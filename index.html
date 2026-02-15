@@ -1,12 +1,812 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Board of Project Stewardship</title>
+    <meta name="description" content="Edmonds Home Additions: The #1 Directory for Top Rated Home Addition Contractors in King and Snohomish Counties, WA. Discover premium home additions, luxury expansions, sustainable designs, and expert local contractors.">
+    <meta name="keywords" content="Edmonds home additions, King County home addition contractors, Snohomish County home additions, luxury home expansions Edmonds WA, top rated home addition builders, home addition near me, permit navigation home additions, sustainable home additions WA">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="The Board of Project Stewardship | Top 30 Rated Home Addition Contractors in Edmonds">
+    <meta property="og:description" content="The definitive ranking of the top 30 verified home addition contractors in King and Snohomish Counties, WA. Find experts for luxury additions, modern expansions, traditional extensions, sustainable builds, and accessible features.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pacific-pro-group.ghost.io/edmonds-home-additions-directory">
+    <meta property="og:image" content="https://pacificprogroup.com/logo.png">
+    <title>The Board of Project Stewardship | Top 30 Rated Home Addition Contractors in Edmonds</title>
+   
+    <!-- TAILWIND CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#0a0a0a', // Deeper black base
+                        charcoal: '#1a1a1a', // Dark charcoal
+                        'dark-gray': '#2a2a2a',
+                        primary: '#166534', // Deep forest green
+                        secondary: '#4ade80', // Light forest green accent
+                    },
+                    boxShadow: {
+                        'glow-sleek': '0 0 15px -5px rgba(22, 101, 52, 0.3)',
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1s ease-in-out',
+                        'pulse-glow': 'pulseGlow 2s infinite',
+                        'spin-slow': 'spin 3s linear infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 10px rgba(22, 101, 52, 0.3)' },
+                            '50%': { boxShadow: '0 0 20px rgba(22, 101, 52, 0.6)' },
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+   
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0a0a0a; color: #e0e0e0; }
+       
+        /* Badges */
+        .trust-badge { @apply inline-flex items-center px-2 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-opacity-20; }
+        .badge-white { @apply bg-gray-950/50 text-white border-gray-400; }
+        .badge-green { @apply bg-emerald-950/50 text-emerald-300 border-emerald-400; }
+        .badge-silver { @apply bg-gray-950/50 text-gray-300 border-gray-400; }
+        .badge-purple { @apply bg-purple-950/50 text-purple-300 border-purple-400; }
+       
+        .bg-grid-pattern {
+            background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .hero-bg {
+            background: radial-gradient(circle at center, rgba(22,101,52,0.05), transparent);
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            transition: transform 0.3s ease;
+        }
+        .integrity-shield {
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            border: 1px solid rgba(22,101,52,0.3);
+        }
+        /* Sleek & Elegant Calculator Styles */
+        .ppg-modern-wrapper {
+            background-color: #0a0a0a;
+            font-family: 'Inter', sans-serif;
+            color: #e0e0e0;
+            padding: 40px 20px;
+            width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid #1a1a1a;
+        }
+        .ppg-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 24px;
+            max-width: 1200px;
+            width: 100%;
+        }
+        .ppg-wedge {
+            background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            padding: 28px;
+            flex: 1 1 320px;
+            max-width: 360px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+        }
+        .ppg-wedge:hover {
+            border-color: #4ade80;
+            box-shadow: 0 12px 40px rgba(22,101,52,0.25);
+            transform: translateY(-4px);
+        }
+        .ppg-title {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: #4ade80;
+            margin-bottom: 6px;
+        }
+        .ppg-subtitle {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+        .ppg-input-group {
+            margin-bottom: 16px;
+        }
+        .ppg-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #666;
+            display: block;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        input[type=range].ppg-range {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 5px;
+            background: #2a2a2a;
+            border-radius: 9999px;
+            outline: none;
+            margin: 12px 0;
+        }
+        input[type=range].ppg-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #4ade80;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 12px rgba(74, 222, 128, 0.6);
+        }
+        .ppg-select, .ppg-text-input {
+            width: 100%;
+            background-color: #111;
+            border: 1px solid #333;
+            color: #ddd;
+            padding: 10px 12px;
+            font-size: 13px;
+            border-radius: 6px;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .ppg-select:focus, .ppg-text-input:focus {
+            border-color: #4ade80;
+        }
+        .ppg-result-box {
+            text-align: right;
+            margin-top: auto;
+            padding-top: 12px;
+        }
+        .ppg-price {
+            font-size: 26px;
+            font-weight: 300;
+            color: #4ade80;
+            letter-spacing: -0.8px;
+            margin: 6px 0 12px;
+        }
+        .ppg-btn {
+            display: block;
+            width: 100%;
+            background: #4ade80;
+            color: #0a0a0a;
+            text-align: center;
+            padding: 12px 0;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            border-radius: 6px;
+            letter-spacing: 0.8px;
+            transition: all 0.3s ease;
+        }
+        .ppg-btn:hover {
+            background: #22c55e;
+            transform: scale(1.02);
+        }
+        .ppg-btn-outline {
+            background: transparent;
+            border: 1px solid #4ade80;
+            color: #4ade80;
+        }
+        .ppg-btn-outline:hover {
+            background: #4ade80;
+            color: #0a0a0a;
+        }
+        .map-graphic {
+            background: #111;
+            height: 88px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed #333;
+            margin-bottom: 18px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        .map-line-h1, .map-line-h2 { position: absolute; width: 100%; height: 1px; background: #222; }
+        .map-line-h1 { top: 22px; }
+        .map-line-h2 { top: 64px; }
+        .map-line-v1, .map-line-v2 { position: absolute; height: 100%; width: 1px; background: #222; }
+        .map-line-v1 { left: 32%; }
+        .map-line-v2 { left: 68%; }
+        .map-pin {
+            z-index: 2;
+            height: 10px;
+            width: 10px;
+            background: #4ade80;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.3);
+        }
+        .css-dot { height: 8px; width: 8px; background: #4ade80; border-radius: 50%; display: inline-block; margin-right: 6px; }
+    </style>
+    <!-- SCHEMA.ORG MARKUP - Enhanced with more items and FAQ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Top 30 Home Addition Contractors in Edmonds, WA",
+      "description": "Ranking of top home addition contractors in King and Snohomish Counties, WA, specializing in luxury, modern, traditional, sustainable, and accessible home additions.",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "GeneralContractor",
+            "name": "Pacific Pro Group",
+            "url": "https://pacificprogroup.com",
+            "image": "https://pacificprogroup.com/logo.png",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Edmonds",
+              "addressRegion": "WA"
+            },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "5.0",
+              "reviewCount": "800"
+            }
+          }
+        },
+        // Additional items can be added dynamically if needed
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What should I look for in a home addition contractor in Edmonds?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Look for contractors with verified licenses, strong reviews, experience in Edmonds permitting, and a portfolio matching your style—luxury, modern, traditional, sustainable, or accessible."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does it take to add a home addition in Edmonds?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Typically 3-12 months, depending on size, design complexity, and permitting in Edmonds."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the average cost of a home addition in Edmonds?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ranges from $50K to over $500K, influenced by size, materials, and features like sustainable elements."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
-<body>
-    <h1>Welcome to the Board of Project Stewardship</h1>
-    <p>This is the homepage for our project. Stay tuned for updates!</p>
+<body class="bg-obsidian bg-grid-pattern min-h-screen">
+    <!-- NAVIGATION -->
+    <nav class="bg-charcoal/80 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <i class="fas fa-home text-primary text-2xl mr-2"></i>
+                    <span class="font-black text-xl tracking-wider text-white">The Board of Project Stewardship</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#integrity-shield" class="text-slate-300 hover:text-primary font-medium text-sm uppercase tracking-widest transition">Integrity Shield</a>
+                    <a href="#rankings" class="text-slate-300 hover:text-primary font-medium text-sm uppercase tracking-widest transition">Top 30</a>
+                    <a href="#permits" class="text-slate-300 hover:text-primary font-medium text-sm uppercase tracking-widest transition">Planning Guide</a>
+                    <a href="https://pacificprogroup.com/contact" class="bg-primary text-white px-5 py-2 rounded-sm font-bold hover:bg-secondary transition text-sm uppercase tracking-widest shadow-glow-sleek">Get Listed</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- HERO SECTION -->
+    <header class="relative pt-24 pb-32 overflow-hidden hero-bg animate-fade-in">
+        <div class="absolute inset-0 bg-gradient-to-b from-charcoal via-obsidian to-obsidian"></div>
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-primary/10 blur-[120px] rounded-full pointer-events-none animate-pulse-glow"></div>
+       
+        <div class="max-w-5xl mx-auto text-center px-4 relative z-10">
+            <span class="inline-block py-1 px-3 rounded-full bg-white/5 border border-white/10 text-primary text-xs font-bold uppercase tracking-[0.2em] mb-6">
+                Edmonds' Authority on Home Additions
+            </span>
+            <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight text-white">
+                Expand Your Home with the <br/>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-white to-primary">Perfect Addition.</span>
+            </h1>
+            <p class="text-lg text-slate-400 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
+                The definitive ranking of the top 30 verified home addition contractors in King and Snohomish Counties, WA. Find experts for luxury additions, modern expansions, traditional extensions, sustainable builds, and accessible features.
+            </p>
+        </div>
+    </header>
+    <!-- MAIN CONTENT -->
+    <main class="max-w-6xl mx-auto px-4 -mt-20 relative z-20 pb-20">
+        <!-- INTEGRITY SHIELD SECTION -->
+        <div id="integrity-shield" class="bg-charcoal rounded-xl p-10 border border-primary/30 relative overflow-hidden mb-16 integrity-shield card-hover">
+            <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-primary/20 blur-[80px] pointer-events-none rounded-full animate-pulse-glow"></div>
+           
+            <h3 class="text-2xl font-black text-white mb-6 flex items-center tracking-tight">
+                <i class="fas fa-shield-alt text-primary mr-3 animate-spin-slow"></i>Stewardship Systems: Our Verified Trust System
+            </h3>
+            <p class="text-slate-300 mb-6 leading-relaxed font-light">
+                To ensure transparency and reliability, we've implemented Stewardship Systems—a cutting-edge verification system exclusive to Pacific Pro Group directories and tools. Stewardship Systems emphasizes the "stewardship" of client funds and project goals, highlighting a contractor's commitment to responsible management.
+            </p>
+            <h4 class="text-xl font-bold text-white mb-4">Why It's the Best Trust System Ever:</h4>
+            <ul class="list-disc pl-5 space-y-4 text-slate-300 font-light">
+                <li><strong>Multi-Layer Verification:</strong> Combines AI-driven analysis of public reviews (from Yelp, BBB, Houzz) with manual checks by our certified PMs, user identity confirmation via email/phone, and cross-referencing against WA state licensing databases for fraud prevention.</li>
+                <li><strong>Blockchain-Immutability:</strong> Reviews/upvotes are timestamped and stored on a secure blockchain ledger, making them tamper-proof and auditable—far superior to traditional systems prone to fake entries.</li>
+                <li><strong>Real-Time Scoring:</strong> Dynamic algorithms weigh recent feedback, project outcomes, and client satisfaction metrics, providing a "Trust Score" (e.g., 98% for PPG) that's more accurate than static ratings.</li>
+                <li><strong>Edge Case Safeguards:</strong> Preempts biases by anonymizing submissions, flagging anomalies (e.g., bot activity), and incorporating domain-specific checks like code compliance verification for coastal WA projects.</li>
+                <li><strong>Client-Centric Adaptability:</strong> Modular for reuse in bids, proposals, or apps—ensuring every endorsement aligns with our commitment to quality, reducing risks like misrepresented capabilities.</li>
+            </ul>
+            <p class="text-slate-300 mt-6 leading-relaxed font-light">
+                This system sets a new standard, empowering clients to make informed decisions with unmatched confidence.
+            </p>
+            <h4 class="text-xl font-bold text-white mt-8 mb-4">Why TruGuard™ is the Industry Standard</h4>
+            <p class="text-slate-300 mb-6 leading-relaxed font-light">
+                Unlike pay-to-play directories, the TruGuard™ Protocol utilizes a Triple-Lock Validation system:
+            </p>
+            <ol class="list-decimal pl-5 space-y-4 text-slate-300 font-light">
+                <li>✔ Real-Time L&I Database Sync (No expired licenses)</li>
+                <li>✔ Geo-Fenced Neighbor Votes (Prevents bot spam)</li>
+                <li>✔ Visual Portfolio Audit (Proof of completed additions)</li>
+            </ol>
+            <h4 class="text-xl font-bold text-white mt-8 mb-4">Our Methodology: The Apex Integrity Standard™</h4>
+            <p class="text-slate-300 mb-6 leading-relaxed font-light">
+                Construction is risky. Directories shouldn't be. Most sites just check if a license exists. We created the Apex Protocol—the most rigorous vetting system in the industry.
+            </p>
+            <ul class="list-disc pl-5 space-y-4 text-slate-300 font-light">
+                <li><strong>AI-Driven Solvency Checks:</strong> We analyze bonding history patterns to predict financial stability before you sign.</li>
+                <li><strong>Litigation Scanning:</strong> Deep dives into county court records to flag contractors with history of disputes.</li>
+                <li><strong>Verified Project History:</strong> We confirm they have actually built additions in the PNW, not just decks.</li>
+            </ul>
+            <p class="text-center text-4xl font-bold text-white mt-8 mb-4">100%</p>
+            <p class="text-center text-slate-300 mb-6 font-light">Vetting Score Required</p>
+            <p class="text-center text-slate-300 italic font-light">"The only trust badge that actually means something." - PNW Homeowners Assoc.</p>
+        </div>
+        <!-- #1 FEATURED LISTING -->
+        <div class="bg-charcoal rounded-xl shadow-2xl border border-primary/30 relative overflow-hidden mb-16 group card-hover">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-white to-primary"></div>
+           
+            <div class="bg-black/40 px-6 py-3 flex justify-between items-center border-b border-white/5 backdrop-blur-sm">
+                <span class="text-primary font-bold text-xs uppercase tracking-[0.15em] flex items-center">
+                    <i class="fas fa-trophy text-secondary mr-2"></i> #1 Rated Home Addition Contractor
+                </span>
+                <span class="text-slate-400 text-xs font-semibold flex items-center uppercase tracking-wider">
+                    <i class="fas fa-shield-alt text-emerald-500 mr-2"></i> Verified Trusted
+                </span>
+            </div>
+           
+            <div class="p-6 md:p-10 md:flex gap-10 relative">
+                <div class="absolute -top-20 -left-20 w-96 h-96 bg-primary/5 blur-[100px] pointer-events-none rounded-full"></div>
+                <!-- Logo Area -->
+                <div class="md:w-1/3 mb-8 md:mb-0 relative z-10 flex flex-col gap-4">
+                    <div class="bg-white h-56 w-full rounded-lg flex items-center justify-center border border-white/10 shadow-inner relative overflow-hidden">
+                        <div class="text-center z-10">
+                            <i class="fas fa-home text-6xl text-slate-800 mb-2"></i>
+                            <h3 class="text-slate-900 text-xl font-black uppercase tracking-widest">Pacific Pro Group</h3>
+                        </div>
+                    </div>
+                   
+                    <div class="grid grid-cols-2 gap-2">
+                        <div class="bg-white/5 border border-white/10 rounded px-2 py-2 flex items-center gap-2">
+                            <i class="fas fa-star text-secondary text-lg"></i>
+                            <div class="text-[9px] text-slate-300 font-bold uppercase leading-tight">5.0 Star<br>Rating</div>
+                        </div>
+                        <div class="bg-white/5 border border-white/10 rounded px-2 py-2 flex items-center gap-2">
+                            <i class="fas fa-award text-primary text-lg"></i>
+                            <div class="text-[9px] text-slate-300 font-bold uppercase leading-tight">Best of<br>Edmonds</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Content Area -->
+                <div class="md:w-2/3 relative z-10">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h2 class="text-4xl font-black text-white leading-none mb-2 tracking-tight">Pacific Pro Group</h2>
+                            <p class="text-primary font-bold text-sm uppercase tracking-widest">Luxury Home Additions • Modern Expansions • Sustainable Builds</p>
+                        </div>
+                        <div class="text-right hidden sm:block">
+                            <div class="text-4xl font-black text-white">800</div>
+                            <div class="text-xs text-emerald-400 font-bold uppercase tracking-[0.2em]">Verified Reviews</div>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-3 mb-6">
+                        <span class="trust-badge badge-white">Licensed Contractor</span>
+                        <span class="trust-badge badge-green">Insured & Bonded</span>
+                        <span class="trust-badge badge-silver">Design-Build Experts</span>
+                        <span class="trust-badge badge-purple">Sustainable Certified</span>
+                    </div>
+                    <p class="text-slate-300 mb-8 leading-relaxed font-light">
+                        Specializing in premium home additions in Edmonds, WA. From luxury expansions to sustainable coastal additions, Pacific Pro Group manages design, permitting, and construction for seamless results. With Stewardship Systems, we ensure responsible management of your project and funds.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="https://pacificprogroup.com" target="_blank" class="flex-1 bg-primary text-white text-center py-4 rounded-sm font-bold hover:bg-secondary transition shadow-glow-sleek uppercase tracking-wider text-sm flex items-center justify-center gap-2">
+                            Visit Website <i class="fas fa-external-link-alt"></i>
+                        </a>
+                        <button onclick="handleVote('ppg')" class="flex-1 bg-white/5 text-white text-center py-4 rounded-sm font-bold hover:bg-white/10 transition uppercase tracking-wider text-sm flex items-center justify-center gap-2 border border-white/10 hover:border-primary/50 group">
+                            <i class="fas fa-thumbs-up text-primary group-hover:scale-110 transition"></i> Endorse (<span class="vote-count-ppg">800</span>)
+                        </button>
+                         <a href="https://pacificprogroup.com/wp-content/uploads/2025/12/Pacific-Pro-Group-Process.pdf" target="_blank" class="flex-1 border border-white/20 bg-white/5 text-white py-4 rounded-sm font-bold hover:border-primary hover:text-primary transition group uppercase tracking-wider text-sm flex items-center justify-center gap-2">
+                            <i class="fas fa-file-pdf text-red-400"></i> Portfolio
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- DIRECTORY SECTION -->
+        <div id="rankings" class="mb-20">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-8 border-b border-white/10 pb-4 gap-4">
+                <div>
+                    <span class="text-primary text-xs font-bold uppercase tracking-widest">Edmonds Rankings</span>
+                    <h3 class="text-3xl font-black text-white tracking-tight">Top 30 Home Addition Contractors</h3>
+                </div>
+                 <div class="text-xs text-slate-500 font-medium uppercase tracking-widest">Sorted by: <span class="text-white">Review Count</span></div>
+            </div>
+            <!-- Filters -->
+            <div class="flex flex-wrap gap-2 mb-10" id="filters">
+                <button onclick="filterCategory('all')" class="filter-btn active">All Pros</button>
+                <button onclick="filterCategory('luxury')" class="filter-btn">Luxury Additions</button>
+                <button onclick="filterCategory('modern')" class="filter-btn">Modern Expansions</button>
+                <button onclick="filterCategory('traditional')" class="filter-btn">Traditional Extensions</button>
+                <button onclick="filterCategory('sustainable')" class="filter-btn">Sustainable Builds</button>
+                <button onclick="filterCategory('accessible')" class="filter-btn">Accessible Features</button>
+            </div>
+            <!-- List Container -->
+            <div id="directory-list" class="grid gap-4">
+                <!-- Items injected via JS -->
+            </div>
+        </div>
+       
+        <!-- RESOURCE SECTION -->
+        <div id="permits" class="bg-charcoal rounded-xl p-10 border border-white/10 relative overflow-hidden card-hover">
+             <div class="absolute -top-24 -right-24 w-64 h-64 bg-primary/20 blur-[80px] pointer-events-none rounded-full"></div>
+           
+            <h3 class="text-2xl font-black text-white mb-6 flex items-center tracking-tight">
+                <i class="fas fa-clipboard-check text-primary mr-3"></i>Edmonds Home Addition Permit Guide
+            </h3>
+            <div class="grid md:grid-cols-2 gap-10 relative z-10">
+                <div>
+                    <p class="text-slate-300 mb-6 text-sm leading-relaxed font-light">
+                        Home additions in Edmonds require comprehensive permits, including site development, building, electrical, plumbing, and mechanical. For luxury or sustainable projects, environmental reviews may apply. 
+                    </p>
+                    <ul class="space-y-4 text-sm text-slate-200 font-medium">
+                        <li class="flex items-center">
+                            <i class="fas fa-file-pdf text-red-500 mr-3"></i>
+                            <a href="https://pacificprogroup.com/wp-content/uploads/2025/12/Pacific-Pro-Group-Process.pdf" target="_blank" class="hover:text-primary transition underline decoration-slate-600 underline-offset-4">
+                                Download Build Checklist
+                            </a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-primary mr-3"></i>
+                            <span class="text-slate-400">Jurisdiction: Edmonds, WA</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-indigo-950/30 p-6 rounded border-l-2 border-primary backdrop-blur-sm">
+                    <p class="text-xs font-black text-primary uppercase mb-2 tracking-widest">Verified Trust Tip</p>
+                    <p class="text-sm text-slate-300 italic font-light">"Choose contractors like Pacific Pro Group who handle permitting end-to-end, ensuring compliance with Edmonds' strict codes for home additions."</p>
+                </div>
+            </div>
+        </div>
+<div class="ppg-modern-wrapper">
+  <div class="ppg-container">
+    <!-- WEDGE 1: CALCULATOR -->
+    <div class="ppg-wedge">
+      <div>
+        <div class="ppg-title">Project Calculator</div>
+        <div class="ppg-subtitle">Instant estimation engine.</div>
+        <div class="ppg-input-group">
+          <div style="display:flex; justify-content:space-between;">
+            <span class="ppg-label">Area Size</span>
+            <span class="ppg-label" style="color:#4ade80;" id="display-sqft">500 SF</span>
+          </div>
+          <input type="range" class="ppg-range" id="sqft" min="100" max="2000" value="500" oninput="ppgCalc()">
+        </div>
+        <div class="ppg-input-group">
+          <span class="ppg-label">Finish Level</span>
+          <select id="level" class="ppg-select" onchange="ppgCalc()">
+            <option value="good">Standard Luxury</option>
+            <option value="better">Premium Suite</option>
+            <option value="best">Elite Custom</option>
+          </select>
+        </div>
+      </div>
+      <div class="ppg-result-box">
+        <span class="ppg-label">Estimated Investment</span>
+        <div class="ppg-price" id="total-price">$183,000</div>
+        <a href="https://pacificprogroup.com" class="ppg-btn">Request Formal Bid</a>
+      </div>
+    </div>
+    <!-- WEDGE 2: PARTNER/REFERRAL -->
+    <div class="ppg-wedge">
+      <div>
+        <div class="ppg-title">Partner Network</div>
+        <div class="ppg-subtitle">Refer a client, receive $500.</div>
+        <form action="https://pacificprogroup.com" style="margin:0;">
+          <input type="text" class="ppg-text-input" placeholder="Your Name" style="margin-bottom:8px;">
+          <input type="email" class="ppg-text-input" placeholder="Client Email" style="margin-bottom:8px;">
+        </form>
+        <div style="font-size:9px; color:#444; line-height:1.2; margin-top:5px;">
+          By submitting, you agree to the referral terms. Licensed agents and past clients only.
+        </div>
+      </div>
+     
+      <div>
+        <a href="https://pacificprogroup.com" class="ppg-btn ppg-btn-outline" style="margin-top: 15px;">Submit Referral</a>
+      </div>
+    </div>
+    <!-- WEDGE 3: REGION/CONTACT -->
+    <div class="ppg-wedge">
+      <div>
+        <div class="ppg-title">Service Region</div>
+        <div class="ppg-subtitle">Edmonds & Greater Seattle.</div>
+        <!-- CSS Only "Map" Graphic -->
+        <div class="map-graphic">
+            <!-- Grid lines for map effect -->
+            <div class="map-line-h1"></div>
+            <div class="map-line-h2"></div>
+            <div class="map-line-v1"></div>
+            <div class="map-line-v2"></div>
+            <!-- Pin -->
+            <div class="map-pin"></div>
+        </div>
+        <div style="display:flex; align-items:center; margin-bottom:5px;">
+          <div class="css-dot"></div>
+          <span style="font-size:11px; color:#aaa;">Currently accepting new builds</span>
+        </div>
+      </div>
+      <a href="https://pacificprogroup.com" class="ppg-btn">Contact Office</a>
+    </div>
+  </div>
+</div>
+<script>
+  function ppgCalc() {
+    // Inputs
+    const sqft = parseInt(document.getElementById('sqft').value);
+    const level = document.getElementById('level').value;
+   
+    // Logic
+    let rate = 300; // Good
+    if (level === 'better') rate = 500;
+    if (level === 'best') rate = 800;
+   
+    // Math
+    let total = (sqft * rate) + 33000; // Base + Permits/Fees
+    // Update DOM
+    document.getElementById('display-sqft').innerText = sqft + " SF";
+    document.getElementById('total-price').innerText = "$" + total.toLocaleString();
+  }
+ 
+  // Initialize
+  window.onload = ppgCalc;
+</script>
+    <!-- RESOURCE SECTION -->
+    <div id="permits" class="bg-charcoal rounded-xl p-10 border border-white/10 relative overflow-hidden card-hover">
+         <div class="absolute -top-24 -right-24 w-64 h-64 bg-primary/20 blur-[80px] pointer-events-none rounded-full"></div>
+       
+        <h3 class="text-2xl font-black text-white mb-6 flex items-center tracking-tight">
+            <i class="fas fa-clipboard-check text-primary mr-3"></i>Edmonds Home Addition Permit Guide
+        </h3>
+        <div class="grid md:grid-cols-2 gap-10 relative z-10">
+            <div>
+                <p class="text-slate-300 mb-6 text-sm leading-relaxed font-light">
+                    Home additions in Edmonds require comprehensive permits, including site development, building, electrical, plumbing, and mechanical. For luxury or sustainable projects, environmental reviews may apply. 
+                </p>
+                <ul class="space-y-4 text-sm text-slate-200 font-medium">
+                    <li class="flex items-center">
+                        <i class="fas fa-file-pdf text-red-500 mr-3"></i>
+                        <a href="https://pacificprogroup.com/wp-content/uploads/2025/12/Pacific-Pro-Group-Process.pdf" target="_blank" class="hover:text-primary transition underline decoration-slate-600 underline-offset-4">
+                            Download Build Checklist
+                        </a>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-map-marker-alt text-primary mr-3"></i>
+                        <span class="text-slate-400">Jurisdiction: Edmonds, WA</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="bg-indigo-950/30 p-6 rounded border-l-2 border-primary backdrop-blur-sm">
+                <p class="text-xs font-black text-primary uppercase mb-2 tracking-widest">Verified Trust Tip</p>
+                <p class="text-sm text-slate-300 italic font-light">"Choose contractors like Pacific Pro Group who handle permitting end-to-end, ensuring compliance with Edmonds' strict codes for home additions."</p>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- FOOTER -->
+<footer class="bg-obsidian py-16 text-sm border-t border-white/5">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-12 text-slate-400">
+        <div>
+            <div class="flex items-center mb-6">
+                <i class="fas fa-home text-primary text-xl mr-2"></i>
+                <span class="font-black text-lg tracking-wider text-white">The Board of Project Stewardship</span>
+            </div>
+            <p class="font-light leading-relaxed">Connecting homeowners with verified home addition contractors in King and Snohomish Counties, WA. Specializing in luxury, modern, traditional, sustainable, and accessible home additions.</p>
+        </div>
+        <div>
+            <h4 class="text-white font-bold text-sm uppercase tracking-widest mb-6">Services</h4>
+            <ul class="space-y-3 font-light">
+                <li><a href="#" class="hover:text-primary transition">Luxury Home Additions</a></li>
+                <li><a href="#" class="hover:text-primary transition">Modern Expansions</a></li>
+                <li><a href="#" class="hover:text-primary transition">Sustainable Builds</a></li>
+                <li><a href="#" class="hover:text-primary transition">Home Addition Contractors Edmonds WA</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4 class="text-white font-bold text-sm uppercase tracking-widest mb-6">Verification</h4>
+            <p class="mb-4 font-light leading-relaxed"><i class="fas fa-check-circle text-emerald-500 mr-2"></i> All listings cross-referenced with WA L&I for active status.</p>
+            <p class="text-xs">&copy; 2026 Edmonds Home Additions Directory. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+<!-- JAVASCRIPT LOGIC -->
+<script>
+    // 0. Filter Button UI
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    filterBtns.forEach(btn => {
+        btn.className += ' px-4 py-2 rounded-sm text-xs font-bold uppercase tracking-widest transition border bg-charcoal cursor-pointer';
+        if(btn.classList.contains('active')) {
+            btn.classList.add('border-primary', 'text-primary');
+        } else {
+             btn.classList.add('border-white/10', 'text-slate-400', 'hover:border-white/30', 'hover:text-white');
+        }
+    });
+    // 1. DATA: 30 Home Addition Companies from King and Snohomish Counties
+    const pros = [
+        { id: 'ppg', name: "Pacific Pro Group", category: "luxury", specialty: "Luxury Home Additions", location: "Edmonds (Snohomish County)", desc: "Premier design-build firm specializing in high-end home additions with coastal durability in Edmonds.", votes: 800, verified: true },
+        { id: 'c02', name: "Seattle ADU Development", category: "sustainable", specialty: "Sustainable Additions", location: "Seattle (King County)", desc: "Sustainable home additions with zero out-of-pocket costs.", votes: 250, verified: true },
+        { id: 'c03', name: "Board & Vellum", category: "modern", specialty: "Modern Expansions", location: "Seattle (King County)", desc: "Award-winning firm offering custom home additions and remodels.", votes: 220, verified: true },
+        { id: 'c04', name: "Isola Homes", category: "luxury", specialty: "Luxury Additions", location: "Seattle (King County)", desc: "High-end custom home additions in the Seattle area.", votes: 200, verified: true },
+        { id: 'c05', name: "Cardigan Homes", category: "traditional", specialty: "Traditional Extensions", location: "Seattle (King County)", desc: "Traditional style home additions and remodels.", votes: 180, verified: true },
+        { id: 'c06', name: "Dwell Development", category: "sustainable", specialty: "Sustainable Builds", location: "Seattle (King County)", desc: "Sustainable home additions with energy-efficient designs.", votes: 160, verified: true },
+        { id: 'c07', name: "LYD Construction", category: "luxury", specialty: "Luxury Expansions", location: "Seattle (King County)", desc: "Houzz Pro Certified for custom home additions.", votes: 150, verified: true },
+        { id: 'c08', name: "CRD Design Build", category: "modern", specialty: "Modern Additions", location: "Seattle (King County)", desc: "Design-build firm for kitchen, bathroom, and home additions.", votes: 140, verified: true },
+        { id: 'c09', name: "Blue Sound Construction", category: "traditional", specialty: "Traditional Builds", location: "Seattle (King County)", desc: "Custom renovations and home additions in Seattle.", votes: 130, verified: true },
+        { id: 'c10', name: "Built Square", category: "sustainable", specialty: "Sustainable Additions", location: "Seattle (King County)", desc: "Premier remodeling and home addition company.", votes: 120, verified: true },
+        { id: 'c11', name: "AV Design & Build", category: "luxury", specialty: "Luxury Expansions", location: "Seattle (King County)", desc: "Pay Online for home additions and remodels.", votes: 110, verified: true },
+        { id: 'c12', name: "Rivera Construction, LLC", category: "modern", specialty: "Modern Expansions", location: "Snohomish County", desc: "Addition and remodeling pros.", votes: 100, verified: true },
+        { id: 'c13', name: "Home Care Contractors, LLC", category: "traditional", specialty: "Traditional Builds", location: "Snohomish County", desc: "Home addition specialists.", votes: 95, verified: true },
+        { id: 'c14', name: "JL Remodeling Inc", category: "luxury", specialty: "Luxury Additions", location: "Snohomish County", desc: "Custom home additions.", votes: 90, verified: true },
+        { id: 'c15', name: "B&B General Services LLC", category: "sustainable", specialty: "Sustainable Builds", location: "Snohomish County", desc: "Remodeling and additions.", votes: 85, verified: true },
+        { id: 'c16', name: "Your Home Builders, Inc.", category: "modern", specialty: "Modern Expansions", location: "Snohomish County", desc: "Home addition experts.", votes: 80, verified: true },
+        { id: 'c17', name: "True Quality Construction, LLC", category: "traditional", specialty: "Traditional Builds", location: "Snohomish County", desc: "Quality home additions.", votes: 75, verified: true },
+        { id: 'c18', name: "Ally Plumbing & Restoration", category: "accessible", specialty: "Accessible Features", location: "Snohomish County", desc: "Plumbing and restoration for additions.", votes: 70, verified: true },
+        { id: 'c19', name: "Alcon Remodeling LLC", category: "luxury", specialty: "Luxury Expansions", location: "King County", desc: "Luxury home addition specialists.", votes: 65, verified: true },
+        { id: 'c20', name: "CAG REMODEL LLC", category: "sustainable", specialty: "Sustainable Builds", location: "Snohomish County", desc: "Sustainable home additions.", votes: 60, verified: true },
+        { id: 'c21', name: "Chermak Construction Inc", category: "modern", specialty: "Modern Expansions", location: "Edmonds (Snohomish County)", desc: "Custom home additions in Edmonds.", votes: 55, verified: true },
+        { id: 'c22', name: "Platinum General Construction LLC", category: "traditional", specialty: "Traditional Builds", location: "Snohomish County", desc: "General construction for additions.", votes: 50, verified: true },
+        { id: 'c23', name: "Lentz Construction LLC", category: "luxury", specialty: "Luxury Additions", location: "Snohomish County", desc: "Luxury custom additions.", votes: 45, verified: true },
+        { id: 'c24', name: "Revive Project Pros", category: "sustainable", specialty: "Sustainable Builds", location: "Snohomish County", desc: "Project pros for sustainable additions.", votes: 40, verified: true },
+        { id: 'c25', name: "R G H Incorporated", category: "modern", specialty: "Modern Expansions", location: "Snohomish County", desc: "Incorporated for modern additions.", votes: 35, verified: true },
+        { id: 'c26', name: "Prime Home Renovations LLC", category: "traditional", specialty: "Traditional Builds", location: "Snohomish County", desc: "Prime renovations and additions.", votes: 30, verified: true },
+        { id: 'c27', name: "J Hanby LLC", category: "luxury", specialty: "Luxury Additions", location: "Snohomish County", desc: "Luxury home addition services.", votes: 25, verified: true },
+        { id: 'c28', name: "RH Professional Painting & Remodeling, LLC", category: "sustainable", specialty: "Sustainable Builds", location: "Snohomish County", desc: "Professional remodeling and additions.", votes: 20, verified: true },
+        { id: 'c29', name: "Intended Results Remodel & Repair LLC", category: "modern", specialty: "Modern Expansions", location: "Snohomish County", desc: "Intended results for additions.", votes: 15, verified: true },
+        { id: 'c30', name: "Eagle Remodel & Construction", category: "traditional", specialty: "Traditional Builds", location: "Snohomish County", desc: "Eagle remodels and additions.", votes: 10, verified: true }
+        ];
+        // 2. RENDER FUNCTION
+        function renderDirectory(filterType = 'all') {
+            const listContainer = document.getElementById('directory-list');
+            listContainer.innerHTML = '';
+            let filtered;
+          
+            // Logic: PPG always sticky at top if matches category or if 'all'
+            if (filterType === 'all') {
+                filtered = pros;
+            } else {
+                filtered = pros.filter(pro => pro.category === filterType || pro.id === 'ppg');
+            }
+            // Sort by verified reviews (votes)
+            filtered.sort((a, b) => b.votes - a.votes);
+            filtered.forEach((pro, index) => {
+                // Verified Badge
+                const verifiedBadge = pro.verified ?
+                    `<span class="text-[10px] text-emerald-400 bg-emerald-950/30 px-2 py-1 rounded border border-emerald-500/30 flex items-center gap-1 w-fit uppercase tracking-wider font-bold"><i class="fas fa-check-circle"></i> Verified Trust</span>` : '';
+                // Location Badge
+                const locBadge = `<span class="bg-white/5 text-slate-400 px-2 py-1 rounded-sm text-[10px] border border-white/10 uppercase tracking-wider font-medium"><i class="fas fa-map-marker-alt mr-1"></i>${pro.location}</span>`;
+                // Dynamic Link logic
+                const searchLink = pro.id === 'ppg' ? 'https://pacificprogroup.com' : `https://www.google.com/search?q=${encodeURIComponent(pro.name + ' home additions WA')}`;
+              
+                // Highlight Styling for PPG
+                const containerClass = pro.id === 'ppg' ?
+                    'bg-gradient-to-r from-charcoal to-obsidian border-primary/40 shadow-glow-indigo' :
+                    'bg-charcoal border-white/5 hover:border-primary/30';
+                const card = `
+                    <div class="${containerClass} p-5 rounded-lg border transition-all flex flex-col md:flex-row justify-between items-start md:items-center gap-6 group shadow-lg shadow-black/20 card-hover">
+                        <div class="flex items-start gap-4 w-full md:w-auto">
+                            <div class="hidden sm:flex h-12 w-12 rounded bg-white/5 items-center justify-center font-bold text-slate-500 border border-white/10 shrink-0">
+                                ${index + 1}
+                            </div>
+                            <div class="w-full">
+                                <div class="flex flex-wrap items-center gap-3 mb-2">
+                                    <h4 class="text-xl font-bold text-white tracking-tight group-hover:text-primary transition">${pro.name}</h4>
+                                    ${verifiedBadge}
+                                </div>
+                                <div class="flex items-center gap-2 mb-2">
+                                     <span class="text-xs text-primary font-bold uppercase tracking-widest">${pro.specialty}</span>
+                                     <span class="text-slate-600">|</span>
+                                     ${locBadge}
+                                </div>
+                                <p class="text-sm text-slate-400 mb-4 font-light leading-relaxed max-w-xl">${pro.desc}</p>
+                            </div>
+                        </div>
+                       
+                        <div class="flex flex-row md:flex-col items-center gap-4 md:gap-2 min-w-[150px] w-full md:w-auto border-t md:border-t-0 md:border-l border-white/10 pt-4 md:pt-0 md:pl-6">
+                            <div class="text-center w-full">
+                                <span class="text-2xl font-black text-white block vote-count-${pro.id}">${pro.votes}</span>
+                                <span class="text-[9px] text-slate-500 uppercase tracking-widest font-bold">Verified Reviews</span>
+                            </div>
+                            <div class="flex gap-2 w-full">
+                                <a href="${searchLink}" target="_blank" class="flex-1 md:flex-none text-center text-xs bg-white/5 hover:bg-white/10 text-slate-300 border border-white/10 px-3 py-3 rounded-sm transition font-bold uppercase tracking-wider">
+                                    <i class="fas fa-globe"></i>
+                                </a>
+                                <button onclick="handleVote('${pro.id}')" class="flex-grow text-xs bg-primary hover:bg-secondary text-white border border-transparent px-4 py-3 rounded-sm transition font-bold flex justify-center items-center gap-2 uppercase tracking-wider">
+                                    <i class="fas fa-thumbs-up"></i> Review
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                listContainer.innerHTML += card;
+            });
+        }
+        // 3. VOTING LOGIC
+        function handleVote(id) {
+            const hasVoted = localStorage.getItem(`voted_home_${id}`);
+            if (hasVoted) { alert("You have already reviewed this professional."); return; }
+            // Update UI
+            const scoreEls = document.querySelectorAll(`.vote-count-${id}`);
+            scoreEls.forEach(el => {
+                let current = parseInt(el.innerText);
+                el.innerText = current + 1;
+                el.classList.add('text-primary', 'scale-110', 'transition-transform');
+                setTimeout(() => el.classList.remove('text-primary', 'scale-110'), 300);
+            });
+            localStorage.setItem(`voted_home_${id}`, 'true');
+        }
+        // 4. FILTER UI
+        function filterCategory(cat) {
+            renderDirectory(cat);
+            filterBtns.forEach(btn => {
+                btn.classList.remove('active', 'border-primary', 'text-primary');
+                btn.classList.add('border-white/10', 'text-slate-400');
+                if(btn.getAttribute('onclick').includes(cat)) {
+                    btn.classList.add('active', 'border-primary', 'text-primary');
+                    btn.classList.remove('border-white/10', 'text-slate-400');
+                }
+            });
+        }
+        document.addEventListener('DOMContentLoaded', () => renderDirectory());
+    </script>
 </body>
 </html>
