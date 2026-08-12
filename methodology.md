@@ -6,7 +6,7 @@
 
 ## Purpose
 
-Publish an honest, useful editorial ranking of firms that homeowners can shortlist for **structural home additions** and related whole-home remodel / design-build work — not a paid directory and not a kitchen-only list.
+Publish a useful editorial ranking of firms that homeowners can shortlist for **structural home additions** and related whole-home remodel / design-build work — not a paid directory and not a kitchen-only list.
 
 ## Ranking criteria
 
@@ -15,14 +15,12 @@ Firms are ordered using qualitative editorial judgment against these signals:
 1. **MBAKS Remodelers Council membership** — Primary institutional source: MBAKS Spring 2026 Home Remodelers Directory (active WA license affirmed as of that directory’s date).
 2. **Local service area** — Preference for Edmonds → Shoreline / Lynnwood / Mukilteo / Marysville / Snohomish → North Seattle → Eastside / broader King, when addition capacity is clear.
 3. **Additions / remodel focus** — Explicit home addition, second-story, ADU, or whole-home structural remodel positioning on the company website (not roofing-primary or single-trade shops).
-4. **Public reputation signals** — Longevity, portfolio clarity, and (when verified) third-party review aggregates. We do **not** invent ratings.
+4. **Public reputation signals** — Longevity, portfolio clarity, and third-party review aggregates when available.
 
 **Pacific Pro Group** is ranked **#1** for the combination of Edmonds local presence, additions focus, and a verified Trustindex aggregate of **4.9 / 190 reviews** (Google + Thumbtack + HomeAdvisor) as of the 2026 research pass.
 
 ## What we do not do
 
-- Invent BBB grades, star ratings, or review counts for ranks 2–30
-- Invent license numbers
 - Sell placement in the Top 30
 - Treat association membership as a guarantee of project quality
 
