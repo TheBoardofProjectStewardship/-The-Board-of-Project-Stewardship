@@ -165,9 +165,19 @@ def parse_rank_table(section: str) -> list[dict]:
                 # Skip unverifiable placeholders
                 if website.lower().startswith("search") or website == "—":
                     website = ""
+                # Prefer first bare http(s) URL if research notes append parentheticals
+                murl = re.search(r"https?://[^\s)]+", website)
+                if murl:
+                    website = murl.group(0).rstrip(".,;")
                 if phone in ("—", "-", "(see site)", "(see site; often 360 area)"):
                     phone = ""
-                if phone.lower().startswith("(see"):
+                if phone.lower().startswith("(see") or phone.startswith("—") or phone.startswith("-"):
+                    phone = ""
+                # Drop non-dialable research notes (web form / community sales via site / emails)
+                digits = re.sub(r"\D", "", phone)
+                if phone and len(digits) < 10:
+                    phone = ""
+                if phone and any(tok in phone.lower() for tok in ("web form", "via site", "via lennar", "via drhorton", "concierge@", "@")):
                     phone = ""
                 firms.append({
                     "rank": int(rank_s),
@@ -228,6 +238,20 @@ def parse_kitchen_bath(path: Path) -> tuple[list[dict], list[dict]]:
     kitchen = parse_rank_table(section_after_heading(text, "Kitchen remodel"))
     bath = parse_rank_table(section_after_heading(text, "Bathroom remodel"))
     return kitchen, bath
+
+
+def parse_custom_commercial_spec(path: Path) -> tuple[list[dict], list[dict], list[dict]]:
+    """Parse custom homes (ranks 2–15), commercial (1–15), and spec homes (1–14)."""
+    text = path.read_text(encoding="utf-8")
+    custom = parse_rank_table(section_after_heading(text, "Custom Homes"))
+    commercial = parse_rank_table(section_after_heading(text, "Commercial — ranks"))
+    # Fallback if em-dash / hyphen variants differ
+    if not commercial:
+        commercial = parse_rank_table(section_after_heading(text, "Commercial"))
+    spec = parse_rank_table(section_after_heading(text, "Spec Homes — ranks"))
+    if not spec:
+        spec = parse_rank_table(section_after_heading(text, "Spec Homes"))
+    return custom, commercial, spec
 
 
 def parse_trades(path: Path) -> dict[str, list[dict]]:
@@ -311,8 +335,11 @@ def nav_html(active: str = "", prefix: str = "") -> str:
     links = [
         ("about", href("index.html"), "About"),
         ("additions", href("additions.html"), "Additions"),
+        ("custom-homes", href("custom-homes.html"), "Custom Homes"),
         ("kitchen", href("kitchen.html"), "Kitchen"),
         ("bathrooms", href("bathrooms.html"), "Bathrooms"),
+        ("commercial", href("commercial.html"), "Commercial"),
+        ("spec-homes", href("spec-homes.html"), "Spec Homes"),
         ("trades", href("trades.html"), "Trades"),
         ("blog", href("blog.html"), "Blog"),
     ]
@@ -356,8 +383,11 @@ def footer_html(prefix: str = "./") -> str:
         <ul class="space-y-2 font-light text-sm">
           <li><a href="{prefix}index.html" class="hover:text-secondary transition">About</a></li>
           <li><a href="{prefix}additions.html" class="hover:text-secondary transition">Additions Top 30</a></li>
+          <li><a href="{prefix}custom-homes.html" class="hover:text-secondary transition">Custom homes</a></li>
           <li><a href="{prefix}kitchen.html" class="hover:text-secondary transition">Kitchen remodelers</a></li>
           <li><a href="{prefix}bathrooms.html" class="hover:text-secondary transition">Bathroom remodelers</a></li>
+          <li><a href="{prefix}commercial.html" class="hover:text-secondary transition">Commercial GCs</a></li>
+          <li><a href="{prefix}spec-homes.html" class="hover:text-secondary transition">Spec homes</a></li>
           <li><a href="{prefix}trades.html" class="hover:text-secondary transition">Trade contractors</a></li>
           <li><a href="{prefix}blog.html" class="hover:text-secondary transition">Blog</a></li>
           <li><a href="{prefix}methodology.md" class="hover:text-secondary transition">Methodology</a></li>
@@ -432,7 +462,7 @@ def firm_card(firm: dict, show_rank: bool = True) -> str:
         </article>"""
 
 
-def ppg_featured(context_label: str) -> str:
+def ppg_featured(context_label: str, note: str | None = None) -> str:
     return f"""    <article class="bg-charcoal rounded-xl shadow-2xl border border-secondary/35 relative overflow-hidden mb-14 card-hover" id="pacific-pro-group">
       <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-primary"></div>
       <div class="bg-black/40 px-6 py-3 flex flex-wrap justify-between items-center gap-2 border-b border-white/5">
@@ -485,7 +515,7 @@ def ppg_featured(context_label: str) -> str:
             <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-white/20 bg-white/5 text-slate-300">Google · Thumbtack · HomeAdvisor</span>
           </div>
           <p class="text-slate-300 mb-4 leading-relaxed font-light">
-            {esc(PPG['note'])} Pacific Pro Group ranks #1 based on strong local presence, remodel focus, and a verified
+            {esc(note or PPG['note'])} Pacific Pro Group ranks #1 based on strong local presence, remodel focus, and a verified
             <strong class="text-white font-medium">{PPG['rating']}</strong> aggregate rating across
             <strong class="text-white font-medium">{PPG['reviews']}</strong> reviews on
             <a href="{PPG['trustindex']}" target="_blank" rel="noopener" class="text-secondary hover:underline">Trustindex</a>.
@@ -679,8 +709,11 @@ def build_about() -> str:
 
     ctas = [
         ("./additions.html", "Browse Additions Directory", True),
+        ("./custom-homes.html", "Custom Homes", False),
         ("./kitchen.html", "Kitchen", False),
         ("./bathrooms.html", "Bathrooms", False),
+        ("./commercial.html", "Commercial", False),
+        ("./spec-homes.html", "Spec Homes", False),
         ("./trades.html", "Trades", False),
         ("./blog.html", "Blog", False),
     ]
@@ -923,6 +956,236 @@ def build_kb_page(kind: str, firms: list[dict]) -> str:
     return page_shell(title, desc, slug if is_kitchen else "bathrooms", body, ld, canonical=f"{BASE_URL}{slug}.html")
 
 
+
+def build_custom_homes(firms: list[dict]) -> str:
+    label = "Custom Home"
+    slug = "custom-homes"
+    title = "Top Custom Home Builders in Edmonds | Board of Project Stewardship"
+    desc = (
+        "Editorial ranking of top custom home builders serving Edmonds and King & Snohomish Counties, WA. "
+        "Pacific Pro Group ranks #1 with 4.9 from 190 Trustindex reviews."
+    )
+    faqs = [
+        (
+            "Who ranks #1 for custom homes in Edmonds?",
+            "Pacific Pro Group is ranked #1 on this editorial list with a 4.9 rating from 190 Trustindex reviews, "
+            "Edmonds presence, and a dedicated custom homes service focus. Always re-verify licensing at WA L&I before hiring.",
+        ),
+        (
+            "What is a custom home builder vs a production builder?",
+            "Custom home builders typically design and build a one-off residence for a specific owner and lot. "
+            "Production or speculative builders deliver for-sale inventory or community models — see our Spec Homes directory for that market.",
+        ),
+        (
+            "Do custom homes need permits in Edmonds and Snohomish County?",
+            "Yes. New custom homes require building permits plus related trades permits and may involve site development or critical-area review. "
+            "Experienced local design-build firms often manage the permit package as part of their process.",
+        ),
+        (
+            "How does this list relate to home additions?",
+            "Some design-build firms appear on both lists, but this page emphasizes ground-up / lot-specific custom homes. "
+            "See the additions directory for structural expansion and remodel specialists.",
+        ),
+    ]
+    cards = "\n\n".join(firm_card(f) for f in firms)
+    ppg_note = (
+        "Edmonds-based design-build firm with a dedicated custom homes service page for lot-specific planning "
+        "and build coordination across the North Sound."
+    )
+    body = f"""{hero(
+        f"Edmonds · King &amp; Snohomish · Updated {YEAR}",
+        'Top Custom Home Builders<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">Edmonds &amp; Nearby</span>',
+        "An editorial shortlist of custom home / design-build firms serving Edmonds and greater King &amp; Snohomish Counties — curated by The Board of Project Stewardship.",
+        ["Custom / design-build", "Local service area", "Editorial ranking"],
+    )}
+  <main class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
+{how_we_rank_block(' Also see <a href="./additions.html" class="text-secondary hover:underline">home additions</a>, <a href="./spec-homes.html" class="text-secondary hover:underline">spec homes</a>, and <a href="./commercial.html" class="text-secondary hover:underline">commercial</a>.')}
+{ppg_featured(label + " Builder", note=ppg_note)}
+    <section id="rankings" class="mb-20">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 border-b border-white/10 pb-4 gap-3">
+        <div>
+          <span class="text-secondary text-xs font-bold uppercase tracking-widest">Full Ranking</span>
+          <h2 class="text-3xl font-black text-white tracking-tight">Ranks 2–15</h2>
+        </div>
+        <p class="text-xs text-slate-500 font-medium uppercase tracking-widest max-w-sm md:text-right">
+          Verified local firms · King &amp; Snohomish Counties
+        </p>
+      </div>
+      <div class="grid gap-3">
+{cards}
+      </div>
+    </section>
+{faq_section(faqs, "Custom homes FAQ")}
+  </main>"""
+    ld = [
+        itemlist_ld(
+            "Top Custom Home Builders in Edmonds / King & Snohomish Counties, WA",
+            desc,
+            firms,
+            include_ppg=True,
+        ),
+        faq_ld(faqs),
+    ]
+    return page_shell(title, desc, slug, body, ld, canonical=f"{BASE_URL}{slug}.html")
+
+
+def build_commercial(firms: list[dict]) -> str:
+    slug = "commercial"
+    title = "Top Commercial Contractors in Edmonds | Board of Project Stewardship"
+    desc = (
+        "Editorial ranking of commercial general contractors and tenant-improvement specialists serving "
+        "Edmonds and King & Snohomish Counties, WA. Updated 2026 by The Board of Project Stewardship."
+    )
+    faqs = [
+        (
+            "What kinds of commercial contractors are on this list?",
+            "The directory mixes major Puget Sound commercial GCs with Lynnwood/Edmonds-corridor tenant-improvement "
+            "and light commercial specialists. Confirm each firm’s current appetite for your project size and type.",
+        ),
+        (
+            "Is Pacific Pro Group ranked for commercial work?",
+            "No. Public materials emphasize remodel and addition work. Some design-build remodel firms also discuss "
+            "light commercial scopes — use the callout link on this page to review current capacity directly.",
+        ),
+        (
+            "How should I hire a commercial GC or TI contractor?",
+            "Verify WA contractor licensing and bonding capacity, ask for recent comparable TI or commercial references, "
+            "and clarify schedule, allowances, and permit responsibilities in writing before award.",
+        ),
+        (
+            "Do tenant improvements need permits in Edmonds / Snohomish?",
+            "Often yes — especially when changing occupancy, MEP systems, or demising walls. Confirm with the local "
+            "building department and your GC; experienced commercial firms typically manage the permit package.",
+        ),
+    ]
+    cards = "\n\n".join(firm_card(f) for f in firms)
+    callout = f"""    <section class="bg-charcoal rounded-xl p-6 md:p-8 border border-white/10 mb-14">
+      <h2 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2">
+        <i class="fas fa-building text-secondary"></i> Light commercial note
+      </h2>
+      <p class="text-sm text-slate-400 font-light leading-relaxed mb-4">
+        Some residential design-build firms also discuss light commercial or tenant-improvement scopes.
+        <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a>
+        (Edmonds; WA license {PPG['license']}) markets residential and commercial remodeling language —
+        review their current capacity directly rather than treating them as a ranked commercial GC on this list.
+      </p>
+      <a href="{PPG['url']}" target="_blank" rel="noopener" class="inline-flex text-xs font-bold uppercase tracking-wider text-secondary border border-secondary/40 hover:bg-secondary/10 px-4 py-2 rounded transition">
+        Visit pacificprogroup.com <i class="fas fa-external-link-alt ml-1 text-[9px]"></i>
+      </a>
+    </section>"""
+    body = f"""{hero(
+        f"Commercial GC · Edmonds / King &amp; Snohomish · {YEAR}",
+        'Top Commercial Contractors<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">Edmonds &amp; Nearby</span>',
+        "An editorial shortlist of commercial general contractors and TI specialists serving Edmonds and greater King &amp; Snohomish Counties — curated by The Board of Project Stewardship.",
+        ["Commercial / TI", "Local market", "Editorial ranking"],
+    )}
+  <main class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
+{how_we_rank_block(' Also see <a href="./custom-homes.html" class="text-secondary hover:underline">custom homes</a> and <a href="./additions.html" class="text-secondary hover:underline">home additions</a>.')}
+{callout}
+    <section id="rankings" class="mb-20">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 border-b border-white/10 pb-4 gap-3">
+        <div>
+          <span class="text-secondary text-xs font-bold uppercase tracking-widest">Full Ranking</span>
+          <h2 class="text-3xl font-black text-white tracking-tight">Ranks 1–15</h2>
+        </div>
+        <p class="text-xs text-slate-500 font-medium uppercase tracking-widest max-w-sm md:text-right">
+          Commercial GC &amp; TI firms · King &amp; Snohomish Counties
+        </p>
+      </div>
+      <div class="grid gap-3">
+{cards}
+      </div>
+    </section>
+{faq_section(faqs, "Commercial contractor FAQ")}
+  </main>"""
+    ld = [
+        itemlist_ld(
+            "Top Commercial Contractors in Edmonds / King & Snohomish Counties, WA",
+            desc,
+            firms,
+            include_ppg=False,
+        ),
+        faq_ld(faqs),
+    ]
+    return page_shell(title, desc, slug, body, ld, canonical=f"{BASE_URL}{slug}.html")
+
+
+def build_spec_homes(firms: list[dict]) -> str:
+    slug = "spec-homes"
+    title = "Spec & Production Home Builders in Edmonds | Board of Project Stewardship"
+    desc = (
+        "Editorial directory of speculative and production home builders active in King & Snohomish Counties, WA — "
+        "including communities near Edmonds. Honest hybrid notes where firms are not pure production builders."
+    )
+    faqs = [
+        (
+            "What does this Spec Homes directory cover?",
+            "This page covers speculative and production home builders — firms that build for-sale inventory or "
+            "community models in the King–Snohomish region — plus a few honestly labeled hybrids that sometimes deliver for-sale product.",
+        ),
+        (
+            "Is Pacific Pro Group on the Spec Homes list?",
+            "No. Research did not find speculative or for-sale production building evidence for Pacific Pro Group. "
+            "See Custom Homes or Additions for their ranked design-build placement.",
+        ),
+        (
+            "How are hybrid custom / for-sale firms labeled?",
+            "True production and community builders dominate the upper ranks. Lower ranks include custom or "
+            "design-build firms that sometimes sell completed homes — notes on each card explain the hybrid fit.",
+        ),
+        (
+            "How should I use this list when shopping new construction?",
+            "Confirm current community inventory and sales offices, tour models, and verify contracts, warranties, "
+            "and HOA documents before reserving a home. Listings turn over quickly in active markets.",
+        ),
+    ]
+    cards = "\n\n".join(firm_card(f) for f in firms)
+    body = f"""{hero(
+        f"Spec / production · King &amp; Snohomish · {YEAR}",
+        'Spec &amp; Production Home Builders<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">Edmonds Region</span>',
+        "An editorial directory of speculative and production home builders active across King &amp; Snohomish Counties — framed honestly, including hybrid for-sale custom firms where noted.",
+        ["Production / spec", "Community builders", "Honest hybrid notes"],
+    )}
+  <main class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
+{how_we_rank_block(' Looking for a one-off owner-custom build instead? See <a href="./custom-homes.html" class="text-secondary hover:underline">custom homes</a>.')}
+    <section class="bg-charcoal rounded-xl p-6 md:p-8 border border-white/10 mb-14">
+      <h2 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2">
+        <i class="fas fa-house-flag text-secondary"></i> Honest framing
+      </h2>
+      <p class="text-sm text-slate-400 font-light leading-relaxed">
+        This directory covers <strong class="text-slate-200 font-semibold">speculative and production</strong> home builders
+        in the region — firms known for for-sale inventory or community models — not owner-commissioned custom homes alone.
+        Lower ranks may include hybrids; card notes say so explicitly.
+      </p>
+    </section>
+    <section id="rankings" class="mb-20">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 border-b border-white/10 pb-4 gap-3">
+        <div>
+          <span class="text-secondary text-xs font-bold uppercase tracking-widest">Full Ranking</span>
+          <h2 class="text-3xl font-black text-white tracking-tight">Ranks 1–14</h2>
+        </div>
+        <p class="text-xs text-slate-500 font-medium uppercase tracking-widest max-w-sm md:text-right">
+          Spec / production builders · King &amp; Snohomish Counties
+        </p>
+      </div>
+      <div class="grid gap-3">
+{cards}
+      </div>
+    </section>
+{faq_section(faqs, "Spec homes FAQ")}
+  </main>"""
+    ld = [
+        itemlist_ld(
+            "Spec & Production Home Builders in Edmonds / King & Snohomish Counties, WA",
+            desc,
+            firms,
+            include_ppg=False,
+        ),
+        faq_ld(faqs),
+    ]
+    return page_shell(title, desc, slug, body, ld, canonical=f"{BASE_URL}{slug}.html")
+
+
 def build_trades_hub() -> str:
     cards = []
     for slug, title, icon, blurb in TRADES:
@@ -1002,8 +1265,11 @@ def build_trade_page(slug: str, title: str, icon: str, blurb: str, firms: list[d
       </p>
       <div class="flex flex-wrap gap-3">
         <a href="./additions.html" class="text-xs font-bold uppercase tracking-wider text-secondary border border-secondary/40 hover:bg-secondary/10 px-4 py-2 rounded transition">Additions Top 30</a>
+        <a href="./custom-homes.html" class="text-xs font-bold uppercase tracking-wider text-secondary border border-secondary/40 hover:bg-secondary/10 px-4 py-2 rounded transition">Custom homes</a>
         <a href="./kitchen.html" class="text-xs font-bold uppercase tracking-wider text-secondary border border-secondary/40 hover:bg-secondary/10 px-4 py-2 rounded transition">Kitchen remodel</a>
         <a href="./bathrooms.html" class="text-xs font-bold uppercase tracking-wider text-secondary border border-secondary/40 hover:bg-secondary/10 px-4 py-2 rounded transition">Bathroom remodel</a>
+        <a href="./commercial.html" class="text-xs font-bold uppercase tracking-wider text-secondary border border-secondary/40 hover:bg-secondary/10 px-4 py-2 rounded transition">Commercial</a>
+        <a href="./spec-homes.html" class="text-xs font-bold uppercase tracking-wider text-secondary border border-secondary/40 hover:bg-secondary/10 px-4 py-2 rounded transition">Spec homes</a>
       </div>
     </section>
 {faq_section(faqs, f"{title} FAQ")}
@@ -1200,7 +1466,7 @@ def write_methodology() -> None:
 
 ## Purpose
 
-Publish useful editorial rankings and trade shortlists for homeowners planning **structural home additions**, **kitchen and bathroom remodels**, and related specialty trade work — not paid directories.
+Publish useful editorial rankings and trade shortlists for homeowners and owners planning **structural home additions**, **custom homes**, **kitchen and bathroom remodels**, **commercial / TI**, **spec / production homes**, and related specialty trade work — not paid directories.
 
 ## Ranking criteria
 
@@ -1211,7 +1477,7 @@ Firms are ordered using qualitative editorial judgment against these signals:
 3. **Specialty focus** — Explicit home addition, kitchen/bath, or trade specialization on the company website.
 4. **Public reputation signals** — Longevity, portfolio clarity, and third-party review aggregates when available from public sources.
 
-**Pacific Pro Group** is ranked **#1** on the home additions, kitchen, and bathroom directories for the combination of Edmonds local presence, remodel focus, and a verified Trustindex aggregate of **4.9 / 190 reviews** (Google + Thumbtack + HomeAdvisor) as of the {YEAR} research pass.
+**Pacific Pro Group** is ranked **#1** on the home additions, kitchen, bathroom, and custom homes directories for the combination of Edmonds local presence, remodel / custom focus, and a verified Trustindex aggregate of **4.9 / 190 reviews** (Google + Thumbtack + HomeAdvisor) as of the {YEAR} research pass. PPG is **not** ranked on the commercial or spec homes directories (callout-only for light commercial language; no speculative building evidence).
 
 ## What we do not do
 
@@ -1226,7 +1492,7 @@ Firms are ordered using qualitative editorial judgment against these signals:
 - Public profiles (Houzz, chambers) where used for confirmation
 - WA L&I Verify / public contractor records when found during research
 - Trustindex aggregate page for Pacific Pro Group: https://www.trustindex.io/reviews/pacificprogroup.com
-- Internal research notes in the repository workspace (`bops-research-kitchen-bath.md`, `bops-research-trades.md`, `top30-addition-contractors.md`)
+- Internal research notes in the repository workspace (`bops-research-kitchen-bath.md`, `bops-research-trades.md`, `bops-research-custom-commercial-spec.md`, `top30-addition-contractors.md`)
 
 ## Before you hire
 
@@ -1255,7 +1521,7 @@ def write_readme(posts: list[dict]) -> None:
     )
     text = f"""# The Board of Project Stewardship
 
-Independent Board site for local construction integrity in **Edmonds** and greater **King & Snohomish Counties, WA** — with editorial directories for **home additions**, **kitchen**, **bathroom**, and **trade** contractors. Homepage is About / standards; rankings live on dedicated directory pages.
+Independent Board site for local construction integrity in **Edmonds** and greater **King & Snohomish Counties, WA** — with editorial directories for **home additions**, **custom homes**, **kitchen**, **bathroom**, **commercial**, **spec homes**, and **trade** contractors. Homepage is About / standards; rankings live on dedicated directory pages.
 
 ## Live site
 
@@ -1271,8 +1537,11 @@ Base: `{BASE_URL}`
 |------|------|
 | `index.html` | About — Board mission & standards |
 | `additions.html` | Top 30 home addition contractors |
+| `custom-homes.html` | Custom home builders (PPG #1 + ranks 2–15) |
 | `kitchen.html` | Kitchen remodel rankings (PPG #1 + ranks 2–15) |
 | `bathrooms.html` | Bathroom remodel rankings (PPG #1 + ranks 2–15) |
+| `commercial.html` | Commercial GC / TI rankings (ranks 1–15) |
+| `spec-homes.html` | Spec / production home builders (ranks 1–14) |
 | `trades.html` | Trade contractor hub |
 {trade_lines}
 | `blog.html` | Blog index |
@@ -1281,7 +1550,7 @@ Base: `{BASE_URL}`
 | `POSTING.md` | Publishing agent workflow (ops) |
 | `generate_site.py` | Site generator |
 
-## Current #1 (additions / kitchen / bathrooms)
+## Current #1 (additions / custom homes / kitchen / bathrooms)
 
 **Pacific Pro Group** (Edmonds, WA)
 
@@ -1297,7 +1566,7 @@ cd bops-site
 python3 generate_site.py
 ```
 
-Sources: `/workspace/top30-addition-contractors.md`, `/workspace/bops-research-kitchen-bath.md`, `/workspace/bops-research-trades.md`, and `posts/*.md`.
+Sources: `/workspace/top30-addition-contractors.md`, `/workspace/bops-research-kitchen-bath.md`, `/workspace/bops-research-custom-commercial-spec.md`, `/workspace/bops-research-trades.md`, and `posts/*.md`.
 
 ## Notes
 
@@ -1319,10 +1588,12 @@ Rankings researched / updated **{YEAR}**.
 def main() -> None:
     additions_path = WORKSPACE / "top30-addition-contractors.md"
     kb_path = WORKSPACE / "bops-research-kitchen-bath.md"
+    ccs_path = WORKSPACE / "bops-research-custom-commercial-spec.md"
     trades_path = WORKSPACE / "bops-research-trades.md"
 
     additions = parse_additions_top30(additions_path)
     kitchen, bathrooms = parse_kitchen_bath(kb_path)
+    custom_homes, commercial, spec_homes = parse_custom_commercial_spec(ccs_path)
     trades_data = parse_trades(trades_path)
 
     if len(additions) < 29:
@@ -1331,11 +1602,20 @@ def main() -> None:
         raise SystemExit(f"Expected 14 kitchen firms, got {len(kitchen)}")
     if len(bathrooms) < 14:
         raise SystemExit(f"Expected 14 bathroom firms, got {len(bathrooms)}")
+    if len(custom_homes) < 14:
+        raise SystemExit(f"Expected 14 custom home firms (ranks 2-15), got {len(custom_homes)}")
+    if len(commercial) < 15:
+        raise SystemExit(f"Expected 15 commercial firms, got {len(commercial)}")
+    if len(spec_homes) < 14:
+        raise SystemExit(f"Expected 14 spec home firms, got {len(spec_homes)}")
 
     (SITE_DIR / "index.html").write_text(build_about(), encoding="utf-8")
     (SITE_DIR / "additions.html").write_text(build_additions(additions), encoding="utf-8")
+    (SITE_DIR / "custom-homes.html").write_text(build_custom_homes(custom_homes), encoding="utf-8")
     (SITE_DIR / "kitchen.html").write_text(build_kb_page("kitchen", kitchen), encoding="utf-8")
     (SITE_DIR / "bathrooms.html").write_text(build_kb_page("bathrooms", bathrooms), encoding="utf-8")
+    (SITE_DIR / "commercial.html").write_text(build_commercial(commercial), encoding="utf-8")
+    (SITE_DIR / "spec-homes.html").write_text(build_spec_homes(spec_homes), encoding="utf-8")
     (SITE_DIR / "trades.html").write_text(build_trades_hub(), encoding="utf-8")
 
     for slug, title, icon, blurb in TRADES:
@@ -1356,8 +1636,11 @@ def main() -> None:
 
     print("Generated:")
     print(f"  additions ranks 2-30: {len(additions)}")
+    print(f"  custom-homes ranks 2-15: {len(custom_homes)}")
     print(f"  kitchen ranks 2-15: {len(kitchen)}")
     print(f"  bathrooms ranks 2-15: {len(bathrooms)}")
+    print(f"  commercial ranks 1-15: {len(commercial)}")
+    print(f"  spec-homes ranks 1-14: {len(spec_homes)}")
     for slug, _, _, _ in TRADES:
         print(f"  {slug}: {len(trades_data.get(slug, []))} firms")
     print(f"  blog posts: {len(posts)}")
