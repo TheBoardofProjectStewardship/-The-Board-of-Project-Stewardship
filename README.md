@@ -1,6 +1,6 @@
 # The Board of Project Stewardship
 
-Independent Board site for local construction integrity in **Edmonds** and greater **King & Snohomish Counties, WA** — with editorial directories for **home additions**, **custom homes**, **kitchen**, **bathroom**, **commercial**, **spec homes**, and **trade** contractors. Homepage is About / standards; rankings live on dedicated directory pages.
+Independent Board site for local construction integrity in **Edmonds** and greater **King & Snohomish Counties, WA** — with editorial directories for **home additions**, **custom homes**, **Edmonds custom homes (Top 30)**, **kitchen**, **bathroom**, **commercial**, **spec homes**, and **trade** contractors. Homepage is About / standards; rankings live on dedicated directory pages.
 
 ## Live site
 
@@ -17,6 +17,7 @@ Base: `https://theboardofprojectstewardship.github.io/-The-Board-of-Project-Stew
 | `index.html` | About — Board mission & standards |
 | `additions.html` | Top 30 home addition contractors |
 | `custom-homes.html` | Custom home builders (PPG #1 + ranks 2–15) |
+| `edmonds-custom-homes.html` | Edmonds Custom Homes Top 30 (filters, permit guide, tools) |
 | `kitchen.html` | Kitchen remodel rankings (PPG #1 + ranks 2–15) |
 | `bathrooms.html` | Bathroom remodel rankings (PPG #1 + ranks 2–15) |
 | `commercial.html` | Commercial GC / TI rankings (ranks 1–15) |
@@ -43,7 +44,7 @@ Base: `https://theboardofprojectstewardship.github.io/-The-Board-of-Project-Stew
 | `POSTING.md` | Publishing agent workflow (ops) |
 | `generate_site.py` | Site generator |
 
-## Current #1 (additions / custom homes / kitchen / bathrooms)
+## Current #1 (additions / custom homes / Edmonds Top 30 / kitchen / bathrooms)
 
 **Pacific Pro Group** (Edmonds, WA)
 
@@ -59,7 +60,7 @@ cd bops-site
 python3 generate_site.py
 ```
 
-Sources: `/workspace/top30-addition-contractors.md`, `/workspace/bops-research-kitchen-bath.md`, `/workspace/bops-research-custom-commercial-spec.md`, `/workspace/bops-research-trades.md`, and `posts/*.md`.
+Sources: `/workspace/top30-addition-contractors.md`, `/workspace/bops-research-kitchen-bath.md`, `/workspace/bops-research-custom-commercial-spec.md`, `/workspace/bops-research-edmonds-custom.md`, `/workspace/bops-research-trades.md`, and `posts/*.md`.
 
 ## Notes
 
