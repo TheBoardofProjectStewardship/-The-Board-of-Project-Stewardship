@@ -56,6 +56,11 @@
     .prose-bops ul { list-style: disc; padding-left: 1.25rem; margin-bottom: 1rem; }
     .prose-bops ol { list-style: decimal; padding-left: 1.25rem; margin-bottom: 1rem; }
     .prose-bops strong { color: #fff; font-weight: 600; }
+    #tools input, #tools select, #tools textarea {
+      color-scheme: dark;
+    }
+    #tools input::placeholder, #tools textarea::placeholder { color: #64748b; }
+    #calc-result { letter-spacing: -0.02em; }
   </style>
   <script type="application/ld+json">
 {
@@ -402,7 +407,7 @@
       <p class="text-slate-400 text-sm font-light leading-relaxed">
         Rankings updated <strong class="text-slate-200">2026</strong>. Always re-verify WA contractor status at
         <a href="https://secure.lni.wa.gov/verify/" target="_blank" rel="noopener" class="text-secondary hover:underline">L&amp;I Verify</a>
-        before hiring. See <a href="./methodology.md" class="text-secondary hover:underline">methodology notes</a>.
+        before hiring.
          Also see <a href="./additions.html" class="text-secondary hover:underline">home additions</a> and <a href="./trades.html" class="text-secondary hover:underline">trade directories</a>.
       </p>
     </section>
@@ -694,6 +699,58 @@
       </div>
     </section>
   </main>
+  <div class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
+    <section id="tools" class="mb-6">
+      <div class="mb-8 border-b border-white/10 pb-4">
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Planning Tools</span>
+        <h2 class="text-3xl font-black text-white tracking-tight">Calculator · Partners · Service Region</h2>
+      </div>
+      <div class="grid lg:grid-cols-3 gap-4">
+        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
+          <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-calculator text-secondary"></i> Project Calculator</h3>
+          <p class="text-xs text-slate-500 mb-4 font-light">Rough ballpark only — not a bid. Uses sq&nbsp;ft × finish level + base coordination fee.</p>
+          <label class="block text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-1" for="calc-sqft">Square footage</label>
+          <input id="calc-sqft" type="number" min="500" step="50" value="2500" class="w-full mb-3 bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
+          <label class="block text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-1" for="calc-finish">Finish level</label>
+          <select id="calc-finish" class="w-full mb-4 bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
+            <option value="275">Essential — $275 / sq ft</option>
+            <option value="350" selected>Standard — $350 / sq ft</option>
+            <option value="450">Luxury — $450 / sq ft</option>
+            <option value="550">Estate — $550 / sq ft</option>
+          </select>
+          <p class="text-xs text-slate-500 mb-2">Base coordination fee: <span class="text-slate-300">$25,000</span></p>
+          <div class="bg-white/5 border border-white/10 rounded-lg px-4 py-3">
+            <div class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">Estimated range</div>
+            <div id="calc-result" class="text-2xl font-black text-secondary mt-1">—</div>
+          </div>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
+          <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-handshake text-secondary"></i> Partner Network</h3>
+          <p class="text-xs text-slate-500 mb-4 font-light">Request an introduction to Pacific Pro Group or ask about Edmonds custom home capacity.</p>
+          <form id="partner-form" action="https://pacificprogroup.com/" method="get" target="_blank" class="space-y-3">
+            <input type="text" name="ref_name" required placeholder="Your name" class="w-full bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
+            <input type="email" name="ref_email" required placeholder="Email" class="w-full bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
+            <input type="text" name="ref_city" placeholder="City / neighborhood" class="w-full bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
+            <textarea name="ref_notes" rows="3" placeholder="Project notes (lot, timeline, sq ft)" class="w-full bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary"></textarea>
+            <button type="submit" class="w-full bg-primary text-white py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs">Continue to Pacific Pro Group</button>
+          </form>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
+          <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-location-dot text-secondary"></i> Service Region</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed mb-4">Primary coverage for this Edmonds directory:</p>
+          <ul class="space-y-2 text-sm text-slate-300 font-light mb-5">
+            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>Edmonds &amp; the Edmonds Bowl</li>
+            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>Shoreline · Lynnwood · Mukilteo · Mountlake Terrace</li>
+            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>South Snohomish &amp; North King County</li>
+            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>Greater Seattle metro (by firm)</li>
+          </ul>
+          <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-secondary hover:underline">
+            Confirm PPG service area <i class="fas fa-arrow-right text-[10px]"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
   <footer class="bg-obsidian py-14 text-sm border-t border-white/5">
     <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-10 text-slate-400">
       <div>
@@ -716,7 +773,6 @@
           <li><a href="./spec-homes.html" class="hover:text-secondary transition">Spec homes</a></li>
           <li><a href="./trades.html" class="hover:text-secondary transition">Trade contractors</a></li>
           <li><a href="./blog.html" class="hover:text-secondary transition">Blog</a></li>
-          <li><a href="./methodology.md" class="hover:text-secondary transition">Methodology</a></li>
         </ul>
       </div>
       <div>
@@ -726,5 +782,26 @@
       </div>
     </div>
   </footer>
+  <script>
+  (function () {
+    var BASE_FEE = 25000;
+    function calc() {
+      var sqEl = document.getElementById('calc-sqft');
+      var finishEl = document.getElementById('calc-finish');
+      var el = document.getElementById('calc-result');
+      if (!sqEl || !finishEl || !el) return;
+      var sq = parseFloat(sqEl.value) || 0;
+      var rate = parseFloat(finishEl.value) || 0;
+      var total = sq * rate + BASE_FEE;
+      if (!sq || !rate) { el.textContent = '—'; return; }
+      el.textContent = total.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+    }
+    var sqft = document.getElementById('calc-sqft');
+    var finish = document.getElementById('calc-finish');
+    if (sqft) sqft.addEventListener('input', calc);
+    if (finish) finish.addEventListener('change', calc);
+    calc();
+  })();
+  </script>
 </body>
 </html>
