@@ -21,6 +21,7 @@ PPG = {
     "phone": "(206) 446-5656",
     "phone_tel": "+12064465656",
     "city": "Edmonds, WA",
+    "license": "PACIFPG765OF",
     "rating": "4.9",
     "reviews": "190",
     "trustindex": "https://www.trustindex.io/reviews/pacificprogroup.com",
@@ -308,11 +309,12 @@ def nav_html(active: str = "", prefix: str = "") -> str:
         return f"./{name}"
 
     links = [
-        ("home", href("index.html"), "Home (Additions)"),
+        ("about", href("index.html"), "About"),
+        ("additions", href("additions.html"), "Additions"),
         ("kitchen", href("kitchen.html"), "Kitchen"),
         ("bathrooms", href("bathrooms.html"), "Bathrooms"),
         ("trades", href("trades.html"), "Trades"),
-        ("method", href("methodology.md"), "How we rank"),
+        ("blog", href("blog.html"), "Blog"),
     ]
     items = []
     for key, h, label in links:
@@ -352,10 +354,12 @@ def footer_html(prefix: str = "./") -> str:
       <div>
         <h4 class="text-white font-bold text-xs uppercase tracking-widest mb-4">Explore</h4>
         <ul class="space-y-2 font-light text-sm">
-          <li><a href="{prefix}index.html" class="hover:text-secondary transition">Home additions Top 30</a></li>
+          <li><a href="{prefix}index.html" class="hover:text-secondary transition">About</a></li>
+          <li><a href="{prefix}additions.html" class="hover:text-secondary transition">Additions Top 30</a></li>
           <li><a href="{prefix}kitchen.html" class="hover:text-secondary transition">Kitchen remodelers</a></li>
           <li><a href="{prefix}bathrooms.html" class="hover:text-secondary transition">Bathroom remodelers</a></li>
           <li><a href="{prefix}trades.html" class="hover:text-secondary transition">Trade contractors</a></li>
+          <li><a href="{prefix}blog.html" class="hover:text-secondary transition">Blog</a></li>
           <li><a href="{prefix}methodology.md" class="hover:text-secondary transition">Methodology</a></li>
         </ul>
       </div>
@@ -372,7 +376,7 @@ def page_shell(title: str, description: str, active: str, body: str, json_ld: li
     ld_blocks = ""
     for obj in json_ld or []:
         ld_blocks += f'  <script type="application/ld+json">\n{json.dumps(obj, indent=2)}\n  </script>\n'
-    canon = canonical or (BASE_URL + ("" if active == "home" else f"{active}.html" if active != "blog" else "blog.html"))
+    canon = canonical or (BASE_URL + ("" if active == "about" else f"{active}.html" if active != "blog" else "blog.html"))
     return f"""<!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
@@ -640,7 +644,139 @@ def how_we_rank_block(extra: str = "") -> str:
 
 # ---------- Page builders ----------
 
-def build_index(additions: list[dict]) -> str:
+def build_about() -> str:
+    pillars = [
+        (
+            "fa-scale-balanced",
+            "Financial Solvency",
+            "Active bonding capacity reviewed against project loads to reduce over-leveraging risk.",
+        ),
+        (
+            "fa-ruler-combined",
+            "Technical Review",
+            "Portfolio review against clear architecture/construction reference standards.",
+        ),
+        (
+            "fa-user-tie",
+            "Project Steward",
+            "Expectation of a designated project steward for continuity (no salesman handoffs).",
+        ),
+        (
+            "fa-map-location-dot",
+            "Local Mastery",
+            "Proven navigation of Edmonds “Bowl” height restrictions, permits, and critical areas.",
+        ),
+    ]
+    pillar_cards = []
+    for icon, title, blurb in pillars:
+        pillar_cards.append(f"""        <div class="bg-charcoal border border-white/10 hover:border-primary/40 rounded-xl p-6 card-hover">
+          <div class="w-11 h-11 rounded-lg bg-primary/20 border border-secondary/30 flex items-center justify-center mb-4">
+            <i class="fas {icon} text-secondary text-lg"></i>
+          </div>
+          <h3 class="text-lg font-black text-white mb-2 tracking-tight">{esc(title)}</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">{esc(blurb)}</p>
+        </div>""")
+
+    ctas = [
+        ("./additions.html", "Browse Additions Directory", True),
+        ("./kitchen.html", "Kitchen", False),
+        ("./bathrooms.html", "Bathrooms", False),
+        ("./trades.html", "Trades", False),
+        ("./blog.html", "Blog", False),
+    ]
+    cta_html = []
+    for href, label, primary in ctas:
+        if primary:
+            cls = "bg-primary text-white hover:bg-emerald-700 shadow-glow-sleek"
+        else:
+            cls = "border border-white/20 bg-white/5 text-white hover:border-secondary hover:text-secondary"
+        cta_html.append(
+            f'<a href="{href}" class="{cls} px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">{esc(label)}</a>'
+        )
+
+    body = f"""{hero(
+        f"Independent · Edmonds / King &amp; Snohomish · {YEAR}",
+        'The Board of Project Stewardship<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">A Regulatory Filter for Local Construction Integrity</span>',
+        "Most directories are marketing platforms. We are a regulatory filter — an independent body focused on local construction integrity in Edmonds and the greater King &amp; Snohomish market.",
+        ["Independent review", "Local standards", "Project continuity"],
+    )}
+  <main class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
+    <section class="bg-charcoal rounded-xl p-8 md:p-10 border border-primary/25 mb-12 relative overflow-hidden">
+      <div class="absolute -bottom-20 -right-20 w-56 h-56 bg-primary/15 blur-[70px] pointer-events-none rounded-full"></div>
+      <h2 class="text-2xl font-black text-white mb-4 tracking-tight flex items-center gap-3 relative z-10">
+        <i class="fas fa-gavel text-secondary"></i> Mission
+      </h2>
+      <p class="text-slate-300 leading-relaxed font-light max-w-3xl relative z-10">
+        The Board of Project Stewardship applies a higher bar than paid listings or lead-gen directories.
+        We emphasize solvency, technical competence, steward accountability, and proven local mastery —
+        so homeowners can evaluate firms against clear standards, not marketing spend.
+      </p>
+    </section>
+
+    <section class="mb-14">
+      <div class="mb-8 border-b border-white/10 pb-4">
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Standards</span>
+        <h2 class="text-3xl font-black text-white tracking-tight">Four pillars of stewardship</h2>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4">
+{chr(10).join(pillar_cards)}
+      </div>
+    </section>
+
+    <section class="bg-charcoal rounded-xl p-8 md:p-10 border border-secondary/35 mb-14 relative overflow-hidden">
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-primary"></div>
+      <div class="absolute -top-16 -left-16 w-72 h-72 bg-primary/10 blur-[90px] pointer-events-none rounded-full"></div>
+      <div class="relative z-10">
+        <span class="text-secondary font-bold text-xs uppercase tracking-[0.15em] flex items-center mb-3">
+          <i class="fas fa-trophy mr-2"></i> Featured ranking
+        </span>
+        <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-3">Pacific Pro Group</h2>
+        <p class="text-slate-300 font-light leading-relaxed mb-4 max-w-3xl">
+          Pacific Pro Group is the Board’s <strong class="text-white font-semibold">#1 ranked design-build firm</strong>
+          for Edmonds home additions. Local presence, remodel focus, and a verified
+          <strong class="text-white font-semibold">{PPG['rating']}</strong> aggregate across
+          <strong class="text-white font-semibold">{PPG['reviews']}</strong> reviews.
+        </p>
+        <div class="flex flex-wrap gap-2 mb-6">
+          <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-emerald-400/30 bg-emerald-950/40 text-emerald-300">WA License {PPG['license']}</span>
+          <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-white/20 bg-white/5 text-slate-300">{PPG['rating']} · {PPG['reviews']} reviews</span>
+          <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-white/20 bg-white/5 text-slate-300">Edmonds, WA</span>
+        </div>
+        <div class="flex flex-col sm:flex-row flex-wrap gap-3">
+          <a href="./additions.html" class="bg-primary text-white text-center py-3.5 px-6 rounded font-bold hover:bg-emerald-700 transition shadow-glow-sleek uppercase tracking-wider text-sm">
+            View Additions ranking
+          </a>
+          <a href="{PPG['url']}" target="_blank" rel="noopener" class="border border-white/20 bg-white/5 text-white py-3.5 px-6 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-sm text-center">
+            pacificprogroup.com
+          </a>
+          <a href="{PPG['trustindex']}" target="_blank" rel="noopener" class="border border-white/15 text-slate-200 py-3.5 px-6 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-sm text-center">
+            Trustindex {PPG['rating']} · {PPG['reviews']}
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-8">
+      <div class="mb-6 border-b border-white/10 pb-4">
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Directories</span>
+        <h2 class="text-2xl font-black text-white tracking-tight">Explore the Board’s listings</h2>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        {''.join(cta_html)}
+      </div>
+    </section>
+  </main>"""
+
+    return page_shell(
+        "The Board of Project Stewardship | Edmonds Construction Standards",
+        "Most directories are marketing platforms. The Board of Project Stewardship is a regulatory filter — an independent body focused on local construction integrity in Edmonds and the greater King & Snohomish market.",
+        "about",
+        body,
+        canonical=BASE_URL,
+    )
+
+
+def build_additions(additions: list[dict]) -> str:
     faqs = [
         (
             "What should I look for in a home addition contractor in Edmonds, WA?",
@@ -716,10 +852,10 @@ def build_index(additions: list[dict]) -> str:
     return page_shell(
         "Top 30 Verified Home Addition Contractors in Edmonds | Board of Project Stewardship",
         "Top 30 verified home addition contractors in Edmonds and King & Snohomish Counties, WA. Editorial ranking by The Board of Project Stewardship — updated 2026. Pacific Pro Group ranks #1.",
-        "home",
+        "additions",
         body,
         ld,
-        canonical=BASE_URL,
+        canonical=f"{BASE_URL}additions.html",
     )
 
 
@@ -757,7 +893,7 @@ def build_kb_page(kind: str, firms: list[dict]) -> str:
         ["Local service area", "Remodel focus", "Editorial ranking"],
     )}
   <main class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
-{how_we_rank_block(f' Also see <a href="./index.html" class="text-secondary hover:underline">home additions</a> and <a href="./trades.html" class="text-secondary hover:underline">trade directories</a>.')}
+{how_we_rank_block(f' Also see <a href="./additions.html" class="text-secondary hover:underline">home additions</a> and <a href="./trades.html" class="text-secondary hover:underline">trade directories</a>.')}
 {ppg_featured(label + " Contractor")}
     <section id="rankings" class="mb-20">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 border-b border-white/10 pb-4 gap-3">
@@ -865,7 +1001,7 @@ def build_trade_page(slug: str, title: str, icon: str, blurb: str, firms: list[d
         (design-build GC; not listed here as a specialty trade).
       </p>
       <div class="flex flex-wrap gap-3">
-        <a href="./index.html" class="text-xs font-bold uppercase tracking-wider text-secondary border border-secondary/40 hover:bg-secondary/10 px-4 py-2 rounded transition">Additions Top 30</a>
+        <a href="./additions.html" class="text-xs font-bold uppercase tracking-wider text-secondary border border-secondary/40 hover:bg-secondary/10 px-4 py-2 rounded transition">Additions Top 30</a>
         <a href="./kitchen.html" class="text-xs font-bold uppercase tracking-wider text-secondary border border-secondary/40 hover:bg-secondary/10 px-4 py-2 rounded transition">Kitchen remodel</a>
         <a href="./bathrooms.html" class="text-xs font-bold uppercase tracking-wider text-secondary border border-secondary/40 hover:bg-secondary/10 px-4 py-2 rounded transition">Bathroom remodel</a>
       </div>
@@ -1119,7 +1255,7 @@ def write_readme(posts: list[dict]) -> None:
     )
     text = f"""# The Board of Project Stewardship
 
-Editorial static site ranking verified **home addition**, **kitchen**, **bathroom**, and **trade** contractors serving **Edmonds** and greater **King & Snohomish Counties, WA**.
+Independent Board site for local construction integrity in **Edmonds** and greater **King & Snohomish Counties, WA** — with editorial directories for **home additions**, **kitchen**, **bathroom**, and **trade** contractors. Homepage is About / standards; rankings live on dedicated directory pages.
 
 ## Live site
 
@@ -1133,7 +1269,8 @@ Base: `{BASE_URL}`
 
 | Path | Page |
 |------|------|
-| `index.html` | Top 30 home addition contractors |
+| `index.html` | About — Board mission & standards |
+| `additions.html` | Top 30 home addition contractors |
 | `kitchen.html` | Kitchen remodel rankings (PPG #1 + ranks 2–15) |
 | `bathrooms.html` | Bathroom remodel rankings (PPG #1 + ranks 2–15) |
 | `trades.html` | Trade contractor hub |
@@ -1195,7 +1332,8 @@ def main() -> None:
     if len(bathrooms) < 14:
         raise SystemExit(f"Expected 14 bathroom firms, got {len(bathrooms)}")
 
-    (SITE_DIR / "index.html").write_text(build_index(additions), encoding="utf-8")
+    (SITE_DIR / "index.html").write_text(build_about(), encoding="utf-8")
+    (SITE_DIR / "additions.html").write_text(build_additions(additions), encoding="utf-8")
     (SITE_DIR / "kitchen.html").write_text(build_kb_page("kitchen", kitchen), encoding="utf-8")
     (SITE_DIR / "bathrooms.html").write_text(build_kb_page("bathrooms", bathrooms), encoding="utf-8")
     (SITE_DIR / "trades.html").write_text(build_trades_hub(), encoding="utf-8")
