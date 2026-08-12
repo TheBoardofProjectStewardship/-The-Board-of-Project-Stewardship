@@ -254,6 +254,49 @@ def parse_custom_commercial_spec(path: Path) -> tuple[list[dict], list[dict], li
     return custom, commercial, spec
 
 
+
+def parse_edmonds_custom(path: Path) -> list[dict]:
+    """Parse Edmonds custom homes Top 30 research (includes PPG at rank 1)."""
+    text = path.read_text(encoding="utf-8")
+    tables = parse_md_tables(text)
+    firms: list[dict] = []
+    for t in tables:
+        headers = [h.lower() for h in t["headers"]]
+        if "rank" not in headers or not any("name" in h for h in headers):
+            continue
+        for row in t["rows"]:
+            rank_s = row.get("Rank", "").strip()
+            if not rank_s.isdigit():
+                continue
+            name = row.get("Name", "").strip()
+            if not name:
+                continue
+            website = row.get("Website", "").strip()
+            if website in ("—", "-", "") or website.lower().startswith("search"):
+                website = ""
+            murl = re.search(r"https?://[^\s)]+", website)
+            if murl:
+                website = murl.group(0).rstrip(".,;")
+            category = (row.get("Category", "") or "traditional").strip().lower()
+            specialty = row.get("Specialty", "").strip()
+            city = row.get("City", "Edmonds").strip() or "Edmonds"
+            note = row.get("Notes", row.get("1-line note", "")).strip()
+            firms.append({
+                "rank": int(rank_s),
+                "name": re.sub(r"\s+", " ", name),
+                "website": website,
+                "city": city if "," in city or city.endswith(" WA") else f"{city}, WA",
+                "phone": "",
+                "note": note or specialty,
+                "category": category,
+                "specialty": specialty,
+            })
+        if firms:
+            break
+    firms.sort(key=lambda f: f["rank"])
+    return firms
+
+
 def parse_trades(path: Path) -> dict[str, list[dict]]:
     text = path.read_text(encoding="utf-8")
     out: dict[str, list[dict]] = {}
@@ -336,6 +379,7 @@ def nav_html(active: str = "", prefix: str = "") -> str:
         ("about", href("index.html"), "About"),
         ("additions", href("additions.html"), "Additions"),
         ("custom-homes", href("custom-homes.html"), "Custom Homes"),
+        ("edmonds", href("edmonds-custom-homes.html"), "Edmonds"),
         ("kitchen", href("kitchen.html"), "Kitchen"),
         ("bathrooms", href("bathrooms.html"), "Bathrooms"),
         ("commercial", href("commercial.html"), "Commercial"),
@@ -384,6 +428,7 @@ def footer_html(prefix: str = "./") -> str:
           <li><a href="{prefix}index.html" class="hover:text-secondary transition">About</a></li>
           <li><a href="{prefix}additions.html" class="hover:text-secondary transition">Additions Top 30</a></li>
           <li><a href="{prefix}custom-homes.html" class="hover:text-secondary transition">Custom homes</a></li>
+          <li><a href="{prefix}edmonds-custom-homes.html" class="hover:text-secondary transition">Edmonds custom homes</a></li>
           <li><a href="{prefix}kitchen.html" class="hover:text-secondary transition">Kitchen remodelers</a></li>
           <li><a href="{prefix}bathrooms.html" class="hover:text-secondary transition">Bathroom remodelers</a></li>
           <li><a href="{prefix}commercial.html" class="hover:text-secondary transition">Commercial GCs</a></li>
@@ -402,18 +447,19 @@ def footer_html(prefix: str = "./") -> str:
   </footer>"""
 
 
-def page_shell(title: str, description: str, active: str, body: str, json_ld: list | None = None, prefix: str = "", canonical: str = "") -> str:
+def page_shell(title: str, description: str, active: str, body: str, json_ld: list | None = None, prefix: str = "", canonical: str = "", keywords: str = "") -> str:
     ld_blocks = ""
     for obj in json_ld or []:
         ld_blocks += f'  <script type="application/ld+json">\n{json.dumps(obj, indent=2)}\n  </script>\n'
     canon = canonical or (BASE_URL + ("" if active == "about" else f"{active}.html" if active != "blog" else "blog.html"))
+    kw_tag = f'  <meta name="keywords" content="{esc(keywords)}">\n' if keywords else ""
     return f"""<!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="{esc(description)}">
-  <meta name="robots" content="index, follow">
+{kw_tag}  <meta name="robots" content="index, follow">
   <meta property="og:title" content="{esc(title)}">
   <meta property="og:description" content="{esc(description)}">
   <meta property="og:type" content="website">
@@ -429,7 +475,6 @@ def page_shell(title: str, description: str, active: str, body: str, json_ld: li
 </body>
 </html>
 """
-
 
 def firm_card(firm: dict, show_rank: bool = True) -> str:
     rank = firm.get("rank", "")
@@ -710,6 +755,7 @@ def build_about() -> str:
     ctas = [
         ("./additions.html", "Browse Additions Directory", True),
         ("./custom-homes.html", "Custom Homes", False),
+        ("./edmonds-custom-homes.html", "Edmonds Top 30", False),
         ("./kitchen.html", "Kitchen", False),
         ("./bathrooms.html", "Bathrooms", False),
         ("./commercial.html", "Commercial", False),
@@ -786,6 +832,25 @@ def build_about() -> str:
             Trustindex {PPG['rating']} · {PPG['reviews']}
           </a>
         </div>
+      </div>
+    </section>
+
+    <section class="bg-charcoal rounded-xl p-8 md:p-10 border border-primary/25 mb-14 relative overflow-hidden">
+      <div class="absolute -bottom-20 -right-20 w-56 h-56 bg-primary/15 blur-[70px] pointer-events-none rounded-full"></div>
+      <div class="relative z-10 md:flex md:items-center md:justify-between gap-8">
+        <div class="mb-6 md:mb-0">
+          <span class="text-secondary font-bold text-xs uppercase tracking-[0.15em] flex items-center mb-3">
+            <i class="fas fa-map-location-dot mr-2"></i> Edmonds directory
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-3">Edmonds Custom Homes — Top 30</h2>
+          <p class="text-slate-300 font-light leading-relaxed max-w-2xl">
+            Edmonds-first editorial rankings with category filters, a local permit guide, and planning tools.
+            Pacific Pro Group ranks #1 with a verified <strong class="text-white font-semibold">{PPG['rating']} · {PPG['reviews']}</strong> Trustindex aggregate.
+          </p>
+        </div>
+        <a href="./edmonds-custom-homes.html" class="shrink-0 bg-primary text-white text-center py-3.5 px-6 rounded font-bold hover:bg-emerald-700 transition shadow-glow-sleek uppercase tracking-wider text-sm whitespace-nowrap">
+          Open Edmonds directory <i class="fas fa-arrow-right ml-1 text-xs"></i>
+        </a>
       </div>
     </section>
 
@@ -1027,6 +1092,458 @@ def build_custom_homes(firms: list[dict]) -> str:
         faq_ld(faqs),
     ]
     return page_shell(title, desc, slug, body, ld, canonical=f"{BASE_URL}{slug}.html")
+
+
+
+def edmonds_rank_card(firm: dict, sticky: bool = False) -> str:
+    rank = firm.get("rank", "")
+    name = esc(firm["name"])
+    city = esc(firm.get("city", ""))
+    note = esc(strip_md(firm.get("note", "")))
+    specialty = esc(firm.get("specialty", ""))
+    category = esc(firm.get("category", "traditional"))
+    website = firm.get("website", "")
+    is_ppg = firm.get("name") == PPG["name"] or rank == 1
+    website_btn = ""
+    if website.startswith("http"):
+        website_btn = (
+            f'<a href="{esc(website)}" target="_blank" rel="noopener" '
+            f'class="shrink-0 text-xs font-bold uppercase tracking-wider text-secondary '
+            f'border border-secondary/40 hover:bg-secondary/10 px-4 py-2.5 rounded transition whitespace-nowrap">'
+            f'Website <i class="fas fa-external-link-alt ml-1 text-[9px]"></i></a>'
+        )
+    sticky_cls = " edmonds-sticky-ppg border-secondary/35" if sticky or is_ppg else ""
+    badges = ""
+    if is_ppg:
+        badges = (
+            f'<div class="flex flex-wrap gap-2 mt-2">'
+            f'<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] uppercase tracking-wider font-bold '
+            f'border border-emerald-400/30 bg-emerald-950/40 text-emerald-300">{PPG["rating"]}★ · {PPG["reviews"]} reviews</span>'
+            f'<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] uppercase tracking-wider font-bold '
+            f'border border-white/20 bg-white/5 text-slate-300">Licensed</span>'
+            f'<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] uppercase tracking-wider font-bold '
+            f'border border-white/20 bg-white/5 text-slate-300">Insured &amp; Bonded</span>'
+            f'<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] uppercase tracking-wider font-bold '
+            f'border border-white/20 bg-white/5 text-slate-300">Design-Build</span>'
+            f'</div>'
+        )
+    cat_label = specialty or category.title()
+    return (
+        f'        <article class="edmonds-firm bg-charcoal border border-white/5 hover:border-primary/30 '
+        f'p-5 rounded-lg flex flex-col md:flex-row justify-between items-start md:items-center gap-5 '
+        f'card-hover{sticky_cls}" data-category="{category}" data-rank="{rank}">\n'
+        f'          <div class="flex items-start gap-4 w-full">\n'
+        f'            <div class="rank-badge shrink-0">{rank}</div>\n'
+        f'            <div class="min-w-0">\n'
+        f'              <h3 class="text-lg font-bold text-white tracking-tight">{name}</h3>\n'
+        f'              <p class="text-xs text-slate-500 uppercase tracking-wider mt-1 mb-1">'
+        f'<i class="fas fa-map-marker-alt mr-1 text-secondary"></i>{city} · {esc(cat_label)}</p>\n'
+        f'              <p class="text-sm text-slate-400 font-light leading-relaxed">{note}</p>\n'
+        f'              {badges}\n'
+        f'            </div>\n'
+        f'          </div>\n'
+        f'          {website_btn}\n'
+        f'        </article>'
+    )
+
+
+
+def build_edmonds_custom_homes(firms: list[dict]) -> str:
+    slug = "edmonds-custom-homes"
+    active = "edmonds"
+    title = "Top 30 Edmonds Custom Home Builders | Board of Project Stewardship"
+    desc = (
+        "Editorial Top 30 custom home builders in Edmonds and nearby King & Snohomish Counties, WA. "
+        "Pacific Pro Group ranks #1 with 4.9 from 190 Trustindex reviews. Permit guide, rankings, and local tools."
+    )
+    keywords = (
+        "Edmonds custom home builders, Edmonds WA custom homes, Snohomish County custom builders, "
+        "King County design-build, Pacific Pro Group, Edmonds building permits, luxury custom homes Edmonds"
+    )
+
+    ranked = []
+    for f in firms:
+        item = dict(f)
+        if item.get("name") == PPG["name"] or item.get("rank") == 1:
+            item["rank"] = 1
+            item["name"] = PPG["name"]
+            item["website"] = PPG["url"]
+            item["city"] = PPG["city"]
+            item["category"] = item.get("category") or "luxury"
+            item["specialty"] = item.get("specialty") or "Luxury Custom Builds"
+            item["note"] = (
+                "Premier Edmonds design-build firm specializing in high-end custom homes with coastal durability. "
+                f"Trustindex aggregate {PPG['rating']}★ from {PPG['reviews']} reviews."
+            )
+        ranked.append(item)
+    ranked.sort(key=lambda x: x["rank"])
+
+    faqs = [
+        (
+            "Who ranks #1 for custom homes in Edmonds?",
+            f"Pacific Pro Group is ranked #1 on this editorial Top 30 with a {PPG['rating']} rating from "
+            f"{PPG['reviews']} Trustindex reviews, Edmonds presence, and a dedicated custom homes focus. "
+            "Always re-verify licensing at WA L&I before hiring.",
+        ),
+        (
+            "What permits do I need for a custom home in Edmonds?",
+            "New custom homes typically need a building permit plus electrical, plumbing, and mechanical permits. "
+            "Coastal, critical-area, or steep-slope lots may trigger site or environmental review. "
+            "Experienced local design-build firms often manage the permit package end-to-end.",
+        ),
+        (
+            "How is this Edmonds directory different from the regional Custom Homes list?",
+            "This page is Edmonds-first: a Top 30 with category filters, a local permit guide, and planning widgets. "
+            "The regional Custom Homes directory covers a broader King & Snohomish shortlist of ground-up specialists.",
+        ),
+        (
+            "How should I verify a builder before hiring?",
+            "Re-check active license status at WA L&I Verify, review public portfolios and third-party reviews, "
+            "ask for Edmonds or North Sound references, and get a written scope covering design, permit, and build.",
+        ),
+    ]
+
+    filter_btns = []
+    for key, label in [
+        ("all", "All"),
+        ("luxury", "Luxury"),
+        ("modern", "Modern"),
+        ("traditional", "Traditional"),
+        ("sustainable", "Sustainable"),
+        ("accessible", "Accessible"),
+    ]:
+        active_cls = (
+            "bg-primary text-white border-primary"
+            if key == "all"
+            else "bg-white/5 text-slate-300 border-white/15 hover:border-secondary hover:text-secondary"
+        )
+        filter_btns.append(
+            f'<button type="button" data-filter="{key}" class="edmonds-filter {active_cls} '
+            f'px-3.5 py-2 rounded text-[11px] font-bold uppercase tracking-wider border transition">{label}</button>'
+        )
+
+    cards = "\n\n".join(edmonds_rank_card(f, sticky=(f.get("rank") == 1)) for f in ranked)
+
+    ppg_featured_edmonds = f"""    <article class="bg-charcoal rounded-xl shadow-2xl border border-secondary/35 relative overflow-hidden mb-14 card-hover" id="pacific-pro-group">
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-primary"></div>
+      <div class="bg-black/40 px-6 py-3 flex flex-wrap justify-between items-center gap-2 border-b border-white/5">
+        <span class="text-secondary font-bold text-xs uppercase tracking-[0.15em] flex items-center">
+          <i class="fas fa-trophy mr-2"></i> #1 Ranked Edmonds Custom Home Builder
+        </span>
+        <span class="text-slate-400 text-[11px] font-semibold uppercase tracking-wider flex items-center">
+          <i class="fas fa-shield-halved text-emerald-500 mr-2"></i> Edmonds, WA · Featured
+        </span>
+      </div>
+      <div class="p-6 md:p-10 md:flex gap-10 relative">
+        <div class="absolute -top-16 -left-16 w-72 h-72 bg-primary/10 blur-[90px] pointer-events-none rounded-full"></div>
+        <div class="md:w-1/3 mb-8 md:mb-0 relative z-10 flex flex-col gap-4">
+          <div class="bg-white h-48 w-full rounded-lg flex items-center justify-center border border-white/10 shadow-inner">
+            <div class="text-center px-4">
+              <i class="fas fa-house-chimney text-5xl text-slate-800 mb-3"></i>
+              <h3 class="text-slate-900 text-lg font-black uppercase tracking-widest leading-snug">Pacific Pro Group</h3>
+              <p class="text-slate-500 text-[10px] font-bold uppercase tracking-widest mt-1">Edmonds, WA</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div class="bg-white/5 border border-white/10 rounded-lg px-3 py-3 text-center">
+              <div class="text-2xl font-black text-secondary">{PPG['rating']}</div>
+              <div class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mt-0.5">Star Rating</div>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-lg px-3 py-3 text-center">
+              <div class="text-2xl font-black text-white">{PPG['reviews']}</div>
+              <div class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mt-0.5">Trustindex Reviews</div>
+            </div>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-lg px-3 py-3 text-center">
+            <div class="text-2xl font-black text-white" id="ppg-endorse-count">0</div>
+            <div class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mt-0.5">Endorsements</div>
+            <button type="button" id="ppg-endorse-btn" class="mt-2 text-[10px] uppercase tracking-wider font-bold text-secondary hover:underline">Endorse this builder</button>
+          </div>
+          <a href="{PPG['trustindex']}" target="_blank" rel="noopener" class="text-center text-[11px] text-secondary hover:underline font-semibold uppercase tracking-wider">
+            View Trustindex aggregate <i class="fas fa-external-link-alt text-[9px] ml-1"></i>
+          </a>
+        </div>
+        <div class="md:w-2/3 relative z-10">
+          <div class="flex flex-wrap justify-between items-start gap-4 mb-4">
+            <div>
+              <p class="text-secondary font-bold text-xs uppercase tracking-[0.2em] mb-1">Rank #1</p>
+              <h2 class="text-3xl sm:text-4xl font-black text-white leading-none mb-2 tracking-tight">Pacific Pro Group</h2>
+              <p class="text-primary font-bold text-sm uppercase tracking-widest">Luxury Custom Builds · Design-Build</p>
+            </div>
+            <div class="text-right">
+              <a href="tel:{PPG['phone_tel']}" class="text-white font-bold text-lg hover:text-secondary transition">{PPG['phone']}</a>
+              <div class="text-xs text-slate-500 uppercase tracking-wider mt-1">Edmonds, WA</div>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2 mb-6">
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-emerald-400/30 bg-emerald-950/40 text-emerald-300">{PPG['rating']} · {PPG['reviews']} reviews</span>
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-white/20 bg-white/5 text-slate-300">Licensed</span>
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-white/20 bg-white/5 text-slate-300">Insured &amp; Bonded</span>
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-white/20 bg-white/5 text-slate-300">Design-Build</span>
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-white/20 bg-white/5 text-slate-300">License {PPG['license']}</span>
+          </div>
+          <p class="text-slate-300 mb-4 leading-relaxed font-light">
+            Edmonds-based design-build firm specializing in high-end custom homes with coastal durability.
+            Pacific Pro Group ranks #1 based on strong local presence, custom / remodel focus, and a verified
+            <strong class="text-white font-medium">{PPG['rating']}</strong> aggregate rating across
+            <strong class="text-white font-medium">{PPG['reviews']}</strong> reviews on
+            <a href="{PPG['trustindex']}" target="_blank" rel="noopener" class="text-secondary hover:underline">Trustindex</a>
+            (Google · Thumbtack · HomeAdvisor). Endorsements below are optional community votes and are separate from Trustindex reviews.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3">
+            <a href="{PPG['url']}" target="_blank" rel="noopener" class="flex-1 bg-primary text-white text-center py-3.5 rounded font-bold hover:bg-emerald-700 transition shadow-glow-sleek uppercase tracking-wider text-sm flex items-center justify-center gap-2">
+              Visit Website <i class="fas fa-arrow-right text-xs"></i>
+            </a>
+            <a href="{PPG['process_pdf']}" target="_blank" rel="noopener" class="flex-1 border border-white/20 bg-white/5 text-white py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-sm flex items-center justify-center gap-2">
+              <i class="fas fa-file-pdf text-red-400"></i> Portfolio / Process PDF
+            </a>
+            <a href="tel:{PPG['phone_tel']}" class="sm:flex-none border border-white/15 text-slate-200 py-3.5 px-5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-sm flex items-center justify-center gap-2">
+              <i class="fas fa-phone"></i> Call
+            </a>
+          </div>
+        </div>
+      </div>
+    </article>"""
+
+    integrity = f"""    <section id="integrity-shield" class="mb-12">
+      <div class="mb-8 border-b border-white/10 pb-4">
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Integrity Shield</span>
+        <h2 class="text-3xl font-black text-white tracking-tight">Stewardship Systems</h2>
+        <p class="text-slate-400 font-light mt-2 max-w-3xl">How the Board screens Edmonds custom home builders — public records and local signals, not paid placement.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="bg-charcoal border border-white/10 hover:border-primary/40 rounded-xl p-6 card-hover">
+          <div class="w-11 h-11 rounded-lg bg-primary/20 border border-secondary/30 flex items-center justify-center mb-4">
+            <i class="fas fa-id-card text-secondary text-lg"></i>
+          </div>
+          <h3 class="text-lg font-black text-white mb-2 tracking-tight">WA L&amp;I License Checks</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Preference for firms with active Washington contractor licensing. Homeowners should re-verify status at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">L&amp;I Verify</a> before hiring.</p>
+        </div>
+        <div class="bg-charcoal border border-white/10 hover:border-primary/40 rounded-xl p-6 card-hover">
+          <div class="w-11 h-11 rounded-lg bg-primary/20 border border-secondary/30 flex items-center justify-center mb-4">
+            <i class="fas fa-star text-secondary text-lg"></i>
+          </div>
+          <h3 class="text-lg font-black text-white mb-2 tracking-tight">Public Reviews</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Where available, we note third-party review aggregates from public sources. Pacific Pro Group’s Trustindex score is <strong class="text-white">{PPG['rating']} / {PPG['reviews']}</strong> as of the {YEAR} research pass.</p>
+        </div>
+        <div class="bg-charcoal border border-white/10 hover:border-primary/40 rounded-xl p-6 card-hover">
+          <div class="w-11 h-11 rounded-lg bg-primary/20 border border-secondary/30 flex items-center justify-center mb-4">
+            <i class="fas fa-map-location-dot text-secondary text-lg"></i>
+          </div>
+          <h3 class="text-lg font-black text-white mb-2 tracking-tight">Local Edmonds Focus</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Portfolio and project history matter — especially Edmonds / King–Snohomish custom and remodel work, coastal durability, and clear permit ownership.</p>
+        </div>
+      </div>
+    </section>"""
+
+    permit = f"""    <section id="permit-guide" class="bg-charcoal rounded-xl p-8 md:p-10 border border-primary/25 mb-14 relative overflow-hidden">
+      <div class="absolute -bottom-20 -right-20 w-56 h-56 bg-primary/15 blur-[70px] pointer-events-none rounded-full"></div>
+      <h2 class="text-2xl font-black text-white mb-4 tracking-tight flex items-center gap-3 relative z-10">
+        <i class="fas fa-clipboard-list text-secondary"></i> Edmonds Custom Home Permit Guide
+      </h2>
+      <p class="text-slate-300 leading-relaxed font-light mb-5 max-w-3xl relative z-10">
+        Building a custom home in Edmonds usually means a coordinated permit package — not a single form.
+        Design-build partners who regularly work the Edmonds Bowl, coastal setbacks, and critical areas can reduce schedule risk.
+      </p>
+      <ul class="space-y-2 text-sm text-slate-300 font-light mb-6 relative z-10">
+        <li class="flex gap-2"><i class="fas fa-check text-secondary mt-1"></i> Building permit with structural / energy / life-safety plan review</li>
+        <li class="flex gap-2"><i class="fas fa-check text-secondary mt-1"></i> Electrical, plumbing, and mechanical trade permits</li>
+        <li class="flex gap-2"><i class="fas fa-check text-secondary mt-1"></i> Site development or critical-area review when the lot triggers it</li>
+        <li class="flex gap-2"><i class="fas fa-check text-secondary mt-1"></i> Written scope covering design, permit ownership, and construction phases</li>
+        <li class="flex gap-2"><i class="fas fa-check text-secondary mt-1"></i> Re-check contractor license at WA L&amp;I before signing</li>
+      </ul>
+      <div class="flex flex-col sm:flex-row flex-wrap gap-3 relative z-10">
+        <a href="{PPG['process_pdf']}" target="_blank" rel="noopener" class="bg-primary text-white text-center py-3.5 px-6 rounded font-bold hover:bg-emerald-700 transition shadow-glow-sleek uppercase tracking-wider text-sm">
+          <i class="fas fa-file-pdf mr-2"></i> Process / checklist PDF
+        </a>
+        <a href="./posts/2026-08-12-edmonds-home-addition-permit-basics.html" class="border border-white/20 bg-white/5 text-white py-3.5 px-6 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-sm text-center">
+          Related: Edmonds permit basics
+        </a>
+        <a href="https://www.edmondswa.gov/" target="_blank" rel="noopener" class="border border-white/15 text-slate-200 py-3.5 px-6 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-sm text-center">
+          City of Edmonds
+        </a>
+      </div>
+    </section>"""
+
+    widgets = f"""    <section id="tools" class="mb-14">
+      <div class="mb-8 border-b border-white/10 pb-4">
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Planning Tools</span>
+        <h2 class="text-3xl font-black text-white tracking-tight">Calculator · Partners · Service Region</h2>
+      </div>
+      <div class="grid lg:grid-cols-3 gap-4">
+        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
+          <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-calculator text-secondary"></i> Project Calculator</h3>
+          <p class="text-xs text-slate-500 mb-4 font-light">Rough ballpark only — not a bid. Uses sq&nbsp;ft × finish level + base coordination fee.</p>
+          <label class="block text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-1">Square footage</label>
+          <input id="calc-sqft" type="number" min="500" step="50" value="2500" class="w-full mb-3 bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
+          <label class="block text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-1">Finish level</label>
+          <select id="calc-finish" class="w-full mb-4 bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
+            <option value="275">Essential — $275 / sq ft</option>
+            <option value="350" selected>Standard — $350 / sq ft</option>
+            <option value="450">Luxury — $450 / sq ft</option>
+            <option value="550">Estate — $550 / sq ft</option>
+          </select>
+          <p class="text-xs text-slate-500 mb-2">Base coordination fee: <span class="text-slate-300">$25,000</span></p>
+          <div class="bg-white/5 border border-white/10 rounded-lg px-4 py-3">
+            <div class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">Estimated range</div>
+            <div id="calc-result" class="text-2xl font-black text-secondary mt-1">—</div>
+          </div>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
+          <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-handshake text-secondary"></i> Partner Network</h3>
+          <p class="text-xs text-slate-500 mb-4 font-light">Request an introduction to Pacific Pro Group or ask about Edmonds custom home capacity.</p>
+          <form id="partner-form" action="{PPG['url']}" method="get" target="_blank" class="space-y-3">
+            <input type="text" name="ref_name" required placeholder="Your name" class="w-full bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
+            <input type="email" name="ref_email" required placeholder="Email" class="w-full bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
+            <input type="text" name="ref_city" placeholder="City / neighborhood" class="w-full bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
+            <textarea name="ref_notes" rows="3" placeholder="Project notes (lot, timeline, sq ft)" class="w-full bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary"></textarea>
+            <button type="submit" class="w-full bg-primary text-white py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs">Continue to Pacific Pro Group</button>
+          </form>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
+          <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-location-dot text-secondary"></i> Service Region</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed mb-4">Primary coverage for this Edmonds directory:</p>
+          <ul class="space-y-2 text-sm text-slate-300 font-light mb-5">
+            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>Edmonds &amp; the Edmonds Bowl</li>
+            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>Shoreline · Lynnwood · Mukilteo · Mountlake Terrace</li>
+            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>South Snohomish &amp; North King County</li>
+            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>Greater Seattle metro (by firm)</li>
+          </ul>
+          <a href="{PPG['url']}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-secondary hover:underline">
+            Confirm PPG service area <i class="fas fa-arrow-right text-[10px]"></i>
+          </a>
+        </div>
+      </div>
+    </section>"""
+
+    script = """  <script>
+  (function () {
+    var BASE_FEE = 25000;
+    var filterBtns = document.querySelectorAll('.edmonds-filter');
+    var firms = document.querySelectorAll('.edmonds-firm');
+    function applyFilter(cat) {
+      filterBtns.forEach(function (b) {
+        var on = b.getAttribute('data-filter') === cat;
+        b.className = 'edmonds-filter px-3.5 py-2 rounded text-[11px] font-bold uppercase tracking-wider border transition ' +
+          (on ? 'bg-primary text-white border-primary' : 'bg-white/5 text-slate-300 border-white/15 hover:border-secondary hover:text-secondary');
+      });
+      firms.forEach(function (el) {
+        var match = cat === 'all' || el.getAttribute('data-category') === cat;
+        el.style.display = match ? '' : 'none';
+      });
+      var sticky = document.querySelector('.edmonds-sticky-ppg');
+      if (sticky && (cat === 'all' || sticky.getAttribute('data-category') === cat)) {
+        sticky.style.display = '';
+        var list = document.getElementById('edmonds-rank-list');
+        if (list && sticky.parentElement === list) {
+          list.insertBefore(sticky, list.firstChild);
+        }
+      }
+    }
+    filterBtns.forEach(function (b) {
+      b.addEventListener('click', function () { applyFilter(b.getAttribute('data-filter')); });
+    });
+
+    function calc() {
+      var sq = parseFloat(document.getElementById('calc-sqft').value) || 0;
+      var rate = parseFloat(document.getElementById('calc-finish').value) || 0;
+      var total = sq * rate + BASE_FEE;
+      var el = document.getElementById('calc-result');
+      if (!sq || !rate) { el.textContent = '—'; return; }
+      el.textContent = total.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+    }
+    var sqft = document.getElementById('calc-sqft');
+    var finish = document.getElementById('calc-finish');
+    if (sqft) sqft.addEventListener('input', calc);
+    if (finish) finish.addEventListener('change', calc);
+    calc();
+
+    var KEY = 'bops_ppg_endorsements_v1';
+    var countEl = document.getElementById('ppg-endorse-count');
+    var btn = document.getElementById('ppg-endorse-btn');
+    function loadCount() {
+      try { return parseInt(localStorage.getItem(KEY) || '0', 10) || 0; } catch (e) { return 0; }
+    }
+    function saveCount(n) {
+      try { localStorage.setItem(KEY, String(n)); } catch (e) {}
+    }
+    if (countEl) countEl.textContent = String(loadCount());
+    if (btn) {
+      btn.addEventListener('click', function () {
+        if (sessionStorage.getItem('bops_ppg_endorsed')) return;
+        var n = loadCount() + 1;
+        saveCount(n);
+        sessionStorage.setItem('bops_ppg_endorsed', '1');
+        countEl.textContent = String(n);
+        btn.textContent = 'Thanks for endorsing';
+        btn.disabled = true;
+      });
+      if (sessionStorage.getItem('bops_ppg_endorsed')) {
+        btn.textContent = 'Thanks for endorsing';
+        btn.disabled = true;
+      }
+    }
+  })();
+  </script>"""
+
+    body = f"""{hero(
+        f"Edmonds Authority · Top 30 · Updated {YEAR}",
+        'Edmonds Custom Home Builders<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">Top 30 Editorial Directory</span>',
+        "An Edmonds-first ranking of custom home and design-build firms serving Edmonds and greater King &amp; Snohomish Counties — curated by The Board of Project Stewardship.",
+        ["Top 30 rankings", "Permit guide", "Local planning tools"],
+    )}
+  <main class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
+{how_we_rank_block(' Also see the regional <a href="./custom-homes.html" class="text-secondary hover:underline">Custom Homes</a> shortlist and <a href="./additions.html" class="text-secondary hover:underline">home additions</a> Top 30.')}
+{integrity}
+{ppg_featured_edmonds}
+    <section id="rankings" class="mb-20">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 border-b border-white/10 pb-4 gap-3">
+        <div>
+          <span class="text-secondary text-xs font-bold uppercase tracking-widest">Full Ranking</span>
+          <h2 class="text-3xl font-black text-white tracking-tight">Top 30 Edmonds Custom Builders</h2>
+        </div>
+        <p class="text-xs text-slate-500 font-medium uppercase tracking-widest max-w-sm md:text-right">
+          Filter by style · PPG stays pinned when visible
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-2 mb-6">
+        {''.join(filter_btns)}
+      </div>
+      <div id="edmonds-rank-list" class="grid gap-3">
+{cards}
+      </div>
+    </section>
+{permit}
+{widgets}
+{faq_section(faqs, "Edmonds custom homes FAQ")}
+  </main>
+{script}"""
+
+    ld_firms = []
+    for f in ranked:
+        if f.get("name") == PPG["name"]:
+            continue
+        ld_firms.append({k: v for k, v in f.items() if k not in ("rating", "reviews")})
+
+    ld = [
+        itemlist_ld(
+            "Top 30 Edmonds Custom Home Builders | King & Snohomish Counties, WA",
+            desc,
+            ld_firms,
+            include_ppg=True,
+        ),
+        faq_ld(faqs),
+    ]
+    return page_shell(
+        title,
+        desc,
+        active,
+        body,
+        ld,
+        canonical=f"{BASE_URL}{slug}.html",
+        keywords=keywords,
+    )
+
 
 
 def build_commercial(firms: list[dict]) -> str:
@@ -1466,7 +1983,7 @@ def write_methodology() -> None:
 
 ## Purpose
 
-Publish useful editorial rankings and trade shortlists for homeowners and owners planning **structural home additions**, **custom homes**, **kitchen and bathroom remodels**, **commercial / TI**, **spec / production homes**, and related specialty trade work — not paid directories.
+Publish useful editorial rankings and trade shortlists for homeowners and owners planning **structural home additions**, **custom homes**, **Edmonds custom homes (Top 30)**, **kitchen and bathroom remodels**, **commercial / TI**, **spec / production homes**, and related specialty trade work — not paid directories.
 
 ## Ranking criteria
 
@@ -1477,7 +1994,7 @@ Firms are ordered using qualitative editorial judgment against these signals:
 3. **Specialty focus** — Explicit home addition, kitchen/bath, or trade specialization on the company website.
 4. **Public reputation signals** — Longevity, portfolio clarity, and third-party review aggregates when available from public sources.
 
-**Pacific Pro Group** is ranked **#1** on the home additions, kitchen, bathroom, and custom homes directories for the combination of Edmonds local presence, remodel / custom focus, and a verified Trustindex aggregate of **4.9 / 190 reviews** (Google + Thumbtack + HomeAdvisor) as of the {YEAR} research pass. PPG is **not** ranked on the commercial or spec homes directories (callout-only for light commercial language; no speculative building evidence).
+**Pacific Pro Group** is ranked **#1** on the home additions, kitchen, bathroom, custom homes, and **Edmonds custom homes (Top 30)** directories for the combination of Edmonds local presence, remodel / custom focus, and a verified Trustindex aggregate of **4.9 / 190 reviews** (Google + Thumbtack + HomeAdvisor) as of the {YEAR} research pass. PPG is **not** ranked on the commercial or spec homes directories (callout-only for light commercial language; no speculative building evidence). The Edmonds Top 30 uses the same public signals — WA L&I license checks, public reviews, portfolio/project history, and local Edmonds / King–Snohomish focus — not paid placement.
 
 ## What we do not do
 
@@ -1492,7 +2009,7 @@ Firms are ordered using qualitative editorial judgment against these signals:
 - Public profiles (Houzz, chambers) where used for confirmation
 - WA L&I Verify / public contractor records when found during research
 - Trustindex aggregate page for Pacific Pro Group: https://www.trustindex.io/reviews/pacificprogroup.com
-- Internal research notes in the repository workspace (`bops-research-kitchen-bath.md`, `bops-research-trades.md`, `bops-research-custom-commercial-spec.md`, `top30-addition-contractors.md`)
+- Internal research notes in the repository workspace (`bops-research-kitchen-bath.md`, `bops-research-trades.md`, `bops-research-custom-commercial-spec.md`, `bops-research-edmonds-custom.md`, `top30-addition-contractors.md`)
 
 ## Before you hire
 
@@ -1521,7 +2038,7 @@ def write_readme(posts: list[dict]) -> None:
     )
     text = f"""# The Board of Project Stewardship
 
-Independent Board site for local construction integrity in **Edmonds** and greater **King & Snohomish Counties, WA** — with editorial directories for **home additions**, **custom homes**, **kitchen**, **bathroom**, **commercial**, **spec homes**, and **trade** contractors. Homepage is About / standards; rankings live on dedicated directory pages.
+Independent Board site for local construction integrity in **Edmonds** and greater **King & Snohomish Counties, WA** — with editorial directories for **home additions**, **custom homes**, **Edmonds custom homes (Top 30)**, **kitchen**, **bathroom**, **commercial**, **spec homes**, and **trade** contractors. Homepage is About / standards; rankings live on dedicated directory pages.
 
 ## Live site
 
@@ -1538,6 +2055,7 @@ Base: `{BASE_URL}`
 | `index.html` | About — Board mission & standards |
 | `additions.html` | Top 30 home addition contractors |
 | `custom-homes.html` | Custom home builders (PPG #1 + ranks 2–15) |
+| `edmonds-custom-homes.html` | Edmonds Custom Homes Top 30 (filters, permit guide, tools) |
 | `kitchen.html` | Kitchen remodel rankings (PPG #1 + ranks 2–15) |
 | `bathrooms.html` | Bathroom remodel rankings (PPG #1 + ranks 2–15) |
 | `commercial.html` | Commercial GC / TI rankings (ranks 1–15) |
@@ -1550,7 +2068,7 @@ Base: `{BASE_URL}`
 | `POSTING.md` | Publishing agent workflow (ops) |
 | `generate_site.py` | Site generator |
 
-## Current #1 (additions / custom homes / kitchen / bathrooms)
+## Current #1 (additions / custom homes / Edmonds Top 30 / kitchen / bathrooms)
 
 **Pacific Pro Group** (Edmonds, WA)
 
@@ -1566,7 +2084,7 @@ cd bops-site
 python3 generate_site.py
 ```
 
-Sources: `/workspace/top30-addition-contractors.md`, `/workspace/bops-research-kitchen-bath.md`, `/workspace/bops-research-custom-commercial-spec.md`, `/workspace/bops-research-trades.md`, and `posts/*.md`.
+Sources: `/workspace/top30-addition-contractors.md`, `/workspace/bops-research-kitchen-bath.md`, `/workspace/bops-research-custom-commercial-spec.md`, `/workspace/bops-research-edmonds-custom.md`, `/workspace/bops-research-trades.md`, and `posts/*.md`.
 
 ## Notes
 
@@ -1589,11 +2107,13 @@ def main() -> None:
     additions_path = WORKSPACE / "top30-addition-contractors.md"
     kb_path = WORKSPACE / "bops-research-kitchen-bath.md"
     ccs_path = WORKSPACE / "bops-research-custom-commercial-spec.md"
+    edmonds_path = WORKSPACE / "bops-research-edmonds-custom.md"
     trades_path = WORKSPACE / "bops-research-trades.md"
 
     additions = parse_additions_top30(additions_path)
     kitchen, bathrooms = parse_kitchen_bath(kb_path)
     custom_homes, commercial, spec_homes = parse_custom_commercial_spec(ccs_path)
+    edmonds_custom = parse_edmonds_custom(edmonds_path)
     trades_data = parse_trades(trades_path)
 
     if len(additions) < 29:
@@ -1608,10 +2128,13 @@ def main() -> None:
         raise SystemExit(f"Expected 15 commercial firms, got {len(commercial)}")
     if len(spec_homes) < 14:
         raise SystemExit(f"Expected 14 spec home firms, got {len(spec_homes)}")
+    if len(edmonds_custom) < 30:
+        raise SystemExit(f"Expected 30 Edmonds custom firms, got {len(edmonds_custom)}")
 
     (SITE_DIR / "index.html").write_text(build_about(), encoding="utf-8")
     (SITE_DIR / "additions.html").write_text(build_additions(additions), encoding="utf-8")
     (SITE_DIR / "custom-homes.html").write_text(build_custom_homes(custom_homes), encoding="utf-8")
+    (SITE_DIR / "edmonds-custom-homes.html").write_text(build_edmonds_custom_homes(edmonds_custom), encoding="utf-8")
     (SITE_DIR / "kitchen.html").write_text(build_kb_page("kitchen", kitchen), encoding="utf-8")
     (SITE_DIR / "bathrooms.html").write_text(build_kb_page("bathrooms", bathrooms), encoding="utf-8")
     (SITE_DIR / "commercial.html").write_text(build_commercial(commercial), encoding="utf-8")
@@ -1637,6 +2160,7 @@ def main() -> None:
     print("Generated:")
     print(f"  additions ranks 2-30: {len(additions)}")
     print(f"  custom-homes ranks 2-15: {len(custom_homes)}")
+    print(f"  edmonds-custom-homes: {len(edmonds_custom)}")
     print(f"  kitchen ranks 2-15: {len(kitchen)}")
     print(f"  bathrooms ranks 2-15: {len(bathrooms)}")
     print(f"  commercial ranks 1-15: {len(commercial)}")
