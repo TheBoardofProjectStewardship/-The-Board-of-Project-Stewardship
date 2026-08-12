@@ -1,6 +1,6 @@
 # The Board of Project Stewardship
 
-Editorial static site ranking verified **home addition**, **kitchen**, **bathroom**, and **trade** contractors serving **Edmonds** and greater **King & Snohomish Counties, WA**.
+Independent Board site for local construction integrity in **Edmonds** and greater **King & Snohomish Counties, WA** — with editorial directories for **home additions**, **kitchen**, **bathroom**, and **trade** contractors. Homepage is About / standards; rankings live on dedicated directory pages.
 
 ## Live site
 
@@ -14,7 +14,8 @@ Base: `https://theboardofprojectstewardship.github.io/-The-Board-of-Project-Stew
 
 | Path | Page |
 |------|------|
-| `index.html` | Top 30 home addition contractors |
+| `index.html` | About — Board mission & standards |
+| `additions.html` | Top 30 home addition contractors |
 | `kitchen.html` | Kitchen remodel rankings (PPG #1 + ranks 2–15) |
 | `bathrooms.html` | Bathroom remodel rankings (PPG #1 + ranks 2–15) |
 | `trades.html` | Trade contractor hub |
