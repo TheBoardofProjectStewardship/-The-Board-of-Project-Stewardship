@@ -57,6 +57,11 @@
     .prose-bops ul { list-style: disc; padding-left: 1.25rem; margin-bottom: 1rem; }
     .prose-bops ol { list-style: decimal; padding-left: 1.25rem; margin-bottom: 1rem; }
     .prose-bops strong { color: #fff; font-weight: 600; }
+    #tools input, #tools select, #tools textarea {
+      color-scheme: dark;
+    }
+    #tools input::placeholder, #tools textarea::placeholder { color: #64748b; }
+    #calc-result { letter-spacing: -0.02em; }
   </style>
   <script type="application/ld+json">
 {
@@ -598,7 +603,7 @@
       <p class="text-slate-400 text-sm font-light leading-relaxed">
         Rankings updated <strong class="text-slate-200">2026</strong>. Always re-verify WA contractor status at
         <a href="https://secure.lni.wa.gov/verify/" target="_blank" rel="noopener" class="text-secondary hover:underline">L&amp;I Verify</a>
-        before hiring. See <a href="./methodology.md" class="text-secondary hover:underline">methodology notes</a>.
+        before hiring.
          Also see the regional <a href="./custom-homes.html" class="text-secondary hover:underline">Custom Homes</a> shortlist and <a href="./additions.html" class="text-secondary hover:underline">home additions</a> Top 30.
       </p>
     </section>
@@ -1145,7 +1150,96 @@
         </a>
       </div>
     </section>
-    <section id="tools" class="mb-14">
+    <section id="faq" class="mb-8">
+      <h2 class="text-3xl font-black text-white tracking-tight mb-6">Edmonds custom homes FAQ</h2>
+      <div class="space-y-4">
+        <details class="bg-charcoal border border-white/10 rounded-lg p-5 group open:border-primary/30" open>
+          <summary class="font-bold text-white cursor-pointer list-none flex justify-between items-center gap-4">
+            Who ranks #1 for custom homes in Edmonds?
+            <i class="fas fa-chevron-down text-secondary text-xs group-open:rotate-180 transition"></i>
+          </summary>
+          <p class="mt-3 text-sm text-slate-400 font-light leading-relaxed">Pacific Pro Group is ranked #1 on this editorial Top 30 with a 4.9 rating from 190 Trustindex reviews, Edmonds presence, and a dedicated custom homes focus. Always re-verify licensing at WA L&amp;I before hiring.</p>
+        </details>
+        <details class="bg-charcoal border border-white/10 rounded-lg p-5 group">
+          <summary class="font-bold text-white cursor-pointer list-none flex justify-between items-center gap-4">
+            What permits do I need for a custom home in Edmonds?
+            <i class="fas fa-chevron-down text-secondary text-xs group-open:rotate-180 transition"></i>
+          </summary>
+          <p class="mt-3 text-sm text-slate-400 font-light leading-relaxed">New custom homes typically need a building permit plus electrical, plumbing, and mechanical permits. Coastal, critical-area, or steep-slope lots may trigger site or environmental review. Experienced local design-build firms often manage the permit package end-to-end.</p>
+        </details>
+        <details class="bg-charcoal border border-white/10 rounded-lg p-5 group">
+          <summary class="font-bold text-white cursor-pointer list-none flex justify-between items-center gap-4">
+            How is this Edmonds directory different from the regional Custom Homes list?
+            <i class="fas fa-chevron-down text-secondary text-xs group-open:rotate-180 transition"></i>
+          </summary>
+          <p class="mt-3 text-sm text-slate-400 font-light leading-relaxed">This page is Edmonds-first: a Top 30 with category filters, a local permit guide, and planning widgets. The regional Custom Homes directory covers a broader King &amp; Snohomish shortlist of ground-up specialists.</p>
+        </details>
+        <details class="bg-charcoal border border-white/10 rounded-lg p-5 group">
+          <summary class="font-bold text-white cursor-pointer list-none flex justify-between items-center gap-4">
+            How should I verify a builder before hiring?
+            <i class="fas fa-chevron-down text-secondary text-xs group-open:rotate-180 transition"></i>
+          </summary>
+          <p class="mt-3 text-sm text-slate-400 font-light leading-relaxed">Re-check active license status at WA L&amp;I Verify, review public portfolios and third-party reviews, ask for Edmonds or North Sound references, and get a written scope covering design, permit, and build.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+  <script>
+  (function () {
+    var filterBtns = document.querySelectorAll('.edmonds-filter');
+    var firms = document.querySelectorAll('.edmonds-firm');
+    function applyFilter(cat) {
+      filterBtns.forEach(function (b) {
+        var on = b.getAttribute('data-filter') === cat;
+        b.className = 'edmonds-filter px-3.5 py-2 rounded text-[11px] font-bold uppercase tracking-wider border transition ' +
+          (on ? 'bg-primary text-white border-primary' : 'bg-white/5 text-slate-300 border-white/15 hover:border-secondary hover:text-secondary');
+      });
+      firms.forEach(function (el) {
+        var match = cat === 'all' || el.getAttribute('data-category') === cat;
+        el.style.display = match ? '' : 'none';
+      });
+      var sticky = document.querySelector('.edmonds-sticky-ppg');
+      if (sticky && (cat === 'all' || sticky.getAttribute('data-category') === cat)) {
+        sticky.style.display = '';
+        var list = document.getElementById('edmonds-rank-list');
+        if (list && sticky.parentElement === list) {
+          list.insertBefore(sticky, list.firstChild);
+        }
+      }
+    }
+    filterBtns.forEach(function (b) {
+      b.addEventListener('click', function () { applyFilter(b.getAttribute('data-filter')); });
+    });
+
+    var KEY = 'bops_ppg_endorsements_v1';
+    var countEl = document.getElementById('ppg-endorse-count');
+    var btn = document.getElementById('ppg-endorse-btn');
+    function loadCount() {
+      try { return parseInt(localStorage.getItem(KEY) || '0', 10) || 0; } catch (e) { return 0; }
+    }
+    function saveCount(n) {
+      try { localStorage.setItem(KEY, String(n)); } catch (e) {}
+    }
+    if (countEl) countEl.textContent = String(loadCount());
+    if (btn) {
+      btn.addEventListener('click', function () {
+        if (sessionStorage.getItem('bops_ppg_endorsed')) return;
+        var n = loadCount() + 1;
+        saveCount(n);
+        sessionStorage.setItem('bops_ppg_endorsed', '1');
+        countEl.textContent = String(n);
+        btn.textContent = 'Thanks for endorsing';
+        btn.disabled = true;
+      });
+      if (sessionStorage.getItem('bops_ppg_endorsed')) {
+        btn.textContent = 'Thanks for endorsing';
+        btn.disabled = true;
+      }
+    }
+  })();
+  </script>
+  <div class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
+    <section id="tools" class="mb-6">
       <div class="mb-8 border-b border-white/10 pb-4">
         <span class="text-secondary text-xs font-bold uppercase tracking-widest">Planning Tools</span>
         <h2 class="text-3xl font-black text-white tracking-tight">Calculator · Partners · Service Region</h2>
@@ -1154,9 +1248,9 @@
         <div class="bg-charcoal border border-white/10 rounded-xl p-6">
           <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-calculator text-secondary"></i> Project Calculator</h3>
           <p class="text-xs text-slate-500 mb-4 font-light">Rough ballpark only — not a bid. Uses sq&nbsp;ft × finish level + base coordination fee.</p>
-          <label class="block text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-1">Square footage</label>
+          <label class="block text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-1" for="calc-sqft">Square footage</label>
           <input id="calc-sqft" type="number" min="500" step="50" value="2500" class="w-full mb-3 bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
-          <label class="block text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-1">Finish level</label>
+          <label class="block text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-1" for="calc-finish">Finish level</label>
           <select id="calc-finish" class="w-full mb-4 bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
             <option value="275">Essential — $275 / sq ft</option>
             <option value="350" selected>Standard — $350 / sq ft</option>
@@ -1195,109 +1289,7 @@
         </div>
       </div>
     </section>
-    <section id="faq" class="mb-8">
-      <h2 class="text-3xl font-black text-white tracking-tight mb-6">Edmonds custom homes FAQ</h2>
-      <div class="space-y-4">
-        <details class="bg-charcoal border border-white/10 rounded-lg p-5 group open:border-primary/30" open>
-          <summary class="font-bold text-white cursor-pointer list-none flex justify-between items-center gap-4">
-            Who ranks #1 for custom homes in Edmonds?
-            <i class="fas fa-chevron-down text-secondary text-xs group-open:rotate-180 transition"></i>
-          </summary>
-          <p class="mt-3 text-sm text-slate-400 font-light leading-relaxed">Pacific Pro Group is ranked #1 on this editorial Top 30 with a 4.9 rating from 190 Trustindex reviews, Edmonds presence, and a dedicated custom homes focus. Always re-verify licensing at WA L&amp;I before hiring.</p>
-        </details>
-        <details class="bg-charcoal border border-white/10 rounded-lg p-5 group">
-          <summary class="font-bold text-white cursor-pointer list-none flex justify-between items-center gap-4">
-            What permits do I need for a custom home in Edmonds?
-            <i class="fas fa-chevron-down text-secondary text-xs group-open:rotate-180 transition"></i>
-          </summary>
-          <p class="mt-3 text-sm text-slate-400 font-light leading-relaxed">New custom homes typically need a building permit plus electrical, plumbing, and mechanical permits. Coastal, critical-area, or steep-slope lots may trigger site or environmental review. Experienced local design-build firms often manage the permit package end-to-end.</p>
-        </details>
-        <details class="bg-charcoal border border-white/10 rounded-lg p-5 group">
-          <summary class="font-bold text-white cursor-pointer list-none flex justify-between items-center gap-4">
-            How is this Edmonds directory different from the regional Custom Homes list?
-            <i class="fas fa-chevron-down text-secondary text-xs group-open:rotate-180 transition"></i>
-          </summary>
-          <p class="mt-3 text-sm text-slate-400 font-light leading-relaxed">This page is Edmonds-first: a Top 30 with category filters, a local permit guide, and planning widgets. The regional Custom Homes directory covers a broader King &amp; Snohomish shortlist of ground-up specialists.</p>
-        </details>
-        <details class="bg-charcoal border border-white/10 rounded-lg p-5 group">
-          <summary class="font-bold text-white cursor-pointer list-none flex justify-between items-center gap-4">
-            How should I verify a builder before hiring?
-            <i class="fas fa-chevron-down text-secondary text-xs group-open:rotate-180 transition"></i>
-          </summary>
-          <p class="mt-3 text-sm text-slate-400 font-light leading-relaxed">Re-check active license status at WA L&amp;I Verify, review public portfolios and third-party reviews, ask for Edmonds or North Sound references, and get a written scope covering design, permit, and build.</p>
-        </details>
-      </div>
-    </section>
-  </main>
-  <script>
-  (function () {
-    var BASE_FEE = 25000;
-    var filterBtns = document.querySelectorAll('.edmonds-filter');
-    var firms = document.querySelectorAll('.edmonds-firm');
-    function applyFilter(cat) {
-      filterBtns.forEach(function (b) {
-        var on = b.getAttribute('data-filter') === cat;
-        b.className = 'edmonds-filter px-3.5 py-2 rounded text-[11px] font-bold uppercase tracking-wider border transition ' +
-          (on ? 'bg-primary text-white border-primary' : 'bg-white/5 text-slate-300 border-white/15 hover:border-secondary hover:text-secondary');
-      });
-      firms.forEach(function (el) {
-        var match = cat === 'all' || el.getAttribute('data-category') === cat;
-        el.style.display = match ? '' : 'none';
-      });
-      var sticky = document.querySelector('.edmonds-sticky-ppg');
-      if (sticky && (cat === 'all' || sticky.getAttribute('data-category') === cat)) {
-        sticky.style.display = '';
-        var list = document.getElementById('edmonds-rank-list');
-        if (list && sticky.parentElement === list) {
-          list.insertBefore(sticky, list.firstChild);
-        }
-      }
-    }
-    filterBtns.forEach(function (b) {
-      b.addEventListener('click', function () { applyFilter(b.getAttribute('data-filter')); });
-    });
-
-    function calc() {
-      var sq = parseFloat(document.getElementById('calc-sqft').value) || 0;
-      var rate = parseFloat(document.getElementById('calc-finish').value) || 0;
-      var total = sq * rate + BASE_FEE;
-      var el = document.getElementById('calc-result');
-      if (!sq || !rate) { el.textContent = '—'; return; }
-      el.textContent = total.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
-    }
-    var sqft = document.getElementById('calc-sqft');
-    var finish = document.getElementById('calc-finish');
-    if (sqft) sqft.addEventListener('input', calc);
-    if (finish) finish.addEventListener('change', calc);
-    calc();
-
-    var KEY = 'bops_ppg_endorsements_v1';
-    var countEl = document.getElementById('ppg-endorse-count');
-    var btn = document.getElementById('ppg-endorse-btn');
-    function loadCount() {
-      try { return parseInt(localStorage.getItem(KEY) || '0', 10) || 0; } catch (e) { return 0; }
-    }
-    function saveCount(n) {
-      try { localStorage.setItem(KEY, String(n)); } catch (e) {}
-    }
-    if (countEl) countEl.textContent = String(loadCount());
-    if (btn) {
-      btn.addEventListener('click', function () {
-        if (sessionStorage.getItem('bops_ppg_endorsed')) return;
-        var n = loadCount() + 1;
-        saveCount(n);
-        sessionStorage.setItem('bops_ppg_endorsed', '1');
-        countEl.textContent = String(n);
-        btn.textContent = 'Thanks for endorsing';
-        btn.disabled = true;
-      });
-      if (sessionStorage.getItem('bops_ppg_endorsed')) {
-        btn.textContent = 'Thanks for endorsing';
-        btn.disabled = true;
-      }
-    }
-  })();
-  </script>
+  </div>
   <footer class="bg-obsidian py-14 text-sm border-t border-white/5">
     <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-10 text-slate-400">
       <div>
@@ -1320,7 +1312,6 @@
           <li><a href="./spec-homes.html" class="hover:text-secondary transition">Spec homes</a></li>
           <li><a href="./trades.html" class="hover:text-secondary transition">Trade contractors</a></li>
           <li><a href="./blog.html" class="hover:text-secondary transition">Blog</a></li>
-          <li><a href="./methodology.md" class="hover:text-secondary transition">Methodology</a></li>
         </ul>
       </div>
       <div>
@@ -1330,5 +1321,26 @@
       </div>
     </div>
   </footer>
+  <script>
+  (function () {
+    var BASE_FEE = 25000;
+    function calc() {
+      var sqEl = document.getElementById('calc-sqft');
+      var finishEl = document.getElementById('calc-finish');
+      var el = document.getElementById('calc-result');
+      if (!sqEl || !finishEl || !el) return;
+      var sq = parseFloat(sqEl.value) || 0;
+      var rate = parseFloat(finishEl.value) || 0;
+      var total = sq * rate + BASE_FEE;
+      if (!sq || !rate) { el.textContent = '—'; return; }
+      el.textContent = total.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+    }
+    var sqft = document.getElementById('calc-sqft');
+    var finish = document.getElementById('calc-finish');
+    if (sqft) sqft.addEventListener('input', calc);
+    if (finish) finish.addEventListener('change', calc);
+    calc();
+  })();
+  </script>
 </body>
 </html>
