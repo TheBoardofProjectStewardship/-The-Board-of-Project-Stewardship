@@ -7,7 +7,7 @@
 
 ## Purpose
 
-Publish useful editorial rankings and trade shortlists for homeowners planning **structural home additions**, **kitchen and bathroom remodels**, and related specialty trade work — not paid directories.
+Publish useful editorial rankings and trade shortlists for homeowners and owners planning **structural home additions**, **custom homes**, **kitchen and bathroom remodels**, **commercial / TI**, **spec / production homes**, and related specialty trade work — not paid directories.
 
 ## Ranking criteria
 
@@ -18,7 +18,7 @@ Firms are ordered using qualitative editorial judgment against these signals:
 3. **Specialty focus** — Explicit home addition, kitchen/bath, or trade specialization on the company website.
 4. **Public reputation signals** — Longevity, portfolio clarity, and third-party review aggregates when available from public sources.
 
-**Pacific Pro Group** is ranked **#1** on the home additions, kitchen, and bathroom directories for the combination of Edmonds local presence, remodel focus, and a verified Trustindex aggregate of **4.9 / 190 reviews** (Google + Thumbtack + HomeAdvisor) as of the 2026 research pass.
+**Pacific Pro Group** is ranked **#1** on the home additions, kitchen, bathroom, and custom homes directories for the combination of Edmonds local presence, remodel / custom focus, and a verified Trustindex aggregate of **4.9 / 190 reviews** (Google + Thumbtack + HomeAdvisor) as of the 2026 research pass. PPG is **not** ranked on the commercial or spec homes directories (callout-only for light commercial language; no speculative building evidence).
 
 ## What we do not do
 
@@ -33,7 +33,7 @@ Firms are ordered using qualitative editorial judgment against these signals:
 - Public profiles (Houzz, chambers) where used for confirmation
 - WA L&I Verify / public contractor records when found during research
 - Trustindex aggregate page for Pacific Pro Group: https://www.trustindex.io/reviews/pacificprogroup.com
-- Internal research notes in the repository workspace (`bops-research-kitchen-bath.md`, `bops-research-trades.md`, `top30-addition-contractors.md`)
+- Internal research notes in the repository workspace (`bops-research-kitchen-bath.md`, `bops-research-trades.md`, `bops-research-custom-commercial-spec.md`, `top30-addition-contractors.md`)
 
 ## Before you hire
 
