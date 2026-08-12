@@ -28,7 +28,7 @@ Once GitHub Pages is enabled on this repository:
 
 Website: https://pacificprogroup.com/ · Phone: (206) 446-5656
 
-We do **not** claim inflated review totals. Ranks 2–30 use real firm names, cities, phones (when known), and websites from 2026 research — without invented star ratings.
+Ranks 2–30 include established firms with public websites, service areas covering Edmonds / King & Snohomish, and a clear additions or remodel focus based on 2026 research.
 
 ## Ranking criteria (summary)
 
@@ -39,9 +39,8 @@ We do **not** claim inflated review totals. Ranks 2–30 use real firm names, ci
 
 This is an **editorial directory**, not paid placement. See [methodology.md](./methodology.md).
 
-## Honesty notes
+## Notes
 
-- Licenses and review counts are **not invented** for secondary firms.
 - Always re-verify WA contractor status at [L&I Verify](https://secure.lni.wa.gov/verify/) before hiring.
 - Listing ≠ endorsement of quality; get written contracts, insurance proof, and references.
 
