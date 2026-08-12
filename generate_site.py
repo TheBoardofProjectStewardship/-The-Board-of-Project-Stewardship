@@ -365,6 +365,11 @@ def head_assets() -> str:
     .prose-bops ul { list-style: disc; padding-left: 1.25rem; margin-bottom: 1rem; }
     .prose-bops ol { list-style: decimal; padding-left: 1.25rem; margin-bottom: 1rem; }
     .prose-bops strong { color: #fff; font-weight: 600; }
+    #tools input, #tools select, #tools textarea {
+      color-scheme: dark;
+    }
+    #tools input::placeholder, #tools textarea::placeholder { color: #64748b; }
+    #calc-result { letter-spacing: -0.02em; }
   </style>"""
 
 
@@ -435,7 +440,6 @@ def footer_html(prefix: str = "./") -> str:
           <li><a href="{prefix}spec-homes.html" class="hover:text-secondary transition">Spec homes</a></li>
           <li><a href="{prefix}trades.html" class="hover:text-secondary transition">Trade contractors</a></li>
           <li><a href="{prefix}blog.html" class="hover:text-secondary transition">Blog</a></li>
-          <li><a href="{prefix}methodology.md" class="hover:text-secondary transition">Methodology</a></li>
         </ul>
       </div>
       <div>
@@ -471,7 +475,11 @@ def page_shell(title: str, description: str, active: str, body: str, json_ld: li
 <body class="bg-obsidian bg-grid-pattern min-h-screen antialiased">
 {nav_html(active, prefix)}
 {body}
+  <div class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
+{ppg_widgets_html()}
+  </div>
 {footer_html(prefix if prefix else "./")}
+{ppg_widgets_script()}
 </body>
 </html>
 """
@@ -711,10 +719,128 @@ def how_we_rank_block(extra: str = "") -> str:
       <p class="text-slate-400 text-sm font-light leading-relaxed">
         Rankings updated <strong class="text-slate-200">{YEAR}</strong>. Always re-verify WA contractor status at
         <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">L&amp;I Verify</a>
-        before hiring. See <a href="./methodology.md" class="text-secondary hover:underline">methodology notes</a>.
+        before hiring.
         {extra}
       </p>
     </section>"""
+
+
+
+def integrity_shield_html(
+    subtitle: str = (
+        "How the Board screens contractors — public records and local signals, not paid placement."
+    ),
+) -> str:
+    """Reusable Integrity Shield / Stewardship Systems block for homepage and Edmonds."""
+    return f"""    <section id="integrity-shield" class="mb-12">
+      <div class="mb-8 border-b border-white/10 pb-4">
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Integrity Shield</span>
+        <h2 class="text-3xl font-black text-white tracking-tight">Stewardship Systems</h2>
+        <p class="text-slate-400 font-light mt-2 max-w-3xl">{subtitle}</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="bg-charcoal border border-white/10 hover:border-primary/40 rounded-xl p-6 card-hover">
+          <div class="w-11 h-11 rounded-lg bg-primary/20 border border-secondary/30 flex items-center justify-center mb-4">
+            <i class="fas fa-id-card text-secondary text-lg"></i>
+          </div>
+          <h3 class="text-lg font-black text-white mb-2 tracking-tight">WA L&amp;I License Checks</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Preference for firms with active Washington contractor licensing. Homeowners should re-verify status at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">L&amp;I Verify</a> before hiring.</p>
+        </div>
+        <div class="bg-charcoal border border-white/10 hover:border-primary/40 rounded-xl p-6 card-hover">
+          <div class="w-11 h-11 rounded-lg bg-primary/20 border border-secondary/30 flex items-center justify-center mb-4">
+            <i class="fas fa-star text-secondary text-lg"></i>
+          </div>
+          <h3 class="text-lg font-black text-white mb-2 tracking-tight">Public Reviews</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Where available, we note third-party review aggregates from public sources. Pacific Pro Group’s Trustindex score is <strong class="text-white">{PPG['rating']} / {PPG['reviews']}</strong> as of the {YEAR} research pass.</p>
+        </div>
+        <div class="bg-charcoal border border-white/10 hover:border-primary/40 rounded-xl p-6 card-hover">
+          <div class="w-11 h-11 rounded-lg bg-primary/20 border border-secondary/30 flex items-center justify-center mb-4">
+            <i class="fas fa-map-location-dot text-secondary text-lg"></i>
+          </div>
+          <h3 class="text-lg font-black text-white mb-2 tracking-tight">Local Edmonds Focus</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Portfolio and project history matter — especially Edmonds / King–Snohomish custom and remodel work, coastal durability, and clear permit ownership.</p>
+        </div>
+      </div>
+    </section>"""
+
+
+def ppg_widgets_html() -> str:
+    """Project Calculator, Partner Network referral, and Service Region — sitewide above footer."""
+    return f"""    <section id="tools" class="mb-6">
+      <div class="mb-8 border-b border-white/10 pb-4">
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Planning Tools</span>
+        <h2 class="text-3xl font-black text-white tracking-tight">Calculator · Partners · Service Region</h2>
+      </div>
+      <div class="grid lg:grid-cols-3 gap-4">
+        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
+          <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-calculator text-secondary"></i> Project Calculator</h3>
+          <p class="text-xs text-slate-500 mb-4 font-light">Rough ballpark only — not a bid. Uses sq&nbsp;ft × finish level + base coordination fee.</p>
+          <label class="block text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-1" for="calc-sqft">Square footage</label>
+          <input id="calc-sqft" type="number" min="500" step="50" value="2500" class="w-full mb-3 bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
+          <label class="block text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-1" for="calc-finish">Finish level</label>
+          <select id="calc-finish" class="w-full mb-4 bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
+            <option value="275">Essential — $275 / sq ft</option>
+            <option value="350" selected>Standard — $350 / sq ft</option>
+            <option value="450">Luxury — $450 / sq ft</option>
+            <option value="550">Estate — $550 / sq ft</option>
+          </select>
+          <p class="text-xs text-slate-500 mb-2">Base coordination fee: <span class="text-slate-300">$25,000</span></p>
+          <div class="bg-white/5 border border-white/10 rounded-lg px-4 py-3">
+            <div class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">Estimated range</div>
+            <div id="calc-result" class="text-2xl font-black text-secondary mt-1">—</div>
+          </div>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
+          <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-handshake text-secondary"></i> Partner Network</h3>
+          <p class="text-xs text-slate-500 mb-4 font-light">Request an introduction to Pacific Pro Group or ask about Edmonds custom home capacity.</p>
+          <form id="partner-form" action="{PPG['url']}" method="get" target="_blank" class="space-y-3">
+            <input type="text" name="ref_name" required placeholder="Your name" class="w-full bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
+            <input type="email" name="ref_email" required placeholder="Email" class="w-full bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
+            <input type="text" name="ref_city" placeholder="City / neighborhood" class="w-full bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
+            <textarea name="ref_notes" rows="3" placeholder="Project notes (lot, timeline, sq ft)" class="w-full bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary"></textarea>
+            <button type="submit" class="w-full bg-primary text-white py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs">Continue to Pacific Pro Group</button>
+          </form>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
+          <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-location-dot text-secondary"></i> Service Region</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed mb-4">Primary coverage for this Edmonds directory:</p>
+          <ul class="space-y-2 text-sm text-slate-300 font-light mb-5">
+            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>Edmonds &amp; the Edmonds Bowl</li>
+            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>Shoreline · Lynnwood · Mukilteo · Mountlake Terrace</li>
+            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>South Snohomish &amp; North King County</li>
+            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>Greater Seattle metro (by firm)</li>
+          </ul>
+          <a href="{PPG['url']}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-secondary hover:underline">
+            Confirm PPG service area <i class="fas fa-arrow-right text-[10px]"></i>
+          </a>
+        </div>
+      </div>
+    </section>"""
+
+
+def ppg_widgets_script() -> str:
+    """Calculator JS shared on every page (ids are unique per page load)."""
+    return """  <script>
+  (function () {
+    var BASE_FEE = 25000;
+    function calc() {
+      var sqEl = document.getElementById('calc-sqft');
+      var finishEl = document.getElementById('calc-finish');
+      var el = document.getElementById('calc-result');
+      if (!sqEl || !finishEl || !el) return;
+      var sq = parseFloat(sqEl.value) || 0;
+      var rate = parseFloat(finishEl.value) || 0;
+      var total = sq * rate + BASE_FEE;
+      if (!sq || !rate) { el.textContent = '—'; return; }
+      el.textContent = total.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+    }
+    var sqft = document.getElementById('calc-sqft');
+    var finish = document.getElementById('calc-finish');
+    if (sqft) sqft.addEventListener('input', calc);
+    if (finish) finish.addEventListener('change', calc);
+    calc();
+  })();
+  </script>"""
 
 
 # ---------- Page builders ----------
@@ -801,6 +927,8 @@ def build_about() -> str:
 {chr(10).join(pillar_cards)}
       </div>
     </section>
+
+{integrity_shield_html()}
 
     <section class="bg-charcoal rounded-xl p-8 md:p-10 border border-secondary/35 mb-14 relative overflow-hidden">
       <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-primary"></div>
@@ -1305,37 +1433,6 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
       </div>
     </article>"""
 
-    integrity = f"""    <section id="integrity-shield" class="mb-12">
-      <div class="mb-8 border-b border-white/10 pb-4">
-        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Integrity Shield</span>
-        <h2 class="text-3xl font-black text-white tracking-tight">Stewardship Systems</h2>
-        <p class="text-slate-400 font-light mt-2 max-w-3xl">How the Board screens Edmonds custom home builders — public records and local signals, not paid placement.</p>
-      </div>
-      <div class="grid md:grid-cols-3 gap-4">
-        <div class="bg-charcoal border border-white/10 hover:border-primary/40 rounded-xl p-6 card-hover">
-          <div class="w-11 h-11 rounded-lg bg-primary/20 border border-secondary/30 flex items-center justify-center mb-4">
-            <i class="fas fa-id-card text-secondary text-lg"></i>
-          </div>
-          <h3 class="text-lg font-black text-white mb-2 tracking-tight">WA L&amp;I License Checks</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Preference for firms with active Washington contractor licensing. Homeowners should re-verify status at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">L&amp;I Verify</a> before hiring.</p>
-        </div>
-        <div class="bg-charcoal border border-white/10 hover:border-primary/40 rounded-xl p-6 card-hover">
-          <div class="w-11 h-11 rounded-lg bg-primary/20 border border-secondary/30 flex items-center justify-center mb-4">
-            <i class="fas fa-star text-secondary text-lg"></i>
-          </div>
-          <h3 class="text-lg font-black text-white mb-2 tracking-tight">Public Reviews</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Where available, we note third-party review aggregates from public sources. Pacific Pro Group’s Trustindex score is <strong class="text-white">{PPG['rating']} / {PPG['reviews']}</strong> as of the {YEAR} research pass.</p>
-        </div>
-        <div class="bg-charcoal border border-white/10 hover:border-primary/40 rounded-xl p-6 card-hover">
-          <div class="w-11 h-11 rounded-lg bg-primary/20 border border-secondary/30 flex items-center justify-center mb-4">
-            <i class="fas fa-map-location-dot text-secondary text-lg"></i>
-          </div>
-          <h3 class="text-lg font-black text-white mb-2 tracking-tight">Local Edmonds Focus</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Portfolio and project history matter — especially Edmonds / King–Snohomish custom and remodel work, coastal durability, and clear permit ownership.</p>
-        </div>
-      </div>
-    </section>"""
-
     permit = f"""    <section id="permit-guide" class="bg-charcoal rounded-xl p-8 md:p-10 border border-primary/25 mb-14 relative overflow-hidden">
       <div class="absolute -bottom-20 -right-20 w-56 h-56 bg-primary/15 blur-[70px] pointer-events-none rounded-full"></div>
       <h2 class="text-2xl font-black text-white mb-4 tracking-tight flex items-center gap-3 relative z-10">
@@ -1365,60 +1462,8 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
       </div>
     </section>"""
 
-    widgets = f"""    <section id="tools" class="mb-14">
-      <div class="mb-8 border-b border-white/10 pb-4">
-        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Planning Tools</span>
-        <h2 class="text-3xl font-black text-white tracking-tight">Calculator · Partners · Service Region</h2>
-      </div>
-      <div class="grid lg:grid-cols-3 gap-4">
-        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
-          <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-calculator text-secondary"></i> Project Calculator</h3>
-          <p class="text-xs text-slate-500 mb-4 font-light">Rough ballpark only — not a bid. Uses sq&nbsp;ft × finish level + base coordination fee.</p>
-          <label class="block text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-1">Square footage</label>
-          <input id="calc-sqft" type="number" min="500" step="50" value="2500" class="w-full mb-3 bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
-          <label class="block text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-1">Finish level</label>
-          <select id="calc-finish" class="w-full mb-4 bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
-            <option value="275">Essential — $275 / sq ft</option>
-            <option value="350" selected>Standard — $350 / sq ft</option>
-            <option value="450">Luxury — $450 / sq ft</option>
-            <option value="550">Estate — $550 / sq ft</option>
-          </select>
-          <p class="text-xs text-slate-500 mb-2">Base coordination fee: <span class="text-slate-300">$25,000</span></p>
-          <div class="bg-white/5 border border-white/10 rounded-lg px-4 py-3">
-            <div class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">Estimated range</div>
-            <div id="calc-result" class="text-2xl font-black text-secondary mt-1">—</div>
-          </div>
-        </div>
-        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
-          <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-handshake text-secondary"></i> Partner Network</h3>
-          <p class="text-xs text-slate-500 mb-4 font-light">Request an introduction to Pacific Pro Group or ask about Edmonds custom home capacity.</p>
-          <form id="partner-form" action="{PPG['url']}" method="get" target="_blank" class="space-y-3">
-            <input type="text" name="ref_name" required placeholder="Your name" class="w-full bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
-            <input type="email" name="ref_email" required placeholder="Email" class="w-full bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
-            <input type="text" name="ref_city" placeholder="City / neighborhood" class="w-full bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
-            <textarea name="ref_notes" rows="3" placeholder="Project notes (lot, timeline, sq ft)" class="w-full bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary"></textarea>
-            <button type="submit" class="w-full bg-primary text-white py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs">Continue to Pacific Pro Group</button>
-          </form>
-        </div>
-        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
-          <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-location-dot text-secondary"></i> Service Region</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed mb-4">Primary coverage for this Edmonds directory:</p>
-          <ul class="space-y-2 text-sm text-slate-300 font-light mb-5">
-            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>Edmonds &amp; the Edmonds Bowl</li>
-            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>Shoreline · Lynnwood · Mukilteo · Mountlake Terrace</li>
-            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>South Snohomish &amp; North King County</li>
-            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>Greater Seattle metro (by firm)</li>
-          </ul>
-          <a href="{PPG['url']}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-secondary hover:underline">
-            Confirm PPG service area <i class="fas fa-arrow-right text-[10px]"></i>
-          </a>
-        </div>
-      </div>
-    </section>"""
-
     script = """  <script>
   (function () {
-    var BASE_FEE = 25000;
     var filterBtns = document.querySelectorAll('.edmonds-filter');
     var firms = document.querySelectorAll('.edmonds-firm');
     function applyFilter(cat) {
@@ -1443,20 +1488,6 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
     filterBtns.forEach(function (b) {
       b.addEventListener('click', function () { applyFilter(b.getAttribute('data-filter')); });
     });
-
-    function calc() {
-      var sq = parseFloat(document.getElementById('calc-sqft').value) || 0;
-      var rate = parseFloat(document.getElementById('calc-finish').value) || 0;
-      var total = sq * rate + BASE_FEE;
-      var el = document.getElementById('calc-result');
-      if (!sq || !rate) { el.textContent = '—'; return; }
-      el.textContent = total.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
-    }
-    var sqft = document.getElementById('calc-sqft');
-    var finish = document.getElementById('calc-finish');
-    if (sqft) sqft.addEventListener('input', calc);
-    if (finish) finish.addEventListener('change', calc);
-    calc();
 
     var KEY = 'bops_ppg_endorsements_v1';
     var countEl = document.getElementById('ppg-endorse-count');
@@ -1494,7 +1525,7 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
     )}
   <main class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
 {how_we_rank_block(' Also see the regional <a href="./custom-homes.html" class="text-secondary hover:underline">Custom Homes</a> shortlist and <a href="./additions.html" class="text-secondary hover:underline">home additions</a> Top 30.')}
-{integrity}
+{integrity_shield_html("How the Board screens Edmonds custom home builders — public records and local signals, not paid placement.")}
 {ppg_featured_edmonds}
     <section id="rankings" class="mb-20">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 border-b border-white/10 pb-4 gap-3">
@@ -1514,7 +1545,6 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
       </div>
     </section>
 {permit}
-{widgets}
 {faq_section(faqs, "Edmonds custom homes FAQ")}
   </main>
 {script}"""
@@ -1973,61 +2003,6 @@ def build_post_page(post: dict) -> str:
     )
 
 
-def write_methodology() -> None:
-    text = f"""# Methodology — Board of Project Stewardship Directories
-
-**Publisher:** The Board of Project Stewardship  
-**Geography:** Edmonds, North Seattle, King County, Snohomish County, WA  
-**Last research pass:** August {YEAR}  
-**Public author line:** {AUTHOR}
-
-## Purpose
-
-Publish useful editorial rankings and trade shortlists for homeowners and owners planning **structural home additions**, **custom homes**, **Edmonds custom homes (Top 30)**, **kitchen and bathroom remodels**, **commercial / TI**, **spec / production homes**, and related specialty trade work — not paid directories.
-
-## Ranking criteria
-
-Firms are ordered using qualitative editorial judgment against these signals:
-
-1. **Institutional / association signals** — MBAKS Remodelers Council membership (Spring {YEAR} directory) where applicable for remodel/addition lists.
-2. **Local service area** — Preference for Edmonds → Shoreline / Lynnwood / Mukilteo / Marysville / Snohomish → North Seattle → Eastside / broader King, when specialty capacity is clear.
-3. **Specialty focus** — Explicit home addition, kitchen/bath, or trade specialization on the company website.
-4. **Public reputation signals** — Longevity, portfolio clarity, and third-party review aggregates when available from public sources.
-
-**Pacific Pro Group** is ranked **#1** on the home additions, kitchen, bathroom, custom homes, and **Edmonds custom homes (Top 30)** directories for the combination of Edmonds local presence, remodel / custom focus, and a verified Trustindex aggregate of **4.9 / 190 reviews** (Google + Thumbtack + HomeAdvisor) as of the {YEAR} research pass. PPG is **not** ranked on the commercial or spec homes directories (callout-only for light commercial language; no speculative building evidence). The Edmonds Top 30 uses the same public signals — WA L&I license checks, public reviews, portfolio/project history, and local Edmonds / King–Snohomish focus — not paid placement.
-
-## What we do not do
-
-- Sell placement in ranked lists
-- Treat association membership as a guarantee of project quality
-- Publish phone numbers or review metrics that were not found in public sources during research
-
-## Sources
-
-- MBAKS Spring {YEAR} Home Remodelers Directory
-- Company websites (services, phone, city, specialty language)
-- Public profiles (Houzz, chambers) where used for confirmation
-- WA L&I Verify / public contractor records when found during research
-- Trustindex aggregate page for Pacific Pro Group: https://www.trustindex.io/reviews/pacificprogroup.com
-- Internal research notes in the repository workspace (`bops-research-kitchen-bath.md`, `bops-research-trades.md`, `bops-research-custom-commercial-spec.md`, `bops-research-edmonds-custom.md`, `top30-addition-contractors.md`)
-
-## Before you hire
-
-1. Re-check license status at https://secure.lni.wa.gov/verify/
-2. Confirm the firm still accepts the work type you need
-3. Ask for local references and written scope covering design, permit, and build where relevant
-4. Verify insurance / bond and get everything in writing
-
-## Site generation
-
-Public HTML pages are rebuilt by `generate_site.py` from research Markdown and `posts/*.md` blog sources. Blog operations for the publishing agent are documented in `POSTING.md`.
-
-## Updates
-
-This methodology and rankings were compiled for **{YEAR}**. Future passes should re-pull MBAKS where relevant, re-verify L&I status, and refresh review aggregates before changing order or claims.
-"""
-    (SITE_DIR / "methodology.md").write_text(text, encoding="utf-8")
-
 
 def write_readme(posts: list[dict]) -> None:
     trade_lines = "\n".join(
@@ -2064,7 +2039,6 @@ Base: `{BASE_URL}`
 {trade_lines}
 | `blog.html` | Blog index |
 {post_lines}
-| `methodology.md` | Ranking methodology |
 | `POSTING.md` | Publishing agent workflow (ops) |
 | `generate_site.py` | Site generator |
 
@@ -2154,8 +2128,11 @@ def main() -> None:
         (posts_dir / post["out_name"]).write_text(build_post_page(post), encoding="utf-8")
     (SITE_DIR / "blog.html").write_text(build_blog_index(posts), encoding="utf-8")
 
-    write_methodology()
     write_readme(posts)
+    leftover_methodology = SITE_DIR / "methodology.md"
+    if leftover_methodology.exists():
+        leftover_methodology.unlink()
+
 
     print("Generated:")
     print(f"  additions ranks 2-30: {len(additions)}")
