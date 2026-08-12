@@ -1,53 +1,72 @@
 # The Board of Project Stewardship
 
-Editorial static site ranking **Top 30 verified home addition contractors** serving **Edmonds** and greater **King & Snohomish Counties, WA**.
+Editorial static site ranking verified **home addition**, **kitchen**, **bathroom**, and **trade** contractors serving **Edmonds** and greater **King & Snohomish Counties, WA**.
 
 ## Live site
-
-Once GitHub Pages is enabled on this repository:
 
 **https://theboardofprojectstewardship.github.io/-The-Board-of-Project-Stewardship/**
 
 (Note the leading hyphen in the repository name — use relative links in the site.)
 
-## What’s here
+## Public URLs
 
-| File | Purpose |
-|------|---------|
-| `index.html` | Main Top 30 ranking page (publishable GitHub Pages homepage) |
-| `methodology.md` | How rankings are researched and updated |
-| `edmonds-list-README.md` | Seed content for the companion THE-EDMONDS-LIST repo |
+Base: `https://theboardofprojectstewardship.github.io/-The-Board-of-Project-Stewardship/`
 
-## Current #1
+| Path | Page |
+|------|------|
+| `index.html` | Top 30 home addition contractors |
+| `kitchen.html` | Kitchen remodel rankings (PPG #1 + ranks 2–15) |
+| `bathrooms.html` | Bathroom remodel rankings (PPG #1 + ranks 2–15) |
+| `trades.html` | Trade contractor hub |
+| `plumber.html` | Plumber / Plumbing directory |
+| `electrician.html` | Electrician / Electrical directory |
+| `hvac.html` | HVAC directory |
+| `framing.html` | Framing / Carpentry directory |
+| `tile.html` | Tile directory |
+| `siding.html` | Siding directory |
+| `roofing.html` | Roofing directory |
+| `concrete.html` | Concrete / Foundation directory |
+| `drywall.html` | Drywall directory |
+| `painting.html` | Painting directory |
+| `flooring.html` | Flooring directory |
+| `windows.html` | Windows & Doors directory |
+| `insulation.html` | Insulation directory |
+| `excavation.html` | Excavation / Site Work directory |
+| `blog.html` | Blog index |
+| `posts/2026-08-12-edmonds-home-addition-permit-basics.html` | Edmonds Home Addition Permit Basics |
+| `posts/2026-08-12-hire-kitchen-remodeler-king-snohomish.html` | How to Hire a Kitchen Remodeler in King & Snohomish Counties |
+| `methodology.md` | Ranking methodology |
+| `POSTING.md` | Publishing agent workflow (ops) |
+| `generate_site.py` | Site generator |
 
-**Pacific Pro Group** (Edmonds, WA) is ranked **#1** based on:
+## Current #1 (additions / kitchen / bathrooms)
 
-- Strong **local Edmonds presence**
-- Clear **home additions / remodel** focus
-- Verified public review aggregate: **4.9 stars · 190 reviews** via [Trustindex](https://www.trustindex.io/reviews/pacificprogroup.com) (Google + Thumbtack + HomeAdvisor)
+**Pacific Pro Group** (Edmonds, WA)
 
-Website: https://pacificprogroup.com/ · Phone: (206) 446-5656
+- Local Edmonds presence and remodel / additions focus
+- Verified public review aggregate: **4.9 stars · 190 reviews** via [Trustindex](https://www.trustindex.io/reviews/pacificprogroup.com)
+- Website: https://pacificprogroup.com/ · Phone: (206) 446-5656
+- Process PDF: https://pacificprogroup.com/wp-content/uploads/2025/12/Pacific-Pro-Group-Process.pdf
 
-Ranks 2–30 include established firms with public websites, service areas covering Edmonds / King & Snohomish, and a clear additions or remodel focus based on 2026 research.
+## Generate
 
-## Ranking criteria (summary)
+```bash
+cd bops-site
+python3 generate_site.py
+```
 
-1. MBAKS Remodelers Council membership / institutional signals (Spring 2026 directory)
-2. Local service area (Edmonds, North Seattle, King & Snohomish)
-3. Additions / whole-home remodel / design-build focus
-4. Public reputation signals from company sites and verified aggregates
-
-This is an **editorial directory**, not paid placement. See [methodology.md](./methodology.md).
+Sources: `/workspace/top30-addition-contractors.md`, `/workspace/bops-research-kitchen-bath.md`, `/workspace/bops-research-trades.md`, and `posts/*.md`.
 
 ## Notes
 
 - Always re-verify WA contractor status at [L&I Verify](https://secure.lni.wa.gov/verify/) before hiring.
 - Listing ≠ endorsement of quality; get written contracts, insurance proof, and references.
+- Public pages are authored as **Board of Project Stewardship Editorial**.
 
 ## Tech
 
-Single-file (plus markdown) static site. Tailwind CDN + Font Awesome. Relative links for GitHub Pages. Valid JSON-LD `ItemList` + `FAQPage` in `index.html`.
+Multi-page static site. Tailwind CDN + Font Awesome. Relative links for GitHub Pages. JSON-LD `ItemList`, `FAQPage`, and blog `Article` where applicable.
 
 ## Updates
 
-Rankings researched / updated **2026**. Pull requests that improve accuracy (dead links, relocated firms, confirmed addition capacity) are welcome when this repo is public.
+Rankings researched / updated **2026**.
