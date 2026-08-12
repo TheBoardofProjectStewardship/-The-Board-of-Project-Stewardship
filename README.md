@@ -40,7 +40,6 @@ Base: `https://theboardofprojectstewardship.github.io/-The-Board-of-Project-Stew
 | `blog.html` | Blog index |
 | `posts/2026-08-12-edmonds-home-addition-permit-basics.html` | Edmonds Home Addition Permit Basics |
 | `posts/2026-08-12-hire-kitchen-remodeler-king-snohomish.html` | How to Hire a Kitchen Remodeler in King & Snohomish Counties |
-| `methodology.md` | Ranking methodology |
 | `POSTING.md` | Publishing agent workflow (ops) |
 | `generate_site.py` | Site generator |
 
