@@ -677,6 +677,11 @@ def board_organization_website_ld() -> dict:
                 "sameAs": [
                     "https://github.com/TheBoardofProjectStewardship",
                 ],
+                "isRelatedTo": {
+                    "@type": "Organization",
+                    "name": "Pacific Pro Group",
+                    "url": "https://pacificprogroup.com/",
+                },
             },
             {
                 "@type": "WebSite",
