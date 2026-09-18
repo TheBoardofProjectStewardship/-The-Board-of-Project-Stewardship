@@ -640,6 +640,82 @@ def another_story_cta(prefix: str = "") -> str:
 """
 
 
+
+def board_organization_website_ld() -> dict:
+    """Board Organization + WebSite JSON-LD (Packet 03). Not LocalBusiness/GC."""
+    return {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Organization",
+                "@id": "https://boardofprojectstewardship.com/#organization",
+                "name": "Board of Project Stewardship",
+                "alternateName": "BOPS",
+                "url": "https://boardofprojectstewardship.com/",
+                "description": (
+                    "Owned editorial construction standards hub and contractor directories "
+                    "for Edmonds and the greater King and Snohomish County market. "
+                    "Associated with Pacific Pro Group; not independent journalism."
+                ),
+                "areaServed": [
+                    {
+                        "@type": "AdministrativeArea",
+                        "name": "King County",
+                        "containedInPlace": {"@type": "State", "name": "Washington"},
+                    },
+                    {
+                        "@type": "AdministrativeArea",
+                        "name": "Snohomish County",
+                        "containedInPlace": {"@type": "State", "name": "Washington"},
+                    },
+                    {
+                        "@type": "City",
+                        "name": "Edmonds",
+                        "containedInPlace": {"@type": "State", "name": "Washington"},
+                    },
+                ],
+                "sameAs": [
+                    "https://github.com/TheBoardofProjectStewardship",
+                ],
+            },
+            {
+                "@type": "WebSite",
+                "@id": "https://boardofprojectstewardship.com/#website",
+                "url": "https://boardofprojectstewardship.com/",
+                "name": "Board of Project Stewardship",
+                "publisher": {"@id": "https://boardofprojectstewardship.com/#organization"},
+                "inLanguage": "en-US",
+            },
+        ],
+    }
+
+
+def ensure_indexnow_key() -> str:
+    """Preserve/mint IndexNow key across generate_site regenerations."""
+    well_known = SITE_DIR / ".well-known"
+    well_known.mkdir(parents=True, exist_ok=True)
+    key_store = well_known / "indexnow-key.txt"
+    key = ""
+    if key_store.exists():
+        key = key_store.read_text(encoding="utf-8").strip()
+    if not key or not all(c in "0123456789abcdef" for c in key.lower()) or len(key) < 32:
+        import secrets
+        key = secrets.token_hex(16)
+        key_store.write_text(key, encoding="utf-8")
+    # Remove any prior IndexNow key *.txt at site root (32 hex only) except current
+    for p in SITE_DIR.glob("*.txt"):
+        if p.name == "robots.txt":
+            continue
+        stem = p.stem
+        if len(stem) >= 32 and all(c in "0123456789abcdef" for c in stem.lower()):
+            if stem.lower() != key.lower():
+                p.unlink()
+    key_file = SITE_DIR / f"{key}.txt"
+    key_file.write_text(key, encoding="utf-8")
+    return key
+
+
+
 def page_shell(
     title: str,
     description: str,
@@ -655,8 +731,12 @@ def page_shell(
     extra_head: str = "",
     extra_scripts: str = "",
 ) -> str:
-    ld_blocks = ""
+    # Sitewide Board Organization + WebSite (Packet 03); page json_ld appends after.
+    ld_objs = [board_organization_website_ld()]
     for obj in json_ld or []:
+        ld_objs.append(obj)
+    ld_blocks = ""
+    for obj in ld_objs:
         ld_blocks += f'  <script type="application/ld+json">\n{json.dumps(obj, indent=2)}\n  </script>\n'
     canon = canonical or (BASE_URL + ("" if active == "about" else f"{active}.html" if active != "blog" else "blog.html"))
     kw_tag = f'  <meta name="keywords" content="{esc(keywords)}">\n' if keywords else ""
@@ -2553,7 +2633,9 @@ def main() -> None:
     for slug, _, _, _ in TRADES:
         print(f"  {slug}: {len(trades_data.get(slug, []))} firms")
     print(f"  blog posts: {len(posts)}")
+    indexnow_key = ensure_indexnow_key()
     print("  robots.txt + sitemap.xml + posts.json + another-story.html written (CNAME left untouched)")
+    print(f"  IndexNow key hosted at /{indexnow_key}.txt (preserved via .well-known/indexnow-key.txt)")
     print("Done.")
 
 
