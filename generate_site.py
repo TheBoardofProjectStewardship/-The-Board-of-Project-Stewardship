@@ -823,11 +823,32 @@ def firm_card(firm: dict, show_rank: bool = True) -> str:
 
 
 def ppg_featured(context_label: str, note: str | None = None) -> str:
-    photo_rel = "assets/images/ppg-featured-photo.webp"
-    if asset_exists(photo_rel):
+    # Prefer CDN-backed URLs (local webp is gitignored and 404s on Netlify).
+    # Context-aware hero: bathroom/kitchen/addition pages get matching cool photos.
+    label_l = (context_label or "").lower()
+    if "bath" in label_l:
+        photo_rel = "assets/images/dir-bathrooms-hero.webp"
+        alt = "Luxury walk-in shower bathroom remodel in the Edmonds coastal market"
+    elif "kitchen" in label_l:
+        photo_rel = "assets/images/dir-kitchen-hero.webp"
+        alt = "Luxury kitchen remodel in the Edmonds and North Sound market"
+    elif "addition" in label_l or "home addition" in label_l:
+        photo_rel = "assets/images/dir-additions-hero.webp"
+        alt = "Home addition design-build project in the Edmonds area"
+    elif "custom" in label_l or "builder" in label_l:
+        photo_rel = "assets/images/dir-custom-homes-hero.webp"
+        alt = "Custom home construction in Edmonds and coastal King County"
+    else:
+        photo_rel = "assets/images/ppg-featured-photo.webp"
+        alt = "Pacific Pro Group design-build remodel in the Edmonds area"
+    # Fall back through CDN map keys if preferred missing
+    if photo_rel not in CDN_MAP and "assets/images/ppg-featured-photo.webp" in CDN_MAP:
+        photo_rel = "assets/images/ppg-featured-photo.webp"
+    photo_src = prefix_asset(photo_rel)
+    if photo_src and (photo_rel in CDN_MAP or asset_exists(photo_rel) or photo_src.startswith("http")):
         left_visual = (
             f'          <div class="h-48 w-full rounded-lg overflow-hidden border border-white/10 shadow-inner">\n'
-            f'            <img src="./{photo_rel}" alt="Design-build remodel jobsite in the Edmonds area" '
+            f'            <img src="{photo_src}" alt="{esc(alt)}" '
             f'class="w-full h-full object-cover" width="800" height="600" loading="lazy">\n'
             f'          </div>\n'
         )
@@ -1706,12 +1727,8 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
       <div class="p-6 md:p-10 md:flex gap-10 relative">
         <div class="absolute -top-16 -left-16 w-72 h-72 bg-primary/10 blur-[90px] pointer-events-none rounded-full"></div>
         <div class="md:w-1/3 mb-8 md:mb-0 relative z-10 flex flex-col gap-4">
-          <div class="bg-white h-48 w-full rounded-lg flex items-center justify-center border border-white/10 shadow-inner">
-            <div class="text-center px-4">
-              <i class="fas fa-house-chimney text-5xl text-slate-800 mb-3"></i>
-              <h3 class="text-slate-900 text-lg font-black uppercase tracking-widest leading-snug">Pacific Pro Group</h3>
-              <p class="text-slate-500 text-[10px] font-bold uppercase tracking-widest mt-1">Edmonds, WA</p>
-            </div>
+          <div class="h-48 w-full rounded-lg overflow-hidden border border-white/10 shadow-inner">
+            <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3J0uIieL1TPm5gGUzNTRHKx1f2R/hf_20260918_035328_e01aaccb-1697-45ba-9ae1-0e56135c6f7a.png" alt="Custom home construction in Edmonds and coastal King County" class="w-full h-full object-cover" width="800" height="600" loading="lazy">
           </div>
           <div class="grid grid-cols-2 gap-2">
             <div class="bg-white/5 border border-white/10 rounded-lg px-3 py-3 text-center">
