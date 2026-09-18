@@ -60,6 +60,7 @@ GitHub Pages serves from the repository root (or configured Pages branch). Relat
 
 Target **one useful post per day** when the publishing agent is scheduled. Skip a day rather than publishing thin duplicate content.
 
+
 ## Community submissions (live)
 
 - Public contribute page: `write.html` (Netlify form `blog-submission`).
