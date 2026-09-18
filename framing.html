@@ -478,22 +478,37 @@
       </div>
     </section>
   </div>
-  <section id="another-story-cta" class="max-w-6xl mx-auto px-4 py-10 relative z-20 border-t border-white/5">
-    <div class="bg-charcoal border border-secondary/25 rounded-xl overflow-hidden flex flex-col md:flex-row card-hover">
-      <div class="md:w-2/5 shrink-0">
-        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3J0uIieL1TPm5gGUzNTRHKx1f2R/hf_20260918_035328_87607fe4-aa7b-4976-b596-36d64687932b.png" alt="Conceptual before-and-after second-story idea for Another Story SEA" class="w-full h-40 md:h-full object-cover" width="640" height="360" loading="lazy">
-      </div>
-      <div class="p-6 md:p-8 flex flex-col justify-center gap-3">
-        <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary">Pacific Pro Group · Concept studio</p>
-        <h2 class="text-2xl font-black text-white tracking-tight">Another Story SEA</h2>
-        <p class="text-sm text-slate-400 font-light leading-relaxed max-w-xl">Same home. Another story. Open the full concept studio to explore a second-story idea on your photo — AI-assisted preview, not a bid or permit document.</p>
-        <div>
-          <a href="./another-story.html" class="inline-flex items-center gap-2 bg-primary text-white px-5 py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs shadow-glow-sleek">
-            Open Another Story <i class="fas fa-arrow-right text-[10px]"></i>
-          </a>
-        </div>
-      </div>
+  <section id="another-story-sea-embed" class="max-w-6xl mx-auto px-4 py-12 relative z-20 border-t border-white/5">
+    <div class="mb-6 overflow-hidden rounded-xl border border-white/10">
+      <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3J0uIieL1TPm5gGUzNTRHKx1f2R/hf_20260918_035328_87607fe4-aa7b-4976-b596-36d64687932b.png" alt="Conceptual before-and-after second-story idea for Another Story SEA" class="w-full h-48 sm:h-64 object-cover" width="1200" height="630" loading="eager">
     </div>
+    <div class="mb-5">
+      <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Pacific Pro Group · Concept studio</p>
+      <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-2">Another Story SEA</h2>
+      <p class="text-sm text-slate-400 font-light max-w-3xl leading-relaxed">Explore a second-story concept on your own photo. AI-assisted design preview — not a bid, permit, or construction document.</p>
+    </div>
+    <iframe
+      id="another-story-sea"
+      src="/tools/another-story/index.html"
+      title="Another Story SEA — second-story design preview"
+      loading="lazy"
+      style="display:block;width:100%;height:1900px;border:0;border-radius:18px;background:#fff9f2;"
+    ></iframe>
+    <script>
+    (() => {
+      const frame = document.getElementById('another-story-sea');
+      if (!frame) return;
+      const trustedOrigin = new URL(frame.src, window.location.href).origin;
+      window.addEventListener('message', (event) => {
+        if (event.origin !== trustedOrigin || event.source !== frame.contentWindow) return;
+        if (event.data?.type !== 'another-story:resize') return;
+        const height = Number(event.data.height);
+        if (Number.isFinite(height) && height >= 300 && height <= 16000) {
+          frame.style.height = `${Math.ceil(height) + 2}px`;
+        }
+      });
+    })();
+    </script>
   </section>
 
   <footer class="bg-obsidian py-14 text-sm border-t border-white/5">

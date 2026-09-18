@@ -564,13 +564,13 @@ def footer_html(prefix: str = "./") -> str:
   </footer>"""
 
 
-def another_story_embed() -> str:
-    """Full Another Story SEA tool iframe — ONLY on another-story.html."""
+def another_story_embed(prefix: str = "") -> str:
+    """Full Another Story SEA tool iframe on every page."""
     banner = ""
     if asset_exists("assets/images/another-story-banner.webp"):
         banner = (
             '    <div class="mb-6 overflow-hidden rounded-xl border border-white/10">\n'
-            '      <img src="./assets/images/another-story-banner.webp" '
+            f'      <img src="{prefix_asset("assets/images/another-story-banner.webp", prefix)}" '
             'alt="Conceptual before-and-after second-story idea for Another Story SEA" '
             'class="w-full h-48 sm:h-64 object-cover" width="1200" height="630" loading="eager">\n'
             '    </div>\n'
@@ -651,7 +651,7 @@ def page_shell(
     keywords: str = "",
     og_image: str | None = None,
     og_type: str = "website",
-    include_story_embed: bool = False,
+    include_story_embed: bool = True,
     extra_head: str = "",
     extra_scripts: str = "",
 ) -> str:
@@ -667,7 +667,7 @@ def page_shell(
         if asset_exists(cand):
             og_rel = cand
     og_abs = resolve_og_image(og_rel)
-    story_block = another_story_embed() if include_story_embed else another_story_cta(prefix if prefix else "")
+    story_block = another_story_embed(prefix if prefix else "")
     fav = favicon_tags(prefix if prefix else "./")
     return f"""<!DOCTYPE html>
 <html lang="en" class="dark">
