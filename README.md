@@ -4,13 +4,13 @@ Independent Board site for local construction integrity in **Edmonds** and great
 
 ## Live site
 
-**https://theboardofprojectstewardship.github.io/-The-Board-of-Project-Stewardship/**
+**https://boardofprojectstewardship.com/**
 
-(Note the leading hyphen in the repository name — use relative links in the site.)
+Custom domain on GitHub Pages (apex). Relative nav links stay relative so the site works on both the domain and preview hosts.
 
 ## Public URLs
 
-Base: `https://theboardofprojectstewardship.github.io/-The-Board-of-Project-Stewardship/`
+Base: `https://boardofprojectstewardship.com/`
 
 | Path | Page |
 |------|------|

@@ -10,7 +10,8 @@ from pathlib import Path
 
 SITE_DIR = Path(__file__).resolve().parent
 WORKSPACE = SITE_DIR.parent
-BASE_URL = "https://theboardofprojectstewardship.github.io/-The-Board-of-Project-Stewardship/"
+SITE_ORIGIN = "https://boardofprojectstewardship.com"
+BASE_URL = SITE_ORIGIN + "/"
 LNI_URL = "https://secure.lni.wa.gov/verify/"
 YEAR = "2026"
 AUTHOR = "Board of Project Stewardship Editorial"
@@ -391,6 +392,7 @@ def nav_html(active: str = "", prefix: str = "") -> str:
         ("spec-homes", href("spec-homes.html"), "Spec Homes"),
         ("trades", href("trades.html"), "Trades"),
         ("blog", href("blog.html"), "Blog"),
+        ("story", href("another-story.html"), "Another Story"),
     ]
     items = []
     for key, h, label in links:
@@ -440,6 +442,7 @@ def footer_html(prefix: str = "./") -> str:
           <li><a href="{prefix}spec-homes.html" class="hover:text-secondary transition">Spec homes</a></li>
           <li><a href="{prefix}trades.html" class="hover:text-secondary transition">Trade contractors</a></li>
           <li><a href="{prefix}blog.html" class="hover:text-secondary transition">Blog</a></li>
+          <li><a href="{prefix}another-story.html" class="hover:text-secondary transition">Another Story SEA</a></li>
         </ul>
       </div>
       <div>
@@ -449,6 +452,40 @@ def footer_html(prefix: str = "./") -> str:
       </div>
     </div>
   </footer>"""
+
+
+def another_story_embed() -> str:
+    """Full Another Story SEA tool iframe — hosted at /tools/another-story/."""
+    return """  <section id="another-story-sea-embed" class="max-w-6xl mx-auto px-4 py-12 relative z-20 border-t border-white/5">
+    <div class="mb-5">
+      <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Pacific Pro Group · Concept studio</p>
+      <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-2">Another Story SEA</h2>
+      <p class="text-sm text-slate-400 font-light max-w-3xl leading-relaxed">Explore a second-story concept on your own photo. AI-assisted design preview — not a bid, permit, or construction document.</p>
+    </div>
+    <iframe
+      id="another-story-sea"
+      src="/tools/another-story/index.html"
+      title="Another Story SEA — second-story design preview"
+      loading="lazy"
+      style="display:block;width:100%;height:1900px;border:0;border-radius:18px;background:#fff9f2;"
+    ></iframe>
+    <script>
+    (() => {
+      const frame = document.getElementById('another-story-sea');
+      if (!frame) return;
+      const trustedOrigin = new URL(frame.src, window.location.href).origin;
+      window.addEventListener('message', (event) => {
+        if (event.origin !== trustedOrigin || event.source !== frame.contentWindow) return;
+        if (event.data?.type !== 'another-story:resize') return;
+        const height = Number(event.data.height);
+        if (Number.isFinite(height) && height >= 300 && height <= 16000) {
+          frame.style.height = `${Math.ceil(height) + 2}px`;
+        }
+      });
+    })();
+    </script>
+  </section>
+"""
 
 
 def page_shell(title: str, description: str, active: str, body: str, json_ld: list | None = None, prefix: str = "", canonical: str = "", keywords: str = "") -> str:
@@ -478,6 +515,7 @@ def page_shell(title: str, description: str, active: str, body: str, json_ld: li
   <div class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
 {ppg_widgets_html()}
   </div>
+{another_story_embed()}
 {footer_html(prefix if prefix else "./")}
 {ppg_widgets_script()}
 </body>
@@ -2017,9 +2055,9 @@ Independent Board site for local construction integrity in **Edmonds** and great
 
 ## Live site
 
-**https://theboardofprojectstewardship.github.io/-The-Board-of-Project-Stewardship/**
+**https://boardofprojectstewardship.com/**
 
-(Note the leading hyphen in the repository name — use relative links in the site.)
+Custom domain on GitHub Pages (apex). Relative nav links stay relative so the site works on both the domain and preview hosts.
 
 ## Public URLs
 
@@ -2077,6 +2115,49 @@ Rankings researched / updated **{YEAR}**.
     (SITE_DIR / "README.md").write_text(text, encoding="utf-8")
 
 
+def write_robots() -> None:
+    (SITE_DIR / "robots.txt").write_text(
+        "User-agent: *\nAllow: /\n\nSitemap: https://boardofprojectstewardship.com/sitemap.xml\n",
+        encoding="utf-8",
+    )
+
+
+def write_sitemap(posts: list[dict]) -> None:
+    lastmod = "2026-08-23"
+    ranking = [
+        "additions.html",
+        "custom-homes.html",
+        "edmonds-custom-homes.html",
+        "kitchen.html",
+        "bathrooms.html",
+        "commercial.html",
+        "spec-homes.html",
+        "trades.html",
+    ] + [f"{slug}.html" for slug, *_ in TRADES]
+    blog_pages = ["blog.html"] + [f"posts/{p['out_name']}" for p in posts]
+
+    def url_entry(loc: str, priority: str) -> str:
+        return (
+            "  <url>\n"
+            f"    <loc>{loc}</loc>\n"
+            f"    <lastmod>{lastmod}</lastmod>\n"
+            "    <changefreq>weekly</changefreq>\n"
+            f"    <priority>{priority}</priority>\n"
+            "  </url>"
+        )
+
+    entries = [url_entry(BASE_URL, "1.0")]
+    entries += [url_entry(f"{BASE_URL}{path}", "0.8") for path in ranking]
+    entries += [url_entry(f"{BASE_URL}{path}", "0.6") for path in blog_pages]
+    xml = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        + "\n".join(entries)
+        + "\n</urlset>\n"
+    )
+    (SITE_DIR / "sitemap.xml").write_text(xml, encoding="utf-8")
+
+
 def main() -> None:
     additions_path = WORKSPACE / "top30-addition-contractors.md"
     kb_path = WORKSPACE / "bops-research-kitchen-bath.md"
@@ -2129,6 +2210,8 @@ def main() -> None:
     (SITE_DIR / "blog.html").write_text(build_blog_index(posts), encoding="utf-8")
 
     write_readme(posts)
+    write_robots()
+    write_sitemap(posts)
     leftover_methodology = SITE_DIR / "methodology.md"
     if leftover_methodology.exists():
         leftover_methodology.unlink()
@@ -2145,6 +2228,7 @@ def main() -> None:
     for slug, _, _, _ in TRADES:
         print(f"  {slug}: {len(trades_data.get(slug, []))} firms")
     print(f"  blog posts: {len(posts)}")
+    print("  robots.txt + sitemap.xml written (CNAME left untouched)")
     print("Done.")
 
 
