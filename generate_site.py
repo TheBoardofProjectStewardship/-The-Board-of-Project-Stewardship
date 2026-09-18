@@ -654,9 +654,8 @@ def board_organization_website_ld() -> dict:
                 "alternateName": "BOPS",
                 "url": "https://boardofprojectstewardship.com/",
                 "description": (
-                    "Owned editorial construction standards hub and contractor directories "
-                    "for Edmonds and the greater King and Snohomish County market. "
-                    "Associated with Pacific Pro Group; not independent journalism."
+                    "Construction standards hub and contractor directories "
+                    "for Edmonds and the greater King and Snohomish County market."
                 ),
                 "areaServed": [
                     {
@@ -1253,7 +1252,7 @@ def build_about() -> str:
     body = f"""{hero(
         f"Independent · Edmonds / King &amp; Snohomish · {YEAR}",
         'The Board of Project Stewardship<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">A Regulatory Filter for Local Construction Integrity</span>',
-        "Most directories are marketing platforms. We are an owned editorial standards hub associated with Pacific Pro Group — a regulatory filter focused on local construction integrity in Edmonds and the greater King &amp; Snohomish market.",
+        "Most directories are marketing platforms. We are a construction standards hub and contractor directory for Edmonds and the greater King and Snohomish County market.",
         ["Independent review", "Local standards", "Project continuity"],
         image_rel=_hero_rel if _hero_rel and asset_exists(_hero_rel) else None,
         image_alt=_hero_alt,
@@ -1348,7 +1347,7 @@ def build_about() -> str:
 
     return page_shell(
         "The Board of Project Stewardship | Edmonds Construction Standards",
-        "Most directories are marketing platforms. The Board of Project Stewardship is an owned editorial standards hub associated with Pacific Pro Group — a regulatory filter focused on local construction integrity in Edmonds and the greater King & Snohomish market.",
+        "Most directories are marketing platforms. The Board of Project Stewardship is a construction standards hub and contractor directory for Edmonds and the greater King and Snohomish County market.",
         "about",
         body,
         canonical=BASE_URL,
