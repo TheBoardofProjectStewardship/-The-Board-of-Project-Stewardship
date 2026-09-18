@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Board of Project Stewardship">
+  <rect width="32" height="32" rx="6" fill="#0a0a0a"/>
+  <circle cx="16" cy="16" r="10" fill="none" stroke="#4ade80" stroke-width="1.5"/>
+  <circle cx="16" cy="16" r="2" fill="#4ade80"/>
+  <path d="M16 6 L17.2 14.2 L16 13.2 L14.8 14.2 Z" fill="#4ade80"/>
+  <path d="M16 26 L14.8 17.8 L16 18.8 L17.2 17.8 Z" fill="#166534"/>
+  <path d="M6 16 L14.2 14.8 L13.2 16 L14.2 17.2 Z" fill="#166534"/>
+  <path d="M26 16 L17.8 17.2 L18.8 16 L17.8 14.8 Z" fill="#4ade80"/>
+</svg>
