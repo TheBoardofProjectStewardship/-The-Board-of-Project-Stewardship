@@ -46,7 +46,7 @@ Body Markdown follows the second `---`. Author on generated HTML is always **Boa
 
 GitHub Pages serves from the repository root (or configured Pages branch). Relative links must keep working under:
 
-`https://theboardofprojectstewardship.github.io/-The-Board-of-Project-Stewardship/`
+`https://boardofprojectstewardship.com/`
 
 ## Content rules for public pages
 
@@ -59,3 +59,9 @@ GitHub Pages serves from the repository root (or configured Pages branch). Relat
 ## Cadence
 
 Target **one useful post per day** when the publishing agent is scheduled. Skip a day rather than publishing thin duplicate content.
+
+## Community submissions (live)
+
+- Public contribute page: `write.html` (Netlify form `blog-submission`).
+- Magazine index: `blog.html` + `blog.js` + `posts.json`.
+- Submissions are **review-only** until Alex/Steward publish a Markdown post and regenerate.
