@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+assets/images/**/*.webp
+assets/images/**/*.png
+assets/images/**/*.jpg
+assets/images/**/*.jpeg
+assets/icons/*.png
+assets/icons/*.ico
+!assets/icons/*.svg
+assets-b64/
