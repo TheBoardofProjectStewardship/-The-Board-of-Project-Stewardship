@@ -1232,7 +1232,7 @@ def build_about() -> str:
     body = f"""{hero(
         f"Independent · Edmonds / King &amp; Snohomish · {YEAR}",
         'The Board of Project Stewardship<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">A Regulatory Filter for Local Construction Integrity</span>',
-        "Most directories are marketing platforms. We are a regulatory filter — an independent body focused on local construction integrity in Edmonds and the greater King &amp; Snohomish market.",
+        "Most directories are marketing platforms. We are an owned editorial standards hub associated with Pacific Pro Group — a regulatory filter focused on local construction integrity in Edmonds and the greater King &amp; Snohomish market.",
         ["Independent review", "Local standards", "Project continuity"],
         image_rel=_hero_rel if _hero_rel and asset_exists(_hero_rel) else None,
         image_alt=_hero_alt,
@@ -1327,7 +1327,7 @@ def build_about() -> str:
 
     return page_shell(
         "The Board of Project Stewardship | Edmonds Construction Standards",
-        "Most directories are marketing platforms. The Board of Project Stewardship is a regulatory filter — an independent body focused on local construction integrity in Edmonds and the greater King & Snohomish market.",
+        "Most directories are marketing platforms. The Board of Project Stewardship is an owned editorial standards hub associated with Pacific Pro Group — a regulatory filter focused on local construction integrity in Edmonds and the greater King & Snohomish market.",
         "about",
         body,
         canonical=BASE_URL,
