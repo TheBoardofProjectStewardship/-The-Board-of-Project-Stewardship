@@ -38,8 +38,48 @@ Base: `https://boardofprojectstewardship.com/`
 | `insulation.html` | Insulation directory |
 | `excavation.html` | Excavation / Site Work directory |
 | `blog.html` | Blog index |
+| `posts/2026-09-17-bathroom-remodel-magnolia-wa.html` | Bathroom Remodel Magnolia WA |
+| `posts/2026-09-16-kitchen-remodel-magnolia-seattle.html` | Kitchen Remodel Magnolia Seattle |
+| `posts/2026-09-15-home-addition-edmonds-wa.html` | Home Addition Edmonds WA |
+| `posts/2026-09-14-stay-in-home-second-story-edmonds.html` | Stay-in-Home Second Story Edmonds |
+| `posts/2026-09-13-bathroom-remodel-edmonds-wa.html` | Bathroom Remodel Edmonds WA |
+| `posts/2026-09-12-kitchen-remodel-shoreline-wa.html` | Kitchen Remodel Shoreline WA |
+| `posts/2026-09-11-bathroom-remodel-shoreline-wa.html` | Bathroom Remodel Shoreline WA |
+| `posts/2026-09-10-home-addition-shoreline-wa.html` | Home Addition Shoreline WA |
+| `posts/2026-09-09-kitchen-remodel-lynnwood-wa.html` | Kitchen Remodel Lynnwood WA |
+| `posts/2026-09-08-bathroom-remodel-lynnwood-wa.html` | Bathroom Remodel Lynnwood WA |
+| `posts/2026-09-07-adu-planning-edmonds-wa.html` | ADU Planning Edmonds WA |
+| `posts/2026-09-06-seattle-bathroom-remodel-permits.html` | Seattle Bathroom Remodel Permits |
+| `posts/2026-09-05-hire-bathroom-remodeler-king-snohomish.html` | How to Hire a Bathroom Remodeler in King & Snohomish Counties |
+| `posts/2026-09-04-kitchen-remodel-ballard-seattle.html` | Kitchen Remodel Ballard Seattle |
+| `posts/2026-09-03-bathroom-remodel-ballard-seattle.html` | Bathroom Remodel Ballard Seattle |
+| `posts/2026-09-02-edmonds-custom-home-planning.html` | Edmonds Custom Home Planning |
+| `posts/2026-09-01-hiring-tile-contractor-edmonds.html` | Hiring a Tile Contractor Edmonds |
+| `posts/2026-08-31-magnolia-plumbing-remodel-considerations.html` | Magnolia Plumbing Remodel Considerations |
+| `posts/2026-08-30-coastal-moisture-primary-bath-edmonds.html` | Coastal Moisture Primary Bath Edmonds |
+| `posts/2026-08-29-kitchen-addition-vs-remodel-edmonds.html` | Kitchen Addition vs Remodel Edmonds |
+| `posts/2026-08-28-bathroom-remodel-mukilteo-wa.html` | Bathroom Remodel Mukilteo WA |
+| `posts/2026-08-27-kitchen-remodel-mukilteo-wa.html` | Kitchen Remodel Mukilteo WA |
+| `posts/2026-08-26-home-addition-lake-forest-park.html` | Home Addition Lake Forest Park |
+| `posts/2026-08-25-bathroom-remodel-lake-forest-park.html` | Bathroom Remodel Lake Forest Park |
+| `posts/2026-08-24-second-story-addition-shoreline.html` | Second Story Addition Shoreline |
+| `posts/2026-08-23-kitchen-remodel-mountlake-terrace.html` | Kitchen Remodel Mountlake Terrace |
+| `posts/2026-08-22-bathroom-remodel-queen-anne-seattle.html` | Bathroom Remodel Queen Anne Seattle |
+| `posts/2026-08-21-kitchen-remodel-queen-anne-seattle.html` | Kitchen Remodel Queen Anne Seattle |
+| `posts/2026-08-20-home-addition-bothell-wa.html` | Home Addition Bothell WA |
+| `posts/2026-08-19-eastside-vs-coastal-bath-remodel.html` | Eastside vs Coastal Bath Remodel Differences |
+| `posts/2026-08-18-pnw-bathroom-waterproofing-essentials.html` | PNW Bathroom Waterproofing Essentials |
+| `posts/2026-08-17-heated-floors-edmonds-bathrooms.html` | Heated Floors in Edmonds Bathrooms |
+| `posts/2026-08-16-walk-in-shower-remodel-magnolia.html` | Walk-In Shower Remodel Magnolia |
+| `posts/2026-08-15-primary-suite-addition-edmonds.html` | Primary Suite Addition Edmonds |
+| `posts/2026-08-14-kitchen-remodel-greenwood-seattle.html` | Kitchen Remodel Greenwood Seattle |
+| `posts/2026-08-13-bathroom-remodel-phinney-ridge.html` | Bathroom Remodel Phinney Ridge |
 | `posts/2026-08-12-edmonds-home-addition-permit-basics.html` | Edmonds Home Addition Permit Basics |
 | `posts/2026-08-12-hire-kitchen-remodeler-king-snohomish.html` | How to Hire a Kitchen Remodeler in King & Snohomish Counties |
+| `posts/2026-08-11-hire-design-build-edmonds.html` | How to Hire a Design-Build Firm Edmonds |
+| `posts/2026-08-10-electrical-upgrades-bathroom-remodels-wa.html` | Electrical Upgrades for Bathroom Remodels WA |
+| `posts/2026-08-09-second-story-vs-teardown-edmonds.html` | Second Story vs Teardown Edmonds |
+| `posts/2026-08-08-another-story-method-weatherproof-first.html` | Another Story Method Weatherproof First |
 | `POSTING.md` | Publishing agent workflow (ops) |
 | `generate_site.py` | Site generator |
 

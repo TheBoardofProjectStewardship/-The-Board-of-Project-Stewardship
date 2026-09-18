@@ -66,3 +66,10 @@ Target **one useful post per day** when the publishing agent is scheduled. Skip 
 - Public contribute page: `write.html` (Netlify form `blog-submission`).
 - Magazine index: `blog.html` + `blog.js` + `posts.json`.
 - Submissions are **review-only** until Alex/Steward publish a Markdown post and regenerate.
+
+
+## Daily cadence (Alex 2026-09-17)
+
+- **Every day at 10:00 AM PT:** Nexus routine `BOPS daily blog post` writes one original post and ships to this site.
+- Ghost remains **OFF**. Publish target is Board of Project Stewardship only.
+- Skip a day rather than ship thin duplicate content.

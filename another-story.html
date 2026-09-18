@@ -5,33 +5,168 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Another Story SEA — second-story concept studio from Pacific Pro Group. AI-assisted design preview for Edmonds and North Sound homes.">
   <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Another Story SEA | Board of Project Stewardship">
+  <meta property="og:description" content="Another Story SEA — second-story concept studio from Pacific Pro Group. AI-assisted design preview for Edmonds and North Sound homes.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://boardofprojectstewardship.com/another-story.html">
+  <meta property="og:image" content="https://d8j0ntlcm91z4.cloudfront.net/user_3J0uIieL1TPm5gGUzNTRHKx1f2R/hf_20260918_035328_87607fe4-aa7b-4976-b596-36d64687932b.png">
+  <meta property="og:image:alt" content="Board of Project Stewardship">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Another Story SEA | Board of Project Stewardship">
+  <meta name="twitter:description" content="Another Story SEA — second-story concept studio from Pacific Pro Group. AI-assisted design preview for Edmonds and North Sound homes.">
+  <meta name="twitter:image" content="https://d8j0ntlcm91z4.cloudfront.net/user_3J0uIieL1TPm5gGUzNTRHKx1f2R/hf_20260918_035328_87607fe4-aa7b-4976-b596-36d64687932b.png">
+  <link rel="canonical" href="https://boardofprojectstewardship.com/another-story.html">
+  <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="./assets/icons/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png">
   <title>Another Story SEA | Board of Project Stewardship</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>tailwind.config={darkMode:"class",theme:{extend:{colors:{obsidian:"#0a0a0a",charcoal:"#1a1a1a",primary:"#166534",secondary:"#4ade80"}}}}</script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#0a0a0a',
+            charcoal: '#1a1a1a',
+            'dark-gray': '#2a2a2a',
+            primary: '#166534',
+            secondary: '#4ade80',
+          },
+          boxShadow: {
+            'glow-sleek': '0 0 15px -5px rgba(22, 101, 52, 0.3)',
+          }
+        }
+      }
+    }
+  </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
-  <style>body{font-family:Inter,system-ui,sans-serif;background:#0a0a0a;color:#e0e0e0}</style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; background-color: #0a0a0a; color: #e0e0e0; }
+    .bg-grid-pattern {
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .card-hover { transition: transform 0.25s ease, border-color 0.25s ease; }
+    .card-hover:hover { transform: translateY(-3px); }
+    .rank-badge {
+      min-width: 2.75rem; height: 2.75rem;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 0.5rem; font-weight: 800; font-size: 0.95rem;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: #94a3b8;
+    }
+    .prose-bops a { color: #4ade80; text-decoration: underline; }
+    .prose-bops h2 { font-size: 1.5rem; font-weight: 800; color: white; margin: 1.75rem 0 0.75rem; }
+    .prose-bops h3 { font-size: 1.15rem; font-weight: 700; color: white; margin: 1.25rem 0 0.5rem; }
+    .prose-bops p, .prose-bops li { color: #cbd5e1; font-weight: 300; line-height: 1.7; margin-bottom: 0.85rem; }
+    .prose-bops ul { list-style: disc; padding-left: 1.25rem; margin-bottom: 1rem; }
+    .prose-bops ol { list-style: decimal; padding-left: 1.25rem; margin-bottom: 1rem; }
+    .prose-bops strong { color: #fff; font-weight: 600; }
+    #tools input, #tools select, #tools textarea {
+      color-scheme: dark;
+    }
+    #tools input::placeholder, #tools textarea::placeholder { color: #64748b; }
+    #calc-result { letter-spacing: -0.02em; }
+  </style>
 </head>
-<body class="min-h-screen antialiased">
+<body class="bg-obsidian bg-grid-pattern min-h-screen antialiased">
   <nav class="bg-charcoal/80 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
-      <a href="./index.html" class="flex items-center gap-2 no-underline min-w-0">
-        <i class="fas fa-compass-drafting text-secondary text-xl"></i>
-        <span class="font-black text-sm sm:text-base tracking-wider text-white truncate">The Board of Project Stewardship</span>
-      </a>
-      <a href="./blog.html" class="text-xs font-bold uppercase tracking-widest text-slate-300 hover:text-secondary">Blog</a>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16 items-center gap-4">
+        <a href="./index.html" class="flex items-center gap-2 no-underline min-w-0">
+          <i class="fas fa-compass-drafting text-secondary text-xl shrink-0"></i>
+          <span class="font-black text-sm sm:text-base tracking-wider text-white truncate">The Board of Project Stewardship</span>
+        </a>
+        <div class="hidden md:flex items-center gap-6 lg:gap-8">
+          <a href="./index.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest transition">About</a><a href="./additions.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest transition">Additions</a><a href="./custom-homes.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest transition">Custom Homes</a><a href="./edmonds-custom-homes.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest transition">Edmonds</a><a href="./kitchen.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest transition">Kitchen</a><a href="./bathrooms.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest transition">Bathrooms</a><a href="./commercial.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest transition">Commercial</a><a href="./spec-homes.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest transition">Spec Homes</a><a href="./trades.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest transition">Trades</a><a href="./blog.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest transition">Blog</a><a href="./another-story.html" class="text-secondary font-medium text-xs uppercase tracking-widest transition">Another Story</a>
+        </div>
+      </div>
+      <div class="md:hidden flex flex-wrap gap-x-4 gap-y-2 pb-3">
+          <a href="./index.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest transition">About</a><a href="./additions.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest transition">Additions</a><a href="./custom-homes.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest transition">Custom Homes</a><a href="./edmonds-custom-homes.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest transition">Edmonds</a><a href="./kitchen.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest transition">Kitchen</a><a href="./bathrooms.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest transition">Bathrooms</a><a href="./commercial.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest transition">Commercial</a><a href="./spec-homes.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest transition">Spec Homes</a><a href="./trades.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest transition">Trades</a><a href="./blog.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest transition">Blog</a><a href="./another-story.html" class="text-secondary font-medium text-xs uppercase tracking-widest transition">Another Story</a>
+      </div>
     </div>
   </nav>
-  <header class="max-w-6xl mx-auto px-4 pt-10 pb-6">
+  <header class="max-w-6xl mx-auto px-4 pt-10 pb-2">
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Pacific Pro Group · Concept studio</p>
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Another Story SEA</h1>
-    <p class="text-slate-400 font-light max-w-2xl leading-relaxed">Same home. Another story. Upload a photo, shape a second-story concept, and review before sharing. AI-assisted preview — not a bid or permit document.</p>
+    <p class="text-slate-400 font-light max-w-2xl leading-relaxed mb-2">Same home. Another story. Upload a photo, shape a second-story concept, and review before sharing. AI-assisted preview — not a bid or permit document.</p>
   </header>
-  <main class="max-w-6xl mx-auto px-4 pb-16">
-    <iframe id="another-story-sea" src="/tools/another-story/index.html" title="Another Story SEA — second-story design preview" loading="lazy" style="display:block;width:100%;height:1900px;border:0;border-radius:18px;background:#fff9f2;"></iframe>
+
+  <div class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
+    <section id="tools" class="mb-6">
+      <div class="mb-8 border-b border-white/10 pb-4">
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Planning Tools</span>
+        <h2 class="text-3xl font-black text-white tracking-tight">Calculator · Partners · Service Region</h2>
+      </div>
+      <div class="grid lg:grid-cols-3 gap-4">
+        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
+          <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-calculator text-secondary"></i> Project Calculator</h3>
+          <p class="text-xs text-slate-500 mb-4 font-light">Illustrative Board planning ballpark — not a Pacific Pro Group quote or bid. Uses sq&nbsp;ft × finish level + base coordination fee; obtain written estimates.</p>
+          <label class="block text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-1" for="calc-sqft">Square footage</label>
+          <input id="calc-sqft" type="number" min="500" step="50" value="2500" class="w-full mb-3 bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
+          <label class="block text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-1" for="calc-finish">Finish level</label>
+          <select id="calc-finish" class="w-full mb-4 bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
+            <option value="275">Essential — $275 / sq ft</option>
+            <option value="350" selected>Standard — $350 / sq ft</option>
+            <option value="450">Luxury — $450 / sq ft</option>
+            <option value="550">Estate — $550 / sq ft</option>
+          </select>
+          <p class="text-xs text-slate-500 mb-2">Base coordination fee: <span class="text-slate-300">$25,000</span></p>
+          <div class="bg-white/5 border border-white/10 rounded-lg px-4 py-3">
+            <div class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">Estimated range</div>
+            <div id="calc-result" class="text-2xl font-black text-secondary mt-1">—</div>
+          </div>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
+          <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-handshake text-secondary"></i> Partner Network</h3>
+          <p class="text-xs text-slate-500 mb-4 font-light">Request an introduction to Pacific Pro Group or ask about Edmonds custom home capacity.</p>
+          <form id="partner-form" action="https://pacificprogroup.com/" method="get" target="_blank" class="space-y-3">
+            <input type="text" name="ref_name" required placeholder="Your name" class="w-full bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
+            <input type="email" name="ref_email" required placeholder="Email" class="w-full bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
+            <input type="text" name="ref_city" placeholder="City / neighborhood" class="w-full bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
+            <textarea name="ref_notes" rows="3" placeholder="Project notes (lot, timeline, sq ft)" class="w-full bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary"></textarea>
+            <button type="submit" class="w-full bg-primary text-white py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs">Continue to Pacific Pro Group</button>
+          </form>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
+          <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-location-dot text-secondary"></i> Service Region</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed mb-4">Primary coverage for this Edmonds directory:</p>
+          <ul class="space-y-2 text-sm text-slate-300 font-light mb-5">
+            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>Edmonds &amp; the Edmonds Bowl</li>
+            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>Shoreline · Lynnwood · Mukilteo · Mountlake Terrace</li>
+            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>South Snohomish &amp; North King County</li>
+            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>Greater Seattle metro (by firm)</li>
+          </ul>
+          <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-secondary hover:underline">
+            Confirm PPG service area <i class="fas fa-arrow-right text-[10px]"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+  <section id="another-story-sea-embed" class="max-w-6xl mx-auto px-4 py-12 relative z-20 border-t border-white/5">
+    <div class="mb-6 overflow-hidden rounded-xl border border-white/10">
+      <img src="./assets/images/another-story-banner.webp" alt="Conceptual before-and-after second-story idea for Another Story SEA" class="w-full h-48 sm:h-64 object-cover" width="1200" height="630" loading="eager">
+    </div>
+    <div class="mb-5">
+      <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Pacific Pro Group · Concept studio</p>
+      <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-2">Another Story SEA</h2>
+      <p class="text-sm text-slate-400 font-light max-w-3xl leading-relaxed">Explore a second-story concept on your own photo. AI-assisted design preview — not a bid, permit, or construction document.</p>
+    </div>
+    <iframe
+      id="another-story-sea"
+      src="/tools/another-story/index.html"
+      title="Another Story SEA — second-story design preview"
+      loading="lazy"
+      style="display:block;width:100%;height:1900px;border:0;border-radius:18px;background:#fff9f2;"
+    ></iframe>
     <script>
     (() => {
       const frame = document.getElementById('another-story-sea');
+      if (!frame) return;
       const trustedOrigin = new URL(frame.src, window.location.href).origin;
       window.addEventListener('message', (event) => {
         if (event.origin !== trustedOrigin || event.source !== frame.contentWindow) return;
@@ -43,10 +178,60 @@
       });
     })();
     </script>
-  </main>
-  <footer class="border-t border-white/5 py-8 text-center text-xs text-slate-600">
-    <a href="./index.html" class="text-secondary hover:underline">← Back to Board home</a>
-    · &copy; 2026 The Board of Project Stewardship
+  </section>
+
+  <footer class="bg-obsidian py-14 text-sm border-t border-white/5">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-10 text-slate-400">
+      <div>
+        <div class="flex items-center mb-4 gap-2">
+          <i class="fas fa-compass-drafting text-secondary"></i>
+          <span class="font-black text-base tracking-wider text-white">The Board of Project Stewardship</span>
+        </div>
+        <p class="font-light leading-relaxed text-sm">Editorial directories of verified remodel, addition, and trade contractors serving Edmonds and King &amp; Snohomish Counties, WA. Updated 2026.</p>
+      </div>
+      <div>
+        <h4 class="text-white font-bold text-xs uppercase tracking-widest mb-4">Explore</h4>
+        <ul class="space-y-2 font-light text-sm">
+          <li><a href="./index.html" class="hover:text-secondary transition">About</a></li>
+          <li><a href="./additions.html" class="hover:text-secondary transition">Additions Top 30</a></li>
+          <li><a href="./custom-homes.html" class="hover:text-secondary transition">Custom homes</a></li>
+          <li><a href="./edmonds-custom-homes.html" class="hover:text-secondary transition">Edmonds custom homes</a></li>
+          <li><a href="./kitchen.html" class="hover:text-secondary transition">Kitchen remodelers</a></li>
+          <li><a href="./bathrooms.html" class="hover:text-secondary transition">Bathroom remodelers</a></li>
+          <li><a href="./commercial.html" class="hover:text-secondary transition">Commercial GCs</a></li>
+          <li><a href="./spec-homes.html" class="hover:text-secondary transition">Spec homes</a></li>
+          <li><a href="./trades.html" class="hover:text-secondary transition">Trade contractors</a></li>
+          <li><a href="./blog.html" class="hover:text-secondary transition">Blog</a></li>
+          <li><a href="./another-story.html" class="hover:text-secondary transition">Another Story SEA</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-bold text-xs uppercase tracking-widest mb-4">Disclaimer</h4>
+        <p class="mb-3 font-light leading-relaxed text-sm">Listing is not an endorsement of quality. Verify licenses, insurance, bonds, and references before hiring. Membership in trade associations does not guarantee outcomes. Re-check status at <a href="https://secure.lni.wa.gov/verify/" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>.</p>
+        <p class="text-xs text-slate-600">&copy; 2026 The Board of Project Stewardship</p>
+      </div>
+    </div>
   </footer>
+  <script>
+  (function () {
+    var BASE_FEE = 25000;
+    function calc() {
+      var sqEl = document.getElementById('calc-sqft');
+      var finishEl = document.getElementById('calc-finish');
+      var el = document.getElementById('calc-result');
+      if (!sqEl || !finishEl || !el) return;
+      var sq = parseFloat(sqEl.value) || 0;
+      var rate = parseFloat(finishEl.value) || 0;
+      var total = sq * rate + BASE_FEE;
+      if (!sq || !rate) { el.textContent = '—'; return; }
+      el.textContent = total.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+    }
+    var sqft = document.getElementById('calc-sqft');
+    var finish = document.getElementById('calc-finish');
+    if (sqft) sqft.addEventListener('input', calc);
+    if (finish) finish.addEventListener('change', calc);
+    calc();
+  })();
+  </script>
 </body>
 </html>

@@ -15,6 +15,36 @@ BASE_URL = SITE_ORIGIN + "/"
 LNI_URL = "https://secure.lni.wa.gov/verify/"
 YEAR = "2026"
 AUTHOR = "Board of Project Stewardship Editorial"
+OG_DEFAULT = f"{SITE_ORIGIN}/assets/images/og-default.webp"
+OG_DEFAULT_REL = "assets/images/og-default.webp"
+
+# Directory page -> hero image (relative to site root)
+DIR_HERO_IMAGES = {
+    "about": ("assets/images/home-hero.webp", "Pacific Northwest home exterior suggesting careful remodel stewardship in Edmonds"),
+    "additions": ("assets/images/dir-additions-hero.webp", "Home with a clean second-story addition in the Pacific Northwest"),
+    "kitchen": ("assets/images/dir-kitchen-hero.webp", "Remodeled Pacific Northwest kitchen with island and garden window"),
+    "bathrooms": ("assets/images/dir-bathrooms-hero.webp", "Walk-in shower bathroom remodel with careful waterproofing details"),
+    "custom-homes": ("assets/images/dir-custom-homes-hero.webp", "Contemporary custom home exterior in a forested Pacific Northwest setting"),
+    "edmonds": ("assets/images/dir-edmonds-custom-hero.webp", "Custom home on a hillside with soft Puget Sound light"),
+    "blog": ("assets/images/blog-featured.webp", "Editorial workspace with blueprints suggesting project stewardship guides"),
+    "story": ("assets/images/another-story-banner.webp", "Conceptual before-and-after second-story idea for Another Story SEA"),
+}
+
+# Category -> optional post hero fallback (directory heroes)
+CATEGORY_HERO_FALLBACK = {
+    "Bathrooms": "assets/images/dir-bathrooms-hero.webp",
+    "Kitchen": "assets/images/dir-kitchen-hero.webp",
+    "Additions": "assets/images/dir-additions-hero.webp",
+    "Guides": "assets/images/blog-featured.webp",
+    "Hiring Guides": "assets/images/blog-featured.webp",
+    "Permits": "assets/images/blog-featured.webp",
+}
+
+# Optional per-post hero files under assets/images/posts/ (stem match helpers)
+POST_HERO_ALIASES = {
+    "bathroom-remodel-magnolia-wa": "bath-magnolia-hero.webp",
+    "bathroom-remodel-edmonds-wa": "bath-edmonds-hero.webp",
+}
 
 PPG = {
     "name": "Pacific Pro Group",
@@ -320,6 +350,86 @@ def parse_trades(path: Path) -> dict[str, list[dict]]:
 
 # ---------- HTML helpers ----------
 
+def asset_exists(rel: str) -> bool:
+    return (SITE_DIR / rel).is_file()
+
+
+def load_cdn_map() -> dict[str, str]:
+    p = SITE_DIR / "assets" / "CDN-MAP.json"
+    if not p.is_file():
+        return {}
+    try:
+        import json as _json
+        data = _json.loads(p.read_text(encoding="utf-8"))
+        return {str(k).lstrip("./"): str(v) for k, v in data.items() if isinstance(v, str)}
+    except Exception:
+        return {}
+
+
+CDN_MAP = load_cdn_map()
+
+
+def abs_asset_url(rel: str) -> str:
+    rel = (rel or "").lstrip("./")
+    if rel in CDN_MAP:
+        return CDN_MAP[rel]
+    return f"{SITE_ORIGIN}/{rel}"
+
+
+def resolve_og_image(rel: str | None = None) -> str:
+    """Absolute OG image URL; fall back to site default when missing."""
+    if rel:
+        rel_n = rel.lstrip("./")
+        if rel_n in CDN_MAP:
+            return CDN_MAP[rel_n]
+        if asset_exists(rel_n):
+            return abs_asset_url(rel_n)
+    if OG_DEFAULT_REL in CDN_MAP:
+        return CDN_MAP[OG_DEFAULT_REL]
+    if asset_exists(OG_DEFAULT_REL):
+        return OG_DEFAULT
+    return OG_DEFAULT
+
+
+def prefix_asset(rel: str, prefix: str = "") -> str:
+    """Prefer CDN URL for photos so live deploys work before binary assets land in git."""
+    rel = (rel or "").lstrip("./")
+    if rel in CDN_MAP:
+        return CDN_MAP[rel]
+    if prefix:
+        return f"{prefix}{rel}"
+    return f"./{rel}"
+
+
+def resolve_post_hero(post: dict) -> str | None:
+    """Optional post hero under assets/images/posts/, else category fallback, else None."""
+    posts_dir = SITE_DIR / "assets" / "images" / "posts"
+    slug = post.get("slug", "")
+    candidates = []
+    alias = POST_HERO_ALIASES.get(slug)
+    if alias:
+        candidates.append(alias)
+    candidates.append(f"{slug}-hero.webp")
+    for name in candidates:
+        p = posts_dir / name
+        if p.is_file():
+            return f"assets/images/posts/{name}"
+    cat = post.get("category", "")
+    fb = CATEGORY_HERO_FALLBACK.get(cat)
+    if fb and asset_exists(fb):
+        return fb
+    return None
+
+
+def favicon_tags(prefix: str = "") -> str:
+    p = prefix or "./"
+    return (
+        f'  <link rel="icon" href="{p}assets/icons/favicon.svg" type="image/svg+xml">\n'
+        f'  <link rel="icon" href="{p}assets/icons/favicon.ico" sizes="any">\n'
+        f'  <link rel="apple-touch-icon" href="{p}assets/icons/apple-touch-icon.png">'
+    )
+
+
 def head_assets() -> str:
     return """  <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -455,21 +565,33 @@ def footer_html(prefix: str = "./") -> str:
 
 
 def another_story_embed() -> str:
-    """Full Another Story SEA tool iframe — hosted at /tools/another-story/."""
-    return """  <section id="another-story-sea-embed" class="max-w-6xl mx-auto px-4 py-12 relative z-20 border-t border-white/5">
-    <div class="mb-5">
-      <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Pacific Pro Group · Concept studio</p>
-      <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-2">Another Story SEA</h2>
-      <p class="text-sm text-slate-400 font-light max-w-3xl leading-relaxed">Explore a second-story concept on your own photo. AI-assisted design preview — not a bid, permit, or construction document.</p>
-    </div>
-    <iframe
-      id="another-story-sea"
-      src="/tools/another-story/index.html"
-      title="Another Story SEA — second-story design preview"
-      loading="lazy"
-      style="display:block;width:100%;height:1900px;border:0;border-radius:18px;background:#fff9f2;"
-    ></iframe>
-    <script>
+    """Full Another Story SEA tool iframe — ONLY on another-story.html."""
+    banner = ""
+    if asset_exists("assets/images/another-story-banner.webp"):
+        banner = (
+            '    <div class="mb-6 overflow-hidden rounded-xl border border-white/10">\n'
+            '      <img src="./assets/images/another-story-banner.webp" '
+            'alt="Conceptual before-and-after second-story idea for Another Story SEA" '
+            'class="w-full h-48 sm:h-64 object-cover" width="1200" height="630" loading="eager">\n'
+            '    </div>\n'
+        )
+    return (
+        '  <section id="another-story-sea-embed" class="max-w-6xl mx-auto px-4 py-12 relative z-20 border-t border-white/5">\n'
+        + banner
+        + '    <div class="mb-5">\n'
+        + '      <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Pacific Pro Group · Concept studio</p>\n'
+        + '      <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-2">Another Story SEA</h2>\n'
+        + '      <p class="text-sm text-slate-400 font-light max-w-3xl leading-relaxed">'
+        'Explore a second-story concept on your own photo. AI-assisted design preview — not a bid, permit, or construction document.</p>\n'
+        + '    </div>\n'
+        + '    <iframe\n'
+        + '      id="another-story-sea"\n'
+        + '      src="/tools/another-story/index.html"\n'
+        + '      title="Another Story SEA — second-story design preview"\n'
+        + '      loading="lazy"\n'
+        + '      style="display:block;width:100%;height:1900px;border:0;border-radius:18px;background:#fff9f2;"\n'
+        + '    ></iframe>\n'
+        + """    <script>
     (() => {
       const frame = document.getElementById('another-story-sea');
       if (!frame) return;
@@ -486,14 +608,67 @@ def another_story_embed() -> str:
     </script>
   </section>
 """
+    )
 
 
-def page_shell(title: str, description: str, active: str, body: str, json_ld: list | None = None, prefix: str = "", canonical: str = "", keywords: str = "") -> str:
+def another_story_cta(prefix: str = "") -> str:
+    """Compact CTA card linking to another-story.html — used on all pages except the tool host."""
+    href = f"{prefix}another-story.html" if prefix else "./another-story.html"
+    img = ""
+    if asset_exists("assets/images/another-story-banner.webp"):
+        src_img = prefix_asset("assets/images/another-story-banner.webp", prefix)
+        img = (
+            '      <div class="md:w-2/5 shrink-0">\n'
+            f'        <img src="{src_img}" alt="Conceptual before-and-after second-story idea for Another Story SEA" '
+            'class="w-full h-40 md:h-full object-cover" width="640" height="360" loading="lazy">\n'
+            '      </div>\n'
+        )
+    return f"""  <section id="another-story-cta" class="max-w-6xl mx-auto px-4 py-10 relative z-20 border-t border-white/5">
+    <div class="bg-charcoal border border-secondary/25 rounded-xl overflow-hidden flex flex-col md:flex-row card-hover">
+{img}      <div class="p-6 md:p-8 flex flex-col justify-center gap-3">
+        <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary">Pacific Pro Group · Concept studio</p>
+        <h2 class="text-2xl font-black text-white tracking-tight">Another Story SEA</h2>
+        <p class="text-sm text-slate-400 font-light leading-relaxed max-w-xl">Same home. Another story. Open the full concept studio to explore a second-story idea on your photo — AI-assisted preview, not a bid or permit document.</p>
+        <div>
+          <a href="{href}" class="inline-flex items-center gap-2 bg-primary text-white px-5 py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs shadow-glow-sleek">
+            Open Another Story <i class="fas fa-arrow-right text-[10px]"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+"""
+
+
+def page_shell(
+    title: str,
+    description: str,
+    active: str,
+    body: str,
+    json_ld: list | None = None,
+    prefix: str = "",
+    canonical: str = "",
+    keywords: str = "",
+    og_image: str | None = None,
+    og_type: str = "website",
+    include_story_embed: bool = False,
+    extra_head: str = "",
+    extra_scripts: str = "",
+) -> str:
     ld_blocks = ""
     for obj in json_ld or []:
         ld_blocks += f'  <script type="application/ld+json">\n{json.dumps(obj, indent=2)}\n  </script>\n'
     canon = canonical or (BASE_URL + ("" if active == "about" else f"{active}.html" if active != "blog" else "blog.html"))
     kw_tag = f'  <meta name="keywords" content="{esc(keywords)}">\n' if keywords else ""
+    # Resolve OG: prefer explicit rel path, else directory hero, else default
+    og_rel = og_image
+    if not og_rel and active in DIR_HERO_IMAGES:
+        cand, _alt = DIR_HERO_IMAGES[active]
+        if asset_exists(cand):
+            og_rel = cand
+    og_abs = resolve_og_image(og_rel)
+    story_block = another_story_embed() if include_story_embed else another_story_cta(prefix if prefix else "")
+    fav = favicon_tags(prefix if prefix else "./")
     return f"""<!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
@@ -503,24 +678,32 @@ def page_shell(title: str, description: str, active: str, body: str, json_ld: li
 {kw_tag}  <meta name="robots" content="index, follow">
   <meta property="og:title" content="{esc(title)}">
   <meta property="og:description" content="{esc(description)}">
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="{esc(og_type)}">
   <meta property="og:url" content="{esc(canon)}">
+  <meta property="og:image" content="{esc(og_abs)}">
+  <meta property="og:image:alt" content="Board of Project Stewardship">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{esc(title)}">
+  <meta name="twitter:description" content="{esc(description)}">
+  <meta name="twitter:image" content="{esc(og_abs)}">
   <link rel="canonical" href="{esc(canon)}">
+{fav}
   <title>{esc(title)}</title>
 {head_assets()}
-{ld_blocks}</head>
+{extra_head}{ld_blocks}</head>
 <body class="bg-obsidian bg-grid-pattern min-h-screen antialiased">
 {nav_html(active, prefix)}
 {body}
   <div class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
 {ppg_widgets_html()}
   </div>
-{another_story_embed()}
+{story_block}
 {footer_html(prefix if prefix else "./")}
 {ppg_widgets_script()}
-</body>
+{extra_scripts}</body>
 </html>
 """
+
 
 def firm_card(firm: dict, show_rank: bool = True) -> str:
     rank = firm.get("rank", "")
@@ -554,6 +737,24 @@ def firm_card(firm: dict, show_rank: bool = True) -> str:
 
 
 def ppg_featured(context_label: str, note: str | None = None) -> str:
+    photo_rel = "assets/images/ppg-featured-photo.webp"
+    if asset_exists(photo_rel):
+        left_visual = (
+            f'          <div class="h-48 w-full rounded-lg overflow-hidden border border-white/10 shadow-inner">\n'
+            f'            <img src="./{photo_rel}" alt="Design-build remodel jobsite in the Edmonds area" '
+            f'class="w-full h-full object-cover" width="800" height="600" loading="lazy">\n'
+            f'          </div>\n'
+        )
+    else:
+        left_visual = (
+            '          <div class="bg-white h-48 w-full rounded-lg flex items-center justify-center border border-white/10 shadow-inner">\n'
+            '            <div class="text-center px-4">\n'
+            '              <i class="fas fa-house-chimney text-5xl text-slate-800 mb-3"></i>\n'
+            '              <h3 class="text-slate-900 text-lg font-black uppercase tracking-widest leading-snug">Pacific Pro Group</h3>\n'
+            '              <p class="text-slate-500 text-[10px] font-bold uppercase tracking-widest mt-1">Edmonds, WA</p>\n'
+            '            </div>\n'
+            '          </div>\n'
+        )
     return f"""    <article class="bg-charcoal rounded-xl shadow-2xl border border-secondary/35 relative overflow-hidden mb-14 card-hover" id="pacific-pro-group">
       <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-primary"></div>
       <div class="bg-black/40 px-6 py-3 flex flex-wrap justify-between items-center gap-2 border-b border-white/5">
@@ -567,14 +768,7 @@ def ppg_featured(context_label: str, note: str | None = None) -> str:
       <div class="p-6 md:p-10 md:flex gap-10 relative">
         <div class="absolute -top-16 -left-16 w-72 h-72 bg-primary/10 blur-[90px] pointer-events-none rounded-full"></div>
         <div class="md:w-1/3 mb-8 md:mb-0 relative z-10 flex flex-col gap-4">
-          <div class="bg-white h-48 w-full rounded-lg flex items-center justify-center border border-white/10 shadow-inner">
-            <div class="text-center px-4">
-              <i class="fas fa-house-chimney text-5xl text-slate-800 mb-3"></i>
-              <h3 class="text-slate-900 text-lg font-black uppercase tracking-widest leading-snug">Pacific Pro Group</h3>
-              <p class="text-slate-500 text-[10px] font-bold uppercase tracking-widest mt-1">Edmonds, WA</p>
-            </div>
-          </div>
-          <div class="grid grid-cols-2 gap-2">
+{left_visual}          <div class="grid grid-cols-2 gap-2">
             <div class="bg-white/5 border border-white/10 rounded-lg px-3 py-3 text-center">
               <div class="text-2xl font-black text-secondary">{PPG['rating']}</div>
               <div class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mt-0.5">Star Rating</div>
@@ -720,11 +914,22 @@ def faq_section(faqs: list[tuple[str, str]], heading: str) -> str:
     </section>"""
 
 
-def hero(badge: str, title_html: str, subtitle: str, checks: list[str]) -> str:
+def hero(badge: str, title_html: str, subtitle: str, checks: list[str], image_rel: str | None = None, image_alt: str = "") -> str:
     check_html = "".join(
         f'<span class="flex items-center gap-2"><i class="fas fa-check text-secondary"></i> {esc(c)}</span>'
         for c in checks
     )
+    media = ""
+    if image_rel and asset_exists(image_rel):
+        src = prefix_asset(image_rel, "")
+        alt = esc(image_alt or "Board of Project Stewardship")
+        media = (
+            f'    <div class="max-w-5xl mx-auto px-4 relative z-10 mt-10">\n'
+            f'      <div class="overflow-hidden rounded-xl border border-white/10 shadow-2xl">\n'
+            f'        <img src="{src}" alt="{alt}" class="w-full h-52 sm:h-72 md:h-80 object-cover" width="1600" height="900" loading="eager">\n'
+            f'      </div>\n'
+            f'    </div>\n'
+        )
     return f"""  <header class="relative pt-20 pb-28 overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-b from-charcoal via-obsidian to-obsidian"></div>
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[420px] bg-primary/15 blur-[120px] rounded-full pointer-events-none"></div>
@@ -742,7 +947,7 @@ def hero(badge: str, title_html: str, subtitle: str, checks: list[str]) -> str:
         {check_html}
       </div>
     </div>
-  </header>"""
+{media}  </header>"""
 
 
 def how_we_rank_block(extra: str = "") -> str:
@@ -812,7 +1017,7 @@ def ppg_widgets_html() -> str:
       <div class="grid lg:grid-cols-3 gap-4">
         <div class="bg-charcoal border border-white/10 rounded-xl p-6">
           <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-calculator text-secondary"></i> Project Calculator</h3>
-          <p class="text-xs text-slate-500 mb-4 font-light">Rough ballpark only — not a bid. Uses sq&nbsp;ft × finish level + base coordination fee.</p>
+          <p class="text-xs text-slate-500 mb-4 font-light">Illustrative Board planning ballpark — not a Pacific Pro Group quote or bid. Uses sq&nbsp;ft × finish level + base coordination fee; obtain written estimates.</p>
           <label class="block text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-1" for="calc-sqft">Square footage</label>
           <input id="calc-sqft" type="number" min="500" step="50" value="2500" class="w-full mb-3 bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
           <label class="block text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-1" for="calc-finish">Finish level</label>
@@ -937,11 +1142,14 @@ def build_about() -> str:
             f'<a href="{href}" class="{cls} px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">{esc(label)}</a>'
         )
 
+    _hero_rel, _hero_alt = DIR_HERO_IMAGES.get("about", (None, ""))
     body = f"""{hero(
         f"Independent · Edmonds / King &amp; Snohomish · {YEAR}",
         'The Board of Project Stewardship<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">A Regulatory Filter for Local Construction Integrity</span>',
         "Most directories are marketing platforms. We are a regulatory filter — an independent body focused on local construction integrity in Edmonds and the greater King &amp; Snohomish market.",
         ["Independent review", "Local standards", "Project continuity"],
+        image_rel=_hero_rel if _hero_rel and asset_exists(_hero_rel) else None,
+        image_alt=_hero_alt,
     )}
   <main class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
     <section class="bg-charcoal rounded-xl p-8 md:p-10 border border-primary/25 mb-12 relative overflow-hidden">
@@ -1064,11 +1272,14 @@ def build_additions(additions: list[dict]) -> str:
         ),
     ]
     cards = "\n\n".join(firm_card(f) for f in additions)
+    _hero_rel, _hero_alt = DIR_HERO_IMAGES.get("additions", (None, ""))
     body = f"""{hero(
         f"Edmonds · King &amp; Snohomish Counties · Updated {YEAR}",
         'Top 30 Verified Home Addition Contractors<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">in Edmonds &amp; Nearby</span>',
         "An editorial ranking of rated and verified home addition / remodel firms serving Edmonds and greater King &amp; Snohomish Counties — curated by The Board of Project Stewardship.",
         ["MBAKS-informed", "Local service area", "Additions focus"],
+        image_rel=_hero_rel if _hero_rel and asset_exists(_hero_rel) else None,
+        image_alt=_hero_alt,
     )}
   <main class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
 {how_we_rank_block()}
@@ -1150,11 +1361,14 @@ def build_kb_page(kind: str, firms: list[dict]) -> str:
         ),
     ]
     cards = "\n\n".join(firm_card(f) for f in firms)
+    _hero_rel, _hero_alt = DIR_HERO_IMAGES.get(kind, (None, ""))
     body = f"""{hero(
         f"Edmonds · King &amp; Snohomish · Updated {YEAR}",
         f'Top {label} Contractors<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">Edmonds &amp; Nearby</span>',
         f"An editorial shortlist of {label.lower()} firms serving Edmonds and greater King &amp; Snohomish Counties — curated by The Board of Project Stewardship.",
         ["Local service area", "Remodel focus", "Editorial ranking"],
+        image_rel=_hero_rel if _hero_rel and asset_exists(_hero_rel) else None,
+        image_alt=_hero_alt,
     )}
   <main class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
 {how_we_rank_block(f' Also see <a href="./additions.html" class="text-secondary hover:underline">home additions</a> and <a href="./trades.html" class="text-secondary hover:underline">trade directories</a>.')}
@@ -1223,11 +1437,14 @@ def build_custom_homes(firms: list[dict]) -> str:
         "Edmonds-based design-build firm with a dedicated custom homes service page for lot-specific planning "
         "and build coordination across the North Sound."
     )
+    _hero_rel, _hero_alt = DIR_HERO_IMAGES.get("custom-homes", (None, ""))
     body = f"""{hero(
         f"Edmonds · King &amp; Snohomish · Updated {YEAR}",
         'Top Custom Home Builders<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">Edmonds &amp; Nearby</span>',
         "An editorial shortlist of custom home / design-build firms serving Edmonds and greater King &amp; Snohomish Counties — curated by The Board of Project Stewardship.",
         ["Custom / design-build", "Local service area", "Editorial ranking"],
+        image_rel=_hero_rel if _hero_rel and asset_exists(_hero_rel) else None,
+        image_alt=_hero_alt,
     )}
   <main class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
 {how_we_rank_block(' Also see <a href="./additions.html" class="text-secondary hover:underline">home additions</a>, <a href="./spec-homes.html" class="text-secondary hover:underline">spec homes</a>, and <a href="./commercial.html" class="text-secondary hover:underline">commercial</a>.')}
@@ -1555,11 +1772,14 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
   })();
   </script>"""
 
+    _hero_rel, _hero_alt = DIR_HERO_IMAGES.get("edmonds", (None, ""))
     body = f"""{hero(
         f"Edmonds Authority · Top 30 · Updated {YEAR}",
         'Edmonds Custom Home Builders<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">Top 30 Editorial Directory</span>',
         "An Edmonds-first ranking of custom home and design-build firms serving Edmonds and greater King &amp; Snohomish Counties — curated by The Board of Project Stewardship.",
         ["Top 30 rankings", "Permit guide", "Local planning tools"],
+        image_rel=_hero_rel if _hero_rel and asset_exists(_hero_rel) else None,
+        image_alt=_hero_alt,
     )}
   <main class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
 {how_we_rank_block(' Also see the regional <a href="./custom-homes.html" class="text-secondary hover:underline">Custom Homes</a> shortlist and <a href="./additions.html" class="text-secondary hover:underline">home additions</a> Top 30.')}
@@ -1979,24 +2199,59 @@ def load_posts() -> list[dict]:
 
 
 def build_blog_index(posts: list[dict]) -> str:
+    featured_rel, featured_alt = DIR_HERO_IMAGES.get("blog", (None, ""))
+    hero_img = featured_rel if featured_rel and asset_exists(featured_rel) else None
     cards = []
     for p in posts:
-        cards.append(f"""        <article class="bg-charcoal border border-white/5 hover:border-primary/30 p-6 rounded-xl card-hover">
+        cards.append(
+            f"""        <article class="bg-charcoal border border-white/5 hover:border-primary/30 p-6 rounded-xl card-hover" data-category="{esc(p['category'])}" data-slug="{esc(p['slug'])}">
           <div class="text-[11px] uppercase tracking-widest text-secondary font-bold mb-2">{esc(p['category'])} · {esc(p['date'])}</div>
           <h2 class="text-xl font-bold text-white mb-2"><a href="./posts/{esc(p['out_name'])}" class="hover:text-secondary transition">{esc(p['title'])}</a></h2>
           <p class="text-sm text-slate-400 font-light leading-relaxed mb-4">{esc(p['description'])}</p>
           <p class="text-xs text-slate-500">By {AUTHOR}</p>
-        </article>""")
+        </article>"""
+        )
+    featured_block = ""
+    if posts:
+        top = posts[0]
+        thumb = ""
+        if hero_img:
+            thumb = (
+                f'<div class="mb-5 overflow-hidden rounded-lg border border-white/10">'
+                f'<img src="{prefix_asset(hero_img)}" alt="{esc(featured_alt)}" '
+                f'class="w-full h-48 sm:h-64 object-cover" width="1600" height="686" loading="eager"></div>'
+            )
+        featured_block = f"""    <section class="mb-10 bg-charcoal border border-secondary/25 rounded-xl p-6 md:p-8">
+      <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-3">Featured</p>
+      {thumb}
+      <div class="text-[11px] uppercase tracking-widest text-secondary font-bold mb-2">{esc(top['category'])} · {esc(top['date'])}</div>
+      <h2 class="text-2xl sm:text-3xl font-black text-white mb-3"><a href="./posts/{esc(top['out_name'])}" class="hover:text-secondary transition">{esc(top['title'])}</a></h2>
+      <p class="text-slate-400 font-light leading-relaxed max-w-3xl">{esc(top['description'])}</p>
+    </section>
+"""
     body = f"""{hero(
         f"Guides &amp; local insights · {YEAR}",
         'Project Stewardship Blog<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">Edmonds &amp; North Sound</span>',
         "Practical hiring, permitting, and remodel guidance from Board of Project Stewardship Editorial.",
         ["Local SEO guides", "Hiring checklists", "Permit basics"],
+        image_rel=hero_img,
+        image_alt=featured_alt or "",
     )}
   <main class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
-    <div class="grid gap-4 mb-12">
+{featured_block}    <div class="flex flex-col sm:flex-row sm:items-center gap-3 mb-6">
+      <div id="blog-tags" class="flex flex-wrap gap-2"></div>
+      <div class="sm:ml-auto flex items-center gap-3 w-full sm:w-auto">
+        <label for="blog-search" class="sr-only">Search posts</label>
+        <input id="blog-search" type="search" placeholder="Search guides…" class="w-full sm:w-64 bg-black/40 border border-white/15 rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-secondary">
+        <span id="blog-count" class="text-xs text-slate-500 whitespace-nowrap"></span>
+      </div>
+    </div>
+    <p id="blog-feed-status" class="text-xs text-slate-600 mb-4"></p>
+    <div id="blog-grid" class="grid gap-4 mb-6">
 {chr(10).join(cards) if cards else '<p class="text-slate-400">No posts yet.</p>'}
     </div>
+    <p id="blog-empty" class="hidden text-slate-400 text-sm">No posts match your filters.</p>
+    <p class="text-sm text-slate-500 mt-8">Have a local guide to share? <a href="./write.html" class="text-secondary hover:underline">Contribute</a>.</p>
   </main>"""
     return page_shell(
         "Blog | Board of Project Stewardship",
@@ -2004,12 +2259,16 @@ def build_blog_index(posts: list[dict]) -> str:
         "blog",
         body,
         canonical=f"{BASE_URL}blog.html",
+        og_image=hero_img,
+        extra_scripts='  <script src="./blog.js" defer></script>\n',
     )
 
 
 def build_post_page(post: dict) -> str:
     article_html = md_to_html(post["body_md"])
     canon = f"{BASE_URL}posts/{post['out_name']}"
+    hero_rel = resolve_post_hero(post)
+    og_abs = resolve_og_image(hero_rel)
     ld = [{
         "@context": "https://schema.org",
         "@type": "Article",
@@ -2018,12 +2277,29 @@ def build_post_page(post: dict) -> str:
         "dateModified": post["date"],
         "description": post["description"],
         "author": {"@type": "Organization", "name": AUTHOR},
-        "publisher": {"@type": "Organization", "name": "The Board of Project Stewardship"},
+        "publisher": {
+            "@type": "Organization",
+            "name": "The Board of Project Stewardship",
+            "logo": {
+                "@type": "ImageObject",
+                "url": f"{SITE_ORIGIN}/assets/icons/apple-touch-icon.png",
+            },
+        },
+        "image": [og_abs],
         "mainEntityOfPage": canon,
     }]
+    hero_html = ""
+    if hero_rel and asset_exists(hero_rel):
+        src = prefix_asset(hero_rel, "../")
+        hero_html = (
+            f'    <div class="mb-8 overflow-hidden rounded-xl border border-white/10">\n'
+            f'      <img src="{src}" alt="{esc(post["title"])}" class="w-full h-52 sm:h-72 object-cover" '
+            f'width="1600" height="900" loading="eager">\n'
+            f'    </div>\n'
+        )
     body = f"""  <main class="max-w-3xl mx-auto px-4 py-16 relative z-20">
     <p class="text-sm text-slate-500 mb-6"><a href="../blog.html" class="text-secondary hover:underline">← Blog</a></p>
-    <div class="text-[11px] uppercase tracking-widest text-secondary font-bold mb-3">{esc(post['category'])} · {esc(post['date'])}</div>
+{hero_html}    <div class="text-[11px] uppercase tracking-widest text-secondary font-bold mb-3">{esc(post['category'])} · {esc(post['date'])}</div>
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-4">{esc(post['title'])}</h1>
     <p class="text-sm text-slate-500 mb-10">By {AUTHOR}</p>
     <div class="prose-bops">
@@ -2038,8 +2314,9 @@ def build_post_page(post: dict) -> str:
         ld,
         prefix="../",
         canonical=canon,
+        og_image=hero_rel,
+        og_type="article",
     )
-
 
 
 def write_readme(posts: list[dict]) -> None:
@@ -2123,7 +2400,6 @@ def write_robots() -> None:
 
 
 def write_sitemap(posts: list[dict]) -> None:
-    lastmod = "2026-08-23"
     ranking = [
         "additions.html",
         "custom-homes.html",
@@ -2134,9 +2410,15 @@ def write_sitemap(posts: list[dict]) -> None:
         "spec-homes.html",
         "trades.html",
     ] + [f"{slug}.html" for slug, *_ in TRADES]
-    blog_pages = ["blog.html"] + [f"posts/{p['out_name']}" for p in posts]
+    extras = ["blog.html", "write.html", "another-story.html"]
 
-    def url_entry(loc: str, priority: str) -> str:
+    def file_lastmod(rel: str) -> str:
+        p = SITE_DIR / rel
+        if p.is_file():
+            return datetime.fromtimestamp(p.stat().st_mtime).strftime("%Y-%m-%d")
+        return datetime.now().strftime("%Y-%m-%d")
+
+    def url_entry(loc: str, lastmod: str, priority: str) -> str:
         return (
             "  <url>\n"
             f"    <loc>{loc}</loc>\n"
@@ -2146,9 +2428,16 @@ def write_sitemap(posts: list[dict]) -> None:
             "  </url>"
         )
 
-    entries = [url_entry(BASE_URL, "1.0")]
-    entries += [url_entry(f"{BASE_URL}{path}", "0.8") for path in ranking]
-    entries += [url_entry(f"{BASE_URL}{path}", "0.6") for path in blog_pages]
+    entries = [url_entry(BASE_URL, file_lastmod("index.html"), "1.0")]
+    for path in ranking:
+        entries.append(url_entry(f"{BASE_URL}{path}", file_lastmod(path), "0.8"))
+    for path in extras:
+        entries.append(url_entry(f"{BASE_URL}{path}", file_lastmod(path), "0.6"))
+    for p in posts:
+        post_path = f"posts/{p['out_name']}"
+        lastmod = p.get("date") or file_lastmod(post_path)
+        entries.append(url_entry(f"{BASE_URL}{post_path}", lastmod, "0.6"))
+
     xml = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
@@ -2156,6 +2445,40 @@ def write_sitemap(posts: list[dict]) -> None:
         + "\n</urlset>\n"
     )
     (SITE_DIR / "sitemap.xml").write_text(xml, encoding="utf-8")
+
+
+def write_posts_json(posts: list[dict]) -> None:
+    payload = []
+    for p in posts:
+        payload.append({
+            "title": p["title"],
+            "date": p["date"],
+            "description": p["description"],
+            "category": p["category"],
+            "slug": p["slug"],
+            "path": f"./posts/{p['out_name']}",
+            "author": AUTHOR,
+        })
+    (SITE_DIR / "posts.json").write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+
+
+def build_another_story_page() -> str:
+    """Dedicated host page with full iframe embed."""
+    body = """  <header class="max-w-6xl mx-auto px-4 pt-10 pb-2">
+    <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Pacific Pro Group · Concept studio</p>
+    <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Another Story SEA</h1>
+    <p class="text-slate-400 font-light max-w-2xl leading-relaxed mb-2">Same home. Another story. Upload a photo, shape a second-story concept, and review before sharing. AI-assisted preview — not a bid or permit document.</p>
+  </header>
+"""
+    return page_shell(
+        "Another Story SEA | Board of Project Stewardship",
+        "Another Story SEA — second-story concept studio from Pacific Pro Group. AI-assisted design preview for Edmonds and North Sound homes.",
+        "story",
+        body,
+        canonical=f"{BASE_URL}another-story.html",
+        og_image="assets/images/another-story-banner.webp",
+        include_story_embed=True,
+    )
 
 
 def main() -> None:
@@ -2208,9 +2531,11 @@ def main() -> None:
     for post in posts:
         (posts_dir / post["out_name"]).write_text(build_post_page(post), encoding="utf-8")
     (SITE_DIR / "blog.html").write_text(build_blog_index(posts), encoding="utf-8")
+    (SITE_DIR / "another-story.html").write_text(build_another_story_page(), encoding="utf-8")
 
     write_readme(posts)
     write_robots()
+    write_posts_json(posts)
     write_sitemap(posts)
     leftover_methodology = SITE_DIR / "methodology.md"
     if leftover_methodology.exists():
@@ -2228,7 +2553,7 @@ def main() -> None:
     for slug, _, _, _ in TRADES:
         print(f"  {slug}: {len(trades_data.get(slug, []))} firms")
     print(f"  blog posts: {len(posts)}")
-    print("  robots.txt + sitemap.xml written (CNAME left untouched)")
+    print("  robots.txt + sitemap.xml + posts.json + another-story.html written (CNAME left untouched)")
     print("Done.")
 
 
