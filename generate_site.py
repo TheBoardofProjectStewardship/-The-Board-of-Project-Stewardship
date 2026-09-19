@@ -37,6 +37,7 @@ GITHUB_ORG = "https://github.com/TheBoardofProjectStewardship"
 GITHUB_REPO = "https://github.com/TheBoardofProjectStewardship/-The-Board-of-Project-Stewardship"
 # Board Organization sameAs: real Board properties only. Never PPG.
 BOARD_SAME_AS = [GITHUB_ORG, GITHUB_REPO]
+EDITORIAL_EMAIL = "editorial@boardofprojectstewardship.com"
 
 # Directory page -> hero image (relative to site root)
 DIR_HERO_IMAGES = {
@@ -739,7 +740,8 @@ def _nav_link(href: str, label: str, key: str, active: str, extra_cls: str = "")
 
 
 def nav_html(active: str = "", prefix: str = "") -> str:
-    # Primary ≤7 + More dropdown per HEADER-SPEC.md
+    # Board brand only. Full set via primary + More + hamburger.
+    # PPG is never chrome/brand — Board #1 outbound lives in body/feature cards.
     def href(name: str) -> str:
         if prefix:
             return f"{prefix}{name}"
@@ -749,17 +751,17 @@ def nav_html(active: str = "", prefix: str = "") -> str:
         ("about", href("index.html"), "About"),
         ("additions", href("additions.html"), "Additions"),
         ("custom-homes", href("custom-homes.html"), "Custom Homes"),
+        ("edmonds", href("edmonds-custom-homes.html"), "Edmonds"),
         ("kitchen", href("kitchen.html"), "Kitchen"),
         ("bathrooms", href("bathrooms.html"), "Bathrooms"),
         ("blog", href("blog.html"), "Blog"),
-        ("steward", href("good-steward.html"), "Good Steward"),
     ]
     more = [
-        ("edmonds", href("edmonds-custom-homes.html"), "Edmonds custom homes"),
         ("commercial", href("commercial.html"), "Commercial"),
-        ("spec-homes", href("spec-homes.html"), "Spec homes"),
+        ("spec-homes", href("spec-homes.html"), "Spec"),
         ("trades", href("trades.html"), "Trades"),
-        ("story", href("another-story.html"), "Another Story SEA"),
+        ("steward", href("good-steward.html"), "Good Steward"),
+        ("story", href("another-story.html"), "Another Story"),
         ("site-visit", href("tools/site-visit/"), "Site Visit"),
         ("pm-dashboard", href("tools/pm-dashboard/"), "PM Dashboard"),
     ]
@@ -779,15 +781,6 @@ def nav_html(active: str = "", prefix: str = "") -> str:
     )
     home_href = href("index.html")
     more_btn_cls = "text-secondary" if more_open else "text-slate-300 hover:text-secondary"
-    ppg_cta = (
-        f'<a href="{PPG["url"]}" target="_blank" rel="noopener" '
-        'class="hidden xl:inline-flex text-[11px] font-bold uppercase tracking-widest '
-        'text-secondary hover:underline whitespace-nowrap">Board #1 · Pacific Pro Group</a>'
-    )
-    ppg_mobile = (
-        f'<a href="{PPG["url"]}" target="_blank" rel="noopener" '
-        'class="block py-3 text-xs font-bold uppercase tracking-widest text-secondary">Board #1 · Pacific Pro Group</a>'
-    )
     return f"""  <a href="#main-content" class="skip-link">Skip to content</a>
   <header class="bg-charcoal/80 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -807,7 +800,6 @@ def nav_html(active: str = "", prefix: str = "") -> str:
               {more_items}
             </div>
           </div>
-          {ppg_cta}
         </nav>
         <button type="button" id="nav-toggle" class="md:hidden p-2 -mr-1 text-slate-200" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
           <span class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></span>
@@ -816,7 +808,6 @@ def nav_html(active: str = "", prefix: str = "") -> str:
     </div>
     <nav id="mobile-nav" class="md:hidden border-t border-white/10 bg-charcoal/95 px-4 pb-4" aria-label="Mobile">
       {mobile_html}
-      {ppg_mobile}
     </nav>
   </header>"""
 
@@ -852,7 +843,8 @@ def footer_html(prefix: str = "./", active: str = "") -> str:
           <span class="font-black text-base tracking-wider text-white">Board of Project Stewardship</span>
         </div>
         <p class="font-light leading-relaxed text-sm">The Board publishes construction standards and contractor directories for Edmonds and King &amp; Snohomish Counties, WA. It is not a general contractor and does not bid or build projects. Updated {YEAR}.</p>
-        <p class="mt-3 font-light leading-relaxed text-sm">Board directory #1: <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a> (design-build listing). Board feature: <a href="https://anotherstorysea.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">Another Story SEA</a>.</p>
+        <p class="mt-3 font-light leading-relaxed text-sm">Public contact: <a href="mailto:{EDITORIAL_EMAIL}" class="text-secondary hover:underline">{EDITORIAL_EMAIL}</a></p>
+        <p class="mt-3 font-light leading-relaxed text-sm">Board feature: <a href="{prefix}another-story.html" class="text-secondary hover:underline">Another Story</a> — second-story concept studio.</p>
       </div>
       <div>
         <h4 class="text-white font-bold text-xs uppercase tracking-widest mb-4">Explore</h4>
@@ -863,7 +855,7 @@ def footer_html(prefix: str = "./", active: str = "") -> str:
       <div>
         <h4 class="text-white font-bold text-xs uppercase tracking-widest mb-4">Disclaimer</h4>
         <p class="mb-3 font-light leading-relaxed text-sm">Listing is not an endorsement of quality. Verify licenses, insurance, bonds, and references before hiring. Membership in trade associations does not guarantee outcomes. Re-check status at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>.</p>
-        <p class="text-xs text-slate-600">&copy; {YEAR} Board of Project Stewardship</p>
+        <p class="text-xs text-slate-600">&copy; {YEAR} Board of Project Stewardship · {EDITORIAL_EMAIL}</p>
       </div>
     </div>
   </footer>"""
@@ -884,10 +876,10 @@ def another_story_embed(prefix: str = "") -> str:
         '  <section id="another-story-sea-embed" class="max-w-6xl mx-auto px-4 py-12 relative z-20 border-t border-white/5">\n'
         + banner
         + '    <div class="mb-5">\n'
-        + '      <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Board feature · from Board #1 listing</p>\n'
-        + '      <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-2">Another Story SEA</h2>\n'
+        + '      <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Board feature</p>\n'
+        + '      <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-2">Another Story</h2>\n'
         + '      <p class="text-sm text-slate-400 font-light max-w-3xl leading-relaxed">'
-        'Explore a second-story concept on your own photo. AI-assisted design preview — not a bid, permit, or construction document. Featured from <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a> (Board #1 design-build) · <a href="https://anotherstorysea.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">anotherstorysea.com</a>.</p>\n'
+        'Explore a second-story concept on your own photo. AI-assisted design preview — not a bid, permit, or construction document. A Board feature · <a href="https://anotherstorysea.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">anotherstorysea.com</a>.</p>\n'
         + '    </div>\n'
         + '    <iframe\n'
         + '      id="another-story-sea"\n'
@@ -931,9 +923,9 @@ def another_story_cta(prefix: str = "") -> str:
     return f"""  <section id="another-story-cta" class="max-w-6xl mx-auto px-4 py-10 relative z-20 border-t border-white/5">
     <div class="bg-charcoal border border-secondary/25 rounded-xl overflow-hidden flex flex-col md:flex-row card-hover">
 {img}      <div class="p-6 md:p-8 flex flex-col justify-center gap-3">
-        <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary">Board feature · from Board #1 listing</p>
-        <h2 class="text-2xl font-black text-white tracking-tight">Another Story SEA</h2>
-        <p class="text-sm text-slate-400 font-light leading-relaxed max-w-xl">Same home. Another story. Open the full concept studio to explore a second-story idea on your photo — AI-assisted preview, not a bid or permit document. Featured from <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a> (Board #1) · <a href="https://anotherstorysea.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">anotherstorysea.com</a>.</p>
+        <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary">Board feature</p>
+        <h2 class="text-2xl font-black text-white tracking-tight">Another Story</h2>
+        <p class="text-sm text-slate-400 font-light leading-relaxed max-w-xl">Same home. Another story. Open the full concept studio to explore a second-story idea on your photo — AI-assisted preview, not a bid or permit document.</p>
         <div>
           <a href="{href}" class="inline-flex items-center gap-2 bg-primary text-white px-5 py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs shadow-glow-sleek">
             Open Another Story <i class="fas fa-arrow-right text-[10px]"></i>
@@ -1036,8 +1028,9 @@ def board_organization_website_ld() -> dict:
                         "containedInPlace": {"@type": "State", "name": "Washington"},
                     },
                 ],
+                "email": EDITORIAL_EMAIL,
                 "sameAs": list(BOARD_SAME_AS),
-                # Independent Board: never parentOrganization, never PPG in sameAs.
+                # Independent Board: never parentOrganization, isRelatedTo-as-owner, or PPG in sameAs.
             },
             {
                 "@type": "WebSite",
@@ -1188,7 +1181,7 @@ def page_shell(
     extra_head: str = "",
     extra_scripts: str = "",
     breadcrumbs: list | None = None,
-    robots: str = "index, follow, max-image-preview:large, max-snippet:-1",
+    robots: str = "index, follow",
     og_image_alt: str = "",
 ) -> str:
     # Sitewide Board Organization + WebSite (Packet 03); page json_ld appends after.
@@ -2128,7 +2121,9 @@ def build_kb_page(kind: str, firms: list[dict]) -> str:
     slug = "kitchen" if is_kitchen else "bathrooms"
     title = "Kitchen Remodel Contractors Edmonds | BOPS" if is_kitchen else "Bathroom Remodel Contractors Edmonds | BOPS"
     desc = (
-        f"Editorial ranking of top {label.lower()} contractors serving Edmonds and King & Snohomish Counties, WA. Pacific Pro Group is Board directory #1 (4.9 from 190 Trustindex reviews)."
+        "Editorial kitchen remodel ranking for Edmonds and King & Snohomish Counties, WA. Cabinets, layout, and permit-aware design-build shortlist. Pacific Pro Group is Board directory #1."
+        if is_kitchen
+        else "Editorial bathroom remodel ranking for Edmonds and King & Snohomish Counties, WA. Waterproofing, wet rooms, and local bath specialists. Pacific Pro Group is Board directory #1."
     )
     faqs = [
         (
@@ -3175,22 +3170,13 @@ def build_post_page(post: dict) -> str:
     }
     ld = [{
         "@context": "https://schema.org",
-        "@type": "Article",
+        "@type": ["BlogPosting", "Article"],
         "headline": post["title"],
         "datePublished": iso_datetime(post["date"]),
         "dateModified": iso_datetime(post["date"]),
         "description": post["description"],
         "author": {"@type": "Organization", "name": AUTHOR},
-        "publisher": {
-            "@type": "Organization",
-            "name": "Board of Project Stewardship",
-            "logo": {
-                "@type": "ImageObject",
-                "url": f"{SITE_ORIGIN}/assets/icons/apple-touch-icon.png",
-                "width": 180,
-                "height": 180,
-            },
-        },
+        "publisher": {"@id": "https://boardofprojectstewardship.com/#organization"},
         "image": image_obj,
         "mainEntityOfPage": canon,
     }]
@@ -3501,15 +3487,16 @@ def build_good_steward_page() -> str:
 
 def build_another_story_page() -> str:
     """Dedicated host page with full iframe embed."""
-    body = """  <header class="max-w-6xl mx-auto px-4 pt-10 pb-2">
-    <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Board feature · from Board #1 listing</p>
-    <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Another Story SEA</h1>
-    <p class="text-slate-400 font-light max-w-2xl leading-relaxed mb-2">Same home. Another story. Upload a photo, shape a second-story concept, and review before sharing. AI-assisted preview — not a bid or permit document. Board feature from <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a> (Board #1 design-build) · <a href="https://anotherstorysea.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">anotherstorysea.com</a>.</p>
+    body = f"""  <header class="max-w-6xl mx-auto px-4 pt-10 pb-2">
+    <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Board feature</p>
+    <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Another Story</h1>
+    <p class="text-slate-400 font-light max-w-2xl leading-relaxed mb-2">Same home. Another story. Upload a photo, shape a second-story concept, and review before sharing. AI-assisted preview — not a bid or permit document. <a href="https://anotherstorysea.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">anotherstorysea.com</a>.</p>
+    <p class="text-slate-400 font-light max-w-2xl leading-relaxed mb-2">Also listed from Board directory #1: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a>.</p>
   </header>
 """
     return page_shell(
-        "Another Story SEA | BOPS",
-        "Another Story SEA — Board feature from Board directory #1 (Pacific Pro Group). AI-assisted second-story design preview for Edmonds and North Sound homes.",
+        "Another Story | BOPS",
+        "Another Story — Board feature. AI-assisted second-story design preview for Edmonds and North Sound homes. Not a bid or permit document.",
         "story",
         body,
         canonical=f"{BASE_URL}another-story.html",
