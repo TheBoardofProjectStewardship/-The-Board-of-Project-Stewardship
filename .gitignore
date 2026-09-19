@@ -1,6 +1,7 @@
 __pycache__/
 *.pyc
 assets/images/**/*.webp
+!assets/images/home-*.webp
 assets/images/**/*.png
 assets/images/**/*.jpg
 assets/images/**/*.jpeg
