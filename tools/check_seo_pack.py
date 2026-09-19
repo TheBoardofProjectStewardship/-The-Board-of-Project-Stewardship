@@ -116,6 +116,37 @@ def main() -> None:
 
     if EDITORIAL not in sample:
         fail("Organization/pages missing editorial@")
+    if "not a general contractor, newsroom, or nonprofit" not in sample.lower():
+        fail("homepage/org missing Board one-liner (not GC / newsroom / nonprofit)")
+    if 'id="contact"' not in sample or EDITORIAL not in sample.split('id="contact"', 1)[1][:400]:
+        fail("index.html missing editorial@ contact strip")
+
+    write_page = ROOT / "write.html"
+    if write_page.is_file():
+        wtxt = write_page.read_text(encoding="utf-8")
+        if 'content="noindex, follow"' not in wtxt:
+            fail("write.html must be noindex, follow")
+
+    sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8") if (ROOT / "sitemap.xml").is_file() else ""
+    if "write.html" in sitemap:
+        fail("write.html must not appear in sitemap.xml")
+    if "tools/another-story/index.html" not in sitemap:
+        fail("sitemap missing public Another Story tool URL")
+
+    trades = (ROOT / "trades.html").read_text(encoding="utf-8")
+    if '"@type": "ItemList"' not in trades:
+        fail("trades.html missing ItemList")
+    if '"@type": "FAQPage"' not in trades:
+        fail("trades.html missing FAQPage")
+
+    blog = (ROOT / "blog.html").read_text(encoding="utf-8")
+    if '"@type": "CollectionPage"' not in blog and '"@type": "ItemList"' not in blog:
+        fail("blog.html missing CollectionPage or ItemList")
+
+    for path in html_files:
+        text = path.read_text(encoding="utf-8")
+        if re.search(r'href="/tools/', text) or re.search(r'src="/tools/', text):
+            fail(f"{path.name} uses root-absolute /tools/ href or src")
 
     post = next((ROOT / "posts").glob("*.html"), None)
     if post:

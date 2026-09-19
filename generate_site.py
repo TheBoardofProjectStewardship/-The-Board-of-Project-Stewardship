@@ -38,6 +38,11 @@ GITHUB_REPO = "https://github.com/TheBoardofProjectStewardship/-The-Board-of-Pro
 # Board Organization sameAs: real Board properties only. Never PPG.
 BOARD_SAME_AS = [GITHUB_ORG, GITHUB_REPO]
 EDITORIAL_EMAIL = "editorial@boardofprojectstewardship.com"
+# Alex one-liner: independent publisher of standards/directories — not a newsroom, nonprofit, or GC.
+BOARD_ONE_LINER = (
+    "The Board of Project Stewardship publishes construction standards and contractor "
+    "directories for Edmonds and King & Snohomish Counties. It is not a general contractor, newsroom, or nonprofit."
+)
 
 # Directory page -> hero image (relative to site root)
 DIR_HERO_IMAGES = {
@@ -842,7 +847,7 @@ def footer_html(prefix: str = "./", active: str = "") -> str:
           <i class="fas fa-compass-drafting text-secondary"></i>
           <span class="font-black text-base tracking-wider text-white">Board of Project Stewardship</span>
         </div>
-        <p class="font-light leading-relaxed text-sm">The Board publishes construction standards and contractor directories for Edmonds and King &amp; Snohomish Counties, WA. It is not a general contractor and does not bid or build projects. Updated {YEAR}.</p>
+        <p class="font-light leading-relaxed text-sm">{esc(BOARD_ONE_LINER)} Updated {YEAR}.</p>
         <p class="mt-3 font-light leading-relaxed text-sm">Public contact: <a href="mailto:{EDITORIAL_EMAIL}" class="text-secondary hover:underline">{EDITORIAL_EMAIL}</a></p>
         <p class="mt-3 font-light leading-relaxed text-sm">Board feature: <a href="{prefix}another-story.html" class="text-secondary hover:underline">Another Story</a> — second-story concept studio.</p>
       </div>
@@ -859,6 +864,23 @@ def footer_html(prefix: str = "./", active: str = "") -> str:
       </div>
     </div>
   </footer>"""
+
+
+def tools_href(slug: str, prefix: str = "", filename: str = "") -> str:
+    """Normalize tool links to ./tools/… (or ../tools/… from posts). Never mix /tools/."""
+    base = prefix if prefix else "./"
+    if filename:
+        return f"{base}tools/{slug}/{filename}"
+    return f"{base}tools/{slug}/"
+
+
+def contact_strip_html() -> str:
+    return f"""  <aside id="contact" class="border-t border-white/5 bg-charcoal/50">
+    <div class="max-w-6xl mx-auto px-4 py-4 text-sm text-slate-400 font-light">
+      Public contact: <a href="mailto:{EDITORIAL_EMAIL}" class="text-secondary hover:underline">{EDITORIAL_EMAIL}</a>
+    </div>
+  </aside>
+"""
 
 
 def another_story_embed(prefix: str = "") -> str:
@@ -878,12 +900,16 @@ def another_story_embed(prefix: str = "") -> str:
         + '    <div class="mb-5">\n'
         + '      <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Board feature</p>\n'
         + '      <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-2">Another Story</h2>\n'
+        + '      <p class="text-sm text-slate-400 font-light max-w-3xl leading-relaxed mb-3">'
+        'Explore a second-story concept on your own photo. Upload a house picture, adjust the massing idea, and review a preview — AI-assisted design only. Not a bid, permit, structural calculation, or construction document.</p>\n'
         + '      <p class="text-sm text-slate-400 font-light max-w-3xl leading-relaxed">'
-        'Explore a second-story concept on your own photo. AI-assisted design preview — not a bid, permit, or construction document. A Board feature · <a href="https://anotherstorysea.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">anotherstorysea.com</a>.</p>\n'
+        'This is a Board feature. Open the standalone tool at '
+        f'<a href="{tools_href("another-story", prefix, "index.html")}" class="text-secondary hover:underline">{SITE_ORIGIN}/tools/another-story/</a>'
+        ' or <a href="https://anotherstorysea.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">anotherstorysea.com</a>.</p>\n'
         + '    </div>\n'
         + '    <iframe\n'
         + '      id="another-story-sea"\n'
-        + '      src="/tools/another-story/index.html"\n'
+        + f'      src="{tools_href("another-story", prefix, "index.html")}"\n'
         + '      title="Another Story SEA — second-story design preview"\n'
         + '      loading="lazy"\n'
         + '      style="display:block;width:100%;height:1900px;border:0;border-radius:18px;background:#fff9f2;"\n'
@@ -942,6 +968,10 @@ def another_story_cta(prefix: str = "") -> str:
 def steward_tools_embed(prefix: str = "") -> str:
     """Good Steward Tools — Site Visit Checklist + PM Dashboard cards and iframes."""
     open_steward = f"{prefix}good-steward.html" if prefix else "./good-steward.html"
+    site_visit_href = tools_href("site-visit", prefix)
+    pm_href = tools_href("pm-dashboard", prefix)
+    site_visit_src = tools_href("site-visit", prefix, "index.html")
+    pm_src = tools_href("pm-dashboard", prefix, "index.html")
     return (
         '  <section id="good-steward-tools-embed" class="max-w-6xl mx-auto px-4 py-12 relative z-20 border-t border-white/5">\n'
         '    <div class="mb-8">\n'
@@ -958,12 +988,12 @@ def steward_tools_embed(prefix: str = "") -> str:
         f'<a href="{open_steward}" class="text-secondary hover:underline">What a good steward does</a>.</p>\n'
         '    </div>\n'
         '    <div class="grid md:grid-cols-2 gap-4 mb-8">\n'
-        '      <a href="/tools/site-visit/" class="block bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover no-underline">\n'
+        f'      <a href="{site_visit_href}" class="block bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover no-underline">\n'
         '        <p class="text-[11px] font-bold uppercase tracking-widest text-secondary mb-2">Checklist</p>\n'
         '        <h3 class="text-lg font-black text-white mb-2">Site Visit &amp; Discovery</h3>\n'
         '        <p class="text-sm text-slate-400 font-light leading-relaxed">Phase-by-phase discovery notes, sketch pad, and proposal-readiness checklist. Data stays in your browser.</p>\n'
         '      </a>\n'
-        '      <a href="/tools/pm-dashboard/" class="block bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover no-underline">\n'
+        f'      <a href="{pm_href}" class="block bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover no-underline">\n'
         '        <p class="text-[11px] font-bold uppercase tracking-widest text-secondary mb-2">Dashboard</p>\n'
         '        <h3 class="text-lg font-black text-white mb-2">PM Execution Dashboard</h3>\n'
         '        <p class="text-sm text-slate-400 font-light leading-relaxed">Build-phase status, punch tracking, and export helpers for steward continuity. Local-only — not a schedule commitment.</p>\n'
@@ -974,7 +1004,7 @@ def steward_tools_embed(prefix: str = "") -> str:
         '        <h3 class="text-sm font-bold uppercase tracking-widest text-slate-300 mb-3">Site Visit &amp; Discovery</h3>\n'
         '        <iframe\n'
         '          id="steward-site-visit"\n'
-        '          src="/tools/site-visit/index.html"\n'
+        f'          src="{site_visit_src}"\n'
         '          title="Site Visit and Discovery Checklist — Good Steward Tools"\n'
         '          loading="lazy"\n'
         '          style="display:block;width:100%;height:1400px;border:0;border-radius:18px;background:#f8fafc;"\n'
@@ -984,7 +1014,7 @@ def steward_tools_embed(prefix: str = "") -> str:
         '        <h3 class="text-sm font-bold uppercase tracking-widest text-slate-300 mb-3">PM Execution Dashboard</h3>\n'
         '        <iframe\n'
         '          id="steward-pm-dashboard"\n'
-        '          src="/tools/pm-dashboard/index.html"\n'
+        f'          src="{pm_src}"\n'
         '          title="PM Execution Dashboard — Good Steward Tools"\n'
         '          loading="lazy"\n'
         '          style="display:block;width:100%;height:1400px;border:0;border-radius:18px;background:#f1f5f9;"\n'
@@ -1007,10 +1037,7 @@ def board_organization_website_ld() -> dict:
                 "name": "Board of Project Stewardship",
                 "alternateName": "BOPS",
                 "url": "https://boardofprojectstewardship.com/",
-                "description": (
-                    "Board of Project Stewardship — Edmonds / King & Snohomish "
-                    "construction standards and contractor directories."
-                ),
+                "description": BOARD_ONE_LINER,
                 "areaServed": [
                     {
                         "@type": "AdministrativeArea",
@@ -1208,6 +1235,7 @@ def page_shell(
     tools_block = steward_tools_embed(prefix if prefix else "") if include_tools_embed else ""
     story_block = another_story_embed(prefix if prefix else "") if include_story_embed else ""
     fav = favicon_tags(prefix if prefix else "./")
+    contact_strip = contact_strip_html()
     return f"""<!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
@@ -1246,6 +1274,7 @@ def page_shell(
 ''' if include_widgets else ""}{tools_block}
 {story_block}
 </main>
+{contact_strip}
 {footer_html(prefix if prefix else "./", active)}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 {chrome_script()}
@@ -1819,10 +1848,10 @@ def build_about() -> str:
 
     _hero_rel, _hero_alt = DIR_HERO_IMAGES.get("about", (None, ""))
     body = f"""{hero(
-        f"Editorial standards · Edmonds / King &amp; Snohomish · {YEAR}",
-        'Board of Project Stewardship<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">A standards filter for local construction integrity</span>',
-        "Board of Project Stewardship — Edmonds / King &amp; Snohomish construction standards and contractor directories. Not a lead-gen marketplace. We shortlist firms against solvency, technical competence, steward continuity, and local permit mastery.",
-        ["Editorial shortlists", "Public L&amp;I signals", "Local permit mastery"],
+        f"Construction standards · Edmonds / King &amp; Snohomish · {YEAR}",
+        'Board of Project Stewardship<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">Standards and contractor directories — not a GC</span>',
+        esc(BOARD_ONE_LINER),
+        ["Published directories", "Public L&amp;I signals", "Local permit mastery"],
         image_rel=_hero_rel if _hero_rel and asset_exists(_hero_rel) else None,
         image_alt=_hero_alt,
     )}
@@ -1833,10 +1862,10 @@ def build_about() -> str:
         <i class="fas fa-gavel text-secondary"></i> Mission
       </h2>
       <p class="text-slate-300 leading-relaxed font-light max-w-3xl relative z-10">
-        Most contractor sites sell leads. The Board publishes <strong class="text-white font-semibold">editorial standards and directories</strong>
-        so homeowners in Edmonds and the greater King &amp; Snohomish market can evaluate firms against clear criteria —
+        {esc(BOARD_ONE_LINER)}
+        Homeowners in Edmonds and the greater King &amp; Snohomish market can evaluate firms against published criteria —
         bonding capacity, technical review, a named project steward, and proven local mastery — not ad spend.
-        The Board is not a general contractor and does not bid or build projects.
+        The Board does not bid or build projects.
       </p>
     </section>
 
@@ -1872,8 +1901,8 @@ def build_about() -> str:
       </div>
       <div class="flex flex-wrap gap-3">
         <a href="./good-steward.html" class="bg-primary text-white px-5 py-3.5 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs shadow-glow-sleek">Good Steward guide &amp; tools</a>
-        <a href="./tools/site-visit/" class="border border-white/20 bg-white/5 text-white px-5 py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Site Visit Checklist</a>
-        <a href="./tools/pm-dashboard/" class="border border-white/20 bg-white/5 text-white px-5 py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">PM Dashboard</a>
+        <a href="{tools_href('site-visit')}" class="border border-white/20 bg-white/5 text-white px-5 py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Site Visit Checklist</a>
+        <a href="{tools_href('pm-dashboard')}" class="border border-white/20 bg-white/5 text-white px-5 py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">PM Dashboard</a>
       </div>
     </section>
 
@@ -2018,7 +2047,7 @@ def build_about() -> str:
 
     return page_shell(
         "Board of Project Stewardship | Edmonds Standards",
-        "Editorial standards and contractor directories for Edmonds and King & Snohomish. Shortlists, Good Steward tools, and Board directory #1 Pacific Pro Group.",
+        "The Board of Project Stewardship publishes construction standards and contractor directories for Edmonds and King & Snohomish. Not a GC, newsroom, or nonprofit.",
         "about",
         body,
         canonical=BASE_URL,
@@ -2811,17 +2840,43 @@ def build_spec_homes(firms: list[dict]) -> str:
 
 def build_trades_hub() -> str:
     cards = []
-    for slug, title, icon, blurb in TRADES:
+    list_elements = []
+    for i, (slug, title, icon, blurb) in enumerate(TRADES, 1):
         cards.append(f"""        <a href="./{slug}.html" class="bg-charcoal border border-white/5 hover:border-primary/40 p-6 rounded-xl card-hover block no-underline">
           <div class="text-secondary text-2xl mb-3"><i class="fas {icon}"></i></div>
           <h2 class="text-lg font-bold text-white mb-2">{esc(title)}</h2>
           <p class="text-sm text-slate-400 font-light leading-relaxed">{esc(blurb)}</p>
           <span class="inline-block mt-4 text-xs font-bold uppercase tracking-wider text-secondary">View directory <i class="fas fa-arrow-right ml-1"></i></span>
         </a>""")
+        list_elements.append({
+            "@type": "ListItem",
+            "position": i,
+            "name": title,
+            "url": f"{BASE_URL}{slug}.html",
+            "description": blurb,
+        })
+    faqs = [
+        (
+            "What are these trade directories?",
+            "They are Board-published shortlists of specialty trade contractors homeowners and GCs use alongside remodel and addition projects in Edmonds and King & Snohomish Counties. They are not paid placements.",
+        ),
+        (
+            "Does the Board verify every license on this page?",
+            "No. Listings are compiled from public research. Always re-verify contractor status at WA L&I Verify before hiring.",
+        ),
+        (
+            "Should I hire a trade directly or through a general contractor?",
+            "Either path is common. Many remodel projects are coordinated by a design-build GC. Specialty pages help when you want a direct hire or a second opinion.",
+        ),
+        (
+            "Is the Board a general contractor or trade firm?",
+            "No. The Board publishes construction standards and contractor directories. It is not a general contractor, trade contractor, newsroom, or nonprofit.",
+        ),
+    ]
     body = f"""{hero(
         f"Trade directories · Updated {YEAR}",
         'Trade Contractors<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">Edmonds / King &amp; Snohomish</span>',
-        "Editorial shortlists of specialty trade contractors that homeowners and GCs use alongside remodel and addition projects.",
+        "Board-published shortlists of specialty trade contractors that homeowners and GCs use alongside remodel and addition projects.",
         ["14 trade pages", "Locality-first", "Verify at L&amp;I"],
     )}
   <div class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
@@ -2830,14 +2885,29 @@ def build_trades_hub() -> str:
     </section>
     <section class="bg-charcoal rounded-xl p-8 border border-white/10 mb-8">
       <h2 class="text-xl font-black text-white mb-3">How to use these lists</h2>
-      <p class="text-slate-300 text-sm font-light leading-relaxed">These are editorial directories, not paid placement. Prefer Edmonds / South Snohomish specialists when locality matters; broader metro multi-trade firms are included when they clearly serve the area. Always re-verify licenses at <a href="{LNI_URL}" class="text-secondary hover:underline" target="_blank" rel="noopener">WA L&amp;I</a> before hiring.</p>
+      <p class="text-slate-300 text-sm font-light leading-relaxed">These are Board directories, not paid placement. Prefer Edmonds / South Snohomish specialists when locality matters; broader metro multi-trade firms are included when they clearly serve the area. Always re-verify licenses at <a href="{LNI_URL}" class="text-secondary hover:underline" target="_blank" rel="noopener">WA L&amp;I</a> before hiring.</p>
     </section>
+{faq_section(faqs, "Trade directories FAQ")}
   </div>"""
+    ld = [
+        {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "@id": f"{BASE_URL}trades.html#itemlist",
+            "name": "Trade contractor directories — Edmonds / King & Snohomish, WA",
+            "description": "Board-published directories of specialty trade contractors serving Edmonds and King & Snohomish Counties.",
+            "url": f"{BASE_URL}trades.html",
+            "numberOfItems": len(list_elements),
+            "itemListElement": list_elements,
+        },
+        faq_ld(faqs),
+    ]
     return page_shell(
         "Trade Contractors in Edmonds | BOPS",
-        "Editorial directories of plumbers, electricians, HVAC, roofing, and other trade contractors serving Edmonds and King & Snohomish Counties, WA.",
+        "Board directories of plumbers, electricians, HVAC, roofing, and other trade contractors serving Edmonds and King & Snohomish Counties, WA.",
         "trades",
         body,
+        ld,
         canonical=f"{BASE_URL}trades.html",
         breadcrumbs=[("About", BASE_URL), ("Trades", f"{BASE_URL}trades.html")],
     )
@@ -3145,11 +3215,36 @@ def build_blog_index(posts: list[dict]) -> str:
     <p id="blog-empty" class="hidden text-slate-400 text-sm">No posts match your filters.</p>
     <p class="text-sm text-slate-500 mt-8">Have a local guide to share? <a href="./write.html" class="text-secondary hover:underline">Contribute</a>.</p>
   </div>"""
+    collection_items = [
+        {
+            "@type": "ListItem",
+            "position": i,
+            "url": f"{BASE_URL}posts/{p['out_name']}",
+            "name": p["title"],
+        }
+        for i, p in enumerate(posts, 1)
+    ]
+    ld = [{
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "@id": f"{BASE_URL}blog.html#collection",
+        "name": "Board of Project Stewardship Blog",
+        "url": f"{BASE_URL}blog.html",
+        "description": "Local remodel, addition, and hiring guides for Edmonds and King & Snohomish Counties.",
+        "isPartOf": {"@id": "https://boardofprojectstewardship.com/#website"},
+        "mainEntity": {
+            "@type": "ItemList",
+            "name": "Board blog posts",
+            "numberOfItems": len(collection_items),
+            "itemListElement": collection_items,
+        },
+    }]
     return page_shell(
         "Blog | Board of Project Stewardship",
-        "Local remodel, addition, and hiring guides for Edmonds and King & Snohomish Counties from Board of Project Stewardship Editorial.",
+        "Local remodel, addition, and hiring guides for Edmonds and King & Snohomish Counties from the Board of Project Stewardship.",
         "blog",
         body,
+        ld,
         canonical=f"{BASE_URL}blog.html",
         og_image=hero_img,
         extra_scripts='  <script src="./blog.js" defer></script>\n',
@@ -3304,6 +3399,26 @@ When the GitHub Pages custom certificate is valid for `boardofprojectstewardship
 
 Until then, verify generated markup over `http://boardofprojectstewardship.com/`.
 
+## IndexNow
+
+After generate (or after Pages ships `main`):
+
+```bash
+python3 generate_site.py --indexnow
+# or, ping the current sitemap only:
+python3 generate_site.py --indexnow-only
+```
+
+CI: `.github/workflows/indexnow.yml` runs `--indexnow-only` on push to `main`. Soft-fails if offline. Key file is hosted at `/{{32-hex}}.txt` and preserved in `.well-known/indexnow-key.txt`.
+
+## Search Console / Bing Webmaster (ops — not this PR)
+
+GSC and Bing Webmaster registration stay with the site owner (Alex login). Do not register them from this generator.
+
+## Draft / noindex
+
+`write.html` is a draft contribution tool. It is generated with `noindex, follow` and is **not** in `sitemap.xml`.
+
 ## Updates
 
 Rankings researched / updated **{YEAR}**.
@@ -3329,7 +3444,15 @@ def write_sitemap(posts: list[dict]) -> None:
         "spec-homes.html",
         "trades.html",
     ] + [f"{slug}.html" for slug, *_ in TRADES]
-    extras = ["blog.html", "write.html", "another-story.html", "good-steward.html", "blog/rss.xml", "tools/site-visit/index.html", "tools/pm-dashboard/index.html"]
+    extras = [
+        "blog.html",
+        "another-story.html",
+        "good-steward.html",
+        "blog/rss.xml",
+        "tools/site-visit/index.html",
+        "tools/pm-dashboard/index.html",
+        "tools/another-story/index.html",
+    ]
 
     def file_lastmod(rel: str) -> str:
         p = SITE_DIR / rel
@@ -3447,8 +3570,8 @@ def build_good_steward_page() -> str:
         Full-width embeds also appear near the bottom of every Board page (with Another Story). Direct links:
       </p>
       <div class="flex flex-wrap gap-3">
-        <a href="./tools/site-visit/" class="bg-primary text-white px-5 py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs">Site Visit &amp; Discovery</a>
-        <a href="./tools/pm-dashboard/" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">PM Dashboard</a>
+        <a href="{tools_href('site-visit')}" class="bg-primary text-white px-5 py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs">Site Visit &amp; Discovery</a>
+        <a href="{tools_href('pm-dashboard')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">PM Dashboard</a>
         <a href="./index.html" class="border border-white/15 text-slate-200 px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Back to About</a>
       </div>
     </section>
@@ -3490,8 +3613,9 @@ def build_another_story_page() -> str:
     body = f"""  <header class="max-w-6xl mx-auto px-4 pt-10 pb-2">
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Board feature</p>
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Another Story</h1>
-    <p class="text-slate-400 font-light max-w-2xl leading-relaxed mb-2">Same home. Another story. Upload a photo, shape a second-story concept, and review before sharing. AI-assisted preview — not a bid or permit document. <a href="https://anotherstorysea.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">anotherstorysea.com</a>.</p>
-    <p class="text-slate-400 font-light max-w-2xl leading-relaxed mb-2">Also listed from Board directory #1: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a>.</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Same home. Another story. Upload a house photo, adjust the massing idea, and review a second-story concept before you share it. This is an AI-assisted design preview published as a Board feature — not a bid, permit, structural calculation, or construction document.</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Use it to explore whether a second story might fit a North Sound house. Then verify any contractor you hire at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>. The standalone tool is also at <a href="{tools_href('another-story', '', 'index.html')}" class="text-secondary hover:underline">{SITE_ORIGIN}/tools/another-story/</a> and <a href="https://anotherstorysea.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">anotherstorysea.com</a>.</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Also listed from Board directory #1: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a>.</p>
   </header>
 """
     return page_shell(
@@ -3639,6 +3763,7 @@ def build_write_page() -> str:
         body,
         canonical=f"{BASE_URL}write.html",
         extra_scripts=extra_scripts,
+        robots="noindex, follow",
         breadcrumbs=[("About", BASE_URL), ("Blog", f"{BASE_URL}blog.html"), ("Contribute", f"{BASE_URL}write.html")],
     )
 

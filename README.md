@@ -127,6 +127,26 @@ When the GitHub Pages custom certificate is valid for `boardofprojectstewardship
 
 Until then, verify generated markup over `http://boardofprojectstewardship.com/`.
 
+## IndexNow
+
+After generate (or after Pages ships `main`):
+
+```bash
+python3 generate_site.py --indexnow
+# or, ping the current sitemap only:
+python3 generate_site.py --indexnow-only
+```
+
+CI: `.github/workflows/indexnow.yml` runs `--indexnow-only` on push to `main`. Soft-fails if offline. Key file is hosted at `/{32-hex}.txt` and preserved in `.well-known/indexnow-key.txt`.
+
+## Search Console / Bing Webmaster (ops — not this PR)
+
+GSC and Bing Webmaster registration stay with the site owner (Alex login). Do not register them from this generator.
+
+## Draft / noindex
+
+`write.html` is a draft contribution tool. It is generated with `noindex, follow` and is **not** in `sitemap.xml`.
+
 ## Updates
 
 Rankings researched / updated **2026**.
