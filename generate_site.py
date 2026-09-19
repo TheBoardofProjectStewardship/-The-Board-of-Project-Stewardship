@@ -1183,6 +1183,8 @@ def page_shell(
     og_image: str | None = None,
     og_type: str = "website",
     include_story_embed: bool = True,
+    include_tools_embed: bool = True,
+    include_widgets: bool = True,
     extra_head: str = "",
     extra_scripts: str = "",
     breadcrumbs: list | None = None,
@@ -1210,7 +1212,7 @@ def page_shell(
             og_rel = cand
     og_abs = resolve_og_image(og_rel)
     img_alt = og_image_alt or OG_IMAGE_ALT
-    tools_block = steward_tools_embed(prefix if prefix else "")
+    tools_block = steward_tools_embed(prefix if prefix else "") if include_tools_embed else ""
     story_block = another_story_embed(prefix if prefix else "") if include_story_embed else ""
     fav = favicon_tags(prefix if prefix else "./")
     return f"""<!DOCTYPE html>
@@ -1245,10 +1247,10 @@ def page_shell(
 {nav_html(active, prefix)}
 <main id="main-content">
 {body}
-  <div class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
+{f'''  <div class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
 {ppg_widgets_html()}
   </div>
-{tools_block}
+''' if include_widgets else ""}{tools_block}
 {story_block}
 </main>
 {footer_html(prefix if prefix else "./", active)}
@@ -3697,6 +3699,9 @@ def build_404_page() -> str:
         body,
         canonical=f"{BASE_URL}404.html",
         robots="noindex, follow",
+        include_story_embed=False,
+        include_tools_embed=False,
+        include_widgets=False,
         breadcrumbs=[("About", BASE_URL), ("Page not found", f"{BASE_URL}404.html")],
     )
 
