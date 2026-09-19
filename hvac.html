@@ -705,7 +705,47 @@
       </div>
     </section>
   </div>
+  <aside id="good-steward-cta" class="max-w-6xl mx-auto px-4 py-8 relative z-20 border-t border-white/5">
+    <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>
+    <h2 class="text-xl font-black text-white tracking-tight mb-2">Site visit and PM checklists</h2>
+    <p class="text-sm text-slate-400 font-light leading-relaxed max-w-3xl mb-4">Educational Board templates for Edmonds / coastal Puget Sound. Data stays in your browser — not a bid, permit, or schedule.</p>
+    <div class="flex flex-wrap gap-3">
+      <a href="./good-steward.html" class="bg-primary text-white px-5 py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs">Good Steward guide</a>
+      <a href="./tools/site-visit/" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Site Visit Checklist</a>
+      <a href="./tools/pm-dashboard/" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">PM Dashboard</a>
+    </div>
+  </aside>
 
+  <section id="another-story-sea-embed" class="max-w-6xl mx-auto px-4 py-12 relative z-20 border-t border-white/5">
+    <div class="mb-5">
+      <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Board feature</p>
+      <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-2">Another Story</h2>
+      <p class="text-sm text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Explore a second-story concept on your own photo. Upload a house picture, adjust the massing idea, and review a preview — AI-assisted design only. Not a bid, permit, structural calculation, or construction document.</p>
+      <p class="text-sm text-slate-400 font-light max-w-3xl leading-relaxed">This is a Board feature. Open the standalone tool at <a href="./tools/another-story/index.html" class="text-secondary hover:underline">https://boardofprojectstewardship.com/tools/another-story/</a> or <a href="https://anotherstorysea.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">anotherstorysea.com</a>.</p>
+    </div>
+    <iframe
+      id="another-story-sea"
+      src="./tools/another-story/index.html"
+      title="Another Story SEA — second-story design preview"
+      loading="lazy"
+      style="display:block;width:100%;height:1900px;border:0;border-radius:18px;background:#fff9f2;"
+    ></iframe>
+    <script>
+    (() => {
+      const frame = document.getElementById('another-story-sea');
+      if (!frame) return;
+      const trustedOrigin = new URL(frame.src, window.location.href).origin;
+      window.addEventListener('message', (event) => {
+        if (event.origin !== trustedOrigin || event.source !== frame.contentWindow) return;
+        if (event.data?.type !== 'another-story:resize') return;
+        const height = Number(event.data.height);
+        if (Number.isFinite(height) && height >= 300 && height <= 16000) {
+          frame.style.height = `${Math.ceil(height) + 2}px`;
+        }
+      });
+    })();
+    </script>
+  </section>
 
 </main>
   <aside id="contact" class="border-t border-white/5 bg-charcoal/50">

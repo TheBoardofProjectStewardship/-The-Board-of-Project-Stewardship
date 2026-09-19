@@ -175,10 +175,21 @@ def main() -> None:
         fail("apple-touch-icon.png missing (must deploy, not gitignore-only)")
 
     additions = (ROOT / "additions.html").read_text(encoding="utf-8")
-    if 'id="another-story-sea-embed"' in additions or 'id="good-steward-tools-embed"' in additions:
-        fail("directory pages must not embed full Another Story / Good Steward iframes")
-    if 'id="another-story-sea-embed"' not in sample or 'id="good-steward-tools-embed"' not in sample:
-        fail("homepage must keep Another Story + Good Steward embeds")
+    if 'id="another-story-sea-embed"' not in additions:
+        fail("directory pages must keep sitewide Another Story embed (Alex lock)")
+    if 'id="good-steward-tools-embed"' in additions:
+        fail("directory pages must not embed twin Good Steward 1400px iframes")
+    if 'id="good-steward-cta"' not in additions:
+        fail("directory pages missing compact Good Steward CTA strip")
+    if 'id="another-story-sea-embed"' not in sample:
+        fail("homepage must keep sitewide Another Story embed")
+    if 'id="good-steward-tools-embed"' in sample:
+        fail("homepage must not embed twin Good Steward 1400px iframes")
+    steward_page = (ROOT / "good-steward.html").read_text(encoding="utf-8")
+    if 'id="good-steward-tools-embed"' not in steward_page:
+        fail("good-steward.html must keep full tool embeds")
+    if 'id="another-story-sea-embed"' not in steward_page:
+        fail("good-steward.html must keep sitewide Another Story embed")
 
     for path in html_files:
         text = path.read_text(encoding="utf-8")

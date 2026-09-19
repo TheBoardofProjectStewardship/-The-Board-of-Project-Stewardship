@@ -1015,6 +1015,24 @@ def another_story_embed(prefix: str = "") -> str:
     )
 
 
+def steward_cta_strip(prefix: str = "") -> str:
+    """Compact Good Steward links — not the twin 1400px iframes."""
+    open_steward = f"{prefix}good-steward.html" if prefix else "./good-steward.html"
+    site_visit_href = tools_href("site-visit", prefix)
+    pm_href = tools_href("pm-dashboard", prefix)
+    return f"""  <aside id="good-steward-cta" class="max-w-6xl mx-auto px-4 py-8 relative z-20 border-t border-white/5">
+    <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>
+    <h2 class="text-xl font-black text-white tracking-tight mb-2">Site visit and PM checklists</h2>
+    <p class="text-sm text-slate-400 font-light leading-relaxed max-w-3xl mb-4">Educational Board templates for Edmonds / coastal Puget Sound. Data stays in your browser — not a bid, permit, or schedule.</p>
+    <div class="flex flex-wrap gap-3">
+      <a href="{open_steward}" class="bg-primary text-white px-5 py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs">Good Steward guide</a>
+      <a href="{site_visit_href}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Site Visit Checklist</a>
+      <a href="{pm_href}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">PM Dashboard</a>
+    </div>
+  </aside>
+"""
+
+
 def another_story_cta(prefix: str = "") -> str:
     """Compact CTA card linking to another-story.html — used on all pages except the tool host."""
     href = f"{prefix}another-story.html" if prefix else "./another-story.html"
@@ -1283,7 +1301,7 @@ def page_shell(
     keywords: str = "",
     og_image: str | None = None,
     og_type: str = "website",
-    include_story_embed: bool = False,
+    include_story_embed: bool = True,
     include_tools_embed: bool = False,
     include_widgets: bool = True,
     extra_head: str = "",
@@ -1313,8 +1331,14 @@ def page_shell(
             og_rel = cand
     og_abs = resolve_og_image(og_rel)
     img_alt = og_image_alt or OG_IMAGE_ALT
-    tools_block = steward_tools_embed(prefix if prefix else "") if include_tools_embed else ""
-    story_block = another_story_embed(prefix if prefix else "") if include_story_embed else ""
+    pfx = prefix if prefix else ""
+    if include_tools_embed:
+        tools_block = steward_tools_embed(pfx)
+    elif include_widgets:
+        tools_block = steward_cta_strip(pfx)
+    else:
+        tools_block = ""
+    story_block = another_story_embed(pfx) if include_story_embed else ""
     fav = favicon_tags(prefix if prefix else "./")
     contact_strip = contact_strip_html()
     return f"""<!DOCTYPE html>
@@ -2134,7 +2158,7 @@ def build_about() -> str:
         canonical=BASE_URL,
         breadcrumbs=[("About", BASE_URL)],
         include_story_embed=True,
-        include_tools_embed=True,
+        include_tools_embed=False,
     )
 
 
@@ -3692,7 +3716,7 @@ def build_good_steward_page() -> str:
         canonical=f"{BASE_URL}good-steward.html",
         breadcrumbs=[("About", BASE_URL), ("Good Steward", f"{BASE_URL}good-steward.html")],
         include_tools_embed=True,
-        include_story_embed=False,
+        include_story_embed=True,
     )
 
 
