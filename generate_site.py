@@ -476,6 +476,45 @@ def head_assets() -> str:
     .prose-bops ul { list-style: disc; padding-left: 1.25rem; margin-bottom: 1rem; }
     .prose-bops ol { list-style: decimal; padding-left: 1.25rem; margin-bottom: 1rem; }
     .prose-bops strong { color: #fff; font-weight: 600; }
+    .prose-bops .post-figure {
+      margin: 1.5rem 0;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.02);
+    }
+    .prose-bops .post-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 32rem;
+      object-fit: cover;
+    }
+    .prose-bops .post-figure figcaption {
+      padding: 0.65rem 0.9rem;
+      font-size: 0.85rem;
+      color: #94a3b8;
+      font-weight: 300;
+      line-height: 1.4;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .prose-bops .video-embed {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 */
+      height: 0;
+      margin: 1.5rem 0;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: #000;
+    }
+    .prose-bops .video-embed iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: 0;
+    }
     #tools input, #tools select, #tools textarea {
       color-scheme: dark;
     }
@@ -2225,6 +2264,16 @@ def md_to_html(md: str) -> str:
     i = 0
     in_ul = False
     in_ol = False
+    yt_id_re = re.compile(r"^[A-Za-z0-9_-]{6,20}$")
+    yt_line_re = re.compile(
+        r"^(?:"
+        r"https?://(?:www\.)?youtube\.com/watch\?v=([A-Za-z0-9_-]{6,20})(?:&\S*)?"
+        r"|https?://youtu\.be/([A-Za-z0-9_-]{6,20})(?:\?\S*)?"
+        r"|https?://(?:www\.)?youtube\.com/embed/([A-Za-z0-9_-]{6,20})(?:\?\S*)?"
+        r"|youtube:([A-Za-z0-9_-]{6,20})"
+        r")$"
+    )
+    img_line_re = re.compile(r"^!\[([^\]]*)\]\(([^)]+)\)$")
 
     def close_lists():
         nonlocal in_ul, in_ol, out
@@ -2235,8 +2284,33 @@ def md_to_html(md: str) -> str:
             out.append("</ol>")
             in_ol = False
 
+    def youtube_embed(vid: str) -> str:
+        return (
+            f'<div class="video-embed">'
+            f'<iframe src="https://www.youtube.com/embed/{esc(vid)}" '
+            f'title="YouTube video" '
+            f'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" '
+            f'allowfullscreen loading="lazy"></iframe></div>'
+        )
+
+    def figure_html(alt: str, src: str) -> str:
+        cap = f"<figcaption>{esc(alt)}</figcaption>" if alt.strip() else ""
+        return (
+            f'<figure class="post-figure">'
+            f'<img src="{esc(src)}" alt="{esc(alt)}" loading="lazy">'
+            f"{cap}</figure>"
+        )
+
     def inline(s: str) -> str:
-        s = esc(s)
+        # Images before links so ![alt](url) is not treated as a bare link.
+        parts: list[str] = []
+        last = 0
+        for m in re.finditer(r"!\[([^\]]*)\]\(([^)]+)\)", s):
+            parts.append(esc(s[last:m.start()]))
+            parts.append(figure_html(m.group(1), m.group(2)))
+            last = m.end()
+        parts.append(esc(s[last:]))
+        s = "".join(parts)
         s = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", r'<a href="\2">\1</a>', s)
         s = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", s)
         s = re.sub(r"(?<!\*)\*([^*]+)\*(?!\*)", r"<em>\1</em>", s)
@@ -2246,6 +2320,23 @@ def md_to_html(md: str) -> str:
         line = lines[i]
         if not line.strip():
             close_lists()
+            i += 1
+            continue
+        stripped = line.strip()
+        yt = yt_line_re.match(stripped)
+        if yt:
+            close_lists()
+            vid = next(g for g in yt.groups() if g)
+            if yt_id_re.match(vid):
+                out.append(youtube_embed(vid))
+            else:
+                out.append(f"<p>{inline(stripped)}</p>")
+            i += 1
+            continue
+        img = img_line_re.match(stripped)
+        if img:
+            close_lists()
+            out.append(figure_html(img.group(1), img.group(2)))
             i += 1
             continue
         if line.startswith("## "):
@@ -2268,7 +2359,12 @@ def md_to_html(md: str) -> str:
             out.append(f"<li>{inline(re.sub(r'^\d+\.\s+', '', line))}</li>")
         else:
             close_lists()
-            out.append(f"<p>{inline(line.strip())}</p>")
+            rendered = inline(stripped)
+            # Avoid wrapping a lone figure in <p>
+            if rendered.startswith("<figure ") and rendered.endswith("</figure>"):
+                out.append(rendered)
+            else:
+                out.append(f"<p>{rendered}</p>")
         i += 1
     close_lists()
     return "\n".join(out)

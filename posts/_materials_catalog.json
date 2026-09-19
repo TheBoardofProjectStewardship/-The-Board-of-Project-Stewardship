@@ -1,0 +1,195 @@
+{
+  "source": "Allan agent / swarm_v2.CONSTRUCTION_MATERIALS",
+  "note": "Manufacturer links for blog rotation. Do not invent prices or licenses.",
+  "materials": [
+    {
+      "name": "Simpson Strong-Tie connectors",
+      "url": "https://www.strongtie.com/",
+      "use": "structural hardware, hold-downs, and framing connectors for additions",
+      "tags": [
+        "structure",
+        "second-story",
+        "seismic",
+        "framing"
+      ]
+    },
+    {
+      "name": "ZIP System sheathing & tape",
+      "url": "https://www.huberwood.com/zip-system",
+      "use": "weather-resistant roof and wall sheathing for wet PNW climates",
+      "tags": [
+        "envelope",
+        "roof",
+        "second-story",
+        "weather"
+      ]
+    },
+    {
+      "name": "James Hardie fiber-cement siding",
+      "url": "https://www.jameshardie.com/",
+      "use": "durable exterior cladding that handles coastal moisture and paint cycles",
+      "tags": [
+        "exterior",
+        "siding",
+        "second-story",
+        "weather"
+      ]
+    },
+    {
+      "name": "GAF roofing systems",
+      "url": "https://www.gaf.com/",
+      "use": "new roof planes and waterproofing when a second story reworks the roof",
+      "tags": [
+        "roof",
+        "second-story",
+        "weather"
+      ]
+    },
+    {
+      "name": "Owens Corning insulation",
+      "url": "https://www.owenscorning.com/en-us/insulation",
+      "use": "thermal comfort and energy performance in new upper floors",
+      "tags": [
+        "energy",
+        "insulation",
+        "second-story",
+        "comfort"
+      ]
+    },
+    {
+      "name": "Andersen Windows",
+      "url": "https://www.andersenwindows.com/",
+      "use": "view windows and egress openings common in second-story suites",
+      "tags": [
+        "windows",
+        "views",
+        "second-story",
+        "energy"
+      ]
+    },
+    {
+      "name": "Marvin Windows and Doors",
+      "url": "https://www.marvin.com/",
+      "use": "premium window packages for coastal light and weather exposure",
+      "tags": [
+        "windows",
+        "views",
+        "second-story",
+        "luxury"
+      ]
+    },
+    {
+      "name": "Trex composite decking",
+      "url": "https://www.trex.com/",
+      "use": "low-maintenance decks and upper-level outdoor connections",
+      "tags": [
+        "deck",
+        "outdoor",
+        "second-story"
+      ]
+    },
+    {
+      "name": "Schluter Systems",
+      "url": "https://www.schluter.com/schluter-us/en_US/",
+      "use": "tile waterproofing assemblies for new upper baths",
+      "tags": [
+        "bath",
+        "waterproofing",
+        "second-story",
+        "finish"
+      ]
+    },
+    {
+      "name": "Kohler bath fixtures",
+      "url": "https://www.kohler.com/en",
+      "use": "fixtures for master suites added on second stories",
+      "tags": [
+        "bath",
+        "finish",
+        "second-story",
+        "luxury"
+      ]
+    },
+    {
+      "name": "Boise Cascade engineered lumber (BCI / Versa-Lam)",
+      "url": "https://www.bc.com/",
+      "use": "LVLs and I-joists for long spans and floor systems upstairs",
+      "tags": [
+        "structure",
+        "framing",
+        "second-story"
+      ]
+    },
+    {
+      "name": "Weyerhaeuser TimberStrand / Parallam",
+      "url": "https://www.weyerhaeuser.com/woodproducts/",
+      "use": "engineered beams and headers for open second-story plans",
+      "tags": [
+        "structure",
+        "framing",
+        "second-story"
+      ]
+    },
+    {
+      "name": "CertainTeed building products",
+      "url": "https://www.certainteed.com/",
+      "use": "insulation, gypsum, and exterior products used on major remodels",
+      "tags": [
+        "envelope",
+        "insulation",
+        "finish"
+      ]
+    },
+    {
+      "name": "Velux skylights",
+      "url": "https://www.veluxusa.com/",
+      "use": "daylighting for upper halls, stairs, and loft-style second stories",
+      "tags": [
+        "windows",
+        "light",
+        "second-story",
+        "energy"
+      ]
+    },
+    {
+      "name": "Milgard Windows",
+      "url": "https://www.milgard.com/",
+      "use": "West Coast\u2013common window systems for additions and remodels",
+      "tags": [
+        "windows",
+        "second-story",
+        "energy"
+      ]
+    },
+    {
+      "name": "Therma-Tru entry doors",
+      "url": "https://www.thermatru.com/",
+      "use": "durable exterior door systems when entries are reworked with additions",
+      "tags": [
+        "doors",
+        "exterior",
+        "finish"
+      ]
+    },
+    {
+      "name": "Benjamin Moore paint",
+      "url": "https://www.benjaminmoore.com/",
+      "use": "interior/exterior finish systems homeowners recognize on completed projects",
+      "tags": [
+        "finish",
+        "paint",
+        "interior"
+      ]
+    },
+    {
+      "name": "Sherwin-Williams coatings",
+      "url": "https://www.sherwin-williams.com/",
+      "use": "pro-grade coatings for new siding, trim, and interiors",
+      "tags": [
+        "finish",
+        "paint",
+        "exterior"
+      ]
+    }
+  ]
+}
