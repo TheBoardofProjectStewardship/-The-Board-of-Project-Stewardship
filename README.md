@@ -38,6 +38,10 @@ Base: `https://boardofprojectstewardship.com/`
 | `insulation.html` | Insulation directory |
 | `excavation.html` | Excavation / Site Work directory |
 | `blog.html` | Blog index |
+| `good-steward.html` | Good Steward hub |
+| `site-visit.html` | Site Visit & Discovery landing |
+| `pm-dashboard.html` | PM Execution Dashboard landing |
+| `another-story.html` | Another Story Board feature |
 | `blog/rss.xml` | Blog RSS feed |
 | `404.html` | Branded Board 404 |
 | `posts/2026-09-19-home-addition-kirkland-wa.html` | Home Addition Kirkland WA |

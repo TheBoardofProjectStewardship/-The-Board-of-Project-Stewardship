@@ -88,7 +88,10 @@ def main() -> None:
         "Trades",
         "Blog",
         "Good Steward",
+        "Site Visit Checklist",
+        "PM Dashboard",
         "Another Story",
+        "Tools",
     )
     chrome = header
     for label in nav_needed:
@@ -132,6 +135,9 @@ def main() -> None:
         fail("write.html must not appear in sitemap.xml")
     if "tools/another-story/index.html" not in sitemap:
         fail("sitemap missing public Another Story tool URL")
+    for rel in ("site-visit.html", "pm-dashboard.html", "good-steward.html", "another-story.html"):
+        if rel not in sitemap:
+            fail(f"sitemap missing {rel}")
 
     trades = (ROOT / "trades.html").read_text(encoding="utf-8")
     if '"@type": "ItemList"' not in trades:
@@ -212,6 +218,28 @@ def main() -> None:
         fail("Another Story iframe chrome still brands Pacific Pro Group as owner")
     if "Board feature" not in story_tool:
         fail("Another Story iframe chrome missing Board feature framing")
+
+    if "site-visit.html" not in header or "pm-dashboard.html" not in header:
+        fail("header Tools group must link site-visit.html and pm-dashboard.html")
+    if "tools/site-visit/" in header or "tools/pm-dashboard/" in header:
+        fail("header must use Board landings, not raw tools/ app URLs")
+
+    for rel, title_bit in (
+        ("site-visit.html", "Site Visit"),
+        ("pm-dashboard.html", "PM"),
+        ("another-story.html", "Another Story"),
+        ("good-steward.html", "Good Steward"),
+    ):
+        landing = ROOT / rel
+        if not landing.is_file():
+            fail(f"{rel} missing")
+        ltxt = landing.read_text(encoding="utf-8")
+        if 'id="main-content"' not in ltxt or 'rel="canonical"' not in ltxt:
+            fail(f"{rel} missing page_shell head/nav landmarks")
+        if f"https://boardofprojectstewardship.com/{rel}" not in ltxt:
+            fail(f"{rel} canonical is not the Board landing")
+        if title_bit.lower() not in ltxt.lower():
+            fail(f"{rel} missing expected title copy ({title_bit})")
 
     print(f"OK: checked {len(html_files)} HTML files; BreadcrumbList on {crumbs}")
 

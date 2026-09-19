@@ -842,28 +842,42 @@ def nav_html(active: str = "", prefix: str = "") -> str:
         ("bathrooms", href("bathrooms.html"), "Bathrooms"),
         ("blog", href("blog.html"), "Blog"),
     ]
-    more = [
+    more_dirs = [
         ("commercial", href("commercial.html"), "Commercial"),
         ("spec-homes", href("spec-homes.html"), "Spec"),
         ("trades", href("trades.html"), "Trades"),
-        ("steward", href("good-steward.html"), "Good Steward"),
-        ("story", href("another-story.html"), "Another Story"),
-        ("site-visit", href("tools/site-visit/"), "Site Visit"),
-        ("pm-dashboard", href("tools/pm-dashboard/"), "PM Dashboard"),
     ]
+    more_tools = [
+        ("steward", href("good-steward.html"), "Good Steward"),
+        ("site-visit", href("site-visit.html"), "Site Visit Checklist"),
+        ("pm-dashboard", href("pm-dashboard.html"), "PM Dashboard"),
+        ("story", href("another-story.html"), "Another Story"),
+    ]
+    more = more_dirs + more_tools
     more_keys = {k for k, _, _ in more}
     more_open = active in more_keys
     primary_html = "".join(_nav_link(h, label, key, active) for key, h, label in primary)
-    more_items = "".join(
-        f'<a href="{h}" class="block px-4 py-2 text-xs uppercase tracking-widest '
-        f'{"text-secondary" if key == active else "text-slate-300 hover:text-secondary hover:bg-white/5"}" '
-        f'{"aria-current=\"page\"" if key == active else ""}>{esc(label)}</a>'
-        for key, h, label in more
+
+    def _more_link(key: str, h: str, label: str) -> str:
+        current = key == active
+        return (
+            f'<a href="{h}" class="block px-4 py-2 text-xs uppercase tracking-widest '
+            f'{"text-secondary" if current else "text-slate-300 hover:text-secondary hover:bg-white/5"}" '
+            f'{"aria-current=\"page\"" if current else ""} role="menuitem">{esc(label)}</a>'
+        )
+
+    more_items = (
+        '<p class="px-4 pt-1 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Directories</p>'
+        + "".join(_more_link(k, h, lab) for k, h, lab in more_dirs)
+        + '<p class="px-4 pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Tools</p>'
+        + "".join(_more_link(k, h, lab) for k, h, lab in more_tools)
     )
-    mobile_all = primary + more
-    mobile_html = "".join(
-        _nav_link(h, label, key, active, extra_cls="block py-2")
-        for key, h, label in mobile_all
+    mobile_html = (
+        "".join(_nav_link(h, label, key, active, extra_cls="block py-2") for key, h, label in primary)
+        + '<p class="pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Directories</p>'
+        + "".join(_nav_link(h, label, key, active, extra_cls="block py-2") for key, h, label in more_dirs)
+        + '<p class="pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Tools</p>'
+        + "".join(_nav_link(h, label, key, active, extra_cls="block py-2") for key, h, label in more_tools)
     )
     home_href = href("index.html")
     more_btn_cls = "text-secondary" if more_open else "text-slate-300 hover:text-secondary"
@@ -911,9 +925,9 @@ def footer_html(prefix: str = "./", active: str = "") -> str:
         ("trades", f"{prefix}trades.html", "Trade contractors"),
         ("blog", f"{prefix}blog.html", "Blog"),
         ("steward", f"{prefix}good-steward.html", "Good Steward"),
-        ("site-visit", f"{prefix}tools/site-visit/", "Site Visit Checklist"),
-        ("pm-dashboard", f"{prefix}tools/pm-dashboard/", "PM Dashboard"),
-        ("story", f"{prefix}another-story.html", "Another Story SEA"),
+        ("site-visit", f"{prefix}site-visit.html", "Site Visit Checklist"),
+        ("pm-dashboard", f"{prefix}pm-dashboard.html", "PM Dashboard"),
+        ("story", f"{prefix}another-story.html", "Another Story"),
     ]
     items = []
     for key, href, label in explore:
@@ -948,11 +962,25 @@ def footer_html(prefix: str = "./", active: str = "") -> str:
 
 
 def tools_href(slug: str, prefix: str = "", filename: str = "") -> str:
-    """Normalize tool links to ./tools/… (or ../tools/… from posts). Never mix /tools/."""
+    """Iframe/app src under ./tools/… (or ../tools/… from posts). Never mix /tools/."""
     base = prefix if prefix else "./"
     if filename:
         return f"{base}tools/{slug}/{filename}"
     return f"{base}tools/{slug}/"
+
+
+def public_tool_href(slug: str, prefix: str = "") -> str:
+    """Board-branded public landing. slugs: site-visit, pm-dashboard, another-story, good-steward."""
+    names = {
+        "site-visit": "site-visit.html",
+        "pm-dashboard": "pm-dashboard.html",
+        "another-story": "another-story.html",
+        "good-steward": "good-steward.html",
+        "story": "another-story.html",
+        "steward": "good-steward.html",
+    }
+    name = names.get(slug, f"{slug}.html")
+    return f"{prefix}{name}" if prefix else f"./{name}"
 
 
 def contact_strip_html() -> str:
@@ -1017,9 +1045,9 @@ def another_story_embed(prefix: str = "") -> str:
 
 def steward_cta_strip(prefix: str = "") -> str:
     """Compact Good Steward links — not the twin 1400px iframes."""
-    open_steward = f"{prefix}good-steward.html" if prefix else "./good-steward.html"
-    site_visit_href = tools_href("site-visit", prefix)
-    pm_href = tools_href("pm-dashboard", prefix)
+    open_steward = public_tool_href("good-steward", prefix)
+    site_visit_href = public_tool_href("site-visit", prefix)
+    pm_href = public_tool_href("pm-dashboard", prefix)
     return f"""  <aside id="good-steward-cta" class="max-w-6xl mx-auto px-4 py-8 relative z-20 border-t border-white/5">
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>
     <h2 class="text-xl font-black text-white tracking-tight mb-2">Site visit and PM checklists</h2>
@@ -1066,9 +1094,9 @@ def another_story_cta(prefix: str = "") -> str:
 
 def steward_tools_embed(prefix: str = "") -> str:
     """Good Steward Tools — Site Visit Checklist + PM Dashboard cards and iframes."""
-    open_steward = f"{prefix}good-steward.html" if prefix else "./good-steward.html"
-    site_visit_href = tools_href("site-visit", prefix)
-    pm_href = tools_href("pm-dashboard", prefix)
+    open_steward = public_tool_href("good-steward", prefix)
+    site_visit_href = public_tool_href("site-visit", prefix)
+    pm_href = public_tool_href("pm-dashboard", prefix)
     site_visit_src = tools_href("site-visit", prefix, "index.html")
     pm_src = tools_href("pm-dashboard", prefix, "index.html")
     return (
@@ -2006,8 +2034,8 @@ def build_about() -> str:
       </div>
       <div class="flex flex-wrap gap-3">
         <a href="./good-steward.html" class="bg-primary text-white px-5 py-3.5 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs shadow-glow-sleek">Good Steward guide &amp; tools</a>
-        <a href="{tools_href('site-visit')}" class="border border-white/20 bg-white/5 text-white px-5 py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Site Visit Checklist</a>
-        <a href="{tools_href('pm-dashboard')}" class="border border-white/20 bg-white/5 text-white px-5 py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">PM Dashboard</a>
+        <a href="{public_tool_href('site-visit')}" class="border border-white/20 bg-white/5 text-white px-5 py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Site Visit Checklist</a>
+        <a href="{public_tool_href('pm-dashboard')}" class="border border-white/20 bg-white/5 text-white px-5 py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">PM Dashboard</a>
       </div>
     </section>
 
@@ -3462,6 +3490,10 @@ Base: `{BASE_URL}`
 | `trades.html` | Trade contractor hub |
 {trade_lines}
 | `blog.html` | Blog index |
+| `good-steward.html` | Good Steward hub |
+| `site-visit.html` | Site Visit & Discovery landing |
+| `pm-dashboard.html` | PM Execution Dashboard landing |
+| `another-story.html` | Another Story Board feature |
 | `blog/rss.xml` | Blog RSS feed |
 | `404.html` | Branded Board 404 |
 {post_lines}
@@ -3559,6 +3591,8 @@ def write_sitemap(posts: list[dict]) -> None:
         "blog.html",
         "another-story.html",
         "good-steward.html",
+        "site-visit.html",
+        "pm-dashboard.html",
         "blog/rss.xml",
         "tools/site-visit/index.html",
         "tools/pm-dashboard/index.html",
@@ -3678,11 +3712,12 @@ def build_good_steward_page() -> str:
     <section class="bg-charcoal border border-primary/25 rounded-xl p-6 md:p-8 mb-4">
       <h2 class="text-xl font-black text-white mb-3 tracking-tight">Open the tools</h2>
       <p class="text-sm text-slate-400 font-light leading-relaxed mb-4">
-        Full-width embeds also appear near the bottom of every Board page (with Another Story). Direct links:
+        Public Board pages for each tool (full embeds below). Another Story is a separate Board feature.
       </p>
       <div class="flex flex-wrap gap-3">
-        <a href="{tools_href('site-visit')}" class="bg-primary text-white px-5 py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs">Site Visit &amp; Discovery</a>
-        <a href="{tools_href('pm-dashboard')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">PM Dashboard</a>
+        <a href="{public_tool_href('site-visit')}" class="bg-primary text-white px-5 py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs">Site Visit &amp; Discovery</a>
+        <a href="{public_tool_href('pm-dashboard')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs">PM Dashboard</a>
+        <a href="{public_tool_href('another-story')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Another Story</a>
         <a href="./index.html" class="border border-white/15 text-slate-200 px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Back to About</a>
       </div>
     </section>
@@ -3717,6 +3752,7 @@ def build_good_steward_page() -> str:
         breadcrumbs=[("About", BASE_URL), ("Good Steward", f"{BASE_URL}good-steward.html")],
         include_tools_embed=True,
         include_story_embed=True,
+        include_widgets=False,
     )
 
 
@@ -3740,7 +3776,82 @@ def build_another_story_page() -> str:
         og_image="assets/images/another-story-banner.webp",
         include_story_embed=True,
         include_tools_embed=False,
-        breadcrumbs=[("About", BASE_URL), ("Another Story SEA", f"{BASE_URL}another-story.html")],
+        include_widgets=False,
+        breadcrumbs=[("About", BASE_URL), ("Another Story", f"{BASE_URL}another-story.html")],
+    )
+
+
+def build_site_visit_page() -> str:
+    """Board-branded Site Visit landing; crawlable intro above the tool iframe."""
+    src = tools_href("site-visit", "", "index.html")
+    body = f"""  <header class="max-w-6xl mx-auto px-4 pt-10 pb-2">
+    <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>
+    <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Site Visit &amp; Discovery</h1>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">A Board checklist for homeowners and builders preparing an addition or remodel site visit in Edmonds and the coastal Puget Sound. Notes stay in this browser — nothing is uploaded to Board servers.</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Educational template only. Not a bid, permit, contract, inspection, or price quote. Any calculator fields are worksheets, not ROI or cost commitments. Re-verify any contractor at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> before you hire.</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="{public_tool_href('good-steward')}" class="text-secondary hover:underline">Good Steward</a>. Also: <a href="{public_tool_href('pm-dashboard')}" class="text-secondary hover:underline">PM Dashboard</a> · <a href="{public_tool_href('another-story')}" class="text-secondary hover:underline">Another Story</a>.</p>
+  </header>
+  <section class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
+    <iframe
+      id="site-visit-tool"
+      src="{src}"
+      title="Site Visit and Discovery Checklist — Good Steward Tools"
+      loading="lazy"
+      style="display:block;width:100%;height:1400px;border:0;border-radius:18px;background:#f8fafc;"
+    ></iframe>
+  </section>
+"""
+    return page_shell(
+        "Site Visit Checklist | BOPS",
+        "Site Visit & Discovery checklist from the Board of Project Stewardship. Browser-local Good Steward template for Edmonds / coastal Puget Sound. Not a bid or permit.",
+        "site-visit",
+        body,
+        canonical=f"{BASE_URL}site-visit.html",
+        include_story_embed=True,
+        include_tools_embed=False,
+        include_widgets=False,
+        breadcrumbs=[
+            ("About", BASE_URL),
+            ("Good Steward", f"{BASE_URL}good-steward.html"),
+            ("Site Visit Checklist", f"{BASE_URL}site-visit.html"),
+        ],
+    )
+
+
+def build_pm_dashboard_page() -> str:
+    """Board-branded PM Dashboard landing; crawlable intro above the tool iframe."""
+    src = tools_href("pm-dashboard", "", "index.html")
+    body = f"""  <header class="max-w-6xl mx-auto px-4 pt-10 pb-2">
+    <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>
+    <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">PM Execution Dashboard</h1>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">A Board worksheet for tracking remodel phases, punch items, and notes during a North Sound project. Status stays in this browser — local-only, not a hosted project manager.</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Educational template only. Not a construction schedule, contract, or promise of dates or cost. The Board is not a general contractor. Re-verify any firm at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> before you hire.</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="{public_tool_href('good-steward')}" class="text-secondary hover:underline">Good Steward</a>. Also: <a href="{public_tool_href('site-visit')}" class="text-secondary hover:underline">Site Visit Checklist</a> · <a href="{public_tool_href('another-story')}" class="text-secondary hover:underline">Another Story</a>.</p>
+  </header>
+  <section class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
+    <iframe
+      id="pm-dashboard-tool"
+      src="{src}"
+      title="PM Execution Dashboard — Good Steward Tools"
+      loading="lazy"
+      style="display:block;width:100%;height:1400px;border:0;border-radius:18px;background:#f1f5f9;"
+    ></iframe>
+  </section>
+"""
+    return page_shell(
+        "PM Dashboard | BOPS",
+        "PM Execution Dashboard from the Board of Project Stewardship. Browser-local Good Steward phase tracker for Edmonds / coastal Puget Sound. Not a schedule commitment.",
+        "pm-dashboard",
+        body,
+        canonical=f"{BASE_URL}pm-dashboard.html",
+        include_story_embed=True,
+        include_tools_embed=False,
+        include_widgets=False,
+        breadcrumbs=[
+            ("About", BASE_URL),
+            ("Good Steward", f"{BASE_URL}good-steward.html"),
+            ("PM Dashboard", f"{BASE_URL}pm-dashboard.html"),
+        ],
     )
 
 
@@ -4003,19 +4114,19 @@ def patch_tool_pages() -> None:
             SITE_DIR / "tools" / "site-visit" / "index.html",
             "Site Visit & Discovery | BOPS",
             "Good Steward site-visit checklist for Edmonds and coastal Puget Sound. Browser-local Board template — not a bid, permit, or contract.",
-            f"{SITE_ORIGIN}/tools/site-visit/",
+            f"{SITE_ORIGIN}/site-visit.html",
         ),
         (
             SITE_DIR / "tools" / "pm-dashboard" / "index.html",
             "PM Execution Dashboard | BOPS",
             "Good Steward PM dashboard for Edmonds remodel phases. Browser-local Board template — not a schedule commitment.",
-            f"{SITE_ORIGIN}/tools/pm-dashboard/",
+            f"{SITE_ORIGIN}/pm-dashboard.html",
         ),
         (
             SITE_DIR / "tools" / "another-story" / "index.html",
             "Another Story | Board of Project Stewardship",
             "Another Story — Board feature. AI-assisted second-story design preview for Edmonds and North Sound homes. Not a bid or permit document.",
-            f"{SITE_ORIGIN}/tools/another-story/",
+            f"{SITE_ORIGIN}/another-story.html",
         ),
     ]
     for path, title, description, canonical in specs:
@@ -4163,6 +4274,8 @@ def main(argv: list[str] | None = None) -> None:
     (SITE_DIR / "blog.html").write_text(build_blog_index(posts), encoding="utf-8")
     (SITE_DIR / "another-story.html").write_text(build_another_story_page(), encoding="utf-8")
     (SITE_DIR / "good-steward.html").write_text(build_good_steward_page(), encoding="utf-8")
+    (SITE_DIR / "site-visit.html").write_text(build_site_visit_page(), encoding="utf-8")
+    (SITE_DIR / "pm-dashboard.html").write_text(build_pm_dashboard_page(), encoding="utf-8")
     (SITE_DIR / "write.html").write_text(build_write_page(), encoding="utf-8")
     (SITE_DIR / "404.html").write_text(build_404_page(), encoding="utf-8")
 
