@@ -38,6 +38,12 @@ Base: `https://boardofprojectstewardship.com/`
 | `insulation.html` | Insulation directory |
 | `excavation.html` | Excavation / Site Work directory |
 | `blog.html` | Blog index |
+| `good-steward.html` | Good Steward hub |
+| `site-visit.html` | Site Visit & Discovery landing |
+| `pm-dashboard.html` | PM Execution Dashboard landing |
+| `another-story.html` | Another Story Board feature |
+| `blog/rss.xml` | Blog RSS feed |
+| `404.html` | Branded Board 404 |
 | `posts/2026-09-19-home-addition-kirkland-wa.html` | Home Addition Kirkland WA |
 | `posts/2026-09-18-kitchen-remodel-mill-creek-wa.html` | Kitchen Remodel Mill Creek WA |
 | `posts/2026-09-17-bathroom-remodel-magnolia-wa.html` | Bathroom Remodel Magnolia WA |
@@ -111,7 +117,41 @@ Sources: `/workspace/top30-addition-contractors.md`, `/workspace/bops-research-k
 
 ## Tech
 
-Multi-page static site. Tailwind CDN + Font Awesome. Relative links for GitHub Pages. JSON-LD `ItemList`, `FAQPage`, and blog `Article` where applicable.
+Multi-page static site. Tailwind CDN + Font Awesome. Relative links for GitHub Pages. JSON-LD `ItemList`, `FAQPage`, `BreadcrumbList`, and blog `Article` where applicable. Tailwind CDN is known render-blocking debt (full purge CSS is a follow-up).
+
+## HTTPS / custom domain (ops — not a generator fix)
+
+Custom-domain HTTPS is still blocked by a **certificate hostname mismatch** on the apex. This ship does **not** claim HTTPS is fixed.
+
+When the GitHub Pages custom certificate is valid for `boardofprojectstewardship.com`:
+
+1. GitHub Pages → **Enforce HTTPS**
+2. If Cloudflare is in front: SSL/TLS mode **Full** (not Flexible)
+3. Recheck the live certificate SAN for `boardofprojectstewardship.com`
+
+Until then, verify generated markup over `http://boardofprojectstewardship.com/`.
+
+GitHub Pages with `.nojekyll` does not pretty-serve `/kitchen` from `kitchen.html`. `404.html` soft-redirects extensionless directory paths to the `.html` URL. Canonicals already lock the `.html` form.
+
+## IndexNow
+
+After generate (or after Pages ships `main`):
+
+```bash
+python3 generate_site.py --indexnow
+# or, ping the current sitemap only:
+python3 generate_site.py --indexnow-only
+```
+
+CI: `.github/workflows/indexnow.yml` runs `--indexnow-only` on push to `main`. Soft-fails if offline. Key file is hosted at `/{32-hex}.txt` and preserved in `.well-known/indexnow-key.txt`.
+
+## Search Console / Bing Webmaster (ops — not this PR)
+
+GSC and Bing Webmaster registration stay with the site owner (Alex login). Do not register them from this generator.
+
+## Draft / noindex
+
+`write.html` is a draft contribution tool. It is generated with `noindex, follow` and is **not** in `sitemap.xml`.
 
 ## Updates
 
