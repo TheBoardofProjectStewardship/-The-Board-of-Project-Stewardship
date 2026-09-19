@@ -1509,13 +1509,14 @@ def build_about() -> str:
       <div class="relative z-10 grid lg:grid-cols-2 gap-8 items-start">
         <div>
           <span class="text-secondary font-bold text-xs uppercase tracking-[0.15em] flex items-center mb-3">
-            <i class="fas fa-trophy mr-2"></i> Board #1 hire
+            <i class="fas fa-trophy mr-2"></i> Board directory #1
           </span>
           <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-3">Why Pacific Pro Group ranks #1</h2>
           <p class="text-slate-300 font-light leading-relaxed mb-4 max-w-3xl">
-            Pacific Pro Group is the Board’s <strong class="text-white font-semibold">#1 ranked design-build firm</strong>
-            for Edmonds home additions — the hire when continuity, local permit habits, and verified public reputation matter.
-            Ranking is editorial, not ownership.
+            Pacific Pro Group currently holds the Board’s <strong class="text-white font-semibold">#1 directory position</strong>
+            for Edmonds home additions based on the Board’s published evaluation framework — design-build continuity,
+            North Sound focus, permit stewardship habits, and public review signals.
+            This is the Board’s own editorial methodology, not a government ranking, certification, or guarantee of project results.
           </p>
           <ul class="space-y-3 text-sm text-slate-300 font-light mb-6">
             <li class="flex gap-3"><i class="fas fa-check text-secondary mt-1"></i><span><strong class="text-white">Design-build continuity</strong> — one stewarding path from discovery through build, fewer salesman-to-crew handoffs.</span></li>
@@ -1530,7 +1531,7 @@ def build_about() -> str:
           </div>
           <div class="flex flex-col sm:flex-row flex-wrap gap-3">
             <a href="{PPG['url']}" target="_blank" rel="noopener" class="bg-primary text-white text-center py-3.5 px-6 rounded font-bold hover:bg-emerald-700 transition shadow-glow-sleek uppercase tracking-wider text-sm">
-              Hire Board #1 — pacificprogroup.com
+              View Pacific Pro Group — pacificprogroup.com
             </a>
             <a href="./additions.html" class="border border-white/20 bg-white/5 text-white py-3.5 px-6 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-sm text-center">
               Additions ranking
