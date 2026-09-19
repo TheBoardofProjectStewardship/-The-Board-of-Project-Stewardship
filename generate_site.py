@@ -578,7 +578,7 @@ def footer_html(prefix: str = "./") -> str:
           <span class="font-black text-base tracking-wider text-white">The Board of Project Stewardship</span>
         </div>
         <p class="font-light leading-relaxed text-sm">Editorial directories of verified remodel, addition, and trade contractors serving Edmonds and King &amp; Snohomish Counties, WA. Updated {YEAR}.</p>
-        <p class="mt-3 font-light leading-relaxed text-sm">Related: <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a> and <a href="https://anotherstorysea.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">Another Story SEA</a> are associated projects.</p>
+        <p class="mt-3 font-light leading-relaxed text-sm">Contractor directory highlight: <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a> (Board #1 design-build). Concept studio: <a href="https://anotherstorysea.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">Another Story SEA</a>.</p>
       </div>
       <div>
         <h4 class="text-white font-bold text-xs uppercase tracking-widest mb-4">Explore</h4>
@@ -698,7 +698,7 @@ def steward_tools_embed(prefix: str = "") -> str:
         'Practical checklists for homeowners and builders working on additions and remodels in Edmonds and the coastal Puget Sound. '
         'Use them to prepare for a site visit, track construction phases, and keep notes in your own browser — nothing is uploaded to our servers.</p>\n'
         '      <p class="text-sm text-slate-400 font-light max-w-3xl leading-relaxed">'
-        'Educational templates associated with '
+        'Educational templates published by the Board. Pacific Pro Group appears in directories as '
         '<a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a>'
         ' (Board #1 design-build). Not bids, permits, contracts, or schedules — verify '
         f'<a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I</a> before hiring. '
@@ -778,11 +778,6 @@ def board_organization_website_ld() -> dict:
                 "sameAs": [
                     "https://github.com/TheBoardofProjectStewardship",
                 ],
-                "isRelatedTo": {
-                    "@type": "Organization",
-                    "name": "Pacific Pro Group",
-                    "url": "https://pacificprogroup.com/",
-                },
             },
             {
                 "@type": "WebSite",
@@ -1356,7 +1351,7 @@ def build_about() -> str:
     body = f"""{hero(
         f"Independent · Edmonds / King &amp; Snohomish · {YEAR}",
         'The Board of Project Stewardship<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">A Regulatory Filter for Local Construction Integrity</span>',
-        "Most directories are marketing platforms. We are an owned editorial standards hub associated with Pacific Pro Group — a regulatory filter focused on local construction integrity in Edmonds and the greater King &amp; Snohomish market.",
+        "Most directories are marketing platforms. The Board of Project Stewardship is an independent construction-standards and contractor-directory organization focused on local construction integrity in Edmonds and the greater King &amp; Snohomish market.",
         ["Independent review", "Local standards", "Project continuity"],
         image_rel=_hero_rel if _hero_rel and asset_exists(_hero_rel) else None,
         image_alt=_hero_alt,
@@ -1494,7 +1489,7 @@ def build_about() -> str:
 
     return page_shell(
         "The Board of Project Stewardship | Edmonds Construction Standards",
-        "Most directories are marketing platforms. The Board of Project Stewardship is an owned editorial standards hub associated with Pacific Pro Group — a regulatory filter focused on local construction integrity in Edmonds and the greater King & Snohomish market.",
+        "Most directories are marketing platforms. The Board of Project Stewardship is an independent construction-standards and contractor-directory organization focused on local construction integrity in Edmonds and the greater King & Snohomish market.",
         "about",
         body,
         canonical=BASE_URL,
@@ -2817,7 +2812,7 @@ def build_good_steward_page() -> str:
       Use them to prepare for a site visit, track construction phases, and keep notes in your own browser — nothing is uploaded to our servers.
     </p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-4">
-      These tools are educational templates associated with
+      These tools are educational templates published by the Board. For contractor listings see
       <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a>
       (Board #1 design-build). They are not bids, permits, contracts, or schedules. Always
       <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">verify a contractor’s WA L&amp;I license</a>
@@ -2853,7 +2848,7 @@ def build_good_steward_page() -> str:
 """
     return page_shell(
         "Good Steward | Board of Project Stewardship",
-        "Good Steward Tools — site visit discovery checklist and PM execution dashboard for Edmonds / coastal Puget Sound. Educational templates associated with Pacific Pro Group. Verify WA L&I before hiring.",
+        "Good Steward Tools — site visit discovery checklist and PM execution dashboard for Edmonds / coastal Puget Sound. Educational templates published by the Board of Project Stewardship. Verify WA L&I before hiring.",
         "steward",
         body,
         canonical=f"{BASE_URL}good-steward.html",
@@ -2871,7 +2866,7 @@ def build_another_story_page() -> str:
 """
     return page_shell(
         "Another Story SEA | Board of Project Stewardship",
-        "Another Story SEA — second-story concept studio from Pacific Pro Group. AI-assisted design preview for Edmonds and North Sound homes.",
+        "Another Story SEA — second-story concept studio. AI-assisted design preview for Edmonds and North Sound homes. Listed with Board directories.",
         "story",
         body,
         canonical=f"{BASE_URL}another-story.html",
