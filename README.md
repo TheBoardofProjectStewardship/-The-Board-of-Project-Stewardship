@@ -38,6 +38,8 @@ Base: `https://boardofprojectstewardship.com/`
 | `insulation.html` | Insulation directory |
 | `excavation.html` | Excavation / Site Work directory |
 | `blog.html` | Blog index |
+| `posts/2026-09-19-home-addition-kirkland-wa.html` | Home Addition Kirkland WA |
+| `posts/2026-09-18-kitchen-remodel-mill-creek-wa.html` | Kitchen Remodel Mill Creek WA |
 | `posts/2026-09-17-bathroom-remodel-magnolia-wa.html` | Bathroom Remodel Magnolia WA |
 | `posts/2026-09-16-kitchen-remodel-magnolia-seattle.html` | Kitchen Remodel Magnolia Seattle |
 | `posts/2026-09-15-home-addition-edmonds-wa.html` | Home Addition Edmonds WA |

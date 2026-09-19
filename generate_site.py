@@ -2294,10 +2294,20 @@ def md_to_html(md: str) -> str:
         )
 
     def figure_html(alt: str, src: str) -> str:
+        # Resolve ../assets/... relative to posts/ through CDN_MAP when present
+        # so live GH Pages works even when binary assets are gitignored.
+        resolved = src
+        if not src.startswith(("http://", "https://", "data:")):
+            rel = src
+            if rel.startswith("../"):
+                rel = rel[3:]
+            rel = rel.lstrip("./")
+            if rel in CDN_MAP:
+                resolved = CDN_MAP[rel]
         cap = f"<figcaption>{esc(alt)}</figcaption>" if alt.strip() else ""
         return (
             f'<figure class="post-figure">'
-            f'<img src="{esc(src)}" alt="{esc(alt)}" loading="lazy">'
+            f'<img src="{esc(resolved)}" alt="{esc(alt)}" loading="lazy">'
             f"{cap}</figure>"
         )
 

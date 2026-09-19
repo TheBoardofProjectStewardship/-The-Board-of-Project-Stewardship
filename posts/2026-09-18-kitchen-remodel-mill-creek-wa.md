@@ -14,6 +14,8 @@ slug: "kitchen-remodel-mill-creek-wa"
 
 Mill Creek’s mix of planned neighborhoods, cul-de-sac lots, and mid-1990s through 2010s housing stock means kitchen remodels here often start with circulation and storage — not only cabinets. Many homes already have open dining connections; the real work is making the work triangle, pantry, and ventilation match how the household cooks today.
 
+![Illustrative Pacific Northwest kitchen remodel in progress with cabinet boxes and island dry-fit — not a photo of a real Board of Professional Services job](../assets/images/posts/2026-09-18-mill-creek-kitchen-1.webp)
+
 ## Neighborhood context
 
 Whether you are near the Town Center, along the 527 corridor, or in a quieter residential pocket, staging and parking still matter. HOA design rules can affect exterior hood terminations, window changes, and dumpster placement even when the kitchen itself is interior. Ask bidders how they have handled Mill Creek or nearby Snohomish County kitchens of similar age — especially homes with existing islands that never got proper circuits or makeup air.
@@ -22,11 +24,23 @@ Whether you are near the Town Center, along the 527 corridor, or in a quieter re
 
 The PNW damp season rewards quiet, adequately sized range hoods that duct outdoors, not recirculating units that leave grease and moisture in the house. If you move gas, enlarge openings, or change structural beams for a wider opening to the family room, expect building review in addition to trade permits. Confirm with the Mill Creek permit desk (or Snohomish County when the jurisdiction routes that way) whether your scope is fixture-only or needs plan review. Put permit ownership, inspection sequencing, and temporary kitchen plans in the proposal — not in a handshake after demolition starts.
 
+![Illustrative kitchen rough-in showing electrical, hood duct chase, and plumbing stub-outs — illustrative only, not a real job photo](../assets/images/posts/2026-09-18-mill-creek-kitchen-2.webp)
+
 ## Layout, materials, and process
 
 Measure appliance clearances and landing space honestly before you fall in love with a slab sample. Quartz and quality laminate handle daily use well when edges and sinks are detailed carefully; natural stone needs a maintenance habit you will actually keep. Prefer soft-close hardware, durable drawer bases over deep shelves, and lighting layers (ambient, task, under-cabinet) planned with the electrician — not added as a punch-list afterthought. If accessibility or aging-in-place is a goal, plan wider aisles, lever hardware, and parallel work zones during layout, when changes are cheap.
 
+![Illustrative finished contemporary PNW kitchen with ducted range hood and island seating — illustrative only, not a real job photo](../assets/images/posts/2026-09-18-mill-creek-kitchen-3.webp)
+
 Board rankings on [kitchen.html](../kitchen.html) place **Pacific Pro Group** at #1 for kitchen remodels in this editorial set — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with [trades.html](../trades.html) when you need electrician or plumber context, [additions.html](../additions.html) if a bump-out is on the table, and the [blog](../blog.html) for related King and Snohomish kitchen posts.
+
+## Materials worth researching
+
+Manufacturer product pages useful when comparing finishes and coatings with your remodel team (no prices or endorsements implied):
+
+- [Benjamin Moore paint](https://www.benjaminmoore.com/) — interior finishes commonly specified around cabinets and trim
+- [Sherwin-Williams coatings](https://www.sherwin-williams.com/) — durable coatings for high-use kitchen surfaces
+- [CertainTeed building products](https://www.certainteed.com/) — building-product systems that may appear in envelope or insulation scopes tied to a kitchen bump-out
 
 ## FAQ
 
