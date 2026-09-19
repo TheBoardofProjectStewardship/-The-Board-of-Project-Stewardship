@@ -578,7 +578,7 @@ def footer_html(prefix: str = "./") -> str:
           <span class="font-black text-base tracking-wider text-white">The Board of Project Stewardship</span>
         </div>
         <p class="font-light leading-relaxed text-sm">Editorial directories of verified remodel, addition, and trade contractors serving Edmonds and King &amp; Snohomish Counties, WA. Updated {YEAR}.</p>
-        <p class="mt-3 font-light leading-relaxed text-sm">Contractor directory highlight: <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a> (Board #1 design-build). Concept studio: <a href="https://anotherstorysea.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">Another Story SEA</a>.</p>
+        <p class="mt-3 font-light leading-relaxed text-sm">Contractor directory highlight: <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a> (Board #1 design-build). Board feature: <a href="https://anotherstorysea.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">Another Story SEA</a>.</p>
       </div>
       <div>
         <h4 class="text-white font-bold text-xs uppercase tracking-widest mb-4">Explore</h4>
@@ -623,10 +623,10 @@ def another_story_embed(prefix: str = "") -> str:
         '  <section id="another-story-sea-embed" class="max-w-6xl mx-auto px-4 py-12 relative z-20 border-t border-white/5">\n'
         + banner
         + '    <div class="mb-5">\n'
-        + '      <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Pacific Pro Group · Concept studio</p>\n'
+        + '      <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Board feature · from Board #1 listing</p>\n'
         + '      <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-2">Another Story SEA</h2>\n'
         + '      <p class="text-sm text-slate-400 font-light max-w-3xl leading-relaxed">'
-        'Explore a second-story concept on your own photo. AI-assisted design preview — not a bid, permit, or construction document.</p>\n'
+        'Explore a second-story concept on your own photo. AI-assisted design preview — not a bid, permit, or construction document. Featured from <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a> (Board #1 design-build) · <a href="https://anotherstorysea.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">anotherstorysea.com</a>.</p>\n'
         + '    </div>\n'
         + '    <iframe\n'
         + '      id="another-story-sea"\n'
@@ -670,9 +670,9 @@ def another_story_cta(prefix: str = "") -> str:
     return f"""  <section id="another-story-cta" class="max-w-6xl mx-auto px-4 py-10 relative z-20 border-t border-white/5">
     <div class="bg-charcoal border border-secondary/25 rounded-xl overflow-hidden flex flex-col md:flex-row card-hover">
 {img}      <div class="p-6 md:p-8 flex flex-col justify-center gap-3">
-        <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary">Pacific Pro Group · Concept studio</p>
+        <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary">Board feature · from Board #1 listing</p>
         <h2 class="text-2xl font-black text-white tracking-tight">Another Story SEA</h2>
-        <p class="text-sm text-slate-400 font-light leading-relaxed max-w-xl">Same home. Another story. Open the full concept studio to explore a second-story idea on your photo — AI-assisted preview, not a bid or permit document.</p>
+        <p class="text-sm text-slate-400 font-light leading-relaxed max-w-xl">Same home. Another story. Open the full concept studio to explore a second-story idea on your photo — AI-assisted preview, not a bid or permit document. Featured from <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a> (Board #1) · <a href="https://anotherstorysea.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">anotherstorysea.com</a>.</p>
         <div>
           <a href="{href}" class="inline-flex items-center gap-2 bg-primary text-white px-5 py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs shadow-glow-sleek">
             Open Another Story <i class="fas fa-arrow-right text-[10px]"></i>
@@ -2859,14 +2859,14 @@ def build_good_steward_page() -> str:
 def build_another_story_page() -> str:
     """Dedicated host page with full iframe embed."""
     body = """  <header class="max-w-6xl mx-auto px-4 pt-10 pb-2">
-    <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Pacific Pro Group · Concept studio</p>
+    <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Board feature · from Board #1 listing</p>
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Another Story SEA</h1>
-    <p class="text-slate-400 font-light max-w-2xl leading-relaxed mb-2">Same home. Another story. Upload a photo, shape a second-story concept, and review before sharing. AI-assisted preview — not a bid or permit document.</p>
+    <p class="text-slate-400 font-light max-w-2xl leading-relaxed mb-2">Same home. Another story. Upload a photo, shape a second-story concept, and review before sharing. AI-assisted preview — not a bid or permit document. Board feature from <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a> (Board #1 design-build) · <a href="https://anotherstorysea.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">anotherstorysea.com</a>.</p>
   </header>
 """
     return page_shell(
         "Another Story SEA | Board of Project Stewardship",
-        "Another Story SEA — second-story concept studio. AI-assisted design preview for Edmonds and North Sound homes. Listed with Board directories.",
+        "Another Story SEA — Board feature from Board #1 listing (Pacific Pro Group). AI-assisted second-story design preview for Edmonds and North Sound homes.",
         "story",
         body,
         canonical=f"{BASE_URL}another-story.html",
