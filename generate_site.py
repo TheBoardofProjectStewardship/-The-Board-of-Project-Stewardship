@@ -1417,7 +1417,7 @@ def build_about() -> str:
                 ),
                 img_card(
                     "assets/images/home-ppg-addition.webp",
-                    "Illustrative quality PNW remodel exterior associated with Board #1 listing photography",
+                    "Illustrative PNW remodel exterior for Board #1 listing",
                     "Board #1 — quality remodel craft",
                 ),
                 img_card(
