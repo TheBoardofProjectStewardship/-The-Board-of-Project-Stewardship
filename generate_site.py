@@ -541,6 +541,7 @@ def nav_html(active: str = "", prefix: str = "") -> str:
         ("spec-homes", href("spec-homes.html"), "Spec Homes"),
         ("trades", href("trades.html"), "Trades"),
         ("blog", href("blog.html"), "Blog"),
+        ("steward", href("good-steward.html"), "Good Steward"),
         ("story", href("another-story.html"), "Another Story"),
     ]
     items = []
@@ -592,6 +593,9 @@ def footer_html(prefix: str = "./") -> str:
           <li><a href="{prefix}spec-homes.html" class="hover:text-secondary transition">Spec homes</a></li>
           <li><a href="{prefix}trades.html" class="hover:text-secondary transition">Trade contractors</a></li>
           <li><a href="{prefix}blog.html" class="hover:text-secondary transition">Blog</a></li>
+          <li><a href="{prefix}good-steward.html" class="hover:text-secondary transition">Good Steward</a></li>
+          <li><a href="{prefix}tools/site-visit/" class="hover:text-secondary transition">Site Visit Checklist</a></li>
+          <li><a href="{prefix}tools/pm-dashboard/" class="hover:text-secondary transition">PM Dashboard</a></li>
           <li><a href="{prefix}another-story.html" class="hover:text-secondary transition">Another Story SEA</a></li>
         </ul>
       </div>
@@ -678,6 +682,64 @@ def another_story_cta(prefix: str = "") -> str:
     </div>
   </section>
 """
+
+
+
+
+def steward_tools_embed(prefix: str = "") -> str:
+    """Good Steward Tools — Site Visit Checklist + PM Dashboard cards and iframes."""
+    open_steward = f"{prefix}good-steward.html" if prefix else "./good-steward.html"
+    return (
+        '  <section id="good-steward-tools-embed" class="max-w-6xl mx-auto px-4 py-12 relative z-20 border-t border-white/5">\n'
+        '    <div class="mb-8">\n'
+        '      <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>\n'
+        '      <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-2">Good Steward Tools</h2>\n'
+        '      <p class="text-sm text-slate-400 font-light max-w-3xl leading-relaxed mb-2">'
+        'Practical checklists for homeowners and builders working on additions and remodels in Edmonds and the coastal Puget Sound. '
+        'Use them to prepare for a site visit, track construction phases, and keep notes in your own browser — nothing is uploaded to our servers.</p>\n'
+        '      <p class="text-sm text-slate-400 font-light max-w-3xl leading-relaxed">'
+        'Educational templates associated with '
+        '<a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a>'
+        ' (Board #1 design-build). Not bids, permits, contracts, or schedules — verify '
+        f'<a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I</a> before hiring. '
+        f'<a href="{open_steward}" class="text-secondary hover:underline">What a good steward does</a>.</p>\n'
+        '    </div>\n'
+        '    <div class="grid md:grid-cols-2 gap-4 mb-8">\n'
+        '      <a href="/tools/site-visit/" class="block bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover no-underline">\n'
+        '        <p class="text-[11px] font-bold uppercase tracking-widest text-secondary mb-2">Checklist</p>\n'
+        '        <h3 class="text-lg font-black text-white mb-2">Site Visit &amp; Discovery</h3>\n'
+        '        <p class="text-sm text-slate-400 font-light leading-relaxed">Phase-by-phase discovery notes, sketch pad, and proposal-readiness checklist. Data stays in your browser.</p>\n'
+        '      </a>\n'
+        '      <a href="/tools/pm-dashboard/" class="block bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover no-underline">\n'
+        '        <p class="text-[11px] font-bold uppercase tracking-widest text-secondary mb-2">Dashboard</p>\n'
+        '        <h3 class="text-lg font-black text-white mb-2">PM Execution Dashboard</h3>\n'
+        '        <p class="text-sm text-slate-400 font-light leading-relaxed">Build-phase status, punch tracking, and export helpers for steward continuity. Local-only — not a schedule commitment.</p>\n'
+        '      </a>\n'
+        '    </div>\n'
+        '    <div class="space-y-10">\n'
+        '      <div>\n'
+        '        <h3 class="text-sm font-bold uppercase tracking-widest text-slate-300 mb-3">Site Visit &amp; Discovery</h3>\n'
+        '        <iframe\n'
+        '          id="steward-site-visit"\n'
+        '          src="/tools/site-visit/index.html"\n'
+        '          title="Site Visit and Discovery Checklist — Good Steward Tools"\n'
+        '          loading="lazy"\n'
+        '          style="display:block;width:100%;height:1400px;border:0;border-radius:18px;background:#f8fafc;"\n'
+        '        ></iframe>\n'
+        '      </div>\n'
+        '      <div>\n'
+        '        <h3 class="text-sm font-bold uppercase tracking-widest text-slate-300 mb-3">PM Execution Dashboard</h3>\n'
+        '        <iframe\n'
+        '          id="steward-pm-dashboard"\n'
+        '          src="/tools/pm-dashboard/index.html"\n'
+        '          title="PM Execution Dashboard — Good Steward Tools"\n'
+        '          loading="lazy"\n'
+        '          style="display:block;width:100%;height:1400px;border:0;border-radius:18px;background:#f1f5f9;"\n'
+        '        ></iframe>\n'
+        '      </div>\n'
+        '    </div>\n'
+        '  </section>\n'
+    )
 
 
 
@@ -791,6 +853,7 @@ def page_shell(
         if asset_exists(cand):
             og_rel = cand
     og_abs = resolve_og_image(og_rel)
+    tools_block = steward_tools_embed(prefix if prefix else "")
     story_block = another_story_embed(prefix if prefix else "")
     fav = favicon_tags(prefix if prefix else "./")
     return f"""<!DOCTYPE html>
@@ -821,6 +884,7 @@ def page_shell(
   <div class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
 {ppg_widgets_html()}
   </div>
+{tools_block}
 {story_block}
 {footer_html(prefix if prefix else "./")}
 {ppg_widgets_script()}
@@ -1276,6 +1340,7 @@ def build_about() -> str:
         ("./spec-homes.html", "Spec Homes", False),
         ("./trades.html", "Trades", False),
         ("./blog.html", "Blog", False),
+        ("./good-steward.html", "Good Steward", False),
     ]
     cta_html = []
     for href, label, primary in ctas:
@@ -1316,6 +1381,49 @@ def build_about() -> str:
       </div>
       <div class="grid sm:grid-cols-2 gap-4">
 {chr(10).join(pillar_cards)}
+      </div>
+    </section>
+
+    <section class="mb-14">
+      <div class="mb-8 border-b border-white/10 pb-4">
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Homeowner practice</span>
+        <h2 class="text-3xl font-black text-white tracking-tight">What a good steward does</h2>
+        <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Concrete habits that keep remodels, additions, and custom work accountable — whether you hire a design-build firm or self-manage trades.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+        <div class="bg-charcoal border border-white/10 rounded-xl p-5">
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-id-card text-secondary mr-2"></i>Verify WA L&amp;I</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Confirm active contractor license, bonding, and insurance on <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">L&amp;I Verify</a> before any deposit or start date.</p>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-5">
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-file-contract text-secondary mr-2"></i>Written scope</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Insist on a written scope of work, allowances, and exclusions — not a handshake estimate — before demolition or ordering long-lead materials.</p>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-5">
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-user-tie text-secondary mr-2"></i>One steward contact</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Name a single project steward for decisions and schedule. Avoid salesman-to-crew handoffs with no continuity.</p>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-5">
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-stamp text-secondary mr-2"></i>Permit ownership</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Know who pulls and owns each permit, who schedules inspections, and how corrections are closed before cover-up.</p>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-5">
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-exchange-alt text-secondary mr-2"></i>Change-order discipline</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Require written change orders with price and schedule impact before extra work starts — no verbal “we’ll figure it out.”</p>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-5">
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-cloud-rain text-secondary mr-2"></i>Weather &amp; dry-in</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">For additions and roof work, demand a dry-in plan: temporary weather protection, sequencing, and moisture checks before finishes.</p>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-5 sm:col-span-2 lg:col-span-3">
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-clipboard-check text-secondary mr-2"></i>Punch list before final pay</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Walk a written punch list with photos, retain final payment until items are closed, and keep manuals/warranty contacts with the project file.</p>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <a href="./good-steward.html" class="bg-primary text-white px-5 py-3.5 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs shadow-glow-sleek">Good Steward guide &amp; tools</a>
+        <a href="./tools/site-visit/" class="border border-white/20 bg-white/5 text-white px-5 py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Site Visit Checklist</a>
+        <a href="./tools/pm-dashboard/" class="border border-white/20 bg-white/5 text-white px-5 py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">PM Dashboard</a>
       </div>
     </section>
 
@@ -2618,7 +2726,7 @@ def write_sitemap(posts: list[dict]) -> None:
         "spec-homes.html",
         "trades.html",
     ] + [f"{slug}.html" for slug, *_ in TRADES]
-    extras = ["blog.html", "write.html", "another-story.html"]
+    extras = ["blog.html", "write.html", "another-story.html", "good-steward.html", "tools/site-visit/index.html", "tools/pm-dashboard/index.html"]
 
     def file_lastmod(rel: str) -> str:
         p = SITE_DIR / rel
@@ -2668,6 +2776,89 @@ def write_posts_json(posts: list[dict]) -> None:
             "author": AUTHOR,
         })
     (SITE_DIR / "posts.json").write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+
+
+
+def build_good_steward_page() -> str:
+    """Expanded Good Steward practices; tools embed via page_shell sitewide block."""
+    practices = [
+        ("fa-id-card", "Verify WA L&I before you hire",
+         "Confirm active contractor license, bonding, and insurance on L&I Verify before any deposit or start date. Match the business name on the contract."),
+        ("fa-file-contract", "Get a written scope — not a handshake",
+         "Document rooms, finishes, allowances, exclusions, and owner-furnished items in writing before demolition or long-lead orders."),
+        ("fa-user-tie", "Keep one steward contact",
+         "Name a single project steward for decisions and schedule. Avoid salesman-to-crew handoffs with no continuity."),
+        ("fa-stamp", "Own the permit story",
+         "Know which permits are required, who pulls them, who pays fees, and who stands for inspections. Cover-up before corrections is a red flag."),
+        ("fa-exchange-alt", "Change-order discipline",
+         "Every scope change gets a written price and schedule impact before work proceeds."),
+        ("fa-cloud-rain", "Weatherproof and dry-in first",
+         "Especially on additions and second stories: temporary protection, roof/window sequencing, and moisture checks before finishes."),
+        ("fa-clipboard-check", "Punch list, then final pay",
+         "Walk a written punch list with photos. Retain final payment until items close. Keep manuals and warranties with the project file."),
+    ]
+    cards = []
+    for icon, title, blurb in practices:
+        cards.append(
+            "        <article class=\"bg-charcoal border border-white/10 rounded-xl p-6 card-hover\">\n"
+            f"          <div class=\"w-11 h-11 rounded-lg bg-primary/20 border border-secondary/30 flex items-center justify-center mb-4\">\n"
+            f"            <i class=\"fas {icon} text-secondary text-lg\"></i>\n"
+            "          </div>\n"
+            f"          <h2 class=\"text-lg font-black text-white mb-2 tracking-tight\">{title}</h2>\n"
+            f"          <p class=\"text-sm text-slate-400 font-light leading-relaxed\">{blurb}</p>\n"
+            "        </article>"
+        )
+    cards_html = "\n".join(cards)
+    body = f"""  <header class="max-w-6xl mx-auto px-4 pt-10 pb-6">
+    <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Standards · Practice · Tools</p>
+    <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Good Steward Tools</h1>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">
+      Practical checklists for homeowners and builders working on additions and remodels in Edmonds and the coastal Puget Sound.
+      Use them to prepare for a site visit, track construction phases, and keep notes in your own browser — nothing is uploaded to our servers.
+    </p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-4">
+      These tools are educational templates associated with
+      <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a>
+      (Board #1 design-build). They are not bids, permits, contracts, or schedules. Always
+      <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">verify a contractor’s WA L&amp;I license</a>
+      before you hire. <em class="text-slate-500">Contractor-ops language in either tool is labeled as an internal template, not a required sales script.</em>
+    </p>
+    <ul class="text-sm text-slate-300 space-y-1 mb-2 list-disc pl-5">
+      <li><strong class="text-white">Site Visit &amp; Discovery</strong> — what to observe and ask before plans or pricing (includes feasibility &amp; estimate calculator)</li>
+      <li><strong class="text-white">PM Execution Dashboard</strong> — phase checklist + status notes for an active build</li>
+    </ul>
+  </header>
+  <main class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
+    <section class="mb-10">
+      <div class="mb-6 border-b border-white/10 pb-4">
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Homeowner practice</span>
+        <h2 class="text-2xl font-black text-white tracking-tight">What a good steward does</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4 mb-8">
+{cards_html}
+      </div>
+    </section>
+    <section class="bg-charcoal border border-primary/25 rounded-xl p-6 md:p-8 mb-4">
+      <h2 class="text-xl font-black text-white mb-3 tracking-tight">Open the tools</h2>
+      <p class="text-sm text-slate-400 font-light leading-relaxed mb-4">
+        Full-width embeds also appear near the bottom of every Board page (with Another Story). Direct links:
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <a href="./tools/site-visit/" class="bg-primary text-white px-5 py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs">Site Visit &amp; Discovery</a>
+        <a href="./tools/pm-dashboard/" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">PM Dashboard</a>
+        <a href="./index.html" class="border border-white/15 text-slate-200 px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Back to About</a>
+      </div>
+    </section>
+  </main>
+"""
+    return page_shell(
+        "Good Steward | Board of Project Stewardship",
+        "Good Steward Tools — site visit discovery checklist and PM execution dashboard for Edmonds / coastal Puget Sound. Educational templates associated with Pacific Pro Group. Verify WA L&I before hiring.",
+        "steward",
+        body,
+        canonical=f"{BASE_URL}good-steward.html",
+    )
+
 
 
 def build_another_story_page() -> str:
@@ -2740,6 +2931,7 @@ def main() -> None:
         (posts_dir / post["out_name"]).write_text(build_post_page(post), encoding="utf-8")
     (SITE_DIR / "blog.html").write_text(build_blog_index(posts), encoding="utf-8")
     (SITE_DIR / "another-story.html").write_text(build_another_story_page(), encoding="utf-8")
+    (SITE_DIR / "good-steward.html").write_text(build_good_steward_page(), encoding="utf-8")
 
     write_readme(posts)
     write_robots()

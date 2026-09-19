@@ -1,0 +1,2485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM Execution Dashboard | Board of Project Stewardship — Good Steward Tools</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 300px;
+        }
+        /* Custom scrollbar for textareas */
+        textarea::-webkit-scrollbar { width: 8px; }
+        textarea::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
+        textarea::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
+        textarea::-webkit-scrollbar-thumb:hover { background: #64748b; }
+        
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        
+        /* Smooth transition for sliders */
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            background: #2563eb;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col">
+    <div class="bg-amber-50 border-b border-amber-200 text-amber-950 text-sm px-4 py-3">
+        <div class="max-w-screen-2xl mx-auto">
+            <p><strong>Disclaimer:</strong> Browser-local tool — autosaves to localStorage on this device. <span class="inline-block mt-1 sm:mt-0 sm:ml-1 px-2 py-0.5 rounded-full bg-slate-900 text-amber-300 text-xs font-semibold">Contractor &amp; project-team template (associated with Pacific Pro Group)</span> · Not a bid/permit/contract. Progress % is a <strong>team note</strong>, not a contract schedule or payment milestone. <a href="https://secure.lni.wa.gov/verify/" target="_blank" rel="noopener" class="underline font-semibold">Verify WA L&amp;I</a> · <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="underline font-semibold">pacificprogroup.com</a></p>
+            <p class="text-xs mt-2 flex flex-wrap gap-3"><span id="pm-last-saved" class="italic">Not saved yet</span>
+            <button type="button" id="pm-clear-data" class="underline text-red-700 font-semibold">Clear this project on device</button></p>
+        </div>
+    </div>
+
+
+    <!-- Chosen Palette: Construction Pro (Slate-100 bg, Slate-800 text, Amber-500 highlights, Blue-600 accents for a structural/builder feel) -->
+
+    <header class="bg-slate-900 shadow-md border-b border-slate-800 sticky top-0 z-10 text-white">
+        <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <span class="text-3xl text-amber-500" aria-hidden="true">&#x26D1;</span>
+                <div>
+                    <h1 class="text-xl font-bold leading-tight tracking-wide">Board of Project Stewardship <span class="text-sm font-normal text-slate-400 ml-2">| Good Steward Tools</span></h1>
+                    <p class="text-xs text-amber-400 font-medium tracking-wide uppercase mt-0.5">PM Execution Dashboard · associated with Pacific Pro Group</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4 bg-slate-800 px-4 py-2 rounded-lg border border-slate-700">
+                <span class="text-sm font-bold text-slate-300">Phase:</span>
+                <span class="text-sm font-medium text-amber-400 bg-slate-900 px-3 py-1 rounded border border-slate-700" id="current-phase-display">1. Pre-Con</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+        
+        <!-- PROJECT INFO HEADER -->
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 mb-6 overflow-hidden">
+            <div class="bg-blue-50 px-6 py-3 border-b border-blue-100 flex justify-between items-center">
+                <h2 class="font-bold text-blue-900 flex items-center gap-2 text-lg"><span>&#x1F4CB;</span> Project Master File</h2>
+            </div>
+            <div class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Project Name / Client</label>
+                    <input type="text" id="pm_project_name" class="w-full text-sm border-0 border-b-2 border-slate-200 focus:ring-0 focus:border-blue-600 px-0 py-1 bg-transparent font-medium text-slate-800" placeholder="e.g., Smith Master Addition">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Site Address</label>
+                    <input type="text" id="pm_address" class="w-full text-sm border-0 border-b-2 border-slate-200 focus:ring-0 focus:border-blue-600 px-0 py-1 bg-transparent font-medium text-slate-800" placeholder="123 Coastal Way, Edmonds, WA">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Permit Number(s)</label>
+                    <input type="text" id="pm_permit" class="w-full text-sm border-0 border-b-2 border-slate-200 focus:ring-0 focus:border-blue-600 px-0 py-1 bg-transparent font-medium text-slate-800" placeholder="BLD-2026-0001">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Est. Completion Date</label>
+                    <input type="date" id="pm_date" class="w-full text-sm border-0 border-b-2 border-slate-200 focus:ring-0 focus:border-blue-600 px-0 py-1 bg-transparent font-medium text-slate-800">
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-8">
+            
+            <!-- SIDEBAR NAVIGATION -->
+            <aside class="w-full lg:w-1/4 xl:w-1/5 flex flex-col gap-6 shrink-0">
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
+                    <h2 class="text-sm font-bold text-slate-800 uppercase tracking-wider mb-4 border-b border-slate-100 pb-2">Build Phases</h2>
+                    <nav class="flex flex-col space-y-1" id="nav-menu">
+                        <button data-target="phase1" class="nav-btn w-full flex items-center justify-between text-left px-3 py-2.5 rounded-lg bg-blue-50 text-blue-700 font-medium transition-colors text-sm">
+                            <span>1. Pre-Con & Handoff</span>
+                            <span class="text-xs bg-white text-blue-600 px-2 py-0.5 rounded-full border border-blue-100 phase-score">0%</span>
+                        </button>
+                        <button data-target="phase2" class="nav-btn w-full flex items-center justify-between text-left px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-medium transition-colors text-sm">
+                            <span>2. Site Prep & Ground</span>
+                            <span class="text-xs bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full phase-score">0%</span>
+                        </button>
+                        <button data-target="phase3" class="nav-btn w-full flex items-center justify-between text-left px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-medium transition-colors text-sm">
+                            <span>3. Framing & Dry-In</span>
+                            <span class="text-xs bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full phase-score">0%</span>
+                        </button>
+                        <button data-target="phase4" class="nav-btn w-full flex items-center justify-between text-left px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-medium transition-colors text-sm">
+                            <span>4. MEP Rough-Ins</span>
+                            <span class="text-xs bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full phase-score">0%</span>
+                        </button>
+                        <button data-target="phase5" class="nav-btn w-full flex items-center justify-between text-left px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-medium transition-colors text-sm">
+                            <span>5. Exterior Finishes</span>
+                            <span class="text-xs bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full phase-score">0%</span>
+                        </button>
+                        <button data-target="phase6" class="nav-btn w-full flex items-center justify-between text-left px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-medium transition-colors text-sm">
+                            <span>6. Insulation & Drywall</span>
+                            <span class="text-xs bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full phase-score">0%</span>
+                        </button>
+                        <button data-target="phase7" class="nav-btn w-full flex items-center justify-between text-left px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-medium transition-colors text-sm">
+                            <span>7. Interior Finishes</span>
+                            <span class="text-xs bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full phase-score">0%</span>
+                        </button>
+                        <button data-target="phase8" class="nav-btn w-full flex items-center justify-between text-left px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-medium transition-colors text-sm">
+                            <span>8. Final & Handover</span>
+                            <span class="text-xs bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full phase-score">0%</span>
+                        </button>
+                        <div class="my-2 border-t border-slate-200"></div>
+                        <button data-target="report" class="nav-btn w-full flex items-center justify-between text-left px-3 py-2.5 rounded-lg text-amber-700 bg-amber-50 hover:bg-amber-100 font-bold transition-colors text-sm border border-amber-200">
+                            <span>&#x1F4C4; Generate Report</span>
+                        </button>
+                    </nav>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl shadow-sm border border-slate-700 p-6 text-white">
+                    <h2 class="text-sm font-bold uppercase tracking-wider mb-2 text-center text-slate-300">Project Progress</h2>
+                    <div class="w-full h-4 bg-slate-900 rounded-full overflow-hidden border border-slate-600 mb-4 relative">
+                        <div id="sidebar-progress-bar" class="h-full bg-blue-500 transition-all duration-500" style="width: 0%;"></div>
+                        <span id="sidebar-progress-text" class="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-white drop-shadow-md">0%</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="progressChart"></canvas>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- MAIN CONTENT AREA -->
+            <section class="w-full lg:w-3/4 xl:w-4/5 bg-white rounded-xl shadow-sm border border-slate-200">
+                
+                <!-- PHASE 1: PRE-CON -->
+                <div id="phase1" class="tab-content active p-6 sm:p-8">
+                    <div class="mb-6 border-b border-slate-200 pb-4">
+                        <h2 class="text-2xl font-bold text-slate-900">Phase 1: Pre-Construction & Handoff</h2>
+                        <p class="text-slate-500 mt-1">Review all estimating documents, establish site controls, and prepare for mobilization.</p>
+                    </div>
+                    
+                    <div class="space-y-4 mb-8">
+                        
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Sales & Estimating Handoff Complete</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Reviewed signed contract, final plans, geotech/structural engineering, and specific client requests.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="1">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Permits Approved & Posted</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Building, plumbing, electrical, and mechanical permits are approved and physically posted on-site in a weather-proof box.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="1">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NEW: Pre-Con Photos -->
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Pre-Construction Photos & Video Logged</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Documented existing conditions of the house, driveway, and neighboring property lines to protect against liability.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="1">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NEW: Material Submittals -->
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Material Submittals & Sign-offs Complete</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Client has signed off on all preliminary material selections (siding colors, window types, etc.) before final ordering.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="1">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">SWPPP & Erosion Control Plan Active</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Stormwater Pollution Prevention Plan reviewed. Erosion control measures scheduled for installation prior to digging.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="1">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Site Utilities & Logistics Setup</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Port-a-john delivered, dumpster/debris plan established, temp power and water confirmed.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="1">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Property Lines & Setbacks Verified</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Surveyor pins located. Setbacks physically marked to ensure foundation avoids encroachment.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="1">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NEW: Weather Protection -->
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Temporary Weather Protection Plan</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Tarping, shrink wrap, or temporary roof structures staged to protect the existing home during demo/tie-in.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="1">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Neighbor Notification Letters Sent</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Adjacent properties notified of upcoming construction timeline, noise, and PM contact info.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="1">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">ROW Access & Staging Plan</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Right of Way (ROW) permits secured for dumpsters, cranes, or material deliveries. Traffic control plan coordinated if blocking streets.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="1">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Site Security & Temp Fencing</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Temporary chain-link fencing installed. Jobsite locks, lockboxes, and any required security cameras active.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="1">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border-2 border-amber-200 bg-amber-50 rounded-lg transition-colors task-container shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-amber-600 mt-0.5 rounded border-amber-400 focus:ring-amber-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-amber-900 font-bold block group-hover:text-amber-700 transition-colors task-title">Pre-Construction Client Walkthrough</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-amber-800 block mb-3">Met with client on-site. Discussed working hours, parking, dust mitigation, safety rules, and communication expectations.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-300 rounded-lg appearance-none cursor-pointer accent-amber-600 outline-none" min="0" max="100" value="0" data-phase="1">
+                                    <span class="text-xs font-bold text-amber-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2">Phase 1 Notes & Delays</label>
+                        <textarea id="notes_p1" class="w-full border border-slate-300 rounded-lg p-3 text-sm focus:ring-blue-500 focus:border-blue-500" rows="3" placeholder="Log any weather delays, material issues, or client changes here..."></textarea>
+                    </div>
+                    
+                    <div class="mt-8 flex flex-wrap justify-between items-center gap-4 border-t border-slate-200 pt-6">
+                        <button onclick="printPhaseReport(1)" class="text-blue-600 font-medium hover:text-blue-800 transition-colors flex items-center gap-2 border border-blue-200 bg-blue-50 px-4 py-2 rounded-lg hover:bg-blue-100">
+                            <span>&#x1F5A8;</span> Print Phase 1 Status
+                        </button>
+                        <button class="next-btn bg-slate-800 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-slate-700 transition-colors shadow-sm">Next Phase &#x2192;</button>
+                    </div>
+                </div>
+
+                <!-- PHASE 2: SITE PREP -->
+                <div id="phase2" class="tab-content p-6 sm:p-8">
+                    <div class="mb-6 border-b border-slate-200 pb-4">
+                        <h2 class="text-2xl font-bold text-slate-900">Phase 2: Site Prep & Groundwork</h2>
+                        <p class="text-slate-500 mt-1">Clearing, excavation, foundation pouring, and underground utilities.</p>
+                    </div>
+                    
+                    <div class="space-y-4 mb-8">
+                        
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Erosion Control & Demo</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Silt fences/wattles installed. Existing structures/hardscaping demolished and hauled away. Tree protection in place.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="2">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Excavation & Trenching</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Footings dug to plan depth. Trenches cut for underground utilities.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="2">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NEW: Soil Export -->
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Soil Export & Haul-off Tracking</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">All excess spoils loaded and hauled off-site. Dump truck tickets logged to budget.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="2">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Geotech Soil Bearing Inspection</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Geotechnical engineer inspected open trenches and verified soil bearing capacity matches plans.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="2">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Underground Utilities (Plumbing/Electrical)</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Under-slab drainage, sewer connections, and electrical conduits laid and inspected prior to pour.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="2">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NEW: Vapor Barrier & Insulation -->
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Slab Vapor Barrier & Rigid Insulation</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Underslab vapor barrier installed and taped. Rigid foam insulation laid down per energy code.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="2">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Forms, Rebar & Ufer Ground</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Foundation forms built. Steel reinforcement (rebar) tied per structural plans. Ufer ground established. <em>Footing inspection passed.</em></span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="2">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Stem Wall / Foundation Survey Verification</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Surveyor verified forms are perfectly placed within setbacks before concrete truck arrives.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="2">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Concrete Pour (Footings/Stem Walls/Slab)</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Concrete poured and finished. Anchor bolts and hold-downs wet-set precisely per structural layout.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="2">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NEW: Form Stripping & Cleanup -->
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Form Stripping & Site Cleanup</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">All concrete forms stripped and removed from site. Concrete splatter/debris cleaned up to prepare for framers.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="2">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Waterproofing & Backfill</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Foundation coating/waterproofing applied. Perimeter drain (French drain) installed. Foundation backfilled and compacted.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="2">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2">Phase 2 Notes & Delays</label>
+                        <textarea id="notes_p2" class="w-full border border-slate-300 rounded-lg p-3 text-sm focus:ring-blue-500 focus:border-blue-500" rows="3" placeholder="Log concrete yardage, delays, or excavation surprises (e.g., hitting rock)..."></textarea>
+                    </div>
+                    
+                    <div class="mt-8 flex flex-wrap justify-between items-center gap-4 border-t border-slate-200 pt-6">
+                        <button class="prev-btn text-slate-500 px-6 py-2.5 rounded-lg font-medium hover:bg-slate-100 transition-colors">&#x2190; Back</button>
+                        <button onclick="printPhaseReport(2)" class="text-blue-600 font-medium hover:text-blue-800 transition-colors flex items-center gap-2 border border-blue-200 bg-blue-50 px-4 py-2 rounded-lg hover:bg-blue-100">
+                            <span>&#x1F5A8;</span> Print Phase 2 Status
+                        </button>
+                        <button class="next-btn bg-slate-800 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-slate-700 transition-colors shadow-sm">Next Phase &#x2192;</button>
+                    </div>
+                </div>
+
+                <!-- PHASE 3: FRAMING -->
+                <div id="phase3" class="tab-content p-6 sm:p-8">
+                    <div class="mb-6 border-b border-slate-200 pb-4">
+                        <h2 class="text-2xl font-bold text-slate-900">Phase 3: Framing & Dry-In</h2>
+                        <p class="text-slate-500 mt-1">Going vertical. Floor systems, walls, roof structure, and weather-proofing.</p>
+                    </div>
+                    
+                    <div class="space-y-4 mb-8">
+                        
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Long-Lead Materials Ordered</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Windows, custom exterior doors, roof trusses, and specialized structural steel ordered.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="3">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Lumber Drop & Sill Plates</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Framing package delivered. Treated sill plates installed with sill sealer.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="3">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Floor System & Subfloor</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Floor joists/I-joists installed. Subfloor glued, nailed, and joints sanded flush.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="3">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Wall Framing & Sheathing</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Exterior and interior walls framed, plumbed, and lined. Exterior wall sheathing (OSB/plywood) installed and nailed to sheer code.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="3">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NEW: Plumb & Line -->
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Plumb & Line Check Complete</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">All framed walls laser-checked for perfectly plumb vertical alignment before roof loading.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="3">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Roof Framing & Decking</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Roof trusses or stick-framed rafters installed. Fascia boards and roof decking attached.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="3">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NEW: Staircase -->
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Staircase Framing & Temp Treads</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Stair stringers cut and installed. Temporary construction treads attached for safe floor-to-floor access.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="3">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Structural Steel & Custom Beams</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Flitch plates, structural steel posts, or glulam beams bolted and welded securely in place.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="3">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Shear Wall & Hold-Down Inspection</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">All Simpson ties, straps, and hold-downs installed to structural engineer's exact specification.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="3">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border-2 border-amber-200 bg-amber-50 rounded-lg transition-colors task-container shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-amber-600 mt-0.5 rounded border-amber-400 focus:ring-amber-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-amber-900 font-bold block group-hover:text-amber-700 transition-colors task-title">Overall Framing Inspection Passed</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-amber-800 block mb-3">City inspector has signed off on the complete framing and structural package.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-300 rounded-lg appearance-none cursor-pointer accent-amber-600 outline-none" min="0" max="100" value="0" data-phase="3">
+                                    <span class="text-xs font-bold text-amber-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NEW: Roof Crickets/Flashing -->
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Roof Flashing & Crickets Installed</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Chimney crickets framed. Step and kick-out flashing installed at roof-to-wall intersections.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="3">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">House Wrap & Roof Dry-In</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Weather-resistant barrier (Tyvek/Zip) installed. Roof underlayment/synthetic felt applied.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="3">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Windows & Exterior Doors Installed</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Windows and exterior doors set, squared, shimmed, and flashed (taped) to prevent water intrusion. <em>Structure is officially dried-in.</em></span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="3">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">In-Wall Blocking & Backing Installed</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Wood blocking installed behind drywall for future cabinets, towel bars, grab bars, heavy mirrors, TVs, and window treatments.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="3">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2">Phase 3 Notes & Delays</label>
+                        <textarea id="notes_p3" class="w-full border border-slate-300 rounded-lg p-3 text-sm focus:ring-blue-500 focus:border-blue-500" rows="3" placeholder="Lumber quality issues, missing hardware, or inspection notes..."></textarea>
+                    </div>
+                    
+                    <div class="mt-8 flex flex-wrap justify-between items-center gap-4 border-t border-slate-200 pt-6">
+                        <button class="prev-btn text-slate-500 px-6 py-2.5 rounded-lg font-medium hover:bg-slate-100 transition-colors">&#x2190; Back</button>
+                        <button onclick="printPhaseReport(3)" class="text-blue-600 font-medium hover:text-blue-800 transition-colors flex items-center gap-2 border border-blue-200 bg-blue-50 px-4 py-2 rounded-lg hover:bg-blue-100">
+                            <span>&#x1F5A8;</span> Print Phase 3 Status
+                        </button>
+                        <button class="next-btn bg-slate-800 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-slate-700 transition-colors shadow-sm">Next Phase &#x2192;</button>
+                    </div>
+                </div>
+
+                <!-- PHASE 4: MEP ROUGH-IN -->
+                <div id="phase4" class="tab-content p-6 sm:p-8">
+                    <div class="mb-6 border-b border-slate-200 pb-4">
+                        <h2 class="text-2xl font-bold text-slate-900">Phase 4: MEP Rough-Ins</h2>
+                        <p class="text-slate-500 mt-1">Mechanical, Electrical, and Plumbing systems installed within the wall cavities.</p>
+                    </div>
+                    
+                    <div class="space-y-4 mb-8">
+                        
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">HVAC Rough-In</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Ductwork, vents, exhaust fans, and furnace/air handler units installed. Refrigerant lines run.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="4">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Plumbing Rough-In</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Water supply lines (PEX/Copper), drain-waste-vent (DWV) piping installed. Shower pans sloped/lined.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="4">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Gas Line Pressure Test</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Gas lines run to appliances and successfully passed pressure test without leaks.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="4">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Electrical & Low-Voltage Rough-In</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Main panel set. Wires pulled to all switch, outlet, and fixture boxes. Data, coax, and AV cables run.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="4">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NEW: Smart Home Wiring -->
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Smart Home & Security Wiring</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Low-voltage wiring pulled for security cameras, motorized shades, built-in audio, and smart thermostats.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="4">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NEW: Radiant Floor / Specialty -->
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Radiant Floor / Specialty Rough-In</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">In-floor heating mats laid and tested. Central vac lines routed (if applicable).</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="4">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Fire Sprinkler Rough-In</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Sprinkler pipes and drops installed and pressure tested. (If required by code)</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="4">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NEW: Fireblocking -->
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Fireblocking & Draftstopping Complete</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">All penetrations between floors and into the attic are sealed with fire foam/caulk to code.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="4">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">PM Pre-Drywall Quality Walk</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Verify backing/blocking is installed for cabinets, towel bars, TVs, and grab bars. Verify all MEP placements match client plans.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="4">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border-2 border-amber-200 bg-amber-50 rounded-lg transition-colors task-container shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-amber-600 mt-0.5 rounded border-amber-400 focus:ring-amber-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-amber-900 font-bold block group-hover:text-amber-700 transition-colors task-title">All Rough Inspections Passed</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-amber-800 block mb-3">City has passed HVAC, Plumbing, and Electrical rough-in inspections. Clear to insulate.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-300 rounded-lg appearance-none cursor-pointer accent-amber-600 outline-none" min="0" max="100" value="0" data-phase="4">
+                                    <span class="text-xs font-bold text-amber-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2">Phase 4 Notes & Delays</label>
+                        <textarea id="notes_p4" class="w-full border border-slate-300 rounded-lg p-3 text-sm focus:ring-blue-500 focus:border-blue-500" rows="3" placeholder="Subcontractor no-shows, inspection corrections required..."></textarea>
+                    </div>
+                    
+                    <div class="mt-8 flex flex-wrap justify-between items-center gap-4 border-t border-slate-200 pt-6">
+                        <button class="prev-btn text-slate-500 px-6 py-2.5 rounded-lg font-medium hover:bg-slate-100 transition-colors">&#x2190; Back</button>
+                        <button onclick="printPhaseReport(4)" class="text-blue-600 font-medium hover:text-blue-800 transition-colors flex items-center gap-2 border border-blue-200 bg-blue-50 px-4 py-2 rounded-lg hover:bg-blue-100">
+                            <span>&#x1F5A8;</span> Print Phase 4 Status
+                        </button>
+                        <button class="next-btn bg-slate-800 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-slate-700 transition-colors shadow-sm">Next Phase &#x2192;</button>
+                    </div>
+                </div>
+
+                <!-- PHASE 5: EXTERIOR -->
+                <div id="phase5" class="tab-content p-6 sm:p-8">
+                    <div class="mb-6 border-b border-slate-200 pb-4">
+                        <h2 class="text-2xl font-bold text-slate-900">Phase 5: Exterior Finishes</h2>
+                        <p class="text-slate-500 mt-1">Completing the building envelope, siding, roofing, and exterior aesthetic.</p>
+                    </div>
+                    
+                    <div class="space-y-4 mb-8">
+                        
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Final Roofing Installation</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Shingles, metal, or flat roof membranes fully installed with all flashing, vents, and ridge caps.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="5">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NEW: Flashing Details -->
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Window & Door Flashing Details Verified</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Z-flashing, pan flashing, and head flashing installed correctly before siding covers them up.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="5">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Siding & Exterior Trim</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Siding (Hardie, cedar, stucco, etc.) installed. Window trims, corner boards, and soffit/fascia completed.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="5">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NEW: Soffit Vents -->
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Exterior Ventilation & Soffits</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Soffit panels installed and continuous venting clears insulation baffles.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="5">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Masonry / Stone Veneer Installed</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Stone, brick, or masonry accents applied to foundation skirts or exterior walls.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="5">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Exterior Paint & Caulk</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">All exterior joints caulked. Primer and final paint coats applied to siding and trim.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="5">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NEW: Garage Door -->
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Garage Door Installation</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Overhead garage doors installed, tracked, balanced, and motorized.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="5">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Gutters & Downspouts</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Seamless gutters formed and hung. Downspouts tied into underground drainage system.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="5">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Exterior Lighting & Outlets</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Sconces, security lights, and weatherproof GFCI outlets installed.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="5">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Decks, Patios & Final Grading Prep</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Deck boards installed. Yard graded to push water away from the foundation.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="5">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2">Phase 5 Notes & Delays</label>
+                        <textarea id="notes_p5" class="w-full border border-slate-300 rounded-lg p-3 text-sm focus:ring-blue-500 focus:border-blue-500" rows="3" placeholder="Siding material backorders, rain delays affecting paint..."></textarea>
+                    </div>
+                    
+                    <div class="mt-8 flex flex-wrap justify-between items-center gap-4 border-t border-slate-200 pt-6">
+                        <button class="prev-btn text-slate-500 px-6 py-2.5 rounded-lg font-medium hover:bg-slate-100 transition-colors">&#x2190; Back</button>
+                        <button onclick="printPhaseReport(5)" class="text-blue-600 font-medium hover:text-blue-800 transition-colors flex items-center gap-2 border border-blue-200 bg-blue-50 px-4 py-2 rounded-lg hover:bg-blue-100">
+                            <span>&#x1F5A8;</span> Print Phase 5 Status
+                        </button>
+                        <button class="next-btn bg-slate-800 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-slate-700 transition-colors shadow-sm">Next Phase &#x2192;</button>
+                    </div>
+                </div>
+
+                <!-- PHASE 6: DRYWALL -->
+                <div id="phase6" class="tab-content p-6 sm:p-8">
+                    <div class="mb-6 border-b border-slate-200 pb-4">
+                        <h2 class="text-2xl font-bold text-slate-900">Phase 6: Insulation & Drywall</h2>
+                        <p class="text-slate-500 mt-1">Sealing the thermal envelope and enclosing the interior walls.</p>
+                    </div>
+                    
+                    <div class="space-y-4 mb-8">
+
+                        <!-- NEW: Clean Cavities -->
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Clean Wall Cavities (Pre-Drywall)</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Swept and vacuumed all sawdust and debris from base plates before insulation/drywall seals the cavity.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="6">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Exterior Insulation Installed</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Wall and ceiling thermal insulation installed (batts, spray foam, blown-in). Baffles installed in attic.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="6">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Interior Soundproofing / Batts</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Acoustic insulation installed in interior walls (bathrooms, laundry, master beds) to reduce noise.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="6">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border-2 border-amber-200 bg-amber-50 rounded-lg transition-colors task-container shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-amber-600 mt-0.5 rounded border-amber-400 focus:ring-amber-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-amber-900 font-bold block group-hover:text-amber-700 transition-colors task-title">Insulation Inspection Passed</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-amber-800 block mb-3">City has passed thermal envelope inspection. Clear to hang drywall.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-300 rounded-lg appearance-none cursor-pointer accent-amber-600 outline-none" min="0" max="100" value="0" data-phase="6">
+                                    <span class="text-xs font-bold text-amber-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NEW: Drywall Boom/Stock -->
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Drywall Delivery & Boom Coordination</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Sheetrock safely boomed in through windows and distributed across floors without damaging framing.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="6">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Drywall Hang & Screw Inspection</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Sheetrock hung on walls/ceilings. City drywall screw/fastener inspection passed (if required).</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="6">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Drywall Tape & Mud</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Seams taped, mudded (3 coats typical), corner beads installed, and sanded smooth.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="6">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NEW: Scrap & Debris -->
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Drywall Scrap Removal</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">All heavy sheetrock off-cuts removed from floors and dumped to keep the site safe for trim carpenters.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="6">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Texture & Primer</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Wall texture applied (if applicable). PVA primer coat sprayed/rolled on all raw drywall.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="6">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Blower Door / Energy Testing Passed</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Third-party blower door and duct leakage testing completed to comply with strict WA State Energy Code.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="6">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2">Phase 6 Notes & Delays</label>
+                        <textarea id="notes_p6" class="w-full border border-slate-300 rounded-lg p-3 text-sm focus:ring-blue-500 focus:border-blue-500" rows="3" placeholder="Dryer conditions affecting mud cure times, drywall finishing touchups needed..."></textarea>
+                    </div>
+                    
+                    <div class="mt-8 flex flex-wrap justify-between items-center gap-4 border-t border-slate-200 pt-6">
+                        <button class="prev-btn text-slate-500 px-6 py-2.5 rounded-lg font-medium hover:bg-slate-100 transition-colors">&#x2190; Back</button>
+                        <button onclick="printPhaseReport(6)" class="text-blue-600 font-medium hover:text-blue-800 transition-colors flex items-center gap-2 border border-blue-200 bg-blue-50 px-4 py-2 rounded-lg hover:bg-blue-100">
+                            <span>&#x1F5A8;</span> Print Phase 6 Status
+                        </button>
+                        <button class="next-btn bg-slate-800 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-slate-700 transition-colors shadow-sm">Next Phase &#x2192;</button>
+                    </div>
+                </div>
+
+                <!-- PHASE 7: INTERIOR FINISHES -->
+                <div id="phase7" class="tab-content p-6 sm:p-8">
+                    <div class="mb-6 border-b border-slate-200 pb-4">
+                        <h2 class="text-2xl font-bold text-slate-900">Phase 7: Interior Finishes & Millwork</h2>
+                        <p class="text-slate-500 mt-1">Installing hard surfaces, carpentry, and turning the structure into a home.</p>
+                    </div>
+                    
+                    <div class="space-y-4 mb-8">
+                        
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Interior Trim & Doors</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Interior doors hung. Window casings, baseboards, crown molding, and wainscoting installed.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="7">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NEW: Staircase Finishes -->
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Staircase Millwork & Railings</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Finish treads, risers, handrails, newel posts, and balusters permanently installed.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="7">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Interior Paint</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Ceilings, walls, and millwork painted to client spec.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="7">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Cabinets, Vanities & Hardware</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Kitchen/bath cabinetry installed and leveled. Pulls, knobs, and soft-close hardware attached.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="7">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NEW: Cabinet Adjustments -->
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Cabinet Hinge & Gap Adjustments</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">All doors and drawers fine-tuned to ensure even gaps (reveals) and smooth operation.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="7">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Countertops Installed</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Stone/quartz templated, fabricated, and installed. Sinks under-mounted.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="7">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Tile Work (Bathrooms & Backsplash)</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Shower pans, wall tiles, niches, and kitchen backsplash set and grouted.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="7">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Hardwood / LVP Flooring</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Hard surface flooring installed. If site-finished wood, final polyurethane coats applied. Floors covered/protected with Ram Board.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="7">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Custom Closets & Shelving</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Wire or custom wood shelving installed in pantries, mudrooms, and bedroom closets.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="7">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Shower Glass & Mirrors</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Frameless shower enclosures installed. Vanity mirrors hung.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="7">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NEW: HVAC Registers & Trim Details -->
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">MEP Trims & Registers</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Toilets, faucets, lights, switches, cover plates, HVAC registers, and final thermostats installed.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="7">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Appliances Delivered & Connected</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Oven, fridge, dishwasher, etc. set in place, connected to power/water, and tested.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="7">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2">Phase 7 Notes & Delays</label>
+                        <textarea id="notes_p7" class="w-full border border-slate-300 rounded-lg p-3 text-sm focus:ring-blue-500 focus:border-blue-500" rows="3" placeholder="Cabinet damage during shipping, appliance backorders, tile shortages..."></textarea>
+                    </div>
+                    
+                    <div class="mt-8 flex flex-wrap justify-between items-center gap-4 border-t border-slate-200 pt-6">
+                        <button class="prev-btn text-slate-500 px-6 py-2.5 rounded-lg font-medium hover:bg-slate-100 transition-colors">&#x2190; Back</button>
+                        <button onclick="printPhaseReport(7)" class="text-blue-600 font-medium hover:text-blue-800 transition-colors flex items-center gap-2 border border-blue-200 bg-blue-50 px-4 py-2 rounded-lg hover:bg-blue-100">
+                            <span>&#x1F5A8;</span> Print Phase 7 Status
+                        </button>
+                        <button class="next-btn bg-slate-800 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-slate-700 transition-colors shadow-sm">Next Phase &#x2192;</button>
+                    </div>
+                </div>
+
+                <!-- PHASE 8: FINAL -->
+                <div id="phase8" class="tab-content p-6 sm:p-8">
+                    <div class="mb-6 border-b border-slate-200 pb-4">
+                        <h2 class="text-2xl font-bold text-slate-900">Phase 8: Punch, Final & Handover</h2>
+                        <p class="text-slate-500 mt-1">Quality control, final inspections, and delivering the finished product to the client.</p>
+                    </div>
+                    
+                    <div class="space-y-4 mb-8">
+                        
+                        <div class="p-4 border-2 border-amber-200 bg-amber-50 rounded-lg transition-colors task-container shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-amber-600 mt-0.5 rounded border-amber-400 focus:ring-amber-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-amber-900 font-bold block group-hover:text-amber-700 transition-colors task-title">Final Building & MEP Inspections Passed</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-amber-800 block mb-3">Certificate of Occupancy (or final sign-off) issued by the city.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-300 rounded-lg appearance-none cursor-pointer accent-amber-600 outline-none" min="0" max="100" value="0" data-phase="8">
+                                    <span class="text-xs font-bold text-amber-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">HVAC Commissioning & Balancing</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Airflow tested and balanced. Thermostats programmed and verified.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="8">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Landscaping & Exterior Hardscape</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Driveways poured, sod laid, and final yard grading/plantings completed.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="8">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NEW: Final Grading/Drainage check -->
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Final Grading & Drainage Verification</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Verified dirt slopes away from foundation 6" over the first 10'. Downspouts routing water clear of the structure.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="8">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Internal PM Punch List Complete</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">PM walked the site. All paint touch-ups, missing hardware, and minor defects resolved.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="8">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Site Demobilization & Final Clean</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Dumpster pulled. Temp toilet removed. Professional cleaners deep-cleaned the entire project area.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="8">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NEW: Window Cleaning & Stickers -->
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Window Cleaning & Tape Removal</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">All factory stickers removed from glass. Windows professionally washed inside and out.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="8">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Client Walkthrough & Sign-off</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Walked project with client. Final client punch-list items noted (if any) or project formally accepted.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="8">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NEW: Owner Training -->
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Owner System Training</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">Trained client on HVAC thermostats, smart home features, water shutoffs, and electrical panel layout.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="8">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">Client Punch List Resolved</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">All specific items noted by the client during the walkthrough have been fixed.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="8">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors task-container bg-white shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-blue-600 mt-0.5 rounded border-slate-300 focus:ring-blue-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-slate-800 font-bold block group-hover:text-blue-700 transition-colors task-title">As-Built Drawings & Redlines Completed</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-slate-500 block mb-3">All field redlines translated to final As-Built drawings. Digital copies provided to client and saved in CRM.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 outline-none" min="0" max="100" value="0" data-phase="8">
+                                    <span class="text-xs font-bold text-blue-700 w-10 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 border-2 border-green-200 bg-green-50 rounded-lg transition-colors task-container shadow-sm">
+                            <label class="flex items-start cursor-pointer group">
+                                <input type="checkbox" class="track-input form-checkbox h-6 w-6 text-green-600 mt-0.5 rounded border-green-400 focus:ring-green-500">
+                                <div class="ml-3 w-full">
+                                    <span class="text-green-900 font-bold block text-lg group-hover:text-green-700 transition-colors task-title">Keys & Warranty Binder Handover</span>
+                                </div>
+                            </label>
+                            <div class="ml-8 mt-1">
+                                <span class="text-sm text-green-800 block mb-3">Final payment collected. Keys, manuals, and warranty documentation given to client. Project closed.</span>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" class="task-slider w-full h-3 bg-slate-300 rounded-lg appearance-none cursor-pointer accent-green-600 outline-none" min="0" max="100" value="0" data-phase="8">
+                                    <span class="text-sm font-bold text-green-700 w-12 text-right slider-display">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2">Phase 8 Notes & Final Punch Items</label>
+                        <textarea id="notes_p8" class="w-full border border-slate-300 rounded-lg p-3 text-sm focus:ring-blue-500 focus:border-blue-500" rows="3" placeholder="List any lingering punch-list items the client noticed..."></textarea>
+                    </div>
+                    
+                    <div class="mt-8 flex flex-wrap justify-between items-center gap-4 border-t border-slate-200 pt-6">
+                        <button class="prev-btn text-slate-500 px-6 py-2.5 rounded-lg font-medium hover:bg-slate-100 transition-colors">&#x2190; Back</button>
+                        <button onclick="printPhaseReport(8)" class="text-blue-600 font-medium hover:text-blue-800 transition-colors flex items-center gap-2 border border-blue-200 bg-blue-50 px-4 py-2 rounded-lg hover:bg-blue-100">
+                            <span>&#x1F5A8;</span> Print Phase 8 Status
+                        </button>
+                        <button class="next-btn bg-amber-500 text-slate-900 px-6 py-2.5 rounded-lg font-bold hover:bg-amber-400 transition-colors shadow-sm">Go to Report Export &#x2192;</button>
+                    </div>
+                </div>
+
+                <!-- REPORT EXPORT -->
+                <div id="report" class="tab-content p-6 sm:p-8">
+                    <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-4">
+                        <div>
+                            <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
+                                <span>&#x1F4C4;</span> Generate PM Status Report
+                            </h2>
+                            <p class="text-slate-500 text-sm mt-1">Compile all tracked progress and phase notes into a clean PDF for the office or client.</p>
+                        </div>
+                    </div>
+
+                    <!-- NEW PROGRESS INPUT & MILESTONES -->
+                    <div class="bg-white border border-slate-200 rounded-xl p-6 mb-8 shadow-sm">
+                        <h3 class="text-lg font-bold text-slate-800 mb-2">Team status note — overall progress</h3>
+                        <p class="text-sm text-slate-500 mb-4">Team note for internal status only — not a contractual schedule or payment milestone.</p>
+
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-4">
+                            <div class="flex items-center gap-2">
+                                <input type="number" id="client_progress_input" min="0" max="100" class="w-24 text-2xl font-bold text-blue-700 border-2 border-blue-200 rounded-lg px-3 py-2 focus:ring-blue-500 focus:border-blue-500 text-center" value="0">
+                                <span class="text-xl font-bold text-slate-600">%</span>
+                            </div>
+                            <span class="text-sm text-slate-400 italic">Auto-syncs with checklist, or type/click below to override.</span>
+                        </div>
+
+                        <div class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100">
+                            <span class="text-xs font-bold text-slate-400 uppercase w-full block mb-1">Quick Milestones:</span>
+                            <button type="button" class="progress-preset-btn px-3 py-1.5 bg-slate-100 hover:bg-blue-50 hover:text-blue-700 text-slate-600 text-sm font-medium rounded border border-slate-200 transition-colors" data-val="10">Prep (10%)</button>
+                            <button type="button" class="progress-preset-btn px-3 py-1.5 bg-slate-100 hover:bg-blue-50 hover:text-blue-700 text-slate-600 text-sm font-medium rounded border border-slate-200 transition-colors" data-val="35">Framed (35%)</button>
+                            <button type="button" class="progress-preset-btn px-3 py-1.5 bg-slate-100 hover:bg-blue-50 hover:text-blue-700 text-slate-600 text-sm font-medium rounded border border-slate-200 transition-colors" data-val="50">Rough-Ins (50%)</button>
+                            <button type="button" class="progress-preset-btn px-3 py-1.5 bg-slate-100 hover:bg-blue-50 hover:text-blue-700 text-slate-600 text-sm font-medium rounded border border-slate-200 transition-colors" data-val="75">Drywall/Paint (75%)</button>
+                            <button type="button" class="progress-preset-btn px-3 py-1.5 bg-slate-100 hover:bg-blue-50 hover:text-blue-700 text-slate-600 text-sm font-medium rounded border border-slate-200 transition-colors" data-val="95">Finishes (95%)</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-blue-50 border border-blue-100 rounded-xl p-6 mb-8 text-center">
+                        <span class="text-4xl block mb-4">&#x1F5A8;</span>
+                        <h3 class="text-lg font-bold text-blue-900 mb-2">Ready to Export</h3>
+                        <p class="text-sm text-blue-700 mb-6 max-w-md mx-auto">This will generate a formatted document containing the Project Master File details, completion status of all 8 phases, your written notes, and the visual progress bar below everything.</p>
+                        <button id="export-pm-report" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-700 transition-colors shadow-md text-lg inline-flex items-center gap-2">
+                            Print / Save to PDF
+                        </button>
+                    </div>
+
+                    <div class="flex justify-start">
+                        <button class="prev-btn text-slate-500 px-6 py-2.5 rounded-lg font-medium hover:bg-slate-100 transition-colors">&#x2190; Back to Phases</button>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    </main>
+
+    <script>
+        // --- State Management ---
+        const state = {
+            totals: { 1: 11, 2: 11, 3: 14, 4: 10, 5: 10, 6: 10, 7: 13, 8: 12 }, 
+            current: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0 },
+            names: {
+                1: '1. Pre-Con & Handoff',
+                2: '2. Site Prep & Ground',
+                3: '3. Framing & Dry-In',
+                4: '4. MEP Rough-Ins',
+                5: '5. Exterior Finishes',
+                6: '6. Insulation & Drywall',
+                7: '7. Interior Finishes',
+                8: '8. Final & Handover'
+            }
+        };
+        const phases = ['phase1', 'phase2', 'phase3', 'phase4', 'phase5', 'phase6', 'phase7', 'phase8', 'report'];
+        let currentPhaseIndex = 0;
+        let progressChartInstance = null;
+
+        // --- Navigation Logic ---
+        function switchTab(targetId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            const targetEl = document.getElementById(targetId);
+            if(targetEl) targetEl.classList.add('active');
+            
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                // Reset normal buttons
+                if(!btn.dataset.target.includes('report')) {
+                    btn.classList.remove('bg-blue-50', 'text-blue-700');
+                    btn.classList.add('text-slate-600');
+                    const phaseScore = btn.querySelector('.phase-score');
+                    if(phaseScore) {
+                        phaseScore.classList.remove('bg-white', 'text-blue-600', 'border', 'border-blue-100');
+                        phaseScore.classList.add('bg-slate-100', 'text-slate-500');
+                    }
+                }
+            });
+
+            const activeBtn = document.querySelector(`[data-target="${targetId}"]`);
+            if (activeBtn && !targetId.includes('report')) {
+                activeBtn.classList.remove('text-slate-600');
+                activeBtn.classList.add('bg-blue-50', 'text-blue-700');
+                const activePhaseScore = activeBtn.querySelector('.phase-score');
+                if(activePhaseScore) {
+                    activePhaseScore.classList.remove('bg-slate-100', 'text-slate-500');
+                    activePhaseScore.classList.add('bg-white', 'text-blue-600', 'border', 'border-blue-100');
+                }
+                
+                // Update Top Header Phase display
+                const phaseNum = targetId.replace('phase', '');
+                const headerDisplay = document.getElementById('current-phase-display');
+                if(headerDisplay && state.names[phaseNum]) {
+                    headerDisplay.innerText = state.names[phaseNum];
+                }
+            } else if (targetId === 'report') {
+                 const headerDisplay = document.getElementById('current-phase-display');
+                 if(headerDisplay) headerDisplay.innerText = "Report Generation";
+            }
+
+            currentPhaseIndex = phases.indexOf(targetId);
+        }
+
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                switchTab(e.currentTarget.getAttribute('data-target'));
+            });
+        });
+
+        document.querySelectorAll('.next-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if(currentPhaseIndex < phases.length - 1) switchTab(phases[currentPhaseIndex + 1]);
+            });
+        });
+
+        document.querySelectorAll('.prev-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if(currentPhaseIndex > 0) switchTab(phases[currentPhaseIndex - 1]);
+            });
+        });
+
+        // --- Progress Sync Logic (Sliders <-> Checkboxes) ---
+        
+        // When slider moves, update text and checkbox
+        document.querySelectorAll('.task-slider').forEach(slider => {
+            slider.addEventListener('input', (e) => {
+                const val = e.target.value;
+                const display = e.target.nextElementSibling;
+                if(display) display.innerText = val + '%';
+                
+                const container = e.target.closest('.task-container');
+                if(container) {
+                    const cb = container.querySelector('.track-input');
+                    if(cb) cb.checked = (val === "100");
+                }
+                calculateProgress();
+            });
+        });
+
+        // When checkbox clicks, jump slider to 100% or 0%
+        document.querySelectorAll('.track-input').forEach(cb => {
+            cb.addEventListener('change', (e) => {
+                const container = e.target.closest('.task-container');
+                if(container) {
+                    const slider = container.querySelector('.task-slider');
+                    const display = slider.nextElementSibling;
+                    if(e.target.checked) {
+                        slider.value = 100;
+                        if(display) display.innerText = '100%';
+                    } else {
+                        slider.value = 0;
+                        if(display) display.innerText = '0%';
+                    }
+                }
+                calculateProgress();
+            });
+        });
+
+        // --- Progress Tracking Calculation ---
+        function calculateProgress() {
+            let totalMaxPossible = 0;
+            let totalAchievedSum = 0;
+
+            // Loop 1 through 8
+            for(let p = 1; p <= 8; p++) {
+                const sliders = document.querySelectorAll(`.task-slider[data-phase="${p}"]`);
+                let phaseSum = 0;
+                
+                sliders.forEach(s => {
+                    phaseSum += parseInt(s.value, 10);
+                });
+                
+                // Max possible sum for this phase is number of tasks * 100
+                const phaseMax = state.totals[p] * 100;
+                const phasePercent = phaseMax > 0 ? Math.round((phaseSum / phaseMax) * 100) : 0;
+                
+                totalMaxPossible += phaseMax;
+                totalAchievedSum += phaseSum;
+                
+                // Update sidebar badges to show Percentage now
+                const btn = document.querySelector(`[data-target="phase${p}"]`);
+                if(btn) {
+                    const phaseScoreEl = btn.querySelector('.phase-score');
+                    if(phaseScoreEl) phaseScoreEl.innerText = `${phasePercent}%`;
+                }
+            }
+
+            // Global Progress Bar
+            const percent = totalMaxPossible > 0 ? Math.round((totalAchievedSum / totalMaxPossible) * 100) : 0;
+            
+            const sidebarProgressBar = document.getElementById('sidebar-progress-bar');
+            if (sidebarProgressBar) sidebarProgressBar.style.width = `${percent}%`;
+            
+            const sidebarProgressText = document.getElementById('sidebar-progress-text');
+            if (sidebarProgressText) sidebarProgressText.innerText = `${percent}% Complete`;
+
+            // Sync the Client Report Input (if user hasn't manually overridden it)
+            const reportInput = document.getElementById('client_progress_input');
+            if (reportInput && !window.manualProgressOverride) {
+                reportInput.value = percent;
+            }
+
+            updateChart();
+        }
+
+        // --- Chart.js Visualization ---
+        function initChart() {
+            const canvasEl = document.getElementById('progressChart');
+            if(!canvasEl) return;
+            const ctx = canvasEl.getContext('2d');
+            
+            progressChartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['P1', 'P2', 'P3', 'P4', 'P5', 'P6', 'P7', 'P8', 'Remaining'],
+                    datasets: [{
+                        data: [0, 0, 0, 0, 0, 0, 0, 0, 91], // Updated total items to 91
+                        backgroundColor: [
+                            '#3b82f6', // P1 Blue 500
+                            '#2563eb', // P2 Blue 600
+                            '#1d4ed8', // P3 Blue 700
+                            '#1e40af', // P4 Blue 800
+                            '#0ea5e9', // P5 Sky 500
+                            '#0284c7', // P6 Sky 600
+                            '#0369a1', // P7 Sky 700
+                            '#16a34a', // P8 Green 600
+                            '#1e293b'  // Remaining (Slate 800)
+                        ],
+                        borderWidth: 1,
+                        borderColor: '#0f172a'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '75%',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    if(context.label === 'Remaining') return ' Tasks left';
+                                    return ` Phase ${context.label.replace('P','')}: ${parseFloat(context.raw).toFixed(1)} tasks done`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateChart() {
+            if(!progressChartInstance) return;
+            
+            let sums = {1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0};
+            let totalDoneTasks = 0;
+            
+            document.querySelectorAll('.task-slider').forEach(slider => {
+                const phase = slider.getAttribute('data-phase');
+                // Every 100% on a slider equals 1 complete task for chart representation
+                const val = parseInt(slider.value, 10) / 100; 
+                sums[phase] += val;
+                totalDoneTasks += val;
+            });
+
+            const remaining = 91 - totalDoneTasks; // Updated total
+            
+            progressChartInstance.data.datasets[0].data = [sums[1], sums[2], sums[3], sums[4], sums[5], sums[6], sums[7], sums[8], remaining];
+            progressChartInstance.update();
+        }
+
+        // --- Single Phase Print Logic ---
+        window.printPhaseReport = function(phaseNum) {
+            const getTextInput = (id) => {
+                const el = document.getElementById(id);
+                return el && el.value.trim() ? el.value.trim() : 'Not Specified';
+            };
+
+            const projName = getTextInput('pm_project_name');
+            const projAddress = getTextInput('pm_address');
+            const projPermit = getTextInput('pm_permit');
+            const projDate = getTextInput('pm_date');
+            
+            const phaseName = state.names[phaseNum];
+            const notes = getTextInput(`notes_p${phaseNum}`);
+            
+            let completedItemsList = '';
+            let inProgressItemsList = '';
+            let pendingItemsList = '';
+
+            const sliders = document.querySelectorAll(`.task-slider[data-phase="${phaseNum}"]`);
+            let phaseSum = 0;
+            
+            sliders.forEach(slider => {
+                const taskTitle = slider.closest('.task-container').querySelector('.task-title').innerText;
+                const val = parseInt(slider.value, 10);
+                phaseSum += val;
+                
+                if(val === 100) {
+                    completedItemsList += `<li>✓ ${taskTitle} (100%)</li>`;
+                } else if (val > 0) {
+                    inProgressItemsList += `<li style="color:#b45309;">◐ ${taskTitle} (${val}%)</li>`;
+                } else {
+                    pendingItemsList += `<li style="color:#94a3b8;">○ ${taskTitle} (0%)</li>`;
+                }
+            });
+
+            if(completedItemsList === '') completedItemsList = '<li style="color:#94a3b8; font-style:italic;">No tasks marked complete.</li>';
+            if(inProgressItemsList === '') inProgressItemsList = '<li style="color:#94a3b8; font-style:italic;">No tasks currently in progress.</li>';
+            if(pendingItemsList === '') pendingItemsList = '<li style="color:#16a34a; font-style:italic;">No pending tasks left!</li>';
+
+            const phasePercent = Math.round(phaseSum / (state.totals[phaseNum] * 100) * 100);
+
+            let summaryHTML = `
+                <html>
+                <head>
+                    <title>${projName !== 'Not Specified' ? projName : 'Project'} - ${phaseName} Report</title>
+                    <style>
+                        body { font-family: 'Helvetica Neue', Arial, sans-serif; line-height: 1.5; color: #1e293b; max-width: 900px; margin: 0 auto; padding: 30px; }
+                        h1 { color: #0f172a; border-bottom: 3px solid #2563eb; padding-bottom: 10px; margin-bottom: 5px; text-transform: uppercase; font-size: 24px;}
+                        .timestamp { color: #64748b; font-size: 0.9em; margin-bottom: 30px; }
+                        
+                        .master-info { background-color: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #2563eb; padding: 15px 20px; border-radius: 4px; margin-bottom: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px;}
+                        .master-info div { margin-bottom: 5px; }
+                        .label { font-weight: bold; color: #475569; font-size: 0.85em; text-transform: uppercase; display: block;}
+                        .value { color: #0f172a; font-size: 1.1em; font-weight: 500;}
+                        
+                        .phase-block { margin-bottom: 25px; padding-bottom: 15px; }
+                        .phase-block h3 { color: #1e40af; margin-top: 0; margin-bottom: 15px; font-size: 1.4em; background: #eff6ff; padding: 8px 12px; border-radius: 4px;}
+                        
+                        .split-col { display: flex; gap: 20px; flex-direction: column; }
+                        .task-lists { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+                        .phase-notes { background: #fefce8; border: 1px solid #fef08a; padding: 15px; border-radius: 4px;}
+                        
+                        h4 { font-size: 1em; text-transform: uppercase; color: #64748b; margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px;}
+                        ul { list-style-type: none; padding: 0; margin: 0; }
+                        li { margin-bottom: 6px; font-size: 0.95em; color: #334155; line-height: 1.3;}
+                        p { margin: 0; font-size: 0.95em; }
+
+                        @media print {
+                            body { padding: 0; }
+                            @page { margin: 1.5cm; }
+                        }
+                    </style>
+                </head>
+                <body>
+                    <h1>Status Notes</h1><p style="color:#b45309;font-size:12px;font-weight:bold;">Team note — not a contract schedule or payment milestone. Educational template associated with Pacific Pro Group.</p>
+                    <div class="timestamp">Generated on: ${new Date().toLocaleString()}</div>
+
+                    <div class="master-info">
+                        <div><span class="label">Project / Client Name:</span> <span class="value">${projName}</span></div>
+                        <div><span class="label">Site Address:</span> <span class="value">${projAddress}</span></div>
+                        <div><span class="label">Permit Number(s):</span> <span class="value">${projPermit}</span></div>
+                        <div><span class="label">Est. Completion Date:</span> <span class="value">${projDate}</span></div>
+                    </div>
+
+                    <div class="phase-block">
+                        <h3>${phaseName} <span style="float:right; font-size: 0.7em; color: #475569; margin-top: 5px; font-weight: normal;">Phase Completion: ${phasePercent}%</span></h3>
+                        <div class="split-col">
+                            <div class="task-lists">
+                                <div>
+                                    <h4>Completed</h4>
+                                    <ul>${completedItemsList}</ul>
+                                </div>
+                                <div>
+                                    <h4>In Progress</h4>
+                                    <ul>${inProgressItemsList}</ul>
+                                </div>
+                                <div>
+                                    <h4>Pending</h4>
+                                    <ul>${pendingItemsList}</ul>
+                                </div>
+                            </div>
+                            <div class="phase-notes">
+                                <h4>PM Notes & Issues</h4>
+                                <p>${notes !== 'Not Specified' ? notes.replace(/\n/g, '<br>') : '<em>No notes recorded.</em>'}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </body>
+                </html>
+            `;
+
+            const printWindow = window.open('', '_blank');
+            if (printWindow) {
+                printWindow.document.write(summaryHTML);
+                printWindow.document.close();
+                printWindow.focus();
+                setTimeout(() => { printWindow.print(); }, 500);
+            } else {
+                alert("Please allow pop-ups to print the report.");
+            }
+        };
+
+        // --- Export Full Report Logic ---
+        const exportBtn = document.getElementById('export-pm-report');
+        if (exportBtn) {
+            exportBtn.addEventListener('click', () => {
+                
+                const getTextInput = (id) => {
+                    const el = document.getElementById(id);
+                    return el && el.value.trim() ? el.value.trim() : 'Not Specified';
+                };
+
+                const projName = getTextInput('pm_project_name');
+                const projAddress = getTextInput('pm_address');
+                const projPermit = getTextInput('pm_permit');
+                const projDate = getTextInput('pm_date');
+
+                // Build Phase Progress HTML
+                let phasesHTML = '';
+                for(let i=1; i<=8; i++) {
+                    
+                    let completedItemsList = '';
+                    let inProgressItemsList = '';
+                    
+                    const sliders = document.querySelectorAll(`.task-slider[data-phase="${i}"]`);
+                    let phaseSum = 0;
+
+                    sliders.forEach(slider => {
+                        const taskTitle = slider.closest('.task-container').querySelector('.task-title').innerText;
+                        const val = parseInt(slider.value, 10);
+                        phaseSum += val;
+
+                        if(val === 100) {
+                            completedItemsList += `<li>✓ ${taskTitle}</li>`;
+                        } else if (val > 0) {
+                            inProgressItemsList += `<li style="color:#b45309;">◐ ${taskTitle} (${val}%)</li>`;
+                        }
+                    });
+
+                    if(completedItemsList === '') completedItemsList = '<li style="color:#94a3b8; font-style:italic;">None</li>';
+                    if(inProgressItemsList === '') inProgressItemsList = '<li style="color:#94a3b8; font-style:italic;">None</li>';
+
+                    const phasePercent = Math.round(phaseSum / (state.totals[i] * 100) * 100);
+                    const notes = getTextInput(`notes_p${i}`);
+                    
+                    phasesHTML += `
+                        <div class="phase-block">
+                            <h3>${state.names[i]} <span class="score">(${phasePercent}% Complete)</span></h3>
+                            <div class="split-col">
+                                <div class="completed-tasks">
+                                    <div style="display:flex; gap: 10px; margin-bottom: 10px;">
+                                        <div style="flex:1;">
+                                            <h4>Completed</h4>
+                                            <ul>${completedItemsList}</ul>
+                                        </div>
+                                        <div style="flex:1;">
+                                            <h4>In Progress</h4>
+                                            <ul>${inProgressItemsList}</ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="phase-notes">
+                                    <h4>PM Notes & Issues:</h4>
+                                    <p>${notes !== 'Not Specified' ? notes.replace(/\n/g, '<br>') : '<em>No notes recorded.</em>'}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                // Global Percent from Manual Input
+                const progressInputEl = document.getElementById('client_progress_input');
+                const globalPercent = progressInputEl ? progressInputEl.value : 0;
+
+                // HTML Structure for the printable document
+                let summaryHTML = `
+                    <html>
+                    <head>
+                        <title>${projName !== 'Not Specified' ? projName : 'Project'} - PM Report</title>
+                        <style>
+                            body { font-family: 'Helvetica Neue', Arial, sans-serif; line-height: 1.5; color: #1e293b; max-width: 900px; margin: 0 auto; padding: 30px; }
+                            h1 { color: #0f172a; border-bottom: 3px solid #2563eb; padding-bottom: 10px; margin-bottom: 5px; text-transform: uppercase; font-size: 24px;}
+                            .timestamp { color: #64748b; font-size: 0.9em; margin-bottom: 30px; }
+                            
+                            .master-info { background-color: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #2563eb; padding: 15px 20px; border-radius: 4px; margin-bottom: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px;}
+                            .master-info div { margin-bottom: 5px; }
+                            .label { font-weight: bold; color: #475569; font-size: 0.85em; text-transform: uppercase; display: block;}
+                            .value { color: #0f172a; font-size: 1.1em; font-weight: 500;}
+                            
+                            .global-progress { font-size: 1.2em; font-weight: bold; color: #2563eb; text-align: right; margin-top: -60px; margin-bottom: 40px;}
+
+                            .phase-block { margin-bottom: 25px; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px; page-break-inside: avoid; }
+                            .phase-block h3 { color: #1e40af; margin-top: 0; margin-bottom: 10px; font-size: 1.2em; background: #eff6ff; padding: 5px 10px; border-radius: 4px;}
+                            .phase-block h3 .score { font-size: 0.8em; color: #475569; font-weight: normal; float: right; margin-top: 2px;}
+                            
+                            .split-col { display: flex; gap: 20px; }
+                            .completed-tasks { flex: 1.5; }
+                            .phase-notes { flex: 1; background: #fefce8; border: 1px solid #fef08a; padding: 10px; border-radius: 4px;}
+                            
+                            h4 { font-size: 0.9em; text-transform: uppercase; color: #64748b; margin-top: 0; margin-bottom: 8px;}
+                            ul { list-style-type: none; padding: 0; margin: 0; }
+                            li { margin-bottom: 4px; font-size: 0.85em; color: #334155; line-height: 1.2;}
+                            p { margin: 0; font-size: 0.9em; }
+
+                            /* Stylings for the bottom visual bar */
+                            .visual-progress-section { margin-top: 50px; border-top: 2px solid #cbd5e1; padding-top: 30px; page-break-inside: avoid; }
+                            .visual-progress-section h2 { text-align: center; color: #0f172a; margin-bottom: 20px; font-size: 1.5em; text-transform: uppercase; letter-spacing: 1px; }
+                            .progress-container { width: 100%; background-color: #e2e8f0; border-radius: 16px; overflow: hidden; border: 1px solid #cbd5e1; height: 45px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); }
+                            .progress-bar { height: 100%; background-color: #2563eb; text-align: center; color: white; font-weight: bold; font-size: 20px; line-height: 45px; transition: width 0.3s ease; }
+                            .progress-text-fallback { text-align: center; margin-top: 10px; color: #64748b; font-weight: bold; font-size: 1.1em;}
+
+                            @media print {
+                                body { padding: 0; }
+                                @page { margin: 1.5cm; }
+                                .progress-container { border: 1px solid #94a3b8; }
+                                .progress-bar { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>Status Notes</h1><p style="color:#b45309;font-size:12px;font-weight:bold;">Team note — not a contract schedule or payment milestone. Educational template associated with Pacific Pro Group.</p>
+                        <div class="timestamp">Generated on: ${new Date().toLocaleString()}</div>
+                        
+                        <div class="global-progress">Status: IN PROGRESS</div>
+
+                        <div class="master-info">
+                            <div><span class="label">Project / Client Name:</span> <span class="value">${projName}</span></div>
+                            <div><span class="label">Site Address:</span> <span class="value">${projAddress}</span></div>
+                            <div><span class="label">Permit Number(s):</span> <span class="value">${projPermit}</span></div>
+                            <div><span class="label">Est. Completion Date:</span> <span class="value">${projDate}</span></div>
+                        </div>
+
+                        ${phasesHTML}
+                        
+                        <!-- Visual Tracker at the bottom -->
+                        <div class="visual-progress-section">
+                            <h2>Overall Project Progress</h2>
+                            <div class="progress-container">
+                                <div class="progress-bar" style="width: ${globalPercent}%;">
+                                    ${globalPercent > 5 ? globalPercent + '% Complete' : ''}
+                                </div>
+                            </div>
+                            ${globalPercent <= 5 ? '<div class="progress-text-fallback">' + globalPercent + '% Complete</div>' : ''}
+                        </div>
+
+                    </body>
+                    </html>
+                `;
+
+                const printWindow = window.open('', '_blank');
+                if (printWindow) {
+                    printWindow.document.write(summaryHTML);
+                    printWindow.document.close();
+                    printWindow.focus();
+                    setTimeout(() => { printWindow.print(); }, 500);
+                } else {
+                    alert("Please allow pop-ups to print the report.");
+                }
+            });
+        }
+
+        // Initialize 
+        document.addEventListener('DOMContentLoaded', () => {
+            initChart();
+            calculateProgress();
+            
+            // Set up manual progress overrides
+            document.querySelectorAll('.progress-preset-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const val = e.target.getAttribute('data-val');
+                    const input = document.getElementById('client_progress_input');
+                    if(input) {
+                        input.value = val;
+                        window.manualProgressOverride = true; // Stop auto-sync from overwriting
+                    }
+                });
+            });
+            
+            const progInput = document.getElementById('client_progress_input');
+            if(progInput) {
+                progInput.addEventListener('input', () => {
+                    window.manualProgressOverride = true;
+                });
+            }
+        });
+
+    
+        (function(){
+          const KEY='bops.goodSteward.pmDash.v1';
+          let timer=null;
+          function collect(){
+            const data={v:1,savedAt:new Date().toISOString(),fields:{},sliders:{},checkOrder:[]};
+            document.querySelectorAll('input, textarea, select').forEach((el,i)=>{
+              const k=el.id||('i'+i);
+              if(!el.id) el.dataset.ls=k;
+              const key=el.id||el.dataset.ls;
+              if(el.type==='checkbox') return;
+              if(el.classList&&el.classList.contains('task-slider')){ data.sliders[key]=el.value; return; }
+              if(el.type==='range'){ data.sliders[key]=el.value; return; }
+              data.fields[key]=el.value;
+            });
+            data.checkOrder=Array.from(document.querySelectorAll('input[type="checkbox"]')).map(e=>e.checked);
+            return data;
+          }
+          function restore(data){
+            if(!data) return;
+            Object.entries(data.fields||{}).forEach(([k,v])=>{
+              const el=document.getElementById(k)||document.querySelector('[data-ls="'+k+'"]');
+              if(el) el.value=v;
+            });
+            Object.entries(data.sliders||{}).forEach(([k,v])=>{
+              const el=document.getElementById(k)||document.querySelector('[data-ls="'+k+'"]');
+              if(el){ el.value=v; const d=el.closest('.task-container')?.querySelector('.slider-display'); if(d) d.textContent=v+'%'; }
+            });
+            if(data.checkOrder) document.querySelectorAll('input[type="checkbox"]').forEach((el,i)=>{ if(typeof data.checkOrder[i]==='boolean') el.checked=data.checkOrder[i]; });
+            if(typeof calculateProgress==='function') calculateProgress();
+            const ls=document.getElementById('pm-last-saved');
+            if(ls&&data.savedAt) ls.textContent='Last saved: '+new Date(data.savedAt).toLocaleString();
+          }
+          function save(){
+            try{ localStorage.setItem(KEY, JSON.stringify(collect()));
+              const ls=document.getElementById('pm-last-saved'); if(ls) ls.textContent='Last saved: '+new Date().toLocaleString();
+            }catch(e){ const ls=document.getElementById('pm-last-saved'); if(ls) ls.textContent='Storage blocked — session only'; }
+          }
+          function schedule(){ clearTimeout(timer); timer=setTimeout(save,350); }
+          document.body.addEventListener('change', schedule);
+          document.body.addEventListener('input', schedule);
+          document.getElementById('pm-clear-data')?.addEventListener('click', ()=>{
+            if(!confirm('Clear this project data on this device?')) return;
+            try{ localStorage.removeItem(KEY); }catch(e){}
+            location.reload();
+          });
+          try{ const raw=localStorage.getItem(KEY); if(raw) restore(JSON.parse(raw)); }catch(e){}
+        })();
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,1511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Visit &amp; Discovery | Board of Project Stewardship — Good Steward Tools</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 300px;
+        }
+        canvas#sketchpad {
+            border: 2px dashed #cbd5e1;
+            border-radius: 0.5rem;
+            cursor: crosshair;
+            touch-action: none;
+        }
+        /* Custom scrollbar for textareas */
+        textarea::-webkit-scrollbar { width: 8px; }
+        textarea::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
+        textarea::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        textarea::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        
+        /* Hide default details marker to make custom accordion */
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+    <div class="bg-amber-50 border-b border-amber-200 text-amber-950 text-sm px-4 py-3">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-start gap-2">
+            <span class="font-bold shrink-0">Disclaimer:</span>
+            <p class="leading-relaxed">Browser-local Good Steward tool — data autosaves to <strong>localStorage</strong> on this device only (Clear available below). Educational template associated with <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="underline font-semibold">Pacific Pro Group</a> (Board #1 design-build). Not a permit or contract. Always <a href="https://secure.lni.wa.gov/verify/" target="_blank" rel="noopener" class="underline font-semibold">verify WA L&amp;I</a> before hiring.</p>
+        </div>
+    </div>
+    <div class="bg-slate-100 border-b border-slate-200 text-slate-700 text-xs px-4 py-2">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            <span>Board of Project Stewardship — Good Steward Tools · Workflow template associated with <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="text-teal-700 font-semibold underline">Pacific Pro Group</a>.</span>
+            <span class="flex items-center gap-3">
+                <span id="sv-last-saved" class="italic text-slate-500">Not saved yet</span>
+                <button type="button" id="sv-clear-data" class="underline text-red-700 font-semibold">Clear data on this device</button>
+            </span>
+        </div>
+    </div>
+
+
+    <!-- Chosen Palette: Coastal Calm (Slate-50 background, Slate-800 text, Teal-600 accents, Sky-500 highlights, Indigo additions) -->
+    <!-- Application Structure Plan: The application uses a task-oriented dashboard structure. Given the source material is a sequential checklist, a vertical tabbed interface (Stepper) is the most logical choice. It allows the user (e.g., a project manager on site) to focus on one phase at a time without being overwhelmed, while a persistent sidebar tracks overall progress. This ensures high usability during a live site visit on a tablet or laptop. -->
+    <!-- Visualization & Content Choices: 
+         - Source Info: Phase completion status.
+         - Goal: Inform/Progress Tracking.
+         - Viz/Presentation Method: Chart.js Doughnut Chart.
+         - Interaction: Automatically updates as the user interacts with form elements.
+         - Justification: Provides immediate visual feedback on how much of the site visit data collection is complete.
+         - Library/Method: Chart.js (Canvas).
+         - Source Info: Hand-Drawn Layout requirement.
+         - Viz/Presentation Method: Interactive HTML5 Canvas.
+         - Interaction: Mouse/Touch drawing capabilities.
+         - Justification: Replaces the static ASCII box with a functional digital drawing board for actual on-site sketching.
+         - Library/Method: Vanilla JS + HTML5 Canvas.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <header class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <span class="text-3xl" aria-hidden="true">&#x1F3D8;</span>
+                <div>
+                    <h1 class="text-xl font-bold text-slate-900 leading-tight">Board of Project Stewardship <span class="text-sm font-normal text-slate-500 ml-2">| Good Steward Tools</span></h1>
+                    <p class="text-xs text-slate-500 font-medium tracking-wide uppercase">Site Visit &amp; Discovery · Estimate checklist associated with Pacific Pro Group</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4 bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">
+                <span class="text-sm font-bold text-slate-700">Goal:</span>
+                <span class="text-sm font-medium text-teal-700 bg-teal-50 px-2 py-1 rounded">Clear discovery notes + next-step proposal readiness</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+        <div class="flex flex-col md:flex-row gap-8">
+            
+            <aside class="w-full md:w-1/3 lg:w-1/4 flex flex-col gap-6">
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
+                    <h2 class="text-sm font-bold text-slate-800 uppercase tracking-wider mb-4 border-b border-slate-100 pb-2">Navigation</h2>
+                    <nav class="flex flex-col space-y-1" id="nav-menu">
+                        <button data-target="phase1" class="nav-btn w-full flex items-center justify-between text-left px-4 py-3 rounded-lg bg-teal-50 text-teal-700 font-medium transition-colors">
+                            <span>&#x1F4CB; 1. Pre-Arrival</span>
+                            <span class="text-xs bg-white text-teal-600 px-2 py-1 rounded-full border border-teal-100 phase-score">0/7</span>
+                        </button>
+                        <button data-target="phase2" class="nav-btn w-full flex items-center justify-between text-left px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-medium transition-colors">
+                            <span>&#x1F91D; 2. On-Site (10m)</span>
+                            <span class="text-xs bg-slate-100 text-slate-500 px-2 py-1 rounded-full phase-score">0/2</span>
+                        </button>
+                        <button data-target="phase3" class="nav-btn w-full flex items-center justify-between text-left px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-medium transition-colors">
+                            <span>&#x1F5E3; 3. Core Discovery</span>
+                            <span class="text-xs bg-slate-100 text-slate-500 px-2 py-1 rounded-full phase-score">0/24</span>
+                        </button>
+                        <button data-target="phase4" class="nav-btn w-full flex items-center justify-between text-left px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-medium transition-colors">
+                            <span>&#x1F4F8; 4. Tasks & Feasibility</span>
+                            <span class="text-xs bg-slate-100 text-slate-500 px-2 py-1 rounded-full phase-score">0/7</span>
+                        </button>
+                        <button data-target="phase5" class="nav-btn w-full flex items-center justify-between text-left px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-medium transition-colors">
+                            <span>&#x1F4DD; 5. Next Steps</span>
+                            <span class="text-xs bg-slate-100 text-slate-500 px-2 py-1 rounded-full phase-score">0/3</span>
+                        </button>
+                        <button data-target="phase6" class="nav-btn w-full flex items-center justify-between text-left px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-medium transition-colors">
+                            <span>&#x1F69A; 6. After You Leave</span>
+                            <span class="text-xs bg-slate-100 text-slate-500 px-2 py-1 rounded-full phase-score">0/3</span>
+                        </button>
+                        <button data-target="sketch" class="nav-btn w-full flex items-center justify-between text-left px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-medium transition-colors">
+                            <span>&#x270F; Site Sketch & Export</span>
+                            <span class="text-xs bg-slate-100 text-slate-500 px-2 py-1 rounded-full phase-score">-</span>
+                        </button>
+                    </nav>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                    <h2 class="text-sm font-bold text-slate-800 uppercase tracking-wider mb-2 text-center">Global Progress</h2>
+                    <div class="w-full h-3 bg-slate-100 rounded-full overflow-hidden border border-slate-200 mb-4">
+                        <div id="sidebar-progress-bar" class="h-full bg-teal-500 transition-all duration-500" style="width: 0%;"></div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="progressChart"></canvas>
+                    </div>
+                </div>
+            </aside>
+
+            <section class="w-full md:w-2/3 lg:w-3/4 bg-white rounded-xl shadow-sm border border-slate-200">
+                
+                <div id="phase1" class="tab-content active p-6 sm:p-8">
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2 mb-2">
+                            <span>&#x23F3;</span> Phase 1: Pre-Arrival <span class="text-lg font-normal text-slate-500">(30 min before)</span>
+                        </h2>
+                        <p class="text-slate-600">Ensure all logistics and materials are prepared to establish professionalism from the first interaction.</p>
+                    </div>
+
+                    <!-- NEW CLIENT INFO SECTION -->
+                    <div class="mb-8 border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                        <div class="bg-slate-50 px-4 py-3 border-b border-slate-200">
+                            <h3 class="font-bold text-slate-800 flex items-center gap-2"><span>&#x1F464;</span> Client Details</h3>
+                        </div>
+                        <div class="p-4 bg-white grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="client_name" class="block text-sm font-medium text-slate-700 mb-1">Client Name</label>
+                                <input type="text" id="client_name" class="track-input primary-text w-full text-sm border border-slate-300 rounded-md px-3 py-2 focus:ring-teal-500 focus:border-teal-500" placeholder="John & Jane Doe" data-phase="1">
+                            </div>
+                            <div>
+                                <label for="client_address" class="block text-sm font-medium text-slate-700 mb-1">Project Address</label>
+                                <input type="text" id="client_address" class="track-input primary-text w-full text-sm border border-slate-300 rounded-md px-3 py-2 focus:ring-teal-500 focus:border-teal-500" placeholder="123 Coastal Way, Edmonds, WA" data-phase="1">
+                            </div>
+                            <div>
+                                <label for="client_email" class="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
+                                <input type="email" id="client_email" class="track-input primary-text w-full text-sm border border-slate-300 rounded-md px-3 py-2 focus:ring-teal-500 focus:border-teal-500" placeholder="client@email.com" data-phase="1">
+                            </div>
+                            <div>
+                                <label for="client_phone" class="block text-sm font-medium text-slate-700 mb-1">Phone Number</label>
+                                <input type="tel" id="client_phone" class="track-input primary-text w-full text-sm border border-slate-300 rounded-md px-3 py-2 focus:ring-teal-500 focus:border-teal-500" placeholder="(555) 123-4567" data-phase="1">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <label class="flex items-start p-4 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors">
+                            <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-teal-600 mt-0.5 rounded border-slate-300 focus:ring-teal-500" data-phase="1">
+                            <span class="ml-3 text-slate-700 font-medium">Confirm address, gate code, parking.</span>
+                        </label>
+                        <label class="flex items-start p-4 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors bg-teal-50 border-teal-100">
+                            <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-teal-600 mt-0.5 rounded border-slate-300 focus:ring-teal-500" data-phase="1">
+                            <span class="ml-3 text-slate-700 font-medium">Load truck: laser measure, <strong>GoPro</strong>, PSA packet, Feasibility Study one-pager, selection sheets, clipboard checklist.</span>
+                        </label>
+                        <label class="flex items-start p-4 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors">
+                            <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-teal-600 mt-0.5 rounded border-slate-300 focus:ring-teal-500" data-phase="1">
+                            <span class="ml-3 text-slate-700 font-medium">Review CRM + pull Pacific Pro Group Process PDF to show client.</span>
+                        </label>
+                    </div>
+                    
+                    <div class="mt-8 flex justify-end">
+                        <button class="next-btn bg-teal-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-teal-700 transition-colors shadow-sm">Next: On-Site &#x2192;</button>
+                    </div>
+                </div>
+
+                <div id="phase2" class="tab-content p-6 sm:p-8">
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2 mb-2">
+                            <span>&#x1F91D;</span> Phase 2: On-Site <span class="text-lg font-normal text-slate-500">(First 10 Minutes)</span>
+                        </h2>
+                        <p class="text-slate-600">The first ten minutes set the tone. Listen more than you speak.</p>
+                    </div>
+
+                    <div class="bg-sky-50 border border-sky-100 rounded-lg p-4 mb-6 flex gap-3">
+                        <span class="text-xl" aria-hidden="true">&#x1F4A1;</span>
+                        <div>
+                            <strong class="text-sky-900 block mb-1">PRO TIP:</strong>
+                            <p class="text-sky-800 text-sm">Let the client do 80% of the talking during the initial walkthrough. Focus on listening to their pain points with the current space.</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <label class="flex items-start p-4 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors">
+                            <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-teal-600 mt-0.5 rounded border-slate-300 focus:ring-teal-500" data-phase="2">
+                            <span class="ml-3 text-slate-700 font-medium">Professional greeting: <br><em class="text-slate-500 font-normal">“We specialize in high-quality coastal home additions that beat the maritime environment.”</em></span>
+                        </label>
+                        <label class="flex items-start p-4 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors">
+                            <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-teal-600 mt-0.5 rounded border-slate-300 focus:ring-teal-500" data-phase="2">
+                            <span class="ml-3 text-slate-700 font-medium">Quick tour + 360&deg; photos/video while the client talks.</span>
+                        </label>
+                    </div>
+
+                    <div class="mt-8 flex justify-between">
+                        <button class="prev-btn text-slate-500 px-6 py-2 rounded-lg font-medium hover:bg-slate-100 transition-colors">&#x2190; Back</button>
+                        <button class="next-btn bg-teal-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-teal-700 transition-colors shadow-sm">Next: Core Discovery &#x2192;</button>
+                    </div>
+                </div>
+
+                <div id="phase3" class="tab-content p-6 sm:p-8">
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2 mb-2">
+                            <span>&#x1F5E3;</span> Phase 3: Core Discovery Questions
+                        </h2>
+                        <p class="text-slate-600 font-medium text-rose-600 bg-rose-50 p-2 rounded inline-block border border-rose-100">Ask in this exact order – take verbatim notes.</p>
+                    </div>
+
+                    <div class="space-y-8">
+                        <!-- NEW VISION & USE SECTION -->
+                        <div class="border border-indigo-200 rounded-xl overflow-hidden shadow-sm">
+                            <div class="bg-indigo-50 px-4 py-3 border-b border-indigo-200">
+                                <h3 class="font-bold text-indigo-900 flex items-center gap-2"><span>&#x1F3AF;</span> Vision & Use</h3>
+                            </div>
+                            <div class="p-4 space-y-6 bg-white">
+                                <div>
+                                    <p class="font-medium text-slate-700 mb-2">1. What is the #1 reason you’re doing this addition?</p>
+                                    <textarea id="vision_reason" class="track-input primary-text w-full text-sm border border-slate-300 rounded-md px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500" rows="2" placeholder="Verbatim notes..." data-phase="3"></textarea>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-slate-700 mb-2">2. How will the space actually be used day-to-day?</p>
+                                    <textarea id="vision_use" class="track-input primary-text w-full text-sm border border-slate-300 rounded-md px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500" rows="2" placeholder="Enter notes here..." data-phase="3"></textarea>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-slate-700 mb-2">3. Any must-have features?</p>
+                                    <div class="grid grid-cols-2 gap-2 mb-2">
+                                        <label class="flex items-center gap-2"><input type="checkbox" name="vision_features" class="track-input text-indigo-600 focus:ring-indigo-500" data-phase="3"> <span class="text-sm">Walk-in pantry</span></label>
+                                        <label class="flex items-center gap-2"><input type="checkbox" name="vision_features" class="track-input text-indigo-600 focus:ring-indigo-500" data-phase="3"> <span class="text-sm">12-ft ceilings</span></label>
+                                        <label class="flex items-center gap-2"><input type="checkbox" name="vision_features" class="track-input text-indigo-600 focus:ring-indigo-500" data-phase="3"> <span class="text-sm">Pocket office</span></label>
+                                        <label class="flex items-center gap-2"><input type="checkbox" name="vision_features" class="track-input text-indigo-600 focus:ring-indigo-500" data-phase="3"> <span class="text-sm">Wet bar</span></label>
+                                    </div>
+                                    <input type="text" id="vision_features_other" placeholder="Other must-haves..." class="w-full text-sm border border-slate-300 rounded-md px-3 py-2 mt-1 focus:ring-indigo-500 focus:border-indigo-500">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- BUDGET -->
+                        <div class="border border-slate-200 rounded-xl overflow-hidden">
+                            <div class="bg-slate-50 px-4 py-3 border-b border-slate-200">
+                                <h3 class="font-bold text-slate-800 flex items-center gap-2"><span>&#x1F4B0;</span> Budget Reality Check</h3>
+                            </div>
+                            <div class="p-4 space-y-6">
+                                <div>
+                                    <p class="font-medium text-slate-700 mb-2">4. What budget range feels comfortable right now?</p>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                        <label class="flex items-center gap-2"><input type="radio" name="budget_range" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">$100,000 - $250,000</span></label>
+                                        <label class="flex items-center gap-2"><input type="radio" name="budget_range" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">$250,000 - $500,000</span></label>
+                                        <label class="flex items-center gap-2"><input type="radio" name="budget_range" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">$500,000 - $850,000</span></label>
+                                        <label class="flex items-center gap-2"><input type="radio" name="budget_range" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">$850,000 - $1.2 Million+</span></label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-slate-700 mb-2">5. Have you gotten any other bids or ballpark numbers already?</p>
+                                    <div class="flex gap-4">
+                                        <label class="flex items-center gap-2"><input type="radio" name="other_bids" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">Yes</span></label>
+                                        <label class="flex items-center gap-2"><input type="radio" name="other_bids" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">No</span></label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-slate-700 mb-2">6. Do you have financing pre-approved or are you paying cash?</p>
+                                    <div class="flex flex-col gap-2">
+                                        <label class="flex items-center gap-2"><input type="radio" name="financing" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">Financing pre-approved</span></label>
+                                        <label class="flex items-center gap-2"><input type="radio" name="financing" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">Paying cash</span></label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-slate-700 mb-2">7. Any hard budget cap we should know about to avoid surprises later?</p>
+                                    <div class="flex items-center gap-4 mb-2">
+                                        <label class="flex items-center gap-2"><input type="radio" name="budget_cap" value="yes" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3" onchange="toggleInput('cap_specify', true)"> <span class="text-sm">Yes</span></label>
+                                        <label class="flex items-center gap-2"><input type="radio" name="budget_cap" value="no" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3" onchange="toggleInput('cap_specify', false)"> <span class="text-sm">No</span></label>
+                                    </div>
+                                    <input type="text" id="cap_specify" placeholder="Specify cap amount..." class="w-full text-sm border border-slate-300 rounded-md px-3 py-2 disabled:bg-slate-100 disabled:opacity-50 focus:ring-teal-500 focus:border-teal-500" disabled>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- STYLE -->
+                        <div class="border border-slate-200 rounded-xl overflow-hidden">
+                            <div class="bg-slate-50 px-4 py-3 border-b border-slate-200">
+                                <h3 class="font-bold text-slate-800 flex items-center gap-2"><span>&#x1F3A8;</span> Style & Inspiration</h3>
+                            </div>
+                            <div class="p-4 space-y-6">
+                                <div>
+                                    <p class="font-medium text-slate-700 mb-2">8. What overall style are you drawn to?</p>
+                                    <div class="grid grid-cols-2 gap-2 mb-2">
+                                        <label class="flex items-center gap-2"><input type="checkbox" name="style_pref" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">Modern Coastal</span></label>
+                                        <label class="flex items-center gap-2"><input type="checkbox" name="style_pref" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">Traditional</span></label>
+                                        <label class="flex items-center gap-2"><input type="checkbox" name="style_pref" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">Farmhouse</span></label>
+                                        <label class="flex items-center gap-2"><input type="checkbox" name="style_pref" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">Minimalist</span></label>
+                                    </div>
+                                    <input type="text" id="style_specify" placeholder="Other style..." class="w-full text-sm border border-slate-300 rounded-md px-3 py-2 mt-1 focus:ring-teal-500 focus:border-teal-500">
+                                </div>
+                                <div>
+                                    <p class="font-medium text-slate-700 mb-2">9. Show 3 recent coastal addition photos &#x2192; "Which feels most like you?"</p>
+                                    <div class="flex gap-4">
+                                        <label class="flex items-center gap-2"><input type="radio" name="photo_pref" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">Photo 1</span></label>
+                                        <label class="flex items-center gap-2"><input type="radio" name="photo_pref" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">Photo 2</span></label>
+                                        <label class="flex items-center gap-2"><input type="radio" name="photo_pref" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">Photo 3</span></label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-slate-700 mb-2">10. Do you have a Pinterest board, Houzz ideas, or saved photos?</p>
+                                    <div class="flex gap-4">
+                                        <label class="flex items-center gap-2"><input type="radio" name="has_boards" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">Yes</span></label>
+                                        <label class="flex items-center gap-2"><input type="radio" name="has_boards" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">No</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PLANS & TIMELINE -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="border border-slate-200 rounded-xl overflow-hidden">
+                                <div class="bg-slate-50 px-4 py-3 border-b border-slate-200">
+                                    <h3 class="font-bold text-slate-800 flex items-center gap-2"><span>&#x1F4D0;</span> Client's Existing Plans</h3>
+                                </div>
+                                <div class="p-4 space-y-4">
+                                    <div>
+                                        <p class="text-sm font-medium text-slate-700 mb-1">11. Sketches, drawings, or ideas from others?</p>
+                                        <div class="flex gap-4"><label class="flex items-center gap-2 text-sm"><input type="radio" name="has_sketches" class="track-input text-teal-600" data-phase="3"> Yes</label><label class="flex items-center gap-2 text-sm"><input type="radio" name="has_sketches" class="track-input text-teal-600" data-phase="3"> No</label></div>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-slate-700 mb-1">12. Worked with an architect before?</p>
+                                        <div class="flex gap-4"><label class="flex items-center gap-2 text-sm"><input type="radio" name="worked_architect" class="track-input text-teal-600" data-phase="3"> Yes</label><label class="flex items-center gap-2 text-sm"><input type="radio" name="worked_architect" class="track-input text-teal-600" data-phase="3"> No</label></div>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-slate-700 mb-1">13. Specific layouts mapped out?</p>
+                                        <div class="flex gap-4"><label class="flex items-center gap-2 text-sm"><input type="radio" name="mapped_layouts" class="track-input text-teal-600" data-phase="3"> Yes</label><label class="flex items-center gap-2 text-sm"><input type="radio" name="mapped_layouts" class="track-input text-teal-600" data-phase="3"> No</label></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="border border-slate-200 rounded-xl overflow-hidden">
+                                <div class="bg-slate-50 px-4 py-3 border-b border-slate-200">
+                                    <h3 class="font-bold text-slate-800 flex items-center gap-2"><span>&#x1F4C5;</span> Timeline & Life</h3>
+                                </div>
+                                <div class="p-4 space-y-4">
+                                    <div>
+                                        <p class="text-sm font-medium text-slate-700 mb-2">14. When do you need this finished by?</p>
+                                        <div class="grid grid-cols-1 gap-2">
+                                            <label class="flex items-center gap-2 text-sm"><input type="radio" name="timeline" class="track-input text-teal-600" data-phase="3"> School start</label>
+                                            <label class="flex items-center gap-2 text-sm"><input type="radio" name="timeline" class="track-input text-teal-600" data-phase="3"> Baby due</label>
+                                            <label class="flex items-center gap-2 text-sm"><input type="radio" name="timeline" class="track-input text-teal-600" data-phase="3"> Retirement move-in</label>
+                                        </div>
+                                        <input type="text" id="timeline_specify" placeholder="Other deadline..." class="w-full text-sm border border-slate-300 rounded-md px-3 py-2 mt-2 focus:ring-teal-500 focus:border-teal-500">
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-slate-700 mb-1">15. Will you live in the house during construction?</p>
+                                        <div class="flex gap-4"><label class="flex items-center gap-2 text-sm"><input type="radio" name="live_in" class="track-input text-teal-600" data-phase="3"> Yes</label><label class="flex items-center gap-2 text-sm"><input type="radio" name="live_in" class="track-input text-teal-600" data-phase="3"> No</label></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SITE SPECIFICS -->
+                        <div class="border border-slate-200 rounded-xl overflow-hidden">
+                            <div class="bg-slate-50 px-4 py-3 border-b border-slate-200">
+                                <h3 class="font-bold text-slate-800 flex items-center gap-2"><span>&#x1F30A;</span> Site & Coastal Specifics (Edmonds WA)</h3>
+                            </div>
+                            <div class="p-4 space-y-6">
+                                <div>
+                                    <p class="font-medium text-slate-700 mb-2">16. Any known issues with foundation, drainage, or siding?</p>
+                                    <div class="flex items-center gap-4 mb-2">
+                                        <label class="flex items-center gap-2"><input type="radio" name="issues" value="yes" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3" onchange="toggleInput('issues_specify', true)"> <span class="text-sm">Yes</span></label>
+                                        <label class="flex items-center gap-2"><input type="radio" name="issues" value="no" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3" onchange="toggleInput('issues_specify', false)"> <span class="text-sm">No</span></label>
+                                    </div>
+                                    <input type="text" id="issues_specify" placeholder="Specify issues..." class="w-full text-sm border border-slate-300 rounded-md px-3 py-2 disabled:bg-slate-100 disabled:opacity-50" disabled>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-slate-700 mb-2">17. Have you had moisture/mold problems on this side of the house?</p>
+                                    <div class="flex gap-4">
+                                        <label class="flex items-center gap-2"><input type="radio" name="moisture" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">Yes</span></label>
+                                        <label class="flex items-center gap-2"><input type="radio" name="moisture" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">No</span></label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-slate-700 mb-2">18. HOA rules, view corridors, or neighbor concerns?</p>
+                                    <div class="flex items-center gap-4 mb-2">
+                                        <label class="flex items-center gap-2"><input type="radio" name="hoa" value="yes" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3" onchange="toggleInput('hoa_specify', true)"> <span class="text-sm">Yes</span></label>
+                                        <label class="flex items-center gap-2"><input type="radio" name="hoa" value="no" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3" onchange="toggleInput('hoa_specify', false)"> <span class="text-sm">No</span></label>
+                                    </div>
+                                    <input type="text" id="hoa_specify" placeholder="Specify HOA/neighbor info..." class="w-full text-sm border border-slate-300 rounded-md px-3 py-2 disabled:bg-slate-100 disabled:opacity-50" disabled>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-slate-700 mb-2">19. Wetlands, shorelines, flood zones, steep slopes? <span class="text-xs text-rose-500 font-bold ml-1">(Critical Area check)</span></p>
+                                    <div class="flex items-center gap-4 mb-2">
+                                        <label class="flex items-center gap-2"><input type="radio" name="critical" value="yes" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3" onchange="toggleInput('critical_specify', true)"> <span class="text-sm">Yes</span></label>
+                                        <label class="flex items-center gap-2"><input type="radio" name="critical" value="no" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3" onchange="toggleInput('critical_specify', false)"> <span class="text-sm">No</span></label>
+                                    </div>
+                                    <input type="text" id="critical_specify" placeholder="Specify critical areas..." class="w-full text-sm border border-slate-300 rounded-md px-3 py-2 disabled:bg-slate-100 disabled:opacity-50" disabled>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-slate-700 mb-2">20. Do you know if the property is on septic or city sewer?</p>
+                                    <div class="flex gap-4">
+                                        <label class="flex items-center gap-2"><input type="radio" name="sewer" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">Septic</span></label>
+                                        <label class="flex items-center gap-2"><input type="radio" name="sewer" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">City sewer</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- UTILITIES & MEP -->
+                        <div class="border border-slate-200 rounded-xl overflow-hidden">
+                            <div class="bg-slate-50 px-4 py-3 border-b border-slate-200">
+                                <h3 class="font-bold text-slate-800 flex items-center gap-2"><span>&#x26A1;</span> Utilities & MEP Systems</h3>
+                            </div>
+                            <div class="p-4 space-y-6">
+                                <div>
+                                    <p class="font-medium text-slate-700 mb-2">Electrical Panel Size?</p>
+                                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                                        <label class="flex items-center gap-2"><input type="radio" name="elec_panel" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">100 Amp</span></label>
+                                        <label class="flex items-center gap-2"><input type="radio" name="elec_panel" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">200 Amp</span></label>
+                                        <label class="flex items-center gap-2"><input type="radio" name="elec_panel" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">400 Amp+</span></label>
+                                        <label class="flex items-center gap-2"><input type="radio" name="elec_panel" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">Unsure</span></label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-slate-700 mb-2">Gas Service on Property?</p>
+                                    <div class="flex flex-wrap gap-4">
+                                        <label class="flex items-center gap-2"><input type="radio" name="gas_service" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">Natural Gas</span></label>
+                                        <label class="flex items-center gap-2"><input type="radio" name="gas_service" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">Propane</span></label>
+                                        <label class="flex items-center gap-2"><input type="radio" name="gas_service" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">None (All Electric)</span></label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-slate-700 mb-2">Primary HVAC System?</p>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                        <label class="flex items-center gap-2"><input type="radio" name="hvac" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">Forced Air (Furnace)</span></label>
+                                        <label class="flex items-center gap-2"><input type="radio" name="hvac" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">Heat Pump / Mini-split</span></label>
+                                        <label class="flex items-center gap-2"><input type="radio" name="hvac" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">Electric Baseboard</span></label>
+                                        <label class="flex items-center gap-2"><input type="radio" name="hvac" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">Boiler / Radiant</span></label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-slate-700 mb-2">Water Heater Type?</p>
+                                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                                        <label class="flex items-center gap-2"><input type="radio" name="water_heater" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">Gas Tank</span></label>
+                                        <label class="flex items-center gap-2"><input type="radio" name="water_heater" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">Electric Tank</span></label>
+                                        <label class="flex items-center gap-2"><input type="radio" name="water_heater" class="track-input text-teal-600 focus:ring-teal-500" data-phase="3"> <span class="text-sm">Tankless</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="mt-8 flex justify-between">
+                        <button class="prev-btn text-slate-500 px-6 py-2 rounded-lg font-medium hover:bg-slate-100 transition-colors">&#x2190; Back</button>
+                        <button class="next-btn bg-teal-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-teal-700 transition-colors shadow-sm">Next: Tasks & Feasibility &#x2192;</button>
+                    </div>
+                </div>
+
+                <div id="phase4" class="tab-content p-6 sm:p-8">
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2 mb-2">
+                            <span>&#x1F4F8;</span> Phase 4: Mandatory Tasks & Feasibility
+                        </h2>
+                        <p class="text-slate-600">Ensure all physical measurements and photographic documentation are completed, then present the Feasibility Breakdown LIVE.</p>
+                    </div>
+
+                    <div class="mb-8">
+                        <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wider mb-4 border-b border-slate-200 pb-2">Site Tasks</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <label class="flex items-center p-4 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-teal-600 rounded border-slate-300 focus:ring-teal-500" data-phase="4">
+                                <span class="ml-3 text-slate-700 font-medium">Laser-measure + quick as-built sketch.</span>
+                            </label>
+                            <label class="flex items-center p-4 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-teal-600 rounded border-slate-300 focus:ring-teal-500" data-phase="4">
+                                <span class="ml-3 text-slate-700 font-medium">Photo every elevation.</span>
+                            </label>
+                            <label class="flex items-center p-4 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-teal-600 rounded border-slate-300 focus:ring-teal-500" data-phase="4">
+                                <span class="ml-3 text-slate-700 font-medium">Photo the roof.</span>
+                            </label>
+                            <label class="flex items-center p-4 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-teal-600 rounded border-slate-300 focus:ring-teal-500" data-phase="4">
+                                <span class="ml-3 text-slate-700 font-medium">Photo utilities (Panel, meter, shutoff).</span>
+                            </label>
+                            <label class="flex items-center p-4 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-teal-600 rounded border-slate-300 focus:ring-teal-500" data-phase="4">
+                                <span class="ml-3 text-slate-700 font-medium">Photo trees & landscaping.</span>
+                            </label>
+                            <label class="flex items-center p-4 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors">
+                                <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-teal-600 rounded border-slate-300 focus:ring-teal-500" data-phase="4">
+                                <span class="ml-3 text-slate-700 font-medium">Photo drainage & downspouts.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="flex items-start p-4 border-2 border-indigo-200 bg-indigo-50 rounded-lg cursor-pointer transition-colors">
+                            <input type="checkbox" class="track-input form-checkbox h-6 w-6 text-indigo-600 mt-0.5 rounded border-indigo-300 focus:ring-indigo-500" data-phase="4">
+                            <div class="ml-3">
+                                <span class="text-indigo-900 font-bold block text-lg">Present Feasibility Breakdown LIVE</span>
+                                <span class="text-indigo-700 text-sm">Use the interactive calculator below to set expectations. Expand items for details.</span>
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- NEW INTERACTIVE CALCULATOR -->
+                    <div class="bg-slate-800 text-white rounded-xl p-6 shadow-lg mt-6">
+                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end mb-6 border-b border-slate-600 pb-4 gap-4">
+                            <h3 class="text-xl font-bold text-teal-400 leading-tight">Live Feasibility & Estimate Calculator</h3>
+                            <div class="text-left sm:text-right shrink-0">
+                                <span class="block text-xs text-slate-400 uppercase tracking-wider mb-1">Estimated Total</span>
+                                <span class="text-4xl font-bold text-sky-400" id="calc_total_display">$62,000</span>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                            <!-- Pre-Construction Package -->
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-300 uppercase tracking-wider mb-3 border-b border-slate-700 pb-2">Pre-Construction Package</h4>
+                                
+                                <div class="space-y-3">
+                                    
+                                    <!-- Feasibility -->
+                                    <div class="border border-slate-700 rounded-lg bg-slate-750 p-3 hover:bg-slate-700 transition-colors">
+                                        <label class="flex justify-between items-center cursor-pointer group mb-1">
+                                            <div class="flex items-center gap-3">
+                                                <input type="checkbox" id="cb_feasibility" class="calc-input form-checkbox h-5 w-5 text-teal-500 rounded bg-slate-800 border-slate-500 focus:ring-teal-500 focus:ring-offset-slate-800" checked>
+                                                <span class="text-slate-200 font-medium group-hover:text-white">Feasibility Study</span>
+                                            </div>
+                                            <span class="font-mono text-teal-300">$5,000</span>
+                                        </label>
+                                        <details class="group/details ml-8">
+                                            <summary class="text-xs text-sky-400 cursor-pointer hover:text-sky-300 font-medium select-none">▸ Show Details</summary>
+                                            <div class="text-xs text-slate-400 mt-2 space-y-1 pb-1">
+                                                <p>Detailed feasibility study to understand zoning requirements and structural possibilities for your project. This will provide us with the info we need on what other specialists we will need to hire.</p>
+                                                <p class="font-bold text-slate-300 mt-2">Specialists Included:</p>
+                                                <ul class="list-disc pl-4 space-y-1">
+                                                    <li><strong>Civil Engineer:</strong> Required for designing drainage systems, roadway improvements & other site infrastructure.</li>
+                                                    <li><strong>Geotechnical Engineer:</strong> Assesses soil conditions for foundation design/site work.</li>
+                                                    <li><strong>Septic Design Engineer:</strong> Needed if property is not on municipal sewer.</li>
+                                                    <li><strong>Land Surveyor:</strong> Collects field data to create property map & establish boundaries.</li>
+                                                    <li><strong>Critical Area Consultant:</strong> Assesses impacts on wetlands/shorelines & mitigates.</li>
+                                                    <li><strong>Arborist:</strong> Evaluates health/impact of trees advising protection or removal.</li>
+                                                </ul>
+                                            </div>
+                                        </details>
+                                    </div>
+
+                                    <!-- Permits -->
+                                    <div class="border border-slate-700 rounded-lg bg-slate-750 p-3 hover:bg-slate-700 transition-colors">
+                                        <label class="flex justify-between items-center cursor-pointer group mb-1">
+                                            <div class="flex items-center gap-3">
+                                                <input type="checkbox" id="cb_permits" class="calc-input form-checkbox h-5 w-5 text-teal-500 rounded bg-slate-800 border-slate-500 focus:ring-teal-500 focus:ring-offset-slate-800" checked>
+                                                <span class="text-slate-200 font-medium group-hover:text-white">Permits</span>
+                                            </div>
+                                            <span class="font-mono text-teal-300">$6,000</span>
+                                        </label>
+                                        <details class="group/details ml-8">
+                                            <summary class="text-xs text-sky-400 cursor-pointer hover:text-sky-300 font-medium select-none">▸ Show Details</summary>
+                                            <div class="text-xs text-slate-400 mt-2 space-y-1 pb-1">
+                                                <p>Covers the full process of securing building permits, zoning approvals, environmental clearances, and utility hookups from local authorities. Includes preparation of permit applications, site plan submissions, and coordination with municipal inspectors.</p>
+                                                <p><span class="text-sky-300">Timeline:</span> 4–8 months.</p>
+                                                <p><span class="text-sky-300">Assumptions:</span> No variances or appeals needed; standard compliance with local codes.</p>
+                                            </div>
+                                        </details>
+                                    </div>
+
+                                    <!-- Blueprints -->
+                                    <div class="border border-slate-700 rounded-lg bg-slate-750 p-3 hover:bg-slate-700 transition-colors">
+                                        <label class="flex justify-between items-center cursor-pointer group mb-1">
+                                            <div class="flex items-center gap-3">
+                                                <input type="checkbox" id="cb_plans" class="calc-input form-checkbox h-5 w-5 text-teal-500 rounded bg-slate-800 border-slate-500 focus:ring-teal-500 focus:ring-offset-slate-800" checked>
+                                                <span class="text-slate-200 font-medium group-hover:text-white">Blueprints & Layouts</span>
+                                            </div>
+                                            <span class="font-mono text-teal-300">$12,000</span>
+                                        </label>
+                                        <details class="group/details ml-8">
+                                            <summary class="text-xs text-sky-400 cursor-pointer hover:text-sky-300 font-medium select-none">▸ Show Details</summary>
+                                            <div class="text-xs text-slate-400 mt-2 pb-1">
+                                                <p><strong>Architectural Layouts:</strong> Involves creating detailed floor plans, elevations, sections to visualize the project's spatial organization, aesthetics, and functionality. Ensures compliance with client vision and code requirements.</p>
+                                            </div>
+                                        </details>
+                                    </div>
+
+                                    <!-- Design -->
+                                    <div class="border border-slate-700 rounded-lg bg-slate-750 p-3 hover:bg-slate-700 transition-colors">
+                                        <label class="flex justify-between items-center cursor-pointer group mb-1">
+                                            <div class="flex items-center gap-3">
+                                                <input type="checkbox" id="cb_design_pkg" class="calc-input form-checkbox h-5 w-5 text-teal-500 rounded bg-slate-800 border-slate-500 focus:ring-teal-500 focus:ring-offset-slate-800" checked>
+                                                <span class="text-slate-200 font-medium group-hover:text-white">Design & Materials</span>
+                                            </div>
+                                            <span class="font-mono text-teal-300">$7,000</span>
+                                        </label>
+                                        <details class="group/details ml-8">
+                                            <summary class="text-xs text-sky-400 cursor-pointer hover:text-sky-300 font-medium select-none">▸ Show Details</summary>
+                                            <div class="text-xs text-slate-400 mt-2 space-y-2 pb-1">
+                                                <p><strong>Material Selection & Specification Package:</strong></p>
+                                                <ul class="list-disc pl-4 space-y-1">
+                                                    <li>3D Renders of key project areas illustrating material application.</li>
+                                                    <li>Project Spec Sheets detailing material manufacturer, product name, code, cost, and lead time.</li>
+                                                    <li>Mood Board (physical or digital) communicating the design aesthetic and material palette.</li>
+                                                </ul>
+                                            </div>
+                                        </details>
+                                    </div>
+
+                                    <!-- Geotech -->
+                                    <div class="border border-slate-700 rounded-lg bg-slate-750 p-3 hover:bg-slate-700 transition-colors">
+                                        <label class="flex justify-between items-center cursor-pointer group mb-1">
+                                            <div class="flex items-center gap-3">
+                                                <input type="checkbox" id="cb_geotech" class="calc-input form-checkbox h-5 w-5 text-teal-500 rounded bg-slate-800 border-slate-500 focus:ring-teal-500 focus:ring-offset-slate-800" checked>
+                                                <span class="text-slate-200 font-medium group-hover:text-white">Geotechnical Engineering</span>
+                                            </div>
+                                            <span class="font-mono text-teal-300">$15,000</span>
+                                        </label>
+                                        <details class="group/details ml-8">
+                                            <summary class="text-xs text-sky-400 cursor-pointer hover:text-sky-300 font-medium select-none">▸ Show Details</summary>
+                                            <div class="text-xs text-slate-400 mt-2 space-y-2 pb-1">
+                                                <p>Detailed geotechnical engineering assessment to analyze soil, groundwater, and subsurface conditions for your project. Ensures stable foundation design, slope stability, and compliance with Edmonds' coastal regulations.</p>
+                                                <p class="font-bold text-slate-300">Rough Timeline (4-6 weeks):</p>
+                                                <ul class="list-none space-y-1">
+                                                    <li>• Week 1: Initial site visit & proposal approval.</li>
+                                                    <li>• Weeks 2-3: Field investigations (borings) & sampling.</li>
+                                                    <li>• Weeks 4-5: Lab analysis & draft report.</li>
+                                                    <li>• Week 6: Final report delivery.</li>
+                                                </ul>
+                                                <p class="font-bold text-slate-300 mt-2">Specialists:</p>
+                                                <ul class="list-disc pl-4 space-y-1">
+                                                    <li><strong>Geotechnical Engineer:</strong> Leads testing & recommends foundations (piles/footings).</li>
+                                                    <li><strong>Soil Technician:</strong> Conducts on-site borings.</li>
+                                                    <li><strong>Lab Analyst:</strong> Performs tests on soil bearing capacity/shear strength.</li>
+                                                    <li><strong>Environmental Consultant:</strong> Integrates findings with critical area assessments.</li>
+                                                </ul>
+                                            </div>
+                                        </details>
+                                    </div>
+
+                                    <!-- Structural -->
+                                    <div class="border border-slate-700 rounded-lg bg-slate-750 p-3 hover:bg-slate-700 transition-colors">
+                                        <label class="flex justify-between items-center cursor-pointer group mb-1">
+                                            <div class="flex items-center gap-3">
+                                                <input type="checkbox" id="cb_structural" class="calc-input form-checkbox h-5 w-5 text-teal-500 rounded bg-slate-800 border-slate-500 focus:ring-teal-500 focus:ring-offset-slate-800" checked>
+                                                <span class="text-slate-200 font-medium group-hover:text-white">Structural Engineering</span>
+                                            </div>
+                                            <span class="font-mono text-teal-300">$12,000</span>
+                                        </label>
+                                        <details class="group/details ml-8">
+                                            <summary class="text-xs text-sky-400 cursor-pointer hover:text-sky-300 font-medium select-none">▸ Show Details</summary>
+                                            <div class="text-xs text-slate-400 mt-2 pb-1">
+                                                <p>Focuses on the technical analysis and design of load-bearing elements, foundations, framing, and seismic/wind resistance. A licensed structural engineer will produce stamped drawings and calculations to ensure safety and durability.</p>
+                                            </div>
+                                        </details>
+                                    </div>
+
+                                    <!-- Survey -->
+                                    <div class="border border-slate-700 rounded-lg bg-slate-750 p-3 hover:bg-slate-700 transition-colors">
+                                        <label class="flex justify-between items-center cursor-pointer group mb-1">
+                                            <div class="flex items-center gap-3">
+                                                <input type="checkbox" id="cb_survey" class="calc-input form-checkbox h-5 w-5 text-teal-500 rounded bg-slate-800 border-slate-500 focus:ring-teal-500 focus:ring-offset-slate-800" checked>
+                                                <span class="text-slate-200 font-medium group-hover:text-white">Survey</span>
+                                            </div>
+                                            <span class="font-mono text-teal-300">$5,000</span>
+                                        </label>
+                                        <details class="group/details ml-8">
+                                            <summary class="text-xs text-sky-400 cursor-pointer hover:text-sky-300 font-medium select-none">▸ Show Details</summary>
+                                            <div class="text-xs text-slate-400 mt-2 pb-1">
+                                                <p>Precisely measures and maps the property's boundaries, easements, setbacks, and existing physical features (topography, utility lines, and structures). Establishes horizontal and vertical controls needed for plans.</p>
+                                            </div>
+                                        </details>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- Construction Cost -->
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-300 uppercase tracking-wider mb-3 border-b border-slate-700 pb-2">Construction Cost Estimation</h4>
+                                <div class="space-y-5">
+                                    
+                                    <!-- Schedule Info Box -->
+                                    <div class="bg-slate-900/60 border border-slate-700 p-3 rounded text-xs text-slate-300 space-y-1">
+                                        <span class="text-sky-400 font-bold block border-b border-slate-700 pb-1 mb-1">Anticipated Project Schedule</span>
+                                        <p><strong>Total Duration:</strong> 10 – 14 months</p>
+                                        <p><strong>Planning/Permitting:</strong> 4 – 6 months</p>
+                                        <p><strong>Construction:</strong> 6 – 8 months</p>
+                                    </div>
+
+                                    <!-- SF Input -->
+                                    <div>
+                                        <label class="block text-sm text-slate-300 mb-1 font-medium">Estimated Square Footage</label>
+                                        <div class="relative">
+                                            <input type="number" id="est_sqft" class="calc-input w-full bg-slate-700 border border-slate-500 text-white rounded-md px-3 py-3 focus:ring-sky-500 focus:border-sky-500 font-mono text-xl" placeholder="e.g., 500">
+                                            <span class="absolute right-3 top-3.5 text-slate-400 font-bold">sq ft</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Tier Selection -->
+                                    <div>
+                                        <label class="block text-sm text-slate-300 mb-2 font-medium">Material & Finish Tier</label>
+                                        <div class="grid grid-cols-1 gap-2">
+                                            
+                                            <label class="cursor-pointer">
+                                                <input type="radio" name="est_tier" id="tier_good" value="300" class="calc-input peer sr-only">
+                                                <div class="rounded-md p-3 border border-slate-600 bg-slate-700 text-slate-300 peer-checked:bg-sky-900 peer-checked:border-sky-500 peer-checked:text-sky-100 transition-colors">
+                                                    <div class="flex justify-between items-center mb-1">
+                                                        <span class="font-bold text-base">Good Tier</span>
+                                                        <span class="font-mono font-bold">~$300/SF</span>
+                                                    </div>
+                                                    <p class="text-xs text-slate-400 peer-checked:text-sky-200">Solid, durable selections with proven local materials, standard appliances, and clean, timeless finishes.</p>
+                                                </div>
+                                            </label>
+
+                                            <label class="cursor-pointer">
+                                                <input type="radio" name="est_tier" id="tier_better" value="500" class="calc-input peer sr-only" checked>
+                                                <div class="rounded-md p-3 border border-slate-600 bg-slate-700 text-slate-300 peer-checked:bg-sky-900 peer-checked:border-sky-500 peer-checked:text-sky-100 transition-colors">
+                                                    <div class="flex justify-between items-center mb-1">
+                                                        <span class="font-bold text-base">Better Tier</span>
+                                                        <span class="font-mono font-bold">~$500/SF</span>
+                                                    </div>
+                                                    <p class="text-xs text-slate-400 peer-checked:text-sky-200">Elevated materials, custom millwork, upgraded appliances/windows, enhanced detailing, and energy-efficient systems.</p>
+                                                </div>
+                                            </label>
+
+                                            <label class="cursor-pointer">
+                                                <input type="radio" name="est_tier" id="tier_best" value="700" class="calc-input peer sr-only">
+                                                <div class="rounded-md p-3 border border-slate-600 bg-slate-700 text-slate-300 peer-checked:bg-sky-900 peer-checked:border-sky-500 peer-checked:text-sky-100 transition-colors">
+                                                    <div class="flex justify-between items-center mb-1">
+                                                        <span class="font-bold text-base">Best Tier</span>
+                                                        <span class="font-mono font-bold">~$700/SF</span>
+                                                    </div>
+                                                    <p class="text-xs text-slate-400 peer-checked:text-sky-200">Premium/luxury selections, high-end custom cabinetry, designer fixtures, architectural upgrades, and top-tier features.</p>
+                                                </div>
+                                            </label>
+
+                                        </div>
+                                    </div>
+
+                                    <!-- Common Add-ons -->
+                                    <div class="pt-3 border-t border-slate-700">
+                                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Common Additions</h4>
+                                        <div class="border border-slate-700 rounded-lg bg-slate-750 p-3 hover:bg-slate-700 transition-colors">
+                                            <label class="flex justify-between items-center cursor-pointer group mb-1">
+                                                <div class="flex items-center gap-3">
+                                                    <input type="checkbox" id="cb_bathroom" class="calc-input form-checkbox h-5 w-5 text-sky-500 rounded bg-slate-800 border-slate-500 focus:ring-sky-500 focus:ring-offset-slate-800">
+                                                    <span class="text-slate-200 font-medium group-hover:text-white">Add Bathroom</span>
+                                                </div>
+                                                <span class="font-mono text-sky-300 font-bold">$45,000 Base</span>
+                                            </label>
+                                            <details class="group/details ml-8">
+                                                <summary class="text-xs text-sky-400 cursor-pointer hover:text-sky-300 font-medium select-none">▸ Show Scope & Tier Pricing</summary>
+                                                <div class="text-xs text-slate-400 mt-2 space-y-2 pb-1">
+                                                    <p class="font-bold text-slate-300 border-b border-slate-700 pb-1">Included Scope:</p>
+                                                    <ul class="list-disc pl-4 space-y-1">
+                                                        <li>Demo everything required for new project</li>
+                                                        <li>Plumbing: reroute pipes, install new supply/drains</li>
+                                                        <li>Electrical: upgrade wiring, add GFCI, switches, recessed lighting, exhaust fan</li>
+                                                        <li>Install new drywall, mud, texture, primer</li>
+                                                        <li>Add walk-in shower with glass enclosure</li>
+                                                        <li>Install new porcelain floor tiles</li>
+                                                        <li>Mount vanity with countertop</li>
+                                                        <li>Install modern faucet and mirror</li>
+                                                        <li>Paint walls and trim</li>
+                                                    </ul>
+                                                    <p class="font-bold text-slate-300 border-b border-slate-700 pb-1 mt-3">Material Tier Pricing:</p>
+                                                    <ul class="list-none space-y-1">
+                                                        <li>• <span class="text-slate-200">Good ($40k-$50k):</span> Locally sourced materials approved by PPG</li>
+                                                        <li>• <span class="text-sky-300">Better ($50k-$75k):</span> Custom cabinets and high-end materials</li>
+                                                        <li>• <span class="text-teal-300">Best ($75k+):</span> Luxury custom design, designer-selected materials</li>
+                                                    </ul>
+                                                </div>
+                                            </details>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 flex justify-between">
+                        <button class="prev-btn text-slate-500 px-6 py-2 rounded-lg font-medium hover:bg-slate-100 transition-colors">&#x2190; Back</button>
+                        <button class="next-btn bg-teal-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-teal-700 transition-colors shadow-sm">Next: Next Steps &#x2192;</button>
+                    </div>
+                </div>
+
+                <!-- NEW PHASE 5: CLOSE STRONG -->
+                <div id="phase5" class="tab-content p-6 sm:p-8">
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2 mb-2">
+                            <span>&#x1F4DD;</span> Phase 5: Next Steps
+                        </h2>
+                        <p class="text-slate-600">Public Board framing: complete discovery notes and agree on next steps. The sample script below is a contractor-ops template associated with Pacific Pro Group — adapt for your firm.</p>
+                    </div>
+
+                    <div class="bg-white border-l-4 border-indigo-600 rounded-r-xl shadow-sm p-6 mb-8 italic text-slate-800 font-medium text-lg leading-relaxed relative">
+                        <span class="absolute top-2 right-4 text-4xl text-slate-100 pointer-events-none">&#x275D;</span>
+                        <p class="mb-4">“Great news – your project fits perfectly in our coastal expertise.</p>
+                        <p class="mb-4">The first commitment is the Design & Construction Agreement. It locks in the $5,000 Feasibility Study deposit today. That study brings in the Civil, Geotechnical, Septic, Survey, and Environmental specialists we need so we know exactly what’s possible before we ever touch permitting.</p>
+                        <p class="mb-4">Once the study is complete we deliver stamped plans, 3D renders, full spec package, and a guaranteed fixed-price construction contract.</p>
+                        <p class="text-indigo-700 font-bold">Would you like me to walk you through the Agreement and get the deposit started right now?”</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <label class="flex items-start p-4 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors bg-green-50">
+                            <input type="checkbox" class="track-input form-checkbox h-6 w-6 text-green-600 mt-0.5 rounded border-green-300 focus:ring-green-500" data-phase="5">
+                            <span class="ml-3 text-slate-800 font-bold">Hand client the DESIGN AND CONSTRUCTION AGREEMENT</span>
+                        </label>
+                        <label class="flex items-start p-4 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors">
+                            <input type="checkbox" class="track-input form-checkbox h-6 w-6 text-teal-600 mt-0.5 rounded border-slate-300 focus:ring-teal-500" data-phase="5">
+                            <span class="ml-3 text-slate-700 font-medium">Collect deposit via Square or check</span>
+                        </label>
+                        <label class="flex items-start p-4 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors">
+                            <input type="checkbox" class="track-input form-checkbox h-6 w-6 text-teal-600 mt-0.5 rounded border-slate-300 focus:ring-teal-500" data-phase="5">
+                            <span class="ml-3 text-slate-700 font-medium">Text client the Process PDF link immediately</span>
+                        </label>
+                    </div>
+
+                    <div class="mt-8 flex justify-between">
+                        <button class="prev-btn text-slate-500 px-6 py-2 rounded-lg font-medium hover:bg-slate-100 transition-colors">&#x2190; Back</button>
+                        <button class="next-btn bg-teal-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-teal-700 transition-colors shadow-sm">Next: After You Leave &#x2192;</button>
+                    </div>
+                </div>
+
+                <!-- NEW PHASE 6: POST-VISIT -->
+                <div id="phase6" class="tab-content p-6 sm:p-8">
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2 mb-2">
+                            <span>&#x1F69A;</span> Phase 6: Immediately After You Leave
+                        </h2>
+                        <p class="text-slate-600">Complete these operational tasks from your truck before driving to the next appointment.</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <label class="flex items-start p-4 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors">
+                            <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-teal-600 mt-0.5 rounded border-slate-300 focus:ring-teal-500" data-phase="6">
+                            <div class="ml-3">
+                                <span class="text-slate-700 font-medium block">Send thank-you text + 3 site photos</span>
+                                <span class="text-sm text-slate-500 italic block mt-1">"Thanks again! Your Feasibility Study starts next week!"</span>
+                            </div>
+                        </label>
+                        <label class="flex items-start p-4 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors">
+                            <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-teal-600 mt-0.5 rounded border-slate-300 focus:ring-teal-500" data-phase="6">
+                            <span class="ml-3 text-slate-700 font-medium">Log deposit in Buildertrend + mark PSA signed</span>
+                        </label>
+                        <label class="flex items-start p-4 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors">
+                            <input type="checkbox" class="track-input form-checkbox h-5 w-5 text-teal-600 mt-0.5 rounded border-slate-300 focus:ring-teal-500" data-phase="6">
+                            <span class="ml-3 text-slate-700 font-medium">Schedule Geotech site visit within 7 days</span>
+                        </label>
+                    </div>
+
+                    <div class="mt-8 flex justify-between">
+                        <button class="prev-btn text-slate-500 px-6 py-2 rounded-lg font-medium hover:bg-slate-100 transition-colors">&#x2190; Back</button>
+                        <button class="next-btn bg-indigo-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-indigo-700 transition-colors shadow-sm">Final Step: Site Sketch &#x2192;</button>
+                    </div>
+                </div>
+
+                <div id="sketch" class="tab-content p-6 sm:p-8">
+                    <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div>
+                            <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2 mb-2">
+                                <span>&#x270F;</span> Hand-Drawn House Layout & As-Built Sketch
+                            </h2>
+                            <p class="text-slate-600 text-sm">Use the interactive canvas below to sketch the existing footprint, proposed addition area, North arrow, property lines, and street access.</p>
+                        </div>
+                        <div class="flex gap-2 shrink-0">
+                            <button id="clear-canvas" class="text-sm bg-white border border-slate-300 text-slate-700 px-4 py-2 rounded-md hover:bg-slate-50 transition-colors font-medium">Clear Canvas</button>
+                        </div>
+                    </div>
+
+                    <div class="w-full bg-slate-50 overflow-hidden relative" style="height: 500px;">
+                        <canvas id="sketchpad" class="absolute top-0 left-0 bg-white w-full h-full"></canvas>
+                    </div>
+
+                    <div class="mt-8 flex flex-col sm:flex-row justify-between gap-4">
+                        <button class="prev-btn text-slate-500 px-6 py-2 rounded-lg font-medium hover:bg-slate-100 transition-colors w-full sm:w-auto">&#x2190; Back</button>
+                        <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+                            <!-- SUMMARY EXPORT BUTTON -->
+                            <button id="export-summary" class="bg-indigo-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-indigo-700 transition-colors shadow-md w-full sm:w-auto">&#x1F4C4; Print Estimate Summary</button>
+                            <button onclick="alert('Notes saved in this browser (localStorage). Nothing uploaded — no CRM sync from this Board tool.')" class="bg-teal-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-teal-700 transition-colors shadow-md w-full sm:w-auto">Complete Visit &#x2714;</button>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    </main>
+
+    <script>
+        // --- State Management ---
+        const state = {
+            totals: { 1: 7, 2: 2, 3: 24, 4: 7, 5: 3, 6: 3 }, // Updated for new phases and inputs. Phase 1 totals increased by 4 for text inputs
+            current: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 }  // Current scored items per phase
+        };
+        const phases = ['phase1', 'phase2', 'phase3', 'phase4', 'phase5', 'phase6', 'sketch'];
+        let currentPhaseIndex = 0;
+        let progressChartInstance = null;
+
+        // --- Navigation Logic ---
+        function switchTab(targetId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            const targetEl = document.getElementById(targetId);
+            if(targetEl) targetEl.classList.add('active');
+            
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-teal-50', 'text-teal-700');
+                btn.classList.add('text-slate-600');
+                const phaseScore = btn.querySelector('.phase-score');
+                if(phaseScore) {
+                    phaseScore.classList.remove('bg-white', 'text-teal-600', 'border', 'border-teal-100');
+                    phaseScore.classList.add('bg-slate-100', 'text-slate-500');
+                }
+            });
+
+            const activeBtn = document.querySelector(`[data-target="${targetId}"]`);
+            if (activeBtn) {
+                activeBtn.classList.remove('text-slate-600');
+                activeBtn.classList.add('bg-teal-50', 'text-teal-700');
+                const activePhaseScore = activeBtn.querySelector('.phase-score');
+                if(activePhaseScore) {
+                    activePhaseScore.classList.remove('bg-slate-100', 'text-slate-500');
+                    activePhaseScore.classList.add('bg-white', 'text-teal-600', 'border', 'border-teal-100');
+                }
+            }
+
+            currentPhaseIndex = phases.indexOf(targetId);
+            
+            // Re-render canvas resolution if switching to sketch tab
+            if(targetId === 'sketch') {
+                resizeCanvas();
+            }
+        }
+
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                switchTab(e.currentTarget.getAttribute('data-target'));
+            });
+        });
+
+        document.querySelectorAll('.next-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if(currentPhaseIndex < phases.length - 1) switchTab(phases[currentPhaseIndex + 1]);
+            });
+        });
+
+        document.querySelectorAll('.prev-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if(currentPhaseIndex > 0) switchTab(phases[currentPhaseIndex - 1]);
+            });
+        });
+
+        // --- Form Interaction & Tracking ---
+        function toggleInput(inputId, show) {
+            const el = document.getElementById(inputId);
+            if(show && el) {
+                el.removeAttribute('disabled');
+                el.focus();
+            } else if (el) {
+                el.setAttribute('disabled', 'true');
+                el.value = '';
+            }
+        }
+
+        function calculateProgress() {
+            // Reset current counts
+            state.current = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 };
+            
+            // Phase 2, 4, 5, 6 (Checkboxes)
+            [2, 4, 5, 6].forEach(p => {
+                const checked = document.querySelectorAll(`input[type="checkbox"][data-phase="${p}"]:checked`).length;
+                state.current[p] = checked;
+            });
+            
+            // Phase 1 (Mixed inputs)
+            let phase1Score = 0;
+            const p1Inputs = document.querySelectorAll('[data-phase="1"]');
+            p1Inputs.forEach(input => {
+                if(input.type === 'checkbox' && input.checked) {
+                    phase1Score++;
+                } else if ((input.type === 'text' || input.type === 'email' || input.type === 'tel') && input.classList.contains('primary-text')) {
+                    if(input.value.trim() !== '') {
+                        phase1Score++;
+                    }
+                }
+            });
+            state.current[1] = phase1Score;
+
+            // Phase 3 (Mixed inputs, grouping by name for radio groups + primary text areas)
+            let phase3Score = 0;
+            const p3Inputs = document.querySelectorAll('[data-phase="3"]');
+            const processedNames = new Set();
+
+            p3Inputs.forEach(input => {
+                if(input.type === 'radio') {
+                    if(!processedNames.has(input.name)) {
+                        processedNames.add(input.name);
+                        if(document.querySelector(`input[name="${input.name}"]:checked`)) phase3Score++;
+                    }
+                } else if (input.type === 'checkbox') {
+                     // Checkboxes grouped by name (style_pref, vision_features)
+                     if(input.checked && !processedNames.has(input.name)) {
+                         processedNames.add(input.name);
+                         phase3Score++;
+                     }
+                } else if ((input.type === 'text' || input.tagName.toLowerCase() === 'textarea') && input.classList.contains('primary-text')) {
+                    // Track primary text areas (Reason and Use)
+                    if(input.value.trim() !== '') {
+                        phase3Score++;
+                    }
+                }
+            });
+            state.current[3] = phase3Score;
+
+            updateUI();
+        }
+
+        function updateUI() {
+            let totalPossible = 0;
+            let totalAchieved = 0;
+
+            [1, 2, 3, 4, 5, 6].forEach(p => {
+                totalPossible += state.totals[p];
+                totalAchieved += state.current[p];
+                
+                // Update sidebar badges
+                const btn = document.querySelector(`[data-target="phase${p}"]`);
+                if(btn) {
+                    const phaseScoreEl = btn.querySelector('.phase-score');
+                    if(phaseScoreEl) phaseScoreEl.innerText = `${state.current[p]}/${state.totals[p]}`;
+                }
+            });
+
+            // Global Progress Bar (with null checks)
+            const percent = Math.round((totalAchieved / totalPossible) * 100) || 0;
+            
+            const globalProgressBar = document.getElementById('global-progress-bar');
+            if (globalProgressBar) globalProgressBar.style.width = `${percent}%`;
+            
+            const globalProgressText = document.getElementById('global-progress-text');
+            if (globalProgressText) globalProgressText.innerText = `${percent}%`;
+            
+            const sidebarProgressBar = document.getElementById('sidebar-progress-bar');
+            if (sidebarProgressBar) sidebarProgressBar.style.width = `${percent}%`;
+
+            updateChart();
+        }
+
+        // Listen for all tracked inputs
+        document.querySelectorAll('.track-input').forEach(input => {
+            // For textareas/inputs use input event for real-time tracking, otherwise change
+            if(input.type === 'text' || input.type === 'email' || input.type === 'tel' || input.tagName.toLowerCase() === 'textarea') {
+                input.addEventListener('input', calculateProgress);
+            } else {
+                input.addEventListener('change', calculateProgress);
+            }
+        });
+
+        // --- Chart.js Visualization ---
+        function initChart() {
+            const canvasEl = document.getElementById('progressChart');
+            if(!canvasEl) return; // Prevent init failure if canvas is missing
+            const ctx = canvasEl.getContext('2d');
+            progressChartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Ph 1: Pre', 'Ph 2: Arrival', 'Ph 3: Discover', 'Ph 4: Tasks', 'Ph 5: Close', 'Ph 6: Post', 'Remaining'],
+                    datasets: [{
+                        data: [0, 0, 0, 0, 0, 0, 46], // Initial empty state (46 total items)
+                        backgroundColor: [
+                            '#0ea5e9', // Sky 500
+                            '#3b82f6', // Blue 500
+                            '#14b8a6', // Teal 500
+                            '#0f766e', // Teal 700
+                            '#6366f1', // Indigo 500
+                            '#4338ca', // Indigo 700
+                            '#e2e8f0'  // Slate 200 (Empty)
+                        ],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    if(context.label === 'Remaining') return ' Tasks left';
+                                    return ` ${context.label}: ${context.raw} completed`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateChart() {
+            if(!progressChartInstance) return;
+            const c = state.current;
+            const totalDone = c[1] + c[2] + c[3] + c[4] + c[5] + c[6];
+            const remaining = 46 - totalDone; // 7+2+24+7+3+3 = 46
+            
+            progressChartInstance.data.datasets[0].data = [c[1], c[2], c[3], c[4], c[5], c[6], remaining];
+            progressChartInstance.update();
+        }
+
+        // --- Interactive Canvas (Sketchpad) ---
+        const canvas = document.getElementById('sketchpad');
+        let ctx;
+        if (canvas) {
+            ctx = canvas.getContext('2d');
+        }
+        
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+
+        function resizeCanvas() {
+            if(!canvas || !ctx) return;
+            const rect = canvas.parentElement.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+            ctx.strokeStyle = '#0f172a'; // Slate 900
+            ctx.lineWidth = 3;
+            ctx.lineJoin = 'round';
+            ctx.lineCap = 'round';
+            
+            // Add a subtle background color directly to canvas data so it exports properly
+            ctx.fillStyle = "#ffffff";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function getMousePos(evt) {
+            if(!canvas) return {x: 0, y: 0};
+            const rect = canvas.getBoundingClientRect();
+            let clientX = evt.clientX;
+            let clientY = evt.clientY;
+            
+            if (evt.touches && evt.touches.length > 0) {
+                clientX = evt.touches[0].clientX;
+                clientY = evt.touches[0].clientY;
+            }
+            
+            return {
+                x: clientX - rect.left,
+                y: clientY - rect.top
+            };
+        }
+
+        function startDrawing(e) {
+            isDrawing = true;
+            const pos = getMousePos(e);
+            [lastX, lastY] = [pos.x, pos.y];
+            if(e.cancelable) e.preventDefault();
+        }
+
+        function draw(e) {
+            if (!isDrawing || !ctx) return;
+            const pos = getMousePos(e);
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(pos.x, pos.y);
+            ctx.stroke();
+            [lastX, lastY] = [pos.x, pos.y];
+            if(e.cancelable) e.preventDefault();
+        }
+
+        function stopDrawing() {
+            isDrawing = false;
+        }
+
+        if(canvas) {
+            canvas.addEventListener('mousedown', startDrawing);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', stopDrawing);
+            canvas.addEventListener('mouseout', stopDrawing);
+            canvas.addEventListener('touchstart', startDrawing, {passive: false});
+            canvas.addEventListener('touchmove', draw, {passive: false});
+            canvas.addEventListener('touchend', stopDrawing);
+        }
+
+        const clearCanvasBtn = document.getElementById('clear-canvas');
+        if(clearCanvasBtn && canvas && ctx) {
+            clearCanvasBtn.addEventListener('click', () => {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = "#ffffff";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            });
+        }
+
+        // --- Calculator Logic ---
+        function updateCalculator() {
+            let total = 0;
+            
+            const isChecked = (id) => {
+                const el = document.getElementById(id);
+                return el ? el.checked : false;
+            };
+
+            // Calculate itemized Pre-Construction
+            if(isChecked('cb_feasibility')) total += 5000;
+            if(isChecked('cb_permits')) total += 6000;
+            if(isChecked('cb_plans')) total += 12000;
+            if(isChecked('cb_design_pkg')) total += 7000;
+            if(isChecked('cb_geotech')) total += 15000;
+            if(isChecked('cb_structural')) total += 12000;
+            if(isChecked('cb_survey')) total += 5000;
+            
+            // Calculate Base Add-ons
+            if(isChecked('cb_bathroom')) total += 45000;
+
+            // Calculate Construction cost via SF + Tier
+            const sqftEl = document.getElementById('est_sqft');
+            const sqft = sqftEl && sqftEl.value ? parseInt(sqftEl.value, 10) : 0;
+            
+            let tierPrice = 0;
+            if(isChecked('tier_good')) tierPrice = 300;
+            if(isChecked('tier_better')) tierPrice = 500;
+            if(isChecked('tier_best')) tierPrice = 700;
+
+            total += (sqft * tierPrice);
+
+            const displayEl = document.getElementById('calc_total_display');
+            if(displayEl) {
+                displayEl.innerText = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(total);
+            }
+        }
+
+        document.querySelectorAll('.calc-input').forEach(input => {
+            if(input.type === 'number') {
+                input.addEventListener('input', updateCalculator);
+            } else {
+                input.addEventListener('change', updateCalculator);
+            }
+        });
+
+        // --- Expand/Collapse All details for nice printing
+        function toggleAllDetails(openState) {
+            document.querySelectorAll('details').forEach(detail => {
+                if (openState) {
+                    detail.setAttribute('open', '');
+                } else {
+                    detail.removeAttribute('open');
+                }
+            });
+        }
+
+        // --- Export Estimate Summary Logic ---
+        const exportBtn = document.getElementById('export-summary');
+        if (exportBtn) {
+            exportBtn.addEventListener('click', () => {
+                // Helper functions to get form data
+                const getSelectedValues = (selector) => {
+                    const inputs = document.querySelectorAll(selector);
+                    const values = [];
+                    inputs.forEach(input => {
+                        if (input.checked) {
+                            const textElement = input.nextElementSibling;
+                            if (textElement) values.push(textElement.innerText.split('\n')[0]); // Take just the main label name if there's subtext
+                        }
+                    });
+                    return values.join(', ') || 'Not answered';
+                };
+
+                const getTextInput = (id) => {
+                    const el = document.getElementById(id);
+                    return el && el.value.trim() ? el.value.trim() : 'N/A';
+                };
+
+                // Retrieve Client Info
+                const clientName = getTextInput('client_name');
+                const clientAddress = getTextInput('client_address');
+                const clientEmail = getTextInput('client_email');
+                const clientPhone = getTextInput('client_phone');
+
+                // Retrieve Calculator Info
+                const calcTotal = document.getElementById('calc_total_display') ? document.getElementById('calc_total_display').innerText : '$0';
+                const sqft = getTextInput('est_sqft') !== 'N/A' ? getTextInput('est_sqft') : '0';
+                let selectedTier = 'None';
+                if (document.getElementById('tier_good') && document.getElementById('tier_good').checked) selectedTier = 'Good (~$300/SF)';
+                if (document.getElementById('tier_better') && document.getElementById('tier_better').checked) selectedTier = 'Better (~$500/SF)';
+                if (document.getElementById('tier_best') && document.getElementById('tier_best').checked) selectedTier = 'Best (~$700/SF)';
+
+                // HTML Structure for the printable document
+                let summaryHTML = `
+                    <html>
+                    <head>
+                        <title>Estimate Summary — Board of Project Stewardship / Pacific Pro Group</title>
+                        <style>
+                            body { font-family: 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #1e293b; max-width: 800px; margin: 0 auto; padding: 40px; }
+                            h1 { color: #0f766e; border-bottom: 2px solid #cbd5e1; padding-bottom: 10px; margin-bottom: 5px; }
+                            h2 { color: #4338ca; margin-top: 30px; border-bottom: 1px solid #e0e7ff; padding-bottom: 5px; }
+                            .timestamp { color: #64748b; font-size: 0.9em; margin-bottom: 30px; }
+                            ul { list-style-type: none; padding: 0; }
+                            li { margin-bottom: 12px; border-bottom: 1px solid #f8fafc; padding-bottom: 8px; display: flex; }
+                            .label { font-weight: 600; width: 300px; flex-shrink: 0; color: #475569; }
+                            .value { color: #0f172a; font-weight: 500; }
+                            .value-block { color: #0f172a; font-weight: 500; white-space: pre-wrap; font-style: italic; }
+                            .sketch-img { max-width: 100%; border: 2px solid #e2e8f0; border-radius: 8px; margin-top: 15px; }
+                            .client-info-box { background-color: #f8fafc; border: 1px solid #e2e8f0; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+                            .client-info-box h3 { margin-top: 0; color: #0f172a; margin-bottom: 10px; font-size: 1.1em;}
+                            .estimate-box { background-color: #f0fdf4; border: 2px solid #bbf7d0; padding: 20px; border-radius: 8px; margin-top: 20px; }
+                            @media print {
+                                body { padding: 0; }
+                                @page { margin: 2cm; }
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>Site Visit & Estimate Summary</h1>
+                        <div class="timestamp">Generated on: ${new Date().toLocaleString()} | Edmonds, WA Coastal Additions</div>
+
+                        <div class="client-info-box">
+                            <h3>Client Information</h3>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                                <div><span class="label" style="display:inline-block; width: 80px;">Name:</span> <span class="value">${clientName}</span></div>
+                                <div><span class="label" style="display:inline-block; width: 80px;">Phone:</span> <span class="value">${clientPhone}</span></div>
+                                <div><span class="label" style="display:inline-block; width: 80px;">Email:</span> <span class="value">${clientEmail}</span></div>
+                                <div><span class="label" style="display:inline-block; width: 80px;">Address:</span> <span class="value">${clientAddress}</span></div>
+                            </div>
+                        </div>
+
+                        <div class="estimate-box">
+                            <h2 style="margin-top: 0; color: #166534; border-bottom-color: #bbf7d0;">Preliminary Estimate Breakdown</h2>
+                            <ul>
+                                <li><span class="label" style="color: #15803d;">Estimated Square Footage:</span> <span class="value">${sqft} sq ft</span></li>
+                                <li><span class="label" style="color: #15803d;">Selected Finish Tier:</span> <span class="value">${selectedTier}</span></li>
+                                <li><span class="label" style="color: #166534; font-size: 1.3em;">Total Estimated Cost:</span> <span class="value" style="color: #166534; font-size: 1.3em; font-weight: bold;">${calcTotal}</span></li>
+                            </ul>
+                            <p style="color: #166534; font-size: 0.85em; margin-top: 10px; font-style: italic;">*Includes selected Pre-Construction Items (Permits, Plans, Design, Survey), Add-ons, and Base Construction Costs. Subject to formal Feasibility Study.</p>
+                        </div>
+
+                        <h2>Vision & Purpose</h2>
+                        <ul>
+                            <li style="display: block;"><div class="label" style="width: auto; margin-bottom: 4px;">#1 Reason for Addition:</div><div class="value-block">"${getTextInput('vision_reason')}"</div></li>
+                            <li style="display: block;"><div class="label" style="width: auto; margin-bottom: 4px;">Day-to-day Use:</div><div class="value-block">"${getTextInput('vision_use')}"</div></li>
+                            <li><span class="label">Must-Have Features:</span> <span class="value">${getSelectedValues('input[name="vision_features"]')} ${getTextInput('vision_features_other') !== 'N/A' ? ' - ' + getTextInput('vision_features_other') : ''}</span></li>
+                        </ul>
+
+                        <h2>Financial & Timeline</h2>
+                        <ul>
+                            <li><span class="label">Budget Range:</span> <span class="value">${getSelectedValues('input[name="budget_range"]')}</span></li>
+                            <li><span class="label">Other Bids Received:</span> <span class="value">${getSelectedValues('input[name="other_bids"]')}</span></li>
+                            <li><span class="label">Financing Strategy:</span> <span class="value">${getSelectedValues('input[name="financing"]')}</span></li>
+                            <li><span class="label">Budget Cap/Hard Limit:</span> <span class="value">${getSelectedValues('input[name="budget_cap"]') === 'Yes' ? getTextInput('cap_specify') : 'No strict cap specified'}</span></li>
+                            <li><span class="label">Timeline/Deadline:</span> <span class="value">${getSelectedValues('input[name="timeline"]')} ${getTextInput('timeline_specify') !== 'N/A' ? '(' + getTextInput('timeline_specify') + ')' : ''}</span></li>
+                            <li><span class="label">Living in house during construction:</span> <span class="value">${getSelectedValues('input[name="live_in"]')}</span></li>
+                        </ul>
+
+                        <h2>Design & Planning</h2>
+                        <ul>
+                            <li><span class="label">Style Preferences:</span> <span class="value">${getSelectedValues('input[name="style_pref"]')} ${getTextInput('style_specify') !== 'N/A' ? ' - ' + getTextInput('style_specify') : ''}</span></li>
+                            <li><span class="label">Photo Preference Match:</span> <span class="value">${getSelectedValues('input[name="photo_pref"]')}</span></li>
+                            <li><span class="label">Has Pinterest/Houzz Boards:</span> <span class="value">${getSelectedValues('input[name="has_boards"]')}</span></li>
+                            <li><span class="label">Existing Sketches/Ideas:</span> <span class="value">${getSelectedValues('input[name="has_sketches"]')}</span></li>
+                            <li><span class="label">Previously Worked with Architect:</span> <span class="value">${getSelectedValues('input[name="worked_architect"]')}</span></li>
+                            <li><span class="label">Specific Layouts Mapped Out:</span> <span class="value">${getSelectedValues('input[name="mapped_layouts"]')}</span></li>
+                        </ul>
+
+                        <h2>Site Specifics (Edmonds, WA)</h2>
+                        <ul>
+                            <li><span class="label">Known Issues (Foundation, etc.):</span> <span class="value">${getSelectedValues('input[name="issues"]') === 'Yes' ? getTextInput('issues_specify') : 'None reported'}</span></li>
+                            <li><span class="label">Moisture/Mold Problems:</span> <span class="value">${getSelectedValues('input[name="moisture"]')}</span></li>
+                            <li><span class="label">HOA/Neighbor/View Concerns:</span> <span class="value">${getSelectedValues('input[name="hoa"]') === 'Yes' ? getTextInput('hoa_specify') : 'None'}</span></li>
+                            <li><span class="label">Critical Areas (Wetlands, Slopes):</span> <span class="value">${getSelectedValues('input[name="critical"]') === 'Yes' ? getTextInput('critical_specify') : 'None'}</span></li>
+                            <li><span class="label">Sewer / Septic System:</span> <span class="value">${getSelectedValues('input[name="sewer"]')}</span></li>
+                        </ul>
+
+                        <h2>Utilities & MEP Systems</h2>
+                        <ul>
+                            <li><span class="label">Electrical Panel Size:</span> <span class="value">${getSelectedValues('input[name="elec_panel"]')}</span></li>
+                            <li><span class="label">Gas Service Available:</span> <span class="value">${getSelectedValues('input[name="gas_service"]')}</span></li>
+                            <li><span class="label">Primary HVAC System:</span> <span class="value">${getSelectedValues('input[name="hvac"]')}</span></li>
+                            <li><span class="label">Water Heater Type:</span> <span class="value">${getSelectedValues('input[name="water_heater"]')}</span></li>
+                        </ul>
+                `;
+
+                // Embed Sketch image data directly into the HTML
+                let canvasData = '';
+                if(canvas) {
+                    // Temporarily hide UI overlay elements if any existed, render to data URL
+                    canvasData = canvas.toDataURL('image/png');
+                    summaryHTML += `
+                            <h2>Site Sketch</h2>
+                            <img src="${canvasData}" class="sketch-img" alt="Digital Site Sketch">
+                    `;
+                }
+
+                summaryHTML += `
+                    </body>
+                    </html>
+                `;
+
+                // Open in new window and trigger print dialog
+                const printWindow = window.open('', '_blank');
+                if (printWindow) {
+                    printWindow.document.write(summaryHTML);
+                    printWindow.document.close();
+                    printWindow.focus();
+                    
+                    // Short timeout ensures image data loads before the print dialog fires
+                    setTimeout(() => { 
+                        printWindow.print(); 
+                    }, 500);
+                } else {
+                    alert("Please allow pop-ups to print the estimate summary.");
+                }
+            });
+        }
+
+        // Initialize (wrapped in DOMContentLoaded to ensure elements exist)
+        document.addEventListener('DOMContentLoaded', () => {
+            initChart();
+            updateCalculator(); // Initialize calculator display
+            calculateProgress();
+            window.setTimeout(resizeCanvas, 100);
+        });
+
+    
+        // --- localStorage bops.goodSteward.siteVisit.v1 (real autosave) ---
+        (function(){
+          const KEY = 'bops.goodSteward.siteVisit.v1';
+          let timer = null;
+          function collect(){
+            const data = {v:1, savedAt:new Date().toISOString(), fields:{}, radios:{}, checkOrder:[], sketch:null};
+            document.querySelectorAll('input, textarea, select').forEach((el,i)=>{
+              const key = el.id || ('i'+i);
+              if(!el.id) el.dataset.ls = key;
+              const k = el.id || el.dataset.ls;
+              if(el.type==='checkbox') return;
+              if(el.type==='radio'){ if(el.checked) data.radios[el.name]=el.value; return; }
+              data.fields[k]=el.value;
+            });
+            data.checkOrder = Array.from(document.querySelectorAll('input[type="checkbox"]')).map(e=>e.checked);
+            try{ const c=document.getElementById('sketchpad'); if(c) data.sketch=c.toDataURL('image/png'); }catch(e){}
+            return data;
+          }
+          function restore(data){
+            if(!data) return;
+            Object.entries(data.fields||{}).forEach(([k,v])=>{
+              const el=document.getElementById(k)||document.querySelector('[data-ls="'+k+'"]');
+              if(el && el.type!=='checkbox' && el.type!=='radio') el.value=v;
+            });
+            Object.entries(data.radios||{}).forEach(([n,v])=>{
+              const el=document.querySelector('input[type="radio"][name="'+n+'"][value="'+v+'"]');
+              if(el) el.checked=true;
+            });
+            if(data.checkOrder){
+              document.querySelectorAll('input[type="checkbox"]').forEach((el,i)=>{
+                if(typeof data.checkOrder[i]==='boolean') el.checked=data.checkOrder[i];
+              });
+            }
+            if(data.sketch){
+              const c=document.getElementById('sketchpad');
+              if(c){ const img=new Image(); img.onload=()=>c.getContext('2d').drawImage(img,0,0); img.src=data.sketch; }
+            }
+            if(typeof calculateProgress==='function') calculateProgress();
+            if(typeof updateCalculator==='function') updateCalculator();
+            const ls=document.getElementById('sv-last-saved');
+            if(ls && data.savedAt) ls.textContent='Last saved: '+new Date(data.savedAt).toLocaleString();
+          }
+          function save(){
+            try{
+              localStorage.setItem(KEY, JSON.stringify(collect()));
+              const ls=document.getElementById('sv-last-saved');
+              if(ls) ls.textContent='Last saved: '+new Date().toLocaleString();
+            }catch(e){
+              const ls=document.getElementById('sv-last-saved');
+              if(ls) ls.textContent='Storage blocked — session only';
+            }
+          }
+          function schedule(){ clearTimeout(timer); timer=setTimeout(save,350); }
+          document.body.addEventListener('change', schedule);
+          document.body.addEventListener('input', schedule);
+          document.getElementById('sv-clear-data')?.addEventListener('click', ()=>{
+            if(!confirm('Clear all saved discovery/estimate data on this device?')) return;
+            try{ localStorage.removeItem(KEY); }catch(e){}
+            location.reload();
+          });
+          try{ const raw=localStorage.getItem(KEY); if(raw) restore(JSON.parse(raw)); }catch(e){}
+          // Keep calculator listeners intact — do not stub updateCalculator
+        })();
+
+    </script>
+</body>
+</html>
