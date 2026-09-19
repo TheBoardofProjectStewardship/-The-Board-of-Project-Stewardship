@@ -20,7 +20,7 @@ OG_DEFAULT_REL = "assets/images/og-default.webp"
 
 # Directory page -> hero image (relative to site root)
 DIR_HERO_IMAGES = {
-    "about": ("assets/images/home-hero.webp", "Pacific Northwest home exterior suggesting careful remodel stewardship in Edmonds"),
+    "about": ("assets/images/home-hero.webp", "Illustrative Pacific Northwest home exterior — Board editorial for Edmonds remodel stewardship"),
     "additions": ("assets/images/dir-additions-hero.webp", "Home with a clean second-story addition in the Pacific Northwest"),
     "kitchen": ("assets/images/dir-kitchen-hero.webp", "Remodeled Pacific Northwest kitchen with island and garden window"),
     "bathrooms": ("assets/images/dir-bathrooms-hero.webp", "Walk-in shower bathroom remodel with careful waterproofing details"),
@@ -1347,12 +1347,109 @@ def build_about() -> str:
             f'<a href="{href}" class="{cls} px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">{esc(label)}</a>'
         )
 
+    def img_card(rel: str, alt: str, caption: str) -> str:
+        if not asset_exists(rel):
+            return ""
+        src = prefix_asset(rel, "")
+        return f"""        <figure class="overflow-hidden rounded-xl border border-white/10 bg-charcoal">
+          <img src="{src}" alt="{esc(alt)}" class="w-full h-44 sm:h-52 object-cover" width="1200" height="675" loading="lazy">
+          <figcaption class="px-3 py-2 text-[11px] text-slate-500 font-light leading-snug">{esc(caption)}</figcaption>
+        </figure>"""
+
+    process_steps = [
+        (
+            "01",
+            "fa-magnifying-glass-chart",
+            "Research",
+            "Study how additions and remodels actually run in Edmonds and coastal King & Snohomish — AHJ norms, coastal detailing, and stay-in-home vs vacate patterns.",
+            "assets/images/home-process-research.webp",
+            "Illustrative editorial photo of plans and research materials for Board process",
+        ),
+        (
+            "02",
+            "fa-id-card",
+            "Verify",
+            "Cross-check public WA L&I signals and third-party review aggregates. Prefer firms homeowners can re-verify themselves before a deposit.",
+            "assets/images/home-process-verify.webp",
+            "Illustrative verification and standards-check visual for Board editorial",
+        ),
+        (
+            "03",
+            "fa-house-chimney-window",
+            "Local mastery",
+            "Weight Edmonds Bowl height limits, critical areas, and coastal weather sequencing — not generic statewide marketing claims.",
+            "assets/images/home-process-build.webp",
+            "Illustrative Pacific Northwest home addition construction for Board editorial",
+        ),
+        (
+            "04",
+            "fa-list-check",
+            "Editorial shortlist",
+            "Publish ranked directories and field guides so homeowners can compare firms against standards — not paid placement.",
+            "assets/images/home-process-shortlist.webp",
+            "Illustrative curated shortlist / directory editorial photo",
+        ),
+    ]
+    process_cards = []
+    for num, icon, title, blurb, rel, alt in process_steps:
+        media = ""
+        if asset_exists(rel):
+            src = prefix_asset(rel, "")
+            media = f'<img src="{src}" alt="{esc(alt)}" class="w-full h-36 object-cover rounded-lg border border-white/10 mb-4" width="800" height="450" loading="lazy">'
+        process_cards.append(f"""        <div class="bg-charcoal border border-white/10 hover:border-primary/40 rounded-xl p-5 card-hover">
+          {media}
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-secondary font-black text-sm tracking-widest">{num}</span>
+            <i class="fas {icon} text-secondary"></i>
+            <h3 class="text-lg font-black text-white tracking-tight">{esc(title)}</h3>
+          </div>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">{esc(blurb)}</p>
+        </div>""")
+
+    gallery = "\n".join(
+        filter(
+            None,
+            [
+                img_card(
+                    "assets/images/home-process-build.webp",
+                    "Illustrative PNW home addition exterior for Board editorial",
+                    "Additions & coastal detailing",
+                ),
+                img_card(
+                    "assets/images/home-ppg-addition.webp",
+                    "Illustrative quality PNW remodel exterior associated with Board #1 listing photography",
+                    "Board #1 — quality remodel craft",
+                ),
+                img_card(
+                    "assets/images/home-ppg-interior.webp",
+                    "Illustrative remodeled kitchen interior for Board editorial",
+                    "Finish discipline indoors",
+                ),
+                img_card(
+                    "assets/images/home-gallery-dryin.webp",
+                    "Illustrative dry-in / framing stage for Board editorial",
+                    "Dry-in & weather protection",
+                ),
+                img_card(
+                    "assets/images/home-gallery-finish.webp",
+                    "Illustrative finished remodel interior for Board editorial",
+                    "Punch-ready finishes",
+                ),
+                img_card(
+                    "assets/images/home-process-research.webp",
+                    "Illustrative plans and research desk for Board editorial",
+                    "Research before ranking",
+                ),
+            ],
+        )
+    )
+
     _hero_rel, _hero_alt = DIR_HERO_IMAGES.get("about", (None, ""))
     body = f"""{hero(
-        f"Independent · Edmonds / King &amp; Snohomish · {YEAR}",
-        'The Board of Project Stewardship<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">A Regulatory Filter for Local Construction Integrity</span>',
-        "Most directories are marketing platforms. The Board of Project Stewardship is an independent construction-standards and contractor-directory organization focused on local construction integrity in Edmonds and the greater King &amp; Snohomish market.",
-        ["Independent review", "Local standards", "Project continuity"],
+        f"Editorial standards · Edmonds / King &amp; Snohomish · {YEAR}",
+        'Board of Project Stewardship<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">A standards filter for local construction integrity</span>',
+        "Board of Project Stewardship — Edmonds / King &amp; Snohomish construction standards and contractor directories. Not a lead-gen marketplace. We shortlist firms against solvency, technical competence, steward continuity, and local permit mastery.",
+        ["Editorial shortlists", "Public L&amp;I signals", "Local permit mastery"],
         image_rel=_hero_rel if _hero_rel and asset_exists(_hero_rel) else None,
         image_alt=_hero_alt,
     )}
@@ -1363,10 +1460,105 @@ def build_about() -> str:
         <i class="fas fa-gavel text-secondary"></i> Mission
       </h2>
       <p class="text-slate-300 leading-relaxed font-light max-w-3xl relative z-10">
-        The Board of Project Stewardship applies a higher bar than paid listings or lead-gen directories.
-        We emphasize solvency, technical competence, steward accountability, and proven local mastery —
-        so homeowners can evaluate firms against clear standards, not marketing spend.
+        Most contractor sites sell leads. The Board publishes <strong class="text-white font-semibold">editorial standards and directories</strong>
+        so homeowners in Edmonds and the greater King &amp; Snohomish market can evaluate firms against clear criteria —
+        bonding capacity, technical review, a named project steward, and proven local mastery — not ad spend.
       </p>
+    </section>
+
+    <section id="how-the-board-works" class="mb-14">
+      <div class="mb-8 border-b border-white/10 pb-4">
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Process</span>
+        <h2 class="text-3xl font-black text-white tracking-tight">How the Board works</h2>
+        <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">A repeatable filter: research the work, verify public signals, weight local mastery, then publish an editorial shortlist homeowners can use.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4">
+{chr(10).join(process_cards)}
+      </div>
+    </section>
+
+    <section id="why-homeowners" class="mb-14">
+      <div class="mb-8 border-b border-white/10 pb-4">
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">For homeowners</span>
+        <h2 class="text-3xl font-black text-white tracking-tight">Why homeowners use the Board</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4 mb-6">
+        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-filter text-secondary mr-2"></i>Standards over lead-gen</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Directories emphasize editorial fit for Edmonds / North Sound work — not whoever bought the top ad slot.</p>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-clipboard-list text-secondary mr-2"></i>Tools that travel with you</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Good Steward checklists keep discovery notes and phase status in your browser — useful with any licensed GC.</p>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-shield-halved text-secondary mr-2"></i>Verify before you hire</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Every ranking page points you back to <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> before deposits or demolition.</p>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <a href="./good-steward.html" class="bg-primary text-white px-5 py-3.5 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs shadow-glow-sleek">Good Steward guide &amp; tools</a>
+        <a href="./tools/site-visit/" class="border border-white/20 bg-white/5 text-white px-5 py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Site Visit Checklist</a>
+        <a href="./tools/pm-dashboard/" class="border border-white/20 bg-white/5 text-white px-5 py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">PM Dashboard</a>
+      </div>
+    </section>
+
+    <section id="why-ppg-number-one" class="bg-charcoal rounded-xl p-8 md:p-10 border border-secondary/35 mb-14 relative overflow-hidden">
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-primary"></div>
+      <div class="absolute -top-16 -left-16 w-72 h-72 bg-primary/10 blur-[90px] pointer-events-none rounded-full"></div>
+      <div class="relative z-10 grid lg:grid-cols-2 gap-8 items-start">
+        <div>
+          <span class="text-secondary font-bold text-xs uppercase tracking-[0.15em] flex items-center mb-3">
+            <i class="fas fa-trophy mr-2"></i> Board #1 hire
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-3">Why Pacific Pro Group ranks #1</h2>
+          <p class="text-slate-300 font-light leading-relaxed mb-4 max-w-3xl">
+            Pacific Pro Group is the Board’s <strong class="text-white font-semibold">#1 ranked design-build firm</strong>
+            for Edmonds home additions — the hire when continuity, local permit habits, and verified public reputation matter.
+            Ranking is editorial, not ownership.
+          </p>
+          <ul class="space-y-3 text-sm text-slate-300 font-light mb-6">
+            <li class="flex gap-3"><i class="fas fa-check text-secondary mt-1"></i><span><strong class="text-white">Design-build continuity</strong> — one stewarding path from discovery through build, fewer salesman-to-crew handoffs.</span></li>
+            <li class="flex gap-3"><i class="fas fa-check text-secondary mt-1"></i><span><strong class="text-white">Edmonds / King &amp; Snohomish focus</strong> — residential additions and remodels for the North Sound, not generic statewide lead funnels.</span></li>
+            <li class="flex gap-3"><i class="fas fa-check text-secondary mt-1"></i><span><strong class="text-white">Permit stewardship habits</strong> — sequencing and AHJ coordination treated as part of the craft, not an afterthought.</span></li>
+            <li class="flex gap-3"><i class="fas fa-check text-secondary mt-1"></i><span><strong class="text-white">Public review aggregate</strong> — Trustindex <strong class="text-white">{PPG['rating']}</strong> across <strong class="text-white">{PPG['reviews']}</strong> reviews (re-check live); WA license chip <strong class="text-white">{PPG['license']}</strong> — always re-verify at L&amp;I.</span></li>
+          </ul>
+          <div class="flex flex-wrap gap-2 mb-6">
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-emerald-400/30 bg-emerald-950/40 text-emerald-300">WA License {PPG['license']}</span>
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-white/20 bg-white/5 text-slate-300">{PPG['rating']} · {PPG['reviews']} reviews</span>
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-white/20 bg-white/5 text-slate-300">{PPG['city']}</span>
+          </div>
+          <div class="flex flex-col sm:flex-row flex-wrap gap-3">
+            <a href="{PPG['url']}" target="_blank" rel="noopener" class="bg-primary text-white text-center py-3.5 px-6 rounded font-bold hover:bg-emerald-700 transition shadow-glow-sleek uppercase tracking-wider text-sm">
+              Hire Board #1 — pacificprogroup.com
+            </a>
+            <a href="./additions.html" class="border border-white/20 bg-white/5 text-white py-3.5 px-6 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-sm text-center">
+              Additions ranking
+            </a>
+            <a href="./edmonds-custom-homes.html" class="border border-white/15 text-slate-200 py-3.5 px-6 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-sm text-center">
+              Edmonds Top 30
+            </a>
+            <a href="{PPG['trustindex']}" target="_blank" rel="noopener" class="border border-white/15 text-slate-200 py-3.5 px-6 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-sm text-center">
+              Trustindex {PPG['rating']} · {PPG['reviews']}
+            </a>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          {img_card("assets/images/home-ppg-addition.webp", "Illustrative PNW addition exterior highlighting Board #1 craft standards", "Additions craft")}
+          {img_card("assets/images/home-ppg-interior.webp", "Illustrative remodel interior highlighting Board #1 finish standards", "Interior finish")}
+        </div>
+      </div>
+    </section>
+
+    <section id="field-gallery" class="mb-14">
+      <div class="mb-8 border-b border-white/10 pb-4">
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Field gallery</span>
+        <h2 class="text-3xl font-black text-white tracking-tight">Standards you can see</h2>
+        <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Editorial process and remodel imagery for Edmonds / coastal Puget Sound work. AI or stock frames are labeled illustrative in alt text.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+{gallery}
+      </div>
     </section>
 
     <section class="mb-14">
@@ -1415,47 +1607,9 @@ def build_about() -> str:
           <p class="text-sm text-slate-400 font-light leading-relaxed">Walk a written punch list with photos, retain final payment until items are closed, and keep manuals/warranty contacts with the project file.</p>
         </div>
       </div>
-      <div class="flex flex-wrap gap-3">
-        <a href="./good-steward.html" class="bg-primary text-white px-5 py-3.5 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs shadow-glow-sleek">Good Steward guide &amp; tools</a>
-        <a href="./tools/site-visit/" class="border border-white/20 bg-white/5 text-white px-5 py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Site Visit Checklist</a>
-        <a href="./tools/pm-dashboard/" class="border border-white/20 bg-white/5 text-white px-5 py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">PM Dashboard</a>
-      </div>
     </section>
 
 {integrity_shield_html()}
-
-    <section class="bg-charcoal rounded-xl p-8 md:p-10 border border-secondary/35 mb-14 relative overflow-hidden">
-      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-primary"></div>
-      <div class="absolute -top-16 -left-16 w-72 h-72 bg-primary/10 blur-[90px] pointer-events-none rounded-full"></div>
-      <div class="relative z-10">
-        <span class="text-secondary font-bold text-xs uppercase tracking-[0.15em] flex items-center mb-3">
-          <i class="fas fa-trophy mr-2"></i> Featured ranking
-        </span>
-        <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-3">Pacific Pro Group</h2>
-        <p class="text-slate-300 font-light leading-relaxed mb-4 max-w-3xl">
-          Pacific Pro Group is the Board’s <strong class="text-white font-semibold">#1 ranked design-build firm</strong>
-          for Edmonds home additions. Local presence, remodel focus, and a verified
-          <strong class="text-white font-semibold">{PPG['rating']}</strong> aggregate across
-          <strong class="text-white font-semibold">{PPG['reviews']}</strong> reviews.
-        </p>
-        <div class="flex flex-wrap gap-2 mb-6">
-          <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-emerald-400/30 bg-emerald-950/40 text-emerald-300">WA License {PPG['license']}</span>
-          <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-white/20 bg-white/5 text-slate-300">{PPG['rating']} · {PPG['reviews']} reviews</span>
-          <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-white/20 bg-white/5 text-slate-300">Edmonds, WA</span>
-        </div>
-        <div class="flex flex-col sm:flex-row flex-wrap gap-3">
-          <a href="./additions.html" class="bg-primary text-white text-center py-3.5 px-6 rounded font-bold hover:bg-emerald-700 transition shadow-glow-sleek uppercase tracking-wider text-sm">
-            View Additions ranking
-          </a>
-          <a href="{PPG['url']}" target="_blank" rel="noopener" class="border border-white/20 bg-white/5 text-white py-3.5 px-6 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-sm text-center">
-            pacificprogroup.com
-          </a>
-          <a href="{PPG['trustindex']}" target="_blank" rel="noopener" class="border border-white/15 text-slate-200 py-3.5 px-6 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-sm text-center">
-            Trustindex {PPG['rating']} · {PPG['reviews']}
-          </a>
-        </div>
-      </div>
-    </section>
 
     <section class="bg-charcoal rounded-xl p-8 md:p-10 border border-primary/25 mb-14 relative overflow-hidden">
       <div class="absolute -bottom-20 -right-20 w-56 h-56 bg-primary/15 blur-[70px] pointer-events-none rounded-full"></div>
@@ -1489,11 +1643,12 @@ def build_about() -> str:
 
     return page_shell(
         "The Board of Project Stewardship | Edmonds Construction Standards",
-        "Most directories are marketing platforms. The Board of Project Stewardship is an independent construction-standards and contractor-directory organization focused on local construction integrity in Edmonds and the greater King & Snohomish market.",
+        "Board of Project Stewardship — Edmonds / King & Snohomish construction standards and contractor directories. Editorial shortlists, Good Steward tools, and why Pacific Pro Group ranks Board #1.",
         "about",
         body,
         canonical=BASE_URL,
     )
+
 
 
 def build_additions(additions: list[dict]) -> str:
