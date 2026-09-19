@@ -551,25 +551,27 @@ def abs_asset_url(rel: str) -> str:
 
 
 def resolve_og_image(rel: str | None = None) -> str:
-    """Absolute OG image URL; prefer on-domain files over external CDN."""
+    """On-domain WebP only. Never emit CloudFront PNGs as og:image."""
+    candidates = []
     if rel:
-        rel_n = rel.lstrip("./")
-        if asset_exists(rel_n):
-            return f"{SITE_ORIGIN}/{rel_n}"
-        if rel_n in CDN_MAP:
-            return CDN_MAP[rel_n]
-    if asset_exists(OG_DEFAULT_REL):
-        return OG_DEFAULT
-    if OG_DEFAULT_REL in CDN_MAP:
-        return CDN_MAP[OG_DEFAULT_REL]
-    if asset_exists("assets/images/home-hero.webp"):
-        return f"{SITE_ORIGIN}/assets/images/home-hero.webp"
+        candidates.append(rel.lstrip("./"))
+    candidates.append(OG_DEFAULT_REL)
+    candidates.append("assets/images/home-hero.webp")
+    for cand in candidates:
+        if not cand:
+            continue
+        if asset_exists(cand) and cand.lower().endswith((".webp", ".jpg", ".jpeg")):
+            return f"{SITE_ORIGIN}/{cand}"
     return OG_DEFAULT
 
 
 def prefix_asset(rel: str, prefix: str = "") -> str:
-    """Prefer CDN URL for photos so live deploys work before binary assets land in git."""
+    """Prefer a committed on-domain file; CDN only when the local asset is absent."""
     rel = (rel or "").lstrip("./")
+    if asset_exists(rel):
+        if prefix:
+            return f"{prefix}{rel}"
+        return f"./{rel}"
     if rel in CDN_MAP:
         return CDN_MAP[rel]
     if prefix:
@@ -597,14 +599,93 @@ def resolve_post_hero(post: dict) -> str | None:
     return None
 
 
-def favicon_tags(prefix: str = "") -> str:
-    # Absolute on-domain icons (fix #15). prefix kept for callers; unused.
-    _ = prefix
-    return (
-        f'  <link rel="icon" href="{SITE_ORIGIN}/assets/icons/favicon.svg" type="image/svg+xml">\n'
-        f'  <link rel="icon" href="{SITE_ORIGIN}/assets/icons/favicon.ico" sizes="any">\n'
-        f'  <link rel="apple-touch-icon" href="{SITE_ORIGIN}/assets/icons/apple-touch-icon.png">'
+def _png_rgba(width: int, height: int, pixels: bytes) -> bytes:
+    """Minimal PNG writer (RGBA). pixels is width*height*4 bytes."""
+    import struct
+    import zlib
+
+    def chunk(tag: bytes, data: bytes) -> bytes:
+        crc = zlib.crc32(tag + data) & 0xFFFFFFFF
+        return struct.pack(">I", len(data)) + tag + data + struct.pack(">I", crc)
+
+    raw = bytearray()
+    stride = width * 4
+    for y in range(height):
+        raw.append(0)
+        raw.extend(pixels[y * stride : (y + 1) * stride])
+    ihdr = struct.pack(">IIBBBBB", width, height, 8, 6, 0, 0, 0)
+    return b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", ihdr) + chunk(b"IDAT", zlib.compress(bytes(raw), 9)) + chunk(b"IEND", b"")
+
+
+def _board_icon_pixels(size: int) -> bytes:
+    """Raster of the Board compass mark (matches favicon.svg colors)."""
+    out = bytearray(size * size * 4)
+    cx = cy = (size - 1) / 2.0
+    r_outer = size * 0.32
+    r_inner = size * 0.26
+    r_dot = max(1.2, size * 0.07)
+    corner = size * 0.18
+    for y in range(size):
+        for x in range(size):
+            i = (y * size + x) * 4
+            # rounded-rect coverage
+            dx = min(x, size - 1 - x)
+            dy = min(y, size - 1 - y)
+            inside = True
+            if dx < corner and dy < corner:
+                inside = (corner - dx) ** 2 + (corner - dy) ** 2 <= corner ** 2
+            if not inside:
+                out[i : i + 4] = b"\x00\x00\x00\x00"
+                continue
+            out[i : i + 4] = b"\x0a\x0a\x0a\xff"
+            rx, ry = x - cx, y - cy
+            dist = (rx * rx + ry * ry) ** 0.5
+            if abs(dist - (r_outer + r_inner) / 2) <= (r_outer - r_inner) / 2 + 0.6:
+                out[i : i + 4] = b"\x4a\xde\x80\xff"
+            if dist <= r_dot:
+                out[i : i + 4] = b"\x4a\xde\x80\xff"
+    return bytes(out)
+
+
+def _ico_from_png(png: bytes, size: int = 32) -> bytes:
+    import struct
+
+    header = struct.pack("<HHH", 0, 1, 1)
+    entry = struct.pack(
+        "<BBBBHHII",
+        size if size < 256 else 0,
+        size if size < 256 else 0,
+        0,
+        0,
+        1,
+        32,
+        len(png),
+        22,
     )
+    return header + entry + png
+
+
+def write_board_icons() -> None:
+    """Write favicon.ico + apple-touch-icon.png so they deploy (not 404)."""
+    icon_dir = SITE_DIR / "assets" / "icons"
+    icon_dir.mkdir(parents=True, exist_ok=True)
+    png32 = _png_rgba(32, 32, _board_icon_pixels(32))
+    png180 = _png_rgba(180, 180, _board_icon_pixels(180))
+    (icon_dir / "apple-touch-icon.png").write_bytes(png180)
+    (icon_dir / "favicon.ico").write_bytes(_ico_from_png(png32, 32))
+
+
+def favicon_tags(prefix: str = "") -> str:
+    # Only reference icons that exist so live URLs 200. prefix unused (absolute).
+    _ = prefix
+    tags = []
+    if asset_exists("assets/icons/favicon.svg"):
+        tags.append(f'  <link rel="icon" href="{SITE_ORIGIN}/assets/icons/favicon.svg" type="image/svg+xml">')
+    if asset_exists("assets/icons/favicon.ico"):
+        tags.append(f'  <link rel="icon" href="{SITE_ORIGIN}/assets/icons/favicon.ico" sizes="any">')
+    if asset_exists("assets/icons/apple-touch-icon.png"):
+        tags.append(f'  <link rel="apple-touch-icon" href="{SITE_ORIGIN}/assets/icons/apple-touch-icon.png">')
+    return "\n".join(tags)
 
 
 def head_assets() -> str:
@@ -1202,8 +1283,8 @@ def page_shell(
     keywords: str = "",
     og_image: str | None = None,
     og_type: str = "website",
-    include_story_embed: bool = True,
-    include_tools_embed: bool = True,
+    include_story_embed: bool = False,
+    include_tools_embed: bool = False,
     include_widgets: bool = True,
     extra_head: str = "",
     extra_scripts: str = "",
@@ -2052,6 +2133,8 @@ def build_about() -> str:
         body,
         canonical=BASE_URL,
         breadcrumbs=[("About", BASE_URL)],
+        include_story_embed=True,
+        include_tools_embed=True,
     )
 
 
@@ -2452,7 +2535,7 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
         <div class="absolute -top-16 -left-16 w-72 h-72 bg-primary/10 blur-[90px] pointer-events-none rounded-full"></div>
         <div class="md:w-1/3 mb-8 md:mb-0 relative z-10 flex flex-col gap-4">
           <div class="h-48 w-full rounded-lg overflow-hidden border border-white/10 shadow-inner">
-            <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3J0uIieL1TPm5gGUzNTRHKx1f2R/hf_20260918_035328_e01aaccb-1697-45ba-9ae1-0e56135c6f7a.png" alt="Custom home construction in Edmonds and coastal King County" class="w-full h-full object-cover" width="800" height="600" loading="lazy">
+            <img src="{prefix_asset('assets/images/home-hero.webp')}" alt="Custom home construction in Edmonds and coastal King County" class="w-full h-full object-cover" width="800" height="600" loading="lazy">
           </div>
           <div class="grid grid-cols-2 gap-2">
             <div class="bg-white/5 border border-white/10 rounded-lg px-3 py-3 text-center">
@@ -3056,7 +3139,9 @@ def md_to_html(md: str) -> str:
             if rel.startswith("../"):
                 rel = rel[3:]
             rel = rel.lstrip("./")
-            if rel in CDN_MAP:
+            if asset_exists(rel):
+                resolved = f"../{rel}"
+            elif rel in CDN_MAP:
                 resolved = CDN_MAP[rel]
         cap = f"<figcaption>{esc(alt)}</figcaption>" if alt.strip() else ""
         return (
@@ -3399,6 +3484,8 @@ When the GitHub Pages custom certificate is valid for `boardofprojectstewardship
 
 Until then, verify generated markup over `http://boardofprojectstewardship.com/`.
 
+GitHub Pages with `.nojekyll` does not pretty-serve `/kitchen` from `kitchen.html`. `404.html` soft-redirects extensionless directory paths to the `.html` URL. Canonicals already lock the `.html` form.
+
 ## IndexNow
 
 After generate (or after Pages ships `main`):
@@ -3604,6 +3691,8 @@ def build_good_steward_page() -> str:
         [faq_ld(steward_faqs)],
         canonical=f"{BASE_URL}good-steward.html",
         breadcrumbs=[("About", BASE_URL), ("Good Steward", f"{BASE_URL}good-steward.html")],
+        include_tools_embed=True,
+        include_story_embed=False,
     )
 
 
@@ -3626,6 +3715,7 @@ def build_another_story_page() -> str:
         canonical=f"{BASE_URL}another-story.html",
         og_image="assets/images/another-story-banner.webp",
         include_story_embed=True,
+        include_tools_embed=False,
         breadcrumbs=[("About", BASE_URL), ("Another Story SEA", f"{BASE_URL}another-story.html")],
     )
 
@@ -3814,8 +3904,115 @@ def build_404_page() -> str:
         include_story_embed=False,
         include_tools_embed=False,
         include_widgets=False,
+        extra_scripts="""  <script>
+  (function () {
+    var p = window.location.pathname || '';
+    if (!p || p === '/') return;
+    if (/\\.[a-zA-Z0-9]+$/.test(p)) return;
+    if (p.indexOf('/assets/') === 0 || p.indexOf('/tools/') === 0 || p.indexOf('/.well-known/') === 0) return;
+    var slug = p.replace(/\\/+$/, '');
+    if (!slug || slug.indexOf('.') !== -1) return;
+    window.location.replace(slug + '.html');
+  })();
+  </script>
+""",
         breadcrumbs=[("About", BASE_URL), ("Page not found", f"{BASE_URL}404.html")],
     )
+
+
+def _tool_seo_block(title: str, description: str, canonical: str, og_image: str) -> str:
+    ld = {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": title,
+        "url": canonical,
+        "description": description,
+        "isPartOf": {"@id": "https://boardofprojectstewardship.com/#website"},
+        "publisher": {"@id": "https://boardofprojectstewardship.com/#organization"},
+        "inLanguage": "en-US",
+    }
+    fav = favicon_tags()
+    return (
+        "<!-- bops-tool-seo -->\n"
+        f'<meta name="description" content="{esc(description)}">\n'
+        '<meta name="robots" content="index, follow">\n'
+        f'<link rel="canonical" href="{esc(canonical)}">\n'
+        f'<meta property="og:title" content="{esc(title)}">\n'
+        f'<meta property="og:description" content="{esc(description)}">\n'
+        '<meta property="og:type" content="website">\n'
+        f'<meta property="og:url" content="{esc(canonical)}">\n'
+        f'<meta property="og:image" content="{esc(og_image)}">\n'
+        '<meta property="og:site_name" content="Board of Project Stewardship">\n'
+        '<meta property="og:locale" content="en_US">\n'
+        '<meta name="twitter:card" content="summary_large_image">\n'
+        f'<meta name="twitter:title" content="{esc(title)}">\n'
+        f'<meta name="twitter:description" content="{esc(description)}">\n'
+        f'<meta name="twitter:image" content="{esc(og_image)}">\n'
+        f"{fav}\n"
+        f'<script type="application/ld+json">{json.dumps(ld, separators=(",", ":"))}</script>\n'
+        "<!-- /bops-tool-seo -->\n"
+    )
+
+
+def reframe_another_story_chrome(html: str) -> str:
+    """Board feature framing — never PPG as ownership brand in iframe chrome."""
+    html = html.replace(
+        '<div class="smallcaps">Pacific Pro Group</div>',
+        '<div class="smallcaps">Board feature</div>',
+    )
+    html = html.replace(
+        "Pacific Pro Group / Another Story SEA",
+        "Board of Project Stewardship · Another Story",
+    )
+    html = html.replace(
+        "Pacific Pro Group · Conceptual design preview",
+        "Board of Project Stewardship · Conceptual design preview",
+    )
+    return html
+
+
+def patch_tool_pages() -> None:
+    """Add description/robots/canonical/OG/favicon/JSON-LD to public tool HTML."""
+    og = resolve_og_image(OG_DEFAULT_REL)
+    specs = [
+        (
+            SITE_DIR / "tools" / "site-visit" / "index.html",
+            "Site Visit & Discovery | BOPS",
+            "Good Steward site-visit checklist for Edmonds and coastal Puget Sound. Browser-local Board template — not a bid, permit, or contract.",
+            f"{SITE_ORIGIN}/tools/site-visit/",
+        ),
+        (
+            SITE_DIR / "tools" / "pm-dashboard" / "index.html",
+            "PM Execution Dashboard | BOPS",
+            "Good Steward PM dashboard for Edmonds remodel phases. Browser-local Board template — not a schedule commitment.",
+            f"{SITE_ORIGIN}/tools/pm-dashboard/",
+        ),
+        (
+            SITE_DIR / "tools" / "another-story" / "index.html",
+            "Another Story | Board of Project Stewardship",
+            "Another Story — Board feature. AI-assisted second-story design preview for Edmonds and North Sound homes. Not a bid or permit document.",
+            f"{SITE_ORIGIN}/tools/another-story/",
+        ),
+    ]
+    for path, title, description, canonical in specs:
+        if not path.is_file():
+            continue
+        text = path.read_text(encoding="utf-8")
+        if path.name == "index.html" and "another-story" in str(path):
+            text = reframe_another_story_chrome(text)
+        text = re.sub(
+            r"<!-- bops-tool-seo -->.*?<!-- /bops-tool-seo -->\n?",
+            "",
+            text,
+            flags=re.S,
+        )
+        block = _tool_seo_block(title, description, canonical, og)
+        head_m = re.search(r"<head[^>]*>", text, flags=re.I)
+        if head_m:
+            text = text[: head_m.end()] + "\n" + block + text[head_m.end() :]
+        else:
+            text = block + text
+        path.write_text(text, encoding="utf-8")
 
 
 def collect_indexnow_urls() -> list[str]:
@@ -3900,6 +4097,7 @@ def main(argv: list[str] | None = None) -> None:
         ping_indexnow()
         return
 
+    write_board_icons()
     additions, kitchen, bathrooms, custom_homes, commercial, spec_homes, edmonds_custom, trades_data = load_all_rankings()
 
     if len(additions) < 29:
@@ -3949,6 +4147,7 @@ def main(argv: list[str] | None = None) -> None:
     write_posts_json(posts)
     write_rss(posts)
     write_sitemap(posts)
+    patch_tool_pages()
     leftover_methodology = SITE_DIR / "methodology.md"
     if leftover_methodology.exists():
         leftover_methodology.unlink()

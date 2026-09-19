@@ -678,79 +678,7 @@
       </div>
     </section>
   </div>
-  <section id="good-steward-tools-embed" class="max-w-6xl mx-auto px-4 py-12 relative z-20 border-t border-white/5">
-    <div class="mb-8">
-      <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>
-      <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-2">Good Steward Tools</h2>
-      <p class="text-sm text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Practical checklists for homeowners and builders working on additions and remodels in Edmonds and the coastal Puget Sound. Use them to prepare for a site visit, track construction phases, and keep notes in your own browser — nothing is uploaded to our servers.</p>
-      <p class="text-sm text-slate-400 font-light max-w-3xl leading-relaxed">Educational templates published by the Board. Pacific Pro Group appears in directories as <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a> (Board #1 design-build). Not bids, permits, contracts, or schedules — verify <a href="https://secure.lni.wa.gov/verify/" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I</a> before hiring. <a href="./good-steward.html" class="text-secondary hover:underline">What a good steward does</a>.</p>
-    </div>
-    <div class="grid md:grid-cols-2 gap-4 mb-8">
-      <a href="./tools/site-visit/" class="block bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover no-underline">
-        <p class="text-[11px] font-bold uppercase tracking-widest text-secondary mb-2">Checklist</p>
-        <h3 class="text-lg font-black text-white mb-2">Site Visit &amp; Discovery</h3>
-        <p class="text-sm text-slate-400 font-light leading-relaxed">Phase-by-phase discovery notes, sketch pad, and proposal-readiness checklist. Data stays in your browser.</p>
-      </a>
-      <a href="./tools/pm-dashboard/" class="block bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover no-underline">
-        <p class="text-[11px] font-bold uppercase tracking-widest text-secondary mb-2">Dashboard</p>
-        <h3 class="text-lg font-black text-white mb-2">PM Execution Dashboard</h3>
-        <p class="text-sm text-slate-400 font-light leading-relaxed">Build-phase status, punch tracking, and export helpers for steward continuity. Local-only — not a schedule commitment.</p>
-      </a>
-    </div>
-    <div class="space-y-10">
-      <div>
-        <h3 class="text-sm font-bold uppercase tracking-widest text-slate-300 mb-3">Site Visit &amp; Discovery</h3>
-        <iframe
-          id="steward-site-visit"
-          src="./tools/site-visit/index.html"
-          title="Site Visit and Discovery Checklist — Good Steward Tools"
-          loading="lazy"
-          style="display:block;width:100%;height:1400px;border:0;border-radius:18px;background:#f8fafc;"
-        ></iframe>
-      </div>
-      <div>
-        <h3 class="text-sm font-bold uppercase tracking-widest text-slate-300 mb-3">PM Execution Dashboard</h3>
-        <iframe
-          id="steward-pm-dashboard"
-          src="./tools/pm-dashboard/index.html"
-          title="PM Execution Dashboard — Good Steward Tools"
-          loading="lazy"
-          style="display:block;width:100%;height:1400px;border:0;border-radius:18px;background:#f1f5f9;"
-        ></iframe>
-      </div>
-    </div>
-  </section>
 
-  <section id="another-story-sea-embed" class="max-w-6xl mx-auto px-4 py-12 relative z-20 border-t border-white/5">
-    <div class="mb-5">
-      <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Board feature</p>
-      <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-2">Another Story</h2>
-      <p class="text-sm text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Explore a second-story concept on your own photo. Upload a house picture, adjust the massing idea, and review a preview — AI-assisted design only. Not a bid, permit, structural calculation, or construction document.</p>
-      <p class="text-sm text-slate-400 font-light max-w-3xl leading-relaxed">This is a Board feature. Open the standalone tool at <a href="./tools/another-story/index.html" class="text-secondary hover:underline">https://boardofprojectstewardship.com/tools/another-story/</a> or <a href="https://anotherstorysea.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">anotherstorysea.com</a>.</p>
-    </div>
-    <iframe
-      id="another-story-sea"
-      src="./tools/another-story/index.html"
-      title="Another Story SEA — second-story design preview"
-      loading="lazy"
-      style="display:block;width:100%;height:1900px;border:0;border-radius:18px;background:#fff9f2;"
-    ></iframe>
-    <script>
-    (() => {
-      const frame = document.getElementById('another-story-sea');
-      if (!frame) return;
-      const trustedOrigin = new URL(frame.src, window.location.href).origin;
-      window.addEventListener('message', (event) => {
-        if (event.origin !== trustedOrigin || event.source !== frame.contentWindow) return;
-        if (event.data?.type !== 'another-story:resize') return;
-        const height = Number(event.data.height);
-        if (Number.isFinite(height) && height >= 300 && height <= 16000) {
-          frame.style.height = `${Math.ceil(height) + 2}px`;
-        }
-      });
-    })();
-    </script>
-  </section>
 
 </main>
   <aside id="contact" class="border-t border-white/5 bg-charcoal/50">

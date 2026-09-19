@@ -7,5 +7,7 @@ assets/images/**/*.jpg
 assets/images/**/*.jpeg
 assets/icons/*.png
 assets/icons/*.ico
+!assets/icons/favicon.ico
+!assets/icons/apple-touch-icon.png
 !assets/icons/*.svg
 assets-b64/

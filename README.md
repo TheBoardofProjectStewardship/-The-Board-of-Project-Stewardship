@@ -127,6 +127,8 @@ When the GitHub Pages custom certificate is valid for `boardofprojectstewardship
 
 Until then, verify generated markup over `http://boardofprojectstewardship.com/`.
 
+GitHub Pages with `.nojekyll` does not pretty-serve `/kitchen` from `kitchen.html`. `404.html` soft-redirects extensionless directory paths to the `.html` URL. Canonicals already lock the `.html` form.
+
 ## IndexNow
 
 After generate (or after Pages ships `main`):

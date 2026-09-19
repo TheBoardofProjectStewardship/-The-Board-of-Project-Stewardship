@@ -425,5 +425,16 @@
     calc();
   })();
   </script>
+  <script>
+  (function () {
+    var p = window.location.pathname || '';
+    if (!p || p === '/') return;
+    if (/\.[a-zA-Z0-9]+$/.test(p)) return;
+    if (p.indexOf('/assets/') === 0 || p.indexOf('/tools/') === 0 || p.indexOf('/.well-known/') === 0) return;
+    var slug = p.replace(/\/+$/, '');
+    if (!slug || slug.indexOf('.') !== -1) return;
+    window.location.replace(slug + '.html');
+  })();
+  </script>
 </body>
 </html>

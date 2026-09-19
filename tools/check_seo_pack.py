@@ -167,6 +167,41 @@ def main() -> None:
     if crumbs < 10:
         fail(f"expected BreadcrumbList on directories + posts, found {crumbs}")
 
+    if not (ROOT / "assets" / "icons" / "favicon.svg").is_file():
+        fail("favicon.svg missing")
+    if not (ROOT / "assets" / "icons" / "favicon.ico").is_file():
+        fail("favicon.ico missing (must deploy, not gitignore-only)")
+    if not (ROOT / "assets" / "icons" / "apple-touch-icon.png").is_file():
+        fail("apple-touch-icon.png missing (must deploy, not gitignore-only)")
+
+    additions = (ROOT / "additions.html").read_text(encoding="utf-8")
+    if 'id="another-story-sea-embed"' in additions or 'id="good-steward-tools-embed"' in additions:
+        fail("directory pages must not embed full Another Story / Good Steward iframes")
+    if 'id="another-story-sea-embed"' not in sample or 'id="good-steward-tools-embed"' not in sample:
+        fail("homepage must keep Another Story + Good Steward embeds")
+
+    for path in html_files:
+        text = path.read_text(encoding="utf-8")
+        for m in re.finditer(r'property="og:image" content="([^"]+)"', text):
+            if "cloudfront.net" in m.group(1) or m.group(1).lower().endswith(".png"):
+                fail(f"{path.name} og:image is CloudFront/PNG ({m.group(1)})")
+
+    for rel in ("tools/site-visit/index.html", "tools/pm-dashboard/index.html", "tools/another-story/index.html"):
+        tpath = ROOT / rel
+        if not tpath.is_file():
+            fail(f"{rel} missing")
+        ttxt = tpath.read_text(encoding="utf-8")
+        if 'rel="canonical"' not in ttxt or "og:image" not in ttxt or "application/ld+json" not in ttxt:
+            fail(f"{rel} missing description/canonical/OG/JSON-LD")
+        if "favicon.svg" not in ttxt:
+            fail(f"{rel} missing favicon")
+
+    story_tool = (ROOT / "tools" / "another-story" / "index.html").read_text(encoding="utf-8")
+    if re.search(r'class="smallcaps">Pacific Pro Group<', story_tool):
+        fail("Another Story iframe chrome still brands Pacific Pro Group as owner")
+    if "Board feature" not in story_tool:
+        fail("Another Story iframe chrome missing Board feature framing")
+
     print(f"OK: checked {len(html_files)} HTML files; BreadcrumbList on {crumbs}")
 
 
