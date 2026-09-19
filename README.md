@@ -38,6 +38,8 @@ Base: `https://boardofprojectstewardship.com/`
 | `insulation.html` | Insulation directory |
 | `excavation.html` | Excavation / Site Work directory |
 | `blog.html` | Blog index |
+| `blog/rss.xml` | Blog RSS feed |
+| `404.html` | Branded Board 404 |
 | `posts/2026-09-19-home-addition-kirkland-wa.html` | Home Addition Kirkland WA |
 | `posts/2026-09-18-kitchen-remodel-mill-creek-wa.html` | Kitchen Remodel Mill Creek WA |
 | `posts/2026-09-17-bathroom-remodel-magnolia-wa.html` | Bathroom Remodel Magnolia WA |
@@ -111,7 +113,19 @@ Sources: `/workspace/top30-addition-contractors.md`, `/workspace/bops-research-k
 
 ## Tech
 
-Multi-page static site. Tailwind CDN + Font Awesome. Relative links for GitHub Pages. JSON-LD `ItemList`, `FAQPage`, and blog `Article` where applicable.
+Multi-page static site. Tailwind CDN + Font Awesome. Relative links for GitHub Pages. JSON-LD `ItemList`, `FAQPage`, `BreadcrumbList`, and blog `Article` where applicable. Tailwind CDN is known render-blocking debt (full purge CSS is a follow-up).
+
+## HTTPS / custom domain (ops — not a generator fix)
+
+Custom-domain HTTPS is still blocked by a **certificate hostname mismatch** on the apex. This ship does **not** claim HTTPS is fixed.
+
+When the GitHub Pages custom certificate is valid for `boardofprojectstewardship.com`:
+
+1. GitHub Pages → **Enforce HTTPS**
+2. If Cloudflare is in front: SSL/TLS mode **Full** (not Flexible)
+3. Recheck the live certificate SAN for `boardofprojectstewardship.com`
+
+Until then, verify generated markup over `http://boardofprojectstewardship.com/`.
 
 ## Updates
 
