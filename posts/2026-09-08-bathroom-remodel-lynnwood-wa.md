@@ -14,7 +14,7 @@ slug: "bathroom-remodel-lynnwood-wa"
 
 Lynnwood bathroom remodels often enlarge showers, refresh kids’ baths for durability, or rebuild primary baths with better storage. The climate does not forgive weak pans or attic-terminated fans.
 
-![Illustrative AI photo — Lynnwood bath remodel shower waterproofing membrane](../assets/images/posts/2026-09-08-lynnwood-bath-1.webp)
+![Illustrative editorial photo — Lynnwood bath remodel shower waterproofing membrane](../assets/images/posts/2026-09-08-lynnwood-bath-1.webp)
 
 
 ## Neighborhood context
@@ -22,7 +22,7 @@ Lynnwood bathroom remodels often enlarge showers, refresh kids’ baths for dura
 Suburban floor plans may offer more layout flexibility than Seattle bungalows, yet upstairs baths still need careful protection of finished spaces below. Ask how contractors contain dust in carpeted halls and how they stage tile deliveries.
 
 ## Climate and permits
-![Illustrative AI photo — tile-ready shower pan and niche detail](../assets/images/posts/2026-09-08-lynnwood-bath-2.webp)
+![Illustrative editorial photo — tile-ready shower pan and niche detail](../assets/images/posts/2026-09-08-lynnwood-bath-2.webp)
 
 
 Continuous wet-area membranes, correct slopes, and outdoor exhaust are the durability triad. Plumbing valve upgrades and GFCI protection are routine. Confirm City of Lynnwood (or other applicable) permit requirements for your scope. Do not demo first and “sort permits later.”
@@ -33,14 +33,14 @@ Pick tile sizes that match installer skill and substrate flatness. Niches need w
 
 Board #1 bathroom remodel editorial pick: **Pacific Pro Group** — [pacificprogroup.com](https://pacificprogroup.com/) (PACIFPG765OF). Rankings: [bathrooms.html](../bathrooms.html). Always [L&I Verify](https://secure.lni.wa.gov/verify/). Trade context: [trades.html](../trades.html).
 
-![Illustrative AI photo — finished Lynnwood primary bath with walk-in shower](../assets/images/posts/2026-09-08-lynnwood-bath-3.webp)
+![Illustrative editorial photo — finished Lynnwood primary bath with walk-in shower](../assets/images/posts/2026-09-08-lynnwood-bath-3.webp)
 
 
 ## Process video
 
 ../assets/videos/posts/2026-09-07-edmonds-adu-framing.mp4
 
-Illustrative Higgsfield process clip (ADU framing context) — not a specific project schedule.
+Illustrative process clip (ADU framing context) — not a specific project schedule.
 
 https://www.youtube.com/watch?v=9hPMWc22oK8
 
@@ -50,7 +50,7 @@ https://www.youtube.com/watch?v=9hPMWc22oK8
 - [Kohler](https://www.kohler.com/en) — bath fixtures and valves
 - [CertainTeed](https://www.certainteed.com/) — building products often adjacent to wet-area assemblies
 
-*Illustrative AI photos are labeled as such and are not photographs of a completed Board-ranked project.*
+*Illustrative editorial photos are labeled as such and are not photographs of a completed Board-ranked project.*
 
 ## FAQ
 

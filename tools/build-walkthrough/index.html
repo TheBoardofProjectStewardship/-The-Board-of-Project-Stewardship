@@ -28,9 +28,11 @@
 
 
 
+
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Interactive build walkthrough from discovery to warranty handoff. Educational Board of Project Stewardship template — illustrative AI media, not engineering documents.">
+  <meta name="description" content="Interactive build walkthrough from discovery to warranty handoff. Educational Board of Project Stewardship template — illustrative media, not engineering documents.">
   <meta name="theme-color" content="#0a0a0a">
   <meta name="robots" content="index, follow">
   <title>Build Walkthrough | Board of Project Stewardship</title>
@@ -60,7 +62,7 @@
     .stage-btn.active { background: rgba(22,101,52,.35); border-color: rgba(74,222,128,.55); color: #4ade80; }
     .stage-btn:focus-visible, .ctrl:focus-visible, input[type=range]:focus-visible { outline: 2px solid #4ade80; outline-offset: 2px; }
     #view3d { touch-action: none; background: radial-gradient(ellipse at 50% 30%, #1a2e22 0%, #0a0a0a 70%); }
-    .ai-badge { letter-spacing: .08em; }
+    .media-badge { letter-spacing: .08em; }
     input[type=range] {
       -webkit-appearance: none; appearance: none; width: 100%; height: 6px;
       border-radius: 999px; background: #334155; outline: none;
@@ -88,7 +90,7 @@
         <h1 class="text-lg sm:text-xl font-black text-white tracking-tight truncate">Build Walkthrough</h1>
       </div>
       <div class="flex items-center gap-2 text-[10px] uppercase tracking-wider font-bold">
-        <span class="ai-badge px-2 py-1 rounded border border-amber-400/40 bg-amber-950/40 text-amber-200">Illustrative AI media</span>
+        <span class="media-badge px-2 py-1 rounded border border-amber-400/40 bg-amber-950/40 text-amber-200">Illustrative media</span>
         <span class="px-2 py-1 rounded border border-white/15 bg-white/5 text-slate-400">Not engineering docs</span>
       </div>
     </div>
@@ -135,17 +137,17 @@
           </div>
           <div id="panelImage" class="media-frame relative bg-obsidian">
             <img id="stageImg" src="" alt="" class="absolute inset-0 w-full h-full object-cover" loading="eager" width="960" height="540">
-            <p class="absolute bottom-2 left-2 ai-badge text-[9px] font-bold uppercase px-2 py-1 rounded bg-black/70 border border-amber-400/30 text-amber-200">Illustrative AI · not a project photo</p>
+            <p class="absolute bottom-2 left-2 media-badge text-[9px] font-bold uppercase px-2 py-1 rounded bg-black/70 border border-amber-400/30 text-amber-200">Illustrative · not a project photo</p>
           </div>
           <div id="panel3d" class="media-frame relative hidden">
             <canvas id="view3d" class="absolute inset-0 w-full h-full"></canvas>
-            <p class="absolute bottom-2 left-2 ai-badge text-[9px] font-bold uppercase px-2 py-1 rounded bg-black/70 border border-amber-400/30 text-amber-200">Procedural Three.js · illustrative</p>
+            <p class="absolute bottom-2 left-2 media-badge text-[9px] font-bold uppercase px-2 py-1 rounded bg-black/70 border border-amber-400/30 text-amber-200">Procedural Three.js · illustrative</p>
             <p id="glbHint" class="absolute top-2 right-2 text-[9px] text-slate-400 bg-black/60 px-2 py-1 rounded border border-white/10 hidden">Optional GLB loaded</p>
           </div>
           <div id="panelVideo" class="media-frame relative hidden bg-obsidian">
             <video id="stageVideo" class="absolute inset-0 w-full h-full object-cover" controls playsinline muted loop poster=""></video>
             <p id="videoEmpty" class="absolute inset-0 flex items-center justify-center text-sm text-slate-500 px-6 text-center">No short clip for this stage yet — use Image or 3D.</p>
-            <p class="absolute bottom-2 left-2 ai-badge text-[9px] font-bold uppercase px-2 py-1 rounded bg-black/70 border border-amber-400/30 text-amber-200">Illustrative AI video</p>
+            <p class="absolute bottom-2 left-2 media-badge text-[9px] font-bold uppercase px-2 py-1 rounded bg-black/70 border border-amber-400/30 text-amber-200">Illustrative video</p>
           </div>
         </div>
         <p class="text-xs text-slate-500 font-light leading-relaxed">
@@ -164,7 +166,7 @@
           <ul id="stageChecks" class="check space-y-2.5 text-sm text-slate-200 font-light leading-relaxed list-none pl-0 mb-5"></ul>
           <div class="rounded-lg border border-white/10 bg-white/5 p-3 text-xs text-slate-400 font-light leading-relaxed">
             <strong class="text-slate-200 font-semibold">Honesty note:</strong>
-            Visuals are AI-generated illustrations for teaching the build sequence.
+            Visuals are illustrative media for teaching the build sequence.
             They are not photos of your project, not permits, and not stamped construction documents.
           </div>
         </article>
@@ -402,7 +404,7 @@
     $('stageChecks').innerHTML = s.checks.map(c => `<li class="flex"><span class="flex-1">${c}</span></li>`).join('');
     const img = $('stageImg');
     img.src = s.image;
-    img.alt = `Illustrative AI media for ${s.title}`;
+    img.alt = `Illustrative media for ${s.title}`;
 
     rail.querySelectorAll('.stage-btn').forEach((el, j) => el.classList.toggle('active', j === idx));
     strip.querySelectorAll('button').forEach((el, j) => el.classList.toggle('ring-2', j === idx));
@@ -674,7 +676,7 @@
   }
   tick();
 
-  // Optional Higgsfield GLBs — non-blocking
+  // Optional staged GLBs — non-blocking
   const loader = new GLTFLoader();
   const glbCandidates = [
     MODEL + 'house-framing.glb',
@@ -688,7 +690,7 @@
       obj.visible = false; // keep procedural as primary; park GLBs aside for future toggle
       scene.add(obj);
       $('glbHint').classList.remove('hidden');
-      $('glbHint').textContent = 'Higgsfield GLB on disk (procedural view primary)';
+      $('glbHint').textContent = 'Staged GLB on disk (procedural view primary)';
     }, undefined, () => { /* missing until download completes */ });
   });
 

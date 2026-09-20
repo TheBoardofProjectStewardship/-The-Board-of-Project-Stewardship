@@ -14,7 +14,7 @@ slug: "hire-bathroom-remodeler-king-snohomish"
 
 Hiring a bathroom remodeler in King and Snohomish Counties means evaluating moisture detailing skill as much as aesthetics. The region’s climate exposes weak pans and poor exhaust quickly.
 
-![Illustrative King/Snohomish bathroom remodel hero — AI illustrative, not a real job photo](../assets/images/posts/2026-09-05-hire-bath-1.webp)
+![Illustrative King/Snohomish bathroom remodel hero — Illustrative editorial photo — not a project photograph](../assets/images/posts/2026-09-05-hire-bath-1.webp)
 
 ## What to look for
 
@@ -24,7 +24,7 @@ Hiring a bathroom remodeler in King and Snohomish Counties means evaluating mois
 - Written specs for membrane type, pan method, niche detailing, and fan model/termination
 - Realistic schedule with rough-in and inspection gates
 
-![Illustrative AI photo — finished walk-in shower and floating vanity for hiring portfolio comparison](../assets/images/posts/2026-09-05-hire-bath-2.webp)
+![Illustrative editorial photo — finished walk-in shower and floating vanity for hiring portfolio comparison](../assets/images/posts/2026-09-05-hire-bath-2.webp)
 
 ## Interview questions that matter
 
@@ -40,13 +40,13 @@ Our [bathroom remodel directory](../bathrooms.html) covers King and Snohomish fi
 
 Also see [trades.html](../trades.html) for specialty trade context and [kitchen.html](../kitchen.html) if a joint kitchen-bath project is planned.
 
-![Illustrative AI photo — shower pan and niche waterproofing detail homeowners should ask to see](../assets/images/posts/2026-09-05-hire-bath-3.webp)
+![Illustrative editorial photo — shower pan and niche waterproofing detail homeowners should ask to see](../assets/images/posts/2026-09-05-hire-bath-3.webp)
 
 ## Process video
 
 ../assets/videos/posts/2026-09-bath-process-shared.mp4
 
-Illustrative Higgsfield process clip (wet-area framing / waterproofing context) — not a specific contractor’s jobsite.
+Illustrative process clip (wet-area framing / waterproofing context) — not a specific contractor’s jobsite.
 
 https://www.youtube.com/watch?v=3PCsTfEbda0
 
@@ -56,7 +56,7 @@ https://www.youtube.com/watch?v=3PCsTfEbda0
 - [CertainTeed building products](https://www.certainteed.com/) — gypsum and building products adjacent to wet-area assemblies
 - [Owens Corning insulation](https://www.owenscorning.com/en-us/insulation) — comfort upgrades when bath walls open during remodel
 
-*Illustrative AI photos are labeled as such and are not photographs of a completed Board-ranked project.*
+*Illustrative editorial photos are labeled as such and are not photographs of a completed Board-ranked project.*
 
 ## FAQ
 

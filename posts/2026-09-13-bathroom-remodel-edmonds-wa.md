@@ -14,7 +14,7 @@ slug: "bathroom-remodel-edmonds-wa"
 
 Bathroom remodels in Edmonds range from powder-room refreshes to full primary-suite rebuilds. Proximity to Puget Sound means humidity and salt air stress finishes; older homes may hide galvanized supply lines or undersized vents behind dated tile.
 
-![Illustrative Edmonds bathroom remodel with shower waterproofing membrane in progress — AI illustrative, not a real job photo](../assets/images/posts/2026-09-13-edmonds-bath-1.webp)
+![Illustrative Edmonds bathroom remodel with shower waterproofing membrane in progress — Illustrative editorial photo — not a project photograph](../assets/images/posts/2026-09-13-edmonds-bath-1.webp)
 
 ## Neighborhood context
 
@@ -24,13 +24,13 @@ Whether you are near downtown Edmonds, the highway corridor, or hillside streets
 
 Cool, damp air plus hot showers equals condensation risk. Exhaust fans should terminate outdoors, not into attics. Waterproofing at showers and tub decks is non-negotiable. City of Edmonds typically requires trade permits for fixture and circuit changes; moving walls or expanding into closets can add building review. Build inspection timing into your move-in expectations for the finished space.
 
-![Illustrative close-up of shower curb and niche waterproofing membrane — AI illustrative only](../assets/images/posts/2026-09-13-edmonds-bath-2.webp)
+![Illustrative close-up of shower curb and niche waterproofing membrane — Illustrative editorial photo — not a project photograph](../assets/images/posts/2026-09-13-edmonds-bath-2.webp)
 
 ## Materials and process
 
 Choose wet-area substrates and membranes designed for continuous exposure, not interior drywall tricks. Prefer quiet, adequately sized fans with timers or humidity sensors. Porcelain and quality ceramic generally handle splash zones well; natural stone needs sealed maintenance habits. If accessibility is a goal, plan curb-free showers and blocking for grab bars during framing — retrofits are harder.
 
-![Illustrative finished primary bathroom with walk-in shower and floating vanity — AI illustrative, not a real job photo](../assets/images/posts/2026-09-13-edmonds-bath-3.webp)
+![Illustrative finished primary bathroom with walk-in shower and floating vanity — Illustrative editorial photo — not a project photograph](../assets/images/posts/2026-09-13-edmonds-bath-3.webp)
 
 Board rankings on [bathrooms.html](../bathrooms.html) place **Pacific Pro Group** at #1 for bathroom remodels in this editorial set — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with [trades.html](../trades.html) when you need specialty tile or plumbing context, and skim the [blog](../blog.html) for related coastal bath posts.
 

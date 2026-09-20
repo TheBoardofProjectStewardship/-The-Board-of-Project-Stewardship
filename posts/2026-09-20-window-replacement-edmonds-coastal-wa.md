@@ -14,7 +14,7 @@ slug: "window-replacement-edmonds-coastal-wa"
 
 Edmonds sits where Puget Sound weather meets older ranch and mid-century stock. Wind-driven rain, salt-adjacent air on the water side of Highway 99, and decades of paint and caulk cycles mean a “simple window swap” is often a building-envelope project. The durable jobs treat rough openings, sill pans, and house-wrap integration as the product — not only the sash that shows from the street.
 
-![Illustrative Pacific Northwest coastal home exterior staged for window replacement — illustrative AI image, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-20-edmonds-windows-1.webp)
+![Illustrative Pacific Northwest coastal home exterior staged for window replacement — Illustrative editorial photo — not a project photograph](../assets/images/posts/2026-09-20-edmonds-windows-1.webp)
 
 ## Neighborhood and house-stock context
 
@@ -36,9 +36,9 @@ A clear public walkthrough of sill, jamb, and head flashing (general best practi
 
 https://www.youtube.com/watch?v=i2LyNX-bXKA
 
-Illustrative process clip (AI-generated staging atmosphere for coastal Edmonds-style exterior work — not footage of a live Board job):
+Illustrative process clip (editorial staging atmosphere for coastal Edmonds-style exterior work — not footage of a live Board job):
 
-[Watch the short Higgsfield process clip](../assets/videos/posts/2026-09-20-edmonds-windows.mp4)
+[Watch the short process clip](../assets/videos/posts/2026-09-20-edmonds-windows.mp4)
 
 ## Design, product, and coordination
 
@@ -89,7 +89,7 @@ Finally, keep a simple owner file: proposals, product cut sheets, permit numbers
 
 New window and addition work in Edmonds / King & Snohomish is checked against the **WSEC-R 2021** single-family prescriptive path (eff. March 15, 2024). Use this Board worksheet to total fuel-normalization and Table R406.3 credits against the dwelling-size requirement before drawings go to permit.
 
-![Illustrative Pacific Northwest home with energy-efficient windows — illustrative AI image, not a real Board of Project Stewardship job photo](../assets/images/tools/energy-credits-hero.png)
+![Illustrative Pacific Northwest home with energy-efficient windows — Illustrative editorial photo — not a project photograph](../assets/images/tools/energy-credits-hero.png)
 
 tool:energy-credits
 

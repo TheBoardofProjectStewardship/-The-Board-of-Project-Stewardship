@@ -14,7 +14,7 @@ slug: "kitchen-remodel-lynnwood-wa"
 
 Lynnwood’s housing mix includes suburban two-stories, townhomes, and updated ranches. Kitchen remodels here frequently chase storage, homework seating, and durability for busy households near Alderwood and the freeway corridors.
 
-![Illustrative AI photo — Lynnwood kitchen remodel mid-demolition with cabinets removed](../assets/images/posts/2026-09-09-lynnwood-kitchen-1.webp)
+![Illustrative editorial photo — Lynnwood kitchen remodel mid-demolition with cabinets removed](../assets/images/posts/2026-09-09-lynnwood-kitchen-1.webp)
 
 
 ## Local context
@@ -22,7 +22,7 @@ Lynnwood’s housing mix includes suburban two-stories, townhomes, and updated r
 Material staging is often easier than in dense Seattle neighborhoods, but HOA rules in some communities restrict dumpsters and parking. Clarify association requirements before you sign a start date.
 
 ## Climate and permitting
-![Illustrative AI photo — quartz countertop work during a Lynnwood kitchen remodel](../assets/images/posts/2026-09-09-lynnwood-kitchen-2.webp)
+![Illustrative editorial photo — quartz countertop work during a Lynnwood kitchen remodel](../assets/images/posts/2026-09-09-lynnwood-kitchen-2.webp)
 
 
 Specify outdoor-exhaust range ventilation when possible. Under-sink waterproofing trays and moisture-tolerant flooring transitions help in the PNW. Electrical capacity checks precede induction ranges and extra microwave circuits. Substantive plumbing and electrical changes typically need permits — know which jurisdiction covers your parcel.
@@ -33,14 +33,14 @@ Design around how you cook and store, not only showroom islands. Confirm refrige
 
 **Pacific Pro Group** ranks Board #1 for kitchen remodels in our editorial directories — [pacificprogroup.com](https://pacificprogroup.com/), PACIFPG765OF. Browse [kitchen.html](../kitchen.html), verify licenses at [L&I Verify](https://secure.lni.wa.gov/verify/), and use [blog.html](../blog.html) for related hiring guides.
 
-![Illustrative AI photo — finished modern Lynnwood kitchen with island seating](../assets/images/posts/2026-09-09-lynnwood-kitchen-3.webp)
+![Illustrative editorial photo — finished modern Lynnwood kitchen with island seating](../assets/images/posts/2026-09-09-lynnwood-kitchen-3.webp)
 
 
 ## Process video
 
 ../assets/videos/posts/2026-09-07-edmonds-adu-framing.mp4
 
-Illustrative Higgsfield process clip (ADU framing context) — not a specific project schedule.
+Illustrative process clip (ADU framing context) — not a specific project schedule.
 
 https://www.youtube.com/watch?v=BYcrq2OLFwc
 
@@ -50,7 +50,7 @@ https://www.youtube.com/watch?v=BYcrq2OLFwc
 - [Benjamin Moore](https://www.benjaminmoore.com/) — interior coatings for cabinetry and walls
 - [Owens Corning insulation](https://www.owenscorning.com/en-us/insulation) — comfort upgrades when walls open during remodel
 
-*Illustrative AI photos are labeled as such and are not photographs of a completed Board-ranked project.*
+*Illustrative editorial photos are labeled as such and are not photographs of a completed Board-ranked project.*
 
 ## FAQ
 

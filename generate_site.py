@@ -1047,7 +1047,7 @@ def another_story_embed(prefix: str = "") -> str:
         + '      <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Board feature</p>\n'
         + '      <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-2">Another Story</h2>\n'
         + '      <p class="text-sm text-slate-400 font-light max-w-3xl leading-relaxed mb-3">'
-        'Explore a second-story concept on your own photo. Upload a house picture, adjust the massing idea, and review a preview — AI-assisted design only. Not a bid, permit, structural calculation, or construction document.</p>\n'
+        'Explore a second-story concept on your own photo. Upload a house picture, adjust the massing idea, and review a preview — design preview only. Not a bid, permit, structural calculation, or construction document.</p>\n'
         + '      <p class="text-sm text-slate-400 font-light max-w-3xl leading-relaxed">'
         'This is a Board feature. Open the standalone tool at '
         f'<a href="{tools_href("another-story", prefix, "index.html")}" class="text-secondary hover:underline">{SITE_ORIGIN}/tools/another-story/</a>'
@@ -1117,7 +1117,7 @@ def another_story_cta(prefix: str = "") -> str:
 {img}      <div class="p-6 md:p-8 flex flex-col justify-center gap-3">
         <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary">Board feature</p>
         <h2 class="text-2xl font-black text-white tracking-tight">Another Story</h2>
-        <p class="text-sm text-slate-400 font-light leading-relaxed max-w-xl">Same home. Another story. Open the full concept studio to explore a second-story idea on your photo — AI-assisted preview, not a bid or permit document.</p>
+        <p class="text-sm text-slate-400 font-light leading-relaxed max-w-xl">Same home. Another story. Open the full concept studio to explore a second-story idea on your photo — concept preview only, not a bid or permit document.</p>
         <div>
           <a href="{href}" class="inline-flex items-center gap-2 bg-primary text-white px-5 py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs shadow-glow-sleek">
             Open Another Story <i class="fas fa-arrow-right text-[10px]"></i>
@@ -1228,7 +1228,7 @@ def build_walkthrough_home_section(prefix: str = "") -> str:
         thumbs.append(
             "        <figure class=\"shrink-0 w-36 sm:w-40 rounded-lg overflow-hidden border border-white/10 bg-charcoal relative\">\n"
             f'          <div class="aspect-[4/3] bg-obsidian relative">\n'
-            f'            <img src="{img}" alt="Illustrative AI stage {i}: {esc(label)} — {esc(blurb)}" '
+            f'            <img src="{img}" alt="Stage {i}: {esc(label)} — {esc(blurb)}" '
             'class="absolute inset-0 w-full h-full object-cover" width="320" height="240" loading="lazy">\n'
             f'            <span class="absolute bottom-0 inset-x-0 z-10 text-[10px] uppercase tracking-wider text-secondary font-bold px-2 py-1 bg-black/65">'
             f"{i} · {esc(label)}</span>\n"
@@ -1241,7 +1241,7 @@ def build_walkthrough_home_section(prefix: str = "") -> str:
     <div class="mb-6 border-b border-white/10 pb-4">
       <span class="text-secondary text-xs font-bold uppercase tracking-widest">Good Steward Tools</span>
       <h2 class="text-3xl font-black text-white tracking-tight">See how a project is built</h2>
-      <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Interactive walkthrough from sales discovery to warranty handoff — blueprints, 3D framing walls rising, then a finished Pacific Northwest home. Checklist language mirrors Site Visit &amp; Discovery and the PM Dashboard. Illustrative AI media, not engineering docs. <a href="{land}" class="text-secondary hover:underline">Open full landing</a>.</p>
+      <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Interactive walkthrough from sales discovery to warranty handoff — blueprints, 3D framing walls rising, then a finished Pacific Northwest home. Checklist language mirrors Site Visit &amp; Discovery and the PM Dashboard. Illustrative media, not engineering docs. <a href="{land}" class="text-secondary hover:underline">Open full landing</a>.</p>
     </div>
     <iframe
       id="build-walkthrough-home"
@@ -1270,7 +1270,7 @@ def build_walkthrough_home_section(prefix: str = "") -> str:
       <div class="flex gap-3 overflow-x-auto pb-2 -mx-1 px-1">
 {strip}
       </div>
-      <p class="text-[11px] text-slate-600 mt-2 leading-relaxed">Illustrative AI stages for homeowners — not a bid, permit set, or schedule commitment.</p>
+      <p class="text-[11px] text-slate-600 mt-2 leading-relaxed">Illustrative stages for homeowners — not a bid, permit set, or schedule commitment.</p>
     </div>
   </section>
 """
@@ -2216,7 +2216,7 @@ def build_about() -> str:
       <div class="mb-8 border-b border-white/10 pb-4">
         <span class="text-secondary text-xs font-bold uppercase tracking-widest">Field gallery</span>
         <h2 class="text-3xl font-black text-white tracking-tight">Standards you can see</h2>
-        <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Editorial process and remodel imagery for Edmonds / coastal Puget Sound work. AI or stock frames are labeled illustrative in alt text.</p>
+        <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Editorial process and remodel imagery for Edmonds / coastal Puget Sound work. Editorial and stock frames are labeled illustrative in alt text.</p>
       </div>
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
 {gallery}
@@ -3939,14 +3939,14 @@ def build_another_story_page() -> str:
     body = f"""  <header class="max-w-6xl mx-auto px-4 pt-10 pb-2">
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Board feature</p>
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Another Story</h1>
-    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Same home. Another story. Upload a house photo, adjust the massing idea, and review a second-story concept before you share it. This is an AI-assisted design preview published as a Board feature — not a bid, permit, structural calculation, or construction document.</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Same home. Another story. Upload a house photo, adjust the massing idea, and review a second-story concept before you share it. This is a design preview published as a Board feature — not a bid, permit, structural calculation, or construction document.</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Use it to explore whether a second story might fit a North Sound house. Then verify any contractor you hire at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>. The standalone tool is also at <a href="{tools_href('another-story', '', 'index.html')}" class="text-secondary hover:underline">{SITE_ORIGIN}/tools/another-story/</a> and <a href="https://anotherstorysea.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">anotherstorysea.com</a>.</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Also listed from Board directory #1: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a>.</p>
   </header>
 """
     return page_shell(
         "Another Story | Board of Project Stewardship",
-        "Another Story — Board feature. AI-assisted second-story design preview for Edmonds and North Sound homes. Not a bid or permit document.",
+        "Another Story — Board feature. Second-story design preview for Edmonds and North Sound homes. Not a bid or permit document.",
         "story",
         body,
         canonical=f"{BASE_URL}another-story.html",
@@ -4380,7 +4380,7 @@ def patch_tool_pages() -> None:
         (
             SITE_DIR / "tools" / "another-story" / "index.html",
             "Another Story | Board of Project Stewardship",
-            "Another Story — Board feature. AI-assisted second-story design preview for Edmonds and North Sound homes. Not a bid or permit document.",
+            "Another Story — Board feature. Second-story design preview for Edmonds and North Sound homes. Not a bid or permit document.",
             f"{SITE_ORIGIN}/another-story.html",
         ),
     ]

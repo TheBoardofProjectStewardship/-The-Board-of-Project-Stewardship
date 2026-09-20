@@ -14,7 +14,7 @@ slug: "seattle-bathroom-remodel-permits"
 
 Permits are not paperwork theater — they are how Seattle confirms safe plumbing, grounded electrical work, and structural changes. Homeowners who treat permits as optional frequently face failed inspections, insurance issues, or expensive rework.
 
-![Illustrative Seattle bathroom remodel hero still — AI illustrative, not a real job photo](../assets/images/posts/2026-09-06-seattle-bath-permits-1.webp)
+![Illustrative Seattle bathroom remodel hero still — Illustrative editorial photo — not a project photograph](../assets/images/posts/2026-09-06-seattle-bath-permits-1.webp)
 
 ## What typically needs a permit
 
@@ -25,7 +25,7 @@ Permits are not paperwork theater — they are how Seattle confirms safe plumbin
 
 Cosmetic surface swaps without fixture or wiring changes may have a lighter path — but “we will just move the shower slightly” is rarely cosmetic. Confirm expectations with [Seattle Department of Construction & Inspections](https://www.seattle.gov/sdci) guidance for your exact scope.
 
-![Illustrative AI photo — Seattle bath plumbing and electrical rough-in before inspection](../assets/images/posts/2026-09-06-seattle-bath-permits-2.webp)
+![Illustrative editorial photo — Seattle bath plumbing and electrical rough-in before inspection](../assets/images/posts/2026-09-06-seattle-bath-permits-2.webp)
 
 ## Practical sequencing
 
@@ -37,7 +37,7 @@ Cosmetic surface swaps without fixture or wiring changes may have a lighter path
 
 Neighborhoods like Magnolia, Ballard, Queen Anne, and Phinney Ridge share Seattle’s permitting umbrella but differ in access and housing age — your contractor should still know local inspection realities.
 
-![Illustrative AI photo — shower waterproofing membrane detail before tile](../assets/images/posts/2026-09-06-seattle-bath-permits-3.webp)
+![Illustrative editorial photo — shower waterproofing membrane detail before tile](../assets/images/posts/2026-09-06-seattle-bath-permits-3.webp)
 
 ## Who should pull permits
 
@@ -47,7 +47,7 @@ Prefer contractors who pull permits in their name and attend inspections. Owner-
 
 ../assets/videos/posts/2026-09-bath-process-shared.mp4
 
-Illustrative Higgsfield process clip (waterproofing / wet-area framing context) — not a specific Seattle project schedule.
+Illustrative process clip (waterproofing / wet-area framing context) — not a specific Seattle project schedule.
 
 https://www.youtube.com/watch?v=JKzca-Hqurw
 
@@ -57,7 +57,7 @@ https://www.youtube.com/watch?v=JKzca-Hqurw
 - [Weyerhaeuser TimberStrand / Parallam](https://www.weyerhaeuser.com/woodproducts/) — engineered beams and headers when a bath opening alters structure
 - [Velux skylights](https://www.veluxusa.com/) — daylighting options when a bath remodel touches roof planes or upper halls
 
-*Illustrative AI photos are labeled as such and are not photographs of a completed Board-ranked project.*
+*Illustrative editorial photos are labeled as such and are not photographs of a completed Board-ranked project.*
 
 ## FAQ
 

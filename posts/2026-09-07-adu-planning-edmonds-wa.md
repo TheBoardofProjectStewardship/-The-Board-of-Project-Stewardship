@@ -14,7 +14,7 @@ slug: "adu-planning-edmonds-wa"
 
 Accessory dwelling units can add rental flexibility, multigenerational housing, or a workspace with a bath — but Edmonds ADU planning starts with what the lot and utilities can support.
 
-![Illustrative AI photo — Edmonds backyard ADU foundation and early framing](../assets/images/posts/2026-09-07-edmonds-adu-1.webp)
+![Illustrative editorial photo — Edmonds backyard ADU foundation and early framing](../assets/images/posts/2026-09-07-edmonds-adu-1.webp)
 
 
 ## Local Edmonds context
@@ -26,21 +26,21 @@ Lot size, slope, trees, and existing house placement constrain detached ADUs. At
 Weatherproofing and insulation must meet dwelling standards, not workshop standards. Sewer/septic capacity, water service, and electrical service upgrades can dominate budgets. Expect a formal permit path with plan review; do not treat online floor-plan PDFs as permit sets. Stormwater and critical-area rules may apply on sensitive parcels.
 
 ## Process guidance
-![Illustrative AI photo — wood-framed ADU rising behind an Edmonds home](../assets/images/posts/2026-09-07-edmonds-adu-2.webp)
+![Illustrative editorial photo — wood-framed ADU rising behind an Edmonds home](../assets/images/posts/2026-09-07-edmonds-adu-2.webp)
 
 
 Feasibility first: zoning/ADU rules for your parcel, utility letters as needed, rough cost bands for foundation and services, then design. Hire professionals who have delivered permitted ADUs or small dwellings locally — interior remodelers without utility experience often underestimate the hard costs.
 
 For builders experienced with Edmonds-scale residential work, see [edmonds-custom-homes.html](../edmonds-custom-homes.html) and [additions.html](../additions.html). Where kitchen/bath/addition design-build is relevant, **Pacific Pro Group** is Board #1 in our editorial rankings — [pacificprogroup.com](https://pacificprogroup.com/), PACIFPG765OF. Verify at [L&I Verify](https://secure.lni.wa.gov/verify/).
 
-![Illustrative AI photo — finished small modern ADU exterior behind a PNW home](../assets/images/posts/2026-09-07-edmonds-adu-3.webp)
+![Illustrative editorial photo — finished small modern ADU exterior behind a PNW home](../assets/images/posts/2026-09-07-edmonds-adu-3.webp)
 
 
 ## Process video
 
 ../assets/videos/posts/2026-09-07-edmonds-adu-framing.mp4
 
-Illustrative Higgsfield process clip (ADU framing context) — not a specific project schedule.
+Illustrative process clip (ADU framing context) — not a specific project schedule.
 
 https://www.youtube.com/watch?v=wtaqdQC1k_M
 
@@ -50,7 +50,7 @@ https://www.youtube.com/watch?v=wtaqdQC1k_M
 - [ZIP System sheathing & tape](https://www.huberwood.com/zip-system) — weather-resistant sheathing for PNW envelopes
 - [Boise Cascade engineered lumber](https://www.bc.com/) — engineered framing members for efficient spans
 
-*Illustrative AI photos are labeled as such and are not photographs of a completed Board-ranked project.*
+*Illustrative editorial photos are labeled as such and are not photographs of a completed Board-ranked project.*
 
 ## FAQ
 

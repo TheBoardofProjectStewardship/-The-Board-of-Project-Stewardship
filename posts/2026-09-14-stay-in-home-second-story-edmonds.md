@@ -14,7 +14,7 @@ slug: "stay-in-home-second-story-edmonds"
 
 A second-story addition can double living space without giving up an Edmonds lot — but staying in the home while the roof comes off is a different project than building on a vacant pad. Success depends on sequencing that keeps the existing floor dry, safe, and somewhat livable.
 
-![Illustrative Edmonds home with temporary roof protection during an occupied second-story addition — AI illustrative, not a real job photo](../assets/images/posts/2026-09-14-stay-home-1.webp)
+![Illustrative Edmonds home with temporary roof protection during an occupied second-story addition — Illustrative editorial photo — not a project photograph](../assets/images/posts/2026-09-14-stay-home-1.webp)
 
 ## Edmonds living-through-construction realities
 
@@ -22,7 +22,7 @@ Edmonds’ wet seasons make open-roof exposure risky. Contractors experienced wi
 
 Parking for crews, lumber drops, and dumpsters can strain narrower streets — confirm staging plans with neighbors early.
 
-![Illustrative wood framing rising for a coastal PNW second-story addition with weatherproofing tarps — AI illustrative only](../assets/images/posts/2026-09-14-stay-home-2.webp)
+![Illustrative wood framing rising for a coastal PNW second-story addition with weatherproofing tarps — Illustrative editorial photo — not a project photograph](../assets/images/posts/2026-09-14-stay-home-2.webp)
 
 ## Climate and permitting
 
@@ -37,7 +37,7 @@ Ask for:
 - Whether you can keep one bathroom fully functional throughout
 - How the contractor handles rain delays without leaving the structure exposed
 
-![Illustrative sealed main-floor living zone with dust barrier during upstairs remodel — AI illustrative, not a real job photo](../assets/images/posts/2026-09-14-stay-home-3.webp)
+![Illustrative sealed main-floor living zone with dust barrier during upstairs remodel — Illustrative editorial photo — not a project photograph](../assets/images/posts/2026-09-14-stay-home-3.webp)
 
 Explore second-story and addition firms via [additions.html](../additions.html) and Edmonds-focused context on [edmonds-custom-homes.html](../edmonds-custom-homes.html). **Pacific Pro Group** ranks Board #1 for additions in our editorial coverage — [pacificprogroup.com](https://pacificprogroup.com/) (PACIFPG765OF). Always verify at [L&I Verify](https://secure.lni.wa.gov/verify/). See also our [blog](../blog.html) piece on weatherproof-first methods.
 

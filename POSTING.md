@@ -89,6 +89,16 @@ Every new BOPS article must be Magnolia-class (structure only — Ghost publish 
 Honesty: L&I Verify + PACIFPG765OF only when mentioning PPG; no invented ROI, reviews, awards, or founding-date selling points.
 
 
+## Public copy lock (Alex 2026-09-20)
+
+**Public site must never mention AI.** Operator tools named in this ops doc (Higgsfield, ChatGPT Astra Extra High / Astra Extra High polish, Grok) are **internal only** and may stay in POSTING.md.
+
+Forbidden on the live site (HTML, meta, og/twitter, alt, figcaption, visible body, visitor-facing JS UI strings):
+AI, A.I., AI-assisted, AI-generated, Illustrative AI, ChatGPT, Higgsfield, artificial intelligence, LLM, "Generate AI preview", "AI CONCEPT", "AI-ASSISTED CONCEPT".
+
+Use public phrasing such as: "design preview only", "concept preview only", "Illustrative editorial photo — not a project photograph", "Illustrative process clip", "Stock or concept frames are labeled illustrative".
+
+
 ## Rich media posts (required for daily ship)
 
 Every daily post must ship with richer media — not text-only. Checklist before regenerate/commit:

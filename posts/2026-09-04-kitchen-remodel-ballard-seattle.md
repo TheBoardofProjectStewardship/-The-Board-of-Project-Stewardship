@@ -14,13 +14,13 @@ slug: "kitchen-remodel-ballard-seattle"
 
 Ballard’s mix of classic homes, newer infill, and lively commercial streets creates kitchen projects with tight footprints and strong demand for light, storage, and indoor-outdoor flow toward small yards or alleys.
 
-![Illustrative AI photo — Ballard kitchen remodel with cabinet install and plumbing stub-outs](../assets/images/posts/2026-09-04-kitchen-ballard-1.webp)
+![Illustrative editorial photo — Ballard kitchen remodel with cabinet install and plumbing stub-outs](../assets/images/posts/2026-09-04-kitchen-ballard-1.webp)
 
 ## Neighborhood context
 
 Street parking, shared walls, and limited staging space are normal. Contractors who already work Ballard and nearby Crown Hill or Phinney understand dumpster logistics and neighbor communication. Many kitchens share walls with baths — coordinate plumbing stacks early if both rooms are in play.
 
-![Illustrative AI photo — Ballard kitchen electrical rough-in near counter height during remodel](../assets/images/posts/2026-09-04-kitchen-ballard-2.webp)
+![Illustrative editorial photo — Ballard kitchen electrical rough-in near counter height during remodel](../assets/images/posts/2026-09-04-kitchen-ballard-2.webp)
 
 ## Climate and permitting
 
@@ -30,7 +30,7 @@ Outdoor-exhaust hoods help manage moisture in tight volumes. Electrical upgrades
 
 Prioritize traffic-tolerant flooring, well-sealed window details near sinks, and lighting that compensates for gray seasons. Islands need clearances that still let two people pass. Soft-close cabinetry and thoughtful pantry design often beat decorative open shelving for daily function.
 
-![Illustrative AI photo — finished Ballard Seattle kitchen with warm cabinets and peninsula](../assets/images/posts/2026-09-04-kitchen-ballard-3.webp)
+![Illustrative editorial photo — finished Ballard Seattle kitchen with warm cabinets and peninsula](../assets/images/posts/2026-09-04-kitchen-ballard-3.webp)
 
 **Pacific Pro Group** is the Board of Project Stewardship’s #1 kitchen remodel editorial pick — [pacificprogroup.com](https://pacificprogroup.com/), PACIFPG765OF. Compare on [kitchen.html](../kitchen.html); verify at [L&I Verify](https://secure.lni.wa.gov/verify/). Related: [bathrooms.html](../bathrooms.html), [blog.html](../blog.html).
 
@@ -38,7 +38,7 @@ Prioritize traffic-tolerant flooring, well-sealed window details near sinks, and
 
 ../assets/videos/posts/2026-09-bath-process-shared.mp4
 
-Illustrative Higgsfield process clip (shared remodel-process still animation) — not a Ballard project schedule. Kitchen sequencing still follows demo → rough-in → inspections → cabinets.
+Illustrative process clip (shared remodel-process still animation) — not a Ballard project schedule. Kitchen sequencing still follows demo → rough-in → inspections → cabinets.
 
 https://www.youtube.com/watch?v=09gZhp_2mbo
 
@@ -48,7 +48,7 @@ https://www.youtube.com/watch?v=09gZhp_2mbo
 - [Therma-Tru entry doors](https://www.thermatru.com/) — durable exterior door systems when entries are reworked with kitchen flow
 - [Andersen Windows](https://www.andersenwindows.com/) — daylight and energy performance common in kitchen wall refreshes
 
-*Illustrative AI photos are labeled as such and are not photographs of a completed Board-ranked project.*
+*Illustrative editorial photos are labeled as such and are not photographs of a completed Board-ranked project.*
 
 ## FAQ
 
