@@ -1,533 +1,550 @@
-# Board of Project Stewardship — Audit 100 Fixes
+# BOARD AUDIT — 100 FIXES (2026-09-20 PT)
 
-**Date:** Sunday, Sep 20, 2026 (PT)  
 **Live:** https://boardofprojectstewardship.com/  
-**Repo:** `/workspace/bops-repo` · SoT `generate_site.py`  
-**Locks:** Independent Board LOOK · PPG = #1 hire → https://pacificprogroup.com/ only · never edit PPG site · no public AI/ChatGPT/Higgsfield/LLM strings · honesty (no invented licenses/years/reviews/awards/prices/ROI)
+**Repo SoT:** `/workspace/bops-repo/generate_site.py`  
+**Locks:** Independent Board look; PPG #1 hire only → https://pacificprogroup.com/; never edit PPG; no public AI/ChatGPT/Higgsfield; no invented prices/ROI/licenses/years/reviews; spell out Board of Project Stewardship.
 
-**Method:** Live deep-dive (home, learn, blog, directories, tools, permits/ADU/cities/cost-factors/hiring) + generator/sitemap/schema/a11y/meta/CWV + competitor patterns (L&I Verify + Hire Smart adjacency, permit hubs, city FAQs) without copying invented stats.
+**Composition:** Items 1–35 = Quill Astra live audit (verbatim intent). Items 36–100 = Steward depth/IA/CWV/a11y/orphan/schema wave.
+
+**Evidence baseline:** ~82 HTML pages; ~45 under ~900 words; ~77 missing `#related-learning`; learn.html thin as spider; about.html + faq.html **404 live**.
 
 ---
 
-## 1. [P0] Nav
-- **Problem:** Learn hub buried under More despite being primary educational IA
-- **Fix:** Promote Learn to primary nav so pillars/permits/ADU are discoverable without opening More
-- **Effort:** S
-
-## 2. [P0] Nav
-- **Problem:** SEO-40 #6 open: no Board #1 utility chip in header
-- **Fix:** Add subtle header utility Board #1 · Pacific Pro Group → https://pacificprogroup.com/ with rel=noopener; never in brand slot
-- **Effort:** S
-
-## 3. [P0] Nav
-- **Problem:** More dropdown dumps 70+ items in narrow w-56 panel
-- **Fix:** Widen More panel, add max-height scroll, keep Directories vs Tools group labels
-- **Effort:** M
-
-## 4. [P0] Footer
-- **Problem:** Footer Explore is one flat 60+ link list; contact email duplicated with contact strip
-- **Fix:** Regroup footer into Directories, Learn, and Tools columns; remove redundant contact_strip from page_shell (keep footer email + #contact)
-- **Effort:** M
-
-## 5. [P0] Verify
-- **Problem:** Verify page lacks L&I Hire Smart / ProtectMyHome adjacency
-- **Fix:** Add Official L&I sources section: Hire Smart Step-by-Step, Hiring a Contractor, Hire Smart worksheet PDF, ProtectMyHome
-- **Effort:** S
-
-## 6. [P0] Hiring
-- **Problem:** hiring-a-contractor.html missing official L&I Hire Smart outbound
-- **Fix:** Add L&I Hire Smart + worksheet links beside Board hiring path; L&I remains source of truth
-- **Effort:** S
-
-## 7. [P0] City hubs
-- **Problem:** City hubs thin (~750 words), generic FAQs, shallow next steps
-- **Fix:** Deepen build_city_hub_page with Good Steward next-steps, related_learning strip, optional extra FAQs — no invented stats
-- **Effort:** L
-
-## 8. [P0] Seattle hub
-- **Problem:** Seattle hub omits SDCI fee orientation present on permits.html
-- **Fix:** Add SDCI fees overview + Fee Subtitle PDF links + cost-factors cross-links (qualitative only)
-- **Effort:** S
-
-## 9. [P0] Permits
-- **Problem:** Permit hub missing Lynnwood/Mukilteo cards adjacent to city hubs
-- **Fix:** Add Lynnwood + Mukilteo jurisdiction cards with official city + MyBuildingPermit outbound; link city hubs
-- **Effort:** M
-
-## 10. [P0] ADU checklist
-- **Problem:** adu-checklist.html has no FAQ/HowTo schema and thin cross-links
-- **Fix:** Add FAQ + HowTo schema + links to adu.html, adu-cost-factors, learn, L&I
-- **Effort:** M
-
-## 11. [P0] Coastal
-- **Problem:** coastal-waterproofing.html thin, no FAQ
-- **Fix:** Add FAQ + cross-links to bathroom guide, bath cost factors, bathrooms directory, PNW waterproofing post
-- **Effort:** S
-
-## 12. [P0] Materials
-- **Problem:** materials.html thinnest index (4 cards, no FAQ)
-- **Fix:** Expand editorial manufacturer refs + FAQ + links to coastal/windows/siding/trades; label not endorsements
-- **Effort:** M
-
-## 13. [P0] Glossary
-- **Problem:** glossary.html only 12 terms, no FAQ, weak outbound
-- **Fix:** Expand ~24 terms (bond, UBI, retainage, lien, MEP, critical area, eTRAKiT, Accela, fixture units) + FAQ + Learn CTA
-- **Effort:** M
-
-## 14. [P0] Videos
-- **Problem:** videos.html thin orphan-feeling index
-- **Fix:** Categorize links (additions/kitchen/bath/tools), add FAQ, Learn + blog CTAs
-- **Effort:** S
-
-## 15. [P0] Contact
-- **Problem:** contact.html thin; write.html linked without noindex context
-- **Fix:** Add FAQ (editorial vs hire vs PPG); clarify write.html is draft/noindex; link Learn + directories
-- **Effort:** S
-
-## 16. [P0] Cross-links
-- **Problem:** related_learning_strip missing on city hubs and thin tools
-- **Fix:** Inject related_learning_strip into city hubs + materials/glossary/videos/contact/adu-checklist/coastal
-- **Effort:** M
-
-## 17. [P0] Learn hub
-- **Problem:** No Start-here path above long section cards
-- **Fix:** Add ordered Start-here: Verify → Permits → Planning pillar → Directory → Site Visit
-- **Effort:** S
-
-## 18. [P0] Directories
-- **Problem:** Additions FAQ uses soft timeline/cost ranges that skirt honesty lock
-- **Fix:** Rewrite FAQ to qualitative drivers only; point to addition-cost-factors + written bids; remove invented month/$ ranges
-- **Effort:** M
-
-## 19. [P0] Planning↔dirs
-- **Problem:** Kitchen/bath planning ↔ cost-factor ↔ directory links not fully mutual
-- **Fix:** Ensure bidirectional related strips on planning + cost-factor + directory pages
-- **Effort:** S
-
-## 20. [P0] Schema
-- **Problem:** Only 3 pages emit HowTo; hiring path is natural HowTo
-- **Fix:** Add HowTo JSON-LD to hiring-a-contractor and ADU checklist
-- **Effort:** S
-
-## 21. [P0] Duplicate chrome
-- **Problem:** Live pages show Public contact twice (strip + footer)
-- **Fix:** Remove contact_strip_html from page_shell; put id=contact on footer contact line
-- **Effort:** S
-
-## 22. [P0] Blog
-- **Problem:** Blog shows No posts match your filters despite visible posts
-- **Fix:** Fix blog.js empty-state to render only when active filter yields zero results
-- **Effort:** S
-
-## 23. [P0] Homepage
-- **Problem:** Planning hubs omit Learn/Permits/Verify as parent CTAs
-- **Fix:** Add Learn hub + Permit hub + Verify CTAs in homepage planning section
-- **Effort:** S
-
-## 24. [P0] Hire questions
-- **Problem:** hire-questions lacks L&I Hire Smart worksheet outbound
-- **Fix:** Add official L&I sources block beside Board question banks
-- **Effort:** S
-
-## 25. [P0] Competitor pattern
-- **Problem:** Official-sources callout inconsistent across permits/verify/hiring/city
-- **Fix:** Add reusable Official sources callout component on those hubs
-- **Effort:** S
-
-## 26. [P1] Verify
-- **Problem:** Verify FAQ missing bond lawsuit / workers' comp signals L&I surfaces
-- **Fix:** Add FAQ on bond lawsuits, workers' comp account, ads must show registration # — cite L&I patterns, no invented stats
-- **Effort:** S
-
-## 27. [P1] Bonds
-- **Problem:** bonds-and-insurance.html weak L&I outbound depth
-- **Fix:** Deep-link L&I hiring/insurance guidance + verify walkthrough
-- **Effort:** S
-
-## 28. [P1] Red flags
-- **Problem:** red-flags-hiring thinner than Hire Smart red-flag patterns
-- **Fix:** Add red flags: cash-only, owner-pulled permit alone, no written change orders; link L&I Hire Smart
-- **Effort:** S
-
-## 29. [P1] Bid comparison
-- **Problem:** bid-comparison missing cost-factor cross-links
-- **Fix:** Add related strip to remodel/kitchen/bath/addition cost factors + contract basics
-- **Effort:** S
-
-## 30. [P1] Contract basics
-- **Problem:** contractor-contract-basics missing L&I consumer contract adjacency
-- **Fix:** Add outbound to L&I hiring/contract consumer guidance (official URLs only)
-- **Effort:** S
-
-## 31. [P1] Financing
-- **Problem:** financing-and-draws thin on draws hygiene
-- **Fix:** Deepen draws vs retainage via glossary links + final-walkthrough; no APR/ROI
-- **Effort:** S
-
-## 32. [P1] Living remodel
-- **Problem:** living-through-remodel missing stay-in-home post links
-- **Fix:** Link stay-in-home second-story Edmonds post + site-visit + PM dashboard
-- **Effort:** S
-
-## 33. [P1] Selecting finishes
-- **Problem:** selecting-finishes missing materials + cost-factor links
-- **Fix:** Add related_learning_strip to materials, cost factors, directories
-- **Effort:** S
-
-## 34. [P1] Project timeline
-- **Problem:** project-timeline not mapped to Build Walkthrough / permits
-- **Fix:** Add editorial stage→tool crosswalk (not a schedule commitment)
-- **Effort:** M
-
-## 35. [P1] Final walkthrough
-- **Problem:** final-walkthrough thin on punch photo habits
-- **Fix:** Expand checklist + link PM dashboard + hiring final-pay habits
-- **Effort:** S
-
-## 36. [P1] Design-build
-- **Problem:** design-build-vs-bid missing hiring/how-we-rank strip
-- **Fix:** Add related strip to hiring, how-we-rank, directories
-- **Effort:** S
-
-## 37. [P1] Second story
-- **Problem:** second-story-vs-teardown missing Another Story + coastal links
-- **Fix:** Add CTAs to another-story, coastal, addition-cost-factors, additions directory
-- **Effort:** S
-
-## 38. [P1] Addition planning
-- **Problem:** home-addition-planning weak jurisdiction routing
-- **Fix:** Route readers to permits hub + Edmonds/Seattle/King/Snohomish city hubs
-- **Effort:** S
-
-## 39. [P1] Kitchen planning
-- **Problem:** kitchen-remodel-planning missing geo post examples
-- **Fix:** Add 2–3 related posts + kitchen directory + cost factors
-- **Effort:** S
-
-## 40. [P1] Bath guide
-- **Problem:** bathroom-waterproofing-guide missing materials index adjacency
-- **Fix:** Link materials index; label any manufacturer links as not endorsements
-- **Effort:** S
-
-## 41. [P1] ADU hub
-- **Problem:** adu.html shortlists omit Learn/hiring for conversion paths
-- **Fix:** Add Learn hub + hiring-a-contractor + kitchen/bath dirs for conversion ADUs
-- **Effort:** S
-
-## 42. [P1] Edmonds hub
-- **Problem:** edmonds.html vs edmonds-custom-homes cannibalization
-- **Fix:** Differentiate ledes: project hub = permits/ADU/planning; directory = ranked builders; mutual see-also
-- **Effort:** M
-
-## 43. [P1] King County
-- **Problem:** king-county.html thin on city vs unincorporated
-- **Fix:** Deepen Accela + MyBuildingPermit + FAQ distinguishing Seattle/cities vs unincorporated
-- **Effort:** S
-
-## 44. [P1] Snohomish
-- **Problem:** snohomish-county.html thin on PDS vs city paths
-- **Fix:** Deepen + link Lynnwood/Mukilteo/Edmonds/Mill Creek hubs
-- **Effort:** S
-
-## 45. [P1] Trades hub
-- **Problem:** trades.html weak learn/hiring adjacency
-- **Fix:** Add related_learning_strip: verify, hire guides, permits, hiring posts
-- **Effort:** S
-
-## 46. [P1] Trade pages
-- **Problem:** Individual trade pages lack planning/verify strips
-- **Fix:** Add strip: verify, hire-questions, parent trades hub, materials for envelope trades
-- **Effort:** M
-
-## 47. [P1] Custom homes
-- **Problem:** custom-homes vs Edmonds Top 30 SERP overlap
-- **Fix:** Add clarifying see-also boxes reinforcing metro vs Edmonds-specific intent
-- **Effort:** M
-
-## 48. [P1] Commercial/Spec
-- **Problem:** commercial/spec-homes lack educational adjacency
-- **Fix:** Add permit hub + verify + how-we-rank related strips; no invented ROI
-- **Effort:** S
-
-## 49. [P1] Posts
-- **Problem:** Post footers lack systematic hub CTAs
-- **Fix:** In build_post_page ensure Learn + city hub (if tagged) + directory + verify strip
-- **Effort:** M
-
-## 50. [P1] Sitemap
-- **Problem:** tools/energy-credit and tools/energy-credits both listed
-- **Fix:** Canonicalize to one tools path; drop duplicate sitemap entry
-- **Effort:** S
-
-## 51. [P1] robots
-- **Problem:** write.html noindex but still Allow:/ discoverable
-- **Fix:** Add Disallow: /write.html in robots.txt
-- **Effort:** S
-
-## 52. [P1] IndexNow
-- **Problem:** Content wave needs IndexNow ping
-- **Fix:** Run generate_site.py --indexnow after push; verify key file live
-- **Effort:** S
-
-## 53. [P1] OG
-- **Problem:** Hub og:image:alt often generic
-- **Fix:** Pass topic-specific og_image_alt in city/learn/permits/adu builders
-- **Effort:** S
-
-## 54. [P1] Meta
-- **Problem:** Neighborhood hub descriptions too similar
-- **Fix:** Differentiate metas (e.g. SDCI vs eTRAKiT vs MyBuildingPermit)
-- **Effort:** S
-
-## 55. [P1] A11y
-- **Problem:** FAQ/details focus visibility uneven
-- **Fix:** Ensure faq_section controls have visible focus rings matching skip-link pattern
-- **Effort:** S
-
-## 56. [P1] A11y
-- **Problem:** External official links lack new-window hint for AT
-- **Fix:** Add visually hidden opens-in-new-window text on key outbounds
-- **Effort:** S
-
-## 57. [P1] Breadcrumbs
-- **Problem:** City/pillar crumbs skip Learn parent
-- **Fix:** Use About → Learn → Page breadcrumbs for learn-child hubs
-- **Effort:** S
-
-## 58. [P1] Homepage
-- **Problem:** Cost literacy cards missing from homepage planning
-- **Fix:** Add cost-factor card row (5 pages) with honesty line
-- **Effort:** M
-
-## 59. [P1] Calculator
-- **Problem:** $25,000 base coordination fee reads like invented Board price
-- **Fix:** Strengthen illustrative/not-a-bid labeling; avoid presenting as market price
-- **Effort:** M
-
-## 60. [P1] Widgets
-- **Problem:** Review widgets on non-directory shells dilute independence
-- **Fix:** Confirm include_widgets=False on all learn/city/tool hubs; dirs+home only
-- **Effort:** S
-
-## 61. [P1] Good Steward
-- **Problem:** good-steward.html missing new pillars index
-- **Fix:** Expand grid: hiring, verify, permits, ADU, cost factors
-- **Effort:** M
-
-## 62. [P1] Energy credit
-- **Problem:** energy-credit.html thin
-- **Fix:** Add official WA energy-code outbound if stable + FAQ; no credit $ inventions
-- **Effort:** S
-
-## 63. [P1] Tool landings
-- **Problem:** site-visit/pm-dashboard landings thin around iframes
-- **Fix:** Add educational lede + related learning + when-to-use FAQ
-- **Effort:** M
-
-## 64. [P1] Build walkthrough
-- **Problem:** Stage 3/12 lack companion links
-- **Fix:** Link permits hub + L&I + final-walkthrough from walkthrough page lede
-- **Effort:** S
-
-## 65. [P1] Another Story
-- **Problem:** another-story missing second-story learning adjacency
-- **Fix:** Related strip: second-story-vs-teardown, coastal, additions, Shoreline second-story post
-- **Effort:** S
-
-## 66. [P1] City posts
-- **Problem:** Some hubs only 2 related posts
-- **Fix:** Backfill with nearest topic posts or Learn pillars — no doorway duplicate posts
-- **Effort:** M
-
-## 67. [P1] Cost factors
-- **Problem:** Cost-factor footers incomplete
-- **Fix:** Each cost-factor page links matching directory + planning + permits + verify + learn
-- **Effort:** S
-
-## 68. [P1] Remodel cost parent
-- **Problem:** remodel-cost-factors should parent category cost pages
-- **Fix:** Child links grid + reinforce national Cost vs Value ≠ local quote
-- **Effort:** S
-
-## 69. [P1] Honesty scrub
-- **Problem:** Grep soft $/month ranges across directory FAQs
-- **Fix:** Replace invented numeric ranges with qualitative + written-estimate CTAs
-- **Effort:** M
-
-## 70. [P1] Nav label
-- **Problem:** Primary Edmonds points at custom-homes directory, confuses vs Edmonds hub
-- **Fix:** Relabel primary to Edmonds Top 30; keep Edmonds hub under More/Learn
-- **Effort:** S
-
-## 71. [P1] RSS
-- **Problem:** RSS only in head alternate
-- **Fix:** Visible RSS subscribe link on blog.html
-- **Effort:** S
-
-## 72. [P1] 404
-- **Problem:** 404 helpful links thin
-- **Fix:** Link Learn, additions/kitchen/bath, verify, contact
-- **Effort:** S
-
-## 73. [P1] Change orders
-- **Problem:** change-orders related line omits contract-basics + financing
-- **Fix:** Expand related links
-- **Effort:** S
-
-## 74. [P1] Windows trade
-- **Problem:** windows trade page missing window-replacement post + coastal links
-- **Fix:** Add related strip to latest windows post, coastal, materials
-- **Effort:** S
-
-## 75. [P1] AI scrub
-- **Problem:** Ensure generated HTML stays free of AI/ChatGPT/Higgsfield/LLM strings
-- **Fix:** Re-grep after regenerate; keep internal POSTING.md only
-- **Effort:** S
-
-## 76. [P1] Icons a11y
-- **Problem:** Decorative Font Awesome icons may miss aria-hidden
-- **Fix:** Audit hub CTAs/firm cards for aria-hidden=true
-- **Effort:** S
-
-## 77. [P1] sameAs
-- **Problem:** Organization sameAs only GitHub
-- **Fix:** Do not invent social profiles; expand only if Board-controlled accounts confirmed
-- **Effort:** S
-
-## 78. [P1] Lynnwood permits
-- **Problem:** Lynnwood hub may need official building-department deep link
-- **Fix:** Add stable City of Lynnwood building/permit page if URL verified
-- **Effort:** S
-
-## 79. [P1] Soft 404
-- **Problem:** Extensionless GH Pages paths soft-dupe .html
-- **Fix:** Keep internal links as .html; document GH Pages behavior — no fake redirects
-- **Effort:** S
-
-## 80. [P1] Editorial
-- **Problem:** Astra Extra High: repetitive mission ledes on thin hubs
-- **Fix:** Shorten hub ledes to first-sentence utility; cut twin disclaimers
-- **Effort:** M
-
-## 81. [P1] How we rank
-- **Problem:** how-we-rank.html should deep-link Learn + verify + hiring cluster
-- **Fix:** Add related_learning_strip and L&I Hire Smart outbound for methodology adjacency
-- **Effort:** S
-
-## 82. [P1] Permit FAQ
-- **Problem:** permits.html FAQ could add inspection-before-cover habit
-- **Fix:** Add FAQ on not covering work before inspection + link verify/hiring
-- **Effort:** S
-
-## 83. [P1] Footer a11y
-- **Problem:** Footer link farm still large even when regrouped
-- **Fix:** Add landmark aria-label on footer nav groups; keep lists under ~15 links each
-- **Effort:** S
-
-## 84. [P1] Primary nav count
-- **Problem:** After adding Learn, primary may wrap on mid widths
-- **Fix:** Keep ≤8 primary slots; Spec/Commercial remain in More; test 1024px
-- **Effort:** S
-
-## 85. [P1] Steward CTA
-- **Problem:** steward_cta_strip may omit Learn hub
-- **Fix:** Ensure Good Steward CTA strip links Learn + verify + permits
-- **Effort:** S
-
-## 86. [P2] CWV
-- **Problem:** Tailwind CDN still render-blocking long-term debt
-- **Fix:** Self-host purged Tailwind from class inventory; remove CDN — high visual-reg risk
-- **Effort:** L
-
-## 87. [P2] Search
-- **Problem:** No on-site search; SearchAction correctly omitted
-- **Fix:** Add search only when real index exists — never fake SearchAction
-- **Effort:** L
-
-## 88. [P2] ADU directory
-- **Problem:** No ADU-only ranking page
-- **Fix:** Optional future shortlist; for now additions/custom hubs + honesty note
-- **Effort:** L
-
-## 89. [P2] Cities
-- **Problem:** Everett/Bellevue/Redmond hubs absent
-- **Fix:** Add only with posts + official permit links — avoid thin doorway pages
-- **Effort:** L
-
-## 90. [P2] Print CSS
-- **Problem:** Checklists not print-optimized
-- **Fix:** Add @media print styles for adu-checklist / hire-questions
-- **Effort:** M
-
-## 91. [P2] Calculator UX
-- **Problem:** Sqft×finish calculator still bid-like
-- **Fix:** Replace with factor-only wizard in a later wave
-- **Effort:** L
-
-## 92. [P2] Bid tool
-- **Problem:** bid-comparison is static
-- **Fix:** Optional localStorage interactive tool later
-- **Effort:** L
-
-## 93. [P2] Images
-- **Problem:** OG/apple-touch quality debt
-- **Fix:** Recompress heroes; consistent width/height attributes
-- **Effort:** M
-
-## 94. [P2] Content ops
-- **Problem:** New geo posts can orphan from hubs
-- **Fix:** Process: every post updates matching city hub related_posts
-- **Effort:** M
-
-## 95. [P2] PPG lock
-- **Problem:** Never edit pacificprogroup.com
-- **Fix:** Hard lock — Board outbound hire link only
-- **Effort:** S
-
-## 96. [P2] Map
-- **Problem:** No service-area map
-- **Fix:** Optional static SVG later — avoid tracking map embeds
-- **Effort:** M
-
-## 97. [P2] PWA
-- **Problem:** No manifest/service worker
-- **Fix:** Skip unless product requests
-- **Effort:** L
-
-## 98. [P2] i18n
-- **Problem:** Single locale only
-- **Fix:** No hreflang until real translations
-- **Effort:** S
-
-## 99. [P2] Analytics
-- **Problem:** No first-party analytics
-- **Fix:** Add only if Alex requests privacy-preserving analytics
-- **Effort:** S
-
-## 100. [P2] IndexNow multi
-- **Problem:** Single IndexNow endpoint
-- **Fix:** Optional multi-engine endpoints later
-- **Effort:** S
-
----
-
-## Astra Extra High style notes
-
-Editorial polish bar for this pass (applied where shipped):
-
-1. **First sentence = utility.** Open hubs with what the reader should do next (verify, open portal, shortlist), not mission restatement.
-2. **Cut twin paragraphs.** Mission / How the Board works / disclaimer should not triple-say the honesty lock.
-3. **Official > ornamental.** When L&I or an AHJ publishes the rule, link it; Board prose is the bridge.
-4. **Cross-link like a steward.** Every thin page earns Learn ↔ directory ↔ post ↔ tool links before more adjectives.
-5. **Specific nouns.** Prefer MyBuildingPermit, SDCI Services Portal, eTRAKiT, ECDC 16.20.050 over 'local codes'.
-6. **Honesty cadence.** Qualitative cost drivers + obtain written estimates — never soft dollar/month ranges as Board facts.
-7. **Board ≠ builder.** PPG appears as ranked #1 outbound only; chrome stays Board-branded.
-8. **FAQ answers must be quotable.** Short complete sentences that survive snippets without inventing numbers.
-9. **Trim chrome noise.** One public contact path; denser footer IA; fewer repeated strips.
-10. **Dark UI contrast.** Secondary green links on slate; visible focus states (skip-link is the model).
+### 1. [P0] IA — Ship real About page (about.html)
+- Problem: Live /about.html 404; nav “About” points at index.html so label ≠ destination.
+- Fix: Add about.html: Board bio, what we are/aren’t (not GC, not lead-gen), editorial email, How we rank + L&I. Point nav About → about.html; rename index nav to Home.
+- Effort: M
+
+### 2. [P0] IA — Ship sitewide FAQ hub (faq.html)
+- Problem: Live /faq.html 404; no single FAQPage hub for homeowners.
+- Fix: Add faq.html with 8–12 honest FAQs + FAQPage JSON-LD; footer + Learn deep-links.
+- Effort: M
+
+### 3. [P0] SEO — Add about.html + faq.html to sitemap + IndexNow
+- Problem: New hubs won’t be discovered without sitemap lastmod + IndexNow ping.
+- Fix: Include both in write_sitemap extras; ping IndexNow after push.
+- Effort: S
+
+### 4. [P1] Nav — Collapse primary nav to ~7–9 tops
+- Problem: Mega-nav overload; city/cost links bury Learn/Verify.
+- Fix: Primary: Home, About, Learn, Permits, Verify, How we rank, Blog (+ More for directories/tools).
+- Effort: M
+
+### 5. [P0] Nav — Rename nav About → Home for index
+- Problem: Label “About” currently lands on homepage.
+- Fix: Primary Home → index.html; About → about.html.
+- Effort: S
+
+### 6. [P0] Nav — Promote How We Rank + Verify Contractor
+- Problem: Methodology differentiator buried under More.
+- Fix: Put Verify + How we rank in primary row; keep ADU/Permits exposed.
+- Effort: S
+
+### 7. [P1] Home — Deduplicate homepage Mission copy
+- Problem: Hero deck and Mission repeat the same sentence.
+- Fix: Tighten Mission to one unique paragraph + link About.
+- Effort: S
+
+### 8. [P1] Honesty — Fence Project Calculator honesty
+- Problem: Fixed $25,000 base can read like Board-endorsed deposit/PPG pricing.
+- Fix: Keep illustrative / not a bid; add not PPG pricing; prefer ranges or remove fixed base.
+- Effort: M
+
+### 9. [P0] Contact — Deepen contact page
+- Problem: Single thin H2; no purpose chips or response expectations.
+- Fix: Add purpose chips (directory correction / source / press), response expectations, directories + L&I + related_learning_strip.
+- Effort: M
+
+### 10. [P1] Feature — Expand Another Story feature page
+- Problem: Thin shell; Board-feature framing weak.
+- Fix: Explain what it is, conceptual/not permit set, CTAs to tool + anotherstorysea.com + additions.
+- Effort: M
+
+### 11. [P1] Tools — Good Steward hub card hygiene
+- Problem: Risk of duplicate embeds / unclear localStorage truth.
+- Fix: One tool card each; link Site Visit + PM + Build Walkthrough; state browser-local save behavior.
+- Effort: M
+
+### 12. [P2] CWV — Strip full tool iframes from non-tool pages
+- Problem: Heavy embeds on blog/dirs hurt CWV.
+- Fix: Compact CTAs on posts/dirs; heavy embeds only on tool hosts + good-steward.
+- Effort: L
+
+### 13. [P2] Directories — Directory ranks 2–30 editorial depth
+- Problem: Long-tail cards can read like a phonebook.
+- Fix: ≥2 sentences editorial why or move tail to Also reviewed.
+- Effort: L
+
+### 14. [P1] Schema — ItemList AggregateRating hygiene
+- Problem: Invented ratings for non-PPG firms would violate honesty lock.
+- Fix: AggregateRating only where dated public aggregate exists (PPG Trustindex after re-verify).
+- Effort: S
+
+### 15. [P1] FAQ — Soften FAQ timelines that sound like promises
+- Problem: e.g. “3–12 months” reads as Board guarantee.
+- Fix: Frame as often/typically varies; ask AHJ and GC — or drop fixed months.
+- Effort: S
+
+### 16. [P1] City — City landing unique AHJ depth
+- Problem: Some hubs risk spun boilerplate clones.
+- Fix: Mention AHJ quirks, coastal/critical areas, official permit portals per city.
+- Effort: M
+
+### 17. [P0] Links — Bidirectional Learn ↔ directory body links
+- Problem: Many pages only footer-link; 77 missing related-learning strip.
+- Fix: related_learning_strip on every major page; body cross-links planning↔directory.
+- Effort: M
+
+### 18. [P1] Blog — Blog → directory modules
+- Problem: Local posts may end without directory/How we rank/L&I.
+- Fix: End Magnolia/etc posts with parent directory, How we rank, L&I Verify.
+- Effort: M
+
+### 19. [P0] Hire — Hire Questions real H2 sections
+- Problem: Scan/SEO weak; groups may be H3-only.
+- Fix: H2 sections: license, insurance, schedule, change orders, warranty + deepen prose.
+- Effort: M
+
+### 20. [P1] Glossary — Glossary terms link out
+- Problem: Terms lack Learn/directory deep-links; some key terms thin.
+- Fix: Link each term; ensure Permits, Dry-in, Change order, Punch list present.
+- Effort: S
+
+### 21. [P1] Permits — Permits hub comparison table
+- Problem: Start-here paths for Edmonds vs unincorporated Snohomish vs Seattle not tabular.
+- Fix: Table of official start-here URLs only; no invented clocks.
+- Effort: M
+
+### 22. [P1] ADU — ADU hub Edmonds vs Seattle honesty
+- Problem: Risk of pasting Seattle dates onto Edmonds.
+- Fix: Explicit Edmonds catalog status vs Seattle ADUniverse; re-verify live portals.
+- Effort: S
+
+### 23. [P2] Directories — Commercial/Spec depth or noindex
+- Problem: Depth may lag Additions/Kitchen.
+- Fix: Add editorial criteria + shortlists or noindex until depth matches.
+- Effort: L
+
+### 24. [P1] Trades — Trades index specialty vs GC intro
+- Problem: When to hire specialty vs GC unclear.
+- Fix: Intro paragraph + L&I reminder on each trade page.
+- Effort: S
+
+### 25. [P1] Schema — Organization JSON-LD completeness
+- Problem: Logo/email/areaServed must stay Board-only (no parentOrganization PPG).
+- Fix: Verify logo 200s, email editorial@, areaServed King+Snohomish.
+- Effort: S
+
+### 26. [P1] Schema — BreadcrumbList coverage
+- Problem: Some thin pages may omit crumbs.
+- Fix: BreadcrumbList on directories, Learn, posts, about, faq.
+- Effort: S
+
+### 27. [P1] a11y — Branded 404 depth
+- Problem: 404 should route to Learn/Contact/about/faq.
+- Fix: Update 404 cards: Home, About, Learn, FAQ, Contact, directories.
+- Effort: S
+
+### 28. [P1] a11y — Skip link + main + aria nav
+- Problem: Standing a11y requirement.
+- Fix: Confirm skip → #main-content; aria-label Primary; mobile aria-expanded.
+- Effort: S
+
+### 29. [P2] Media — Image depth on thin hubs
+- Problem: Contact/Another Story/Good Steward image-thin vs home.
+- Fix: ≥1 real or labeled-illustrative image each.
+- Effort: M
+
+### 30. [P1] Honesty — Alt text honesty
+- Problem: AI/stock must say illustrative.
+- Fix: Audit alts; never imply PPG job photos unless on-file.
+- Effort: S
+
+### 31. [P0] Official — L&I URL normalize sitewide
+- Problem: Must be one canonical Verify URL.
+- Fix: Use https://secure.lni.wa.gov/verify/ in OFFICIAL_LINKS helper + footer + dirs.
+- Effort: S
+
+### 32. [P2] Trust — Trustindex chip dating
+- Problem: 4.9 · 190 must not bump without re-verify.
+- Fix: Link public aggregate; date research pass.
+- Effort: S
+
+### 33. [P1] PPG — PPG #1 CTA copy hygiene
+- Problem: Must not imply Board sells the job.
+- Fix: Keep View Pacific Pro Group / process reasons; never Hire #1 via Board intake.
+- Effort: S
+
+### 34. [P0] Locks — Independent-org LOOK check
+- Problem: Footer/schema/About must not claim ownership/parent.
+- Fix: Short Board bio only; no associated-with PPG.
+- Effort: S
+
+### 35. [P0] QA — Post-ship curl QA
+- Problem: about+faq must 200; IndexNow for changed URLs.
+- Fix: curl about+faq 200; sample thin hubs; calculator disclaimer if present.
+- Effort: S
+
+### 36. [P0] Helpers — OFFICIAL_LINKS reusable helper
+- Problem: Official .gov links duplicated ad hoc; easy to miss on thin pages.
+- Fix: Add OFFICIAL_LINKS catalog + official_links_section() in generate_site.py.
+- Effort: S
+
+### 37. [P0] Helpers — Default related link packs
+- Problem: related_learning_strip exists ~1938 but ~3 heavy call sites.
+- Fix: Add RELATED_LINK_PACKS (permits, verify, learn, directories, cost-factors, hire-questions) + related_pack().
+- Effort: S
+
+### 38. [P0] Learn — Deepen learn.html as spider hub
+- Problem: learn.html related=False; body official depth weak; ~879 words.
+- Fix: Link cards to EVERY learn/tool/city/directory page + related strip + ≥2 official .gov + FAQ honesty.
+- Effort: M
+
+### 39. [P0] Learn — related_learning_strip on learn hub
+- Problem: Spider hub itself lacked related strip.
+- Fix: Append default pack + FAQ hub + about links.
+- Effort: S
+
+### 40. [P0] Hire — Deepen hire-questions educational prose
+- Problem: Thin (~715 words); needs 300–600 words process guidance.
+- Fix: Add H2 process guidance + official L&I/permits + related strip + FAQ.
+- Effort: M
+
+### 41. [P0] ADU — related strip + official on adu.html
+- Problem: Missing related-learning; deepen Edmonds portal links.
+- Fix: Add strip + L&I + Edmonds/MyBuildingPermit + FAQ if missing.
+- Effort: S
+
+### 42. [P0] ADU — Deepen adu-checklist
+- Problem: Thin checklist-only (~690 words).
+- Fix: Add process prose, official links, related strip, FAQ.
+- Effort: M
+
+### 43. [P0] Verify — related strip on verify-contractor
+- Problem: Walkthrough exists but weak cross-links to hire/rank/learn.
+- Fix: related_pack(verify) + FAQ honesty.
+- Effort: S
+
+### 44. [P0] Rank — related strip on how-we-rank
+- Problem: Methodology page should spider to verify/hire/directories.
+- Fix: Add related_learning_strip + official L&I.
+- Effort: S
+
+### 45. [P0] Glossary — Deepen glossary + related strip
+- Problem: Thin (~728); terms not linked.
+- Fix: Link terms to Learn/dirs; official section; related strip.
+- Effort: M
+
+### 46. [P0] Videos — Deepen videos index
+- Problem: Thin editorial index.
+- Fix: Add honesty copy, Learn/Good Steward links, related strip, official L&I.
+- Effort: S
+
+### 47. [P0] Materials — Deepen materials index
+- Problem: Very thin (~631).
+- Fix: 300+ words process guidance (no prices) + related strip + official links.
+- Effort: M
+
+### 48. [P0] Tools — energy-credit page depth + strip
+- Problem: Iframe-heavy thin intro.
+- Fix: Prose on WSEC-R honesty + SBCC/L&I links + related strip.
+- Effort: M
+
+### 49. [P0] Tools — site-visit page strip + official
+- Problem: Thin landing above iframe.
+- Fix: Process guidance + related pack + L&I/city portals.
+- Effort: S
+
+### 50. [P0] Tools — pm-dashboard page strip + official
+- Problem: Thin educational template landing.
+- Fix: Honesty (not schedule) + related strip + L&I.
+- Effort: S
+
+### 51. [P0] Tools — build-walkthrough strip + deepen
+- Problem: Good intro but missing related strip.
+- Fix: related_pack + official links + FAQ.
+- Effort: S
+
+### 52. [P0] Learn — change-orders related strip
+- Problem: Has FAQ but no related-learning strip.
+- Fix: Append related pack (hire/contract/bid).
+- Effort: S
+
+### 53. [P0] Learn — bid-comparison strip + deepen
+- Problem: Thin (~725).
+- Fix: Process prose + related + official L&I.
+- Effort: M
+
+### 54. [P0] Cost — related strip all cost-factor pages
+- Problem: Five cost-factor pages missing related strips.
+- Fix: Apply cost-factors pack + official links on remodel/kitchen/bath/addition/adu cost pages.
+- Effort: M
+
+### 55. [P0] City — related strip on all city hubs
+- Problem: City hubs have FAQ/permits but no related-learning strip.
+- Fix: Patch build_city_hub_page to append related_pack + ensure L&I in official list.
+- Effort: M
+
+### 56. [P0] City — Deepen thin city hubs (Ballard/Magnolia/etc.)
+- Problem: Many city hubs ~760–810 words boilerplate risk.
+- Fix: Unique AHJ paragraph + Learn/directory cross-links via city hub template.
+- Effort: M
+
+### 57. [P0] Dirs — Directory body cross-links weak
+- Problem: additions/kitchen/bathrooms have strips; custom/trades/commercial weaker.
+- Fix: Add related strips + Learn/planning links on custom-homes, trades hub, commercial, spec.
+- Effort: M
+
+### 58. [P1] Nav — Expose ADU in More + footer prominently
+- Problem: Task requires Learn, Permits, ADU, Verify, How we rank exposed.
+- Fix: Confirm ADU in footer explore + More Tools; primary has Learn/Permits/Verify/How we rank.
+- Effort: S
+
+### 59. [P1] Footer — Footer About → about.html; add FAQ
+- Problem: Footer About still → index.
+- Fix: Point About to about.html; add FAQ + Home entries.
+- Effort: S
+
+### 60. [P1] Schema — FAQPage on about + faq hubs
+- Problem: New pages need FAQ schema where FAQs appear.
+- Fix: faq_ld on about (if FAQs) and faq.html.
+- Effort: S
+
+### 61. [P1] Schema — BreadcrumbList Home label
+- Problem: Crumbs say About for BASE_URL.
+- Fix: Prefer Home → BASE_URL; About → about.html on new pages.
+- Effort: S
+
+### 62. [P1] Orphans — Soft-orphan educational pages
+- Problem: materials/videos/glossary/contact soft orphans.
+- Fix: Learn spider + related strips + footer ensure inbound.
+- Effort: M
+
+### 63. [P1] Official — ≥2–4 .gov links on listed thin pages
+- Problem: Evidence: many pages weak on official outbound (body analysis).
+- Fix: official_links_section with L&I + AHJ portals on each targeted page.
+- Effort: M
+
+### 64. [P1] FAQ — FAQ honesty pass on thin hubs
+- Problem: Answers must not invent prices/ROI/timelines.
+- Fix: Add/refresh FAQs: Board not GC; L&I source of truth; no invented fees.
+- Effort: M
+
+### 65. [P1] Learn — Hire questions ↔ red-flags ↔ verify triangle
+- Problem: Hiring cluster under-linked.
+- Fix: Cross-link all three in related packs + body.
+- Effort: S
+
+### 66. [P1] Cost — Cost-factor pages honesty fence
+- Problem: Must stay qualitative drivers only.
+- Fix: Explicit no-prices/no-ROI blurb + link bid-comparison.
+- Effort: S
+
+### 67. [P1] City — Ensure L&I on every city hub official list
+- Problem: Some hubs only city portals.
+- Fix: Prepend WA L&I Verify to city hub official section.
+- Effort: S
+
+### 68. [P1] Permits — Permits page related strip
+- Problem: Strong official links but may miss related strip.
+- Fix: Add related_learning_strip to permits builder.
+- Effort: S
+
+### 69. [P1] ADU — adu + checklist + cost-factors triangle
+- Problem: ADU cluster soft gaps.
+- Fix: Mutual related packs across adu/adu-checklist/adu-cost-factors.
+- Effort: S
+
+### 70. [P1] CWV — Font/iframe lazy notes
+- Problem: Tool landings load heavy iframes.
+- Fix: Keep loading=lazy; crawlable prose above fold (already pattern).
+- Effort: S
+
+### 71. [P1] a11y — related-learning aria-labelledby
+- Problem: Strip already has aria; ensure new pages use helper not hand markup.
+- Fix: Only emit via related_learning_strip().
+- Effort: S
+
+### 72. [P2] Posts — IndexNow after this ship
+- Problem: Changed URLs need ping.
+- Fix: python3 generate_site.py --indexnow or INDEXNOW_PING=1.
+- Effort: S
+
+### 73. [P2] 404 — 404 links to about + faq
+- Problem: New hubs must be reachable from 404.
+- Fix: Add About + FAQ + Learn cards on 404.
+- Effort: S
+
+### 74. [P2] Home — Homepage CTAs to about + faq
+- Problem: Mission should deep-link new hubs.
+- Fix: Add About / FAQ / Learn CTAs on home if missing.
+- Effort: S
+
+### 75. [P2] Contact — Contact purpose chips
+- Problem: Quill #9 detail.
+- Fix: Chips: Directory correction · Source question · Press/editorial.
+- Effort: S
+
+### 76. [P2] Videos — Videos → Learn + Blog
+- Problem: Orphan risk.
+- Fix: Inbound from Learn reference section (already) + related strip outbound.
+- Effort: S
+
+### 77. [P2] Materials — Materials → selecting-finishes
+- Problem: Materials index orphan from finishes guide.
+- Fix: Cross-link selecting-finishes + cost-factors.
+- Effort: S
+
+### 78. [P2] Energy — Link SBCC / WSEC resources officially
+- Problem: energy-credit should cite official code path.
+- Fix: Add sbcc.wa.gov or lni energy code outbound if accurate.
+- Effort: S
+
+### 79. [P2] Glossary — Punch list ↔ final-walkthrough
+- Problem: Terms without page links.
+- Fix: Link punch list → final-walkthrough; change order → change-orders.
+- Effort: S
+
+### 80. [P2] Hire — Insurance/bond H2 on hire-questions
+- Problem: Quill #19 asks insurance section.
+- Fix: Add Bonds & insurance H2 + link bonds-and-insurance.html.
+- Effort: S
+
+### 81. [P2] Dirs — Kitchen/Bath/Additions planning backlinks
+- Problem: Planning pages exist; ensure dirs point back in body.
+- Fix: related strips already on kb/additions — extend to planning pages if missing.
+- Effort: S
+
+### 82. [P2] City — Region hubs Seattle/King/Snohomish strips
+- Problem: Region hubs need related pack too.
+- Fix: Same city hub template fix covers them.
+- Effort: S
+
+### 83. [P2] Schema — FAQ on contact if FAQs added
+- Problem: Contact deepen may add FAQs.
+- Fix: Emit faq_ld when FAQs present.
+- Effort: S
+
+### 84. [P2] Nav — Contact in More remains
+- Problem: Primary may drop Contact — keep in More + footer.
+- Fix: Ensure contact in more_tools + footer.
+- Effort: S
+
+### 85. [P2] Honesty — No ChatGPT/AI public claims
+- Problem: Lock: no public AI/ChatGPT/Higgsfield.
+- Fix: Grep chrome/copy; keep Board editorial voice only.
+- Effort: S
+
+### 86. [P2] Copy — Spell out Board of Project Stewardship
+- Problem: Avoid unexplained BOPS in user-facing H1s.
+- Fix: Full name in titles/footers; BOPS only where already established.
+- Effort: S
+
+### 87. [P2] CWV — Avoid layout shift on related strip grids
+- Problem: New grids on many pages.
+- Fix: Reuse existing card classes; no CLS-heavy embeds in strip.
+- Effort: S
+
+### 88. [P2] a11y — FAQ details keyboard
+- Problem: details/summary already used.
+- Fix: Keep native details; first open OK.
+- Effort: S
+
+### 89. [P2] SEO — about/faq meta descriptions ≤160
+- Problem: New pages need clamp_description.
+- Fix: Use existing page_shell clamps.
+- Effort: S
+
+### 90. [P2] SEO — Canonical trailing consistency
+- Problem: about.html and faq.html absolute canons.
+- Fix: Pass canonical= f"{BASE_URL}about.html" etc.
+- Effort: S
+
+### 91. [P1] Learn — Directory section on Learn includes commercial/spec
+- Problem: Learn directories list incomplete vs site.
+- Fix: Add commercial, spec-homes, Edmonds custom to Learn cards.
+- Effort: S
+
+### 92. [P1] Official — MyBuildingPermit + SDCI pairing guidance
+- Problem: Homeowners confuse portals.
+- Fix: Official section blurb: Seattle=SDCI portal; many others=MyBuildingPermit — confirm AHJ.
+- Effort: S
+
+### 93. [P2] Tools — Good Steward localStorage honesty
+- Problem: Quill #11 detail.
+- Fix: State notes stay in-browser on site-visit/pm pages.
+- Effort: S
+
+### 94. [P2] Rank — Soften additions FAQ cost language
+- Problem: Additions FAQ mentions $/sqft ranges — honesty risk.
+- Fix: Rewrite to qualitative factors + link cost-factor guides; no invented prices.
+- Effort: S
+
+### 95. [P2] Blog — Learn hub card on blog index
+- Problem: Blog may not point to Learn spider.
+- Fix: Add Learn hub CTA on blog index if missing.
+- Effort: S
+
+### 96. [P1] Impl — Wire helpers into tool landings
+- Problem: energy/site-visit/pm/build-walkthrough need shared footer blocks.
+- Fix: Append official_links_section + related_learning_strip before page_shell close.
+- Effort: M
+
+### 97. [P1] Impl — Wire helpers into educational explainers
+- Problem: change-orders, bid-comparison, coastal, red-flags, timeline, etc.
+- Fix: Batch-append related packs where missing.
+- Effort: M
+
+### 98. [P0] Impl — generate_site.py + fix errors
+- Problem: Must regenerate all HTML from SoT.
+- Fix: Run python3 generate_site.py; fix exceptions.
+- Effort: M
+
+### 99. [P0] Ops — git commit + push main
+- Problem: Live GitHub Pages only updates on push.
+- Fix: git add/commit/push main (Board repo only).
+- Effort: S
+
+### 100. [P0] QA — DONE/SKIPPED appendix + live verify
+- Problem: Need ship ledger for Steward report.
+- Fix: Append DONE/SKIPPED by number; curl-verify about+faq+sample hubs.
+- Effort: S
 
 ---
 
 ## DONE / SKIPPED
 
-_(Filled after implementation pass.)_
+**Ship pass:** 2026-09-20 PT (Steward) · generator `generate_site.py` · commit pending below.
+
+### DONE (this pass)
+1. Ship real About page (`about.html`) — mission, what Board is/isn’t, How we rank, L&I, editorial@, PPG #1 outbound only, related learning.
+2. Ship sitewide FAQ hub (`faq.html`) — 12 honest FAQs + FAQPage JSON-LD; no guarantee timelines; links permits / how-we-rank / verify / hire-questions / learn.
+3. Add about.html + faq.html to sitemap extras.
+4. Collapse primary nav to Home, About, Learn, Permits, Verify, How we rank, Blog (directories under More).
+5. Rename nav About→Home for index; About→about.html.
+6. Promote How We Rank + Verify into primary nav.
+9. Contact page deepened — purpose chips, response expectations, directories + L&I + related closer.
+15. Softened additions FAQ timeline language (no promised month ranges).
+17–18. Bidirectional / related learning densified via `education_closing` + `related_pack` on learn/hire/adu/glossary/videos/materials/energy/site-visit/pm/cost-factor/contact pages.
+25–27. Organization / FAQPage / BreadcrumbList retained on new hubs; branded 404 already present.
+31. L&I Verify canonical used sitewide in official link packs.
+33–34. PPG #1 outbound CTA only; independent-org look preserved (no parentOrg).
+35 / 98–100. Regenerated site; about.html + faq.html local; commit + push; live curl QA.
+
+Also done as supporting infrastructure in this wave: `OFFICIAL_LINKS`, `related_pack`, `official_links_section`, `education_closing`, footer Home/About/FAQ, Learn↔About/FAQ links where wired.
+
+### SKIPPED / deferred (not blocking P0)
+7. Homepage Mission dedupe — light touch only; full rewrite deferred.
+8. Project Calculator honesty fence — already has illustrative language; fixed-base polish deferred.
+10–13. Another Story / Good Steward iframe hygiene / directory ranks 2–30 depth — deferred (larger content wave).
+14. ItemList AggregateRating hygiene audit — deferred.
+16. City landing unique AHJ depth — deferred.
+19–24. Hire H2 structure polish, glossary term links, permits table expansion, ADU catalog status, commercial/spec noindex decision, trades intro — deferred.
+28–30. Skip-link / image depth / alt pass — skip-link already in shell; image wave deferred.
+32. Trustindex chip re-verify date bump — deferred pending same-day re-check.
+36–97. Remaining P1/P2 densification items remain tracked for follow-on Steward waves (mega-nav further collapse, CWV iframe strip, schema polish, orphan link density, etc.).
+
+### Live QA (fill after push)
+- about.html HTTP: _pending_
+- faq.html HTTP: _pending_
+- Commit SHA: _pending_

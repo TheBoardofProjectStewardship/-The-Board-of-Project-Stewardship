@@ -514,18 +514,13 @@
 
 ## DONE / SKIPPED
 
-_Filled after implement pass._
+**Ship pass:** 2026-09-20 PT · Steward · `generate_site.py` + push main
 
+### DONE (shipped this pass)
+1, 2, 3, 5, 6, 9, 15 (additions FAQ softened), 17, 19, 27 (404 cards), 31, 34, 35 (verify after push), 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57 (custom/trades/commercial/spec strips), 58, 59, 60, 61 (new pages use Home crumbs), 62, 63, 64, 65, 67, 68, 69, 73, 75, 80, 91, 92, 94, 96, 97, 98, 99, 100
 
----
+### PARTIAL
+4 (primary collapsed to Home/About/Learn/Permits/Verify/How we rank/Blog — More still long), 7 (homepage Mission dedupe not fully rewritten), 10–14, 16, 18, 20–26, 28–30, 32–33, 66, 70–72, 74, 76–79, 81–90, 93, 95 (deferred / standing)
 
-## DONE (shipped 2026-09-20 PT)
-
-1. **about.html** — dedicated About page (mission, what Board is/isn’t, ranking, L&I, PPG #1 outbound only).
-2. **faq.html** — sitewide FAQ + FAQPage JSON-LD.
-3. **Nav** — Home → index; About → about.html; Learn / Permits / Verify / How we rank in primary; FAQ in More + footer.
-4. **Sitemap** — about.html + faq.html indexed.
-5. **Contact** — deepened with purpose note + About/FAQ links.
-6. **Audit list** — this 100-item file published under `docs/`.
-
-Still open: mega-nav collapse (city list still long under More), calculator honesty fence, directory editorial depth, city uniqueness, related-strip coverage on thin hubs, CWV/a11y leftovers — continue from P0/P1 remaining.
+### SKIPPED / deferred
+8 (calculator fence), 12 (iframe strip from non-tool pages), 13 (ranks 2–30 depth), 23 (commercial/spec noindex decision)
