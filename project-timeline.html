@@ -243,6 +243,26 @@
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://boardofprojectstewardship.com/project-timeline.html#webpage",
+  "url": "https://boardofprojectstewardship.com/project-timeline.html",
+  "name": "Project Timeline Phases | Board of Project Stewardship",
+  "description": "Typical remodel and addition project phases for North Sound homeowners \u2014 \u201coften\u201d ranges with an explicit non-guarantee disclaimer from the Board of Project",
+  "isPartOf": {
+    "@id": "https://boardofprojectstewardship.com/#website"
+  },
+  "about": {
+    "@id": "https://boardofprojectstewardship.com/#organization"
+  },
+  "inLanguage": "en-US",
+  "breadcrumb": {
+    "@id": "https://boardofprojectstewardship.com/project-timeline.html#breadcrumb"
+  }
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
     {
@@ -323,6 +343,14 @@
     </nav>
   </header>
 <main id="main-content">
+  <nav aria-label="Breadcrumb" class="border-b border-white/5 bg-black/20">
+    <div class="max-w-6xl mx-auto px-4 py-3">
+      <ol class="flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-widest text-slate-500">
+        <li><a href="https://boardofprojectstewardship.com/" class="hover:text-secondary transition">About</a></li><li aria-hidden="true" class="text-slate-600">/</li><li><a href="https://boardofprojectstewardship.com/good-steward.html" class="hover:text-secondary transition">Good Steward</a></li><li aria-hidden="true" class="text-slate-600">/</li><li class="text-slate-400" aria-current="page">Project timeline</li>
+      </ol>
+    </div>
+  </nav>
+
   <header class="max-w-6xl mx-auto px-4 pt-10 pb-6">
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward · Schedule literacy</p>
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Project timeline — typical phases</h1>
@@ -501,26 +529,6 @@
   })();
   </script>
 
-  <script>
-  (function () {
-    var BASE_FEE = 25000;
-    function calc() {
-      var sqEl = document.getElementById('calc-sqft');
-      var finishEl = document.getElementById('calc-finish');
-      var el = document.getElementById('calc-result');
-      if (!sqEl || !finishEl || !el) return;
-      var sq = parseFloat(sqEl.value) || 0;
-      var rate = parseFloat(finishEl.value) || 0;
-      var total = sq * rate + BASE_FEE;
-      if (!sq || !rate) { el.textContent = '—'; return; }
-      el.textContent = total.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
-    }
-    var sqft = document.getElementById('calc-sqft');
-    var finish = document.getElementById('calc-finish');
-    if (sqft) sqft.addEventListener('input', calc);
-    if (finish) finish.addEventListener('change', calc);
-    calc();
-  })();
-  </script>
+
 </body>
 </html>

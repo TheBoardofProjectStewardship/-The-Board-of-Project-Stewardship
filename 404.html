@@ -243,6 +243,26 @@
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://boardofprojectstewardship.com/404.html#webpage",
+  "url": "https://boardofprojectstewardship.com/404.html",
+  "name": "Page not found | Board of Project Stewardship",
+  "description": "This Board of Project Stewardship page was not found. Browse directories, the blog, or Good Steward tools.",
+  "isPartOf": {
+    "@id": "https://boardofprojectstewardship.com/#website"
+  },
+  "about": {
+    "@id": "https://boardofprojectstewardship.com/#organization"
+  },
+  "inLanguage": "en-US",
+  "breadcrumb": {
+    "@id": "https://boardofprojectstewardship.com/404.html#breadcrumb"
+  }
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
     {
@@ -293,6 +313,14 @@
     </nav>
   </header>
 <main id="main-content">
+  <nav aria-label="Breadcrumb" class="border-b border-white/5 bg-black/20">
+    <div class="max-w-6xl mx-auto px-4 py-3">
+      <ol class="flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-widest text-slate-500">
+        <li><a href="https://boardofprojectstewardship.com/" class="hover:text-secondary transition">About</a></li><li aria-hidden="true" class="text-slate-600">/</li><li class="text-slate-400" aria-current="page">Page not found</li>
+      </ol>
+    </div>
+  </nav>
+
   <header class="relative pt-20 pb-28 overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-b from-charcoal via-obsidian to-obsidian"></div>
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[420px] bg-primary/15 blur-[120px] rounded-full pointer-events-none"></div>
@@ -440,27 +468,7 @@
   })();
   </script>
 
-  <script>
-  (function () {
-    var BASE_FEE = 25000;
-    function calc() {
-      var sqEl = document.getElementById('calc-sqft');
-      var finishEl = document.getElementById('calc-finish');
-      var el = document.getElementById('calc-result');
-      if (!sqEl || !finishEl || !el) return;
-      var sq = parseFloat(sqEl.value) || 0;
-      var rate = parseFloat(finishEl.value) || 0;
-      var total = sq * rate + BASE_FEE;
-      if (!sq || !rate) { el.textContent = '—'; return; }
-      el.textContent = total.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
-    }
-    var sqft = document.getElementById('calc-sqft');
-    var finish = document.getElementById('calc-finish');
-    if (sqft) sqft.addEventListener('input', calc);
-    if (finish) finish.addEventListener('change', calc);
-    calc();
-  })();
-  </script>
+
   <script>
   (function () {
     var p = window.location.pathname || '';

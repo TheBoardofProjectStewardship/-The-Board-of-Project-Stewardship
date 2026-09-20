@@ -163,6 +163,12 @@ def clamp_description(desc: str, limit: int = 160) -> str:
     if len(desc) <= limit:
         return desc
     cut = desc[:limit].rsplit(" ", 1)[0].rstrip(" .,;:")
+    cut = re.sub(
+        r"(\s+(?:and|or|for|to|with|by|of|in|on|at|from|is|are|the|a|an|vs|&|—|–|-))+$",
+        "",
+        cut,
+        flags=re.I,
+    ).rstrip(" |-,;:—–")
     return cut if cut else desc[:limit]
 
 
@@ -2715,7 +2721,7 @@ def build_additions(additions: list[dict]) -> str:
     ]
     return page_shell(
         "Top 30 Addition Contractors Edmonds | Board of Project Stewardship",
-        "Top 30 verified home addition contractors in Edmonds and King & Snohomish Counties, WA. Editorial ranking by the Board — updated 2026. Pacific Pro Group is Board directory #1.",
+        "Top 30 verified home addition contractors in Edmonds and King & Snohomish Counties, WA. Editorial ranking by the Board, updated 2026.",
         "additions",
         body,
         ld,
@@ -2730,9 +2736,9 @@ def build_kb_page(kind: str, firms: list[dict]) -> str:
     slug = "kitchen" if is_kitchen else "bathrooms"
     title = "Kitchen Remodel Contractors Edmonds | Board of Project Stewardship" if is_kitchen else "Bathroom Remodel Contractors Edmonds | Board of Project Stewardship"
     desc = (
-        "Editorial kitchen remodel ranking for Edmonds and King & Snohomish Counties, WA. Cabinets, layout, and permit-aware design-build shortlist. Pacific Pro Group is Board directory #1."
+        "Editorial kitchen remodel ranking for Edmonds and King & Snohomish Counties, WA. Cabinets, layout, and permit-aware shortlist, updated 2026."
         if is_kitchen
-        else "Editorial bathroom remodel ranking for Edmonds and King & Snohomish Counties, WA. Waterproofing, wet rooms, and local bath specialists. Pacific Pro Group is Board directory #1."
+        else "Editorial bathroom remodel ranking for Edmonds and King & Snohomish Counties, WA. Waterproofing, wet rooms, and local bath shortlist, updated 2026."
     )
     faqs = [
         (
@@ -2872,8 +2878,7 @@ def build_custom_homes(firms: list[dict]) -> str:
     slug = "custom-homes"
     title = "Custom Home Builders in Edmonds | Board of Project Stewardship"
     desc = (
-        "Editorial ranking of top custom home builders serving Edmonds and King & Snohomish Counties, WA. "
-        "Pacific Pro Group is Board directory #1 with 4.9 from 190 Trustindex reviews."
+        "Editorial ranking of custom home builders serving Edmonds and King & Snohomish Counties, WA. Independent Board shortlist, updated 2026."
     )
     faqs = [
         (
@@ -3365,8 +3370,7 @@ def build_commercial(firms: list[dict]) -> str:
     slug = "commercial"
     title = "Top Commercial Contractors in Edmonds | Board of Project Stewardship"
     desc = (
-        "Editorial ranking of commercial general contractors and tenant-improvement specialists serving "
-        "Edmonds and King & Snohomish Counties, WA. Updated 2026 by The Board of Project Stewardship."
+        "Editorial ranking of commercial GCs and tenant-improvement contractors serving Edmonds and King & Snohomish Counties, WA. Updated 2026."
     )
     faqs = [
         (
@@ -3480,8 +3484,7 @@ def build_spec_homes(firms: list[dict]) -> str:
     slug = "spec-homes"
     title = "Spec & Production Home Builders in Edmonds | Board of Project Stewardship"
     desc = (
-        "Editorial directory of speculative and production home builders active in King & Snohomish Counties, WA — "
-        "including communities near Edmonds. Honest hybrid notes where firms are not pure production builders."
+        "Editorial directory of production and spec home builders active in King & Snohomish Counties, WA, including communities near Edmonds."
     )
     faqs = [
         (
@@ -4068,11 +4071,12 @@ def build_blog_index(posts: list[dict]) -> str:
 
 
 def _post_location_context(post: dict) -> tuple[str, str, list[tuple[str, str]], tuple[str, str] | None]:
-    text = " ".join(
+    meta_text = " ".join(
         str(post.get(key, ""))
-        for key in ("slug", "title", "description", "category", "body_md")
+        for key in ("slug", "title", "description", "category")
     ).lower()
-    text = text.replace("–", "-").replace("—", "-")
+    meta_text = meta_text.replace("–", "-").replace("—", "-")
+    body_text = str(post.get("body_md", "")).lower().replace("–", "-").replace("—", "-")
     location_rules = [
         (
             ("ballard", "magnolia", "queen-anne", "greenwood", "phinney-ridge", "seattle"),
@@ -4214,7 +4218,10 @@ def _post_location_context(post: dict) -> tuple[str, str, list[tuple[str, str]],
         ),
     ]
     for needles, payload in location_rules:
-        if any(needle in text for needle in needles):
+        if any(needle in meta_text for needle in needles):
+            return payload
+    for needles, payload in location_rules:
+        if any(needle in body_text for needle in needles):
             return payload
     return (
         "Washington",
@@ -4229,12 +4236,40 @@ def _post_location_context(post: dict) -> tuple[str, str, list[tuple[str, str]],
 
 
 def _post_board_links(post: dict, city_hub: tuple[str, str] | None) -> list[tuple[str, str]]:
-    text = " ".join(
+    meta_text = " ".join(
         str(post.get(key, ""))
-        for key in ("slug", "title", "description", "category", "body_md")
+        for key in ("slug", "title", "description", "category")
     ).lower()
-    text = text.replace("–", "-").replace("—", "-")
-    if "adu" in text:
+    meta_text = meta_text.replace("–", "-").replace("—", "-")
+    body_text = str(post.get("body_md", "")).lower().replace("–", "-").replace("—", "-")
+
+    def has_any(text: str, tokens: tuple[str, ...]) -> bool:
+        return any(token in text for token in tokens)
+
+    topic = "general"
+    if "adu" in meta_text:
+        topic = "adu"
+    elif has_any(meta_text, ("addition", "second-story", "second story", "teardown")):
+        topic = "addition"
+    elif has_any(meta_text, ("bath", "shower", "waterproof")):
+        topic = "bath"
+    elif "kitchen" in meta_text:
+        topic = "kitchen"
+    elif has_any(meta_text, ("tile", "plumb", "electrical", "electrician", "hvac", "window", "roof", "floor", "siding", "concrete", "framing", "excavation", "insulation", "drywall", "paint")):
+        topic = "trade"
+    else:
+        if "adu" in body_text:
+            topic = "adu"
+        elif has_any(body_text, ("addition", "second-story", "second story", "teardown")):
+            topic = "addition"
+        elif has_any(body_text, ("bath", "shower", "waterproof")):
+            topic = "bath"
+        elif "kitchen" in body_text:
+            topic = "kitchen"
+        elif has_any(body_text, ("tile", "plumb", "electrical", "electrician", "hvac", "window", "roof", "floor", "siding", "concrete", "framing", "excavation", "insulation", "drywall", "paint")):
+            topic = "trade"
+
+    if topic == "adu":
         links = [
             ("Edmonds ADU hub", "../adu.html"),
             ("ADU readiness checklist", "../adu-checklist.html"),
@@ -4242,7 +4277,7 @@ def _post_board_links(post: dict, city_hub: tuple[str, str] | None) -> list[tupl
             ("Permit jurisdiction hub", "../permits.html"),
             ("Home additions directory", "../additions.html"),
         ]
-    elif any(token in text for token in ("addition", "second-story", "second story", "teardown")):
+    elif topic == "addition":
         links = [
             ("Home additions directory", "../additions.html"),
             ("Home addition planning", "../home-addition-planning.html"),
@@ -4250,7 +4285,7 @@ def _post_board_links(post: dict, city_hub: tuple[str, str] | None) -> list[tupl
             ("Second story vs teardown", "../second-story-vs-teardown.html"),
             ("Project timeline phases", "../project-timeline.html"),
         ]
-    elif any(token in text for token in ("bath", "shower", "waterproof")):
+    elif topic == "bath":
         links = [
             ("Bathroom remodelers", "../bathrooms.html"),
             ("Bathroom waterproofing guide", "../bathroom-waterproofing-guide.html"),
@@ -4258,7 +4293,7 @@ def _post_board_links(post: dict, city_hub: tuple[str, str] | None) -> list[tupl
             ("Coastal waterproofing checklist", "../coastal-waterproofing.html"),
             ("Bid comparison checklist", "../bid-comparison.html"),
         ]
-    elif "kitchen" in text:
+    elif topic == "kitchen":
         links = [
             ("Kitchen remodelers", "../kitchen.html"),
             ("Kitchen remodel planning", "../kitchen-remodel-planning.html"),
@@ -4266,10 +4301,7 @@ def _post_board_links(post: dict, city_hub: tuple[str, str] | None) -> list[tupl
             ("Bid comparison checklist", "../bid-comparison.html"),
             ("Change orders & allowances", "../change-orders.html"),
         ]
-    elif any(
-        token in text
-        for token in ("tile", "plumb", "electrical", "electrician", "hvac", "window", "roof", "floor", "siding", "concrete", "framing", "excavation", "insulation", "drywall", "paint")
-    ):
+    elif topic == "trade":
         links = [
             ("Trades hub", "../trades.html"),
             ("Hiring a contractor", "../hiring-a-contractor.html"),

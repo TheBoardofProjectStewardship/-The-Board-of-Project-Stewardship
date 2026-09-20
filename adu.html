@@ -243,6 +243,26 @@
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://boardofprojectstewardship.com/adu.html#webpage",
+  "url": "https://boardofprojectstewardship.com/adu.html",
+  "name": "Edmonds ADU Planning Hub | Board of Project Stewardship",
+  "description": "Edmonds ADU planning hub: ECDC 16.20.050, city handouts, MyBuildingPermit paths, and Board shortlists. Official links only \u2014 no invented fees.",
+  "isPartOf": {
+    "@id": "https://boardofprojectstewardship.com/#website"
+  },
+  "about": {
+    "@id": "https://boardofprojectstewardship.com/#organization"
+  },
+  "inLanguage": "en-US",
+  "breadcrumb": {
+    "@id": "https://boardofprojectstewardship.com/adu.html#breadcrumb"
+  }
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
     {
@@ -341,6 +361,14 @@
     </nav>
   </header>
 <main id="main-content">
+  <nav aria-label="Breadcrumb" class="border-b border-white/5 bg-black/20">
+    <div class="max-w-6xl mx-auto px-4 py-3">
+      <ol class="flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-widest text-slate-500">
+        <li><a href="https://boardofprojectstewardship.com/" class="hover:text-secondary transition">About</a></li><li aria-hidden="true" class="text-slate-600">/</li><li class="text-slate-400" aria-current="page">Edmonds ADU</li>
+      </ol>
+    </div>
+  </nav>
+
   <header class="max-w-6xl mx-auto px-4 pt-10 pb-6">
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Edmonds-first · Updated 2026</p>
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Edmonds ADU planning hub</h1>
@@ -523,26 +551,6 @@
   })();
   </script>
 
-  <script>
-  (function () {
-    var BASE_FEE = 25000;
-    function calc() {
-      var sqEl = document.getElementById('calc-sqft');
-      var finishEl = document.getElementById('calc-finish');
-      var el = document.getElementById('calc-result');
-      if (!sqEl || !finishEl || !el) return;
-      var sq = parseFloat(sqEl.value) || 0;
-      var rate = parseFloat(finishEl.value) || 0;
-      var total = sq * rate + BASE_FEE;
-      if (!sq || !rate) { el.textContent = '—'; return; }
-      el.textContent = total.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
-    }
-    var sqft = document.getElementById('calc-sqft');
-    var finish = document.getElementById('calc-finish');
-    if (sqft) sqft.addEventListener('input', calc);
-    if (finish) finish.addEventListener('change', calc);
-    calc();
-  })();
-  </script>
+
 </body>
 </html>
