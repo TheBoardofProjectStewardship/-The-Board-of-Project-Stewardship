@@ -3264,7 +3264,7 @@ def md_to_html(md: str) -> str:
                 '<div class="tool-embed my-8 border border-white/10 rounded-2xl p-4 sm:p-5 bg-white/[0.03]">'
                 '<p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>'
                 '<h2 class="text-xl font-black text-white tracking-tight mb-2">WSEC-R prescriptive credits</h2>'
-                '<p class="text-slate-400 text-sm font-light mb-4">Published federal §25C caps and PSE / Snohomish PUD rebate schedules — estimates only, not tax advice. '
+                '<p class="text-slate-400 text-sm font-light mb-4">WSEC-R 2021 single-family / townhouse prescriptive energy credit worksheet. '
                 f'<a class="text-secondary hover:underline" href="{land}">Open full Board landing</a>.</p>'
                 f'<iframe src="{src}" title="WSEC-R prescriptive credits" loading="lazy" '
                 'style="display:block;width:100%;height:1180px;border:0;border-radius:18px;background:#f8fafc;"></iframe>'
@@ -3838,7 +3838,7 @@ def build_energy_credit_page() -> str:
     body = f"""  <header class="max-w-6xl mx-auto px-4 pt-10 pb-2">
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">WSEC-R prescriptive credits</h1>
-    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Estimate worksheet using published IRS §25C window caps and current PSE / Snohomish PUD rebate pages. Built for Edmonds / King &amp; Snohomish homeowners comparing window replacement incentives.</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Interactive worksheet for the WSEC-R 2021 single-family / townhouse prescriptive path — dwelling size, Table R406.2 fuel normalization, and Table R406.3 energy credits.</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">WSEC-R 2021 single-family prescriptive path credit worksheet (fuel normalization + Table R406.3). When you hire, shortlist from Board directories — Board #1: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a>.</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Also: <a href="{public_tool_href('site-visit')}" class="text-secondary hover:underline">Site Visit Checklist</a> · <a href="./posts/2026-09-20-window-replacement-edmonds-coastal-wa.html" class="text-secondary hover:underline">Edmonds window replacement guide</a>.</p>
   </header>
