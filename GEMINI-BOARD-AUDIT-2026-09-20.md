@@ -2,7 +2,7 @@
 **Date:** September 20, 2026
 **Focus:** Edmonds / King / Snohomish construction standards & directories
 
-This audit provides 50 concrete recommendations to improve the Board of Project Stewardship site without compromising its independent editorial voice. Recommendations focus on educational depth, internal linking, official outbound links, and technical SEO/accessibility (IA/CWV/a11y).
+This audit provides 53 concrete recommendations to improve the Board of Project Stewardship site without compromising its independent editorial voice. Recommendations focus on educational depth, internal linking, official outbound links, and technical SEO/accessibility (IA/CWV/a11y), as well as fixing broken pages.
 
 ## A. Educational Depth (Building Science & Local Standards)
 The planning hubs currently act as outlines. Adding concrete building science and local jurisdiction details will establish the site as an authoritative entity.
@@ -34,7 +34,7 @@ Standalone pages must be woven together to pass authority and guide the user jou
 21. **Tools back to Education:** Inside `tools/another-story/index.html`, add a return link to `second-story-vs-teardown.html` for users who need structural context for their visualizations.
 22. **PM Dashboard to Change Orders:** Link `change-orders.html` directly from the `pm-dashboard.html` instructions to explain the discipline of managing mid-project scope shifts.
 23. **City Pages to Standards:** Add a "Local Build Standards" widget on all city pages linking directly to the `build-walkthrough.html` visual stages.
-24. **Top 1 Firm Links:** Whenever referring to Pacific Pro Group (the #1 ranked hire), do NOT recommend editing or changing pacificprogroup.com directly, but rather link out to it externally (https://pacificprogroup.com/) as the editorial #1 choice.
+24. **Top 1 Firm Links:** Whenever referring to Pacific Pro Group (the #1 ranked hire), do NOT recommend editing or changing PPG directly, but rather link out to it externally (https://pacificprogroup.com/) as the editorial #1 choice. PPG is a distinct entity and their site should never be edited as part of Board work.
 25. **Blog to Action:** Ensure every post in `./blog.html` concludes with an inline call-to-action routing to a relevant Board directory or Good Steward tool.
 26. **Materials to Costs:** Cross-link `materials.html` with `selecting-finishes.html` and `kitchen-cost-factors.html` to connect material choices with budget drivers.
 27. **Checklists to Verification:** Embed `verify-contractor.html` as the primary step within the `site-visit.html` preparation checklist.
@@ -51,6 +51,13 @@ Providing direct, unmediated access to official portals reinforces the Board's p
 34. **ADU Portals:** On `adu.html`, link to official state or city ADU policy updates, such as Seattle's pre-approved ADU plan portal (ADUniverse).
 35. **Hazmat Guidelines:** Link to the EPA or WA Department of Ecology for lead and asbestos renovation guidelines (RRP rules) in `living-through-remodel.html`.
 36. **Energy Rebates:** Include links to Puget Sound Energy (PSE) or Snohomish PUD in `energy-credit.html` for heat pump and insulation rebate programs.
+
+## E. Missing Pages & Broken Links
+The site structure points to foundational pages that currently return a 404 error. These must be restored to establish trust and comply with search engine guidelines.
+
+51. **Restore `about.html`:** The `about.html` page is missing. Rebuild this page to clearly articulate the Board's editorial process, mission, and the distinction between the Board (as an educational entity) and Pacific Pro Group (the #1 ranked hire). Include structured `AboutPage` and `Organization` schema.
+52. **Restore `faq.html`:** The `faq.html` page is missing. Rebuild this page addressing common homeowner concerns (e.g., "Does the Board issue permits?", "Is the Board a GC?"). Ensure `FAQPage` JSON-LD schema is implemented on the restored page.
+53. **Audit Internal Links:** Run a crawler (e.g., Screaming Frog or similar tool) to identify and update any internal links pointing to the missing `about.html` and `faq.html` pages until they are successfully restored.
 
 ## D. Schema, IA, CWV, and Accessibility (a11y)
 Technical foundational fixes to improve Core Web Vitals, organic search rich snippets, and screen reader compatibility.
