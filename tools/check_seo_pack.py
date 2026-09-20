@@ -2,6 +2,7 @@
 """Grep-style checks for BOPS chrome + SEO lock (Chief of Staff rules)."""
 from __future__ import annotations
 
+import html
 import re
 import sys
 from pathlib import Path
@@ -31,10 +32,35 @@ def main() -> None:
         fail("generator must not mention admin@")
     if EDITORIAL not in GEN:
         fail("generator missing editorial@ public contact")
+    if re.search(r'"alternateName"\s*:', GEN):
+        fail("generator must not emit Organization alternateName (no BOPS alias)")
+    if re.search(r"[>|]\s*BOPS\b", GEN) or re.search(r">BOPS<", GEN):
+        fail("generator still emits public-facing BOPS chrome")
 
     html_files = list(ROOT.glob("*.html")) + list((ROOT / "posts").glob("*.html"))
     if not html_files:
         fail("no generated HTML found")
+
+    bops_token = re.compile(r"(?<![A-Za-z0-9])BOPS(?![A-Za-z0-9])")
+    for path in html_files:
+        text = path.read_text(encoding="utf-8")
+        cleaned = re.sub(r"<!--.*?-->", "", text, flags=re.S)
+        cleaned = cleaned.replace("prose-bops", "").replace("bops-tool-seo", "")
+        if bops_token.search(cleaned):
+            fail(f"{path.name} still contains public-facing BOPS")
+        if '"alternateName"' in text:
+            fail(f"{path.name} still emits JSON-LD alternateName")
+        titles = (
+            re.findall(r"<title>([^<]+)</title>", text)
+            + re.findall(r'property="og:title" content="([^"]+)"', text)
+            + re.findall(r'name="twitter:title" content="([^"]+)"', text)
+        )
+        for raw in titles:
+            title = html.unescape(raw)
+            if bops_token.search(title):
+                fail(f"{path.name} title still uses BOPS: {title}")
+            if re.search(r"Board of(?! Project Stewardship)", title):
+                fail(f"{path.name} title chops the Board name: {title}")
 
     sample = (ROOT / "index.html").read_text(encoding="utf-8")
     for needle in (
