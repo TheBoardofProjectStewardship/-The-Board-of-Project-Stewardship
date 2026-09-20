@@ -2,7 +2,8 @@
 """Generate The Board of Project Stewardship multi-page static site.
 
 Schema hygiene (fix #28): emit Organization, WebSite, ItemList, FAQPage,
-Article, BreadcrumbList, and ImageObject only. Never emit
+Article, BreadcrumbList, ImageObject, and HowTo (steps must match visible
+on-page steps; never invent totalTime/estimatedCost/prices). Never emit
 NewsMediaOrganization, LocalBusiness, parentOrganization, or a WebSite
 SearchAction (no on-site search URL — skip fix #21 until search exists).
 
@@ -891,8 +892,14 @@ def nav_html(active: str = "", prefix: str = "") -> str:
         ("bothell", href("bothell.html"), "Bothell"),
         ("queen-anne", href("queen-anne.html"), "Queen Anne"),
         ("phinney-ridge", href("phinney-ridge.html"), "Phinney Ridge"),
+        ("greenwood", href("greenwood.html"), "Greenwood"),
+        ("lake-forest-park", href("lake-forest-park.html"), "Lake Forest Park"),
+        ("mountlake-terrace", href("mountlake-terrace.html"), "Mountlake Terrace"),
+        ("mill-creek", href("mill-creek.html"), "Mill Creek"),
+        ("edmonds-hub", href("edmonds.html"), "Edmonds hub"),
     ]
     more_tools = [
+        ("learn", href("learn.html"), "Learn hub"),
         ("steward", href("good-steward.html"), "Good Steward"),
         ("permits", href("permits.html"), "Permit Hub"),
         ("adu", href("adu.html"), "Edmonds ADU"),
@@ -1000,6 +1007,12 @@ def footer_html(prefix: str = "./", active: str = "") -> str:
         ("bothell", f"{prefix}bothell.html", "Bothell hub"),
         ("queen-anne", f"{prefix}queen-anne.html", "Queen Anne hub"),
         ("phinney-ridge", f"{prefix}phinney-ridge.html", "Phinney Ridge hub"),
+        ("greenwood", f"{prefix}greenwood.html", "Greenwood hub"),
+        ("lake-forest-park", f"{prefix}lake-forest-park.html", "Lake Forest Park hub"),
+        ("mountlake-terrace", f"{prefix}mountlake-terrace.html", "Mountlake Terrace hub"),
+        ("mill-creek", f"{prefix}mill-creek.html", "Mill Creek hub"),
+        ("edmonds-hub", f"{prefix}edmonds.html", "Edmonds project hub"),
+        ("learn", f"{prefix}learn.html", "Learn hub"),
         ("permits", f"{prefix}permits.html", "Permit hub"),
         ("adu", f"{prefix}adu.html", "Edmonds ADU"),
         ("verify-contractor", f"{prefix}verify-contractor.html", "Verify contractor"),
@@ -1831,6 +1844,56 @@ def faq_ld(faqs: list[tuple[str, str]]) -> dict:
     }
 
 
+def howto_ld(
+    name: str,
+    description: str,
+    steps: list[tuple[str, str]],
+    page_url: str,
+) -> dict:
+    """HowTo JSON-LD. steps = [(name, text), ...]. No times/prices/costs."""
+    return {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": name,
+        "description": description,
+        "url": page_url,
+        "step": [
+            {
+                "@type": "HowToStep",
+                "position": i,
+                "name": title,
+                "text": body,
+            }
+            for i, (title, body) in enumerate(steps, 1)
+        ],
+    }
+
+
+def related_learning_strip(
+    links: list[tuple[str, str]],
+    heading: str = "Related learning",
+    blurb: str = "Board educational hubs — habits and verification, not invented prices or ROI.",
+) -> str:
+    cards = "".join(
+        f'''      <a href="{href}" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover block no-underline">
+        <h3 class="text-base font-black text-white mb-1">{esc(label)}</h3>
+        <p class="text-xs text-secondary font-bold uppercase tracking-widest">Open guide -></p>
+      </a>
+'''
+        for label, href in links
+    )
+    return f'''    <section class="mb-14" id="related-learning" aria-labelledby="related-learning-h">
+      <div class="mb-6 border-b border-white/10 pb-4">
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Learn</span>
+        <h2 id="related-learning-h" class="text-2xl font-black text-white tracking-tight">{esc(heading)}</h2>
+        <p class="text-slate-400 font-light mt-2 max-w-3xl text-sm leading-relaxed">{esc(blurb)} <a href="./learn.html" class="text-secondary hover:underline">All learning hubs</a>.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+{cards}      </div>
+    </section>
+'''
+
+
 def faq_section(faqs: list[tuple[str, str]], heading: str) -> str:
     blocks = []
     for i, (q, a) in enumerate(faqs):
@@ -2381,7 +2444,8 @@ def build_about() -> str:
           <p class="text-sm text-slate-400 font-light leading-relaxed"><a href="./bid-comparison.html" class="text-secondary hover:underline">Bid checklist</a> · <a href="./red-flags-hiring.html" class="text-secondary hover:underline">red flags</a> · <a href="./project-timeline.html" class="text-secondary hover:underline">timeline phases</a>.</p>
         </div>
       </div>
-      <p class="text-sm text-slate-500 font-light">City hubs: <a href="./mukilteo.html" class="text-secondary hover:underline">Mukilteo</a> · <a href="./kirkland.html" class="text-secondary hover:underline">Kirkland</a> · <a href="./bothell.html" class="text-secondary hover:underline">Bothell</a> · <a href="./queen-anne.html" class="text-secondary hover:underline">Queen Anne</a> · <a href="./phinney-ridge.html" class="text-secondary hover:underline">Phinney Ridge</a> · <a href="./shoreline.html" class="text-secondary hover:underline">Shoreline</a> · <a href="./lynnwood.html" class="text-secondary hover:underline">Lynnwood</a> · <a href="./ballard.html" class="text-secondary hover:underline">Ballard</a> · <a href="./magnolia.html" class="text-secondary hover:underline">Magnolia</a></p>
+      <p class="text-sm text-slate-400 font-light mb-3"><a href="./learn.html" class="text-secondary hover:underline font-semibold">Browse the full Learn hub</a> — permits, ADU, verify, checklists, pillars, glossary, videos, and Good Steward tools.</p>
+      <p class="text-sm text-slate-500 font-light">City hubs: <a href="./edmonds.html" class="text-secondary hover:underline">Edmonds</a> · <a href="./greenwood.html" class="text-secondary hover:underline">Greenwood</a> · <a href="./lake-forest-park.html" class="text-secondary hover:underline">Lake Forest Park</a> · <a href="./mountlake-terrace.html" class="text-secondary hover:underline">Mountlake Terrace</a> · <a href="./mill-creek.html" class="text-secondary hover:underline">Mill Creek</a> · <a href="./mukilteo.html" class="text-secondary hover:underline">Mukilteo</a> · <a href="./kirkland.html" class="text-secondary hover:underline">Kirkland</a> · <a href="./bothell.html" class="text-secondary hover:underline">Bothell</a> · <a href="./queen-anne.html" class="text-secondary hover:underline">Queen Anne</a> · <a href="./phinney-ridge.html" class="text-secondary hover:underline">Phinney Ridge</a> · <a href="./shoreline.html" class="text-secondary hover:underline">Shoreline</a> · <a href="./lynnwood.html" class="text-secondary hover:underline">Lynnwood</a> · <a href="./ballard.html" class="text-secondary hover:underline">Ballard</a> · <a href="./magnolia.html" class="text-secondary hover:underline">Magnolia</a></p>
     </section>
 
     <section class="bg-charcoal rounded-xl p-8 md:p-10 border border-primary/25 mb-14 relative overflow-hidden">
@@ -2492,6 +2556,14 @@ def build_additions(additions: list[dict]) -> str:
         </div>
       </div>
     </section>
+{related_learning_strip([
+            ("Home addition planning", "./home-addition-planning.html"),
+            ("Second story vs teardown", "./second-story-vs-teardown.html"),
+            ("Hiring a contractor", "./hiring-a-contractor.html"),
+            ("Permit hub", "./permits.html"),
+            ("Project timeline", "./project-timeline.html"),
+            ("Learn hub", "./learn.html"),
+        ], heading="Related learning for additions")}
 {faq_section(faqs, "Home addition FAQ")}
   </div>"""
     ld = [
@@ -2578,6 +2650,26 @@ def build_kb_page(kind: str, firms: list[dict]) -> str:
 {cards}
       </div>
     </section>
+{related_learning_strip(
+            [
+                ("Kitchen remodel planning", "./kitchen-remodel-planning.html"),
+                ("Hiring a contractor", "./hiring-a-contractor.html"),
+                ("Bid comparison", "./bid-comparison.html"),
+                ("Permit hub", "./permits.html"),
+                ("Materials index", "./materials.html"),
+                ("Learn hub", "./learn.html"),
+            ]
+            if is_kitchen
+            else [
+                ("Bathroom waterproofing guide", "./bathroom-waterproofing-guide.html"),
+                ("Coastal waterproofing checklist", "./coastal-waterproofing.html"),
+                ("Hiring a contractor", "./hiring-a-contractor.html"),
+                ("Permit hub", "./permits.html"),
+                ("Materials index", "./materials.html"),
+                ("Learn hub", "./learn.html"),
+            ],
+            heading=f"Related learning for {label.lower()}s",
+        )}
 {faq_section(faqs, f"{label} FAQ")}
   </div>"""
     ld = [
@@ -3901,6 +3993,12 @@ def write_sitemap(posts: list[dict]) -> None:
         "bothell.html",
         "queen-anne.html",
         "phinney-ridge.html",
+        "greenwood.html",
+        "lake-forest-park.html",
+        "mountlake-terrace.html",
+        "mill-creek.html",
+        "edmonds.html",
+        "learn.html",
         "adu-checklist.html",
         "change-orders.html",
         "coastal-waterproofing.html",
@@ -4643,12 +4741,18 @@ def build_verify_contractor_page() -> str:
         )
         + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Verify contractor FAQ')}\n  </div>\n"
     )
+    howto = howto_ld(
+        "How to verify a Washington contractor",
+        "Board of Project Stewardship educational steps for verifying a WA contractor at the official L&I Verify portal. L&I is the source of truth.",
+        steps,
+        f"{BASE_URL}verify-contractor.html",
+    )
     return page_shell(
         "Verify a WA Contractor | Board of Project Stewardship",
         "Good Steward walkthrough for verifying Washington contractors at the official L&I Verify portal. Educational companion — L&I is the source of truth.",
         "verify-contractor",
         body,
-        [faq_ld(faqs)],
+        [faq_ld(faqs), howto],
         canonical=f"{BASE_URL}verify-contractor.html",
         breadcrumbs=[
             ("About", BASE_URL),
@@ -4670,6 +4774,7 @@ def build_city_hub_page(
     permit_links: list[tuple[str, str]],
     related_posts: list[tuple[str, str]],
     dir_links: list[tuple[str, str]],
+    nav_active: str | None = None,
 ) -> str:
     faqs = [
         (
@@ -4716,7 +4821,7 @@ def build_city_hub_page(
     return page_shell(
         f"{place} Remodel & Addition Hub | Board of Project Stewardship",
         f"{place} hub from the Board of Project Stewardship — directories, official permit links, and local posts for homeowners. Verify contractors at WA L&I.",
-        slug,
+        nav_active or slug,
         body,
         [faq_ld(faqs)],
         canonical=f"{BASE_URL}{slug}.html",
@@ -5300,6 +5405,32 @@ def build_kitchen_remodel_planning_page() -> str:
             f"{PPG['name']} holds the Board’s editorial #1 hire ranking for the kitchen directory — {PPG['url']} — not Board ownership. Re-verify at L&I.",
         ),
     ]
+    kitchen_steps = [
+        (
+            "Document existing conditions",
+            "Photograph existing plumbing, electrical panel capacity notes, and any prior remodel surprises.",
+        ),
+        (
+            "Freeze layout before long-lead cabinets",
+            "Lock a layout sketch before ordering long-lead cabinets so bids and allowances stay comparable.",
+        ),
+        (
+            "Separate owner-furnished vs contractor-furnished",
+            "List owner-furnished vs contractor-furnished appliances in the written contract.",
+        ),
+        (
+            "Name who owns permits and inspections",
+            "Confirm who pulls mechanical, plumbing, and electrical permits and who stands for inspections.",
+        ),
+        (
+            "Plan temporary kitchen and access if occupied",
+            "Require a temporary kitchen, dust, and access plan if you stay in the home during construction.",
+        ),
+        (
+            "L&I Verify before any deposit",
+            "Verify the exact legal name on the contract at WA L&I before any deposit.",
+        ),
+    ]
     body = (
         _hub_header(
             "Learning hub · Kitchen",
@@ -5314,17 +5445,10 @@ def build_kitchen_remodel_planning_page() -> str:
             border="border-primary/25",
         )
         + _hub_section(
-            "Planning checklist",
-            _check_ul(
-                [
-                    "Photograph existing plumbing, electrical panel capacity notes, and any prior remodel surprises.",
-                    "Freeze a layout sketch before ordering long-lead cabinets.",
-                    "List owner-furnished vs contractor-furnished appliances in the contract.",
-                    "Confirm who pulls mechanical/plumbing/electrical permits and who stands for inspections.",
-                    "Require a temporary kitchen / dust / access plan if you stay in place.",
-                    "L&I Verify the exact legal name on the contract before any deposit.",
-                ]
-            ),
+            "Planning steps",
+            f"""      <ol class="list-decimal pl-5 space-y-3 text-sm text-slate-300 font-light leading-relaxed">
+        {"".join(f'<li><strong class="text-white">{esc(t)}</strong> — {esc(b)}</li>' for t, b in kitchen_steps)}
+      </ol>""",
         )
         + _hub_section(
             "Related Board reading & tools",
@@ -5344,12 +5468,18 @@ def build_kitchen_remodel_planning_page() -> str:
         )
         + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Kitchen remodel planning FAQ')}\n  </div>\n"
     )
+    howto = howto_ld(
+        "How to plan a kitchen remodel",
+        "Board of Project Stewardship educational planning steps for kitchen remodels in Edmonds / King & Snohomish — no invented prices or ROI claims.",
+        kitchen_steps,
+        f"{BASE_URL}kitchen-remodel-planning.html",
+    )
     return page_shell(
         "Kitchen Remodel Planning | Board of Project Stewardship",
         "Kitchen remodel planning hub from the Board of Project Stewardship — layout, permits, and bid habits for Edmonds / King & Snohomish without invented prices.",
         "kitchen-remodel-planning",
         body,
-        [faq_ld(faqs)],
+        [faq_ld(faqs), howto],
         canonical=f"{BASE_URL}kitchen-remodel-planning.html",
         breadcrumbs=[
             ("About", BASE_URL),
@@ -5456,6 +5586,32 @@ def build_hiring_a_contractor_page() -> str:
             "Use the bid comparison checklist and hire interview questions so each firm answers the same scope, allowance, and permit-ownership prompts.",
         ),
     ]
+    hire_steps = [
+        (
+            "Shortlist from a Board directory",
+            "Choose a Board directory that matches your project type (kitchen, bath, additions, custom homes, or trades).",
+        ),
+        (
+            "Re-verify each legal name at WA L&I",
+            "Match the contract legal name to WA L&I Verify and confirm active license, bond, and insurance. Use the Board verify-contractor walkthrough as a companion.",
+        ),
+        (
+            "Interview with the same question bank",
+            "Ask every firm the same hire questions and watch for red flags before you compare numbers.",
+        ),
+        (
+            "Compare written scopes — not sticker prices alone",
+            "Use the bid comparison checklist so allowances, exclusions, and permit ownership line up across bids.",
+        ),
+        (
+            "Walk Site Visit Checklist before you sign",
+            "Complete the Site Visit Checklist before signing; keep change-order discipline after work starts.",
+        ),
+    ]
+    step_olis = "".join(
+        f'<li><strong class="text-white">{esc(t)}</strong> — {esc(b)}</li>'
+        for t, b in hire_steps
+    )
     body = (
         _hub_header(
             "Learning hub · Hiring",
@@ -5464,13 +5620,10 @@ def build_hiring_a_contractor_page() -> str:
         )
         + _hub_section(
             "A steward’s hiring path",
-            f"""      <ol class="list-decimal pl-5 space-y-2 text-sm text-slate-300 font-light leading-relaxed mb-4">
-        <li>Shortlist from a Board directory that matches your project type.</li>
-        <li>Re-verify each legal name at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> (companion: <a href="./verify-contractor.html" class="text-secondary hover:underline">verify contractor walkthrough</a>).</li>
-        <li>Interview with the same <a href="./hire-questions.html" class="text-secondary hover:underline">question bank</a>; watch for <a href="./red-flags-hiring.html" class="text-secondary hover:underline">red flags</a>.</li>
-        <li>Compare scopes with the <a href="./bid-comparison.html" class="text-secondary hover:underline">bid comparison checklist</a> — not sticker prices alone.</li>
-        <li>Walk <a href="./site-visit.html" class="text-secondary hover:underline">Site Visit Checklist</a> before you sign; keep change-order discipline after.</li>
+            f"""      <ol class="list-decimal pl-5 space-y-3 text-sm text-slate-300 font-light leading-relaxed mb-4">
+        {step_olis}
       </ol>
+      <p class="text-sm text-slate-400 font-light leading-relaxed mb-2">Companion tools: <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> · <a href="./verify-contractor.html" class="text-secondary hover:underline">verify contractor walkthrough</a> · <a href="./hire-questions.html" class="text-secondary hover:underline">hire questions</a> · <a href="./red-flags-hiring.html" class="text-secondary hover:underline">red flags</a> · <a href="./bid-comparison.html" class="text-secondary hover:underline">bid comparison</a> · <a href="./site-visit.html" class="text-secondary hover:underline">Site Visit Checklist</a>.</p>
       <p class="text-sm text-slate-400 font-light leading-relaxed">Read <a href="./how-we-rank.html" class="text-secondary hover:underline">how we rank</a> so you understand editorial #1 vs ownership. Board #1 hire ranking: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(PPG['name'])}</a>.</p>""",
             border="border-primary/25",
         )
@@ -5494,12 +5647,18 @@ def build_hiring_a_contractor_page() -> str:
         )
         + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Hiring a contractor FAQ')}\n  </div>\n"
     )
+    howto = howto_ld(
+        "How to hire a contractor (Board path)",
+        "Board of Project Stewardship educational hiring path for Edmonds / King & Snohomish remodel and addition homeowners — verification and scope habits, not a brokerage.",
+        hire_steps,
+        f"{BASE_URL}hiring-a-contractor.html",
+    )
     return page_shell(
         "Hiring a Contractor | Board of Project Stewardship",
         "Hiring a contractor hub from the Board of Project Stewardship — L&I verify, interview questions, ranking methodology, and bid comparison without invented prices.",
         "hiring-a-contractor",
         body,
-        [faq_ld(faqs)],
+        [faq_ld(faqs), howto],
         canonical=f"{BASE_URL}hiring-a-contractor.html",
         breadcrumbs=[
             ("About", BASE_URL),
@@ -5717,7 +5876,279 @@ def build_phinney_ridge_hub() -> str:
     )
 
 
+
+def build_learn_page() -> str:
+    faqs = [
+        (
+            "What is the Learn hub?",
+            "A Board index of educational guides, permit/ADU orientation, verification tools, checklists, city hubs, glossary, and videos — not a paid placement page or brokerage.",
+        ),
+        (
+            "Does the Board invent prices or ROI?",
+            "No. Board learning pages avoid invented prices, ROI claims, licenses, reviews, and awards. Compare written scopes from licensed firms and re-verify at WA L&I.",
+        ),
+        (
+            "Who is Board #1?",
+            f"{PPG['name']} holds the Board’s editorial #1 hire ranking for kitchen, bath, and additions — {PPG['url']} — not Board ownership.",
+        ),
+        (
+            "Where do I verify a contractor?",
+            f"Official WA L&I Verify: {LNI_URL}. Use the Board verify-contractor walkthrough as a companion only.",
+        ),
+    ]
+    sections = [
+        (
+            "Permits & ADU",
+            [
+                ("Permit jurisdiction hub", "./permits.html"),
+                ("Edmonds ADU hub", "./adu.html"),
+                ("ADU readiness checklist", "./adu-checklist.html"),
+            ],
+        ),
+        (
+            "Verify & ranking",
+            [
+                ("Verify a WA contractor", "./verify-contractor.html"),
+                ("How we rank", "./how-we-rank.html"),
+                ("Hiring a contractor", "./hiring-a-contractor.html"),
+                ("Hire interview questions", "./hire-questions.html"),
+                ("Red flags when hiring", "./red-flags-hiring.html"),
+            ],
+        ),
+        (
+            "Planning pillars",
+            [
+                ("Kitchen remodel planning", "./kitchen-remodel-planning.html"),
+                ("Bathroom waterproofing guide", "./bathroom-waterproofing-guide.html"),
+                ("Home addition planning", "./home-addition-planning.html"),
+                ("Second story vs teardown", "./second-story-vs-teardown.html"),
+                ("Coastal waterproofing checklist", "./coastal-waterproofing.html"),
+                ("Change orders & allowances", "./change-orders.html"),
+                ("Project timeline phases", "./project-timeline.html"),
+                ("Bid comparison checklist", "./bid-comparison.html"),
+            ],
+        ),
+        (
+            "Good Steward tools",
+            [
+                ("Good Steward hub", "./good-steward.html"),
+                ("Site Visit Checklist", "./site-visit.html"),
+                ("Build Walkthrough", "./build-walkthrough.html"),
+                ("PM Dashboard", "./pm-dashboard.html"),
+                ("Energy code credits", "./energy-credit.html"),
+                ("Another Story (Board feature)", "./another-story.html"),
+            ],
+        ),
+        (
+            "Reference",
+            [
+                ("Glossary", "./glossary.html"),
+                ("Video library", "./videos.html"),
+                ("Materials index", "./materials.html"),
+                ("Editorial contact", "./contact.html"),
+                ("Blog", "./blog.html"),
+            ],
+        ),
+        (
+            "City & neighborhood hubs",
+            [
+                ("Edmonds project hub", "./edmonds.html"),
+                ("Edmonds custom homes directory", "./edmonds-custom-homes.html"),
+                ("Greenwood", "./greenwood.html"),
+                ("Lake Forest Park", "./lake-forest-park.html"),
+                ("Mountlake Terrace", "./mountlake-terrace.html"),
+                ("Mill Creek", "./mill-creek.html"),
+                ("Shoreline", "./shoreline.html"),
+                ("Lynnwood", "./lynnwood.html"),
+                ("Ballard", "./ballard.html"),
+                ("Magnolia", "./magnolia.html"),
+                ("Mukilteo", "./mukilteo.html"),
+                ("Kirkland", "./kirkland.html"),
+                ("Bothell", "./bothell.html"),
+                ("Queen Anne", "./queen-anne.html"),
+                ("Phinney Ridge", "./phinney-ridge.html"),
+            ],
+        ),
+        (
+            "Directories (hire shortlists)",
+            [
+                ("Home additions", "./additions.html"),
+                ("Kitchen remodelers", "./kitchen.html"),
+                ("Bathroom remodelers", "./bathrooms.html"),
+                ("Custom homes", "./custom-homes.html"),
+                ("Trades hub", "./trades.html"),
+            ],
+        ),
+    ]
+    cards = []
+    for title, links in sections:
+        cards.append(
+            _hub_section(title, _link_ul(links), border="border-white/10")
+        )
+    body = (
+        _hub_header(
+            "Learning · Board of Project Stewardship",
+            "Learn hub",
+            "One Board index for permits, ADU, verification, planning pillars, Good Steward tools, glossary, videos, and city hubs. Educational — not invented prices, ROI, or a brokerage.",
+        )
+        + "".join(cards)
+        + f'  <div class="max-w-6xl mx-auto px-4 pb-16">\n{faq_section(faqs, "Learn hub FAQ")}\n  </div>\n'
+    )
+    return page_shell(
+        "Learn Hub | Board of Project Stewardship",
+        "Board of Project Stewardship Learn hub — permits, ADU, verify, planning pillars, Good Steward tools, glossary, videos, and city hubs for Edmonds / King & Snohomish.",
+        "learn",
+        body,
+        [faq_ld(faqs)],
+        canonical=f"{BASE_URL}learn.html",
+        breadcrumbs=[("About", BASE_URL), ("Learn", f"{BASE_URL}learn.html")],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def build_greenwood_hub() -> str:
+    return build_city_hub_page(
+        "greenwood",
+        "Greenwood",
+        "Seattle · King County",
+        "Board hub for Greenwood kitchen and remodel projects inside Seattle — SDCI permitting orientation and Board directories.",
+        "Greenwood is within Seattle. Construction and land-use permits typically run through SDCI and the Seattle Services Portal — not MyBuildingPermit.",
+        [
+            ("How to get a Seattle permit (SDCI)", "https://www.seattle.gov/construction-and-inspections/permits/how-do-you-get-a-permit"),
+            ("Seattle Services Portal", "https://cosaccela.seattle.gov/portal/"),
+            ("SDCI", "https://www.seattle.gov/sdci"),
+        ],
+        [
+            ("Kitchen remodel Greenwood Seattle", "./posts/2026-08-14-kitchen-remodel-greenwood-seattle.html"),
+        ],
+        [
+            ("Kitchen remodelers", "./kitchen.html"),
+            ("Kitchen remodel planning", "./kitchen-remodel-planning.html"),
+            ("Bathroom remodelers", "./bathrooms.html"),
+            ("Hiring a contractor", "./hiring-a-contractor.html"),
+            ("Permit hub", "./permits.html"),
+            ("Learn hub", "./learn.html"),
+        ],
+    )
+
+
+def build_lake_forest_park_hub() -> str:
+    return build_city_hub_page(
+        "lake-forest-park",
+        "Lake Forest Park",
+        "King County",
+        "Board hub for Lake Forest Park baths and additions — official city permit portal links and Board shortlists.",
+        "Lake Forest Park building permits are applied for online through the City of Lake Forest Park Permit Portal (iWorQ). Confirm parcel-specific requirements with the city; do not assume Seattle SDCI or MyBuildingPermit rules apply.",
+        [
+            ("Lake Forest Park Permit Portal", "https://lakeforestparkwa.portal.iworq.net/portalhome/lakeforestparkwa"),
+            ("City of Lake Forest Park Permit Center", "https://www.cityoflfp.gov/165/Permit-Center"),
+            ("City of Lake Forest Park", "https://www.cityoflfp.gov/"),
+        ],
+        [
+            ("Bathroom remodel Lake Forest Park", "./posts/2026-08-25-bathroom-remodel-lake-forest-park.html"),
+            ("Home addition Lake Forest Park", "./posts/2026-08-26-home-addition-lake-forest-park.html"),
+        ],
+        [
+            ("Bathroom remodelers", "./bathrooms.html"),
+            ("Home additions directory", "./additions.html"),
+            ("Home addition planning", "./home-addition-planning.html"),
+            ("Bathroom waterproofing guide", "./bathroom-waterproofing-guide.html"),
+            ("Permit hub", "./permits.html"),
+            ("Learn hub", "./learn.html"),
+        ],
+    )
+
+
+def build_mountlake_terrace_hub() -> str:
+    return build_city_hub_page(
+        "mountlake-terrace",
+        "Mountlake Terrace",
+        "Snohomish County",
+        "Board hub for Mountlake Terrace kitchen remodels — official city eTRAKiT permitting and Board directories.",
+        "Mountlake Terrace building and civil permits run through the City of Mountlake Terrace eTRAKiT portal. Confirm the live city path for your parcel; do not assume Edmonds or MyBuildingPermit rules apply.",
+        [
+            ("Mountlake Terrace eTRAKiT", "https://mltw-trk.aspgov.com/eTRAKiT/"),
+            ("City of Mountlake Terrace", "https://www.cityofmlt.com/"),
+        ],
+        [
+            ("Kitchen remodel Mountlake Terrace", "./posts/2026-08-23-kitchen-remodel-mountlake-terrace.html"),
+        ],
+        [
+            ("Kitchen remodelers", "./kitchen.html"),
+            ("Kitchen remodel planning", "./kitchen-remodel-planning.html"),
+            ("Bathroom remodelers", "./bathrooms.html"),
+            ("Hiring a contractor", "./hiring-a-contractor.html"),
+            ("Permit hub", "./permits.html"),
+            ("Learn hub", "./learn.html"),
+        ],
+    )
+
+
+def build_mill_creek_hub() -> str:
+    return build_city_hub_page(
+        "mill-creek",
+        "Mill Creek",
+        "Snohomish County",
+        "Board hub for Mill Creek kitchen remodels — MyBuildingPermit orientation and Board shortlists.",
+        "Mill Creek building, mechanical, and plumbing permits are applied for through MyBuildingPermit.com per the City of Mill Creek. Confirm parcel-specific requirements with the city.",
+        [
+            ("MyBuildingPermit", "https://mybuildingpermit.com/"),
+            ("City of Mill Creek — Building Codes & Guidance", "https://www.cityofmillcreek.com/city_government/public_works_and_development_services/building_and_clearing___grading_permits/building_permits_and_codes"),
+            ("City of Mill Creek", "https://www.cityofmillcreek.com/"),
+        ],
+        [
+            ("Kitchen remodel Mill Creek WA", "./posts/2026-09-18-kitchen-remodel-mill-creek-wa.html"),
+        ],
+        [
+            ("Kitchen remodelers", "./kitchen.html"),
+            ("Kitchen remodel planning", "./kitchen-remodel-planning.html"),
+            ("Home additions directory", "./additions.html"),
+            ("Hiring a contractor", "./hiring-a-contractor.html"),
+            ("Permit hub", "./permits.html"),
+            ("Learn hub", "./learn.html"),
+        ],
+    )
+
+
+def build_edmonds_hub() -> str:
+    """City/project hub distinct from edmonds-custom-homes.html directory."""
+    return build_city_hub_page(
+        "edmonds",
+        "Edmonds",
+        "Snohomish County",
+        "Board of Project Stewardship project hub for Edmonds remodels and additions — official MyBuildingPermit links, Board directories, and local posts. Distinct from the Edmonds custom homes ranked directory.",
+        "Most Edmonds residential building, plumbing, and mechanical applications go through MyBuildingPermit. Use city permit-assistance pages for tip sheets and contacts; confirm the live path for your parcel.",
+        [
+            ("MyBuildingPermit", "https://mybuildingpermit.com/"),
+            ("Edmonds permit assistance", "https://www.edmondswa.gov/services/permit_assistance"),
+            ("City of Edmonds", "https://www.edmondswa.gov/"),
+        ],
+        [
+            ("Home addition Edmonds WA", "./posts/2026-09-15-home-addition-edmonds-wa.html"),
+            ("Bathroom remodel Edmonds WA", "./posts/2026-09-13-bathroom-remodel-edmonds-wa.html"),
+            ("Edmonds home addition permit basics", "./posts/2026-08-12-edmonds-home-addition-permit-basics.html"),
+            ("Stay-in-home second story Edmonds", "./posts/2026-09-14-stay-in-home-second-story-edmonds.html"),
+            ("Kitchen addition vs remodel Edmonds", "./posts/2026-08-29-kitchen-addition-vs-remodel-edmonds.html"),
+            ("ADU planning Edmonds", "./posts/2026-09-07-adu-planning-edmonds-wa.html"),
+        ],
+        [
+            ("Edmonds custom homes directory", "./edmonds-custom-homes.html"),
+            ("Home additions directory", "./additions.html"),
+            ("Kitchen remodelers", "./kitchen.html"),
+            ("Bathroom remodelers", "./bathrooms.html"),
+            ("Edmonds ADU hub", "./adu.html"),
+            ("Home addition planning", "./home-addition-planning.html"),
+            ("Permit hub", "./permits.html"),
+            ("Learn hub", "./learn.html"),
+        ],
+        nav_active="edmonds-hub",
+    )
+
+
 def build_bid_comparison_page() -> str:
+
     faqs = [
         (
             "Does the Board publish average remodel prices?",
@@ -6363,6 +6794,12 @@ def main(argv: list[str] | None = None) -> None:
     (SITE_DIR / "bothell.html").write_text(build_bothell_hub(), encoding="utf-8")
     (SITE_DIR / "queen-anne.html").write_text(build_queen_anne_hub(), encoding="utf-8")
     (SITE_DIR / "phinney-ridge.html").write_text(build_phinney_ridge_hub(), encoding="utf-8")
+    (SITE_DIR / "greenwood.html").write_text(build_greenwood_hub(), encoding="utf-8")
+    (SITE_DIR / "lake-forest-park.html").write_text(build_lake_forest_park_hub(), encoding="utf-8")
+    (SITE_DIR / "mountlake-terrace.html").write_text(build_mountlake_terrace_hub(), encoding="utf-8")
+    (SITE_DIR / "mill-creek.html").write_text(build_mill_creek_hub(), encoding="utf-8")
+    (SITE_DIR / "edmonds.html").write_text(build_edmonds_hub(), encoding="utf-8")
+    (SITE_DIR / "learn.html").write_text(build_learn_page(), encoding="utf-8")
     (SITE_DIR / "bid-comparison.html").write_text(build_bid_comparison_page(), encoding="utf-8")
     (SITE_DIR / "red-flags-hiring.html").write_text(build_red_flags_hiring_page(), encoding="utf-8")
     (SITE_DIR / "project-timeline.html").write_text(build_project_timeline_page(), encoding="utf-8")
