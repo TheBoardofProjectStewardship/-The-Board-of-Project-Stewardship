@@ -944,6 +944,7 @@ def nav_html(active: str = "", prefix: str = "") -> str:
     ]
     more_tools = [
         ("learn", href("learn.html"), "Learn hub"),
+        ("faq", href("faq.html"), "FAQ"),
         ("steward", href("good-steward.html"), "Good Steward"),
         ("permits", href("permits.html"), "Permit Hub"),
         ("adu", href("adu.html"), "Edmonds ADU"),
@@ -1045,6 +1046,8 @@ def nav_html(active: str = "", prefix: str = "") -> str:
 def footer_html(prefix: str = "./", active: str = "") -> str:
     explore = [
         ("about", f"{prefix}index.html", "About"),
+        ("about-page", f"{prefix}about.html", "About page"),
+        ("faq", f"{prefix}faq.html", "FAQ"),
         ("how-we-rank", f"{prefix}how-we-rank.html", "How we rank"),
         ("additions", f"{prefix}additions.html", "Additions Top 30"),
         ("custom-homes", f"{prefix}custom-homes.html", "Custom homes"),
@@ -1165,6 +1168,8 @@ def public_tool_href(slug: str, prefix: str = "") -> str:
         "permits": "permits.html",
         "adu": "adu.html",
         "how-we-rank": "how-we-rank.html",
+        "faq": "faq.html",
+        "about": "about.html",
         "verify-contractor": "verify-contractor.html",
         "adu-checklist": "adu-checklist.html",
         "change-orders": "change-orders.html",
@@ -2606,6 +2611,194 @@ def build_about() -> str:
         include_tools_embed=False,
     )
 
+
+
+def build_about_page() -> str:
+    faqs = [
+        (
+            "What is the Board of Project Stewardship?",
+            "The Board is an independent publisher of construction standards, contractor directories, permit orientation, and homeowner tools for Edmonds and nearby King & Snohomish markets.",
+        ),
+        (
+            "Is the Board a contractor?",
+            "No. The Board does not bid, build, or pull permits under the Board name. It publishes editorial directories and education only.",
+        ),
+        (
+            "Why does Pacific Pro Group appear as Board #1?",
+            f"Pacific Pro Group holds the Board’s editorial #1 hire ranking on key directories and links to {PPG['url']}. That ranking is not Board ownership.",
+        ),
+        (
+            "How should I use a Board directory?",
+            "Use the directory to build a shortlist, then verify the legal entity at WA L&I, confirm the parcel’s permit jurisdiction, and compare written scopes before you sign.",
+        ),
+        (
+            "Where do I go next?",
+            "Start with How we rank, Permit hub, Learn hub, and the Board FAQ. Then open the directory or planning page that matches your scope.",
+        ),
+    ]
+    body = (
+        _hub_header(
+            f"About the Board · Updated {YEAR}",
+            "About the Board of Project Stewardship",
+            "What the Board publishes, what it does not do, and how homeowners should use Board directories, official permit hubs, and Good Steward tools.",
+        )
+        + _hub_section(
+            "What the Board is",
+            f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">{esc(BOARD_ONE_LINER)}</p>
+      <p class="text-sm text-slate-400 font-light leading-relaxed">The Board does not take deposits, perform construction, or operate under a contractor trade name. Pacific Pro Group appears as Board directory #1 at <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(PPG['url'])}</a> — not as owner, parent, or operator of the Board.</p>""",
+            border="border-primary/25",
+        )
+        + _hub_section(
+            "How to use the site",
+            _check_ul(
+                [
+                    "Read How we rank so you understand editorial criteria before you call firms.",
+                    "Use the Permit hub or the matching city hub before you compare schedule promises or fee assumptions.",
+                    "Shortlist on the directory page that matches your job type: additions, kitchen, bathrooms, custom, commercial, spec, or trades.",
+                    "Verify the contract legal name at WA L&I before deposit, demolition, or permit submittal.",
+                ]
+            )
+            + """      <p class="text-sm text-slate-400 font-light mt-4"><a href="./how-we-rank.html" class="text-secondary hover:underline">How we rank</a> · <a href="./permits.html" class="text-secondary hover:underline">Permit hub</a> · <a href="./learn.html" class="text-secondary hover:underline">Learn hub</a> · <a href="./faq.html" class="text-secondary hover:underline">Board FAQ</a></p>""",
+        )
+        + _hub_section(
+            "What the Board publishes",
+            _link_ul(
+                [
+                    ("Home additions directory", "./additions.html"),
+                    ("Kitchen remodelers", "./kitchen.html"),
+                    ("Bathroom remodelers", "./bathrooms.html"),
+                    ("Custom homes", "./custom-homes.html"),
+                    ("Edmonds Top 30", "./edmonds-custom-homes.html"),
+                    ("Commercial", "./commercial.html"),
+                    ("Spec homes", "./spec-homes.html"),
+                    ("Trades hub", "./trades.html"),
+                    ("Good Steward tools", "./good-steward.html"),
+                    ("Board blog", "./blog.html"),
+                ]
+            ),
+        )
+        + _hub_section(
+            "Official sources we keep pointing to",
+            _link_ul(
+                [
+                    ("WA L&I Verify", LNI_URL),
+                    ("WA L&I — hiring a contractor", WA_CONSUMER_PROTECT_URL),
+                    ("MyBuildingPermit", MYBUILDINGPERMIT_URL),
+                    ("How to get a Seattle permit (SDCI)", SEATTLE_PERMIT_HOW),
+                    ("King County local services — permits", "https://kingcounty.gov/en/dept/local-services/permits-inspections"),
+                    ("Snohomish County PDS", "https://www.snohomishcountywa.gov/198/Planning-Development-Services"),
+                    ("City of Edmonds", "https://www.edmondswa.gov/"),
+                ],
+                external=True,
+            ),
+        )
+        + f'  <div class="max-w-6xl mx-auto px-4 pb-16">\n{faq_section(faqs, "About FAQ")}\n  </div>\n'
+    )
+    return page_shell(
+        "About the Board | Board of Project Stewardship",
+        "About the Board of Project Stewardship — what the Board publishes, how to use its directories, and where it points homeowners for live official verification and permit sources.",
+        "about",
+        body,
+        [faq_ld(faqs)],
+        canonical=f"{BASE_URL}about.html",
+        breadcrumbs=[("About", BASE_URL), ("About page", f"{BASE_URL}about.html")],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+        page_type="AboutPage",
+    )
+
+
+def build_faq_page() -> str:
+    faqs = [
+        (
+            "What is the Board of Project Stewardship?",
+            "The Board is an independent publisher of construction standards, contractor directories, permit orientation, and homeowner tools for Edmonds and nearby King & Snohomish markets.",
+        ),
+        (
+            "Is the Board a contractor?",
+            "No. The Board does not bid, build, or pull permits under the Board name. It publishes editorial directories and education only.",
+        ),
+        (
+            "Are Board directories paid placements?",
+            "No. They are editorial rankings. Listing is not an endorsement of quality or a guarantee of outcomes.",
+        ),
+        (
+            "Why does Pacific Pro Group appear as Board #1?",
+            f"Pacific Pro Group holds the Board’s editorial #1 hire ranking on key directories and links to {PPG['url']}. That ranking is not Board ownership.",
+        ),
+        (
+            "How do I verify a contractor?",
+            "Use the official WA L&I Verify tool with the exact legal name shown on the contract. The Board verify-contractor page is a companion walkthrough only.",
+        ),
+        (
+            "Does a Board listing mean a firm is verified forever?",
+            "No. Licensing, bond status, insurance, and staffing can change. Re-verify the legal entity at hire time even for Board #1 or any ranked firm.",
+        ),
+        (
+            "How do I know whether city or county rules apply?",
+            "Start with the parcel’s authority having jurisdiction. Use the Permit hub or the matching city hub before you compare permit timelines or fee assumptions.",
+        ),
+        (
+            "Do all remodels need permits?",
+            "No. But moving walls, structure, plumbing, electrical, gas, or mechanical systems often does. Confirm with the jurisdiction for the parcel.",
+        ),
+        (
+            "Does the Board publish price bands?",
+            "No. The Board does not invent local price tables. Use cost-factor pages for drivers only, then compare written local bids with matching allowances and exclusions.",
+        ),
+        (
+            "Does the Board publish ROI claims?",
+            "No. The Board does not invent resale ROI for your address. National studies are context only and are not bids or promises.",
+        ),
+        (
+            "Which page should I open first?",
+            "If you need a shortlist, open the matching directory. If you need process help, start with Learn, Permit hub, Hiring a contractor, or the city hub for your market.",
+        ),
+        (
+            "How often are pages updated?",
+            f"Major directory and learning pages carry a {YEAR} research pass date in visible copy or metadata. Readers should still confirm live licensing and jurisdiction details.",
+        ),
+        (
+            "Where do I contact the Board?",
+            f"Use the editorial contact page or email {EDITORIAL_EMAIL} for corrections, source questions, or notes about Board content.",
+        ),
+    ]
+    body = (
+        _hub_header(
+            f"Frequently asked questions · Updated {YEAR}",
+            "Board FAQ",
+            "Common questions about the Board, rankings, permits, hiring, and price honesty. Board guidance points back to live official sources where decisions belong.",
+        )
+        + _hub_section(
+            "Start with these pages",
+            _link_ul(
+                [
+                    ("About the Board", "./about.html"),
+                    ("How we rank", "./how-we-rank.html"),
+                    ("Permit hub", "./permits.html"),
+                    ("Learn hub", "./learn.html"),
+                    ("Verify contractor", "./verify-contractor.html"),
+                    ("Hiring a contractor", "./hiring-a-contractor.html"),
+                    ("Contact", "./contact.html"),
+                ]
+            ),
+            border="border-primary/25",
+        )
+        + f'  <div class="max-w-6xl mx-auto px-4 pb-16">\n{faq_section(faqs, "Board FAQ")}\n  </div>\n'
+    )
+    return page_shell(
+        "FAQ | Board of Project Stewardship",
+        "Board FAQ — answers on rankings, permits, hiring, verification, and price honesty for Edmonds and nearby King & Snohomish homeowners.",
+        "faq",
+        body,
+        [faq_ld(faqs)],
+        canonical=f"{BASE_URL}faq.html",
+        breadcrumbs=[("About", BASE_URL), ("FAQ", f"{BASE_URL}faq.html")],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
 
 
 def build_additions(additions: list[dict]) -> str:
@@ -4448,6 +4641,8 @@ Base: `{BASE_URL}`
 | Path | Page |
 |------|------|
 | `index.html` | About — Board mission & standards |
+| `about.html` | About the Board |
+| `faq.html` | Board FAQ |
 | `additions.html` | Top 30 home addition contractors |
 | `custom-homes.html` | Custom home builders (PPG #1 + ranks 2–15) |
 | `edmonds-custom-homes.html` | Edmonds Custom Homes Top 30 (filters, permit guide, tools) |
@@ -4558,6 +4753,8 @@ def write_sitemap(posts: list[dict]) -> None:
     ] + [f"{slug}.html" for slug, *_ in TRADES]
     extras = [
         "blog.html",
+        "about.html",
+        "faq.html",
         "another-story.html",
         "good-steward.html",
         "build-walkthrough.html",
@@ -6710,6 +6907,8 @@ def build_learn_page() -> str:
         (
             "Reference",
             [
+                ("About the Board", "./about.html"),
+                ("Board FAQ", "./faq.html"),
                 ("Glossary", "./glossary.html"),
                 ("Video library", "./videos.html"),
                 ("Materials index", "./materials.html"),
@@ -8545,6 +8744,7 @@ def main(argv: list[str] | None = None) -> None:
         raise SystemExit(f"Expected 30 Edmonds custom firms, got {len(edmonds_custom)}")
 
     (SITE_DIR / "index.html").write_text(build_about(), encoding="utf-8")
+    (SITE_DIR / "about.html").write_text(build_about_page(), encoding="utf-8")
     (SITE_DIR / "additions.html").write_text(build_additions(additions), encoding="utf-8")
     (SITE_DIR / "custom-homes.html").write_text(build_custom_homes(custom_homes), encoding="utf-8")
     (SITE_DIR / "edmonds-custom-homes.html").write_text(build_edmonds_custom_homes(edmonds_custom), encoding="utf-8")
@@ -8610,6 +8810,7 @@ def main(argv: list[str] | None = None) -> None:
     (SITE_DIR / "mill-creek.html").write_text(build_mill_creek_hub(), encoding="utf-8")
     (SITE_DIR / "edmonds.html").write_text(build_edmonds_hub(), encoding="utf-8")
     (SITE_DIR / "learn.html").write_text(build_learn_page(), encoding="utf-8")
+    (SITE_DIR / "faq.html").write_text(build_faq_page(), encoding="utf-8")
     (SITE_DIR / "bid-comparison.html").write_text(build_bid_comparison_page(), encoding="utf-8")
     (SITE_DIR / "red-flags-hiring.html").write_text(build_red_flags_hiring_page(), encoding="utf-8")
     (SITE_DIR / "project-timeline.html").write_text(build_project_timeline_page(), encoding="utf-8")

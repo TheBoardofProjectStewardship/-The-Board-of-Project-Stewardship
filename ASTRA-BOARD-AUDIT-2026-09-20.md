@@ -8,8 +8,8 @@ Scope: boardofprojectstewardship.com only. This audit keeps the Board voice inde
 
 1. **Implemented in this PR:** Replace the sitewide pricing / partner widget with a Board-only next-steps module that pushes readers toward verification, permit, bid-comparison, and learn resources instead of invented price math.
 2. **Implemented in this PR:** Remove the sitewide lead-gen tone and replace it with neutral Board guidance that reinforces the site as an editorial publisher, not a contractor dispatch layer.
-3. **Implemented in this PR:** Add visible breadcrumb navigation on non-post pages so users and crawlers can see hierarchy without relying only on JSON-LD.
-4. **Implemented in this PR:** Add a page-level `WebPage` schema object to every generated page so page intent is not inferred only from `ItemList`, `FAQPage`, or `Article`.
+3. **Implemented in this PR:** Ship a real `about.html` page so the live Board site no longer 404s on the About URL and has a crawlable explanation of Board role, scope, and official source habits.
+4. **Implemented in this PR:** Ship a real `faq.html` page so the live Board site no longer 404s on FAQ and has a dedicated Board-wide answer hub for rankings, permits, verification, and price honesty.
 5. **Implemented in this PR:** Expand the “How we rank” block with explicit next actions: read methodology, verify at WA L&I, confirm permit jurisdiction, then compare written scopes.
 6. **Implemented in this PR:** Add a “How to use this additions directory” section so the page teaches dry-in planning, permit ownership, exclusions, and staging before homeowners request bids.
 7. **Implemented in this PR:** Rewrite the additions cost FAQ so it stops implying pseudo-price ranges and instead points readers to cost drivers and written local bids.
