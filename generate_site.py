@@ -85,6 +85,7 @@ PPG = {
     "rating": "4.9",
     "reviews": "190",
     "trustindex": "https://www.trustindex.io/reviews/pacificprogroup.com",
+    "trustindex_as_of": "2026-09",
     "process_pdf": "https://pacificprogroup.com/wp-content/uploads/2025/12/Pacific-Pro-Group-Process.pdf",
     "note": "Edmonds-based firm specializing in residential home additions and remodels for the North Sound.",
 }
@@ -1124,6 +1125,65 @@ def public_tool_href(slug: str, prefix: str = "") -> str:
     return f"{prefix}{name}" if prefix else f"./{name}"
 
 
+
+def ppg_trustindex_as_of_label() -> str:
+    """Human label for Trustindex editorial snapshot date."""
+    raw = str(PPG.get("trustindex_as_of") or "2026-09")
+    if raw.startswith("2026-09"):
+        return "Sept 2026"
+    return raw
+
+
+def ppg_trustindex_phrase(*, short: bool = False) -> str:
+    """Public Trustindex aggregate with as-of date — re-check live; not a Board-owned fact."""
+    label = ppg_trustindex_as_of_label()
+    if short:
+        return f"{PPG['rating']} · {PPG['reviews']} reviews (as of {label}; re-check live)"
+    return (
+        f"Trustindex aggregate {PPG['rating']}★ · {PPG['reviews']} reviews "
+        f"(as of {label}; re-check live)"
+    )
+
+
+
+# Site-root hub stems linked from posts must use ../ (or absolute), not ./ under /posts/
+POST_ROOT_HUB_STEMS = frozenset({
+    "remodel-cost-factors", "kitchen-cost-factors", "bathroom-cost-factors",
+    "addition-cost-factors", "adu-cost-factors", "permits", "hire-questions",
+    "hiring-a-contractor", "how-we-rank", "verify-contractor", "learn", "directory",
+    "adu", "adu-checklist", "change-orders", "coastal-waterproofing", "materials",
+    "glossary", "contact", "about", "faq", "site-visit", "pm-dashboard",
+    "energy-credit", "build-walkthrough", "good-steward", "another-story",
+    "kitchen", "bathrooms", "additions", "custom-homes", "edmonds-custom-homes",
+    "trades", "blog", "index", "windows", "roofing", "insulation", "siding",
+    "commercial", "spec-homes", "videos", "write", "bid-comparison",
+    "home-addition-planning", "kitchen-remodel-planning", "bathroom-waterproofing-guide",
+    "second-story-vs-teardown", "bonds-and-insurance", "contractor-contract-basics",
+    "design-build-vs-bid",
+})
+
+
+def rewrite_post_root_hrefs(html: str, post_basenames: set[str] | None = None) -> str:
+    """After markdown→HTML for a post, rewrite href="./X.html" → ../X.html when X is site-root."""
+    known_posts = post_basenames or set()
+
+    def repl(m: re.Match) -> str:
+        quote = m.group(1)
+        path = m.group(2)
+        if path.startswith(("http://", "https://", "#", "mailto:", "/", "../")):
+            return m.group(0)
+        stem = path[2:] if path.startswith("./") else path
+        if "/" in stem or not stem.endswith(".html"):
+            return m.group(0)
+        if stem in known_posts or re.match(r"^\d{4}-\d{2}-\d{2}-", stem):
+            return m.group(0)
+        # Non-post root pages must resolve from /posts/ via ../
+        return f"href={quote}../{stem}{quote}"
+
+    return re.sub(r'href=(["\'])([^"\']+)\1', repl, html)
+
+
+
 def contact_strip_html() -> str:
     return f"""  <aside id="contact" class="border-t border-white/5 bg-charcoal/50">
     <div class="max-w-6xl mx-auto px-4 py-4 text-sm text-slate-400 font-light">
@@ -1628,7 +1688,7 @@ def page_shell(
 <main id="main-content">
 {body}
 {f'''  <div class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
-{ppg_widgets_html()}
+{ppg_widgets_html(pfx)}
   </div>
 ''' if include_widgets else ""}{tools_block}
 {story_block}
@@ -1754,15 +1814,13 @@ def ppg_featured(context_label: str, note: str | None = None) -> str:
             </div>
           </div>
           <div class="flex flex-wrap gap-2 mb-6">
-            <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-emerald-400/30 bg-emerald-950/40 text-emerald-300">{PPG['rating']} · {PPG['reviews']} reviews</span>
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-emerald-400/30 bg-emerald-950/40 text-emerald-300">{ppg_trustindex_phrase(short=True)}</span>
             <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-white/20 bg-white/5 text-slate-300">Edmonds-based</span>
             <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-white/20 bg-white/5 text-slate-300">Google · Thumbtack · HomeAdvisor</span>
           </div>
           <p class="text-slate-300 mb-4 leading-relaxed font-light">
-            {esc(note or PPG['note'])} Pacific Pro Group ranks #1 based on strong local presence, remodel focus, and a verified
-            <strong class="text-white font-medium">{PPG['rating']}</strong> aggregate rating across
-            <strong class="text-white font-medium">{PPG['reviews']}</strong> reviews on
-            <a href="{PPG['trustindex']}" target="_blank" rel="noopener" class="text-secondary hover:underline">Trustindex</a>.
+            {esc(note or PPG['note'])} Pacific Pro Group ranks #1 based on strong local presence, remodel focus, and a
+            <a href="{PPG['trustindex']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{ppg_trustindex_phrase()}</a>.
           </p>
           <p class="text-slate-400 mb-8 text-sm leading-relaxed font-light">
             Ideal for homeowners seeking a local partner for expansions and remodels in Edmonds and nearby King &amp; Snohomish communities.
@@ -2392,12 +2450,20 @@ def integrity_shield_html(
     </section>"""
 
 
-def ppg_widgets_html() -> str:
-    """Project Calculator, Partner Network referral, and Service Region — sitewide above footer."""
+def ppg_widgets_html(prefix: str = "") -> str:
+    """Project Factor Guide, Directory #1 outbound, and Service Region — sitewide above footer."""
+    pfx = prefix if prefix else "./"
+    how = f"{pfx}how-we-rank.html"
+    additions = f"{pfx}additions.html"
+    directory = f"{pfx}directory.html"
+    verify = f"{pfx}verify-contractor.html"
+    cost = f"{pfx}remodel-cost-factors.html"
+    permits = f"{pfx}permits.html"
+    hire = f"{pfx}hire-questions.html"
     return f"""    <section id="tools" class="mb-6">
       <div class="mb-8 border-b border-white/10 pb-4">
         <span class="text-secondary text-xs font-bold uppercase tracking-widest">Planning Tools</span>
-        <h2 class="text-3xl font-black text-white tracking-tight">Calculator · Partners · Service Region</h2>
+        <h2 class="text-3xl font-black text-white tracking-tight">Planning tools · Directory #1 · Service region</h2>
       </div>
       <div class="grid lg:grid-cols-3 gap-4">
         <div class="bg-charcoal border border-white/10 rounded-xl p-6">
@@ -2422,22 +2488,25 @@ def ppg_widgets_html() -> str:
             <div class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">Board guidance</div>
             <div id="calc-result" class="text-sm font-light text-slate-300 mt-1 leading-relaxed">Pick a scope and driver to see what to ask in bids — dollar totals belong on contractor proposals, not this page.</div>
           </div>
-          <p class="text-[11px] text-slate-500 mt-3 font-light"><a href="./remodel-cost-factors.html" class="text-secondary hover:underline">Cost-factor guides</a> · <a href="./permits.html" class="text-secondary hover:underline">Permit hub</a> · <a href="./hire-questions.html" class="text-secondary hover:underline">Hire questions</a></p>
+          <p class="text-[11px] text-slate-500 mt-3 font-light"><a href="{cost}" class="text-secondary hover:underline">Cost-factor guides</a> · <a href="{permits}" class="text-secondary hover:underline">Permit hub</a> · <a href="{hire}" class="text-secondary hover:underline">Hire questions</a></p>
         </div>
         <div class="bg-charcoal border border-white/10 rounded-xl p-6">
-          <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-handshake text-secondary"></i> Partner Network</h3>
-          <p class="text-xs text-slate-500 mb-4 font-light">Request an introduction to Pacific Pro Group or ask about Edmonds custom home capacity.</p>
-          <form id="partner-form" action="{PPG['url']}" method="get" target="_blank" class="space-y-3">
-            <input type="text" name="ref_name" required placeholder="Your name" class="w-full bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
-            <input type="email" name="ref_email" required placeholder="Email" class="w-full bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
-            <input type="text" name="ref_city" placeholder="City / neighborhood" class="w-full bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
-            <textarea name="ref_notes" rows="3" placeholder="Project notes (lot, timeline, sq ft)" class="w-full bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary"></textarea>
-            <button type="submit" class="w-full bg-primary text-white py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs">Continue to Pacific Pro Group</button>
-          </form>
+          <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-trophy text-secondary"></i> Directory #1</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed mb-4">The Board ranks <strong class="text-white font-semibold">Pacific Pro Group</strong> #1 for Edmonds / King &amp; Snohomish remodel and additions focus. Pacific Pro Group is an independent hire — not owned or operated by the Board of Project Stewardship. Outbound only; re-verify at WA L&amp;I before any deposit.</p>
+          <a href="{PPG['url']}" target="_blank" rel="noopener" class="inline-flex w-full items-center justify-center gap-2 bg-primary text-white py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs mb-4">
+            View Pacific Pro Group (directory #1) <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+          </a>
+          <p class="text-[11px] text-slate-500 font-light leading-relaxed">
+            <a href="{how}" class="text-secondary hover:underline">How we rank</a>
+            · <a href="{additions}" class="text-secondary hover:underline">Additions Top 30</a>
+            · <a href="{directory}" class="text-secondary hover:underline">Directories hub</a>
+            · <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">L&amp;I Verify</a>
+            · <a href="{verify}" class="text-secondary hover:underline">Board verify walkthrough</a>
+          </p>
         </div>
         <div class="bg-charcoal border border-white/10 rounded-xl p-6">
           <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-location-dot text-secondary"></i> Service Region</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed mb-4">Primary coverage for this Edmonds directory:</p>
+          <p class="text-sm text-slate-400 font-light leading-relaxed mb-4">Primary coverage emphasized in this Edmonds / North Sound directory:</p>
           <ul class="space-y-2 text-sm text-slate-300 font-light mb-5">
             <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>Edmonds &amp; the Edmonds Bowl</li>
             <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>Shoreline · Lynnwood · Mukilteo · Mountlake Terrace</li>
@@ -2445,11 +2514,12 @@ def ppg_widgets_html() -> str:
             <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>Greater Seattle metro (by firm)</li>
           </ul>
           <a href="{PPG['url']}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-secondary hover:underline">
-            Confirm PPG service area <i class="fas fa-arrow-right text-[10px]"></i>
+            Pacific Pro Group site (directory #1) <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
           </a>
         </div>
       </div>
     </section>"""
+
 
 
 def ppg_widgets_script() -> str:
@@ -2710,11 +2780,11 @@ def build_about() -> str:
             <li class="flex gap-3"><i class="fas fa-check text-secondary mt-1"></i><span><strong class="text-white">Design-build continuity</strong> — one stewarding path from discovery through build, fewer salesman-to-crew handoffs.</span></li>
             <li class="flex gap-3"><i class="fas fa-check text-secondary mt-1"></i><span><strong class="text-white">Edmonds / King &amp; Snohomish focus</strong> — residential additions and remodels for the North Sound, not generic statewide lead funnels.</span></li>
             <li class="flex gap-3"><i class="fas fa-check text-secondary mt-1"></i><span><strong class="text-white">Permit stewardship habits</strong> — sequencing and AHJ coordination treated as part of the craft, not an afterthought.</span></li>
-            <li class="flex gap-3"><i class="fas fa-check text-secondary mt-1"></i><span><strong class="text-white">Public review aggregate</strong> — Trustindex <strong class="text-white">{PPG['rating']}</strong> across <strong class="text-white">{PPG['reviews']}</strong> reviews (re-check live); WA license chip <strong class="text-white">{PPG['license']}</strong> — always re-verify at L&amp;I.</span></li>
+            <li class="flex gap-3"><i class="fas fa-check text-secondary mt-1"></i><span><strong class="text-white">Public review aggregate</strong> — {ppg_trustindex_phrase()}; WA license chip <strong class="text-white">{PPG['license']}</strong> — always re-verify at L&amp;I.</span></li>
           </ul>
           <div class="flex flex-wrap gap-2 mb-6">
             <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-emerald-400/30 bg-emerald-950/40 text-emerald-300">WA License {PPG['license']}</span>
-            <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-white/20 bg-white/5 text-slate-300">{PPG['rating']} · {PPG['reviews']} reviews</span>
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-white/20 bg-white/5 text-slate-300">{ppg_trustindex_phrase(short=True)}</span>
             <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-white/20 bg-white/5 text-slate-300">{PPG['city']}</span>
           </div>
           <div class="flex flex-col sm:flex-row flex-wrap gap-3">
@@ -2728,7 +2798,7 @@ def build_about() -> str:
               Edmonds Top 30
             </a>
             <a href="{PPG['trustindex']}" target="_blank" rel="noopener" class="border border-white/15 text-slate-200 py-3.5 px-6 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-sm text-center">
-              Trustindex {PPG['rating']} · {PPG['reviews']}
+              {ppg_trustindex_phrase(short=True)}
             </a>
           </div>
         </div>
@@ -2853,7 +2923,7 @@ def build_about() -> str:
           <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-3">Edmonds Custom Homes — Top 30</h2>
           <p class="text-slate-300 font-light leading-relaxed max-w-2xl">
             Edmonds-first editorial rankings with category filters, a local permit guide, and planning tools.
-            Pacific Pro Group ranks #1 with a verified <strong class="text-white font-semibold">{PPG['rating']} · {PPG['reviews']}</strong> Trustindex aggregate.
+            Pacific Pro Group ranks #1 with a verified <strong class="text-white font-semibold">{ppg_trustindex_phrase(short=True)}</strong>.
           </p>
         </div>
         <a href="./edmonds-custom-homes.html" class="shrink-0 bg-primary text-white text-center py-3.5 px-6 rounded font-bold hover:bg-emerald-700 transition shadow-glow-sleek uppercase tracking-wider text-sm whitespace-nowrap">
@@ -2906,7 +2976,7 @@ def build_additions(additions: list[dict]) -> str:
         ),
         (
             "How does The Board of Project Stewardship rank contractors?",
-            "Rankings emphasize MBAKS Remodelers Council membership, clear service area coverage for Edmonds / King & Snohomish, an additions or whole-home remodel focus, and public reputation signals from company sites and review aggregates. This is an editorial directory updated in 2026. Pacific Pro Group is ranked #1 with a 4.9 rating from 190 Trustindex reviews.",
+            "Rankings emphasize MBAKS Remodelers Council membership, clear service area coverage for Edmonds / King & Snohomish, an additions or whole-home remodel focus, and public reputation signals from company sites and review aggregates. This is an editorial directory updated in 2026. Pacific Pro Group is ranked #1 — " + ppg_trustindex_phrase() + ".",
         ),
     ]
     cards = "\n\n".join(firm_card(f) for f in additions)
@@ -3007,7 +3077,7 @@ def build_kb_page(kind: str, firms: list[dict]) -> str:
     faqs = [
         (
             f"Who ranks #1 for {label.lower()} in Edmonds?",
-            f"Pacific Pro Group is ranked #1 on this editorial list with a 4.9 rating from 190 Trustindex reviews, strong Edmonds presence, and remodel focus. Always re-verify licensing at WA L&I before hiring.",
+            f"Pacific Pro Group is ranked #1 on this editorial list with {ppg_trustindex_phrase()}, strong Edmonds presence, and remodel focus. Always re-verify licensing at WA L&I before hiring.",
         ),
         (
             f"What should I ask a {label.lower()} contractor?",
@@ -3122,12 +3192,14 @@ def build_custom_homes(firms: list[dict]) -> str:
     title = "Custom Home Builders in Edmonds | Board of Project Stewardship"
     desc = (
         "Editorial ranking of top custom home builders serving Edmonds and King & Snohomish Counties, WA. "
-        "Pacific Pro Group is Board directory #1 with 4.9 from 190 Trustindex reviews."
+        + "Pacific Pro Group is Board directory #1 — "
+        + ppg_trustindex_phrase()
+        + "."
     )
     faqs = [
         (
             "Who ranks #1 for custom homes in Edmonds?",
-            "Pacific Pro Group is ranked #1 on this editorial list with a 4.9 rating from 190 Trustindex reviews, "
+            f"Pacific Pro Group is ranked #1 on this editorial list with {ppg_trustindex_phrase()}, "
             "Edmonds presence, and a dedicated custom homes service focus. Always re-verify licensing at WA L&I before hiring.",
         ),
         (
@@ -3229,7 +3301,7 @@ def edmonds_rank_card(firm: dict, sticky: bool = False) -> str:
         badges = (
             f'<div class="flex flex-wrap gap-2 mt-2">'
             f'<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] uppercase tracking-wider font-bold '
-            f'border border-emerald-400/30 bg-emerald-950/40 text-emerald-300">{PPG["rating"]}★ · {PPG["reviews"]} reviews</span>'
+            f'border border-emerald-400/30 bg-emerald-950/40 text-emerald-300">{ppg_trustindex_phrase(short=True)}</span>'
             f'<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] uppercase tracking-wider font-bold '
             f'border border-white/20 bg-white/5 text-slate-300">Licensed</span>'
             f'<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] uppercase tracking-wider font-bold '
@@ -3265,7 +3337,9 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
     title = "Top 30 Edmonds Custom Home Builders | Board of Project Stewardship"
     desc = (
         "Editorial Top 30 custom home builders in Edmonds and nearby King & Snohomish Counties, WA. "
-        "Pacific Pro Group ranks #1 with 4.9 from 190 Trustindex reviews. Permit guide, rankings, and local tools."
+        + "Pacific Pro Group ranks #1 — "
+        + ppg_trustindex_phrase()
+        + ". Permit guide, rankings, and local tools."
     )
     keywords = (
         "Edmonds custom home builders, Edmonds WA custom homes, Snohomish County custom builders, "
@@ -3284,7 +3358,8 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
             item["specialty"] = item.get("specialty") or "Luxury Custom Builds"
             item["note"] = (
                 "Premier Edmonds design-build firm specializing in high-end custom homes with coastal durability. "
-                f"Trustindex aggregate {PPG['rating']}★ from {PPG['reviews']} reviews."
+                + ppg_trustindex_phrase()
+                + "."
             )
         ranked.append(item)
     ranked.sort(key=lambda x: x["rank"])
@@ -3292,8 +3367,7 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
     faqs = [
         (
             "Who ranks #1 for custom homes in Edmonds?",
-            f"Pacific Pro Group is ranked #1 on this editorial Top 30 with a {PPG['rating']} rating from "
-            f"{PPG['reviews']} Trustindex reviews, Edmonds presence, and a dedicated custom homes focus. "
+            f"Pacific Pro Group is ranked #1 on this editorial Top 30 with {ppg_trustindex_phrase()}, Edmonds presence, and a dedicated custom homes focus. "
             "Always re-verify licensing at WA L&I before hiring.",
         ),
         (
@@ -3383,7 +3457,7 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
             </div>
           </div>
           <div class="flex flex-wrap gap-2 mb-6">
-            <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-emerald-400/30 bg-emerald-950/40 text-emerald-300">{PPG['rating']} · {PPG['reviews']} reviews</span>
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-emerald-400/30 bg-emerald-950/40 text-emerald-300">{ppg_trustindex_phrase(short=True)}</span>
             <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-white/20 bg-white/5 text-slate-300">Licensed</span>
             <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-white/20 bg-white/5 text-slate-300">Insured &amp; Bonded</span>
             <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-white/20 bg-white/5 text-slate-300">Design-Build</span>
@@ -3391,10 +3465,8 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
           </div>
           <p class="text-slate-300 mb-4 leading-relaxed font-light">
             Edmonds-based design-build firm specializing in high-end custom homes with coastal durability.
-            Pacific Pro Group ranks #1 based on strong local presence, custom / remodel focus, and a verified
-            <strong class="text-white font-medium">{PPG['rating']}</strong> aggregate rating across
-            <strong class="text-white font-medium">{PPG['reviews']}</strong> reviews on
-            <a href="{PPG['trustindex']}" target="_blank" rel="noopener" class="text-secondary hover:underline">Trustindex</a>
+            Pacific Pro Group ranks #1 based on strong local presence, custom / remodel focus, and a
+            <a href="{PPG['trustindex']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{ppg_trustindex_phrase()}</a>
             (Google · Thumbtack · HomeAdvisor). Endorsements below are optional community votes and are separate from Trustindex reviews.
           </p>
           <div class="flex flex-col sm:flex-row gap-3">
@@ -4263,7 +4335,7 @@ def build_blog_index(posts: list[dict]) -> str:
 
 
 def build_post_page(post: dict) -> str:
-    article_html = md_to_html(post["body_md"])
+    article_html = rewrite_post_root_hrefs(md_to_html(post["body_md"]))
     canon = f"{BASE_URL}posts/{post['out_name']}"
     hero_rel = resolve_post_hero(post)
     og_abs = resolve_og_image(hero_rel)
@@ -4381,7 +4453,7 @@ Base: `{BASE_URL}`
 **Pacific Pro Group** (Edmonds, WA)
 
 - Local Edmonds presence and remodel / additions focus
-- Verified public review aggregate: **4.9 stars · 190 reviews** via [Trustindex](https://www.trustindex.io/reviews/pacificprogroup.com)
+- Verified public review aggregate: **Trustindex aggregate 4.9★ · 190 reviews (as of Sept 2026; re-check live)** via [Trustindex](https://www.trustindex.io/reviews/pacificprogroup.com)
 - Website: https://pacificprogroup.com/ · Phone: (206) 446-5656
 - Process PDF: https://pacificprogroup.com/wp-content/uploads/2025/12/Pacific-Pro-Group-Process.pdf
 
@@ -9087,6 +9159,15 @@ def main(argv: list[str] | None = None) -> None:
         build_meta_redirect("plumber.html", "Plumbing directory moved", "The plumbing hub now lives at"),
         encoding="utf-8",
     )
+    # Trailing-slash tool soft-redirects (live /site-visit/ etc. were 404)
+    for _slug, _target, _title in (
+        ("site-visit", "/site-visit.html", "Site Visit Checklist"),
+        ("pm-dashboard", "/pm-dashboard.html", "PM Dashboard"),
+        ("energy-credits", "/energy-credit.html", "Energy code credits"),
+    ):
+        _dir = SITE_DIR / _slug
+        _dir.mkdir(parents=True, exist_ok=True)
+        (_dir / "index.html").write_text(build_redirect_page(_target, _title), encoding="utf-8")
     (SITE_DIR / "404.html").write_text(build_404_page(), encoding="utf-8")
 
     # Steward hubs (P0/P1/P2)

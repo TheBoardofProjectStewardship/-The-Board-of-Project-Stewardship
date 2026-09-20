@@ -517,13 +517,13 @@
 **Ship pass:** 2026-09-20 PT · Steward · tip `69238aa` (includes `ac9add5` about/faq + related-learning wave)
 
 ### DONE (shipped)
-1, 2, 3, 5, 6, 9, 15, 17, 19, 27, 31, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 67, 68, 69, 72, 73, 75, 80, 91, 92, 94, 96, 97, 98, 99, 100
+1, 2, 3, 5, 6, 9, 15, 17, 19, 27, 31, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 67, 68, 69, 72, 73, 75, 80, 91, 92, 94, 96, 97, 98, 99, 100, 32
 
 ### PARTIAL
 4 (primary trimmed; More still long), 7 (Mission dedupe), 16 (city unique depth improved via template but not every AHJ quirk), 20 (glossary links light), 66, 70, 71, 74, 76–79, 81–90, 93, 95
 
 ### SKIPPED / deferred
-8 (calculator — may be handled in sibling honesty commit), 10–14, 18, 21–26, 28–30, 32–33, 12, 13, 23
+8 (calculator — may be handled in sibling honesty commit), 10–14, 18, 21–26, 28–30, 33, 12, 13, 23
 
 **Live verify (PT):** about.html + faq.html HTTP 200; primary nav Home/About/Learn/Permits/Verify/How we rank; IndexNow 134 URLs HTTP 200.
 
@@ -600,3 +600,10 @@ Steward leftover batch after mega-nav / bridge / outro wave. Regenerated site; I
 
 **Live verify (PT):** sample 200s for Official portals hubs + trades + commercial/spec + glossary + homepage cornerstone — see Steward report.
 
+
+### DONE addendum — browser-audit P0/P1 (2026-09-20 PT)
+Shipped in generate_site.py + regen:
+- Tool trailing-slash redirects: `/site-visit/`, `/pm-dashboard/`, `/energy-credits/` → canonical `.html` via `build_redirect_page()` index.html
+- Post hub links: `ppg_widgets_html(prefix)` + `rewrite_post_root_hrefs()` so posts use `../` (not `./`) for site-root hubs
+- Softened Partner Network lead form → Directory #1 outbound only (View Pacific Pro Group); section “Planning tools · Directory #1 · Service region”
+- Trustindex: `trustindex_as_of: 2026-09` + `ppg_trustindex_phrase()` (as of Sept 2026; re-check live) — closes #32 dating
