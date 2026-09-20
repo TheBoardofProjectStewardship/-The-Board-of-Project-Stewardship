@@ -1,186 +1,310 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Board of Project Stewardship estimate worksheet for federal Energy Efficient Home Improvement Credit (25C) window limits and published Puget Sound utility window rebates. Estimates only — not tax advice.">
-<meta name="robots" content="index,follow">
-<link rel="canonical" href="https://boardofprojectstewardship.com/energy-credit.html">
-<title>WA Window Energy Credit Estimator | Board of Project Stewardship</title>
+<title>WSEC-R 2021 Prescriptive Credits | Board of Project Stewardship</title>
+<meta name="description" content="Washington State Energy Code Residential 2021 single-family prescriptive path credit worksheet for Edmonds, King, and Snohomish projects.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://boardofprojectstewardship.com/tools/energy-credit/">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
-tailwind.config={theme:{extend:{colors:{primary:'#166534',secondary:'#4ade80'}}}}
+tailwind.config = { darkMode:"class", theme:{ extend:{ colors:{ obsidian:"#0a0a0a", charcoal:"#1a1a1a", primary:"#166534", secondary:"#4ade80" }}}};
 </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  body{font-family:Inter,system-ui,sans-serif}
-  .src a{color:#166534;text-decoration:underline}
+body{font-family:Inter,system-ui,sans-serif}
+.field label{display:block;font-size:.7rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#94a3b8;margin-bottom:.4rem}
+.field input,.field select{width:100%;background:#0a0a0a;border:1px solid rgba(255,255,255,.12);border-radius:.5rem;padding:.65rem .75rem;color:#f8fafc;font-size:.95rem}
+.field input:focus,.field select:focus{outline:2px solid #166534;border-color:#166534}
+.opt{display:flex;gap:.65rem;align-items:flex-start;padding:.65rem .75rem;border:1px solid rgba(255,255,255,.08);border-radius:.6rem;cursor:pointer;background:#0a0a0a;margin-bottom:.4rem}
+.opt:hover{border-color:rgba(74,222,128,.35)}
+.opt.on{border-color:#4ade80;background:rgba(22,101,52,.25)}
+.opt input{margin-top:.2rem;accent-color:#166534;flex-shrink:0}
+.stat{background:#0a0a0a;border:1px solid rgba(255,255,255,.08);border-radius:.75rem;padding:.9rem 1rem;margin-bottom:.6rem}
+.stat .v{font-size:1.5rem;font-weight:700;color:#4ade80}
+.pass{color:#4ade80}.short{color:#fbbf24}
+@media print{body{background:#fff;color:#111}.no-print{display:none!important}.opt,.stat,.field input,.field select{border-color:#ccc;background:#fff;color:#111}.stat .v,.pass{color:#166534}}
 </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen">
-  <div class="bg-amber-50 border-b border-amber-200 text-amber-950 text-sm px-4 py-3">
-    <div class="max-w-3xl mx-auto">
-      <p class="leading-relaxed"><strong>Estimates only — not tax, legal, or rebate advice.</strong> Caps and rules change. Confirm eligibility, product ratings (Energy Star / NFRC U-factor), QMID where required, and utility forms before you claim anything. Re-check
-        <a class="underline font-semibold" href="https://www.irs.gov/instructions/i5695" target="_blank" rel="noopener">IRS Form 5695 instructions</a>,
-        <a class="underline font-semibold" href="https://www.pse.com/en/rebates/windows-rebates" target="_blank" rel="noopener">PSE windows rebates</a>, and
-        <a class="underline font-semibold" href="https://www.snopud.com/save-energy/residential/rebates/weatherization/" target="_blank" rel="noopener">Snohomish PUD weatherization</a>.
-      </p>
+<body class="bg-obsidian text-slate-100 min-h-screen">
+<header class="bg-charcoal/90 border-b border-white/10 sticky top-0 z-20 backdrop-blur no-print">
+  <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+    <div>
+      <p class="text-[10px] uppercase tracking-[0.2em] text-secondary font-semibold">Board of Project Stewardship · Good Steward Tools</p>
+      <h1 class="text-lg sm:text-xl font-bold text-white">WSEC-R 2021 Prescriptive Credits</h1>
+    </div>
+    <div class="flex gap-3 text-xs">
+      <button type="button" id="btnPrint" class="text-slate-400 hover:text-secondary uppercase tracking-wider">Print summary</button>
+      <a href="../../energy-credit.html" class="text-slate-400 hover:text-secondary uppercase tracking-wider">Tool landing</a>
     </div>
   </div>
-  <div class="bg-slate-900 text-slate-200 text-xs px-4 py-2">
-    <div class="max-w-3xl mx-auto flex flex-wrap justify-between gap-2">
-      <span>Board of Project Stewardship — Good Steward Tools</span>
-      <a href="https://boardofprojectstewardship.com/energy-credit.html" class="text-secondary hover:underline" target="_parent">Open Board landing</a>
+</header>
+
+<main class="max-w-6xl mx-auto px-4 py-8 space-y-6">
+  <p class="text-sm text-slate-400 leading-relaxed max-w-3xl">
+    Worksheet for the <strong class="text-slate-200">2021 Washington State Energy Code — Residential</strong> single-family / townhouse prescriptive path (eff. March 15, 2024).
+    Enter project size, pick one fuel-normalization row, then add energy credits. Source: WSEC-R 2021 Prescriptive Path EPCA C103.
+  </p>
+
+  <section class="bg-charcoal border border-white/10 rounded-xl p-5 sm:p-6 space-y-4">
+    <h2 class="text-sm font-bold uppercase tracking-wider text-slate-300 border-b border-white/10 pb-2">Project</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="field sm:col-span-2"><label for="address">Address or lot</label><input id="address" type="text" placeholder="123 Main St, Edmonds"></div>
+      <div class="field"><label for="city">City</label><input id="city" type="text" value="Edmonds"></div>
+      <div class="field"><label for="permit">Permit #</label><input id="permit" type="text"></div>
+      <div class="field"><label for="cfa">Conditioned floor area (sf)</label><input id="cfa" type="number" min="0" step="1" value="2400"></div>
+      <div class="field"><label for="fen">Fenestration area (sf)</label><input id="fen" type="number" min="0" step="1" value="350"></div>
+      <div class="field"><label for="dwelling">Dwelling / addition class</label>
+        <select id="dwelling">
+          <option value="auto">Auto from size</option>
+          <option value="small">1 · Small DU (5.0 credits)</option>
+          <option value="medium" selected>2 · Medium DU (8.0 credits)</option>
+          <option value="large">3 · Large DU &gt;5000 sf (9.0 credits)</option>
+          <option value="r2">4 · Group R-2 unit (6.5 credits)</option>
+          <option value="add">5 · Addition 150–500 sf (2.0 credits)</option>
+        </select>
+      </div>
+      <div class="field"><label for="suggested">Suggested class</label><input id="suggested" type="text" readonly></div>
     </div>
+    <p class="text-xs text-slate-500 leading-relaxed">Base envelope (Table R402.1.3): fenestration U-0.30 · skylight U-0.50 · ceiling R-60 · wood wall R-20+5ci or R-13+10ci · floor R-30 · below-grade 10/15/21 int +5 TB · slab R-10, 4 ft.</p>
+  </section>
+
+  <div class="grid lg:grid-cols-5 gap-6">
+    <div class="lg:col-span-3 space-y-6">
+      <section class="bg-charcoal border border-white/10 rounded-xl p-5 sm:p-6">
+        <h2 class="text-sm font-bold uppercase tracking-wider text-slate-300 border-b border-white/10 pb-2 mb-3">Table R406.2 — Fuel normalization (pick one)</h2>
+        <div id="fuelOpts"></div>
+      </section>
+
+      <section class="bg-charcoal border border-white/10 rounded-xl p-5 sm:p-6 space-y-5">
+        <h2 class="text-sm font-bold uppercase tracking-wider text-slate-300 border-b border-white/10 pb-2">Table R406.3 — Energy credits</h2>
+        <div><h3 class="text-xs font-semibold text-secondary uppercase tracking-wider mb-2">1 · Efficient building envelope (one)</h3><div id="cat1"></div></div>
+        <div><h3 class="text-xs font-semibold text-secondary uppercase tracking-wider mb-2">2 · Air leakage + efficient ventilation (one)</h3><div id="cat2"></div></div>
+        <div><h3 class="text-xs font-semibold text-secondary uppercase tracking-wider mb-2">3 · High efficiency HVAC (one of 3.1–3.10)</h3><div id="cat3"></div>
+          <div id="cat311" class="mt-2"></div></div>
+        <div><h3 class="text-xs font-semibold text-secondary uppercase tracking-wider mb-2">4 · HVAC distribution</h3><div id="cat4"></div></div>
+        <div><h3 class="text-xs font-semibold text-secondary uppercase tracking-wider mb-2">5 · Efficient water heating (5.1/5.2 stackable; one of 5.3–5.8)</h3>
+          <div id="cat5s" class="mb-2"></div><div id="cat5m"></div></div>
+        <div>
+          <h3 class="text-xs font-semibold text-secondary uppercase tracking-wider mb-2">6 · Renewable electric energy</h3>
+          <div class="field max-w-xs mb-2"><label for="renewKwh">Annual on-site wind/solar (kWh / housing unit)</label>
+            <input id="renewKwh" type="number" min="0" step="100" value="0"></div>
+          <p class="text-xs text-slate-500">0.5 credit per 600 kWh, max 4.5 (option 6.1).</p>
+        </div>
+        <div><h3 class="text-xs font-semibold text-secondary uppercase tracking-wider mb-2">7 · Appliance package</h3><div id="cat7"></div></div>
+      </section>
+    </div>
+
+    <aside class="lg:col-span-2 space-y-4 lg:sticky lg:top-24 self-start">
+      <div class="bg-charcoal border border-primary/40 rounded-xl p-5">
+        <h2 class="text-sm font-bold uppercase tracking-wider text-secondary mb-3">Credit summary</h2>
+        <div class="stat"><p class="text-xs text-slate-400 uppercase tracking-wider">Required</p><p class="v" id="outReq">8.0</p><p class="text-xs text-slate-500 mt-1" id="outClass"></p></div>
+        <div class="stat"><p class="text-xs text-slate-400 uppercase tracking-wider">Fuel normalization</p><p class="v" id="outFuel">0</p></div>
+        <div class="stat"><p class="text-xs text-slate-400 uppercase tracking-wider">Energy credits (R406.3)</p><p class="v" id="outEnergy">0</p></div>
+        <div class="stat border border-secondary/30"><p class="text-xs text-slate-400 uppercase tracking-wider">Total</p><p class="v text-2xl" id="outTotal">0</p></div>
+        <p class="text-sm font-semibold mt-2" id="outStatus"></p>
+        <p class="text-xs text-slate-500 leading-relaxed mt-1" id="outDetail"></p>
+      </div>
+      <div class="bg-charcoal border border-white/10 rounded-xl p-4 text-xs text-slate-400 leading-relaxed">
+        <p class="text-slate-300 font-semibold mb-2">Selected options</p>
+        <ul id="outList" class="list-disc pl-4 space-y-1"></ul>
+      </div>
+      <p class="text-[11px] text-slate-600 leading-relaxed no-print">When you hire, shortlist from Board directories — Board #1:
+        <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a>.</p>
+    </aside>
   </div>
+</main>
 
-  <main class="max-w-3xl mx-auto px-4 py-8">
-    <h1 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mb-2">WA window energy credit estimator</h1>
-    <p class="text-slate-600 font-light mb-6 leading-relaxed">Worksheet for Edmonds / King &amp; Snohomish homeowners comparing <strong>published</strong> federal §25C window limits with common utility rebate schedules. Numbers below are from linked public pages as of the Board’s 2026-09-20 review.</p>
+<footer class="max-w-6xl mx-auto px-4 py-8 text-center text-[11px] text-slate-500 border-t border-white/5 no-print">
+  Board of Project Stewardship · Edmonds / King &amp; Snohomish · WSEC-R 2021 Prescriptive Path worksheet
+</footer>
 
-    <form id="calc" class="space-y-5 bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
-      <div>
-        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1" for="year">Year windows placed in service</label>
-        <select id="year" class="w-full border border-slate-300 rounded-lg px-3 py-2.5">
-          <option value="2025">2025 (federal §25C still available for property placed in service in 2025)</option>
-          <option value="2026" selected>2026 or later (federal §25C ended for property after 12/31/2025)</option>
-          <option value="2024">2024</option>
-        </select>
-      </div>
-      <div class="grid sm:grid-cols-2 gap-4">
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1" for="cost">Eligible window / skylight product cost ($)</label>
-          <input id="cost" type="number" min="0" step="1" value="8000" class="w-full border border-slate-300 rounded-lg px-3 py-2.5">
-          <p class="text-xs text-slate-500 mt-1">For §25C envelope components, IRS instructions generally exclude onsite prep/install labor from the component cost. Enter only amounts you believe are eligible — this tool does not decide eligibility.</p>
-        </div>
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1" for="count">Number of windows replaced</label>
-          <input id="count" type="number" min="1" step="1" value="8" class="w-full border border-slate-300 rounded-lg px-3 py-2.5">
-        </div>
-      </div>
-      <div class="grid sm:grid-cols-2 gap-4">
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1" for="existing">Existing glazing (for utility rules)</label>
-          <select id="existing" class="w-full border border-slate-300 rounded-lg px-3 py-2.5">
-            <option value="single">Single-pane</option>
-            <option value="double_metal">Double-pane metal frame</option>
-            <option value="other">Other / not sure</option>
-          </select>
-        </div>
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1" for="ufactor">New product U-factor band (NFRC)</label>
-          <select id="ufactor" class="w-full border border-slate-300 rounded-lg px-3 py-2.5">
-            <option value="022">U-factor 0.22 or lower</option>
-            <option value="023_030" selected>U-factor 0.23–0.30</option>
-            <option value="above">Above 0.30 / unknown</option>
-          </select>
-        </div>
-      </div>
-      <div>
-        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1" for="utility">Electric / gas utility</label>
-        <select id="utility" class="w-full border border-slate-300 rounded-lg px-3 py-2.5">
-          <option value="pse">Puget Sound Energy (PSE)</option>
-          <option value="snopud">Snohomish County PUD</option>
-          <option value="none">Other / none listed here</option>
-        </select>
-      </div>
-      <label class="flex items-start gap-2 text-sm text-slate-700">
-        <input id="boost" type="checkbox" class="mt-1">
-        <span>PSE Efficiency Boost / income-qualified path (must be confirmed with PSE — higher published per-window amounts).</span>
-      </label>
-      <button type="submit" class="w-full sm:w-auto bg-primary text-white font-bold uppercase tracking-wider text-xs px-6 py-3 rounded-lg hover:bg-emerald-800">Update estimate</button>
-    </form>
-
-    <section id="results" class="mt-6 bg-slate-900 text-white rounded-xl p-5 space-y-4" aria-live="polite"></section>
-
-    <section class="mt-8 text-sm text-slate-600 space-y-3 src leading-relaxed">
-      <h2 class="text-base font-black text-slate-900">Sources (public)</h2>
-      <ul class="list-disc pl-5 space-y-2">
-        <li>IRS — Energy Efficient Home Improvement Credit / Form 5695: windows &amp; skylights 30% with <strong>$600 combined cap</strong>; annual envelope-style limit <strong>$1,200</strong> (with separate heat-pump rules). <a href="https://www.irs.gov/instructions/i5695" target="_blank" rel="noopener">Instructions for Form 5695</a>; <a href="https://www.irs.gov/credits-deductions/frequently-asked-questions-about-energy-efficient-home-improvements-and-residential-clean-energy-property-credits-energy-efficient-home-improvement-credit-qualifying-expenditures-and-credit-amount" target="_blank" rel="noopener">IRS 25C FAQ</a>.</li>
-        <li>IRS OBBB FAQs — §25C not allowed for property placed in service after <strong>December 31, 2025</strong>. <a href="https://www.irs.gov/newsroom/faqs-for-modification-of-sections-25c-25d-25e-30c-30d-45l-45w-and-179d-under-public-law-119-21-139-stat-72-july-4-2025-commonly-known-as-the-one-big-beautiful-bill-obbb" target="_blank" rel="noopener">IRS OBBB energy credit FAQs</a>.</li>
-        <li>PSE windows rebate page (purchase/install through 12/31/2026 per PSE page; apply within 60 days): standard published amounts include <strong>$50</strong> or <strong>$100</strong> per qualifying window by U-factor / existing type, with published program caps; Efficiency Boost amounts higher. <a href="https://www.pse.com/en/rebates/windows-rebates" target="_blank" rel="noopener">pse.com/en/rebates/windows-rebates</a>.</li>
-        <li>Snohomish PUD weatherization: published <strong>$100</strong> per replaced single-pane window; <strong>$50</strong> for qualifying double-pane metal-frame replacements; U-0.30 or lower; PUD-registered contractor; electric heat. <a href="https://www.snopud.com/save-energy/residential/rebates/weatherization/" target="_blank" rel="noopener">snopud.com weatherization rebates</a>.</li>
-      </ul>
-      <p>Board of Project Stewardship publishes standards and directories. This worksheet does not file your taxes or submit a utility rebate.</p>
-    </section>
-  </main>
 <script>
 (function(){
-  const $ = (id) => document.getElementById(id);
-  function money(n){ return (Math.max(0, Math.round(n))).toLocaleString('en-US', {style:'currency', currency:'USD', maximumFractionDigits:0}); }
-  function calc(){
-    const year = $('year').value;
-    const cost = Math.max(0, Number($('cost').value)||0);
-    const count = Math.max(0, Math.floor(Number($('count').value)||0));
-    const existing = $('existing').value;
-    const ufactor = $('ufactor').value;
-    const utility = $('utility').value;
-    const boost = $('boost').checked;
+  function $(id){ return document.getElementById(id); }
+  var FUEL=[
+    {id:"f1",c:0,label:"1 — Combustion heating meeting minimum federal efficiency"},
+    {id:"f2",c:1.5,label:"2 — Heat pump (federal std) + supplemental ER or combustion furnace"},
+    {id:"f3",c:0.5,label:"3 — Electric resistance only (forced air or zonal)"},
+    {id:"f4",c:3.0,label:"4 — Heat pump meeting federal std or air-to-water HP (AHRI 550/590)"},
+    {id:"f5",c:2.0,label:"5 — ER with inverter mini-split in largest zone, or ≤2 kW total installed heating"}
+  ];
+  var CAT1=[
+    {id:"1.1",c:0.5,label:"1.1 — Vertical fenestration U-0.22"},
+    {id:"1.2",c:1.0,label:"1.2 — U-0.25 fenestration + floor/slab upgrades, or Total UA −15%"},
+    {id:"1.3",c:1.5,label:"1.3 — U-0.18 + advanced envelope, or Total UA −22.5%"},
+    {id:"1.4",c:2.5,label:"1.4 — U-0.18 + highest envelope package, or Total UA −30%"}
+  ];
+  var CAT2=[
+    {id:"2.1",c:1.0,label:"2.1 — ≤2.0 ACH50 (or 0.25 cfm/ft² R-2) + HRV ≥0.65 SRE"},
+    {id:"2.2",c:1.5,label:"2.2 — ≤1.5 ACH50 (or 0.20 cfm/ft² R-2) + HRV ≥0.75 SRE"},
+    {id:"2.3",c:2.0,label:"2.3 — ≤0.6 ACH50 (or 0.15 cfm/ft² R-2) + HRV ≥0.80 SRE"}
+  ];
+  var CAT3=[
+    {id:"3.1",c:1.0,label:"3.1 — ENERGY STAR (U.S. North) gas/propane furnace AFUE ≥95% or boiler ≥90%"},
+    {id:"3.2",c:0.5,label:"3.2 — Secondary for System Type 2: ducted ASHP HSPF2 ≥8.5 or ES boiler ≥90%"},
+    {id:"3.3",c:0.5,label:"3.3 — Centrally ducted ASHP HSPF2 ≥8.5; NEEP cold-climate if design ≤23°F"},
+    {id:"3.4",c:1.5,label:"3.4 — Closed-loop GSHP COP ≥3.3 or open-loop WSHP COP ≥3.6"},
+    {id:"3.5",c:1.5,label:"3.5 — Ductless mini-split (HSPF ≥10) on largest zone; primary = zonal ER"},
+    {id:"3.6",c:1.0,label:"3.6 — Centrally ducted cold-climate ccVHP (NEEP list)"},
+    {id:"3.7",c:2.0,label:"3.7 — Ductless HP whole dwelling, no ER in primary living"},
+    {id:"3.8",c:1.0,label:"3.8 — Air-to-water heat pump COP ≥3.2 at 47°F"},
+    {id:"3.9",c:1.5,label:"3.9 — Gas-fired heat pump UEF ≥1.15"},
+    {id:"3.10",c:2.5,label:"3.10 — Combination water + space heating (NEEA Tier 2 gas HPWH / qualifying gas HP)"}
+  ];
+  var CAT311=[{id:"3.11",c:0.5,label:"3.11 — Connected thermostat (ENERGY STAR). Only with 3.1 or 3.3 (not VCHP)"}];
+  var CAT4=[{id:"4.1",c:0.5,label:"4.1 — HVAC + ducts per R403.3.2 tight distribution path"}];
+  var CAT5S=[
+    {id:"5.1",c:0.5,label:"5.1 — Drain-water heat recovery (≥2 showers)"},
+    {id:"5.2",c:0.5,label:"5.2 — Compact hot water distribution (≥1.5 baths)"}
+  ];
+  var CAT5M=[
+    {id:"5.3",c:0.5,label:"5.3 — ENERGY STAR gas/propane WH UEF ≥0.80"},
+    {id:"5.4",c:1.0,label:"5.4 — ES gas WH UEF ≥0.91, solar credit, or GSHP WH"},
+    {id:"5.5",c:1.5,label:"5.5 — Gas HPWH NEEA Tier 2"},
+    {id:"5.6",c:2.0,label:"5.6 — Electric HPWH NEEA Tier III / split UEF ≥2.9"},
+    {id:"5.7",c:2.5,label:"5.7 — Electric split HPWH UEF ≥2.9 outdoor A2R"},
+    {id:"5.8",c:2.5,label:"5.8 — Combination WH + space heating (gas HP path)"}
+  ];
+  var CAT7=[{id:"7.1",c:0.5,label:"7.1 — Full ENERGY STAR appliance package (no dryer ducts)"}];
 
-    let federal = 0, federalNote = '';
-    if (year === '2026') {
-      federal = 0;
-      federalNote = 'Federal §25C is not allowed for property placed in service after Dec 31, 2025 (IRS OBBB FAQs). Enter 2025 if that is when units were placed in service.';
-    } else {
-      const raw = cost * 0.30;
-      federal = Math.min(raw, 600);
-      federalNote = 'Published §25C treatment for exterior windows/skylights: 30% of eligible costs, combined cap $600 (within the broader annual limits on Form 5695). Energy Star / QMID rules still apply — this worksheet does not verify products.';
-    }
+  var state={fuel:"f4",cat1:null,cat2:null,cat3:null,cat311:false,cat4:null,cat5s:{},cat5m:null,cat7:false};
 
-    let utilityAmt = 0, utilityNote = 'No published utility schedule selected.';
-    if (utility === 'pse') {
-      if (ufactor === 'above' || existing === 'other') {
-        utilityNote = 'PSE amounts depend on existing window type and new U-factor. Pick a listed band or confirm on PSE’s rebate table before estimating.';
-      } else {
-        let per = 0;
-        if (boost) {
-          per = 200;
-          utilityNote = 'PSE Efficiency Boost published path: up to $200 per qualifying window (program caps apply; income qualification required). Confirm with PSE.';
-        } else if (existing === 'single' && ufactor === '022') {
-          per = 100;
-          utilityNote = 'PSE published standard path example: $100 per window for U-factor 0.22 or lower replacing single-pane (subject to PSE caps / primary heat rules).';
-        } else if (existing === 'single' && ufactor === '023_030') {
-          per = 50;
-          utilityNote = 'PSE published standard path example: $50 per window for U-factor 0.23–0.30 replacing single-pane (subject to PSE caps).';
-        } else if (existing === 'double_metal' && ufactor === '022') {
-          per = 100;
-          utilityNote = 'PSE table includes higher amounts for low-U replacements of certain existing types — confirm your row on pse.com before claiming.';
-        } else {
-          utilityNote = 'Your PSE combination may not match a simple published row. Use PSE’s current table.';
-        }
-        let cap = boost ? 2000 : (per >= 100 ? 1500 : 750);
-        utilityAmt = Math.min(per * count, cap);
-        utilityNote += ' Worksheet applies a published program-style cap of ' + money(cap) + ' for this estimate path.';
-      }
-    } else if (utility === 'snopud') {
-      if (ufactor === 'above') {
-        utilityNote = 'SnoPUD requires new windows U-0.30 or lower (and other rules).';
-      } else if (existing === 'single') {
-        utilityAmt = 100 * count;
-        utilityNote = 'SnoPUD published: $100 per replaced single-pane window (electric heat, PUD-registered contractor, specs apply). No automatic cap modeled here — confirm with PUD.';
-      } else if (existing === 'double_metal') {
-        utilityAmt = 50 * count;
-        utilityNote = 'SnoPUD published: $50 per qualifying double-pane metal-frame replacement. Confirm current weatherization page.';
-      } else {
-        utilityNote = 'Select existing glazing type for a SnoPUD published per-window estimate.';
-      }
-    }
-
-    const total = federal + utilityAmt;
-    $('results').innerHTML = `
-      <h2 class="text-lg font-black tracking-tight">Estimate summary</h2>
-      <div class="grid sm:grid-cols-3 gap-3 text-sm">
-        <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-slate-400 text-xs uppercase tracking-wider mb-1">Federal §25C (est.)</div><div class="text-2xl font-black text-secondary">${money(federal)}</div></div>
-        <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-slate-400 text-xs uppercase tracking-wider mb-1">Utility rebate (est.)</div><div class="text-2xl font-black text-secondary">${money(utilityAmt)}</div></div>
-        <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-slate-400 text-xs uppercase tracking-wider mb-1">Combined (est.)</div><div class="text-2xl font-black text-white">${money(total)}</div></div>
-      </div>
-      <p class="text-sm text-slate-300 leading-relaxed"><strong class="text-white">Federal note:</strong> ${federalNote}</p>
-      <p class="text-sm text-slate-300 leading-relaxed"><strong class="text-white">Utility note:</strong> ${utilityNote}</p>
-      <p class="text-xs text-slate-400">Combined total stacks federal tax credit (if any) with a utility rebate estimate. Stacking, taxable income limits, and “placed in service” timing can reduce what you actually receive.</p>
-    `;
+  function find(list,id){ for(var i=0;i<list.length;i++) if(list[i].id===id) return list[i]; return null; }
+  function reqCredits(cls){ return ({small:5,medium:8,large:9,r2:6.5,add:2})[cls]||8; }
+  function classLabel(c){
+    return ({
+      small:"Small dwelling unit — 5.0 credits required",
+      medium:"Medium dwelling unit — 8.0 credits required",
+      large:"Large dwelling unit (>5000 sf) — 9.0 credits required",
+      r2:"Group R-2 dwelling unit — 6.5 credits required",
+      add:"Addition 150–500 sf — 2.0 credits required"
+    })[c]||c;
   }
-  $('calc').addEventListener('submit', function(e){ e.preventDefault(); calc(); });
-  ['year','cost','count','existing','ufactor','utility','boost'].forEach(id => $(id).addEventListener('change', calc));
-  calc();
+  function suggestClass(){
+    var cfa=parseFloat($("cfa").value)||0;
+    var fen=parseFloat($("fen").value)||0;
+    var d=$("dwelling").value;
+    if(d==="add") return "add";
+    if(d==="r2") return "r2";
+    if(d!=="auto") return d;
+    if(cfa>5000) return "large";
+    if(cfa>0 && cfa<1500 && fen<300) return "small";
+    return "medium";
+  }
+  function renewCredits(){
+    var kwh=Math.max(0,parseFloat($("renewKwh").value)||0);
+    return Math.min(4.5, Math.floor(kwh/600)*0.5);
+  }
+
+  function renderRadios(containerId, items, group, selectedId, allowNone){
+    var el=$(containerId); el.innerHTML="";
+    function add(val, labelHtml, on){
+      var lab=document.createElement("label");
+      lab.className="opt"+(on?" on":"");
+      lab.innerHTML='<input type="radio" name="'+group+'" value="'+val+'"'+(on?" checked":"")+"> "+labelHtml;
+      lab.querySelector("input").addEventListener("change", function(){ onPick(group, val); });
+      el.appendChild(lab);
+    }
+    if(allowNone) add("", '<span class="text-sm text-slate-400">None</span>', !selectedId);
+    items.forEach(function(it){
+      add(it.id, '<span class="text-sm text-slate-200"><span class="text-secondary font-semibold">'+it.c.toFixed(1)+"</span> · "+it.label+"</span>", selectedId===it.id);
+    });
+  }
+  function renderChecks(containerId, items, mapKey){
+    var el=$(containerId); el.innerHTML="";
+    items.forEach(function(it){
+      var on=!!state[mapKey][it.id];
+      var lab=document.createElement("label");
+      lab.className="opt"+(on?" on":"");
+      lab.innerHTML='<input type="checkbox"'+(on?" checked":"")+'> <span class="text-sm text-slate-200"><span class="text-secondary font-semibold">'+it.c.toFixed(1)+"</span> · "+it.label+"</span>";
+      lab.querySelector("input").addEventListener("change", function(e){
+        state[mapKey][it.id]=e.target.checked; paint();
+      });
+      el.appendChild(lab);
+    });
+  }
+  function renderToggle(containerId, items, flagKey){
+    var el=$(containerId); el.innerHTML="";
+    items.forEach(function(it){
+      var on=!!state[flagKey];
+      var lab=document.createElement("label");
+      lab.className="opt"+(on?" on":"");
+      lab.innerHTML='<input type="checkbox"'+(on?" checked":"")+'> <span class="text-sm text-slate-200"><span class="text-secondary font-semibold">'+it.c.toFixed(1)+"</span> · "+it.label+"</span>";
+      lab.querySelector("input").addEventListener("change", function(e){
+        state[flagKey]=e.target.checked; paint();
+      });
+      el.appendChild(lab);
+    });
+  }
+  function onPick(group, id){
+    if(group==="fuel") state.fuel=id||"f1";
+    if(group==="cat1") state.cat1=id||null;
+    if(group==="cat2") state.cat2=id||null;
+    if(group==="cat3") state.cat3=id||null;
+    if(group==="cat4") state.cat4=id||null;
+    if(group==="cat5m") state.cat5m=id||null;
+    paint();
+  }
+
+  function calc(){
+    var cls=suggestClass();
+    $("suggested").value=classLabel(cls);
+    var req=reqCredits(cls);
+    var fuel=find(FUEL,state.fuel)||FUEL[0];
+    var energy=0, picks=[];
+    picks.push("Fuel "+fuel.id.slice(1)+": "+fuel.c.toFixed(1));
+    var c1=find(CAT1,state.cat1); if(c1){ energy+=c1.c; picks.push(c1.id+": "+c1.c.toFixed(1)); }
+    var c2=find(CAT2,state.cat2); if(c2){ energy+=c2.c; picks.push(c2.id+": "+c2.c.toFixed(1)); }
+    var c3=find(CAT3,state.cat3); if(c3){ energy+=c3.c; picks.push(c3.id+": "+c3.c.toFixed(1)); }
+    if(state.cat311){
+      if(state.cat3==="3.1"||state.cat3==="3.3"){ energy+=0.5; picks.push("3.11: 0.5"); }
+      else { picks.push("3.11 not applied (needs 3.1 or 3.3)"); }
+    }
+    var c4=find(CAT4,state.cat4); if(c4){ energy+=c4.c; picks.push(c4.id+": "+c4.c.toFixed(1)); }
+    CAT5S.forEach(function(it){ if(state.cat5s[it.id]){ energy+=it.c; picks.push(it.id+": "+it.c.toFixed(1)); }});
+    var c5=find(CAT5M,state.cat5m); if(c5){ energy+=c5.c; picks.push(c5.id+": "+c5.c.toFixed(1)); }
+    var r=renewCredits();
+    if(r>0){ energy+=r; picks.push("6.1 renewable: "+r.toFixed(1)+" ("+(parseFloat($("renewKwh").value)||0)+" kWh)"); }
+    if(state.cat7){ energy+=0.5; picks.push("7.1: 0.5"); }
+
+    var total=Math.round((fuel.c+energy)*10)/10;
+    var gap=Math.round((req-total)*10)/10;
+    $("outReq").textContent=req.toFixed(1);
+    $("outClass").textContent=classLabel(cls);
+    $("outFuel").textContent=fuel.c.toFixed(1);
+    $("outEnergy").textContent=energy.toFixed(1);
+    $("outTotal").textContent=total.toFixed(1);
+    if(total+1e-9>=req){
+      $("outStatus").innerHTML='<span class="pass">PASS — meets or exceeds required credits</span>';
+      $("outDetail").textContent="Total "+total.toFixed(1)+" ≥ required "+req.toFixed(1)+".";
+    } else {
+      $("outStatus").innerHTML='<span class="short">SHORT — need '+gap.toFixed(1)+" more credit(s)</span>";
+      $("outDetail").textContent="Add envelope, HRV, HVAC, water heating, or renewables to close the "+gap.toFixed(1)+" gap.";
+    }
+    $("outList").innerHTML=picks.map(function(p){return "<li>"+p+"</li>";}).join("")||"<li>None selected yet</li>";
+  }
+
+  function paint(){
+    renderRadios("fuelOpts", FUEL, "fuel", state.fuel, false);
+    renderRadios("cat1", CAT1, "cat1", state.cat1, true);
+    renderRadios("cat2", CAT2, "cat2", state.cat2, true);
+    renderRadios("cat3", CAT3, "cat3", state.cat3, true);
+    renderToggle("cat311", CAT311, "cat311");
+    renderRadios("cat4", CAT4, "cat4", state.cat4, true);
+    renderChecks("cat5s", CAT5S, "cat5s");
+    renderRadios("cat5m", CAT5M, "cat5m", state.cat5m, true);
+    renderToggle("cat7", CAT7, "cat7");
+    calc();
+  }
+
+  ["cfa","fen","dwelling","renewKwh"].forEach(function(id){
+    $(id).addEventListener("input", calc);
+    $(id).addEventListener("change", function(){ paint(); });
+  });
+  $("btnPrint").addEventListener("click", function(){ window.print(); });
+  paint();
 })();
 </script>
 </body>

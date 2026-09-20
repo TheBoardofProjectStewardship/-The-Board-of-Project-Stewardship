@@ -181,6 +181,18 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://boardofprojectstewardship.com/tools/energy-credits/index.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://boardofprojectstewardship.com/tools/energy-credit/index.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://boardofprojectstewardship.com/tools/pm-dashboard/index.html</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>

@@ -880,7 +880,7 @@ def nav_html(active: str = "", prefix: str = "") -> str:
     more_tools = [
         ("steward", href("good-steward.html"), "Good Steward"),
         ("site-visit", href("site-visit.html"), "Site Visit Checklist"),
-        ("energy-credit", href("energy-credit.html"), "Energy Credits"),
+        ("energy-credit", href("energy-credit.html"), "Energy Code Credits"),
         ("pm-dashboard", href("pm-dashboard.html"), "PM Dashboard"),
         ("story", href("another-story.html"), "Another Story"),
     ]
@@ -1008,6 +1008,7 @@ def public_tool_href(slug: str, prefix: str = "") -> str:
         "another-story": "another-story.html",
         "good-steward": "good-steward.html",
         "energy-credit": "energy-credit.html",
+        "energy-credits": "energy-credit.html",
         "story": "another-story.html",
         "steward": "good-steward.html",
     }
@@ -1083,7 +1084,7 @@ def steward_cta_strip(prefix: str = "") -> str:
     return f"""  <aside id="good-steward-cta" class="max-w-6xl mx-auto px-4 py-8 relative z-20 border-t border-white/5">
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>
     <h2 class="text-xl font-black text-white tracking-tight mb-2">Site visit and PM checklists</h2>
-    <p class="text-sm text-slate-400 font-light leading-relaxed max-w-3xl mb-4">Educational Board templates for Edmonds / coastal Puget Sound. Data stays in your browser — not a bid, permit, or schedule.</p>
+    <p class="text-sm text-slate-400 font-light leading-relaxed max-w-3xl mb-4">Good Steward tools for Edmonds / coastal Puget Sound. Data stays in your browser on this device.</p>
     <div class="flex flex-wrap gap-3">
       <a href="{open_steward}" class="bg-primary text-white px-5 py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs">Good Steward guide</a>
       <a href="{site_visit_href}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Site Visit Checklist</a>
@@ -3255,17 +3256,17 @@ def md_to_html(md: str) -> str:
             i += 1
             continue
         stripped = line.strip()
-        if stripped in ("tool:energy-credit", "tool:wa-energy-credit"):
+        if stripped in ("tool:energy-credits", "tool:energy-credit", "tool:wa-energy-credit"):
             close_lists()
-            src = tools_href("energy-credit", "../", "index.html")
-            land = public_tool_href("energy-credit", "../")
+            src = tools_href("energy-credits", "../", "index.html")
+            land = public_tool_href("energy-credits", "../")
             out.append(
                 '<div class="tool-embed my-8 border border-white/10 rounded-2xl p-4 sm:p-5 bg-white/[0.03]">'
                 '<p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>'
-                '<h2 class="text-xl font-black text-white tracking-tight mb-2">WA window energy credit estimator</h2>'
+                '<h2 class="text-xl font-black text-white tracking-tight mb-2">WSEC-R prescriptive credits</h2>'
                 '<p class="text-slate-400 text-sm font-light mb-4">Published federal §25C caps and PSE / Snohomish PUD rebate schedules — estimates only, not tax advice. '
                 f'<a class="text-secondary hover:underline" href="{land}">Open full Board landing</a>.</p>'
-                f'<iframe src="{src}" title="WA window energy credit estimator" loading="lazy" '
+                f'<iframe src="{src}" title="WSEC-R prescriptive credits" loading="lazy" '
                 'style="display:block;width:100%;height:1180px;border:0;border-radius:18px;background:#f8fafc;"></iframe>'
                 '</div>'
             )
@@ -3642,6 +3643,8 @@ def write_sitemap(posts: list[dict]) -> None:
         "pm-dashboard.html",
         "blog/rss.xml",
         "tools/site-visit/index.html",
+        "tools/energy-credits/index.html",
+        "tools/energy-credit/index.html",
         "tools/pm-dashboard/index.html",
         "tools/another-story/index.html",
     ]
@@ -3830,23 +3833,23 @@ def build_another_story_page() -> str:
 
 
 def build_energy_credit_page() -> str:
-    """Board landing for WA window energy credit estimator."""
-    src = tools_href("energy-credit", "", "index.html")
+    """Board landing for WSEC-R prescriptive credits."""
+    src = tools_href("energy-credits", "", "index.html")
     body = f"""  <header class="max-w-6xl mx-auto px-4 pt-10 pb-2">
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>
-    <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">WA window energy credit estimator</h1>
+    <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">WSEC-R prescriptive credits</h1>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Estimate worksheet using published IRS §25C window caps and current PSE / Snohomish PUD rebate pages. Built for Edmonds / King &amp; Snohomish homeowners comparing window replacement incentives.</p>
-    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3"><strong class="text-white">Estimates only — not tax or rebate advice.</strong> Federal §25C ends for property placed in service after December 31, 2025. Confirm products and utility forms before you claim. When you hire, shortlist from Board directories — Board #1: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a>.</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">WSEC-R 2021 single-family prescriptive path credit worksheet (fuel normalization + Table R406.3). When you hire, shortlist from Board directories — Board #1: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a>.</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Also: <a href="{public_tool_href('site-visit')}" class="text-secondary hover:underline">Site Visit Checklist</a> · <a href="./posts/2026-09-20-window-replacement-edmonds-coastal-wa.html" class="text-secondary hover:underline">Edmonds window replacement guide</a>.</p>
   </header>
   <section class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
-    <iframe id="energy-credit-tool" src="{src}" title="WA window energy credit estimator" loading="lazy"
+    <iframe id="energy-credit-tool" src="{src}" title="WSEC-R prescriptive credits" loading="lazy"
       style="display:block;width:100%;height:1200px;border:0;border-radius:18px;background:#f8fafc;"></iframe>
   </section>
 """
     return page_shell(
-        "WA Window Energy Credit Estimator | Board of Project Stewardship",
-        "Estimate worksheet for federal Energy Efficient Home Improvement Credit window limits and published PSE / Snohomish PUD window rebates. Estimates only — not tax advice.",
+        "WSEC-R Prescriptive Credits | Board of Project Stewardship",
+        "WSEC-R 2021 single-family prescriptive energy credit worksheet for Edmonds, King, and Snohomish projects.",
         "energy-credit",
         body,
         canonical=f"{BASE_URL}energy-credit.html",
@@ -3856,7 +3859,7 @@ def build_energy_credit_page() -> str:
         breadcrumbs=[
             ("About", BASE_URL),
             ("Good Steward", f"{BASE_URL}good-steward.html"),
-            ("Energy credit estimator", f"{BASE_URL}energy-credit.html"),
+            ("Energy code credits", f"{BASE_URL}energy-credit.html"),
         ],
     )
 
@@ -3868,7 +3871,7 @@ def build_site_visit_page() -> str:
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Site Visit &amp; Discovery</h1>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">A Board checklist for homeowners and builders preparing an addition or remodel site visit in Edmonds and the coastal Puget Sound. Notes stay in this browser — nothing is uploaded to Board servers.</p>
-    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Educational template only. Not a bid, permit, contract, inspection, or price quote. Any calculator fields are worksheets, not ROI or cost commitments. Re-verify any contractor at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> before you hire.</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Good Steward site-visit checklist. Re-verify any contractor at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> before you hire.</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="{public_tool_href('good-steward')}" class="text-secondary hover:underline">Good Steward</a>. Also: <a href="{public_tool_href('pm-dashboard')}" class="text-secondary hover:underline">PM Dashboard</a> · <a href="{public_tool_href('another-story')}" class="text-secondary hover:underline">Another Story</a>.</p>
   </header>
   <section class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
@@ -3883,7 +3886,7 @@ def build_site_visit_page() -> str:
 """
     return page_shell(
         "Site Visit Checklist | Board of Project Stewardship",
-        "Site Visit & Discovery checklist from the Board of Project Stewardship. Browser-local Good Steward template for Edmonds / coastal Puget Sound. Not a bid or permit.",
+        "Site Visit & Discovery checklist from the Board of Project Stewardship. Browser-local Good Steward template for Edmonds / coastal Puget Sound.",
         "site-visit",
         body,
         canonical=f"{BASE_URL}site-visit.html",
@@ -4193,7 +4196,7 @@ def patch_tool_pages() -> None:
         (
             SITE_DIR / "tools" / "site-visit" / "index.html",
             "Site Visit & Discovery | Board of Project Stewardship",
-            "Good Steward site-visit checklist for Edmonds and coastal Puget Sound. Browser-local Board template — not a bid, permit, or contract.",
+            "Good Steward site-visit checklist for Edmonds and coastal Puget Sound. Browser-local Good Steward checklist for Edmonds and coastal Puget Sound.",
             f"{SITE_ORIGIN}/site-visit.html",
         ),
         (

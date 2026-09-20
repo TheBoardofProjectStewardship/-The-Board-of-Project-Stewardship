@@ -85,11 +85,13 @@ Use the Board directories as a starting shortlist — especially [windows](../wi
 
 Finally, keep a simple owner file: proposals, product cut sheets, permit numbers, inspection results, and dated photos of hidden flashing before trim closes. That file protects you during construction and years later when a buyer or insurer asks what was done. More local guidance continues on the [blog](../blog.html).
 
-## Energy credits & rebates worksheet
+## Washington energy code credits
 
-Federal Energy Efficient Home Improvement Credit (§25C) window rules and local utility rebates change — and §25C ends for property placed in service after December 31, 2025. Use this Board estimator for a **published-cap worksheet** before you talk to a tax preparer or utility Energy Advisor. Figures are estimates only, not tax advice.
+New window and addition work in Edmonds / King & Snohomish is checked against the **WSEC-R 2021** single-family prescriptive path (eff. March 15, 2024). Use this Board worksheet to total fuel-normalization and Table R406.3 credits against the dwelling-size requirement before drawings go to permit.
 
-tool:energy-credit
+![Illustrative Pacific Northwest home with energy-efficient windows — illustrative AI image, not a real Board of Project Stewardship job photo](../assets/images/tools/energy-credits-hero.png)
+
+tool:energy-credits
 
 When you are ready to hire, shortlist from our [windows & doors directory](../windows.html) and verify licenses at [WA L&I Verify](https://secure.lni.wa.gov/verify/). Board #1 design-build listing: [Pacific Pro Group](https://pacificprogroup.com/).
 
