@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>WSEC-R 2021 Prescriptive Credits | Board of Project Stewardship</title>
-<meta name="description" content="Washington State Energy Code Residential 2021 single-family prescriptive path credit worksheet for Edmonds, King, and Snohomish projects.">
+<meta name="description" content="Upload building plans and map Washington State Energy Code Residential 2021 single-family prescriptive credits for Edmonds, King, and Snohomish projects.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://boardofprojectstewardship.com/tools/energy-credits/">
 <script src="https://cdn.tailwindcss.com"></script>
@@ -12,6 +12,7 @@
 tailwind.config = { darkMode:"class", theme:{ extend:{ colors:{ obsidian:"#0a0a0a", charcoal:"#1a1a1a", primary:"#166534", secondary:"#4ade80" }}}};
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs" type="module"></script>
 <style>
 body{font-family:Inter,system-ui,sans-serif}
 .field label{display:block;font-size:.7rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#94a3b8;margin-bottom:.4rem}
@@ -24,7 +25,9 @@ body{font-family:Inter,system-ui,sans-serif}
 .stat{background:#0a0a0a;border:1px solid rgba(255,255,255,.08);border-radius:.75rem;padding:.9rem 1rem;margin-bottom:.6rem}
 .stat .v{font-size:1.5rem;font-weight:700;color:#4ade80}
 .pass{color:#4ade80}.short{color:#fbbf24}
-@media print{body{background:#fff;color:#111}.no-print{display:none!important}.opt,.stat,.field input,.field select{border-color:#ccc;background:#fff;color:#111}.stat .v,.pass{color:#166534}}
+.drop{border:2px dashed rgba(74,222,128,.35);border-radius:1rem;padding:1.25rem;background:rgba(22,101,52,.12);transition:border-color .15s,background .15s}
+.drop.drag{border-color:#4ade80;background:rgba(22,101,52,.28)}
+@media print{body{background:#fff;color:#111}.no-print{display:none!important}.opt,.stat,.field input,.field select,.drop{border-color:#ccc;background:#fff;color:#111}.stat .v,.pass{color:#166534}}
 </style>
 </head>
 <body class="bg-obsidian text-slate-100 min-h-screen">
@@ -43,9 +46,31 @@ body{font-family:Inter,system-ui,sans-serif}
 
 <main class="max-w-6xl mx-auto px-4 py-8 space-y-6">
   <p class="text-sm text-slate-400 leading-relaxed max-w-3xl">
-    Worksheet for the <strong class="text-slate-200">2021 Washington State Energy Code — Residential</strong> single-family / townhouse prescriptive path (eff. March 15, 2024).
-    Enter project size, pick one fuel-normalization row, then add energy credits. Source: WSEC-R 2021 Prescriptive Path EPCA C103.
+    Worksheet for the <strong class="text-slate-200">2021 Washington State Energy Code — Residential</strong> single-family / townhouse
+    prescriptive path (eff. March 15, 2024). Upload plan PDFs (energy code sheet, window schedule, mechanical) to auto-suggest credits, then confirm.
   </p>
+
+  <section class="bg-charcoal border border-white/10 rounded-xl p-5 sm:p-6 space-y-4 no-print" id="uploadSection">
+    <h2 class="text-sm font-bold uppercase tracking-wider text-slate-300 border-b border-white/10 pb-2">Upload plans</h2>
+    <div id="dropZone" class="drop text-center cursor-pointer">
+      <p class="text-secondary font-semibold mb-1">Drop PDF plans here, or click to browse</p>
+      <p class="text-xs text-slate-400">Best results: text-based PDFs with energy code / window / mechanical schedules. Multi-file OK. Files stay in your browser.</p>
+      <input id="planFiles" type="file" accept=".pdf,application/pdf" multiple class="hidden">
+    </div>
+    <div id="fileList" class="text-xs text-slate-400 space-y-1"></div>
+    <div id="parseStatus" class="text-sm text-slate-300"></div>
+    <div id="suggestPanel" class="hidden space-y-3 border border-secondary/30 rounded-xl p-4 bg-obsidian/60">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+        <h3 class="text-sm font-bold text-secondary uppercase tracking-wider">Suggested from plans</h3>
+        <div class="flex gap-2 text-xs">
+          <button type="button" id="btnApply" class="px-3 py-2 rounded bg-primary text-white font-semibold hover:bg-emerald-700">Apply suggestions</button>
+          <button type="button" id="btnClearSuggest" class="px-3 py-2 rounded border border-white/20 text-slate-300 hover:border-secondary">Clear</button>
+        </div>
+      </div>
+      <ul id="suggestList" class="text-xs text-slate-300 space-y-2 list-disc pl-4"></ul>
+      <p class="text-[11px] text-slate-500">Review against your drawings before you submit for permit. You can change any option after applying.</p>
+    </div>
+  </section>
 
   <section class="bg-charcoal border border-white/10 rounded-xl p-5 sm:p-6 space-y-4">
     <h2 class="text-sm font-bold uppercase tracking-wider text-slate-300 border-b border-white/10 pb-2">Project</h2>
@@ -120,7 +145,10 @@ body{font-family:Inter,system-ui,sans-serif}
   Board of Project Stewardship · Edmonds / King &amp; Snohomish · WSEC-R 2021 Prescriptive Path worksheet
 </footer>
 
-<script>
+<script type="module">
+import * as pdfjsLib from "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs";
+pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.mjs";
+
 (function(){
   function $(id){ return document.getElementById(id); }
   var FUEL=[
@@ -170,6 +198,7 @@ body{font-family:Inter,system-ui,sans-serif}
   var CAT7=[{id:"7.1",c:0.5,label:"7.1 — Full ENERGY STAR appliance package (no dryer ducts)"}];
 
   var state={fuel:"f4",cat1:null,cat2:null,cat3:null,cat311:false,cat4:null,cat5s:{},cat5m:null,cat7:false};
+  var pendingSuggest=null;
 
   function find(list,id){ for(var i=0;i<list.length;i++) if(list[i].id===id) return list[i]; return null; }
   function reqCredits(cls){ return ({small:5,medium:8,large:9,r2:6.5,add:2})[cls]||8; }
@@ -298,6 +327,207 @@ body{font-family:Inter,system-ui,sans-serif}
     renderToggle("cat7", CAT7, "cat7");
     calc();
   }
+
+  /* ---------- Plan upload + heuristics ---------- */
+  function num(re, text, idx){
+    var m=text.match(re);
+    if(!m) return null;
+    var v=parseFloat(String(m[idx||1]).replace(/,/g,""));
+    return isFinite(v)?v:null;
+  }
+  function has(re, text){ return re.test(text); }
+  function snippet(text, re, radius){
+    var m=re.exec(text);
+    if(!m) return "";
+    var i=Math.max(0, m.index-(radius||40));
+    return text.slice(i, i+(radius||40)*2+m[0].length).replace(/\s+/g," ").trim();
+  }
+
+  function analyzePlans(raw){
+    var text=raw.replace(/\s+/g," ").toLowerCase();
+    var notes=[];
+    var patch={cat5s:{}};
+    var fields={};
+
+    var cfa=num(/(?:conditioned\s+(?:floor\s+)?area|cfa|heated\s+floor\s+area|gross\s+floor\s+area)[^\d]{0,24}(\d{3,5})/i, raw)
+      || num(/(\d{3,5})\s*(?:s\.?f\.?|sq\.?\s*ft\.?)\s*(?:conditioned|heated)/i, raw);
+    if(cfa){ fields.cfa=cfa; notes.push({label:"Conditioned floor area → "+cfa+" sf", evidence:snippet(raw,/(?:conditioned|heated\s+floor)/i)}); }
+
+    var fen=num(/(?:fenestration|window)\s+area[^\d]{0,20}(\d{2,4})/i, raw);
+    if(fen){ fields.fen=fen; notes.push({label:"Fenestration area → "+fen+" sf", evidence:snippet(raw,/fenestration|window\s+area/i)}); }
+
+    // Vertical fenestration U-factor (take lowest clear U-#)
+    var uVals=[];
+    raw.replace(/(?:fenestration|window|glazing|u[- ]?factor)[^\d]{0,30}u[- ]?(?:factor)?\s*[=:]?\s*(0\.\d{2,3})/ig, function(_,u){ uVals.push(parseFloat(u)); return _; });
+    raw.replace(/\bu\s*[=:]?\s*(0\.(?:1\d|2\d))\b/ig, function(_,u){ uVals.push(parseFloat(u)); return _; });
+    if(uVals.length){
+      var u=Math.min.apply(null,uVals);
+      if(u<=0.18){ patch.cat1="1.3"; notes.push({label:"Envelope 1.3 (U-"+u+" ≤0.18)", evidence:"Lowest parsed fenestration U="+u}); }
+      else if(u<=0.22){ patch.cat1="1.1"; notes.push({label:"Envelope 1.1 (U-"+u+" ≤0.22)", evidence:"Lowest parsed fenestration U="+u}); }
+      else if(u<=0.25){ patch.cat1="1.2"; notes.push({label:"Envelope 1.2 (U-"+u+" ≤0.25)", evidence:"Lowest parsed fenestration U="+u}); }
+      else notes.push({label:"Fenestration U="+u+" (above credit thresholds)", evidence:"No cat-1 credit auto-selected"});
+    }
+    if(has(/total\s+ua\s*(?:reduction|reduced)?[^\d]{0,12}(30|22\.5|15)\s*%/i, raw) || has(/ua\s*−\s*30|ua\s*-\s*30|30%\s*ua/i, text)){
+      patch.cat1="1.4"; notes.push({label:"Envelope 1.4 (Total UA −30%)", evidence:snippet(raw,/ua/i)});
+    } else if(has(/22\.5\s*%\s*ua|ua\s*−\s*22|ua\s*-\s*22/i, text)){
+      patch.cat1="1.3"; notes.push({label:"Envelope 1.3 (Total UA −22.5%)", evidence:snippet(raw,/ua/i)});
+    } else if(has(/15\s*%\s*ua|ua\s*−\s*15|ua\s*-\s*15/i, text)){
+      patch.cat1="1.2"; notes.push({label:"Envelope 1.2 (Total UA −15%)", evidence:snippet(raw,/ua/i)});
+    }
+
+    var ach=num(/(?:ach\s*50|ach50|air\s+changes)[^\d]{0,16}(\d+(?:\.\d+)?)/i, raw)
+      || num(/(\d+(?:\.\d+)?)\s*ach\s*50/i, raw);
+    var sre=num(/(?:sensible\s+recovery|sre|hrv\s+efficiency)[^\d]{0,16}(0\.\d{2}|\d{2})\s*%?/i, raw);
+    if(sre!==null && sre>1) sre=sre/100;
+    var hasHrv=has(/\bhrv\b|\berv\b|heat\s+recovery|energy\s+recovery/i, raw);
+    if(ach!==null && hasHrv){
+      if(ach<=0.6 && (sre===null||sre>=0.80)){ patch.cat2="2.3"; notes.push({label:"Air/vent 2.3 (ACH50 "+ach+")", evidence:snippet(raw,/ach/i)}); }
+      else if(ach<=1.5 && (sre===null||sre>=0.75)){ patch.cat2="2.2"; notes.push({label:"Air/vent 2.2 (ACH50 "+ach+")", evidence:snippet(raw,/ach/i)}); }
+      else if(ach<=2.0 && (sre===null||sre>=0.65)){ patch.cat2="2.1"; notes.push({label:"Air/vent 2.1 (ACH50 "+ach+")", evidence:snippet(raw,/ach/i)}); }
+    } else if(hasHrv){
+      notes.push({label:"HRV/ERV found — set ACH50 on drawings to auto-pick 2.x", evidence:snippet(raw,/hrv|erv|heat\s+recovery/i)});
+    }
+
+    var ductedHp=has(/ducted\s+(?:air[- ]source\s+)?heat\s+pump|centrally\s+ducted\s+heat\s+pump|ashp/i, raw);
+    var ductless=has(/ductless|mini[- ]split|multi[- ]split|hyper\s*heat/i, raw);
+    var gshp=has(/ground\s+source|geothermal|gshp|water[- ]source\s+heat\s+pump/i, raw);
+    var atw=has(/air[- ]to[- ]water|hydronic\s+heat\s+pump/i, raw);
+    var gasFurnace=has(/furnace|afue/i, raw) && has(/gas|propane|natural\s+gas/i, raw);
+    var electricRes=has(/electric\s+resistance|baseboard|wall\s+heater|zonal\s+electric/i, raw);
+    var hspf=num(/hspf2?[^\d]{0,10}(\d+(?:\.\d+)?)/i, raw);
+    var afue=num(/afue[^\d]{0,10}(\d{2,3}(?:\.\d+)?)/i, raw);
+    var wholeHouseDuctless=ductless && has(/whole\s+(?:house|dwelling)|all\s+zones|entire\s+dwelling/i, raw);
+    var coldClimate=has(/cold\s+climate|neep|ccashp|ccvhp/i, raw);
+
+    if(gshp){ patch.fuel="f4"; patch.cat3="3.4"; notes.push({label:"Fuel 4 + HVAC 3.4 (GSHP/WSHP)", evidence:snippet(raw,/ground|geothermal|water-source|gshp/i)}); }
+    else if(atw){ patch.fuel="f4"; patch.cat3="3.8"; notes.push({label:"Fuel 4 + HVAC 3.8 (air-to-water HP)", evidence:snippet(raw,/air-to-water|hydronic\s+heat\s+pump/i)}); }
+    else if(wholeHouseDuctless){ patch.fuel="f4"; patch.cat3="3.7"; notes.push({label:"Fuel 4 + HVAC 3.7 (ductless whole dwelling)", evidence:snippet(raw,/ductless|mini-split/i)}); }
+    else if(ductless && electricRes){ patch.fuel="f5"; patch.cat3="3.5"; notes.push({label:"Fuel 5 + HVAC 3.5 (mini-split + zonal ER)", evidence:snippet(raw,/mini-split|ductless/i)}); }
+    else if(ductedHp && coldClimate){ patch.fuel="f4"; patch.cat3="3.6"; notes.push({label:"Fuel 4 + HVAC 3.6 (cold-climate ducted HP)", evidence:snippet(raw,/cold\s+climate|neep/i)}); }
+    else if(ductedHp){ patch.fuel="f4"; patch.cat3="3.3"; notes.push({label:"Fuel 4 + HVAC 3.3 (ducted ASHP)", evidence:snippet(raw,/heat\s+pump|ashp/i)}); }
+    else if(gasFurnace && afue!==null && afue>=95){ patch.fuel="f1"; patch.cat3="3.1"; notes.push({label:"Fuel 1 + HVAC 3.1 (AFUE "+afue+"%)", evidence:snippet(raw,/afue/i)}); }
+    else if(gasFurnace){ patch.fuel="f1"; notes.push({label:"Fuel 1 (combustion) — AFUE not clear for 3.1", evidence:snippet(raw,/furnace|boiler/i)}); }
+    else if(electricRes && !ductless){ patch.fuel="f3"; notes.push({label:"Fuel 3 (electric resistance)", evidence:snippet(raw,/electric\s+resistance|baseboard/i)}); }
+    else if(has(/heat\s+pump/i, raw)){ patch.fuel="f4"; notes.push({label:"Fuel 4 (heat pump mentioned)", evidence:snippet(raw,/heat\s+pump/i)}); }
+
+    if(has(/connected\s+thermostat|smart\s+thermostat|energy\s+star\s+thermostat|ecobee|nest\s+thermostat/i, raw)){
+      patch.cat311=true; notes.push({label:"HVAC 3.11 (connected thermostat)", evidence:snippet(raw,/thermostat/i)});
+    }
+    if(has(/ducts?\s+in\s+conditioned|conditioned\s+space\s+duct|r403\.3\.2|tight\s+duct/i, raw)){
+      patch.cat4="4.1"; notes.push({label:"Distribution 4.1", evidence:snippet(raw,/duct/i)});
+    }
+
+    if(has(/drain\s*water\s+heat\s+recovery|dwhr|gfx/i, raw)){ patch.cat5s["5.1"]=true; notes.push({label:"WH 5.1 (DWHR)", evidence:snippet(raw,/drain|dwhr|gfx/i)}); }
+    if(has(/compact\s+hot\s+water|compact\s+hw\b|r403\.5\.1/i, raw)){ patch.cat5s["5.2"]=true; notes.push({label:"WH 5.2 (compact HW)", evidence:snippet(raw,/compact\s+hot|compact\s+hw/i)}); }
+
+    var uef=num(/uef[^\d]{0,10}(\d+(?:\.\d+)?)/i, raw);
+    var hpwh=has(/heat\s+pump\s+water\s+heater|hpwh/i, raw);
+    var neeaTier=null;
+    if(has(/neea\s+tier\s*iii|tier\s*iii/i, text)) neeaTier=3;
+    else if(has(/neea\s+tier\s*ii|\btier\s*2\b/i, text)) neeaTier=2;
+    else if(has(/neea\s+tier\s*i\b|\btier\s*1\b/i, text)) neeaTier=1;
+    if(hpwh && has(/gas|propane/i, raw) && (neeaTier===2 || has(/tier\s*2/i, text))){ patch.cat5m="5.5"; notes.push({label:"WH 5.5 (gas HPWH NEEA Tier 2)", evidence:snippet(raw,/hpwh|heat\s+pump\s+water/i)}); }
+    else if(hpwh && (neeaTier===3 || (uef!==null && uef>=2.9))){ patch.cat5m=has(/split|outdoor/i, raw)?"5.7":"5.6"; notes.push({label:"WH "+patch.cat5m+" (electric HPWH)", evidence:snippet(raw,/hpwh|heat\s+pump\s+water|uef/i)}); }
+    else if(uef!==null && uef>=0.91 && has(/gas|propane/i, raw)){ patch.cat5m="5.4"; notes.push({label:"WH 5.4 (gas UEF "+uef+")", evidence:snippet(raw,/uef/i)}); }
+    else if(uef!==null && uef>=0.80 && has(/gas|propane/i, raw)){ patch.cat5m="5.3"; notes.push({label:"WH 5.3 (gas UEF "+uef+")", evidence:snippet(raw,/uef/i)}); }
+
+    var kwh=num(/(?:annual\s+)?(?:pv|solar|photovoltaic)[^\d]{0,40}(\d{3,5})\s*kwh/i, raw)
+      || num(/(\d{3,5})\s*kwh(?:\/yr|\/year)?[^\.]{0,20}(?:pv|solar)/i, raw);
+    if(kwh){ fields.renewKwh=kwh; notes.push({label:"Renewables 6.1 ← "+kwh+" kWh/yr", evidence:snippet(raw,/kwh|solar|pv/i)}); }
+
+    if(has(/energy\s+star\s+appliance|appliance\s+package|es\s+dishwasher|es\s+refrigerator/i, raw)){
+      patch.cat7=true; notes.push({label:"Appliances 7.1", evidence:snippet(raw,/appliance|dishwasher|refrigerator/i)});
+    }
+
+    if(!notes.length){
+      notes.push({label:"No clear WSEC schedule values found", evidence:"Use a text PDF of the energy code / window / mechanical sheets, or pick options manually."});
+    }
+    return {patch:patch, fields:fields, notes:notes};
+  }
+
+  async function extractPdfText(file){
+    var buf=await file.arrayBuffer();
+    var pdf=await pdfjsLib.getDocument({data:buf}).promise;
+    var parts=[];
+    for(var p=1;p<=pdf.numPages;p++){
+      var page=await pdf.getPage(p);
+      var tc=await page.getTextContent();
+      parts.push(tc.items.map(function(it){return it.str;}).join(" "));
+    }
+    return parts.join("\n");
+  }
+
+  async function handleFiles(fileList){
+    var files=Array.prototype.slice.call(fileList||[]).filter(function(f){ return /\.pdf$/i.test(f.name) || f.type==="application/pdf"; });
+    if(!files.length){
+      $("parseStatus").textContent="Add one or more PDF plan sheets (energy code, windows, mechanical).";
+      return;
+    }
+    $("fileList").innerHTML=files.map(function(f){ return "<div>• "+f.name+" ("+Math.round(f.size/1024)+" KB)</div>"; }).join("");
+    $("parseStatus").textContent="Reading "+files.length+" PDF(s)…";
+    var texts=[];
+    for(var i=0;i<files.length;i++){
+      try{
+        texts.push(await extractPdfText(files[i]));
+      }catch(err){
+        texts.push("");
+        $("fileList").innerHTML += "<div class='text-amber-300'>Could not read "+files[i].name+": "+(err.message||err)+"</div>";
+      }
+    }
+    var combined=texts.join("\n");
+    var chars=combined.replace(/\s+/g,"").length;
+    if(chars<40){
+      $("parseStatus").textContent="Little text found — this looks like a scanned drawing set. Export a text PDF of the energy/window/mechanical schedules, or pick options manually.";
+      $("suggestPanel").classList.add("hidden");
+      return;
+    }
+    $("parseStatus").textContent="Parsed "+chars.toLocaleString()+" characters. Review suggestions, then apply.";
+    var result=analyzePlans(combined);
+    pendingSuggest=result;
+    $("suggestList").innerHTML=result.notes.map(function(n){
+      return "<li><span class='text-secondary font-semibold'>"+n.label+"</span>"+(n.evidence?" — <span class='text-slate-500'>"+n.evidence.replace(/[<>]/g,"")+"</span>":"")+"</li>";
+    }).join("");
+    $("suggestPanel").classList.remove("hidden");
+  }
+
+  function applySuggestions(){
+    if(!pendingSuggest) return;
+    var p=pendingSuggest.patch;
+    var f=pendingSuggest.fields;
+    if(f.cfa) $("cfa").value=f.cfa;
+    if(f.fen) $("fen").value=f.fen;
+    if(f.renewKwh) $("renewKwh").value=f.renewKwh;
+    if(p.fuel) state.fuel=p.fuel;
+    if(p.cat1!==undefined) state.cat1=p.cat1;
+    if(p.cat2!==undefined) state.cat2=p.cat2;
+    if(p.cat3!==undefined) state.cat3=p.cat3;
+    if(p.cat311!==undefined) state.cat311=!!p.cat311;
+    if(p.cat4!==undefined) state.cat4=p.cat4;
+    if(p.cat5m!==undefined) state.cat5m=p.cat5m;
+    if(p.cat7!==undefined) state.cat7=!!p.cat7;
+    if(p.cat5s){
+      Object.keys(p.cat5s).forEach(function(k){ state.cat5s[k]=!!p.cat5s[k]; });
+    }
+    if($("dwelling").value==="auto"){ /* keep auto */ }
+    paint();
+    $("parseStatus").textContent="Suggestions applied — adjust anything that doesn’t match the drawings.";
+  }
+
+  // Upload UI
+  var drop=$("dropZone"), input=$("planFiles");
+  drop.addEventListener("click", function(){ input.click(); });
+  drop.addEventListener("dragover", function(e){ e.preventDefault(); drop.classList.add("drag"); });
+  drop.addEventListener("dragleave", function(){ drop.classList.remove("drag"); });
+  drop.addEventListener("drop", function(e){ e.preventDefault(); drop.classList.remove("drag"); handleFiles(e.dataTransfer.files); });
+  input.addEventListener("change", function(){ handleFiles(input.files); });
+  $("btnApply").addEventListener("click", applySuggestions);
+  $("btnClearSuggest").addEventListener("click", function(){
+    pendingSuggest=null;
+    $("suggestPanel").classList.add("hidden");
+    $("parseStatus").textContent="";
+    $("fileList").innerHTML="";
+    input.value="";
+  });
 
   ["cfa","fen","dwelling","renewKwh"].forEach(function(id){
     $(id).addEventListener("input", calc);
