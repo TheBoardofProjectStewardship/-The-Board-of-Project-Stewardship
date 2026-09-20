@@ -16,7 +16,8 @@
     "https://www.weyerhaeuser.com/woodproducts/",
     "https://www.veluxusa.com/",
     "https://www.trex.com/",
-    "https://www.thermatru.com/"
+    "https://www.thermatru.com/",
+    "https://www.gaf.com/"
   ],
   "used_youtube_ids": [
     "i2LyNX-bXKA",
@@ -25,7 +26,10 @@
     "wtaqdQC1k_M",
     "JKzca-Hqurw",
     "3PCsTfEbda0",
-    "09gZhp_2mbo"
+    "09gZhp_2mbo",
+    "7Gi5W9L5Wxo",
+    "KRaloDMnASo",
+    "vC6Il3vPt0E"
   ],
   "used_photo_urls": [
     "assets/images/posts/2026-09-19-kirkland-addition-1.webp",
@@ -66,13 +70,22 @@
     "assets/images/posts/2026-09-05-hire-bath-3.webp",
     "assets/images/posts/2026-09-04-kitchen-ballard-1.webp",
     "assets/images/posts/2026-09-04-kitchen-ballard-2.webp",
-    "assets/images/posts/2026-09-04-kitchen-ballard-3.webp"
+    "assets/images/posts/2026-09-04-kitchen-ballard-3.webp",
+    "assets/images/posts/2026-09-03-ballard-bath-1.webp",
+    "assets/images/posts/2026-09-03-ballard-bath-2.webp",
+    "assets/images/posts/2026-09-03-ballard-bath-3.webp",
+    "assets/images/posts/2026-09-02-edmonds-custom-1.webp",
+    "assets/images/posts/2026-09-02-edmonds-custom-2.webp",
+    "assets/images/posts/2026-09-02-edmonds-custom-3.webp",
+    "assets/images/posts/2026-09-01-tile-edmonds-1.webp",
+    "assets/images/posts/2026-09-01-tile-edmonds-2.webp",
+    "assets/images/posts/2026-09-01-tile-edmonds-3.webp"
   ],
   "last_morning_audit": "2026-09-20",
   "last_upgraded_slugs": [
-    "seattle-bathroom-remodel-permits",
-    "hire-bathroom-remodeler-king-snohomish",
-    "kitchen-remodel-ballard-seattle"
+    "bathroom-remodel-ballard-seattle",
+    "edmonds-custom-home-planning",
+    "hiring-tile-contractor-edmonds"
   ],
-  "last_shared_video": "assets/videos/posts/2026-09-bath-process-shared.mp4"
+  "last_shared_video": "assets/videos/posts/2026-09-shared-waterproofing.mp4"
 }
