@@ -5965,33 +5965,33 @@ def build_contact_page() -> str:
 
 def build_glossary_page() -> str:
     terms = [
-        ("AHJ", "Authority Having Jurisdiction — the city or county department that issues permits and inspections for the parcel."),
-        ("Allowance", "Contract placeholder budget for a selection not yet finalized; overages need a written rule."),
-        ("Board #1", f"Editorial hire ranking on Board directories. {PPG['name']} currently holds #1 for key remodel categories — not Board ownership."),
-        ("Change order", "Written amendment stating price and schedule impact before changed work proceeds."),
-        ("DADU", "Detached accessory dwelling unit — a separate small dwelling on the same lot as a primary home."),
-        ("Dry-in", "Stage when the structure is weather-protected enough that interior work is not exposed to open rain risk."),
-        ("ECDC", "Edmonds Community Development Code — includes ADU standards such as 16.20.050."),
-        ("L&I Verify", "Washington State Department of Labor & Industries official contractor license lookup."),
-        ("MyBuildingPermit", "Shared regional portal used by many Puget Sound jurisdictions for permit applications."),
-        ("Punch list", "Documented remaining items to complete or correct before final payment."),
-        ("SDCI", "Seattle Department of Construction and Inspections."),
-        ("WRB", "Weather-resistive barrier — part of the exterior moisture-control assembly."),
-        ("Bond (contractor)", "Surety bond associated with WA contractor registration; L&I Verify shows bond-related fields and claims history when present."),
-        ("UBI", "Washington Unified Business Identifier — a state business ID sometimes used alongside contractor registration searches."),
-        ("Retainage", "Contract amount held until punch list or closeout conditions are met; terms must be written."),
-        ("Lien", "A claim against property for unpaid labor or materials; ask about lien waivers at draws and final payment."),
-        ("MEP", "Mechanical, electrical, and plumbing — rough-in and finish trades that often drive remodel sequencing."),
-        ("Critical area", "Environmentally sensitive land (steep slopes, wetlands, buffers) that can add review beyond a simple building permit."),
-        ("eTRAKiT", "Shoreline’s online permitting portal for applications, status, and inspections."),
-        ("Accela", "Permit/records software used by some jurisdictions (including King County portals) for status and filings."),
-        ("Fixture unit", "Plumbing sizing concept used when checking water meter / supply capacity for ADUs and additions."),
-        ("Notice to Customer", "Washington consumer disclosure concept referenced in L&I hiring guidance — confirm current L&I forms for your contract."),
+        ("AHJ", esc("Authority Having Jurisdiction — the city or county department that issues permits and inspections for the parcel.") + ' See the <a href="./permits.html" class="text-secondary hover:underline">permit hub</a>.'),
+        ("Allowance", esc("Contract placeholder budget for a selection not yet finalized; overages need a written rule.") + ' Related: <a href="./change-orders.html" class="text-secondary hover:underline">change orders</a> · <a href="./hire-questions.html" class="text-secondary hover:underline">hire questions</a>.'),
+        ("Board #1", esc(f"Editorial hire ranking on Board directories. {PPG['name']} currently holds #1 for key remodel categories — not Board ownership.") + f' <a href="{PPG["url"]}" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a> · <a href="./how-we-rank.html" class="text-secondary hover:underline">How we rank</a>.'),
+        ("Change order", esc("Written amendment stating price and schedule impact before changed work proceeds.") + ' Guide: <a href="./change-orders.html" class="text-secondary hover:underline">change orders &amp; allowances</a>.'),
+        ("DADU", esc("Detached accessory dwelling unit — a separate small dwelling on the same lot as a primary home.") + ' See <a href="./adu.html" class="text-secondary hover:underline">Edmonds ADU hub</a> · <a href="./adu-checklist.html" class="text-secondary hover:underline">ADU checklist</a>.'),
+        ("Dry-in", esc("Stage when the structure is weather-protected enough that interior work is not exposed to open rain risk.") + ' Related: <a href="./coastal-waterproofing.html" class="text-secondary hover:underline">coastal waterproofing</a> · <a href="./project-timeline.html" class="text-secondary hover:underline">project timeline</a>.'),
+        ("ECDC", esc("Edmonds Community Development Code — includes ADU standards such as 16.20.050.")),
+        ("L&I Verify", esc("Washington State Department of Labor & Industries official contractor license lookup.") + f' Official tool: <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> · Board walkthrough: <a href="./verify-contractor.html" class="text-secondary hover:underline">verify contractor</a>.'),
+        ("MyBuildingPermit", esc("Shared regional portal used by many Puget Sound jurisdictions for permit applications.") + ' Orientation: <a href="./permits.html" class="text-secondary hover:underline">permit hub</a> (Seattle typically uses SDCI instead).'),
+        ("Punch list", esc("Documented remaining items to complete or correct before final payment.") + ' Related: <a href="./final-walkthrough.html" class="text-secondary hover:underline">final walkthrough</a>.'),
+        ("SDCI", esc("Seattle Department of Construction and Inspections.") + ' See <a href="./seattle.html" class="text-secondary hover:underline">Seattle hub</a> · <a href="./permits.html" class="text-secondary hover:underline">permit hub</a>.'),
+        ("WRB", esc("Weather-resistive barrier — part of the exterior moisture-control assembly.") + ' Related: <a href="./coastal-waterproofing.html" class="text-secondary hover:underline">coastal waterproofing</a> · <a href="./materials.html" class="text-secondary hover:underline">materials index</a>.'),
+        ("Bond (contractor)", esc("Surety bond associated with WA contractor registration; L&I Verify shows bond-related fields and claims history when present.") + ' Guide: <a href="./bonds-and-insurance.html" class="text-secondary hover:underline">bonds &amp; insurance</a>.'),
+        ("UBI", esc("Washington Unified Business Identifier — a state business ID sometimes used alongside contractor registration searches.")),
+        ("Retainage", esc("Contract amount held until punch list or closeout conditions are met; terms must be written.")),
+        ("Lien", esc("A claim against property for unpaid labor or materials; ask about lien waivers at draws and final payment.")),
+        ("MEP", esc("Mechanical, electrical, and plumbing — rough-in and finish trades that often drive remodel sequencing.")),
+        ("Critical area", esc("Environmentally sensitive land (steep slopes, wetlands, buffers) that can add review beyond a simple building permit.")),
+        ("eTRAKiT", esc("Shoreline’s online permitting portal for applications, status, and inspections.")),
+        ("Accela", esc("Permit/records software used by some jurisdictions (including King County portals) for status and filings.")),
+        ("Fixture unit", esc("Plumbing sizing concept used when checking water meter / supply capacity for ADUs and additions.")),
+        ("Notice to Customer", esc("Washington consumer disclosure concept referenced in L&I hiring guidance — confirm current L&I forms for your contract.")),
     ]
     rows = "".join(
         f"""      <div class="border-b border-white/10 py-4">
         <h3 class="text-white font-bold mb-1">{esc(term)}</h3>
-        <p class="text-sm text-slate-400 font-light leading-relaxed">{esc(defn)}</p>
+        <p class="text-sm text-slate-400 font-light leading-relaxed">{defn}</p>
       </div>"""
         for term, defn in terms
     )
@@ -8174,6 +8174,158 @@ def write_rss(posts: list[dict]) -> None:
         + "\n  </channel>\n</rss>\n"
     )
     (blog_dir / "rss.xml").write_text(xml, encoding="utf-8")
+
+
+
+def build_directory_hub() -> str:
+    """Directories index hub — Additions/Kitchen/Bathrooms/Custom/Edmonds/Trades/Commercial/Spec + L&I CTA."""
+    cards = [
+        (
+            "fa-house-chimney",
+            "Home additions",
+            "Structural additions, second stories, and attached expansions serving Edmonds / King & Snohomish. Prefer firms that own permit packages and written scopes.",
+            "./additions.html",
+            "Open additions directory",
+        ),
+        (
+            "fa-kitchen-set",
+            "Kitchen remodelers",
+            "Kitchen remodel shortlist for layout moves, MEP reality, and finish lead times — not showroom invoices alone.",
+            "./kitchen.html",
+            "Open kitchen directory",
+        ),
+        (
+            "fa-bath",
+            "Bathroom remodelers",
+            "Bath and wet-area remodelers with waterproofing detail habits for Puget Sound moisture loads.",
+            "./bathrooms.html",
+            "Open bathrooms directory",
+        ),
+        (
+            "fa-drafting-compass",
+            "Custom homes",
+            "Custom / design-build homes across the North Sound. Board #1 hire ranking links outbound to Pacific Pro Group.",
+            "./custom-homes.html",
+            "Open custom homes",
+        ),
+        (
+            "fa-location-dot",
+            "Edmonds custom homes (Top 30)",
+            "Edmonds-focused custom home shortlist — Bowl constraints, coastal detailing, and local permit ownership.",
+            "./edmonds-custom-homes.html",
+            "Open Edmonds Top 30",
+        ),
+        (
+            "fa-screwdriver-wrench",
+            "Trades hub",
+            "Plumbers, electricians, HVAC, roofing, and other specialty trades. Start here when you need a trade-only shortlist.",
+            "./trades.html",
+            "Open trades hub",
+        ),
+        (
+            "fa-building",
+            "Commercial contractors",
+            "Commercial / light commercial firms serving the corridor — still re-verify every license at WA L&I before award.",
+            "./commercial.html",
+            "Open commercial directory",
+        ),
+        (
+            "fa-house",
+            "Spec homes",
+            "Spec / production builders covered in Board editorial research for the King & Snohomish market.",
+            "./spec-homes.html",
+            "Open spec homes",
+        ),
+    ]
+    card_html = []
+    for icon, title, blurb, href, cta in cards:
+        card_html.append(f"""      <a href="{href}" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-6 card-hover no-underline block">
+        <div class="w-11 h-11 rounded-lg bg-primary/20 border border-secondary/30 flex items-center justify-center mb-4">
+          <i class="fas {icon} text-secondary text-lg" aria-hidden="true"></i>
+        </div>
+        <h2 class="text-lg font-black text-white mb-2 tracking-tight">{esc(title)}</h2>
+        <p class="text-sm text-slate-400 font-light leading-relaxed mb-4">{esc(blurb)}</p>
+        <span class="text-xs font-bold uppercase tracking-widest text-secondary">{esc(cta)} →</span>
+      </a>""")
+    body = (
+        _hub_header(
+            "Hire shortlists · Editorial · Not paid placement",
+            "Contractor directories",
+            "Board of Project Stewardship directories for Edmonds and King & Snohomish Counties. Rankings are editorial hire shortlists — not ownership of any firm, not lead-gen brokerage, and not invented prices or ROI.",
+        )
+        + f"""  <section class="max-w-6xl mx-auto px-4 pb-8">
+    <div class="bg-primary/10 border border-secondary/30 rounded-xl p-6 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">
+      <div>
+        <h2 class="text-lg font-black text-white mb-1 tracking-tight">Verify before you hire</h2>
+        <p class="text-sm text-slate-300 font-light leading-relaxed">Re-check every bidder’s active contractor license, bond, and insurance on the official WA L&amp;I Verify tool. Board listings are shortlists — L&amp;I remains the source of truth.</p>
+      </div>
+      <a href="{LNI_URL}" target="_blank" rel="noopener" class="inline-flex justify-center items-center gap-2 px-5 py-3 rounded-lg bg-primary text-white text-xs font-bold uppercase tracking-widest hover:bg-emerald-700 transition shrink-0">L&amp;I Verify CTA</a>
+    </div>
+  </section>
+  <section class="max-w-6xl mx-auto px-4 pb-10">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+{chr(10).join(card_html)}
+    </div>
+  </section>
+"""
+        + _hub_section(
+            "How to use these directories",
+            _check_ul(
+                [
+                    "Read How we rank for methodology before treating any #1 card as a mandate.",
+                    "Board #1 for key remodel categories currently points outbound to Pacific Pro Group at https://pacificprogroup.com/ — ranking is not Board ownership.",
+                    "Compare at least three written bids; never rely on a web shortlist alone.",
+                    "Confirm permit ownership and AHJ path on the Permit hub for your parcel.",
+                ]
+            )
+            + _link_ul(
+                [
+                    ("How we rank", "./how-we-rank.html"),
+                    ("Verify a WA contractor", "./verify-contractor.html"),
+                    ("Permit jurisdiction hub", "./permits.html"),
+                    ("Learn hub", "./learn.html"),
+                    ("Sitewide FAQ", "./faq.html"),
+                    ("About the Board", "./about.html"),
+                ]
+            ),
+            border="border-primary/25",
+        )
+        + education_closing("directories", "verify", "hire", official_keys=["lni_verify", "lni_home", "lni_hire_smart", "mybuildingpermit"])
+    )
+    return page_shell(
+        "Directories | Board of Project Stewardship",
+        "Board of Project Stewardship contractor directories for Edmonds / King & Snohomish — additions, kitchen, bathrooms, custom homes, Edmonds Top 30, trades, commercial, and spec. Verify every firm at WA L&I.",
+        "directory",
+        body,
+        canonical=f"{BASE_URL}directory.html",
+        breadcrumbs=[("Home", BASE_URL), ("Directories", f"{BASE_URL}directory.html")],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def build_meta_redirect(target_rel: str, title: str, blurb: str) -> str:
+    """Static GitHub Pages soft-redirect (meta refresh + link). target_rel like kitchen.html."""
+    dest = f"./{target_rel}"
+    canon = f"{BASE_URL}{target_rel}"
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{esc(title)} | Board of Project Stewardship</title>
+  <meta name="robots" content="noindex, follow">
+  <meta http-equiv="refresh" content="0;url={dest}">
+  <link rel="canonical" href="{canon}">
+  <script>location.replace({json.dumps(dest)});</script>
+</head>
+<body style="font-family:system-ui,sans-serif;background:#0b1220;color:#e2e8f0;padding:2rem;max-width:40rem;margin:auto">
+  <h1 style="font-size:1.25rem">{esc(title)}</h1>
+  <p>{esc(blurb)} <a href="{dest}" style="color:#4ade80">{esc(target_rel)}</a>.</p>
+</body>
+</html>
+"""
 
 
 def build_write_page() -> str:
