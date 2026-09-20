@@ -38,7 +38,7 @@ https://www.youtube.com/watch?v=i2LyNX-bXKA
 
 Illustrative process clip (AI-generated staging atmosphere for coastal Edmonds-style exterior work — not footage of a live Board job):
 
-[Watch the short Higgsfield process clip](https://d8j0ntlcm91z4.cloudfront.net/user_3J0uIieL1TPm5gGUzNTRHKx1f2R/hf_20260920_170732_710e2224-85cf-43e4-ac74-17ac469ff30f.mp4)
+[Watch the short Higgsfield process clip](../assets/videos/posts/2026-09-20-edmonds-windows.mp4)
 
 ## Design, product, and coordination
 

@@ -552,11 +552,12 @@ def parse_trades(path: Path) -> dict[str, list[dict]]:
 # ---------- HTML helpers ----------
 
 def asset_exists(rel: str) -> bool:
+    """True only if the file exists on disk (will ship with GH Pages when not gitignored).
+    CDN-MAP is a fallback for prefix_asset when the local file is absent — do not
+    treat CDN presence as on-domain availability.
+    """
     rel = (rel or "").lstrip("./")
-    if (SITE_DIR / rel).is_file():
-        return True
-    # Gitignored on-domain WebP still ships on Pages when listed in CDN-MAP.
-    return rel in CDN_MAP
+    return (SITE_DIR / rel).is_file()
 
 
 def load_cdn_map() -> dict[str, str]:

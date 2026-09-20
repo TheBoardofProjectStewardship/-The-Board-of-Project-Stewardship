@@ -1,14 +1,4 @@
 __pycache__/
 *.pyc
-assets/images/**/*.webp
-!assets/images/home-*.webp
-!assets/images/posts/2026-09-20-edmonds-windows-*.webp
-assets/images/**/*.png
-assets/images/**/*.jpg
-assets/images/**/*.jpeg
-assets/icons/*.png
-assets/icons/*.ico
-!assets/icons/favicon.ico
-!assets/icons/apple-touch-icon.png
-!assets/icons/*.svg
+# Base64 dumps / scratch — not site media (media must ship for GitHub Pages)
 assets-b64/
