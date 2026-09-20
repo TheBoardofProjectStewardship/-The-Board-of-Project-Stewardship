@@ -542,4 +542,4 @@ Supporting helpers shipped: `OFFICIAL_LINKS`, `related_pack`, `official_links_se
 ### Live QA
 - `about.html`: **200** (verified)
 - `faq.html`: **200** (verified)
-- Commit SHA: **(filled after commit)**
+- Commit SHA: 
