@@ -724,11 +724,13 @@ def head_assets() -> str:
     # Font Awesome is deferred to </body> (fix #40).
     # Tailwind CDN remains known CWV debt: a full self-hosted purge build of every
     # utility class used across ~80+ pages is large and risk of visual break is high;
-    # keep CDN + preconnect/dns-prefetch for fonts + CDN hosts as the practical win.
-    return """  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    # keep CDN + dns-prefetch as the practical win (SRI hashes on the live Tailwind
+    # play CDN are not stable across releases — do not invent integrity attributes).
+    # Inter is self-hosted (variable + key static weights) under assets/fonts/.
+    return """  <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
   <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
   <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+  <link rel="preload" href="/assets/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -749,8 +751,42 @@ def head_assets() -> str:
       }
     }
   </script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url('/assets/fonts/InterVariable.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('/assets/fonts/Inter-Regular.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url('/assets/fonts/Inter-Medium.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+      src: url('/assets/fonts/Inter-SemiBold.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url('/assets/fonts/Inter-Bold.woff2') format('woff2');
+    }
     body { font-family: 'Inter', system-ui, sans-serif; background-color: #0a0a0a; color: #e0e0e0; }
     .bg-grid-pattern {
       background-image:
@@ -927,6 +963,15 @@ def nav_html(active: str = "", prefix: str = "") -> str:
         ("final-walkthrough", href("final-walkthrough.html"), "Final Walkthrough"),
         ("bonds-and-insurance", href("bonds-and-insurance.html"), "Bonds & Insurance"),
         ("design-build-vs-bid", href("design-build-vs-bid.html"), "Design-Build vs Bid"),
+        ("remodel-cost-factors", href("remodel-cost-factors.html"), "Remodel Cost Factors"),
+        ("kitchen-cost-factors", href("kitchen-cost-factors.html"), "Kitchen Cost Factors"),
+        ("bathroom-cost-factors", href("bathroom-cost-factors.html"), "Bathroom Cost Factors"),
+        ("addition-cost-factors", href("addition-cost-factors.html"), "Addition Cost Factors"),
+        ("adu-cost-factors", href("adu-cost-factors.html"), "ADU Cost Factors"),
+        ("financing-and-draws", href("financing-and-draws.html"), "Financing & Draws"),
+        ("living-through-remodel", href("living-through-remodel.html"), "Living Through Remodel"),
+        ("selecting-finishes", href("selecting-finishes.html"), "Selecting Finishes"),
+        ("contractor-contract-basics", href("contractor-contract-basics.html"), "Contract Basics (WA)"),
         ("materials", href("materials.html"), "Materials Index"),
         ("contact", href("contact.html"), "Contact"),
         ("glossary", href("glossary.html"), "Glossary"),
@@ -1045,6 +1090,15 @@ def footer_html(prefix: str = "./", active: str = "") -> str:
         ("final-walkthrough", f"{prefix}final-walkthrough.html", "Final walkthrough"),
         ("bonds-and-insurance", f"{prefix}bonds-and-insurance.html", "Bonds & insurance"),
         ("design-build-vs-bid", f"{prefix}design-build-vs-bid.html", "Design-build vs bid"),
+        ("remodel-cost-factors", f"{prefix}remodel-cost-factors.html", "Remodel cost factors"),
+        ("kitchen-cost-factors", f"{prefix}kitchen-cost-factors.html", "Kitchen cost factors"),
+        ("bathroom-cost-factors", f"{prefix}bathroom-cost-factors.html", "Bathroom cost factors"),
+        ("addition-cost-factors", f"{prefix}addition-cost-factors.html", "Addition cost factors"),
+        ("adu-cost-factors", f"{prefix}adu-cost-factors.html", "ADU cost factors"),
+        ("financing-and-draws", f"{prefix}financing-and-draws.html", "Financing & draws"),
+        ("living-through-remodel", f"{prefix}living-through-remodel.html", "Living through remodel"),
+        ("selecting-finishes", f"{prefix}selecting-finishes.html", "Selecting finishes"),
+        ("contractor-contract-basics", f"{prefix}contractor-contract-basics.html", "Contract basics (WA)"),
         ("materials", f"{prefix}materials.html", "Materials index"),
         ("glossary", f"{prefix}glossary.html", "Glossary"),
         ("videos", f"{prefix}videos.html", "Video library"),
@@ -2570,6 +2624,7 @@ def build_additions(additions: list[dict]) -> str:
     </section>
 {related_learning_strip([
             ("Home addition planning", "./home-addition-planning.html"),
+            ("Addition cost factors", "./addition-cost-factors.html"),
             ("Second story vs teardown", "./second-story-vs-teardown.html"),
             ("Hiring a contractor", "./hiring-a-contractor.html"),
             ("Permit hub", "./permits.html"),
@@ -2665,6 +2720,7 @@ def build_kb_page(kind: str, firms: list[dict]) -> str:
 {related_learning_strip(
             [
                 ("Kitchen remodel planning", "./kitchen-remodel-planning.html"),
+                ("Kitchen cost factors", "./kitchen-cost-factors.html"),
                 ("Hiring a contractor", "./hiring-a-contractor.html"),
                 ("Bid comparison", "./bid-comparison.html"),
                 ("Permit hub", "./permits.html"),
@@ -2674,6 +2730,7 @@ def build_kb_page(kind: str, firms: list[dict]) -> str:
             if is_kitchen
             else [
                 ("Bathroom waterproofing guide", "./bathroom-waterproofing-guide.html"),
+                ("Bathroom cost factors", "./bathroom-cost-factors.html"),
                 ("Coastal waterproofing checklist", "./coastal-waterproofing.html"),
                 ("Hiring a contractor", "./hiring-a-contractor.html"),
                 ("Permit hub", "./permits.html"),
@@ -4029,6 +4086,15 @@ def write_sitemap(posts: list[dict]) -> None:
         "final-walkthrough.html",
         "bonds-and-insurance.html",
         "design-build-vs-bid.html",
+        "remodel-cost-factors.html",
+        "kitchen-cost-factors.html",
+        "bathroom-cost-factors.html",
+        "addition-cost-factors.html",
+        "adu-cost-factors.html",
+        "financing-and-draws.html",
+        "living-through-remodel.html",
+        "selecting-finishes.html",
+        "contractor-contract-basics.html",
         "materials.html",
         "contact.html",
         "glossary.html",
@@ -4437,11 +4503,14 @@ def build_permits_page() -> str:
         ),
         (
             "Seattle",
-            "Seattle Department of Construction and Inspections (SDCI) applications typically run through the Seattle Services Portal — not MyBuildingPermit.",
+            "Seattle Department of Construction and Inspections (SDCI) applications typically run through the Seattle Services Portal — not MyBuildingPermit. Use official SDCI fee pages and the Fee Subtitle PDF for permit cost context; the Board does not invent Seattle project prices or fee invoices.",
             [
                 ("How to get a Seattle permit (SDCI)", "https://www.seattle.gov/construction-and-inspections/permits/how-do-you-get-a-permit"),
                 ("Seattle Services Portal", "https://cosaccela.seattle.gov/portal/"),
                 ("SDCI home", "https://www.seattle.gov/sdci"),
+                ("SDCI fees overview", "https://seattle.gov/sdci/codes/codes-we-enforce-(a-z)/fees"),
+                ("How much will your permit cost?", "https://seattle.gov/sdci/permits/how-much-will-your-permit-cost"),
+                ("2026 Fee Subtitle (PDF)", "https://seattle.gov/documents/Departments/SDCI/Codes/FeeSubtitleFinal.pdf"),
             ],
         ),
         (
@@ -4500,6 +4569,14 @@ def build_permits_page() -> str:
             "How does this hub relate to Board directories?",
             "This page links official portals only. Shortlist firms on Board directories, then re-verify at L&I before hiring.",
         ),
+        (
+            "Where are Seattle permit fees published?",
+            "On official SDCI fee pages and the Fee Subtitle PDF linked in the Seattle section above — not as invented Board prices. Pair with remodel cost-factor guides for qualitative drivers only.",
+        ),
+        (
+            "Is there a separate Seattle permits page?",
+            "No. Seattle orientation lives on this permit hub (plus the Seattle city hub) to avoid duplicate thin pages.",
+        ),
     ]
     body = (
         _hub_header(
@@ -4528,6 +4605,8 @@ def build_permits_page() -> str:
                     ("Bathroom remodelers", "./bathrooms.html"),
                     ("Site Visit Checklist", "./site-visit.html"),
                     ("Good Steward", "./good-steward.html"),
+                    ("Remodel cost factors", "./remodel-cost-factors.html"),
+                    ("Seattle hub", "./seattle.html"),
                 ]
             ),
         )
@@ -4610,6 +4689,7 @@ def build_adu_page() -> str:
       {_link_ul([
           ("Edmonds custom homes directory", "./edmonds-custom-homes.html"),
           ("Home additions directory", "./additions.html"),
+          ("ADU cost factors", "./adu-cost-factors.html"),
           ("Permit jurisdiction hub", "./permits.html"),
           ("Another Story — Board feature for second-story concepts", "./another-story.html"),
       ])}""",
@@ -5947,6 +6027,20 @@ def build_learn_page() -> str:
                 ("Final walkthrough & punch list", "./final-walkthrough.html"),
                 ("WA contractor bonds & insurance", "./bonds-and-insurance.html"),
                 ("Design-build vs bid-build", "./design-build-vs-bid.html"),
+                ("Financing & draws (education)", "./financing-and-draws.html"),
+                ("Living through a remodel", "./living-through-remodel.html"),
+                ("Selecting finishes", "./selecting-finishes.html"),
+                ("Contractor contract basics (WA)", "./contractor-contract-basics.html"),
+            ],
+        ),
+        (
+            "Cost literacy (no ROI)",
+            [
+                ("Remodel cost factors", "./remodel-cost-factors.html"),
+                ("Kitchen cost factors", "./kitchen-cost-factors.html"),
+                ("Bathroom cost factors", "./bathroom-cost-factors.html"),
+                ("Addition cost factors", "./addition-cost-factors.html"),
+                ("ADU cost factors", "./adu-cost-factors.html"),
             ],
         ),
         (
@@ -6711,6 +6805,654 @@ def build_design_build_vs_bid_page() -> str:
 
 
 
+# Wave 4: cost-factor guides + remaining learn pages (Ghost OFF — static Board only)
+# New page builders for wave 4 — injected into generate_site.py
+
+COST_VS_VALUE_URL = "https://zondahome.com/2025-cost-vs-value-report/"
+COST_VS_VALUE_DATA_URL = "https://www.costvsvalue.com/"
+SEATTLE_FEES_URL = "https://seattle.gov/sdci/codes/codes-we-enforce-(a-z)/fees"
+SEATTLE_FEE_SUBTITLE_PDF = "https://seattle.gov/documents/Departments/SDCI/Codes/FeeSubtitleFinal.pdf"
+SEATTLE_FEE_HOW_MUCH = "https://seattle.gov/sdci/permits/how-much-will-your-permit-cost"
+SEATTLE_PERMIT_HOW = "https://www.seattle.gov/construction-and-inspections/permits/how-do-you-get-a-permit"
+WA_CONTRACTOR_REG_URL = "https://www.lni.wa.gov/licensing-permits/electrical/electrical-contractors-administrators-and-masters/contractor-registration"
+WA_CONSUMER_PROTECT_URL = "https://www.lni.wa.gov/licensing-permits/contractors/hiring-a-contractor"
+MYBUILDINGPERMIT_URL = "https://mybuildingpermit.com/"
+
+
+def _cost_disclaimer_box() -> str:
+    return f"""      <aside class="bg-amber-950/30 border border-amber-500/30 rounded-xl p-5 mb-6" role="note">
+        <p class="text-sm text-amber-100/90 font-light leading-relaxed mb-2"><strong class="text-amber-200 font-semibold">Not a bid · Not local project prices · Not ROI.</strong> This Board page explains qualitative cost drivers and points to public methodology or fee schedules. It does not invent dollar amounts for your kitchen, bath, addition, or ADU.</p>
+        <p class="text-sm text-amber-100/80 font-light leading-relaxed">National remodeling “cost vs value” studies (e.g. Zonda / Remodeling Magazine Cost vs Value) are <em>national study context only</em> — survey and modeled averages across U.S. markets, not a quote for Edmonds, Seattle, or your parcel. Always obtain written local estimates and verify fees with the AHJ.</p>
+        <p class="text-xs text-amber-200/70 font-light mt-3">Sources: <a href="{COST_VS_VALUE_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">Zonda 2025 Cost vs Value overview</a> · <a href="{COST_VS_VALUE_DATA_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">costvsvalue.com</a> · <a href="{SEATTLE_FEES_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">Seattle SDCI fees</a> · <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a></p>
+      </aside>"""
+
+
+def _cost_factor_related() -> str:
+    return _link_ul(
+        [
+            ("Remodel cost factors (hub)", "./remodel-cost-factors.html"),
+            ("Kitchen cost factors", "./kitchen-cost-factors.html"),
+            ("Bathroom cost factors", "./bathroom-cost-factors.html"),
+            ("Addition cost factors", "./addition-cost-factors.html"),
+            ("ADU cost factors", "./adu-cost-factors.html"),
+            ("Financing & draws (education)", "./financing-and-draws.html"),
+            ("Living through a remodel", "./living-through-remodel.html"),
+            ("Selecting finishes", "./selecting-finishes.html"),
+            ("Contractor contract basics (WA)", "./contractor-contract-basics.html"),
+            ("Permit hub", "./permits.html"),
+            ("Change orders & allowances", "./change-orders.html"),
+            ("Bid comparison", "./bid-comparison.html"),
+            ("Learn hub", "./learn.html"),
+        ]
+    )
+
+
+def build_remodel_cost_factors_page() -> str:
+    faqs = [
+        (
+            "Does the Board publish remodel prices or ROI?",
+            "No. The Board never invents local project prices, cost-recouped percentages, or resale ROI for your home. Cost-factor pages explain drivers and cite public national methodology or official fee portals for context only.",
+        ),
+        (
+            "What is Cost vs Value useful for?",
+            "As national study context only: industry reports compare modeled project costs to surveyed resale-value estimates across many U.S. markets. That is not a bid for your kitchen, bath, or addition in King or Snohomish County.",
+        ),
+        (
+            "Where do local permit fees come from?",
+            "From your authority having jurisdiction (city or county). For Seattle, use SDCI fee pages and the Fee Subtitle PDF. Many other cities use MyBuildingPermit tip sheets. The Board does not republish fee tables as your invoice.",
+        ),
+        (
+            "Who is Board #1?",
+            f"{PPG['name']} holds the Board’s editorial #1 hire ranking for kitchen, bath, and additions — {PPG['url']} — not Board ownership. Still L&I Verify before any deposit.",
+        ),
+    ]
+    drivers = [
+        "Scope breadth — cosmetic refresh vs full gut, wall moves, and structural openings.",
+        "Existing conditions — panel capacity, plumbing stack access, asbestos/lead era finishes, crawlspace or slab surprises.",
+        "Finish level — commodity vs custom cabinets, stone vs laminate, tile complexity, fixture brands (as allowances, not Board prices).",
+        "Site access — occupied home, steep lots, coastal weather windows, dumpster/parking constraints.",
+        "Trades coordination — number of licensed trades, inspection gates, and correction cycles.",
+        "Permit & review path — AHJ fees, plan review hours, and whether land-use triggers apply (link official schedules; never invent fees).",
+        "Contingency & change discipline — documented allowances and signed change orders before work proceeds.",
+        "Schedule pressure — rush orders, long-lead substitutions, and winter dry-in for envelope openings.",
+    ]
+    body = (
+        _hub_header(
+            "Learning · Cost literacy (no ROI)",
+            "Remodel cost factors",
+            "What typically drives kitchen, bath, addition, and ADU project cost in Edmonds / King &amp; Snohomish — qualitative drivers and sourced public links. <strong class=\"text-white\">Not a bid</strong>; verify locally.",
+        )
+        + "  <div class=\"max-w-6xl mx-auto px-4\">\n"
+        + _cost_disclaimer_box()
+        + "  </div>\n"
+        + _hub_section(
+            "How to read national cost studies",
+            f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Industry Cost vs Value reports (Zonda / Remodeling Magazine and collaborators) publish national and market-level averages that pair modeled remodeling costs with surveyed estimates of resale value added. Methodology and markets change by edition — treat them as <strong class="text-white">national study context only</strong>, never as your local project price or a promised ROI.</p>
+      <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Board rule: we cite the methodology and link the public overview; we do <em>not</em> copy cost-recouped percentages onto Board pages as if they were Edmonds or Seattle bids.</p>
+      <p class="text-sm text-slate-400 font-light leading-relaxed">Public overview: <a href="{COST_VS_VALUE_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">Zonda 2025 Cost vs Value</a> · data lookup: <a href="{COST_VS_VALUE_DATA_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">costvsvalue.com</a>.</p>""",
+            border="border-primary/25",
+        )
+        + _hub_section(
+            "Cross-cutting cost drivers",
+            _check_ul(drivers),
+        )
+        + _hub_section(
+            "Official fee & verification links (not Board prices)",
+            _link_ul(
+                [
+                    ("Seattle SDCI — Fees overview", SEATTLE_FEES_URL),
+                    ("Seattle SDCI — 2026 Fee Subtitle (PDF)", SEATTLE_FEE_SUBTITLE_PDF),
+                    ("Seattle — How much will your permit cost?", SEATTLE_FEE_HOW_MUCH),
+                    ("MyBuildingPermit (shared portal)", MYBUILDINGPERMIT_URL),
+                    ("WA L&I Verify", LNI_URL),
+                    ("WA L&I — Hiring a contractor", WA_CONSUMER_PROTECT_URL),
+                ],
+                external=True,
+            )
+            + """
+      <p class="text-sm text-slate-400 font-light mt-4">Also see the Board <a href="./permits.html" class="text-secondary hover:underline">permit jurisdiction hub</a> for Edmonds, Seattle, King County, Snohomish County, and Shoreline portals.</p>""",
+        )
+        + _hub_section(
+            "Project-type cost-factor guides",
+            _cost_factor_related(),
+        )
+        + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Remodel cost factors FAQ')}\n  </div>\n"
+    )
+    return page_shell(
+        "Remodel Cost Factors | Board of Project Stewardship",
+        "What drives remodel cost — Board cost-factor literacy for kitchen, bath, addition, and ADU projects. Sourced national study context and fee links only; not a bid or ROI promise.",
+        "remodel-cost-factors",
+        body,
+        [faq_ld(faqs)],
+        canonical=f"{BASE_URL}remodel-cost-factors.html",
+        breadcrumbs=[
+            ("About", BASE_URL),
+            ("Learn", f"{BASE_URL}learn.html"),
+            ("Remodel cost factors", f"{BASE_URL}remodel-cost-factors.html"),
+        ],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def build_kitchen_cost_factors_page() -> str:
+    faqs = [
+        (
+            "Will the Board tell me what a kitchen remodel costs in Seattle?",
+            "No. Local prices vary by scope, existing conditions, finishes, and AHJ fees. Compare written bids with matching allowances; use this page for drivers only.",
+        ),
+        (
+            "Do cabinets always dominate cost?",
+            "Often cabinets, counters, and appliances are major line items — but moving plumbing/gas, electrical upgrades, structural openings, and living-in-place logistics can rival finish spend. Ask bidders to separate rough-in vs finish in writing.",
+        ),
+        (
+            "Who is Board #1 for kitchen?",
+            f"{PPG['name']} holds the Board’s editorial #1 hire ranking on the kitchen directory — {PPG['url']} — not Board ownership.",
+        ),
+    ]
+    factors = [
+        "Layout change vs like-for-like — island moves, range/hood path, and wall removals change framing, MEP, and inspections.",
+        "Plumbing and gas relocations — stack access, slab vs crawl cuts, and shutoff logistics.",
+        "Electrical capacity — panel/subpanel needs, dedicated circuits, lighting layers, and EV/other loads competing for capacity.",
+        "Cabinet & counter path — stock vs custom, lead times, stone templating, and backsplash complexity (as allowances).",
+        "Appliance package — owner-furnished vs contractor-furnished, delivery damage risk, and trim-out labor.",
+        "Flooring transitions and structural leveling when removing load-bearing elements or combining rooms.",
+        "Occupied-home premium — temporary kitchen, dust control, phased work, and schedule stretch.",
+        "Permit path — plumbing/mechanical/electrical plus building when walls move; confirm with AHJ (see permit hub).",
+    ]
+    body = (
+        _hub_header(
+            "Learning · Kitchen cost literacy",
+            "Kitchen cost factors",
+            "Qualitative drivers of kitchen remodel cost for Edmonds / King &amp; Snohomish. <strong class=\"text-white\">Not a bid</strong>; not ROI; verify with written local estimates.",
+        )
+        + "  <div class=\"max-w-6xl mx-auto px-4\">\n"
+        + _cost_disclaimer_box()
+        + "  </div>\n"
+        + _hub_section(
+            "What usually moves the number",
+            _check_ul(factors)
+            + f"""
+      <p class="text-sm text-slate-400 font-light mt-4">Planning companion: <a href="./kitchen-remodel-planning.html" class="text-secondary hover:underline">kitchen remodel planning</a> · directory: <a href="./kitchen.html" class="text-secondary hover:underline">kitchen remodelers</a> · Board #1: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(PPG['name'])}</a>.</p>""",
+            border="border-primary/25",
+        )
+        + _hub_section(
+            "Related",
+            _cost_factor_related(),
+        )
+        + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Kitchen cost factors FAQ')}\n  </div>\n"
+    )
+    return page_shell(
+        "Kitchen Cost Factors | Board of Project Stewardship",
+        "Kitchen remodel cost factors for North Sound homeowners — qualitative drivers and sourced fee/study links. Not a bid, local price table, or ROI claim.",
+        "kitchen-cost-factors",
+        body,
+        [faq_ld(faqs)],
+        canonical=f"{BASE_URL}kitchen-cost-factors.html",
+        breadcrumbs=[
+            ("About", BASE_URL),
+            ("Learn", f"{BASE_URL}learn.html"),
+            ("Kitchen cost factors", f"{BASE_URL}kitchen-cost-factors.html"),
+        ],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def build_bathroom_cost_factors_page() -> str:
+    faqs = [
+        (
+            "Why do bath remodels vary so widely?",
+            "Wet-area waterproofing systems, layout moves (especially toilet and shower drains), tile complexity, ventilation, and whether you stay in the home all change labor and risk — independent of fixture showroom stickers.",
+        ),
+        (
+            "Does the Board publish cost-recouped bath ROI?",
+            "No. National Cost vs Value figures are context only. Board pages do not invent bath ROI for your address.",
+        ),
+        (
+            "Who is Board #1 for bathrooms?",
+            f"{PPG['name']} holds the Board’s editorial #1 hire ranking on the bathrooms directory — {PPG['url']} — not Board ownership.",
+        ),
+    ]
+    factors = [
+        "Waterproofing system choice and who owns flood/cure milestones before tile.",
+        "Drain and toilet relocates — slab cuts vs crawl access vs stack constraints.",
+        "Curbless vs curb shower, niche/bench geometry, and glass complexity.",
+        "Tile labor intensity — large-format, mosaics, schluter details, heated floors.",
+        "Ventilation upgrades — fan capacity, duct route, and exterior termination.",
+        "Vanity/plumbing fixture allowances vs owner-furnished risk.",
+        "Shared-bath downtime — temporary facilities if the only bath is offline.",
+        "Permit path for plumbing/electrical/mechanical and any exterior wall openings.",
+    ]
+    body = (
+        _hub_header(
+            "Learning · Bathroom cost literacy",
+            "Bathroom cost factors",
+            "What drives bath remodel cost on Puget Sound projects — waterproofing, layout, and logistics. <strong class=\"text-white\">Not a bid</strong>; verify locally.",
+        )
+        + "  <div class=\"max-w-6xl mx-auto px-4\">\n"
+        + _cost_disclaimer_box()
+        + "  </div>\n"
+        + _hub_section(
+            "Wet-area cost drivers",
+            _check_ul(factors)
+            + """
+      <p class="text-sm text-slate-400 font-light mt-4"><a href="./bathroom-waterproofing-guide.html" class="text-secondary hover:underline">Bathroom waterproofing guide</a> · <a href="./coastal-waterproofing.html" class="text-secondary hover:underline">Coastal waterproofing checklist</a> · <a href="./bathrooms.html" class="text-secondary hover:underline">Bathroom directory</a></p>""",
+            border="border-primary/25",
+        )
+        + _hub_section("Related", _cost_factor_related())
+        + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Bathroom cost factors FAQ')}\n  </div>\n"
+    )
+    return page_shell(
+        "Bathroom Cost Factors | Board of Project Stewardship",
+        "Bathroom remodel cost factors — waterproofing, layout, and logistics for Puget Sound baths. Sourced public links only; not a bid or ROI promise.",
+        "bathroom-cost-factors",
+        body,
+        [faq_ld(faqs)],
+        canonical=f"{BASE_URL}bathroom-cost-factors.html",
+        breadcrumbs=[
+            ("About", BASE_URL),
+            ("Learn", f"{BASE_URL}learn.html"),
+            ("Bathroom cost factors", f"{BASE_URL}bathroom-cost-factors.html"),
+        ],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def build_addition_cost_factors_page() -> str:
+    faqs = [
+        (
+            "Can the Board estimate my second-story addition price?",
+            "No. Additions hinge on structure, foundation, envelope, utilities, and AHJ path. Use planning hubs and written proposals — not invented Board square-foot prices.",
+        ),
+        (
+            "What often surprises addition budgets?",
+            "Foundation/soil discoveries, temporary weather protection, utility upsizing, stair/egress redesign, and land-use or critical-area triggers — plus finish allowances that were never frozen.",
+        ),
+        (
+            "Who is Board #1 for additions?",
+            f"{PPG['name']} holds the Board’s editorial #1 hire ranking on the additions directory — {PPG['url']} — not Board ownership.",
+        ),
+    ]
+    factors = [
+        "Structural approach — bump-out vs second story vs teardown comparison (see second-story vs teardown hub).",
+        "Foundation and soils — engineered design, drainage, and coastal/seismic detailing.",
+        "Envelope & dry-in — temporary weather protection when roofs or walls open in PNW rain seasons.",
+        "MEP upsizing — service panel, HVAC zoning, plumbing stacks, and fire/life-safety paths.",
+        "Stairs, egress, and existing floor disruption when tying into occupied space.",
+        "Exterior finish match — siding, windows, roofing transitions visible from the street.",
+        "AHJ complexity — building plus possibly land-use, trees, critical areas, or right-of-way.",
+        "Contingency culture — written change orders and allowance freezes before long-lead orders.",
+    ]
+    body = (
+        _hub_header(
+            "Learning · Addition cost literacy",
+            "Addition cost factors",
+            "Qualitative drivers of home addition cost for Edmonds / King &amp; Snohomish. <strong class=\"text-white\">Not a bid</strong>; not ROI.",
+        )
+        + "  <div class=\"max-w-6xl mx-auto px-4\">\n"
+        + _cost_disclaimer_box()
+        + "  </div>\n"
+        + _hub_section(
+            "What usually drives addition cost",
+            _check_ul(factors)
+            + f"""
+      <p class="text-sm text-slate-400 font-light mt-4"><a href="./home-addition-planning.html" class="text-secondary hover:underline">Home addition planning</a> · <a href="./second-story-vs-teardown.html" class="text-secondary hover:underline">Second story vs teardown</a> · <a href="./additions.html" class="text-secondary hover:underline">Additions directory</a> · Board #1: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(PPG['name'])}</a></p>""",
+            border="border-primary/25",
+        )
+        + _hub_section("Related", _cost_factor_related())
+        + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Addition cost factors FAQ')}\n  </div>\n"
+    )
+    return page_shell(
+        "Addition Cost Factors | Board of Project Stewardship",
+        "Home addition cost factors for North Sound projects — structure, envelope, utilities, and AHJ drivers. Not a bid, square-foot price table, or ROI claim.",
+        "addition-cost-factors",
+        body,
+        [faq_ld(faqs)],
+        canonical=f"{BASE_URL}addition-cost-factors.html",
+        breadcrumbs=[
+            ("About", BASE_URL),
+            ("Learn", f"{BASE_URL}learn.html"),
+            ("Addition cost factors", f"{BASE_URL}addition-cost-factors.html"),
+        ],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def build_adu_cost_factors_page() -> str:
+    faqs = [
+        (
+            "Does the Board publish ADU construction prices?",
+            "No. ADU cost depends on detached vs conversion, utilities, foundation, fire separation, parking/access rules, and city standards. Official Edmonds standards live in city code and handouts — not Board fee tables.",
+        ),
+        (
+            "Where do I find Edmonds ADU rules?",
+            "Start with the Board Edmonds ADU hub and official ECDC / MyBuildingPermit links there. Confirm live code before freezing design.",
+        ),
+        (
+            "Are national ADU Cost vs Value numbers local bids?",
+            "No. Treat them as national study context only. Your parcel, utility runs, and AHJ fees control the real number.",
+        ),
+    ]
+    factors = [
+        "Typology — detached new, attached, garage conversion, or ADU within a new residence.",
+        "Foundation and utility runs — sewer/water/power distance and upsizing.",
+        "Fire separation, egress, and sound/privacy detailing for attached or stacked units.",
+        "Kitchen and bath wet cores — full dwelling MEPs, not a guest suite refresh.",
+        "Site constraints — setbacks, trees, critical areas, parking, and alley/ROW access.",
+        "City standards & permits — Edmonds ECDC paths and MyBuildingPermit ADU applications; Seattle SDCI fees when applicable.",
+        "Owner vs rental use assumptions that change finish durability (still not Board ROI).",
+        "Inspection sequencing and temporary occupancy logistics on tight lots.",
+    ]
+    body = (
+        _hub_header(
+            "Learning · ADU cost literacy",
+            "ADU cost factors",
+            "What drives accessory dwelling unit cost in the North Sound — typology, utilities, and AHJ path. <strong class=\"text-white\">Not a bid</strong>; official links only for fees/standards.",
+        )
+        + "  <div class=\"max-w-6xl mx-auto px-4\">\n"
+        + _cost_disclaimer_box()
+        + "  </div>\n"
+        + _hub_section(
+            "ADU-specific drivers",
+            _check_ul(factors)
+            + f"""
+      <p class="text-sm text-slate-400 font-light mt-4"><a href="./adu.html" class="text-secondary hover:underline">Edmonds ADU hub</a> · <a href="./adu-checklist.html" class="text-secondary hover:underline">ADU readiness checklist</a> · fees context: <a href="{SEATTLE_FEES_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">Seattle SDCI fees</a> · <a href="{MYBUILDINGPERMIT_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">MyBuildingPermit</a></p>""",
+            border="border-primary/25",
+        )
+        + _hub_section("Related", _cost_factor_related())
+        + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'ADU cost factors FAQ')}\n  </div>\n"
+    )
+    return page_shell(
+        "ADU Cost Factors | Board of Project Stewardship",
+        "ADU cost factors for Edmonds / North Sound — typology, utilities, and AHJ drivers with official fee links. Not a bid, fee table, or ROI promise.",
+        "adu-cost-factors",
+        body,
+        [faq_ld(faqs)],
+        canonical=f"{BASE_URL}adu-cost-factors.html",
+        breadcrumbs=[
+            ("About", BASE_URL),
+            ("Learn", f"{BASE_URL}learn.html"),
+            ("ADU cost factors", f"{BASE_URL}adu-cost-factors.html"),
+        ],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def build_financing_and_draws_page() -> str:
+    faqs = [
+        (
+            "Does the Board sell loans or endorse lenders?",
+            "No. This page is educational literacy about draws, contingency, and payment milestones. The Board does not offer loan products, broker credit, or promise approval.",
+        ),
+        (
+            "What is a draw?",
+            "In construction lending, a draw is a progress payment released after documented work milestones (often with inspection). Exact rules come from your lender and contract — not from the Board.",
+        ),
+        (
+            "How much contingency should I keep?",
+            "The Board does not invent a universal percentage. Ask each firm how allowances, change orders, and contingency interact in writing, then keep owner reserves for discoveries and AHJ corrections.",
+        ),
+    ]
+    habits = [
+        "Tie payments to written milestones (permits issued, dry-in, rough-in passed, trim, punch) — not calendar vibes.",
+        "Understand whether your funding source uses lender draws, private draws, or cash progress payments.",
+        "Keep a contingency reserve separate from finish allowances; document who may authorize spending it.",
+        "Never pay large deposits to unlock work from firms you have not L&I Verified.",
+        "Align change orders with draw requests so funding matches signed scope changes.",
+        "Retain a final holdback until punch list and closeout documents are complete.",
+        "Ask how materials stored off-site are billed and insured before paying for them.",
+        "If a lender is involved, ask who schedules draw inspections and what photos/docs they require.",
+    ]
+    body = (
+        _hub_header(
+            "Learning · Money milestones",
+            "Financing &amp; draws (education)",
+            "Educational overview of construction draws, contingencies, and payment discipline for remodel and addition projects. <strong class=\"text-white\">Not a loan product</strong>, credit offer, or financial advice.",
+        )
+        + _hub_section(
+            "Board disclaimer",
+            """      <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">The Board of Project Stewardship does not originate mortgages, HELOCs, construction loans, or contractor financing. Nothing here is a recommendation to borrow. Talk with your own lender, CPA, or attorney for product-specific questions.</p>
+      <p class="text-sm text-slate-400 font-light leading-relaxed">Pair this page with <a href="./change-orders.html" class="text-secondary hover:underline">change orders &amp; allowances</a>, <a href="./bid-comparison.html" class="text-secondary hover:underline">bid comparison</a>, and <a href="./contractor-contract-basics.html" class="text-secondary hover:underline">contractor contract basics</a>.</p>""",
+            border="border-primary/25",
+        )
+        + _hub_section("Steward payment habits", _check_ul(habits))
+        + _hub_section(
+            "Related",
+            _link_ul(
+                [
+                    ("Change orders & allowances", "./change-orders.html"),
+                    ("Contractor contract basics", "./contractor-contract-basics.html"),
+                    ("Project timeline phases", "./project-timeline.html"),
+                    ("Final walkthrough & punch list", "./final-walkthrough.html"),
+                    ("Remodel cost factors", "./remodel-cost-factors.html"),
+                    ("Verify contractor", "./verify-contractor.html"),
+                    ("Learn hub", "./learn.html"),
+                ]
+            ),
+        )
+        + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Financing & draws FAQ')}\n  </div>\n"
+    )
+    return page_shell(
+        "Financing & Draws Education | Board of Project Stewardship",
+        "Educational guide to construction draws, contingency, and payment milestones for North Sound remodels — not loan products, credit offers, or financial advice.",
+        "financing-and-draws",
+        body,
+        [faq_ld(faqs)],
+        canonical=f"{BASE_URL}financing-and-draws.html",
+        breadcrumbs=[
+            ("About", BASE_URL),
+            ("Learn", f"{BASE_URL}learn.html"),
+            ("Financing & draws", f"{BASE_URL}financing-and-draws.html"),
+        ],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def build_living_through_remodel_page() -> str:
+    faqs = [
+        (
+            "Should we move out during a remodel?",
+            "It depends on scope, dust/noise tolerance, number of baths, and whether exterior walls open. Ask each bidder for a written occupied-home plan — the Board does not invent a one-size answer.",
+        ),
+        (
+            "What should an occupied-home plan cover?",
+            "Temporary kitchen/bath access, dust and HVAC protection, daily clean expectations, pet/child safety zones, parking/dumpster, work hours, and who locks the site.",
+        ),
+        (
+            "Who is Board #1?",
+            f"{PPG['name']} holds the Board’s editorial #1 hire ranking for kitchen, bath, and additions — {PPG['url']} — not Board ownership.",
+        ),
+    ]
+    habits = [
+        "Decide early whether the project is phased or vacated — price and schedule both change.",
+        "Require a written dust, containment, and HVAC protection plan for occupied remodels.",
+        "Map temporary kitchen, laundry, and bath access before demo day.",
+        "Agree work hours, weekend expectations, and quiet rules in the contract.",
+        "Protect valuables; clarify who may enter finished rooms.",
+        "Plan pet and child safety zones; keep chemicals and tools secured.",
+        "Photograph existing conditions in non-work rooms before start (baseline for damage claims).",
+        "Keep one steward contact for daily decisions so crews are not redirected by three owners.",
+    ]
+    body = (
+        _hub_header(
+            "Learning · Occupied remodels",
+            "Living through a remodel",
+            "Board habits for homeowners who stay in place during kitchen, bath, or addition work. Educational — not a means-and-methods manual or schedule guarantee.",
+        )
+        + _hub_section(
+            "Occupied-home stewardship",
+            _check_ul(habits)
+            + """
+      <p class="text-sm text-slate-400 font-light mt-4"><a href="./project-timeline.html" class="text-secondary hover:underline">Project timeline</a> · <a href="./site-visit.html" class="text-secondary hover:underline">Site Visit Checklist</a> · <a href="./hire-questions.html" class="text-secondary hover:underline">Hire questions</a> · <a href="./selecting-finishes.html" class="text-secondary hover:underline">Selecting finishes</a></p>""",
+            border="border-primary/25",
+        )
+        + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Living through a remodel FAQ')}\n  </div>\n"
+    )
+    return page_shell(
+        "Living Through a Remodel | Board of Project Stewardship",
+        "How to live through a kitchen, bath, or addition remodel — Board occupied-home habits for dust, access, and decisions. Not a schedule guarantee.",
+        "living-through-remodel",
+        body,
+        [faq_ld(faqs)],
+        canonical=f"{BASE_URL}living-through-remodel.html",
+        breadcrumbs=[
+            ("About", BASE_URL),
+            ("Learn", f"{BASE_URL}learn.html"),
+            ("Living through a remodel", f"{BASE_URL}living-through-remodel.html"),
+        ],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def build_selecting_finishes_page() -> str:
+    faqs = [
+        (
+            "When should finishes be locked?",
+            "Before long-lead orders whenever possible. Late tile, cabinet, or fixture changes are classic change-order fuel — see change orders & allowances.",
+        ),
+        (
+            "Should everything be owner-furnished?",
+            "Owner-furnished can save markup but shifts delivery, damage, and fit risk to you. Spell OFCI vs CFCI in the contract for each category.",
+        ),
+        (
+            "Does the Board endorse brands?",
+            "No. The materials index links manufacturer resources for education only — not prices or warranties from the Board.",
+        ),
+    ]
+    habits = [
+        "Build a finish schedule (room × surface × product × allowance) shared with every bidder.",
+        "Freeze wet-area waterproofing system before tile showroom days.",
+        "Separate structural/MEP decisions from cosmetic selections so bids stay comparable.",
+        "Photograph samples under your home’s light; phone photos lie.",
+        "Confirm lead times in writing before promising a start date.",
+        "Track OFCI deliveries with signatures; damaged crates are harder to dispute later.",
+        "Keep cut sheets and color codes in the owner file for punch and future repairs.",
+        "Do not let incomplete selections silently become contractor delay without documentation.",
+    ]
+    body = (
+        _hub_header(
+            "Learning · Selections",
+            "Selecting finishes",
+            "Board habits for cabinets, counters, tile, fixtures, and color decisions that keep bids comparable. Not product endorsements or price lists.",
+        )
+        + _hub_section(
+            "Selection stewardship",
+            _check_ul(habits)
+            + """
+      <p class="text-sm text-slate-400 font-light mt-4"><a href="./change-orders.html" class="text-secondary hover:underline">Change orders &amp; allowances</a> · <a href="./materials.html" class="text-secondary hover:underline">Materials index</a> · <a href="./kitchen-cost-factors.html" class="text-secondary hover:underline">Kitchen cost factors</a> · <a href="./bathroom-cost-factors.html" class="text-secondary hover:underline">Bathroom cost factors</a></p>""",
+            border="border-primary/25",
+        )
+        + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Selecting finishes FAQ')}\n  </div>\n"
+    )
+    return page_shell(
+        "Selecting Finishes | Board of Project Stewardship",
+        "Finish selection habits for remodel projects — allowances, lead times, and OFCI vs CFCI without product ROI claims or Board price lists.",
+        "selecting-finishes",
+        body,
+        [faq_ld(faqs)],
+        canonical=f"{BASE_URL}selecting-finishes.html",
+        breadcrumbs=[
+            ("About", BASE_URL),
+            ("Learn", f"{BASE_URL}learn.html"),
+            ("Selecting finishes", f"{BASE_URL}selecting-finishes.html"),
+        ],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def build_contractor_contract_basics_page() -> str:
+    faqs = [
+        (
+            "Is this legal advice?",
+            "No. This is general consumer-education themed around Washington hiring and L&I verification. For contract review, consult a licensed Washington attorney.",
+        ),
+        (
+            "Where do I verify a contractor?",
+            f"Official WA L&I Verify: {LNI_URL}. Match the exact legal name on the contract. Board companion: verify-contractor.html.",
+        ),
+        (
+            "What themes do WA consumers often overlook?",
+            "Legal name mismatches, incomplete scope/exclusions, vague allowances, payment schedules untied to milestones, and missing written change-order rules. Always re-check registration status at L&I.",
+        ),
+        (
+            "Who is Board #1?",
+            f"{PPG['name']} holds the Board’s editorial #1 hire ranking for kitchen, bath, and additions — {PPG['url']} — not Board ownership.",
+        ),
+    ]
+    themes = [
+        "Exact legal business name and WA contractor registration number on the signature block — match L&I Verify.",
+        "Written scope of work with inclusions, exclusions, and responsibilities for permits/inspections.",
+        "Allowance list with starting values and a rule for overages before work continues.",
+        "Payment schedule tied to milestones; limits on deposits relative to work in place (ask your attorney for statutory nuances).",
+        "Change-order process: price + schedule impact in writing before proceeding.",
+        "Insurance certificates and bond awareness — see bonds & insurance hub; L&I remains source of truth.",
+        "Warranty start points and what is excluded (existing conditions, owner-furnished items, abuse).",
+        "Closeout package: lien releases as applicable, manuals, punch list, and final payment conditions.",
+    ]
+    body = (
+        _hub_header(
+            "Learning · WA consumer themes",
+            "Contractor contract basics",
+            "Educational themes for Washington homeowners reading remodel contracts — paired with L&amp;I Verify. <strong class=\"text-white\">Not legal advice</strong> and not a fill-in contract form.",
+        )
+        + _hub_section(
+            "Not legal advice",
+            f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">The Board of Project Stewardship is not a law firm. Washington contractor registration, bonding, and consumer rules are administered through official channels such as <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline font-semibold">WA L&amp;I Verify</a> and L&amp;I hiring guidance. Use this page as a discussion checklist with your contractor and, when needed, your own attorney.</p>
+      <p class="text-sm text-slate-400 font-light leading-relaxed">Official reading: <a href="{WA_CONSUMER_PROTECT_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">L&amp;I — Hiring a contractor</a>.</p>""",
+            border="border-primary/25",
+        )
+        + _hub_section("Themes to confirm in writing", _check_ul(themes))
+        + _hub_section(
+            "Related Board reading",
+            _link_ul(
+                [
+                    ("Verify contractor (L&I companion)", "./verify-contractor.html"),
+                    ("WA contractor bonds & insurance", "./bonds-and-insurance.html"),
+                    ("Change orders & allowances", "./change-orders.html"),
+                    ("Red flags when hiring", "./red-flags-hiring.html"),
+                    ("Hiring a contractor", "./hiring-a-contractor.html"),
+                    ("Hire interview questions", "./hire-questions.html"),
+                    ("Financing & draws (education)", "./financing-and-draws.html"),
+                    ("Bid comparison checklist", "./bid-comparison.html"),
+                    ("Learn hub", "./learn.html"),
+                ]
+            ),
+        )
+        + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Contract basics FAQ')}\n  </div>\n"
+    )
+    return page_shell(
+        "Contractor Contract Basics (WA) | Board of Project Stewardship",
+        "Washington contractor contract basics for homeowners — L&I Verify themes, scope, allowances, and change orders. Educational only; not legal advice.",
+        "contractor-contract-basics",
+        body,
+        [faq_ld(faqs)],
+        canonical=f"{BASE_URL}contractor-contract-basics.html",
+        breadcrumbs=[
+            ("About", BASE_URL),
+            ("Learn", f"{BASE_URL}learn.html"),
+            ("Contractor contract basics", f"{BASE_URL}contractor-contract-basics.html"),
+        ],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
 def write_rss(posts: list[dict]) -> None:
     blog_dir = SITE_DIR / "blog"
     blog_dir.mkdir(parents=True, exist_ok=True)
@@ -7198,6 +7940,16 @@ def main(argv: list[str] | None = None) -> None:
     (SITE_DIR / "final-walkthrough.html").write_text(build_final_walkthrough_page(), encoding="utf-8")
     (SITE_DIR / "bonds-and-insurance.html").write_text(build_bonds_and_insurance_page(), encoding="utf-8")
     (SITE_DIR / "design-build-vs-bid.html").write_text(build_design_build_vs_bid_page(), encoding="utf-8")
+    # Wave 4: cost-factor guides + remaining learn pages
+    (SITE_DIR / "remodel-cost-factors.html").write_text(build_remodel_cost_factors_page(), encoding="utf-8")
+    (SITE_DIR / "kitchen-cost-factors.html").write_text(build_kitchen_cost_factors_page(), encoding="utf-8")
+    (SITE_DIR / "bathroom-cost-factors.html").write_text(build_bathroom_cost_factors_page(), encoding="utf-8")
+    (SITE_DIR / "addition-cost-factors.html").write_text(build_addition_cost_factors_page(), encoding="utf-8")
+    (SITE_DIR / "adu-cost-factors.html").write_text(build_adu_cost_factors_page(), encoding="utf-8")
+    (SITE_DIR / "financing-and-draws.html").write_text(build_financing_and_draws_page(), encoding="utf-8")
+    (SITE_DIR / "living-through-remodel.html").write_text(build_living_through_remodel_page(), encoding="utf-8")
+    (SITE_DIR / "selecting-finishes.html").write_text(build_selecting_finishes_page(), encoding="utf-8")
+    (SITE_DIR / "contractor-contract-basics.html").write_text(build_contractor_contract_basics_page(), encoding="utf-8")
 
     write_readme(posts)
     write_robots()
