@@ -880,6 +880,7 @@ def nav_html(active: str = "", prefix: str = "") -> str:
     ]
     more_tools = [
         ("steward", href("good-steward.html"), "Good Steward"),
+        ("build-walkthrough", href("build-walkthrough.html"), "Build Walkthrough"),
         ("site-visit", href("site-visit.html"), "Site Visit Checklist"),
         ("energy-credit", href("energy-credit.html"), "Energy Code Credits"),
         ("pm-dashboard", href("pm-dashboard.html"), "PM Dashboard"),
@@ -957,6 +958,7 @@ def footer_html(prefix: str = "./", active: str = "") -> str:
         ("trades", f"{prefix}trades.html", "Trade contractors"),
         ("blog", f"{prefix}blog.html", "Blog"),
         ("steward", f"{prefix}good-steward.html", "Good Steward"),
+        ("build-walkthrough", f"{prefix}build-walkthrough.html", "Build Walkthrough"),
         ("site-visit", f"{prefix}site-visit.html", "Site Visit Checklist"),
         ("pm-dashboard", f"{prefix}pm-dashboard.html", "PM Dashboard"),
         ("story", f"{prefix}another-story.html", "Another Story"),
@@ -1010,6 +1012,7 @@ def public_tool_href(slug: str, prefix: str = "") -> str:
         "good-steward": "good-steward.html",
         "energy-credit": "energy-credit.html",
         "energy-credits": "energy-credit.html",
+        "build-walkthrough": "build-walkthrough.html",
         "story": "another-story.html",
         "steward": "good-steward.html",
     }
@@ -1082,12 +1085,14 @@ def steward_cta_strip(prefix: str = "") -> str:
     open_steward = public_tool_href("good-steward", prefix)
     site_visit_href = public_tool_href("site-visit", prefix)
     pm_href = public_tool_href("pm-dashboard", prefix)
+    walk_href = public_tool_href("build-walkthrough", prefix)
     return f"""  <aside id="good-steward-cta" class="max-w-6xl mx-auto px-4 py-8 relative z-20 border-t border-white/5">
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>
     <h2 class="text-xl font-black text-white tracking-tight mb-2">Site visit and PM checklists</h2>
     <p class="text-sm text-slate-400 font-light leading-relaxed max-w-3xl mb-4">Good Steward tools for Edmonds / coastal Puget Sound. Data stays in your browser on this device.</p>
     <div class="flex flex-wrap gap-3">
       <a href="{open_steward}" class="bg-primary text-white px-5 py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs">Good Steward guide</a>
+      <a href="{walk_href}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Build Walkthrough</a>
       <a href="{site_visit_href}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Site Visit Checklist</a>
       <a href="{pm_href}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">PM Dashboard</a>
     </div>
@@ -1131,6 +1136,7 @@ def steward_tools_embed(prefix: str = "") -> str:
     open_steward = public_tool_href("good-steward", prefix)
     site_visit_href = public_tool_href("site-visit", prefix)
     pm_href = public_tool_href("pm-dashboard", prefix)
+    walk_href = public_tool_href("build-walkthrough", prefix)
     site_visit_src = tools_href("site-visit", prefix, "index.html")
     pm_src = tools_href("pm-dashboard", prefix, "index.html")
     return (
@@ -1148,7 +1154,12 @@ def steward_tools_embed(prefix: str = "") -> str:
         f'<a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I</a> before hiring. '
         f'<a href="{open_steward}" class="text-secondary hover:underline">What a good steward does</a>.</p>\n'
         '    </div>\n'
-        '    <div class="grid md:grid-cols-2 gap-4 mb-8">\n'
+        '    <div class="grid md:grid-cols-3 gap-4 mb-8">\n'
+        f'      <a href="{walk_href}" class="block bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover no-underline">\n'
+        '        <p class="text-[11px] font-bold uppercase tracking-widest text-secondary mb-2">Walkthrough</p>\n'
+        '        <h3 class="text-lg font-black text-white mb-2">Build Walkthrough</h3>\n'
+        '        <p class="text-sm text-slate-400 font-light leading-relaxed">Visual stages from blueprint to framing to finished home, with homeowner checklists.</p>\n'
+        '      </a>\n'
         f'      <a href="{site_visit_href}" class="block bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover no-underline">\n'
         '        <p class="text-[11px] font-bold uppercase tracking-widest text-secondary mb-2">Checklist</p>\n'
         '        <h3 class="text-lg font-black text-white mb-2">Site Visit &amp; Discovery</h3>\n'
@@ -1185,6 +1196,84 @@ def steward_tools_embed(prefix: str = "") -> str:
         '  </section>\n'
     )
 
+
+
+
+WALKTHROUGH_STAGES = [
+    ("01-sales-discovery.webp", "Sales / discovery", "Vision, budget reality, coastal site notes"),
+    ("02-plans-blueprints.webp", "Plans & blueprints", "Layouts and elevations — illustrative only"),
+    ("03-permits-lni.webp", "Permits & L&I", "Posted permits and license hygiene"),
+    ("04-site-foundation.webp", "Site / foundation", "Excavation, rebar, pour, waterproofing"),
+    ("05-framing.webp", "Framing", "Stud walls rising — featured 3D moment"),
+    ("06-sheathing-dryin.webp", "Sheathing / dry-in", "OSB, WRB, roof weather-tight"),
+    ("07-mep-roughin.webp", "MEP rough-in", "HVAC, plumbing, electrical in open walls"),
+    ("08-insulation-wrb.webp", "Insulation / WRB", "Cavity fill and energy-path habits"),
+    ("09-drywall-paint.webp", "Drywall / paint", "Hang, tape, texture, primer, paint"),
+    ("10-finishes-fixtures.webp", "Finishes / fixtures", "Cabinets, counters, flooring, fixtures"),
+    ("11-punch-closeout.webp", "Punch / closeout", "Walkthrough, finals, touch-ups"),
+    ("12-warranty-handoff.webp", "Warranty handoff", "Finished house and steward contacts"),
+]
+
+
+def build_walkthrough_home_section(prefix: str = "") -> str:
+    """Prominent homepage embed: Build Walkthrough iframe + plan-photos strip."""
+    src = tools_href("build-walkthrough", prefix, "index.html")
+    land = public_tool_href("build-walkthrough", prefix)
+    thumbs = []
+    for i, (fname, label, blurb) in enumerate(WALKTHROUGH_STAGES, 1):
+        rel = f"assets/images/tools/build-walkthrough/{fname}"
+        if not asset_exists(rel):
+            continue
+        img = prefix_asset(rel, prefix)
+        thumbs.append(
+            "        <figure class=\"shrink-0 w-36 sm:w-40 rounded-lg overflow-hidden border border-white/10 bg-charcoal relative\">\n"
+            f'          <div class="aspect-[4/3] bg-obsidian relative">\n'
+            f'            <img src="{img}" alt="Illustrative AI stage {i}: {esc(label)} — {esc(blurb)}" '
+            'class="absolute inset-0 w-full h-full object-cover" width="320" height="240" loading="lazy">\n'
+            f'            <span class="absolute bottom-0 inset-x-0 z-10 text-[10px] uppercase tracking-wider text-secondary font-bold px-2 py-1 bg-black/65">'
+            f"{i} · {esc(label)}</span>\n"
+            "          </div>\n"
+            f'          <figcaption class="px-2 py-1.5 text-[10px] text-slate-500 font-light leading-snug">{esc(blurb)}</figcaption>\n'
+            "        </figure>"
+        )
+    strip = "\n".join(thumbs)
+    return f"""  <section id="build-walkthrough" class="mb-14">
+    <div class="mb-6 border-b border-white/10 pb-4">
+      <span class="text-secondary text-xs font-bold uppercase tracking-widest">Good Steward Tools</span>
+      <h2 class="text-3xl font-black text-white tracking-tight">See how a project is built</h2>
+      <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Interactive walkthrough from sales discovery to warranty handoff — blueprints, 3D framing walls rising, then a finished Pacific Northwest home. Checklist language mirrors Site Visit &amp; Discovery and the PM Dashboard. Illustrative AI media, not engineering docs. <a href="{land}" class="text-secondary hover:underline">Open full landing</a>.</p>
+    </div>
+    <iframe
+      id="build-walkthrough-home"
+      src="{src}"
+      title="Build Walkthrough — Board of Project Stewardship"
+      loading="lazy"
+      style="display:block;width:100%;height:920px;border:0;border-radius:18px;background:#0a0a0a;"
+    ></iframe>
+    <script>
+    (() => {{
+      const frame = document.getElementById('build-walkthrough-home');
+      if (!frame) return;
+      const trustedOrigin = new URL(frame.src, window.location.href).origin;
+      window.addEventListener('message', (event) => {{
+        if (event.origin !== trustedOrigin || event.source !== frame.contentWindow) return;
+        if (event.data?.type !== 'build-walkthrough:resize') return;
+        const height = Number(event.data.height);
+        if (Number.isFinite(height) && height >= 400 && height <= 16000) {{
+          frame.style.height = `${{Math.min(Math.ceil(height) + 2, 1400)}}px`;
+        }}
+      }});
+    }})();
+    </script>
+    <div class="mt-5">
+      <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-3">Plan photo strip</p>
+      <div class="flex gap-3 overflow-x-auto pb-2 -mx-1 px-1">
+{strip}
+      </div>
+      <p class="text-[11px] text-slate-600 mt-2 leading-relaxed">Illustrative AI stages for homeowners — not a bid, permit set, or schedule commitment.</p>
+    </div>
+  </section>
+"""
 
 
 def board_organization_website_ld() -> dict:
@@ -2035,6 +2124,8 @@ def build_about() -> str:
       </p>
     </section>
 
+{build_walkthrough_home_section()}
+
     <section id="how-the-board-works" class="mb-14">
       <div class="mb-8 border-b border-white/10 pb-4">
         <span class="text-secondary text-xs font-bold uppercase tracking-widest">Process</span>
@@ -2067,6 +2158,7 @@ def build_about() -> str:
       </div>
       <div class="flex flex-wrap gap-3">
         <a href="./good-steward.html" class="bg-primary text-white px-5 py-3.5 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs shadow-glow-sleek">Good Steward guide &amp; tools</a>
+        <a href="{public_tool_href('build-walkthrough')}" class="border border-white/20 bg-white/5 text-white px-5 py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Build Walkthrough</a>
         <a href="{public_tool_href('site-visit')}" class="border border-white/20 bg-white/5 text-white px-5 py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Site Visit Checklist</a>
         <a href="{public_tool_href('pm-dashboard')}" class="border border-white/20 bg-white/5 text-white px-5 py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">PM Dashboard</a>
       </div>
@@ -3349,8 +3441,12 @@ def load_posts() -> list[dict]:
 def build_blog_index(posts: list[dict]) -> str:
     featured_rel, featured_alt = DIR_HERO_IMAGES.get("blog", (None, ""))
     hero_img = featured_rel if featured_rel and asset_exists(featured_rel) else None
+    featured_slug = posts[0]["slug"] if posts else ""
     cards = []
     for p in posts:
+        # Skip featured post in the grid so it is not listed twice
+        if featured_slug and p["slug"] == featured_slug:
+            continue
         cards.append(
             f"""        <article class="bg-charcoal border border-white/5 hover:border-primary/30 p-6 rounded-xl card-hover" data-category="{esc(p['category'])}" data-slug="{esc(p['slug'])}">
           <div class="text-[11px] uppercase tracking-widest text-secondary font-bold mb-2">{esc(p['category'])} · {esc(p['date'])}</div>
@@ -3395,7 +3491,7 @@ def build_blog_index(posts: list[dict]) -> str:
       </div>
     </div>
     <p id="blog-feed-status" class="text-xs text-slate-600 mb-4"></p>
-    <div id="blog-grid" class="grid gap-4 mb-6">
+    <div id="blog-grid" class="grid gap-4 mb-6" data-exclude-slug="{esc(featured_slug)}">
 {chr(10).join(cards) if cards else '<p class="text-slate-400">No posts yet.</p>'}
     </div>
     <p id="blog-empty" class="hidden text-slate-400 text-sm">No posts match your filters.</p>
@@ -3540,8 +3636,10 @@ Base: `{BASE_URL}`
 {trade_lines}
 | `blog.html` | Blog index |
 | `good-steward.html` | Good Steward hub |
+| `build-walkthrough.html` | Build Walkthrough landing |
 | `site-visit.html` | Site Visit & Discovery landing |
 | `pm-dashboard.html` | PM Execution Dashboard landing |
+| `energy-credit.html` | WSEC-R energy credits landing |
 | `another-story.html` | Another Story Board feature |
 | `blog/rss.xml` | Blog RSS feed |
 | `404.html` | Branded Board 404 |
@@ -3640,9 +3738,12 @@ def write_sitemap(posts: list[dict]) -> None:
         "blog.html",
         "another-story.html",
         "good-steward.html",
+        "build-walkthrough.html",
         "site-visit.html",
         "pm-dashboard.html",
+        "energy-credit.html",
         "blog/rss.xml",
+        "tools/build-walkthrough/index.html",
         "tools/site-visit/index.html",
         "tools/energy-credits/index.html",
         "tools/energy-credit/index.html",
@@ -3746,6 +3847,7 @@ def build_good_steward_page() -> str:
       before you hire. <em class="text-slate-500">Contractor-ops language in either tool is labeled as an internal template, not a required sales script.</em>
     </p>
     <ul class="text-sm text-slate-300 space-y-1 mb-2 list-disc pl-5">
+      <li><strong class="text-white">Build Walkthrough</strong> — visual sales-to-build stages with homeowner checklists</li>
       <li><strong class="text-white">Site Visit &amp; Discovery</strong> — what to observe and ask before plans or pricing (includes feasibility &amp; estimate calculator)</li>
       <li><strong class="text-white">PM Execution Dashboard</strong> — phase checklist + status notes for an active build</li>
     </ul>
@@ -3766,8 +3868,9 @@ def build_good_steward_page() -> str:
         Public Board pages for each tool (full embeds below). Another Story is a separate Board feature.
       </p>
       <div class="flex flex-wrap gap-3">
-        <a href="{public_tool_href('site-visit')}" class="bg-primary text-white px-5 py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs">Site Visit &amp; Discovery</a>
-        <a href="{public_tool_href('pm-dashboard')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs">PM Dashboard</a>
+        <a href="{public_tool_href('build-walkthrough')}" class="bg-primary text-white px-5 py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs">Build Walkthrough</a>
+        <a href="{public_tool_href('site-visit')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Site Visit &amp; Discovery</a>
+        <a href="{public_tool_href('pm-dashboard')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">PM Dashboard</a>
         <a href="{public_tool_href('another-story')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Another Story</a>
         <a href="./index.html" class="border border-white/15 text-slate-200 px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Back to About</a>
       </div>
@@ -3865,6 +3968,45 @@ def build_energy_credit_page() -> str:
     )
 
 
+
+def build_build_walkthrough_page() -> str:
+    """Board landing for interactive Build Walkthrough."""
+    src = tools_href("build-walkthrough", "", "index.html")
+    body = f"""  <header class="max-w-6xl mx-auto px-4 pt-10 pb-2">
+    <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>
+    <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Build Walkthrough</h1>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">See how a North Sound project moves from discovery to closeout — blueprint lines, 3D framing walls, then a finished home. Stage checklists reuse Board language from Site Visit &amp; Discovery and the PM Execution Dashboard.</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Educational Board tool. When you hire, shortlist from Board directories — Board #1: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a>. Re-verify any contractor at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>.</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="{public_tool_href('good-steward')}" class="text-secondary hover:underline">Good Steward</a>. Also: <a href="{public_tool_href('site-visit')}" class="text-secondary hover:underline">Site Visit Checklist</a> · <a href="{public_tool_href('pm-dashboard')}" class="text-secondary hover:underline">PM Dashboard</a> · <a href="{public_tool_href('energy-credit')}" class="text-secondary hover:underline">Energy code credits</a>.</p>
+  </header>
+  <section class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
+    <iframe
+      id="build-walkthrough-tool"
+      src="{src}"
+      title="Build Walkthrough — Board of Project Stewardship"
+      loading="lazy"
+      style="display:block;width:100%;height:900px;border:0;border-radius:18px;background:#0a0a0a;"
+    ></iframe>
+    <p class="text-[11px] text-slate-600 mt-3 leading-relaxed">Illustrative stages for homeowners — not a bid or schedule commitment.</p>
+  </section>
+"""
+    return page_shell(
+        "Build Walkthrough | Board of Project Stewardship",
+        "Interactive build walkthrough from the Board of Project Stewardship — discovery through finishes for Edmonds / coastal Puget Sound. Educational stages, not a bid or schedule.",
+        "build-walkthrough",
+        body,
+        canonical=f"{BASE_URL}build-walkthrough.html",
+        include_story_embed=True,
+        include_tools_embed=False,
+        include_widgets=False,
+        breadcrumbs=[
+            ("About", BASE_URL),
+            ("Good Steward", f"{BASE_URL}good-steward.html"),
+            ("Build Walkthrough", f"{BASE_URL}build-walkthrough.html"),
+        ],
+    )
+
+
 def build_site_visit_page() -> str:
     """Board-branded Site Visit landing; crawlable intro above the tool iframe."""
     src = tools_href("site-visit", "", "index.html")
@@ -3873,7 +4015,7 @@ def build_site_visit_page() -> str:
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Site Visit &amp; Discovery</h1>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">A Board checklist for homeowners and builders preparing an addition or remodel site visit in Edmonds and the coastal Puget Sound. Notes stay in this browser — nothing is uploaded to Board servers.</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Good Steward site-visit checklist. Re-verify any contractor at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> before you hire.</p>
-    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="{public_tool_href('good-steward')}" class="text-secondary hover:underline">Good Steward</a>. Also: <a href="{public_tool_href('pm-dashboard')}" class="text-secondary hover:underline">PM Dashboard</a> · <a href="{public_tool_href('another-story')}" class="text-secondary hover:underline">Another Story</a>.</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="{public_tool_href('good-steward')}" class="text-secondary hover:underline">Good Steward</a>. Also: <a href="{public_tool_href('build-walkthrough')}" class="text-secondary hover:underline">Build Walkthrough</a> · <a href="{public_tool_href('pm-dashboard')}" class="text-secondary hover:underline">PM Dashboard</a> · <a href="{public_tool_href('another-story')}" class="text-secondary hover:underline">Another Story</a>.</p>
   </header>
   <section class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
     <iframe
@@ -3910,7 +4052,7 @@ def build_pm_dashboard_page() -> str:
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">PM Execution Dashboard</h1>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">A Board worksheet for tracking remodel phases, punch items, and notes during a North Sound project. Status stays in this browser — local-only, not a hosted project manager.</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Educational template only. Not a construction schedule, contract, or promise of dates or cost. Re-verify any firm at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> before you hire.</p>
-    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="{public_tool_href('good-steward')}" class="text-secondary hover:underline">Good Steward</a>. Also: <a href="{public_tool_href('site-visit')}" class="text-secondary hover:underline">Site Visit Checklist</a> · <a href="{public_tool_href('another-story')}" class="text-secondary hover:underline">Another Story</a>.</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="{public_tool_href('good-steward')}" class="text-secondary hover:underline">Good Steward</a>. Also: <a href="{public_tool_href('build-walkthrough')}" class="text-secondary hover:underline">Build Walkthrough</a> · <a href="{public_tool_href('site-visit')}" class="text-secondary hover:underline">Site Visit Checklist</a> · <a href="{public_tool_href('another-story')}" class="text-secondary hover:underline">Another Story</a>.</p>
   </header>
   <section class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
     <iframe
@@ -4195,6 +4337,12 @@ def patch_tool_pages() -> None:
     og = resolve_og_image(OG_DEFAULT_REL)
     specs = [
         (
+            SITE_DIR / "tools" / "build-walkthrough" / "index.html",
+            "Build Walkthrough | Board of Project Stewardship",
+            "Interactive sales-to-build walkthrough for Edmonds / coastal Puget Sound homeowners — blueprint to framing to finished home. Educational Board stages, not a bid or schedule.",
+            f"{SITE_ORIGIN}/build-walkthrough.html",
+        ),
+        (
             SITE_DIR / "tools" / "site-visit" / "index.html",
             "Site Visit & Discovery | Board of Project Stewardship",
             "Good Steward site-visit checklist for Edmonds and coastal Puget Sound. Browser-local Good Steward checklist for Edmonds and coastal Puget Sound.",
@@ -4358,6 +4506,7 @@ def main(argv: list[str] | None = None) -> None:
     (SITE_DIR / "blog.html").write_text(build_blog_index(posts), encoding="utf-8")
     (SITE_DIR / "another-story.html").write_text(build_another_story_page(), encoding="utf-8")
     (SITE_DIR / "good-steward.html").write_text(build_good_steward_page(), encoding="utf-8")
+    (SITE_DIR / "build-walkthrough.html").write_text(build_build_walkthrough_page(), encoding="utf-8")
     (SITE_DIR / "energy-credit.html").write_text(build_energy_credit_page(), encoding="utf-8")
     (SITE_DIR / "site-visit.html").write_text(build_site_visit_page(), encoding="utf-8")
     (SITE_DIR / "pm-dashboard.html").write_text(build_pm_dashboard_page(), encoding="utf-8")

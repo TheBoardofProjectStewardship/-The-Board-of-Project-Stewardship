@@ -39,8 +39,10 @@ Base: `https://boardofprojectstewardship.com/`
 | `excavation.html` | Excavation / Site Work directory |
 | `blog.html` | Blog index |
 | `good-steward.html` | Good Steward hub |
+| `build-walkthrough.html` | Build Walkthrough landing |
 | `site-visit.html` | Site Visit & Discovery landing |
 | `pm-dashboard.html` | PM Execution Dashboard landing |
+| `energy-credit.html` | WSEC-R energy credits landing |
 | `another-story.html` | Another Story Board feature |
 | `blog/rss.xml` | Blog RSS feed |
 | `404.html` | Branded Board 404 |

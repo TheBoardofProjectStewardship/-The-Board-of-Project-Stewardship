@@ -157,6 +157,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://boardofprojectstewardship.com/build-walkthrough.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://boardofprojectstewardship.com/site-visit.html</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
@@ -169,7 +175,19 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://boardofprojectstewardship.com/energy-credit.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://boardofprojectstewardship.com/blog/rss.xml</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://boardofprojectstewardship.com/tools/build-walkthrough/index.html</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>

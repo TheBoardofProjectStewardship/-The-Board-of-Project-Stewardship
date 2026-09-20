@@ -15,3 +15,7 @@ assets/images/**/*.jpg
 assets/images/**/*.jpeg
 # Base64 dumps / scratch — not site media (media must ship for GitHub Pages)
 assets-b64/
+
+# Walkthrough homepage strip (must ship on GitHub Pages)
+!assets/images/walkthrough/
+!assets/images/walkthrough/**
