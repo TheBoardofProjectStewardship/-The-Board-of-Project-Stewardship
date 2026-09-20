@@ -14,9 +14,14 @@ slug: "coastal-moisture-primary-bath-edmonds"
 
 A primary bath in Edmonds is a daily wet climate inside a wet climate. Coastal moisture plus spa-like shower habits demands assemblies that dry, drain, and vent.
 
+![Illustrative editorial photo — not a project photograph; Edmonds-style primary bath with exterior-wall glass and steam-prone shower](../assets/images/posts/2026-08-30-coastal-moisture-1.webp)
+
+
 ## Local context
 
 View-oriented primary suites may sit on exterior walls with big glass — beautiful, and condensation-prone if ventilation lags. Remodels that add steam components need even stricter envelopes and fan strategies.
+
+![Illustrative editorial photo — not a project photograph; continuous shower waterproofing membrane at niches and curb before tile](../assets/images/posts/2026-08-30-coastal-moisture-2.webp)
 
 ## Detailing priorities
 
@@ -42,6 +47,22 @@ Poor substitutes for outdoor exhaust in this climate for primary wet rooms.
 
 **How do I know waterproofing was done?**  
 Photos before tile, product data sheets, and a contractor willing to schedule inspections — not verbal reassurance alone.
+
+![Illustrative editorial photo — not a project photograph; finished coastal primary bath with walk-in shower and humidity-rated finishes](../assets/images/posts/2026-08-30-coastal-moisture-3.webp)
+
+../assets/videos/posts/2026-09-shared-waterproofing.mp4
+
+Illustrative process clip (shared waterproofing still-motion) — not an Edmonds primary-bath schedule. Coastal wet rooms still need membrane continuity, outdoor exhaust, and commissioning before final payment.
+
+https://www.youtube.com/watch?v=pWePjMmyha0
+
+## Materials Worth Knowing
+
+- [Schluter Systems](https://www.schluter.com/schluter-us/en_US/) — tile waterproofing assemblies for steam-heavy primary showers
+- [Owens Corning insulation](https://www.owenscorning.com/en-us/insulation) — exterior-wall baths need thermal continuity so condensation stays managed
+- [Sherwin-Williams coatings](https://www.sherwin-williams.com/) — humid-room-rated finishes for dressing areas adjacent to wet zones
+
+*Illustrative editorial photos are labeled as such and are not photographs of a completed Board of Project Stewardship–ranked project.*
 
 ## Materials that cope with steamy coastal use
 

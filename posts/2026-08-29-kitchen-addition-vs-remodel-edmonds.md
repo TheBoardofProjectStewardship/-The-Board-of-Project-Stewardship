@@ -14,9 +14,14 @@ slug: "kitchen-addition-vs-remodel-edmonds"
 
 Edmonds owners often ask whether to gut the existing kitchen or bump out for an island and dining connection. These are different project types wearing the same “kitchen” label.
 
+![Illustrative editorial photo — not a project photograph; Edmonds kitchen mid-remodel with cabinets removed and new layout marked](../assets/images/posts/2026-08-29-kitchen-addition-1.webp)
+
+
 ## When a remodel is enough
 
 If circulation, storage, and light can be fixed by layout, windows, and systems upgrades inside current walls, a remodel avoids foundation and major roof work. You still may need electrical capacity, hood ducting, and trade permits — but the weather envelope mostly stays intact.
+
+![Illustrative editorial photo — not a project photograph; kitchen bump-out framing with roof tie-in and weather-resistant sheathing](../assets/images/posts/2026-08-29-kitchen-addition-2.webp)
 
 ## When an addition earns its keep
 
@@ -42,6 +47,22 @@ Yes, if the first design does not block future openings. Tell your designer abou
 
 **What permit difference matters most?**  
 Additions typically trigger building permits and exterior reviews; in-place remodels lean on trade permits unless walls move structurally.
+
+![Illustrative editorial photo — not a project photograph; finished open kitchen with island after footprint expansion](../assets/images/posts/2026-08-29-kitchen-addition-3.webp)
+
+../assets/videos/posts/2026-09-07-edmonds-adu-framing.mp4
+
+Illustrative process clip (shared framing still-motion) — not an Edmonds kitchen-addition schedule. Envelope openings and roof tie-ins still need sequenced weatherproofing before finishes.
+
+https://www.youtube.com/watch?v=knQjjjKAI_M
+
+## Materials Worth Knowing
+
+- [ZIP System sheathing & tape](https://www.huberwood.com/zip-system) — weather-resistant sheathing when a bump-out opens the Edmonds envelope
+- [Simpson Strong-Tie connectors](https://www.strongtie.com/) — structural hardware for headers and addition connections
+- [Boise Cascade engineered lumber (BCI / Versa-Lam)](https://www.bc.com/) — LVLs and I-joists common when islands and openings need longer spans
+
+*Illustrative editorial photos are labeled as such and are not photographs of a completed Board of Project Stewardship–ranked project.*
 
 ## Hybrid strategies
 

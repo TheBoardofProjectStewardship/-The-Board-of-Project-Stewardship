@@ -14,6 +14,9 @@ slug: "magnolia-plumbing-remodel-considerations"
 
 Plumbing is the hidden backbone of Magnolia kitchen and bath remodels. Bluff-area homes and mid-century builds often mix original materials with prior partial updates — a recipe for surprises when walls open.
 
+![Illustrative editorial photo — not a project photograph; Magnolia-style bath rough-in with open walls and new supply/drain stubs](../assets/images/posts/2026-08-31-magnolia-plumbing-1.webp)
+
+
 ## Neighborhood context
 
 Long runs to stacks, limited crawl access on hillside lots, and shared walls complicate reroutes. Water shutoff planning matters when you share supply realities with tight schedules. Ask how the team maps existing lines before finalizing a new shower location across the room.
@@ -21,6 +24,8 @@ Long runs to stacks, limited crawl access on hillside lots, and shared walls com
 ## Permits and climate-adjacent issues
 
 Seattle plumbing permits apply to substantive changes. Venting must be correct — trapping problems show up as odors and slow drains after the pretty tile is done. Exterior wall baths need insulation and condensation awareness so pipes and surfaces stay healthier.
+
+![Illustrative editorial photo — not a project photograph; copper and PEX supply branches staged before pressure test](../assets/images/posts/2026-08-31-magnolia-plumbing-2.webp)
 
 ## Process guidance
 
@@ -41,6 +46,22 @@ Possible, but delays and compatibility issues become your problem. Coordinate mo
 
 **What about water heaters?**  
 Capacity and location may need updates when adding showers or fixtures — evaluate during design, not at final inspection.
+
+![Illustrative editorial photo — not a project photograph; accessible shutoff valves and labeled manifolds after rough-in](../assets/images/posts/2026-08-31-magnolia-plumbing-3.webp)
+
+../assets/videos/posts/2026-09-bath-process-shared.mp4
+
+Illustrative process clip (shared wet-area still-motion) — not a Magnolia plumbing schedule. Rough-in still follows assessment → fixture lock → inspection → pressure test.
+
+https://www.youtube.com/watch?v=EUIKy7vmc40
+
+## Materials Worth Knowing
+
+- [Kohler bath fixtures](https://www.kohler.com/en) — fixture packages commonly coordinated with plumber rough-in dimensions
+- [Schluter Systems](https://www.schluter.com/schluter-us/en_US/) — wet-area assemblies that depend on correctly placed drains and valves
+- [CertainTeed building products](https://www.certainteed.com/) — gypsum and related products used after plumbing close-up
+
+*Illustrative editorial photos are labeled as such and are not photographs of a completed Board of Project Stewardship–ranked project.*
 
 ## Prioritizing what to replace while walls are open
 
