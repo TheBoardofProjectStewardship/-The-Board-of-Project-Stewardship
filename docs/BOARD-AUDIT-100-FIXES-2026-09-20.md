@@ -594,3 +594,9 @@ Steward leftover batch after mega-nav / bridge / outro wave. Regenerated site; I
 
 **Locks check:** Board of Project Stewardship spelled out; no public AI names; PPG #1 outbound only; no invented prices/ROI/fees/timelines; never edit pacificprogroup.com.
 
+**Ship SHA:** `c4eb247965e11b2643940c28ec08e256495c5dd9` (`c4eb247`)
+
+**IndexNow:** pinged 134 URLs (HTTP 200).
+
+**Live verify (PT):** sample 200s for Official portals hubs + trades + commercial/spec + glossary + homepage cornerstone — see Steward report.
+
