@@ -2,6 +2,7 @@ __pycache__/
 *.pyc
 assets/images/**/*.webp
 !assets/images/home-*.webp
+!assets/images/posts/2026-09-20-edmonds-windows-*.webp
 assets/images/**/*.png
 assets/images/**/*.jpg
 assets/images/**/*.jpeg
