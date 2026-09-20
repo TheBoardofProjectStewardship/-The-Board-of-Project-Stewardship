@@ -1526,6 +1526,55 @@ def breadcrumb_ld(crumbs: list[tuple[str, str]], page_url: str = "") -> dict:
     return payload
 
 
+def webpage_ld(
+    title: str,
+    description: str,
+    page_url: str,
+    page_type: str = "WebPage",
+    breadcrumb_id: str = "",
+) -> dict:
+    payload: dict = {
+        "@context": "https://schema.org",
+        "@type": page_type,
+        "@id": page_url.split("#")[0] + "#webpage",
+        "url": page_url,
+        "name": title,
+        "description": description,
+        "isPartOf": {"@id": "https://boardofprojectstewardship.com/#website"},
+        "about": {"@id": "https://boardofprojectstewardship.com/#organization"},
+        "inLanguage": "en-US",
+    }
+    if breadcrumb_id:
+        payload["breadcrumb"] = {"@id": breadcrumb_id}
+    return payload
+
+
+def visible_breadcrumb_html(crumbs: list[tuple[str, str]]) -> str:
+    if len(crumbs) < 2:
+        return ""
+    items = []
+    last = len(crumbs)
+    for i, (label, url) in enumerate(crumbs, 1):
+        if i == last:
+            items.append(
+                f'<li class="text-slate-400" aria-current="page">{esc(label)}</li>'
+            )
+        else:
+            items.append(
+                f'<li><a href="{url}" class="hover:text-secondary transition">{esc(label)}</a></li>'
+            )
+        if i != last:
+            items.append('<li aria-hidden="true" class="text-slate-600">/</li>')
+    return f"""  <nav aria-label="Breadcrumb" class="border-b border-white/5 bg-black/20">
+    <div class="max-w-6xl mx-auto px-4 py-3">
+      <ol class="flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-widest text-slate-500">
+        {''.join(items)}
+      </ol>
+    </div>
+  </nav>
+"""
+
+
 def chrome_script() -> str:
     return """  <script>
   (function () {
@@ -1613,16 +1662,28 @@ def page_shell(
     breadcrumbs: list | None = None,
     robots: str = "index, follow",
     og_image_alt: str = "",
+    page_type: str = "WebPage",
+    show_shell_breadcrumbs: bool = True,
 ) -> str:
     # Sitewide Board Organization + WebSite (Packet 03); page json_ld appends after.
     title = clamp_title(title)
     description = clamp_description(description)
+    canon = canonical or (BASE_URL + ("" if active == "about" else f"{active}.html" if active != "blog" else "blog.html"))
+    breadcrumb_obj = breadcrumb_ld(list(breadcrumbs), canon) if breadcrumbs else None
     ld_objs = [board_organization_website_ld()]
+    ld_objs.append(
+        webpage_ld(
+            title,
+            description,
+            canon,
+            page_type=page_type,
+            breadcrumb_id=breadcrumb_obj["@id"] if breadcrumb_obj else "",
+        )
+    )
     for obj in json_ld or []:
         ld_objs.append(obj)
-    canon = canonical or (BASE_URL + ("" if active == "about" else f"{active}.html" if active != "blog" else "blog.html"))
-    if breadcrumbs:
-        ld_objs.append(breadcrumb_ld(list(breadcrumbs), canon))
+    if breadcrumb_obj:
+        ld_objs.append(breadcrumb_obj)
     ld_blocks = ""
     for obj in ld_objs:
         ld_blocks += f'  <script type="application/ld+json">\n{json.dumps(obj, indent=2)}\n  </script>\n'
@@ -1645,6 +1706,9 @@ def page_shell(
     story_block = another_story_embed(pfx) if include_story_embed else ""
     fav = favicon_tags(prefix if prefix else "./")
     contact_strip = contact_strip_html()
+    breadcrumb_nav = ""
+    if breadcrumbs and show_shell_breadcrumbs:
+        breadcrumb_nav = visible_breadcrumb_html(list(breadcrumbs))
     return f"""<!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
@@ -1676,6 +1740,7 @@ def page_shell(
 <body class="bg-obsidian bg-grid-pattern min-h-screen antialiased">
 {nav_html(active, prefix)}
 <main id="main-content">
+{breadcrumb_nav}
 {body}
 {f'''  <div class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
 {ppg_widgets_html()}
@@ -2025,6 +2090,9 @@ def how_we_rank_block(extra: str = "") -> str:
       <p class="text-slate-300 leading-relaxed font-light mb-5 max-w-3xl">
         This directory is an <strong class="text-white font-semibold">editorial ranking</strong> by The Board of Project Stewardship — not a paid placement list. Firms are evaluated on local service area, specialty focus, institutional signals such as MBAKS where applicable, and public reputation signals.
       </p>
+      <p class="text-slate-400 text-sm font-light leading-relaxed mb-4">
+        Use the page in order: read <a href="./how-we-rank.html" class="text-secondary hover:underline">how we rank</a>, verify the contract legal name at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>, confirm the parcel’s permit path in the <a href="./permits.html" class="text-secondary hover:underline">permit hub</a>, then compare written scopes with <a href="./bid-comparison.html" class="text-secondary hover:underline">bid comparison</a> and <a href="./hire-questions.html" class="text-secondary hover:underline">hire questions</a>.
+      </p>
       <p class="text-slate-400 text-sm font-light leading-relaxed">
         Rankings updated <strong class="text-slate-200">{YEAR}</strong>. Always re-verify WA contractor status at
         <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">L&amp;I Verify</a>
@@ -2074,82 +2142,60 @@ def integrity_shield_html(
 
 
 def ppg_widgets_html() -> str:
-    """Project Calculator, Partner Network referral, and Service Region — sitewide above footer."""
-    return f"""    <section id="tools" class="mb-6">
+    """Board-only next steps block — educational, neutral, and link-dense."""
+    return f"""    <section id="board-next-steps" class="mb-6">
       <div class="mb-8 border-b border-white/10 pb-4">
-        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Planning Tools</span>
-        <h2 class="text-3xl font-black text-white tracking-tight">Calculator · Partners · Service Region</h2>
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Board next steps</span>
+        <h2 class="text-3xl font-black text-white tracking-tight">Verify, permit, and compare with live sources</h2>
+        <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Use Board pages for orientation, then switch to live state and city portals for authority, permit status, and contractor verification. No Board pricing widget, fee table, or ROI promise belongs here.</p>
       </div>
-      <div class="grid lg:grid-cols-3 gap-4">
+      <div class="grid lg:grid-cols-2 gap-4">
         <div class="bg-charcoal border border-white/10 rounded-xl p-6">
-          <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-calculator text-secondary"></i> Project Calculator</h3>
-          <p class="text-xs text-slate-500 mb-4 font-light">Illustrative Board planning ballpark — not a Pacific Pro Group quote or bid. Uses sq&nbsp;ft × finish level + base coordination fee; obtain written estimates.</p>
-          <label class="block text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-1" for="calc-sqft">Square footage</label>
-          <input id="calc-sqft" type="number" min="500" step="50" value="2500" class="w-full mb-3 bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
-          <label class="block text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-1" for="calc-finish">Finish level</label>
-          <select id="calc-finish" class="w-full mb-4 bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
-            <option value="275">Essential — $275 / sq ft</option>
-            <option value="350" selected>Standard — $350 / sq ft</option>
-            <option value="450">Luxury — $450 / sq ft</option>
-            <option value="550">Estate — $550 / sq ft</option>
-          </select>
-          <p class="text-xs text-slate-500 mb-2">Base coordination fee: <span class="text-slate-300">$25,000</span></p>
-          <div class="bg-white/5 border border-white/10 rounded-lg px-4 py-3">
-            <div class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">Estimated range</div>
-            <div id="calc-result" class="text-2xl font-black text-secondary mt-1">—</div>
-          </div>
-        </div>
-        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
-          <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-handshake text-secondary"></i> Partner Network</h3>
-          <p class="text-xs text-slate-500 mb-4 font-light">Request an introduction to Pacific Pro Group or ask about Edmonds custom home capacity.</p>
-          <form id="partner-form" action="{PPG['url']}" method="get" target="_blank" class="space-y-3">
-            <input type="text" name="ref_name" required placeholder="Your name" class="w-full bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
-            <input type="email" name="ref_email" required placeholder="Email" class="w-full bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
-            <input type="text" name="ref_city" placeholder="City / neighborhood" class="w-full bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
-            <textarea name="ref_notes" rows="3" placeholder="Project notes (lot, timeline, sq ft)" class="w-full bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary"></textarea>
-            <button type="submit" class="w-full bg-primary text-white py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs">Continue to Pacific Pro Group</button>
-          </form>
-        </div>
-        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
-          <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-location-dot text-secondary"></i> Service Region</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed mb-4">Primary coverage for this Edmonds directory:</p>
-          <ul class="space-y-2 text-sm text-slate-300 font-light mb-5">
-            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>Edmonds &amp; the Edmonds Bowl</li>
-            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>Shoreline · Lynnwood · Mukilteo · Mountlake Terrace</li>
-            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>South Snohomish &amp; North King County</li>
-            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>Greater Seattle metro (by firm)</li>
+          <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-id-card text-secondary"></i> Verify the contracting entity</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed mb-4">Match the legal name on the contract to the live state record before deposit, demolition, or permit submittal.</p>
+          <ul class="space-y-2 text-sm text-slate-300 font-light">
+            <li><a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a></li>
+            <li><a href="{WA_CONSUMER_PROTECT_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I — hiring a contractor</a></li>
+            <li><a href="./verify-contractor.html" class="text-secondary hover:underline">Board verify-contractor walkthrough</a></li>
+            <li><a href="./how-we-rank.html" class="text-secondary hover:underline">How the Board ranks firms</a></li>
           </ul>
-          <a href="{PPG['url']}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-secondary hover:underline">
-            Confirm PPG service area <i class="fas fa-arrow-right text-[10px]"></i>
-          </a>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
+          <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-stamp text-secondary"></i> Find the permit path first</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed mb-4">Good bids assume the right authority having jurisdiction. Start with the parcel’s city or county path — not rumor.</p>
+          <ul class="space-y-2 text-sm text-slate-300 font-light">
+            <li><a href="./permits.html" class="text-secondary hover:underline">Board permit jurisdiction hub</a></li>
+            <li><a href="{MYBUILDINGPERMIT_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">MyBuildingPermit</a></li>
+            <li><a href="./edmonds.html" class="text-secondary hover:underline">Edmonds project hub</a></li>
+            <li><a href="./seattle.html" class="text-secondary hover:underline">Seattle project hub</a></li>
+          </ul>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
+          <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-file-signature text-secondary"></i> Compare scopes, not vibes</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed mb-4">When bids differ, compare scope boundaries, allowances, exclusions, permit ownership, and change-order rules before you compare totals.</p>
+          <ul class="space-y-2 text-sm text-slate-300 font-light">
+            <li><a href="./bid-comparison.html" class="text-secondary hover:underline">Bid comparison checklist</a></li>
+            <li><a href="./hire-questions.html" class="text-secondary hover:underline">Hire interview questions</a></li>
+            <li><a href="./change-orders.html" class="text-secondary hover:underline">Change orders &amp; allowances</a></li>
+            <li><a href="./contractor-contract-basics.html" class="text-secondary hover:underline">Contract basics (WA)</a></li>
+          </ul>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
+          <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-compass-drafting text-secondary"></i> Keep learning by scope and place</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed mb-4">Move from a broad article to the right directory, planning hub, and city page before you call firms.</p>
+          <ul class="space-y-2 text-sm text-slate-300 font-light">
+            <li><a href="./learn.html" class="text-secondary hover:underline">Learn hub</a></li>
+            <li><a href="./hiring-a-contractor.html" class="text-secondary hover:underline">Hiring a contractor</a></li>
+            <li><a href="./king-county.html" class="text-secondary hover:underline">King County hub</a> · <a href="./snohomish-county.html" class="text-secondary hover:underline">Snohomish County hub</a></li>
+            <li><a href="./blog.html" class="text-secondary hover:underline">Board blog</a></li>
+          </ul>
         </div>
       </div>
     </section>"""
 
 
 def ppg_widgets_script() -> str:
-    """Calculator JS shared on every page (ids are unique per page load)."""
-    return """  <script>
-  (function () {
-    var BASE_FEE = 25000;
-    function calc() {
-      var sqEl = document.getElementById('calc-sqft');
-      var finishEl = document.getElementById('calc-finish');
-      var el = document.getElementById('calc-result');
-      if (!sqEl || !finishEl || !el) return;
-      var sq = parseFloat(sqEl.value) || 0;
-      var rate = parseFloat(finishEl.value) || 0;
-      var total = sq * rate + BASE_FEE;
-      if (!sq || !rate) { el.textContent = '—'; return; }
-      el.textContent = total.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
-    }
-    var sqft = document.getElementById('calc-sqft');
-    var finish = document.getElementById('calc-finish');
-    if (sqft) sqft.addEventListener('input', calc);
-    if (finish) finish.addEventListener('change', calc);
-    calc();
-  })();
-  </script>"""
+    return ""
 
 
 # ---------- Page builders ----------
@@ -2569,7 +2615,7 @@ def build_additions(additions: list[dict]) -> str:
         ),
         (
             "How much does a home addition cost in Edmonds / North Seattle?",
-            "Costs vary widely by square footage, foundation type, finishes, and whether the work is a single-story bump-out, second-story, or ADU-style addition. Regional remodelers commonly quote mid-to-high hundreds of dollars per square foot for quality work; larger or luxury projects can exceed several hundred thousand dollars. Obtain written estimates from multiple licensed firms.",
+            "There is no single honest Board price band for additions. Scope, engineering, access, weather protection, and permit path can change the number dramatically. Use the addition cost factors page for drivers only, then compare written local bids with matching allowances and exclusions.",
         ),
         (
             "Do I need a permit for a home addition in Edmonds?",
@@ -2593,6 +2639,30 @@ def build_additions(additions: list[dict]) -> str:
   <div class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
 {how_we_rank_block(' Also see <a href="./home-addition-planning.html" class="text-secondary hover:underline">addition planning</a>, <a href="./second-story-vs-teardown.html" class="text-secondary hover:underline">second story vs teardown</a>, and <a href="./hiring-a-contractor.html" class="text-secondary hover:underline">hiring a contractor</a>.')}
 {ppg_featured("Home Addition Contractor")}
+{directory_use_block(
+            "How to use this additions directory",
+            "Shortlist firms here, but do not request bids until you know the parcel jurisdiction, the dry-in plan, and who owns design, permit, and construction scope. The Board list helps you choose who to interview; the written scope decides whether bids are actually comparable.",
+            [
+                "Confirm the parcel authority having jurisdiction before you compare schedules or demolition dates.",
+                "Ask each bidder who owns design coordination, structural input, permit submittal, and inspections.",
+                "Require a written dry-in and weather-protection plan before roof or wall openings are cut.",
+                "Compare exclusions, allowances, and occupied-home staging before you compare totals.",
+            ],
+            [
+                ("MyBuildingPermit", MYBUILDINGPERMIT_URL),
+                ("Edmonds permit assistance", "https://www.edmondswa.gov/services/permit_assistance"),
+                ("City of Edmonds", "https://www.edmondswa.gov/"),
+                ("WA L&I — hiring a contractor", WA_CONSUMER_PROTECT_URL),
+            ],
+            [
+                ("Home addition planning", "./home-addition-planning.html"),
+                ("Addition cost factors", "./addition-cost-factors.html"),
+                ("Second story vs teardown", "./second-story-vs-teardown.html"),
+                ("Hire interview questions", "./hire-questions.html"),
+                ("Permit jurisdiction hub", "./permits.html"),
+                ("Site Visit Checklist", "./site-visit.html"),
+            ],
+        )}
     <section id="rankings" class="mb-20">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 border-b border-white/10 pb-4 gap-3">
         <div>
@@ -2703,6 +2773,39 @@ def build_kb_page(kind: str, firms: list[dict]) -> str:
   <div class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
 {how_we_rank_block(f' Also see <a href="./additions.html" class="text-secondary hover:underline">home additions</a>, <a href="./trades.html" class="text-secondary hover:underline">trade directories</a>, <a href="./kitchen-remodel-planning.html" class="text-secondary hover:underline">kitchen planning</a>, <a href="./bathroom-waterproofing-guide.html" class="text-secondary hover:underline">bath waterproofing</a>, and <a href="./hiring-a-contractor.html" class="text-secondary hover:underline">hiring a contractor</a>.')}
 {ppg_featured(label + " Contractor")}
+{directory_use_block(
+            f"How to use this {label.lower()} directory",
+            "Use the ranking to build a shortlist, then move immediately into permit ownership, allowances, sequencing, and L&I verification. Kitchen and bathroom bids become misleading fast when finish lists or inspection responsibility are fuzzy.",
+            [
+                "Ask each bidder who pulls permits, who schedules inspections, and how corrections are handled before cover-up.",
+                "Force the same allowance list across bids so cabinets, counters, fixtures, and tile are comparable.",
+                "For baths, require the waterproofing approach and responsible trade in writing; for kitchens, freeze layout before long-lead orders.",
+                "Match the contract legal name to WA L&I before any deposit, demolition, or material order.",
+            ],
+            [
+                ("MyBuildingPermit", MYBUILDINGPERMIT_URL),
+                ("Edmonds permit assistance", "https://www.edmondswa.gov/services/permit_assistance"),
+                ("City of Edmonds", "https://www.edmondswa.gov/"),
+                ("WA L&I — hiring a contractor", WA_CONSUMER_PROTECT_URL),
+            ],
+            [
+                ("Kitchen remodel planning", "./kitchen-remodel-planning.html"),
+                ("Kitchen cost factors", "./kitchen-cost-factors.html"),
+                ("Bid comparison checklist", "./bid-comparison.html"),
+                ("Change orders & allowances", "./change-orders.html"),
+                ("Permit jurisdiction hub", "./permits.html"),
+                ("Hire interview questions", "./hire-questions.html"),
+            ]
+            if is_kitchen
+            else [
+                ("Bathroom waterproofing guide", "./bathroom-waterproofing-guide.html"),
+                ("Bathroom cost factors", "./bathroom-cost-factors.html"),
+                ("Coastal waterproofing checklist", "./coastal-waterproofing.html"),
+                ("Bid comparison checklist", "./bid-comparison.html"),
+                ("Permit jurisdiction hub", "./permits.html"),
+                ("Hire interview questions", "./hire-questions.html"),
+            ],
+        )}
     <section id="rankings" class="mb-20">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 border-b border-white/10 pb-4 gap-3">
         <div>
@@ -2815,6 +2918,30 @@ def build_custom_homes(firms: list[dict]) -> str:
   <div class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
 {how_we_rank_block(' Also see <a href="./additions.html" class="text-secondary hover:underline">home additions</a>, <a href="./home-addition-planning.html" class="text-secondary hover:underline">addition planning</a>, <a href="./hiring-a-contractor.html" class="text-secondary hover:underline">hiring a contractor</a>, <a href="./spec-homes.html" class="text-secondary hover:underline">spec homes</a>, and <a href="./commercial.html" class="text-secondary hover:underline">commercial</a>.')}
 {ppg_featured(label + " Builder", note=ppg_note)}
+{directory_use_block(
+            "How to use this custom-home directory",
+            "Ground-up custom-home interviews should start with parcel authority, site constraints, and responsibility for the permit package. Shortlisting a builder before you clarify those boundaries usually produces pretty presentations and muddy scope.",
+            [
+                "Confirm whether the lot sits in Edmonds city limits, another city, or unincorporated county before you compare permit promises.",
+                "Ask who owns surveys, structural and energy coordination, site-development studies, and plan revisions.",
+                "Separate owner-custom work from speculative or production inventory before you compare firms.",
+                "Require a written scope that states design, permit, and construction handoff responsibilities.",
+            ],
+            [
+                ("MyBuildingPermit", MYBUILDINGPERMIT_URL),
+                ("Edmonds permit assistance", "https://www.edmondswa.gov/services/permit_assistance"),
+                ("City of Edmonds", "https://www.edmondswa.gov/"),
+                ("WA L&I — hiring a contractor", WA_CONSUMER_PROTECT_URL),
+            ],
+            [
+                ("Edmonds custom homes directory", "./edmonds-custom-homes.html"),
+                ("Home addition planning", "./home-addition-planning.html"),
+                ("Spec homes directory", "./spec-homes.html"),
+                ("Hiring a contractor", "./hiring-a-contractor.html"),
+                ("Permit jurisdiction hub", "./permits.html"),
+                ("How we rank", "./how-we-rank.html"),
+            ],
+        )}
     <section id="rankings" class="mb-20">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 border-b border-white/10 pb-4 gap-3">
         <div>
@@ -3076,8 +3203,11 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
         <li class="flex gap-2"><i class="fas fa-check text-secondary mt-1"></i> Re-check contractor license at WA L&amp;I before signing</li>
       </ul>
       <div class="flex flex-col sm:flex-row flex-wrap gap-3 relative z-10">
-        <a href="{PPG['process_pdf']}" target="_blank" rel="noopener" class="bg-primary text-white text-center py-3.5 px-6 rounded font-bold hover:bg-emerald-700 transition shadow-glow-sleek uppercase tracking-wider text-sm">
-          <i class="fas fa-file-pdf mr-2"></i> Process / checklist PDF
+        <a href="{MYBUILDINGPERMIT_URL}" target="_blank" rel="noopener" class="bg-primary text-white text-center py-3.5 px-6 rounded font-bold hover:bg-emerald-700 transition shadow-glow-sleek uppercase tracking-wider text-sm">
+          <i class="fas fa-stamp mr-2"></i> MyBuildingPermit
+        </a>
+        <a href="https://www.edmondswa.gov/services/permit_assistance" target="_blank" rel="noopener" class="border border-white/20 bg-white/5 text-white py-3.5 px-6 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-sm text-center">
+          Edmonds permit assistance
         </a>
         <a href="./posts/2026-08-12-edmonds-home-addition-permit-basics.html" class="border border-white/20 bg-white/5 text-white py-3.5 px-6 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-sm text-center">
           Related: Edmonds permit basics
@@ -3156,6 +3286,30 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
 {how_we_rank_block(' Also see the regional <a href="./custom-homes.html" class="text-secondary hover:underline">Custom Homes</a> shortlist and <a href="./additions.html" class="text-secondary hover:underline">home additions</a> Top 30.')}
 {integrity_shield_html("How the Board screens Edmonds custom home builders — public records and local signals, not paid placement.")}
 {ppg_featured_edmonds}
+{directory_use_block(
+            "How to use the Edmonds Top 30",
+            "Use the Edmonds-specific filter view after you confirm parcel jurisdiction, lot constraints, and who will own the permit package. This page is strongest when you pair it with the permit guide and the city’s live process pages before interviews start.",
+            [
+                "Confirm whether the parcel triggers city-only review, coastal constraints, steep-slope review, or other site-development questions before schematic promises harden.",
+                "Use the style filters to narrow the list, but verify that each builder’s recent Edmonds work matches your lot and program.",
+                "Ask for a written scope covering design management, permit ownership, engineering boundaries, and construction phases.",
+                "Re-check the legal business name at WA L&I before any deposit or preconstruction payment.",
+            ],
+            [
+                ("MyBuildingPermit", MYBUILDINGPERMIT_URL),
+                ("Edmonds permit assistance", "https://www.edmondswa.gov/services/permit_assistance"),
+                ("City of Edmonds", "https://www.edmondswa.gov/"),
+                ("WA L&I — hiring a contractor", WA_CONSUMER_PROTECT_URL),
+            ],
+            [
+                ("Regional custom homes directory", "./custom-homes.html"),
+                ("Edmonds project hub", "./edmonds.html"),
+                ("Home additions directory", "./additions.html"),
+                ("Home addition planning", "./home-addition-planning.html"),
+                ("Hire interview questions", "./hire-questions.html"),
+                ("Permit jurisdiction hub", "./permits.html"),
+            ],
+        )}
     <section id="rankings" class="mb-20">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 border-b border-white/10 pb-4 gap-3">
         <div>
@@ -3260,6 +3414,31 @@ def build_commercial(firms: list[dict]) -> str:
   <div class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
 {how_we_rank_block(' Also see <a href="./custom-homes.html" class="text-secondary hover:underline">custom homes</a> and <a href="./additions.html" class="text-secondary hover:underline">home additions</a>.')}
 {callout}
+{directory_use_block(
+            "How to use this commercial directory",
+            "Commercial and tenant-improvement conversations break down when occupancy assumptions, permit ownership, and allowance boundaries stay vague. Use the ranking to build a shortlist, then drive every meeting toward comparable written scope.",
+            [
+                "Confirm whether the job is true commercial GC work, tenant improvement, or light commercial remodel before comparing firms.",
+                "Ask who owns permit submittal, plan revisions, and inspection coordination for the occupancy type involved.",
+                "Separate shell, MEP, allowance, and after-hours logistics in writing before you compare totals.",
+                "Verify the legal business entity at WA L&I and ask for recent comparable TI or commercial references.",
+            ],
+            [
+                ("City of Edmonds", "https://www.edmondswa.gov/"),
+                ("Seattle SDCI — how to get a permit", SEATTLE_PERMIT_HOW),
+                ("King County local services — permits", "https://kingcounty.gov/en/dept/local-services/permits-inspections"),
+                ("Snohomish County PDS", "https://www.snohomishcountywa.gov/198/Planning-Development-Services"),
+                ("WA L&I Verify", LNI_URL),
+            ],
+            [
+                ("Permit jurisdiction hub", "./permits.html"),
+                ("Contract basics (WA)", "./contractor-contract-basics.html"),
+                ("Bonds & insurance", "./bonds-and-insurance.html"),
+                ("Bid comparison checklist", "./bid-comparison.html"),
+                ("Hiring a contractor", "./hiring-a-contractor.html"),
+                ("Learn hub", "./learn.html"),
+            ],
+        )}
     <section id="rankings" class="mb-20">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 border-b border-white/10 pb-4 gap-3">
         <div>
@@ -3345,6 +3524,30 @@ def build_spec_homes(firms: list[dict]) -> str:
         Lower ranks may include hybrids; card notes say so explicitly.
       </p>
     </section>
+{directory_use_block(
+            "How to use this spec-homes directory",
+            "Production and speculative builders should be compared differently than owner-custom firms. Use this page to separate those models, then verify the legal entity, contract path, and closeout expectations before you reserve anything.",
+            [
+                "Separate community production inventory from one-off owner-custom work before you compare builders.",
+                "Confirm the current community, inventory, warranty, and HOA-document path in writing before you reserve a home.",
+                "Verify the legal builder entity at WA L&I even when the sales experience feels more like retail than contracting.",
+                "Use final walkthrough and contract-basics pages before you treat model-home polish as proof of closeout discipline.",
+            ],
+            [
+                ("King County local services — permits", "https://kingcounty.gov/en/dept/local-services/permits-inspections"),
+                ("Snohomish County PDS", "https://www.snohomishcountywa.gov/198/Planning-Development-Services"),
+                ("WA L&I Verify", LNI_URL),
+                ("WA L&I — hiring a contractor", WA_CONSUMER_PROTECT_URL),
+            ],
+            [
+                ("Custom homes directory", "./custom-homes.html"),
+                ("Home additions directory", "./additions.html"),
+                ("Contract basics (WA)", "./contractor-contract-basics.html"),
+                ("Bonds & insurance", "./bonds-and-insurance.html"),
+                ("Final walkthrough & punch list", "./final-walkthrough.html"),
+                ("Learn hub", "./learn.html"),
+            ],
+        )}
     <section id="rankings" class="mb-20">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 border-b border-white/10 pb-4 gap-3">
         <div>
@@ -3492,6 +3695,29 @@ def build_trade_page(slug: str, title: str, icon: str, blurb: str, firms: list[d
 {cards}
       </div>
     </section>
+{directory_use_block(
+            f"How to use this {title.lower()} directory",
+            "Trade pages work best when you already know whether you want a direct-hire specialty contractor or a GC-managed package. Clarify permit ownership and coordination before you compare direct trade bids against bundled remodel scopes.",
+            [
+                "Verify the exact legal business name at WA L&I before you ask for pricing or availability.",
+                "Ask whether the trade will pull permits directly or work under a GC-managed permit path.",
+                "Request recent local references for the same specialty and scope depth, not only broad remodel photos.",
+                "If the trade is part of a larger remodel, compare the direct-hire path against a GC-managed package on scope, risk, and schedule.",
+            ],
+            [
+                ("WA L&I Verify", LNI_URL),
+                ("WA L&I — hiring a contractor", WA_CONSUMER_PROTECT_URL),
+                ("MyBuildingPermit", MYBUILDINGPERMIT_URL),
+            ],
+            [
+                ("Trades hub", "./trades.html"),
+                ("Hiring a contractor", "./hiring-a-contractor.html"),
+                ("Bid comparison checklist", "./bid-comparison.html"),
+                ("Home additions directory", "./additions.html"),
+                ("Kitchen remodelers", "./kitchen.html"),
+                ("Bathroom remodelers", "./bathrooms.html"),
+            ],
+        )}
     <section class="bg-charcoal rounded-xl p-6 md:p-8 border border-white/10 mb-12">
       <h2 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2">
         <i class="fas fa-helmet-safety text-secondary"></i> Working with a general contractor?
@@ -3841,6 +4067,263 @@ def build_blog_index(posts: list[dict]) -> str:
     )
 
 
+def _post_location_context(post: dict) -> tuple[str, str, list[tuple[str, str]], tuple[str, str] | None]:
+    text = " ".join(
+        str(post.get(key, ""))
+        for key in ("slug", "title", "description", "category", "body_md")
+    ).lower()
+    text = text.replace("–", "-").replace("—", "-")
+    location_rules = [
+        (
+            ("ballard", "magnolia", "queen-anne", "greenwood", "phinney-ridge", "seattle"),
+            (
+                "Seattle",
+                "Seattle posts should hand off to SDCI and the Seattle Services Portal for permit type, fee context, and parcel-specific rules.",
+                [
+                    ("How to get a Seattle permit (SDCI)", SEATTLE_PERMIT_HOW),
+                    ("Seattle Services Portal", "https://cosaccela.seattle.gov/portal/"),
+                    ("SDCI home", "https://www.seattle.gov/sdci"),
+                    ("Seattle SDCI fees", SEATTLE_FEES_URL),
+                    ("WA L&I Verify", LNI_URL),
+                ],
+                ("Seattle hub", "../seattle.html"),
+            ),
+        ),
+        (
+            ("edmonds",),
+            (
+                "Edmonds",
+                "Most Edmonds residential permit paths start with MyBuildingPermit plus city permit-assistance pages. Confirm the parcel’s live city requirements before design freeze.",
+                [
+                    ("MyBuildingPermit", MYBUILDINGPERMIT_URL),
+                    ("Edmonds permit assistance", "https://www.edmondswa.gov/services/permit_assistance"),
+                    ("City of Edmonds", "https://www.edmondswa.gov/"),
+                    ("WA L&I Verify", LNI_URL),
+                ],
+                ("Edmonds project hub", "../edmonds.html"),
+            ),
+        ),
+        (
+            ("shoreline",),
+            (
+                "Shoreline",
+                "Shoreline permit status, applications, and inspections run through the city’s eTRAKiT path. Use the live city portal for the parcel, not Edmonds or county assumptions.",
+                [
+                    ("Shoreline eTRAKiT", "https://permits.shorelinewa.gov/eTRAKiT/"),
+                    ("City of Shoreline", "https://www.shorelinewa.gov/"),
+                    ("WA L&I Verify", LNI_URL),
+                ],
+                ("Shoreline hub", "../shoreline.html"),
+            ),
+        ),
+        (
+            ("lynnwood",),
+            (
+                "Lynnwood",
+                "Lynnwood permit workflows change by project type. Use the live city path and confirm whether MyBuildingPermit is the right entry point for your parcel.",
+                [
+                    ("MyBuildingPermit", MYBUILDINGPERMIT_URL),
+                    ("City of Lynnwood", "https://www.lynnwoodwa.gov/"),
+                    ("WA L&I Verify", LNI_URL),
+                ],
+                ("Lynnwood hub", "../lynnwood.html"),
+            ),
+        ),
+        (
+            ("mukilteo",),
+            (
+                "Mukilteo",
+                "Mukilteo projects should use the city’s permit center or SmartGov portal for live requirements and inspection status.",
+                [
+                    ("Mukilteo Building & Permits", "https://mukilteowa.gov/207/Building-Permits"),
+                    ("City of Mukilteo Public Portal (SmartGov)", "https://ci-mukilteo-wa.smartgovcommunity.com/Public/Home"),
+                    ("City of Mukilteo", "https://mukilteowa.gov/"),
+                    ("WA L&I Verify", LNI_URL),
+                ],
+                ("Mukilteo hub", "../mukilteo.html"),
+            ),
+        ),
+        (
+            ("kirkland",),
+            (
+                "Kirkland",
+                "Kirkland development work routes through the city’s Development Services Center and MyBuildingPermit. Confirm the current permit path for the parcel.",
+                [
+                    ("Apply for a Kirkland development permit", "https://www.kirklandwa.gov/Government/Departments/Development-Services-Center/Apply-for-a-Permit"),
+                    ("MyBuildingPermit", MYBUILDINGPERMIT_URL),
+                    ("City of Kirkland", "https://www.kirklandwa.gov/"),
+                    ("WA L&I Verify", LNI_URL),
+                ],
+                ("Kirkland hub", "../kirkland.html"),
+            ),
+        ),
+        (
+            ("bothell",),
+            (
+                "Bothell",
+                "Bothell spans county lines, so parcel authority matters. Use the city permit center and MyBuildingPermit for the live application path.",
+                [
+                    ("Bothell Permit Center", "https://www.bothellwa.gov/337/Permit-Center"),
+                    ("MyBuildingPermit", MYBUILDINGPERMIT_URL),
+                    ("City of Bothell", "https://www.bothellwa.gov/"),
+                    ("WA L&I Verify", LNI_URL),
+                ],
+                ("Bothell hub", "../bothell.html"),
+            ),
+        ),
+        (
+            ("mountlake-terrace", "mountlake terrace"),
+            (
+                "Mountlake Terrace",
+                "Mountlake Terrace building and civil permits run through the city’s eTRAKiT portal. Confirm the live city path before assuming Edmonds or county rules apply.",
+                [
+                    ("Mountlake Terrace eTRAKiT", "https://mltw-trk.aspgov.com/eTRAKiT/"),
+                    ("City of Mountlake Terrace", "https://www.cityofmlt.com/"),
+                    ("WA L&I Verify", LNI_URL),
+                ],
+                ("Mountlake Terrace hub", "../mountlake-terrace.html"),
+            ),
+        ),
+        (
+            ("mill-creek", "mill creek"),
+            (
+                "Mill Creek",
+                "Mill Creek permit paths commonly use MyBuildingPermit plus city code guidance. Check the city page for current workflow before bidding around assumptions.",
+                [
+                    ("MyBuildingPermit", MYBUILDINGPERMIT_URL),
+                    ("City of Mill Creek — Building Codes & Guidance", "https://www.cityofmillcreek.com/city_government/public_works_and_development_services/building_and_clearing___grading_permits/building_permits_and_codes"),
+                    ("City of Mill Creek", "https://www.cityofmillcreek.com/"),
+                    ("WA L&I Verify", LNI_URL),
+                ],
+                ("Mill Creek hub", "../mill-creek.html"),
+            ),
+        ),
+        (
+            ("lake-forest-park", "lake forest park"),
+            (
+                "Lake Forest Park",
+                "Lake Forest Park uses its own permit portal. Confirm the parcel’s live city requirements rather than borrowing Seattle or county rules.",
+                [
+                    ("Lake Forest Park Permit Portal", "https://lakeforestparkwa.portal.iworq.net/portalhome/lakeforestparkwa"),
+                    ("City of Lake Forest Park Permit Center", "https://www.cityoflfp.gov/165/Permit-Center"),
+                    ("City of Lake Forest Park", "https://www.cityoflfp.gov/"),
+                    ("WA L&I Verify", LNI_URL),
+                ],
+                ("Lake Forest Park hub", "../lake-forest-park.html"),
+            ),
+        ),
+    ]
+    for needles, payload in location_rules:
+        if any(needle in text for needle in needles):
+            return payload
+    return (
+        "Washington",
+        "Use the live city or county authority having jurisdiction for permit rules, then verify any contractor at the state source before you sign.",
+        [
+            ("WA L&I Verify", LNI_URL),
+            ("WA L&I — hiring a contractor", WA_CONSUMER_PROTECT_URL),
+            ("MyBuildingPermit", MYBUILDINGPERMIT_URL),
+        ],
+        None,
+    )
+
+
+def _post_board_links(post: dict, city_hub: tuple[str, str] | None) -> list[tuple[str, str]]:
+    text = " ".join(
+        str(post.get(key, ""))
+        for key in ("slug", "title", "description", "category", "body_md")
+    ).lower()
+    text = text.replace("–", "-").replace("—", "-")
+    if "adu" in text:
+        links = [
+            ("Edmonds ADU hub", "../adu.html"),
+            ("ADU readiness checklist", "../adu-checklist.html"),
+            ("ADU cost factors", "../adu-cost-factors.html"),
+            ("Permit jurisdiction hub", "../permits.html"),
+            ("Home additions directory", "../additions.html"),
+        ]
+    elif any(token in text for token in ("addition", "second-story", "second story", "teardown")):
+        links = [
+            ("Home additions directory", "../additions.html"),
+            ("Home addition planning", "../home-addition-planning.html"),
+            ("Addition cost factors", "../addition-cost-factors.html"),
+            ("Second story vs teardown", "../second-story-vs-teardown.html"),
+            ("Project timeline phases", "../project-timeline.html"),
+        ]
+    elif any(token in text for token in ("bath", "shower", "waterproof")):
+        links = [
+            ("Bathroom remodelers", "../bathrooms.html"),
+            ("Bathroom waterproofing guide", "../bathroom-waterproofing-guide.html"),
+            ("Bathroom cost factors", "../bathroom-cost-factors.html"),
+            ("Coastal waterproofing checklist", "../coastal-waterproofing.html"),
+            ("Bid comparison checklist", "../bid-comparison.html"),
+        ]
+    elif "kitchen" in text:
+        links = [
+            ("Kitchen remodelers", "../kitchen.html"),
+            ("Kitchen remodel planning", "../kitchen-remodel-planning.html"),
+            ("Kitchen cost factors", "../kitchen-cost-factors.html"),
+            ("Bid comparison checklist", "../bid-comparison.html"),
+            ("Change orders & allowances", "../change-orders.html"),
+        ]
+    elif any(
+        token in text
+        for token in ("tile", "plumb", "electrical", "electrician", "hvac", "window", "roof", "floor", "siding", "concrete", "framing", "excavation", "insulation", "drywall", "paint")
+    ):
+        links = [
+            ("Trades hub", "../trades.html"),
+            ("Hiring a contractor", "../hiring-a-contractor.html"),
+            ("Hire interview questions", "../hire-questions.html"),
+            ("Verify contractor", "../verify-contractor.html"),
+            ("Permit jurisdiction hub", "../permits.html"),
+        ]
+    else:
+        links = [
+            ("Learn hub", "../learn.html"),
+            ("Hiring a contractor", "../hiring-a-contractor.html"),
+            ("Verify contractor", "../verify-contractor.html"),
+            ("Permit jurisdiction hub", "../permits.html"),
+            ("Good Steward hub", "../good-steward.html"),
+        ]
+    if city_hub:
+        links.insert(0, city_hub)
+    links.extend(
+        [
+            ("How we rank", "../how-we-rank.html"),
+            ("Blog index", "../blog.html"),
+        ]
+    )
+    deduped = []
+    seen = set()
+    for label, href in links:
+        if href in seen:
+            continue
+        seen.add(href)
+        deduped.append((label, href))
+    return deduped
+
+
+def post_resource_panels(post: dict) -> str:
+    place, official_blurb, official_links, city_hub = _post_location_context(post)
+    board_links = _post_board_links(post, city_hub)
+    return f"""    <section class="mt-12 pt-10 border-t border-white/10">
+      <div class="grid gap-6 lg:grid-cols-2">
+        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
+          <p class="text-[11px] uppercase tracking-widest text-secondary font-bold mb-2">Official sources</p>
+          <h2 class="text-xl font-black text-white tracking-tight mb-3">{esc(place)} permit and contractor links</h2>
+          <p class="text-sm text-slate-400 font-light leading-relaxed mb-4">{esc(official_blurb)}</p>
+          {_link_ul(official_links, external=True)}
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
+          <p class="text-[11px] uppercase tracking-widest text-secondary font-bold mb-2">Continue learning</p>
+          <h2 class="text-xl font-black text-white tracking-tight mb-3">Use this article with Board directories and tools</h2>
+          <p class="text-sm text-slate-400 font-light leading-relaxed mb-4">Treat the post as orientation, then move to the matching directory, planning page, or verification tool before you request bids.</p>
+          {_link_ul(board_links)}
+        </div>
+      </div>
+    </section>"""
+
+
 def build_post_page(post: dict) -> str:
     article_html = md_to_html(post["body_md"])
     canon = f"{BASE_URL}posts/{post['out_name']}"
@@ -3889,6 +4372,7 @@ def build_post_page(post: dict) -> str:
     <div class="prose-bops">
 {article_html}
     </div>
+{post_resource_panels(post)}
   </div>"""
     return page_shell(
         f"{post['title']} | Board of Project Stewardship",
@@ -3905,6 +4389,7 @@ def build_post_page(post: dict) -> str:
             ("Blog", f"{BASE_URL}blog.html"),
             (post["title"], canon),
         ],
+        show_shell_breadcrumbs=False,
     )
 
 
@@ -4205,7 +4690,7 @@ def build_good_steward_page() -> str:
     </p>
     <ul class="text-sm text-slate-300 space-y-1 mb-2 list-disc pl-5">
       <li><strong class="text-white">Build Walkthrough</strong> — visual sales-to-build stages with homeowner checklists</li>
-      <li><strong class="text-white">Site Visit &amp; Discovery</strong> — what to observe and ask before plans or pricing (includes feasibility &amp; estimate calculator)</li>
+      <li><strong class="text-white">Site Visit &amp; Discovery</strong> — what to observe and ask before plans or pricing (includes feasibility notes and scope prompts)</li>
       <li><strong class="text-white">PM Execution Dashboard</strong> — phase checklist + status notes for an active build</li>
     </ul>
   </header>
@@ -4490,6 +4975,36 @@ def _check_ul(items: list[str]) -> str:
     return f'<ul class="space-y-3 text-sm text-slate-300 font-light leading-relaxed">{lis}</ul>'
 
 
+def directory_use_block(
+    heading: str,
+    summary: str,
+    checklist: list[str],
+    official_links: list[tuple[str, str]],
+    board_links: list[tuple[str, str]],
+    official_note: str = "Official portals move over time. If a direct link changes, restart from the city or county home and confirm the live authority having jurisdiction.",
+) -> str:
+    return f"""    <section class="bg-charcoal rounded-xl p-8 md:p-10 border border-white/10 mb-14">
+      <div class="grid lg:grid-cols-[1.2fr_0.8fr] gap-8">
+        <div>
+          <h2 class="text-2xl font-black text-white tracking-tight mb-3">{esc(heading)}</h2>
+          <p class="text-sm text-slate-300 font-light leading-relaxed mb-5">{summary}</p>
+          {_check_ul(checklist)}
+        </div>
+        <div class="space-y-6">
+          <div>
+            <p class="text-[11px] uppercase tracking-widest text-secondary font-bold mb-2">Official links</p>
+            {_link_ul(official_links, external=True)}
+            <p class="text-xs text-slate-500 font-light mt-3">{esc(official_note)}</p>
+          </div>
+          <div>
+            <p class="text-[11px] uppercase tracking-widest text-secondary font-bold mb-2">Board reading</p>
+            {_link_ul(board_links)}
+          </div>
+        </div>
+      </div>
+    </section>"""
+
+
 def build_permits_page() -> str:
     jurisdictions = [
         (
@@ -4536,6 +5051,67 @@ def build_permits_page() -> str:
             [
                 ("Shoreline eTRAKiT", "https://permits.shorelinewa.gov/eTRAKiT/"),
                 ("City of Shoreline", "https://www.shorelinewa.gov/"),
+            ],
+        ),
+        (
+            "Lynnwood",
+            "Lynnwood permit workflows vary by project type. Confirm the live city path for your parcel and whether MyBuildingPermit is the right entry point.",
+            [
+                ("MyBuildingPermit", MYBUILDINGPERMIT_URL),
+                ("City of Lynnwood", "https://www.lynnwoodwa.gov/"),
+            ],
+        ),
+        (
+            "Mukilteo",
+            "Mukilteo building permits run through the city permit center and SmartGov public portal. Use the live city path for applications and status.",
+            [
+                ("Mukilteo Building & Permits", "https://mukilteowa.gov/207/Building-Permits"),
+                ("City of Mukilteo Public Portal (SmartGov)", "https://ci-mukilteo-wa.smartgovcommunity.com/Public/Home"),
+                ("City of Mukilteo", "https://mukilteowa.gov/"),
+            ],
+        ),
+        (
+            "Kirkland",
+            "Kirkland development work runs through the city’s Development Services Center and MyBuildingPermit. Confirm the current workflow for your address.",
+            [
+                ("Apply for a Kirkland development permit", "https://www.kirklandwa.gov/Government/Departments/Development-Services-Center/Apply-for-a-Permit"),
+                ("MyBuildingPermit", MYBUILDINGPERMIT_URL),
+                ("City of Kirkland", "https://www.kirklandwa.gov/"),
+            ],
+        ),
+        (
+            "Bothell",
+            "Bothell spans county lines, so parcel authority matters. Start with the city permit center and MyBuildingPermit for the live application path.",
+            [
+                ("Bothell Permit Center", "https://www.bothellwa.gov/337/Permit-Center"),
+                ("MyBuildingPermit", MYBUILDINGPERMIT_URL),
+                ("City of Bothell", "https://www.bothellwa.gov/"),
+            ],
+        ),
+        (
+            "Mountlake Terrace",
+            "Mountlake Terrace building and civil permits run through the city’s eTRAKiT portal. Confirm the live city path rather than borrowing Edmonds assumptions.",
+            [
+                ("Mountlake Terrace eTRAKiT", "https://mltw-trk.aspgov.com/eTRAKiT/"),
+                ("City of Mountlake Terrace", "https://www.cityofmlt.com/"),
+            ],
+        ),
+        (
+            "Lake Forest Park",
+            "Lake Forest Park uses its own permit portal and permit center. Confirm city requirements directly rather than assuming Seattle or county rules apply.",
+            [
+                ("Lake Forest Park Permit Portal", "https://lakeforestparkwa.portal.iworq.net/portalhome/lakeforestparkwa"),
+                ("City of Lake Forest Park Permit Center", "https://www.cityoflfp.gov/165/Permit-Center"),
+                ("City of Lake Forest Park", "https://www.cityoflfp.gov/"),
+            ],
+        ),
+        (
+            "Mill Creek",
+            "Mill Creek building, plumbing, and mechanical paths commonly route through MyBuildingPermit with city code guidance for details.",
+            [
+                ("MyBuildingPermit", MYBUILDINGPERMIT_URL),
+                ("City of Mill Creek — Building Codes & Guidance", "https://www.cityofmillcreek.com/city_government/public_works_and_development_services/building_and_clearing___grading_permits/building_permits_and_codes"),
+                ("City of Mill Creek", "https://www.cityofmillcreek.com/"),
             ],
         ),
     ]
@@ -4607,6 +5183,25 @@ def build_permits_page() -> str:
                     ("Good Steward", "./good-steward.html"),
                     ("Remodel cost factors", "./remodel-cost-factors.html"),
                     ("Seattle hub", "./seattle.html"),
+                ]
+            ),
+        )
+        + _hub_section(
+            "Board city permit hubs",
+            _link_ul(
+                [
+                    ("Edmonds project hub", "./edmonds.html"),
+                    ("Seattle hub", "./seattle.html"),
+                    ("King County hub", "./king-county.html"),
+                    ("Snohomish County hub", "./snohomish-county.html"),
+                    ("Shoreline hub", "./shoreline.html"),
+                    ("Lynnwood hub", "./lynnwood.html"),
+                    ("Mukilteo hub", "./mukilteo.html"),
+                    ("Kirkland hub", "./kirkland.html"),
+                    ("Bothell hub", "./bothell.html"),
+                    ("Mountlake Terrace hub", "./mountlake-terrace.html"),
+                    ("Lake Forest Park hub", "./lake-forest-park.html"),
+                    ("Mill Creek hub", "./mill-creek.html"),
                 ]
             ),
         )
@@ -4884,6 +5479,10 @@ def build_city_hub_page(
             permit_blurb,
         ),
         (
+            f"Does the Board publish {place} price bands?",
+            "No. The Board does not publish city-specific price promises, fee invoices, or ROI claims. Use the official permit path for fee context and compare written local bids with matching scope.",
+        ),
+        (
             "Who is Board #1?",
             f"{PPG['name']} holds the Board’s editorial #1 hire ranking for kitchen, bath, and additions directories — {PPG['url']} — not Board ownership.",
         ),
@@ -4913,6 +5512,30 @@ def build_city_hub_page(
         + _hub_section(
             "Related local posts",
             _link_ul(related_posts),
+        )
+        + _hub_section(
+            f"Next steps for {place} homeowners",
+            f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-4">Use the official permit links above to confirm AHJ authority for the parcel, then move into contractor verification, scope comparison, and the Board directory that matches your project type.</p>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div>
+          <p class="text-[11px] uppercase tracking-widest text-secondary font-bold mb-2">Board tools</p>
+          {_link_ul([
+              ("Verify contractor", "./verify-contractor.html"),
+              ("Hiring a contractor", "./hiring-a-contractor.html"),
+              ("Hire interview questions", "./hire-questions.html"),
+              ("Bid comparison checklist", "./bid-comparison.html"),
+              ("Permit jurisdiction hub", "./permits.html"),
+              ("Learn hub", "./learn.html"),
+          ])}
+        </div>
+        <div>
+          <p class="text-[11px] uppercase tracking-widest text-secondary font-bold mb-2">Official Washington links</p>
+          {_link_ul([
+              ("WA L&I Verify", LNI_URL),
+              ("WA L&I — hiring a contractor", WA_CONSUMER_PROTECT_URL),
+          ], external=True)}
+        </div>
+      </div>""",
         )
         + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, f'{place} hub FAQ')}\n  </div>\n"
     )
@@ -6108,6 +6731,33 @@ def build_learn_page() -> str:
             "Learning · Board of Project Stewardship",
             "Learn hub",
             "One Board index for permits, ADU, verification, planning pillars, Good Steward tools, glossary, videos, and city hubs. Educational — not invented prices, ROI, or a brokerage.",
+        )
+        + _hub_section(
+            "Start here",
+            f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-4">If you are new to the Board, follow this order: confirm the legal entity, confirm the parcel’s permitting authority, compare written scopes, then move into the planning page or directory that matches your project.</p>
+      {_check_ul([
+          "Verify the contract legal name at WA L&I before any deposit or permit submittal.",
+          "Use the permit hub or city hub before you compare schedule promises.",
+          "Pick the planning guide or directory that matches your actual scope — kitchen, bath, additions, ADU, custom, or trades.",
+          "Use bid comparison, hire questions, and change-order guidance before you sign.",
+      ])}
+      <p class="text-sm text-slate-400 font-light mt-4"><a href="./verify-contractor.html" class="text-secondary hover:underline">Verify contractor</a> · <a href="./permits.html" class="text-secondary hover:underline">Permit hub</a> · <a href="./hiring-a-contractor.html" class="text-secondary hover:underline">Hiring a contractor</a> · <a href="./bid-comparison.html" class="text-secondary hover:underline">Bid comparison</a></p>""",
+            border="border-primary/25",
+        )
+        + _hub_section(
+            "Official sources the Board keeps pointing to",
+            _link_ul(
+                [
+                    ("WA L&I Verify", LNI_URL),
+                    ("WA L&I — hiring a contractor", WA_CONSUMER_PROTECT_URL),
+                    ("MyBuildingPermit", MYBUILDINGPERMIT_URL),
+                    ("How to get a Seattle permit (SDCI)", SEATTLE_PERMIT_HOW),
+                    ("King County local services — permits", "https://kingcounty.gov/en/dept/local-services/permits-inspections"),
+                    ("Snohomish County PDS", "https://www.snohomishcountywa.gov/198/Planning-Development-Services"),
+                    ("City of Edmonds", "https://www.edmondswa.gov/"),
+                ],
+                external=True,
+            ),
         )
         + "".join(cards)
         + f'  <div class="max-w-6xl mx-auto px-4 pb-16">\n{faq_section(faqs, "Learn hub FAQ")}\n  </div>\n'
