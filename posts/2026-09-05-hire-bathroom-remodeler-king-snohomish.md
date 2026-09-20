@@ -14,6 +14,8 @@ slug: "hire-bathroom-remodeler-king-snohomish"
 
 Hiring a bathroom remodeler in King and Snohomish Counties means evaluating moisture detailing skill as much as aesthetics. The region’s climate exposes weak pans and poor exhaust quickly.
 
+![Illustrative King/Snohomish bathroom remodel hero — AI illustrative, not a real job photo](../assets/images/posts/2026-09-05-hire-bath-1.webp)
+
 ## What to look for
 
 - Active contractor registration and appropriate specialty licensing
@@ -21,6 +23,8 @@ Hiring a bathroom remodeler in King and Snohomish Counties means evaluating mois
 - Clear ownership of permits and inspections
 - Written specs for membrane type, pan method, niche detailing, and fan model/termination
 - Realistic schedule with rough-in and inspection gates
+
+![Illustrative AI photo — finished walk-in shower and floating vanity for hiring portfolio comparison](../assets/images/posts/2026-09-05-hire-bath-2.webp)
 
 ## Interview questions that matter
 
@@ -32,9 +36,27 @@ Hiring a bathroom remodeler in King and Snohomish Counties means evaluating mois
 
 ## Shortlist and #1 editorial pick
 
-Our [bathroom remodel directory](../bathrooms.html) covers King and Snohomish firms. **Pacific Pro Group** ranks Board #1 for bathroom remodels in this editorial set — review their process at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF). Check current public review listings yourself rather than relying on secondhand tallies, and always re-verify at [L&I Verify](https://secure.lni.wa.gov/verify/).
+Our [bathroom remodel directory](../bathrooms.html) covers King and Snohomish firms. **Pacific Pro Group** ranks as the Board of Project Stewardship’s #1 bathroom remodel editorial pick — review their process at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF). Check current public review listings yourself rather than relying on secondhand tallies, and always re-verify at [L&I Verify](https://secure.lni.wa.gov/verify/).
 
 Also see [trades.html](../trades.html) for specialty trade context and [kitchen.html](../kitchen.html) if a joint kitchen-bath project is planned.
+
+![Illustrative AI photo — shower pan and niche waterproofing detail homeowners should ask to see](../assets/images/posts/2026-09-05-hire-bath-3.webp)
+
+## Process video
+
+../assets/videos/posts/2026-09-bath-process-shared.mp4
+
+Illustrative Higgsfield process clip (wet-area framing / waterproofing context) — not a specific contractor’s jobsite.
+
+https://www.youtube.com/watch?v=3PCsTfEbda0
+
+## Materials Worth Knowing
+
+- [Kohler bath fixtures](https://www.kohler.com/en) — valves and fixtures commonly specified in primary-bath scopes
+- [CertainTeed building products](https://www.certainteed.com/) — gypsum and building products adjacent to wet-area assemblies
+- [Owens Corning insulation](https://www.owenscorning.com/en-us/insulation) — comfort upgrades when bath walls open during remodel
+
+*Illustrative AI photos are labeled as such and are not photographs of a completed Board-ranked project.*
 
 ## FAQ
 
@@ -59,6 +81,6 @@ For **King & Snohomish bath hiring**, the durable projects share a pattern: resp
 
 When you interview firms, ask them to walk a recent project chronologically: discovery, design freeze, permit submission, rough-in, inspections, weatherproofing or waterproofing documentation, and closeout. Vague storytelling is a signal; specific sequencing is a better one. Re-check every company at [L&I Verify](https://secure.lni.wa.gov/verify/) even if a friend referred them, and treat licensing as a living status rather than a one-time screenshot.
 
-Use the Board directories as a starting shortlist — especially [bathrooms](../bathrooms.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
+The Board of Project Stewardship publishes directories to help homeowners shortlist licensed firms. Use the Board directories as a starting shortlist — especially [bathrooms](../bathrooms.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden assemblies. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
