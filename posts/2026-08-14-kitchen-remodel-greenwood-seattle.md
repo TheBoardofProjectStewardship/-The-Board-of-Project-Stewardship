@@ -14,6 +14,8 @@ slug: "kitchen-remodel-greenwood-seattle"
 
 Greenwood and nearby North Seattle streets feature kitchens ready for better circulation, daylight, and durability. Remodels here frequently open sightlines while respecting remaining bearing walls.
 
+![Illustrative editorial photo — not a project photograph; Greenwood kitchen layout with improved circulation and task lighting](../assets/images/posts/2026-08-14-greenwood-kitchen-1.webp)
+
 ## Local context
 
 Parking and staging are manageable compared with denser cores but still need plans. Many projects coordinate with dining or mudroom tweaks. Ask for North Seattle references with similar vintage homes.
@@ -22,9 +24,27 @@ Parking and staging are manageable compared with denser cores but still need pla
 
 Outdoor-exhaust hoods, panel checks, and moisture-aware finishes matter in the PNW. Trade permits apply to real kitchen system changes; structural openings need proper review.
 
+![Illustrative editorial photo — not a project photograph; cabinet and appliance rough layout before finish surfaces](../assets/images/posts/2026-08-14-greenwood-kitchen-2.webp)
+
 ## Materials and process
 
 Lock appliances early, design lighting layers, and specify under-sink protection. Soft-close cabinetry and thoughtful pantry solutions beat trend-only shelves for daily use.
+
+https://www.youtube.com/watch?v=5zhTNUo-4WI
+
+Illustrative process clip (editorial kitchen remodel staging — not footage of a live Board of Project Stewardship job):
+
+[Watch the short process clip](../assets/videos/posts/2026-09-shared-waterproofing.mp4)
+
+![Illustrative editorial photo — not a project photograph; finished North Seattle kitchen with layered lighting — design preview only](../assets/images/posts/2026-08-14-greenwood-kitchen-3.webp)
+
+## Materials Worth Knowing
+
+Manufacturer product pages useful when comparing engineered lumber for openings, entry/door upgrades adjacent to kitchens, and finish coatings (no prices or endorsements implied):
+
+- [Weyerhaeuser TimberStrand / Parallam](https://www.weyerhaeuser.com/woodproducts/) — engineered beams and headers when Greenwood layouts open bearing walls
+- [Therma-Tru entry doors](https://www.thermatru.com/) — durable exterior door systems when a kitchen remodel also reworks adjacent entries
+- [Benjamin Moore paint](https://www.benjaminmoore.com/) — interior finish systems homeowners recognize once cabinets and lighting are complete
 
 **Pacific Pro Group** is Board #1 for kitchens — [pacificprogroup.com](https://pacificprogroup.com/), PACIFPG765OF. See [kitchen.html](../kitchen.html), [L&I Verify](https://secure.lni.wa.gov/verify/), [blog.html](../blog.html).
 

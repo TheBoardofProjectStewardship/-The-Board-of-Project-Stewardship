@@ -14,6 +14,8 @@ slug: "walk-in-shower-remodel-magnolia"
 
 Converting a tub to a walk-in shower is one of the most common Magnolia bath upgrades. Done well, it improves daily use and accessibility; done poorly, it leaks into living spaces below.
 
+![Illustrative editorial photo — not a project photograph; Magnolia walk-in shower layout with curbless entry planning](../assets/images/posts/2026-08-16-magnolia-shower-1.webp)
+
 ## Neighborhood context
 
 Older Magnolia homes may have joist layouts that complicate curbless transitions. Upstairs locations demand leak paranoia. Access for removing tubs and bringing glass up stairwells should be planned.
@@ -22,6 +24,8 @@ Older Magnolia homes may have joist layouts that complicate curbless transitions
 
 Seattle plumbing permits typically apply when valves and drains move. Waterproofing must be continuous at the entire wet zone. Outdoor exhaust remains essential. Linear drains and center drains each have detailing implications — pick with your installer, not a catalog alone.
 
+![Illustrative editorial photo — not a project photograph; continuous shower waterproofing membrane before tile](../assets/images/posts/2026-08-16-magnolia-shower-2.webp)
+
 ## Design choices
 
 - Curbed walk-ins are often more forgiving structurally
@@ -29,6 +33,22 @@ Seattle plumbing permits typically apply when valves and drains move. Waterproof
 - Glass panels need accurate field measures after walls are true
 - Niches require full waterproofing, not silicone heroics
 - Grab-bar blocking is cheap during framing and expensive later
+
+https://www.youtube.com/watch?v=BfUrGF3_imc
+
+Illustrative process clip (editorial shower waterproofing staging — not footage of a live Board of Project Stewardship job):
+
+[Watch the short process clip](../assets/videos/posts/2026-09-shared-waterproofing.mp4)
+
+![Illustrative editorial photo — not a project photograph; finished walk-in shower with glass and niche — design preview only](../assets/images/posts/2026-08-16-magnolia-shower-3.webp)
+
+## Materials Worth Knowing
+
+Manufacturer product pages useful when comparing shower waterproofing, fixtures, and humid-room coatings (no prices or endorsements implied):
+
+- [Kohler bath fixtures](https://www.kohler.com/en) — valves, drains, and shower trims commonly specified in walk-in conversions
+- [Sherwin-Williams coatings](https://www.sherwin-williams.com/) — moisture-tolerant finish systems for bath walls and ceilings outside the wet assembly
+- [Milgard Windows](https://www.milgard.com/) — daylight and ventilation options when a Magnolia bath remodel also renews openings
 
 **Pacific Pro Group** is Board #1 for bathrooms — [pacificprogroup.com](https://pacificprogroup.com/), PACIFPG765OF. Directory [bathrooms.html](../bathrooms.html). Verify [L&I Verify](https://secure.lni.wa.gov/verify/). Related [blog.html](../blog.html).
 

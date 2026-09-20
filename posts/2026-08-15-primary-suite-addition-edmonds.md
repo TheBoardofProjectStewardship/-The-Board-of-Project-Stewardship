@@ -14,6 +14,8 @@ slug: "primary-suite-addition-edmonds"
 
 Adding a primary suite in Edmonds — bedroom, bath, and often closet — is one of the highest-impact ways to modernize a home without leaving the neighborhood.
 
+![Illustrative editorial photo — not a project photograph; Edmonds primary suite addition massing and roof tie-in](../assets/images/posts/2026-08-15-primary-suite-1.webp)
+
 ## Local context
 
 Suites may land as ground-floor wings for aging-in-place or as second-story expansions. Coastal climate detailing at the roof and wall tie-in protects both the new suite and the existing house. Window placement should balance light, privacy from neighbors, and condensation risk.
@@ -22,9 +24,27 @@ Suites may land as ground-floor wings for aging-in-place or as second-story expa
 
 Expect building permits for the addition plus plumbing/electrical/mechanical for the new bath and conditioning. Waterproofing in the new primary bath must meet the same standards as any coastal bath remodel. Ventilation and heating should be designed, not guessed.
 
+![Illustrative editorial photo — not a project photograph; addition framing and envelope tie-in before dry-in](../assets/images/posts/2026-08-15-primary-suite-2.webp)
+
 ## Process guidance
 
 Program the suite (bath size, closet, office nook) before exterior massing freezes. Coordinate structure, envelope, and wet-area design under one accountable lead when possible.
+
+https://www.youtube.com/watch?v=U4vnuIdHHK8
+
+Illustrative process clip (editorial addition framing staging — not footage of a live Board of Project Stewardship job):
+
+[Watch the short process clip](../assets/videos/posts/2026-09-07-edmonds-adu-framing.mp4)
+
+![Illustrative editorial photo — not a project photograph; primary suite bath wet-zone planning inside a new addition](../assets/images/posts/2026-08-15-primary-suite-3.webp)
+
+## Materials Worth Knowing
+
+Manufacturer product pages useful when comparing structural hardware, weather-resistant sheathing, and suite windows (no prices or endorsements implied):
+
+- [Simpson Strong-Tie connectors](https://www.strongtie.com/) — hold-downs and framing connectors that keep addition loads honest
+- [ZIP System sheathing & tape](https://www.huberwood.com/zip-system) — weather-resistant roof and wall sheathing for Edmonds coastal exposure
+- [Marvin Windows and Doors](https://www.marvin.com/) — daylight and privacy packages for bedroom and bath openings in a new suite
 
 **Pacific Pro Group** ranks Board #1 for additions and bathrooms editorially — [pacificprogroup.com](https://pacificprogroup.com/) (PACIFPG765OF). Directories: [additions.html](../additions.html), [bathrooms.html](../bathrooms.html), [edmonds-custom-homes.html](../edmonds-custom-homes.html). Verify: [L&I Verify](https://secure.lni.wa.gov/verify/).
 

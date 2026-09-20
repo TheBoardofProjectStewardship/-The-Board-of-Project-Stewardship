@@ -44,7 +44,10 @@
     "3fP0LZMEV5w",
     "2-Sn8I1AjP0",
     "wAKfLIN79pY",
-    "Y8VG3STo6VM"
+    "Y8VG3STo6VM",
+    "BfUrGF3_imc",
+    "U4vnuIdHHK8",
+    "5zhTNUo-4WI"
   ],
   "used_photo_urls": [
     "assets/images/posts/2026-08-28-mukilteo-bath-1.webp",
@@ -148,15 +151,24 @@
     "assets/images/posts/2026-09-14-stay-home-3.webp",
     "assets/images/posts/bath-edmonds-hero.webp",
     "assets/images/posts/bath-magnolia-hero.webp",
-    "assets/images/posts/2026-09-12-shoreline-kitchen-1.webp"
+    "assets/images/posts/2026-09-12-shoreline-kitchen-1.webp",
+    "assets/images/posts/2026-08-16-magnolia-shower-1.webp",
+    "assets/images/posts/2026-08-16-magnolia-shower-2.webp",
+    "assets/images/posts/2026-08-16-magnolia-shower-3.webp",
+    "assets/images/posts/2026-08-15-primary-suite-1.webp",
+    "assets/images/posts/2026-08-15-primary-suite-2.webp",
+    "assets/images/posts/2026-08-15-primary-suite-3.webp",
+    "assets/images/posts/2026-08-14-greenwood-kitchen-1.webp",
+    "assets/images/posts/2026-08-14-greenwood-kitchen-2.webp",
+    "assets/images/posts/2026-08-14-greenwood-kitchen-3.webp"
   ],
   "last_morning_audit": "2026-09-20",
   "last_upgraded_slugs": [
-    "eastside-vs-coastal-bath-remodel",
-    "pnw-bathroom-waterproofing-essentials",
-    "heated-floors-edmonds-bathrooms"
+    "walk-in-shower-remodel-magnolia",
+    "primary-suite-addition-edmonds",
+    "kitchen-remodel-greenwood-seattle"
   ],
-  "last_shared_video": "assets/videos/posts/2026-09-bath-process-shared.mp4",
+  "last_shared_video": "assets/videos/posts/2026-09-shared-waterproofing.mp4",
   "video_skip_log": [
     {
       "date": "2026-09-20",
@@ -209,6 +221,20 @@
       ],
       "reused": [
         "assets/videos/posts/2026-09-bath-process-shared.mp4",
+        "assets/videos/posts/2026-09-shared-waterproofing.mp4"
+      ]
+    },
+    {
+      "date": "2026-09-20",
+      "reason": "reuse existing shared mp4s; Higgsfield balance ~19.73 \u2014 no new video/image spend; copied unused on-disk stills",
+      "posts": [
+        "walk-in-shower-remodel-magnolia",
+        "primary-suite-addition-edmonds",
+        "kitchen-remodel-greenwood-seattle"
+      ],
+      "reused": [
+        "assets/videos/posts/2026-09-shared-waterproofing.mp4",
+        "assets/videos/posts/2026-09-07-edmonds-adu-framing.mp4",
         "assets/videos/posts/2026-09-shared-waterproofing.mp4"
       ]
     }
