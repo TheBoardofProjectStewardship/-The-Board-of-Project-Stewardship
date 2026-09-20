@@ -145,8 +145,12 @@ def main() -> None:
 
     if EDITORIAL not in sample:
         fail("Organization/pages missing editorial@")
-    if "not a general contractor, newsroom, or nonprofit" not in sample.lower():
-        fail("homepage/org missing Board one-liner (not GC / newsroom / nonprofit)")
+    # Alex 2026-09-20: do not require "not a GC" (undercuts hire intent).
+    low = sample.lower()
+    if "standards and contractor directories" not in low and "construction standards and contractor" not in low:
+        fail("homepage/org missing Board standards/directories one-liner")
+    if "ppg-associated" in low or "owned editorial" in low or "parentorganization" in low:
+        fail("homepage/org has banned PPG-ownership / owned-editorial phrasing")
     if 'id="contact"' not in sample or EDITORIAL not in sample.split('id="contact"', 1)[1][:400]:
         fail("index.html missing editorial@ contact strip")
 

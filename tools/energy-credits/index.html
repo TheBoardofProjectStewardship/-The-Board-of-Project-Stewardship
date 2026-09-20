@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WA Energy Credits Estimator | Board of Project Stewardship</title>
+  <meta name="description" content="Educational estimator for federal section 25C window credits and PSE / SnoPUD rebates for Edmonds, King, and Snohomish homeowners. Not tax advice.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a0a0a">
+  <link rel="canonical" href="https://boardofprojectstewardship.com/tools/energy-credits/">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            obsidian: "#0a0a0a",
+            charcoal: "#1a1a1a",
+            "dark-gray": "#2a2a2a",
+            primary: "#166534",
+            secondary: "#4ade80"
+          }
+        }
+      }
+    };
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: Inter, system-ui, sans-serif; }
+    .field label {
+      display: block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.05em;
+      text-transform: uppercase; color: #94a3b8; margin-bottom: 0.4rem;
+    }
+    .field input, .field select {
+      width: 100%; background: #0a0a0a; border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 0.5rem; padding: 0.65rem 0.75rem; color: #f8fafc; font-size: 0.95rem;
+    }
+    .field input:focus, .field select:focus {
+      outline: 2px solid #166534; outline-offset: 1px; border-color: #166534;
+    }
+    .result-card {
+      background: #0a0a0a; border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 0.75rem; padding: 1rem 1.1rem;
+    }
+    .result-card .amt { font-size: 1.45rem; font-weight: 700; color: #4ade80; }
+    .disclaimer {
+      background: rgba(250, 204, 21, 0.08); border: 1px solid rgba(250, 204, 21, 0.35);
+      color: #fde68a; border-radius: 0.75rem; padding: 0.9rem 1rem; font-size: 0.8rem; line-height: 1.55;
+    }
+    .check-row {
+      display: flex; gap: 0.65rem; align-items: flex-start;
+      font-size: 0.875rem; color: #cbd5e1; cursor: pointer;
+    }
+    .check-row input { margin-top: 0.2rem; accent-color: #166534; width: 1rem; height: 1rem; flex-shrink: 0; }
+  </style>
+</head>
+<body class="bg-obsidian text-slate-100 min-h-screen">
+  <header class="bg-charcoal/90 border-b border-white/10 sticky top-0 z-20 backdrop-blur">
+    <div class="max-w-5xl mx-auto px-4 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+      <div>
+        <p class="text-[10px] uppercase tracking-[0.2em] text-secondary font-semibold">Board of Project Stewardship · Good Steward Tools</p>
+        <h1 class="text-lg sm:text-xl font-bold text-white">WA Energy Credits Estimator</h1>
+      </div>
+      <a href="../../good-steward.html" class="text-xs text-slate-400 hover:text-secondary uppercase tracking-wider">Good Steward hub</a>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4 py-8 space-y-6">
+    <div class="disclaimer" role="note">
+      <strong>Educational estimate only — not tax, legal, or rebate advice.</strong>
+      Confirm IRS Form 5695 and your utility’s current rules before purchase or filing.
+      Board of Project Stewardship editorial tool. Modeled figures: federal §25C for property placed in service through <strong>2025-12-31</strong>; PSE window rebates published through install <strong>2026-12-31</strong>; SnoPUD weatherization window rebates as published on snopud.com (see sources file).
+    </div>
+
+    <figure class="rounded-xl overflow-hidden border border-white/10 bg-charcoal">
+      <img src="../../assets/images/tools/energy-credits-hero.png"
+           width="1200" height="675"
+           class="w-full h-40 sm:h-52 object-cover opacity-90"
+           loading="eager"
+           alt="Illustrative Pacific Northwest coastal home with energy-efficient windows — illustrative AI image, not a real Board of Project Stewardship job photo">
+    </figure>
+
+    <div class="grid lg:grid-cols-5 gap-6">
+      <section class="lg:col-span-3 bg-charcoal border border-white/10 rounded-xl p-5 sm:p-6 space-y-4">
+        <h2 class="text-sm font-bold uppercase tracking-wider text-slate-300 border-b border-white/10 pb-2">Project inputs</h2>
+
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div class="field">
+            <label for="utility">Utility</label>
+            <select id="utility">
+              <option value="pse">Puget Sound Energy (PSE)</option>
+              <option value="snopud">Snohomish County PUD</option>
+              <option value="scl">Seattle City Light</option>
+              <option value="other">Other / Unknown</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="serviceYear">Placed in service (tax year)</label>
+            <select id="serviceYear">
+              <option value="2025">2025 (federal §25C available)</option>
+              <option value="2026" selected>2026+ (federal §25C ended)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div class="field">
+            <label for="windowCount">Number of windows replaced</label>
+            <input id="windowCount" type="number" min="0" max="100" step="1" value="10">
+          </div>
+          <div class="field">
+            <label for="glazingSf">Sq ft of glazing (optional)</label>
+            <input id="glazingSf" type="number" min="0" step="1" placeholder="Not required for $ estimates">
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div class="field">
+            <label for="installedCost">Approx. installed cost ($)</label>
+            <input id="installedCost" type="number" min="0" step="100" value="18000">
+          </div>
+          <div class="field">
+            <label for="productCost">Window product cost — materials only ($)</label>
+            <input id="productCost" type="number" min="0" step="100" value="12000" title="Federal envelope credit excludes labor">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="federalQualify">Federal §25C (ENERGY STAR Most Efficient + Form 5695)?</label>
+          <select id="federalQualify">
+            <option value="yes">Yes — assume qualifying products / main home</option>
+            <option value="no">No</option>
+            <option value="unsure" selected>Unsure — show range</option>
+          </select>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div class="field">
+            <label for="pseTier">PSE U-factor tier (PSE customers)</label>
+            <select id="pseTier">
+              <option value="100">U ≤ 0.22 → $100 / window (standard)</option>
+              <option value="50" selected>U 0.23–0.30 → $50 / window (standard)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="existingType">Existing windows (SnoPUD / PSE context)</label>
+            <select id="existingType">
+              <option value="single">Single-pane</option>
+              <option value="double_metal">Double-pane metal frame</option>
+              <option value="double_other">Double-pane other / unknown</option>
+            </select>
+          </div>
+        </div>
+
+        <label class="check-row">
+          <input type="checkbox" id="pseBoost">
+          <span>PSE Efficiency Boost / manufactured-home tier ($200 / window, cap $2,000; boost-rate openings limited to 10) — only if PSE says you qualify</span>
+        </label>
+
+        <div class="border-t border-white/10 pt-4 space-y-3">
+          <p class="text-xs uppercase tracking-wider text-slate-500 font-semibold">Optional verified federal lines</p>
+          <label class="check-row">
+            <input type="checkbox" id="optInsulation">
+            <span>Also claiming qualifying insulation / air sealing (30%; shares $1,200 annual envelope bucket with windows)</span>
+          </label>
+          <div class="field" id="insulationWrap" hidden>
+            <label for="insulationCost">Insulation / air-sealing material cost ($)</label>
+            <input id="insulationCost" type="number" min="0" step="50" value="2000">
+          </div>
+          <label class="check-row">
+            <input type="checkbox" id="optHeatPump">
+            <span>Also claiming qualifying heat pump / HPWH (30%; separate up to $2,000 / year)</span>
+          </label>
+          <div class="field" id="heatPumpWrap" hidden>
+            <label for="heatPumpCost">Heat pump / HPWH qualified cost including labor ($)</label>
+            <input id="heatPumpCost" type="number" min="0" step="100" value="12000">
+          </div>
+        </div>
+      </section>
+
+      <section class="lg:col-span-2 space-y-4">
+        <div class="bg-charcoal border border-primary/40 rounded-xl p-5 space-y-3">
+          <h2 class="text-sm font-bold uppercase tracking-wider text-secondary">Stacked estimate</h2>
+          <div class="result-card">
+            <p class="text-xs text-slate-400 uppercase tracking-wider">Federal §25C</p>
+            <p class="amt" id="outFederal">$0</p>
+            <p class="text-xs text-slate-500 mt-1" id="outFederalNote"></p>
+          </div>
+          <div class="result-card">
+            <p class="text-xs text-slate-400 uppercase tracking-wider">Utility rebate line</p>
+            <p class="amt" id="outUtility">$0</p>
+            <p class="text-xs text-slate-500 mt-1" id="outUtilityNote"></p>
+          </div>
+          <div class="result-card border border-secondary/30">
+            <p class="text-xs text-slate-400 uppercase tracking-wider">Combined (educational)</p>
+            <p class="amt text-2xl" id="outTotal">$0</p>
+            <p class="text-xs text-slate-500 mt-1" id="outNet"></p>
+          </div>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-4 text-xs text-slate-400 leading-relaxed space-y-2">
+          <p><strong class="text-slate-300">Sources:</strong> IRS Energy Efficient Home Improvement Credit; PSE windows rebates; SnoPUD weatherization rebates. Citation log lives with Steward as <code class="text-secondary">wa-energy-credits-SOURCES.md</code>.</p>
+          <p>When both apply, this tool subtracts the estimated utility rebate from window product cost before the 30% federal calculation (simplified purchase-price adjustment — not tax advice).</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="max-w-5xl mx-auto px-4 py-8 text-center text-[11px] text-slate-500 border-t border-white/5">
+    Board of Project Stewardship · Edmonds / King &amp; Snohomish · Not a CPA, enrolled agent, or utility administrator
+  </footer>
+
+  <script>
+  (function () {
+    var $ = function (id) { return document.getElementById(id); };
+    var money = function (n) {
+      if (n == null || isNaN(n)) return "—";
+      return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
+    };
+
+    var RATES = {
+      federalPct: 0.30,
+      windowCap: 600,
+      envelopeCap: 1200,
+      heatPumpCap: 2000,
+      pse: { std50: 50, std50Cap: 750, std100: 100, std100Cap: 1500, boost: 200, boostCap: 2000, boostMaxOpenings: 10, lifetimeMax: 15 },
+      snopud: { single: 100, doubleMetal: 50 }
+    };
+
+    function calc() {
+      var utility = $("utility").value;
+      var year = parseInt($("serviceYear").value, 10);
+      var count = Math.max(0, parseInt($("windowCount").value || "0", 10));
+      var installed = Math.max(0, parseFloat($("installedCost").value || "0"));
+      var product = Math.max(0, parseFloat($("productCost").value || "0"));
+      if (!product && installed) product = installed;
+      var qualify = $("federalQualify").value;
+      var pseTier = $("pseTier").value;
+      var existing = $("existingType").value;
+      var boost = $("pseBoost").checked;
+      var wantIns = $("optInsulation").checked;
+      var wantHp = $("optHeatPump").checked;
+      var insCost = wantIns ? Math.max(0, parseFloat($("insulationCost").value || "0")) : 0;
+      var hpCost = wantHp ? Math.max(0, parseFloat($("heatPumpCost").value || "0")) : 0;
+
+      $("insulationWrap").hidden = !wantIns;
+      $("heatPumpWrap").hidden = !wantHp;
+
+      var util = 0;
+      var utilNote = "";
+      var utilKnown = true;
+
+      if (utility === "pse") {
+        var n = Math.min(count, RATES.pse.lifetimeMax);
+        if (boost) {
+          var openings = Math.min(n, RATES.pse.boostMaxOpenings);
+          util = Math.min(RATES.pse.boostCap, openings * RATES.pse.boost);
+          utilNote = "PSE Efficiency Boost / MH estimate: $" + RATES.pse.boost + "/window × " + openings + " (cap $" + RATES.pse.boostCap + "). Confirm income/MH rules on pse.com. Install by 2026-12-31.";
+        } else if (pseTier === "100") {
+          util = Math.min(RATES.pse.std100Cap, n * RATES.pse.std100);
+          utilNote = "PSE standard U≤0.22: $" + RATES.pse.std100 + "/window × " + n + " (cap $" + RATES.pse.std100Cap + "). Primary PSE heat required.";
+        } else {
+          if (existing === "double_metal" || existing === "double_other") {
+            util = 0;
+            utilNote = "PSE $50 tier (U 0.23–0.30) generally requires preexisting single-pane wood/metal. Double-pane preexisting: use U≤0.22 ($100) path or confirm with PSE.";
+          } else {
+            util = Math.min(RATES.pse.std50Cap, n * RATES.pse.std50);
+            utilNote = "PSE standard U 0.23–0.30 from single-pane: $" + RATES.pse.std50 + "/window × " + n + " (cap $" + RATES.pse.std50Cap + ").";
+          }
+        }
+      } else if (utility === "snopud") {
+        if (existing === "single") {
+          util = count * RATES.snopud.single;
+          utilNote = "SnoPUD: $" + RATES.snopud.single + "/window replacing single-pane (new U≤0.30, PUD registered contractor, electric primary heat). No household $ cap in sources log — verify with SnoPUD.";
+        } else if (existing === "double_metal") {
+          util = count * RATES.snopud.doubleMetal;
+          utilNote = "SnoPUD: $" + RATES.snopud.doubleMetal + "/window replacing double-pane metal frame. Verify with SnoPUD.";
+        } else {
+          util = 0;
+          utilKnown = false;
+          utilNote = "SnoPUD published amounts cover single-pane ($100) or double-pane metal-frame ($50). Other existing types: check SnoPUD.";
+        }
+      } else if (utility === "scl") {
+        util = 0;
+        utilKnown = false;
+        utilNote = "Seattle City Light: no verified current single-family window $/unit in Board sources log. Check City Light programs; multifamily differs.";
+      } else {
+        util = 0;
+        utilKnown = false;
+        utilNote = "Select PSE or SnoPUD for a modeled rebate, or check your utility’s weatherization page.";
+      }
+
+      var fedLow = 0, fedHigh = 0, fedNote = "";
+      var federalAlive = year <= 2025;
+
+      if (!federalAlive) {
+        fedNote = "Federal §25C does not apply to property placed in service after 2025-12-31 (IRS). Utility rebates may still apply.";
+      } else if (qualify === "no") {
+        fedNote = "Federal line set to $0 (marked not qualifying).";
+      } else {
+        var basisWindows = Math.max(0, product - (utilKnown ? util : 0));
+        var windowCredit = Math.min(RATES.windowCap, RATES.federalPct * basisWindows);
+        var envelopeUsed = windowCredit;
+        var insCredit = 0;
+        if (wantIns && insCost > 0) {
+          var room = Math.max(0, RATES.envelopeCap - envelopeUsed);
+          insCredit = Math.min(room, RATES.federalPct * insCost);
+          envelopeUsed += insCredit;
+        }
+        var hpCredit = 0;
+        if (wantHp && hpCost > 0) {
+          hpCredit = Math.min(RATES.heatPumpCap, RATES.federalPct * hpCost);
+        }
+        var totalFed = windowCredit + insCredit + hpCredit;
+        if (qualify === "unsure") {
+          fedLow = Math.round(totalFed * 0.5);
+          fedHigh = Math.round(totalFed);
+          fedNote = "Unsure: showing 50–100% of modeled credit. Windows ≤$" + RATES.windowCap + "; envelope bucket $" + RATES.envelopeCap + "; heat-pump bucket $" + RATES.heatPumpCap + ". Use materials-only product cost (envelope labor excluded).";
+        } else {
+          fedLow = fedHigh = Math.round(totalFed);
+          fedNote = "30% of adjusted product basis; windows ≤$" + RATES.windowCap +
+            (insCredit ? "; insulation +$" + Math.round(insCredit) : "") +
+            (hpCredit ? "; heat pump +$" + Math.round(hpCredit) : "") +
+            ". Nonrefundable; 2025 QMID rules apply.";
+        }
+      }
+
+      var fedDisplay = (fedLow === fedHigh) ? money(fedHigh) : (money(fedLow) + " – " + money(fedHigh));
+      var totalLow = fedLow + (utilKnown ? util : 0);
+      var totalHigh = fedHigh + (utilKnown ? util : 0);
+      var totalDisplay = (totalLow === totalHigh) ? money(totalHigh) : (money(totalLow) + " – " + money(totalHigh));
+
+      $("outFederal").textContent = fedDisplay;
+      $("outFederalNote").textContent = fedNote;
+      $("outUtility").textContent = utilKnown ? money(util) : "Check utility";
+      $("outUtilityNote").textContent = utilNote;
+      $("outTotal").textContent = totalDisplay;
+      if (installed > 0) {
+        var netHigh = Math.max(0, installed - totalHigh);
+        var netLow = Math.max(0, installed - totalLow);
+        $("outNet").textContent = netLow === netHigh
+          ? ("Illustrative net after modeled incentives: " + money(netHigh))
+          : ("Illustrative net after modeled incentives: " + money(netHigh) + " – " + money(netLow));
+      } else {
+        $("outNet").textContent = "Enter installed cost to see illustrative net.";
+      }
+    }
+
+    [
+      "utility", "serviceYear", "windowCount", "glazingSf", "installedCost", "productCost",
+      "federalQualify", "pseTier", "existingType", "pseBoost", "optInsulation", "optHeatPump",
+      "insulationCost", "heatPumpCost"
+    ].forEach(function (id) {
+      var el = $(id);
+      if (!el) return;
+      el.addEventListener("input", calc);
+      el.addEventListener("change", calc);
+    });
+
+    calc();
+  })();
+  </script>
+</body>
+</html>
