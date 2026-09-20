@@ -877,14 +877,30 @@ def nav_html(active: str = "", prefix: str = "") -> str:
         ("commercial", href("commercial.html"), "Commercial"),
         ("spec-homes", href("spec-homes.html"), "Spec"),
         ("trades", href("trades.html"), "Trades"),
+        ("shoreline", href("shoreline.html"), "Shoreline"),
+        ("lynnwood", href("lynnwood.html"), "Lynnwood"),
+        ("ballard", href("ballard.html"), "Ballard"),
+        ("magnolia", href("magnolia.html"), "Magnolia"),
     ]
     more_tools = [
         ("steward", href("good-steward.html"), "Good Steward"),
+        ("permits", href("permits.html"), "Permit Hub"),
+        ("adu", href("adu.html"), "Edmonds ADU"),
+        ("how-we-rank", href("how-we-rank.html"), "How We Rank"),
+        ("verify-contractor", href("verify-contractor.html"), "Verify Contractor"),
         ("build-walkthrough", href("build-walkthrough.html"), "Build Walkthrough"),
         ("site-visit", href("site-visit.html"), "Site Visit Checklist"),
         ("energy-credit", href("energy-credit.html"), "Energy Code Credits"),
         ("pm-dashboard", href("pm-dashboard.html"), "PM Dashboard"),
-        ("story", href("another-story.html"), "Another Story"),
+        ("adu-checklist", href("adu-checklist.html"), "ADU Checklist"),
+        ("change-orders", href("change-orders.html"), "Change Orders"),
+        ("coastal-waterproofing", href("coastal-waterproofing.html"), "Coastal Waterproofing"),
+        ("hire-questions", href("hire-questions.html"), "Hire Questions"),
+        ("materials", href("materials.html"), "Materials Index"),
+        ("contact", href("contact.html"), "Contact"),
+        ("glossary", href("glossary.html"), "Glossary"),
+        ("videos", href("videos.html"), "Video Library"),
+        ("story", href("another-story.html"), "Another Story · Board feature"),
     ]
     more = more_dirs + more_tools
     more_keys = {k for k, _, _ in more}
@@ -948,6 +964,7 @@ def nav_html(active: str = "", prefix: str = "") -> str:
 def footer_html(prefix: str = "./", active: str = "") -> str:
     explore = [
         ("about", f"{prefix}index.html", "About"),
+        ("how-we-rank", f"{prefix}how-we-rank.html", "How we rank"),
         ("additions", f"{prefix}additions.html", "Additions Top 30"),
         ("custom-homes", f"{prefix}custom-homes.html", "Custom homes"),
         ("edmonds", f"{prefix}edmonds-custom-homes.html", "Edmonds custom homes"),
@@ -956,12 +973,27 @@ def footer_html(prefix: str = "./", active: str = "") -> str:
         ("commercial", f"{prefix}commercial.html", "Commercial GCs"),
         ("spec-homes", f"{prefix}spec-homes.html", "Spec homes"),
         ("trades", f"{prefix}trades.html", "Trade contractors"),
+        ("shoreline", f"{prefix}shoreline.html", "Shoreline hub"),
+        ("lynnwood", f"{prefix}lynnwood.html", "Lynnwood hub"),
+        ("ballard", f"{prefix}ballard.html", "Ballard hub"),
+        ("magnolia", f"{prefix}magnolia.html", "Magnolia hub"),
+        ("permits", f"{prefix}permits.html", "Permit hub"),
+        ("adu", f"{prefix}adu.html", "Edmonds ADU"),
+        ("verify-contractor", f"{prefix}verify-contractor.html", "Verify contractor"),
         ("blog", f"{prefix}blog.html", "Blog"),
         ("steward", f"{prefix}good-steward.html", "Good Steward"),
         ("build-walkthrough", f"{prefix}build-walkthrough.html", "Build Walkthrough"),
         ("site-visit", f"{prefix}site-visit.html", "Site Visit Checklist"),
         ("pm-dashboard", f"{prefix}pm-dashboard.html", "PM Dashboard"),
-        ("story", f"{prefix}another-story.html", "Another Story"),
+        ("adu-checklist", f"{prefix}adu-checklist.html", "ADU checklist"),
+        ("change-orders", f"{prefix}change-orders.html", "Change orders"),
+        ("coastal-waterproofing", f"{prefix}coastal-waterproofing.html", "Coastal waterproofing"),
+        ("hire-questions", f"{prefix}hire-questions.html", "Hire questions"),
+        ("materials", f"{prefix}materials.html", "Materials index"),
+        ("glossary", f"{prefix}glossary.html", "Glossary"),
+        ("videos", f"{prefix}videos.html", "Video library"),
+        ("contact", f"{prefix}contact.html", "Contact"),
+        ("story", f"{prefix}another-story.html", "Another Story · Board feature"),
     ]
     items = []
     for key, href, label in explore:
@@ -1015,6 +1047,18 @@ def public_tool_href(slug: str, prefix: str = "") -> str:
         "build-walkthrough": "build-walkthrough.html",
         "story": "another-story.html",
         "steward": "good-steward.html",
+        "permits": "permits.html",
+        "adu": "adu.html",
+        "how-we-rank": "how-we-rank.html",
+        "verify-contractor": "verify-contractor.html",
+        "adu-checklist": "adu-checklist.html",
+        "change-orders": "change-orders.html",
+        "coastal-waterproofing": "coastal-waterproofing.html",
+        "hire-questions": "hire-questions.html",
+        "materials": "materials.html",
+        "contact": "contact.html",
+        "glossary": "glossary.html",
+        "videos": "videos.html",
     }
     name = names.get(slug, f"{slug}.html")
     return f"{prefix}{name}" if prefix else f"./{name}"
@@ -2425,11 +2469,19 @@ def build_kb_page(kind: str, firms: list[dict]) -> str:
         ),
         (
             "Do kitchen and bath remodels need permits in Edmonds?",
-            "Often yes — especially when moving plumbing, electrical, or walls. Confirm with the City of Edmonds and your contractor; many design-build firms manage the permit package.",
+            "Often yes — especially when moving plumbing, electrical, or walls. Confirm with the City of Edmonds / MyBuildingPermit and your contractor; many design-build firms manage the permit package. See our permit jurisdiction hub for official portals.",
         ),
         (
             "How does this list relate to home additions?",
             "Many of the same design-build remodelers appear on our home additions Top 30. See the additions directory for structural expansion specialists.",
+        ),
+        (
+            "How should I verify a firm before depositing?",
+            "Match the legal business name on the contract to WA L&I Verify, confirm active license, bond, and insurance, then ask for recent local references with similar scope.",
+        ),
+        (
+            "Is The Board of Project Stewardship a general contractor?",
+            "No. The Board publishes editorial directories and standards. Pacific Pro Group appears as Board directory #1 for hire — not as an owner of the Board.",
         ),
     ]
     cards = "\n\n".join(firm_card(f) for f in firms)
@@ -3765,6 +3817,22 @@ def write_sitemap(posts: list[dict]) -> None:
         "site-visit.html",
         "pm-dashboard.html",
         "energy-credit.html",
+        "permits.html",
+        "adu.html",
+        "how-we-rank.html",
+        "verify-contractor.html",
+        "shoreline.html",
+        "lynnwood.html",
+        "ballard.html",
+        "magnolia.html",
+        "adu-checklist.html",
+        "change-orders.html",
+        "coastal-waterproofing.html",
+        "hire-questions.html",
+        "materials.html",
+        "contact.html",
+        "glossary.html",
+        "videos.html",
         "blog/rss.xml",
         "tools/build-walkthrough/index.html",
         "tools/site-visit/index.html",
@@ -4104,6 +4172,944 @@ def build_pm_dashboard_page() -> str:
     )
 
 
+
+# ---------------------------------------------------------------------------
+
+
+# ---------------------------------------------------------------------------
+# Steward hubs & Good Steward companions (P0 + P1 + light P2)
+# ---------------------------------------------------------------------------
+
+
+def _hub_header(eyebrow: str, title: str, lead: str) -> str:
+    return f"""  <header class="max-w-6xl mx-auto px-4 pt-10 pb-6">
+    <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">{esc(eyebrow)}</p>
+    <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">{title}</h1>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed">{lead}</p>
+  </header>
+"""
+
+
+def _hub_section(title: str, inner: str, border: str = "border-white/10") -> str:
+    return f"""  <section class="max-w-6xl mx-auto px-4 pb-8">
+    <div class="bg-charcoal rounded-xl p-8 border {border}">
+      <h2 class="text-2xl font-black text-white mb-4 tracking-tight">{esc(title)}</h2>
+{inner}
+    </div>
+  </section>
+"""
+
+
+def _link_ul(items: list[tuple[str, str]], external: bool = False) -> str:
+    lis = []
+    for label, href in items:
+        if external:
+            lis.append(
+                f'<li><a href="{href}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(label)}</a></li>'
+            )
+        else:
+            lis.append(f'<li><a href="{href}" class="text-secondary hover:underline">{esc(label)}</a></li>')
+    return '<ul class="space-y-2 text-sm text-slate-300 font-light">\n' + "\n".join(lis) + "\n</ul>"
+
+
+def _check_ul(items: list[str]) -> str:
+    lis = "".join(
+        f'<li class="flex gap-3"><i class="fas fa-check text-secondary mt-1 shrink-0" aria-hidden="true"></i><span>{esc(x)}</span></li>'
+        for x in items
+    )
+    return f'<ul class="space-y-3 text-sm text-slate-300 font-light leading-relaxed">{lis}</ul>'
+
+
+def build_permits_page() -> str:
+    jurisdictions = [
+        (
+            "Edmonds",
+            "Most Edmonds residential building, plumbing, and mechanical applications go through MyBuildingPermit. Use city permit-assistance pages for tip sheets and contacts.",
+            [
+                ("MyBuildingPermit", "https://mybuildingpermit.com/"),
+                ("City of Edmonds", "https://www.edmondswa.gov/"),
+                ("Edmonds permit assistance", "https://www.edmondswa.gov/services/permit_assistance"),
+            ],
+        ),
+        (
+            "Seattle",
+            "Seattle Department of Construction and Inspections (SDCI) applications typically run through the Seattle Services Portal — not MyBuildingPermit.",
+            [
+                ("How to get a Seattle permit (SDCI)", "https://www.seattle.gov/construction-and-inspections/permits/how-do-you-get-a-permit"),
+                ("Seattle Services Portal", "https://cosaccela.seattle.gov/portal/"),
+                ("SDCI home", "https://www.seattle.gov/sdci"),
+            ],
+        ),
+        (
+            "King County (unincorporated)",
+            "Unincorporated King County residential applications commonly start at MyBuildingPermit; the county Accela portal is also used for status and records.",
+            [
+                ("MyBuildingPermit", "https://mybuildingpermit.com/"),
+                ("King County permitting portal", "https://aca-prod.accela.com/KINGCO/Default.aspx"),
+                ("King County local services — permits", "https://kingcounty.gov/en/dept/local-services/permits-inspections"),
+            ],
+        ),
+        (
+            "Snohomish County",
+            "Snohomish County Planning and Development Services (PDS) covers county-jurisdiction work. City projects (Edmonds, Lynnwood, and others) use the city or MyBuildingPermit path instead.",
+            [
+                ("Snohomish County PDS", "https://www.snohomishcountywa.gov/198/Planning-Development-Services"),
+                ("MyBuildingPermit", "https://mybuildingpermit.com/"),
+            ],
+        ),
+        (
+            "Shoreline",
+            "The City of Shoreline uses its eTRAKiT portal for applications, status, and inspections.",
+            [
+                ("Shoreline eTRAKiT", "https://permits.shorelinewa.gov/eTRAKiT/"),
+                ("City of Shoreline", "https://www.shorelinewa.gov/"),
+            ],
+        ),
+    ]
+    cards = []
+    for name, blurb, links in jurisdictions:
+        cards.append(
+            f"""      <article class="bg-charcoal border border-white/10 rounded-xl p-6 mb-4">
+        <h3 class="text-xl font-black text-white mb-2 tracking-tight">{esc(name)}</h3>
+        <p class="text-sm text-slate-400 font-light leading-relaxed mb-3">{esc(blurb)}</p>
+        {_link_ul(links, external=True)}
+      </article>"""
+        )
+    faqs = [
+        (
+            "Does every remodel need a building permit?",
+            "Not always — but moving walls, plumbing, electrical, or changing structure usually does. Confirm with the jurisdiction for your parcel (city vs county).",
+        ),
+        (
+            "What is MyBuildingPermit?",
+            "MyBuildingPermit.com is a shared online portal used by many Puget Sound cities and counties (including Edmonds) for residential permit applications and tip sheets.",
+        ),
+        (
+            "Who pulls the permit — homeowner or contractor?",
+            "Either can, depending on jurisdiction and license rules. Get the permit number in writing and confirm the named contractor matches WA L&I Verify.",
+        ),
+        (
+            "Where do I verify a Washington contractor?",
+            "Use the official WA L&I Verify tool. The Board publishes a walkthrough companion; L&I remains the source of truth.",
+        ),
+        (
+            "How does this hub relate to Board directories?",
+            "This page links official portals only. Shortlist firms on Board directories, then re-verify at L&I before hiring.",
+        ),
+    ]
+    body = (
+        _hub_header(
+            f"Official portals · Updated {YEAR}",
+            "Permit jurisdiction hub",
+            "Editorial how-to with outbound links to official permit portals only. The Board of Project Stewardship does not issue permits and does not invent review timelines.",
+        )
+        + _hub_section(
+            "How to use this hub",
+            f"""      <p class="text-slate-300 text-sm font-light leading-relaxed mb-3">Identify which city or county has permitting authority for your parcel, open that jurisdiction’s official portal, and keep permit numbers with your project file. Ask bidders who owns the submittal and who stands for inspections.</p>
+      <p class="text-slate-400 text-sm font-light leading-relaxed">Always re-verify any contractor at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>. Companion walkthrough: <a href="./verify-contractor.html" class="text-secondary hover:underline">How to verify a WA contractor</a>.</p>""",
+            border="border-primary/25",
+        )
+        + "  <div class=\"max-w-6xl mx-auto px-4 pb-4\">\n"
+        + "\n".join(cards)
+        + "\n  </div>\n"
+        + _hub_section(
+            "Related Board reading",
+            _link_ul(
+                [
+                    ("Edmonds home addition permit basics", "./posts/2026-08-12-edmonds-home-addition-permit-basics.html"),
+                    ("Seattle bathroom remodel permits", "./posts/2026-09-06-seattle-bathroom-remodel-permits.html"),
+                    ("Edmonds ADU planning hub", "./adu.html"),
+                    ("Home additions directory", "./additions.html"),
+                    ("Kitchen remodelers", "./kitchen.html"),
+                    ("Bathroom remodelers", "./bathrooms.html"),
+                    ("Site Visit Checklist", "./site-visit.html"),
+                    ("Good Steward", "./good-steward.html"),
+                ]
+            ),
+        )
+        + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Permit hub FAQ')}\n  </div>\n"
+    )
+    return page_shell(
+        "Permit Jurisdiction Hub | Board of Project Stewardship",
+        "Official permit portals for Edmonds, Seattle, King County, Snohomish County, and Shoreline — Board editorial hub with L&I Verify links. No invented timelines.",
+        "permits",
+        body,
+        [faq_ld(faqs)],
+        canonical=f"{BASE_URL}permits.html",
+        breadcrumbs=[("About", BASE_URL), ("Permit hub", f"{BASE_URL}permits.html")],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def build_adu_page() -> str:
+    faqs = [
+        (
+            "Where are Edmonds ADU standards published?",
+            "Site development standards for accessory dwelling units are in Edmonds Community Development Code (ECDC) 16.20.050. Confirm the live code text before you freeze design.",
+        ),
+        (
+            "Do Edmonds ADUs require a building permit?",
+            "Yes. City handouts state a residential building permit is required for ADUs, and additional permits may apply (plumbing, utilities, critical areas, right-of-way, and similar).",
+        ),
+        (
+            "Where do I apply?",
+            "Apply through MyBuildingPermit.com and select the Edmonds ADU path that matches your project (detached, attached/remodel, new residence with ADU, or manufactured-home ADU).",
+        ),
+        (
+            "Detached vs garage conversion — which is simpler?",
+            "Neither is automatically simple. Garage conversions can hide insulation, ceiling-height, and fire-separation issues; detached units add foundation and utility runs.",
+        ),
+        (
+            "How does the Board rank ADU builders?",
+            "The Board does not publish a separate ADU-only ranking yet. Use Edmonds custom homes and additions directories as a starting shortlist, then verify every firm at WA L&I.",
+        ),
+    ]
+    body = (
+        _hub_header(
+            f"Edmonds-first · Updated {YEAR}",
+            "Edmonds ADU planning hub",
+            "A Board of Project Stewardship hub that points homeowners to official Edmonds ADU standards and portals. Not a fee table, bid, or guarantee of approval.",
+        )
+        + _hub_section(
+            "Start with official sources",
+            f"""      <p class="text-slate-300 text-sm font-light leading-relaxed mb-4">Accessory dwelling units in Edmonds are full dwellings with utility, egress, and permit obligations — not shed upgrades. Read the live code and city handouts before schematic attachment.</p>
+      {_link_ul([
+          ("ECDC 16.20.050 — ADU site development standards", "https://edmonds.municipal.codes/ECDC/16.20.050"),
+          ("City of Edmonds ADU informational handout (PDF)", "https://cdnsm5-hosted.civiclive.com/UserFiles/Servers/Server_16494932/File/Services/Permits%20Development/General%20Permit%20Assistance/Informational%20Handouts/B2-Accessory_Dwelling_Unit.pdf"),
+          ("Pre-approved DADU program handout (PDF)", "https://cdnsm5-hosted.civiclive.com/UserFiles/Servers/Server_16494932/File/Services/Permits%20Development/General%20Permit%20Assistance/Informational%20Handouts/B2b-Pre-Approved_DADU_Program.pdf"),
+          ("MyBuildingPermit", "https://mybuildingpermit.com/"),
+          ("City of Edmonds", "https://www.edmondswa.gov/"),
+      ], external=True)}
+      <p class="text-slate-500 text-xs font-light mt-4">Handout URLs are city-hosted PDFs; if a link moves, use Edmonds permit-assistance pages and search for current ADU handouts.</p>""",
+            border="border-primary/25",
+        )
+        + _hub_section(
+            "Simple planning checklist",
+            _check_ul(
+                [
+                    "Confirm parcel zoning and whether attached, detached, or conversion paths fit the lot.",
+                    "Read ECDC 16.20.050 for unit count, setbacks, and dwelling standards that apply to your configuration.",
+                    "Check utility capacity early (water meter / fixture units, sewer or septic, electrical service).",
+                    "Flag critical areas, slopes, trees, and parking before you buy plans.",
+                    "Apply in MyBuildingPermit under the Edmonds ADU application type that matches the work.",
+                    "Hire only after WA L&I Verify matches the contract legal name; keep permit numbers in the owner file.",
+                ]
+            )
+            + """
+      <p class="text-sm text-slate-400 font-light mt-4">Printable companion: <a href="./adu-checklist.html" class="text-secondary hover:underline">ADU readiness checklist</a>. Deeper editorial: <a href="./posts/2026-09-07-adu-planning-edmonds-wa.html" class="text-secondary hover:underline">ADU planning Edmonds WA (2026-09-07)</a>.</p>""",
+        )
+        + _hub_section(
+            "Board shortlists & tools",
+            f"""      <p class="text-sm text-slate-400 font-light leading-relaxed mb-3">{esc(PPG['name'])} is Board directory #1 for kitchen, bath, and additions hire rankings — <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(PPG['url'].rstrip('/').split('//')[-1])}</a> — not Board ownership. Re-verify at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">L&amp;I Verify</a>.</p>
+      {_link_ul([
+          ("Edmonds custom homes directory", "./edmonds-custom-homes.html"),
+          ("Home additions directory", "./additions.html"),
+          ("Permit jurisdiction hub", "./permits.html"),
+          ("Another Story — Board feature for second-story concepts", "./another-story.html"),
+      ])}""",
+        )
+        + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Edmonds ADU FAQ')}\n  </div>\n"
+    )
+    return page_shell(
+        "Edmonds ADU Planning Hub | Board of Project Stewardship",
+        "Edmonds ADU planning hub: ECDC 16.20.050, city handouts, MyBuildingPermit paths, and Board shortlists. Official links only — no invented fees.",
+        "adu",
+        body,
+        [faq_ld(faqs)],
+        canonical=f"{BASE_URL}adu.html",
+        breadcrumbs=[("About", BASE_URL), ("Edmonds ADU", f"{BASE_URL}adu.html")],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def build_how_we_rank_page() -> str:
+    faqs = [
+        (
+            "Is the Board of Project Stewardship a general contractor?",
+            "No. The Board is an independent publisher of construction standards and contractor directories. It does not perform construction under the Board name.",
+        ),
+        (
+            "What does Board #1 mean?",
+            f"Board #1 is an editorial hire ranking on Board directories (for example kitchen, bath, and additions). {PPG['name']} currently holds that #1 hire ranking and links to {PPG['url']}. Ranking is not ownership of the Board.",
+        ),
+        (
+            "Are listings paid placements?",
+            "No. Directories are editorial. Listing is not an endorsement of quality or a guarantee of outcomes.",
+        ),
+        (
+            "Should I still use L&I Verify?",
+            "Yes. Treat licensing as a living status. Re-check every bidder at WA L&I Verify even if they appear on a Board directory or were referred by a friend.",
+        ),
+        (
+            "How often are rankings updated?",
+            f"Directories carry a {YEAR} research pass date in page copy. Criteria emphasize local service area, specialty focus, institutional signals such as MBAKS where applicable, and public reputation signals — not invented awards.",
+        ),
+    ]
+    body = (
+        _hub_header(
+            f"Editorial standards · {YEAR}",
+            "How we rank",
+            "How the Board of Project Stewardship builds contractor directories, what Board #1 means, and why L&I re-verification stays non-negotiable.",
+        )
+        + _hub_section(
+            "Entity clarity",
+            f"""      <p class="text-slate-300 text-sm font-light leading-relaxed mb-3">The Board of Project Stewardship publishes standards and directories for Edmonds and King &amp; Snohomish Counties. <strong class="text-white">{esc(PPG['name'])}</strong> appears as <strong class="text-white">Board directory #1</strong> — a hire ranking homeowners can follow to <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(PPG['url'])}</a> — not as owner, parent, or brand of the Board.</p>
+      <p class="text-slate-400 text-sm font-light leading-relaxed">Another Story is labeled a <strong class="text-white">Board feature</strong> (second-story concept studio), not ownership chrome for any ranked firm.</p>""",
+            border="border-primary/25",
+        )
+        + _hub_section(
+            "Ranking method",
+            _check_ul(
+                [
+                    "Local service area coverage for Edmonds / King & Snohomish (or the page’s stated geography).",
+                    "Specialty focus that matches the directory (additions vs kitchen vs bath vs custom, and so on).",
+                    "Institutional signals such as MBAKS Remodelers Council membership where applicable.",
+                    "Public reputation signals from company sites and review aggregates — cited when used, never invented.",
+                    "Active WA contractor licensing checked during research; readers must still re-verify at hire time.",
+                ]
+            )
+            + f"""
+      <p class="text-sm text-slate-400 font-light leading-relaxed mt-4">We do not invent licenses, years in business, review counts, awards, prices, or ROI. Where {esc(PPG['name'])}’s public review aggregate appears, it is labeled as such from the research pass — not a Board-owned review wall.</p>""",
+        )
+        + _hub_section(
+            "Good Steward verification habit",
+            f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Before deposit or start date: match the contract legal name to <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>, confirm active license / bond / insurance status, and keep a screenshot or PDF of the result in the owner file.</p>
+      <p class="text-sm text-slate-400 font-light"><a href="./verify-contractor.html" class="text-secondary hover:underline">Verify contractor walkthrough</a> · <a href="./good-steward.html" class="text-secondary hover:underline">Good Steward</a> · <a href="./contact.html" class="text-secondary hover:underline">Editorial contact</a></p>""",
+        )
+        + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Ranking FAQ')}\n  </div>\n"
+    )
+    return page_shell(
+        "How We Rank | Board of Project Stewardship",
+        "How the Board of Project Stewardship ranks contractors: independent editorial directories, Board #1 as hire ranking not ownership, and the L&I Verify habit.",
+        "how-we-rank",
+        body,
+        [faq_ld(faqs)],
+        canonical=f"{BASE_URL}how-we-rank.html",
+        breadcrumbs=[("About", BASE_URL), ("How we rank", f"{BASE_URL}how-we-rank.html")],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def build_verify_contractor_page() -> str:
+    steps = [
+        ("Collect the legal name", "Use the exact business name that will appear on the contract and permit — not only a marketing DBA on a yard sign."),
+        ("Open WA L&I Verify", "Go to the official tool at secure.lni.wa.gov/verify/ — bookmark it. The Board does not operate a license database."),
+        ("Match license & status", "Confirm the contractor registration is active, note the license number, and check bonding/insurance fields the portal shows."),
+        ("Scan complaints & history", "Read any discipline or complaint history the portal surfaces. Ask the firm about anything you do not understand."),
+        ("Cross-check references", "Call recent local references with similar scope. Board directories are a shortlist — not a substitute for your own diligence."),
+        ("Save proof before deposit", "Keep a dated PDF or screenshot with the owner project file before any deposit or demolition."),
+    ]
+    step_html = "".join(
+        f"""      <li class="bg-charcoal border border-white/10 rounded-xl p-5 flex gap-4 mb-3 list-none">
+        <span class="text-secondary font-black text-xl shrink-0">{i:02d}</span>
+        <div>
+          <h3 class="text-white font-bold mb-1">{esc(title)}</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">{esc(blurb)}</p>
+        </div>
+      </li>"""
+        for i, (title, blurb) in enumerate(steps, 1)
+    )
+    faqs = [
+        (
+            "Is this page a substitute for L&I?",
+            "No. It is a Good Steward walkthrough that deep-links to the official WA L&I Verify tool. L&I is the source of truth.",
+        ),
+        (
+            "What if the marketing name and legal name differ?",
+            "Search both, and require the contract to use the registered legal name that matches the active license.",
+        ),
+        (
+            "Does Board listing mean already verified forever?",
+            "No. Licensing status changes. Re-verify at hire time even for Board #1 or any ranked firm.",
+        ),
+    ]
+    body = (
+        _hub_header(
+            "Good Steward · WA L&I",
+            "How to verify a Washington contractor",
+            "A Board of Project Stewardship companion to the state license tool — educational steps only. Always finish on the official portal.",
+        )
+        + f"""  <section class="max-w-6xl mx-auto px-4 pb-8">
+    <div class="bg-charcoal rounded-xl p-8 border border-primary/25 text-center">
+      <p class="text-slate-300 text-sm font-light mb-4">Open the official tool in a new tab:</p>
+      <a href="{LNI_URL}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-secondary text-obsidian font-black uppercase tracking-widest text-sm px-6 py-3 rounded hover:opacity-90 transition">WA L&amp;I Verify <i class="fas fa-external-link-alt text-xs" aria-hidden="true"></i></a>
+      <p class="text-xs text-slate-500 mt-3 break-all">{esc(LNI_URL)}</p>
+    </div>
+  </section>
+  <section class="max-w-6xl mx-auto px-4 pb-8">
+    <ol class="space-y-0">
+{step_html}
+    </ol>
+  </section>
+"""
+        + _hub_section(
+            "After you verify",
+            f"""      <p class="text-sm text-slate-400 font-light leading-relaxed mb-3">Shortlist from Board directories, compare written scopes, and keep permit ownership clear. Board #1 hire ranking: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(PPG['name'])}</a>.</p>
+      <p class="text-sm text-slate-400 font-light"><a href="./how-we-rank.html" class="text-secondary hover:underline">How we rank</a> · <a href="./hire-questions.html" class="text-secondary hover:underline">Hire interview questions</a> · <a href="./good-steward.html" class="text-secondary hover:underline">Good Steward</a></p>""",
+        )
+        + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Verify contractor FAQ')}\n  </div>\n"
+    )
+    return page_shell(
+        "Verify a WA Contractor | Board of Project Stewardship",
+        "Good Steward walkthrough for verifying Washington contractors at the official L&I Verify portal. Educational companion — L&I is the source of truth.",
+        "verify-contractor",
+        body,
+        [faq_ld(faqs)],
+        canonical=f"{BASE_URL}verify-contractor.html",
+        breadcrumbs=[
+            ("About", BASE_URL),
+            ("Good Steward", f"{BASE_URL}good-steward.html"),
+            ("Verify contractor", f"{BASE_URL}verify-contractor.html"),
+        ],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def build_city_hub_page(
+    slug: str,
+    place: str,
+    county_note: str,
+    blurb: str,
+    permit_blurb: str,
+    permit_links: list[tuple[str, str]],
+    related_posts: list[tuple[str, str]],
+    dir_links: list[tuple[str, str]],
+) -> str:
+    faqs = [
+        (
+            f"Is this a complete contractor list for {place}?",
+            f"No. This is a neighborhood hub that aggregates Board directories and local posts for {place}. Use directory pages for ranked shortlists, then verify at WA L&I.",
+        ),
+        (
+            f"Who permits work in {place}?",
+            permit_blurb,
+        ),
+        (
+            "Who is Board #1?",
+            f"{PPG['name']} holds the Board’s editorial #1 hire ranking for kitchen, bath, and additions directories — {PPG['url']} — not Board ownership.",
+        ),
+        (
+            "Where should I start?",
+            "Read the related posts below, shortlist from the linked directories, run L&I Verify, and use the Site Visit Checklist before you sign.",
+        ),
+    ]
+    body = (
+        _hub_header(
+            f"{place} · {county_note}",
+            f"{place} project hub",
+            blurb,
+        )
+        + _hub_section(
+            "Permitting orientation",
+            f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-4">{esc(permit_blurb)}</p>
+      {_link_ul(permit_links, external=True)}
+      <p class="text-sm text-slate-500 font-light mt-4"><a href="./permits.html" class="text-secondary hover:underline">Full permit jurisdiction hub</a></p>""",
+            border="border-primary/25",
+        )
+        + _hub_section(
+            "Board directories",
+            f"""      {_link_ul(dir_links)}
+      <p class="text-sm text-slate-400 font-light mt-4">Board #1 hire ranking: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(PPG['name'])}</a>. Re-verify at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">L&amp;I Verify</a>.</p>""",
+        )
+        + _hub_section(
+            "Related local posts",
+            _link_ul(related_posts),
+        )
+        + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, f'{place} hub FAQ')}\n  </div>\n"
+    )
+    return page_shell(
+        f"{place} Remodel & Addition Hub | Board of Project Stewardship",
+        f"{place} hub from the Board of Project Stewardship — directories, official permit links, and local posts for homeowners. Verify contractors at WA L&I.",
+        slug,
+        body,
+        [faq_ld(faqs)],
+        canonical=f"{BASE_URL}{slug}.html",
+        breadcrumbs=[("About", BASE_URL), (place, f"{BASE_URL}{slug}.html")],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def build_shoreline_hub() -> str:
+    return build_city_hub_page(
+        "shoreline",
+        "Shoreline",
+        "North King County",
+        "A Board of Project Stewardship neighborhood hub for Shoreline additions and remodels — linking official city permitting and Board shortlists.",
+        "Shoreline building permits are handled through the City of Shoreline eTRAKiT portal. Confirm zoning and permit expectations with the city before design freeze.",
+        [
+            ("Shoreline eTRAKiT permitting portal", "https://permits.shorelinewa.gov/eTRAKiT/"),
+            ("City of Shoreline", "https://www.shorelinewa.gov/"),
+        ],
+        [
+            ("Home addition Shoreline WA", "./posts/2026-09-10-home-addition-shoreline-wa.html"),
+            ("Bathroom remodel Shoreline WA", "./posts/2026-09-11-bathroom-remodel-shoreline-wa.html"),
+            ("Kitchen remodel Shoreline WA", "./posts/2026-09-12-kitchen-remodel-shoreline-wa.html"),
+            ("Second-story addition Shoreline", "./posts/2026-08-24-second-story-addition-shoreline.html"),
+        ],
+        [
+            ("Home additions directory", "./additions.html"),
+            ("Kitchen remodelers", "./kitchen.html"),
+            ("Bathroom remodelers", "./bathrooms.html"),
+            ("Another Story (Board feature)", "./another-story.html"),
+        ],
+    )
+
+
+def build_lynnwood_hub() -> str:
+    return build_city_hub_page(
+        "lynnwood",
+        "Lynnwood",
+        "Snohomish County",
+        "Board hub for Lynnwood kitchen and bath remodels — editorial shortlists plus links toward official permitting paths.",
+        "Lynnwood projects are generally permitted through the City of Lynnwood (often via MyBuildingPermit for participating workflows). Confirm the live city path for your parcel; do not assume Edmonds or county rules apply.",
+        [
+            ("MyBuildingPermit", "https://mybuildingpermit.com/"),
+            ("City of Lynnwood", "https://www.lynnwoodwa.gov/"),
+        ],
+        [
+            ("Bathroom remodel Lynnwood WA", "./posts/2026-09-08-bathroom-remodel-lynnwood-wa.html"),
+            ("Kitchen remodel Lynnwood WA", "./posts/2026-09-09-kitchen-remodel-lynnwood-wa.html"),
+        ],
+        [
+            ("Kitchen remodelers", "./kitchen.html"),
+            ("Bathroom remodelers", "./bathrooms.html"),
+            ("Home additions directory", "./additions.html"),
+            ("Trades hub", "./trades.html"),
+        ],
+    )
+
+
+def build_ballard_hub() -> str:
+    return build_city_hub_page(
+        "ballard",
+        "Ballard",
+        "Seattle · King County",
+        "Board hub for Ballard kitchen and bath projects inside Seattle — SDCI permitting orientation and Board directories.",
+        "Ballard is within Seattle. Construction and land-use permits typically run through SDCI and the Seattle Services Portal — not MyBuildingPermit.",
+        [
+            ("How to get a Seattle permit (SDCI)", "https://www.seattle.gov/construction-and-inspections/permits/how-do-you-get-a-permit"),
+            ("Seattle Services Portal", "https://cosaccela.seattle.gov/portal/"),
+            ("SDCI", "https://www.seattle.gov/sdci"),
+        ],
+        [
+            ("Bathroom remodel Ballard Seattle", "./posts/2026-09-03-bathroom-remodel-ballard-seattle.html"),
+            ("Kitchen remodel Ballard Seattle", "./posts/2026-09-04-kitchen-remodel-ballard-seattle.html"),
+            ("Seattle bathroom remodel permits", "./posts/2026-09-06-seattle-bathroom-remodel-permits.html"),
+        ],
+        [
+            ("Kitchen remodelers", "./kitchen.html"),
+            ("Bathroom remodelers", "./bathrooms.html"),
+            ("Home additions directory", "./additions.html"),
+            ("Permit hub", "./permits.html"),
+        ],
+    )
+
+
+def build_magnolia_hub() -> str:
+    return build_city_hub_page(
+        "magnolia",
+        "Magnolia",
+        "Seattle · King County",
+        "Board hub for Magnolia remodels — coastal moisture awareness, SDCI permitting, and Board shortlists.",
+        "Magnolia is within Seattle. Expect SDCI permitting via the Seattle Services Portal. Bluff, steep-slope, and moisture details often deserve early site diligence.",
+        [
+            ("How to get a Seattle permit (SDCI)", "https://www.seattle.gov/construction-and-inspections/permits/how-do-you-get-a-permit"),
+            ("Seattle Services Portal", "https://cosaccela.seattle.gov/portal/"),
+            ("SDCI", "https://www.seattle.gov/sdci"),
+        ],
+        [
+            ("Bathroom remodel Magnolia WA", "./posts/2026-09-17-bathroom-remodel-magnolia-wa.html"),
+            ("Kitchen remodel Magnolia Seattle", "./posts/2026-09-16-kitchen-remodel-magnolia-seattle.html"),
+            ("Walk-in shower remodel Magnolia", "./posts/2026-08-16-walk-in-shower-remodel-magnolia.html"),
+            ("Magnolia plumbing remodel considerations", "./posts/2026-08-31-magnolia-plumbing-remodel-considerations.html"),
+        ],
+        [
+            ("Bathroom remodelers", "./bathrooms.html"),
+            ("Kitchen remodelers", "./kitchen.html"),
+            ("Coastal waterproofing checklist", "./coastal-waterproofing.html"),
+            ("Permit hub", "./permits.html"),
+        ],
+    )
+
+
+def build_adu_checklist_page() -> str:
+    items = [
+        "Confirm city/county jurisdiction for the parcel (Edmonds city vs other).",
+        "Read ECDC 16.20.050 (or the live ADU section) for your attached/detached/conversion path.",
+        "Sketch setbacks, height, parking, and privacy screening against the lot.",
+        "Request early utility capacity checks (water fixture units / meter, sewer or septic, electrical).",
+        "Note critical areas, trees, slopes, and easements before purchasing plans.",
+        "Choose MyBuildingPermit application type that matches the ADU scope.",
+        "Decide occupied-site staging if the primary home stays lived-in.",
+        "Shortlist firms with permitted small-dwelling or addition experience; L&I Verify each.",
+        "Require written scope covering design, permit ownership, and inspections.",
+        "File permits, inspection results, and as-builts for future refinance or sale.",
+    ]
+    body = (
+        _hub_header(
+            "Good Steward · ADU",
+            "ADU readiness checklist",
+            "A printable Board checklist for homeowners exploring an accessory dwelling unit. Educational — not a permit set, fee schedule, or bid.",
+        )
+        + _hub_section(
+            "Checklist",
+            _check_ul(items)
+            + """
+      <p class="text-sm text-slate-400 font-light mt-4"><a href="./adu.html" class="text-secondary hover:underline">Edmonds ADU hub</a> · <a href="./posts/2026-09-07-adu-planning-edmonds-wa.html" class="text-secondary hover:underline">ADU planning post</a> · <a href="./permits.html" class="text-secondary hover:underline">Permit hub</a></p>""",
+            border="border-primary/25",
+        )
+        + "  <div class=\"pb-12\"></div>\n"
+    )
+    return page_shell(
+        "ADU Readiness Checklist | Board of Project Stewardship",
+        "Edmonds-first ADU readiness checklist from the Board of Project Stewardship — planning habits without invented fees or timelines.",
+        "adu-checklist",
+        body,
+        canonical=f"{BASE_URL}adu-checklist.html",
+        breadcrumbs=[
+            ("About", BASE_URL),
+            ("Edmonds ADU", f"{BASE_URL}adu.html"),
+            ("ADU checklist", f"{BASE_URL}adu-checklist.html"),
+        ],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def build_change_orders_page() -> str:
+    faqs = [
+        (
+            "What is an allowance?",
+            "An allowance is a budget placeholder in the contract for selections not yet finalized (for example tile or fixtures). Overages and underages should be spelled out in writing.",
+        ),
+        (
+            "When should a change order be signed?",
+            "Before the changed work proceeds — with price and schedule impact stated. Handshake changes are how Good Steward projects go sideways.",
+        ),
+        (
+            "Does the Board publish standard markup percentages?",
+            "No. Markups and contingency percentages vary by firm and contract. Ask each bidder to explain their written policy; do not rely on invented Board averages.",
+        ),
+    ]
+    body = (
+        _hub_header(
+            "Good Steward · Contracts",
+            "Change orders &amp; allowances",
+            "Board educational explainer for homeowners comparing remodel bids in Edmonds / King &amp; Snohomish. Not legal advice and not a price guide.",
+        )
+        + _hub_section(
+            "Habits that protect the schedule",
+            _check_ul(
+                [
+                    "Freeze scope rooms, openings, and wet locations before long-lead orders when possible.",
+                    "List allowances with initial dollar placeholders and a rule for overage approval.",
+                    "Require every scope change to state price and calendar impact before work continues.",
+                    "Name who may authorize changes (one steward contact beats three overlapping yeses).",
+                    "Keep a running change log with dates beside the original contract.",
+                    "Do not let selection delays silently become contractor delay claims without documentation.",
+                ]
+            )
+            + """
+      <p class="text-sm text-slate-400 font-light mt-4"><a href="./hire-questions.html" class="text-secondary hover:underline">Hire interview questions</a> · <a href="./good-steward.html" class="text-secondary hover:underline">Good Steward</a> · <a href="./verify-contractor.html" class="text-secondary hover:underline">Verify contractor</a></p>""",
+            border="border-primary/25",
+        )
+        + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Change-order FAQ')}\n  </div>\n"
+    )
+    return page_shell(
+        "Change Orders & Allowances | Board of Project Stewardship",
+        "Change-order and allowance explainer for North Sound remodels — Board Good Steward habits without invented markup percentages.",
+        "change-orders",
+        body,
+        [faq_ld(faqs)],
+        canonical=f"{BASE_URL}change-orders.html",
+        breadcrumbs=[
+            ("About", BASE_URL),
+            ("Good Steward", f"{BASE_URL}good-steward.html"),
+            ("Change orders", f"{BASE_URL}change-orders.html"),
+        ],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def build_coastal_waterproofing_page() -> str:
+    body = (
+        _hub_header(
+            "Good Steward · PNW envelope",
+            "Coastal waterproofing checklist",
+            "Educational checklist for baths, additions, and weatherproofing near Puget Sound. Not a product endorsement or installation manual.",
+        )
+        + _hub_section(
+            "Moisture habits",
+            _check_ul(
+                [
+                    "Identify wind-driven rain exposure and coastal moisture risk for the elevation before finish selections.",
+                    "Require a written dry-in / temporary weather protection plan when openings are cut in roofs or walls.",
+                    "Specify the waterproofing or weather-resistive approach in the contract (system + responsible trade).",
+                    "Photograph membrane changes of plane, pan flashings, and wet-wall assemblies before cover.",
+                    "Confirm ventilation strategy for baths (fan capacity, duct termination) in writing.",
+                    "Sequence exterior cladding and window flashing so water has a drainage path, not a dead-end cavity.",
+                    "Walk a moisture-related punch list before final payment; keep product cut sheets in the owner file.",
+                ]
+            )
+            + """
+      <p class="text-sm text-slate-400 font-light mt-4 mb-2">Related: <a href="./posts/2026-08-18-pnw-bathroom-waterproofing-essentials.html" class="text-secondary hover:underline">PNW bathroom waterproofing essentials</a> · <a href="./posts/2026-08-08-another-story-method-weatherproof-first.html" class="text-secondary hover:underline">Weatherproof-first method</a> · <a href="./bathrooms.html" class="text-secondary hover:underline">Bathroom directory</a></p>
+      <p class="text-sm text-slate-400 font-light"><a href="./another-story.html" class="text-secondary hover:underline">Another Story</a> is a Board feature for second-story concepts — still weatherproof before finishes.</p>""",
+            border="border-primary/25",
+        )
+        + "  <div class=\"pb-12\"></div>\n"
+    )
+    return page_shell(
+        "Coastal Waterproofing Checklist | Board of Project Stewardship",
+        "Coastal waterproofing checklist for Puget Sound baths and additions — Board Good Steward moisture habits without product ROI claims.",
+        "coastal-waterproofing",
+        body,
+        canonical=f"{BASE_URL}coastal-waterproofing.html",
+        breadcrumbs=[
+            ("About", BASE_URL),
+            ("Good Steward", f"{BASE_URL}good-steward.html"),
+            ("Coastal waterproofing", f"{BASE_URL}coastal-waterproofing.html"),
+        ],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def build_hire_questions_page() -> str:
+    groups = [
+        (
+            "License & entity",
+            [
+                "What exact legal name and WA contractor license number will appear on the contract?",
+                "Will you pause while I confirm that name on WA L&I Verify today?",
+            ],
+        ),
+        (
+            "Scope & allowances",
+            [
+                "What is included vs excluded in the written scope?",
+                "Which finishes are allowances, and how are overages approved?",
+            ],
+        ),
+        (
+            "Permits & inspections",
+            [
+                "Who pulls which permits, who pays fees, and who stands for inspections?",
+                "What happens if a correction notice stops cover-up work?",
+            ],
+        ),
+        (
+            "Schedule & site",
+            [
+                "What is the weather / dry-in plan if we open a roof or exterior wall?",
+                "Who is the single steward contact for decisions and schedule?",
+            ],
+        ),
+        (
+            "Money & closeout",
+            [
+                "What is the payment schedule tied to milestones (not vibes)?",
+                "How do punch list and final payment work, and what manuals do I receive?",
+            ],
+        ),
+    ]
+    blocks = []
+    for title, qs in groups:
+        lis = "".join(f"<li>{esc(q)}</li>" for q in qs)
+        blocks.append(
+            f"""      <article class="bg-charcoal border border-white/10 rounded-xl p-6 mb-4">
+        <h3 class="text-lg font-black text-white mb-3">{esc(title)}</h3>
+        <ul class="space-y-2 text-sm text-slate-300 font-light list-disc pl-5">{lis}</ul>
+      </article>"""
+        )
+    body = (
+        _hub_header(
+            "Good Steward · Interviews",
+            "Hire interview question bank",
+            "A Board question bank for comparing remodel and addition bids in Edmonds / King &amp; Snohomish. Use alongside L&amp;I Verify — not instead of it.",
+        )
+        + "  <div class=\"max-w-6xl mx-auto px-4 pb-4\">\n"
+        + "\n".join(blocks)
+        + """
+    <p class="text-sm text-slate-400 font-light pb-16"><a href="./verify-contractor.html" class="text-secondary hover:underline">Verify contractor</a> · <a href="./change-orders.html" class="text-secondary hover:underline">Change orders</a> · <a href="./site-visit.html" class="text-secondary hover:underline">Site Visit Checklist</a> · <a href="./how-we-rank.html" class="text-secondary hover:underline">How we rank</a></p>
+  </div>
+"""
+    )
+    return page_shell(
+        "Hire Interview Questions | Board of Project Stewardship",
+        "Hire interview question bank for North Sound remodel and addition bids — Board Good Steward prompts paired with L&I Verify.",
+        "hire-questions",
+        body,
+        canonical=f"{BASE_URL}hire-questions.html",
+        breadcrumbs=[
+            ("About", BASE_URL),
+            ("Good Steward", f"{BASE_URL}good-steward.html"),
+            ("Hire questions", f"{BASE_URL}hire-questions.html"),
+        ],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def build_materials_index_page() -> str:
+    materials = [
+        ("Simpson Strong-Tie", "https://www.strongtie.com/", "Structural connectors and hold-downs commonly referenced in addition/ADU framing notes."),
+        ("ZIP System (Huber)", "https://www.huberwood.com/zip-system", "Weather-resistant sheathing systems often discussed for PNW envelopes."),
+        ("James Hardie", "https://www.jameshardie.com/", "Fiber-cement cladding frequently cited for coastal moisture cycles."),
+        ("Boise Cascade engineered lumber", "https://www.bc.com/", "Engineered framing members referenced for efficient spans."),
+    ]
+    cards = "".join(
+        f"""      <article class="bg-charcoal border border-white/10 rounded-xl p-6 mb-3">
+        <h3 class="text-lg font-black text-white mb-2"><a href="{url}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(name)}</a></h3>
+        <p class="text-sm text-slate-400 font-light leading-relaxed">{esc(blurb)}</p>
+      </article>"""
+        for name, url, blurb in materials
+    )
+    body = (
+        _hub_header(
+            "Editorial index · No prices",
+            "Materials Worth Knowing",
+            "An index of manufacturer resources the Board has pointed to in editorial posts. Not endorsements, not prices, not installation warranties from the Board.",
+        )
+        + f"""  <div class="max-w-6xl mx-auto px-4 pb-16">
+{cards}
+    <p class="text-sm text-slate-400 font-light">See Materials Worth Knowing sections inside individual <a href="./blog.html" class="text-secondary hover:underline">blog posts</a> for project context.</p>
+  </div>
+"""
+    )
+    return page_shell(
+        "Materials Worth Knowing | Board of Project Stewardship",
+        "Materials Worth Knowing index — manufacturer resources referenced in Board of Project Stewardship posts. No prices or ROI claims.",
+        "materials",
+        body,
+        canonical=f"{BASE_URL}materials.html",
+        breadcrumbs=[("About", BASE_URL), ("Materials", f"{BASE_URL}materials.html")],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def build_contact_page() -> str:
+    body = (
+        _hub_header(
+            "Editorial desk",
+            "Contact the Board",
+            f"Public contact for the Board of Project Stewardship editorial desk. This is not a contractor dispatch line and not {PPG['name']} customer service.",
+        )
+        + _hub_section(
+            "Email",
+            f"""      <p class="text-slate-300 text-sm font-light leading-relaxed mb-4">Email <a href="mailto:{EDITORIAL_EMAIL}" class="text-secondary hover:underline font-semibold">{EDITORIAL_EMAIL}</a> for directory corrections, source questions, or editorial notes.</p>
+      <p class="text-slate-400 text-sm font-light leading-relaxed mb-4">For hiring: use Board directories, then verify at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>. Board #1 hire ranking links to <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(PPG['url'])}</a> — contact that firm directly for project inquiries.</p>
+      <p class="text-slate-400 text-sm font-light leading-relaxed"><a href="./how-we-rank.html" class="text-secondary hover:underline">How we rank</a> · <a href="./write.html" class="text-secondary hover:underline">Contribute (draft tool)</a> · <a href="./good-steward.html" class="text-secondary hover:underline">Good Steward</a></p>""",
+            border="border-primary/25",
+        )
+        + "  <div class=\"pb-12\"></div>\n"
+    )
+    return page_shell(
+        "Contact | Board of Project Stewardship",
+        f"Contact the Board of Project Stewardship editorial desk at {EDITORIAL_EMAIL}. Not a contractor dispatch line.",
+        "contact",
+        body,
+        canonical=f"{BASE_URL}contact.html",
+        breadcrumbs=[("About", BASE_URL), ("Contact", f"{BASE_URL}contact.html")],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def build_glossary_page() -> str:
+    terms = [
+        ("AHJ", "Authority Having Jurisdiction — the city or county department that issues permits and inspections for the parcel."),
+        ("Allowance", "Contract placeholder budget for a selection not yet finalized; overages need a written rule."),
+        ("Board #1", f"Editorial hire ranking on Board directories. {PPG['name']} currently holds #1 for key remodel categories — not Board ownership."),
+        ("Change order", "Written amendment stating price and schedule impact before changed work proceeds."),
+        ("DADU", "Detached accessory dwelling unit — a separate small dwelling on the same lot as a primary home."),
+        ("Dry-in", "Stage when the structure is weather-protected enough that interior work is not exposed to open rain risk."),
+        ("ECDC", "Edmonds Community Development Code — includes ADU standards such as 16.20.050."),
+        ("L&I Verify", "Washington State Department of Labor & Industries official contractor license lookup."),
+        ("MyBuildingPermit", "Shared regional portal used by many Puget Sound jurisdictions for permit applications."),
+        ("Punch list", "Documented remaining items to complete or correct before final payment."),
+        ("SDCI", "Seattle Department of Construction and Inspections."),
+        ("WRB", "Weather-resistive barrier — part of the exterior moisture-control assembly."),
+    ]
+    rows = "".join(
+        f"""      <div class="border-b border-white/10 py-4">
+        <h3 class="text-white font-bold mb-1">{esc(term)}</h3>
+        <p class="text-sm text-slate-400 font-light leading-relaxed">{esc(defn)}</p>
+      </div>"""
+        for term, defn in terms
+    )
+    body = (
+        _hub_header(
+            "Reference",
+            "Glossary",
+            "Short definitions used across Board of Project Stewardship directories and Good Steward tools.",
+        )
+        + _hub_section("Terms", rows)
+        + "  <div class=\"pb-12\"></div>\n"
+    )
+    return page_shell(
+        "Glossary | Board of Project Stewardship",
+        "Glossary of remodel and permitting terms used by the Board of Project Stewardship.",
+        "glossary",
+        body,
+        canonical=f"{BASE_URL}glossary.html",
+        breadcrumbs=[("About", BASE_URL), ("Glossary", f"{BASE_URL}glossary.html")],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def build_videos_page() -> str:
+    body = (
+        _hub_header(
+            "Editorial media",
+            "Video library index",
+            "Index of Board-hosted illustrative process clips referenced from posts and tools. Clips are editorial context — not footage of a guaranteed Board job schedule.",
+        )
+        + _hub_section(
+            "Where to watch",
+            """      <ul class="space-y-3 text-sm text-slate-300 font-light">
+        <li><a href="./posts/2026-09-07-adu-planning-edmonds-wa.html" class="text-secondary hover:underline">ADU planning Edmonds</a> — includes illustrative framing context clip</li>
+        <li><a href="./posts/2026-08-12-edmonds-home-addition-permit-basics.html" class="text-secondary hover:underline">Edmonds addition permit basics</a> — process clip reference</li>
+        <li><a href="./build-walkthrough.html" class="text-secondary hover:underline">Build Walkthrough</a> — interactive stage tool</li>
+        <li><a href="./another-story.html" class="text-secondary hover:underline">Another Story</a> — Board feature concept studio</li>
+      </ul>
+      <p class="text-xs text-slate-500 mt-4 font-light">Prefer the post page for captions and honesty labels. Illustrative clips are not project guarantees.</p>""",
+        )
+        + "  <div class=\"pb-12\"></div>\n"
+    )
+    return page_shell(
+        "Video Library | Board of Project Stewardship",
+        "Video library index for Board of Project Stewardship illustrative process clips and tools.",
+        "videos",
+        body,
+        canonical=f"{BASE_URL}videos.html",
+        breadcrumbs=[("About", BASE_URL), ("Video library", f"{BASE_URL}videos.html")],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+
 def write_rss(posts: list[dict]) -> None:
     blog_dir = SITE_DIR / "blog"
     blog_dir.mkdir(parents=True, exist_ok=True)
@@ -4162,6 +5168,16 @@ def build_write_page() -> str:
         ["Reviewed before live", "L&amp;I honesty", "No invented ratings"],
     )}
   <div class="max-w-3xl mx-auto px-4 -mt-8 relative z-20 pb-24">
+    <div class="bg-charcoal border border-white/10 rounded-xl p-6 mb-6">
+      <h2 class="text-lg font-black text-white mb-3 tracking-tight">Contribution guidelines</h2>
+      <ul class="space-y-2 text-sm text-slate-400 font-light list-disc pl-5">
+        <li>Write as Board editorial — an independent publisher, not a contractor sales page.</li>
+        <li>Cite official permit and L&amp;I sources; never invent licenses, prices, awards, or ROI.</li>
+        <li>Pacific Pro Group may appear only as Board directory #1 outbound, never as Board owner.</li>
+        <li>Do not mention generative-model vendors in public copy.</li>
+        <li>Drafts are reviewed; publishing is not automatic.</li>
+      </ul>
+    </div>
     <div class="bg-primary/10 border border-secondary/30 rounded-xl p-4 mb-6 flex gap-3 items-start">
       <i class="fas fa-circle-info text-secondary mt-0.5"></i>
       <div class="text-sm text-slate-300 font-light leading-relaxed">
@@ -4535,6 +5551,24 @@ def main(argv: list[str] | None = None) -> None:
     (SITE_DIR / "pm-dashboard.html").write_text(build_pm_dashboard_page(), encoding="utf-8")
     (SITE_DIR / "write.html").write_text(build_write_page(), encoding="utf-8")
     (SITE_DIR / "404.html").write_text(build_404_page(), encoding="utf-8")
+
+    # Steward hubs (P0/P1/P2)
+    (SITE_DIR / "permits.html").write_text(build_permits_page(), encoding="utf-8")
+    (SITE_DIR / "adu.html").write_text(build_adu_page(), encoding="utf-8")
+    (SITE_DIR / "how-we-rank.html").write_text(build_how_we_rank_page(), encoding="utf-8")
+    (SITE_DIR / "verify-contractor.html").write_text(build_verify_contractor_page(), encoding="utf-8")
+    (SITE_DIR / "shoreline.html").write_text(build_shoreline_hub(), encoding="utf-8")
+    (SITE_DIR / "lynnwood.html").write_text(build_lynnwood_hub(), encoding="utf-8")
+    (SITE_DIR / "ballard.html").write_text(build_ballard_hub(), encoding="utf-8")
+    (SITE_DIR / "magnolia.html").write_text(build_magnolia_hub(), encoding="utf-8")
+    (SITE_DIR / "adu-checklist.html").write_text(build_adu_checklist_page(), encoding="utf-8")
+    (SITE_DIR / "change-orders.html").write_text(build_change_orders_page(), encoding="utf-8")
+    (SITE_DIR / "coastal-waterproofing.html").write_text(build_coastal_waterproofing_page(), encoding="utf-8")
+    (SITE_DIR / "hire-questions.html").write_text(build_hire_questions_page(), encoding="utf-8")
+    (SITE_DIR / "materials.html").write_text(build_materials_index_page(), encoding="utf-8")
+    (SITE_DIR / "contact.html").write_text(build_contact_page(), encoding="utf-8")
+    (SITE_DIR / "glossary.html").write_text(build_glossary_page(), encoding="utf-8")
+    (SITE_DIR / "videos.html").write_text(build_videos_page(), encoding="utf-8")
 
     write_readme(posts)
     write_robots()
