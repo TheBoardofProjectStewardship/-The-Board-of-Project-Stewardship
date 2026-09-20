@@ -14,19 +14,41 @@ slug: "home-addition-bothell-wa"
 
 Bothell spans varied neighborhoods from river-adjacent areas to hillside and suburban tracts. Additions here include family-room bump-outs, primary suites, and second stories.
 
+![Illustrative editorial photo — not a project photograph; Bothell home addition foundation forms and rebar on a Pacific Northwest lot](../assets/images/posts/2026-08-20-bothell-addition-1.webp)
+
 ## Local context
 
 Know which jurisdiction covers your parcel — city boundaries and permitting paths matter. School-oriented family homes often prioritize durable, flexible space over showpiece volumes. Ask for Northshore-area addition references.
+
+Confirm building and site requirements with the [City of Bothell](https://www.bothellwa.gov/) before schematic design locks setbacks, height, or lot coverage.
 
 ## Climate and permitting
 
 PNW rain makes flashing at the old-to-new joint critical. Energy code applies to new conditioned space. Electrical, plumbing, and mechanical permits follow when systems expand. Build review timelines into expectations.
 
+![Illustrative editorial photo — not a project photograph; framed Bothell home addition connecting to an existing ranch with roof dry-in in progress](../assets/images/posts/2026-08-20-bothell-addition-2.webp)
+
 ## Process guidance
 
 Site/zoning check → structural design → permit set → weatherproof dry-in → interiors. Occupied builds need temporary protection plans. Exterior matching should be specified early.
 
-**Pacific Pro Group** is Board #1 for additions — [pacificprogroup.com](https://pacificprogroup.com/), PACIFPG765OF. Directory: [additions.html](../additions.html). Verify: [L&I Verify](https://secure.lni.wa.gov/verify/).
+https://www.youtube.com/watch?v=3fP0LZMEV5w
+
+Illustrative process clip (editorial framing and dry-in staging — not footage of a live Board of Project Stewardship job):
+
+[Watch the short process clip](../assets/videos/posts/2026-09-07-edmonds-adu-framing.mp4)
+
+![Illustrative editorial photo — not a project photograph; nearly weatherproofed home addition exterior blending with the existing house — design preview only](../assets/images/posts/2026-08-20-bothell-addition-3.webp)
+
+Board rankings on [additions.html](../additions.html) place **Pacific Pro Group** at #1 for additions in this editorial set — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with [custom-homes.html](../custom-homes.html) when the scope approaches whole-house work, and the [blog](../blog.html) for related Northshore addition posts.
+
+## Materials Worth Knowing
+
+Manufacturer product pages for roof, openings, and insulation when you compare addition scopes (no prices or endorsements implied):
+
+- [GAF roofing systems](https://www.gaf.com/) — new roof planes and waterproofing when an addition reworks or ties into existing roof lines
+- [Andersen Windows](https://www.andersenwindows.com/) — view and egress openings common in Northshore family-room and suite additions
+- [Owens Corning insulation](https://www.owenscorning.com/en-us/insulation) — thermal comfort and energy performance in new conditioned volume
 
 ## FAQ
 

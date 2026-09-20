@@ -14,19 +14,41 @@ slug: "bathroom-remodel-queen-anne-seattle"
 
 Queen Anne bathroom projects range from classic home powder rooms to primary suites with view exposure. Steep streets and limited parking shape contractor logistics as much as tile choice.
 
+![Illustrative editorial photo — not a project photograph; Queen Anne Seattle bathroom remodel with careful containment on an upstairs wet wall](../assets/images/posts/2026-08-22-queen-anne-bath-1.webp)
+
 ## Local context
 
 Housing ages vary from early craftsmanship to newer construction. Shared walls and precious finish floors downstairs raise the stakes for leak-proof showers. Ask for Queen Anne or comparable hillside references.
+
+Confirm plumbing and electrical permit expectations with [Seattle Department of Construction and Inspections (SDCI)](https://www.seattle.gov/sdci) rather than assuming a suburban checklist applies on a steep lot.
 
 ## Climate and permitting
 
 Seattle dampness plus hot showers demands membranes, slopes, and outdoor exhaust. Plumbing and electrical permits are typical; structural changes pull building review. Schedule inspections into the critical path.
 
+![Illustrative editorial photo — not a project photograph; shower curb membrane and niche waterproofing detail in a hillside Seattle bath](../assets/images/posts/2026-08-22-queen-anne-bath-2.webp)
+
 ## Materials and process
 
 Prioritize waterproofing details, quiet ventilation, and layouts that respect small footprints. Quality valves and properly grounded circuits are non-negotiable. Large-format tile needs flat substrates — budget prep.
 
-**Pacific Pro Group** ranks Board #1 for bathrooms — [pacificprogroup.com](https://pacificprogroup.com/), PACIFPG765OF. See [bathrooms.html](../bathrooms.html), [L&I Verify](https://secure.lni.wa.gov/verify/), [blog.html](../blog.html).
+https://www.youtube.com/watch?v=mMbSgZCcsDU
+
+Illustrative process clip (editorial wet-area staging — not footage of a live Board of Project Stewardship job):
+
+[Watch the short process clip](../assets/videos/posts/2026-09-bath-process-shared.mp4)
+
+![Illustrative editorial photo — not a project photograph; finished primary bath with walk-in shower and vanity — design preview only](../assets/images/posts/2026-08-22-queen-anne-bath-3.webp)
+
+Board rankings on [bathrooms.html](../bathrooms.html) place **Pacific Pro Group** at #1 for bathrooms in this editorial set — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with [trades.html](../trades.html) when plumbing or electrical is in scope, and the [blog](../blog.html) for related Seattle bath posts.
+
+## Materials Worth Knowing
+
+Manufacturer product pages useful when comparing wet-area scopes, openings, and daylighting (no prices or endorsements implied):
+
+- [Schluter Systems](https://www.schluter.com/schluter-us/en_US/) — tile waterproofing assemblies for showers and wet walls on older Queen Anne stacks
+- [Kohler bath fixtures](https://www.kohler.com/en) — fixtures commonly coordinated with plumber rough-in dimensions in compact upstairs baths
+- [Velux skylights](https://www.veluxusa.com/) — daylighting options when a Queen Anne bath sits under a dark roof plane
 
 ## FAQ
 
