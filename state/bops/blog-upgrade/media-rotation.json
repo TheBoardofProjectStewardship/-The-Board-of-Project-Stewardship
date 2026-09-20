@@ -47,7 +47,10 @@
     "Y8VG3STo6VM",
     "BfUrGF3_imc",
     "U4vnuIdHHK8",
-    "5zhTNUo-4WI"
+    "5zhTNUo-4WI",
+    "ys9YEPP5FUo",
+    "btR9CWYB1TM",
+    "LquaPVqh6tw"
   ],
   "used_photo_urls": [
     "assets/images/posts/2026-08-28-mukilteo-bath-1.webp",
@@ -160,15 +163,24 @@
     "assets/images/posts/2026-08-15-primary-suite-3.webp",
     "assets/images/posts/2026-08-14-greenwood-kitchen-1.webp",
     "assets/images/posts/2026-08-14-greenwood-kitchen-2.webp",
-    "assets/images/posts/2026-08-14-greenwood-kitchen-3.webp"
+    "assets/images/posts/2026-08-14-greenwood-kitchen-3.webp",
+    "assets/images/posts/2026-08-13-phinney-bath-1.webp",
+    "assets/images/posts/2026-08-13-phinney-bath-2.webp",
+    "assets/images/posts/2026-08-13-phinney-bath-3.webp",
+    "assets/images/posts/2026-08-12-hire-kitchen-1.webp",
+    "assets/images/posts/2026-08-12-hire-kitchen-2.webp",
+    "assets/images/posts/2026-08-12-hire-kitchen-3.webp",
+    "assets/images/posts/2026-08-12-edmonds-addition-permit-1.webp",
+    "assets/images/posts/2026-08-12-edmonds-addition-permit-2.webp",
+    "assets/images/posts/2026-08-12-edmonds-addition-permit-3.webp"
   ],
   "last_morning_audit": "2026-09-20",
   "last_upgraded_slugs": [
-    "walk-in-shower-remodel-magnolia",
-    "primary-suite-addition-edmonds",
-    "kitchen-remodel-greenwood-seattle"
+    "bathroom-remodel-phinney-ridge",
+    "hire-kitchen-remodeler-king-snohomish",
+    "edmonds-home-addition-permit-basics"
   ],
-  "last_shared_video": "assets/videos/posts/2026-09-shared-waterproofing.mp4",
+  "last_shared_video": "assets/videos/posts/2026-09-07-edmonds-adu-framing.mp4",
   "video_skip_log": [
     {
       "date": "2026-09-20",
@@ -236,6 +248,20 @@
         "assets/videos/posts/2026-09-shared-waterproofing.mp4",
         "assets/videos/posts/2026-09-07-edmonds-adu-framing.mp4",
         "assets/videos/posts/2026-09-shared-waterproofing.mp4"
+      ]
+    },
+    {
+      "date": "2026-09-20",
+      "reason": "reuse existing shared mp4s; Higgsfield balance ~19.73 \u2014 no new video/image spend; copied unused on-disk stills",
+      "posts": [
+        "bathroom-remodel-phinney-ridge",
+        "hire-kitchen-remodeler-king-snohomish",
+        "edmonds-home-addition-permit-basics"
+      ],
+      "reused": [
+        "assets/videos/posts/2026-09-bath-process-shared.mp4",
+        "assets/videos/posts/2026-09-shared-waterproofing.mp4",
+        "assets/videos/posts/2026-09-07-edmonds-adu-framing.mp4"
       ]
     }
   ]
