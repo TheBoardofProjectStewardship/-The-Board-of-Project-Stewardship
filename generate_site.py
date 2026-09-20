@@ -3307,6 +3307,23 @@ def md_to_html(md: str) -> str:
             f'allowfullscreen loading="lazy"></iframe></div>'
         )
 
+    def local_video_embed(src: str) -> str:
+        resolved = src
+        if not src.startswith(("http://", "https://", "data:")):
+            rel = src[3:] if src.startswith("../") else src.lstrip("./")
+            if asset_exists(rel):
+                resolved = f"../{rel}"
+            elif rel in CDN_MAP:
+                resolved = CDN_MAP[rel]
+        return (
+            f'<div class="video-embed">'
+            f'<video controls playsinline preload="metadata" '
+            f'style="width:100%;border-radius:12px;background:#000">'
+            f'<source src="{esc(resolved)}" type="video/mp4">'
+            f'</video></div>'
+        )
+
+
     def figure_html(alt: str, src: str) -> str:
         # Resolve ../assets/... relative to posts/ through CDN_MAP when present
         # so live GH Pages works even when binary assets are gitignored.
@@ -3373,6 +3390,12 @@ def md_to_html(md: str) -> str:
                 out.append(youtube_embed(vid))
             else:
                 out.append(f"<p>{inline(stripped)}</p>")
+            i += 1
+            continue
+        if stripped.endswith(".mp4") or stripped.startswith("video:"):
+            close_lists()
+            src = stripped[6:].strip() if stripped.startswith("video:") else stripped
+            out.append(local_video_embed(src))
             i += 1
             continue
         img = img_line_re.match(stripped)

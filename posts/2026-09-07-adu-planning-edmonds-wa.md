@@ -14,6 +14,9 @@ slug: "adu-planning-edmonds-wa"
 
 Accessory dwelling units can add rental flexibility, multigenerational housing, or a workspace with a bath — but Edmonds ADU planning starts with what the lot and utilities can support.
 
+![Illustrative AI photo — Edmonds backyard ADU foundation and early framing](../assets/images/posts/2026-09-07-edmonds-adu-1.webp)
+
+
 ## Local Edmonds context
 
 Lot size, slope, trees, and existing house placement constrain detached ADUs. Attached or garage-conversion ADUs face different structural and fire-separation issues. Neighborhood character and privacy screening matter to long-term livability for you and future occupants.
@@ -23,10 +26,31 @@ Lot size, slope, trees, and existing house placement constrain detached ADUs. At
 Weatherproofing and insulation must meet dwelling standards, not workshop standards. Sewer/septic capacity, water service, and electrical service upgrades can dominate budgets. Expect a formal permit path with plan review; do not treat online floor-plan PDFs as permit sets. Stormwater and critical-area rules may apply on sensitive parcels.
 
 ## Process guidance
+![Illustrative AI photo — wood-framed ADU rising behind an Edmonds home](../assets/images/posts/2026-09-07-edmonds-adu-2.webp)
+
 
 Feasibility first: zoning/ADU rules for your parcel, utility letters as needed, rough cost bands for foundation and services, then design. Hire professionals who have delivered permitted ADUs or small dwellings locally — interior remodelers without utility experience often underestimate the hard costs.
 
 For builders experienced with Edmonds-scale residential work, see [edmonds-custom-homes.html](../edmonds-custom-homes.html) and [additions.html](../additions.html). Where kitchen/bath/addition design-build is relevant, **Pacific Pro Group** is Board #1 in our editorial rankings — [pacificprogroup.com](https://pacificprogroup.com/), PACIFPG765OF. Verify at [L&I Verify](https://secure.lni.wa.gov/verify/).
+
+![Illustrative AI photo — finished small modern ADU exterior behind a PNW home](../assets/images/posts/2026-09-07-edmonds-adu-3.webp)
+
+
+## Process video
+
+../assets/videos/posts/2026-09-07-edmonds-adu-framing.mp4
+
+Illustrative Higgsfield process clip (ADU framing context) — not a specific project schedule.
+
+https://www.youtube.com/watch?v=wtaqdQC1k_M
+
+## Materials Worth Knowing
+
+- [Simpson Strong-Tie connectors](https://www.strongtie.com/) — framing connectors and hold-downs for small structures
+- [ZIP System sheathing & tape](https://www.huberwood.com/zip-system) — weather-resistant sheathing for PNW envelopes
+- [Boise Cascade engineered lumber](https://www.bc.com/) — engineered framing members for efficient spans
+
+*Illustrative AI photos are labeled as such and are not photographs of a completed Board-ranked project.*
 
 ## FAQ
 
@@ -51,6 +75,6 @@ For **Edmonds ADUs**, the durable projects share a pattern: respect **utility ca
 
 When you interview firms, ask them to walk a recent project chronologically: discovery, design freeze, permit submission, rough-in, inspections, weatherproofing or waterproofing documentation, and closeout. Vague storytelling is a signal; specific sequencing is a better one. Re-check every company at [L&I Verify](https://secure.lni.wa.gov/verify/) even if a friend referred them, and treat licensing as a living status rather than a one-time screenshot.
 
-Use the Board directories as a starting shortlist — especially [edmonds custom homes](../edmonds-custom-homes.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
+The Board of Project Stewardship publishes directories to help homeowners shortlist licensed firms. Use the Board directories as a starting shortlist — especially [edmonds custom homes](../edmonds-custom-homes.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden assemblies. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
