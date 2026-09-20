@@ -556,3 +556,20 @@ Shipped after About+FAQ commit `578341a`. Regenerated site; IndexNow pinged 134 
 
 **Locks check:** No public AI names; PPG #1 outbound only; no invented ROI/license years; Board of Project Stewardship spelled out on hubs.
 
+## DONE (batch 2026-09-20 PT — mega-nav / about shield / learn↔dir / post outro)
+
+Steward P1 ship after related-learning wave. Regenerated site; IndexNow to follow on push.
+
+| # | Item | Notes |
+|---|------|-------|
+| 4 | Collapse mega-nav | Primary remains ~8 (Home About Directories Learn Permits Verify How-we-rank Blog). Long city list removed from More; cities only on Learn + Directories hubs via `city_hubs_section` / Learn city list. More tools trimmed to FAQ/ADU/Contact/Good Steward/hire + three planning guides + glossary/feature. |
+| about / Integrity Shield | Embed six layers on about.html | `build_about_page()` now includes `integrity_shield_html(...)` (six stewardship layers). |
+| 17 | Bidirectional learn↔directory body modules | New `learn_directory_bridge_html()` on kitchen/bathrooms/additions directories **and** kitchen-remodel-planning / bathroom-waterproofing-guide / home-addition-planning. |
+| 18 | Blog/post outro | Generator-level `post_outro_html()` on all 45 posts: parent directory + How we rank + WA L&I Verify. |
+| 15 | Soften guarantee timelines | Prior batch already framed “often / AHJ-dependent”; no new hard month guarantees reintroduced. |
+| 72 / 98 / 99 / 100 | Regen + IndexNow + ledger | `python3 generate_site.py` OK; this DONE table; IndexNow on push. |
+
+**Live verify (PT):** sample URLs curl 200 after push (about, kitchen, bathrooms, additions, planning guides, sample post, directory, learn).
+
+**Locks check:** Board of Project Stewardship spelled out; no public AI names; PPG #1 outbound only; no invented prices/ROI; never edit pacificprogroup.com.
+

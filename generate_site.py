@@ -918,6 +918,7 @@ def nav_html(active: str = "", prefix: str = "") -> str:
         ("how-we-rank", href("how-we-rank.html"), "How we rank"),
         ("blog", href("blog.html"), "Blog"),
     ]
+    # Cities live under Learn + Directories hubs only (mega-nav collapse).
     more_dirs = [
         ("additions", href("additions.html"), "Additions"),
         ("custom-homes", href("custom-homes.html"), "Custom Homes"),
@@ -927,61 +928,18 @@ def nav_html(active: str = "", prefix: str = "") -> str:
         ("commercial", href("commercial.html"), "Commercial"),
         ("spec-homes", href("spec-homes.html"), "Spec"),
         ("trades", href("trades.html"), "Trades"),
-        ("shoreline", href("shoreline.html"), "Shoreline"),
-        ("lynnwood", href("lynnwood.html"), "Lynnwood"),
-        ("ballard", href("ballard.html"), "Ballard"),
-        ("magnolia", href("magnolia.html"), "Magnolia"),
-        ("mukilteo", href("mukilteo.html"), "Mukilteo"),
-        ("kirkland", href("kirkland.html"), "Kirkland"),
-        ("bothell", href("bothell.html"), "Bothell"),
-        ("queen-anne", href("queen-anne.html"), "Queen Anne"),
-        ("phinney-ridge", href("phinney-ridge.html"), "Phinney Ridge"),
-        ("greenwood", href("greenwood.html"), "Greenwood"),
-        ("lake-forest-park", href("lake-forest-park.html"), "Lake Forest Park"),
-        ("mountlake-terrace", href("mountlake-terrace.html"), "Mountlake Terrace"),
-        ("mill-creek", href("mill-creek.html"), "Mill Creek"),
-        ("edmonds-hub", href("edmonds.html"), "Edmonds hub"),
-        ("seattle", href("seattle.html"), "Seattle"),
-        ("king-county", href("king-county.html"), "King County"),
-        ("snohomish-county", href("snohomish-county.html"), "Snohomish County"),
     ]
     more_tools = [
         ("faq", href("faq.html"), "FAQ"),
-        ("steward", href("good-steward.html"), "Good Steward"),
         ("adu", href("adu.html"), "Edmonds ADU"),
         ("contact", href("contact.html"), "Contact"),
-        ("build-walkthrough", href("build-walkthrough.html"), "Build Walkthrough"),
-        ("site-visit", href("site-visit.html"), "Site Visit Checklist"),
-        ("energy-credit", href("energy-credit.html"), "Energy Code Credits"),
-        ("pm-dashboard", href("pm-dashboard.html"), "PM Dashboard"),
-        ("adu-checklist", href("adu-checklist.html"), "ADU Checklist"),
-        ("change-orders", href("change-orders.html"), "Change Orders"),
-        ("coastal-waterproofing", href("coastal-waterproofing.html"), "Coastal Waterproofing"),
+        ("steward", href("good-steward.html"), "Good Steward"),
         ("hire-questions", href("hire-questions.html"), "Hire Questions"),
         ("hiring-a-contractor", href("hiring-a-contractor.html"), "Hiring a Contractor"),
-        ("second-story-vs-teardown", href("second-story-vs-teardown.html"), "Second Story vs Teardown"),
         ("kitchen-remodel-planning", href("kitchen-remodel-planning.html"), "Kitchen Remodel Planning"),
         ("bathroom-waterproofing-guide", href("bathroom-waterproofing-guide.html"), "Bathroom Waterproofing"),
         ("home-addition-planning", href("home-addition-planning.html"), "Home Addition Planning"),
-        ("bid-comparison", href("bid-comparison.html"), "Bid Comparison"),
-        ("red-flags-hiring", href("red-flags-hiring.html"), "Red Flags Hiring"),
-        ("project-timeline", href("project-timeline.html"), "Project Timeline"),
-        ("final-walkthrough", href("final-walkthrough.html"), "Final Walkthrough"),
-        ("bonds-and-insurance", href("bonds-and-insurance.html"), "Bonds & Insurance"),
-        ("design-build-vs-bid", href("design-build-vs-bid.html"), "Design-Build vs Bid"),
-        ("remodel-cost-factors", href("remodel-cost-factors.html"), "Remodel Cost Factors"),
-        ("kitchen-cost-factors", href("kitchen-cost-factors.html"), "Kitchen Cost Factors"),
-        ("bathroom-cost-factors", href("bathroom-cost-factors.html"), "Bathroom Cost Factors"),
-        ("addition-cost-factors", href("addition-cost-factors.html"), "Addition Cost Factors"),
-        ("adu-cost-factors", href("adu-cost-factors.html"), "ADU Cost Factors"),
-        ("financing-and-draws", href("financing-and-draws.html"), "Financing & Draws"),
-        ("living-through-remodel", href("living-through-remodel.html"), "Living Through Remodel"),
-        ("selecting-finishes", href("selecting-finishes.html"), "Selecting Finishes"),
-        ("contractor-contract-basics", href("contractor-contract-basics.html"), "Contract Basics (WA)"),
-        ("materials", href("materials.html"), "Materials Index"),
-        ("contact", href("contact.html"), "Contact"),
         ("glossary", href("glossary.html"), "Glossary"),
-        ("videos", href("videos.html"), "Video Library"),
         ("story", href("another-story.html"), "Another Story · Board feature"),
     ]
     more = more_dirs + more_tools
@@ -1046,7 +1004,9 @@ def nav_html(active: str = "", prefix: str = "") -> str:
 
 def footer_html(prefix: str = "./", active: str = "") -> str:
     explore = [
-        ("about", f"{prefix}index.html", "About"),
+        ("about", f"{prefix}about.html", "About"),
+        ("directory", f"{prefix}directory.html", "Directories"),
+        ("learn", f"{prefix}learn.html", "Learn"),
         ("how-we-rank", f"{prefix}how-we-rank.html", "How we rank"),
         ("additions", f"{prefix}additions.html", "Additions Top 30"),
         ("custom-homes", f"{prefix}custom-homes.html", "Custom homes"),
@@ -1056,23 +1016,6 @@ def footer_html(prefix: str = "./", active: str = "") -> str:
         ("commercial", f"{prefix}commercial.html", "Commercial GCs"),
         ("spec-homes", f"{prefix}spec-homes.html", "Spec homes"),
         ("trades", f"{prefix}trades.html", "Trade contractors"),
-        ("shoreline", f"{prefix}shoreline.html", "Shoreline hub"),
-        ("lynnwood", f"{prefix}lynnwood.html", "Lynnwood hub"),
-        ("ballard", f"{prefix}ballard.html", "Ballard hub"),
-        ("magnolia", f"{prefix}magnolia.html", "Magnolia hub"),
-        ("mukilteo", f"{prefix}mukilteo.html", "Mukilteo hub"),
-        ("kirkland", f"{prefix}kirkland.html", "Kirkland hub"),
-        ("bothell", f"{prefix}bothell.html", "Bothell hub"),
-        ("queen-anne", f"{prefix}queen-anne.html", "Queen Anne hub"),
-        ("phinney-ridge", f"{prefix}phinney-ridge.html", "Phinney Ridge hub"),
-        ("greenwood", f"{prefix}greenwood.html", "Greenwood hub"),
-        ("lake-forest-park", f"{prefix}lake-forest-park.html", "Lake Forest Park hub"),
-        ("mountlake-terrace", f"{prefix}mountlake-terrace.html", "Mountlake Terrace hub"),
-        ("mill-creek", f"{prefix}mill-creek.html", "Mill Creek hub"),
-        ("edmonds-hub", f"{prefix}edmonds.html", "Edmonds project hub"),
-        ("seattle", f"{prefix}seattle.html", "Seattle hub"),
-        ("king-county", f"{prefix}king-county.html", "King County hub"),
-        ("snohomish-county", f"{prefix}snohomish-county.html", "Snohomish County hub"),
         ("learn", f"{prefix}learn.html", "Learn hub"),
         ("permits", f"{prefix}permits.html", "Permit hub"),
         ("adu", f"{prefix}adu.html", "Edmonds ADU"),
@@ -2287,6 +2230,123 @@ STEWARDSHIP_LAYERS = [
 ]
 
 
+
+# City / neighborhood hubs — linked from Learn + Directories only (not primary mega-nav).
+CITY_HUB_LINKS: list[tuple[str, str]] = [
+    ("Seattle hub", "./seattle.html"),
+    ("King County hub", "./king-county.html"),
+    ("Snohomish County hub", "./snohomish-county.html"),
+    ("Edmonds project hub", "./edmonds.html"),
+    ("Edmonds custom homes", "./edmonds-custom-homes.html"),
+    ("Shoreline", "./shoreline.html"),
+    ("Lynnwood", "./lynnwood.html"),
+    ("Ballard", "./ballard.html"),
+    ("Magnolia", "./magnolia.html"),
+    ("Mukilteo", "./mukilteo.html"),
+    ("Kirkland", "./kirkland.html"),
+    ("Bothell", "./bothell.html"),
+    ("Queen Anne", "./queen-anne.html"),
+    ("Phinney Ridge", "./phinney-ridge.html"),
+    ("Greenwood", "./greenwood.html"),
+    ("Lake Forest Park", "./lake-forest-park.html"),
+    ("Mountlake Terrace", "./mountlake-terrace.html"),
+    ("Mill Creek", "./mill-creek.html"),
+]
+
+
+def city_hubs_section(
+    heading: str = "City & neighborhood hubs",
+    blurb: str = "Local Board hubs for Edmonds / King & Snohomish — permitting orientation and shortlist links. Not a complete contractor roster.",
+) -> str:
+    links = _link_ul(CITY_HUB_LINKS)
+    return _hub_section(heading, f"""      <p class="text-sm text-slate-400 font-light leading-relaxed mb-3">{esc(blurb)}</p>
+{links}""")
+
+
+def learn_directory_bridge_html(
+    *,
+    topic: str,
+    directory_href: str,
+    directory_label: str,
+    learn_href: str,
+    learn_label: str,
+    extra_links: list[tuple[str, str]] | None = None,
+) -> str:
+    """Bidirectional body module: directory ↔ matching planning guide."""
+    extras = "".join(
+        f'<li><a href="{href}" class="text-secondary hover:underline">{esc(label)}</a></li>'
+        for label, href in (extra_links or [])
+    )
+    return f"""    <section id="learn-directory-bridge" class="mb-12 bg-charcoal border border-secondary/30 rounded-xl p-6 md:p-8" aria-labelledby="learn-dir-bridge-h">
+      <span class="text-secondary text-xs font-bold uppercase tracking-widest">Learn ↔ Directory</span>
+      <h2 id="learn-dir-bridge-h" class="text-2xl font-black text-white tracking-tight mt-1 mb-3">{esc(topic)}</h2>
+      <p class="text-sm text-slate-300 font-light leading-relaxed mb-4">Use the planning guide for questions and sequencing, then shortlist from the matching Board directory. Re-verify every legal name at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> before any deposit. Rankings are editorial — not invented prices or ROI.</p>
+      <div class="grid sm:grid-cols-2 gap-3 mb-3">
+        <a href="{learn_href}" class="bg-obsidian border border-white/10 hover:border-secondary/40 rounded-lg p-4 no-underline block">
+          <div class="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-1">Planning</div>
+          <div class="text-base font-black text-white">{esc(learn_label)}</div>
+        </a>
+        <a href="{directory_href}" class="bg-obsidian border border-white/10 hover:border-secondary/40 rounded-lg p-4 no-underline block">
+          <div class="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-1">Directory</div>
+          <div class="text-base font-black text-white">{esc(directory_label)}</div>
+        </a>
+      </div>
+      <ul class="text-sm text-slate-400 font-light space-y-1 list-disc pl-5">
+        <li><a href="./how-we-rank.html" class="text-secondary hover:underline">How we rank</a></li>
+        <li><a href="./verify-contractor.html" class="text-secondary hover:underline">Verify a WA contractor</a></li>
+        <li><a href="./learn.html" class="text-secondary hover:underline">Learn hub</a> · <a href="./directory.html" class="text-secondary hover:underline">Directories hub</a></li>
+        {extras}
+      </ul>
+    </section>
+"""
+
+
+def resolve_post_parent_directory(post: dict) -> tuple[str, str]:
+    """Map post category/slug → parent directory (href, label) for post outro."""
+    cat = (post.get("category") or "").strip().lower()
+    slug = (post.get("slug") or post.get("out_name") or "").lower()
+    title = (post.get("title") or "").lower()
+    blob = f"{cat} {slug} {title}"
+    if any(k in blob for k in ("kitchen",)):
+        return ("./kitchen.html", "Kitchen remodelers directory")
+    if any(k in blob for k in ("bath", "shower", "waterproof")):
+        return ("./bathrooms.html", "Bathroom remodelers directory")
+    if any(k in blob for k in ("addition", "second-story", "second story", "adu")):
+        return ("./additions.html", "Home additions directory")
+    if any(k in blob for k in ("custom home", "custom-home")):
+        return ("./custom-homes.html", "Custom homes directory")
+    if any(k in blob for k in ("hire", "hiring", "red flag", "contract", "verify")):
+        return ("./hiring-a-contractor.html", "Hiring a contractor hub")
+    if any(k in blob for k in ("permit",)):
+        return ("./permits.html", "Permit jurisdiction hub")
+    return ("./directory.html", "Contractor directories hub")
+
+
+def post_outro_html(post: dict, *, prefix: str = "../") -> str:
+    """Generator-level blog/post outro: parent directory + How we rank + L&I Verify."""
+    dir_href, dir_label = resolve_post_parent_directory(post)
+    # Posts live under posts/; adjust relative links
+    def adj(href: str) -> str:
+        if href.startswith("./"):
+            return prefix + href[2:]
+        if href.startswith("http"):
+            return href
+        return prefix + href.lstrip("/")
+
+    return f"""    <section id="post-outro" class="mt-12 mb-4 bg-charcoal border border-white/10 rounded-xl p-6 md:p-8" aria-labelledby="post-outro-h">
+      <span class="text-secondary text-xs font-bold uppercase tracking-widest">Next steps</span>
+      <h2 id="post-outro-h" class="text-xl font-black text-white tracking-tight mt-1 mb-3">Directory · ranking method · L&amp;I Verify</h2>
+      <p class="text-sm text-slate-300 font-light leading-relaxed mb-4">This article is educational Board of Project Stewardship guidance — not a bid, schedule guarantee, or price list. Shortlist from a matching directory, read how rankings work, then re-verify every contract legal name on the official WA L&amp;I tool before deposits.</p>
+      <ul class="space-y-2 text-sm text-slate-300 font-light">
+        <li><a href="{adj(dir_href)}" class="text-secondary hover:underline font-semibold">{esc(dir_label)}</a></li>
+        <li><a href="{adj('./how-we-rank.html')}" class="text-secondary hover:underline">How we rank</a> — published editorial method, not paid placement.</li>
+        <li><a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> — official contractor license lookup.</li>
+        <li><a href="{adj('./verify-contractor.html')}" class="text-secondary hover:underline">Board verify walkthrough</a> · <a href="{adj('./learn.html')}" class="text-secondary hover:underline">Learn hub</a> · <a href="{adj('./blog.html')}" class="text-secondary hover:underline">Blog</a></li>
+      </ul>
+    </section>
+"""
+
+
 def integrity_shield_html(
     subtitle: str = (
         "Six layers the Board uses when screening contractors — public records, local mastery, and clear permit ownership. Not paid placement and not a certification product."
@@ -2869,6 +2929,17 @@ def build_additions(additions: list[dict]) -> str:
         </div>
       </div>
     </section>
+{learn_directory_bridge_html(
+            topic="Additions: plan first, then shortlist",
+            directory_href="./additions.html",
+            directory_label="Home additions directory",
+            learn_href="./home-addition-planning.html",
+            learn_label="Home addition planning guide",
+            extra_links=[
+                ("Addition cost factors", "./addition-cost-factors.html"),
+                ("Second story vs teardown", "./second-story-vs-teardown.html"),
+            ],
+        )}
 {related_learning_strip([
             ("Home addition planning", "./home-addition-planning.html"),
             ("Addition cost factors", "./addition-cost-factors.html"),
@@ -2964,6 +3035,18 @@ def build_kb_page(kind: str, firms: list[dict]) -> str:
 {cards}
       </div>
     </section>
+{learn_directory_bridge_html(
+            topic=("Kitchen remodel: plan ↔ directory" if is_kitchen else "Bathroom remodel: plan ↔ directory"),
+            directory_href=("./kitchen.html" if is_kitchen else "./bathrooms.html"),
+            directory_label=("Kitchen remodelers directory" if is_kitchen else "Bathroom remodelers directory"),
+            learn_href=("./kitchen-remodel-planning.html" if is_kitchen else "./bathroom-waterproofing-guide.html"),
+            learn_label=("Kitchen remodel planning" if is_kitchen else "Bathroom waterproofing guide"),
+            extra_links=(
+                [("Kitchen cost factors", "./kitchen-cost-factors.html"), ("Hire questions", "./hire-questions.html")]
+                if is_kitchen
+                else [("Bathroom cost factors", "./bathroom-cost-factors.html"), ("Coastal waterproofing", "./coastal-waterproofing.html")]
+            ),
+        )}
 {related_learning_strip(
             [
                 ("Kitchen remodel planning", "./kitchen-remodel-planning.html"),
@@ -4152,6 +4235,7 @@ def build_post_page(post: dict) -> str:
     <div class="prose-board">
 {article_html}
     </div>
+{post_outro_html(post, prefix="../")}
   </div>"""
     return page_shell(
         f"{post['title']} | Board of Project Stewardship",
@@ -5759,6 +5843,9 @@ def build_about_page() -> str:
                 ]
             ),
         )
+        + integrity_shield_html(
+            "Six stewardship layers the Board uses when screening contractors — public records and local mastery, not paid placement."
+        )
         + education_closing("default", "directories", "learn", official_keys=["lni_verify", "lni_hire_smart", "lni_home", "mybuildingpermit", "edmonds"])
         + f'  <div class="max-w-6xl mx-auto px-4 pb-16">\n{faq_section(faqs, "About FAQ")}\n  </div>\n'
     )
@@ -6212,7 +6299,18 @@ def build_kitchen_remodel_planning_page() -> str:
                 ]
             ),
         )
-        + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Kitchen remodel planning FAQ')}\n  </div>\n"
+                + learn_directory_bridge_html(
+            topic="Kitchen remodel: plan ↔ directory",
+            directory_href="./kitchen.html",
+            directory_label="Kitchen remodelers directory",
+            learn_href="./kitchen-remodel-planning.html",
+            learn_label="Kitchen remodel planning (this guide)",
+            extra_links=[
+                ("Kitchen cost factors", "./kitchen-cost-factors.html"),
+                ("Hire questions", "./hire-questions.html"),
+            ],
+        )
++ f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Kitchen remodel planning FAQ')}\n  </div>\n"
     )
     howto = howto_ld(
         "How to plan a kitchen remodel",
@@ -6293,7 +6391,18 @@ def build_bathroom_waterproofing_guide_page() -> str:
                 ]
             ),
         )
-        + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Bathroom waterproofing FAQ')}\n  </div>\n"
+                + learn_directory_bridge_html(
+            topic="Bathroom remodel: plan ↔ directory",
+            directory_href="./bathrooms.html",
+            directory_label="Bathroom remodelers directory",
+            learn_href="./bathroom-waterproofing-guide.html",
+            learn_label="Bathroom waterproofing guide (this page)",
+            extra_links=[
+                ("Bathroom cost factors", "./bathroom-cost-factors.html"),
+                ("Coastal waterproofing", "./coastal-waterproofing.html"),
+            ],
+        )
++ f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Bathroom waterproofing FAQ')}\n  </div>\n"
     )
     return page_shell(
         "Bathroom Waterproofing Guide | Board of Project Stewardship",
@@ -6481,7 +6590,18 @@ def build_home_addition_planning_page() -> str:
                 ]
             ),
         )
-        + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Home addition planning FAQ')}\n  </div>\n"
+                + learn_directory_bridge_html(
+            topic="Home additions: plan ↔ directory",
+            directory_href="./additions.html",
+            directory_label="Home additions directory",
+            learn_href="./home-addition-planning.html",
+            learn_label="Home addition planning (this guide)",
+            extra_links=[
+                ("Addition cost factors", "./addition-cost-factors.html"),
+                ("Second story vs teardown", "./second-story-vs-teardown.html"),
+            ],
+        )
++ f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Home addition planning FAQ')}\n  </div>\n"
     )
     return page_shell(
         "Home Addition Planning | Board of Project Stewardship",
@@ -8287,6 +8407,7 @@ def build_directory_hub() -> str:
             ),
             border="border-primary/25",
         )
+        + city_hubs_section()
         + education_closing("directories", "verify", "hire", official_keys=["lni_verify", "lni_home", "lni_hire_smart", "mybuildingpermit"])
     )
     return page_shell(
