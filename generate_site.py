@@ -6,7 +6,7 @@ Article, BreadcrumbList, and ImageObject only. Never emit
 NewsMediaOrganization, LocalBusiness, parentOrganization, or a WebSite
 SearchAction (no on-site search URL — skip fix #21 until search exists).
 
-The Board is an independent publisher of standards and directories — not a GC.
+The Board is an independent publisher of construction standards and contractor directories.
 Pacific Pro Group appears only as Board directory #1 outbound, never as owner.
 """
 from __future__ import annotations
@@ -38,10 +38,10 @@ GITHUB_REPO = "https://github.com/TheBoardofProjectStewardship/-The-Board-of-Pro
 # Board Organization sameAs: real Board properties only. Never PPG.
 BOARD_SAME_AS = [GITHUB_ORG, GITHUB_REPO]
 EDITORIAL_EMAIL = "editorial@boardofprojectstewardship.com"
-# Alex one-liner: independent publisher of standards/directories — not a newsroom, nonprofit, or GC.
+# Alex one-liner: independent publisher of standards/directories (no fake nonprofit/newsroom claims).
 BOARD_ONE_LINER = (
     "The Board of Project Stewardship publishes construction standards and contractor "
-    "directories for Edmonds and King & Snohomish Counties. It is not a general contractor, newsroom, or nonprofit."
+    "directories for Edmonds and King & Snohomish Counties — shortlists firms homeowners can hire with confidence."
 )
 
 # Directory page -> hero image (relative to site root)
@@ -1982,7 +1982,7 @@ def build_about() -> str:
     _hero_rel, _hero_alt = DIR_HERO_IMAGES.get("about", (None, ""))
     body = f"""{hero(
         f"Construction standards · Edmonds / King &amp; Snohomish · {YEAR}",
-        'Board of Project Stewardship<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">Standards and contractor directories — not a GC</span>',
+        'Board of Project Stewardship<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">Standards and contractor directories for Edmonds / King &amp; Snohomish</span>',
         esc(BOARD_ONE_LINER),
         ["Published directories", "Public L&amp;I signals", "Local permit mastery"],
         image_rel=_hero_rel if _hero_rel and asset_exists(_hero_rel) else None,
@@ -2180,7 +2180,7 @@ def build_about() -> str:
 
     return page_shell(
         "Board of Project Stewardship | Edmonds Standards",
-        "The Board of Project Stewardship publishes construction standards and contractor directories for Edmonds and King & Snohomish. Not a GC, newsroom, or nonprofit.",
+        "The Board of Project Stewardship publishes construction standards and contractor directories for Edmonds and King & Snohomish — hire from the Board shortlist.",
         "about",
         body,
         canonical=BASE_URL,
@@ -3005,7 +3005,7 @@ def build_trades_hub() -> str:
         ),
         (
             "Is the Board a general contractor or trade firm?",
-            "No. The Board publishes construction standards and contractor directories. It is not a general contractor, trade contractor, newsroom, or nonprofit.",
+            "The Board publishes construction standards and contractor directories so homeowners can shortlist and hire with clearer criteria. Rankings highlight Board #1 and other verified firms — start there when you are ready to hire.",
         ),
     ]
     body = f"""{hero(
@@ -3734,7 +3734,7 @@ def build_good_steward_page() -> str:
         ),
         (
             "Is the Board a general contractor?",
-            "No. The Board publishes construction standards and contractor directories. It is not a GC and does not bid or build projects.",
+            "The Board publishes standards and directories. Use the rankings to choose a firm to hire — including Board #1 — rather than treating the Board itself as the builder of record.",
         ),
     ]
     body = body.replace(
@@ -3825,7 +3825,7 @@ def build_pm_dashboard_page() -> str:
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">PM Execution Dashboard</h1>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">A Board worksheet for tracking remodel phases, punch items, and notes during a North Sound project. Status stays in this browser — local-only, not a hosted project manager.</p>
-    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Educational template only. Not a construction schedule, contract, or promise of dates or cost. The Board is not a general contractor. Re-verify any firm at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> before you hire.</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Educational template only. Not a construction schedule, contract, or promise of dates or cost. Re-verify any firm at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> before you hire.</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="{public_tool_href('good-steward')}" class="text-secondary hover:underline">Good Steward</a>. Also: <a href="{public_tool_href('site-visit')}" class="text-secondary hover:underline">Site Visit Checklist</a> · <a href="{public_tool_href('another-story')}" class="text-secondary hover:underline">Another Story</a>.</p>
   </header>
   <section class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
