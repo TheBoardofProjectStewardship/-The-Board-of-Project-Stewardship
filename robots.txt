@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /write.html
 
 Sitemap: https://boardofprojectstewardship.com/sitemap.xml
