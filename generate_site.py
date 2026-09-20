@@ -888,7 +888,7 @@ def nav_html(active: str = "", prefix: str = "") -> str:
         <a href="{home_href}" class="flex items-center gap-2 no-underline min-w-0">
           <i class="fas fa-compass-drafting text-secondary text-xl shrink-0" aria-hidden="true"></i>
           <span class="hidden md:inline font-black text-sm lg:text-base tracking-wider text-white">Board of Project Stewardship</span>
-          <span class="md:hidden font-black text-base tracking-wider text-white">BOPS</span>
+          <span class="md:hidden font-black text-base tracking-wider text-white">Board</span>
         </a>
         <nav class="hidden md:flex items-center gap-4 lg:gap-5" aria-label="Primary">
           {primary_html}
@@ -1162,7 +1162,7 @@ def board_organization_website_ld() -> dict:
                 "@type": "Organization",
                 "@id": "https://boardofprojectstewardship.com/#organization",
                 "name": "Board of Project Stewardship",
-                "alternateName": "BOPS",
+                "alternateName": "Board of Project Stewardship",
                 "url": "https://boardofprojectstewardship.com/",
                 "description": BOARD_ONE_LINER,
                 "areaServed": [
@@ -2269,7 +2269,7 @@ def build_additions(additions: list[dict]) -> str:
         faq_ld(faqs),
     ]
     return page_shell(
-        "Top 30 Addition Contractors Edmonds | BOPS",
+        "Top 30 Addition Contractors Edmonds | Board of Project Stewardship",
         "Top 30 verified home addition contractors in Edmonds and King & Snohomish Counties, WA. Editorial ranking by the Board — updated 2026. Pacific Pro Group is Board directory #1.",
         "additions",
         body,
@@ -2283,7 +2283,7 @@ def build_kb_page(kind: str, firms: list[dict]) -> str:
     is_kitchen = kind == "kitchen"
     label = "Kitchen Remodel" if is_kitchen else "Bathroom Remodel"
     slug = "kitchen" if is_kitchen else "bathrooms"
-    title = "Kitchen Remodel Contractors Edmonds | BOPS" if is_kitchen else "Bathroom Remodel Contractors Edmonds | BOPS"
+    title = "Kitchen Remodel Contractors Edmonds | Board of Project Stewardship" if is_kitchen else "Bathroom Remodel Contractors Edmonds | Board of Project Stewardship"
     desc = (
         "Editorial kitchen remodel ranking for Edmonds and King & Snohomish Counties, WA. Cabinets, layout, and permit-aware design-build shortlist. Pacific Pro Group is Board directory #1."
         if is_kitchen
@@ -2362,7 +2362,7 @@ def build_kb_page(kind: str, firms: list[dict]) -> str:
 def build_custom_homes(firms: list[dict]) -> str:
     label = "Custom Home"
     slug = "custom-homes"
-    title = "Custom Home Builders in Edmonds | BOPS"
+    title = "Custom Home Builders in Edmonds | Board of Project Stewardship"
     desc = (
         "Editorial ranking of top custom home builders serving Edmonds and King & Snohomish Counties, WA. "
         "Pacific Pro Group is Board directory #1 with 4.9 from 190 Trustindex reviews."
@@ -2786,7 +2786,7 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
         faq_ld(faqs),
     ]
     return page_shell(
-        "Edmonds Custom Homes Top 30 | BOPS",
+        "Edmonds Custom Homes Top 30 | Board of Project Stewardship",
         desc,
         active,
         body,
@@ -2878,7 +2878,7 @@ def build_commercial(firms: list[dict]) -> str:
         faq_ld(faqs),
     ]
     return page_shell(
-        "Commercial Contractors in Edmonds | BOPS",
+        "Commercial Contractors in Edmonds | Board of Project Stewardship",
         desc,
         slug,
         body,
@@ -2963,7 +2963,7 @@ def build_spec_homes(firms: list[dict]) -> str:
         faq_ld(faqs),
     ]
     return page_shell(
-        "Spec Home Builders near Edmonds | BOPS",
+        "Spec Home Builders near Edmonds | Board of Project Stewardship",
         desc,
         slug,
         body,
@@ -3038,7 +3038,7 @@ def build_trades_hub() -> str:
         faq_ld(faqs),
     ]
     return page_shell(
-        "Trade Contractors in Edmonds | BOPS",
+        "Trade Contractors in Edmonds | Board of Project Stewardship",
         "Board directories of plumbers, electricians, HVAC, roofing, and other trade contractors serving Edmonds and King & Snohomish Counties, WA.",
         "trades",
         body,
@@ -3116,7 +3116,7 @@ def build_trade_page(slug: str, title: str, icon: str, blurb: str, firms: list[d
         faq_ld(faqs),
     ]
     return page_shell(
-        f"{title} in Edmonds | BOPS",
+        f"{title} in Edmonds | Board of Project Stewardship",
         f"{blurb} Editorial directory for Edmonds and King & Snohomish Counties, WA.",
         "trades",
         body,
@@ -3439,7 +3439,7 @@ def build_post_page(post: dict) -> str:
     </div>
   </div>"""
     return page_shell(
-        f"{post['title']} | BOPS",
+        f"{post['title']} | Board of Project Stewardship",
         post["description"] or post["title"],
         "blog",
         body,
@@ -3743,7 +3743,7 @@ def build_good_steward_page() -> str:
         + "\n    <section class=\"bg-charcoal border border-primary/25",
     )
     return page_shell(
-        "Good Steward Tools | BOPS",
+        "Good Steward Tools | Board of Project Stewardship",
         "Good Steward Tools — site visit checklist and PM dashboard for Edmonds / coastal Puget Sound. Educational Board templates. Verify WA L&I before hiring.",
         "steward",
         body,
@@ -3768,7 +3768,7 @@ def build_another_story_page() -> str:
   </header>
 """
     return page_shell(
-        "Another Story | BOPS",
+        "Another Story | Board of Project Stewardship",
         "Another Story — Board feature. AI-assisted second-story design preview for Edmonds and North Sound homes. Not a bid or permit document.",
         "story",
         body,
@@ -3802,7 +3802,7 @@ def build_site_visit_page() -> str:
   </section>
 """
     return page_shell(
-        "Site Visit Checklist | BOPS",
+        "Site Visit Checklist | Board of Project Stewardship",
         "Site Visit & Discovery checklist from the Board of Project Stewardship. Browser-local Good Steward template for Edmonds / coastal Puget Sound. Not a bid or permit.",
         "site-visit",
         body,
@@ -3839,7 +3839,7 @@ def build_pm_dashboard_page() -> str:
   </section>
 """
     return page_shell(
-        "PM Dashboard | BOPS",
+        "PM Dashboard | Board of Project Stewardship",
         "PM Execution Dashboard from the Board of Project Stewardship. Browser-local Good Steward phase tracker for Edmonds / coastal Puget Sound. Not a schedule commitment.",
         "pm-dashboard",
         body,
@@ -4030,7 +4030,7 @@ def build_404_page() -> str:
   </div>
 """
     return page_shell(
-        "Page not found | BOPS",
+        "Page not found | Board of Project Stewardship",
         "This Board of Project Stewardship page was not found. Browse directories, the blog, or Good Steward tools.",
         "about",
         body,
@@ -4112,13 +4112,13 @@ def patch_tool_pages() -> None:
     specs = [
         (
             SITE_DIR / "tools" / "site-visit" / "index.html",
-            "Site Visit & Discovery | BOPS",
+            "Site Visit & Discovery | Board of Project Stewardship",
             "Good Steward site-visit checklist for Edmonds and coastal Puget Sound. Browser-local Board template — not a bid, permit, or contract.",
             f"{SITE_ORIGIN}/site-visit.html",
         ),
         (
             SITE_DIR / "tools" / "pm-dashboard" / "index.html",
-            "PM Execution Dashboard | BOPS",
+            "PM Execution Dashboard | Board of Project Stewardship",
             "Good Steward PM dashboard for Edmonds remodel phases. Browser-local Board template — not a schedule commitment.",
             f"{SITE_ORIGIN}/pm-dashboard.html",
         ),
