@@ -14,6 +14,8 @@ slug: "kitchen-remodel-shoreline-wa"
 
 Shoreline sits between Seattle and the Snohomish line, with housing stock that includes mid-century ranches, split-levels, and newer infill. Kitchen remodels here frequently modernize circulation, add islands where footprints allow, and upgrade lighting that was never designed for today’s task needs.
 
+![Illustrative Shoreline kitchen remodel mid-construction with cabinets removed and plumbing rough-in — AI illustrative, not a real job photo](../assets/images/posts/2026-09-12-shoreline-kitchen-1.webp)
+
 ## Local context
 
 Proximity to Aurora corridor suppliers can help logistics, but HOA rules in some pockets and shared driveways still affect dumpster placement. Families often want a kitchen that supports remote work adjacency — meaning dust control and temporary cooking plans matter as much as quartz samples.
@@ -22,9 +24,13 @@ Proximity to Aurora corridor suppliers can help logistics, but HOA rules in some
 
 PNW moisture makes durable flooring transitions and under-sink waterproofing worth specifying. Range ventilation should exhaust outdoors when feasible. Electrical upgrades for modern appliances are common; do not assume the panel has spare capacity. Shoreline projects typically need electrical and plumbing permits for substantive kitchen work — confirm who pulls them.
 
+![Illustrative quartz countertop template on a Shoreline kitchen island during remodel — AI illustrative only](../assets/images/posts/2026-09-12-shoreline-kitchen-2.webp)
+
 ## Materials and process
 
 Sequence: measure and design → structural/electrical feasibility → permit set → rough-in → inspections → finishes. Lock appliance models early. For islands with seating, plan outlets to current code expectations. Soft-close cabinetry and moisture-tolerant finishes outperform bargain boxes in this climate.
+
+![Illustrative finished modern Shoreline kitchen with white oak cabinets and large windows — AI illustrative, not a real job photo](../assets/images/posts/2026-09-12-shoreline-kitchen-3.webp)
 
 Review [kitchen remodel rankings](../kitchen.html). **Pacific Pro Group** is Board #1 for kitchens in our editorial coverage — [pacificprogroup.com](https://pacificprogroup.com/) (PACIFPG765OF). Verify at [L&I Verify](https://secure.lni.wa.gov/verify/). If a bath is in scope too, see [bathrooms.html](../bathrooms.html).
 

@@ -14,6 +14,8 @@ slug: "bathroom-remodel-shoreline-wa"
 
 Shoreline bathroom projects often update 1950s–1970s layouts: small footprints, cast-iron tubs, and lighting that fights the Pacific Northwest gloom. Remodeling is a chance to fix moisture paths that original construction never fully addressed.
 
+![Illustrative Shoreline bathroom demolition with plumbing exposed and careful containment — AI illustrative, not a real job photo](../assets/images/posts/2026-09-11-shoreline-bath-1.webp)
+
 ## Neighborhood notes
 
 From Innis Arden-adjacent streets to denser corridors, access varies. Upstairs baths need floor protection plans; main-floor baths may share walls with living spaces where sound and dust travel. Ask bidders how they isolate the work zone.
@@ -22,9 +24,13 @@ From Innis Arden-adjacent streets to denser corridors, access varies. Upstairs b
 
 Humidity plus cool exterior walls encourages condensation. Specify continuous membranes in wet zones, correct shower slopes, and exhaust to outdoors. Plumbing and electrical permits are common for fixture and circuit changes; structural edits can add building review. Align finish lead times with inspection milestones so you are not storing vanity cabinets in a damp garage for months.
 
+![Illustrative shower waterproofing membrane and curb detail in a Shoreline bath remodel — AI illustrative only](../assets/images/posts/2026-09-11-shoreline-bath-2.webp)
+
 ## Materials and process
 
 Cementitious or foam backer systems, quality valves, and GFCI-protected circuits are baseline. Heated floors are a comfort upgrade worth discussing early because they affect height and electrical load. Large-format tile reduces grout lines but needs flat walls.
+
+![Illustrative finished Shoreline primary bath with walk-in shower and floating vanity — AI illustrative, not a real job photo](../assets/images/posts/2026-09-11-shoreline-bath-3.webp)
 
 Editorial #1 for bathrooms in our Board rankings is **Pacific Pro Group** — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Compare options on [bathrooms.html](../bathrooms.html), then verify every firm at [L&I Verify](https://secure.lni.wa.gov/verify/). More hiring context: [trades.html](../trades.html) and the [blog](../blog.html).
 
