@@ -239,6 +239,7 @@ def parse_firms_from_html(path: Path, skip_rank_1: bool = False) -> list[dict]:
         city = ""
         phone = ""
         specialty = ""
+        loc = ""
         loc_m = re.search(
             r'fa-map-marker-alt[^>]*>.*?</i>(.*?)</p>',
             block,
@@ -249,10 +250,14 @@ def parse_firms_from_html(path: Path, skip_rank_1: bool = False) -> list[dict]:
             loc = html.unescape(loc).replace("\xa0", " ")
             loc = re.sub(r"\s+", " ", loc).strip()
             if " · " in loc:
-                city, specialty = [p.strip() for p in loc.split(" · ", 1)]
+                city, rest = [p.strip() for p in loc.split(" · ", 1)]
+                if re.search(r"\d", rest):
+                    phone = rest
+                else:
+                    specialty = rest
             else:
                 city = loc
-        tel_m = re.search(r">(\([^<]+?\))</a>", block)
+        tel_m = re.search(r'href="tel:[^"]+"[^>]*>([^<]+)</a>', block)
         if tel_m:
             phone = html.unescape(tel_m.group(1)).strip()
         note_m = re.search(
@@ -547,7 +552,11 @@ def parse_trades(path: Path) -> dict[str, list[dict]]:
 # ---------- HTML helpers ----------
 
 def asset_exists(rel: str) -> bool:
-    return (SITE_DIR / rel).is_file()
+    rel = (rel or "").lstrip("./")
+    if (SITE_DIR / rel).is_file():
+        return True
+    # Gitignored on-domain WebP still ships on Pages when listed in CDN-MAP.
+    return rel in CDN_MAP
 
 
 def load_cdn_map() -> dict[str, str]:
@@ -580,9 +589,9 @@ def resolve_og_image(rel: str | None = None) -> str:
     candidates.append(OG_DEFAULT_REL)
     candidates.append("assets/images/home-hero.webp")
     for cand in candidates:
-        if not cand:
+        if not cand or not cand.lower().endswith((".webp", ".jpg", ".jpeg")):
             continue
-        if asset_exists(cand) and cand.lower().endswith((".webp", ".jpg", ".jpeg")):
+        if asset_exists(cand) or cand.startswith("assets/images/"):
             return f"{SITE_ORIGIN}/{cand}"
     return OG_DEFAULT
 
@@ -603,7 +612,6 @@ def prefix_asset(rel: str, prefix: str = "") -> str:
 
 def resolve_post_hero(post: dict) -> str | None:
     """Optional post hero under assets/images/posts/, else category fallback, else None."""
-    posts_dir = SITE_DIR / "assets" / "images" / "posts"
     slug = post.get("slug", "")
     candidates = []
     alias = POST_HERO_ALIASES.get(slug)
@@ -611,9 +619,9 @@ def resolve_post_hero(post: dict) -> str | None:
         candidates.append(alias)
     candidates.append(f"{slug}-hero.webp")
     for name in candidates:
-        p = posts_dir / name
-        if p.is_file():
-            return f"assets/images/posts/{name}"
+        rel = f"assets/images/posts/{name}"
+        if asset_exists(rel):
+            return rel
     cat = post.get("category", "")
     fb = CATEGORY_HERO_FALLBACK.get(cat)
     if fb and asset_exists(fb):
@@ -1376,8 +1384,8 @@ def page_shell(
     og_rel = og_image
     if not og_rel and active in DIR_HERO_IMAGES:
         cand, _alt = DIR_HERO_IMAGES[active]
-        if asset_exists(cand):
-            og_rel = cand
+        # Directory heroes may be gitignored locally but still ship on Pages.
+        og_rel = cand
     og_abs = resolve_og_image(og_rel)
     img_alt = og_image_alt or OG_IMAGE_ALT
     pfx = prefix if prefix else ""
