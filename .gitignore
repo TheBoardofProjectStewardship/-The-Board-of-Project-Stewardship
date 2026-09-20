@@ -1,4 +1,17 @@
 __pycache__/
 *.pyc
+assets/images/**/*.webp
+!assets/images/home-*.webp
+!assets/images/another-story-banner.webp
+!assets/images/blog-featured.webp
+!assets/images/og-default.webp
+!assets/images/ppg-featured-photo.webp
+!assets/images/dir-*.webp
+!assets/images/posts/*.webp
+!assets/images/tools/**
+assets/images/**/*.png
+!assets/images/tools/**
+assets/images/**/*.jpg
+assets/images/**/*.jpeg
 # Base64 dumps / scratch — not site media (media must ship for GitHub Pages)
 assets-b64/
