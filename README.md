@@ -120,7 +120,7 @@ Sources: `/workspace/top30-addition-contractors.md`, `/workspace/bops-research-k
 
 ## Tech
 
-Multi-page static site. Tailwind CDN + Font Awesome. Relative links for GitHub Pages. JSON-LD `ItemList`, `FAQPage`, `BreadcrumbList`, and blog `Article` where applicable. Tailwind CDN is known render-blocking debt (full purge CSS is a follow-up).
+Multi-page static site. Tailwind CDN + Font Awesome. Relative links for GitHub Pages. JSON-LD `ItemList`, `FAQPage`, `BreadcrumbList`, and blog `Article` where applicable. Tailwind CDN is known render-blocking debt (full self-host Tailwind purge skipped this wave — too large / visual-break risk across 80+ pages; kept CDN + dns-prefetch).
 
 ## HTTPS / custom domain (ops — not a generator fix)
 

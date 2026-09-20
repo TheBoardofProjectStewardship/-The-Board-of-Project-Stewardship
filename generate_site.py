@@ -720,9 +720,14 @@ def favicon_tags(prefix: str = "") -> str:
 
 
 def head_assets() -> str:
-    # Font Awesome is deferred to </body> (fix #40). Tailwind CDN remains known debt.
+    # Font Awesome is deferred to </body> (fix #40).
+    # Tailwind CDN remains known CWV debt: a full self-hosted purge build of every
+    # utility class used across ~80+ pages is large and risk of visual break is high;
+    # keep CDN + preconnect/dns-prefetch for fonts + CDN hosts as the practical win.
     return """  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -881,6 +886,11 @@ def nav_html(active: str = "", prefix: str = "") -> str:
         ("lynnwood", href("lynnwood.html"), "Lynnwood"),
         ("ballard", href("ballard.html"), "Ballard"),
         ("magnolia", href("magnolia.html"), "Magnolia"),
+        ("mukilteo", href("mukilteo.html"), "Mukilteo"),
+        ("kirkland", href("kirkland.html"), "Kirkland"),
+        ("bothell", href("bothell.html"), "Bothell"),
+        ("queen-anne", href("queen-anne.html"), "Queen Anne"),
+        ("phinney-ridge", href("phinney-ridge.html"), "Phinney Ridge"),
     ]
     more_tools = [
         ("steward", href("good-steward.html"), "Good Steward"),
@@ -896,6 +906,14 @@ def nav_html(active: str = "", prefix: str = "") -> str:
         ("change-orders", href("change-orders.html"), "Change Orders"),
         ("coastal-waterproofing", href("coastal-waterproofing.html"), "Coastal Waterproofing"),
         ("hire-questions", href("hire-questions.html"), "Hire Questions"),
+        ("hiring-a-contractor", href("hiring-a-contractor.html"), "Hiring a Contractor"),
+        ("second-story-vs-teardown", href("second-story-vs-teardown.html"), "Second Story vs Teardown"),
+        ("kitchen-remodel-planning", href("kitchen-remodel-planning.html"), "Kitchen Remodel Planning"),
+        ("bathroom-waterproofing-guide", href("bathroom-waterproofing-guide.html"), "Bathroom Waterproofing"),
+        ("home-addition-planning", href("home-addition-planning.html"), "Home Addition Planning"),
+        ("bid-comparison", href("bid-comparison.html"), "Bid Comparison"),
+        ("red-flags-hiring", href("red-flags-hiring.html"), "Red Flags Hiring"),
+        ("project-timeline", href("project-timeline.html"), "Project Timeline"),
         ("materials", href("materials.html"), "Materials Index"),
         ("contact", href("contact.html"), "Contact"),
         ("glossary", href("glossary.html"), "Glossary"),
@@ -977,6 +995,11 @@ def footer_html(prefix: str = "./", active: str = "") -> str:
         ("lynnwood", f"{prefix}lynnwood.html", "Lynnwood hub"),
         ("ballard", f"{prefix}ballard.html", "Ballard hub"),
         ("magnolia", f"{prefix}magnolia.html", "Magnolia hub"),
+        ("mukilteo", f"{prefix}mukilteo.html", "Mukilteo hub"),
+        ("kirkland", f"{prefix}kirkland.html", "Kirkland hub"),
+        ("bothell", f"{prefix}bothell.html", "Bothell hub"),
+        ("queen-anne", f"{prefix}queen-anne.html", "Queen Anne hub"),
+        ("phinney-ridge", f"{prefix}phinney-ridge.html", "Phinney Ridge hub"),
         ("permits", f"{prefix}permits.html", "Permit hub"),
         ("adu", f"{prefix}adu.html", "Edmonds ADU"),
         ("verify-contractor", f"{prefix}verify-contractor.html", "Verify contractor"),
@@ -989,6 +1012,14 @@ def footer_html(prefix: str = "./", active: str = "") -> str:
         ("change-orders", f"{prefix}change-orders.html", "Change orders"),
         ("coastal-waterproofing", f"{prefix}coastal-waterproofing.html", "Coastal waterproofing"),
         ("hire-questions", f"{prefix}hire-questions.html", "Hire questions"),
+        ("hiring-a-contractor", f"{prefix}hiring-a-contractor.html", "Hiring a contractor"),
+        ("second-story-vs-teardown", f"{prefix}second-story-vs-teardown.html", "Second story vs teardown"),
+        ("kitchen-remodel-planning", f"{prefix}kitchen-remodel-planning.html", "Kitchen remodel planning"),
+        ("bathroom-waterproofing-guide", f"{prefix}bathroom-waterproofing-guide.html", "Bathroom waterproofing"),
+        ("home-addition-planning", f"{prefix}home-addition-planning.html", "Home addition planning"),
+        ("bid-comparison", f"{prefix}bid-comparison.html", "Bid comparison"),
+        ("red-flags-hiring", f"{prefix}red-flags-hiring.html", "Red flags hiring"),
+        ("project-timeline", f"{prefix}project-timeline.html", "Project timeline"),
         ("materials", f"{prefix}materials.html", "Materials index"),
         ("glossary", f"{prefix}glossary.html", "Glossary"),
         ("videos", f"{prefix}videos.html", "Video library"),
@@ -1575,7 +1606,8 @@ def page_shell(
 </main>
 {contact_strip}
 {footer_html(prefix if prefix else "./", active)}
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 {chrome_script()}
 {ppg_widgets_script()}
 {extra_scripts}</body>
@@ -2317,6 +2349,41 @@ def build_about() -> str:
 
 {integrity_shield_html()}
 
+    <section class="mb-14" id="learn">
+      <div class="mb-8 border-b border-white/10 pb-4">
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Learn before you hire</span>
+        <h2 class="text-3xl font-black text-white tracking-tight">Planning hubs &amp; client tools</h2>
+        <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Educational Board guides for remodels and additions — paired with verification tools. No invented prices, licenses, or awards.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+        <a href="./hiring-a-contractor.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover block">
+          <h3 class="text-base font-black text-white mb-2">Hiring a contractor</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">L&amp;I verify path, interview habits, and how Board rankings work.</p>
+        </a>
+        <a href="./kitchen-remodel-planning.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover block">
+          <h3 class="text-base font-black text-white mb-2">Kitchen remodel planning</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Layout, allowances, and permit ownership before cabinet day.</p>
+        </a>
+        <a href="./bathroom-waterproofing-guide.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover block">
+          <h3 class="text-base font-black text-white mb-2">Bathroom waterproofing</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Wet-area systems and coastal moisture habits for Puget Sound baths.</p>
+        </a>
+        <a href="./home-addition-planning.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover block">
+          <h3 class="text-base font-black text-white mb-2">Home addition planning</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Jurisdiction, dry-in sequencing, and addition shortlist links.</p>
+        </a>
+        <a href="./second-story-vs-teardown.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover block">
+          <h3 class="text-base font-black text-white mb-2">Second story vs teardown</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Compare paths without invented cost guarantees.</p>
+        </a>
+        <div class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover">
+          <h3 class="text-base font-black text-white mb-2">Bid comparison &amp; red flags</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed"><a href="./bid-comparison.html" class="text-secondary hover:underline">Bid checklist</a> · <a href="./red-flags-hiring.html" class="text-secondary hover:underline">red flags</a> · <a href="./project-timeline.html" class="text-secondary hover:underline">timeline phases</a>.</p>
+        </div>
+      </div>
+      <p class="text-sm text-slate-500 font-light">City hubs: <a href="./mukilteo.html" class="text-secondary hover:underline">Mukilteo</a> · <a href="./kirkland.html" class="text-secondary hover:underline">Kirkland</a> · <a href="./bothell.html" class="text-secondary hover:underline">Bothell</a> · <a href="./queen-anne.html" class="text-secondary hover:underline">Queen Anne</a> · <a href="./phinney-ridge.html" class="text-secondary hover:underline">Phinney Ridge</a> · <a href="./shoreline.html" class="text-secondary hover:underline">Shoreline</a> · <a href="./lynnwood.html" class="text-secondary hover:underline">Lynnwood</a> · <a href="./ballard.html" class="text-secondary hover:underline">Ballard</a> · <a href="./magnolia.html" class="text-secondary hover:underline">Magnolia</a></p>
+    </section>
+
     <section class="bg-charcoal rounded-xl p-8 md:p-10 border border-primary/25 mb-14 relative overflow-hidden">
       <div class="absolute -bottom-20 -right-20 w-56 h-56 bg-primary/15 blur-[70px] pointer-events-none rounded-full"></div>
       <div class="relative z-10 md:flex md:items-center md:justify-between gap-8">
@@ -2394,7 +2461,7 @@ def build_additions(additions: list[dict]) -> str:
         image_alt=_hero_alt,
     )}
   <div class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
-{how_we_rank_block()}
+{how_we_rank_block(' Also see <a href="./home-addition-planning.html" class="text-secondary hover:underline">addition planning</a>, <a href="./second-story-vs-teardown.html" class="text-secondary hover:underline">second story vs teardown</a>, and <a href="./hiring-a-contractor.html" class="text-secondary hover:underline">hiring a contractor</a>.')}
 {ppg_featured("Home Addition Contractor")}
     <section id="rankings" class="mb-20">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 border-b border-white/10 pb-4 gap-3">
@@ -2495,7 +2562,7 @@ def build_kb_page(kind: str, firms: list[dict]) -> str:
         image_alt=_hero_alt,
     )}
   <div class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
-{how_we_rank_block(f' Also see <a href="./additions.html" class="text-secondary hover:underline">home additions</a> and <a href="./trades.html" class="text-secondary hover:underline">trade directories</a>.')}
+{how_we_rank_block(f' Also see <a href="./additions.html" class="text-secondary hover:underline">home additions</a>, <a href="./trades.html" class="text-secondary hover:underline">trade directories</a>, <a href="./kitchen-remodel-planning.html" class="text-secondary hover:underline">kitchen planning</a>, <a href="./bathroom-waterproofing-guide.html" class="text-secondary hover:underline">bath waterproofing</a>, and <a href="./hiring-a-contractor.html" class="text-secondary hover:underline">hiring a contractor</a>.')}
 {ppg_featured(label + " Contractor")}
     <section id="rankings" class="mb-20">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 border-b border-white/10 pb-4 gap-3">
@@ -2565,6 +2632,10 @@ def build_custom_homes(firms: list[dict]) -> str:
             "Some design-build firms appear on both lists, but this page emphasizes ground-up / lot-specific custom homes. "
             "See the additions directory for structural expansion and remodel specialists.",
         ),
+        (
+            "Where should I learn addition vs custom-home planning?",
+            "Read Home addition planning and Second story vs teardown for expansion literacy, then Hiring a contractor before deposits. Custom-home shortlists stay on this page and Edmonds custom homes.",
+        ),
     ]
     cards = "\n\n".join(firm_card(f) for f in firms)
     ppg_note = (
@@ -2581,7 +2652,7 @@ def build_custom_homes(firms: list[dict]) -> str:
         image_alt=_hero_alt,
     )}
   <div class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
-{how_we_rank_block(' Also see <a href="./additions.html" class="text-secondary hover:underline">home additions</a>, <a href="./spec-homes.html" class="text-secondary hover:underline">spec homes</a>, and <a href="./commercial.html" class="text-secondary hover:underline">commercial</a>.')}
+{how_we_rank_block(' Also see <a href="./additions.html" class="text-secondary hover:underline">home additions</a>, <a href="./home-addition-planning.html" class="text-secondary hover:underline">addition planning</a>, <a href="./hiring-a-contractor.html" class="text-secondary hover:underline">hiring a contractor</a>, <a href="./spec-homes.html" class="text-secondary hover:underline">spec homes</a>, and <a href="./commercial.html" class="text-secondary hover:underline">commercial</a>.')}
 {ppg_featured(label + " Builder", note=ppg_note)}
     <section id="rankings" class="mb-20">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 border-b border-white/10 pb-4 gap-3">
@@ -3748,7 +3819,7 @@ Sources: `/workspace/top30-addition-contractors.md`, `/workspace/bops-research-k
 
 ## Tech
 
-Multi-page static site. Tailwind CDN + Font Awesome. Relative links for GitHub Pages. JSON-LD `ItemList`, `FAQPage`, `BreadcrumbList`, and blog `Article` where applicable. Tailwind CDN is known render-blocking debt (full purge CSS is a follow-up).
+Multi-page static site. Tailwind CDN + Font Awesome. Relative links for GitHub Pages. JSON-LD `ItemList`, `FAQPage`, `BreadcrumbList`, and blog `Article` where applicable. Tailwind CDN is known render-blocking debt (full self-host Tailwind purge skipped this wave — too large / visual-break risk across 80+ pages; kept CDN + dns-prefetch).
 
 ## HTTPS / custom domain (ops — not a generator fix)
 
@@ -3825,10 +3896,23 @@ def write_sitemap(posts: list[dict]) -> None:
         "lynnwood.html",
         "ballard.html",
         "magnolia.html",
+        "mukilteo.html",
+        "kirkland.html",
+        "bothell.html",
+        "queen-anne.html",
+        "phinney-ridge.html",
         "adu-checklist.html",
         "change-orders.html",
         "coastal-waterproofing.html",
         "hire-questions.html",
+        "second-story-vs-teardown.html",
+        "kitchen-remodel-planning.html",
+        "bathroom-waterproofing-guide.html",
+        "hiring-a-contractor.html",
+        "home-addition-planning.html",
+        "bid-comparison.html",
+        "red-flags-hiring.html",
+        "project-timeline.html",
         "materials.html",
         "contact.html",
         "glossary.html",
@@ -3971,7 +4055,7 @@ def build_good_steward_page() -> str:
     steward_faqs = [
         (
             "What does a good steward do before hiring?",
-            "Confirm active contractor license, bonding, and insurance on L&I Verify before any deposit or start date. Match the business name on the contract.",
+            "Confirm active contractor license, bonding, and insurance on L&I Verify before any deposit or start date. Match the business name on the contract. See Hiring a contractor and Red flags when hiring.",
         ),
         (
             "Why does the Board publish Site Visit and PM tools?",
@@ -3980,6 +4064,10 @@ def build_good_steward_page() -> str:
         (
             "Is the Board a general contractor?",
             "The Board publishes standards and directories. Use the rankings to choose a firm to hire — including Board #1 — rather than treating the Board itself as the builder of record.",
+        ),
+        (
+            "Where are the planning hubs and bid tools?",
+            "Use Kitchen remodel planning, Bathroom waterproofing, Home addition planning, Second story vs teardown, Bid comparison, and Project timeline — all linked from Good Steward and the About page Learn section.",
         ),
     ]
     body = body.replace(
@@ -5110,6 +5198,700 @@ def build_videos_page() -> str:
 
 
 
+
+# ---------------------------------------------------------------------------
+# SEO learning hubs + city hubs + lightweight client tools (wave after d6ca6b7)
+# ---------------------------------------------------------------------------
+
+
+def build_second_story_vs_teardown_page() -> str:
+    faqs = [
+        (
+            "Is a second story always cheaper than a teardown?",
+            "Not always. Structure, foundation capacity, roof complexity, temporary housing, and permit path can erase an apparent savings. Compare written scopes — not vibes.",
+        ),
+        (
+            "Do I need engineering either way?",
+            "Often yes for second-story loads and for new foundations after teardown. Your AHJ and structural engineer set the bar; the Board does not invent stamp requirements.",
+        ),
+        (
+            "Who should I hire first?",
+            "Shortlist design-build or addition specialists from Board directories, re-verify at WA L&I, then walk Site Visit Checklist questions before deposits.",
+        ),
+        (
+            "Where does Another Story fit?",
+            "Another Story is a Board feature concept studio for exploring second-story massing ideas — not a bid, permit, or structural calculation.",
+        ),
+    ]
+    body = (
+        _hub_header(
+            "Learning hub · Additions",
+            "Second story vs teardown",
+            "An educational Board comparison for North Sound homeowners weighing a second-story addition against a full teardown-and-rebuild. Not a cost guarantee, appraisal, or structural opinion.",
+        )
+        + _hub_section(
+            "What you are really choosing",
+            f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">A second story keeps the existing footprint and neighborhood pattern but asks the current foundation, lateral system, and roof to carry new loads. A teardown resets systems and often zoning interpretation — and usually means longer vacancy, more demolition waste, and a full new-home permit path.</p>
+      <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Neither path is automatically “better.” Good stewards compare <strong class="text-white">habitability during construction</strong>, <strong class="text-white">permit jurisdiction</strong>, <strong class="text-white">engineering scope</strong>, and <strong class="text-white">written exclusions</strong> before chasing a single headline number.</p>
+      <p class="text-sm text-slate-400 font-light leading-relaxed">Official permit orientation: <a href="./permits.html" class="text-secondary hover:underline">permit hub</a>. Contractor verification: <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>.</p>""",
+            border="border-primary/25",
+        )
+        + _hub_section(
+            "Decision checklist",
+            _check_ul(
+                [
+                    "Confirm parcel jurisdiction (city vs county) before concept drawings freeze.",
+                    "Ask whether existing foundation and lateral systems were evaluated for added story loads.",
+                    "Price temporary living, storage, and weather protection as first-class line items — not afterthoughts.",
+                    "For teardown: confirm demolition, haul-off, and any asbestos/lead survey expectations in writing.",
+                    "For second story: demand a written dry-in / temporary roof plan before openings are cut.",
+                    "Shortlist firms with permitted local addition or custom-home experience; L&I Verify each legal name.",
+                ]
+            ),
+        )
+        + _hub_section(
+            "Related Board reading & tools",
+            _link_ul(
+                [
+                    ("Second story vs teardown — Edmonds post", "./posts/2026-08-09-second-story-vs-teardown-edmonds.html"),
+                    ("Stay-in-home second story Edmonds", "./posts/2026-09-14-stay-in-home-second-story-edmonds.html"),
+                    ("Second-story addition Shoreline", "./posts/2026-08-24-second-story-addition-shoreline.html"),
+                    ("Home addition planning hub", "./home-addition-planning.html"),
+                    ("Home additions directory", "./additions.html"),
+                    ("Another Story (Board feature)", "./another-story.html"),
+                    ("Project timeline (typical phases)", "./project-timeline.html"),
+                    ("Hiring a contractor hub", "./hiring-a-contractor.html"),
+                    ("Good Steward tools", "./good-steward.html"),
+                ]
+            ),
+        )
+        + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Second story vs teardown FAQ')}\n  </div>\n"
+    )
+    return page_shell(
+        "Second Story vs Teardown | Board of Project Stewardship",
+        "Educational comparison of second-story additions vs teardown-rebuild for Edmonds / King & Snohomish homeowners — Board learning hub, not a cost guarantee.",
+        "second-story-vs-teardown",
+        body,
+        [faq_ld(faqs)],
+        canonical=f"{BASE_URL}second-story-vs-teardown.html",
+        breadcrumbs=[
+            ("About", BASE_URL),
+            ("Home additions", f"{BASE_URL}additions.html"),
+            ("Second story vs teardown", f"{BASE_URL}second-story-vs-teardown.html"),
+        ],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def build_kitchen_remodel_planning_page() -> str:
+    faqs = [
+        (
+            "Do kitchen remodels always need permits?",
+            "Moving plumbing, electrical, gas, or walls usually triggers permits. Confirm with your AHJ — see the permit hub — and get the permit number in writing.",
+        ),
+        (
+            "What should a kitchen bid include?",
+            "Written scope for demo, rough-ins, cabinets, counters, appliances (owner vs contractor furnished), allowances, exclusions, and who owns inspections.",
+        ),
+        (
+            "Who ranks #1 for kitchen remodels on the Board?",
+            f"{PPG['name']} holds the Board’s editorial #1 hire ranking for the kitchen directory — {PPG['url']} — not Board ownership. Re-verify at L&I.",
+        ),
+    ]
+    body = (
+        _hub_header(
+            "Learning hub · Kitchen",
+            "Kitchen remodel planning",
+            "Board educational guide for planning a kitchen remodel in Edmonds / King &amp; Snohomish. Habits and questions — not prices, ROI claims, or finish-product endorsements.",
+        )
+        + _hub_section(
+            "Plan before you shop cabinets",
+            f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Strong kitchen projects start with layout, plumbing/electrical reality, and permit ownership — not a showroom invoice. Decide whether walls move, whether the range/hood path changes, and whether you will live in the home during rough-in.</p>
+      <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Ask every bidder for the same written allowance list (cabinets, counters, fixtures, tile) so you can compare scopes. Use <a href="./bid-comparison.html" class="text-secondary hover:underline">bid comparison checklist</a> and <a href="./hire-questions.html" class="text-secondary hover:underline">hire questions</a> side by side.</p>
+      <p class="text-sm text-slate-400 font-light leading-relaxed">Directory: <a href="./kitchen.html" class="text-secondary hover:underline">kitchen remodelers</a>. Board #1 hire ranking: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(PPG['name'])}</a>.</p>""",
+            border="border-primary/25",
+        )
+        + _hub_section(
+            "Planning checklist",
+            _check_ul(
+                [
+                    "Photograph existing plumbing, electrical panel capacity notes, and any prior remodel surprises.",
+                    "Freeze a layout sketch before ordering long-lead cabinets.",
+                    "List owner-furnished vs contractor-furnished appliances in the contract.",
+                    "Confirm who pulls mechanical/plumbing/electrical permits and who stands for inspections.",
+                    "Require a temporary kitchen / dust / access plan if you stay in place.",
+                    "L&I Verify the exact legal name on the contract before any deposit.",
+                ]
+            ),
+        )
+        + _hub_section(
+            "Related Board reading & tools",
+            _link_ul(
+                [
+                    ("Hire a kitchen remodeler (King & Snohomish)", "./posts/2026-08-12-hire-kitchen-remodeler-king-snohomish.html"),
+                    ("Kitchen addition vs remodel Edmonds", "./posts/2026-08-29-kitchen-addition-vs-remodel-edmonds.html"),
+                    ("Kitchen remodel Shoreline", "./posts/2026-09-12-kitchen-remodel-shoreline-wa.html"),
+                    ("Kitchen remodel Magnolia Seattle", "./posts/2026-09-16-kitchen-remodel-magnolia-seattle.html"),
+                    ("Kitchen remodelers directory", "./kitchen.html"),
+                    ("Hiring a contractor hub", "./hiring-a-contractor.html"),
+                    ("Change orders & allowances", "./change-orders.html"),
+                    ("Materials index", "./materials.html"),
+                    ("Site Visit Checklist", "./site-visit.html"),
+                ]
+            ),
+        )
+        + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Kitchen remodel planning FAQ')}\n  </div>\n"
+    )
+    return page_shell(
+        "Kitchen Remodel Planning | Board of Project Stewardship",
+        "Kitchen remodel planning hub from the Board of Project Stewardship — layout, permits, and bid habits for Edmonds / King & Snohomish without invented prices.",
+        "kitchen-remodel-planning",
+        body,
+        [faq_ld(faqs)],
+        canonical=f"{BASE_URL}kitchen-remodel-planning.html",
+        breadcrumbs=[
+            ("About", BASE_URL),
+            ("Kitchen", f"{BASE_URL}kitchen.html"),
+            ("Kitchen remodel planning", f"{BASE_URL}kitchen-remodel-planning.html"),
+        ],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def build_bathroom_waterproofing_guide_page() -> str:
+    faqs = [
+        (
+            "Is waterproofing the same as a coat of paint-on membrane?",
+            "Not necessarily. Systems differ (sheet, liquid, foam, pan liners). Require the waterproofing approach and responsible trade in writing, then photograph changes of plane before cover.",
+        ),
+        (
+            "Why does coastal moisture matter?",
+            "Wind-driven rain and higher ambient moisture punish weak wet-wall and ventilation details. See the coastal waterproofing checklist for PNW habits.",
+        ),
+        (
+            "Where should I shortlist bath remodelers?",
+            f"Use the Board bathrooms directory, then L&I Verify. Board #1 hire ranking links to {PPG['name']} at {PPG['url']} — not Board ownership.",
+        ),
+    ]
+    body = (
+        _hub_header(
+            "Learning hub · Bathrooms",
+            "Bathroom waterproofing guide",
+            "Educational Board guide to wet-area waterproofing habits for Puget Sound baths. Not a product endorsement, installation manual, or warranty.",
+        )
+        + _hub_section(
+            "Waterproofing is a system, not a finish",
+            """      <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Tile and paint do not waterproof a shower. The membrane, pan, curb or curbless detail, niche changes of plane, and ventilation path do. Good stewards treat cover-up as a gated milestone: photos first, then finishes.</p>
+      <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Pair this guide with the <a href="./coastal-waterproofing.html" class="text-secondary hover:underline">coastal waterproofing checklist</a> when the home sits near Puget Sound exposure, and with <a href="./hire-questions.html" class="text-secondary hover:underline">hire questions</a> when comparing bids.</p>""",
+            border="border-primary/25",
+        )
+        + _hub_section(
+            "Wet-area habits",
+            _check_ul(
+                [
+                    "Name the waterproofing system and the trade responsible for it in the written scope.",
+                    "Photograph membrane at corners, niches, benches, and pan-to-drain transitions before tile.",
+                    "Confirm fan capacity and duct termination (not into attic) in writing.",
+                    "Ask how curing / flood tests are handled before cover when the system requires them.",
+                    "Sequence exterior wall openings and window flashing if the bath remodel touches the envelope.",
+                    "Walk a moisture-related punch list before final payment; keep cut sheets in the owner file.",
+                ]
+            ),
+        )
+        + _hub_section(
+            "Related Board reading & tools",
+            _link_ul(
+                [
+                    ("PNW bathroom waterproofing essentials", "./posts/2026-08-18-pnw-bathroom-waterproofing-essentials.html"),
+                    ("Coastal waterproofing checklist", "./coastal-waterproofing.html"),
+                    ("Hire a bathroom remodeler", "./posts/2026-09-05-hire-bathroom-remodeler-king-snohomish.html"),
+                    ("Walk-in shower remodel Magnolia", "./posts/2026-08-16-walk-in-shower-remodel-magnolia.html"),
+                    ("Bathroom remodelers directory", "./bathrooms.html"),
+                    ("Materials index", "./materials.html"),
+                    ("Red flags when hiring", "./red-flags-hiring.html"),
+                    ("Good Steward", "./good-steward.html"),
+                ]
+            ),
+        )
+        + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Bathroom waterproofing FAQ')}\n  </div>\n"
+    )
+    return page_shell(
+        "Bathroom Waterproofing Guide | Board of Project Stewardship",
+        "Bathroom waterproofing guide for Puget Sound remodels — Board learning hub with wet-area habits, coastal checklist links, and no product ROI claims.",
+        "bathroom-waterproofing-guide",
+        body,
+        [faq_ld(faqs)],
+        canonical=f"{BASE_URL}bathroom-waterproofing-guide.html",
+        breadcrumbs=[
+            ("About", BASE_URL),
+            ("Bathrooms", f"{BASE_URL}bathrooms.html"),
+            ("Bathroom waterproofing", f"{BASE_URL}bathroom-waterproofing-guide.html"),
+        ],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def build_hiring_a_contractor_page() -> str:
+    faqs = [
+        (
+            "What is the first hiring step the Board recommends?",
+            "Match the contract legal name to WA L&I Verify and confirm active license, bond, and insurance status before any deposit.",
+        ),
+        (
+            "How does the Board rank firms?",
+            "Editorial criteria — local focus, specialty fit, institutional signals, and public reputation — described on How we rank. Not paid placement.",
+        ),
+        (
+            "Who is Board #1?",
+            f"{PPG['name']} holds the Board’s editorial #1 hire ranking for kitchen, bath, and additions — {PPG['url']} — not Board ownership.",
+        ),
+        (
+            "What if bids are hard to compare?",
+            "Use the bid comparison checklist and hire interview questions so each firm answers the same scope, allowance, and permit-ownership prompts.",
+        ),
+    ]
+    body = (
+        _hub_header(
+            "Learning hub · Hiring",
+            "Hiring a contractor",
+            "Board of Project Stewardship hub for homeowners hiring remodel, addition, or design-build firms in Edmonds / King &amp; Snohomish. Education and verification — not a brokerage.",
+        )
+        + _hub_section(
+            "A steward’s hiring path",
+            f"""      <ol class="list-decimal pl-5 space-y-2 text-sm text-slate-300 font-light leading-relaxed mb-4">
+        <li>Shortlist from a Board directory that matches your project type.</li>
+        <li>Re-verify each legal name at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> (companion: <a href="./verify-contractor.html" class="text-secondary hover:underline">verify contractor walkthrough</a>).</li>
+        <li>Interview with the same <a href="./hire-questions.html" class="text-secondary hover:underline">question bank</a>; watch for <a href="./red-flags-hiring.html" class="text-secondary hover:underline">red flags</a>.</li>
+        <li>Compare scopes with the <a href="./bid-comparison.html" class="text-secondary hover:underline">bid comparison checklist</a> — not sticker prices alone.</li>
+        <li>Walk <a href="./site-visit.html" class="text-secondary hover:underline">Site Visit Checklist</a> before you sign; keep change-order discipline after.</li>
+      </ol>
+      <p class="text-sm text-slate-400 font-light leading-relaxed">Read <a href="./how-we-rank.html" class="text-secondary hover:underline">how we rank</a> so you understand editorial #1 vs ownership. Board #1 hire ranking: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(PPG['name'])}</a>.</p>""",
+            border="border-primary/25",
+        )
+        + _hub_section(
+            "Related Board reading & tools",
+            _link_ul(
+                [
+                    ("Verify contractor (L&I companion)", "./verify-contractor.html"),
+                    ("Hire interview questions", "./hire-questions.html"),
+                    ("How we rank", "./how-we-rank.html"),
+                    ("Red flags when hiring", "./red-flags-hiring.html"),
+                    ("Bid comparison checklist", "./bid-comparison.html"),
+                    ("Change orders & allowances", "./change-orders.html"),
+                    ("Project timeline phases", "./project-timeline.html"),
+                    ("Good Steward tools", "./good-steward.html"),
+                    ("Home additions directory", "./additions.html"),
+                    ("Kitchen remodelers", "./kitchen.html"),
+                    ("Bathroom remodelers", "./bathrooms.html"),
+                ]
+            ),
+        )
+        + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Hiring a contractor FAQ')}\n  </div>\n"
+    )
+    return page_shell(
+        "Hiring a Contractor | Board of Project Stewardship",
+        "Hiring a contractor hub from the Board of Project Stewardship — L&I verify, interview questions, ranking methodology, and bid comparison without invented prices.",
+        "hiring-a-contractor",
+        body,
+        [faq_ld(faqs)],
+        canonical=f"{BASE_URL}hiring-a-contractor.html",
+        breadcrumbs=[
+            ("About", BASE_URL),
+            ("Good Steward", f"{BASE_URL}good-steward.html"),
+            ("Hiring a contractor", f"{BASE_URL}hiring-a-contractor.html"),
+        ],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def build_home_addition_planning_page() -> str:
+    faqs = [
+        (
+            "What permits does a home addition usually need?",
+            "Structural additions typically need building permits plus related trades permits; some lots trigger site or critical-area review. Confirm with the parcel’s AHJ via the permit hub.",
+        ),
+        (
+            "Second story or teardown?",
+            "See the second story vs teardown hub — compare engineering, habitability, and written dry-in plans before you chase a single number.",
+        ),
+        (
+            "Where do I find addition specialists?",
+            f"Board additions directory. Editorial #1 hire ranking: {PPG['name']} — {PPG['url']}. Always L&I Verify before hiring.",
+        ),
+    ]
+    body = (
+        _hub_header(
+            "Learning hub · Additions",
+            "Home addition planning",
+            "Educational Board planning hub for home additions in Edmonds / King &amp; Snohomish — sequencing, permits, and hire habits without invented timelines or dollar bands.",
+        )
+        + _hub_section(
+            "Addition projects are permit + weather stories",
+            f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Additions fail when permit ownership is fuzzy or when openings sit unprotected in North Sound weather. Freeze jurisdiction early, name who pulls permits, and require a written dry-in plan before roof or wall openings.</p>
+      <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Use <a href="./project-timeline.html" class="text-secondary hover:underline">typical project phases</a> as orientation only — ranges are “often,” not guarantees. Compare bidders with <a href="./bid-comparison.html" class="text-secondary hover:underline">bid comparison</a> and <a href="./hiring-a-contractor.html" class="text-secondary hover:underline">hiring a contractor</a>.</p>
+      <p class="text-sm text-slate-400 font-light leading-relaxed"><a href="./permits.html" class="text-secondary hover:underline">Permit hub</a> · <a href="./additions.html" class="text-secondary hover:underline">Additions directory</a> · Board #1: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(PPG['name'])}</a></p>""",
+            border="border-primary/25",
+        )
+        + _hub_section(
+            "Planning checklist",
+            _check_ul(
+                [
+                    "Confirm city vs county permitting authority for the parcel.",
+                    "Decide bump-out vs second story vs ADU-style path before detailed pricing.",
+                    "Ask for structural engineering scope boundaries in writing.",
+                    "Require temporary weather protection and sequencing for openings.",
+                    "Clarify occupied-site staging if the primary home stays lived-in.",
+                    "L&I Verify each bidder’s contract legal name; keep screenshots in the owner file.",
+                ]
+            ),
+        )
+        + _hub_section(
+            "Related Board reading & tools",
+            _link_ul(
+                [
+                    ("Edmonds home addition permit basics", "./posts/2026-08-12-edmonds-home-addition-permit-basics.html"),
+                    ("Home addition Edmonds WA", "./posts/2026-09-15-home-addition-edmonds-wa.html"),
+                    ("Home addition Shoreline WA", "./posts/2026-09-10-home-addition-shoreline-wa.html"),
+                    ("Home addition Kirkland WA", "./posts/2026-09-19-home-addition-kirkland-wa.html"),
+                    ("Home addition Bothell WA", "./posts/2026-08-20-home-addition-bothell-wa.html"),
+                    ("Second story vs teardown hub", "./second-story-vs-teardown.html"),
+                    ("Home additions directory", "./additions.html"),
+                    ("Another Story (Board feature)", "./another-story.html"),
+                    ("Site Visit Checklist", "./site-visit.html"),
+                    ("Good Steward", "./good-steward.html"),
+                ]
+            ),
+        )
+        + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Home addition planning FAQ')}\n  </div>\n"
+    )
+    return page_shell(
+        "Home Addition Planning | Board of Project Stewardship",
+        "Home addition planning hub — permits, weather sequencing, and hire habits for Edmonds / King & Snohomish from the Board of Project Stewardship.",
+        "home-addition-planning",
+        body,
+        [faq_ld(faqs)],
+        canonical=f"{BASE_URL}home-addition-planning.html",
+        breadcrumbs=[
+            ("About", BASE_URL),
+            ("Home additions", f"{BASE_URL}additions.html"),
+            ("Home addition planning", f"{BASE_URL}home-addition-planning.html"),
+        ],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def build_mukilteo_hub() -> str:
+    return build_city_hub_page(
+        "mukilteo",
+        "Mukilteo",
+        "Snohomish County",
+        "Board of Project Stewardship neighborhood hub for Mukilteo kitchen and bath remodels — official city permitting links and Board shortlists.",
+        "Mukilteo building permits run through the City of Mukilteo online permit center (SmartGov). Confirm the live city path for your parcel; do not assume Edmonds or county rules apply.",
+        [
+            ("Mukilteo Building & Permits", "https://mukilteowa.gov/207/Building-Permits"),
+            ("City of Mukilteo Public Portal (SmartGov)", "https://ci-mukilteo-wa.smartgovcommunity.com/Public/Home"),
+            ("City of Mukilteo", "https://mukilteowa.gov/"),
+        ],
+        [
+            ("Kitchen remodel Mukilteo WA", "./posts/2026-08-27-kitchen-remodel-mukilteo-wa.html"),
+            ("Bathroom remodel Mukilteo WA", "./posts/2026-08-28-bathroom-remodel-mukilteo-wa.html"),
+        ],
+        [
+            ("Kitchen remodelers", "./kitchen.html"),
+            ("Bathroom remodelers", "./bathrooms.html"),
+            ("Home additions directory", "./additions.html"),
+            ("Kitchen remodel planning", "./kitchen-remodel-planning.html"),
+            ("Permit hub", "./permits.html"),
+        ],
+    )
+
+
+def build_kirkland_hub() -> str:
+    return build_city_hub_page(
+        "kirkland",
+        "Kirkland",
+        "King County",
+        "Board hub for Kirkland home additions and remodels — MyBuildingPermit orientation and Board directories.",
+        "Kirkland development permits are applied for online through MyBuildingPermit.com per the City of Kirkland Development Services Center. Confirm parcel-specific requirements with the city.",
+        [
+            ("Apply for a Kirkland development permit", "https://www.kirklandwa.gov/Government/Departments/Development-Services-Center/Apply-for-a-Permit"),
+            ("MyBuildingPermit", "https://mybuildingpermit.com/"),
+            ("City of Kirkland", "https://www.kirklandwa.gov/"),
+        ],
+        [
+            ("Home addition Kirkland WA", "./posts/2026-09-19-home-addition-kirkland-wa.html"),
+        ],
+        [
+            ("Home additions directory", "./additions.html"),
+            ("Home addition planning", "./home-addition-planning.html"),
+            ("Kitchen remodelers", "./kitchen.html"),
+            ("Bathroom remodelers", "./bathrooms.html"),
+            ("Permit hub", "./permits.html"),
+        ],
+    )
+
+
+def build_bothell_hub() -> str:
+    return build_city_hub_page(
+        "bothell",
+        "Bothell",
+        "King & Snohomish Counties",
+        "Board hub for Bothell additions and remodels — MyBuildingPermit path and Board shortlists. Bothell spans county lines; confirm which city rules apply to your parcel.",
+        "City of Bothell accepts permit and land-use applications online through MyBuildingPermit.com. Confirm the live Permit Center path for your address.",
+        [
+            ("Bothell Permit Center", "https://www.bothellwa.gov/337/Permit-Center"),
+            ("MyBuildingPermit", "https://mybuildingpermit.com/"),
+            ("City of Bothell", "https://www.bothellwa.gov/"),
+        ],
+        [
+            ("Home addition Bothell WA", "./posts/2026-08-20-home-addition-bothell-wa.html"),
+        ],
+        [
+            ("Home additions directory", "./additions.html"),
+            ("Home addition planning", "./home-addition-planning.html"),
+            ("Kitchen remodelers", "./kitchen.html"),
+            ("Trades hub", "./trades.html"),
+            ("Permit hub", "./permits.html"),
+        ],
+    )
+
+
+def build_queen_anne_hub() -> str:
+    return build_city_hub_page(
+        "queen-anne",
+        "Queen Anne",
+        "Seattle · King County",
+        "Board hub for Queen Anne kitchen and bath projects inside Seattle — SDCI permitting orientation and Board directories.",
+        "Queen Anne is within Seattle. Construction and land-use permits typically run through SDCI and the Seattle Services Portal — not MyBuildingPermit.",
+        [
+            ("How to get a Seattle permit (SDCI)", "https://www.seattle.gov/construction-and-inspections/permits/how-do-you-get-a-permit"),
+            ("Seattle Services Portal", "https://cosaccela.seattle.gov/portal/"),
+            ("SDCI", "https://www.seattle.gov/sdci"),
+        ],
+        [
+            ("Kitchen remodel Queen Anne Seattle", "./posts/2026-08-21-kitchen-remodel-queen-anne-seattle.html"),
+            ("Bathroom remodel Queen Anne Seattle", "./posts/2026-08-22-bathroom-remodel-queen-anne-seattle.html"),
+        ],
+        [
+            ("Kitchen remodelers", "./kitchen.html"),
+            ("Bathroom remodelers", "./bathrooms.html"),
+            ("Kitchen remodel planning", "./kitchen-remodel-planning.html"),
+            ("Bathroom waterproofing guide", "./bathroom-waterproofing-guide.html"),
+            ("Permit hub", "./permits.html"),
+        ],
+    )
+
+
+def build_phinney_ridge_hub() -> str:
+    return build_city_hub_page(
+        "phinney-ridge",
+        "Phinney Ridge",
+        "Seattle · King County",
+        "Board hub for Phinney Ridge bath and remodel projects inside Seattle — SDCI permitting and Board shortlists.",
+        "Phinney Ridge is within Seattle. Expect SDCI permitting via the Seattle Services Portal. Confirm parcel-specific land-use notes with the city.",
+        [
+            ("How to get a Seattle permit (SDCI)", "https://www.seattle.gov/construction-and-inspections/permits/how-do-you-get-a-permit"),
+            ("Seattle Services Portal", "https://cosaccela.seattle.gov/portal/"),
+            ("SDCI", "https://www.seattle.gov/sdci"),
+        ],
+        [
+            ("Bathroom remodel Phinney Ridge", "./posts/2026-08-13-bathroom-remodel-phinney-ridge.html"),
+        ],
+        [
+            ("Bathroom remodelers", "./bathrooms.html"),
+            ("Bathroom waterproofing guide", "./bathroom-waterproofing-guide.html"),
+            ("Kitchen remodelers", "./kitchen.html"),
+            ("Hiring a contractor", "./hiring-a-contractor.html"),
+            ("Permit hub", "./permits.html"),
+        ],
+    )
+
+
+def build_bid_comparison_page() -> str:
+    faqs = [
+        (
+            "Does the Board publish average remodel prices?",
+            "No. The Board does not invent price bands or ROI figures. Compare written scopes, allowances, and exclusions — then obtain bids from licensed firms.",
+        ),
+        (
+            "What if one bid is much lower?",
+            "Re-read exclusions, allowance values, permit ownership, and staffing. Use red-flags hiring and L&I Verify before treating a low number as a bargain.",
+        ),
+    ]
+    body = (
+        _hub_header(
+            "Good Steward · Bids",
+            "Bid comparison checklist",
+            "A Board checklist for comparing remodel and addition bids side by side. Educational — no prices, no invented averages.",
+        )
+        + _hub_section(
+            "Compare apples to apples",
+            _check_ul(
+                [
+                    "Same rooms / square footage / structural scope described in writing.",
+                    "Same allowance list (cabinets, counters, tile, fixtures, appliances) with dollar placeholders disclosed by each bidder — do not invent Board averages.",
+                    "Exclusions listed (haul-off, engineering, temporary facilities, painting, landscaping).",
+                    "Who pulls which permits and who pays fees.",
+                    "Payment schedule tied to milestones; retainage / final payment rules.",
+                    "Warranty language and punch-list process stated.",
+                    "Legal business name matches WA L&I Verify result.",
+                    "Single steward contact named for schedule and decisions.",
+                ]
+            )
+            + f"""
+      <p class="text-sm text-slate-400 font-light mt-4">Next: <a href="./hire-questions.html" class="text-secondary hover:underline">hire questions</a> · <a href="./red-flags-hiring.html" class="text-secondary hover:underline">red flags</a> · <a href="./change-orders.html" class="text-secondary hover:underline">change orders</a> · <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">L&amp;I Verify</a></p>""",
+            border="border-primary/25",
+        )
+        + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Bid comparison FAQ')}\n  </div>\n"
+    )
+    return page_shell(
+        "Bid Comparison Checklist | Board of Project Stewardship",
+        "Bid comparison checklist for North Sound remodels — Board Good Steward tool with no invented prices or ROI claims.",
+        "bid-comparison",
+        body,
+        [faq_ld(faqs)],
+        canonical=f"{BASE_URL}bid-comparison.html",
+        breadcrumbs=[
+            ("About", BASE_URL),
+            ("Good Steward", f"{BASE_URL}good-steward.html"),
+            ("Bid comparison", f"{BASE_URL}bid-comparison.html"),
+        ],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def build_red_flags_hiring_page() -> str:
+    faqs = [
+        (
+            "Where do I verify a Washington contractor?",
+            f"Official WA L&I Verify: {LNI_URL}. The Board’s verify-contractor page is a walkthrough companion only.",
+        ),
+        (
+            "Is a low deposit always safe?",
+            "Deposit norms vary. The red flag is paying large sums before written scope, permit ownership, and L&I verification — not a specific Board percentage.",
+        ),
+    ]
+    body = (
+        _hub_header(
+            "Good Steward · Hiring",
+            "Red flags when hiring",
+            "Educational Board list of bond, insurance, and L&amp;I warning signs for homeowners. Not legal advice and not a guarantee that any single signal proves fraud.",
+        )
+        + _hub_section(
+            "Stop and verify",
+            _check_ul(
+                [
+                    "Contract legal name does not match the L&I Verify record — or license shows inactive / unbonded.",
+                    "Pressure to pay cash or large sums before a written scope and permit plan.",
+                    "Refusal to pause while you open WA L&I Verify.",
+                    "No clear answer on who pulls permits or who stands for inspections.",
+                    "Handshake-only change orders; “we’ll figure price later.”",
+                    "No proof of insurance or bond when asked — or certificates that do not name the contracting entity.",
+                    "Door-to-door urgency after a storm with no local references you can call.",
+                ]
+            )
+            + f"""
+      <p class="text-sm text-slate-300 font-light leading-relaxed mt-4 mb-2">Official source of truth: <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>. Companion walkthrough: <a href="./verify-contractor.html" class="text-secondary hover:underline">How to verify a WA contractor</a>.</p>
+      <p class="text-sm text-slate-400 font-light"><a href="./hiring-a-contractor.html" class="text-secondary hover:underline">Hiring a contractor hub</a> · <a href="./hire-questions.html" class="text-secondary hover:underline">Hire questions</a> · <a href="./how-we-rank.html" class="text-secondary hover:underline">How we rank</a></p>""",
+            border="border-primary/25",
+        )
+        + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Red flags FAQ')}\n  </div>\n"
+    )
+    return page_shell(
+        "Red Flags When Hiring | Board of Project Stewardship",
+        "Red flags when hiring a Washington contractor — Board education on L&I, bond, and insurance warning signs without invented scare statistics.",
+        "red-flags-hiring",
+        body,
+        [faq_ld(faqs)],
+        canonical=f"{BASE_URL}red-flags-hiring.html",
+        breadcrumbs=[
+            ("About", BASE_URL),
+            ("Good Steward", f"{BASE_URL}good-steward.html"),
+            ("Red flags hiring", f"{BASE_URL}red-flags-hiring.html"),
+        ],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def build_project_timeline_page() -> str:
+    faqs = [
+        (
+            "Are these durations guarantees?",
+            "No. Ranges below are “often” orientation for planning conversations. Your contract schedule, AHJ review times, and weather control the calendar.",
+        ),
+        (
+            "What usually takes longer than homeowners expect?",
+            "Design revisions, permit review/corrections, long-lead materials, and dry-in weather delays. Build contingency into occupied-site plans.",
+        ),
+    ]
+    phases = [
+        ("Discovery & feasibility", "Often 1–3 weeks", "Site visit, rough program, early jurisdiction check, photo documentation."),
+        ("Design & selections", "Often 3–10 weeks", "Layout, structural input as needed, finish allowances, written scope draft."),
+        ("Permit submittal & review", "Often 2–12+ weeks", "AHJ-dependent. Corrections are normal; do not schedule demo on optimism alone."),
+        ("Procurement & long-lead", "Often overlaps permits", "Cabinets, windows, and specialty items may gate start; get order dates in writing."),
+        ("Construction & inspections", "Often 1–9+ months", "Varies wildly by scope (bath vs second story). Inspections gate cover-up."),
+        ("Punch & closeout", "Often 1–3 weeks after substantial completion", "Written punch list, manuals, final payment retainage release."),
+    ]
+    cards = []
+    for title, timing, blurb in phases:
+        cards.append(
+            f"""      <article class="bg-charcoal border border-white/10 rounded-xl p-6 mb-3">
+        <div class="flex flex-wrap items-baseline justify-between gap-2 mb-2">
+          <h3 class="text-lg font-black text-white">{esc(title)}</h3>
+          <span class="text-xs font-bold uppercase tracking-wider text-secondary">{esc(timing)}</span>
+        </div>
+        <p class="text-sm text-slate-400 font-light leading-relaxed">{esc(blurb)}</p>
+      </article>"""
+        )
+    body = (
+        _hub_header(
+            "Good Steward · Schedule literacy",
+            "Project timeline — typical phases",
+            "Orientation to common remodel/addition phases for Edmonds / King &amp; Snohomish. <strong class=\"text-slate-200\">Ranges are “often,” not guarantees.</strong> Your signed schedule and AHJ control reality.",
+        )
+        + _hub_section(
+            "Disclaimer",
+            f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-2">The Board of Project Stewardship does not promise durations, occupancy dates, or permit turnaround. Use this page to ask better schedule questions — then put dates only in a signed contract.</p>
+      <p class="text-sm text-slate-400 font-light">Related: <a href="./home-addition-planning.html" class="text-secondary hover:underline">addition planning</a> · <a href="./pm-dashboard.html" class="text-secondary hover:underline">PM Dashboard</a> · <a href="./build-walkthrough.html" class="text-secondary hover:underline">Build Walkthrough</a> · <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">L&amp;I Verify</a></p>""",
+            border="border-primary/25",
+        )
+        + "  <div class=\"max-w-6xl mx-auto px-4 pb-4\">\n"
+        + "\n".join(cards)
+        + "\n  </div>\n"
+        + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Project timeline FAQ')}\n  </div>\n"
+    )
+    return page_shell(
+        "Project Timeline Phases | Board of Project Stewardship",
+        "Typical remodel and addition project phases for North Sound homeowners — “often” ranges with an explicit non-guarantee disclaimer from the Board of Project Stewardship.",
+        "project-timeline",
+        body,
+        [faq_ld(faqs)],
+        canonical=f"{BASE_URL}project-timeline.html",
+        breadcrumbs=[
+            ("About", BASE_URL),
+            ("Good Steward", f"{BASE_URL}good-steward.html"),
+            ("Project timeline", f"{BASE_URL}project-timeline.html"),
+        ],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
 def write_rss(posts: list[dict]) -> None:
     blog_dir = SITE_DIR / "blog"
     blog_dir.mkdir(parents=True, exist_ok=True)
@@ -5569,6 +6351,21 @@ def main(argv: list[str] | None = None) -> None:
     (SITE_DIR / "contact.html").write_text(build_contact_page(), encoding="utf-8")
     (SITE_DIR / "glossary.html").write_text(build_glossary_page(), encoding="utf-8")
     (SITE_DIR / "videos.html").write_text(build_videos_page(), encoding="utf-8")
+
+    # SEO learning hubs + more city hubs + client tools
+    (SITE_DIR / "second-story-vs-teardown.html").write_text(build_second_story_vs_teardown_page(), encoding="utf-8")
+    (SITE_DIR / "kitchen-remodel-planning.html").write_text(build_kitchen_remodel_planning_page(), encoding="utf-8")
+    (SITE_DIR / "bathroom-waterproofing-guide.html").write_text(build_bathroom_waterproofing_guide_page(), encoding="utf-8")
+    (SITE_DIR / "hiring-a-contractor.html").write_text(build_hiring_a_contractor_page(), encoding="utf-8")
+    (SITE_DIR / "home-addition-planning.html").write_text(build_home_addition_planning_page(), encoding="utf-8")
+    (SITE_DIR / "mukilteo.html").write_text(build_mukilteo_hub(), encoding="utf-8")
+    (SITE_DIR / "kirkland.html").write_text(build_kirkland_hub(), encoding="utf-8")
+    (SITE_DIR / "bothell.html").write_text(build_bothell_hub(), encoding="utf-8")
+    (SITE_DIR / "queen-anne.html").write_text(build_queen_anne_hub(), encoding="utf-8")
+    (SITE_DIR / "phinney-ridge.html").write_text(build_phinney_ridge_hub(), encoding="utf-8")
+    (SITE_DIR / "bid-comparison.html").write_text(build_bid_comparison_page(), encoding="utf-8")
+    (SITE_DIR / "red-flags-hiring.html").write_text(build_red_flags_hiring_page(), encoding="utf-8")
+    (SITE_DIR / "project-timeline.html").write_text(build_project_timeline_page(), encoding="utf-8")
 
     write_readme(posts)
     write_robots()
