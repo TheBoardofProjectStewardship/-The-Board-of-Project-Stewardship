@@ -3429,6 +3429,18 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
 {faq_section(faqs, "Edmonds custom homes FAQ")}
   </div>
 {script}"""
+    body = body + education_closing(
+        "directories",
+        "learn",
+        "permits",
+        official_keys=["lni_verify", "lni_home", "edmonds", "edmonds_permits", "mybuildingpermit"],
+        related_extra=[
+            ("Learn hub", "./learn.html"),
+            ("Home addition planning", "./home-addition-planning.html"),
+            ("Custom homes (regional)", "./custom-homes.html"),
+            ("Hiring a contractor", "./hiring-a-contractor.html"),
+        ],
+    )
 
     ld_firms = []
     for f in ranked:
@@ -5286,7 +5298,7 @@ def build_city_hub_page(
         + _hub_section(
             "Permitting orientation",
             f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-4">{esc(permit_blurb)}</p>
-      {_link_ul(permit_links, external=True)}
+      {_link_ul([("WA L&I Verify (contractor license)", LNI_URL)] + [p for p in permit_links if "lni.wa.gov" not in p[1]], external=True)}
       <p class="text-sm text-slate-500 font-light mt-4"><a href="./permits.html" class="text-secondary hover:underline">Full permit jurisdiction hub</a> · <a href="./verify-contractor.html" class="text-secondary hover:underline">Verify contractor</a> · <a href="./learn.html" class="text-secondary hover:underline">Learn hub</a></p>""",
             border="border-primary/25",
         )
@@ -7053,9 +7065,9 @@ def build_project_timeline_page() -> str:
     phases = [
         ("Discovery & feasibility", "Often 1–3 weeks", "Site visit, rough program, early jurisdiction check, photo documentation."),
         ("Design & selections", "Often 3–10 weeks", "Layout, structural input as needed, finish allowances, written scope draft."),
-        ("Permit submittal & review", "Often 2–12+ weeks", "AHJ-dependent. Corrections are normal; do not schedule demo on optimism alone."),
+        ("Permit submittal & review", "Often AHJ-dependent", "Review clocks vary by city/county and completeness. Corrections are normal; do not schedule demo on optimism alone."),
         ("Procurement & long-lead", "Often overlaps permits", "Cabinets, windows, and specialty items may gate start; get order dates in writing."),
-        ("Construction & inspections", "Often 1–9+ months", "Varies wildly by scope (bath vs second story). Inspections gate cover-up."),
+        ("Construction & inspections", "Often varies — ask AHJ & GC", "Duration depends on scope (bath vs second story), weather, and inspection cycles. Not a Board schedule promise."),
         ("Punch & closeout", "Often 1–3 weeks after substantial completion", "Written punch list, manuals, final payment retainage release."),
     ]
     cards = []
@@ -7084,7 +7096,18 @@ def build_project_timeline_page() -> str:
         + "  <div class=\"max-w-6xl mx-auto px-4 pb-4\">\n"
         + "\n".join(cards)
         + "\n  </div>\n"
-        + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Project timeline FAQ')}\n  </div>\n"
+        + f"  <div class=\"max-w-6xl mx-auto px-4 pb-8\">\n{faq_section(faqs, 'Project timeline FAQ')}\n  </div>\n"
+        + education_closing(
+            "default",
+            "hire",
+            "directories",
+            official_keys=["lni_verify", "lni_home", "mybuildingpermit", "edmonds", "seattle_how"],
+            related_extra=[
+                ("Home addition planning", "./home-addition-planning.html"),
+                ("PM Dashboard", "./pm-dashboard.html"),
+                ("Build Walkthrough", "./build-walkthrough.html"),
+            ],
+        )
     )
     return page_shell(
         "Project Timeline Phases | Board of Project Stewardship",

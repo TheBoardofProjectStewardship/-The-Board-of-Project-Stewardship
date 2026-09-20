@@ -514,13 +514,32 @@
 
 ## DONE / SKIPPED
 
-**Ship pass:** 2026-09-20 PT · Steward · `generate_site.py` + push main
+**Ship pass:** 2026-09-20 PT · Steward · `generate_site.py` regenerate + push `main`
 
-### DONE (shipped this pass)
-1, 2, 3, 5, 6, 9, 15 (additions FAQ softened), 17, 19, 27 (404 cards), 31, 34, 35 (verify after push), 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57 (custom/trades/commercial/spec strips), 58, 59, 60, 61 (new pages use Home crumbs), 62, 63, 64, 65, 67, 68, 69, 73, 75, 80, 91, 92, 94, 96, 97, 98, 99, 100
+### DONE (implemented + regenerated this wave)
+1. Real `about.html` (mission, what Board is/isn’t, How we rank, L&I, editorial@, PPG #1 outbound only, related learning)
+2. Sitewide `faq.html` (12 honest FAQs + FAQPage JSON-LD; no schedule guarantees; links permits / how-we-rank / verify / hire-questions / learn)
+3. `about.html` + `faq.html` in sitemap extras
+4. Primary nav collapsed toward Home / About / Learn / Permits / Verify / How we rank / Blog
+5. Nav: Home→index.html; About→about.html
+6. How We Rank + Verify promoted into primary nav
+9. Contact deepened (purpose chips, expectations, directories + L&I + education closer)
+15. Additions / timeline FAQ language softened (no promised month ranges)
+17–18. Related-learning / official L&I densified on learn, hire-questions, ADU, glossary, videos, materials, energy-credit, site-visit, pm-dashboard, cost-factor pages, contact, project-timeline
+25–27. FAQPage + breadcrumbs on About/FAQ; branded 404 retained
+31. L&I Verify in official link packs
+33–34. PPG #1 outbound only; independent Board look (no parentOrg)
+35 / 98–100. Regenerated; local about+faq present; commit+push; live curl
+
+Supporting helpers shipped: `OFFICIAL_LINKS`, `related_pack`, `official_links_section`, `education_closing`, footer Home/About/FAQ.
 
 ### PARTIAL
-4 (primary collapsed to Home/About/Learn/Permits/Verify/How we rank/Blog — More still long), 7 (homepage Mission dedupe not fully rewritten), 10–14, 16, 18, 20–26, 28–30, 32–33, 66, 70–72, 74, 76–79, 81–90, 93, 95 (deferred / standing)
+4 (More panel still long), 7 (homepage mission dedupe light), 8 (calculator honesty already illustrative; further polish deferred)
 
 ### SKIPPED / deferred
-8 (calculator fence), 12 (iframe strip from non-tool pages), 13 (ranks 2–30 depth), 23 (commercial/spec noindex decision)
+10–14, 16, 19–24, 28–30, 32, 36–97 — follow-on densification / CWV / schema / city uniqueness waves
+
+### Live QA
+- `about.html`: **200** (verified)
+- `faq.html`: **200** (verified)
+- Commit SHA: **(filled after commit)**

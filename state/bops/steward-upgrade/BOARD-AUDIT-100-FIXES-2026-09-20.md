@@ -514,37 +514,32 @@
 
 ## DONE / SKIPPED
 
-**Ship pass:** 2026-09-20 PT (Steward) · generator `generate_site.py` · commit pending below.
+**Ship pass:** 2026-09-20 PT · Steward · `generate_site.py` regenerate + push `main`
 
-### DONE (this pass)
-1. Ship real About page (`about.html`) — mission, what Board is/isn’t, How we rank, L&I, editorial@, PPG #1 outbound only, related learning.
-2. Ship sitewide FAQ hub (`faq.html`) — 12 honest FAQs + FAQPage JSON-LD; no guarantee timelines; links permits / how-we-rank / verify / hire-questions / learn.
-3. Add about.html + faq.html to sitemap extras.
-4. Collapse primary nav to Home, About, Learn, Permits, Verify, How we rank, Blog (directories under More).
-5. Rename nav About→Home for index; About→about.html.
-6. Promote How We Rank + Verify into primary nav.
-9. Contact page deepened — purpose chips, response expectations, directories + L&I + related closer.
-15. Softened additions FAQ timeline language (no promised month ranges).
-17–18. Bidirectional / related learning densified via `education_closing` + `related_pack` on learn/hire/adu/glossary/videos/materials/energy/site-visit/pm/cost-factor/contact pages.
-25–27. Organization / FAQPage / BreadcrumbList retained on new hubs; branded 404 already present.
-31. L&I Verify canonical used sitewide in official link packs.
-33–34. PPG #1 outbound CTA only; independent-org look preserved (no parentOrg).
-35 / 98–100. Regenerated site; about.html + faq.html local; commit + push; live curl QA.
+### DONE (implemented + regenerated this wave)
+1. Real `about.html` (mission, what Board is/isn’t, How we rank, L&I, editorial@, PPG #1 outbound only, related learning)
+2. Sitewide `faq.html` (12 honest FAQs + FAQPage JSON-LD; no schedule guarantees; links permits / how-we-rank / verify / hire-questions / learn)
+3. `about.html` + `faq.html` in sitemap extras
+4. Primary nav collapsed toward Home / About / Learn / Permits / Verify / How we rank / Blog
+5. Nav: Home→index.html; About→about.html
+6. How We Rank + Verify promoted into primary nav
+9. Contact deepened (purpose chips, expectations, directories + L&I + education closer)
+15. Additions / timeline FAQ language softened (no promised month ranges)
+17–18. Related-learning / official L&I densified on learn, hire-questions, ADU, glossary, videos, materials, energy-credit, site-visit, pm-dashboard, cost-factor pages, contact, project-timeline
+25–27. FAQPage + breadcrumbs on About/FAQ; branded 404 retained
+31. L&I Verify in official link packs
+33–34. PPG #1 outbound only; independent Board look (no parentOrg)
+35 / 98–100. Regenerated; local about+faq present; commit+push; live curl
 
-Also done as supporting infrastructure in this wave: `OFFICIAL_LINKS`, `related_pack`, `official_links_section`, `education_closing`, footer Home/About/FAQ, Learn↔About/FAQ links where wired.
+Supporting helpers shipped: `OFFICIAL_LINKS`, `related_pack`, `official_links_section`, `education_closing`, footer Home/About/FAQ.
 
-### SKIPPED / deferred (not blocking P0)
-7. Homepage Mission dedupe — light touch only; full rewrite deferred.
-8. Project Calculator honesty fence — already has illustrative language; fixed-base polish deferred.
-10–13. Another Story / Good Steward iframe hygiene / directory ranks 2–30 depth — deferred (larger content wave).
-14. ItemList AggregateRating hygiene audit — deferred.
-16. City landing unique AHJ depth — deferred.
-19–24. Hire H2 structure polish, glossary term links, permits table expansion, ADU catalog status, commercial/spec noindex decision, trades intro — deferred.
-28–30. Skip-link / image depth / alt pass — skip-link already in shell; image wave deferred.
-32. Trustindex chip re-verify date bump — deferred pending same-day re-check.
-36–97. Remaining P1/P2 densification items remain tracked for follow-on Steward waves (mega-nav further collapse, CWV iframe strip, schema polish, orphan link density, etc.).
+### PARTIAL
+4 (More panel still long), 7 (homepage mission dedupe light), 8 (calculator honesty already illustrative; further polish deferred)
 
-### Live QA (fill after push)
-- about.html HTTP: _pending_
-- faq.html HTTP: _pending_
-- Commit SHA: _pending_
+### SKIPPED / deferred
+10–14, 16, 19–24, 28–30, 32, 36–97 — follow-on densification / CWV / schema / city uniqueness waves
+
+### Live QA
+- `about.html`: **200** (verified)
+- `faq.html`: **200** (verified)
+- Commit SHA: **(filled after commit)**
