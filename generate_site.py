@@ -32,6 +32,8 @@ AUTHOR = "Board of Project Stewardship Editorial"
 OG_DEFAULT_REL = "assets/images/home-hero.webp"
 OG_DEFAULT = f"{SITE_ORIGIN}/{OG_DEFAULT_REL}"
 OG_IMAGE_ALT = "Board of Project Stewardship"
+BRAND_NAME = "Board of Project Stewardship"
+TITLE_SUFFIX = f" | {BRAND_NAME}"
 RSS_HREF = f"{SITE_ORIGIN}/blog/rss.xml"
 GITHUB_ORG = "https://github.com/TheBoardofProjectStewardship"
 GITHUB_REPO = "https://github.com/TheBoardofProjectStewardship/-The-Board-of-Project-Stewardship"
@@ -125,11 +127,31 @@ def esc(s: str) -> str:
     return html.escape(s or "", quote=True)
 
 
-def clamp_title(title: str, limit: int = 60) -> str:
-    """Keep titles roughly ≤60 characters; never cut mid-word."""
+def clamp_title(title: str, limit: int = 70) -> str:
+    """Keep titles reasonable; never cut mid-word or chop the Board name.
+
+    Prefer the full ``Board of Project Stewardship`` suffix. If the string is
+    still long, shorten the page-specific left side — never emit
+    ``Board of Project`` or ``Board of``.
+    """
     title = re.sub(r"\s+", " ", (title or "").strip())
     if len(title) <= limit:
         return title
+    if title.endswith(TITLE_SUFFIX):
+        left = title[: -len(TITLE_SUFFIX)].rstrip()
+        room = max(limit - len(TITLE_SUFFIX), 0)
+        if room < 8:
+            return BRAND_NAME
+        if len(left) <= room:
+            return f"{left}{TITLE_SUFFIX}"
+        cut = left[:room].rsplit(" ", 1)[0]
+        cut = re.sub(
+            r"(\s+(?:in|of|for|and|the|a|an|to|vs|versus|&|—|–|-))+$",
+            "",
+            cut,
+            flags=re.I,
+        ).rstrip(" |-,;:—–")
+        return f"{cut}{TITLE_SUFFIX}" if cut else BRAND_NAME
     cut = title[:limit].rsplit(" ", 1)[0].rstrip(" |-,;:")
     return cut if cut else title[:limit]
 
@@ -1162,7 +1184,6 @@ def board_organization_website_ld() -> dict:
                 "@type": "Organization",
                 "@id": "https://boardofprojectstewardship.com/#organization",
                 "name": "Board of Project Stewardship",
-                "alternateName": "Board of Project Stewardship",
                 "url": "https://boardofprojectstewardship.com/",
                 "description": BOARD_ONE_LINER,
                 "areaServed": [
