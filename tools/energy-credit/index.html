@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Board of Project Stewardship estimate worksheet for federal Energy Efficient Home Improvement Credit (25C) window limits and published Puget Sound utility window rebates. Estimates only — not tax advice.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://boardofprojectstewardship.com/energy-credit.html">
+<title>WA Window Energy Credit Estimator | Board of Project Stewardship</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config={theme:{extend:{colors:{primary:'#166534',secondary:'#4ade80'}}}}
+</script>
+<style>
+  body{font-family:Inter,system-ui,sans-serif}
+  .src a{color:#166534;text-decoration:underline}
+</style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+  <div class="bg-amber-50 border-b border-amber-200 text-amber-950 text-sm px-4 py-3">
+    <div class="max-w-3xl mx-auto">
+      <p class="leading-relaxed"><strong>Estimates only — not tax, legal, or rebate advice.</strong> Caps and rules change. Confirm eligibility, product ratings (Energy Star / NFRC U-factor), QMID where required, and utility forms before you claim anything. Re-check
+        <a class="underline font-semibold" href="https://www.irs.gov/instructions/i5695" target="_blank" rel="noopener">IRS Form 5695 instructions</a>,
+        <a class="underline font-semibold" href="https://www.pse.com/en/rebates/windows-rebates" target="_blank" rel="noopener">PSE windows rebates</a>, and
+        <a class="underline font-semibold" href="https://www.snopud.com/save-energy/residential/rebates/weatherization/" target="_blank" rel="noopener">Snohomish PUD weatherization</a>.
+      </p>
+    </div>
+  </div>
+  <div class="bg-slate-900 text-slate-200 text-xs px-4 py-2">
+    <div class="max-w-3xl mx-auto flex flex-wrap justify-between gap-2">
+      <span>Board of Project Stewardship — Good Steward Tools</span>
+      <a href="https://boardofprojectstewardship.com/energy-credit.html" class="text-secondary hover:underline" target="_parent">Open Board landing</a>
+    </div>
+  </div>
+
+  <main class="max-w-3xl mx-auto px-4 py-8">
+    <h1 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mb-2">WA window energy credit estimator</h1>
+    <p class="text-slate-600 font-light mb-6 leading-relaxed">Worksheet for Edmonds / King &amp; Snohomish homeowners comparing <strong>published</strong> federal §25C window limits with common utility rebate schedules. Numbers below are from linked public pages as of the Board’s 2026-09-20 review.</p>
+
+    <form id="calc" class="space-y-5 bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+      <div>
+        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1" for="year">Year windows placed in service</label>
+        <select id="year" class="w-full border border-slate-300 rounded-lg px-3 py-2.5">
+          <option value="2025">2025 (federal §25C still available for property placed in service in 2025)</option>
+          <option value="2026" selected>2026 or later (federal §25C ended for property after 12/31/2025)</option>
+          <option value="2024">2024</option>
+        </select>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1" for="cost">Eligible window / skylight product cost ($)</label>
+          <input id="cost" type="number" min="0" step="1" value="8000" class="w-full border border-slate-300 rounded-lg px-3 py-2.5">
+          <p class="text-xs text-slate-500 mt-1">For §25C envelope components, IRS instructions generally exclude onsite prep/install labor from the component cost. Enter only amounts you believe are eligible — this tool does not decide eligibility.</p>
+        </div>
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1" for="count">Number of windows replaced</label>
+          <input id="count" type="number" min="1" step="1" value="8" class="w-full border border-slate-300 rounded-lg px-3 py-2.5">
+        </div>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1" for="existing">Existing glazing (for utility rules)</label>
+          <select id="existing" class="w-full border border-slate-300 rounded-lg px-3 py-2.5">
+            <option value="single">Single-pane</option>
+            <option value="double_metal">Double-pane metal frame</option>
+            <option value="other">Other / not sure</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1" for="ufactor">New product U-factor band (NFRC)</label>
+          <select id="ufactor" class="w-full border border-slate-300 rounded-lg px-3 py-2.5">
+            <option value="022">U-factor 0.22 or lower</option>
+            <option value="023_030" selected>U-factor 0.23–0.30</option>
+            <option value="above">Above 0.30 / unknown</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1" for="utility">Electric / gas utility</label>
+        <select id="utility" class="w-full border border-slate-300 rounded-lg px-3 py-2.5">
+          <option value="pse">Puget Sound Energy (PSE)</option>
+          <option value="snopud">Snohomish County PUD</option>
+          <option value="none">Other / none listed here</option>
+        </select>
+      </div>
+      <label class="flex items-start gap-2 text-sm text-slate-700">
+        <input id="boost" type="checkbox" class="mt-1">
+        <span>PSE Efficiency Boost / income-qualified path (must be confirmed with PSE — higher published per-window amounts).</span>
+      </label>
+      <button type="submit" class="w-full sm:w-auto bg-primary text-white font-bold uppercase tracking-wider text-xs px-6 py-3 rounded-lg hover:bg-emerald-800">Update estimate</button>
+    </form>
+
+    <section id="results" class="mt-6 bg-slate-900 text-white rounded-xl p-5 space-y-4" aria-live="polite"></section>
+
+    <section class="mt-8 text-sm text-slate-600 space-y-3 src leading-relaxed">
+      <h2 class="text-base font-black text-slate-900">Sources (public)</h2>
+      <ul class="list-disc pl-5 space-y-2">
+        <li>IRS — Energy Efficient Home Improvement Credit / Form 5695: windows &amp; skylights 30% with <strong>$600 combined cap</strong>; annual envelope-style limit <strong>$1,200</strong> (with separate heat-pump rules). <a href="https://www.irs.gov/instructions/i5695" target="_blank" rel="noopener">Instructions for Form 5695</a>; <a href="https://www.irs.gov/credits-deductions/frequently-asked-questions-about-energy-efficient-home-improvements-and-residential-clean-energy-property-credits-energy-efficient-home-improvement-credit-qualifying-expenditures-and-credit-amount" target="_blank" rel="noopener">IRS 25C FAQ</a>.</li>
+        <li>IRS OBBB FAQs — §25C not allowed for property placed in service after <strong>December 31, 2025</strong>. <a href="https://www.irs.gov/newsroom/faqs-for-modification-of-sections-25c-25d-25e-30c-30d-45l-45w-and-179d-under-public-law-119-21-139-stat-72-july-4-2025-commonly-known-as-the-one-big-beautiful-bill-obbb" target="_blank" rel="noopener">IRS OBBB energy credit FAQs</a>.</li>
+        <li>PSE windows rebate page (purchase/install through 12/31/2026 per PSE page; apply within 60 days): standard published amounts include <strong>$50</strong> or <strong>$100</strong> per qualifying window by U-factor / existing type, with published program caps; Efficiency Boost amounts higher. <a href="https://www.pse.com/en/rebates/windows-rebates" target="_blank" rel="noopener">pse.com/en/rebates/windows-rebates</a>.</li>
+        <li>Snohomish PUD weatherization: published <strong>$100</strong> per replaced single-pane window; <strong>$50</strong> for qualifying double-pane metal-frame replacements; U-0.30 or lower; PUD-registered contractor; electric heat. <a href="https://www.snopud.com/save-energy/residential/rebates/weatherization/" target="_blank" rel="noopener">snopud.com weatherization rebates</a>.</li>
+      </ul>
+      <p>Board of Project Stewardship publishes standards and directories. This worksheet does not file your taxes or submit a utility rebate.</p>
+    </section>
+  </main>
+<script>
+(function(){
+  const $ = (id) => document.getElementById(id);
+  function money(n){ return (Math.max(0, Math.round(n))).toLocaleString('en-US', {style:'currency', currency:'USD', maximumFractionDigits:0}); }
+  function calc(){
+    const year = $('year').value;
+    const cost = Math.max(0, Number($('cost').value)||0);
+    const count = Math.max(0, Math.floor(Number($('count').value)||0));
+    const existing = $('existing').value;
+    const ufactor = $('ufactor').value;
+    const utility = $('utility').value;
+    const boost = $('boost').checked;
+
+    let federal = 0, federalNote = '';
+    if (year === '2026') {
+      federal = 0;
+      federalNote = 'Federal §25C is not allowed for property placed in service after Dec 31, 2025 (IRS OBBB FAQs). Enter 2025 if that is when units were placed in service.';
+    } else {
+      const raw = cost * 0.30;
+      federal = Math.min(raw, 600);
+      federalNote = 'Published §25C treatment for exterior windows/skylights: 30% of eligible costs, combined cap $600 (within the broader annual limits on Form 5695). Energy Star / QMID rules still apply — this worksheet does not verify products.';
+    }
+
+    let utilityAmt = 0, utilityNote = 'No published utility schedule selected.';
+    if (utility === 'pse') {
+      if (ufactor === 'above' || existing === 'other') {
+        utilityNote = 'PSE amounts depend on existing window type and new U-factor. Pick a listed band or confirm on PSE’s rebate table before estimating.';
+      } else {
+        let per = 0;
+        if (boost) {
+          per = 200;
+          utilityNote = 'PSE Efficiency Boost published path: up to $200 per qualifying window (program caps apply; income qualification required). Confirm with PSE.';
+        } else if (existing === 'single' && ufactor === '022') {
+          per = 100;
+          utilityNote = 'PSE published standard path example: $100 per window for U-factor 0.22 or lower replacing single-pane (subject to PSE caps / primary heat rules).';
+        } else if (existing === 'single' && ufactor === '023_030') {
+          per = 50;
+          utilityNote = 'PSE published standard path example: $50 per window for U-factor 0.23–0.30 replacing single-pane (subject to PSE caps).';
+        } else if (existing === 'double_metal' && ufactor === '022') {
+          per = 100;
+          utilityNote = 'PSE table includes higher amounts for low-U replacements of certain existing types — confirm your row on pse.com before claiming.';
+        } else {
+          utilityNote = 'Your PSE combination may not match a simple published row. Use PSE’s current table.';
+        }
+        let cap = boost ? 2000 : (per >= 100 ? 1500 : 750);
+        utilityAmt = Math.min(per * count, cap);
+        utilityNote += ' Worksheet applies a published program-style cap of ' + money(cap) + ' for this estimate path.';
+      }
+    } else if (utility === 'snopud') {
+      if (ufactor === 'above') {
+        utilityNote = 'SnoPUD requires new windows U-0.30 or lower (and other rules).';
+      } else if (existing === 'single') {
+        utilityAmt = 100 * count;
+        utilityNote = 'SnoPUD published: $100 per replaced single-pane window (electric heat, PUD-registered contractor, specs apply). No automatic cap modeled here — confirm with PUD.';
+      } else if (existing === 'double_metal') {
+        utilityAmt = 50 * count;
+        utilityNote = 'SnoPUD published: $50 per qualifying double-pane metal-frame replacement. Confirm current weatherization page.';
+      } else {
+        utilityNote = 'Select existing glazing type for a SnoPUD published per-window estimate.';
+      }
+    }
+
+    const total = federal + utilityAmt;
+    $('results').innerHTML = `
+      <h2 class="text-lg font-black tracking-tight">Estimate summary</h2>
+      <div class="grid sm:grid-cols-3 gap-3 text-sm">
+        <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-slate-400 text-xs uppercase tracking-wider mb-1">Federal §25C (est.)</div><div class="text-2xl font-black text-secondary">${money(federal)}</div></div>
+        <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-slate-400 text-xs uppercase tracking-wider mb-1">Utility rebate (est.)</div><div class="text-2xl font-black text-secondary">${money(utilityAmt)}</div></div>
+        <div class="bg-white/5 rounded-lg p-3 border border-white/10"><div class="text-slate-400 text-xs uppercase tracking-wider mb-1">Combined (est.)</div><div class="text-2xl font-black text-white">${money(total)}</div></div>
+      </div>
+      <p class="text-sm text-slate-300 leading-relaxed"><strong class="text-white">Federal note:</strong> ${federalNote}</p>
+      <p class="text-sm text-slate-300 leading-relaxed"><strong class="text-white">Utility note:</strong> ${utilityNote}</p>
+      <p class="text-xs text-slate-400">Combined total stacks federal tax credit (if any) with a utility rebate estimate. Stacking, taxable income limits, and “placed in service” timing can reduce what you actually receive.</p>
+    `;
+  }
+  $('calc').addEventListener('submit', function(e){ e.preventDefault(); calc(); });
+  ['year','cost','count','existing','ufactor','utility','boost'].forEach(id => $(id).addEventListener('change', calc));
+  calc();
+})();
+</script>
+</body>
+</html>

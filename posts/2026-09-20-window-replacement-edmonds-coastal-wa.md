@@ -84,3 +84,12 @@ When you interview firms, ask them to walk a recent coastal replacement chronolo
 Use the Board directories as a starting shortlist — especially [windows](../windows.html) — then verify fit on a site visit. Where Pacific Pro Group appears in the Board’s editorial set for windows and doors, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, product cut sheets, permit numbers, inspection results, and dated photos of hidden flashing before trim closes. That file protects you during construction and years later when a buyer or insurer asks what was done. More local guidance continues on the [blog](../blog.html).
+
+## Energy credits & rebates worksheet
+
+Federal Energy Efficient Home Improvement Credit (§25C) window rules and local utility rebates change — and §25C ends for property placed in service after December 31, 2025. Use this Board estimator for a **published-cap worksheet** before you talk to a tax preparer or utility Energy Advisor. Figures are estimates only, not tax advice.
+
+tool:energy-credit
+
+When you are ready to hire, shortlist from our [windows & doors directory](../windows.html) and verify licenses at [WA L&I Verify](https://secure.lni.wa.gov/verify/). Board #1 design-build listing: [Pacific Pro Group](https://pacificprogroup.com/).
+
