@@ -1,25 +1,28 @@
 {
   "used_material_urls": [
+    "https://www.schluter.com/schluter-us/en_US/",
+    "https://www.kohler.com/en",
+    "https://www.owenscorning.com/en-us/insulation",
+    "https://www.marvin.com/",
+    "https://www.benjaminmoore.com/",
+    "https://www.certainteed.com/",
+    "https://www.bc.com/",
+    "https://www.weyerhaeuser.com/woodproducts/",
+    "https://www.trex.com/",
     "https://www.strongtie.com/",
     "https://www.huberwood.com/zip-system",
     "https://www.jameshardie.com/",
-    "https://www.benjaminmoore.com/",
     "https://www.sherwin-williams.com/",
-    "https://www.certainteed.com/",
-    "https://www.schluter.com/schluter-us/en_US/",
-    "https://www.kohler.com/en",
     "https://www.andersenwindows.com/",
-    "https://www.marvin.com/",
     "https://www.milgard.com/",
-    "https://www.owenscorning.com/en-us/insulation",
-    "https://www.bc.com/",
-    "https://www.weyerhaeuser.com/woodproducts/",
     "https://www.veluxusa.com/",
-    "https://www.trex.com/",
     "https://www.thermatru.com/",
     "https://www.gaf.com/"
   ],
   "used_youtube_ids": [
+    "CbhLg85i6oA",
+    "9MD50WRgQ60",
+    "2gYfxhxcJvA",
     "i2LyNX-bXKA",
     "BYcrq2OLFwc",
     "9hPMWc22oK8",
@@ -35,6 +38,15 @@
     "knQjjjKAI_M"
   ],
   "used_photo_urls": [
+    "assets/images/posts/2026-08-28-mukilteo-bath-1.webp",
+    "assets/images/posts/2026-08-28-mukilteo-bath-2.webp",
+    "assets/images/posts/2026-08-28-mukilteo-bath-3.webp",
+    "assets/images/posts/2026-08-27-mukilteo-kitchen-1.webp",
+    "assets/images/posts/2026-08-27-mukilteo-kitchen-2.webp",
+    "assets/images/posts/2026-08-27-mukilteo-kitchen-3.webp",
+    "assets/images/posts/2026-08-26-lfp-addition-1.webp",
+    "assets/images/posts/2026-08-26-lfp-addition-2.webp",
+    "assets/images/posts/2026-08-26-lfp-addition-3.webp",
     "assets/images/posts/2026-09-19-kirkland-addition-1.webp",
     "assets/images/posts/2026-09-19-kirkland-addition-2.webp",
     "assets/images/posts/2026-09-19-kirkland-addition-3.webp",
@@ -95,9 +107,24 @@
   ],
   "last_morning_audit": "2026-09-20",
   "last_upgraded_slugs": [
-    "magnolia-plumbing-remodel-considerations",
-    "coastal-moisture-primary-bath-edmonds",
-    "kitchen-addition-vs-remodel-edmonds"
+    "bathroom-remodel-mukilteo-wa",
+    "kitchen-remodel-mukilteo-wa",
+    "home-addition-lake-forest-park"
   ],
-  "last_shared_video": "assets/videos/posts/2026-09-bath-process-shared.mp4"
+  "last_shared_video": "assets/videos/posts/2026-09-shared-waterproofing.mp4",
+  "video_skip_log": [
+    {
+      "date": "2026-09-20",
+      "reason": "reuse existing shared mp4s; Higgsfield balance ~21 \u2014 no new video spend",
+      "posts": [
+        "bathroom-remodel-mukilteo-wa",
+        "kitchen-remodel-mukilteo-wa",
+        "home-addition-lake-forest-park"
+      ],
+      "reused": [
+        "assets/videos/posts/2026-09-shared-waterproofing.mp4",
+        "assets/videos/posts/2026-09-bath-process-shared.mp4"
+      ]
+    }
+  ]
 }
