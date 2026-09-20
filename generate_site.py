@@ -2252,40 +2252,77 @@ def how_we_rank_block(extra: str = "") -> str:
 
 
 
+# Settled Project Stewardship layers (Alex 2026-09-20) — shared by Integrity Shield + homepage.
+STEWARDSHIP_LAYERS = [
+    (
+        "fa-scale-balanced",
+        "Financial Solvency",
+        "Active bonding capacity reviewed against project loads to reduce over-leveraging risk.",
+    ),
+    (
+        "fa-ruler-combined",
+        "Technical Review (McMorrough Protocol)",
+        "Portfolio review against architecture and construction reference standards using the McMorrough Protocol — an editorial lens for drawings, detailing, and completed work. Not a professional license or certification.",
+    ),
+    (
+        "fa-user-tie",
+        "Project Steward",
+        "Expectation of a designated project steward for continuity (no salesman handoffs).",
+    ),
+    (
+        "fa-map-location-dot",
+        "Local Mastery",
+        "Proven navigation of Edmonds Bowl height restrictions, permits, and critical areas across King and Snohomish jurisdictions.",
+    ),
+    (
+        "fa-id-card",
+        "WA L&I License",
+        "Preference for firms with active Washington contractor registration. Homeowners should re-verify status at L&I Verify before hiring.",
+    ),
+    (
+        "fa-stamp",
+        "Permit ownership",
+        "Clear answers on who pulls and owns each permit, who schedules inspections, and who closes corrections before cover-up. The Board does not issue permits.",
+    ),
+]
+
+
 def integrity_shield_html(
     subtitle: str = (
-        "How the Board screens contractors — public records and local signals, not paid placement."
+        "Six layers the Board uses when screening contractors — public records, local mastery, and clear permit ownership. Not paid placement and not a certification product."
     ),
 ) -> str:
-    """Reusable Integrity Shield / Stewardship Systems block for homepage and Edmonds."""
-    return f"""    <section id="integrity-shield" class="mb-12">
+    """Reusable Integrity Shield block: six Project Stewardship layers in a 2×3 / 3×2 grid."""
+    cards = []
+    for icon, title, blurb in STEWARDSHIP_LAYERS:
+        if title == "WA L&I License":
+            body = (
+                f'Preference for firms with active Washington contractor registration. '
+                f'Homeowners should re-verify status at '
+                f'<a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">L&amp;I Verify</a> '
+                f'before hiring.'
+            )
+        else:
+            body = esc(blurb)
+        cards.append(f"""        <div class="bg-charcoal border border-white/10 hover:border-primary/40 rounded-xl p-6 card-hover">
+          <div class="w-11 h-11 rounded-lg bg-primary/20 border border-secondary/30 flex items-center justify-center mb-4">
+            <i class="fas {icon} text-secondary text-lg" aria-hidden="true"></i>
+          </div>
+          <h3 class="text-lg font-black text-white mb-2 tracking-tight">{esc(title)}</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">{body}</p>
+        </div>""")
+    cards_html = "\n".join(cards)
+    return f"""    <section id="integrity-shield" class="mb-14">
       <div class="mb-8 border-b border-white/10 pb-4">
         <span class="text-secondary text-xs font-bold uppercase tracking-widest">Integrity Shield</span>
-        <h2 class="text-3xl font-black text-white tracking-tight">Stewardship Systems</h2>
+        <h2 class="text-3xl font-black text-white tracking-tight flex items-center gap-3">
+          <i class="fas fa-shield-halved text-secondary" aria-hidden="true"></i>
+          <span>Six layers of project stewardship</span>
+        </h2>
         <p class="text-slate-400 font-light mt-2 max-w-3xl">{subtitle}</p>
       </div>
-      <div class="grid md:grid-cols-3 gap-4">
-        <div class="bg-charcoal border border-white/10 hover:border-primary/40 rounded-xl p-6 card-hover">
-          <div class="w-11 h-11 rounded-lg bg-primary/20 border border-secondary/30 flex items-center justify-center mb-4">
-            <i class="fas fa-id-card text-secondary text-lg"></i>
-          </div>
-          <h3 class="text-lg font-black text-white mb-2 tracking-tight">WA L&amp;I License Checks</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Preference for firms with active Washington contractor licensing. Homeowners should re-verify status at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">L&amp;I Verify</a> before hiring.</p>
-        </div>
-        <div class="bg-charcoal border border-white/10 hover:border-primary/40 rounded-xl p-6 card-hover">
-          <div class="w-11 h-11 rounded-lg bg-primary/20 border border-secondary/30 flex items-center justify-center mb-4">
-            <i class="fas fa-star text-secondary text-lg"></i>
-          </div>
-          <h3 class="text-lg font-black text-white mb-2 tracking-tight">Public Reviews</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Where available, we note third-party review aggregates from public sources. Pacific Pro Group’s Trustindex score is <strong class="text-white">{PPG['rating']} / {PPG['reviews']}</strong> as of the {YEAR} research pass.</p>
-        </div>
-        <div class="bg-charcoal border border-white/10 hover:border-primary/40 rounded-xl p-6 card-hover">
-          <div class="w-11 h-11 rounded-lg bg-primary/20 border border-secondary/30 flex items-center justify-center mb-4">
-            <i class="fas fa-map-location-dot text-secondary text-lg"></i>
-          </div>
-          <h3 class="text-lg font-black text-white mb-2 tracking-tight">Local Edmonds Focus</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Portfolio and project history matter — especially Edmonds / King–Snohomish custom and remodel work, coastal durability, and clear permit ownership.</p>
-        </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+{cards_html}
       </div>
     </section>"""
 
@@ -2406,38 +2443,7 @@ def ppg_widgets_script() -> str:
 # ---------- Page builders ----------
 
 def build_about() -> str:
-    pillars = [
-        (
-            "fa-scale-balanced",
-            "Financial Solvency",
-            "Active bonding capacity reviewed against project loads to reduce over-leveraging risk.",
-        ),
-        (
-            "fa-ruler-combined",
-            "Technical Review",
-            "Portfolio review against clear architecture/construction reference standards.",
-        ),
-        (
-            "fa-user-tie",
-            "Project Steward",
-            "Expectation of a designated project steward for continuity (no salesman handoffs).",
-        ),
-        (
-            "fa-map-location-dot",
-            "Local Mastery",
-            "Proven navigation of Edmonds “Bowl” height restrictions, permits, and critical areas.",
-        ),
-    ]
-    pillar_cards = []
-    for icon, title, blurb in pillars:
-        pillar_cards.append(f"""        <div class="bg-charcoal border border-white/10 hover:border-primary/40 rounded-xl p-6 card-hover">
-          <div class="w-11 h-11 rounded-lg bg-primary/20 border border-secondary/30 flex items-center justify-center mb-4">
-            <i class="fas {icon} text-secondary text-lg"></i>
-          </div>
-          <h3 class="text-lg font-black text-white mb-2 tracking-tight">{esc(title)}</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">{esc(blurb)}</p>
-        </div>""")
-
+    # Six stewardship layers live in STEWARDSHIP_LAYERS / integrity_shield_html().
     ctas = [
         ("./additions.html", "Browse Additions Directory", True),
         ("./custom-homes.html", "Custom Homes", False),
@@ -2679,15 +2685,7 @@ def build_about() -> str:
       </div>
     </section>
 
-    <section class="mb-14">
-      <div class="mb-8 border-b border-white/10 pb-4">
-        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Standards</span>
-        <h2 class="text-3xl font-black text-white tracking-tight">Four pillars of stewardship</h2>
-      </div>
-      <div class="grid sm:grid-cols-2 gap-4">
-{chr(10).join(pillar_cards)}
-      </div>
-    </section>
+{integrity_shield_html()}
 
     <section class="mb-14">
       <div class="mb-8 border-b border-white/10 pb-4">
@@ -2727,8 +2725,6 @@ def build_about() -> str:
       </div>
     </section>
 
-{integrity_shield_html()}
-
     <section class="mb-14" id="learn">
       <div class="mb-8 border-b border-white/10 pb-4">
         <span class="text-secondary text-xs font-bold uppercase tracking-widest">Learn before you hire</span>
@@ -2761,7 +2757,7 @@ def build_about() -> str:
           <p class="text-sm text-slate-400 font-light leading-relaxed"><a href="./bid-comparison.html" class="text-secondary hover:underline">Bid checklist</a> · <a href="./red-flags-hiring.html" class="text-secondary hover:underline">red flags</a> · <a href="./project-timeline.html" class="text-secondary hover:underline">timeline phases</a>.</p>
         </div>
       </div>
-      <p class="text-sm text-slate-400 font-light mb-3"><a href="./learn.html" class="text-secondary hover:underline font-semibold">Browse the full Learn hub</a> — permits, ADU, verify, checklists, pillars, glossary, videos, and Good Steward tools.</p>
+      <p class="text-sm text-slate-400 font-light mb-3"><a href="./learn.html" class="text-secondary hover:underline font-semibold">Browse the full Learn hub</a> — permits, ADU, verify, checklists, stewardship layers, glossary, videos, and Good Steward tools.</p>
       <p class="text-sm text-slate-500 font-light">City hubs: <a href="./edmonds.html" class="text-secondary hover:underline">Edmonds</a> · <a href="./greenwood.html" class="text-secondary hover:underline">Greenwood</a> · <a href="./lake-forest-park.html" class="text-secondary hover:underline">Lake Forest Park</a> · <a href="./mountlake-terrace.html" class="text-secondary hover:underline">Mountlake Terrace</a> · <a href="./mill-creek.html" class="text-secondary hover:underline">Mill Creek</a> · <a href="./mukilteo.html" class="text-secondary hover:underline">Mukilteo</a> · <a href="./kirkland.html" class="text-secondary hover:underline">Kirkland</a> · <a href="./bothell.html" class="text-secondary hover:underline">Bothell</a> · <a href="./queen-anne.html" class="text-secondary hover:underline">Queen Anne</a> · <a href="./phinney-ridge.html" class="text-secondary hover:underline">Phinney Ridge</a> · <a href="./shoreline.html" class="text-secondary hover:underline">Shoreline</a> · <a href="./lynnwood.html" class="text-secondary hover:underline">Lynnwood</a> · <a href="./ballard.html" class="text-secondary hover:underline">Ballard</a> · <a href="./magnolia.html" class="text-secondary hover:underline">Magnolia</a></p>
     </section>
 
@@ -4572,6 +4568,7 @@ def build_energy_credit_page() -> str:
     body = f"""  <header class="max-w-6xl mx-auto px-4 pt-10 pb-2">
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">WSEC-R prescriptive credits</h1>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Authority links (no invented dollar amounts): <a href="https://www.energy.gov/energysaver/federal-tax-credits-energy-efficiency" target="_blank" rel="noopener" class="text-secondary hover:underline">U.S. Department of Energy — federal energy-efficiency tax credits</a> · <a href="https://www.irs.gov/credits-deductions/energy-efficient-home-improvement-credit" target="_blank" rel="noopener" class="text-secondary hover:underline">IRS — Energy Efficient Home Improvement Credit</a> · confirm WA WSEC-R with the State Building Code Council. This Board tool does not invent tax-credit dollar amounts.</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Upload plan PDFs to auto-suggest WSEC-R 2021 single-family / townhouse credits, then confirm dwelling size, Table R406.2 fuel normalization, and Table R406.3 options.</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">WSEC-R 2021 single-family prescriptive path credit worksheet (fuel normalization + Table R406.3). When you hire, shortlist from Board directories — Board #1: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a>.</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Also: <a href="{public_tool_href('site-visit')}" class="text-secondary hover:underline">Site Visit Checklist</a> · <a href="./posts/2026-09-20-window-replacement-edmonds-coastal-wa.html" class="text-secondary hover:underline">Edmonds window replacement guide</a>.</p>
@@ -8328,28 +8325,129 @@ def build_meta_redirect(target_rel: str, title: str, blurb: str) -> str:
 """
 
 
+
+def build_directory_page() -> str:
+    """Directories index hub — ends soft-404 on /directory.html."""
+    cards = [
+        ("./additions.html", "Additions", "Top editorial shortlist for Edmonds / North Sound additions."),
+        ("./kitchen.html", "Kitchen", "Kitchen remodel directory with Board #1 hire path."),
+        ("./bathrooms.html", "Bathrooms", "Bath remodel shortlist — waterproofing discipline emphasized."),
+        ("./custom-homes.html", "Custom homes", "Custom home builders serving King & Snohomish."),
+        ("./edmonds-custom-homes.html", "Edmonds custom homes", "Edmonds-focused Top 30 custom home shortlist."),
+        ("./commercial.html", "Commercial", "Commercial GC shortlist — research aid, not a brokerage."),
+        ("./spec-homes.html", "Spec homes", "Spec / production builders under Board review."),
+        ("./trades.html", "Trades hub", "Plumber, electrician, HVAC, and specialty trades."),
+        ("./plumber.html", "Plumber", "Trade directory — re-verify every firm at WA L&I."),
+        ("./electrician.html", "Electrician", "Trade directory — re-verify every firm at WA L&I."),
+        ("./verify-contractor.html", "Verify contractor", "Walkthrough companion to official L&I Verify."),
+        ("./how-we-rank.html", "How we rank", "Published editorial method — not paid placement."),
+    ]
+    parts = []
+    for href, title, blurb in cards:
+        parts.append(
+            "        <a href=\"%s\" class=\"bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 block no-underline card-hover\">\n"
+            "          <h2 class=\"text-lg font-black text-white mb-1 tracking-tight\">%s</h2>\n"
+            "          <p class=\"text-sm text-slate-400 font-light leading-relaxed\">%s</p>\n"
+            "        </a>\n" % (href, esc(title), esc(blurb))
+        )
+    lis = "".join(parts)
+    body = (
+        _hub_header(
+            "Directories",
+            "Board contractor directories",
+            "Editorial shortlists for Edmonds, King County, and Snohomish County. Listing is a research aid — not a government certification. Re-verify every firm at WA L&I before deposits. Board #1 hire ranking links outbound to Pacific Pro Group; the Board does not own that firm.",
+        )
+        + "  <section class=\"max-w-6xl mx-auto px-4 pb-8\">\n"
+        + "    <div class=\"grid sm:grid-cols-2 lg:grid-cols-3 gap-4\">\n"
+        + lis
+        + "    </div>\n"
+        + "    <p class=\"text-sm text-slate-500 font-light mt-8\"><a href=\"./learn.html\" class=\"text-secondary hover:underline\">Learn hub</a> · <a href=\"./permits.html\" class=\"text-secondary hover:underline\">Permit hub</a> · <a href=\""
+        + LNI_URL
+        + "\" target=\"_blank\" rel=\"noopener\" class=\"text-secondary hover:underline\">WA L&amp;I Verify</a> · <a href=\"./about.html\" class=\"text-secondary hover:underline\">About the Board</a></p>\n"
+        + "  </section>\n"
+        + integrity_shield_html(
+            "Directory rankings inherit these six stewardship layers — public signals and local mastery, not paid placement."
+        )
+    )
+    return page_shell(
+        "Directories | Board of Project Stewardship",
+        "Board of Project Stewardship contractor directories for Edmonds / King & Snohomish — additions, kitchen, bath, custom homes, trades. Editorial shortlists; re-verify at WA L&I.",
+        "directory",
+        body,
+        canonical=f"{BASE_URL}directory.html",
+        breadcrumbs=[("Home", BASE_URL), ("Directories", f"{BASE_URL}directory.html")],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def build_redirect_page(target: str, title: str) -> str:
+    """Static HTML redirect for plural slug soft-404s."""
+    return (
+        "<!DOCTYPE html>\n<html lang=\"en\"><head><meta charset=\"utf-8\">"
+        f"<meta http-equiv=\"refresh\" content=\"0; url={target}\">"
+        f"<link rel=\"canonical\" href=\"{BASE_URL}{target.lstrip('./')}\">"
+        f"<title>{esc(title)} — redirect</title>"
+        f"<script>location.replace({target!r});</script></head>"
+        f"<body class=\"bg-obsidian text-slate-300 p-8\"><p>Moved to <a href=\"{target}\">{esc(title)}</a>.</p></body></html>\n"
+    )
+
+
 def build_write_page() -> str:
+    """Draft contribution form — mailto editorial desk (GitHub Pages; no Netlify Forms)."""
     extra_scripts = """  <script>
   (function () {
+    var INBOX = __INBOX__;
     var btn = document.getElementById('btn-preview');
     var body = document.getElementById('post-body');
     var box = document.getElementById('md-preview');
     var out = document.getElementById('md-preview-body');
-    if (!btn || !body || !box || !out) return;
-    btn.addEventListener('click', function () {
-      var open = !box.classList.contains('hidden');
-      if (open) {
-        box.classList.add('hidden');
-        btn.textContent = 'Toggle preview';
-        return;
-      }
-      out.textContent = body.value || '(empty)';
-      box.classList.remove('hidden');
-      btn.textContent = 'Hide preview';
+    if (btn && body && box && out) {
+      btn.addEventListener('click', function () {
+        var open = !box.classList.contains('hidden');
+        if (open) {
+          box.classList.add('hidden');
+          btn.textContent = 'Toggle preview';
+          return;
+        }
+        out.textContent = body.value || '(empty)';
+        box.classList.remove('hidden');
+        btn.textContent = 'Hide preview';
+      });
+    }
+    var form = document.getElementById('blog-submission');
+    if (!form) return;
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      var name = (document.getElementById('submitter-name') || {}).value || '';
+      var email = (document.getElementById('submitter-email') || {}).value || '';
+      var title = (document.getElementById('post-title') || {}).value || '';
+      var category = (document.getElementById('post-category') || {}).value || '';
+      var slug = (document.getElementById('post-slug') || {}).value || '';
+      var description = (document.getElementById('post-description') || {}).value || '';
+      var article = (document.getElementById('post-body') || {}).value || '';
+      var subject = encodeURIComponent('Board blog draft: ' + title);
+      var lines = [
+        'Name: ' + name,
+        'Email: ' + email,
+        'Title: ' + title,
+        'Category: ' + category,
+        'Suggested slug: ' + slug,
+        'Description: ' + description,
+        '',
+        '--- Article body (Markdown) ---',
+        article,
+        '',
+        'I understand this draft is for editorial review and will not appear live until approved.'
+      ];
+      var mailto = 'mailto:' + INBOX + '?subject=' + subject + '&body=' + encodeURIComponent(lines.join('\\n'));
+      window.location.href = mailto;
     });
   })();
   </script>
-"""
+""".replace("__INBOX__", json.dumps(EDITORIAL_EMAIL))
     body = f"""{hero(
         "Open publishing · Moderation gate",
         "Contribute to the Blog",
@@ -8370,13 +8468,11 @@ def build_write_page() -> str:
     <div class="bg-primary/10 border border-secondary/30 rounded-xl p-4 mb-6 flex gap-3 items-start">
       <i class="fas fa-circle-info text-secondary mt-0.5"></i>
       <div class="text-sm text-slate-300 font-light leading-relaxed">
-        <p class="mb-2"><strong class="text-white font-semibold">Reviewed before live.</strong> Drafts go to the Board inbox. Editors check facts, L&amp;I honesty, and Board directory #1 attribution rules before publishing under <em>Board of Project Stewardship Editorial</em>.</p>
+        <p class="mb-2"><strong class="text-white font-semibold">Reviewed before live.</strong> This form opens your email client to <a href="mailto:{EDITORIAL_EMAIL}" class="text-secondary hover:underline">{EDITORIAL_EMAIL}</a> — a review-only inbox on GitHub Pages (no Netlify Forms). Editors check facts, L&amp;I honesty, and Board directory #1 attribution rules before publishing under <em>Board of Project Stewardship Editorial</em>.</p>
         <p class="text-xs text-slate-500 mb-0">Do not invent ratings. PPG links: <a href="https://pacificprogroup.com/" class="text-secondary hover:underline" target="_blank" rel="noopener">https://pacificprogroup.com/</a> only. Re-verify WA L&amp;I before recommending any contractor.</p>
       </div>
     </div>
-    <form name="blog-submission" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/blog.html" class="bg-charcoal border border-white/10 rounded-xl p-6 sm:p-8 space-y-5 shadow-glow-sleek">
-      <input type="hidden" name="form-name" value="blog-submission">
-      <p class="hidden"><label>Don’t fill this out: <input name="bot-field"></label></p>
+    <form id="blog-submission" name="blog-submission" class="bg-charcoal border border-white/10 rounded-xl p-6 sm:p-8 space-y-5 shadow-glow-sleek">
       <div class="grid sm:grid-cols-2 gap-4">
         <div>
           <label for="submitter-name" class="block text-[11px] uppercase tracking-widest text-slate-400 font-bold mb-1">Your name</label>
@@ -8429,9 +8525,10 @@ def build_write_page() -> str:
         <label for="agree-review" class="text-sm text-slate-400 font-light leading-relaxed">I understand this draft is submitted for review and will not appear live until Board editorial approves it.</label>
       </div>
       <div class="pt-2 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
-        <button type="submit" class="inline-flex justify-center items-center gap-2 px-6 py-3 rounded-lg bg-primary text-white text-xs font-bold uppercase tracking-widest hover:bg-emerald-700 transition shadow-glow-sleek">Submit for review</button>
+        <button type="submit" class="inline-flex justify-center items-center gap-2 px-6 py-3 rounded-lg bg-primary text-white text-xs font-bold uppercase tracking-widest hover:bg-emerald-700 transition shadow-glow-sleek">Email draft for review</button>
         <a href="./blog.html" class="text-center text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-secondary transition">← Back to magazine</a>
       </div>
+      <p class="text-[11px] text-slate-500 font-light">Opens your mail app to {EDITORIAL_EMAIL}. If nothing opens, email that address directly with your draft attached.</p>
     </form>
   </div>
 """
@@ -8750,7 +8847,19 @@ def main(argv: list[str] | None = None) -> None:
     (SITE_DIR / "energy-credit.html").write_text(build_energy_credit_page(), encoding="utf-8")
     (SITE_DIR / "site-visit.html").write_text(build_site_visit_page(), encoding="utf-8")
     (SITE_DIR / "pm-dashboard.html").write_text(build_pm_dashboard_page(), encoding="utf-8")
+    (SITE_DIR / "directory.html").write_text(build_directory_page(), encoding="utf-8")
+    (SITE_DIR / "kitchens.html").write_text(build_redirect_page("./kitchen.html", "Kitchen directory"), encoding="utf-8")
+    (SITE_DIR / "plumbing.html").write_text(build_redirect_page("./plumber.html", "Plumber directory"), encoding="utf-8")
     (SITE_DIR / "write.html").write_text(build_write_page(), encoding="utf-8")
+    (SITE_DIR / "directory.html").write_text(build_directory_hub(), encoding="utf-8")
+    (SITE_DIR / "kitchens.html").write_text(
+        build_meta_redirect("kitchen.html", "Kitchens directory moved", "The kitchens hub now lives at"),
+        encoding="utf-8",
+    )
+    (SITE_DIR / "plumbing.html").write_text(
+        build_meta_redirect("plumber.html", "Plumbing directory moved", "The plumbing hub now lives at"),
+        encoding="utf-8",
+    )
     (SITE_DIR / "404.html").write_text(build_404_page(), encoding="utf-8")
 
     # Steward hubs (P0/P1/P2)

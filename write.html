@@ -334,13 +334,11 @@
     <div class="bg-primary/10 border border-secondary/30 rounded-xl p-4 mb-6 flex gap-3 items-start">
       <i class="fas fa-circle-info text-secondary mt-0.5"></i>
       <div class="text-sm text-slate-300 font-light leading-relaxed">
-        <p class="mb-2"><strong class="text-white font-semibold">Reviewed before live.</strong> Drafts go to the Board inbox. Editors check facts, L&amp;I honesty, and Board directory #1 attribution rules before publishing under <em>Board of Project Stewardship Editorial</em>.</p>
+        <p class="mb-2"><strong class="text-white font-semibold">Reviewed before live.</strong> This form opens your email client to <a href="mailto:editorial@boardofprojectstewardship.com" class="text-secondary hover:underline">editorial@boardofprojectstewardship.com</a> — a review-only inbox on GitHub Pages (no Netlify Forms). Editors check facts, L&amp;I honesty, and Board directory #1 attribution rules before publishing under <em>Board of Project Stewardship Editorial</em>.</p>
         <p class="text-xs text-slate-500 mb-0">Do not invent ratings. PPG links: <a href="https://pacificprogroup.com/" class="text-secondary hover:underline" target="_blank" rel="noopener">https://pacificprogroup.com/</a> only. Re-verify WA L&amp;I before recommending any contractor.</p>
       </div>
     </div>
-    <form name="blog-submission" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/blog.html" class="bg-charcoal border border-white/10 rounded-xl p-6 sm:p-8 space-y-5 shadow-glow-sleek">
-      <input type="hidden" name="form-name" value="blog-submission">
-      <p class="hidden"><label>Don’t fill this out: <input name="bot-field"></label></p>
+    <form id="blog-submission" name="blog-submission" class="bg-charcoal border border-white/10 rounded-xl p-6 sm:p-8 space-y-5 shadow-glow-sleek">
       <div class="grid sm:grid-cols-2 gap-4">
         <div>
           <label for="submitter-name" class="block text-[11px] uppercase tracking-widest text-slate-400 font-bold mb-1">Your name</label>
@@ -393,9 +391,10 @@
         <label for="agree-review" class="text-sm text-slate-400 font-light leading-relaxed">I understand this draft is submitted for review and will not appear live until Board editorial approves it.</label>
       </div>
       <div class="pt-2 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
-        <button type="submit" class="inline-flex justify-center items-center gap-2 px-6 py-3 rounded-lg bg-primary text-white text-xs font-bold uppercase tracking-widest hover:bg-emerald-700 transition shadow-glow-sleek">Submit for review</button>
+        <button type="submit" class="inline-flex justify-center items-center gap-2 px-6 py-3 rounded-lg bg-primary text-white text-xs font-bold uppercase tracking-widest hover:bg-emerald-700 transition shadow-glow-sleek">Email draft for review</button>
         <a href="./blog.html" class="text-center text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-secondary transition">← Back to magazine</a>
       </div>
+      <p class="text-[11px] text-slate-500 font-light">Opens your mail app to editorial@boardofprojectstewardship.com. If nothing opens, email that address directly with your draft attached.</p>
     </form>
   </div>
 
@@ -646,21 +645,52 @@
   </script>
   <script>
   (function () {
+    var INBOX = "editorial@boardofprojectstewardship.com";
     var btn = document.getElementById('btn-preview');
     var body = document.getElementById('post-body');
     var box = document.getElementById('md-preview');
     var out = document.getElementById('md-preview-body');
-    if (!btn || !body || !box || !out) return;
-    btn.addEventListener('click', function () {
-      var open = !box.classList.contains('hidden');
-      if (open) {
-        box.classList.add('hidden');
-        btn.textContent = 'Toggle preview';
-        return;
-      }
-      out.textContent = body.value || '(empty)';
-      box.classList.remove('hidden');
-      btn.textContent = 'Hide preview';
+    if (btn && body && box && out) {
+      btn.addEventListener('click', function () {
+        var open = !box.classList.contains('hidden');
+        if (open) {
+          box.classList.add('hidden');
+          btn.textContent = 'Toggle preview';
+          return;
+        }
+        out.textContent = body.value || '(empty)';
+        box.classList.remove('hidden');
+        btn.textContent = 'Hide preview';
+      });
+    }
+    var form = document.getElementById('blog-submission');
+    if (!form) return;
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      var name = (document.getElementById('submitter-name') || {}).value || '';
+      var email = (document.getElementById('submitter-email') || {}).value || '';
+      var title = (document.getElementById('post-title') || {}).value || '';
+      var category = (document.getElementById('post-category') || {}).value || '';
+      var slug = (document.getElementById('post-slug') || {}).value || '';
+      var description = (document.getElementById('post-description') || {}).value || '';
+      var article = (document.getElementById('post-body') || {}).value || '';
+      var subject = encodeURIComponent('Board blog draft: ' + title);
+      var lines = [
+        'Name: ' + name,
+        'Email: ' + email,
+        'Title: ' + title,
+        'Category: ' + category,
+        'Suggested slug: ' + slug,
+        'Description: ' + description,
+        '',
+        '--- Article body (Markdown) ---',
+        article,
+        '',
+        'I understand this draft is for editorial review and will not appear live until approved.'
+      ];
+      var mailto = 'mailto:' + INBOX + '?subject=' + subject + '&body=' + encodeURIComponent(lines.join('\n'));
+      window.location.href = mailto;
     });
   })();
   </script>

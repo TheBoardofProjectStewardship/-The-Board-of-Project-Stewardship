@@ -526,3 +526,33 @@
 8 (calculator — may be handled in sibling honesty commit), 10–14, 18, 21–26, 28–30, 32–33, 12, 13, 23
 
 **Live verify (PT):** about.html + faq.html HTTP 200; primary nav Home/About/Learn/Permits/Verify/How we rank; IndexNow 134 URLs HTTP 200.
+
+---
+
+## DONE (batch 2026-09-20 PT — related strips / official / honesty)
+
+Shipped after About+FAQ commit `578341a`. Regenerated site; IndexNow pinged 134 URLs (HTTP 200).
+
+| # | Item | Notes |
+|---|------|-------|
+| 8 | Calculator honesty fence | Replaced $/sqft toy with **Project Factor Guide** (qualitative drivers only; not a bid / not PPG pricing). |
+| 15 / timeline | Soften timeline guarantees | Project timeline phases use “often / AHJ-dependent / ask AHJ & GC”; explicit non-guarantee FAQ. |
+| 17 / 37 / 39+ | related_learning_strip + RELATED_LINK_PACKS | Helpers `OFFICIAL_LINKS`, `RELATED_LINK_PACKS`, `related_pack()`, `official_links_section()`, `education_closing()` wired sitewide. |
+| 36 / 63 | Official .gov helper | L&I Verify + city/county portals via reusable section; city hubs prepend L&I in permitting orientation. |
+| 40 / 19 / 80 | Hire questions depth | H2 sections (incl. bonds/insurance/warranty), process prose, education_closing. |
+| 45 / 20 / 79 | Glossary deepen + term links | Related strip + official links; key terms deep-link (change orders, punch list→final-walkthrough, L&I, ADU, permits, etc.). |
+| 46 / 76 | Videos index | education_closing + L&I / official outbound. |
+| 47 / 77 | Materials index | Depth + related strip (finishes/dirs) + official links. |
+| 48 / 49 / 50 / 51 / 96 | Tool landings | energy-credit, site-visit, pm-dashboard, build-walkthrough: education_closing packs. |
+| 54 / 66 | Cost-factor pages | All five cost-factor pages: related packs + official fee/L&I links + no-prices honesty. |
+| 55 / 67 / 82 | City hubs strips + L&I | City/region template: related learning + L&I prepended to permit link lists. |
+| 57 | Edmonds custom / dirs | Edmonds Top 30 + commercial/spec/custom education_closing or related strips; learn↔directory body links present. |
+| 68 | Permits related strip | Permits hub education_closing. |
+| 38 / 91 | Learn spider | Learn hub cards include directories (commercial/spec/edmonds) + education_closing. |
+| 9 / 75 | Contact deepen | Purpose chips + response expectations + FAQ + education_closing (prior batch overlap). |
+| 72 / 98 / 99 / 100 | Regen + IndexNow + ship ledger | `python3 generate_site.py --indexnow` OK; this DONE table. |
+
+**Still open (not this batch):** mega-nav collapse (#4), directory editorial depth ranks 2–30 (#13), CWV iframe strip from non-tool pages (#12), Trustindex dating (#32), some a11y/media leftovers.
+
+**Locks check:** No public AI names; PPG #1 outbound only; no invented ROI/license years; Board of Project Stewardship spelled out on hubs.
+

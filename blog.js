@@ -1,5 +1,5 @@
 /**
- * BOPS blog magazine filters — reads posts.json when present.
+ * Board blog magazine filters — reads posts.json when present.
  * Ghost-inspired (static): tag chips, search, author filter.
  */
 (function () {
