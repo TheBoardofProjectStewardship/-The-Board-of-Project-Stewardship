@@ -14,6 +14,8 @@ slug: "electrical-upgrades-bathroom-remodels-wa"
 
 Bathroom electrical work in Washington is about safety and moisture. Remodels that ignore capacity and protection create inspection failures — or worse, hazards.
 
+![Illustrative editorial photo — not a project photograph; bathroom remodel electrical and vanity lighting context](../assets/images/posts/2026-08-10-electrical-bath-1.webp)
+
 ## Common upgrades
 
 - GFCI-protected receptacles in bath areas
@@ -27,9 +29,25 @@ Bathroom electrical work in Washington is about safety and moisture. Remodels th
 
 Have the electrician walk the project during design, not after tile is selected. Coordinate fan routing with framing. Schedule rough electrical inspection before insulation and drywall in opened walls.
 
+![Illustrative editorial photo — not a project photograph; heated-floor mat and thermostat rough-in context for WA baths](../assets/images/posts/2026-08-10-electrical-bath-2.webp)
+
 ## Hiring
 
 Electricians should be properly licensed; GCs coordinating bath remodels should state who pulls electrical permits. Board bathroom leads on [bathrooms.html](../bathrooms.html) often manage this coordination. **Pacific Pro Group** is editorial #1 for bathroom remodels — [pacificprogroup.com](https://pacificprogroup.com/) (PACIFPG765OF). Trade hub: [trades.html](../trades.html). Verify: [L&I Verify](https://secure.lni.wa.gov/verify/).
+
+https://www.youtube.com/watch?v=pEFKSAYh9hA
+
+Illustrative process clip (editorial bath remodel process — not footage of a live Board of Project Stewardship job):
+
+[Watch the short process clip](../assets/videos/posts/2026-09-bath-process-shared.mp4)
+
+## Materials Worth Knowing
+
+Manufacturer product pages useful when comparing fixtures, waterproofing assemblies, and insulation around wet rooms (no prices or endorsements implied):
+
+- [Kohler bath fixtures](https://www.kohler.com/en) — fixtures for primary and hall baths that often drive circuit and fan upgrades
+- [Schluter Systems](https://www.schluter.com/schluter-us/en_US/) — tile waterproofing assemblies that must coordinate with device penetrations
+- [Owens Corning insulation](https://www.owenscorning.com/en-us/insulation) — thermal comfort around bath envelopes after rough electrical clears
 
 ## FAQ
 
@@ -48,6 +66,8 @@ Heat mats, niche lighting, and fog-free mirrors introduce penetrations and low-v
 
 Fans deserve duct design, not flexible foil spaghetti crushed in joist bays. Short, smooth ducts with proper exterior terminations outperform high CFM ratings stuck behind a clogged route. In two-story homes, confirm whether the fan can terminate through a sidewall or needs a roof jack — and who patches the roof.
 
+![Illustrative editorial photo — not a project photograph; bath plumbing and device-coordination context before cover](../assets/images/posts/2026-08-10-electrical-bath-3.webp)
+
 ## Panel and service reality checks
 
 Many WA homes have panels that are full or nearly full. Adding heated floors, towel warmers, and upgraded lighting may force a subpanel or service discussion. That decision belongs in early budgeting. A bathroom remodel that ignores the panel becomes an electrical project by surprise.
@@ -62,6 +82,6 @@ For **WA bath electrical upgrades**, the durable projects share a pattern: respe
 
 When you interview firms, ask them to walk a recent project chronologically: discovery, design freeze, permit submission, rough-in, inspections, weatherproofing or waterproofing documentation, and closeout. Vague storytelling is a signal; specific sequencing is a better one. Re-check every company at [L&I Verify](https://secure.lni.wa.gov/verify/) even if a friend referred them, and treat licensing as a living status rather than a one-time screenshot.
 
-Use the Board directories as a starting shortlist — especially [trades](../trades.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
+Use the Board of Project Stewardship directories as a starting shortlist — especially [trades](../trades.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden assemblies. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
