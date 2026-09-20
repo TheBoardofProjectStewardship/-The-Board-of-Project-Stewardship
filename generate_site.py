@@ -935,6 +935,8 @@ def nav_html(active: str = "", prefix: str = "") -> str:
         ("contact", href("contact.html"), "Contact"),
         ("steward", href("good-steward.html"), "Good Steward"),
         ("hire-questions", href("hire-questions.html"), "Hire Questions"),
+        ("site-visit", href("site-visit.html"), "Site Visit Checklist"),
+        ("pm-dashboard", href("pm-dashboard.html"), "PM Dashboard"),
         ("hiring-a-contractor", href("hiring-a-contractor.html"), "Hiring a Contractor"),
         ("kitchen-remodel-planning", href("kitchen-remodel-planning.html"), "Kitchen Remodel Planning"),
         ("bathroom-waterproofing-guide", href("bathroom-waterproofing-guide.html"), "Bathroom Waterproofing"),
@@ -989,7 +991,6 @@ def nav_html(active: str = "", prefix: str = "") -> str:
               {more_items}
             </div>
           </div>
-          <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="hidden lg:inline-flex items-center gap-1 ml-1 px-2.5 py-1 rounded border border-secondary/40 text-[10px] font-bold uppercase tracking-widest text-secondary hover:bg-secondary/10 transition" title="Board directory #1 hire ranking">Board #1 · PPG<span class="sr-only"> — Pacific Pro Group (opens in new window)</span></a>
         </nav>
         <button type="button" id="nav-toggle" class="md:hidden p-2 -mr-1 text-slate-200" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
           <span class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></span>
@@ -1005,6 +1006,7 @@ def nav_html(active: str = "", prefix: str = "") -> str:
 def footer_html(prefix: str = "./", active: str = "") -> str:
     explore = [
         ("about", f"{prefix}about.html", "About"),
+        ("faq", f"{prefix}faq.html", "FAQ"),
         ("directory", f"{prefix}directory.html", "Directories"),
         ("learn", f"{prefix}learn.html", "Learn"),
         ("how-we-rank", f"{prefix}how-we-rank.html", "How we rank"),
@@ -1594,7 +1596,7 @@ def page_shell(
         tools_block = ""
     story_block = another_story_embed(pfx) if include_story_embed else ""
     fav = favicon_tags(prefix if prefix else "./")
-    contact_strip = ""
+    contact_strip = contact_strip_html()
     return f"""<!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
@@ -1633,6 +1635,7 @@ def page_shell(
 ''' if include_widgets else ""}{tools_block}
 {story_block}
 </main>
+{contact_strip}
 {footer_html(prefix if prefix else "./", active)}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
@@ -2507,7 +2510,7 @@ def ppg_widgets_script() -> str:
 
 # ---------- Page builders ----------
 
-def build_about() -> str:
+def build_home() -> str:
     # Six stewardship layers live in STEWARDSHIP_LAYERS / integrity_shield_html().
     ctas = [
         ("./additions.html", "Browse Additions Directory", True),
@@ -2838,9 +2841,17 @@ def build_about() -> str:
           <h3 class="text-base font-black text-white mb-2">Bid comparison &amp; red flags</h3>
           <p class="text-sm text-slate-400 font-light leading-relaxed"><a href="./bid-comparison.html" class="text-secondary hover:underline">Bid checklist</a> · <a href="./red-flags-hiring.html" class="text-secondary hover:underline">red flags</a> · <a href="./project-timeline.html" class="text-secondary hover:underline">timeline phases</a>.</p>
         </div>
+        <a href="./about.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover block">
+          <h3 class="text-base font-black text-white mb-2">About the Board</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Independent publisher — PPG is directory #1 hire only.</p>
+        </a>
+        <a href="./faq.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover block">
+          <h3 class="text-base font-black text-white mb-2">Board FAQ</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Who we are, what we do not invent, and how to verify.</p>
+        </a>
       </div>
       <p class="text-sm text-slate-400 font-light mb-3"><a href="./learn.html" class="text-secondary hover:underline font-semibold">Browse the full Learn hub</a> — permits, ADU, verify, checklists, stewardship layers, glossary, videos, and Good Steward tools.</p>
-      <p class="text-sm text-slate-500 font-light">City hubs: <a href="./edmonds.html" class="text-secondary hover:underline">Edmonds</a> · <a href="./greenwood.html" class="text-secondary hover:underline">Greenwood</a> · <a href="./lake-forest-park.html" class="text-secondary hover:underline">Lake Forest Park</a> · <a href="./mountlake-terrace.html" class="text-secondary hover:underline">Mountlake Terrace</a> · <a href="./mill-creek.html" class="text-secondary hover:underline">Mill Creek</a> · <a href="./mukilteo.html" class="text-secondary hover:underline">Mukilteo</a> · <a href="./kirkland.html" class="text-secondary hover:underline">Kirkland</a> · <a href="./bothell.html" class="text-secondary hover:underline">Bothell</a> · <a href="./queen-anne.html" class="text-secondary hover:underline">Queen Anne</a> · <a href="./phinney-ridge.html" class="text-secondary hover:underline">Phinney Ridge</a> · <a href="./shoreline.html" class="text-secondary hover:underline">Shoreline</a> · <a href="./lynnwood.html" class="text-secondary hover:underline">Lynnwood</a> · <a href="./ballard.html" class="text-secondary hover:underline">Ballard</a> · <a href="./magnolia.html" class="text-secondary hover:underline">Magnolia</a></p>
+      <p class="text-sm text-slate-500 font-light">City hubs: <a href="./seattle.html" class="text-secondary hover:underline">Seattle</a> · <a href="./king-county.html" class="text-secondary hover:underline">King County</a> · <a href="./snohomish-county.html" class="text-secondary hover:underline">Snohomish County</a> · <a href="./edmonds.html" class="text-secondary hover:underline">Edmonds</a> · <a href="./greenwood.html" class="text-secondary hover:underline">Greenwood</a> · <a href="./lake-forest-park.html" class="text-secondary hover:underline">Lake Forest Park</a> · <a href="./mountlake-terrace.html" class="text-secondary hover:underline">Mountlake Terrace</a> · <a href="./mill-creek.html" class="text-secondary hover:underline">Mill Creek</a> · <a href="./mukilteo.html" class="text-secondary hover:underline">Mukilteo</a> · <a href="./kirkland.html" class="text-secondary hover:underline">Kirkland</a> · <a href="./bothell.html" class="text-secondary hover:underline">Bothell</a> · <a href="./queen-anne.html" class="text-secondary hover:underline">Queen Anne</a> · <a href="./phinney-ridge.html" class="text-secondary hover:underline">Phinney Ridge</a> · <a href="./shoreline.html" class="text-secondary hover:underline">Shoreline</a> · <a href="./lynnwood.html" class="text-secondary hover:underline">Lynnwood</a> · <a href="./ballard.html" class="text-secondary hover:underline">Ballard</a> · <a href="./magnolia.html" class="text-secondary hover:underline">Magnolia</a></p>
     </section>
 
     <section class="bg-charcoal rounded-xl p-8 md:p-10 border border-primary/25 mb-14 relative overflow-hidden">
@@ -2879,7 +2890,7 @@ def build_about() -> str:
         "home",
         body,
         canonical=BASE_URL,
-        breadcrumbs=[("About", BASE_URL)],
+        breadcrumbs=[("Home", BASE_URL)],
         include_story_embed=True,
         include_tools_embed=False,
     )
@@ -3943,7 +3954,14 @@ def build_trade_page(slug: str, title: str, icon: str, blurb: str, firms: list[d
             ("Plumber directory", "./plumber.html"),
             ("Electrician directory", "./electrician.html"),
             ("HVAC directory", "./hvac.html"),
-        ],
+            ("Hire interview questions", "./hire-questions.html"),
+            ("Remodel cost factors", "./remodel-cost-factors.html"),
+        ] + {
+            "tile": [("Hiring a tile contractor — Edmonds", "./posts/2026-09-01-hiring-tile-contractor-edmonds.html")],
+            "plumber": [("Magnolia plumbing remodel considerations", "./posts/2026-08-31-magnolia-plumbing-remodel-considerations.html")],
+            "electrician": [("Electrical upgrades in bathroom remodels", "./posts/2026-08-10-electrical-upgrades-bathroom-remodels-wa.html")],
+            "windows": [("Window replacement Edmonds (coastal)", "./posts/2026-09-20-window-replacement-edmonds-coastal-wa.html")],
+        }.get(slug, []),
     )
     return page_shell(
         f"{title} in Edmonds | Board of Project Stewardship",
@@ -5887,7 +5905,8 @@ def build_hire_questions_page() -> str:
 
 
 
-def build_about_page() -> str:
+def build_about() -> str:
+    """Dedicated /about.html — independent Board voice. Homepage is build_home()."""
     faqs = [
         (
             "Is the Board of Project Stewardship a general contractor?",
@@ -5895,18 +5914,30 @@ def build_about_page() -> str:
         ),
         (
             "Does the Board own Pacific Pro Group?",
-            f"No. {PPG['name']} appears as Board #1 on relevant directories because of the published ranking method — not ownership. Hire outreach goes to {PPG['url']} directly.",
+            f"No. {PPG['name']} appears as Board #1 on relevant directories because of the published ranking method — not ownership. Hire outreach goes to {PPG['url']} directly. The Board does not edit pacificprogroup.com.",
+        ),
+        (
+            "Where is the official Board website?",
+            f"https://boardofprojectstewardship.com/ only (GitHub Pages CNAME). Directory #1 hire outbound is {PPG['url']} — a separate company site.",
+        ),
+        (
+            "Do you publish prices, dollars per square foot, or ROI?",
+            "No. Compare written scopes and allowances. Read remodel cost-factor guides for drivers — the Board does not invent bid amounts or return-on-investment claims.",
         ),
         (
             "Where should homeowners start?",
             "Open the Learn hub for permits/ADU/hiring guides, shortlist from a matching directory, then re-verify every legal name at WA L&I Verify before any deposit.",
+        ),
+        (
+            "How do I contact the Board?",
+            f"Email the editorial desk at {EDITORIAL_EMAIL} for directory corrections or source questions — not contractor dispatch and not {PPG['name']} customer service.",
         ),
     ]
     body = (
         _hub_header(
             "Independent publisher · Edmonds / King & Snohomish",
             "About the Board of Project Stewardship",
-            "We publish construction standards and contractor directories so homeowners can shortlist with confidence — not ad spend. The Board does not bid or build projects.",
+            "We publish construction standards and contractor directories so homeowners can shortlist with confidence — not ad spend. The Board does not bid or build projects. Live site: https://boardofprojectstewardship.com/ only.",
         )
         + _hub_section(
             "What we are",
@@ -5914,6 +5945,7 @@ def build_about_page() -> str:
         <li>An independent editorial publisher of remodel and addition standards for Edmonds and King &amp; Snohomish Counties.</li>
         <li>A curator of ranked directories and Good Steward tools that point homeowners back to official portals.</li>
         <li>Public contact: <a href="mailto:{EDITORIAL_EMAIL}" class="text-secondary hover:underline">{EDITORIAL_EMAIL}</a>.</li>
+        <li>Official Board URL: <a href="{BASE_URL}" class="text-secondary hover:underline">{SITE_ORIGIN}/</a> (CNAME).</li>
       </ul>""",
             border="border-primary/25",
         )
@@ -5923,6 +5955,7 @@ def build_about_page() -> str:
         <li>Not a general contractor, architect, or permit agency.</li>
         <li>Not a lead marketplace and not a paid placement list.</li>
         <li>Not the owner of ranked firms — Board #1 is an editorial hire ranking outbound only.</li>
+        <li>Not a source of invented prices, ROI, licenses, years in business, or awards.</li>
       </ul>""",
         )
         + _hub_section(
@@ -5934,8 +5967,13 @@ def build_about_page() -> str:
                     ("Verify a WA contractor", "./verify-contractor.html"),
                     ("Permit jurisdiction hub", "./permits.html"),
                     ("Sitewide FAQ", "./faq.html"),
+                    ("Hire interview questions", "./hire-questions.html"),
+                    ("Remodel cost factors", "./remodel-cost-factors.html"),
                     ("Contact editorial", "./contact.html"),
                     ("Home additions directory", "./additions.html"),
+                    ("King County hub", "./king-county.html"),
+                    ("Snohomish County hub", "./snohomish-county.html"),
+                    ("Seattle hub", "./seattle.html"),
                 ]
             ),
         )
@@ -5943,7 +5981,7 @@ def build_about_page() -> str:
             "Six stewardship layers the Board uses when screening contractors — public records and local mastery, not paid placement."
         )
         + education_closing("default", "directories", "learn", official_keys=["lni_verify", "lni_hire_smart", "lni_home", "mybuildingpermit", "edmonds"])
-        + f'  <div class="max-w-6xl mx-auto px-4 pb-16">\n{faq_section(faqs, "About FAQ")}\n  </div>\n'
+        + f'  <div class="max-w-6xl mx-auto px-4 pb-16">\n{faq_section(faqs, "About FAQ")}\n      <p class="text-sm text-slate-400 font-light"><a href="./faq.html" class="text-secondary hover:underline font-semibold">Open the full Board FAQ</a>.</p>\n  </div>\n'
     )
     return page_shell(
         "About | Board of Project Stewardship",
@@ -5958,6 +5996,9 @@ def build_about_page() -> str:
         include_tools_embed=False,
         og_image_alt="About the Board of Project Stewardship — independent publisher",
     )
+
+
+build_about_page = build_about
 
 
 def build_faq_page() -> str:
@@ -6010,14 +6051,45 @@ def build_faq_page() -> str:
             "Where is the full learning library?",
             "The Learn hub indexes permits, ADU, hiring guides, cost factors, glossary, videos, and Good Steward tools.",
         ),
+        (
+            "How do I hire from a Board directory?",
+            f"Shortlist from a directory, run the same Hire interview questions on every bidder, read cost-factor guides, then contact the firm directly. Board #1 hire ranking links to {PPG['url']}. Re-verify at WA L&I first.",
+        ),
+        (
+            "Does the Board award energy credits or permits?",
+            "No. Energy-code credit tools are educational orientation. The Board does not award credits, issue permits, or set review times. Use the official city or county portal for your parcel.",
+        ),
+        (
+            "Do you have a ranked ADU-only directory?",
+            "No. The Edmonds ADU hub orients to ECDC 16.20.050 and official portals. The Board does not invent a separate ADU ranking.",
+        ),
+        (
+            "Where is the official Board website?",
+            f"https://boardofprojectstewardship.com/ only. Directory #1 hire outbound is {PPG['url']} — a separate company site the Board does not edit.",
+        ),
     ]
     body = (
         _hub_header(
             "FAQ",
             "Homeowner questions",
-            "Straight answers about the Board, rankings, verification, and permits. Educational — not legal, engineering, or bid advice.",
+            "Straight answers about the Board, rankings, verification, and permits. Educational — not legal, engineering, or bid advice. Live Board URL: https://boardofprojectstewardship.com/ only.",
         )
         + faq_section(faqs, "Frequently asked questions")
+        + related_learning_strip(
+            [
+                ("About the Board", "./about.html"),
+                ("Learn hub", "./learn.html"),
+                ("How we rank", "./how-we-rank.html"),
+                ("Hire interview questions", "./hire-questions.html"),
+                ("Remodel cost factors", "./remodel-cost-factors.html"),
+                ("Verify a WA contractor", "./verify-contractor.html"),
+                ("Permit hub", "./permits.html"),
+                ("Hiring a contractor", "./hiring-a-contractor.html"),
+                ("Editorial contact", "./contact.html"),
+            ],
+            heading="Related reading",
+            blurb="Deeper Board hubs after the FAQ — still no invented prices or ROI.",
+        )
         + education_closing(
             "default",
             "hire",
@@ -6056,6 +6128,7 @@ def build_materials_index_page() -> str:
         f"""      <article class="bg-charcoal border border-white/10 rounded-xl p-6 mb-3">
         <h3 class="text-lg font-black text-white mb-2"><a href="{url}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(name)}</a></h3>
         <p class="text-sm text-slate-400 font-light leading-relaxed">{esc(blurb)}</p>
+        <p class="text-xs text-slate-500 font-light mt-2">Official manufacturer docs linked above — not a Board price list, warranty, or installation endorsement. Confirm current product literature yourself.</p>
       </article>"""
         for name, url, blurb in materials
     )
@@ -6216,10 +6289,14 @@ def build_videos_page() -> str:
             """      <ul class="space-y-3 text-sm text-slate-300 font-light">
         <li><a href="./posts/2026-09-07-adu-planning-edmonds-wa.html" class="text-secondary hover:underline">ADU planning Edmonds</a> — includes illustrative framing context clip</li>
         <li><a href="./posts/2026-08-12-edmonds-home-addition-permit-basics.html" class="text-secondary hover:underline">Edmonds addition permit basics</a> — process clip reference</li>
+        <li><a href="./posts/2026-09-20-window-replacement-edmonds-coastal-wa.html" class="text-secondary hover:underline">Window replacement Edmonds (coastal)</a> — flashing and coastal clip context</li>
+        <li><a href="./posts/2026-08-18-pnw-bathroom-waterproofing-essentials.html" class="text-secondary hover:underline">PNW bathroom waterproofing essentials</a> — wet-area clip reference</li>
+        <li><a href="./posts/2026-08-30-coastal-moisture-primary-bath-edmonds.html" class="text-secondary hover:underline">Coastal moisture primary bath Edmonds</a> — moisture-control clip context</li>
         <li><a href="./build-walkthrough.html" class="text-secondary hover:underline">Build Walkthrough</a> — interactive stage tool</li>
         <li><a href="./another-story.html" class="text-secondary hover:underline">Another Story</a> — Board feature concept studio</li>
+        <li><a href="./bathroom-waterproofing-guide.html" class="text-secondary hover:underline">Bathroom waterproofing guide</a> — written wet-area habits</li>
       </ul>
-      <p class="text-xs text-slate-500 mt-4 font-light">Prefer the post page for captions and honesty labels. Illustrative clips are not project guarantees.</p>""",
+      <p class="text-xs text-slate-500 mt-4 font-light">Prefer the post page for captions and honesty labels. Illustrative clips are not project guarantees or scheduled Board jobs.</p>""",
         )
         + "  <div class=\"pb-12\"></div>\n"
         + education_closing("learn", "tools", "default", official_keys=["lni_verify", "lni_home"])
@@ -8545,8 +8622,10 @@ def build_meta_redirect(target_rel: str, title: str, blurb: str) -> str:
   <script>location.replace({json.dumps(dest)});</script>
 </head>
 <body style="font-family:system-ui,sans-serif;background:#0b1220;color:#e2e8f0;padding:2rem;max-width:40rem;margin:auto">
+<main id="main-content">
   <h1 style="font-size:1.25rem">{esc(title)}</h1>
   <p>{esc(blurb)} <a href="{dest}" style="color:#4ade80">{esc(target_rel)}</a>.</p>
+</main>
 </body>
 </html>
 """
@@ -8687,6 +8766,7 @@ def build_write_page() -> str:
       <ul class="space-y-2 text-sm text-slate-400 font-light list-disc pl-5">
         <li>Write as Board editorial — an independent publisher, not a contractor sales page.</li>
         <li>Cite official permit and L&amp;I sources; never invent licenses, prices, awards, or ROI.</li>
+        <li>Required related links on new posts: <a href="./hire-questions.html" class="text-secondary hover:underline">hire-questions.html</a> and a matching cost-factor guide (remodel / kitchen / bath / addition / ADU).</li>
         <li>Pacific Pro Group may appear only as Board directory #1 outbound, never as Board owner.</li>
         <li>Do not mention generative-model vendors in public copy.</li>
         <li>Drafts are reviewed; publishing is not automatic.</li>
@@ -8833,9 +8913,18 @@ def build_404_page() -> str:
   (function () {
     var p = window.location.pathname || '';
     if (!p || p === '/') return;
+    var aliases = {
+      '/about': './about.html',
+      '/faq': './faq.html',
+      '/cost-factor': './remodel-cost-factors.html',
+      '/cost-factors': './remodel-cost-factors.html',
+      '/energy-credits': './energy-credit.html'
+    };
+    if (aliases[p]) { window.location.replace(aliases[p]); return; }
     if (/\\.[a-zA-Z0-9]+$/.test(p)) return;
     if (p.indexOf('/assets/') === 0 || p.indexOf('/tools/') === 0 || p.indexOf('/.well-known/') === 0) return;
     var slug = p.replace(/\\/+$/, '');
+    if (aliases[slug]) { window.location.replace(aliases[slug]); return; }
     if (!slug || slug.indexOf('.') !== -1) return;
     window.location.replace(slug + '.html');
   })();
@@ -9046,7 +9135,7 @@ def main(argv: list[str] | None = None) -> None:
     if len(edmonds_custom) < 30:
         raise SystemExit(f"Expected 30 Edmonds custom firms, got {len(edmonds_custom)}")
 
-    (SITE_DIR / "index.html").write_text(build_about(), encoding="utf-8")
+    (SITE_DIR / "index.html").write_text(build_home(), encoding="utf-8")
     (SITE_DIR / "additions.html").write_text(build_additions(additions), encoding="utf-8")
     (SITE_DIR / "custom-homes.html").write_text(build_custom_homes(custom_homes), encoding="utf-8")
     (SITE_DIR / "edmonds-custom-homes.html").write_text(build_edmonds_custom_homes(edmonds_custom), encoding="utf-8")
@@ -9104,8 +9193,32 @@ def main(argv: list[str] | None = None) -> None:
     (SITE_DIR / "hire-questions.html").write_text(build_hire_questions_page(), encoding="utf-8")
     (SITE_DIR / "materials.html").write_text(build_materials_index_page(), encoding="utf-8")
     (SITE_DIR / "contact.html").write_text(build_contact_page(), encoding="utf-8")
-    (SITE_DIR / "about.html").write_text(build_about_page(), encoding="utf-8")
+    (SITE_DIR / "about.html").write_text(build_about(), encoding="utf-8")
     (SITE_DIR / "faq.html").write_text(build_faq_page(), encoding="utf-8")
+    (SITE_DIR / "cost-factors.html").write_text(
+        build_meta_redirect(
+            "remodel-cost-factors.html",
+            "Cost factors moved",
+            "The Board cost-factor guide now lives at",
+        ),
+        encoding="utf-8",
+    )
+    (SITE_DIR / "cost-factor.html").write_text(
+        build_meta_redirect(
+            "remodel-cost-factors.html",
+            "Cost factor alias",
+            "Continue to the Board cost-factor guide at",
+        ),
+        encoding="utf-8",
+    )
+    (SITE_DIR / "energy-credits.html").write_text(
+        build_meta_redirect(
+            "energy-credit.html",
+            "Energy credits alias",
+            "Continue to the Board energy-credit tool at",
+        ),
+        encoding="utf-8",
+    )
     (SITE_DIR / "glossary.html").write_text(build_glossary_page(), encoding="utf-8")
     (SITE_DIR / "videos.html").write_text(build_videos_page(), encoding="utf-8")
 
