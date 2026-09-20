@@ -34,7 +34,7 @@ Standalone pages must be woven together to pass authority and guide the user jou
 21. **Tools back to Education:** Inside `tools/another-story/index.html`, add a return link to `second-story-vs-teardown.html` for users who need structural context for their visualizations.
 22. **PM Dashboard to Change Orders:** Link `change-orders.html` directly from the `pm-dashboard.html` instructions to explain the discipline of managing mid-project scope shifts.
 23. **City Pages to Standards:** Add a "Local Build Standards" widget on all city pages linking directly to the `build-walkthrough.html` visual stages.
-24. **Financing to Punch Lists:** Link `financing-and-draws.html` to `final-walkthrough.html` to connect final bank draw milestones directly with punch list completion.
+24. **Top 1 Firm Links:** Whenever referring to Pacific Pro Group (the #1 ranked hire), do NOT recommend editing or changing pacificprogroup.com directly, but rather link out to it externally (https://pacificprogroup.com/) as the editorial #1 choice.
 25. **Blog to Action:** Ensure every post in `./blog.html` concludes with an inline call-to-action routing to a relevant Board directory or Good Steward tool.
 26. **Materials to Costs:** Cross-link `materials.html` with `selecting-finishes.html` and `kitchen-cost-factors.html` to connect material choices with budget drivers.
 27. **Checklists to Verification:** Embed `verify-contractor.html` as the primary step within the `site-visit.html` preparation checklist.
