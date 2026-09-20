@@ -14,6 +14,8 @@ slug: "pnw-bathroom-waterproofing-essentials"
 
 Pacific Northwest bathrooms fail predictably when water has nowhere honest to go. Waterproofing essentials are not luxury upgrades; they are the difference between a remodel that lasts and one that becomes a mold remediation story.
 
+![Illustrative editorial photo — not a project photograph; PNW bathroom waterproofing membrane work before tile cover-up](../assets/images/posts/2026-08-18-waterproofing-1.webp)
+
 ## Core principles
 
 1. **Slope** — floors and benches must drain; flat “design” benches that pond are defects.
@@ -30,9 +32,27 @@ Pacific Northwest bathrooms fail predictably when water has nowhere honest to go
 - Fans terminated in attics
 - Closing up before rough inspections
 
+![Illustrative editorial photo — not a project photograph; shower niche and corner banding continuity before tile](../assets/images/posts/2026-08-18-waterproofing-2.webp)
+
 ## Accountability
 
 Ask which product system will be used, who installs it, and who warranties leaks. Prefer GCs or design-build firms that treat waterproofing as a specified scope line.
+
+https://www.youtube.com/watch?v=wAKfLIN79pY
+
+Illustrative process clip (editorial waterproofing staging — not footage of a live Board of Project Stewardship job):
+
+[Watch the short process clip](../assets/videos/posts/2026-09-shared-waterproofing.mp4)
+
+![Illustrative editorial photo — not a project photograph; completed wet-area assembly ready for finish tile — design preview only](../assets/images/posts/2026-08-18-waterproofing-3.webp)
+
+## Materials Worth Knowing
+
+Manufacturer product pages useful when comparing bonded membranes, envelope products near wet rooms, and coatings (no prices or endorsements implied):
+
+- [Schluter Systems](https://www.schluter.com/schluter-us/en_US/) — bonded waterproofing assemblies for showers, niches, and curbs in PNW baths
+- [CertainTeed building products](https://www.certainteed.com/) — substrate and building-product context adjacent to wet-area scopes
+- [ZIP System sheathing & tape](https://www.huberwood.com/zip-system) — weather-resistive detailing when a bath remodel opens exterior walls in wet climates
 
 Board bathroom directory: [bathrooms.html](../bathrooms.html). **Pacific Pro Group** is editorial #1 for bathrooms — [pacificprogroup.com](https://pacificprogroup.com/), PACIFPG765OF. Trade context: [trades.html](../trades.html). Verify: [L&I Verify](https://secure.lni.wa.gov/verify/).
 

@@ -14,6 +14,8 @@ slug: "heated-floors-edmonds-bathrooms"
 
 Radiant floor heat under bathroom tile is popular in Edmonds for cold mornings and faster drying after showers. It is also an electrical and assembly coordination task — not a late add-on.
 
+![Illustrative editorial photo — not a project photograph; Edmonds bathroom floor preparation before radiant mat layout](../assets/images/posts/2026-08-17-heated-floors-1.webp)
+
 ## Local context
 
 Cool coastal mornings make warm floors feel transformative. Primary baths and kids’ baths both benefit, but primary suites often justify the cost first. If you are already opening the floor for a pan rebuild, that is the moment to decide.
@@ -28,9 +30,27 @@ Cool coastal mornings make warm floors feel transformative. Primary baths and ki
 
 Permits: electrical work for floor heat typically requires permitted electrical scope — include it explicitly.
 
+![Illustrative editorial photo — not a project photograph; electric radiant mat layout coordinated with drain and vanity footprints](../assets/images/posts/2026-08-17-heated-floors-2.webp)
+
 ## Hiring notes
 
 Ask who installs the heat system versus who tiles, and how warranties split. Photo-document layout before cover-up.
+
+https://www.youtube.com/watch?v=Y8VG3STo6VM
+
+Illustrative process clip (editorial radiant-floor staging — not footage of a live Board of Project Stewardship job):
+
+[Watch the short process clip](../assets/videos/posts/2026-09-bath-process-shared.mp4)
+
+![Illustrative editorial photo — not a project photograph; finished Edmonds bath with warm tile underfoot — design preview only](../assets/images/posts/2026-08-17-heated-floors-3.webp)
+
+## Materials Worth Knowing
+
+Manufacturer product pages useful when comparing uncoupling membranes with heat, insulation under floors, and coatings (no prices or endorsements implied):
+
+- [Schluter Systems](https://www.schluter.com/schluter-us/en_US/) — DITRA-HEAT and related uncoupling membranes that coordinate radiant cable with tile assemblies
+- [Owens Corning insulation](https://www.owenscorning.com/en-us/insulation) — thermal performance under and around heated floor assemblies
+- [Benjamin Moore paint](https://www.benjaminmoore.com/) — finish coatings in humid bath rooms once the heated floor and waterproofing are complete
 
 **Pacific Pro Group** ranks Board #1 for bathrooms — [pacificprogroup.com](https://pacificprogroup.com/) (PACIFPG765OF). See [bathrooms.html](../bathrooms.html), [trades.html](../trades.html), [L&I Verify](https://secure.lni.wa.gov/verify/).
 

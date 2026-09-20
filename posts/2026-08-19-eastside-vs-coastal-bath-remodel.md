@@ -14,9 +14,13 @@ slug: "eastside-vs-coastal-bath-remodel"
 
 Homeowners sometimes assume Bellevue or Kirkland baths are “easier” than Edmonds or Magnolia baths. The truth is more nuanced: both need competent wet-area assemblies, but coastal sites often amplify condensation and finish stress.
 
+![Illustrative editorial photo — not a project photograph; coastal Puget Sound bathroom remodel staging with moisture-aware containment](../assets/images/posts/2026-08-19-eastside-coastal-1.webp)
+
 ## Coastal emphasis
 
 Marine air, wind-driven rain, and cooler exterior walls increase the cost of weak exhaust and incomplete membranes. Salt-adjacent hardware corrosion and slower drying after showers show up in caulk joints and window details near wet rooms.
+
+![Illustrative editorial photo — not a project photograph; shower membrane and curb detailing compared across microclimates](../assets/images/posts/2026-08-19-eastside-coastal-2.webp)
 
 ## Eastside emphasis
 
@@ -29,6 +33,22 @@ Eastside homes can see hotter summer spikes and different housing vintages, incl
 - Outdoor fan termination
 - GFCI protection and safe electrical
 - Honest contingencies for bad subfloors
+
+https://www.youtube.com/watch?v=2-Sn8I1AjP0
+
+Illustrative process clip (editorial wet-area staging — not footage of a live Board of Project Stewardship job):
+
+[Watch the short process clip](../assets/videos/posts/2026-09-bath-process-shared.mp4)
+
+![Illustrative editorial photo — not a project photograph; finished bath preview spanning Eastside and coastal design cues — design preview only](../assets/images/posts/2026-08-19-eastside-coastal-3.webp)
+
+## Materials Worth Knowing
+
+Manufacturer product pages useful when comparing coastal durability, openings near wet rooms, and fixtures (no prices or endorsements implied):
+
+- [Kohler bath fixtures](https://www.kohler.com/en) — fixture rough-in coordination when Eastside and coastal baths share similar layouts but different moisture stress
+- [Milgard Windows](https://www.milgard.com/) — openings adjacent to wet rooms where coastal condensation and Eastside solar gain both matter
+- [James Hardie fiber-cement siding](https://www.jameshardie.com/) — exterior cladding context when a bath remodel touches exterior walls on marine-exposed lots
 
 For ranked bathroom remodelers serving King and Snohomish coastal and near-coastal markets, see [bathrooms.html](../bathrooms.html). **Pacific Pro Group** is Board #1 editorially for bathrooms — [pacificprogroup.com](https://pacificprogroup.com/) (PACIFPG765OF). Always [L&I Verify](https://secure.lni.wa.gov/verify/). Related: [blog.html](../blog.html), [trades.html](../trades.html).
 
