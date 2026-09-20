@@ -577,3 +577,20 @@ Steward P1 ship after related-learning wave. Regenerated site; IndexNow to follo
 
 **Locks check:** Board of Project Stewardship spelled out; no public AI names; PPG #1 outbound only; no invented prices/ROI; never edit pacificprogroup.com.
 
+
+## DONE (batch 2026-09-20 PT — city Official portals / trades / commercial-spec / glossary / homepage)
+
+Steward leftover batch after mega-nav / bridge / outro wave. Regenerated site; IndexNow pinged 134 URLs (HTTP 200).
+
+| # | Item | Notes |
+|---|------|-------|
+| 16 / 55 / 63 / 67 | City hub Official portals | `build_city_hub_page` now emits `#official-resources` Official portals blocks. Live AHJ keys for Edmonds, Shoreline, Lynnwood, Seattle, King County, Snohomish County. Replaced dead King County permits URL with live Accela + local-services permits path. |
+| 24 / F069 trades | Trades specialty vs GC + L&I | Trades index intro clarifies specialty vs GC; links Kitchen/Bathrooms/Additions + Plumber/Electrician/HVAC/Roofing + L&I. Each trade page gains Specialty vs GC · license check + `education_closing` L&I Official resources. |
+| 23 / F069 commercial-spec | Commercial/Spec honesty | Deepened `#editorial-criteria` on commercial.html and spec-homes.html (criteria bullets + How we rank + L&I). Kept indexable — not brochure-thin after criteria deepen. |
+| 20 / 45 / 79 | Glossary term links | Extended learn/dir links on retainage, lien, MEP, critical area, eTRAKiT, Accela, ECDC, UBI, Notice to Customer, fixture unit; added Permit, Rough-in, Substantial completion, WSEC-R, RFI, Shop drawings. |
+| Homepage | Cornerstone posts | Homepage `#cornerstone-reading` adds 6 contextual links to cornerstone posts (permits, hire design-build, waterproofing, second-story, kitchen hire, ADU). |
+| 70 / CWV FA | Optional CWV | Safe win already present: Font Awesome deferred (`media=print` + onload). Skipped risky Tailwind runtime self-host this pass. |
+| 72 / 98 / 99 / 100 | Regen + IndexNow + ledger | `python3 generate_site.py --indexnow` OK; this DONE table. |
+
+**Locks check:** Board of Project Stewardship spelled out; no public AI names; PPG #1 outbound only; no invented prices/ROI/fees/timelines; never edit pacificprogroup.com.
+

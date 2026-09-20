@@ -1945,8 +1945,12 @@ OFFICIAL_LINKS: dict[str, tuple[str, str]] = {
         "https://www.edmondswa.gov/services/permit_assistance",
     ),
     "king_permits": (
-        "King County local services — permits",
-        "https://kingcounty.gov/en/dept/local-services/permits-inspections",
+        "King County permits & inspections (local services)",
+        "https://kingcounty.gov/en/dept/local-services/certificates-permits-licenses/permits/permits-inspections-codes-buildings-land-use",
+    ),
+    "king_accela": (
+        "King County permitting portal (Accela)",
+        "https://aca-prod.accela.com/KINGCO/Default.aspx",
     ),
     "snohomish_pds": (
         "Snohomish County Planning & Development Services",
@@ -1954,6 +1958,7 @@ OFFICIAL_LINKS: dict[str, tuple[str, str]] = {
     ),
     "shoreline_etrait": ("Shoreline eTRAKiT", "https://permits.shorelinewa.gov/eTRAKiT/"),
     "shoreline": ("City of Shoreline", "https://www.shorelinewa.gov/"),
+    "lynnwood": ("City of Lynnwood", "https://www.lynnwoodwa.gov/"),
     "sbcc": ("WA State Building Code Council", "https://sbcc.wa.gov/"),
 }
 
@@ -2785,6 +2790,23 @@ def build_about() -> str:
       </div>
     </section>
 
+    <section class="mb-14" id="cornerstone-reading">
+      <div class="mb-8 border-b border-white/10 pb-4">
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">From the Board journal</span>
+        <h2 class="text-3xl font-black text-white tracking-tight">Cornerstone reading</h2>
+        <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Six editorial posts that pair with Board directories and Good Steward tools — permits, hiring, waterproofing, and addition path decisions. Educational only; no invented prices or timelines.</p>
+      </div>
+      <ul class="grid sm:grid-cols-2 gap-3 text-sm text-slate-300 font-light">
+        <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-08-12-edmonds-home-addition-permit-basics.html" class="text-secondary hover:underline font-semibold">Edmonds home addition permit basics</a> — AHJ start-here habits before design freeze.</li>
+        <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-08-11-hire-design-build-edmonds.html" class="text-secondary hover:underline font-semibold">Hire design-build in Edmonds</a> — when one steward beats a trade-only chase.</li>
+        <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-08-18-pnw-bathroom-waterproofing-essentials.html" class="text-secondary hover:underline font-semibold">PNW bathroom waterproofing essentials</a> — wet-area discipline for coastal baths.</li>
+        <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-08-09-second-story-vs-teardown-edmonds.html" class="text-secondary hover:underline font-semibold">Second story vs teardown (Edmonds)</a> — compare paths without invented cost claims.</li>
+        <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-08-12-hire-kitchen-remodeler-king-snohomish.html" class="text-secondary hover:underline font-semibold">Hire a kitchen remodeler (King &amp; Snohomish)</a> — shortlist habits before cabinet day.</li>
+        <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-09-07-adu-planning-edmonds-wa.html" class="text-secondary hover:underline font-semibold">ADU planning Edmonds WA</a> — parcel and portal honesty before stock plans.</li>
+      </ul>
+      <p class="text-sm text-slate-500 font-light mt-4"><a href="./blog.html" class="text-secondary hover:underline">Browse the full blog</a> · <a href="./learn.html" class="text-secondary hover:underline">Learn hub</a> · <a href="./how-we-rank.html" class="text-secondary hover:underline">How we rank</a></p>
+    </section>
+
     <section class="mb-14" id="learn">
       <div class="mb-8 border-b border-white/10 pb-4">
         <span class="text-secondary text-xs font-bold uppercase tracking-widest">Learn before you hire</span>
@@ -3602,6 +3624,21 @@ def build_commercial(firms: list[dict]) -> str:
     )}
   <div class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
 {how_we_rank_block(' Also see <a href="./custom-homes.html" class="text-secondary hover:underline">custom homes</a> and <a href="./additions.html" class="text-secondary hover:underline">home additions</a>.')}
+    <section class="bg-charcoal rounded-xl p-6 md:p-8 border border-primary/20 mb-10" id="editorial-criteria">
+      <h2 class="text-lg font-black text-white mb-3 tracking-tight">Editorial criteria (commercial / TI)</h2>
+      <p class="text-sm text-slate-400 font-light leading-relaxed mb-3">
+        This Board shortlist favors firms with a clear King &amp; Snohomish commercial or tenant-improvement footprint,
+        public WA contractor registration signals, and transparent contact paths. It is an editorial preview ranking —
+        not a paid placement list, bond guarantee, or capacity calendar.
+      </p>
+      <ul class="space-y-2 text-sm text-slate-300 font-light list-disc pl-5 mb-3">
+        <li>Local service area for Edmonds / Lynnwood corridor and greater King &amp; Snohomish commercial work.</li>
+        <li>Specialty fit: ground-up commercial GC vs TI / light commercial remodel appetite stated in public materials.</li>
+        <li>Institutional or public reputation signals where available — never invented awards or review scores.</li>
+        <li>Homeowners and owners must still re-verify every legal name at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> and confirm bonding capacity for the job size.</li>
+      </ul>
+      <p class="text-sm text-slate-500 font-light leading-relaxed">Full methodology: <a href="./how-we-rank.html" class="text-secondary hover:underline">How we rank</a>. Residential remodel packages belong on <a href="./kitchen.html" class="text-secondary hover:underline">Kitchen</a> / <a href="./additions.html" class="text-secondary hover:underline">Additions</a>, not this list.</p>
+    </section>
 {callout}
     <section id="rankings" class="mb-20">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 border-b border-white/10 pb-4 gap-3">
@@ -3629,7 +3666,7 @@ def build_commercial(firms: list[dict]) -> str:
         ),
         faq_ld(faqs),
     ]
-    body = body + education_closing("directories", "default", official_keys=["lni_verify", "lni_home", "seattle_sdci"])
+    body = body + education_closing("directories", "verify", "default", official_keys=["lni_verify", "lni_home", "lni_hire_smart", "mybuildingpermit", "seattle_sdci"])
     return page_shell(
         "Commercial Contractors in Edmonds | Board of Project Stewardship",
         desc,
@@ -3679,15 +3716,22 @@ def build_spec_homes(firms: list[dict]) -> str:
     )}
   <div class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
 {how_we_rank_block(' Looking for a one-off owner-custom build instead? See <a href="./custom-homes.html" class="text-secondary hover:underline">custom homes</a>.')}
-    <section class="bg-charcoal rounded-xl p-6 md:p-8 border border-white/10 mb-14">
+    <section class="bg-charcoal rounded-xl p-6 md:p-8 border border-primary/20 mb-14" id="editorial-criteria">
       <h2 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2">
-        <i class="fas fa-house-flag text-secondary"></i> Honest framing
+        <i class="fas fa-house-flag text-secondary"></i> Editorial criteria · honest framing
       </h2>
-      <p class="text-sm text-slate-400 font-light leading-relaxed">
+      <p class="text-sm text-slate-400 font-light leading-relaxed mb-3">
         This directory covers <strong class="text-slate-200 font-semibold">speculative and production</strong> home builders
         in the region — firms known for for-sale inventory or community models — not owner-commissioned custom homes alone.
-        Lower ranks may include hybrids; card notes say so explicitly.
+        Lower ranks may include hybrids; card notes say so explicitly. Editorial shortlist only — not paid placement.
       </p>
+      <ul class="space-y-2 text-sm text-slate-300 font-light list-disc pl-5 mb-3">
+        <li>Evidence of for-sale / community product in King or Snohomish Counties (or honest hybrid labeling when custom firms occasionally sell completed homes).</li>
+        <li>Public WA contractor registration signals buyers can re-check at L&amp;I before reservation deposits.</li>
+        <li>Transparent sales or company contact paths — no invented community inventories or price bands on Board pages.</li>
+        <li>Owner-custom one-off builds belong on <a href="./custom-homes.html" class="text-secondary hover:underline">Custom homes</a>; remodel packages on <a href="./additions.html" class="text-secondary hover:underline">Additions</a>.</li>
+      </ul>
+      <p class="text-sm text-slate-500 font-light leading-relaxed">Methodology: <a href="./how-we-rank.html" class="text-secondary hover:underline">How we rank</a>. Re-verify: <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>.</p>
     </section>
     <section id="rankings" class="mb-20">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 border-b border-white/10 pb-4 gap-3">
@@ -3715,7 +3759,7 @@ def build_spec_homes(firms: list[dict]) -> str:
         ),
         faq_ld(faqs),
     ]
-    body = body + education_closing("directories", "default", official_keys=["lni_verify", "lni_home"])
+    body = body + education_closing("directories", "verify", "default", official_keys=["lni_verify", "lni_home", "lni_hire_smart", "mybuildingpermit"])
     return page_shell(
         "Spec Home Builders near Edmonds | Board of Project Stewardship",
         desc,
@@ -3755,7 +3799,7 @@ def build_trades_hub() -> str:
         ),
         (
             "Should I hire a trade directly or through a general contractor?",
-            "Either path is common. Many remodel projects are coordinated by a design-build GC. Specialty pages help when you want a direct hire or a second opinion.",
+            "Either path is common. Use a specialty hire for single-craft scopes; use a design-build GC when kitchen, bath, or addition work needs one steward for permits and sequencing. Specialty pages help for direct hire or a second opinion — then re-verify at WA L&I.",
         ),
         (
             "Is the Board a general contractor or trade firm?",
@@ -3773,8 +3817,11 @@ def build_trades_hub() -> str:
 {chr(10).join(cards)}
     </section>
     <section class="bg-charcoal rounded-xl p-8 border border-white/10 mb-8">
-      <h2 class="text-xl font-black text-white mb-3">How to use these lists</h2>
-      <p class="text-slate-300 text-sm font-light leading-relaxed">These are Board directories, not paid placement. Prefer Edmonds / South Snohomish specialists when locality matters; broader metro multi-trade firms are included when they clearly serve the area. Always re-verify licenses at <a href="{LNI_URL}" class="text-secondary hover:underline" target="_blank" rel="noopener">WA L&amp;I</a> before hiring.</p>
+      <h2 class="text-xl font-black text-white mb-3">Specialty trade vs general contractor</h2>
+      <p class="text-slate-300 text-sm font-light leading-relaxed mb-3">Hire a <strong class="text-white font-semibold">specialty trade</strong> when the scope is mostly one craft — a service panel, furnace swap, re-roof, or drain repair — and you (or your designer) will coordinate the rest. Hire a <strong class="text-white font-semibold">general contractor / design-build GC</strong> when several trades must sequence together (kitchen, bath, addition) and you want one written steward for permits, schedule, and punch list.</p>
+      <p class="text-slate-300 text-sm font-light leading-relaxed mb-3">These Board directories are editorial shortlists — not paid placement. Prefer Edmonds / South Snohomish specialists when locality matters; broader metro firms appear when they clearly serve the corridor. Re-verify every legal name at <a href="{LNI_URL}" class="text-secondary hover:underline" target="_blank" rel="noopener">WA L&amp;I Verify</a> before any deposit.</p>
+      <p class="text-slate-400 text-sm font-light leading-relaxed mb-2">GC directories for multi-trade packages: <a href="./kitchen.html" class="text-secondary hover:underline">Kitchen</a> · <a href="./bathrooms.html" class="text-secondary hover:underline">Bathrooms</a> · <a href="./additions.html" class="text-secondary hover:underline">Additions</a> · <a href="./how-we-rank.html" class="text-secondary hover:underline">How we rank</a>.</p>
+      <p class="text-slate-400 text-sm font-light leading-relaxed">Common specialty starts: <a href="./plumber.html" class="text-secondary hover:underline">Plumber</a> · <a href="./electrician.html" class="text-secondary hover:underline">Electrician</a> · <a href="./hvac.html" class="text-secondary hover:underline">HVAC</a> · <a href="./roofing.html" class="text-secondary hover:underline">Roofing</a> · <a href="./verify-contractor.html" class="text-secondary hover:underline">Verify walkthrough</a>.</p>
     </section>
 {faq_section(faqs, "Trade directories FAQ")}
   </div>"""
@@ -3826,7 +3873,21 @@ def build_trade_page(slug: str, title: str, icon: str, blurb: str, firms: list[d
         ["Editorial shortlist", "Locality-first", "Verify at L&amp;I"],
     )}
   <div class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
-    <p class="text-sm text-slate-500 mb-8"><a href="./trades.html" class="text-secondary hover:underline">← All trades</a></p>
+    <p class="text-sm text-slate-500 mb-4"><a href="./trades.html" class="text-secondary hover:underline">← All trades</a></p>
+    <section class="bg-charcoal rounded-xl p-5 md:p-6 border border-primary/20 mb-10">
+      <h2 class="text-base font-black text-white mb-2 tracking-tight">Specialty vs GC · license check</h2>
+      <p class="text-sm text-slate-400 font-light leading-relaxed mb-2">
+        Use this specialty shortlist for craft-focused scopes. For multi-trade kitchen, bath, or addition packages, start with a
+        <a href="./kitchen.html" class="text-secondary hover:underline">kitchen</a>,
+        <a href="./bathrooms.html" class="text-secondary hover:underline">bathroom</a>, or
+        <a href="./additions.html" class="text-secondary hover:underline">additions</a> GC directory instead — then bring trades under that steward.
+      </p>
+      <p class="text-sm text-slate-400 font-light leading-relaxed">
+        Before any deposit, re-verify the legal business name at
+        <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>
+        (Board walkthrough: <a href="./verify-contractor.html" class="text-secondary hover:underline">verify contractor</a>).
+      </p>
+    </section>
     <section id="rankings" class="mb-16">
       <div class="flex items-end justify-between mb-8 border-b border-white/10 pb-4">
         <div>
@@ -3870,6 +3931,20 @@ def build_trade_page(slug: str, title: str, icon: str, blurb: str, firms: list[d
         ),
         faq_ld(faqs),
     ]
+    body = body + education_closing(
+        "directories",
+        "verify",
+        "hire",
+        official_keys=["lni_verify", "lni_home", "lni_hire_smart"],
+        related_extra=[
+            ("Trades hub", "./trades.html"),
+            ("Kitchen remodelers", "./kitchen.html"),
+            ("Bathroom remodelers", "./bathrooms.html"),
+            ("Plumber directory", "./plumber.html"),
+            ("Electrician directory", "./electrician.html"),
+            ("HVAC directory", "./hvac.html"),
+        ],
+    )
     return page_shell(
         f"{title} in Edmonds | Board of Project Stewardship",
         f"{blurb} Editorial directory for Edmonds and King & Snohomish Counties, WA.",
@@ -4946,7 +5021,7 @@ def build_permits_page() -> str:
             [
                 ("MyBuildingPermit", "https://mybuildingpermit.com/"),
                 ("King County permitting portal", "https://aca-prod.accela.com/KINGCO/Default.aspx"),
-                ("King County local services — permits", "https://kingcounty.gov/en/dept/local-services/permits-inspections"),
+                ("King County local services — permits", "https://kingcounty.gov/en/dept/local-services/certificates-permits-licenses/permits/permits-inspections-codes-buildings-land-use"),
             ],
         ),
         (
@@ -5339,6 +5414,8 @@ def build_city_hub_page(
     dir_links: list[tuple[str, str]],
     nav_active: str | None = None,
     extra_faqs: list[tuple[str, str]] | None = None,
+    official_keys: list[str] | None = None,
+    official_extra: list[tuple[str, str]] | None = None,
 ) -> str:
     faqs = [
         (
@@ -5403,6 +5480,23 @@ def build_city_hub_page(
       <p class="text-sm text-slate-400 font-light mt-4">Board #1 hire ranking: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(PPG['name'])}<span class="sr-only"> (opens in new window)</span></a>. Re-verify at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">L&amp;I Verify<span class="sr-only"> (opens in new window)</span></a>.</p>""",
         )
         + _hub_section("Related local posts", posts_block)
+        + (
+            '  <div class="max-w-6xl mx-auto px-4">\n'
+            + official_links_section(
+                official_keys
+                or ["lni_verify", "lni_home", "mybuildingpermit"],
+                extra=official_extra
+                or [p for p in permit_links if "lni.wa.gov" not in p[1]],
+                heading=f"Official portals · {place}",
+                blurb=(
+                    f"Live authority-having-jurisdiction (AHJ) links for {place}. "
+                    "The Board of Project Stewardship does not issue permits or licenses. "
+                    "Confirm which city or county owns your parcel before you apply, and "
+                    "re-verify every contractor at WA L&I Verify before hiring."
+                ),
+            )
+            + "  </div>\n"
+        )
         + related_learning_strip(
             [
                 ("Learn hub", "./learn.html"),
@@ -5455,6 +5549,7 @@ def build_shoreline_hub() -> str:
             ("Bathroom remodelers", "./bathrooms.html"),
             ("Another Story (Board feature)", "./another-story.html"),
         ],
+        official_keys=["lni_verify", "lni_home", "shoreline_etrait", "shoreline"]
     )
 
 
@@ -5479,6 +5574,7 @@ def build_lynnwood_hub() -> str:
             ("Home additions directory", "./additions.html"),
             ("Trades hub", "./trades.html"),
         ],
+        official_keys=["lni_verify", "lni_home", "lynnwood", "mybuildingpermit"]
     )
 
 
@@ -6055,22 +6151,28 @@ def build_glossary_page() -> str:
         ("Change order", esc("Written amendment stating price and schedule impact before changed work proceeds.") + ' Guide: <a href="./change-orders.html" class="text-secondary hover:underline">change orders &amp; allowances</a>.'),
         ("DADU", esc("Detached accessory dwelling unit — a separate small dwelling on the same lot as a primary home.") + ' See <a href="./adu.html" class="text-secondary hover:underline">Edmonds ADU hub</a> · <a href="./adu-checklist.html" class="text-secondary hover:underline">ADU checklist</a>.'),
         ("Dry-in", esc("Stage when the structure is weather-protected enough that interior work is not exposed to open rain risk.") + ' Related: <a href="./coastal-waterproofing.html" class="text-secondary hover:underline">coastal waterproofing</a> · <a href="./project-timeline.html" class="text-secondary hover:underline">project timeline</a>.'),
-        ("ECDC", esc("Edmonds Community Development Code — includes ADU standards such as 16.20.050.")),
+        ("ECDC", esc("Edmonds Community Development Code — includes ADU standards such as 16.20.050.") + ' See <a href="./adu.html" class="text-secondary hover:underline">Edmonds ADU hub</a> · <a href="./permits.html" class="text-secondary hover:underline">permit hub</a>.'),
         ("L&I Verify", esc("Washington State Department of Labor & Industries official contractor license lookup.") + f' Official tool: <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> · Board walkthrough: <a href="./verify-contractor.html" class="text-secondary hover:underline">verify contractor</a>.'),
         ("MyBuildingPermit", esc("Shared regional portal used by many Puget Sound jurisdictions for permit applications.") + ' Orientation: <a href="./permits.html" class="text-secondary hover:underline">permit hub</a> (Seattle typically uses SDCI instead).'),
         ("Punch list", esc("Documented remaining items to complete or correct before final payment.") + ' Related: <a href="./final-walkthrough.html" class="text-secondary hover:underline">final walkthrough</a>.'),
         ("SDCI", esc("Seattle Department of Construction and Inspections.") + ' See <a href="./seattle.html" class="text-secondary hover:underline">Seattle hub</a> · <a href="./permits.html" class="text-secondary hover:underline">permit hub</a>.'),
         ("WRB", esc("Weather-resistive barrier — part of the exterior moisture-control assembly.") + ' Related: <a href="./coastal-waterproofing.html" class="text-secondary hover:underline">coastal waterproofing</a> · <a href="./materials.html" class="text-secondary hover:underline">materials index</a>.'),
         ("Bond (contractor)", esc("Surety bond associated with WA contractor registration; L&I Verify shows bond-related fields and claims history when present.") + ' Guide: <a href="./bonds-and-insurance.html" class="text-secondary hover:underline">bonds &amp; insurance</a>.'),
-        ("UBI", esc("Washington Unified Business Identifier — a state business ID sometimes used alongside contractor registration searches.")),
-        ("Retainage", esc("Contract amount held until punch list or closeout conditions are met; terms must be written.")),
-        ("Lien", esc("A claim against property for unpaid labor or materials; ask about lien waivers at draws and final payment.")),
-        ("MEP", esc("Mechanical, electrical, and plumbing — rough-in and finish trades that often drive remodel sequencing.")),
-        ("Critical area", esc("Environmentally sensitive land (steep slopes, wetlands, buffers) that can add review beyond a simple building permit.")),
-        ("eTRAKiT", esc("Shoreline’s online permitting portal for applications, status, and inspections.")),
-        ("Accela", esc("Permit/records software used by some jurisdictions (including King County portals) for status and filings.")),
-        ("Fixture unit", esc("Plumbing sizing concept used when checking water meter / supply capacity for ADUs and additions.")),
-        ("Notice to Customer", esc("Washington consumer disclosure concept referenced in L&I hiring guidance — confirm current L&I forms for your contract.")),
+        ("UBI", esc("Washington Unified Business Identifier — a state business ID sometimes used alongside contractor registration searches.") + f' Pair with <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> · <a href="./verify-contractor.html" class="text-secondary hover:underline">verify walkthrough</a>.'),
+        ("Retainage", esc("Contract amount held until punch list or closeout conditions are met; terms must be written.") + ' Related: <a href="./final-walkthrough.html" class="text-secondary hover:underline">final walkthrough</a> · <a href="./change-orders.html" class="text-secondary hover:underline">change orders</a> · <a href="./financing-and-draws.html" class="text-secondary hover:underline">financing &amp; draws</a>.'),
+        ("Lien", esc("A claim against property for unpaid labor or materials; ask about lien waivers at draws and final payment.") + ' Related: <a href="./bonds-and-insurance.html" class="text-secondary hover:underline">bonds &amp; insurance</a> · <a href="./contractor-contract-basics.html" class="text-secondary hover:underline">contract basics</a> · <a href="./financing-and-draws.html" class="text-secondary hover:underline">draws</a>.'),
+        ("MEP", esc("Mechanical, electrical, and plumbing — rough-in and finish trades that often drive remodel sequencing.") + ' Directories: <a href="./plumber.html" class="text-secondary hover:underline">plumber</a> · <a href="./electrician.html" class="text-secondary hover:underline">electrician</a> · <a href="./hvac.html" class="text-secondary hover:underline">HVAC</a> · <a href="./trades.html" class="text-secondary hover:underline">trades hub</a>.'),
+        ("Critical area", esc("Environmentally sensitive land (steep slopes, wetlands, buffers) that can add review beyond a simple building permit.") + ' Start at the <a href="./permits.html" class="text-secondary hover:underline">permit hub</a> · <a href="./home-addition-planning.html" class="text-secondary hover:underline">addition planning</a> · city hubs such as <a href="./edmonds.html" class="text-secondary hover:underline">Edmonds</a>.'),
+        ("eTRAKiT", esc("Shoreline’s online permitting portal for applications, status, and inspections.") + ' See <a href="./shoreline.html" class="text-secondary hover:underline">Shoreline hub</a> · <a href="./permits.html" class="text-secondary hover:underline">permit hub</a>.'),
+        ("Accela", esc("Permit/records software used by some jurisdictions (including King County portals) for status and filings.") + ' See <a href="./king-county.html" class="text-secondary hover:underline">King County hub</a> · <a href="./seattle.html" class="text-secondary hover:underline">Seattle hub</a> (Services Portal) · <a href="./permits.html" class="text-secondary hover:underline">permit hub</a>.'),
+        ("Fixture unit", esc("Plumbing sizing concept used when checking water meter / supply capacity for ADUs and additions.") + ' Related: <a href="./adu-checklist.html" class="text-secondary hover:underline">ADU checklist</a> · <a href="./plumber.html" class="text-secondary hover:underline">plumber directory</a> · <a href="./adu.html" class="text-secondary hover:underline">ADU hub</a>.'),
+        ("Notice to Customer", esc("Washington consumer disclosure concept referenced in L&I hiring guidance — confirm current L&I forms for your contract.") + f' Official: <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> · <a href="./hiring-a-contractor.html" class="text-secondary hover:underline">hiring a contractor</a> · <a href="./hire-questions.html" class="text-secondary hover:underline">hire questions</a>.'),
+        ("Permit", esc("Official authorization from the AHJ to perform regulated construction work; who pulls and owns each permit should be written.") + ' Hub: <a href="./permits.html" class="text-secondary hover:underline">permits</a> · city examples: <a href="./edmonds.html" class="text-secondary hover:underline">Edmonds</a> · <a href="./seattle.html" class="text-secondary hover:underline">Seattle</a>.'),
+        ("Rough-in", esc("Stage when MEP lines are installed in walls/floors before insulation and finishes conceal them.") + ' Related: <a href="./project-timeline.html" class="text-secondary hover:underline">project timeline</a> · <a href="./build-walkthrough.html" class="text-secondary hover:underline">Build Walkthrough</a> · <a href="./trades.html" class="text-secondary hover:underline">trades hub</a>.'),
+        ("Substantial completion", esc("Contract milestone when the work is usable for its intended purpose except punch-list items; definitions must match your written contract.") + ' Related: <a href="./final-walkthrough.html" class="text-secondary hover:underline">final walkthrough</a> · <a href="./change-orders.html" class="text-secondary hover:underline">change orders</a>.'),
+        ("WSEC-R", esc("Washington State Energy Code — Residential provisions that can affect insulation, windows, and mechanical choices.") + ' Related: <a href="./energy-credit.html" class="text-secondary hover:underline">energy code credits tool</a> · <a href="./insulation.html" class="text-secondary hover:underline">insulation</a> · <a href="./windows.html" class="text-secondary hover:underline">windows</a>.'),
+        ("RFI", esc("Request for Information — a written question from builder to designer (or reverse) that should be logged before work proceeds on unclear details.") + ' Related: <a href="./change-orders.html" class="text-secondary hover:underline">change orders</a> · <a href="./contractor-contract-basics.html" class="text-secondary hover:underline">contract basics</a>.'),
+        ("Shop drawings", esc("Fabricator or installer detail drawings (cabinets, steel, stairs) submitted for coordination before fabrication.") + ' Related: <a href="./kitchen-remodel-planning.html" class="text-secondary hover:underline">kitchen planning</a> · <a href="./materials.html" class="text-secondary hover:underline">materials index</a>.'),
     ]
     rows = "".join(
         f"""      <div class="border-b border-white/10 py-4">
@@ -7053,6 +7155,7 @@ def build_edmonds_hub() -> str:
             ("Learn hub", "./learn.html"),
         ],
         nav_active="edmonds-hub",
+        official_keys=["lni_verify", "lni_home", "edmonds", "edmonds_permits", "mybuildingpermit"]
     )
 
 
@@ -7288,6 +7391,7 @@ def build_seattle_hub() -> str:
             ("Learn hub", "./learn.html"),
             ("King County hub", "./king-county.html"),
         ],
+        official_keys=["lni_verify", "lni_home", "seattle_how", "seattle_portal", "seattle_sdci"]
     )
 
 
@@ -7326,6 +7430,7 @@ def build_snohomish_county_hub() -> str:
             ("Learn hub", "./learn.html"),
             ("Hiring a contractor", "./hiring-a-contractor.html"),
         ],
+        official_keys=["lni_verify", "lni_home", "snohomish_pds", "mybuildingpermit"]
     )
 
 
@@ -7340,7 +7445,7 @@ def build_king_county_hub() -> str:
         [
             ("MyBuildingPermit", "https://mybuildingpermit.com/"),
             ("King County permitting portal", "https://aca-prod.accela.com/KINGCO/Default.aspx"),
-            ("King County local services — permits", "https://kingcounty.gov/en/dept/local-services/permits-inspections"),
+            ("King County local services — permits", "https://kingcounty.gov/en/dept/local-services/certificates-permits-licenses/permits/permits-inspections-codes-buildings-land-use"),
         ],
         [
             ("Seattle bathroom remodel permits", "./posts/2026-09-06-seattle-bathroom-remodel-permits.html"),
@@ -7364,6 +7469,7 @@ def build_king_county_hub() -> str:
             ("Learn hub", "./learn.html"),
             ("Hiring a contractor", "./hiring-a-contractor.html"),
         ],
+        official_keys=["lni_verify", "lni_home", "mybuildingpermit", "king_accela", "king_permits"]
     )
 
 
