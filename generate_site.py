@@ -897,6 +897,9 @@ def nav_html(active: str = "", prefix: str = "") -> str:
         ("mountlake-terrace", href("mountlake-terrace.html"), "Mountlake Terrace"),
         ("mill-creek", href("mill-creek.html"), "Mill Creek"),
         ("edmonds-hub", href("edmonds.html"), "Edmonds hub"),
+        ("seattle", href("seattle.html"), "Seattle"),
+        ("king-county", href("king-county.html"), "King County"),
+        ("snohomish-county", href("snohomish-county.html"), "Snohomish County"),
     ]
     more_tools = [
         ("learn", href("learn.html"), "Learn hub"),
@@ -921,6 +924,9 @@ def nav_html(active: str = "", prefix: str = "") -> str:
         ("bid-comparison", href("bid-comparison.html"), "Bid Comparison"),
         ("red-flags-hiring", href("red-flags-hiring.html"), "Red Flags Hiring"),
         ("project-timeline", href("project-timeline.html"), "Project Timeline"),
+        ("final-walkthrough", href("final-walkthrough.html"), "Final Walkthrough"),
+        ("bonds-and-insurance", href("bonds-and-insurance.html"), "Bonds & Insurance"),
+        ("design-build-vs-bid", href("design-build-vs-bid.html"), "Design-Build vs Bid"),
         ("materials", href("materials.html"), "Materials Index"),
         ("contact", href("contact.html"), "Contact"),
         ("glossary", href("glossary.html"), "Glossary"),
@@ -1012,6 +1018,9 @@ def footer_html(prefix: str = "./", active: str = "") -> str:
         ("mountlake-terrace", f"{prefix}mountlake-terrace.html", "Mountlake Terrace hub"),
         ("mill-creek", f"{prefix}mill-creek.html", "Mill Creek hub"),
         ("edmonds-hub", f"{prefix}edmonds.html", "Edmonds project hub"),
+        ("seattle", f"{prefix}seattle.html", "Seattle hub"),
+        ("king-county", f"{prefix}king-county.html", "King County hub"),
+        ("snohomish-county", f"{prefix}snohomish-county.html", "Snohomish County hub"),
         ("learn", f"{prefix}learn.html", "Learn hub"),
         ("permits", f"{prefix}permits.html", "Permit hub"),
         ("adu", f"{prefix}adu.html", "Edmonds ADU"),
@@ -1033,6 +1042,9 @@ def footer_html(prefix: str = "./", active: str = "") -> str:
         ("bid-comparison", f"{prefix}bid-comparison.html", "Bid comparison"),
         ("red-flags-hiring", f"{prefix}red-flags-hiring.html", "Red flags hiring"),
         ("project-timeline", f"{prefix}project-timeline.html", "Project timeline"),
+        ("final-walkthrough", f"{prefix}final-walkthrough.html", "Final walkthrough"),
+        ("bonds-and-insurance", f"{prefix}bonds-and-insurance.html", "Bonds & insurance"),
+        ("design-build-vs-bid", f"{prefix}design-build-vs-bid.html", "Design-build vs bid"),
         ("materials", f"{prefix}materials.html", "Materials index"),
         ("glossary", f"{prefix}glossary.html", "Glossary"),
         ("videos", f"{prefix}videos.html", "Video library"),
@@ -3998,6 +4010,9 @@ def write_sitemap(posts: list[dict]) -> None:
         "mountlake-terrace.html",
         "mill-creek.html",
         "edmonds.html",
+        "seattle.html",
+        "king-county.html",
+        "snohomish-county.html",
         "learn.html",
         "adu-checklist.html",
         "change-orders.html",
@@ -4011,6 +4026,9 @@ def write_sitemap(posts: list[dict]) -> None:
         "bid-comparison.html",
         "red-flags-hiring.html",
         "project-timeline.html",
+        "final-walkthrough.html",
+        "bonds-and-insurance.html",
+        "design-build-vs-bid.html",
         "materials.html",
         "contact.html",
         "glossary.html",
@@ -5926,6 +5944,9 @@ def build_learn_page() -> str:
                 ("Change orders & allowances", "./change-orders.html"),
                 ("Project timeline phases", "./project-timeline.html"),
                 ("Bid comparison checklist", "./bid-comparison.html"),
+                ("Final walkthrough & punch list", "./final-walkthrough.html"),
+                ("WA contractor bonds & insurance", "./bonds-and-insurance.html"),
+                ("Design-build vs bid-build", "./design-build-vs-bid.html"),
             ],
         ),
         (
@@ -5952,6 +5973,9 @@ def build_learn_page() -> str:
         (
             "City & neighborhood hubs",
             [
+                ("Seattle hub", "./seattle.html"),
+                ("King County hub", "./king-county.html"),
+                ("Snohomish County hub", "./snohomish-county.html"),
                 ("Edmonds project hub", "./edmonds.html"),
                 ("Edmonds custom homes directory", "./edmonds-custom-homes.html"),
                 ("Greenwood", "./greenwood.html"),
@@ -6321,6 +6345,370 @@ def build_project_timeline_page() -> str:
         include_story_embed=False,
         include_tools_embed=False,
     )
+
+
+# ---------------------------------------------------------------------------
+# Wave 3: region hubs + learning explainers (seattle / counties / walkthrough /
+# bonds / design-build vs bid). Ghost publish remains OFF — static Board only.
+# ---------------------------------------------------------------------------
+
+
+def build_seattle_hub() -> str:
+    """City hub aggregating Seattle neighborhoods — editorial learning, not a GC list."""
+    return build_city_hub_page(
+        "seattle",
+        "Seattle",
+        "King County",
+        "Board of Project Stewardship city hub for Seattle remodels and additions — SDCI permitting orientation, Board directories, and neighborhood posts. Educational aggregation, not a complete contractor roster.",
+        "Seattle Department of Construction and Inspections (SDCI) applications typically run through the Seattle Services Portal — not MyBuildingPermit. Confirm parcel zoning and permit type with SDCI before design freeze.",
+        [
+            ("How to get a Seattle permit (SDCI)", "https://www.seattle.gov/construction-and-inspections/permits/how-do-you-get-a-permit"),
+            ("Seattle Services Portal", "https://cosaccela.seattle.gov/portal/"),
+            ("SDCI home", "https://www.seattle.gov/sdci"),
+        ],
+        [
+            ("Seattle bathroom remodel permits", "./posts/2026-09-06-seattle-bathroom-remodel-permits.html"),
+            ("Bathroom remodel Ballard Seattle", "./posts/2026-09-03-bathroom-remodel-ballard-seattle.html"),
+            ("Kitchen remodel Ballard Seattle", "./posts/2026-09-04-kitchen-remodel-ballard-seattle.html"),
+            ("Kitchen remodel Magnolia Seattle", "./posts/2026-09-16-kitchen-remodel-magnolia-seattle.html"),
+            ("Kitchen remodel Queen Anne Seattle", "./posts/2026-08-21-kitchen-remodel-queen-anne-seattle.html"),
+            ("Bathroom remodel Queen Anne Seattle", "./posts/2026-08-22-bathroom-remodel-queen-anne-seattle.html"),
+            ("Kitchen remodel Greenwood Seattle", "./posts/2026-08-14-kitchen-remodel-greenwood-seattle.html"),
+        ],
+        [
+            ("Ballard hub", "./ballard.html"),
+            ("Magnolia hub", "./magnolia.html"),
+            ("Queen Anne hub", "./queen-anne.html"),
+            ("Greenwood hub", "./greenwood.html"),
+            ("Phinney Ridge hub", "./phinney-ridge.html"),
+            ("Kitchen remodelers", "./kitchen.html"),
+            ("Bathroom remodelers", "./bathrooms.html"),
+            ("Home additions directory", "./additions.html"),
+            ("Permit hub", "./permits.html"),
+            ("Learn hub", "./learn.html"),
+            ("King County hub", "./king-county.html"),
+        ],
+    )
+
+
+def build_snohomish_county_hub() -> str:
+    """County region hub — links cities/dirs/learn/permits; no invented county-wide contractor claims."""
+    return build_city_hub_page(
+        "snohomish-county",
+        "Snohomish County",
+        "North Sound region",
+        "Board of Project Stewardship region hub for Snohomish County homeowners — official PDS / MyBuildingPermit orientation plus links to city hubs, directories, and Learn pages. Not a ranked county-wide contractor list.",
+        "Snohomish County Planning and Development Services (PDS) covers county-jurisdiction work. City projects (Edmonds, Lynnwood, Mukilteo, Mountlake Terrace, Mill Creek, and others) use the city portal or MyBuildingPermit path instead — confirm which AHJ owns your parcel.",
+        [
+            ("Snohomish County PDS", "https://www.snohomishcountywa.gov/198/Planning-Development-Services"),
+            ("MyBuildingPermit", "https://mybuildingpermit.com/"),
+        ],
+        [
+            ("Home addition Edmonds WA", "./posts/2026-09-15-home-addition-edmonds-wa.html"),
+            ("Edmonds home addition permit basics", "./posts/2026-08-12-edmonds-home-addition-permit-basics.html"),
+            ("Bathroom remodel Lynnwood WA", "./posts/2026-09-08-bathroom-remodel-lynnwood-wa.html"),
+            ("Kitchen remodel Lynnwood WA", "./posts/2026-09-09-kitchen-remodel-lynnwood-wa.html"),
+            ("Kitchen remodel Mill Creek WA", "./posts/2026-09-18-kitchen-remodel-mill-creek-wa.html"),
+            ("Bathroom remodel Mukilteo WA", "./posts/2026-08-28-bathroom-remodel-mukilteo-wa.html"),
+            ("Kitchen remodel Mountlake Terrace", "./posts/2026-08-23-kitchen-remodel-mountlake-terrace.html"),
+        ],
+        [
+            ("Edmonds project hub", "./edmonds.html"),
+            ("Lynnwood hub", "./lynnwood.html"),
+            ("Mukilteo hub", "./mukilteo.html"),
+            ("Mountlake Terrace hub", "./mountlake-terrace.html"),
+            ("Mill Creek hub", "./mill-creek.html"),
+            ("Edmonds custom homes directory", "./edmonds-custom-homes.html"),
+            ("Home additions directory", "./additions.html"),
+            ("Kitchen remodelers", "./kitchen.html"),
+            ("Bathroom remodelers", "./bathrooms.html"),
+            ("Permit hub", "./permits.html"),
+            ("Learn hub", "./learn.html"),
+            ("Hiring a contractor", "./hiring-a-contractor.html"),
+        ],
+    )
+
+
+def build_king_county_hub() -> str:
+    """County region hub — unincorporated vs city AHJs; links hubs/dirs/learn/permits only."""
+    return build_city_hub_page(
+        "king-county",
+        "King County",
+        "Central Puget Sound region",
+        "Board of Project Stewardship region hub for King County homeowners — unincorporated permitting orientation plus links to Seattle / Eastside / North King city hubs, directories, and Learn pages. Not a ranked county-wide contractor list.",
+        "Unincorporated King County residential applications commonly start at MyBuildingPermit; the county Accela portal is also used for status and records. Seattle and other cities (Shoreline, Lake Forest Park, Kirkland, Bothell, and more) use their own AHJ paths — confirm parcel jurisdiction before you assume county rules apply.",
+        [
+            ("MyBuildingPermit", "https://mybuildingpermit.com/"),
+            ("King County permitting portal", "https://aca-prod.accela.com/KINGCO/Default.aspx"),
+            ("King County local services — permits", "https://kingcounty.gov/en/dept/local-services/permits-inspections"),
+        ],
+        [
+            ("Seattle bathroom remodel permits", "./posts/2026-09-06-seattle-bathroom-remodel-permits.html"),
+            ("Home addition Shoreline WA", "./posts/2026-09-10-home-addition-shoreline-wa.html"),
+            ("Home addition Lake Forest Park", "./posts/2026-08-26-home-addition-lake-forest-park.html"),
+            ("Home addition Bothell WA", "./posts/2026-08-20-home-addition-bothell-wa.html"),
+            ("Bathroom remodel Lake Forest Park", "./posts/2026-08-25-bathroom-remodel-lake-forest-park.html"),
+        ],
+        [
+            ("Seattle hub", "./seattle.html"),
+            ("Shoreline hub", "./shoreline.html"),
+            ("Lake Forest Park hub", "./lake-forest-park.html"),
+            ("Kirkland hub", "./kirkland.html"),
+            ("Bothell hub", "./bothell.html"),
+            ("Ballard hub", "./ballard.html"),
+            ("Magnolia hub", "./magnolia.html"),
+            ("Home additions directory", "./additions.html"),
+            ("Kitchen remodelers", "./kitchen.html"),
+            ("Bathroom remodelers", "./bathrooms.html"),
+            ("Permit hub", "./permits.html"),
+            ("Learn hub", "./learn.html"),
+            ("Hiring a contractor", "./hiring-a-contractor.html"),
+        ],
+    )
+
+
+def build_final_walkthrough_page() -> str:
+    faqs = [
+        (
+            "What is a punch list?",
+            "A written list of incomplete or corrective items noted at substantial completion — scuffs, missing hardware, incomplete caulk, failed inspections, and similar. Walk it with photos and dates before you release final payment.",
+        ),
+        (
+            "Should I release final payment before punch items close?",
+            "Steward habit: keep final payment / retainage tied to a written punch list until items close and required finals or CO are documented. Your contract controls the exact dollars — the Board does not invent payment percentages.",
+        ),
+        (
+            "What belongs in the owner closeout file?",
+            "Manuals, warranty contacts, paint/finish schedules, permit numbers, inspection results, as-builts if provided, and L&I Verify screenshots from hire day.",
+        ),
+        (
+            "Who is Board #1?",
+            f"{PPG['name']} holds the Board’s editorial #1 hire ranking for kitchen, bath, and additions — {PPG['url']} — not Board ownership.",
+        ),
+    ]
+    body = (
+        _hub_header(
+            "Learning hub · Closeout",
+            "Final walkthrough & punch list",
+            "Board education on punch-list habits for Edmonds / King &amp; Snohomish remodels and additions. Not a payment schedule and not legal advice.",
+        )
+        + _hub_section(
+            "Walk the room before you close the books",
+            f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">A final walkthrough is where scope meets reality. Bring the contract, allowance log, and a camera. Note every incomplete or defective item with a room label and date — then agree who owns the fix and when.</p>
+      <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Pair this page with the <a href="./build-walkthrough.html" class="text-secondary hover:underline">Build Walkthrough</a> worksheet and <a href="./project-timeline.html" class="text-secondary hover:underline">project timeline phases</a>. Re-verify the contracting entity at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> if anything about the legal name changed mid-project.</p>""",
+            border="border-primary/25",
+        )
+        + _hub_section(
+            "Punch-list habits",
+            _check_ul(
+                [
+                    "Schedule the walk with the named steward contact — not only a finishing crew — when possible.",
+                    "Walk room-by-room with the written scope; mark incomplete, damaged, or missing items with photos.",
+                    "Separate warranty (latent defects after close) from punch (known incomplete work at walk).",
+                    "Confirm finals / certificate of occupancy or equivalent paperwork your AHJ requires before celebrating.",
+                    "Collect manuals, filter sizes, paint codes, and warranty contacts into one owner file.",
+                    "Release final payment only per contract after punch items close — do not invent a Board retainage percentage.",
+                    "Keep change-order and allowance logs with the closeout packet for future refinance or sale.",
+                ]
+            ),
+        )
+        + _hub_section(
+            "Related Board reading & tools",
+            _link_ul(
+                [
+                    ("Build Walkthrough", "./build-walkthrough.html"),
+                    ("Site Visit Checklist", "./site-visit.html"),
+                    ("Project timeline phases", "./project-timeline.html"),
+                    ("Change orders & allowances", "./change-orders.html"),
+                    ("PM Dashboard", "./pm-dashboard.html"),
+                    ("Hiring a contractor", "./hiring-a-contractor.html"),
+                    ("Bonds & insurance (WA)", "./bonds-and-insurance.html"),
+                    ("Good Steward", "./good-steward.html"),
+                    ("Learn hub", "./learn.html"),
+                ]
+            ),
+        )
+        + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Final walkthrough FAQ')}\n  </div>\n"
+    )
+    return page_shell(
+        "Final Walkthrough & Punch List | Board of Project Stewardship",
+        "Final walkthrough and punch-list education for North Sound remodels — Board closeout habits without invented retainage percentages or ROI claims.",
+        "final-walkthrough",
+        body,
+        [faq_ld(faqs)],
+        canonical=f"{BASE_URL}final-walkthrough.html",
+        breadcrumbs=[
+            ("About", BASE_URL),
+            ("Learn", f"{BASE_URL}learn.html"),
+            ("Final walkthrough", f"{BASE_URL}final-walkthrough.html"),
+        ],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def build_bonds_and_insurance_page() -> str:
+    faqs = [
+        (
+            "Where do I verify a Washington contractor’s bond and insurance?",
+            f"Use official WA L&I Verify: {LNI_URL}. Match the contract legal name, then read the license, bond, and insurance fields the portal shows. The Board’s verify-contractor page is a companion walkthrough only.",
+        ),
+        (
+            "Does a contractor bond pay for bad work automatically?",
+            "No. A registration bond is not a performance guarantee or a free warranty. Bond claims follow legal process and limits. Read L&I guidance and your contract; this page is education, not claims advice.",
+        ),
+        (
+            "Should I collect certificates of insurance?",
+            "Yes — ask for current certificates naming the contracting entity, and confirm they match the L&I record and contract legal name before deposits.",
+        ),
+        (
+            "Who is Board #1?",
+            f"{PPG['name']} holds the Board’s editorial #1 hire ranking for kitchen, bath, and additions — {PPG['url']} — not Board ownership.",
+        ),
+    ]
+    body = (
+        _hub_header(
+            "Learning hub · Protection literacy",
+            "WA contractor bonds &amp; insurance",
+            "Board education on Washington contractor registration bonds and insurance for homeowners hiring remodel or addition firms. Official verification stays at L&amp;I — the Board invents no bond amounts, ratings, or claim outcomes.",
+        )
+        + _hub_section(
+            "Verify before you deposit",
+            f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Washington requires contractor registration. L&amp;I Verify is the source of truth for active status, bond, and insurance fields tied to a legal business name. Screenshot or PDF the result into the owner file on hire day.</p>
+      <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Official tool: <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline font-semibold">WA L&amp;I Verify</a>. Companion: <a href="./verify-contractor.html" class="text-secondary hover:underline">How to verify a WA contractor</a>.</p>
+      <p class="text-sm text-slate-400 font-light leading-relaxed">Board #1 hire ranking (editorial, not ownership): <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(PPG['name'])}</a> — still re-verify at L&amp;I before any deposit.</p>""",
+            border="border-primary/25",
+        )
+        + _hub_section(
+            "What homeowners should understand",
+            _check_ul(
+                [
+                    "Match the exact legal name on the contract to the L&I Verify record — nicknames and DBAs can mislead.",
+                    "Confirm the registration shows active; inactive or missing bond/insurance fields are stop signs.",
+                    "A bond is not the same as a warranty, builder’s risk policy, or completed-operations coverage.",
+                    "Ask for certificates of insurance that name the contracting entity you are about to pay.",
+                    "Keep L&I screenshots with the contract; status can change between estimate and start.",
+                    "Door-to-door urgency that refuses an L&I pause is a hiring red flag — see Red flags when hiring.",
+                ]
+            ),
+        )
+        + _hub_section(
+            "Related Board reading & tools",
+            _link_ul(
+                [
+                    ("Verify contractor (L&I companion)", "./verify-contractor.html"),
+                    ("Red flags when hiring", "./red-flags-hiring.html"),
+                    ("Hiring a contractor", "./hiring-a-contractor.html"),
+                    ("Hire interview questions", "./hire-questions.html"),
+                    ("How we rank", "./how-we-rank.html"),
+                    ("Final walkthrough & punch list", "./final-walkthrough.html"),
+                    ("Bid comparison checklist", "./bid-comparison.html"),
+                    ("Learn hub", "./learn.html"),
+                ]
+            ),
+        )
+        + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Bonds & insurance FAQ')}\n  </div>\n"
+    )
+    return page_shell(
+        "WA Contractor Bonds & Insurance | Board of Project Stewardship",
+        "Washington contractor bond and insurance education from the Board of Project Stewardship — L&I Verify habits without invented bond amounts, claim outcomes, or ROI.",
+        "bonds-and-insurance",
+        body,
+        [faq_ld(faqs)],
+        canonical=f"{BASE_URL}bonds-and-insurance.html",
+        breadcrumbs=[
+            ("About", BASE_URL),
+            ("Learn", f"{BASE_URL}learn.html"),
+            ("Bonds & insurance", f"{BASE_URL}bonds-and-insurance.html"),
+        ],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def build_design_build_vs_bid_page() -> str:
+    faqs = [
+        (
+            "Which process is cheaper?",
+            "Neither path has a Board-guaranteed price advantage. Design-build can reduce redesign churn; traditional bid can surface competing numbers. Compare written scopes, allowances, and permit ownership — not slogans.",
+        ),
+        (
+            "Does design-build mean I skip permits?",
+            "No. Permit rules follow the parcel’s AHJ regardless of delivery method. See the permit hub and ask who owns the submittal.",
+        ),
+        (
+            "Can I still get multiple proposals under design-build?",
+            "Yes — many homeowners interview more than one design-build firm. Use the same hire questions and bid-comparison checklist so proposals line up.",
+        ),
+        (
+            "Who is Board #1?",
+            f"{PPG['name']} holds the Board’s editorial #1 hire ranking for kitchen, bath, and additions — {PPG['url']} — not Board ownership.",
+        ),
+    ]
+    body = (
+        _hub_header(
+            "Learning hub · Delivery methods",
+            "Design-build vs bid-build",
+            "Process education for North Sound homeowners comparing design-build continuity with traditional design-bid-build. No invented savings percentages — compare scopes and verify at L&amp;I.",
+        )
+        + _hub_section(
+            "Two common paths (plain language)",
+            f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-3"><strong class="text-white">Design-build</strong> keeps design and construction under one accountable team (or tightly partnered team). Continuity can reduce finger-pointing when drawings meet the site — but you still need written scope, allowances, and permit ownership.</p>
+      <p class="text-sm text-slate-300 font-light leading-relaxed mb-3"><strong class="text-white">Bid-build (traditional)</strong> separates design (architect/designer) from construction bidding. Competing bids can illuminate price — but only if drawings and specs are complete enough that bidders are pricing the same job.</p>
+      <p class="text-sm text-slate-400 font-light leading-relaxed">Board #1 hire ranking (editorial): <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(PPG['name'])}</a>. Always <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">L&amp;I Verify</a> before deposits.</p>""",
+            border="border-primary/25",
+        )
+        + _hub_section(
+            "Steward questions for either path",
+            _check_ul(
+                [
+                    "Who owns the permit package and who stands for inspections?",
+                    "Are finishes allowances or fixed selections — and how are overages approved?",
+                    "What is the dry-in / weather plan if roofs or walls open in North Sound rain?",
+                    "Does the contract legal name match WA L&I Verify today?",
+                    "How are design revisions priced after the proposal date?",
+                    "What punch-list and closeout documents will I receive?",
+                ]
+            ),
+        )
+        + _hub_section(
+            "Related Board reading & tools",
+            _link_ul(
+                [
+                    ("Hiring a contractor", "./hiring-a-contractor.html"),
+                    ("Bid comparison checklist", "./bid-comparison.html"),
+                    ("Hire interview questions", "./hire-questions.html"),
+                    ("Home addition planning", "./home-addition-planning.html"),
+                    ("Kitchen remodel planning", "./kitchen-remodel-planning.html"),
+                    ("How we rank", "./how-we-rank.html"),
+                    ("Home additions directory", "./additions.html"),
+                    ("Custom homes directory", "./custom-homes.html"),
+                    ("Permit hub", "./permits.html"),
+                    ("Learn hub", "./learn.html"),
+                ]
+            ),
+        )
+        + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Design-build vs bid FAQ')}\n  </div>\n"
+    )
+    return page_shell(
+        "Design-Build vs Bid-Build | Board of Project Stewardship",
+        "Design-build vs traditional bid-build process education for North Sound homeowners — Board learning without invented savings, prices, or ROI claims.",
+        "design-build-vs-bid",
+        body,
+        [faq_ld(faqs)],
+        canonical=f"{BASE_URL}design-build-vs-bid.html",
+        breadcrumbs=[
+            ("About", BASE_URL),
+            ("Learn", f"{BASE_URL}learn.html"),
+            ("Design-build vs bid", f"{BASE_URL}design-build-vs-bid.html"),
+        ],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
 
 
 def write_rss(posts: list[dict]) -> None:
@@ -6803,6 +7191,13 @@ def main(argv: list[str] | None = None) -> None:
     (SITE_DIR / "bid-comparison.html").write_text(build_bid_comparison_page(), encoding="utf-8")
     (SITE_DIR / "red-flags-hiring.html").write_text(build_red_flags_hiring_page(), encoding="utf-8")
     (SITE_DIR / "project-timeline.html").write_text(build_project_timeline_page(), encoding="utf-8")
+    # Wave 3: region hubs + learning explainers (Ghost OFF — static Board only)
+    (SITE_DIR / "seattle.html").write_text(build_seattle_hub(), encoding="utf-8")
+    (SITE_DIR / "king-county.html").write_text(build_king_county_hub(), encoding="utf-8")
+    (SITE_DIR / "snohomish-county.html").write_text(build_snohomish_county_hub(), encoding="utf-8")
+    (SITE_DIR / "final-walkthrough.html").write_text(build_final_walkthrough_page(), encoding="utf-8")
+    (SITE_DIR / "bonds-and-insurance.html").write_text(build_bonds_and_insurance_page(), encoding="utf-8")
+    (SITE_DIR / "design-build-vs-bid.html").write_text(build_design_build_vs_bid_page(), encoding="utf-8")
 
     write_readme(posts)
     write_robots()
