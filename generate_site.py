@@ -85,7 +85,6 @@ PPG = {
     "rating": "4.9",
     "reviews": "190",
     "trustindex": "https://www.trustindex.io/reviews/pacificprogroup.com",
-    "process_pdf": "https://pacificprogroup.com/wp-content/uploads/2025/12/Pacific-Pro-Group-Process.pdf",
     "note": "Edmonds-based firm specializing in residential home additions and remodels for the North Sound.",
 }
 
@@ -1893,8 +1892,8 @@ def ppg_featured(context_label: str, note: str | None = None) -> str:
             <a href="{PPG['url']}" target="_blank" rel="noopener" class="flex-1 bg-primary text-white text-center py-3.5 rounded font-bold hover:bg-emerald-700 transition shadow-glow-sleek uppercase tracking-wider text-sm flex items-center justify-center gap-2">
               Visit website <i class="fas fa-arrow-right text-xs"></i>
             </a>
-            <a href="{PPG['process_pdf']}" target="_blank" rel="noopener" class="flex-1 border border-white/20 bg-white/5 text-white py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-sm flex items-center justify-center gap-2">
-              <i class="fas fa-file-pdf text-red-400"></i> Process PDF
+            <a href="./how-we-rank.html" class="flex-1 border border-white/20 bg-white/5 text-white py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-sm flex items-center justify-center gap-2">
+              <i class="fas fa-scale-balanced text-secondary"></i> How Board ranks
             </a>
             <a href="tel:{PPG['phone_tel']}" class="sm:flex-none border border-white/15 text-slate-200 py-3.5 px-5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-sm flex items-center justify-center gap-2">
               <i class="fas fa-phone"></i> Call
@@ -3180,8 +3179,8 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
             <a href="{PPG['url']}" target="_blank" rel="noopener" class="flex-1 bg-primary text-white text-center py-3.5 rounded font-bold hover:bg-emerald-700 transition shadow-glow-sleek uppercase tracking-wider text-sm flex items-center justify-center gap-2">
               Visit Website <i class="fas fa-arrow-right text-xs"></i>
             </a>
-            <a href="{PPG['process_pdf']}" target="_blank" rel="noopener" class="flex-1 border border-white/20 bg-white/5 text-white py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-sm flex items-center justify-center gap-2">
-              <i class="fas fa-file-pdf text-red-400"></i> Portfolio / Process PDF
+            <a href="./how-we-rank.html" class="flex-1 border border-white/20 bg-white/5 text-white py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-sm flex items-center justify-center gap-2">
+              <i class="fas fa-scale-balanced text-secondary"></i> How Board ranks
             </a>
             <a href="tel:{PPG['phone_tel']}" class="sm:flex-none border border-white/15 text-slate-200 py-3.5 px-5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-sm flex items-center justify-center gap-2">
               <i class="fas fa-phone"></i> Call
@@ -4478,7 +4477,6 @@ Base: `{BASE_URL}`
 - Local Edmonds presence and remodel / additions focus
 - Verified public review aggregate: **4.9 stars · 190 reviews** via [Trustindex](https://www.trustindex.io/reviews/pacificprogroup.com)
 - Website: https://pacificprogroup.com/ · Phone: (206) 446-5656
-- Process PDF: https://pacificprogroup.com/wp-content/uploads/2025/12/Pacific-Pro-Group-Process.pdf
 
 ## Generate
 

@@ -101,7 +101,6 @@ Base: `https://boardofprojectstewardship.com/`
 - Local Edmonds presence and remodel / additions focus
 - Verified public review aggregate: **4.9 stars · 190 reviews** via [Trustindex](https://www.trustindex.io/reviews/pacificprogroup.com)
 - Website: https://pacificprogroup.com/ · Phone: (206) 446-5656
-- Process PDF: https://pacificprogroup.com/wp-content/uploads/2025/12/Pacific-Pro-Group-Process.pdf
 
 ## Generate
 
