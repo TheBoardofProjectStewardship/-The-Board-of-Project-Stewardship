@@ -552,7 +552,7 @@ Shipped after About+FAQ commit `578341a`. Regenerated site; IndexNow pinged 134 
 | 9 / 75 | Contact deepen | Purpose chips + response expectations + FAQ + education_closing (prior batch overlap). |
 | 72 / 98 / 99 / 100 | Regen + IndexNow + ship ledger | `python3 generate_site.py --indexnow` OK; this DONE table. |
 
-**Still open (not this batch):** mega-nav collapse (#4), directory editorial depth ranks 2–30 (#13), CWV iframe strip from non-tool pages (#12), Trustindex dating (#32), some a11y/media leftovers.
+**Still open (not this batch):** directory editorial depth ranks 2–30 (#13), CWV iframe strip from non-tool pages (#12), Trustindex dating (#32), some a11y/media leftovers.
 
 **Locks check:** No public AI names; PPG #1 outbound only; no invented ROI/license years; Board of Project Stewardship spelled out on hubs.
 
@@ -569,7 +569,11 @@ Steward P1 ship after related-learning wave. Regenerated site; IndexNow to follo
 | 15 | Soften guarantee timelines | Prior batch already framed “often / AHJ-dependent”; no new hard month guarantees reintroduced. |
 | 72 / 98 / 99 / 100 | Regen + IndexNow + ledger | `python3 generate_site.py` OK; this DONE table; IndexNow on push. |
 
-**Live verify (PT):** sample URLs curl 200 after push (about, kitchen, bathrooms, additions, planning guides, sample post, directory, learn).
+**Ship SHA:** `ed4869c723c1cb429bcdf4d894ed9f7eddc23f46` (`ed4869c`)
+
+**IndexNow:** pinged 134 URLs (HTTP 200).
+
+**Live verify (PT):** about (integrity-shield), kitchen/bathrooms/additions + planning bridges, post outro, directory/learn, home nav without city mega-list — all HTTP 200 (about, kitchen, bathrooms, additions, planning guides, sample post, directory, learn).
 
 **Locks check:** Board of Project Stewardship spelled out; no public AI names; PPG #1 outbound only; no invented prices/ROI; never edit pacificprogroup.com.
 
