@@ -540,6 +540,7 @@ Supporting helpers shipped: `OFFICIAL_LINKS`, `related_pack`, `official_links_se
 10–14, 16, 19–24, 28–30, 32, 36–97 — follow-on densification / CWV / schema / city uniqueness waves
 
 ### Live QA
-- `about.html`: **200** (verified)
-- `faq.html`: **200** (verified)
-- Commit SHA: 
+- about.html: **200**
+- faq.html: **200**
+- Ship commit: `69238aa65e366a182fd323f74ce6c05af6d5d78f`
+- DONE-ledger commit: `526c8bb091d6792057d5b7b523d0c5493bc35243`
