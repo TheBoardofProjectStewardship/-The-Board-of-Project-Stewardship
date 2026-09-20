@@ -14,19 +14,41 @@ slug: "kitchen-remodel-mountlake-terrace"
 
 Mountlake Terrace’s residential fabric supports practical kitchen remodels oriented around family circulation, storage, and durability.
 
+![Illustrative editorial photo — not a project photograph; Pacific Northwest kitchen remodel with cabinet boxes and island dry-fit](../assets/images/posts/2026-08-23-mlt-kitchen-1.webp)
+
 ## Local context
 
 Suburban access eases staging versus Seattle core neighborhoods. HOA or neighborhood norms may still affect dumpsters. Many homes have 1990s–2000s kitchens ready for layout corrections and brighter task lighting.
+
+Confirm permit expectations with the [City of Mountlake Terrace](https://www.cityofmlt.com/) for plumbing and electrical scopes rather than guessing from a neighboring city’s checklist.
 
 ## Climate and permitting
 
 Outdoor-exhaust hoods and under-sink waterproofing remain wise in the PNW. Trade permits apply to substantive changes. Panel capacity checks precede major appliance upgrades.
 
+![Illustrative editorial photo — not a project photograph; kitchen rough-in with electrical, hood duct chase, and plumbing stub-outs](../assets/images/posts/2026-08-23-mlt-kitchen-2.webp)
+
 ## Materials and process
 
 Design for clearances, then aesthetics. Soft-close cabinets, resilient flooring transitions, and layered lighting deliver daily value. Freeze appliance models before ordering cabinets.
 
-**Pacific Pro Group** is Board #1 for kitchens — [pacificprogroup.com](https://pacificprogroup.com/) (PACIFPG765OF). Directories: [kitchen.html](../kitchen.html). Verify: [L&I Verify](https://secure.lni.wa.gov/verify/).
+https://www.youtube.com/watch?v=jU5cLOaqfTs
+
+Illustrative process clip (shared editorial staging for remodel sequencing — not footage of a live Board of Project Stewardship job):
+
+[Watch the short process clip](../assets/videos/posts/2026-09-shared-waterproofing.mp4)
+
+![Illustrative editorial photo — not a project photograph; finished contemporary kitchen with ducted range hood and island seating — design preview only](../assets/images/posts/2026-08-23-mlt-kitchen-3.webp)
+
+Board rankings on [kitchen.html](../kitchen.html) place **Pacific Pro Group** at #1 for kitchens in this editorial set — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with [trades.html](../trades.html) when electrical or plumbing is in scope, and the [blog](../blog.html) for related Snohomish County kitchen posts.
+
+## Materials Worth Knowing
+
+Manufacturer product pages useful when comparing openings, coatings, and exterior connections tied to a kitchen remodel (no prices or endorsements implied):
+
+- [Andersen Windows](https://www.andersenwindows.com/) — sink-wall and view openings common in suburban kitchen remodels
+- [Sherwin-Williams coatings](https://www.sherwin-williams.com/) — interior and exterior coatings commonly specified around cabinets, trim, and touch-up after remodel dust
+- [Therma-Tru entry doors](https://www.thermatru.com/) — exterior door packages when a kitchen remodel touches or relocates a side or rear entry
 
 ## FAQ
 

@@ -35,7 +35,10 @@
     "vC6Il3vPt0E",
     "EUIKy7vmc40",
     "pWePjMmyha0",
-    "knQjjjKAI_M"
+    "knQjjjKAI_M",
+    "9R9kfoAJVbQ",
+    "7n0NE2WJegw",
+    "jU5cLOaqfTs"
   ],
   "used_photo_urls": [
     "assets/images/posts/2026-08-28-mukilteo-bath-1.webp",
@@ -103,15 +106,24 @@
     "assets/images/posts/2026-08-30-coastal-moisture-3.webp",
     "assets/images/posts/2026-08-29-kitchen-addition-1.webp",
     "assets/images/posts/2026-08-29-kitchen-addition-2.webp",
-    "assets/images/posts/2026-08-29-kitchen-addition-3.webp"
+    "assets/images/posts/2026-08-29-kitchen-addition-3.webp",
+    "assets/images/posts/2026-08-25-lfp-bath-1.webp",
+    "assets/images/posts/2026-08-25-lfp-bath-2.webp",
+    "assets/images/posts/2026-08-25-lfp-bath-3.webp",
+    "assets/images/posts/2026-08-24-shoreline-addition-1.webp",
+    "assets/images/posts/2026-08-24-shoreline-addition-2.webp",
+    "assets/images/posts/2026-08-24-shoreline-addition-3.webp",
+    "assets/images/posts/2026-08-23-mlt-kitchen-1.webp",
+    "assets/images/posts/2026-08-23-mlt-kitchen-2.webp",
+    "assets/images/posts/2026-08-23-mlt-kitchen-3.webp"
   ],
   "last_morning_audit": "2026-09-20",
   "last_upgraded_slugs": [
-    "bathroom-remodel-mukilteo-wa",
-    "kitchen-remodel-mukilteo-wa",
-    "home-addition-lake-forest-park"
+    "bathroom-remodel-lake-forest-park",
+    "second-story-addition-shoreline",
+    "kitchen-remodel-mountlake-terrace"
   ],
-  "last_shared_video": "assets/videos/posts/2026-09-shared-waterproofing.mp4",
+  "last_shared_video": "assets/videos/posts/2026-09-07-edmonds-adu-framing.mp4",
   "video_skip_log": [
     {
       "date": "2026-09-20",
@@ -124,6 +136,20 @@
       "reused": [
         "assets/videos/posts/2026-09-shared-waterproofing.mp4",
         "assets/videos/posts/2026-09-bath-process-shared.mp4"
+      ]
+    },
+    {
+      "date": "2026-09-20",
+      "reason": "reuse existing shared mp4s; Higgsfield balance ~21 \u2014 no new video spend; z_image stills only",
+      "posts": [
+        "bathroom-remodel-lake-forest-park",
+        "second-story-addition-shoreline",
+        "kitchen-remodel-mountlake-terrace"
+      ],
+      "reused": [
+        "assets/videos/posts/2026-09-bath-process-shared.mp4",
+        "assets/videos/posts/2026-09-07-edmonds-adu-framing.mp4",
+        "assets/videos/posts/2026-09-shared-waterproofing.mp4"
       ]
     }
   ]

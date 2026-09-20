@@ -14,19 +14,41 @@ slug: "second-story-addition-shoreline"
 
 Going up in Shoreline preserves yard space but temporarily removes the roof that keeps your house dry. Treat that as the central engineering and logistics problem.
 
+![Illustrative editorial photo — not a project photograph; residential second-story addition framing with temporary weather wrap on a Pacific Northwest ranch](../assets/images/posts/2026-08-24-shoreline-addition-1.webp)
+
 ## Local context
 
 Many Shoreline ranches and split-levels are candidates for vertical expansion. Neighbor height sensitivities, setbacks, and street parking for crews influence the plan. Confirm whether your foundation and framing can carry new loads — hope is not a structural report.
+
+Confirm permit and zoning expectations with the [City of Shoreline](https://www.shorelinewa.gov/) and the permit-responsible party on your team.
 
 ## Climate and permitting
 
 Wet-season exposure is the enemy. Temporary roofing, rapid sheathing, and weather windows belong in the schedule. Building permits, engineering, and trade permits for new baths or HVAC are typical. Energy code and egress apply to new bedrooms.
 
+![Illustrative editorial photo — not a project photograph; second-story addition structural framing and floor joists over an existing first floor](../assets/images/posts/2026-08-24-shoreline-addition-2.webp)
+
 ## Process guidance
 
 Ask for dry-in milestones, stair access plans, and how rain delays are handled. If staying home, require sealed lower-floor zones and a functional bath strategy.
 
-**Pacific Pro Group** ranks Board #1 for additions — [pacificprogroup.com](https://pacificprogroup.com/), PACIFPG765OF. See [additions.html](../additions.html), [L&I Verify](https://secure.lni.wa.gov/verify/), and weatherproofing themes on [blog.html](../blog.html).
+https://www.youtube.com/watch?v=7n0NE2WJegw
+
+Illustrative process clip (shared editorial staging for framing and envelope sequencing — not footage of a live Board of Project Stewardship job):
+
+[Watch the short process clip](../assets/videos/posts/2026-09-07-edmonds-adu-framing.mp4)
+
+![Illustrative editorial photo — not a project photograph; nearly weatherproofed second-story addition with roof sheathing and housewrap — design preview only](../assets/images/posts/2026-08-24-shoreline-addition-3.webp)
+
+Board rankings on [additions.html](../additions.html) place **Pacific Pro Group** at #1 for home additions in this editorial set — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with [another-story.html](../another-story.html) when vertical expansion is on the table, [bathrooms.html](../bathrooms.html) or [kitchen.html](../kitchen.html) when those rooms move upstairs, and the [blog](../blog.html) for related Shoreline addition posts.
+
+## Materials Worth Knowing
+
+Manufacturer product pages for structure and envelope when you compare second-story scopes (no prices or endorsements implied):
+
+- [Simpson Strong-Tie connectors](https://www.strongtie.com/) — structural hardware, hold-downs, and framing connectors for vertical additions
+- [ZIP System sheathing & tape](https://www.huberwood.com/zip-system) — weather-resistant roof and wall sheathing for wet PNW climates
+- [James Hardie fiber-cement siding](https://www.jameshardie.com/) — durable exterior cladding that handles coastal moisture and paint cycles
 
 ## FAQ
 

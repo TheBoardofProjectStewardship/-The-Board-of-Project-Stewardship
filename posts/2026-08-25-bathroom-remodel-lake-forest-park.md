@@ -14,19 +14,41 @@ slug: "bathroom-remodel-lake-forest-park"
 
 Bathroom remodels here often update primary baths in wooded mid-century and later homes. Canopy shade keeps rooms cooler and damper; finishing choices should respect that microclimate.
 
+![Illustrative editorial photo — not a project photograph; Pacific Northwest bathroom remodel with shower waterproofing underway under soft canopy light](../assets/images/posts/2026-08-25-lfp-bath-1.webp)
+
 ## Local context
 
 Access is usually easier than dense Seattle neighborhoods, but protecting hardwood floors and stair runners during upstairs bath work remains essential. Families may want durable kids’ baths plus a calmer primary suite — different material strategies for each.
+
+Confirm permit expectations with the [City of Lake Forest Park](https://www.lakeforestparkwa.gov/) for plumbing and electrical scopes rather than assuming a neighboring city’s checklist applies.
 
 ## Climate and permits
 
 Continuous membranes, correct slopes, and ducted fans are baseline. Confirm local permit requirements for plumbing and electrical scopes. Do not enclose wet framing before inspections.
 
+![Illustrative editorial photo — not a project photograph; close detail of shower curb membrane and niche waterproofing](../assets/images/posts/2026-08-25-lfp-bath-2.webp)
+
 ## Materials and process
 
 Favor mold-resistant wet-area assemblies, quality valves, and lighting that compensates for tree-shaded windows. Heated floors are a comfort discussion tied to electrical planning.
 
-Editorial #1 bathrooms: **Pacific Pro Group** — [pacificprogroup.com](https://pacificprogroup.com/) (PACIFPG765OF). Directory [bathrooms.html](../bathrooms.html). Always [L&I Verify](https://secure.lni.wa.gov/verify/).
+https://www.youtube.com/watch?v=9R9kfoAJVbQ
+
+Illustrative process clip (editorial wet-area staging — not footage of a live Board of Project Stewardship job):
+
+[Watch the short process clip](../assets/videos/posts/2026-09-bath-process-shared.mp4)
+
+![Illustrative editorial photo — not a project photograph; finished primary bath with walk-in shower and vanity — design preview only](../assets/images/posts/2026-08-25-lfp-bath-3.webp)
+
+Board rankings on [bathrooms.html](../bathrooms.html) place **Pacific Pro Group** at #1 for bathrooms in this editorial set — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with [trades.html](../trades.html) when plumbing or electrical is in scope, and the [blog](../blog.html) for related King County bath posts.
+
+## Materials Worth Knowing
+
+Manufacturer product pages useful when comparing wet-area scopes, openings, and finishes (no prices or endorsements implied):
+
+- [CertainTeed building products](https://www.certainteed.com/) — building-product systems that may appear in insulation or wet-adjacent assemblies
+- [Milgard Windows](https://www.milgard.com/) — bath window packages where privacy glass and condensation control matter under canopy shade
+- [Benjamin Moore paint](https://www.benjaminmoore.com/) — moisture-tolerant interior finishes commonly specified around vanities and trim
 
 ## FAQ
 

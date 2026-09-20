@@ -1,0 +1,613 @@
+                                       2021 Washington State Energy Code – Residential
+                          Prescriptive Energy Code Compliance for All Climate Zones in Washington
+                                 Single Family – New & Additions (effective March 15, 2024)
+
+
+
+
+                                                                       Permit#
+                                                                                          Address or Lot & Block
+
+
+
+                                                                       City                                              Zip
+       These requirements apply to all the IRC building types, including detached one- and two-family
+                      dwellings and multiple single-family dwellings (townhouses).
+Instructions: This single-family project uses the requirements of the Prescriptive Path below to incorporate
+the minimum values listed. Based on the conditioned floor area of the structure, the number of required
+additional credits must be selected by the permit applicant.
+ Provide all information from the following tables in as building permit drawings: Table R402.1.2 - Insulation and
+Fenestration Requirements by Component, Table R406.2 - Fuel Normalization Credits and R406.3 Energy Credits.
+Authorized Representative
+                                                                                                            Date
+        Signature
+
+                                                      All Climate Zones Table 402.1.3
+                                                               R-Value a                                              U-Factor a
+                            b, j
+Fenestration U-Factor                                             n/a                                                   0.30
+Skylight U-Factor b                                               n/a                                                   0.50
+Ceiling e                                                         60                                                     n/a
+Wood Frame Wall g,i                                          20+5 or 13+10                                               n/a
+Floor                                                             30                                                     n/a
+Below Grade Wall c,h                                      10/15/21 int + 5TB                                             n/a
+Slab d,f R-Value & Depth                                        10, 4 ft                                                 n/a
+     R-values are minimums. U-factors and SHGC are maximums. When insulation is installed in a cavity which is less than the label or design
+ a thickness of the insulation, the compressed R-value of the insulation from Appendix Table A101.4 shall not be less than the R-value specified
+     in the table
+ b The fenestration U-factor column excludes skylights.
+     "10/15/21 +5TB" means R-10 continuous insulation on the exterior of the wall, or R-15 continuous insulation on the interior of the wall, or R-
+     21 cavity insulation plus a thermal break between the slab and the basement wall at the interior of the basement wall. "10/15/21 +5TB" shall
+ c   be permitted to be met with R-13 cavity insulation on the interior of the basement wall plus R-5 continuous insulation on the interior or
+     exterior of the wall. "5TB" means R-5 thermal break between floor slab and basement wall.
+ d   R-10 continuous insulation is required under heated slab on grade floors. See Section R402.2.9.1.
+     For single rafter- or joist-vaulted ceilings, the insulation may be reduced to R-38 if the full insulation depth extends over the top plate of the
+ e   exterior wall.
+     R-7.5 continuous insulation installed over an existing slab is deemed to be equivalent to the required perimeter slab insulation when applied
+ f   to existing slabs complying with Section R503.1.1. If foam plastic is used, it shall meet the requirements for thermal barriers protecting foam
+     plastics.
+ g   For log structures developed in compliance with Standard ICC 400, log walls shall meet the requirements for climate zone 5 of ICC 400.
+     Int. (intermediate framing) denotes framing and insulation as described in Section A103.2.2 including standard framing 16 inches on center,
+ h   78 percent of the wall cavity insulated and headers insulated with a minimum of R-10 insulation.
+     The first value is cavity insulation, the second value is continuous insulation. Therefore, as an example, “R13+10” means R-13 cavity
+ i   insulation plus R-10 continuous insulation
+     A maximum U-factor of 0.32 shall apply to vertical fenestration products installed in buildings located above 4000 feet in elevation above sea
+ j   level, or in windborne debris regions where protection of openings is required under Section R301.2.1.2 of the International Residential
+     Code.
+
+
+
+
+Prescriptive Path – Single Family WSEC-R 2021 Edition EPCA C103 (V 01/2024)                                                                        1
+                                     2021 Washington State Energy Code – Residential
+                        Prescriptive Energy Code Compliance for All Climate Zones in Washington
+                               Single Family – New & Additions (effective March 15, 2024)
+
+
+Each dwelling unit in a residential building shall comply with sufficient options from Table R406.2 (fuel
+normalization credits) and Table 406.3 (energy credits) to achieve the following minimum number of
+credits. To claim this credit, the building permit drawings shall specify the option selected and the
+maximum tested building air leakage, and show the qualifying ventilation system and its control sequence
+of operation.
+
+    1.   Small Dwelling Unit: ........................................................................................... 5.0 credits
+          Dwelling units less than 1500 square feet in conditioned floor area with less than 300 square feet of
+         fenestration area. Additions to existing building greater than 500 square feet of heated floor area but less
+         than 1500 square feet.
+    2.   Medium Dwelling Unit: ...................................................................................... 8.0 credits
+         All dwelling units that are not included in #1, #3 or #4.
+    3.   Large Dwelling Unit: ..........................................................................................9.0 credits
+         Dwelling units exceeding 5000 square feet of conditioned floor area.
+    4.   Dwelling units serving Group R-2 occupancies: ................................................ 6.5 credits
+         Section R401.1 and residential building Section R202 for Group R-2.
+    5.   Additions 150 square feet to 500 square feet: ..................................................... 2.0 credits
+
+The drawings included with the building permit application shall identify which options have been selected and the
+point value of each option, regardless of whether separate mechanical, plumbing, electrical, or other permits are
+utilized for the project
+Before selecting your credits on this Summary table, review the details in Table 406.3 (Single Family), on page 4.
+
+                                         Table R406.2 ENERGY EQUALIZATION CREDITS
+                                                                                                                              Credits -
+System                                                                                                                       select ONE
+                                           Description of Primary Heating Source                                               system
+ Type
+                                                                                                                                type
+          For combustion heating equipment meeting minimum federal efficiency standards for the
+    1                                                                                                        0   ☐
+          equipment listed in Table C403.3.2(5) or C403.3.2(6)
+          For an initial heating system using a heat pump that meets federal standards for the equipment
+          listed in Table C403.3.2(2) and supplemental heating provided by electric resistance or a
+     2                                                                                                      1.5  ☐
+          combustion furnace meeting minimum standards listed in Table C403.3.2(5)b found in the 2021
+          WSEC- COMMERCIAL ENERGY CODE
+     3    For heating system based on electric resistance only (either forced air or Zonal)                 0.5  ☐
+          For heating system using a heat pump that meets federal standards for the equipment listed in
+     4c   Table C403.3.2(2) or C403.3.2(9) or Air to water heat pump units that are configured to provide 3.0    ☐
+          both heating and cooling and are rated in accordance with AHRI 550/590
+          For heating system based on electric resistance with:
+               1. Inverter-driven ductless mini-split heat pump system installed in the largest zone in the
+     5              dwelling,                                                                               2.0  ☐
+                    or
+               2. With 2kW or less total installed heating capacity per dwelling
+a. See Section R401.1 and residential building in Section R202 for Group R-2 scope.
+b. The gas back-up furnace will operate as fan-only when the heat pump is operating. The heat pump shall operate at
+all temperatures above 38°F (3.3°C) (or lower). Below that “changeover” temperature, the heat pump would not
+operate to provide space heating. The gas furnace provides heating below 38°F (3.3°C) (or lower).
+c. Additional points for the HVAC system are included in Table R406.3.
+
+
+
+
+Prescriptive Path – Single Family WSEC-R 2021 Edition EPCA C103 (V 01/2024)                                                             2
+                                        2021 Washington State Energy Code – Residential
+                           Prescriptive Energy Code Compliance for All Climate Zones in Washington
+                                  Single Family – New & Additions (effective March 15, 2024)
+
+
+                                              Summary of Table R406.3
+                                                         Credits –
+                                                      limited to one
+Options        Energy Credit Option Descriptions      energy option                                                Comments:
+                                                        from each
+                                                        category d
+  1.1 Efficient Building Envelope                        0.5     ☐
+  1.2 Efficient Building Envelope                        1.0     ☐
+  1.3 Efficient Building Envelope                        1.5     ☐
+                                                                 ☐
+                                                    ●
+  1.4 Efficient Building Envelope                        2.5
+  2.1 Air Leakage Control and Efficient Ventilation      1.0     ☐
+  2.2 Air Leakage Control and Efficient Ventilation      1.5     ☐
+                                                                 ☐
+                                                    ●
+  2.3 Air Leakage Control and Efficient Ventilation      2.0
+  3.1a High Efficiency HVAC                              1.0     ☐
+  3.2 a High Efficiency HVAC                             0.5     ☐
+ 3.3a,c,d High Efficiency HVAC                           0.5     ☐
+ 3.4a,d     High Efficiency HVAC                                         1.5       ☐
+  3.5d      High Efficiency HVAC                                         1.5       ☐
+  3.6a      High Efficiency HVAC                                         1.0       ☐
+ 3.7a,d,e   High Efficiency HVAC                                         2.0       ☐
+ 3.8a,d     High Efficiency HVAC                                         1.0       ☐
+  3.9c      High Efficiency HVAC                                         1.5       ☐
+                                                                   ●
+  3.10      High Efficiency HVAC                                         2.5       ☐
+  3.11      High Efficiency HVAC                                         0.5       ☐
+   4.1      High Efficiency HVAC Distribution System                     0.5       ☐
+  5.1d      Efficient Water Heating                                     0.5        ☐
+   5.2      Efficient Water Heating                                     0.5        ☐
+   5.3      Efficient Water Heating                                     0.5        ☐
+   5.4      Efficient Water Heating                                     1.0        ☐
+   5.5      Efficient Water Heating                                     1.5        ☐
+   5.6      Efficient Water Heating                                     2.0        ☐
+   5.7      Efficient Water Heating                                     2.5        ☐
+   5.8      Efficient Water Heating                                     2.5        ☐
+  6.1e      Renewable Electric Energy (4.5 credits max)                0.5-4.5     0.0
+
+   7.1      Appliance Package                                            0.5       ☐
+
+                                                               Total Credits                     Calculate Total
+
+
+a. An alternative heating source sized at a maximum of 0.5 Watts/ft2 (equivalent) of heated floor area or 500 Watts, whichever is bigger, may be
+installed in the dwelling unit.
+b. See Section R401.1 and residential building in Section R202 for Group R-2 scope.
+c. Option 3.11 can only be taken with Options 3.1 and 3.3. To qualify to claim Option 3.11 with 3.3, the system shall be a 1-2 speed heat pump
+system. Variable capacity heat pumps are ineligible from claiming this option.
+d. This option may only be claimed if serving System Type 4 or 5 from Table R406.2.
+e. Primary living areas include living, dining, kitchen, family rooms, and similar areas.
+f Option 3.11 may only be taken with Efficient Water Heating Options 5.1 or 5.2. Equipment sizing for space heating shall be calculated as provided
+in Section R403.7 with increased capacity to provide a minimum of 75 percent of peak hot water demand or shall be sized in accordance with
+approved manufacturer's specifications or guidance. Supplementary heat for water heating system shall be in accordance with Section R403.5.7.
+
+
+
+Prescriptive Path – Single Family WSEC-R 2021 Edition EPCA C103 (V2/1/2024)                                                                     3
+                                    2021 Washington State Energy Code – Residential
+                       Prescriptive Energy Code Compliance for All Climate Zones in Washington
+                              Single Family – New & Additions (effective March 15, 2024)
+
+
+
+
+                                      Table 406.3 – Energy Credits (Single Family)
+  Option                                             Description                                        Credits: SF
+1. EFFICIENT BUILDING ENVELOPE OPTIONS Only one option from Items 1.1 through 1.4 may be selected in this
+category. Compliance with the conductive UA targets is demonstrated using Section R402.1.5, Total UA alternative,
+where [1-(Proposed UA/Target UA)] > the required %UA reduction
+            Prescriptive compliance is based on Table R402.1.3 with the following modifications:
+    1.1     Vertical fenestration U = 0.22                                                                 0.5
+
+            Prescriptive compliance is based on Table R402.1.3 with the following modifications:
+            Vertical fenestration U = 0.25
+            FloorR-38 Slab on grade R-10 perimeter and under entire slab Below grade slab R-10
+    1.2                                                                                                     1.0
+            perimeter and under entire slab
+            or
+            Compliance based on Section R402.1.5: Reduce the Total target UA by 15%.
+            Prescriptive compliance is based on Table R402.1.3 with the following modifications:
+            Vertical fenestration U = 0.18
+            Ceiling and single-rafter or joist-vaulted R-60 advanced
+            Wood frame wall R-21 int plus R-12 ci
+            Floor R-38
+    1.3     Basement wall R-21 int plus R-12 ci                                                             1.5
+            Slab on grade R-10 perimeter and under entire slab
+            Below grade slab R-10 perimeter and under entire slab
+            or
+            Compliance based on Section R402.1.5: Reduce the Total target UA by 22.5%.
+            Prescriptive compliance is based on Table R402.1.3 with the following modifications:
+            Vertical fenestration U = 0.18
+            Ceiling and single-rafter or joist-vaulted R-60 advanced
+            Wood frame wall R-21 int plus R-16 ci
+            Floor R-48
+    1.4     Basement wall R-21 int plus R-16 ci                                                             2.5
+            Slab on grade R-20 perimeter and under entire slab Below grade slab
+            R-20 perimeter and under entire slab
+            or
+            Compliance based on Section R402.1.5: Reduce the Total target UA by 30%
+
+
+
+
+Prescriptive Path – Single Family WSEC-R 2021 Edition EPCA C103 (V2/1/2024)                                       4
+                                    2021 Washington State Energy Code – Residential
+                       Prescriptive Energy Code Compliance for All Climate Zones in Washington
+                              Single Family – New & Additions (effective March 15, 2024)
+
+
+                                       Table 406.3 – Energy Credits (Single Family)
+  Option                                              Description                                Credits: SF
+2. AIR LEAKAGE CONTROL AND EFFICIENT VENTILATION OPTIONS Only one option from Items 2.1 through 2.3 may be
+selected in this category.
+             Compliance based on Section R402.4.1.2:
+             Reduce the tested air leakage to 2.0 air changes per hour maximum at 50 Pascals,
+             or For R-2 Occupancies, optional compliance based on Section R402.4.1.2: Reduce the
+             tested air leakage to 0.25 cfm/ft2 maximum at 50 Pascals
+             and
+
+    2.1      All whole house ventilation requirements as determined by Section M1505.3 of the                     1.0
+             International Residential Code or Section 403.8 of the International Mechanical Code shall
+             be met with a heat recovery ventilation system with minimum sensible heat recovery
+             efficiency of 0.65.
+
+             To qualify to claim this credit, the building permit drawings shall specify the option being
+             selected, the maximum tested building air leakage, and shall show the qualifying ventilation
+             system and its control sequence of operation.
+             Compliance based on Section R402.4.1.2:
+             Reduce the tested air leakage to 1.5 air changes per hour maximum at 50 Pascals,
+             or For R-2 Occupancies, optional compliance based on Section R402.4.1.2: Reduce the
+             tested air leakage to 0.20 cfm/ft2 maximum at 50 Pascals
+             and
+             All whole house ventilation requirements as determined by Section M1505.3 of the
+    2.2                                                                                                           1.5
+             International Residential Code or Section 403.8 of the International Mechanical Code shall
+             be met with a heat recovery ventilation system with minimum sensible heat recovery
+             efficiency of 0.75.
+
+             To qualify to claim this credit, the building permit drawings shall specify the option being
+             selected and shall specify the maximum tested building air leakage and shall show the heat
+             recovery ventilation system.
+             Compliance based on Section R402.4.1.2:
+             Reduce the tested air leakage to 0.6 air changes per hour maximum at 50 Pascals,
+             or
+             For R-2 Occupancies, optional compliance based on Section R402.4.1.2: Reduce the tested
+             air leakage to 0.15 cfm/ft2 maximum at 50 Pascals
+             and
+    2.3      All whole house ventilation requirements as determined by Section M1505.3 of the                     2.0
+             International Residential Code or Section 403.8 of the International Mechanical Code shall
+             be met with a heat recovery ventilation system with minimum sensible heat recovery
+             efficiency of 0.80. Duct insulation shall comply with Section R403.3.7.
+
+             To qualify to claim this credit, the building permit drawings shall specify the option being
+             selected and shall specify the maximum tested building air leakage and shall show the heat
+             recovery ventilation system.
+To qualify to claim this credit, the building permit drawings shall specify the option being selected and shall specify
+the maximum tested building air leakage and shall show the heat recovery ventilation system.
+
+
+
+
+Prescriptive Path – Single Family WSEC-R 2021 Edition EPCA C103 (V2/1/2024)                                               5
+                                    2021 Washington State Energy Code – Residential
+                       Prescriptive Energy Code Compliance for All Climate Zones in Washington
+                              Single Family – New & Additions (effective March 15, 2024)
+
+
+Table 406.3 – Energy Credits (Single Family)
+  Option                                         Description                                           Credits: SF
+3. HIGH EFFICIENCY HVAC EQUIPMENT OPTIONS
+Only one option from Items 3.1 through 3.10 may be selected in this category. Item 3.11 may be taken with Items 3.1
+or 3.3 only.
+  Reference the chart at the appendix for the HSPF2 Rating conversions for the HVAC selections.
+                                  Energy Credit Options                                        Old HSPF     HSPF2
+3.2 & 3.3 Ducted central heat pump                                                                9.5        8.5
+
+3.5 ductless heat pump in main living area + electric resistance in other rooms                   10          9
+3.6 ducted central heat pump                                                                      11         9.4
+3.6 ducted central heat pump – NEEP cc VCHP list                                                  10         8.5
+3.7 ductless heat pump with no electric resistance (except footnote A)                            10          9
+3.7 ductless heat pump with no electric resistance ≤ 24,000 Btu (except footnote A)                9         8.1
+             For System Type 1 in Table R406.2:
+             Energy Star rated (U.S. North) Gas or propane furnace with minimum AFUE of 95%
+             or
+   3.1 a     Energy Star rated (U.S. North) Gas or propane boiler with minimum AFUE of 90%.                  1.0
+             To qualify to claim this credit, the building permit drawings shall specify the option being
+             selected and shall specify the heating equipment type and the minimum equipment
+             efficiency
+             For secondary heating system serving System Type 2 in Table R406.2:
+             Air-source centrally ducted heat pump with minimum (HSPF 9.5) HSPF2 8.5
+             or
+    3.2a     Energy Star rated (U.S. North) Gas or propane boiler with minimum AFUE of 90%.                  0.5
+             To qualify to claim this credit, the building permit drawings shall specify the option being
+             selected and shall specify the heating equipment type and the minimum equipment
+             efficiency.
+             Air-source, centrally ducted heat pump with minimum (HSPF 9.5) HSPF2 8.5.
+
+             In areas where the winter design temperature as specified in Appendix RC is 23°F or
+             below, a cold climate heat pump found on the NEEP cc ASHP qualified product list shall be
+  3.3a,c,d   used.                                                                                           0.5
+
+             To qualify to claim this credit, the building permit drawings shall specify the option being
+             selected and shall specify the heating equipment type and the minimum equipment
+             efficiency.
+             Closed-loop ground source heat pump; with a minimum COP of 3.3
+             or
+             Open loop water source heat pump with a maximum pumping hydraulic head of 150 feet
+   3.4a,d    and minimum COP of 3.6.                                                                         1.5
+             To qualify to claim this credit, the building permit drawings shall specify the option being
+             selected and shall specify the heating equipment type and the minimum equipment
+             efficiency.
+             Ductless mini-split heat pump system, zonal control: In homes where the primary space
+   3.5 d                                                                                                     1.5
+             heating system is zonal electric heating, a ductless mini-split heat pump system with a
+
+
+Prescriptive Path – Single Family WSEC-R 2021 Edition EPCA C103 (V2/1/2024)                                         6
+                                    2021 Washington State Energy Code – Residential
+                       Prescriptive Energy Code Compliance for All Climate Zones in Washington
+                              Single Family – New & Additions (effective March 15, 2024)
+
+
+              minimum HSPF of 10.0 shall be installed and provide heating to the largest zone of the
+              housing unit.
+
+              To qualify to claim this credit, the building permit drawings shall specify the option being
+              selected and shall specify the heating equipment type and the minimum equipment
+              efficiency.
+              A centrally ducted air source cold climate variable capacity heat pump (cc VHP) found on
+              the NEEP cc VCHP qualified product list with a minimum of 10 HSPF may be used to satisfy
+              this requirement.
+
+              In areas where the winter design temperature as specified in Appendix RC is 23°F or below,
+    3.6       an air source centrally ducted heat pump shall be a cold climate variable capacity heat pump    1.0
+              as listed on the NEEP qualified product list.
+
+              To qualify to claim this credit, the building permit drawings shall specify the option being
+              selected and shall specify the heating equipment type and the minimum equipment
+              efficiency.
+              Ductless split system heat pumps with no electric resistance heating in the primary living
+              areas. A ductless heat pump system with a minimum HSPF of 10 shall be sized and
+              installed to provide heat to entire dwelling unit at the design outdoor air temperature.
+
+              Exception: In homes with total heating loads of 24,000 BTUs or less using multi-zone mini-
+   3.7a,d,e   split systems with nominal ratings of 24,000 or less, the minimum HSPF to claim this credit    2.0
+              shall be 9 HSPF.
+
+              To qualify to claim this credit, the building permit drawings shall specify the option being
+              selected, the heated floor area calculation, the heating equipment type(s), the minimum
+              equipment efficiency, and total installed heat capacity (by equipment type).
+              Air-to-water heat pump with minimum COP of 3.2 at 47°F, rated in accordance with AHRI
+              550/590 by an accredited or certified testing lab. To qualify to claim this credit, the
+   3.8a,d     building permit drawings shall specify the option being selected, the heated floor area         1.0
+              calculation, the heating equipment type(s), the minimum equipment efficiency, and total
+              installed heat capacity (by equipment type).
+              Gas-fired heat pump(s) meeting ANSI Z21.40.2 and Z21.40.4 or CSA, with a minimum UEF
+    3.9       of 1.15. For R-2 Occupancy, gas-fired heat pump(s) meeting ANSI Z21.40.2 and Z21.40.4 or        1.5
+              CSA, with a minimum UEF of 1.15, shall serve all units
+              Combination water heating and space heating system shall include one of the following:
+              Gas-fired heat pump water heater(s) meeting Tier 2 of the NEEA Advanced Water Heating
+              Specification for Gas-Fueled Residential Storage Water Heaters Version 1.0.
+              or
+              For R-2 Occupancy, gas-fired heat pump water heater(s) meeting Tier 2 of the NEEA
+              Advanced Water Heating Specification for Gas-Fueled Residential Storage Water Heaters
+   3.10f      Version 1.0., shall serve all units.                                                            2.5
+              or
+              For R-2 Occupancy, gas-fired heat pump(s) meeting ANSI Z21.40.2 and Z21.40.4 or CSA,
+              with a minimum UEF of 1.15, shall serve all units. To qualify to claim this credit, the
+              building permit drawings shall specify the option being selected and shall specify the water
+              heater equipment type and the minimum equipment efficiency and, for solar water
+              heating systems, the calculation of the minimum energy savings.
+
+
+Prescriptive Path – Single Family WSEC-R 2021 Edition EPCA C103 (V2/1/2024)                                         7
+                                    2021 Washington State Energy Code – Residential
+                       Prescriptive Energy Code Compliance for All Climate Zones in Washington
+                              Single Family – New & Additions (effective March 15, 2024)
+
+
+
+
+             Connected thermostat meeting ENERGY STAR Certified Smart Thermostats/EPA ENERGY
+   3.11c     STAR specifications. To qualify to claim this credit, the building permit drawings shall            0.5
+             specify the option being selected and shall specify the thermostat model.
+
+
+
+
+                                       Table 406.3 – Energy Credits (Single Family)
+  Option                                              Description                                             Credits: SF
+4. HIGH EFFICIENCY HVAC DISTRIBUTION SYSTEM OPTIONS
+           HVAC equipment and associated duct system(s) installation shall comply with the
+           requirements of Section R403.3.2.
+           Electric resistance heat, hydronic heating and ductless heat pumps are not permitted
+           under this option.
+    4.1    Direct combustion heating equipment with AFUE less than 80% is not permitted under this               0.5
+           option.
+           To qualify to claim this credit, the building permit drawings shall specify the option being
+           selected and shall specify the heating equipment type and shall show the location of the
+           heating and cooling equipment and all the ductwork.
+
+                                     Table 406.3 – Energy Credits (Single Family)
+ Option                                              Description                                          Credits: SF
+5. EFFICIENT WATER HEATING OPTIONS
+Only one option from Items 5.3 through 5.8 may be selected in this category. Items 5.1 and 5.2 may be combined
+with any option.
+          A drain water heat recovery unit(s) shall be installed, which captures waste water heat from at
+          least two showers, including tub/shower combinations. It is acceptable, but not required, for
+          sink water to be connected. Unit shall have a minimum efficiency of 40% if installed for equal
+          flow or a minimum efficiency of 54% if installed for unequal flow. Such units shall be rated in
+   5.1    accordance with CSA B55.1 or IAPMO IGC 346-2017 and be so labeled.                                  0.5
+           To qualify to claim this credit, the building permit drawings shall include a plumbing diagram
+           that specifies the drain water heat recovery units and the plumbing layout needed to install it.
+           Labels or other documentation shall be provided that demonstrates that the unit complies with
+           the standard.
+           For Compact Hot Water Distribution system credit, the volume shall store not more than 16
+           ounces of water between the nearest source of heated water and the termination of the
+           fixture supply pipe where calculated using Section R403.5.2. Construction documents shall
+           indicate the ounces of water in piping between the hot water source and the termination of
+   5.2     the fixture supply. When the hot water source is the nearest primed plumbing loop or trunk,             0.5
+           this must be primed with an On Demand recirculation pump and must run a dedicated ambient
+           return line from the furthest fixture or end of loop to the water heater.
+
+           To qualify for this credit, the dwelling must have a minimum of 1.5 bathrooms.
+
+
+
+
+Prescriptive Path – Single Family WSEC-R 2021 Edition EPCA C103 (V2/1/2024)                                              8
+                                    2021 Washington State Energy Code – Residential
+                       Prescriptive Energy Code Compliance for All Climate Zones in Washington
+                              Single Family – New & Additions (effective March 15, 2024)
+
+
+
+          Water heating system shall include the following:
+
+          Energy Star rated gas or propane water heater with a minimum
+          UEF of 0.80.
+   5.3                                                                                                        0.5
+          To qualify to claim this credit, the building permit drawings shall specify the option being
+          selected and shall specify the water heater equipment type and the minimum equipment
+          efficiency and, for solar water heating systems, the calculation of the minimum energy savings.
+          Water heating system shall include one of the following: Energy Star rated gas or propane
+          water heater with a minimum UEF of 0.91
+          or
+          Solar water heating supplementing a minimum standard water heater. Solar water heating will
+          provide a rated minimum savings of 85 therms or 2000 kWh based on the Solar Rating and
+          Certification Corporation (SRCC) Annual Performance of OG-300 Certified Solar Water Heating
+   5.4    System                                                                                              1.0
+
+          or
+          Water heater heated by ground source heat pump meeting the requirements of Option 3.4.
+          To qualify to claim this credit, the building permit drawings shall specify the option being
+          selected and shall specify the water heater equipment type and the minimum equipment
+          efficiency and, for solar water heating systems, the calculation of the minimum energy savings.
+          Water heating system shall include one of the following: Gas-fired heat pump water heater(s)
+          meeting Tier 2 of the NEEA Advanced Water Heating Specification for Gas-Fueled Residential
+          Storage Water Heaters Version 1.0.
+          or
+          For R-2 Occupancy, gas-fired heat pump water heater(s) meeting Tier 2 of the NEEA Advanced
+          Water Heating Specification for Gas-Fueled Residential Storage Water Heaters Version 1.0 shall
+  5.5     supply domestic hot water to all units.                                                             1.5
+          or
+          For R-2 Occupancy, gas-fired heat pump water heater(s) meeting ANSI Z21.40.2 and Z21.40.4
+          or CSA, with a minimum UEF of 1.15, shall supply domestic hot water to all units. To qualify to
+          claim this credit, the building permit drawings shall specify the option being selected and shall
+          specify the water heater equipment type and the minimum equipment efficiency and, for solar
+          water heating systems, the calculation of the minimum energy savings.
+          Water heating system shall include the following:
+          Electric heat pump water heater meeting the standards for Tier III of NEEA's advanced water
+          heating specification
+          Electric heat pump water heater with a minimum UEF of 2.9 and utilizing a split system
+  5.6     configuration with the air-to-refrigerant heat exchanger located outdoors. Equipment shall          2.0
+          meet Section 4, requirements for all units, of the NEEA standard Advanced Water Heating
+          Specification with the UEF noted above
+          To qualify to claim this credit, the building permit drawings shall specify the option being
+          selected and shall specify the water heater equipment type and the minimum equipment
+          efficiency.
+          Water heating system shall include one of the following: Electric heat pump water heater with
+   5.7    a minimum UEF of 2.9 and utilizing a split system configuration with the air-to-refrigerant heat    2.5
+          exchanger located outdoors. Equipment shall meet Section 4, requirements for all units, of the
+          NEEA standard Advanced Water Heating Specification with the UEF noted above
+
+Prescriptive Path – Single Family WSEC-R 2021 Edition EPCA C103 (V2/1/2024)                                         9
+                                      2021 Washington State Energy Code – Residential
+                         Prescriptive Energy Code Compliance for All Climate Zones in Washington
+                                Single Family – New & Additions (effective March 15, 2024)
+
+
+
+           or
+
+           For R-2 Occupancy, electric heat pump water heater(s), meeting the standards for Tier III of
+           NEEA's advanced water heating specification and utilizing a split system configuration with the
+           air-to-refrigerant heat exchanger located outdoors, shall supply domestic hot water to all units.
+           If one water heater is serving more than one dwelling unit, all hot water supply and
+           recirculation piping shall be insulated with R-8 minimum pipe insulation.
+
+           To qualify to claim this credit, the building permit drawings shall specify the option being
+           selected and shall specify the water heater equipment type and the minimum equipment
+           efficiency.
+           Combination water heating and space heating system shall include one of the following: Gas-
+           fired heat pump water heater(s) meeting Tier 2 of the NEEA Advanced Water Heating
+           Specification for Gas-Fueled Residential Storage Water Heaters Version 1.0.
+
+           or
+
+           For R-2 Occupancy, gas-fired heat pump water heater(s) meeting Tier 2 of the NEEA Advanced
+           Water Heating Specification for Gas-Fueled Residential Storage Water Heaters Version 1.0.,
+   5.8     shall supply all units.                                                                                  2.5
+
+           or
+
+           For R-2 Occupancy, gas-fired heat pump(s) meeting ANSI Z21.40.2 and Z21.40.4 or CSA, with a
+           minimum UEF of 1.15, shall supply all units. To qualify to claim this credit, the building permit
+           drawings shall specify the option being selected and shall specify the water heater equipment
+           type and the minimum equipment efficiency and, for solar water heating systems, the
+           calculation of the minimum energy savings.
+
+
+
+                                        Table 406.3 – Energy Credits (Single Family)
+  Option                                               Description                                              Credits: SF
+6. RENEWABLE ELECTRIC ENERGY OPTION
+                For each 600 kWh of electrical generation per housing unit provided annually by on-site
+                wind or solar equipment a 0.5 credit shall be allowed, up to 4.5 credits. Generation shall be
+                calculated as follows:
+
+                For solar electric systems, the design shall be demonstrated to meet this requirement using
+                the National Renewable Energy Laboratory calculator PVWATTs or approved alternate by
+                the code official. Documentation noting solar access shall be included on the plans.
+    6.1                                                                                                          0.5 - 4.5
+                For wind generation projects designs shall document annual power generation based on
+                the wind turbine power curve; average annual wind speed at the site; frequency
+                distribution of the wind speed at the site and height of the tower.
+
+                To qualify to claim this credit, the building permit drawings shall specify the option being
+                selected and shall show the photovoltaic or wind turbine equipment type, provide
+                documentation of solar and wind access, and include a calculation of the minimum annual
+                energy power production.
+
+
+Prescriptive Path – Single Family WSEC-R 2021 Edition EPCA C103 (V2/1/2024)                                               10
+                                    2021 Washington State Energy Code – Residential
+                       Prescriptive Energy Code Compliance for All Climate Zones in Washington
+                              Single Family – New & Additions (effective March 15, 2024)
+
+
+
+
+                                       Table 406.3 – Energy Credits (Single Family)
+  Option                                              Description                                             Credits: SF
+7. APPLIANCE PACKAGE OPTION
+             All of the following appliances shall be new and installed in the dwelling unit and shall meet
+             the following standards:
+             1. Dishwasher, standard – Energy Star rated, Most Efficient 2021 or Dishwasher, compact –
+             Energy Star rated (Version 6.0)
+             2. Refrigerator (if provided) – Energy Star rated (Version 5.1)
+             3. Washing machine (Residential) – Energy Star rated (Version 8.1)
+    7.1      4. Dryer – Energy Star rated, Most Efficient 2022                                                   0.5
+
+             To qualify to claim this credit, the building permit drawings shall specify the option being
+             selected and shall show the appliance type and provide documentation of Energy Star
+             compliance. At the time of inspection, all appliances shall be installed and connected to
+             utilities. Dryer ducts and exterior dryer vent caps are not permitted to be installed
+             in the dwelling unit.
+a. An alternative heating source sized at a maximum of 0.5 Watts/ft2 (equivalent) of heated floor area or 500 Watts,
+whichever is bigger, may be installed in the dwelling unit.
+b. See Section R401.1 and residential building in Section R202 for Group R-2 scope.
+c. Option 3.11 can only be taken with Options 3.1 and 3.3. To qualify to claim option 3.11 with 3.3, the system shall
+be a 1-2 speed heat pump system. Variable capacity heat pumps are ineligible from claiming this option.
+d. This option may only be claimed if serving System Type 5 from Table R406.2.
+e. Primary living areas include living, dining, kitchen, family rooms, and similar areas.
+f. Option 3.11 may only be taken with Efficient Water Heating Options 5.1 or 5.2. Equipment sizing for space heating
+shall be calculated as provided in Section R403.7 with increased capacity to provide a minimum of 75 percent of peak
+hot water demand or shall be sized in accordance with approved manufacturer's specifications or guidance.
+Supplementary heat for water heating system shall be in accordance with Section R403.5.7.
+
+
+
+
+Prescriptive Path – Single Family WSEC-R 2021 Edition EPCA C103 (V2/1/2024)                                            11
+
