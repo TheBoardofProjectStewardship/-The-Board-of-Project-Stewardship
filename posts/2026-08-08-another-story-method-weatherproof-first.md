@@ -28,6 +28,8 @@ Opening a roof in Edmonds, Shoreline, or nearby coastal communities exposes inte
 4. **Rapid dry-in** — roof planes and critical flashings before interior focus upstairs
 5. **Only then** — full interior systems and finishes in the new level
 
+![Illustrative editorial photo — not a project photograph; coastal Edmonds roof plane / weather exposure context for open-roof risk — illustrative only](../assets/images/posts/2026-08-08-weatherproof-first-4.webp)
+
 ![Illustrative editorial photo — not a project photograph; Shoreline addition sheathing and weather-barrier staging](../assets/images/posts/2026-08-08-weatherproof-first-2.webp)
 
 ## Contractor interview prompts
@@ -66,11 +68,15 @@ Stop, dry, assess, document. Hidden moisture becomes mold if ignored. Contracts 
 
 ## Owner behaviors that support the method
 
+![Illustrative editorial photo — not a project photograph; WRB and flashing detail context at openings — illustrative only](../assets/images/posts/2026-08-08-weatherproof-first-5.webp)
+
 Do not pressure crews to “keep going” in unsafe weather to hit a party date. Protecting the existing home is the schedule. Store furniture away from second-story work zones, maintain clear paths for emergency covering materials, and designate an owner decision-maker reachable during storms.
 
 Ask for daily end-of-day photos during the open-roof period. Documentation encourages discipline and helps insurance conversations if something goes wrong despite best efforts.
 
 ![Illustrative editorial photo — not a project photograph; waterproofing membrane and wet-assembly protection — design preview only](../assets/images/posts/2026-08-08-weatherproof-first-3.webp)
+
+![Illustrative editorial photo — not a project photograph; second-story vs teardown planning massing — design preview only](../assets/images/posts/2026-08-08-weatherproof-first-6.webp)
 
 ## Putting it together for homeowners
 

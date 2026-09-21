@@ -24,6 +24,8 @@ Pacific Northwest bathrooms fail predictably when water has nowhere honest to go
 4. **Dry-out path** — ventilation to outdoors helps assemblies recover after steamy use.
 5. **Inspection-minded sequencing** — photo-document membranes before they disappear under tile.
 
+![Illustrative editorial photo — not a project photograph; Magnolia-area bath wet-wall prep context before finish cover — illustrative only](../assets/images/posts/2026-08-18-waterproofing-4.webp)
+
 ## Common failure points
 
 - Corners and valve penetrations
@@ -81,9 +83,13 @@ You do not need to be a tradesperson to notice ponding on a “finished” showe
 
 ## How waterproofing relates to hiring
 
+![Illustrative editorial photo — not a project photograph; Edmonds bath membrane/process context — illustrative only](../assets/images/posts/2026-08-18-waterproofing-5.webp)
+
 If three bids look similar until you ask about membranes, the cheap bid often omitted the real wet assembly. Normalize scopes. Prefer contractors who discuss systems calmly over those who dismiss waterproofing questions as overkill — in the PNW, that dismissal is a warning.
 
 Pair this guide with local bath hiring context on [bathrooms.html](../bathrooms.html) and trade context on [trades.html](../trades.html).
+
+![Illustrative editorial photo — not a project photograph; walk-in shower wet-area finish context — design preview only](../assets/images/posts/2026-08-18-waterproofing-6.webp)
 
 ## Putting it together for homeowners
 

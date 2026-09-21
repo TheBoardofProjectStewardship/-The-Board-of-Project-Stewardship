@@ -32,6 +32,8 @@ Design-build firms package design and construction under one primary contract. I
 4. What Edmonds projects can we tour or call?
 5. How are changes documented?
 
+![Illustrative editorial photo — not a project photograph; Edmonds custom-home massing context for design-build interviews — illustrative only](../assets/images/posts/2026-08-11-hire-design-build-4.webp)
+
 ![Illustrative editorial photo — not a project photograph; finished bath and finish-selection context for design-build interviews](../assets/images/posts/2026-08-11-hire-design-build-2.webp)
 
 ## Red flags
@@ -79,7 +81,11 @@ Know who your day-to-day PM is, who designs, who engineers, and which trades are
 
 ## Aligning incentives
 
+![Illustrative editorial photo — not a project photograph; primary-suite addition finish context when design-build owns wet rooms — illustrative only](../assets/images/posts/2026-08-11-hire-design-build-5.webp)
+
 Progress payments should track visible milestones: design deliverables, permit submission, dry-in, rough inspections, and substantial completion. Avoid schedules that front-load payment before weatherproofing on vertical work.
+
+![Illustrative editorial photo — not a project photograph; coastal Edmonds exterior massing — design preview only](../assets/images/posts/2026-08-11-hire-design-build-6.webp)
 
 ## Putting it together for homeowners
 

@@ -46,6 +46,7 @@ Base: `https://boardofprojectstewardship.com/`
 | `another-story.html` | Another Story Board feature |
 | `blog/rss.xml` | Blog RSS feed |
 | `404.html` | Branded Board 404 |
+| `posts/2026-09-21-roof-replacement-edmonds-coastal-wa.html` | Roof Replacement Edmonds WA — Coastal Moisture, Flashing & Permits |
 | `posts/2026-09-20-window-replacement-edmonds-coastal-wa.html` | Window Replacement Edmonds WA — Coastal Moisture & Permits |
 | `posts/2026-09-19-home-addition-kirkland-wa.html` | Home Addition Kirkland WA |
 | `posts/2026-09-18-kitchen-remodel-mill-creek-wa.html` | Kitchen Remodel Mill Creek WA |

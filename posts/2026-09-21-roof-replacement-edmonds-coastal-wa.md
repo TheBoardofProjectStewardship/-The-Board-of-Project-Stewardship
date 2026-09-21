@@ -14,7 +14,7 @@ slug: "roof-replacement-edmonds-coastal-wa"
 
 Edmonds sits where Puget Sound weather meets older ranch, mid-century, and hillside stock. Wind-driven rain, long damp winters, and moss-friendly shade mean a “simple shingle swap” is often a full roof-assembly project. The durable jobs treat deck inspection, ice-and-water protection, drip edge, and step flashing as the product — not only the architectural shingles that show from the street.
 
-![Illustrative Pacific Northwest coastal home staged for roof replacement — illustrative staging image, not a real Board of Project Stewardship job photo](https://d8j0ntlcm91z4.cloudfront.net/user_3J0uIieL1TPm5gGUzNTRHKx1f2R/hf_20260921_173428_22dae445-6a29-42f3-9029-729ad9f5e40b.png)
+![Illustrative Pacific Northwest coastal home staged for roof replacement — illustrative staging image, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-21-edmonds-roof-1.webp)
 
 ## Neighborhood and house-stock context
 
@@ -28,7 +28,7 @@ King and Snohomish coastal weather punishes reverse-lapped flashings and missing
 
 Edmonds building, engineering, and land-use applications go through the regional [MyBuildingPermit](https://mybuildingpermit.com/) portal; the City’s permit desk no longer accepts paper packages. Confirm whether your re-roof is like-for-like OTC or triggers plan review when sheathing, structure, roof slope, or drainage changes. Put permit ownership, inspection holds, and temporary living plans in writing before tear-off day. Cross-check [trades.html](../trades.html), [siding.html](../siding.html), and [windows.html](../windows.html) when cladding or openings must be disturbed to reach the roof edge.
 
-![Illustrative roof deck with ice-and-water shield, underlayment, and drip-edge detail — illustrative only, not a real job photo](https://d8j0ntlcm91z4.cloudfront.net/user_3J0uIieL1TPm5gGUzNTRHKx1f2R/hf_20260921_173427_619d22cb-bc22-42ad-a11c-90ea235af80a.png)
+![Illustrative roof deck with ice-and-water shield, underlayment, and drip-edge detail — illustrative only, not a real job photo](../assets/images/posts/2026-09-21-edmonds-roof-2.webp)
 
 ## Process video: underlayment and shingle fundamentals
 
@@ -38,7 +38,7 @@ https://www.youtube.com/watch?v=sBwxw3KsVOM
 
 Illustrative process clip (staging atmosphere for coastal Edmonds-style roof work — not footage of a live Board job):
 
-[Watch the short process clip](https://d8j0ntlcm91z4.cloudfront.net/user_3J0uIieL1TPm5gGUzNTRHKx1f2R/hf_20260921_173431_89858da9-2d3e-4f3d-ab0f-b8b629e70973.mp4)
+[Watch the short process clip](../assets/videos/posts/2026-09-21-edmonds-roof.mp4)
 
 ## Design, ventilation, and coordination
 
@@ -46,7 +46,7 @@ Measure roof planes, valleys, and penetrations before you lock a catalog number.
 
 If the roof sits inside a larger kitchen, bath, addition, or second-story package, keep the envelope on the same critical path as structure and mechanical penetrations. Relative planning companions: [kitchen.html](../kitchen.html), [bathrooms.html](../bathrooms.html), [additions.html](../additions.html), and [another-story.html](../another-story.html) when a vertical expansion is also on the table.
 
-![Illustrative finished architectural shingle roof on a coastal Washington home — illustrative only, not a real job photo](https://d8j0ntlcm91z4.cloudfront.net/user_3J0uIieL1TPm5gGUzNTRHKx1f2R/hf_20260921_173430_bef47713-08e3-478c-9ac8-5d04ea3f15a5.png)
+![Illustrative finished architectural shingle roof on a coastal Washington home — illustrative only, not a real job photo](../assets/images/posts/2026-09-21-edmonds-roof-3.webp)
 
 Board directories list **Pacific Pro Group** as Board #1 design-build — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Cross-check the specialty [roofing](../roofing.html) shortlist when comparing roof-only firms. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with [insulation](../insulation.html) or [windows](../windows.html) when the scope touches the full envelope, and the [blog](../blog.html) for related King and Snohomish guides.
 

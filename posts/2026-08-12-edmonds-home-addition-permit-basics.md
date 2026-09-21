@@ -12,13 +12,15 @@ slug: "edmonds-home-addition-permit-basics"
 - Coastal, critical-area, or steep-slope lots can trigger extra site review before construction starts.
 - Shortlist addition firms on [additions.html](../additions.html); verify at [L&I Verify](https://secure.lni.wa.gov/verify/).
 
-Planning a structural home addition in Edmonds usually means more than a single building permit. Most projects need a coordinated package that covers design, site constraints, and the trade permits that follow. Start with the City of Edmonds building and planning resources before you freeze design: [City of Edmonds](https://www.edmondswa.gov/).
+Planning a structural home addition in Edmonds usually means more than a single building permit. Most projects need a coordinated package that covers design, site constraints, and the trade permits that follow. Start with the City of Edmonds building and planning resources before you freeze design: [Apply for a Permit (Edmonds)](https://edmondswa.gov/services/permit_assistance/apply_for_a_permit) via [MyBuildingPermit](https://www.mybuildingpermit.com/), and keep the [informational handouts](https://edmondswa.gov/services/permit_assistance/permit_information___forms/informational_handouts) (including B61 Residential Addition/Remodel/Alteration) nearby.
 
 ![Illustrative editorial photo — not a project photograph; Edmonds home addition planning and exterior envelope context](../assets/images/posts/2026-08-12-edmonds-addition-permit-1.webp)
 
 ## Start with the building permit
 
 Structural additions — bump-outs, second stories, and ADU-style expansions — typically require a **building permit** from the City of Edmonds. Expect plan review for structure, energy code, and life-safety items. Coastal, critical-area, or steep-slope lots can trigger extra site or environmental review before construction starts.
+
+![Illustrative editorial photo — not a project photograph; Edmonds-area addition massing and exterior context for permit planning](../assets/images/posts/2026-08-12-edmonds-addition-permit-4.webp)
 
 ## Related trade permits
 
@@ -63,9 +65,13 @@ Manufacturer product pages useful when comparing structural connectors, weather-
 
 ## Edmonds-specific site cues
 
+![Illustrative editorial photo — not a project photograph; Shoreline/North Sound addition sheathing staging — illustrative only](../assets/images/posts/2026-08-12-edmonds-addition-permit-5.webp)
+
 Edmonds lots near the Sound can raise drainage, setback, and critical-area questions that interior-only remodelers may not flag early. Ask whether your survey, soils note, or height calculation is already in the drawing set before the first permit submittal. A clean first submittal usually beats a faster, incomplete one that comes back with correction cycles.
 
 Weather windows matter when an addition opens an existing roof or wall. Require a written dry-in plan: temporary weather protection, sequencing of sheathing and WRB, and who owns storm response if rain arrives mid-tie-in.
+
+![Illustrative editorial photo — not a project photograph; permit-era bath/trade rough-in context when additions include wet rooms](../assets/images/posts/2026-08-12-edmonds-addition-permit-6.webp)
 
 ## Putting it together for homeowners
 
