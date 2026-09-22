@@ -1,0 +1,7 @@
+{
+  "schema_version": "1.0.0",
+  "producer": "openclaw",
+  "slug": "intake-contract-fixture",
+  "internal_links": ["../roofing.html", "../trades.html"],
+  "notes": "OPERATOR-NOTE-NOT-FOR-HTML"
+}

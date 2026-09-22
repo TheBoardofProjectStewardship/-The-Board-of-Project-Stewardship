@@ -19,3 +19,7 @@ assets-b64/
 # Walkthrough homepage strip (must ship on GitHub Pages)
 !assets/images/walkthrough/
 !assets/images/walkthrough/**
+
+# Local publish lock (no secrets; not a site page)
+intake/lock/*
+!intake/lock/.gitkeep

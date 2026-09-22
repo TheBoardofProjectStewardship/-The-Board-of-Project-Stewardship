@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0.0",
+  "producer": "hermes",
+  "sources": [
+    {
+      "id": "src-lni",
+      "title": "Washington L&I Verify a Contractor",
+      "url": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-09-22",
+      "supports": "Homeowners re-verify the legal business name, license, bond, and insurance before hiring."
+    },
+    {
+      "id": "src-mbp",
+      "title": "MyBuildingPermit",
+      "url": "https://mybuildingpermit.com/",
+      "retrieved": "2026-09-22",
+      "supports": "Many King and Snohomish roof permits are filed through the regional portal."
+    }
+  ]
+}

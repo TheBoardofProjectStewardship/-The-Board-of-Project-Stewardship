@@ -94,6 +94,7 @@ Base: `https://boardofprojectstewardship.com/`
 | `posts/2026-08-08-another-story-method-weatherproof-first.html` | Another Story Method Weatherproof First |
 | `POSTING.md` | Publishing agent workflow (ops) |
 | `generate_site.py` | Site generator |
+| `docs/AGENT-INTAKE.md` | Multi-agent intake contract (ops; Steward publishes) |
 
 ## Current #1 (additions / custom homes / Edmonds Top 30 / kitchen / bathrooms)
 
@@ -112,6 +113,17 @@ python3 generate_site.py
 ```
 
 Sources: `/workspace/top30-addition-contractors.md`, `/workspace/bops-research-kitchen-bath.md`, `/workspace/bops-research-custom-commercial-spec.md`, `/workspace/bops-research-edmonds-custom.md`, `/workspace/bops-research-trades.md`, and `posts/*.md`.
+
+## Agent intake
+
+Local agents drop draft packets in `intake/inbox/submission-id/`. Steward is the only publisher. Dry-run does not write posts or indexes:
+
+```bash
+python3 tools/board_intake.py validate intake/inbox/submission-id
+python3 tools/board_intake.py publish intake/inbox/submission-id --dry-run
+```
+
+`publish --apply` is a deliberate Steward action. CI must not pass `--apply`. The only morning schedule is the existing 10:00 AM PT routine, which calls `python3 tools/board_intake.py morning --apply` after Steward review. This repository does not add a second cron. Contract: `docs/AGENT-INTAKE.md`.
 
 ## Notes
 

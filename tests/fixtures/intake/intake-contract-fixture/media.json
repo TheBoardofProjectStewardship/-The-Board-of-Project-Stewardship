@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0.0",
+  "producer": "grok-build",
+  "files": [
+    {
+      "role": "in-article",
+      "intake_file": "media/shot-1.webp",
+      "repo_path": "assets/images/posts/intake-contract-fixture-1.webp",
+      "alt": "Illustrative coastal roof staged for flashing review — not a real Board of Project Stewardship job photo"
+    },
+    {
+      "role": "in-article",
+      "intake_file": "media/shot-2.webp",
+      "repo_path": "assets/images/posts/intake-contract-fixture-2.webp",
+      "alt": "Illustrative step flashing at a wall — not a real job photo"
+    },
+    {
+      "role": "in-article",
+      "intake_file": "media/shot-3.webp",
+      "repo_path": "assets/images/posts/intake-contract-fixture-3.webp",
+      "alt": "Illustrative drip edge and underlayment — not a real job photo"
+    },
+    {
+      "role": "process-clip",
+      "intake_file": "media/clip.mp4",
+      "repo_path": "assets/videos/posts/intake-contract-fixture.mp4",
+      "alt": "Illustrative process clip"
+    }
+  ]
+}

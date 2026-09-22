@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0.0",
+  "publisher": "steward",
+  "canonical_site": "https://boardofprojectstewardship.com/",
+  "agents": {
+    "chief-of-staff": {
+      "display": "Chief of Staff",
+      "kinds": ["coordination", "post-bundle"],
+      "writes_public_copy": false,
+      "publishes": false,
+      "role": "Assemble specialist packets into one post-bundle and open the review. Do not author the article and do not publish."
+    },
+    "steward": {
+      "display": "Steward",
+      "kinds": [],
+      "writes_public_copy": false,
+      "publishes": true,
+      "role": "Sole publisher. Validate, deduplicate, apply site chrome, and update posts.json, blog.html, sitemap.xml, and blog/rss.xml. Do not originate drafts."
+    },
+    "grok-build": {
+      "display": "Grok Build",
+      "kinds": ["media"],
+      "writes_public_copy": false,
+      "publishes": false,
+      "role": "Localize media onto repo assets/ paths and supply alt text. Do not write the article and do not publish."
+    },
+    "openclaw": {
+      "display": "OpenClaw",
+      "kinds": ["seo-brief"],
+      "writes_public_copy": false,
+      "publishes": false,
+      "role": "Allan-PC SEO brief only: slug, description, and internal links. Do not publish and do not emit HTML."
+    },
+    "hermes": {
+      "display": "Hermes",
+      "kinds": ["sources"],
+      "writes_public_copy": false,
+      "publishes": false,
+      "role": "Allan-PC source citations only. Do not invent facts and do not publish."
+    },
+    "ollama": {
+      "display": "Ollama",
+      "kinds": ["draft"],
+      "writes_public_copy": true,
+      "publishes": false,
+      "role": "Allan-PC markdown draft only. No HTML and no publish."
+    }
+  }
+}

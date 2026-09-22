@@ -4402,6 +4402,56 @@ def build_post_page(post: dict) -> str:
     )
 
 
+# Hand-polished post HTML may include this marker. Regenerating from markdown
+# that still points at CloudFront would replace repo assets/ paths in the live page.
+POLISHED_POST_MARKER = "<!-- board-post-polished -->"
+
+
+def post_html_should_be_preserved(existing: str, regenerated: str) -> bool:
+    """True when writing regenerated HTML would drop polished markup or repo assets."""
+    if existing == regenerated:
+        return False
+    if POLISHED_POST_MARKER in existing:
+        return True
+    regenerated_cdn = "cloudfront.net" in regenerated.lower()
+    existing_cdn = "cloudfront.net" in existing.lower()
+    existing_repo_asset = "../assets/" in existing or "./assets/" in existing
+    if regenerated_cdn and not existing_cdn and existing_repo_asset:
+        return True
+    return False
+
+
+def refresh_post_html(posts: list[dict]) -> None:
+    """Rewrite post HTML from markdown, keeping polished pages and local asset HTML.
+
+    Markdown media must use repo ``assets/...`` paths. A CloudFront URL in
+    markdown makes ``build_post_page`` emit that URL and would overwrite a
+    polished page that already references ``../assets/...``.
+    """
+    posts_dir = SITE_DIR / "posts"
+    expected = {p["out_name"] for p in posts}
+    for old in sorted(posts_dir.glob("*.html")):
+        if old.name in expected:
+            continue
+        text = old.read_text(encoding="utf-8")
+        if POLISHED_POST_MARKER in text:
+            print(f"  keep polished post HTML outside current markdown set: {old.name}")
+            continue
+        old.unlink()
+    for post in posts:
+        dest = posts_dir / post["out_name"]
+        regenerated = build_post_page(post)
+        if dest.is_file():
+            existing = dest.read_text(encoding="utf-8")
+            if post_html_should_be_preserved(existing, regenerated):
+                print(
+                    f"  keep post HTML {dest.name}: regenerate would replace "
+                    "repo asset paths or polished markup"
+                )
+                continue
+        dest.write_text(regenerated, encoding="utf-8")
+
+
 def write_readme(posts: list[dict]) -> None:
     trade_lines = "\n".join(
         f"| `{slug}.html` | {title} directory |" for slug, title, _, _ in TRADES
@@ -4447,6 +4497,7 @@ Base: `{BASE_URL}`
 {post_lines}
 | `POSTING.md` | Publishing agent workflow (ops) |
 | `generate_site.py` | Site generator |
+| `docs/AGENT-INTAKE.md` | Multi-agent intake contract (ops; Steward publishes) |
 
 ## Current #1 (additions / custom homes / Edmonds Top 30 / kitchen / bathrooms)
 
@@ -4465,6 +4516,17 @@ python3 generate_site.py
 ```
 
 Sources: `/workspace/top30-addition-contractors.md`, `/workspace/bops-research-kitchen-bath.md`, `/workspace/bops-research-custom-commercial-spec.md`, `/workspace/bops-research-edmonds-custom.md`, `/workspace/bops-research-trades.md`, and `posts/*.md`.
+
+## Agent intake
+
+Local agents drop draft packets in `intake/inbox/submission-id/`. Steward is the only publisher. Dry-run does not write posts or indexes:
+
+```bash
+python3 tools/board_intake.py validate intake/inbox/submission-id
+python3 tools/board_intake.py publish intake/inbox/submission-id --dry-run
+```
+
+`publish --apply` is a deliberate Steward action. CI must not pass `--apply`. The only morning schedule is the existing 10:00 AM PT routine, which calls `python3 tools/board_intake.py morning --apply` after Steward review. This repository does not add a second cron. Contract: `docs/AGENT-INTAKE.md`.
 
 ## Notes
 
@@ -4519,7 +4581,7 @@ Rankings researched / updated **{YEAR}**.
 
 def write_robots() -> None:
     (SITE_DIR / "robots.txt").write_text(
-        "User-agent: *\nAllow: /\nDisallow: /write.html\n\nSitemap: https://boardofprojectstewardship.com/sitemap.xml\n",
+        "User-agent: *\nAllow: /\nDisallow: /write.html\nDisallow: /intake/\n\nSitemap: https://boardofprojectstewardship.com/sitemap.xml\n",
         encoding="utf-8",
     )
 
@@ -9133,12 +9195,7 @@ def main(argv: list[str] | None = None) -> None:
         (SITE_DIR / f"{slug}.html").write_text(html_page, encoding="utf-8")
 
     posts = load_posts()
-    posts_dir = SITE_DIR / "posts"
-    # Remove previously generated post HTML (keep md)
-    for old in posts_dir.glob("*.html"):
-        old.unlink()
-    for post in posts:
-        (posts_dir / post["out_name"]).write_text(build_post_page(post), encoding="utf-8")
+    refresh_post_html(posts)
     (SITE_DIR / "blog.html").write_text(build_blog_index(posts), encoding="utf-8")
     (SITE_DIR / "another-story.html").write_text(build_another_story_page(), encoding="utf-8")
     (SITE_DIR / "good-steward.html").write_text(build_good_steward_page(), encoding="utf-8")
