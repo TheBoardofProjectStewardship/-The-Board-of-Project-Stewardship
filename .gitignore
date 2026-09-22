@@ -23,3 +23,6 @@ assets-b64/
 # Local publish lock (no secrets; not a site page)
 intake/lock/*
 !intake/lock/.gitkeep
+
+!assets/images/hubs/
+!assets/images/hubs/**
