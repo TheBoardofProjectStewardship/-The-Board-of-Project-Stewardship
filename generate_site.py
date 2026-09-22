@@ -73,6 +73,7 @@ CATEGORY_HERO_FALLBACK = {
 POST_HERO_ALIASES = {
     "bathroom-remodel-magnolia-wa": "bath-magnolia-hero.webp",
     "bathroom-remodel-edmonds-wa": "bath-edmonds-hero.webp",
+    "siding-replacement-edmonds-coastal-wa": "2026-09-22-edmonds-siding-1.webp",
 }
 
 PPG = {
@@ -614,15 +615,40 @@ def prefix_asset(rel: str, prefix: str = "") -> str:
 
 
 def resolve_post_hero(post: dict) -> str | None:
-    """Optional post hero under assets/images/posts/, else category fallback, else None."""
+    """Optional post hero under assets/images/posts/, else first in-body still, else category fallback."""
+    import re as _re
+
     slug = post.get("slug", "")
-    candidates = []
+    date = post.get("date", "")
+    candidates: list[str] = []
     alias = POST_HERO_ALIASES.get(slug)
     if alias:
         candidates.append(alias)
     candidates.append(f"{slug}-hero.webp")
+    if date:
+        candidates.append(f"{date}-{slug}-1.webp")
+        posts_dir = SITE_DIR / "assets" / "images" / "posts"
+        if posts_dir.is_dir():
+            tokens = [
+                tok
+                for tok in slug.replace("_", "-").split("-")
+                if len(tok) > 3 and tok not in {"replacement", "coastal"}
+            ]
+            for path in sorted(posts_dir.glob(f"{date}-*-1.webp")):
+                name = path.name.lower()
+                if any(tok in name for tok in tokens):
+                    candidates.append(path.name)
+                    break
     for name in candidates:
         rel = f"assets/images/posts/{name}"
+        if asset_exists(rel):
+            return rel
+    body = post.get("body_md") or post.get("body") or ""
+    for match in _re.finditer(
+        r"\((?:\.\./)?assets/images/posts/([^)]+\.(?:webp|jpg|jpeg|png))\)",
+        body,
+    ):
+        rel = f"assets/images/posts/{match.group(1)}"
         if asset_exists(rel):
             return rel
     cat = post.get("category", "")
@@ -630,6 +656,8 @@ def resolve_post_hero(post: dict) -> str | None:
     if fb and asset_exists(fb):
         return fb
     return None
+
+
 
 
 def _png_rgba(width: int, height: int, pixels: bytes) -> bytes:
@@ -4258,11 +4286,28 @@ def build_blog_index(posts: list[dict]) -> str:
     featured_block = ""
     if posts:
         top = posts[0]
+        # Featured card must not reuse the blog chrome hero (same viewport).
+        card_img = resolve_post_hero(top)
+        if card_img and hero_img and card_img == hero_img:
+            for alt_name in (
+                f"assets/images/posts/{top.get('date','')}-edmonds-siding-2.webp",
+                f"assets/images/posts/{top.get('date','')}-edmonds-siding-3.webp",
+                "assets/images/hubs/hub-edmonds-1.webp",
+                "assets/images/home-hero.webp",
+            ):
+                if asset_exists(alt_name) and alt_name != hero_img:
+                    card_img = alt_name
+                    break
+        card_alt = (
+            f"Illustrative cover for {top['title']} — not a real Board of Project Stewardship job photo"
+            if card_img
+            else ""
+        )
         thumb = ""
-        if hero_img:
+        if card_img:
             thumb = (
                 f'<div class="mb-5 overflow-hidden rounded-lg border border-white/10">'
-                f'<img src="{prefix_asset(hero_img)}" alt="{esc(featured_alt)}" '
+                f'<img src="{prefix_asset(card_img)}" alt="{esc(card_alt)}" '
                 f'class="w-full h-48 sm:h-64 object-cover" width="1600" height="686" loading="eager"></div>'
             )
         featured_block = f"""    <section class="mb-10 bg-charcoal border border-secondary/25 rounded-xl p-6 md:p-8">
