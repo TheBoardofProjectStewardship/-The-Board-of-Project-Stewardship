@@ -1,6 +1,19 @@
 # Daily blog posting workflow (publishing agent)
 
-This document is for the company publishing agent that commits one SEO post per day to the BOPS static site. It is an **ops** doc — not a public page.
+This document is for the company publishing agent that commits one SEO post per day to the Board of Project Stewardship static site. It is an **ops** doc — not a public page.
+
+## Controlled intake (required before a new post)
+
+Specialist agents do not publish and do not edit `posts/`, `posts.json`, `blog.html`, `sitemap.xml`, or `blog/rss.xml` directly. They submit a packet under `intake/inbox/<submission-id>/`. **Steward is the only publisher.**
+
+```bash
+python3 tools/board_intake.py validate intake/inbox/<submission-id>
+python3 tools/board_intake.py publish intake/inbox/<submission-id> --dry-run
+# Steward only, after the dry-run JSON is clean:
+python3 tools/board_intake.py publish intake/inbox/<submission-id> --apply
+```
+
+Post markdown media must use repo `../assets/images/posts/...` and `../assets/videos/posts/...` paths. CloudFront URLs are rejected: `generate_site.py` would otherwise rewrite polished HTML that already uses those repo assets. Full contract, failure states, and rollback: `docs/AGENT-INTAKE.md`.
 
 ## Frontmatter (required)
 
@@ -79,7 +92,7 @@ Target **one useful post per day** when the publishing agent is scheduled. Skip 
 
 Every new BOPS article must be Magnolia-class (structure only — Ghost publish forbidden):
 
-1. **Multiple photos** — new unique assets per post (hero + in-body). Prefer Higgsfield (`user-Higgsfield`); CDN URLs OK. Do not reuse the same image set forever.
+1. **Multiple photos** — new unique assets per post (hero + in-body). Generation may happen off-repo. The committed markdown must reference repo files such as `../assets/images/posts/your-shot.webp`. Do not put CloudFront URLs in post markdown. Do not reuse the same image set forever.
 2. **Materials we use** — link to real product/brand pages (tile, fixtures, cabinets, waterproofing, etc.) honestly. No invented prices or fake “preferred” claims.
 3. **YouTube construction process** — embed or link relevant process videos; use **new / post-specific** links, not one recycled video on every article.
 4. **Create video** — generate short construction/process clips with Higgsfield when no licensed job video exists; file URLs in the post.

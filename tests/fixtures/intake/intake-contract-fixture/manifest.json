@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "intake-contract-fixture",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-09-22T00:00:00Z",
+  "example": true,
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Intake Contract Fixture for Shoreline Roof Flashing",
+    "date": "2026-09-22",
+    "slug": "intake-contract-fixture",
+    "description": "Fixture guide for Shoreline roof flashing, permit checks, and how a homeowner shortlists licensed roofers without invented prices.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  }
+}
