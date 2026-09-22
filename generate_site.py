@@ -5449,6 +5449,26 @@ def build_how_we_rank_page() -> str:
             "How we rank",
             "How the Board of Project Stewardship builds contractor directories, what Board #1 means, and why L&I re-verification stays non-negotiable.",
         )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/home-process-research.webp",
+                    "Illustrative research and ranking-review materials — not a real Board job photo",
+                    "Editorial research pass",
+                ),
+                (
+                    "assets/images/home-process-verify.webp",
+                    "Illustrative contractor license verification habit — not a real Board job photo",
+                    "L&I re-verify before hire",
+                ),
+                (
+                    "assets/images/home-process-shortlist.webp",
+                    "Illustrative directory shortlist comparison context — not a real Board job photo",
+                    "Shortlist, then compare bids",
+                ),
+            ],
+            title="Ranking habits in pictures (illustrative)",
+        )
         + _hub_section(
             "Entity clarity",
             f"""      <p class="text-slate-300 text-sm font-light leading-relaxed mb-3">The Board of Project Stewardship publishes standards and directories for Edmonds and King &amp; Snohomish Counties. <strong class="text-white">{esc(PPG['name'])}</strong> appears as <strong class="text-white">Board directory #1</strong> — a hire ranking homeowners can follow to <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(PPG['url'])}</a> — not as owner, parent, or brand of the Board.</p>
@@ -5620,6 +5640,8 @@ def build_city_hub_page(
     extra_faqs: list[tuple[str, str]] | None = None,
     official_keys: list[str] | None = None,
     official_extra: list[tuple[str, str]] | None = None,
+    photo_strip: list[tuple[str, str, str]] | None = None,
+    photo_strip_title: str = "Field context (illustrative)",
 ) -> str:
     faqs = [
         (
@@ -5651,12 +5673,18 @@ def build_city_hub_page(
         '<a href="./learn.html" class="text-secondary hover:underline">Learn hub</a> '
         'for planning pillars while geo posts continue to grow.</p>'
     )
+    strip = (
+        _hub_photo_strip(photo_strip, title=photo_strip_title)
+        if photo_strip
+        else ""
+    )
     body = (
         _hub_header(
             f"{place} · {county_note}",
             f"{place} project hub",
             blurb,
         )
+        + strip
         + _hub_section(
             "Permitting orientation",
             f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-4">{esc(permit_blurb)}</p>
@@ -6112,6 +6140,26 @@ def build_about_page() -> str:
             "About the Board of Project Stewardship",
             "We publish construction standards and contractor directories so homeowners can shortlist with confidence — not ad spend. The Board does not bid or build projects.",
         )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/home-process-research.webp",
+                    "Illustrative Board research and standards desk — not a real Board job photo",
+                    "Editorial research",
+                ),
+                (
+                    "assets/images/home-process-verify.webp",
+                    "Illustrative verification habit for Board directories — not a real Board job photo",
+                    "Verify before hire",
+                ),
+                (
+                    "assets/images/posts/2026-08-11-hire-design-build-5.webp",
+                    "Illustrative design-build hire planning context — not a real Board job photo",
+                    "Shortlist with clear scope",
+                ),
+            ],
+            title="How the Board works (illustrative)",
+        )
         + _hub_section(
             "What we are",
             f"""      <ul class="space-y-2 text-sm text-slate-300 font-light list-disc pl-5 mb-4">
@@ -6220,6 +6268,26 @@ def build_faq_page() -> str:
             "FAQ",
             "Homeowner questions",
             "Straight answers about the Board, rankings, verification, and permits. Educational — not legal, engineering, or bid advice.",
+        )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/home-process-shortlist.webp",
+                    "Illustrative homeowner shortlist review — not a real Board job photo",
+                    "Start with a shortlist",
+                ),
+                (
+                    "assets/images/home-process-verify.webp",
+                    "Illustrative WA L&I verification workflow — not a real Board job photo",
+                    "Re-verify at L&I",
+                ),
+                (
+                    "assets/images/posts/2026-08-12-edmonds-addition-permit-5.webp",
+                    "Illustrative permit plan-review materials — not a real Board job photo",
+                    "Confirm the AHJ path",
+                ),
+            ],
+            title="Quick visual context (illustrative)",
         )
         + faq_section(faqs, "Frequently asked questions")
         + education_closing(
@@ -7459,7 +7527,25 @@ def build_edmonds_hub() -> str:
             ("Learn hub", "./learn.html"),
         ],
         nav_active="edmonds-hub",
-        official_keys=["lni_verify", "lni_home", "edmonds", "edmonds_permits", "mybuildingpermit"]
+        official_keys=["lni_verify", "lni_home", "edmonds", "edmonds_permits", "mybuildingpermit"],
+        photo_strip=[
+            (
+                "assets/images/posts/2026-08-12-edmonds-addition-permit-4.webp",
+                "Illustrative Edmonds addition permit planning still — not a real Board job photo",
+                "MyBuildingPermit orientation",
+            ),
+            (
+                "assets/images/posts/2026-09-21-edmonds-roof-1.webp",
+                "Illustrative Edmonds coastal roof weatherproofing still — not a real Board job photo",
+                "Coastal roof detailing",
+            ),
+            (
+                "assets/images/posts/2026-09-22-edmonds-siding-1.webp",
+                "Illustrative Edmonds fiber-cement siding still — not a real Board job photo",
+                "Siding & moisture cycles",
+            ),
+        ],
+        photo_strip_title="Edmonds work in pictures (illustrative)",
     )
 
 
@@ -8779,6 +8865,26 @@ def build_directory_hub() -> str:
             "Hire shortlists · Editorial · Not paid placement",
             "Contractor directories",
             "Board of Project Stewardship directories for Edmonds and King & Snohomish Counties. Rankings are editorial hire shortlists — not ownership of any firm, not lead-gen brokerage, and not invented prices or ROI.",
+        )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/posts/2026-08-11-hire-design-build-3.webp",
+                    "Illustrative design-build hire shortlist still — not a real Board job photo",
+                    "Design-build hire path",
+                ),
+                (
+                    "assets/images/home-process-verify.webp",
+                    "Illustrative contractor verification before directory hire — not a real Board job photo",
+                    "Verify every bidder",
+                ),
+                (
+                    "assets/images/posts/2026-09-05-hire-bath-1.webp",
+                    "Illustrative bathroom remodel hire context — not a real Board job photo",
+                    "Bath & kitchen shortlists",
+                ),
+            ],
+            title="Directory habits in pictures (illustrative)",
         )
         + f"""  <section class="max-w-6xl mx-auto px-4 pb-8">
     <div class="bg-primary/10 border border-secondary/30 rounded-xl p-6 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">
