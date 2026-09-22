@@ -373,9 +373,9 @@ class PublishTests(unittest.TestCase):
         with self.assertRaises(intake.IntakeFailure) as raised:
             intake.guard_post_index(before, [{"slug": "a"}])
         self.assertEqual(raised.exception.code, "index_guard_failed")
-        floor = [{"slug": f"p{i}"} for i in range(46)]
+        floor = [{"slug": f"p{i}"} for i in range(47)]
         with self.assertRaises(intake.IntakeFailure):
-            intake.guard_post_index(floor, floor[:45])
+            intake.guard_post_index(floor, floor[:46])
         sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
         updated = intake.insert_sitemap_post(sitemap, "2099-01-01-brand-new.html", "2099-01-01")
         self.assertIn("2099-01-01-brand-new.html", updated)
@@ -386,9 +386,9 @@ class PublishTests(unittest.TestCase):
 
 
 class LiveSiteRegressionTests(unittest.TestCase):
-    def test_forty_six_post_index_is_intact(self):
+    def test_forty_seven_post_index_is_intact(self):
         posts = json.loads((ROOT / "posts.json").read_text(encoding="utf-8"))
-        self.assertEqual(len(posts), 46)
+        self.assertEqual(len(posts), 47)
         loaded = gs.load_posts()
         self.assertEqual([p["slug"] for p in loaded], [p["slug"] for p in posts])
         rebuilt = [

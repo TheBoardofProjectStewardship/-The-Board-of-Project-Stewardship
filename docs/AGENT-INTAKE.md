@@ -128,7 +128,7 @@ python3 tools/board_intake.py morning --apply
 
 `--apply` is Steward-only. It acquires `intake/lock/publish.lock` (holder `steward`, pid, timestamp; no secrets), re-validates, copies media and canonical Markdown, renders that one post through `generate_site.build_post_page` (site chrome, Article / BlogPosting, canonical, RSS link), then updates:
 
-- `posts.json` (existing slugs kept; count must not fall, and a site that already has at least 46 posts stays at or above 46)
+- `posts.json` (existing slugs kept; count must not fall, and a site that already has at least 47 posts stays at or above 47)
 - `blog.html`
 - `blog/rss.xml`
 - `sitemap.xml` (the new post URL is inserted; other `<lastmod>` values are left as they are)
@@ -160,7 +160,7 @@ Stdout is one JSON object. Exit `0` means `ok`. Exit `2` is a validation failure
 | `target_site_rejected` | Site is not `https://boardofprojectstewardship.com/` (includes any `pacificprogroup.com` target). |
 | `secret_material` | Secret-shaped text. The secret is not printed. |
 | `lock_held` | Another publish holds the lock, or the lock is stale. |
-| `index_guard_failed` | The update would drop an existing post or shrink the 46-post floor. |
+| `index_guard_failed` | The update would drop an existing post or shrink the 47-post floor. |
 | `publish_failed` | Apply stopped before a receipt was written. |
 | `unlocked` | `lock-status` when no lock file exists. |
 | `skipped` | Morning inbox has no single bundle for that Pacific date. Nothing was published. |
@@ -195,7 +195,7 @@ Pushing an apply commit to `main` is what makes GitHub Pages serve it. That push
 
 ## Migration
 
-Existing posts stay where they are. There are 46 entries in `posts.json`, with matching `posts/*.md` and `posts/*.html`. Do not backfill them into `intake/inbox/`. The next new post is the first packet.
+Existing posts stay where they are. There are 47 entries in `posts.json`, with matching `posts/*.md` and `posts/*.html`. Do not backfill them into `intake/inbox/`. The next new post is the first packet.
 
 Daily order:
 
@@ -220,7 +220,7 @@ Review the `git clean -n` list before dropping `-n`.
 
 If a publish commit is already on a branch, `git revert` that commit. Also remove `intake/receipts/<submission-id>.json` in the revert. Leaving the receipt in place makes a later identical packet return `idempotent_replay` and skip the write. The publish lock is local and untracked; delete `intake/lock/publish.lock` only when no Steward publish is running.
 
-Do not roll back the existing 46 posts as part of adopting this contract.
+Do not roll back the existing 47 posts as part of adopting this contract.
 
 ## Morning routine (existing 10:00 AM PT schedule)
 

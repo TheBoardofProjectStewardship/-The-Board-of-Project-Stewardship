@@ -34,7 +34,7 @@ CANONICAL_SITE = "https://boardofprojectstewardship.com/"
 CANONICAL_HOST = "boardofprojectstewardship.com"
 PUBLISHER = "steward"
 LOCK_TTL_SECONDS = 1800
-LIVE_POST_FLOOR = 46
+LIVE_POST_FLOOR = 47
 AUTHOR = "Board of Project Stewardship Editorial"
 
 KINDS = ("post-bundle", "draft", "sources", "seo-brief", "media", "coordination")
