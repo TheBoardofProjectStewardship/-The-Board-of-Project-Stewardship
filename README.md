@@ -46,6 +46,7 @@ Base: `https://boardofprojectstewardship.com/`
 | `another-story.html` | Another Story Board feature |
 | `blog/rss.xml` | Blog RSS feed |
 | `404.html` | Branded Board 404 |
+| `posts/2026-09-22-siding-replacement-edmonds-coastal-wa.html` | Fiber-Cement Siding Replacement Edmonds WA — Coastal Moisture, WRB & Permits |
 | `posts/2026-09-21-roof-replacement-edmonds-coastal-wa.html` | Roof Replacement Edmonds WA — Coastal Moisture, Flashing & Permits |
 | `posts/2026-09-20-window-replacement-edmonds-coastal-wa.html` | Window Replacement Edmonds WA — Coastal Moisture & Permits |
 | `posts/2026-09-19-home-addition-kirkland-wa.html` | Home Addition Kirkland WA |

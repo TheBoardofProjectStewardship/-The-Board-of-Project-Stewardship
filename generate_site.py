@@ -5050,6 +5050,36 @@ def _check_ul(items: list[str]) -> str:
 
 
 
+
+def _hub_photo_strip(
+    items: list[tuple[str, str, str]],
+    *,
+    title: str = "Field context (illustrative)",
+) -> str:
+    """Reusable 3-up photo strip for thin learning hubs. Skips missing assets."""
+    figures: list[str] = []
+    for rel, alt, caption in items:
+        if not asset_exists(rel):
+            continue
+        src = prefix_asset(rel, "")
+        figures.append(
+            f"""        <figure class="overflow-hidden rounded-xl border border-white/10 bg-obsidian">
+          <img src="{src}" alt="{esc(alt)}" class="w-full h-40 sm:h-48 object-cover" width="800" height="450" loading="lazy">
+          <figcaption class="px-3 py-2 text-[11px] text-slate-500 font-light leading-snug">{esc(caption)}</figcaption>
+        </figure>"""
+        )
+    if not figures:
+        return ""
+    return f"""  <section class="max-w-6xl mx-auto px-4 pb-8" aria-label="{esc(title)}">
+    <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-3">{esc(title)}</p>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+{chr(10).join(figures)}
+    </div>
+  </section>
+"""
+
+
+
 def build_about_org_page() -> str:
     """Dedicated About page for the Board of Project Stewardship (not the homepage)."""
     faqs = [
@@ -5241,6 +5271,26 @@ def build_permits_page() -> str:
             f"Official portals · Updated {YEAR}",
             "Permit jurisdiction hub",
             "Editorial how-to with outbound links to official permit portals only. The Board of Project Stewardship does not issue permits and does not invent review timelines.",
+        )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/posts/2026-08-12-edmonds-addition-permit-4.webp",
+                    "Illustrative Edmonds-area addition permit planning context",
+                    "Addition permit context",
+                ),
+                (
+                    "assets/images/posts/2026-08-12-edmonds-addition-permit-5.webp",
+                    "Illustrative residential permit document and plan review materials",
+                    "Plan review readiness",
+                ),
+                (
+                    "assets/images/posts/2026-09-06-seattle-bath-permits-1.webp",
+                    "Illustrative Seattle bathroom remodel permit orientation",
+                    "City vs county AHJ",
+                ),
+            ],
+            title="Permit work in pictures (illustrative)",
         )
         + _hub_section(
             "How to use this hub",
@@ -5487,6 +5537,26 @@ def build_verify_contractor_page() -> str:
             "Good Steward · WA L&I",
             "How to verify a Washington contractor",
             "A Board of Project Stewardship companion to the state license tool — educational steps only. Always finish on the official portal.",
+        )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/home-process-verify.webp",
+                    "Illustrative WA contractor verification workflow for homeowners",
+                    "Open official L&I Verify",
+                ),
+                (
+                    "assets/images/posts/2026-08-11-hire-design-build-5.webp",
+                    "Illustrative contract legal-name match before remodel deposit",
+                    "Match legal name on contract",
+                ),
+                (
+                    "assets/images/posts/2026-08-12-hire-kitchen-1.webp",
+                    "Illustrative kitchen remodel bidder diligence in King & Snohomish",
+                    "Save proof before deposit",
+                ),
+            ],
+            title="Verification in pictures (illustrative)",
         )
         + f"""  <section class="max-w-6xl mx-auto px-4 pb-8">
     <div class="bg-charcoal rounded-xl p-8 border border-primary/25 text-center">
@@ -6506,6 +6576,26 @@ def build_kitchen_remodel_planning_page() -> str:
             "Kitchen remodel planning",
             "Board educational guide for planning a kitchen remodel in Edmonds / King &amp; Snohomish. Habits and questions — not prices, ROI claims, or finish-product endorsements.",
         )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/posts/2026-09-18-mill-creek-kitchen-1.webp",
+                    "Illustrative Mill Creek kitchen remodel layout planning context",
+                    "Layout before long-lead cabinets",
+                ),
+                (
+                    "assets/images/posts/2026-09-18-mill-creek-kitchen-2.webp",
+                    "Illustrative kitchen rough-in and allowance coordination",
+                    "Allowances in writing",
+                ),
+                (
+                    "assets/images/posts/2026-09-18-mill-creek-kitchen-3.webp",
+                    "Illustrative finished kitchen remodel craft standards for North Sound",
+                    "Compare scopes, not stickers",
+                ),
+            ],
+            title="Kitchen planning in pictures (illustrative)",
+        )
         + _hub_section(
             "Plan before you shop cabinets",
             f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Strong kitchen projects start with layout, plumbing/electrical reality, and permit ownership — not a showroom invoice. Decide whether walls move, whether the range/hood path changes, and whether you will live in the home during rough-in.</p>
@@ -6592,6 +6682,26 @@ def build_bathroom_waterproofing_guide_page() -> str:
             "Learning hub · Bathrooms",
             "Bathroom waterproofing guide",
             "Educational Board guide to wet-area waterproofing habits for Puget Sound baths. Not a product endorsement, installation manual, or warranty.",
+        )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/posts/2026-08-18-waterproofing-4.webp",
+                    "Illustrative PNW bathroom waterproofing membrane stack",
+                    "Wet-area membrane discipline",
+                ),
+                (
+                    "assets/images/posts/2026-08-18-waterproofing-5.webp",
+                    "Illustrative shower waterproofing detailing for coastal baths",
+                    "Shower detailing",
+                ),
+                (
+                    "assets/images/posts/2026-08-18-waterproofing-6.webp",
+                    "Illustrative finished bath waterproofing craft for King & Snohomish",
+                    "Inspect before cover-up",
+                ),
+            ],
+            title="Bath waterproofing in pictures (illustrative)",
         )
         + _hub_section(
             "Waterproofing is a system, not a finish",
@@ -6709,6 +6819,26 @@ def build_hiring_a_contractor_page() -> str:
             "Hiring a contractor",
             "Board of Project Stewardship hub for homeowners hiring remodel, addition, or design-build firms in Edmonds / King &amp; Snohomish. Education and verification — not a brokerage.",
         )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/posts/2026-08-11-hire-design-build-4.webp",
+                    "Illustrative design-build hire conversation and plan review",
+                    "Interview every bidder the same way",
+                ),
+                (
+                    "assets/images/home-process-verify.webp",
+                    "Illustrative contractor license verification habit before deposit",
+                    "L&I before any deposit",
+                ),
+                (
+                    "assets/images/posts/2026-09-05-hire-bath-1.webp",
+                    "Illustrative bathroom remodel hire shortlist context for North Sound homes",
+                    "Match directory to scope",
+                ),
+            ],
+            title="Hiring in pictures (illustrative)",
+        )
         + _hub_section(
             "A steward’s hiring path",
             f"""      <ol class="list-decimal pl-5 space-y-3 text-sm text-slate-300 font-light leading-relaxed mb-4">
@@ -6788,6 +6918,26 @@ def build_home_addition_planning_page() -> str:
             "Learning hub · Additions",
             "Home addition planning",
             "Educational Board planning hub for home additions in Edmonds / King &amp; Snohomish — sequencing, permits, and hire habits without invented timelines or dollar bands.",
+        )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/posts/2026-09-19-kirkland-addition-1.webp",
+                    "Illustrative Kirkland home addition exterior framing context",
+                    "Freeze jurisdiction early",
+                ),
+                (
+                    "assets/images/posts/2026-09-19-kirkland-addition-2.webp",
+                    "Illustrative home addition dry-in and weather protection",
+                    "Written dry-in plan",
+                ),
+                (
+                    "assets/images/posts/2026-09-10-shoreline-addition-1.webp",
+                    "Illustrative Shoreline home addition planning for occupied sites",
+                    "Occupied-site staging",
+                ),
+            ],
+            title="Addition planning in pictures (illustrative)",
         )
         + _hub_section(
             "Addition projects are permit + weather stories",
@@ -7123,6 +7273,26 @@ def build_learn_page() -> str:
             "Learning · Board of Project Stewardship",
             "Learn hub",
             "Start with verification and your AHJ portal, then pick a planning pillar and a Board directory. Educational — not invented prices, ROI, or a brokerage.",
+        )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/home-process-research.webp",
+                    "Illustrative plans and research materials for Board learning path",
+                    "Research before you bid",
+                ),
+                (
+                    "assets/images/home-process-verify.webp",
+                    "Illustrative verification checklist visual for contractor diligence",
+                    "Verify at WA L&I",
+                ),
+                (
+                    "assets/images/home-gallery-dryin.webp",
+                    "Illustrative PNW dry-in weather protection during remodel openings",
+                    "Weather & dry-in habits",
+                ),
+            ],
+            title="Learning in pictures (illustrative)",
         )
         + _hub_section(
             "Start here",
