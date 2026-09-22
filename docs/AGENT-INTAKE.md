@@ -120,6 +120,8 @@ python3 tools/board_intake.py validate
 python3 tools/board_intake.py publish intake/inbox/<submission-id> --dry-run
 python3 tools/board_intake.py publish intake/inbox/<submission-id> --apply
 python3 tools/board_intake.py lock-status
+python3 tools/board_intake.py morning
+python3 tools/board_intake.py morning --apply
 ```
 
 `publish` without `--apply` is a dry-run. Dry-run does not create the lock and does not write posts, media, indexes, or receipts.
@@ -161,6 +163,9 @@ Stdout is one JSON object. Exit `0` means `ok`. Exit `2` is a validation failure
 | `index_guard_failed` | The update would drop an existing post or shrink the 46-post floor. |
 | `publish_failed` | Apply stopped before a receipt was written. |
 | `unlocked` | `lock-status` when no lock file exists. |
+| `skipped` | Morning inbox has no single bundle for that Pacific date. Nothing was published. |
+| `already_published` | That Pacific date already has its one post. A rerun does not publish another. |
+| `multiple_ready` | More than one post-bundle is dated that morning. None were published. |
 
 ## Idempotency
 
@@ -217,8 +222,28 @@ If a publish commit is already on a branch, `git revert` that commit. Also remov
 
 Do not roll back the existing 46 posts as part of adopting this contract.
 
+## Morning routine (existing 10:00 AM PT schedule)
+
+Do not create a second schedule. The Nexus routine named `BOPS daily blog post` already runs every day at 10:00 AM Pacific (`America/Los_Angeles`). After the local agents are recoded and Steward/Forge has accepted this intake path, that same routine is what publishes. This repository does not install cron, a GitHub Actions `schedule`, or a second agent timer. CI must not call `morning --apply`. This pull request does not run it.
+
+The routine's repo entrypoint is cron-safe: no prompts, one JSON object on stdout, a flushed exit code, and the same publish lock as `publish --apply`. It does not commit or push. The routine commits only when `"commit"` is true.
+
+```bash
+python3 tools/board_intake.py morning --apply
+```
+
+Without `--apply`, the same selection runs as a dry-run. `--date YYYY-MM-DD` pins the Pacific date for a test. The default date is today in `America/Los_Angeles`.
+
+### How the routine uses the entrypoint
+
+1. **Research and draft aggregation, before 10:00.** Hermes writes `sources`, OpenClaw writes `seo-brief`, Ollama writes `draft`, and Grok Build writes `media`. Chief of Staff assembles those artifacts into one `intake/inbox/<submission-id>/` post-bundle whose `post.date` is that Pacific morning. The morning command does not merge competing drafts and does not write article prose. Specialist directories left in the inbox are reported under `aggregation.specialist_packets` and are never published.
+2. **Fail-closed validation.** The entrypoint validates that bundle with the same rules as `validate`. If it is not `ready`, the command publishes nothing and returns that failure status. If zero bundles match the date, status is `skipped`. If two or more post-bundles share the date, status is `multiple_ready` and none are published, including when one of them would have passed alone.
+3. **Single Steward publish.** When exactly one bundle is `ready` and `posts.json` does not already contain that Pacific date, `morning --apply` calls the Steward publisher once. A second run the same morning returns `already_published` and writes nothing. `commit` is true only for status `published`.
+
+Exit 0 means `published`, `already_published`, `skipped`, or a clean `dry_run`. Exit 2 is a validation failure. Exit 3 is `lock_held`. Exit 4 is `multiple_ready`, `duplicate`, `conflict`, or `index_guard_failed`. The routine must not `git commit` or `git push` unless `commit` is true.
+
 ## Handoff
 
-**Chief of Staff:** own assembly and the review pull request. Reject packets that fail `validate`. Do not run `--apply`. Do not merge, deploy, or send the packet to any host other than this GitHub repository.
+**Chief of Staff:** own assembly and the review pull request. Before 10:00 AM PT, leave exactly one post-bundle dated that Pacific morning. Reject packets that fail `validate`. Do not run `--apply` or `morning --apply`. Do not merge, deploy, or send the packet to any host other than this GitHub repository.
 
-**Steward:** own `publish --dry-run`, the publish lock, and `publish --apply`. Confirm the dry-run JSON is `ok` with status `dry_run` before applying. Confirm the diff adds one post and does not drop slugs from `posts.json`, `sitemap.xml`, or `blog/rss.xml`. Push only after that review. Do not regenerate the whole site unless you intend to, and do not overwrite polished post HTML with CloudFront URLs.
+**Steward:** own `publish --dry-run`, the publish lock, `publish --apply`, and the single `morning --apply` inside the existing 10:00 AM PT routine after Forge review. Confirm a dry-run JSON is clean before the routine passes `--apply`. Commit only when `commit` is true. Confirm the diff adds one post and does not drop slugs from `posts.json`, `sitemap.xml`, or `blog/rss.xml`. Do not add a second schedule. Do not regenerate the whole site unless you intend to, and do not overwrite polished post HTML with CloudFront URLs.

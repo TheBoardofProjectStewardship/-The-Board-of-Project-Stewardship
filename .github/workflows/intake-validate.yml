@@ -1,5 +1,7 @@
 name: Intake contract
 
+# No schedule here. The only morning run is the existing 10:00 AM PT routine
+# (BOPS daily blog post). Do not add a cron, and do not pass morning --apply.
 on:
   pull_request:
   push:

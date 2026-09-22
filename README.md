@@ -123,7 +123,7 @@ python3 tools/board_intake.py validate intake/inbox/submission-id
 python3 tools/board_intake.py publish intake/inbox/submission-id --dry-run
 ```
 
-`publish --apply` is a deliberate Steward action. CI must not pass `--apply`. Contract: `docs/AGENT-INTAKE.md`.
+`publish --apply` is a deliberate Steward action. CI must not pass `--apply`. The only morning schedule is the existing 10:00 AM PT routine, which calls `python3 tools/board_intake.py morning --apply` after Steward review. This repository does not add a second cron. Contract: `docs/AGENT-INTAKE.md`.
 
 ## Notes
 

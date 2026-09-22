@@ -81,11 +81,25 @@ Target **one useful post per day** when the publishing agent is scheduled. Skip 
 - Submissions are **review-only** until Alex/Steward publish a Markdown post and regenerate.
 
 
-## Daily cadence (Alex 2026-09-17)
+## Daily cadence (Alex 2026-09-17, intake entrypoint 2026-09-22)
 
-- **Every day at 10:00 AM PT:** Nexus routine `BOPS daily blog post` writes one original post and ships to this site.
+There is one morning schedule. Do not add a second cron, GitHub Action schedule, or agent timer.
+
+- **Every day at 10:00 AM PT:** the existing Nexus routine `BOPS daily blog post` is the only run. After local agents are recoded and this intake path has passed Steward/Forge review, that routine calls the repo entrypoint below. Until that review, do not point the routine at `--apply`.
 - Ghost remains **OFF**. Publish target is Board of Project Stewardship only.
-- Skip a day rather than ship thin duplicate content.
+- One vetted post per Pacific morning. Specialist agents never publish. Skip a day rather than ship a second post or thin duplicate content.
+
+The routine does three steps, in order, and stops on a fail-closed result:
+
+1. **Aggregate.** Before 10:00 AM PT, Hermes leaves sources, OpenClaw leaves the SEO brief, Ollama leaves the draft, and Grok Build leaves repo-path media. Chief of Staff copies those into **one** `post-bundle` whose `post.date` is that Pacific date. Loose specialist packets stay in the inbox and are not posts.
+2. **Validate, fail closed.** The entrypoint checks that single bundle. A validation error publishes nothing. Two bundles dated that morning publish nothing (`multiple_ready`). An empty morning publishes nothing (`skipped`).
+3. **One Steward publish.** Only this command writes the site, and only for that one bundle:
+
+```bash
+python3 tools/board_intake.py morning --apply
+```
+
+Commit and push only when the JSON says `"commit": true` (status `published`). `already_published` and `skipped` exit 0 and must not commit again. `python3 tools/board_intake.py morning` without `--apply` is the dry-run. This pull request does not run `--apply` and does not install the schedule.
 
 
 ## Rich media recipe (Alex 2026-09-19)

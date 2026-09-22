@@ -61,6 +61,16 @@ def _rewrite_slug(packet: Path, slug: str, title: str | None = None) -> None:
     (packet / "seo.json").write_text(json.dumps(seo, indent=2) + "\n", encoding="utf-8")
 
 
+def _stage_inbox(root: Path, submission_id: str, slug: str, title: str, example: bool = False) -> Path:
+    packet = _copy_bundle(root, submission_id=submission_id, example=example)
+    dest = root / "intake" / "inbox" / submission_id
+    if dest.exists():
+        shutil.rmtree(dest)
+    shutil.move(str(packet), dest)
+    _rewrite_slug(dest, slug, title)
+    return dest
+
+
 def _seed_site(root: Path) -> None:
     (root / "posts").mkdir(parents=True)
     (root / "blog").mkdir(parents=True)
@@ -451,6 +461,124 @@ class LiveSiteRegressionTests(unittest.TestCase):
             for path, blob in blobs.items():
                 if path.exists() and path.read_bytes() != blob:
                     path.write_bytes(blob)
+
+
+class MorningRoutineTests(unittest.TestCase):
+    MORNING = "2026-09-22"
+
+    def test_workflow_has_no_second_schedule(self):
+        text = (ROOT / ".github" / "workflows" / "intake-validate.yml").read_text(encoding="utf-8")
+        self.assertNotIn("\nschedule:", "\n" + text)
+        self.assertNotIn("cron:", text)
+
+    def test_empty_morning_skips_without_writing(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            _seed_site(root)
+            result = intake.morning_run(root, apply=True, on_date=self.MORNING)
+            self.assertTrue(result["ok"], result)
+            self.assertEqual(result["status"], "skipped")
+            self.assertFalse(result["commit"])
+            self.assertEqual(result["schedule"]["when"], "10:00 AM PT")
+            self.assertFalse(result["schedule"]["competing_schedule"])
+            self.assertEqual(list((root / "posts").glob("2026-09-22*")), [])
+
+    def test_one_bundle_dry_run_then_apply_then_replay(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            _seed_site(root)
+            _stage_inbox(
+                root,
+                "morning-one",
+                "morning-one-flashing",
+                "Morning One Flashing Fixture Guide",
+            )
+            (root / "intake" / "inbox" / "sources-only").mkdir()
+            (root / "intake" / "inbox" / "sources-only" / "manifest.json").write_text(
+                json.dumps({
+                    "schema_version": "1.0.0",
+                    "submission_id": "sources-only",
+                    "kind": "sources",
+                    "producer": "hermes",
+                    "created_at": "2026-09-22T00:00:00Z",
+                    "target": {"site": "https://boardofprojectstewardship.com/", "content_type": "note"},
+                    "artifacts": {"sources": "sources.json"},
+                }) + "\n",
+                encoding="utf-8",
+            )
+            (root / "intake" / "inbox" / "sources-only" / "sources.json").write_text(
+                json.dumps({"producer": "hermes", "sources": []}) + "\n",
+                encoding="utf-8",
+            )
+            dry = intake.morning_run(root, apply=False, on_date=self.MORNING)
+            self.assertEqual(dry["status"], "dry_run", dry)
+            self.assertFalse(dry["commit"])
+            self.assertEqual(dry["aggregation"]["selected"], "morning-one")
+            self.assertIn("sources-only", dry["aggregation"]["specialist_packets"])
+            self.assertFalse((root / "posts" / "2026-09-22-morning-one-flashing.md").exists())
+            applied = intake.morning_run(root, apply=True, on_date=self.MORNING)
+            self.assertEqual(applied["status"], "published", applied)
+            self.assertTrue(applied["commit"])
+            posts = json.loads((root / "posts.json").read_text(encoding="utf-8"))
+            dated = [post["slug"] for post in posts if post["date"] == self.MORNING]
+            self.assertEqual(dated, ["morning-one-flashing"])
+            again = intake.morning_run(root, apply=True, on_date=self.MORNING)
+            self.assertEqual(again["status"], "already_published", again)
+            self.assertFalse(again["commit"])
+            self.assertEqual(
+                [post["slug"] for post in json.loads((root / "posts.json").read_text(encoding="utf-8")) if post["date"] == self.MORNING],
+                ["morning-one-flashing"],
+            )
+
+    def test_two_bundles_publish_nothing(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            _seed_site(root)
+            _stage_inbox(root, "morning-a", "morning-a-flashing", "Morning A Flashing Fixture Guide")
+            _stage_inbox(root, "morning-b", "morning-b-flashing", "Morning B Flashing Fixture Guide")
+            result = intake.morning_run(root, apply=True, on_date=self.MORNING)
+            self.assertFalse(result["ok"])
+            self.assertEqual(result["status"], "multiple_ready")
+            self.assertFalse(result["commit"])
+            self.assertEqual(list((root / "posts").glob("2026-09-22*")), [])
+            self.assertEqual(json.loads((root / "posts.json").read_text(encoding="utf-8"))[0]["slug"], "existing-guide")
+
+    def test_invalid_bundle_fails_closed(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            _seed_site(root)
+            packet = _stage_inbox(root, "morning-bad", "morning-bad-flashing", "Morning Bad Flashing Fixture Guide")
+            draft = (packet / "draft.md").read_text(encoding="utf-8")
+            (packet / "draft.md").write_text(draft + "\nChatGPT\n", encoding="utf-8")
+            result = intake.morning_run(root, apply=True, on_date=self.MORNING)
+            self.assertFalse(result["ok"])
+            self.assertEqual(result["status"], "forbidden_public_copy")
+            self.assertEqual(result["wrote"], [])
+            self.assertFalse(result["commit"])
+            self.assertEqual(list((root / "posts").glob("2026-09-22*")), [])
+
+    def test_cli_dry_run_on_empty_future_date_writes_nothing(self):
+        before = hashlib.sha256((ROOT / "posts.json").read_bytes()).hexdigest()
+        proc = subprocess.run(
+            [
+                sys.executable,
+                str(ROOT / "tools" / "board_intake.py"),
+                "morning",
+                "--dry-run",
+                "--date",
+                "2099-01-01",
+            ],
+            cwd=ROOT,
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        self.assertEqual(proc.returncode, 0, proc.stderr + proc.stdout)
+        payload = json.loads(proc.stdout)
+        self.assertEqual(payload["status"], "skipped")
+        self.assertFalse(payload["commit"])
+        self.assertEqual(payload["schedule"]["routine"], "BOPS daily blog post")
+        self.assertEqual(hashlib.sha256((ROOT / "posts.json").read_bytes()).hexdigest(), before)
 
 
 if __name__ == "__main__":

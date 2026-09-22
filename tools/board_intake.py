@@ -21,6 +21,7 @@ import sys
 from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
@@ -134,7 +135,12 @@ EXIT_CODES = {
     "conflict": 4,
     "duplicate": 4,
     "index_guard_failed": 4,
+    "multiple_ready": 4,
 }
+# The only morning schedule. This repository does not install a second cron.
+MORNING_ROUTINE = "BOPS daily blog post"
+MORNING_WHEN = "10:00 AM PT"
+MORNING_TZ = ZoneInfo("America/Los_Angeles")
 
 
 class IntakeFailure(Exception):
@@ -1249,6 +1255,180 @@ def _apply(packet, root, manifest, checked, planned, force_lock) -> dict:
         release_lock(root)
 
 
+def pacific_today(now: datetime | None = None) -> str:
+    """Calendar date of the existing morning routine in America/Los_Angeles."""
+    current = now or datetime.now(MORNING_TZ)
+    if current.tzinfo is None:
+        current = current.replace(tzinfo=MORNING_TZ)
+    return current.astimezone(MORNING_TZ).strftime("%Y-%m-%d")
+
+
+def _inbox_packets(root: Path) -> list[Path]:
+    inbox = root / "intake" / "inbox"
+    if not inbox.is_dir():
+        return []
+    return sorted(
+        path for path in inbox.iterdir()
+        if path.is_dir() and (path / "manifest.json").is_file()
+    )
+
+
+def _posts_on_date(root: Path, pacific_date: str) -> list[dict]:
+    return [
+        post for post in _existing_posts(root)
+        if isinstance(post, dict) and post.get("date") == pacific_date
+    ]
+
+
+def _schedule_block(pacific_date: str) -> dict:
+    return {
+        "routine": MORNING_ROUTINE,
+        "when": MORNING_WHEN,
+        "timezone": "America/Los_Angeles",
+        "pacific_date": pacific_date,
+        "competing_schedule": False,
+    }
+
+
+def morning_run(
+    root: Path,
+    *,
+    apply: bool,
+    force_lock: bool = False,
+    on_date: str | None = None,
+) -> dict:
+    """One fail-closed pass for the existing 10:00 AM PT routine.
+
+    Aggregates inbox packets, selects at most one ready post-bundle dated the
+    Pacific morning, and publishes it only when ``apply`` is set. Specialist
+    packets never publish. Two ready bundles publish nothing.
+    """
+    root = root.resolve()
+    if on_date is None:
+        try:
+            pacific_date = pacific_today()
+        except Exception:
+            return _result(
+                ok=False,
+                status="publish_failed",
+                message="Pacific morning clock is unavailable; nothing was published",
+                errors=[{"code": "publish_failed", "message": "America/Los_Angeles clock failed"}],
+            )
+    else:
+        pacific_date = on_date
+    if not isinstance(pacific_date, str) or not DATE_RE.match(pacific_date):
+        return _result(
+            ok=False,
+            status="invalid_manifest",
+            message="morning date must be YYYY-MM-DD",
+            errors=[{"code": "invalid_manifest", "message": "morning date must be YYYY-MM-DD"}],
+        )
+    try:
+        datetime.strptime(pacific_date, "%Y-%m-%d")
+    except ValueError:
+        return _result(
+            ok=False,
+            status="invalid_manifest",
+            message="morning date is not a real calendar date",
+            errors=[{"code": "invalid_manifest", "message": "morning date is not a real calendar date"}],
+        )
+
+    specialists: list[str] = []
+    ignored_examples: list[str] = []
+    deferred: list[str] = []
+    today_bundles: list[tuple[Path, dict, dict]] = []
+    for path in _inbox_packets(root):
+        try:
+            manifest = _load_json(path / "manifest.json")
+        except IntakeFailure:
+            manifest = {}
+        checked = validate_packet(path, root)
+        kind = manifest.get("kind")
+        submission_id = checked.get("submission_id") or path.name
+        if kind != "post-bundle":
+            specialists.append(str(submission_id))
+            continue
+        if manifest.get("example"):
+            ignored_examples.append(str(submission_id))
+            continue
+        post = manifest.get("post") if isinstance(manifest.get("post"), dict) else {}
+        post_date = post.get("date")
+        if post_date != pacific_date:
+            deferred.append(str(submission_id))
+            continue
+        today_bundles.append((path, manifest, checked))
+
+    aggregation = {
+        "specialist_packets": specialists,
+        "ignored_examples": ignored_examples,
+        "deferred_other_dates": deferred,
+        "today_bundles": [item[2].get("submission_id") for item in today_bundles],
+        "selected": None,
+    }
+
+    def finish(payload: dict) -> dict:
+        payload = dict(payload)
+        payload["schedule"] = _schedule_block(pacific_date)
+        payload["aggregation"] = aggregation
+        payload["publisher"] = PUBLISHER
+        payload["commit"] = payload.get("status") == "published" and not payload.get("dry_run")
+        payload["dry_run"] = not apply if "dry_run" not in payload else payload["dry_run"]
+        return payload
+
+    existing = _posts_on_date(root, pacific_date)
+    if existing:
+        aggregation["selected"] = None
+        return finish(_result(
+            ok=True,
+            status="already_published",
+            submission_id=existing[0].get("slug") if isinstance(existing[0].get("slug"), str) else None,
+            dry_run=not apply,
+            publishable=False,
+            message=(
+                f"the {pacific_date} morning already has its one post; "
+                "no second packet was published"
+            ),
+            extra={"existing_slugs": [post.get("slug") for post in existing]},
+        ))
+
+    if len(today_bundles) > 1:
+        return finish(_result(
+            ok=False,
+            status="multiple_ready",
+            dry_run=not apply,
+            publishable=False,
+            message="more than one post-bundle is dated this morning; published none",
+            errors=[{
+                "code": "multiple_ready",
+                "message": "refusing to let multiple packets publish on the same morning",
+            }],
+        ))
+
+    if not today_bundles:
+        return finish(_result(
+            ok=True,
+            status="skipped",
+            dry_run=not apply,
+            publishable=False,
+            message=(
+                "no single vetted post-bundle for this Pacific morning; "
+                "specialist packets were not published"
+            ),
+        ))
+
+    path, _manifest, checked = today_bundles[0]
+    if checked.get("status") != "ready" or not checked.get("ok"):
+        failed = dict(checked)
+        failed["dry_run"] = not apply
+        failed["wrote"] = []
+        failed["message"] = checked.get("message") or "morning bundle failed validation; nothing was published"
+        return finish(failed)
+
+    aggregation["selected"] = checked.get("submission_id")
+    published = publish_packet(path, root, apply=apply, force_lock=force_lock)
+    return finish(published)
+
+
 def validate_inbox(root: Path) -> dict:
     inbox = root / "intake" / "inbox"
     results = []
@@ -1268,6 +1448,7 @@ def validate_inbox(root: Path) -> dict:
 def _print(payload: dict) -> int:
     json.dump(payload, sys.stdout, indent=2)
     sys.stdout.write("\n")
+    sys.stdout.flush()
     if payload.get("ok"):
         return 0
     return EXIT_CODES.get(payload.get("status", ""), 2)
@@ -1289,10 +1470,37 @@ def main(argv: list[str] | None = None) -> int:
 
     sub.add_parser("lock-status", help="Show the local publish lock")
 
+    morning = sub.add_parser(
+        "morning",
+        help="Fail-closed pass for the existing 10:00 AM PT routine (one post; no second schedule)",
+    )
+    morning.add_argument("--dry-run", action="store_true", help="Select and validate only (default)")
+    morning.add_argument(
+        "--apply",
+        action="store_true",
+        help="Steward publishes the one vetted bundle. The existing routine passes this; CI must not.",
+    )
+    morning.add_argument("--date", help="Pacific date YYYY-MM-DD. Default is today in America/Los_Angeles.")
+    morning.add_argument("--force-lock", action="store_true", help="Replace a stale publish lock")
+
     args = parser.parse_args(argv)
     root = args.root.resolve()
     if args.cmd == "lock-status":
         return _print(lock_status(root))
+    if args.cmd == "morning":
+        if args.apply and args.dry_run:
+            return _print(_result(
+                ok=False,
+                status="invalid_manifest",
+                message="pass only one of --apply or --dry-run",
+                errors=[{"code": "invalid_manifest", "message": "pass only one of --apply or --dry-run"}],
+            ))
+        return _print(morning_run(
+            root,
+            apply=bool(args.apply),
+            force_lock=bool(args.force_lock),
+            on_date=args.date,
+        ))
     if args.cmd == "validate":
         if args.packet is None:
             return _print(validate_inbox(root))
