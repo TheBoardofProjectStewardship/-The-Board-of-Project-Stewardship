@@ -5452,19 +5452,19 @@ def build_how_we_rank_page() -> str:
         + _hub_photo_strip(
             [
                 (
-                    "assets/images/home-process-research.webp",
-                    "Illustrative research and ranking-review materials — not a real Board job photo",
-                    "Editorial research pass",
+                    "assets/images/hubs/hub-rank-1.webp",
+                    "Illustrative contractor ranking scorecard staging — free generative image, not a real Board job photo",
+                    "Editorial scorecard habit",
                 ),
                 (
-                    "assets/images/home-process-verify.webp",
-                    "Illustrative contractor license verification habit — not a real Board job photo",
-                    "L&I re-verify before hire",
+                    "assets/images/hubs/hub-rank-2.webp",
+                    "Illustrative sealed-bid comparison staging — free generative image, not a real Board job photo",
+                    "Compare written proposals",
                 ),
                 (
-                    "assets/images/home-process-shortlist.webp",
-                    "Illustrative directory shortlist comparison context — not a real Board job photo",
-                    "Shortlist, then compare bids",
+                    "assets/images/hubs/hub-rank-3.webp",
+                    "Illustrative framed-house walk-through notebook staging — free generative image, not a real Board job photo",
+                    "Site walk notes",
                 ),
             ],
             title="Ranking habits in pictures (illustrative)",
@@ -7530,19 +7530,19 @@ def build_edmonds_hub() -> str:
         official_keys=["lni_verify", "lni_home", "edmonds", "edmonds_permits", "mybuildingpermit"],
         photo_strip=[
             (
-                "assets/images/posts/2026-08-12-edmonds-addition-permit-4.webp",
-                "Illustrative Edmonds addition permit planning still — not a real Board job photo",
-                "MyBuildingPermit orientation",
+                "assets/images/hubs/hub-edmonds-1.webp",
+                "Illustrative Edmonds coastal craftsman with fiber-cement siding — free generative image, not a real Board job photo",
+                "Coastal cladding curb appeal",
             ),
             (
-                "assets/images/posts/2026-09-21-edmonds-roof-1.webp",
-                "Illustrative Edmonds coastal roof weatherproofing still — not a real Board job photo",
-                "Coastal roof detailing",
+                "assets/images/hubs/hub-edmonds-2.webp",
+                "Illustrative weather-resistive barrier and window flashing detail — free generative image, not a real Board job photo",
+                "WRB & flashing detail",
             ),
             (
-                "assets/images/posts/2026-09-22-edmonds-siding-1.webp",
-                "Illustrative Edmonds fiber-cement siding still — not a real Board job photo",
-                "Siding & moisture cycles",
+                "assets/images/hubs/hub-edmonds-3.webp",
+                "Illustrative Edmonds / Puget Sound waterfront context — free generative image, not a real Board job photo",
+                "Sound-side climate context",
             ),
         ],
         photo_strip_title="Edmonds work in pictures (illustrative)",
@@ -8869,19 +8869,19 @@ def build_directory_hub() -> str:
         + _hub_photo_strip(
             [
                 (
-                    "assets/images/posts/2026-08-11-hire-design-build-3.webp",
-                    "Illustrative design-build hire shortlist still — not a real Board job photo",
-                    "Design-build hire path",
+                    "assets/images/hubs/hub-directory-1.webp",
+                    "Illustrative contractor license checklist still — free generative image, not a real Board job photo",
+                    "License checklist habit",
                 ),
                 (
-                    "assets/images/home-process-verify.webp",
-                    "Illustrative contractor verification before directory hire — not a real Board job photo",
-                    "Verify every bidder",
+                    "assets/images/hubs/hub-directory-2.webp",
+                    "Illustrative homeowner comparing sealed contractor bids — free generative image, not a real Board job photo",
+                    "Compare written bids",
                 ),
                 (
-                    "assets/images/posts/2026-09-05-hire-bath-1.webp",
-                    "Illustrative bathroom remodel hire context — not a real Board job photo",
-                    "Bath & kitchen shortlists",
+                    "assets/images/hubs/hub-directory-3.webp",
+                    "Illustrative WA contractor license verification staging — free generative image, not a real Board job photo",
+                    "L&I verify before hire",
                 ),
             ],
             title="Directory habits in pictures (illustrative)",
