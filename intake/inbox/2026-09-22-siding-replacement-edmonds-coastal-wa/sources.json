@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "producer": "hermes",
+  "sources": [
+    {
+      "id": "src-lni",
+      "title": "Washington L&I Verify a Contractor",
+      "url": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-09-22",
+      "supports": "Homeowners re-verify the legal business name, license, bond, and insurance before hiring."
+    },
+    {
+      "id": "src-mbp",
+      "title": "MyBuildingPermit",
+      "url": "https://mybuildingpermit.com/",
+      "retrieved": "2026-09-22",
+      "supports": "Many King and Snohomish building permits, including Edmonds cladding work, are filed through the regional portal."
+    },
+    {
+      "id": "src-edmonds-permit",
+      "title": "City of Edmonds \u2014 Apply for a Permit",
+      "url": "https://edmondswa.gov/services/permit_assistance/apply_for_a_permit",
+      "retrieved": "2026-09-22",
+      "supports": "City of Edmonds directs building applications to MyBuildingPermit and publishes current permit assistance guidance."
+    }
+  ]
+}

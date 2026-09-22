@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-09-22-siding-replacement-edmonds-coastal-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-09-22T17:38:51Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Fiber-Cement Siding Replacement Edmonds WA \u2014 Coastal Moisture, WRB & Permits",
+    "date": "2026-09-22",
+    "slug": "siding-replacement-edmonds-coastal-wa",
+    "description": "Edmonds fiber-cement siding replacement guide for coastal moisture, weather-resistive barriers, window and door flashings, MyBuildingPermit paths, and how to shortlist licensed siding contractors in King and Snohomish.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  }
+}
