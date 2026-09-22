@@ -1,0 +1,20 @@
+{
+  "submission_id": "2026-09-22-siding-replacement-edmonds-coastal-wa",
+  "idempotency_key": "sha256:e1d7ed482c34b8c9d2a3e06cba7096f484b97178b154667f0d8ac70595ec8e1a",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-09-22T17:45:11Z",
+  "outputs": [
+    "assets/images/posts/2026-09-22-edmonds-siding-1.webp",
+    "assets/images/posts/2026-09-22-edmonds-siding-2.webp",
+    "assets/images/posts/2026-09-22-edmonds-siding-3.webp",
+    "assets/videos/posts/2026-09-22-edmonds-siding.mp4",
+    "posts/2026-09-22-siding-replacement-edmonds-coastal-wa.md",
+    "posts/2026-09-22-siding-replacement-edmonds-coastal-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 47
+}
