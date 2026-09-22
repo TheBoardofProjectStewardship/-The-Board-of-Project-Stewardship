@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0.0",
+  "producer": "openclaw",
+  "slug": "siding-replacement-edmonds-coastal-wa",
+  "internal_links": [
+    "../siding.html",
+    "../windows.html",
+    "../roofing.html",
+    "../insulation.html",
+    "../bathrooms.html",
+    "../kitchen.html",
+    "../additions.html",
+    "../trades.html",
+    "../blog.html"
+  ],
+  "notes": "OPERATOR-NOTE-NOT-FOR-HTML coastal siding WRB guide rotating after 09-20 windows and 09-21 roof"
+}

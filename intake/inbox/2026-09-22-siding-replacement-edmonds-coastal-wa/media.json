@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0.0",
+  "producer": "grok-build",
+  "files": [
+    {
+      "role": "in-article",
+      "intake_file": "media/shot-1.webp",
+      "repo_path": "assets/images/posts/2026-09-22-edmonds-siding-1.webp",
+      "alt": "Illustrative Pacific Northwest coastal home staged for fiber-cement siding replacement \u2014 illustrative staging image, not a real Board of Project Stewardship job photo"
+    },
+    {
+      "role": "in-article",
+      "intake_file": "media/shot-2.webp",
+      "repo_path": "assets/images/posts/2026-09-22-edmonds-siding-2.webp",
+      "alt": "Illustrative weather-resistive barrier and window flashing detail during coastal siding work \u2014 illustrative only, not a real job photo"
+    },
+    {
+      "role": "in-article",
+      "intake_file": "media/shot-3.webp",
+      "repo_path": "assets/images/posts/2026-09-22-edmonds-siding-3.webp",
+      "alt": "Illustrative finished fiber-cement lap siding on a coastal Washington home \u2014 illustrative only, not a real job photo"
+    },
+    {
+      "role": "process-clip",
+      "intake_file": "media/clip.mp4",
+      "repo_path": "assets/videos/posts/2026-09-22-edmonds-siding.mp4",
+      "alt": "Illustrative process clip for coastal Edmonds-style envelope staging \u2014 not footage of a live Board job"
+    }
+  ]
+}
