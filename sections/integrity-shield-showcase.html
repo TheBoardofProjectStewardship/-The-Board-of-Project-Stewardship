@@ -274,7 +274,13 @@
     if (reduce) {
       document.querySelectorAll('.layer-list li')[0]?.classList.add('active');
     } else {
-      boot();
+      boot().catch(function () {
+        var host = document.getElementById('canvas-host');
+        var still = document.querySelector('.static-shield');
+        if (host) host.style.display = 'none';
+        if (still) still.style.display = 'block';
+        document.querySelectorAll('.layer-list li')[0]?.classList.add('active');
+      });
     }
 
     async function boot() {
