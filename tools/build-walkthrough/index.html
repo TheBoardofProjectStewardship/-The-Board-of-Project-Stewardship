@@ -200,7 +200,299 @@
       .stage-card.is-enter { animation: none; }
       .img-stack img { transition: none !important; }
     }
+
+    /* Uncle-render soft grade on stills (Rina) */
+    .img-stack img {
+      filter: saturate(0.92) brightness(1.03) contrast(0.98);
+      object-position: var(--img-focus, 50% 50%);
+      transform-origin: var(--img-focus, 50% 50%);
+    }
+    .img-stack.ken-on img.is-front {
+      animation: kenBurns 8s ease-out forwards;
+    }
+    @keyframes kenBurns {
+      from { transform: scale(1); }
+      to { transform: scale(1.06); }
+    }
+    .img-stack.tint-plumbing::after,
+    .img-stack.tint-electrical::after,
+    .img-stack.tint-hvac::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 2;
+      mix-blend-mode: soft-light;
+    }
+    .img-stack.tint-plumbing::after { background: rgba(56, 189, 248, 0.18); }
+    .img-stack.tint-electrical::after { background: rgba(250, 204, 21, 0.14); }
+    .img-stack.tint-hvac::after { background: rgba(167, 139, 250, 0.14); }
+
+    /* Trade layer toggles */
+    .layer-bar { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; }
+    .layer-chip {
+      min-height: 40px; padding: 0 .75rem; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.15); background: rgba(0,0,0,.35);
+      font-size: 10px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
+      color: #94a3b8; transition: background .15s, color .15s, border-color .15s, opacity .15s;
+    }
+    .layer-chip[aria-pressed="true"] {
+      background: rgba(22,101,52,.45); color: #4ade80; border-color: rgba(74,222,128,.45);
+    }
+    .layer-chip:disabled, .layer-chip[aria-disabled="true"] {
+      opacity: .35; cursor: not-allowed;
+    }
+    .layer-honesty {
+      font-size: 9px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      color: #fcd34d; opacity: .9;
+    }
+
+    /* Coastal diligence (secondary, not a 5th check) */
+    .coastal-block { margin-top: .75rem; padding-top: .75rem; border-top: 1px solid rgba(255,255,255,.08); }
+    .coastal-block h3 { font-size: 10px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #64748b; margin-bottom: .4rem; }
+    .coastal-block ul { list-style: none; padding: 0; margin: 0; }
+    .coastal-block li { font-size: 12px; color: #94a3b8; font-weight: 300; line-height: 1.45; padding-left: .9rem; position: relative; margin-bottom: .35rem; }
+    .coastal-block li::before { content: "›"; position: absolute; left: 0; color: #4ade80; font-weight: 800; }
+
+    /* Mobile scrub chrome: prev / label / next (rail stays glance-scroll, not a chip wall) */
+    @media (max-width: 767px) {
+      .stage-rail { max-height: none; }
+      .mobile-stage-nav { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
+      .mobile-stage-nav .live-label {
+        flex: 1; text-align: center; font-size: 12px; font-weight: 800; color: #4ade80;
+        letter-spacing: .08em; text-transform: uppercase;
+      }
+    }
+    @media (min-width: 768px) {
+      .mobile-stage-nav { display: none; }
+    }
+
+    /* Static cite outline + FAQ */
+    .static-stages details { border: 1px solid rgba(255,255,255,.1); border-radius: .75rem; background: rgba(26,26,26,.8); }
+    .static-stages summary { cursor: pointer; padding: .85rem 1rem; font-weight: 700; color: #e2e8f0; list-style: none; }
+    .static-stages summary::-webkit-details-marker { display: none; }
+    .static-stages .stage-static-body { padding: 0 1rem 1rem; }
+    .faq-list details { margin-bottom: .5rem; border: 1px solid rgba(255,255,255,.08); border-radius: .5rem; padding: .65rem .85rem; background: rgba(0,0,0,.25); }
+    .faq-list summary { cursor: pointer; font-weight: 600; color: #e2e8f0; }
+    .faq-list p { margin-top: .45rem; font-size: .875rem; color: #94a3b8; font-weight: 300; line-height: 1.5; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .img-stack.ken-on img.is-front { animation: none !important; }
+      .img-stack img { filter: none; }
+    }
   </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://boardofprojectstewardship.com/tools/build-walkthrough/#webpage",
+      "url": "https://boardofprojectstewardship.com/tools/build-walkthrough/",
+      "name": "Build Walkthrough | Board of Project Stewardship",
+      "description": "Educational seventeen-stage build sequence from the Board of Project Stewardship for Edmonds / coastal Puget Sound homeowners. Illustrative media only — not a bid, schedule, or stamped plans.",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Board of Project Stewardship",
+        "url": "https://boardofprojectstewardship.com/"
+      }
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://boardofprojectstewardship.com/tools/build-walkthrough/#howto",
+      "name": "Board of Project Stewardship Build Walkthrough",
+      "description": "Illustrative home-build sequence from discovery to warranty handoff. Educational diligence for Edmonds / coastal Puget Sound — not a bid or schedule.",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Discovery",
+          "text": "Before drawings: sit at the kitchen table and capture vision, budget reality, coastal site notes, and proposal readiness. Vision, budget reality, and site notes are captured before plans start.",
+          "url": "https://boardofprojectstewardship.com/tools/build-walkthrough/#static-discovery"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Plans",
+          "text": "Layouts and elevations turn discovery into a shared spatial story you can walk through on paper. Layouts reviewed against the brief; educational sheets only — not AHJ-approved.",
+          "url": "https://boardofprojectstewardship.com/tools/build-walkthrough/#static-plans"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Permits",
+          "text": "Permits posted, contractor license verified, and site logistics set before dirt moves. Permits posted and license habit confirmed before dirt moves.",
+          "url": "https://boardofprojectstewardship.com/tools/build-walkthrough/#static-permits"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Site prep",
+          "text": "Clearing, access, erosion control, and staging so the crew can work clean and keep sediment off the street. Erosion controls and staging set before excavation advances.",
+          "url": "https://boardofprojectstewardship.com/tools/build-walkthrough/#static-site-prep"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "name": "Foundation",
+          "text": "Excavation, underground utilities, and concrete that will carry every later stage. Foundation inspections and waterproofing complete before framing mobilizes.",
+          "url": "https://boardofprojectstewardship.com/tools/build-walkthrough/#static-foundation"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 6,
+          "name": "Framing",
+          "text": "Studs, joists, and roof structure rise from the foundation — the moment the house becomes a volume. Framing plumb, lined, and ready for inspection before sheathing closes structure.",
+          "url": "https://boardofprojectstewardship.com/tools/build-walkthrough/#static-framing"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 7,
+          "name": "Roofing",
+          "text": "Underlayment, flashings, and finished roofing dry the structure from above so interior trades are not racing rain. Roof dry-in from above confirmed before moisture-sensitive interior work advances.",
+          "url": "https://boardofprojectstewardship.com/tools/build-walkthrough/#static-roofing"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 8,
+          "name": "Siding",
+          "text": "Weather-resistive barrier, openings, and cladding that shed wind-driven rain. WRB, openings, and cladding hold so the envelope sheds wind-driven rain.",
+          "url": "https://boardofprojectstewardship.com/tools/build-walkthrough/#static-siding"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 9,
+          "name": "Plumbing",
+          "text": "Supply, drain, and vent rough-in land in open walls and floors before insulation closes the cavities. Plumbing rough inspection passed before insulation.",
+          "url": "https://boardofprojectstewardship.com/tools/build-walkthrough/#static-plumbing"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 10,
+          "name": "Electrical",
+          "text": "Branch circuits, panels, and device boxes land while walls are open — including low-voltage paths for data, security, and controls. Electrical rough inspection passed before insulation.",
+          "url": "https://boardofprojectstewardship.com/tools/build-walkthrough/#static-electrical"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 11,
+          "name": "HVAC",
+          "text": "Ducts, equipment pads, refrigerant lines, and ventilation rough-in share the open-wall window with plumbing and electrical. Mechanical rough (when required) passed before insulation.",
+          "url": "https://boardofprojectstewardship.com/tools/build-walkthrough/#static-hvac"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 12,
+          "name": "Insulation",
+          "text": "Cavity fill and continuous weather-resistive discipline that matter on PNW coastal homes. Insulation inspection passed prior to drywall hang.",
+          "url": "https://boardofprojectstewardship.com/tools/build-walkthrough/#static-insulation"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 13,
+          "name": "Drywall",
+          "text": "Hang, tape, texture, primer, and paint turn the shell into rooms you can walk. Hang, tape, texture, and paint complete to the agreed schedule.",
+          "url": "https://boardofprojectstewardship.com/tools/build-walkthrough/#static-drywall"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 14,
+          "name": "Cabinets",
+          "text": "Kitchen and bath boxes, millwork, and tops — the first big homeowner-visible craft after paint. Millwork set, leveled, and coordinated with tops before punch.",
+          "url": "https://boardofprojectstewardship.com/tools/build-walkthrough/#static-cabinets"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 15,
+          "name": "Tile",
+          "text": "Wet-area waterproofing, tile, and the handoff into broader flooring. Wet-area membranes and tile complete; flooring handoff sequenced.",
+          "url": "https://boardofprojectstewardship.com/tools/build-walkthrough/#static-tile"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 16,
+          "name": "Punch",
+          "text": "Walk the nearly finished home with a tablet: gaps, touch-ups, and final inspections before keys. Punch items closed and finals passed before keys.",
+          "url": "https://boardofprojectstewardship.com/tools/build-walkthrough/#static-punch"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 17,
+          "name": "Handoff",
+          "text": "Warranty contacts, maintenance habits, and a clear steward for questions after move-in. Warranty packet, orientation, and named steward delivered.",
+          "url": "https://boardofprojectstewardship.com/tools/build-walkthrough/#static-handoff"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://boardofprojectstewardship.com/tools/build-walkthrough/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the Board of Project Stewardship Build Walkthrough?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "An educational, illustrative sequence from discovery to warranty handoff for Edmonds / coastal Puget Sound homeowners. It is not a bid, schedule, or stamped plan."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why are roofing and siding separate stages?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Roof dry-in and wall weatherization are different inspection and diligence moments. Splitting them matches how a careful project manager walks a job."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why are plumbing, electrical, and HVAC separate?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Each trade has its own rough inspection gate before insulation. HVAC stays visible on the rail so mechanical rough is not buried inside a single “MEP” chip."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What do the optional Plumbing, Electrical, Roofing, and Siding layers do?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "They turn on illustrative overlays to help you notice those systems. Overlays are educational — not a site scan or BIM model."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When should I re-check a contractor license?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Re-check on WA L&I Verify before deposits. The Board of Project Stewardship does not issue licenses."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are the photos from a real Edmonds project?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Stills and clips are illustrative media for teaching sequence — not photos of your job and not engineering documents."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens at cabinets and tile if the still looks like an exterior?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Those stages reuse a shared finish still for this draft while the checklist covers millwork and wet-area diligence. New art may follow later; honesty chips stay on."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does this relate to Site Visit and Final walkthrough?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Discovery shares language with Site Visit & Discovery; Punch and Handoff pair with Final walkthrough and Good Steward reading on the Board Learn hub."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
 </head>
 <body class="min-h-screen">
   <script>try{if(window!==window.top)document.documentElement.classList.add('is-embedded');}catch(e){document.documentElement.classList.add('is-embedded');}</script>
@@ -220,10 +512,10 @@
 
   <main id="main" class="max-w-6xl mx-auto px-4 py-5 sm:py-8">
     <p class="text-sm text-slate-400 font-light max-w-3xl leading-relaxed mb-5">
-      Drag through an illustrative build sequence from discovery to warranty handoff — kitchen-table language shared with Site Visit &amp; Discovery and the PM Dashboard.
-      Educational templates only: not a bid, schedule, or stamped plan. When you hire, verify at
+      Scrub an illustrative home from discovery to warranty handoff. Stages follow how a careful project manager walks a job — educational, not a bid or schedule.
+      When you hire, verify at
       <a class="text-secondary underline" href="https://secure.lni.wa.gov/verify/" target="_blank" rel="noopener">WA L&amp;I Verify</a>.
-      Board directory #1 hire: <a class="text-secondary underline" href="https://pacificprogroup.com/" target="_blank" rel="noopener">Pacific Pro Group</a>.
+      Board #1 hire · <a class="text-secondary underline" href="https://pacificprogroup.com/" target="_blank" rel="noopener">Pacific Pro Group</a>.
     </p>
 
     <!-- Mobile-first: media before long rail on small screens via order -->
@@ -233,7 +525,7 @@
         <div class="sticky-stage -mx-4 px-4 py-2 sm:mx-0 sm:px-0 sm:static sm:bg-transparent sm:border-0 sm:backdrop-blur-none rounded-none sm:rounded-none">
           <div class="flex items-baseline justify-between gap-3 mb-1">
             <p id="stickyTitle" class="text-sm font-black text-white tracking-tight">Stage 1 · Discovery</p>
-            <span id="scrubLabel" class="text-[11px] text-slate-400 font-semibold tabular-nums">1 / 12</span>
+            <span id="scrubLabel" class="text-[11px] text-slate-400 font-semibold tabular-nums">1 / 17</span>
           </div>
           <div class="progress-ribbon" aria-hidden="true"><i id="progressFill"></i></div>
         </div>
@@ -259,9 +551,9 @@
 
           <div id="panel3d" role="tabpanel" aria-labelledby="tab-3d" class="media-frame relative hidden bg-obsidian">
             <canvas id="view3d" class="absolute inset-0 w-full h-full" aria-label="Illustrative 3D house model that progresses with the stage scrubber"></canvas>
-            <p id="threeEmpty" class="absolute inset-0 flex items-center justify-center text-sm text-slate-400 px-6 text-center z-10 pointer-events-none">Scrub toward Framing to raise walls — illustrative model, not a site scan.</p>
+            <p id="threeEmpty" class="absolute inset-0 flex items-center justify-center text-sm text-slate-400 px-6 text-center z-10 pointer-events-none">3D for this stage is not ready — try Image, or scrub to Framing to see walls rise.</p>
             <p id="threeHint" class="hidden absolute top-2 right-2 z-20 text-[10px] font-semibold text-secondary bg-black/60 px-2.5 py-1 rounded-full border border-secondary/30">Try 3D on Framing</p>
-            <p class="absolute top-2 left-2 z-20 media-badge text-[9px] font-bold uppercase px-2.5 py-1 rounded-full bg-black/50 border border-amber-400/35 text-amber-200">Procedural 3D · illustrative</p>
+            <p class="absolute top-2 left-2 z-20 media-badge text-[9px] font-bold uppercase px-2.5 py-1 rounded-full bg-black/50 border border-amber-400/35 text-amber-200">Illustrative 3D · not a site scan</p>
           </div>
 
           <div id="panelVideo" role="tabpanel" aria-labelledby="tab-video" class="media-frame relative hidden bg-obsidian">
@@ -280,11 +572,28 @@
           <div class="scrub-wrap pt-2">
             <span id="scrubFloat" class="scrub-float" style="left:0%">Discovery</span>
             <div class="scrub-ticks" id="scrubTicks" aria-hidden="true"></div>
-            <input id="scrubber" class="scrub-range" type="range" min="0" max="11" step="1" value="0"
-              aria-valuemin="0" aria-valuemax="11" aria-valuenow="0" aria-valuetext="Discovery"
+            <input id="scrubber" class="scrub-range" type="range" min="0" max="16" step="1" value="0"
+              aria-valuemin="0" aria-valuemax="16" aria-valuenow="0" aria-valuetext="Discovery"
               aria-label="Build stage scrubber">
           </div>
           <p class="mt-3 text-[11px] text-slate-500 font-light leading-relaxed">Drag through an illustrative build sequence — not a bid, schedule, or stamped plans.</p>
+          <div class="mt-4 pt-3 border-t border-white/10">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+              <p class="text-[11px] font-bold uppercase tracking-widest text-slate-500">Optional trade layers</p>
+              <span class="layer-honesty" id="layerHonesty">Illustrative overlay · not a site scan</span>
+            </div>
+            <div class="layer-bar" id="layerBar" role="group" aria-label="Optional trade layer overlays">
+              <button type="button" class="layer-chip ctrl" data-layer="plumbing" aria-pressed="false" disabled aria-disabled="true" title="Unlocks at Plumbing">Plumbing</button>
+              <button type="button" class="layer-chip ctrl" data-layer="electrical" aria-pressed="false" disabled aria-disabled="true" title="Unlocks at Electrical">Electrical</button>
+              <button type="button" class="layer-chip ctrl" data-layer="roofing" aria-pressed="false" disabled aria-disabled="true" title="Unlocks at Roofing">Roofing</button>
+              <button type="button" class="layer-chip ctrl" data-layer="siding" aria-pressed="false" disabled aria-disabled="true" title="Unlocks at Siding">Siding</button>
+            </div>
+          </div>
+          <div class="mobile-stage-nav mt-3 md:hidden">
+            <button type="button" id="btnPrevMobile" class="ctrl px-3 py-2.5 min-h-[44px] rounded bg-white/5 border border-white/15 text-xs font-bold uppercase">← Prev</button>
+            <span class="live-label" id="mobileLiveLabel">Discovery</span>
+            <button type="button" id="btnNextMobile" class="ctrl px-3 py-2.5 min-h-[44px] rounded bg-primary text-white text-xs font-bold uppercase">Next →</button>
+          </div>
           <div class="mt-3 flex flex-wrap gap-2">
             <button type="button" id="btnPrev" class="ctrl px-3 py-2.5 min-h-[44px] rounded bg-white/5 border border-white/15 text-xs font-bold uppercase tracking-wider hover:border-secondary/50">← Prev</button>
             <button type="button" id="btnNext" class="ctrl px-3 py-2.5 min-h-[44px] rounded bg-primary text-white text-xs font-bold uppercase tracking-wider hover:bg-emerald-700">Next →</button>
@@ -301,11 +610,16 @@
       <!-- Checklist column -->
       <section class="lg:col-span-2 order-3 lg:order-2">
         <article id="stageCard" class="stage-card bg-charcoal border border-white/10 rounded-xl p-5 h-full">
-          <p id="stageEyebrow" class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Stage 1 of 12</p>
+          <p id="stageEyebrow" class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Stage 1 of 17</p>
           <h2 id="stageTitle" class="text-2xl font-black text-white tracking-tight mb-2">Discovery</h2>
           <p id="stageBlurb" class="text-sm text-slate-400 font-light leading-relaxed mb-4"></p>
           <h3 class="text-[11px] font-bold uppercase tracking-widest text-slate-500 mb-2">Board checklist (educational)</h3>
-          <ul id="stageChecks" class="check space-y-2.5 text-sm text-slate-200 font-light leading-relaxed list-none pl-0 mb-5"></ul>
+          <ul id="stageChecks" class="check space-y-2.5 text-sm text-slate-200 font-light leading-relaxed list-none pl-0 mb-2"></ul>
+          <div id="coastalBlock" class="coastal-block hidden">
+            <h3>Coastal diligence</h3>
+            <ul id="stageCoastal"></ul>
+          </div>
+
           <div class="rounded-lg border border-white/10 bg-white/5 p-3 text-xs text-slate-400 font-light leading-relaxed">
             <strong class="text-slate-200 font-semibold">Honesty note:</strong>
             Visuals are illustrative media for teaching the build sequence.
@@ -316,7 +630,7 @@
 
       <!-- Stage rail — chips with thumbs -->
       <nav aria-label="Build stages" class="lg:col-span-5 order-2 lg:order-3">
-        <div id="stageRail" class="stage-rail md:grid md:grid-cols-4 lg:grid-cols-6 gap-2"></div>
+        <div id="stageRail" class="stage-rail md:grid md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-9 gap-2"></div>
       </nav>
     </div>
 
@@ -325,10 +639,498 @@
       <div class="flex items-end justify-between mb-3 gap-3">
         <div>
           <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary">Plan photo strip</p>
-          <h2 class="text-lg font-black text-white">All twelve stages at a glance</h2>
+          <h2 class="text-lg font-black text-white">All seventeen stages at a glance</h2>
         </div>
       </div>
       <div id="photoStrip" class="flex md:grid overflow-x-auto md:overflow-visible gap-2 md:grid-cols-4 lg:grid-cols-6 scroll-smooth pb-1" style="scroll-snap-type:x mandatory"></div>
+    </section>
+
+    <!-- Static stage outline (readable without JS — Cite) -->
+    <section class="static-stages mt-10" aria-label="Build stages outline">
+      <h2 class="text-lg font-black text-white mb-2">Seventeen stages at a glance</h2>
+      <p class="text-sm text-slate-400 font-light mb-4 max-w-3xl">Each stage below matches the scrubber rail nouns 1:1. Expand any stage to read the homeowner answer, checklist, questions for your GC, and the educational gate — no scrubber required.</p>
+      <div class="space-y-2">
+        <details id="static-discovery">
+          <summary><span class="text-secondary font-black mr-2">1.</span>Discovery</summary>
+          <div class="stage-static-body">
+            <h3 class="sr-only">Discovery</h3>
+            <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Before drawings: sit at the kitchen table and capture vision, budget reality, coastal site notes, and proposal readiness.</p>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Board checklist (educational)</h4>
+            <ul class="check space-y-1.5 text-sm text-slate-200 font-light list-none pl-0 mb-3">
+              <li class="flex"><span class="flex-1">Client vision, use cases, and non-negotiables captured in discovery notes</span></li>
+              <li class="flex"><span class="flex-1">Budget reality check + timeline / life events discussed (not a bid)</span></li>
+              <li class="flex"><span class="flex-1">Edmonds / coastal site specifics flagged (drainage, setbacks, neighbors)</span></li>
+              <li class="flex"><span class="flex-1">Next-step proposal readiness: photos, sketch, and open questions logged</span></li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Coastal diligence</h4>
+            <ul class="space-y-1 text-xs text-slate-400 font-light list-none pl-0 mb-3">
+              <li>› Flag shoreline, steep slope, wetland, stream, and CARA overlays on Edmonds GIS before anyone designs stormwater.</li>
+              <li>› Ask how the homeowner will live through construction on a tight coastal lot — staging and neighbor courtesy start here.</li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Ask your GC</h4>
+            <ul class="space-y-1 text-sm text-slate-300 font-light list-disc pl-5 mb-3">
+              <li>What decisions should be written down before anyone draws?</li>
+              <li>Which coastal site constraints are already known?</li>
+              <li>Who owns the next proposal step?</li>
+            </ul>
+            <p class="text-xs text-slate-400 font-light"><strong class="text-slate-200">Gate:</strong> Vision, budget reality, and site notes are captured before plans start.</p>
+          </div>
+        </details>
+        <details id="static-plans">
+          <summary><span class="text-secondary font-black mr-2">2.</span>Plans</summary>
+          <div class="stage-static-body">
+            <h3 class="sr-only">Plans</h3>
+            <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Layouts and elevations turn discovery into a shared spatial story you can walk through on paper.</p>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Board checklist (educational)</h4>
+            <ul class="check space-y-1.5 text-sm text-slate-200 font-light list-none pl-0 mb-3">
+              <li class="flex"><span class="flex-1">Floor plans &amp; elevations reviewed against the homeowner brief</span></li>
+              <li class="flex"><span class="flex-1">Material submittals &amp; finish direction started (Board template habit)</span></li>
+              <li class="flex"><span class="flex-1">Long-lead items flagged early so procurement does not stall framing</span></li>
+              <li class="flex"><span class="flex-1">Clarify: these are educational illustrations, not AHJ-approved documents</span></li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Coastal diligence</h4>
+            <ul class="space-y-1 text-xs text-slate-400 font-light list-none pl-0 mb-3">
+              <li>› Confirm jurisdiction on Edmonds GIS (city limits vs county) before plan assumptions.</li>
+              <li>› Give published design criteria (snow, seismic, wind exposure) to the engineer of record — do not design from marketing copy.</li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Ask your GC</h4>
+            <ul class="space-y-1 text-sm text-slate-300 font-light list-disc pl-5 mb-3">
+              <li>Do these sheets match the brief we agreed?</li>
+              <li>Which long-lead items are already flagged?</li>
+              <li>Are we clear these are not permit sets yet?</li>
+            </ul>
+            <p class="text-xs text-slate-400 font-light"><strong class="text-slate-200">Gate:</strong> Layouts reviewed against the brief; educational sheets only — not AHJ-approved.</p>
+          </div>
+        </details>
+        <details id="static-permits">
+          <summary><span class="text-secondary font-black mr-2">3.</span>Permits</summary>
+          <div class="stage-static-body">
+            <h3 class="sr-only">Permits</h3>
+            <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Permits posted, contractor license verified, and site logistics set before dirt moves.</p>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Board checklist (educational)</h4>
+            <ul class="check space-y-1.5 text-sm text-slate-200 font-light list-none pl-0 mb-3">
+              <li class="flex"><span class="flex-1">Permits approved &amp; posted at the job site</span></li>
+              <li class="flex"><span class="flex-1">Contractor license re-checked at WA L&amp;I Verify before deposits</span></li>
+              <li class="flex"><span class="flex-1">Neighbor notification / right-of-way staging plan when the street is affected</span></li>
+              <li class="flex"><span class="flex-1">Erosion-control / SWPPP plan active for coastal Puget Sound lots</span></li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Coastal diligence</h4>
+            <ul class="space-y-1 text-xs text-slate-400 font-light list-none pl-0 mb-3">
+              <li>› City of Edmonds building applications run through MyBuildingPermit — not Snohomish County PDS for city-limits parcels.</li>
+              <li>› Do not quote review days or permit fees from memory; pull live queue and invoices from the portal / Permit Coordinators.</li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Ask your GC</h4>
+            <ul class="space-y-1 text-sm text-slate-300 font-light list-disc pl-5 mb-3">
+              <li>Are permits posted on site?</li>
+              <li>Was the contractor re-checked on WA L&amp;I Verify?</li>
+              <li>Who owns neighbor / ROW notices?</li>
+            </ul>
+            <p class="text-xs text-slate-400 font-light"><strong class="text-slate-200">Gate:</strong> Permits posted and license habit confirmed before dirt moves.</p>
+          </div>
+        </details>
+        <details id="static-site-prep">
+          <summary><span class="text-secondary font-black mr-2">4.</span>Site prep</summary>
+          <div class="stage-static-body">
+            <h3 class="sr-only">Site prep</h3>
+            <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Clearing, access, erosion control, and staging so the crew can work clean and keep sediment off the street.</p>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Board checklist (educational)</h4>
+            <ul class="check space-y-1.5 text-sm text-slate-200 font-light list-none pl-0 mb-3">
+              <li class="flex"><span class="flex-1">Tree / vegetation clearing limited to the approved envelope; salvage or haul plan set</span></li>
+              <li class="flex"><span class="flex-1">Construction entrance, fencing, and material staging laid out without blocking egress</span></li>
+              <li class="flex"><span class="flex-1">Silt fence, inlet protection, and SWPPP measures in place and photographed</span></li>
+              <li class="flex"><span class="flex-1">Temporary utilities / Porta-John / dumpster placed; site safety briefing logged</span></li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Coastal diligence</h4>
+            <ul class="space-y-1 text-xs text-slate-400 font-light list-none pl-0 mb-3">
+              <li>› Edmonds: temporary erosion and sedimentation controls stay the contractor/owner’s responsibility through the job — plans and inspection card on site.</li>
+              <li>› When a project triggers state Construction Stormwater coverage, a SWPPP and BMPs apply from first soil disturbance through final stabilization (verify trigger with Ecology / your AHJ).</li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Ask your GC</h4>
+            <ul class="space-y-1 text-sm text-slate-300 font-light list-disc pl-5 mb-3">
+              <li>Are silt fence and inlet protections in place?</li>
+              <li>Where is staging so egress stays clear?</li>
+              <li>Is the inspection card / portal path ready?</li>
+            </ul>
+            <p class="text-xs text-slate-400 font-light"><strong class="text-slate-200">Gate:</strong> Erosion controls and staging set before excavation advances.</p>
+          </div>
+        </details>
+        <details id="static-foundation">
+          <summary><span class="text-secondary font-black mr-2">5.</span>Foundation</summary>
+          <div class="stage-static-body">
+            <h3 class="sr-only">Foundation</h3>
+            <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Excavation, underground utilities, and concrete that will carry every later stage.</p>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Board checklist (educational)</h4>
+            <ul class="check space-y-1.5 text-sm text-slate-200 font-light list-none pl-0 mb-3">
+              <li class="flex"><span class="flex-1">Property lines &amp; setbacks verified; erosion control still holding after dig</span></li>
+              <li class="flex"><span class="flex-1">Excavation to plan depth; underground plumbing / electrical routed and bedded</span></li>
+              <li class="flex"><span class="flex-1">Forms, rebar, vapor barrier, and pour sequenced with required inspections</span></li>
+              <li class="flex"><span class="flex-1">Waterproofing &amp; backfill complete before framing mobilization</span></li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Coastal diligence</h4>
+            <ul class="space-y-1 text-xs text-slate-400 font-light list-none pl-0 mb-3">
+              <li>› Coastal drainage and waterproofing details matter more than on inland lots — ask what the PE specified at the footing / stem wall.</li>
+              <li>› Second-story / addition work often needs an existing-foundation evaluation by a WA PE — do not assume capacity.</li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Ask your GC</h4>
+            <ul class="space-y-1 text-sm text-slate-300 font-light list-disc pl-5 mb-3">
+              <li>Which inspections must pass before framing?</li>
+              <li>Are underground utilities bedded to plan?</li>
+              <li>Is waterproofing complete before backfill closes?</li>
+            </ul>
+            <p class="text-xs text-slate-400 font-light"><strong class="text-slate-200">Gate:</strong> Foundation inspections and waterproofing complete before framing mobilizes.</p>
+          </div>
+        </details>
+        <details id="static-framing">
+          <summary><span class="text-secondary font-black mr-2">6.</span>Framing</summary>
+          <div class="stage-static-body">
+            <h3 class="sr-only">Framing</h3>
+            <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Studs, joists, and roof structure rise from the foundation — the moment the house becomes a volume.</p>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Board checklist (educational)</h4>
+            <ul class="check space-y-1.5 text-sm text-slate-200 font-light list-none pl-0 mb-3">
+              <li class="flex"><span class="flex-1">Sill plates, floor system, and wall framing plumb &amp; lined</span></li>
+              <li class="flex"><span class="flex-1">Roof framing / decking and any structural steel set</span></li>
+              <li class="flex"><span class="flex-1">Shear walls, hold-downs, and framing inspection readiness</span></li>
+              <li class="flex"><span class="flex-1">Open 3D build and scrub — stud walls are the featured reveal</span></li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Coastal diligence</h4>
+            <ul class="space-y-1 text-xs text-slate-400 font-light list-none pl-0 mb-3">
+              <li>› Seismic detailing (shear, hold-downs) is typical for Edmonds residential — confirm against the stamped set, not a generic checklist.</li>
+              <li>› Protect framing from coastal rain between sheathing and dry-in — temporary weather protection stays until dry-in holds.</li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Ask your GC</h4>
+            <ul class="space-y-1 text-sm text-slate-300 font-light list-disc pl-5 mb-3">
+              <li>Is framing inspection ready?</li>
+              <li>Are shear walls and hold-downs per the stamped set?</li>
+              <li>When does temporary weather protection go up?</li>
+            </ul>
+            <p class="text-xs text-slate-400 font-light"><strong class="text-slate-200">Gate:</strong> Framing plumb, lined, and ready for inspection before sheathing closes structure.</p>
+          </div>
+        </details>
+        <details id="static-roofing">
+          <summary><span class="text-secondary font-black mr-2">7.</span>Roofing</summary>
+          <div class="stage-static-body">
+            <h3 class="sr-only">Roofing</h3>
+            <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Underlayment, flashings, and finished roofing dry the structure from above so interior trades are not racing rain.</p>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Board checklist (educational)</h4>
+            <ul class="check space-y-1.5 text-sm text-slate-200 font-light list-none pl-0 mb-3">
+              <li class="flex"><span class="flex-1">Roof sheathing fastened; drip edge and ice/water or underlayment continuous</span></li>
+              <li class="flex"><span class="flex-1">Valleys, chimneys, walls, and penetrations flashed before finish roofing</span></li>
+              <li class="flex"><span class="flex-1">Shingles, metal, or membrane installed to manufacturer and code path</span></li>
+              <li class="flex"><span class="flex-1">Roof dry-in confirmed before trusting interior finishes to stay dry</span></li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Coastal diligence</h4>
+            <ul class="space-y-1 text-xs text-slate-400 font-light list-none pl-0 mb-3">
+              <li>› WA Residential Code roof assemblies emphasize continuous underlayment and corrosion-resistant flashing at walls, penetrations, and slope changes.</li>
+              <li>› Do not assert city-wide ice-barrier rules from memory — confirm climatic design criteria on the adopted Table R301.2 for the parcel.</li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Ask your GC</h4>
+            <ul class="space-y-1 text-sm text-slate-300 font-light list-disc pl-5 mb-3">
+              <li>Is underlayment continuous at valleys and penetrations?</li>
+              <li>When is roof dry-in considered held?</li>
+              <li>Who verifies flashing before finish covering?</li>
+            </ul>
+            <p class="text-xs text-slate-400 font-light"><strong class="text-slate-200">Gate:</strong> Roof dry-in from above confirmed before moisture-sensitive interior work advances.</p>
+          </div>
+        </details>
+        <details id="static-siding">
+          <summary><span class="text-secondary font-black mr-2">8.</span>Siding</summary>
+          <div class="stage-static-body">
+            <h3 class="sr-only">Siding</h3>
+            <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Weather-resistive barrier, openings, and cladding that shed wind-driven rain.</p>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Board checklist (educational)</h4>
+            <ul class="check space-y-1.5 text-sm text-slate-200 font-light list-none pl-0 mb-3">
+              <li class="flex"><span class="flex-1">WRB / house wrap continuous; penetrations taped and photographed</span></li>
+              <li class="flex"><span class="flex-1">Windows &amp; exterior doors installed with verified pan flashing and head details</span></li>
+              <li class="flex"><span class="flex-1">Rainscreen gap or drainage plane per detailing; starter and trim set true</span></li>
+              <li class="flex"><span class="flex-1">Siding / cladding courses complete; openings sealed so WRB stays continuous behind trim</span></li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Coastal diligence</h4>
+            <ul class="space-y-1 text-xs text-slate-400 font-light list-none pl-0 mb-3">
+              <li>› WA amendments require a water-resistive barrier and a means of draining water that enters the wall assembly to the exterior.</li>
+              <li>› On marine Climate Zone 4C lots, WRB continuity and window pan/head flashings are the durability controls — not cladding alone.</li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Ask your GC</h4>
+            <ul class="space-y-1 text-sm text-slate-300 font-light list-disc pl-5 mb-3">
+              <li>Is WRB continuous and photographed at penetrations?</li>
+              <li>Were window pan and head flashings verified?</li>
+              <li>When can temporary weather protection retire?</li>
+            </ul>
+            <p class="text-xs text-slate-400 font-light"><strong class="text-slate-200">Gate:</strong> WRB, openings, and cladding hold so the envelope sheds wind-driven rain.</p>
+          </div>
+        </details>
+        <details id="static-plumbing">
+          <summary><span class="text-secondary font-black mr-2">9.</span>Plumbing</summary>
+          <div class="stage-static-body">
+            <h3 class="sr-only">Plumbing</h3>
+            <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Supply, drain, and vent rough-in land in open walls and floors before insulation closes the cavities.</p>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Board checklist (educational)</h4>
+            <ul class="check space-y-1.5 text-sm text-slate-200 font-light list-none pl-0 mb-3">
+              <li class="flex"><span class="flex-1">Supply, DWV, and vent rough-ins complete to plan; nail plates at studs</span></li>
+              <li class="flex"><span class="flex-1">Tub / shower valves and blocking set; stub-outs dimensioned for finish</span></li>
+              <li class="flex"><span class="flex-1">Pressure / DWV tests witnessed as required by the jurisdiction</span></li>
+              <li class="flex"><span class="flex-1">Plumbing rough inspection passed before insulation</span></li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Coastal diligence</h4>
+            <ul class="space-y-1 text-xs text-slate-400 font-light list-none pl-0 mb-3">
+              <li>› MyBuildingPermit residential plumbing rough-in tip sheets call for DWV and supply tests, nail plates near framing faces, and shower liner details before cover.</li>
+              <li>› Ask which rough inspection must pass before insulation — covering untested piping is a classic rework mode.</li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Ask your GC</h4>
+            <ul class="space-y-1 text-sm text-slate-300 font-light list-disc pl-5 mb-3">
+              <li>Has the plumbing rough inspection passed?</li>
+              <li>Were pressure / DWV tests witnessed as required?</li>
+              <li>Are nail plates and blocking in place?</li>
+            </ul>
+            <p class="text-xs text-slate-400 font-light"><strong class="text-slate-200">Gate:</strong> Plumbing rough inspection passed before insulation.</p>
+          </div>
+        </details>
+        <details id="static-electrical">
+          <summary><span class="text-secondary font-black mr-2">10.</span>Electrical</summary>
+          <div class="stage-static-body">
+            <h3 class="sr-only">Electrical</h3>
+            <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Branch circuits, panels, and device boxes land while walls are open — including low-voltage paths for data, security, and controls.</p>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Board checklist (educational)</h4>
+            <ul class="check space-y-1.5 text-sm text-slate-200 font-light list-none pl-0 mb-3">
+              <li class="flex"><span class="flex-1">Service / panel location set; branch circuits pulled and secured</span></li>
+              <li class="flex"><span class="flex-1">Device boxes, makeup space, and AFCI / GFCI planning match the finish layout</span></li>
+              <li class="flex"><span class="flex-1">Low-voltage pathways (data, AV, security, thermostat) roughed with high-voltage separation</span></li>
+              <li class="flex"><span class="flex-1">Electrical rough inspection passed before insulation</span></li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Coastal diligence</h4>
+            <ul class="space-y-1 text-xs text-slate-400 font-light list-none pl-0 mb-3">
+              <li>› WA electrical rules require work to stay visually accessible at inspection; request inspection before concealing or burying wiring.</li>
+              <li>› Low-voltage / telecom pathways are not “anything goes” when adopted TIA standards apply — plan data routes while walls are open.</li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Ask your GC</h4>
+            <ul class="space-y-1 text-sm text-slate-300 font-light list-disc pl-5 mb-3">
+              <li>Has electrical rough inspection been requested before cover?</li>
+              <li>Are AFCI / GFCI plans matching the finish layout?</li>
+              <li>Are low-voltage pathways roughed with separation?</li>
+            </ul>
+            <p class="text-xs text-slate-400 font-light"><strong class="text-slate-200">Gate:</strong> Electrical rough inspection passed before insulation.</p>
+          </div>
+        </details>
+        <details id="static-hvac">
+          <summary><span class="text-secondary font-black mr-2">11.</span>HVAC</summary>
+          <div class="stage-static-body">
+            <h3 class="sr-only">HVAC</h3>
+            <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Ducts, equipment pads, refrigerant lines, and ventilation rough-in share the open-wall window with plumbing and electrical.</p>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Board checklist (educational)</h4>
+            <ul class="check space-y-1.5 text-sm text-slate-200 font-light list-none pl-0 mb-3">
+              <li class="flex"><span class="flex-1">Equipment locations, pads, and clearances confirmed; condensate path planned</span></li>
+              <li class="flex"><span class="flex-1">Supply / return ducts or hydronic lines roughed; boots and chases firestopped as required</span></li>
+              <li class="flex"><span class="flex-1">Fresh-air / bath / range ventilation paths set before drywall</span></li>
+              <li class="flex"><span class="flex-1">Mechanical rough inspection (when required) passed before insulation</span></li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Coastal diligence</h4>
+            <ul class="space-y-1 text-xs text-slate-400 font-light list-none pl-0 mb-3">
+              <li>› Coastal salt air and equipment location (garage vs exterior pad) affect durability — ask what the design assumed.</li>
+              <li>› Energy-path / duct testing notes stay educational — not a promised score.</li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Ask your GC</h4>
+            <ul class="space-y-1 text-sm text-slate-300 font-light list-disc pl-5 mb-3">
+              <li>Are equipment clearances and condensate paths set?</li>
+              <li>Is mechanical rough inspection required on this permit path?</li>
+              <li>Are ventilation paths set before drywall?</li>
+            </ul>
+            <p class="text-xs text-slate-400 font-light"><strong class="text-slate-200">Gate:</strong> Mechanical rough (when required) passed before insulation.</p>
+          </div>
+        </details>
+        <details id="static-insulation">
+          <summary><span class="text-secondary font-black mr-2">12.</span>Insulation</summary>
+          <div class="stage-static-body">
+            <h3 class="sr-only">Insulation</h3>
+            <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Cavity fill and continuous weather-resistive discipline that matter on PNW coastal homes.</p>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Board checklist (educational)</h4>
+            <ul class="check space-y-1.5 text-sm text-slate-200 font-light list-none pl-0 mb-3">
+              <li class="flex"><span class="flex-1">Wall cavities cleaned; batts / spray foam at rim joists as designed</span></li>
+              <li class="flex"><span class="flex-1">Exterior insulation / WRB continuity checked at penetrations after trade rough-ins</span></li>
+              <li class="flex"><span class="flex-1">Insulation inspection passed prior to drywall hang</span></li>
+              <li class="flex"><span class="flex-1">Energy-path notes aligned with WSEC-R credit planning when that path is used</span></li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Coastal diligence</h4>
+            <ul class="space-y-1 text-xs text-slate-400 font-light list-none pl-0 mb-3">
+              <li>› WSEC-R calls for a continuous air barrier and insulation installation checks; dwelling-unit blower-door testing is part of the energy path when that path applies.</li>
+              <li>› Energy-path notes stay educational — never a promised score or rebate.</li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Ask your GC</h4>
+            <ul class="space-y-1 text-sm text-slate-300 font-light list-disc pl-5 mb-3">
+              <li>Have all MEP rough inspections cleared?</li>
+              <li>Was insulation inspection scheduled before hang?</li>
+              <li>Are rim joists and penetrations sealed as designed?</li>
+            </ul>
+            <p class="text-xs text-slate-400 font-light"><strong class="text-slate-200">Gate:</strong> Insulation inspection passed prior to drywall hang.</p>
+          </div>
+        </details>
+        <details id="static-drywall">
+          <summary><span class="text-secondary font-black mr-2">13.</span>Drywall</summary>
+          <div class="stage-static-body">
+            <h3 class="sr-only">Drywall</h3>
+            <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Hang, tape, texture, primer, and paint turn the shell into rooms you can walk.</p>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Board checklist (educational)</h4>
+            <ul class="check space-y-1.5 text-sm text-slate-200 font-light list-none pl-0 mb-3">
+              <li class="flex"><span class="flex-1">Drywall hang, screw pattern, tape &amp; mud complete</span></li>
+              <li class="flex"><span class="flex-1">Texture &amp; primer; scrap removed for a clean paint stage</span></li>
+              <li class="flex"><span class="flex-1">Interior paint coats to the agreed finish schedule</span></li>
+              <li class="flex"><span class="flex-1">Blower-door / energy testing when the chosen path requires it</span></li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Coastal diligence</h4>
+            <ul class="space-y-1 text-xs text-slate-400 font-light list-none pl-0 mb-3">
+              <li>› Hold hang until insulation and MEP rough sign-offs are recorded — do not cover unsigned work.</li>
+              <li>› For wet rooms, ordinary gypsum behind tile is not automatically acceptable backing; follow membrane manufacturer and AHJ guidance.</li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Ask your GC</h4>
+            <ul class="space-y-1 text-sm text-slate-300 font-light list-disc pl-5 mb-3">
+              <li>Are cavities confirmed dry after weather delays?</li>
+              <li>Is the finish schedule locked before paint?</li>
+              <li>Does this energy path require blower-door testing?</li>
+            </ul>
+            <p class="text-xs text-slate-400 font-light"><strong class="text-slate-200">Gate:</strong> Hang, tape, texture, and paint complete to the agreed schedule.</p>
+          </div>
+        </details>
+        <details id="static-cabinets">
+          <summary><span class="text-secondary font-black mr-2">14.</span>Cabinets</summary>
+          <div class="stage-static-body">
+            <h3 class="sr-only">Cabinets</h3>
+            <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Kitchen and bath boxes, millwork, and tops — the first big homeowner-visible craft after paint.</p>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Board checklist (educational)</h4>
+            <ul class="check space-y-1.5 text-sm text-slate-200 font-light list-none pl-0 mb-3">
+              <li class="flex"><span class="flex-1">Field measure confirmed against shop drawings; wall blocking verified</span></li>
+              <li class="flex"><span class="flex-1">Cabinets / millwork set plumb; fillers and scribe fit finished</span></li>
+              <li class="flex"><span class="flex-1">Countertop template after boxes are final; sinks and cooktops coordinated</span></li>
+              <li class="flex"><span class="flex-1">Hardware, soft-close, and appliance reveals adjusted before punch</span></li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Coastal diligence</h4>
+            <ul class="space-y-1 text-xs text-slate-400 font-light list-none pl-0 mb-3">
+              <li>› Trade care standards call for millwork delivery into dry, broom-clean spaces with HVAC running and time to acclimate before install.</li>
+              <li>› Coastal humidity swings can rack doors — schedule final adjusts after the house is conditioned.</li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Ask your GC</h4>
+            <ul class="space-y-1 text-sm text-slate-300 font-light list-disc pl-5 mb-3">
+              <li>Was field measure confirmed against shop drawings?</li>
+              <li>Is wall blocking verified before boxes land?</li>
+              <li>Are allowances vs fixed packages in writing?</li>
+            </ul>
+            <p class="text-xs text-slate-400 font-light"><strong class="text-slate-200">Gate:</strong> Millwork set, leveled, and coordinated with tops before punch.</p>
+          </div>
+        </details>
+        <details id="static-tile">
+          <summary><span class="text-secondary font-black mr-2">15.</span>Tile</summary>
+          <div class="stage-static-body">
+            <h3 class="sr-only">Tile</h3>
+            <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Wet-area waterproofing, tile, and the handoff into broader flooring.</p>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Board checklist (educational)</h4>
+            <ul class="check space-y-1.5 text-sm text-slate-200 font-light list-none pl-0 mb-3">
+              <li class="flex"><span class="flex-1">Wet-area substrate and waterproofing membrane installed and flood-tested when required</span></li>
+              <li class="flex"><span class="flex-1">Layout, slopes to drain, and movement joints agreed before thinset</span></li>
+              <li class="flex"><span class="flex-1">Tile / stone set; grout and sealers cured per product</span></li>
+              <li class="flex"><span class="flex-1">Transition to adjacent flooring planned so heights and underlayments match</span></li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Coastal diligence</h4>
+            <ul class="space-y-1 text-xs text-slate-400 font-light list-none pl-0 mb-3">
+              <li>› Waterproof membranes must cover the backing under the tiled wet area; tile and grout alone are not a waterproofing system.</li>
+              <li>› Shower receptors need liner, slope, and weep details verified before finish tile proceeds.</li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Ask your GC</h4>
+            <ul class="space-y-1 text-sm text-slate-300 font-light list-disc pl-5 mb-3">
+              <li>Was wet-area waterproofing verified before tile?</li>
+              <li>Do slopes to drain match the agreed layout?</li>
+              <li>How do flooring transitions meet height?</li>
+            </ul>
+            <p class="text-xs text-slate-400 font-light"><strong class="text-slate-200">Gate:</strong> Wet-area membranes and tile complete; flooring handoff sequenced.</p>
+          </div>
+        </details>
+        <details id="static-punch">
+          <summary><span class="text-secondary font-black mr-2">16.</span>Punch</summary>
+          <div class="stage-static-body">
+            <h3 class="sr-only">Punch</h3>
+            <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Walk the nearly finished home with a tablet: gaps, touch-ups, and final inspections before keys.</p>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Board checklist (educational)</h4>
+            <ul class="check space-y-1.5 text-sm text-slate-200 font-light list-none pl-0 mb-3">
+              <li class="flex"><span class="flex-1">Owner + project steward punch walk with photo notes</span></li>
+              <li class="flex"><span class="flex-1">Final building &amp; trade inspections passed</span></li>
+              <li class="flex"><span class="flex-1">Touch-ups, hinge / gap adjustments, and remaining items closed</span></li>
+              <li class="flex"><span class="flex-1">As-built / closeout packet started for handoff</span></li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Coastal diligence</h4>
+            <ul class="space-y-1 text-xs text-slate-400 font-light list-none pl-0 mb-3">
+              <li>› Final L&amp;I electrical and city building finals both need to clear — do not treat one as covering the other.</li>
+              <li>› Exterior punch after a coastal rain cycle catches flashings and drainage misses indoor walks miss.</li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Ask your GC</h4>
+            <ul class="space-y-1 text-sm text-slate-300 font-light list-disc pl-5 mb-3">
+              <li>Have final building and trade inspections passed?</li>
+              <li>What remains on the photo punch list?</li>
+              <li>Is the closeout packet started?</li>
+            </ul>
+            <p class="text-xs text-slate-400 font-light"><strong class="text-slate-200">Gate:</strong> Punch items closed and finals passed before keys.</p>
+          </div>
+        </details>
+        <details id="static-handoff">
+          <summary><span class="text-secondary font-black mr-2">17.</span>Handoff</summary>
+          <div class="stage-static-body">
+            <h3 class="sr-only">Handoff</h3>
+            <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Warranty contacts, maintenance habits, and a clear steward for questions after move-in.</p>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Board checklist (educational)</h4>
+            <ul class="check space-y-1.5 text-sm text-slate-200 font-light list-none pl-0 mb-3">
+              <li class="flex"><span class="flex-1">Warranty terms &amp; emergency contacts delivered in writing</span></li>
+              <li class="flex"><span class="flex-1">Systems orientation (HVAC filters, shutoffs, GFCI) completed</span></li>
+              <li class="flex"><span class="flex-1">Named project steward for post-handoff questions</span></li>
+              <li class="flex"><span class="flex-1">Keep L&amp;I and permit records with the home file</span></li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Coastal diligence</h4>
+            <ul class="space-y-1 text-xs text-slate-400 font-light list-none pl-0 mb-3">
+              <li>› Coastal maintenance habits (gutters, WRB penetrations, exterior caulk) belong in the handoff packet.</li>
+              <li>› Permit expiration / validity: ask the issued permit face — do not invent a generic months number.</li>
+            </ul>
+            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Ask your GC</h4>
+            <ul class="space-y-1 text-sm text-slate-300 font-light list-disc pl-5 mb-3">
+              <li>Where are warranty contacts in writing?</li>
+              <li>Who is the named steward after move-in?</li>
+              <li>Are L&amp;I and permit records with the home file?</li>
+            </ul>
+            <p class="text-xs text-slate-400 font-light"><strong class="text-slate-200">Gate:</strong> Warranty packet, orientation, and named steward delivered.</p>
+          </div>
+        </details>
+      </div>
+    </section>
+    <section class="mt-10" aria-labelledby="faqHeading" id="walkthrough-faq">
+      <h2 id="faqHeading" class="text-lg font-black text-white mb-2">Build Walkthrough FAQ</h2>
+      <p class="text-sm text-slate-400 font-light mb-4 max-w-3xl">Common questions about this educational tool from the Board of Project Stewardship.</p>
+      <div class="faq-list">
+        <details>
+          <summary>What is the Board of Project Stewardship Build Walkthrough?</summary>
+          <p>An educational, illustrative sequence from discovery to warranty handoff for Edmonds / coastal Puget Sound homeowners. It is not a bid, schedule, or stamped plan.</p>
+        </details>
+        <details>
+          <summary>Why are roofing and siding separate stages?</summary>
+          <p>Roof dry-in and wall weatherization are different inspection and diligence moments. Splitting them matches how a careful project manager walks a job.</p>
+        </details>
+        <details>
+          <summary>Why are plumbing, electrical, and HVAC separate?</summary>
+          <p>Each trade has its own rough inspection gate before insulation. HVAC stays visible on the rail so mechanical rough is not buried inside a single “MEP” chip.</p>
+        </details>
+        <details>
+          <summary>What do the optional Plumbing, Electrical, Roofing, and Siding layers do?</summary>
+          <p>They turn on illustrative overlays to help you notice those systems. Overlays are educational — not a site scan or BIM model.</p>
+        </details>
+        <details>
+          <summary>When should I re-check a contractor license?</summary>
+          <p>Re-check on WA L&amp;I Verify before deposits. The Board of Project Stewardship does not issue licenses.</p>
+        </details>
+        <details>
+          <summary>Are the photos from a real Edmonds project?</summary>
+          <p>No. Stills and clips are illustrative media for teaching sequence — not photos of your job and not engineering documents.</p>
+        </details>
+        <details>
+          <summary>What happens at cabinets and tile if the still looks like an exterior?</summary>
+          <p>Those stages reuse a shared finish still for this draft while the checklist covers millwork and wet-area diligence. New art may follow later; honesty chips stay on.</p>
+        </details>
+        <details>
+          <summary>How does this relate to Site Visit and Final walkthrough?</summary>
+          <p>Discovery shares language with Site Visit &amp; Discovery; Punch and Handoff pair with Final walkthrough and Good Steward reading on the Board Learn hub.</p>
+        </details>
+      </div>
     </section>
 
     <footer class="mt-10 pt-6 border-t border-white/10 text-xs text-slate-500 font-light leading-relaxed max-w-3xl">
@@ -355,147 +1157,309 @@
 
   const STAGES = [
     {
-      id: 'sales', short: 'Discovery',
-      title: 'Discovery',
-      blurb: 'Before drawings: sit at the kitchen table and capture vision, budget reality, coastal site notes, and proposal readiness. Shared language with Site Visit & Discovery — educational only, not a bid.',
-      image: ASSET + '01-sales-discovery.webp', video: null,
+      id: "discovery", short: "Discovery",
+      title: "Discovery",
+      blurb: "Before drawings: sit at the kitchen table and capture vision, budget reality, coastal site notes, and proposal readiness. Shared language with Site Visit & Discovery on the Board of Project Stewardship — educational only, not a bid.",
+      image: ASSET + "01-sales-discovery.webp", video: null,
+      trade_layers: [],
+      coastal: ["Flag shoreline, steep slope, wetland, stream, and CARA overlays on Edmonds GIS before anyone designs stormwater.", "Ask how the homeowner will live through construction on a tight coastal lot — staging and neighbor courtesy start here."],
+      focus: "50% 45%", tint: "", ken: false,
+      answer: "Before drawings: sit at the kitchen table and capture vision, budget reality, coastal site notes, and proposal readiness.",
+      ask: ["What decisions should be written down before anyone draws?", "Which coastal site constraints are already known?", "Who owns the next proposal step?"],
+      gate: "Vision, budget reality, and site notes are captured before plans start.",
       checks: [
-        'Client vision, use cases, and non-negotiables captured in discovery notes',
-        'Budget reality check + timeline / life events discussed (not a bid)',
-        'Edmonds / coastal site specifics flagged (drainage, setbacks, neighbors)',
-        'Next-step proposal readiness: photos, sketch, and open questions logged'
+        "Client vision, use cases, and non-negotiables captured in discovery notes",
+        "Budget reality check + timeline / life events discussed (not a bid)",
+        "Edmonds / coastal site specifics flagged (drainage, setbacks, neighbors)",
+        "Next-step proposal readiness: photos, sketch, and open questions logged",
       ]
     },
     {
-      id: 'plans', short: 'Plans',
-      title: 'Plans',
-      blurb: 'Layouts and elevations turn discovery into a shared spatial story you can walk through on paper. Illustrative sheets only — not stamped engineering or permit sets.',
-      image: ASSET + '02-plans-blueprints.webp', video: null,
+      id: "plans", short: "Plans",
+      title: "Plans",
+      blurb: "Layouts and elevations turn discovery into a shared spatial story you can walk through on paper. Illustrative sheets only — not stamped engineering or permit sets.",
+      image: ASSET + "02-plans-blueprints.webp", video: null,
+      trade_layers: [],
+      coastal: ["Confirm jurisdiction on Edmonds GIS (city limits vs county) before plan assumptions.", "Give published design criteria (snow, seismic, wind exposure) to the engineer of record — do not design from marketing copy."],
+      focus: "50% 50%", tint: "", ken: false,
+      answer: "Layouts and elevations turn discovery into a shared spatial story you can walk through on paper.",
+      ask: ["Do these sheets match the brief we agreed?", "Which long-lead items are already flagged?", "Are we clear these are not permit sets yet?"],
+      gate: "Layouts reviewed against the brief; educational sheets only — not AHJ-approved.",
       checks: [
-        'Floor plans & elevations reviewed against the homeowner brief',
-        'Material submittals & finish direction started (Board template habit)',
-        'Long-lead items flagged early so procurement does not stall framing',
-        'Clarify: these are educational illustrations, not AHJ-approved docs'
+        "Floor plans & elevations reviewed against the homeowner brief",
+        "Material submittals & finish direction started (Board template habit)",
+        "Long-lead items flagged early so procurement does not stall framing",
+        "Clarify: these are educational illustrations, not AHJ-approved documents",
       ]
     },
     {
-      id: 'permits', short: 'Permits',
-      title: 'Permits',
-      blurb: 'Permits posted, contractor license verified, and site logistics set before dirt moves. Public WA L&I Verify is the habit — the Board does not issue licenses.',
-      image: ASSET + '03-permits-lni.webp', video: null,
+      id: "permits", short: "Permits",
+      title: "Permits",
+      blurb: "Permits posted, contractor license verified, and site logistics set before dirt moves. Public WA L&I Verify is the habit — the Board of Project Stewardship does not issue licenses.",
+      image: ASSET + "03-permits-lni.webp", video: null,
+      trade_layers: [],
+      coastal: ["City of Edmonds building applications run through MyBuildingPermit — not Snohomish County PDS for city-limits parcels.", "Do not quote review days or permit fees from memory; pull live queue and invoices from the portal / Permit Coordinators."],
+      focus: "50% 40%", tint: "", ken: false,
+      answer: "Permits posted, contractor license verified, and site logistics set before dirt moves.",
+      ask: ["Are permits posted on site?", "Was the contractor re-checked on WA L&I Verify?", "Who owns neighbor / ROW notices?"],
+      gate: "Permits posted and license habit confirmed before dirt moves.",
       checks: [
-        'Permits approved & posted at the job site',
-        'Contractor license re-checked at WA L&I Verify before deposits',
-        'Neighbor notification / ROW staging plan when the street is affected',
-        'SWPPP & erosion control plan active for coastal Puget Sound lots'
+        "Permits approved & posted at the job site",
+        "Contractor license re-checked at WA L&I Verify before deposits",
+        "Neighbor notification / right-of-way staging plan when the street is affected",
+        "Erosion-control / SWPPP plan active for coastal Puget Sound lots",
       ]
     },
     {
-      id: 'foundation', short: 'Foundation',
-      title: 'Foundation',
-      blurb: 'Clearing, excavation, underground utilities, and concrete that will carry every later stage. Ask what inspections must pass before framing mobilizes.',
-      image: ASSET + '04-site-foundation.webp', video: null,
+      id: "site-prep", short: "Site prep",
+      title: "Site prep",
+      blurb: "Clearing, access, erosion control, and staging so the crew can work clean and keep sediment off the street. On coastal lots, this beat protects neighbors and storm drains before excavation starts.",
+      image: ASSET + "04-site-foundation.webp", video: null,
+      trade_layers: [],
+      coastal: ["Edmonds: temporary erosion and sedimentation controls stay the contractor/owner’s responsibility through the job — plans and inspection card on site.", "When a project triggers state Construction Stormwater coverage, a SWPPP and BMPs apply from first soil disturbance through final stabilization (verify trigger with Ecology / your AHJ)."],
+      focus: "50% 78%", tint: "", ken: true,
+      answer: "Clearing, access, erosion control, and staging so the crew can work clean and keep sediment off the street.",
+      ask: ["Are silt fence and inlet protections in place?", "Where is staging so egress stays clear?", "Is the inspection card / portal path ready?"],
+      gate: "Erosion controls and staging set before excavation advances.",
       checks: [
-        'Property lines & setbacks verified; erosion control in place',
-        'Excavation to plan depth; underground plumbing/electrical routed',
-        'Forms, rebar, vapor barrier, and pour sequenced with inspections',
-        'Waterproofing & backfill before framing mobilization'
+        "Tree / vegetation clearing limited to the approved envelope; salvage or haul plan set",
+        "Construction entrance, fencing, and material staging laid out without blocking egress",
+        "Silt fence, inlet protection, and SWPPP measures in place and photographed",
+        "Temporary utilities / Porta-John / dumpster placed; site safety briefing logged",
       ]
     },
     {
-      id: 'framing', short: 'Framing',
-      title: 'Framing',
-      blurb: 'Studs, joists, and roof structure rise from the foundation — the moment the house becomes a volume. Open 3D and scrub to watch walls grow; still illustrative, not a site scan.',
-      image: ASSET + '05-framing.webp', video: VIDEO + 'framing-walls-rising.mp4',
+      id: "foundation", short: "Foundation",
+      title: "Foundation",
+      blurb: "Excavation, underground utilities, and concrete that will carry every later stage. Ask what inspections must pass before framing mobilizes.",
+      image: ASSET + "04-site-foundation.webp", video: null,
+      trade_layers: ["plumbing"],
+      coastal: ["Coastal drainage and waterproofing details matter more than on inland lots — ask what the PE specified at the footing / stem wall.", "Second-story / addition work often needs an existing-foundation evaluation by a WA PE — do not assume capacity."],
+      focus: "50% 42%", tint: "", ken: true,
+      answer: "Excavation, underground utilities, and concrete that will carry every later stage.",
+      ask: ["Which inspections must pass before framing?", "Are underground utilities bedded to plan?", "Is waterproofing complete before backfill closes?"],
+      gate: "Foundation inspections and waterproofing complete before framing mobilizes.",
       checks: [
-        'Sill plates, floor system, and wall framing plumb & lined',
-        'Roof framing / decking and any structural steel set',
-        'Shear walls, hold-downs, and framing inspection readiness',
-        'Open 3D build and scrub — stud walls are the featured reveal'
+        "Property lines & setbacks verified; erosion control still holding after dig",
+        "Excavation to plan depth; underground plumbing / electrical routed and bedded",
+        "Forms, rebar, vapor barrier, and pour sequenced with required inspections",
+        "Waterproofing & backfill complete before framing mobilization",
       ]
     },
     {
-      id: 'sheathing', short: 'Dry-in',
-      title: 'Dry-in',
-      blurb: 'Sheathing, house wrap, roof dry-in, and openings weather-tight so interior trades can work dry. Coastal detailing matters here more than on inland lots.',
-      image: ASSET + '06-sheathing-dryin.webp', video: VIDEO + 'sheathing-dryin.mp4',
+      id: "framing", short: "Framing",
+      title: "Framing",
+      blurb: "Studs, joists, and roof structure rise from the foundation — the moment the house becomes a volume. Open 3D and scrub to watch walls grow; still illustrative, not a site scan.",
+      image: ASSET + "05-framing.webp", video: VIDEO + "framing-walls-rising.mp4",
+      trade_layers: [],
+      coastal: ["Seismic detailing (shear, hold-downs) is typical for Edmonds residential — confirm against the stamped set, not a generic checklist.", "Protect framing from coastal rain between sheathing and dry-in — temporary weather protection stays until dry-in holds."],
+      focus: "50% 40%", tint: "", ken: false,
+      answer: "Studs, joists, and roof structure rise from the foundation — the moment the house becomes a volume.",
+      ask: ["Is framing inspection ready?", "Are shear walls and hold-downs per the stamped set?", "When does temporary weather protection go up?"],
+      gate: "Framing plumb, lined, and ready for inspection before sheathing closes structure.",
       checks: [
-        'Wall sheathing + house wrap / WRB continuous',
-        'Roof flashing, underlayment, and dry-in complete',
-        'Windows & exterior doors installed with verified flashing details',
-        'Temporary weather protection retired only after dry-in holds'
+        "Sill plates, floor system, and wall framing plumb & lined",
+        "Roof framing / decking and any structural steel set",
+        "Shear walls, hold-downs, and framing inspection readiness",
+        "Open 3D build and scrub — stud walls are the featured reveal",
       ]
     },
     {
-      id: 'mep', short: 'Rough-ins',
-      title: 'Rough-ins',
-      blurb: 'Mechanical, electrical, and plumbing land in open walls before insulation closes the cavities. Ask which rough inspections must pass before batts go in.',
-      image: ASSET + '07-mep-roughin.webp', video: null,
+      id: "roofing", short: "Roofing",
+      title: "Roofing",
+      blurb: "Underlayment, flashings, and finished roofing dry the structure from above so interior trades are not racing rain. In the Puget Sound climate, roof dry-in is its own beat — not a footnote on sheathing.",
+      image: ASSET + "06-sheathing-dryin.webp", video: VIDEO + "sheathing-dryin.mp4",
+      trade_layers: ["roofing"],
+      coastal: ["WA Residential Code roof assemblies emphasize continuous underlayment and corrosion-resistant flashing at walls, penetrations, and slope changes.", "Do not assert city-wide ice-barrier rules from memory — confirm climatic design criteria on the adopted Table R301.2 for the parcel."],
+      focus: "50% 18%", tint: "", ken: true,
+      answer: "Underlayment, flashings, and finished roofing dry the structure from above so interior trades are not racing rain.",
+      ask: ["Is underlayment continuous at valleys and penetrations?", "When is roof dry-in considered held?", "Who verifies flashing before finish covering?"],
+      gate: "Roof dry-in from above confirmed before moisture-sensitive interior work advances.",
       checks: [
-        'HVAC, plumbing, and electrical / low-voltage rough-ins complete',
-        'Gas pressure test & specialty rough-ins as scoped',
-        'Fireblocking / draftstopping and in-wall blocking for fixtures',
-        'All rough inspections passed before insulation'
+        "Roof sheathing fastened; drip edge and ice/water or underlayment continuous",
+        "Valleys, chimneys, walls, and penetrations flashed before finish roofing",
+        "Shingles, metal, or membrane installed to manufacturer and code path",
+        "Roof dry-in confirmed before trusting interior finishes to stay dry",
       ]
     },
     {
-      id: 'insulation', short: 'Insulation',
-      title: 'Insulation',
-      blurb: 'Cavity fill and continuous weather-resistive discipline that matter on PNW coastal homes. Energy-path notes stay educational — not a promised score.',
-      image: ASSET + '08-insulation-wrb.webp', video: null,
+      id: "siding", short: "Siding",
+      title: "Siding",
+      blurb: "Weather-resistive barrier, openings, and cladding that shed wind-driven rain. Coastal detailing at windows and decks matters more here than on inland lots.",
+      image: ASSET + "06-sheathing-dryin.webp", video: null,
+      trade_layers: ["siding"],
+      coastal: ["WA amendments require a water-resistive barrier and a means of draining water that enters the wall assembly to the exterior.", "On marine Climate Zone 4C lots, WRB continuity and window pan/head flashings are the durability controls — not cladding alone."],
+      focus: "55% 55%", tint: "", ken: true,
+      answer: "Weather-resistive barrier, openings, and cladding that shed wind-driven rain.",
+      ask: ["Is WRB continuous and photographed at penetrations?", "Were window pan and head flashings verified?", "When can temporary weather protection retire?"],
+      gate: "WRB, openings, and cladding hold so the envelope sheds wind-driven rain.",
       checks: [
-        'Wall cavities cleaned; batts / spray foam at rim joists as designed',
-        'Exterior insulation / WRB continuity checked at penetrations',
-        'Insulation inspection passed prior to drywall hang',
-        'Energy-path notes aligned with WSEC-R credit planning when used'
+        "WRB / house wrap continuous; penetrations taped and photographed",
+        "Windows & exterior doors installed with verified pan flashing and head details",
+        "Rainscreen gap or drainage plane per detailing; starter and trim set true",
+        "Siding / cladding courses complete; openings sealed so WRB stays continuous behind trim",
       ]
     },
     {
-      id: 'drywall', short: 'Drywall',
-      title: 'Drywall',
-      blurb: 'Hang, tape, texture, primer, and paint turn the shell into rooms you can walk. A good moment to confirm finish schedules before fixtures land.',
-      image: ASSET + '09-drywall-paint.webp', video: null,
+      id: "plumbing", short: "Plumbing",
+      title: "Plumbing",
+      blurb: "Supply, drain, and vent rough-in land in open walls and floors before insulation closes the cavities. Ask which plumbing rough inspection must pass before batts go in.",
+      image: ASSET + "07-mep-roughin.webp", video: null,
+      trade_layers: ["plumbing"],
+      coastal: ["MyBuildingPermit residential plumbing rough-in tip sheets call for DWV and supply tests, nail plates near framing faces, and shower liner details before cover.", "Ask which rough inspection must pass before insulation — covering untested piping is a classic rework mode."],
+      focus: "28% 55%", tint: "tint-plumbing", ken: true,
+      answer: "Supply, drain, and vent rough-in land in open walls and floors before insulation closes the cavities.",
+      ask: ["Has the plumbing rough inspection passed?", "Were pressure / DWV tests witnessed as required?", "Are nail plates and blocking in place?"],
+      gate: "Plumbing rough inspection passed before insulation.",
       checks: [
-        'Drywall hang, screw pattern, tape & mud complete',
-        'Texture & primer; scrap removed for a clean paint stage',
-        'Interior paint coats to agreed finish schedule',
-        'Blower-door / energy testing when the path requires it'
+        "Supply, DWV, and vent rough-ins complete to plan; nail plates at studs",
+        "Tub / shower valves and blocking set; stub-outs dimensioned for finish",
+        "Pressure / DWV tests witnessed as required by the jurisdiction",
+        "Plumbing rough inspection passed before insulation",
       ]
     },
     {
-      id: 'finishes', short: 'Finishes',
-      title: 'Finishes',
-      blurb: 'Trim, cabinets, counters, flooring, tile, and fixture trims — the homeowner-visible craft. Keep allowances vs fixed packages clear in writing.',
-      image: ASSET + '10-finishes-fixtures.webp', video: null,
+      id: "electrical", short: "Electrical",
+      title: "Electrical",
+      blurb: "Branch circuits, panels, and device boxes land while walls are open — including low-voltage paths for data, security, and controls. Rough inspection before insulation is non-negotiable.",
+      image: ASSET + "07-mep-roughin.webp", video: null,
+      trade_layers: ["electrical"],
+      coastal: ["WA electrical rules require work to stay visually accessible at inspection; request inspection before concealing or burying wiring.", "Low-voltage / telecom pathways are not “anything goes” when adopted TIA standards apply — plan data routes while walls are open."],
+      focus: "72% 48%", tint: "tint-electrical", ken: true,
+      answer: "Branch circuits, panels, and device boxes land while walls are open — including low-voltage paths for data, security, and controls.",
+      ask: ["Has electrical rough inspection been requested before cover?", "Are AFCI / GFCI plans matching the finish layout?", "Are low-voltage pathways roughed with separation?"],
+      gate: "Electrical rough inspection passed before insulation.",
       checks: [
-        'Interior trim, doors, stair millwork, and railings set',
-        'Cabinets, counters, tile, and flooring installed & adjusted',
-        'Fixtures, appliances, registers, and lighting connected',
-        'Exterior finishes coordinated toward closeout'
+        "Service / panel location set; branch circuits pulled and secured",
+        "Device boxes, makeup space, and AFCI / GFCI planning match the finish layout",
+        "Low-voltage pathways (data, AV, security, thermostat) roughed with high-voltage separation",
+        "Electrical rough inspection passed before insulation",
       ]
     },
     {
-      id: 'punch', short: 'Punch',
-      title: 'Punch',
-      blurb: 'Walk the nearly finished home with a tablet: gaps, touch-ups, and final inspections before keys. Companion reading: Final walkthrough on the Board Learn hub.',
-      image: ASSET + '11-punch-closeout.webp', video: null,
+      id: "hvac", short: "HVAC",
+      title: "HVAC",
+      blurb: "Ducts, equipment pads, refrigerant lines, and ventilation rough-in share the open-wall window with plumbing and electrical. Balance this beat so no trade closes the wall on another’s unfinished rough.",
+      image: ASSET + "07-mep-roughin.webp", video: null,
+      trade_layers: [],
+      coastal: ["Coastal salt air and equipment location (garage vs exterior pad) affect durability — ask what the design assumed.", "Energy-path / duct testing notes stay educational — not a promised score."],
+      focus: "50% 50%", tint: "tint-hvac", ken: true,
+      answer: "Ducts, equipment pads, refrigerant lines, and ventilation rough-in share the open-wall window with plumbing and electrical.",
+      ask: ["Are equipment clearances and condensate paths set?", "Is mechanical rough inspection required on this permit path?", "Are ventilation paths set before drywall?"],
+      gate: "Mechanical rough (when required) passed before insulation.",
       checks: [
-        'Owner + steward punch walk with photo notes',
-        'Final building & MEP inspections passed',
-        'Touch-ups, hinge/gap adjustments, and remaining items closed',
-        'As-built / closeout packet started for handoff'
+        "Equipment locations, pads, and clearances confirmed; condensate path planned",
+        "Supply / return ducts or hydronic lines roughed; boots and chases firestopped as required",
+        "Fresh-air / bath / range ventilation paths set before drywall",
+        "Mechanical rough inspection (when required) passed before insulation",
       ]
     },
     {
-      id: 'warranty', short: 'Handoff',
-      title: 'Handoff',
-      blurb: 'Warranty contacts, maintenance habits, and a clear steward for questions after move-in. Celebrate — then keep L&I and permit records with the home file.',
-      image: ASSET + '12-warranty-handoff.webp', video: VIDEO + 'finished-handoff.mp4',
+      id: "insulation", short: "Insulation",
+      title: "Insulation",
+      blurb: "Cavity fill and continuous weather-resistive discipline that matter on PNW coastal homes. Energy-path notes stay educational — not a promised score.",
+      image: ASSET + "08-insulation-wrb.webp", video: null,
+      trade_layers: [],
+      coastal: ["WSEC-R calls for a continuous air barrier and insulation installation checks; dwelling-unit blower-door testing is part of the energy path when that path applies.", "Energy-path notes stay educational — never a promised score or rebate."],
+      focus: "50% 50%", tint: "", ken: false,
+      answer: "Cavity fill and continuous weather-resistive discipline that matter on PNW coastal homes.",
+      ask: ["Have all MEP rough inspections cleared?", "Was insulation inspection scheduled before hang?", "Are rim joists and penetrations sealed as designed?"],
+      gate: "Insulation inspection passed prior to drywall hang.",
       checks: [
-        'Warranty terms & emergency contacts delivered in writing',
-        'Systems orientation (HVAC filters, shutoffs, GFCI) completed',
-        'Named project steward for post-handoff questions',
-        'Keep L&I and permit records with the home file'
+        "Wall cavities cleaned; batts / spray foam at rim joists as designed",
+        "Exterior insulation / WRB continuity checked at penetrations after trade rough-ins",
+        "Insulation inspection passed prior to drywall hang",
+        "Energy-path notes aligned with WSEC-R credit planning when that path is used",
+      ]
+    },
+    {
+      id: "drywall", short: "Drywall",
+      title: "Drywall",
+      blurb: "Hang, tape, texture, primer, and paint turn the shell into rooms you can walk. Confirm finish schedules here before cabinets and tile lock the look.",
+      image: ASSET + "09-drywall-paint.webp", video: null,
+      trade_layers: [],
+      coastal: ["Hold hang until insulation and MEP rough sign-offs are recorded — do not cover unsigned work.", "For wet rooms, ordinary gypsum behind tile is not automatically acceptable backing; follow membrane manufacturer and AHJ guidance."],
+      focus: "50% 50%", tint: "", ken: false,
+      answer: "Hang, tape, texture, primer, and paint turn the shell into rooms you can walk.",
+      ask: ["Are cavities confirmed dry after weather delays?", "Is the finish schedule locked before paint?", "Does this energy path require blower-door testing?"],
+      gate: "Hang, tape, texture, and paint complete to the agreed schedule.",
+      checks: [
+        "Drywall hang, screw pattern, tape & mud complete",
+        "Texture & primer; scrap removed for a clean paint stage",
+        "Interior paint coats to the agreed finish schedule",
+        "Blower-door / energy testing when the chosen path requires it",
+      ]
+    },
+    {
+      id: "cabinets", short: "Cabinets",
+      title: "Cabinets",
+      blurb: "Kitchen and bath boxes, millwork, and tops — the first big homeowner-visible craft after paint. Keep allowance vs fixed packages clear in writing before install day.",
+      image: ASSET + "10-finishes-fixtures.webp", video: null,
+      trade_layers: [],
+      coastal: ["Trade care standards call for millwork delivery into dry, broom-clean spaces with HVAC running and time to acclimate before install.", "Coastal humidity swings can rack doors — schedule final adjusts after the house is conditioned."],
+      focus: "50% 45%", tint: "", ken: true,
+      answer: "Kitchen and bath boxes, millwork, and tops — the first big homeowner-visible craft after paint.",
+      ask: ["Was field measure confirmed against shop drawings?", "Is wall blocking verified before boxes land?", "Are allowances vs fixed packages in writing?"],
+      gate: "Millwork set, leveled, and coordinated with tops before punch.",
+      checks: [
+        "Field measure confirmed against shop drawings; wall blocking verified",
+        "Cabinets / millwork set plumb; fillers and scribe fit finished",
+        "Countertop template after boxes are final; sinks and cooktops coordinated",
+        "Hardware, soft-close, and appliance reveals adjusted before punch",
+      ]
+    },
+    {
+      id: "tile", short: "Tile",
+      title: "Tile",
+      blurb: "Wet-area waterproofing, tile, and the handoff into broader flooring. Showers and baths fail at the membrane — not at the pretty face — so this stage stays inspection-minded.",
+      image: ASSET + "10-finishes-fixtures.webp", video: null,
+      trade_layers: [],
+      coastal: ["Waterproof membranes must cover the backing under the tiled wet area; tile and grout alone are not a waterproofing system.", "Shower receptors need liner, slope, and weep details verified before finish tile proceeds."],
+      focus: "60% 60%", tint: "", ken: true,
+      answer: "Wet-area waterproofing, tile, and the handoff into broader flooring.",
+      ask: ["Was wet-area waterproofing verified before tile?", "Do slopes to drain match the agreed layout?", "How do flooring transitions meet height?"],
+      gate: "Wet-area membranes and tile complete; flooring handoff sequenced.",
+      checks: [
+        "Wet-area substrate and waterproofing membrane installed and flood-tested when required",
+        "Layout, slopes to drain, and movement joints agreed before thinset",
+        "Tile / stone set; grout and sealers cured per product",
+        "Transition to adjacent flooring planned so heights and underlayments match",
+      ]
+    },
+    {
+      id: "punch", short: "Punch",
+      title: "Punch",
+      blurb: "Walk the nearly finished home with a tablet: gaps, touch-ups, and final inspections before keys. Companion reading: Final walkthrough on the Board of Project Stewardship Learn hub.",
+      image: ASSET + "11-punch-closeout.webp", video: null,
+      trade_layers: [],
+      coastal: ["Final L&I electrical and city building finals both need to clear — do not treat one as covering the other.", "Exterior punch after a coastal rain cycle catches flashings and drainage misses indoor walks miss."],
+      focus: "50% 50%", tint: "", ken: false,
+      answer: "Walk the nearly finished home with a tablet: gaps, touch-ups, and final inspections before keys.",
+      ask: ["Have final building and trade inspections passed?", "What remains on the photo punch list?", "Is the closeout packet started?"],
+      gate: "Punch items closed and finals passed before keys.",
+      checks: [
+        "Owner + project steward punch walk with photo notes",
+        "Final building & trade inspections passed",
+        "Touch-ups, hinge / gap adjustments, and remaining items closed",
+        "As-built / closeout packet started for handoff",
+      ]
+    },
+    {
+      id: "handoff", short: "Handoff",
+      title: "Handoff",
+      blurb: "Warranty contacts, maintenance habits, and a clear steward for questions after move-in. Celebrate — then keep L&I and permit records with the home file.",
+      image: ASSET + "12-warranty-handoff.webp", video: VIDEO + "finished-handoff.mp4",
+      trade_layers: [],
+      coastal: ["Coastal maintenance habits (gutters, WRB penetrations, exterior caulk) belong in the handoff packet.", "Permit expiration / validity: ask the issued permit face — do not invent a generic months number."],
+      focus: "50% 45%", tint: "", ken: false,
+      answer: "Warranty contacts, maintenance habits, and a clear steward for questions after move-in.",
+      ask: ["Where are warranty contacts in writing?", "Who is the named steward after move-in?", "Are L&I and permit records with the home file?"],
+      gate: "Warranty packet, orientation, and named steward delivered.",
+      checks: [
+        "Warranty terms & emergency contacts delivered in writing",
+        "Systems orientation (HVAC filters, shutoffs, GFCI) completed",
+        "Named project steward for post-handoff questions",
+        "Keep L&I and permit records with the home file",
       ]
     }
   ];
@@ -508,6 +1472,8 @@
   let imgFrontIsA = true;
   let framingHintShown = false;
   let pageVisible = document.visibilityState !== 'hidden';
+  const layerOn = { plumbing: false, electrical: false, roofing: false, siding: false };
+  const LAYER_UNLOCK = { roofing: 6, siding: 7, plumbing: 8, electrical: 9 }; // stage index
 
   const $ = (id) => document.getElementById(id);
   const rail = $('stageRail');
@@ -633,6 +1599,40 @@
     }
   }
 
+
+  function applyStillFocus(s) {
+    const stack = document.querySelector('.img-stack');
+    if (!stack) return;
+    document.documentElement.style.setProperty('--img-focus', s.focus || '50% 50%');
+    stack.classList.remove('tint-plumbing', 'tint-electrical', 'tint-hvac', 'ken-on');
+    if (s.tint) stack.classList.add(s.tint);
+    if (s.ken && !reduceMotion) {
+      stack.classList.remove('ken-on');
+      void stack.offsetWidth;
+      stack.classList.add('ken-on');
+    }
+  }
+
+  function updateLayerChrome() {
+    document.querySelectorAll('.layer-chip').forEach(btn => {
+      const key = btn.dataset.layer;
+      const unlock = LAYER_UNLOCK[key];
+      const unlocked = idx >= unlock;
+      btn.disabled = !unlocked;
+      btn.setAttribute('aria-disabled', unlocked ? 'false' : 'true');
+      if (!unlocked && layerOn[key]) {
+        layerOn[key] = false;
+        btn.setAttribute('aria-pressed', 'false');
+      } else {
+        btn.setAttribute('aria-pressed', layerOn[key] ? 'true' : 'false');
+      }
+      btn.title = unlocked
+        ? ({ plumbing: 'Supply & DWV rough (illustrative)', electrical: 'Branch circuits & low-voltage paths (illustrative)', roofing: 'Underlayment to finish roofing (illustrative)', siding: 'WRB, openings, cladding (illustrative)' })[key]
+        : `Unlocks at ${STAGES[unlock].short}`;
+    });
+    houseAPI?.setLayers?.(layerOn);
+  }
+
   function setStage(i, { fromScrub } = {}) {
     idx = Math.max(0, Math.min(STAGES.length - 1, i));
     const s = STAGES[idx];
@@ -643,6 +1643,17 @@
     $('stageTitle').textContent = s.title;
     $('stageBlurb').textContent = s.blurb;
     $('stageChecks').innerHTML = s.checks.map(c => `<li class="flex"><span class="flex-1">${c}</span></li>`).join('');
+    const coastalEl = $('stageCoastal');
+    const coastalBlock = $('coastalBlock');
+    if (s.coastal && s.coastal.length) {
+      coastalEl.innerHTML = s.coastal.map(c => `<li>${c}</li>`).join('');
+      coastalBlock.classList.remove('hidden');
+    } else {
+      coastalEl.innerHTML = '';
+      coastalBlock.classList.add('hidden');
+    }
+    const live = $('mobileLiveLabel');
+    if (live) live.textContent = s.short;
     $('stickyTitle').textContent = `Stage ${idx + 1} · ${s.short}`;
 
     const card = $('stageCard');
@@ -653,7 +1664,10 @@
     }
 
     setImage(s.image, `Illustrative media for ${s.short}`);
+    applyStillFocus(s);
     $('imageEmpty').classList.add('hidden');
+    updateLayerChrome();
+    houseAPI?.setLayers?.(layerOn);
 
     rail.querySelectorAll('.stage-btn').forEach((el, j) => {
       el.classList.toggle('active', j === idx);
@@ -687,10 +1701,10 @@
 
     if (houseAPI) {
       houseAPI.setProgress(idx / (STAGES.length - 1));
-      const early = idx < 4;
+      const early = idx < 4; // before foundation mass
       $('threeEmpty').classList.toggle('hidden', !early || view !== '3d');
     } else {
-      $('threeEmpty').classList.toggle('hidden', idx >= 4);
+      $('threeEmpty').classList.toggle('hidden', idx >= 4); // site-prep pad may show earlier in 3D
     }
 
     // One-time framing hint toward 3D
@@ -932,6 +1946,83 @@
       finishGroup.add(roof);
       root.add(finishGroup);
 
+      // Site-prep pad (before foundation)
+      const pad = new THREE.Mesh(
+        new THREE.CylinderGeometry(3.8, 4.0, 0.08, 32),
+        new THREE.MeshStandardMaterial({ color: 0x6b5b4a, roughness: 1, transparent: true, opacity: 0.85 })
+      );
+      pad.position.set(0, 0.04, 0);
+      pad.visible = false;
+      root.add(pad);
+
+      // Anti-hollow silhouette from Plans+
+      const silhouette = new THREE.Mesh(
+        new THREE.BoxGeometry(6.0, 2.8, 4.2),
+        new THREE.MeshStandardMaterial({ color: 0x4ade80, roughness: 1, metalness: 0, transparent: true, opacity: 0.06, wireframe: true })
+      );
+      silhouette.position.set(0, 1.85, 0);
+      silhouette.visible = false;
+      root.add(silhouette);
+
+      // Trade overlay groups (illustrative tubes/planes — not a site scan)
+      const overlays = {
+        plumbing: new THREE.Group(),
+        electrical: new THREE.Group(),
+        roofing: new THREE.Group(),
+        siding: new THREE.Group(),
+      };
+      const pipeMat = new THREE.MeshStandardMaterial({ color: 0x38bdf8, roughness: 0.4, metalness: 0.3, transparent: true, opacity: 0.85 });
+      const elecMat = new THREE.MeshStandardMaterial({ color: 0xfacc15, roughness: 0.5, transparent: true, opacity: 0.8 });
+      const roofOverlayMat = new THREE.MeshStandardMaterial({ color: 0xf97316, roughness: 0.6, transparent: true, opacity: 0.35 });
+      const sidingOverlayMat = new THREE.MeshStandardMaterial({ color: 0x4ade80, roughness: 0.7, transparent: true, opacity: 0.25 });
+      for (let i = 0; i < 4; i++) {
+        const tube = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 2.2, 8), pipeMat);
+        tube.position.set(-1.5 + i * 0.9, 1.2, -1.6);
+        tube.rotation.z = Math.PI / 2;
+        overlays.plumbing.add(tube);
+      }
+      for (let i = 0; i < 5; i++) {
+        const box = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.12, 0.08), elecMat);
+        box.position.set(-2 + i * 0.9, 1.6, 1.9);
+        overlays.electrical.add(box);
+        const run = new THREE.Mesh(new THREE.BoxGeometry(0.03, 1.4, 0.03), elecMat);
+        run.position.set(-2 + i * 0.9, 1.0, 1.9);
+        overlays.electrical.add(run);
+      }
+      const roofPlane = new THREE.Mesh(new THREE.ConeGeometry(4.0, 1.4, 4), roofOverlayMat);
+      roofPlane.position.set(0, 4.05, 0);
+      roofPlane.rotation.y = Math.PI / 4;
+      overlays.roofing.add(roofPlane);
+      panels.forEach(([w, h, d, x, y, z]) => {
+        const m = new THREE.Mesh(new THREE.BoxGeometry(w * 1.05, h * 1.05, d * 1.6), sidingOverlayMat);
+        m.position.set(x * 1.06, y, z * 1.06);
+        overlays.siding.add(m);
+      });
+      Object.values(overlays).forEach(g => { g.visible = false; root.add(g); });
+
+      function setLayers(state) {
+        Object.keys(overlays).forEach(k => {
+          overlays[k].visible = !!(state && state[k]);
+        });
+        // X-ray: fade shell slightly when any overlay on
+        const any = state && Object.values(state).some(Boolean);
+        const shellOpacity = any ? 0.35 : 1;
+        [sheathGroup, wrapGroup, finishGroup].forEach(g => {
+          g.traverse(ch => {
+            if (ch.isMesh && ch.material && ch.material.transparent !== undefined) {
+              ch.material.transparent = true;
+              ch.material.opacity = any ? shellOpacity : (ch.userData._baseOpacity ?? 1);
+            } else if (ch.isMesh && ch.material && any) {
+              ch.material.transparent = true;
+              ch.userData._baseOpacity = ch.userData._baseOpacity ?? 1;
+              ch.material.opacity = 0.45;
+            } else if (ch.isMesh && ch.material && !any && ch.userData._baseOpacity != null) {
+              ch.material.opacity = ch.userData._baseOpacity;
+            }
+          });
+        });
+      }
+
       function lerpScale(obj, key, t, ymin = 0.001) {
         obj.traverse(ch => {
           if (!ch.isMesh || !ch.userData[key]) return;
@@ -944,23 +2035,49 @@
         });
       }
 
+
       function setProgress(p) {
-        const foundationVis = THREE.MathUtils.clamp((p - 0.08) / 0.12, 0, 1);
+        // 17-beat remap: site prep pad → foundation → framing → roof → siding → hold through MEP → insulation → finish
+        silhouette.visible = p >= (1 / 16);
+        silhouette.material.opacity = THREE.MathUtils.lerp(0.08, 0.02, THREE.MathUtils.clamp((p - 0.2) / 0.5, 0, 1));
+
+        const padVis = THREE.MathUtils.clamp((p - (2.5 / 16)) / (1 / 16), 0, 1);
+        pad.visible = padVis > 0.05;
+        pad.material.opacity = THREE.MathUtils.lerp(0, 0.85, padVis);
+
+        const foundationVis = THREE.MathUtils.clamp((p - (3.5 / 16)) / (1.2 / 16), 0, 1);
         foundation.scale.set(1, Math.max(0.05, foundationVis), 1);
-        foundation.visible = p > 0.05;
-        const rise = THREE.MathUtils.clamp((p - 0.22) / 0.2, 0, 1);
+        foundation.visible = foundationVis > 0.05;
+
+        const rise = THREE.MathUtils.clamp((p - (4.5 / 16)) / (1.5 / 16), 0, 1);
         lerpScale(studGroup, 'rise', rise);
         lerpScale(joists, 'rise', rise);
-        lerpScale(roofFrame, 'rise', THREE.MathUtils.clamp((p - 0.3) / 0.15, 0, 1));
-        const sh = THREE.MathUtils.clamp((p - 0.42) / 0.12, 0, 1);
-        lerpScale(sheathGroup, 'sheath', sh);
-        const wr = THREE.MathUtils.clamp((p - 0.52) / 0.12, 0, 1);
+        lerpScale(roofFrame, 'rise', THREE.MathUtils.clamp((p - (5 / 16)) / (1.2 / 16), 0, 1));
+
+        // Roof covering at roofing beat (stage 7 → index 6 → p=6/16)
+        const roofCover = THREE.MathUtils.clamp((p - (5.5 / 16)) / (1.2 / 16), 0, 1);
+        // Siding / WRB at siding beat — sheath then wrap; hold through plumbing/electrical/hvac
+        const sh = THREE.MathUtils.clamp((p - (6.5 / 16)) / (1.2 / 16), 0, 1);
+        lerpScale(sheathGroup, 'sheath', Math.max(sh, roofCover * 0.35));
+        const wr = THREE.MathUtils.clamp((p - (7 / 16)) / (1 / 16), 0, 1);
         lerpScale(wrapGroup, 'wrap', wr);
-        const fin = THREE.MathUtils.clamp((p - 0.7) / 0.22, 0, 1);
+
+        // Hold shell mass through MEP (p ~ 8/16–10/16); insulation tint cue via wrap opacity already held
+        const fin = THREE.MathUtils.clamp((p - (12.5 / 16)) / (2.5 / 16), 0, 1);
         lerpScale(finishGroup, 'finish', fin);
-        plan.material.opacity = THREE.MathUtils.lerp(0.9, 0.15, THREE.MathUtils.clamp(p / 0.35, 0, 1));
-        grid.visible = p < 0.45;
-        $('threeEmpty').classList.toggle('hidden', p >= 0.22 || view !== '3d');
+
+        // Explicit roof mesh follows roofing+ 
+        finishGroup.traverse(ch => {
+          if (ch.isMesh && ch.geometry && ch.geometry.type === 'ConeGeometry') {
+            const s = THREE.MathUtils.lerp(0.001, 1, roofCover);
+            if (fin < 0.05) ch.scale.setScalar(Math.max(s, 0.001));
+          }
+        });
+
+        plan.material.opacity = THREE.MathUtils.lerp(0.9, 0.12, THREE.MathUtils.clamp(p / 0.4, 0, 1));
+        grid.visible = p < (7 / 16);
+        $('threeEmpty').classList.toggle('hidden', p >= (3.5 / 16) || view !== '3d');
+        setLayers(layerOn);
       }
 
       function resize() {
@@ -994,7 +2111,7 @@
 
       window.addEventListener('resize', () => { if (active) resize(); });
 
-      houseAPI = { setProgress, resize, setActive };
+      houseAPI = { setProgress, resize, setActive, setLayers };
       setProgress(idx / (STAGES.length - 1));
       resize();
       return houseAPI;
