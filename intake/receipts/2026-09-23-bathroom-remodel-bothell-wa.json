@@ -1,0 +1,19 @@
+{
+  "submission_id": "2026-09-23-bathroom-remodel-bothell-wa",
+  "idempotency_key": "sha256:0d422039da5e9a6abf37f1e1100292841d4a360905df715c69940c0299c38450",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-09-23T17:51:06Z",
+  "outputs": [
+    "assets/images/posts/2026-09-23-bothell-bath-1.webp",
+    "assets/images/posts/2026-09-23-bothell-bath-2.webp",
+    "assets/images/posts/2026-09-23-bothell-bath-3.webp",
+    "posts/2026-09-23-bathroom-remodel-bothell-wa.md",
+    "posts/2026-09-23-bathroom-remodel-bothell-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 48
+}
