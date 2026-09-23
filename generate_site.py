@@ -2659,9 +2659,10 @@ def ppg_widgets_script() -> str:
 # ---------- Page builders ----------
 
 def home_flashlight_hero() -> tuple[str, str, str] | None:
-    """Homepage flashlight hero: wireframe on black, cursor spotlight reveals the finished still.
+    """Homepage hero: ambient sketch-to-home video, flashlight only if playback fails.
 
     Returns (html, extra_head, extra_scripts), or None when the stills are not on disk.
+    prefers-reduced-motion hides the video and shows the finished still.
     Static camera — no orbit. Site nav stays in the sticky header above this block.
     """
     wire_rel = "assets/hero/hero-wireframe.jpg"
@@ -2676,19 +2677,19 @@ def home_flashlight_hero() -> tuple[str, str, str] | None:
     poster = prefix_asset(poster_rel) if asset_exists(poster_rel) else finished
     video_html = ""
     if video:
-        video_html = f"""      <video class="hero-reduced-video" muted loop playsinline preload="none" poster="{poster}" aria-hidden="true" tabindex="-1">
-        <source src="{video}" type="video/mp4" media="(prefers-reduced-motion: reduce)">
+        video_html = f"""      <video class="hero-ambient-video" muted loop autoplay playsinline preload="metadata" poster="{poster}" aria-hidden="true" tabindex="-1">
+        <source src="{video}" type="video/mp4">
       </video>"""
     html_block = f"""  <section class="flashlight-hero" id="home-hero" aria-labelledby="home-hero-title">
     <div class="hero-stage">
-      <img class="hero-layer hero-layer-finished" src="{finished}" alt="Finished dusk coastal home concept for Edmonds and coastal Puget Sound — illustrative media for Board of Project Stewardship, not a bid or stamped plan" width="1920" height="1080" decoding="async">
-      <img class="hero-layer hero-layer-wire" id="home-hero-wire" src="{wire}" alt="" width="1920" height="1080" decoding="async" fetchpriority="high">
+      <img class="hero-layer hero-layer-finished" src="{finished}" alt="Illustrative coastal Puget Sound home concept for Board of Project Stewardship — not a bid or stamped plan" width="1920" height="1085" decoding="async">
+      <img class="hero-layer hero-layer-wire" id="home-hero-wire" src="{wire}" alt="" width="1920" height="1085" decoding="async" fetchpriority="high">
 {video_html}
     </div>
     <div class="hero-scrim" aria-hidden="true"></div>
     <div class="hero-vignette" aria-hidden="true"></div>
     <div class="hero-cursor" id="home-hero-ring" aria-hidden="true"></div>
-    <p class="hero-hint" id="home-hero-hint"><span class="hero-hint-fine">Hover to reveal the finished home</span><span class="hero-hint-coarse">Drag to reveal the finished home</span></p>
+    <p class="hero-hint" id="home-hero-hint"><span class="hero-hint-video">Plans assemble into the finished home</span><span class="hero-hint-flashlight"><span class="hero-hint-fine">Hover to reveal the finished home</span><span class="hero-hint-coarse">Drag to reveal the finished home</span></span></p>
     <div class="hero-copy">
       <p class="hero-kicker">Edmonds · coastal Puget Sound</p>
       <h1 id="home-hero-title">See the build emerge from the plan.</h1>
@@ -2721,7 +2722,7 @@ def home_flashlight_hero() -> tuple[str, str, str] | None:
     }}
     .flashlight-hero .hero-stage,
     .flashlight-hero .hero-layer,
-    .flashlight-hero .hero-reduced-video {{
+    .flashlight-hero .hero-ambient-video {{
       position: absolute;
       inset: 0;
       width: 100%;
@@ -2740,12 +2741,25 @@ def home_flashlight_hero() -> tuple[str, str, str] | None:
       -webkit-mask-repeat: no-repeat;
       mask-repeat: no-repeat;
     }}
-    .flashlight-hero .hero-reduced-video {{
-      display: none;
+    .flashlight-hero .hero-ambient-video {{
+      display: block;
       z-index: 2;
       object-fit: cover;
       object-position: center center;
       pointer-events: none;
+    }}
+    .flashlight-hero.is-video-playing {{
+      cursor: auto;
+    }}
+    .flashlight-hero.is-video-playing .hero-layer-wire,
+    .flashlight-hero.is-video-playing .hero-cursor {{
+      display: none !important;
+    }}
+    .flashlight-hero.is-video-playing .hero-hint-flashlight {{
+      display: none !important;
+    }}
+    .flashlight-hero:not(.is-video-playing) .hero-hint-video {{
+      display: none !important;
     }}
     .flashlight-hero .hero-scrim,
     .flashlight-hero .hero-vignette {{
@@ -2924,7 +2938,7 @@ def home_flashlight_hero() -> tuple[str, str, str] | None:
       .flashlight-hero .hero-layer-wire,
       .flashlight-hero .hero-cursor,
       .flashlight-hero .hero-hint,
-      .flashlight-hero .hero-reduced-video {{ display: none !important; }}
+      .flashlight-hero .hero-ambient-video {{ display: none !important; }}
     }}
   </style>
 """
@@ -2934,6 +2948,7 @@ def home_flashlight_hero() -> tuple[str, str, str] | None:
   var wire = document.getElementById('home-hero-wire');
   var ring = document.getElementById('home-hero-ring');
   var hint = document.getElementById('home-hero-hint');
+  var video = hero ? hero.querySelector('.hero-ambient-video') : null;
   if (!hero || !wire) return;
 
   var motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -2945,6 +2960,8 @@ def home_flashlight_hero() -> tuple[str, str, str] | None:
   var hovering = false;
   var activePointer = null;
   var rafId = 0;
+  var videoMode = false;
+  var flashlightArmed = false;
 
   function reduced() { return motionQuery.matches; }
   function finePointer() { return hoverQuery.matches; }
@@ -2960,7 +2977,7 @@ def home_flashlight_hero() -> tuple[str, str, str] | None:
     var y = my * h;
     var r = Math.max(0, radiusPx);
     if (ring) ring.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)';
-    if (reduced() || r < 2) {
+    if (reduced() || videoMode || r < 2) {
       wire.style.webkitMaskImage = 'none';
       wire.style.maskImage = 'none';
       return;
@@ -2998,8 +3015,72 @@ def home_flashlight_hero() -> tuple[str, str, str] | None:
     return node && node.closest && node.closest('a, button');
   }
 
+  function stopFlashlightLoop() {
+    if (rafId) {
+      window.cancelAnimationFrame(rafId);
+      rafId = 0;
+    }
+  }
+
+  function startFlashlightLoop() {
+    if (!rafId) rafId = window.requestAnimationFrame(tick);
+  }
+
+  function enableVideoMode() {
+    videoMode = true;
+    flashlightArmed = false;
+    hero.classList.add('is-video-playing');
+    hero.classList.remove('is-flashlight');
+    closeSpotlight();
+    stopFlashlightLoop();
+    radiusPx = 0;
+    targetR = 0;
+    applyMask();
+    if (video) {
+      video.style.display = '';
+    }
+  }
+
+  function enableFlashlightFallback() {
+    videoMode = false;
+    flashlightArmed = true;
+    hero.classList.remove('is-video-playing');
+    hero.classList.add('is-flashlight');
+    if (video) {
+      try { video.pause(); } catch (err) {}
+      video.style.display = 'none';
+    }
+    if (!reduced()) startFlashlightLoop();
+  }
+
+  function tryAmbientVideo() {
+    if (reduced() || !video) {
+      if (video) {
+        try { video.pause(); } catch (err) {}
+        video.style.display = 'none';
+      }
+      hero.classList.remove('is-video-playing');
+      return;
+    }
+    video.muted = true;
+    video.setAttribute('playsinline', '');
+    video.style.display = '';
+    var onFail = function () { enableFlashlightFallback(); };
+    video.addEventListener('error', onFail, { once: true });
+    var playPromise = video.play();
+    if (playPromise && typeof playPromise.then === 'function') {
+      playPromise.then(function () {
+        if (!video.paused) enableVideoMode();
+        else onFail();
+      }).catch(onFail);
+    } else {
+      if (!video.paused) enableVideoMode();
+      else onFail();
+    }
+  }
+
   hero.addEventListener('pointerdown', function (e) {
-    if (reduced()) return;
+    if (reduced() || videoMode || !flashlightArmed) return;
     if (e.pointerType === 'touch' || e.pointerType === 'pen') {
       if (interactiveTarget(e.target)) return;
       activePointer = e.pointerId;
@@ -3010,7 +3091,7 @@ def home_flashlight_hero() -> tuple[str, str, str] | None:
   });
 
   hero.addEventListener('pointermove', function (e) {
-    if (reduced()) return;
+    if (reduced() || videoMode || !flashlightArmed) return;
     if (e.pointerType === 'touch' || e.pointerType === 'pen') {
       if (activePointer !== e.pointerId) return;
     }
@@ -3033,7 +3114,7 @@ def home_flashlight_hero() -> tuple[str, str, str] | None:
   });
 
   function tick() {
-    if (!reduced()) {
+    if (!reduced() && flashlightArmed && !videoMode) {
       targetR = hovering ? baseRadius() : 0;
       radiusPx += (targetR - radiusPx) * 0.12;
       if (!hovering && radiusPx < 0.6) radiusPx = 0;
@@ -3049,21 +3130,24 @@ def home_flashlight_hero() -> tuple[str, str, str] | None:
       radiusPx = 0;
       targetR = 0;
       applyMask();
-      var clip = hero.querySelector('.hero-reduced-video');
-      if (clip && clip.pause) clip.pause();
-      if (rafId) {
-        window.cancelAnimationFrame(rafId);
-        rafId = 0;
+      videoMode = false;
+      flashlightArmed = false;
+      hero.classList.remove('is-video-playing');
+      hero.classList.remove('is-flashlight');
+      if (video) {
+        try { video.pause(); } catch (err) {}
+        video.style.display = 'none';
       }
+      stopFlashlightLoop();
       return;
     }
-    if (!rafId) rafId = window.requestAnimationFrame(tick);
+    tryAmbientVideo();
   }
 
   if (motionQuery.addEventListener) motionQuery.addEventListener('change', syncMotion);
   else if (motionQuery.addListener) motionQuery.addListener(syncMotion);
   window.addEventListener('resize', function () {
-    if (hovering) targetR = baseRadius();
+    if (hovering && flashlightArmed && !videoMode) targetR = baseRadius();
     applyMask();
   });
   syncMotion();
@@ -3464,7 +3548,7 @@ def build_about() -> str:
     </section>
   </div>"""
 
-    og_alt = "Finished dusk coastal home concept for Edmonds and coastal Puget Sound — illustrative media for Board of Project Stewardship, not a bid or stamped plan"
+    og_alt = "Illustrative coastal Puget Sound home concept for Board of Project Stewardship — not a bid or stamped plan"
     return page_shell(
         "Board of Project Stewardship | Edmonds Standards",
         "The Board of Project Stewardship publishes construction standards and contractor directories for Edmonds and King & Snohomish — hire from the Board shortlist.",
