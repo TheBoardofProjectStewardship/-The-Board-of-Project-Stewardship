@@ -1,420 +1,1260 @@
-<!DOCTYPE html>
+<!-- circular-directory.html -->
+<!doctype html>
 <html lang="en" data-section-id="circular-directory">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="robots" content="noindex, follow" />
   <base target="_top" />
-  <title>Circular Directory — Board of Project Stewardship</title>
-  <meta name="description" content="Explore Edmonds-area stewardship topics in a circular carousel from the Board of Project Stewardship." />
+  <meta
+    name="description"
+    content="Explore construction topics from The Board of Project Stewardship in a circular interactive directory."
+  />
+  <meta name="theme-color" content="#07100f" />
+
+  <title>Circular Directory | The Board of Project Stewardship</title>
+
   <style>
     @font-face {
-      font-family: 'Inter';
+      font-family: Inter;
       font-style: normal;
       font-weight: 100 900;
       font-display: swap;
-      src: url('../assets/fonts/InterVariable.woff2') format('woff2');
+      src: url("../assets/fonts/InterVariable.woff2") format("woff2");
     }
+
     :root {
-      --obsidian: #0a0a0a;
-      --charcoal: #141414;
-      --white: #f8fafc;
-      --soft: #cbd5e1;
-      --muted: #94a3b8;
-      --accent: #4ade80;
-      --primary: #166534;
+      --bg: #07100f;
+      --bg-deep: #030706;
+      --panel: rgba(15, 31, 27, 0.76);
+      --panel-strong: rgba(20, 40, 35, 0.92);
+      --line: rgba(191, 225, 214, 0.15);
+      --line-strong: rgba(191, 225, 214, 0.3);
+      --text: #f2f5ef;
+      --muted: #a8bbb4;
+      --muted-2: #71847e;
+      --accent: #b8efd8;
+      --accent-soft: #78bea3;
+      --accent-deep: #173a31;
+      --max: 1380px;
+      --card-w: 300px;
+      --card-h: 390px;
+      --radius: 440px;
+      --pointer-x: 50%;
+      --pointer-y: 34%;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg-deep);
+    }
+
     body {
-      font-family: Inter, system-ui, sans-serif;
-      background: var(--obsidian);
-      color: var(--soft);
+      margin: 0;
+      min-width: 320px;
       min-height: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: clamp(1.5rem, 4vw, 3rem);
       overflow-x: hidden;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 50% -15%, rgba(79, 148, 122, 0.2), transparent 42rem),
+        linear-gradient(180deg, #091512 0%, var(--bg) 58%, #040806 100%);
+      font-family:
+        Inter,
+        ui-sans-serif,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+      text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
     }
-    .intro {
-      text-align: center;
-      max-width: 560px;
-      margin-bottom: 0.5rem;
-      z-index: 2;
+
+    a,
+    button {
+      font: inherit;
     }
-    .eyebrow {
-      font-size: 0.68rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 700;
-      margin-bottom: 0.75rem;
-    }
-    h1 {
-      font-size: clamp(1.6rem, 3.5vw, 2.25rem);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      color: var(--white);
-      margin-bottom: 0.65rem;
-    }
-    .lede {
-      font-size: 0.95rem;
-      font-weight: 300;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-    .stage {
-      position: relative;
-      width: min(920px, 100%);
-      height: clamp(420px, 62vw, 520px);
-      perspective: 1200px;
-      margin-top: 0.5rem;
-      touch-action: pan-y;
-      user-select: none;
-    }
-    .ring {
-      position: absolute;
-      inset: 0;
-      transform-style: preserve-3d;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .card {
-      position: absolute;
-      width: min(240px, 68vw);
-      padding: 1.35rem 1.25rem 1.2rem;
-      border-radius: 18px;
-      background: linear-gradient(165deg, #1a1a1a, #101010);
-      border: 1px solid rgba(255,255,255,0.1);
-      box-shadow: 0 20px 50px -20px rgba(0,0,0,0.9);
-      transform-style: preserve-3d;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-      text-decoration: none;
+
+    a {
       color: inherit;
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
     }
-    .card.is-front {
-      border-color: rgba(74,222,128,0.45);
-      box-shadow:
-        0 24px 60px -18px rgba(0,0,0,0.95),
-        0 0 40px -12px rgba(74,222,128,0.25);
-      z-index: 5;
+
+    button {
+      border: 0;
     }
-    .card .num {
-      font-size: 0.65rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 700;
-      margin-bottom: 0.55rem;
+
+    ::selection {
+      color: #07100f;
+      background: var(--accent);
     }
-    .card h2 {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--white);
-      letter-spacing: -0.02em;
-      margin-bottom: 0.5rem;
+
+    .skip-link {
+      position: fixed;
+      z-index: 9999;
+      top: 12px;
+      left: 12px;
+      padding: 11px 15px;
+      border-radius: 999px;
+      color: #07100f;
+      background: var(--accent);
+      transform: translateY(-150%);
+      transition: transform 180ms ease;
     }
-    .card p {
-      font-size: 0.82rem;
-      font-weight: 300;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-    .card .go {
-      margin-top: 0.9rem;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--accent);
-      opacity: 0;
-      transform: translateY(4px);
-      transition: opacity 0.25s, transform 0.25s;
-    }
-    .card.is-front .go {
-      opacity: 1;
+
+    .skip-link:focus {
       transform: translateY(0);
     }
-    .controls {
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      z-index: 80;
+      opacity: 0.05;
+      pointer-events: none;
+      mix-blend-mode: soft-light;
+      background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.34'/%3E%3C/svg%3E");
+    }
+
+    .ambient {
+      position: fixed;
+      z-index: -1;
+      left: var(--pointer-x);
+      top: var(--pointer-y);
+      width: min(72vw, 950px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      pointer-events: none;
+      background:
+        radial-gradient(
+          circle,
+          rgba(118, 201, 168, 0.12) 0%,
+          rgba(69, 130, 106, 0.06) 34%,
+          transparent 70%
+        );
+      filter: blur(26px);
+      transform: translate(-50%, -50%);
+      transition:
+        left 160ms ease-out,
+        top 160ms ease-out;
+    }
+
+    .shell {
+      width: min(calc(100% - 36px), var(--max));
+      margin-inline: auto;
+    }
+
+    header {
+      position: relative;
+      z-index: 30;
+      padding-top: 22px;
+    }
+
+    .nav {
       display: flex;
       align-items: center;
-      gap: 1rem;
-      margin-top: 0.25rem;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 50px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 650;
+    }
+
+    .brand-mark {
+      position: relative;
+      width: 32px;
+      height: 36px;
+      flex: 0 0 auto;
+      clip-path: polygon(50% 0, 93% 14%, 88% 68%, 50% 100%, 12% 68%, 7% 14%);
+      background:
+        linear-gradient(145deg, rgba(190, 238, 220, 0.28), transparent 45%),
+        linear-gradient(180deg, #173b31, #0a1b17);
+      box-shadow:
+        inset 0 0 0 1px rgba(220, 249, 238, 0.2),
+        0 10px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      inset: 6px;
+      clip-path: inherit;
+      border: 1px solid rgba(216, 249, 237, 0.22);
+    }
+
+    .brand-name {
+      color: rgba(244, 247, 242, 0.9);
+    }
+
+    .nav-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 40px;
+      padding: 0 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(7, 16, 15, 0.46);
+      font-size: 0.8rem;
+      backdrop-filter: blur(12px);
+    }
+
+    .hero {
+      padding: clamp(86px, 10vw, 138px) 0 34px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      color: var(--accent);
+      font-size: 0.74rem;
+      font-weight: 760;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before,
+    .eyebrow::after {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent));
+    }
+
+    .eyebrow::after {
+      transform: scaleX(-1);
+    }
+
+    h1 {
+      max-width: 980px;
+      margin: 0 auto;
+      color: #f5f7f2;
+      font-size: clamp(3.2rem, 7.5vw, 7.6rem);
+      font-weight: 500;
+      letter-spacing: -0.068em;
+      line-height: 0.9;
+    }
+
+    h1 span {
+      display: block;
+      color: var(--accent);
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: 28px auto 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.3vw, 1.18rem);
+      line-height: 1.68;
+    }
+
+    .directory-section {
+      position: relative;
+      min-height: 870px;
+      padding: 20px 0 90px;
+      overflow: hidden;
+    }
+
+    .carousel-shell {
+      position: relative;
+      height: 720px;
+      perspective: 1600px;
+      perspective-origin: 50% 42%;
+      touch-action: pan-y;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .orbit {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: min(78vw, 900px);
+      aspect-ratio: 1;
+      transform: translate(-50%, -45%) rotateX(72deg);
+      border: 1px solid rgba(183, 226, 209, 0.1);
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 70px rgba(113, 181, 155, 0.012),
+        0 0 0 140px rgba(113, 181, 155, 0.008);
+      pointer-events: none;
+    }
+
+    .orbit::before,
+    .orbit::after {
+      content: "";
+      position: absolute;
+      border: 1px dashed rgba(183, 226, 209, 0.07);
+      border-radius: 50%;
+    }
+
+    .orbit::before {
+      inset: 16%;
+    }
+
+    .orbit::after {
+      inset: 34%;
+    }
+
+    .center-glow {
+      position: absolute;
+      left: 50%;
+      top: 53%;
+      width: min(44vw, 520px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      background:
+        radial-gradient(circle, rgba(130, 216, 181, 0.16), rgba(58, 108, 90, 0.04) 48%, transparent 72%);
+      filter: blur(18px);
+    }
+
+    .carousel {
+      position: absolute;
+      left: 50%;
+      top: 47%;
+      width: var(--card-w);
+      height: var(--card-h);
+      transform-style: preserve-3d;
+      transform:
+        translate(-50%, -50%)
+        rotateX(-5deg)
+        rotateY(var(--rotation, 0deg));
+      transition: transform 650ms cubic-bezier(0.2, 0.72, 0.18, 1);
+    }
+
+    .card {
+      --angle: 0deg;
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(180, 235, 214, 0.1), transparent 40%),
+        linear-gradient(155deg, rgba(22, 45, 38, 0.96), rgba(8, 18, 16, 0.93));
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.035),
+        0 30px 80px rgba(0, 0, 0, 0.34);
+      transform:
+        rotateY(var(--angle))
+        translateZ(var(--radius));
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transition:
+        border-color 220ms ease,
+        background 220ms ease,
+        box-shadow 220ms ease,
+        opacity 220ms ease;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(130deg, rgba(255, 255, 255, 0.04), transparent 32%),
+        repeating-linear-gradient(
+          132deg,
+          transparent 0 18px,
+          rgba(225, 255, 244, 0.011) 18px 19px
+        );
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      right: -65px;
+      bottom: -65px;
+      width: 180px;
+      height: 180px;
+      border: 1px solid rgba(182, 230, 211, 0.1);
+      border-radius: 50%;
+      box-shadow: 0 0 0 32px rgba(182, 230, 211, 0.016);
+    }
+
+    .card.is-active {
+      border-color: rgba(192, 239, 221, 0.3);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(180, 235, 214, 0.16), transparent 42%),
+        linear-gradient(155deg, rgba(28, 58, 48, 0.98), rgba(8, 18, 16, 0.95));
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.055),
+        0 40px 100px rgba(0, 0, 0, 0.48),
+        0 0 60px rgba(91, 163, 135, 0.08);
+    }
+
+    .card-index {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--muted-2);
+      font-size: 0.7rem;
+      font-weight: 760;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .card-index span:last-child {
+      width: 38px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--line-strong), transparent);
+    }
+
+    .card-content {
+      position: relative;
       z-index: 2;
     }
-    .controls button {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.04);
-      color: var(--white);
-      cursor: pointer;
+
+    .card h2 {
+      margin: 0;
+      max-width: 230px;
+      color: #eef4ef;
+      font-size: clamp(1.8rem, 2.5vw, 2.35rem);
+      font-weight: 560;
+      letter-spacing: -0.045em;
+      line-height: 1.02;
+    }
+
+    .card p {
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: 0.93rem;
+      line-height: 1.62;
+    }
+
+    .card-link {
+      position: relative;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      width: fit-content;
+      margin-top: 24px;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .card-link svg {
+      width: 17px;
+      height: 17px;
+      transition: transform 180ms ease;
+    }
+
+    .card-link:hover svg,
+    .card-link:focus-visible svg {
+      transform: translateX(3px);
+    }
+
+    .carousel-controls {
+      position: absolute;
+      z-index: 20;
+      left: 50%;
+      bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transform: translateX(-50%);
+    }
+
+    .control {
       display: grid;
       place-items: center;
-      transition: background 0.2s, border-color 0.2s;
-    }
-    .controls button:hover {
-      background: rgba(74,222,128,0.1);
-      border-color: rgba(74,222,128,0.35);
-    }
-    .controls button:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 2px;
-    }
-    .dots {
-      display: flex;
-      gap: 0.4rem;
-    }
-    .dots button {
-      width: 8px;
-      height: 8px;
+      width: 50px;
+      height: 50px;
+      border: 1px solid var(--line);
       border-radius: 50%;
-      border: none;
-      padding: 0;
-      background: rgba(255,255,255,0.2);
+      color: var(--text);
+      background: rgba(12, 26, 23, 0.78);
       cursor: pointer;
+      backdrop-filter: blur(12px);
+      transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        background 180ms ease;
     }
-    .dots button[aria-current="true"] {
-      background: var(--accent);
-      box-shadow: 0 0 10px rgba(74,222,128,0.5);
+
+    .control:hover,
+    .control:focus-visible {
+      transform: translateY(-2px);
+      border-color: var(--line-strong);
+      background: rgba(24, 49, 42, 0.9);
     }
-    .note {
-      margin-top: 1.25rem;
-      font-size: 0.72rem;
-      color: #64748b;
+
+    .control svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .counter {
+      min-width: 94px;
       text-align: center;
-      max-width: 420px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.08em;
     }
-    @media (prefers-reduced-motion: reduce) {
-      .stage {
-        height: auto;
-        perspective: none;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 0.85rem;
-        margin-top: 1.5rem;
+
+    .drag-hint {
+      position: absolute;
+      left: 50%;
+      bottom: -6px;
+      transform: translateX(-50%);
+      color: var(--muted-2);
+      font-size: 0.72rem;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+
+    .directory-intro {
+      display: grid;
+      grid-template-columns: 0.5fr 1fr;
+      gap: 44px;
+      padding: 90px 0 110px;
+      border-top: 1px solid var(--line);
+    }
+
+    .directory-label {
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 760;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .directory-copy {
+      max-width: 860px;
+    }
+
+    .directory-copy p:first-child {
+      margin: 0;
+      color: #eef4ef;
+      font-size: clamp(1.8rem, 3.8vw, 3.9rem);
+      font-weight: 480;
+      letter-spacing: -0.045em;
+      line-height: 1.08;
+    }
+
+    .directory-copy p:last-child {
+      max-width: 720px;
+      margin: 24px 0 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.7;
+    }
+
+    footer {
+      padding-bottom: 38px;
+    }
+
+    .footer-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      padding-top: 26px;
+      border-top: 1px solid var(--line);
+      color: var(--muted-2);
+      font-size: 0.78rem;
+      line-height: 1.55;
+    }
+
+    .footer-line strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--muted);
+      font-weight: 650;
+    }
+
+    .footer-note {
+      max-width: 720px;
+      text-align: right;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 980px) {
+      :root {
+        --card-w: 270px;
+        --card-h: 360px;
+        --radius: 370px;
       }
-      .ring {
-        position: static;
-        display: contents;
-        transform: none !important;
+
+      .carousel-shell {
+        height: 650px;
       }
+
+      .directory-intro {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      :root {
+        --card-w: min(78vw, 286px);
+        --card-h: 355px;
+        --radius: 250px;
+      }
+
+      .shell {
+        width: min(calc(100% - 24px), var(--max));
+      }
+
+      header {
+        padding-top: 14px;
+      }
+
+      .brand-name {
+        max-width: 205px;
+        font-size: 0.76rem;
+        line-height: 1.25;
+      }
+
+      .nav-pill {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 76px;
+      }
+
+      h1 {
+        font-size: clamp(3.3rem, 17vw, 5.7rem);
+      }
+
+      .directory-section {
+        min-height: 760px;
+        padding-bottom: 60px;
+      }
+
+      .carousel-shell {
+        height: 610px;
+      }
+
+      .orbit {
+        width: 680px;
+      }
+
+      .carousel {
+        top: 45%;
+      }
+
+      .carousel-controls {
+        bottom: 34px;
+      }
+
+      .drag-hint {
+        bottom: 0;
+      }
+
+      .directory-intro {
+        padding: 70px 0 90px;
+      }
+
+      .footer-line {
+        flex-direction: column;
+      }
+
+      .footer-note {
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 520px) {
+      :root {
+        --card-w: min(78vw, 272px);
+        --card-h: 342px;
+        --radius: 205px;
+      }
+
+      .carousel-shell {
+        height: 575px;
+      }
+
       .card {
-        position: static !important;
-        transform: none !important;
-        opacity: 1 !important;
-        width: auto;
+        padding: 24px;
       }
-      .card .go { opacity: 1; transform: none; }
-      .controls { display: none; }
+
+      .card h2 {
+        font-size: 1.75rem;
+      }
+
+      .card p {
+        font-size: 0.87rem;
+      }
+
+      .control {
+        width: 46px;
+        height: 46px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+
+      .ambient {
+        display: none;
+      }
+
+      .carousel {
+        transition: none;
+      }
     }
   </style>
 </head>
+
 <body>
-  <header class="intro">
-    <p class="eyebrow">Edmonds-area topics</p>
-    <h1>Explore stewardship by project type</h1>
-    <p class="lede">
-      Educational paths from the Board of Project Stewardship — what to verify before you hire,
-      not a marketplace bid board.
-    </p>
+  <a class="skip-link" href="#main" target="_self">Skip to content</a>
+
+  <div class="noise" aria-hidden="true"></div>
+  <div class="ambient" aria-hidden="true"></div>
+
+  <header>
+    <div class="shell nav">
+      <a class="brand" href="../index.html" aria-label="The Board of Project Stewardship home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">The Board of Project Stewardship</span>
+      </a>
+
+      <span class="nav-pill">Construction topic directory</span>
+    </div>
   </header>
 
-  <div class="stage" id="stage" aria-roledescription="carousel" aria-label="Topic directory">
-    <div class="ring" id="ring">
-      <a class="card" href="../edmonds.html" data-i="0">
-        <div class="num">01 · Place</div>
-        <h2>Home additions</h2>
-        <p>Bowl height limits, setbacks, and sequencing for Edmonds expansions.</p>
-        <div class="go">Open Edmonds guide →</div>
-      </a>
-      <a class="card" href="../kitchen.html" data-i="1">
-        <div class="num">02 · Remodel</div>
-        <h2>Kitchen remodel</h2>
-        <p>Scope clarity, allowances, and when a permit is required for wet rooms.</p>
-        <div class="go">Kitchen planning →</div>
-      </a>
-      <a class="card" href="../bathrooms.html" data-i="2">
-        <div class="num">03 · Remodel</div>
-        <h2>Bath remodel</h2>
-        <p>Waterproofing assemblies and inspection timing before tile cover-up.</p>
-        <div class="go">Bath guidance →</div>
-      </a>
-      <a class="card" href="../permits.html" data-i="3">
-        <div class="num">04 · Process</div>
-        <h2>Permits</h2>
-        <p>Who pulls, who owns, and how corrections close — before drywall hides work.</p>
-        <div class="go">Permit ownership →</div>
-      </a>
-      <a class="card" href="../coastal-waterproofing.html" data-i="4">
-        <div class="num">05 · Coastal</div>
-        <h2>Coastal durability</h2>
-        <p>Salt air, wind-driven rain, and envelope choices for Puget Sound homes.</p>
-        <div class="go">Coastal notes →</div>
-      </a>
-      <a class="card" href="../how-we-rank.html" data-i="5">
-        <div class="num">06 · Method</div>
-        <h2>How we rank</h2>
-        <p>Six stewardship layers — records and local mastery over ad spend.</p>
-        <div class="go">Ranking method →</div>
-      </a>
-    </div>
-  </div>
+  <main id="main">
+    <section class="shell hero" aria-labelledby="page-title">
+      <div class="eyebrow">Explore by topic</div>
 
-  <div class="controls">
-    <button type="button" id="prev" aria-label="Previous topic">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-    </button>
-    <div class="dots" id="dots" role="tablist" aria-label="Topics"></div>
-    <button type="button" id="next" aria-label="Next topic">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-    </button>
-  </div>
-  <p class="note">Board of Project Stewardship · Drag, swipe, or use arrows · Links go to Board guides</p>
+      <h1 id="page-title">
+        A clearer way to
+        <span>navigate construction.</span>
+      </h1>
+
+      <p>
+        Move through practical homeowner topics covering additions, remodeling,
+        permitting, durability, and contractor evaluation across Edmonds, King,
+        and Snohomish communities.
+      </p>
+    </section>
+
+    <section class="directory-section" aria-label="Interactive construction topic directory">
+      <div class="shell carousel-shell" id="carouselShell">
+        <div class="orbit" aria-hidden="true"></div>
+        <div class="center-glow" aria-hidden="true"></div>
+
+        <div class="carousel" id="carousel">
+          <article class="card" style="--angle: 0deg;" data-index="0">
+            <div class="card-index">
+              <span>01 · Guide</span>
+              <span aria-hidden="true"></span>
+            </div>
+
+            <div class="card-content">
+              <h2>Home additions</h2>
+
+              <p>
+                Start with feasibility, site constraints, structure, access,
+                permitting, sequencing, and how new space connects to the existing home.
+              </p>
+
+              <a class="card-link" href="../edmonds.html">
+                Explore additions
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M4 10h11" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                  <path d="m11 6 4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="card" style="--angle: 60deg;" data-index="1">
+            <div class="card-index">
+              <span>02 · Guide</span>
+              <span aria-hidden="true"></span>
+            </div>
+
+            <div class="card-content">
+              <h2>Kitchen remodel</h2>
+
+              <p>
+                Review layout changes, cabinetry, electrical and plumbing coordination,
+                ventilation, selections, allowances, sequencing, and finish expectations.
+              </p>
+
+              <a class="card-link" href="../kitchen.html">
+                Explore kitchens
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M4 10h11" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                  <path d="m11 6 4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="card" style="--angle: 120deg;" data-index="2">
+            <div class="card-index">
+              <span>03 · Guide</span>
+              <span aria-hidden="true"></span>
+            </div>
+
+            <div class="card-content">
+              <h2>Bath</h2>
+
+              <p>
+                Understand waterproofing, ventilation, plumbing changes, tile assemblies,
+                fixtures, accessibility, inspection requirements, and moisture management.
+              </p>
+
+              <a class="card-link" href="../bathrooms.html">
+                Explore bathrooms
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M4 10h11" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                  <path d="m11 6 4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="card" style="--angle: 180deg;" data-index="3">
+            <div class="card-index">
+              <span>04 · Guide</span>
+              <span aria-hidden="true"></span>
+            </div>
+
+            <div class="card-content">
+              <h2>Permits</h2>
+
+              <p>
+                Learn how permit research, submittals, plan review, corrections,
+                inspections, revisions, and closeout can affect a residential project.
+              </p>
+
+              <a class="card-link" href="../permits.html">
+                Explore permits
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M4 10h11" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                  <path d="m11 6 4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="card" style="--angle: 240deg;" data-index="4">
+            <div class="card-index">
+              <span>05 · Guide</span>
+              <span aria-hidden="true"></span>
+            </div>
+
+            <div class="card-content">
+              <h2>Coastal durability</h2>
+
+              <p>
+                Consider wind-driven rain, salt exposure, drainage, flashing,
+                fasteners, exterior assemblies, maintenance, and material suitability
+                for exposed Pacific Northwest conditions.
+              </p>
+
+              <a class="card-link" href="../coastal-waterproofing.html">
+                Explore durability
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M4 10h11" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                  <path d="m11 6 4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="card" style="--angle: 300deg;" data-index="5">
+            <div class="card-index">
+              <span>06 · Standard</span>
+              <span aria-hidden="true"></span>
+            </div>
+
+            <div class="card-content">
+              <h2>How we rank</h2>
+
+              <p>
+                Review the documented signals, public records, local context,
+                methodology, limitations, and editorial standards used when comparing
+                contractors.
+              </p>
+
+              <a class="card-link" href="../how-we-rank.html">
+                Review methodology
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M4 10h11" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                  <path d="m11 6 4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+        </div>
+
+        <div class="carousel-controls" aria-label="Directory carousel controls">
+          <button class="control" type="button" id="previousButton" aria-label="Previous topic">
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M16 10H5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+              <path d="m9 6-4 4 4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
+          <div class="counter" id="counter" aria-live="polite">01 / 06</div>
+
+          <button class="control" type="button" id="nextButton" aria-label="Next topic">
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M4 10h11" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+              <path d="m11 6 4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="drag-hint">Drag or swipe to rotate</div>
+      </div>
+    </section>
+
+    <section class="shell directory-intro" aria-labelledby="directory-principle">
+      <div class="directory-label">Directory principle</div>
+
+      <div class="directory-copy">
+        <p id="directory-principle">
+          Start with the project type, then move outward to permitting,
+          durability, and contractor evaluation.
+        </p>
+
+        <p>
+          These topics are educational starting points rather than project-specific
+          instructions. Construction conditions, permit requirements, professional
+          design needs, product suitability, and contractor qualifications should be
+          verified for the actual property and scope before decisions are made.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-line">
+      <div>
+        <strong>The Board of Project Stewardship</strong>
+        Edmonds / King &amp; Snohomish construction standards hub
+      </div>
+
+      <div class="footer-note">
+        Educational and illustrative only. Verify current contractor registration,
+        insurance, permit requirements, professional credentials, product information,
+        site conditions, and project-specific requirements independently.
+      </div>
+    </div>
+  </footer>
 
   <script>
-    (function () {
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const ring = document.getElementById('ring');
-      const cards = [...ring.querySelectorAll('.card')];
-      const n = cards.length;
-      const dotsHost = document.getElementById('dots');
+    (() => {
+      "use strict";
+
+      const root = document.documentElement;
+      const shell = document.getElementById("carouselShell");
+      const carousel = document.getElementById("carousel");
+      const cards = Array.from(document.querySelectorAll(".card"));
+      const previousButton = document.getElementById("previousButton");
+      const nextButton = document.getElementById("nextButton");
+      const counter = document.getElementById("counter");
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+      const total = cards.length;
+      const step = 360 / total;
+
       let index = 0;
-      let angle = 0;
-      let target = 0;
-      let dragging = false;
+      let rotation = 0;
       let startX = 0;
-      let startAngle = 0;
+      let startRotation = 0;
+      let dragging = false;
+      let pointerId = null;
+      let moved = false;
 
-      // Build dots
-      cards.forEach((_, i) => {
-        const b = document.createElement('button');
-        b.type = 'button';
-        b.setAttribute('aria-label', 'Go to topic ' + (i + 1));
-        b.addEventListener('click', () => goTo(i));
-        dotsHost.appendChild(b);
+      function wrapIndex(value) {
+        return ((value % total) + total) % total;
+      }
+
+      function normalizeDegrees(value) {
+        let result = value % 360;
+
+        if (result > 180) result -= 360;
+        if (result < -180) result += 360;
+
+        return result;
+      }
+
+      function nearestIndexFromRotation(value) {
+        return wrapIndex(Math.round(-value / step));
+      }
+
+      function updateActiveCard() {
+        const active = wrapIndex(index);
+
+        cards.forEach((card, cardIndex) => {
+          const isActive = cardIndex === active;
+
+          card.classList.toggle("is-active", isActive);
+          card.setAttribute("aria-hidden", isActive ? "false" : "true");
+
+          const link = card.querySelector("a");
+
+          if (link) {
+            link.tabIndex = isActive ? 0 : -1;
+          }
+        });
+
+        counter.textContent =
+          `${String(active + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
+      }
+
+      function render(immediate = false) {
+        if (immediate || reduceMotion.matches) {
+          carousel.style.transition = "none";
+        } else {
+          carousel.style.transition =
+            "transform 650ms cubic-bezier(0.2, 0.72, 0.18, 1)";
+        }
+
+        carousel.style.setProperty("--rotation", `${rotation}deg`);
+        updateActiveCard();
+
+        if (immediate && !reduceMotion.matches) {
+          requestAnimationFrame(() => {
+            carousel.style.transition =
+              "transform 650ms cubic-bezier(0.2, 0.72, 0.18, 1)";
+          });
+        }
+      }
+
+      function goTo(targetIndex) {
+        const currentWrapped = wrapIndex(index);
+        const targetWrapped = wrapIndex(targetIndex);
+
+        let delta = targetWrapped - currentWrapped;
+
+        if (delta > total / 2) delta -= total;
+        if (delta < -total / 2) delta += total;
+
+        index += delta;
+        rotation = -index * step;
+
+        render();
+      }
+
+      function next() {
+        goTo(index + 1);
+      }
+
+      function previous() {
+        goTo(index - 1);
+      }
+
+      nextButton.addEventListener("click", next);
+      previousButton.addEventListener("click", previous);
+
+      shell.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowRight") {
+          event.preventDefault();
+          next();
+        }
+
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          previous();
+        }
+
+        if (event.key === "Home") {
+          event.preventDefault();
+          goTo(0);
+        }
+
+        if (event.key === "End") {
+          event.preventDefault();
+          goTo(total - 1);
+        }
       });
-      const dots = [...dotsHost.querySelectorAll('button')];
 
-      function layout() {
-        if (reduce) {
-          cards.forEach((c) => { c.style.transform = 'none'; c.classList.add('is-front'); });
-          return;
-        }
-        const radius = Math.min(320, window.innerWidth * 0.38);
-        const step = (Math.PI * 2) / n;
-        cards.forEach((card, i) => {
-          const a = angle + i * step;
-          const x = Math.sin(a) * radius;
-          const z = Math.cos(a) * radius;
-          const scale = 0.72 + (z / radius) * 0.28;
-          const opacity = 0.35 + (z / radius + 1) * 0.32;
-          card.style.transform =
-            `translate(-50%, -50%) translateX(${x}px) translateZ(${z}px) rotateY(${a * 180 / Math.PI}deg) scale(${scale})`;
-          card.style.opacity = String(Math.max(0.25, opacity));
-          card.style.zIndex = String(Math.round(z + 100));
-          const isFront = ((i - index) % n + n) % n === 0;
-          // front card is the one closest to camera (smallest angular distance to -angle)
-          card.classList.toggle('is-front', false);
-        });
-        // Determine front: card whose angle is nearest 0 in view space
-        let best = 0, bestScore = Infinity;
-        cards.forEach((card, i) => {
-          const a = ((angle + i * step) % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2);
-          const score = Math.min(a, Math.PI * 2 - a);
-          if (score < bestScore) { bestScore = score; best = i; }
-        });
-        index = best;
-        cards.forEach((c, i) => c.classList.toggle('is-front', i === index));
-        dots.forEach((d, i) => d.setAttribute('aria-current', i === index ? 'true' : 'false'));
-      }
+      shell.tabIndex = 0;
 
-      function goTo(i) {
-        const step = (Math.PI * 2) / n;
-        // rotate so card i faces front (angle + i*step ≈ 0)
-        target = -i * step;
-        index = i;
-      }
+      shell.addEventListener("pointerdown", (event) => {
+        if (event.button !== 0 && event.pointerType === "mouse") return;
 
-      function tick() {
-        if (!reduce) {
-          angle += (target - angle) * 0.08;
-          // normalize drift
-          if (Math.abs(target - angle) < 0.0005) angle = target;
-          layout();
-          requestAnimationFrame(tick);
-        }
-      }
-
-      document.getElementById('prev').addEventListener('click', () => goTo((index - 1 + n) % n));
-      document.getElementById('next').addEventListener('click', () => goTo((index + 1) % n));
-
-      const stage = document.getElementById('stage');
-      stage.addEventListener('pointerdown', (e) => {
-        if (reduce) return;
         dragging = true;
-        startX = e.clientX;
-        startAngle = target;
-        stage.setPointerCapture(e.pointerId);
-      });
-      stage.addEventListener('pointermove', (e) => {
-        if (!dragging) return;
-        const dx = e.clientX - startX;
-        target = startAngle + (dx / 220) * ((Math.PI * 2) / n);
-      });
-      function endDrag() {
-        if (!dragging) return;
-        dragging = false;
-        // snap to nearest
-        const step = (Math.PI * 2) / n;
-        const nearest = Math.round(-target / step);
-        goTo(((nearest % n) + n) % n);
-      }
-      stage.addEventListener('pointerup', endDrag);
-      stage.addEventListener('pointercancel', endDrag);
+        moved = false;
+        pointerId = event.pointerId;
+        startX = event.clientX;
+        startRotation = rotation;
 
-      // Prevent accidental navigation while dragging
-      cards.forEach((c) => {
-        c.addEventListener('click', (e) => {
-          if (Math.abs(target - angle) > 0.02) e.preventDefault();
-          if (!c.classList.contains('is-front') && !reduce) {
-            e.preventDefault();
-            goTo(+c.dataset.i);
+        shell.setPointerCapture?.(pointerId);
+        carousel.style.transition = "none";
+      });
+
+      shell.addEventListener("pointermove", (event) => {
+        if (!dragging || event.pointerId !== pointerId) return;
+
+        const deltaX = event.clientX - startX;
+
+        if (Math.abs(deltaX) > 6) {
+          moved = true;
+        }
+
+        const sensitivity = window.innerWidth < 720 ? 0.34 : 0.24;
+        rotation = startRotation + deltaX * sensitivity;
+
+        carousel.style.setProperty("--rotation", `${rotation}deg`);
+
+        const previewIndex = nearestIndexFromRotation(rotation);
+
+        cards.forEach((card, cardIndex) => {
+          card.classList.toggle("is-active", cardIndex === previewIndex);
+        });
+
+        counter.textContent =
+          `${String(previewIndex + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
+      });
+
+      function finishDrag(event) {
+        if (!dragging) return;
+        if (event && event.pointerId !== pointerId) return;
+
+        dragging = false;
+
+        if (pointerId !== null) {
+          try {
+            shell.releasePointerCapture?.(pointerId);
+          } catch (_) {
+          }
+        }
+
+        pointerId = null;
+
+        const snapped = nearestIndexFromRotation(rotation);
+        const currentWrapped = wrapIndex(index);
+
+        let delta = snapped - currentWrapped;
+
+        if (delta > total / 2) delta -= total;
+        if (delta < -total / 2) delta += total;
+
+        index += delta;
+        rotation = -index * step;
+
+        render();
+      }
+
+      shell.addEventListener("pointerup", finishDrag);
+      shell.addEventListener("pointercancel", finishDrag);
+
+      shell.addEventListener(
+        "click",
+        (event) => {
+          if (moved) {
+            event.preventDefault();
+            event.stopPropagation();
+            moved = false;
+          }
+        },
+        true
+      );
+
+      cards.forEach((card, cardIndex) => {
+        card.addEventListener("click", (event) => {
+          const active = wrapIndex(index);
+
+          if (cardIndex !== active) {
+            event.preventDefault();
+            goTo(cardIndex);
           }
         });
       });
 
-      window.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') goTo((index - 1 + n) % n);
-        if (e.key === 'ArrowRight') goTo((index + 1) % n);
+      function updateAmbient(event) {
+        if (reduceMotion.matches) return;
+
+        const x = Math.max(
+          0,
+          Math.min(100, (event.clientX / window.innerWidth) * 100)
+        );
+
+        const y = Math.max(
+          0,
+          Math.min(100, (event.clientY / window.innerHeight) * 100)
+        );
+
+        root.style.setProperty("--pointer-x", `${x.toFixed(2)}%`);
+        root.style.setProperty("--pointer-y", `${y.toFixed(2)}%`);
+      }
+
+      window.addEventListener("pointermove", updateAmbient, {
+        passive: true
       });
 
-      window.addEventListener('resize', layout);
-      goTo(0);
-      if (reduce) layout();
-      else requestAnimationFrame(tick);
+      reduceMotion.addEventListener?.("change", () => {
+        root.style.setProperty("--pointer-x", "50%");
+        root.style.setProperty("--pointer-y", "34%");
+        render(true);
+      });
+
+      render(true);
     })();
   </script>
 
   <script>
     (function () {
-      var id = document.documentElement.getAttribute('data-section-id');
+      var id = document.documentElement.getAttribute("data-section-id");
       function report() {
-        var h = Math.ceil(Math.max(document.documentElement.scrollHeight, document.body ? document.body.scrollHeight : 0));
+        var h = Math.ceil(Math.max(
+          document.documentElement.scrollHeight,
+          document.body ? document.body.scrollHeight : 0
+        ));
         if (window.parent && window.parent !== window && id) {
-          window.parent.postMessage({ type: 'board-section:resize', id: id, height: h }, window.location.origin);
+          window.parent.postMessage({ type: "board-section:resize", id: id, height: h }, window.location.origin);
         }
       }
-      window.addEventListener('load', report);
-      window.addEventListener('resize', report);
+      window.addEventListener("load", report);
+      window.addEventListener("resize", report);
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(report);
       setTimeout(report, 250);
       setTimeout(report, 1200);
     })();
   </script>
+
 </body>
 </html>
