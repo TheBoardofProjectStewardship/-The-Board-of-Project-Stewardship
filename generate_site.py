@@ -1468,6 +1468,59 @@ def build_walkthrough_home_section(prefix: str = "") -> str:
 """
 
 
+def board_section_iframe(frame_id: str, filename: str, title: str, height: int) -> str:
+    """Same-origin embed of a static section document under ./sections/.
+
+    Each section posts {type:'board-section:resize', id, height}. The listener
+    matches both the iframe id and contentWindow so several embeds on one page
+    stay independent. Paths are relative so GitHub Pages and the custom domain
+    resolve the same files.
+    """
+    src = f"./sections/{filename}"
+    fid = json.dumps(frame_id)
+    return f"""    <iframe
+      id="{esc(frame_id)}"
+      class="board-section-frame"
+      src="{src}"
+      title="{esc(title)}"
+      loading="lazy"
+      style="display:block;width:100%;height:{int(height)}px;border:0;border-radius:18px;background:#0a0a0a;"
+    ></iframe>
+    <script>
+    (function () {{
+      var frame = document.getElementById({fid});
+      if (!frame) return;
+      window.addEventListener('message', function (event) {{
+        if (!event.data || event.data.type !== 'board-section:resize') return;
+        if (event.data.id !== {fid}) return;
+        if (event.source !== frame.contentWindow) return;
+        var trusted = new URL(frame.src, window.location.href).origin;
+        if (event.origin !== trusted) return;
+        var next = Number(event.data.height);
+        if (Number.isFinite(next) && next >= 280 && next <= 2200) {{
+          frame.style.height = Math.ceil(next) + 'px';
+        }}
+      }});
+    }})();
+    </script>"""
+
+
+def board_section_embed(
+    section_id: str,
+    frame_id: str,
+    filename: str,
+    title: str,
+    height: int,
+    extra_class: str = "mb-14",
+) -> str:
+    frame = board_section_iframe(frame_id, filename, title, height)
+    return (
+        f'    <section id="{esc(section_id)}" class="{extra_class}">\n'
+        f"{frame}\n"
+        f"    </section>\n"
+    )
+
+
 def board_organization_website_ld() -> dict:
     """Board Organization + WebSite JSON-LD (Packet 03). Not LocalBusiness/GC."""
     return {
@@ -3160,18 +3213,14 @@ def build_about() -> str:
         content_open = '  <div class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">'
     body = f"""{hero_html}
 {content_open}
-    <section class="bg-charcoal rounded-xl p-8 md:p-10 border border-primary/25 mb-12 relative overflow-hidden">
-      <div class="absolute -bottom-20 -right-20 w-56 h-56 bg-primary/15 blur-[70px] pointer-events-none rounded-full"></div>
-      <h2 class="text-2xl font-black text-white mb-4 tracking-tight flex items-center gap-3 relative z-10">
-        <i class="fas fa-gavel text-secondary"></i> Mission
-      </h2>
-      <p class="text-slate-300 leading-relaxed font-light max-w-3xl relative z-10">
-        {esc(BOARD_ONE_LINER)}
-        Homeowners in Edmonds and the greater King &amp; Snohomish market can evaluate firms against published criteria —
-        bonding capacity, technical review, a named project steward, and proven local mastery — not ad spend.
-        The Board does not bid or build projects.
-      </p>
-    </section>
+{board_section_embed(
+        "mission",
+        "mesh-flow-mission",
+        "mesh-flow-backdrop.html",
+        "Mission — Board of Project Stewardship",
+        560,
+        extra_class="mb-12",
+    )}
 
 {build_walkthrough_home_section()}
 
@@ -3272,7 +3321,20 @@ def build_about() -> str:
       </div>
     </section>
 
-{integrity_shield_html()}
+{board_section_embed(
+        "how-we-evaluate",
+        "focus-reveal-standards",
+        "focus-reveal-standards.html",
+        "How we evaluate — Board of Project Stewardship",
+        640,
+    )}
+{board_section_embed(
+        "integrity-shield",
+        "integrity-shield-showcase",
+        "integrity-shield-showcase.html",
+        "Integrity Shield — six stewardship layers",
+        780,
+    )}
 
     <section class="mb-14">
       <div class="mb-8 border-b border-white/10 pb-4">
@@ -3384,6 +3446,13 @@ def build_about() -> str:
       </div>
     </section>
 
+{board_section_embed(
+        "topic-carousel",
+        "circular-directory",
+        "circular-directory.html",
+        "Edmonds topic directory — Board of Project Stewardship",
+        760,
+    )}
     <section class="mb-8">
       <div class="mb-6 border-b border-white/10 pb-4">
         <span class="text-secondary text-xs font-bold uppercase tracking-widest">Directories</span>
@@ -5943,6 +6012,13 @@ def build_how_we_rank_page() -> str:
             ],
             title="Ranking habits in pictures (illustrative)",
         )
+        + board_section_embed(
+            "how-we-evaluate",
+            "focus-reveal-standards",
+            "focus-reveal-standards.html",
+            "How we evaluate — Board of Project Stewardship",
+            640,
+        )
         + _hub_section(
             "Entity clarity",
             f"""      <p class="text-slate-300 text-sm font-light leading-relaxed mb-3">The Board of Project Stewardship publishes standards and directories for Edmonds and King &amp; Snohomish Counties. <strong class="text-white">{esc(PPG['name'])}</strong> appears as <strong class="text-white">Board directory #1</strong> — a hire ranking homeowners can follow to <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(PPG['url'])}</a> — not as owner, parent, or brand of the Board.</p>
@@ -5967,6 +6043,13 @@ def build_how_we_rank_page() -> str:
             "Good Steward verification habit",
             f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Before deposit or start date: match the contract legal name to <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>, confirm active license / bond / insurance status, and keep a screenshot or PDF of the result in the owner file.</p>
       <p class="text-sm text-slate-400 font-light"><a href="./verify-contractor.html" class="text-secondary hover:underline">Verify contractor walkthrough</a> · <a href="./good-steward.html" class="text-secondary hover:underline">Good Steward</a> · <a href="./contact.html" class="text-secondary hover:underline">Editorial contact</a></p>""",
+        )
+        + board_section_embed(
+            "integrity-shield",
+            "integrity-shield-showcase",
+            "integrity-shield-showcase.html",
+            "Integrity Shield — six stewardship layers",
+            780,
         )
         + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Ranking FAQ')}\n  </div>\n"
         + education_closing("verify", "directories", "default", official_keys=["lni_verify", "lni_home"])
@@ -6116,6 +6199,7 @@ def build_city_hub_page(
     official_extra: list[tuple[str, str]] | None = None,
     photo_strip: list[tuple[str, str, str]] | None = None,
     photo_strip_title: str = "Field context (illustrative)",
+    lead_embed: str = "",
 ) -> str:
     faqs = [
         (
@@ -6159,6 +6243,7 @@ def build_city_hub_page(
             blurb,
         )
         + strip
+        + lead_embed
         + _hub_section(
             "Permitting orientation",
             f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-4">{esc(permit_blurb)}</p>
@@ -6634,6 +6719,13 @@ def build_about_page() -> str:
             ],
             title="How the Board works (illustrative)",
         )
+        + board_section_embed(
+            "mission",
+            "mesh-flow-mission",
+            "mesh-flow-backdrop.html",
+            "Mission — Board of Project Stewardship",
+            560,
+        )
         + _hub_section(
             "What we are",
             f"""      <ul class="space-y-2 text-sm text-slate-300 font-light list-disc pl-5 mb-4">
@@ -6665,8 +6757,12 @@ def build_about_page() -> str:
                 ]
             ),
         )
-        + integrity_shield_html(
-            "Six stewardship layers the Board uses when screening contractors — public records and local mastery, not paid placement."
+        + board_section_embed(
+            "integrity-shield",
+            "integrity-shield-showcase",
+            "integrity-shield-showcase.html",
+            "Integrity Shield — six stewardship layers",
+            780,
         )
         + education_closing("default", "directories", "learn", official_keys=["lni_verify", "lni_hire_smart", "lni_home", "mybuildingpermit", "edmonds"])
         + f'  <div class="max-w-6xl mx-auto px-4 pb-16">\n{faq_section(faqs, "About FAQ")}\n  </div>\n'
@@ -8020,6 +8116,13 @@ def build_edmonds_hub() -> str:
             ),
         ],
         photo_strip_title="Edmonds work in pictures (illustrative)",
+        lead_embed=board_section_embed(
+            "topic-carousel",
+            "circular-directory",
+            "circular-directory.html",
+            "Edmonds topics — Board of Project Stewardship",
+            760,
+        ),
     )
 
 
@@ -9359,6 +9462,13 @@ def build_directory_hub() -> str:
                 ),
             ],
             title="Directory habits in pictures (illustrative)",
+        )
+        + board_section_embed(
+            "topic-carousel",
+            "circular-directory",
+            "circular-directory.html",
+            "Edmonds topic directory — Board of Project Stewardship",
+            760,
         )
         + f"""  <section class="max-w-6xl mx-auto px-4 pb-8">
     <div class="bg-primary/10 border border-secondary/30 rounded-xl p-6 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">

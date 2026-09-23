@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en" data-section-id="integrity-shield-showcase">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, follow" />
+  <base target="_top" />
+  <title>Integrity Shield Showcase — Board of Project Stewardship</title>
+  <meta name="description" content="A quiet look at the six stewardship layers the Board of Project Stewardship uses when screening contractors in Edmonds and coastal King &amp; Snohomish Counties." />
+  <style>
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url('../assets/fonts/InterVariable.woff2') format('woff2');
+    }
+    :root {
+      --obsidian: #0a0a0a;
+      --charcoal: #121212;
+      --panel: #161616;
+      --line: rgba(255,255,255,0.08);
+      --muted: #94a3b8;
+      --soft: #cbd5e1;
+      --white: #f8fafc;
+      --primary: #166534;
+      --accent: #4ade80;
+      --glow: rgba(74, 222, 128, 0.22);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: Inter, system-ui, -apple-system, sans-serif;
+      background: var(--obsidian);
+      color: var(--soft);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    .stage {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: grid;
+      grid-template-columns: 1fr 1.15fr 0.95fr;
+      gap: 0;
+      position: relative;
+      background:
+        radial-gradient(ellipse 60% 50% at 55% 45%, rgba(22,101,52,0.12), transparent 60%),
+        radial-gradient(ellipse 40% 35% at 20% 80%, rgba(74,222,128,0.04), transparent 50%),
+        var(--obsidian);
+    }
+    .col {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(1.5rem, 4vw, 3.5rem);
+    }
+    .col-left { align-items: flex-start; }
+    .col-right { align-items: flex-end; text-align: right; }
+    .eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-size: clamp(2rem, 4.2vw, 3.4rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      max-width: 11ch;
+    }
+    .lede {
+      margin-top: 1.25rem;
+      font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--muted);
+      max-width: 32ch;
+    }
+    .cta {
+      margin-top: 2rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.85rem 1.35rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--primary), #14532d);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      border: 1px solid rgba(74,222,128,0.35);
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.4), 0 12px 40px -12px var(--glow);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .cta:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(0,0,0,0.4), 0 18px 48px -10px var(--glow); }
+    .cta svg { width: 16px; height: 16px; }
+    .meta {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #64748b;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+    .layer-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      max-width: 28ch;
+    }
+    .layer-list li {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--soft);
+      padding: 0.55rem 0.75rem;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      transition: background 0.25s, border-color 0.25s, color 0.25s;
+      cursor: default;
+    }
+    .layer-list li.active,
+    .layer-list li:hover {
+      background: rgba(74,222,128,0.06);
+      border-color: rgba(74,222,128,0.25);
+      color: var(--white);
+    }
+    .layer-list .n {
+      display: inline-block;
+      width: 1.5rem;
+      color: var(--accent);
+      font-variant-numeric: tabular-nums;
+      font-weight: 700;
+      font-size: 0.75rem;
+    }
+    .viewport-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 420px;
+    }
+    #canvas-host {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    #canvas-host canvas { display: block; width: 100% !important; height: 100% !important; }
+    .static-shield {
+      display: none;
+      width: min(360px, 80%);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 40% 35%, rgba(74,222,128,0.25), transparent 45%),
+        radial-gradient(circle at 60% 70%, rgba(22,101,52,0.4), transparent 50%),
+        linear-gradient(160deg, #1f2937, #0a0a0a);
+      border: 1px solid rgba(74,222,128,0.3);
+      box-shadow:
+        inset 0 0 60px rgba(74,222,128,0.08),
+        0 30px 80px -20px rgba(0,0,0,0.8),
+        0 0 40px -10px var(--glow);
+      position: relative;
+    }
+    .static-shield::before {
+      content: "";
+      position: absolute;
+      inset: 18%;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: inset 0 0 30px rgba(74,222,128,0.12);
+    }
+    .static-shield::after {
+      content: "6";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-size: 4.5rem;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: -0.04em;
+      text-shadow: 0 0 40px var(--glow);
+    }
+    .footnote {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 1.25rem;
+      text-align: center;
+      font-size: 0.7rem;
+      color: #64748b;
+      font-weight: 300;
+      z-index: 3;
+      padding: 0 1rem;
+    }
+    @media (max-width: 960px) {
+      .stage {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto minmax(380px, 48vh) auto;
+        min-height: auto;
+      }
+      .col { padding: 2rem 1.5rem 1rem; }
+      .col-right { align-items: flex-start; text-align: left; padding-bottom: 3.5rem; }
+      h1 { max-width: none; }
+      .lede { max-width: 48ch; }
+      .layer-list { max-width: none; }
+      .viewport-wrap { min-height: 380px; order: 0; }
+      .col-left { order: -1; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #canvas-host { display: none; }
+      .static-shield { display: block; }
+      .cta { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <section class="stage" aria-label="Integrity Shield showcase">
+    <div class="col col-left">
+      <p class="eyebrow">Integrity Shield</p>
+      <h1>Six layers of project stewardship</h1>
+      <p class="lede">
+        An independent construction standards hub for Edmonds and coastal King &amp; Snohomish Counties.
+        Screening rests on public records, local mastery, and clear permit ownership — not marketing spend.
+      </p>
+      <a class="cta" href="#layers" target="_self">
+        Explore the six layers
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="viewport-wrap" aria-hidden="true">
+      <div id="canvas-host"></div>
+      <div class="static-shield" role="img" aria-label="Stylized Integrity Shield with six stewardship layers"></div>
+    </div>
+
+    <div class="col col-right">
+      <p class="meta">Stewardship layers</p>
+      <ul class="layer-list" id="layer-list">
+        <li data-i="0"><span class="n">01</span> Financial Solvency</li>
+        <li data-i="1"><span class="n">02</span> Technical Review / McMorrough Protocol</li>
+        <li data-i="2"><span class="n">03</span> Project Steward</li>
+        <li data-i="3"><span class="n">04</span> Local Mastery</li>
+        <li data-i="4"><span class="n">05</span> WA L&amp;I License</li>
+        <li data-i="5"><span class="n">06</span> Permit ownership</li>
+      </ul>
+    </div>
+
+    <p class="footnote">Board of Project Stewardship · Editorial standards, not a certification product</p>
+  </section>
+
+  <!-- Deep-link target for same-page /standards-style embeds -->
+  <div id="layers" hidden></div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module">
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) {
+      document.querySelectorAll('.layer-list li')[0]?.classList.add('active');
+    } else {
+      boot();
+    }
+
+    async function boot() {
+      const THREE = await import('three');
+      const host = document.getElementById('canvas-host');
+      const list = document.getElementById('layer-list');
+      const items = [...list.querySelectorAll('li')];
+
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      renderer.setClearColor(0x000000, 0);
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      host.appendChild(renderer.domElement);
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
+      camera.position.set(0, 0.15, 5.2);
+
+      const key = new THREE.DirectionalLight(0xb8ffd0, 1.35);
+      key.position.set(3.2, 4.5, 2.8);
+      scene.add(key);
+      const fill = new THREE.DirectionalLight(0x6b8cae, 0.45);
+      fill.position.set(-3, -1, 2);
+      scene.add(fill);
+      const rim = new THREE.PointLight(0x4ade80, 1.1, 12);
+      rim.position.set(-1.5, 1.2, -2.5);
+      scene.add(rim);
+      scene.add(new THREE.AmbientLight(0x1a2e24, 0.55));
+
+      const root = new THREE.Group();
+      scene.add(root);
+
+      // Knurled ring texture (procedural canvas)
+      function knurlMap(size = 256) {
+        const c = document.createElement('canvas');
+        c.width = c.height = size;
+        const ctx = c.getContext('2d');
+        ctx.fillStyle = '#1a1a1a';
+        ctx.fillRect(0, 0, size, size);
+        for (let i = 0; i < size; i += 3) {
+          ctx.fillStyle = i % 6 === 0 ? '#2a2a2a' : '#222';
+          ctx.fillRect(i, 0, 1, size);
+        }
+        for (let y = 0; y < size; y += 8) {
+          ctx.fillStyle = 'rgba(74,222,128,0.04)';
+          ctx.fillRect(0, y, size, 1);
+        }
+        const tex = new THREE.CanvasTexture(c);
+        tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+        tex.repeat.set(8, 1);
+        return tex;
+      }
+      const knurl = knurlMap();
+
+      const metal = new THREE.MeshStandardMaterial({
+        color: 0x1c1c1c,
+        metalness: 0.85,
+        roughness: 0.35,
+        envMapIntensity: 0.8,
+      });
+      const accentMat = new THREE.MeshStandardMaterial({
+        color: 0x4ade80,
+        metalness: 0.55,
+        roughness: 0.28,
+        emissive: 0x14532d,
+        emissiveIntensity: 0.35,
+      });
+      const glassMat = new THREE.MeshPhysicalMaterial({
+        color: 0x0f1f16,
+        metalness: 0.1,
+        roughness: 0.15,
+        transmission: 0.35,
+        thickness: 0.6,
+        transparent: true,
+        opacity: 0.92,
+      });
+      const knurlMat = new THREE.MeshStandardMaterial({
+        color: 0x222222,
+        metalness: 0.9,
+        roughness: 0.4,
+        map: knurl,
+        bumpMap: knurl,
+        bumpScale: 0.04,
+      });
+
+      // Outer knurled bezel
+      const bezel = new THREE.Mesh(new THREE.TorusGeometry(1.55, 0.12, 24, 96), knurlMat);
+      bezel.rotation.x = Math.PI / 2;
+      root.add(bezel);
+
+      // Inner glass disc (shield face)
+      const face = new THREE.Mesh(new THREE.CylinderGeometry(1.35, 1.35, 0.12, 64), glassMat);
+      root.add(face);
+
+      // Center hub
+      const hub = new THREE.Mesh(new THREE.CylinderGeometry(0.32, 0.38, 0.22, 48), metal);
+      hub.position.y = 0.08;
+      root.add(hub);
+      const hubCap = new THREE.Mesh(new THREE.SphereGeometry(0.18, 32, 16), accentMat);
+      hubCap.position.y = 0.22;
+      root.add(hubCap);
+
+      // Six stewardship layer arcs / plates
+      const layerGroup = new THREE.Group();
+      root.add(layerGroup);
+      const plates = [];
+      const labels = [
+        'Financial Solvency',
+        'Technical Review',
+        'Project Steward',
+        'Local Mastery',
+        'WA L&I License',
+        'Permit ownership',
+      ];
+
+      for (let i = 0; i < 6; i++) {
+        const angle = (i / 6) * Math.PI * 2 - Math.PI / 2;
+        const g = new THREE.Group();
+        const plate = new THREE.Mesh(
+          new THREE.BoxGeometry(0.55, 0.08, 0.72),
+          metal.clone()
+        );
+        plate.material.color = new THREE.Color(0x1e1e1e);
+        // slight bevel via edge accent strip
+        const strip = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.02, 0.04), accentMat.clone());
+        strip.position.z = 0.34;
+        strip.position.y = 0.05;
+        g.add(plate, strip);
+
+        // outer marker pin
+        const pin = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 0.16, 16), accentMat.clone());
+        pin.rotation.z = Math.PI / 2;
+        pin.position.set(0, 0.06, -0.42);
+        g.add(pin);
+
+        const r = 0.95;
+        g.position.set(Math.cos(angle) * r, 0.18, Math.sin(angle) * r);
+        g.rotation.y = -angle + Math.PI / 2;
+        g.userData = { i, baseY: 0.18 };
+        layerGroup.add(g);
+        plates.push(g);
+      }
+
+      // Soft ground glow disc
+      const glow = new THREE.Mesh(
+        new THREE.CircleGeometry(2.2, 64),
+        new THREE.MeshBasicMaterial({ color: 0x4ade80, transparent: true, opacity: 0.06 })
+      );
+      glow.rotation.x = -Math.PI / 2;
+      glow.position.y = -0.55;
+      root.add(glow);
+
+      let active = 0;
+      function setActive(i) {
+        active = ((i % 6) + 6) % 6;
+        items.forEach((el, idx) => el.classList.toggle('active', idx === active));
+        plates.forEach((p, idx) => {
+          const on = idx === active;
+          p.children[0].material.emissive = new THREE.Color(on ? 0x14532d : 0x000000);
+          p.children[0].material.emissiveIntensity = on ? 0.45 : 0;
+          p.children[1].material.emissiveIntensity = on ? 0.8 : 0.35;
+        });
+      }
+      setActive(0);
+
+      items.forEach((el) => {
+        el.addEventListener('pointerenter', () => setActive(+el.dataset.i));
+        el.addEventListener('focus', () => setActive(+el.dataset.i));
+        el.tabIndex = 0;
+      });
+
+      let t = 0;
+      let mx = 0, my = 0, tx = 0, ty = 0;
+      host.addEventListener('pointermove', (e) => {
+        const r = host.getBoundingClientRect();
+        tx = ((e.clientX - r.left) / r.width - 0.5) * 0.35;
+        ty = ((e.clientY - r.top) / r.height - 0.5) * 0.25;
+      });
+
+      function resize() {
+        const w = host.clientWidth || 1;
+        const h = host.clientHeight || 1;
+        renderer.setSize(w, h, false);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      let lastCycle = 0;
+      function frame(now) {
+        requestAnimationFrame(frame);
+        t = now * 0.001;
+        mx += (tx - mx) * 0.05;
+        my += (ty - my) * 0.05;
+
+        // subtle camera drift
+        camera.position.x = Math.sin(t * 0.22) * 0.25 + mx;
+        camera.position.y = 0.2 + Math.cos(t * 0.18) * 0.12 - my;
+        camera.lookAt(0, 0.05, 0);
+
+        root.rotation.y = t * 0.12 + mx * 0.4;
+        bezel.rotation.z = t * 0.08;
+        hubCap.rotation.y = -t * 0.4;
+
+        plates.forEach((p, idx) => {
+          const lift = idx === active ? 0.12 : 0;
+          p.position.y = p.userData.baseY + lift + Math.sin(t * 1.2 + idx) * 0.015;
+        });
+
+        // auto-cycle layers every 3.2s if idle
+        if (now - lastCycle > 3200) {
+          lastCycle = now;
+          setActive(active + 1);
+        }
+
+        renderer.render(scene, camera);
+      }
+      requestAnimationFrame(frame);
+
+      // Pause auto-cycle while hovering list
+      list.addEventListener('pointerenter', () => { lastCycle = performance.now() + 8000; });
+    }
+  </script>
+
+  <script>
+    (function () {
+      var id = document.documentElement.getAttribute('data-section-id');
+      function report() {
+        var h = Math.ceil(Math.max(document.documentElement.scrollHeight, document.body ? document.body.scrollHeight : 0));
+        if (window.parent && window.parent !== window && id) {
+          window.parent.postMessage({ type: 'board-section:resize', id: id, height: h }, window.location.origin);
+        }
+      }
+      window.addEventListener('load', report);
+      window.addEventListener('resize', report);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(report);
+      setTimeout(report, 250);
+      setTimeout(report, 1200);
+    })();
+  </script>
+</body>
+</html>

@@ -541,18 +541,34 @@
   </section>
   <noscript><style>.flashlight-hero .hero-layer-wire,.flashlight-hero .hero-hint,.flashlight-hero .hero-cursor{display:none!important}</style></noscript>
   <div class="max-w-6xl mx-auto px-4 pt-14 relative z-20 pb-24">
-    <section class="bg-charcoal rounded-xl p-8 md:p-10 border border-primary/25 mb-12 relative overflow-hidden">
-      <div class="absolute -bottom-20 -right-20 w-56 h-56 bg-primary/15 blur-[70px] pointer-events-none rounded-full"></div>
-      <h2 class="text-2xl font-black text-white mb-4 tracking-tight flex items-center gap-3 relative z-10">
-        <i class="fas fa-gavel text-secondary"></i> Mission
-      </h2>
-      <p class="text-slate-300 leading-relaxed font-light max-w-3xl relative z-10">
-        The Board of Project Stewardship publishes construction standards and contractor directories for Edmonds and King &amp; Snohomish Counties — shortlists firms homeowners can hire with confidence.
-        Homeowners in Edmonds and the greater King &amp; Snohomish market can evaluate firms against published criteria —
-        bonding capacity, technical review, a named project steward, and proven local mastery — not ad spend.
-        The Board does not bid or build projects.
-      </p>
+    <section id="mission" class="mb-12">
+    <iframe
+      id="mesh-flow-mission"
+      class="board-section-frame"
+      src="./sections/mesh-flow-backdrop.html"
+      title="Mission — Board of Project Stewardship"
+      loading="lazy"
+      style="display:block;width:100%;height:560px;border:0;border-radius:18px;background:#0a0a0a;"
+    ></iframe>
+    <script>
+    (function () {
+      var frame = document.getElementById("mesh-flow-mission");
+      if (!frame) return;
+      window.addEventListener('message', function (event) {
+        if (!event.data || event.data.type !== 'board-section:resize') return;
+        if (event.data.id !== "mesh-flow-mission") return;
+        if (event.source !== frame.contentWindow) return;
+        var trusted = new URL(frame.src, window.location.href).origin;
+        if (event.origin !== trusted) return;
+        var next = Number(event.data.height);
+        if (Number.isFinite(next) && next >= 280 && next <= 2200) {
+          frame.style.height = Math.ceil(next) + 'px';
+        }
+      });
+    })();
+    </script>
     </section>
+
 
   <section id="build-walkthrough" class="mb-14">
     <div class="mb-6 border-b border-white/10 pb-4">
@@ -836,60 +852,62 @@
       </div>
     </section>
 
-    <section id="integrity-shield" class="mb-14">
-      <div class="mb-8 border-b border-white/10 pb-4">
-        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Integrity Shield</span>
-        <h2 class="text-3xl font-black text-white tracking-tight flex items-center gap-3">
-          <i class="fas fa-shield-halved text-secondary" aria-hidden="true"></i>
-          <span>Six layers of project stewardship</span>
-        </h2>
-        <p class="text-slate-400 font-light mt-2 max-w-3xl">Six layers the Board uses when screening contractors — public records, local mastery, and clear permit ownership. Not paid placement and not a certification product.</p>
-      </div>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="bg-charcoal border border-white/10 hover:border-primary/40 rounded-xl p-6 card-hover">
-          <div class="w-11 h-11 rounded-lg bg-primary/20 border border-secondary/30 flex items-center justify-center mb-4">
-            <i class="fas fa-scale-balanced text-secondary text-lg" aria-hidden="true"></i>
-          </div>
-          <h3 class="text-lg font-black text-white mb-2 tracking-tight">Financial Solvency</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Active bonding capacity reviewed against project loads to reduce over-leveraging risk.</p>
-        </div>
-        <div class="bg-charcoal border border-white/10 hover:border-primary/40 rounded-xl p-6 card-hover">
-          <div class="w-11 h-11 rounded-lg bg-primary/20 border border-secondary/30 flex items-center justify-center mb-4">
-            <i class="fas fa-ruler-combined text-secondary text-lg" aria-hidden="true"></i>
-          </div>
-          <h3 class="text-lg font-black text-white mb-2 tracking-tight">Technical Review (McMorrough Protocol)</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Portfolio review against architecture and construction reference standards using the McMorrough Protocol — an editorial lens for drawings, detailing, and completed work. Not a professional license or certification.</p>
-        </div>
-        <div class="bg-charcoal border border-white/10 hover:border-primary/40 rounded-xl p-6 card-hover">
-          <div class="w-11 h-11 rounded-lg bg-primary/20 border border-secondary/30 flex items-center justify-center mb-4">
-            <i class="fas fa-user-tie text-secondary text-lg" aria-hidden="true"></i>
-          </div>
-          <h3 class="text-lg font-black text-white mb-2 tracking-tight">Project Steward</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Expectation of a designated project steward for continuity (no salesman handoffs).</p>
-        </div>
-        <div class="bg-charcoal border border-white/10 hover:border-primary/40 rounded-xl p-6 card-hover">
-          <div class="w-11 h-11 rounded-lg bg-primary/20 border border-secondary/30 flex items-center justify-center mb-4">
-            <i class="fas fa-map-location-dot text-secondary text-lg" aria-hidden="true"></i>
-          </div>
-          <h3 class="text-lg font-black text-white mb-2 tracking-tight">Local Mastery</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Proven navigation of Edmonds Bowl height restrictions, permits, and critical areas across King and Snohomish jurisdictions.</p>
-        </div>
-        <div class="bg-charcoal border border-white/10 hover:border-primary/40 rounded-xl p-6 card-hover">
-          <div class="w-11 h-11 rounded-lg bg-primary/20 border border-secondary/30 flex items-center justify-center mb-4">
-            <i class="fas fa-id-card text-secondary text-lg" aria-hidden="true"></i>
-          </div>
-          <h3 class="text-lg font-black text-white mb-2 tracking-tight">WA L&amp;I License</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Preference for firms with active Washington contractor registration. Homeowners should re-verify status at <a href="https://secure.lni.wa.gov/verify/" target="_blank" rel="noopener" class="text-secondary hover:underline">L&amp;I Verify</a> before hiring.</p>
-        </div>
-        <div class="bg-charcoal border border-white/10 hover:border-primary/40 rounded-xl p-6 card-hover">
-          <div class="w-11 h-11 rounded-lg bg-primary/20 border border-secondary/30 flex items-center justify-center mb-4">
-            <i class="fas fa-stamp text-secondary text-lg" aria-hidden="true"></i>
-          </div>
-          <h3 class="text-lg font-black text-white mb-2 tracking-tight">Permit ownership</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Clear answers on who pulls and owns each permit, who schedules inspections, and who closes corrections before cover-up. The Board does not issue permits.</p>
-        </div>
-      </div>
+    <section id="how-we-evaluate" class="mb-14">
+    <iframe
+      id="focus-reveal-standards"
+      class="board-section-frame"
+      src="./sections/focus-reveal-standards.html"
+      title="How we evaluate — Board of Project Stewardship"
+      loading="lazy"
+      style="display:block;width:100%;height:640px;border:0;border-radius:18px;background:#0a0a0a;"
+    ></iframe>
+    <script>
+    (function () {
+      var frame = document.getElementById("focus-reveal-standards");
+      if (!frame) return;
+      window.addEventListener('message', function (event) {
+        if (!event.data || event.data.type !== 'board-section:resize') return;
+        if (event.data.id !== "focus-reveal-standards") return;
+        if (event.source !== frame.contentWindow) return;
+        var trusted = new URL(frame.src, window.location.href).origin;
+        if (event.origin !== trusted) return;
+        var next = Number(event.data.height);
+        if (Number.isFinite(next) && next >= 280 && next <= 2200) {
+          frame.style.height = Math.ceil(next) + 'px';
+        }
+      });
+    })();
+    </script>
     </section>
+
+    <section id="integrity-shield" class="mb-14">
+    <iframe
+      id="integrity-shield-showcase"
+      class="board-section-frame"
+      src="./sections/integrity-shield-showcase.html"
+      title="Integrity Shield — six stewardship layers"
+      loading="lazy"
+      style="display:block;width:100%;height:780px;border:0;border-radius:18px;background:#0a0a0a;"
+    ></iframe>
+    <script>
+    (function () {
+      var frame = document.getElementById("integrity-shield-showcase");
+      if (!frame) return;
+      window.addEventListener('message', function (event) {
+        if (!event.data || event.data.type !== 'board-section:resize') return;
+        if (event.data.id !== "integrity-shield-showcase") return;
+        if (event.source !== frame.contentWindow) return;
+        var trusted = new URL(frame.src, window.location.href).origin;
+        if (event.origin !== trusted) return;
+        var next = Number(event.data.height);
+        if (Number.isFinite(next) && next >= 280 && next <= 2200) {
+          frame.style.height = Math.ceil(next) + 'px';
+        }
+      });
+    })();
+    </script>
+    </section>
+
 
     <section class="mb-14">
       <div class="mb-8 border-b border-white/10 pb-4">
@@ -999,6 +1017,34 @@
           Open Edmonds directory <i class="fas fa-arrow-right ml-1 text-xs"></i>
         </a>
       </div>
+    </section>
+
+    <section id="topic-carousel" class="mb-14">
+    <iframe
+      id="circular-directory"
+      class="board-section-frame"
+      src="./sections/circular-directory.html"
+      title="Edmonds topic directory — Board of Project Stewardship"
+      loading="lazy"
+      style="display:block;width:100%;height:760px;border:0;border-radius:18px;background:#0a0a0a;"
+    ></iframe>
+    <script>
+    (function () {
+      var frame = document.getElementById("circular-directory");
+      if (!frame) return;
+      window.addEventListener('message', function (event) {
+        if (!event.data || event.data.type !== 'board-section:resize') return;
+        if (event.data.id !== "circular-directory") return;
+        if (event.source !== frame.contentWindow) return;
+        var trusted = new URL(frame.src, window.location.href).origin;
+        if (event.origin !== trusted) return;
+        var next = Number(event.data.height);
+        if (Number.isFinite(next) && next >= 280 && next <= 2200) {
+          frame.style.height = Math.ceil(next) + 'px';
+        }
+      });
+    })();
+    </script>
     </section>
 
     <section class="mb-8">
