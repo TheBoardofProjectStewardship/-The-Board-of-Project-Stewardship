@@ -318,6 +318,33 @@
         </figure>
     </div>
   </section>
+    <section id="topic-carousel" class="mb-14">
+    <iframe
+      id="circular-directory"
+      class="board-section-frame"
+      src="./sections/circular-directory.html"
+      title="Edmonds topic directory — Board of Project Stewardship"
+      loading="lazy"
+      style="display:block;width:100%;height:760px;border:0;border-radius:18px;background:#0a0a0a;"
+    ></iframe>
+    <script>
+    (function () {
+      var frame = document.getElementById("circular-directory");
+      if (!frame) return;
+      window.addEventListener('message', function (event) {
+        if (!event.data || event.data.type !== 'board-section:resize') return;
+        if (event.data.id !== "circular-directory") return;
+        if (event.source !== frame.contentWindow) return;
+        var trusted = new URL(frame.src, window.location.href).origin;
+        if (event.origin !== trusted) return;
+        var next = Number(event.data.height);
+        if (Number.isFinite(next) && next >= 280 && next <= 2200) {
+          frame.style.height = Math.ceil(next) + 'px';
+        }
+      });
+    })();
+    </script>
+    </section>
   <section class="max-w-6xl mx-auto px-4 pb-8">
     <div class="bg-primary/10 border border-secondary/30 rounded-xl p-6 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">
       <div>

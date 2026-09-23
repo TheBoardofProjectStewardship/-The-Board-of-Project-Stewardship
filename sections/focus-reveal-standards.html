@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" data-section-id="focus-reveal-standards">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, follow" />
+  <base target="_top" />
+  <title>Focus Reveal — Board of Project Stewardship</title>
+  <meta name="description" content="Hover key phrases to sharpen what the Board of Project Stewardship evaluates — standards over marketing spend." />
+  <style>
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url('../assets/fonts/InterVariable.woff2') format('woff2');
+    }
+    :root {
+      --obsidian: #0a0a0a;
+      --charcoal: #141414;
+      --muted: #64748b;
+      --soft: #94a3b8;
+      --text: #cbd5e1;
+      --white: #f8fafc;
+      --accent: #4ade80;
+      --primary: #166534;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      background: var(--obsidian);
+      color: var(--text);
+      min-height: 0;
+      padding: clamp(1.25rem, 4vw, 2.5rem);
+      -webkit-font-smoothing: antialiased;
+    }
+    .panel {
+      width: min(820px, 100%);
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(22,101,52,0.14), transparent 55%),
+        var(--charcoal);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: clamp(1.75rem, 4vw, 3rem);
+      box-shadow: 0 30px 80px -30px rgba(0,0,0,0.85);
+    }
+    .eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 0.85rem;
+    }
+    h1 {
+      font-size: clamp(1.65rem, 3.5vw, 2.35rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 0.75rem;
+    }
+    .hint {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 300;
+      margin-bottom: 1.75rem;
+    }
+    .hint kbd {
+      display: inline-block;
+      padding: 0.1rem 0.45rem;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      font-size: 0.75rem;
+      font-family: inherit;
+      color: var(--soft);
+    }
+    .copy {
+      font-size: clamp(1.15rem, 2.4vw, 1.45rem);
+      line-height: 1.75;
+      font-weight: 300;
+      color: var(--soft);
+    }
+    .focus-word {
+      display: inline;
+      color: inherit;
+      font-weight: 400;
+      filter: blur(3.5px);
+      opacity: 0.55;
+      transition: filter 0.35s ease, opacity 0.35s ease, color 0.35s ease, text-shadow 0.35s ease;
+      cursor: default;
+      border-radius: 2px;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .focus-word.is-sharp,
+    .focus-word:hover,
+    .focus-word:focus-visible {
+      filter: blur(0);
+      opacity: 1;
+      color: var(--white);
+      font-weight: 600;
+      text-shadow: 0 0 24px rgba(74,222,128,0.35);
+      outline: none;
+    }
+    .rest {
+      transition: opacity 0.35s ease;
+    }
+    .copy.is-focusing .rest { opacity: 0.35; }
+    .footer {
+      margin-top: 2rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.25rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer p {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-weight: 300;
+    }
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .footer a:hover { text-decoration: underline; }
+    @media (prefers-reduced-motion: reduce) {
+      .focus-word {
+        filter: none;
+        opacity: 1;
+        color: var(--white);
+        font-weight: 600;
+        transition: none;
+      }
+      .copy.is-focusing .rest { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <section class="panel" aria-label="Standards focus reveal">
+    <p class="eyebrow">How the Board evaluates</p>
+    <h1>Standards before spend</h1>
+    <p class="hint">Hover or tap a highlighted phrase to bring it into focus. <kbd>Tab</kbd> works too.</p>
+
+    <p class="copy" id="focus-copy">
+      The Board of Project Stewardship helps homeowners in
+      <span class="focus-word" tabindex="0">Edmonds</span>
+      and coastal
+      <span class="focus-word" tabindex="0">King &amp; Snohomish</span>
+      Counties judge contractors by
+      <span class="focus-word" tabindex="0">stewardship standards</span>
+      — not by who buys the loudest ads.
+      We look for
+      <span class="focus-word" tabindex="0">financial solvency</span>,
+      a clear
+      <span class="focus-word" tabindex="0">project steward</span>,
+      <span class="focus-word" tabindex="0">local mastery</span>
+      of coastal permits, an active
+      <span class="focus-word" tabindex="0">WA L&amp;I license</span>,
+      and explicit
+      <span class="focus-word" tabindex="0">permit ownership</span>.
+      Technical work is read through the
+      <span class="focus-word" tabindex="0">McMorrough Protocol</span>
+      — an editorial lens, not a license.
+      Marketing budgets do not move rankings;
+      <span class="focus-word" tabindex="0">public records</span>
+      and accountable practice do.
+    </p>
+
+    <div class="footer">
+      <p>Independent construction standards hub · Not paid placement</p>
+      <a href="../how-we-rank.html">Read how we rank →</a>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce) return;
+
+      const copy = document.getElementById('focus-copy');
+      const words = [...copy.querySelectorAll('.focus-word')];
+
+      // Wrap non-focus text nodes so we can dim the rest
+      const walker = document.createTreeWalker(copy, NodeFilter.SHOW_TEXT, null);
+      const textNodes = [];
+      while (walker.nextNode()) {
+        const n = walker.currentNode;
+        if (n.parentElement && n.parentElement.classList.contains('focus-word')) continue;
+        if (!n.textContent.trim()) continue;
+        textNodes.push(n);
+      }
+      textNodes.forEach((n) => {
+        const span = document.createElement('span');
+        span.className = 'rest';
+        n.parentNode.insertBefore(span, n);
+        span.appendChild(n);
+      });
+
+      function sharpen(el) {
+        words.forEach((w) => w.classList.toggle('is-sharp', w === el));
+        copy.classList.add('is-focusing');
+      }
+      function clear() {
+        words.forEach((w) => w.classList.remove('is-sharp'));
+        copy.classList.remove('is-focusing');
+      }
+
+      words.forEach((w) => {
+        w.addEventListener('pointerenter', () => sharpen(w));
+        w.addEventListener('pointerleave', clear);
+        w.addEventListener('focus', () => sharpen(w));
+        w.addEventListener('blur', clear);
+        // touch: tap toggles
+        w.addEventListener('click', (e) => {
+          if (window.matchMedia('(hover: none)').matches) {
+            e.preventDefault();
+            if (w.classList.contains('is-sharp')) clear();
+            else sharpen(w);
+          }
+        });
+      });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      var id = document.documentElement.getAttribute('data-section-id');
+      function report() {
+        var h = Math.ceil(Math.max(document.documentElement.scrollHeight, document.body ? document.body.scrollHeight : 0));
+        if (window.parent && window.parent !== window && id) {
+          window.parent.postMessage({ type: 'board-section:resize', id: id, height: h }, window.location.origin);
+        }
+      }
+      window.addEventListener('load', report);
+      window.addEventListener('resize', report);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(report);
+      setTimeout(report, 250);
+      setTimeout(report, 1200);
+    })();
+  </script>
+</body>
+</html>

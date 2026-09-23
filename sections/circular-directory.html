@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en" data-section-id="circular-directory">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, follow" />
+  <base target="_top" />
+  <title>Circular Directory — Board of Project Stewardship</title>
+  <meta name="description" content="Explore Edmonds-area stewardship topics in a circular carousel from the Board of Project Stewardship." />
+  <style>
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url('../assets/fonts/InterVariable.woff2') format('woff2');
+    }
+    :root {
+      --obsidian: #0a0a0a;
+      --charcoal: #141414;
+      --white: #f8fafc;
+      --soft: #cbd5e1;
+      --muted: #94a3b8;
+      --accent: #4ade80;
+      --primary: #166534;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      background: var(--obsidian);
+      color: var(--soft);
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(1.5rem, 4vw, 3rem);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    .intro {
+      text-align: center;
+      max-width: 560px;
+      margin-bottom: 0.5rem;
+      z-index: 2;
+    }
+    .eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    h1 {
+      font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      margin-bottom: 0.65rem;
+    }
+    .lede {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .stage {
+      position: relative;
+      width: min(920px, 100%);
+      height: clamp(420px, 62vw, 520px);
+      perspective: 1200px;
+      margin-top: 0.5rem;
+      touch-action: pan-y;
+      user-select: none;
+    }
+    .ring {
+      position: absolute;
+      inset: 0;
+      transform-style: preserve-3d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card {
+      position: absolute;
+      width: min(240px, 68vw);
+      padding: 1.35rem 1.25rem 1.2rem;
+      border-radius: 18px;
+      background: linear-gradient(165deg, #1a1a1a, #101010);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 20px 50px -20px rgba(0,0,0,0.9);
+      transform-style: preserve-3d;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .card.is-front {
+      border-color: rgba(74,222,128,0.45);
+      box-shadow:
+        0 24px 60px -18px rgba(0,0,0,0.95),
+        0 0 40px -12px rgba(74,222,128,0.25);
+      z-index: 5;
+    }
+    .card .num {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 0.55rem;
+    }
+    .card h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .card p {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .card .go {
+      margin-top: 0.9rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.25s, transform 0.25s;
+    }
+    .card.is-front .go {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 0.25rem;
+      z-index: 2;
+    }
+    .controls button {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      color: var(--white);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .controls button:hover {
+      background: rgba(74,222,128,0.1);
+      border-color: rgba(74,222,128,0.35);
+    }
+    .controls button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .dots {
+      display: flex;
+      gap: 0.4rem;
+    }
+    .dots button {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: none;
+      padding: 0;
+      background: rgba(255,255,255,0.2);
+      cursor: pointer;
+    }
+    .dots button[aria-current="true"] {
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(74,222,128,0.5);
+    }
+    .note {
+      margin-top: 1.25rem;
+      font-size: 0.72rem;
+      color: #64748b;
+      text-align: center;
+      max-width: 420px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .stage {
+        height: auto;
+        perspective: none;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 0.85rem;
+        margin-top: 1.5rem;
+      }
+      .ring {
+        position: static;
+        display: contents;
+        transform: none !important;
+      }
+      .card {
+        position: static !important;
+        transform: none !important;
+        opacity: 1 !important;
+        width: auto;
+      }
+      .card .go { opacity: 1; transform: none; }
+      .controls { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="intro">
+    <p class="eyebrow">Edmonds-area topics</p>
+    <h1>Explore stewardship by project type</h1>
+    <p class="lede">
+      Educational paths from the Board of Project Stewardship — what to verify before you hire,
+      not a marketplace bid board.
+    </p>
+  </header>
+
+  <div class="stage" id="stage" aria-roledescription="carousel" aria-label="Topic directory">
+    <div class="ring" id="ring">
+      <a class="card" href="../edmonds.html" data-i="0">
+        <div class="num">01 · Place</div>
+        <h2>Home additions</h2>
+        <p>Bowl height limits, setbacks, and sequencing for Edmonds expansions.</p>
+        <div class="go">Open Edmonds guide →</div>
+      </a>
+      <a class="card" href="../kitchen.html" data-i="1">
+        <div class="num">02 · Remodel</div>
+        <h2>Kitchen remodel</h2>
+        <p>Scope clarity, allowances, and when a permit is required for wet rooms.</p>
+        <div class="go">Kitchen planning →</div>
+      </a>
+      <a class="card" href="../bathrooms.html" data-i="2">
+        <div class="num">03 · Remodel</div>
+        <h2>Bath remodel</h2>
+        <p>Waterproofing assemblies and inspection timing before tile cover-up.</p>
+        <div class="go">Bath guidance →</div>
+      </a>
+      <a class="card" href="../permits.html" data-i="3">
+        <div class="num">04 · Process</div>
+        <h2>Permits</h2>
+        <p>Who pulls, who owns, and how corrections close — before drywall hides work.</p>
+        <div class="go">Permit ownership →</div>
+      </a>
+      <a class="card" href="../coastal-waterproofing.html" data-i="4">
+        <div class="num">05 · Coastal</div>
+        <h2>Coastal durability</h2>
+        <p>Salt air, wind-driven rain, and envelope choices for Puget Sound homes.</p>
+        <div class="go">Coastal notes →</div>
+      </a>
+      <a class="card" href="../how-we-rank.html" data-i="5">
+        <div class="num">06 · Method</div>
+        <h2>How we rank</h2>
+        <p>Six stewardship layers — records and local mastery over ad spend.</p>
+        <div class="go">Ranking method →</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button type="button" id="prev" aria-label="Previous topic">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <div class="dots" id="dots" role="tablist" aria-label="Topics"></div>
+    <button type="button" id="next" aria-label="Next topic">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+  </div>
+  <p class="note">Board of Project Stewardship · Drag, swipe, or use arrows · Links go to Board guides</p>
+
+  <script>
+    (function () {
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const ring = document.getElementById('ring');
+      const cards = [...ring.querySelectorAll('.card')];
+      const n = cards.length;
+      const dotsHost = document.getElementById('dots');
+      let index = 0;
+      let angle = 0;
+      let target = 0;
+      let dragging = false;
+      let startX = 0;
+      let startAngle = 0;
+
+      // Build dots
+      cards.forEach((_, i) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.setAttribute('aria-label', 'Go to topic ' + (i + 1));
+        b.addEventListener('click', () => goTo(i));
+        dotsHost.appendChild(b);
+      });
+      const dots = [...dotsHost.querySelectorAll('button')];
+
+      function layout() {
+        if (reduce) {
+          cards.forEach((c) => { c.style.transform = 'none'; c.classList.add('is-front'); });
+          return;
+        }
+        const radius = Math.min(320, window.innerWidth * 0.38);
+        const step = (Math.PI * 2) / n;
+        cards.forEach((card, i) => {
+          const a = angle + i * step;
+          const x = Math.sin(a) * radius;
+          const z = Math.cos(a) * radius;
+          const scale = 0.72 + (z / radius) * 0.28;
+          const opacity = 0.35 + (z / radius + 1) * 0.32;
+          card.style.transform =
+            `translate(-50%, -50%) translateX(${x}px) translateZ(${z}px) rotateY(${a * 180 / Math.PI}deg) scale(${scale})`;
+          card.style.opacity = String(Math.max(0.25, opacity));
+          card.style.zIndex = String(Math.round(z + 100));
+          const isFront = ((i - index) % n + n) % n === 0;
+          // front card is the one closest to camera (smallest angular distance to -angle)
+          card.classList.toggle('is-front', false);
+        });
+        // Determine front: card whose angle is nearest 0 in view space
+        let best = 0, bestScore = Infinity;
+        cards.forEach((card, i) => {
+          const a = ((angle + i * step) % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2);
+          const score = Math.min(a, Math.PI * 2 - a);
+          if (score < bestScore) { bestScore = score; best = i; }
+        });
+        index = best;
+        cards.forEach((c, i) => c.classList.toggle('is-front', i === index));
+        dots.forEach((d, i) => d.setAttribute('aria-current', i === index ? 'true' : 'false'));
+      }
+
+      function goTo(i) {
+        const step = (Math.PI * 2) / n;
+        // rotate so card i faces front (angle + i*step ≈ 0)
+        target = -i * step;
+        index = i;
+      }
+
+      function tick() {
+        if (!reduce) {
+          angle += (target - angle) * 0.08;
+          // normalize drift
+          if (Math.abs(target - angle) < 0.0005) angle = target;
+          layout();
+          requestAnimationFrame(tick);
+        }
+      }
+
+      document.getElementById('prev').addEventListener('click', () => goTo((index - 1 + n) % n));
+      document.getElementById('next').addEventListener('click', () => goTo((index + 1) % n));
+
+      const stage = document.getElementById('stage');
+      stage.addEventListener('pointerdown', (e) => {
+        if (reduce) return;
+        dragging = true;
+        startX = e.clientX;
+        startAngle = target;
+        stage.setPointerCapture(e.pointerId);
+      });
+      stage.addEventListener('pointermove', (e) => {
+        if (!dragging) return;
+        const dx = e.clientX - startX;
+        target = startAngle + (dx / 220) * ((Math.PI * 2) / n);
+      });
+      function endDrag() {
+        if (!dragging) return;
+        dragging = false;
+        // snap to nearest
+        const step = (Math.PI * 2) / n;
+        const nearest = Math.round(-target / step);
+        goTo(((nearest % n) + n) % n);
+      }
+      stage.addEventListener('pointerup', endDrag);
+      stage.addEventListener('pointercancel', endDrag);
+
+      // Prevent accidental navigation while dragging
+      cards.forEach((c) => {
+        c.addEventListener('click', (e) => {
+          if (Math.abs(target - angle) > 0.02) e.preventDefault();
+          if (!c.classList.contains('is-front') && !reduce) {
+            e.preventDefault();
+            goTo(+c.dataset.i);
+          }
+        });
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') goTo((index - 1 + n) % n);
+        if (e.key === 'ArrowRight') goTo((index + 1) % n);
+      });
+
+      window.addEventListener('resize', layout);
+      goTo(0);
+      if (reduce) layout();
+      else requestAnimationFrame(tick);
+    })();
+  </script>
+
+  <script>
+    (function () {
+      var id = document.documentElement.getAttribute('data-section-id');
+      function report() {
+        var h = Math.ceil(Math.max(document.documentElement.scrollHeight, document.body ? document.body.scrollHeight : 0));
+        if (window.parent && window.parent !== window && id) {
+          window.parent.postMessage({ type: 'board-section:resize', id: id, height: h }, window.location.origin);
+        }
+      }
+      window.addEventListener('load', report);
+      window.addEventListener('resize', report);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(report);
+      setTimeout(report, 250);
+      setTimeout(report, 1200);
+    })();
+  </script>
+</body>
+</html>
