@@ -2605,6 +2605,421 @@ def ppg_widgets_script() -> str:
 
 # ---------- Page builders ----------
 
+def home_flashlight_hero() -> tuple[str, str, str] | None:
+    """Homepage flashlight hero: wireframe on black, cursor spotlight reveals the finished still.
+
+    Returns (html, extra_head, extra_scripts), or None when the stills are not on disk.
+    Static camera — no orbit. Site nav stays in the sticky header above this block.
+    """
+    wire_rel = "assets/hero/hero-wireframe.jpg"
+    finished_rel = "assets/hero/hero-finished.jpg"
+    video_rel = "assets/hero/board-sketch-to-home.mp4"
+    poster_rel = "assets/hero/board-sketch-to-home-poster.jpg"
+    if not (asset_exists(wire_rel) and asset_exists(finished_rel)):
+        return None
+    wire = prefix_asset(wire_rel)
+    finished = prefix_asset(finished_rel)
+    video = prefix_asset(video_rel) if asset_exists(video_rel) else ""
+    poster = prefix_asset(poster_rel) if asset_exists(poster_rel) else finished
+    video_html = ""
+    if video:
+        video_html = f"""      <video class="hero-reduced-video" muted loop playsinline preload="none" poster="{poster}" aria-hidden="true" tabindex="-1">
+        <source src="{video}" type="video/mp4" media="(prefers-reduced-motion: reduce)">
+      </video>"""
+    html_block = f"""  <section class="flashlight-hero" id="home-hero" aria-labelledby="home-hero-title">
+    <div class="hero-stage">
+      <img class="hero-layer hero-layer-finished" src="{finished}" alt="Finished dusk coastal home concept for Edmonds and coastal Puget Sound — illustrative media for Board of Project Stewardship, not a bid or stamped plan" width="1920" height="1080" decoding="async">
+      <img class="hero-layer hero-layer-wire" id="home-hero-wire" src="{wire}" alt="" width="1920" height="1080" decoding="async" fetchpriority="high">
+{video_html}
+    </div>
+    <div class="hero-scrim" aria-hidden="true"></div>
+    <div class="hero-vignette" aria-hidden="true"></div>
+    <div class="hero-cursor" id="home-hero-ring" aria-hidden="true"></div>
+    <p class="hero-hint" id="home-hero-hint"><span class="hero-hint-fine">Hover to reveal the finished home</span><span class="hero-hint-coarse">Drag to reveal the finished home</span></p>
+    <div class="hero-copy">
+      <p class="hero-kicker">Edmonds · coastal Puget Sound</p>
+      <h1 id="home-hero-title">See the build emerge from the plan.</h1>
+      <p class="hero-dek">Educational homeowner concept — framing to finished cedar and glass. Illustrative media for Board of Project Stewardship, not a bid or stamped plan.</p>
+      <div class="hero-ctas">
+        <a class="hero-btn" href="./directory.html">Browse directories</a>
+        <a class="hero-link" href="./build-walkthrough.html">Explore walkthrough</a>
+      </div>
+    </div>
+    <p class="hero-credit">Educational concept · not a bid or stamped plan</p>
+  </section>
+  <noscript><style>.flashlight-hero .hero-layer-wire,.flashlight-hero .hero-hint,.flashlight-hero .hero-cursor{{display:none!important}}</style></noscript>"""
+    extra_head = f"""  <link rel="preload" as="image" href="{wire}" fetchpriority="high">
+  <link rel="preload" as="image" href="{finished}">
+  <style>
+    .flashlight-hero {{
+      --hero-gutter: clamp(18px, 4.6vw, 72px);
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      min-height: max(560px, calc(100dvh - 4rem));
+      height: max(560px, calc(100dvh - 4rem));
+      background: #0c0c0c;
+      color: #F2F2EE;
+      cursor: none;
+      touch-action: pan-y;
+    }}
+    @media (hover: none) {{
+      .flashlight-hero {{ cursor: auto; }}
+    }}
+    .flashlight-hero .hero-stage,
+    .flashlight-hero .hero-layer,
+    .flashlight-hero .hero-reduced-video {{
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }}
+    .flashlight-hero .hero-stage {{ z-index: 0; background: #0c0c0c; }}
+    .flashlight-hero .hero-layer {{
+      object-fit: cover;
+      object-position: center center;
+      user-select: none;
+      -webkit-user-drag: none;
+    }}
+    .flashlight-hero .hero-layer-finished {{ z-index: 1; }}
+    .flashlight-hero .hero-layer-wire {{
+      z-index: 2;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+    }}
+    .flashlight-hero .hero-reduced-video {{
+      display: none;
+      z-index: 2;
+      object-fit: cover;
+      object-position: center center;
+      pointer-events: none;
+    }}
+    .flashlight-hero .hero-scrim,
+    .flashlight-hero .hero-vignette {{
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+    }}
+    .flashlight-hero .hero-scrim {{
+      background:
+        linear-gradient(90deg, rgba(6,7,7,.94) 0%, rgba(6,7,7,.82) 24%, rgba(6,7,7,.42) 46%, rgba(6,7,7,0) 64%),
+        linear-gradient(0deg, rgba(8,9,9,.78) 0%, rgba(8,9,9,0) 36%),
+        linear-gradient(180deg, rgba(8,9,9,.55) 0%, rgba(8,9,9,0) 18%);
+    }}
+    .flashlight-hero .hero-vignette {{
+      background: radial-gradient(ellipse at 62% 48%, transparent 42%, rgba(0,0,0,.45) 100%);
+    }}
+    .flashlight-hero .hero-cursor {{
+      position: absolute;
+      z-index: 6;
+      top: 0;
+      left: 0;
+      width: 28px;
+      height: 28px;
+      margin: -14px 0 0 -14px;
+      border: 1px solid rgba(242,242,238,.55);
+      border-radius: 50%;
+      box-shadow: 0 0 0 1px rgba(0,0,0,.35);
+      pointer-events: none;
+      opacity: 0;
+      will-change: transform;
+    }}
+    .flashlight-hero.is-hovering .hero-cursor {{ opacity: 1; }}
+    .flashlight-hero .hero-hint {{
+      position: absolute;
+      z-index: 5;
+      top: 1.25rem;
+      right: var(--hero-gutter);
+      max-width: 26ch;
+      margin: 0;
+      text-align: right;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      line-height: 1.5;
+      color: rgba(242,242,238,.62);
+      pointer-events: none;
+      transition: opacity .35s ease;
+    }}
+    .flashlight-hero .hero-hint-coarse {{ display: none; }}
+    .flashlight-hero .hero-copy {{
+      position: absolute;
+      z-index: 5;
+      left: var(--hero-gutter);
+      bottom: clamp(64px, 11vh, 120px);
+      max-width: 36rem;
+    }}
+    .flashlight-hero .hero-kicker {{
+      margin: 0;
+      color: #4ade80;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }}
+    .flashlight-hero h1 {{
+      margin: 14px 0 0;
+      max-width: 16ch;
+      color: #fff;
+      font-family: Inter, system-ui, sans-serif;
+      font-weight: 600;
+      font-size: clamp(34px, 4.4vw, 58px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }}
+    .flashlight-hero .hero-dek {{
+      margin: 16px 0 0;
+      max-width: 42ch;
+      color: rgba(242,242,238,.8);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.55;
+    }}
+    .flashlight-hero .hero-ctas {{
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 22px 28px;
+      margin-top: 28px;
+    }}
+    .flashlight-hero .hero-btn,
+    .flashlight-hero .hero-link {{
+      cursor: pointer;
+    }}
+    .flashlight-hero .hero-btn {{
+      display: inline-flex;
+      align-items: center;
+      padding: 14px 18px;
+      background: #F2F2EE;
+      color: #0E0F0F;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      border: 1px solid #F2F2EE;
+      transition: background .35s ease, color .35s ease;
+    }}
+    .flashlight-hero .hero-btn:hover {{
+      background: transparent;
+      color: #F2F2EE;
+    }}
+    .flashlight-hero .hero-link {{
+      color: #F2F2EE;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(242,242,238,.35);
+      padding-bottom: 3px;
+    }}
+    .flashlight-hero .hero-link:hover {{
+      color: #4ade80;
+      border-color: #4ade80;
+    }}
+    .flashlight-hero a:focus-visible {{
+      outline: 2px solid #4ade80;
+      outline-offset: 3px;
+    }}
+    .flashlight-hero .hero-credit {{
+      position: absolute;
+      z-index: 5;
+      right: var(--hero-gutter);
+      bottom: 22px;
+      margin: 0;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(242,242,238,.45);
+      pointer-events: none;
+    }}
+    @media (max-width: 860px) {{
+      .flashlight-hero {{
+        height: auto;
+        min-height: max(640px, calc(100dvh - 4rem));
+        cursor: auto;
+      }}
+      .flashlight-hero .hero-cursor {{ display: none; }}
+      .flashlight-hero .hero-hint {{
+        top: auto;
+        right: auto;
+        left: var(--hero-gutter);
+        bottom: auto;
+        text-align: left;
+        position: relative;
+        margin: 0 0 12px;
+      }}
+      .flashlight-hero .hero-copy {{
+        right: var(--hero-gutter);
+        max-width: none;
+      }}
+      .flashlight-hero .hero-scrim {{
+        background: linear-gradient(0deg, rgba(6,7,7,.94) 0%, rgba(6,7,7,.55) 46%, rgba(6,7,7,.35) 100%);
+      }}
+    }}
+    @media (hover: none), (pointer: coarse) {{
+      .flashlight-hero .hero-hint-fine {{ display: none; }}
+      .flashlight-hero .hero-hint-coarse {{ display: inline; }}
+    }}
+    @media (prefers-reduced-motion: reduce) {{
+      .flashlight-hero {{ cursor: auto; }}
+      .flashlight-hero .hero-btn {{ transition: none; }}
+      .flashlight-hero .hero-layer-wire,
+      .flashlight-hero .hero-cursor,
+      .flashlight-hero .hero-hint,
+      .flashlight-hero .hero-reduced-video {{ display: none !important; }}
+    }}
+  </style>
+"""
+    extra_scripts = """  <script>
+(function () {
+  var hero = document.getElementById('home-hero');
+  var wire = document.getElementById('home-hero-wire');
+  var ring = document.getElementById('home-hero-ring');
+  var hint = document.getElementById('home-hero-hint');
+  if (!hero || !wire) return;
+
+  var motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var hoverQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
+  var mx = 0.62;
+  var my = 0.46;
+  var radiusPx = 0;
+  var targetR = 0;
+  var hovering = false;
+  var activePointer = null;
+  var rafId = 0;
+
+  function reduced() { return motionQuery.matches; }
+  function finePointer() { return hoverQuery.matches; }
+
+  function baseRadius() {
+    return Math.min(hero.clientWidth, hero.clientHeight) * 0.34;
+  }
+
+  function applyMask() {
+    var w = hero.clientWidth;
+    var h = hero.clientHeight;
+    var x = mx * w;
+    var y = my * h;
+    var r = Math.max(0, radiusPx);
+    if (ring) ring.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)';
+    if (reduced() || r < 2) {
+      wire.style.webkitMaskImage = 'none';
+      wire.style.maskImage = 'none';
+      return;
+    }
+    var soft = Math.max(42, r * 0.58);
+    var inner = Math.max(0, r * 0.42);
+    var hole = 'radial-gradient(circle ' + (r + soft).toFixed(1) + 'px at ' + x.toFixed(1) + 'px ' + y.toFixed(1) + 'px, transparent 0%, transparent ' + inner.toFixed(1) + 'px, rgba(0,0,0,0.28) ' + r.toFixed(1) + 'px, #000 ' + (r + soft).toFixed(1) + 'px)';
+    wire.style.webkitMaskImage = hole;
+    wire.style.maskImage = hole;
+  }
+
+  function onPoint(clientX, clientY) {
+    var rect = hero.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+    mx = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
+    my = Math.min(1, Math.max(0, (clientY - rect.top) / rect.height));
+  }
+
+  function openSpotlight() {
+    hovering = true;
+    hero.classList.add('is-hovering');
+    targetR = baseRadius();
+    if (hint) hint.style.opacity = '0.28';
+  }
+
+  function closeSpotlight() {
+    hovering = false;
+    activePointer = null;
+    hero.classList.remove('is-hovering');
+    targetR = 0;
+    if (hint) hint.style.opacity = '';
+  }
+
+  function interactiveTarget(node) {
+    return node && node.closest && node.closest('a, button');
+  }
+
+  hero.addEventListener('pointerdown', function (e) {
+    if (reduced()) return;
+    if (e.pointerType === 'touch' || e.pointerType === 'pen') {
+      if (interactiveTarget(e.target)) return;
+      activePointer = e.pointerId;
+      try { hero.setPointerCapture(e.pointerId); } catch (err) {}
+    }
+    onPoint(e.clientX, e.clientY);
+    openSpotlight();
+  });
+
+  hero.addEventListener('pointermove', function (e) {
+    if (reduced()) return;
+    if (e.pointerType === 'touch' || e.pointerType === 'pen') {
+      if (activePointer !== e.pointerId) return;
+    }
+    onPoint(e.clientX, e.clientY);
+    openSpotlight();
+  });
+
+  hero.addEventListener('pointerup', function (e) {
+    if (activePointer === e.pointerId) activePointer = null;
+    if (!finePointer()) closeSpotlight();
+  });
+
+  hero.addEventListener('pointercancel', function () {
+    if (!finePointer()) closeSpotlight();
+  });
+
+  hero.addEventListener('pointerleave', function () {
+    if (activePointer !== null) return;
+    closeSpotlight();
+  });
+
+  function tick() {
+    if (!reduced()) {
+      targetR = hovering ? baseRadius() : 0;
+      radiusPx += (targetR - radiusPx) * 0.12;
+      if (!hovering && radiusPx < 0.6) radiusPx = 0;
+      applyMask();
+    }
+    rafId = window.requestAnimationFrame(tick);
+  }
+
+  function syncMotion() {
+    hero.classList.toggle('is-reduced', reduced());
+    if (reduced()) {
+      closeSpotlight();
+      radiusPx = 0;
+      targetR = 0;
+      applyMask();
+      var clip = hero.querySelector('.hero-reduced-video');
+      if (clip && clip.pause) clip.pause();
+      if (rafId) {
+        window.cancelAnimationFrame(rafId);
+        rafId = 0;
+      }
+      return;
+    }
+    if (!rafId) rafId = window.requestAnimationFrame(tick);
+  }
+
+  if (motionQuery.addEventListener) motionQuery.addEventListener('change', syncMotion);
+  else if (motionQuery.addListener) motionQuery.addListener(syncMotion);
+  window.addEventListener('resize', function () {
+    if (hovering) targetR = baseRadius();
+    applyMask();
+  });
+  syncMotion();
+})();
+  </script>
+"""
+    return html_block, extra_head, extra_scripts
+
+
 def build_about() -> str:
     # Six stewardship layers live in STEWARDSHIP_LAYERS / integrity_shield_html().
     ctas = [
@@ -2726,16 +3141,25 @@ def build_about() -> str:
         )
     )
 
-    _hero_rel, _hero_alt = DIR_HERO_IMAGES.get("about", (None, ""))
-    body = f"""{hero(
-        f"Construction standards · Edmonds / King &amp; Snohomish · {YEAR}",
-        'Board of Project Stewardship<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">Standards and contractor directories for Edmonds / King &amp; Snohomish</span>',
-        esc(BOARD_ONE_LINER),
-        ["Published directories", "Public L&amp;I signals", "Local permit mastery"],
-        image_rel=_hero_rel if _hero_rel and asset_exists(_hero_rel) else None,
-        image_alt=_hero_alt,
-    )}
-  <div class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
+    flash = home_flashlight_hero()
+    if flash:
+        hero_html, hero_head, hero_js = flash
+        content_open = '  <div class="max-w-6xl mx-auto px-4 pt-14 relative z-20 pb-24">'
+    else:
+        _hero_rel, _hero_alt = DIR_HERO_IMAGES.get("about", (None, ""))
+        hero_html = hero(
+            f"Construction standards · Edmonds / King &amp; Snohomish · {YEAR}",
+            'Board of Project Stewardship<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">Standards and contractor directories for Edmonds / King &amp; Snohomish</span>',
+            esc(BOARD_ONE_LINER),
+            ["Published directories", "Public L&amp;I signals", "Local permit mastery"],
+            image_rel=_hero_rel if _hero_rel and asset_exists(_hero_rel) else None,
+            image_alt=_hero_alt,
+        )
+        hero_head = ""
+        hero_js = ""
+        content_open = '  <div class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">'
+    body = f"""{hero_html}
+{content_open}
     <section class="bg-charcoal rounded-xl p-8 md:p-10 border border-primary/25 mb-12 relative overflow-hidden">
       <div class="absolute -bottom-20 -right-20 w-56 h-56 bg-primary/15 blur-[70px] pointer-events-none rounded-full"></div>
       <h2 class="text-2xl font-black text-white mb-4 tracking-tight flex items-center gap-3 relative z-10">
@@ -2971,6 +3395,7 @@ def build_about() -> str:
     </section>
   </div>"""
 
+    og_alt = "Finished dusk coastal home concept for Edmonds and coastal Puget Sound — illustrative media for Board of Project Stewardship, not a bid or stamped plan"
     return page_shell(
         "Board of Project Stewardship | Edmonds Standards",
         "The Board of Project Stewardship publishes construction standards and contractor directories for Edmonds and King & Snohomish — hire from the Board shortlist.",
@@ -2980,6 +3405,10 @@ def build_about() -> str:
         breadcrumbs=[("About", BASE_URL)],
         include_story_embed=True,
         include_tools_embed=False,
+        extra_head=hero_head,
+        extra_scripts=hero_js,
+        og_image="assets/hero/hero-finished.jpg" if asset_exists("assets/hero/hero-finished.jpg") else None,
+        og_image_alt=og_alt if asset_exists("assets/hero/hero-finished.jpg") else "",
     )
 
 

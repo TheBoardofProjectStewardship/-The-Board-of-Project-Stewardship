@@ -11,15 +11,15 @@
   <meta property="og:description" content="The Board of Project Stewardship publishes construction standards and contractor directories for Edmonds and King &amp; Snohomish — hire from the Board shortlist.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://boardofprojectstewardship.com/">
-  <meta property="og:image" content="https://boardofprojectstewardship.com/assets/images/home-hero.webp">
-  <meta property="og:image:alt" content="Board of Project Stewardship">
+  <meta property="og:image" content="https://boardofprojectstewardship.com/assets/hero/hero-finished.jpg">
+  <meta property="og:image:alt" content="Finished dusk coastal home concept for Edmonds and coastal Puget Sound — illustrative media for Board of Project Stewardship, not a bid or stamped plan">
   <meta property="og:site_name" content="Board of Project Stewardship">
   <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Board of Project Stewardship | Edmonds Standards">
   <meta name="twitter:description" content="The Board of Project Stewardship publishes construction standards and contractor directories for Edmonds and King &amp; Snohomish — hire from the Board shortlist.">
-  <meta name="twitter:image" content="https://boardofprojectstewardship.com/assets/images/home-hero.webp">
-  <meta name="twitter:image:alt" content="Board of Project Stewardship">
+  <meta name="twitter:image" content="https://boardofprojectstewardship.com/assets/hero/hero-finished.jpg">
+  <meta name="twitter:image:alt" content="Finished dusk coastal home concept for Edmonds and coastal Puget Sound — illustrative media for Board of Project Stewardship, not a bid or stamped plan">
   <link rel="canonical" href="https://boardofprojectstewardship.com/">
   <link rel="alternate" type="application/rss+xml" title="Board of Project Stewardship Blog" href="https://boardofprojectstewardship.com/blog/rss.xml">
   <link rel="icon" href="https://boardofprojectstewardship.com/assets/icons/favicon.svg" type="image/svg+xml">
@@ -187,6 +187,232 @@
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
     details.board-faq > summary:focus-visible { outline: 2px solid #4ade80; outline-offset: 2px; }
   </style>
+  <link rel="preload" as="image" href="./assets/hero/hero-wireframe.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="./assets/hero/hero-finished.jpg">
+  <style>
+    .flashlight-hero {
+      --hero-gutter: clamp(18px, 4.6vw, 72px);
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      min-height: max(560px, calc(100dvh - 4rem));
+      height: max(560px, calc(100dvh - 4rem));
+      background: #0c0c0c;
+      color: #F2F2EE;
+      cursor: none;
+      touch-action: pan-y;
+    }
+    @media (hover: none) {
+      .flashlight-hero { cursor: auto; }
+    }
+    .flashlight-hero .hero-stage,
+    .flashlight-hero .hero-layer,
+    .flashlight-hero .hero-reduced-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .flashlight-hero .hero-stage { z-index: 0; background: #0c0c0c; }
+    .flashlight-hero .hero-layer {
+      object-fit: cover;
+      object-position: center center;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+    .flashlight-hero .hero-layer-finished { z-index: 1; }
+    .flashlight-hero .hero-layer-wire {
+      z-index: 2;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+    }
+    .flashlight-hero .hero-reduced-video {
+      display: none;
+      z-index: 2;
+      object-fit: cover;
+      object-position: center center;
+      pointer-events: none;
+    }
+    .flashlight-hero .hero-scrim,
+    .flashlight-hero .hero-vignette {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+    }
+    .flashlight-hero .hero-scrim {
+      background:
+        linear-gradient(90deg, rgba(6,7,7,.94) 0%, rgba(6,7,7,.82) 24%, rgba(6,7,7,.42) 46%, rgba(6,7,7,0) 64%),
+        linear-gradient(0deg, rgba(8,9,9,.78) 0%, rgba(8,9,9,0) 36%),
+        linear-gradient(180deg, rgba(8,9,9,.55) 0%, rgba(8,9,9,0) 18%);
+    }
+    .flashlight-hero .hero-vignette {
+      background: radial-gradient(ellipse at 62% 48%, transparent 42%, rgba(0,0,0,.45) 100%);
+    }
+    .flashlight-hero .hero-cursor {
+      position: absolute;
+      z-index: 6;
+      top: 0;
+      left: 0;
+      width: 28px;
+      height: 28px;
+      margin: -14px 0 0 -14px;
+      border: 1px solid rgba(242,242,238,.55);
+      border-radius: 50%;
+      box-shadow: 0 0 0 1px rgba(0,0,0,.35);
+      pointer-events: none;
+      opacity: 0;
+      will-change: transform;
+    }
+    .flashlight-hero.is-hovering .hero-cursor { opacity: 1; }
+    .flashlight-hero .hero-hint {
+      position: absolute;
+      z-index: 5;
+      top: 1.25rem;
+      right: var(--hero-gutter);
+      max-width: 26ch;
+      margin: 0;
+      text-align: right;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      line-height: 1.5;
+      color: rgba(242,242,238,.62);
+      pointer-events: none;
+      transition: opacity .35s ease;
+    }
+    .flashlight-hero .hero-hint-coarse { display: none; }
+    .flashlight-hero .hero-copy {
+      position: absolute;
+      z-index: 5;
+      left: var(--hero-gutter);
+      bottom: clamp(64px, 11vh, 120px);
+      max-width: 36rem;
+    }
+    .flashlight-hero .hero-kicker {
+      margin: 0;
+      color: #4ade80;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .flashlight-hero h1 {
+      margin: 14px 0 0;
+      max-width: 16ch;
+      color: #fff;
+      font-family: Inter, system-ui, sans-serif;
+      font-weight: 600;
+      font-size: clamp(34px, 4.4vw, 58px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+    .flashlight-hero .hero-dek {
+      margin: 16px 0 0;
+      max-width: 42ch;
+      color: rgba(242,242,238,.8);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.55;
+    }
+    .flashlight-hero .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 22px 28px;
+      margin-top: 28px;
+    }
+    .flashlight-hero .hero-btn,
+    .flashlight-hero .hero-link {
+      cursor: pointer;
+    }
+    .flashlight-hero .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 14px 18px;
+      background: #F2F2EE;
+      color: #0E0F0F;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      border: 1px solid #F2F2EE;
+      transition: background .35s ease, color .35s ease;
+    }
+    .flashlight-hero .hero-btn:hover {
+      background: transparent;
+      color: #F2F2EE;
+    }
+    .flashlight-hero .hero-link {
+      color: #F2F2EE;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(242,242,238,.35);
+      padding-bottom: 3px;
+    }
+    .flashlight-hero .hero-link:hover {
+      color: #4ade80;
+      border-color: #4ade80;
+    }
+    .flashlight-hero a:focus-visible {
+      outline: 2px solid #4ade80;
+      outline-offset: 3px;
+    }
+    .flashlight-hero .hero-credit {
+      position: absolute;
+      z-index: 5;
+      right: var(--hero-gutter);
+      bottom: 22px;
+      margin: 0;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(242,242,238,.45);
+      pointer-events: none;
+    }
+    @media (max-width: 860px) {
+      .flashlight-hero {
+        height: auto;
+        min-height: max(640px, calc(100dvh - 4rem));
+        cursor: auto;
+      }
+      .flashlight-hero .hero-cursor { display: none; }
+      .flashlight-hero .hero-hint {
+        top: auto;
+        right: auto;
+        left: var(--hero-gutter);
+        bottom: auto;
+        text-align: left;
+        position: relative;
+        margin: 0 0 12px;
+      }
+      .flashlight-hero .hero-copy {
+        right: var(--hero-gutter);
+        max-width: none;
+      }
+      .flashlight-hero .hero-scrim {
+        background: linear-gradient(0deg, rgba(6,7,7,.94) 0%, rgba(6,7,7,.55) 46%, rgba(6,7,7,.35) 100%);
+      }
+    }
+    @media (hover: none), (pointer: coarse) {
+      .flashlight-hero .hero-hint-fine { display: none; }
+      .flashlight-hero .hero-hint-coarse { display: inline; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .flashlight-hero { cursor: auto; }
+      .flashlight-hero .hero-btn { transition: none; }
+      .flashlight-hero .hero-layer-wire,
+      .flashlight-hero .hero-cursor,
+      .flashlight-hero .hero-hint,
+      .flashlight-hero .hero-reduced-video { display: none !important; }
+    }
+  </style>
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -290,30 +516,31 @@
     </nav>
   </header>
 <main id="main-content">
-  <header class="relative pt-20 pb-28 overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-b from-charcoal via-obsidian to-obsidian"></div>
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[420px] bg-primary/15 blur-[120px] rounded-full pointer-events-none"></div>
-    <div class="max-w-4xl mx-auto text-center px-4 relative z-10">
-      <span class="inline-block py-1.5 px-4 rounded-full bg-white/5 border border-white/10 text-secondary text-[11px] font-bold uppercase tracking-[0.2em] mb-6">
-        Construction standards · Edmonds / King &amp; Snohomish · 2026
-      </span>
-      <h1 class="text-4xl sm:text-5xl md:text-6xl font-black mb-6 leading-tight text-white tracking-tight">
-        Board of Project Stewardship<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">Standards and contractor directories for Edmonds / King &amp; Snohomish</span>
-      </h1>
-      <p class="text-base sm:text-lg text-slate-400 mb-8 max-w-2xl mx-auto font-light leading-relaxed">
-        The Board of Project Stewardship publishes construction standards and contractor directories for Edmonds and King &amp; Snohomish Counties — shortlists firms homeowners can hire with confidence.
-      </p>
-      <div class="flex flex-wrap justify-center gap-3 text-xs text-slate-500 uppercase tracking-widest font-semibold">
-        <span class="flex items-center gap-2"><i class="fas fa-check text-secondary"></i> Published directories</span><span class="flex items-center gap-2"><i class="fas fa-check text-secondary"></i> Public L&amp;amp;I signals</span><span class="flex items-center gap-2"><i class="fas fa-check text-secondary"></i> Local permit mastery</span>
+  <section class="flashlight-hero" id="home-hero" aria-labelledby="home-hero-title">
+    <div class="hero-stage">
+      <img class="hero-layer hero-layer-finished" src="./assets/hero/hero-finished.jpg" alt="Finished dusk coastal home concept for Edmonds and coastal Puget Sound — illustrative media for Board of Project Stewardship, not a bid or stamped plan" width="1920" height="1080" decoding="async">
+      <img class="hero-layer hero-layer-wire" id="home-hero-wire" src="./assets/hero/hero-wireframe.jpg" alt="" width="1920" height="1080" decoding="async" fetchpriority="high">
+      <video class="hero-reduced-video" muted loop playsinline preload="none" poster="./assets/hero/board-sketch-to-home-poster.jpg" aria-hidden="true" tabindex="-1">
+        <source src="./assets/hero/board-sketch-to-home.mp4" type="video/mp4" media="(prefers-reduced-motion: reduce)">
+      </video>
+    </div>
+    <div class="hero-scrim" aria-hidden="true"></div>
+    <div class="hero-vignette" aria-hidden="true"></div>
+    <div class="hero-cursor" id="home-hero-ring" aria-hidden="true"></div>
+    <p class="hero-hint" id="home-hero-hint"><span class="hero-hint-fine">Hover to reveal the finished home</span><span class="hero-hint-coarse">Drag to reveal the finished home</span></p>
+    <div class="hero-copy">
+      <p class="hero-kicker">Edmonds · coastal Puget Sound</p>
+      <h1 id="home-hero-title">See the build emerge from the plan.</h1>
+      <p class="hero-dek">Educational homeowner concept — framing to finished cedar and glass. Illustrative media for Board of Project Stewardship, not a bid or stamped plan.</p>
+      <div class="hero-ctas">
+        <a class="hero-btn" href="./directory.html">Browse directories</a>
+        <a class="hero-link" href="./build-walkthrough.html">Explore walkthrough</a>
       </div>
     </div>
-    <div class="max-w-5xl mx-auto px-4 relative z-10 mt-10">
-      <div class="overflow-hidden rounded-xl border border-white/10 shadow-2xl">
-        <img src="./assets/images/home-hero.webp" alt="Illustrative Pacific Northwest home exterior — Board editorial for Edmonds remodel stewardship" class="w-full h-52 sm:h-72 md:h-80 object-cover" width="1600" height="900" loading="eager">
-      </div>
-    </div>
-  </header>
-  <div class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
+    <p class="hero-credit">Educational concept · not a bid or stamped plan</p>
+  </section>
+  <noscript><style>.flashlight-hero .hero-layer-wire,.flashlight-hero .hero-hint,.flashlight-hero .hero-cursor{display:none!important}</style></noscript>
+  <div class="max-w-6xl mx-auto px-4 pt-14 relative z-20 pb-24">
     <section class="bg-charcoal rounded-xl p-8 md:p-10 border border-primary/25 mb-12 relative overflow-hidden">
       <div class="absolute -bottom-20 -right-20 w-56 h-56 bg-primary/15 blur-[70px] pointer-events-none rounded-full"></div>
       <h2 class="text-2xl font-black text-white mb-4 tracking-tight flex items-center gap-3 relative z-10">
@@ -1031,6 +1258,147 @@
     if (drivers) drivers.addEventListener('change', update);
     update();
   })();
+  </script>
+  <script>
+(function () {
+  var hero = document.getElementById('home-hero');
+  var wire = document.getElementById('home-hero-wire');
+  var ring = document.getElementById('home-hero-ring');
+  var hint = document.getElementById('home-hero-hint');
+  if (!hero || !wire) return;
+
+  var motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var hoverQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
+  var mx = 0.62;
+  var my = 0.46;
+  var radiusPx = 0;
+  var targetR = 0;
+  var hovering = false;
+  var activePointer = null;
+  var rafId = 0;
+
+  function reduced() { return motionQuery.matches; }
+  function finePointer() { return hoverQuery.matches; }
+
+  function baseRadius() {
+    return Math.min(hero.clientWidth, hero.clientHeight) * 0.34;
+  }
+
+  function applyMask() {
+    var w = hero.clientWidth;
+    var h = hero.clientHeight;
+    var x = mx * w;
+    var y = my * h;
+    var r = Math.max(0, radiusPx);
+    if (ring) ring.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)';
+    if (reduced() || r < 2) {
+      wire.style.webkitMaskImage = 'none';
+      wire.style.maskImage = 'none';
+      return;
+    }
+    var soft = Math.max(42, r * 0.58);
+    var inner = Math.max(0, r * 0.42);
+    var hole = 'radial-gradient(circle ' + (r + soft).toFixed(1) + 'px at ' + x.toFixed(1) + 'px ' + y.toFixed(1) + 'px, transparent 0%, transparent ' + inner.toFixed(1) + 'px, rgba(0,0,0,0.28) ' + r.toFixed(1) + 'px, #000 ' + (r + soft).toFixed(1) + 'px)';
+    wire.style.webkitMaskImage = hole;
+    wire.style.maskImage = hole;
+  }
+
+  function onPoint(clientX, clientY) {
+    var rect = hero.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+    mx = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
+    my = Math.min(1, Math.max(0, (clientY - rect.top) / rect.height));
+  }
+
+  function openSpotlight() {
+    hovering = true;
+    hero.classList.add('is-hovering');
+    targetR = baseRadius();
+    if (hint) hint.style.opacity = '0.28';
+  }
+
+  function closeSpotlight() {
+    hovering = false;
+    activePointer = null;
+    hero.classList.remove('is-hovering');
+    targetR = 0;
+    if (hint) hint.style.opacity = '';
+  }
+
+  function interactiveTarget(node) {
+    return node && node.closest && node.closest('a, button');
+  }
+
+  hero.addEventListener('pointerdown', function (e) {
+    if (reduced()) return;
+    if (e.pointerType === 'touch' || e.pointerType === 'pen') {
+      if (interactiveTarget(e.target)) return;
+      activePointer = e.pointerId;
+      try { hero.setPointerCapture(e.pointerId); } catch (err) {}
+    }
+    onPoint(e.clientX, e.clientY);
+    openSpotlight();
+  });
+
+  hero.addEventListener('pointermove', function (e) {
+    if (reduced()) return;
+    if (e.pointerType === 'touch' || e.pointerType === 'pen') {
+      if (activePointer !== e.pointerId) return;
+    }
+    onPoint(e.clientX, e.clientY);
+    openSpotlight();
+  });
+
+  hero.addEventListener('pointerup', function (e) {
+    if (activePointer === e.pointerId) activePointer = null;
+    if (!finePointer()) closeSpotlight();
+  });
+
+  hero.addEventListener('pointercancel', function () {
+    if (!finePointer()) closeSpotlight();
+  });
+
+  hero.addEventListener('pointerleave', function () {
+    if (activePointer !== null) return;
+    closeSpotlight();
+  });
+
+  function tick() {
+    if (!reduced()) {
+      targetR = hovering ? baseRadius() : 0;
+      radiusPx += (targetR - radiusPx) * 0.12;
+      if (!hovering && radiusPx < 0.6) radiusPx = 0;
+      applyMask();
+    }
+    rafId = window.requestAnimationFrame(tick);
+  }
+
+  function syncMotion() {
+    hero.classList.toggle('is-reduced', reduced());
+    if (reduced()) {
+      closeSpotlight();
+      radiusPx = 0;
+      targetR = 0;
+      applyMask();
+      var clip = hero.querySelector('.hero-reduced-video');
+      if (clip && clip.pause) clip.pause();
+      if (rafId) {
+        window.cancelAnimationFrame(rafId);
+        rafId = 0;
+      }
+      return;
+    }
+    if (!rafId) rafId = window.requestAnimationFrame(tick);
+  }
+
+  if (motionQuery.addEventListener) motionQuery.addEventListener('change', syncMotion);
+  else if (motionQuery.addListener) motionQuery.addListener(syncMotion);
+  window.addEventListener('resize', function () {
+    if (hovering) targetR = baseRadius();
+    applyMask();
+  });
+  syncMotion();
+})();
   </script>
 </body>
 </html>
