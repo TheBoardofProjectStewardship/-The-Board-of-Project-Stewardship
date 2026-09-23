@@ -1,312 +1,993 @@
-<!DOCTYPE html>
+<!-- mesh-flow-backdrop.html -->
+<!doctype html>
 <html lang="en" data-section-id="mesh-flow-mission">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="robots" content="noindex, follow" />
   <base target="_top" />
-  <title>Mesh Flow Backdrop — Board of Project Stewardship</title>
-  <meta name="description" content="Mission section with a pointer-warped mesh backdrop for the Board of Project Stewardship." />
+  <meta
+    name="description"
+    content="Mission statement for The Board of Project Stewardship with an interactive coastal mesh backdrop."
+  />
+  <meta name="theme-color" content="#06100e" />
+
+  <title>Mission | The Board of Project Stewardship</title>
+
   <style>
     @font-face {
-      font-family: 'Inter';
+      font-family: Inter;
       font-style: normal;
       font-weight: 100 900;
       font-display: swap;
-      src: url('../assets/fonts/InterVariable.woff2') format('woff2');
+      src: url("../assets/fonts/InterVariable.woff2") format("woff2");
     }
+
     :root {
-      --obsidian: #070707;
-      --white: #f8fafc;
-      --soft: #cbd5e1;
-      --muted: #94a3b8;
-      --accent: #4ade80;
-      --primary: #166534;
+      --bg: #06100e;
+      --bg-deep: #020605;
+      --panel: rgba(8, 20, 17, 0.58);
+      --line: rgba(197, 232, 219, 0.14);
+      --line-strong: rgba(197, 232, 219, 0.28);
+      --text: #f1f5ef;
+      --muted: #a6bab2;
+      --muted-2: #73857f;
+      --accent: #b7efd8;
+      --accent-soft: #72b99e;
+      --max: 1380px;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: var(--bg-deep);
+    }
+
     body {
-      font-family: Inter, system-ui, sans-serif;
-      background: var(--obsidian);
-      color: var(--soft);
+      margin: 0;
+      min-width: 320px;
+      min-height: 0;
+      overflow-x: hidden;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 50% -20%, rgba(73, 135, 112, 0.14), transparent 42rem),
+        linear-gradient(180deg, #081411 0%, var(--bg) 55%, #030706 100%);
+      font-family:
+        Inter,
+        ui-sans-serif,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+      text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
     }
-    .hero {
+
+    a {
+      color: inherit;
+    }
+
+    ::selection {
+      color: #07100e;
+      background: var(--accent);
+    }
+
+    .skip-link {
+      position: fixed;
+      z-index: 1000;
+      top: 12px;
+      left: 12px;
+      padding: 11px 15px;
+      border-radius: 999px;
+      color: #07100e;
+      background: var(--accent);
+      transform: translateY(-150%);
+      transition: transform 180ms ease;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      opacity: 0.045;
+      pointer-events: none;
+      mix-blend-mode: soft-light;
+      background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.3'/%3E%3C/svg%3E");
+    }
+
+    .shell {
+      width: min(calc(100% - 36px), var(--max));
+      margin-inline: auto;
+    }
+
+    header {
       position: relative;
-      min-height: 560px;
+      z-index: 20;
+      padding-top: 22px;
+    }
+
+    .nav {
       display: flex;
       align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      padding: clamp(2rem, 6vw, 5rem);
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 50px;
     }
-    #mesh {
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 650;
+    }
+
+    .brand-mark {
+      position: relative;
+      width: 32px;
+      height: 36px;
+      flex: 0 0 auto;
+      clip-path: polygon(50% 0, 93% 14%, 88% 68%, 50% 100%, 12% 68%, 7% 14%);
+      background:
+        linear-gradient(145deg, rgba(190, 238, 220, 0.28), transparent 45%),
+        linear-gradient(180deg, #173b31, #0a1b17);
+      box-shadow:
+        inset 0 0 0 1px rgba(220, 249, 238, 0.2),
+        0 10px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      inset: 6px;
+      clip-path: inherit;
+      border: 1px solid rgba(216, 249, 237, 0.22);
+    }
+
+    .brand-name {
+      color: rgba(244, 247, 242, 0.9);
+    }
+
+    .nav-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 40px;
+      padding: 0 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(7, 16, 15, 0.44);
+      font-size: 0.8rem;
+      backdrop-filter: blur(12px);
+    }
+
+    .mission {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 720px;
+      padding: clamp(70px, 8vw, 110px) 0 clamp(90px, 10vw, 130px);
+      overflow: hidden;
+    }
+
+    .mesh-wrap {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    #meshCanvas {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       display: block;
-      z-index: 0;
+      opacity: 0.82;
     }
-    .veil {
+
+    .mesh-vignette {
       position: absolute;
       inset: 0;
-      z-index: 1;
-      pointer-events: none;
       background:
-        radial-gradient(ellipse 55% 50% at 50% 45%, transparent 20%, rgba(7,7,7,0.55) 70%, rgba(7,7,7,0.92) 100%),
-        linear-gradient(180deg, rgba(7,7,7,0.35), transparent 30%, rgba(7,7,7,0.5) 100%);
+        radial-gradient(circle at 50% 48%, transparent 0 28%, rgba(2, 6, 5, 0.14) 58%, rgba(2, 6, 5, 0.7) 100%),
+        linear-gradient(180deg, rgba(2, 6, 5, 0.1), rgba(2, 6, 5, 0.34));
     }
+
+    .mesh-horizon {
+      position: absolute;
+      left: 50%;
+      top: 52%;
+      width: min(1100px, 92vw);
+      height: 1px;
+      transform: translateX(-50%);
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(173, 223, 204, 0.06) 18%,
+          rgba(173, 223, 204, 0.2) 50%,
+          rgba(173, 223, 204, 0.06) 82%,
+          transparent
+        );
+      box-shadow: 0 0 38px rgba(119, 190, 162, 0.08);
+    }
+
     .content {
       position: relative;
-      z-index: 2;
-      width: min(680px, 100%);
+      z-index: 3;
+      width: min(100%, 1050px);
+      margin-inline: auto;
       text-align: center;
     }
+
     .eyebrow {
-      font-size: 0.68rem;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 700;
-      margin-bottom: 1.1rem;
-    }
-    h1 {
-      font-size: clamp(2rem, 5vw, 3.25rem);
-      font-weight: 800;
-      letter-spacing: -0.035em;
-      line-height: 1.08;
-      color: var(--white);
-      margin-bottom: 1.25rem;
-    }
-    .mission {
-      font-size: clamp(1.05rem, 2.2vw, 1.2rem);
-      font-weight: 300;
-      line-height: 1.7;
-      color: var(--muted);
-      margin-bottom: 2rem;
-    }
-    .mission strong {
-      color: var(--soft);
-      font-weight: 500;
-    }
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      justify-content: center;
-    }
-    .btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.8rem 1.3rem;
-      border-radius: 999px;
-      font-size: 0.875rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: transform 0.2s ease, background 0.2s ease;
+      gap: 11px;
+      margin-bottom: 26px;
+      color: var(--accent);
+      font-size: 0.73rem;
+      font-weight: 760;
+      letter-spacing: 0.17em;
+      text-transform: uppercase;
     }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--primary), #14532d);
-      color: var(--white);
-      border: 1px solid rgba(74,222,128,0.35);
-    }
-    .btn-ghost {
-      background: rgba(255,255,255,0.03);
-      color: var(--soft);
-      border: 1px solid rgba(255,255,255,0.12);
-    }
-    .btn:hover { transform: translateY(-2px); }
-    .static-mesh {
-      display: none;
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      background:
-        radial-gradient(circle at 30% 40%, rgba(74,222,128,0.12), transparent 35%),
-        radial-gradient(circle at 70% 60%, rgba(22,101,52,0.18), transparent 40%),
-        linear-gradient(135deg, #0a0a0a, #111827 50%, #0a0a0a);
-      opacity: 0.9;
-    }
-    .static-mesh::before {
+
+    .eyebrow::before,
+    .eyebrow::after {
       content: "";
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(74,222,128,0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(74,222,128,0.06) 1px, transparent 1px);
-      background-size: 48px 48px;
-      mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+      width: 30px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent));
     }
+
+    .eyebrow::after {
+      transform: scaleX(-1);
+    }
+
+    h1 {
+      margin: 0;
+      color: #f4f7f2;
+      font-size: clamp(3.8rem, 8.7vw, 9rem);
+      font-weight: 490;
+      letter-spacing: -0.072em;
+      line-height: 0.86;
+      text-shadow: 0 20px 80px rgba(0, 0, 0, 0.4);
+    }
+
+    h1 span {
+      display: block;
+      color: var(--accent);
+    }
+
+    .mission-copy {
+      max-width: 780px;
+      margin: 34px auto 0;
+      color: var(--muted);
+      font-size: clamp(1.03rem, 1.6vw, 1.3rem);
+      line-height: 1.72;
+      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .mission-copy strong {
+      color: #e9f0eb;
+      font-weight: 580;
+    }
+
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1px;
+      max-width: 900px;
+      margin: 54px auto 0;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      overflow: hidden;
+      background: var(--line);
+      box-shadow:
+        0 30px 90px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(14px);
+    }
+
+    .principle {
+      min-height: 145px;
+      padding: 24px;
+      background: rgba(7, 17, 15, 0.72);
+      text-align: left;
+    }
+
+    .principle-number {
+      display: block;
+      margin-bottom: 34px;
+      color: var(--muted-2);
+      font-size: 0.68rem;
+      font-weight: 760;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .principle strong {
+      display: block;
+      margin-bottom: 7px;
+      color: #edf3ee;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .principle p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.83rem;
+      line-height: 1.55;
+    }
+
+    .interaction-note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 25px;
+      color: var(--muted-2);
+      font-size: 0.74rem;
+      line-height: 1.5;
+    }
+
+    .interaction-note span:first-child {
+      width: 7px;
+      height: 7px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      box-shadow: 0 0 18px rgba(114, 185, 158, 0.42);
+    }
+
+    .statement {
+      position: relative;
+      z-index: 2;
+      padding: clamp(80px, 10vw, 140px) 0;
+      border-top: 1px solid var(--line);
+      background:
+        radial-gradient(circle at 50% 0%, rgba(83, 147, 121, 0.06), transparent 45%);
+    }
+
+    .statement-grid {
+      display: grid;
+      grid-template-columns: 0.46fr 1fr;
+      gap: clamp(30px, 7vw, 100px);
+    }
+
+    .statement-label {
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 760;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .statement-copy {
+      max-width: 870px;
+    }
+
+    .statement-copy p:first-child {
+      margin: 0;
+      color: #eef4ef;
+      font-size: clamp(1.8rem, 3.8vw, 4rem);
+      font-weight: 480;
+      letter-spacing: -0.048em;
+      line-height: 1.08;
+    }
+
+    .statement-copy p:last-child {
+      max-width: 720px;
+      margin: 26px 0 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.72;
+    }
+
+    footer {
+      position: relative;
+      z-index: 2;
+      padding-bottom: 38px;
+    }
+
+    .footer-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      padding-top: 26px;
+      border-top: 1px solid var(--line);
+      color: var(--muted-2);
+      font-size: 0.78rem;
+      line-height: 1.55;
+    }
+
+    .footer-line strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--muted);
+      font-weight: 650;
+    }
+
+    .footer-note {
+      max-width: 720px;
+      text-align: right;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 900px) {
+      .mission {
+        min-height: auto;
+        padding-top: 120px;
+      }
+
+      .principles {
+        grid-template-columns: 1fr;
+      }
+
+      .principle {
+        min-height: 0;
+      }
+
+      .principle-number {
+        margin-bottom: 20px;
+      }
+
+      .statement-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .shell {
+        width: min(calc(100% - 24px), var(--max));
+      }
+
+      header {
+        padding-top: 14px;
+      }
+
+      .brand-name {
+        max-width: 205px;
+        font-size: 0.76rem;
+        line-height: 1.25;
+      }
+
+      .nav-tag {
+        display: none;
+      }
+
+      .mission {
+        padding-top: 90px;
+        padding-bottom: 85px;
+      }
+
+      h1 {
+        font-size: clamp(3.6rem, 18vw, 6rem);
+      }
+
+      .mission-copy {
+        margin-top: 26px;
+        font-size: 1rem;
+      }
+
+      .principles {
+        margin-top: 40px;
+      }
+
+      .interaction-note {
+        max-width: 280px;
+        margin-inline: auto;
+      }
+
+      .footer-line {
+        flex-direction: column;
+      }
+
+      .footer-note {
+        text-align: left;
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
-      #mesh { display: none; }
-      .static-mesh { display: block; }
-      .btn { transition: none; }
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+
+      .interaction-note {
+        display: none;
+      }
     }
   </style>
 </head>
-<body>
-  <section class="hero" aria-label="Mission with mesh backdrop">
-    <canvas id="mesh" aria-hidden="true"></canvas>
-    <div class="static-mesh" aria-hidden="true"></div>
-    <div class="veil" aria-hidden="true"></div>
 
-    <div class="content">
-      <p class="eyebrow">Mission</p>
-      <h1>Clear standards for coastal Washington builds</h1>
-      <p class="mission">
-        The <strong>Board of Project Stewardship</strong> publishes construction standards and contractor directories
-        for Edmonds and King &amp; Snohomish Counties. Screening covers solvency, technical review, local mastery,
-        license status, and permit ownership — evidence, not ad volume.
-        The Board does not bid or build projects.
-      </p>
-      <div class="actions">
-        <a class="btn btn-primary" href="../about.html">About the Board</a>
-        <a class="btn btn-ghost" href="../how-we-rank.html">How we rank</a>
+<body>
+  <a class="skip-link" href="#main" target="_self">Skip to content</a>
+
+  <div class="noise" aria-hidden="true"></div>
+
+  <header>
+    <div class="shell nav">
+      <a class="brand" href="../index.html" aria-label="The Board of Project Stewardship home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">The Board of Project Stewardship</span>
+      </a>
+
+      <span class="nav-tag">Mission</span>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="mission" id="mission" aria-labelledby="mission-title">
+      <div class="mesh-wrap" aria-hidden="true">
+        <canvas id="meshCanvas"></canvas>
+        <div class="mesh-horizon"></div>
+        <div class="mesh-vignette"></div>
+      </div>
+
+      <div class="shell content">
+        <div class="eyebrow">Our mission</div>
+
+        <h1 id="mission-title">
+          Better questions.
+          <span>Better stewardship.</span>
+        </h1>
+
+        <p class="mission-copy">
+          The Board of Project Stewardship exists to help homeowners navigate
+          construction with more clarity. We organize practical standards around
+          <strong>verification, accountability, local context, and informed decision-making</strong>
+          so people can evaluate projects and contractors with fewer assumptions.
+        </p>
+
+        <div class="principles" aria-label="Mission principles">
+          <article class="principle">
+            <span class="principle-number">01 · Verify</span>
+            <strong>Use current evidence.</strong>
+            <p>
+              Prefer public records, written scope, current documentation, and
+              project-specific facts over unsupported impressions.
+            </p>
+          </article>
+
+          <article class="principle">
+            <span class="principle-number">02 · Clarify</span>
+            <strong>Define responsibility.</strong>
+            <p>
+              Make ownership of permits, coordination, decisions, changes, and
+              unresolved issues clear before construction becomes complicated.
+            </p>
+          </article>
+
+          <article class="principle">
+            <span class="principle-number">03 · Steward</span>
+            <strong>Protect the whole process.</strong>
+            <p>
+              Good stewardship considers not only the finished space, but how the
+              project is planned, documented, communicated, and carried through.
+            </p>
+          </article>
+        </div>
+
+        <div class="interaction-note">
+          <span aria-hidden="true"></span>
+          <span>Move a pointer or touch the backdrop to gently shift the mesh.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="statement" aria-labelledby="statement-title">
+      <div class="shell statement-grid">
+        <div class="statement-label">What this means</div>
+
+        <div class="statement-copy">
+          <p id="statement-title">
+            Construction standards are most useful when they help people see
+            what is known, what is uncertain, and what still needs verification.
+          </p>
+
+          <p>
+            The Board of Project Stewardship provides educational guidance and
+            comparative frameworks. It does not replace legal, financial,
+            architectural, engineering, geotechnical, code, permitting, insurance,
+            or other project-specific professional advice, and it does not guarantee
+            contractor performance or construction outcomes.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-line">
+      <div>
+        <strong>The Board of Project Stewardship</strong>
+        Edmonds / King &amp; Snohomish construction standards hub
+      </div>
+
+      <div class="footer-note">
+        Educational and illustrative only. Verify contractor registration, insurance,
+        permit requirements, professional credentials, site conditions, written scope,
+        and project-specific requirements independently.
       </div>
     </div>
-  </section>
+  </footer>
 
   <script>
-    (function () {
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const canvas = document.getElementById('mesh');
-      if (reduce || !canvas) return;
+    (() => {
+      "use strict";
 
-      const ctx = canvas.getContext('2d', { alpha: true });
-      let w = 0, h = 0, dpr = 1;
-      const COLS = 28;
-      const ROWS = 18;
-      const points = [];
-      let mx = 0.5, my = 0.5, tmx = 0.5, tmy = 0.5;
-      let t = 0;
-      let running = true;
+      const canvas = document.getElementById("meshCanvas");
+      const section = document.getElementById("mission");
+      const ctx = canvas.getContext("2d", { alpha: true });
+
+      if (!ctx) return;
+
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+      let cssWidth = 0;
+      let cssHeight = 0;
+      let dpr = 1;
+      let cols = 0;
+      let rows = 0;
+      let spacingX = 0;
+      let spacingY = 0;
+      let points = [];
+
+      let pointerX = 0;
+      let pointerY = 0;
+      let targetX = 0;
+      let targetY = 0;
+      let pointerStrength = 0;
+      let targetStrength = 0;
+
+      let frame = 0;
+      let lastTime = 0;
+
+      const config = {
+        desktopColumns: 20,
+        mobileColumns: 12,
+        verticalSpacingRatio: 0.72,
+        influenceRadius: 230,
+        warp: 38,
+        wave: 8
+      };
+
+      function clamp(value, min, max) {
+        return Math.min(max, Math.max(min, value));
+      }
 
       function resize() {
+        const rect = section.getBoundingClientRect();
+
+        cssWidth = Math.max(1, rect.width);
+        cssHeight = Math.max(1, rect.height);
         dpr = Math.min(window.devicePixelRatio || 1, 2);
-        w = canvas.clientWidth;
-        h = canvas.clientHeight;
-        canvas.width = Math.floor(w * dpr);
-        canvas.height = Math.floor(h * dpr);
+
+        canvas.width = Math.round(cssWidth * dpr);
+        canvas.height = Math.round(cssHeight * dpr);
+        canvas.style.width = `${cssWidth}px`;
+        canvas.style.height = `${cssHeight}px`;
+
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        points.length = 0;
-        for (let y = 0; y <= ROWS; y++) {
-          for (let x = 0; x <= COLS; x++) {
+
+        cols = window.innerWidth < 700
+          ? config.mobileColumns
+          : config.desktopColumns;
+
+        spacingX = cssWidth / Math.max(1, cols - 1);
+        spacingY = spacingX * config.verticalSpacingRatio;
+        rows = Math.ceil(cssHeight / spacingY) + 3;
+
+        points = [];
+
+        for (let row = -1; row < rows; row += 1) {
+          for (let col = 0; col < cols; col += 1) {
+            const stagger = row % 2 === 0 ? 0 : spacingX * 0.5;
+
             points.push({
-              bx: x / COLS,
-              by: y / ROWS,
-              x: x / COLS,
-              y: y / ROWS,
+              row,
+              col,
+              x: col * spacingX + stagger - spacingX * 0.25,
+              y: row * spacingY
             });
           }
         }
+
+        if (!pointerX && !pointerY) {
+          pointerX = cssWidth * 0.5;
+          pointerY = cssHeight * 0.48;
+          targetX = pointerX;
+          targetY = pointerY;
+        }
+
+        if (reduceMotion.matches) {
+          draw(performance.now());
+        }
       }
 
-      function idx(x, y) { return y * (COLS + 1) + x; }
+      function pointAt(row, col) {
+        const normalizedCol = clamp(col, 0, cols - 1);
+        const index = (row + 1) * cols + normalizedCol;
+        return points[index];
+      }
 
-      function frame(now) {
-        if (!running) return;
-        requestAnimationFrame(frame);
-        t = now * 0.001;
-        mx += (tmx - mx) * 0.06;
-        my += (tmy - my) * 0.06;
+      function displaced(point, time) {
+        const t = time * 0.00045;
+        const dx = point.x - pointerX;
+        const dy = point.y - pointerY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const radius = config.influenceRadius;
+        const influence = Math.max(0, 1 - distance / radius);
+        const eased = influence * influence * (3 - 2 * influence);
 
-        ctx.clearRect(0, 0, w, h);
+        const safeDistance = Math.max(distance, 1);
+        const normalX = dx / safeDistance;
+        const normalY = dy / safeDistance;
 
-        // warp points toward pointer + gentle wave
-        for (const p of points) {
-          const dx = p.bx - mx;
-          const dy = p.by - my;
-          const dist = Math.sqrt(dx * dx + dy * dy) + 0.001;
-          const pull = Math.exp(-dist * 4.2) * 0.09;
-          const wave = Math.sin(t * 0.7 + p.bx * 6 + p.by * 4) * 0.008;
-          p.x = p.bx - dx * pull + wave;
-          p.y = p.by - dy * pull + Math.cos(t * 0.55 + p.by * 5) * 0.006;
-        }
+        const flowX =
+          Math.sin(point.y * 0.010 + t * 1.4) * config.wave +
+          Math.cos(point.x * 0.008 - t) * 3;
 
-        // draw mesh lines
-        ctx.lineWidth = 1;
-        for (let y = 0; y <= ROWS; y++) {
-          for (let x = 0; x < COLS; x++) {
-            const a = points[idx(x, y)];
-            const b = points[idx(x + 1, y)];
-            const mid = (a.x + b.x) / 2;
-            const midy = (a.y + b.y) / 2;
-            const d = Math.hypot(mid - mx, midy - my);
-            const alpha = 0.04 + Math.max(0, 0.22 - d * 0.35);
-            ctx.strokeStyle = `rgba(74, 222, 128, ${alpha})`;
-            ctx.beginPath();
-            ctx.moveTo(a.x * w, a.y * h);
-            ctx.lineTo(b.x * w, b.y * h);
-            ctx.stroke();
+        const flowY =
+          Math.cos(point.x * 0.011 - t * 1.2) * config.wave +
+          Math.sin(point.y * 0.009 + t) * 3;
+
+        const pointerWarp = config.warp * eased * pointerStrength;
+
+        return {
+          x:
+            point.x +
+            flowX +
+            normalX * pointerWarp +
+            -normalY * pointerWarp * 0.16,
+          y:
+            point.y +
+            flowY +
+            normalY * pointerWarp +
+            normalX * pointerWarp * 0.1,
+          influence: eased
+        };
+      }
+
+      function drawLine(a, b, alpha, width) {
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.strokeStyle = `rgba(161, 220, 197, ${alpha})`;
+        ctx.lineWidth = width;
+        ctx.stroke();
+      }
+
+      function draw(time) {
+        ctx.clearRect(0, 0, cssWidth, cssHeight);
+
+        const gradient = ctx.createRadialGradient(
+          pointerX,
+          pointerY,
+          0,
+          pointerX,
+          pointerY,
+          Math.max(cssWidth, cssHeight) * 0.62
+        );
+
+        gradient.addColorStop(0, "rgba(80, 157, 126, 0.12)");
+        gradient.addColorStop(0.35, "rgba(47, 103, 82, 0.05)");
+        gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
+
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, cssWidth, cssHeight);
+
+        const resolved = points.map((point) => displaced(point, time));
+
+        for (let row = -1; row < rows - 1; row += 1) {
+          for (let col = 0; col < cols - 1; col += 1) {
+            const currentIndex = (row + 1) * cols + col;
+            const rightIndex = currentIndex + 1;
+            const downIndex = currentIndex + cols;
+
+            const a = resolved[currentIndex];
+            const b = resolved[rightIndex];
+            const c = resolved[downIndex];
+
+            if (!a || !b || !c) continue;
+
+            const localInfluence = Math.max(
+              a.influence,
+              b.influence,
+              c.influence
+            );
+
+            const alpha = 0.055 + localInfluence * 0.09;
+            const lineWidth = 0.65 + localInfluence * 0.35;
+
+            drawLine(a, b, alpha, lineWidth);
+            drawLine(a, c, alpha * 0.9, lineWidth);
+
+            if ((row + col) % 2 === 0) {
+              const diagonalIndex = downIndex + 1;
+              const d = resolved[diagonalIndex];
+
+              if (d) {
+                drawLine(
+                  a,
+                  d,
+                  alpha * 0.42,
+                  Math.max(0.5, lineWidth - 0.1)
+                );
+              }
+            }
           }
         }
-        for (let x = 0; x <= COLS; x++) {
-          for (let y = 0; y < ROWS; y++) {
-            const a = points[idx(x, y)];
-            const b = points[idx(x, y + 1)];
-            const mid = (a.x + b.x) / 2;
-            const midy = (a.y + b.y) / 2;
-            const d = Math.hypot(mid - mx, midy - my);
-            const alpha = 0.03 + Math.max(0, 0.18 - d * 0.35);
-            ctx.strokeStyle = `rgba(22, 101, 52, ${alpha * 1.4})`;
-            ctx.beginPath();
-            ctx.moveTo(a.x * w, a.y * h);
-            ctx.lineTo(b.x * w, b.y * h);
-            ctx.stroke();
-          }
-        }
 
-        // soft nodes near pointer
-        for (const p of points) {
-          const d = Math.hypot(p.x - mx, p.y - my);
-          if (d > 0.28) continue;
-          const r = (1 - d / 0.28) * 2.2;
-          ctx.fillStyle = `rgba(74, 222, 128, ${(1 - d / 0.28) * 0.45})`;
+        for (let i = 0; i < resolved.length; i += 1) {
+          const point = resolved[i];
+          const alpha = 0.07 + point.influence * 0.18;
+          const radius = 0.8 + point.influence * 1.15;
+
           ctx.beginPath();
-          ctx.arc(p.x * w, p.y * h, r, 0, Math.PI * 2);
+          ctx.arc(point.x, point.y, radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(192, 238, 220, ${alpha})`;
           ctx.fill();
         }
       }
 
-      function onMove(clientX, clientY) {
-        const r = canvas.getBoundingClientRect();
-        tmx = (clientX - r.left) / r.width;
-        tmy = (clientY - r.top) / r.height;
+      function animate(time) {
+        const delta = Math.min(32, time - lastTime || 16);
+        lastTime = time;
+
+        const ease = 1 - Math.pow(0.001, delta / 1000);
+
+        pointerX += (targetX - pointerX) * Math.min(0.14, ease * 7);
+        pointerY += (targetY - pointerY) * Math.min(0.14, ease * 7);
+        pointerStrength +=
+          (targetStrength - pointerStrength) * Math.min(0.12, ease * 6);
+
+        draw(time);
+
+        if (!reduceMotion.matches) {
+          frame = requestAnimationFrame(animate);
+        }
       }
 
-      window.addEventListener('resize', resize);
-      window.addEventListener('pointermove', (e) => onMove(e.clientX, e.clientY));
-      window.addEventListener('touchmove', (e) => {
-        if (e.touches[0]) onMove(e.touches[0].clientX, e.touches[0].clientY);
-      }, { passive: true });
+      function localPointer(clientX, clientY) {
+        const rect = section.getBoundingClientRect();
 
-      document.addEventListener('visibilitychange', () => {
-        running = !document.hidden;
-        if (running) requestAnimationFrame(frame);
+        targetX = clamp(clientX - rect.left, 0, rect.width);
+        targetY = clamp(clientY - rect.top, 0, rect.height);
+        targetStrength = 1;
+      }
+
+      section.addEventListener(
+        "pointermove",
+        (event) => {
+          if (reduceMotion.matches) return;
+          localPointer(event.clientX, event.clientY);
+        },
+        { passive: true }
+      );
+
+      section.addEventListener(
+        "pointerleave",
+        () => {
+          if (reduceMotion.matches) return;
+
+          targetX = cssWidth * 0.5;
+          targetY = cssHeight * 0.48;
+          targetStrength = 0.3;
+        },
+        { passive: true }
+      );
+
+      section.addEventListener(
+        "touchstart",
+        (event) => {
+          if (reduceMotion.matches || !event.touches.length) return;
+
+          const touch = event.touches[0];
+          localPointer(touch.clientX, touch.clientY);
+        },
+        { passive: true }
+      );
+
+      section.addEventListener(
+        "touchmove",
+        (event) => {
+          if (reduceMotion.matches || !event.touches.length) return;
+
+          const touch = event.touches[0];
+          localPointer(touch.clientX, touch.clientY);
+        },
+        { passive: true }
+      );
+
+      section.addEventListener(
+        "touchend",
+        () => {
+          if (reduceMotion.matches) return;
+
+          targetX = cssWidth * 0.5;
+          targetY = cssHeight * 0.48;
+          targetStrength = 0.3;
+        },
+        { passive: true }
+      );
+
+      const resizeObserver = new ResizeObserver(() => {
+        resize();
+      });
+
+      resizeObserver.observe(section);
+
+      reduceMotion.addEventListener?.("change", () => {
+        cancelAnimationFrame(frame);
+
+        targetX = cssWidth * 0.5;
+        targetY = cssHeight * 0.48;
+        pointerX = targetX;
+        pointerY = targetY;
+        targetStrength = reduceMotion.matches ? 0 : 0.3;
+        pointerStrength = targetStrength;
+
+        if (reduceMotion.matches) {
+          draw(performance.now());
+        } else {
+          frame = requestAnimationFrame(animate);
+        }
       });
 
       resize();
-      requestAnimationFrame(frame);
+
+      if (reduceMotion.matches) {
+        pointerStrength = 0;
+        draw(performance.now());
+      } else {
+        targetStrength = 0.3;
+        pointerStrength = 0.3;
+        frame = requestAnimationFrame(animate);
+      }
     })();
   </script>
 
   <script>
     (function () {
-      var id = document.documentElement.getAttribute('data-section-id');
+      var id = document.documentElement.getAttribute("data-section-id");
       function report() {
-        var h = Math.ceil(Math.max(document.documentElement.scrollHeight, document.body ? document.body.scrollHeight : 0));
+        var h = Math.ceil(Math.max(
+          document.documentElement.scrollHeight,
+          document.body ? document.body.scrollHeight : 0
+        ));
         if (window.parent && window.parent !== window && id) {
-          window.parent.postMessage({ type: 'board-section:resize', id: id, height: h }, window.location.origin);
+          window.parent.postMessage({ type: "board-section:resize", id: id, height: h }, window.location.origin);
         }
       }
-      window.addEventListener('load', report);
-      window.addEventListener('resize', report);
+      window.addEventListener("load", report);
+      window.addEventListener("resize", report);
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(report);
       setTimeout(report, 250);
       setTimeout(report, 1200);
     })();
   </script>
+
 </body>
 </html>

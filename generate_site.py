@@ -1497,7 +1497,7 @@ def board_section_iframe(frame_id: str, filename: str, title: str, height: int) 
         var trusted = new URL(frame.src, window.location.href).origin;
         if (event.origin !== trusted) return;
         var next = Number(event.data.height);
-        if (Number.isFinite(next) && next >= 280 && next <= 2200) {{
+        if (Number.isFinite(next) && next >= 280 && next <= 6400) {{
           frame.style.height = Math.ceil(next) + 'px';
         }}
       }});
@@ -3218,7 +3218,7 @@ def build_about() -> str:
         "mesh-flow-mission",
         "mesh-flow-backdrop.html",
         "Mission — Board of Project Stewardship",
-        560,
+        1100,
         extra_class="mb-12",
     )}
 
@@ -3326,14 +3326,14 @@ def build_about() -> str:
         "focus-reveal-standards",
         "focus-reveal-standards.html",
         "How we evaluate — Board of Project Stewardship",
-        640,
+        1200,
     )}
 {board_section_embed(
         "integrity-shield",
         "integrity-shield-showcase",
         "integrity-shield-showcase.html",
         "Integrity Shield — six stewardship layers",
-        780,
+        1400,
     )}
 
     <section class="mb-14">
@@ -3451,7 +3451,7 @@ def build_about() -> str:
         "circular-directory",
         "circular-directory.html",
         "Edmonds topic directory — Board of Project Stewardship",
-        760,
+        1100,
     )}
     <section class="mb-8">
       <div class="mb-6 border-b border-white/10 pb-4">
@@ -6017,7 +6017,7 @@ def build_how_we_rank_page() -> str:
             "focus-reveal-standards",
             "focus-reveal-standards.html",
             "How we evaluate — Board of Project Stewardship",
-            640,
+            1200,
         )
         + _hub_section(
             "Entity clarity",
@@ -6049,7 +6049,7 @@ def build_how_we_rank_page() -> str:
             "integrity-shield-showcase",
             "integrity-shield-showcase.html",
             "Integrity Shield — six stewardship layers",
-            780,
+            1400,
         )
         + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Ranking FAQ')}\n  </div>\n"
         + education_closing("verify", "directories", "default", official_keys=["lni_verify", "lni_home"])
@@ -6876,7 +6876,7 @@ def build_about_page() -> str:
             "mesh-flow-mission",
             "mesh-flow-backdrop.html",
             "Mission — Board of Project Stewardship",
-            560,
+            1100,
         )
         + _hub_section(
             "What we are",
@@ -6914,7 +6914,7 @@ def build_about_page() -> str:
             "integrity-shield-showcase",
             "integrity-shield-showcase.html",
             "Integrity Shield — six stewardship layers",
-            780,
+            1400,
         )
         + education_closing("default", "directories", "learn", official_keys=["lni_verify", "lni_hire_smart", "lni_home", "mybuildingpermit", "edmonds"])
         + f'  <div class="max-w-6xl mx-auto px-4 pb-16">\n{faq_section(faqs, "About FAQ")}\n  </div>\n'
@@ -8368,7 +8368,7 @@ def build_edmonds_hub() -> str:
             "circular-directory",
             "circular-directory.html",
             "Edmonds topics — Board of Project Stewardship",
-            760,
+            1100,
         ),
     )
 
@@ -10069,7 +10069,7 @@ def build_directory_hub() -> str:
             "circular-directory",
             "circular-directory.html",
             "Edmonds topic directory — Board of Project Stewardship",
-            760,
+            1100,
         )
         + f"""  <section class="max-w-6xl mx-auto px-4 pb-8">
     <div class="bg-primary/10 border border-secondary/30 rounded-xl p-6 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">
