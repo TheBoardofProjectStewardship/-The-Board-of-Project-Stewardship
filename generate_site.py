@@ -5826,7 +5826,25 @@ def build_shoreline_hub() -> str:
             ("Bathroom remodelers", "./bathrooms.html"),
             ("Another Story (Board feature)", "./another-story.html"),
         ],
-        official_keys=["lni_verify", "lni_home", "shoreline_etrait", "shoreline"]
+        official_keys=["lni_verify", "lni_home", "shoreline_etrait", "shoreline"],
+        photo_strip=[
+            (
+                "assets/images/posts/2026-09-12-shoreline-kitchen-1.webp",
+                "Illustrative Shoreline kitchen remodel context — not a real Board job photo",
+                "Kitchen scopes",
+            ),
+            (
+                "assets/images/posts/2026-09-11-shoreline-bath-1.webp",
+                "Illustrative Shoreline bath remodel context — not a real Board job photo",
+                "Bath scopes",
+            ),
+            (
+                "assets/images/posts/2026-09-10-shoreline-addition-1.webp",
+                "Illustrative Shoreline addition context — not a real Board job photo",
+                "Addition scopes",
+            ),
+        ],
+        photo_strip_title="Shoreline work in pictures (illustrative)",
     )
 
 
@@ -5851,7 +5869,25 @@ def build_lynnwood_hub() -> str:
             ("Home additions directory", "./additions.html"),
             ("Trades hub", "./trades.html"),
         ],
-        official_keys=["lni_verify", "lni_home", "lynnwood", "mybuildingpermit"]
+        official_keys=["lni_verify", "lni_home", "lynnwood", "mybuildingpermit"],
+        photo_strip=[
+            (
+                "assets/images/posts/2026-09-09-lynnwood-kitchen-1.webp",
+                "Illustrative Lynnwood kitchen remodel context — not a real Board job photo",
+                "Kitchen scopes",
+            ),
+            (
+                "assets/images/posts/2026-09-08-lynnwood-bath-1.webp",
+                "Illustrative Lynnwood bath remodel context — not a real Board job photo",
+                "Bath scopes",
+            ),
+            (
+                "assets/images/home-process-verify.webp",
+                "Illustrative contractor verification habit — not a real Board job photo",
+                "L&I before hire",
+            ),
+        ],
+        photo_strip_title="Lynnwood work in pictures (illustrative)",
     )
 
 
@@ -5878,6 +5914,24 @@ def build_ballard_hub() -> str:
             ("Home additions directory", "./additions.html"),
             ("Permit hub", "./permits.html"),
         ],
+        photo_strip=[
+            (
+                "assets/images/posts/2026-09-04-kitchen-ballard-1.webp",
+                "Illustrative Ballard kitchen remodel context — not a real Board job photo",
+                "Kitchen scopes",
+            ),
+            (
+                "assets/images/posts/2026-09-03-ballard-bath-1.webp",
+                "Illustrative Ballard bath remodel context — not a real Board job photo",
+                "Bath scopes",
+            ),
+            (
+                "assets/images/home-process-build.webp",
+                "Illustrative remodel build phase — not a real Board job photo",
+                "Occupied-site habits",
+            ),
+        ],
+        photo_strip_title="Ballard work in pictures (illustrative)",
     )
 
 
@@ -5905,6 +5959,24 @@ def build_magnolia_hub() -> str:
             ("Coastal waterproofing checklist", "./coastal-waterproofing.html"),
             ("Permit hub", "./permits.html"),
         ],
+        photo_strip=[
+            (
+                "assets/images/posts/2026-09-17-magnolia-bathroom-1.webp",
+                "Illustrative Magnolia bath remodel context — not a real Board job photo",
+                "Bath scopes",
+            ),
+            (
+                "assets/images/posts/2026-09-16-magnolia-kitchen-1.webp",
+                "Illustrative Magnolia kitchen remodel context — not a real Board job photo",
+                "Kitchen scopes",
+            ),
+            (
+                "assets/images/home-gallery-finish.webp",
+                "Illustrative finish craft — not a real Board job photo",
+                "Finish discipline",
+            ),
+        ],
+        photo_strip_title="Magnolia work in pictures (illustrative)",
     )
 
 
@@ -5926,6 +5998,26 @@ def build_adu_checklist_page() -> str:
             "Good Steward · ADU",
             "ADU readiness checklist",
             "A printable Board checklist for homeowners exploring an accessory dwelling unit. Educational — not a permit set, fee schedule, or bid.",
+        )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/posts/2026-09-07-edmonds-adu-1.webp",
+                    "Illustrative ADU / small-dwelling planning context — not a real Board job photo",
+                    "Parcel & program fit",
+                ),
+                (
+                    "assets/images/posts/2026-08-12-edmonds-addition-permit-3.webp",
+                    "Illustrative permit plan set review for small dwellings — not a real Board job photo",
+                    "Portal readiness",
+                ),
+                (
+                    "assets/images/home-process-research.webp",
+                    "Illustrative Board research desk for ADU standards — not a real Board job photo",
+                    "Standards before stock plans",
+                ),
+            ],
+            title="ADU planning in pictures (illustrative)",
         )
         + _hub_section(
             "How to use this checklist",
@@ -5982,6 +6074,26 @@ def build_change_orders_page() -> str:
             "Change orders &amp; allowances",
             "Board educational explainer for homeowners comparing remodel bids in Edmonds / King &amp; Snohomish. Not legal advice and not a price guide.",
         )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/posts/2026-08-11-hire-design-build-3.webp",
+                    "Illustrative written scope and selection review — not a real Board job photo",
+                    "Freeze scope before long-leads",
+                ),
+                (
+                    "assets/images/home-process-verify.webp",
+                    "Illustrative verification habit before approving extras — not a real Board job photo",
+                    "Price & schedule in writing",
+                ),
+                (
+                    "assets/images/posts/2026-08-12-hire-kitchen-2.webp",
+                    "Illustrative kitchen remodel selection boards — not a real Board job photo",
+                    "Allowances need rules",
+                ),
+            ],
+            title="Change-order discipline (illustrative)",
+        )
         + _hub_section(
             "Habits that protect the schedule",
             _check_ul(
@@ -6025,6 +6137,26 @@ def build_coastal_waterproofing_page() -> str:
             "Good Steward · PNW envelope",
             "Coastal waterproofing checklist",
             "Educational checklist for baths, additions, and weatherproofing near Puget Sound. Not a product endorsement or installation manual.",
+        )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/home-gallery-dryin.webp",
+                    "Illustrative weather-resistive dry-in on a Pacific Northwest home — not a real Board job photo",
+                    "Dry-in before finishes",
+                ),
+                (
+                    "assets/images/posts/2026-08-08-weatherproof-first-2.webp",
+                    "Illustrative coastal weatherproofing assembly — not a real Board job photo",
+                    "WRB & flashing first",
+                ),
+                (
+                    "assets/images/posts/2026-09-22-edmonds-siding-1.webp",
+                    "Illustrative fiber-cement cladding context for coastal Edmonds — not a real Board job photo",
+                    "Cladding after WRB",
+                ),
+            ],
+            title="Coastal moisture context (illustrative)",
         )
         + _hub_section(
             "Moisture habits",
@@ -6130,6 +6262,26 @@ def build_hire_questions_page() -> str:
             "Good Steward · Interviews",
             "Hire interview question bank",
             "A Board question bank for comparing remodel and addition bids in Edmonds / King &amp; Snohomish. Use alongside L&amp;I Verify — not instead of it.",
+        )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/posts/2026-08-11-hire-design-build-4.webp",
+                    "Illustrative hire interview over plans — not a real Board job photo",
+                    "Same questions every firm",
+                ),
+                (
+                    "assets/images/home-process-verify.webp",
+                    "Illustrative L&I verification before deposit — not a real Board job photo",
+                    "License before handshake",
+                ),
+                (
+                    "assets/images/home-process-shortlist.webp",
+                    "Illustrative shortlist comparison — not a real Board job photo",
+                    "Compare written scopes",
+                ),
+            ],
+            title="Interview habits (illustrative)",
         )
         + _hub_section(
             "How to run the interview",
@@ -6504,6 +6656,26 @@ def build_glossary_page() -> str:
             "Glossary",
             "Short definitions used across Board of Project Stewardship directories and Good Steward tools.",
         )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/home-process-research.webp",
+                    "Illustrative standards research desk — not a real Board job photo",
+                    "Shared vocabulary",
+                ),
+                (
+                    "assets/images/home-process-verify.webp",
+                    "Illustrative verification language in practice — not a real Board job photo",
+                    "Public records terms",
+                ),
+                (
+                    "assets/images/home-gallery-dryin.webp",
+                    "Illustrative building-assembly context — not a real Board job photo",
+                    "Assembly terms",
+                ),
+            ],
+            title="Standards language (illustrative)",
+        )
         + _hub_section("Terms", rows)
         + "  <div class=\"pb-12\"></div>\n"
         + education_closing("learn", "default", official_keys=["lni_verify", "lni_home", "mybuildingpermit", "seattle_sdci"])
@@ -6585,6 +6757,26 @@ def build_second_story_vs_teardown_page() -> str:
             "Learning hub · Additions",
             "Second story vs teardown",
             "An educational Board comparison for North Sound homeowners weighing a second-story addition against a full teardown-and-rebuild. Not a cost guarantee, appraisal, or structural opinion.",
+        )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/posts/2026-08-09-second-story-teardown-1.webp",
+                    "Illustrative second-story vs teardown comparison context — not a real Board job photo",
+                    "Compare paths honestly",
+                ),
+                (
+                    "assets/images/posts/2026-08-09-second-story-teardown-2.webp",
+                    "Illustrative structural addition framing — not a real Board job photo",
+                    "Structure drives path",
+                ),
+                (
+                    "assets/images/posts/2026-08-09-second-story-teardown-3.webp",
+                    "Illustrative finished vertical addition massing — not a real Board job photo",
+                    "No invented cost deltas",
+                ),
+            ],
+            title="Path comparison (illustrative)",
         )
         + _hub_section(
             "What you are really choosing",
@@ -7168,6 +7360,24 @@ def build_kirkland_hub() -> str:
             ("Bathroom remodelers", "./bathrooms.html"),
             ("Permit hub", "./permits.html"),
         ],
+        photo_strip=[
+            (
+                "assets/images/posts/2026-09-19-kirkland-addition-1.webp",
+                "Illustrative Kirkland home addition context — not a real Board job photo",
+                "Addition planning",
+            ),
+            (
+                "assets/images/dir-additions-hero.webp",
+                "Illustrative addition craft — not a real Board job photo",
+                "Structure & envelope",
+            ),
+            (
+                "assets/images/home-gallery-dryin.webp",
+                "Illustrative dry-in milestone — not a real Board job photo",
+                "Weather sequencing",
+            ),
+        ],
+        photo_strip_title="Kirkland work in pictures (illustrative)",
     )
 
 
@@ -7184,6 +7394,7 @@ def build_bothell_hub() -> str:
             ("City of Bothell", "https://www.bothellwa.gov/"),
         ],
         [
+            ("Bathroom remodel Bothell WA", "./posts/2026-09-23-bathroom-remodel-bothell-wa.html"),
             ("Home addition Bothell WA", "./posts/2026-08-20-home-addition-bothell-wa.html"),
         ],
         [
@@ -7193,6 +7404,24 @@ def build_bothell_hub() -> str:
             ("Trades hub", "./trades.html"),
             ("Permit hub", "./permits.html"),
         ],
+        photo_strip=[
+            (
+                "assets/images/posts/2026-09-23-bothell-bath-1.webp",
+                "Illustrative Bothell-style bath waterproofing in progress — not a real Board job photo",
+                "Wet-room discipline",
+            ),
+            (
+                "assets/images/posts/2026-09-23-bothell-bath-2.webp",
+                "Illustrative shower membrane at curb — not a real Board job photo",
+                "Membrane details",
+            ),
+            (
+                "assets/images/posts/2026-08-20-bothell-addition-1.webp",
+                "Illustrative Bothell addition context — not a real Board job photo",
+                "Addition & remodel hub",
+            ),
+        ],
+        photo_strip_title="Bothell work in pictures (illustrative)",
     )
 
 
@@ -7537,6 +7766,24 @@ def build_mill_creek_hub() -> str:
             ("Permit hub", "./permits.html"),
             ("Learn hub", "./learn.html"),
         ],
+        photo_strip=[
+            (
+                "assets/images/posts/2026-09-18-mill-creek-kitchen-1.webp",
+                "Illustrative Mill Creek kitchen remodel context — not a real Board job photo",
+                "Kitchen scopes",
+            ),
+            (
+                "assets/images/dir-kitchen-hero.webp",
+                "Illustrative kitchen craft — not a real Board job photo",
+                "Layout & trades",
+            ),
+            (
+                "assets/images/home-process-verify.webp",
+                "Illustrative verification habit — not a real Board job photo",
+                "L&I before hire",
+            ),
+        ],
+        photo_strip_title="Mill Creek work in pictures (illustrative)",
     )
 
 
@@ -7612,6 +7859,26 @@ def build_bid_comparison_page() -> str:
             "Bid comparison checklist",
             "A Board checklist for comparing remodel and addition bids side by side. Educational — no prices, no invented averages.",
         )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/home-process-shortlist.webp",
+                    "Illustrative homeowner bid shortlist review — not a real Board job photo",
+                    "Normalize the apples",
+                ),
+                (
+                    "assets/images/posts/2026-08-11-hire-design-build-2.webp",
+                    "Illustrative design-build proposal review — not a real Board job photo",
+                    "Permit ownership lines",
+                ),
+                (
+                    "assets/images/posts/2026-08-12-hire-kitchen-1.webp",
+                    "Illustrative kitchen remodel bid context — not a real Board job photo",
+                    "Allowances & exclusions",
+                ),
+            ],
+            title="Bid comparison in pictures (illustrative)",
+        )
         + _hub_section(
             "Compare apples to apples",
             _check_ul(
@@ -7667,6 +7934,26 @@ def build_red_flags_hiring_page() -> str:
             "Good Steward · Hiring",
             "Red flags when hiring",
             "Educational Board list of bond, insurance, and L&amp;I warning signs for homeowners. Not legal advice and not a guarantee that any single signal proves fraud.",
+        )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/home-process-verify.webp",
+                    "Illustrative license verification habit — not a real Board job photo",
+                    "No deposit before L&I",
+                ),
+                (
+                    "assets/images/posts/2026-08-11-hire-design-build-4.webp",
+                    "Illustrative careful hire interview — not a real Board job photo",
+                    "Pushy urgency is a flag",
+                ),
+                (
+                    "assets/images/home-process-shortlist.webp",
+                    "Illustrative comparing multiple bids — not a real Board job photo",
+                    "Too-good bids need scrutiny",
+                ),
+            ],
+            title="Red-flag awareness (illustrative)",
         )
         + _hub_section(
             "Stop and verify",
@@ -7741,6 +8028,26 @@ def build_project_timeline_page() -> str:
             "Good Steward · Schedule literacy",
             "Project timeline — typical phases",
             "Orientation to common remodel/addition phases for Edmonds / King &amp; Snohomish. <strong class=\"text-slate-200\">Ranges are “often,” not guarantees.</strong> Your signed schedule and AHJ control reality.",
+        )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/home-process-build.webp",
+                    "Illustrative build-phase sequencing — not a real Board job photo",
+                    "Rough-in before cover",
+                ),
+                (
+                    "assets/images/home-gallery-dryin.webp",
+                    "Illustrative dry-in milestone — not a real Board job photo",
+                    "Weather holds matter",
+                ),
+                (
+                    "assets/images/home-gallery-finish.webp",
+                    "Illustrative finish-phase sequencing — not a real Board job photo",
+                    "Finishes after inspections",
+                ),
+            ],
+            title="Sequencing context (illustrative)",
         )
         + _hub_section(
             "Disclaimer",
@@ -7826,7 +8133,25 @@ def build_seattle_hub() -> str:
             ("Learn hub", "./learn.html"),
             ("King County hub", "./king-county.html"),
         ],
-        official_keys=["lni_verify", "lni_home", "seattle_how", "seattle_portal", "seattle_sdci"]
+        official_keys=["lni_verify", "lni_home", "seattle_how", "seattle_portal", "seattle_sdci"],
+        photo_strip=[
+            (
+                "assets/images/posts/2026-09-06-seattle-bath-permits-1.webp",
+                "Illustrative Seattle bath permit context — not a real Board job photo",
+                "SDCI path differs",
+            ),
+            (
+                "assets/images/home-process-research.webp",
+                "Illustrative Seattle permit research — not a real Board job photo",
+                "Services Portal",
+            ),
+            (
+                "assets/images/home-gallery-finish.webp",
+                "Illustrative urban remodel finishes — not a real Board job photo",
+                "Urban staging",
+            ),
+        ],
+        photo_strip_title="Seattle work in pictures (illustrative)",
     )
 
 
@@ -7865,7 +8190,25 @@ def build_snohomish_county_hub() -> str:
             ("Learn hub", "./learn.html"),
             ("Hiring a contractor", "./hiring-a-contractor.html"),
         ],
-        official_keys=["lni_verify", "lni_home", "snohomish_pds", "mybuildingpermit"]
+        official_keys=["lni_verify", "lni_home", "snohomish_pds", "mybuildingpermit"],
+        photo_strip=[
+            (
+                "assets/images/hubs/hub-edmonds-1.webp",
+                "Illustrative Snohomish coastal craftsman context — not a real Board job photo",
+                "Coastal stock",
+            ),
+            (
+                "assets/images/home-process-research.webp",
+                "Illustrative county permit research — not a real Board job photo",
+                "City vs county AHJ",
+            ),
+            (
+                "assets/images/home-process-verify.webp",
+                "Illustrative contractor verification — not a real Board job photo",
+                "L&I Verify",
+            ),
+        ],
+        photo_strip_title="Snohomish County context (illustrative)",
     )
 
 
@@ -7904,7 +8247,25 @@ def build_king_county_hub() -> str:
             ("Learn hub", "./learn.html"),
             ("Hiring a contractor", "./hiring-a-contractor.html"),
         ],
-        official_keys=["lni_verify", "lni_home", "mybuildingpermit", "king_accela", "king_permits"]
+        official_keys=["lni_verify", "lni_home", "mybuildingpermit", "king_accela", "king_permits"],
+        photo_strip=[
+            (
+                "assets/images/home-hero.webp",
+                "Illustrative King County / North Sound home exterior — not a real Board job photo",
+                "North Sound stock",
+            ),
+            (
+                "assets/images/home-process-research.webp",
+                "Illustrative permit research desk — not a real Board job photo",
+                "Confirm the AHJ",
+            ),
+            (
+                "assets/images/home-process-verify.webp",
+                "Illustrative L&I verification — not a real Board job photo",
+                "Verify every bidder",
+            ),
+        ],
+        photo_strip_title="King County context (illustrative)",
     )
 
 
@@ -7932,6 +8293,26 @@ def build_final_walkthrough_page() -> str:
             "Learning hub · Closeout",
             "Final walkthrough & punch list",
             "Board education on punch-list habits for Edmonds / King &amp; Snohomish remodels and additions. Not a payment schedule and not legal advice.",
+        )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/home-gallery-finish.webp",
+                    "Illustrative punch-ready finish walkthrough — not a real Board job photo",
+                    "Walk with a written list",
+                ),
+                (
+                    "assets/images/posts/2026-08-11-hire-design-build-6.webp",
+                    "Illustrative finished remodel ready for handoff — not a real Board job photo",
+                    "Manuals & warranties",
+                ),
+                (
+                    "assets/images/home-ppg-interior.webp",
+                    "Illustrative interior finish quality check — not a real Board job photo",
+                    "Photo the punch items",
+                ),
+            ],
+            title="Closeout & punch (illustrative)",
         )
         + _hub_section(
             "Walk the room before you close the books",
@@ -8014,6 +8395,26 @@ def build_bonds_and_insurance_page() -> str:
             "WA contractor bonds &amp; insurance",
             "Board education on Washington contractor registration bonds and insurance for homeowners hiring remodel or addition firms. Official verification stays at L&amp;I — the Board invents no bond amounts, ratings, or claim outcomes.",
         )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/home-process-verify.webp",
+                    "Illustrative verifying contractor bond and insurance — not a real Board job photo",
+                    "Re-check before deposit",
+                ),
+                (
+                    "assets/images/posts/2026-08-11-hire-design-build-5.webp",
+                    "Illustrative hiring paperwork context — not a real Board job photo",
+                    "Ask for certificates",
+                ),
+                (
+                    "assets/images/home-process-shortlist.webp",
+                    "Illustrative shortlist after public-signal checks — not a real Board job photo",
+                    "Public signals first",
+                ),
+            ],
+            title="Bond & insurance habits (illustrative)",
+        )
         + _hub_section(
             "Verify before you deposit",
             f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Washington requires contractor registration. L&amp;I Verify is the source of truth for active status, bond, and insurance fields tied to a legal business name. Screenshot or PDF the result into the owner file on hire day.</p>
@@ -8093,6 +8494,26 @@ def build_design_build_vs_bid_page() -> str:
             "Learning hub · Delivery methods",
             "Design-build vs bid-build",
             "Process education for North Sound homeowners comparing design-build continuity with traditional design-bid-build. No invented savings percentages — compare scopes and verify at L&amp;I.",
+        )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/posts/2026-08-11-hire-design-build-1.webp",
+                    "Illustrative design-build continuity from discovery — not a real Board job photo",
+                    "One steward path",
+                ),
+                (
+                    "assets/images/home-process-build.webp",
+                    "Illustrative build phase coordination — not a real Board job photo",
+                    "Trade coordination",
+                ),
+                (
+                    "assets/images/posts/2026-08-11-hire-design-build-6.webp",
+                    "Illustrative finished remodel after coordinated delivery — not a real Board job photo",
+                    "Punch before final pay",
+                ),
+            ],
+            title="Delivery paths (illustrative)",
         )
         + _hub_section(
             "Two common paths (plain language)",
@@ -8229,6 +8650,26 @@ def build_remodel_cost_factors_page() -> str:
             "Remodel cost factors",
             "What typically drives kitchen, bath, addition, and ADU project cost in Edmonds / King &amp; Snohomish — qualitative drivers and sourced public links. <strong class=\"text-white\">Not a bid</strong>; verify locally.",
         )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/home-process-research.webp",
+                    "Illustrative remodel planning desk — not a real Board job photo",
+                    "Drivers, not dollar claims",
+                ),
+                (
+                    "assets/images/posts/2026-08-12-edmonds-addition-permit-1.webp",
+                    "Illustrative addition complexity context — not a real Board job photo",
+                    "Complexity moves cost",
+                ),
+                (
+                    "assets/images/home-gallery-dryin.webp",
+                    "Illustrative envelope work as a cost driver — not a real Board job photo",
+                    "Envelope & weather",
+                ),
+            ],
+            title="Cost drivers (illustrative — no prices)",
+        )
         + "  <div class=\"max-w-6xl mx-auto px-4\">\n"
         + _cost_disclaimer_box()
         + "  </div>\n"
@@ -8315,6 +8756,26 @@ def build_kitchen_cost_factors_page() -> str:
             "Kitchen cost factors",
             "Qualitative drivers of kitchen remodel cost for Edmonds / King &amp; Snohomish. <strong class=\"text-white\">Not a bid</strong>; not ROI; verify with written local estimates.",
         )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/dir-kitchen-hero.webp",
+                    "Illustrative kitchen remodel craft — not a real Board job photo",
+                    "Layout drives trades",
+                ),
+                (
+                    "assets/images/posts/2026-08-12-hire-kitchen-2.webp",
+                    "Illustrative kitchen selection boards — not a real Board job photo",
+                    "Allowances matter",
+                ),
+                (
+                    "assets/images/posts/2026-08-12-hire-kitchen-3.webp",
+                    "Illustrative finished kitchen context — not a real Board job photo",
+                    "Finishes last",
+                ),
+            ],
+            title="Kitchen cost drivers (illustrative — no prices)",
+        )
         + "  <div class=\"max-w-6xl mx-auto px-4\">\n"
         + _cost_disclaimer_box()
         + "  </div>\n"
@@ -8381,6 +8842,26 @@ def build_bathroom_cost_factors_page() -> str:
             "Bathroom cost factors",
             "What drives bath remodel cost on Puget Sound projects — waterproofing, layout, and logistics. <strong class=\"text-white\">Not a bid</strong>; verify locally.",
         )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/dir-bathrooms-hero.webp",
+                    "Illustrative bathroom remodel craft — not a real Board job photo",
+                    "Wet zone first",
+                ),
+                (
+                    "assets/images/posts/2026-09-23-bothell-bath-2.webp",
+                    "Illustrative shower waterproofing membrane — not a real Board job photo",
+                    "Membrane & slope",
+                ),
+                (
+                    "assets/images/posts/2026-09-23-bothell-bath-3.webp",
+                    "Illustrative finished primary bath — not a real Board job photo",
+                    "Glass lead times",
+                ),
+            ],
+            title="Bath cost drivers (illustrative — no prices)",
+        )
         + "  <div class=\"max-w-6xl mx-auto px-4\">\n"
         + _cost_disclaimer_box()
         + "  </div>\n"
@@ -8443,6 +8924,26 @@ def build_addition_cost_factors_page() -> str:
             "Learning · Addition cost literacy",
             "Addition cost factors",
             "Qualitative drivers of home addition cost for Edmonds / King &amp; Snohomish. <strong class=\"text-white\">Not a bid</strong>; not ROI.",
+        )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/dir-additions-hero.webp",
+                    "Illustrative home addition craft — not a real Board job photo",
+                    "Structure & dry-in",
+                ),
+                (
+                    "assets/images/home-ppg-addition.webp",
+                    "Illustrative Pacific Northwest addition massing — not a real Board job photo",
+                    "Envelope complexity",
+                ),
+                (
+                    "assets/images/posts/2026-08-12-edmonds-addition-permit-4.webp",
+                    "Illustrative addition permit context — not a real Board job photo",
+                    "AHJ path matters",
+                ),
+            ],
+            title="Addition cost drivers (illustrative — no prices)",
         )
         + "  <div class=\"max-w-6xl mx-auto px-4\">\n"
         + _cost_disclaimer_box()
@@ -8507,6 +9008,26 @@ def build_adu_cost_factors_page() -> str:
             "ADU cost factors",
             "What drives accessory dwelling unit cost in the North Sound — typology, utilities, and AHJ path. <strong class=\"text-white\">Not a bid</strong>; official links only for fees/standards.",
         )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/posts/2026-09-07-edmonds-adu-2.webp",
+                    "Illustrative ADU massing concept — not a real Board job photo",
+                    "Path & utilities",
+                ),
+                (
+                    "assets/images/posts/2026-09-07-edmonds-adu-3.webp",
+                    "Illustrative small-dwelling interior — not a real Board job photo",
+                    "Program density",
+                ),
+                (
+                    "assets/images/home-process-research.webp",
+                    "Illustrative ADU standards research — not a real Board job photo",
+                    "No invented ROI",
+                ),
+            ],
+            title="ADU cost drivers (illustrative — no prices)",
+        )
         + "  <div class=\"max-w-6xl mx-auto px-4\">\n"
         + _cost_disclaimer_box()
         + "  </div>\n"
@@ -8569,6 +9090,26 @@ def build_financing_and_draws_page() -> str:
             "Learning · Money milestones",
             "Financing &amp; draws (education)",
             "Educational overview of construction draws, contingencies, and payment discipline for remodel and addition projects. <strong class=\"text-white\">Not a loan product</strong>, credit offer, or financial advice.",
+        )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/home-process-verify.webp",
+                    "Illustrative draw documentation habit — not a real Board job photo",
+                    "Paper trail for draws",
+                ),
+                (
+                    "assets/images/posts/2026-08-12-edmonds-addition-permit-2.webp",
+                    "Illustrative inspection milestone context — not a real Board job photo",
+                    "Tie draws to inspections",
+                ),
+                (
+                    "assets/images/home-process-research.webp",
+                    "Illustrative planning desk for remodel budgets — not a real Board job photo",
+                    "Budget without invented ROI",
+                ),
+            ],
+            title="Draws & documentation (illustrative)",
         )
         + _hub_section(
             "Board disclaimer",
@@ -8642,6 +9183,26 @@ def build_living_through_remodel_page() -> str:
             "Living through a remodel",
             "Board habits for homeowners who stay in place during kitchen, bath, or addition work. Educational — not a means-and-methods manual or schedule guarantee.",
         )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/home-ppg-interior.webp",
+                    "Illustrative lived-in remodel interior protection — not a real Board job photo",
+                    "Protect finished rooms",
+                ),
+                (
+                    "assets/images/posts/2026-09-14-stay-home-1.webp",
+                    "Illustrative stay-in-home remodel staging — not a real Board job photo",
+                    "Staging & dust control",
+                ),
+                (
+                    "assets/images/home-process-build.webp",
+                    "Illustrative active remodel work zone — not a real Board job photo",
+                    "Daily work zones",
+                ),
+            ],
+            title="Occupied-site remodel (illustrative)",
+        )
         + _hub_section(
             "Occupied-home stewardship",
             _check_ul(habits)
@@ -8699,6 +9260,26 @@ def build_selecting_finishes_page() -> str:
             "Learning · Selections",
             "Selecting finishes",
             "Board habits for cabinets, counters, tile, fixtures, and color decisions that keep bids comparable. Not product endorsements or price lists.",
+        )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/home-gallery-finish.webp",
+                    "Illustrative finish selection context — not a real Board job photo",
+                    "Lock long-leads early",
+                ),
+                (
+                    "assets/images/posts/2026-08-12-hire-kitchen-2.webp",
+                    "Illustrative material boards — not a real Board job photo",
+                    "Samples before orders",
+                ),
+                (
+                    "assets/images/home-ppg-interior.webp",
+                    "Illustrative interior finish craft — not a real Board job photo",
+                    "Coordinate trades",
+                ),
+            ],
+            title="Finish selection habits (illustrative)",
         )
         + _hub_section(
             "Selection stewardship",
@@ -8761,6 +9342,26 @@ def build_contractor_contract_basics_page() -> str:
             "Learning · WA consumer themes",
             "Contractor contract basics",
             "Educational themes for Washington homeowners reading remodel contracts — paired with L&amp;I Verify. <strong class=\"text-white\">Not legal advice</strong> and not a fill-in contract form.",
+        )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/posts/2026-08-11-hire-design-build-3.webp",
+                    "Illustrative written contract and scope review — not a real Board job photo",
+                    "Scope in writing",
+                ),
+                (
+                    "assets/images/home-process-verify.webp",
+                    "Illustrative license and bond check — not a real Board job photo",
+                    "Match legal name to L&I",
+                ),
+                (
+                    "assets/images/home-process-shortlist.webp",
+                    "Illustrative comparing contract terms — not a real Board job photo",
+                    "Read exclusions",
+                ),
+            ],
+            title="Contract basics (illustrative)",
         )
         + _hub_section(
             "Not legal advice",
