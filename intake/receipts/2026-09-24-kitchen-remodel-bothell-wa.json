@@ -1,0 +1,19 @@
+{
+  "submission_id": "2026-09-24-kitchen-remodel-bothell-wa",
+  "idempotency_key": "sha256:65fc7f9d7b7edcfc5565cd4bed086bf6e62de5215f5aa8bcfd3e5d67a9a9e638",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-09-24T17:21:03Z",
+  "outputs": [
+    "assets/images/posts/2026-09-24-bothell-kitchen-1.webp",
+    "assets/images/posts/2026-09-24-bothell-kitchen-2.webp",
+    "assets/images/posts/2026-09-24-bothell-kitchen-3.webp",
+    "posts/2026-09-24-kitchen-remodel-bothell-wa.md",
+    "posts/2026-09-24-kitchen-remodel-bothell-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 49
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0.0",
+  "producer": "openclaw",
+  "slug": "kitchen-remodel-bothell-wa",
+  "internal_links": [
+    "../kitchen.html",
+    "../bathrooms.html",
+    "../additions.html",
+    "../trades.html",
+    "../plumber.html",
+    "../electrician.html",
+    "../blog.html"
+  ],
+  "notes": "OPERATOR-NOTE-NOT-FOR-HTML Pair with 09-23 Bothell bath; rotate category to Kitchen; materials Andersen/Velux/Sherwin-Williams"
+}

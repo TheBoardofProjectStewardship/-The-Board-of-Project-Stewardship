@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "producer": "hermes",
+  "sources": [
+    {
+      "id": "src-lni",
+      "title": "Washington L&I Verify a Contractor",
+      "url": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-09-24",
+      "supports": "Homeowners re-verify the legal business name, license, bond, and insurance before hiring."
+    },
+    {
+      "id": "src-mbp",
+      "title": "MyBuildingPermit",
+      "url": "https://mybuildingpermit.com/",
+      "retrieved": "2026-09-24",
+      "supports": "City of Bothell accepts building, plumbing, and mechanical permits online through the regional MyBuildingPermit portal."
+    },
+    {
+      "id": "src-bothell-forms",
+      "title": "City of Bothell — Applications & Forms",
+      "url": "https://www.bothellwa.gov/393/Applications-Forms",
+      "retrieved": "2026-09-24",
+      "supports": "Bothell directs permit applications to MyBuildingPermit and publishes residential remodel checklists."
+    }
+  ]
+}
