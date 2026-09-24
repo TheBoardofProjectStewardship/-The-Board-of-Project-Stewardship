@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Official Stamp of Trust and Integrity Shield from the Board of Project Stewardship — how Pacific Northwest contractors earn verification and how homeowners can check a stamp.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta property="og:title" content="Stamp of Trust | Board of Project Stewardship">
+  <meta property="og:description" content="Official Stamp of Trust and six-layer Integrity Shield for contractors serving King County, Snohomish County, and the Seattle area.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://boardofprojectstewardship.com/stamp-of-trust/">
+  <meta property="og:site_name" content="Board of Project Stewardship">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="https://boardofprojectstewardship.com/assets/images/home-hero.webp">
+  <meta property="og:image:alt" content="Board of Project Stewardship">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Stamp of Trust | Board of Project Stewardship">
+  <meta name="twitter:description" content="Official Stamp of Trust and six-layer Integrity Shield for contractors serving King County, Snohomish County, and the Seattle area.">
+  <meta name="twitter:url" content="https://boardofprojectstewardship.com/stamp-of-trust/">
+  <meta name="twitter:image" content="https://boardofprojectstewardship.com/assets/images/home-hero.webp">
+  <meta name="twitter:image:alt" content="Board of Project Stewardship">
+  <link rel="icon" href="https://boardofprojectstewardship.com/assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="https://boardofprojectstewardship.com/assets/icons/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="https://boardofprojectstewardship.com/assets/icons/apple-touch-icon.png">
+  <link rel="canonical" href="https://boardofprojectstewardship.com/stamp-of-trust/">
+  <title>Stamp of Trust | Board of Project Stewardship</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#0a0a0a',
+            charcoal: '#1a1a1a',
+            'dark-gray': '#2a2a2a',
+            primary: '#166534',
+            secondary: '#4ade80',
+            seal: '#d4af37',
+            ambersoft: '#fbbf24',
+          },
+          boxShadow: {
+            'glow-sleek': '0 0 15px -5px rgba(22, 101, 52, 0.3)',
+            'seal': '0 0 40px -10px rgba(212, 175, 55, 0.35)',
+            'cert': '0 24px 60px rgba(0,0,0,0.45), 0 0 0 1px rgba(212,175,55,0.25)',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; background: #0a0a0a; color: #e0e0e0; }
+    .bg-grid-pattern {
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .card-hover { transition: transform 0.25s ease, border-color 0.25s ease; }
+    .card-hover:hover { transform: translateY(-3px); }
+    .gold-rule { height: 1px; background: linear-gradient(90deg, transparent, #d4af37, transparent); }
+    .gold-rule-left { height: 1px; background: linear-gradient(90deg, #d4af37, transparent); }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      color: #4ade80; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase;
+      font-size: 0.72rem;
+    }
+    .eyebrow::before { content: ""; width: 1.6rem; height: 1px; background: currentColor; flex-shrink: 0; }
+    .eyebrow-gold { color: #fbbf24; }
+    .seal-ring {
+      box-shadow:
+        0 0 0 1px rgba(212,175,55,0.55),
+        0 0 0 8px rgba(22,101,52,0.22),
+        0 0 0 9px rgba(212,175,55,0.18),
+        inset 0 0 28px rgba(212,175,55,0.06),
+        0 28px 70px rgba(0,0,0,0.45);
+    }
+    .cert-frame {
+      border: 1px solid rgba(212,175,55,0.45);
+      box-shadow:
+        inset 0 0 0 6px #0a0a0a,
+        inset 0 0 0 7px rgba(212,175,55,0.28),
+        0 20px 50px rgba(0,0,0,0.4);
+    }
+    .process-strip { display: grid; grid-template-columns: 1fr; gap: 1px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); border-radius: 1rem; overflow: hidden; }
+    @media (min-width: 768px) { .process-strip { grid-template-columns: repeat(4, 1fr); } }
+    details.board-faq > summary { list-style: none; cursor: pointer; }
+    details.board-faq > summary::-webkit-details-marker { display: none; }
+    details.board-faq > summary:focus-visible { outline: 2px solid #4ade80; outline-offset: 2px; }
+    .skip-link {
+      position: absolute; left: 0.75rem; top: -3.25rem; z-index: 80;
+      background: #166534; color: #fff; padding: 0.55rem 0.9rem; border-radius: 0.375rem;
+      font-size: 0.7rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;
+    }
+    .skip-link:focus { top: 0.75rem; outline: 2px solid #4ade80; outline-offset: 2px; }
+    code.embed-block { white-space: pre-wrap; word-break: break-word; }
+    .nav-burger {
+      width: 1.35rem; height: 1.05rem;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .nav-burger span { display: block; height: 2px; background: #e2e8f0; border-radius: 1px; }
+    :focus-visible { outline: 2px solid #4ade80; outline-offset: 3px; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body class="bg-obsidian text-slate-200 antialiased">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="bg-charcoal/90 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16 items-center gap-3">
+        <a href="/index.html" class="flex items-center gap-2.5 no-underline min-w-0">
+          <span class="w-9 h-9 rounded-full bg-primary border border-seal/50 flex items-center justify-center text-ambersoft shrink-0" aria-hidden="true">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.2 4.6 5 .5-3.7 3.3 1.1 4.9L12 14.2 7.4 16.3l1.1-4.9L4.8 8.1l5-.5L12 3z" stroke="currentColor" stroke-width="1.6"/></svg>
+          </span>
+          <span class="min-w-0">
+            <span class="block font-black text-sm sm:text-base tracking-wider text-white leading-tight">Board of Project Stewardship</span>
+            <span class="hidden sm:block text-[9px] font-semibold uppercase tracking-[0.16em] text-slate-500 mt-0.5">Construction standards &amp; directories</span>
+          </span>
+        </a>
+        <nav class="hidden md:flex items-center gap-5" aria-label="Primary">
+          <a href="/index.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest transition">Home</a>
+          <a href="#main-content" class="text-secondary font-medium text-xs uppercase tracking-widest" aria-current="page">Stamp of Trust</a>
+          <a href="/verify-contractor.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest transition">Verify</a>
+          <a href="/directory.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest transition">Directories</a>
+          <a href="/about.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest transition">About</a>
+        </nav>
+        <div class="flex items-center gap-2 shrink-0">
+          <a href="#apply" class="inline-flex items-center rounded-full bg-primary px-3.5 py-2 text-[11px] font-bold uppercase tracking-widest text-white hover:bg-primary/90 border border-secondary/30 shadow-glow-sleek">Apply</a>
+          <button type="button" id="stamp-nav-toggle" class="md:hidden p-2 -mr-1 text-slate-200" aria-expanded="false" aria-controls="stamp-mobile-nav" aria-label="Open menu">
+            <span class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <nav id="stamp-mobile-nav" class="hidden md:hidden border-t border-white/10 bg-charcoal px-4 pb-4" aria-label="Mobile">
+      <a href="/index.html" class="block py-2 text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest">Home</a>
+      <a href="#main-content" class="block py-2 text-secondary font-medium text-xs uppercase tracking-widest" aria-current="page">Stamp of Trust</a>
+      <a href="/verify-contractor.html" class="block py-2 text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest">Verify</a>
+      <a href="/directory.html" class="block py-2 text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest">Directories</a>
+      <a href="/about.html" class="block py-2 text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest">About</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <!-- HERO -->
+    <section class="relative overflow-hidden border-b border-white/5">
+      <div class="absolute inset-0 bg-grid-pattern opacity-50 pointer-events-none"></div>
+      <div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(circle at 78% 18%, rgba(212,175,55,0.12), transparent 28%), radial-gradient(circle at 12% 0%, rgba(22,101,52,0.28), transparent 32%);"></div>
+      <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-22 lg:py-24">
+        <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+          <!-- Seal first on mobile for ceremonial weight -->
+          <div class="shrink-0 order-first lg:order-last">
+            <div class="seal-ring rounded-full p-2.5 bg-charcoal/90">
+              <svg width="240" height="240" viewBox="0 0 240 240" class="w-[min(240px,72vw)] h-auto" role="img" aria-label="Official Stamp of Trust seal of the Board of Project Stewardship">
+                <defs>
+                  <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#fbbf24"/>
+                    <stop offset="50%" stop-color="#d4af37"/>
+                    <stop offset="100%" stop-color="#a16207"/>
+                  </linearGradient>
+                </defs>
+                <circle cx="120" cy="120" r="114" fill="#0a0a0a" stroke="url(#goldGrad)" stroke-width="2.5"/>
+                <circle cx="120" cy="120" r="102" fill="none" stroke="#166534" stroke-width="1.5"/>
+                <circle cx="120" cy="120" r="94" fill="none" stroke="url(#goldGrad)" stroke-width="1" stroke-dasharray="3.5 3"/>
+                <circle cx="120" cy="120" r="82" fill="#1a1a1a" stroke="url(#goldGrad)" stroke-width="1.5"/>
+                <circle cx="120" cy="120" r="72" fill="none" stroke="rgba(74,222,128,0.25)" stroke-width="1"/>
+                <!-- Hexagon mark -->
+                <path d="M120 58l28 16v32l-28 16-28-16V74z" fill="none" stroke="url(#goldGrad)" stroke-width="2.2"/>
+                <path d="M120 72l16 9v18l-16 9-16-9V81z" fill="url(#goldGrad)" opacity="0.92"/>
+                <text x="120" y="168" text-anchor="middle" fill="#fbbf24" font-family="Inter,sans-serif" font-size="11" font-weight="800" letter-spacing="2.8">STAMP OF TRUST</text>
+                <text x="120" y="184" text-anchor="middle" fill="#94a3b8" font-family="Inter,sans-serif" font-size="7" font-weight="600" letter-spacing="1.4">INTEGRITY SHIELD</text>
+                <text x="120" y="198" text-anchor="middle" fill="#64748b" font-family="Inter,sans-serif" font-size="5.5" font-weight="600" letter-spacing="1.1">BOARD OF PROJECT STEWARDSHIP</text>
+              </svg>
+            </div>
+            <p class="text-center mt-4 text-[10px] uppercase tracking-[0.22em] text-slate-500 font-semibold">Six-layer review framework</p>
+          </div>
+
+          <div class="flex-1 text-center lg:text-left">
+            <div class="inline-flex items-center gap-2 rounded-full border border-seal/40 bg-seal/10 px-3 py-1 mb-5">
+              <span class="h-1.5 w-1.5 rounded-full bg-seal"></span>
+              <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-seal">Technical Bulletin · Pacific Northwest</span>
+            </div>
+            <p class="eyebrow eyebrow-gold mb-4 justify-center lg:justify-start">Board credential</p>
+            <h1 class="text-[2.65rem] sm:text-5xl lg:text-6xl xl:text-7xl font-black text-white tracking-tight leading-[1.02]" style="letter-spacing:-0.04em;">
+              Stamp of Trust
+            </h1>
+            <p class="mt-3 text-lg sm:text-xl font-semibold text-slate-300 tracking-tight">Integrity Shield verification for residential construction</p>
+            <div class="gold-rule-left my-6 max-w-md mx-auto lg:mx-0 opacity-80"></div>
+            <p class="text-slate-400 font-light leading-relaxed max-w-xl mx-auto lg:mx-0 text-base sm:text-[1.05rem]">
+              An independent standards mark for contractors serving King County, Snohomish County, Seattle, Edmonds, and neighboring Pacific Northwest communities. Not a government license, permit, warranty, or paid placement — a forensic stewardship screen.
+            </p>
+            <div class="mt-8 flex flex-wrap justify-center lg:justify-start gap-3">
+              <a href="#integrity-shield" class="inline-flex items-center rounded-full bg-ambersoft px-5 py-3 text-xs font-extrabold uppercase tracking-widest text-obsidian hover:bg-seal border border-seal/40 shadow-seal">View Integrity Shield</a>
+              <a href="#display" class="inline-flex items-center rounded-full bg-white/5 px-5 py-3 text-xs font-bold uppercase tracking-widest text-white border border-white/20 hover:border-seal/50">Display your status</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT IT MEANS -->
+    <section id="meaning" class="py-16 md:py-20 border-b border-white/5">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-10 max-w-2xl">
+          <p class="eyebrow mb-3">Purpose</p>
+          <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight" style="letter-spacing:-0.03em;">What the Stamp means</h2>
+          <p class="text-slate-400 font-light mt-3 leading-relaxed">One mark, two audiences — clarity for homeowners and a public standard for firms that choose stewardship over marketing shortcuts.</p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6">
+          <article class="bg-charcoal border border-white/10 rounded-2xl p-7 card-hover hover:border-secondary/40 relative overflow-hidden">
+            <div class="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-seal/70 to-transparent"></div>
+            <p class="text-seal text-[10px] font-bold uppercase tracking-[0.2em] mb-3">For homeowners</p>
+            <h3 class="text-xl font-black text-white mb-3">A filter, not an ad</h3>
+            <p class="text-slate-400 font-light leading-relaxed text-sm">The Stamp of Trust signals that a contractor was reviewed against the Board’s Integrity Shield — financial, technical, accountability, local, license, and permit-ownership expectations. Always re-check Washington L&amp;I status before you hire.</p>
+          </article>
+          <article class="bg-charcoal border border-white/10 rounded-2xl p-7 card-hover hover:border-secondary/40 relative overflow-hidden">
+            <div class="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-seal/70 to-transparent"></div>
+            <p class="text-seal text-[10px] font-bold uppercase tracking-[0.2em] mb-3">For contractors</p>
+            <h3 class="text-xl font-black text-white mb-3">Authority you earn</h3>
+            <p class="text-slate-400 font-light leading-relaxed text-sm">The Board does not sell placement. Firms that complete the application checklist and clear the six Integrity Shield layers may display the Official Stamp of Trust on their site and project materials while status remains current.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTEGRITY SHIELD -->
+    <section id="integrity-shield" class="py-16 md:py-20 border-b border-white/5 bg-charcoal/40">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-10 border-b border-white/10 pb-6">
+          <p class="eyebrow mb-3">Integrity Shield</p>
+          <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight" style="letter-spacing:-0.03em;">Six layers of project stewardship</h2>
+          <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">The Stamp of Trust rests on the Integrity Shield — six educational and editorial layers the Board of Project Stewardship uses to organize due diligence. Checkable signals, not a single marketing claim.</p>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <article class="bg-obsidian border border-white/10 hover:border-primary/40 rounded-2xl p-6 card-hover">
+            <div class="w-10 h-10 rounded-full bg-primary border border-seal/40 flex items-center justify-center text-ambersoft font-black text-sm mb-4">1</div>
+            <h3 class="text-lg font-black text-white tracking-tight mb-2">Financial Solvency</h3>
+            <p class="text-sm text-slate-400 font-light leading-relaxed">Licensing alone is not enough. The Board reviews bonding capacity against active project loads. Over-leveraged firms do not receive the Stamp of Trust — reducing homeowner exposure to liens and abandoned jobsites.</p>
+          </article>
+          <article class="bg-obsidian border border-white/10 hover:border-primary/40 rounded-2xl p-6 card-hover">
+            <div class="w-10 h-10 rounded-full bg-primary border border-seal/40 flex items-center justify-center text-ambersoft font-black text-sm mb-4">2</div>
+            <h3 class="text-lg font-black text-white tracking-tight mb-2">Technical Review / McMorrough Protocol</h3>
+            <p class="text-sm text-slate-400 font-light leading-relaxed">Portfolios are reviewed against architecture and construction reference standards using the McMorrough Protocol — an editorial lens for drawings, detailing, and completed work. Not a professional license or certification.</p>
+          </article>
+          <article class="bg-obsidian border border-white/10 hover:border-primary/40 rounded-2xl p-6 card-hover">
+            <div class="w-10 h-10 rounded-full bg-primary border border-seal/40 flex items-center justify-center text-ambersoft font-black text-sm mb-4">3</div>
+            <h3 class="text-lg font-black text-white tracking-tight mb-2">Project Steward</h3>
+            <p class="text-sm text-slate-400 font-light leading-relaxed">Every verified engagement expects a designated Project Steward — a single point of accountability who champions the homeowner’s vision against scope creep and budget drift. No salesman handoffs.</p>
+          </article>
+          <article class="bg-obsidian border border-white/10 hover:border-primary/40 rounded-2xl p-6 card-hover">
+            <div class="w-10 h-10 rounded-full bg-primary border border-seal/40 flex items-center justify-center text-ambersoft font-black text-sm mb-4">4</div>
+            <h3 class="text-lg font-black text-white tracking-tight mb-2">Local Mastery</h3>
+            <p class="text-sm text-slate-400 font-light leading-relaxed">Competence where the work happens: King County, Snohomish County, Seattle, Edmonds, and neighboring jurisdictions — including permitting paths, height limits, view corridors, and critical-area rules where they apply.</p>
+          </article>
+          <article class="bg-obsidian border border-white/10 hover:border-primary/40 rounded-2xl p-6 card-hover">
+            <div class="w-10 h-10 rounded-full bg-primary border border-seal/40 flex items-center justify-center text-ambersoft font-black text-sm mb-4">5</div>
+            <h3 class="text-lg font-black text-white tracking-tight mb-2">WA L&amp;I License</h3>
+            <p class="text-sm text-slate-400 font-light leading-relaxed">Preference for firms with active Washington contractor registration. Homeowners should re-verify status at the official <a href="https://secure.lni.wa.gov/verify/" target="_blank" rel="noopener" class="text-secondary hover:underline">L&amp;I Verify</a> portal before hiring. The Board is not L&amp;I.</p>
+          </article>
+          <article class="bg-obsidian border border-white/10 hover:border-primary/40 rounded-2xl p-6 card-hover">
+            <div class="w-10 h-10 rounded-full bg-primary border border-seal/40 flex items-center justify-center text-ambersoft font-black text-sm mb-4">6</div>
+            <h3 class="text-lg font-black text-white tracking-tight mb-2">Permit ownership</h3>
+            <p class="text-sm text-slate-400 font-light leading-relaxed">Clear answers on who pulls and owns each permit, who schedules inspections, and who closes corrections before cover-up. The Board of Project Stewardship does not issue permits.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW TO EARN -->
+    <section id="earn" class="py-16 md:py-20 border-b border-white/5">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-10 max-w-2xl">
+          <p class="eyebrow mb-3">Credential process</p>
+          <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight" style="letter-spacing:-0.03em;">How to earn the Stamp of Trust</h2>
+          <p class="text-slate-400 font-light mt-3 leading-relaxed">A multi-step path for contractors operating in the Pacific Northwest who want to signal Board-reviewed stewardship — not a one-click badge purchase.</p>
+        </div>
+        <div class="process-strip">
+          <article class="bg-charcoal p-6 md:p-7 min-h-[200px]">
+            <p class="text-[10px] font-black uppercase tracking-[0.18em] text-secondary mb-3">Step 1</p>
+            <h3 class="font-black text-white text-lg mb-2">Prepare your file</h3>
+            <p class="text-sm text-slate-400 font-light leading-relaxed">Gather UBI, L&amp;I contractor ID, insurance certificates, and three Seismic Category D framing case studies. Confirm a named Project Steward for active work.</p>
+          </article>
+          <article class="bg-charcoal p-6 md:p-7 min-h-[200px]">
+            <p class="text-[10px] font-black uppercase tracking-[0.18em] text-secondary mb-3">Step 2</p>
+            <h3 class="font-black text-white text-lg mb-2">Submit application</h3>
+            <p class="text-sm text-slate-400 font-light leading-relaxed">Send the checklist package to <a href="mailto:editorial@boardofprojectstewardship.com" class="text-secondary hover:underline">editorial@boardofprojectstewardship.com</a> with subject line “Stamp of Trust application.”</p>
+          </article>
+          <article class="bg-charcoal p-6 md:p-7 min-h-[200px]">
+            <p class="text-[10px] font-black uppercase tracking-[0.18em] text-secondary mb-3">Step 3</p>
+            <h3 class="font-black text-white text-lg mb-2">Integrity Shield review</h3>
+            <p class="text-sm text-slate-400 font-light leading-relaxed">Editorial review across all six Integrity Shield layers, including technical review under the McMorrough Protocol and local jurisdictional evidence.</p>
+          </article>
+          <article class="bg-charcoal p-6 md:p-7 min-h-[200px]">
+            <p class="text-[10px] font-black uppercase tracking-[0.18em] text-secondary mb-3">Step 4</p>
+            <h3 class="font-black text-white text-lg mb-2">Decision &amp; badge grant</h3>
+            <p class="text-sm text-slate-400 font-light leading-relaxed">If approved, you receive permission to display the Official Stamp of Trust embed while your status remains current. Status can be withdrawn if records lapse.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHECKLIST -->
+    <section id="apply" class="py-16 md:py-20 border-b border-white/5 bg-charcoal/40">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-10 max-w-2xl">
+          <p class="eyebrow mb-3">Application requirements</p>
+          <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight" style="letter-spacing:-0.03em;">Application checklist</h2>
+          <p class="text-slate-400 font-light mt-3 leading-relaxed">Core package requirements drawn from the Board’s published Stamp of Trust criteria. Integrity Shield layers 5–6 reinforce license and permit-ownership expectations.</p>
+        </div>
+        <div class="cert-frame bg-obsidian rounded-2xl p-6 md:p-10">
+          <div class="flex items-center justify-between gap-4 mb-2">
+            <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-seal">Official checklist · Board of Project Stewardship</p>
+            <span class="hidden sm:inline text-[10px] font-semibold uppercase tracking-widest text-slate-500">Credential application</span>
+          </div>
+          <div class="gold-rule mb-7"></div>
+          <ul class="space-y-5">
+            <li class="flex gap-3 items-start">
+              <span class="mt-0.5 w-6 h-6 rounded-full bg-primary/30 border border-seal/50 flex items-center justify-center text-seal text-xs font-black shrink-0" aria-hidden="true">✓</span>
+              <div>
+                <p class="text-white font-semibold">Active UBI &amp; L&amp;I Contractor ID</p>
+                <p class="text-sm text-slate-400 font-light mt-1">Submit current Washington business and contractor registration identifiers for verification against public records.</p>
+              </div>
+            </li>
+            <li class="flex gap-3 items-start">
+              <span class="mt-0.5 w-6 h-6 rounded-full bg-primary/30 border border-seal/50 flex items-center justify-center text-seal text-xs font-black shrink-0" aria-hidden="true">✓</span>
+              <div>
+                <p class="text-white font-semibold">Three Seismic Category D framing case studies</p>
+                <p class="text-sm text-slate-400 font-light mt-1">Provide documentation demonstrating Seismic Category D framing competence on completed or permitted projects.</p>
+              </div>
+            </li>
+            <li class="flex gap-3 items-start">
+              <span class="mt-0.5 w-6 h-6 rounded-full bg-primary/30 border border-seal/50 flex items-center justify-center text-seal text-xs font-black shrink-0" aria-hidden="true">✓</span>
+              <div>
+                <p class="text-white font-semibold">General Liability Insurance — $2M minimum</p>
+                <p class="text-sm text-slate-400 font-light mt-1">Proof of active GL coverage at or above the $2M minimum stated in Board Stamp criteria.</p>
+              </div>
+            </li>
+            <li class="flex gap-3 items-start">
+              <span class="mt-0.5 w-6 h-6 rounded-full bg-primary/30 border border-seal/50 flex items-center justify-center text-seal text-xs font-black shrink-0" aria-hidden="true">✓</span>
+              <div>
+                <p class="text-white font-semibold">Stewardship Code of Ethics (transparency)</p>
+                <p class="text-sm text-slate-400 font-light mt-1">Written agreement to the Stewardship Code of Ethics regarding transparency with homeowners and the Board.</p>
+              </div>
+            </li>
+            <li class="flex gap-3 items-start border-t border-white/10 pt-5">
+              <span class="mt-0.5 w-6 h-6 rounded-full bg-secondary/10 border border-secondary/40 flex items-center justify-center text-secondary text-xs font-black shrink-0" aria-hidden="true">+</span>
+              <div>
+                <p class="text-white font-semibold">WA L&amp;I standing (Integrity Shield layer 5)</p>
+                <p class="text-sm text-slate-400 font-light mt-1">Maintain active Washington contractor registration; homeowners will be directed to re-verify at L&amp;I Verify.</p>
+              </div>
+            </li>
+            <li class="flex gap-3 items-start">
+              <span class="mt-0.5 w-6 h-6 rounded-full bg-secondary/10 border border-secondary/40 flex items-center justify-center text-secondary text-xs font-black shrink-0" aria-hidden="true">+</span>
+              <div>
+                <p class="text-white font-semibold">Permit ownership clarity (Integrity Shield layer 6)</p>
+                <p class="text-sm text-slate-400 font-light mt-1">Be prepared to state who pulls and owns permits, schedules inspections, and closes corrections on Board-reviewed work.</p>
+              </div>
+            </li>
+          </ul>
+          <div class="gold-rule mt-7 mb-5"></div>
+          <p class="text-sm text-slate-400 font-light">Questions or submissions: <a href="mailto:editorial@boardofprojectstewardship.com" class="text-secondary hover:underline">editorial@boardofprojectstewardship.com</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DISPLAY STATUS -->
+    <section id="display" class="py-16 md:py-20 border-b border-white/5 relative overflow-hidden">
+      <div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(circle at 50% 0%, rgba(22,101,52,0.18), transparent 45%);"></div>
+      <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-10 max-w-2xl">
+          <p class="eyebrow mb-3">Display your status</p>
+          <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight" style="letter-spacing:-0.03em;">Use the credential with a live source link</h2>
+          <p class="text-slate-400 font-light mt-3 leading-relaxed">Verified contractors may embed the Official Stamp of Trust on their website. Keep the link live so homeowners can confirm the Board page.</p>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-8 items-start">
+          <div class="bg-white rounded-2xl p-8 text-slate-900 shadow-cert">
+            <h3 class="text-2xl font-black text-primary mb-2">Badge preview</h3>
+            <p class="text-sm text-slate-600 font-light mb-6">How the embed appears on a light contractor site.</p>
+            <div class="border-2 border-dashed border-slate-300 rounded-xl p-6 flex justify-center bg-slate-50">
+              <a href="https://boardofprojectstewardship.com/stamp-of-trust/" target="_blank" rel="noopener" style="text-decoration:none;">
+                <div style="display:inline-flex;align-items:center;gap:12px;background:#022c22;padding:10px 18px;border-radius:50px;border:1px solid #d4af37;font-family:Inter,system-ui,sans-serif;">
+                  <span style="display:inline-flex;width:28px;height:28px;border-radius:9999px;background:#166534;align-items:center;justify-content:center;color:#fbbf24;font-weight:900;font-size:14px;" aria-hidden="true">✓</span>
+                  <span style="display:flex;flex-direction:column;line-height:1.15;">
+                    <span style="color:#94a3b8;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;">Verified by</span>
+                    <span style="color:#ffffff;font-size:11px;font-weight:800;letter-spacing:0.5px;">Board of Project Stewardship</span>
+                  </span>
+                </div>
+              </a>
+            </div>
+            <p class="text-xs text-slate-500 mt-4 font-light leading-relaxed">The badge is descriptive. It does not claim government approval or guarantee project performance.</p>
+          </div>
+          <div class="bg-charcoal border border-white/10 rounded-2xl overflow-hidden">
+            <div class="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-dark-gray/60">
+              <span class="text-[11px] font-bold uppercase tracking-widest text-slate-400">Embed code</span>
+              <button type="button" id="copy-embed" class="rounded-md bg-primary px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest text-white border border-secondary/30 hover:bg-primary/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary">Copy Code</button>
+            </div>
+            <pre class="p-4 text-xs text-secondary/90 overflow-x-auto"><code id="embed-code" class="embed-block">&lt;a href="https://boardofprojectstewardship.com/stamp-of-trust/" target="_blank" rel="noopener" style="text-decoration:none;"&gt;
+  &lt;div style="display:inline-flex;align-items:center;gap:12px;background:#022c22;padding:10px 18px;border-radius:50px;border:1px solid #d4af37;font-family:sans-serif;"&gt;
+    &lt;span style="color:#fbbf24;font-weight:900;margin-right:4px;"&gt;&#10003;&lt;/span&gt;
+    &lt;span style="display:flex;flex-direction:column;line-height:1.15;"&gt;
+      &lt;span style="color:#94a3b8;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;"&gt;Verified by&lt;/span&gt;
+      &lt;span style="color:#ffffff;font-size:11px;font-weight:800;"&gt;Board of Project Stewardship&lt;/span&gt;
+    &lt;/span&gt;
+  &lt;/div&gt;
+&lt;/a&gt;</code></pre>
+            <p id="copy-status" class="px-4 pb-3 text-[11px] text-slate-500" role="status" aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EMBED STEPS -->
+    <section id="embed-steps" class="py-16 md:py-20 border-b border-white/5 bg-charcoal/40">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-10">
+          <p class="eyebrow mb-3">Installation</p>
+          <h2 class="text-3xl font-black text-white tracking-tight" style="letter-spacing:-0.03em;">Embed steps</h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="bg-obsidian border border-white/10 rounded-2xl p-6 relative">
+            <span class="absolute top-5 right-5 text-3xl font-black text-white/5" aria-hidden="true">1</span>
+            <p class="text-seal text-xs font-black uppercase tracking-widest mb-2">Step 1</p>
+            <h3 class="font-black text-white mb-2">Copy the code</h3>
+            <p class="text-sm text-slate-400 font-light leading-relaxed">Use the Copy Code button above to place the Stamp of Trust snippet on your clipboard.</p>
+          </div>
+          <div class="bg-obsidian border border-white/10 rounded-2xl p-6 relative">
+            <span class="absolute top-5 right-5 text-3xl font-black text-white/5" aria-hidden="true">2</span>
+            <p class="text-seal text-xs font-black uppercase tracking-widest mb-2">Step 2</p>
+            <h3 class="font-black text-white mb-2">Paste on your site</h3>
+            <p class="text-sm text-slate-400 font-light leading-relaxed">Add the snippet to your footer, About page, or project landing templates where homeowners look for credentials.</p>
+          </div>
+          <div class="bg-obsidian border border-white/10 rounded-2xl p-6 relative">
+            <span class="absolute top-5 right-5 text-3xl font-black text-white/5" aria-hidden="true">3</span>
+            <p class="text-seal text-xs font-black uppercase tracking-widest mb-2">Step 3</p>
+            <h3 class="font-black text-white mb-2">Keep the link live</h3>
+            <p class="text-sm text-slate-400 font-light leading-relaxed">Do not strip the href. The badge must continue to open the Board Stamp of Trust page so status remains checkable.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOMEOWNER CHECK -->
+    <section id="check" class="py-16 md:py-20 border-b border-white/5">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-8 max-w-2xl">
+          <p class="eyebrow mb-3">For homeowners</p>
+          <h2 class="text-3xl font-black text-white tracking-tight" style="letter-spacing:-0.03em;">How to check a stamp</h2>
+          <p class="text-slate-400 font-light mt-3 leading-relaxed">Treat the Stamp as one signal among several. Always confirm state registration independently — verify the contractor, not just the badge.</p>
+        </div>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <a href="https://secure.lni.wa.gov/verify/" target="_blank" rel="noopener" class="block bg-charcoal border border-white/10 rounded-2xl p-6 card-hover hover:border-secondary/40 no-underline">
+            <p class="text-xs font-bold uppercase tracking-widest text-seal mb-2">Official</p>
+            <h3 class="text-white font-black mb-2">L&amp;I Verify</h3>
+            <p class="text-sm text-slate-400 font-light">Washington State contractor registration — source of truth for license status.</p>
+          </a>
+          <a href="/verify-contractor.html" class="block bg-charcoal border border-white/10 rounded-2xl p-6 card-hover hover:border-secondary/40 no-underline">
+            <p class="text-xs font-bold uppercase tracking-widest text-seal mb-2">Board guide</p>
+            <h3 class="text-white font-black mb-2">Verify a WA contractor</h3>
+            <p class="text-sm text-slate-400 font-light">Educational walkthrough for using the L&amp;I portal with Good Steward habits.</p>
+          </a>
+          <a href="/directory.html" class="block bg-charcoal border border-white/10 rounded-2xl p-6 card-hover hover:border-secondary/40 no-underline">
+            <p class="text-xs font-bold uppercase tracking-widest text-seal mb-2">Directories</p>
+            <h3 class="text-white font-black mb-2">Board directories</h3>
+            <p class="text-sm text-slate-400 font-light">Browse Board shortlists for King &amp; Snohomish Counties and related trades.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-16 md:py-20 border-b border-white/5 bg-charcoal/40">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-8">
+          <p class="eyebrow mb-3">FAQ</p>
+          <h2 class="text-3xl font-black text-white tracking-tight" style="letter-spacing:-0.03em;">Common questions</h2>
+        </div>
+        <div class="space-y-3">
+          <details class="board-faq bg-obsidian border border-white/10 rounded-xl px-5 py-4">
+            <summary class="font-bold text-white flex justify-between items-center gap-3">Is the Stamp of Trust a government license? <span class="text-slate-500 text-lg" aria-hidden="true">+</span></summary>
+            <p class="mt-3 text-sm text-slate-400 font-light leading-relaxed">No. It is an independent editorial credential from the Board of Project Stewardship. Washington contractor registration is issued by L&amp;I — always verify there.</p>
+          </details>
+          <details class="board-faq bg-obsidian border border-white/10 rounded-xl px-5 py-4">
+            <summary class="font-bold text-white flex justify-between items-center gap-3">Does the Board perform construction? <span class="text-slate-500 text-lg" aria-hidden="true">+</span></summary>
+            <p class="mt-3 text-sm text-slate-400 font-light leading-relaxed">No. The Board publishes construction standards and contractor directories. It does not perform construction under the Board name and does not sell contractor leads.</p>
+          </details>
+          <details class="board-faq bg-obsidian border border-white/10 rounded-xl px-5 py-4">
+            <summary class="font-bold text-white flex justify-between items-center gap-3">What is the Integrity Shield? <span class="text-slate-500 text-lg" aria-hidden="true">+</span></summary>
+            <p class="mt-3 text-sm text-slate-400 font-light leading-relaxed">Six stewardship layers: Financial Solvency; Technical Review / McMorrough Protocol; Project Steward; Local Mastery; WA L&amp;I License; and Permit ownership.</p>
+          </details>
+          <details class="board-faq bg-obsidian border border-white/10 rounded-xl px-5 py-4">
+            <summary class="font-bold text-white flex justify-between items-center gap-3">Who owns the building permits? <span class="text-slate-500 text-lg" aria-hidden="true">+</span></summary>
+            <p class="mt-3 text-sm text-slate-400 font-light leading-relaxed">That must be explicit in your contract. The Board expects clear permit ownership and inspection accountability; the Board itself does not issue permits.</p>
+          </details>
+          <details class="board-faq bg-obsidian border border-white/10 rounded-xl px-5 py-4">
+            <summary class="font-bold text-white flex justify-between items-center gap-3">How do I re-verify a contractor’s L&amp;I status? <span class="text-slate-500 text-lg" aria-hidden="true">+</span></summary>
+            <p class="mt-3 text-sm text-slate-400 font-light leading-relaxed">Use Washington Labor &amp; Industries’ public contractor verification service at secure.lni.wa.gov/verify/. Because registration status can change, check it directly when making hiring decisions.</p>
+          </details>
+          <details class="board-faq bg-obsidian border border-white/10 rounded-xl px-5 py-4">
+            <summary class="font-bold text-white flex justify-between items-center gap-3">Can anyone buy placement on this page? <span class="text-slate-500 text-lg" aria-hidden="true">+</span></summary>
+            <p class="mt-3 text-sm text-slate-400 font-light leading-relaxed">No. The Stamp is awarded after review against Board criteria. Placement is not sold as advertising inventory on this credential page.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-obsidian py-14 text-sm border-t border-white/5">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-10 text-slate-400">
+      <div>
+        <div class="flex items-center mb-4 gap-2">
+          <span class="w-8 h-8 rounded-full bg-primary border border-seal/40 flex items-center justify-center text-ambersoft text-xs" aria-hidden="true">◆</span>
+          <span class="font-black text-base tracking-wider text-white">Board of Project Stewardship</span>
+        </div>
+        <p class="font-light leading-relaxed text-sm">Independent publisher of construction standards and contractor directories for King &amp; Snohomish Counties and the broader Seattle / Pacific Northwest area. Updated 2026.</p>
+        <p class="mt-3 font-light text-sm">Public contact: <a href="mailto:editorial@boardofprojectstewardship.com" class="text-secondary hover:underline">editorial@boardofprojectstewardship.com</a></p>
+      </div>
+      <div>
+        <h4 class="text-white font-bold text-xs uppercase tracking-widest mb-4">Explore</h4>
+        <ul class="space-y-2 font-light text-sm">
+          <li><a href="/about.html" class="hover:text-secondary transition">About</a></li>
+          <li><a href="/directory.html" class="hover:text-secondary transition">Directories</a></li>
+          <li><a href="/verify-contractor.html" class="hover:text-secondary transition">Verify a contractor</a></li>
+          <li><a href="/how-we-rank.html" class="hover:text-secondary transition">How we rank</a></li>
+          <li><a href="#main-content" class="hover:text-secondary transition">Stamp of Trust</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-bold text-xs uppercase tracking-widest mb-4">Independence</h4>
+        <p class="font-light leading-relaxed text-sm">The Board of Project Stewardship does not sell contractor leads and does not perform construction under the Board name. L&amp;I remains the source of truth for Washington contractor registration. The Stamp of Trust is not a government license or project guarantee.</p>
+        <p class="mt-4 text-xs text-slate-500">© 2026 Board of Project Stewardship</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var btn = document.getElementById('copy-embed');
+      var codeEl = document.getElementById('embed-code');
+      var status = document.getElementById('copy-status');
+      if (!btn || !codeEl) return;
+      btn.addEventListener('click', function () {
+        var text = codeEl.textContent;
+        function ok() {
+          status.textContent = 'Copied to clipboard.';
+          btn.textContent = 'Copied';
+          setTimeout(function () { btn.textContent = 'Copy Code'; status.textContent = ''; }, 2000);
+        }
+        function fail() {
+          status.textContent = 'Select the code and copy manually (Ctrl/Cmd+C).';
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(ok).catch(fail);
+        } else {
+          var ta = document.createElement('textarea');
+          ta.value = text;
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand('copy'); ok(); } catch (e) { fail(); }
+          document.body.removeChild(ta);
+        }
+      });
+    })();
+  </script>
+  <script>
+    (function () {
+      var toggle = document.getElementById('stamp-nav-toggle');
+      var menu = document.getElementById('stamp-mobile-nav');
+      if (!toggle || !menu) return;
+      toggle.addEventListener('click', function () {
+        var open = menu.classList.toggle('hidden') === false;
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      });
+    })();
+  </script>
+</body>
+</html>

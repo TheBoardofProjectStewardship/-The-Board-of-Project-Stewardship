@@ -935,7 +935,7 @@ def _nav_link(href: str, label: str, key: str, active: str, extra_cls: str = "")
     cls = "text-secondary" if is_current else "text-slate-300 hover:text-secondary"
     current = ' aria-current="page"' if is_current else ""
     return (
-        f'<a href="{href}" class="{cls} font-medium text-xs uppercase tracking-widest '
+        f'<a href="{href}" class="{cls} font-medium text-xs uppercase tracking-widest whitespace-nowrap '
         f'transition {extra_cls}"{current}>{esc(label)}</a>'
     )
 
@@ -955,6 +955,7 @@ def nav_html(active: str = "", prefix: str = "") -> str:
         ("learn", href("learn.html"), "Learn"),
         ("permits", href("permits.html"), "Permits"),
         ("verify-contractor", href("verify-contractor.html"), "Verify"),
+        ("stamp-of-trust", href("stamp-of-trust/"), "Stamp of Trust"),
         ("how-we-rank", href("how-we-rank.html"), "How we rank"),
         ("blog", href("blog.html"), "Blog"),
     ]
@@ -1060,6 +1061,7 @@ def footer_html(prefix: str = "./", active: str = "") -> str:
         ("permits", f"{prefix}permits.html", "Permit hub"),
         ("adu", f"{prefix}adu.html", "Edmonds ADU"),
         ("verify-contractor", f"{prefix}verify-contractor.html", "Verify contractor"),
+        ("stamp-of-trust", f"{prefix}stamp-of-trust/", "Stamp of Trust"),
         ("blog", f"{prefix}blog.html", "Blog"),
         ("steward", f"{prefix}good-steward.html", "Good Steward"),
         ("build-walkthrough", f"{prefix}build-walkthrough.html", "Build Walkthrough"),
@@ -5141,6 +5143,7 @@ Base: `{BASE_URL}`
 | `pm-dashboard.html` | PM Execution Dashboard landing |
 | `energy-credit.html` | WSEC-R energy credits landing |
 | `another-story.html` | Another Story Board feature |
+| `stamp-of-trust/` | Stamp of Trust credential |
 | `blog/rss.xml` | Blog RSS feed |
 | `404.html` | Branded Board 404 |
 {post_lines}
@@ -5340,6 +5343,13 @@ def write_sitemap(posts: list[dict]) -> None:
         post_path = f"posts/{p['out_name']}"
         lastmod = p.get("date") or file_lastmod(post_path)
         entries.append(url_entry(f"{BASE_URL}{post_path}", lastmod, "0.6"))
+    entries.append(
+        url_entry(
+            f"{BASE_URL}stamp-of-trust/",
+            file_lastmod("stamp-of-trust/index.html"),
+            "0.7",
+        )
+    )
 
     xml = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
@@ -10586,6 +10596,10 @@ def build_404_page() -> str:
     if (/\\.[a-zA-Z0-9]+$/.test(p)) return;
     if (p.indexOf('/assets/') === 0 || p.indexOf('/tools/') === 0 || p.indexOf('/.well-known/') === 0) return;
     var slug = p.replace(/\\/+$/, '');
+    if (slug === '/stamp-of-trust') {
+      window.location.replace('/stamp-of-trust/');
+      return;
+    }
     if (!slug || slug.indexOf('.') !== -1) return;
     window.location.replace(slug + '.html');
   })();
@@ -10769,6 +10783,38 @@ def load_all_rankings() -> tuple:
     return additions, kitchen, bathrooms, custom_homes, commercial, spec_homes, edmonds_custom, trades_data
 
 
+STAMP_SOURCE = SITE_DIR / "pages" / "stamp-of-trust.html"
+
+
+def emit_stamp_of_trust_page() -> None:
+    """Publish pages/stamp-of-trust.html at /stamp-of-trust/ (badge canonical)."""
+    if not STAMP_SOURCE.is_file():
+        raise SystemExit(f"Missing Stamp of Trust source: {STAMP_SOURCE}")
+    html_text = STAMP_SOURCE.read_text(encoding="utf-8")
+    required = (
+        'rel="canonical" href="https://boardofprojectstewardship.com/stamp-of-trust/"',
+        'property="og:title"',
+        'property="og:description"',
+        'property="og:url" content="https://boardofprojectstewardship.com/stamp-of-trust/"',
+        'property="og:image"',
+        'name="twitter:title"',
+        'name="twitter:description"',
+        'name="twitter:url"',
+        'name="twitter:image"',
+        'href="/verify-contractor.html"',
+        'href="/directory.html"',
+    )
+    missing = [token for token in required if token not in html_text]
+    if missing:
+        raise SystemExit("Stamp of Trust source missing required markup: " + ", ".join(missing))
+    # Relative ./ links would resolve under /stamp-of-trust/ and miss site-root pages.
+    if re.search(r'href="\./[^"]+\.html"', html_text):
+        raise SystemExit("Stamp of Trust source uses ./ page links; use root paths like /verify-contractor.html")
+    dest_dir = SITE_DIR / "stamp-of-trust"
+    dest_dir.mkdir(parents=True, exist_ok=True)
+    (dest_dir / "index.html").write_text(html_text, encoding="utf-8")
+
+
 def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description="Generate the Board of Project Stewardship static site.")
     parser.add_argument("--indexnow", action="store_true", help="Ping IndexNow after generate.")
@@ -10901,6 +10947,7 @@ def main(argv: list[str] | None = None) -> None:
     (SITE_DIR / "selecting-finishes.html").write_text(build_selecting_finishes_page(), encoding="utf-8")
     (SITE_DIR / "contractor-contract-basics.html").write_text(build_contractor_contract_basics_page(), encoding="utf-8")
 
+    emit_stamp_of_trust_page()
     write_readme(posts)
     write_robots()
     write_posts_json(posts)
