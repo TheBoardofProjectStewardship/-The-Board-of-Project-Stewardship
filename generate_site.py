@@ -5792,19 +5792,45 @@ def _check_ul(items: list[str]) -> str:
 
 
 def _hub_photo_strip(
-    items: list[tuple[str, str, str]],
+    items: list[tuple],
     *,
     title: str = "Field context (illustrative)",
 ) -> str:
-    """Reusable 3-up photo strip for thin learning hubs. Skips missing assets."""
+    """Reusable 3-up photo strip for thin learning hubs. Skips missing assets.
+
+    Each item is (rel, alt, caption) or (rel, alt, caption, href) or
+    (rel, alt, caption, href, link_label). When href is present, the image is
+    wrapped in an on-site <a>; figcaption stays outside the link.
+    """
     figures: list[str] = []
-    for rel, alt, caption in items:
+    for item in items:
+        if len(item) < 3:
+            continue
+        rel, alt, caption = item[0], item[1], item[2]
+        href = item[3] if len(item) >= 4 else None
+        link_label = item[4] if len(item) >= 5 else None
         if not asset_exists(rel):
             continue
         src = prefix_asset(rel, "")
+        img_class = "w-full h-40 sm:h-48 object-cover"
+        if href:
+            img_class += " transition hover:opacity-90"
+            aria = esc(link_label or caption or alt or "Related Board page")
+            img = (
+                f'<a href="{esc(href)}" class="block focus:outline-none '
+                f'focus-visible:ring-2 focus-visible:ring-secondary/60" '
+                f'aria-label="{aria}">'
+                f'<img src="{src}" alt="{esc(alt)}" class="{img_class}" '
+                f'width="800" height="450" loading="lazy"></a>'
+            )
+        else:
+            img = (
+                f'<img src="{src}" alt="{esc(alt)}" class="{img_class}" '
+                f'width="800" height="450" loading="lazy">'
+            )
         figures.append(
             f"""        <figure class="overflow-hidden rounded-xl border border-white/10 bg-obsidian">
-          <img src="{src}" alt="{esc(alt)}" class="w-full h-40 sm:h-48 object-cover" width="800" height="450" loading="lazy">
+          {img}
           <figcaption class="px-3 py-2 text-[11px] text-slate-500 font-light leading-snug">{esc(caption)}</figcaption>
         </figure>"""
         )
@@ -6861,17 +6887,69 @@ def _hub_video_embed_html(
 """
 
 
+# Role → on-site page for place/Locations photo strips (existing hubs only).
+_PHOTO_ROLE_LINKS = {
+    "kitchen": ("./kitchen.html", "Kitchen remodelers directory"),
+    "bathroom": ("./bathrooms.html", "Bathroom remodelers directory"),
+    "addition": ("./additions.html", "Home additions directory"),
+}
+
+
+def _infer_photo_role(rel: str, role: str | None = None) -> str:
+    """Resolve photo role from manifest role, else filename hints."""
+    r = (role or "").strip().lower()
+    if r in _PHOTO_ROLE_LINKS or r == "context":
+        return r
+    name = (rel or "").lower()
+    if "kitchen" in name:
+        return "kitchen"
+    if "bathroom" in name or "/bath-" in name or "-bath-" in name or name.endswith("-bath.webp"):
+        return "bathroom"
+    if "addition" in name:
+        return "addition"
+    return "context"
+
+
+def _photo_strip_link(
+    ph: dict,
+    *,
+    context: str,
+) -> tuple[str, str] | None:
+    """Return (href, aria-label) for a manifest photo, or None.
+
+    context: "place" (place SEO hubs) or "locations" (Locations index).
+    Optional per-photo manifest override: href / link_label (or aria_label).
+    """
+    override = (ph.get("href") or "").strip()
+    label_override = (ph.get("link_label") or ph.get("aria_label") or "").strip()
+    if override:
+        return override, label_override or (ph.get("caption") or ph.get("alt") or "Related Board page")
+    role = _infer_photo_role(ph.get("rel") or "", ph.get("role"))
+    if role in _PHOTO_ROLE_LINKS:
+        href, label = _PHOTO_ROLE_LINKS[role]
+        return href, label_override or label
+    # context / exterior overview
+    if context == "locations":
+        return "./learn.html", label_override or "Learn hub"
+    return "./locations.html", label_override or "Locations hub"
+
+
 def place_seo_media_html(slug: str, place: str) -> str:
     """Photo strip + video for a place SEO hub from _place_media_manifest.json."""
     manifest = load_place_media_manifest()
     entry = (manifest.get("places") or {}).get(slug) or {}
     photos = entry.get("photos") or []
-    items: list[tuple[str, str, str]] = []
+    items: list[tuple] = []
     for ph in photos:
         rel = ph.get("rel") or ""
         alt = ph.get("alt") or f"Illustrative remodel context for {place}"
         caption = ph.get("caption") or f"{place} (illustrative)"
-        if rel:
+        if not rel:
+            continue
+        link = _photo_strip_link(ph, context="place")
+        if link:
+            items.append((rel, alt, caption, link[0], link[1]))
+        else:
             items.append((rel, alt, caption))
     strip = _hub_photo_strip(
         items,
@@ -6890,12 +6968,17 @@ def locations_hub_media_html() -> str:
     manifest = load_place_media_manifest()
     entry = manifest.get("locations") or {}
     photos = entry.get("photos") or []
-    items: list[tuple[str, str, str]] = []
+    items: list[tuple] = []
     for ph in photos:
         rel = ph.get("rel") or ""
         alt = ph.get("alt") or "Illustrative Locations hub remodel context"
         caption = ph.get("caption") or "Locations (illustrative)"
-        if rel:
+        if not rel:
+            continue
+        link = _photo_strip_link(ph, context="locations")
+        if link:
+            items.append((rel, alt, caption, link[0], link[1]))
+        else:
             items.append((rel, alt, caption))
     strip = _hub_photo_strip(
         items,
