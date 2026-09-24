@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-09-24-kitchen-remodel-bothell-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-09-24T17:20:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Kitchen Remodel Bothell WA — Layout, Permits & Licensed Pros",
+    "date": "2026-09-24",
+    "slug": "kitchen-remodel-bothell-wa",
+    "description": "Practical Bothell kitchen remodel guidance for King County layouts, MyBuildingPermit paths, cabinet sequencing, and how to shortlist licensed design-build firms.",
+    "category": "Kitchen"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  }
+}
