@@ -8025,6 +8025,24 @@ def build_mukilteo_hub() -> str:
             ("Kitchen remodel planning", "./kitchen-remodel-planning.html"),
             ("Permit hub", "./permits.html"),
         ],
+        photo_strip=[
+            (
+                "assets/images/posts/2026-08-27-mukilteo-kitchen-1.webp",
+                "Illustrative Mukilteo kitchen remodel context — not a real Board job photo",
+                "Kitchen scopes",
+            ),
+            (
+                "assets/images/posts/2026-08-28-mukilteo-bath-1.webp",
+                "Illustrative Mukilteo bath remodel context — not a real Board job photo",
+                "Bath scopes",
+            ),
+            (
+                "assets/images/posts/2026-08-27-mukilteo-kitchen-2.webp",
+                "Illustrative Mukilteo finish discipline — not a real Board job photo",
+                "Finish habits",
+            ),
+        ],
+        photo_strip_title="Mukilteo work in pictures (illustrative)",
     )
 
 
@@ -8138,6 +8156,24 @@ def build_queen_anne_hub() -> str:
             ("Bathroom waterproofing guide", "./bathroom-waterproofing-guide.html"),
             ("Permit hub", "./permits.html"),
         ],
+        photo_strip=[
+            (
+                "assets/images/posts/2026-08-21-queen-anne-kitchen-1.webp",
+                "Illustrative Queen Anne kitchen remodel context — not a real Board job photo",
+                "Kitchen scopes",
+            ),
+            (
+                "assets/images/posts/2026-08-22-queen-anne-bath-1.webp",
+                "Illustrative Queen Anne bath remodel context — not a real Board job photo",
+                "Bath scopes",
+            ),
+            (
+                "assets/images/posts/2026-08-21-queen-anne-kitchen-2.webp",
+                "Illustrative Queen Anne finish discipline — not a real Board job photo",
+                "Finish habits",
+            ),
+        ],
+        photo_strip_title="Queen Anne work in pictures (illustrative)",
     )
 
 
@@ -8163,6 +8199,24 @@ def build_phinney_ridge_hub() -> str:
             ("Hiring a contractor", "./hiring-a-contractor.html"),
             ("Permit hub", "./permits.html"),
         ],
+        photo_strip=[
+            (
+                "assets/images/posts/2026-08-13-phinney-bath-1.webp",
+                "Illustrative Phinney Ridge bath remodel context — not a real Board job photo",
+                "Bath scopes",
+            ),
+            (
+                "assets/images/posts/2026-08-13-phinney-bath-2.webp",
+                "Illustrative Phinney Ridge wet-room discipline — not a real Board job photo",
+                "Waterproofing",
+            ),
+            (
+                "assets/images/posts/2026-08-13-phinney-bath-3.webp",
+                "Illustrative Phinney Ridge finish context — not a real Board job photo",
+                "Finish habits",
+            ),
+        ],
+        photo_strip_title="Phinney Ridge work in pictures (illustrative)",
     )
 
 
@@ -8378,6 +8432,24 @@ def build_greenwood_hub() -> str:
             ("Permit hub", "./permits.html"),
             ("Learn hub", "./learn.html"),
         ],
+        photo_strip=[
+            (
+                "assets/images/posts/2026-08-14-greenwood-kitchen-1.webp",
+                "Illustrative Greenwood kitchen remodel context — not a real Board job photo",
+                "Kitchen scopes",
+            ),
+            (
+                "assets/images/posts/2026-08-14-greenwood-kitchen-2.webp",
+                "Illustrative Greenwood layout planning — not a real Board job photo",
+                "Layout habits",
+            ),
+            (
+                "assets/images/posts/2026-08-14-greenwood-kitchen-3.webp",
+                "Illustrative Greenwood finish discipline — not a real Board job photo",
+                "Finish habits",
+            ),
+        ],
+        photo_strip_title="Greenwood work in pictures (illustrative)",
     )
 
 
@@ -8405,6 +8477,24 @@ def build_lake_forest_park_hub() -> str:
             ("Permit hub", "./permits.html"),
             ("Learn hub", "./learn.html"),
         ],
+        photo_strip=[
+            (
+                "assets/images/posts/2026-08-25-lfp-bath-1.webp",
+                "Illustrative Lake Forest Park bath remodel context — not a real Board job photo",
+                "Bath scopes",
+            ),
+            (
+                "assets/images/posts/2026-08-26-lfp-addition-1.webp",
+                "Illustrative Lake Forest Park addition context — not a real Board job photo",
+                "Addition scopes",
+            ),
+            (
+                "assets/images/posts/2026-08-25-lfp-bath-2.webp",
+                "Illustrative Lake Forest Park wet-room discipline — not a real Board job photo",
+                "Waterproofing",
+            ),
+        ],
+        photo_strip_title="Lake Forest Park work in pictures (illustrative)",
     )
 
 
@@ -8430,6 +8520,24 @@ def build_mountlake_terrace_hub() -> str:
             ("Permit hub", "./permits.html"),
             ("Learn hub", "./learn.html"),
         ],
+        photo_strip=[
+            (
+                "assets/images/posts/2026-08-23-mlt-kitchen-1.webp",
+                "Illustrative Mountlake Terrace kitchen remodel context — not a real Board job photo",
+                "Kitchen scopes",
+            ),
+            (
+                "assets/images/posts/2026-08-23-mlt-kitchen-2.webp",
+                "Illustrative Mountlake Terrace layout planning — not a real Board job photo",
+                "Layout habits",
+            ),
+            (
+                "assets/images/posts/2026-08-23-mlt-kitchen-3.webp",
+                "Illustrative Mountlake Terrace finish discipline — not a real Board job photo",
+                "Finish habits",
+            ),
+        ],
+        photo_strip_title="Mountlake Terrace work in pictures (illustrative)",
     )
 
 
