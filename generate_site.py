@@ -952,6 +952,7 @@ def nav_html(active: str = "", prefix: str = "") -> str:
         ("home", href("index.html"), "Home"),
         ("about", href("about.html"), "About"),
         ("directory", href("directory.html"), "Directories"),
+        ("locations", href("locations.html"), "Locations"),
         ("learn", href("learn.html"), "Learn"),
         ("permits", href("permits.html"), "Permits"),
         ("verify-contractor", href("verify-contractor.html"), "Verify"),
@@ -959,7 +960,7 @@ def nav_html(active: str = "", prefix: str = "") -> str:
         ("how-we-rank", href("how-we-rank.html"), "How we rank"),
         ("blog", href("blog.html"), "Blog"),
     ]
-    # Cities live under Learn + Directories hubs only (mega-nav collapse).
+    # Place hubs: primary Locations tab → locations.html; cities also on Learn/Directories.
     more_dirs = [
         ("additions", href("additions.html"), "Additions"),
         ("custom-homes", href("custom-homes.html"), "Custom Homes"),
@@ -1044,67 +1045,70 @@ def nav_html(active: str = "", prefix: str = "") -> str:
 
 
 def footer_html(prefix: str = "./", active: str = "") -> str:
-    explore = [
+    """Sitewide footer with SEO link clusters (not a stuffed city dump).
+
+    Full place inventory lives on locations.html. Key cities only in this cluster.
+    """
+    site = [
         ("about", f"{prefix}about.html", "About"),
         ("directory", f"{prefix}directory.html", "Directories"),
+        ("locations", f"{prefix}locations.html", "Locations"),
         ("learn", f"{prefix}learn.html", "Learn"),
         ("how-we-rank", f"{prefix}how-we-rank.html", "How we rank"),
-        ("additions", f"{prefix}additions.html", "Additions Top 30"),
-        ("custom-homes", f"{prefix}custom-homes.html", "Custom homes"),
-        ("edmonds", f"{prefix}edmonds-custom-homes.html", "Edmonds custom homes"),
-        ("kitchen", f"{prefix}kitchen.html", "Kitchen remodelers"),
-        ("bathrooms", f"{prefix}bathrooms.html", "Bathroom remodelers"),
-        ("commercial", f"{prefix}commercial.html", "Commercial GCs"),
-        ("spec-homes", f"{prefix}spec-homes.html", "Spec homes"),
-        ("trades", f"{prefix}trades.html", "Trade contractors"),
-        ("learn", f"{prefix}learn.html", "Learn hub"),
-        ("permits", f"{prefix}permits.html", "Permit hub"),
-        ("adu", f"{prefix}adu.html", "Edmonds ADU"),
+        ("permits", f"{prefix}permits.html", "Permits"),
         ("verify-contractor", f"{prefix}verify-contractor.html", "Verify contractor"),
         ("stamp-of-trust", f"{prefix}stamp-of-trust/", "Stamp of Trust"),
         ("blog", f"{prefix}blog.html", "Blog"),
-        ("steward", f"{prefix}good-steward.html", "Good Steward"),
-        ("build-walkthrough", f"{prefix}build-walkthrough.html", "Build Walkthrough"),
-        ("site-visit", f"{prefix}site-visit.html", "Site Visit Checklist"),
-        ("pm-dashboard", f"{prefix}pm-dashboard.html", "PM Dashboard"),
-        ("adu-checklist", f"{prefix}adu-checklist.html", "ADU checklist"),
-        ("change-orders", f"{prefix}change-orders.html", "Change orders"),
-        ("coastal-waterproofing", f"{prefix}coastal-waterproofing.html", "Coastal waterproofing"),
-        ("hire-questions", f"{prefix}hire-questions.html", "Hire questions"),
+        ("contact", f"{prefix}contact.html", "Contact"),
+    ]
+    directories = [
+        ("additions", f"{prefix}additions.html", "Additions Top 30"),
+        ("kitchen", f"{prefix}kitchen.html", "Kitchen remodelers"),
+        ("bathrooms", f"{prefix}bathrooms.html", "Bathroom remodelers"),
+        ("custom-homes", f"{prefix}custom-homes.html", "Custom homes"),
+        ("edmonds", f"{prefix}edmonds-custom-homes.html", "Edmonds custom homes"),
+        ("commercial", f"{prefix}commercial.html", "Commercial GCs"),
+        ("trades", f"{prefix}trades.html", "Trade contractors"),
+    ]
+    learn_tools = [
         ("hiring-a-contractor", f"{prefix}hiring-a-contractor.html", "Hiring a contractor"),
-        ("second-story-vs-teardown", f"{prefix}second-story-vs-teardown.html", "Second story vs teardown"),
         ("kitchen-remodel-planning", f"{prefix}kitchen-remodel-planning.html", "Kitchen remodel planning"),
         ("bathroom-waterproofing-guide", f"{prefix}bathroom-waterproofing-guide.html", "Bathroom waterproofing"),
         ("home-addition-planning", f"{prefix}home-addition-planning.html", "Home addition planning"),
-        ("bid-comparison", f"{prefix}bid-comparison.html", "Bid comparison"),
-        ("red-flags-hiring", f"{prefix}red-flags-hiring.html", "Red flags hiring"),
-        ("project-timeline", f"{prefix}project-timeline.html", "Project timeline"),
-        ("final-walkthrough", f"{prefix}final-walkthrough.html", "Final walkthrough"),
-        ("bonds-and-insurance", f"{prefix}bonds-and-insurance.html", "Bonds & insurance"),
-        ("design-build-vs-bid", f"{prefix}design-build-vs-bid.html", "Design-build vs bid"),
-        ("remodel-cost-factors", f"{prefix}remodel-cost-factors.html", "Remodel cost factors"),
-        ("kitchen-cost-factors", f"{prefix}kitchen-cost-factors.html", "Kitchen cost factors"),
-        ("bathroom-cost-factors", f"{prefix}bathroom-cost-factors.html", "Bathroom cost factors"),
-        ("addition-cost-factors", f"{prefix}addition-cost-factors.html", "Addition cost factors"),
-        ("adu-cost-factors", f"{prefix}adu-cost-factors.html", "ADU cost factors"),
-        ("financing-and-draws", f"{prefix}financing-and-draws.html", "Financing & draws"),
-        ("living-through-remodel", f"{prefix}living-through-remodel.html", "Living through remodel"),
-        ("selecting-finishes", f"{prefix}selecting-finishes.html", "Selecting finishes"),
-        ("contractor-contract-basics", f"{prefix}contractor-contract-basics.html", "Contract basics (WA)"),
-        ("materials", f"{prefix}materials.html", "Materials index"),
+        ("steward", f"{prefix}good-steward.html", "Good Steward"),
+        ("story", f"{prefix}another-story.html", "Another Story"),
         ("glossary", f"{prefix}glossary.html", "Glossary"),
-        ("videos", f"{prefix}videos.html", "Video library"),
-        ("contact", f"{prefix}contact.html", "Contact"),
-        ("story", f"{prefix}another-story.html", "Another Story · Board feature"),
     ]
-    items = []
-    for key, href, label in explore:
-        current = ' aria-current="page"' if key == active else ""
-        items.append(
-            f'<li><a href="{href}" class="hover:text-secondary transition"{current}>{esc(label)}</a></li>'
-        )
+    # Key locations only — full inventory is on /locations.html (avoid footer stuffing).
+    locations = [
+        ("locations", f"{prefix}locations.html", "All service areas"),
+        ("king-county", f"{prefix}king-county.html", "King County"),
+        ("snohomish-county", f"{prefix}snohomish-county.html", "Snohomish County"),
+        ("seattle", f"{prefix}seattle.html", "Seattle"),
+        ("edmonds", f"{prefix}edmonds.html", "Edmonds"),
+        ("bellevue", f"{prefix}bellevue.html", "Bellevue"),
+        ("everett", f"{prefix}everett.html", "Everett"),
+        ("kirkland", f"{prefix}kirkland.html", "Kirkland"),
+        ("redmond", f"{prefix}redmond.html", "Redmond"),
+        ("shoreline", f"{prefix}shoreline.html", "Shoreline"),
+        ("lynnwood", f"{prefix}lynnwood.html", "Lynnwood"),
+        ("ballard", f"{prefix}ballard.html", "Ballard"),
+    ]
+
+    def _lis(rows: list[tuple[str, str, str]]) -> str:
+        items = []
+        for key, href, label in rows:
+            rel = href.replace(prefix, "", 1) if href.startswith(prefix) else href.lstrip("./")
+            if rel.endswith(".html") and not (SITE_DIR / rel).is_file() and key != "locations":
+                continue
+            current = ' aria-current="page"' if key == active else ""
+            items.append(
+                f'<li><a href="{href}" class="hover:text-secondary transition"{current}>{esc(label)}</a></li>'
+            )
+        return "".join(items)
+
     return f"""  <footer class="bg-obsidian py-14 text-sm border-t border-white/5">
-    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-10 text-slate-400">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 lg:grid-cols-4 gap-10 text-slate-400">
       <div>
         <div class="flex items-center mb-4 gap-2">
           <i class="fas fa-compass-drafting text-secondary"></i>
@@ -1112,16 +1116,31 @@ def footer_html(prefix: str = "./", active: str = "") -> str:
         </div>
         <p class="font-light leading-relaxed text-sm">{esc(BOARD_ONE_LINER)} Updated {YEAR}.</p>
         <p class="mt-3 font-light leading-relaxed text-sm">Public contact: <a href="mailto:{EDITORIAL_EMAIL}" class="text-secondary hover:underline">{EDITORIAL_EMAIL}</a></p>
-        <p class="mt-3 font-light leading-relaxed text-sm">Board feature: <a href="{prefix}another-story.html" class="text-secondary hover:underline">Another Story</a> — second-story concept studio.</p>
+        <p class="mt-3 font-light leading-relaxed text-sm">Board #1 hire (outbound): <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a> — independent design-build GC; not Board-owned.</p>
       </div>
       <div>
-        <h4 class="text-white font-bold text-xs uppercase tracking-widest mb-4">Explore</h4>
+        <h4 class="text-white font-bold text-xs uppercase tracking-widest mb-4">Site</h4>
         <ul class="space-y-2 font-light text-sm">
-          {''.join(items)}
+          {_lis(site)}
+        </ul>
+        <h4 class="text-white font-bold text-xs uppercase tracking-widest mb-4 mt-8">Directories</h4>
+        <ul class="space-y-2 font-light text-sm">
+          {_lis(directories)}
         </ul>
       </div>
       <div>
-        <h4 class="text-white font-bold text-xs uppercase tracking-widest mb-4">Disclaimer</h4>
+        <h4 class="text-white font-bold text-xs uppercase tracking-widest mb-4">Locations</h4>
+        <p class="font-light leading-relaxed text-xs text-slate-500 mb-3">Editorial place hubs for remodel planning across King County, Snohomish County, and Seattle neighborhoods.</p>
+        <ul class="space-y-2 font-light text-sm">
+          {_lis(locations)}
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-bold text-xs uppercase tracking-widest mb-4">Learn &amp; tools</h4>
+        <ul class="space-y-2 font-light text-sm">
+          {_lis(learn_tools)}
+        </ul>
+        <h4 class="text-white font-bold text-xs uppercase tracking-widest mb-4 mt-8">Disclaimer</h4>
         <p class="mb-3 font-light leading-relaxed text-sm">Listing is not an endorsement of quality. Verify licenses, insurance, bonds, and references before hiring. Membership in trade associations does not guarantee outcomes. Re-check status at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>.</p>
         <p class="text-xs text-slate-600">&copy; {YEAR} Board of Project Stewardship · {EDITORIAL_EMAIL}</p>
       </div>
@@ -1201,6 +1220,7 @@ POST_ROOT_HUB_STEMS = frozenset({
     "home-addition-planning", "kitchen-remodel-planning", "bathroom-waterproofing-guide",
     "second-story-vs-teardown", "bonds-and-insurance", "contractor-contract-basics",
     "design-build-vs-bid",
+    "locations",
 })
 
 
@@ -2424,9 +2444,9 @@ CITY_HUB_LINKS: list[tuple[str, str]] = [
 
 def city_hubs_section(
     heading: str = "City & neighborhood hubs",
-    blurb: str = "Local Board hubs across the Pacific Northwest — King County, Snohomish County, Seattle, and cities such as Edmonds. Permitting orientation and shortlist links. Not a complete contractor roster.",
+    blurb: str = "Local Board hubs across the Pacific Northwest — King County, Snohomish County, Seattle, and cities such as Edmonds. The Locations index lists every live place page. Permitting orientation and shortlist links. Not a complete contractor roster.",
 ) -> str:
-    links = _link_ul(CITY_HUB_LINKS + place_seo_city_hub_links())
+    links = _link_ul([("Locations index", "./locations.html")] + CITY_HUB_LINKS + place_seo_city_hub_links())
     return _hub_section(heading, f"""      <p class="text-sm text-slate-400 font-light leading-relaxed mb-3">{esc(blurb)}</p>
 {links}""")
 
@@ -5144,6 +5164,7 @@ Base: `{BASE_URL}`
 | `pm-dashboard.html` | PM Execution Dashboard landing |
 | `energy-credit.html` | WSEC-R energy credits landing |
 | `another-story.html` | Another Story Board feature |
+| `locations.html` | Locations hub (live place pages) |
 | `stamp-of-trust/` | Stamp of Trust credential |
 | `blog/rss.xml` | Blog RSS feed |
 | `404.html` | Branded Board 404 |
@@ -5283,6 +5304,7 @@ def write_sitemap(posts: list[dict]) -> None:
         "king-county.html",
         "snohomish-county.html",
         "learn.html",
+        "locations.html",
         "adu-checklist.html",
         "change-orders.html",
         "coastal-waterproofing.html",
@@ -5319,8 +5341,8 @@ def write_sitemap(posts: list[dict]) -> None:
         "tools/another-story/index.html",
     ]
 
-    # Wave1 place SEO hubs (only files that exist on disk)
-    for _ps in load_place_specs_wave1():
+    # Place SEO hubs wave1+wave2 (only files that exist on disk)
+    for _ps in load_all_place_seo_specs():
         _slug = (_ps.get("slug") or "").strip()
         if not _slug:
             continue
@@ -6499,6 +6521,7 @@ def build_city_hub_page(
 PLACES_DIR = SITE_DIR / "places"
 GC_HIRE_TERMS_PATH = PLACES_DIR / "_gc_hire_terms.json"
 PLACE_SPECS_WAVE1_PATH = PLACES_DIR / "_place_specs_wave1.json"
+PLACE_SPECS_WAVE2_PATH = PLACES_DIR / "_place_specs_wave2.json"
 MAPS_EMBED_SRC = (
     "https://www.google.com/maps/d/embed?mid=136ZTS0u0e1Pnhc8h0RKNAdOf1jtk7YU&ehbc=2E312F"
 )
@@ -6612,6 +6635,18 @@ def load_place_specs_wave1() -> list[dict]:
         return []
     payload = json.loads(PLACE_SPECS_WAVE1_PATH.read_text(encoding="utf-8"))
     return list(payload.get("places") or [])
+
+
+def load_place_specs_wave2() -> list[dict]:
+    if not PLACE_SPECS_WAVE2_PATH.is_file():
+        return []
+    payload = json.loads(PLACE_SPECS_WAVE2_PATH.read_text(encoding="utf-8"))
+    return list(payload.get("places") or [])
+
+
+def load_all_place_seo_specs() -> list[dict]:
+    """Wave1 + wave2 PlaceSpecs (order preserved; later waves append)."""
+    return load_place_specs_wave1() + load_place_specs_wave2()
 
 
 def place_spec_is_complete(spec: dict) -> tuple[bool, str]:
@@ -6890,9 +6925,12 @@ def build_place_seo_page(spec: dict, hire_pack: dict | None = None) -> str:
     )
 
 
-def write_place_seo_wave1() -> list[str]:
-    """Generate wave1 place hubs that pass completeness + uniqueness gates. Returns written slugs."""
-    specs = load_place_specs_wave1()
+def _write_place_seo_wave(specs: list[dict], *, wave_label: str, compare_with: list[dict] | None = None) -> list[str]:
+    """Generate place hubs that pass completeness + uniqueness gates. Returns written slugs.
+
+    When compare_with is provided, uniqueness is evaluated against compare_with + complete
+    wave specs (wave2 must pass vs wave1 blurbs and sections too).
+    """
     hire_pack = load_gc_hire_terms()
     complete: list[dict] = []
     skipped: list[str] = []
@@ -6902,11 +6940,19 @@ def write_place_seo_wave1() -> list[str]:
             skipped.append(f"{spec.get('slug', '?')}:{reason}")
             continue
         complete.append(spec)
-    flags = place_specs_uniqueness_report(complete)
+    universe = list(compare_with or []) + complete
+    seen: set[str] = set()
+    deduped: list[dict] = []
+    for spec in universe:
+        slug = spec.get("slug")
+        if not slug or slug in seen:
+            continue
+        seen.add(slug)
+        deduped.append(spec)
+    flags = place_specs_uniqueness_report(deduped)
     hard = [f for f in flags if f.startswith("SWAP_DUP") or f.startswith("NEAR_DUP")]
     if hard:
-        # Do not emit any wave1 page if uniqueness fails — leave tree unchanged for those slugs.
-        print("Place SEO uniqueness gate failed; skipping wave1 HTML emit:")
+        print(f"Place SEO uniqueness gate failed; skipping {wave_label} HTML emit:")
         for f in hard[:40]:
             print(f"  {f}")
         if skipped:
@@ -6914,18 +6960,38 @@ def write_place_seo_wave1() -> list[str]:
         return []
     written: list[str] = []
     for spec in complete:
+        slug = spec["slug"]
+        # Never clobber the Board homepage (Town of Index uses index-wa).
+        if slug == "index":
+            raise ValueError(
+                "Place SEO slug 'index' would overwrite index.html homepage; use 'index-wa'"
+            )
         html_page = build_place_seo_page(spec, hire_pack)
-        (SITE_DIR / f"{spec['slug']}.html").write_text(html_page, encoding="utf-8")
-        written.append(spec["slug"])
+        (SITE_DIR / f"{slug}.html").write_text(html_page, encoding="utf-8")
+        written.append(slug)
     if skipped:
-        print(f"Place SEO skipped incomplete specs: {', '.join(skipped)}")
-    print(f"Place SEO wave1 wrote {len(written)} hubs")
+        print(f"Place SEO skipped incomplete {wave_label} specs: {', '.join(skipped)}")
+    print(f"Place SEO {wave_label} wrote {len(written)} hubs")
     return written
 
 
+def write_place_seo_wave1() -> list[str]:
+    """Generate wave1 place hubs that pass completeness + uniqueness gates. Returns written slugs."""
+    return _write_place_seo_wave(load_place_specs_wave1(), wave_label="wave1")
+
+
+def write_place_seo_wave2() -> list[str]:
+    """Generate wave2 place hubs; uniqueness vs wave2 peers AND all wave1 specs."""
+    return _write_place_seo_wave(
+        load_place_specs_wave2(),
+        wave_label="wave2",
+        compare_with=load_place_specs_wave1(),
+    )
+
+
 def place_seo_city_hub_links(written_slugs: list[str] | None = None) -> list[tuple[str, str]]:
-    """Extra CITY_HUB_LINKS rows for emitted wave1 places."""
-    specs = load_place_specs_wave1()
+    """Extra CITY_HUB_LINKS rows for emitted wave1 + wave2 places."""
+    specs = load_all_place_seo_specs()
     allow = set(written_slugs) if written_slugs is not None else None
     links: list[tuple[str, str]] = []
     for spec in specs:
@@ -6941,6 +7007,232 @@ def place_seo_city_hub_links(written_slugs: list[str] | None = None) -> list[tup
             continue
         links.append((spec.get("place") or slug.title(), f"./{slug}.html"))
     return links
+
+
+# Legacy city hubs (hand-built) with county/group metadata for the Locations index.
+EXISTING_PLACE_HUB_META: list[tuple[str, str, str, str]] = [
+    ("seattle", "Seattle", "King County", "city"),
+    ("king-county", "King County", "King County", "county"),
+    ("snohomish-county", "Snohomish County", "Snohomish County", "county"),
+    ("edmonds", "Edmonds", "Snohomish County", "city"),
+    ("shoreline", "Shoreline", "King County", "city"),
+    ("lynnwood", "Lynnwood", "Snohomish County", "city"),
+    ("ballard", "Ballard", "King County", "neighborhood"),
+    ("magnolia", "Magnolia", "King County", "neighborhood"),
+    ("mukilteo", "Mukilteo", "Snohomish County", "city"),
+    ("kirkland", "Kirkland", "King County", "city"),
+    ("bothell", "Bothell", "King County / Snohomish County", "city"),
+    ("queen-anne", "Queen Anne", "King County", "neighborhood"),
+    ("phinney-ridge", "Phinney Ridge", "King County", "neighborhood"),
+    ("greenwood", "Greenwood", "King County", "neighborhood"),
+    ("lake-forest-park", "Lake Forest Park", "King County", "city"),
+    ("mountlake-terrace", "Mountlake Terrace", "Snohomish County", "city"),
+    ("mill-creek", "Mill Creek", "Snohomish County", "city"),
+]
+
+SEATTLE_NEIGHBORHOOD_SLUGS = {
+    "ballard",
+    "magnolia",
+    "queen-anne",
+    "phinney-ridge",
+    "greenwood",
+}
+
+
+def iter_live_place_hubs() -> list[dict]:
+    """All crawlable place hubs on disk: legacy city hubs + complete wave1/wave2 specs.
+
+    New place waves auto-appear here when specs are ready and `{slug}.html` exists.
+    """
+    seen: set[str] = set()
+    hubs: list[dict] = []
+
+    def _add(slug: str, place: str, county: str, kind: str) -> None:
+        slug = (slug or "").strip()
+        if not slug or slug in seen:
+            return
+        if not (SITE_DIR / f"{slug}.html").is_file():
+            return
+        seen.add(slug)
+        hubs.append(
+            {
+                "slug": slug,
+                "place": place or slug.replace("-", " ").title(),
+                "county": county or "",
+                "kind": kind or "city",
+                "href": f"./{slug}.html",
+            }
+        )
+
+    for slug, place, county, kind in EXISTING_PLACE_HUB_META:
+        _add(slug, place, county, kind)
+
+    for spec in load_all_place_seo_specs():
+        ok, _ = place_spec_is_complete(spec)
+        if not ok:
+            continue
+        county = (spec.get("county") or "").strip()
+        kind = (spec.get("place_type") or "city").strip()
+        _add(spec.get("slug") or "", spec.get("place") or "", county, kind)
+
+    hubs.sort(key=lambda h: (h["place"].lower(), h["slug"]))
+    return hubs
+
+
+def group_place_hubs_for_locations(
+    hubs: list[dict] | None = None,
+) -> dict[str, list[dict]]:
+    """Group live hubs for the Locations index."""
+    hubs = hubs if hubs is not None else iter_live_place_hubs()
+    groups: dict[str, list[dict]] = {
+        "counties": [],
+        "seattle_neighborhoods": [],
+        "king": [],
+        "snohomish": [],
+        "cross_county": [],
+    }
+    for h in hubs:
+        slug = h["slug"]
+        county = h.get("county") or ""
+        kind = h.get("kind") or ""
+        if kind == "county" or slug in {"king-county", "snohomish-county"}:
+            groups["counties"].append(h)
+        elif kind == "neighborhood" or slug in SEATTLE_NEIGHBORHOOD_SLUGS:
+            groups["seattle_neighborhoods"].append(h)
+        elif slug == "seattle":
+            groups["king"].append(h)
+        elif "/" in county or "Pierce" in county or county in {"Both", "both"}:
+            groups["cross_county"].append(h)
+        elif "Snohomish" in county and "King" in county:
+            groups["cross_county"].append(h)
+        elif "Snohomish" in county:
+            groups["snohomish"].append(h)
+        else:
+            groups["king"].append(h)
+    for key in groups:
+        groups[key].sort(key=lambda x: x["place"].lower())
+    return groups
+
+
+def _locations_group_html(title: str, blurb: str, hubs: list[dict], heading_id: str) -> str:
+    if not hubs:
+        return ""
+    lis = "".join(
+        f'<li><a href="{esc(h["href"])}" class="text-secondary hover:underline font-medium">{esc(h["place"])}</a>'
+        f'<span class="text-slate-500 text-xs ml-2">{esc(h.get("kind") or "")}</span></li>'
+        for h in hubs
+    )
+    return f"""    <section class="mb-12" aria-labelledby="{esc(heading_id)}">
+      <h2 id="{esc(heading_id)}" class="text-2xl font-black text-white tracking-tight mb-2">{esc(title)}</h2>
+      <p class="text-sm text-slate-400 font-light leading-relaxed mb-4">{esc(blurb)}</p>
+      <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-2 text-sm text-slate-300 font-light list-none pl-0">
+        {lis}
+      </ul>
+    </section>
+"""
+
+
+def build_locations_page() -> str:
+    """Hub index of all live place pages."""
+    groups = group_place_hubs_for_locations()
+    total = sum(len(v) for v in groups.values())
+    ppg_name = (PPG.get("name") if isinstance(PPG, dict) else None) or "Pacific Pro Group"
+    ppg_url = (PPG.get("url") if isinstance(PPG, dict) else None) or "https://pacificprogroup.com/"
+
+    body = f"""  <section class="relative overflow-hidden border-b border-white/5">
+    <div class="max-w-6xl mx-auto px-4 pt-14 pb-10">
+      <nav class="text-xs text-slate-500 font-light mb-4" aria-label="Breadcrumb">
+        <ol class="flex flex-wrap items-center gap-2 list-none pl-0">
+          <li><a href="./index.html" class="text-secondary hover:underline">Home</a></li>
+          <li aria-hidden="true">/</li>
+          <li class="text-slate-300" aria-current="page">Locations</li>
+        </ol>
+      </nav>
+      <p class="text-secondary text-xs font-bold uppercase tracking-widest mb-3">Service areas</p>
+      <h1 class="text-3xl md:text-4xl font-black text-white tracking-tight mb-4">Locations — King County, Snohomish County &amp; Seattle</h1>
+      <p class="text-slate-300 font-light leading-relaxed max-w-3xl mb-4">
+        The Board of Project Stewardship publishes editorial place hubs for remodel and addition planning across
+        King County, Snohomish County, and Seattle neighborhoods. Each hub orients local permitting paths and links
+        Board directories — not a paid contractor roster, and not a promise of coverage for every parcel.
+      </p>
+      <p class="text-sm text-slate-400 font-light leading-relaxed max-w-3xl mb-2">
+        Currently indexed: <strong class="text-white font-semibold">{total}</strong> live place hubs.
+        New place SEO waves appear here automatically when their pages ship.
+      </p>
+      <p class="text-sm text-slate-500 font-light leading-relaxed max-w-3xl">
+        Board #1 hire (outbound only): <a href="{esc(ppg_url)}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(ppg_name)}</a>
+        — independent design-build GC; not owned or operated by the Board of Project Stewardship.
+        Re-verify every legal name at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> before any deposit.
+      </p>
+    </div>
+  </section>
+  <div class="max-w-6xl mx-auto px-4 py-12">
+{_locations_group_html(
+        "County overview hubs",
+        "Start with a county-level Board hub when you need AHJ orientation across multiple cities.",
+        groups["counties"],
+        "loc-counties",
+    )}
+{_locations_group_html(
+        "Seattle neighborhoods",
+        "Seattle district and neighborhood hubs — Ballard, Magnolia, Queen Anne, and nearby corridors.",
+        groups["seattle_neighborhoods"],
+        "loc-seattle-nbhd",
+    )}
+{_locations_group_html(
+        "King County cities & towns",
+        "Eastside, South King, and other King County place hubs with live Board pages.",
+        groups["king"],
+        "loc-king",
+    )}
+{_locations_group_html(
+        "Snohomish County cities & towns",
+        "Edmonds corridor, inland Snohomish, and related place hubs.",
+        groups["snohomish"],
+        "loc-snohomish",
+    )}
+{_locations_group_html(
+        "Cross-county & special jurisdictions",
+        "Places that straddle county lines or need a dual-AHJ note — confirm which city or county owns your parcel.",
+        groups["cross_county"],
+        "loc-cross",
+    )}
+    <section class="mb-8 bg-charcoal border border-white/10 rounded-xl p-6 md:p-8" aria-labelledby="loc-next-h">
+      <h2 id="loc-next-h" class="text-xl font-black text-white tracking-tight mb-3">What to do next</h2>
+      <ul class="text-sm text-slate-300 font-light space-y-2 list-disc pl-5">
+        <li>Open your place hub for permitting orientation, then shortlist from <a href="./directory.html" class="text-secondary hover:underline">Board directories</a>.</li>
+        <li>Read the <a href="./learn.html" class="text-secondary hover:underline">Learn hub</a> for kitchen, bath, and addition planning guides.</li>
+        <li>Walk <a href="./verify-contractor.html" class="text-secondary hover:underline">Verify a WA contractor</a> before deposits or demolition.</li>
+        <li>Methodology: <a href="./how-we-rank.html" class="text-secondary hover:underline">How we rank</a> — editorial, not paid placement.</li>
+      </ul>
+    </section>
+  </div>
+"""
+    return page_shell(
+        "Locations — King & Snohomish Counties | Board of Project Stewardship",
+        (
+            "Board of Project Stewardship locations index: crawlable place hubs for King County, "
+            "Snohomish County, and Seattle neighborhoods — remodel and addition planning, not a contractor ad list."
+        ),
+        "locations",
+        body,
+        canonical=f"{BASE_URL}locations.html",
+        breadcrumbs=[
+            ("Home", BASE_URL),
+            ("Locations", f"{BASE_URL}locations.html"),
+        ],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def write_locations_page() -> Path:
+    out = SITE_DIR / "locations.html"
+    out.write_text(build_locations_page(), encoding="utf-8")
+    return out
+
+
 
 
 
@@ -11416,8 +11708,10 @@ def main(argv: list[str] | None = None) -> None:
     (SITE_DIR / "energy-credit.html").write_text(build_energy_credit_page(), encoding="utf-8")
     (SITE_DIR / "site-visit.html").write_text(build_site_visit_page(), encoding="utf-8")
     (SITE_DIR / "pm-dashboard.html").write_text(build_pm_dashboard_page(), encoding="utf-8")
-    # Place SEO wave1 (unique PlaceSpecs only; shared Maps/BT/badge chrome)
+    # Place SEO wave1 + wave2 (unique PlaceSpecs only; shared Maps/BT/badge chrome)
     write_place_seo_wave1()
+    write_place_seo_wave2()
+    write_locations_page()
     (SITE_DIR / "directory.html").write_text(build_directory_page(), encoding="utf-8")
     (SITE_DIR / "kitchens.html").write_text(build_redirect_page("./kitchen.html", "Kitchen directory"), encoding="utf-8")
     (SITE_DIR / "plumbing.html").write_text(build_redirect_page("./plumber.html", "Plumber directory"), encoding="utf-8")
