@@ -6522,6 +6522,7 @@ PLACES_DIR = SITE_DIR / "places"
 GC_HIRE_TERMS_PATH = PLACES_DIR / "_gc_hire_terms.json"
 PLACE_SPECS_WAVE1_PATH = PLACES_DIR / "_place_specs_wave1.json"
 PLACE_SPECS_WAVE2_PATH = PLACES_DIR / "_place_specs_wave2.json"
+PLACE_MEDIA_MANIFEST_PATH = PLACES_DIR / "_place_media_manifest.json"
 MAPS_EMBED_SRC = (
     "https://www.google.com/maps/d/embed?mid=136ZTS0u0e1Pnhc8h0RKNAdOf1jtk7YU&ehbc=2E312F"
 )
@@ -6788,6 +6789,126 @@ def hire_terms_section_html(spec: dict, hire_pack: dict) -> str:
     return _hub_section(f"Highly searched hire terms near {place}", inner, border="border-secondary/20")
 
 
+
+def load_place_media_manifest() -> dict:
+    """Optional place/locations media strip + video embeds (WebP + YouTube/mp4)."""
+    if not PLACE_MEDIA_MANIFEST_PATH.is_file():
+        return {}
+    try:
+        return json.loads(PLACE_MEDIA_MANIFEST_PATH.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+
+def _hub_video_embed_html(
+    video: dict | None,
+    *,
+    heading: str = "Process context (educational)",
+    place: str | None = None,
+) -> str:
+    """YouTube or local mp4 embed for place/Locations hubs. Skips empty/missing."""
+    if not video or not isinstance(video, dict):
+        return ""
+    kind = (video.get("kind") or "").strip().lower()
+    caption = video.get("caption") or (
+        "Educational construction process video — not a Board project walkthrough or guarantee."
+    )
+    title = video.get("title") or "Educational construction process video"
+    iframe_title = esc(title)
+    if place:
+        iframe_title = esc(f"{title} — {place}")
+    body = ""
+    if kind == "youtube":
+        vid = (video.get("youtube_id") or "").strip()
+        if not vid or len(vid) < 6:
+            return ""
+        body = (
+            f'<div class="hub-video-embed">'
+            f'<iframe src="https://www.youtube.com/embed/{esc(vid)}" '
+            f'title="{iframe_title}" '
+            f'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" '
+            f'allowfullscreen loading="lazy"></iframe></div>'
+        )
+    elif kind in ("mp4", "local", "video"):
+        rel = (video.get("rel") or video.get("src") or "").lstrip("./")
+        if not rel or not asset_exists(rel):
+            return ""
+        src = prefix_asset(rel, "")
+        body = (
+            f'<div class="hub-video-embed">'
+            f'<video controls playsinline preload="metadata" '
+            f'title="{iframe_title}">'
+            f'<source src="{esc(src)}" type="video/mp4">'
+            f'</video></div>'
+        )
+    else:
+        return ""
+    return f"""  <style>
+    .hub-video-embed {{
+      position: relative; width: 100%; padding-bottom: 56.25%; height: 0;
+      border-radius: 0.75rem; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08); background: #000;
+    }}
+    .hub-video-embed iframe, .hub-video-embed video {{
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;
+    }}
+  </style>
+  <section class="max-w-6xl mx-auto px-4 pb-8" aria-label="{esc(heading)}">
+    <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-3">{esc(heading)}</p>
+    {body}
+    <p class="text-[11px] text-slate-500 font-light leading-snug mt-3">{esc(caption)}</p>
+  </section>
+"""
+
+
+def place_seo_media_html(slug: str, place: str) -> str:
+    """Photo strip + video for a place SEO hub from _place_media_manifest.json."""
+    manifest = load_place_media_manifest()
+    entry = (manifest.get("places") or {}).get(slug) or {}
+    photos = entry.get("photos") or []
+    items: list[tuple[str, str, str]] = []
+    for ph in photos:
+        rel = ph.get("rel") or ""
+        alt = ph.get("alt") or f"Illustrative remodel context for {place}"
+        caption = ph.get("caption") or f"{place} (illustrative)"
+        if rel:
+            items.append((rel, alt, caption))
+    strip = _hub_photo_strip(
+        items,
+        title=f"Field context · {place} (illustrative)",
+    )
+    video_html = _hub_video_embed_html(
+        entry.get("video"),
+        heading=f"Process context · {place} (educational)",
+        place=place,
+    )
+    return strip + video_html
+
+
+def locations_hub_media_html() -> str:
+    """Photo strip + video for the Locations index page."""
+    manifest = load_place_media_manifest()
+    entry = manifest.get("locations") or {}
+    photos = entry.get("photos") or []
+    items: list[tuple[str, str, str]] = []
+    for ph in photos:
+        rel = ph.get("rel") or ""
+        alt = ph.get("alt") or "Illustrative Locations hub remodel context"
+        caption = ph.get("caption") or "Locations (illustrative)"
+        if rel:
+            items.append((rel, alt, caption))
+    strip = _hub_photo_strip(
+        items,
+        title="Field context across King & Snohomish (illustrative)",
+    )
+    video_html = _hub_video_embed_html(
+        entry.get("video"),
+        heading="Process context (educational)",
+        place="Locations",
+    )
+    return strip + video_html
+
+
 def build_place_seo_page(spec: dict, hire_pack: dict | None = None) -> str:
     """Place SEO hub from a complete PlaceSpec (unique copy + shared chrome)."""
     ok, reason = place_spec_is_complete(spec)
@@ -6840,6 +6961,7 @@ def build_place_seo_page(spec: dict, hire_pack: dict | None = None) -> str:
             esc(spec["h1"]),
             esc(spec["blurb"]),
         )
+        + place_seo_media_html(slug, place)
         + _hub_section(
             "Permitting orientation",
             f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-4">{esc(spec['permit_blurb'])}</p>
@@ -7166,7 +7288,7 @@ def build_locations_page() -> str:
       </p>
     </div>
   </section>
-  <div class="max-w-6xl mx-auto px-4 py-12">
+{locations_hub_media_html()}  <div class="max-w-6xl mx-auto px-4 py-12">
 {_locations_group_html(
         "County overview hubs",
         "Start with a county-level Board hub when you need AHJ orientation across multiple cities.",

@@ -26,3 +26,7 @@ intake/lock/*
 
 !assets/images/hubs/
 !assets/images/hubs/**
+
+# Place SEO hub stills (wave1/wave2 + Locations) — must ship on GitHub Pages
+!assets/images/places/
+!assets/images/places/**
