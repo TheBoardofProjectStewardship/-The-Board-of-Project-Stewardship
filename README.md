@@ -44,6 +44,7 @@ Base: `https://boardofprojectstewardship.com/`
 | `pm-dashboard.html` | PM Execution Dashboard landing |
 | `energy-credit.html` | WSEC-R energy credits landing |
 | `another-story.html` | Another Story Board feature |
+| `locations.html` | Locations hub (live place pages) |
 | `stamp-of-trust/` | Stamp of Trust credential |
 | `blog/rss.xml` | Blog RSS feed |
 | `404.html` | Branded Board 404 |

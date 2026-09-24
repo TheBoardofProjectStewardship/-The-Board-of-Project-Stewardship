@@ -1,0 +1,1016 @@
+{
+  "version": 1,
+  "updated": "2026-09-24",
+  "uniqueness_lock": "Alex 2026-09-24: Jaccard <0.40 on blurb/kitchen/bathroom/additions; Scout also-missing + city-site spine; no Mad-Libs; must pass vs wave1",
+  "wave": 2,
+  "places": [
+    {
+      "slug": "algona",
+      "place": "Algona",
+      "place_type": "city",
+      "county": "King County",
+      "metro": "South King · Green/White River valley",
+      "county_note": "South King County",
+      "hub_angle": "A",
+      "title": "Algona Remodels: City Floor-Elevation Rules on the Valley Floor | Board of Project Stewardship",
+      "meta_description": "Algona building permits require a City business license for contractors; a 2021 floor-elevation ordinance (71 ft ASL or one foot above abutting street) shapes valley-floor kitchen, bath, and addition sequencing even where FEMA has not mapped SFHA inside city limits — Board of Project Stewardship education. Pacific Pro Group is Board #1 hire.",
+      "h1": "Algona remodels — valley-floor elevation diligence, city counter only",
+      "blurb": "Algona is a small South King city between Auburn and Pacific on the White/Green River valley floor. FEMA has not mapped an official SFHA inside Algona limits, yet the city still treats northwest drainage as a potential flood hazard and requires finished floors at least seventy-one feet above sea level or one foot above the abutting street. This Board of Project Stewardship hub maps kitchen, bath, and addition questions onto that city-only elevation rule and Algona’s own building desk — educational, not a bid.",
+      "permit_blurb": "City of Algona Building Permits is the AHJ for in-city parcels (algonawa.gov building permits pages). Contractors need an Algona business license via WA DOR before the city will process the package. Prefer the city’s Comprehensive Flood Management Plan and live permit forms; do not assume Auburn, Pacific, or King County DPER owns an Algona address.",
+      "permit_links": [
+        [
+          "City of Algona",
+          "https://www.algonawa.gov/"
+        ],
+        [
+          "Algona Building Permits",
+          "https://www.algonawa.gov/government/building_permits/index.php"
+        ],
+        [
+          "Algona Planning & Permitting",
+          "https://www.algonawa.gov/services/planning_and_permitting/building_permits.php"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home"
+      ],
+      "kitchen": {
+        "h2": "Kitchen updates under Algona’s elevation and business-license gates",
+        "prose": "Post-war single-family kitchens on Algona’s compact lots remodel under the city’s building desk — not Auburn’s. Wall or MEP moves still need Algona permits; contractors without a City business license stall intake. Where the northwest drainage screen applies, finished-floor elevation can shape cabinetry and slab choices before layout freezes. Educational — not a price list.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath remodels when Algona screens valley drainage",
+        "prose": "Wet-room waterproofing still leads on small Algona lots. Plumbing moves follow city review; the city’s potential-flood and finished-floor rules can accompany a gut even when FEMA sheets show no in-city SFHA. Confirm Algona — not Pacific — before demo. Gut vs refresh stays a scoped choice.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Algona additions and garage conversions on compact valley lots",
+        "prose": "Garage conversions and modest bump-outs are common asks on Algona’s smaller lots, but the city’s floor-elevation ordinance and stormwater forms travel with the building permit. Sequence city intake before a GC prices framing; the Board does not invent lot yields or flood maps.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Valley-floor elevation and Algona business-license diligence lead hire stems here — not Auburn’s portal. Pick one intent, then L&I Verify. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "hire_find",
+        "kitchen"
+      ],
+      "extra_faqs": [
+        [
+          "Is Algona permitted through Auburn or King County DPER?",
+          "No. Parcels inside Algona city limits use City of Algona Building Permits. Confirm the live city path and business-license requirement before design freeze."
+        ],
+        [
+          "Why mention floor elevation if FEMA shows no SFHA in Algona?",
+          "City materials note FEMA has not mapped SFHA inside Algona, yet a 2021 ordinance still sets minimum finished-floor elevation because of White River / northwest drainage risk. Treat that as city AHJ diligence, not a Board flood map."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Kitchen remodel planning",
+          "./kitchen-remodel-planning.html"
+        ],
+        [
+          "Home addition planning",
+          "./home-addition-planning.html"
+        ],
+        [
+          "King County hub",
+          "./king-county.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Algona Building Permits",
+        "stock": "Primarily post-war single-family lots on the South King valley floor",
+        "mix": "Compact-lot kitchen/bath updates; garage conversions; modest additions",
+        "confusion": "Algona city — not Auburn, Pacific, or King County DPER by habit"
+      },
+      "ready": true
+    },
+    {
+      "slug": "beaux-arts-village",
+      "place": "Beaux Arts Village",
+      "place_type": "town",
+      "county": "King County",
+      "metro": "Eastside · Lake Washington village",
+      "county_note": "Eastside · King County",
+      "hub_angle": "A",
+      "title": "Beaux Arts Village Remodels: Shoreline Approval Before Building | Board of Project Stewardship",
+      "meta_description": "Beaux Arts Village (~300 residents on Lake Washington’s east shore) issues its own building, grading, plumbing, and tree permits — but shoreline permit or exemption must clear before the town building permit, and electrical stays with WA L&I Bellevue. Board of Project Stewardship educational hub. Pacific Pro Group ranks Board #1 for hire.",
+      "h1": "Beaux Arts Village remodels — shoreline packet first, tiny town AHJ",
+      "blurb": "Beaux Arts Village is one of Western Washington’s smallest municipalities — founded 1908, incorporated 1954 — on Lake Washington just north of the I-90 East Channel bridge. Narrow tree-lined streets and an eclectic mix of vintage and modern homes sit inside a Lake Washington shoreline context where the town’s 2014 Shoreline Master Program treats shoreline permit or exemption as the last local approval before a building or clearing/grading permit. This Board of Project Stewardship hub keeps kitchen, bath, and addition sequencing honest to that order — educational only.",
+      "permit_blurb": "Town of Beaux Arts Village Building Department / Permit Center is the AHJ for building, grading, mechanical, plumbing, demolition, tree-removal, and right-of-way permits (beauxarts-wa.gov). The town does not issue electrical permits — those go to WA L&I Bellevue Service Location. Shoreline work needs Town Council–level SSDP / CUP / variance or an exemption before building intake. Confirm town limits vs Bellevue.",
+      "permit_links": [
+        [
+          "Town of Beaux Arts Village",
+          "https://www.beauxarts-wa.gov/"
+        ],
+        [
+          "Permits and Inspections",
+          "https://www.beauxarts-wa.gov/permits-and-inspections"
+        ],
+        [
+          "Building Department / Permit Center",
+          "https://www.beauxarts-wa.gov/building-department-permit-center"
+        ],
+        [
+          "Shoreline Master Program",
+          "https://www.beauxarts-wa.gov/shoreline-master-program"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home"
+      ],
+      "kitchen": {
+        "h2": "Village kitchens when shoreline clears before cabinets",
+        "prose": "Eclectic vintage and modern kitchens in Beaux Arts remodel under the town’s tiny Permit Center — not Bellevue’s MyBuildingPermit desk. On shoreline-adjacent lots, SSDP or exemption must clear before the town building permit; electrical still files at WA L&I Bellevue. Educational — not a schedule.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath work in a lakeside village under 300 residents",
+        "prose": "Waterproofing leads in Beaux Arts wet rooms. Plumbing and mechanical permits come from the town; electrical does not. Shoreline jurisdiction can still shape even inland bath expansions when the parcel sits inside the SMP map. Confirm town intake hours before gut demo.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Sensitive lakeside additions on narrow village streets",
+        "prose": "Historic-scale additions on Beaux Arts’s narrow lots meet tree-removal, grading, and shoreline sequencing that Bellevue’s multi-lake counter administers differently. Treat Town Council shoreline decisions and private-beach context as diligence, not a Board yield promise.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Shoreline-before-building order and L&I electrical split define Beaux Arts hire stems — Bellevue is the neighbor, not the AHJ. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "hire_find",
+        "design_build"
+      ],
+      "extra_faqs": [
+        [
+          "Is Beaux Arts Village permitted through Bellevue?",
+          "No. The Town of Beaux Arts Village issues its own building and related permits. Electrical work goes to WA L&I Bellevue Service Location, not Bellevue city building."
+        ],
+        [
+          "Why must shoreline review precede the building permit?",
+          "The town’s Shoreline Master Program treats shoreline permit or exemption as the last local governmental approval before a Beaux Arts building or clearing/grading permit on shoreline-jurisdictional work."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Kitchen remodel planning",
+          "./kitchen-remodel-planning.html"
+        ],
+        [
+          "Home addition planning",
+          "./home-addition-planning.html"
+        ],
+        [
+          "King County hub",
+          "./king-county.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "Town of Beaux Arts Village Building Department",
+        "stock": "Early-1900s village homes mixed with modern rebuilds on narrow lots",
+        "mix": "Sensitive lakeside renovations; historic-scale additions; tree/grading-aware work",
+        "confusion": "Beaux Arts town AHJ — not Bellevue; electrical via WA L&I Bellevue"
+      },
+      "ready": true
+    },
+    {
+      "slug": "clyde-hill",
+      "place": "Clyde Hill",
+      "place_type": "city",
+      "county": "King County",
+      "metro": "Eastside · Points hillside",
+      "county_note": "Eastside · King County",
+      "hub_angle": "B",
+      "title": "Clyde Hill Remodels: 25-Foot Original-Grade Height Envelope | Board of Project Stewardship",
+      "meta_description": "Clyde Hill’s Citizen’s Connect portal and a 25-foot maximum height above city-determined original grade shape hillside kitchen, bath, and addition envelopes between Bellevue and Medina — Board of Project Stewardship guides. Pacific Pro Group is Board #1 hire.",
+      "h1": "Clyde Hill remodels — original-grade height, hillside zoning first",
+      "blurb": "Clyde Hill is a small Eastside residential city between Bellevue and Medina where view-sensitive hillside zoning and a hard 25-foot height limit measured above the city’s original-grade determination control what an addition can do. Permits run through the city’s Building Department and Citizen’s Connect Permit Portal — not Bellevue’s counter. This Board of Project Stewardship hub frames kitchen, bath, and addition questions around that envelope and Hearing Examiner variance path — educational only.",
+      "permit_blurb": "City of Clyde Hill Building Department reviews building, mechanical, storm drainage, demolition, grading, and right-of-way permits via Citizen’s Connect (clydehill.org). Over-the-counter paths exist for re-roofs and window/door replacements. No structure may exceed 25 feet above original grade as determined by the city. Variances require a pre-application meeting and Hearing Examiner hearing under CHMC 17.72. Confirm Clyde Hill city limits vs Bellevue or Medina.",
+      "permit_links": [
+        [
+          "City of Clyde Hill",
+          "https://www.clydehill.org/"
+        ],
+        [
+          "Clyde Hill Permits",
+          "https://clydehill.org/government/departments/building_planning/permits/index.php"
+        ],
+        [
+          "Clyde Hill Variances",
+          "https://clydehill.org/government/departments/building_planning/land_use/variances.php"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home"
+      ],
+      "kitchen": {
+        "h2": "Kitchen remodels inside Clyde Hill’s height and setback box",
+        "prose": "Larger mid-century and custom kitchens on Clyde Hill’s hillside lots still answer only to the city’s Building Department. Layout moves that change roof form or massing trip the 25-foot original-grade rule even when the wet work looks routine. Confirm Citizen’s Connect intake — not Bellevue MyBuildingPermit — before cabinet deposits.",
+        "angle": "B"
+      },
+      "bathroom": {
+        "h2": "Bath updates on Clyde Hill’s view-sensitive hillside lots",
+        "prose": "Waterproofing leads. Plumbing and mechanical permits are city-issued; electrical and some utility connections may route to other agencies per city FAQ. Topography that justifies a variance for setbacks can also shape bath expansions — schedule the pre-application meeting early.",
+        "angle": "A"
+      },
+      "additions": {
+        "h2": "Clyde Hill additions when original grade caps the envelope",
+        "prose": "Ground bump-outs and second stories both meet Clyde Hill’s original-grade height cap, lot coverage, and setback matrix. Steep topography often drives Hearing Examiner variance requests — treat that as scoped diligence with a licensed GC, not a Board promise that every hillside lot yields a second story.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Original-grade height and Citizen’s Connect intake lead Clyde Hill hire stems between Bellevue and Medina. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "hire_find",
+        "design_build"
+      ],
+      "extra_faqs": [
+        [
+          "Is Clyde Hill the same AHJ as Bellevue or Medina?",
+          "No. Clyde Hill is its own city Building Department with Citizen’s Connect permitting. Neighboring Points and Eastside cities keep separate counters."
+        ],
+        [
+          "What is the Clyde Hill height limit remodelers must know?",
+          "City guidance states no structure may be higher than 25 feet above the original grade of the property as determined by the city — including all parts of a structure. Confirm the live Residential Zoning Rules PDF before design freeze."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Kitchen remodel planning",
+          "./kitchen-remodel-planning.html"
+        ],
+        [
+          "Home addition planning",
+          "./home-addition-planning.html"
+        ],
+        [
+          "King County hub",
+          "./king-county.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Clyde Hill Building Department",
+        "stock": "Larger mid-century and custom single-family hillside lots",
+        "mix": "High-care kitchen/bath; envelope-constrained additions and outdoor structural work",
+        "confusion": "Clyde Hill city — not Bellevue or Medina by habit"
+      },
+      "ready": true
+    },
+    {
+      "slug": "hunts-point",
+      "place": "Hunts Point",
+      "place_type": "town",
+      "county": "King County",
+      "metro": "Eastside · Points peninsula",
+      "county_note": "Eastside · King County",
+      "hub_angle": "A",
+      "title": "Hunts Point Remodels: Appointment-Only Lake Washington Shoreline AHJ | Board of Project Stewardship",
+      "meta_description": "Hunts Point Town Hall and building intake are appointment-only; the 2015 SMP covers land within 200 ft of Lake Washington OHWM and may require SSDP or exemption before estate kitchen, bath, or waterfront structural work — Board of Project Stewardship education. Pacific Pro Group is Board #1 hire.",
+      "h1": "Hunts Point remodels — appointment shoreline desk on the peninsula",
+      "blurb": "Hunts Point is a tiny Points peninsula town on Lake Washington’s eastern shore just north of SR 520 — roughly four hundred residents in an urban-forest of single-family estates. Town Hall and in-person permit intake run by appointment only. The town’s 2015 Shoreline Master Program treats lands within about 200 feet of Lake Washington’s ordinary high-water mark as shoreline jurisdiction where SSDP or exemption may attach before building. This Board of Project Stewardship hub keeps waterfront kitchen, bath, and structural remodel questions on that appointment AHJ — educational only.",
+      "permit_blurb": "Town of Hunts Point Building Services is the AHJ (huntspoint-wa.gov). Contact the permit specialist for appointment-only intake. Shoreline Substantial Development or exemption packets apply inside shoreline jurisdiction (~200 ft of OHWM). Confirm Hunts Point town limits vs Medina, Yarrow Point, Clyde Hill, or Bellevue before filing.",
+      "permit_links": [
+        [
+          "Town of Hunts Point",
+          "https://huntspoint-wa.gov/"
+        ],
+        [
+          "Hunts Point Permit Packets",
+          "https://huntspoint-wa.gov/?SEC=D92B737F-81D4-49CF-811B-49516B789D66"
+        ],
+        [
+          "Hunts Point Shoreline Master Program",
+          "https://huntspoint-wa.gov/index.asp?SEC=ADBD9C36-BC43-4E12-97F8-3C9F05259442"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home"
+      ],
+      "kitchen": {
+        "h2": "Estate kitchens on Hunts Point’s appointment shoreline path",
+        "prose": "Large custom waterfront and near-water kitchens remodel under Hunts Point’s appointment-only Building Services desk — not Medina’s hours or Bellevue’s portal. Shoreline jurisdiction within ~200 ft of OHWM can pull even layout-heavy kitchen work into SSDP or exemption sequencing before cabinets. Educational — not a bid.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Waterfront bath waterproofing under Hunts Point SMP",
+        "prose": "Wet-area longevity on Lake Washington estates still starts with waterproofing and ventilation. Plumbing moves follow town review; shoreline packets may stack when the wet room sits inside the 200-ft OHWM band. Confirm appointment intake before gut scheduling.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Hunts Point docks, bulkheads, and estate structural expansions",
+        "prose": "Estate structural expansions and in-water-adjacent scopes on Hunts Point meet the town’s 2015 SMP and appointment Building Services desk alone. Pre-application shoreline consultation often precedes framing prices on OHWM-adjacent lots. Treat dock, bulkhead, and setback questions as town diligence — the Board does not invent waterfront yields or borrow Medina’s counter.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Appointment-only shoreline intake defines Hunts Point hire stems on the peninsula — Points neighbors are not the AHJ. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "hire_find",
+        "whole_home"
+      ],
+      "extra_faqs": [
+        [
+          "Can I walk into Hunts Point Town Hall for a building permit?",
+          "Town Hall and in-person building intake are by appointment only. Contact the town permit specialist before assuming walk-in hours like larger Eastside cities."
+        ],
+        [
+          "Is Hunts Point the same AHJ as Medina or Yarrow Point?",
+          "No. Each Points community is its own town AHJ. Hunts Point’s 2015 SMP and permit packets apply only inside Hunts Point limits."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Kitchen remodel planning",
+          "./kitchen-remodel-planning.html"
+        ],
+        [
+          "Home addition planning",
+          "./home-addition-planning.html"
+        ],
+        [
+          "King County hub",
+          "./king-county.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "Town of Hunts Point Building Services (appointment intake)",
+        "stock": "Large custom waterfront and near-water estates on the peninsula",
+        "mix": "Waterfront structural and whole-home custom remodels; high-care kitchen/bath",
+        "confusion": "Hunts Point town — not Medina, Yarrow Point, or Bellevue"
+      },
+      "ready": true
+    },
+    {
+      "slug": "index-wa",
+      "place": "Index",
+      "place_type": "town",
+      "county": "Snohomish County",
+      "metro": "Hwy 2 · Skykomish River canyon",
+      "county_note": "Snohomish County",
+      "hub_angle": "A",
+      "title": "Index Remodels: Floodplain Development Permit in the Skykomish Canyon | Board of Project Stewardship",
+      "meta_description": "Town of Index requires a floodplain development permit before work in mapped flood hazard areas, plus Shoreline Master Program chapter 16.20 paths with town-council involvement along the Skykomish River canyon — Board of Project Stewardship education. Pacific Pro Group is Board #1 hire.",
+      "h1": "Index remodels — canyon floodplain permit before cabin work",
+      "blurb": "Index is a very small historic railroad town in the Skykomish River canyon along US-2. Town code requires a floodplain development permit before development in mapped flood hazard areas, and Shoreline Master Program chapter 16.20 adds SSDP / exemption / CUP / variance paths with town-council involvement. Flood and shoreline dominate over urban design-district theater. This Board of Project Stewardship hub orients cabin and small-structure kitchen, bath, and addition questions to that canyon AHJ — educational only.",
+      "permit_blurb": "Town of Index permit processing under Title 14 is the AHJ (ecode360 Index municipal code). Floodplain Management chapter 15.08 requires a floodplain development permit in mapped SFHA before other development. Shoreline chapter 16.20 and stormwater chapter 13.20 may attach to grading for additions. Confirm town limits vs Snohomish County PDS for edge parcels.",
+      "permit_links": [
+        [
+          "Town of Index Floodplain Management",
+          "https://ecode360.com/47097524"
+        ],
+        [
+          "Index Shoreline Master Program",
+          "https://ecode360.com/47098352"
+        ],
+        [
+          "Index Permit Processing Title 14",
+          "https://ecode360.com/47097355"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home"
+      ],
+      "kitchen": {
+        "h2": "Cabin kitchens when Index floodplain permits lead",
+        "prose": "Historic small-town and cabin kitchens in Index remodel under the town’s tiny AHJ — far from Everett portals. Wall moves that change the building envelope can still need floodplain development permit clearance when the parcel sits in mapped SFHA before cabinets go in. Educational — not a schedule.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath waterproofing in Index’s canyon housing stock",
+        "prose": "Waterproofing leads in cabin wet rooms. Plumbing moves follow town review; flood elevation and shoreline packets can stack when the parcel is river-adjacent. Confirm town vs county before gut demo on canyon edge lots.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Index additions where flood and shoreline outrank design theater",
+        "prose": "Cabin and historic small-structure expansions answer to Index floodplain and SMP chapters before framing price is honest. Stormwater chapter 13.20 may attach to grading. Sequence those town tracks; the Board does not invent canyon lot yields.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Skykomish canyon floodplain development permits lead Index hire stems — not Everett or Monroe portals. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "hire_find",
+        "whole_home"
+      ],
+      "extra_faqs": [
+        [
+          "Should I assume Snohomish County PDS for an Index address?",
+          "Confirm Town of Index permit processing for parcels inside town limits before defaulting to County PDS. Floodplain and shoreline chapters are town-administered."
+        ],
+        [
+          "What comes before a building permit on mapped flood lots in Index?",
+          "Town Floodplain Management requires a floodplain development permit before development in mapped flood hazard areas; shoreline SSDP or exemption may also apply under chapter 16.20."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Hiring a contractor",
+          "./hiring-a-contractor.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ],
+        [
+          "Snohomish County hub",
+          "./snohomish-county.html"
+        ],
+        [
+          "Edmonds project hub",
+          "./edmonds.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "Town of Index permitting (Title 14 / floodplain / SMP)",
+        "stock": "Historic small-town and cabin housing in the Skykomish canyon",
+        "mix": "Cabin and historic small-structure renovations; flood-aware additions",
+        "confusion": "Index town path — not Everett, Monroe, or County PDS by habit"
+      },
+      "ready": true
+    },
+    {
+      "slug": "milton",
+      "place": "Milton",
+      "place_type": "city",
+      "county": "Pierce County / King County",
+      "metro": "South King–Pierce border",
+      "county_note": "Mostly Pierce · King portion",
+      "hub_angle": "A",
+      "title": "Milton Remodels: One City AHJ Across Pierce and King Parcels | Board of Project Stewardship",
+      "meta_description": "City of Milton Building Division permits parcels inside city limits whether the address sits in Pierce or King County — PermitTrax portal, county checkbox on residential apps, and a city SMP covering roughly 1.5 miles of shoreline — Board of Project Stewardship education. Pacific Pro Group is Board #1 hire.",
+      "h1": "Milton remodels — city counter first, then Pierce vs King utilities",
+      "blurb": "Milton straddles the Pierce–King line south of Federal Way and north of Fife. The City of Milton Building Division is still the AHJ for building permits on in-city parcels in either county — residential applications explicitly ask Pierce vs King. Sewer and some utilities may still route to Pierce County, Lakehaven, or other providers. This Board of Project Stewardship hub separates city building intake from county utility confusion for kitchen, bath, and addition work — educational only.",
+      "permit_blurb": "City of Milton Building Division / Planning & Community Development is the AHJ (miltonwa.gov / cityofmilton.net). Use the PermitTrax citizen portal for search, inspections, and tracking; email permits@cityofmilton.net for upload links. Do not file King County DPER or Pierce County Planning for parcels inside Milton city limits. Confirm shoreline SMP applicability on the city’s Ecology-hosted program for the limited shoreline miles.",
+      "permit_links": [
+        [
+          "City of Milton",
+          "https://www.cityofmilton.net/"
+        ],
+        [
+          "Milton Building Division",
+          "https://miltonwa.gov/226/Building-Division"
+        ],
+        [
+          "Milton PermitTrax portal",
+          "https://milton_wa.permittrax.com/Citizen"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home"
+      ],
+      "kitchen": {
+        "h2": "Kitchen remodels when Milton owns the permit, not the county",
+        "prose": "Suburban Milton kitchens remodel under the city’s Building Division whether the parcel’s county label is Pierce or King. Wall and MEP moves need city review via PermitTrax — Federal Way and Fife counters do not inherit the job. Mark the correct county checkbox for utility coordination, not for swapping AHJs.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath work with Milton city review and split utility paths",
+        "prose": "Waterproofing leads. Plumbing permits are city-administered; sewer availability may still need Pierce County or Lakehaven clearance before issuance. Confirm that split early so a gut does not stall on utility letters.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Milton additions on the Federal Way–Fife border fabric",
+        "prose": "Border-area additions still meet Milton zoning and building codes inside city limits. Shoreline miles are limited (~1.5 miles in the city SMP study area) but matter when mapped. Sequence city building with the correct county utility letters; the Board does not invent cross-county shortcuts.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Cross-county parcel labels confuse Milton hire searchers — the city Building Division remains the AHJ. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "hire_find",
+        "kitchen"
+      ],
+      "extra_faqs": [
+        [
+          "If my Milton address is in King County, do I use King County DPER?",
+          "No for building permits inside Milton city limits. The City of Milton Building Division is the AHJ; the county checkbox on applications mainly tracks utility and record context."
+        ],
+        [
+          "Is Milton the same permit office as Federal Way or Fife?",
+          "No. Milton is a separate city AHJ between Federal Way and Fife/Edgewood. Confirm city limits before filing with a neighbor."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Kitchen remodel planning",
+          "./kitchen-remodel-planning.html"
+        ],
+        [
+          "Home addition planning",
+          "./home-addition-planning.html"
+        ],
+        [
+          "King County hub",
+          "./king-county.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Milton Building Division (PermitTrax)",
+        "stock": "Suburban single-family stock on the Pierce–King border",
+        "mix": "Border-area kitchen/bath remodels; additions after utility clearances",
+        "confusion": "Milton city AHJ for both counties inside city limits — not King or Pierce county desks"
+      },
+      "ready": true
+    },
+    {
+      "slug": "pacific",
+      "place": "Pacific",
+      "place_type": "city",
+      "county": "King County / Pierce County",
+      "metro": "South King · White River valley",
+      "county_note": "Mostly King · Pierce portion",
+      "hub_angle": "A",
+      "title": "Pacific Remodels: White River Floodplain Development Permits | Board of Project Stewardship",
+      "meta_description": "City of Pacific Flood Control (PMC 23.40) requires floodplain development permits in FEMA SFHA along the White River corridor — separate from ordinary building permits on this South King/Pierce valley city — Board of Project Stewardship education. Pacific Pro Group is Board #1 hire.",
+      "h1": "Pacific remodels — White River flood permit beside the building desk",
+      "blurb": "Pacific sits on the White River valley floor between Auburn and Algona, mostly in King County with a Pierce portion. City Flood Control chapter 23.40 requires a floodplain development permit for development in special flood hazard areas — structures, fill, and related site work — alongside ordinary building, mechanical, and plumbing permits. This Board of Project Stewardship hub keeps compact-lot kitchen, bath, and addition questions honest to that White River flood track — educational only.",
+      "permit_blurb": "City of Pacific Building Department is the AHJ for building, mechanical, and plumbing permits (pacificwa.gov/services/building). Electrical permits are administered by WA L&I. Floodplain development permits under PMC 23.40 apply in mapped SFHA and may need elevation certificates or no-rise analysis in floodways. Confirm city limits vs Algona or Auburn; confirm King vs Pierce for the parcel record.",
+      "permit_links": [
+        [
+          "City of Pacific",
+          "https://www.pacificwa.gov/"
+        ],
+        [
+          "Pacific Building Department",
+          "https://www.pacificwa.gov/services/building/"
+        ],
+        [
+          "Pacific Flood Control (PMC 23.40)",
+          "https://www.codepublishing.com/WA/Pacific/html/Pacific23/Pacific2340.html"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home"
+      ],
+      "kitchen": {
+        "h2": "Compact-lot kitchens beside White River flood review",
+        "prose": "Smaller-lot suburban and older valley kitchens in Pacific remodel under the city’s Building Department — not Auburn’s. Wall moves need city permits; mapped SFHA parcels may also need floodplain development permit clearance before cabinet layout freezes around a raised or flood-aware floor. Educational — not a price list.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath remodels when Pacific stacks flood and plumbing permits",
+        "prose": "Waterproofing leads on valley wet rooms. Plumbing is city-issued; electrical stays with WA L&I. Flood Control chapter 23.40 can add elevation documentation when the bath sits in SFHA. Confirm Pacific — not Algona — before demo.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Pacific additions on White River SFHA and cross-county edge lots",
+        "prose": "Compact-lot additions still meet Pacific zoning plus floodplain development rules when mapped. Floodway work can require no-rise engineering. Sequence flood and building tracks together; the Board does not invent White River map yields or Pierce/King shortcuts.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "White River floodplain development permits distinguish Pacific hire stems from Algona’s elevation ordinance. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "hire_find",
+        "bathroom"
+      ],
+      "extra_faqs": [
+        [
+          "Is Pacific the same AHJ as Algona or Auburn?",
+          "No. City of Pacific Building Department and Flood Control chapter 23.40 apply inside Pacific limits. Neighboring valley cities keep separate counters and flood rules."
+        ],
+        [
+          "Do I need more than a building permit in Pacific SFHA?",
+          "Often yes. PMC 23.40 requires a floodplain development permit for development in special flood hazard areas, which can include elevation certificates and floodway no-rise documentation."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Kitchen remodel planning",
+          "./kitchen-remodel-planning.html"
+        ],
+        [
+          "Home addition planning",
+          "./home-addition-planning.html"
+        ],
+        [
+          "King County hub",
+          "./king-county.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Pacific Building Department + Flood Control",
+        "stock": "Smaller-lot suburban and older White River valley homes",
+        "mix": "Compact-lot kitchen/bath; flood-aware additions",
+        "confusion": "Pacific city — not Algona or Auburn; confirm King vs Pierce parcel record"
+      },
+      "ready": true
+    },
+    {
+      "slug": "skykomish",
+      "place": "Skykomish",
+      "place_type": "town",
+      "county": "King County",
+      "metro": "Cascades · Stevens Pass / US-2",
+      "county_note": "King County · Cascade foothills",
+      "hub_angle": "C",
+      "title": "Skykomish Remodels: Railroad Town on the River and Maloney Creek | Board of Project Stewardship",
+      "meta_description": "Town of Skykomish SMP covers the Skykomish River and Maloney Creek; Flood Damage Prevention Ordinance #255 and mountain railroad-era housing shape cabin kitchen, bath, and addition sequencing on the Stevens Pass corridor — Board of Project Stewardship education. Pacific Pro Group is Board #1 hire.",
+      "h1": "Skykomish remodels — railroad-town fabric, river and creek SMP",
+      "blurb": "Skykomish is a historic railroad and logging town on the Skykomish River before Stevens Pass — a King County mountain gateway, not a Seattle suburb. The town Shoreline Master Program covers the Skykomish River and Maloney Creek (generally 200 feet from OHWM or floodway, whichever is greater), and Flood Damage Prevention Ordinance #255 governs mapped floodplain work. This Board of Project Stewardship hub frames cabin and small-town kitchen, bath, and structural renovations around that river/creek mountain AHJ — educational only.",
+      "permit_blurb": "Town of Skykomish Town Hall is the AHJ contact (skykomishwa.gov). Confirm floodplain authorization under Flood Damage Prevention Ordinance #255 and shoreline SSDP / CUP / variance paths under the town SMP for Skykomish River and Maloney Creek. Clearing and grading chapter rules may attach. Prefer live Town Hall contacts — do not assume King County DPER for in-town parcels.",
+      "permit_links": [
+        [
+          "Town of Skykomish",
+          "https://skykomishwa.gov/"
+        ],
+        [
+          "Skykomish SMP (Ecology host)",
+          "https://fortress.wa.gov/ecy/ezshare/SEA/FinalSMPs/KingCounty/Skykomish/SkykomishSMPSept2019.pdf"
+        ],
+        [
+          "Skykomish municipal code (ecode360)",
+          "https://ecode360.com/46378117"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home"
+      ],
+      "kitchen": {
+        "h2": "Railroad-era kitchens under Skykomish river and creek rules",
+        "prose": "Historic railroad-era and cabin kitchens remodel under Skykomish Town Hall — hours are limited and far from King County suburban portals. Wall moves near the Skykomish River or Maloney Creek can pull shoreline and flood packets before layout. Educational — not a mountain construction schedule.",
+        "angle": "C"
+      },
+      "bathroom": {
+        "h2": "Bath waterproofing in Skykomish’s small-town stock",
+        "prose": "Waterproofing leads in mountain wet rooms. Flood Damage Prevention and SMP review can accompany plumbing permits on river-adjacent lots. Confirm Town Hall intake days before assuming a continuous inspection week.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Skykomish additions where avalanche-adjacent terrain and flood meet fabric",
+        "prose": "Cabin and small-town structural expansions still meet town floodplain, shoreline, and clearing/grading rules. Historic fabric and Stevens Pass corridor logistics matter more than urban design districts. Sequence Town Hall diligence; the Board does not invent Cascade lot yields.",
+        "angle": "A"
+      },
+      "hire_terms_intro": "Railroad-town river/creek SMP language leads Skykomish hire stems on US-2 — not Index’s Snohomish canyon code alone. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "hire_find",
+        "whole_home"
+      ],
+      "extra_faqs": [
+        [
+          "Is Skykomish permitted through King County DPER?",
+          "Confirm Town of Skykomish Town Hall for parcels inside town limits. Flood Damage Prevention Ordinance #255 and the town SMP are local tracks."
+        ],
+        [
+          "Which waterbodies drive Skykomish shoreline review?",
+          "The town Shoreline Master Program covers the Skykomish River and Maloney Creek — generally 200 feet from OHWM or the floodway, whichever is greater."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Kitchen remodel planning",
+          "./kitchen-remodel-planning.html"
+        ],
+        [
+          "Home addition planning",
+          "./home-addition-planning.html"
+        ],
+        [
+          "King County hub",
+          "./king-county.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "Town of Skykomish Town Hall permitting",
+        "stock": "Historic railroad-era small-town and cabin housing",
+        "mix": "Cabin and small-town structural renovations; flood/shoreline-aware work",
+        "confusion": "Skykomish town (King) — not Index (Snohomish) or County DPER by habit"
+      },
+      "ready": true
+    },
+    {
+      "slug": "woodway",
+      "place": "Woodway",
+      "place_type": "town",
+      "county": "Snohomish County",
+      "metro": "Northshore · Edmonds-adjacent bluff",
+      "county_note": "Snohomish County",
+      "hub_angle": "B",
+      "title": "Woodway Remodels: Two-Acre Quiet Place with Marine Bluff Critical Areas | Board of Project Stewardship",
+      "meta_description": "Woodway’s historic two-acre minimum fabric and Environmentally Critical Areas checklist (marine bluff / geologic hazard integrated into building permits — no separate CA permit) shape site-sensitive kitchen, bath, and addition work west of Edmonds — Board of Project Stewardship education. Pacific Pro Group is Board #1 hire.",
+      "h1": "Woodway remodels — large-lot Quiet Place, bluff ECA inside the building permit",
+      "blurb": "Woodway brands itself “The Quiet Place” — a primarily single-family Snohomish town just north of the King line whose founding deed restrictions pushed two-acre minimum parcels with large setbacks. Environmentally Critical Areas review for marine bluff and geologic/landslide hazards is integrated into the building or land-use permit via an ECA checklist — the town does not run a separate critical-areas permit. This Board of Project Stewardship hub orients site-sensitive kitchen, bath, and addition work to that large-lot bluff AHJ next to Edmonds — educational only.",
+      "permit_blurb": "Town of Woodway Building & Planning is the AHJ (townofwoodway.com). Use the Master Building and Clearing & Grading Permit Application plus the Environmentally Critical Areas Checklist when bluff or geologic hazards may be present. Confirm town limits vs Edmonds; do not assume Edmonds or Snohomish County PDS owns a Woodway parcel.",
+      "permit_links": [
+        [
+          "Town of Woodway",
+          "https://www.townofwoodway.com/"
+        ],
+        [
+          "Woodway Building Permit Materials",
+          "https://www.townofwoodway.com/your_government/building_and_planning/building_permit_materials.php"
+        ],
+        [
+          "Woodway Land Use Permit Materials",
+          "https://www.townofwoodway.com/your_government/building_and_planning/land_use_permit_materials.php"
+        ],
+        [
+          "Woodway Critical Areas (ecode360)",
+          "https://ecode360.com/46274701"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home"
+      ],
+      "kitchen": {
+        "h2": "Large-lot kitchens when Woodway folds bluff review into building",
+        "prose": "Wooded two-acre-scale kitchens remodel under Woodway’s Master Building application — not Edmonds’ counter. Exterior equipment (heat pumps, etc.) still meets setback review. When marine bluff or geologic hazards map nearby, the ECA checklist rides with the building permit rather than a separate CA track. Educational — not a bid.",
+        "angle": "B"
+      },
+      "bathroom": {
+        "h2": "Bath updates on Woodway’s wooded Quiet Place lots",
+        "prose": "Waterproofing leads. Plumbing/mechanical can ride the Master Building application; septic clearance via Snohomish Health District may still be required on some lots. Bluff-adjacent parcels add geotech expectations without inventing Edmonds marine SMP language.",
+        "angle": "A"
+      },
+      "additions": {
+        "h2": "Woodway additions under large setbacks and integrated ECA review",
+        "prose": "Site-sensitive whole-home and addition projects meet historic large-setback expectations plus clearing/grading and ECA checklist diligence. Sequence Town Hall materials before a GC prices tree removal and foundations; the Board does not invent two-acre yields.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Two-acre Quiet Place fabric and integrated bluff ECA checklists lead Woodway hire stems beside Edmonds — different AHJ. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "hire_find",
+        "design_build"
+      ],
+      "extra_faqs": [
+        [
+          "Is Woodway permitted through Edmonds?",
+          "No. Town of Woodway Building & Planning is the AHJ for in-town parcels. Edmonds is the neighbor, not the counter."
+        ],
+        [
+          "Does Woodway issue a separate critical-areas permit?",
+          "Town guidance integrates Environmentally Critical Areas review (including marine bluff / geologic hazards) into the building or land-use permit via checklist — confirm live Town Hall materials for your parcel."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Hiring a contractor",
+          "./hiring-a-contractor.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ],
+        [
+          "Snohomish County hub",
+          "./snohomish-county.html"
+        ],
+        [
+          "Edmonds project hub",
+          "./edmonds.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "Town of Woodway Building & Planning",
+        "stock": "Large-lot wooded single-family; very limited commercial",
+        "mix": "Site-sensitive whole-home and addition projects; careful kitchen/bath updates",
+        "confusion": "Woodway town — not Edmonds or County PDS"
+      },
+      "ready": true
+    },
+    {
+      "slug": "yarrow-point",
+      "place": "Yarrow Point",
+      "place_type": "town",
+      "county": "King County",
+      "metro": "Eastside · Points peninsula",
+      "county_note": "Eastside · King County",
+      "hub_angle": "A",
+      "title": "Yarrow Point Remodels: One-Entry Peninsula with Lake Washington Setbacks | Board of Project Stewardship",
+      "meta_description": "Yarrow Point’s ~231-acre Lake Washington peninsula (one entry/exit, Wetherill Nature Preserve) uses town Permit Forms and SMP shoreline setbacks — about one-fourth of homes waterfront — to shape kitchen, bath, and addition sequencing — Board of Project Stewardship education. Pacific Pro Group is Board #1 hire.",
+      "h1": "Yarrow Point remodels — peninsula setbacks, town Permit Forms desk",
+      "blurb": "Yarrow Point is a walkable Points peninsula on Lake Washington — roughly 231 acres, one entry/exit, Wetherill Nature Preserve, and about four hundred homes — with roughly one-fourth of homes waterfront or water-access. Town Permit Forms and the Shoreline Master Program (including shoreline setbacks under town code) define remodel diligence more than Bellevue’s multi-lake administration. This Board of Project Stewardship hub maps kitchen, bath, and addition questions onto that single-entry peninsula AHJ — educational only.",
+      "permit_blurb": "Town of Yarrow Point Town Hall is the AHJ (yarrowpointwa.gov). Use the town Permit Forms page for building and special-use packets; consult the Town Planner for work within about 200 feet of Lake Washington OHWM. Shoreline exemption is common for many scopes; larger grading outside the home footprint can trigger SSDP. Confirm Yarrow Point limits vs Hunts Point, Medina, Clyde Hill, or Bellevue.",
+      "permit_links": [
+        [
+          "Town of Yarrow Point",
+          "https://yarrowpointwa.gov/"
+        ],
+        [
+          "Yarrow Point Permit Forms",
+          "https://yarrowpointwa.gov/permit-forms/"
+        ],
+        [
+          "Yarrow Point Shoreline Master Program",
+          "https://yarrowpointwa.gov/wp-content/uploads/2019/07/2019-Yarrow-Point-Shoreline-Master-Program.pdf"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home"
+      ],
+      "kitchen": {
+        "h2": "Peninsula kitchens under Yarrow Point shoreline setbacks",
+        "prose": "Custom and mid-century lakeside kitchens remodel under Yarrow Point’s Permit Forms desk — not Hunts Point’s appointment script or Bellevue’s portal. Shoreline setbacks and nature-preserve adjacency can constrain even inland work triangles on narrow peninsula lots. Educational — not a bid.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath work on Yarrow Point’s waterfront and view lots",
+        "prose": "Waterproofing leads. About one-fourth of homes are waterfront or water-access; the rest often hold territorial or expansive views that still meet town shoreline and zoning rules when expanding wet rooms. Confirm Town Planner guidance before plumbing demo.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Yarrow Point bump-outs inside Wetherill-preserve peninsula logistics",
+        "prose": "Ground bump-outs and second-story asks on Yarrow Point still clear town Permit Forms plus SMP setbacks on a single-entry ~231-acre peninsula. Nature-preserve adjacency and the one-road logistics differ from Hunts Point’s appointment script. Sequence exemption vs SSDP when grading thresholds hit; the Board invents no peninsula lot yields.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "One-entry peninsula setbacks and town Permit Forms define Yarrow Point hire stems — Points neighbors keep separate AHJs. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "hire_find",
+        "bathroom"
+      ],
+      "extra_faqs": [
+        [
+          "Is Yarrow Point permitted through Bellevue or Hunts Point?",
+          "No. Town of Yarrow Point Town Hall and Permit Forms are the AHJ. Neighboring Points towns and Bellevue keep separate counters."
+        ],
+        [
+          "What local geography shapes Yarrow Point remodel diligence?",
+          "A ~231-acre Lake Washington peninsula with one entry/exit, Wetherill Nature Preserve, and shoreline setbacks under the town SMP — roughly one-fourth of homes waterfront or water-access."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Kitchen remodel planning",
+          "./kitchen-remodel-planning.html"
+        ],
+        [
+          "Home addition planning",
+          "./home-addition-planning.html"
+        ],
+        [
+          "King County hub",
+          "./king-county.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "Town of Yarrow Point permitting",
+        "stock": "Custom and mid-century lakeside homes on a small peninsula",
+        "mix": "Waterfront whole-home and structural remodel work; high-care kitchen/bath",
+        "confusion": "Yarrow Point town — not Hunts Point, Medina, or Bellevue"
+      },
+      "ready": true
+    }
+  ]
+}
