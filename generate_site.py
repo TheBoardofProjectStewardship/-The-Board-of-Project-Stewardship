@@ -2418,6 +2418,7 @@ CITY_HUB_LINKS: list[tuple[str, str]] = [
     ("Lake Forest Park", "./lake-forest-park.html"),
     ("Mountlake Terrace", "./mountlake-terrace.html"),
     ("Mill Creek", "./mill-creek.html"),
+    # Wave1 place SEO hubs appended at render time via place_seo_city_hub_links()
 ]
 
 
@@ -2425,7 +2426,7 @@ def city_hubs_section(
     heading: str = "City & neighborhood hubs",
     blurb: str = "Local Board hubs across the Pacific Northwest — King County, Snohomish County, Seattle, and cities such as Edmonds. Permitting orientation and shortlist links. Not a complete contractor roster.",
 ) -> str:
-    links = _link_ul(CITY_HUB_LINKS)
+    links = _link_ul(CITY_HUB_LINKS + place_seo_city_hub_links())
     return _hub_section(heading, f"""      <p class="text-sm text-slate-400 font-light leading-relaxed mb-3">{esc(blurb)}</p>
 {links}""")
 
@@ -5318,6 +5319,15 @@ def write_sitemap(posts: list[dict]) -> None:
         "tools/another-story/index.html",
     ]
 
+    # Wave1 place SEO hubs (only files that exist on disk)
+    for _ps in load_place_specs_wave1():
+        _slug = (_ps.get("slug") or "").strip()
+        if not _slug:
+            continue
+        _fn = f"{_slug}.html"
+        if _fn not in extras and (SITE_DIR / _fn).is_file():
+            extras.append(_fn)
+
     def file_lastmod(rel: str) -> str:
         p = SITE_DIR / rel
         if p.is_file():
@@ -6479,6 +6489,458 @@ def build_city_hub_page(
         include_tools_embed=False,
         og_image_alt=f"Board of Project Stewardship {place} remodel and addition project hub",
     )
+
+
+
+# ---------------------------------------------------------------------------
+# Place SEO wave (King / Snohomish hubs) — unique PlaceSpecs + shared chrome
+# ---------------------------------------------------------------------------
+
+PLACES_DIR = SITE_DIR / "places"
+GC_HIRE_TERMS_PATH = PLACES_DIR / "_gc_hire_terms.json"
+PLACE_SPECS_WAVE1_PATH = PLACES_DIR / "_place_specs_wave1.json"
+MAPS_EMBED_SRC = (
+    "https://www.google.com/maps/d/embed?mid=136ZTS0u0e1Pnhc8h0RKNAdOf1jtk7YU&ehbc=2E312F"
+)
+BT_ESTIMATE_IFRAME_SRC = (
+    "https://buildertrend.net/leads/contactforms/ContactFormFrame.aspx?"
+    "builderID=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJidWlsZGVySWQiOjExMjQyMn0."
+    "Y3NnroSe4xGZ8bP6T6mRYyEPKcqPaYb7ODcchdZzp8Y"
+)
+BT_CONTACT_FORM_JS = (
+    "https://buildertrend.net/api/contentDelivery/javascript/btClientContactForm.js"
+)
+VERIFIED_STEWARD_HREF = "https://boardofprojectstewardship.com/"
+PLACE_SEO_REQUIRED_FIELDS = (
+    "slug",
+    "place",
+    "county_note",
+    "title",
+    "meta_description",
+    "h1",
+    "blurb",
+    "permit_blurb",
+    "permit_links",
+    "kitchen",
+    "bathroom",
+    "additions",
+    "hire_terms_intro",
+    "extra_faqs",
+)
+
+
+def maps_service_area_embed_html(place: str | None = None) -> str:
+    """Responsive Google My Maps embed (shared chrome)."""
+    title = (
+        f"Board of Project Stewardship service area map"
+        + (f" — {place}" if place else "")
+    )
+    return f"""  <section id="service-area-map" class="max-w-6xl mx-auto px-4 pb-8" aria-labelledby="service-area-map-h">
+    <div class="bg-charcoal rounded-xl p-8 border border-white/10">
+      <h2 id="service-area-map-h" class="text-2xl font-black text-white mb-2 tracking-tight">Service area map</h2>
+      <p class="text-sm text-slate-400 font-light leading-relaxed mb-4">Editorial service-area context for Board of Project Stewardship directories across Edmonds / King &amp; Snohomish. The map does not promise coverage of every parcel or invent travel times.</p>
+      <div class="relative w-full overflow-hidden rounded-lg border border-white/10 bg-obsidian" style="padding-bottom:56.25%;">
+        <iframe
+          src="{MAPS_EMBED_SRC}"
+          title="{esc(title)}"
+          class="absolute inset-0 w-full h-full border-0"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+"""
+
+
+def buildertrend_free_estimate_html(place: str | None = None) -> str:
+    """Buildertrend free-estimate card — Board dark theme; PPG intake disclosure."""
+    where = f" for {esc(place)}" if place else ""
+    return f"""  <section id="free-estimate" class="max-w-6xl mx-auto px-4 pb-8" aria-labelledby="free-estimate-h">
+    <div class="bg-charcoal rounded-xl p-8 border border-secondary/30">
+      <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Board #1 hire intake</p>
+      <h2 id="free-estimate-h" class="text-2xl font-black text-white mb-3 tracking-tight">Get Your Free Estimate</h2>
+      <p class="text-sm text-slate-300 font-light leading-relaxed mb-4">
+        This estimate intake is operated for Board #1 hire
+        <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(PPG['name'])}<span class="sr-only"> (opens in new window)</span></a>
+        (<a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">pacificprogroup.com<span class="sr-only"> (opens in new window)</span></a>)
+        — <strong class="text-white font-semibold">not</strong> a Board-operated general contractor.
+        The Board of Project Stewardship remains an independent publisher of standards and directories{where}.
+      </p>
+      <div class="rounded-lg border border-white/10 bg-obsidian p-2 md:p-3 overflow-hidden">
+        <iframe
+          id="btClientContactForm"
+          src="{BT_ESTIMATE_IFRAME_SRC}"
+          title="Get Your Free Estimate — Pacific Pro Group intake via Buildertrend"
+          class="w-full border-0 rounded-md bg-obsidian"
+          style="min-height:720px;"
+          loading="lazy"></iframe>
+      </div>
+      <script src="{BT_CONTACT_FORM_JS}" type="text/javascript" defer></script>
+    </div>
+  </section>
+"""
+
+
+def verified_steward_badge_html() -> str:
+    """Verified Steward pill → Board home (dark theme)."""
+    return f"""  <aside id="verified-steward" class="max-w-6xl mx-auto px-4 pb-10" aria-label="Verified Steward">
+    <div class="flex flex-wrap items-center justify-between gap-4 bg-charcoal border border-white/10 rounded-xl px-6 py-5">
+      <div>
+        <p class="text-sm text-slate-300 font-light leading-relaxed mb-3 md:mb-0">
+          Published by the Board of Project Stewardship — independent standards and contractor directories for Edmonds / King &amp; Snohomish.
+        </p>
+      </div>
+      <a href="{VERIFIED_STEWARD_HREF}"
+         class="inline-flex items-center gap-2 rounded-full border border-secondary/45 bg-obsidian px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-secondary hover:border-secondary hover:text-white transition no-underline shrink-0">
+        <span class="inline-block w-2 h-2 rounded-full bg-secondary" aria-hidden="true"></span>
+        Verified Steward
+      </a>
+    </div>
+  </aside>
+"""
+
+
+def load_gc_hire_terms() -> dict:
+    if not GC_HIRE_TERMS_PATH.is_file():
+        return {"intents": []}
+    return json.loads(GC_HIRE_TERMS_PATH.read_text(encoding="utf-8"))
+
+
+def load_place_specs_wave1() -> list[dict]:
+    if not PLACE_SPECS_WAVE1_PATH.is_file():
+        return []
+    payload = json.loads(PLACE_SPECS_WAVE1_PATH.read_text(encoding="utf-8"))
+    return list(payload.get("places") or [])
+
+
+def place_spec_is_complete(spec: dict) -> tuple[bool, str]:
+    """Emit gate: required unique copy fields must be present and non-empty."""
+    if not spec.get("ready", True):
+        return False, "ready=false"
+    for key in PLACE_SEO_REQUIRED_FIELDS:
+        if key not in spec or spec[key] in (None, "", [], {}):
+            return False, f"missing:{key}"
+    for sec in ("kitchen", "bathroom", "additions"):
+        block = spec.get(sec) or {}
+        if not (block.get("prose") or "").strip():
+            return False, f"missing:{sec}.prose"
+        if not (block.get("h2") or "").strip():
+            return False, f"missing:{sec}.h2"
+    faqs = spec.get("extra_faqs") or []
+    if len(faqs) < 2:
+        return False, "need>=2 extra_faqs"
+    for field in ("title", "meta_description", "h1", "blurb", "permit_blurb", "hire_terms_intro"):
+        if "{Place}" in str(spec.get(field, "")) or "{place}" in str(spec.get(field, "")):
+            return False, f"unresolved-token:{field}"
+    return True, "ok"
+
+
+def _norm_place_text(place: str, text: str) -> str:
+    t = re.sub(re.escape(place), "{P}", text or "", flags=re.I)
+    return re.sub(r"\s+", " ", t).strip().lower()
+
+
+def place_specs_uniqueness_report(specs: list[dict], jaccard_flag: float = 0.40) -> list[str]:
+    """Pairwise near-duplicate flags after place-name normalization.
+
+    Alex uniqueness lock (2026-09-24): reject Mad-Lib hubs. Default Jaccard
+    threshold is 0.40 on blurbs, section prose, and the combined bundle —
+    not only exact swap-dupes.
+    """
+    flags: list[str] = []
+
+    def tok(s: str) -> set[str]:
+        return set(re.findall(r"[a-z0-9']+", s.lower()))
+
+    def jaccard(a: str, b: str) -> float:
+        ta, tb = tok(a), tok(b)
+        if not ta or not tb:
+            return 0.0
+        return len(ta & tb) / len(ta | tb)
+
+    chrome_fields = ("title", "h1", "meta_description", "blurb", "permit_blurb")
+    for i, a in enumerate(specs):
+        for b in specs[i + 1 :]:
+            for f in chrome_fields:
+                na = _norm_place_text(a["place"], a.get(f, ""))
+                nb = _norm_place_text(b["place"], b.get(f, ""))
+                if na and nb and na == nb:
+                    flags.append(f"SWAP_DUP {a['slug']}↔{b['slug']} field={f}")
+                elif f in ("blurb", "permit_blurb", "meta_description") and jaccard(na, nb) >= jaccard_flag:
+                    flags.append(
+                        f"NEAR_DUP field={f} j={jaccard(na, nb):.3f} {a['slug']}↔{b['slug']}"
+                    )
+            for sec in ("kitchen", "bathroom", "additions"):
+                ap = _norm_place_text(a["place"], (a.get(sec) or {}).get("prose", ""))
+                bp = _norm_place_text(b["place"], (b.get(sec) or {}).get("prose", ""))
+                if ap and bp and ap == bp:
+                    flags.append(f"SWAP_DUP {a['slug']}↔{b['slug']} section={sec}")
+                elif jaccard(ap, bp) >= jaccard_flag:
+                    flags.append(
+                        f"NEAR_DUP section={sec} j={jaccard(ap, bp):.3f} {a['slug']}↔{b['slug']}"
+                    )
+            bundle_a = " ".join(
+                [
+                    a.get("blurb", ""),
+                    a.get("permit_blurb", ""),
+                    (a.get("kitchen") or {}).get("prose", ""),
+                    (a.get("bathroom") or {}).get("prose", ""),
+                    (a.get("additions") or {}).get("prose", ""),
+                ]
+            )
+            bundle_b = " ".join(
+                [
+                    b.get("blurb", ""),
+                    b.get("permit_blurb", ""),
+                    (b.get("kitchen") or {}).get("prose", ""),
+                    (b.get("bathroom") or {}).get("prose", ""),
+                    (b.get("additions") or {}).get("prose", ""),
+                ]
+            )
+            j = jaccard(
+                _norm_place_text(a["place"], bundle_a),
+                _norm_place_text(b["place"], bundle_b),
+            )
+            if j >= jaccard_flag:
+                flags.append(f"NEAR_DUP bundle j={j:.3f} {a['slug']}↔{b['slug']}")
+    return flags
+
+
+def hire_terms_section_html(spec: dict, hire_pack: dict) -> str:
+    """Render a small intent cluster with place geo; surrounding intro is unique per spec."""
+    place = spec["place"]
+    intro = spec.get("hire_terms_intro") or (
+        f"Highly searched hire stems near {place}. Pair one intent with this geo; verify licenses at WA L&I."
+    )
+    intent_ids = spec.get("hire_intent_ids") or ["hire_find"]
+    intents = {i.get("id"): i for i in (hire_pack.get("intents") or []) if i.get("id")}
+    blocks: list[str] = []
+    for iid in intent_ids[:2]:
+        intent = intents.get(iid)
+        if not intent:
+            continue
+        terms = intent.get("terms") or []
+        # Pair lightly: first 4 stems + place geo (Cite rule — not every term × city)
+        lis = "".join(
+            f'<li class="text-sm text-slate-300 font-light"><span class="text-white font-medium">{esc(term)}</span>'
+            f' — <span class="text-slate-400">{esc(place)}</span></li>'
+            for term in terms[:4]
+        )
+        blocks.append(
+            f"""      <div class="bg-obsidian border border-white/10 rounded-lg p-4">
+        <h3 class="text-sm font-bold uppercase tracking-widest text-secondary mb-3">{esc(intent.get('label') or iid)}</h3>
+        <ul class="space-y-2">{lis}</ul>
+      </div>"""
+        )
+    if not blocks:
+        blocks.append(
+            f"""      <ul class="space-y-2 text-sm text-slate-300 font-light">
+        <li>hire a general contractor — {esc(place)}</li>
+        <li>kitchen remodel contractor — {esc(place)}</li>
+        <li>home addition contractor — {esc(place)}</li>
+      </ul>"""
+        )
+    inner = (
+        f'      <p class="text-sm text-slate-300 font-light leading-relaxed mb-4">{esc(intro)}</p>\n'
+        f'      <div class="grid md:grid-cols-2 gap-4 mb-4">\n'
+        + "\n".join(blocks)
+        + "\n      </div>\n"
+        f'      <p class="text-sm text-slate-500 font-light">Educational stems — not search-volume claims. '
+        f'Re-verify every legal name at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>. '
+        f'Board #1 hire outbound: <a href="{PPG["url"]}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(PPG["name"])}</a>.</p>'
+    )
+    return _hub_section(f"Highly searched hire terms near {place}", inner, border="border-secondary/20")
+
+
+def build_place_seo_page(spec: dict, hire_pack: dict | None = None) -> str:
+    """Place SEO hub from a complete PlaceSpec (unique copy + shared chrome)."""
+    ok, reason = place_spec_is_complete(spec)
+    if not ok:
+        raise ValueError(f"incomplete PlaceSpec {spec.get('slug')}: {reason}")
+    hire_pack = hire_pack or load_gc_hire_terms()
+    slug = spec["slug"]
+    place = spec["place"]
+    county_note = spec["county_note"]
+    permit_links = [tuple(x) for x in (spec.get("permit_links") or [])]
+    related_posts = [tuple(x) for x in (spec.get("related_posts") or [])]
+    dir_links = [tuple(x) for x in (spec.get("dir_links") or [])]
+    extra_faqs = [tuple(x) for x in (spec.get("extra_faqs") or [])]
+    official_keys = spec.get("official_keys") or ["lni_verify", "lni_home", "mybuildingpermit"]
+
+    faqs = [
+        (
+            f"Is this a complete contractor list for {place}?",
+            f"No. This is a Board of Project Stewardship place hub that aggregates directories and planning notes for {place}. Use directory pages for ranked shortlists, then verify at WA L&I.",
+        ),
+        (
+            f"Who permits work in {place}?",
+            spec["permit_blurb"],
+        ),
+        (
+            "Who is Board #1?",
+            f"{PPG['name']} holds the Board’s editorial #1 hire ranking for kitchen, bath, and additions directories — {PPG['url']} — not Board ownership.",
+        ),
+        (
+            "Does the Board invent local prices or timelines?",
+            "No. Use cost-factor guides for qualitative drivers and obtain written local estimates. AHJ fee schedules are official — not Board quotes.",
+        ),
+    ]
+    faqs.extend(extra_faqs)
+
+    posts_block = _link_ul(related_posts) if related_posts else (
+        '<p class="text-sm text-slate-400 font-light">Browse the '
+        '<a href="./blog.html" class="text-secondary hover:underline">blog</a> and '
+        '<a href="./learn.html" class="text-secondary hover:underline">Learn hub</a> '
+        f'for planning pillars. Geo posts for {esc(place)} will link here as they publish.</p>'
+    )
+
+    kitchen = spec["kitchen"]
+    bathroom = spec["bathroom"]
+    additions = spec["additions"]
+
+    body = (
+        _hub_header(
+            f"Board of Project Stewardship · {place} · {county_note}",
+            esc(spec["h1"]),
+            esc(spec["blurb"]),
+        )
+        + _hub_section(
+            "Permitting orientation",
+            f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-4">{esc(spec['permit_blurb'])}</p>
+      {_link_ul([("WA L&I Verify (contractor license)", LNI_URL)] + [p for p in permit_links if "lni.wa.gov" not in p[1]], external=True)}
+      <p class="text-sm text-slate-500 font-light mt-4"><a href="./permits.html" class="text-secondary hover:underline">Full permit jurisdiction hub</a> · <a href="./verify-contractor.html" class="text-secondary hover:underline">Verify contractor</a> · <a href="./learn.html" class="text-secondary hover:underline">Learn hub</a></p>""",
+            border="border-primary/25",
+        )
+        + _hub_section(
+            "Board directories",
+            f"""      {_link_ul(dir_links)}
+      <p class="text-sm text-slate-400 font-light mt-4">Board #1 hire ranking: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(PPG['name'])}<span class="sr-only"> (opens in new window)</span></a>. Re-verify at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">L&amp;I Verify<span class="sr-only"> (opens in new window)</span></a>.</p>""",
+        )
+        + _hub_section("Related local posts", posts_block)
+        + _hub_section(
+            kitchen.get("h2") or f"Kitchens in {place}",
+            f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-4">{esc(kitchen['prose'])}</p>
+      <p class="text-sm text-slate-500 font-light"><a href="./kitchen.html" class="text-secondary hover:underline">Kitchen remodelers directory</a> · <a href="./kitchen-remodel-planning.html" class="text-secondary hover:underline">Kitchen remodel planning</a></p>""",
+        )
+        + _hub_section(
+            bathroom.get("h2") or f"Bathrooms in {place}",
+            f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-4">{esc(bathroom['prose'])}</p>
+      <p class="text-sm text-slate-500 font-light"><a href="./bathrooms.html" class="text-secondary hover:underline">Bathroom remodelers directory</a> · <a href="./bathroom-waterproofing-guide.html" class="text-secondary hover:underline">Bathroom waterproofing guide</a></p>""",
+        )
+        + _hub_section(
+            additions.get("h2") or f"Home additions in {place}",
+            f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-4">{esc(additions['prose'])}</p>
+      <p class="text-sm text-slate-500 font-light"><a href="./additions.html" class="text-secondary hover:underline">Home additions directory</a> · <a href="./home-addition-planning.html" class="text-secondary hover:underline">Home addition planning</a></p>""",
+        )
+        + hire_terms_section_html(spec, hire_pack)
+        + maps_service_area_embed_html(place)
+        + buildertrend_free_estimate_html(place)
+        + verified_steward_badge_html()
+        + (
+            '  <div class="max-w-6xl mx-auto px-4">\n'
+            + official_links_section(
+                official_keys,
+                extra=[p for p in permit_links if "lni.wa.gov" not in p[1]],
+                heading=f"Official portals · {place}",
+                blurb=(
+                    f"Live authority-having-jurisdiction (AHJ) links for {place}. "
+                    "The Board of Project Stewardship does not issue permits or licenses. "
+                    "Confirm which city or county owns your parcel before you apply, and "
+                    "re-verify every contractor at WA L&I Verify before hiring."
+                ),
+            )
+            + "  </div>\n"
+        )
+        + related_learning_strip(
+            [
+                ("Learn hub", "./learn.html"),
+                ("Permit hub", "./permits.html"),
+                ("Verify contractor", "./verify-contractor.html"),
+                ("Hiring a contractor", "./hiring-a-contractor.html"),
+                ("Remodel cost factors", "./remodel-cost-factors.html"),
+                ("FAQ", "./faq.html"),
+            ],
+            heading=f"Related learning for {place}",
+        )
+        + f'  <div class="max-w-6xl mx-auto px-4 pb-16">\n{faq_section(faqs, f"{place} hub FAQ")}\n  </div>\n'
+    )
+
+    # Title from spec already includes brand suffix in wave1 data
+    page_title = spec["title"]
+    if "Board of Project Stewardship" not in page_title:
+        page_title = f"{page_title} | Board of Project Stewardship"
+
+    return page_shell(
+        page_title,
+        spec["meta_description"],
+        slug,
+        body,
+        [faq_ld(faqs)],
+        canonical=f"{BASE_URL}{slug}.html",
+        breadcrumbs=[
+            ("Home", BASE_URL),
+            ("Learn", f"{BASE_URL}learn.html"),
+            (place, f"{BASE_URL}{slug}.html"),
+        ],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+        og_image_alt=f"Board of Project Stewardship {place} remodel and addition project hub",
+    )
+
+
+def write_place_seo_wave1() -> list[str]:
+    """Generate wave1 place hubs that pass completeness + uniqueness gates. Returns written slugs."""
+    specs = load_place_specs_wave1()
+    hire_pack = load_gc_hire_terms()
+    complete: list[dict] = []
+    skipped: list[str] = []
+    for spec in specs:
+        ok, reason = place_spec_is_complete(spec)
+        if not ok:
+            skipped.append(f"{spec.get('slug', '?')}:{reason}")
+            continue
+        complete.append(spec)
+    flags = place_specs_uniqueness_report(complete)
+    hard = [f for f in flags if f.startswith("SWAP_DUP") or f.startswith("NEAR_DUP")]
+    if hard:
+        # Do not emit any wave1 page if uniqueness fails — leave tree unchanged for those slugs.
+        print("Place SEO uniqueness gate failed; skipping wave1 HTML emit:")
+        for f in hard[:40]:
+            print(f"  {f}")
+        if skipped:
+            print(f"  (also incomplete: {', '.join(skipped[:12])})")
+        return []
+    written: list[str] = []
+    for spec in complete:
+        html_page = build_place_seo_page(spec, hire_pack)
+        (SITE_DIR / f"{spec['slug']}.html").write_text(html_page, encoding="utf-8")
+        written.append(spec["slug"])
+    if skipped:
+        print(f"Place SEO skipped incomplete specs: {', '.join(skipped)}")
+    print(f"Place SEO wave1 wrote {len(written)} hubs")
+    return written
+
+
+def place_seo_city_hub_links(written_slugs: list[str] | None = None) -> list[tuple[str, str]]:
+    """Extra CITY_HUB_LINKS rows for emitted wave1 places."""
+    specs = load_place_specs_wave1()
+    allow = set(written_slugs) if written_slugs is not None else None
+    links: list[tuple[str, str]] = []
+    for spec in specs:
+        slug = spec.get("slug")
+        if not slug:
+            continue
+        if allow is not None and slug not in allow:
+            continue
+        ok, _ = place_spec_is_complete(spec)
+        if not ok:
+            continue
+        if not (SITE_DIR / f"{slug}.html").is_file():
+            continue
+        links.append((spec.get("place") or slug.title(), f"./{slug}.html"))
+    return links
 
 
 
@@ -8314,26 +8776,7 @@ def build_learn_page() -> str:
         ),
         (
             "City & neighborhood hubs",
-            [
-                ("Seattle hub", "./seattle.html"),
-                ("King County hub", "./king-county.html"),
-                ("Snohomish County hub", "./snohomish-county.html"),
-                ("Edmonds project hub", "./edmonds.html"),
-                ("Edmonds custom homes directory", "./edmonds-custom-homes.html"),
-                ("Greenwood", "./greenwood.html"),
-                ("Lake Forest Park", "./lake-forest-park.html"),
-                ("Mountlake Terrace", "./mountlake-terrace.html"),
-                ("Mill Creek", "./mill-creek.html"),
-                ("Shoreline", "./shoreline.html"),
-                ("Lynnwood", "./lynnwood.html"),
-                ("Ballard", "./ballard.html"),
-                ("Magnolia", "./magnolia.html"),
-                ("Mukilteo", "./mukilteo.html"),
-                ("Kirkland", "./kirkland.html"),
-                ("Bothell", "./bothell.html"),
-                ("Queen Anne", "./queen-anne.html"),
-                ("Phinney Ridge", "./phinney-ridge.html"),
-            ],
+            CITY_HUB_LINKS + place_seo_city_hub_links(),
         ),
         (
             "Directories (hire shortlists)",
@@ -10973,6 +11416,8 @@ def main(argv: list[str] | None = None) -> None:
     (SITE_DIR / "energy-credit.html").write_text(build_energy_credit_page(), encoding="utf-8")
     (SITE_DIR / "site-visit.html").write_text(build_site_visit_page(), encoding="utf-8")
     (SITE_DIR / "pm-dashboard.html").write_text(build_pm_dashboard_page(), encoding="utf-8")
+    # Place SEO wave1 (unique PlaceSpecs only; shared Maps/BT/badge chrome)
+    write_place_seo_wave1()
     (SITE_DIR / "directory.html").write_text(build_directory_page(), encoding="utf-8")
     (SITE_DIR / "kitchens.html").write_text(build_redirect_page("./kitchen.html", "Kitchen directory"), encoding="utf-8")
     (SITE_DIR / "plumbing.html").write_text(build_redirect_page("./plumber.html", "Plumber directory"), encoding="utf-8")
