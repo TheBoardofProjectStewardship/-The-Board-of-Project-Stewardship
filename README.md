@@ -1,6 +1,6 @@
 # The Board of Project Stewardship
 
-Independent Board site for local construction integrity in **Edmonds** and greater **King & Snohomish Counties, WA** — with editorial directories for **home additions**, **custom homes**, **Edmonds custom homes (Top 30)**, **kitchen**, **bathroom**, **commercial**, **spec homes**, and **trade** contractors. Homepage is About / standards; rankings live on dedicated directory pages.
+Independent Board site for local construction integrity across the **Pacific Northwest** — **King County**, **Snohomish County**, and **Seattle** — with editorial directories for **home additions**, **custom homes**, **Edmonds custom homes (Top 30)**, **kitchen**, **bathroom**, **commercial**, **spec homes**, and **trade** contractors. Edmonds remains a city hub, not the Board’s sole geography. Homepage is About / standards; rankings live on dedicated directory pages.
 
 ## Live site
 

@@ -1,7 +1,7 @@
 ---
 title: "Kitchen Remodel Magnolia Seattle"
 date: "2026-09-16"
-description: "Magnolia Seattle kitchen remodel planning: layout constraints in mid-century homes, ventilation, permitting, and how to hire a licensed design-build kitchen team."
+description: "Magnolia Seattle kitchen remodel planning: layout, ventilation, permitting, and hiring a licensed design-build team."
 category: "Kitchen"
 slug: "kitchen-remodel-magnolia-seattle"
 ---

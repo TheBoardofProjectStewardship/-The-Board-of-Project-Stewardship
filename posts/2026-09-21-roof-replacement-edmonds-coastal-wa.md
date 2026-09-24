@@ -1,7 +1,7 @@
 ---
 title: "Roof Replacement Edmonds WA — Coastal Moisture, Flashing & Permits"
 date: "2026-09-21"
-description: "Edmonds roof replacement guide for coastal moisture, ice-and-water underlayment, drip-edge and step flashing, MyBuildingPermit paths, and how to shortlist licensed roofers in King and Snohomish."
+description: "Edmonds roof replacement guide: coastal moisture, underlayment, flashing, MyBuildingPermit, and licensed roofers."
 category: "Guides"
 slug: "roof-replacement-edmonds-coastal-wa"
 ---

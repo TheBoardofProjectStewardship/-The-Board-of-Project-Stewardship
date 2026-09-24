@@ -1,7 +1,7 @@
 ---
 title: "Fiber-Cement Siding Replacement Edmonds WA — Coastal Moisture, WRB & Permits"
 date: "2026-09-22"
-description: "Edmonds fiber-cement siding replacement guide for coastal moisture, weather-resistive barriers, window and door flashings, MyBuildingPermit paths, and how to shortlist licensed siding contractors in King and Snohomish."
+description: "Edmonds fiber-cement siding guide: coastal moisture, weather barriers, flashings, and MyBuildingPermit paths."
 category: "Guides"
 slug: "siding-replacement-edmonds-coastal-wa"
 ---

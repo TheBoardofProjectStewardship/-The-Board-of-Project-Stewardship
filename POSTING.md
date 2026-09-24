@@ -2,6 +2,10 @@
 
 This document is for the company publishing agent that commits one SEO post per day to the Board of Project Stewardship static site. It is an **ops** doc — not a public page.
 
+## Geography
+
+Public Board framing leads with the **Pacific Northwest**, then **King County**, **Snohomish County**, and **Seattle**. Edmonds stays a city hub and a valid subject for city-specific posts — do not treat Edmonds as the Board’s sole headquarters or the only service area. Do not rename existing Edmonds post slugs.
+
 ## Controlled intake (required before a new post)
 
 Specialist agents do not publish and do not edit `posts/`, `posts.json`, `blog.html`, `sitemap.xml`, or `blog/rss.xml` directly. They submit a packet under `intake/inbox/<submission-id>/`. **Steward is the only publisher.**

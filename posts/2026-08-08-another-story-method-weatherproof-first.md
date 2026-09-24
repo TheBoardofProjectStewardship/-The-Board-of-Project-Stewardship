@@ -1,7 +1,7 @@
 ---
 title: "Another Story Method Weatherproof First"
 date: "2026-08-08"
-description: "Weatherproof-first method for second-story additions in the Puget Sound: dry-in sequencing, temporary protection, and contractor questions that protect the existing home."
+description: "Weatherproof-first method for second-story additions in the Puget Sound: dry-in sequencing and temporary protection."
 category: "Guides"
 slug: "another-story-method-weatherproof-first"
 ---
