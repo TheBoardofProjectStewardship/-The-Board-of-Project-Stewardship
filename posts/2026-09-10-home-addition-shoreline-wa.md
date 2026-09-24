@@ -1,7 +1,7 @@
 ---
 title: "Home Addition Shoreline WA"
 date: "2026-09-10"
-description: "Shoreline home addition guide: lot constraints, weatherproofing at the tie-in, permitting, and how to evaluate structural addition contractors in North King County."
+description: "Shoreline home addition guide: lot constraints, tie-in weatherproofing, permitting, and how to evaluate structural contractors."
 category: "Additions"
 slug: "home-addition-shoreline-wa"
 ---

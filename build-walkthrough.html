@@ -196,8 +196,16 @@
       "@id": "https://boardofprojectstewardship.com/#organization",
       "name": "Board of Project Stewardship",
       "url": "https://boardofprojectstewardship.com/",
-      "description": "The Board of Project Stewardship publishes construction standards and contractor directories for Edmonds and King & Snohomish Counties \u2014 shortlists firms homeowners can hire with confidence.",
+      "description": "The Board of Project Stewardship publishes construction standards and contractor directories for the Pacific Northwest \u2014 King County, Snohomish County, and Seattle \u2014 shortlists firms homeowners can hire with confidence.",
       "areaServed": [
+        {
+          "@type": "AdministrativeArea",
+          "name": "Pacific Northwest",
+          "containedInPlace": {
+            "@type": "Country",
+            "name": "United States"
+          }
+        },
         {
           "@type": "AdministrativeArea",
           "name": "King County",
@@ -209,6 +217,14 @@
         {
           "@type": "AdministrativeArea",
           "name": "Snohomish County",
+          "containedInPlace": {
+            "@type": "State",
+            "name": "Washington"
+          }
+        },
+        {
+          "@type": "City",
+          "name": "Seattle",
           "containedInPlace": {
             "@type": "State",
             "name": "Washington"
@@ -245,6 +261,119 @@
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How one illustrative house progresses from Discovery to Handoff",
+  "description": "One cohesive illustrative house through 17 stages from the Board of Project Stewardship. Educational media only \u2014 not engineering documents, bids, schedules, or stamped plans.",
+  "url": "https://boardofprojectstewardship.com/build-walkthrough.html",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Discovery",
+      "text": "Before drawings: capture vision, budget reality, and site constraints. Educational diagram of one persistent house."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Plans",
+      "text": "Layouts and elevations turn discovery into a shared spatial story. Illustrative sheets only \u2014 not stamped engineering."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "Permits",
+      "text": "Verify permit pathways, licensing, access, and review responsibilities before work starts. The Board of Project Stewardship does not issue licenses."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "name": "Site prep",
+      "text": "Access, erosion controls, temporary utilities, and staging prepare the lot."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 5,
+      "name": "Foundation",
+      "text": "Excavation, forms, concrete, waterproofing, and backfill establish the load path."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 6,
+      "name": "Framing",
+      "text": "Studs, joists, headers, rafters, and plates turn the footprint into a readable volume."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 7,
+      "name": "Roofing",
+      "text": "Decking, underlayment, flashing, and roof covering complete dry-in from above."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 8,
+      "name": "Siding",
+      "text": "Sheathing, weather barrier, openings, trim, and cladding close the exterior envelope."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 9,
+      "name": "Plumbing",
+      "text": "Water, waste, and vent paths coordinate through open framing before cavities close."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 10,
+      "name": "Electrical",
+      "text": "Panel, branch circuits, device boxes, and low-voltage paths rough into the open walls."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 11,
+      "name": "HVAC",
+      "text": "Ducts, equipment, returns, and fresh-air paths coordinate before insulation."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 12,
+      "name": "Insulation",
+      "text": "Cavity fill and envelope continuity follow completed rough inspections."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 13,
+      "name": "Drywall",
+      "text": "Wallboard, finishing, primer, and paint turn the shell into rooms that can be walked. Walk view becomes available here."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 14,
+      "name": "Cabinets",
+      "text": "Cabinet boxes, millwork, counters, and alignment bring homeowner-visible craft forward."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 15,
+      "name": "Tile",
+      "text": "Wet-area waterproofing, tile, grout, and flooring transitions complete durable surfaces."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 16,
+      "name": "Punch",
+      "text": "The nearly complete house is checked for gaps, touch-ups, operation, and final signoffs."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 17,
+      "name": "Handoff",
+      "text": "Warranty contacts, systems orientation, maintenance habits, and records support long-term stewardship."
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
     {
@@ -267,37 +396,6 @@
     }
   ],
   "@id": "https://boardofprojectstewardship.com/build-walkthrough.html#breadcrumb"
-}
-  </script>
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How one illustrative house progresses from Discovery to Handoff",
-  "description": "One cohesive illustrative house through 17 stages from the Board of Project Stewardship. Educational media only — not engineering documents, bids, schedules, or stamped plans.",
-  "url": "https://boardofprojectstewardship.com/build-walkthrough.html",
-  "inLanguage": "en-US",
-  "isPartOf": {"@id": "https://boardofprojectstewardship.com/#website"},
-  "publisher": {"@id": "https://boardofprojectstewardship.com/#organization"},
-  "step": [
-    {"@type": "HowToStep", "position": 1, "name": "Discovery", "text": "Before drawings: capture vision, budget reality, and site constraints. Educational diagram of one persistent house."},
-    {"@type": "HowToStep", "position": 2, "name": "Plans", "text": "Layouts and elevations turn discovery into a shared spatial story. Illustrative sheets only — not stamped engineering."},
-    {"@type": "HowToStep", "position": 3, "name": "Permits", "text": "Verify permit pathways, licensing, access, and review responsibilities before work starts. The Board of Project Stewardship does not issue licenses."},
-    {"@type": "HowToStep", "position": 4, "name": "Site prep", "text": "Access, erosion controls, temporary utilities, and staging prepare the lot."},
-    {"@type": "HowToStep", "position": 5, "name": "Foundation", "text": "Excavation, forms, concrete, waterproofing, and backfill establish the load path."},
-    {"@type": "HowToStep", "position": 6, "name": "Framing", "text": "Studs, joists, headers, rafters, and plates turn the footprint into a readable volume."},
-    {"@type": "HowToStep", "position": 7, "name": "Roofing", "text": "Decking, underlayment, flashing, and roof covering complete dry-in from above."},
-    {"@type": "HowToStep", "position": 8, "name": "Siding", "text": "Sheathing, weather barrier, openings, trim, and cladding close the exterior envelope."},
-    {"@type": "HowToStep", "position": 9, "name": "Plumbing", "text": "Water, waste, and vent paths coordinate through open framing before cavities close."},
-    {"@type": "HowToStep", "position": 10, "name": "Electrical", "text": "Panel, branch circuits, device boxes, and low-voltage paths rough into the open walls."},
-    {"@type": "HowToStep", "position": 11, "name": "HVAC", "text": "Ducts, equipment, returns, and fresh-air paths coordinate before insulation."},
-    {"@type": "HowToStep", "position": 12, "name": "Insulation", "text": "Cavity fill and envelope continuity follow completed rough inspections."},
-    {"@type": "HowToStep", "position": 13, "name": "Drywall", "text": "Wallboard, finishing, primer, and paint turn the shell into rooms that can be walked. Walk view becomes available here."},
-    {"@type": "HowToStep", "position": 14, "name": "Cabinets", "text": "Cabinet boxes, millwork, counters, and alignment bring homeowner-visible craft forward."},
-    {"@type": "HowToStep", "position": 15, "name": "Tile", "text": "Wet-area waterproofing, tile, grout, and flooring transitions complete durable surfaces."},
-    {"@type": "HowToStep", "position": 16, "name": "Punch", "text": "The nearly complete house is checked for gaps, touch-ups, operation, and final signoffs."},
-    {"@type": "HowToStep", "position": 17, "name": "Handoff", "text": "Warranty contacts, systems orientation, maintenance habits, and records support long-term stewardship."}
-  ]
 }
   </script>
 </head>
@@ -341,36 +439,14 @@
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="./good-steward.html" class="text-secondary hover:underline">Good Steward</a>. Also: <a href="./site-visit.html" class="text-secondary hover:underline">Site Visit Checklist</a> · <a href="./pm-dashboard.html" class="text-secondary hover:underline">PM Dashboard</a> · <a href="./energy-credit.html" class="text-secondary hover:underline">Energy code credits</a>.</p>
   </header>
   <section class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
-    <p class="md:hidden mb-3">
-      <a href="./tools/build-walkthrough/index.html" class="inline-flex items-center justify-center min-h-[44px] px-4 py-2 rounded-lg border border-secondary/50 text-secondary text-xs font-bold uppercase tracking-widest hover:bg-secondary/10">
-        Open full Build Walkthrough
-      </a>
-      <span class="block text-[11px] text-slate-500 mt-1.5 font-light">Best on phones — opens the tool full-page (no nested scroll).</span>
-    </p>
     <iframe
       id="build-walkthrough-tool"
       src="./tools/build-walkthrough/index.html"
       title="Build Walkthrough — Board of Project Stewardship"
       loading="lazy"
-      style="display:block;width:100%;min-height:640px;height:900px;border:0;border-radius:18px;background:#0a0a0a;"
+      style="display:block;width:100%;height:900px;border:0;border-radius:18px;background:#0a0a0a;"
     ></iframe>
     <p class="text-[11px] text-slate-600 mt-3 leading-relaxed">One persistent house. Honesty chips: Illustrative media · not engineering documents. Illustrative model · not a site scan.</p>
-
-    <script>
-    (() => {
-      const frame = document.getElementById('build-walkthrough-tool');
-      if (!frame) return;
-      const trustedOrigin = new URL(frame.src, window.location.href).origin;
-      window.addEventListener('message', (event) => {
-        if (event.origin !== trustedOrigin || event.source !== frame.contentWindow) return;
-        if (event.data?.type !== 'build-walkthrough:resize') return;
-        const height = Number(event.data.height);
-        if (Number.isFinite(height) && height >= 480 && height <= 16000) {
-          frame.style.height = `${Math.ceil(height) + 2}px`;
-        }
-      });
-    })();
-    </script>
     <section class="mt-8" id="seventeen-stages" aria-labelledby="seventeen-stages-h">
       <h2 id="seventeen-stages-h" class="text-xl font-black text-white tracking-tight mb-3">Seventeen stages, one house</h2>
       <p class="text-sm text-slate-400 font-light max-w-3xl leading-relaxed mb-4">Drag the scrubber on the same illustrative model. Views are educational diagrams from the Board of Project Stewardship, not construction documents or a promised sequence.</p>
@@ -496,7 +572,7 @@
           <i class="fas fa-compass-drafting text-secondary"></i>
           <span class="font-black text-base tracking-wider text-white">Board of Project Stewardship</span>
         </div>
-        <p class="font-light leading-relaxed text-sm">The Board of Project Stewardship publishes construction standards and contractor directories for Edmonds and King &amp; Snohomish Counties — shortlists firms homeowners can hire with confidence. Updated 2026.</p>
+        <p class="font-light leading-relaxed text-sm">The Board of Project Stewardship publishes construction standards and contractor directories for the Pacific Northwest — King County, Snohomish County, and Seattle — shortlists firms homeowners can hire with confidence. Updated 2026.</p>
         <p class="mt-3 font-light leading-relaxed text-sm">Public contact: <a href="mailto:editorial@boardofprojectstewardship.com" class="text-secondary hover:underline">editorial@boardofprojectstewardship.com</a></p>
         <p class="mt-3 font-light leading-relaxed text-sm">Board feature: <a href="./another-story.html" class="text-secondary hover:underline">Another Story</a> — second-story concept studio.</p>
       </div>
@@ -605,7 +681,7 @@
         site: 'Confirm lot coverage, parking, and utility taps early; Edmonds and Seattle rules are not interchangeable.',
         structure: 'Detached vs attached ADUs change foundation and fire-separation details — put the typology in the contract.',
         finish: 'Kitchenette and bath packages inside an ADU still need allowance rules and inspection sequencing.',
-        ahj: 'Read the Board Edmonds ADU hub for orientation, then finish on the official portal for that parcel's AHJ.'
+        ahj: "Read the Board ADU notes for the parcel's AHJ. The Edmonds ADU hub is one city example. Then finish on the official portal."
       },
       custom: {
         site: 'Custom homes hinge on site surveys, soils, and coastal exposure — ask who owns each diligence item.',

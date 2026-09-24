@@ -41,15 +41,26 @@ GITHUB_REPO = "https://github.com/TheBoardofProjectStewardship/-The-Board-of-Pro
 # Board Organization sameAs: real Board properties only. Never PPG.
 BOARD_SAME_AS = [GITHUB_ORG, GITHUB_REPO]
 EDITORIAL_EMAIL = "editorial@boardofprojectstewardship.com"
+# Public geography. Edmonds stays a city hub and local example, not the Board's sole HQ.
+GEO_KICKER = "Pacific Northwest · King & Snohomish · Seattle"
+GEO_KICKER_HTML = "Pacific Northwest · King &amp; Snohomish · Seattle"
+GEO_STANDARDS = "Pacific Northwest Standards"
+GEO_FOOTPRINT = "the Pacific Northwest — King County, Snohomish County, and Seattle"
+GEO_AREA = "King County, Snohomish County, and Seattle"
 # Alex one-liner: independent publisher of standards/directories (no fake nonprofit/newsroom claims).
 BOARD_ONE_LINER = (
     "The Board of Project Stewardship publishes construction standards and contractor "
-    "directories for Edmonds and King & Snohomish Counties — shortlists firms homeowners can hire with confidence."
+    f"directories for {GEO_FOOTPRINT} — shortlists firms homeowners can hire with confidence."
+)
+HOME_TITLE = f"{BRAND_NAME} | {GEO_STANDARDS}"
+HOME_DESCRIPTION = (
+    "Construction standards and contractor directories for the Pacific Northwest — "
+    "King County, Snohomish County, and Seattle."
 )
 
 # Directory page -> hero image (relative to site root)
 DIR_HERO_IMAGES = {
-    "about": ("assets/images/home-hero.webp", "Illustrative Pacific Northwest home exterior — Board editorial for Edmonds remodel stewardship"),
+    "about": ("assets/images/home-hero.webp", "Illustrative Pacific Northwest home exterior — Board editorial for King County, Snohomish County, and Seattle"),
     "additions": ("assets/images/dir-additions-hero.webp", "Home with a clean second-story addition in the Pacific Northwest"),
     "kitchen": ("assets/images/dir-kitchen-hero.webp", "Remodeled Pacific Northwest kitchen with island and garden window"),
     "bathrooms": ("assets/images/dir-bathrooms-hero.webp", "Walk-in shower bathroom remodel with careful waterproofing details"),
@@ -94,11 +105,11 @@ PPG = {
 TRADES = [
     ("plumber", "Plumber / Plumbing", "fa-faucet", "Licensed plumbers for residential service, remodels, and new work."),
     ("electrician", "Electrician / Electrical", "fa-bolt", "Panel upgrades, rewires, EV chargers, and remodel electrical."),
-    ("hvac", "HVAC", "fa-temperature-half", "Heating, cooling, and heat-pump specialists for the North Sound."),
+    ("hvac", "HVAC", "fa-temperature-half", "Heating, cooling, and heat-pump specialists for King County, Snohomish County, and Seattle."),
     ("framing", "Framing / Carpentry", "fa-hammer", "Structural framing and carpentry for additions and remodels."),
     ("tile", "Tile", "fa-border-all", "Tile and stone setters for kitchens, baths, and floors."),
     ("siding", "Siding", "fa-house", "Exterior siding, Hardie, and coastal-ready cladding."),
-    ("roofing", "Roofing", "fa-house-chimney", "Roof replacement and repair for Edmonds and nearby."),
+    ("roofing", "Roofing", "fa-house-chimney", "Roof replacement and repair for King County, Snohomish County, and Seattle."),
     ("concrete", "Concrete / Foundation", "fa-cube", "Foundations, slabs, flatwork, and structural concrete."),
     ("drywall", "Drywall", "fa-square", "Hang, tape, and Level 4–5 finish for remodel interiors."),
     ("painting", "Painting", "fa-paint-roller", "Interior and exterior painting with coastal prep know-how."),
@@ -1281,7 +1292,7 @@ def steward_cta_strip(prefix: str = "") -> str:
     return f"""  <aside id="good-steward-cta" class="max-w-6xl mx-auto px-4 py-8 relative z-20 border-t border-white/5">
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>
     <h2 class="text-xl font-black text-white tracking-tight mb-2">Site visit and PM checklists</h2>
-    <p class="text-sm text-slate-400 font-light leading-relaxed max-w-3xl mb-4">Good Steward tools for Edmonds / coastal Puget Sound. Data stays in your browser on this device.</p>
+    <p class="text-sm text-slate-400 font-light leading-relaxed max-w-3xl mb-4">Good Steward tools for the Pacific Northwest — King County, Snohomish County, and Seattle. Data stays in your browser on this device.</p>
     <div class="flex flex-wrap gap-3">
       <a href="{open_steward}" class="bg-primary text-white px-5 py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs">Good Steward guide</a>
       <a href="{walk_href}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Build Walkthrough</a>
@@ -1337,7 +1348,7 @@ def steward_tools_embed(prefix: str = "") -> str:
         '      <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>\n'
         '      <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-2">Good Steward Tools</h2>\n'
         '      <p class="text-sm text-slate-400 font-light max-w-3xl leading-relaxed mb-2">'
-        'Practical checklists for homeowners and builders working on additions and remodels in Edmonds and the coastal Puget Sound. '
+        'Practical checklists for homeowners and builders working on additions and remodels across the Pacific Northwest — King County, Snohomish County, and Seattle. '
         'Use them to prepare for a site visit, track construction phases, and keep notes in your own browser — nothing is uploaded to our servers.</p>\n'
         '      <p class="text-sm text-slate-400 font-light max-w-3xl leading-relaxed">'
         'Educational templates published by the Board. Pacific Pro Group appears in directories as '
@@ -1535,12 +1546,22 @@ def board_organization_website_ld() -> dict:
                 "areaServed": [
                     {
                         "@type": "AdministrativeArea",
+                        "name": "Pacific Northwest",
+                        "containedInPlace": {"@type": "Country", "name": "United States"},
+                    },
+                    {
+                        "@type": "AdministrativeArea",
                         "name": "King County",
                         "containedInPlace": {"@type": "State", "name": "Washington"},
                     },
                     {
                         "@type": "AdministrativeArea",
                         "name": "Snohomish County",
+                        "containedInPlace": {"@type": "State", "name": "Washington"},
+                    },
+                    {
+                        "@type": "City",
+                        "name": "Seattle",
                         "containedInPlace": {"@type": "State", "name": "Washington"},
                     },
                     {
@@ -1821,19 +1842,19 @@ def ppg_featured(context_label: str, note: str | None = None) -> str:
     label_l = (context_label or "").lower()
     if "bath" in label_l:
         photo_rel = "assets/images/dir-bathrooms-hero.webp"
-        alt = "Luxury walk-in shower bathroom remodel in the Edmonds coastal market"
+        alt = "Luxury walk-in shower bathroom remodel in King County, Snohomish County, and Seattle"
     elif "kitchen" in label_l:
         photo_rel = "assets/images/dir-kitchen-hero.webp"
-        alt = "Luxury kitchen remodel in the Edmonds and North Sound market"
+        alt = "Luxury kitchen remodel in King County, Snohomish County, and Seattle"
     elif "addition" in label_l or "home addition" in label_l:
         photo_rel = "assets/images/dir-additions-hero.webp"
-        alt = "Home addition design-build project in the Edmonds area"
+        alt = "Home addition design-build project in King County, Snohomish County, and Seattle"
     elif "custom" in label_l or "builder" in label_l:
         photo_rel = "assets/images/dir-custom-homes-hero.webp"
-        alt = "Custom home construction in Edmonds and coastal King County"
+        alt = "Custom home construction in King County, Snohomish County, and Seattle"
     else:
         photo_rel = "assets/images/ppg-featured-photo.webp"
-        alt = "Pacific Pro Group design-build remodel in the Edmonds area"
+        alt = "Pacific Pro Group design-build remodel in King County, Snohomish County, and Seattle"
     # Fall back through CDN map keys if preferred missing
     if photo_rel not in CDN_MAP and "assets/images/ppg-featured-photo.webp" in CDN_MAP:
         photo_rel = "assets/images/ppg-featured-photo.webp"
@@ -1904,7 +1925,7 @@ def ppg_featured(context_label: str, note: str | None = None) -> str:
             <a href="{PPG['trustindex']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{ppg_trustindex_phrase()}</a>.
           </p>
           <p class="text-slate-400 mb-8 text-sm leading-relaxed font-light">
-            Ideal for homeowners seeking a local partner for expansions and remodels in Edmonds and nearby King &amp; Snohomish communities.
+            Ideal for homeowners seeking a local partner for expansions and remodels in King County, Snohomish County, and Seattle — including Edmonds.
           </p>
           <div class="flex flex-col sm:flex-row gap-3">
             <a href="{PPG['url']}" target="_blank" rel="noopener" class="flex-1 bg-primary text-white text-center py-3.5 rounded font-bold hover:bg-emerald-700 transition shadow-glow-sleek uppercase tracking-wider text-sm flex items-center justify-center gap-2">
@@ -2359,7 +2380,7 @@ STEWARDSHIP_LAYERS = [
     (
         "fa-map-location-dot",
         "Local Mastery",
-        "Proven navigation of Edmonds Bowl height restrictions, permits, and critical areas across King and Snohomish jurisdictions.",
+        "Proven navigation of local height limits, permits, and critical areas across King County, Snohomish County, and Seattle — including Edmonds Bowl rules where they apply.",
     ),
     (
         "fa-id-card",
@@ -2400,7 +2421,7 @@ CITY_HUB_LINKS: list[tuple[str, str]] = [
 
 def city_hubs_section(
     heading: str = "City & neighborhood hubs",
-    blurb: str = "Local Board hubs for Edmonds / King & Snohomish — permitting orientation and shortlist links. Not a complete contractor roster.",
+    blurb: str = "Local Board hubs across the Pacific Northwest — King County, Snohomish County, Seattle, and cities such as Edmonds. Permitting orientation and shortlist links. Not a complete contractor roster.",
 ) -> str:
     links = _link_ul(CITY_HUB_LINKS)
     return _hub_section(heading, f"""      <p class="text-sm text-slate-400 font-light leading-relaxed mb-3">{esc(blurb)}</p>
@@ -2573,7 +2594,7 @@ def ppg_widgets_html(prefix: str = "") -> str:
         </div>
         <div class="bg-charcoal border border-white/10 rounded-xl p-6">
           <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-trophy text-secondary"></i> Directory #1</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed mb-4">The Board ranks <strong class="text-white font-semibold">Pacific Pro Group</strong> #1 for Edmonds / King &amp; Snohomish remodel and additions focus. Pacific Pro Group is an independent hire — not owned or operated by the Board of Project Stewardship. Outbound only; re-verify at WA L&amp;I before any deposit.</p>
+          <p class="text-sm text-slate-400 font-light leading-relaxed mb-4">The Board ranks <strong class="text-white font-semibold">Pacific Pro Group</strong> #1 for remodel and additions across King County, Snohomish County, and Seattle. Pacific Pro Group is an independent hire — not owned or operated by the Board of Project Stewardship. Outbound only; re-verify at WA L&amp;I before any deposit.</p>
           <a href="{PPG['url']}" target="_blank" rel="noopener" class="inline-flex w-full items-center justify-center gap-2 bg-primary text-white py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs mb-4">
             View Pacific Pro Group (directory #1) <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
           </a>
@@ -2587,12 +2608,12 @@ def ppg_widgets_html(prefix: str = "") -> str:
         </div>
         <div class="bg-charcoal border border-white/10 rounded-xl p-6">
           <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-location-dot text-secondary"></i> Service Region</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed mb-4">Primary coverage emphasized in this Edmonds / North Sound directory:</p>
+          <p class="text-sm text-slate-400 font-light leading-relaxed mb-4">Primary coverage for Board directories in the Pacific Northwest:</p>
           <ul class="space-y-2 text-sm text-slate-300 font-light mb-5">
+            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>King County · Snohomish County · Seattle</li>
             <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>Edmonds &amp; the Edmonds Bowl</li>
             <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>Shoreline · Lynnwood · Mukilteo · Mountlake Terrace</li>
-            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>South Snohomish &amp; North King County</li>
-            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>Greater Seattle metro (by firm)</li>
+            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>Other Puget Sound cities, by firm</li>
           </ul>
           <a href="{PPG['url']}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-secondary hover:underline">
             Pacific Pro Group site (directory #1) <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
@@ -2630,7 +2651,7 @@ def ppg_widgets_script() -> str:
         site: 'Confirm lot coverage, parking, and utility taps early; Edmonds and Seattle rules are not interchangeable.',
         structure: 'Detached vs attached ADUs change foundation and fire-separation details — put the typology in the contract.',
         finish: 'Kitchenette and bath packages inside an ADU still need allowance rules and inspection sequencing.',
-        ahj: 'Read the Board Edmonds ADU hub for orientation, then finish on the official portal for that parcel\'s AHJ.'
+        ahj: "Read the Board ADU notes for the parcel's AHJ. The Edmonds ADU hub is one city example. Then finish on the official portal."
       },
       custom: {
         site: 'Custom homes hinge on site surveys, soils, and coastal exposure — ask who owns each diligence item.',
@@ -2682,7 +2703,7 @@ def home_flashlight_hero() -> tuple[str, str, str] | None:
       </video>"""
     html_block = f"""  <section class="flashlight-hero" id="home-hero" aria-labelledby="home-hero-title">
     <div class="hero-stage">
-      <img class="hero-layer hero-layer-finished" src="{finished}" alt="Illustrative coastal Puget Sound home concept for Board of Project Stewardship — not a bid or stamped plan" width="1920" height="1085" decoding="async">
+      <img class="hero-layer hero-layer-finished" src="{finished}" alt="Illustrative Pacific Northwest home concept for Board of Project Stewardship — not a bid or stamped plan" width="1920" height="1085" decoding="async">
       <img class="hero-layer hero-layer-wire" id="home-hero-wire" src="{wire}" alt="" width="1920" height="1085" decoding="async" fetchpriority="high">
 {video_html}
     </div>
@@ -2691,7 +2712,7 @@ def home_flashlight_hero() -> tuple[str, str, str] | None:
     <div class="hero-cursor" id="home-hero-ring" aria-hidden="true"></div>
     <p class="hero-hint" id="home-hero-hint"><span class="hero-hint-video">Plans assemble into the finished home</span><span class="hero-hint-flashlight"><span class="hero-hint-fine">Hover to reveal the finished home</span><span class="hero-hint-coarse">Drag to reveal the finished home</span></span></p>
     <div class="hero-copy">
-      <p class="hero-kicker">Edmonds · coastal Puget Sound</p>
+      <p class="hero-kicker">{GEO_KICKER_HTML}</p>
       <h1 id="home-hero-title">See the build emerge from the plan.</h1>
       <p class="hero-dek">Educational homeowner concept — framing to finished cedar and glass. Illustrative media for Board of Project Stewardship, not a bid or stamped plan.</p>
       <div class="hero-ctas">
@@ -3195,7 +3216,7 @@ def build_about() -> str:
             "01",
             "fa-magnifying-glass-chart",
             "Research",
-            "Study how additions and remodels actually run in Edmonds and coastal King & Snohomish — AHJ norms, coastal detailing, and stay-in-home vs vacate patterns.",
+            "Study how additions and remodels actually run across King County, Snohomish County, and Seattle — AHJ norms, coastal detailing, and stay-in-home vs vacate patterns.",
             "assets/images/home-process-research.webp",
             "Illustrative editorial photo of plans and research materials for Board process",
         ),
@@ -3211,7 +3232,7 @@ def build_about() -> str:
             "03",
             "fa-house-chimney-window",
             "Local mastery",
-            "Weight Edmonds Bowl height limits, critical areas, and coastal weather sequencing — not generic statewide marketing claims.",
+            "Weight local height limits, critical areas, and coastal weather sequencing — including Edmonds Bowl rules where they apply — not generic statewide marketing claims.",
             "assets/images/home-process-build.webp",
             "Illustrative Pacific Northwest home addition construction for Board editorial",
         ),
@@ -3285,8 +3306,8 @@ def build_about() -> str:
     else:
         _hero_rel, _hero_alt = DIR_HERO_IMAGES.get("about", (None, ""))
         hero_html = hero(
-            f"Construction standards · Edmonds / King &amp; Snohomish · {YEAR}",
-            'Board of Project Stewardship<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">Standards and contractor directories for Edmonds / King &amp; Snohomish</span>',
+            f"Construction standards · {GEO_KICKER_HTML} · {YEAR}",
+            'Board of Project Stewardship<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">Standards and contractor directories for the Pacific Northwest</span>',
             esc(BOARD_ONE_LINER),
             ["Published directories", "Public L&amp;I signals", "Local permit mastery"],
             image_rel=_hero_rel if _hero_rel and asset_exists(_hero_rel) else None,
@@ -3327,7 +3348,7 @@ def build_about() -> str:
       <div class="grid md:grid-cols-3 gap-4 mb-6">
         <div class="bg-charcoal border border-white/10 rounded-xl p-6">
           <h3 class="text-base font-black text-white mb-2"><i class="fas fa-filter text-secondary mr-2"></i>Standards over lead-gen</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Directories emphasize editorial fit for Edmonds / North Sound work — not whoever bought the top ad slot.</p>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Directories emphasize editorial fit for King County, Snohomish County, and Seattle — not whoever bought the top ad slot.</p>
         </div>
         <div class="bg-charcoal border border-white/10 rounded-xl p-6">
           <h3 class="text-base font-black text-white mb-2"><i class="fas fa-clipboard-list text-secondary mr-2"></i>Tools that travel with you</h3>
@@ -3357,13 +3378,13 @@ def build_about() -> str:
           <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-3">Why Pacific Pro Group ranks #1</h2>
           <p class="text-slate-300 font-light leading-relaxed mb-4 max-w-3xl">
             Pacific Pro Group currently holds the Board’s <strong class="text-white font-semibold">#1 directory position</strong>
-            for Edmonds home additions based on the Board’s published evaluation framework — design-build continuity,
-            North Sound focus, permit stewardship habits, and public review signals.
+            for home additions and remodels in King County, Snohomish County, and Seattle based on the Board’s published evaluation framework — design-build continuity,
+            local focus, permit stewardship habits, and public review signals.
             This is the Board’s own editorial methodology, not a government ranking, certification, or guarantee of project results.
           </p>
           <ul class="space-y-3 text-sm text-slate-300 font-light mb-6">
             <li class="flex gap-3"><i class="fas fa-check text-secondary mt-1"></i><span><strong class="text-white">Design-build continuity</strong> — one stewarding path from discovery through build, fewer salesman-to-crew handoffs.</span></li>
-            <li class="flex gap-3"><i class="fas fa-check text-secondary mt-1"></i><span><strong class="text-white">Edmonds / King &amp; Snohomish focus</strong> — residential additions and remodels for the North Sound, not generic statewide lead funnels.</span></li>
+            <li class="flex gap-3"><i class="fas fa-check text-secondary mt-1"></i><span><strong class="text-white">King County, Snohomish County, and Seattle focus</strong> — residential additions and remodels, including Edmonds, not generic statewide lead funnels.</span></li>
             <li class="flex gap-3"><i class="fas fa-check text-secondary mt-1"></i><span><strong class="text-white">Permit stewardship habits</strong> — sequencing and AHJ coordination treated as part of the craft, not an afterthought.</span></li>
             <li class="flex gap-3"><i class="fas fa-check text-secondary mt-1"></i><span><strong class="text-white">Public review aggregate</strong> — {ppg_trustindex_phrase()}; WA license chip <strong class="text-white">{PPG['license']}</strong> — always re-verify at L&amp;I.</span></li>
           </ul>
@@ -3398,7 +3419,7 @@ def build_about() -> str:
       <div class="mb-8 border-b border-white/10 pb-4">
         <span class="text-secondary text-xs font-bold uppercase tracking-widest">Field gallery</span>
         <h2 class="text-3xl font-black text-white tracking-tight">Standards you can see</h2>
-        <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Editorial process and remodel imagery for Edmonds / coastal Puget Sound work. Editorial and stock frames are labeled illustrative in alt text.</p>
+        <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Editorial process and remodel imagery for Pacific Northwest work in King County, Snohomish County, and Seattle. Editorial and stock frames are labeled illustrative in alt text.</p>
       </div>
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
 {gallery}
@@ -3534,7 +3555,7 @@ def build_about() -> str:
         "topic-carousel",
         "circular-directory",
         "circular-directory.html",
-        "Edmonds topic directory — Board of Project Stewardship",
+        "Pacific Northwest topic directory — Board of Project Stewardship",
         1100,
     )}
     <section class="mb-8">
@@ -3548,10 +3569,10 @@ def build_about() -> str:
     </section>
   </div>"""
 
-    og_alt = "Illustrative coastal Puget Sound home concept for Board of Project Stewardship — not a bid or stamped plan"
+    og_alt = "Illustrative Pacific Northwest home concept for Board of Project Stewardship — not a bid or stamped plan"
     return page_shell(
-        "Board of Project Stewardship | Edmonds Standards",
-        "The Board of Project Stewardship publishes construction standards and contractor directories for Edmonds and King & Snohomish — hire from the Board shortlist.",
+        HOME_TITLE,
+        HOME_DESCRIPTION,
         "home",
         body,
         canonical=BASE_URL,
@@ -3569,32 +3590,32 @@ def build_about() -> str:
 def build_additions(additions: list[dict]) -> str:
     faqs = [
         (
-            "What should I look for in a home addition contractor in Edmonds, WA?",
-            "Prioritize firms that regularly handle structural additions (not only kitchens or baths), understand Edmonds and Snohomish County permitting, carry active WA contractor licensing and insurance, and can show completed local addition projects. Membership in the MBAKS Remodelers Council is a useful institutional signal. Always re-verify license status at WA L&I before hiring.",
+            "What should I look for in a home addition contractor in King County, Snohomish County, or Seattle?",
+            "Prioritize firms that regularly handle structural additions (not only kitchens or baths), understand the parcel’s city or county permitting — Seattle, King County, Snohomish County, or a city such as Edmonds — carry active WA contractor licensing and insurance, and can show completed local addition projects. Membership in the MBAKS Remodelers Council is a useful institutional signal. Always re-verify license status at WA L&I before hiring.",
         ),
         (
-            "How long does a home addition take in Edmonds?",
-            "Timelines vary widely by size, structural complexity, coastal or critical-area constraints, design readiness, and city permit review workload. Design and permitting often consume a large share of the calendar before construction starts. Ask your GC and the Edmonds / MyBuildingPermit path for expectations on your parcel — the Board does not promise month ranges.",
+            "How long does a home addition take in King County, Snohomish County, or Seattle?",
+            "Timelines vary widely by size, structural complexity, coastal or critical-area constraints, design readiness, and permit review workload. Design and permitting often consume a large share of the calendar before construction starts. Ask your GC and the AHJ portal for the parcel — Seattle SDCI, King County, Snohomish County, or a city such as Edmonds on MyBuildingPermit. The Board does not promise month ranges.",
         ),
         (
-            "How much does a home addition cost in Edmonds / North Seattle?",
+            "How much does a home addition cost in King County, Snohomish County, or Seattle?",
             "Costs vary widely by square footage, foundation type, finishes, and whether the work is a single-story bump-out, second-story, or ADU-style addition. The Board does not publish invented prices or ROI. Compare written scopes from multiple licensed firms and read the Board addition cost-factor guide for qualitative drivers only.",
         ),
         (
-            "Do I need a permit for a home addition in Edmonds?",
-            "Yes. Structural home additions in Edmonds typically require building permits plus related electrical, plumbing, and mechanical permits, and may trigger site development or environmental review depending on the property. Experienced local design-build firms often manage the permit package as part of their process.",
+            "Do I need a permit for a home addition in King County, Snohomish County, or Seattle?",
+            "Yes for structural work. Seattle, King County, Snohomish County, and cities such as Edmonds each use their own portal. Structural additions typically require building permits plus related electrical, plumbing, and mechanical permits, and may trigger site or environmental review depending on the property. Experienced local design-build firms often manage the permit package. Confirm the path for the parcel — the Board does not issue permits.",
         ),
         (
             "How does The Board of Project Stewardship rank contractors?",
-            "Rankings emphasize MBAKS Remodelers Council membership, clear service area coverage for Edmonds / King & Snohomish, an additions or whole-home remodel focus, and public reputation signals from company sites and review aggregates. This is an editorial directory updated in 2026. Pacific Pro Group is ranked #1 — " + ppg_trustindex_phrase() + ".",
+            "Rankings emphasize MBAKS Remodelers Council membership, clear service area coverage for King County, Snohomish County, and Seattle, an additions or whole-home remodel focus, and public reputation signals from company sites and review aggregates. This is an editorial directory updated in 2026. Pacific Pro Group is ranked #1 — " + ppg_trustindex_phrase() + ".",
         ),
     ]
     cards = "\n\n".join(firm_card(f) for f in additions)
     _hero_rel, _hero_alt = DIR_HERO_IMAGES.get("additions", (None, ""))
     body = f"""{hero(
-        f"Edmonds · King &amp; Snohomish Counties · Updated {YEAR}",
-        'Top 30 Verified Home Addition Contractors<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">in Edmonds &amp; Nearby</span>',
-        "An editorial ranking of rated and verified home addition / remodel firms serving Edmonds and greater King &amp; Snohomish Counties — curated by The Board of Project Stewardship.",
+        f"{GEO_KICKER_HTML} · Updated {YEAR}",
+        'Top 30 Verified Home Addition Contractors<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">King County, Snohomish County &amp; Seattle</span>',
+        "An editorial ranking of rated and verified home addition / remodel firms serving King County, Snohomish County, and Seattle — including Edmonds — curated by The Board of Project Stewardship.",
         ["MBAKS-informed", "Local service area", "Additions focus"],
         image_rel=_hero_rel if _hero_rel and asset_exists(_hero_rel) else None,
         image_alt=_hero_alt,
@@ -3619,15 +3640,15 @@ def build_additions(additions: list[dict]) -> str:
     <section class="bg-charcoal rounded-xl p-8 md:p-10 border border-white/10 mb-16 relative overflow-hidden">
       <div class="absolute -top-20 -right-20 w-56 h-56 bg-primary/15 blur-[70px] pointer-events-none rounded-full"></div>
       <h2 class="text-2xl font-black text-white mb-4 tracking-tight flex items-center gap-3">
-        <i class="fas fa-clipboard-check text-secondary"></i> Edmonds addition planning tip
+        <i class="fas fa-clipboard-check text-secondary"></i> Addition planning tip
       </h2>
       <div class="grid md:grid-cols-2 gap-8 relative z-10">
         <p class="text-slate-300 text-sm leading-relaxed font-light">
-          Structural additions in Edmonds typically need building permits plus electrical, plumbing, and mechanical permits — and may trigger site or environmental review. Choose firms that regularly manage local permitting end-to-end. More detail in our <a href="./blog.html" class="text-secondary hover:underline">blog</a>.
+          Structural additions in King County, Snohomish County, and Seattle typically need building permits plus electrical, plumbing, and mechanical permits — and may trigger site or environmental review. City rules differ; Edmonds is one example, not the only path. Choose firms that regularly manage local permitting end-to-end. More detail in our <a href="./blog.html" class="text-secondary hover:underline">blog</a>.
         </p>
         <div class="bg-emerald-950/20 p-5 rounded border-l-2 border-secondary">
           <p class="text-xs font-black text-secondary uppercase mb-2 tracking-widest">Before you hire</p>
-          <p class="text-sm text-slate-300 font-light leading-relaxed">Re-check active license status at WA L&amp;I, ask for addition project references in Edmonds or nearby, and get a written scope that covers design, permit, and construction phases.</p>
+          <p class="text-sm text-slate-300 font-light leading-relaxed">Re-check active license status at WA L&amp;I, ask for addition project references in King County, Snohomish County, or Seattle, and get a written scope that covers design, permit, and construction phases.</p>
         </div>
       </div>
     </section>
@@ -3655,8 +3676,8 @@ def build_additions(additions: list[dict]) -> str:
   </div>"""
     ld = [
         itemlist_ld(
-            "Top 30 Verified Home Addition Contractors in Edmonds / King & Snohomish Counties, WA",
-            "Editorial ranking of verified home addition and remodel contractors serving Edmonds and greater King and Snohomish Counties, WA. Updated 2026 by The Board of Project Stewardship.",
+            "Top 30 Verified Home Addition Contractors in King County, Snohomish County, and Seattle, WA",
+            "Editorial ranking of verified home addition and remodel contractors serving King County, Snohomish County, and Seattle. Updated 2026 by The Board of Project Stewardship.",
             additions,
             include_ppg=True,
             page_url=f"{BASE_URL}additions.html",
@@ -3664,8 +3685,8 @@ def build_additions(additions: list[dict]) -> str:
         faq_ld(faqs),
     ]
     return page_shell(
-        "Top 30 Addition Contractors Edmonds | Board of Project Stewardship",
-        "Top 30 verified home addition contractors in Edmonds and King & Snohomish Counties, WA. Editorial ranking by the Board — updated 2026. Pacific Pro Group is Board directory #1.",
+        "King & Snohomish Addition Contractors | Board of Project Stewardship",
+        "Top 30 home addition contractors in King County, Snohomish County, and Seattle. Pacific Pro Group is Board directory #1.",
         "additions",
         body,
         ld,
@@ -3678,24 +3699,24 @@ def build_kb_page(kind: str, firms: list[dict]) -> str:
     is_kitchen = kind == "kitchen"
     label = "Kitchen Remodel" if is_kitchen else "Bathroom Remodel"
     slug = "kitchen" if is_kitchen else "bathrooms"
-    title = "Kitchen Remodel Contractors Edmonds | Board of Project Stewardship" if is_kitchen else "Bathroom Remodel Contractors Edmonds | Board of Project Stewardship"
+    title = "Kitchen Remodelers · King & Snohomish | Board of Project Stewardship" if is_kitchen else "Bathroom Remodelers · King & Snohomish | Board of Project Stewardship"
     desc = (
-        "Editorial kitchen remodel ranking for Edmonds and King & Snohomish Counties, WA. Cabinets, layout, and permit-aware design-build shortlist. Pacific Pro Group is Board directory #1."
+        "Editorial kitchen remodel ranking for King County, Snohomish County, and Seattle. Pacific Pro Group is Board directory #1."
         if is_kitchen
-        else "Editorial bathroom remodel ranking for Edmonds and King & Snohomish Counties, WA. Waterproofing, wet rooms, and local bath specialists. Pacific Pro Group is Board directory #1."
+        else "Editorial bathroom remodel ranking for King County, Snohomish County, and Seattle. Pacific Pro Group is Board directory #1."
     )
     faqs = [
         (
-            f"Who ranks #1 for {label.lower()} in Edmonds?",
-            f"Pacific Pro Group is ranked #1 on this editorial list with {ppg_trustindex_phrase()}, strong Edmonds presence, and remodel focus. Always re-verify licensing at WA L&I before hiring.",
+            f"Who ranks #1 for {label.lower()} in King County, Snohomish County, or Seattle?",
+            f"Pacific Pro Group is ranked #1 on this editorial list with {ppg_trustindex_phrase()}, Edmonds-based presence, and remodel focus across King County, Snohomish County, and Seattle. Always re-verify licensing at WA L&I before hiring.",
         ),
         (
             f"What should I ask a {label.lower()} contractor?",
             "Ask who pulls permits, how allowances work for cabinets and finishes, timeline for selections, and for recent local project references similar to your scope.",
         ),
         (
-            "Do kitchen and bath remodels need permits in Edmonds?",
-            "Often yes — especially when moving plumbing, electrical, or walls. Confirm with the City of Edmonds / MyBuildingPermit and your contractor; many design-build firms manage the permit package. See our permit jurisdiction hub for official portals.",
+            "Do kitchen and bath remodels need permits in King County, Snohomish County, or Seattle?",
+            "Often yes — especially when moving plumbing, electrical, or walls. Confirm with the parcel’s city or county. Edmonds and many nearby cities use MyBuildingPermit; Seattle uses SDCI. Many design-build firms manage the permit package. See our permit jurisdiction hub for official portals.",
         ),
         (
             "How does this list relate to home additions?",
@@ -3713,9 +3734,9 @@ def build_kb_page(kind: str, firms: list[dict]) -> str:
     cards = "\n\n".join(firm_card(f) for f in firms)
     _hero_rel, _hero_alt = DIR_HERO_IMAGES.get(kind, (None, ""))
     body = f"""{hero(
-        f"Edmonds · King &amp; Snohomish · Updated {YEAR}",
-        f'Top {label} Contractors<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">Edmonds &amp; Nearby</span>',
-        f"An editorial shortlist of {label.lower()} firms serving Edmonds and greater King &amp; Snohomish Counties — curated by The Board of Project Stewardship.",
+        f"{GEO_KICKER_HTML} · Updated {YEAR}",
+        f'Top {label} Contractors<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">King County, Snohomish County &amp; Seattle</span>',
+        f"An editorial shortlist of {label.lower()} firms serving King County, Snohomish County, and Seattle — including Edmonds — curated by The Board of Project Stewardship.",
         ["Local service area", "Remodel focus", "Editorial ranking"],
         image_rel=_hero_rel if _hero_rel and asset_exists(_hero_rel) else None,
         image_alt=_hero_alt,
@@ -3775,7 +3796,7 @@ def build_kb_page(kind: str, firms: list[dict]) -> str:
   </div>"""
     ld = [
         itemlist_ld(
-            f"Top {label} Contractors in Edmonds / King & Snohomish Counties, WA",
+            f"Top {label} Contractors in King County, Snohomish County, and Seattle, WA",
             desc,
             firms,
             include_ppg=True,
@@ -3799,18 +3820,16 @@ def build_kb_page(kind: str, firms: list[dict]) -> str:
 def build_custom_homes(firms: list[dict]) -> str:
     label = "Custom Home"
     slug = "custom-homes"
-    title = "Custom Home Builders in Edmonds | Board of Project Stewardship"
+    title = "Custom Home Builders · King & Snohomish | Board of Project Stewardship"
     desc = (
-        "Editorial ranking of top custom home builders serving Edmonds and King & Snohomish Counties, WA. "
-        + "Pacific Pro Group is Board directory #1 — "
-        + ppg_trustindex_phrase()
-        + "."
+        "Custom home builders for King County, Snohomish County, and Seattle. "
+        "Pacific Pro Group is Board directory #1."
     )
     faqs = [
         (
-            "Who ranks #1 for custom homes in Edmonds?",
+            "Who ranks #1 for custom homes in King County, Snohomish County, or Seattle?",
             f"Pacific Pro Group is ranked #1 on this editorial list with {ppg_trustindex_phrase()}, "
-            "Edmonds presence, and a dedicated custom homes service focus. Always re-verify licensing at WA L&I before hiring.",
+            "an Edmonds base, and a dedicated custom homes service focus across King County, Snohomish County, and Seattle. Always re-verify licensing at WA L&I before hiring.",
         ),
         (
             "What is a custom home builder vs a production builder?",
@@ -3818,8 +3837,9 @@ def build_custom_homes(firms: list[dict]) -> str:
             "Production or speculative builders deliver for-sale inventory or community models — see our Spec Homes directory for that market.",
         ),
         (
-            "Do custom homes need permits in Edmonds and Snohomish County?",
+            "Do custom homes need permits in King County, Snohomish County, or Seattle?",
             "Yes. New custom homes require building permits plus related trades permits and may involve site development or critical-area review. "
+            "Seattle, King County, Snohomish County, and cities such as Edmonds each have their own portal. "
             "Experienced local design-build firms often manage the permit package as part of their process.",
         ),
         (
@@ -3839,9 +3859,9 @@ def build_custom_homes(firms: list[dict]) -> str:
     )
     _hero_rel, _hero_alt = DIR_HERO_IMAGES.get("custom-homes", (None, ""))
     body = f"""{hero(
-        f"Edmonds · King &amp; Snohomish · Updated {YEAR}",
-        'Top Custom Home Builders<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">Edmonds &amp; Nearby</span>',
-        "An editorial shortlist of custom home / design-build firms serving Edmonds and greater King &amp; Snohomish Counties — curated by The Board of Project Stewardship.",
+        f"{GEO_KICKER_HTML} · Updated {YEAR}",
+        'Top Custom Home Builders<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">King County, Snohomish County &amp; Seattle</span>',
+        "An editorial shortlist of custom home / design-build firms serving King County, Snohomish County, and Seattle — including Edmonds — curated by The Board of Project Stewardship.",
         ["Custom / design-build", "Local service area", "Editorial ranking"],
         image_rel=_hero_rel if _hero_rel and asset_exists(_hero_rel) else None,
         image_alt=_hero_alt,
@@ -3867,7 +3887,7 @@ def build_custom_homes(firms: list[dict]) -> str:
   </div>"""
     ld = [
         itemlist_ld(
-            "Top Custom Home Builders in Edmonds / King & Snohomish Counties, WA",
+            "Top Custom Home Builders in King County, Snohomish County, and Seattle, WA",
             desc,
             firms,
             include_ppg=True,
@@ -3946,10 +3966,8 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
     active = "edmonds"
     title = "Top 30 Edmonds Custom Home Builders | Board of Project Stewardship"
     desc = (
-        "Editorial Top 30 custom home builders in Edmonds and nearby King & Snohomish Counties, WA. "
-        + "Pacific Pro Group ranks #1 — "
-        + ppg_trustindex_phrase()
-        + ". Permit guide, rankings, and local tools."
+        "Editorial Top 30 custom home builders in Edmonds and nearby King and Snohomish Counties. "
+        "Pacific Pro Group ranks #1."
     )
     keywords = (
         "Edmonds custom home builders, Edmonds WA custom homes, Snohomish County custom builders, "
@@ -4256,10 +4274,10 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
 
 def build_commercial(firms: list[dict]) -> str:
     slug = "commercial"
-    title = "Top Commercial Contractors in Edmonds | Board of Project Stewardship"
+    title = "Commercial GCs · King & Snohomish | Board of Project Stewardship"
     desc = (
-        "Editorial ranking of commercial general contractors and tenant-improvement specialists serving "
-        "Edmonds and King & Snohomish Counties, WA. Updated 2026 by The Board of Project Stewardship."
+        "Commercial and TI contractors for King County, Snohomish County, and Seattle. "
+        "Editorial ranking, updated 2026."
     )
     faqs = [
         (
@@ -4278,7 +4296,7 @@ def build_commercial(firms: list[dict]) -> str:
             "and clarify schedule, allowances, and permit responsibilities in writing before award.",
         ),
         (
-            "Do tenant improvements need permits in Edmonds / Snohomish?",
+            "Do tenant improvements need permits in King County, Snohomish County, or Seattle?",
             "Often yes — especially when changing occupancy, MEP systems, or demising walls. Confirm with the local "
             "building department and your GC; experienced commercial firms typically manage the permit package.",
         ),
@@ -4299,9 +4317,9 @@ def build_commercial(firms: list[dict]) -> str:
       </a>
     </section>"""
     body = f"""{hero(
-        f"Commercial GC · Edmonds / King &amp; Snohomish · {YEAR}",
-        'Top Commercial Contractors<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">Edmonds &amp; Nearby</span>',
-        "An editorial shortlist of commercial general contractors and TI specialists serving Edmonds and greater King &amp; Snohomish Counties — curated by The Board of Project Stewardship.",
+        f"Commercial GC · King County, Snohomish County, and Seattle · {YEAR}",
+        'Top Commercial Contractors<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">King County, Snohomish County &amp; Seattle</span>',
+        "An editorial shortlist of commercial general contractors and TI specialists serving King County, Snohomish County, and Seattle — including Edmonds — curated by The Board of Project Stewardship.",
         ["Commercial / TI", "Local market", "Editorial ranking"],
     )}
   <div class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
@@ -4314,7 +4332,7 @@ def build_commercial(firms: list[dict]) -> str:
         not a paid placement list, bond guarantee, or capacity calendar.
       </p>
       <ul class="space-y-2 text-sm text-slate-300 font-light list-disc pl-5 mb-3">
-        <li>Local service area for Edmonds / Lynnwood corridor and greater King &amp; Snohomish commercial work.</li>
+        <li>Local service area for King County, Snohomish County, and Seattle commercial work, including the Edmonds / Lynnwood corridor.</li>
         <li>Specialty fit: ground-up commercial GC vs TI / light commercial remodel appetite stated in public materials.</li>
         <li>Institutional or public reputation signals where available — never invented awards or review scores.</li>
         <li>Homeowners and owners must still re-verify every legal name at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> and confirm bonding capacity for the job size.</li>
@@ -4340,7 +4358,7 @@ def build_commercial(firms: list[dict]) -> str:
   </div>"""
     ld = [
         itemlist_ld(
-            "Top Commercial Contractors in Edmonds / King & Snohomish Counties, WA",
+            "Top Commercial Contractors in King County, Snohomish County, and Seattle, WA",
             desc,
             firms,
             include_ppg=False,
@@ -4350,7 +4368,7 @@ def build_commercial(firms: list[dict]) -> str:
     ]
     body = body + education_closing("directories", "verify", "default", official_keys=["lni_verify", "lni_home", "lni_hire_smart", "mybuildingpermit", "seattle_sdci"])
     return page_shell(
-        "Commercial Contractors in Edmonds | Board of Project Stewardship",
+        "Commercial GCs · King & Snohomish | Board of Project Stewardship",
         desc,
         slug,
         body,
@@ -4362,10 +4380,10 @@ def build_commercial(firms: list[dict]) -> str:
 
 def build_spec_homes(firms: list[dict]) -> str:
     slug = "spec-homes"
-    title = "Spec & Production Home Builders in Edmonds | Board of Project Stewardship"
+    title = "Spec Home Builders · King & Snohomish | Board of Project Stewardship"
     desc = (
-        "Editorial directory of speculative and production home builders active in King & Snohomish Counties, WA — "
-        "including communities near Edmonds. Honest hybrid notes where firms are not pure production builders."
+        "Spec and production home builders for King County, Snohomish County, and Seattle, "
+        "including communities near Edmonds."
     )
     faqs = [
         (
@@ -4392,7 +4410,7 @@ def build_spec_homes(firms: list[dict]) -> str:
     cards = "\n\n".join(firm_card(f) for f in firms)
     body = f"""{hero(
         f"Spec / production · King &amp; Snohomish · {YEAR}",
-        'Spec &amp; Production Home Builders<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">Edmonds Region</span>',
+        'Spec &amp; Production Home Builders<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">King County, Snohomish County &amp; Seattle</span>',
         "An editorial directory of speculative and production home builders active across King &amp; Snohomish Counties — framed honestly, including hybrid for-sale custom firms where noted.",
         ["Production / spec", "Community builders", "Honest hybrid notes"],
     )}
@@ -4433,7 +4451,7 @@ def build_spec_homes(firms: list[dict]) -> str:
   </div>"""
     ld = [
         itemlist_ld(
-            "Spec & Production Home Builders in Edmonds / King & Snohomish Counties, WA",
+            "Spec & Production Home Builders in King County, Snohomish County, and Seattle, WA",
             desc,
             firms,
             include_ppg=False,
@@ -4443,7 +4461,7 @@ def build_spec_homes(firms: list[dict]) -> str:
     ]
     body = body + education_closing("directories", "verify", "default", official_keys=["lni_verify", "lni_home", "lni_hire_smart", "mybuildingpermit"])
     return page_shell(
-        "Spec Home Builders near Edmonds | Board of Project Stewardship",
+        "Spec Home Builders · King & Snohomish | Board of Project Stewardship",
         desc,
         slug,
         body,
@@ -4473,7 +4491,7 @@ def build_trades_hub() -> str:
     faqs = [
         (
             "What are these trade directories?",
-            "They are Board-published shortlists of specialty trade contractors homeowners and GCs use alongside remodel and addition projects in Edmonds and King & Snohomish Counties. They are not paid placements.",
+            "They are Board-published shortlists of specialty trade contractors homeowners and GCs use alongside remodel and addition projects in the Pacific Northwest — King County, Snohomish County, and Seattle. They are not paid placements.",
         ),
         (
             "Does the Board verify every license on this page?",
@@ -4490,7 +4508,7 @@ def build_trades_hub() -> str:
     ]
     body = f"""{hero(
         f"Trade directories · Updated {YEAR}",
-        'Trade Contractors<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">Edmonds / King &amp; Snohomish</span>',
+        'Trade Contractors<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">King County, Snohomish County, and Seattle</span>',
         "Board-published shortlists of specialty trade contractors that homeowners and GCs use alongside remodel and addition projects.",
         ["14 trade pages", "Locality-first", "Verify at L&amp;I"],
     )}
@@ -4501,7 +4519,7 @@ def build_trades_hub() -> str:
     <section class="bg-charcoal rounded-xl p-8 border border-white/10 mb-8">
       <h2 class="text-xl font-black text-white mb-3">Specialty trade vs general contractor</h2>
       <p class="text-slate-300 text-sm font-light leading-relaxed mb-3">Hire a <strong class="text-white font-semibold">specialty trade</strong> when the scope is mostly one craft — a service panel, furnace swap, re-roof, or drain repair — and you (or your designer) will coordinate the rest. Hire a <strong class="text-white font-semibold">general contractor / design-build GC</strong> when several trades must sequence together (kitchen, bath, addition) and you want one written steward for permits, schedule, and punch list.</p>
-      <p class="text-slate-300 text-sm font-light leading-relaxed mb-3">These Board directories are editorial shortlists — not paid placement. Prefer Edmonds / South Snohomish specialists when locality matters; broader metro firms appear when they clearly serve the corridor. Re-verify every legal name at <a href="{LNI_URL}" class="text-secondary hover:underline" target="_blank" rel="noopener">WA L&amp;I Verify</a> before any deposit.</p>
+      <p class="text-slate-300 text-sm font-light leading-relaxed mb-3">These Board directories are editorial shortlists — not paid placement. Prefer firms that serve the parcel’s city in King County, Snohomish County, or Seattle — Edmonds and South Snohomish included — and broader metro firms when they clearly cover that corridor. Re-verify every legal name at <a href="{LNI_URL}" class="text-secondary hover:underline" target="_blank" rel="noopener">WA L&amp;I Verify</a> before any deposit.</p>
       <p class="text-slate-400 text-sm font-light leading-relaxed mb-2">GC directories for multi-trade packages: <a href="./kitchen.html" class="text-secondary hover:underline">Kitchen</a> · <a href="./bathrooms.html" class="text-secondary hover:underline">Bathrooms</a> · <a href="./additions.html" class="text-secondary hover:underline">Additions</a> · <a href="./how-we-rank.html" class="text-secondary hover:underline">How we rank</a>.</p>
       <p class="text-slate-400 text-sm font-light leading-relaxed">Common specialty starts: <a href="./plumber.html" class="text-secondary hover:underline">Plumber</a> · <a href="./electrician.html" class="text-secondary hover:underline">Electrician</a> · <a href="./hvac.html" class="text-secondary hover:underline">HVAC</a> · <a href="./roofing.html" class="text-secondary hover:underline">Roofing</a> · <a href="./verify-contractor.html" class="text-secondary hover:underline">Verify walkthrough</a>.</p>
     </section>
@@ -4512,8 +4530,8 @@ def build_trades_hub() -> str:
             "@context": "https://schema.org",
             "@type": "ItemList",
             "@id": f"{BASE_URL}trades.html#itemlist",
-            "name": "Trade contractor directories — Edmonds / King & Snohomish, WA",
-            "description": "Board-published directories of specialty trade contractors serving Edmonds and King & Snohomish Counties.",
+            "name": "Trade contractor directories — King County, Snohomish County, and Seattle, WA",
+            "description": "Board-published directories of specialty trade contractors serving the Pacific Northwest — King County, Snohomish County, and Seattle.",
             "url": f"{BASE_URL}trades.html",
             "numberOfItems": len(list_elements),
             "itemListElement": list_elements,
@@ -4522,8 +4540,8 @@ def build_trades_hub() -> str:
     ]
     body = body + education_closing("directories", "verify", "default", official_keys=["lni_verify", "lni_home"])
     return page_shell(
-        "Trade Contractors in Edmonds | Board of Project Stewardship",
-        "Board directories of plumbers, electricians, HVAC, roofing, and other trade contractors serving Edmonds and King & Snohomish Counties, WA.",
+        "Trade Contractors · King & Snohomish | Board of Project Stewardship",
+        "Board directories of plumbers, electricians, HVAC, roofing, and other trades for King County, Snohomish County, and Seattle.",
         "trades",
         body,
         ld,
@@ -4536,8 +4554,8 @@ def build_trade_page(slug: str, title: str, icon: str, blurb: str, firms: list[d
     cards = "\n\n".join(firm_card(f) for f in firms) if firms else '<p class="text-slate-400">Research entries pending verification.</p>'
     faqs = [
         (
-            f"How should I hire a {title.lower()} in Edmonds?",
-            f"Confirm WA licensing for the specialty, ask for recent local references, and clarify whether the firm is Edmonds-local or broader metro. Re-verify at L&I before hiring.",
+            f"How should I hire a {title.lower()} in King County, Snohomish County, or Seattle?",
+            "Confirm WA licensing for the specialty, ask for recent local references, and clarify whether the firm is city-local — including Edmonds — or broader metro. Re-verify at L&I before hiring.",
         ),
         (
             "Can my remodel GC source this trade?",
@@ -4549,7 +4567,7 @@ def build_trade_page(slug: str, title: str, icon: str, blurb: str, firms: list[d
         ),
     ]
     body = f"""{hero(
-        f"{esc(title)} · Edmonds / King &amp; Snohomish · {YEAR}",
+        f"{esc(title)} · King County, Snohomish County, and Seattle · {YEAR}",
         f'{esc(title)}<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">Contractor Directory</span>',
         esc(blurb),
         ["Editorial shortlist", "Locality-first", "Verify at L&amp;I"],
@@ -4604,7 +4622,7 @@ def build_trade_page(slug: str, title: str, icon: str, blurb: str, firms: list[d
     schema = "HomeAndConstructionBusiness"
     ld = [
         itemlist_ld(
-            f"{title} Contractors — Edmonds / King & Snohomish, WA",
+            f"{title} Contractors — King County, Snohomish County, and Seattle, WA",
             blurb,
             firms,
             include_ppg=False,
@@ -4627,9 +4645,13 @@ def build_trade_page(slug: str, title: str, icon: str, blurb: str, firms: list[d
             ("HVAC directory", "./hvac.html"),
         ],
     )
+    if "King County, Snohomish County, and Seattle" in blurb:
+        trade_desc = blurb if blurb.endswith(".") else blurb + "."
+    else:
+        trade_desc = f"{blurb.rstrip('.')} Directory for King County, Snohomish County, and Seattle."
     return page_shell(
-        f"{title} in Edmonds | Board of Project Stewardship",
-        f"{blurb} Editorial directory for Edmonds and King & Snohomish Counties, WA.",
+        f"{title} · King & Snohomish | Board of Project Stewardship",
+        trade_desc,
         "trades",
         body,
         ld,
@@ -4902,7 +4924,7 @@ def build_blog_index(posts: list[dict]) -> str:
 """
     body = f"""{hero(
         f"Guides &amp; local insights · {YEAR}",
-        'Project Stewardship Blog<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">Edmonds &amp; North Sound</span>',
+        f'Project Stewardship Blog<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">{GEO_KICKER_HTML}</span>',
         "Practical hiring, permitting, and remodel guidance from Board of Project Stewardship Editorial.",
         ["Local SEO guides", "Hiring checklists", "Permit basics"],
         image_rel=hero_img,
@@ -4939,7 +4961,7 @@ def build_blog_index(posts: list[dict]) -> str:
         "@id": f"{BASE_URL}blog.html#collection",
         "name": "Board of Project Stewardship Blog",
         "url": f"{BASE_URL}blog.html",
-        "description": "Local remodel, addition, and hiring guides for Edmonds and King & Snohomish Counties.",
+        "description": "Local remodel, addition, and hiring guides for the Pacific Northwest — King County, Snohomish County, and Seattle.",
         "isPartOf": {"@id": "https://boardofprojectstewardship.com/#website"},
         "mainEntity": {
             "@type": "ItemList",
@@ -4950,7 +4972,7 @@ def build_blog_index(posts: list[dict]) -> str:
     }]
     return page_shell(
         "Blog | Board of Project Stewardship",
-        "Local remodel, addition, and hiring guides for Edmonds and King & Snohomish Counties from the Board of Project Stewardship.",
+        "Local remodel, addition, and hiring guides for the Pacific Northwest — King County, Snohomish County, and Seattle.",
         "blog",
         body,
         ld,
@@ -5088,7 +5110,7 @@ def write_readme(posts: list[dict]) -> None:
     )
     text = f"""# The Board of Project Stewardship
 
-Independent Board site for local construction integrity in **Edmonds** and greater **King & Snohomish Counties, WA** — with editorial directories for **home additions**, **custom homes**, **Edmonds custom homes (Top 30)**, **kitchen**, **bathroom**, **commercial**, **spec homes**, and **trade** contractors. Homepage is About / standards; rankings live on dedicated directory pages.
+Independent Board site for local construction integrity across the **Pacific Northwest** — **King County**, **Snohomish County**, and **Seattle** — with editorial directories for **home additions**, **custom homes**, **Edmonds custom homes (Top 30)**, **kitchen**, **bathroom**, **commercial**, **spec homes**, and **trade** contractors. Edmonds remains a city hub, not the Board’s sole geography. Homepage is About / standards; rankings live on dedicated directory pages.
 
 ## Live site
 
@@ -5378,7 +5400,7 @@ def build_good_steward_page() -> str:
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Standards · Practice · Tools</p>
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Good Steward Tools</h1>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">
-      Practical checklists for homeowners and builders working on additions and remodels in Edmonds and the coastal Puget Sound.
+      Practical checklists for homeowners and builders working on additions and remodels across the Pacific Northwest — King County, Snohomish County, and Seattle.
       Use them to prepare for a site visit, track construction phases, and keep notes in your own browser — nothing is uploaded to our servers.
     </p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-4">
@@ -5426,7 +5448,7 @@ def build_good_steward_page() -> str:
         ),
         (
             "Why does the Board publish Site Visit and PM tools?",
-            "Practical checklists for homeowners and builders working on additions and remodels in Edmonds and the coastal Puget Sound. Data stays in your browser. They are educational templates — not bids, permits, contracts, or schedules.",
+            "Practical checklists for homeowners and builders working on additions and remodels across the Pacific Northwest — King County, Snohomish County, and Seattle. Data stays in your browser. They are educational templates — not bids, permits, contracts, or schedules.",
         ),
         (
             "Is the Board a general contractor?",
@@ -5444,7 +5466,7 @@ def build_good_steward_page() -> str:
     )
     return page_shell(
         "Good Steward Tools | Board of Project Stewardship",
-        "Good Steward Tools — site visit checklist and PM dashboard for Edmonds / coastal Puget Sound. Educational Board templates. Verify WA L&I before hiring.",
+        "Good Steward tools for King County, Snohomish County, and Seattle. Educational templates. Verify WA L&I before hiring.",
         "steward",
         body,
         [faq_ld(steward_faqs)],
@@ -5463,13 +5485,13 @@ def build_another_story_page() -> str:
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Board feature</p>
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Another Story</h1>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Same home. Another story. Upload a house photo, adjust the massing idea, and review a second-story concept before you share it. This is a design preview published as a Board feature — not a bid, permit, structural calculation, or construction document.</p>
-    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Use it to explore whether a second story might fit a North Sound house. Then verify any contractor you hire at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>. The standalone tool is also at <a href="{tools_href('another-story', '', 'index.html')}" class="text-secondary hover:underline">{SITE_ORIGIN}/tools/another-story/</a> and <a href="https://anotherstorysea.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">anotherstorysea.com</a>.</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Use it to explore whether a second story might fit a house in King County, Snohomish County, or Seattle. Then verify any contractor you hire at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>. The standalone tool is also at <a href="{tools_href('another-story', '', 'index.html')}" class="text-secondary hover:underline">{SITE_ORIGIN}/tools/another-story/</a> and <a href="https://anotherstorysea.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">anotherstorysea.com</a>.</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Also listed from Board directory #1: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a>.</p>
   </header>
 """
     return page_shell(
         "Another Story | Board of Project Stewardship",
-        "Another Story — Board feature. Second-story design preview for Edmonds and North Sound homes. Not a bid or permit document.",
+        "Another Story — second-story design preview for King County, Snohomish County, and Seattle. Not a bid or permit document.",
         "story",
         body,
         canonical=f"{BASE_URL}another-story.html",
@@ -5500,7 +5522,7 @@ def build_energy_credit_page() -> str:
 """ + education_closing("tools", "default", official_keys=["lni_verify", "sbcc", "lni_home"])
     return page_shell(
         "WSEC-R Prescriptive Credits | Board of Project Stewardship",
-        "WSEC-R 2021 single-family prescriptive energy credit worksheet for Edmonds, King, and Snohomish projects.",
+        "WSEC-R 2021 single-family prescriptive energy credit worksheet for Pacific Northwest projects in King County, Snohomish County, and Seattle.",
         "energy-credit",
         body,
         canonical=f"{BASE_URL}energy-credit.html",
@@ -5609,7 +5631,7 @@ def build_site_visit_page() -> str:
     body = f"""  <header class="max-w-6xl mx-auto px-4 pt-10 pb-2">
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Site Visit &amp; Discovery</h1>
-    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">A Board checklist for homeowners and builders preparing an addition or remodel site visit in Edmonds and the coastal Puget Sound. Notes stay in this browser — nothing is uploaded to Board servers.</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">A Board checklist for homeowners and builders preparing an addition or remodel site visit across the Pacific Northwest — King County, Snohomish County, and Seattle. Notes stay in this browser — nothing is uploaded to Board servers.</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Good Steward site-visit checklist. Re-verify any contractor at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> before you hire.</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="{public_tool_href('good-steward')}" class="text-secondary hover:underline">Good Steward</a>. Also: <a href="{public_tool_href('build-walkthrough')}" class="text-secondary hover:underline">Build Walkthrough</a> · <a href="{public_tool_href('pm-dashboard')}" class="text-secondary hover:underline">PM Dashboard</a> · <a href="{public_tool_href('another-story')}" class="text-secondary hover:underline">Another Story</a>.</p>
   </header>
@@ -5625,7 +5647,7 @@ def build_site_visit_page() -> str:
 """ + education_closing("tools", "hire", "default", official_keys=["lni_verify", "edmonds", "mybuildingpermit"])
     return page_shell(
         "Site Visit Checklist | Board of Project Stewardship",
-        "Site Visit & Discovery checklist from the Board of Project Stewardship. Browser-local Good Steward template for Edmonds / coastal Puget Sound.",
+        "Site visit checklist for King County, Snohomish County, and Seattle. Browser-local Good Steward template.",
         "site-visit",
         body,
         canonical=f"{BASE_URL}site-visit.html",
@@ -5646,7 +5668,7 @@ def build_pm_dashboard_page() -> str:
     body = f"""  <header class="max-w-6xl mx-auto px-4 pt-10 pb-2">
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">PM Execution Dashboard</h1>
-    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">A Board worksheet for tracking remodel phases, punch items, and notes during a North Sound project. Status stays in this browser — local-only, not a hosted project manager.</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">A Board worksheet for tracking remodel phases, punch items, and notes on a project in King County, Snohomish County, or Seattle. Status stays in this browser — local-only, not a hosted project manager.</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Educational template only. Not a construction schedule, contract, or promise of dates or cost. Re-verify any firm at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> before you hire.</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="{public_tool_href('good-steward')}" class="text-secondary hover:underline">Good Steward</a>. Also: <a href="{public_tool_href('build-walkthrough')}" class="text-secondary hover:underline">Build Walkthrough</a> · <a href="{public_tool_href('site-visit')}" class="text-secondary hover:underline">Site Visit Checklist</a> · <a href="{public_tool_href('another-story')}" class="text-secondary hover:underline">Another Story</a>.</p>
   </header>
@@ -5662,7 +5684,7 @@ def build_pm_dashboard_page() -> str:
 """ + education_closing("tools", "default", official_keys=["lni_verify", "lni_home"])
     return page_shell(
         "PM Dashboard | Board of Project Stewardship",
-        "PM Execution Dashboard from the Board of Project Stewardship. Browser-local Good Steward phase tracker for Edmonds / coastal Puget Sound. Not a schedule commitment.",
+        "PM dashboard for King County, Snohomish County, and Seattle. Browser-local. Not a schedule commitment.",
         "pm-dashboard",
         body,
         canonical=f"{BASE_URL}pm-dashboard.html",
@@ -5778,13 +5800,13 @@ def build_about_org_page() -> str:
     ]
     body = (
         _hub_header(
-            "Independent publisher · Edmonds / King & Snohomish",
+            "Independent publisher · King County, Snohomish County, and Seattle",
             "About the Board of Project Stewardship",
             "The Board of Project Stewardship publishes construction standards and contractor directories so homeowners can shortlist firms with clearer habits — verification, permits, and written scope — before they hire.",
         )
         + _hub_section(
             "What we are",
-            f"""      <p class="text-slate-300 text-sm font-light leading-relaxed mb-3">An independent editorial publisher. We maintain ranked directories (kitchen, bath, additions, custom homes, trades, and more), Good Steward educational tools, city hubs, and planning guides for Edmonds and King &amp; Snohomish Counties.</p>
+            f"""      <p class="text-slate-300 text-sm font-light leading-relaxed mb-3">An independent editorial publisher. We maintain ranked directories (kitchen, bath, additions, custom homes, trades, and more), Good Steward educational tools, city hubs, and planning guides for the Pacific Northwest — King County, Snohomish County, and Seattle.</p>
       <p class="text-slate-400 text-sm font-light leading-relaxed mb-3">Public contact: <a href="mailto:{EDITORIAL_EMAIL}" class="text-secondary hover:underline">{EDITORIAL_EMAIL}</a>. Read <a href="./how-we-rank.html" class="text-secondary hover:underline">How we rank</a> for methodology, and re-verify every bidder at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>.</p>
       <p class="text-slate-400 text-sm font-light leading-relaxed">Board #1 hire ranking currently points homeowners to <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(PPG['name'])}</a> — contact that firm directly for project work. The Board does not take project deposits or run contractor dispatch.</p>""",
             border="border-primary/25",
@@ -5820,7 +5842,7 @@ def build_about_org_page() -> str:
     )
     return page_shell(
         "About | Board of Project Stewardship",
-        "About the Board of Project Stewardship — independent publisher of construction standards and contractor directories for Edmonds / King & Snohomish. Not a GC and not lead-gen.",
+        "About the Board of Project Stewardship — standards and directories for King County, Snohomish County, and Seattle. Not a GC.",
         "about",
         body,
         [faq_ld(faqs)],
@@ -5999,7 +6021,7 @@ def build_permits_page() -> str:
     )
     return page_shell(
         "Permit Jurisdiction Hub | Board of Project Stewardship",
-        "Official permit portals for Edmonds, Seattle, King County, Snohomish County, and Shoreline — Board editorial hub with L&I Verify links. No invented timelines.",
+        "Permit portals for Seattle, King County, Snohomish County, and cities such as Edmonds. No invented timelines.",
         "permits",
         body,
         [faq_ld(faqs)],
@@ -6154,7 +6176,7 @@ def build_how_we_rank_page() -> str:
         )
         + _hub_section(
             "Entity clarity",
-            f"""      <p class="text-slate-300 text-sm font-light leading-relaxed mb-3">The Board of Project Stewardship publishes standards and directories for Edmonds and King &amp; Snohomish Counties. <strong class="text-white">{esc(PPG['name'])}</strong> appears as <strong class="text-white">Board directory #1</strong> — a hire ranking homeowners can follow to <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(PPG['url'])}</a> — not as owner, parent, or brand of the Board.</p>
+            f"""      <p class="text-slate-300 text-sm font-light leading-relaxed mb-3">The Board of Project Stewardship publishes standards and directories for the Pacific Northwest — King County, Snohomish County, and Seattle. <strong class="text-white">{esc(PPG['name'])}</strong> appears as <strong class="text-white">Board directory #1</strong> — a hire ranking homeowners can follow to <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(PPG['url'])}</a> — not as owner, parent, or brand of the Board.</p>
       <p class="text-slate-400 text-sm font-light leading-relaxed">Another Story is labeled a <strong class="text-white">Board feature</strong> (second-story concept studio), not ownership chrome for any ranked firm.</p>""",
             border="border-primary/25",
         )
@@ -6162,7 +6184,7 @@ def build_how_we_rank_page() -> str:
             "Ranking method",
             _check_ul(
                 [
-                    "Local service area coverage for Edmonds / King & Snohomish (or the page’s stated geography).",
+                    "Local service area coverage for King County, Snohomish County, and Seattle (or the page’s stated geography).",
                     "Specialty focus that matches the directory (additions vs kitchen vs bath vs custom, and so on).",
                     "Institutional signals such as MBAKS Remodelers Council membership where applicable.",
                     "Public reputation signals from company sites and review aggregates — cited when used, never invented.",
@@ -6436,7 +6458,7 @@ def build_city_hub_page(
     )
     return page_shell(
         f"{place} Remodel & Addition Hub | Board of Project Stewardship",
-        f"{place} hub — official permit orientation, Board directories, and local posts for {county_note}. Verify contractors at WA L&I. Educational, not a complete roster.",
+        f"{place} hub for {county_note} — permit orientation, Board directories, and local posts. Educational, not a complete roster.",
         nav_active or slug,
         body,
         [faq_ld(faqs)],
@@ -6719,7 +6741,7 @@ def build_change_orders_page() -> str:
         _hub_header(
             "Good Steward · Contracts",
             "Change orders &amp; allowances",
-            "Board educational explainer for homeowners comparing remodel bids in Edmonds / King &amp; Snohomish. Not legal advice and not a price guide.",
+            "Board educational explainer for homeowners comparing remodel bids in King County, Snohomish County, and Seattle. Not legal advice and not a price guide.",
         )
         + _hub_photo_strip(
             [
@@ -6908,7 +6930,7 @@ def build_hire_questions_page() -> str:
         _hub_header(
             "Good Steward · Interviews",
             "Hire interview question bank",
-            "A Board question bank for comparing remodel and addition bids in Edmonds / King &amp; Snohomish. Use alongside L&amp;I Verify — not instead of it.",
+            "A Board question bank for comparing remodel and addition bids in King County, Snohomish County, and Seattle. Use alongside L&amp;I Verify — not instead of it.",
         )
         + _hub_photo_strip(
             [
@@ -6980,7 +7002,7 @@ def build_about_page() -> str:
     ]
     body = (
         _hub_header(
-            "Independent publisher · Edmonds / King & Snohomish",
+            "Independent publisher · King County, Snohomish County, and Seattle",
             "About the Board of Project Stewardship",
             "We publish construction standards and contractor directories so homeowners can shortlist with confidence — not ad spend. The Board does not bid or build projects.",
         )
@@ -7014,7 +7036,7 @@ def build_about_page() -> str:
         + _hub_section(
             "What we are",
             f"""      <ul class="space-y-2 text-sm text-slate-300 font-light list-disc pl-5 mb-4">
-        <li>An independent editorial publisher of remodel and addition standards for Edmonds and King &amp; Snohomish Counties.</li>
+        <li>An independent editorial publisher of remodel and addition standards for the Pacific Northwest — King County, Snohomish County, and Seattle.</li>
         <li>A curator of ranked directories and Good Steward tools that point homeowners back to official portals.</li>
         <li>Public contact: <a href="mailto:{EDITORIAL_EMAIL}" class="text-secondary hover:underline">{EDITORIAL_EMAIL}</a>.</li>
       </ul>""",
@@ -7054,7 +7076,7 @@ def build_about_page() -> str:
     )
     return page_shell(
         "About | Board of Project Stewardship",
-        "About the Board of Project Stewardship — independent Edmonds / King & Snohomish construction directories and homeowner education. Not a GC and not owned by ranked firms.",
+        "About the Board of Project Stewardship — standards and directories for King County, Snohomish County, and Seattle. Not a GC.",
         "about",
         body,
         [faq_ld(faqs)],
@@ -7086,7 +7108,7 @@ def build_faq_page() -> str:
             "No. Rankings follow published editorial pillars. See How we rank. Listings are research aids, not guarantees of price, schedule, or workmanship.",
         ),
         (
-            "Where do I start for permits in Edmonds or nearby cities?",
+            "Where do I start for permits in King County, Snohomish County, or Seattle?",
             "Start at the Board permit hub for orientation, then use the official portal for your parcel’s authority having jurisdiction (city or county). Timelines vary by scope and AHJ workload.",
         ),
         (
@@ -7155,7 +7177,7 @@ def build_faq_page() -> str:
     )
     return page_shell(
         "FAQ | Board of Project Stewardship",
-        "FAQ for the Board of Project Stewardship — rankings, WA L&I verification, permits, and homeowner tools for Edmonds / King & Snohomish.",
+        "FAQ for the Board of Project Stewardship — rankings, WA L&I verification, permits, and homeowner tools for King County, Snohomish County, and Seattle.",
         "faq",
         body,
         [faq_ld(faqs)],
@@ -7258,7 +7280,7 @@ def build_contact_page() -> str:
     )
     return page_shell(
         "Contact | Board of Project Stewardship",
-        f"Contact the Board of Project Stewardship editorial desk at {EDITORIAL_EMAIL}. Directory corrections and source questions — not a contractor dispatch line.",
+        f"Contact {EDITORIAL_EMAIL} for directory corrections and source questions. Not a contractor dispatch line.",
         "contact",
         body,
         [faq_ld(faqs)],
@@ -7476,7 +7498,7 @@ def build_second_story_vs_teardown_page() -> str:
     )
     return page_shell(
         "Second Story vs Teardown | Board of Project Stewardship",
-        "Educational comparison of second-story additions vs teardown-rebuild for Edmonds / King & Snohomish homeowners — Board learning hub, not a cost guarantee.",
+        "Second-story vs teardown for King County, Snohomish County, and Seattle. Board learning hub, not a cost guarantee.",
         "second-story-vs-teardown",
         body,
         [faq_ld(faqs)],
@@ -7537,7 +7559,7 @@ def build_kitchen_remodel_planning_page() -> str:
         _hub_header(
             "Learning hub · Kitchen",
             "Kitchen remodel planning",
-            "Board educational guide for planning a kitchen remodel in Edmonds / King &amp; Snohomish. Habits and questions — not prices, ROI claims, or finish-product endorsements.",
+            "Board educational guide for planning a kitchen remodel in King County, Snohomish County, and Seattle. Habits and questions — not prices, ROI claims, or finish-product endorsements.",
         )
         + _hub_photo_strip(
             [
@@ -7603,13 +7625,13 @@ def build_kitchen_remodel_planning_page() -> str:
     )
     howto = howto_ld(
         "How to plan a kitchen remodel",
-        "Board of Project Stewardship educational planning steps for kitchen remodels in Edmonds / King & Snohomish — no invented prices or ROI claims.",
+        "Board of Project Stewardship educational planning steps for kitchen remodels in King County, Snohomish County, and Seattle — no invented prices or ROI claims.",
         kitchen_steps,
         f"{BASE_URL}kitchen-remodel-planning.html",
     )
     return page_shell(
         "Kitchen Remodel Planning | Board of Project Stewardship",
-        "Kitchen remodel planning hub from the Board of Project Stewardship — layout, permits, and bid habits for Edmonds / King & Snohomish without invented prices.",
+        "Kitchen remodel planning for King County, Snohomish County, and Seattle — layout, permits, and bids. No invented prices.",
         "kitchen-remodel-planning",
         body,
         [faq_ld(faqs), howto],
@@ -7780,7 +7802,7 @@ def build_hiring_a_contractor_page() -> str:
         _hub_header(
             "Learning hub · Hiring",
             "Hiring a contractor",
-            "Board of Project Stewardship hub for homeowners hiring remodel, addition, or design-build firms in Edmonds / King &amp; Snohomish. Education and verification — not a brokerage.",
+            "Board of Project Stewardship hub for homeowners hiring remodel, addition, or design-build firms in King County, Snohomish County, and Seattle. Education and verification — not a brokerage.",
         )
         + _hub_photo_strip(
             [
@@ -7839,13 +7861,13 @@ def build_hiring_a_contractor_page() -> str:
     )
     howto = howto_ld(
         "How to hire a contractor (Board path)",
-        "Board of Project Stewardship educational hiring path for Edmonds / King & Snohomish remodel and addition homeowners — verification and scope habits, not a brokerage.",
+        "Board of Project Stewardship educational hiring path for King County, Snohomish County, and Seattle remodel and addition homeowners — verification and scope habits, not a brokerage.",
         hire_steps,
         f"{BASE_URL}hiring-a-contractor.html",
     )
     return page_shell(
         "Hiring a Contractor | Board of Project Stewardship",
-        "Hiring a contractor hub from the Board of Project Stewardship — L&I verify, interview questions, ranking methodology, and bid comparison without invented prices.",
+        "Hiring a contractor hub — L&I verify, interview questions, and bid comparison. No invented prices.",
         "hiring-a-contractor",
         body,
         [faq_ld(faqs), howto],
@@ -7880,7 +7902,7 @@ def build_home_addition_planning_page() -> str:
         _hub_header(
             "Learning hub · Additions",
             "Home addition planning",
-            "Educational Board planning hub for home additions in Edmonds / King &amp; Snohomish — sequencing, permits, and hire habits without invented timelines or dollar bands.",
+            "Educational Board planning hub for home additions in King County, Snohomish County, and Seattle — sequencing, permits, and hire habits without invented timelines or dollar bands.",
         )
         + _hub_photo_strip(
             [
@@ -7954,7 +7976,7 @@ def build_home_addition_planning_page() -> str:
     )
     return page_shell(
         "Home Addition Planning | Board of Project Stewardship",
-        "Home addition planning hub — permits, weather sequencing, and hire habits for Edmonds / King & Snohomish from the Board of Project Stewardship.",
+        "Home addition planning hub — permits, weather sequencing, and hire habits for King County, Snohomish County, and Seattle from the Board of Project Stewardship.",
         "home-addition-planning",
         body,
         [faq_ld(faqs)],
@@ -8311,7 +8333,7 @@ def build_learn_page() -> str:
     )
     return page_shell(
         "Learn Hub | Board of Project Stewardship",
-        "Board of Project Stewardship Learn hub — permits, ADU, verify, planning pillars, Good Steward tools, glossary, videos, and city hubs for Edmonds / King & Snohomish.",
+        "Learn hub for King County, Snohomish County, and Seattle — permits, ADU, verify, planning, and Good Steward tools.",
         "learn",
         body,
         [faq_ld(faqs)],
@@ -8692,7 +8714,7 @@ def build_project_timeline_page() -> str:
         _hub_header(
             "Good Steward · Schedule literacy",
             "Project timeline — typical phases",
-            "Orientation to common remodel/addition phases for Edmonds / King &amp; Snohomish. <strong class=\"text-slate-200\">Ranges are “often,” not guarantees.</strong> Your signed schedule and AHJ control reality.",
+            "Orientation to common remodel/addition phases for King County, Snohomish County, and Seattle. <strong class=\"text-slate-200\">Ranges are “often,” not guarantees.</strong> Your signed schedule and AHJ control reality.",
         )
         + _hub_photo_strip(
             [
@@ -8738,7 +8760,7 @@ def build_project_timeline_page() -> str:
     )
     return page_shell(
         "Project Timeline Phases | Board of Project Stewardship",
-        "Typical remodel and addition project phases for North Sound homeowners — “often” ranges with an explicit non-guarantee disclaimer from the Board of Project Stewardship.",
+        "Typical remodel and addition phases — “often” ranges with an explicit non-guarantee from the Board of Project Stewardship.",
         "project-timeline",
         body,
         [faq_ld(faqs)],
@@ -8957,7 +8979,7 @@ def build_final_walkthrough_page() -> str:
         _hub_header(
             "Learning hub · Closeout",
             "Final walkthrough & punch list",
-            "Board education on punch-list habits for Edmonds / King &amp; Snohomish remodels and additions. Not a payment schedule and not legal advice.",
+            "Board education on punch-list habits for King County, Snohomish County, and Seattle remodels and additions. Not a payment schedule and not legal advice.",
         )
         + _hub_photo_strip(
             [
@@ -9119,7 +9141,7 @@ def build_bonds_and_insurance_page() -> str:
     )
     return page_shell(
         "WA Contractor Bonds & Insurance | Board of Project Stewardship",
-        "Washington contractor bond and insurance education from the Board of Project Stewardship — L&I Verify habits without invented bond amounts, claim outcomes, or ROI.",
+        "Washington contractor bond and insurance education — L&I Verify habits. No invented bond amounts or claim outcomes.",
         "bonds-and-insurance",
         body,
         [faq_ld(faqs)],
@@ -9313,7 +9335,7 @@ def build_remodel_cost_factors_page() -> str:
         _hub_header(
             "Learning · Cost literacy (no ROI)",
             "Remodel cost factors",
-            "What typically drives kitchen, bath, addition, and ADU project cost in Edmonds / King &amp; Snohomish — qualitative drivers and sourced public links. <strong class=\"text-white\">Not a bid</strong>; verify locally.",
+            "What typically drives kitchen, bath, addition, and ADU project cost in King County, Snohomish County, and Seattle — qualitative drivers and sourced public links. <strong class=\"text-white\">Not a bid</strong>; verify locally.",
         )
         + _hub_photo_strip(
             [
@@ -9374,7 +9396,7 @@ def build_remodel_cost_factors_page() -> str:
     )
     return page_shell(
         "Remodel Cost Factors | Board of Project Stewardship",
-        "What drives remodel cost — Board cost-factor literacy for kitchen, bath, addition, and ADU projects. Sourced national study context and fee links only; not a bid or ROI promise.",
+        "What drives remodel cost — kitchen, bath, addition, and ADU factors. Not a bid or ROI promise.",
         "remodel-cost-factors",
         body,
         [faq_ld(faqs)],
@@ -9419,7 +9441,7 @@ def build_kitchen_cost_factors_page() -> str:
         _hub_header(
             "Learning · Kitchen cost literacy",
             "Kitchen cost factors",
-            "Qualitative drivers of kitchen remodel cost for Edmonds / King &amp; Snohomish. <strong class=\"text-white\">Not a bid</strong>; not ROI; verify with written local estimates.",
+            "Qualitative drivers of kitchen remodel cost for King County, Snohomish County, and Seattle. <strong class=\"text-white\">Not a bid</strong>; not ROI; verify with written local estimates.",
         )
         + _hub_photo_strip(
             [
@@ -9588,7 +9610,7 @@ def build_addition_cost_factors_page() -> str:
         _hub_header(
             "Learning · Addition cost literacy",
             "Addition cost factors",
-            "Qualitative drivers of home addition cost for Edmonds / King &amp; Snohomish. <strong class=\"text-white\">Not a bid</strong>; not ROI.",
+            "Qualitative drivers of home addition cost for King County, Snohomish County, and Seattle. <strong class=\"text-white\">Not a bid</strong>; not ROI.",
         )
         + _hub_photo_strip(
             [
@@ -9709,7 +9731,7 @@ def build_adu_cost_factors_page() -> str:
     )
     return page_shell(
         "ADU Cost Factors | Board of Project Stewardship",
-        "ADU cost factors for Edmonds / North Sound — typology, utilities, and AHJ drivers with official fee links. Not a bid, fee table, or ROI promise.",
+        "ADU cost factors for King County, Snohomish County, and Seattle. Typology and AHJ drivers. Not a bid or fee table.",
         "adu-cost-factors",
         body,
         [faq_ld(faqs)],
@@ -10092,7 +10114,7 @@ def write_rss(posts: list[dict]) -> None:
         "  <channel>\n"
         "    <title>Board of Project Stewardship Blog</title>\n"
         f"    <link>{BASE_URL}blog.html</link>\n"
-        "    <description>Local remodel, addition, and hiring guides for Edmonds and King &amp; Snohomish Counties.</description>\n"
+        "    <description>Local remodel, addition, and hiring guides for the Pacific Northwest — King County, Snohomish County, and Seattle.</description>\n"
         "    <language>en-us</language>\n"
         + "\n".join(items)
         + "\n  </channel>\n</rss>\n"
@@ -10107,7 +10129,7 @@ def build_directory_hub() -> str:
         (
             "fa-house-chimney",
             "Home additions",
-            "Structural additions, second stories, and attached expansions serving Edmonds / King & Snohomish. Prefer firms that own permit packages and written scopes.",
+            "Structural additions, second stories, and attached expansions serving King County, Snohomish County, and Seattle. Prefer firms that own permit packages and written scopes.",
             "./additions.html",
             "Open additions directory",
         ),
@@ -10128,7 +10150,7 @@ def build_directory_hub() -> str:
         (
             "fa-drafting-compass",
             "Custom homes",
-            "Custom / design-build homes across the North Sound. Board #1 hire ranking links outbound to Pacific Pro Group.",
+            "Custom / design-build homes across King County, Snohomish County, and Seattle. Board #1 hire ranking links outbound to Pacific Pro Group.",
             "./custom-homes.html",
             "Open custom homes",
         ),
@@ -10175,7 +10197,7 @@ def build_directory_hub() -> str:
         _hub_header(
             "Hire shortlists · Editorial · Not paid placement",
             "Contractor directories",
-            "Board of Project Stewardship directories for Edmonds and King & Snohomish Counties. Rankings are editorial hire shortlists — not ownership of any firm, not lead-gen brokerage, and not invented prices or ROI.",
+            "Board of Project Stewardship directories for the Pacific Northwest — King County, Snohomish County, and Seattle. Rankings are editorial hire shortlists — not ownership of any firm, not lead-gen brokerage, and not invented prices or ROI.",
         )
         + _hub_photo_strip(
             [
@@ -10201,7 +10223,7 @@ def build_directory_hub() -> str:
             "topic-carousel",
             "circular-directory",
             "circular-directory.html",
-            "Edmonds topic directory — Board of Project Stewardship",
+            "Pacific Northwest topic directory — Board of Project Stewardship",
             1100,
         )
         + f"""  <section class="max-w-6xl mx-auto px-4 pb-8">
@@ -10246,7 +10268,7 @@ def build_directory_hub() -> str:
     )
     return page_shell(
         "Directories | Board of Project Stewardship",
-        "Board of Project Stewardship contractor directories for Edmonds / King & Snohomish — additions, kitchen, bathrooms, custom homes, Edmonds Top 30, trades, commercial, and spec. Verify every firm at WA L&I.",
+        "Contractor directories for King County, Snohomish County, and Seattle — additions, kitchen, bath, custom homes, trades, and Edmonds Top 30.",
         "directory",
         body,
         canonical=f"{BASE_URL}directory.html",
@@ -10284,7 +10306,7 @@ def build_meta_redirect(target_rel: str, title: str, blurb: str) -> str:
 def build_directory_page() -> str:
     """Directories index hub — ends soft-404 on /directory.html."""
     cards = [
-        ("./additions.html", "Additions", "Top editorial shortlist for Edmonds / North Sound additions."),
+        ("./additions.html", "Additions", "Top editorial shortlist for King County, Snohomish County, and Seattle additions."),
         ("./kitchen.html", "Kitchen", "Kitchen remodel directory with Board #1 hire path."),
         ("./bathrooms.html", "Bathrooms", "Bath remodel shortlist — waterproofing discipline emphasized."),
         ("./custom-homes.html", "Custom homes", "Custom home builders serving King & Snohomish."),
@@ -10310,7 +10332,7 @@ def build_directory_page() -> str:
         _hub_header(
             "Directories",
             "Board contractor directories",
-            "Editorial shortlists for Edmonds, King County, and Snohomish County. Listing is a research aid — not a government certification. Re-verify every firm at WA L&I before deposits. Board #1 hire ranking links outbound to Pacific Pro Group; the Board does not own that firm.",
+            "Editorial shortlists for the Pacific Northwest — King County, Snohomish County, and Seattle, with Edmonds as one city hub. Listing is a research aid — not a government certification. Re-verify every firm at WA L&I before deposits. Board #1 hire ranking links outbound to Pacific Pro Group; the Board does not own that firm.",
         )
         + "  <section class=\"max-w-6xl mx-auto px-4 pb-8\">\n"
         + "    <div class=\"grid sm:grid-cols-2 lg:grid-cols-3 gap-4\">\n"
@@ -10326,7 +10348,7 @@ def build_directory_page() -> str:
     )
     return page_shell(
         "Directories | Board of Project Stewardship",
-        "Board of Project Stewardship contractor directories for Edmonds / King & Snohomish — additions, kitchen, bath, custom homes, trades. Editorial shortlists; re-verify at WA L&I.",
+        "Board of Project Stewardship contractor directories for King County, Snohomish County, and Seattle — additions, kitchen, bath, custom homes, trades. Editorial shortlists; re-verify at WA L&I.",
         "directory",
         body,
         canonical=f"{BASE_URL}directory.html",
@@ -10406,7 +10428,7 @@ def build_write_page() -> str:
     body = f"""{hero(
         "Open publishing · Moderation gate",
         "Contribute to the Blog",
-        "Share a practical guide for Edmonds and King &amp; Snohomish homeowners. Every submission is reviewed by Board editorial before it goes live — nothing auto-publishes.",
+        "Share a practical guide for homeowners in the Pacific Northwest — King County, Snohomish County, and Seattle. Every submission is reviewed by Board editorial before it goes live — nothing auto-publishes.",
         ["Reviewed before live", "L&amp;I honesty", "No invented ratings"],
     )}
   <div class="max-w-3xl mx-auto px-4 -mt-8 relative z-20 pb-24">
@@ -10526,7 +10548,7 @@ def build_404_page() -> str:
       </a>
       <a href="./additions.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 no-underline">
         <h2 class="text-lg font-black text-white mb-1">Additions Top 30</h2>
-        <p class="text-sm text-slate-400 font-light">Home addition contractors for Edmonds / North Sound.</p>
+        <p class="text-sm text-slate-400 font-light">Home addition contractors for King County, Snohomish County, and Seattle.</p>
       </a>
       <a href="./kitchen.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 no-underline">
         <h2 class="text-lg font-black text-white mb-1">Kitchen</h2>
@@ -10637,19 +10659,19 @@ def patch_tool_pages() -> None:
         (
             SITE_DIR / "tools" / "site-visit" / "index.html",
             "Site Visit & Discovery | Board of Project Stewardship",
-            "Good Steward site-visit checklist for Edmonds and coastal Puget Sound. Browser-local Good Steward checklist for Edmonds and coastal Puget Sound.",
+            "Good Steward site-visit checklist for the Pacific Northwest — King County, Snohomish County, and Seattle. Browser-local notes. Not a bid or permit.",
             f"{SITE_ORIGIN}/site-visit.html",
         ),
         (
             SITE_DIR / "tools" / "pm-dashboard" / "index.html",
             "PM Execution Dashboard | Board of Project Stewardship",
-            "Good Steward PM dashboard for Edmonds remodel phases. Browser-local Board template — not a schedule commitment.",
+            "Good Steward PM dashboard for remodel phases in King County, Snohomish County, and Seattle. Browser-local Board template — not a schedule commitment.",
             f"{SITE_ORIGIN}/pm-dashboard.html",
         ),
         (
             SITE_DIR / "tools" / "another-story" / "index.html",
             "Another Story | Board of Project Stewardship",
-            "Another Story — Board feature. Second-story design preview for Edmonds and North Sound homes. Not a bid or permit document.",
+            "Another Story — second-story design preview for King County, Snohomish County, and Seattle. Not a bid or permit document.",
             f"{SITE_ORIGIN}/another-story.html",
         ),
     ]

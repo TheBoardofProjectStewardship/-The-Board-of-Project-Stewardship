@@ -1,7 +1,7 @@
 ---
 title: "Window Replacement Edmonds WA — Coastal Moisture & Permits"
 date: "2026-09-20"
-description: "Edmonds window replacement guide for coastal moisture, flashing details, MyBuildingPermit paths, and how to shortlist licensed window contractors in King and Snohomish."
+description: "Edmonds window replacement guide: coastal moisture, flashing, MyBuildingPermit, and licensed window contractors."
 category: "Guides"
 slug: "window-replacement-edmonds-coastal-wa"
 ---
