@@ -2,7 +2,7 @@
   "version": 1,
   "updated": "2026-09-24",
   "method": "thematic-unique-crop",
-  "gemini_status": "blocked_no_computerUse_on_executor",
+  "gemini_status": "partial-computerUse: 15 Imagen stills (locations+bellevue+everett+redmond+renton) + 1 Veo redmond mp4; remaining wave1/wave2 still crops+YouTube",
   "places": {
     "bellevue": {
       "place": "Bellevue",
@@ -13,24 +13,21 @@
           "alt": "Illustrative Bellevue residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
           "caption": "Bellevue exterior context (illustrative)",
           "role": "context",
-          "source": "assets/images/hubs/hub-edmonds-3.webp",
-          "origin": "unique-crop-reuse"
+          "origin": "gemini-imagen-computerUse-2026-09-24"
         },
         {
           "rel": "assets/images/places/bellevue/bellevue-kitchen-remodel-pnw.webp",
           "alt": "Illustrative kitchen remodel interior for Bellevue homeowners \u2014 PNW materials; not a real Board job photo",
           "caption": "Bellevue kitchen (illustrative)",
           "role": "kitchen",
-          "source": "assets/images/posts/2026-08-21-queen-anne-kitchen-2.webp",
-          "origin": "unique-crop-reuse"
+          "origin": "gemini-imagen-computerUse-2026-09-24"
         },
         {
           "rel": "assets/images/places/bellevue/bellevue-bathroom-remodel-pnw.webp",
           "alt": "Illustrative bathroom remodel scene for Bellevue \u2014 waterproofing-minded PNW context; not a real Board job photo",
           "caption": "Bellevue bathroom (illustrative)",
           "role": "bathroom",
-          "source": "assets/images/posts/2026-08-10-electrical-bath-3.webp",
-          "origin": "unique-crop-reuse"
+          "origin": "gemini-imagen-computerUse-2026-09-24"
         }
       ],
       "video": {
@@ -52,32 +49,28 @@
           "alt": "Illustrative Redmond residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
           "caption": "Redmond exterior context (illustrative)",
           "role": "context",
-          "source": "assets/images/hubs/hub-edmonds-2.webp",
-          "origin": "unique-crop-reuse"
+          "origin": "gemini-imagen-computerUse-2026-09-24"
         },
         {
           "rel": "assets/images/places/redmond/redmond-kitchen-remodel-pnw.webp",
           "alt": "Illustrative kitchen remodel interior for Redmond homeowners \u2014 PNW materials; not a real Board job photo",
           "caption": "Redmond kitchen (illustrative)",
           "role": "kitchen",
-          "source": "assets/images/posts/2026-08-21-queen-anne-kitchen-3.webp",
-          "origin": "unique-crop-reuse"
+          "origin": "gemini-imagen-computerUse-2026-09-24"
         },
         {
           "rel": "assets/images/places/redmond/redmond-bathroom-remodel-pnw.webp",
           "alt": "Illustrative bathroom remodel scene for Redmond \u2014 waterproofing-minded PNW context; not a real Board job photo",
           "caption": "Redmond bathroom (illustrative)",
           "role": "bathroom",
-          "source": "assets/images/posts/2026-08-10-electrical-bath-3.webp",
-          "origin": "unique-crop-reuse"
+          "origin": "gemini-imagen-computerUse-2026-09-24"
         }
       ],
       "video": {
-        "kind": "youtube",
-        "youtube_id": "9hPMWc22oK8",
-        "title": "Bathroom remodel sequencing fundamentals (educational process)",
-        "caption": "Educational construction process video for Redmond planning context \u2014 not a Board project walkthrough or guarantee.",
-        "origin": "youtube-fallback-veo-skipped"
+        "kind": "mp4",
+        "rel": "assets/videos/places/redmond/redmond-process-pnw.mp4",
+        "title": "PNW remodel process context (illustrative)",
+        "caption": "Illustrative construction process clip for Redmond planning context \u2014 not a Board project walkthrough or guarantee."
       },
       "gemini": "skipped",
       "priority": "showcase"
@@ -91,24 +84,21 @@
           "alt": "Illustrative Renton residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
           "caption": "Renton exterior context (illustrative)",
           "role": "context",
-          "source": "assets/images/home-ppg-addition.webp",
-          "origin": "unique-crop-reuse"
+          "origin": "gemini-imagen-computerUse-2026-09-24"
         },
         {
           "rel": "assets/images/places/renton/renton-kitchen-remodel-pnw.webp",
           "alt": "Illustrative kitchen remodel interior for Renton homeowners \u2014 PNW materials; not a real Board job photo",
           "caption": "Renton kitchen (illustrative)",
           "role": "kitchen",
-          "source": "assets/images/posts/2026-08-14-greenwood-kitchen-3.webp",
-          "origin": "unique-crop-reuse"
+          "origin": "gemini-imagen-computerUse-2026-09-24"
         },
         {
           "rel": "assets/images/places/renton/renton-home-addition-pnw.webp",
           "alt": "Illustrative home addition / exterior massing for Renton \u2014 PNW cedar-fir context; not a real Board job photo",
           "caption": "Renton addition (illustrative)",
           "role": "addition",
-          "source": "assets/images/posts/2026-08-20-bothell-addition-2.webp",
-          "origin": "unique-crop-reuse"
+          "origin": "gemini-imagen-computerUse-2026-09-24"
         }
       ],
       "video": {
@@ -910,24 +900,21 @@
           "alt": "Illustrative Everett residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
           "caption": "Everett exterior context (illustrative)",
           "role": "context",
-          "source": "assets/images/home-process-build.webp",
-          "origin": "unique-crop-reuse"
+          "origin": "gemini-imagen-computerUse-2026-09-24"
         },
         {
           "rel": "assets/images/places/everett/everett-kitchen-remodel-pnw.webp",
           "alt": "Illustrative kitchen remodel interior for Everett homeowners \u2014 PNW materials; not a real Board job photo",
           "caption": "Everett kitchen (illustrative)",
           "role": "kitchen",
-          "source": "assets/images/home-ppg-interior.webp",
-          "origin": "unique-crop-reuse"
+          "origin": "gemini-imagen-computerUse-2026-09-24"
         },
         {
           "rel": "assets/images/places/everett/everett-bathroom-remodel-pnw.webp",
           "alt": "Illustrative bathroom remodel scene for Everett \u2014 waterproofing-minded PNW context; not a real Board job photo",
           "caption": "Everett bathroom (illustrative)",
           "role": "bathroom",
-          "source": "assets/images/dir-bathrooms-hero.webp",
-          "origin": "unique-crop-reuse"
+          "origin": "gemini-imagen-computerUse-2026-09-24"
         }
       ],
       "video": {
@@ -1884,24 +1871,21 @@
         "alt": "Illustrative King & Snohomish overview for Board of Project Stewardship Locations hub \u2014 not a real Board job photo",
         "caption": "King & Snohomish overview (illustrative)",
         "role": "context",
-        "source": "assets/images/home-ppg-addition.webp",
-        "origin": "unique-crop-reuse"
+        "origin": "gemini-imagen-computerUse-2026-09-24"
       },
       {
         "rel": "assets/images/places/_locations/locations-kitchen-remodel-pnw.webp",
         "alt": "Illustrative Kitchen remodel context for Board of Project Stewardship Locations hub \u2014 not a real Board job photo",
         "caption": "Kitchen remodel context (illustrative)",
         "role": "kitchen",
-        "source": "assets/images/dir-kitchen-hero.webp",
-        "origin": "unique-crop-reuse"
+        "origin": "gemini-imagen-computerUse-2026-09-24"
       },
       {
         "rel": "assets/images/places/_locations/locations-home-addition-pnw.webp",
         "alt": "Illustrative Home addition context for Board of Project Stewardship Locations hub \u2014 not a real Board job photo",
         "caption": "Home addition context (illustrative)",
         "role": "addition",
-        "source": "assets/images/dir-additions-hero.webp",
-        "origin": "unique-crop-reuse"
+        "origin": "gemini-imagen-computerUse-2026-09-24"
       }
     ],
     "video": {
