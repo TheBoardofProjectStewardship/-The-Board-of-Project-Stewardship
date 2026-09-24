@@ -44,6 +44,7 @@ Base: `https://boardofprojectstewardship.com/`
 | `pm-dashboard.html` | PM Execution Dashboard landing |
 | `energy-credit.html` | WSEC-R energy credits landing |
 | `another-story.html` | Another Story Board feature |
+| `stamp-of-trust/` | Stamp of Trust credential |
 | `blog/rss.xml` | Blog RSS feed |
 | `404.html` | Branded Board 404 |
 | `posts/2026-09-23-bathroom-remodel-bothell-wa.html` | Bathroom Remodel Bothell WA — Moisture, Permits & Licensed Pros |
