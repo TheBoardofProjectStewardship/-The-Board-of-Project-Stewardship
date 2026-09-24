@@ -1,0 +1,3833 @@
+{
+  "version": 1,
+  "updated": "2026-09-24",
+  "uniqueness_lock": "Alex 2026-09-24: Jaccard <0.40 on blurb/kitchen/bathroom/additions; Scout angles spine; no Mad-Libs",
+  "places": [
+    {
+      "slug": "bellevue",
+      "place": "Bellevue",
+      "place_type": "city",
+      "county": "King County",
+      "metro": "Eastside",
+      "county_note": "Eastside · King County",
+      "hub_angle": "A",
+      "title": "Bellevue Remodel Guides: Kitchen, Bath & Additions | Board of Project Stewardship",
+      "meta_description": "Steep-slope toe setbacks under LUC 20.25H and Shoreline Overlay 20.25E on Lake Washington, Lake Sammamish, Phantom Lake, and lower Kelsey Creek shape Bellevue kitchen, bath, and addition sequencing through MyBuildingPermit — Board of Project Stewardship educational guides. Pacific Pro Group is Board #1 hire.",
+      "h1": "Bellevue remodels — city permits, Eastside houses, clear GC hire",
+      "blurb": "Bellevue kitchens and baths remodel under Bellevue Development Services — paperless through MyBuildingPermit — not Seattle SDCI. This Board of Project Stewardship hub separates finish swaps from work that trips LUC 20.25H steep-slope setbacks or Shoreline Overlay 20.25E on Lake Washington, Lake Sammamish, Phantom Lake, or lower Kelsey Creek. Educational only — not a bid or a schedule.",
+      "permit_blurb": "Bellevue Development Services is the AHJ. Building and many land-use filings go through MyBuildingPermit. Mapped landslide or steep-slope parcels can require a Critical Areas Land Use Permit and preapplication under LUC 20.25H; shoreline parcels may also need Shoreline Overlay review. Confirm the live portal for your address — do not assume Seattle SDCI.",
+      "permit_links": [
+        [
+          "City of Bellevue",
+          "https://bellevuewa.gov/"
+        ],
+        [
+          "Bellevue Development Services",
+          "https://bellevuewa.gov/city-government/departments/development-services"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Kitchen remodels under Bellevue’s permit path",
+        "prose": "Bellevue kitchens remodel under a city permit path, not Seattle’s. Layout and finish work can stay light; wall, plumbing, or electrical moves usually need Bellevue Development Services review via MyBuildingPermit. On steep-slope or shoreline-adjacent lots, geotech and critical-areas packets can shape the sequence before cabinets go in. Educational — not a price list.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bathroom remodels in Bellevue’s Eastside houses",
+        "prose": "Eastside houses in Bellevue often have more room than a tight Seattle lot — but waterproofing and ventilation still make or break the bath. Gut vs refresh is a scoped choice; plumbing moves follow city review. Shoreline or critical-areas overlays can add land-use steps even when the wet room itself looks routine.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Bellevue home additions — ground floor or up",
+        "prose": "On many Bellevue lots the first fork is ground bump-out versus second story — different load paths, weather-in, and setback questions. Steep-slope toe setbacks under LUC 20.25H and shoreline buffers on Lake Washington or Lake Sammamish can decide what fits before a GC prices framing. Treat the choice as scoped diligence, not a Board yield promise.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Searchers pairing Bellevue with “kitchen remodel contractor” often also type MyBuildingPermit or LUC 20.25H. Pick a single hire intent, then license-check at WA L&I. Pacific Pro Group is the Board #1 hire outbound link.",
+      "hire_intent_ids": [
+        "hire_find",
+        "kitchen"
+      ],
+      "extra_faqs": [
+        [
+          "Is Bellevue permitted through Seattle SDCI?",
+          "No. Bellevue parcels use Bellevue Development Services (often via MyBuildingPermit). Confirm the live AHJ for your address before design freeze."
+        ],
+        [
+          "Do Eastside Bellevue lots always allow a ground addition?",
+          "No. LUC 20.25H steep-slope setbacks, shoreline overlays, and existing structure still control what fits. Treat bump-out vs second story as a scoped choice with a licensed GC — the Board does not invent lot yields."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Kitchen remodel planning",
+          "./kitchen-remodel-planning.html"
+        ],
+        [
+          "Home addition planning",
+          "./home-addition-planning.html"
+        ],
+        [
+          "King County hub",
+          "./king-county.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "Bellevue Development Services",
+        "stock": "Eastside single-family with suburban lots that often differ from Seattle neighborhood density",
+        "mix": "kitchen and bath work in existing houses; ground additions where lots allow; second stories when structure and setbacks support them",
+        "confusion": "Not Seattle SDCI — Bellevue has its own city permit path"
+      },
+      "ready": true
+    },
+    {
+      "slug": "redmond",
+      "place": "Redmond",
+      "place_type": "city",
+      "county": "King County",
+      "metro": "Eastside",
+      "county_note": "Eastside · King County",
+      "hub_angle": "B",
+      "title": "Redmond Remodel Hub for Eastside Houses | Board of Project Stewardship",
+      "meta_description": "REPS/land.redmond.gov replaces MyBuildingPermit for Redmond parcels; Bear Creek, Evans Creek, Sammamish River, and Lake Sammamish shoreline packets may attach within ~200 ft — Board of Project Stewardship remodel education. Pacific Pro Group ranks Board #1 for hire.",
+      "h1": "Redmond remodels — Overlake-area stock, city review, hire checks",
+      "blurb": "Overlake and Education Hill houses in Redmond file through the city’s REPS ePermitting desk — a solo portal, not the MyBuildingPermit club and not Seattle SDCI. Bear Creek, Evans Creek, the Sammamish River, and Lake Sammamish can pull residential work into shoreline review within about 200 feet. This Board of Project Stewardship page maps kitchen, bath, and addition questions onto those Redmond-only triggers, then how to hire a licensed Washington GC.",
+      "permit_blurb": "Use Redmond ePermitting Service (REPS / land.redmond.gov). Redmond does not share the MyBuildingPermit consortium path many Eastside peers use. Properties within about 200 ft of Bear Creek, Evans Creek, the Sammamish River, or Lake Sammamish may need SSDP or shoreline exemption even for residential work. Critical-areas reports under RZC 21.64 apply when mapped features are present.",
+      "permit_links": [
+        [
+          "City of Redmond",
+          "https://www.redmond.gov/"
+        ],
+        [
+          "Redmond Development Services",
+          "https://www.redmond.gov/179/Development-Services"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Kitchen work where Redmond reviews the parcel",
+        "prose": "Redmond kitchens often start with more continuous floor area than a tight Seattle lot, but wall and MEP moves still trigger city review through REPS. Education Hill and Overlake fabric differ from downtown density — confirm which portal owns your parcel before you freeze layout. No invented cabinet pricing here.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bathrooms in Redmond’s suburban Eastside fabric",
+        "prose": "Wet-area success in Redmond still turns on waterproofing and ventilation, whether the house is 1970s stock or newer Overlake housing. If plumbing relocates, REPS is the intake — not Bellevue’s counter and not Seattle Accela. Shoreline-adjacent parcels may stack SSDP questions on top of the bath permit.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Redmond additions when lot and setbacks allow",
+        "prose": "ADU and addition interest shows up often near Education Hill and larger suburban lots — but Sammamish River or creek shoreline jurisdiction can reshape the envelope before framing. Confirm setbacks and critical-areas reports with Redmond before choosing bump-out vs up. Educational sequencing notes only.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Education Hill and Overlake homeowners typing Redmond + “kitchen remodel contractor” often already know REPS is not MyBuildingPermit. Shoreline packets for Bear or Evans Creek can appear mid-hire. License-check at WA L&I. Pacific Pro Group is Board #1 hire outbound.",
+      "hire_intent_ids": [
+        "design_build",
+        "kitchen"
+      ],
+      "extra_faqs": [
+        [
+          "Does Redmond use MyBuildingPermit?",
+          "No. Redmond uses its own REPS / land.redmond.gov ePermitting path. Confirm the live portal for your parcel."
+        ],
+        [
+          "Which shorelines matter in Redmond?",
+          "Bear Creek, Evans Creek, the Sammamish River, and Lake Sammamish. Work within ~200 ft may need shoreline review even when the remodel feels interior-only."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Hiring a contractor",
+          "./hiring-a-contractor.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ],
+        [
+          "Learn hub",
+          "./learn.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Redmond permit path",
+        "stock": "Eastside suburban fabric near Overlake and the Sammamish River corridor",
+        "mix": "kitchen/bath refreshes in existing houses; additions where lot and setbacks allow",
+        "confusion": "Not Seattle SDCI; confirm Redmond — not Bellevue or county — owns the parcel"
+      },
+      "ready": true
+    },
+    {
+      "slug": "renton",
+      "place": "Renton",
+      "place_type": "city",
+      "county": "King County",
+      "metro": "South King",
+      "county_note": "South King County",
+      "hub_angle": "C",
+      "title": "Renton Kitchen, Bath & Addition Planning | Board of Project Stewardship",
+      "meta_description": "Residential addition checklists in Renton flag coal-mine hazards beside wetlands, steep slopes, and creeks; Highlands mid-century stock differs from valley floor geometry — Board of Project Stewardship planning notes. Hire path: Pacific Pro Group as Board #1.",
+      "h1": "Renton remodels — South King project mix and city hire diligence",
+      "blurb": "Renton remodel decisions often start with project mix — gut bath vs refresh, bump-out vs up — on South King lots that are not Seattle neighborhood footprints. Renton’s residential checklists explicitly flag coal-mine hazards beside wetlands, steep slopes, and creeks, so geotech scope can appear before kitchen demo. This Board of Project Stewardship hub frames those choices under City of Renton review, then how to hire a licensed GC.",
+      "permit_blurb": "City of Renton Permit Services is the AHJ. Residential new/addition checklists call out coal-mine hazards alongside wetlands, steep slopes, and creeks — GIS coalmine layers can trigger professional reports. Waterfront or lands-covered-by-water work may need shoreline exemption plus building permits. SEPA/critical-area tracks can run ahead of building issuance; confirm city vs county for edge parcels.",
+      "permit_links": [
+        [
+          "City of Renton",
+          "https://www.rentonwa.gov/"
+        ],
+        [
+          "Renton Building / Permits",
+          "https://www.rentonwa.gov/city_hall/community_and_economic_development/building_permit_services"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Kitchen planning when Renton’s checklist flags hazards",
+        "prose": "In Renton, kitchen work fails when finishes outrun scope: wall moves, ventilation, and electrical upgrades need a clear plan under city review. Highlands mid-century stock and valley houses do not share the same lot geometry — and mapped coal-mine distance can force a geotech packet before cabinets. Educational only.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bathrooms in Renton’s Highlands and valley stock",
+        "prose": "Highlands baths often sit in mid-century footprints with tighter wet-area clearances than newer valley plats. Waterproofing still decides longevity. If the parcel sits near coal-mine or steep-slope mapping, Renton’s critical-areas track can attach even when the shower remodel looks simple.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Renton additions on hillside and valley lots",
+        "prose": "Hillside additions in Renton commonly meet coal-mine hazard screening and steep-slope study triggers that Seattle ridge neighborhoods do not share. Valley-floor lots trade that for floodplain or creek questions. Choose bump-out vs second story only after the city’s hazard checklist is on the table — not from a Board square-footage guess.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Coal-mine diligence shows up beside “home addition contractor” searches on Renton Highlands and valley addresses. Keep the stem narrow. WA L&I verify every legal name. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "home_addition",
+        "bathroom"
+      ],
+      "extra_faqs": [
+        [
+          "Why do Renton addition checklists mention coal mines?",
+          "Renton’s residential new/addition materials list coal-mine hazards with wetlands, steep slopes, and creeks. City GIS publishes a coalmine critical-areas layer; medium/high mapped distances can require professional reports."
+        ],
+        [
+          "Is Renton the same AHJ as Seattle?",
+          "No. City of Renton Permit Services reviews in-city parcels. Edge lots may still be county — confirm before design freeze."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Hiring a contractor",
+          "./hiring-a-contractor.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ],
+        [
+          "Learn hub",
+          "./learn.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Renton permitting",
+        "stock": "South King mix of mid-century and newer suburban houses near the valley floor",
+        "mix": "kitchen/bath gut-or-refresh; ground additions on larger lots; second stories when structure allows",
+        "confusion": "South King — not Seattle SDCI; confirm city vs county for edge parcels"
+      },
+      "ready": true
+    },
+    {
+      "slug": "kent",
+      "place": "Kent",
+      "place_type": "city",
+      "county": "King County",
+      "metro": "South King",
+      "county_note": "South King County",
+      "hub_angle": "A",
+      "title": "Kent Remodel Guides Under City Review | Board of Project Stewardship",
+      "meta_description": "Kent’s Citizen Permit Portal (not MyBuildingPermit) plus KMC 14.09 flood-hazard rules on Green River valley floors and East Hill mid-century streets — Board of Project Stewardship kitchen/bath/addition orientation. Board #1 outbound hire → Pacific Pro Group.",
+      "h1": "Kent remodels — Green River Valley permits and GC checks",
+      "blurb": "Kent’s Citizen Permit Portal is a home-grown intake for Green River Valley parcels — neither Seattle SDCI nor MyBuildingPermit. Valley floors often sit inside FEMA flood hazard areas under KMC 14.09, and East Hill mid-century streets bring a different geometry. This Board of Project Stewardship hub separates kitchen, bath, and addition planning under that Kent AHJ, then GC hire checks.",
+      "permit_blurb": "Kent runs its own Citizen Permit Portal (permitportal.kentwa.gov) rather than MyBuildingPermit. Green River valley properties often sit in FEMA special flood hazard areas; KMC Chapter 14.09 Flood Hazard Regulations require flood-zone compliance before development. Land-use/environmental permits (critical areas, SEPA, shoreline) are a separate track from residential building permits. Kent’s SMP regulates Green River shoreline jurisdiction — distinct from Eastside lake SMPs.",
+      "permit_links": [
+        [
+          "City of Kent",
+          "https://www.kentwa.gov/"
+        ],
+        [
+          "Kent Permits & Inspections",
+          "https://www.kentwa.gov/city-hall/public-works/permits-inspections"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Kitchens when Kent reviews the parcel",
+        "prose": "When Kent reviews the parcel, kitchen wall and MEP moves follow the city path — not a neighbor city’s portal. East Hill mid-century kitchens and valley multifamily-adjacent stock need different layout honesty. Flood-zone or shoreline stacking on the Green River can change sequence even for interior work. No invented budgets.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath remodels across Kent’s East Hill and valley",
+        "prose": "East Hill baths remodel inside mid-century SFH footprints; valley parcels may add flood-hazard elevation questions that a hillside Eastside bath never sees. Waterproofing remains non-negotiable. Confirm whether building and flood/shoreline tracks both apply before demo.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Kent home additions and Green River constraints",
+        "prose": "Practical additions where zoning and lot allow still meet Green River flood and shoreline jurisdiction on many valley parcels — a different constraint set than Lake Sammamish Eastside cities. East Hill lots trade flood for hillside geometry. Sequence flood review with building permits; the Board does not invent freeboard numbers.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "East Hill bathroom-contractor queries and Green River flood vocabulary both appear in Kent hire traffic. One intent only. Pacific Pro Group is Board #1 hire outbound.",
+      "hire_intent_ids": [
+        "hire_find",
+        "whole_home"
+      ],
+      "extra_faqs": [
+        [
+          "Does Kent use MyBuildingPermit?",
+          "No. Kent uses its own Citizen Permit Portal. Confirm permitportal.kentwa.gov for live intake."
+        ],
+        [
+          "Why does Kent remodel planning mention the Green River?",
+          "Valley parcels often sit in FEMA flood hazard areas and Kent SMP shoreline jurisdiction along the Green River — separate from Eastside lake SMP language."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Hiring a contractor",
+          "./hiring-a-contractor.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ],
+        [
+          "Learn hub",
+          "./learn.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Kent permitting",
+        "stock": "Green River Valley residential fabric mixed with industrial-adjacent corridors",
+        "mix": "practical kitchen/bath remodels; additions where zoning and lot allow",
+        "confusion": "Valley city path — not Seattle; confirm Kent vs county"
+      },
+      "ready": true
+    },
+    {
+      "slug": "auburn",
+      "place": "Auburn",
+      "place_type": "city",
+      "county_note": "South King County",
+      "county": "King County",
+      "metro": "South King",
+      "hub_angle": "A",
+      "title": "Auburn Remodel Notes: White/Green Rivers & City Review | Board of Project Stewardship",
+      "meta_description": "White/Green river shoreline management stacks with a separate floodplain track near the confluence; King vs Pierce parcel county can change accompanying rules — Board of Project Stewardship Auburn education. Board #1 hire link: Pacific Pro Group.",
+      "h1": "Auburn remodels — river confluence diligence, City of Auburn AHJ",
+      "blurb": "Auburn sits where White River and Green River systems shape valley-floor remodels — shoreline management and a separate floodplain track often both apply before kitchen demo. The city spans King and Pierce, so parcel county can change which rules travel with the AHJ. This Board of Project Stewardship page walks kitchen, bath, and addition planning under City of Auburn review without inventing fees or timelines.",
+      "permit_blurb": "City of Auburn Community Development is the AHJ; many building permits file through MyBuildingPermit, with Critical Areas as distinct MBP land-use types needing a consultant’s Critical Areas Report. Shoreline management covers the White/Green system (SSDP and exemptions). Floodplain management resources are published separately — valley-floor remodels near the confluence commonly need both tracks. Confirm King vs Pierce for the parcel.",
+      "permit_links": [
+        [
+          "City of Auburn",
+          "https://www.auburnwa.gov/"
+        ],
+        [
+          "Auburn Building Permits",
+          "https://www.auburnwa.gov/city_hall/community_development/building_permits"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Auburn kitchens on valley-floor and hillside streets",
+        "prose": "Valley-floor Auburn kitchens often meet flood or shoreline stacking that hillside plats skip. Mid-century and newer subdivision stock share city review when walls or MEP move — but cross-county edges mean verifying the parcel’s county before you assume King County habits. Educational layout notes only.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Wet rooms when Auburn floodplain review may stack",
+        "prose": "Bath waterproofing still decides longevity in Auburn — and valley parcels near White/Green flood mapping can require floodplain compliance alongside the plumbing permit. Gut vs refresh remains a scope call. Do not copy Seattle SDCI bath language onto Auburn addresses.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Additions near Auburn’s river confluence geography",
+        "prose": "Wider-lot additions in Auburn subdivisions still collide with wetlands, streams, geologic hazards, and flood hazards under ACC 16.10 when mapped. Shoreline SSDP and floodplain permits can precede framing on confluence-adjacent sites. Confirm city limits and county before treating a bump-out as “just building.”",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Whole-home remodel stems near Auburn collide with White River floodplain wording and King/Pierce edge confusion. Confirm parcel county, then verify licenses. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "adu",
+        "process_timeline"
+      ],
+      "extra_faqs": [
+        [
+          "Can Auburn parcels be in Pierce County?",
+          "Yes. Auburn spans King and Pierce. Confirm parcel county and the live AHJ path before design freeze — rules and portals can differ at the edge."
+        ],
+        [
+          "Are shoreline and floodplain the same permit in Auburn?",
+          "No. Auburn publishes shoreline management and floodplain management as separate tracks; valley-floor work near the White/Green confluence commonly needs both."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "King County hub",
+          "./king-county.html"
+        ],
+        [
+          "Remodel cost factors",
+          "./remodel-cost-factors.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ],
+        [
+          "Verify contractor",
+          "./verify-contractor.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Auburn permitting",
+        "stock": "valley-floor and hillside residential mix in South King",
+        "mix": "kitchen/bath remodels; additions on wider lots; watch county-edge parcels",
+        "confusion": "Near the King/Pierce edge — confirm Auburn city vs other AHJs"
+      },
+      "ready": true
+    },
+    {
+      "slug": "federal-way",
+      "place": "Federal Way",
+      "place_type": "city",
+      "county_note": "South King County",
+      "county": "King County",
+      "metro": "South King · I-5 corridor",
+      "hub_angle": "B",
+      "title": "Federal Way Remodels on Puget Sound Marine Shoreline | Board of Project Stewardship",
+      "meta_description": "Marine SMP for Admiralty Inlet/Central Sound frontage, mandatory upload-link e-submittal, and Dash Point coastal-plateau envelope pressure — Board of Project Stewardship Federal Way guides. Pacific Pro Group = Board #1 hire.",
+      "h1": "Federal Way remodels — marine shoreline rules, I-5 corridor stock",
+      "blurb": "Federal Way’s Shoreline Master Program regulates Puget Sound marine shoreline — Admiralty Inlet / Central Sound frontage — a different remodel constraint set than Bellevue or Kenmore lake AHJs. Envelope-aware kitchens and baths matter on the coastal plateau toward Dash Point. This Board of Project Stewardship hub covers city e-submittal habits, then how to hire a licensed Washington GC.",
+      "permit_blurb": "City of Federal Way Community Development is the AHJ. Electronic document submittal requires requesting an upload link before shoreline/building packages are accepted; public lookup uses Federal Way’s CSDC eNtraprise portal (different UX than Seattle Accela). Even shoreline-exempt work must still comply with SMP standards. Confirm MyBuildingPermit participation vs city e-submittal for your permit type.",
+      "permit_links": [
+        [
+          "City of Federal Way",
+          "https://www.cityoffederalway.com/"
+        ],
+        [
+          "Federal Way Permits",
+          "https://www.cityoffederalway.com/page/permits"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Kitchens in Federal Way’s coastal-plateau suburban stock",
+        "prose": "1970s–1990s suburban kitchens west toward Dash Point face marine-climate envelope pressure Seattle ridge kitchens rarely see. Layout and ventilation still lead; wall moves go through Federal Way intake after you request the upload link. Educational — no invented appliance budgets.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath waterproofing under Federal Way’s marine SMP context",
+        "prose": "Marine exposure raises the stakes on wet-area detailing even inland of OHWM. If the parcel is within shoreline jurisdiction, SMP standards can apply even when the bath itself is “exempt.” Confirm building vs shoreline worksheets before you open walls.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Second-story and bump-out ideas on Federal Way lots",
+        "prose": "Suburban second-story queries are common on I-5 corridor lots — overlays and setbacks still decide feasibility. Marine shoreline jurisdiction (generally landward of OHWM) is not a Lake Washington rulebook. Sequence city review before assuming a vertical addition is the quiet path.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Dash Point marine-climate wording rides along with Federal Way kitchen and bath hire stems. Stay narrow. Pacific Pro Group appears once as Board #1 hire outbound.",
+      "hire_intent_ids": [
+        "whole_home",
+        "stay_vs_move"
+      ],
+      "extra_faqs": [
+        [
+          "Is Federal Way’s shoreline the same as Bellevue’s?",
+          "No. Federal Way’s SMP regulates Puget Sound marine shoreline, not Lake Washington. Remodel constraint sets differ from Eastside lake AHJs."
+        ],
+        [
+          "How do I submit Federal Way permit documents?",
+          "City e-submittal typically requires requesting an upload link before packages are accepted. Confirm the live instructions on Federal Way’s permit pages."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "King County hub",
+          "./king-county.html"
+        ],
+        [
+          "Remodel cost factors",
+          "./remodel-cost-factors.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ],
+        [
+          "Verify contractor",
+          "./verify-contractor.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Federal Way permitting",
+        "stock": "I-5 corridor suburban stock with coastal-plateau weather exposure",
+        "mix": "envelope-aware baths/kitchens; additions where lot and overlays allow",
+        "confusion": "Federal Way city path — not Seattle SDCI"
+      },
+      "ready": true
+    },
+    {
+      "slug": "issaquah",
+      "place": "Issaquah",
+      "place_type": "city",
+      "county_note": "Eastside · King County",
+      "county": "King County",
+      "metro": "Eastside foothills",
+      "hub_angle": "C",
+      "title": "Issaquah Remodels: Lake Sammamish, Creeks & Coal-Mine Hazards | Board of Project Stewardship",
+      "meta_description": "SMP limited to Lake Sammamish plus mainstem and East Fork Issaquah Creek; Chapter 18.802 coal-mine hazard classes can gate grading before kitchen demo — Board of Project Stewardship foothills notes. Pacific Pro Group is Board #1 hire.",
+      "h1": "Issaquah remodels — Alps foothills, creek & lake shoreline diligence",
+      "blurb": "Issaquah SMP jurisdiction is limited to Lake Sammamish, Mainstem Issaquah Creek, and East Fork Issaquah Creek — not Puget Sound. Critical Areas Chapter 18.802 expressly regulates coal-mine hazard areas (declassified / moderate / severe) before building or grading. This Board of Project Stewardship hub frames foothills kitchen, bath, and hillside addition planning under City of Issaquah Development Services.",
+      "permit_blurb": "City of Issaquah Development Services / MyBuildingPermit is the usual building path. On Lake Sammamish, landward shoreline extent may use OHWM elevation 31.76 NAVD88 (or field OHWM by qualified biologist + survey). Coal-mine hazard studies and mitigation can be required before grading. Shoreline environment designations include Lake Sammamish Shoreline Residential, creek residential, Urban Conservancy, and Natural (Tradition Lake Natural Area).",
+      "permit_links": [
+        [
+          "City of Issaquah",
+          "https://www.issaquahwa.gov/"
+        ],
+        [
+          "Issaquah Building",
+          "https://www.issaquahwa.gov/147/Building"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Kitchen remodels in Issaquah Highlands and valley SFH",
+        "prose": "Historic downtown fabric, Highlands plats, and valley SFH do not share one kitchen geometry. Wall moves still need city review. Creek-adjacent or Lake Sammamish shoreline parcels can stack SSDP questions even when the kitchen feels inland. Educational only.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath work when Issaquah critical areas may attach",
+        "prose": "Foothill baths still live or die on waterproofing. If the parcel maps into coal-mine hazard areas under Chapter 18.802, study requirements can precede wet-area demo. Do not assume Bellevue’s counter owns Issaquah addresses.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Hillside additions and ADUs in Issaquah",
+        "prose": "Slope-aware additions and ADU interest are common in the Issaquah Alps foothills — coal-mine hazard mapping and creek shoreline buffers can reshape the envelope before a GC prices foundation work. Confirm critical-areas and SMP designation early; the Board does not invent pad elevations.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Issaquah Alps addition hire traffic names Lake Sammamish shoreline packets or Chapter 18.802 coal-mine classes before cabinet brands. One geo + one intent. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "kitchen",
+        "bathroom"
+      ],
+      "extra_faqs": [
+        [
+          "Which waterbodies does Issaquah’s SMP cover?",
+          "Lake Sammamish, Mainstem Issaquah Creek, and East Fork Issaquah Creek — not Puget Sound marine shoreline."
+        ],
+        [
+          "Why do Issaquah remodel notes mention coal mines?",
+          "Critical Areas Chapter 18.802 regulates coal-mine hazard areas with study and mitigation requirements before building or grading."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Snohomish County hub",
+          "./snohomish-county.html"
+        ],
+        [
+          "Hiring a contractor",
+          "./hiring-a-contractor.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ],
+        [
+          "Edmonds project hub",
+          "./edmonds.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Issaquah Development Services",
+        "stock": "foothill lots with slope and critical-area awareness near the Issaquah Alps",
+        "mix": "careful additions on slopes; kitchen/bath in existing houses",
+        "confusion": "Foothill city path — confirm critical areas; not Bellevue’s counter"
+      },
+      "ready": true
+    },
+    {
+      "slug": "sammamish",
+      "place": "Sammamish",
+      "place_type": "city",
+      "county_note": "Eastside · King County",
+      "county": "King County",
+      "metro": "Sammamish Plateau",
+      "hub_angle": "D",
+      "title": "Sammamish Plateau Remodel Hire & Permit Notes | Board of Project Stewardship",
+      "meta_description": "Hire diligence first on the plateau: Lake Sammamish OHWM setbacks, mandatory critical-areas affidavits, sewer-vs-septic pockets for ADUs — Board of Project Stewardship Sammamish education. Pacific Pro Group listed as Board #1 hire.",
+      "h1": "Sammamish remodels — plateau hire diligence, Lake Sammamish shoreline",
+      "blurb": "On the Sammamish Plateau, family kitchen and bath projects sit in mostly late-20th / 21st century plats — and Lake Sammamish shoreline setbacks measured from OHWM can control waterfront parcels more tightly than Bellevue’s multi-lake overlay. This Board of Project Stewardship hub leads with hire diligence and city shoreline filing habits, then kitchen, bath, and addition sections.",
+      "permit_blurb": "City of Sammamish Community Development / MyBuildingPermit handles shoreline applications (exemption, SSDP, CUP, variance) under Land Use → Shoreline Development. A critical-areas affidavit is a required disclosure even when city maps are advisory. Within shoreline jurisdiction, the more protective of critical-area buffer vs shoreline setback controls. Sammamish’s primary residential shoreline waterbody is Lake Sammamish (no Lake Washington frontage).",
+      "permit_links": [
+        [
+          "City of Sammamish",
+          "https://www.sammamish.us/"
+        ],
+        [
+          "Sammamish Building & Land Use",
+          "https://www.sammamish.us/government/departments/community-development/"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Family kitchens on Sammamish Plateau plats",
+        "prose": "Larger plateau houses often give more room for island layouts than Seattle neighborhood SFH — utilities and setbacks still gate wall moves. File through Sammamish’s city path, not Redmond’s REPS and not King County by default. Educational planning notes only.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bathrooms when plateau critical-areas affidavits apply",
+        "prose": "Wet-area waterproofing remains the longevity driver. Critical-areas affidavits and tree/critical-area realities on the plateau can affect even interior baths when buffers stack with shoreline setbacks. Confirm before you relocate showers.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Bonus rooms and ADUs when Sammamish setbacks allow",
+        "prose": "Bonus-room and ADU intent is common on plateau lots — sewer vs septic pockets and shoreline setbacks from Lake Sammamish OHWM can decide feasibility before framing. Confirm utilities and the more protective buffer rule inside shoreline jurisdiction.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Plateau homeowners searching Sammamish lead with “hire a general contractor” before ADU or kitchen language — and before Lake Sammamish OHWM setbacks. Pacific Pro Group once as Board #1 hire outbound.",
+      "hire_intent_ids": [
+        "home_addition",
+        "second_story"
+      ],
+      "extra_faqs": [
+        [
+          "Does Sammamish have Lake Washington shoreline?",
+          "No. Sammamish’s primary residential shoreline waterbody for docks/bulkheads is Lake Sammamish — unlike Bellevue’s multi-lake overlay."
+        ],
+        [
+          "Are city critical-areas maps final?",
+          "City maps are often advisory; a critical-areas affidavit is still required disclosure, and qualified professionals establish boundaries for permits."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "King County hub",
+          "./king-county.html"
+        ],
+        [
+          "Kitchen remodel planning",
+          "./kitchen-remodel-planning.html"
+        ],
+        [
+          "Home addition planning",
+          "./home-addition-planning.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Sammamish permit path",
+        "stock": "plateau single-family fabric; some pockets still sort sewer vs septic realities",
+        "mix": "kitchen/bath in larger plateau houses; additions when setbacks and utilities support them",
+        "confusion": "Plateau city — not Redmond or King County by default"
+      },
+      "ready": true
+    },
+    {
+      "slug": "mercer-island",
+      "place": "Mercer Island",
+      "place_type": "city",
+      "county_note": "Eastside · King County",
+      "county": "King County",
+      "metro": "Mercer Island · Eastside Points",
+      "hub_angle": "A",
+      "title": "Mercer Island Remodels & Wet-Season Grading Limits | Board of Project Stewardship",
+      "meta_description": "Wet-season grading/foundation ban Oct 1–Apr 1 in landslide/steep-slope/erosion zones unless geotech waiver; Lake Washington shoreline still needs city review when “exempt” — Board of Project Stewardship island guides. Board #1 hire: Pacific Pro Group.",
+      "h1": "Mercer Island remodels — Lake Washington shoreline, seasonal work limits",
+      "blurb": "Mercer Island’s entire shoreline jurisdiction is Lake Washington — and “shoreline exempt” still means city review, not a skip. Land clearing, grading, filling, and foundation work are not permitted Oct 1–Apr 1 in landslide / steep-slope / erosion hazard areas without a Seasonal Development Limitation Waiver backed by geotech. This Board of Project Stewardship hub orients island kitchen, bath, and addition planning around that calendar and bridge-access logistics.",
+      "permit_blurb": "City of Mercer Island Development Services / Permit Submittal Portal is the AHJ. SSDP vs Shoreline Exemption still requires city review. Geological Hazards guidance requires stamped WA-licensed geotech reports in coal-mine/erosion, landslide, steep-slope, seismic, or flood contexts. Shoreline exemptions can carry mitigation planting and multi-season monitoring; WDFW HPA may still apply for in-water work.",
+      "permit_links": [
+        [
+          "City of Mercer Island",
+          "https://www.mercerisland.gov/"
+        ],
+        [
+          "Mercer Island Development Services",
+          "https://www.mercerisland.gov/community-planning-development"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Island kitchens with bridge-access logistics",
+        "prose": "Bridge-only access shapes cabinet deliveries as much as layout on Mercer Island. Mid-century ranches and custom SFH file wall and MEP moves through the island Permit Submittal Portal — never Seattle SDCI. Board of Project Stewardship notes stay educational on sequencing, not pricing.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath remodels when shoreline covenants may attach",
+        "prose": "Waterproofing still leads. Shoreline exemption approvals can require mitigation planting and monitoring covenants that outlast the shower install. Confirm Lake Washington shoreline status before treating a bath as interior-only.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Second-story additions under Mercer Island seasonal limits",
+        "prose": "Second-story and foundation work in mapped landslide/steep-slope/erosion areas collide with the Oct 1–Apr 1 wet-season ban unless a geotech-backed waiver is approved. Sequence grading and foundations around that calendar — the Board does not invent waiver odds.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Island logistics and the Oct–Apr wet-season grading rule color Mercer Island GC hire searches. Bridge access is not Seattle SDCI. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "hire_find",
+        "kitchen"
+      ],
+      "extra_faqs": [
+        [
+          "Does shoreline exemption mean no Mercer Island application?",
+          "No. Exempt work still requires city review. “Exempt” is not “no application.”"
+        ],
+        [
+          "What is the wet-season work ban?",
+          "Land clearing, grading, filling, and foundation work are generally not permitted Oct 1–Apr 1 in landslide/steep-slope/erosion hazard areas (and 10 ft beyond top/toe) without a Seasonal Development Limitation Waiver backed by geotech."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "King County hub",
+          "./king-county.html"
+        ],
+        [
+          "Kitchen remodel planning",
+          "./kitchen-remodel-planning.html"
+        ],
+        [
+          "Home addition planning",
+          "./home-addition-planning.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Mercer Island Development Services",
+        "stock": "island single-family fabric with bridge-access logistics and shoreline-aware parcels",
+        "mix": "kitchen/bath diligence; additions constrained by lot and island rules",
+        "confusion": "Island city counter — not Seattle SDCI even though the bridge leads to Seattle"
+      },
+      "ready": true
+    },
+    {
+      "slug": "kenmore",
+      "place": "Kenmore",
+      "place_type": "city",
+      "county_note": "North King County",
+      "county": "King County",
+      "metro": "Northshore",
+      "hub_angle": "B",
+      "title": "Kenmore Lakeside Remodels: Lake Washington & Swamp Creek | Board of Project Stewardship",
+      "meta_description": "Dual shoreline jurisdiction on Lake Washington and Swamp Creek (still a Shoreline of the State), with preapplication before SSDP/exemption — Board of Project Stewardship Northshore education. Pacific Pro Group remains Board #1 hire.",
+      "h1": "Kenmore remodels — Northshore lakeside stock, dual shoreline diligence",
+      "blurb": "Kenmore SMP shoreline jurisdiction includes Lake Washington and Swamp Creek — a Shoreline of the State that remains under shoreline rules, not only newer citywide stream-buffer programs. Preapplication meetings typically precede SSDP or shoreline exemption filings. This Board of Project Stewardship hub covers Northshore mid-century kitchen and bath work plus shoreline-aware additions along the Burke-Gilman corridor.",
+      "permit_blurb": "City of Kenmore Development Services / MyBuildingPermit is the AHJ for in-city parcels. Shoreline applications generally require a preapplication meeting. City GIS shoreline maps flag Lake Washington and Swamp Creek areas for parcel screening. Kenmore is a MyBuildingPermit partner — a different stack than Redmond’s REPS. Confirm building vs shoreline paths before design freeze.",
+      "permit_links": [
+        [
+          "City of Kenmore",
+          "https://www.kenmorewa.gov/"
+        ],
+        [
+          "Kenmore Building",
+          "https://www.kenmorewa.gov/our-city/city-departments/department-of-development-services"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Northshore kitchens along Kenmore’s lakeside streets",
+        "prose": "Post-war houses along Kenmore’s Burke-Gilman and lakeshore streets remodel kitchens under the city’s MyBuildingPermit desk. Swamp Creek shoreline jurisdiction — still a Shoreline of the State — can trigger preapplication even when the work triangle sits away from Lake Washington. Board of Project Stewardship layout notes stay educational, never a fixture catalog.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath envelope work on Kenmore’s Lake Washington edge",
+        "prose": "Lakeside envelope and wet-area detailing matter on Kenmore’s north tip of Lake Washington. Waterproofing leads; shoreline preapplication may attach when the parcel sits in mapped shoreline jurisdiction. Gut vs refresh stays a scope call.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Shoreline-aware additions in Kenmore",
+        "prose": "Additions near Lake Washington or Swamp Creek stack building permits with shoreline review — confirm buffers and OHWM early. Inland Northshore lots trade shoreline for ordinary setbacks. Sequence preapplication before assuming a bump-out is building-only.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Burke-Gilman / lakeshore envelope phrases sit beside Kenmore kitchen hire stems; Swamp Creek shoreline still counts. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "design_build",
+        "home_addition"
+      ],
+      "extra_faqs": [
+        [
+          "Does Kenmore only regulate Lake Washington shoreline?",
+          "No. Kenmore SMP jurisdiction includes Lake Washington and Swamp Creek; Swamp Creek remains under shoreline rules, not only newer stream-buffer programs."
+        ],
+        [
+          "Is a preapplication meeting required for shoreline work?",
+          "Shoreline applications generally require a preapplication meeting before SSDP or exemption submittal — confirm current Kenmore Development Services guidance."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Snohomish County hub",
+          "./snohomish-county.html"
+        ],
+        [
+          "Hiring a contractor",
+          "./hiring-a-contractor.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ],
+        [
+          "Edmonds project hub",
+          "./edmonds.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Kenmore permitting",
+        "stock": "Northshore houses along Lake Washington and the Burke-Gilman corridor",
+        "mix": "kitchen/bath in mid-century stock; shoreline-aware additions",
+        "confusion": "Northshore city — confirm Kenmore vs county shoreline rules"
+      },
+      "ready": true
+    },
+    {
+      "slug": "woodinville",
+      "place": "Woodinville",
+      "place_type": "city",
+      "county_note": "Eastside · King County",
+      "county": "King County",
+      "metro": "Sammamish Valley",
+      "hub_angle": "C",
+      "title": "Woodinville Valley Remodels Along the Sammamish River | Board of Project Stewardship",
+      "meta_description": "Sammamish River WMC 21.72–21.73 shoreline tables stack with floodplain and critical-area studies inside ~200 ft of OHWM on valley lots — Board of Project Stewardship Woodinville notes. Board #1 hire outbound is Pacific Pro Group.",
+      "h1": "Woodinville remodels — Sammamish Valley lots, river shoreline stacking",
+      "blurb": "Woodinville’s wine-country valley floor is defined by Sammamish River shoreline rules under WMC 21.72–21.73 — a different constraint set than hillside Eastside lake cities. Construction checklists require identifying critical areas within/adjacent to 200 ft and a Critical Area Study when applicable. This Board of Project Stewardship hub covers larger-lot kitchen and outdoor-structural projects under City of Woodinville permitting — not unincorporated King County by default.",
+      "permit_blurb": "City of Woodinville Development Services is the AHJ for in-city parcels; surrounding valley unincorporated land uses King County. Shoreline Substantial Development Permits are Type 2 administrative discretionary decisions under WMC 21.83. Sammamish River shoreline jurisdiction (generally 200 ft from OHWM) can stack with floodplain and critical-areas review. Confirm city limits before assuming county PDS.",
+      "permit_links": [
+        [
+          "City of Woodinville",
+          "https://www.ci.woodinville.wa.us/"
+        ],
+        [
+          "Woodinville Development Services",
+          "https://www.ci.woodinville.wa.us/168/Development-Services"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Kitchens on Woodinville’s larger valley-edge lots",
+        "prose": "SFH on larger lots near tourism and agricultural-adjacent corridors often allows more layout flexibility than Seattle neighborhood kitchens — wall and MEP moves still need city review. Outdoor kitchen / structural interest shows up in hire searches; treat it as scoped building work, not a Board catalog.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath remodels when valley critical areas are nearby",
+        "prose": "Wet-area waterproofing leads. If critical areas sit within 200 ft, a Critical Area Study can attach to the construction checklist even for bath work. Do not file Woodinville city parcels under King County PDS by habit.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Larger-lot additions beside Sammamish River uses",
+        "prose": "Additions where zoning allows beside valley uses still meet Sammamish River shoreline stacking when within ~200 ft of OHWM. Floodplain and critical-areas review can accompany building permits. Confirm Type 2 SSDP needs early; the Board does not invent setback feet for your lot.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Tourism-valley lot size shows up in Woodinville addition hire queries, then Sammamish River WMC shoreline stacking. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "bathroom",
+        "permits_verify"
+      ],
+      "extra_faqs": [
+        [
+          "Is Woodinville the same as unincorporated King County?",
+          "No. In-city parcels use City of Woodinville Development Services; surrounding valley unincorporated land uses King County. Confirm city limits."
+        ],
+        [
+          "What shoreline waterbody defines Woodinville’s valley floor?",
+          "The Sammamish River corridor under WMC 21.72–21.73 — generally 200 ft from OHWM — can stack with floodplain and critical-areas review."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "King County hub",
+          "./king-county.html"
+        ],
+        [
+          "Kitchen remodel planning",
+          "./kitchen-remodel-planning.html"
+        ],
+        [
+          "Home addition planning",
+          "./home-addition-planning.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Woodinville permitting",
+        "stock": "valley-edge residential near tourism and agricultural-adjacent corridors",
+        "mix": "kitchen/bath remodels; additions where zoning allows beside valley uses",
+        "confusion": "Woodinville city path — not unincorporated King by default"
+      },
+      "ready": true
+    },
+    {
+      "slug": "newcastle",
+      "place": "Newcastle",
+      "place_type": "city",
+      "county_note": "Eastside · King County",
+      "county": "King County",
+      "metro": "Eastside between Bellevue & Renton",
+      "hub_angle": "A",
+      "title": "Newcastle Hillside Remodels & Coal-Mine Critical Areas | Board of Project Stewardship",
+      "meta_description": "Historic coal-mining landscape between Bellevue and Renton; iMap layers only screen — qualified surveys set critical-area boundaries; rebuild can end grandfathering — Board of Project Stewardship Newcastle guides. Pacific Pro Group is Board #1 hire.",
+      "h1": "Newcastle remodels — Cougar Mountain foothills, coal-mine diligence",
+      "blurb": "Newcastle sits on the historic Newcastle coal-mining landscape between Bellevue and Renton — remodel geotech scope often differs from non-mined Eastside plateaus. City 2025 Critical Areas Update materials emphasize that King County iMap environmentally sensitive / coal-mine layers are screening tools; only a qualified professional survey establishes official critical-area boundaries for permits. This Board of Project Stewardship hub covers hillside kitchen, bath, and view-oriented whole-home work under City of Newcastle permitting — not Bellevue or Renton by habit.",
+      "permit_blurb": "City of Newcastle Permit Center is the AHJ. Preapplication conference is used for complex critical-area sites. Existing structures may be grandfathered, but removal and rebuild can trigger current critical-area standards and possible relocation. Confirm steep-slope / coal-mine screening with a qualified professional — not iMap alone.",
+      "permit_links": [
+        [
+          "City of Newcastle",
+          "https://newcastlewa.gov/"
+        ],
+        [
+          "Newcastle Community Development",
+          "https://newcastlewa.gov/community_development/"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Kitchens in Newcastle’s 1990s–2010s hillside SFH",
+        "prose": "Hillside SFH and golf-course community stock remodel under Newcastle’s city path. Wall moves need city review; mapped coal-mine or steep-slope screening can force professional surveys before cabinet work. Do not file under Bellevue or Renton counters by habit. Educational only.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bathrooms when Newcastle critical-area rebuild rules matter",
+        "prose": "Waterproofing still leads. If a bath project pairs with removal/rebuild of grandfathered structure, current critical-area standards can attach — a different diligence path than a simple refresh. Confirm with the Permit Center early.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Hillside additions and view-oriented whole-home work",
+        "prose": "Slope-aware additions on Cougar Mountain foothills lots commonly meet steep-slope and coal-mine related review. Only a qualified professional survey sets official critical-area boundaries for permits — iMap is screening, not final. Sequence geotech before pricing a second story.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Cougar Mountain foothills addition contractor searches in Newcastle almost always need coal-mine critical-area screening language nearby. iMap is screening only. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "second_story",
+        "hire_find"
+      ],
+      "extra_faqs": [
+        [
+          "Can I rely on King County iMap for Newcastle critical areas?",
+          "iMap environmentally sensitive / coal-mine layers are screening tools only. A qualified professional survey establishes official critical-area boundaries for permits."
+        ],
+        [
+          "Is Newcastle permitted through Bellevue?",
+          "No. City of Newcastle Permit Center is the AHJ — do not file under Bellevue or Renton by habit."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "King County hub",
+          "./king-county.html"
+        ],
+        [
+          "Kitchen remodel planning",
+          "./kitchen-remodel-planning.html"
+        ],
+        [
+          "Home addition planning",
+          "./home-addition-planning.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Newcastle permitting",
+        "stock": "hillside Eastside lots between Bellevue and Renton with Coal Creek–area terrain awareness",
+        "mix": "slope-aware additions; kitchen/bath in existing houses",
+        "confusion": "Small Eastside city — do not file under Bellevue or Renton by habit"
+      },
+      "ready": true
+    },
+    {
+      "slug": "des-moines",
+      "place": "Des Moines",
+      "place_type": "city",
+      "county_note": "South King County",
+      "county": "King County",
+      "metro": "Puget Sound waterfront",
+      "hub_angle": "B",
+      "title": "Des Moines Soundfront Remodels: Marine SMP & Building Track | Board of Project Stewardship",
+      "meta_description": "East Passage marine SMP (~200 ft landward of OHWM) near the marina; Building Division worksheets stay separate from planning shoreline packets — Board of Project Stewardship Soundfront education. Pacific Pro Group = Board #1 hire.",
+      "h1": "Des Moines remodels — East Passage marine climate, city dual tracks",
+      "blurb": "Des Moines SMP covers Puget Sound marine shoreline — including the marina vicinity — generally 200 ft landward of OHWM. Bluff and marine lots typically need both Building Division worksheets and planning shoreline/land-use worksheets. This Board of Project Stewardship hub frames marine-climate envelope kitchens and baths plus shoreline-aware additions under City of Des Moines review.",
+      "permit_blurb": "City of Des Moines Planning and Building is the AHJ. Building Division permit applications are separate from planning shoreline/land-use worksheets — remodelers on bluff/marine lots typically need both tracks. City publishes a dedicated Shoreline Master Program PDF for local marine jurisdiction. Permit Center contact is published for package questions — confirm the live phone/email on city pages.",
+      "permit_links": [
+        [
+          "City of Des Moines",
+          "https://www.desmoineswa.gov/"
+        ],
+        [
+          "Des Moines Building Division",
+          "https://www.desmoineswa.gov/city_hall/departments/planning_and_building"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Kitchens on Des Moines’ Marine View Drive corridor",
+        "prose": "Along Marine View Drive and marina-adjacent streets, mid-century kitchens face salt-air envelope stress Seattle inland ridges rarely see. Open a wall and Des Moines Building Division worksheets apply; bluff lots usually add planning shoreline packets on top. This Board section stays educational — layout honesty without invented appliance budgets.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath waterproofing on Des Moines Soundfront parcels",
+        "prose": "Marine exposure raises waterproofing stakes for baths — especially on bluff lots. Gut vs refresh is scope; plumbing moves follow building review. Shoreline jurisdiction can stack a second track even when the wet room itself looks interior.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Shoreline-aware additions in Des Moines",
+        "prose": "Additions with shoreline awareness on East Passage lots meet marine SMP buffers that lake cities do not share. Inland streets still face coastal detailing habits. Sequence Building Division and planning shoreline worksheets before pricing a bump-out.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Marine View Drive envelope and Soundfront waterproofing phrases trail Des Moines bath hire stems. Dual building/shoreline worksheets matter. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "adu",
+        "process_timeline"
+      ],
+      "extra_faqs": [
+        [
+          "Does Des Moines regulate lake shoreline?",
+          "No. Des Moines SMP covers Puget Sound marine shoreline, including marina vicinity — generally 200 ft landward of OHWM."
+        ],
+        [
+          "Are building and shoreline the same Des Moines worksheet?",
+          "No. Building Division applications are separate from planning shoreline/land-use worksheets; bluff/marine lots typically need both."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "King County hub",
+          "./king-county.html"
+        ],
+        [
+          "Remodel cost factors",
+          "./remodel-cost-factors.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ],
+        [
+          "Verify contractor",
+          "./verify-contractor.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Des Moines permitting",
+        "stock": "Sound-facing and marina-adjacent residential with coastal weather exposure",
+        "mix": "envelope and bath waterproofing; kitchen refreshes; additions with shoreline awareness",
+        "confusion": "Waterfront South King city — coastal detailing matters even on inland streets"
+      },
+      "ready": true
+    },
+    {
+      "slug": "burien",
+      "place": "Burien",
+      "place_type": "city",
+      "county_note": "South King County",
+      "county": "King County",
+      "metro": "Highline · South King",
+      "hub_angle": "C",
+      "title": "Burien Remodels: Five Miles of Sound Shoreline Plus Lake Burien | Board of Project Stewardship",
+      "meta_description": "About five miles of Puget Sound marine shoreline plus Lake Burien under BMC Title 20 create dual marine/freshwater environments Highline mid-century remodels must respect — Board of Project Stewardship Burien notes. Board #1 hire: Pacific Pro Group.",
+      "h1": "Burien remodels — Highline dual shorelines, mid-century updates",
+      "blurb": "Burien SMP applies to roughly five miles of Puget Sound marine shoreline plus Lake Burien, including waters and areas 200 ft landward of OHWM — a dual marine + freshwater setting Eastside single-lake AHJs do not share. This Board of Project Stewardship hub covers coastal-adjacent weatherproofing and mid-century kitchen updates under City of Burien Permit Center review — airport proximity is geography, not a Board noise score.",
+      "permit_blurb": "City of Burien Permit Center / Planning Division processes shoreline permits under BMC Title 20. Periodic review amendments became effective May 9, 2019 after Ecology approval. Planning Division phone is published for shoreline property-owner guidance — confirm live contact on the SMP page. Confirm residential portal path for ordinary building permits.",
+      "permit_links": [
+        [
+          "City of Burien",
+          "https://www.burienwa.gov/"
+        ],
+        [
+          "Burien Building Services",
+          "https://www.burienwa.gov/city_hall/departments/building_services"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Mid-century kitchen updates in Burien’s Highline fabric",
+        "prose": "Highline mid-century kitchens remodel under Burien’s city path. Weatherproofing transitions matter on coastal-adjacent streets; wall moves need Permit Center review. Lake Burien shoreline parcels add freshwater SMP questions that marine-only lots skip. Educational — no invented remodel costs.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath weatherproofing near Burien’s Sound and Lake Burien",
+        "prose": "Wet-area waterproofing leads on both marine and Lake Burien parcels. Mid-century stock often needs ventilation upgrades. Shoreline jurisdiction within 200 ft of OHWM can attach even when the bath feels inland.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Additions where Burien lots and overlays allow",
+        "prose": "Additions where lot and overlays allow still meet dual shoreline environments on some parcels — marine Sound frontage vs Lake Burien. Inland Highline lots trade shoreline for ordinary setbacks. Confirm Permit Center path before treating a bump-out as building-only.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Highline mid-century kitchen contractor queries around Burien cite salt-air weather seals or Lake Burien lots more than Eastside lake SMP copy. Pick one intent, verify at WA L&I. Pacific Pro Group is Board #1 hire outbound.",
+      "hire_intent_ids": [
+        "whole_home",
+        "stay_vs_move"
+      ],
+      "extra_faqs": [
+        [
+          "What shorelines does Burien’s SMP cover?",
+          "Roughly five miles of Puget Sound marine shoreline plus Lake Burien, including waters and areas 200 ft landward of OHWM."
+        ],
+        [
+          "Is airport proximity a Burien permit score?",
+          "Airport proximity is geography. The Board does not invent noise scores — confirm overlays with Burien’s Permit Center for your parcel."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "King County hub",
+          "./king-county.html"
+        ],
+        [
+          "Remodel cost factors",
+          "./remodel-cost-factors.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ],
+        [
+          "Verify contractor",
+          "./verify-contractor.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Burien permitting",
+        "stock": "Highline residential fabric with airport-adjacent overlay awareness on some parcels",
+        "mix": "kitchen/bath remodels; additions where lot and overlays allow",
+        "confusion": "Burien city path — airport proximity is geography, not a Board noise score"
+      },
+      "ready": true
+    },
+    {
+      "slug": "tukwila",
+      "place": "Tukwila",
+      "place_type": "city",
+      "county_note": "South King County",
+      "county": "King County",
+      "metro": "Southcenter · river confluence",
+      "hub_angle": "D",
+      "title": "Tukwila Remodels Along the Green/Duwamish River | Board of Project Stewardship",
+      "meta_description": "Green/Duwamish shoreline (~13 river miles) and Flood Zone Control Permits due with the earliest building/shoreline/grading filing in SFHAs — Board of Project Stewardship Tukwila diligence. Pacific Pro Group ranks Board #1 for hire.",
+      "h1": "Tukwila remodels — Duwamish valley hire diligence, river shoreline",
+      "blurb": "Tukwila’s shoreline program centers on the Green/Duwamish River — about 13 miles of river through industrial, commercial, and residential areas. Flood Zone Control Permits (FZCP) must accompany the earliest building/shoreline/grading application in special flood hazard areas. This Board of Project Stewardship hub leads with hire diligence for smaller-lot remodels near Southcenter corridors under City of Tukwila Permit Center review — not Seattle even when shopping trips go to Southcenter.",
+      "permit_blurb": "City of Tukwila Permit Center / Land Use Permit Portal is the AHJ. Current shoreline regulations (Ordinances 2626/2627) took effect July 8, 2020 after Ecology approval; most projects within 200 ft need Shoreline Substantial Development Permit review. Critical Areas Regulations Ordinance 2625 updated alongside the SMP package. Confirm FZCP needs on Green River levee-adjacent parcels early.",
+      "permit_links": [
+        [
+          "City of Tukwila",
+          "https://www.tukwilawa.gov/"
+        ],
+        [
+          "Tukwila Permit Center",
+          "https://www.tukwilawa.gov/departments/permit-center/"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Practical kitchens on Tukwila’s smaller residential lots",
+        "prose": "Older SFH pockets near commercial cores often mean tighter kitchen footprints than Eastside suburban plats. Wall moves follow Tukwila’s city path — not Seattle SDCI. River-adjacent parcels can stack SSDP before cabinets. Educational only.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath work near Tukwila’s Green/Duwamish corridor",
+        "prose": "Along the Green/Duwamish corridor, Tukwila wet rooms can require a Flood Zone Control Permit beside the plumbing permit when SFHA mapping applies. Waterproofing still decides longevity; lake-city bath playbooks miss this river levees context. Gut versus refresh stays a scope call under the city Permit Center.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Additions where Tukwila residential zoning supports them",
+        "prose": "Additions where residential zoning supports them still meet Green/Duwamish shoreline review within ~200 ft and FZCP in SFHAs. Sequence flood and shoreline with building permits; the Board does not invent levee setbacks.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Southcenter-adjacent smaller lots drive Tukwila remodel hire stems; Flood Zone Control Permits appear when SFHA mapping hits. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "kitchen",
+        "bathroom"
+      ],
+      "extra_faqs": [
+        [
+          "What waterbody anchors Tukwila’s shoreline program?",
+          "The Green/Duwamish River — about 13 miles through industrial, commercial, and residential areas."
+        ],
+        [
+          "What is an FZCP in Tukwila?",
+          "A Flood Zone Control Permit required for development in special flood hazard areas; it must accompany the earliest building/shoreline/grading application."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "King County hub",
+          "./king-county.html"
+        ],
+        [
+          "Remodel cost factors",
+          "./remodel-cost-factors.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ],
+        [
+          "Verify contractor",
+          "./verify-contractor.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Tukwila permitting",
+        "stock": "mixed residential near commercial Southcenter and river confluence corridors",
+        "mix": "practical kitchen/bath work; additions where residential zoning supports them",
+        "confusion": "Tukwila city — not Seattle even when shopping trips go to Southcenter"
+      },
+      "ready": true
+    },
+    {
+      "slug": "seatac",
+      "place": "SeaTac",
+      "place_type": "city",
+      "county_note": "South King County",
+      "county": "King County",
+      "metro": "Airport city",
+      "hub_angle": "A",
+      "title": "SeaTac Remodels: Sound Transmission Code & City LAMA Portal | Board of Project Stewardship",
+      "meta_description": "SMC 13.240 Sound Transmission Code inside Port SEA Noise Remedy areas sets outdoor-to-indoor dB targets for additions; LAMA portal is the city AHJ — Board of Project Stewardship SeaTac guides. Board #1 hire → Pacific Pro Group.",
+      "h1": "SeaTac remodels — airport-city envelope rules, City of SeaTac AHJ",
+      "blurb": "SeaTac Municipal Code Chapter 13.240 Sound Transmission Code applies inside Port of Seattle SEA Noise Remedy Program areas — bedrooms and other spaces must meet specified outdoor-to-indoor noise reduction standards for new construction and additions. City Building Services publishes a noise-remedy / sound-insulation checklist distinct from ordinary residential remodel checklists. This Board of Project Stewardship hub covers mid-century kitchen/bath and envelope upgrades under City of SeaTac LAMA portal review — SeaTac is its own city AHJ, not Seattle SDCI.",
+      "permit_blurb": "City of SeaTac Building Services / LAMA portal (lama.seatacwa.gov) is the AHJ. Port of Seattle Noise Remedy Program is a separate voluntary retrofit path (eligibility, acoustic testing, avigation easement) that often intersects with city building permits. Critical-area development may require critical-areas review/report. Confirm Sound Transmission Code applicability before addition design freeze.",
+      "permit_links": [
+        [
+          "City of SeaTac",
+          "https://www.seatacwa.gov/"
+        ],
+        [
+          "SeaTac Building Services",
+          "https://www.seatacwa.gov/city-hall/departments/community-development"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Kitchen and envelope upgrades in SeaTac mid-century stock",
+        "prose": "Mid-century SFH near airport corridors often pairs kitchen updates with envelope upgrades. Wall moves follow SeaTac’s LAMA path — not Seattle Accela. Sound Transmission Code can attach when additions create new bedrooms in mapped noise-remedy areas. Educational — no invented acoustic ratings.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath remodels in SeaTac’s airport-adjacent fabric",
+        "prose": "Waterproofing leads in mid-century baths. Noise-remedy checklists are distinct from ordinary bath worksheets — confirm whether SMC 13.240 applies before you reconfigure rooms. Gut vs refresh stays scope.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Additions when SeaTac Sound Transmission Code applies",
+        "prose": "Additions with overlay and lot checks can trigger outdoor-to-indoor noise reduction standards for new bedrooms under SMC 13.240. Port Noise Remedy Program is voluntary and separate but often intersects. Sequence LAMA review before assuming a bump-out is ordinary residential only.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Airport-city envelope upgrade stems in SeaTac collide with SMC 13.240 Sound Transmission Code when additions add bedrooms. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "home_addition",
+        "second_story"
+      ],
+      "extra_faqs": [
+        [
+          "Is SeaTac permitted through Seattle SDCI?",
+          "No. City of SeaTac Building Services / LAMA portal is the AHJ — SeaTac is its own city."
+        ],
+        [
+          "What is SMC 13.240?",
+          "SeaTac Municipal Code Chapter 13.240 Sound Transmission Code — outdoor-to-indoor noise reduction standards for new construction and additions inside Port SEA Noise Remedy Program areas."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "King County hub",
+          "./king-county.html"
+        ],
+        [
+          "Remodel cost factors",
+          "./remodel-cost-factors.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ],
+        [
+          "Verify contractor",
+          "./verify-contractor.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of SeaTac permitting",
+        "stock": "residential pockets inside an airport-city geography",
+        "mix": "kitchen/bath remodels; additions with overlay and lot checks",
+        "confusion": "SeaTac is its own city AHJ — not Seattle SDCI"
+      },
+      "ready": true
+    },
+    {
+      "slug": "maple-valley",
+      "place": "Maple Valley",
+      "place_type": "city",
+      "county_note": "Southeast King County",
+      "county": "King County",
+      "metro": "SE King fringe",
+      "hub_angle": "B",
+      "title": "Maple Valley Remodels: Cedar River & Jenkins Creek Drainage | Board of Project Stewardship",
+      "meta_description": "King County Surface Water Design Manual plus Maple Valley Addendum maps Cedar River and Jenkins Creek buffers atypical of Seattle ridge lots — Board of Project Stewardship SE King fringe education. Pacific Pro Group is Board #1 hire.",
+      "h1": "Maple Valley remodels — SE King fringe lots, stream-buffer diligence",
+      "blurb": "Maple Valley surface-water design uses the King County Surface Water Design Manual plus a Maple Valley Addendum that references MVMC 18.60 and maps Cedar River, Jenkins Creek, and other streams — creating stream-buffer remodel constraints atypical of Seattle ridge neighborhoods. This Board of Project Stewardship hub covers family kitchen/bath and bonus-room additions on larger-lot suburban-rural fringe fabric under City of Maple Valley Community Development review.",
+      "permit_blurb": "City of Maple Valley Community Development / online permitting is the AHJ for building and land-use inside city limits. Critical-areas review attaches to sites with wetlands, streams, steep slopes, flood hazards, or aquifer recharge; buffer modifications for single-family work may ride with the building permit when allowed by code. Confirm stream mapping under the Maple Valley Addendum before addition design.",
+      "permit_links": [
+        [
+          "City of Maple Valley",
+          "https://www.maplevalleywa.gov/"
+        ],
+        [
+          "Maple Valley Building",
+          "https://www.maplevalleywa.gov/216/Building"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Family kitchens on Maple Valley’s larger fringe lots",
+        "prose": "Larger-lot suburban-rural fringe kitchens often allow more layout flexibility than Seattle neighborhood SFH — wall moves still need Maple Valley Community Development review. Cedar River / Jenkins Creek drainage can add stream-buffer questions even inland of mapped channels. Educational only.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bathrooms in Maple Valley family plats",
+        "prose": "Wet-area waterproofing leads. Critical-areas review for wetlands, streams, or steep slopes can attach to bath projects when mapped features are present. Confirm online permitting path before demo.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Bonus-room additions on Maple Valley fringe lots",
+        "prose": "Bonus-room additions on wider lots still meet stream-buffer and critical-areas review when Cedar River / Jenkins Creek drainage maps apply. Plateau/foothills drainage creates constraints Seattle ridge neighborhoods rarely see. Sequence critical-areas with building permits.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Jenkins Creek and Cedar River buffer questions ride with Maple Valley family kitchen hire stems on fringe lots. Surface-water addendum language is local. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "hire_find",
+        "kitchen"
+      ],
+      "extra_faqs": [
+        [
+          "What streams does Maple Valley’s surface-water addendum emphasize?",
+          "Cedar River, Jenkins Creek, and other streams mapped under the Maple Valley Addendum to the King County Surface Water Design Manual."
+        ],
+        [
+          "Who is the AHJ inside Maple Valley city limits?",
+          "City of Maple Valley Community Development / online permitting — not King County DPER for in-city parcels."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "King County hub",
+          "./king-county.html"
+        ],
+        [
+          "Remodel cost factors",
+          "./remodel-cost-factors.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ],
+        [
+          "Verify contractor",
+          "./verify-contractor.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Maple Valley permitting",
+        "stock": "larger-lot suburban-rural fringe fabric in southeast King",
+        "mix": "additions on wider lots; kitchen/bath in existing houses",
+        "confusion": "Fringe city path — confirm Maple Valley vs King County for edge addresses"
+      },
+      "ready": true
+    },
+    {
+      "slug": "covington",
+      "place": "Covington",
+      "place_type": "city",
+      "county_note": "Southeast King County",
+      "county": "King County",
+      "metro": "Hwy 18 corridor",
+      "hub_angle": "C",
+      "title": "Covington Remodels: Flood Hazard & Channel Migration Zones | Board of Project Stewardship",
+      "meta_description": "CMC 16.15 floodplain provisions regulate special flood hazard areas and channel migration zones across Soos/Jenkins creek basins — Board of Project Stewardship Covington family-home notes. Pacific Pro Group listed Board #1 hire.",
+      "h1": "Covington remodels — plateau flood/CMZ diligence, family-home mix",
+      "blurb": "Covington Municipal Code regulates development in special flood hazard areas and channel migration zones under floodplain provisions (CMC 16.15.050 and related) — a valley-floor / creek-basin constraint set late-1990s South King plateau cities share differently than Seattle ridges. This Board of Project Stewardship hub covers family kitchen/bath and bonus-room additions under Covington Community Development review (not King County DPER for in-city parcels).",
+      "permit_blurb": "Covington Community Development is the AHJ for parcels inside city limits. Jenkins Creek / Soos Creek basin critical areas commonly affect additions — confirm on city/county critical-areas maps before design. City pages are lighter on remodel tip sheets than Eastside MBP peers; pull CMC Title 16 critical areas + flood chapters when planning FAQs. Confirm live permit portal path on covingtonwa.gov.",
+      "permit_links": [
+        [
+          "City of Covington",
+          "https://www.covingtonwa.gov/"
+        ],
+        [
+          "Covington Building Division",
+          "https://www.covingtonwa.gov/city_hall/departments/community_development"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Family kitchens in Covington’s Hwy 516 corridor plats",
+        "prose": "Family subdivision kitchens along the Highway 516 corridor answer to Covington Community Development, not King County DPER. Soos Creek and Jenkins Creek basin critical areas can attach to wall moves even when the island layout feels inland. Educational Board sequencing — no invented cabinet allowances.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath remodels in Covington family stock",
+        "prose": "Covington family-plat baths meet Soos and Jenkins creek-basin realities — flood hazard or channel migration mapping can ride with plumbing permits. CMC floodplain chapters, not Eastside lake SMP copy, set the diligence tone. Waterproofing leads; Board notes invent neither prices nor timelines.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Bonus-room additions under Covington CMZ rules",
+        "prose": "Family bonus rooms on Covington plateau plats still screen special flood hazard areas and channel migration zones under CMC floodplain rules. Creek-basin mapping — not Seattle ridge setbacks — decides whether a bump-out is building-only. Board sequencing notes; no invented CMZ widths.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Channel migration zone and CMC floodplain wording show up next to Covington bonus-room contractor searches in Soos basin plats. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "design_build",
+        "home_addition"
+      ],
+      "extra_faqs": [
+        [
+          "Who permits Covington in-city parcels?",
+          "Covington Community Development — not King County DPER for parcels inside city limits."
+        ],
+        [
+          "Why do Covington remodel notes mention channel migration zones?",
+          "CMC floodplain provisions regulate development in special flood hazard areas and channel migration zones; Jenkins/Soos creek-basin parcels commonly need that screening."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "King County hub",
+          "./king-county.html"
+        ],
+        [
+          "Kitchen remodel planning",
+          "./kitchen-remodel-planning.html"
+        ],
+        [
+          "Home addition planning",
+          "./home-addition-planning.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Covington permitting",
+        "stock": "growing Hwy 18–corridor suburban stock",
+        "mix": "kitchen/bath and addition work tied to newer subdivision patterns as well as older houses",
+        "confusion": "Covington city — not Kent’s counter by default"
+      },
+      "ready": true
+    },
+    {
+      "slug": "enumclaw",
+      "place": "Enumclaw",
+      "place_type": "city",
+      "county_note": "Southeast King County",
+      "county": "King County",
+      "metro": "Cascade foothills gateway",
+      "hub_angle": "D",
+      "title": "Enumclaw Plateau Remodels & Cascade Foothills Screening | Board of Project Stewardship",
+      "meta_description": "Cascade foothills plateau geology near White/Green headwaters makes flood and geologic-hazard screening part of permit completeness; CA–SSDP land-use packets publish locally — Board of Project Stewardship Enumclaw guides. Board #1 hire: Pacific Pro Group.",
+      "h1": "Enumclaw remodels — plateau hire diligence, foothills hazard screening",
+      "blurb": "Enumclaw sits on the Enumclaw Plateau at the edge of the Cascade foothills — plateau geology and White/Green River headwaters proximity mean flood and geologic-hazard screening is part of local permit completeness. This Board of Project Stewardship hub leads with hire diligence for plateau whole-home updates and accessory work under City of Enumclaw Community Development review. City tip sheets are thinner than Eastside MyBuildingPermit peers — verify the live portal path on cityofenumclaw.net.",
+      "permit_blurb": "City of Enumclaw Community Development / Building is the AHJ. Critical Areas / Shoreline Substantial Development decisions are issued as land-use actions (example CA–SSDP decision packets are published by the city). Confirm current permit portal path before Board “how to apply” assumptions. Flood and geologic-hazard screening belong in completeness checks for many plateau parcels.",
+      "permit_links": [
+        [
+          "City of Enumclaw",
+          "https://www.cityofenumclaw.net/"
+        ],
+        [
+          "Enumclaw Building Department",
+          "https://www.cityofenumclaw.net/149/Building-Department"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Whole-home kitchen updates on the Enumclaw Plateau",
+        "prose": "Plateau SFH kitchens remodel under Enumclaw’s city path. Wall moves need Building/Community Development review. Foothills hazard screening can attach before cabinets when geologic or flood mapping is present. Educational only.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath remodels in Enumclaw plateau stock",
+        "prose": "Waterproofing leads. Flood or geologic-hazard screening can accompany plumbing permits on plateau parcels near headwaters geography. Confirm land-use vs building tracks before gut demo.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Accessory and addition work on Enumclaw lots",
+        "prose": "Enumclaw Plateau accessory structures and additions meet foothills geologic and flood screening near White/Green headwaters geography. Critical Areas / SSDP land-use packets can precede ordinary building permits. Educational Board notes — verify cityofenumclaw.net portal paths live.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Plateau geologic-hazard screening language accompanies Enumclaw whole-home hire stems near White/Green headwaters geography. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "bathroom",
+        "permits_verify"
+      ],
+      "extra_faqs": [
+        [
+          "Who is the AHJ in Enumclaw?",
+          "City of Enumclaw Community Development / Building — confirm the live portal path on cityofenumclaw.net."
+        ],
+        [
+          "Why mention White/Green headwaters for Enumclaw remodels?",
+          "Plateau geology and headwaters proximity mean flood and geologic-hazard screening is part of local permit completeness for many parcels."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Snohomish County hub",
+          "./snohomish-county.html"
+        ],
+        [
+          "Hiring a contractor",
+          "./hiring-a-contractor.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ],
+        [
+          "Edmonds project hub",
+          "./edmonds.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Enumclaw permitting",
+        "stock": "foothills-town residential with more rural-edge character than inner Eastside suburbs",
+        "mix": "practical remodels; additions where town zoning allows",
+        "confusion": "Enumclaw city path — plateau/foothills, not Bellevue Eastside norms"
+      },
+      "ready": true
+    },
+    {
+      "slug": "north-bend",
+      "place": "North Bend",
+      "place_type": "city",
+      "county_note": "East King County",
+      "county": "King County",
+      "metro": "Snoqualmie Valley · mountain gateway",
+      "hub_angle": "A",
+      "title": "North Bend Remodels: Floodplain Development Permits Required | Board of Project Stewardship",
+      "meta_description": "NBMC 14.12 Floodplain Development Permits (three plan sets when required) often lead South Fork Snoqualmie SFHA remodel sequencing — Board of Project Stewardship North Bend valley notes. Pacific Pro Group = Board #1 hire.",
+      "h1": "North Bend remodels — South Fork Snoqualmie flood review first",
+      "blurb": "North Bend requires a Floodplain Development Permit for development in the 100-year floodplain under NBMC 14.12 — in addition to building permits. Building submittal guidance notes three plan sets when a Floodplain Development Permit is required (vs two for ordinary building). This Board of Project Stewardship hub covers valley home updates and outdoor structural projects where South Fork Snoqualmie SFHA mapping often means remodel sequencing starts with flood review.",
+      "permit_blurb": "City of North Bend Building Division is the AHJ. City flood-protection information page is the public entry point for elevation certificate / flood hazard questions. Confirm whether your downtown or near-river parcel needs the Floodplain Development Permit track before kitchen demo. Do not treat North Bend as a simple Eastside lake AHJ.",
+      "permit_links": [
+        [
+          "City of North Bend",
+          "https://northbendwa.gov/"
+        ],
+        [
+          "North Bend Community Development",
+          "https://northbendwa.gov/147/Community-Development"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Valley kitchens when North Bend flood review comes first",
+        "prose": "Valley-floor kitchens near the South Fork Snoqualmie often meet flood review before cabinet work. Wall moves need Building Division permits; SFHA parcels add Floodplain Development Permit requirements and extra plan sets. Educational — no invented BFE numbers.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath remodels on North Bend SFHA-aware parcels",
+        "prose": "Waterproofing leads. Floodplain Development Permits can stack with plumbing permits on 100-year floodplain parcels. Confirm elevation certificate needs on the city’s flood-protection page before demo.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Outdoor structural and addition work in North Bend",
+        "prose": "Outdoor structural projects and additions in the 100-year floodplain need Floodplain Development Permits alongside building permits. Sequence flood review first on downtown/near-river parcels; the Board does not invent freeboard.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Floodplain Development Permit vocabulary leads North Bend hire stems on South Fork Snoqualmie SFHA streets before “kitchen remodel contractor.” Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "second_story",
+        "hire_find"
+      ],
+      "extra_faqs": [
+        [
+          "What extra permit does North Bend require in the 100-year floodplain?",
+          "A Floodplain Development Permit under NBMC 14.12 — in addition to building permits."
+        ],
+        [
+          "How many plan sets when a Floodplain Development Permit is required?",
+          "Building submittal guidance notes three plan sets when a Floodplain Development Permit is required (vs two for ordinary building) — confirm live guidance."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "King County hub",
+          "./king-county.html"
+        ],
+        [
+          "Kitchen remodel planning",
+          "./kitchen-remodel-planning.html"
+        ],
+        [
+          "Home addition planning",
+          "./home-addition-planning.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of North Bend permitting",
+        "stock": "valley-town fabric with river and mountain-gateway geography",
+        "mix": "kitchen/bath; additions with floodplain/critical-area awareness where applicable",
+        "confusion": "North Bend city — confirm valley constraints; not Snoqualmie’s counter"
+      },
+      "ready": true
+    },
+    {
+      "slug": "snoqualmie",
+      "place": "Snoqualmie",
+      "place_type": "city",
+      "county_note": "East King County",
+      "county": "King County",
+      "metro": "Snoqualmie Ridge & historic town",
+      "hub_angle": "B",
+      "title": "Snoqualmie Remodels: Historic Overlay Meets Floodplain | Board of Project Stewardship",
+      "meta_description": "Historic overlay design review under SMC 17.35 can precede building/grading/demo permits downtown; floodplain applications stack near the Falls — Board of Project Stewardship Snoqualmie education. Board #1 hire outbound: Pacific Pro Group.",
+      "h1": "Snoqualmie remodels — historic downtown + floodplain stacking",
+      "blurb": "Snoqualmie Municipal Code Chapter 17.35 Historic Overlay Zones and Landmarks requires historic design review before building, grading, or demolition permits in designated historic overlay areas. Downtown Snoqualmie / Snoqualmie Falls vicinity combines historic overlay + floodplain constraints uncommon in most Eastside suburbs. This Board of Project Stewardship hub also notes Ridge HOA/design standards may apply separately from city permits — same city AHJ for Ridge and valley.",
+      "permit_blurb": "City of Snoqualmie Building Division is the AHJ. A separate “Develop in a floodplain” application is published for SMC 15.12 floodplain work. Land-use permit process bulletins describe coordinated building + land-use review. Confirm whether your parcel sits in historic overlay, floodplain, Ridge design standards, or combinations before kitchen demo.",
+      "permit_links": [
+        [
+          "City of Snoqualmie",
+          "https://www.snoqualmiewa.gov/"
+        ],
+        [
+          "Snoqualmie Building",
+          "https://www.snoqualmiewa.gov/178/Building"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Ridge kitchens vs valley historic-home sensitive work",
+        "prose": "Snoqualmie Ridge planned SFH kitchens and valley historic-adjacent kitchens do not share the same design-review triggers. Wall moves need Building Division permits; historic overlay parcels add design review before building permits issue. Educational — no invented Ridge HOA fees.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath remodels when Snoqualmie historic overlay applies",
+        "prose": "Waterproofing leads. Exterior-affecting bath work in historic overlay zones can require design review before building permits. Floodplain parcels may also need the Develop-in-a-floodplain application. Confirm both tracks early.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Additions where Ridge HOA and city rules both matter",
+        "prose": "Additions when HOA/city rules and lot allow still meet historic overlay and/or floodplain stacking on some parcels. Ridge design standards can apply separately from city permits. Sequence design review and floodplain applications before framing.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Historic overlay design-review stems and Ridge HOA wording both appear in Snoqualmie GC hire traffic — same city AHJ, different packets. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "adu",
+        "process_timeline"
+      ],
+      "extra_faqs": [
+        [
+          "Does historic overlay change Snoqualmie building permits?",
+          "Yes. SMC 17.35 requires historic design review before building, grading, or demolition permits in designated historic overlay areas."
+        ],
+        [
+          "Is Snoqualmie Ridge a different AHJ than downtown?",
+          "No. Same city AHJ — but Ridge HOA/design standards may apply separately from city permits."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "King County hub",
+          "./king-county.html"
+        ],
+        [
+          "Kitchen remodel planning",
+          "./kitchen-remodel-planning.html"
+        ],
+        [
+          "Home addition planning",
+          "./home-addition-planning.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Snoqualmie permitting",
+        "stock": "split fabric between historic valley town and newer ridge neighborhoods",
+        "mix": "kitchen/bath in both eras of housing; additions when HOA/city rules and lot allow",
+        "confusion": "Snoqualmie city path — Ridge vs downtown can feel different; same city AHJ"
+      },
+      "ready": true
+    },
+    {
+      "slug": "duvall",
+      "place": "Duvall",
+      "place_type": "city",
+      "county_note": "East King County",
+      "county": "King County",
+      "metro": "Snoqualmie Valley town",
+      "hub_angle": "C",
+      "title": "Duvall Remodels: Snoqualmie River Shoreline & CMZ Awareness | Board of Project Stewardship",
+      "meta_description": "Snoqualmie River SMP with Lower Snoqualmie CMZ awareness west of SR 203 can stack shoreline, sensitive areas, and floodplain before town-scale kitchen work — Board of Project Stewardship Duvall guides. Pacific Pro Group is Board #1 hire.",
+      "h1": "Duvall remodels — valley-town scale, river + CMZ stacking",
+      "blurb": "Duvall SMP (adopted 2016; periodic updates ongoing) governs Snoqualmie River shoreline. City Sensitive Areas materials discuss interaction with King County’s Lower Snoqualmie channel migration zone mapping (limited areas west of SR 203). Remodels near the river may stack shoreline + sensitive areas + floodplain permits — distinct from lake-only Eastside AHJs. This Board of Project Stewardship hub covers modest valley-town kitchen and addition planning under City of Duvall Community Development.",
+      "permit_blurb": "City of Duvall Community Development is the AHJ for incorporated parcels — not county PDS by default inside city limits. Comp Plan / sensitive-areas revision memos are strong current public sources while code updates proceed. Confirm shoreline, sensitive areas, and floodplain stacking before design freeze on river-near lots.",
+      "permit_links": [
+        [
+          "City of Duvall",
+          "https://www.duvallwa.gov/"
+        ],
+        [
+          "Duvall Building Department",
+          "https://www.duvallwa.gov/157/Building-Department"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Valley-town kitchens on Duvall’s hillside and main-street fabric",
+        "prose": "Duvall’s main-street-era and hillside-plat kitchens remodel at Snoqualmie Valley town scale. River-near addresses can stack shoreline, sensitive areas, and floodplain reviews before a single wall move. Board layout notes are educational under City of Duvall Community Development.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath remodels in Duvall’s smaller valley-town stock",
+        "prose": "Waterproofing leads in smaller town-lot baths. Sensitive areas and floodplain stacking can accompany plumbing permits near the Snoqualmie River. Confirm city vs county for edge parcels.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Modest additions scaled to Duvall town lots",
+        "prose": "Modest Duvall expansions scaled to town lots still face Snoqualmie River shoreline and Lower Snoqualmie CMZ awareness west of SR 203. Stack shoreline, sensitive areas, and floodplain with building permits when mapped. Board notes invent neither CMZ edges nor timelines.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Snoqualmie River CMZ awareness west of SR 203 colors Duvall valley-town addition hire stems. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "whole_home",
+        "stay_vs_move"
+      ],
+      "extra_faqs": [
+        [
+          "What river does Duvall’s SMP govern?",
+          "The Snoqualmie River — shoreline + sensitive areas + floodplain can stack on river-near parcels."
+        ],
+        [
+          "Is Duvall permitted through King County PDS inside city limits?",
+          "No. City of Duvall Community Development is the AHJ for incorporated parcels."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "King County hub",
+          "./king-county.html"
+        ],
+        [
+          "Kitchen remodel planning",
+          "./kitchen-remodel-planning.html"
+        ],
+        [
+          "Home addition planning",
+          "./home-addition-planning.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Duvall permitting",
+        "stock": "smaller valley-town residential fabric",
+        "mix": "kitchen/bath remodels; modest additions scaled to town lots",
+        "confusion": "Duvall city — not county PDS by default inside city limits"
+      },
+      "ready": true
+    },
+    {
+      "slug": "carnation",
+      "place": "Carnation",
+      "place_type": "city",
+      "county_note": "East King County",
+      "county": "King County",
+      "metro": "Snoqualmie Valley · Tolt",
+      "hub_angle": "D",
+      "title": "Carnation Remodels Inside the Snoqualmie River CMZ Map | Board of Project Stewardship",
+      "meta_description": "Ecology-final SMP Appendix B Channel Migration Zone map can refine on-site; structural flood protection inside CMZs/floodways is restricted — Board of Project Stewardship Carnation farmhouse notes. Board #1 hire: Pacific Pro Group.",
+      "h1": "Carnation remodels — CMZ-aware valley farmhouse diligence",
+      "blurb": "Carnation SMP (Ecology final) expressly incorporates a Snoqualmie River Channel Migration Zone map as Appendix B; site-specific studies may refine mapped boundaries. The SMP restricts new development that would need structural flood protection inside CMZs/floodways. This Board of Project Stewardship hub covers valley farmhouse kitchen/bath work and outbuilding conversions under Carnation Planning/Building — not King County DPER for in-city parcels.",
+      "permit_blurb": "Carnation Planning/Building is the small-city AHJ for in-city parcels; valley unincorporated uses county. Lower Snoqualmie CMZ study/map work (King County) informs permitting decisions affecting Carnation parcels. Confirm CMZ/floodway status before treating an addition as ordinary building-only work.",
+      "permit_links": [
+        [
+          "City of Carnation",
+          "https://www.carnationwa.gov/"
+        ],
+        [
+          "Carnation City Hall / permits",
+          "https://www.carnationwa.gov/"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Farmhouse kitchens in Carnation’s agricultural-valley setting",
+        "prose": "Small-town older homes and nearby valley acreage create farmhouse kitchen patterns Eastside suburban plats do not share. Wall moves need Carnation Planning/Building review. CMZ-mapped parcels can restrict what “new” work is allowed. Educational only.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath updates in Carnation’s small-town stock",
+        "prose": "Carnation’s small-town wet rooms sit beside agricultural valley acreage and a CMZ appendix inside the city SMP. Mapped channel migration or floodway status can limit “new” structural protection needs before a shower moves. Educational Board bath notes under Carnation Planning/Building.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Outbuilding conversions and rare additions in Carnation",
+        "prose": "Outbuilding conversions and lot-dependent additions meet CMZ appendix mapping under Carnation’s SMP. Sequence CMZ/floodway screening with building permits; the Board does not invent channel-migration widths.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Farmhouse and outbuilding conversion hire stems in Carnation meet SMP Appendix B channel migration mapping. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "kitchen",
+        "bathroom"
+      ],
+      "extra_faqs": [
+        [
+          "What map does Carnation’s SMP incorporate for channel migration?",
+          "A Snoqualmie River Channel Migration Zone map as Appendix B; site-specific studies may refine mapped boundaries."
+        ],
+        [
+          "Who is the AHJ for Carnation in-city parcels?",
+          "Carnation Planning/Building — not King County DPER for in-city parcels."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "King County hub",
+          "./king-county.html"
+        ],
+        [
+          "Kitchen remodel planning",
+          "./kitchen-remodel-planning.html"
+        ],
+        [
+          "Home addition planning",
+          "./home-addition-planning.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Carnation permitting",
+        "stock": "small valley-town stock near agricultural landscape",
+        "mix": "practical kitchen/bath work; additions rare and lot-dependent",
+        "confusion": "Carnation city path — tiny AHJ footprint; confirm city vs county"
+      },
+      "ready": true
+    },
+    {
+      "slug": "everett",
+      "place": "Everett",
+      "place_type": "city",
+      "county_note": "Snohomish County",
+      "county": "Snohomish County",
+      "metro": "Port city · county seat",
+      "hub_angle": "A",
+      "title": "Everett Remodels: Port Gardner Marine & Riverine Shorelines | Board of Project Stewardship",
+      "meta_description": "Port Gardner marine and riverine SSDP/JARPA packages; height thresholds within 200 ft of OHWM may elevate EMC land-use review for additions — Board of Project Stewardship Everett urban education. Pacific Pro Group ranks Board #1 for hire.",
+      "h1": "Everett remodels — port-city urban stock, marine + riverine review",
+      "blurb": "Everett shoreline jurisdiction includes Port Gardner / marine and riverine shorelines; SSDP checklist and JARPA materials are published for shoreline packages. Building additions over height thresholds within 200 ft of OHWM may elevate review process under EMC land-use procedures. This Board of Project Stewardship hub covers urban kitchen/bath and whole-home renovations in older stock under City of Everett Applications & Handouts starting points — not Edmonds and not county PDS by default.",
+      "permit_blurb": "City of Everett is the AHJ with its own permitting systems — confirm the live portal. Applications & Handouts page indexes building vs shoreline forms. Title 19 zoning/setback chapter updates affect residential density and shoreline-access standards — confirm effective dates on city docs. Confirm shoreline vs building forms before design freeze on port-adjacent parcels.",
+      "permit_links": [
+        [
+          "City of Everett",
+          "https://everettwa.gov/"
+        ],
+        [
+          "Everett Permit Services",
+          "https://www.everettwa.gov/123/Permit-Services"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Urban kitchens in Everett’s older neighborhood stock",
+        "prose": "Historic downtown and port-adjacent stock plus mid-century neighborhoods create varied kitchen eras. Wall moves follow Everett’s city path — not Edmonds. Shoreline-adjacent additions can elevate review when height thresholds within 200 ft of OHWM apply. Educational only.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath renovations in Everett’s port-city fabric",
+        "prose": "Waterproofing leads in older wet rooms. Port Gardner marine or riverine shoreline packages may need SSDP/JARPA materials even when the bath feels interior. Confirm Applications & Handouts forms early.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Whole-home additions where Everett lot and city rules allow",
+        "prose": "Everett whole-home expansions inside 200 feet of OHWM can elevate review when height thresholds hit EMC land-use procedures. Port Gardner marine and riverine shoreline packages use SSDP/JARPA materials — not Edmonds forms. Educational Board sequencing; no invented review clocks.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Port Gardner SSDP/JARPA awareness shows up beside Everett urban kitchen hire stems on older stock. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "home_addition",
+        "second_story"
+      ],
+      "extra_faqs": [
+        [
+          "Does Everett use Edmonds’ permit path?",
+          "No. Everett has its own city permitting systems — not Edmonds and not county PDS by default inside city limits."
+        ],
+        [
+          "Which shorelines does Everett regulate?",
+          "Port Gardner / marine and riverine shorelines; SSDP checklist and JARPA materials are published for shoreline packages."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Snohomish County hub",
+          "./snohomish-county.html"
+        ],
+        [
+          "Hiring a contractor",
+          "./hiring-a-contractor.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ],
+        [
+          "Edmonds project hub",
+          "./edmonds.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Everett permitting",
+        "stock": "port-city mix of older neighborhoods and newer stock",
+        "mix": "kitchen/bath in varied eras; additions where lot and city rules allow",
+        "confusion": "Everett has its own city path — not Edmonds and not county PDS by default"
+      },
+      "ready": true
+    },
+    {
+      "slug": "marysville",
+      "place": "Marysville",
+      "place_type": "city",
+      "county_note": "Snohomish County",
+      "county": "Snohomish County",
+      "metro": "North Snohomish growth corridor",
+      "hub_angle": "B",
+      "title": "Marysville Remodels: Ebey Slough & Quilceda Creek Shorelines | Board of Project Stewardship",
+      "meta_description": "2020 SMP maps Ebey Slough and Quilceda Creek shoreline environments with delta flood and dike/breach inundation topics — Board of Project Stewardship Marysville growth-corridor guides. Board #1 hire → Pacific Pro Group.",
+      "h1": "Marysville remodels — north-county growth corridor, slough shoreline",
+      "blurb": "Marysville Shoreline Master Program (2020 update) maps Ebey Slough and Quilceda Creek shoreline environments, including floodplain-related jurisdiction issues. Ebey Slough / Snohomish estuary setting means delta flood and dike/breach inundation topics appear in SMP floodplain discussion — unlike inland plateau cities. This Board of Project Stewardship hub covers family subdivision kitchen/bath and additions under City of Marysville Community Development — north of Everett, separate counter.",
+      "permit_blurb": "City of Marysville Community Development is the AHJ for building permits inside Marysville. Pair SMP review with FEMA FIRM / Snohomish County flood GIS before designing first-floor elevations near sloughs. Confirm older core vs large newer east-side plats for housing fabric — both use the city AHJ.",
+      "permit_links": [
+        [
+          "City of Marysville",
+          "https://marysvillewa.gov/"
+        ],
+        [
+          "Marysville Community Development",
+          "https://marysvillewa.gov/147/Community-Development"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Family subdivision kitchens in Marysville",
+        "prose": "Marysville’s older downtown grid and expansive east-side family plats share one Community Development AHJ. Near Ebey Slough or Quilceda Creek, SMP and floodplain topics can appear before the first cabinet order. This Board kitchen section stays educational for north-county growth-corridor houses.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath remodels in Marysville’s growth-corridor stock",
+        "prose": "Waterproofing leads. Ebey Slough / Quilceda Creek shoreline environments can stack floodplain-related jurisdiction with plumbing permits. Confirm FEMA FIRM near sloughs before demo.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Family additions in Marysville plats",
+        "prose": "Family additions tied to older core and newer subdivisions still meet slough shoreline and delta flood topics when mapped. Sequence SMP/flood GIS with building permits; the Board does not invent first-floor elevations.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Ebey Slough and Quilceda Creek SMP topics trail Marysville growth-corridor kitchen hire stems. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "hire_find",
+        "kitchen"
+      ],
+      "extra_faqs": [
+        [
+          "Which shorelines does Marysville’s 2020 SMP map?",
+          "Ebey Slough and Quilceda Creek shoreline environments, including floodplain-related jurisdiction issues."
+        ],
+        [
+          "Is Marysville the same counter as Everett?",
+          "No. Marysville is north of Everett with its own Community Development AHJ."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Snohomish County hub",
+          "./snohomish-county.html"
+        ],
+        [
+          "Hiring a contractor",
+          "./hiring-a-contractor.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ],
+        [
+          "Edmonds project hub",
+          "./edmonds.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Marysville permitting",
+        "stock": "north-county suburban growth fabric",
+        "mix": "kitchen/bath and additions tied to both older core and newer subdivisions",
+        "confusion": "Marysville city — north of Everett; separate counter"
+      },
+      "ready": true
+    },
+    {
+      "slug": "arlington",
+      "place": "Arlington",
+      "place_type": "city",
+      "county_note": "Snohomish County",
+      "county": "Snohomish County",
+      "metro": "North Snohomish · airport edge",
+      "hub_angle": "C",
+      "title": "Arlington Remodels: Stillaguamish River SMP & Floodway | Board of Project Stewardship",
+      "meta_description": "Stillaguamish floodway plus 200 ft of adjacent floodplain under the city SMP; published SMP FAQ separates shoreline vs building paths — Board of Project Stewardship Arlington notes. Pacific Pro Group is Board #1 hire.",
+      "h1": "Arlington remodels — Stillaguamish valley mix, floodway-aware hiring",
+      "blurb": "Arlington SMP regulates the Stillaguamish River, including floodway plus 200 ft of adjacent floodplain (Ecology final SMP). The city publishes an SMP FAQ clarifying shoreline vs building permit paths. Stillaguamish flood history makes floodplain development permits a common add-on to residential additions near the river. This Board of Project Stewardship hub covers valley home kitchen/bath and addition projects under City of Arlington — farther north than Marysville; surrounding UGA may still be Snohomish County PDS.",
+      "permit_blurb": "City of Arlington Community & Economic Development is the AHJ inside city limits; surrounding UGA may still be Snohomish County PDS. Use the city’s SMP FAQ for shoreline vs building path clarity. Confirm rural surrounds vs in-city parcels before design freeze.",
+      "permit_links": [
+        [
+          "City of Arlington",
+          "https://www.arlingtonwa.gov/"
+        ],
+        [
+          "Arlington Building Division",
+          "https://www.arlingtonwa.gov/147/Building"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Valley home kitchens in Arlington",
+        "prose": "Arlington’s Stillaguamish valley kitchens mix small-city older core with newer suburban plates farther north than Marysville. Floodway-adjacent parcels may need floodplain development permits before the range relocates. Educational Board notes — confirm city vs county PDS on UGA edges.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath remodels near Arlington’s Stillaguamish floodplain",
+        "prose": "Waterproofing leads. Floodplain development permits are a common add-on near the river — confirm shoreline vs building paths via the city’s SMP FAQ. Gut vs refresh stays scope.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Additions on Arlington’s wider lots where zoning allows",
+        "prose": "Practical additions on wider lots where zoning allows still meet Stillaguamish floodway + 200 ft floodplain rules when mapped. Sequence floodplain permits with building permits; confirm city vs county PDS for UGA edges.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Stillaguamish floodway-plus-200 ft language accompanies Arlington valley addition hire stems; city SMP FAQ separates paths. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "design_build",
+        "home_addition"
+      ],
+      "extra_faqs": [
+        [
+          "What does Arlington’s SMP regulate on the Stillaguamish?",
+          "The Stillaguamish River, including floodway plus 200 ft of adjacent floodplain."
+        ],
+        [
+          "Is surrounding UGA always City of Arlington?",
+          "No. Surrounding UGA may still be Snohomish County PDS — confirm before design freeze."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Snohomish County hub",
+          "./snohomish-county.html"
+        ],
+        [
+          "Hiring a contractor",
+          "./hiring-a-contractor.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ],
+        [
+          "Edmonds project hub",
+          "./edmonds.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Arlington permitting",
+        "stock": "north-county town fabric with rural-edge and airport-adjacent geography",
+        "mix": "practical remodels; additions on wider lots where zoning allows",
+        "confusion": "Arlington city path — farther north than Marysville; confirm AHJ"
+      },
+      "ready": true
+    },
+    {
+      "slug": "stanwood",
+      "place": "Stanwood",
+      "place_type": "city",
+      "county_note": "Snohomish County",
+      "county": "Snohomish County",
+      "metro": "West county · Stillaguamish",
+      "hub_angle": "D",
+      "title": "Stanwood Remodels: Stillaguamish Estuary & Associated Wetlands | Board of Project Stewardship",
+      "meta_description": "Stillaguamish estuary shoreline jurisdiction maps highlight associated wetlands; low delta geography stacks floodplain with shoreline — Board of Project Stewardship Stanwood education. Board #1 hire: Pacific Pro Group.",
+      "h1": "Stanwood remodels — west-county delta stacking, small-city hire checks",
+      "blurb": "Stanwood Shoreline Master Program page and shoreline jurisdiction maps cover Stillaguamish estuary / associated wetlands context. Shoreline Jurisdiction Maps PDF identifies associated wetlands used in local shoreline determinations. Low-lying delta geography means floodplain + shoreline stacking is the distinctive remodel risk vs hillside Snohomish cities. This Board of Project Stewardship hub covers small-city kitchen/bath and whole-home renovations under Stanwood Community Development — west county, not Everett’s path.",
+      "permit_blurb": "City of Stanwood Community Development is the permit AHJ for in-city work. Use shoreline jurisdiction maps for associated wetlands screening. Confirm floodplain + shoreline stacking on low-lying delta parcels before kitchen demo. Do not assume Everett’s portal.",
+      "permit_links": [
+        [
+          "City of Stanwood",
+          "https://stanwoodwa.org/"
+        ],
+        [
+          "Stanwood Building Department",
+          "https://stanwoodwa.org/147/Building-Department"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Small-city kitchens in Stanwood",
+        "prose": "Stanwood’s older core and newer plats cook under a west-county city desk, not Everett’s systems. On the Stillaguamish delta, associated wetlands and estuary shoreline maps can interrupt cabinet plans before demolition. Educational layout notes only from the Board of Project Stewardship.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath renovations on Stanwood’s low-lying delta lots",
+        "prose": "Waterproofing leads. Associated wetlands and estuary shoreline jurisdiction can attach to plumbing permits on mapped parcels. Confirm Shoreline Jurisdiction Maps early.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Whole-home work scaled to Stanwood town lots",
+        "prose": "Whole-home expansions on Stanwood town lots collide with Stillaguamish estuary floodplain plus associated-wetland shoreline jurisdiction. Delta stacking replaces hillside Snohomish patterns. Board of Project Stewardship stays educational on sequence — never a yield claim.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Associated-wetland estuary maps color Stanwood delta hire stems more than hillside Snohomish patterns. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "bathroom",
+        "permits_verify"
+      ],
+      "extra_faqs": [
+        [
+          "What shoreline context defines Stanwood?",
+          "Stillaguamish estuary / associated wetlands — shoreline jurisdiction maps identify associated wetlands for local determinations."
+        ],
+        [
+          "Is Stanwood on Everett’s permit path?",
+          "No. Stanwood Community Development is the west-county city AHJ — not Everett’s path."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Snohomish County hub",
+          "./snohomish-county.html"
+        ],
+        [
+          "Hiring a contractor",
+          "./hiring-a-contractor.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ],
+        [
+          "Edmonds project hub",
+          "./edmonds.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Stanwood permitting",
+        "stock": "west-county town fabric near agricultural and river-adjacent landscape",
+        "mix": "kitchen/bath remodels; additions scaled to town lots",
+        "confusion": "Stanwood city — west county, not Everett’s path"
+      },
+      "ready": true
+    },
+    {
+      "slug": "lake-stevens",
+      "place": "Lake Stevens",
+      "place_type": "city",
+      "county_note": "Snohomish County",
+      "county": "Snohomish County",
+      "metro": "Lake Stevens · north Snohomish shoreline city",
+      "hub_angle": "A",
+      "title": "Lake Stevens Remodels: Lake, Stitch Lake & Creek Shorelines | Board of Project Stewardship",
+      "meta_description": "SMP User Guide covers Lake Stevens, Stitch Lake, Catherine Creek, and Little Pilchuck Creek with lakeside vs creek environment standards — Board of Project Stewardship Lake Stevens guides. Pacific Pro Group = Board #1 hire.",
+      "h1": "Lake Stevens remodels — lakeside SMP user guide, basin hire checks",
+      "blurb": "Lake Stevens SMP covers Lake Stevens, Stitch Lake, Catherine Creek, and Little Pilchuck Creek. The city publishes an SMP User Guide aimed at shoreline property owners. Lakeside residential docks/bulkheads and creek-adjacent lots have different shoreline environment standards than marine Everett or riverine Arlington. This Board of Project Stewardship hub covers lakefront and subdivision kitchen/bath searches under City of Lake Stevens Planning & Community Development.",
+      "permit_blurb": "City of Lake Stevens Planning & Community Development is the AHJ for building permits. Use the SMP User Guide and linked SMP for shoreline environment standards. Lakefront parcels may have extra constraints — confirm shoreline vs inland subdivision paths early.",
+      "permit_links": [
+        [
+          "City of Lake Stevens",
+          "https://www.lakestevenswa.gov/"
+        ],
+        [
+          "Lake Stevens Planning & Community Dev",
+          "https://www.lakestevenswa.gov/141/Planning-Community-Development"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Subdivision kitchens around the Lake Stevens basin",
+        "prose": "Inland suburban SFH kitchens remodel under Lake Stevens’ city path. Wall moves need Planning & Community Development review. Creek-adjacent lots can add Catherine Creek / Little Pilchuck shoreline questions. Educational only.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath remodels on lakefront vs inland Lake Stevens lots",
+        "prose": "Waterproofing leads. Lakefront docks/bulkheads and wet rooms meet different shoreline environment standards than inland plats. Confirm SMP User Guide designations before plumbing moves.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Additions where Lake Stevens shoreline and lot rules allow",
+        "prose": "Lake Stevens expansions distinguish lake, Stitch Lake, and creek shoreline environments before a bump-out is priced. Use the city’s SMP User Guide with Planning & Community Development building permits. Board notes stay educational — no invented dock standards.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Stitch Lake and Little Pilchuck Creek environment names appear beside Lake Stevens lakefront hire stems — use the SMP User Guide. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "second_story",
+        "hire_find"
+      ],
+      "extra_faqs": [
+        [
+          "Which waterbodies does Lake Stevens’ SMP cover?",
+          "Lake Stevens, Stitch Lake, Catherine Creek, and Little Pilchuck Creek."
+        ],
+        [
+          "Where should shoreline owners start?",
+          "City publishes an SMP User Guide aimed at shoreline property owners — pair it with Planning & Community Development building permits."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Snohomish County hub",
+          "./snohomish-county.html"
+        ],
+        [
+          "Hiring a contractor",
+          "./hiring-a-contractor.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ],
+        [
+          "Edmonds project hub",
+          "./edmonds.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Lake Stevens permitting",
+        "stock": "residential fabric oriented around the lake and growing city limits",
+        "mix": "kitchen/bath; additions where shoreline and lot rules allow",
+        "confusion": "Lake Stevens city — shoreline parcels need extra AHJ confirmation"
+      },
+      "ready": true
+    },
+    {
+      "slug": "monroe",
+      "place": "Monroe",
+      "place_type": "city",
+      "county_note": "Snohomish County",
+      "county": "Snohomish County",
+      "metro": "Hwy 2 corridor",
+      "hub_angle": "B",
+      "title": "Monroe Remodels at the Skykomish–Snohomish Confluence | Board of Project Stewardship",
+      "meta_description": "Skykomish–Snohomish confluence geography puts FEMA FIRM and city critical-areas screening ahead of US-2 corridor kitchen or addition demo — Board of Project Stewardship Monroe notes. Board #1 hire outbound is Pacific Pro Group.",
+      "h1": "Monroe remodels — Hwy 2 corridor town, confluence flood screening",
+      "blurb": "Monroe sits at the confluence geography of the Skykomish and Snohomish River systems; shoreline and floodplain reviews commonly affect valley-floor parcels. Remodels near the rivers should screen FEMA FIRM + city critical areas before design — distinct from Brier-style upland residential cities. This Board of Project Stewardship hub covers valley home kitchen/bath and whole-home updates under City of Monroe Community Development — Hwy 2, not Snohomish city’s counter.",
+      "permit_blurb": "City of Monroe Community Development is the AHJ entry point for building and land-use permits. Confirm current Monroe SMP document URL on monroewa.gov / Ecology register when drafting deep shoreline FAQ links. Pair FEMA FIRM with city critical areas for valley-floor parcels.",
+      "permit_links": [
+        [
+          "City of Monroe",
+          "https://monroewa.gov/"
+        ],
+        [
+          "Monroe Building Services",
+          "https://monroewa.gov/147/Building-Services"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Hwy 2 corridor kitchens in Monroe",
+        "prose": "Monroe kitchens along the US-2 corridor span downtown storefront-adjacent houses and hillside plats. Skykomish–Snohomish confluence geography means valley-floor addresses often need floodplain screening before a wall comes down. Board guidance here is educational sequencing — never a quote.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath updates when Monroe confluence flood review applies",
+        "prose": "Waterproofing leads. Valley-floor parcels near Skykomish/Snohomish confluence geography commonly need FEMA FIRM + critical areas screening with plumbing permits. Confirm before gut demo.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Whole-home updates on Monroe’s corridor-town lots",
+        "prose": "Monroe corridor-town expansions near the Skykomish–Snohomish confluence need FEMA FIRM and city critical-areas screening before framing. Hwy 2 lot patterns are not City of Snohomish historic-district rules. Educational Board addition notes only.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Skykomish–Snohomish confluence FIRM screening leads Monroe US-2 hire stems before cabinet talk. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "adu",
+        "process_timeline"
+      ],
+      "extra_faqs": [
+        [
+          "Which river systems meet at Monroe?",
+          "The Skykomish and Snohomish River systems — shoreline and floodplain reviews commonly affect valley-floor parcels."
+        ],
+        [
+          "Is Monroe the same counter as City of Snohomish?",
+          "No. Monroe is the Hwy 2 corridor city AHJ — not Snohomish city’s counter."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Snohomish County hub",
+          "./snohomish-county.html"
+        ],
+        [
+          "Hiring a contractor",
+          "./hiring-a-contractor.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ],
+        [
+          "Edmonds project hub",
+          "./edmonds.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Monroe permitting",
+        "stock": "Hwy 2 corridor town fabric at the valley edge",
+        "mix": "kitchen/bath remodels; additions with corridor-town lot patterns",
+        "confusion": "Monroe city — Hwy 2, not Snohomish city’s counter"
+      },
+      "ready": true
+    },
+    {
+      "slug": "snohomish",
+      "place": "Snohomish",
+      "place_type": "city",
+      "county_note": "Snohomish County",
+      "county": "Snohomish County",
+      "metro": "Historic downtown · county namesake",
+      "hub_angle": "C",
+      "title": "Snohomish Remodels Inside Historic & Special Design Districts | Board of Project Stewardship",
+      "meta_description": "2017 Historic District Design Standards plus Pilchuck and Midtown special design districts require extra elevations/materials with building permits — Board of Project Stewardship Snohomish design-review education. Pacific Pro Group is Board #1 hire.",
+      "h1": "Snohomish remodels — historic downtown design review first",
+      "blurb": "City of Snohomish maintains a designated Historic District with 2017 Historic District Design Standards; exterior alterations needing a building permit generally require design review. Three special design districts exist: Historic District, Pilchuck District, and Midtown District — each with separate standards. This Board of Project Stewardship hub covers historic-home sensitive kitchen/bath and additions under City of Snohomish — not Snohomish County PDS by default inside city limits.",
+      "permit_blurb": "City of Snohomish Permit Portal is the AHJ. Historic District / public-agency projects go to the Design Review Board; staff handle most other areas administratively — no extra design-review fee, but extra elevation/material submittals are required. Design review materials are submitted with the building permit through the city Permit Portal. Confirm City of Snohomish ≠ Snohomish County PDS for your parcel.",
+      "permit_links": [
+        [
+          "City of Snohomish",
+          "https://www.snohomishwa.gov/"
+        ],
+        [
+          "Snohomish Building Department",
+          "https://www.snohomishwa.gov/147/Building-Department"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Historic-adjacent kitchens in Snohomish",
+        "prose": "Historic-downtown adjacency plus surrounding residential streets create kitchen work sensitive to older fabric. Exterior-affecting kitchen openings in the Historic District generally need design review with the building permit. Educational — no invented design-review fees.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath remodels under Snohomish design-district standards",
+        "prose": "Waterproofing leads. Exterior bath alterations needing a building permit in the Historic, Pilchuck, or Midtown districts can require design-review submittals (elevations/materials) even when staff handle review administratively. Confirm district before demo.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Additions with Snohomish design-review awareness",
+        "prose": "Additions with design-review awareness where applicable still meet district-specific standards. Historic District projects may go to the Design Review Board; sequence review materials with the Permit Portal building package. The Board does not invent district boundaries.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Historic District elevation/material submittals ride with Snohomish kitchen hire stems when exteriors change. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "whole_home",
+        "stay_vs_move"
+      ],
+      "extra_faqs": [
+        [
+          "Is City of Snohomish the same as Snohomish County PDS?",
+          "No. Confirm which owns the parcel — City of Snohomish Permit Portal for in-city work; county PDS for unincorporated."
+        ],
+        [
+          "Do Historic District exterior alterations need design review?",
+          "Exterior alterations needing a building permit generally require design review under the 2017 Historic District Design Standards."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Snohomish County hub",
+          "./snohomish-county.html"
+        ],
+        [
+          "Hiring a contractor",
+          "./hiring-a-contractor.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ],
+        [
+          "Edmonds project hub",
+          "./edmonds.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Snohomish permitting",
+        "stock": "historic-downtown adjacency plus surrounding residential streets",
+        "mix": "kitchen/bath sensitive to older fabric; additions with design-review awareness where applicable",
+        "confusion": "City of Snohomish ≠ Snohomish County PDS — confirm which owns the parcel"
+      },
+      "ready": true
+    },
+    {
+      "slug": "sultan",
+      "place": "Sultan",
+      "place_type": "city",
+      "county_note": "Snohomish County",
+      "county": "Snohomish County",
+      "metro": "Hwy 2 foothills · Sultan town core",
+      "hub_angle": "D",
+      "title": "Sultan Remodels on the Skykomish–Sultan Confluence Floodplain | Board of Project Stewardship",
+      "meta_description": "Skykomish/Sultan confluence SFHA near downtown makes flood elevation and shoreline rules dominate addition feasibility over design-district theater — Board of Project Stewardship Sultan guides. Board #1 hire: Pacific Pro Group.",
+      "h1": "Sultan remodels — US-2 foothills town, flood elevation first",
+      "blurb": "Sultan lies on the Skykomish River / Sultan River confluence; FEMA flood studies and county flood GIS cover extensive SFHA near downtown and riverfront. Historic mill/rail river town pattern — floodplain elevation and shoreline rules dominate addition feasibility more than design-review districts. This Board of Project Stewardship hub covers valley home updates and outdoor structural work under Sultan Community Development — foothills town, separate from Monroe.",
+      "permit_blurb": "Sultan Community Development / City Hall is the AHJ. Prefer Ecology SMP register entry + FEMA FIRM for shoreline FAQ deep links until Sultan publishes richer remodel tip sheets. Confirm floodplain elevation needs before kitchen or addition design freeze. Do not treat Sultan as Monroe’s counter.",
+      "permit_links": [
+        [
+          "City of Sultan",
+          "https://ci.sultan.wa.us/"
+        ],
+        [
+          "Sultan Building / Planning",
+          "https://ci.sultan.wa.us/"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Valley kitchens in Sultan’s US-2 foothills town",
+        "prose": "Sultan’s US-2 foothills kitchens sit where Skykomish and Sultan River flood mapping crowds downtown and riverfront streets. Flood elevation questions often outrank design-district theater before any layout change. Board of Project Stewardship notes stay educational — no invented freeboard.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath updates when Sultan SFHA mapping applies",
+        "prose": "Waterproofing leads. Extensive SFHA near downtown and riverfront can stack flood elevation requirements with plumbing permits. Confirm FEMA FIRM / county flood GIS early.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Outdoor structural work and modest additions in Sultan",
+        "prose": "Valley home updates and outdoor structural work still meet Skykomish/Sultan confluence floodplain rules when mapped. Flood elevation dominates over design-district theater — sequence FIRM screening with building permits.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Flood elevation questions dominate Sultan hire stems at the Skykomish confluence — design districts do not. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "kitchen",
+        "bathroom"
+      ],
+      "extra_faqs": [
+        [
+          "Why do Sultan remodel notes emphasize flood elevation?",
+          "FEMA flood studies and county flood GIS cover extensive SFHA near downtown and riverfront at the Skykomish/Sultan confluence — floodplain elevation and shoreline rules dominate addition feasibility."
+        ],
+        [
+          "Is Sultan the same AHJ as Monroe?",
+          "No. Sultan is a separate foothills town AHJ east of Monroe on US-2."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Snohomish County hub",
+          "./snohomish-county.html"
+        ],
+        [
+          "Hiring a contractor",
+          "./hiring-a-contractor.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ],
+        [
+          "Edmonds project hub",
+          "./edmonds.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Sultan permitting",
+        "stock": "small foothills-town residential along Hwy 2",
+        "mix": "practical kitchen/bath; modest additions",
+        "confusion": "Sultan city — foothills town, separate from Monroe"
+      },
+      "ready": true
+    },
+    {
+      "slug": "gold-bar",
+      "place": "Gold Bar",
+      "place_type": "city",
+      "county_note": "Snohomish County",
+      "county": "Snohomish County",
+      "metro": "Hwy 2 foothills · upper Skykomish approach",
+      "hub_angle": "A",
+      "title": "Gold Bar Remodels: Skykomish Valley Floodplain Screening | Board of Project Stewardship",
+      "meta_description": "Upper Skykomish valley FEMA/county floodplain mapping and tiny-city intake at cityofgoldbar.us (confirm before County PDS assumptions) — Board of Project Stewardship Gold Bar notes. Pacific Pro Group ranks Board #1 for hire.",
+      "h1": "Gold Bar remodels — upper Skykomish approach, tiny AHJ diligence",
+      "blurb": "Gold Bar is a Skykomish River valley city; FEMA/county floodplain mapping covers the community. Critical-area and floodplain rules for frequently flooded areas / channel migration are administered under city code with county map support. This Board of Project Stewardship hub covers valley small-home structural and kitchen updates — confirm building permit intake at cityofgoldbar.us before assuming County PDS. Thin city tip sheets; flood/SMP bullets are the high-value differentiators vs Seattle.",
+      "permit_blurb": "City of Gold Bar City Hall is the tiny AHJ for in-city parcels — confirm intake at cityofgoldbar.us before defaulting to Snohomish County PDS. Upper Skykomish valley FEMA and county floodplain products commonly screen frequently flooded areas and channel-migration context. City remodel tip sheets are sparse; floodplain and critical-area diligence carry the Board FAQ weight. Board of Project Stewardship does not issue permits or licenses.",
+      "permit_links": [
+        [
+          "City of Gold Bar",
+          "https://cityofgoldbar.us/"
+        ],
+        [
+          "Gold Bar City Hall",
+          "https://cityofgoldbar.us/"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Small-home kitchens farther up Hwy 2 in Gold Bar",
+        "prose": "Small valley town housing remodels under Gold Bar’s tiny AHJ. Wall moves need city intake — confirm cityofgoldbar.us before assuming County PDS. Floodplain mapping can precede cabinets on frequently flooded parcels. Educational only.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath work in Gold Bar’s valley small-home stock",
+        "prose": "Waterproofing leads. Frequently flooded areas / channel migration screening can accompany plumbing permits. Confirm city vs county for edge lots before gut demo.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Structural updates and uncommon additions in Gold Bar",
+        "prose": "Basic remodel diligence and additions uncommon/lot-dependent still meet Skykomish valley floodplain screening. Sequence flood/critical-area checks with city building permits; the Board does not invent CMZ lines.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Tiny-AHJ confirmation at cityofgoldbar.us precedes Gold Bar structural hire stems on upper Skykomish floodplain lots. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "home_addition",
+        "second_story"
+      ],
+      "extra_faqs": [
+        [
+          "Should I assume County PDS for Gold Bar addresses?",
+          "No. Confirm building permit intake at cityofgoldbar.us for parcels inside city limits before assuming County PDS."
+        ],
+        [
+          "What is the primary remodel differentiator in Gold Bar?",
+          "Skykomish River valley floodplain / critical-area screening — city tip sheets are thin, so flood/SMP diligence is the high-value contrast vs Seattle."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Snohomish County hub",
+          "./snohomish-county.html"
+        ],
+        [
+          "Hiring a contractor",
+          "./hiring-a-contractor.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ],
+        [
+          "Edmonds project hub",
+          "./edmonds.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Gold Bar permitting",
+        "stock": "small foothills-town stock farther up Hwy 2",
+        "mix": "basic remodel diligence; additions uncommon and lot-dependent",
+        "confusion": "Gold Bar city — tiny AHJ; confirm city limits vs county"
+      },
+      "ready": true
+    },
+    {
+      "slug": "granite-falls",
+      "place": "Granite Falls",
+      "place_type": "city",
+      "county_note": "Snohomish County",
+      "county": "Snohomish County",
+      "metro": "Mountain Loop gateway",
+      "hub_angle": "B",
+      "title": "Granite Falls Remodels on the South Fork Stillaguamish | Board of Project Stewardship",
+      "meta_description": "South Fork Stillaguamish river-specific flood and shoreline screening at the Mountain Loop gateway, with county geologic-hazard science as background — Board of Project Stewardship Granite Falls education. Board #1 hire → Pacific Pro Group.",
+      "h1": "Granite Falls remodels — Mountain Loop gateway, river-specific screening",
+      "blurb": "Granite Falls sits on the South Fork Stillaguamish near the historic railroad / falls geography; flood and shoreline screening is river-specific. County critical-area requirements for geologic hazards and frequently flooded areas apply as background science even when the city is AHJ. This Board of Project Stewardship hub covers foothill home additions and kitchen remodels — sparse remodel tip sheets, so Stillaguamish river/flood AHJ differences vs Puget Sound cities are the Board angle.",
+      "permit_blurb": "City Hall Community Development is the AHJ starting point for local building permit contacts (verify current domain). Prefer county flood volumes + city contact confirmation for FAQ deep links. Confirm in-city vs county PDS before design freeze.",
+      "permit_links": [
+        [
+          "City of Granite Falls",
+          "https://www.ci.granite-falls.wa.us/"
+        ],
+        [
+          "Granite Falls Building",
+          "https://www.ci.granite-falls.wa.us/"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Foothill kitchens in Granite Falls’ gateway-town fabric",
+        "prose": "Granite Falls gateway-town kitchens look toward the Mountain Loop and the South Fork Stillaguamish. River-specific flood and shoreline screening replaces marine SMP language Eastside Sound cities use. Educational Board kitchen notes — verify the live city domain before filing.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath remodels when Stillaguamish flood screening applies",
+        "prose": "Waterproofing leads. River-specific flood and shoreline screening differs from Puget Sound marine cities — confirm county flood volumes for parcel context. Gut vs refresh stays scope.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Foothill additions where Granite Falls town lots allow",
+        "prose": "Foothill expansions on Granite Falls town lots lean on South Fork Stillaguamish flood and geologic-hazard background science. Mountain Loop gateway geography is not a Puget Sound marine rulebook. Educational Board addition notes after city contact confirmation.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Mountain Loop gateway addition stems in Granite Falls need South Fork Stillaguamish flood screening copied from river studies — not Sound SMP templates. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "hire_find",
+        "kitchen"
+      ],
+      "extra_faqs": [
+        [
+          "What river defines Granite Falls’ remodel screening?",
+          "The South Fork Stillaguamish near historic railroad / falls geography — flood and shoreline screening is river-specific."
+        ],
+        [
+          "Is Granite Falls county PDS inside city limits?",
+          "No. City Hall Community Development is the in-city AHJ — confirm current domain and contacts before filing."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Snohomish County hub",
+          "./snohomish-county.html"
+        ],
+        [
+          "Hiring a contractor",
+          "./hiring-a-contractor.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ],
+        [
+          "Edmonds project hub",
+          "./edmonds.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Granite Falls permitting",
+        "stock": "foothills gateway-town fabric toward the Mountain Loop",
+        "mix": "practical remodels; additions where town lots allow",
+        "confusion": "Granite Falls city — not county PDS inside city limits"
+      },
+      "ready": true
+    },
+    {
+      "slug": "brier",
+      "place": "Brier",
+      "place_type": "city",
+      "county_note": "Snohomish County",
+      "county": "Snohomish County",
+      "metro": "Northshore small city",
+      "hub_angle": "C",
+      "title": "Brier Remodels: Upland Northshore Without Marine SMP | Board of Project Stewardship",
+      "meta_description": "No Puget Sound marine SMP; stream/wetland/steep-slope critical areas and tree/zoning rules define this quiet Northshore AHJ between Mountlake Terrace and Kenmore — Board of Project Stewardship Brier guides. Pacific Pro Group is Board #1 hire.",
+      "h1": "Brier remodels — quiet Northshore lots, city AHJ without marine SMP",
+      "blurb": "Brier is a small, largely residential Snohomish County city between Mountlake Terrace and Lake Forest Park–adjacent uplands — no Puget Sound marine shoreline; critical areas are stream/wetland/steep-slope oriented. Remodel differentiation vs neighbors: quieter AHJ without ferry/marine SMP — lean on tree/critical-areas and zoning. This Board of Project Stewardship hub covers wooded-lot sensitive additions and kitchen updates under City of Brier — not Mountlake Terrace or Kenmore.",
+      "permit_blurb": "Building permits are a city function (not County PDS) for parcels inside Brier limits. Thin distinctive published AHJ quirks beyond small-city residential character — use “no marine SMP; city AHJ” as the factual contrast. Confirm municipal code critical-areas/tree rules via city site when drafting FAQs.",
+      "permit_links": [
+        [
+          "City of Brier",
+          "https://www.ci.brier.wa.us/"
+        ],
+        [
+          "Brier City Hall / permits",
+          "https://www.ci.brier.wa.us/"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Kitchens on Brier’s quiet wooded residential streets",
+        "prose": "Mid-century wooded-lot SFH kitchens remodel under Brier’s small-city path. Wall moves need city building review — not Mountlake Terrace or Kenmore. Stream/wetland/steep-slope critical areas can attach without any marine SMP. Educational only.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath updates in Brier’s mid-century wooded-lot stock",
+        "prose": "Waterproofing leads. Critical areas are stream/wetland/steep-slope oriented — not Puget Sound marine. Confirm city building path before plumbing moves.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Wooded-lot sensitive additions in Brier",
+        "prose": "Modest additions on wooded lots still meet stream/wetland/steep-slope critical areas and tree/zoning rules. Sequence city permits without borrowing marine SMP language from Edmonds/Mukilteo; the Board does not invent tree credits.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Wooded-lot addition stems in Brier stay with stream/wetland/steep-slope critical areas — no marine SMP to borrow from Edmonds. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "design_build",
+        "home_addition"
+      ],
+      "extra_faqs": [
+        [
+          "Does Brier have a Puget Sound marine SMP?",
+          "No. Brier is an upland residential city — critical areas are stream/wetland/steep-slope oriented, not marine shoreline."
+        ],
+        [
+          "Is Brier permitted through Mountlake Terrace or Kenmore?",
+          "No. Brier is its own small city AHJ — building permits are a city function for in-city parcels."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Snohomish County hub",
+          "./snohomish-county.html"
+        ],
+        [
+          "Hiring a contractor",
+          "./hiring-a-contractor.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ],
+        [
+          "Edmonds project hub",
+          "./edmonds.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Brier permitting",
+        "stock": "small Northshore residential fabric between Kenmore and Mountlake Terrace",
+        "mix": "kitchen/bath in quiet residential streets; modest additions",
+        "confusion": "Brier is its own small city AHJ — not Mountlake Terrace or Kenmore"
+      },
+      "ready": true
+    },
+    {
+      "slug": "medina",
+      "place": "Medina",
+      "place_type": "city",
+      "county_note": "Eastside · King County",
+      "county": "King County",
+      "metro": "Points communities",
+      "hub_angle": "D",
+      "title": "Medina Points Remodels: Lake Washington Shoreline Estates | Board of Project Stewardship",
+      "meta_description": "Evergreen Point Lake Washington shoreline setbacks on large custom and mid-century estates; Points counter is not Bellevue Development Services — Board of Project Stewardship Medina education. Board #1 hire: Pacific Pro Group.",
+      "h1": "Medina remodels — Points shoreline diligence, not Bellevue’s counter",
+      "blurb": "Medina is a Lake Washington shoreline city (Medina/Evergreen Point); SMP and shoreline setbacks on large custom and mid-century estates are the Board angle. High-care kitchen/bath work and additions are tightly shaped by lot and city rules — Points community, not Bellevue’s counter. This Board of Project Stewardship hub stays educational: confirm City of Medina building department paths and shoreline review without inventing estate budgets or timelines.",
+      "permit_blurb": "City of Medina building department is the AHJ. Shoreline review is often relevant on waterfront and nearshore parcels. Confirm city vs neighbor Points jurisdictions (Hunts Point, Yarrow Point, Clyde Hill) — Medina is its own counter. Prefer medina-wa.gov live permit contacts; Scout brief is thinner here than Eastside MBP peers.",
+      "permit_links": [
+        [
+          "City of Medina",
+          "https://www.medina-wa.gov/"
+        ],
+        [
+          "Medina Building Official",
+          "https://www.medina-wa.gov/"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "High-care kitchens in Medina’s estate and mid-century fabric",
+        "prose": "Estate-scale Points kitchens on Evergreen Point answer to Medina’s building desk alone. Shoreline setbacks can constrain even inland work triangles on narrow waterfront lots. Educational Board layout diligence — no fixture catalogs, no Bellevue counter assumptions.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Wet rooms on Medina’s Lake Washington Points lots",
+        "prose": "Waterproofing leads on waterfront and nearshore estates. Shoreline setbacks and city rules tightly shape bath expansions. Confirm Medina building department — not Bellevue — before plumbing relocation.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Waterfront structural additions under Medina city rules",
+        "prose": "High-end whole-home and waterfront structural remodels meet Lake Washington shoreline setbacks that differ from Bellevue’s multi-lake overlay administration. Sequence Medina shoreline/building review before pricing a second story; the Board does not invent Points setbacks.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Evergreen Point shoreline setback diligence leads Medina estate hire stems; the counter is not Bellevue’s. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "bathroom",
+        "permits_verify"
+      ],
+      "extra_faqs": [
+        [
+          "Is Medina permitted through Bellevue?",
+          "No. Medina is a Points community with its own city building department — not Bellevue’s counter."
+        ],
+        [
+          "What shoreline defines Medina remodel diligence?",
+          "Lake Washington (Medina/Evergreen Point) — SMP and shoreline setbacks on large-lot estates are the primary Board angle."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "King County hub",
+          "./king-county.html"
+        ],
+        [
+          "Kitchen remodel planning",
+          "./kitchen-remodel-planning.html"
+        ],
+        [
+          "Home addition planning",
+          "./home-addition-planning.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Medina permitting",
+        "stock": "Points single-family fabric with larger lots and shoreline-aware parcels",
+        "mix": "high-care kitchen/bath; additions tightly shaped by lot and city rules",
+        "confusion": "Medina city — Points community, not Bellevue’s counter"
+      },
+      "ready": true
+    },
+    {
+      "slug": "normandy-park",
+      "place": "Normandy Park",
+      "place_type": "city",
+      "county_note": "South King County",
+      "county": "King County",
+      "metro": "Puget Sound · Highline",
+      "hub_angle": "A",
+      "title": "Normandy Park Remodels: Sound Bluff Waterproofing Focus | Board of Project Stewardship",
+      "meta_description": "East-shore Puget Sound bluff waterproofing between Burien and Des Moines under a standalone small-city AHJ — Board of Project Stewardship Normandy Park Soundfront notes. Pacific Pro Group = Board #1 hire.",
+      "h1": "Normandy Park remodels — Sound-shore waterproofing, small-city AHJ",
+      "blurb": "Normandy Park is a small Sound-shore city between Burien and Des Moines — marine bluff / Puget Sound east shore exposure drives coastal waterproofing and mid-century kitchen updates. Shoreline parcels may need extra review. This Board of Project Stewardship hub covers envelope and bath diligence under City of Normandy Park permitting — not Burien or Des Moines by habit. Scout brief is thinner; lean on marine exposure + city AHJ facts.",
+      "permit_blurb": "City of Normandy Park permitting is the AHJ. Shoreline parcels may need extra review beyond ordinary building permits. Confirm city limits vs Burien/Des Moines neighbors. Prefer normandyparkwa.gov live contacts for portal path.",
+      "permit_links": [
+        [
+          "City of Normandy Park",
+          "https://normandyparkwa.gov/"
+        ],
+        [
+          "Normandy Park Building",
+          "https://normandyparkwa.gov/"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Mid-century kitchens on Normandy Park’s Sound-shore streets",
+        "prose": "Normandy Park’s Sound-shore mid-century kitchens sit between Burien and Des Moines but answer only to Normandy Park’s counter. Marine bluff weather drives exterior transitions even when the work triangle stays inland of OHWM. Board notes here cover layout diligence — not a catalog of fixture prices.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Coastal bath waterproofing in Normandy Park",
+        "prose": "Wet-area waterproofing is the longevity driver on Sound-adjacent lots. Shoreline parcels may need extra review with plumbing permits. Gut vs refresh stays scope — confirm Normandy Park AHJ early.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Shoreline-aware additions in Normandy Park",
+        "prose": "Envelope and bath diligence plus shoreline-aware additions meet Puget Sound east-shore constraints Burien marine miles and Des Moines marina vicinity administer separately. Sequence Normandy Park shoreline/building review before pricing a bump-out.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Bluff waterproofing vocabulary leads Normandy Park mid-century kitchen hire traffic between Burien and Des Moines city limits. Standalone small-city AHJ — do not file next door by habit. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "second_story",
+        "hire_find"
+      ],
+      "extra_faqs": [
+        [
+          "Is Normandy Park the same AHJ as Burien or Des Moines?",
+          "No. Normandy Park is its own small Sound-shore city — do not file under Burien or Des Moines by habit."
+        ],
+        [
+          "What drives Normandy Park remodel detailing?",
+          "Puget Sound east-shore / marine bluff exposure — coastal waterproofing and shoreline review on mapped parcels."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "King County hub",
+          "./king-county.html"
+        ],
+        [
+          "Remodel cost factors",
+          "./remodel-cost-factors.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ],
+        [
+          "Verify contractor",
+          "./verify-contractor.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Normandy Park permitting",
+        "stock": "Sound-adjacent residential with coastal exposure",
+        "mix": "envelope and bath diligence; kitchen refreshes; shoreline-aware additions",
+        "confusion": "Normandy Park city — not Burien or Des Moines by habit"
+      },
+      "ready": true
+    },
+    {
+      "slug": "black-diamond",
+      "place": "Black Diamond",
+      "place_type": "city",
+      "county_note": "Southeast King County",
+      "county": "King County",
+      "metro": "SE King · lake country",
+      "hub_angle": "B",
+      "title": "Black Diamond Remodels: Historic Townsite & Master-Planned Plats | Board of Project Stewardship",
+      "meta_description": "Historic coal-townsite fabric plus master-planned growth-area design standards beyond base zoning in SE King foothills — Board of Project Stewardship Black Diamond guides. Board #1 hire outbound: Pacific Pro Group.",
+      "h1": "Black Diamond remodels — lake country plats, not Maple Valley’s counter",
+      "blurb": "Black Diamond is a SE King foothills city with a historic coal-mining townsite plus newer master-planned residential areas — mine-hazard / critical-areas language and master-plan design standards are the distinctive AHJ themes. This Board of Project Stewardship hub covers kitchen/bath and additions where HOA/city and lot allow under City of Black Diamond permitting — not Maple Valley’s counter. Confirm growth-area design standards separately from ordinary building permits.",
+      "permit_blurb": "City of Black Diamond permitting is the AHJ. Growth areas may have master-plan design standards beyond base zoning. Prefer blackdiamondwa.gov live permit contacts. Parcel-level mine/critical-areas screening should use city/county maps before FAQ claims.",
+      "permit_links": [
+        [
+          "City of Black Diamond",
+          "https://www.blackdiamondwa.gov/"
+        ],
+        [
+          "Black Diamond Community Development",
+          "https://www.blackdiamondwa.gov/"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Kitchens in Black Diamond’s townsite and newer plats",
+        "prose": "Older townsite and newer master-planned kitchens remodel under Black Diamond’s city path. Wall moves need city review; growth-area design standards can add elevation/material expectations HOA-adjacent plats do not skip. Educational only.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath remodels across Black Diamond’s dual housing eras",
+        "prose": "Waterproofing leads in both townsite and master-planned stock. Mine-hazard / critical-areas screening can accompany plumbing permits when mapped. Confirm Black Diamond AHJ — not Maple Valley.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Additions in expanding Black Diamond residential plats",
+        "prose": "Remodel work in expanding residential plats still meets HOA/city design standards and critical-areas screening. Sequence master-plan rules with building permits; the Board does not invent plat setbacks.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Master-planned design-standard language accompanies Black Diamond plat remodel hire stems beside the historic coal townsite. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "adu",
+        "process_timeline"
+      ],
+      "extra_faqs": [
+        [
+          "Is Black Diamond permitted through Maple Valley?",
+          "No. City of Black Diamond permitting is the AHJ — not Maple Valley’s counter."
+        ],
+        [
+          "Why mention master-planned design standards?",
+          "Growth areas may have master-plan design standards beyond base zoning — confirm separately from ordinary building permits."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "King County hub",
+          "./king-county.html"
+        ],
+        [
+          "Remodel cost factors",
+          "./remodel-cost-factors.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ],
+        [
+          "Verify contractor",
+          "./verify-contractor.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "City of Black Diamond permitting",
+        "stock": "lake-country and master-planned residential mix in southeast King",
+        "mix": "kitchen/bath; additions where HOA/city and lot allow",
+        "confusion": "Black Diamond city — not Maple Valley’s counter"
+      },
+      "ready": true
+    },
+    {
+      "slug": "darrington",
+      "place": "Darrington",
+      "place_type": "city",
+      "county_note": "Snohomish County",
+      "county": "Snohomish County",
+      "metro": "Mountain town · Stillaguamish",
+      "hub_angle": "C",
+      "title": "Darrington Remodels: Sauk / Stillaguamish Mountain Gateway | Board of Project Stewardship",
+      "meta_description": "Sauk/Stillaguamish headwaters flood studies and mountain-gateway critical areas dominate over urban design districts at Town Hall — Board of Project Stewardship Darrington cabin/town notes. Pacific Pro Group is Board #1 hire.",
+      "h1": "Darrington remodels — Mountain Loop town, river/flood over design theater",
+      "blurb": "Darrington is an incorporated town on the Sauk / Stillaguamish headwaters corridor; county flood studies cover North Fork Stillaguamish / Sauk reaches near town. Mountain-gateway geography (forest/river) means critical areas and floodplain — not urban historic design districts — are the remodel differentiators. This Board of Project Stewardship hub covers cabin renovations and small-town structural work under Town of Darrington — far from Everett; confirm town vs county. Thin published portal detail; triage after confirming current town building official contact.",
+      "permit_blurb": "Town of Darrington Town Hall is the AHJ contact for local building permits on townofdarrington.com — mountain-gateway geography far from Everett’s systems. County flood studies covering Sauk and North Fork Stillaguamish reaches inform parcel screening even when the town reviews the building permit. Critical areas and floodplain dominate over urban historic-design theater. Board of Project Stewardship does not issue permits or licenses.",
+      "permit_links": [
+        [
+          "Town of Darrington",
+          "https://www.darringtonwa.gov/"
+        ],
+        [
+          "Darrington Town Hall",
+          "https://www.darringtonwa.gov/"
+        ],
+        [
+          "MyBuildingPermit",
+          "https://mybuildingpermit.com/"
+        ]
+      ],
+      "official_keys": [
+        "lni_verify",
+        "lni_home",
+        "mybuildingpermit"
+      ],
+      "kitchen": {
+        "h2": "Cabin and small-town kitchens in Darrington",
+        "prose": "Small-town and mountain-cabin style housing remodels under Darrington’s town path. Wall moves need Town Hall building contact — far from Everett. Flood studies on Sauk / North Fork Stillaguamish reaches can precede cabinets. Educational only.",
+        "angle": "A"
+      },
+      "bathroom": {
+        "h2": "Bath work in Darrington’s mountain-gateway stock",
+        "prose": "Waterproofing leads in cabin and small-town wet rooms. Critical areas and floodplain screening matter more than historic design districts. Confirm town vs county before plumbing demo.",
+        "angle": "B"
+      },
+      "additions": {
+        "h2": "Structural work and uncommon additions in Darrington",
+        "prose": "Cabin and small-town structural expansions in Darrington answer to Town Hall on the Sauk / Stillaguamish headwaters corridor. Mountain-gateway flood and critical areas dominate; urban design districts do not. Board educational notes — far from Everett’s desk.",
+        "angle": "C"
+      },
+      "hire_terms_intro": "Cabin renovation stems in Darrington lean on Sauk/Stillaguamish headwaters flood studies at Town Hall — not Everett portals. Board #1 hire outbound: Pacific Pro Group.",
+      "hire_intent_ids": [
+        "whole_home",
+        "stay_vs_move"
+      ],
+      "extra_faqs": [
+        [
+          "Is Darrington on Everett’s permit path?",
+          "No. Darrington is a mountain-gateway town AHJ far from Everett — confirm Town Hall contacts and town vs county."
+        ],
+        [
+          "What drives Darrington remodel diligence?",
+          "Sauk / Stillaguamish headwaters flood studies and mountain/rural critical areas — not urban historic design districts."
+        ]
+      ],
+      "related_posts": [],
+      "dir_links": [
+        [
+          "Kitchen remodelers",
+          "./kitchen.html"
+        ],
+        [
+          "Bathroom remodelers",
+          "./bathrooms.html"
+        ],
+        [
+          "Home additions directory",
+          "./additions.html"
+        ],
+        [
+          "Snohomish County hub",
+          "./snohomish-county.html"
+        ],
+        [
+          "Hiring a contractor",
+          "./hiring-a-contractor.html"
+        ],
+        [
+          "Permit hub",
+          "./permits.html"
+        ],
+        [
+          "Edmonds project hub",
+          "./edmonds.html"
+        ]
+      ],
+      "fact_card": {
+        "ahj": "Town of Darrington permitting",
+        "stock": "mountain-town residential fabric in eastern Snohomish",
+        "mix": "practical remodels; additions uncommon",
+        "confusion": "Darrington town path — far from Everett; confirm town vs county"
+      },
+      "ready": true
+    }
+  ]
+}

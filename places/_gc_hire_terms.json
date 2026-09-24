@@ -1,0 +1,196 @@
+{
+  "version": 1,
+  "updated": "2026-09-24",
+  "owner": "Cite",
+  "for": "Board of Project Stewardship places SEO \u2014 drop into places/_gc_hire_terms.json",
+  "rules": {
+    "volumes": "none \u2014 do not invent or paste search-volume numbers",
+    "pairing": "pair one primary term with one geo_modifier per place page; do not Mad-Lib every term \u00d7 every city",
+    "board_copy": "educational Board voice; spell out Board of Project Stewardship; no ChatGPT, Gemini, Grok, LLM, or AI-product names in public HTML/meta/alt; no invented prices, licenses, years, awards, or ROI; educational \u2260 bid or schedule promise",
+    "outbound": "when a hire CTA is appropriate, Board #1 hire may point to https://pacificprogroup.com/ \u2014 do not keyword-stuff Pacific Pro Group into every H2",
+    "source": "Cite Aug 17 2026 SERP/FAQ harvest + unique-question inventory (live PPG/Another Story FAQs, competitor cost pages, SDCI/L&I Hire Smart language). Stems observed in market \u2014 not invented Mad-Libs."
+  },
+  "geo_modifiers": {
+    "king_snohomish_primary": [
+      "Edmonds",
+      "Shoreline",
+      "Lynnwood",
+      "Seattle",
+      "North Seattle",
+      "Mukilteo"
+    ],
+    "county": [
+      "King County",
+      "Snohomish County",
+      "Washington"
+    ],
+    "adjacent_thin": [
+      "Mountlake Terrace",
+      "Lake Forest Park",
+      "Woodway",
+      "Everett"
+    ],
+    "neighborhoods_only_if_real_stock": [
+      "Ballard",
+      "Green Lake",
+      "Ravenna",
+      "Wedgwood",
+      "Wallingford",
+      "Greenwood",
+      "Phinney Ridge",
+      "Magnolia"
+    ]
+  },
+  "intents": [
+    {
+      "id": "hire_find",
+      "label": "Find / hire a contractor",
+      "terms": [
+        "hire a general contractor",
+        "find a licensed contractor",
+        "best general contractor",
+        "home remodeling contractor",
+        "remodeling contractor near me",
+        "how to hire a general contractor Washington",
+        "questions to ask a general contractor before hiring",
+        "compare contractor bids"
+      ]
+    },
+    {
+      "id": "design_build",
+      "label": "Design-build",
+      "terms": [
+        "design build contractor",
+        "design build firm",
+        "design build remodel",
+        "design build vs general contractor",
+        "hire design build contractor",
+        "design build home addition"
+      ]
+    },
+    {
+      "id": "kitchen",
+      "label": "Kitchen remodel",
+      "terms": [
+        "kitchen remodel contractor",
+        "kitchen remodel",
+        "kitchen renovation contractor",
+        "best kitchen remodeler",
+        "kitchen remodel cost",
+        "full kitchen remodel timeline"
+      ]
+    },
+    {
+      "id": "bathroom",
+      "label": "Bathroom remodel",
+      "terms": [
+        "bathroom remodel contractor",
+        "bathroom remodel",
+        "bathroom renovation",
+        "master bath remodel",
+        "bathroom remodel cost",
+        "do I need a permit for a bathroom remodel"
+      ]
+    },
+    {
+      "id": "home_addition",
+      "label": "Home addition / bump-out",
+      "terms": [
+        "home addition contractor",
+        "house addition",
+        "room addition contractor",
+        "bump out addition",
+        "primary suite addition",
+        "home addition cost",
+        "home addition process"
+      ]
+    },
+    {
+      "id": "second_story",
+      "label": "Second-story / vertical addition",
+      "terms": [
+        "second story addition",
+        "second floor addition",
+        "second story addition contractor",
+        "adding a second story to a rambler",
+        "second story addition cost",
+        "stay in home during second story addition",
+        "second story vs bump out"
+      ]
+    },
+    {
+      "id": "adu",
+      "label": "ADU / DADU",
+      "terms": [
+        "ADU contractor",
+        "DADU builder",
+        "backyard ADU",
+        "accessory dwelling unit builder",
+        "ADU vs second story addition",
+        "permit ready ADU plans"
+      ]
+    },
+    {
+      "id": "whole_home",
+      "label": "Whole-home remodel",
+      "terms": [
+        "whole home remodel",
+        "whole house renovation",
+        "major home renovation contractor",
+        "full house remodel"
+      ]
+    },
+    {
+      "id": "permits_verify",
+      "label": "Permits / license / verify",
+      "terms": [
+        "how to verify Washington contractor license",
+        "verify contractor license L and I",
+        "building permit home addition",
+        "who pulls permits for a remodel",
+        "do I need a permit for a home addition",
+        "permit ready plans",
+        "Edmonds building permit addition",
+        "Seattle SDCI addition permit"
+      ]
+    },
+    {
+      "id": "stay_vs_move",
+      "label": "Stay-in-home / remodel vs buy",
+      "terms": [
+        "can I live in my house during a remodel",
+        "stay in home during construction",
+        "live in house during home addition",
+        "remodel vs buy a bigger house",
+        "add on or move"
+      ]
+    },
+    {
+      "id": "process_timeline",
+      "label": "Process / timeline / what to expect",
+      "terms": [
+        "home addition timeline",
+        "kitchen remodel how long",
+        "what to expect when hiring a contractor",
+        "design build process",
+        "questions to ask a second story contractor"
+      ]
+    }
+  ],
+  "place_page_seed_pattern": {
+    "title_shape": "{Primary intent} in {Geo} | Board of Project Stewardship",
+    "h1_shape": "Hiring a {role} in {Geo}",
+    "examples": [
+      "Hiring a design-build contractor in Edmonds",
+      "Kitchen remodel contractors in Shoreline",
+      "Second-story additions in North Seattle",
+      "How to verify a Washington contractor license"
+    ],
+    "do_not": [
+      "stuff every intent into one place page",
+      "publish Pacific Pro Group vs peer listicles on the Board domain",
+      "paste dollar ranges unless sourced to a live public page Alex already approved",
+      "name Trustindex, Mastodon creator tags, or paid referral cards"
+    ]
+  }
+}
