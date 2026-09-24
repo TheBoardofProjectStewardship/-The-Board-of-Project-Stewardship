@@ -1433,7 +1433,7 @@ def build_walkthrough_home_section(prefix: str = "") -> str:
     <div class="mb-6 border-b border-white/10 pb-4">
       <span class="text-secondary text-xs font-bold uppercase tracking-widest">Good Steward Tools</span>
       <h2 class="text-3xl font-black text-white tracking-tight">See how a project is built</h2>
-      <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Interactive walkthrough from sales discovery to warranty handoff — blueprints, 3D framing walls rising, then a finished Pacific Northwest home. Checklist language mirrors Site Visit &amp; Discovery and the PM Dashboard. Illustrative media, not engineering docs. <a href="{land}" class="text-secondary hover:underline">Open full landing</a>.</p>
+      <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">One cohesive illustrative house from the Board of Project Stewardship, scrubbed through 17 stages from Discovery to Handoff. Plan, 3D, Elevation, and Walk stay on the same model. Honesty chips: illustrative media, not engineering documents. <a href="{land}" class="text-secondary hover:underline">Open full landing</a>.</p>
     </div>
     <iframe
       id="build-walkthrough-home"
@@ -5522,7 +5522,7 @@ def build_build_walkthrough_page() -> str:
     body = f"""  <header class="max-w-6xl mx-auto px-4 pt-10 pb-2">
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Build Walkthrough</h1>
-    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">See how a North Sound project moves from discovery to closeout — blueprint lines, 3D framing walls, then a finished home. Stage checklists reuse Board language from Site Visit &amp; Discovery and the PM Execution Dashboard.</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">One cohesive illustrative house from the Board of Project Stewardship, scrubbed through 17 stages from Discovery to Handoff. The same model stays on screen in 3D, Plan, Elevation, and Walk. Honesty chips read “Illustrative media · not engineering documents” and “Illustrative model · not a site scan.”</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Educational Board tool. When you hire, shortlist from Board directories — Board #1: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a>. Re-verify any contractor at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>.</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="{public_tool_href('good-steward')}" class="text-secondary hover:underline">Good Steward</a>. Also: <a href="{public_tool_href('site-visit')}" class="text-secondary hover:underline">Site Visit Checklist</a> · <a href="{public_tool_href('pm-dashboard')}" class="text-secondary hover:underline">PM Dashboard</a> · <a href="{public_tool_href('energy-credit')}" class="text-secondary hover:underline">Energy code credits</a>.</p>
   </header>
@@ -5534,14 +5534,63 @@ def build_build_walkthrough_page() -> str:
       loading="lazy"
       style="display:block;width:100%;height:900px;border:0;border-radius:18px;background:#0a0a0a;"
     ></iframe>
-    <p class="text-[11px] text-slate-600 mt-3 leading-relaxed">Illustrative stages for homeowners — not a bid or schedule commitment.</p>
+    <p class="text-[11px] text-slate-600 mt-3 leading-relaxed">One persistent house. Honesty chips: Illustrative media · not engineering documents. Illustrative model · not a site scan.</p>
+    <section class="mt-8" id="seventeen-stages" aria-labelledby="seventeen-stages-h">
+      <h2 id="seventeen-stages-h" class="text-xl font-black text-white tracking-tight mb-3">Seventeen stages, one house</h2>
+      <p class="text-sm text-slate-400 font-light max-w-3xl leading-relaxed mb-4">Drag the scrubber on the same illustrative model. Views are educational diagrams from the Board of Project Stewardship, not construction documents or a promised sequence.</p>
+      <ol class="grid sm:grid-cols-2 gap-3 text-sm text-slate-300 font-light list-decimal pl-5">
+        <li><strong class="text-white">Discovery.</strong> Before drawings: capture vision, budget reality, and site constraints.</li>
+        <li><strong class="text-white">Plans.</strong> Layouts and elevations turn discovery into a shared spatial story.</li>
+        <li><strong class="text-white">Permits.</strong> Verify permit pathways, licensing, access, and review responsibilities before work starts. The Board of Project Stewardship does not issue licenses.</li>
+        <li><strong class="text-white">Site prep.</strong> Access, erosion controls, temporary utilities, and staging prepare the lot.</li>
+        <li><strong class="text-white">Foundation.</strong> Excavation, forms, concrete, waterproofing, and backfill establish the load path.</li>
+        <li><strong class="text-white">Framing.</strong> Studs, joists, headers, rafters, and plates turn the footprint into a readable volume.</li>
+        <li><strong class="text-white">Roofing.</strong> Decking, underlayment, flashing, and roof covering complete dry-in from above.</li>
+        <li><strong class="text-white">Siding.</strong> Sheathing, weather barrier, openings, trim, and cladding close the exterior envelope.</li>
+        <li><strong class="text-white">Plumbing.</strong> Water, waste, and vent paths coordinate through open framing before cavities close.</li>
+        <li><strong class="text-white">Electrical.</strong> Panel, branch circuits, device boxes, and low-voltage paths rough into the open walls.</li>
+        <li><strong class="text-white">HVAC.</strong> Ducts, equipment, returns, and fresh-air paths coordinate before insulation.</li>
+        <li><strong class="text-white">Insulation.</strong> Cavity fill and envelope continuity follow completed rough inspections.</li>
+        <li><strong class="text-white">Drywall.</strong> Wallboard, finishing, primer, and paint turn the shell into rooms that can be walked.</li>
+        <li><strong class="text-white">Cabinets.</strong> Cabinet boxes, millwork, counters, and alignment bring homeowner-visible craft forward.</li>
+        <li><strong class="text-white">Tile.</strong> Wet-area waterproofing, tile, grout, and flooring transitions complete durable surfaces.</li>
+        <li><strong class="text-white">Punch.</strong> The nearly complete house is checked for gaps, touch-ups, operation, and final signoffs.</li>
+        <li><strong class="text-white">Handoff.</strong> Warranty contacts, systems orientation, maintenance habits, and records support long-term stewardship.</li>
+      </ol>
+    </section>
   </section>
 """ + education_closing("tools", "hire", "default", official_keys=["lni_verify", "lni_home", "mybuildingpermit"])
+    walk_steps = [
+        ("Discovery", "Before drawings: capture vision, budget reality, and site constraints. Educational diagram of one persistent house."),
+        ("Plans", "Layouts and elevations turn discovery into a shared spatial story. Illustrative sheets only — not stamped engineering."),
+        ("Permits", "Verify permit pathways, licensing, access, and review responsibilities before work starts. The Board of Project Stewardship does not issue licenses."),
+        ("Site prep", "Access, erosion controls, temporary utilities, and staging prepare the lot."),
+        ("Foundation", "Excavation, forms, concrete, waterproofing, and backfill establish the load path."),
+        ("Framing", "Studs, joists, headers, rafters, and plates turn the footprint into a readable volume."),
+        ("Roofing", "Decking, underlayment, flashing, and roof covering complete dry-in from above."),
+        ("Siding", "Sheathing, weather barrier, openings, trim, and cladding close the exterior envelope."),
+        ("Plumbing", "Water, waste, and vent paths coordinate through open framing before cavities close."),
+        ("Electrical", "Panel, branch circuits, device boxes, and low-voltage paths rough into the open walls."),
+        ("HVAC", "Ducts, equipment, returns, and fresh-air paths coordinate before insulation."),
+        ("Insulation", "Cavity fill and envelope continuity follow completed rough inspections."),
+        ("Drywall", "Wallboard, finishing, primer, and paint turn the shell into rooms that can be walked. Walk view becomes available here."),
+        ("Cabinets", "Cabinet boxes, millwork, counters, and alignment bring homeowner-visible craft forward."),
+        ("Tile", "Wet-area waterproofing, tile, grout, and flooring transitions complete durable surfaces."),
+        ("Punch", "The nearly complete house is checked for gaps, touch-ups, operation, and final signoffs."),
+        ("Handoff", "Warranty contacts, systems orientation, maintenance habits, and records support long-term stewardship."),
+    ]
+    walk_howto = howto_ld(
+        "How one illustrative house progresses from Discovery to Handoff",
+        "One cohesive illustrative house through 17 stages from the Board of Project Stewardship. Educational media only — not engineering documents, bids, schedules, or stamped plans.",
+        walk_steps,
+        f"{BASE_URL}build-walkthrough.html",
+    )
     return page_shell(
         "Build Walkthrough | Board of Project Stewardship",
-        "Interactive build walkthrough from the Board of Project Stewardship — discovery through finishes for Edmonds / coastal Puget Sound. Educational stages, not a bid or schedule.",
+        "One cohesive illustrative house through 17 stages from the Board of Project Stewardship. Honesty chips mark illustrative media, not engineering documents.",
         "build-walkthrough",
         body,
+        json_ld=[walk_howto],
         canonical=f"{BASE_URL}build-walkthrough.html",
         include_story_embed=True,
         include_tools_embed=False,
@@ -10582,7 +10631,7 @@ def patch_tool_pages() -> None:
         (
             SITE_DIR / "tools" / "build-walkthrough" / "index.html",
             "Build Walkthrough | Board of Project Stewardship",
-            "Interactive sales-to-build walkthrough for Edmonds / coastal Puget Sound homeowners — blueprint to framing to finished home. Educational Board stages, not a bid or schedule.",
+            "One cohesive illustrative house through 17 stages from the Board of Project Stewardship. Educational media only — not engineering documents, bids, or schedules.",
             f"{SITE_ORIGIN}/build-walkthrough.html",
         ),
         (
