@@ -4749,7 +4749,7 @@ def md_to_html(md: str) -> str:
                 resolved = CDN_MAP[rel]
         return (
             f'<div class="video-embed">'
-            f'<video controls playsinline preload="metadata" '
+            f'<video controls playsinline preload="metadata" muted '
             f'style="width:100%;border-radius:12px;background:#000">'
             f'<source src="{esc(resolved)}" type="video/mp4">'
             f'</video></div>'
