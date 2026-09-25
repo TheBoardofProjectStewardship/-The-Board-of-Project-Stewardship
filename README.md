@@ -20,6 +20,7 @@ Base: `https://boardofprojectstewardship.com/`
 | `edmonds-custom-homes.html` | Edmonds Custom Homes Top 30 (filters, permit guide, tools) |
 | `kitchen.html` | Kitchen remodel rankings (PPG #1 + ranks 2–15) |
 | `bathrooms.html` | Bathroom remodel rankings (PPG #1 + ranks 2–15) |
+| `restoration.html` | Water, fire, and mold damage restoration (DK Production #1) |
 | `commercial.html` | Commercial GC / TI rankings (ranks 1–15) |
 | `spec-homes.html` | Spec / production home builders (ranks 1–14) |
 | `trades.html` | Trade contractor hub |
