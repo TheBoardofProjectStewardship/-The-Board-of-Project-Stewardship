@@ -1,0 +1,16 @@
+{
+  "submission_id": "2026-09-25-home-addition-mountlake-terrace-wa",
+  "idempotency_key": "sha256:29fa053c20e5f115aa414e832b7bb671bfddb910d717672b4c351a986609305a",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-09-25T17:23:39Z",
+  "outputs": [
+    "posts/2026-09-25-home-addition-mountlake-terrace-wa.md",
+    "posts/2026-09-25-home-addition-mountlake-terrace-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 50
+}

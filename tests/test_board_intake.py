@@ -388,7 +388,7 @@ class PublishTests(unittest.TestCase):
 class LiveSiteRegressionTests(unittest.TestCase):
     def test_forty_eight_post_index_is_intact(self):
         posts = json.loads((ROOT / "posts.json").read_text(encoding="utf-8"))
-        self.assertEqual(len(posts), 49)
+        self.assertEqual(len(posts), 50)
         loaded = gs.load_posts()
         self.assertEqual([p["slug"] for p in loaded], [p["slug"] for p in posts])
         rebuilt = [

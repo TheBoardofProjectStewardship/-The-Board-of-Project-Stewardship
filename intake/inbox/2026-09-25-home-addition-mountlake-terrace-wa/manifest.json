@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-09-25-home-addition-mountlake-terrace-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-09-25T17:20:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Home Addition Mountlake Terrace WA — Setbacks, Stormwater & Design-Build Sequencing",
+    "date": "2026-09-25",
+    "slug": "home-addition-mountlake-terrace-wa",
+    "description": "Mountlake Terrace home addition guidance for Snohomish County setbacks, stormwater, City permit portal paths, and how to shortlist licensed design-build firms.",
+    "category": "Additions"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0.0",
+  "producer": "grok-build",
+  "files": [
+    {
+      "role": "in-article",
+      "intake_file": "media/shot-1.webp",
+      "repo_path": "assets/images/posts/2026-09-25-mlt-addition-1.webp",
+      "alt": "Illustrative Mountlake Terrace–style home addition with wood framing and temporary weather wrap — illustrative staging image, not a real Board of Project Stewardship job photo"
+    },
+    {
+      "role": "in-article",
+      "intake_file": "media/shot-2.webp",
+      "repo_path": "assets/images/posts/2026-09-25-mlt-addition-2.webp",
+      "alt": "Illustrative foundation and sill connection detail for a residential addition in a wet Pacific Northwest climate — illustrative only, not a real job photo"
+    },
+    {
+      "role": "in-article",
+      "intake_file": "media/shot-3.webp",
+      "repo_path": "assets/images/posts/2026-09-25-mlt-addition-3.webp",
+      "alt": "Illustrative nearly weatherproofed Pacific Northwest home addition with roof sheathing and housewrap underway — illustrative only, not a real job photo"
+    },
+    {
+      "role": "process-clip",
+      "intake_file": "media/clip.mp4",
+      "repo_path": "assets/videos/posts/2026-09-25-mlt-addition.mp4",
+      "alt": "Illustrative process clip for Mountlake Terrace–style addition framing and weather wrap — not footage of a live Board job"
+    }
+  ]
+}
