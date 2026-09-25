@@ -17,7 +17,10 @@
     "https://www.veluxusa.com/",
     "https://www.trex.com/",
     "https://www.thermatru.com/",
-    "https://www.gaf.com/"
+    "https://www.gaf.com/",
+    "https://www.dupont.com/brands/tyvek.html",
+    "https://www.rockwool.com/north-america/",
+    "https://www.pella.com/"
   ],
   "used_youtube_ids": [
     "i2LyNX-bXKA",
@@ -31,7 +34,8 @@
     "KRaloDMnASo",
     "vC6Il3vPt0E",
     "sBwxw3KsVOM",
-    "pEFmR8uXa0E"
+    "pEFmR8uXa0E",
+    "7n0NE2WJegw"
   ],
   "used_photo_urls": [
     "assets/images/posts/2026-09-22-edmonds-siding-3.webp",
@@ -99,14 +103,17 @@
     "assets/images/posts/2026-09-02-edmonds-custom-3.webp",
     "assets/images/posts/2026-09-01-tile-edmonds-1.webp",
     "assets/images/posts/2026-09-01-tile-edmonds-2.webp",
-    "assets/images/posts/2026-09-01-tile-edmonds-3.webp"
+    "assets/images/posts/2026-09-01-tile-edmonds-3.webp",
+    "assets/images/posts/2026-09-25-mlt-addition-1.webp",
+    "assets/images/posts/2026-09-25-mlt-addition-2.webp",
+    "assets/images/posts/2026-09-25-mlt-addition-3.webp"
   ],
-  "last_morning_audit": "2026-09-22",
+  "last_morning_audit": "2026-09-25",
   "last_upgraded_slugs": [
     "edmonds-home-addition-permit-basics",
     "pnw-bathroom-waterproofing-essentials",
     "hire-design-build-edmonds",
     "another-story-method-weatherproof-first"
   ],
-  "last_shared_video": "assets/videos/posts/2026-09-22-edmonds-siding.mp4"
+  "last_shared_video": "assets/videos/posts/2026-09-25-mlt-addition.mp4"
 }

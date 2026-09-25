@@ -48,6 +48,7 @@ Base: `https://boardofprojectstewardship.com/`
 | `stamp-of-trust/` | Stamp of Trust credential |
 | `blog/rss.xml` | Blog RSS feed |
 | `404.html` | Branded Board 404 |
+| `posts/2026-09-25-home-addition-mountlake-terrace-wa.html` | Home Addition Mountlake Terrace WA — Setbacks, Stormwater & Design-Build Sequencing |
 | `posts/2026-09-24-kitchen-remodel-bothell-wa.html` | Kitchen Remodel Bothell WA — Layout, Permits & Licensed Pros |
 | `posts/2026-09-23-bathroom-remodel-bothell-wa.html` | Bathroom Remodel Bothell WA — Moisture, Permits & Licensed Pros |
 | `posts/2026-09-22-siding-replacement-edmonds-coastal-wa.html` | Fiber-Cement Siding Replacement Edmonds WA — Coastal Moisture, WRB & Permits |
