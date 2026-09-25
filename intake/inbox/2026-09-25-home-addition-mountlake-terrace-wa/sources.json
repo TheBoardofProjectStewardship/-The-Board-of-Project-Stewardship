@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0.0",
+  "producer": "hermes",
+  "sources": [
+    {
+      "id": "src-lni",
+      "title": "Washington L&I Verify a Contractor",
+      "url": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-09-25",
+      "supports": "Homeowners re-verify the legal business name, license, bond, and insurance before hiring."
+    },
+    {
+      "id": "src-mlt-building",
+      "title": "City of Mountlake Terrace — Building Permits",
+      "url": "https://www.cityofmlt.com/177/Building-Permits",
+      "retrieved": "2026-09-25",
+      "supports": "Mountlake Terrace publishes residential building application types, filing requirements, and fee schedules."
+    },
+    {
+      "id": "src-mlt-permits",
+      "title": "City of Mountlake Terrace — Permits & Licenses",
+      "url": "https://www.cityofmlt.com/1993/Permits-Licenses",
+      "retrieved": "2026-09-25",
+      "supports": "City directs applicants to its online Permit Portal and publishes typical residential review timelines."
+    },
+    {
+      "id": "src-mlt-etrakit",
+      "title": "Mountlake Terrace Permit Portal (eTRAKiT)",
+      "url": "https://mltw-trk.aspgov.com/eTRAKiT/",
+      "retrieved": "2026-09-25",
+      "supports": "Mountlake Terrace accepts building applications and inspection scheduling through its eTRAKiT portal, not MyBuildingPermit."
+    }
+  ]
+}
