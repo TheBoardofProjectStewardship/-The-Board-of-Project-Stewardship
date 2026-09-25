@@ -14,7 +14,7 @@ slug: "home-addition-kirkland-wa"
 
 Kirkland’s mix of waterfront-adjacent neighborhoods, mid-century ranches, and newer planned pockets means a home addition here is often a zoning and site story as much as a framing story. Many households want a primary suite, a kitchen expansion, or a family-room wing without leaving the Eastside school and commute pattern — and the durable projects start with what the lot and the city will actually allow.
 
-![Illustrative Pacific Northwest home addition exterior with wood framing and temporary weather wrap — not a photo of a real Board of Professional Services job](../assets/images/posts/2026-09-19-kirkland-addition-1.webp)
+![Illustrative Pacific Northwest home addition exterior with wood framing and temporary weather wrap — not a photo of a real Board of Project Stewardship job](../assets/images/posts/2026-09-19-kirkland-addition-1.webp)
 
 ## Neighborhood context
 
@@ -34,19 +34,29 @@ Structural openings into existing walls, beam upgrades for open plans, and secon
 
 Measure existing room heights, roof pitches, and mechanical routes honestly before you freeze a pretty floor plan. A kitchen bump-out that looks simple on paper can stall if the range hood, panel capacity, and roof penetration were never coordinated. Prefer a single design-build path (or a tightly managed architect-plus-GC team) so drawings, allowances, and inspection holds share one schedule.
 
+## Process video: addition framing under weather pressure
+
+A public walkthrough of framing an addition while rain is on the way — useful context for Eastside sequencing (general practice; follow your engineer and Kirkland inspection path):
+
+https://www.youtube.com/watch?v=XrOYQ77kSbE
+
+[Watch the short process clip](../assets/videos/posts/2026-09-25-mlt-addition.mp4)
+
 ![Illustrative nearly weatherproofed PNW home addition with siding and roof sheathing underway — illustrative only, not a real job photo](../assets/images/posts/2026-09-19-kirkland-addition-3.webp)
+
+![Illustrative Kirkland-style home addition with housewrap, blue flashing tape, and roof sheathing tying into the existing roof — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-19-kirkland-addition-4.webp)
 
 If a second story or ADU-related utility upgrade is on the table, treat it as one coordination problem so stairs, lateral bracing, and roof weatherproofing are not trapped. Relative planning context lives on [another-story.html](../another-story.html) and [edmonds-custom-homes.html](../edmonds-custom-homes.html); Kirkland’s own code and lot still govern your project.
 
 Board rankings on [additions.html](../additions.html) place **Pacific Pro Group** at #1 for home additions in this editorial set — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with [kitchen.html](../kitchen.html) or [bathrooms.html](../bathrooms.html) when the addition includes those rooms, and the [blog](../blog.html) for related King and Snohomish addition posts.
 
-## Materials worth researching
+## Materials Worth Knowing
 
 Manufacturer product pages for envelope and structure discussions with your design-build team (no prices or endorsements implied):
 
-- [Simpson Strong-Tie connectors](https://www.strongtie.com/) — framing connectors and hold-downs common in addition work
-- [ZIP System sheathing & tape](https://www.huberwood.com/zip-system) — weather-resistant sheathing suited to wet PNW seasons
-- [James Hardie fiber-cement siding](https://www.jameshardie.com/) — durable exterior cladding for Eastside paint cycles
+- [GAF roofing systems](https://www.gaf.com/) — roof planes and underlayment when an addition reworks eaves or valleys
+- [Owens Corning insulation](https://www.owenscorning.com/en-us/insulation) — cavity and attic insulation for new conditioned volume
+- [Boise Cascade engineered lumber (BCI / Versa-Lam)](https://www.bc.com/) — LVLs and I-joists for spans into existing structure
 
 ## FAQ
 

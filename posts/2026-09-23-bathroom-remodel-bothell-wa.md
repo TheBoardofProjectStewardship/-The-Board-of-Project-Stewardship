@@ -43,6 +43,8 @@ A clear public walkthrough of Schluter-style KERDI-BOARD wet-wall layout, fasten
 
 https://www.youtube.com/watch?v=qrObaJbftcE
 
+[Watch the short process clip](../assets/videos/posts/2026-09-shared-waterproofing.mp4)
+
 ## Design, trades, and coordination
 
 Measure the wet zone, valve height, niche, and glass opening before you lock a catalog number. Glass lead times can dominate the end of the schedule — measure only after walls are true. Coordinate plumber and electrician so one trade’s fastener line does not puncture the membrane the next trade just finished. Keep exhaust duct routing visible on the plan so it is not improvised through joist bays after tile is ordered.

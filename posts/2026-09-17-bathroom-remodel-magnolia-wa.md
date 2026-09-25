@@ -14,7 +14,7 @@ slug: "bathroom-remodel-magnolia-wa"
 
 Magnolia sits on a bluff between Elliott Bay and the ship canal, so bathroom remodels here are not generic “Seattle interiors.” Salt-tinged air, wind-driven rain, and mid-century homes with aging supply and drain lines shape what lasts. A beautiful vanity fails if the wet wall, shower pan, and exhaust path were treated as afterthoughts.
 
-![Illustrative Magnolia-style bathroom remodel with shower waterproofing membrane in progress — not a photo of a real Board of Professional Services job](../assets/images/posts/2026-09-17-magnolia-bathroom-1.webp)
+![Illustrative Magnolia-style bathroom remodel with shower waterproofing membrane in progress — not a photo of a real Board of Project Stewardship job](../assets/images/posts/2026-09-17-magnolia-bathroom-1.webp)
 
 ## Neighborhood and coastal context
 
@@ -35,23 +35,33 @@ Practical sequencing that works in Magnolia:
 
 ![Illustrative close-up of bathroom waterproofing membrane at shower curb and niche — illustrative only, not a real job photo](../assets/images/posts/2026-09-17-magnolia-bathroom-2.webp)
 
+## Process video: wet-wall waterproofing fundamentals
+
+A public walkthrough of sheet-membrane wet-wall layout and sealing at niches and valve walls (general best practice — still follow your product’s install guide and Seattle inspection path):
+
+https://www.youtube.com/watch?v=wAKfLIN79pY
+
+[Watch the short process clip](../assets/videos/posts/2026-09-shared-waterproofing.mp4)
+
 ## Materials and process guidance
 
 Prioritize cement board or foam-board systems rated for wet areas, continuous waterproofing at niches and benches, and slopes that actually drain. Large-format tile looks clean but demands flat substrates; pebble floors need careful pitch. Choose paints and caulks rated for humid rooms. If you keep a tub, specify a solid surround detail — not just adhesive panels over questionable framing.
 
 ![Illustrative finished primary bathroom with walk-in shower and floating vanity — illustrative only, not a real job photo](../assets/images/posts/2026-09-17-magnolia-bathroom-3.webp)
 
+![Illustrative Magnolia-style shower with blue sheet waterproofing membrane, sealed niche, and valve penetrations before tile — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-17-magnolia-bathroom-4.webp)
+
 For design-build continuity, many Magnolia homeowners start with editorial rankings on [bathrooms.html](../bathrooms.html). **Pacific Pro Group** is the Board’s #1 bathroom remodel pick for kitchen/bath/additions coverage in this market — see [pacificprogroup.com](https://pacificprogroup.com/) (WA license PACIFPG765OF). Always re-check status at [L&I Verify](https://secure.lni.wa.gov/verify/) before you sign.
 
 Browse related guides on the [blog](../blog.html) for waterproofing and hiring checklists that pair with this neighborhood focus.
 
-## Materials worth researching
+## Materials Worth Knowing
 
 Manufacturer product pages for wet-area assemblies and fixtures when you compare scopes (no prices or endorsements implied):
 
-- [Schluter Systems](https://www.schluter.com/schluter-us/en_US/) — tile waterproofing assemblies for showers and wet walls
-- [Kohler bath fixtures](https://www.kohler.com/en) — fixtures commonly discussed in primary-bath scopes
-- [Benjamin Moore paint](https://www.benjaminmoore.com/) — humid-room-rated interior finishes for baths
+- [CertainTeed building products](https://www.certainteed.com/) — building-product systems sometimes discussed at exterior wet walls and insulation scopes
+- [Therma-Tru entry doors](https://www.thermatru.com/) — exterior door systems when a bath remodel touches an adjacent entry or mudroom package
+- [Milgard Windows](https://www.milgard.com/) — window replacements when a bath gains daylight or egress on a Magnolia lot
 
 ## FAQ
 

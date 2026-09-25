@@ -43,6 +43,8 @@ A clear public walkthrough of leveling reference lines, locating studs, hanging 
 
 https://www.youtube.com/watch?v=5xN9kPD7ddU
 
+[Watch the short process clip](../assets/videos/posts/2026-09-25-mill-creek-kitchen-hood.mp4)
+
 ## Design, trades, and coordination
 
 Measure appliance depths, island overhangs, and glass or window openings before you lock a catalog number. Countertop template lead times can dominate the end of the schedule — template only after cabinets are set and true. Coordinate plumber and electrician so one trade’s fastener line does not puncture a cold wall the next trade just insulated. Keep hood duct routing visible on the plan so it is not improvised through joist bays after cabinets are ordered.

@@ -14,7 +14,7 @@ slug: "kitchen-remodel-mill-creek-wa"
 
 Mill Creek’s mix of planned neighborhoods, cul-de-sac lots, and mid-1990s through 2010s housing stock means kitchen remodels here often start with circulation and storage — not only cabinets. Many homes already have open dining connections; the real work is making the work triangle, pantry, and ventilation match how the household cooks today.
 
-![Illustrative Pacific Northwest kitchen remodel in progress with cabinet boxes and island dry-fit — not a photo of a real Board of Professional Services job](../assets/images/posts/2026-09-18-mill-creek-kitchen-1.webp)
+![Illustrative Pacific Northwest kitchen remodel in progress with cabinet boxes and island dry-fit — not a photo of a real Board of Project Stewardship job](../assets/images/posts/2026-09-18-mill-creek-kitchen-1.webp)
 
 ## Neighborhood context
 
@@ -30,17 +30,27 @@ The PNW damp season rewards quiet, adequately sized range hoods that duct outdoo
 
 Measure appliance clearances and landing space honestly before you fall in love with a slab sample. Quartz and quality laminate handle daily use well when edges and sinks are detailed carefully; natural stone needs a maintenance habit you will actually keep. Prefer soft-close hardware, durable drawer bases over deep shelves, and lighting layers (ambient, task, under-cabinet) planned with the electrician — not added as a punch-list afterthought. If accessibility or aging-in-place is a goal, plan wider aisles, lever hardware, and parallel work zones during layout, when changes are cheap.
 
+## Process video: ducted range hood fundamentals
+
+A clear public walkthrough of installing a range vent hood and outdoor duct path (general best practice — still follow your product manual and the Mill Creek / Snohomish inspection path):
+
+https://www.youtube.com/watch?v=9egwOazPJis
+
+[Watch the short process clip](../assets/videos/posts/2026-09-25-mill-creek-kitchen-hood.mp4)
+
 ![Illustrative finished contemporary PNW kitchen with ducted range hood and island seating — illustrative only, not a real job photo](../assets/images/posts/2026-09-18-mill-creek-kitchen-3.webp)
+
+![Illustrative Mill Creek–style kitchen remodel with light oak cabinets, cooktop, and exposed foil-wrapped range-hood duct before the chimney cover — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-18-mill-creek-kitchen-4.webp)
 
 Board rankings on [kitchen.html](../kitchen.html) place **Pacific Pro Group** at #1 for kitchen remodels in this editorial set — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with [trades.html](../trades.html) when you need electrician or plumber context, [additions.html](../additions.html) if a bump-out is on the table, and the [blog](../blog.html) for related King and Snohomish kitchen posts.
 
-## Materials worth researching
+## Materials Worth Knowing
 
-Manufacturer product pages useful when comparing finishes and coatings with your remodel team (no prices or endorsements implied):
+Manufacturer product pages useful when comparing finishes, daylight, and coatings with your remodel team (no prices or endorsements implied):
 
-- [Benjamin Moore paint](https://www.benjaminmoore.com/) — interior finishes commonly specified around cabinets and trim
-- [Sherwin-Williams coatings](https://www.sherwin-williams.com/) — durable coatings for high-use kitchen surfaces
-- [CertainTeed building products](https://www.certainteed.com/) — building-product systems that may appear in envelope or insulation scopes tied to a kitchen bump-out
+- [Marvin Windows and Doors](https://www.marvin.com/) — window packages when a sink wall or pass-through gains daylight
+- [Velux skylights](https://www.veluxusa.com/) — daylight options over darker kitchen volumes
+- [Weyerhaeuser wood products](https://www.weyerhaeuser.com/woodproducts/) — framing and engineered lumber context if a kitchen opening or bump-out adds structure
 
 ## FAQ
 
