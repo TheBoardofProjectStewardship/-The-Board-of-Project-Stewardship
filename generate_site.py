@@ -4,8 +4,10 @@
 Schema hygiene (fix #28): emit Organization, WebSite, ItemList, FAQPage,
 Article, BreadcrumbList, ImageObject, and HowTo (steps must match visible
 on-page steps; never invent totalTime/estimatedCost/prices). Never emit
-NewsMediaOrganization, LocalBusiness, parentOrganization, or a WebSite
+NewsMediaOrganization, parentOrganization, or a WebSite
 SearchAction (no on-site search URL — skip fix #21 until search exists).
+The Board Organization graph is not a local-business listing. The restoration
+ItemList may type the ranked firm as HomeAndConstructionBusiness.
 
 The Board is an independent publisher of construction standards and contractor directories.
 Pacific Pro Group appears only as Board directory #1 outbound, never as owner.
@@ -68,6 +70,10 @@ DIR_HERO_IMAGES = {
     "edmonds": ("assets/images/dir-edmonds-custom-hero.webp", "Custom home on a hillside with soft Puget Sound light"),
     "blog": ("assets/images/blog-featured.webp", "Editorial workspace with blueprints suggesting project stewardship guides"),
     "story": ("assets/images/another-story-banner.webp", "Conceptual before-and-after second-story idea for Another Story SEA"),
+    "restoration": (
+        "assets/images/restoration-water-drying.webp",
+        "Illustrative: air movers and a dehumidifier drying a water-damaged hardwood floor in a Pacific Northwest living room",
+    ),
 }
 
 # Category -> optional post hero fallback (directory heroes)
@@ -967,6 +973,7 @@ def nav_html(active: str = "", prefix: str = "") -> str:
         ("edmonds", href("edmonds-custom-homes.html"), "Edmonds Top 30"),
         ("kitchen", href("kitchen.html"), "Kitchen"),
         ("bathrooms", href("bathrooms.html"), "Bathrooms"),
+        ("restoration", href("restoration.html"), "Restoration"),
         ("commercial", href("commercial.html"), "Commercial"),
         ("spec-homes", href("spec-homes.html"), "Spec"),
         ("trades", href("trades.html"), "Trades"),
@@ -1065,6 +1072,7 @@ def footer_html(prefix: str = "./", active: str = "") -> str:
         ("additions", f"{prefix}additions.html", "Additions Top 30"),
         ("kitchen", f"{prefix}kitchen.html", "Kitchen remodelers"),
         ("bathrooms", f"{prefix}bathrooms.html", "Bathroom remodelers"),
+        ("restoration", f"{prefix}restoration.html", "Damage restoration"),
         ("custom-homes", f"{prefix}custom-homes.html", "Custom homes"),
         ("edmonds", f"{prefix}edmonds-custom-homes.html", "Edmonds custom homes"),
         ("commercial", f"{prefix}commercial.html", "Commercial GCs"),
@@ -5153,6 +5161,7 @@ Base: `{BASE_URL}`
 | `edmonds-custom-homes.html` | Edmonds Custom Homes Top 30 (filters, permit guide, tools) |
 | `kitchen.html` | Kitchen remodel rankings (PPG #1 + ranks 2–15) |
 | `bathrooms.html` | Bathroom remodel rankings (PPG #1 + ranks 2–15) |
+| `restoration.html` | Water, fire, and mold damage restoration (DK Production #1) |
 | `commercial.html` | Commercial GC / TI rankings (ranks 1–15) |
 | `spec-homes.html` | Spec / production home builders (ranks 1–14) |
 | `trades.html` | Trade contractor hub |
@@ -5267,6 +5276,7 @@ def write_sitemap(posts: list[dict]) -> None:
         "edmonds-custom-homes.html",
         "kitchen.html",
         "bathrooms.html",
+        "restoration.html",
         "commercial.html",
         "spec-homes.html",
         "trades.html",
@@ -9223,6 +9233,7 @@ def build_learn_page() -> str:
             [
                 ("Kitchen remodel planning", "./kitchen-remodel-planning.html"),
                 ("Bathroom waterproofing guide", "./bathroom-waterproofing-guide.html"),
+                ("Damage restoration", "./restoration.html"),
                 ("Home addition planning", "./home-addition-planning.html"),
                 ("Second story vs teardown", "./second-story-vs-teardown.html"),
                 ("Coastal waterproofing checklist", "./coastal-waterproofing.html"),
@@ -11181,6 +11192,389 @@ def write_rss(posts: list[dict]) -> None:
 
 
 
+def build_restoration_page() -> str:
+    """Editorial restoration directory: DK Production is Board #1. No review scores."""
+    page_url = f"{BASE_URL}restoration.html"
+    title = "Water, Fire & Mold Damage Restoration | King & Snohomish County"
+    desc = (
+        "Water, fire, and mold damage restoration in Seattle, Everett, Edmonds, and "
+        "King & Snohomish County. Drying, smoke cleanup, claims notes, and hiring steps."
+    )
+    if not (58 <= len(title) <= 68):
+        raise SystemExit(f"restoration title length {len(title)} is outside the ~60 character target")
+    if not (148 <= len(desc) <= 160):
+        raise SystemExit(f"restoration description length {len(desc)} is outside ~155 characters")
+
+    dk_url = "https://www.dkreno.com/"
+    dk_phone = "(206) 941-3725"
+    dk_tel = "+12069413725"
+    dk_email = "Dkproconnect@gmail.com"
+    dk_lni = "https://secure.lni.wa.gov/verify/Detail.aspx?UBI=603327330&LIC=DKPROPL872OC&SAW="
+    dk_thumbtack = "https://www.thumbtack.com/wa/marysville/subfloor-repair-contractors/dk-production-llc/service/384150803013025804"
+    dk_yelp = "https://www.yelp.com/biz/dk-production-marysville-4"
+    water_alt = "Illustrative: air movers and a dehumidifier drying a water-damaged hardwood floor in a Pacific Northwest living room"
+    fire_alt = "Illustrative: a fire- and smoke-damaged kitchen with exposed framing, a dehumidifier, and plastic sheeting"
+    mold_alt = "Illustrative: plastic containment, a negative-air duct, and mold on open wall framing during remediation"
+    storm_alt = "Illustrative: a windstorm-damaged Pacific Northwest house with a blue roof tarp and a fallen evergreen"
+    addition_alt = "Illustrative: a finished Pacific Northwest home addition, reused as reconstruction context and not a DK Production job photo"
+    build_alt = "Illustrative: build-phase work on a Pacific Northwest addition, reused as reconstruction context and not a DK Production job photo"
+    og_alt = water_alt
+
+    def _photo(stem: str, alt: str, caption: str, eager: bool = False) -> str:
+        webp = f"assets/images/{stem}.webp"
+        jpg = f"assets/images/{stem}.jpg"
+        rel = webp if asset_exists(webp) or not asset_exists(jpg) else jpg
+        loading = "eager" if eager else "lazy"
+        return (
+            "        <figure class=\"overflow-hidden rounded-xl border border-white/10 bg-obsidian mb-6\">\n"
+            f"          <img src=\"{prefix_asset(rel)}\" alt=\"{esc(alt)}\" "
+            f"class=\"w-full h-56 sm:h-80 object-cover\" width=\"1600\" height=\"900\" loading=\"{loading}\">\n"
+            f"          <figcaption class=\"px-4 py-3 text-xs text-slate-500 font-light leading-relaxed\">{esc(caption)}</figcaption>\n"
+            "        </figure>\n"
+        )
+
+    place_rows = [
+        ("Seattle", "seattle.html"),
+        ("Bellevue", "bellevue.html"),
+        ("Shoreline", "shoreline.html"),
+        ("Kirkland", "kirkland.html"),
+        ("Redmond", "redmond.html"),
+        ("Bothell", "bothell.html"),
+        ("Kenmore", "kenmore.html"),
+        ("Lake Forest Park", "lake-forest-park.html"),
+        ("Renton", "renton.html"),
+        ("Everett", "everett.html"),
+        ("Edmonds", "edmonds.html"),
+        ("Marysville", "marysville.html"),
+        ("Lynnwood", "lynnwood.html"),
+        ("Mukilteo", "mukilteo.html"),
+        ("Mill Creek", "mill-creek.html"),
+        ("Mountlake Terrace", "mountlake-terrace.html"),
+        ("Snohomish", "snohomish.html"),
+        ("Lake Stevens", "lake-stevens.html"),
+        ("Arlington", "arlington.html"),
+        ("Monroe", "monroe.html"),
+        ("Stanwood", "stanwood.html"),
+        ("Woodinville", "woodinville.html"),
+        ("King County", "king-county.html"),
+        ("Snohomish County", "snohomish-county.html"),
+    ]
+    place_items = []
+    for label, slug in place_rows:
+        if (SITE_DIR / slug).is_file():
+            place_items.append(
+                f'<li><a href="./{slug}" class="text-secondary hover:underline">{esc(label)}</a></li>'
+            )
+    places_html = "\n".join(place_items)
+
+    faqs = [
+        (
+            "What should I do in the first hour after a leak or flood in a Puget Sound house?",
+            "Stop the water if you can do it safely, stay off wet floors near a panel or furnace, and do not run HVAC from a wet room. Photograph the source and belongings before you move them, then call a restoration contractor and your insurer. After an atmospheric river, check the crawlspace and any basement drain.",
+        ),
+        (
+            "Is sewage backup cleaned up the same way as a clean supply-line leak?",
+            "No. A supply-line leak is dried and sanitized. Sewage and contaminated drain backup need containment and removal of porous materials that were touched. DK Production lists sewage backup with its flood work. Get the remove-versus-dry split in writing.",
+        ),
+        (
+            "How should I document a water, fire, or mold loss for an insurance claim?",
+            "Photograph the source before demolition, note whom you called, and keep tarp or lodging receipts. Ask for moisture readings, an equipment log, and a scope that matches the photos. The Board does not adjust claims or name insurers.",
+        ),
+        (
+            "When does mold need remediation instead of ordinary cleaning?",
+            "Wipeable spotting on a hard surface, after the leak is fixed, can be cleaning. Mold on drywall, insulation, or framing needs containment, removal, and a moisture fix. Paint over a stain traps a damp wall. Check the crawlspace before you treat a musty King County or Snohomish County house as cosmetic.",
+        ),
+        (
+            "Do structural repairs after fire or water damage need a building permit?",
+            "Often yes, once work passes emergency dry-out into framing, electrical, plumbing, or mechanical replacement. Seattle uses SDCI. Many other cities use MyBuildingPermit. Board-up is not a building permit. Ask who pulls each permit. Confirm the parcel on the official portal.",
+        ),
+        (
+            "How do I check a Washington restoration contractor before I sign?",
+            "Match the legal name on the estimate to WA L&I Verify. For DK Production look up DKPROPL872OC and confirm Active status, General specialty, the expiration, and bond and insurance on file. Read exclusions and change-order terms before debris leaves. This list does not replace that record.",
+        ),
+        (
+            "Should emergency drying and the rebuild be the same contract?",
+            "Keep them separate until readings are written down. Mitigation extracts, dries, and removes what cannot be saved. Reconstruction is framing, permits, and finishes. DK Production lists both, plus remodeling. A design-build firm can still take the rebuild after mitigation.",
+        ),
+        (
+            "What should I ask about insurance billing before work starts?",
+            "Ask whether you pay and seek reimbursement or the firm bills the insurer, and what happens if the adjuster changes the scope. Put equipment and demolition on separate lines. DK Production works with insurance claims. Confirm the billing method in the contract. That is not a coverage promise.",
+        ),
+    ]
+
+    water_photo = _photo(
+        "restoration-water-drying",
+        water_alt,
+        "Illustrative drying setup on an opened hardwood floor. Not a DK Production job photo.",
+        eager=True,
+    )
+    fire_photo = _photo(
+        "restoration-fire-smoke",
+        fire_alt,
+        "Illustrative fire and smoke damage in a kitchen. Not a DK Production job photo.",
+    )
+    mold_photo = _photo(
+        "restoration-mold-containment",
+        mold_alt,
+        "Illustrative mold containment at open framing. Not a DK Production job photo.",
+    )
+    storm_photo = _photo(
+        "restoration-storm-tarp",
+        storm_alt,
+        "Illustrative windstorm roof tarp and fallen evergreen. Not a DK Production photo.",
+    )
+    addition_photo = _photo(
+        "dir-additions-hero",
+        addition_alt,
+        "Existing Board addition still, reused for rebuild context. Not a DK Production project.",
+    )
+    build_photo = _photo(
+        "home-process-build",
+        build_alt,
+        "Existing Board build-phase still, reused here. Not a DK Production project.",
+    )
+
+    body = f"""  <header class="max-w-6xl mx-auto px-4 pt-8 pb-4">
+    <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-3">{GEO_KICKER_HTML} · Updated {YEAR}</p>
+    <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight leading-tight mb-3">Damage Restoration Contractors in King &amp; Snohomish County</h1>
+    <p class="text-base sm:text-lg text-slate-400 font-light leading-relaxed max-w-3xl">A practical guide for water, fire, smoke, and mold damage in Pacific Northwest houses — and the restoration contractor ranked #1 on this Board list.</p>
+  </header>
+  <div class="max-w-6xl mx-auto px-4 pb-16">
+    <article id="dk-production" class="bg-charcoal rounded-xl shadow-2xl border border-secondary/35 relative overflow-hidden mb-10">
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-primary"></div>
+      <div class="px-5 py-4 sm:px-8 sm:py-6">
+        <p class="inline-flex items-center gap-2 text-secondary font-bold text-xs uppercase tracking-[0.14em] mb-3">
+          <i class="fas fa-trophy" aria-hidden="true"></i> #1 Board-ranked restoration contractor
+        </p>
+        <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-4">
+          <div>
+            <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight leading-none mb-2"><a href="{dk_url}" target="_blank" rel="noopener" class="hover:text-secondary">DK Production</a></h2>
+            <p class="text-sm text-slate-300 font-light">Legal name DK Production LLC · Marysville, WA · <a href="tel:{dk_tel}" class="text-white font-semibold hover:text-secondary">{dk_phone}</a></p>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-2">
+            <a href="tel:{dk_tel}" class="inline-flex items-center justify-center gap-2 bg-primary text-white px-4 py-3 rounded font-bold uppercase tracking-wider text-xs hover:bg-emerald-700 transition"><i class="fas fa-phone" aria-hidden="true"></i> Call</a>
+            <a href="{dk_url}" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 border border-secondary/40 text-secondary px-4 py-3 rounded font-bold uppercase tracking-wider text-xs hover:bg-secondary/10 transition">Visit dkreno.com</a>
+            <a href="{dk_lni}" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 border border-white/20 text-white px-4 py-3 rounded font-bold uppercase tracking-wider text-xs hover:border-secondary hover:text-secondary transition">Verify on L&amp;I</a>
+          </div>
+        </div>
+        <p class="text-sm text-slate-300 font-light leading-relaxed mb-4">DK Production is ranked #1 on the Board of Project Stewardship restoration list. The rank is an editorial shortlist. It is not ownership, and it is not an affiliation between the firm and the Board.</p>
+        <dl class="grid sm:grid-cols-2 gap-3 text-sm mb-4">
+          <div class="bg-white/5 border border-white/10 rounded-lg px-4 py-3">
+            <dt class="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-1">WA L&amp;I license</dt>
+            <dd class="text-slate-200 font-light leading-relaxed">DKPROPL872OC · Active · General specialty · expires 12/05/2026</dd>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-lg px-4 py-3">
+            <dt class="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-1">Bond and insurance</dt>
+            <dd class="text-slate-200 font-light leading-relaxed">Bond and insurance on file with L&amp;I.</dd>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-lg px-4 py-3">
+            <dt class="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-1">Service area</dt>
+            <dd class="text-slate-200 font-light leading-relaxed">Based in Marysville. Serves Snohomish County, including Everett, and the greater Seattle metro.</dd>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-lg px-4 py-3">
+            <dt class="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-1">Emergency line</dt>
+            <dd class="text-slate-200 font-light leading-relaxed">24/7 emergency line at <a href="tel:{dk_tel}" class="text-secondary hover:underline">{dk_phone}</a>. Secondary email <a href="mailto:{dk_email}" class="text-secondary hover:underline">{dk_email}</a>.</dd>
+          </div>
+        </dl>
+        <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Services listed by DK Production: water damage and flood restoration, including drying and sewage backup; fire and smoke damage restoration, including board-up, roof tarping, and soot and odor cleanup; mold remediation; reconstruction after damage; remodeling; and insurance-claim help.</p>
+        <p class="text-xs text-slate-500 font-light">Review profiles, links only: <a href="{dk_thumbtack}" target="_blank" rel="noopener" class="text-secondary hover:underline">Thumbtack profile</a> · <a href="{dk_yelp}" target="_blank" rel="noopener" class="text-secondary hover:underline">Yelp profile</a>. Re-check the license at <a href="{dk_lni}" target="_blank" rel="noopener" class="text-secondary hover:underline">Verify on L&amp;I</a> before any deposit.</p>
+      </div>
+    </article>
+
+    <section class="mb-12" id="why-this-page" aria-labelledby="why-h">
+      <h2 id="why-h" class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-4">Why restoration is a different hire than a remodel</h2>
+      <p class="text-slate-300 font-light leading-relaxed mb-4">A remodel starts on your calendar. Water, fire, and mold start with a house that is already wet, smoky, or growing. An atmospheric-river week means days of rain, a crawlspace that never dried, and a basement holding water the living room hides. Windstorms drop fir and cedar on roofs from Everett to Shoreline. This is Board of Project Stewardship guidance for King County and Snohomish County, including Seattle, Everett, and Edmonds. DK Production is #1 on the Board restoration list. That rank is not ownership.</p>
+{water_photo}    </section>
+
+    <section class="mb-12" id="water-damage" aria-labelledby="water-h">
+      <h2 id="water-h" class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-4">Water damage and flood restoration</h2>
+      <p class="text-slate-300 font-light leading-relaxed mb-4">A supply line, water heater, or washer soaks subfloors, wall plates, and cabinet bottoms. In a Seattle bungalow or a Marysville rambler the water runs inside the wall and sits on the sill. Extraction removes the puddle. Drying — air movers, a dehumidifier, and time — is the longer job. Closing drywall because the paint looks dry starts mold in a climate that stays humid from October through June. Do not sand cupped hardwood until the boards and the subfloor agree. Swollen particle board usually comes out.</p>
+      <p class="text-slate-300 font-light leading-relaxed mb-4">Vented crawlspaces are common in Snohomish County and north King County. After an atmospheric river, groundwater wets girders and the insulation between joists. Drying the carpet will not dry that floor. A basement in Everett, Edmonds, or Seattle can also take sewage if the line surcharged. That is not a mop-and-fan visit. Photograph contents before you discard them. DK Production lists water damage and flood restoration, including drying and sewage backup. See the <a href="./bathroom-waterproofing-guide.html" class="text-secondary hover:underline">bathroom waterproofing guide</a>, <a href="./posts/2026-08-18-pnw-bathroom-waterproofing-essentials.html" class="text-secondary hover:underline">Pacific Northwest bathroom waterproofing</a>, and the <a href="./coastal-waterproofing.html" class="text-secondary hover:underline">coastal waterproofing checklist</a>.</p>
+    </section>
+
+    <section class="mb-12" id="fire-smoke" aria-labelledby="fire-h">
+      <h2 id="fire-h" class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-4">Fire and smoke damage</h2>
+{fire_photo}      <p class="text-slate-300 font-light leading-relaxed mb-4">After the fire department releases the house, it may be open to weather and full of soot that smears if you wipe it wet. Board-up and roof tarping keep the next Puget Sound rain from turning a smoke loss into a flood. DK Production lists fire and smoke damage restoration, including board-up, roof tarping, and soot and odor cleanup. That tarping line is part of the fire and smoke scope. It is not a claim that storm restoration is a DK Production service.</p>
+      <p class="text-slate-300 font-light leading-relaxed mb-4">Soot hides in ducts and on the tops of trim, and a wet rag drives it deeper. Odor can stay in insulation after walls look wiped. Ask what will be cleaned, what will be removed, and whether ducts are in the scope before the furnace runs. Charred joists are a permit question, not a cleaning question. Photograph before demolition if you can wait, and still board up openings the same day.</p>
+    </section>
+
+    <section class="mb-12" id="mold" aria-labelledby="mold-h">
+      <h2 id="mold-h" class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-4">Mold remediation</h2>
+{mold_photo}      <p class="text-slate-300 font-light leading-relaxed mb-4">Mold follows water. A slow sink leak can fill a cabinet back while the kitchen only smells slightly musty. A crawlspace without a sound vapor barrier grows on the joists every wet season until the ground moisture is fixed. Bleach on the face of drywall does not dry the cavity. Remediation means containing the work area, removing what cannot be cleaned, cleaning what can stay, and stopping the water.</p>
+      <p class="text-slate-300 font-light leading-relaxed mb-4">Plastic containment and negative air keep disturbed material out of the next room. The photo is illustrative. It is not a DK Production project. DK Production lists mold remediation. Ask what is contained, what is removed, how waste leaves, and what moisture repair is in the same scope. A bid that is only spray and paint is not a remediation scope. After a flood, assume hidden growth until cavities are open and dry. Wet insulation usually comes out. Recheck the crawlspace the next atmospheric river if the drainage was never fixed.</p>
+    </section>
+
+    <section class="mb-12" id="storm-damage" aria-labelledby="storm-h">
+      <h2 id="storm-h" class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-4">Storm damage</h2>
+{storm_photo}      <p class="text-slate-300 font-light leading-relaxed mb-4">This section is general guidance for King County and Snohomish County windstorms and long rains. DK Production is not described here as a storm-restoration specialist. If a storm opens the roof, the drying questions above still apply. Ask any contractor, in writing, whether emergency tarping is in the scope.</p>
+      <p class="text-slate-300 font-light leading-relaxed mb-4">A tarp is a temporary roof. Do not walk a wet roof if you are not equipped, and stay clear of a fallen evergreen that may hide a power line. After the tree is off, look for attic daylight and ceiling stains. Wind-driven rain can wet a wall through failed flashing even when the glass is intact. The <a href="./coastal-waterproofing.html" class="text-secondary hover:underline">coastal waterproofing checklist</a> and the <a href="./posts/2026-09-21-roof-replacement-edmonds-coastal-wa.html" class="text-secondary hover:underline">Edmonds roof replacement guide</a> cover lasting roofs, not emergency tarps.</p>
+    </section>
+
+    <section class="mb-12" id="rebuild" aria-labelledby="rebuild-h">
+      <h2 id="rebuild-h" class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-4">From restoration to rebuild</h2>
+      <p class="text-slate-300 font-light leading-relaxed mb-4">Keep mitigation and reconstruction as separate scopes so a Puget Sound loss is not dried twice. Nothing here is a promised duration or price.</p>
+      <div class="grid md:grid-cols-2 gap-4 mb-6">
+{addition_photo}{build_photo}      </div>
+      <ol class="space-y-5 text-slate-300 font-light leading-relaxed list-none">
+        <li class="bg-charcoal border border-white/10 rounded-xl p-5">
+          <h3 class="text-white font-black tracking-tight mb-2">1. Emergency call and safety</h3>
+          <p>Call when the building is wet, open, smoky, or contaminated. Shut water off only if it is safe, and leave electrical and gas alone. DK Production publishes a 24/7 emergency line at {dk_phone}. Confirm on that call what they will not do.</p>
+        </li>
+        <li class="bg-charcoal border border-white/10 rounded-xl p-5">
+          <h3 class="text-white font-black tracking-tight mb-2">2. Documenting for the insurance claim</h3>
+          <p>Photograph the source, the spread, and the contents. Keep the emails. Ask for a written scope before large demolition if it is safe to pause. Moisture notes and equipment lists belong with the photos. The Board does not file claims. DK Production works with insurance claims. Ask how they want the papers handled before the scope grows.</p>
+        </li>
+        <li class="bg-charcoal border border-white/10 rounded-xl p-5">
+          <h3 class="text-white font-black tracking-tight mb-2">3. Mitigation and drying</h3>
+          <p>Extract water, remove what cannot be saved, contain sewage or mold, and dry until the framing is actually dry. Tarp openings so the next rain does not reset the work. In a crawlspace, dry the joists, not only the room above.</p>
+        </li>
+        <li class="bg-charcoal border border-white/10 rounded-xl p-5">
+          <h3 class="text-white font-black tracking-tight mb-2">4. Moisture verification</h3>
+          <p>Before insulation and drywall return, ask for readings on framing and subfloor compared with a dry spot in the same house. If the numbers are still high, keep drying. Closing a wall in November because the schedule slipped is how odor shows up in January. Keep the note with the project file.</p>
+        </li>
+        <li class="bg-charcoal border border-white/10 rounded-xl p-5">
+          <h3 class="text-white font-black tracking-tight mb-2">5. Permits with the local building department</h3>
+          <p>Structural repair and new electrical, plumbing, or mechanical work are permit questions for the city or county on the parcel. Seattle uses SDCI. Edmonds, Lynnwood, Everett, Bellevue, Kirkland, Bothell, and many neighbors use their own portals, often MyBuildingPermit. Unincorporated King County and Snohomish County are separate. The <a href="./permits.html" class="text-secondary hover:underline">permit hub</a> lists the official doors. The Board does not issue permits. Ask who pulls each one and who meets the inspector.</p>
+        </li>
+        <li class="bg-charcoal border border-white/10 rounded-xl p-5">
+          <h3 class="text-white font-black tracking-tight mb-2">6. Reconstruction</h3>
+          <p>Rebuild is framing, weather barrier, insulation, drywall, and finishes. DK Production lists reconstruction after damage and remodeling, so that scope can stay with them when the license and the writing cover it. <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a> is a top-ranked Board contractor for design-build rebuilds and may be the design-build reconstruction partner after mitigation. The rank is an editorial shortlist. The Board of Project Stewardship does not own Pacific Pro Group, and Pacific Pro Group does not own the Board. See <a href="./additions.html" class="text-secondary hover:underline">home additions</a> and <a href="./how-we-rank.html" class="text-secondary hover:underline">how we rank</a>.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="mb-12" id="vet-a-contractor" aria-labelledby="vet-h">
+      <h2 id="vet-h" class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-4">How to vet a restoration contractor</h2>
+      <ul class="space-y-3 text-slate-300 font-light leading-relaxed mb-4">
+        <li class="flex gap-3"><i class="fas fa-check text-secondary mt-1 shrink-0" aria-hidden="true"></i><span><strong class="text-white font-semibold">L&amp;I Verify.</strong> Use <a href="{dk_lni}" target="_blank" rel="noopener" class="text-secondary hover:underline">Verify on L&amp;I</a> for DK Production LLC, license DKPROPL872OC, Active, General specialty, expires 12/05/2026. For any other firm, search <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> and match the contract name. The <a href="./verify-contractor.html" class="text-secondary hover:underline">verify-contractor walkthrough</a> is only a companion.</span></li>
+        <li class="flex gap-3"><i class="fas fa-check text-secondary mt-1 shrink-0" aria-hidden="true"></i><span><strong class="text-white font-semibold">Bond and insurance on file with L&amp;I.</strong> Read <a href="./bonds-and-insurance.html" class="text-secondary hover:underline">bonds and insurance</a> before you treat a website sentence as proof.</span></li>
+        <li class="flex gap-3"><i class="fas fa-check text-secondary mt-1 shrink-0" aria-hidden="true"></i><span><strong class="text-white font-semibold">Written scope.</strong> Rooms, demolition, drying equipment, and exclusions should be readable on paper. <a href="./contractor-contract-basics.html" class="text-secondary hover:underline">Contractor contract basics</a> and <a href="./change-orders.html" class="text-secondary hover:underline">change orders</a> cover what happens when walls open. Price the change before the extra work.</span></li>
+        <li class="flex gap-3"><i class="fas fa-check text-secondary mt-1 shrink-0" aria-hidden="true"></i><span><strong class="text-white font-semibold">Direct insurer billing questions.</strong> Ask who invoices whom and what you still owe if coverage is partial. DK Production works with insurance claims. Ask the billing path anyway.</span></li>
+      </ul>
+      <p class="text-slate-300 font-light leading-relaxed">The <a href="./stamp-of-trust/" class="text-secondary hover:underline">Stamp of Trust</a> page is how the Board describes stewardship standards. It is not a field certification of a restoration crew and it does not replace the L&amp;I lookup.</p>
+    </section>
+
+    <section class="mb-12" id="areas-served" aria-labelledby="areas-h">
+      <h2 id="areas-h" class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-4">Areas served</h2>
+      <p class="text-slate-300 font-light leading-relaxed mb-4">DK Production is based in Marysville and serves Snohomish County, including Everett, and the greater Seattle metro. Confirm travel for your address before you hire. These Board place pages are for homeowners in those communities. A link is not a separate city-by-city promise.</p>
+      <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-2 text-sm text-slate-300 font-light">
+{places_html}
+      </ul>
+    </section>
+
+    <section class="mb-12" id="keep-reading" aria-labelledby="read-h">
+      <h2 id="read-h" class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-4">Related Board reading</h2>
+      <p class="text-slate-300 font-light leading-relaxed mb-4">Use these after the emergency, when the question turns from drying to the contract and the license.</p>
+      <ul class="space-y-2 text-sm text-slate-300 font-light">
+        <li><a href="./posts/2026-08-18-pnw-bathroom-waterproofing-essentials.html" class="text-secondary hover:underline">Pacific Northwest bathroom waterproofing essentials</a></li>
+        <li><a href="./bathroom-waterproofing-guide.html" class="text-secondary hover:underline">Bathroom waterproofing guide</a></li>
+        <li><a href="./coastal-waterproofing.html" class="text-secondary hover:underline">Coastal waterproofing checklist</a></li>
+        <li><a href="./bonds-and-insurance.html" class="text-secondary hover:underline">Bonds and insurance</a></li>
+        <li><a href="./contractor-contract-basics.html" class="text-secondary hover:underline">Contractor contract basics</a></li>
+        <li><a href="./change-orders.html" class="text-secondary hover:underline">Change orders</a></li>
+        <li><a href="./hiring-a-contractor.html" class="text-secondary hover:underline">Hiring a contractor</a></li>
+        <li><a href="./stamp-of-trust/" class="text-secondary hover:underline">Stamp of Trust</a></li>
+        <li><a href="./directory.html" class="text-secondary hover:underline">Contractor directories</a></li>
+      </ul>
+    </section>
+
+{faq_section(faqs, "Restoration questions")}
+  </div>"""
+
+    visible = re.sub(r"<[^>]+>", " ", body)
+    visible = html.unescape(visible)
+    word_count = len(re.findall(r"[A-Za-z0-9']+", visible))
+    if not (1500 <= word_count <= 2200):
+        raise SystemExit(f"restoration visible word count {word_count} is outside 1500-2200")
+
+    faq_entities = [
+        {
+            "@type": "Question",
+            "name": q,
+            "acceptedAnswer": {"@type": "Answer", "text": a},
+        }
+        for q, a in faqs
+    ]
+    graph = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "WebPage",
+                "@id": page_url + "#webpage",
+                "url": page_url,
+                "name": title,
+                "description": desc,
+                "isPartOf": {"@id": f"{SITE_ORIGIN}/#website"},
+                "breadcrumb": {"@id": page_url + "#breadcrumb"},
+                "mainEntity": {"@id": page_url + "#faq"},
+                "primaryImageOfPage": {
+                    "@type": "ImageObject",
+                    "url": f"{SITE_ORIGIN}/assets/images/restoration-water-drying.webp",
+                    "caption": water_alt,
+                },
+                "inLanguage": "en-US",
+            },
+            {
+                "@type": "BreadcrumbList",
+                "@id": page_url + "#breadcrumb",
+                "itemListElement": [
+                    {"@type": "ListItem", "position": 1, "name": "Home", "item": BASE_URL},
+                    {"@type": "ListItem", "position": 2, "name": "Directory", "item": f"{BASE_URL}directory.html"},
+                    {"@type": "ListItem", "position": 3, "name": "Restoration", "item": page_url},
+                ],
+            },
+            {
+                "@type": "FAQPage",
+                "@id": page_url + "#faq",
+                "mainEntity": faq_entities,
+            },
+            {
+                "@type": "ItemList",
+                "@id": page_url + "#itemlist",
+                "name": "Board-ranked restoration contractors in King and Snohomish County",
+                "numberOfItems": 1,
+                "itemListOrder": "https://schema.org/ItemListOrderAscending",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "item": {
+                            "@type": ["HomeAndConstructionBusiness", "LocalBusiness"],
+                            "@id": page_url + "#dk-production",
+                            "name": "DK Production",
+                            "url": dk_url,
+                            "telephone": dk_tel,
+                            "address": {
+                                "@type": "PostalAddress",
+                                "addressLocality": "Marysville",
+                                "addressRegion": "WA",
+                                "addressCountry": "US",
+                            },
+                            "areaServed": [
+                                {"@type": "City", "name": "Marysville"},
+                                {"@type": "AdministrativeArea", "name": "Snohomish County"},
+                                {"@type": "City", "name": "Everett"},
+                                {"@type": "City", "name": "Seattle"},
+                            ],
+                            "sameAs": [dk_thumbtack, dk_yelp],
+                        },
+                    }
+                ],
+            },
+        ],
+    }
+    return page_shell(
+        title,
+        desc,
+        "restoration",
+        body,
+        json_ld=[graph],
+        canonical=page_url,
+        og_image="assets/images/restoration-water-drying.webp",
+        og_image_alt=og_alt,
+    )
+
+
 def build_directory_hub() -> str:
     """Directories index hub — Additions/Kitchen/Bathrooms/Custom/Edmonds/Trades/Commercial/Spec + L&I CTA."""
     cards = [
@@ -11204,6 +11598,13 @@ def build_directory_hub() -> str:
             "Bath and wet-area remodelers with waterproofing detail habits for Puget Sound moisture loads.",
             "./bathrooms.html",
             "Open bathrooms directory",
+        ),
+        (
+            "fa-droplet",
+            "Damage restoration",
+            "Water, fire, smoke, and mold restoration guidance for King County and Snohomish County, with the Board's #1-ranked restoration contractor.",
+            "./restoration.html",
+            "Open restoration directory",
         ),
         (
             "fa-drafting-compass",
@@ -11367,6 +11768,7 @@ def build_directory_page() -> str:
         ("./additions.html", "Additions", "Top editorial shortlist for King County, Snohomish County, and Seattle additions."),
         ("./kitchen.html", "Kitchen", "Kitchen remodel directory with Board #1 hire path."),
         ("./bathrooms.html", "Bathrooms", "Bath remodel shortlist — waterproofing discipline emphasized."),
+        ("./restoration.html", "Restoration", "Water, fire, smoke, and mold damage restoration — Board #1 restoration contractor and homeowner guidance."),
         ("./custom-homes.html", "Custom homes", "Custom home builders serving King & Snohomish."),
         ("./edmonds-custom-homes.html", "Edmonds custom homes", "Edmonds-focused Top 30 custom home shortlist."),
         ("./commercial.html", "Commercial", "Commercial GC shortlist — research aid, not a brokerage."),
@@ -11896,6 +12298,7 @@ def main(argv: list[str] | None = None) -> None:
     (SITE_DIR / "edmonds-custom-homes.html").write_text(build_edmonds_custom_homes(edmonds_custom), encoding="utf-8")
     (SITE_DIR / "kitchen.html").write_text(build_kb_page("kitchen", kitchen), encoding="utf-8")
     (SITE_DIR / "bathrooms.html").write_text(build_kb_page("bathrooms", bathrooms), encoding="utf-8")
+    (SITE_DIR / "restoration.html").write_text(build_restoration_page(), encoding="utf-8")
     (SITE_DIR / "commercial.html").write_text(build_commercial(commercial), encoding="utf-8")
     (SITE_DIR / "spec-homes.html").write_text(build_spec_homes(spec_homes), encoding="utf-8")
     (SITE_DIR / "trades.html").write_text(build_trades_hub(), encoding="utf-8")

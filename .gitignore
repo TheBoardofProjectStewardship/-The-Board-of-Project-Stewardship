@@ -7,12 +7,15 @@ assets/images/**/*.webp
 !assets/images/og-default.webp
 !assets/images/ppg-featured-photo.webp
 !assets/images/dir-*.webp
+!assets/images/restoration-*.webp
 !assets/images/posts/*.webp
 !assets/images/tools/**
 assets/images/**/*.png
 !assets/images/tools/**
 assets/images/**/*.jpg
+!assets/images/restoration-*.jpg
 assets/images/**/*.jpeg
+!assets/images/restoration-*.jpeg
 # Base64 dumps / scratch — not site media (media must ship for GitHub Pages)
 assets-b64/
 
