@@ -14,6 +14,8 @@ slug: "home-addition-mountlake-terrace-wa"
 
 Mountlake Terrace sits in south Snohomish County between Edmonds, Shoreline, and the I-5 corridor — a compact city of mid-century ranches, split-levels, and newer infill where a home addition is often a setback, drainage, and sequencing story as much as a framing story. Many households want a primary suite, a kitchen bump-out, or a family-room wing without leaving the North Sound commute pattern. Durable projects start with what the lot and the City will actually allow, then lock design-build coordination so temporary weather protection, inspections, and finishes share one critical path.
 
+![Illustrative Mountlake Terrace–style home addition with wood framing and temporary weather wrap — illustrative staging image, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-25-mlt-addition-1.webp)
+
 ## Neighborhood and jurisdiction context
 
 Whether you are near Town Center, the Interurban Trail corridor, Lake Ballinger–adjacent streets, or closer to the Edmonds and Brier edges, staging still matters. Narrow lots, shared driveways, and street parking limit dumpster and lumber deliveries. Ask bidders how they protect finished rooms on the haul path, how long temporary weather wrap stays up in a wet stretch, and who owns change-order language when excavation discovers soft soils or an undersized footing under an existing wall you planned to open.
@@ -37,7 +39,7 @@ Practical sequencing that works on Mountlake Terrace lots:
 3. Lock structure and weatherproofing details (connections, sheathing, WRB, flashings) before finish selections freeze shop drawings.
 4. Submit the City permit path, hold cover-up until inspections clear, and keep temporary living and neighbor staging visible on the schedule.
 
-![Illustrative foundation and sill connection for a residential addition in a wet Pacific Northwest climate — footing and drainage detailing before walls close, not a real job photo](../assets/images/posts/2026-09-25-mlt-addition-2.webp)
+![Illustrative foundation and sill connection detail for a residential addition in a wet Pacific Northwest climate — illustrative only, not a real job photo](../assets/images/posts/2026-09-25-mlt-addition-2.webp)
 
 ![Illustrative exterior grade and roof edge on a Snohomish County house — downspouts and yard drainage to review when an addition grows the footprint, not a Mountlake Terrace stormwater plan](../assets/images/places/snohomish/snohomish-exterior-context-pnw.webp)
 
@@ -59,7 +61,7 @@ Structural openings into existing walls, beam upgrades for open plans, and secon
 
 ![Illustrative framing and a structural opening during a residential addition — sequence beams and walls before finishes freeze, not a real job photo](../assets/images/posts/2026-09-19-kirkland-addition-2.webp)
 
-![Illustrative nearly weatherproofed Pacific Northwest home addition with roof sheathing and housewrap — envelope sequencing after framing, not a real job photo](../assets/images/posts/2026-09-25-mlt-addition-3.webp)
+![Illustrative nearly weatherproofed Pacific Northwest home addition with roof sheathing and housewrap underway — illustrative only, not a real job photo](../assets/images/posts/2026-09-25-mlt-addition-3.webp)
 
 ![Illustrative siding and roof sheathing underway on a Pacific Northwest addition — closing the envelope after framing inspections, not a real job photo](../assets/images/posts/2026-09-19-kirkland-addition-3.webp)
 
