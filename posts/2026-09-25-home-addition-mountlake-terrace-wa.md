@@ -14,13 +14,15 @@ slug: "home-addition-mountlake-terrace-wa"
 
 Mountlake Terrace sits in south Snohomish County between Edmonds, Shoreline, and the I-5 corridor — a compact city of mid-century ranches, split-levels, and newer infill where a home addition is often a setback, drainage, and sequencing story as much as a framing story. Many households want a primary suite, a kitchen bump-out, or a family-room wing without leaving the North Sound commute pattern. Durable projects start with what the lot and the City will actually allow, then lock design-build coordination so temporary weather protection, inspections, and finishes share one critical path.
 
-![Illustrative Mountlake Terrace–style home addition with wood framing and temporary weather wrap — illustrative staging image, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-25-mlt-addition-1.webp)
-
 ## Neighborhood and jurisdiction context
 
 Whether you are near Town Center, the Interurban Trail corridor, Lake Ballinger–adjacent streets, or closer to the Edmonds and Brier edges, staging still matters. Narrow lots, shared driveways, and street parking limit dumpster and lumber deliveries. Ask bidders how they protect finished rooms on the haul path, how long temporary weather wrap stays up in a wet stretch, and who owns change-order language when excavation discovers soft soils or an undersized footing under an existing wall you planned to open.
 
 HOA or neighborhood design expectations can affect exterior materials, window proportions, and dumpster placement even when the addition itself is clearly allowed. Put those constraints in the proposal so they are not discovered after framing starts. Cross-check [trades.html](../trades.html) for excavation, concrete, framing, and roofing context when your scope touches the envelope.
+
+![Illustrative south Snohomish exterior near a Brier-edge lot — setbacks, street frontage, and where staging can sit, not a Mountlake Terrace survey photo](../assets/images/places/brier/brier-exterior-context-pnw.webp)
+
+![Illustrative Snohomish County home addition — how a new wing meets the existing house when you check setbacks and lot coverage, not a Mountlake Terrace permit photo](../assets/images/places/snohomish/snohomish-home-addition-pnw.webp)
 
 ## Climate, setbacks, stormwater, and permits
 
@@ -35,7 +37,9 @@ Practical sequencing that works on Mountlake Terrace lots:
 3. Lock structure and weatherproofing details (connections, sheathing, WRB, flashings) before finish selections freeze shop drawings.
 4. Submit the City permit path, hold cover-up until inspections clear, and keep temporary living and neighbor staging visible on the schedule.
 
-![Illustrative foundation and sill connection detail for a residential addition in a wet Pacific Northwest climate — illustrative only, not a real job photo](../assets/images/posts/2026-09-25-mlt-addition-2.webp)
+![Illustrative foundation and sill connection for a residential addition in a wet Pacific Northwest climate — footing and drainage detailing before walls close, not a real job photo](../assets/images/posts/2026-09-25-mlt-addition-2.webp)
+
+![Illustrative exterior grade and roof edge on a Snohomish County house — downspouts and yard drainage to review when an addition grows the footprint, not a Mountlake Terrace stormwater plan](../assets/images/places/snohomish/snohomish-exterior-context-pnw.webp)
 
 ## Process video: second-story framing fundamentals
 
@@ -43,7 +47,9 @@ A clear public walkthrough of layout, LVL and I-joist sequencing, and floor-syst
 
 https://www.youtube.com/watch?v=7n0NE2WJegw
 
-[Watch the short process clip](../assets/videos/posts/2026-09-25-mlt-addition.mp4)
+../assets/videos/posts/2026-09-25-mlt-addition.mp4
+
+Educational process clip.
 
 ## Design-build sequencing and trade coordination
 
@@ -51,7 +57,13 @@ Measure existing room heights, roof pitches, and mechanical routes honestly befo
 
 Structural openings into existing walls, beam upgrades for open plans, and second-story loads on older foundations belong on the critical path with the engineer — not as a late “field clarification.” If a second story or ADU-related utility upgrade is on the table, treat it as one coordination problem so stairs, lateral bracing, and roof weatherproofing are not trapped. Relative planning companions: [another-story.html](../another-story.html), [kitchen.html](../kitchen.html), and [bathrooms.html](../bathrooms.html) when the addition includes those rooms.
 
-![Illustrative nearly weatherproofed Pacific Northwest home addition with roof sheathing and housewrap underway — illustrative only, not a real job photo](../assets/images/posts/2026-09-25-mlt-addition-3.webp)
+![Illustrative framing and a structural opening during a residential addition — sequence beams and walls before finishes freeze, not a real job photo](../assets/images/posts/2026-09-19-kirkland-addition-2.webp)
+
+![Illustrative nearly weatherproofed Pacific Northwest home addition with roof sheathing and housewrap — envelope sequencing after framing, not a real job photo](../assets/images/posts/2026-09-25-mlt-addition-3.webp)
+
+![Illustrative siding and roof sheathing underway on a Pacific Northwest addition — closing the envelope after framing inspections, not a real job photo](../assets/images/posts/2026-09-19-kirkland-addition-3.webp)
+
+![Illustrative addition with housewrap, flashing tape, and roof sheathing tying into the existing roof — the weather-lap step in design-build sequencing, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-19-kirkland-addition-4.webp)
 
 Board rankings on [additions.html](../additions.html) place **Pacific Pro Group** at #1 for home additions in this editorial set — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with the [blog](../blog.html) for related King and Snohomish addition posts, and [edmonds-custom-homes.html](../edmonds-custom-homes.html) when you are comparing nearby city process notes — Mountlake Terrace’s own code and lot still govern your project.
 
@@ -81,6 +93,8 @@ Normalize permit ownership, setback and stormwater assumptions, structural scope
 Use the Board’s [additions directory](../additions.html), interview two or three licensed firms, request written scopes, and verify each at [L&I Verify](https://secure.lni.wa.gov/verify/).
 
 ## Mountlake Terrace vs Edmonds coastal and Eastside addition scopes
+
+![Illustrative Eastside-style home addition with wood framing and temporary weather wrap — a Kirkland hillside package does not transfer to a Mountlake Terrace lot, not a real job photo](../assets/images/posts/2026-09-19-kirkland-addition-1.webp)
 
 Edmonds and other Sound-facing lots take more wind-driven wetting and salt air on the exterior envelope; inland Mountlake Terrace still sees the same cool, damp climate that slows drying and stresses paint and WRB detailing. Eastside hillside packages (clay soils, steeper grades) do not automatically transfer either. Ask firms that also work Edmonds, Shoreline, or Kirkland how their Mountlake Terrace details change when marine exposure or steep Eastside drainage is not the driver — the honest answer is usually setbacks, stormwater, City portal process, and sequencing, not a one-size coastal or Eastside package. Cross-check [roofing.html](../roofing.html) and [siding.html](../siding.html) when the addition reworks the envelope; the City still issues the local building path for your lot through its [Permit Portal](https://mltw-trk.aspgov.com/eTRAKiT/).
 
