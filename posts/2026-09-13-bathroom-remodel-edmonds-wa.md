@@ -26,11 +26,27 @@ Cool, damp air plus hot showers equals condensation risk. Exhaust fans should te
 
 ![Illustrative close-up of shower curb and niche waterproofing membrane — Illustrative editorial photo — not a project photograph](../assets/images/posts/2026-09-13-edmonds-bath-2.webp)
 
+## Process video: waterproofing membrane fundamentals
+
+A clear public walkthrough of installing Schluter-style DITRA uncoupling/waterproofing membrane, thin-set embedding, and sealing seams with KERDI-BAND (general best practice — still follow your product’s install handbook and the Edmonds inspection path):
+
+https://www.youtube.com/watch?v=K_XYu1I7gs8
+
+[Watch the short process clip](../assets/videos/posts/2026-09-shared-waterproofing.mp4)
+
 ## Materials and process
 
 Choose wet-area substrates and membranes designed for continuous exposure, not interior drywall tricks. Prefer quiet, adequately sized fans with timers or humidity sensors. Porcelain and quality ceramic generally handle splash zones well; natural stone needs sealed maintenance habits. If accessibility is a goal, plan curb-free showers and blocking for grab bars during framing — retrofits are harder.
 
 ![Illustrative finished primary bathroom with walk-in shower and floating vanity — Illustrative editorial photo — not a project photograph](../assets/images/posts/2026-09-13-edmonds-bath-3.webp)
+
+## Materials Worth Knowing
+
+Manufacturer product pages for wet-area assemblies and fixtures when you compare scopes (no prices or endorsements implied):
+
+- [Schluter Systems](https://www.schluter.com/schluter-us/en_US/) — tile waterproofing assemblies for showers and wet walls
+- [Kohler bath fixtures](https://www.kohler.com/en) — fixtures commonly discussed in primary-bath scopes
+- [Benjamin Moore paint](https://www.benjaminmoore.com/) — humid-room-rated interior finishes for baths
 
 Board rankings on [bathrooms.html](../bathrooms.html) place **Pacific Pro Group** at #1 for bathroom remodels in this editorial set — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with [trades.html](../trades.html) when you need specialty tile or plumbing context, and skim the [blog](../blog.html) for related coastal bath posts.
 

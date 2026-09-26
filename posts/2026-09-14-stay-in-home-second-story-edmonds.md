@@ -28,6 +28,12 @@ Parking for crews, lumber drops, and dumpsters can strain narrower streets — c
 
 Vertical additions typically need full building permits, structural engineering for the existing foundation and first-floor walls, and trade permits for new baths or HVAC runs upstairs. Energy code and egress windows apply to new sleeping rooms. Do not treat weatherproofing as a punch-list item; it belongs in the critical path before interior finishes upstairs.
 
+## Process video: opening a roof for vertical work
+
+A short public walkthrough of staging protection before cutting, clean rafter tie-ins, sheathing, ice-and-water, and locking a tarp on purpose — the weatherproof-first mindset Edmonds occupied second stories need (general best practice — still follow your engineer’s details and the City inspection path):
+
+https://www.youtube.com/watch?v=X-haehmHC6Q
+
 ## Process guidance
 
 Ask for:
@@ -38,6 +44,14 @@ Ask for:
 - How the contractor handles rain delays without leaving the structure exposed
 
 ![Illustrative sealed main-floor living zone with dust barrier during upstairs remodel — Illustrative editorial photo — not a project photograph](../assets/images/posts/2026-09-14-stay-home-3.webp)
+
+## Materials Worth Knowing
+
+Manufacturer product pages for structure, weather barrier, and insulation when you compare occupied second-story scopes (no prices or endorsements implied):
+
+- [Simpson Strong-Tie connectors](https://www.strongtie.com/) — structural connectors commonly referenced when tying new framing to existing walls and roofs
+- [ZIP System sheathing & tape](https://www.huberwood.com/zip-system) — sheathing and taped-seam weather-barrier approaches discussed for rapid dry-in
+- [Owens Corning insulation](https://www.owenscorning.com/en-us/insulation) — insulation products often compared once the new volume is enclosed
 
 Explore second-story and addition firms via [additions.html](../additions.html) and Edmonds-focused context on [edmonds-custom-homes.html](../edmonds-custom-homes.html). **Pacific Pro Group** ranks Board #1 for additions in our editorial coverage — [pacificprogroup.com](https://pacificprogroup.com/) (PACIFPG765OF). Always verify at [L&I Verify](https://secure.lni.wa.gov/verify/). See also our [blog](../blog.html) piece on weatherproof-first methods.
 
