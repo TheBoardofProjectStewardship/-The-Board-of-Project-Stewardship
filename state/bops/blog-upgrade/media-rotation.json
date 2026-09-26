@@ -20,7 +20,10 @@
     "https://www.gaf.com/",
     "https://www.dupont.com/brands/tyvek.html",
     "https://www.rockwool.com/north-america/",
-    "https://www.pella.com/"
+    "https://www.pella.com/",
+    "https://www.deltafaucet.com/",
+    "https://www.caesarstoneus.com/",
+    "https://www.bosch-home.com/us/"
   ],
   "used_youtube_ids": [
     "i2LyNX-bXKA",
@@ -40,7 +43,8 @@
     "9egwOazPJis",
     "wAKfLIN79pY",
     "qrObaJbftcE",
-    "5xN9kPD7ddU"
+    "5xN9kPD7ddU",
+    "Jp29ucu6zZQ"
   ],
   "used_photo_urls": [
     "assets/images/posts/2026-09-22-edmonds-siding-3.webp",
@@ -114,15 +118,19 @@
     "assets/images/posts/2026-09-25-mlt-addition-3.webp",
     "assets/images/posts/2026-09-19-kirkland-addition-4.webp",
     "assets/images/posts/2026-09-18-mill-creek-kitchen-4.webp",
-    "assets/images/posts/2026-09-17-magnolia-bathroom-4.webp"
+    "assets/images/posts/2026-09-17-magnolia-bathroom-4.webp",
+    "assets/images/posts/2026-09-26-kenmore-kitchen-1.webp",
+    "assets/images/posts/2026-09-26-kenmore-kitchen-2.webp",
+    "assets/images/posts/2026-09-26-kenmore-kitchen-3.webp"
   ],
-  "last_morning_audit": "2026-09-25",
+  "last_morning_audit": "2026-09-26",
   "last_upgraded_slugs": [
     "home-addition-kirkland-wa",
     "kitchen-remodel-mill-creek-wa",
     "bathroom-remodel-magnolia-wa",
     "bathroom-remodel-bothell-wa",
-    "kitchen-remodel-bothell-wa"
+    "kitchen-remodel-bothell-wa",
+    "kitchen-remodel-kenmore-wa"
   ],
   "last_shared_video": "assets/videos/posts/2026-09-25-mill-creek-kitchen-hood.mp4"
 }
