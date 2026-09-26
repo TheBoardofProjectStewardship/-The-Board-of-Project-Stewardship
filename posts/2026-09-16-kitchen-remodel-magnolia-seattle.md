@@ -26,11 +26,25 @@ Cooking plus PNW humidity means range hoods that actually exhaust outdoors outpe
 
 ![Illustrative close-up of outdoor-venting range hood ductwork and cabinet framing — Illustrative editorial photo — not a project photograph](../assets/images/posts/2026-09-16-magnolia-kitchen-2.webp)
 
+## Process video: range-hood install fundamentals
+
+A clear public walkthrough of mounting a cabinet-style range hood, cutting the duct opening, and sealing duct connections with foil tape — useful when Magnolia kitchens insist on outdoor exhaust (general best practice — still follow your hood’s template, manufacturer install guide, and Seattle / L&I inspection path):
+
+https://www.youtube.com/watch?v=D91yEmPE7tc
+
 ## Materials and process
 
 Lock appliance depths and hood CFM early so cabinets and duct runs are not redesigned mid-job. Specify water-resistant assembly under sinks, durable flooring for wet-entry traffic from the porch, and lighting layers (task, ambient, under-cabinet). Soft-close hardware and mid-grade plywood boxes often outlast bargain particleboard in a damp climate.
 
 ![Illustrative finished Magnolia kitchen with shaker cabinets, quartz counters, and under-cabinet lighting — Illustrative editorial photo — not a project photograph](../assets/images/posts/2026-09-16-magnolia-kitchen-3.webp)
+
+## Materials Worth Knowing
+
+Manufacturer product pages for openings and coatings when you compare Magnolia kitchen scopes (no prices or endorsements implied):
+
+- [Marvin Windows and Doors](https://www.marvin.com/) — window and patio-door systems often discussed when view glass is part of the kitchen remodel
+- [Milgard Windows](https://www.milgard.com/) — window options commonly compared for energy and coastal-adjacent Seattle exposures
+- [Sherwin-Williams coatings](https://www.sherwin-williams.com/) — interior/exterior coating literature relevant when cabinetry and trim share a finish plan
 
 Our [kitchen remodel rankings](../kitchen.html) list firms serving Magnolia and greater King County. **Pacific Pro Group** ranks Board #1 for kitchen remodels in this editorial set — visit [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF). Re-verify any company at [L&I Verify](https://secure.lni.wa.gov/verify/). Cross-check bathroom coordination on [bathrooms.html](../bathrooms.html) if you are doing both rooms.
 

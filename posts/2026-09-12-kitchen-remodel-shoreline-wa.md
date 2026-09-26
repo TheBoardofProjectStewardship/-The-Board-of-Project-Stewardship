@@ -26,11 +26,25 @@ PNW moisture makes durable flooring transitions and under-sink waterproofing wor
 
 ![Illustrative quartz countertop template on a Shoreline kitchen island during remodel — Illustrative editorial photo — not a project photograph](../assets/images/posts/2026-09-12-shoreline-kitchen-2.webp)
 
+## Process video: range-hood install fundamentals
+
+A clear public walkthrough of mounting a cabinet-style range hood, cutting the duct opening, and sealing duct connections with foil tape (general best practice — still follow your hood’s template, manufacturer install guide, and the Shoreline / L&I inspection path):
+
+https://www.youtube.com/watch?v=D91yEmPE7tc
+
 ## Materials and process
 
 Sequence: measure and design → structural/electrical feasibility → permit set → rough-in → inspections → finishes. Lock appliance models early. For islands with seating, plan outlets to current code expectations. Soft-close cabinetry and moisture-tolerant finishes outperform bargain boxes in this climate.
 
 ![Illustrative finished modern Shoreline kitchen with white oak cabinets and large windows — Illustrative editorial photo — not a project photograph](../assets/images/posts/2026-09-12-shoreline-kitchen-3.webp)
+
+## Materials Worth Knowing
+
+Manufacturer product pages for daylight, coatings, and openings when you compare scopes (no prices or endorsements implied):
+
+- [Andersen Windows](https://www.andersenwindows.com/) — window and patio-door systems often discussed when a kitchen gains daylight or replaces a sink-wall unit
+- [Velux skylights](https://www.veluxusa.com/) — daylight options when a flat or low-pitch roof plane sits over a darker kitchen
+- [Benjamin Moore paint](https://www.benjaminmoore.com/) — interior finishes commonly compared for kitchens adjacent to wet zones
 
 Review [kitchen remodel rankings](../kitchen.html). **Pacific Pro Group** is Board #1 for kitchens in our editorial coverage — [pacificprogroup.com](https://pacificprogroup.com/) (PACIFPG765OF). Verify at [L&I Verify](https://secure.lni.wa.gov/verify/). If a bath is in scope too, see [bathrooms.html](../bathrooms.html).
 

@@ -26,11 +26,25 @@ Coastal Snohomish County weather rewards continuous weather barriers, thoughtful
 
 ![Illustrative close-up of weather barrier and flashing where a new addition meets existing siding — Illustrative editorial photo — not a project photograph](../assets/images/posts/2026-09-15-edmonds-addition-2.webp)
 
+## Process video: weather-barrier install fundamentals
+
+A clear public walkthrough of installing house wrap / weather barrier courses, fastening, and sequencing wraps so water sheds outward (general best practice — still follow manufacturer instructions and the Edmonds building inspection path):
+
+https://www.youtube.com/watch?v=X81Q2oaTAJo
+
 ## Process and materials guidance
 
 Strong addition processes usually include survey/plot plan as needed, structural design, energy-code compliance, weatherproofing details at the tie-in, and a temporary protection plan if the roof or walls are opened. Match foundation type and drainage to existing conditions; poor grading against a new wall invites moisture problems within a few wet seasons.
 
 ![Illustrative finished rear home addition exterior blended with existing Edmonds-style house — Illustrative editorial photo — not a project photograph](../assets/images/posts/2026-09-15-edmonds-addition-3.webp)
+
+## Materials Worth Knowing
+
+Manufacturer product pages for weather barrier, roofing, and openings when you compare addition scopes (no prices or endorsements implied):
+
+- [ZIP System sheathing & tape](https://www.huberwood.com/zip-system) — sheathing and taped weather-barrier systems commonly discussed at old-to-new tie-ins
+- [GAF roofing systems](https://www.gaf.com/) — steep-slope roofing systems and published install guidance when an addition reworks the roof plane
+- [Marvin Windows and Doors](https://www.marvin.com/) — window and door systems often specified when an addition gains daylight or egress
 
 Editorial rankings on [additions.html](../additions.html) and [edmonds-custom-homes.html](../edmonds-custom-homes.html) highlight firms experienced with Edmonds-scale work. **Pacific Pro Group** is the Board’s #1 pick for additions (and kitchen/bath) in this research set — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Confirm current status at [L&I Verify](https://secure.lni.wa.gov/verify/). Related reading lives on the [blog](../blog.html).
 
