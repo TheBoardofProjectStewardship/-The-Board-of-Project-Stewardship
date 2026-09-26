@@ -28,11 +28,11 @@ Parking for crews, lumber drops, and dumpsters can strain narrower streets — c
 
 Vertical additions typically need full building permits, structural engineering for the existing foundation and first-floor walls, and trade permits for new baths or HVAC runs upstairs. Energy code and egress windows apply to new sleeping rooms. Do not treat weatherproofing as a punch-list item; it belongs in the critical path before interior finishes upstairs.
 
-## Process video: opening a roof for vertical work
+## Process video: addition roof framing and dry-in
 
-A short public walkthrough of staging protection before cutting, clean rafter tie-ins, sheathing, ice-and-water, and locking a tarp on purpose — the weatherproof-first mindset Edmonds occupied second stories need (general best practice — still follow your engineer’s details and the City inspection path):
+A clear public walkthrough of addition roof framing, sheathing, and getting the new volume watertight — the weatherproof-first mindset Edmonds occupied second stories need (general best practice — still follow your engineer’s details and the City inspection path):
 
-https://www.youtube.com/watch?v=X-haehmHC6Q
+https://www.youtube.com/watch?v=3Ku2GriHUwM
 
 ## Process guidance
 
