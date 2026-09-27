@@ -142,6 +142,335 @@ TRADE_HEADING_MAP = {
     "excavation": "14. Excavation",
 }
 
+# Reused on-disk stills for trade specialty pages (free-first; no new Higgsfield).
+# Each item: (rel, alt, caption, href, link_label) — strip images link to Board hubs.
+TRADE_PHOTO_STRIPS: dict[str, list[tuple[str, str, str, str, str]]] = {
+    "plumber": [
+        (
+            "assets/images/posts/2026-08-31-magnolia-plumbing-1.webp",
+            "Illustrative plumbing rough-in for a Pacific Northwest bath remodel",
+            "Rough-in context (illustrative)",
+            "./bathrooms.html",
+            "Bathroom remodelers directory",
+        ),
+        (
+            "assets/images/posts/2026-08-31-magnolia-plumbing-2.webp",
+            "Illustrative fixture layout planning for a residential plumbing remodel",
+            "Fixture planning (illustrative)",
+            "./kitchen.html",
+            "Kitchen remodelers directory",
+        ),
+        (
+            "assets/images/posts/2026-08-31-magnolia-plumbing-3.webp",
+            "Illustrative finished bath plumbing details after a careful remodel",
+            "Finish details (illustrative)",
+            "./bathrooms.html",
+            "Bathroom remodelers directory",
+        ),
+    ],
+    "electrician": [
+        (
+            "assets/images/posts/2026-08-10-electrical-bath-1.webp",
+            "Illustrative electrical rough-in during a bathroom remodel",
+            "Bath electrical rough-in (illustrative)",
+            "./bathrooms.html",
+            "Bathroom remodelers directory",
+        ),
+        (
+            "assets/images/posts/2026-08-10-electrical-bath-2.webp",
+            "Illustrative lighting and receptacle planning for a remodel electrical scope",
+            "Device layout (illustrative)",
+            "./kitchen.html",
+            "Kitchen remodelers directory",
+        ),
+        (
+            "assets/images/posts/2026-08-10-electrical-bath-3.webp",
+            "Illustrative finished electrical details in a remodeled bath",
+            "Finish electrical (illustrative)",
+            "./learn.html",
+            "Learn hub",
+        ),
+    ],
+    "hvac": [
+        (
+            "assets/images/posts/2026-08-17-heated-floors-1.webp",
+            "Illustrative radiant floor tubing staged before finish flooring",
+            "Radiant layout (illustrative)",
+            "./additions.html",
+            "Home additions directory",
+        ),
+        (
+            "assets/images/posts/2026-08-17-heated-floors-2.webp",
+            "Illustrative mechanical coordination space in a Pacific Northwest remodel",
+            "Mechanical coordination (illustrative)",
+            "./learn.html",
+            "Learn hub",
+        ),
+        (
+            "assets/images/posts/2026-08-17-heated-floors-3.webp",
+            "Illustrative finished floor over a conditioned radiant assembly",
+            "Comfort finish (illustrative)",
+            "./locations.html",
+            "Locations hub",
+        ),
+    ],
+    "framing": [
+        (
+            "assets/images/posts/2026-08-20-bothell-addition-1.webp",
+            "Illustrative framing for a Pacific Northwest home addition",
+            "Addition framing (illustrative)",
+            "./additions.html",
+            "Home additions directory",
+        ),
+        (
+            "assets/images/posts/2026-08-12-edmonds-addition-permit-1.webp",
+            "Illustrative structural opening and framing coordination on an addition",
+            "Structural openings (illustrative)",
+            "./additions.html",
+            "Home additions directory",
+        ),
+        (
+            "assets/images/posts/2026-08-24-shoreline-addition-2.webp",
+            "Illustrative framed addition volume under coastal Pacific Northwest light",
+            "Framed volume (illustrative)",
+            "./locations.html",
+            "Locations hub",
+        ),
+    ],
+    "tile": [
+        (
+            "assets/images/posts/2026-09-01-tile-edmonds-1.webp",
+            "Illustrative tile layout for an Edmonds-area bath remodel",
+            "Tile layout (illustrative)",
+            "./bathrooms.html",
+            "Bathroom remodelers directory",
+        ),
+        (
+            "assets/images/posts/2026-09-01-tile-edmonds-2.webp",
+            "Illustrative shower tile work with careful waterproofing substrate",
+            "Shower tile (illustrative)",
+            "./bathrooms.html",
+            "Bathroom remodelers directory",
+        ),
+        (
+            "assets/images/posts/2026-09-01-tile-edmonds-3.webp",
+            "Illustrative finished tile surfaces in a Pacific Northwest remodel",
+            "Finished tile (illustrative)",
+            "./kitchen.html",
+            "Kitchen remodelers directory",
+        ),
+    ],
+    "siding": [
+        (
+            "assets/images/posts/2026-09-22-edmonds-siding-1.webp",
+            "Illustrative coastal Edmonds home staged for siding replacement",
+            "Coastal siding context (illustrative)",
+            "./locations.html",
+            "Locations hub",
+        ),
+        (
+            "assets/images/posts/2026-09-22-edmonds-siding-2.webp",
+            "Illustrative weather-resistive barrier and siding underlayment detail",
+            "WRB / cladding prep (illustrative)",
+            "./learn.html",
+            "Learn hub",
+        ),
+        (
+            "assets/images/posts/2026-09-22-edmonds-siding-3.webp",
+            "Illustrative finished fiber-cement siding on a coastal Washington home",
+            "Finished cladding (illustrative)",
+            "./additions.html",
+            "Home additions directory",
+        ),
+    ],
+    "roofing": [
+        (
+            "assets/images/posts/2026-09-21-edmonds-roof-1.webp",
+            "Illustrative coastal Edmonds home staged for roof replacement",
+            "Roof replacement context (illustrative)",
+            "./locations.html",
+            "Locations hub",
+        ),
+        (
+            "assets/images/posts/2026-09-21-edmonds-roof-2.webp",
+            "Illustrative roof deck with underlayment and drip-edge detail",
+            "Underlayment detail (illustrative)",
+            "./learn.html",
+            "Learn hub",
+        ),
+        (
+            "assets/images/posts/2026-09-21-edmonds-roof-3.webp",
+            "Illustrative finished architectural shingle roof on a coastal home",
+            "Finished roof (illustrative)",
+            "./additions.html",
+            "Home additions directory",
+        ),
+    ],
+    "concrete": [
+        (
+            "assets/images/posts/2026-08-12-edmonds-addition-permit-2.webp",
+            "Illustrative foundation and site work context for an Edmonds addition",
+            "Foundation context (illustrative)",
+            "./additions.html",
+            "Home additions directory",
+        ),
+        (
+            "assets/images/posts/2026-08-12-edmonds-addition-permit-3.webp",
+            "Illustrative concrete and structural interface on a residential addition",
+            "Structural interface (illustrative)",
+            "./additions.html",
+            "Home additions directory",
+        ),
+        (
+            "assets/images/posts/2026-08-24-shoreline-addition-1.webp",
+            "Illustrative addition massing where foundation work sets the envelope",
+            "Envelope from foundation (illustrative)",
+            "./locations.html",
+            "Locations hub",
+        ),
+    ],
+    "drywall": [
+        (
+            "assets/images/posts/2026-08-18-waterproofing-1.webp",
+            "Illustrative wall substrate prep before finish drywall in a wet area",
+            "Substrate prep (illustrative)",
+            "./bathrooms.html",
+            "Bathroom remodelers directory",
+        ),
+        (
+            "assets/images/posts/2026-08-18-waterproofing-2.webp",
+            "Illustrative interior remodel walls ready for tape and finish levels",
+            "Interior walls (illustrative)",
+            "./kitchen.html",
+            "Kitchen remodelers directory",
+        ),
+        (
+            "assets/images/posts/2026-08-18-waterproofing-3.webp",
+            "Illustrative smooth wall finish ahead of paint in a Pacific Northwest remodel",
+            "Finish level (illustrative)",
+            "./learn.html",
+            "Learn hub",
+        ),
+    ],
+    "painting": [
+        (
+            "assets/images/posts/2026-08-19-eastside-coastal-1.webp",
+            "Illustrative Pacific Northwest exterior ready for paint and coastal prep",
+            "Exterior paint context (illustrative)",
+            "./locations.html",
+            "Locations hub",
+        ),
+        (
+            "assets/images/posts/2026-08-19-eastside-coastal-2.webp",
+            "Illustrative trim and siding surfaces staged for finish paint",
+            "Trim and cladding (illustrative)",
+            "./learn.html",
+            "Learn hub",
+        ),
+        (
+            "assets/images/posts/2026-08-11-hire-design-build-6.webp",
+            "Illustrative finished interior surfaces after remodel painting",
+            "Interior finish (illustrative)",
+            "./kitchen.html",
+            "Kitchen remodelers directory",
+        ),
+    ],
+    "flooring": [
+        (
+            "assets/images/posts/2026-08-17-heated-floors-1.webp",
+            "Illustrative floor assembly staged before finish flooring",
+            "Floor assembly (illustrative)",
+            "./kitchen.html",
+            "Kitchen remodelers directory",
+        ),
+        (
+            "assets/images/posts/2026-08-17-heated-floors-2.webp",
+            "Illustrative underlayment and radiant coordination for finish floors",
+            "Underlayment coordination (illustrative)",
+            "./bathrooms.html",
+            "Bathroom remodelers directory",
+        ),
+        (
+            "assets/images/posts/2026-08-17-heated-floors-3.webp",
+            "Illustrative finished floor surface in a Pacific Northwest remodel",
+            "Finished flooring (illustrative)",
+            "./learn.html",
+            "Learn hub",
+        ),
+    ],
+    "windows": [
+        (
+            "assets/images/posts/2026-09-20-edmonds-windows-1.webp",
+            "Illustrative coastal Edmonds home staged for window replacement",
+            "Window replacement context (illustrative)",
+            "./locations.html",
+            "Locations hub",
+        ),
+        (
+            "assets/images/posts/2026-09-20-edmonds-windows-2.webp",
+            "Illustrative window rough opening with weather-resistive barrier and flashing",
+            "Flashing detail (illustrative)",
+            "./learn.html",
+            "Learn hub",
+        ),
+        (
+            "assets/images/posts/2026-09-20-edmonds-windows-3.webp",
+            "Illustrative newly installed windows with clean exterior trim",
+            "Installed windows (illustrative)",
+            "./additions.html",
+            "Home additions directory",
+        ),
+    ],
+    "insulation": [
+        (
+            "assets/images/posts/2026-08-08-weatherproof-first-1.webp",
+            "Illustrative weatherproofing and insulation coordination on a PNW shell",
+            "Shell coordination (illustrative)",
+            "./learn.html",
+            "Learn hub",
+        ),
+        (
+            "assets/images/posts/2026-08-30-coastal-moisture-1.webp",
+            "Illustrative coastal moisture control layers relevant to insulation choices",
+            "Moisture control (illustrative)",
+            "./locations.html",
+            "Locations hub",
+        ),
+        (
+            "assets/images/posts/2026-08-08-weatherproof-first-3.webp",
+            "Illustrative insulated wall assembly before interior finishes",
+            "Insulated assembly (illustrative)",
+            "./additions.html",
+            "Home additions directory",
+        ),
+    ],
+    "excavation": [
+        (
+            "assets/images/posts/2026-08-12-edmonds-addition-permit-1.webp",
+            "Illustrative site and dig context ahead of an Edmonds home addition",
+            "Site / dig context (illustrative)",
+            "./additions.html",
+            "Home additions directory",
+        ),
+        (
+            "assets/images/posts/2026-08-12-edmonds-addition-permit-2.webp",
+            "Illustrative grading and foundation interface for residential site work",
+            "Grading interface (illustrative)",
+            "./additions.html",
+            "Home additions directory",
+        ),
+        (
+            "assets/images/posts/2026-08-24-shoreline-addition-3.webp",
+            "Illustrative addition footprint where excavation sets drainage and pad",
+            "Footprint from site work (illustrative)",
+            "./locations.html",
+            "Locations hub",
+        ),
+    ],
+}
+
+
+
 
 def esc(s: str) -> str:
     return html.escape(s or "", quote=True)
@@ -4554,6 +4883,29 @@ def build_trades_hub() -> str:
       <p class="text-slate-400 text-sm font-light leading-relaxed mb-2">GC directories for multi-trade packages: <a href="./kitchen.html" class="text-secondary hover:underline">Kitchen</a> · <a href="./bathrooms.html" class="text-secondary hover:underline">Bathrooms</a> · <a href="./additions.html" class="text-secondary hover:underline">Additions</a> · <a href="./how-we-rank.html" class="text-secondary hover:underline">How we rank</a>.</p>
       <p class="text-slate-400 text-sm font-light leading-relaxed">Common specialty starts: <a href="./plumber.html" class="text-secondary hover:underline">Plumber</a> · <a href="./electrician.html" class="text-secondary hover:underline">Electrician</a> · <a href="./hvac.html" class="text-secondary hover:underline">HVAC</a> · <a href="./roofing.html" class="text-secondary hover:underline">Roofing</a> · <a href="./verify-contractor.html" class="text-secondary hover:underline">Verify walkthrough</a>.</p>
     </section>
+{_hub_photo_strip([
+        (
+            "assets/images/posts/2026-08-31-magnolia-plumbing-1.webp",
+            "Illustrative plumbing rough-in for a Pacific Northwest remodel",
+            "Plumbing context (illustrative)",
+            "./plumber.html",
+            "Plumber directory",
+        ),
+        (
+            "assets/images/posts/2026-08-10-electrical-bath-1.webp",
+            "Illustrative electrical rough-in during a bathroom remodel",
+            "Electrical context (illustrative)",
+            "./electrician.html",
+            "Electrician directory",
+        ),
+        (
+            "assets/images/posts/2026-09-21-edmonds-roof-1.webp",
+            "Illustrative coastal Edmonds home staged for roof work",
+            "Roofing context (illustrative)",
+            "./roofing.html",
+            "Roofing directory",
+        ),
+    ], title="Trade field context (illustrative)")}
 {faq_section(faqs, "Trade directories FAQ")}
   </div>"""
     ld = [
@@ -4583,6 +4935,10 @@ def build_trades_hub() -> str:
 
 def build_trade_page(slug: str, title: str, icon: str, blurb: str, firms: list[dict]) -> str:
     cards = "\n\n".join(firm_card(f) for f in firms) if firms else '<p class="text-slate-400">Research entries pending verification.</p>'
+    photo_strip = _hub_photo_strip(
+        TRADE_PHOTO_STRIPS.get(slug, []),
+        title=f"{title.split('/')[0].strip()} field context (illustrative)",
+    )
     faqs = [
         (
             f"How should I hire a {title.lower()} in King County, Snohomish County, or Seattle?",
@@ -4619,6 +4975,7 @@ def build_trade_page(slug: str, title: str, icon: str, blurb: str, firms: list[d
         (Board walkthrough: <a href="./verify-contractor.html" class="text-secondary hover:underline">verify contractor</a>).
       </p>
     </section>
+{photo_strip}
     <section id="rankings" class="mb-16">
       <div class="flex items-end justify-between mb-8 border-b border-white/10 pb-4">
         <div>
