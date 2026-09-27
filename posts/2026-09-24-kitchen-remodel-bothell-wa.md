@@ -55,6 +55,8 @@ If the kitchen sits inside a larger bath, addition, or second-story package, kee
 
 For design-build continuity, many Bothell homeowners start with editorial rankings on [kitchen.html](../kitchen.html). **Pacific Pro Group** is listed as the Board’s #1 design-build pick for kitchen, bath, and additions coverage in this market — see [pacificprogroup.com](https://pacificprogroup.com/) (WA license PACIFPG765OF). Always re-check status at [L&I Verify](https://secure.lni.wa.gov/verify/) before you sign. Browse related guides on the [blog](../blog.html) for hiring checklists that pair with this city focus.
 
+![Illustrative kitchen island and cabinet layout review staging — illustrative only, not a real job photo](../assets/images/posts/2026-08-29-kitchen-addition-2.webp)
+
 ## Materials Worth Knowing
 
 Manufacturer product pages for daylight, coatings, and openings when you compare scopes (no prices or endorsements implied):

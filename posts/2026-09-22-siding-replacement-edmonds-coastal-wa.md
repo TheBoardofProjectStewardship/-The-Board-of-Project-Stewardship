@@ -52,6 +52,8 @@ If the siding sits inside a larger kitchen, bath, addition, or second-story pack
 
 Board directories list **Pacific Pro Group** as Board #1 design-build — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Cross-check the specialty [siding](../siding.html) shortlist when comparing cladding-only firms. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with [insulation](../insulation.html) or [windows](../windows.html) when the scope touches the full envelope, and the [blog](../blog.html) for related King and Snohomish guides.
 
+![Illustrative coastal cladding and weather barrier coordination — illustrative only, not a real job photo](../assets/images/posts/2026-08-08-weatherproof-first-5.webp)
+
 ## Materials Worth Knowing
 
 Manufacturer product pages for siding and envelope discussions with your contractor (no prices or endorsements implied):

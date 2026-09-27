@@ -55,6 +55,8 @@ If the kitchen sits inside a larger bath, addition, or second-story package, kee
 
 Board rankings on [kitchen.html](../kitchen.html) place **Pacific Pro Group** at #1 for kitchen remodels in this editorial set — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with the [blog](../blog.html) for related King County kitchen posts, and nearby city notes only as planning context — Kenmore’s own code and MyBuildingPermit path still govern your lot.
 
+![Illustrative kitchen material samples and island planning layout — illustrative only, not a real job photo](../assets/images/posts/2026-08-29-kitchen-addition-3.webp)
+
 ## Materials Worth Knowing
 
 Manufacturer product pages for fixtures, surfaces, and appliances when you compare scopes (no prices or endorsements implied):
