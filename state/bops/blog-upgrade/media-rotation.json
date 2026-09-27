@@ -55,6 +55,10 @@
     "pWePjMmyha0"
   ],
   "used_photo_urls": [
+    "assets/images/posts/2026-08-10-electrical-bath-1.webp",
+    "assets/images/posts/2026-08-31-magnolia-plumbing-1.webp",
+    "assets/images/posts/2026-08-29-kitchen-addition-3.webp",
+    "assets/images/posts/2026-08-29-kitchen-addition-2.webp",
     "assets/images/posts/2026-09-22-edmonds-siding-3.webp",
     "assets/images/posts/2026-09-22-edmonds-siding-2.webp",
     "assets/images/posts/2026-09-22-edmonds-siding-1.webp",
@@ -142,5 +146,11 @@
     "kitchen-remodel-magnolia-seattle",
     "bathroom-remodel-mill-creek-wa"
   ],
-  "last_shared_video": "assets/videos/posts/2026-09-shared-waterproofing.mp4"
+  "last_shared_video": "assets/videos/posts/2026-09-shared-waterproofing.mp4",
+  "last_steward_morning": {
+    "date": "2026-09-27",
+    "focus": "trade specialty photo strips + 4th stills on Sep 21-24/26",
+    "higgsfield_spend": 0,
+    "source": "reuse on-disk WebP"
+  }
 }
