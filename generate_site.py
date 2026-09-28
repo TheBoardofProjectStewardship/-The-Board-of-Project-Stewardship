@@ -4041,6 +4041,29 @@ def build_additions(additions: list[dict]) -> str:
     )}
   <div class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
 {how_we_rank_block(' Also see <a href="./home-addition-planning.html" class="text-secondary hover:underline">addition planning</a>, <a href="./second-story-vs-teardown.html" class="text-secondary hover:underline">second story vs teardown</a>, and <a href="./hiring-a-contractor.html" class="text-secondary hover:underline">hiring a contractor</a>.')}
+{_hub_photo_strip([
+        (
+            "assets/images/dir-additions-hero.webp",
+            "Illustrative home addition exterior context for King and Snohomish County remodels",
+            "Addition exterior context (illustrative)",
+            "./home-addition-planning.html",
+            "Home addition planning",
+        ),
+        (
+            "assets/images/posts/2026-08-12-edmonds-addition-permit-1.webp",
+            "Illustrative permit and plan-set context for an Edmonds home addition",
+            "Permit / plan-set context (illustrative)",
+            "./posts/2026-08-12-edmonds-home-addition-permit-basics.html",
+            "Edmonds home addition permit basics",
+        ),
+        (
+            "assets/images/posts/2026-08-24-shoreline-addition-2.webp",
+            "Illustrative second-story addition framing for a Shoreline-area home",
+            "Second-story framing context (illustrative)",
+            "./posts/2026-08-24-second-story-addition-shoreline.html",
+            "Shoreline second-story addition",
+        ),
+    ], title="Addition field context (illustrative)")}
 {ppg_featured("Home Addition Contractor")}
     <section id="rankings" class="mb-20">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 border-b border-white/10 pb-4 gap-3">
@@ -4287,6 +4310,29 @@ def build_custom_homes(firms: list[dict]) -> str:
     )}
   <div class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
 {how_we_rank_block(' Also see <a href="./additions.html" class="text-secondary hover:underline">home additions</a>, <a href="./home-addition-planning.html" class="text-secondary hover:underline">addition planning</a>, <a href="./hiring-a-contractor.html" class="text-secondary hover:underline">hiring a contractor</a>, <a href="./spec-homes.html" class="text-secondary hover:underline">spec homes</a>, and <a href="./commercial.html" class="text-secondary hover:underline">commercial</a>.')}
+{_hub_photo_strip([
+        (
+            "assets/images/hubs/hub-edmonds-1.webp",
+            "Illustrative Edmonds-area custom home exterior context for coastal King County builds",
+            "Coastal custom context (illustrative)",
+            "./edmonds-custom-homes.html",
+            "Edmonds custom homes directory",
+        ),
+        (
+            "assets/images/posts/2026-08-29-kitchen-addition-1.webp",
+            "Illustrative kitchen and living layout planning for a custom or speculative home",
+            "Interior planning context (illustrative)",
+            "./spec-homes.html",
+            "Spec homes directory",
+        ),
+        (
+            "assets/images/posts/2026-08-24-shoreline-addition-1.webp",
+            "Illustrative home addition framing for Pacific Northwest custom home projects",
+            "Addition sequencing context (illustrative)",
+            "./home-addition-planning.html",
+            "Home addition planning",
+        ),
+    ], title="Custom-home field context (illustrative)")}
 {ppg_featured(label + " Builder", note=ppg_note)}
     <section id="rankings" class="mb-20">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 border-b border-white/10 pb-4 gap-3">
@@ -4743,6 +4789,29 @@ def build_commercial(firms: list[dict]) -> str:
     )}
   <div class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
 {how_we_rank_block(' Also see <a href="./custom-homes.html" class="text-secondary hover:underline">custom homes</a> and <a href="./additions.html" class="text-secondary hover:underline">home additions</a>.')}
+{_hub_photo_strip([
+        (
+            "assets/images/posts/2026-08-11-hire-design-build-1.webp",
+            "Illustrative design-build jobsite staging for Pacific Northwest commercial and residential scopes",
+            "Jobsite staging (illustrative)",
+            "./custom-homes.html",
+            "Custom homes directory",
+        ),
+        (
+            "assets/images/posts/2026-08-21-queen-anne-kitchen-1.webp",
+            "Illustrative tenant-improvement style kitchen remodel interior in the Puget Sound",
+            "TI / interior remodel context (illustrative)",
+            "./kitchen.html",
+            "Kitchen remodelers directory",
+        ),
+        (
+            "assets/images/posts/2026-08-20-bothell-addition-1.webp",
+            "Illustrative structural addition framing related to light commercial and expansion work",
+            "Structural expansion context (illustrative)",
+            "./additions.html",
+            "Home additions directory",
+        ),
+    ], title="Commercial field context (illustrative)")}
     <section class="bg-charcoal rounded-xl p-6 md:p-8 border border-primary/20 mb-10" id="editorial-criteria">
       <h2 class="text-lg font-black text-white mb-3 tracking-tight">Editorial criteria (commercial / TI)</h2>
       <p class="text-sm text-slate-400 font-light leading-relaxed mb-3">
@@ -4835,6 +4904,29 @@ def build_spec_homes(firms: list[dict]) -> str:
     )}
   <div class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
 {how_we_rank_block(' Looking for a one-off owner-custom build instead? See <a href="./custom-homes.html" class="text-secondary hover:underline">custom homes</a>.')}
+{_hub_photo_strip([
+        (
+            "assets/images/posts/2026-09-02-edmonds-custom-1.webp",
+            "Illustrative custom home planning context for King and Snohomish County builders",
+            "Custom planning context (illustrative)",
+            "./custom-homes.html",
+            "Custom homes directory",
+        ),
+        (
+            "assets/images/dir-custom-homes-hero.webp",
+            "Illustrative finished exterior for a Pacific Northwest custom or speculative home",
+            "Finished exterior context (illustrative)",
+            "./edmonds-custom-homes.html",
+            "Edmonds custom homes directory",
+        ),
+        (
+            "assets/images/posts/2026-08-26-lfp-addition-2.webp",
+            "Illustrative addition framing and dry-in related to speculative home build sequencing",
+            "Framing / dry-in context (illustrative)",
+            "./additions.html",
+            "Home additions directory",
+        ),
+    ], title="Spec-home field context (illustrative)")}
     <section class="bg-charcoal rounded-xl p-6 md:p-8 border border-primary/20 mb-14" id="editorial-criteria">
       <h2 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2">
         <i class="fas fa-house-flag text-secondary"></i> Editorial criteria · honest framing
