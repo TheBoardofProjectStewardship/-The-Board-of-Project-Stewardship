@@ -659,14 +659,14 @@
     <div class="mb-6 border-b border-white/10 pb-4">
       <span class="text-secondary text-xs font-bold uppercase tracking-widest">Good Steward Tools</span>
       <h2 class="text-3xl font-black text-white tracking-tight">See how a project is built</h2>
-      <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">One cohesive illustrative house from the Board of Project Stewardship, scrubbed through 17 stages from Discovery to Handoff. Plan, 3D, Elevation, and Walk stay on the same model. Honesty chips: illustrative media, not engineering documents. <a href="./build-walkthrough.html" class="text-secondary hover:underline">Open full landing</a>.</p>
+      <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">One cohesive illustrative house from the Board of Project Stewardship, scrubbed through 17 stages from Discovery to Handoff. The plan stays on the sheet, then the walls rise into the same model. Honesty chips: illustrative media, not engineering documents. <a href="./build-walkthrough.html" class="text-secondary hover:underline">Open full landing</a>.</p>
     </div>
     <iframe
       id="build-walkthrough-home"
       src="./tools/build-walkthrough/index.html"
       title="Build Walkthrough — Board of Project Stewardship"
       loading="lazy"
-      style="display:block;width:100%;height:920px;border:0;border-radius:18px;background:#0a0a0a;"
+      style="display:block;width:100%;height:1280px;border:0;border-radius:18px;background:#f3efe6;"
     ></iframe>
     <script>
     (() => {
@@ -678,7 +678,7 @@
         if (event.data?.type !== 'build-walkthrough:resize') return;
         const height = Number(event.data.height);
         if (Number.isFinite(height) && height >= 400 && height <= 16000) {
-          frame.style.height = `${Math.min(Math.ceil(height) + 2, 1400)}px`;
+          frame.style.height = `${Math.min(Math.ceil(height) + 2, 1900)}px`;
         }
       });
     })();
@@ -935,34 +935,6 @@
           <figcaption class="px-3 py-2 text-[11px] text-slate-500 font-light leading-snug">Research before ranking</figcaption>
         </figure>
       </div>
-    </section>
-
-    <section id="how-we-evaluate" class="mb-14">
-    <iframe
-      id="focus-reveal-standards"
-      class="board-section-frame"
-      src="./sections/focus-reveal-standards.html"
-      title="How we evaluate — Board of Project Stewardship"
-      loading="lazy"
-      style="display:block;width:100%;height:1200px;border:0;border-radius:18px;background:#0a0a0a;"
-    ></iframe>
-    <script>
-    (function () {
-      var frame = document.getElementById("focus-reveal-standards");
-      if (!frame) return;
-      window.addEventListener('message', function (event) {
-        if (!event.data || event.data.type !== 'board-section:resize') return;
-        if (event.data.id !== "focus-reveal-standards") return;
-        if (event.source !== frame.contentWindow) return;
-        var trusted = new URL(frame.src, window.location.href).origin;
-        if (event.origin !== trusted) return;
-        var next = Number(event.data.height);
-        if (Number.isFinite(next) && next >= 280 && next <= 6400) {
-          frame.style.height = Math.ceil(next) + 'px';
-        }
-      });
-    })();
-    </script>
     </section>
 
     <section id="integrity-shield" class="mb-14">

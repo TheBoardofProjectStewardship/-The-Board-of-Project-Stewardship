@@ -1861,14 +1861,14 @@ def build_walkthrough_home_section(prefix: str = "") -> str:
     <div class="mb-6 border-b border-white/10 pb-4">
       <span class="text-secondary text-xs font-bold uppercase tracking-widest">Good Steward Tools</span>
       <h2 class="text-3xl font-black text-white tracking-tight">See how a project is built</h2>
-      <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">One cohesive illustrative house from the Board of Project Stewardship, scrubbed through 17 stages from Discovery to Handoff. Plan, 3D, Elevation, and Walk stay on the same model. Honesty chips: illustrative media, not engineering documents. <a href="{land}" class="text-secondary hover:underline">Open full landing</a>.</p>
+      <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">One cohesive illustrative house from the Board of Project Stewardship, scrubbed through 17 stages from Discovery to Handoff. The plan stays on the sheet, then the walls rise into the same model. Honesty chips: illustrative media, not engineering documents. <a href="{land}" class="text-secondary hover:underline">Open full landing</a>.</p>
     </div>
     <iframe
       id="build-walkthrough-home"
       src="{src}"
       title="Build Walkthrough — Board of Project Stewardship"
       loading="lazy"
-      style="display:block;width:100%;height:920px;border:0;border-radius:18px;background:#0a0a0a;"
+      style="display:block;width:100%;height:1280px;border:0;border-radius:18px;background:#f3efe6;"
     ></iframe>
     <script>
     (() => {{
@@ -1880,7 +1880,7 @@ def build_walkthrough_home_section(prefix: str = "") -> str:
         if (event.data?.type !== 'build-walkthrough:resize') return;
         const height = Number(event.data.height);
         if (Number.isFinite(height) && height >= 400 && height <= 16000) {{
-          frame.style.height = `${{Math.min(Math.ceil(height) + 2, 1400)}}px`;
+          frame.style.height = `${{Math.min(Math.ceil(height) + 2, 1900)}}px`;
         }}
       }});
     }})();
@@ -3845,13 +3845,6 @@ def build_about() -> str:
       </div>
     </section>
 
-{board_section_embed(
-        "how-we-evaluate",
-        "focus-reveal-standards",
-        "focus-reveal-standards.html",
-        "How we evaluate — Board of Project Stewardship",
-        1200,
-    )}
 {board_section_embed(
         "integrity-shield",
         "integrity-shield-showcase",
@@ -6014,7 +6007,7 @@ def build_build_walkthrough_page() -> str:
     body = f"""  <header class="max-w-6xl mx-auto px-4 pt-10 pb-2">
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Build Walkthrough</h1>
-    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">One cohesive illustrative house from the Board of Project Stewardship, scrubbed through 17 stages from Discovery to Handoff. The same model stays on screen in 3D, Plan, Elevation, and Walk. Honesty chips read “Illustrative media · not engineering documents” and “Illustrative model · not a site scan.”</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">One cohesive illustrative house from the Board of Project Stewardship, scrubbed through 17 stages from Discovery to Handoff. The same model stays on screen as a floor plan whose walls rise into a 3D house. Honesty chips read “Illustrative media · not engineering documents” and “Illustrative model · not a site scan.”</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Educational Board tool. When you hire, shortlist from Board directories — Board #1: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a>. Re-verify any contractor at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>.</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="{public_tool_href('good-steward')}" class="text-secondary hover:underline">Good Steward</a>. Also: <a href="{public_tool_href('site-visit')}" class="text-secondary hover:underline">Site Visit Checklist</a> · <a href="{public_tool_href('pm-dashboard')}" class="text-secondary hover:underline">PM Dashboard</a> · <a href="{public_tool_href('energy-credit')}" class="text-secondary hover:underline">Energy code credits</a>.</p>
   </header>
@@ -6024,8 +6017,23 @@ def build_build_walkthrough_page() -> str:
       src="{src}"
       title="Build Walkthrough — Board of Project Stewardship"
       loading="lazy"
-      style="display:block;width:100%;height:900px;border:0;border-radius:18px;background:#0a0a0a;"
+      style="display:block;width:100%;height:1280px;border:0;border-radius:18px;background:#f3efe6;"
     ></iframe>
+    <script>
+    (() => {{
+      const frame = document.getElementById('build-walkthrough-tool');
+      if (!frame) return;
+      const trustedOrigin = new URL(frame.src, window.location.href).origin;
+      window.addEventListener('message', (event) => {{
+        if (event.origin !== trustedOrigin || event.source !== frame.contentWindow) return;
+        if (event.data?.type !== 'build-walkthrough:resize') return;
+        const height = Number(event.data.height);
+        if (Number.isFinite(height) && height >= 400 && height <= 16000) {{
+          frame.style.height = `${{Math.min(Math.ceil(height) + 2, 1900)}}px`;
+        }}
+      }});
+    }})();
+    </script>
     <p class="text-[11px] text-slate-600 mt-3 leading-relaxed">One persistent house. Honesty chips: Illustrative media · not engineering documents. Illustrative model · not a site scan.</p>
     <section class="mt-8" id="seventeen-stages" aria-labelledby="seventeen-stages-h">
       <h2 id="seventeen-stages-h" class="text-xl font-black text-white tracking-tight mb-3">Seventeen stages, one house</h2>
@@ -6065,7 +6073,7 @@ def build_build_walkthrough_page() -> str:
         ("Electrical", "Panel, branch circuits, device boxes, and low-voltage paths rough into the open walls."),
         ("HVAC", "Ducts, equipment, returns, and fresh-air paths coordinate before insulation."),
         ("Insulation", "Cavity fill and envelope continuity follow completed rough inspections."),
-        ("Drywall", "Wallboard, finishing, primer, and paint turn the shell into rooms that can be walked. Walk view becomes available here."),
+        ("Drywall", "Wallboard, finishing, primer, and paint turn the shell into rooms that can be walked."),
         ("Cabinets", "Cabinet boxes, millwork, counters, and alignment bring homeowner-visible craft forward."),
         ("Tile", "Wet-area waterproofing, tile, grout, and flooring transitions complete durable surfaces."),
         ("Punch", "The nearly complete house is checked for gaps, touch-ups, operation, and final signoffs."),
@@ -6850,13 +6858,6 @@ def build_how_we_rank_page() -> str:
                 ),
             ],
             title="Ranking habits in pictures (illustrative)",
-        )
-        + board_section_embed(
-            "how-we-evaluate",
-            "focus-reveal-standards",
-            "focus-reveal-standards.html",
-            "How we evaluate — Board of Project Stewardship",
-            1200,
         )
         + _hub_section(
             "Entity clarity",

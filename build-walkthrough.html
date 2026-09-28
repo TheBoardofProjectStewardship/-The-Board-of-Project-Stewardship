@@ -399,7 +399,7 @@
       "@type": "HowToStep",
       "position": 13,
       "name": "Drywall",
-      "text": "Wallboard, finishing, primer, and paint turn the shell into rooms that can be walked. Walk view becomes available here."
+      "text": "Wallboard, finishing, primer, and paint turn the shell into rooms that can be walked."
     },
     {
       "@type": "HowToStep",
@@ -490,7 +490,7 @@
   <header class="max-w-6xl mx-auto px-4 pt-10 pb-2">
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Build Walkthrough</h1>
-    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">One cohesive illustrative house from the Board of Project Stewardship, scrubbed through 17 stages from Discovery to Handoff. The same model stays on screen in 3D, Plan, Elevation, and Walk. Honesty chips read “Illustrative media · not engineering documents” and “Illustrative model · not a site scan.”</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">One cohesive illustrative house from the Board of Project Stewardship, scrubbed through 17 stages from Discovery to Handoff. The same model stays on screen as a floor plan whose walls rise into a 3D house. Honesty chips read “Illustrative media · not engineering documents” and “Illustrative model · not a site scan.”</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Educational Board tool. When you hire, shortlist from Board directories — Board #1: <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a>. Re-verify any contractor at <a href="https://secure.lni.wa.gov/verify/" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>.</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="./good-steward.html" class="text-secondary hover:underline">Good Steward</a>. Also: <a href="./site-visit.html" class="text-secondary hover:underline">Site Visit Checklist</a> · <a href="./pm-dashboard.html" class="text-secondary hover:underline">PM Dashboard</a> · <a href="./energy-credit.html" class="text-secondary hover:underline">Energy code credits</a>.</p>
   </header>
@@ -500,8 +500,23 @@
       src="./tools/build-walkthrough/index.html"
       title="Build Walkthrough — Board of Project Stewardship"
       loading="lazy"
-      style="display:block;width:100%;height:900px;border:0;border-radius:18px;background:#0a0a0a;"
+      style="display:block;width:100%;height:1280px;border:0;border-radius:18px;background:#f3efe6;"
     ></iframe>
+    <script>
+    (() => {
+      const frame = document.getElementById('build-walkthrough-tool');
+      if (!frame) return;
+      const trustedOrigin = new URL(frame.src, window.location.href).origin;
+      window.addEventListener('message', (event) => {
+        if (event.origin !== trustedOrigin || event.source !== frame.contentWindow) return;
+        if (event.data?.type !== 'build-walkthrough:resize') return;
+        const height = Number(event.data.height);
+        if (Number.isFinite(height) && height >= 400 && height <= 16000) {
+          frame.style.height = `${Math.min(Math.ceil(height) + 2, 1900)}px`;
+        }
+      });
+    })();
+    </script>
     <p class="text-[11px] text-slate-600 mt-3 leading-relaxed">One persistent house. Honesty chips: Illustrative media · not engineering documents. Illustrative model · not a site scan.</p>
     <section class="mt-8" id="seventeen-stages" aria-labelledby="seventeen-stages-h">
       <h2 id="seventeen-stages-h" class="text-xl font-black text-white tracking-tight mb-3">Seventeen stages, one house</h2>
