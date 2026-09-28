@@ -175,8 +175,65 @@
     #more-dropdown, #mobile-nav { display: none; }
     #more-dropdown.is-open { display: block; }
     #mobile-nav.is-open { display: block; }
-    @media (min-width: 768px) {
+    /* Full primary nav does not fit beside the full brand name below 1280px.
+       Keep the hamburger through that range so the name stays one line. */
+    @media (min-width: 1280px) {
       #mobile-nav.is-open { display: none !important; }
+    }
+    header .site-header-inner { width: 100%; }
+    header .site-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      height: 4rem;
+      flex-wrap: nowrap;
+    }
+    header .site-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+      min-width: max-content;
+      text-decoration: none;
+    }
+    header .site-brand-name {
+      white-space: nowrap;
+      flex-shrink: 0;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.2;
+      letter-spacing: 0.03em;
+      font-size: clamp(0.7rem, 3.5vw, 0.875rem);
+    }
+    @media (min-width: 480px) {
+      header .site-brand-name {
+        font-size: 0.875rem;
+        letter-spacing: 0.05em;
+      }
+    }
+    @media (min-width: 1280px) {
+      header .site-brand-name {
+        font-size: 1rem;
+        letter-spacing: 0.05em;
+      }
+    }
+    header .site-nav-desktop { display: none; }
+    header .site-nav-burger { display: inline-flex; flex-shrink: 0; }
+    @media (min-width: 1280px) {
+      header .site-nav-desktop {
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+        gap: 0.5rem;
+      }
+      header .site-nav-burger { display: none !important; }
+    }
+    @media (min-width: 1440px) {
+      header .site-nav-desktop { gap: 0.9rem; }
+    }
+    @media (min-width: 1680px) {
+      header .site-nav-desktop { gap: 1.25rem; }
     }
     .nav-burger {
       width: 1.35rem; height: 1.05rem;
@@ -453,14 +510,13 @@
 <body class="bg-obsidian bg-grid-pattern min-h-screen antialiased">
   <a href="#main-content" class="skip-link">Skip to content</a>
   <header class="bg-charcoal/80 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between h-16 items-center gap-3">
-        <a href="./index.html" class="flex items-center gap-2 no-underline min-w-0">
+    <div class="site-header-inner mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="site-header-row">
+        <a href="./index.html" class="site-brand">
           <i class="fas fa-compass-drafting text-secondary text-xl shrink-0" aria-hidden="true"></i>
-          <span class="hidden md:inline font-black text-sm lg:text-base tracking-wider text-white">Board of Project Stewardship</span>
-          <span class="md:hidden font-black text-base tracking-wider text-white">Board</span>
+          <span class="site-brand-name">Board of Project Stewardship</span>
         </a>
-        <nav class="hidden md:flex items-center gap-4 lg:gap-5" aria-label="Primary">
+        <nav class="site-nav-desktop" aria-label="Primary">
           <a href="./index.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition ">Home</a><a href="./about.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition ">About</a><a href="./directory.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition ">Directories</a><a href="./locations.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition ">Locations</a><a href="./learn.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition ">Learn</a><a href="./permits.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition ">Permits</a><a href="./verify-contractor.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition ">Verify</a><a href="./stamp-of-trust/" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition ">Stamp of Trust</a><a href="./how-we-rank.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition ">How we rank</a><a href="./blog.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition ">Blog</a>
           <div class="relative">
             <button type="button" id="more-toggle" class="text-secondary font-medium text-xs uppercase tracking-widest transition inline-flex items-center gap-1" aria-expanded="false" aria-controls="more-dropdown" aria-haspopup="true">
@@ -472,12 +528,12 @@
           </div>
           <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="hidden lg:inline-flex items-center gap-1 ml-1 px-2.5 py-1 rounded border border-secondary/40 text-[10px] font-bold uppercase tracking-widest text-secondary hover:bg-secondary/10 transition" title="Board directory #1 hire ranking">Board #1 · PPG<span class="sr-only"> — Pacific Pro Group (opens in new window)</span></a>
         </nav>
-        <button type="button" id="nav-toggle" class="md:hidden p-2 -mr-1 text-slate-200" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        <button type="button" id="nav-toggle" class="site-nav-burger p-2 -mr-1 text-slate-200" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
           <span class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></span>
         </button>
       </div>
     </div>
-    <nav id="mobile-nav" class="md:hidden border-t border-white/10 bg-charcoal/95 px-4 pb-4" aria-label="Mobile">
+    <nav id="mobile-nav" class="border-t border-white/10 bg-charcoal/95 px-4 pb-4" aria-label="Mobile">
       <a href="./index.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Home</a><a href="./about.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">About</a><a href="./directory.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Directories</a><a href="./locations.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Locations</a><a href="./learn.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Learn</a><a href="./permits.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Permits</a><a href="./verify-contractor.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Verify</a><a href="./stamp-of-trust/" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Stamp of Trust</a><a href="./how-we-rank.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">How we rank</a><a href="./blog.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Blog</a><p class="pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Directories</p><a href="./additions.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Additions</a><a href="./custom-homes.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Custom Homes</a><a href="./edmonds-custom-homes.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Edmonds Top 30</a><a href="./kitchen.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Kitchen</a><a href="./bathrooms.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Bathrooms</a><a href="./restoration.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Restoration</a><a href="./commercial.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Commercial</a><a href="./spec-homes.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Spec</a><a href="./trades.html" class="text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2" aria-current="page">Trades</a><p class="pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Tools</p><a href="./faq.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">FAQ</a><a href="./adu.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Edmonds ADU</a><a href="./contact.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Contact</a><a href="./good-steward.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Good Steward</a><a href="./floor-plan-3d.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Floor Plan to 3D</a><a href="./hire-questions.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Hire Questions</a><a href="./hiring-a-contractor.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Hiring a Contractor</a><a href="./kitchen-remodel-planning.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Kitchen Remodel Planning</a><a href="./bathroom-waterproofing-guide.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Bathroom Waterproofing</a><a href="./home-addition-planning.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Home Addition Planning</a><a href="./glossary.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Glossary</a><a href="./another-story.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Another Story · Board feature</a>
     </nav>
   </header>

@@ -1251,8 +1251,65 @@ def head_assets() -> str:
     #more-dropdown, #mobile-nav { display: none; }
     #more-dropdown.is-open { display: block; }
     #mobile-nav.is-open { display: block; }
-    @media (min-width: 768px) {
+    /* Full primary nav does not fit beside the full brand name below 1280px.
+       Keep the hamburger through that range so the name stays one line. */
+    @media (min-width: 1280px) {
       #mobile-nav.is-open { display: none !important; }
+    }
+    header .site-header-inner { width: 100%; }
+    header .site-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      height: 4rem;
+      flex-wrap: nowrap;
+    }
+    header .site-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+      min-width: max-content;
+      text-decoration: none;
+    }
+    header .site-brand-name {
+      white-space: nowrap;
+      flex-shrink: 0;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.2;
+      letter-spacing: 0.03em;
+      font-size: clamp(0.7rem, 3.5vw, 0.875rem);
+    }
+    @media (min-width: 480px) {
+      header .site-brand-name {
+        font-size: 0.875rem;
+        letter-spacing: 0.05em;
+      }
+    }
+    @media (min-width: 1280px) {
+      header .site-brand-name {
+        font-size: 1rem;
+        letter-spacing: 0.05em;
+      }
+    }
+    header .site-nav-desktop { display: none; }
+    header .site-nav-burger { display: inline-flex; flex-shrink: 0; }
+    @media (min-width: 1280px) {
+      header .site-nav-desktop {
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+        gap: 0.5rem;
+      }
+      header .site-nav-burger { display: none !important; }
+    }
+    @media (min-width: 1440px) {
+      header .site-nav-desktop { gap: 0.9rem; }
+    }
+    @media (min-width: 1680px) {
+      header .site-nav-desktop { gap: 1.25rem; }
     }
     .nav-burger {
       width: 1.35rem; height: 1.05rem;
@@ -1351,14 +1408,13 @@ def nav_html(active: str = "", prefix: str = "") -> str:
     more_btn_cls = "text-secondary" if more_open else "text-slate-300 hover:text-secondary"
     return f"""  <a href="#main-content" class="skip-link">Skip to content</a>
   <header class="bg-charcoal/80 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between h-16 items-center gap-3">
-        <a href="{home_href}" class="flex items-center gap-2 no-underline min-w-0">
+    <div class="site-header-inner mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="site-header-row">
+        <a href="{home_href}" class="site-brand">
           <i class="fas fa-compass-drafting text-secondary text-xl shrink-0" aria-hidden="true"></i>
-          <span class="hidden md:inline font-black text-sm lg:text-base tracking-wider text-white">Board of Project Stewardship</span>
-          <span class="md:hidden font-black text-base tracking-wider text-white">Board</span>
+          <span class="site-brand-name">Board of Project Stewardship</span>
         </a>
-        <nav class="hidden md:flex items-center gap-4 lg:gap-5" aria-label="Primary">
+        <nav class="site-nav-desktop" aria-label="Primary">
           {primary_html}
           <div class="relative">
             <button type="button" id="more-toggle" class="{more_btn_cls} font-medium text-xs uppercase tracking-widest transition inline-flex items-center gap-1" aria-expanded="false" aria-controls="more-dropdown" aria-haspopup="true">
@@ -1370,12 +1426,12 @@ def nav_html(active: str = "", prefix: str = "") -> str:
           </div>
           <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="hidden lg:inline-flex items-center gap-1 ml-1 px-2.5 py-1 rounded border border-secondary/40 text-[10px] font-bold uppercase tracking-widest text-secondary hover:bg-secondary/10 transition" title="Board directory #1 hire ranking">Board #1 · PPG<span class="sr-only"> — Pacific Pro Group (opens in new window)</span></a>
         </nav>
-        <button type="button" id="nav-toggle" class="md:hidden p-2 -mr-1 text-slate-200" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        <button type="button" id="nav-toggle" class="site-nav-burger p-2 -mr-1 text-slate-200" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
           <span class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></span>
         </button>
       </div>
     </div>
-    <nav id="mobile-nav" class="md:hidden border-t border-white/10 bg-charcoal/95 px-4 pb-4" aria-label="Mobile">
+    <nav id="mobile-nav" class="border-t border-white/10 bg-charcoal/95 px-4 pb-4" aria-label="Mobile">
       {mobile_html}
     </nav>
   </header>"""
