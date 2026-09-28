@@ -3,29 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="One cohesive illustrative house through 17 stages from the Board of Project Stewardship. Honesty chips mark illustrative media, not engineering documents.">
+  <meta name="description" content="Sketch or trace a floor plan, then orbit and walk it in 3D. A free Board of Project Stewardship planning tool for talking through layouts before you hire.">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#0a0a0a">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta property="og:title" content="Build Walkthrough | Board of Project Stewardship">
-  <meta property="og:description" content="One cohesive illustrative house through 17 stages from the Board of Project Stewardship. Honesty chips mark illustrative media, not engineering documents.">
+  <meta property="og:title" content="Floor Plan to 3D Walkthrough | Board of Project Stewardship">
+  <meta property="og:description" content="Sketch or trace a floor plan, then orbit and walk it in 3D. A free Board of Project Stewardship planning tool for talking through layouts before you hire.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://boardofprojectstewardship.com/build-walkthrough.html">
-  <meta property="og:image" content="https://boardofprojectstewardship.com/assets/images/home-hero.webp">
-  <meta property="og:image:alt" content="Board of Project Stewardship">
+  <meta property="og:url" content="https://boardofprojectstewardship.com/floor-plan-3d.html">
+  <meta property="og:image" content="https://boardofprojectstewardship.com/assets/images/tools/floor-plan-3d/floor-plan-3d-og.webp">
+  <meta property="og:image:alt" content="Furnished 3D model of a two-bedroom cottage floor plan with walls cut away">
   <meta property="og:site_name" content="Board of Project Stewardship">
   <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Build Walkthrough | Board of Project Stewardship">
-  <meta name="twitter:description" content="One cohesive illustrative house through 17 stages from the Board of Project Stewardship. Honesty chips mark illustrative media, not engineering documents.">
-  <meta name="twitter:image" content="https://boardofprojectstewardship.com/assets/images/home-hero.webp">
-  <meta name="twitter:image:alt" content="Board of Project Stewardship">
-  <link rel="canonical" href="https://boardofprojectstewardship.com/build-walkthrough.html">
+  <meta name="twitter:title" content="Floor Plan to 3D Walkthrough | Board of Project Stewardship">
+  <meta name="twitter:description" content="Sketch or trace a floor plan, then orbit and walk it in 3D. A free Board of Project Stewardship planning tool for talking through layouts before you hire.">
+  <meta name="twitter:image" content="https://boardofprojectstewardship.com/assets/images/tools/floor-plan-3d/floor-plan-3d-og.webp">
+  <meta name="twitter:image:alt" content="Furnished 3D model of a two-bedroom cottage floor plan with walls cut away">
+  <link rel="canonical" href="https://boardofprojectstewardship.com/floor-plan-3d.html">
   <link rel="alternate" type="application/rss+xml" title="Board of Project Stewardship Blog" href="https://boardofprojectstewardship.com/blog/rss.xml">
   <link rel="icon" href="https://boardofprojectstewardship.com/assets/icons/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="https://boardofprojectstewardship.com/assets/icons/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="https://boardofprojectstewardship.com/assets/icons/apple-touch-icon.png">
-  <title>Build Walkthrough | Board of Project Stewardship</title>
+  <title>Floor Plan to 3D Walkthrough | Board of Project Stewardship</title>
   <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
   <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
   <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
@@ -187,6 +187,32 @@
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
     details.board-faq > summary:focus-visible { outline: 2px solid #4ade80; outline-offset: 2px; }
   </style>
+  <style>
+    #fp3d .fp-btn { display:inline-flex; align-items:center; gap:0.35rem; padding:0.5rem 0.75rem; border-radius:0.4rem; border:1px solid rgba(255,255,255,0.14); background:rgba(255,255,255,0.04); color:#e2e8f0; font-size:0.7rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer; min-height:2.5rem; }
+    #fp3d .fp-btn:hover { border-color:#4ade80; color:#4ade80; }
+    #fp3d .fp-btn[aria-pressed="true"] { background:#166534; border-color:#4ade80; color:#fff; }
+    #fp3d .fp-btn:disabled { opacity:0.4; cursor:not-allowed; }
+    #fp3d .fp-btn:focus-visible, #fp3d select:focus-visible, #fp3d input:focus-visible { outline:2px solid #4ade80; outline-offset:2px; }
+    #fp3d select, #fp3d input[type=number] { background:#1a1a1a; color:#e2e8f0; border:1px solid rgba(255,255,255,0.14); border-radius:0.4rem; padding:0.45rem 0.6rem; font-size:0.8rem; min-height:2.5rem; color-scheme:dark; }
+    #fp3d .fp-panel { background:#111814; border:1px solid rgba(255,255,255,0.08); border-radius:1rem; overflow:hidden; display:flex; flex-direction:column; }
+    #fp3d .fp-head { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:0.5rem; padding:0.6rem 0.75rem; border-bottom:1px solid rgba(255,255,255,0.06); }
+    #fp3d .fp-title { font-size:0.7rem; font-weight:800; letter-spacing:0.16em; text-transform:uppercase; color:#94a3b8; }
+    #fp-plan { display:block; width:100%; height:26rem; touch-action:none; user-select:none; -webkit-user-select:none; background:#0d120f; }
+    #fp-3d { position:relative; width:100%; height:26rem; background:#0f1512; }
+    #fp-canvas { display:block; width:100%; height:100%; touch-action:none; }
+    #fp-fallback { position:absolute; inset:0; display:flex; flex-direction:column; }
+    #fp-fallback[hidden] { display:none; }
+    #fp-iso { flex:1; min-height:0; padding:0.5rem; }
+    #fp-walkpad { position:absolute; right:0.75rem; bottom:0.75rem; display:grid; grid-template-columns:repeat(3,2.75rem); grid-template-rows:repeat(2,2.75rem); gap:0.35rem; }
+    #fp-walkpad[hidden] { display:none; }
+    #fp-walkpad button { border-radius:0.5rem; background:rgba(10,10,10,0.7); border:1px solid rgba(255,255,255,0.25); color:#fff; font-size:1rem; touch-action:none; }
+    #fp-walkpad button:active { background:#166534; }
+    #fp-3d-loading { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#64748b; font-size:0.8rem; pointer-events:none; }
+    #fp-3d-loading[hidden] { display:none; }
+    .fp-chip { display:inline-block; font-size:0.62rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#fbbf24; border:1px solid rgba(251,191,36,0.35); border-radius:999px; padding:0.2rem 0.55rem; }
+    @media (min-width: 1024px) { #fp-plan, #fp-3d { height:34rem; } }
+    @media (max-width: 480px) { #fp-plan, #fp-3d { height:20rem; } #fp3d .fp-btn { padding:0.45rem 0.6rem; font-size:0.62rem; } }
+  </style>
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -262,111 +288,79 @@
 {
   "@context": "https://schema.org",
   "@type": "HowTo",
-  "name": "How one illustrative house progresses from Discovery to Handoff",
-  "description": "One cohesive illustrative house through 17 stages from the Board of Project Stewardship. Educational media only \u2014 not engineering documents, bids, schedules, or stamped plans.",
-  "url": "https://boardofprojectstewardship.com/build-walkthrough.html",
+  "name": "How to turn a floor plan sketch into a 3D walkthrough",
+  "description": "Sketch or trace a floor plan, add doors, windows, and furniture, then view and walk it in 3D. Illustrative planning sketch only, not construction documents.",
+  "url": "https://boardofprojectstewardship.com/floor-plan-3d.html",
   "step": [
     {
       "@type": "HowToStep",
       "position": 1,
-      "name": "Discovery",
-      "text": "Before drawings: capture vision, budget reality, and site constraints. Educational diagram of one persistent house."
+      "name": "Start from a sample or a blank grid",
+      "text": "Pick a sample layout, or clear the plan and draw walls. Ends snap to nearby corners and to a half-foot grid."
     },
     {
       "@type": "HowToStep",
       "position": 2,
-      "name": "Plans",
-      "text": "Layouts and elevations turn discovery into a shared spatial story. Illustrative sheets only \u2014 not stamped engineering."
+      "name": "Trace your own plan (optional)",
+      "text": "Add a floor plan image as a tracing layer, set its width in feet, and draw walls over it. The image stays on your device."
     },
     {
       "@type": "HowToStep",
       "position": 3,
-      "name": "Permits",
-      "text": "Verify permit pathways, licensing, access, and review responsibilities before work starts. The Board of Project Stewardship does not issue licenses."
+      "name": "Add doors, windows, and furniture",
+      "text": "Tap a wall to add a door or window, then place furniture to check clearances and circulation."
     },
     {
       "@type": "HowToStep",
       "position": 4,
-      "name": "Site prep",
-      "text": "Access, erosion controls, temporary utilities, and staging prepare the lot."
+      "name": "Look around in 3D",
+      "text": "Orbit the model, lower the walls for a dollhouse view, add a roof for an exterior look, or walk through at eye level."
     },
     {
       "@type": "HowToStep",
       "position": 5,
-      "name": "Foundation",
-      "text": "Excavation, forms, concrete, waterproofing, and backfill establish the load path."
+      "name": "Bring it to your contractor",
+      "text": "Download a snapshot or the sketch file and use it to talk through the layout. It is a conversation starter, not a drawing set."
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is this sketch accurate enough for permits or bids?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. It is an illustrative planning sketch for conversation, not construction documents. Permit drawings, structural decisions, and bids come from your designer, engineer, and contractor after they measure the real site."
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 6,
-      "name": "Framing",
-      "text": "Studs, joists, headers, rafters, and plates turn the footprint into a readable volume."
+      "@type": "Question",
+      "name": "Does my floor plan image get uploaded anywhere?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. A tracing image stays in your browser and is not sent to the Board of Project Stewardship or anyone else. Your sketch is saved only in this browser unless you download it as a file."
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 7,
-      "name": "Roofing",
-      "text": "Decking, underlayment, flashing, and roof covering complete dry-in from above."
+      "@type": "Question",
+      "name": "What if the 3D view does not load on my phone?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The plan editor works on its own. If your device has 3D graphics turned off, the page shows a simplified raised-wall drawing instead, and you can still edit and download your sketch."
+      }
     },
     {
-      "@type": "HowToStep",
-      "position": 8,
-      "name": "Siding",
-      "text": "Sheathing, weather barrier, openings, trim, and cladding close the exterior envelope."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 9,
-      "name": "Plumbing",
-      "text": "Water, waste, and vent paths coordinate through open framing before cavities close."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 10,
-      "name": "Electrical",
-      "text": "Panel, branch circuits, device boxes, and low-voltage paths rough into the open walls."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 11,
-      "name": "HVAC",
-      "text": "Ducts, equipment, returns, and fresh-air paths coordinate before insulation."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 12,
-      "name": "Insulation",
-      "text": "Cavity fill and envelope continuity follow completed rough inspections."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 13,
-      "name": "Drywall",
-      "text": "Wallboard, finishing, primer, and paint turn the shell into rooms that can be walked. Walk view becomes available here."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 14,
-      "name": "Cabinets",
-      "text": "Cabinet boxes, millwork, counters, and alignment bring homeowner-visible craft forward."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 15,
-      "name": "Tile",
-      "text": "Wet-area waterproofing, tile, grout, and flooring transitions complete durable surfaces."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 16,
-      "name": "Punch",
-      "text": "The nearly complete house is checked for gaps, touch-ups, operation, and final signoffs."
-    },
-    {
-      "@type": "HowToStep",
-      "position": 17,
-      "name": "Handoff",
-      "text": "Warranty contacts, systems orientation, maintenance habits, and records support long-term stewardship."
+      "@type": "Question",
+      "name": "Should my contractor walk me through a 3D model before I sign?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It is a fair question to ask. Many homeowners understand room sizes, door swings, and furniture clearances far better in 3D than on a flat plan. Ask how your contractor will show you the layout before work starts and how changes get documented."
+      }
     }
   ]
 }
@@ -391,11 +385,11 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "Build Walkthrough",
-      "item": "https://boardofprojectstewardship.com/build-walkthrough.html"
+      "name": "Floor Plan to 3D",
+      "item": "https://boardofprojectstewardship.com/floor-plan-3d.html"
     }
   ],
-  "@id": "https://boardofprojectstewardship.com/build-walkthrough.html#breadcrumb"
+  "@id": "https://boardofprojectstewardship.com/floor-plan-3d.html#breadcrumb"
 }
   </script>
 </head>
@@ -412,11 +406,11 @@
         <nav class="hidden md:flex items-center gap-4 lg:gap-5" aria-label="Primary">
           <a href="./index.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition ">Home</a><a href="./about.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition ">About</a><a href="./directory.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition ">Directories</a><a href="./locations.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition ">Locations</a><a href="./learn.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition ">Learn</a><a href="./permits.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition ">Permits</a><a href="./verify-contractor.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition ">Verify</a><a href="./stamp-of-trust/" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition ">Stamp of Trust</a><a href="./how-we-rank.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition ">How we rank</a><a href="./blog.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition ">Blog</a>
           <div class="relative">
-            <button type="button" id="more-toggle" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest transition inline-flex items-center gap-1" aria-expanded="false" aria-controls="more-dropdown" aria-haspopup="true">
+            <button type="button" id="more-toggle" class="text-secondary font-medium text-xs uppercase tracking-widest transition inline-flex items-center gap-1" aria-expanded="false" aria-controls="more-dropdown" aria-haspopup="true">
               More <span aria-hidden="true">▾</span>
             </button>
             <div id="more-dropdown" class="absolute right-0 mt-2 w-72 max-h-[70vh] overflow-y-auto rounded-lg border border-white/10 bg-charcoal shadow-xl py-2 z-50" role="menu">
-              <p class="px-4 pt-1 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Directories</p><a href="./additions.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Additions</a><a href="./custom-homes.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Custom Homes</a><a href="./edmonds-custom-homes.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Edmonds Top 30</a><a href="./kitchen.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Kitchen</a><a href="./bathrooms.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Bathrooms</a><a href="./restoration.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Restoration</a><a href="./commercial.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Commercial</a><a href="./spec-homes.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Spec</a><a href="./trades.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Trades</a><p class="px-4 pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Tools</p><a href="./faq.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">FAQ</a><a href="./adu.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Edmonds ADU</a><a href="./contact.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Contact</a><a href="./good-steward.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Good Steward</a><a href="./floor-plan-3d.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Floor Plan to 3D</a><a href="./hire-questions.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Hire Questions</a><a href="./hiring-a-contractor.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Hiring a Contractor</a><a href="./kitchen-remodel-planning.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Kitchen Remodel Planning</a><a href="./bathroom-waterproofing-guide.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Bathroom Waterproofing</a><a href="./home-addition-planning.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Home Addition Planning</a><a href="./glossary.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Glossary</a><a href="./another-story.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Another Story · Board feature</a>
+              <p class="px-4 pt-1 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Directories</p><a href="./additions.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Additions</a><a href="./custom-homes.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Custom Homes</a><a href="./edmonds-custom-homes.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Edmonds Top 30</a><a href="./kitchen.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Kitchen</a><a href="./bathrooms.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Bathrooms</a><a href="./restoration.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Restoration</a><a href="./commercial.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Commercial</a><a href="./spec-homes.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Spec</a><a href="./trades.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Trades</a><p class="px-4 pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Tools</p><a href="./faq.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">FAQ</a><a href="./adu.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Edmonds ADU</a><a href="./contact.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Contact</a><a href="./good-steward.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Good Steward</a><a href="./floor-plan-3d.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-secondary" aria-current="page" role="menuitem">Floor Plan to 3D</a><a href="./hire-questions.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Hire Questions</a><a href="./hiring-a-contractor.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Hiring a Contractor</a><a href="./kitchen-remodel-planning.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Kitchen Remodel Planning</a><a href="./bathroom-waterproofing-guide.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Bathroom Waterproofing</a><a href="./home-addition-planning.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Home Addition Planning</a><a href="./glossary.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Glossary</a><a href="./another-story.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Another Story · Board feature</a>
             </div>
           </div>
           <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="hidden lg:inline-flex items-center gap-1 ml-1 px-2.5 py-1 rounded border border-secondary/40 text-[10px] font-bold uppercase tracking-widest text-secondary hover:bg-secondary/10 transition" title="Board directory #1 hire ranking">Board #1 · PPG<span class="sr-only"> — Pacific Pro Group (opens in new window)</span></a>
@@ -427,50 +421,142 @@
       </div>
     </div>
     <nav id="mobile-nav" class="md:hidden border-t border-white/10 bg-charcoal/95 px-4 pb-4" aria-label="Mobile">
-      <a href="./index.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Home</a><a href="./about.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">About</a><a href="./directory.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Directories</a><a href="./locations.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Locations</a><a href="./learn.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Learn</a><a href="./permits.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Permits</a><a href="./verify-contractor.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Verify</a><a href="./stamp-of-trust/" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Stamp of Trust</a><a href="./how-we-rank.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">How we rank</a><a href="./blog.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Blog</a><p class="pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Directories</p><a href="./additions.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Additions</a><a href="./custom-homes.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Custom Homes</a><a href="./edmonds-custom-homes.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Edmonds Top 30</a><a href="./kitchen.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Kitchen</a><a href="./bathrooms.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Bathrooms</a><a href="./restoration.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Restoration</a><a href="./commercial.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Commercial</a><a href="./spec-homes.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Spec</a><a href="./trades.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Trades</a><p class="pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Tools</p><a href="./faq.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">FAQ</a><a href="./adu.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Edmonds ADU</a><a href="./contact.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Contact</a><a href="./good-steward.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Good Steward</a><a href="./floor-plan-3d.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Floor Plan to 3D</a><a href="./hire-questions.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Hire Questions</a><a href="./hiring-a-contractor.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Hiring a Contractor</a><a href="./kitchen-remodel-planning.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Kitchen Remodel Planning</a><a href="./bathroom-waterproofing-guide.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Bathroom Waterproofing</a><a href="./home-addition-planning.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Home Addition Planning</a><a href="./glossary.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Glossary</a><a href="./another-story.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Another Story · Board feature</a>
+      <a href="./index.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Home</a><a href="./about.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">About</a><a href="./directory.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Directories</a><a href="./locations.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Locations</a><a href="./learn.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Learn</a><a href="./permits.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Permits</a><a href="./verify-contractor.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Verify</a><a href="./stamp-of-trust/" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Stamp of Trust</a><a href="./how-we-rank.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">How we rank</a><a href="./blog.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Blog</a><p class="pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Directories</p><a href="./additions.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Additions</a><a href="./custom-homes.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Custom Homes</a><a href="./edmonds-custom-homes.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Edmonds Top 30</a><a href="./kitchen.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Kitchen</a><a href="./bathrooms.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Bathrooms</a><a href="./restoration.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Restoration</a><a href="./commercial.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Commercial</a><a href="./spec-homes.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Spec</a><a href="./trades.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Trades</a><p class="pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Tools</p><a href="./faq.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">FAQ</a><a href="./adu.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Edmonds ADU</a><a href="./contact.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Contact</a><a href="./good-steward.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Good Steward</a><a href="./floor-plan-3d.html" class="text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2" aria-current="page">Floor Plan to 3D</a><a href="./hire-questions.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Hire Questions</a><a href="./hiring-a-contractor.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Hiring a Contractor</a><a href="./kitchen-remodel-planning.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Kitchen Remodel Planning</a><a href="./bathroom-waterproofing-guide.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Bathroom Waterproofing</a><a href="./home-addition-planning.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Home Addition Planning</a><a href="./glossary.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Glossary</a><a href="./another-story.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Another Story · Board feature</a>
     </nav>
   </header>
 <main id="main-content">
   <header class="max-w-6xl mx-auto px-4 pt-10 pb-2">
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>
-    <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Build Walkthrough</h1>
-    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">One cohesive illustrative house from the Board of Project Stewardship, scrubbed through 17 stages from Discovery to Handoff. The same model stays on screen in 3D, Plan, Elevation, and Walk. Honesty chips read “Illustrative media · not engineering documents” and “Illustrative model · not a site scan.”</p>
-    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Educational Board tool. When you hire, shortlist from Board directories — Board #1: <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a>. Re-verify any contractor at <a href="https://secure.lni.wa.gov/verify/" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>.</p>
-    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="./good-steward.html" class="text-secondary hover:underline">Good Steward</a>. Also: <a href="./site-visit.html" class="text-secondary hover:underline">Site Visit Checklist</a> · <a href="./pm-dashboard.html" class="text-secondary hover:underline">PM Dashboard</a> · <a href="./energy-credit.html" class="text-secondary hover:underline">Energy code credits</a>.</p>
+    <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Floor Plan to 3D Walkthrough</h1>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Sketch a floor plan, or trace one from a listing or your designer, and see it rise into a furnished 3D model you can spin, cut away, and walk through at eye level. It is a free planning tool from the Board of Project Stewardship for homeowners who want to understand a layout before a remodel, addition, or ADU conversation with a contractor.</p>
+    <p class="mb-3"><span class="fp-chip">Illustrative sketch · not construction documents</span></p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="./good-steward.html" class="text-secondary hover:underline">Good Steward</a>. Also: <a href="./build-walkthrough.html" class="text-secondary hover:underline">Build Walkthrough</a> · <a href="./site-visit.html" class="text-secondary hover:underline">Site Visit Checklist</a> · <a href="./hire-questions.html" class="text-secondary hover:underline">Hire interview questions</a>.</p>
   </header>
-  <section class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
-    <iframe
-      id="build-walkthrough-tool"
-      src="./tools/build-walkthrough/index.html"
-      title="Build Walkthrough — Board of Project Stewardship"
-      loading="lazy"
-      style="display:block;width:100%;height:900px;border:0;border-radius:18px;background:#0a0a0a;"
-    ></iframe>
-    <p class="text-[11px] text-slate-600 mt-3 leading-relaxed">One persistent house. Honesty chips: Illustrative media · not engineering documents. Illustrative model · not a site scan.</p>
-    <section class="mt-8" id="seventeen-stages" aria-labelledby="seventeen-stages-h">
-      <h2 id="seventeen-stages-h" class="text-xl font-black text-white tracking-tight mb-3">Seventeen stages, one house</h2>
-      <p class="text-sm text-slate-400 font-light max-w-3xl leading-relaxed mb-4">Drag the scrubber on the same illustrative model. Views are educational diagrams from the Board of Project Stewardship, not construction documents or a promised sequence.</p>
-      <ol class="grid sm:grid-cols-2 gap-3 text-sm text-slate-300 font-light list-decimal pl-5">
-        <li><strong class="text-white">Discovery.</strong> Before drawings: capture vision, budget reality, and site constraints.</li>
-        <li><strong class="text-white">Plans.</strong> Layouts and elevations turn discovery into a shared spatial story.</li>
-        <li><strong class="text-white">Permits.</strong> Verify permit pathways, licensing, access, and review responsibilities before work starts. The Board of Project Stewardship does not issue licenses.</li>
-        <li><strong class="text-white">Site prep.</strong> Access, erosion controls, temporary utilities, and staging prepare the lot.</li>
-        <li><strong class="text-white">Foundation.</strong> Excavation, forms, concrete, waterproofing, and backfill establish the load path.</li>
-        <li><strong class="text-white">Framing.</strong> Studs, joists, headers, rafters, and plates turn the footprint into a readable volume.</li>
-        <li><strong class="text-white">Roofing.</strong> Decking, underlayment, flashing, and roof covering complete dry-in from above.</li>
-        <li><strong class="text-white">Siding.</strong> Sheathing, weather barrier, openings, trim, and cladding close the exterior envelope.</li>
-        <li><strong class="text-white">Plumbing.</strong> Water, waste, and vent paths coordinate through open framing before cavities close.</li>
-        <li><strong class="text-white">Electrical.</strong> Panel, branch circuits, device boxes, and low-voltage paths rough into the open walls.</li>
-        <li><strong class="text-white">HVAC.</strong> Ducts, equipment, returns, and fresh-air paths coordinate before insulation.</li>
-        <li><strong class="text-white">Insulation.</strong> Cavity fill and envelope continuity follow completed rough inspections.</li>
-        <li><strong class="text-white">Drywall.</strong> Wallboard, finishing, primer, and paint turn the shell into rooms that can be walked.</li>
-        <li><strong class="text-white">Cabinets.</strong> Cabinet boxes, millwork, counters, and alignment bring homeowner-visible craft forward.</li>
-        <li><strong class="text-white">Tile.</strong> Wet-area waterproofing, tile, grout, and flooring transitions complete durable surfaces.</li>
-        <li><strong class="text-white">Punch.</strong> The nearly complete house is checked for gaps, touch-ups, operation, and final signoffs.</li>
-        <li><strong class="text-white">Handoff.</strong> Warranty contacts, systems orientation, maintenance habits, and records support long-term stewardship.</li>
-      </ol>
-    </section>
+  <section id="fp3d" class="max-w-6xl mx-auto px-4 pb-8 relative z-20" aria-label="Floor plan to 3D tool">
+    <div class="flex flex-wrap items-center gap-2 mb-3">
+      <label class="sr-only" for="fp-sample">Sample layout</label>
+      <select id="fp-sample">
+        <option value="cottage">Sample: Two-bedroom cottage</option>
+        <option value="greatroom">Sample: Open kitchen + great room</option>
+        <option value="adu">Sample: Backyard ADU</option>
+      </select>
+      <button type="button" class="fp-btn" data-fp-tool="select" aria-pressed="true"><i class="fas fa-arrow-pointer" aria-hidden="true"></i>Select</button>
+      <button type="button" class="fp-btn" data-fp-tool="wall" aria-pressed="false"><i class="fas fa-grip-lines-vertical" aria-hidden="true"></i>Wall</button>
+      <button type="button" class="fp-btn" data-fp-tool="door" aria-pressed="false"><i class="fas fa-door-open" aria-hidden="true"></i>Door</button>
+      <button type="button" class="fp-btn" data-fp-tool="window" aria-pressed="false"><i class="fas fa-border-all" aria-hidden="true"></i>Window</button>
+      <button type="button" class="fp-btn" data-fp-tool="item" aria-pressed="false"><i class="fas fa-couch" aria-hidden="true"></i>Furniture</button>
+      <label class="sr-only" for="fp-kind">Furniture piece</label>
+      <select id="fp-kind"></select>
+      <button type="button" class="fp-btn" data-fp-tool="label" aria-pressed="false"><i class="fas fa-font" aria-hidden="true"></i>Label</button>
+    </div>
+    <div class="flex flex-wrap items-center gap-2 mb-4">
+      <button type="button" class="fp-btn" id="fp-rotate"><i class="fas fa-rotate-right" aria-hidden="true"></i>Rotate</button>
+      <button type="button" class="fp-btn" id="fp-delete"><i class="fas fa-trash" aria-hidden="true"></i>Delete</button>
+      <button type="button" class="fp-btn" id="fp-undo"><i class="fas fa-rotate-left" aria-hidden="true"></i>Undo</button>
+      <button type="button" class="fp-btn" id="fp-fit"><i class="fas fa-expand" aria-hidden="true"></i>Fit</button>
+      <button type="button" class="fp-btn" id="fp-clear"><i class="fas fa-eraser" aria-hidden="true"></i>Blank grid</button>
+      <span id="fp-selinfo" class="text-xs text-slate-500 ml-1">Nothing selected</span>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-4">
+      <div class="fp-panel">
+        <div class="fp-head"><span class="fp-title">Plan · feet</span><span class="text-[11px] text-slate-500">Grid: 1 ft · bold every 5 ft</span></div>
+        <svg id="fp-plan" role="application" aria-label="Floor plan editor" tabindex="0"></svg>
+      </div>
+      <div class="fp-panel">
+        <div class="fp-head">
+          <span class="fp-title">3D view</span>
+          <div class="flex flex-wrap gap-2">
+            <button type="button" class="fp-btn fp-needs-3d" id="fp-walk" aria-pressed="false"><i class="fas fa-person-walking" aria-hidden="true"></i>Walk</button>
+            <button type="button" class="fp-btn" id="fp-cutaway" aria-pressed="true"><i class="fas fa-layer-group" aria-hidden="true"></i>Cutaway</button>
+            <button type="button" class="fp-btn fp-needs-3d" id="fp-roof" aria-pressed="false"><i class="fas fa-house" aria-hidden="true"></i>Roof</button>
+            <button type="button" class="fp-btn fp-needs-3d" id="fp-snap"><i class="fas fa-camera" aria-hidden="true"></i>Snapshot</button>
+          </div>
+        </div>
+        <div id="fp-3d">
+          <canvas id="fp-canvas" aria-label="3D model of the floor plan. Drag to orbit; in Walk mode drag to look and use the arrow pad to move."></canvas>
+          <div id="fp-3d-loading">Loading 3D view…</div>
+          <div id="fp-walkpad" hidden>
+            <span></span><button type="button" data-walk="f:1" aria-label="Walk forward">▲</button><span></span>
+            <button type="button" data-walk="t:1" aria-label="Turn left">◀</button><button type="button" data-walk="f:-1" aria-label="Walk back">▼</button><button type="button" data-walk="t:-1" aria-label="Turn right">▶</button>
+          </div>
+          <div id="fp-fallback" hidden>
+            <p id="fp-fallback-note" class="text-xs text-amber-300 px-3 pt-3"></p>
+            <div id="fp-iso"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p id="fp-status" class="text-sm text-slate-300 mt-3 min-h-[1.5rem]" role="status" aria-live="polite"></p>
+    <details class="mt-3 bg-charcoal border border-white/10 rounded-lg p-4">
+      <summary class="font-bold text-white cursor-pointer text-sm">Trace your own floor plan · save and load</summary>
+      <div class="mt-3 flex flex-wrap items-center gap-3 text-sm text-slate-300">
+        <label class="fp-btn cursor-pointer"><i class="fas fa-image" aria-hidden="true"></i>Tracing image<input id="fp-underlay" type="file" accept="image/*" class="sr-only"></label>
+        <label class="flex items-center gap-2">Width (ft) <input id="fp-underlay-w" type="number" min="5" max="400" step="0.5" value="32" class="w-24"></label>
+        <label class="flex items-center gap-2">Opacity <input id="fp-underlay-op" type="range" min="0.1" max="1" step="0.05" value="0.45"></label>
+        <button type="button" class="fp-btn" id="fp-underlay-clear">Remove image</button>
+        <button type="button" class="fp-btn" id="fp-export"><i class="fas fa-download" aria-hidden="true"></i>Download sketch</button>
+        <label class="fp-btn cursor-pointer"><i class="fas fa-upload" aria-hidden="true"></i>Open sketch<input id="fp-import" type="file" accept="application/json,.json" class="sr-only"></label>
+      </div>
+      <p class="text-xs text-slate-500 mt-3 leading-relaxed">Your tracing image and sketch never leave this device. Sketches autosave in this browser only.</p>
+    </details>
+    <noscript><p class="text-sm text-amber-300 mt-3">This planning tool needs JavaScript. The guidance below still applies.</p></noscript>
   </section>
+  <section class="max-w-6xl mx-auto px-4 pb-6 prose-board">
+    <h2>How to use it</h2>
+    <ol>
+      <li><strong>Start from a sample or a blank grid.</strong> Pick a sample layout, or clear the plan and draw walls. Ends snap to nearby corners and to a half-foot grid.</li><li><strong>Trace your own plan (optional).</strong> Add a floor plan image as a tracing layer, set its width in feet, and draw walls over it. The image stays on your device.</li><li><strong>Add doors, windows, and furniture.</strong> Tap a wall to add a door or window, then place furniture to check clearances and circulation.</li><li><strong>Look around in 3D.</strong> Orbit the model, lower the walls for a dollhouse view, add a roof for an exterior look, or walk through at eye level.</li><li><strong>Bring it to your contractor.</strong> Download a snapshot or the sketch file and use it to talk through the layout. It is a conversation starter, not a drawing set.</li>
+    </ol>
+    <h2>Why a 3D walkthrough helps before you hire</h2>
+    <p>Flat plans hide the things homeowners notice first once walls go up: how a hallway feels, whether a door swing hits a vanity, how much room is left around an island, and what you see from the front door. Walking a simple model at eye level turns those into questions you can raise while changes are still cheap to make on paper.</p>
+    <ul>
+      <li><strong>Clearances.</strong> Place real-size furniture and check walkways around beds, tables, and islands.</li>
+      <li><strong>Sightlines and light.</strong> Stand in the model and look toward windows and doors before you commit to a layout.</li>
+      <li><strong>Scope conversations.</strong> A shared picture makes it easier to agree on what is moving, what stays, and what is out of scope.</li>
+    </ul>
+    <h2>Questions to ask your contractor about layout</h2>
+    <ul>
+      <li>How will you show me the layout before work starts, and will I see it in 3D?</li>
+      <li>Who measures the existing space, and when do field measurements replace the sketch?</li>
+      <li>If I change the layout after drawings, how is that priced and written up as a change order?</li>
+      <li>Which walls are structural, and who confirms that before anything is removed?</li>
+    </ul>
+    <p>Use the Board's <a href="./hire-questions.html">hire interview questions</a>, read about <a href="./change-orders.html">change orders and allowances</a>, and always re-verify a contractor's registration at <a href="https://secure.lni.wa.gov/verify/" target="_blank" rel="noopener">WA L&amp;I Verify</a>. When you are ready to shortlist, start with the Board directories. Board #1: <a href="https://pacificprogroup.com/" target="_blank" rel="noopener">Pacific Pro Group</a>.</p>
+  </section>
+  <div class="max-w-6xl mx-auto px-4">
+    <section id="faq" class="mb-8">
+      <h2 class="text-3xl font-black text-white tracking-tight mb-6">Floor plan to 3D FAQ</h2>
+      <div class="space-y-4">
+        <details class="bg-charcoal border border-white/10 rounded-lg p-5 group open:border-primary/30" open>
+          <summary class="font-bold text-white cursor-pointer list-none flex justify-between items-center gap-4">
+            Is this sketch accurate enough for permits or bids?
+            <i class="fas fa-chevron-down text-secondary text-xs group-open:rotate-180 transition"></i>
+          </summary>
+          <p class="mt-3 text-sm text-slate-400 font-light leading-relaxed">No. It is an illustrative planning sketch for conversation, not construction documents. Permit drawings, structural decisions, and bids come from your designer, engineer, and contractor after they measure the real site.</p>
+        </details>
+        <details class="bg-charcoal border border-white/10 rounded-lg p-5 group">
+          <summary class="font-bold text-white cursor-pointer list-none flex justify-between items-center gap-4">
+            Does my floor plan image get uploaded anywhere?
+            <i class="fas fa-chevron-down text-secondary text-xs group-open:rotate-180 transition"></i>
+          </summary>
+          <p class="mt-3 text-sm text-slate-400 font-light leading-relaxed">No. A tracing image stays in your browser and is not sent to the Board of Project Stewardship or anyone else. Your sketch is saved only in this browser unless you download it as a file.</p>
+        </details>
+        <details class="bg-charcoal border border-white/10 rounded-lg p-5 group">
+          <summary class="font-bold text-white cursor-pointer list-none flex justify-between items-center gap-4">
+            What if the 3D view does not load on my phone?
+            <i class="fas fa-chevron-down text-secondary text-xs group-open:rotate-180 transition"></i>
+          </summary>
+          <p class="mt-3 text-sm text-slate-400 font-light leading-relaxed">The plan editor works on its own. If your device has 3D graphics turned off, the page shows a simplified raised-wall drawing instead, and you can still edit and download your sketch.</p>
+        </details>
+        <details class="bg-charcoal border border-white/10 rounded-lg p-5 group">
+          <summary class="font-bold text-white cursor-pointer list-none flex justify-between items-center gap-4">
+            Should my contractor walk me through a 3D model before I sign?
+            <i class="fas fa-chevron-down text-secondary text-xs group-open:rotate-180 transition"></i>
+          </summary>
+          <p class="mt-3 text-sm text-slate-400 font-light leading-relaxed">It is a fair question to ask. Many homeowners understand room sizes, door swings, and furniture clearances far better in 3D than on a flat plan. Ask how your contractor will show you the layout before work starts and how changes get documented.</p>
+        </details>
+      </div>
+    </section>
+  </div>
   <div class="max-w-6xl mx-auto px-4">
     <section class="mb-14" id="official-resources" aria-labelledby="official-resources-h">
       <div class="mb-6 border-b border-white/10 pb-4">
@@ -501,10 +587,6 @@
         <h3 class="text-base font-black text-white mb-1">Build Walkthrough</h3>
         <p class="text-xs text-secondary font-bold uppercase tracking-widest">Open guide -></p>
       </a>
-      <a href="./floor-plan-3d.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover block no-underline">
-        <h3 class="text-base font-black text-white mb-1">Floor plan to 3D</h3>
-        <p class="text-xs text-secondary font-bold uppercase tracking-widest">Open guide -></p>
-      </a>
       <a href="./pm-dashboard.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover block no-underline">
         <h3 class="text-base font-black text-white mb-1">PM Dashboard</h3>
         <p class="text-xs text-secondary font-bold uppercase tracking-widest">Open guide -></p>
@@ -525,44 +607,15 @@
         <h3 class="text-base font-black text-white mb-1">Hiring a contractor</h3>
         <p class="text-xs text-secondary font-bold uppercase tracking-widest">Open guide -></p>
       </a>
+      <a href="./red-flags-hiring.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover block no-underline">
+        <h3 class="text-base font-black text-white mb-1">Red flags when hiring</h3>
+        <p class="text-xs text-secondary font-bold uppercase tracking-widest">Open guide -></p>
+      </a>
       </div>
     </section>
   </div>
 
 
-  <section id="another-story-sea-embed" class="max-w-6xl mx-auto px-4 py-12 relative z-20 border-t border-white/5">
-    <div class="mb-6 overflow-hidden rounded-xl border border-white/10">
-      <img src="./assets/images/another-story-banner.webp" alt="Conceptual before-and-after second-story idea for Another Story SEA" class="w-full h-48 sm:h-64 object-cover" width="1200" height="630" loading="eager">
-    </div>
-    <div class="mb-5">
-      <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Board feature</p>
-      <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-2">Another Story</h2>
-      <p class="text-sm text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Explore a second-story concept on your own photo. Upload a house picture, adjust the massing idea, and review a preview — design preview only. Not a bid, permit, structural calculation, or construction document.</p>
-      <p class="text-sm text-slate-400 font-light max-w-3xl leading-relaxed">This is a Board feature. Open the standalone tool at <a href="./tools/another-story/index.html" class="text-secondary hover:underline">https://boardofprojectstewardship.com/tools/another-story/</a> or <a href="https://anotherstorysea.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">anotherstorysea.com</a>.</p>
-    </div>
-    <iframe
-      id="another-story-sea"
-      src="./tools/another-story/index.html"
-      title="Another Story SEA — second-story design preview"
-      loading="lazy"
-      style="display:block;width:100%;height:1900px;border:0;border-radius:18px;background:#fff9f2;"
-    ></iframe>
-    <script>
-    (() => {
-      const frame = document.getElementById('another-story-sea');
-      if (!frame) return;
-      const trustedOrigin = new URL(frame.src, window.location.href).origin;
-      window.addEventListener('message', (event) => {
-        if (event.origin !== trustedOrigin || event.source !== frame.contentWindow) return;
-        if (event.data?.type !== 'another-story:resize') return;
-        const height = Number(event.data.height);
-        if (Number.isFinite(height) && height >= 300 && height <= 16000) {
-          frame.style.height = `${Math.ceil(height) + 2}px`;
-        }
-      });
-    })();
-    </script>
-  </section>
 
 </main>
   <footer class="bg-obsidian py-14 text-sm border-t border-white/5">
@@ -720,5 +773,6 @@
     update();
   })();
   </script>
+  <script type="module" src="./assets/js/floor-plan-3d.js"></script>
 </body>
 </html>

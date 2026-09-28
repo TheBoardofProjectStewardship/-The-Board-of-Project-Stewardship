@@ -1312,6 +1312,7 @@ def nav_html(active: str = "", prefix: str = "") -> str:
         ("adu", href("adu.html"), "Edmonds ADU"),
         ("contact", href("contact.html"), "Contact"),
         ("steward", href("good-steward.html"), "Good Steward"),
+        ("floor-plan-3d", href("floor-plan-3d.html"), "Floor Plan to 3D"),
         ("hire-questions", href("hire-questions.html"), "Hire Questions"),
         ("hiring-a-contractor", href("hiring-a-contractor.html"), "Hiring a Contractor"),
         ("kitchen-remodel-planning", href("kitchen-remodel-planning.html"), "Kitchen Remodel Planning"),
@@ -1503,6 +1504,7 @@ def public_tool_href(slug: str, prefix: str = "") -> str:
         "energy-credit": "energy-credit.html",
         "energy-credits": "energy-credit.html",
         "build-walkthrough": "build-walkthrough.html",
+        "floor-plan-3d": "floor-plan-3d.html",
         "story": "another-story.html",
         "steward": "good-steward.html",
         "permits": "permits.html",
@@ -1550,7 +1552,7 @@ POST_ROOT_HUB_STEMS = frozenset({
     "hiring-a-contractor", "how-we-rank", "verify-contractor", "learn", "directory",
     "adu", "adu-checklist", "change-orders", "coastal-waterproofing", "materials",
     "glossary", "contact", "about", "faq", "site-visit", "pm-dashboard",
-    "energy-credit", "build-walkthrough", "good-steward", "another-story",
+    "energy-credit", "build-walkthrough", "floor-plan-3d", "good-steward", "another-story",
     "kitchen", "bathrooms", "additions", "custom-homes", "edmonds-custom-homes",
     "trades", "blog", "index", "windows", "roofing", "insulation", "siding",
     "commercial", "spec-homes", "videos", "write", "bid-comparison",
@@ -2551,6 +2553,7 @@ RELATED_LINK_PACKS: dict[str, list[tuple[str, str]]] = {
         ("Good Steward hub", "./good-steward.html"),
         ("Site Visit Checklist", "./site-visit.html"),
         ("Build Walkthrough", "./build-walkthrough.html"),
+        ("Floor plan to 3D", "./floor-plan-3d.html"),
         ("PM Dashboard", "./pm-dashboard.html"),
         ("Energy code credits", "./energy-credit.html"),
         ("Learn hub", "./learn.html"),
@@ -5646,6 +5649,7 @@ def write_sitemap(posts: list[dict]) -> None:
         "another-story.html",
         "good-steward.html",
         "build-walkthrough.html",
+        "floor-plan-3d.html",
         "site-visit.html",
         "pm-dashboard.html",
         "energy-credit.html",
@@ -5842,6 +5846,7 @@ def build_good_steward_page() -> str:
       </p>
       <div class="flex flex-wrap gap-3">
         <a href="{public_tool_href('build-walkthrough')}" class="bg-primary text-white px-5 py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs">Build Walkthrough</a>
+        <a href="{public_tool_href('floor-plan-3d')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Floor Plan to 3D</a>
         <a href="{public_tool_href('site-visit')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Site Visit &amp; Discovery</a>
         <a href="{public_tool_href('pm-dashboard')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">PM Dashboard</a>
         <a href="{public_tool_href('another-story')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Another Story</a>
@@ -6030,6 +6035,194 @@ def build_build_walkthrough_page() -> str:
             ("About", BASE_URL),
             ("Good Steward", f"{BASE_URL}good-steward.html"),
             ("Build Walkthrough", f"{BASE_URL}build-walkthrough.html"),
+        ],
+    )
+
+
+FLOOR_PLAN_3D_STYLE = """  <style>
+    #fp3d .fp-btn { display:inline-flex; align-items:center; gap:0.35rem; padding:0.5rem 0.75rem; border-radius:0.4rem; border:1px solid rgba(255,255,255,0.14); background:rgba(255,255,255,0.04); color:#e2e8f0; font-size:0.7rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer; min-height:2.5rem; }
+    #fp3d .fp-btn:hover { border-color:#4ade80; color:#4ade80; }
+    #fp3d .fp-btn[aria-pressed="true"] { background:#166534; border-color:#4ade80; color:#fff; }
+    #fp3d .fp-btn:disabled { opacity:0.4; cursor:not-allowed; }
+    #fp3d .fp-btn:focus-visible, #fp3d select:focus-visible, #fp3d input:focus-visible { outline:2px solid #4ade80; outline-offset:2px; }
+    #fp3d select, #fp3d input[type=number] { background:#1a1a1a; color:#e2e8f0; border:1px solid rgba(255,255,255,0.14); border-radius:0.4rem; padding:0.45rem 0.6rem; font-size:0.8rem; min-height:2.5rem; color-scheme:dark; }
+    #fp3d .fp-panel { background:#111814; border:1px solid rgba(255,255,255,0.08); border-radius:1rem; overflow:hidden; display:flex; flex-direction:column; }
+    #fp3d .fp-head { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:0.5rem; padding:0.6rem 0.75rem; border-bottom:1px solid rgba(255,255,255,0.06); }
+    #fp3d .fp-title { font-size:0.7rem; font-weight:800; letter-spacing:0.16em; text-transform:uppercase; color:#94a3b8; }
+    #fp-plan { display:block; width:100%; height:26rem; touch-action:none; user-select:none; -webkit-user-select:none; background:#0d120f; }
+    #fp-3d { position:relative; width:100%; height:26rem; background:#0f1512; }
+    #fp-canvas { display:block; width:100%; height:100%; touch-action:none; }
+    #fp-fallback { position:absolute; inset:0; display:flex; flex-direction:column; }
+    #fp-fallback[hidden] { display:none; }
+    #fp-iso { flex:1; min-height:0; padding:0.5rem; }
+    #fp-walkpad { position:absolute; right:0.75rem; bottom:0.75rem; display:grid; grid-template-columns:repeat(3,2.75rem); grid-template-rows:repeat(2,2.75rem); gap:0.35rem; }
+    #fp-walkpad[hidden] { display:none; }
+    #fp-walkpad button { border-radius:0.5rem; background:rgba(10,10,10,0.7); border:1px solid rgba(255,255,255,0.25); color:#fff; font-size:1rem; touch-action:none; }
+    #fp-walkpad button:active { background:#166534; }
+    #fp-3d-loading { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#64748b; font-size:0.8rem; pointer-events:none; }
+    #fp-3d-loading[hidden] { display:none; }
+    .fp-chip { display:inline-block; font-size:0.62rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#fbbf24; border:1px solid rgba(251,191,36,0.35); border-radius:999px; padding:0.2rem 0.55rem; }
+    @media (min-width: 1024px) { #fp-plan, #fp-3d { height:34rem; } }
+    @media (max-width: 480px) { #fp-plan, #fp-3d { height:20rem; } #fp3d .fp-btn { padding:0.45rem 0.6rem; font-size:0.62rem; } }
+  </style>
+"""
+
+
+def build_floor_plan_3d_page() -> str:
+    """Board client-visualization tool: sketch or trace a floor plan, view and walk it in 3D."""
+    page_url = f"{BASE_URL}floor-plan-3d.html"
+    faqs = [
+        (
+            "Is this sketch accurate enough for permits or bids?",
+            "No. It is an illustrative planning sketch for conversation, not construction documents. Permit drawings, structural decisions, and bids come from your designer, engineer, and contractor after they measure the real site.",
+        ),
+        (
+            "Does my floor plan image get uploaded anywhere?",
+            "No. A tracing image stays in your browser and is not sent to the Board of Project Stewardship or anyone else. Your sketch is saved only in this browser unless you download it as a file.",
+        ),
+        (
+            "What if the 3D view does not load on my phone?",
+            "The plan editor works on its own. If your device has 3D graphics turned off, the page shows a simplified raised-wall drawing instead, and you can still edit and download your sketch.",
+        ),
+        (
+            "Should my contractor walk me through a 3D model before I sign?",
+            "It is a fair question to ask. Many homeowners understand room sizes, door swings, and furniture clearances far better in 3D than on a flat plan. Ask how your contractor will show you the layout before work starts and how changes get documented.",
+        ),
+    ]
+    steps = [
+        ("Start from a sample or a blank grid", "Pick a sample layout, or clear the plan and draw walls. Ends snap to nearby corners and to a half-foot grid."),
+        ("Trace your own plan (optional)", "Add a floor plan image as a tracing layer, set its width in feet, and draw walls over it. The image stays on your device."),
+        ("Add doors, windows, and furniture", "Tap a wall to add a door or window, then place furniture to check clearances and circulation."),
+        ("Look around in 3D", "Orbit the model, lower the walls for a dollhouse view, add a roof for an exterior look, or walk through at eye level."),
+        ("Bring it to your contractor", "Download a snapshot or the sketch file and use it to talk through the layout. It is a conversation starter, not a drawing set."),
+    ]
+    body = f"""  <header class="max-w-6xl mx-auto px-4 pt-10 pb-2">
+    <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>
+    <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Floor Plan to 3D Walkthrough</h1>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Sketch a floor plan, or trace one from a listing or your designer, and see it rise into a furnished 3D model you can spin, cut away, and walk through at eye level. It is a free planning tool from the Board of Project Stewardship for homeowners who want to understand a layout before a remodel, addition, or ADU conversation with a contractor.</p>
+    <p class="mb-3"><span class="fp-chip">Illustrative sketch · not construction documents</span></p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="{public_tool_href('good-steward')}" class="text-secondary hover:underline">Good Steward</a>. Also: <a href="{public_tool_href('build-walkthrough')}" class="text-secondary hover:underline">Build Walkthrough</a> · <a href="{public_tool_href('site-visit')}" class="text-secondary hover:underline">Site Visit Checklist</a> · <a href="{public_tool_href('hire-questions')}" class="text-secondary hover:underline">Hire interview questions</a>.</p>
+  </header>
+  <section id="fp3d" class="max-w-6xl mx-auto px-4 pb-8 relative z-20" aria-label="Floor plan to 3D tool">
+    <div class="flex flex-wrap items-center gap-2 mb-3">
+      <label class="sr-only" for="fp-sample">Sample layout</label>
+      <select id="fp-sample">
+        <option value="cottage">Sample: Two-bedroom cottage</option>
+        <option value="greatroom">Sample: Open kitchen + great room</option>
+        <option value="adu">Sample: Backyard ADU</option>
+      </select>
+      <button type="button" class="fp-btn" data-fp-tool="select" aria-pressed="true"><i class="fas fa-arrow-pointer" aria-hidden="true"></i>Select</button>
+      <button type="button" class="fp-btn" data-fp-tool="wall" aria-pressed="false"><i class="fas fa-grip-lines-vertical" aria-hidden="true"></i>Wall</button>
+      <button type="button" class="fp-btn" data-fp-tool="door" aria-pressed="false"><i class="fas fa-door-open" aria-hidden="true"></i>Door</button>
+      <button type="button" class="fp-btn" data-fp-tool="window" aria-pressed="false"><i class="fas fa-border-all" aria-hidden="true"></i>Window</button>
+      <button type="button" class="fp-btn" data-fp-tool="item" aria-pressed="false"><i class="fas fa-couch" aria-hidden="true"></i>Furniture</button>
+      <label class="sr-only" for="fp-kind">Furniture piece</label>
+      <select id="fp-kind"></select>
+      <button type="button" class="fp-btn" data-fp-tool="label" aria-pressed="false"><i class="fas fa-font" aria-hidden="true"></i>Label</button>
+    </div>
+    <div class="flex flex-wrap items-center gap-2 mb-4">
+      <button type="button" class="fp-btn" id="fp-rotate"><i class="fas fa-rotate-right" aria-hidden="true"></i>Rotate</button>
+      <button type="button" class="fp-btn" id="fp-delete"><i class="fas fa-trash" aria-hidden="true"></i>Delete</button>
+      <button type="button" class="fp-btn" id="fp-undo"><i class="fas fa-rotate-left" aria-hidden="true"></i>Undo</button>
+      <button type="button" class="fp-btn" id="fp-fit"><i class="fas fa-expand" aria-hidden="true"></i>Fit</button>
+      <button type="button" class="fp-btn" id="fp-clear"><i class="fas fa-eraser" aria-hidden="true"></i>Blank grid</button>
+      <span id="fp-selinfo" class="text-xs text-slate-500 ml-1">Nothing selected</span>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-4">
+      <div class="fp-panel">
+        <div class="fp-head"><span class="fp-title">Plan · feet</span><span class="text-[11px] text-slate-500">Grid: 1 ft · bold every 5 ft</span></div>
+        <svg id="fp-plan" role="application" aria-label="Floor plan editor" tabindex="0"></svg>
+      </div>
+      <div class="fp-panel">
+        <div class="fp-head">
+          <span class="fp-title">3D view</span>
+          <div class="flex flex-wrap gap-2">
+            <button type="button" class="fp-btn fp-needs-3d" id="fp-walk" aria-pressed="false"><i class="fas fa-person-walking" aria-hidden="true"></i>Walk</button>
+            <button type="button" class="fp-btn" id="fp-cutaway" aria-pressed="true"><i class="fas fa-layer-group" aria-hidden="true"></i>Cutaway</button>
+            <button type="button" class="fp-btn fp-needs-3d" id="fp-roof" aria-pressed="false"><i class="fas fa-house" aria-hidden="true"></i>Roof</button>
+            <button type="button" class="fp-btn fp-needs-3d" id="fp-snap"><i class="fas fa-camera" aria-hidden="true"></i>Snapshot</button>
+          </div>
+        </div>
+        <div id="fp-3d">
+          <canvas id="fp-canvas" aria-label="3D model of the floor plan. Drag to orbit; in Walk mode drag to look and use the arrow pad to move."></canvas>
+          <div id="fp-3d-loading">Loading 3D view…</div>
+          <div id="fp-walkpad" hidden>
+            <span></span><button type="button" data-walk="f:1" aria-label="Walk forward">▲</button><span></span>
+            <button type="button" data-walk="t:1" aria-label="Turn left">◀</button><button type="button" data-walk="f:-1" aria-label="Walk back">▼</button><button type="button" data-walk="t:-1" aria-label="Turn right">▶</button>
+          </div>
+          <div id="fp-fallback" hidden>
+            <p id="fp-fallback-note" class="text-xs text-amber-300 px-3 pt-3"></p>
+            <div id="fp-iso"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p id="fp-status" class="text-sm text-slate-300 mt-3 min-h-[1.5rem]" role="status" aria-live="polite"></p>
+    <details class="mt-3 bg-charcoal border border-white/10 rounded-lg p-4">
+      <summary class="font-bold text-white cursor-pointer text-sm">Trace your own floor plan · save and load</summary>
+      <div class="mt-3 flex flex-wrap items-center gap-3 text-sm text-slate-300">
+        <label class="fp-btn cursor-pointer"><i class="fas fa-image" aria-hidden="true"></i>Tracing image<input id="fp-underlay" type="file" accept="image/*" class="sr-only"></label>
+        <label class="flex items-center gap-2">Width (ft) <input id="fp-underlay-w" type="number" min="5" max="400" step="0.5" value="32" class="w-24"></label>
+        <label class="flex items-center gap-2">Opacity <input id="fp-underlay-op" type="range" min="0.1" max="1" step="0.05" value="0.45"></label>
+        <button type="button" class="fp-btn" id="fp-underlay-clear">Remove image</button>
+        <button type="button" class="fp-btn" id="fp-export"><i class="fas fa-download" aria-hidden="true"></i>Download sketch</button>
+        <label class="fp-btn cursor-pointer"><i class="fas fa-upload" aria-hidden="true"></i>Open sketch<input id="fp-import" type="file" accept="application/json,.json" class="sr-only"></label>
+      </div>
+      <p class="text-xs text-slate-500 mt-3 leading-relaxed">Your tracing image and sketch never leave this device. Sketches autosave in this browser only.</p>
+    </details>
+    <noscript><p class="text-sm text-amber-300 mt-3">This planning tool needs JavaScript. The guidance below still applies.</p></noscript>
+  </section>
+  <section class="max-w-6xl mx-auto px-4 pb-6 prose-board">
+    <h2>How to use it</h2>
+    <ol>
+      {''.join(f'<li><strong>{esc(t)}.</strong> {esc(d)}</li>' for t, d in steps)}
+    </ol>
+    <h2>Why a 3D walkthrough helps before you hire</h2>
+    <p>Flat plans hide the things homeowners notice first once walls go up: how a hallway feels, whether a door swing hits a vanity, how much room is left around an island, and what you see from the front door. Walking a simple model at eye level turns those into questions you can raise while changes are still cheap to make on paper.</p>
+    <ul>
+      <li><strong>Clearances.</strong> Place real-size furniture and check walkways around beds, tables, and islands.</li>
+      <li><strong>Sightlines and light.</strong> Stand in the model and look toward windows and doors before you commit to a layout.</li>
+      <li><strong>Scope conversations.</strong> A shared picture makes it easier to agree on what is moving, what stays, and what is out of scope.</li>
+    </ul>
+    <h2>Questions to ask your contractor about layout</h2>
+    <ul>
+      <li>How will you show me the layout before work starts, and will I see it in 3D?</li>
+      <li>Who measures the existing space, and when do field measurements replace the sketch?</li>
+      <li>If I change the layout after drawings, how is that priced and written up as a change order?</li>
+      <li>Which walls are structural, and who confirms that before anything is removed?</li>
+    </ul>
+    <p>Use the Board's <a href="{public_tool_href('hire-questions')}">hire interview questions</a>, read about <a href="{public_tool_href('change-orders')}">change orders and allowances</a>, and always re-verify a contractor's registration at <a href="{LNI_URL}" target="_blank" rel="noopener">WA L&amp;I Verify</a>. When you are ready to shortlist, start with the Board directories. Board #1: <a href="{PPG['url']}" target="_blank" rel="noopener">Pacific Pro Group</a>.</p>
+  </section>
+  <div class="max-w-6xl mx-auto px-4">
+{faq_section(faqs, "Floor plan to 3D FAQ")}
+  </div>
+""" + education_closing("tools", "hire", "default", official_keys=["lni_verify", "lni_home", "mybuildingpermit"], exclude_href={"./floor-plan-3d.html"})
+    return page_shell(
+        "Floor Plan to 3D Walkthrough | Board of Project Stewardship",
+        "Sketch or trace a floor plan, then orbit and walk it in 3D. A free Board of Project Stewardship planning tool for talking through layouts before you hire.",
+        "floor-plan-3d",
+        body,
+        json_ld=[
+            howto_ld(
+                "How to turn a floor plan sketch into a 3D walkthrough",
+                "Sketch or trace a floor plan, add doors, windows, and furniture, then view and walk it in 3D. Illustrative planning sketch only, not construction documents.",
+                steps,
+                page_url,
+            ),
+            faq_ld(faqs),
+        ],
+        canonical=page_url,
+        og_image="assets/images/tools/floor-plan-3d/floor-plan-3d-og.webp",
+        og_image_alt="Furnished 3D model of a two-bedroom cottage floor plan with walls cut away",
+        include_story_embed=False,
+        include_tools_embed=False,
+        include_widgets=False,
+        extra_head=FLOOR_PLAN_3D_STYLE,
+        extra_scripts='  <script type="module" src="./assets/js/floor-plan-3d.js"></script>\n',
+        breadcrumbs=[
+            ("About", BASE_URL),
+            ("Good Steward", f"{BASE_URL}good-steward.html"),
+            ("Floor Plan to 3D", page_url),
         ],
     )
 
@@ -12670,6 +12863,7 @@ def main(argv: list[str] | None = None) -> None:
     (SITE_DIR / "another-story.html").write_text(build_another_story_page(), encoding="utf-8")
     (SITE_DIR / "good-steward.html").write_text(build_good_steward_page(), encoding="utf-8")
     (SITE_DIR / "build-walkthrough.html").write_text(build_build_walkthrough_page(), encoding="utf-8")
+    (SITE_DIR / "floor-plan-3d.html").write_text(build_floor_plan_3d_page(), encoding="utf-8")
     (SITE_DIR / "energy-credit.html").write_text(build_energy_credit_page(), encoding="utf-8")
     (SITE_DIR / "site-visit.html").write_text(build_site_visit_page(), encoding="utf-8")
     (SITE_DIR / "pm-dashboard.html").write_text(build_pm_dashboard_page(), encoding="utf-8")
