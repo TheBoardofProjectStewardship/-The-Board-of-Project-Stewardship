@@ -6900,6 +6900,32 @@ def build_adu_page() -> str:
             "Edmonds ADU planning hub",
             "A Board of Project Stewardship hub that points homeowners to official Edmonds ADU standards and portals. Not a fee table, bid, or guarantee of approval.",
         )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/posts/2026-09-07-edmonds-adu-1.webp",
+                    "Illustrative Edmonds-area ADU planning context",
+                    "ADU planning context (illustrative)",
+                    "./posts/2026-09-07-adu-planning-edmonds-wa.html",
+                    "ADU planning Edmonds",
+                ),
+                (
+                    "assets/images/posts/2026-09-07-edmonds-adu-2.webp",
+                    "Illustrative Edmonds-area ADU site and yard context",
+                    "Lot and yard context (illustrative)",
+                    "./adu-checklist.html",
+                    "ADU readiness checklist",
+                ),
+                (
+                    "assets/images/posts/2026-09-07-edmonds-adu-3.webp",
+                    "Illustrative Edmonds-area accessory dwelling exterior context",
+                    "Accessory dwelling context (illustrative)",
+                    "./edmonds-custom-homes.html",
+                    "Edmonds custom homes directory",
+                ),
+            ],
+            title="Edmonds ADU field context (illustrative)",
+        )
         + _hub_section(
             "Start with official sources",
             f"""      <p class="text-slate-300 text-sm font-light leading-relaxed mb-4">Accessory dwelling units in Edmonds are full dwellings with utility, egress, and permit obligations — not shed upgrades. Read the live code and city handouts before schematic attachment.</p>
@@ -8946,6 +8972,32 @@ def build_materials_index_page() -> str:
             "Materials Worth Knowing",
             "An index of manufacturer resources the Board has pointed to in editorial posts. Not endorsements, not prices, not installation warranties from the Board.",
         )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/posts/2026-09-22-edmonds-siding-1.webp",
+                    "Illustrative Edmonds-area siding and cladding context",
+                    "Cladding context (illustrative)",
+                    "./posts/2026-09-22-siding-replacement-edmonds-coastal-wa.html",
+                    "Edmonds coastal siding notes",
+                ),
+                (
+                    "assets/images/posts/2026-09-20-edmonds-windows-1.webp",
+                    "Illustrative Edmonds-area window and flashing context",
+                    "Window assembly context (illustrative)",
+                    "./posts/2026-09-20-window-replacement-edmonds-coastal-wa.html",
+                    "Edmonds coastal window notes",
+                ),
+                (
+                    "assets/images/tools/build-walkthrough/08-insulation-wrb.webp",
+                    "Illustrative weather-resistive barrier and insulation context",
+                    "WRB and dry-in context (illustrative)",
+                    "./coastal-waterproofing.html",
+                    "Coastal waterproofing",
+                ),
+            ],
+            title="Materials in pictures (illustrative)",
+        )
         + f"""  <div class="max-w-6xl mx-auto px-4 pb-16">
 {cards}
     <p class="text-sm text-slate-400 font-light mb-6">See Materials Worth Knowing sections inside individual <a href="./blog.html" class="text-secondary hover:underline">blog posts</a> for project context. Links are editorial references — not prices, warranties, or Board product endorsements.</p>
@@ -9111,6 +9163,32 @@ def build_videos_page() -> str:
             "Editorial media",
             "Video library index",
             "Index of Board-hosted illustrative process clips referenced from posts and tools. Clips are editorial context — not footage of a guaranteed Board job schedule.",
+        )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/posts/2026-09-07-adu-edmonds-2.webp",
+                    "Illustrative Edmonds-area ADU framing context",
+                    "ADU framing clip context (illustrative)",
+                    "./posts/2026-09-07-adu-planning-edmonds-wa.html",
+                    "ADU planning Edmonds",
+                ),
+                (
+                    "assets/images/posts/2026-08-12-edmonds-addition-permit-1.webp",
+                    "Illustrative Edmonds home addition permit context",
+                    "Addition permit clip context (illustrative)",
+                    "./posts/2026-08-12-edmonds-home-addition-permit-basics.html",
+                    "Edmonds addition permit basics",
+                ),
+                (
+                    "assets/images/tools/build-walkthrough/05-framing.webp",
+                    "Illustrative residential framing stage context",
+                    "Build walkthrough stage (illustrative)",
+                    "./build-walkthrough.html",
+                    "Build Walkthrough",
+                ),
+            ],
+            title="Library stills (illustrative)",
         )
         + _hub_section(
             "Where to watch",
