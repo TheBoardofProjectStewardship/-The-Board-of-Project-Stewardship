@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-09-28-home-addition-mukilteo-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-09-29T03:30:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Home Addition Mukilteo WA \u2014 Going Up or Out on a Coastal Lot: City Permits, Tree Rules, and Weatherproof-First Sequencing",
+    "date": "2026-09-28",
+    "slug": "home-addition-mukilteo-wa",
+    "description": "Planning a home addition or second story in Mukilteo: confirm city jurisdiction, use the City of Mukilteo online permit portal, check tree and steep-slope rules, file electrical with L&I, and keep dry-in on the critical path.",
+    "category": "Additions"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  }
+}

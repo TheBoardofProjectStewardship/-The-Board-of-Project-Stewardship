@@ -1,0 +1,23 @@
+{
+  "producer": "grok-build",
+  "files": [
+    {
+      "intake_file": "media/2026-08-12-edmonds-addition-permit-3.webp",
+      "repo_path": "assets/images/posts/2026-08-12-edmonds-addition-permit-3.webp",
+      "alt": "Illustrative Pacific Northwest home with an addition in framing beside the existing house. Illustrative image only, not a real Board of Project Stewardship job photo",
+      "source": "reused repo still (free-first tier)"
+    },
+    {
+      "intake_file": "media/2026-08-12-edmonds-addition-permit-4.webp",
+      "repo_path": "assets/images/posts/2026-08-12-edmonds-addition-permit-4.webp",
+      "alt": "Illustrative addition framing with a temporary roof tarp on a Pacific Northwest home near the water. Illustrative only, not a real Board of Project Stewardship job photo",
+      "source": "reused repo still (free-first tier)"
+    },
+    {
+      "intake_file": "media/2026-08-24-shoreline-addition-1.webp",
+      "repo_path": "assets/images/posts/2026-08-24-shoreline-addition-1.webp",
+      "alt": "Illustrative Pacific Northwest two-story home with weather protection wrapped around new work. Illustrative only, not a real Board of Project Stewardship job photo",
+      "source": "reused repo still (free-first tier)"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "producer": "grok-build",
+  "files": [
+    {
+      "intake_file": "media/2026-09-07-edmonds-adu-2.webp",
+      "repo_path": "assets/images/posts/2026-09-07-edmonds-adu-2.webp",
+      "alt": "Illustrative residential street of Pacific Northwest craftsman homes. Illustrative image only, not a real Board of Project Stewardship job photo",
+      "source": "reused repo still (free-first tier)"
+    },
+    {
+      "intake_file": "media/2026-09-07-edmonds-adu-1.webp",
+      "repo_path": "assets/images/posts/2026-09-07-edmonds-adu-1.webp",
+      "alt": "Illustrative early-stage residential foundation forms and framing on a Pacific Northwest lot. Illustrative only, not a real Board of Project Stewardship job photo",
+      "source": "reused repo still (free-first tier)"
+    },
+    {
+      "intake_file": "media/2026-08-12-edmonds-addition-permit-1.webp",
+      "repo_path": "assets/images/posts/2026-08-12-edmonds-addition-permit-1.webp",
+      "alt": "Illustrative Pacific Northwest craftsman-style home exterior. Illustrative only, not a real Board of Project Stewardship job photo",
+      "source": "reused repo still (free-first tier)"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-09-28-edmonds-area-remodel-permit-news",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-09-29T03:30:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Edmonds-Area Homeowner News, September 28, 2026: Esperance Annexation, Budgets, and Utility Rates",
+    "date": "2026-09-28",
+    "slug": "edmonds-area-remodel-permit-news-2026-09-28",
+    "description": "Local news for Edmonds, Esperance, Lynnwood, and Kenmore homeowners planning remodels: annexation and permit jurisdiction, new city budgets, a utility rate freeze vote, and a long sidewalk closure.",
+    "category": "Permits"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  }
+}
