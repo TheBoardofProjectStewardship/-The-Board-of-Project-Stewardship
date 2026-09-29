@@ -14,7 +14,7 @@ slug: "hiring-a-remodeler-mountlake-terrace-wa"
 
 Mountlake Terrace sits in south Snohomish County with a deep stock of mid-century ranch and split-level houses. Those layouts remodel well into open living spaces, but they also hide structural quirks, aging electrical panels, and envelopes that were never detailed for today’s rain. Hiring well here means checking license status, confirming who pulls permits, and picking a team that designs and prices the moisture work before finishes.
 
-![Illustrative remodel planning meeting and finished living space staging for a Mountlake Terrace home — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-29-mountlake-terrace-hiring-1.webp)
+![Illustrative: Mountlake Terrace, Washington — a mid-century living room staged with blank remodel drawings and material samples, rain on the picture window — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-29-mountlake-terrace-hiring-4.webp)
 
 ## Understanding the Mountlake Terrace remodeling landscape
 
