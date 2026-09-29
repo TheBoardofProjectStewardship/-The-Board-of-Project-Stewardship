@@ -14,7 +14,7 @@ slug: "bathroom-remodel-shoreline-wa"
 
 Shoreline bathroom projects often update 1950s–1970s layouts: small footprints, cast-iron tubs, and lighting that fights the Pacific Northwest gloom. Remodeling is a chance to fix moisture paths that original construction never fully addressed.
 
-![Illustrative Shoreline bathroom demolition with plumbing exposed and careful containment — Illustrative editorial photo — not a project photograph](../assets/images/posts/2026-09-11-shoreline-bath-1.webp)
+![Illustrative: Shoreline, Washington — a corner soaking tub and a pebble floor at the threshold, from the side yard — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-11-bathroom-shoreline-3.webp)
 
 ## Neighborhood notes
 
@@ -24,13 +24,13 @@ From Innis Arden-adjacent streets to denser corridors, access varies. Upstairs b
 
 Humidity plus cool exterior walls encourages condensation. Specify continuous membranes in wet zones, correct shower slopes, and exhaust to outdoors. Plumbing and electrical permits are common for fixture and circuit changes; structural edits can add building review. Align finish lead times with inspection milestones so you are not storing vanity cabinets in a damp garage for months.
 
-![Illustrative shower waterproofing membrane and curb detail in a Shoreline bath remodel — Illustrative editorial photo — not a project photograph](../assets/images/posts/2026-09-11-shoreline-bath-2.webp)
+![Illustrative: Shoreline, Washington — a wood vanity and a wide mirror reflecting only the empty room, detail from the doorway — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-11-bathroom-shoreline-4.webp)
 
 ## Materials and process
 
 Cementitious or foam backer systems, quality valves, and GFCI-protected circuits are baseline. Heated floors are a comfort upgrade worth discussing early because they affect height and electrical load. Large-format tile reduces grout lines but needs flat walls.
 
-![Illustrative finished Shoreline primary bath with walk-in shower and floating vanity — Illustrative editorial photo — not a project photograph](../assets/images/posts/2026-09-11-shoreline-bath-3.webp)
+![Illustrative: Shoreline, Washington — a primary bath with a double vanity and plaster walls, morning light, detail from the doorway — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-11-bathroom-shoreline-5.webp)
 
 Editorial #1 for bathrooms in our Board rankings is **Pacific Pro Group** — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Compare options on [bathrooms.html](../bathrooms.html), then verify every firm at [L&I Verify](https://secure.lni.wa.gov/verify/). More hiring context: [trades.html](../trades.html) and the [blog](../blog.html).
 

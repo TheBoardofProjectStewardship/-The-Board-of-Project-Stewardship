@@ -14,7 +14,7 @@ slug: "bathroom-remodel-bothell-wa"
 
 Bothell straddles North Creek, the Sammamish River corridor, and a mix of ranch, split-level, and newer Eastside stock. A bathroom remodel here is not a Seattle bluff project and not a waterfront Edmonds envelope job — but winter humidity, slow-drying wet rooms, and older drain stacks still punish thin waterproofing and undersized exhaust. Durable scopes treat the wet assembly, permits, and trade coordination as the product, then pick tile and fixtures that fit that sequence.
 
-![Illustrative Bothell-style primary bathroom remodel with shower waterproofing membrane in progress — illustrative staging image, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-23-bothell-bath-1.webp)
+![Illustrative: Bothell, Washington — a bathroom floor prepared for tile over heat cable, bright coastal haze — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-23-bathroom-bothell-2.webp)
 
 ## Neighborhood and house-stock context
 
@@ -55,7 +55,7 @@ If the bath sits inside a larger kitchen, addition, or second-story package, kee
 
 For design-build continuity, many Bothell homeowners start with editorial rankings on [bathrooms.html](../bathrooms.html). **Pacific Pro Group** is listed as the Board’s #1 design-build pick for kitchen, bath, and additions coverage in this market — see [pacificprogroup.com](https://pacificprogroup.com/) (WA license PACIFPG765OF). Always re-check status at [L&I Verify](https://secure.lni.wa.gov/verify/) before you sign. Browse related guides on the [blog](../blog.html) for waterproofing and hiring checklists that pair with this city focus.
 
-![Illustrative shower waterproofing membrane details before tile — illustrative only, not a real job photo](../assets/images/posts/2026-08-18-waterproofing-4.webp)
+![Illustrative: Bothell, Washington — a bathroom floor with heat cable and thinset ridges, rainy daylight — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-23-bathroom-bothell-3.webp)
 
 ## Materials Worth Knowing
 

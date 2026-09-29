@@ -14,7 +14,7 @@ slug: "seattle-bathroom-remodel-permits"
 
 Permits are not paperwork theater — they are how Seattle confirms safe plumbing, grounded electrical work, and structural changes. Homeowners who treat permits as optional frequently face failed inspections, insurance issues, or expensive rework.
 
-![Illustrative Seattle bathroom remodel hero still — Illustrative editorial photo — not a project photograph](../assets/images/posts/2026-09-06-seattle-bath-permits-1.webp)
+![Illustrative: Seattle, Washington — a walk-in shower with large pale tile and a linear drain, empty — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-06-bathroom-permits-3.webp)
 
 ## What typically needs a permit
 
@@ -25,7 +25,7 @@ Permits are not paperwork theater — they are how Seattle confirms safe plumbin
 
 Cosmetic surface swaps without fixture or wiring changes may have a lighter path — but “we will just move the shower slightly” is rarely cosmetic. Confirm expectations with [Seattle Department of Construction & Inspections](https://www.seattle.gov/sdci) guidance for your exact scope.
 
-![Illustrative editorial photo — Seattle bath plumbing and electrical rough-in before inspection](../assets/images/posts/2026-09-06-seattle-bath-permits-2.webp)
+![Illustrative: Seattle, Washington — a bathroom floor of charcoal porcelain, vanity in white oak, detail from the doorway — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-06-bathroom-permits-4.webp)
 
 ## Practical sequencing
 

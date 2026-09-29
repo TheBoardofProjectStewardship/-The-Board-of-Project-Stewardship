@@ -14,7 +14,7 @@ slug: "kitchen-remodel-kenmore-wa"
 
 Kenmore sits on the north end of Lake Washington between Lake Forest Park, Bothell, and the SR-522 corridor — a compact King County city of mid-century ranches, split-levels, and newer lakefront and hillside infill. A kitchen remodel here is often a layout, moisture, and permitting story as much as a cabinet story. Many households want an island, a better work triangle, and outdoor-ducted ventilation without treating the job like a Seattle condo gut or an Edmonds waterfront envelope rebuild. Durable projects start with what the City and the lot will actually allow, then lock trade coordination so rough-in, inspections, and finishes share one critical path.
 
-![Illustrative Pacific Northwest kitchen with island seating and wood cabinetry — illustrative staging image, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-26-kenmore-kitchen-1.webp)
+![Illustrative: Kenmore, Washington — a kitchen pantry with open oak shelves and a zinc counter, pale winter sun — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-26-kitchen-kenmore-2.webp)
 
 ## Neighborhood and house-stock context
 
@@ -55,7 +55,7 @@ If the kitchen sits inside a larger bath, addition, or second-story package, kee
 
 Board rankings on [kitchen.html](../kitchen.html) place **Pacific Pro Group** at #1 for kitchen remodels in this editorial set — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with the [blog](../blog.html) for related King County kitchen posts, and nearby city notes only as planning context — Kenmore’s own code and MyBuildingPermit path still govern your lot.
 
-![Illustrative kitchen material samples and island planning layout — illustrative only, not a real job photo](../assets/images/posts/2026-08-29-kitchen-addition-3.webp)
+![Illustrative: Kenmore, Washington — a finished kitchen with a farmhouse sink under a rain-streaked window, late afternoon sun through firs — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-26-kitchen-kenmore-3.webp)
 
 ## Materials Worth Knowing
 

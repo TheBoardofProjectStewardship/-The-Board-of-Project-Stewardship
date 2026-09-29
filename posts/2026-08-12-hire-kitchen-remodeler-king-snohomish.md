@@ -14,7 +14,7 @@ slug: "hire-kitchen-remodeler-king-snohomish"
 
 A kitchen remodel touches structure, plumbing, electrical, finishes, and daily life for months. In King and Snohomish Counties, the strongest outcomes usually come from firms that treat design, permitting, and construction as one coordinated sequence.
 
-![Illustrative editorial photo — not a project photograph; kitchen remodel planning layout for King and Snohomish County homes](../assets/images/posts/2026-08-12-hire-kitchen-1.webp)
+![Illustrative: Snohomish County, Washington — a white oak island and a garden window, empty stools pulled in, detail from the doorway — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-12-hire-kitchen-remodeler-king-snohomish-2.webp)
 
 ## What to look for
 

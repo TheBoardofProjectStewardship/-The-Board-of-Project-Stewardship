@@ -14,7 +14,7 @@ slug: "home-addition-lake-forest-park"
 
 Lake Forest Park’s wooded character is part of the appeal — and part of the addition challenge. Roots, canopy, setbacks, and stormwater shape what you can build and how water moves after you build it.
 
-![Illustrative editorial photo — not a project photograph; Pacific Northwest home addition exterior with framing and temporary weather wrap](../assets/images/posts/2026-08-26-lfp-addition-1.webp)
+![Illustrative: Lake Forest Park, Washington — a one-story addition with cedar siding and a matching gable, seen from the garden, from the side yard — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-26-home-addition-lake-forest-park-3.webp)
 
 ## Neighborhood context
 
@@ -28,7 +28,7 @@ PNW rain plus tree cover means detailing roofs and gutters so new volumes do not
 
 Structural openings into existing walls, beam upgrades for open plans, and second-story loads on older foundations belong on the critical path with the engineer — not as a late field clarification. Cross-check [trades.html](../trades.html) for excavation, concrete, framing, and roofing context when your scope touches the envelope.
 
-![Illustrative editorial photo — not a project photograph; framing and structural opening detail during a residential addition](../assets/images/posts/2026-08-26-lfp-addition-2.webp)
+![Illustrative: Lake Forest Park, Washington — a small bump-out addition with a shed roof over a kitchen window, from the side yard — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-26-home-addition-lake-forest-park-4.webp)
 
 ## Design, process, and coordination
 
@@ -40,7 +40,7 @@ Illustrative process clip (shared editorial staging for envelope and remodel seq
 
 [Watch the short process clip](../assets/videos/posts/2026-09-shared-waterproofing.mp4)
 
-![Illustrative editorial photo — not a project photograph; nearly weatherproofed addition with siding and roof sheathing underway — design preview only](../assets/images/posts/2026-08-26-lfp-addition-3.webp)
+![Illustrative: Lake Forest Park, Washington — a finished addition at dusk with warm light in the new windows and nobody outside, from the side yard — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-26-home-addition-lake-forest-park-5.webp)
 
 Board rankings on [additions.html](../additions.html) place **Pacific Pro Group** at #1 for home additions in this editorial set — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with [kitchen.html](../kitchen.html) or [bathrooms.html](../bathrooms.html) when the addition includes those rooms, [another-story.html](../another-story.html) when a second story is on the table, and the [blog](../blog.html) for related King County addition posts.
 

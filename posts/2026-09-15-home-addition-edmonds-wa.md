@@ -14,7 +14,7 @@ slug: "home-addition-edmonds-wa"
 
 Expanding an Edmonds home — whether a rear bump-out, side addition, or vertical expansion — is a structural project with neighborhood-specific wrinkles: marine weather, mature lots, and city review expectations that differ from a pure interior remodel.
 
-![Illustrative Edmonds home addition framing at old-to-new roof tie-in with temporary weather protection — Illustrative editorial photo — not a project photograph](../assets/images/posts/2026-09-15-edmonds-addition-1.webp)
+![Illustrative: Edmonds, Washington — the empty interior of a new addition with three tall windows to fir trees — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-15-home-addition-edmonds-3.webp)
 
 ## Local Edmonds context
 
@@ -24,7 +24,7 @@ Edmonds neighborhoods from the Bowl to Perrinville and Meadowdale mix mid-centur
 
 Coastal Snohomish County weather rewards continuous weather barriers, thoughtful flashing at the old-to-new joint, and ventilation that keeps cavities dry. City of Edmonds building permits are typical for structural additions; electrical, plumbing, and mechanical permits usually follow. Critical areas, steep slopes, or shoreline-adjacent parcels can require extra documentation. Design and permitting often consume a large share of the calendar — ask bidders for realistic review timelines rather than optimistic construction-only schedules.
 
-![Illustrative close-up of weather barrier and flashing where a new addition meets existing siding — Illustrative editorial photo — not a project photograph](../assets/images/posts/2026-09-15-edmonds-addition-2.webp)
+![Illustrative: Edmonds, Washington — a small bump-out addition with a shed roof over a kitchen window — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-15-home-addition-edmonds-4.webp)
 
 ## Process video: weather-barrier install fundamentals
 

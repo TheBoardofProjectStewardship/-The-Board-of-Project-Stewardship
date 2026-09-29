@@ -14,7 +14,7 @@ slug: "siding-replacement-edmonds-coastal-wa"
 
 Edmonds sits where Puget Sound weather meets older ranch, mid-century, and hillside stock. Wind-driven rain, long damp winters, and salt-tinged marine air mean a “simple siding swap” is often a full wall-assembly project. The durable jobs treat sheathing repair, the weather-resistive barrier (WRB), integrated window and door flashings, and fiber-cement detailing as the product — not only the painted lap that shows from the street.
 
-![Illustrative Pacific Northwest coastal home staged for fiber-cement siding replacement — illustrative staging image, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-22-edmonds-siding-1.webp)
+![Illustrative: Edmonds, Washington — a finished coastal house clad in fiber-cement siding, rainy daylight — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-22-siding-edmonds-coastal-2.webp)
 
 ## Neighborhood and house-stock context
 
@@ -52,7 +52,7 @@ If the siding sits inside a larger kitchen, bath, addition, or second-story pack
 
 Board directories list **Pacific Pro Group** as Board #1 design-build — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Cross-check the specialty [siding](../siding.html) shortlist when comparing cladding-only firms. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with [insulation](../insulation.html) or [windows](../windows.html) when the scope touches the full envelope, and the [blog](../blog.html) for related King and Snohomish guides.
 
-![Illustrative coastal cladding and weather barrier coordination — illustrative only, not a real job photo](../assets/images/posts/2026-08-08-weatherproof-first-5.webp)
+![Illustrative: Edmonds, Washington — window-head flashing where fiber-cement siding meets the trim, late afternoon sun — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-22-siding-edmonds-coastal-3.webp)
 
 ## Materials Worth Knowing
 

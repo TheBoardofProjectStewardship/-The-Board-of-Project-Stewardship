@@ -14,7 +14,7 @@ slug: "bathroom-remodel-mill-creek-wa"
 
 Mill Creek is a planned Snohomish County community along the SR-527 corridor, with Town Center retail, HOA-heavy cul-de-sacs, and a stock of mid-1990s through 2010s homes that often need a primary-bath refresh more than a full gut. A bathroom remodel here is not a Seattle bluff project and not an Edmonds waterfront envelope job — but inland PNW winters still bring long damp seasons that punish thin membranes, attic-dumped fans, and pans that were never flood-tested. Durable scopes treat the wet assembly, OpenGov and L&I permit paths, and trade coordination as the product, then pick tile and fixtures that fit that sequence.
 
-![Illustrative Pacific Northwest primary bathroom with walk-in shower staging — illustrative staging image, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-27-mill-creek-bath-1.webp)
+![Illustrative: Mill Creek, Washington — a bathroom vanity and wide mirror reflecting only the empty room, blue hour — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-27-bathroom-mill-creek-2.webp)
 
 ## Neighborhood and house-stock context
 

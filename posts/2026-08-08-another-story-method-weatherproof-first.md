@@ -14,7 +14,7 @@ slug: "another-story-method-weatherproof-first"
 
 “Another story” additions fail in the Puget Sound when teams chase framing progress while weather enters the old volume. A weatherproof-first method flips the priority: protect, dry in, then refine.
 
-![Illustrative editorial photo — not a project photograph; coastal moisture and envelope protection context for vertical additions](../assets/images/posts/2026-08-08-weatherproof-first-1.webp)
+![Illustrative: the Pacific Northwest — a roof temporarily tented with tarps while an upper floor is opened — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-08-another-story-weatherproof-first-3.webp)
 
 ## Why weatherproof-first
 
@@ -76,7 +76,7 @@ Ask for daily end-of-day photos during the open-roof period. Documentation encou
 
 ![Illustrative editorial photo — not a project photograph; waterproofing membrane and wet-assembly protection — design preview only](../assets/images/posts/2026-08-08-weatherproof-first-3.webp)
 
-![Illustrative editorial photo — not a project photograph; second-story vs teardown planning massing — design preview only](../assets/images/posts/2026-08-08-weatherproof-first-6.webp)
+![Illustrative: Pacific Northwest — wall sheathing wrapped in a weather barrier with taped seams, pale winter light — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-08-another-story-weatherproof-first-2.webp)
 
 ## Putting it together for homeowners
 

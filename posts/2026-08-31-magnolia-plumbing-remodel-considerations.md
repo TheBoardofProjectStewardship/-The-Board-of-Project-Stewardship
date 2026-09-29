@@ -14,7 +14,7 @@ slug: "magnolia-plumbing-remodel-considerations"
 
 Plumbing is the hidden backbone of Magnolia kitchen and bath remodels. Bluff-area homes and mid-century builds often mix original materials with prior partial updates — a recipe for surprises when walls open.
 
-![Illustrative editorial photo — not a project photograph; Magnolia-style bath rough-in with open walls and new supply/drain stubs](../assets/images/posts/2026-08-31-magnolia-plumbing-1.webp)
+![Illustrative: Magnolia, Seattle — a bathroom wet wall showing a drain and vent stack — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-31-magnolia-plumbing-5.webp)
 
 
 ## Neighborhood context
@@ -25,7 +25,7 @@ Long runs to stacks, limited crawl access on hillside lots, and shared walls com
 
 Seattle plumbing permits apply to substantive changes. Venting must be correct — trapping problems show up as odors and slow drains after the pretty tile is done. Exterior wall baths need insulation and condensation awareness so pipes and surfaces stay healthier.
 
-![Illustrative editorial photo — not a project photograph; copper and PEX supply branches staged before pressure test](../assets/images/posts/2026-08-31-magnolia-plumbing-2.webp)
+![Illustrative: Magnolia, Seattle — a kitchen sink bay with supply lines before cabinets — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-31-magnolia-plumbing-6.webp)
 
 ## Process guidance
 
@@ -47,7 +47,7 @@ Possible, but delays and compatibility issues become your problem. Coordinate mo
 **What about water heaters?**  
 Capacity and location may need updates when adding showers or fixtures — evaluate during design, not at final inspection.
 
-![Illustrative editorial photo — not a project photograph; accessible shutoff valves and labeled manifolds after rough-in](../assets/images/posts/2026-08-31-magnolia-plumbing-3.webp)
+![Illustrative: Magnolia, Seattle — a utility room with a water heater and tidy piping, labels turned away — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-31-magnolia-plumbing-7.webp)
 
 ../assets/videos/posts/2026-09-bath-process-shared.mp4
 

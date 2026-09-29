@@ -14,7 +14,7 @@ slug: "walk-in-shower-remodel-magnolia"
 
 Converting a tub to a walk-in shower is one of the most common Magnolia bath upgrades. Done well, it improves daily use and accessibility; done poorly, it leaks into living spaces below.
 
-![Illustrative editorial photo — not a project photograph; Magnolia walk-in shower layout with curbless entry planning](../assets/images/posts/2026-08-16-magnolia-shower-1.webp)
+![Illustrative: Magnolia, Seattle — a curbless shower with a linear drain and large tile, glass panel open — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-16-walk-in-shower-magnolia-2.webp)
 
 ## Neighborhood context
 

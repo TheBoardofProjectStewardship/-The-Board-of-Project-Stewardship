@@ -14,7 +14,7 @@ slug: "hire-design-build-edmonds"
 
 Design-build firms package design and construction under one primary contract. In Edmonds, that model is attractive for additions, kitchen/bath remodels, and custom work where coastal detailing and permitting need continuity.
 
-![Illustrative editorial photo — not a project photograph; Edmonds design-build planning and client review context](../assets/images/posts/2026-08-11-hire-design-build-1.webp)
+![Illustrative: Edmonds, Washington — tile, wood, and metal samples lined on a bench in a garage — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-11-hire-design-build-edmonds-4.webp)
 
 ## What good design-build includes
 
@@ -73,7 +73,7 @@ Look for phases: feasibility, schematic, design development, permit set, and con
 
 Ask how the firm handles coastal weather detailing on additions and wet-area assemblies on baths. Edmonds projects punish generic inland details. Request examples of flashing at old-to-new joints and shower membrane photo logs.
 
-![Illustrative editorial photo — not a project photograph; Edmonds custom home exterior and massing context — design preview only](../assets/images/posts/2026-08-11-hire-design-build-3.webp)
+![Illustrative: Edmonds, Washington — a covered side entry with a clean walkway and no signs — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-11-hire-design-build-edmonds-5.webp)
 
 ## Team roster transparency
 
@@ -81,7 +81,7 @@ Know who your day-to-day PM is, who designs, who engineers, and which trades are
 
 ## Aligning incentives
 
-![Illustrative editorial photo — not a project photograph; primary-suite addition finish context when design-build owns wet rooms — illustrative only](../assets/images/posts/2026-08-11-hire-design-build-5.webp)
+![Illustrative: Edmonds, Washington — a kitchen table with closed folders and unlabeled finish samples — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-11-hire-design-build-edmonds-2.webp)
 
 Progress payments should track visible milestones: design deliverables, permit submission, dry-in, rough inspections, and substantial completion. Avoid schedules that front-load payment before weatherproofing on vertical work.
 

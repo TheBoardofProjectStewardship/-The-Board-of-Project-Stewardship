@@ -14,7 +14,7 @@ slug: "electrical-upgrades-bathroom-remodels-wa"
 
 Bathroom electrical work in Washington is about safety and moisture. Remodels that ignore capacity and protection create inspection failures — or worse, hazards.
 
-![Illustrative editorial photo — not a project photograph; bathroom remodel electrical and vanity lighting context](../assets/images/posts/2026-08-10-electrical-bath-1.webp)
+![Illustrative: Pacific Northwest — a bathroom ceiling with new recessed lights above a stone tub deck, rainy daylight — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-10-electrical-upgrades-bathroom-remodels-2.webp)
 
 ## Common upgrades
 
@@ -29,7 +29,7 @@ Bathroom electrical work in Washington is about safety and moisture. Remodels th
 
 Have the electrician walk the project during design, not after tile is selected. Coordinate fan routing with framing. Schedule rough electrical inspection before insulation and drywall in opened walls.
 
-![Illustrative editorial photo — not a project photograph; heated-floor mat and thermostat rough-in context for WA baths](../assets/images/posts/2026-08-10-electrical-bath-2.webp)
+![Illustrative: the Pacific Northwest — an open bathroom wall with electrical boxes and cable, cover plates off, no readable printing — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-10-electrical-upgrades-bathroom-remodels-3.webp)
 
 ## Hiring
 

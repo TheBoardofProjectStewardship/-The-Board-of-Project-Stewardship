@@ -14,7 +14,7 @@ slug: "edmonds-home-addition-permit-basics"
 
 Planning a structural home addition in Edmonds usually means more than a single building permit. Most projects need a coordinated package that covers design, site constraints, and the trade permits that follow. Start with the City of Edmonds building and planning resources before you freeze design: [Apply for a Permit (Edmonds)](https://edmondswa.gov/services/permit_assistance/apply_for_a_permit) via [MyBuildingPermit](https://www.mybuildingpermit.com/), and keep the [informational handouts](https://edmondswa.gov/services/permit_assistance/permit_information___forms/informational_handouts) (including B61 Residential Addition/Remodel/Alteration) nearby.
 
-![Illustrative editorial photo — not a project photograph; Edmonds home addition planning and exterior envelope context](../assets/images/posts/2026-08-12-edmonds-addition-permit-1.webp)
+![Illustrative: Edmonds, Washington — an addition framed and sheathed with a weather barrier, bright coastal haze — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-12-edmonds-home-addition-permit-2.webp)
 
 ## Start with the building permit
 
@@ -32,7 +32,7 @@ Alongside the building permit, additions commonly need:
 
 Experienced design-build firms often assemble this package so homeowners are not chasing agencies alone. See our [Top home addition contractors](../additions.html) for firms that regularly manage Edmonds and nearby permitting.
 
-![Illustrative editorial photo — not a project photograph; addition framing and structural tie-in context for North Sound homes](../assets/images/posts/2026-08-12-edmonds-addition-permit-2.webp)
+![Illustrative: Edmonds, Washington — an addition roof being tied into the existing roof, underlayment only — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-12-edmonds-home-addition-permit-3.webp)
 
 ## Timeline expectations
 
@@ -44,7 +44,7 @@ Illustrative process clip (editorial addition framing staging — not footage of
 
 [Watch the short process clip](../assets/videos/posts/2026-09-07-edmonds-adu-framing.mp4)
 
-![Illustrative editorial photo — not a project photograph; dried-in addition volume and weather protection — design preview only](../assets/images/posts/2026-08-12-edmonds-addition-permit-3.webp)
+![Illustrative: Edmonds, Washington — the empty interior of a new addition with three tall windows to fir trees, from the side yard — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-12-edmonds-home-addition-permit-4.webp)
 
 ## Materials Worth Knowing
 

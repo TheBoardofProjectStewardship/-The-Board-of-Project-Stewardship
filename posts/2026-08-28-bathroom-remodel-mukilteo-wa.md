@@ -14,7 +14,7 @@ slug: "bathroom-remodel-mukilteo-wa"
 
 Mukilteo bathroom remodels serve homes near the waterfront, hillside streets, and quieter inland pockets. Marine air and views are amenities; they are also durability tests for showers, exhaust paths, and hardware that sees salt-influenced humidity year-round.
 
-![Illustrative editorial photo — not a project photograph; coastal Pacific Northwest bathroom remodel with shower waterproofing underway](../assets/images/posts/2026-08-28-mukilteo-bath-1.webp)
+![Illustrative: Mukilteo, Washington — a tiled shower niche, empty, with a wood-slat ceiling, from the side yard — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-28-bathroom-mukilteo-3.webp)
 
 ## Neighborhood context
 
@@ -28,7 +28,7 @@ Prioritize continuous waterproofing, outdoor exhaust, and condensation control o
 
 Cool walls facing the Sound argue for honest insulation and vapor details when a window sits in or beside the wet room. If you are replacing that window during the bath remodel, integrate flashing and trim so the waterproofing stack and the exterior opening read as one assembly.
 
-![Illustrative editorial photo — not a project photograph; close detail of shower curb membrane and niche waterproofing](../assets/images/posts/2026-08-28-mukilteo-bath-2.webp)
+![Illustrative: Mukilteo, Washington — a freestanding tub under a window with rain on the glass, detail from the doorway — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-28-bathroom-mukilteo-4.webp)
 
 ## Design, process, and coordination
 
@@ -42,7 +42,7 @@ Illustrative process clip (editorial wet-area staging — not footage of a live 
 
 [Watch the short process clip](../assets/videos/posts/2026-09-shared-waterproofing.mp4)
 
-![Illustrative editorial photo — not a project photograph; finished primary bath with walk-in shower and vanity — design preview only](../assets/images/posts/2026-08-28-mukilteo-bath-3.webp)
+![Illustrative: Mukilteo, Washington — a compact bath with a glass shower and a frosted garden window, detail from the doorway — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-28-bathroom-mukilteo-5.webp)
 
 Board rankings on [bathrooms.html](../bathrooms.html) place **Pacific Pro Group** at #1 for bathroom remodels in this editorial set — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with [trades.html](../trades.html) for plumber and electrician context, [kitchen.html](../kitchen.html) when a paired remodel is on the table, and the [blog](../blog.html) for related Snohomish County bath guides.
 

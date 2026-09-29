@@ -93,6 +93,34 @@ POST_HERO_ALIASES = {
     "siding-replacement-edmonds-coastal-wa": "2026-09-22-edmonds-siding-1.webp",
 }
 
+# Per-post hero pins (path plus optional alt). Regeneration must keep these
+# stills so a later post cannot inherit an older post's photo.
+POST_HERO_PINS_PATH = SITE_DIR / "state/bops/blog-upgrade/post-heroes.json"
+USED_PHOTO_URLS_PATH = SITE_DIR / "state/bops/blog-upgrade/media-rotation.json"
+
+
+def load_post_hero_pins() -> dict:
+    """Slug -> {path, alt?}. Missing file means no pins."""
+    if not POST_HERO_PINS_PATH.is_file():
+        return {}
+    try:
+        data = json.loads(POST_HERO_PINS_PATH.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return {}
+    return data if isinstance(data, dict) else {}
+
+
+def load_used_photo_urls() -> set[str]:
+    """Paths already used on posts. Future hero guesses must not reuse them."""
+    if not USED_PHOTO_URLS_PATH.is_file():
+        return set()
+    try:
+        data = json.loads(USED_PHOTO_URLS_PATH.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return set()
+    urls = data.get("used_photo_urls") or []
+    return {url for url in urls if isinstance(url, str)}
+
 PPG = {
     "name": "Pacific Pro Group",
     "url": "https://pacificprogroup.com/",
@@ -961,11 +989,32 @@ def prefix_asset(rel: str, prefix: str = "") -> str:
 
 
 def resolve_post_hero(post: dict) -> str | None:
-    """Optional post hero under assets/images/posts/, else first in-body still, else category fallback."""
+    """Optional post hero under assets/images/posts/, else first in-body still, else category fallback.
+
+    Pinned heroes win so regeneration keeps the unique still chosen for that post.
+    Unpinned guesses skip paths already listed in used_photo_urls unless this
+    post's markdown names that file.
+    """
     import re as _re
 
     slug = post.get("slug", "")
     date = post.get("date", "")
+    pin = load_post_hero_pins().get(slug)
+    if isinstance(pin, dict):
+        pinned = str(pin.get("path") or "")
+        if pinned and asset_exists(pinned):
+            return pinned
+    elif isinstance(pin, str) and pin and asset_exists(pin):
+        return pin
+
+    body = post.get("body_md") or post.get("body") or ""
+    used = load_used_photo_urls()
+
+    def allowed(rel: str) -> bool:
+        if rel not in used:
+            return True
+        return rel in body or f"../{rel}" in body
+
     candidates: list[str] = []
     alias = POST_HERO_ALIASES.get(slug)
     if alias:
@@ -987,19 +1036,18 @@ def resolve_post_hero(post: dict) -> str | None:
                     break
     for name in candidates:
         rel = f"assets/images/posts/{name}"
-        if asset_exists(rel):
+        if asset_exists(rel) and allowed(rel):
             return rel
-    body = post.get("body_md") or post.get("body") or ""
     for match in _re.finditer(
         r"\((?:\.\./)?assets/images/posts/([^)]+\.(?:webp|jpg|jpeg|png))\)",
         body,
     ):
         rel = f"assets/images/posts/{match.group(1)}"
-        if asset_exists(rel):
+        if asset_exists(rel) and allowed(rel):
             return rel
     cat = post.get("category", "")
     fb = CATEGORY_HERO_FALLBACK.get(cat)
-    if fb and asset_exists(fb):
+    if fb and asset_exists(fb) and allowed(fb):
         return fb
     return None
 
@@ -5538,12 +5586,17 @@ def build_post_page(post: dict) -> str:
         "image": image_obj,
         "mainEntityOfPage": canon,
     }]
+    pin = load_post_hero_pins().get(post.get("slug", ""))
+    custom_alt = ""
+    if isinstance(pin, dict):
+        custom_alt = str(pin.get("alt") or "").strip()
+    hero_alt_text = custom_alt or post["title"]
     hero_html = ""
     if hero_rel and asset_exists(hero_rel):
         src = prefix_asset(hero_rel, "../")
         hero_html = (
             f'    <div class="mb-8 overflow-hidden rounded-xl border border-white/10">\n'
-            f'      <img src="{src}" alt="{esc(post["title"])}" class="w-full h-52 sm:h-72 object-cover" '
+            f'      <img src="{src}" alt="{esc(hero_alt_text)}" class="w-full h-52 sm:h-72 object-cover" '
             f'width="1600" height="900" loading="eager">\n'
             f'    </div>\n'
         )
@@ -5575,6 +5628,7 @@ def build_post_page(post: dict) -> str:
         canonical=canon,
         og_image=hero_rel,
         og_type="article",
+        og_image_alt=custom_alt,
         breadcrumbs=[
             ("About", BASE_URL),
             ("Blog", f"{BASE_URL}blog.html"),

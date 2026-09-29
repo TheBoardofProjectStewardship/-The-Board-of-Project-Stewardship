@@ -14,7 +14,7 @@ slug: "kitchen-remodel-magnolia-seattle"
 
 A Magnolia kitchen remodel sits at the intersection of view-oriented living, older floor plans, and Seattle’s cool, moist climate. Galley kitchens, peninsula additions, and open-concept removals of non-bearing walls are common — each with different structural and mechanical consequences.
 
-![Illustrative Magnolia Seattle kitchen remodel in progress with cabinets removed and electrical rough-in — Illustrative editorial photo — not a project photograph](../assets/images/posts/2026-09-16-magnolia-kitchen-1.webp)
+![Illustrative: Magnolia, Seattle — a white oak island and a garden window, empty stools pulled in — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-16-kitchen-magnolia-2.webp)
 
 ## Neighborhood context
 

@@ -14,13 +14,13 @@ slug: "eastside-vs-coastal-bath-remodel"
 
 Homeowners sometimes assume Bellevue or Kirkland baths are “easier” than Edmonds or Magnolia baths. The truth is more nuanced: both need competent wet-area assemblies, but coastal sites often amplify condensation and finish stress.
 
-![Illustrative editorial photo — not a project photograph; coastal Puget Sound bathroom remodel staging with moisture-aware containment](../assets/images/posts/2026-08-19-eastside-coastal-1.webp)
+![Illustrative: the Pacific Northwest — a wood vanity and a wide mirror reflecting only the empty room, from the side yard — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-19-eastside-coastal-bath-2.webp)
 
 ## Coastal emphasis
 
 Marine air, wind-driven rain, and cooler exterior walls increase the cost of weak exhaust and incomplete membranes. Salt-adjacent hardware corrosion and slower drying after showers show up in caulk joints and window details near wet rooms.
 
-![Illustrative editorial photo — not a project photograph; shower membrane and curb detailing compared across microclimates](../assets/images/posts/2026-08-19-eastside-coastal-2.webp)
+![Illustrative: the Pacific Northwest — a bath with a skylight and a stone bench in the shower, from the side yard — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-19-eastside-coastal-bath-3.webp)
 
 ## Eastside emphasis
 

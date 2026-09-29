@@ -14,7 +14,7 @@ slug: "second-story-addition-shoreline"
 
 Going up in Shoreline preserves yard space but temporarily removes the roof that keeps your house dry. Treat that as the central engineering and logistics problem.
 
-![Illustrative editorial photo — not a project photograph; residential second-story addition framing with temporary weather wrap on a Pacific Northwest ranch](../assets/images/posts/2026-08-24-shoreline-addition-1.webp)
+![Illustrative: Shoreline, Washington — the empty upper bedroom of an addition with knee walls and a window — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-24-second-story-addition-shoreline-2.webp)
 
 ## Local context
 
@@ -26,7 +26,7 @@ Confirm permit and zoning expectations with the [City of Shoreline](https://www.
 
 Wet-season exposure is the enemy. Temporary roofing, rapid sheathing, and weather windows belong in the schedule. Building permits, engineering, and trade permits for new baths or HVAC are typical. Energy code and egress apply to new bedrooms.
 
-![Illustrative editorial photo — not a project photograph; second-story addition structural framing and floor joists over an existing first floor](../assets/images/posts/2026-08-24-shoreline-addition-2.webp)
+![Illustrative: Shoreline, Washington — sheathing on a second-story wall, weather barrier half installed — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-24-second-story-addition-shoreline-3.webp)
 
 ## Process guidance
 

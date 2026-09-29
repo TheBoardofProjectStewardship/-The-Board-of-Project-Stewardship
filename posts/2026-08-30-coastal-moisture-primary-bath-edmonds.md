@@ -14,14 +14,14 @@ slug: "coastal-moisture-primary-bath-edmonds"
 
 A primary bath in Edmonds is a daily wet climate inside a wet climate. Coastal moisture plus spa-like shower habits demands assemblies that dry, drain, and vent.
 
-![Illustrative editorial photo — not a project photograph; Edmonds-style primary bath with exterior-wall glass and steam-prone shower](../assets/images/posts/2026-08-30-coastal-moisture-1.webp)
+![Illustrative: Edmonds, Washington — a primary bath with a double vanity and plaster walls, morning light — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-30-coastal-moisture-primary-bath-edmonds-4.webp)
 
 
 ## Local context
 
 View-oriented primary suites may sit on exterior walls with big glass — beautiful, and condensation-prone if ventilation lags. Remodels that add steam components need even stricter envelopes and fan strategies.
 
-![Illustrative editorial photo — not a project photograph; continuous shower waterproofing membrane at niches and curb before tile](../assets/images/posts/2026-08-30-coastal-moisture-2.webp)
+![Illustrative: Edmonds, Washington — a primary bath vanity and wide mirror reflecting only the empty room, soft overcast morning light — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-30-coastal-moisture-primary-bath-edmonds-2.webp)
 
 ## Detailing priorities
 

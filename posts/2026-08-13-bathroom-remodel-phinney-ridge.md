@@ -14,7 +14,7 @@ slug: "bathroom-remodel-phinney-ridge"
 
 Phinney Ridge bathroom remodels serve walkable North Seattle living: older homes, precious square footage, and upstairs baths that must not fail onto living rooms.
 
-![Illustrative editorial photo — not a project photograph; compact Phinney Ridge bath layout with efficient wet-zone planning](../assets/images/posts/2026-08-13-phinney-bath-1.webp)
+![Illustrative: Phinney Ridge, Seattle — a freestanding tub under a window with rain on the glass, low viewpoint — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-13-bathroom-phinney-ridge-2.webp)
 
 ## Local context
 

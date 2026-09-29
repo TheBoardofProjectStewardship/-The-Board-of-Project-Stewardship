@@ -14,7 +14,7 @@ slug: "heated-floors-edmonds-bathrooms"
 
 Radiant floor heat under bathroom tile is popular in Edmonds for cold mornings and faster drying after showers. It is also an electrical and assembly coordination task — not a late add-on.
 
-![Illustrative editorial photo — not a project photograph; Edmonds bathroom floor preparation before radiant mat layout](../assets/images/posts/2026-08-17-heated-floors-1.webp)
+![Illustrative: Edmonds, Washington — a heat mat with combed thinset, no person, rainy window — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-17-heated-floors-edmonds-bathrooms-4.webp)
 
 ## Local context
 
@@ -30,7 +30,7 @@ Cool coastal mornings make warm floors feel transformative. Primary baths and ki
 
 Permits: electrical work for floor heat typically requires permitted electrical scope — include it explicitly.
 
-![Illustrative editorial photo — not a project photograph; electric radiant mat layout coordinated with drain and vanity footprints](../assets/images/posts/2026-08-17-heated-floors-2.webp)
+![Illustrative: Edmonds, Washington — electric floor-heat cable on a bathroom subfloor, bright coastal haze — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-17-heated-floors-edmonds-bathrooms-2.webp)
 
 ## Hiring notes
 
