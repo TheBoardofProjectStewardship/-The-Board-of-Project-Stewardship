@@ -1,0 +1,59 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Mountlake Terrace",
+    "service": "Hiring a Remodeler",
+    "slug": "hiring-a-remodeler-mountlake-terrace-wa"
+  },
+  "sources": [
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "Washington L&I Verify a Contractor, Tradesperson or Business",
+      "retrieved": "2026-09-29",
+      "supports": "Verify contractor registration, bonding, and insurance in Washington state."
+    },
+    {
+      "url": "https://www.cityofmlt.com/1993/Permits-Licenses",
+      "title": "Mountlake Terrace Permits & Licenses",
+      "retrieved": "2026-09-29",
+      "supports": "City permitting hub: eTRAKiT portal, staff hours, minor remodel path, permit specialist contact."
+    },
+    {
+      "url": "https://www.cityofmlt.com/177/Building-Permits",
+      "title": "Mountlake Terrace Building Permits",
+      "retrieved": "2026-09-29",
+      "supports": "City building permit landing page linked from Permits & Licenses."
+    },
+    {
+      "url": "https://mltw-trk.aspgov.com/eTRAKiT/",
+      "title": "Mountlake Terrace eTRAKiT Permit Portal",
+      "retrieved": "2026-09-29",
+      "supports": "Online applications, fees, comments, and inspection scheduling for city permits."
+    },
+    {
+      "url": "https://www.cityofmlt.com/DocumentCenter/View/38297/Building-Permit-Steps",
+      "title": "Mountlake Terrace Building Permit Steps",
+      "retrieved": "2026-09-29",
+      "supports": "Step overview from portal account creation through final inspection."
+    },
+    {
+      "url": "https://snohomishcountywa.gov/1687/Permitting",
+      "title": "Snohomish County Permitting",
+      "retrieved": "2026-09-29",
+      "supports": "County PDS permitting overview for unincorporated parcels."
+    },
+    {
+      "url": "https://snohomishcountywa.gov/3920/Online-Permitting",
+      "title": "Snohomish County Online Permitting",
+      "retrieved": "2026-09-29",
+      "supports": "PDS Permit Portal path for county land use and building applications."
+    }
+  ],
+  "generation": {
+    "agent": "hermes",
+    "hermes_status": "hermes-ok",
+    "verified_count": 7,
+    "supports_mode": "enriched-verified",
+    "note": "Dropped stale /183/Building-Permits CivicEngage ID (resolves to Facilities-Fleet). Added verified MLT Permits hub, Building Permits, eTRAKiT, and Snohomish Online Permitting URLs."
+  }
+}

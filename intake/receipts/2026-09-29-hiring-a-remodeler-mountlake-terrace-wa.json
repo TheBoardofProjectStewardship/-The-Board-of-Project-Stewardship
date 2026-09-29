@@ -1,0 +1,16 @@
+{
+  "submission_id": "2026-09-29-hiring-a-remodeler-mountlake-terrace-wa",
+  "idempotency_key": "sha256:8fb418c8355295e8b07565d361e074566629e9e6be5146243caa1b626fc51f62",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-09-29T17:32:12Z",
+  "outputs": [
+    "posts/2026-09-29-hiring-a-remodeler-mountlake-terrace-wa.md",
+    "posts/2026-09-29-hiring-a-remodeler-mountlake-terrace-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 56
+}
