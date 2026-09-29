@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-09-29-hiring-a-remodeler-mountlake-terrace-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-09-29T17:31:07Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Hiring a Remodeler Mountlake Terrace WA \u2014 Vetting Pros, Local Permit Tips & Design-Build Benefits",
+    "date": "2026-09-29",
+    "slug": "hiring-a-remodeler-mountlake-terrace-wa",
+    "description": "Hiring a remodeler in Mountlake Terrace: verify L&I credentials, use the City eTRAKiT permit portal, watch Snohomish County jurisdiction, and compare design-build delivery for mid-century homes.",
+    "category": "Hiring Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "idempotency_key": "sha256:8fb418c8355295e8b07565d361e074566629e9e6be5146243caa1b626fc51f62"
+}

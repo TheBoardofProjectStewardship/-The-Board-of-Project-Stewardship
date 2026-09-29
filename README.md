@@ -49,6 +49,10 @@ Base: `https://boardofprojectstewardship.com/`
 | `stamp-of-trust/` | Stamp of Trust credential |
 | `blog/rss.xml` | Blog RSS feed |
 | `404.html` | Branded Board 404 |
+| `posts/2026-09-29-hiring-a-remodeler-mountlake-terrace-wa.html` | Hiring a Remodeler Mountlake Terrace WA — Vetting Pros, Local Permit Tips & Design-Build Benefits |
+| `posts/2026-09-28-edmonds-area-remodel-permit-news-2026-09-28.html` | Edmonds-Area Homeowner News, September 28, 2026: Esperance Annexation, Budgets, and Utility Rates |
+| `posts/2026-09-28-home-addition-mukilteo-wa.html` | Home Addition Mukilteo WA — Going Up or Out on a Coastal Lot: City Permits, Tree Rules, and Weatherproof-First Sequencing |
+| `posts/2026-09-28-second-story-addition-woodinville-wa.html` | Second-Story Addition Woodinville WA — Stay-in-Home Sequencing, Permits & Weatherproof-First |
 | `posts/2026-09-27-bathroom-remodel-mill-creek-wa.html` | Bathroom Remodel Mill Creek WA — Moisture, OpenGov Permits & Licensed Pros |
 | `posts/2026-09-26-kitchen-remodel-kenmore-wa.html` | Kitchen Remodel Kenmore WA — Layout, Permits & Moisture-Smart Specs |
 | `posts/2026-09-25-home-addition-mountlake-terrace-wa.html` | Home Addition Mountlake Terrace WA — Setbacks, Stormwater & Design-Build Sequencing |
