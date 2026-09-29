@@ -1,0 +1,83 @@
+{
+  "producer": "hermes",
+  "sources": [
+    {
+      "url": "https://www.edmondswa.gov/government/departments/development_services/planning_division/e_s_p_e_r_a_n_c_e_a_n_n_e_x_a_t_i_o_n",
+      "title": "City of Edmonds \u2014 Esperance Annexation",
+      "retrieved": "2026-09-28",
+      "supports": "Area size and population, county jurisdiction, Aug. 18 council direction, July 1 2028 goal, Sept. 30 meeting details"
+    },
+    {
+      "url": "https://myedmondsnews.com/2026/09/city-of-edmonds-esperance-neighborhood-alliance-to-host-community-conversation-on-annexation/",
+      "title": "My Edmonds News \u2014 community conversation on annexation",
+      "retrieved": "2026-09-28",
+      "supports": "Sept. 30 community conversation coverage"
+    },
+    {
+      "url": "https://www.heraldnet.com/2026/09/20/esperance-residents-invited-to-annexation-conversation/",
+      "title": "Everett Herald \u2014 Esperance residents invited to annexation conversation",
+      "retrieved": "2026-09-28",
+      "supports": "Two-phase plan, first-phase population, interlocal agreement path"
+    },
+    {
+      "url": "https://www.heraldnet.com/2026/08/18/edmonds-takes-step-forward-in-esperance-annexation/",
+      "title": "Everett Herald \u2014 Edmonds takes step forward in Esperance annexation",
+      "retrieved": "2026-09-28",
+      "supports": "Resolution requesting no county zoning changes to area two before July 1 2028"
+    },
+    {
+      "url": "https://snohomishcountywa.gov/3920/Online-Permitting",
+      "title": "Snohomish County PDS \u2014 Online Permitting",
+      "retrieved": "2026-09-28",
+      "supports": "County permit portal for unincorporated parcels"
+    },
+    {
+      "url": "https://snohomishcountywa.gov/2908/Residential",
+      "title": "Snohomish County PDS \u2014 Residential Building Permits",
+      "retrieved": "2026-09-28",
+      "supports": "Structural, site, and drainage plan submittal items"
+    },
+    {
+      "url": "https://edmondswa.gov/services/permit_assistance/apply_for_a_permit",
+      "title": "City of Edmonds \u2014 Apply for a Permit",
+      "retrieved": "2026-09-28",
+      "supports": "City permit starting point"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/",
+      "title": "Washington L&I \u2014 Electrical permits, fees, and inspections",
+      "retrieved": "2026-09-28",
+      "supports": "Electrical permit authority check"
+    },
+    {
+      "url": "https://myedmondsnews.com/2026/09/rosen-to-present-budget-oct-5-and-civic-roundtable-invites-to-you-to-stay-and-chat-after/",
+      "title": "My Edmonds News \u2014 Rosen to present budget Oct. 5",
+      "retrieved": "2026-09-28",
+      "supports": "Budget presentation time and place"
+    },
+    {
+      "url": "https://lynnwoodtimes.com/2026/09/25/utility-tax/",
+      "title": "Lynnwood Times \u2014 Lynnwood council to weigh skipping 2027 utility rate hikes",
+      "retrieved": "2026-09-28",
+      "supports": "Budget hearing schedule and utility rate freeze ordinance"
+    },
+    {
+      "url": "https://www.shorelineareanews.com/2026/09/long-term-sidewalk-closure-in-front-of.html",
+      "title": "Shoreline Area News \u2014 Long-term sidewalk closure in front of Kenmore Park-and-Ride",
+      "retrieved": "2026-09-28",
+      "supports": "Closure dates, hours, detours"
+    },
+    {
+      "url": "https://www.soundtransit.org/system-expansion/stride-bus-rapid-transit",
+      "title": "Sound Transit \u2014 Stride bus rapid transit",
+      "retrieved": "2026-09-28",
+      "supports": "Program context"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "Washington L&I Verify",
+      "retrieved": "2026-09-28",
+      "supports": "Contractor verification"
+    }
+  ]
+}

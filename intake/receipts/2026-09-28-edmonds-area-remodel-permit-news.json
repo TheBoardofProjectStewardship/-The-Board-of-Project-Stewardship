@@ -1,0 +1,16 @@
+{
+  "submission_id": "2026-09-28-edmonds-area-remodel-permit-news",
+  "idempotency_key": "sha256:7b4e341c545586d964ff7e052c1910cc48f35adedfc0008194e4843318241925",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-09-29T03:10:13Z",
+  "outputs": [
+    "posts/2026-09-28-edmonds-area-remodel-permit-news-2026-09-28.md",
+    "posts/2026-09-28-edmonds-area-remodel-permit-news-2026-09-28.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 54
+}

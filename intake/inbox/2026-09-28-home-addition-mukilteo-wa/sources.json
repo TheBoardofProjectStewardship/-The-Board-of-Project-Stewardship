@@ -1,0 +1,35 @@
+{
+  "producer": "hermes",
+  "sources": [
+    {
+      "url": "https://mukilteowa.gov/207/Building-Permits",
+      "title": "City of Mukilteo \u2014 Building Permits",
+      "retrieved": "2026-09-28",
+      "supports": "Digital submittals, inspection days and notice, L&I electrical, pre-application meeting, payment scam notice, City Hall hours"
+    },
+    {
+      "url": "https://ci-mukilteo-wa.smartgovcommunity.com/Public/Home",
+      "title": "City of Mukilteo \u2014 Online Permit Portal",
+      "retrieved": "2026-09-28",
+      "supports": "Permit application portal"
+    },
+    {
+      "url": "https://mukilteowa.gov/210/Do-You-Need-a-Permit-for-That",
+      "title": "City of Mukilteo \u2014 Do You Need a Permit for That?",
+      "retrieved": "2026-09-28",
+      "supports": "Tree removal permit thresholds"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/",
+      "title": "Washington L&I \u2014 Electrical permits, fees, and inspections",
+      "retrieved": "2026-09-28",
+      "supports": "Electrical permits via L&I"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "Washington L&I Verify",
+      "retrieved": "2026-09-28",
+      "supports": "Contractor verification"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "submission_id": "2026-09-28-home-addition-mukilteo-wa",
+  "idempotency_key": "sha256:ee14aa77afd6dbca92258e41fc93de380b807dd726693fcdaca28a05edb0e934",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-09-29T03:10:13Z",
+  "outputs": [
+    "posts/2026-09-28-home-addition-mukilteo-wa.md",
+    "posts/2026-09-28-home-addition-mukilteo-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 55
+}
