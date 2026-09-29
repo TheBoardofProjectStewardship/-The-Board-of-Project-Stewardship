@@ -14,7 +14,7 @@ slug: "hiring-tile-contractor-edmonds"
 
 Tile is the visible finish people remember, but in Edmonds baths and kitchens it is only as good as the assembly beneath. Hiring a tile contractor means probing prep standards, not just looking at Instagram niches.
 
-![Illustrative editorial photo — large-format porcelain tile dry layout with laser level before thinset in an Edmonds bath](../assets/images/posts/2026-09-01-tile-edmonds-1.webp)
+![Illustrative: Edmonds, Washington — large porcelain tile laid in an empty bathroom, spacers still in a few joints — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-01-hiring-tile-contractor-edmonds-2.webp)
 
 ## Local context
 

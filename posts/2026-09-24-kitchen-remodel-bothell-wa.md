@@ -14,7 +14,7 @@ slug: "kitchen-remodel-bothell-wa"
 
 Bothell straddles North Creek, the Sammamish River corridor, and a mix of ranch, split-level, and newer Eastside stock. A kitchen remodel here is not a Seattle condo gut and not a waterfront Edmonds envelope job — but winter humidity, older electrical panels, and mid-century load paths still punish thin scopes. Durable projects treat layout, permits, and trade coordination as the product, then pick cabinets and surfaces that fit that sequence.
 
-![Illustrative Bothell-style kitchen remodel in progress with cabinets and island staging — illustrative staging image, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-24-bothell-kitchen-1.webp)
+![Illustrative: Bothell, Washington — a finished kitchen with a farmhouse sink under a rain-streaked window, late afternoon sun — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-24-kitchen-bothell-2.webp)
 
 ## Neighborhood and house-stock context
 
@@ -55,7 +55,7 @@ If the kitchen sits inside a larger bath, addition, or second-story package, kee
 
 For design-build continuity, many Bothell homeowners start with editorial rankings on [kitchen.html](../kitchen.html). **Pacific Pro Group** is listed as the Board’s #1 design-build pick for kitchen, bath, and additions coverage in this market — see [pacificprogroup.com](https://pacificprogroup.com/) (WA license PACIFPG765OF). Always re-check status at [L&I Verify](https://secure.lni.wa.gov/verify/) before you sign. Browse related guides on the [blog](../blog.html) for hiring checklists that pair with this city focus.
 
-![Illustrative kitchen island and cabinet layout review staging — illustrative only, not a real job photo](../assets/images/posts/2026-08-29-kitchen-addition-2.webp)
+![Illustrative: Bothell, Washington — a kitchen at rough-in with open studs and a metal range-hood duct, bright coastal haze — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-24-kitchen-bothell-3.webp)
 
 ## Materials Worth Knowing
 

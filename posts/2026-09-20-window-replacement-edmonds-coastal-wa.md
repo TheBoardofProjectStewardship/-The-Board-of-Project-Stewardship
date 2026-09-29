@@ -14,7 +14,7 @@ slug: "window-replacement-edmonds-coastal-wa"
 
 Edmonds sits where Puget Sound weather meets older ranch and mid-century stock. Wind-driven rain, salt-adjacent air on the water side of Highway 99, and decades of paint and caulk cycles mean a “simple window swap” is often a building-envelope project. The durable jobs treat rough openings, sill pans, and house-wrap integration as the product — not only the sash that shows from the street.
 
-![Illustrative Pacific Northwest coastal home exterior staged for window replacement — Illustrative editorial photo — not a project photograph](../assets/images/posts/2026-09-20-edmonds-windows-1.webp)
+![Illustrative: Edmonds, Washington — interior trim at a corner window in an empty coastal living room, cool north light — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-20-window-edmonds-coastal-3.webp)
 
 ## Neighborhood and house-stock context
 
@@ -28,7 +28,7 @@ King and Snohomish coastal weather punishes reverse-lapped flashing and missing 
 
 Edmonds building, engineering, and land-use applications go through the regional [MyBuildingPermit](https://mybuildingpermit.com/) portal; the City’s permit desk no longer accepts paper packages. Confirm whether your replacement is like-for-like OTC or triggers plan review when openings change size, structure, or egress. Put permit ownership, inspection holds, and temporary living plans in writing before the first sash comes out. Cross-check [trades.html](../trades.html) and [siding.html](../siding.html) when trim or cladding must be disturbed to reach the WRB.
 
-![Illustrative window rough opening with weather-resistive barrier and flashing tape detail — illustrative only, not a real job photo](../assets/images/posts/2026-09-20-edmonds-windows-2.webp)
+![Illustrative: Edmonds, Washington — a corner window in an empty coastal living room, bright coastal haze — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-20-window-edmonds-coastal-2.webp)
 
 ## Process video: flashing fundamentals
 

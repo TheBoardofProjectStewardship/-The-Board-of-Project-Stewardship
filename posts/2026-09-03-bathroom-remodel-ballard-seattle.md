@@ -14,7 +14,7 @@ slug: "bathroom-remodel-ballard-seattle"
 
 Ballard bathroom remodels often convert tubs to showers, steal inches from closets, or rebuild upstairs baths above living spaces where leak risk is existential.
 
-![Illustrative editorial photo — Ballard Seattle bathroom mid-remodel with open studs and new shower drain rough-in](../assets/images/posts/2026-09-03-ballard-bath-1.webp)
+![Illustrative: Ballard, Seattle — a bath with a skylight and a stone bench in the shower, detail from the doorway — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-03-bathroom-ballard-2.webp)
 
 ## Local context
 

@@ -14,7 +14,7 @@ slug: "kitchen-remodel-lynnwood-wa"
 
 Lynnwood’s housing mix includes suburban two-stories, townhomes, and updated ranches. Kitchen remodels here frequently chase storage, homework seating, and durability for busy households near Alderwood and the freeway corridors.
 
-![Illustrative editorial photo — Lynnwood kitchen remodel mid-demolition with cabinets removed](../assets/images/posts/2026-09-09-lynnwood-kitchen-1.webp)
+![Illustrative: Lynnwood, Washington — a kitchen rough-in with open studs and a metal hood duct, from the side yard — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-09-kitchen-lynnwood-2.webp)
 
 
 ## Local context

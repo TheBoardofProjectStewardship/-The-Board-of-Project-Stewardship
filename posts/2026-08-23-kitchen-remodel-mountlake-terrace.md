@@ -14,7 +14,7 @@ slug: "kitchen-remodel-mountlake-terrace"
 
 Mountlake Terrace’s residential fabric supports practical kitchen remodels oriented around family circulation, storage, and durability.
 
-![Illustrative editorial photo — not a project photograph; Pacific Northwest kitchen remodel with cabinet boxes and island dry-fit](../assets/images/posts/2026-08-23-mlt-kitchen-1.webp)
+![Illustrative: Mountlake Terrace, Washington — dark green cabinets, a stone island, and north light, from the side yard — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-23-kitchen-mountlake-terrace-2.webp)
 
 ## Local context
 

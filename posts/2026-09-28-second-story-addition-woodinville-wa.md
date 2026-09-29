@@ -14,7 +14,7 @@ slug: "second-story-addition-woodinville-wa"
 
 Woodinville sits at the edge of the Sammamish Valley — wine-country tourism along SR-202 and Woodinville-Redmond Road, equestrian and larger-lot pockets toward Hollywood Hill and the rural edges, and denser neighborhoods closer to Downtown and the Tourist District. A second-story addition here is not a Seattle bluff envelope job and not an Edmonds waterfront salt-air rebuild — but inland Eastside winters still bring long wet seasons that punish an open roof deck, thin temporary cover, and stair shafts left unprotected overnight. Durable scopes treat structure, weatherproof-first sequencing, Accela (or county) permit ownership, and stay-in-home phasing as the product, then pick upstairs layouts that fit that critical path.
 
-![Illustrative Pacific Northwest second-story framing with temporary weather protection — illustrative staging image, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-28-woodinville-second-story-1.webp)
+![Illustrative: Woodinville, Washington — wall sheathing wrapped in a weather barrier during a second-story addition, rainy daylight — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-28-second-story-addition-woodinville-2.webp)
 
 ## Neighborhood and lot context
 

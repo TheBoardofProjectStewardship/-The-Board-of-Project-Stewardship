@@ -14,7 +14,7 @@ slug: "kitchen-remodel-greenwood-seattle"
 
 Greenwood and nearby North Seattle streets feature kitchens ready for better circulation, daylight, and durability. Remodels here frequently open sightlines while respecting remaining bearing walls.
 
-![Illustrative editorial photo — not a project photograph; Greenwood kitchen layout with improved circulation and task lighting](../assets/images/posts/2026-08-14-greenwood-kitchen-1.webp)
+![Illustrative: Greenwood, Seattle — a farmhouse sink under a wet window and sage cabinets, from the side yard — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-14-kitchen-greenwood-2.webp)
 
 ## Local context
 

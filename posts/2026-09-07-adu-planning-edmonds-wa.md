@@ -14,7 +14,7 @@ slug: "adu-planning-edmonds-wa"
 
 Accessory dwelling units can add rental flexibility, multigenerational housing, or a workspace with a bath — but Edmonds ADU planning starts with what the lot and utilities can support.
 
-![Illustrative editorial photo — Edmonds backyard ADU foundation and early framing](../assets/images/posts/2026-09-07-edmonds-adu-1.webp)
+![Illustrative: Edmonds, Washington — a small backyard cottage with cedar siding and a covered porch among trees — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-07-adu-edmonds-2.webp)
 
 
 ## Local Edmonds context

@@ -14,7 +14,7 @@ slug: "pnw-bathroom-waterproofing-essentials"
 
 Pacific Northwest bathrooms fail predictably when water has nowhere honest to go. Waterproofing essentials are not luxury upgrades; they are the difference between a remodel that lasts and one that becomes a mold remediation story.
 
-![Illustrative editorial photo — not a project photograph; PNW bathroom waterproofing membrane work before tile cover-up](../assets/images/posts/2026-08-18-waterproofing-1.webp)
+![Illustrative: Pacific Northwest — a window rough opening sealed with flashing tape — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-18-pnw-bathroom-waterproofing-3.webp)
 
 ## Core principles
 
@@ -24,7 +24,7 @@ Pacific Northwest bathrooms fail predictably when water has nowhere honest to go
 4. **Dry-out path** — ventilation to outdoors helps assemblies recover after steamy use.
 5. **Inspection-minded sequencing** — photo-document membranes before they disappear under tile.
 
-![Illustrative editorial photo — not a project photograph; Magnolia-area bath wet-wall prep context before finish cover — illustrative only](../assets/images/posts/2026-08-18-waterproofing-4.webp)
+![Illustrative: Pacific Northwest — a window opening sealed with flexible flashing tape, rainy daylight — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-18-pnw-bathroom-waterproofing-4.webp)
 
 ## Common failure points
 
@@ -89,7 +89,7 @@ If three bids look similar until you ask about membranes, the cheap bid often om
 
 Pair this guide with local bath hiring context on [bathrooms.html](../bathrooms.html) and trade context on [trades.html](../trades.html).
 
-![Illustrative editorial photo — not a project photograph; walk-in shower wet-area finish context — design preview only](../assets/images/posts/2026-08-18-waterproofing-6.webp)
+![Illustrative: the Pacific Northwest — shower walls covered in waterproof membrane with taped seams — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-18-pnw-bathroom-waterproofing-5.webp)
 
 ## Putting it together for homeowners
 

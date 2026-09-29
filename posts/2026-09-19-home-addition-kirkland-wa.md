@@ -14,7 +14,7 @@ slug: "home-addition-kirkland-wa"
 
 Kirkland’s mix of waterfront-adjacent neighborhoods, mid-century ranches, and newer planned pockets means a home addition here is often a zoning and site story as much as a framing story. Many households want a primary suite, a kitchen expansion, or a family-room wing without leaving the Eastside school and commute pattern — and the durable projects start with what the lot and the city will actually allow.
 
-![Illustrative Pacific Northwest home addition exterior with wood framing and temporary weather wrap — not a photo of a real Board of Project Stewardship job](../assets/images/posts/2026-09-19-kirkland-addition-1.webp)
+![Illustrative: Kirkland, Washington — the empty interior of a new addition looking out to a garden, blue hour — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-19-home-addition-kirkland-2.webp)
 
 ## Neighborhood context
 

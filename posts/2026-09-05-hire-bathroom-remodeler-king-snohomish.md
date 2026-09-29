@@ -14,7 +14,7 @@ slug: "hire-bathroom-remodeler-king-snohomish"
 
 Hiring a bathroom remodeler in King and Snohomish Counties means evaluating moisture detailing skill as much as aesthetics. The region’s climate exposes weak pans and poor exhaust quickly.
 
-![Illustrative King/Snohomish bathroom remodel hero — Illustrative editorial photo — not a project photograph](../assets/images/posts/2026-09-05-hire-bath-1.webp)
+![Illustrative: Snohomish County, Washington — a bathroom floor of charcoal porcelain, vanity in white oak — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-05-hire-bathroom-remodeler-king-snohomish-3.webp)
 
 ## What to look for
 
@@ -24,7 +24,7 @@ Hiring a bathroom remodeler in King and Snohomish Counties means evaluating mois
 - Written specs for membrane type, pan method, niche detailing, and fan model/termination
 - Realistic schedule with rough-in and inspection gates
 
-![Illustrative editorial photo — finished walk-in shower and floating vanity for hiring portfolio comparison](../assets/images/posts/2026-09-05-hire-bath-2.webp)
+![Illustrative: Snohomish County, Washington — a corner soaking tub and a pebble floor at the threshold, detail from the doorway — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-05-hire-bathroom-remodeler-king-snohomish-4.webp)
 
 ## Interview questions that matter
 

@@ -14,7 +14,7 @@ slug: "home-addition-bothell-wa"
 
 Bothell spans varied neighborhoods from river-adjacent areas to hillside and suburban tracts. Additions here include family-room bump-outs, primary suites, and second stories.
 
-![Illustrative editorial photo — not a project photograph; Bothell home addition foundation forms and rebar on a Pacific Northwest lot](../assets/images/posts/2026-08-20-bothell-addition-1.webp)
+![Illustrative: Bothell, Washington — plywood subfloor of an addition with no furniture, looking toward the yard — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-20-home-addition-bothell-3.webp)
 
 ## Local context
 
@@ -26,7 +26,7 @@ Confirm building and site requirements with the [City of Bothell](https://www.bo
 
 PNW rain makes flashing at the old-to-new joint critical. Energy code applies to new conditioned space. Electrical, plumbing, and mechanical permits follow when systems expand. Build review timelines into expectations.
 
-![Illustrative editorial photo — not a project photograph; framed Bothell home addition connecting to an existing ranch with roof dry-in in progress](../assets/images/posts/2026-08-20-bothell-addition-2.webp)
+![Illustrative: Bothell, Washington — a new concrete stem wall and gravel footing beside the existing house, from the side yard — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-20-home-addition-bothell-4.webp)
 
 ## Process guidance
 

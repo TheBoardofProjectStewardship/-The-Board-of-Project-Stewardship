@@ -14,7 +14,7 @@ slug: "edmonds-area-remodel-permit-news-2026-09-28"
 
 This is the Board of Project Stewardship's local news roundup for homeowners in Edmonds, Esperance, and the nearby South Snohomish County and north King County cities. We only pick stories that could affect how you plan, permit, or schedule a remodel. We link every original report so you can read the details yourself, and we note anything that is still undecided.
 
-![Illustrative residential street of Pacific Northwest craftsman homes. Illustrative image only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-07-edmonds-adu-2.webp)
+![Illustrative: Edmonds, Washington — bungalows seen from a mossy side yard in the rain — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-28-edmonds-permit-news-3.webp)
 
 ## Esperance annexation: what homeowners should know before they apply for a permit
 
@@ -30,7 +30,7 @@ The first public meeting is a "Community Conversation on Annexation." The city a
 
 In Lynnwood, the [Lynnwood Times reported](https://lynnwoodtimes.com/2026/09/25/utility-tax/) that the Sept. 28 council business meeting opened the first of two required public hearings on the 2027–28 preliminary budget. The second hearing is scheduled for Nov. 9, and adoption is targeted for Nov. 23. The same agenda included an ordinance to freeze 2027 water, sewer, and surface-water rates at 2026 levels and to reset 2028 rates to the levels that had been scheduled for 2027. City staff told the council the utilities can absorb the pause. When we published, we had not seen a report on how the vote went, so check the city's official record before you rely on it.
 
-![Illustrative early-stage residential foundation forms and framing on a Pacific Northwest lot. Illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-07-edmonds-adu-1.webp)
+![Illustrative: Edmonds, Washington — early foundation forms and framing on a residential lot, rainy daylight — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-28-edmonds-permit-news-4.webp)
 
 ## Kenmore: long-term sidewalk closure near SR 522
 
@@ -50,7 +50,7 @@ https://www.youtube.com/watch?v=ca-1Xbrh8Tc
 
 Board planning pages that go with this roundup: [Edmonds](../edmonds.html), [Lynnwood](../lynnwood.html), [permits](../permits.html), [verify a contractor](../verify-contractor.html), and [additions](../additions.html).
 
-![Illustrative Pacific Northwest craftsman-style home exterior. Illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-12-edmonds-addition-permit-1.webp)
+![Illustrative: Edmonds, Washington — a craftsman house with a deep porch and a fern garden — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-28-edmonds-permit-news-5.webp)
 
 ## Materials Worth Knowing
 

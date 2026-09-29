@@ -14,7 +14,7 @@ slug: "home-addition-mukilteo-wa"
 
 Mukilteo sits on the bluffs above Possession Sound. Many lots have water or mountain views, and many also have slopes, mature trees, and steady marine weather. That combination pushes homeowners toward expanding the house they have instead of moving. A durable addition here treats jurisdiction, site constraints, and weatherproof-first sequencing as the core of the project and picks finishes after that. This guide takes the Board of Project Stewardship's "another story" approach: compare going up with going out honestly, then write the permit path and the dry-in plan down before demolition.
 
-![Illustrative Pacific Northwest home with an addition in framing beside the existing house. Illustrative image only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-12-edmonds-addition-permit-3.webp)
+![Illustrative: Mukilteo, Washington — addition wall framing beside the existing house, overcast coastal light — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-28-home-addition-mukilteo-3.webp)
 
 ## Going up or going out on a Mukilteo lot
 
@@ -39,7 +39,7 @@ For city parcels, the [Building Permits page](https://mukilteowa.gov/207/Buildin
 
 Mukilteo's [Do You Need a Permit for That?](https://mukilteowa.gov/210/Do-You-Need-a-Permit-for-That) page spells out the tree rules. Removing any tree from a wetland or stream buffer, a steep slope over 40 percent, or a Native Growth Protection Area requires a permit, whatever its size. Outside those protected areas, removing an evergreen 8 inches or more in diameter at breast height, or a deciduous tree 12 inches or more, also requires a permit. Diameter is measured 4.5 feet above the ground. Tree topping is prohibited. For an addition that reaches toward the trees, account for these rules in the site plan and the schedule before you commit to a footprint.
 
-![Illustrative addition framing with a temporary roof tarp on a Pacific Northwest home near the water. Illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-12-edmonds-addition-permit-4.webp)
+![Illustrative: Mukilteo, Washington — a temporary roof tarp over an open addition, marine clouds — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-28-home-addition-mukilteo-4.webp)
 
 ## Designing for marine weather: weatherproof-first
 
@@ -62,7 +62,7 @@ https://www.youtube.com/watch?v=I96DNJSsYxI
 
 Additions in occupied homes need a written plan for dust zones, a working bathroom, and noisy work hours. If the upper floor or a main wall will be open, temporary housing for part of the schedule is sometimes the calmer choice. Ask each bidder to explain in writing how they separate the work area, protect the existing floors, and handle the days the roof is open.
 
-![Illustrative Pacific Northwest two-story home with weather protection wrapped around new work. Illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-24-shoreline-addition-1.webp)
+![Illustrative: Mukilteo, Washington — a two-story house with weather barrier on the new upper walls — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-28-home-addition-mukilteo-5.webp)
 
 ## Materials Worth Knowing
 

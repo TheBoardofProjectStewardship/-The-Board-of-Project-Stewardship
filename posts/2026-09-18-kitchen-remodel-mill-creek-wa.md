@@ -14,7 +14,7 @@ slug: "kitchen-remodel-mill-creek-wa"
 
 Mill Creek’s mix of planned neighborhoods, cul-de-sac lots, and mid-1990s through 2010s housing stock means kitchen remodels here often start with circulation and storage — not only cabinets. Many homes already have open dining connections; the real work is making the work triangle, pantry, and ventilation match how the household cooks today.
 
-![Illustrative Pacific Northwest kitchen remodel in progress with cabinet boxes and island dry-fit — not a photo of a real Board of Project Stewardship job](../assets/images/posts/2026-09-18-mill-creek-kitchen-1.webp)
+![Illustrative: Mill Creek, Washington — a kitchen with a long counter and a tile backsplash after a rain shower — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-18-kitchen-mill-creek-2.webp)
 
 ## Neighborhood context
 

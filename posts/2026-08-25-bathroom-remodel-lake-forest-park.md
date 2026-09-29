@@ -14,7 +14,7 @@ slug: "bathroom-remodel-lake-forest-park"
 
 Bathroom remodels here often update primary baths in wooded mid-century and later homes. Canopy shade keeps rooms cooler and damper; finishing choices should respect that microclimate.
 
-![Illustrative editorial photo — not a project photograph; Pacific Northwest bathroom remodel with shower waterproofing underway under soft canopy light](../assets/images/posts/2026-08-25-lfp-bath-1.webp)
+![Illustrative: Lake Forest Park, Washington — a walk-in shower with large pale tile and a linear drain, empty, low viewpoint — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-25-bathroom-lake-forest-park-2.webp)
 
 ## Local context
 

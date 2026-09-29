@@ -14,7 +14,7 @@ slug: "bathroom-remodel-magnolia-wa"
 
 Magnolia sits on a bluff between Elliott Bay and the ship canal, so bathroom remodels here are not generic “Seattle interiors.” Salt-tinged air, wind-driven rain, and mid-century homes with aging supply and drain lines shape what lasts. A beautiful vanity fails if the wet wall, shower pan, and exhaust path were treated as afterthoughts.
 
-![Illustrative Magnolia-style bathroom remodel with shower waterproofing membrane in progress — not a photo of a real Board of Project Stewardship job](../assets/images/posts/2026-09-17-magnolia-bathroom-1.webp)
+![Illustrative: Magnolia, Seattle — a wood vanity and a wide mirror reflecting only the empty room — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-17-bathroom-magnolia-4.webp)
 
 ## Neighborhood and coastal context
 
@@ -33,7 +33,7 @@ Practical sequencing that works in Magnolia:
 3. Size exhaust to outdoor termination with a quiet, appropriately rated fan.
 4. Submit trade permits before finish selections freeze the rough-in.
 
-![Illustrative close-up of bathroom waterproofing membrane at shower curb and niche — illustrative only, not a real job photo](../assets/images/posts/2026-09-17-magnolia-bathroom-2.webp)
+![Illustrative: Magnolia, Seattle — a bathroom vanity and a wide mirror reflecting only the empty room, blue hour — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-17-bathroom-magnolia-2.webp)
 
 ## Process video: wet-wall waterproofing fundamentals
 
@@ -47,7 +47,7 @@ https://www.youtube.com/watch?v=wAKfLIN79pY
 
 Prioritize cement board or foam-board systems rated for wet areas, continuous waterproofing at niches and benches, and slopes that actually drain. Large-format tile looks clean but demands flat substrates; pebble floors need careful pitch. Choose paints and caulks rated for humid rooms. If you keep a tub, specify a solid surround detail — not just adhesive panels over questionable framing.
 
-![Illustrative finished primary bathroom with walk-in shower and floating vanity — illustrative only, not a real job photo](../assets/images/posts/2026-09-17-magnolia-bathroom-3.webp)
+![Illustrative: Magnolia, Seattle — a bathroom at waterproofing stage, orange membrane on the walls — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-17-bathroom-magnolia-5.webp)
 
 ![Illustrative Magnolia-style shower with blue sheet waterproofing membrane, sealed niche, and valve penetrations before tile — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-17-magnolia-bathroom-4.webp)
 

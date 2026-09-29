@@ -14,7 +14,7 @@ slug: "bathroom-remodel-lynnwood-wa"
 
 Lynnwood bathroom remodels often enlarge showers, refresh kids’ baths for durability, or rebuild primary baths with better storage. The climate does not forgive weak pans or attic-terminated fans.
 
-![Illustrative editorial photo — Lynnwood bath remodel shower waterproofing membrane](../assets/images/posts/2026-09-08-lynnwood-bath-1.webp)
+![Illustrative: Lynnwood, Washington — a tiled shower niche, empty, with a wood-slat ceiling, detail from the doorway — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-08-bathroom-lynnwood-2.webp)
 
 
 ## Neighborhood context

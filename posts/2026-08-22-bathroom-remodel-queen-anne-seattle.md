@@ -14,7 +14,7 @@ slug: "bathroom-remodel-queen-anne-seattle"
 
 Queen Anne bathroom projects range from classic home powder rooms to primary suites with view exposure. Steep streets and limited parking shape contractor logistics as much as tile choice.
 
-![Illustrative editorial photo — not a project photograph; Queen Anne Seattle bathroom remodel with careful containment on an upstairs wet wall](../assets/images/posts/2026-08-22-queen-anne-bath-1.webp)
+![Illustrative: Queen Anne, Seattle — a compact bath with a glass shower and a frosted garden window, from the side yard — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-22-bathroom-queen-anne-3.webp)
 
 ## Local context
 
@@ -26,7 +26,7 @@ Confirm plumbing and electrical permit expectations with [Seattle Department of 
 
 Seattle dampness plus hot showers demands membranes, slopes, and outdoor exhaust. Plumbing and electrical permits are typical; structural changes pull building review. Schedule inspections into the critical path.
 
-![Illustrative editorial photo — not a project photograph; shower curb membrane and niche waterproofing detail in a hillside Seattle bath](../assets/images/posts/2026-08-22-queen-anne-bath-2.webp)
+![Illustrative: Queen Anne, Seattle — a walk-in shower with large pale tile and a linear drain, empty, detail from the doorway — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-22-bathroom-queen-anne-4.webp)
 
 ## Materials and process
 
@@ -38,7 +38,7 @@ Illustrative process clip (editorial wet-area staging — not footage of a live 
 
 [Watch the short process clip](../assets/videos/posts/2026-09-bath-process-shared.mp4)
 
-![Illustrative editorial photo — not a project photograph; finished primary bath with walk-in shower and vanity — design preview only](../assets/images/posts/2026-08-22-queen-anne-bath-3.webp)
+![Illustrative: Queen Anne, Seattle — a bathroom at waterproofing stage, orange membrane on the walls, detail from the doorway — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-22-bathroom-queen-anne-5.webp)
 
 Board rankings on [bathrooms.html](../bathrooms.html) place **Pacific Pro Group** at #1 for bathrooms in this editorial set — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with [trades.html](../trades.html) when plumbing or electrical is in scope, and the [blog](../blog.html) for related Seattle bath posts.
 
