@@ -14,7 +14,7 @@ slug: "bathroom-remodel-lake-forest-park-wa"
 
 Lake Forest Park sits between Shoreline and Kenmore along the northeast shore of Lake Washington, with a deep canopy, winding residential streets, and a housing stock that mixes mid-century ranches with later additions. A bathroom remodel here is usually an interior wet-room upgrade, but the City’s permit path, tree and right-of-way rules, and cool damp winters still shape how durable the job will be. Treat membrane continuity, outdoor exhaust, and the iWorQ portal as part of the product — then pick fixtures and tile that fit that sequence.
 
-![Illustrative: Lake Forest Park, Washington — a bathroom vanity and mirror in a quiet residential interior, soft morning light — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-30-lfp-bath-1.webp)
+![Illustrative: Lake Forest Park, Washington — a tiled shower niche with linen and ceramic bottles, soft morning light — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-30-lfp-bath-4.webp)
 
 ## Neighborhood and lot context
 
