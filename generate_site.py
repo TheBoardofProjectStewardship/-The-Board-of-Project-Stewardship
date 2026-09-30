@@ -4216,6 +4216,61 @@ def build_kb_page(kind: str, firms: list[dict]) -> str:
     ]
     cards = "\n\n".join(firm_card(f) for f in firms)
     _hero_rel, _hero_alt = DIR_HERO_IMAGES.get(kind, (None, ""))
+    photo_strip = (
+        _hub_photo_strip(
+            [
+                (
+                    "assets/images/posts/2026-09-26-kenmore-kitchen-1.webp",
+                    "Illustrative Pacific Northwest kitchen remodel with island and natural light",
+                    "Kitchen remodel context (illustrative)",
+                    "./kitchen-remodel-planning.html",
+                    "Kitchen remodel planning",
+                ),
+                (
+                    "assets/images/posts/2026-09-24-bothell-kitchen-2.webp",
+                    "Illustrative kitchen cabinet and finish selection context for a Bothell-area remodel",
+                    "Cabinetry / finishes context (illustrative)",
+                    "./kitchen-cost-factors.html",
+                    "Kitchen cost factors",
+                ),
+                (
+                    "assets/images/posts/2026-08-21-queen-anne-kitchen-1.webp",
+                    "Illustrative Queen Anne kitchen layout planning for Seattle remodels",
+                    "Layout planning context (illustrative)",
+                    "./materials.html",
+                    "Materials index",
+                ),
+            ],
+            title="Kitchen field context (illustrative)",
+        )
+        if is_kitchen
+        else _hub_photo_strip(
+            [
+                (
+                    "assets/images/posts/2026-09-30-lfp-bath-1.webp",
+                    "Illustrative bathroom vanity and residential bath interior for a Lake Forest Park remodel",
+                    "Bath remodel context (illustrative)",
+                    "./bathroom-waterproofing-guide.html",
+                    "Bathroom waterproofing guide",
+                ),
+                (
+                    "assets/images/posts/2026-09-27-mill-creek-bath-2.webp",
+                    "Illustrative Mill Creek bathroom layout and wet-area sequencing",
+                    "Wet-area sequencing (illustrative)",
+                    "./bathroom-cost-factors.html",
+                    "Bathroom cost factors",
+                ),
+                (
+                    "assets/images/posts/2026-08-18-waterproofing-2.webp",
+                    "Illustrative shower wet-wall waterproofing membrane for PNW baths",
+                    "Waterproofing membrane (illustrative)",
+                    "./coastal-waterproofing.html",
+                    "Coastal waterproofing checklist",
+                ),
+            ],
+            title="Bathroom field context (illustrative)",
+        )
+    )
     body = f"""{hero(
         f"{GEO_KICKER_HTML} · Updated {YEAR}",
         f'Top {label} Contractors<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">King County, Snohomish County &amp; Seattle</span>',
@@ -4226,6 +4281,7 @@ def build_kb_page(kind: str, firms: list[dict]) -> str:
     )}
   <div class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
 {how_we_rank_block(f' Also see <a href="./additions.html" class="text-secondary hover:underline">home additions</a>, <a href="./trades.html" class="text-secondary hover:underline">trade directories</a>, <a href="./kitchen-remodel-planning.html" class="text-secondary hover:underline">kitchen planning</a>, <a href="./bathroom-waterproofing-guide.html" class="text-secondary hover:underline">bath waterproofing</a>, and <a href="./hiring-a-contractor.html" class="text-secondary hover:underline">hiring a contractor</a>.')}
+{photo_strip}
 {ppg_featured(label + " Contractor")}
     <section id="rankings" class="mb-20">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 border-b border-white/10 pb-4 gap-3">
@@ -4703,6 +4759,32 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
   </script>"""
 
     _hero_rel, _hero_alt = DIR_HERO_IMAGES.get("edmonds", (None, ""))
+    photo_strip = _hub_photo_strip(
+        [
+            (
+                "assets/images/hubs/hub-edmonds-1.webp",
+                "Illustrative Edmonds-area custom home exterior under soft Puget Sound light",
+                "Edmonds custom exterior (illustrative)",
+                "./custom-homes.html",
+                "Custom homes directory",
+            ),
+            (
+                "assets/images/posts/2026-09-02-edmonds-custom-1.webp",
+                "Illustrative Edmonds custom home planning and design-build context",
+                "Design-build planning (illustrative)",
+                "./home-addition-planning.html",
+                "Home addition planning",
+            ),
+            (
+                "assets/images/posts/2026-09-02-edmonds-custom-2.webp",
+                "Illustrative coastal King County custom home construction context",
+                "Coastal custom context (illustrative)",
+                "./edmonds.html",
+                "Edmonds city hub",
+            ),
+        ],
+        title="Edmonds custom-home field context (illustrative)",
+    )
     body = f"""{hero(
         f"Edmonds Authority · Top 30 · Updated {YEAR}",
         'Edmonds Custom Home Builders<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">Top 30 Editorial Directory</span>',
@@ -4713,6 +4795,7 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
     )}
   <div class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
 {how_we_rank_block(' Also see the regional <a href="./custom-homes.html" class="text-secondary hover:underline">Custom Homes</a> shortlist and <a href="./additions.html" class="text-secondary hover:underline">home additions</a> Top 30.')}
+{photo_strip}
 {integrity_shield_html("How the Board screens Edmonds custom home builders — public records and local signals, not paid placement.")}
 {ppg_featured_edmonds}
     <section id="rankings" class="mb-20">
