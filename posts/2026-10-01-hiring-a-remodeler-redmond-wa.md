@@ -14,7 +14,7 @@ slug: "hiring-a-remodeler-redmond-wa"
 
 Redmond sits on the Eastside of King County with a housing stock that ranges from mid-century neighborhoods to newer tech-corridor estates. Hiring a remodeler here is less about chasing a single low bid and more about verifying credentials, confirming who owns the City of Redmond permit path, and locking written scope for structure, envelope, and finishes before demolition. The Board of Project Stewardship treats license checks, permit ownership, and moisture detailing as part of the same decision — not optional add-ons after you like a portfolio photo.
 
-![Illustrative: Redmond, Washington — remodel planning materials and samples staged in a quiet residential interior — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-01-redmond-hiring-1.webp)
+![Illustrative: Redmond, Washington — remodel plans, samples, and notes staged for a homeowner hiring conversation — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-01-redmond-hiring-4.webp)
 
 ## Defining your project goals and budget
 
