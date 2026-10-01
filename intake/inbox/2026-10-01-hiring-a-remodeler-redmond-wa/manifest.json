@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-10-01-hiring-a-remodeler-redmond-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-10-01T17:30:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Hiring a Remodeler Redmond WA \u2014 Vetting Experts, Budgeting Tips & Permit Guidance",
+    "date": "2026-10-01",
+    "slug": "hiring-a-remodeler-redmond-wa",
+    "description": "Ensure your home transformation is seamless with our comprehensive guide to choosing the right remodeling contractor in Redmond, from initial vetting to navigating King County permits.",
+    "category": "Hiring Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "idempotency_key": "sha256:1897e74e738f39455a1e8bb31711d00074f58e3fda05fc66942fd7f4875b7781"
+}

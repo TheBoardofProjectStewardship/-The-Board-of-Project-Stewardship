@@ -1,0 +1,16 @@
+{
+  "submission_id": "2026-10-01-hiring-a-remodeler-redmond-wa",
+  "idempotency_key": "sha256:1897e74e738f39455a1e8bb31711d00074f58e3fda05fc66942fd7f4875b7781",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-10-01T17:25:44Z",
+  "outputs": [
+    "posts/2026-10-01-hiring-a-remodeler-redmond-wa.md",
+    "posts/2026-10-01-hiring-a-remodeler-redmond-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 58
+}
