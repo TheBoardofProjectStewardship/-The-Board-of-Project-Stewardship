@@ -1,0 +1,41 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Lynnwood",
+    "service": "Window Replacement",
+    "slug": "window-replacement-lynnwood-wa"
+  },
+  "sources": [
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "Washington L&I Verify a Contractor, Tradesperson or Business",
+      "retrieved": "2026-10-02",
+      "supports": "Verify that a window installation contractor is licensed, bonded, and insured in Washington before work begins."
+    },
+    {
+      "url": "https://www.lynnwoodwa.gov/Services/Apply-for-a-Permit",
+      "title": "City of Lynnwood Apply for a Permit",
+      "retrieved": "2026-10-02",
+      "supports": "Development and Business Services Permit Center hub for applying, tracking, and contacting the City of Lynnwood permit team."
+    },
+    {
+      "url": "https://www.lynnwoodwa.gov/Services/Apply-for-a-Permit/Applications-Checklists",
+      "title": "City of Lynnwood Applications & Checklists",
+      "retrieved": "2026-10-02",
+      "supports": "Residential building checklists, energy-code forms, and work-exempt guidance before portal submission."
+    },
+    {
+      "url": "https://www.snohomishcountywa.gov/2908/Residential",
+      "title": "Snohomish County Residential Building Permits",
+      "retrieved": "2026-10-02",
+      "supports": "When a residential building permit is required in unincorporated Snohomish County and what application materials typically accompany it."
+    }
+  ],
+  "generation": {
+    "agent": "hermes",
+    "hermes_status": "hermes-ok-box-enriched",
+    "verified_count": 4,
+    "supports_mode": "enriched-verified",
+    "note": "Dropped bare lynnwoodwa.gov home and stale snohomishcountywa.gov/334/Building-Permits (redirects to Business-Personal-Property). Kept L&I Verify plus verified Lynnwood Apply-for-a-Permit, Applications-Checklists, and Snohomish Residential Building Permits (HTTP 200)."
+  }
+}
