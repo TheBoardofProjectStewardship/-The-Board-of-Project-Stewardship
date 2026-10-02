@@ -1,0 +1,16 @@
+{
+  "submission_id": "2026-10-02-window-replacement-lynnwood-wa",
+  "idempotency_key": "sha256:2a15f4690c4c0405df5a397e41b4cf947837a10f376efa12679e92b2e851d3e4",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-10-02T17:30:15Z",
+  "outputs": [
+    "posts/2026-10-02-window-replacement-lynnwood-wa.md",
+    "posts/2026-10-02-window-replacement-lynnwood-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 59
+}
