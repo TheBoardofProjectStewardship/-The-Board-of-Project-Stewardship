@@ -12,7 +12,7 @@ slug: "window-replacement-lynnwood-wa"
 - Confirm whether your scope is a pocket (insert) replacement or a full-frame / resized opening — that choice usually decides whether City of Lynnwood or Snohomish County permits apply.
 - Re-check every installation contractor on [Washington L&I Verify](https://secure.lni.wa.gov/verify/) before anyone touches the envelope.
 
-![Illustrative Lynnwood-area window replacement staging with new unit set in a residential opening — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-02-lynnwood-window-1.webp)
+![Illustrative Pacific Northwest window rough-opening and unit fit-up detail for a Lynnwood-area replacement conversation — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-02-lynnwood-window-4.webp)
 
 ## Why window upgrades matter in Lynnwood
 
