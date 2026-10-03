@@ -1,0 +1,48 @@
+{
+  "producer": "openclaw",
+  "agent": "seo-specialist",
+  "slug": "hiring-a-remodeler-queen-anne-wa",
+  "title": "Hiring a Remodeler Queen Anne WA — Local Permitting, Historic Home Care & Design-Build Value",
+  "description": "How Queen Anne Seattle homeowners can vet remodelers: SDCI permit paths, steep-slope logistics, historic character care, and Washington L&I Verify before you sign.",
+  "category": "Hiring Guides",
+  "keywords": [
+    "hiring a remodeler Queen Anne WA",
+    "Queen Anne Seattle home renovation",
+    "Seattle design-build contractors",
+    "historic home remodel Queen Anne",
+    "SDCI residential permits",
+    "Queen Anne steep slope remodel"
+  ],
+  "outline": [
+    "Key Takeaways",
+    "Why Queen Anne remodeling is its own hiring problem",
+    "SDCI permitting is part of the remodel",
+    "Design-build vs. design-bid-build on steep historic lots",
+    "Questions that separate Queen Anne-capable remodelers",
+    "Historic character, moisture, and modern systems",
+    "Budgeting without invented numbers",
+    "Materials Worth Knowing",
+    "Next steps for a Queen Anne hire",
+    "Where Pacific Pro Group fits"
+  ],
+  "search_intent": "Homeowner wants a jurisdiction-specific guide to vetting and hiring a remodeler for Queen Anne Seattle, including permits and historic/steep-lot constraints.",
+  "local_angles": [
+    "Steep-sloped lots and narrow street staging",
+    "SDCI Seattle Services Portal intake and PASV triggers",
+    "Historic Victorian / Edwardian / Craftsman stock",
+    "PNW moisture management behind luxury finishes"
+  ],
+  "internal_links": [
+    "../queen-anne.html",
+    "../hiring-a-contractor.html",
+    "../red-flags-hiring.html",
+    "../verify-contractor.html",
+    "../permits.html"
+  ],
+  "notes": "Operator-only brief. Internal links must appear in the draft. PPG only as Board #1 -> https://pacificprogroup.com/.",
+  "generation": {
+    "agent": "openclaw/seo-specialist",
+    "openclaw_status": "openclaw-ok",
+    "mode": "pc-packet-box-enriched"
+  }
+}

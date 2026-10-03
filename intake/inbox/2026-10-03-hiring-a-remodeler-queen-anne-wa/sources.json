@@ -1,0 +1,41 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Queen Anne (Seattle)",
+    "service": "Hiring a Remodeler",
+    "slug": "hiring-a-remodeler-queen-anne-wa"
+  },
+  "sources": [
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "Washington L&I Verify a Contractor, Tradesperson or Business",
+      "retrieved": "2026-10-03",
+      "supports": "Official portal for Queen Anne homeowners to confirm contractor registration, bonding, and insurance before hiring."
+    },
+    {
+      "url": "https://www.seattle.gov/sdci",
+      "title": "Seattle Department of Construction & Inspections (SDCI)",
+      "retrieved": "2026-10-03",
+      "supports": "Primary City of Seattle department that issues construction and land-use permits affecting Queen Anne remodels."
+    },
+    {
+      "url": "https://www.seattle.gov/sdci/permits/how-do-you-get-a-permit",
+      "title": "SDCI — How Do You Get a Permit?",
+      "retrieved": "2026-10-03",
+      "supports": "Official step-by-step permit process including pre-application, PASV/PAR triggers, and Seattle Services Portal intake."
+    },
+    {
+      "url": "https://services.seattle.gov/Portal/Customization/SEATTLE/Welcome.aspx",
+      "title": "Seattle Services Portal",
+      "retrieved": "2026-10-03",
+      "supports": "Online portal where homeowners and contractors submit Building & Land Use Pre-Applications and track permit records."
+    }
+  ],
+  "generation": {
+    "agent": "hermes",
+    "hermes_status": "hermes-timeout-box-enriched",
+    "verified_count": 4,
+    "supports_mode": "enriched-verified",
+    "note": "PC hermes returned only L&I + SDCI home (timeout). Box enriched with verified How-Do-You-Get-a-Permit and Seattle Services Portal (HTTP 200 on 2026-10-03)."
+  }
+}

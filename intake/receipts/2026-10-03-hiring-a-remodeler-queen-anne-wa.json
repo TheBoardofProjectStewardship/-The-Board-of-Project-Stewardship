@@ -1,0 +1,19 @@
+{
+  "submission_id": "2026-10-03-hiring-a-remodeler-queen-anne-wa",
+  "idempotency_key": "sha256:9771c97549145fbd370e187f1fd4b39bd61d02876ea877be8f644aaddb42d14e",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-10-03T17:20:25Z",
+  "outputs": [
+    "assets/images/posts/2026-10-03-queen-anne-hiring-1.webp",
+    "assets/images/posts/2026-10-03-queen-anne-hiring-2.webp",
+    "assets/images/posts/2026-10-03-queen-anne-hiring-3.webp",
+    "posts/2026-10-03-hiring-a-remodeler-queen-anne-wa.md",
+    "posts/2026-10-03-hiring-a-remodeler-queen-anne-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 60
+}
