@@ -4084,11 +4084,11 @@ def build_additions(additions: list[dict]) -> str:
 {how_we_rank_block(' Also see <a href="./home-addition-planning.html" class="text-secondary hover:underline">addition planning</a>, <a href="./second-story-vs-teardown.html" class="text-secondary hover:underline">second story vs teardown</a>, and <a href="./hiring-a-contractor.html" class="text-secondary hover:underline">hiring a contractor</a>.')}
 {_hub_photo_strip([
         (
-            "assets/images/dir-additions-hero.webp",
-            "Illustrative home addition exterior context for King and Snohomish County remodels",
-            "Addition exterior context (illustrative)",
-            "./home-addition-planning.html",
-            "Home addition planning",
+            "assets/images/posts/2026-09-28-woodinville-second-story-1.webp",
+            "Illustrative second-story addition exterior for a Woodinville-area home",
+            "Woodinville second-story context (illustrative)",
+            "./posts/2026-09-28-second-story-addition-woodinville-wa.html",
+            "Woodinville second-story addition",
         ),
         (
             "assets/images/posts/2026-08-12-edmonds-addition-permit-1.webp",
