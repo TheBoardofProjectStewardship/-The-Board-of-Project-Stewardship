@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-10-03-hiring-a-remodeler-queen-anne-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-10-03T17:20:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Hiring a Remodeler Queen Anne WA — Local Permitting, Historic Home Care & Design-Build Value",
+    "date": "2026-10-03",
+    "slug": "hiring-a-remodeler-queen-anne-wa",
+    "description": "How Queen Anne Seattle homeowners can vet remodelers: SDCI permit paths, steep-slope logistics, historic character care, and Washington L&I Verify before you sign.",
+    "category": "Hiring Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  }
+}
