@@ -12,7 +12,7 @@ slug: "hiring-a-remodeler-queen-anne-wa"
 - Treat [Seattle Department of Construction & Inspections (SDCI)](https://www.seattle.gov/sdci) permitting as part of the schedule: most Queen Anne envelope or footprint changes route through the [Seattle Services Portal](https://services.seattle.gov/Portal/Customization/SEATTLE/Welcome.aspx), not a handshake on the curb.
 - Ask remodelers how they stage materials on steep, narrow streets and how they join new structure to old-growth framing — Queen Anne logistics and historic stock punish generic suburban playbooks.
 
-![Illustrative residential remodel staging and site walk-through for a Queen Anne Seattle hiring decision — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-03-queen-anne-hiring-1.webp)
+![Illustrative: Queen Anne, Seattle — old-growth framing meeting new lumber inside a steep-lot Craftsman during a remodeler walk-through — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-03-queen-anne-hiring-4.webp)
 
 ## Why Queen Anne remodeling is its own hiring problem
 
