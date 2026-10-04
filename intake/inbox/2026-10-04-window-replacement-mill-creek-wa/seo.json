@@ -1,0 +1,45 @@
+{
+  "producer": "openclaw",
+  "agent": "seo-specialist",
+  "slug": "window-replacement-mill-creek-wa",
+  "title": "Window Replacement Mill Creek WA — Planning, Permits & Licensed Pros",
+  "description": "Window replacement guidance for Mill Creek homeowners: City OpenGov permit path, PNW moisture detailing, and Washington L&I Verify before you hire.",
+  "category": "Guides",
+  "keywords": [
+    "window replacement Mill Creek WA",
+    "Mill Creek window permits",
+    "Snohomish County replacement windows",
+    "OpenGov Mill Creek building permit",
+    "PNW window flashing moisture",
+    "verify contractor Washington L&I"
+  ],
+  "outline": [
+    "Key Takeaways",
+    "Mill Creek house stock and moisture context",
+    "City of Mill Creek permits and OpenGov",
+    "Insert vs full-frame planning sequence",
+    "Flashing, egress, and energy performance",
+    "Materials Worth Knowing",
+    "How to shortlist and verify firms",
+    "Where Pacific Pro Group fits"
+  ],
+  "search_intent": "Homeowner wants a Mill Creek–specific guide to planning window replacement, including city permit paths and licensed contractor verification.",
+  "local_angles": [
+    "City of Mill Creek OpenGov building permits",
+    "IRC / Mill Creek adopted codes and design criteria",
+    "Tree-canopy humidity and failed insulated-glass seals",
+    "Multi-story egress openings in Snohomish County stock"
+  ],
+  "internal_links": [
+    "../mill-creek.html",
+    "../windows.html",
+    "../permits.html",
+    "../verify-contractor.html"
+  ],
+  "notes": "Operator-only brief. Internal links must appear in the draft. PPG only as Board #1 -> https://pacificprogroup.com/.",
+  "generation": {
+    "agent": "openclaw/seo-specialist",
+    "openclaw_status": "openclaw-ok",
+    "mode": "pc-packet-box-enriched"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-10-04-window-replacement-mill-creek-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-10-04T17:18:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Window Replacement Mill Creek WA — Planning, Permits & Licensed Pros",
+    "date": "2026-10-04",
+    "slug": "window-replacement-mill-creek-wa",
+    "description": "Window replacement guidance for Mill Creek homeowners: City OpenGov permit path, PNW moisture detailing, and Washington L&I Verify before you hire.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  }
+}

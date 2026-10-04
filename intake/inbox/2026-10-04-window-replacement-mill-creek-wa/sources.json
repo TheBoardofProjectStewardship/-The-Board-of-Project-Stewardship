@@ -1,0 +1,41 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Mill Creek",
+    "service": "Window Replacement",
+    "slug": "window-replacement-mill-creek-wa"
+  },
+  "sources": [
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "Washington L&I Verify a Contractor, Tradesperson or Business",
+      "retrieved": "2026-10-04",
+      "supports": "Official portal for Mill Creek homeowners to confirm contractor registration, bonding, and insurance before hiring a window replacement firm."
+    },
+    {
+      "url": "https://millcreekwa.gov/permits",
+      "title": "City of Mill Creek — Permits and Licensing",
+      "retrieved": "2026-10-04",
+      "supports": "City landing page for permit counter hours, residential improvement rules, and the OpenGov path for building permits."
+    },
+    {
+      "url": "https://millcreekwa.gov/topics/building-permits-0",
+      "title": "City of Mill Creek — Building Permits",
+      "retrieved": "2026-10-04",
+      "supports": "Building division page describing online OpenGov applications for building, mechanical, and plumbing permits plus inspection scheduling guidance."
+    },
+    {
+      "url": "https://millcreekwa.gov/topics/building-codes-and-guidance",
+      "title": "City of Mill Creek — Building Codes and Guidance",
+      "retrieved": "2026-10-04",
+      "supports": "Published adopted codes (including 2021 IRC) and Mill Creek design criteria such as snow load, seismic category, wind speed, and frost depth."
+    }
+  ],
+  "generation": {
+    "agent": "hermes",
+    "hermes_status": "hermes-timeout-box-enriched",
+    "verified_count": 4,
+    "supports_mode": "enriched-verified",
+    "note": "PC hermes returned only L&I + millcreekwa.gov/permits (timeout). Box enriched with Building Permits and Building Codes pages (HTTP 200 on 2026-10-04)."
+  }
+}

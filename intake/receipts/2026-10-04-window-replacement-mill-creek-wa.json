@@ -1,0 +1,16 @@
+{
+  "submission_id": "2026-10-04-window-replacement-mill-creek-wa",
+  "idempotency_key": "sha256:0aae52788e2276bc5b88280a054bf53b1b5dfa1215369a54b19d399882c7b8ea",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-10-04T17:19:42Z",
+  "outputs": [
+    "posts/2026-10-04-window-replacement-mill-creek-wa.md",
+    "posts/2026-10-04-window-replacement-mill-creek-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 61
+}
