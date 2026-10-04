@@ -3,11 +3,11 @@
   "status": "ready",
   "files": [
     {
-      "role": "hero",
-      "intake_file": "media/2026-10-04-mill-creek-window-1.webp",
-      "repo_path": "assets/images/posts/2026-10-04-mill-creek-window-1.webp",
-      "alt": "Illustrative residential window elevation and glazing detail for a Mill Creek WA replacement planning guide — illustrative only, not a real Board of Project Stewardship job photo",
-      "source": "unique crop/mirror/grade from assets/images/posts/2026-09-20-edmonds-windows-1.webp (free-first)"
+      "role": "in-body",
+      "intake_file": "media/2026-10-04-mill-creek-window-4.webp",
+      "repo_path": "assets/images/posts/2026-10-04-mill-creek-window-4.webp",
+      "alt": "Illustrative: Mill Creek, Washington — a craftsman home with newly installed replacement windows, cedar trim, and rain-dark siding under overcast Pacific Northwest light — not a real Board of Project Stewardship job photo",
+      "source": "unique free still; published hero stays assets/images/posts/2026-10-04-mill-creek-window-1.webp"
     },
     {
       "role": "in-body",
