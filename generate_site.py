@@ -9958,14 +9958,14 @@ def build_kirkland_hub() -> str:
                 "Addition planning",
             ),
             (
-                "assets/images/dir-additions-hero.webp",
-                "Illustrative addition craft — not a real Board job photo",
-                "Structure & envelope",
+                "assets/images/posts/2026-09-19-kirkland-addition-2.webp",
+                "Illustrative Kirkland addition framing and structural opening — not a real Board job photo",
+                "Framing detail",
             ),
             (
-                "assets/images/home-gallery-dryin.webp",
-                "Illustrative dry-in milestone — not a real Board job photo",
-                "Weather sequencing",
+                "assets/images/posts/2026-09-19-kirkland-addition-3.webp",
+                "Illustrative Kirkland addition with siding and roof sheathing underway — not a real Board job photo",
+                "Siding and sheathing",
             ),
         ],
         photo_strip_title="Kirkland work in pictures (illustrative)",
@@ -10436,14 +10436,14 @@ def build_mill_creek_hub() -> str:
                 "Kitchen scopes",
             ),
             (
-                "assets/images/dir-kitchen-hero.webp",
-                "Illustrative kitchen craft — not a real Board job photo",
-                "Layout & trades",
+                "assets/images/posts/2026-10-04-mill-creek-window-2.webp",
+                "Illustrative Mill Creek window opening and trim coordination — not a real Board job photo",
+                "Window sequencing",
             ),
             (
-                "assets/images/home-process-verify.webp",
-                "Illustrative verification habit — not a real Board job photo",
-                "L&I before hire",
+                "assets/images/posts/2026-09-27-mill-creek-bath-2.webp",
+                "Illustrative Mill Creek shower waterproofing — not a real Board job photo",
+                "Bath wet wall",
             ),
         ],
         photo_strip_title="Mill Creek work in pictures (illustrative)",
@@ -10920,19 +10920,19 @@ def build_king_county_hub() -> str:
         official_keys=["lni_verify", "lni_home", "mybuildingpermit", "king_accela", "king_permits"],
         photo_strip=[
             (
-                "assets/images/home-hero.webp",
-                "Illustrative King County / North Sound home exterior — not a real Board job photo",
-                "North Sound stock",
+                "assets/images/posts/2026-09-26-kenmore-kitchen-2.webp",
+                "Illustrative Kenmore kitchen rough-in with open studs — not a real Board job photo",
+                "Kitchen rough-in",
             ),
             (
-                "assets/images/home-process-research.webp",
-                "Illustrative permit research desk — not a real Board job photo",
-                "Confirm the AHJ",
+                "assets/images/posts/2026-09-30-lfp-bath-2.webp",
+                "Illustrative Lake Forest Park shower waterproofing — not a real Board job photo",
+                "Bath wet wall",
             ),
             (
-                "assets/images/home-process-verify.webp",
-                "Illustrative L&I verification — not a real Board job photo",
-                "Verify every bidder",
+                "assets/images/posts/2026-09-10-home-addition-shoreline-3.webp",
+                "Illustrative Shoreline addition weather barrier — not a real Board job photo",
+                "Addition envelope",
             ),
         ],
         photo_strip_title="King County context (illustrative)",
@@ -11429,9 +11429,9 @@ def build_kitchen_cost_factors_page() -> str:
         + _hub_photo_strip(
             [
                 (
-                    "assets/images/dir-kitchen-hero.webp",
-                    "Illustrative kitchen remodel craft — not a real Board job photo",
-                    "Layout drives trades",
+                    "assets/images/posts/2026-09-24-bothell-kitchen-2.webp",
+                    "Illustrative Bothell kitchen plumbing and electrical rough-in — not a real Board job photo",
+                    "Rough-in behind cabinets",
                 ),
                 (
                     "assets/images/posts/2026-08-12-hire-kitchen-2.webp",
@@ -11515,9 +11515,9 @@ def build_bathroom_cost_factors_page() -> str:
         + _hub_photo_strip(
             [
                 (
-                    "assets/images/dir-bathrooms-hero.webp",
-                    "Illustrative bathroom remodel craft — not a real Board job photo",
-                    "Wet zone first",
+                    "assets/images/posts/2026-09-30-lfp-bath-3.webp",
+                    "Illustrative Lake Forest Park finished bath layout — not a real Board job photo",
+                    "Finish layout",
                 ),
                 (
                     "assets/images/posts/2026-09-23-bothell-bath-2.webp",
@@ -11598,9 +11598,9 @@ def build_addition_cost_factors_page() -> str:
         + _hub_photo_strip(
             [
                 (
-                    "assets/images/dir-additions-hero.webp",
-                    "Illustrative home addition craft — not a real Board job photo",
-                    "Structure & dry-in",
+                    "assets/images/posts/2026-09-28-woodinville-second-story-2.webp",
+                    "Illustrative Woodinville second-story sheathing and dry-in — not a real Board job photo",
+                    "Sheathing and dry-in",
                 ),
                 (
                     "assets/images/home-ppg-addition.webp",
