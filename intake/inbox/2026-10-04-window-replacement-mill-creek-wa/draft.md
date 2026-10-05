@@ -12,7 +12,7 @@ slug: "window-replacement-mill-creek-wa"
 - Treat City of Mill Creek permitting as part of the schedule: building, mechanical, and plumbing work routes through the city’s [OpenGov building permits](https://millcreekwa.gov/topics/building-permits-0) path described on [Permits and Licensing](https://millcreekwa.gov/permits), not a handshake on the curb.
 - Prioritize flashing and rough-opening detailing for Snohomish County moisture — a premium unit installed without a drained, sealed transition will fail faster than a mid-range unit installed correctly.
 
-![Illustrative residential window elevation and glazing detail for a Mill Creek WA replacement planning guide — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-04-mill-creek-window-1.webp)
+![Illustrative image of a Mill Creek craftsman house with replacement windows, cedar trim, and rain-dark siding — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-04-mill-creek-window-4.webp)
 
 ## Mill Creek house stock and moisture context
 

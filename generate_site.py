@@ -8385,16 +8385,22 @@ def build_lynnwood_hub() -> str:
                 "assets/images/posts/2026-09-09-lynnwood-kitchen-1.webp",
                 "Illustrative Lynnwood kitchen remodel context — not a real Board job photo",
                 "Kitchen scopes",
+                "./kitchen.html",
+                "Kitchen remodelers directory",
             ),
             (
                 "assets/images/posts/2026-09-08-lynnwood-bath-1.webp",
                 "Illustrative Lynnwood bath remodel context — not a real Board job photo",
                 "Bath scopes",
+                "./bathrooms.html",
+                "Bathroom remodelers directory",
             ),
             (
-                "assets/images/home-process-verify.webp",
-                "Illustrative contractor verification habit — not a real Board job photo",
-                "L&I before hire",
+                "assets/images/posts/2026-10-02-lynnwood-window-2.webp",
+                "Illustrative image of white-trimmed windows on light siding under an overcast sky — not a real Board job photo",
+                "Window elevation",
+                "./windows.html",
+                "Windows directory",
             ),
         ],
         photo_strip_title="Lynnwood work in pictures (illustrative)",
@@ -8429,16 +8435,22 @@ def build_ballard_hub() -> str:
                 "assets/images/posts/2026-09-04-kitchen-ballard-1.webp",
                 "Illustrative Ballard kitchen remodel context — not a real Board job photo",
                 "Kitchen scopes",
+                "./kitchen.html",
+                "Kitchen remodelers directory",
             ),
             (
                 "assets/images/posts/2026-09-03-ballard-bath-1.webp",
                 "Illustrative Ballard bath remodel context — not a real Board job photo",
                 "Bath scopes",
+                "./bathrooms.html",
+                "Bathroom remodelers directory",
             ),
             (
-                "assets/images/home-process-build.webp",
-                "Illustrative remodel build phase — not a real Board job photo",
-                "Occupied-site habits",
+                "assets/images/posts/2026-10-05-ballard-roof-2.webp",
+                "Illustrative image of synthetic roof underlayment and a metal drip edge at the eave — not a real Board job photo",
+                "Underlayment and drip edge",
+                "./roofing.html",
+                "Roofing directory",
             ),
         ],
         photo_strip_title="Ballard work in pictures (illustrative)",
@@ -8474,16 +8486,22 @@ def build_magnolia_hub() -> str:
                 "assets/images/posts/2026-09-17-magnolia-bathroom-1.webp",
                 "Illustrative Magnolia bath remodel context — not a real Board job photo",
                 "Bath scopes",
+                "./bathrooms.html",
+                "Bathroom remodelers directory",
             ),
             (
                 "assets/images/posts/2026-09-16-magnolia-kitchen-1.webp",
                 "Illustrative Magnolia kitchen remodel context — not a real Board job photo",
                 "Kitchen scopes",
+                "./kitchen.html",
+                "Kitchen remodelers directory",
             ),
             (
-                "assets/images/home-gallery-finish.webp",
-                "Illustrative finish craft — not a real Board job photo",
-                "Finish discipline",
+                "assets/images/posts/2026-09-16-magnolia-kitchen-2.webp",
+                "Illustrative image of a kitchen with white cabinets, wood floors, and a pendant light — not a real Board job photo",
+                "Kitchen finishes",
+                "./kitchen.html",
+                "Kitchen remodelers directory",
             ),
         ],
         photo_strip_title="Magnolia work in pictures (illustrative)",
@@ -10228,19 +10246,25 @@ def build_learn_page() -> str:
         + _hub_photo_strip(
             [
                 (
-                    "assets/images/home-process-research.webp",
-                    "Illustrative plans and research materials for Board learning path",
-                    "Research before you bid",
+                    "assets/images/posts/2026-09-18-mill-creek-kitchen-2.webp",
+                    "Illustrative image of a bright kitchen with white cabinets, a wood island, and a garden window — not a real Board job photo",
+                    "Kitchen layout",
+                    "./kitchen.html",
+                    "Kitchen remodelers directory",
                 ),
                 (
-                    "assets/images/home-process-verify.webp",
-                    "Illustrative verification checklist visual for contractor diligence",
-                    "Verify at WA L&I",
+                    "assets/images/posts/2026-09-27-mill-creek-bath-3.webp",
+                    "Illustrative image of a bathroom vanity, wood floor, and window — not a real Board job photo",
+                    "Bath finish layout",
+                    "./bathrooms.html",
+                    "Bathroom remodelers directory",
                 ),
                 (
-                    "assets/images/home-gallery-dryin.webp",
-                    "Illustrative PNW dry-in weather protection during remodel openings",
-                    "Weather & dry-in habits",
+                    "assets/images/posts/2026-09-28-home-addition-mukilteo-3.webp",
+                    "Illustrative image of a bright interior hallway with wood floors and tall windows — not a real Board job photo",
+                    "Interior daylight",
+                    "./additions.html",
+                    "Home additions directory",
                 ),
             ],
             title="Learning in pictures (illustrative)",
@@ -10809,16 +10833,22 @@ def build_seattle_hub() -> str:
                 "assets/images/posts/2026-09-06-seattle-bath-permits-1.webp",
                 "Illustrative Seattle bath permit context — not a real Board job photo",
                 "SDCI path differs",
+                "./permits.html",
+                "Permit jurisdiction hub",
             ),
             (
-                "assets/images/home-process-research.webp",
-                "Illustrative Seattle permit research — not a real Board job photo",
-                "Services Portal",
+                "assets/images/posts/2026-08-21-queen-anne-kitchen-2.webp",
+                "Illustrative image of a Queen Anne kitchen with white cabinets and a wood island — not a real Board job photo",
+                "Kitchen layout",
+                "./kitchen.html",
+                "Kitchen remodelers directory",
             ),
             (
-                "assets/images/home-gallery-finish.webp",
-                "Illustrative urban remodel finishes — not a real Board job photo",
-                "Urban staging",
+                "assets/images/posts/2026-09-03-ballard-bath-2.webp",
+                "Illustrative image of a bathroom vanity with black fixtures and a wood floor — not a real Board job photo",
+                "Bath finish",
+                "./bathrooms.html",
+                "Bathroom remodelers directory",
             ),
         ],
         photo_strip_title="Seattle work in pictures (illustrative)",
@@ -10866,16 +10896,22 @@ def build_snohomish_county_hub() -> str:
                 "assets/images/hubs/hub-edmonds-1.webp",
                 "Illustrative Snohomish coastal craftsman context — not a real Board job photo",
                 "Coastal stock",
+                "./locations.html",
+                "Locations hub",
             ),
             (
-                "assets/images/home-process-research.webp",
-                "Illustrative county permit research — not a real Board job photo",
-                "City vs county AHJ",
+                "assets/images/posts/2026-09-18-mill-creek-kitchen-1.webp",
+                "Illustrative image of a white kitchen with an island and wood floors — not a real Board job photo",
+                "Kitchen scopes",
+                "./kitchen.html",
+                "Kitchen remodelers directory",
             ),
             (
-                "assets/images/home-process-verify.webp",
-                "Illustrative contractor verification — not a real Board job photo",
-                "L&I Verify",
+                "assets/images/posts/2026-09-08-lynnwood-bath-2.webp",
+                "Illustrative image of a tiled walk-in shower with a niche and glass panel — not a real Board job photo",
+                "Shower waterproofing",
+                "./bathrooms.html",
+                "Bathroom remodelers directory",
             ),
         ],
         photo_strip_title="Snohomish County context (illustrative)",
@@ -12746,7 +12782,7 @@ def build_redirect_page(target: str, title: str) -> str:
 
 
 def build_write_page() -> str:
-    """Draft contribution form — mailto editorial desk (GitHub Pages; no Netlify Forms)."""
+    """Draft contribution form — mailto editorial desk. Live host is GitHub Pages."""
     extra_scripts = """  <script>
   (function () {
     var INBOX = __INBOX__;
@@ -12819,7 +12855,7 @@ def build_write_page() -> str:
     <div class="bg-primary/10 border border-secondary/30 rounded-xl p-4 mb-6 flex gap-3 items-start">
       <i class="fas fa-circle-info text-secondary mt-0.5"></i>
       <div class="text-sm text-slate-300 font-light leading-relaxed">
-        <p class="mb-2"><strong class="text-white font-semibold">Reviewed before live.</strong> This form opens your email client to <a href="mailto:{EDITORIAL_EMAIL}" class="text-secondary hover:underline">{EDITORIAL_EMAIL}</a> — a review-only inbox on GitHub Pages (no Netlify Forms). Editors check facts, L&amp;I honesty, and Board directory #1 attribution rules before publishing under <em>Board of Project Stewardship Editorial</em>.</p>
+        <p class="mb-2"><strong class="text-white font-semibold">Reviewed before live.</strong> This form opens your email client to <a href="mailto:{EDITORIAL_EMAIL}" class="text-secondary hover:underline">{EDITORIAL_EMAIL}</a> — a review-only inbox. Editors check facts, L&amp;I honesty, and Board directory #1 attribution rules before publishing under <em>Board of Project Stewardship Editorial</em>.</p>
         <p class="text-xs text-slate-500 mb-0">Do not invent ratings. PPG links: <a href="https://pacificprogroup.com/" class="text-secondary hover:underline" target="_blank" rel="noopener">https://pacificprogroup.com/</a> only. Re-verify WA L&amp;I before recommending any contractor.</p>
       </div>
     </div>
