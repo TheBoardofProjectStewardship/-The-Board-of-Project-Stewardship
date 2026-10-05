@@ -402,15 +402,20 @@
     "assets/images/posts/2026-10-03-queen-anne-hiring-1.webp",
     "assets/images/posts/2026-10-03-queen-anne-hiring-2.webp",
     "assets/images/posts/2026-10-03-queen-anne-hiring-3.webp",
-    "assets/images/posts/2026-10-03-queen-anne-hiring-4.webp"
+    "assets/images/posts/2026-10-03-queen-anne-hiring-4.webp",
+    "assets/images/posts/2026-10-04-mill-creek-window-4.webp",
+    "assets/images/posts/2026-10-05-ballard-roof-4.webp"
   ],
-  "last_morning_audit": "2026-10-03",
+  "last_morning_audit": "2026-10-05",
   "last_upgraded_slugs": [
-    "stay-in-home-second-story-edmonds",
-    "home-addition-edmonds-wa",
-    "kitchen-remodel-magnolia-seattle",
-    "bathroom-remodel-mill-creek-wa",
-    "second-story-addition-woodinville-wa"
+    "learn",
+    "snohomish-county",
+    "seattle",
+    "lynnwood",
+    "ballard",
+    "magnolia",
+    "roof-replacement-ballard-wa",
+    "window-replacement-mill-creek-wa"
   ],
   "last_shared_video": "assets/videos/posts/2026-09-shared-waterproofing.mp4",
   "last_steward_morning": {

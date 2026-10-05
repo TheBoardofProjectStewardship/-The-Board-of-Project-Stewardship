@@ -12,7 +12,7 @@ slug: "roof-replacement-ballard-wa"
 - In Ballard's long wet season, the underlayment, eave and valley membranes, and flashing do more to protect the house than the shingle brand. Ask every bidder to write those layers into the scope.
 - Re-check every roofer and specialty trade on [Washington L&I Verify](https://secure.lni.wa.gov/verify/) yourself before a deposit or tear-off. Registration, bond, and insurance are public records.
 
-![Illustrative Ballard-area single-story home mid tear-off with sections of roof deck exposed under an overcast sky — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-05-ballard-roof-1.webp)
+![Illustrative image of a Ballard craftsman bungalow mid roof replacement, with underlayment and a metal drip edge under an overcast sky — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-05-ballard-roof-4.webp)
 
 ## Why Ballard roofs work harder
 
