@@ -1,0 +1,42 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-10-05-ballard-roof-1.webp",
+      "repo_path": "assets/images/posts/2026-10-05-ballard-roof-1.webp",
+      "alt": "Illustrative Ballard-area single-story home mid tear-off with sections of roof deck exposed under an overcast sky — illustrative only, not a real Board of Project Stewardship job photo",
+      "source": "unique crop/grade from assets/images/posts/2026-09-21-edmonds-roof-1.webp (free-first)"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-05-ballard-roof-2.webp",
+      "repo_path": "assets/images/posts/2026-10-05-ballard-roof-2.webp",
+      "alt": "Illustrative roof deck covered in synthetic underlayment with drip edge at the eave, tall evergreens behind — illustrative only, not a real Board of Project Stewardship job photo",
+      "source": "unique crop/grade from assets/images/posts/2026-09-21-roof-edmonds-coastal-4.webp (free-first)"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-05-ballard-roof-3.webp",
+      "repo_path": "assets/images/posts/2026-10-05-ballard-roof-3.webp",
+      "alt": "Illustrative brick chimney with a metal cricket and flashing on a rain-wet roof — illustrative only, not a real Board of Project Stewardship job photo",
+      "source": "unique crop/grade from assets/images/posts/2026-09-21-roof-edmonds-coastal-3.webp (free-first)"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "PJvVVlhnLW4",
+      "url": "https://www.youtube.com/watch?v=PJvVVlhnLW4",
+      "title": "Roofing Underlayments EXPLAINED by a roofer: Tar Paper, Synthetic, Ice and Water Shield | Roofing Insights",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Illustrative frames are labeled in alt text",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "Zero Higgsfield credits. Unique Pillow crop/mirror/grade from existing 2026-09-21 roof stills."
+}

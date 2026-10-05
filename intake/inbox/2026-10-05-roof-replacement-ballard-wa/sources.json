@@ -1,0 +1,47 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Ballard (Seattle)",
+    "service": "Roof Replacement",
+    "slug": "roof-replacement-ballard-wa"
+  },
+  "sources": [
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "Washington L&I Verify a Contractor, Tradesperson or Business",
+      "retrieved": "2026-10-05",
+      "supports": "Official portal to confirm a roofing contractor's Washington registration, bond, and insurance before hiring."
+    },
+    {
+      "url": "https://www.seattle.gov/construction-and-inspections",
+      "title": "Seattle Department of Construction and Inspections (SDCI)",
+      "retrieved": "2026-10-05",
+      "supports": "City department that regulates building permits for Ballard properties in the City of Seattle."
+    },
+    {
+      "url": "https://www.seattle.gov/construction-and-inspections/permits/permits-we-issue-%28a-z%29/re-roof-permit",
+      "title": "SDCI — Re-Roof Permit",
+      "retrieved": "2026-10-05",
+      "supports": "States that re-roof work on one- and two-family homes and townhouses needs no permit if the envelope is unchanged (other than equal-or-better insulation); envelope changes need a construction permit; commercial/multifamily re-roof permit rules."
+    },
+    {
+      "url": "https://www.seattle.gov/documents/Departments/SDCI/Forms/RoofReplacementAffidavit.pdf",
+      "title": "SDCI — Roof Replacement Affidavit",
+      "retrieved": "2026-10-05",
+      "supports": "Lists re-roof permit exemptions and energy code requirements for roof replacements."
+    },
+    {
+      "url": "https://www.seattle.gov/neighborhoods/historic-preservation/historic-districts/ballard-avenue-landmark-district",
+      "title": "Seattle Department of Neighborhoods — Ballard Avenue Landmark District",
+      "retrieved": "2026-10-05",
+      "supports": "Ballard shingle-industry history (world's largest by 1895) and Certificate of Approval requirement for exterior changes within the district."
+    }
+  ],
+  "generation": {
+    "agent": "hermes",
+    "hermes_status": "hermes-ok-box-enriched",
+    "verified_count": 5,
+    "supports_mode": "enriched-verified",
+    "note": "PC hermes returned L&I + seattle.gov/sdci. Box enriched with SDCI Re-Roof Permit page, Roof Replacement Affidavit, and Ballard Avenue Landmark District page (HTTP 200 on 2026-10-05)."
+  }
+}
