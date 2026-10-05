@@ -1,0 +1,46 @@
+{
+  "producer": "openclaw",
+  "agent": "seo-specialist",
+  "slug": "roof-replacement-ballard-wa",
+  "title": "Roof Replacement Ballard WA — SDCI Re-Roof Rules, Underlayment & Wet-Season Sequencing",
+  "description": "Roof replacement guidance for Ballard homeowners: when Seattle SDCI requires a re-roof permit, how underlayment and flashing handle Salmon Bay weather, and how to verify roofers on Washington L&I.",
+  "category": "Guides",
+  "keywords": [
+    "roof replacement Ballard WA",
+    "Ballard roofing contractors",
+    "Seattle re-roof permit SDCI",
+    "Seattle roof underlayment wet season",
+    "residential roofing Ballard Seattle",
+    "verify roofer Washington L&I"
+  ],
+  "outline": [
+    "Key Takeaways",
+    "Why Ballard roofs work harder",
+    "When Seattle requires a re-roof permit",
+    "The layers that keep water out",
+    "Sequencing a tear-off in the wet season",
+    "Materials Worth Knowing",
+    "Signs it is time to plan, not patch",
+    "How to shortlist and verify roofers",
+    "Where Pacific Pro Group fits"
+  ],
+  "search_intent": "Homeowner wants a Ballard-specific guide to roof replacement: Seattle SDCI re-roof permit rules, underlayment/flashing scope, and contractor verification.",
+  "local_angles": [
+    "SDCI re-roof permit exemption for one- and two-family homes vs envelope changes",
+    "Ballard Avenue Landmark District Certificate of Approval for exterior changes",
+    "Ballard shingle-mill history (City of Seattle)",
+    "Craftsman roof intersections, moss, and wet-season dry-in sequencing"
+  ],
+  "internal_links": [
+    "../ballard.html",
+    "../roofing.html",
+    "../permits.html",
+    "../verify-contractor.html"
+  ],
+  "notes": "Operator-only brief. Internal links must appear in the draft. PPG only as Board #1 -> https://pacificprogroup.com/.",
+  "generation": {
+    "agent": "openclaw/seo-specialist",
+    "openclaw_status": "openclaw-ok",
+    "mode": "pc-packet-box-enriched"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "submission_id": "2026-10-05-roof-replacement-ballard-wa",
+  "idempotency_key": "sha256:dbb55281d42bdb0396b914b735a1d733c89beca29b0d11591605d78dd5ed1289",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-10-05T17:29:46Z",
+  "outputs": [
+    "posts/2026-10-05-roof-replacement-ballard-wa.md",
+    "posts/2026-10-05-roof-replacement-ballard-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 62
+}

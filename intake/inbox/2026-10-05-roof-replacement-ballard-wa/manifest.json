@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-10-05-roof-replacement-ballard-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-10-05T17:32:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Roof Replacement Ballard WA — SDCI Re-Roof Rules, Underlayment & Wet-Season Sequencing",
+    "date": "2026-10-05",
+    "slug": "roof-replacement-ballard-wa",
+    "description": "Roof replacement guidance for Ballard homeowners: when Seattle SDCI requires a re-roof permit, how underlayment and flashing handle Salmon Bay weather, and how to verify roofers on Washington L&I.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  }
+}
