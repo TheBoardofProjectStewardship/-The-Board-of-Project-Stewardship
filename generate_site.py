@@ -13610,6 +13610,9 @@ def main(argv: list[str] | None = None) -> None:
     if len(edmonds_custom) < 30:
         raise SystemExit(f"Expected 30 Edmonds custom firms, got {len(edmonds_custom)}")
 
+    # Footer links are omitted until the target file exists, so publish this
+    # page before any chrome that lists it.
+    (SITE_DIR / "pascal-editor.html").write_text(build_pascal_editor_page(), encoding="utf-8")
     (SITE_DIR / "index.html").write_text(build_about(), encoding="utf-8")
     (SITE_DIR / "additions.html").write_text(build_additions(additions), encoding="utf-8")
     (SITE_DIR / "custom-homes.html").write_text(build_custom_homes(custom_homes), encoding="utf-8")
@@ -13632,7 +13635,6 @@ def main(argv: list[str] | None = None) -> None:
     (SITE_DIR / "good-steward.html").write_text(build_good_steward_page(), encoding="utf-8")
     (SITE_DIR / "build-walkthrough.html").write_text(build_build_walkthrough_page(), encoding="utf-8")
     (SITE_DIR / "floor-plan-3d.html").write_text(build_floor_plan_3d_page(), encoding="utf-8")
-    (SITE_DIR / "pascal-editor.html").write_text(build_pascal_editor_page(), encoding="utf-8")
     (SITE_DIR / "energy-credit.html").write_text(build_energy_credit_page(), encoding="utf-8")
     (SITE_DIR / "site-visit.html").write_text(build_site_visit_page(), encoding="utf-8")
     (SITE_DIR / "pm-dashboard.html").write_text(build_pm_dashboard_page(), encoding="utf-8")
