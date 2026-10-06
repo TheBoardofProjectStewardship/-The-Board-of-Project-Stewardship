@@ -1,0 +1,48 @@
+{
+  "producer": "openclaw",
+  "agent": "seo-specialist",
+  "slug": "window-replacement-shoreline-wa",
+  "title": "Window Replacement Shoreline WA — Permit Exemptions, Lead-Safe Rules & Drained Openings",
+  "description": "Window replacement guidance for Shoreline homeowners: when the City of Shoreline code exempts a window swap from a building permit, lead-safe rules for pre-1978 homes, flashing that drains, and how to verify installers on Washington L&I.",
+  "category": "Guides",
+  "keywords": [
+    "window replacement Shoreline WA",
+    "Shoreline window permit exemption",
+    "Shoreline WA window installers",
+    "lead-safe window replacement pre-1978 Washington",
+    "full-frame window replacement King County",
+    "verify window contractor Washington L&I"
+  ],
+  "outline": [
+    "Key Takeaways",
+    "Shoreline house stock and why windows wear out here",
+    "When the City of Shoreline requires a permit",
+    "Lead-safe work on pre-1978 homes",
+    "Insert or full-frame: choosing the scope",
+    "Flashing that drains, not just seals",
+    "Materials Worth Knowing",
+    "How to shortlist and verify installers",
+    "Where Pacific Pro Group fits"
+  ],
+  "search_intent": "The user is looking for professional guidance on replacing windows in Shoreline, WA, focusing on local climate needs, energy savings, and installation quality.",
+  "local_angles": [
+    "SMC 15.05 window replacement permit exemption (no structural change, egress not reduced)",
+    "Mid-century Shoreline house stock and pre-1978 lead-safe RRP rules (WA Commerce)",
+    "Richmond Beach / Sound-facing wind-driven rain and tree-canopy shade",
+    "Light rail station-area infill vs older neighborhoods"
+  ],
+  "internal_links": [
+    "../shoreline.html",
+    "../windows.html",
+    "../permits.html",
+    "../verify-contractor.html"
+  ],
+  "notes": "Operator-only brief. Box refined title/outline for Shoreline-specific code + lead-safe angle (differentiates from 10-02 Lynnwood and 10-04 Mill Creek window posts). Internal links must appear in the draft. PPG only as Board #1 -> https://pacificprogroup.com/.",
+  "generation": {
+    "agent": "openclaw/seo-specialist",
+    "openclaw_status": "openclaw-ok",
+    "model": "gemma4-agent:latest",
+    "endpoint": "http://127.0.0.1:11434",
+    "mode": "openclaw-agent"
+  }
+}
