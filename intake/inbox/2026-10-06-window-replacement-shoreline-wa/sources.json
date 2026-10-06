@@ -1,0 +1,41 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Shoreline",
+    "service": "Window Replacement",
+    "slug": "window-replacement-shoreline-wa"
+  },
+  "sources": [
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "Washington L&I Verify a Contractor, Tradesperson or Business",
+      "retrieved": "2026-10-06",
+      "supports": "Official portal to confirm a window contractor's Washington registration, bond, and insurance before hiring."
+    },
+    {
+      "url": "https://ecode360.com/49772285",
+      "title": "Shoreline Municipal Code Chapter 15.05 — Construction and Building Codes",
+      "retrieved": "2026-10-06",
+      "supports": "Adds IRC R105.2(12) and IBC 105.2(15) permit exemptions: replacement of windows where no structural elements are revised and emergency escape and rescue openings are not reduced in size."
+    },
+    {
+      "url": "https://www.commerce.wa.gov/lead-based-paint/rrp/",
+      "title": "Washington State Department of Commerce — Renovation, Repair and Painting (RRP) Program",
+      "retrieved": "2026-10-06",
+      "supports": "RRP firm and individual certification required for renovation, repair, or painting work on pre-1978 homes and child-occupied facilities."
+    },
+    {
+      "url": "https://www.commerce.wa.gov/lead-based-paint/lbp-resources/",
+      "title": "Washington State Department of Commerce — Business and Homeowner Resources for Lead-Based Paint",
+      "retrieved": "2026-10-06",
+      "supports": "Publishes certified RRP company lists for homeowners hiring contractors."
+    }
+  ],
+  "generation": {
+    "agent": "hermes",
+    "hermes_status": "hermes-ok-box-enriched",
+    "verified_count": 4,
+    "supports_mode": "enriched-verified",
+    "note": "PC hermes returned L&I Verify only. Box enriched with SMC 15.05 (ecode360) and two WA Commerce lead-based paint pages (HTTP 200 on 2026-10-06). shorelinewa.gov returns 403 to box fetches, so not linked."
+  }
+}

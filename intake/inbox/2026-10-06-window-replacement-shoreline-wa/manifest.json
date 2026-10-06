@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-10-06-window-replacement-shoreline-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-10-06T17:35:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Window Replacement Shoreline WA — Permit Exemptions, Lead-Safe Rules & Drained Openings",
+    "date": "2026-10-06",
+    "slug": "window-replacement-shoreline-wa",
+    "description": "Window replacement guidance for Shoreline homeowners: when the City of Shoreline code exempts a window swap from a building permit, lead-safe rules for pre-1978 homes, flashing that drains, and how to verify installers on Washington L&I.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  }
+}
