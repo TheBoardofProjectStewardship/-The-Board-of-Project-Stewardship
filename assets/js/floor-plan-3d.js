@@ -1,8 +1,11 @@
 /* Floor plan to 3D walkthrough - Board of Project Stewardship.
    Illustrative planning sketch only. Everything runs in the browser; nothing is uploaded. */
+import { assessPlan, parseFeet } from './floor-plan-check.js';
+
 const RENDER_LIB = 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
 const STORE_KEY = 'board-floorplan-3d-v1';
-const WALL_H = 9, WALL_T = 0.5, DOOR_H = 6.8, SILL = 3, HEAD = 7, CUT_H = 4, EYE = 5.3;
+const WALL_T = 0.5, DOOR_H = 6.8, SILL = 3, HEAD = 7, CUT_H = 4, EYE = 5.3;
+let wallH = 9;
 const SVGNS = 'http://www.w3.org/2000/svg';
 
 const CATALOG = {
@@ -133,17 +136,54 @@ let underlay = { url: null, opacity: 0.45, width: 32 };
 const opts = { cutaway: true, roof: false, walk: false };
 let idSeq = 1000;
 const nid = (p) => p + (++idSeq);
+let scaleHold = false;
+let checkTouched = false;
+let planAcknowledged = false;
+let measureMode = false;
+let measureLine = null;
 
 function status(msg) { const el = $('fp-status'); if (el) el.textContent = msg; }
-function save() { try { localStorage.setItem(STORE_KEY, JSON.stringify(plan)); } catch (e) { /* private mode */ } }
+function readCheckFields() {
+  return {
+    labeled: $('fp-labeled') ? $('fp-labeled').value : '',
+    measured: $('fp-measured') ? $('fp-measured').value : '',
+    ceiling: $('fp-ceiling') ? $('fp-ceiling').value : '9',
+  };
+}
+function save() {
+  try {
+    if (plan) plan.check = readCheckFields();
+    localStorage.setItem(STORE_KEY, JSON.stringify(plan));
+  } catch (e) { /* private mode */ }
+}
+function syncCheckFromPlan() {
+  const c = (plan && plan.check) || {};
+  if ($('fp-labeled') && c.labeled != null) $('fp-labeled').value = c.labeled;
+  if ($('fp-measured') && c.measured != null) $('fp-measured').value = c.measured;
+  if ($('fp-ceiling') && c.ceiling != null && c.ceiling !== '') $('fp-ceiling').value = c.ceiling;
+}
 function pushHistory() { history.push(JSON.stringify(plan)); if (history.length > 60) history.shift(); }
-function undo() { if (!history.length) return status('Nothing to undo.'); plan = JSON.parse(history.pop()); selected = null; changed(false); status('Undone.'); }
-function changed(fit) { if (fit) fitView(); save(); render2D(); scene3D.rebuild(); updateSelectionUI(); }
+function undo() {
+  if (!history.length) return status('Nothing to undo.');
+  plan = JSON.parse(history.pop()); selected = null;
+  syncCheckFromPlan();
+  changed(false);
+  status('Undone.');
+}
+function changed(fit) {
+  if (fit) fitView();
+  render2D();
+  updateSelectionUI();
+  if (checkTouched) runDimensionCheck();
+  else { save(); if (!scaleHold) scene3D.rebuild(); }
+}
 function valid(p) { return p && Array.isArray(p.walls) && Array.isArray(p.openings) && Array.isArray(p.items); }
 function loadSample(key) {
   const s = SAMPLES[key] || SAMPLES.cottage; pushHistory();
-  plan = s.make(); plan.labels = plan.labels || []; selected = null; changed(true);
-  status(`Loaded sample: ${s.name}. Drag furniture, add walls, doors, and windows, then look around in 3D.`);
+  plan = s.make(); plan.labels = plan.labels || []; selected = null;
+  resetCheck();
+  changed(true);
+  status(`Loaded sample: ${s.name}. Check a dimension written on the plan before you rely on the 3D model.`);
 }
 
 /* ---------- 2D plan editor ---------- */
@@ -228,6 +268,11 @@ function render2D() {
     const t = el('text', { x: (preview.x1 + preview.x2) / 2, y: (preview.y1 + preview.y2) / 2 - 0.8, 'font-size': 0.8, fill: '#4ade80', 'text-anchor': 'middle' }, svg);
     t.textContent = fmtFt(len(preview));
   }
+  if (measureLine) {
+    el('line', { x1: measureLine.x1, y1: measureLine.y1, x2: measureLine.x2, y2: measureLine.y2, stroke: '#fbbf24', 'stroke-width': 0.12, 'stroke-linecap': 'round' }, svg);
+    const t = el('text', { x: (measureLine.x1 + measureLine.x2) / 2, y: (measureLine.y1 + measureLine.y2) / 2 - 0.8, 'font-size': 0.8, fill: '#fbbf24', 'text-anchor': 'middle' }, svg);
+    t.textContent = fmtFt(Math.hypot(measureLine.x2 - measureLine.x1, measureLine.y2 - measureLine.y1));
+  }
 }
 function snapPoint(p) {
   let best = null, bd = 0.8;
@@ -246,7 +291,14 @@ function clampOpening(o, w) {
 let drag = null;
 svg.addEventListener('pointerdown', (e) => {
   if (e.button > 0) return;
-  const p = toPlan(e); const hit = e.target.closest('.fp-hit');
+  const p = toPlan(e);
+  if (measureMode) {
+    measureLine = { x1: p.x, y1: p.y, x2: p.x, y2: p.y };
+    svg.setPointerCapture(e.pointerId);
+    render2D();
+    return;
+  }
+  const hit = e.target.closest('.fp-hit');
   if (tool === 'select') {
     if (!hit) { selected = null; render2D(); updateSelectionUI(); return; }
     selected = { type: hit.dataset.type, id: hit.dataset.id };
@@ -277,6 +329,7 @@ svg.addEventListener('pointerdown', (e) => {
 });
 svg.addEventListener('pointermove', (e) => {
   const p = toPlan(e);
+  if (measureLine) { measureLine.x2 = p.x; measureLine.y2 = p.y; render2D(); return; }
   if (preview) {
     let s = snapPoint(p); const dx = s.x - preview.x1, dy = s.y - preview.y1;
     const ang = Math.abs(Math.atan2(dy, dx) * 180 / Math.PI);
@@ -294,6 +347,21 @@ svg.addEventListener('pointermove', (e) => {
   }
 });
 function endPointer() {
+  if (measureLine) {
+    const L = Math.hypot(measureLine.x2 - measureLine.x1, measureLine.y2 - measureLine.y1);
+    measureLine = null;
+    setMeasureMode(false);
+    if (L >= 0.5) {
+      $('fp-measured').value = String(Math.round(L * 100) / 100);
+      planAcknowledged = false;
+      checkTouched = true;
+      runDimensionCheck();
+    } else {
+      render2D();
+      status('That measurement is shorter than half a foot. Drag a longer length.');
+    }
+    return;
+  }
   if (preview) {
     const w = preview; preview = null;
     if (len(w) >= 1) { pushHistory(); plan.walls.push({ id: nid('w'), x1: w.x1, y1: w.y1, x2: w.x2, y2: w.y2 }); changed(false); status(`Wall added: ${fmtFt(len(w))}. Keep drawing, or switch to Door or Window.`); }
@@ -355,8 +423,9 @@ function showFallback(reason) {
 }
 /* Simple axonometric drawing for devices without WebGL. */
 function drawIso() {
+  if (scaleHold) return;
   const box = $('fp-iso'); box.innerHTML = '';
-  const H = opts.cutaway ? CUT_H : WALL_H; const c = Math.cos(Math.PI / 6), s = Math.sin(Math.PI / 6);
+  const H = opts.cutaway ? CUT_H : wallH; const c = Math.cos(Math.PI / 6), s = Math.sin(Math.PI / 6);
   const P = (x, y, z) => [(x - y) * c, (x + y) * s - z];
   const faces = [];
   const b = wallBounds(plan);
@@ -442,8 +511,9 @@ async function init3D() {
     const m = new THREE.Mesh(geo, mats.roof); m.castShadow = true; return m;
   }
   function rebuild() {
+    if (scaleHold) return;
     clearGroup();
-    const H = (opts.roof || opts.walk) ? WALL_H : (opts.cutaway ? CUT_H : WALL_H);
+    const H = (opts.roof || opts.walk) ? wallH : (opts.cutaway ? CUT_H : wallH);
     const b = wallBounds(plan); center = { x: (b.x0 + b.x1) / 2, z: (b.y0 + b.y1) / 2 };
     radius = Math.max(18, Math.hypot(b.x1 - b.x0, b.y1 - b.y0));
     if (plan.walls.length) {
@@ -467,7 +537,7 @@ async function init3D() {
       const m = boxMesh(c.w, c.h, c.d, itemMats[it.kind], it.kind !== 'rug');
       m.position.set(it.x, 0.2 + c.h / 2, it.y); m.rotation.y = -it.rot * Math.PI / 180; group.add(m);
     }
-    if (opts.roof && plan.walls.length) group.add(roofMesh(b, WALL_H + 0.2));
+    if (opts.roof && plan.walls.length) group.add(roofMesh(b, wallH + 0.2));
     sun.target.position.set(center.x, 0, center.z); sun.position.set(center.x - 30, 60, center.z - 20);
     orbit.r = Math.min(Math.max(orbit.r, radius * 0.5), radius * 3);
     dirty = true;
@@ -561,6 +631,154 @@ async function init3D() {
   $('fp-3d-loading').hidden = true;
 }
 
+/* ---------- dimension check ---------- */
+function setBadge(label, cls) {
+  const b = $('fp-check-badge');
+  if (!b) return;
+  b.textContent = label;
+  b.className = 'fp-chip' + (cls ? ' ' + cls : '');
+}
+function showHold(text) {
+  const hold = $('fp-3d-hold');
+  if (!hold) return;
+  hold.hidden = false;
+  const p = $('fp-3d-hold-text');
+  if (p) p.textContent = text;
+}
+function hideHold() {
+  const hold = $('fp-3d-hold');
+  if (hold) hold.hidden = true;
+}
+function showIdleSummary() {
+  const box = $('fp-check-summary');
+  const list = $('fp-check-list');
+  const head = $('fp-check-heading');
+  if (!box || !list || !head) return;
+  box.hidden = false;
+  box.className = 'is-incomplete';
+  head.textContent = 'Dimension check';
+  list.replaceChildren();
+  const li = document.createElement('li');
+  li.className = 'fp-note';
+  li.textContent = 'Enter a dimension written on the plan and the same length at this scale, then check before you rely on the 3D model.';
+  list.appendChild(li);
+  setBadge('Not checked', '');
+}
+function renderSummary(result) {
+  const box = $('fp-check-summary');
+  const list = $('fp-check-list');
+  const head = $('fp-check-heading');
+  if (!box || !list || !head) return;
+  box.hidden = false;
+  list.replaceChildren();
+  if (result.status === 'passed') {
+    box.className = 'is-pass';
+    head.textContent = 'Dimension check \u00b7 Passed';
+    setBadge('Passed', 'is-pass');
+  } else if (result.status === 'warnings') {
+    box.className = 'is-warn';
+    head.textContent = 'Dimension check \u00b7 Warnings';
+    setBadge('Warnings', 'is-warn');
+  } else {
+    box.className = 'is-incomplete';
+    head.textContent = 'Dimension check';
+    setBadge('Not checked', '');
+  }
+  for (const item of result.items) {
+    const li = document.createElement('li');
+    li.className = item.level === 'warn' ? 'fp-warn' : (item.level === 'pass' ? 'fp-pass' : 'fp-note');
+    li.textContent = item.text;
+    list.appendChild(li);
+  }
+}
+function applyCeiling() {
+  const entered = parseFeet($('fp-ceiling') ? $('fp-ceiling').value : '9');
+  const n = entered == null ? 9 : entered;
+  wallH = Math.min(20, Math.max(6, n));
+  return n;
+}
+function runDimensionCheck() {
+  const ceilingFeet = applyCeiling();
+  const result = assessPlan({
+    labeledText: $('fp-labeled').value,
+    measuredText: $('fp-measured').value,
+    ceilingFeet,
+    walls: plan.walls,
+  });
+  renderSummary(result);
+  const matchBtn = $('fp-match-scale');
+  const anywayBtn = $('fp-build-anyway');
+  if (matchBtn) matchBtn.hidden = !result.mismatch;
+  if (anywayBtn) anywayBtn.hidden = !result.mismatch;
+  if (result.mismatch && !planAcknowledged) {
+    scaleHold = true;
+    const line = result.items.find((i) => i.code === 'scale-mismatch');
+    showHold(line ? line.text : 'The scale does not match the plan. Correct it before the 3D model updates.');
+  } else {
+    const wasHeld = scaleHold;
+    scaleHold = false;
+    hideHold();
+    if (wasHeld || scene3D.ready) scene3D.rebuild();
+  }
+  const lead = result.items.find((i) => i.level === 'warn') || result.items[0];
+  if (lead) status(lead.text);
+  save();
+  return result;
+}
+function resetCheck() {
+  checkTouched = false;
+  planAcknowledged = false;
+  scaleHold = false;
+  measureLine = null;
+  setMeasureMode(false);
+  if ($('fp-labeled')) $('fp-labeled').value = '';
+  if ($('fp-measured')) $('fp-measured').value = '';
+  if ($('fp-match-scale')) $('fp-match-scale').hidden = true;
+  if ($('fp-build-anyway')) $('fp-build-anyway').hidden = true;
+  hideHold();
+  showIdleSummary();
+}
+function setMeasureMode(on) {
+  measureMode = !!on;
+  const btn = $('fp-measure');
+  if (btn) btn.setAttribute('aria-pressed', measureMode ? 'true' : 'false');
+  if (!svg) return;
+  if (measureMode) {
+    svg.style.cursor = 'crosshair';
+    status('Measure: press and drag the length written on the plan. Release to use that length at the current scale.');
+  } else svg.style.cursor = tool === 'select' ? 'default' : 'crosshair';
+}
+function matchScaleToLabel() {
+  const labeled = parseFeet($('fp-labeled').value);
+  const measured = parseFeet($('fp-measured').value);
+  if (!(labeled > 0) || !(measured > 0)) return;
+  const factor = labeled / measured;
+  if (!(factor > 0.05 && factor < 20)) {
+    status('That scale change is too large to apply. Check the two lengths.');
+    return;
+  }
+  pushHistory();
+  for (const w of plan.walls) { w.x1 *= factor; w.y1 *= factor; w.x2 *= factor; w.y2 *= factor; }
+  for (const o of plan.openings) o.width *= factor;
+  for (const it of plan.items) { it.x *= factor; it.y *= factor; }
+  for (const l of plan.labels || []) { l.x *= factor; l.y *= factor; }
+  underlay.width = Math.min(399, Math.max(5.5, underlay.width * factor));
+  const wEl = $('fp-underlay-w');
+  if (wEl) wEl.value = String(Math.round(underlay.width * 10) / 10);
+  $('fp-measured').value = $('fp-labeled').value.trim();
+  planAcknowledged = false;
+  checkTouched = true;
+  changed(true);
+  status('Scale updated so the reference length matches the dimension written on the plan.');
+}
+function buildAnyway() {
+  planAcknowledged = true;
+  scaleHold = false;
+  hideHold();
+  scene3D.rebuild();
+  status('3D model built with the current scale. The dimension warning is still listed above.');
+}
+
 /* ---------- wire up controls ---------- */
 function wire() {
   const kindSel = $('fp-kind');
@@ -573,6 +791,13 @@ function wire() {
   $('fp-rotate').addEventListener('click', rotateSelected);
   $('fp-fit').addEventListener('click', () => { fitView(); render2D(); });
   $('fp-clear').addEventListener('click', () => { if (!window.confirm('Clear the plan and start from a blank grid?')) return; pushHistory(); plan = { walls: [], openings: [], items: [], labels: [] }; selected = null; changed(false); setTool('wall'); });
+  $('fp-labeled').addEventListener('input', () => { planAcknowledged = false; });
+  $('fp-measured').addEventListener('input', () => { planAcknowledged = false; });
+  $('fp-ceiling').addEventListener('change', () => { checkTouched = true; planAcknowledged = false; runDimensionCheck(); });
+  $('fp-check-run').addEventListener('click', () => { checkTouched = true; runDimensionCheck(); });
+  $('fp-measure').addEventListener('click', () => setMeasureMode(!measureMode));
+  $('fp-match-scale').addEventListener('click', matchScaleToLabel);
+  $('fp-build-anyway').addEventListener('click', buildAnyway);
   const toggle = (id, key, after) => $(id).addEventListener('click', (e) => {
     opts[key] = !opts[key]; e.currentTarget.setAttribute('aria-pressed', String(opts[key])); if (after) after(); scene3D.rebuild();
   });
@@ -592,14 +817,22 @@ function wire() {
   });
   $('fp-import').addEventListener('change', async (e) => {
     const f = e.target.files[0]; if (!f) return;
-    try { const p = JSON.parse(await f.text()); if (!valid(p)) throw new Error('bad'); pushHistory(); plan = p; plan.labels = plan.labels || []; selected = null; changed(true); status('Sketch loaded.'); }
+    try {
+      const p = JSON.parse(await f.text()); if (!valid(p)) throw new Error('bad');
+      pushHistory(); plan = p; plan.labels = plan.labels || []; selected = null;
+      syncCheckFromPlan();
+      checkTouched = !!(plan.check && (plan.check.labeled || plan.check.measured));
+      planAcknowledged = false;
+      changed(true);
+      status(checkTouched ? 'Sketch loaded. Dimension check updated from the file.' : 'Sketch loaded.');
+    }
     catch (err) { status('That file is not a saved sketch from this page.'); }
     e.target.value = '';
   });
   $('fp-underlay').addEventListener('change', (e) => {
     const f = e.target.files[0]; if (!f) return;
     if (underlay.url) URL.revokeObjectURL(underlay.url);
-    underlay.url = URL.createObjectURL(f); render2D(); status('Tracing image added under the grid (it stays on your device). Set its width in feet, then trace walls over it.');
+    underlay.url = URL.createObjectURL(f); render2D(); status('Tracing image added (it stays on your device). Set its width in feet, then check a dimension written on the plan before you trace walls.');
   });
   $('fp-underlay-op').addEventListener('input', (e) => { underlay.opacity = +e.target.value; render2D(); });
   $('fp-underlay-w').addEventListener('change', (e) => { const v = +e.target.value; if (v > 4 && v < 400) { underlay.width = v; render2D(); } });
@@ -611,7 +844,10 @@ function wire() {
     if (!svg.matches(':hover') && document.activeElement !== svg && !selected) return;
     if (e.key === 'Delete' || e.key === 'Backspace') { if (selected) { e.preventDefault(); deleteSelected(); } }
     else if (e.key === 'r' || e.key === 'R') rotateSelected();
-    else if (e.key === 'Escape') { selected = null; preview = null; render2D(); updateSelectionUI(); }
+    else if (e.key === 'Escape') {
+      if (measureMode || measureLine) { measureLine = null; setMeasureMode(false); render2D(); return; }
+      selected = null; preview = null; render2D(); updateSelectionUI();
+    }
   });
   new ResizeObserver(() => render2D()).observe(svg);
 }
@@ -621,8 +857,13 @@ function start() {
   try { stored = JSON.parse(localStorage.getItem(STORE_KEY) || 'null'); } catch (e) { stored = null; }
   plan = valid(stored) ? stored : SAMPLES.cottage.make();
   plan.labels = plan.labels || [];
-  wire(); fitView(); render2D(); setTool('select');
-  status(valid(stored) ? 'Welcome back. Your last sketch was restored from this browser.' : 'Sample loaded. Drag furniture on the plan, or pick a tool to draw walls, doors, and windows.');
+  wire();
+  syncCheckFromPlan();
+  checkTouched = !!(plan.check && (plan.check.labeled || plan.check.measured));
+  fitView(); render2D(); setTool('select');
+  if (checkTouched) runDimensionCheck();
+  else showIdleSummary();
+  status(valid(stored) ? 'Welcome back. Your last sketch was restored from this browser. Check a dimension written on the plan before you rely on the 3D model.' : 'Sample loaded. Check a dimension written on the plan, or drag furniture and add walls, doors, and windows.');
   init3D();
 }
 start();
