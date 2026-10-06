@@ -1418,6 +1418,7 @@ def nav_html(active: str = "", prefix: str = "") -> str:
         ("contact", href("contact.html"), "Contact"),
         ("steward", href("good-steward.html"), "Good Steward"),
         ("floor-plan-3d", href("floor-plan-3d.html"), "Floor Plan to 3D"),
+        ("pascal-editor", href("pascal-editor.html"), "Pascal Editor Sketch"),
         ("hire-questions", href("hire-questions.html"), "Hire Questions"),
         ("hiring-a-contractor", href("hiring-a-contractor.html"), "Hiring a Contractor"),
         ("kitchen-remodel-planning", href("kitchen-remodel-planning.html"), "Kitchen Remodel Planning"),
@@ -1517,6 +1518,7 @@ def footer_html(prefix: str = "./", active: str = "") -> str:
         ("kitchen-remodel-planning", f"{prefix}kitchen-remodel-planning.html", "Kitchen remodel planning"),
         ("bathroom-waterproofing-guide", f"{prefix}bathroom-waterproofing-guide.html", "Bathroom waterproofing"),
         ("home-addition-planning", f"{prefix}home-addition-planning.html", "Home addition planning"),
+        ("pascal-editor", f"{prefix}pascal-editor.html", "Pascal Editor sketch"),
         ("steward", f"{prefix}good-steward.html", "Good Steward"),
         ("story", f"{prefix}another-story.html", "Another Story"),
         ("glossary", f"{prefix}glossary.html", "Glossary"),
@@ -1609,6 +1611,7 @@ def public_tool_href(slug: str, prefix: str = "") -> str:
         "energy-credits": "energy-credit.html",
         "build-walkthrough": "build-walkthrough.html",
         "floor-plan-3d": "floor-plan-3d.html",
+        "pascal-editor": "pascal-editor.html",
         "story": "another-story.html",
         "steward": "good-steward.html",
         "permits": "permits.html",
@@ -1656,7 +1659,7 @@ POST_ROOT_HUB_STEMS = frozenset({
     "hiring-a-contractor", "how-we-rank", "verify-contractor", "learn", "directory",
     "adu", "adu-checklist", "change-orders", "coastal-waterproofing", "materials",
     "glossary", "contact", "about", "faq", "site-visit", "pm-dashboard",
-    "energy-credit", "build-walkthrough", "floor-plan-3d", "good-steward", "another-story",
+    "energy-credit", "build-walkthrough", "floor-plan-3d", "pascal-editor", "good-steward", "another-story",
     "kitchen", "bathrooms", "additions", "custom-homes", "edmonds-custom-homes",
     "trades", "blog", "index", "windows", "roofing", "insulation", "siding",
     "commercial", "spec-homes", "videos", "write", "bid-comparison",
@@ -2658,6 +2661,7 @@ RELATED_LINK_PACKS: dict[str, list[tuple[str, str]]] = {
         ("Site Visit Checklist", "./site-visit.html"),
         ("Build Walkthrough", "./build-walkthrough.html"),
         ("Floor plan to 3D", "./floor-plan-3d.html"),
+        ("Pascal Editor sketch", "./pascal-editor.html"),
         ("PM Dashboard", "./pm-dashboard.html"),
         ("Energy code credits", "./energy-credit.html"),
         ("Learn hub", "./learn.html"),
@@ -5807,6 +5811,7 @@ Base: `{BASE_URL}`
 | `blog.html` | Blog index |
 | `good-steward.html` | Good Steward hub |
 | `build-walkthrough.html` | Build Walkthrough landing |
+| `pascal-editor.html` | Pascal Editor remodel sketch walkthrough |
 | `site-visit.html` | Site Visit & Discovery landing |
 | `pm-dashboard.html` | PM Execution Dashboard landing |
 | `energy-credit.html` | WSEC-R energy credits landing |
@@ -5928,6 +5933,7 @@ def write_sitemap(posts: list[dict]) -> None:
         "good-steward.html",
         "build-walkthrough.html",
         "floor-plan-3d.html",
+        "pascal-editor.html",
         "site-visit.html",
         "pm-dashboard.html",
         "energy-credit.html",
@@ -6103,6 +6109,7 @@ def build_good_steward_page() -> str:
     </p>
     <ul class="text-sm text-slate-300 space-y-1 mb-2 list-disc pl-5">
       <li><strong class="text-white">Build Walkthrough</strong> — visual sales-to-build stages with homeowner checklists</li>
+      <li><strong class="text-white">Pascal Editor sketch</strong> — how to draw a remodel or addition in the free open-source Pascal Editor before a contractor meeting</li>
       <li><strong class="text-white">Site Visit &amp; Discovery</strong> — what to observe and ask before plans or pricing (includes feasibility &amp; estimate calculator)</li>
       <li><strong class="text-white">PM Execution Dashboard</strong> — phase checklist + status notes for an active build</li>
     </ul>
@@ -6125,6 +6132,7 @@ def build_good_steward_page() -> str:
       <div class="flex flex-wrap gap-3">
         <a href="{public_tool_href('build-walkthrough')}" class="bg-primary text-white px-5 py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs">Build Walkthrough</a>
         <a href="{public_tool_href('floor-plan-3d')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Floor Plan to 3D</a>
+        <a href="{public_tool_href('pascal-editor')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Pascal Editor Sketch</a>
         <a href="{public_tool_href('site-visit')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Site Visit &amp; Discovery</a>
         <a href="{public_tool_href('pm-dashboard')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">PM Dashboard</a>
         <a href="{public_tool_href('another-story')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Another Story</a>
@@ -6394,7 +6402,7 @@ def build_floor_plan_3d_page() -> str:
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Floor Plan to 3D Walkthrough</h1>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Sketch a floor plan, or trace one from a listing or your designer, and see it rise into a furnished 3D model you can spin, cut away, and walk through at eye level. It is a free planning tool from the Board of Project Stewardship for homeowners who want to understand a layout before a remodel, addition, or ADU conversation with a contractor.</p>
     <p class="mb-3"><span class="fp-chip">Illustrative sketch · not construction documents</span></p>
-    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="{public_tool_href('good-steward')}" class="text-secondary hover:underline">Good Steward</a>. Also: <a href="{public_tool_href('build-walkthrough')}" class="text-secondary hover:underline">Build Walkthrough</a> · <a href="{public_tool_href('site-visit')}" class="text-secondary hover:underline">Site Visit Checklist</a> · <a href="{public_tool_href('hire-questions')}" class="text-secondary hover:underline">Hire interview questions</a>.</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="{public_tool_href('good-steward')}" class="text-secondary hover:underline">Good Steward</a>. Also: <a href="{public_tool_href('pascal-editor')}" class="text-secondary hover:underline">Pascal Editor sketch</a> · <a href="{public_tool_href('build-walkthrough')}" class="text-secondary hover:underline">Build Walkthrough</a> · <a href="{public_tool_href('site-visit')}" class="text-secondary hover:underline">Site Visit Checklist</a> · <a href="{public_tool_href('hire-questions')}" class="text-secondary hover:underline">Hire interview questions</a>.</p>
   </header>
   <section id="fp3d" class="max-w-6xl mx-auto px-4 pb-8 relative z-20" aria-label="Floor plan to 3D tool">
     <div class="flex flex-wrap items-center gap-2 mb-3">
@@ -6519,6 +6527,359 @@ def build_floor_plan_3d_page() -> str:
         ],
     )
 
+
+
+PASCAL_EDITOR_STYLE = """  <style>
+    .pascal-jump { display:flex; flex-wrap:wrap; gap:0.5rem; margin:0 0 1.25rem; }
+    .pascal-jump a {
+      display:inline-flex; align-items:center; min-height:2.75rem; padding:0.4rem 0.75rem;
+      border-radius:999px; border:1px solid rgba(255,255,255,0.12); background:rgba(255,255,255,0.03);
+      color:#e2e8f0; font-size:0.72rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;
+      text-decoration:none;
+    }
+    .pascal-jump a:hover { border-color:#4ade80; color:#4ade80; }
+    .pascal-jump a:focus-visible, .pascal-cta:focus-visible { outline:2px solid #4ade80; outline-offset:2px; }
+    .pascal-cta {
+      display:inline-flex; align-items:center; justify-content:center; gap:0.5rem;
+      min-height:2.75rem; padding:0.75rem 1.1rem; border-radius:0.5rem;
+      background:#166534; color:#fff; font-size:0.75rem; font-weight:800;
+      letter-spacing:0.08em; text-transform:uppercase; text-decoration:none;
+    }
+    .pascal-cta:hover { background:#15803d; }
+    .pascal-cta-secondary {
+      display:inline-flex; align-items:center; justify-content:center; min-height:2.75rem;
+      padding:0.7rem 1rem; border-radius:0.5rem; border:1px solid rgba(255,255,255,0.16);
+      color:#e2e8f0; font-size:0.75rem; font-weight:700; letter-spacing:0.06em;
+      text-transform:uppercase; text-decoration:none;
+    }
+    .pascal-cta-secondary:hover { border-color:#4ade80; color:#4ade80; }
+    .pascal-chip {
+      display:inline-block; font-size:0.62rem; font-weight:700; letter-spacing:0.1em;
+      text-transform:uppercase; color:#fbbf24; border:1px solid rgba(251,191,36,0.35);
+      border-radius:999px; padding:0.2rem 0.55rem;
+    }
+    .pascal-step {
+      background:#111814; border:1px solid rgba(255,255,255,0.08); border-radius:1rem;
+      padding:1.1rem 1.1rem 0.4rem; margin:0 0 1rem;
+    }
+    .pascal-step h2 { margin-top:0; }
+    .pascal-kicker {
+      display:block; font-size:0.68rem; font-weight:800; letter-spacing:0.16em;
+      text-transform:uppercase; color:#4ade80; margin-bottom:0.35rem;
+    }
+    .pascal-figure {
+      margin:0.5rem 0 1rem; border-radius:0.75rem; overflow:hidden;
+      border:1px solid rgba(255,255,255,0.08); background:#0d120f;
+    }
+    .pascal-figure svg { display:block; width:100%; height:auto; }
+    .pascal-figure figcaption {
+      padding:0.65rem 0.9rem; font-size:0.85rem; color:#94a3b8; font-weight:300;
+      line-height:1.45; border-top:1px solid rgba(255,255,255,0.06);
+    }
+    .pascal-ol { margin:0.25rem 0 0.75rem; padding-left:1.2rem; }
+    .pascal-ol li { margin-bottom:0.45rem; }
+    @media (max-width: 640px) {
+      .pascal-step { padding:0.9rem 0.85rem 0.2rem; }
+      .pascal-jump a { font-size:0.66rem; padding:0.35rem 0.65rem; }
+    }
+  </style>
+"""
+
+
+def _pascal_plan_svg() -> str:
+    return """<svg viewBox="0 0 420 230" role="img" aria-labelledby="pascal-plan-title pascal-plan-desc">
+      <title id="pascal-plan-title">Walls drawn to a measured rectangle</title>
+      <desc id="pascal-plan-desc">A four-wall room on a grid, with length and width called out the way Pascal Editor shows a live measurement label.</desc>
+      <rect width="420" height="230" fill="#0d120f"/>
+      <g stroke="rgba(255,255,255,0.06)" stroke-width="1">
+        <path d="M20 20 V210 M60 20 V210 M100 20 V210 M140 20 V210 M180 20 V210 M220 20 V210 M260 20 V210 M300 20 V210 M340 20 V210 M380 20 V210"/>
+        <path d="M20 20 H400 M20 60 H400 M20 100 H400 M20 140 H400 M20 180 H400 M20 220 H400"/>
+      </g>
+      <rect x="90" y="48" width="240" height="120" fill="rgba(22,101,52,0.18)" stroke="#4ade80" stroke-width="8"/>
+      <path d="M90 188 H330" stroke="#e2e8f0" stroke-width="1.5"/>
+      <path d="M90 182 V194 M330 182 V194" stroke="#e2e8f0" stroke-width="1.5"/>
+      <text x="210" y="208" text-anchor="middle" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="13">Length label</text>
+      <path d="M348 48 V168" stroke="#e2e8f0" stroke-width="1.5"/>
+      <path d="M342 48 H354 M342 168 H354" stroke="#e2e8f0" stroke-width="1.5"/>
+      <text x="392" y="112" text-anchor="middle" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="13" transform="rotate(90 392 112)">Width label</text>
+      <circle cx="90" cy="48" r="4" fill="#4ade80"/>
+      <circle cx="330" cy="168" r="4" fill="#4ade80"/>
+    </svg>"""
+
+
+def _pascal_levels_svg() -> str:
+    return """<svg viewBox="0 0 420 230" role="img" aria-labelledby="pascal-levels-title pascal-levels-desc">
+      <title id="pascal-levels-title">Two levels and a roof level</title>
+      <desc id="pascal-levels-desc">Ground Floor and Floor 1 stacked, with an empty level above them reserved for the roof.</desc>
+      <rect width="420" height="230" fill="#0d120f"/>
+      <g fill="none" stroke="#4ade80" stroke-width="3">
+        <path d="M70 168 H250 L290 148 H110 Z" fill="rgba(22,101,52,0.35)"/>
+        <path d="M90 118 H270 L310 98 H130 Z" fill="rgba(74,222,128,0.12)"/>
+        <path d="M110 68 H290 L330 48 H150 Z" fill="rgba(255,255,255,0.03)" stroke-dasharray="5 4"/>
+      </g>
+      <text x="168" y="196" text-anchor="middle" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="13">Ground Floor</text>
+      <text x="196" y="138" text-anchor="middle" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="13">Floor 1</text>
+      <text x="214" y="42" text-anchor="middle" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="13">Roof level (empty of rooms)</text>
+    </svg>"""
+
+
+def _pascal_roof_svg() -> str:
+    return """<svg viewBox="0 0 420 220" role="img" aria-labelledby="pascal-roof-title pascal-roof-desc">
+      <title id="pascal-roof-title">A gable roof over the walls</title>
+      <desc id="pascal-roof-desc">A simple gable at the editor default of 40 degrees, with the seven roof type names listed beside it.</desc>
+      <rect width="420" height="220" fill="#0d120f"/>
+      <path d="M48 150 H210 V92 H48 Z" fill="rgba(22,101,52,0.28)" stroke="#94a3b8" stroke-width="2"/>
+      <path d="M48 92 L129 42 L210 92" fill="rgba(74,222,128,0.2)" stroke="#4ade80" stroke-width="3"/>
+      <path d="M78 92 L129 58" stroke="#fbbf24" stroke-width="1.5"/>
+      <text x="86" y="78" fill="#fbbf24" font-family="Inter, system-ui, sans-serif" font-size="12">40°</text>
+      <text x="248" y="36" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="12">Roof types</text>
+      <text x="248" y="64" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="14">Hip · Gable · Shed</text>
+      <text x="248" y="88" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="14">Flat · Gambrel</text>
+      <text x="248" y="112" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="14">Dutch · Mansard</text>
+      <text x="248" y="156" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="12">New roofs start as</text>
+      <text x="248" y="176" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="14">a 40° gable</text>
+    </svg>"""
+
+
+def _pascal_check_svg() -> str:
+    return """<svg viewBox="0 0 420 200" role="img" aria-labelledby="pascal-check-title pascal-check-desc">
+      <title id="pascal-check-title">Compare the model label with a tape</title>
+      <desc id="pascal-check-desc">A wall length in the model beside a tape reading taken in the real room.</desc>
+      <rect width="420" height="200" fill="#0d120f"/>
+      <rect x="36" y="48" width="160" height="100" fill="rgba(22,101,52,0.2)" stroke="#4ade80" stroke-width="6"/>
+      <text x="116" y="104" text-anchor="middle" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="13">Model label</text>
+      <rect x="230" y="58" width="154" height="36" rx="6" fill="#1a1a1a" stroke="#fbbf24" stroke-width="2"/>
+      <path d="M242 76 H372" stroke="#fbbf24" stroke-width="2"/>
+      <path d="M250 70 V82 M270 70 V82 M290 70 V82 M310 70 V82 M330 70 V82 M350 70 V82 M370 70 V82" stroke="#fbbf24" stroke-width="1.5"/>
+      <text x="307" y="118" text-anchor="middle" fill="#e2e8f0" font-family="Inter, system-ui, sans-serif" font-size="13">Tape on the real wall</text>
+      <text x="210" y="168" text-anchor="middle" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="13">These two numbers should agree</text>
+    </svg>"""
+
+
+def build_pascal_editor_page() -> str:
+    """Homeowner walkthrough for the open-source Pascal Editor. Steps follow public docs."""
+    page_url = f"{BASE_URL}pascal-editor.html"
+    editor_url = "https://editor.pascal.app"
+    docs_url = "https://editor.pascal.app/docs"
+    first_scene_url = "https://editor.pascal.app/docs/getting-started/your-first-scene"
+    repo_url = "https://github.com/pascalorg/editor"
+    license_url = "https://github.com/pascalorg/editor/blob/main/LICENSE"
+    steps = [
+        (
+            "Start a project",
+            "Open editor.pascal.app and sign in with Google or email. Create a new project, name it, keep Blank project unless you want a template, and choose Public or Private. The hosted editor saves to your account automatically.",
+        ),
+        (
+            "Draw walls to real dimensions",
+            "Open the Build tab and choose Rectangle, Polygon, or Walls. Set Units to Imperial in the Display menu when you want feet and inches on the live measurement label. Draw the walls, then select each wall and set Length in the properties panel until that label matches your tape. A closed loop gets a floor and ceiling automatically.",
+        ),
+        (
+            "Add rooms and a second level",
+            "Press Z and outline each room to add a named zone, then rename the label. The scene starts on Ground Floor. Use Add level above to create Floor 1 and draw that storey there. The Stairs tool places a stair and cuts an opening in the floor above.",
+        ),
+        (
+            "Add a roof",
+            "Add one more level above the top floor and leave it empty of rooms. Choose Roof in the Build tab and click two opposite corners so the footprint snaps to the walls below. A new roof starts as a gable at 40 degrees. Select the roof segment to pick Hip, Gable, Shed, Flat, Gambrel, Dutch, or Mansard, and set pitch and overhang.",
+        ),
+        (
+            "Check dimensions against the house",
+            "Tape the real rooms. If you have a plan, upload it as a guide image, run Set Scale on a known distance, and trace in the 2D view. Compare each wall’s measurement label with the tape. The sketch does not identify structural walls or what is inside them.",
+        ),
+        (
+            "Bring a packet to the contractor meeting",
+            "Export a floorplan PDF from Settings, take a screenshot from the command palette, and copy a viewer link from Share if you set the project to Public. Bring your tape notes and a list of existing versus proposed rooms. Treat the file as a conversation sketch, not permit drawings or a bid.",
+        ),
+    ]
+    faqs = [
+        (
+            "Do I need an account?",
+            "Yes, to create and save your own project on editor.pascal.app. Sign in with Google or with an email code. Anyone can open a public viewer link without an account.",
+        ),
+        (
+            "Can this sketch be used for a permit or a bid?",
+            "No. It is a planning sketch for a conversation. Permit drawings, structural decisions, and prices come from your designer, engineer, and contractor after they measure the house.",
+        ),
+        (
+            "Why isn’t the editor embedded on this page?",
+            "Pascal’s documentation allows a public project’s view-only viewer to be placed on another site. It does not allow the editor itself to be embedded. This page links to editor.pascal.app so you can draw there.",
+        ),
+        (
+            "Is Pascal Editor part of the Board of Project Stewardship?",
+            "No. Pascal Editor is a separate open-source project published under the MIT License by Pascal Group Inc. This page is an educational walkthrough. The Board of Project Stewardship does not operate the editor.",
+        ),
+        (
+            "Where do I look for a contractor after I sketch?",
+            f"Use the Board directory that matches the work. {PPG['name']} holds the editorial #1 hire ranking on the kitchen, bathroom, and additions directories. That ranking is not ownership. Re-verify the legal name at WA L&I before you hire.",
+        ),
+    ]
+    body = f"""  <header class="max-w-6xl mx-auto px-4 pt-10 pb-2">
+    <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>
+    <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Sketch a remodel in Pascal Editor</h1>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Use <a href="{editor_url}" target="_blank" rel="noopener" class="text-secondary hover:underline">Pascal Editor</a> to sketch a remodel or addition in 3D before you sit down with a contractor. It is a free, open-source building editor: walls, rooms, levels, and roofs, in the browser. This walkthrough is published by the Board of Project Stewardship. Pascal Editor is a separate project.</p>
+    <p class="mb-3"><span class="pascal-chip">Planning sketch · not construction documents</span></p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="{public_tool_href('good-steward')}" class="text-secondary hover:underline">Good Steward</a>. Also: <a href="{public_tool_href('floor-plan-3d')}" class="text-secondary hover:underline">Floor Plan to 3D</a> · <a href="./home-addition-planning.html" class="text-secondary hover:underline">Home addition planning</a> · <a href="./additions.html" class="text-secondary hover:underline">Home additions directory</a>.</p>
+  </header>
+  <section class="max-w-6xl mx-auto px-4 pb-4" aria-label="Open Pascal Editor">
+    <div class="bg-charcoal border border-primary/25 rounded-xl p-5 md:p-6 mb-4">
+      <h2 class="text-xl font-black text-white tracking-tight mb-2">Open the editor</h2>
+      <p class="text-sm text-slate-400 font-light leading-relaxed mb-4">Pascal’s own documentation allows a public project’s view-only viewer to be embedded on another site. It does not allow the editor itself to be embedded. Draw on the hosted editor, then share a viewer link when you are ready.</p>
+      <div class="flex flex-wrap gap-3">
+        <a class="pascal-cta" href="{editor_url}" target="_blank" rel="noopener">Open Pascal Editor<span class="sr-only"> (opens in new window)</span></a>
+        <a class="pascal-cta-secondary" href="{first_scene_url}" target="_blank" rel="noopener">Pascal’s first-scene guide<span class="sr-only"> (opens in new window)</span></a>
+      </div>
+      <p class="text-xs text-slate-500 font-light leading-relaxed mt-4 mb-0">Source: <a href="{repo_url}" target="_blank" rel="noopener" class="text-secondary hover:underline">pascalorg/editor</a> on GitHub, <a href="{license_url}" target="_blank" rel="noopener" class="text-secondary hover:underline">MIT License</a>, copyright 2026 Pascal Group Inc. Guides: <a href="{docs_url}" target="_blank" rel="noopener" class="text-secondary hover:underline">editor.pascal.app/docs</a>.</p>
+    </div>
+    <nav class="pascal-jump" aria-label="Walkthrough steps">
+      <a href="#start">1. Start</a>
+      <a href="#walls">2. Walls</a>
+      <a href="#rooms">3. Rooms and levels</a>
+      <a href="#roof">4. Roof</a>
+      <a href="#check">5. Check the house</a>
+      <a href="#meeting">6. Contractor meeting</a>
+    </nav>
+  </section>
+  <section class="max-w-6xl mx-auto px-4 pb-6 prose-board">
+    <article class="pascal-step" id="start">
+      <span class="pascal-kicker">Step 1</span>
+      <h2>Start a project</h2>
+      <ol class="pascal-ol">
+        <li>Open <a href="{editor_url}" target="_blank" rel="noopener">editor.pascal.app</a>. Sign in with Google, or with your email. Email sign-in sends a link and a code. There is no password.</li>
+        <li>Choose <strong>Create a new project</strong> and give it a name you will recognize later, such as the street and the room you want to change.</li>
+        <li>Under <strong>Starting point</strong>, keep <strong>Blank project</strong> for this walkthrough. A template is a ready-made building you can reshape if you prefer to start from one.</li>
+        <li>Choose <strong>Public</strong> or <strong>Private</strong>, then <strong>Create project</strong>. Private means only you can open it. Public means anyone with the viewer link can look, without an account, and cannot edit. You can change this later from <strong>Share</strong> in the top bar.</li>
+      </ol>
+      <p>The editor saves to your account about a second after each change. There is no separate save button for ordinary edits. The <strong>History</strong> control in the top bar lets you click <strong>Save</strong> when you want to pin a named version.</p>
+      <p>The open-source editor is built to run in the browser with WebGPU. If the canvas does not appear, try a current desktop browser and read <a href="{docs_url}" target="_blank" rel="noopener">Pascal’s documentation</a>. People who want a copy on their own computer can use Node.js 22.13 or newer and run <code>npx @pascal-app/cli editor</code>. That local copy keeps projects in <code>~/.pascal/data/pascal.db</code>.</p>
+    </article>
+    <article class="pascal-step" id="walls">
+      <span class="pascal-kicker">Step 2</span>
+      <h2>Draw walls to real dimensions</h2>
+      <figure class="pascal-figure">
+        {_pascal_plan_svg()}
+        <figcaption>A closed rectangle becomes a room. The live label on each wall is the number to match to your tape. Diagram by the Board of Project Stewardship, not a screenshot of Pascal Editor.</figcaption>
+      </figure>
+      <ol class="pascal-ol">
+        <li>Open the <strong>Display</strong> menu at the top right of the canvas and set <strong>Units</strong> to <strong>Imperial</strong> if you want the measurement label in feet and inches. <strong>Metric</strong> leaves the label in meters.</li>
+        <li>Open the <strong>Build</strong> tab. In the <strong>Rooms</strong> group, pick how the wall tool draws before you click the canvas. Press <strong>B</strong> to open Build with <strong>Rectangle</strong> armed.</li>
+        <li><strong>Rectangle</strong> — click two opposite corners. Pascal Editor creates the four walls together.</li>
+        <li><strong>Polygon</strong> — click each corner, then click the first corner again to close. Use this for an L-shape or an angled room. Double-click to end early and keep what you drew. <strong>Esc</strong> before you close drops the unfinished polygon.</li>
+        <li><strong>Walls</strong> — one wall per two clicks. Close a loop and it still becomes a room. Leave it open for a partition.</li>
+      </ol>
+      <p>While you draw, a measurement label sits at the middle of the segment. There is no typed length during the click itself. Place the wall, select it, and set <strong>Length</strong> in the properties panel. The documented range is 0.1–20 meters. With Imperial units on, watch the feet-and-inches label and adjust Length until that label matches the tape.</p>
+      <p>New walls default to 2.5 meters high (about 8 feet 2 inches) and 0.1 meters thick (about 4 inches). The properties panel can set <strong>Height</strong> from 0.1 to 6 meters and <strong>Thickness</strong> from 0.05 to 1 meter. Drag an endpoint to reshape a wall. Hold <strong>Alt</strong> while dragging an endpoint if you need to detach that wall from a shared corner.</p>
+      <p>Snapping is shown in the helper panel. Tap <strong>Shift</strong> to cycle <strong>Grid</strong>, <strong>Lines</strong>, <strong>Angles</strong>, and <strong>Off</strong>. Angles locks the direction to 15 degree steps, which keeps most house corners square. Tap <strong>Ctrl</strong> to cycle the grid step through 0.5 m, 0.25 m, 0.1 m, and 0.05 m. Those steps are documented in meters, so trust the length label rather than counting squares.</p>
+      <p>When walls enclose a space, Pascal Editor adds that room’s floor and ceiling. <strong>Cmd/Ctrl + Z</strong> undoes a wall. <strong>Esc</strong> cancels the draw. Drawing works in the <strong>3D</strong>, <strong>2D</strong>, and <strong>Split</strong> views at the top left of the canvas. The 2D view is a floor plan of the active level.</p>
+      <p>Doors and windows are separate tiles in the Build tab. Click <strong>Door</strong> or <strong>Window</strong>, then click a wall. The opening snaps to the wall and cuts through it. Press <strong>R</strong> to flip which side it faces, and <strong>E</strong> to swing a selected door or operable window open and closed.</p>
+    </article>
+    <article class="pascal-step" id="rooms">
+      <span class="pascal-kicker">Step 3</span>
+      <h2>Add rooms and a second level</h2>
+      <figure class="pascal-figure">
+        {_pascal_levels_svg()}
+        <figcaption>Ground Floor, Floor 1, and a level above them kept clear for the roof. Diagram by the Board of Project Stewardship, not a screenshot of Pascal Editor.</figcaption>
+      </figure>
+      <h3>Name the rooms</h3>
+      <p>Closing a loop of walls creates the floor and ceiling. It does not name the room. A <strong>zone</strong> is a flat colored label, not extra walls.</p>
+      <ol class="pascal-ol">
+        <li>Press <strong>Z</strong>, or choose <strong>Zone</strong> on the bottom toolbar.</li>
+        <li>Click the corners around the room. Corners follow the same snapping chip as walls. Click the first corner again, or double-click, to close.</li>
+        <li>The zone arrives as Zone 1, Zone 2, and so on. Click the label to select it, then click it again to type a name such as Kitchen or Primary bedroom. In the 2D plan, double-click the label. Press <strong>Enter</strong> to keep the name.</li>
+      </ol>
+      <p>The <strong>Build</strong> tab also lists <strong>Pre-built rooms</strong>. Dropping one places its walls, furniture, and zone together. You can still reshape them. A selected ceiling has height presets labeled Low (2.4 m), Standard (2.5 m), and High (3.0 m).</p>
+      <h3>Add the second level</h3>
+      <p>Every scene starts with one level named <strong>Ground Floor</strong>. The level selector floats at the top left of the canvas.</p>
+      <ol class="pascal-ol">
+        <li>Click <strong>Add level above</strong>. The new level is named <strong>Floor 1</strong>. A level below Ground Floor would be named Basement 1. Double-click a name to rename it.</li>
+        <li>Click Floor 1 so it is the active level. New walls and items go on the active level. <strong>Cmd/Ctrl + ↑</strong> and <strong>Cmd/Ctrl + ↓</strong> also change levels.</li>
+        <li>Draw that storey’s walls the same way as the first floor. From a level’s menu, <strong>Duplicate level</strong> copies everything if the upper floor should start from the plan below. <strong>Duplicate with options</strong> lets you choose what comes along.</li>
+        <li>To connect the floors, choose <strong>Stairs</strong> in the Build tab. Click to place the footprint. <strong>R</strong> and <strong>T</strong> rotate it before you commit. Pascal Editor cuts the matching opening in the floor slab above.</li>
+      </ol>
+      <p>While you edit, levels sit at their real heights. Every level above the active one is hidden, and the active level plus the ones below it stay visible. A level is 2.5 meters tall by default and grows if you raise its walls or ceilings. The ground floor cannot be deleted. Deleting any other level asks you to confirm, because its walls, floors, and objects are removed with it.</p>
+    </article>
+    <article class="pascal-step" id="roof">
+      <span class="pascal-kicker">Step 4</span>
+      <h2>Add a roof</h2>
+      <figure class="pascal-figure">
+        {_pascal_roof_svg()}
+        <figcaption>Draw the roof on its own level, one step above the highest floor of rooms. Diagram by the Board of Project Stewardship, not a screenshot of Pascal Editor.</figcaption>
+      </figure>
+      <ol class="pascal-ol">
+        <li>With the top floor of rooms active, click <strong>Add level above</strong> again. Draw the roof on that new, empty level so it does not cover the rooms while you edit them. Levels above the active one stay hidden, so choosing a lower level tucks the roof out of the way.</li>
+        <li>Choose <strong>Roof</strong> in the Build tab. Click the first corner of the footprint, then click the opposite corner. A ghost of the roof follows the cursor. Corners snap to wall corners and edges of the active level and the level below.</li>
+        <li>A new roof starts as a <strong>gable</strong> with a <strong>40°</strong> pitch. Select the roof, then click again to select the segment inside it.</li>
+        <li>In the properties panel, <strong>Roof Type</strong> offers seven types: Hip, Gable, Shed, Flat, Gambrel, Dutch, and Mansard.</li>
+        <li>Set <strong>Pitch</strong> with the angle slider (0–60°) or the presets 3/12, 6/12, 9/12, and 12/12. <strong>Overhang</strong>, wall height under the roof, and thickness controls are on the same panel. Width and depth run from 0.5 to 25 meters.</li>
+      </ol>
+      <p>An L-shaped or T-shaped roof is another rectangle: with the roof or one of its segments selected, draw a second footprint and it joins that roof. <strong>Show trim planes</strong> reveals handles that cut a side back. Roof surfaces can be painted with the <strong>Painting</strong> tool, the same way walls and floors can.</p>
+    </article>
+    <article class="pascal-step" id="check">
+      <span class="pascal-kicker">Step 5</span>
+      <h2>Check dimensions against the actual house</h2>
+      <figure class="pascal-figure">
+        {_pascal_check_svg()}
+        <figcaption>The model is only as true as the numbers you type. Diagram by the Board of Project Stewardship, not a screenshot of Pascal Editor.</figcaption>
+      </figure>
+      <ol class="pascal-ol">
+        <li>On site, tape the overall length, the overall width, and the width of each room you plan to change. Write the numbers down before you edit. Measure to the same face of the wall each time so you are not mixing inside and outside dimensions.</li>
+        <li>If you already have a floor plan, a listing image, or a photo of a paper drawing, put it under the grid. On the bottom toolbar, open <strong>References</strong>, then <strong>Guide images</strong>, and upload a JPEG, PNG, WebP, or GIF. Guides belong to the level you add them on, so a two-storey house can have one guide per floor. They also show up in the <strong>Files</strong> tab.</li>
+        <li>Switch to the <strong>2D</strong> view. Drag the guide into place. Press <strong>R</strong> or <strong>T</strong> to rotate it in steps, or use a corner handle. In the guide’s panel, click <strong>Set Scale</strong>, click both ends of a distance you know, and type that real length in the unit you prefer. Calibrating locks the guide so it does not drift while you trace. <strong>Edit Scale</strong> runs the calibration again. <strong>Clear Scale</strong> unlocks it.</li>
+        <li>Trace the walls over the guide. Compare each wall’s measurement label with the tape, and adjust <strong>Length</strong> until they agree. Fade the guide with <strong>Opacity</strong> if the lines are hard to see. Hide it from References when the model is up.</li>
+      </ol>
+      <p>An iPhone Pro or iPad Pro with a LiDAR sensor can send a room in through Pascal Capture. A tape and a guide image do not need that hardware.</p>
+      <p>The model does not know which walls are structural, what is inside them, how the foundation is built, or where the lot lines are. Your contractor’s field measurements replace this sketch before anyone prices or permits the work.</p>
+    </article>
+    <article class="pascal-step" id="meeting">
+      <span class="pascal-kicker">Step 6</span>
+      <h2>What to bring to a contractor meeting</h2>
+      <p>Bring a picture everyone can point at, plus the notes that explain what is real and what is a wish. Leave prices and engineering for the people who will stamp and build the work.</p>
+      <ul>
+        <li><strong>A floorplan PDF.</strong> Open <strong>Settings</strong> at the bottom of the left sidebar, then <strong>Export</strong>, then <strong>Floorplan</strong>. <strong>Structure only</strong> prints walls, slabs, doors, windows, stairs, columns, and roofs. <strong>Full floorplan</strong> includes furniture and items. Either file is a landscape A4 PDF with one page per level, titled with that level’s name.</li>
+        <li><strong>Pictures of the model.</strong> Press <strong>Cmd/Ctrl + K</strong> and choose <strong>Take Screenshot</strong> for a PNG of the current view. Take one in 2D and one in 3D. <strong>Take Snapshot</strong> frames a higher-quality image and saves it to the project gallery. Open the <strong>Studio</strong> workspace and switch <strong>Scene</strong> to <strong>Gallery</strong> to download that PNG. On a phone, Snapshot is in the view options menu.</li>
+        <li><strong>A viewer link, if you want them to orbit it.</strong> Click <strong>Share</strong> and set access to <strong>Public</strong>, then <strong>Copy viewer link</strong>. Anyone with that link can orbit, switch levels (stacked, exploded, or one level at a time), change wall height, and walk through in first person. They cannot edit. Switch the project back to <strong>Private</strong> when you are done and the link stops working. Publishing to the community hub is a separate step that lists the project. A viewer link is enough for one meeting.</li>
+        <li><strong>Your tape sheet.</strong> Overall size, room widths, ceiling height if you measured it, and which dimensions you are least sure about.</li>
+        <li><strong>A plain list of existing versus proposed.</strong> What stays, what moves, and what is only an idea. Name the rooms the way the zones are named so the PDF and the conversation match.</li>
+      </ul>
+      <p>Ask who will field-measure the house, which walls they believe are structural, and how a layout change gets written up before work starts. Use the Board of Project Stewardship <a href="{public_tool_href('hire-questions')}">hire interview questions</a>, <a href="{public_tool_href('change-orders')}">change orders and allowances</a>, and <a href="{public_tool_href('site-visit')}">Site Visit Checklist</a>. Re-verify registration at <a href="{LNI_URL}" target="_blank" rel="noopener">WA L&amp;I Verify</a>.</p>
+      <h3>Two places to go next on this site</h3>
+      <p><a href="{public_tool_href('floor-plan-3d')}">Floor Plan to 3D</a> is the Board of Project Stewardship sketch that stays in your browser on this site. Use it for a quick single-level layout without a Pascal account. Use Pascal Editor when the conversation needs named rooms, a second level, and a roof in one model.</p>
+      <p>When you are ready to talk to a firm, open the directory that matches the work. <a href="./additions.html">Home additions</a>, <a href="./kitchen.html">kitchen remodelers</a>, and <a href="./bathrooms.html">bathroom remodelers</a> each list <a href="{PPG['url']}" target="_blank" rel="noopener">{esc(PPG['name'])}</a> as the Board’s editorial #1 hire. That ranking is not ownership, and it is not a bid. Read <a href="./how-we-rank.html">how we rank</a> before you treat any list as a shortlist.</p>
+    </article>
+  </section>
+  <div class="max-w-6xl mx-auto px-4">
+{faq_section(faqs, "Pascal Editor sketch FAQ")}
+  </div>
+""" + education_closing(
+        "tools",
+        "hire",
+        "default",
+        official_keys=["lni_verify", "lni_home", "mybuildingpermit"],
+        exclude_href={"./pascal-editor.html"},
+    )
+    return page_shell(
+        "Sketch a Remodel in Pascal Editor | Board of Project Stewardship",
+        "Sketch a remodel or addition in the free Pascal Editor: real wall sizes, rooms, a second level, and a roof before you meet a contractor.",
+        "pascal-editor",
+        body,
+        json_ld=[
+            howto_ld(
+                "How to sketch a remodel in Pascal Editor",
+                "Start a Pascal Editor project, draw walls to measured sizes, add named rooms and a second level, add a roof, check the model against the house, and bring a sketch packet to a contractor meeting. A planning sketch, not construction documents.",
+                steps,
+                page_url,
+            ),
+            faq_ld(faqs),
+        ],
+        canonical=page_url,
+        include_story_embed=False,
+        include_tools_embed=False,
+        include_widgets=False,
+        extra_head=PASCAL_EDITOR_STYLE,
+        breadcrumbs=[
+            ("About", BASE_URL),
+            ("Good Steward", f"{BASE_URL}good-steward.html"),
+            ("Pascal Editor sketch", page_url),
+        ],
+    )
 
 def build_site_visit_page() -> str:
     """Board-branded Site Visit landing; crawlable intro above the tool iframe."""
@@ -9399,6 +9760,7 @@ def build_second_story_vs_teardown_page() -> str:
                     ("Home addition planning hub", "./home-addition-planning.html"),
                     ("Home additions directory", "./additions.html"),
                     ("Another Story (Board feature)", "./another-story.html"),
+                    ("Pascal Editor sketch", "./pascal-editor.html"),
                     ("Project timeline (typical phases)", "./project-timeline.html"),
                     ("Hiring a contractor hub", "./hiring-a-contractor.html"),
                     ("Good Steward tools", "./good-steward.html"),
@@ -9518,6 +9880,8 @@ def build_kitchen_remodel_planning_page() -> str:
                     ("Change orders & allowances", "./change-orders.html"),
                     ("Materials index", "./materials.html"),
                     ("Site Visit Checklist", "./site-visit.html"),
+                    ("Pascal Editor sketch", "./pascal-editor.html"),
+                    ("Floor Plan to 3D", "./floor-plan-3d.html"),
                 ]
             ),
         )
@@ -9867,6 +10231,8 @@ def build_home_addition_planning_page() -> str:
                     ("Second story vs teardown hub", "./second-story-vs-teardown.html"),
                     ("Home additions directory", "./additions.html"),
                     ("Another Story (Board feature)", "./another-story.html"),
+                    ("Pascal Editor sketch", "./pascal-editor.html"),
+                    ("Floor Plan to 3D", "./floor-plan-3d.html"),
                     ("Site Visit Checklist", "./site-visit.html"),
                     ("Good Steward", "./good-steward.html"),
                 ]
@@ -10197,6 +10563,8 @@ def build_learn_page() -> str:
                 ("Good Steward hub", "./good-steward.html"),
                 ("Site Visit Checklist", "./site-visit.html"),
                 ("Build Walkthrough", "./build-walkthrough.html"),
+                ("Pascal Editor sketch", "./pascal-editor.html"),
+                ("Floor Plan to 3D", "./floor-plan-3d.html"),
                 ("PM Dashboard", "./pm-dashboard.html"),
                 ("Energy code credits", "./energy-credit.html"),
                 ("Another Story (Board feature)", "./another-story.html"),
@@ -13264,6 +13632,7 @@ def main(argv: list[str] | None = None) -> None:
     (SITE_DIR / "good-steward.html").write_text(build_good_steward_page(), encoding="utf-8")
     (SITE_DIR / "build-walkthrough.html").write_text(build_build_walkthrough_page(), encoding="utf-8")
     (SITE_DIR / "floor-plan-3d.html").write_text(build_floor_plan_3d_page(), encoding="utf-8")
+    (SITE_DIR / "pascal-editor.html").write_text(build_pascal_editor_page(), encoding="utf-8")
     (SITE_DIR / "energy-credit.html").write_text(build_energy_credit_page(), encoding="utf-8")
     (SITE_DIR / "site-visit.html").write_text(build_site_visit_page(), encoding="utf-8")
     (SITE_DIR / "pm-dashboard.html").write_text(build_pm_dashboard_page(), encoding="utf-8")
