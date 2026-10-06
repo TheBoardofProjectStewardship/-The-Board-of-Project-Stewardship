@@ -41,6 +41,7 @@ Base: `https://boardofprojectstewardship.com/`
 | `blog.html` | Blog index |
 | `good-steward.html` | Good Steward hub |
 | `build-walkthrough.html` | Build Walkthrough landing |
+| `pascal-editor.html` | Pascal Editor remodel sketch walkthrough |
 | `site-visit.html` | Site Visit & Discovery landing |
 | `pm-dashboard.html` | PM Execution Dashboard landing |
 | `energy-credit.html` | WSEC-R energy credits landing |
