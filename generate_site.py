@@ -6107,7 +6107,32 @@ def build_good_steward_page() -> str:
       <li><strong class="text-white">PM Execution Dashboard</strong> — phase checklist + status notes for an active build</li>
     </ul>
   </header>
-  <div class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
+{_hub_photo_strip(
+    [
+        (
+            "assets/images/posts/2026-08-11-hire-design-build-edmonds-2.webp",
+            "Illustrative plan review before hiring a remodeler — not a real Board job photo",
+            "Written scope before work starts",
+            "./hiring-a-contractor.html",
+            "Hiring a contractor",
+        ),
+        (
+            "assets/images/posts/2026-08-12-edmonds-home-addition-permit-2.webp",
+            "Illustrative permit set reviewed before an addition — not a real Board job photo",
+            "Know who owns the permit",
+            "./permits.html",
+            "Permit hub",
+        ),
+        (
+            "assets/images/hubs/hub-directory-3.webp",
+            "Illustrative exterior walk of a Pacific Northwest house before a project — not a real Board job photo",
+            "Look at the house before you hire",
+            "./site-visit.html",
+            "Site Visit Checklist",
+        ),
+    ],
+    title="Good Steward field context (illustrative)",
+)}  <div class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
     <section class="mb-10">
       <div class="mb-6 border-b border-white/10 pb-4">
         <span class="text-secondary text-xs font-bold uppercase tracking-widest">Homeowner practice</span>
@@ -6180,7 +6205,32 @@ def build_another_story_page() -> str:
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Use it to explore whether a second story might fit a house in King County, Snohomish County, or Seattle. Then verify any contractor you hire at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>. The standalone tool is also at <a href="{tools_href('another-story', '', 'index.html')}" class="text-secondary hover:underline">{SITE_ORIGIN}/tools/another-story/</a> and <a href="https://anotherstorysea.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">anotherstorysea.com</a>.</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Also listed from Board directory #1: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a>.</p>
   </header>
-"""
+{_hub_photo_strip(
+    [
+        (
+            "assets/images/posts/2026-08-09-second-story-teardown-2.webp",
+            "Illustrative second-story massing concept over an existing house — not a real Board job photo",
+            "Massing idea, not a permit set",
+            "./second-story-vs-teardown.html",
+            "Second story vs teardown",
+        ),
+        (
+            "assets/images/posts/2026-08-24-second-story-addition-shoreline-2.webp",
+            "Illustrative finished second-story addition with new windows and siding — not a real Board job photo",
+            "Another story on the same house",
+            "./additions.html",
+            "Home additions directory",
+        ),
+        (
+            "assets/images/posts/2026-08-08-another-story-weatherproof-first-2.webp",
+            "Illustrative second-story addition during weatherproofing — not a real Board job photo",
+            "Weatherproof the new story first",
+            "./home-addition-planning.html",
+            "Home addition planning",
+        ),
+    ],
+    title="Second-story context (illustrative)",
+)}"""
     return page_shell(
         "Another Story | Board of Project Stewardship",
         "Another Story — second-story design preview for King County, Snohomish County, and Seattle. Not a bid or permit document.",
@@ -6207,7 +6257,32 @@ def build_energy_credit_page() -> str:
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">WSEC-R 2021 single-family prescriptive path credit worksheet (fuel normalization + Table R406.3). When you hire, shortlist from Board directories — Board #1: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a>.</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Also: <a href="{public_tool_href('site-visit')}" class="text-secondary hover:underline">Site Visit Checklist</a> · <a href="./posts/2026-09-20-window-replacement-edmonds-coastal-wa.html" class="text-secondary hover:underline">Edmonds window replacement guide</a>.</p>
   </header>
-  <section class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
+{_hub_photo_strip(
+    [
+        (
+            "assets/images/posts/2026-09-20-window-edmonds-coastal-2.webp",
+            "Illustrative new window set in an existing wall opening — not a real Board job photo",
+            "Window performance is a credit input",
+            "./windows.html",
+            "Windows directory",
+        ),
+        (
+            "assets/images/posts/2026-10-04-mill-creek-window-4.webp",
+            "Illustrative high-performance window unit for a residential opening — not a real Board job photo",
+            "Glazing choices affect the energy path",
+            "./posts/2026-10-04-window-replacement-mill-creek-wa.html",
+            "Mill Creek window notes",
+        ),
+        (
+            "assets/images/tools/build-walkthrough/08-insulation-wrb.webp",
+            "Illustrative wall insulation and weather-resistive barrier — not a real Board job photo",
+            "Envelope continuity before cover-up",
+            "./insulation.html",
+            "Insulation directory",
+        ),
+    ],
+    title="Energy-code context (illustrative)",
+)}  <section class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
     <iframe id="energy-credit-tool" src="{src}" title="WSEC-R prescriptive credits" loading="lazy"
       style="display:block;width:100%;height:1200px;border:0;border-radius:18px;background:#f8fafc;"></iframe>
   </section>
@@ -6240,7 +6315,32 @@ def build_build_walkthrough_page() -> str:
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Educational Board tool. When you hire, shortlist from Board directories — Board #1: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a>. Re-verify any contractor at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>.</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="{public_tool_href('good-steward')}" class="text-secondary hover:underline">Good Steward</a>. Also: <a href="{public_tool_href('site-visit')}" class="text-secondary hover:underline">Site Visit Checklist</a> · <a href="{public_tool_href('pm-dashboard')}" class="text-secondary hover:underline">PM Dashboard</a> · <a href="{public_tool_href('energy-credit')}" class="text-secondary hover:underline">Energy code credits</a>.</p>
   </header>
-  <section class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
+{_hub_photo_strip(
+    [
+        (
+            "assets/images/tools/build-walkthrough-hero.webp",
+            "Illustrative 3D house model moving through build stages — not a site scan or engineering document",
+            "One model, many stages",
+            "./project-timeline.html",
+            "Project timeline",
+        ),
+        (
+            "assets/images/tools/build-walkthrough/02-plans-blueprints.webp",
+            "Illustrative architectural plans and a scale model before construction — not a real Board job photo",
+            "Plans before the shell",
+            "./good-steward.html",
+            "Good Steward",
+        ),
+        (
+            "assets/images/tools/build-walkthrough/06-sheathing-dryin.webp",
+            "Illustrative sheathed house at dry-in — not a real Board job photo",
+            "Dry-in before finishes",
+            "./coastal-waterproofing.html",
+            "Coastal waterproofing",
+        ),
+    ],
+    title="Build stages (illustrative)",
+)}  <section class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
     <iframe
       id="build-walkthrough-tool"
       src="{src}"
@@ -6530,7 +6630,32 @@ def build_site_visit_page() -> str:
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Good Steward site-visit checklist. Re-verify any contractor at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> before you hire.</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="{public_tool_href('good-steward')}" class="text-secondary hover:underline">Good Steward</a>. Also: <a href="{public_tool_href('build-walkthrough')}" class="text-secondary hover:underline">Build Walkthrough</a> · <a href="{public_tool_href('pm-dashboard')}" class="text-secondary hover:underline">PM Dashboard</a> · <a href="{public_tool_href('another-story')}" class="text-secondary hover:underline">Another Story</a>.</p>
   </header>
-  <section class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
+{_hub_photo_strip(
+    [
+        (
+            "assets/images/tools/build-walkthrough/01-sales-discovery.webp",
+            "Illustrative discovery conversation before drawings or pricing — not a real Board job photo",
+            "What to ask on the first visit",
+            "./good-steward.html",
+            "Good Steward",
+        ),
+        (
+            "assets/images/tools/build-walkthrough/04-site-foundation.webp",
+            "Illustrative residential site and foundation conditions to note on a visit — not a real Board job photo",
+            "Site conditions come before pricing",
+            "./home-addition-planning.html",
+            "Home addition planning",
+        ),
+        (
+            "assets/images/posts/2026-08-09-second-story-teardown-edmonds-2.webp",
+            "Illustrative Pacific Northwest house exterior before a site visit — not a real Board job photo",
+            "Photograph the existing house",
+            "./verify-contractor.html",
+            "Verify a contractor",
+        ),
+    ],
+    title="Site visit context (illustrative)",
+)}  <section class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
     <iframe
       id="site-visit-tool"
       src="{src}"
@@ -6567,7 +6692,32 @@ def build_pm_dashboard_page() -> str:
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Educational template only. Not a construction schedule, contract, or promise of dates or cost. Re-verify any firm at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> before you hire.</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="{public_tool_href('good-steward')}" class="text-secondary hover:underline">Good Steward</a>. Also: <a href="{public_tool_href('build-walkthrough')}" class="text-secondary hover:underline">Build Walkthrough</a> · <a href="{public_tool_href('site-visit')}" class="text-secondary hover:underline">Site Visit Checklist</a> · <a href="{public_tool_href('another-story')}" class="text-secondary hover:underline">Another Story</a>.</p>
   </header>
-  <section class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
+{_hub_photo_strip(
+    [
+        (
+            "assets/images/tools/build-walkthrough/09-drywall-paint.webp",
+            "Illustrative drywall and paint stage of a residential build — not a real Board job photo",
+            "Track the phase you are in",
+            "./project-timeline.html",
+            "Project timeline",
+        ),
+        (
+            "assets/images/tools/build-walkthrough/11-punch-closeout.webp",
+            "Illustrative punch-list walkthrough before closeout — not a real Board job photo",
+            "Punch items before final pay",
+            "./final-walkthrough.html",
+            "Final walkthrough",
+        ),
+        (
+            "assets/images/tools/build-walkthrough/12-warranty-handoff.webp",
+            "Illustrative warranty and handoff documents at project close — not a real Board job photo",
+            "Keep the closeout file",
+            "./build-walkthrough.html",
+            "Build Walkthrough",
+        ),
+    ],
+    title="Project phase context (illustrative)",
+)}  <section class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
     <iframe
       id="pm-dashboard-tool"
       src="{src}"
@@ -6763,7 +6913,7 @@ def build_about_org_page() -> str:
     )
     return page_shell(
         "About | Board of Project Stewardship",
-        "About the Board of Project Stewardship — standards and directories for King County, Snohomish County, and Seattle. Not a GC.",
+        "About the Board of Project Stewardship — standards and directories for King County, Snohomish County, and Seattle.",
         "about",
         body,
         [faq_ld(faqs)],
@@ -8935,7 +9085,7 @@ def build_about_page() -> str:
     )
     return page_shell(
         "About | Board of Project Stewardship",
-        "About the Board of Project Stewardship — standards and directories for King County, Snohomish County, and Seattle. Not a GC.",
+        "About the Board of Project Stewardship — standards and directories for King County, Snohomish County, and Seattle.",
         "about",
         body,
         [faq_ld(faqs)],
@@ -9146,6 +9296,32 @@ def build_contact_page() -> str:
             "Editorial desk",
             "Contact the Board of Project Stewardship",
             f"Public contact for the Board of Project Stewardship editorial desk. This is not a contractor dispatch line and not {PPG['name']} customer service.",
+        )
+        + _hub_photo_strip(
+            [
+                (
+                    "assets/images/hubs/hub-directory-1.webp",
+                    "Illustrative contractor directory files on an editorial desk — not a real Board job photo",
+                    "Directory corrections start with the page",
+                    "./directory.html",
+                    "Directories",
+                ),
+                (
+                    "assets/images/hubs/hub-rank-1.webp",
+                    "Illustrative ranking scorecard used when reviewing a directory note — not a real Board job photo",
+                    "Rankings follow published pillars",
+                    "./how-we-rank.html",
+                    "How we rank",
+                ),
+                (
+                    "assets/images/posts/2026-08-11-hire-design-build-edmonds-4.webp",
+                    "Illustrative hire interview notes before a homeowner contacts a firm — not a real Board job photo",
+                    "Hiring questions stay with the firm",
+                    "./hiring-a-contractor.html",
+                    "Hiring a contractor",
+                ),
+            ],
+            title="Editorial desk context (illustrative)",
         )
         + _hub_section(
             "What this inbox is for",
