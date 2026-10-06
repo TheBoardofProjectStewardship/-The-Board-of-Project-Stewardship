@@ -6337,8 +6337,27 @@ FLOOR_PLAN_3D_STYLE = """  <style>
     #fp3d .fp-btn:hover { border-color:#4ade80; color:#4ade80; }
     #fp3d .fp-btn[aria-pressed="true"] { background:#166534; border-color:#4ade80; color:#fff; }
     #fp3d .fp-btn:disabled { opacity:0.4; cursor:not-allowed; }
+    #fp3d .fp-btn[hidden] { display:none; }
     #fp3d .fp-btn:focus-visible, #fp3d select:focus-visible, #fp3d input:focus-visible { outline:2px solid #4ade80; outline-offset:2px; }
-    #fp3d select, #fp3d input[type=number] { background:#1a1a1a; color:#e2e8f0; border:1px solid rgba(255,255,255,0.14); border-radius:0.4rem; padding:0.45rem 0.6rem; font-size:0.8rem; min-height:2.5rem; color-scheme:dark; }
+    #fp3d select, #fp3d input[type=number], #fp3d input[type=text] { background:#1a1a1a; color:#e2e8f0; border:1px solid rgba(255,255,255,0.14); border-radius:0.4rem; padding:0.45rem 0.6rem; font-size:0.8rem; min-height:2.5rem; color-scheme:dark; }
+    #fp-dimcheck .fp-field { display:flex; flex-direction:column; gap:0.25rem; font-size:0.75rem; color:#cbd5e1; min-width:0; }
+    #fp-dimcheck .fp-field input { width:8.5rem; }
+    #fp-check-summary { margin-top:0.75rem; border-radius:0.6rem; padding:0.75rem 0.9rem; background:rgba(255,255,255,0.03); }
+    #fp-check-summary[hidden] { display:none; }
+    #fp-check-summary.is-pass { border:1px solid rgba(74,222,128,0.45); }
+    #fp-check-summary.is-warn { border:1px solid rgba(251,191,36,0.55); }
+    #fp-check-summary.is-incomplete { border:1px solid rgba(255,255,255,0.08); }
+    #fp-check-heading { font-size:0.8rem; font-weight:800; color:#fff; margin:0 0 0.35rem; }
+    #fp-check-list { margin:0; padding-left:1.1rem; }
+    #fp-check-list li { margin:0.2rem 0; line-height:1.45; }
+    #fp-check-summary .fp-pass { color:#86efac; }
+    #fp-check-summary .fp-warn { color:#fcd34d; }
+    #fp-check-summary .fp-note { color:#94a3b8; }
+    #fp-check-badge.is-pass { color:#86efac; border-color:rgba(74,222,128,0.45); }
+    #fp-check-badge.is-warn { color:#fcd34d; border-color:rgba(251,191,36,0.7); }
+    #fp-3d-hold { position:absolute; inset:0; z-index:6; display:flex; align-items:center; justify-content:center; padding:1rem; background:rgba(10,14,12,0.92); }
+    #fp-3d-hold[hidden] { display:none; }
+    #fp-3d-hold p { max-width:22rem; text-align:center; color:#fde68a; font-size:0.9rem; line-height:1.45; margin:0; }
     #fp3d .fp-panel { background:#111814; border:1px solid rgba(255,255,255,0.08); border-radius:1rem; overflow:hidden; display:flex; flex-direction:column; }
     #fp3d .fp-head { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:0.5rem; padding:0.6rem 0.75rem; border-bottom:1px solid rgba(255,255,255,0.06); }
     #fp3d .fp-title { font-size:0.7rem; font-weight:800; letter-spacing:0.16em; text-transform:uppercase; color:#94a3b8; }
@@ -6356,7 +6375,7 @@ FLOOR_PLAN_3D_STYLE = """  <style>
     #fp-3d-loading[hidden] { display:none; }
     .fp-chip { display:inline-block; font-size:0.62rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#fbbf24; border:1px solid rgba(251,191,36,0.35); border-radius:999px; padding:0.2rem 0.55rem; }
     @media (min-width: 1024px) { #fp-plan, #fp-3d { height:34rem; } }
-    @media (max-width: 480px) { #fp-plan, #fp-3d { height:20rem; } #fp3d .fp-btn { padding:0.45rem 0.6rem; font-size:0.62rem; } }
+    @media (max-width: 480px) { #fp-plan, #fp-3d { height:20rem; } #fp3d .fp-btn { padding:0.45rem 0.6rem; font-size:0.62rem; } #fp-dimcheck .fp-field { flex:1 1 100%; } #fp-dimcheck .fp-field input { width:100%; } }
   </style>
 """
 
@@ -6381,8 +6400,13 @@ def build_floor_plan_3d_page() -> str:
             "Should my contractor walk me through a 3D model before I sign?",
             "It is a fair question to ask. Many homeowners understand room sizes, door swings, and furniture clearances far better in 3D than on a flat plan. Ask how your contractor will show you the layout before work starts and how changes get documented.",
         ),
+        (
+            "What if the scale does not match the dimensions on the plan?",
+            "Enter a dimension written on the plan and the same length at the scale you chose. If they disagree, the page flags the mismatch and holds the 3D model until you correct the scale, correct the reference, or choose to build anyway. Room sizes and ceiling height are also checked against a typical residential range. The result is still an illustrative sketch, not a measured survey.",
+        ),
     ]
     steps = [
+        ("Check the plan's own dimensions", "Enter a length written on the plan and the same length at your scale. If they disagree, correct the scale before the 3D model updates. The page also checks ceiling height and room sizes against a typical residential range."),
         ("Start from a sample or a blank grid", "Pick a sample layout, or clear the plan and draw walls. Ends snap to nearby corners and to a half-foot grid."),
         ("Trace your own plan (optional)", "Add a floor plan image as a tracing layer, set its width in feet, and draw walls over it. The image stays on your device."),
         ("Add doors, windows, and furniture", "Tap a wall to add a door or window, then place furniture to check clearances and circulation."),
@@ -6392,11 +6416,40 @@ def build_floor_plan_3d_page() -> str:
     body = f"""  <header class="max-w-6xl mx-auto px-4 pt-10 pb-2">
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Floor Plan to 3D Walkthrough</h1>
-    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Sketch a floor plan, or trace one from a listing or your designer, and see it rise into a furnished 3D model you can spin, cut away, and walk through at eye level. It is a free planning tool from the Board of Project Stewardship for homeowners who want to understand a layout before a remodel, addition, or ADU conversation with a contractor.</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Sketch a floor plan, or trace one from a listing or your designer, and see it rise into a furnished 3D model you can spin, cut away, and walk through at eye level. Before you draw, confirm a dimension written on the plan against your scale. It is a free planning tool from the Board of Project Stewardship for homeowners who want to understand a layout before a remodel, addition, or ADU conversation with a contractor.</p>
     <p class="mb-3"><span class="fp-chip">Illustrative sketch · not construction documents</span></p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="{public_tool_href('good-steward')}" class="text-secondary hover:underline">Good Steward</a>. Also: <a href="{public_tool_href('build-walkthrough')}" class="text-secondary hover:underline">Build Walkthrough</a> · <a href="{public_tool_href('site-visit')}" class="text-secondary hover:underline">Site Visit Checklist</a> · <a href="{public_tool_href('hire-questions')}" class="text-secondary hover:underline">Hire interview questions</a>.</p>
   </header>
   <section id="fp3d" class="max-w-6xl mx-auto px-4 pb-8 relative z-20" aria-label="Floor plan to 3D tool">
+    <div id="fp-dimcheck" class="mb-4 rounded-lg border border-white/10 bg-charcoal p-4">
+      <div class="flex flex-wrap items-start justify-between gap-2 mb-2">
+        <div>
+          <h2 class="text-sm font-bold text-white">Check the plan's dimensions first</h2>
+          <p class="text-xs text-slate-400 font-light mt-1 max-w-3xl leading-relaxed">Before you draw, compare a dimension written on the plan with the same length at your scale. If they disagree, correct the scale or the reference before the 3D model updates. The check stays in this browser.</p>
+        </div>
+        <p id="fp-check-badge" class="fp-chip">Not checked</p>
+      </div>
+      <div class="flex flex-wrap items-end gap-3">
+        <label class="fp-field" for="fp-labeled">Dimension written on the plan
+          <input id="fp-labeled" type="text" inputmode="text" placeholder="12'-0&quot;" autocomplete="off" aria-describedby="fp-check-summary">
+        </label>
+        <label class="fp-field" for="fp-measured">Same length at this scale
+          <input id="fp-measured" type="text" inputmode="decimal" placeholder="9" autocomplete="off">
+        </label>
+        <button type="button" class="fp-btn" id="fp-measure" aria-pressed="false">Measure on plan</button>
+        <label class="fp-field" for="fp-ceiling">Ceiling height (ft)
+          <input id="fp-ceiling" type="number" min="6" max="20" step="0.1" value="9">
+        </label>
+        <button type="button" class="fp-btn" id="fp-check-run">Check dimensions</button>
+        <button type="button" class="fp-btn" id="fp-match-scale" hidden>Match scale to the label</button>
+        <button type="button" class="fp-btn" id="fp-build-anyway" hidden>Build with this scale anyway</button>
+      </div>
+      <p class="text-[11px] text-slate-500 mt-2 leading-relaxed">Ceiling height is used for the full-height model, the roof, and walking through. A typical residential range is 7 ft to 12 ft.</p>
+      <div id="fp-check-summary" hidden>
+        <p id="fp-check-heading"></p>
+        <ul id="fp-check-list"></ul>
+      </div>
+    </div>
     <div class="flex flex-wrap items-center gap-2 mb-3">
       <label class="sr-only" for="fp-sample">Sample layout</label>
       <select id="fp-sample">
@@ -6447,6 +6500,9 @@ def build_floor_plan_3d_page() -> str:
             <p id="fp-fallback-note" class="text-xs text-amber-300 px-3 pt-3"></p>
             <div id="fp-iso"></div>
           </div>
+          <div id="fp-3d-hold" hidden>
+            <p id="fp-3d-hold-text"></p>
+          </div>
         </div>
       </div>
     </div>
@@ -6461,7 +6517,7 @@ def build_floor_plan_3d_page() -> str:
         <button type="button" class="fp-btn" id="fp-export"><i class="fas fa-download" aria-hidden="true"></i>Download sketch</button>
         <label class="fp-btn cursor-pointer"><i class="fas fa-upload" aria-hidden="true"></i>Open sketch<input id="fp-import" type="file" accept="application/json,.json" class="sr-only"></label>
       </div>
-      <p class="text-xs text-slate-500 mt-3 leading-relaxed">Your tracing image and sketch never leave this device. Sketches autosave in this browser only.</p>
+      <p class="text-xs text-slate-500 mt-3 leading-relaxed">Your tracing image and sketch never leave this device. Sketches autosave in this browser only. After you set the tracing width, check a dimension written on the plan so that length matches this scale.</p>
     </details>
     <noscript><p class="text-sm text-amber-300 mt-3">This planning tool needs JavaScript. The guidance below still applies.</p></noscript>
   </section>
