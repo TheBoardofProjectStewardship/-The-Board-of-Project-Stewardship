@@ -12,7 +12,7 @@ slug: "window-replacement-shoreline-wa"
 - If your Shoreline home was built before 1978, removing old sashes and trim can disturb lead-based paint. Washington requires paid renovators working on pre-1978 homes to hold Renovation, Repair and Painting (RRP) certification through the [Washington State Department of Commerce](https://www.commerce.wa.gov/lead-based-paint/rrp/).
 - Check every window contractor and installation crew on [Washington L&I Verify](https://secure.lni.wa.gov/verify/) yourself before a deposit — registration, bond, and insurance are public records.
 
-![Illustrative mid-century house with window openings wrapped in protective sheeting and a ladder staged during a replacement — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-06-shoreline-window-1.webp)
+![Illustrative: window replacement in progress on a mid-century Shoreline rambler, with flashing membrane on the rough opening and a new unit staged against lap siding under an overcast sky — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-06-shoreline-window-4.webp)
 
 ## Shoreline house stock and why windows wear out here
 
