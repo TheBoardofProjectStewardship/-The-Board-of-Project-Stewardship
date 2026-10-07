@@ -50,6 +50,13 @@ Base: `https://boardofprojectstewardship.com/`
 | `stamp-of-trust/` | Stamp of Trust credential |
 | `blog/rss.xml` | Blog RSS feed |
 | `404.html` | Branded Board 404 |
+| `posts/2026-10-06-window-replacement-shoreline-wa.html` | Window Replacement Shoreline WA — Permit Exemptions, Lead-Safe Rules & Drained Openings |
+| `posts/2026-10-05-roof-replacement-ballard-wa.html` | Roof Replacement Ballard WA — SDCI Re-Roof Rules, Underlayment & Wet-Season Sequencing |
+| `posts/2026-10-04-window-replacement-mill-creek-wa.html` | Window Replacement Mill Creek WA — Planning, Permits & Licensed Pros |
+| `posts/2026-10-03-hiring-a-remodeler-queen-anne-wa.html` | Hiring a Remodeler Queen Anne WA — Local Permitting, Historic Home Care & Design-Build Value |
+| `posts/2026-10-02-window-replacement-lynnwood-wa.html` | Window Replacement Lynnwood WA — Energy Efficiency, Modern Styles & Local Permit Guides |
+| `posts/2026-10-01-hiring-a-remodeler-redmond-wa.html` | Hiring a Remodeler Redmond WA — Vetting Experts, Budgeting Tips & Permit Guidance |
+| `posts/2026-09-30-bathroom-remodel-lake-forest-park-wa.html` | Bathroom Remodel Lake Forest Park WA — iWorQ Permits, Tree Canopy & Wet Assemblies |
 | `posts/2026-09-29-hiring-a-remodeler-mountlake-terrace-wa.html` | Hiring a Remodeler Mountlake Terrace WA — Vetting Pros, Local Permit Tips & Design-Build Benefits |
 | `posts/2026-09-28-edmonds-area-remodel-permit-news-2026-09-28.html` | Edmonds-Area Homeowner News, September 28, 2026: Esperance Annexation, Budgets, and Utility Rates |
 | `posts/2026-09-28-home-addition-mukilteo-wa.html` | Home Addition Mukilteo WA — Going Up or Out on a Coastal Lot: City Permits, Tree Rules, and Weatherproof-First Sequencing |
@@ -126,7 +133,7 @@ cd bops-site
 python3 generate_site.py
 ```
 
-Sources: `/workspace/top30-addition-contractors.md`, `/workspace/bops-research-kitchen-bath.md`, `/workspace/bops-research-custom-commercial-spec.md`, `/workspace/bops-research-edmonds-custom.md`, `/workspace/bops-research-trades.md`, and `posts/*.md`.
+Sources: `data/research/top30-addition-contractors.md`, `data/research/bops-research-kitchen-bath.md`, `data/research/bops-research-custom-commercial-spec.md`, `data/research/bops-research-edmonds-custom.md`, `data/research/bops-research-trades.md`, and `posts/*.md`.
 
 ## Agent intake
 

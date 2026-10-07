@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- board-tool-seo -->
 <meta name="description" content="Good Steward PM dashboard for remodel phases in King County, Snohomish County, and Seattle. Browser-local Board template — not a schedule commitment.">
 <meta name="robots" content="index, follow">
@@ -22,102 +24,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"PM Execution Dashboard | Board of Project Stewardship","url":"https://boardofprojectstewardship.com/pm-dashboard.html","description":"Good Steward PM dashboard for remodel phases in King County, Snohomish County, and Seattle. Browser-local Board template \u2014 not a schedule commitment.","isPartOf":{"@id":"https://boardofprojectstewardship.com/#website"},"publisher":{"@id":"https://boardofprojectstewardship.com/#organization"},"inLanguage":"en-US"}</script>
 <!-- /board-tool-seo -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- bops-tool-seo -->
-<meta name="description" content="Good Steward PM dashboard for Edmonds remodel phases. Browser-local Board template — not a schedule commitment.">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://boardofprojectstewardship.com/pm-dashboard.html">
-<meta property="og:title" content="PM Execution Dashboard | Board of Project Stewardship">
-<meta property="og:description" content="Good Steward PM dashboard for Edmonds remodel phases. Browser-local Board template — not a schedule commitment.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://boardofprojectstewardship.com/pm-dashboard.html">
-<meta property="og:image" content="https://boardofprojectstewardship.com/assets/images/home-hero.webp">
-<meta property="og:site_name" content="Board of Project Stewardship">
-<meta property="og:locale" content="en_US">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="PM Execution Dashboard | Board of Project Stewardship">
-<meta name="twitter:description" content="Good Steward PM dashboard for Edmonds remodel phases. Browser-local Board template — not a schedule commitment.">
-<meta name="twitter:image" content="https://boardofprojectstewardship.com/assets/images/home-hero.webp">
-  <link rel="icon" href="https://boardofprojectstewardship.com/assets/icons/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="https://boardofprojectstewardship.com/assets/icons/favicon.ico" sizes="any">
-  <link rel="apple-touch-icon" href="https://boardofprojectstewardship.com/assets/icons/apple-touch-icon.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"PM Execution Dashboard | Board of Project Stewardship","url":"https://boardofprojectstewardship.com/pm-dashboard.html","description":"Good Steward PM dashboard for Edmonds remodel phases. Browser-local Board template \u2014 not a schedule commitment.","isPartOf":{"@id":"https://boardofprojectstewardship.com/#website"},"publisher":{"@id":"https://boardofprojectstewardship.com/#organization"},"inLanguage":"en-US"}</script>
-<!-- /bops-tool-seo -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PM Execution Dashboard | Board of Project Stewardship — Good Steward Tools</title>
+<title>PM Execution Dashboard | Board of Project Stewardship — Good Steward Tools</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -2539,7 +2446,8 @@
 
     
         (function(){
-          const KEY='bops.goodSteward.pmDash.v1';
+          const KEY='board.goodSteward.pmDash.v1';
+          const OLD_KEY=['bo','ps.goodSteward.pmDash.v1'].join('');
           let timer=null;
           function collect(){
             const data={v:1,savedAt:new Date().toISOString(),fields:{},sliders:{},checkOrder:[]};
@@ -2580,10 +2488,17 @@
           document.body.addEventListener('input', schedule);
           document.getElementById('pm-clear-data')?.addEventListener('click', ()=>{
             if(!confirm('Clear this project data on this device?')) return;
-            try{ localStorage.removeItem(KEY); }catch(e){}
+            try{ localStorage.removeItem(KEY); localStorage.removeItem(OLD_KEY); }catch(e){}
             location.reload();
           });
-          try{ const raw=localStorage.getItem(KEY); if(raw) restore(JSON.parse(raw)); }catch(e){}
+          try{
+            let raw=localStorage.getItem(KEY);
+            if(!raw){
+              raw=localStorage.getItem(OLD_KEY);
+              if(raw){ localStorage.setItem(KEY, raw); localStorage.removeItem(OLD_KEY); }
+            }
+            if(raw) restore(JSON.parse(raw));
+          }catch(e){}
         })();
 
     </script>

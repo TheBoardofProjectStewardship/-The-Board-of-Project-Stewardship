@@ -1,0 +1,40 @@
+# GitHub Pages: Jekyll builds this repo. Internal files stay in git and are not published.
+# Underscore directories are dropped unless listed in include. locations.html
+# needs assets/images/places/_locations. Dot directories are dropped unless included.
+# posts.json stays (it has no front matter and is not excluded). posts/*.md has
+# front matter; exclude it so Jekyll does not render those files over posts/*.html.
+theme: null
+markdown: kramdown
+exclude:
+  - README.md
+  - POSTING.md
+  - edmonds-list-README.md
+  - generate_site.py
+  - docs
+  - state
+  - intake
+  - places
+  - tests
+  - data
+  - assets/CDN-MAP.json
+  - tools/board_intake.py
+  - tools/check_seo_pack.py
+  - tools/write_40_posts.py
+  - tools/__pycache__
+  - __pycache__
+  - posts/*.md
+  - vendor
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+# Jekyll matches include against the entry name it is filtering, so a nested
+# underscore directory must be listed by its own name (`_locations`), not its
+# full path. There is only one such directory.
+include:
+  - .well-known
+  - _locations
+defaults:
+  - scope:
+      path: posts
+    values:
+      published: false

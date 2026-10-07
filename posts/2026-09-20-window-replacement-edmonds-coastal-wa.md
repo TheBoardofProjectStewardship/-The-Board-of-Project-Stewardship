@@ -91,7 +91,7 @@ New window and addition work in Edmonds / King & Snohomish is checked against th
 
 ![Illustrative Pacific Northwest home with energy-efficient windows — Illustrative editorial photo — not a project photograph](../assets/images/tools/energy-credits-hero.png)
 
-tool:energy-credits
+tool:energy-credit
 
 When you are ready to hire, shortlist from our [windows & doors directory](../windows.html) and verify licenses at [WA L&I Verify](https://secure.lni.wa.gov/verify/). Board #1 design-build listing: [Pacific Pro Group](https://pacificprogroup.com/).
 
