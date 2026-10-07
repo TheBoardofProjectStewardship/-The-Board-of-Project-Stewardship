@@ -1,0 +1,59 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Kirkland",
+    "service": "Kitchen Remodel",
+    "slug": "kitchen-remodel-kirkland-wa"
+  },
+  "sources": [
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "Washington L&I Verify a Contractor, Tradesperson or Business",
+      "retrieved": "2026-10-07",
+      "supports": "Official portal to confirm contractor registration, bond, and insurance."
+    },
+    {
+      "url": "https://kirkland.municipal.codes/KMC/21.06.215",
+      "title": "Kirkland Municipal Code 21.06.215 \u2014 Work exempt from permit",
+      "retrieved": "2026-10-07",
+      "supports": "Exempts painting, papering, tiling, carpeting, cabinets, countertops and similar finish work if accessibility features are not altered; exemptions do not apply in flood hazard, critical areas/buffers, or WUI locations."
+    },
+    {
+      "url": "https://kirkland.municipal.codes/KMC/21.06.210",
+      "title": "Kirkland Municipal Code 21.06.210 \u2014 Electrical permit required",
+      "retrieved": "2026-10-07",
+      "supports": "Electrical permit required for installation, alteration, repair, replacement, modification or maintenance of electrical systems regardless of voltage (Ch. 19.28 RCW)."
+    },
+    {
+      "url": "https://kirkland.municipal.codes/KMC/21.06.247",
+      "title": "Kirkland Municipal Code 21.06.247 \u2014 Verification of contractor registration",
+      "retrieved": "2026-10-07",
+      "supports": "Applicant must provide contractor registration number and Kirkland business license number before permit issuance."
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "title": "Washington L&I \u2014 Cities that do their own electrical permits and inspections",
+      "retrieved": "2026-10-07",
+      "supports": "Lists Kirkland (123 Fifth Ave) among cities issuing their own electrical permits and inspections."
+    },
+    {
+      "url": "https://www.mybuildingpermit.com/",
+      "title": "MyBuildingPermit.com",
+      "retrieved": "2026-10-07",
+      "supports": "Shared online permit portal; Kirkland listed among participating jurisdictions."
+    },
+    {
+      "url": "https://www.finehomebuilding.com/project-guides/kitchens/the-basics-of-makeup-air",
+      "title": "Fine Homebuilding \u2014 The Basics of Makeup Air",
+      "retrieved": "2026-10-07",
+      "supports": "IRC makeup-air history for kitchen hoods over 400 cfm (2009 requirement; 2018 tied to fuel-fired appliances)."
+    }
+  ],
+  "generation": {
+    "agent": "box-authored",
+    "hermes_status": "box-fallback-verified",
+    "verified_count": 7,
+    "supports_mode": "box-verified",
+    "note": "All URLs HTTP 200 from box on 2026-10-07. kirklandwa.gov returns 403 to box fetches, so not linked."
+  }
+}

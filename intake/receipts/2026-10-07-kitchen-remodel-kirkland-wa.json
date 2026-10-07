@@ -1,0 +1,16 @@
+{
+  "submission_id": "2026-10-07-kitchen-remodel-kirkland-wa",
+  "idempotency_key": "sha256:f13dabceb5888e4ec7c73046783104eaa93603b62e3bd8d36e2f8a37a100ccb9",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-10-07T17:29:37Z",
+  "outputs": [
+    "posts/2026-10-07-kitchen-remodel-kirkland-wa.md",
+    "posts/2026-10-07-kitchen-remodel-kirkland-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 64
+}
