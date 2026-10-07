@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-10-07-kitchen-remodel-kirkland-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-10-07T17:45:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Kitchen Remodel Kirkland WA \u2014 Permit Exemptions, City Electrical Permits & Range-Hood Makeup Air",
+    "date": "2026-10-07",
+    "slug": "kitchen-remodel-kirkland-wa",
+    "description": "Kitchen remodel guidance for Kirkland homeowners: which finish work the Kirkland Municipal Code exempts from a building permit, why electrical permits come from the City of Kirkland rather than L&I, planning makeup air for a bigger range hood, and how to verify contractors.",
+    "category": "Kitchen"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. PC team topic (kitchen-remodel-mountlake-terrace-wa) duplicated the live 2026-08-23 Mountlake Terrace kitchen post and the city already ran 09-25 and 09-29; box wrote a fresh Kirkland kitchen post using PC kitchen outline as research only. Producer role fields kept per intake contract."
+}

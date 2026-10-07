@@ -7550,7 +7550,32 @@ def build_floor_plan_3d_page() -> str:
     </details>
     <noscript><p class="text-sm text-amber-300 mt-3">This planning tool needs JavaScript. The guidance below still applies.</p></noscript>
   </section>
-  <section class="max-w-6xl mx-auto px-4 pb-6 prose-board">
+{_hub_photo_strip(
+    [
+        (
+            "assets/images/posts/2026-08-14-kitchen-greenwood-2.webp",
+            "Illustrative kitchen with sage green cabinets, white counters, and a wood-top island — not a real Board job photo",
+            "A kitchen layout to compare with a sketch",
+            "./kitchen.html",
+            "Kitchen remodelers directory",
+        ),
+        (
+            "assets/images/posts/2026-09-11-bathroom-shoreline-3.webp",
+            "Illustrative bathroom with a floating vanity, glass walk-in shower, and freestanding tub — not a real Board job photo",
+            "A bath layout with a walk-in shower",
+            "./bathrooms.html",
+            "Bathroom remodelers directory",
+        ),
+        (
+            "assets/images/posts/2026-08-26-home-addition-lake-forest-park-3.webp",
+            "Illustrative two-story addition with light siding beside a darker existing house — not a real Board job photo",
+            "An addition beside the existing house",
+            "./additions.html",
+            "Home additions directory",
+        ),
+    ],
+    title="Layout context (illustrative)",
+)}  <section class="max-w-6xl mx-auto px-4 pb-6 prose-board">
     <h2>How to use it</h2>
     <ol>
       {''.join(f'<li><strong>{esc(t)}.</strong> {esc(d)}</li>' for t, d in steps)}
@@ -7750,7 +7775,33 @@ def build_plan_walkthrough_page() -> str:
     </div>
     <noscript><p class="text-sm text-amber-200">This tool needs JavaScript. The notes below still apply.</p></noscript>
   </section>
-  <section class="max-w-6xl mx-auto px-4 pb-6 prose-board">
+{_hub_photo_strip(
+    [
+        (
+            "assets/images/posts/2026-09-04-kitchen-ballard-6.webp",
+            "Illustrative galley kitchen with white cabinets and a stainless range — not a real Board job photo",
+            "A galley kitchen to walk in the model",
+            "../kitchen.html",
+            "Kitchen remodelers directory",
+        ),
+        (
+            "assets/images/posts/2026-08-25-lfp-bath-3.webp",
+            "Illustrative bathroom with a double vanity, glass shower, and freestanding tub — not a real Board job photo",
+            "Check clearances around a bath",
+            "../bathrooms.html",
+            "Bathroom remodelers directory",
+        ),
+        (
+            "assets/images/posts/2026-09-28-second-story-addition-woodinville-2.webp",
+            "Illustrative second-story addition with dark horizontal siding and a gable roof — not a real Board job photo",
+            "See where a new storey meets the roof",
+            "../additions.html",
+            "Home additions directory",
+        ),
+    ],
+    title="Walkthrough context (illustrative)",
+    asset_prefix="../",
+)}  <section class="max-w-6xl mx-auto px-4 pb-6 prose-board">
     <h2>How to use it</h2>
     <ol>
       {''.join(f'<li><strong>{esc(t)}.</strong> {esc(d)}</li>' for t, d in steps)}
@@ -8018,7 +8069,32 @@ def build_pascal_editor_page() -> str:
       <a href="#meeting">6. Contractor meeting</a>
     </nav>
   </section>
-  <section class="max-w-6xl mx-auto px-4 pb-6 prose-board">
+{_hub_photo_strip(
+    [
+        (
+            "assets/images/posts/2026-08-21-kitchen-queen-anne-4.webp",
+            "Illustrative kitchen with white shaker cabinets, a marble island, and a gold faucet — not a real Board job photo",
+            "Draw the kitchen before the meeting",
+            "./kitchen.html",
+            "Kitchen remodelers directory",
+        ),
+        (
+            "assets/images/posts/2026-08-18-pnw-bathroom-waterproofing-4.webp",
+            "Illustrative primary bathroom with a freestanding tub and a glass shower — not a real Board job photo",
+            "A primary bath to name in the sketch",
+            "./bathrooms.html",
+            "Bathroom remodelers directory",
+        ),
+        (
+            "assets/images/posts/2026-08-15-primary-suite-addition-edmonds-2.webp",
+            "Illustrative second-story addition with a gable roof and new windows — not a real Board job photo",
+            "A second storey changes the roof",
+            "./additions.html",
+            "Home additions directory",
+        ),
+    ],
+    title="Sketch context (illustrative)",
+)}  <section class="max-w-6xl mx-auto px-4 pb-6 prose-board">
     <article class="pascal-step" id="start">
       <span class="pascal-kicker">Step 1</span>
       <h2>Start a project</h2>
@@ -8411,12 +8487,14 @@ def _hub_photo_strip(
     items: list[tuple],
     *,
     title: str = "Field context (illustrative)",
+    asset_prefix: str = "",
 ) -> str:
     """Reusable 3-up photo strip for thin learning hubs. Skips missing assets.
 
     Each item is (rel, alt, caption) or (rel, alt, caption, href) or
     (rel, alt, caption, href, link_label). When href is present, the image is
     wrapped in an on-site <a>; figcaption stays outside the link.
+    asset_prefix is "../" on pages that live one directory below the site root.
     """
     figures: list[str] = []
     for item in items:
@@ -8427,7 +8505,7 @@ def _hub_photo_strip(
         link_label = item[4] if len(item) >= 5 else None
         if not asset_exists(rel):
             continue
-        src = prefix_asset(rel, "")
+        src = prefix_asset(rel, asset_prefix)
         img_class = "w-full h-40 sm:h-48 object-cover"
         if href:
             img_class += " transition hover:opacity-90"
