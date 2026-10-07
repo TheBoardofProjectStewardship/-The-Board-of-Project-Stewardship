@@ -14,3 +14,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Dry-run intake tests
         run: python3 -m unittest discover -s tests -v
+      - name: Public page integrity
+        run: python3 tools/check_seo_pack.py --ci
+      - name: Image byte duplicates
+        run: python3 tools/dup-scan.py

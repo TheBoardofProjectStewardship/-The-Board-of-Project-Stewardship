@@ -20,6 +20,8 @@ exclude:
   - assets/CDN-MAP.json
   - tools/board_intake.py
   - tools/check_seo_pack.py
+  - tools/dup-scan.py
+  - tools/image_md5_baseline.json
   - tools/write_40_posts.py
   - tools/__pycache__
   - __pycache__

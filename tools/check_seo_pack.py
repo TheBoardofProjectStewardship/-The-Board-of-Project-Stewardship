@@ -8,6 +8,9 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
 GEN = (ROOT / "generate_site.py").read_text(encoding="utf-8")
 EDITORIAL = "editorial@boardofprojectstewardship.com"
 
@@ -319,5 +322,83 @@ def main() -> None:
     print(f"OK: checked {len(html_files)} HTML files; BreadcrumbList on {crumbs}")
 
 
+def check_public_regressions() -> None:
+    """Checks safe to run in CI. Does not judge the required Board #1 header link."""
+    import generate_site as gs
+
+    html_files = list(ROOT.glob("*.html")) + list((ROOT / "posts").glob("*.html"))
+    if not html_files:
+        fail("no generated HTML found")
+
+    forbidden = re.compile(
+        r"\b(?:BOPS|ChatGPT|Gemini|Imagen|Veo|Higgsfield|Pollinations)\b|\bAI\b"
+    )
+    illustrative_src = re.compile(
+        r"(?:assets/images/(?:posts|places|hubs|tools|walkthrough)/|assets/hero/|"
+        r"assets/images/(?:dir-|home-)|another-story-banner)",
+        re.I,
+    )
+    for path in html_files:
+        text = path.read_text(encoding="utf-8")
+        if forbidden.search(text):
+            fail(f"{path.relative_to(ROOT)} contains a forbidden public term")
+        title_m = re.search(r"<title>(.*?)</title>", text, flags=re.S)
+        if title_m:
+            title = re.sub(r"\s+", " ", html.unescape(title_m.group(1))).strip()
+            if len(title) > 60 or title.endswith("...") or title.endswith("…"):
+                fail(f"{path.relative_to(ROOT)} title is truncated or over 60 characters: {title}")
+        if 'id="nav-toggle"' in text and 'id="another-story-sea"' not in text:
+            fail(f"{path.relative_to(ROOT)} is missing the Another Story iframe")
+        for tag in re.findall(r"<img\b([^>]*?)>", text, flags=re.I | re.S):
+            src_m = re.search(r'\bsrc\s*=\s*"([^"]*)"', tag)
+            alt_m = re.search(r'\balt\s*=\s*"([^"]*)"', tag)
+            if not src_m or not alt_m or not illustrative_src.search(src_m.group(1)):
+                continue
+            alt = html.unescape(alt_m.group(1)).strip()
+            if alt and not alt.lower().startswith("illustrative:"):
+                fail(f"{path.relative_to(ROOT)} generated image alt missing Illustrative: prefix: {alt[:80]}")
+
+    specs = gs.load_all_place_seo_specs()
+    flags = [
+        item
+        for item in gs.place_specs_uniqueness_report(specs)
+        if item.startswith("SWAP_DUP") or item.startswith("NEAR_DUP")
+    ]
+    if flags:
+        fail("place pages are too similar: " + "; ".join(flags[:8]))
+
+    dead_official = (
+        "https://www.cityoffederalway.com/page/permits",
+        "https://www.mercerisland.gov/community-planning-development",
+        "https://www.desmoineswa.gov/city_hall/departments/planning_and_building",
+        "https://www.burienwa.gov/city_hall/departments/building_services",
+        "https://www.maplevalleywa.gov/216/Building",
+        "https://www.covingtonwa.gov/city_hall/departments/community_development",
+        "https://www.arlingtonwa.gov/147/Building",
+        "https://stanwoodwa.org/147/Building-Department",
+        "https://www.lakestevenswa.gov/141/Planning-Community-Development",
+        "https://www.snohomishwa.gov/147/Building-Department",
+        "https://newcastlewa.gov/community_development/",
+        "https://www.cityofenumclaw.net/149/Building-Department",
+        "https://northbendwa.gov/147/Community-Development",
+        "https://www.snoqualmiewa.gov/178/Building",
+        "https://www.duvallwa.gov/157/Building-Department",
+        "https://marysvillewa.gov/147/Community-Development",
+        "https://monroewa.gov/147/Building-Services",
+    )
+    spec_blob = "".join(path.read_text(encoding="utf-8") for path in (ROOT / "places").glob("_place_specs_wave*.json"))
+    for url in dead_official:
+        if url in spec_blob:
+            fail(f"dead official permit URL still in place specs: {url}")
+        for path in html_files:
+            if url in path.read_text(encoding="utf-8"):
+                fail(f"dead official permit URL still in {path.relative_to(ROOT)}: {url}")
+
+    print(f"OK: public regressions checked on {len(html_files)} HTML files")
+
+
 if __name__ == "__main__":
-    main()
+    if "--ci" in sys.argv:
+        check_public_regressions()
+    else:
+        main()
