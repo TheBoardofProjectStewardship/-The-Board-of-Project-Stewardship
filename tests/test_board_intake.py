@@ -435,7 +435,7 @@ class LiveSiteRegressionTests(unittest.TestCase):
             previous_site = gs.SITE_DIR
             previous_build = gs.build_post_page
             gs.SITE_DIR = root
-            gs.build_post_page = lambda post: "<html>https://cdn.cloudfront.net/sample.png</html>"
+            gs.build_post_page = lambda post, posts=None: "<html>https://cdn.cloudfront.net/sample.png</html>"
             try:
                 gs.refresh_post_html([{
                     "title": "Sample",
