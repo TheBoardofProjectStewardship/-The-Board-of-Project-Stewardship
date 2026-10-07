@@ -58,6 +58,9 @@
   let builtOnce = false;
   let reducedMotion = false;
 
+  function capturePointer(el, id) {
+    try { el.setPointerCapture(id); } catch (err) { /* some browsers reject capture on a synthetic pointer */ }
+  }
   function nid(prefix) {
     seq += 1;
     return prefix + seq;
@@ -837,7 +840,7 @@
   function onPointerDown(e) {
     if (viewMode !== "plan") return;
     if (e.pointerType === "mouse" && e.button !== 0) return;
-    planCanvas.setPointerCapture(e.pointerId);
+    capturePointer(planCanvas, e.pointerId);
     pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
     const wpt = eventWorld(e);
     drag = {
@@ -1821,7 +1824,7 @@
         glCanvas.requestPointerLock && glCanvas.requestPointerLock();
       }
       look = { id: e.pointerId, x: e.clientX, y: e.clientY };
-      glCanvas.setPointerCapture(e.pointerId);
+      capturePointer(glCanvas, e.pointerId);
       userOrbit = true;
     });
     glCanvas.addEventListener("pointermove", (e) => {
@@ -1869,7 +1872,7 @@
       knob.style.transform = "translate(-50%, -50%)";
     }
     joyEl.addEventListener("pointerdown", (e) => {
-      joyEl.setPointerCapture(e.pointerId);
+      capturePointer(joyEl, e.pointerId);
       joySet(e.clientX, e.clientY);
       e.stopPropagation();
     });

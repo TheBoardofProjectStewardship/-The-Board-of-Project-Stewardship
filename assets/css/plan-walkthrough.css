@@ -1,5 +1,6 @@
 /* Plan to 3D Walkthrough. Loaded only on /plan-walkthrough/. */
 #pw { color: #e2e8f0; }
+#pw .pw-btn, #pw .pw-file, #pw .pw-stage, #pw .pw-field { scroll-margin-top: 8.5rem; }
 #pw * { box-sizing: border-box; }
 #pw .pw-steps { display: flex; gap: 0.4rem; overflow-x: auto; margin: 0 0 0.9rem; padding: 0; list-style: none; }
 #pw .pw-steps li { flex: 0 0 auto; min-height: 2.4rem; display: flex; align-items: center; gap: 0.35rem; padding: 0.35rem 0.7rem; border-radius: 999px; border: 1px solid rgba(255,255,255,0.12); color: #cbd5e1; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; }
@@ -40,5 +41,6 @@
 #pw :focus-visible { outline: 2px solid #4ade80; outline-offset: 2px; }
 @media (max-width: 640px) {
   #pw .pw-stage { height: 68vh; min-height: 20rem; }
+  #pw .pw-btn, #pw .pw-file, #pw .pw-stage, #pw .pw-field { scroll-margin-top: 5rem; }
   #pw-3dbar { font-size: 0.7rem; }
 }
