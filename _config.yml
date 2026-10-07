@@ -16,6 +16,7 @@ exclude:
   - places
   - tests
   - data
+  - pages
   - assets/CDN-MAP.json
   - tools/board_intake.py
   - tools/check_seo_pack.py
