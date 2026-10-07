@@ -1578,6 +1578,7 @@ def nav_html(active: str = "", prefix: str = "") -> str:
         ("contact", href("contact.html"), "Contact"),
         ("steward", href("good-steward.html"), "Good Steward"),
         ("floor-plan-3d", href("floor-plan-3d.html"), "Floor Plan to 3D"),
+        ("plan-walkthrough", href("plan-walkthrough/"), "Plan Walkthrough"),
         ("pascal-editor", href("pascal-editor.html"), "Pascal Editor Sketch"),
         ("hire-questions", href("hire-questions.html"), "Hire Questions"),
         ("hiring-a-contractor", href("hiring-a-contractor.html"), "Hiring a Contractor"),
@@ -1693,6 +1694,7 @@ def footer_html(prefix: str = "./", active: str = "", updated: str = "") -> str:
         ("bathroom-waterproofing-guide", f"{prefix}bathroom-waterproofing-guide.html", "Bathroom waterproofing"),
         ("home-addition-planning", f"{prefix}home-addition-planning.html", "Home addition planning"),
         ("pascal-editor", f"{prefix}pascal-editor.html", "Pascal Editor sketch"),
+        ("plan-walkthrough", f"{prefix}plan-walkthrough/", "Plan to 3D walkthrough"),
         ("steward", f"{prefix}good-steward.html", "Good Steward"),
         ("story", f"{prefix}another-story.html", "Another Story"),
         ("glossary", f"{prefix}glossary.html", "Glossary"),
@@ -1785,6 +1787,7 @@ def public_tool_href(slug: str, prefix: str = "") -> str:
         "energy-credits": "energy-credit.html",
         "build-walkthrough": "build-walkthrough.html",
         "floor-plan-3d": "floor-plan-3d.html",
+        "plan-walkthrough": "plan-walkthrough/",
         "pascal-editor": "pascal-editor.html",
         "story": "another-story.html",
         "steward": "good-steward.html",
@@ -2871,6 +2874,7 @@ RELATED_LINK_PACKS: dict[str, list[tuple[str, str]]] = {
         ("Site Visit Checklist", "./site-visit.html"),
         ("Build Walkthrough", "./build-walkthrough.html"),
         ("Floor plan to 3D", "./floor-plan-3d.html"),
+        ("Plan to 3D walkthrough", "./plan-walkthrough/"),
         ("Pascal Editor sketch", "./pascal-editor.html"),
         ("PM Dashboard", "./pm-dashboard.html"),
         ("Energy code credits", "./energy-credit.html"),
@@ -6256,6 +6260,7 @@ Base: `{BASE_URL}`
 | `blog.html` | Blog index |
 | `good-steward.html` | Good Steward hub |
 | `build-walkthrough.html` | Build Walkthrough landing |
+| `plan-walkthrough/` | Plan to 3D walkthrough |
 | `pascal-editor.html` | Pascal Editor remodel sketch walkthrough |
 | `site-visit.html` | Site Visit & Discovery landing |
 | `pm-dashboard.html` | PM Execution Dashboard landing |
@@ -6390,6 +6395,7 @@ def write_llms_txt() -> None:
 ## Guides
 
 - [Learn](https://boardofprojectstewardship.com/learn.html): Guide index.
+- [Plan to 3D Walkthrough](https://boardofprojectstewardship.com/plan-walkthrough/): Trace a plan in the browser and walk the sketch. Illustration only, not for construction.
 - [Hiring a contractor](https://boardofprojectstewardship.com/hiring-a-contractor.html): Questions to ask before you hire.
 - [Remodel cost factors](https://boardofprojectstewardship.com/remodel-cost-factors.html): What moves a remodel scope. No prices.
 - [Kitchen cost factors](https://boardofprojectstewardship.com/kitchen-cost-factors.html): What moves a kitchen scope. No prices.
@@ -6589,6 +6595,13 @@ def write_sitemap(posts: list[dict]) -> None:
             "0.7",
         )
     )
+    entries.append(
+        url_entry(
+            f"{BASE_URL}plan-walkthrough/",
+            file_lastmod("plan-walkthrough/index.html"),
+            "0.7",
+        )
+    )
 
     xml = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
@@ -6695,6 +6708,9 @@ def write_search_index() -> None:
     stamp = SITE_DIR / "stamp-of-trust" / "index.html"
     if stamp.is_file():
         add(stamp, "/stamp-of-trust/")
+    plan_walk = SITE_DIR / "plan-walkthrough" / "index.html"
+    if plan_walk.is_file():
+        add(plan_walk, "/plan-walkthrough/")
     rows.sort(key=lambda row: row["title"].lower())
     (SITE_DIR / "search-index.json").write_text(json.dumps(rows, indent=2) + "\n", encoding="utf-8")
 
@@ -6809,6 +6825,7 @@ def build_good_steward_page() -> str:
       <div class="flex flex-wrap gap-3">
         <a href="{public_tool_href('build-walkthrough')}" class="bg-primary text-white px-5 py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs">Build Walkthrough</a>
         <a href="{public_tool_href('floor-plan-3d')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Floor Plan to 3D</a>
+        <a href="{public_tool_href('plan-walkthrough')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Plan to 3D Walkthrough</a>
         <a href="{public_tool_href('pascal-editor')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Pascal Editor Sketch</a>
         <a href="{public_tool_href('site-visit')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Site Visit &amp; Discovery</a>
         <a href="{public_tool_href('pm-dashboard')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">PM Dashboard</a>
@@ -7177,6 +7194,7 @@ def build_floor_plan_3d_page() -> str:
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Floor Plan to 3D Walkthrough</h1>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Sketch a floor plan, or trace one from a listing or your designer, and see it rise into a furnished 3D model you can spin, cut away, and walk through at eye level. Before you draw, confirm a dimension written on the plan against your scale. It is a free planning tool from the Board of Project Stewardship for homeowners who want to understand a layout before a remodel, addition, or ADU conversation with a contractor.</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">For a builder PDF or a photo, with more than one storey and a stair, use <a href="{public_tool_href('plan-walkthrough')}" class="text-secondary hover:underline">Plan to 3D Walkthrough</a>.</p>
     <p class="mb-3"><span class="fp-chip">Illustrative sketch · not construction documents</span></p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="{public_tool_href('good-steward')}" class="text-secondary hover:underline">Good Steward</a>. Also: <a href="{public_tool_href('pascal-editor')}" class="text-secondary hover:underline">Pascal Editor sketch</a> · <a href="{public_tool_href('build-walkthrough')}" class="text-secondary hover:underline">Build Walkthrough</a> · <a href="{public_tool_href('site-visit')}" class="text-secondary hover:underline">Site Visit Checklist</a> · <a href="{public_tool_href('hire-questions')}" class="text-secondary hover:underline">Hire interview questions</a>.</p>
   </header>
@@ -7335,6 +7353,208 @@ def build_floor_plan_3d_page() -> str:
         ],
     )
 
+
+
+def build_plan_walkthrough_page() -> str:
+    """Client-side plan trace and walk. No upload to a server and no 3D library on other pages."""
+    page_url = f"{BASE_URL}plan-walkthrough/"
+    description = (
+        "Upload a builder plan, trace the walls, and walk the house in 3D before it is built. "
+        "Free in your browser. Illustration only, not for construction."
+    )
+    steps = [
+        ("Upload the plan", "Add a builder PDF or a straight-on photo. PDF pages render in the browser. Pick the page for this storey. The file stays on your device."),
+        ("Set the scale", "Tap two points on a known dimension and type its length in feet and inches."),
+        ("Trace the storey", "Draw walls from point to point. Ends snap to corners and to square angles. Place doors, windows, room names, and stairs. Add another storey with its own plan page."),
+        ("Watch it build", "Traced lines glow, then the walls rise storey by storey, and the roof drops on."),
+        ("Walk through", "Orbit the dollhouse, lift the roof, and walk room to room. On a phone, use the on-screen joystick. Download a snapshot or a project file."),
+    ]
+    faqs = [
+        (
+            "Is this model for construction or permits?",
+            "No. It is an illustration so you can picture a layout. Always confirm dimensions, structure, and openings with your builder, architect, or the permit set. It is not a survey and not for construction.",
+        ),
+        (
+            "Does my plan get uploaded to a server?",
+            "No. PDF pages and photos are read in your browser. The sketch is saved only in this browser unless you download a project file or copy a share link. A share link carries the walls, not the plan image.",
+        ),
+        (
+            "What can I upload?",
+            "A PDF, or a JPG or PNG photo taken straight on to the sheet. Some phones can also open a HEIC photo. If this browser cannot read HEIC, export a JPG or PNG and upload that.",
+        ),
+        (
+            "Can I show more than one storey?",
+            "Yes. Each storey has its own plan page, walls, doors, windows, and room names. A stair run on a lower storey climbs to the storey above in the walk.",
+        ),
+        (
+            "Does this cost anything?",
+            "No. There is no account and no payment. It runs in the browser on this site.",
+        ),
+    ]
+    webapp = {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Plan to 3D Walkthrough",
+        "url": page_url,
+        "description": description,
+        "applicationCategory": "DesignApplication",
+        "operatingSystem": "Any web browser",
+        "browserRequirements": "Requires JavaScript. WebGL is used for the 3D view.",
+        "isAccessibleForFree": True,
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+        "publisher": {"@id": f"{SITE_ORIGIN}/#organization"},
+    }
+    body = f"""  <header class="max-w-6xl mx-auto px-4 pt-10 pb-2">
+    <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>
+    <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Plan to 3D Walkthrough</h1>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Upload a builder's floor plan, or a straight-on photo of one, trace the walls yourself, and walk the house in the browser before it is built. Cedar Lane House, a two-storey sample, is ready to open. No account and no payment. The plan never leaves your device.</p>
+    <p class="mb-4 rounded-lg border border-amber-300/40 bg-amber-950/40 text-amber-100 px-4 py-3 text-sm leading-relaxed max-w-3xl">For illustration only. Always confirm dimensions, structure, and layout with your builder, architect, or the permit set. This is not for construction.</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="../good-steward.html" class="text-secondary hover:underline">Good Steward</a>. A simpler single-level sketch is <a href="../floor-plan-3d.html" class="text-secondary hover:underline">Floor Plan to 3D</a>. Also: <a href="../build-walkthrough.html" class="text-secondary hover:underline">Build Walkthrough</a> · <a href="../home-addition-planning.html" class="text-secondary hover:underline">Home addition planning</a> · <a href="../hire-questions.html" class="text-secondary hover:underline">Hire interview questions</a>.</p>
+  </header>
+  <section id="pw" class="max-w-6xl mx-auto px-4 pb-8 relative z-20" aria-label="Plan to 3D walkthrough">
+    <ol class="pw-steps">
+      <li data-step="upload"><b>1</b> Upload</li>
+      <li data-step="scale"><b>2</b> Scale</li>
+      <li data-step="trace"><b>3</b> Trace</li>
+      <li data-step="walk"><b>4</b> Build and walk</li>
+    </ol>
+    <div class="pw-bar" role="toolbar" aria-label="Tracing tools">
+      <label class="pw-file">Upload plan<input id="pw-file" type="file" accept=".pdf,.png,.jpg,.jpeg,.heic,.heif,image/*,application/pdf"></label>
+      <button type="button" class="pw-btn" data-tool="scale">Scale</button>
+      <button type="button" class="pw-btn" data-tool="wall">Wall</button>
+      <button type="button" class="pw-btn" data-tool="door">Door</button>
+      <button type="button" class="pw-btn" data-tool="window">Window</button>
+      <button type="button" class="pw-btn" data-tool="room">Room</button>
+      <button type="button" class="pw-btn" data-tool="stair">Stair</button>
+      <button type="button" class="pw-btn" data-tool="select" aria-pressed="true">Select</button>
+    </div>
+    <div class="pw-sub">
+      <button type="button" class="pw-btn" id="pw-undo">Undo</button>
+      <button type="button" class="pw-btn" id="pw-redo">Redo</button>
+      <button type="button" class="pw-btn" id="pw-delete">Delete</button>
+      <button type="button" class="pw-btn" id="pw-finish" disabled>Finish wall</button>
+      <button type="button" class="pw-btn" id="pw-fit">Fit</button>
+      <button type="button" class="pw-btn" id="pw-zin" aria-label="Zoom in">+</button>
+      <button type="button" class="pw-btn" id="pw-zout" aria-label="Zoom out">−</button>
+      <button type="button" class="pw-btn" id="pw-sample">Sample home</button>
+      <button type="button" class="pw-btn" id="pw-blank">Blank</button>
+    </div>
+    <div class="pw-sub" id="pw-storeys" aria-label="Storeys"></div>
+    <div class="pw-sub">
+      <button type="button" class="pw-btn" id="pw-add-storey">Add storey</button>
+      <button type="button" class="pw-btn" id="pw-copy-below">Copy walls from below</button>
+      <button type="button" class="pw-btn" id="pw-del-storey">Remove storey</button>
+      <label class="pw-field" for="pw-name">Plan name<input id="pw-name" type="text" maxlength="60" value="Cedar Lane House"></label>
+      <label class="pw-field" for="pw-wall-h">Wall height (ft)<input id="pw-wall-h" type="number" min="7.5" max="16" step="0.5" value="9"></label>
+      <label class="pw-field" for="pw-opacity">Plan opacity<input id="pw-opacity" type="range" min="0.15" max="0.95" step="0.05" value="0.55"></label>
+      <label class="pw-field" id="pw-room-wrap" for="pw-room">Room name<input id="pw-room" type="text" maxlength="32" value="Room"></label>
+      <label class="pw-field" id="pw-width-wrap" for="pw-width" hidden>Width (ft)<input id="pw-width" type="number" min="1.5" max="16" step="0.1" value="3"></label>
+    </div>
+    <div class="pw-sub">
+      <button type="button" class="pw-btn" id="pw-plan-mode" aria-pressed="true">Plan</button>
+      <button type="button" class="pw-btn pw-go" id="pw-build">Watch it build</button>
+      <button type="button" class="pw-btn" id="pw-orbit-mode" aria-pressed="false">Orbit</button>
+      <button type="button" class="pw-btn" id="pw-walk-mode" aria-pressed="false">Walk</button>
+      <button type="button" class="pw-btn" id="pw-shot">Snapshot</button>
+    </div>
+    <div id="pw-review" hidden>
+      <p class="pw-help">Choose the plan page to trace on this storey.</p>
+      <div id="pw-thumbs"></div>
+      <div class="pw-sub">
+        <button type="button" class="pw-btn" id="pw-page-prev">Previous page</button>
+        <span id="pw-page-label">Page</span>
+        <button type="button" class="pw-btn" id="pw-page-next">Next page</button>
+      </div>
+    </div>
+    <div id="pw-stage" class="pw-stage">
+      <canvas id="pw-plan" aria-label="Plan board. Tap to trace walls, doors, windows, rooms, and stairs."></canvas>
+      <div id="pw-view3d" hidden>
+        <canvas id="pw-gl" aria-label="3D model of the traced plan. Drag to orbit. In walk mode, drag to look."></canvas>
+        <div id="pw-3dbar">
+          <label class="pw-field" for="pw-roof">Lift roof<input id="pw-roof" type="range" min="0" max="1" step="0.01" value="0"></label>
+          <label class="pw-field" for="pw-level-view">Storeys in view
+            <select id="pw-level-view"><option value="all">All storeys</option></select>
+          </label>
+        </div>
+        <p id="pw-walkhint" hidden>Drag to look. Joystick or WASD to move. You cannot walk through walls.</p>
+        <div id="pw-joy" hidden aria-label="Move joystick"><div id="pw-joy-knob"></div></div>
+        <p id="pw-3d-loading" hidden>Loading the 3D view…</p>
+        <p id="pw-3d-error" hidden></p>
+      </div>
+      <div id="pw-scalebox" hidden>
+        <p class="pw-help" style="flex:1 1 100%;margin:0">Length between the two points</p>
+        <label class="pw-field" for="pw-feet">Feet<input id="pw-feet" type="number" min="0" max="500" step="1" inputmode="numeric" value="20"></label>
+        <label class="pw-field" for="pw-inches">Inches<input id="pw-inches" type="number" min="0" max="11.99" step="0.25" inputmode="decimal" value="0"></label>
+        <button type="button" class="pw-btn pw-go" id="pw-scale-apply">Apply scale</button>
+        <button type="button" class="pw-btn" id="pw-scale-cancel">Cancel</button>
+      </div>
+    </div>
+    <p id="pw-scale-note" hidden>Scale is not set. Trace lengths will not match the sheet until you mark a known dimension.</p>
+    <p id="pw-status" role="status" aria-live="polite"></p>
+    <p class="pw-help">Tap to draw. Points snap to corners and to 0, 45, and 90 degree runs. Drag a point to fix it. Pinch or scroll to zoom. Each storey keeps its own plan page.</p>
+    <div class="pw-sub">
+      <button type="button" class="pw-btn" id="pw-export">Download project</button>
+      <label class="pw-file">Open project<input id="pw-import" type="file" accept="application/json,.json"></label>
+      <button type="button" class="pw-btn" id="pw-share">Copy share link</button>
+    </div>
+    <noscript><p class="text-sm text-amber-200">This tool needs JavaScript. The notes below still apply.</p></noscript>
+  </section>
+  <section class="max-w-6xl mx-auto px-4 pb-6 prose-board">
+    <h2>How to use it</h2>
+    <ol>
+      {''.join(f'<li><strong>{esc(t)}.</strong> {esc(d)}</li>' for t, d in steps)}
+    </ol>
+    <h2>What you are looking at</h2>
+    <p>The sample is Cedar Lane House, an original two-storey sketch on this page: entry and stair, living room, kitchen, dining, powder room, and an upper hall with bedrooms and a bath. It is not a built house and not a drawing set. Your own trace replaces it when you upload a plan.</p>
+    <p>Walls, doors, and windows are the lines you place. The walk stops at walls and passes through doors. A stair run climbs to the next storey. Room names sit on the floors. Lift the roof in the dollhouse view to see every level.</p>
+    <p>Use the model to talk about layout, not to build from it. Ask who will field-measure the house, which walls are structural, and how a layout change is written up. Re-verify a contractor at <a href="{LNI_URL}" target="_blank" rel="noopener">WA L&amp;I Verify</a>. When you are ready to shortlist, start with the Board directories. Board #1: <a href="{PPG['url']}" target="_blank" rel="noopener">{esc(PPG['name'])}</a>.</p>
+  </section>
+  <div class="max-w-6xl mx-auto px-4">
+{faq_section(faqs, "Plan to 3D Walkthrough FAQ")}
+  </div>
+"""
+    closing = (
+        '  <div class="max-w-6xl mx-auto px-4">\n'
+        + official_links_section(["lni_verify", "lni_home", "mybuildingpermit"])
+        + related_learning_strip(
+            [
+                ("Good Steward hub", "../good-steward.html"),
+                ("Floor plan to 3D sketch", "../floor-plan-3d.html"),
+                ("Build Walkthrough", "../build-walkthrough.html"),
+                ("Home addition planning", "../home-addition-planning.html"),
+                ("Hire interview questions", "../hire-questions.html"),
+                ("Verify a contractor", "../verify-contractor.html"),
+            ]
+        )
+        + "  </div>\n"
+    )
+    return page_shell(
+        "Plan to 3D Walkthrough | Board of Project Stewardship",
+        description,
+        "plan-walkthrough",
+        body + closing,
+        prefix="../",
+        json_ld=[
+            webapp,
+            howto_ld(
+                "How to trace a plan and walk it in 3D",
+                "Upload a plan, set the scale, trace walls, watch the model build, and walk through. Illustration only, not construction documents.",
+                steps,
+                page_url,
+            ),
+            faq_ld(faqs),
+        ],
+        canonical=page_url,
+        include_widgets=False,
+        include_tools_embed=False,
+        extra_head='  <link rel="stylesheet" href="/assets/css/plan-walkthrough.css">\n',
+        extra_scripts='  <script defer src="/assets/js/plan-walkthrough.js"></script>\n',
+        breadcrumbs=[
+            ("Home", BASE_URL),
+            ("Good Steward", f"{BASE_URL}good-steward.html"),
+            ("Plan to 3D Walkthrough", page_url),
+        ],
+    )
 
 
 PASCAL_EDITOR_STYLE = """  <style>
@@ -7649,7 +7869,7 @@ def build_pascal_editor_page() -> str:
       </ul>
       <p>Ask who will field-measure the house, which walls they believe are structural, and how a layout change gets written up before work starts. Use the Board of Project Stewardship <a href="{public_tool_href('hire-questions')}">hire interview questions</a>, <a href="{public_tool_href('change-orders')}">change orders and allowances</a>, and <a href="{public_tool_href('site-visit')}">Site Visit Checklist</a>. Re-verify registration at <a href="{LNI_URL}" target="_blank" rel="noopener">WA L&amp;I Verify</a>.</p>
       <h3>Two places to go next on this site</h3>
-      <p><a href="{public_tool_href('floor-plan-3d')}">Floor Plan to 3D</a> is the Board of Project Stewardship sketch that stays in your browser on this site. Use it for a quick single-level layout without a Pascal account. Use Pascal Editor when the conversation needs named rooms, a second level, and a roof in one model.</p>
+      <p><a href="{public_tool_href('floor-plan-3d')}">Floor Plan to 3D</a> is the Board of Project Stewardship sketch that stays in your browser on this site. Use it for a quick single-level layout without a Pascal account. Use Pascal Editor when the conversation needs named rooms, a second level, and a roof in one model. <a href="{public_tool_href('plan-walkthrough')}">Plan to 3D Walkthrough</a> traces a builder PDF or photo into more than one storey, including a stair, and stays in the browser.</p>
       <p>When you are ready to talk to a firm, open the directory that matches the work. <a href="./additions.html">Home additions</a>, <a href="./kitchen.html">kitchen remodelers</a>, and <a href="./bathrooms.html">bathroom remodelers</a> each list <a href="{PPG['url']}" target="_blank" rel="noopener">{esc(PPG['name'])}</a> as the Board’s editorial #1 hire. That ranking is not ownership, and it is not a bid. Read <a href="./how-we-rank.html">how we rank</a> before you treat any list as a shortlist.</p>
     </article>
   </section>
@@ -10847,6 +11067,7 @@ def build_kitchen_remodel_planning_page() -> str:
                     ("Site Visit Checklist", "./site-visit.html"),
                     ("Pascal Editor sketch", "./pascal-editor.html"),
                     ("Floor Plan to 3D", "./floor-plan-3d.html"),
+                    ("Plan to 3D Walkthrough", "./plan-walkthrough/"),
                 ]
             ),
         )
@@ -11211,6 +11432,7 @@ def build_home_addition_planning_page() -> str:
                     ("Another Story (Board feature)", "./another-story.html"),
                     ("Pascal Editor sketch", "./pascal-editor.html"),
                     ("Floor Plan to 3D", "./floor-plan-3d.html"),
+                    ("Plan to 3D Walkthrough", "./plan-walkthrough/"),
                     ("Site Visit Checklist", "./site-visit.html"),
                     ("Good Steward", "./good-steward.html"),
                 ]
@@ -11543,6 +11765,7 @@ def build_learn_page() -> str:
                 ("Build Walkthrough", "./build-walkthrough.html"),
                 ("Pascal Editor sketch", "./pascal-editor.html"),
                 ("Floor Plan to 3D", "./floor-plan-3d.html"),
+                ("Plan to 3D Walkthrough", "./plan-walkthrough/"),
                 ("PM Dashboard", "./pm-dashboard.html"),
                 ("Energy code credits", "./energy-credit.html"),
                 ("Another Story (Board feature)", "./another-story.html"),
@@ -14713,6 +14936,9 @@ def main(argv: list[str] | None = None) -> None:
     (SITE_DIR / "good-steward.html").write_text(build_good_steward_page(), encoding="utf-8")
     (SITE_DIR / "build-walkthrough.html").write_text(build_build_walkthrough_page(), encoding="utf-8")
     (SITE_DIR / "floor-plan-3d.html").write_text(build_floor_plan_3d_page(), encoding="utf-8")
+    _plan_dir = SITE_DIR / "plan-walkthrough"
+    _plan_dir.mkdir(parents=True, exist_ok=True)
+    (_plan_dir / "index.html").write_text(build_plan_walkthrough_page(), encoding="utf-8")
     (SITE_DIR / "energy-credit.html").write_text(build_energy_credit_page(), encoding="utf-8")
     (SITE_DIR / "site-visit.html").write_text(build_site_visit_page(), encoding="utf-8")
     (SITE_DIR / "pm-dashboard.html").write_text(build_pm_dashboard_page(), encoding="utf-8")
