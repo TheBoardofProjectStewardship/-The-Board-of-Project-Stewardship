@@ -1643,8 +1643,16 @@ def nav_html(active: str = "", prefix: str = "") -> str:
           <span class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></span>
         </button>
       </div>
+      <form class="site-search-desktop" action="/search.html" method="get" role="search">
+        <label class="sr-only" for="header-q">Search</label>
+        <input id="header-q" name="q" type="search" placeholder="Search" autocomplete="off">
+      </form>
     </div>
     <nav id="mobile-nav" class="border-t border-white/10 bg-charcoal/95 px-4 pb-4" aria-label="Mobile">
+      <form class="site-search-mobile" action="/search.html" method="get" role="search">
+        <label class="sr-only" for="mobile-q">Search</label>
+        <input id="mobile-q" name="q" type="search" placeholder="Search the site" autocomplete="off">
+      </form>
       {mobile_html}
     </nav>
   </header>"""
@@ -3160,7 +3168,77 @@ def resolve_post_parent_directory(post: dict) -> tuple[str, str]:
     return ("./directory.html", "Contractor directories hub")
 
 
-def post_outro_html(post: dict, *, prefix: str = "../") -> str:
+def _place_slugs() -> list[str]:
+    slugs: list[str] = []
+    for path in sorted((SITE_DIR / "places").glob("_place_specs_wave*.json")):
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        for spec in data.get("places") or []:
+            slug = str(spec.get("slug") or "").strip()
+            if slug:
+                slugs.append(slug)
+    slugs.sort(key=len, reverse=True)
+    return slugs
+
+
+def _slug_has_place(slug: str, place_slug: str) -> bool:
+    """True when place_slug is a whole hyphen-token sequence inside slug."""
+    tokens = (slug or "").lower().split("-")
+    want = (place_slug or "").lower().split("-")
+    if not want or want == [""]:
+        return False
+    n = len(want)
+    return any(tokens[i : i + n] == want for i in range(len(tokens) - n + 1))
+
+
+def posts_matching_place(place_slug: str, posts: list[dict], limit: int = 4) -> list[tuple[str, str]]:
+    hits: list[tuple[str, str]] = []
+    for post in posts:
+        if _slug_has_place(post.get("slug") or "", place_slug):
+            hits.append((post["title"], f"./posts/{post['out_name']}"))
+        if len(hits) >= limit:
+            break
+    return hits
+
+
+def related_guides_for_post(post: dict, posts: list[dict], prefix: str = "../") -> list[tuple[str, str]]:
+    """Other published posts that share this post's city or category."""
+    own = post.get("out_name") or ""
+    slug = (post.get("slug") or "").lower()
+    city = ""
+    for place_slug in _place_slugs():
+        if _slug_has_place(slug, place_slug):
+            city = place_slug
+            break
+    category = (post.get("category") or "").strip().lower()
+    picked: list[tuple[str, str]] = []
+    seen: set[str] = set()
+
+    def add(other: dict) -> None:
+        name = other.get("out_name") or ""
+        if not name or name == own or name in seen:
+            return
+        seen.add(name)
+        picked.append((other["title"], f"{prefix}{name}"))
+
+    if city:
+        for other in posts:
+            if _slug_has_place(other.get("slug") or "", city):
+                add(other)
+            if len(picked) >= 4:
+                return picked
+    if category:
+        for other in posts:
+            if (other.get("category") or "").strip().lower() == category:
+                add(other)
+            if len(picked) >= 4:
+                break
+    return picked[:4]
+
+
+def post_outro_html(post: dict, *, prefix: str = "../", posts: list[dict] | None = None) -> str:
     """Generator-level blog/post outro: parent directory + How we rank + L&I Verify."""
     dir_href, dir_label = resolve_post_parent_directory(post)
     # Posts live under posts/; adjust relative links
@@ -3171,6 +3249,17 @@ def post_outro_html(post: dict, *, prefix: str = "../") -> str:
             return href
         return prefix + href.lstrip("/")
 
+    more = related_guides_for_post(post, posts or [], prefix)
+    more_html = ""
+    if more:
+        items = "".join(
+            f'<li><a href="{esc(href)}" class="text-secondary hover:underline">{esc(label)}</a></li>'
+            for label, href in more
+        )
+        more_html = (
+            '<p class="text-xs font-bold uppercase tracking-widest text-secondary mt-6 mb-2">More guides</p>'
+            f'<ul class="space-y-2 text-sm text-slate-300 font-light">{items}</ul>'
+        )
     return f"""    <section id="post-outro" class="mt-12 mb-4 bg-charcoal border border-white/10 rounded-xl p-6 md:p-8" aria-labelledby="post-outro-h">
       <span class="text-secondary text-xs font-bold uppercase tracking-widest">Next steps</span>
       <h2 id="post-outro-h" class="text-xl font-black text-white tracking-tight mt-1 mb-3">Directory · ranking method · L&amp;I Verify</h2>
@@ -3181,6 +3270,7 @@ def post_outro_html(post: dict, *, prefix: str = "../") -> str:
         <li><a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> — official contractor license lookup.</li>
         <li><a href="{adj('./verify-contractor.html')}" class="text-secondary hover:underline">Board verify walkthrough</a> · <a href="{adj('./learn.html')}" class="text-secondary hover:underline">Learn hub</a> · <a href="{adj('./blog.html')}" class="text-secondary hover:underline">Blog</a></li>
       </ul>
+      {more_html}
     </section>
 """
 
@@ -4448,10 +4538,46 @@ def build_kb_page(kind: str, firms: list[dict]) -> str:
     slug = "kitchen" if is_kitchen else "bathrooms"
     title = "Kitchen Remodelers · King & Snohomish | Board of Project Stewardship" if is_kitchen else "Bathroom Remodelers · King & Snohomish | Board of Project Stewardship"
     desc = (
-        "Editorial kitchen remodel ranking for King County, Snohomish County, and Seattle. Pacific Pro Group is Board directory #1."
+        "Editorial kitchen remodel ranking for King County, Snohomish County, and Seattle. Compare cabinet allowances and who pulls permits. Pacific Pro Group is Board directory #1."
         if is_kitchen
-        else "Editorial bathroom remodel ranking for King County, Snohomish County, and Seattle. Pacific Pro Group is Board directory #1."
+        else "Editorial bathroom remodel ranking for King County, Snohomish County, and Seattle. Ask about the waterproofing system and photos before tile. Pacific Pro Group is Board directory #1."
     )
+    if is_kitchen:
+        intro = (
+            "An editorial shortlist of kitchen remodel firms in King County, Snohomish County, and Seattle. "
+            "Compare written cabinet and finish allowances, freeze the layout before long-lead orders, "
+            "and confirm who pulls the permits."
+        )
+        ask = (
+            "Ask who pulls permits, how cabinet and counter allowances are written, whether the layout is frozen before long-lead cabinets are ordered, and who owns inspections. "
+            "List owner-furnished appliances separately from contractor-furnished ones."
+        )
+        permit_answer = (
+            "Moving plumbing, electrical, gas, or walls usually triggers permits. Confirm with the parcel’s city or county. "
+            "Edmonds and many nearby cities use MyBuildingPermit; Seattle uses SDCI. Get the permit number in writing."
+        )
+        additions_answer = (
+            "Kitchen work that removes walls or adds floor area overlaps the additions directory. "
+            "This page stays on interior kitchen remodelers. Use the additions directory when the project is a structural expansion."
+        )
+    else:
+        intro = (
+            "An editorial shortlist of bathroom remodel firms in King County, Snohomish County, and Seattle. "
+            "Ask which waterproofing system is in the written scope — sheet, liquid, foam, or a pan liner — "
+            "and require photos at changes of plane before tile."
+        )
+        ask = (
+            "Ask which waterproofing system is specified — sheet, liquid, foam, or a pan liner — who owns it, and whether changes of plane are photographed before cover. "
+            "On a coastal lot, also ask how ventilation and wet-wall details handle wind-driven rain."
+        )
+        permit_answer = (
+            "A wet-area remodel that moves a drain, adds a fan, or opens an exterior wall usually needs plumbing, electrical, or mechanical permits. "
+            "Confirm the portal for that parcel on the permit hub and keep the permit number in the project file."
+        )
+        additions_answer = (
+            "Stay on this bathroom page when the work is inside the existing room. "
+            "A new story or extra floor area belongs on the home additions shortlist, with the structural specialists listed there."
+        )
     faqs = [
         (
             f"Who ranks #1 for {label.lower()} in King County, Snohomish County, or Seattle?",
@@ -4459,15 +4585,17 @@ def build_kb_page(kind: str, firms: list[dict]) -> str:
         ),
         (
             f"What should I ask a {label.lower()} contractor?",
-            "Ask who pulls permits, how allowances work for cabinets and finishes, timeline for selections, and for recent local project references similar to your scope.",
+            ask,
         ),
         (
-            "Do kitchen and bath remodels need permits in King County, Snohomish County, or Seattle?",
-            "Often yes — especially when moving plumbing, electrical, or walls. Confirm with the parcel’s city or county. Edmonds and many nearby cities use MyBuildingPermit; Seattle uses SDCI. Many design-build firms manage the permit package. See our permit jurisdiction hub for official portals.",
+            "Do kitchen remodels need permits in King County, Snohomish County, or Seattle?"
+            if is_kitchen
+            else "Do bathroom remodels need permits in King County, Snohomish County, or Seattle?",
+            permit_answer,
         ),
         (
             "How does this list relate to home additions?",
-            "Many of the same design-build remodelers appear on our home additions Top 30. See the additions directory for structural expansion specialists.",
+            additions_answer,
         ),
         (
             "How should I verify a firm before depositing?",
@@ -4538,7 +4666,7 @@ def build_kb_page(kind: str, firms: list[dict]) -> str:
     body = f"""{hero(
         f"{GEO_KICKER_HTML} · Updated {YEAR}",
         f'Top {label} Contractors<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">King County, Snohomish County &amp; Seattle</span>',
-        f"An editorial shortlist of {label.lower()} firms serving King County, Snohomish County, and Seattle — including Edmonds — curated by The Board of Project Stewardship.",
+        intro,
         ["Local service area", "Remodel focus", "Editorial ranking"],
         image_rel=_hero_rel if _hero_rel and asset_exists(_hero_rel) else None,
         image_alt=_hero_alt,
@@ -5932,7 +6060,7 @@ def build_blog_index(posts: list[dict]) -> str:
     )
 
 
-def build_post_page(post: dict) -> str:
+def build_post_page(post: dict, posts: list[dict] | None = None) -> str:
     article_html = rewrite_post_root_hrefs(md_to_html(post["body_md"]))
     canon = f"{BASE_URL}posts/{post['out_name']}"
     hero_rel = resolve_post_hero(post)
@@ -5985,7 +6113,7 @@ def build_post_page(post: dict) -> str:
     <div class="prose-board">
 {article_html}
     </div>
-{post_outro_html(post, prefix="../")}
+{post_outro_html(post, prefix="../", posts=posts)}
   </div>"""
     return page_shell(
         f"{post['title']} | Board of Project Stewardship",
@@ -6044,7 +6172,7 @@ def refresh_post_html(posts: list[dict]) -> None:
         old.unlink()
     for post in posts:
         dest = posts_dir / post["out_name"]
-        regenerated = build_post_page(post)
+        regenerated = build_post_page(post, posts)
         if dest.is_file():
             existing = dest.read_text(encoding="utf-8")
             if post_html_should_be_preserved(existing, regenerated):
@@ -6368,6 +6496,7 @@ def write_sitemap(posts: list[dict]) -> None:
         "contact.html",
         "glossary.html",
         "videos.html",
+        "search.html",
     ]
 
     # Place SEO hubs wave1+wave2 (only files that exist on disk)
@@ -6434,6 +6563,105 @@ def write_sitemap(posts: list[dict]) -> None:
     )
     (SITE_DIR / "sitemap.xml").write_text(xml, encoding="utf-8")
     _save_lastmod_store(lastmod_store)
+
+
+def build_search_page() -> str:
+    body = """  <header class="max-w-6xl mx-auto px-4 pt-10 pb-6">
+    <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Site search</p>
+    <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Search</h1>
+    <p class="text-slate-200 font-light max-w-3xl leading-relaxed mb-4">Search directories, place hubs, and guides published on this site. Results use each page’s title and short description.</p>
+    <form action="/search.html" method="get" role="search" class="max-w-xl">
+      <label for="q" class="sr-only">Search</label>
+      <input id="q" name="q" type="search" autocomplete="off" class="w-full bg-white/5 border border-white/10 rounded text-base text-white px-3 py-3">
+    </form>
+    <p id="search-status" class="text-sm text-slate-400 font-light mt-4" role="status">Type a word to search.</p>
+    <ul id="search-results" class="mt-4 space-y-3"></ul>
+  </header>
+  <script>
+  (function () {
+    var input = document.getElementById("q");
+    var list = document.getElementById("search-results");
+    var status = document.getElementById("search-status");
+    var pages = [];
+    function esc(s) {
+      return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    }
+    function render() {
+      var q = (input.value || "").trim().toLowerCase();
+      var hits = [];
+      if (q) {
+        hits = pages.filter(function (p) {
+          return (p.title + " " + p.description + " " + p.url).toLowerCase().indexOf(q) !== -1;
+        }).slice(0, 40);
+      }
+      if (!q) {
+        status.textContent = "Type a word to search.";
+        list.innerHTML = "";
+        return;
+      }
+      status.textContent = hits.length ? (hits.length + (hits.length === 1 ? " result" : " results")) : "No matching pages.";
+      list.innerHTML = hits.map(function (p) {
+        return '<li class="bg-charcoal border border-white/10 rounded-xl p-4"><a class="text-secondary hover:underline font-semibold" href="' + esc(p.url) + '">' + esc(p.title) + '</a><p class="text-sm text-slate-400 font-light mt-1">' + esc(p.description) + '</p></li>';
+      }).join("");
+    }
+    var params = new URLSearchParams(window.location.search);
+    if (params.get("q")) input.value = params.get("q");
+    fetch("/search-index.json").then(function (r) { return r.json(); }).then(function (data) {
+      pages = data || [];
+      render();
+    }).catch(function () {
+      status.textContent = "The search index did not load.";
+    });
+    input.addEventListener("input", render);
+  })();
+  </script>
+"""
+    return page_shell(
+        "Search | Board of Project Stewardship",
+        "Search directories, place hubs, and guides on the Board of Project Stewardship site.",
+        "search",
+        body,
+        canonical=f"{BASE_URL}search.html",
+        breadcrumbs=[("Home", BASE_URL), ("Search", f"{BASE_URL}search.html")],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+def write_search_index() -> None:
+    """Title, URL, and description for published HTML. Skip drafts and redirects."""
+    skip_names = {"404.html", "write.html"}
+    rows: list[dict] = []
+
+    def add(path: Path, url: str) -> None:
+        if path.name in skip_names:
+            return
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        if 'http-equiv="refresh"' in text or re.search(r'name="robots"[^>]*noindex', text, re.I):
+            return
+        title_m = re.search(r"<title>(.*?)</title>", text, re.I | re.S)
+        desc_m = re.search(r'<meta name="description" content="(.*?)"', text, re.I | re.S)
+        title = html.unescape(re.sub(r"\s+", " ", title_m.group(1)).strip()) if title_m else path.stem
+        desc = html.unescape(re.sub(r"\s+", " ", desc_m.group(1)).strip()) if desc_m else ""
+        if not title:
+            return
+        rows.append({"title": title, "url": url, "description": desc})
+
+    add(SITE_DIR / "index.html", "/")
+    for path in sorted(SITE_DIR.glob("*.html")):
+        if path.name == "index.html":
+            continue
+        add(path, f"/{path.name}")
+    posts_dir = SITE_DIR / "posts"
+    if posts_dir.is_dir():
+        for path in sorted(posts_dir.glob("*.html")):
+            add(path, f"/posts/{path.name}")
+    stamp = SITE_DIR / "stamp-of-trust" / "index.html"
+    if stamp.is_file():
+        add(stamp, "/stamp-of-trust/")
+    rows.sort(key=lambda row: row["title"].lower())
+    (SITE_DIR / "search-index.json").write_text(json.dumps(rows, indent=2) + "\n", encoding="utf-8")
 
 
 def write_posts_json(posts: list[dict]) -> None:
@@ -6649,7 +6877,7 @@ def build_energy_credit_page() -> str:
     body = f"""  <header class="max-w-6xl mx-auto px-4 pt-10 pb-2">
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">WSEC-R prescriptive credits</h1>
-    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Authority links (no invented dollar amounts): <a href="https://www.energy.gov/energysaver/federal-tax-credits-energy-efficiency" target="_blank" rel="noopener" class="text-secondary hover:underline">U.S. Department of Energy — federal energy-efficiency tax credits</a> · <a href="https://www.irs.gov/credits-deductions/energy-efficient-home-improvement-credit" target="_blank" rel="noopener" class="text-secondary hover:underline">IRS — Energy Efficient Home Improvement Credit</a> · confirm WA WSEC-R with the State Building Code Council. This Board tool does not invent tax-credit dollar amounts.</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">The IRS page on the Energy Efficient Home Improvement Credit says the credit can be claimed for improvements made through December 31, 2025. This Board page does not calculate a credit or quote a dollar amount. Confirm Washington WSEC-R with the State Building Code Council. <a href="https://www.irs.gov/credits-deductions/energy-efficient-home-improvement-credit" target="_blank" rel="noopener" class="text-secondary hover:underline">IRS — Energy Efficient Home Improvement Credit</a>.</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Upload plan PDFs to auto-suggest WSEC-R 2021 single-family / townhouse credits, then confirm dwelling size, Table R406.2 fuel normalization, and Table R406.3 options.</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">WSEC-R 2021 single-family prescriptive path credit worksheet (fuel normalization + Table R406.3). When you hire, shortlist from Board directories — Board #1: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a>.</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Also: <a href="{public_tool_href('site-visit')}" class="text-secondary hover:underline">Site Visit Checklist</a> · <a href="./posts/2026-09-20-window-replacement-edmonds-coastal-wa.html" class="text-secondary hover:underline">Edmonds window replacement guide</a>.</p>
@@ -7559,11 +7787,16 @@ def build_pm_dashboard_page() -> str:
 # ---------------------------------------------------------------------------
 
 
-def _hub_header(eyebrow: str, title: str, lead: str) -> str:
+def _hub_header(eyebrow: str, title: str, lead: str, answer: str = "") -> str:
+    answer_html = (
+        f'    <p class="text-slate-200 font-light max-w-3xl leading-relaxed mb-3">{answer}</p>\n'
+        if answer
+        else ""
+    )
     return f"""  <header class="max-w-6xl mx-auto px-4 pt-10 pb-6">
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">{esc(eyebrow)}</p>
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">{title}</h1>
-    <p class="text-slate-400 font-light max-w-3xl leading-relaxed">{lead}</p>
+{answer_html}    <p class="text-slate-400 font-light max-w-3xl leading-relaxed">{lead}</p>
   </header>
 """
 
@@ -7596,6 +7829,73 @@ def _check_ul(items: list[str]) -> str:
         for x in items
     )
     return f'<ul class="space-y-3 text-sm text-slate-300 font-light leading-relaxed">{lis}</ul>'
+
+
+def _simple_table(headers: list[str], rows: list[list[str]], *, link_col: int | None = None) -> str:
+    ths = "".join(f'<th scope="col">{esc(h)}</th>' for h in headers)
+    body = []
+    for row in rows:
+        cells = []
+        for i, cell in enumerate(row):
+            if link_col is not None and i == link_col and cell.startswith(("http://", "https://", "./")):
+                inner = (
+                    f'<a href="{esc(cell)}" class="text-secondary hover:underline"'
+                    + (' target="_blank" rel="noopener"' if cell.startswith("http") else "")
+                    + f">{esc(cell)}</a>"
+                )
+            else:
+                inner = esc(cell)
+            cells.append(f"<td>{inner}</td>")
+        body.append("<tr>" + "".join(cells) + "</tr>")
+    return (
+        '<div class="board-table-wrap"><table class="board-table"><thead><tr>'
+        + ths
+        + "</tr></thead><tbody>"
+        + "".join(body)
+        + "</tbody></table></div>"
+    )
+
+
+def _driver_table(rows: list[tuple[str, str, str]]) -> str:
+    return _simple_table(
+        ["Driver", "Why it moves scope", "Who to ask"],
+        [list(row) for row in rows],
+    )
+
+
+def _portal_link(links: list[tuple[str, str]]) -> tuple[str, str]:
+    """Prefer a shared portal or a deep official URL over a bare city homepage."""
+
+    def rank(item: tuple[str, str]) -> tuple[int, int]:
+        href = item[1].lower()
+        if "mybuildingpermit.com" in href:
+            return (0, 0)
+        path = href.split("://", 1)[-1].rstrip("/")
+        if path.count("/") >= 1:
+            return (1, -path.count("/"))
+        return (2, 0)
+
+    official = [(label, href) for label, href in links if href.startswith("http")]
+    if not official:
+        return ("", "")
+    return sorted(official, key=rank)[0]
+
+
+def _county_permit_rows(county_token: str) -> list[list[str]]:
+    rows: list[list[str]] = []
+    for spec in load_all_place_seo_specs():
+        county = spec.get("county") or ""
+        if county_token not in county:
+            continue
+        links = [tuple(x) for x in (spec.get("permit_links") or []) if isinstance(x, (list, tuple)) and len(x) >= 2]
+        label, href = _portal_link([(str(a), str(b)) for a, b in links])
+        if not href:
+            continue
+        blurb = (spec.get("permit_blurb") or "").strip()
+        authority = blurb.split(". ")[0].strip().rstrip(".")
+        rows.append([spec.get("place") or "", authority, label, href])
+    rows.sort(key=lambda r: r[0])
+    return rows
 
 
 
@@ -7841,11 +8141,21 @@ def build_permits_page() -> str:
             "No. Keep work open until the AHJ completes required inspections. Covering work early can force costly uncovering. Confirm the inspection sequence with your permit owner and GC in writing.",
         ),
     ]
+    permit_rows = []
+    for name, blurb, links in jurisdictions:
+        label, href = _portal_link(links)
+        authority = blurb.split(". ")[0].strip().rstrip(".")
+        if href:
+            permit_rows.append([name, authority, label, href])
     body = (
         _hub_header(
             f"Official portals · Updated {YEAR}",
             "Permit jurisdiction hub",
             "Editorial how-to with outbound links to official permit portals only. The Board of Project Stewardship does not issue permits and does not invent review timelines.",
+            answer=(
+                "Identify which city or county permits your parcel, open that jurisdiction’s official portal, and keep the permit number with the project file. "
+                "The Board does not issue permits and does not invent review timelines. Re-verify any contractor at WA L&amp;I."
+            ),
         )
         + _hub_photo_strip(
             [
@@ -7868,9 +8178,10 @@ def build_permits_page() -> str:
             title="Permit work in pictures (illustrative)",
         )
         + _hub_section(
-            "How to use this hub",
+            "How do I find the permit portal for my parcel?",
             f"""      <p class="text-slate-300 text-sm font-light leading-relaxed mb-3">Identify which city or county has permitting authority for your parcel, open that jurisdiction’s official portal, and keep permit numbers with your project file. Ask bidders who owns the submittal and who stands for inspections.</p>
-      <p class="text-slate-400 text-sm font-light leading-relaxed">Always re-verify any contractor at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>. Companion walkthrough: <a href="./verify-contractor.html" class="text-secondary hover:underline">How to verify a WA contractor</a>.</p>""",
+      {_simple_table(["City", "Permit authority", "Portal", "Official URL"], permit_rows, link_col=3)}
+      <p class="text-slate-400 text-sm font-light leading-relaxed mt-4">Always re-verify any contractor at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>. Companion walkthrough: <a href="./verify-contractor.html" class="text-secondary hover:underline">How to verify a WA contractor</a>.</p>""",
             border="border-primary/25",
         )
         + "  <div class=\"max-w-6xl mx-auto px-4 pb-4\">\n"
@@ -8165,6 +8476,11 @@ def build_verify_contractor_page() -> str:
             "Good Steward · WA L&I",
             "How to verify a Washington contractor",
             "A Board of Project Stewardship companion to the state license tool — educational steps only. Always finish on the official portal.",
+            answer=(
+                "Match the exact business name that will appear on the contract to the official WA L&amp;I Verify tool. "
+                "Confirm the registration is active, note the license number, and read the bond and insurance fields the portal shows. "
+                "This walkthrough is a companion. L&amp;I is the source of truth."
+            ),
         )
         + _hub_photo_strip(
             [
@@ -8194,6 +8510,7 @@ def build_verify_contractor_page() -> str:
     </div>
   </section>
   <section class="max-w-6xl mx-auto px-4 pb-8">
+    <h2 class="text-2xl font-black text-white mb-4 tracking-tight">How do I match a contract name to L&amp;I Verify?</h2>
     <ol class="space-y-0">
 {step_html}
     </ol>
@@ -8276,12 +8593,33 @@ def build_city_hub_page(
     ]
     if extra_faqs:
         faqs.extend(extra_faqs)
-    posts_block = _link_ul(related_posts) if related_posts else (
-        '<p class="text-sm text-slate-400 font-light">Browse the '
-        '<a href="./blog.html" class="text-secondary hover:underline">blog</a> and '
-        '<a href="./learn.html" class="text-secondary hover:underline">Learn hub</a> '
-        'for planning pillars while geo posts continue to grow.</p>'
-    )
+    matched_posts = list(related_posts)
+    posts_label = "Related local posts"
+    if not matched_posts:
+        matched_posts = posts_matching_place(slug, load_posts())
+        posts_label = "Nearby guides" if matched_posts else ""
+    posts_block = _link_ul(matched_posts) if matched_posts else ""
+    county_table = ""
+    if slug == "king-county":
+        county_table = _hub_section(
+            "Which portal does each King County place use?",
+            _simple_table(
+                ["City", "Permit authority", "Portal", "Official URL"],
+                _county_permit_rows("King County"),
+                link_col=3,
+            )
+            + '<p class="text-sm text-slate-400 font-light mt-4">Unincorporated King County applications commonly start at MyBuildingPermit. Seattle uses SDCI. Confirm the parcel before you assume a city portal.</p>',
+        )
+    elif slug == "snohomish-county":
+        county_table = _hub_section(
+            "Which portal does each Snohomish County place use?",
+            _simple_table(
+                ["City", "Permit authority", "Portal", "Official URL"],
+                _county_permit_rows("Snohomish County"),
+                link_col=3,
+            )
+            + '<p class="text-sm text-slate-400 font-light mt-4">City projects use the city portal or MyBuildingPermit. County-jurisdiction work goes through Snohomish County Planning and Development Services.</p>',
+        )
     strip = (
         _hub_photo_strip(photo_strip, title=photo_strip_title)
         if photo_strip
@@ -8296,14 +8634,15 @@ def build_city_hub_page(
         + strip
         + lead_embed
         + _hub_section(
-            "Permitting orientation",
+            f"Who permits work in {place}?",
             f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-4">{esc(permit_blurb)}</p>
       {_link_ul([("WA L&I Verify (contractor license)", LNI_URL)] + [p for p in permit_links if "lni.wa.gov" not in p[1]], external=True)}
       <p class="text-sm text-slate-500 font-light mt-4"><a href="./permits.html" class="text-secondary hover:underline">Full permit jurisdiction hub</a> · <a href="./verify-contractor.html" class="text-secondary hover:underline">Verify contractor</a> · <a href="./learn.html" class="text-secondary hover:underline">Learn hub</a></p>""",
             border="border-primary/25",
         )
+        + county_table
         + _hub_section(
-            "Good Steward next steps",
+            "Where should I start?",
             _check_ul(
                 [
                     "Identify the authority having jurisdiction for your parcel (city vs county).",
@@ -8317,11 +8656,11 @@ def build_city_hub_page(
       <p class="text-sm text-slate-400 font-light mt-4"><a href="./hiring-a-contractor.html" class="text-secondary hover:underline">Hiring a contractor</a> · <a href="./site-visit.html" class="text-secondary hover:underline">Site Visit Checklist</a> · <a href="./remodel-cost-factors.html" class="text-secondary hover:underline">Cost factors</a></p>""",
         )
         + _hub_section(
-            "Board directories",
+            "Where do I shortlist contractors?",
             f"""      {_link_ul(dir_links)}
       <p class="text-sm text-slate-400 font-light mt-4">Board #1 hire ranking: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(PPG['name'])}<span class="sr-only"> (opens in new window)</span></a>. Re-verify at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">L&amp;I Verify<span class="sr-only"> (opens in new window)</span></a>.</p>""",
         )
-        + _hub_section("Related local posts", posts_block)
+        + (_hub_section(posts_label, posts_block) if posts_block else "")
         + (
             '  <div class="max-w-6xl mx-auto px-4">\n'
             + official_links_section(
@@ -8598,49 +8937,9 @@ def place_specs_uniqueness_report(specs: list[dict], jaccard_flag: float = 0.40)
 
 
 def hire_terms_section_html(spec: dict, hire_pack: dict) -> str:
-    """Render a small intent cluster with place geo; surrounding intro is unique per spec."""
-    place = spec["place"]
-    intro = spec.get("hire_terms_intro") or (
-        f"Highly searched hire stems near {place}. Pair one intent with this geo; verify licenses at WA L&I."
-    )
-    intent_ids = spec.get("hire_intent_ids") or ["hire_find"]
-    intents = {i.get("id"): i for i in (hire_pack.get("intents") or []) if i.get("id")}
-    blocks: list[str] = []
-    for iid in intent_ids[:2]:
-        intent = intents.get(iid)
-        if not intent:
-            continue
-        terms = intent.get("terms") or []
-        # Pair lightly: first 4 stems + place geo (Cite rule — not every term × city)
-        lis = "".join(
-            f'<li class="text-sm text-slate-300 font-light"><span class="text-white font-medium">{esc(term)}</span>'
-            f' — <span class="text-slate-400">{esc(place)}</span></li>'
-            for term in terms[:4]
-        )
-        blocks.append(
-            f"""      <div class="bg-obsidian border border-white/10 rounded-lg p-4">
-        <h3 class="text-sm font-bold uppercase tracking-widest text-secondary mb-3">{esc(intent.get('label') or iid)}</h3>
-        <ul class="space-y-2">{lis}</ul>
-      </div>"""
-        )
-    if not blocks:
-        blocks.append(
-            f"""      <ul class="space-y-2 text-sm text-slate-300 font-light">
-        <li>hire a general contractor — {esc(place)}</li>
-        <li>kitchen remodel contractor — {esc(place)}</li>
-        <li>home addition contractor — {esc(place)}</li>
-      </ul>"""
-        )
-    inner = (
-        f'      <p class="text-sm text-slate-300 font-light leading-relaxed mb-4">{esc(intro)}</p>\n'
-        f'      <div class="grid md:grid-cols-2 gap-4 mb-4">\n'
-        + "\n".join(blocks)
-        + "\n      </div>\n"
-        f'      <p class="text-sm text-slate-500 font-light">Educational stems — not search-volume claims. '
-        f'Re-verify every legal name at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>. '
-        f'Board #1 hire outbound: <a href="{PPG["url"]}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(PPG["name"])}</a>.</p>'
-    )
-    return _hub_section(f"Highly searched hire terms near {place}", inner, border="border-secondary/20")
+    """Keyword-stem lists are not published. Hire phrasing stays in the FAQs."""
+    _ = (spec, hire_pack)
+    return ""
 
 
 
@@ -8657,7 +8956,7 @@ def load_place_media_manifest() -> dict:
 def _hub_video_embed_html(
     video: dict | None,
     *,
-    heading: str = "Process context (educational)",
+    heading: str = "General process video (not specific to one city)",
     place: str | None = None,
 ) -> str:
     """YouTube or local mp4 embed for place/Locations hubs. Skips empty/missing."""
@@ -8785,7 +9084,7 @@ def place_seo_media_html(slug: str, place: str) -> str:
     )
     video_html = _hub_video_embed_html(
         entry.get("video"),
-        heading=f"Process context · {place} (educational)",
+        heading=f"General process video (not specific to {place})",
         place=place,
     )
     return strip + video_html
@@ -8814,8 +9113,7 @@ def locations_hub_media_html() -> str:
     )
     video_html = _hub_video_embed_html(
         entry.get("video"),
-        heading="Process context (educational)",
-        place="Locations",
+        heading="General process video (not specific to one city)",
     )
     return strip + video_html
 
@@ -8855,12 +9153,12 @@ def build_place_seo_page(spec: dict, hire_pack: dict | None = None) -> str:
     ]
     faqs.extend(extra_faqs)
 
-    posts_block = _link_ul(related_posts) if related_posts else (
-        '<p class="text-sm text-slate-400 font-light">Browse the '
-        '<a href="./blog.html" class="text-secondary hover:underline">blog</a> and '
-        '<a href="./learn.html" class="text-secondary hover:underline">Learn hub</a> '
-        f'for planning pillars. Geo posts for {esc(place)} will link here as they publish.</p>'
-    )
+    matched_posts = list(related_posts)
+    posts_label = "Related local posts"
+    if not matched_posts:
+        matched_posts = posts_matching_place(slug, load_posts())
+        posts_label = "Nearby guides" if matched_posts else ""
+    posts_block = _link_ul(matched_posts) if matched_posts else ""
 
     kitchen = spec["kitchen"]
     bathroom = spec["bathroom"]
@@ -8874,18 +9172,18 @@ def build_place_seo_page(spec: dict, hire_pack: dict | None = None) -> str:
         )
         + place_seo_media_html(slug, place)
         + _hub_section(
-            "Permitting orientation",
+            f"Who permits work in {place}?",
             f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-4">{esc(spec['permit_blurb'])}</p>
       {_link_ul([("WA L&I Verify (contractor license)", LNI_URL)] + [p for p in permit_links if "lni.wa.gov" not in p[1]], external=True)}
       <p class="text-sm text-slate-500 font-light mt-4"><a href="./permits.html" class="text-secondary hover:underline">Full permit jurisdiction hub</a> · <a href="./verify-contractor.html" class="text-secondary hover:underline">Verify contractor</a> · <a href="./learn.html" class="text-secondary hover:underline">Learn hub</a></p>""",
             border="border-primary/25",
         )
         + _hub_section(
-            "Board directories",
+            "Where do I shortlist contractors?",
             f"""      {_link_ul(dir_links)}
       <p class="text-sm text-slate-400 font-light mt-4">Board #1 hire ranking: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(PPG['name'])}<span class="sr-only"> (opens in new window)</span></a>. Re-verify at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">L&amp;I Verify<span class="sr-only"> (opens in new window)</span></a>.</p>""",
         )
-        + _hub_section("Related local posts", posts_block)
+        + (_hub_section(posts_label, posts_block) if posts_block else "")
         + _hub_section(
             kitchen.get("h2") or f"Kitchens in {place}",
             f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-4">{esc(kitchen['prose'])}</p>
@@ -9962,6 +10260,11 @@ def build_faq_page() -> str:
             "FAQ",
             "Homeowner questions",
             "Straight answers about the Board, rankings, verification, and permits. Educational — not legal, engineering, or bid advice.",
+            answer=(
+                "No. The Board publishes directories and educational guides. It does not build projects, write construction contracts, or collect project deposits. "
+                "Pacific Pro Group appears as Board #1 on relevant directories because of the published ranking method, not ownership. "
+                "Re-verify every firm at WA L&amp;I before hiring."
+            ),
         )
         + _hub_photo_strip(
             [
@@ -10456,6 +10759,10 @@ def build_kitchen_remodel_planning_page() -> str:
             "Learning hub · Kitchen",
             "Kitchen remodel planning",
             "Board educational guide for planning a kitchen remodel in King County, Snohomish County, and Seattle. Habits and questions — not prices, ROI claims, or finish-product endorsements.",
+            answer=(
+                "Freeze the kitchen layout before you order long-lead cabinets. Write cabinet, counter, fixture, and tile allowances so bids can be compared, and name who pulls the mechanical, plumbing, and electrical permits. "
+                "This guide is planning habits, not a price list."
+            ),
         )
         + _hub_photo_strip(
             [
@@ -10478,14 +10785,14 @@ def build_kitchen_remodel_planning_page() -> str:
             title="Kitchen planning in pictures (illustrative)",
         )
         + _hub_section(
-            "Plan before you shop cabinets",
+            "What should I lock before I order cabinets?",
             f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Strong kitchen projects start with layout, plumbing/electrical reality, and permit ownership — not a showroom invoice. Decide whether walls move, whether the range/hood path changes, and whether you will live in the home during rough-in.</p>
       <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Ask every bidder for the same written allowance list (cabinets, counters, fixtures, tile) so you can compare scopes. Use <a href="./bid-comparison.html" class="text-secondary hover:underline">bid comparison checklist</a> and <a href="./hire-questions.html" class="text-secondary hover:underline">hire questions</a> side by side.</p>
       <p class="text-sm text-slate-400 font-light leading-relaxed">Directory: <a href="./kitchen.html" class="text-secondary hover:underline">kitchen remodelers</a>. Board #1 hire ranking: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(PPG['name'])}</a>.</p>""",
             border="border-primary/25",
         )
         + _hub_section(
-            "Planning steps",
+            "What are the planning steps?",
             f"""      <ol class="list-decimal pl-5 space-y-3 text-sm text-slate-300 font-light leading-relaxed">
         {"".join(f'<li><strong class="text-white">{esc(t)}</strong> — {esc(b)}</li>' for t, b in kitchen_steps)}
       </ol>""",
@@ -10565,6 +10872,10 @@ def build_bathroom_waterproofing_guide_page() -> str:
             "Learning hub · Bathrooms",
             "Bathroom waterproofing guide",
             "Educational Board guide to wet-area waterproofing habits for Puget Sound baths. Not a product endorsement, installation manual, or warranty.",
+            answer=(
+                "Tile and paint do not waterproof a shower. The membrane, pan, curb or curbless detail, niche changes of plane, and the ventilation path do. "
+                "Photograph those changes of plane before cover. Systems differ: sheet, liquid, foam, or a pan liner."
+            ),
         )
         + _hub_photo_strip(
             [
@@ -10587,13 +10898,13 @@ def build_bathroom_waterproofing_guide_page() -> str:
             title="Bath waterproofing in pictures (illustrative)",
         )
         + _hub_section(
-            "Waterproofing is a system, not a finish",
+            "Is tile the same as waterproofing?",
             """      <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Tile and paint do not waterproof a shower. The membrane, pan, curb or curbless detail, niche changes of plane, and ventilation path do. Good stewards treat cover-up as a gated milestone: photos first, then finishes.</p>
       <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Pair this guide with the <a href="./coastal-waterproofing.html" class="text-secondary hover:underline">coastal waterproofing checklist</a> when the home sits near Puget Sound exposure, and with <a href="./hire-questions.html" class="text-secondary hover:underline">hire questions</a> when comparing bids.</p>""",
             border="border-primary/25",
         )
         + _hub_section(
-            "Wet-area habits",
+            "What should I photograph before tile?",
             _check_ul(
                 [
                     "Name the waterproofing system and the trade responsible for it in the written scope.",
@@ -10701,6 +11012,11 @@ def build_hiring_a_contractor_page() -> str:
             "Learning hub · Hiring",
             "Hiring a contractor",
             "Board of Project Stewardship hub for homeowners hiring remodel, addition, or design-build firms in King County, Snohomish County, and Seattle. Education and verification — not a brokerage.",
+            answer=(
+                "Match the contract legal name to WA L&amp;I Verify and confirm active license, bond, and insurance status before any deposit. "
+                "Shortlist from a Board directory that matches the project, ask every firm the same questions, and compare written scopes. "
+                "Read how the ranking works before you treat a #1 listing as ownership."
+            ),
         )
         + _hub_photo_strip(
             [
@@ -10723,7 +11039,7 @@ def build_hiring_a_contractor_page() -> str:
             title="Hiring in pictures (illustrative)",
         )
         + _hub_section(
-            "A steward’s hiring path",
+            "What is the first hiring step?",
             f"""      <ol class="list-decimal pl-5 space-y-3 text-sm text-slate-300 font-light leading-relaxed mb-4">
         {step_olis}
       </ol>
@@ -10801,6 +11117,10 @@ def build_home_addition_planning_page() -> str:
             "Learning hub · Additions",
             "Home addition planning",
             "Educational Board planning hub for home additions in King County, Snohomish County, and Seattle — sequencing, permits, and hire habits without invented timelines or dollar bands.",
+            answer=(
+                "A home addition usually needs a building permit plus related trade permits, and some lots add site or critical-area review. "
+                "Confirm the authority having jurisdiction on the permit hub. Compare a second story with a teardown only after the engineering and a written dry-in plan are in hand."
+            ),
         )
         + _hub_photo_strip(
             [
@@ -10823,14 +11143,14 @@ def build_home_addition_planning_page() -> str:
             title="Addition planning in pictures (illustrative)",
         )
         + _hub_section(
-            "Addition projects are permit + weather stories",
+            "What permits does a home addition usually need?",
             f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Additions fail when permit ownership is fuzzy or when openings sit unprotected in North Sound weather. Freeze jurisdiction early, name who pulls permits, and require a written dry-in plan before roof or wall openings.</p>
       <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Use <a href="./project-timeline.html" class="text-secondary hover:underline">typical project phases</a> as orientation only — ranges are “often,” not guarantees. Compare bidders with <a href="./bid-comparison.html" class="text-secondary hover:underline">bid comparison</a> and <a href="./hiring-a-contractor.html" class="text-secondary hover:underline">hiring a contractor</a>.</p>
       <p class="text-sm text-slate-400 font-light leading-relaxed"><a href="./permits.html" class="text-secondary hover:underline">Permit hub</a> · <a href="./additions.html" class="text-secondary hover:underline">Additions directory</a> · Board #1: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(PPG['name'])}</a></p>""",
             border="border-primary/25",
         )
         + _hub_section(
-            "Planning checklist",
+            "What should I freeze before I ask for a price?",
             _check_ul(
                 [
                     "Confirm city vs county permitting authority for the parcel.",
@@ -12332,20 +12652,24 @@ def build_remodel_cost_factors_page() -> str:
         ),
     ]
     drivers = [
-        "Scope breadth — cosmetic refresh vs full gut, wall moves, and structural openings.",
-        "Existing conditions — panel capacity, plumbing stack access, asbestos/lead era finishes, crawlspace or slab surprises.",
-        "Finish level — commodity vs custom cabinets, stone vs laminate, tile complexity, fixture brands (as allowances, not Board prices).",
-        "Site access — occupied home, steep lots, coastal weather windows, dumpster/parking constraints.",
-        "Trades coordination — number of licensed trades, inspection gates, and correction cycles.",
-        "Permit & review path — AHJ fees, plan review hours, and whether land-use triggers apply (link official schedules; never invent fees).",
-        "Contingency & change discipline — documented allowances and signed change orders before work proceeds.",
-        "Schedule pressure — rush orders, long-lead substitutions, and winter dry-in for envelope openings.",
+        ("Scope breadth", "A cosmetic refresh is a different scope from a full gut, wall moves, and structural openings.", "Ask each bidder to state which of those is in the written scope."),
+        ("Existing conditions", "Panel capacity, plumbing stack access, older finishes, and crawlspace or slab surprises change the rough-in.", "Ask the bidder what was assumed about the existing house, and confirm fees with the authority having jurisdiction."),
+        ("Finish level", "Commodity versus custom cabinets, stone versus laminate, tile complexity, and fixture brands are allowance items, not Board prices.", "Write the allowance in the contract before you compare bids."),
+        ("Site access", "An occupied home, a steep lot, a coastal weather window, and dumpster or parking limits change how the work is sequenced.", "Ask for the access plan in the written scope."),
+        ("Trades coordination", "More licensed trades mean more inspection gates and correction cycles.", "Ask who owns each trade permit and who stands for inspections."),
+        ("Permit and review path", "The authority having jurisdiction sets fees and plan-review steps, and some lots add land-use review.", "Use the official fee schedule linked below. This page does not invent a fee."),
+        ("Allowances and changes", "Undocumented allowances and unsigned changes move the scope after work starts.", "Keep allowances and change orders in writing before the work proceeds."),
+        ("Schedule pressure", "Rush orders, long-lead substitutions, and winter dry-in for envelope openings change the sequence.", "Ask which materials are long-lead and how an open envelope will be dried in."),
     ]
     body = (
         _hub_header(
             "Learning · Cost literacy (no ROI)",
             "Remodel cost factors",
             "What typically drives kitchen, bath, addition, and ADU project cost in King County, Snohomish County, and Seattle — qualitative drivers and sourced public links. <strong class=\"text-white\">Not a bid</strong>; verify locally.",
+            answer=(
+                "Remodel scope moves with how much of the house changes, what you find in the existing walls and panel, the finish level, site access, how many trades must coordinate, and the city or county permit path. "
+                "National cost studies are context only. This page does not publish a price or a return for your home."
+            ),
         )
         + _hub_photo_strip(
             [
@@ -12371,15 +12695,15 @@ def build_remodel_cost_factors_page() -> str:
         + _cost_disclaimer_box()
         + "  </div>\n"
         + _hub_section(
-            "How to read national cost studies",
+            "Are national cost studies a local bid?",
             f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Industry Cost vs Value reports (Zonda / Remodeling Magazine and collaborators) publish national and market-level averages that pair modeled remodeling costs with surveyed estimates of resale value added. Methodology and markets change by edition — treat them as <strong class="text-white">national study context only</strong>, never as your local project price or a promised ROI.</p>
       <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Board rule: we cite the methodology and link the public overview; we do <em>not</em> copy cost-recouped percentages onto Board pages as if they were Edmonds or Seattle bids.</p>
       <p class="text-sm text-slate-400 font-light leading-relaxed">Public overview: <a href="{COST_VS_VALUE_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">Zonda 2025 Cost vs Value</a> · data lookup: <a href="{COST_VS_VALUE_DATA_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">costvsvalue.com</a>.</p>""",
             border="border-primary/25",
         )
         + _hub_section(
-            "Cross-cutting cost drivers",
-            _check_ul(drivers),
+            "What usually moves remodel scope?",
+            _driver_table(drivers),
         )
         + _hub_section(
             "Official fee & verification links (not Board prices)",
@@ -12438,20 +12762,24 @@ def build_kitchen_cost_factors_page() -> str:
         ),
     ]
     factors = [
-        "Layout change vs like-for-like — island moves, range/hood path, and wall removals change framing, MEP, and inspections.",
-        "Plumbing and gas relocations — stack access, slab vs crawl cuts, and shutoff logistics.",
-        "Electrical capacity — panel/subpanel needs, dedicated circuits, lighting layers, and EV/other loads competing for capacity.",
-        "Cabinet & counter path — stock vs custom, lead times, stone templating, and backsplash complexity (as allowances).",
-        "Appliance package — owner-furnished vs contractor-furnished, delivery damage risk, and trim-out labor.",
-        "Flooring transitions and structural leveling when removing load-bearing elements or combining rooms.",
-        "Occupied-home premium — temporary kitchen, dust control, phased work, and schedule stretch.",
-        "Permit path — plumbing/mechanical/electrical plus building when walls move; confirm with AHJ (see permit hub).",
+        ("Layout change versus like-for-like", "Island moves, a new range or hood path, and wall removals change framing, mechanical rough-in, and inspections.", "Ask bidders to separate a layout change from a like-for-like refresh in the written scope."),
+        ("Plumbing and gas relocations", "Stack access, slab or crawl cuts, and shutoff logistics change the rough-in.", "Ask who relocates plumbing or gas, and confirm the permit path with the city or county."),
+        ("Electrical capacity", "Panel or subpanel needs, dedicated circuits, and lighting layers compete for capacity.", "Ask whether the existing panel is in the scope, and confirm electrical permits with the authority having jurisdiction."),
+        ("Cabinet and counter path", "Stock versus custom, lead times, stone templating, and backsplash complexity are allowance items.", "Freeze the layout before long-lead cabinets and write the allowance in the contract."),
+        ("Appliance package", "Owner-furnished versus contractor-furnished appliances change delivery risk and trim-out labor.", "List which appliances the owner furnishes in the written contract."),
+        ("Flooring and structural leveling", "Removing a wall or combining rooms can require leveling and new transitions.", "Ask whether structural work is in this kitchen scope or belongs on an addition proposal."),
+        ("Living in the home", "A temporary kitchen, dust control, and phased work stretch the schedule.", "Ask for a temporary-kitchen and access plan if you will stay in the house."),
+        ("Permit path", "Plumbing, mechanical, electrical, and building permits can apply when walls move.", "Confirm the portal for the parcel on the permit hub and get the permit number in writing."),
     ]
     body = (
         _hub_header(
             "Learning · Kitchen cost literacy",
             "Kitchen cost factors",
             "Qualitative drivers of kitchen remodel cost for King County, Snohomish County, and Seattle. <strong class=\"text-white\">Not a bid</strong>; not ROI; verify with written local estimates.",
+            answer=(
+                "Kitchen remodel scope usually moves when the layout changes, plumbing or gas is relocated, the electrical panel needs more capacity, or cabinets and counters are custom. "
+                "Living in the home during the work and the permit path matter too. This page lists drivers only. It is not a bid."
+            ),
         )
         + _hub_photo_strip(
             [
@@ -12477,8 +12805,8 @@ def build_kitchen_cost_factors_page() -> str:
         + _cost_disclaimer_box()
         + "  </div>\n"
         + _hub_section(
-            "What usually moves the number",
-            _check_ul(factors)
+            "What usually moves a kitchen remodel’s scope?",
+            _driver_table(factors)
             + f"""
       <p class="text-sm text-slate-400 font-light mt-4">Planning companion: <a href="./kitchen-remodel-planning.html" class="text-secondary hover:underline">kitchen remodel planning</a> · directory: <a href="./kitchen.html" class="text-secondary hover:underline">kitchen remodelers</a> · Board #1: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(PPG['name'])}</a>.</p>""",
             border="border-primary/25",
@@ -12524,20 +12852,24 @@ def build_bathroom_cost_factors_page() -> str:
         ),
     ]
     factors = [
-        "Waterproofing system choice and who owns flood/cure milestones before tile.",
-        "Drain and toilet relocates — slab cuts vs crawl access vs stack constraints.",
-        "Curbless vs curb shower, niche/bench geometry, and glass complexity.",
-        "Tile labor intensity — large-format, mosaics, schluter details, heated floors.",
-        "Ventilation upgrades — fan capacity, duct route, and exterior termination.",
-        "Vanity/plumbing fixture allowances vs owner-furnished risk.",
-        "Shared-bath downtime — temporary facilities if the only bath is offline.",
-        "Permit path for plumbing/electrical/mechanical and any exterior wall openings.",
+        ("Waterproofing system", "Sheet, liquid, foam, and pan-liner systems are different scopes, and the flood or cure step happens before tile.", "Name the system and the trade that owns it in the written scope."),
+        ("Drain and toilet moves", "A slab cut, a crawl access, or a stack constraint changes the rough-in.", "Ask whether the fixture locations stay put, and confirm plumbing permits with the city or county."),
+        ("Shower geometry", "A curbless shower, a niche or bench, and the glass package change the wet-area scope.", "Require photos at changes of plane before cover."),
+        ("Tile labor", "Large-format tile, mosaics, trim details, and a heated floor change the labor, not just the material allowance.", "Ask the bidder to separate tile labor from the material allowance."),
+        ("Ventilation", "Fan capacity, the duct route, and an exterior termination are part of a wet-area scope.", "Ask where the fan duct terminates. It should not end in the attic."),
+        ("Vanity and fixtures", "An allowance and an owner-furnished fixture are different delivery risks.", "Write which fixtures the owner furnishes in the contract."),
+        ("The only bath offline", "If you stay in the house while the only bath is closed, the schedule needs temporary facilities.", "Ask for that plan in writing before you compare bids."),
+        ("Permit path", "Plumbing, electrical, mechanical, and any exterior wall opening can each need a permit.", "Confirm the portal on the permit hub and get the permit number in writing."),
     ]
     body = (
         _hub_header(
             "Learning · Bathroom cost literacy",
             "Bathroom cost factors",
             "What drives bath remodel cost on Puget Sound projects — waterproofing, layout, and logistics. <strong class=\"text-white\">Not a bid</strong>; verify locally.",
+            answer=(
+                "Bathroom remodel scope moves with the waterproofing system, whether the toilet or shower drain moves, shower geometry, tile labor, and the ventilation path. "
+                "Taking the only bath offline while you stay in the house changes the work. This page explains those drivers and does not quote a local price."
+            ),
         )
         + _hub_photo_strip(
             [
@@ -12563,8 +12895,8 @@ def build_bathroom_cost_factors_page() -> str:
         + _cost_disclaimer_box()
         + "  </div>\n"
         + _hub_section(
-            "Wet-area cost drivers",
-            _check_ul(factors)
+            "What usually moves a bathroom remodel’s scope?",
+            _driver_table(factors)
             + """
       <p class="text-sm text-slate-400 font-light mt-4"><a href="./bathroom-waterproofing-guide.html" class="text-secondary hover:underline">Bathroom waterproofing guide</a> · <a href="./coastal-waterproofing.html" class="text-secondary hover:underline">Coastal waterproofing checklist</a> · <a href="./bathrooms.html" class="text-secondary hover:underline">Bathroom directory</a></p>""",
             border="border-primary/25",
@@ -12607,20 +12939,24 @@ def build_addition_cost_factors_page() -> str:
         ),
     ]
     factors = [
-        "Structural approach — bump-out vs second story vs teardown comparison (see second-story vs teardown hub).",
-        "Foundation and soils — engineered design, drainage, and coastal/seismic detailing.",
-        "Envelope & dry-in — temporary weather protection when roofs or walls open in PNW rain seasons.",
-        "MEP upsizing — service panel, HVAC zoning, plumbing stacks, and fire/life-safety paths.",
-        "Stairs, egress, and existing floor disruption when tying into occupied space.",
-        "Exterior finish match — siding, windows, roofing transitions visible from the street.",
-        "AHJ complexity — building plus possibly land-use, trees, critical areas, or right-of-way.",
-        "Contingency culture — written change orders and allowance freezes before long-lead orders.",
+        ("Structural approach", "A bump-out, a second story, and a teardown are different scopes.", "Read the second-story versus teardown hub, then ask the bidder which approach the proposal uses."),
+        ("Foundation and soils", "Engineered design, drainage, and coastal or seismic detailing change the structure scope.", "Ask whether a soils or engineering report is assumed in the proposal."),
+        ("Envelope and dry-in", "Opening a roof or wall in a rainy season needs temporary weather protection.", "Ask for the written dry-in plan before the envelope is opened."),
+        ("Utility upsizing", "The service panel, HVAC zoning, plumbing stacks, and fire or life-safety paths can all grow with the addition.", "Ask which of those are in the written scope."),
+        ("Stairs and egress", "Tying a new volume into an occupied floor can move stairs and egress and disrupt the existing rooms.", "Ask the bidder to show that work as its own line in the scope."),
+        ("Exterior finish match", "Siding, windows, and roof transitions that show from the street are part of the addition scope.", "Write the finish match into the allowance before long-lead orders."),
+        ("Authority having jurisdiction", "The path can be a building permit plus land use, trees, critical areas, or right-of-way.", "Confirm which reviews apply to the parcel on the permit hub."),
+        ("Changes after freeze", "Unsigned changes and unfrozen allowances move the scope after work starts.", "Keep change orders and allowance freezes in writing before long-lead orders."),
     ]
     body = (
         _hub_header(
             "Learning · Addition cost literacy",
             "Addition cost factors",
             "Qualitative drivers of home addition cost for King County, Snohomish County, and Seattle. <strong class=\"text-white\">Not a bid</strong>; not ROI.",
+            answer=(
+                "Home addition scope moves with the structural approach, foundation and soils, how the envelope is dried in, utility upsizing, stairs and egress, and the authority having jurisdiction. "
+                "The Board does not publish a square-foot price. Use the planning hubs and written proposals."
+            ),
         )
         + _hub_photo_strip(
             [
@@ -12646,8 +12982,8 @@ def build_addition_cost_factors_page() -> str:
         + _cost_disclaimer_box()
         + "  </div>\n"
         + _hub_section(
-            "What usually drives addition cost",
-            _check_ul(factors)
+            "What usually moves an addition’s scope?",
+            _driver_table(factors)
             + f"""
       <p class="text-sm text-slate-400 font-light mt-4"><a href="./home-addition-planning.html" class="text-secondary hover:underline">Home addition planning</a> · <a href="./second-story-vs-teardown.html" class="text-secondary hover:underline">Second story vs teardown</a> · <a href="./additions.html" class="text-secondary hover:underline">Additions directory</a> · Board #1: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(PPG['name'])}</a></p>""",
             border="border-primary/25",
@@ -12690,20 +13026,24 @@ def build_adu_cost_factors_page() -> str:
         ),
     ]
     factors = [
-        "Typology — detached new, attached, garage conversion, or ADU within a new residence.",
-        "Foundation and utility runs — sewer/water/power distance and upsizing.",
-        "Fire separation, egress, and sound/privacy detailing for attached or stacked units.",
-        "Kitchen and bath wet cores — full dwelling MEPs, not a guest suite refresh.",
-        "Site constraints — setbacks, trees, critical areas, parking, and alley/ROW access.",
-        "City standards & permits — Edmonds ECDC paths and MyBuildingPermit ADU applications; Seattle SDCI fees when applicable.",
-        "Owner vs rental use assumptions that change finish durability (still not Board ROI).",
-        "Inspection sequencing and temporary occupancy logistics on tight lots.",
+        ("Typology", "A detached unit, an attached unit, a garage conversion, and an ADU inside a new residence are different scopes.", "Ask the bidder which typology the proposal assumes, and confirm it against the city handout."),
+        ("Foundation and utilities", "Sewer, water, and power distance, plus any upsizing, change the site work.", "Ask how far the new wet utilities run from the existing house."),
+        ("Fire separation and egress", "Attached or stacked units add fire separation, egress, and sound or privacy detailing.", "Ask the bidder to name those items in the written scope."),
+        ("Kitchen and bath wet cores", "An ADU is a full dwelling mechanical, electrical, and plumbing package, not a guest-suite refresh.", "Ask which wet rooms are in the scope."),
+        ("Site constraints", "Setbacks, trees, critical areas, parking, and alley or right-of-way access can change the footprint.", "Confirm those limits with the city before the design is frozen."),
+        ("City standards and permits", "Edmonds standards live in the community development code and MyBuildingPermit ADU paths. Seattle fees live on SDCI pages.", "Start at the Edmonds ADU hub and the official links there. This page does not republish a fee table."),
+        ("How the unit will be used", "Owner use and rental use can change the finish durability the owner asks for.", "Say which use the allowance assumes. This page does not estimate a return."),
+        ("Inspections on a tight lot", "Inspection order and temporary occupancy are harder when the lot has little laydown room.", "Ask the bidder for the inspection sequence in writing."),
     ]
     body = (
         _hub_header(
             "Learning · ADU cost literacy",
             "ADU cost factors",
             "What drives accessory dwelling unit cost in the North Sound — typology, utilities, and AHJ path. <strong class=\"text-white\">Not a bid</strong>; official links only for fees/standards.",
+            answer=(
+                "ADU scope depends on whether the unit is detached, attached, or a garage conversion, plus utility runs, fire separation, and the city standards that apply. "
+                "Official Edmonds standards live in city code and handouts. This page does not publish a construction price."
+            ),
         )
         + _hub_photo_strip(
             [
@@ -12729,8 +13069,8 @@ def build_adu_cost_factors_page() -> str:
         + _cost_disclaimer_box()
         + "  </div>\n"
         + _hub_section(
-            "ADU-specific drivers",
-            _check_ul(factors)
+            "What usually moves an ADU’s scope?",
+            _driver_table(factors)
             + f"""
       <p class="text-sm text-slate-400 font-light mt-4"><a href="./adu.html" class="text-secondary hover:underline">Edmonds ADU hub</a> · <a href="./adu-checklist.html" class="text-secondary hover:underline">ADU readiness checklist</a> · fees context: <a href="{SEATTLE_FEES_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">Seattle SDCI fees</a> · <a href="{MYBUILDINGPERMIT_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">MyBuildingPermit</a></p>""",
             border="border-primary/25",
@@ -14390,6 +14730,7 @@ def main(argv: list[str] | None = None) -> None:
     (SITE_DIR / "contact.html").write_text(build_contact_page(), encoding="utf-8")
     (SITE_DIR / "about.html").write_text(build_about_page(), encoding="utf-8")
     (SITE_DIR / "faq.html").write_text(build_faq_page(), encoding="utf-8")
+    (SITE_DIR / "search.html").write_text(build_search_page(), encoding="utf-8")
     (SITE_DIR / "glossary.html").write_text(build_glossary_page(), encoding="utf-8")
     (SITE_DIR / "videos.html").write_text(build_videos_page(), encoding="utf-8")
 
@@ -14469,6 +14810,7 @@ def main(argv: list[str] | None = None) -> None:
     if args.indexnow or os.environ.get("INDEXNOW_PING") == "1":
         ping_indexnow()
     finalize_published_html()
+    write_search_index()
     print("Done.")
 
 
