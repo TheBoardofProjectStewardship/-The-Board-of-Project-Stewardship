@@ -29,7 +29,198 @@
   <link rel="preload" href="/assets/fonts/InterLatin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/css/site.css">
 
-  <link rel="preload" as="image" href="./assets/hero/hero-finished-1280.webp" imagesrcset="./assets/hero/hero-finished-640.webp 640w, ./assets/hero/hero-finished-1280.webp 1280w" imagesizes="100vw" fetchpriority="high">
+  <style>
+    .plan-home-hero {
+      background: linear-gradient(180deg, #ffffff 0%, #f4f0e8 100%);
+      color: #0f172a;
+      padding: 1.25rem 1rem 1.1rem;
+    }
+    .plan-home-grid {
+      max-width: 72rem;
+      margin: 0 auto;
+      display: grid;
+      gap: 1.25rem;
+      align-items: center;
+    }
+    .plan-home-kicker {
+      margin: 0;
+      color: #0e7490;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .plan-home-hero h1 {
+      margin: 0.45rem 0 0;
+      max-width: 12ch;
+      color: #0f172a;
+      font-family: Inter, system-ui, sans-serif;
+      font-weight: 700;
+      font-size: clamp(2.05rem, 8vw, 3.5rem);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+    }
+    .plan-home-dek {
+      margin: 0.85rem 0 0;
+      max-width: 42rem;
+      color: #334155;
+      font-size: 1rem;
+      line-height: 1.55;
+    }
+    .plan-home-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.85rem 1.25rem;
+      margin-top: 1.15rem;
+    }
+    .plan-home-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 3rem;
+      padding: 0.8rem 1.15rem;
+      border-radius: 999px;
+      background: #0f172a;
+      color: #f8fafc;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.98rem;
+      box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.55);
+    }
+    .plan-home-btn:hover { background: #1e293b; }
+    .plan-home-text {
+      color: #0f172a;
+      font-weight: 700;
+      text-decoration: none;
+      border-bottom: 2px solid #22d3ee;
+      padding-bottom: 0.1rem;
+    }
+    .plan-home-hero a:focus-visible {
+      outline: 2px solid #0891b2;
+      outline-offset: 3px;
+    }
+    .plan-home-stage {
+      position: relative;
+      display: block;
+      height: 16rem;
+      border-radius: 1.1rem;
+      overflow: hidden;
+      text-decoration: none;
+      background: #f4f0e8;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+    }
+    .ph-sheet, .ph-build { position: absolute; inset: 0; }
+    .ph-trace {
+      position: absolute;
+      height: 2px;
+      background: #22d3ee;
+      transform-origin: left center;
+      transform: scaleX(0);
+      animation: ph-draw 0.7s ease forwards;
+    }
+    .ph-trace.a { left: 16%; top: 38%; width: 46%; }
+    .ph-trace.b { left: 16%; top: 62%; width: 68%; animation-delay: 0.15s; }
+    .ph-trace.c, .ph-trace.d {
+      width: 2px;
+      height: 24%;
+      top: 38%;
+      transform-origin: center top;
+      transform: scaleY(0);
+      animation-name: ph-draw-y;
+    }
+    .ph-trace.c { left: 16%; animation-delay: 0.28s; }
+    .ph-trace.d { left: 62%; animation-delay: 0.4s; }
+    .ph-build {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 2.4rem;
+    }
+    .ph-roof {
+      width: 0;
+      height: 0;
+      border-left: 5.1rem solid transparent;
+      border-right: 5.1rem solid transparent;
+      border-bottom: 2.15rem solid #0f172a;
+      transform-origin: top center;
+      animation: ph-drop 0.55s ease 1.35s both;
+    }
+    .ph-floor {
+      width: 9.2rem;
+      height: 2.7rem;
+      display: flex;
+      align-items: stretch;
+      gap: 0.28rem;
+      margin-top: 0.2rem;
+    }
+    .ph-floor i {
+      flex: 1;
+      background: #fff;
+      border: 2px solid #67e8f9;
+      border-bottom: 0;
+      transform-origin: center bottom;
+      transform: scaleY(0);
+      animation: ph-rise 0.7s ease forwards;
+    }
+    .ph-floor.main i { animation-delay: 0.55s; }
+    .ph-floor.upper i { animation-delay: 1.05s; }
+    .ph-floor i.door { background: linear-gradient(#fff 55%, #0f172a 55%); }
+    .ph-floor i.win { background: linear-gradient(#fff 20%, #22d3ee 20% 70%, #fff 70%); }
+    .ph-caption {
+      position: absolute;
+      left: 0.8rem;
+      bottom: 0.7rem;
+      margin: 0;
+      color: #0f172a;
+      background: rgba(255, 255, 255, 0.88);
+      border-radius: 999px;
+      padding: 0.28rem 0.7rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .plan-home-jumps {
+      max-width: 72rem;
+      margin: 1rem auto 0;
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 0.15rem;
+    }
+    .plan-home-jumps a {
+      flex: 0 0 auto;
+      color: #0f172a;
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border: 1px solid rgba(15, 23, 42, 0.14);
+      background: #fff;
+      border-radius: 999px;
+      padding: 0.45rem 0.75rem;
+    }
+    .plan-home-jumps a:hover { border-color: #22d3ee; }
+    @media (min-width: 860px) {
+      .plan-home-hero { padding: 2.25rem 1.5rem 1.35rem; }
+      .plan-home-grid { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 2.5rem; }
+      .plan-home-stage { height: 22rem; }
+      .plan-home-btn { width: auto; }
+    }
+    @media (max-width: 859px) {
+      .plan-home-btn { width: 100%; }
+    }
+    @keyframes ph-draw { to { transform: scaleX(1); } }
+    @keyframes ph-draw-y { to { transform: scaleY(1); } }
+    @keyframes ph-rise { to { transform: scaleY(1); } }
+    @keyframes ph-drop { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) {
+      .ph-trace, .ph-floor i, .ph-roof { animation: none; transform: none; opacity: 1; }
+    }
+  </style>
+
   <style>
     .flashlight-hero {
       --hero-gutter: clamp(18px, 4.6vw, 72px);
@@ -179,7 +370,8 @@
       letter-spacing: .16em;
       text-transform: uppercase;
     }
-    .flashlight-hero h1 {
+    .flashlight-hero h1,
+    .flashlight-hero h2 {
       margin: 14px 0 0;
       max-width: 16ch;
       color: #fff;
@@ -293,6 +485,18 @@
       .flashlight-hero .hero-hint,
       .flashlight-hero .hero-play,
       .flashlight-hero .hero-ambient-video { display: none !important; }
+    }
+    .flashlight-hero.is-supporting {
+      min-height: 22rem;
+      height: 22rem;
+      cursor: auto;
+    }
+    .flashlight-hero.is-supporting .hero-cursor { display: none; }
+    @media (max-width: 860px) {
+      .flashlight-hero.is-supporting {
+        min-height: 28rem;
+        height: 28rem;
+      }
     }
   </style>
   <script type="application/ld+json">
@@ -440,10 +644,326 @@
     </nav>
   </header>
 <main id="main-content">
-  <section class="flashlight-hero" id="home-hero" aria-labelledby="home-hero-title">
+  <section class="plan-home-hero" id="plan-home-hero" aria-labelledby="plan-home-title">
+    <div class="plan-home-grid">
+      <div class="plan-home-copy">
+        <p class="plan-home-kicker">Pacific Northwest · King &amp; Snohomish · Seattle</p>
+        <h1 id="plan-home-title">Walk through a home in 3D</h1>
+        <p class="plan-home-dek">Trace a builder plan, watch the walls rise, and step inside Cedar Lane House, a two-storey sample. Illustration only. Confirm the drawing with your builder, architect, or the permit set. Not for construction.</p>
+        <div class="plan-home-ctas">
+          <a class="plan-home-btn" href="./plan-walkthrough/">Walk through a home in 3D</a>
+          <a class="plan-home-text" href="./directory.html">Browse directories</a>
+        </div>
+      </div>
+      <a class="plan-home-stage" href="./plan-walkthrough/" aria-label="Walk through a home in 3D">
+        <span class="ph-sheet" aria-hidden="true">
+          <i class="ph-trace a"></i>
+          <i class="ph-trace b"></i>
+          <i class="ph-trace c"></i>
+          <i class="ph-trace d"></i>
+        </span>
+        <span class="ph-build" aria-hidden="true">
+          <span class="ph-roof"></span>
+          <span class="ph-floor upper"><i></i><i class="win"></i><i></i></span>
+          <span class="ph-floor main"><i></i><i class="door"></i><i></i><i></i></span>
+        </span>
+        <span class="ph-caption">Cedar Lane House</span>
+      </a>
+    </div>
+    <nav class="plan-home-jumps" aria-label="Start here">
+      <a href="./plan-walkthrough/">Plan to 3D</a>
+      <a href="./directory.html">Directories</a>
+      <a href="./verify-contractor.html">Verify a contractor</a>
+      <a href="./how-we-rank.html">How we rank</a>
+      <a href="./good-steward.html">Good Steward</a>
+    </nav>
+  </section>
+  <div class="max-w-6xl mx-auto px-4 pt-10 relative z-20">
+    <section id="why-ppg-number-one" class="bg-charcoal rounded-xl p-8 md:p-10 border border-secondary/35 mb-14 relative overflow-hidden">
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-primary"></div>
+      <div class="absolute -top-16 -left-16 w-72 h-72 bg-primary/10 blur-[90px] pointer-events-none rounded-full"></div>
+      <div class="relative z-10 grid lg:grid-cols-2 gap-8 items-start">
+        <div>
+          <span class="text-secondary font-bold text-xs uppercase tracking-[0.15em] flex items-center mb-3">
+            <i class="fas fa-trophy mr-2"></i> Board directory #1
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-3">Why Pacific Pro Group ranks #1</h2>
+          <p class="text-slate-300 font-light leading-relaxed mb-4 max-w-3xl">
+            Pacific Pro Group currently holds the Board’s <strong class="text-white font-semibold">#1 directory position</strong>
+            for home additions and remodels in King County, Snohomish County, and Seattle based on the Board’s published evaluation framework — design-build continuity,
+            local focus, permit stewardship habits, and public review signals.
+            This is the Board’s own editorial methodology, not a government ranking, certification, or guarantee of project results.
+          </p>
+          <ul class="space-y-3 text-sm text-slate-300 font-light mb-6">
+            <li class="flex gap-3"><i class="fas fa-check text-secondary mt-1"></i><span><strong class="text-white">Design-build continuity</strong> — one stewarding path from discovery through build, fewer salesman-to-crew handoffs.</span></li>
+            <li class="flex gap-3"><i class="fas fa-check text-secondary mt-1"></i><span><strong class="text-white">King County, Snohomish County, and Seattle focus</strong> — residential additions and remodels, including Edmonds, not generic statewide lead funnels.</span></li>
+            <li class="flex gap-3"><i class="fas fa-check text-secondary mt-1"></i><span><strong class="text-white">Permit stewardship habits</strong> — sequencing and AHJ coordination treated as part of the craft, not an afterthought.</span></li>
+            <li class="flex gap-3"><i class="fas fa-check text-secondary mt-1"></i><span><strong class="text-white">Public review aggregate</strong> — Trustindex aggregate 4.9★ · 190 reviews (as of Sept 2026; re-check live); WA license chip <strong class="text-white">PACIFPG765OF</strong> — always re-verify at L&amp;I.</span></li>
+          </ul>
+          <div class="flex flex-wrap gap-2 mb-6">
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-emerald-400/30 bg-emerald-950/40 text-emerald-300">WA License PACIFPG765OF</span>
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-white/20 bg-white/5 text-slate-300">4.9 · 190 reviews (as of Sept 2026; re-check live)</span>
+            <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-white/20 bg-white/5 text-slate-300">Edmonds, WA</span>
+          </div>
+          <div class="flex flex-col sm:flex-row flex-wrap gap-3">
+            <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="bg-primary text-white text-center py-3.5 px-6 rounded font-bold hover:bg-emerald-700 transition shadow-glow-sleek uppercase tracking-wider text-sm">
+              View Pacific Pro Group — pacificprogroup.com
+            </a>
+            <a href="./additions.html" class="border border-white/20 bg-white/5 text-white py-3.5 px-6 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-sm text-center">
+              Additions ranking
+            </a>
+            <a href="./edmonds-custom-homes.html" class="border border-white/15 text-slate-200 py-3.5 px-6 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-sm text-center">
+              Edmonds custom homes
+            </a>
+            <a href="https://www.trustindex.io/reviews/pacificprogroup.com" target="_blank" rel="noopener" class="border border-white/15 text-slate-200 py-3.5 px-6 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-sm text-center">
+              4.9 · 190 reviews (as of Sept 2026; re-check live)
+            </a>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+                  <figure class="overflow-hidden rounded-xl border border-white/10 bg-charcoal">
+          <img src="./assets/images/home-ppg-addition-800.webp" alt="Illustrative: PNW addition exterior highlighting Board #1 craft standards" class="w-full h-44 sm:h-52 object-cover" width="1200" height="675" loading="lazy" data-defer-lcp srcset="./assets/images/home-ppg-addition-480.webp 480w, ./assets/images/home-ppg-addition-800.webp 800w, ./assets/images/home-ppg-addition-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
+          <figcaption class="px-3 py-2 text-xs text-slate-300 font-light leading-snug">Additions craft</figcaption>
+        </figure>
+                  <figure class="overflow-hidden rounded-xl border border-white/10 bg-charcoal">
+          <img src="./assets/images/home-ppg-interior-800.webp" alt="Illustrative: remodel interior highlighting Board #1 finish standards" class="w-full h-44 sm:h-52 object-cover" width="1200" height="675" loading="lazy" data-defer-lcp srcset="./assets/images/home-ppg-interior-480.webp 480w, ./assets/images/home-ppg-interior-800.webp 800w, ./assets/images/home-ppg-interior-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
+          <figcaption class="px-3 py-2 text-xs text-slate-300 font-light leading-snug">Interior finish</figcaption>
+        </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-14">
+      <div class="mb-6 border-b border-white/10 pb-4">
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Directories</span>
+        <h2 class="text-2xl font-black text-white tracking-tight">Explore the Board’s listings</h2>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <a href="./additions.html" class="bg-primary text-white hover:bg-emerald-700 shadow-glow-sleek px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">Browse Additions Directory</a><a href="./custom-homes.html" class="border border-white/20 bg-white/5 text-white hover:border-secondary hover:text-secondary px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">Custom Homes</a><a href="./edmonds-custom-homes.html" class="border border-white/20 bg-white/5 text-white hover:border-secondary hover:text-secondary px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">Edmonds custom homes</a><a href="./kitchen.html" class="border border-white/20 bg-white/5 text-white hover:border-secondary hover:text-secondary px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">Kitchen</a><a href="./bathrooms.html" class="border border-white/20 bg-white/5 text-white hover:border-secondary hover:text-secondary px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">Bathrooms</a><a href="./commercial.html" class="border border-white/20 bg-white/5 text-white hover:border-secondary hover:text-secondary px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">Commercial</a><a href="./spec-homes.html" class="border border-white/20 bg-white/5 text-white hover:border-secondary hover:text-secondary px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">Spec Homes</a><a href="./trades.html" class="border border-white/20 bg-white/5 text-white hover:border-secondary hover:text-secondary px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">Trades</a><a href="./blog.html" class="border border-white/20 bg-white/5 text-white hover:border-secondary hover:text-secondary px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">Blog</a><a href="./good-steward.html" class="border border-white/20 bg-white/5 text-white hover:border-secondary hover:text-secondary px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">Good Steward</a>
+      </div>
+    </section>
+
+    <section id="why-homeowners" class="mb-14">
+      <div class="mb-8 border-b border-white/10 pb-4">
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">For homeowners</span>
+        <h2 class="text-3xl font-black text-white tracking-tight">Why homeowners use the Board</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4 mb-6">
+        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-filter text-secondary mr-2"></i>Standards over lead-gen</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Directories emphasize editorial fit for King County, Snohomish County, and Seattle — not whoever bought the top ad slot.</p>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-clipboard-list text-secondary mr-2"></i>Tools that travel with you</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Good Steward checklists keep discovery notes and phase status in your browser — useful with any licensed GC.</p>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-shield-halved text-secondary mr-2"></i>Verify before you hire</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Every ranking page points you back to <a href="https://secure.lni.wa.gov/verify/" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> before deposits or demolition.</p>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <a href="./good-steward.html" class="bg-primary text-white px-5 py-3.5 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs shadow-glow-sleek">Good Steward guide &amp; tools</a>
+        <a href="./build-walkthrough.html" class="border border-white/20 bg-white/5 text-white px-5 py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Build Walkthrough</a>
+        <a href="./site-visit.html" class="border border-white/20 bg-white/5 text-white px-5 py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Site Visit Checklist</a>
+        <a href="./pm-dashboard.html" class="border border-white/20 bg-white/5 text-white px-5 py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">PM Dashboard</a>
+      </div>
+    </section>
+
+    <section id="how-the-board-works" class="mb-14">
+      <div class="mb-8 border-b border-white/10 pb-4">
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Process</span>
+        <h2 class="text-3xl font-black text-white tracking-tight">How the Board works</h2>
+        <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">A repeatable filter: research the work, verify public signals, weight local mastery, then publish an editorial shortlist homeowners can use.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="bg-charcoal border border-white/10 hover:border-primary/40 rounded-xl p-5 card-hover">
+          <img src="./assets/images/home-process-research-800.webp" alt="Illustrative: editorial photo of plans and research materials for Board process" class="w-full h-36 object-cover rounded-lg border border-white/10 mb-4" width="800" height="450" loading="lazy" data-defer-lcp srcset="./assets/images/home-process-research-480.webp 480w, ./assets/images/home-process-research-800.webp 800w, ./assets/images/home-process-research-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-secondary font-black text-sm tracking-widest">01</span>
+            <i class="fas fa-magnifying-glass-chart text-secondary"></i>
+            <h3 class="text-lg font-black text-white tracking-tight">Research</h3>
+          </div>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Study how additions and remodels actually run across King County, Snohomish County, and Seattle — AHJ norms, coastal detailing, and stay-in-home vs vacate patterns.</p>
+        </div>
+        <div class="bg-charcoal border border-white/10 hover:border-primary/40 rounded-xl p-5 card-hover">
+          <img src="./assets/images/home-process-verify-800.webp" alt="Illustrative: verification and standards-check visual for Board editorial" class="w-full h-36 object-cover rounded-lg border border-white/10 mb-4" width="800" height="450" loading="lazy" data-defer-lcp srcset="./assets/images/home-process-verify-480.webp 480w, ./assets/images/home-process-verify-800.webp 800w, ./assets/images/home-process-verify-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-secondary font-black text-sm tracking-widest">02</span>
+            <i class="fas fa-id-card text-secondary"></i>
+            <h3 class="text-lg font-black text-white tracking-tight">Verify</h3>
+          </div>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Cross-check public WA L&amp;I signals and third-party review aggregates. Prefer firms homeowners can re-verify themselves before a deposit.</p>
+        </div>
+        <div class="bg-charcoal border border-white/10 hover:border-primary/40 rounded-xl p-5 card-hover">
+          <img src="./assets/images/home-process-build-800.webp" alt="Illustrative: Pacific Northwest home addition construction for Board editorial" class="w-full h-36 object-cover rounded-lg border border-white/10 mb-4" width="800" height="450" loading="lazy" data-defer-lcp srcset="./assets/images/home-process-build-480.webp 480w, ./assets/images/home-process-build-800.webp 800w, ./assets/images/home-process-build-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-secondary font-black text-sm tracking-widest">03</span>
+            <i class="fas fa-house-chimney-window text-secondary"></i>
+            <h3 class="text-lg font-black text-white tracking-tight">Local mastery</h3>
+          </div>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Weight local height limits, critical areas, and coastal weather sequencing — including Edmonds Bowl rules where they apply — not generic statewide marketing claims.</p>
+        </div>
+        <div class="bg-charcoal border border-white/10 hover:border-primary/40 rounded-xl p-5 card-hover">
+          <img src="./assets/images/home-process-shortlist-800.webp" alt="Illustrative: curated shortlist / directory editorial photo" class="w-full h-36 object-cover rounded-lg border border-white/10 mb-4" width="800" height="450" loading="lazy" data-defer-lcp srcset="./assets/images/home-process-shortlist-480.webp 480w, ./assets/images/home-process-shortlist-800.webp 800w, ./assets/images/home-process-shortlist-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-secondary font-black text-sm tracking-widest">04</span>
+            <i class="fas fa-list-check text-secondary"></i>
+            <h3 class="text-lg font-black text-white tracking-tight">Editorial shortlist</h3>
+          </div>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Publish ranked directories and field guides so homeowners can compare firms against standards — not paid placement.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-14">
+      <div class="mb-8 border-b border-white/10 pb-4">
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Homeowner practice</span>
+        <h2 class="text-3xl font-black text-white tracking-tight">What a good steward does</h2>
+        <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Concrete habits that keep remodels, additions, and custom work accountable — whether you hire a design-build firm or self-manage trades.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+        <div class="bg-charcoal border border-white/10 rounded-xl p-5">
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-id-card text-secondary mr-2"></i>Verify WA L&amp;I</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Confirm active contractor license, bonding, and insurance on <a href="https://secure.lni.wa.gov/verify/" target="_blank" rel="noopener" class="text-secondary hover:underline">L&amp;I Verify</a> before any deposit or start date.</p>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-5">
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-file-contract text-secondary mr-2"></i>Written scope</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Insist on a written scope of work, allowances, and exclusions — not a handshake estimate — before demolition or ordering long-lead materials.</p>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-5">
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-user-tie text-secondary mr-2"></i>One steward contact</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Name a single project steward for decisions and schedule. Avoid salesman-to-crew handoffs with no continuity.</p>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-5">
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-stamp text-secondary mr-2"></i>Permit ownership</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Know who pulls and owns each permit, who schedules inspections, and how corrections are closed before cover-up.</p>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-5">
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-exchange-alt text-secondary mr-2"></i>Change-order discipline</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Require written change orders with price and schedule impact before extra work starts — no verbal “we’ll figure it out.”</p>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-5">
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-cloud-rain text-secondary mr-2"></i>Weather &amp; dry-in</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">For additions and roof work, demand a dry-in plan: temporary weather protection, sequencing, and moisture checks before finishes.</p>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-5 sm:col-span-2 lg:col-span-3">
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-clipboard-check text-secondary mr-2"></i>Punch list before final pay</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Walk a written punch list with photos, retain final payment until items are closed, and keep manuals/warranty contacts with the project file.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-14" id="cornerstone-reading">
+      <div class="mb-8 border-b border-white/10 pb-4">
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">From the Board journal</span>
+        <h2 class="text-3xl font-black text-white tracking-tight">Cornerstone reading</h2>
+        <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Six editorial posts that pair with Board directories and Good Steward tools — permits, hiring, waterproofing, and addition path decisions. Educational only; no invented prices or timelines.</p>
+      </div>
+      <ul class="grid sm:grid-cols-2 gap-3 text-sm text-slate-300 font-light">
+        <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-08-12-edmonds-home-addition-permit-basics.html" class="text-secondary hover:underline font-semibold">Edmonds home addition permit basics</a> — AHJ start-here habits before design freeze.</li>
+        <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-08-11-hire-design-build-edmonds.html" class="text-secondary hover:underline font-semibold">Hire design-build in Edmonds</a> — when one steward beats a trade-only chase.</li>
+        <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-08-18-pnw-bathroom-waterproofing-essentials.html" class="text-secondary hover:underline font-semibold">PNW bathroom waterproofing essentials</a> — wet-area discipline for coastal baths.</li>
+        <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-08-09-second-story-vs-teardown-edmonds.html" class="text-secondary hover:underline font-semibold">Second story vs teardown (Edmonds)</a> — compare paths without invented cost claims.</li>
+        <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-08-12-hire-kitchen-remodeler-king-snohomish.html" class="text-secondary hover:underline font-semibold">Hire a kitchen remodeler (King &amp; Snohomish)</a> — shortlist habits before cabinet day.</li>
+        <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-09-07-adu-planning-edmonds-wa.html" class="text-secondary hover:underline font-semibold">ADU planning Edmonds WA</a> — parcel and portal honesty before stock plans.</li>
+      </ul>
+      <p class="text-sm text-slate-500 font-light mt-4"><a href="./blog.html" class="text-secondary hover:underline">Browse the full blog</a> · <a href="./learn.html" class="text-secondary hover:underline">Learn hub</a> · <a href="./how-we-rank.html" class="text-secondary hover:underline">How we rank</a></p>
+    </section>
+
+    <section class="mb-14" id="learn">
+      <div class="mb-8 border-b border-white/10 pb-4">
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Learn before you hire</span>
+        <h2 class="text-3xl font-black text-white tracking-tight">Planning hubs &amp; client tools</h2>
+        <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Educational Board guides for remodels and additions — paired with verification tools. No invented prices, licenses, or awards.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+        <a href="./hiring-a-contractor.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover block">
+          <h3 class="text-base font-black text-white mb-2">Hiring a contractor</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">L&amp;I verify path, interview habits, and how Board rankings work.</p>
+        </a>
+        <a href="./kitchen-remodel-planning.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover block">
+          <h3 class="text-base font-black text-white mb-2">Kitchen remodel planning</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Layout, allowances, and permit ownership before cabinet day.</p>
+        </a>
+        <a href="./bathroom-waterproofing-guide.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover block">
+          <h3 class="text-base font-black text-white mb-2">Bathroom waterproofing</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Wet-area systems and coastal moisture habits for Puget Sound baths.</p>
+        </a>
+        <a href="./home-addition-planning.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover block">
+          <h3 class="text-base font-black text-white mb-2">Home addition planning</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Jurisdiction, dry-in sequencing, and addition shortlist links.</p>
+        </a>
+        <a href="./second-story-vs-teardown.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover block">
+          <h3 class="text-base font-black text-white mb-2">Second story vs teardown</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Compare paths without invented cost guarantees.</p>
+        </a>
+        <div class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover">
+          <h3 class="text-base font-black text-white mb-2">Bid comparison &amp; red flags</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed"><a href="./bid-comparison.html" class="text-secondary hover:underline">Bid checklist</a> · <a href="./red-flags-hiring.html" class="text-secondary hover:underline">red flags</a> · <a href="./project-timeline.html" class="text-secondary hover:underline">timeline phases</a>.</p>
+        </div>
+      </div>
+      <p class="text-sm text-slate-400 font-light mb-3"><a href="./learn.html" class="text-secondary hover:underline font-semibold">Browse the full Learn hub</a> — permits, ADU, verify, checklists, stewardship layers, glossary, videos, and Good Steward tools.</p>
+      <p class="text-sm text-slate-500 font-light">City hubs: <a href="./edmonds.html" class="text-secondary hover:underline">Edmonds</a> · <a href="./greenwood.html" class="text-secondary hover:underline">Greenwood</a> · <a href="./lake-forest-park.html" class="text-secondary hover:underline">Lake Forest Park</a> · <a href="./mountlake-terrace.html" class="text-secondary hover:underline">Mountlake Terrace</a> · <a href="./mill-creek.html" class="text-secondary hover:underline">Mill Creek</a> · <a href="./mukilteo.html" class="text-secondary hover:underline">Mukilteo</a> · <a href="./kirkland.html" class="text-secondary hover:underline">Kirkland</a> · <a href="./bothell.html" class="text-secondary hover:underline">Bothell</a> · <a href="./queen-anne.html" class="text-secondary hover:underline">Queen Anne</a> · <a href="./phinney-ridge.html" class="text-secondary hover:underline">Phinney Ridge</a> · <a href="./shoreline.html" class="text-secondary hover:underline">Shoreline</a> · <a href="./lynnwood.html" class="text-secondary hover:underline">Lynnwood</a> · <a href="./ballard.html" class="text-secondary hover:underline">Ballard</a> · <a href="./magnolia.html" class="text-secondary hover:underline">Magnolia</a></p>
+    </section>
+
+    <section class="bg-charcoal rounded-xl p-8 md:p-10 border border-primary/25 mb-14 relative overflow-hidden">
+      <div class="absolute -bottom-20 -right-20 w-56 h-56 bg-primary/15 blur-[70px] pointer-events-none rounded-full"></div>
+      <div class="relative z-10 md:flex md:items-center md:justify-between gap-8">
+        <div class="mb-6 md:mb-0">
+          <span class="text-secondary font-bold text-xs uppercase tracking-[0.15em] flex items-center mb-3">
+            <i class="fas fa-map-location-dot mr-2"></i> Edmonds directory
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-3">Edmonds custom home builders</h2>
+          <p class="text-slate-300 font-light leading-relaxed max-w-2xl">
+            Edmonds-first editorial list, a local permit guide, and planning tools.
+            Pacific Pro Group ranks #1 with a verified <strong class="text-white font-semibold">4.9 · 190 reviews (as of Sept 2026; re-check live)</strong>.
+          </p>
+        </div>
+        <a href="./edmonds-custom-homes.html" class="shrink-0 bg-primary text-white text-center py-3.5 px-6 rounded font-bold hover:bg-emerald-700 transition shadow-glow-sleek uppercase tracking-wider text-sm whitespace-nowrap">
+          Open Edmonds directory <i class="fas fa-arrow-right ml-1 text-xs"></i>
+        </a>
+      </div>
+    </section>
+
+    <section id="field-gallery" class="mb-4">
+      <div class="mb-8 border-b border-white/10 pb-4">
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Field gallery</span>
+        <h2 class="text-3xl font-black text-white tracking-tight">Standards you can see</h2>
+        <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Editorial process and remodel imagery for Pacific Northwest work in King County, Snohomish County, and Seattle. Editorial and stock frames are labeled illustrative in alt text.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <figure class="overflow-hidden rounded-xl border border-white/10 bg-charcoal">
+          <img src="./assets/images/home-process-build-800.webp" alt="Illustrative: PNW home addition exterior for Board editorial" class="w-full h-44 sm:h-52 object-cover" width="1200" height="675" loading="lazy" data-defer-lcp srcset="./assets/images/home-process-build-480.webp 480w, ./assets/images/home-process-build-800.webp 800w, ./assets/images/home-process-build-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
+          <figcaption class="px-3 py-2 text-xs text-slate-300 font-light leading-snug">Additions &amp; coastal detailing</figcaption>
+        </figure>
+        <figure class="overflow-hidden rounded-xl border border-white/10 bg-charcoal">
+          <img src="./assets/images/home-ppg-addition-800.webp" alt="Illustrative: PNW remodel exterior for Board #1 listing" class="w-full h-44 sm:h-52 object-cover" width="1200" height="675" loading="lazy" data-defer-lcp srcset="./assets/images/home-ppg-addition-480.webp 480w, ./assets/images/home-ppg-addition-800.webp 800w, ./assets/images/home-ppg-addition-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
+          <figcaption class="px-3 py-2 text-xs text-slate-300 font-light leading-snug">Board #1 — quality remodel craft</figcaption>
+        </figure>
+        <figure class="overflow-hidden rounded-xl border border-white/10 bg-charcoal">
+          <img src="./assets/images/home-ppg-interior-800.webp" alt="Illustrative: remodeled kitchen interior for Board editorial" class="w-full h-44 sm:h-52 object-cover" width="1200" height="675" loading="lazy" data-defer-lcp srcset="./assets/images/home-ppg-interior-480.webp 480w, ./assets/images/home-ppg-interior-800.webp 800w, ./assets/images/home-ppg-interior-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
+          <figcaption class="px-3 py-2 text-xs text-slate-300 font-light leading-snug">Finish discipline indoors</figcaption>
+        </figure>
+        <figure class="overflow-hidden rounded-xl border border-white/10 bg-charcoal">
+          <img src="./assets/images/home-gallery-dryin-800.webp" alt="Illustrative: dry-in / framing stage for Board editorial" class="w-full h-44 sm:h-52 object-cover" width="1200" height="675" loading="lazy" data-defer-lcp srcset="./assets/images/home-gallery-dryin-480.webp 480w, ./assets/images/home-gallery-dryin-800.webp 800w, ./assets/images/home-gallery-dryin-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
+          <figcaption class="px-3 py-2 text-xs text-slate-300 font-light leading-snug">Dry-in &amp; weather protection</figcaption>
+        </figure>
+        <figure class="overflow-hidden rounded-xl border border-white/10 bg-charcoal">
+          <img src="./assets/images/home-gallery-finish-800.webp" alt="Illustrative: finished remodel interior for Board editorial" class="w-full h-44 sm:h-52 object-cover" width="1200" height="675" loading="lazy" data-defer-lcp srcset="./assets/images/home-gallery-finish-480.webp 480w, ./assets/images/home-gallery-finish-800.webp 800w, ./assets/images/home-gallery-finish-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
+          <figcaption class="px-3 py-2 text-xs text-slate-300 font-light leading-snug">Punch-ready finishes</figcaption>
+        </figure>
+        <figure class="overflow-hidden rounded-xl border border-white/10 bg-charcoal">
+          <img src="./assets/images/home-process-research-800.webp" alt="Illustrative: plans and research desk for Board editorial" class="w-full h-44 sm:h-52 object-cover" width="1200" height="675" loading="lazy" data-defer-lcp srcset="./assets/images/home-process-research-480.webp 480w, ./assets/images/home-process-research-800.webp 800w, ./assets/images/home-process-research-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
+          <figcaption class="px-3 py-2 text-xs text-slate-300 font-light leading-snug">Research before ranking</figcaption>
+        </figure>
+      </div>
+    </section>
+  </div>
+  <section class="flashlight-hero is-supporting" id="home-hero" aria-labelledby="home-hero-title">
     <div class="hero-stage">
-      <img class="hero-layer hero-layer-finished" src="./assets/hero/hero-finished-1280.webp" srcset="./assets/hero/hero-finished-640.webp 640w, ./assets/hero/hero-finished-1280.webp 1280w" sizes="100vw" alt="Illustrative: Pacific Northwest home concept for Board of Project Stewardship — not a bid or stamped plan" width="1280" height="723" decoding="async" fetchpriority="high" loading="eager">
-      <img class="hero-layer hero-layer-wire" id="home-hero-wire" src="./assets/hero/hero-wireframe-1280.webp" srcset="./assets/hero/hero-wireframe-640.webp 640w, ./assets/hero/hero-wireframe-1280.webp 1280w" sizes="100vw" alt="" width="1280" height="723" decoding="async" loading="lazy">
+      <img class="hero-layer hero-layer-finished" src="./assets/hero/hero-finished-1280.webp" srcset="./assets/hero/hero-finished-640.webp 640w, ./assets/hero/hero-finished-1280.webp 1280w" sizes="100vw" alt="Illustrative: Pacific Northwest home concept for Board of Project Stewardship — not a bid or stamped plan" width="1280" height="723" decoding="async" data-defer-lcp loading="lazy">
+      <img class="hero-layer hero-layer-wire" id="home-hero-wire" src="./assets/hero/hero-wireframe-1280.webp" srcset="./assets/hero/hero-wireframe-640.webp 640w, ./assets/hero/hero-wireframe-1280.webp 1280w" sizes="100vw" alt="" width="1280" height="723" decoding="async" data-defer-lcp loading="lazy">
       <video class="hero-ambient-video" muted loop playsinline preload="none" poster="./assets/hero/board-sketch-to-home-poster.webp">
         <source src="./assets/hero/board-sketch-to-home-720.mp4" type="video/mp4">
       </video>
@@ -456,7 +976,7 @@
     <p class="hero-hint" id="home-hero-hint"><span class="hero-hint-video">Plans assemble into the finished home</span><span class="hero-hint-flashlight"><span class="hero-hint-fine">Hover to reveal the finished home</span><span class="hero-hint-coarse">Drag to reveal the finished home</span></span></p>
     <div class="hero-copy">
       <p class="hero-kicker">Pacific Northwest · King &amp; Snohomish · Seattle</p>
-      <h1 id="home-hero-title">Remodel directories and permit guides</h1>
+      <h2 id="home-hero-title">Remodel directories and permit guides</h2>
       <p class="hero-dek">See the build emerge from the plan. Educational homeowner concept — framing to finished cedar and glass. Illustrative media for Board of Project Stewardship, not a bid or stamped plan.</p>
       <div class="hero-ctas">
         <a class="hero-btn" href="./directory.html">Browse directories</a>
@@ -466,7 +986,7 @@
     <p class="hero-credit">Educational concept · not a bid or stamped plan</p>
   </section>
   <noscript><style>.flashlight-hero .hero-layer-wire,.flashlight-hero .hero-hint,.flashlight-hero .hero-cursor{display:none!important}</style></noscript>
-  <div class="max-w-6xl mx-auto px-4 pt-14 relative z-20 pb-24">
+  <div class="max-w-6xl mx-auto px-4 pt-10 relative z-20 pb-24">
     <section id="mission" class="mb-12">
     <iframe
       id="mesh-flow-mission"
@@ -617,167 +1137,6 @@
   </section>
 
 
-    <section id="how-the-board-works" class="mb-14">
-      <div class="mb-8 border-b border-white/10 pb-4">
-        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Process</span>
-        <h2 class="text-3xl font-black text-white tracking-tight">How the Board works</h2>
-        <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">A repeatable filter: research the work, verify public signals, weight local mastery, then publish an editorial shortlist homeowners can use.</p>
-      </div>
-      <div class="grid sm:grid-cols-2 gap-4">
-        <div class="bg-charcoal border border-white/10 hover:border-primary/40 rounded-xl p-5 card-hover">
-          <img src="./assets/images/home-process-research-800.webp" alt="Illustrative: editorial photo of plans and research materials for Board process" class="w-full h-36 object-cover rounded-lg border border-white/10 mb-4" width="800" height="450" loading="lazy" srcset="./assets/images/home-process-research-480.webp 480w, ./assets/images/home-process-research-800.webp 800w, ./assets/images/home-process-research-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
-          <div class="flex items-center gap-3 mb-3">
-            <span class="text-secondary font-black text-sm tracking-widest">01</span>
-            <i class="fas fa-magnifying-glass-chart text-secondary"></i>
-            <h3 class="text-lg font-black text-white tracking-tight">Research</h3>
-          </div>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Study how additions and remodels actually run across King County, Snohomish County, and Seattle — AHJ norms, coastal detailing, and stay-in-home vs vacate patterns.</p>
-        </div>
-        <div class="bg-charcoal border border-white/10 hover:border-primary/40 rounded-xl p-5 card-hover">
-          <img src="./assets/images/home-process-verify-800.webp" alt="Illustrative: verification and standards-check visual for Board editorial" class="w-full h-36 object-cover rounded-lg border border-white/10 mb-4" width="800" height="450" loading="lazy" srcset="./assets/images/home-process-verify-480.webp 480w, ./assets/images/home-process-verify-800.webp 800w, ./assets/images/home-process-verify-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
-          <div class="flex items-center gap-3 mb-3">
-            <span class="text-secondary font-black text-sm tracking-widest">02</span>
-            <i class="fas fa-id-card text-secondary"></i>
-            <h3 class="text-lg font-black text-white tracking-tight">Verify</h3>
-          </div>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Cross-check public WA L&amp;I signals and third-party review aggregates. Prefer firms homeowners can re-verify themselves before a deposit.</p>
-        </div>
-        <div class="bg-charcoal border border-white/10 hover:border-primary/40 rounded-xl p-5 card-hover">
-          <img src="./assets/images/home-process-build-800.webp" alt="Illustrative: Pacific Northwest home addition construction for Board editorial" class="w-full h-36 object-cover rounded-lg border border-white/10 mb-4" width="800" height="450" loading="lazy" srcset="./assets/images/home-process-build-480.webp 480w, ./assets/images/home-process-build-800.webp 800w, ./assets/images/home-process-build-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
-          <div class="flex items-center gap-3 mb-3">
-            <span class="text-secondary font-black text-sm tracking-widest">03</span>
-            <i class="fas fa-house-chimney-window text-secondary"></i>
-            <h3 class="text-lg font-black text-white tracking-tight">Local mastery</h3>
-          </div>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Weight local height limits, critical areas, and coastal weather sequencing — including Edmonds Bowl rules where they apply — not generic statewide marketing claims.</p>
-        </div>
-        <div class="bg-charcoal border border-white/10 hover:border-primary/40 rounded-xl p-5 card-hover">
-          <img src="./assets/images/home-process-shortlist-800.webp" alt="Illustrative: curated shortlist / directory editorial photo" class="w-full h-36 object-cover rounded-lg border border-white/10 mb-4" width="800" height="450" loading="lazy" srcset="./assets/images/home-process-shortlist-480.webp 480w, ./assets/images/home-process-shortlist-800.webp 800w, ./assets/images/home-process-shortlist-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
-          <div class="flex items-center gap-3 mb-3">
-            <span class="text-secondary font-black text-sm tracking-widest">04</span>
-            <i class="fas fa-list-check text-secondary"></i>
-            <h3 class="text-lg font-black text-white tracking-tight">Editorial shortlist</h3>
-          </div>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Publish ranked directories and field guides so homeowners can compare firms against standards — not paid placement.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="why-homeowners" class="mb-14">
-      <div class="mb-8 border-b border-white/10 pb-4">
-        <span class="text-secondary text-xs font-bold uppercase tracking-widest">For homeowners</span>
-        <h2 class="text-3xl font-black text-white tracking-tight">Why homeowners use the Board</h2>
-      </div>
-      <div class="grid md:grid-cols-3 gap-4 mb-6">
-        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
-          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-filter text-secondary mr-2"></i>Standards over lead-gen</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Directories emphasize editorial fit for King County, Snohomish County, and Seattle — not whoever bought the top ad slot.</p>
-        </div>
-        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
-          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-clipboard-list text-secondary mr-2"></i>Tools that travel with you</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Good Steward checklists keep discovery notes and phase status in your browser — useful with any licensed GC.</p>
-        </div>
-        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
-          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-shield-halved text-secondary mr-2"></i>Verify before you hire</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Every ranking page points you back to <a href="https://secure.lni.wa.gov/verify/" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> before deposits or demolition.</p>
-        </div>
-      </div>
-      <div class="flex flex-wrap gap-3">
-        <a href="./good-steward.html" class="bg-primary text-white px-5 py-3.5 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs shadow-glow-sleek">Good Steward guide &amp; tools</a>
-        <a href="./build-walkthrough.html" class="border border-white/20 bg-white/5 text-white px-5 py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Build Walkthrough</a>
-        <a href="./site-visit.html" class="border border-white/20 bg-white/5 text-white px-5 py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Site Visit Checklist</a>
-        <a href="./pm-dashboard.html" class="border border-white/20 bg-white/5 text-white px-5 py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">PM Dashboard</a>
-      </div>
-    </section>
-
-    <section id="why-ppg-number-one" class="bg-charcoal rounded-xl p-8 md:p-10 border border-secondary/35 mb-14 relative overflow-hidden">
-      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-primary"></div>
-      <div class="absolute -top-16 -left-16 w-72 h-72 bg-primary/10 blur-[90px] pointer-events-none rounded-full"></div>
-      <div class="relative z-10 grid lg:grid-cols-2 gap-8 items-start">
-        <div>
-          <span class="text-secondary font-bold text-xs uppercase tracking-[0.15em] flex items-center mb-3">
-            <i class="fas fa-trophy mr-2"></i> Board directory #1
-          </span>
-          <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-3">Why Pacific Pro Group ranks #1</h2>
-          <p class="text-slate-300 font-light leading-relaxed mb-4 max-w-3xl">
-            Pacific Pro Group currently holds the Board’s <strong class="text-white font-semibold">#1 directory position</strong>
-            for home additions and remodels in King County, Snohomish County, and Seattle based on the Board’s published evaluation framework — design-build continuity,
-            local focus, permit stewardship habits, and public review signals.
-            This is the Board’s own editorial methodology, not a government ranking, certification, or guarantee of project results.
-          </p>
-          <ul class="space-y-3 text-sm text-slate-300 font-light mb-6">
-            <li class="flex gap-3"><i class="fas fa-check text-secondary mt-1"></i><span><strong class="text-white">Design-build continuity</strong> — one stewarding path from discovery through build, fewer salesman-to-crew handoffs.</span></li>
-            <li class="flex gap-3"><i class="fas fa-check text-secondary mt-1"></i><span><strong class="text-white">King County, Snohomish County, and Seattle focus</strong> — residential additions and remodels, including Edmonds, not generic statewide lead funnels.</span></li>
-            <li class="flex gap-3"><i class="fas fa-check text-secondary mt-1"></i><span><strong class="text-white">Permit stewardship habits</strong> — sequencing and AHJ coordination treated as part of the craft, not an afterthought.</span></li>
-            <li class="flex gap-3"><i class="fas fa-check text-secondary mt-1"></i><span><strong class="text-white">Public review aggregate</strong> — Trustindex aggregate 4.9★ · 190 reviews (as of Sept 2026; re-check live); WA license chip <strong class="text-white">PACIFPG765OF</strong> — always re-verify at L&amp;I.</span></li>
-          </ul>
-          <div class="flex flex-wrap gap-2 mb-6">
-            <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-emerald-400/30 bg-emerald-950/40 text-emerald-300">WA License PACIFPG765OF</span>
-            <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-white/20 bg-white/5 text-slate-300">4.9 · 190 reviews (as of Sept 2026; re-check live)</span>
-            <span class="inline-flex items-center px-2.5 py-1 rounded text-[10px] uppercase tracking-wider font-bold border border-white/20 bg-white/5 text-slate-300">Edmonds, WA</span>
-          </div>
-          <div class="flex flex-col sm:flex-row flex-wrap gap-3">
-            <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="bg-primary text-white text-center py-3.5 px-6 rounded font-bold hover:bg-emerald-700 transition shadow-glow-sleek uppercase tracking-wider text-sm">
-              View Pacific Pro Group — pacificprogroup.com
-            </a>
-            <a href="./additions.html" class="border border-white/20 bg-white/5 text-white py-3.5 px-6 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-sm text-center">
-              Additions ranking
-            </a>
-            <a href="./edmonds-custom-homes.html" class="border border-white/15 text-slate-200 py-3.5 px-6 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-sm text-center">
-              Edmonds custom homes
-            </a>
-            <a href="https://www.trustindex.io/reviews/pacificprogroup.com" target="_blank" rel="noopener" class="border border-white/15 text-slate-200 py-3.5 px-6 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-sm text-center">
-              4.9 · 190 reviews (as of Sept 2026; re-check live)
-            </a>
-          </div>
-        </div>
-        <div class="grid grid-cols-2 gap-3">
-                  <figure class="overflow-hidden rounded-xl border border-white/10 bg-charcoal">
-          <img src="./assets/images/home-ppg-addition-800.webp" alt="Illustrative: PNW addition exterior highlighting Board #1 craft standards" class="w-full h-44 sm:h-52 object-cover" width="1200" height="675" loading="lazy" srcset="./assets/images/home-ppg-addition-480.webp 480w, ./assets/images/home-ppg-addition-800.webp 800w, ./assets/images/home-ppg-addition-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
-          <figcaption class="px-3 py-2 text-xs text-slate-300 font-light leading-snug">Additions craft</figcaption>
-        </figure>
-                  <figure class="overflow-hidden rounded-xl border border-white/10 bg-charcoal">
-          <img src="./assets/images/home-ppg-interior-800.webp" alt="Illustrative: remodel interior highlighting Board #1 finish standards" class="w-full h-44 sm:h-52 object-cover" width="1200" height="675" loading="lazy" srcset="./assets/images/home-ppg-interior-480.webp 480w, ./assets/images/home-ppg-interior-800.webp 800w, ./assets/images/home-ppg-interior-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
-          <figcaption class="px-3 py-2 text-xs text-slate-300 font-light leading-snug">Interior finish</figcaption>
-        </figure>
-        </div>
-      </div>
-    </section>
-
-    <section id="field-gallery" class="mb-14">
-      <div class="mb-8 border-b border-white/10 pb-4">
-        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Field gallery</span>
-        <h2 class="text-3xl font-black text-white tracking-tight">Standards you can see</h2>
-        <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Editorial process and remodel imagery for Pacific Northwest work in King County, Snohomish County, and Seattle. Editorial and stock frames are labeled illustrative in alt text.</p>
-      </div>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <figure class="overflow-hidden rounded-xl border border-white/10 bg-charcoal">
-          <img src="./assets/images/home-process-build-800.webp" alt="Illustrative: PNW home addition exterior for Board editorial" class="w-full h-44 sm:h-52 object-cover" width="1200" height="675" loading="lazy" srcset="./assets/images/home-process-build-480.webp 480w, ./assets/images/home-process-build-800.webp 800w, ./assets/images/home-process-build-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
-          <figcaption class="px-3 py-2 text-xs text-slate-300 font-light leading-snug">Additions &amp; coastal detailing</figcaption>
-        </figure>
-        <figure class="overflow-hidden rounded-xl border border-white/10 bg-charcoal">
-          <img src="./assets/images/home-ppg-addition-800.webp" alt="Illustrative: PNW remodel exterior for Board #1 listing" class="w-full h-44 sm:h-52 object-cover" width="1200" height="675" loading="lazy" srcset="./assets/images/home-ppg-addition-480.webp 480w, ./assets/images/home-ppg-addition-800.webp 800w, ./assets/images/home-ppg-addition-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
-          <figcaption class="px-3 py-2 text-xs text-slate-300 font-light leading-snug">Board #1 — quality remodel craft</figcaption>
-        </figure>
-        <figure class="overflow-hidden rounded-xl border border-white/10 bg-charcoal">
-          <img src="./assets/images/home-ppg-interior-800.webp" alt="Illustrative: remodeled kitchen interior for Board editorial" class="w-full h-44 sm:h-52 object-cover" width="1200" height="675" loading="lazy" srcset="./assets/images/home-ppg-interior-480.webp 480w, ./assets/images/home-ppg-interior-800.webp 800w, ./assets/images/home-ppg-interior-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
-          <figcaption class="px-3 py-2 text-xs text-slate-300 font-light leading-snug">Finish discipline indoors</figcaption>
-        </figure>
-        <figure class="overflow-hidden rounded-xl border border-white/10 bg-charcoal">
-          <img src="./assets/images/home-gallery-dryin-800.webp" alt="Illustrative: dry-in / framing stage for Board editorial" class="w-full h-44 sm:h-52 object-cover" width="1200" height="675" loading="lazy" srcset="./assets/images/home-gallery-dryin-480.webp 480w, ./assets/images/home-gallery-dryin-800.webp 800w, ./assets/images/home-gallery-dryin-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
-          <figcaption class="px-3 py-2 text-xs text-slate-300 font-light leading-snug">Dry-in &amp; weather protection</figcaption>
-        </figure>
-        <figure class="overflow-hidden rounded-xl border border-white/10 bg-charcoal">
-          <img src="./assets/images/home-gallery-finish-800.webp" alt="Illustrative: finished remodel interior for Board editorial" class="w-full h-44 sm:h-52 object-cover" width="1200" height="675" loading="lazy" srcset="./assets/images/home-gallery-finish-480.webp 480w, ./assets/images/home-gallery-finish-800.webp 800w, ./assets/images/home-gallery-finish-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
-          <figcaption class="px-3 py-2 text-xs text-slate-300 font-light leading-snug">Punch-ready finishes</figcaption>
-        </figure>
-        <figure class="overflow-hidden rounded-xl border border-white/10 bg-charcoal">
-          <img src="./assets/images/home-process-research-800.webp" alt="Illustrative: plans and research desk for Board editorial" class="w-full h-44 sm:h-52 object-cover" width="1200" height="675" loading="lazy" srcset="./assets/images/home-process-research-480.webp 480w, ./assets/images/home-process-research-800.webp 800w, ./assets/images/home-process-research-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
-          <figcaption class="px-3 py-2 text-xs text-slate-300 font-light leading-snug">Research before ranking</figcaption>
-        </figure>
-      </div>
-    </section>
-
     <section id="integrity-shield" class="mb-14">
     <iframe
       id="integrity-shield-showcase"
@@ -807,116 +1166,6 @@
     </section>
 
 
-    <section class="mb-14">
-      <div class="mb-8 border-b border-white/10 pb-4">
-        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Homeowner practice</span>
-        <h2 class="text-3xl font-black text-white tracking-tight">What a good steward does</h2>
-        <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Concrete habits that keep remodels, additions, and custom work accountable — whether you hire a design-build firm or self-manage trades.</p>
-      </div>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-        <div class="bg-charcoal border border-white/10 rounded-xl p-5">
-          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-id-card text-secondary mr-2"></i>Verify WA L&amp;I</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Confirm active contractor license, bonding, and insurance on <a href="https://secure.lni.wa.gov/verify/" target="_blank" rel="noopener" class="text-secondary hover:underline">L&amp;I Verify</a> before any deposit or start date.</p>
-        </div>
-        <div class="bg-charcoal border border-white/10 rounded-xl p-5">
-          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-file-contract text-secondary mr-2"></i>Written scope</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Insist on a written scope of work, allowances, and exclusions — not a handshake estimate — before demolition or ordering long-lead materials.</p>
-        </div>
-        <div class="bg-charcoal border border-white/10 rounded-xl p-5">
-          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-user-tie text-secondary mr-2"></i>One steward contact</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Name a single project steward for decisions and schedule. Avoid salesman-to-crew handoffs with no continuity.</p>
-        </div>
-        <div class="bg-charcoal border border-white/10 rounded-xl p-5">
-          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-stamp text-secondary mr-2"></i>Permit ownership</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Know who pulls and owns each permit, who schedules inspections, and how corrections are closed before cover-up.</p>
-        </div>
-        <div class="bg-charcoal border border-white/10 rounded-xl p-5">
-          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-exchange-alt text-secondary mr-2"></i>Change-order discipline</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Require written change orders with price and schedule impact before extra work starts — no verbal “we’ll figure it out.”</p>
-        </div>
-        <div class="bg-charcoal border border-white/10 rounded-xl p-5">
-          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-cloud-rain text-secondary mr-2"></i>Weather &amp; dry-in</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">For additions and roof work, demand a dry-in plan: temporary weather protection, sequencing, and moisture checks before finishes.</p>
-        </div>
-        <div class="bg-charcoal border border-white/10 rounded-xl p-5 sm:col-span-2 lg:col-span-3">
-          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-clipboard-check text-secondary mr-2"></i>Punch list before final pay</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Walk a written punch list with photos, retain final payment until items are closed, and keep manuals/warranty contacts with the project file.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="mb-14" id="cornerstone-reading">
-      <div class="mb-8 border-b border-white/10 pb-4">
-        <span class="text-secondary text-xs font-bold uppercase tracking-widest">From the Board journal</span>
-        <h2 class="text-3xl font-black text-white tracking-tight">Cornerstone reading</h2>
-        <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Six editorial posts that pair with Board directories and Good Steward tools — permits, hiring, waterproofing, and addition path decisions. Educational only; no invented prices or timelines.</p>
-      </div>
-      <ul class="grid sm:grid-cols-2 gap-3 text-sm text-slate-300 font-light">
-        <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-08-12-edmonds-home-addition-permit-basics.html" class="text-secondary hover:underline font-semibold">Edmonds home addition permit basics</a> — AHJ start-here habits before design freeze.</li>
-        <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-08-11-hire-design-build-edmonds.html" class="text-secondary hover:underline font-semibold">Hire design-build in Edmonds</a> — when one steward beats a trade-only chase.</li>
-        <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-08-18-pnw-bathroom-waterproofing-essentials.html" class="text-secondary hover:underline font-semibold">PNW bathroom waterproofing essentials</a> — wet-area discipline for coastal baths.</li>
-        <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-08-09-second-story-vs-teardown-edmonds.html" class="text-secondary hover:underline font-semibold">Second story vs teardown (Edmonds)</a> — compare paths without invented cost claims.</li>
-        <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-08-12-hire-kitchen-remodeler-king-snohomish.html" class="text-secondary hover:underline font-semibold">Hire a kitchen remodeler (King &amp; Snohomish)</a> — shortlist habits before cabinet day.</li>
-        <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-09-07-adu-planning-edmonds-wa.html" class="text-secondary hover:underline font-semibold">ADU planning Edmonds WA</a> — parcel and portal honesty before stock plans.</li>
-      </ul>
-      <p class="text-sm text-slate-500 font-light mt-4"><a href="./blog.html" class="text-secondary hover:underline">Browse the full blog</a> · <a href="./learn.html" class="text-secondary hover:underline">Learn hub</a> · <a href="./how-we-rank.html" class="text-secondary hover:underline">How we rank</a></p>
-    </section>
-
-    <section class="mb-14" id="learn">
-      <div class="mb-8 border-b border-white/10 pb-4">
-        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Learn before you hire</span>
-        <h2 class="text-3xl font-black text-white tracking-tight">Planning hubs &amp; client tools</h2>
-        <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Educational Board guides for remodels and additions — paired with verification tools. No invented prices, licenses, or awards.</p>
-      </div>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-        <a href="./hiring-a-contractor.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover block">
-          <h3 class="text-base font-black text-white mb-2">Hiring a contractor</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">L&amp;I verify path, interview habits, and how Board rankings work.</p>
-        </a>
-        <a href="./kitchen-remodel-planning.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover block">
-          <h3 class="text-base font-black text-white mb-2">Kitchen remodel planning</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Layout, allowances, and permit ownership before cabinet day.</p>
-        </a>
-        <a href="./bathroom-waterproofing-guide.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover block">
-          <h3 class="text-base font-black text-white mb-2">Bathroom waterproofing</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Wet-area systems and coastal moisture habits for Puget Sound baths.</p>
-        </a>
-        <a href="./home-addition-planning.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover block">
-          <h3 class="text-base font-black text-white mb-2">Home addition planning</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Jurisdiction, dry-in sequencing, and addition shortlist links.</p>
-        </a>
-        <a href="./second-story-vs-teardown.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover block">
-          <h3 class="text-base font-black text-white mb-2">Second story vs teardown</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Compare paths without invented cost guarantees.</p>
-        </a>
-        <div class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover">
-          <h3 class="text-base font-black text-white mb-2">Bid comparison &amp; red flags</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed"><a href="./bid-comparison.html" class="text-secondary hover:underline">Bid checklist</a> · <a href="./red-flags-hiring.html" class="text-secondary hover:underline">red flags</a> · <a href="./project-timeline.html" class="text-secondary hover:underline">timeline phases</a>.</p>
-        </div>
-      </div>
-      <p class="text-sm text-slate-400 font-light mb-3"><a href="./learn.html" class="text-secondary hover:underline font-semibold">Browse the full Learn hub</a> — permits, ADU, verify, checklists, stewardship layers, glossary, videos, and Good Steward tools.</p>
-      <p class="text-sm text-slate-500 font-light">City hubs: <a href="./edmonds.html" class="text-secondary hover:underline">Edmonds</a> · <a href="./greenwood.html" class="text-secondary hover:underline">Greenwood</a> · <a href="./lake-forest-park.html" class="text-secondary hover:underline">Lake Forest Park</a> · <a href="./mountlake-terrace.html" class="text-secondary hover:underline">Mountlake Terrace</a> · <a href="./mill-creek.html" class="text-secondary hover:underline">Mill Creek</a> · <a href="./mukilteo.html" class="text-secondary hover:underline">Mukilteo</a> · <a href="./kirkland.html" class="text-secondary hover:underline">Kirkland</a> · <a href="./bothell.html" class="text-secondary hover:underline">Bothell</a> · <a href="./queen-anne.html" class="text-secondary hover:underline">Queen Anne</a> · <a href="./phinney-ridge.html" class="text-secondary hover:underline">Phinney Ridge</a> · <a href="./shoreline.html" class="text-secondary hover:underline">Shoreline</a> · <a href="./lynnwood.html" class="text-secondary hover:underline">Lynnwood</a> · <a href="./ballard.html" class="text-secondary hover:underline">Ballard</a> · <a href="./magnolia.html" class="text-secondary hover:underline">Magnolia</a></p>
-    </section>
-
-    <section class="bg-charcoal rounded-xl p-8 md:p-10 border border-primary/25 mb-14 relative overflow-hidden">
-      <div class="absolute -bottom-20 -right-20 w-56 h-56 bg-primary/15 blur-[70px] pointer-events-none rounded-full"></div>
-      <div class="relative z-10 md:flex md:items-center md:justify-between gap-8">
-        <div class="mb-6 md:mb-0">
-          <span class="text-secondary font-bold text-xs uppercase tracking-[0.15em] flex items-center mb-3">
-            <i class="fas fa-map-location-dot mr-2"></i> Edmonds directory
-          </span>
-          <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-3">Edmonds custom home builders</h2>
-          <p class="text-slate-300 font-light leading-relaxed max-w-2xl">
-            Edmonds-first editorial list, a local permit guide, and planning tools.
-            Pacific Pro Group ranks #1 with a verified <strong class="text-white font-semibold">4.9 · 190 reviews (as of Sept 2026; re-check live)</strong>.
-          </p>
-        </div>
-        <a href="./edmonds-custom-homes.html" class="shrink-0 bg-primary text-white text-center py-3.5 px-6 rounded font-bold hover:bg-emerald-700 transition shadow-glow-sleek uppercase tracking-wider text-sm whitespace-nowrap">
-          Open Edmonds directory <i class="fas fa-arrow-right ml-1 text-xs"></i>
-        </a>
-      </div>
-    </section>
-
     <section id="topic-carousel" class="mb-14">
     <iframe
       id="circular-directory"
@@ -945,15 +1194,6 @@
     </script>
     </section>
 
-    <section class="mb-8">
-      <div class="mb-6 border-b border-white/10 pb-4">
-        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Directories</span>
-        <h2 class="text-2xl font-black text-white tracking-tight">Explore the Board’s listings</h2>
-      </div>
-      <div class="flex flex-wrap gap-3">
-        <a href="./additions.html" class="bg-primary text-white hover:bg-emerald-700 shadow-glow-sleek px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">Browse Additions Directory</a><a href="./custom-homes.html" class="border border-white/20 bg-white/5 text-white hover:border-secondary hover:text-secondary px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">Custom Homes</a><a href="./edmonds-custom-homes.html" class="border border-white/20 bg-white/5 text-white hover:border-secondary hover:text-secondary px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">Edmonds custom homes</a><a href="./kitchen.html" class="border border-white/20 bg-white/5 text-white hover:border-secondary hover:text-secondary px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">Kitchen</a><a href="./bathrooms.html" class="border border-white/20 bg-white/5 text-white hover:border-secondary hover:text-secondary px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">Bathrooms</a><a href="./commercial.html" class="border border-white/20 bg-white/5 text-white hover:border-secondary hover:text-secondary px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">Commercial</a><a href="./spec-homes.html" class="border border-white/20 bg-white/5 text-white hover:border-secondary hover:text-secondary px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">Spec Homes</a><a href="./trades.html" class="border border-white/20 bg-white/5 text-white hover:border-secondary hover:text-secondary px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">Trades</a><a href="./blog.html" class="border border-white/20 bg-white/5 text-white hover:border-secondary hover:text-secondary px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">Blog</a><a href="./good-steward.html" class="border border-white/20 bg-white/5 text-white hover:border-secondary hover:text-secondary px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">Good Steward</a>
-      </div>
-    </section>
   </div>
   <div class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
     <section id="tools" class="mb-6">

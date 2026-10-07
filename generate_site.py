@@ -1319,8 +1319,13 @@ def apply_image_pass(html: str) -> str:
         if not src_m:
             return match.group(0)
         prefix, rel = _split_asset_url(src_m.group(1))
-        is_first = state["first"]
-        state["first"] = False
+        # Homepage stills marked data-defer-lcp stay lazy so a text hero can be LCP.
+        if "data-defer-lcp" in inner:
+            state["first"] = False
+            is_first = False
+        else:
+            is_first = state["first"]
+            state["first"] = False
         if rel and "srcset=" not in inner:
             variants = variant_rels(rel)
             sibling = ""
@@ -3447,7 +3452,238 @@ def ppg_widgets_script() -> str:
 
 # ---------- Page builders ----------
 
-def home_flashlight_hero() -> tuple[str, str, str] | None:
+def home_plan_hero() -> tuple[str, str]:
+    """White homepage hero. CSS dollhouse only — the 3D library stays on the plan page."""
+    html_block = f"""  <section class="plan-home-hero" id="plan-home-hero" aria-labelledby="plan-home-title">
+    <div class="plan-home-grid">
+      <div class="plan-home-copy">
+        <p class="plan-home-kicker">{GEO_KICKER_HTML}</p>
+        <h1 id="plan-home-title">Walk through a home in 3D</h1>
+        <p class="plan-home-dek">Trace a builder plan, watch the walls rise, and step inside Cedar Lane House, a two-storey sample. Illustration only. Confirm the drawing with your builder, architect, or the permit set. Not for construction.</p>
+        <div class="plan-home-ctas">
+          <a class="plan-home-btn" href="./plan-walkthrough/">Walk through a home in 3D</a>
+          <a class="plan-home-text" href="./directory.html">Browse directories</a>
+        </div>
+      </div>
+      <a class="plan-home-stage" href="./plan-walkthrough/" aria-label="Walk through a home in 3D">
+        <span class="ph-sheet" aria-hidden="true">
+          <i class="ph-trace a"></i>
+          <i class="ph-trace b"></i>
+          <i class="ph-trace c"></i>
+          <i class="ph-trace d"></i>
+        </span>
+        <span class="ph-build" aria-hidden="true">
+          <span class="ph-roof"></span>
+          <span class="ph-floor upper"><i></i><i class="win"></i><i></i></span>
+          <span class="ph-floor main"><i></i><i class="door"></i><i></i><i></i></span>
+        </span>
+        <span class="ph-caption">Cedar Lane House</span>
+      </a>
+    </div>
+    <nav class="plan-home-jumps" aria-label="Start here">
+      <a href="./plan-walkthrough/">Plan to 3D</a>
+      <a href="./directory.html">Directories</a>
+      <a href="./verify-contractor.html">Verify a contractor</a>
+      <a href="./how-we-rank.html">How we rank</a>
+      <a href="./good-steward.html">Good Steward</a>
+    </nav>
+  </section>"""
+    css = """  <style>
+    .plan-home-hero {
+      background: linear-gradient(180deg, #ffffff 0%, #f4f0e8 100%);
+      color: #0f172a;
+      padding: 1.25rem 1rem 1.1rem;
+    }
+    .plan-home-grid {
+      max-width: 72rem;
+      margin: 0 auto;
+      display: grid;
+      gap: 1.25rem;
+      align-items: center;
+    }
+    .plan-home-kicker {
+      margin: 0;
+      color: #0e7490;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .plan-home-hero h1 {
+      margin: 0.45rem 0 0;
+      max-width: 12ch;
+      color: #0f172a;
+      font-family: Inter, system-ui, sans-serif;
+      font-weight: 700;
+      font-size: clamp(2.05rem, 8vw, 3.5rem);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+    }
+    .plan-home-dek {
+      margin: 0.85rem 0 0;
+      max-width: 42rem;
+      color: #334155;
+      font-size: 1rem;
+      line-height: 1.55;
+    }
+    .plan-home-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.85rem 1.25rem;
+      margin-top: 1.15rem;
+    }
+    .plan-home-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 3rem;
+      padding: 0.8rem 1.15rem;
+      border-radius: 999px;
+      background: #0f172a;
+      color: #f8fafc;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.98rem;
+      box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.55);
+    }
+    .plan-home-btn:hover { background: #1e293b; }
+    .plan-home-text {
+      color: #0f172a;
+      font-weight: 700;
+      text-decoration: none;
+      border-bottom: 2px solid #22d3ee;
+      padding-bottom: 0.1rem;
+    }
+    .plan-home-hero a:focus-visible {
+      outline: 2px solid #0891b2;
+      outline-offset: 3px;
+    }
+    .plan-home-stage {
+      position: relative;
+      display: block;
+      height: 16rem;
+      border-radius: 1.1rem;
+      overflow: hidden;
+      text-decoration: none;
+      background: #f4f0e8;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+    }
+    .ph-sheet, .ph-build { position: absolute; inset: 0; }
+    .ph-trace {
+      position: absolute;
+      height: 2px;
+      background: #22d3ee;
+      transform-origin: left center;
+      transform: scaleX(0);
+      animation: ph-draw 0.7s ease forwards;
+    }
+    .ph-trace.a { left: 16%; top: 38%; width: 46%; }
+    .ph-trace.b { left: 16%; top: 62%; width: 68%; animation-delay: 0.15s; }
+    .ph-trace.c, .ph-trace.d {
+      width: 2px;
+      height: 24%;
+      top: 38%;
+      transform-origin: center top;
+      transform: scaleY(0);
+      animation-name: ph-draw-y;
+    }
+    .ph-trace.c { left: 16%; animation-delay: 0.28s; }
+    .ph-trace.d { left: 62%; animation-delay: 0.4s; }
+    .ph-build {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 2.4rem;
+    }
+    .ph-roof {
+      width: 0;
+      height: 0;
+      border-left: 5.1rem solid transparent;
+      border-right: 5.1rem solid transparent;
+      border-bottom: 2.15rem solid #0f172a;
+      transform-origin: top center;
+      animation: ph-drop 0.55s ease 1.35s both;
+    }
+    .ph-floor {
+      width: 9.2rem;
+      height: 2.7rem;
+      display: flex;
+      align-items: stretch;
+      gap: 0.28rem;
+      margin-top: 0.2rem;
+    }
+    .ph-floor i {
+      flex: 1;
+      background: #fff;
+      border: 2px solid #67e8f9;
+      border-bottom: 0;
+      transform-origin: center bottom;
+      transform: scaleY(0);
+      animation: ph-rise 0.7s ease forwards;
+    }
+    .ph-floor.main i { animation-delay: 0.55s; }
+    .ph-floor.upper i { animation-delay: 1.05s; }
+    .ph-floor i.door { background: linear-gradient(#fff 55%, #0f172a 55%); }
+    .ph-floor i.win { background: linear-gradient(#fff 20%, #22d3ee 20% 70%, #fff 70%); }
+    .ph-caption {
+      position: absolute;
+      left: 0.8rem;
+      bottom: 0.7rem;
+      margin: 0;
+      color: #0f172a;
+      background: rgba(255, 255, 255, 0.88);
+      border-radius: 999px;
+      padding: 0.28rem 0.7rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .plan-home-jumps {
+      max-width: 72rem;
+      margin: 1rem auto 0;
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 0.15rem;
+    }
+    .plan-home-jumps a {
+      flex: 0 0 auto;
+      color: #0f172a;
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border: 1px solid rgba(15, 23, 42, 0.14);
+      background: #fff;
+      border-radius: 999px;
+      padding: 0.45rem 0.75rem;
+    }
+    .plan-home-jumps a:hover { border-color: #22d3ee; }
+    @media (min-width: 860px) {
+      .plan-home-hero { padding: 2.25rem 1.5rem 1.35rem; }
+      .plan-home-grid { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 2.5rem; }
+      .plan-home-stage { height: 22rem; }
+      .plan-home-btn { width: auto; }
+    }
+    @media (max-width: 859px) {
+      .plan-home-btn { width: 100%; }
+    }
+    @keyframes ph-draw { to { transform: scaleX(1); } }
+    @keyframes ph-draw-y { to { transform: scaleY(1); } }
+    @keyframes ph-rise { to { transform: scaleY(1); } }
+    @keyframes ph-drop { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) {
+      .ph-trace, .ph-floor i, .ph-roof { animation: none; transform: none; opacity: 1; }
+    }
+  </style>
+"""
+    return html_block, css
+
+
+def home_flashlight_hero(supporting: bool = False) -> tuple[str, str, str] | None:
     """Homepage hero: ambient sketch-to-home video, flashlight only if playback fails.
 
     Returns (html, extra_head, extra_scripts), or None when the stills are not on disk.
@@ -3483,10 +3719,14 @@ def home_flashlight_hero() -> tuple[str, str, str] | None:
       </video>
       <button type="button" class="hero-play" id="home-hero-play">Play video</button>
       <button type="button" class="hero-play hero-pause" id="home-hero-pause">Pause video</button>"""
-    html_block = f"""  <section class="flashlight-hero" id="home-hero" aria-labelledby="home-hero-title">
+    section_cls = "flashlight-hero is-supporting" if supporting else "flashlight-hero"
+    heading = "h2" if supporting else "h1"
+    finished_attrs = ' decoding="async" data-defer-lcp loading="lazy"' if supporting else ' decoding="async" fetchpriority="high"'
+    wire_attrs = ' decoding="async" data-defer-lcp loading="lazy"'
+    html_block = f"""  <section class="{section_cls}" id="home-hero" aria-labelledby="home-hero-title">
     <div class="hero-stage">
-      <img class="hero-layer hero-layer-finished" src="{finished}"{fin_attr} alt="Illustrative Pacific Northwest home concept for Board of Project Stewardship — not a bid or stamped plan" width="1280" height="723" decoding="async" fetchpriority="high">
-      <img class="hero-layer hero-layer-wire" id="home-hero-wire" src="{wire}"{wire_attr} alt="" width="1280" height="723" decoding="async" loading="lazy">
+      <img class="hero-layer hero-layer-finished" src="{finished}"{fin_attr} alt="Illustrative Pacific Northwest home concept for Board of Project Stewardship — not a bid or stamped plan" width="1280" height="723"{finished_attrs}>
+      <img class="hero-layer hero-layer-wire" id="home-hero-wire" src="{wire}"{wire_attr} alt="" width="1280" height="723"{wire_attrs}>
 {video_html}
     </div>
     <div class="hero-scrim" aria-hidden="true"></div>
@@ -3495,7 +3735,7 @@ def home_flashlight_hero() -> tuple[str, str, str] | None:
     <p class="hero-hint" id="home-hero-hint"><span class="hero-hint-video">Plans assemble into the finished home</span><span class="hero-hint-flashlight"><span class="hero-hint-fine">Hover to reveal the finished home</span><span class="hero-hint-coarse">Drag to reveal the finished home</span></span></p>
     <div class="hero-copy">
       <p class="hero-kicker">{GEO_KICKER_HTML}</p>
-      <h1 id="home-hero-title">Remodel directories and permit guides</h1>
+      <{heading} id="home-hero-title">Remodel directories and permit guides</{heading}>
       <p class="hero-dek">See the build emerge from the plan. Educational homeowner concept — framing to finished cedar and glass. Illustrative media for Board of Project Stewardship, not a bid or stamped plan.</p>
       <div class="hero-ctas">
         <a class="hero-btn" href="./directory.html">Browse directories</a>
@@ -3505,7 +3745,9 @@ def home_flashlight_hero() -> tuple[str, str, str] | None:
     <p class="hero-credit">Educational concept · not a bid or stamped plan</p>
   </section>
   <noscript><style>.flashlight-hero .hero-layer-wire,.flashlight-hero .hero-hint,.flashlight-hero .hero-cursor{{display:none!important}}</style></noscript>"""
-    if fin_set:
+    if supporting:
+        preload = ""
+    elif fin_set:
         preload = f'  <link rel="preload" as="image" href="{finished}" imagesrcset="{fin_set}" imagesizes="100vw" fetchpriority="high">'
     else:
         preload = f'  <link rel="preload" as="image" href="{finished}" fetchpriority="high">'
@@ -3659,7 +3901,8 @@ def home_flashlight_hero() -> tuple[str, str, str] | None:
       letter-spacing: .16em;
       text-transform: uppercase;
     }}
-    .flashlight-hero h1 {{
+    .flashlight-hero h1,
+    .flashlight-hero h2 {{
       margin: 14px 0 0;
       max-width: 16ch;
       color: #fff;
@@ -3773,6 +4016,18 @@ def home_flashlight_hero() -> tuple[str, str, str] | None:
       .flashlight-hero .hero-hint,
       .flashlight-hero .hero-play,
       .flashlight-hero .hero-ambient-video {{ display: none !important; }}
+    }}
+    .flashlight-hero.is-supporting {{
+      min-height: 22rem;
+      height: 22rem;
+      cursor: auto;
+    }}
+    .flashlight-hero.is-supporting .hero-cursor {{ display: none; }}
+    @media (max-width: 860px) {{
+      .flashlight-hero.is-supporting {{
+        min-height: 28rem;
+        height: 28rem;
+      }}
     }}
   </style>
 """
@@ -4033,7 +4288,7 @@ def build_about() -> str:
             return ""
         src = prefix_asset(rel, "")
         return f"""        <figure class="overflow-hidden rounded-xl border border-white/10 bg-charcoal">
-          <img src="{src}" alt="{esc(alt)}" class="w-full h-44 sm:h-52 object-cover" width="1200" height="675" loading="lazy">
+          <img src="{src}" alt="{esc(alt)}" class="w-full h-44 sm:h-52 object-cover" width="1200" height="675" loading="lazy" data-defer-lcp>
           <figcaption class="px-3 py-2 text-xs text-slate-300 font-light leading-snug">{esc(caption)}</figcaption>
         </figure>"""
 
@@ -4076,7 +4331,7 @@ def build_about() -> str:
         media = ""
         if asset_exists(rel):
             src = prefix_asset(rel, "")
-            media = f'<img src="{src}" alt="{esc(alt)}" class="w-full h-36 object-cover rounded-lg border border-white/10 mb-4" width="800" height="450" loading="lazy">'
+            media = f'<img src="{src}" alt="{esc(alt)}" class="w-full h-36 object-cover rounded-lg border border-white/10 mb-4" width="800" height="450" loading="lazy" data-defer-lcp>'
         process_cards.append(f"""        <div class="bg-charcoal border border-white/10 hover:border-primary/40 rounded-xl p-5 card-hover">
           {media}
           <div class="flex items-center gap-3 mb-3">
@@ -4125,74 +4380,17 @@ def build_about() -> str:
         )
     )
 
-    flash = home_flashlight_hero()
+    plan_html, plan_css = home_plan_hero()
+    flash = home_flashlight_hero(supporting=True)
     if flash:
         hero_html, hero_head, hero_js = flash
-        content_open = '  <div class="max-w-6xl mx-auto px-4 pt-14 relative z-20 pb-24">'
     else:
-        _hero_rel, _hero_alt = DIR_HERO_IMAGES.get("about", (None, ""))
-        hero_html = hero(
-            f"Construction standards · {GEO_KICKER_HTML} · {YEAR}",
-            'Board of Project Stewardship<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">Standards and contractor directories for the Pacific Northwest</span>',
-            esc(BOARD_ONE_LINER),
-            ["Published directories", "Public L&amp;I signals", "Local permit mastery"],
-            image_rel=_hero_rel if _hero_rel and asset_exists(_hero_rel) else None,
-            image_alt=_hero_alt,
-        )
-        hero_head = ""
-        hero_js = ""
-        content_open = '  <div class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">'
-    body = f"""{hero_html}
+        hero_html, hero_head, hero_js = "", "", ""
+    hero_head = plan_css + hero_head
+    content_open = '  <div class="max-w-6xl mx-auto px-4 pt-10 relative z-20">'
+    content_resume = '  <div class="max-w-6xl mx-auto px-4 pt-10 relative z-20 pb-24">'
+    body = f"""{plan_html}
 {content_open}
-{board_section_embed(
-        "mission",
-        "mesh-flow-mission",
-        "mesh-flow-backdrop.html",
-        "Mission — Board of Project Stewardship",
-        1100,
-        extra_class="mb-12",
-    )}
-
-{build_walkthrough_home_section()}
-
-    <section id="how-the-board-works" class="mb-14">
-      <div class="mb-8 border-b border-white/10 pb-4">
-        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Process</span>
-        <h2 class="text-3xl font-black text-white tracking-tight">How the Board works</h2>
-        <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">A repeatable filter: research the work, verify public signals, weight local mastery, then publish an editorial shortlist homeowners can use.</p>
-      </div>
-      <div class="grid sm:grid-cols-2 gap-4">
-{chr(10).join(process_cards)}
-      </div>
-    </section>
-
-    <section id="why-homeowners" class="mb-14">
-      <div class="mb-8 border-b border-white/10 pb-4">
-        <span class="text-secondary text-xs font-bold uppercase tracking-widest">For homeowners</span>
-        <h2 class="text-3xl font-black text-white tracking-tight">Why homeowners use the Board</h2>
-      </div>
-      <div class="grid md:grid-cols-3 gap-4 mb-6">
-        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
-          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-filter text-secondary mr-2"></i>Standards over lead-gen</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Directories emphasize editorial fit for King County, Snohomish County, and Seattle — not whoever bought the top ad slot.</p>
-        </div>
-        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
-          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-clipboard-list text-secondary mr-2"></i>Tools that travel with you</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Good Steward checklists keep discovery notes and phase status in your browser — useful with any licensed GC.</p>
-        </div>
-        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
-          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-shield-halved text-secondary mr-2"></i>Verify before you hire</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Every ranking page points you back to <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> before deposits or demolition.</p>
-        </div>
-      </div>
-      <div class="flex flex-wrap gap-3">
-        <a href="./good-steward.html" class="bg-primary text-white px-5 py-3.5 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs shadow-glow-sleek">Good Steward guide &amp; tools</a>
-        <a href="{public_tool_href('build-walkthrough')}" class="border border-white/20 bg-white/5 text-white px-5 py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Build Walkthrough</a>
-        <a href="{public_tool_href('site-visit')}" class="border border-white/20 bg-white/5 text-white px-5 py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Site Visit Checklist</a>
-        <a href="{public_tool_href('pm-dashboard')}" class="border border-white/20 bg-white/5 text-white px-5 py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">PM Dashboard</a>
-      </div>
-    </section>
-
     <section id="why-ppg-number-one" class="bg-charcoal rounded-xl p-8 md:p-10 border border-secondary/35 mb-14 relative overflow-hidden">
       <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-primary"></div>
       <div class="absolute -top-16 -left-16 w-72 h-72 bg-primary/10 blur-[90px] pointer-events-none rounded-full"></div>
@@ -4241,24 +4439,53 @@ def build_about() -> str:
       </div>
     </section>
 
-    <section id="field-gallery" class="mb-14">
-      <div class="mb-8 border-b border-white/10 pb-4">
-        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Field gallery</span>
-        <h2 class="text-3xl font-black text-white tracking-tight">Standards you can see</h2>
-        <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Editorial process and remodel imagery for Pacific Northwest work in King County, Snohomish County, and Seattle. Editorial and stock frames are labeled illustrative in alt text.</p>
+    <section class="mb-14">
+      <div class="mb-6 border-b border-white/10 pb-4">
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Directories</span>
+        <h2 class="text-2xl font-black text-white tracking-tight">Explore the Board’s listings</h2>
       </div>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-{gallery}
+      <div class="flex flex-wrap gap-3">
+        {''.join(cta_html)}
       </div>
     </section>
 
-{board_section_embed(
-        "integrity-shield",
-        "integrity-shield-showcase",
-        "integrity-shield-showcase.html",
-        "Integrity Shield — six stewardship layers",
-        1400,
-    )}
+    <section id="why-homeowners" class="mb-14">
+      <div class="mb-8 border-b border-white/10 pb-4">
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">For homeowners</span>
+        <h2 class="text-3xl font-black text-white tracking-tight">Why homeowners use the Board</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4 mb-6">
+        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-filter text-secondary mr-2"></i>Standards over lead-gen</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Directories emphasize editorial fit for King County, Snohomish County, and Seattle — not whoever bought the top ad slot.</p>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-clipboard-list text-secondary mr-2"></i>Tools that travel with you</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Good Steward checklists keep discovery notes and phase status in your browser — useful with any licensed GC.</p>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-shield-halved text-secondary mr-2"></i>Verify before you hire</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Every ranking page points you back to <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> before deposits or demolition.</p>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <a href="./good-steward.html" class="bg-primary text-white px-5 py-3.5 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs shadow-glow-sleek">Good Steward guide &amp; tools</a>
+        <a href="{public_tool_href('build-walkthrough')}" class="border border-white/20 bg-white/5 text-white px-5 py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Build Walkthrough</a>
+        <a href="{public_tool_href('site-visit')}" class="border border-white/20 bg-white/5 text-white px-5 py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Site Visit Checklist</a>
+        <a href="{public_tool_href('pm-dashboard')}" class="border border-white/20 bg-white/5 text-white px-5 py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">PM Dashboard</a>
+      </div>
+    </section>
+
+    <section id="how-the-board-works" class="mb-14">
+      <div class="mb-8 border-b border-white/10 pb-4">
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Process</span>
+        <h2 class="text-3xl font-black text-white tracking-tight">How the Board works</h2>
+        <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">A repeatable filter: research the work, verify public signals, weight local mastery, then publish an editorial shortlist homeowners can use.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4">
+{chr(10).join(process_cards)}
+      </div>
+    </section>
 
     <section class="mb-14">
       <div class="mb-8 border-b border-white/10 pb-4">
@@ -4370,6 +4597,38 @@ def build_about() -> str:
       </div>
     </section>
 
+    <section id="field-gallery" class="mb-4">
+      <div class="mb-8 border-b border-white/10 pb-4">
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Field gallery</span>
+        <h2 class="text-3xl font-black text-white tracking-tight">Standards you can see</h2>
+        <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Editorial process and remodel imagery for Pacific Northwest work in King County, Snohomish County, and Seattle. Editorial and stock frames are labeled illustrative in alt text.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+{gallery}
+      </div>
+    </section>
+  </div>
+{hero_html}
+{content_resume}
+{board_section_embed(
+        "mission",
+        "mesh-flow-mission",
+        "mesh-flow-backdrop.html",
+        "Mission — Board of Project Stewardship",
+        1100,
+        extra_class="mb-12",
+    )}
+
+{build_walkthrough_home_section()}
+
+{board_section_embed(
+        "integrity-shield",
+        "integrity-shield-showcase",
+        "integrity-shield-showcase.html",
+        "Integrity Shield — six stewardship layers",
+        1400,
+    )}
+
 {board_section_embed(
         "topic-carousel",
         "circular-directory",
@@ -4377,15 +4636,6 @@ def build_about() -> str:
         "Pacific Northwest topic directory — Board of Project Stewardship",
         1100,
     )}
-    <section class="mb-8">
-      <div class="mb-6 border-b border-white/10 pb-4">
-        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Directories</span>
-        <h2 class="text-2xl font-black text-white tracking-tight">Explore the Board’s listings</h2>
-      </div>
-      <div class="flex flex-wrap gap-3">
-        {''.join(cta_html)}
-      </div>
-    </section>
   </div>"""
 
     og_alt = "Illustrative Pacific Northwest home concept for Board of Project Stewardship — not a bid or stamped plan"
