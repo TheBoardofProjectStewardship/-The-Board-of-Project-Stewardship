@@ -733,6 +733,40 @@ def _validate_media(packet, root, manifest, texts, body, errors) -> None:
             })
         if alt.strip():
             _scan_public("image alt", alt, errors)
+    hero_digests: list[str] = []
+    body_digests: list[str] = []
+    for item in files:
+        if not isinstance(item, dict):
+            continue
+        repo_path = item.get("repo_path")
+        if not isinstance(repo_path, str) or IMAGE_REPO_RE.match(repo_path) is None:
+            continue
+        role = str(item.get("role") or "").lower()
+        digest = ""
+        stated = item.get("md5")
+        if isinstance(stated, str) and re.fullmatch(r"[0-9a-fA-F]{32}", stated):
+            digest = stated.lower()
+        else:
+            intake_file = item.get("intake_file")
+            if isinstance(intake_file, str):
+                try:
+                    src = _safe_child(packet, intake_file)
+                except IntakeFailure:
+                    src = None
+                if src is not None and src.is_file():
+                    digest = hashlib.md5(src.read_bytes()).hexdigest()
+        if not digest:
+            continue
+        is_hero = role in {"hero", "post-hero", "og", "og-image"} or repo_path.endswith(("-1.webp", "-hero.webp"))
+        if is_hero:
+            hero_digests.append(digest)
+        else:
+            body_digests.append(digest)
+    if any(digest in body_digests for digest in hero_digests):
+        errors.append({
+            "code": "duplicate_hero",
+            "message": "media.json hero md5 equals a body figure",
+        })
     for repo_path in images:
         if f"../{repo_path}" not in body and f"({repo_path})" not in body:
             errors.append({

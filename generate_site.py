@@ -6060,10 +6060,45 @@ def build_blog_index(posts: list[dict]) -> str:
     )
 
 
+def _asset_md5(rel: str) -> str | None:
+    path = SITE_DIR / rel.lstrip("./")
+    if not path.is_file():
+        return None
+    return hashlib.md5(path.read_bytes()).hexdigest()
+
+
+def _strip_leading_hero_figure(article_html: str, hero_rel: str | None) -> str:
+    """Drop the first body figure when it repeats the resolved hero (path or bytes)."""
+    if not hero_rel:
+        return article_html
+    match = re.search(r'<figure class="post-figure">.*?</figure>', article_html, flags=re.S)
+    if not match:
+        return article_html
+    src_m = re.search(r'\bsrc="([^"]+)"', match.group(0))
+    if not src_m:
+        return article_html
+    rel = src_m.group(1)
+    if rel.startswith("../"):
+        rel = rel[3:]
+    rel = rel.lstrip("./")
+    hero = hero_rel.lstrip("./")
+    same = rel == hero
+    if not same:
+        hero_md5 = _asset_md5(hero)
+        body_md5 = _asset_md5(rel)
+        same = bool(hero_md5 and body_md5 and hero_md5 == body_md5)
+    if not same:
+        return article_html
+    return article_html[: match.start()] + article_html[match.end() :]
+
+
 def build_post_page(post: dict, posts: list[dict] | None = None) -> str:
-    article_html = rewrite_post_root_hrefs(md_to_html(post["body_md"]))
-    canon = f"{BASE_URL}posts/{post['out_name']}"
     hero_rel = resolve_post_hero(post)
+    article_html = _strip_leading_hero_figure(
+        rewrite_post_root_hrefs(md_to_html(post["body_md"])),
+        hero_rel,
+    )
+    canon = f"{BASE_URL}posts/{post['out_name']}"
     og_abs = resolve_og_image(hero_rel)
     image_obj = {
         "@type": "ImageObject",
