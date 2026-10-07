@@ -117,7 +117,7 @@ Base: `https://boardofprojectstewardship.com/`
 | `generate_site.py` | Site generator |
 | `docs/AGENT-INTAKE.md` | Multi-agent intake contract (ops; Steward publishes) |
 
-## Current #1 (additions / custom homes / Edmonds Top 30 / kitchen / bathrooms)
+## Current #1 (additions / custom homes / Edmonds custom homes / kitchen / bathrooms)
 
 **Pacific Pro Group** (Edmonds, WA)
 

@@ -954,22 +954,50 @@ def parse_edmonds_custom(path: Path) -> list[dict]:
     return firms
 
 
+def _trade_skip_row(firm: dict) -> bool:
+    """Drop researcher leftovers. Do not invent a license reason to drop a named firm."""
+    note = firm.get("note") or ""
+    conf = firm.get("confidence") or ""
+    if re.search(r"\bLOW\b", conf):
+        return True
+    if re.search(r"verify\b.{0,80}\bbefore listing", note, re.I):
+        return True
+    return False
+
+
+def _trade_non_firm(firm: dict) -> bool:
+    """Category rows and 'source' fillers are not a single ranked firm."""
+    name = firm.get("name") or ""
+    note = (firm.get("note") or "").lower()
+    if " / " in name:
+        return True
+    if "source" in note and any(tok in note for tok in ("fill", "not one company", "use as source")):
+        return True
+    low = name.lower()
+    return any(tok in low for tok in ("specialists", "crews", "roofers", "franchise", "trade ally"))
+
+
 def parse_trades(path: Path) -> dict[str, list[dict]]:
     text = path.read_text(encoding="utf-8")
     out: dict[str, list[dict]] = {}
     for slug, prefix in TRADE_HEADING_MAP.items():
         section = section_after_heading(text, prefix)
         firms = parse_rank_table(section)
-        # Keep only firms with a name and (website or phone) or HIGH confidence with city
-        cleaned = []
+        ranked: list[dict] = []
+        other: list[dict] = []
         for f in firms:
-            # LOW-confidence rows with no contact path were research leftovers.
-            # Named rows that the published pages already show stay, including
-            # unranked "where else to look" lines that have no website yet.
-            if f["confidence"].startswith("LOW") and not f["website"] and not f["phone"]:
+            if _trade_skip_row(f):
                 continue
-            cleaned.append(f)
-        out[slug] = cleaned
+            if _trade_non_firm(f):
+                row = dict(f)
+                row["unranked"] = True
+                row["note"] = ""
+                other.append(row)
+                continue
+            ranked.append(dict(f))
+        for i, firm in enumerate(ranked, start=1):
+            firm["rank"] = i
+        out[slug] = ranked + other
     return out
 
 
@@ -1536,7 +1564,7 @@ def nav_html(active: str = "", prefix: str = "") -> str:
     more_dirs = [
         ("additions", href("additions.html"), "Additions"),
         ("custom-homes", href("custom-homes.html"), "Custom Homes"),
-        ("edmonds", href("edmonds-custom-homes.html"), "Edmonds Top 30"),
+        ("edmonds", href("edmonds-custom-homes.html"), "Edmonds custom homes"),
         ("kitchen", href("kitchen.html"), "Kitchen"),
         ("bathrooms", href("bathrooms.html"), "Bathrooms"),
         ("restoration", href("restoration.html"), "Restoration"),
@@ -3886,7 +3914,7 @@ def build_about() -> str:
     ctas = [
         ("./additions.html", "Browse Additions Directory", True),
         ("./custom-homes.html", "Custom Homes", False),
-        ("./edmonds-custom-homes.html", "Edmonds Top 30", False),
+        ("./edmonds-custom-homes.html", "Edmonds custom homes", False),
         ("./kitchen.html", "Kitchen", False),
         ("./bathrooms.html", "Bathrooms", False),
         ("./commercial.html", "Commercial", False),
@@ -4104,7 +4132,7 @@ def build_about() -> str:
               Additions ranking
             </a>
             <a href="./edmonds-custom-homes.html" class="border border-white/15 text-slate-200 py-3.5 px-6 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-sm text-center">
-              Edmonds Top 30
+              Edmonds custom homes
             </a>
             <a href="{PPG['trustindex']}" target="_blank" rel="noopener" class="border border-white/15 text-slate-200 py-3.5 px-6 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-sm text-center">
               {ppg_trustindex_phrase(short=True)}
@@ -4235,9 +4263,9 @@ def build_about() -> str:
           <span class="text-secondary font-bold text-xs uppercase tracking-[0.15em] flex items-center mb-3">
             <i class="fas fa-map-location-dot mr-2"></i> Edmonds directory
           </span>
-          <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-3">Edmonds Custom Homes — Top 30</h2>
+          <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-3">Edmonds custom home builders</h2>
           <p class="text-slate-300 font-light leading-relaxed max-w-2xl">
-            Edmonds-first editorial rankings with category filters, a local permit guide, and planning tools.
+            Edmonds-first editorial list, a local permit guide, and planning tools.
             Pacific Pro Group ranks #1 with a verified <strong class="text-white font-semibold">{ppg_trustindex_phrase(short=True)}</strong>.
           </p>
         </div>
@@ -4310,8 +4338,8 @@ def build_additions(additions: list[dict]) -> str:
     _hero_rel, _hero_alt = DIR_HERO_IMAGES.get("additions", (None, ""))
     body = f"""{hero(
         f"{GEO_KICKER_HTML} · Updated {YEAR}",
-        'Top 30 Verified Home Addition Contractors<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">King County, Snohomish County &amp; Seattle</span>',
-        "An editorial ranking of rated and verified home addition / remodel firms serving King County, Snohomish County, and Seattle — including Edmonds — curated by The Board of Project Stewardship.",
+        'Top 30 Home Addition Contractors<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">King County, Snohomish County &amp; Seattle</span>',
+        "An editorial ranking of home addition and remodel firms serving King County, Snohomish County, and Seattle — including Edmonds — curated by The Board of Project Stewardship.",
         ["MBAKS-informed", "Local service area", "Additions focus"],
         image_rel=_hero_rel if _hero_rel and asset_exists(_hero_rel) else None,
         image_alt=_hero_alt,
@@ -4349,7 +4377,7 @@ def build_additions(additions: list[dict]) -> str:
           <h2 class="text-3xl font-black text-white tracking-tight">Ranks 2–30</h2>
         </div>
         <p class="text-xs text-slate-500 font-medium uppercase tracking-widest max-w-sm md:text-right">
-          Verified local firms · King &amp; Snohomish Counties
+          Editorial shortlist · King &amp; Snohomish Counties
         </p>
       </div>
       <div class="grid gap-3">
@@ -4395,8 +4423,8 @@ def build_additions(additions: list[dict]) -> str:
   </div>"""
     ld = [
         itemlist_ld(
-            "Top 30 Verified Home Addition Contractors in King County, Snohomish County, and Seattle, WA",
-            "Editorial ranking of verified home addition and remodel contractors serving King County, Snohomish County, and Seattle. Updated 2026 by The Board of Project Stewardship.",
+            "Top 30 Home Addition Contractors in King County, Snohomish County, and Seattle, WA",
+            "Editorial ranking of home addition and remodel contractors serving King County, Snohomish County, and Seattle. Updated 2026 by The Board of Project Stewardship.",
             additions,
             include_ppg=True,
             page_url=f"{BASE_URL}additions.html",
@@ -4526,7 +4554,7 @@ def build_kb_page(kind: str, firms: list[dict]) -> str:
           <h2 class="text-3xl font-black text-white tracking-tight">Ranks 2–15</h2>
         </div>
         <p class="text-xs text-slate-500 font-medium uppercase tracking-widest max-w-sm md:text-right">
-          Verified local firms · King &amp; Snohomish Counties
+          Editorial shortlist · King &amp; Snohomish Counties
         </p>
       </div>
       <div class="grid gap-3">
@@ -4674,7 +4702,7 @@ def build_custom_homes(firms: list[dict]) -> str:
           <h2 class="text-3xl font-black text-white tracking-tight">Ranks 2–15</h2>
         </div>
         <p class="text-xs text-slate-500 font-medium uppercase tracking-widest max-w-sm md:text-right">
-          Verified local firms · King &amp; Snohomish Counties
+          Editorial shortlist · King &amp; Snohomish Counties
         </p>
       </div>
       <div class="grid gap-3">
@@ -4749,8 +4777,9 @@ def edmonds_rank_card(firm: dict, sticky: bool = False) -> str:
         f'            <div class="min-w-0">\n'
         f'              <h3 class="text-lg font-bold text-white tracking-tight">{name}</h3>\n'
         f'              <p class="text-xs text-slate-500 uppercase tracking-wider mt-1 mb-1">'
-        f'<i class="fas fa-map-marker-alt mr-1 text-secondary"></i>{city} · {esc(cat_label)}</p>\n'
-        f'              <p class="text-sm text-slate-400 font-light leading-relaxed">{note}</p>\n'
+        f'<i class="fas fa-map-marker-alt mr-1 text-secondary"></i>{city}'
+        f'{(" · " + esc(cat_label)) if is_ppg else ""}</p>\n'
+        f'              {f"<p class=\"text-sm text-slate-400 font-light leading-relaxed\">{note}</p>" if is_ppg else ""}\n'
         f'              {badges}\n'
         f'            </div>\n'
         f'          </div>\n'
@@ -4763,9 +4792,9 @@ def edmonds_rank_card(firm: dict, sticky: bool = False) -> str:
 def build_edmonds_custom_homes(firms: list[dict]) -> str:
     slug = "edmonds-custom-homes"
     active = "edmonds"
-    title = "Top 30 Edmonds Custom Home Builders | Board of Project Stewardship"
+    title = "Edmonds custom home builders | Board of Project Stewardship"
     desc = (
-        "Editorial Top 30 custom home builders in Edmonds and nearby King and Snohomish Counties. "
+        "Editorial list of custom home builders in Edmonds and nearby King and Snohomish Counties. "
         "Pacific Pro Group ranks #1."
     )
     keywords = (
@@ -4794,7 +4823,7 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
     faqs = [
         (
             "Who ranks #1 for custom homes in Edmonds?",
-            f"Pacific Pro Group is ranked #1 on this editorial Top 30 with {ppg_trustindex_phrase()}, Edmonds presence, and a dedicated custom homes focus. "
+            f"Pacific Pro Group is ranked #1 on this editorial list with {ppg_trustindex_phrase()}, Edmonds presence, and a dedicated custom homes focus. "
             "Always re-verify licensing at WA L&I before hiring.",
         ),
         (
@@ -4805,7 +4834,7 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
         ),
         (
             "How is this Edmonds directory different from the regional Custom Homes list?",
-            "This page is Edmonds-first: a Top 30 with category filters, a local permit guide, and planning widgets. "
+            "This page is Edmonds-first: a local permit guide, planning widgets, and a name-and-city shortlist. "
             "The regional Custom Homes directory covers a broader King & Snohomish shortlist of ground-up specialists.",
         ),
         (
@@ -5023,10 +5052,10 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
         title="Edmonds custom-home field context (illustrative)",
     )
     body = f"""{hero(
-        f"Edmonds Authority · Top 30 · Updated {YEAR}",
-        'Edmonds Custom Home Builders<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">Top 30 Editorial Directory</span>',
-        "An Edmonds-first ranking of custom home and design-build firms serving Edmonds and greater King &amp; Snohomish Counties — curated by The Board of Project Stewardship.",
-        ["Top 30 rankings", "Permit guide", "Local planning tools"],
+        f"Edmonds · Editorial list · Updated {YEAR}",
+        'Edmonds Custom Home Builders<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">Editorial directory</span>',
+        "An Edmonds-first list of custom home and design-build firms serving Edmonds and greater King &amp; Snohomish Counties — curated by The Board of Project Stewardship.",
+        ["Name, city, and site", "Permit guide", "Local planning tools"],
         image_rel=_hero_rel if _hero_rel and asset_exists(_hero_rel) else None,
         image_alt=_hero_alt,
     )}
@@ -5039,14 +5068,11 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
       <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 border-b border-white/10 pb-4 gap-3">
         <div>
           <span class="text-secondary text-xs font-bold uppercase tracking-widest">Full Ranking</span>
-          <h2 class="text-3xl font-black text-white tracking-tight">Top 30 Edmonds Custom Builders</h2>
+          <h2 class="text-3xl font-black text-white tracking-tight">Edmonds custom home builders</h2>
         </div>
         <p class="text-xs text-slate-500 font-medium uppercase tracking-widest max-w-sm md:text-right">
-          Filter by style · PPG stays pinned when visible
+          Name, city, and website or phone
         </p>
-      </div>
-      <div class="flex flex-wrap gap-2 mb-6">
-        {''.join(filter_btns)}
       </div>
       <div id="edmonds-rank-list" class="grid gap-3">
 {cards}
@@ -5077,7 +5103,7 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
 
     ld = [
         itemlist_ld(
-            "Top 30 Edmonds Custom Home Builders | King & Snohomish Counties, WA",
+            "Edmonds custom home builders | King & Snohomish Counties, WA",
             desc,
             ld_firms,
             include_ppg=True,
@@ -5086,7 +5112,7 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
         faq_ld(faqs),
     ]
     return page_shell(
-        "Edmonds Custom Homes Top 30 | Board of Project Stewardship",
+        title,
         desc,
         active,
         body,
@@ -5445,8 +5471,31 @@ def build_trades_hub() -> str:
     )
 
 
+def _trade_public_firm(firm: dict, title: str) -> dict:
+    """Public trade cards show focus and city, not researcher notes."""
+    row = dict(firm)
+    city = (row.get("city") or "").strip()
+    row["note"] = f"Focus: {title}" + (f" · {city}" if city else "")
+    return row
+
+
 def build_trade_page(slug: str, title: str, icon: str, blurb: str, firms: list[dict]) -> str:
-    cards = "\n\n".join(firm_card(f) for f in firms) if firms else '<p class="text-slate-400">Research entries pending verification.</p>'
+    ranked = [_trade_public_firm(f, title) for f in firms if not f.get("unranked")]
+    others = [_trade_public_firm(f, title) for f in firms if f.get("unranked")]
+    cards = "\n\n".join(firm_card(f) for f in ranked) if ranked else '<p class="text-slate-400">No ranked firms in this shortlist.</p>'
+    other_block = ""
+    if others:
+        other_cards = "\n\n".join(firm_card(f, show_rank=False) for f in others)
+        other_block = f"""    <section id="other-places" class="mb-16">
+      <div class="mb-6 border-b border-white/10 pb-4">
+        <h2 class="text-2xl font-black text-white tracking-tight">Other places to look</h2>
+        <p class="text-sm text-slate-400 font-light mt-2 max-w-3xl">Unranked resources. These rows are not a single named firm.</p>
+      </div>
+      <div class="grid gap-3">
+{other_cards}
+      </div>
+    </section>
+"""
     photo_strip = _hub_photo_strip(
         TRADE_PHOTO_STRIPS.get(slug, []),
         title=f"{title.split('/')[0].strip()} field context (illustrative)",
@@ -5499,7 +5548,7 @@ def build_trade_page(slug: str, title: str, icon: str, blurb: str, firms: list[d
 {cards}
       </div>
     </section>
-    <section class="bg-charcoal rounded-xl p-6 md:p-8 border border-white/10 mb-12">
+{other_block}    <section class="bg-charcoal rounded-xl p-6 md:p-8 border border-white/10 mb-12">
       <h2 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2">
         <i class="fas fa-helmet-safety text-secondary"></i> Working with a general contractor?
       </h2>
@@ -5524,7 +5573,7 @@ def build_trade_page(slug: str, title: str, icon: str, blurb: str, firms: list[d
         itemlist_ld(
             f"{title} Contractors — King County, Snohomish County, and Seattle, WA",
             blurb,
-            firms,
+            ranked,
             include_ppg=False,
             schema_type=schema,
             page_url=f"{BASE_URL}{slug}.html",
@@ -6058,7 +6107,7 @@ Base: `{BASE_URL}`
 | `generate_site.py` | Site generator |
 | `docs/AGENT-INTAKE.md` | Multi-agent intake contract (ops; Steward publishes) |
 
-## Current #1 (additions / custom homes / Edmonds Top 30 / kitchen / bathrooms)
+## Current #1 (additions / custom homes / Edmonds custom homes / kitchen / bathrooms)
 
 **Pacific Pro Group** (Edmonds, WA)
 
@@ -13507,10 +13556,10 @@ def build_directory_hub() -> str:
         ),
         (
             "fa-location-dot",
-            "Edmonds custom homes (Top 30)",
+            "Edmonds custom homes",
             "Edmonds-focused custom home shortlist — Bowl constraints, coastal detailing, and local permit ownership.",
             "./edmonds-custom-homes.html",
-            "Open Edmonds Top 30",
+            "Open Edmonds directory",
         ),
         (
             "fa-screwdriver-wrench",
@@ -13619,7 +13668,7 @@ def build_directory_hub() -> str:
     )
     return page_shell(
         "Contractor directories | Board of Project Stewardship",
-        "Contractor directories for King County, Snohomish County, and Seattle — additions, kitchen, bath, custom homes, trades, and Edmonds Top 30.",
+        "Contractor directories for King County, Snohomish County, and Seattle — additions, kitchen, bath, custom homes, trades, and Edmonds.",
         "directory",
         body,
         canonical=f"{BASE_URL}directory.html",
