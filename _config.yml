@@ -27,6 +27,18 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - node_modules
+  - package.json
+  - package-lock.json
+  - tailwind.config.js
+  - tools/make_perf_assets.py
+  - assets/css/tw-input.css
+  - assets/css/chrome.css
+  - assets/css/fa-subset.css
+  - assets/fonts/InterVariable.woff2
+  - assets/fonts/Inter-Regular.woff2
+  - assets/fonts/Inter-Medium.woff2
+  - assets/fonts/Inter-SemiBold.woff2
+  - assets/fonts/Inter-Bold.woff2
 # Jekyll matches include against the entry name it is filtering, so a nested
 # underscore directory must be listed by its own name (`_locations`), not its
 # full path. There is only one such directory.

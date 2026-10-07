@@ -1176,231 +1176,268 @@ def favicon_tags(prefix: str = "") -> str:
     return "\n".join(tags)
 
 
+_VARIANT_WIDTHS = (480, 640, 800, 1200, 1280)
+_IFRAME_RE = re.compile(r"<iframe\b([^>]*)>\s*</iframe>", re.I | re.S)
+_IMG_RE = re.compile(r"<img\b([^>]*?)>", re.I | re.S)
+
+
+def _split_asset_url(src: str) -> tuple[str, str]:
+    """Return (url prefix, repo-relative path) for a local asset reference."""
+    if not src or src.startswith(("http://", "https://", "data:", "blob:")):
+        return "", ""
+    if src.startswith("../"):
+        return "../", src[3:]
+    if src.startswith("./"):
+        return "./", src[2:]
+    if src.startswith("/"):
+        return "/", src.lstrip("/")
+    return "", src
+
+
+def variant_rels(rel: str) -> list[tuple[str, int]]:
+    rel = (rel or "").lstrip("./")
+    path = Path(rel)
+    found: list[tuple[str, int]] = []
+    for width in _VARIANT_WIDTHS:
+        cand = path.with_name(f"{path.stem}-{width}.webp").as_posix()
+        if asset_exists(cand):
+            found.append((cand, width))
+    return found
+
+
+def playback_rel(rel: str) -> str:
+    rel = (rel or "").lstrip("./")
+    if not rel.endswith(".mp4"):
+        return rel
+    alt = rel[:-4] + "-720.mp4"
+    return alt if asset_exists(alt) else rel
+
+
+def poster_rel_for(rel: str) -> str:
+    rel = (rel or "").lstrip("./")
+    stem = rel[:-4] if rel.endswith(".mp4") else rel
+    if stem.endswith("-720"):
+        stem = stem[:-4]
+    cand = stem + "-poster.webp"
+    return cand if asset_exists(cand) else ""
+
+
+def _url_for(prefix: str, rel: str) -> str:
+    if prefix:
+        return f"{prefix}{rel}"
+    return f"./{rel}"
+
+
+def _set_attr(inner: str, name: str, value: str) -> str:
+    if re.search(rf"\b{name}\s*=", inner):
+        return re.sub(rf'\b{name}\s*=\s*"[^"]*"', f'{name}="{value}"', inner, count=1)
+    return f'{inner} {name}="{value}"'
+
+
+def apply_image_pass(html: str) -> str:
+    """srcset for local images; the first image is the LCP candidate."""
+    state = {"first": True}
+
+    def repl(match: re.Match) -> str:
+        inner = match.group(1)
+        src_m = re.search(r'\bsrc\s*=\s*"([^"]*)"', inner)
+        if not src_m:
+            return match.group(0)
+        prefix, rel = _split_asset_url(src_m.group(1))
+        is_first = state["first"]
+        state["first"] = False
+        if rel and "srcset=" not in inner:
+            variants = variant_rels(rel)
+            sibling = ""
+            if Path(rel).suffix.lower() in {".png", ".jpg", ".jpeg"}:
+                cand = Path(rel).with_suffix(".webp").as_posix()
+                if asset_exists(cand):
+                    sibling = cand
+            if variants or sibling:
+                if variants:
+                    src_rel = variants[0][0]
+                    for cand, width in variants:
+                        if width <= 800:
+                            src_rel = cand
+                    if "hero-layer" in inner:
+                        for cand, width in variants:
+                            if width >= 1280:
+                                src_rel = cand
+                                break
+                    srcset = ", ".join(f"{_url_for(prefix, cand)} {width}w" for cand, width in variants)
+                    inner = _set_attr(inner, "src", _url_for(prefix, src_rel))
+                    inner = _set_attr(inner, "srcset", srcset)
+                    if "sizes=" not in inner:
+                        sizes = "100vw" if "hero-layer" in inner else "(max-width: 640px) 100vw, 800px"
+                        inner = _set_attr(inner, "sizes", sizes)
+                else:
+                    inner = _set_attr(inner, "src", _url_for(prefix, sibling))
+        if is_first:
+            inner = _set_attr(inner, "loading", "eager")
+            inner = _set_attr(inner, "fetchpriority", "high")
+        else:
+            inner = _set_attr(inner, "loading", "lazy")
+            inner = re.sub(r'\s+fetchpriority="high"', "", inner)
+        return "<img" + inner + ">"
+
+    return _IMG_RE.sub(repl, html)
+
+
+def apply_video_pass(html: str) -> str:
+    """Point videos at the 720p encode, with a poster and no preload."""
+
+    def repl(match: re.Match) -> str:
+        block = match.group(0)
+        block = re.sub(r"\sautoplay(?:\s*=\s*\"[^\"]*\")?", "", block)
+        if re.search(r"\bpreload\s*=", block):
+            block = re.sub(r'\bpreload\s*=\s*"[^"]*"', 'preload="none"', block, count=1)
+        else:
+            block = block.replace("<video", '<video preload="none"', 1)
+        src_m = re.search(r'<source\b[^>]*\bsrc="([^"]+)"', block)
+        if not src_m:
+            return block
+        prefix, rel = _split_asset_url(src_m.group(1))
+        if not rel:
+            return block
+        play = playback_rel(rel)
+        block = block.replace(src_m.group(1), _url_for(prefix, play) if prefix else play, 1)
+        if "poster=" not in block:
+            poster = poster_rel_for(rel)
+            if poster:
+                block = block.replace("<video", f'<video poster="{_url_for(prefix, poster)}"', 1)
+        return block
+
+    return re.sub(r"<video\b.*?</video>", repl, html, flags=re.I | re.S)
+
+
+def apply_iframe_pass(html: str) -> str:
+    """Click-to-load for YouTube and Google Maps. Another Story and Buildertrend stay iframes."""
+
+    def lazy(tag: str) -> str:
+        if re.search(r"\bloading\s*=", tag, re.I):
+            return tag
+        return tag.replace("<iframe", '<iframe loading="lazy"', 1)
+
+    def repl(match: re.Match) -> str:
+        attrs = match.group(1)
+        full = match.group(0)
+        src_m = re.search(r'\bsrc\s*=\s*"([^"]+)"', attrs)
+        if not src_m:
+            return lazy(full)
+        src = src_m.group(1)
+        blob = (src + " " + attrs).lower()
+        if "buildertrend" in blob or "another-story" in blob:
+            return lazy(full)
+        third = any(
+            token in blob
+            for token in ("youtube.com", "youtube-nocookie.com", "youtu.be", "google.com/maps", "maps.google.")
+        )
+        if not third:
+            return lazy(full)
+        title_m = re.search(r'\btitle\s*=\s*"([^"]*)"', attrs)
+        title = esc(title_m.group(1) if title_m else "Embedded content")
+        label = "Play video" if "you" in src.lower() else "Show map"
+        if "youtube.com/embed/" in src:
+            src = src.replace("youtube.com/embed/", "youtube-nocookie.com/embed/")
+        src = esc(src)
+        return (
+            '<div class="embed-facade-frame">'
+            f'<button type="button" class="embed-facade" data-embed-src="{src}" data-embed-title="{title}">{label}</button>'
+            "</div>"
+        )
+
+    return _IFRAME_RE.sub(repl, html)
+
+
+def strip_render_blocking_cdns(html: str) -> str:
+    html = re.sub(
+        r"\s*<link[^>]+(?:cdn\.tailwindcss\.com|fonts\.googleapis\.com|font-awesome/6\.4\.0)[^>]*>\s*",
+        "\n",
+        html,
+        flags=re.I,
+    )
+    html = re.sub(
+        r"\s*<noscript>\s*<link[^>]+font-awesome[^>]*>\s*</noscript>\s*",
+        "\n",
+        html,
+        flags=re.I,
+    )
+    html = re.sub(
+        r"\s*<script[^>]+src=\"https://cdn\.tailwindcss\.com\"[^>]*>\s*</script>\s*",
+        "\n",
+        html,
+        flags=re.I,
+    )
+    html = re.sub(
+        r"\s*<script>\s*tailwind\.config\s*=\s*\{.*?\}\s*;?\s*</script>\s*",
+        "\n",
+        html,
+        flags=re.I | re.S,
+    )
+    if "/assets/fonts/InterLatin.woff2" not in html and re.search(r"<head\b", html, re.I):
+        html = re.sub(
+            r"(<head[^>]*>)",
+            r'\1\n  <link rel="preload" href="/assets/fonts/InterLatin.woff2" as="font" type="font/woff2" crossorigin>',
+            html,
+            count=1,
+            flags=re.I,
+        )
+    if "assets/css/site.css" not in html and re.search(r"<head\b", html, re.I):
+        html = re.sub(
+            r"(<head[^>]*>)",
+            r'\1\n  <link rel="stylesheet" href="/assets/css/site.css">',
+            html,
+            count=1,
+            flags=re.I,
+        )
+    return html
+
+
+def rewrite_mp4_urls(html: str) -> str:
+    """Send linked clips at the smaller encode. Original files stay in the repo."""
+
+    def repl(match: re.Match) -> str:
+        url = match.group(2)
+        prefix, rel = _split_asset_url(url)
+        if not rel or not rel.endswith(".mp4") or rel.endswith("-720.mp4"):
+            return match.group(0)
+        play = playback_rel(rel)
+        if play == rel:
+            return match.group(0)
+        return f'{match.group(1)}="{_url_for(prefix, play) if prefix else play}"'
+
+    return re.sub(r'\b(src|href)="([^"]+\.mp4)"', repl, html)
+
+
+def apply_performance_pass(html: str) -> str:
+    if re.search(r"http-equiv=[\"']refresh[\"']", html, re.I):
+        return html
+    html = strip_render_blocking_cdns(html)
+    html = apply_iframe_pass(html)
+    html = apply_video_pass(html)
+    html = rewrite_mp4_urls(html)
+    html = apply_image_pass(html)
+    return html
+
+
+def finalize_published_html() -> None:
+    """Performance pass for pages that are not built by page_shell (tools, stamp)."""
+    skip = {"node_modules", "intake", "tests", "docs", "state", "data", "vendor", ".git"}
+    for path in SITE_DIR.rglob("*.html"):
+        if any(part in skip for part in path.relative_to(SITE_DIR).parts):
+            continue
+        text = path.read_text(encoding="utf-8")
+        updated = apply_performance_pass(text)
+        if updated != text:
+            path.write_text(updated, encoding="utf-8")
+
+
 def head_assets() -> str:
-    # Font Awesome is deferred to </body> (fix #40).
-    # Tailwind CDN remains known CWV debt: a full self-hosted purge build of every
-    # utility class used across ~80+ pages is large and risk of visual break is high;
-    # keep CDN + dns-prefetch as the practical win (SRI hashes on the live Tailwind
-    # play CDN are not stable across releases — do not invent integrity attributes).
-    # Inter is self-hosted (variable + key static weights) under assets/fonts/.
-    return """  <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
-  <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
-  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-  <link rel="preload" href="/assets/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            obsidian: '#0a0a0a',
-            charcoal: '#1a1a1a',
-            'dark-gray': '#2a2a2a',
-            primary: '#166534',
-            secondary: '#4ade80',
-          },
-          boxShadow: {
-            'glow-sleek': '0 0 15px -5px rgba(22, 101, 52, 0.3)',
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    @font-face {
-      font-family: 'Inter';
-      font-style: normal;
-      font-weight: 100 900;
-      font-display: swap;
-      src: url('/assets/fonts/InterVariable.woff2') format('woff2');
-    }
-    @font-face {
-      font-family: 'Inter';
-      font-style: normal;
-      font-weight: 400;
-      font-display: swap;
-      src: url('/assets/fonts/Inter-Regular.woff2') format('woff2');
-    }
-    @font-face {
-      font-family: 'Inter';
-      font-style: normal;
-      font-weight: 500;
-      font-display: swap;
-      src: url('/assets/fonts/Inter-Medium.woff2') format('woff2');
-    }
-    @font-face {
-      font-family: 'Inter';
-      font-style: normal;
-      font-weight: 600;
-      font-display: swap;
-      src: url('/assets/fonts/Inter-SemiBold.woff2') format('woff2');
-    }
-    @font-face {
-      font-family: 'Inter';
-      font-style: normal;
-      font-weight: 700;
-      font-display: swap;
-      src: url('/assets/fonts/Inter-Bold.woff2') format('woff2');
-    }
-    body { font-family: 'Inter', system-ui, sans-serif; background-color: #0a0a0a; color: #e0e0e0; }
-    .bg-grid-pattern {
-      background-image:
-        linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-    }
-    .card-hover { transition: transform 0.25s ease, border-color 0.25s ease; }
-    .card-hover:hover { transform: translateY(-3px); }
-    .rank-badge {
-      min-width: 2.75rem; height: 2.75rem;
-      display: flex; align-items: center; justify-content: center;
-      border-radius: 0.5rem; font-weight: 800; font-size: 0.95rem;
-      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: #94a3b8;
-    }
-    .prose-board a { color: #4ade80; text-decoration: underline; }
-    .prose-board h2 { font-size: 1.5rem; font-weight: 800; color: white; margin: 1.75rem 0 0.75rem; }
-    .prose-board h3 { font-size: 1.15rem; font-weight: 700; color: white; margin: 1.25rem 0 0.5rem; }
-    .prose-board p, .prose-board li { color: #cbd5e1; font-weight: 300; line-height: 1.7; margin-bottom: 0.85rem; }
-    .prose-board ul { list-style: disc; padding-left: 1.25rem; margin-bottom: 1rem; }
-    .prose-board ol { list-style: decimal; padding-left: 1.25rem; margin-bottom: 1rem; }
-    .prose-board strong { color: #fff; font-weight: 600; }
-    .prose-board .post-figure {
-      margin: 1.5rem 0;
-      border-radius: 0.75rem;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.02);
-    }
-    .prose-board .post-figure img {
-      display: block;
-      width: 100%;
-      height: auto;
-      max-height: 32rem;
-      object-fit: cover;
-    }
-    .prose-board .post-figure figcaption {
-      padding: 0.65rem 0.9rem;
-      font-size: 0.85rem;
-      color: #94a3b8;
-      font-weight: 300;
-      line-height: 1.4;
-      border-top: 1px solid rgba(255,255,255,0.06);
-    }
-    .prose-board .video-embed {
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%; /* 16:9 */
-      height: 0;
-      margin: 1.5rem 0;
-      border-radius: 0.75rem;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: #000;
-    }
-    .prose-board .video-embed iframe {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      border: 0;
-    }
-    #tools input, #tools select, #tools textarea {
-      color-scheme: dark;
-    }
-    #tools input::placeholder, #tools textarea::placeholder { color: #64748b; }
-    #calc-result { letter-spacing: -0.02em; }
-    .skip-link {
-      position: absolute;
-      left: 0.75rem;
-      top: -3.25rem;
-      z-index: 80;
-      background: #166534;
-      color: #fff;
-      padding: 0.55rem 0.9rem;
-      border-radius: 0.375rem;
-      font-size: 0.7rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-decoration: none;
-    }
-    .skip-link:focus {
-      top: 0.75rem;
-      outline: 2px solid #4ade80;
-      outline-offset: 2px;
-    }
-    #more-dropdown, #mobile-nav { display: none; }
-    #more-dropdown.is-open { display: block; }
-    #mobile-nav.is-open { display: block; }
-    /* Full primary nav does not fit beside the full brand name below 1280px.
-       Keep the hamburger through that range so the name stays one line. */
-    @media (min-width: 1280px) {
-      #mobile-nav.is-open { display: none !important; }
-    }
-    header .site-header-inner { width: 100%; }
-    header .site-header-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-      height: 4rem;
-      flex-wrap: nowrap;
-    }
-    header .site-brand {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      flex-shrink: 0;
-      min-width: max-content;
-      text-decoration: none;
-    }
-    header .site-brand-name {
-      white-space: nowrap;
-      flex-shrink: 0;
-      font-weight: 900;
-      color: #fff;
-      line-height: 1.2;
-      letter-spacing: 0.03em;
-      font-size: clamp(0.7rem, 3.5vw, 0.875rem);
-    }
-    @media (min-width: 480px) {
-      header .site-brand-name {
-        font-size: 0.875rem;
-        letter-spacing: 0.05em;
-      }
-    }
-    @media (min-width: 1280px) {
-      header .site-brand-name {
-        font-size: 1rem;
-        letter-spacing: 0.05em;
-      }
-    }
-    header .site-nav-desktop { display: none; }
-    header .site-nav-burger { display: inline-flex; flex-shrink: 0; }
-    @media (min-width: 1280px) {
-      header .site-nav-desktop {
-        display: flex;
-        align-items: center;
-        flex-shrink: 0;
-        gap: 0.5rem;
-      }
-      header .site-nav-burger { display: none !important; }
-    }
-    @media (min-width: 1440px) {
-      header .site-nav-desktop { gap: 0.9rem; }
-    }
-    @media (min-width: 1680px) {
-      header .site-nav-desktop { gap: 1.25rem; }
-    }
-    .nav-burger {
-      width: 1.35rem; height: 1.05rem;
-      display: flex; flex-direction: column; justify-content: space-between;
-    }
-    .nav-burger span { display: block; height: 2px; background: #e2e8f0; border-radius: 1px; }
-    body.nav-open { overflow: hidden; }
-    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
-    details.board-faq > summary:focus-visible { outline: 2px solid #4ade80; outline-offset: 2px; }
-  </style>"""
+    # Compiled Tailwind + shared chrome CSS. Pages serves the file; it does not run Node.
+    return """  <link rel="preload" href="/assets/fonts/InterLatin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/site.css">
+"""
+
 
 
 def _nav_link(href: str, label: str, key: str, active: str, extra_cls: str = "") -> str:
@@ -2147,71 +2184,7 @@ def breadcrumb_ld(crumbs: list[tuple[str, str]], page_url: str = "") -> dict:
 
 
 def chrome_script() -> str:
-    return """  <script>
-  (function () {
-    var moreBtn = document.getElementById('more-toggle');
-    var morePanel = document.getElementById('more-dropdown');
-    var burger = document.getElementById('nav-toggle');
-    var drawer = document.getElementById('mobile-nav');
-    function setOpen(btn, panel, open) {
-      if (!btn || !panel) return;
-      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      if (open) panel.classList.add('is-open');
-      else panel.classList.remove('is-open');
-    }
-    if (moreBtn && morePanel) {
-      moreBtn.addEventListener('click', function (e) {
-        e.stopPropagation();
-        setOpen(moreBtn, morePanel, moreBtn.getAttribute('aria-expanded') !== 'true');
-      });
-    }
-    if (burger && drawer) {
-      burger.addEventListener('click', function () {
-        var open = burger.getAttribute('aria-expanded') !== 'true';
-        setOpen(burger, drawer, open);
-        document.body.classList.toggle('nav-open', open);
-        burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-        if (open) {
-          var first = drawer.querySelector('a');
-          if (first) first.focus();
-        }
-      });
-      drawer.querySelectorAll('a').forEach(function (a) {
-        a.addEventListener('click', function () {
-          setOpen(burger, drawer, false);
-          document.body.classList.remove('nav-open');
-          burger.setAttribute('aria-label', 'Open menu');
-        });
-      });
-    }
-    document.addEventListener('click', function (e) {
-      if (moreBtn && morePanel && e.target !== moreBtn && !morePanel.contains(e.target)) {
-        setOpen(moreBtn, morePanel, false);
-      }
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') {
-        setOpen(moreBtn, morePanel, false);
-        if (burger && burger.getAttribute('aria-expanded') === 'true') {
-          setOpen(burger, drawer, false);
-          document.body.classList.remove('nav-open');
-          burger.setAttribute('aria-label', 'Open menu');
-          burger.focus();
-        }
-        return;
-      }
-      if (e.key !== 'Tab' || !drawer || !burger) return;
-      if (burger.getAttribute('aria-expanded') !== 'true') return;
-      var focusable = [burger].concat(Array.prototype.slice.call(drawer.querySelectorAll('a, button')));
-      if (!focusable.length) return;
-      var first = focusable[0];
-      var last = focusable[focusable.length - 1];
-      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-    });
-  })();
-  </script>
-"""
+    return '  <script src="/assets/js/site.js" defer></script>\n'
 
 
 def page_shell(
@@ -2265,7 +2238,7 @@ def page_shell(
     story_block = another_story_embed(pfx) if include_story_embed else ""
     fav = favicon_tags(prefix if prefix else "./")
     contact_strip = ""
-    return f"""<!DOCTYPE html>
+    return apply_performance_pass(f"""<!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
   <meta charset="UTF-8">
@@ -2304,13 +2277,11 @@ def page_shell(
 {story_block}
 </main>
 {footer_html(prefix if prefix else "./", active)}
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 {chrome_script()}
 {ppg_widgets_script()}
 {extra_scripts}</body>
 </html>
-"""
+""")
 
 
 def firm_card(firm: dict, show_rank: bool = True) -> str:
@@ -3203,19 +3174,32 @@ def home_flashlight_hero() -> tuple[str, str, str] | None:
     poster_rel = "assets/hero/board-sketch-to-home-poster.jpg"
     if not (asset_exists(wire_rel) and asset_exists(finished_rel)):
         return None
-    wire = prefix_asset(wire_rel)
-    finished = prefix_asset(finished_rel)
-    video = prefix_asset(video_rel) if asset_exists(video_rel) else ""
-    poster = prefix_asset(poster_rel) if asset_exists(poster_rel) else finished
+    def _layer(rel: str) -> tuple[str, str]:
+        variants = [(cand, width) for cand, width in variant_rels(rel) if width in (640, 1280)]
+        if not variants:
+            return prefix_asset(rel), ""
+        src_rel = variants[-1][0]
+        srcset = ", ".join(f"{prefix_asset(cand)} {width}w" for cand, width in variants)
+        return prefix_asset(src_rel), srcset
+
+    wire, wire_set = _layer(wire_rel)
+    finished, fin_set = _layer(finished_rel)
+    play_rel = playback_rel(video_rel) if asset_exists(video_rel) else ""
+    video = prefix_asset(play_rel) if play_rel else ""
+    poster_file = poster_rel_for(video_rel) or (poster_rel if asset_exists(poster_rel) else "")
+    poster = prefix_asset(poster_file) if poster_file else finished
+    wire_attr = f' srcset="{wire_set}" sizes="100vw"' if wire_set else ""
+    fin_attr = f' srcset="{fin_set}" sizes="100vw"' if fin_set else ""
     video_html = ""
     if video:
-        video_html = f"""      <video class="hero-ambient-video" muted loop autoplay playsinline preload="metadata" poster="{poster}" aria-hidden="true" tabindex="-1">
+        video_html = f"""      <video class="hero-ambient-video" muted loop playsinline preload="none" poster="{poster}">
         <source src="{video}" type="video/mp4">
-      </video>"""
+      </video>
+      <button type="button" class="hero-play" id="home-hero-play">Play video</button>"""
     html_block = f"""  <section class="flashlight-hero" id="home-hero" aria-labelledby="home-hero-title">
     <div class="hero-stage">
-      <img class="hero-layer hero-layer-finished" src="{finished}" alt="Illustrative Pacific Northwest home concept for Board of Project Stewardship — not a bid or stamped plan" width="1920" height="1085" decoding="async">
-      <img class="hero-layer hero-layer-wire" id="home-hero-wire" src="{wire}" alt="" width="1920" height="1085" decoding="async" fetchpriority="high">
+      <img class="hero-layer hero-layer-finished" src="{finished}"{fin_attr} alt="Illustrative Pacific Northwest home concept for Board of Project Stewardship — not a bid or stamped plan" width="1280" height="723" decoding="async" fetchpriority="high">
+      <img class="hero-layer hero-layer-wire" id="home-hero-wire" src="{wire}"{wire_attr} alt="" width="1280" height="723" decoding="async" loading="lazy">
 {video_html}
     </div>
     <div class="hero-scrim" aria-hidden="true"></div>
@@ -3234,8 +3218,11 @@ def home_flashlight_hero() -> tuple[str, str, str] | None:
     <p class="hero-credit">Educational concept · not a bid or stamped plan</p>
   </section>
   <noscript><style>.flashlight-hero .hero-layer-wire,.flashlight-hero .hero-hint,.flashlight-hero .hero-cursor{{display:none!important}}</style></noscript>"""
-    extra_head = f"""  <link rel="preload" as="image" href="{wire}" fetchpriority="high">
-  <link rel="preload" as="image" href="{finished}">
+    if fin_set:
+        preload = f'  <link rel="preload" as="image" href="{finished}" imagesrcset="{fin_set}" imagesizes="100vw" fetchpriority="high">'
+    else:
+        preload = f'  <link rel="preload" as="image" href="{finished}" fetchpriority="high">'
+    extra_head = f"""{preload}
   <style>
     .flashlight-hero {{
       --hero-gutter: clamp(18px, 4.6vw, 72px);
@@ -3270,16 +3257,41 @@ def home_flashlight_hero() -> tuple[str, str, str] | None:
     .flashlight-hero .hero-layer-finished {{ z-index: 1; }}
     .flashlight-hero .hero-layer-wire {{
       z-index: 2;
+      display: none;
       -webkit-mask-repeat: no-repeat;
       mask-repeat: no-repeat;
     }}
+    .flashlight-hero.is-flashlight .hero-layer-wire {{ display: block; }}
     .flashlight-hero .hero-ambient-video {{
-      display: block;
+      display: none;
       z-index: 2;
       object-fit: cover;
       object-position: center center;
       pointer-events: none;
     }}
+    .flashlight-hero.is-video-playing .hero-ambient-video {{ display: block; }}
+    .flashlight-hero .hero-play {{
+      position: absolute;
+      z-index: 7;
+      top: 46%;
+      left: 62%;
+      transform: translate(-50%, -50%);
+      margin: 0;
+      padding: 0.9rem 1.1rem;
+      border: 1px solid #F2F2EE;
+      border-radius: 999px;
+      background: rgba(12,12,12,0.72);
+      color: #F2F2EE;
+      font: 700 11px/1 Inter, system-ui, sans-serif;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }}
+    .flashlight-hero .hero-play:hover,
+    .flashlight-hero .hero-play:focus-visible {{ color: #4ade80; border-color: #4ade80; outline: none; }}
+    .flashlight-hero.is-video-playing .hero-play,
+    .flashlight-hero.is-reduced .hero-play,
+    .flashlight-hero.is-flashlight .hero-play {{ display: none; }}
     .flashlight-hero.is-video-playing {{
       cursor: auto;
     }}
@@ -3470,6 +3482,7 @@ def home_flashlight_hero() -> tuple[str, str, str] | None:
       .flashlight-hero .hero-layer-wire,
       .flashlight-hero .hero-cursor,
       .flashlight-hero .hero-hint,
+      .flashlight-hero .hero-play,
       .flashlight-hero .hero-ambient-video {{ display: none !important; }}
     }}
   </style>
@@ -3585,30 +3598,35 @@ def home_flashlight_hero() -> tuple[str, str, str] | None:
     if (!reduced()) startFlashlightLoop();
   }
 
-  function tryAmbientVideo() {
-    if (reduced() || !video) {
-      if (video) {
-        try { video.pause(); } catch (err) {}
-        video.style.display = 'none';
-      }
-      hero.classList.remove('is-video-playing');
-      return;
+  var playBtn = document.getElementById('home-hero-play');
+  function showStill() {
+    videoMode = false;
+    hero.classList.remove('is-video-playing');
+    if (video) {
+      try { video.pause(); } catch (err) {}
     }
+  }
+  function playHeroVideo() {
+    if (reduced() || !video) return;
     video.muted = true;
     video.setAttribute('playsinline', '');
-    video.style.display = '';
+    video.preload = 'auto';
     var onFail = function () { enableFlashlightFallback(); };
     video.addEventListener('error', onFail, { once: true });
-    var playPromise = video.play();
-    if (playPromise && typeof playPromise.then === 'function') {
-      playPromise.then(function () {
-        if (!video.paused) enableVideoMode();
-        else onFail();
-      }).catch(onFail);
-    } else {
+    var started = function () {
       if (!video.paused) enableVideoMode();
       else onFail();
-    }
+    };
+    var playPromise = video.play();
+    if (playPromise && typeof playPromise.then === 'function') playPromise.then(started).catch(onFail);
+    else started();
+  }
+  if (playBtn) {
+    playBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      e.preventDefault();
+      playHeroVideo();
+    });
   }
 
   hero.addEventListener('pointerdown', function (e) {
@@ -3673,7 +3691,7 @@ def home_flashlight_hero() -> tuple[str, str, str] | None:
       stopFlashlightLoop();
       return;
     }
-    tryAmbientVideo();
+    showStill();
   }
 
   if (motionQuery.addEventListener) motionQuery.addEventListener('change', syncMotion);
@@ -14143,6 +14161,7 @@ def main(argv: list[str] | None = None) -> None:
     write_llms_txt()
     write_posts_json(posts)
     write_rss(posts)
+    finalize_published_html()
     write_sitemap(posts)
     patch_tool_pages()
     # Plural tool URL was a second indexable copy of the energy worksheet.
@@ -14173,6 +14192,7 @@ def main(argv: list[str] | None = None) -> None:
     print(f"  IndexNow key hosted at /{indexnow_key}.txt (preserved via .well-known/indexnow-key.txt)")
     if args.indexnow or os.environ.get("INDEXNOW_PING") == "1":
         ping_indexnow()
+    finalize_published_html()
     print("Done.")
 
 

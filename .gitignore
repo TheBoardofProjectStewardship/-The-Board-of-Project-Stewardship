@@ -1,5 +1,6 @@
 __pycache__/
 *.pyc
+node_modules/
 assets/images/**/*.webp
 !assets/images/home-*.webp
 !assets/images/another-story-banner.webp
@@ -33,3 +34,9 @@ intake/lock/*
 # Place SEO hub stills (wave1/wave2 + Locations) — must ship on GitHub Pages
 !assets/images/places/
 !assets/images/places/**
+# Responsive derivatives of tracked stills
+!assets/images/**/*-480.webp
+!assets/images/**/*-640.webp
+!assets/images/**/*-800.webp
+!assets/images/**/*-1200.webp
+!assets/images/**/*-1280.webp

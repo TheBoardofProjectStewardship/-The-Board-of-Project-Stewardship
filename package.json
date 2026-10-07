@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "description": "Build-time CSS for the static site. GitHub Pages serves assets/css/site.css; it does not run this package.",
+  "devDependencies": {
+    "tailwindcss": "3.4.17"
+  }
+}

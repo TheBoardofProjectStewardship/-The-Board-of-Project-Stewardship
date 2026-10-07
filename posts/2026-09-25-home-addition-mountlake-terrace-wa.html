@@ -26,224 +26,9 @@
   <link rel="icon" href="https://boardofprojectstewardship.com/assets/icons/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="https://boardofprojectstewardship.com/assets/icons/apple-touch-icon.png">
   <title>Home Addition Mountlake Terrace WA | Board of Project Stewardship</title>
-  <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
-  <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
-  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-  <link rel="preload" href="/assets/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            obsidian: '#0a0a0a',
-            charcoal: '#1a1a1a',
-            'dark-gray': '#2a2a2a',
-            primary: '#166534',
-            secondary: '#4ade80',
-          },
-          boxShadow: {
-            'glow-sleek': '0 0 15px -5px rgba(22, 101, 52, 0.3)',
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    @font-face {
-      font-family: 'Inter';
-      font-style: normal;
-      font-weight: 100 900;
-      font-display: swap;
-      src: url('/assets/fonts/InterVariable.woff2') format('woff2');
-    }
-    @font-face {
-      font-family: 'Inter';
-      font-style: normal;
-      font-weight: 400;
-      font-display: swap;
-      src: url('/assets/fonts/Inter-Regular.woff2') format('woff2');
-    }
-    @font-face {
-      font-family: 'Inter';
-      font-style: normal;
-      font-weight: 500;
-      font-display: swap;
-      src: url('/assets/fonts/Inter-Medium.woff2') format('woff2');
-    }
-    @font-face {
-      font-family: 'Inter';
-      font-style: normal;
-      font-weight: 600;
-      font-display: swap;
-      src: url('/assets/fonts/Inter-SemiBold.woff2') format('woff2');
-    }
-    @font-face {
-      font-family: 'Inter';
-      font-style: normal;
-      font-weight: 700;
-      font-display: swap;
-      src: url('/assets/fonts/Inter-Bold.woff2') format('woff2');
-    }
-    body { font-family: 'Inter', system-ui, sans-serif; background-color: #0a0a0a; color: #e0e0e0; }
-    .bg-grid-pattern {
-      background-image:
-        linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-    }
-    .card-hover { transition: transform 0.25s ease, border-color 0.25s ease; }
-    .card-hover:hover { transform: translateY(-3px); }
-    .rank-badge {
-      min-width: 2.75rem; height: 2.75rem;
-      display: flex; align-items: center; justify-content: center;
-      border-radius: 0.5rem; font-weight: 800; font-size: 0.95rem;
-      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: #94a3b8;
-    }
-    .prose-board a { color: #4ade80; text-decoration: underline; }
-    .prose-board h2 { font-size: 1.5rem; font-weight: 800; color: white; margin: 1.75rem 0 0.75rem; }
-    .prose-board h3 { font-size: 1.15rem; font-weight: 700; color: white; margin: 1.25rem 0 0.5rem; }
-    .prose-board p, .prose-board li { color: #cbd5e1; font-weight: 300; line-height: 1.7; margin-bottom: 0.85rem; }
-    .prose-board ul { list-style: disc; padding-left: 1.25rem; margin-bottom: 1rem; }
-    .prose-board ol { list-style: decimal; padding-left: 1.25rem; margin-bottom: 1rem; }
-    .prose-board strong { color: #fff; font-weight: 600; }
-    .prose-board .post-figure {
-      margin: 1.5rem 0;
-      border-radius: 0.75rem;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.02);
-    }
-    .prose-board .post-figure img {
-      display: block;
-      width: 100%;
-      height: auto;
-      max-height: 32rem;
-      object-fit: cover;
-    }
-    .prose-board .post-figure figcaption {
-      padding: 0.65rem 0.9rem;
-      font-size: 0.85rem;
-      color: #94a3b8;
-      font-weight: 300;
-      line-height: 1.4;
-      border-top: 1px solid rgba(255,255,255,0.06);
-    }
-    .prose-board .video-embed {
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%; /* 16:9 */
-      height: 0;
-      margin: 1.5rem 0;
-      border-radius: 0.75rem;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: #000;
-    }
-    .prose-board .video-embed iframe {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      border: 0;
-    }
-    #tools input, #tools select, #tools textarea {
-      color-scheme: dark;
-    }
-    #tools input::placeholder, #tools textarea::placeholder { color: #64748b; }
-    #calc-result { letter-spacing: -0.02em; }
-    .skip-link {
-      position: absolute;
-      left: 0.75rem;
-      top: -3.25rem;
-      z-index: 80;
-      background: #166534;
-      color: #fff;
-      padding: 0.55rem 0.9rem;
-      border-radius: 0.375rem;
-      font-size: 0.7rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-decoration: none;
-    }
-    .skip-link:focus {
-      top: 0.75rem;
-      outline: 2px solid #4ade80;
-      outline-offset: 2px;
-    }
-    #more-dropdown, #mobile-nav { display: none; }
-    #more-dropdown.is-open { display: block; }
-    #mobile-nav.is-open { display: block; }
-    /* Full primary nav does not fit beside the full brand name below 1280px.
-       Keep the hamburger through that range so the name stays one line. */
-    @media (min-width: 1280px) {
-      #mobile-nav.is-open { display: none !important; }
-    }
-    header .site-header-inner { width: 100%; }
-    header .site-header-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-      height: 4rem;
-      flex-wrap: nowrap;
-    }
-    header .site-brand {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      flex-shrink: 0;
-      min-width: max-content;
-      text-decoration: none;
-    }
-    header .site-brand-name {
-      white-space: nowrap;
-      flex-shrink: 0;
-      font-weight: 900;
-      color: #fff;
-      line-height: 1.2;
-      letter-spacing: 0.03em;
-      font-size: clamp(0.7rem, 3.5vw, 0.875rem);
-    }
-    @media (min-width: 480px) {
-      header .site-brand-name {
-        font-size: 0.875rem;
-        letter-spacing: 0.05em;
-      }
-    }
-    @media (min-width: 1280px) {
-      header .site-brand-name {
-        font-size: 1rem;
-        letter-spacing: 0.05em;
-      }
-    }
-    header .site-nav-desktop { display: none; }
-    header .site-nav-burger { display: inline-flex; flex-shrink: 0; }
-    @media (min-width: 1280px) {
-      header .site-nav-desktop {
-        display: flex;
-        align-items: center;
-        flex-shrink: 0;
-        gap: 0.5rem;
-      }
-      header .site-nav-burger { display: none !important; }
-    }
-    @media (min-width: 1440px) {
-      header .site-nav-desktop { gap: 0.9rem; }
-    }
-    @media (min-width: 1680px) {
-      header .site-nav-desktop { gap: 1.25rem; }
-    }
-    .nav-burger {
-      width: 1.35rem; height: 1.05rem;
-      display: flex; flex-direction: column; justify-content: space-between;
-    }
-    .nav-burger span { display: block; height: 2px; background: #e2e8f0; border-radius: 1px; }
-    body.nav-open { overflow: hidden; }
-    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
-    details.board-faq > summary:focus-visible { outline: 2px solid #4ade80; outline-offset: 2px; }
-  </style>
+  <link rel="preload" href="/assets/fonts/InterLatin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/site.css">
+
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -412,7 +197,7 @@
       </ol>
     </nav>
     <div class="mb-8 overflow-hidden rounded-xl border border-white/10">
-      <img src="../assets/images/posts/2026-09-25-mlt-addition-1.webp" alt="Home Addition Mountlake Terrace WA — Setbacks, Stormwater &amp; Design-Build Sequencing" class="w-full h-52 sm:h-72 object-cover" width="1600" height="900" loading="eager">
+      <img src="../assets/images/posts/2026-09-25-mlt-addition-1-800.webp" alt="Home Addition Mountlake Terrace WA — Setbacks, Stormwater &amp; Design-Build Sequencing" class="w-full h-52 sm:h-72 object-cover" width="1600" height="900" loading="eager" srcset="../assets/images/posts/2026-09-25-mlt-addition-1-480.webp 480w, ../assets/images/posts/2026-09-25-mlt-addition-1-800.webp 800w, ../assets/images/posts/2026-09-25-mlt-addition-1-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px" fetchpriority="high">
     </div>
     <div class="text-[11px] uppercase tracking-widest text-secondary font-bold mb-3">Additions · 2026-09-25</div>
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-4">Home Addition Mountlake Terrace WA — Setbacks, Stormwater &amp; Design-Build Sequencing</h1>
@@ -425,12 +210,12 @@
 <li>Shortlist from our <a href="../additions.html">home additions directory</a>, then verify every contractor at <a href="https://secure.lni.wa.gov/verify/">L&amp;I Verify</a>.</li>
 </ul>
 <p>Mountlake Terrace sits in south Snohomish County between Edmonds, Shoreline, and the I-5 corridor — a compact city of mid-century ranches, split-levels, and newer infill where a home addition is often a setback, drainage, and sequencing story as much as a framing story. Many households want a primary suite, a kitchen bump-out, or a family-room wing without leaving the North Sound commute pattern. Durable projects start with what the lot and the City will actually allow, then lock design-build coordination so temporary weather protection, inspections, and finishes share one critical path.</p>
-<figure class="post-figure"><img src="../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-2.webp" alt="Illustrative: Mountlake Terrace, Washington — a house with a new one-story addition and a matching roof, late afternoon sun through firs — not a real Board of Project Stewardship job photo" loading="lazy" width="1200" height="675"><figcaption>Illustrative: Mountlake Terrace, Washington — a house with a new one-story addition and a matching roof, late afternoon sun through firs — not a real Board of Project Stewardship job photo</figcaption></figure>
+<figure class="post-figure"><img src="../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-2-800.webp" alt="Illustrative: Mountlake Terrace, Washington — a house with a new one-story addition and a matching roof, late afternoon sun through firs — not a real Board of Project Stewardship job photo" loading="lazy" width="1200" height="675" srcset="../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-2-480.webp 480w, ../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-2-800.webp 800w, ../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-2-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px"><figcaption>Illustrative: Mountlake Terrace, Washington — a house with a new one-story addition and a matching roof, late afternoon sun through firs — not a real Board of Project Stewardship job photo</figcaption></figure>
 <h2>Neighborhood and jurisdiction context</h2>
 <p>Whether you are near Town Center, the Interurban Trail corridor, Lake Ballinger–adjacent streets, or closer to the Edmonds and Brier edges, staging still matters. Narrow lots, shared driveways, and street parking limit dumpster and lumber deliveries. Ask bidders how they protect finished rooms on the haul path, how long temporary weather wrap stays up in a wet stretch, and who owns change-order language when excavation discovers soft soils or an undersized footing under an existing wall you planned to open.</p>
 <p>HOA or neighborhood design expectations can affect exterior materials, window proportions, and dumpster placement even when the addition itself is clearly allowed. Put those constraints in the proposal so they are not discovered after framing starts. Cross-check <a href="../trades.html">trades.html</a> for excavation, concrete, framing, and roofing context when your scope touches the envelope.</p>
-<figure class="post-figure"><img src="../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-3.webp" alt="Illustrative: Mountlake Terrace, Washington — a new foundation and stem wall beside an existing house, rainy daylight — not a real Board of Project Stewardship job photo" loading="lazy" width="1200" height="675"><figcaption>Illustrative: Mountlake Terrace, Washington — a new foundation and stem wall beside an existing house, rainy daylight — not a real Board of Project Stewardship job photo</figcaption></figure>
-<figure class="post-figure"><img src="../assets/images/places/snohomish/snohomish-home-addition-pnw.webp" alt="Illustrative Snohomish County home addition — how a new wing meets the existing house when you check setbacks and lot coverage, not a Mountlake Terrace permit photo" loading="lazy" width="1200" height="675"><figcaption>Illustrative Snohomish County home addition — how a new wing meets the existing house when you check setbacks and lot coverage, not a Mountlake Terrace permit photo</figcaption></figure>
+<figure class="post-figure"><img src="../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-3-800.webp" alt="Illustrative: Mountlake Terrace, Washington — a new foundation and stem wall beside an existing house, rainy daylight — not a real Board of Project Stewardship job photo" loading="lazy" width="1200" height="675" srcset="../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-3-480.webp 480w, ../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-3-800.webp 800w, ../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-3-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px"><figcaption>Illustrative: Mountlake Terrace, Washington — a new foundation and stem wall beside an existing house, rainy daylight — not a real Board of Project Stewardship job photo</figcaption></figure>
+<figure class="post-figure"><img src="../assets/images/places/snohomish/snohomish-home-addition-pnw-800.webp" alt="Illustrative Snohomish County home addition — how a new wing meets the existing house when you check setbacks and lot coverage, not a Mountlake Terrace permit photo" loading="lazy" width="1200" height="675" srcset="../assets/images/places/snohomish/snohomish-home-addition-pnw-480.webp 480w, ../assets/images/places/snohomish/snohomish-home-addition-pnw-800.webp 800w, ../assets/images/places/snohomish/snohomish-home-addition-pnw-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px"><figcaption>Illustrative Snohomish County home addition — how a new wing meets the existing house when you check setbacks and lot coverage, not a Mountlake Terrace permit photo</figcaption></figure>
 <h2>Climate, setbacks, stormwater, and permits</h2>
 <p>Western Washington’s cool, damp seasons punish weak drainage and envelope detailing. If you enlarge the footprint, change roof planes, or disturb grades, expect building review plus possible engineering and stormwater requirements — confirm the current checklist with Mountlake Terrace rather than assuming an Edmonds MyBuildingPermit package or a Kirkland Eastside hillside package transfers. Put permit ownership, inspection sequencing, and temporary living plans in writing before demolition or excavation begins.</p>
 <p>Mountlake Terrace publishes residential building application types and filing requirements on its <a href="https://www.cityofmlt.com/177/Building-Permits">Building Permits</a> page and routes online applications and inspection scheduling through the City’s <a href="https://mltw-trk.aspgov.com/eTRAKiT/">Permit Portal</a> (also linked from <a href="https://www.cityofmlt.com/1993/Permits-Licenses">Permits &amp; Licenses</a>). Typical residential review timing published by the City is measured from submittal to first comments — plan for that cycle rather than treating issuance as same-week for a full addition. Do not assume a “small bump-out” skips review when you change structure, exterior walls, or utilities.</p>
@@ -441,20 +226,20 @@
 <li>Lock structure and weatherproofing details (connections, sheathing, WRB, flashings) before finish selections freeze shop drawings.</li>
 <li>Submit the City permit path, hold cover-up until inspections clear, and keep temporary living and neighbor staging visible on the schedule.</li>
 </ol>
-<figure class="post-figure"><img src="../assets/images/posts/2026-09-25-mlt-addition-2.webp" alt="Illustrative foundation and sill connection detail for a residential addition in a wet Pacific Northwest climate — illustrative only, not a real job photo" loading="lazy" width="1200" height="675"><figcaption>Illustrative foundation and sill connection detail for a residential addition in a wet Pacific Northwest climate — illustrative only, not a real job photo</figcaption></figure>
-<figure class="post-figure"><img src="../assets/images/places/snohomish/snohomish-exterior-context-pnw.webp" alt="Illustrative exterior grade and roof edge on a Snohomish County house — downspouts and yard drainage to review when an addition grows the footprint, not a Mountlake Terrace stormwater plan" loading="lazy" width="1200" height="675"><figcaption>Illustrative exterior grade and roof edge on a Snohomish County house — downspouts and yard drainage to review when an addition grows the footprint, not a Mountlake Terrace stormwater plan</figcaption></figure>
+<figure class="post-figure"><img src="../assets/images/posts/2026-09-25-mlt-addition-2-800.webp" alt="Illustrative foundation and sill connection detail for a residential addition in a wet Pacific Northwest climate — illustrative only, not a real job photo" loading="lazy" width="1200" height="675" srcset="../assets/images/posts/2026-09-25-mlt-addition-2-480.webp 480w, ../assets/images/posts/2026-09-25-mlt-addition-2-800.webp 800w, ../assets/images/posts/2026-09-25-mlt-addition-2-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px"><figcaption>Illustrative foundation and sill connection detail for a residential addition in a wet Pacific Northwest climate — illustrative only, not a real job photo</figcaption></figure>
+<figure class="post-figure"><img src="../assets/images/places/snohomish/snohomish-exterior-context-pnw-800.webp" alt="Illustrative exterior grade and roof edge on a Snohomish County house — downspouts and yard drainage to review when an addition grows the footprint, not a Mountlake Terrace stormwater plan" loading="lazy" width="1200" height="675" srcset="../assets/images/places/snohomish/snohomish-exterior-context-pnw-480.webp 480w, ../assets/images/places/snohomish/snohomish-exterior-context-pnw-800.webp 800w, ../assets/images/places/snohomish/snohomish-exterior-context-pnw-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px"><figcaption>Illustrative exterior grade and roof edge on a Snohomish County house — downspouts and yard drainage to review when an addition grows the footprint, not a Mountlake Terrace stormwater plan</figcaption></figure>
 <h2>Process video: second-story framing fundamentals</h2>
 <p>A clear public walkthrough of layout, LVL and I-joist sequencing, and floor-system work when adding volume over an existing house (general best practice — still follow your engineer’s drawings and the Mountlake Terrace inspection path):</p>
-<div class="video-embed"><iframe src="https://www.youtube.com/embed/7n0NE2WJegw" title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
-<div class="video-embed"><video controls playsinline preload="metadata" muted style="width:100%;border-radius:12px;background:#000"><source src="../assets/videos/posts/2026-09-25-mlt-addition.mp4" type="video/mp4"></video></div>
+<div class="video-embed"><div class="embed-facade-frame"><button type="button" class="embed-facade" data-embed-src="https://www.youtube-nocookie.com/embed/7n0NE2WJegw" data-embed-title="YouTube video">Play video</button></div></div>
+<div class="video-embed"><video poster="../assets/videos/posts/2026-09-25-mlt-addition-poster.webp" controls playsinline preload="none" muted style="width:100%;border-radius:12px;background:#000"><source src="../assets/videos/posts/2026-09-25-mlt-addition-720.mp4" type="video/mp4"></video></div>
 <p>Educational process clip.</p>
 <h2>Design-build sequencing and trade coordination</h2>
 <p>Measure existing room heights, roof pitches, and mechanical routes honestly before you freeze a pretty floor plan. A kitchen or primary-suite bump-out that looks simple on paper can stall if the range hood, panel capacity, stair, or roof penetration were never coordinated. Prefer a single design-build path (or a tightly managed architect-plus-GC team) so drawings, allowances, and inspection holds share one schedule.</p>
 <p>Structural openings into existing walls, beam upgrades for open plans, and second-story loads on older foundations belong on the critical path with the engineer — not as a late “field clarification.” If a second story or ADU-related utility upgrade is on the table, treat it as one coordination problem so stairs, lateral bracing, and roof weatherproofing are not trapped. Relative planning companions: <a href="../another-story.html">another-story.html</a>, <a href="../kitchen.html">kitchen.html</a>, and <a href="../bathrooms.html">bathrooms.html</a> when the addition includes those rooms.</p>
-<figure class="post-figure"><img src="../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-4.webp" alt="Illustrative: Mountlake Terrace, Washington — a one-story addition corner with board-and-batten, soft overcast morning light — not a real Board of Project Stewardship job photo" loading="lazy" width="1200" height="675"><figcaption>Illustrative: Mountlake Terrace, Washington — a one-story addition corner with board-and-batten, soft overcast morning light — not a real Board of Project Stewardship job photo</figcaption></figure>
-<figure class="post-figure"><img src="../assets/images/posts/2026-09-25-mlt-addition-3.webp" alt="Illustrative nearly weatherproofed Pacific Northwest home addition with roof sheathing and housewrap underway — illustrative only, not a real job photo" loading="lazy" width="1200" height="675"><figcaption>Illustrative nearly weatherproofed Pacific Northwest home addition with roof sheathing and housewrap underway — illustrative only, not a real job photo</figcaption></figure>
-<figure class="post-figure"><img src="../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-5.webp" alt="Illustrative: Mountlake Terrace, Washington — a foundation stem wall and drainage trench in coastal haze — not a real Board of Project Stewardship job photo" loading="lazy" width="1200" height="675"><figcaption>Illustrative: Mountlake Terrace, Washington — a foundation stem wall and drainage trench in coastal haze — not a real Board of Project Stewardship job photo</figcaption></figure>
-<figure class="post-figure"><img src="../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-6.webp" alt="Illustrative: Mountlake Terrace, Washington — an addition wrapped in weather barrier in the rain — not a real Board of Project Stewardship job photo" loading="lazy" width="1200" height="675"><figcaption>Illustrative: Mountlake Terrace, Washington — an addition wrapped in weather barrier in the rain — not a real Board of Project Stewardship job photo</figcaption></figure>
+<figure class="post-figure"><img src="../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-4-800.webp" alt="Illustrative: Mountlake Terrace, Washington — a one-story addition corner with board-and-batten, soft overcast morning light — not a real Board of Project Stewardship job photo" loading="lazy" width="1200" height="675" srcset="../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-4-480.webp 480w, ../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-4-800.webp 800w, ../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-4-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px"><figcaption>Illustrative: Mountlake Terrace, Washington — a one-story addition corner with board-and-batten, soft overcast morning light — not a real Board of Project Stewardship job photo</figcaption></figure>
+<figure class="post-figure"><img src="../assets/images/posts/2026-09-25-mlt-addition-3-800.webp" alt="Illustrative nearly weatherproofed Pacific Northwest home addition with roof sheathing and housewrap underway — illustrative only, not a real job photo" loading="lazy" width="1200" height="675" srcset="../assets/images/posts/2026-09-25-mlt-addition-3-480.webp 480w, ../assets/images/posts/2026-09-25-mlt-addition-3-800.webp 800w, ../assets/images/posts/2026-09-25-mlt-addition-3-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px"><figcaption>Illustrative nearly weatherproofed Pacific Northwest home addition with roof sheathing and housewrap underway — illustrative only, not a real job photo</figcaption></figure>
+<figure class="post-figure"><img src="../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-5-800.webp" alt="Illustrative: Mountlake Terrace, Washington — a foundation stem wall and drainage trench in coastal haze — not a real Board of Project Stewardship job photo" loading="lazy" width="1200" height="675" srcset="../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-5-480.webp 480w, ../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-5-800.webp 800w, ../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-5-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px"><figcaption>Illustrative: Mountlake Terrace, Washington — a foundation stem wall and drainage trench in coastal haze — not a real Board of Project Stewardship job photo</figcaption></figure>
+<figure class="post-figure"><img src="../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-6-800.webp" alt="Illustrative: Mountlake Terrace, Washington — an addition wrapped in weather barrier in the rain — not a real Board of Project Stewardship job photo" loading="lazy" width="1200" height="675" srcset="../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-6-480.webp 480w, ../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-6-800.webp 800w, ../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-6-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px"><figcaption>Illustrative: Mountlake Terrace, Washington — an addition wrapped in weather barrier in the rain — not a real Board of Project Stewardship job photo</figcaption></figure>
 <p>Board rankings on <a href="../additions.html">additions.html</a> place <strong>Pacific Pro Group</strong> at #1 for home additions in this editorial set — <a href="https://pacificprogroup.com/">pacificprogroup.com</a>, license PACIFPG765OF. Re-verify every bidder at <a href="https://secure.lni.wa.gov/verify/">L&amp;I Verify</a>. Pair with the <a href="../blog.html">blog</a> for related King and Snohomish addition posts, and <a href="../edmonds-custom-homes.html">edmonds-custom-homes.html</a> when you are comparing nearby city process notes — Mountlake Terrace’s own code and lot still govern your project.</p>
 <h2>Materials Worth Knowing</h2>
 <p>Manufacturer product pages for weather barrier, insulation, and openings when you compare scopes (no prices or endorsements implied):</p>
@@ -475,7 +260,7 @@
 <p><strong>Where should I shortlist contractors?</strong></p>
 <p>Use the Board’s <a href="../additions.html">additions directory</a>, interview two or three licensed firms, request written scopes, and verify each at <a href="https://secure.lni.wa.gov/verify/">L&amp;I Verify</a>.</p>
 <h2>Mountlake Terrace vs Edmonds coastal and Eastside addition scopes</h2>
-<figure class="post-figure"><img src="../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-7.webp" alt="Illustrative: Mountlake Terrace, Washington — addition interior with shaker doors and a view of the new roof, soft morning light — not a real Board of Project Stewardship job photo" loading="lazy" width="1200" height="675"><figcaption>Illustrative: Mountlake Terrace, Washington — addition interior with shaker doors and a view of the new roof, soft morning light — not a real Board of Project Stewardship job photo</figcaption></figure>
+<figure class="post-figure"><img src="../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-7-800.webp" alt="Illustrative: Mountlake Terrace, Washington — addition interior with shaker doors and a view of the new roof, soft morning light — not a real Board of Project Stewardship job photo" loading="lazy" width="1200" height="675" srcset="../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-7-480.webp 480w, ../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-7-800.webp 800w, ../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-7-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px"><figcaption>Illustrative: Mountlake Terrace, Washington — addition interior with shaker doors and a view of the new roof, soft morning light — not a real Board of Project Stewardship job photo</figcaption></figure>
 <p>Edmonds and other Sound-facing lots take more wind-driven wetting and salt air on the exterior envelope; inland Mountlake Terrace still sees the same cool, damp climate that slows drying and stresses paint and WRB detailing. Eastside hillside packages (clay soils, steeper grades) do not automatically transfer either. Ask firms that also work Edmonds, Shoreline, or Kirkland how their Mountlake Terrace details change when marine exposure or steep Eastside drainage is not the driver — the honest answer is usually setbacks, stormwater, City portal process, and sequencing, not a one-size coastal or Eastside package. Cross-check <a href="../roofing.html">roofing.html</a> and <a href="../siding.html">siding.html</a> when the addition reworks the envelope; the City still issues the local building path for your lot through its <a href="https://mltw-trk.aspgov.com/eTRAKiT/">Permit Portal</a>.</p>
 <h2>Putting it together for homeowners</h2>
 <p>For <strong>home additions in Mountlake Terrace</strong>, durable projects share a pattern: respect the <strong>City of Mountlake Terrace permit path</strong>, put <strong>setbacks, stormwater, and structure</strong> on the critical path, and keep <strong>staging and inspection holds</strong> visible before finish selections freeze. Style still matters — it just should not outrun the soils, the weather wrap schedule, or the written allowances.</p>
@@ -571,7 +356,7 @@
 
   <section id="another-story-sea-embed" class="max-w-6xl mx-auto px-4 py-12 relative z-20 border-t border-white/5">
     <div class="mb-6 overflow-hidden rounded-xl border border-white/10">
-      <img src="../assets/images/another-story-banner.webp" alt="Conceptual before-and-after second-story idea for Another Story SEA" class="w-full h-48 sm:h-64 object-cover" width="1200" height="630" loading="eager">
+      <img src="../assets/images/another-story-banner-800.webp" alt="Conceptual before-and-after second-story idea for Another Story SEA" class="w-full h-48 sm:h-64 object-cover" width="1200" height="630" loading="lazy" srcset="../assets/images/another-story-banner-480.webp 480w, ../assets/images/another-story-banner-800.webp 800w, ../assets/images/another-story-banner-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
     </div>
     <div class="mb-5">
       <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Board feature</p>
@@ -643,72 +428,7 @@
       </div>
     </div>
   </footer>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-  <script>
-  (function () {
-    var moreBtn = document.getElementById('more-toggle');
-    var morePanel = document.getElementById('more-dropdown');
-    var burger = document.getElementById('nav-toggle');
-    var drawer = document.getElementById('mobile-nav');
-    function setOpen(btn, panel, open) {
-      if (!btn || !panel) return;
-      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      if (open) panel.classList.add('is-open');
-      else panel.classList.remove('is-open');
-    }
-    if (moreBtn && morePanel) {
-      moreBtn.addEventListener('click', function (e) {
-        e.stopPropagation();
-        setOpen(moreBtn, morePanel, moreBtn.getAttribute('aria-expanded') !== 'true');
-      });
-    }
-    if (burger && drawer) {
-      burger.addEventListener('click', function () {
-        var open = burger.getAttribute('aria-expanded') !== 'true';
-        setOpen(burger, drawer, open);
-        document.body.classList.toggle('nav-open', open);
-        burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-        if (open) {
-          var first = drawer.querySelector('a');
-          if (first) first.focus();
-        }
-      });
-      drawer.querySelectorAll('a').forEach(function (a) {
-        a.addEventListener('click', function () {
-          setOpen(burger, drawer, false);
-          document.body.classList.remove('nav-open');
-          burger.setAttribute('aria-label', 'Open menu');
-        });
-      });
-    }
-    document.addEventListener('click', function (e) {
-      if (moreBtn && morePanel && e.target !== moreBtn && !morePanel.contains(e.target)) {
-        setOpen(moreBtn, morePanel, false);
-      }
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') {
-        setOpen(moreBtn, morePanel, false);
-        if (burger && burger.getAttribute('aria-expanded') === 'true') {
-          setOpen(burger, drawer, false);
-          document.body.classList.remove('nav-open');
-          burger.setAttribute('aria-label', 'Open menu');
-          burger.focus();
-        }
-        return;
-      }
-      if (e.key !== 'Tab' || !drawer || !burger) return;
-      if (burger.getAttribute('aria-expanded') !== 'true') return;
-      var focusable = [burger].concat(Array.prototype.slice.call(drawer.querySelectorAll('a, button')));
-      if (!focusable.length) return;
-      var first = focusable[0];
-      var last = focusable[focusable.length - 1];
-      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-    });
-  })();
-  </script>
+  <script src="/assets/js/site.js" defer></script>
 
   <script>
   (function () {
