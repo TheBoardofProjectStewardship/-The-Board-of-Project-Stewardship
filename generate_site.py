@@ -15,10 +15,12 @@ Pacific Pro Group appears only as Board directory #1 outbound, never as owner.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import html
 import json
 import os
 import re
+import subprocess
 import urllib.error
 import urllib.request
 from datetime import datetime
@@ -558,17 +560,35 @@ def rss_pubdate(date_s: str) -> str:
         return datetime.now().strftime("%a, %d %b %Y 08:00:00 -0700")
 
 
+RESEARCH_DIR = SITE_DIR / "data" / "research"
+
+
 def resolve_research_file(name: str) -> Path | None:
-    """Research markdown lives beside the site repo in OpenClaw; fall back locally."""
+    """Directory research is vendored in data/research so a clean checkout can rebuild.
+
+    Older checkouts may still have the files beside the repo; those paths stay as
+    fallbacks. A missing file is a build error (see load_rank_list), not a silent
+    HTML scrape.
+    """
     extra = os.environ.get("BOPS_RESEARCH_DIR", "").strip()
     candidates = [
+        RESEARCH_DIR / name,
         SITE_DIR / name,
         WORKSPACE / name,
-        Path("/workspace") / name,
         Path(extra) / name if extra else None,
     ]
+    seen: set[Path] = set()
     for p in candidates:
-        if p and p.is_file():
+        if not p:
+            continue
+        try:
+            key = p.resolve()
+        except OSError:
+            key = p
+        if key in seen:
+            continue
+        seen.add(key)
+        if p.is_file():
             return p
     return None
 
@@ -667,14 +687,20 @@ def load_rank_list(
     skip_rank_1: bool = False,
 ) -> list[dict]:
     path = resolve_research_file(research_name)
-    if path:
-        parsed = parser(path)
-        if parsed:
-            return parsed
-    recovered = parse_firms_from_html(SITE_DIR / html_name, skip_rank_1=skip_rank_1)
-    if recovered:
-        print(f"  research fallback: {html_name} ({len(recovered)} firms from existing HTML)")
-    return recovered
+    if not path:
+        raise SystemExit(
+            f"Missing directory research file {research_name}. "
+            f"Expected {RESEARCH_DIR / research_name}."
+        )
+    parsed = parser(path)
+    if not parsed:
+        raise SystemExit(f"Research file {path} parsed to zero firms ({html_name}).")
+    if skip_rank_1:
+        parsed = [
+            f for f in parsed
+            if f.get("rank") != 1 and f.get("name") != PPG["name"]
+        ]
+    return parsed
 
 
 def strip_md(s: str) -> str:
@@ -803,6 +829,11 @@ def parse_rank_table(section: str) -> list[dict]:
 
 def parse_additions_top30(path: Path) -> list[dict]:
     text = path.read_text(encoding="utf-8")
+    # Vendored snapshot is a markdown table. The older heading format still works.
+    if "### " not in text:
+        table_firms = parse_rank_table(text)
+        if table_firms:
+            return table_firms
     firms = []
     blocks = re.split(r"\n###\s+", text)
     for block in blocks[1:]:
@@ -915,11 +946,10 @@ def parse_trades(path: Path) -> dict[str, list[dict]]:
         # Keep only firms with a name and (website or phone) or HIGH confidence with city
         cleaned = []
         for f in firms:
-            if f["rank"] > 8 and (not f["website"] or f["confidence"].startswith("LOW")):
-                # drop thin LOW fill-ins without websites for public pages
-                if not f["website"]:
-                    continue
-            if not f["website"] and not f["phone"]:
+            # LOW-confidence rows with no contact path were research leftovers.
+            # Named rows that the published pages already show stay, including
+            # unranked "where else to look" lines that have no website yet.
+            if f["confidence"].startswith("LOW") and not f["website"] and not f["phone"]:
                 continue
             cleaned.append(f)
         out[slug] = cleaned
@@ -1127,7 +1157,10 @@ def write_board_icons() -> None:
     png32 = _png_rgba(32, 32, _board_icon_pixels(32))
     png180 = _png_rgba(180, 180, _board_icon_pixels(180))
     (icon_dir / "apple-touch-icon.png").write_bytes(png180)
-    (icon_dir / "favicon.ico").write_bytes(_ico_from_png(png32, 32))
+    ico = _ico_from_png(png32, 32)
+    (icon_dir / "favicon.ico").write_bytes(ico)
+    # Crawlers and feed readers request /favicon.ico, not only the icons path.
+    (SITE_DIR / "favicon.ico").write_bytes(ico)
 
 
 def favicon_tags(prefix: str = "") -> str:
@@ -1384,6 +1417,13 @@ def nav_html(active: str = "", prefix: str = "") -> str:
     # Board brand only. Full set via primary + More + hamburger.
     # PPG is never chrome/brand — Board #1 outbound lives in body/feature cards.
     def href(name: str) -> str:
+        # Home is the site root. /index.html is the same document and splits signals.
+        if name in ("", "index.html"):
+            if prefix == "/":
+                return "/"
+            if not prefix or prefix == "./":
+                return "./"
+            return prefix if prefix.endswith("/") else f"{prefix}/"
         if prefix:
             return f"{prefix}{name}"
         return f"./{name}"
@@ -5444,7 +5484,7 @@ def md_to_html(md: str) -> str:
         stripped = line.strip()
         if stripped in ("tool:energy-credits", "tool:energy-credit", "tool:wa-energy-credit"):
             close_lists()
-            src = tools_href("energy-credits", "../", "index.html")
+            src = tools_href("energy-credit", "../", "index.html")
             land = public_tool_href("energy-credits", "../")
             out.append(
                 '<div class="tool-embed my-8 border border-white/10 rounded-2xl p-4 sm:p-5 bg-white/[0.03]">'
@@ -5690,7 +5730,7 @@ def build_post_page(post: dict) -> str:
     body = f"""  <div class="max-w-3xl mx-auto px-4 py-16 relative z-20">
     <nav aria-label="Breadcrumb" class="text-xs text-slate-500 mb-6">
       <ol class="flex flex-wrap items-center gap-2">
-        <li><a href="../index.html" class="hover:text-secondary">About</a></li>
+        <li><a href="../" class="hover:text-secondary">About</a></li>
         <li aria-hidden="true" class="text-slate-600">/</li>
         <li><a href="../blog.html" class="hover:text-secondary">Blog</a></li>
         <li aria-hidden="true" class="text-slate-600">/</li>
@@ -5841,7 +5881,7 @@ cd bops-site
 python3 generate_site.py
 ```
 
-Sources: `/workspace/top30-addition-contractors.md`, `/workspace/bops-research-kitchen-bath.md`, `/workspace/bops-research-custom-commercial-spec.md`, `/workspace/bops-research-edmonds-custom.md`, `/workspace/bops-research-trades.md`, and `posts/*.md`.
+Sources: `data/research/top30-addition-contractors.md`, `data/research/bops-research-kitchen-bath.md`, `data/research/bops-research-custom-commercial-spec.md`, `data/research/bops-research-edmonds-custom.md`, `data/research/bops-research-trades.md`, and `posts/*.md`.
 
 ## Agent intake
 
@@ -5907,9 +5947,107 @@ Rankings researched / updated **{YEAR}**.
 
 def write_robots() -> None:
     (SITE_DIR / "robots.txt").write_text(
-        "User-agent: *\nAllow: /\nDisallow: /write.html\nDisallow: /intake/\n\nSitemap: https://boardofprojectstewardship.com/sitemap.xml\n",
+        "User-agent: *\nAllow: /\nDisallow: /intake/\n\nSitemap: https://boardofprojectstewardship.com/sitemap.xml\n",
         encoding="utf-8",
     )
+
+
+def write_llms_txt() -> None:
+    """Short public map of what this site publishes. No vendor names."""
+    text = """# Board of Project Stewardship
+
+> Independent publisher of construction standards, contractor directories, and permit guides for King County, Snohomish County, and Seattle. Listings are editorial. Re-verify every contractor on Washington L&I before you hire.
+
+## How the Board works
+
+- [How we rank](https://boardofprojectstewardship.com/how-we-rank.html): Editorial ranking method. Not a government list and not a paid placement.
+- [Verify a contractor](https://boardofprojectstewardship.com/verify-contractor.html): How to check a Washington contractor license, bond, and insurance.
+- [About](https://boardofprojectstewardship.com/about.html): What the Board publishes and what it does not do.
+- [FAQ](https://boardofprojectstewardship.com/faq.html): Directories, rankings, permits, and L&I.
+
+## Permits and places
+
+- [Permits](https://boardofprojectstewardship.com/permits.html): Which city or county issues the building permit.
+- [King County](https://boardofprojectstewardship.com/king-county.html): King County place hubs and permit paths.
+- [Snohomish County](https://boardofprojectstewardship.com/snohomish-county.html): Snohomish County place hubs and permit paths.
+- [Seattle](https://boardofprojectstewardship.com/seattle.html): Seattle neighborhood hubs and SDCI.
+- [Locations](https://boardofprojectstewardship.com/locations.html): Index of city and neighborhood hubs.
+
+## Directories
+
+- [Directories](https://boardofprojectstewardship.com/directory.html): Contractor directory index.
+- [Additions](https://boardofprojectstewardship.com/additions.html): Home addition contractors.
+- [Kitchen](https://boardofprojectstewardship.com/kitchen.html): Kitchen remodelers.
+- [Bathrooms](https://boardofprojectstewardship.com/bathrooms.html): Bathroom remodelers.
+- [Custom homes](https://boardofprojectstewardship.com/custom-homes.html): Custom home builders.
+- [Trades](https://boardofprojectstewardship.com/trades.html): Trade contractor lists.
+
+## Guides
+
+- [Learn](https://boardofprojectstewardship.com/learn.html): Guide index.
+- [Hiring a contractor](https://boardofprojectstewardship.com/hiring-a-contractor.html): Questions to ask before you hire.
+- [Remodel cost factors](https://boardofprojectstewardship.com/remodel-cost-factors.html): What moves a remodel scope. No prices.
+- [Kitchen cost factors](https://boardofprojectstewardship.com/kitchen-cost-factors.html): What moves a kitchen scope. No prices.
+- [Blog](https://boardofprojectstewardship.com/blog.html): Local permit and remodel guides.
+"""
+    (SITE_DIR / "llms.txt").write_text(text, encoding="utf-8")
+
+
+LASTMOD_STORE = SITE_DIR / "state" / "seo" / "lastmod.json"
+
+
+def _git_commit_date(rel: str) -> str:
+    """YYYY-MM-DD of the last commit that touched rel, or empty."""
+    cache = getattr(_git_commit_date, "_cache", None)
+    if cache is None:
+        cache = {}
+        setattr(_git_commit_date, "_cache", cache)
+    if rel in cache:
+        return cache[rel]
+    date = ""
+    try:
+        out = subprocess.check_output(
+            ["git", "log", "-1", "--format=%cs", "--", rel],
+            cwd=SITE_DIR,
+            stderr=subprocess.DEVNULL,
+            text=True,
+        ).strip()
+        if re.match(r"^\d{4}-\d{2}-\d{2}$", out):
+            date = out
+    except (subprocess.CalledProcessError, OSError):
+        date = ""
+    cache[rel] = date
+    return date
+
+
+def _main_text_hash(rel: str) -> str:
+    """Hash of visible main text so lastmod ignores nav/script churn."""
+    path = SITE_DIR / rel
+    if not path.is_file():
+        return ""
+    text = path.read_text(encoding="utf-8", errors="ignore")
+    match = re.search(r"<main\b[^>]*>(.*)</main>", text, flags=re.S | re.I)
+    chunk = match.group(1) if match else text
+    chunk = re.sub(r"<script\b[^>]*>.*?</script>", " ", chunk, flags=re.S | re.I)
+    chunk = re.sub(r"<style\b[^>]*>.*?</style>", " ", chunk, flags=re.S | re.I)
+    chunk = re.sub(r"<[^>]+>", " ", chunk)
+    chunk = re.sub(r"\s+", " ", chunk).strip().lower()
+    return hashlib.sha256(chunk.encode("utf-8")).hexdigest()[:20]
+
+
+def _load_lastmod_store() -> dict:
+    if not LASTMOD_STORE.is_file():
+        return {}
+    try:
+        data = json.loads(LASTMOD_STORE.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return {}
+    return data if isinstance(data, dict) else {}
+
+
+def _save_lastmod_store(store: dict) -> None:
+    LASTMOD_STORE.parent.mkdir(parents=True, exist_ok=True)
+    LASTMOD_STORE.write_text(json.dumps(store, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
 def write_sitemap(posts: list[dict]) -> None:
@@ -5988,12 +6126,6 @@ def write_sitemap(posts: list[dict]) -> None:
         "contact.html",
         "glossary.html",
         "videos.html",
-        "blog/rss.xml",
-        "tools/build-walkthrough/index.html",
-        "tools/site-visit/index.html",
-        "tools/energy-credit/index.html",
-        "tools/pm-dashboard/index.html",
-        "tools/another-story/index.html",
     ]
 
     # Place SEO hubs wave1+wave2 (only files that exist on disk)
@@ -6005,11 +6137,25 @@ def write_sitemap(posts: list[dict]) -> None:
         if _fn not in extras and (SITE_DIR / _fn).is_file():
             extras.append(_fn)
 
+    lastmod_store = _load_lastmod_store()
+
     def file_lastmod(rel: str) -> str:
-        p = SITE_DIR / rel
-        if p.is_file():
-            return datetime.fromtimestamp(p.stat().st_mtime).strftime("%Y-%m-%d")
-        return datetime.now().strftime("%Y-%m-%d")
+        """Date of the last real content change, not the build clock.
+
+        The first time a URL is seen, seed from the last git commit that
+        touched the file. Later runs keep that date until the rendered
+        main text changes.
+        """
+        digest = _main_text_hash(rel)
+        prev = lastmod_store.get(rel)
+        if isinstance(prev, dict) and prev.get("hash") == digest and prev.get("date"):
+            return str(prev["date"])
+        if isinstance(prev, dict) and prev.get("hash") and prev.get("hash") != digest:
+            date = datetime.now().strftime("%Y-%m-%d")
+        else:
+            date = _git_commit_date(rel) or datetime.now().strftime("%Y-%m-%d")
+        lastmod_store[rel] = {"hash": digest, "date": date}
+        return date
 
     def url_entry(loc: str, lastmod: str, priority: str) -> str:
         return (
@@ -6045,6 +6191,7 @@ def write_sitemap(posts: list[dict]) -> None:
         + "\n</urlset>\n"
     )
     (SITE_DIR / "sitemap.xml").write_text(xml, encoding="utf-8")
+    _save_lastmod_store(lastmod_store)
 
 
 def write_posts_json(posts: list[dict]) -> None:
@@ -6161,7 +6308,7 @@ def build_good_steward_page() -> str:
         <a href="{public_tool_href('site-visit')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Site Visit &amp; Discovery</a>
         <a href="{public_tool_href('pm-dashboard')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">PM Dashboard</a>
         <a href="{public_tool_href('another-story')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Another Story</a>
-        <a href="./index.html" class="border border-white/15 text-slate-200 px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Back to About</a>
+        <a href="./" class="border border-white/15 text-slate-200 px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Back to About</a>
       </div>
     </section>
   </div>
@@ -6256,7 +6403,7 @@ def build_another_story_page() -> str:
 
 def build_energy_credit_page() -> str:
     """Board landing for WSEC-R prescriptive credits."""
-    src = tools_href("energy-credits", "", "index.html")
+    src = tools_href("energy-credit", "", "index.html")
     body = f"""  <header class="max-w-6xl mx-auto px-4 pt-10 pb-2">
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">WSEC-R prescriptive credits</h1>
@@ -7321,7 +7468,7 @@ def build_about_org_page() -> str:
                     ("Verify a WA contractor", "./verify-contractor.html"),
                     ("Permit jurisdiction hub", "./permits.html"),
                     ("Editorial contact", "./contact.html"),
-                    ("Home", "./index.html"),
+                    ("Home", "./"),
                 ]
             ),
         )
@@ -8787,7 +8934,7 @@ def build_locations_page() -> str:
     <div class="max-w-6xl mx-auto px-4 pt-14 pb-10">
       <nav class="text-xs text-slate-500 font-light mb-4" aria-label="Breadcrumb">
         <ol class="flex flex-wrap items-center gap-2 list-none pl-0">
-          <li><a href="./index.html" class="text-secondary hover:underline">Home</a></li>
+          <li><a href="./" class="text-secondary hover:underline">Home</a></li>
           <li aria-hidden="true">/</li>
           <li class="text-slate-300" aria-current="page">Locations</li>
         </ol>
@@ -13450,7 +13597,6 @@ def build_write_page() -> str:
         <li>Write as Board editorial — an independent publisher, not a contractor sales page.</li>
         <li>Cite official permit and L&amp;I sources; never invent licenses, prices, awards, or ROI.</li>
         <li>Pacific Pro Group may appear only as Board directory #1 outbound, never as Board owner.</li>
-        <li>Do not mention generative-model vendors in public copy.</li>
         <li>Drafts are reviewed; publishing is not automatic.</li>
       </ul>
     </div>
@@ -13542,39 +13688,39 @@ def build_404_page() -> str:
     )}
   <div class="max-w-3xl mx-auto px-4 -mt-14 relative z-20 pb-24">
     <div class="grid sm:grid-cols-2 gap-3">
-      <a href="./index.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 no-underline">
+      <a href="/" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 no-underline">
         <h2 class="text-lg font-black text-white mb-1">Home</h2>
         <p class="text-sm text-slate-400 font-light">Board standards and directories.</p>
       </a>
-      <a href="./about.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 no-underline">
+      <a href="/about.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 no-underline">
         <h2 class="text-lg font-black text-white mb-1">About</h2>
         <p class="text-sm text-slate-400 font-light">What the Board is — and is not.</p>
       </a>
-      <a href="./faq.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 no-underline">
+      <a href="/faq.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 no-underline">
         <h2 class="text-lg font-black text-white mb-1">FAQ</h2>
         <p class="text-sm text-slate-400 font-light">Rankings, L&amp;I Verify, permits.</p>
       </a>
-      <a href="./learn.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 no-underline">
+      <a href="/learn.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 no-underline">
         <h2 class="text-lg font-black text-white mb-1">Learn hub</h2>
         <p class="text-sm text-slate-400 font-light">Guides, tools, and city hubs.</p>
       </a>
-      <a href="./additions.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 no-underline">
+      <a href="/additions.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 no-underline">
         <h2 class="text-lg font-black text-white mb-1">Additions Top 30</h2>
         <p class="text-sm text-slate-400 font-light">Home addition contractors for King County, Snohomish County, and Seattle.</p>
       </a>
-      <a href="./kitchen.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 no-underline">
+      <a href="/kitchen.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 no-underline">
         <h2 class="text-lg font-black text-white mb-1">Kitchen</h2>
         <p class="text-sm text-slate-400 font-light">Kitchen remodel directory.</p>
       </a>
-      <a href="./bathrooms.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 no-underline">
+      <a href="/bathrooms.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 no-underline">
         <h2 class="text-lg font-black text-white mb-1">Bathrooms</h2>
         <p class="text-sm text-slate-400 font-light">Bathroom remodel directory.</p>
       </a>
-      <a href="./blog.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 no-underline">
+      <a href="/blog.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 no-underline">
         <h2 class="text-lg font-black text-white mb-1">Blog</h2>
         <p class="text-sm text-slate-400 font-light">Hiring, permit, and remodel guides.</p>
       </a>
-      <a href="./good-steward.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 no-underline">
+      <a href="/good-steward.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 no-underline">
         <h2 class="text-lg font-black text-white mb-1">Good Steward</h2>
         <p class="text-sm text-slate-400 font-light">Site Visit and PM Dashboard tools.</p>
       </a>
@@ -13586,9 +13732,10 @@ def build_404_page() -> str:
         "This Board of Project Stewardship page was not found. Browse directories, the blog, or Good Steward tools.",
         "about",
         body,
+        prefix="/",
         canonical=f"{BASE_URL}404.html",
         robots="noindex, follow",
-        include_story_embed=False,
+        include_story_embed=True,
         include_tools_embed=False,
         include_widgets=False,
         extra_scripts="""  <script>
@@ -13598,6 +13745,11 @@ def build_404_page() -> str:
     if (/\\.[a-zA-Z0-9]+$/.test(p)) return;
     if (p.indexOf('/assets/') === 0 || p.indexOf('/tools/') === 0 || p.indexOf('/.well-known/') === 0) return;
     var slug = p.replace(/\\/+$/, '');
+    var aliases = { '/directories': '/directory.html' };
+    if (aliases[slug]) {
+      window.location.replace(aliases[slug]);
+      return;
+    }
     if (slug === '/stamp-of-trust') {
       window.location.replace('/stamp-of-trust/');
       return;
@@ -13662,6 +13814,34 @@ def reframe_another_story_chrome(html: str) -> str:
     return html
 
 
+def _strip_tool_seo_blocks(text: str) -> str:
+    """Remove every injected tool SEO block, including the legacy comment name."""
+    text = re.sub(
+        r"<!--\s*(?:board|bops)-tool-seo\s*-->.*?<!--\s*/(?:board|bops)-tool-seo\s*-->\s*",
+        "",
+        text,
+        flags=re.S,
+    )
+    return text
+
+
+def _insert_tool_seo(text: str, block: str) -> str:
+    """Put SEO after charset and viewport so charset stays inside the first 1024 bytes."""
+    match = re.search(
+        r"<meta\s+charset=[^>]*>\s*<meta\s+name=[\"']viewport[\"'][^>]*>",
+        text,
+        flags=re.I,
+    )
+    if not match:
+        match = re.search(r"<meta\s+charset=[^>]*>", text, flags=re.I)
+    if match:
+        return text[: match.end()] + "\n" + block + text[match.end() :]
+    head_m = re.search(r"<head[^>]*>", text, flags=re.I)
+    if head_m:
+        return text[: head_m.end()] + "\n" + block + text[head_m.end() :]
+    return block + text
+
+
 def patch_tool_pages() -> None:
     """Add description/robots/canonical/OG/favicon/JSON-LD to public tool HTML."""
     og = resolve_og_image(OG_DEFAULT_REL)
@@ -13690,6 +13870,12 @@ def patch_tool_pages() -> None:
             "Another Story — second-story design preview for King County, Snohomish County, and Seattle. Not a bid or permit document.",
             f"{SITE_ORIGIN}/another-story.html",
         ),
+        (
+            SITE_DIR / "tools" / "energy-credit" / "index.html",
+            "WSEC-R 2021 Prescriptive Credits | Board of Project Stewardship",
+            "WSEC-R 2021 prescriptive credits for King County, Snohomish County, and Seattle. Educational — no invented tax amounts.",
+            f"{SITE_ORIGIN}/energy-credit.html",
+        ),
     ]
     for path, title, description, canonical in specs:
         if not path.is_file():
@@ -13697,19 +13883,15 @@ def patch_tool_pages() -> None:
         text = path.read_text(encoding="utf-8")
         if path.name == "index.html" and "another-story" in str(path):
             text = reframe_another_story_chrome(text)
-        text = re.sub(
-            r"<!-- board-tool-seo -->.*?<!-- /board-tool-seo -->\n?",
-            "",
-            text,
-            flags=re.S,
-        )
+        text = _strip_tool_seo_blocks(text)
+        if path.parent.name == "energy-credit":
+            # The hand-written tool already has these tags. Drop the first of each
+            # so the injected block is the only canonical.
+            text = re.sub(r"<link\s+rel=[\"']canonical[\"'][^>]*>\s*", "", text, count=1, flags=re.I)
+            text = re.sub(r"<meta\s+name=[\"']robots[\"'][^>]*>\s*", "", text, count=1, flags=re.I)
+            text = re.sub(r"<meta\s+name=[\"']description[\"'][^>]*>\s*", "", text, count=1, flags=re.I)
         block = _tool_seo_block(title, description, canonical, og)
-        head_m = re.search(r"<head[^>]*>", text, flags=re.I)
-        if head_m:
-            text = text[: head_m.end()] + "\n" + block + text[head_m.end() :]
-        else:
-            text = block + text
-        path.write_text(text, encoding="utf-8")
+        path.write_text(_insert_tool_seo(text, block), encoding="utf-8")
 
 
 def collect_indexnow_urls() -> list[str]:
@@ -13753,20 +13935,18 @@ def load_all_rankings() -> tuple:
         skip_rank_1=True,
     )
     kb_path = resolve_research_file("bops-research-kitchen-bath.md")
-    if kb_path:
-        kitchen, bathrooms = parse_kitchen_bath(kb_path)
-    else:
-        kitchen = parse_firms_from_html(SITE_DIR / "kitchen.html", skip_rank_1=True)
-        bathrooms = parse_firms_from_html(SITE_DIR / "bathrooms.html", skip_rank_1=True)
-        print(f"  research fallback: kitchen.html ({len(kitchen)}) / bathrooms.html ({len(bathrooms)})")
+    if not kb_path:
+        raise SystemExit(f"Missing directory research file {RESEARCH_DIR / 'bops-research-kitchen-bath.md'}")
+    kitchen, bathrooms = parse_kitchen_bath(kb_path)
+    kitchen = [f for f in kitchen if f.get("rank") != 1 and f.get("name") != PPG["name"]]
+    bathrooms = [f for f in bathrooms if f.get("rank") != 1 and f.get("name") != PPG["name"]]
     ccs_path = resolve_research_file("bops-research-custom-commercial-spec.md")
-    if ccs_path:
-        custom_homes, commercial, spec_homes = parse_custom_commercial_spec(ccs_path)
-    else:
-        custom_homes = parse_firms_from_html(SITE_DIR / "custom-homes.html", skip_rank_1=True)
-        commercial = parse_firms_from_html(SITE_DIR / "commercial.html", skip_rank_1=False)
-        spec_homes = parse_firms_from_html(SITE_DIR / "spec-homes.html", skip_rank_1=False)
-        print(f"  research fallback: custom/commercial/spec HTML ({len(custom_homes)}/{len(commercial)}/{len(spec_homes)})")
+    if not ccs_path:
+        raise SystemExit(
+            f"Missing directory research file {RESEARCH_DIR / 'bops-research-custom-commercial-spec.md'}"
+        )
+    custom_homes, commercial, spec_homes = parse_custom_commercial_spec(ccs_path)
+    custom_homes = [f for f in custom_homes if f.get("rank") != 1 and f.get("name") != PPG["name"]]
     edmonds_custom = load_rank_list(
         "bops-research-edmonds-custom.md",
         "edmonds-custom-homes.html",
@@ -13774,14 +13954,9 @@ def load_all_rankings() -> tuple:
         skip_rank_1=False,
     )
     trades_path = resolve_research_file("bops-research-trades.md")
-    if trades_path:
-        trades_data = parse_trades(trades_path)
-    else:
-        trades_data = {
-            slug: parse_firms_from_html(SITE_DIR / f"{slug}.html", skip_rank_1=False)
-            for slug, *_ in TRADES
-        }
-        print("  research fallback: trade HTML pages")
+    if not trades_path:
+        raise SystemExit(f"Missing directory research file {RESEARCH_DIR / 'bops-research-trades.md'}")
+    trades_data = parse_trades(trades_path)
     return additions, kitchen, bathrooms, custom_homes, commercial, spec_homes, edmonds_custom, trades_data
 
 
@@ -13879,6 +14054,10 @@ def main(argv: list[str] | None = None) -> None:
     (SITE_DIR / "directory.html").write_text(build_directory_page(), encoding="utf-8")
     (SITE_DIR / "kitchens.html").write_text(build_redirect_page("./kitchen.html", "Kitchen directory"), encoding="utf-8")
     (SITE_DIR / "plumbing.html").write_text(build_redirect_page("./plumber.html", "Plumber directory"), encoding="utf-8")
+    (SITE_DIR / "directories.html").write_text(
+        build_redirect_page("/directory.html", "Directories hub"),
+        encoding="utf-8",
+    )
     (SITE_DIR / "write.html").write_text(build_write_page(), encoding="utf-8")
     (SITE_DIR / "directory.html").write_text(build_directory_hub(), encoding="utf-8")
     (SITE_DIR / "kitchens.html").write_text(
@@ -13961,10 +14140,18 @@ def main(argv: list[str] | None = None) -> None:
     emit_stamp_of_trust_page()
     write_readme(posts)
     write_robots()
+    write_llms_txt()
     write_posts_json(posts)
     write_rss(posts)
     write_sitemap(posts)
     patch_tool_pages()
+    # Plural tool URL was a second indexable copy of the energy worksheet.
+    # The worksheet itself stays at tools/energy-credit/ and canonicalizes to the landing page.
+    (SITE_DIR / "tools" / "energy-credits").mkdir(parents=True, exist_ok=True)
+    (SITE_DIR / "tools" / "energy-credits" / "index.html").write_text(
+        build_redirect_page("/energy-credit.html", "Energy code credits"),
+        encoding="utf-8",
+    )
     leftover_methodology = SITE_DIR / "methodology.md"
     if leftover_methodology.exists():
         leftover_methodology.unlink()
