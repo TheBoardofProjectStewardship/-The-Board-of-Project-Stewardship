@@ -42,8 +42,9 @@ TITLE_SUFFIX = f" | {BRAND_NAME}"
 RSS_HREF = f"{SITE_ORIGIN}/blog/rss.xml"
 GITHUB_ORG = "https://github.com/TheBoardofProjectStewardship"
 GITHUB_REPO = "https://github.com/TheBoardofProjectStewardship/-The-Board-of-Project-Stewardship"
-# Board Organization sameAs: real Board properties only. Never PPG.
-BOARD_SAME_AS = [GITHUB_ORG, GITHUB_REPO]
+# sameAs only for profiles the Board actually controls. The GitHub repo is the
+# site source, not an organization profile, so it is not listed.
+BOARD_SAME_AS: list[str] = []
 EDITORIAL_EMAIL = "editorial@boardofprojectstewardship.com"
 # Public geography. Edmonds stays a city hub and local example, not the Board's sole HQ.
 GEO_KICKER = "Pacific Northwest · King & Snohomish · Seattle"
@@ -56,7 +57,7 @@ BOARD_ONE_LINER = (
     "The Board of Project Stewardship publishes construction standards and contractor "
     f"directories for {GEO_FOOTPRINT} — shortlists firms homeowners can hire with confidence."
 )
-HOME_TITLE = f"{BRAND_NAME} | {GEO_STANDARDS}"
+HOME_TITLE = f"Remodel directories & guides{TITLE_SUFFIX}"
 HOME_DESCRIPTION = (
     "Construction standards and contractor directories for the Pacific Northwest — "
     "King County, Snohomish County, and Seattle."
@@ -502,11 +503,27 @@ TRADE_PHOTO_STRIPS: dict[str, list[tuple[str, str, str, str, str]]] = {
 
 
 
+def illustrative_alt(custom: str, category: str) -> str:
+    """Alt for a generated still. Never the post title, and always marked illustrative."""
+    text = re.sub(r"\s+", " ", (custom or "").strip())
+    if text.lower().startswith("illustrative:"):
+        return text
+    if text.lower().startswith("illustrative"):
+        rest = text.split(" ", 1)[1] if " " in text else ""
+        rest = rest.lstrip(":").strip()
+        if rest:
+            return f"Illustrative: {rest}"
+    subject = re.sub(r"\s+", " ", (category or "remodel").strip()) or "remodel"
+    if subject.lower() in {"guides", "guide", "blog", "post"}:
+        subject = "remodel"
+    return f"Illustrative: editorial still for a {subject} guide"
+
+
 def esc(s: str) -> str:
     return html.escape(s or "", quote=True)
 
 
-def clamp_title(title: str, limit: int = 70) -> str:
+def clamp_title(title: str, limit: int = 60) -> str:
     """Keep titles reasonable; never cut mid-word or chop the Board name.
 
     Prefer the full ``Board of Project Stewardship`` suffix. If the string is
@@ -525,7 +542,7 @@ def clamp_title(title: str, limit: int = 70) -> str:
             return f"{left}{TITLE_SUFFIX}"
         cut = left[:room].rsplit(" ", 1)[0]
         cut = re.sub(
-            r"(\s+(?:in|of|for|and|the|a|an|to|vs|versus|&|—|–|-))+$",
+            r"(\s+(?:in|of|for|and|the|a|an|to|vs|versus|on|at|by|with|from|near|&|—|–|-))+$",
             "",
             cut,
             flags=re.I,
@@ -1157,6 +1174,8 @@ def write_board_icons() -> None:
     png32 = _png_rgba(32, 32, _board_icon_pixels(32))
     png180 = _png_rgba(180, 180, _board_icon_pixels(180))
     (icon_dir / "apple-touch-icon.png").write_bytes(png180)
+    png512 = _png_rgba(512, 512, _board_icon_pixels(512))
+    (icon_dir / "logo-512.png").write_bytes(png512)
     ico = _ico_from_png(png32, 32)
     (icon_dir / "favicon.ico").write_bytes(ico)
     # Crawlers and feed readers request /favicon.ico, not only the icons path.
@@ -1563,7 +1582,9 @@ def nav_html(active: str = "", prefix: str = "") -> str:
   </header>"""
 
 
-def footer_html(prefix: str = "./", active: str = "") -> str:
+def footer_html(prefix: str = "./", active: str = "", updated: str = "") -> str:
+    if not re.match(r"^\d{4}-\d{2}-\d{2}$", updated or ""):
+        updated = stored_lastmod("index.html")
     """Sitewide footer with SEO link clusters (not a stuffed city dump).
 
     Full place inventory lives on locations.html. Key cities only in this cluster.
@@ -1635,7 +1656,7 @@ def footer_html(prefix: str = "./", active: str = "") -> str:
           <i class="fas fa-compass-drafting text-secondary"></i>
           <span class="font-black text-base tracking-wider text-white">Board of Project Stewardship</span>
         </div>
-        <p class="font-light leading-relaxed text-sm">{esc(BOARD_ONE_LINER)} Updated {YEAR}.</p>
+        <p class="font-light leading-relaxed text-sm">{esc(BOARD_ONE_LINER)} Last updated <time datetime="{esc(updated)}">{esc(updated)}</time>.</p>
         <p class="mt-3 font-light leading-relaxed text-sm">Public contact: <a href="mailto:{EDITORIAL_EMAIL}" class="text-secondary hover:underline">{EDITORIAL_EMAIL}</a></p>
         <p class="mt-3 font-light leading-relaxed text-sm">Board #1 hire (outbound): <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a> — independent design-build GC; not Board-owned.</p>
       </div>
@@ -2116,8 +2137,14 @@ def board_organization_website_ld() -> dict:
                     },
                 ],
                 "email": EDITORIAL_EMAIL,
-                "sameAs": list(BOARD_SAME_AS),
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": f"{SITE_ORIGIN}/assets/icons/logo-512.png",
+                    "width": 512,
+                    "height": 512,
+                },
                 # Independent Board: never parentOrganization, isRelatedTo-as-owner, or PPG in sameAs.
+                **({"sameAs": list(BOARD_SAME_AS)} if BOARD_SAME_AS else {}),
             },
             {
                 "@type": "WebSite",
@@ -2165,6 +2192,8 @@ def breadcrumb_ld(crumbs: list[tuple[str, str]], page_url: str = "") -> dict:
         item_url = url
         if item_url and not item_url.startswith("http"):
             item_url = SITE_ORIGIN + "/" + item_url.lstrip("./")
+        if name.strip().lower() == "about" and item_url.rstrip("/") == SITE_ORIGIN.rstrip("/"):
+            name = "Home"
         entry: dict = {
             "@type": "ListItem",
             "position": i,
@@ -2185,6 +2214,47 @@ def breadcrumb_ld(crumbs: list[tuple[str, str]], page_url: str = "") -> dict:
 
 def chrome_script() -> str:
     return '  <script src="/assets/js/site.js" defer></script>\n'
+
+
+def _rel_from_canonical(canon: str) -> str:
+    path = (canon or "").split("?", 1)[0].split("#", 1)[0]
+    if path.startswith(SITE_ORIGIN):
+        path = path[len(SITE_ORIGIN):]
+    path = path.lstrip("/")
+    if not path:
+        return "index.html"
+    if path.endswith("/"):
+        return path + "index.html"
+    return path
+
+
+def stored_lastmod(rel: str) -> str:
+    """Date already recorded for this URL, else the last git commit that touched it."""
+    prev = _load_lastmod_store().get(rel)
+    if isinstance(prev, dict) and re.match(r"^\d{4}-\d{2}-\d{2}$", str(prev.get("date") or "")):
+        return str(prev["date"])
+    return _git_commit_date(rel) or datetime.now().strftime("%Y-%m-%d")
+
+
+def _stamp_date_modified(ld_objs: list, updated: str, canon: str, title: str) -> None:
+    page_types = {"WebPage", "AboutPage", "CollectionPage", "FAQPage", "ContactPage", "ItemPage"}
+    for obj in ld_objs:
+        typ = obj.get("@type")
+        names = typ if isinstance(typ, list) else [typ]
+        if any(name in page_types for name in names):
+            obj["dateModified"] = updated
+            return
+    ld_objs.append({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": canon.split("#")[0] + "#webpage",
+        "url": canon,
+        "name": title,
+        "dateModified": updated,
+        "isPartOf": {"@id": "https://boardofprojectstewardship.com/#website"},
+        "publisher": {"@id": "https://boardofprojectstewardship.com/#organization"},
+        "inLanguage": "en-US",
+    })
 
 
 def page_shell(
@@ -2214,8 +2284,10 @@ def page_shell(
     for obj in json_ld or []:
         ld_objs.append(obj)
     canon = canonical or (BASE_URL + ("" if active in ("home", "about-home") else f"{active}.html" if active != "blog" else "blog.html"))
+    updated = stored_lastmod(_rel_from_canonical(canon))
     if breadcrumbs:
         ld_objs.append(breadcrumb_ld(list(breadcrumbs), canon))
+    _stamp_date_modified(ld_objs, updated, canon, title)
     ld_blocks = ""
     for obj in ld_objs:
         ld_blocks += f'  <script type="application/ld+json">\n{json.dumps(obj, indent=2)}\n  </script>\n'
@@ -2276,7 +2348,7 @@ def page_shell(
 ''' if include_widgets else ""}{tools_block}
 {story_block}
 </main>
-{footer_html(prefix if prefix else "./", active)}
+{footer_html(prefix if prefix else "./", active, updated)}
 {chrome_script()}
 {ppg_widgets_script()}
 {extra_scripts}</body>
@@ -3208,8 +3280,8 @@ def home_flashlight_hero() -> tuple[str, str, str] | None:
     <p class="hero-hint" id="home-hero-hint"><span class="hero-hint-video">Plans assemble into the finished home</span><span class="hero-hint-flashlight"><span class="hero-hint-fine">Hover to reveal the finished home</span><span class="hero-hint-coarse">Drag to reveal the finished home</span></span></p>
     <div class="hero-copy">
       <p class="hero-kicker">{GEO_KICKER_HTML}</p>
-      <h1 id="home-hero-title">See the build emerge from the plan.</h1>
-      <p class="hero-dek">Educational homeowner concept — framing to finished cedar and glass. Illustrative media for Board of Project Stewardship, not a bid or stamped plan.</p>
+      <h1 id="home-hero-title">Remodel directories and permit guides</h1>
+      <p class="hero-dek">See the build emerge from the plan. Educational homeowner concept — framing to finished cedar and glass. Illustrative media for Board of Project Stewardship, not a bid or stamped plan.</p>
       <div class="hero-ctas">
         <a class="hero-btn" href="./directory.html">Browse directories</a>
         <a class="hero-link" href="./build-walkthrough.html">Explore walkthrough</a>
@@ -4098,7 +4170,7 @@ def build_about() -> str:
         "home",
         body,
         canonical=BASE_URL,
-        breadcrumbs=[("About", BASE_URL)],
+        breadcrumbs=[("Home", BASE_URL)],
         include_story_embed=True,
         include_tools_embed=False,
         extra_head=hero_head,
@@ -4236,7 +4308,7 @@ def build_additions(additions: list[dict]) -> str:
         body,
         ld,
         canonical=f"{BASE_URL}additions.html",
-        breadcrumbs=[("About", BASE_URL), ("Additions", f"{BASE_URL}additions.html")],
+        breadcrumbs=[("Home", BASE_URL), ("Additions", f"{BASE_URL}additions.html")],
     )
 
 
@@ -4413,7 +4485,7 @@ def build_kb_page(kind: str, firms: list[dict]) -> str:
         body,
         ld,
         canonical=f"{BASE_URL}{slug}.html",
-        breadcrumbs=[("About", BASE_URL), (crumb_label, f"{BASE_URL}{slug}.html")],
+        breadcrumbs=[("Home", BASE_URL), (crumb_label, f"{BASE_URL}{slug}.html")],
     )
 
 
@@ -4527,7 +4599,7 @@ def build_custom_homes(firms: list[dict]) -> str:
         body,
         ld,
         canonical=f"{BASE_URL}{slug}.html",
-        breadcrumbs=[("About", BASE_URL), ("Custom Homes", f"{BASE_URL}{slug}.html")],
+        breadcrumbs=[("Home", BASE_URL), ("Custom Homes", f"{BASE_URL}{slug}.html")],
     )
 
 
@@ -4918,7 +4990,7 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
         ld,
         canonical=f"{BASE_URL}{slug}.html",
         keywords=keywords,
-        breadcrumbs=[("About", BASE_URL), ("Edmonds custom homes", f"{BASE_URL}{slug}.html")],
+        breadcrumbs=[("Home", BASE_URL), ("Edmonds custom homes", f"{BASE_URL}{slug}.html")],
     )
 
 
@@ -5048,7 +5120,7 @@ def build_commercial(firms: list[dict]) -> str:
         body,
         ld,
         canonical=f"{BASE_URL}{slug}.html",
-        breadcrumbs=[("About", BASE_URL), ("Commercial", f"{BASE_URL}{slug}.html")],
+        breadcrumbs=[("Home", BASE_URL), ("Commercial", f"{BASE_URL}{slug}.html")],
     )
 
 
@@ -5164,7 +5236,7 @@ def build_spec_homes(firms: list[dict]) -> str:
         body,
         ld,
         canonical=f"{BASE_URL}{slug}.html",
-        breadcrumbs=[("About", BASE_URL), ("Spec homes", f"{BASE_URL}{slug}.html")],
+        breadcrumbs=[("Home", BASE_URL), ("Spec homes", f"{BASE_URL}{slug}.html")],
     )
 
 
@@ -5266,7 +5338,7 @@ def build_trades_hub() -> str:
         body,
         ld,
         canonical=f"{BASE_URL}trades.html",
-        breadcrumbs=[("About", BASE_URL), ("Trades", f"{BASE_URL}trades.html")],
+        breadcrumbs=[("Home", BASE_URL), ("Trades", f"{BASE_URL}trades.html")],
     )
 
 
@@ -5382,7 +5454,7 @@ def build_trade_page(slug: str, title: str, icon: str, blurb: str, firms: list[d
         ld,
         canonical=f"{BASE_URL}{slug}.html",
         breadcrumbs=[
-            ("About", BASE_URL),
+            ("Home", BASE_URL),
             ("Trades", f"{BASE_URL}trades.html"),
             (title, f"{BASE_URL}{slug}.html"),
         ],
@@ -5704,7 +5776,7 @@ def build_blog_index(posts: list[dict]) -> str:
         canonical=f"{BASE_URL}blog.html",
         og_image=hero_img,
         extra_scripts='  <script src="./blog.js" defer></script>\n',
-        breadcrumbs=[("About", BASE_URL), ("Blog", f"{BASE_URL}blog.html")],
+        breadcrumbs=[("Home", BASE_URL), ("Blog", f"{BASE_URL}blog.html")],
     )
 
 
@@ -5726,7 +5798,7 @@ def build_post_page(post: dict) -> str:
         "datePublished": iso_datetime(post["date"]),
         "dateModified": iso_datetime(post["date"]),
         "description": post["description"],
-        "author": {"@type": "Organization", "name": AUTHOR},
+        "author": {"@id": "https://boardofprojectstewardship.com/#organization"},
         "publisher": {"@id": "https://boardofprojectstewardship.com/#organization"},
         "image": image_obj,
         "mainEntityOfPage": canon,
@@ -5735,7 +5807,7 @@ def build_post_page(post: dict) -> str:
     custom_alt = ""
     if isinstance(pin, dict):
         custom_alt = str(pin.get("alt") or "").strip()
-    hero_alt_text = custom_alt or post["title"]
+    hero_alt_text = illustrative_alt(custom_alt, post.get("category") or "remodel guide")
     hero_html = ""
     if hero_rel and asset_exists(hero_rel):
         src = prefix_asset(hero_rel, "../")
@@ -5748,7 +5820,7 @@ def build_post_page(post: dict) -> str:
     body = f"""  <div class="max-w-3xl mx-auto px-4 py-16 relative z-20">
     <nav aria-label="Breadcrumb" class="text-xs text-slate-500 mb-6">
       <ol class="flex flex-wrap items-center gap-2">
-        <li><a href="../" class="hover:text-secondary">About</a></li>
+        <li><a href="../" class="hover:text-secondary">Home</a></li>
         <li aria-hidden="true" class="text-slate-600">/</li>
         <li><a href="../blog.html" class="hover:text-secondary">Blog</a></li>
         <li aria-hidden="true" class="text-slate-600">/</li>
@@ -5775,7 +5847,7 @@ def build_post_page(post: dict) -> str:
         og_type="article",
         og_image_alt=custom_alt,
         breadcrumbs=[
-            ("About", BASE_URL),
+            ("Home", BASE_URL),
             ("Blog", f"{BASE_URL}blog.html"),
             (post["title"], canon),
         ],
@@ -6361,7 +6433,7 @@ def build_good_steward_page() -> str:
         body,
         [faq_ld(steward_faqs)],
         canonical=f"{BASE_URL}good-steward.html",
-        breadcrumbs=[("About", BASE_URL), ("Good Steward", f"{BASE_URL}good-steward.html")],
+        breadcrumbs=[("Home", BASE_URL), ("Good Steward", f"{BASE_URL}good-steward.html")],
         include_tools_embed=True,
         include_story_embed=True,
         include_widgets=False,
@@ -6414,7 +6486,7 @@ def build_another_story_page() -> str:
         include_story_embed=True,
         include_tools_embed=False,
         include_widgets=False,
-        breadcrumbs=[("About", BASE_URL), ("Another Story", f"{BASE_URL}another-story.html")],
+        breadcrumbs=[("Home", BASE_URL), ("Another Story", f"{BASE_URL}another-story.html")],
     )
 
 
@@ -6470,7 +6542,7 @@ def build_energy_credit_page() -> str:
         include_tools_embed=False,
         include_widgets=False,
         breadcrumbs=[
-            ("About", BASE_URL),
+            ("Home", BASE_URL),
             ("Good Steward", f"{BASE_URL}good-steward.html"),
             ("Energy code credits", f"{BASE_URL}energy-credit.html"),
         ],
@@ -6598,7 +6670,7 @@ def build_build_walkthrough_page() -> str:
         include_tools_embed=False,
         include_widgets=False,
         breadcrumbs=[
-            ("About", BASE_URL),
+            ("Home", BASE_URL),
             ("Good Steward", f"{BASE_URL}good-steward.html"),
             ("Build Walkthrough", f"{BASE_URL}build-walkthrough.html"),
         ],
@@ -6842,7 +6914,7 @@ def build_floor_plan_3d_page() -> str:
         extra_head=FLOOR_PLAN_3D_STYLE,
         extra_scripts='  <script type="module" src="./assets/js/floor-plan-3d.js"></script>\n',
         breadcrumbs=[
-            ("About", BASE_URL),
+            ("Home", BASE_URL),
             ("Good Steward", f"{BASE_URL}good-steward.html"),
             ("Floor Plan to 3D", page_url),
         ],
@@ -7196,7 +7268,7 @@ def build_pascal_editor_page() -> str:
         include_widgets=False,
         extra_head=PASCAL_EDITOR_STYLE,
         breadcrumbs=[
-            ("About", BASE_URL),
+            ("Home", BASE_URL),
             ("Good Steward", f"{BASE_URL}good-steward.html"),
             ("Pascal Editor sketch", page_url),
         ],
@@ -7257,7 +7329,7 @@ def build_site_visit_page() -> str:
         include_tools_embed=False,
         include_widgets=False,
         breadcrumbs=[
-            ("About", BASE_URL),
+            ("Home", BASE_URL),
             ("Good Steward", f"{BASE_URL}good-steward.html"),
             ("Site Visit Checklist", f"{BASE_URL}site-visit.html"),
         ],
@@ -7319,7 +7391,7 @@ def build_pm_dashboard_page() -> str:
         include_tools_embed=False,
         include_widgets=False,
         breadcrumbs=[
-            ("About", BASE_URL),
+            ("Home", BASE_URL),
             ("Good Steward", f"{BASE_URL}good-steward.html"),
             ("PM Dashboard", f"{BASE_URL}pm-dashboard.html"),
         ],
@@ -7679,7 +7751,7 @@ def build_permits_page() -> str:
         body,
         [faq_ld(faqs)],
         canonical=f"{BASE_URL}permits.html",
-        breadcrumbs=[("About", BASE_URL), ("Permit hub", f"{BASE_URL}permits.html")],
+        breadcrumbs=[("Home", BASE_URL), ("Permit hub", f"{BASE_URL}permits.html")],
         include_widgets=False,
         include_story_embed=False,
         include_tools_embed=False,
@@ -7790,7 +7862,7 @@ def build_adu_page() -> str:
         body,
         [faq_ld(faqs)],
         canonical=f"{BASE_URL}adu.html",
-        breadcrumbs=[("About", BASE_URL), ("Edmonds ADU", f"{BASE_URL}adu.html")],
+        breadcrumbs=[("Home", BASE_URL), ("Edmonds ADU", f"{BASE_URL}adu.html")],
         include_widgets=False,
         include_story_embed=False,
         include_tools_embed=False,
@@ -7888,7 +7960,7 @@ def build_how_we_rank_page() -> str:
         body,
         [faq_ld(faqs)],
         canonical=f"{BASE_URL}how-we-rank.html",
-        breadcrumbs=[("About", BASE_URL), ("How we rank", f"{BASE_URL}how-we-rank.html")],
+        breadcrumbs=[("Home", BASE_URL), ("How we rank", f"{BASE_URL}how-we-rank.html")],
         include_widgets=False,
         include_story_embed=False,
         include_tools_embed=False,
@@ -8001,7 +8073,7 @@ def build_verify_contractor_page() -> str:
         [faq_ld(faqs), howto],
         canonical=f"{BASE_URL}verify-contractor.html",
         breadcrumbs=[
-            ("About", BASE_URL),
+            ("Home", BASE_URL),
             ("Good Steward", f"{BASE_URL}good-steward.html"),
             ("Verify contractor", f"{BASE_URL}verify-contractor.html"),
         ],
@@ -8711,7 +8783,7 @@ def build_place_seo_page(spec: dict, hire_pack: dict | None = None) -> str:
     )
 
     # Title from spec already includes brand suffix in wave1 data
-    page_title = spec["title"]
+    page_title = (spec.get("seo_title") or spec["title"] or "").strip()
     if "Board of Project Stewardship" not in page_title:
         page_title = f"{page_title} | Board of Project Stewardship"
 
@@ -9305,7 +9377,7 @@ def build_adu_checklist_page() -> str:
         body,
         canonical=f"{BASE_URL}adu-checklist.html",
         breadcrumbs=[
-            ("About", BASE_URL),
+            ("Home", BASE_URL),
             ("Edmonds ADU", f"{BASE_URL}adu.html"),
             ("ADU checklist", f"{BASE_URL}adu-checklist.html"),
         ],
@@ -9383,7 +9455,7 @@ def build_change_orders_page() -> str:
         [faq_ld(faqs)],
         canonical=f"{BASE_URL}change-orders.html",
         breadcrumbs=[
-            ("About", BASE_URL),
+            ("Home", BASE_URL),
             ("Good Steward", f"{BASE_URL}good-steward.html"),
             ("Change orders", f"{BASE_URL}change-orders.html"),
         ],
@@ -9455,7 +9527,7 @@ def build_coastal_waterproofing_page() -> str:
         body,
         canonical=f"{BASE_URL}coastal-waterproofing.html",
         breadcrumbs=[
-            ("About", BASE_URL),
+            ("Home", BASE_URL),
             ("Good Steward", f"{BASE_URL}good-steward.html"),
             ("Coastal waterproofing", f"{BASE_URL}coastal-waterproofing.html"),
         ],
@@ -9567,7 +9639,7 @@ def build_hire_questions_page() -> str:
         body,
         canonical=f"{BASE_URL}hire-questions.html",
         breadcrumbs=[
-            ("About", BASE_URL),
+            ("Home", BASE_URL),
             ("Good Steward", f"{BASE_URL}good-steward.html"),
             ("Hire questions", f"{BASE_URL}hire-questions.html"),
         ],
@@ -9853,7 +9925,7 @@ def build_materials_index_page() -> str:
         "materials",
         body,
         canonical=f"{BASE_URL}materials.html",
-        breadcrumbs=[("About", BASE_URL), ("Materials", f"{BASE_URL}materials.html")],
+        breadcrumbs=[("Home", BASE_URL), ("Materials", f"{BASE_URL}materials.html")],
         include_widgets=False,
         include_story_embed=False,
         include_tools_embed=False,
@@ -10011,7 +10083,7 @@ def build_glossary_page() -> str:
         "glossary",
         body,
         canonical=f"{BASE_URL}glossary.html",
-        breadcrumbs=[("About", BASE_URL), ("Glossary", f"{BASE_URL}glossary.html")],
+        breadcrumbs=[("Home", BASE_URL), ("Glossary", f"{BASE_URL}glossary.html")],
         include_widgets=False,
         include_story_embed=False,
         include_tools_embed=False,
@@ -10070,7 +10142,7 @@ def build_videos_page() -> str:
         "videos",
         body,
         canonical=f"{BASE_URL}videos.html",
-        breadcrumbs=[("About", BASE_URL), ("Video library", f"{BASE_URL}videos.html")],
+        breadcrumbs=[("Home", BASE_URL), ("Video library", f"{BASE_URL}videos.html")],
         include_widgets=False,
         include_story_embed=False,
         include_tools_embed=False,
@@ -10176,7 +10248,7 @@ def build_second_story_vs_teardown_page() -> str:
         [faq_ld(faqs)],
         canonical=f"{BASE_URL}second-story-vs-teardown.html",
         breadcrumbs=[
-            ("About", BASE_URL),
+            ("Home", BASE_URL),
             ("Home additions", f"{BASE_URL}additions.html"),
             ("Second story vs teardown", f"{BASE_URL}second-story-vs-teardown.html"),
         ],
@@ -10311,7 +10383,7 @@ def build_kitchen_remodel_planning_page() -> str:
         [faq_ld(faqs), howto],
         canonical=f"{BASE_URL}kitchen-remodel-planning.html",
         breadcrumbs=[
-            ("About", BASE_URL),
+            ("Home", BASE_URL),
             ("Kitchen", f"{BASE_URL}kitchen.html"),
             ("Kitchen remodel planning", f"{BASE_URL}kitchen-remodel-planning.html"),
         ],
@@ -10417,7 +10489,7 @@ def build_bathroom_waterproofing_guide_page() -> str:
         [faq_ld(faqs)],
         canonical=f"{BASE_URL}bathroom-waterproofing-guide.html",
         breadcrumbs=[
-            ("About", BASE_URL),
+            ("Home", BASE_URL),
             ("Bathrooms", f"{BASE_URL}bathrooms.html"),
             ("Bathroom waterproofing", f"{BASE_URL}bathroom-waterproofing-guide.html"),
         ],
@@ -10547,7 +10619,7 @@ def build_hiring_a_contractor_page() -> str:
         [faq_ld(faqs), howto],
         canonical=f"{BASE_URL}hiring-a-contractor.html",
         breadcrumbs=[
-            ("About", BASE_URL),
+            ("Home", BASE_URL),
             ("Good Steward", f"{BASE_URL}good-steward.html"),
             ("Hiring a contractor", f"{BASE_URL}hiring-a-contractor.html"),
         ],
@@ -10658,7 +10730,7 @@ def build_home_addition_planning_page() -> str:
         [faq_ld(faqs)],
         canonical=f"{BASE_URL}home-addition-planning.html",
         breadcrumbs=[
-            ("About", BASE_URL),
+            ("Home", BASE_URL),
             ("Home additions", f"{BASE_URL}additions.html"),
             ("Home addition planning", f"{BASE_URL}home-addition-planning.html"),
         ],
@@ -11058,7 +11130,7 @@ def build_learn_page() -> str:
         body,
         [faq_ld(faqs)],
         canonical=f"{BASE_URL}learn.html",
-        breadcrumbs=[("About", BASE_URL), ("Learn", f"{BASE_URL}learn.html")],
+        breadcrumbs=[("Home", BASE_URL), ("Learn", f"{BASE_URL}learn.html")],
         include_widgets=False,
         include_story_embed=False,
         include_tools_embed=False,
@@ -11369,7 +11441,7 @@ def build_bid_comparison_page() -> str:
         [faq_ld(faqs)],
         canonical=f"{BASE_URL}bid-comparison.html",
         breadcrumbs=[
-            ("About", BASE_URL),
+            ("Home", BASE_URL),
             ("Good Steward", f"{BASE_URL}good-steward.html"),
             ("Bid comparison", f"{BASE_URL}bid-comparison.html"),
         ],
@@ -11444,7 +11516,7 @@ def build_red_flags_hiring_page() -> str:
         [faq_ld(faqs)],
         canonical=f"{BASE_URL}red-flags-hiring.html",
         breadcrumbs=[
-            ("About", BASE_URL),
+            ("Home", BASE_URL),
             ("Good Steward", f"{BASE_URL}good-steward.html"),
             ("Red flags hiring", f"{BASE_URL}red-flags-hiring.html"),
         ],
@@ -11540,7 +11612,7 @@ def build_project_timeline_page() -> str:
         [faq_ld(faqs)],
         canonical=f"{BASE_URL}project-timeline.html",
         breadcrumbs=[
-            ("About", BASE_URL),
+            ("Home", BASE_URL),
             ("Good Steward", f"{BASE_URL}good-steward.html"),
             ("Project timeline", f"{BASE_URL}project-timeline.html"),
         ],
@@ -11833,7 +11905,7 @@ def build_final_walkthrough_page() -> str:
         [faq_ld(faqs)],
         canonical=f"{BASE_URL}final-walkthrough.html",
         breadcrumbs=[
-            ("About", BASE_URL),
+            ("Home", BASE_URL),
             ("Learn", f"{BASE_URL}learn.html"),
             ("Final walkthrough", f"{BASE_URL}final-walkthrough.html"),
         ],
@@ -11933,7 +12005,7 @@ def build_bonds_and_insurance_page() -> str:
         [faq_ld(faqs)],
         canonical=f"{BASE_URL}bonds-and-insurance.html",
         breadcrumbs=[
-            ("About", BASE_URL),
+            ("Home", BASE_URL),
             ("Learn", f"{BASE_URL}learn.html"),
             ("Bonds & insurance", f"{BASE_URL}bonds-and-insurance.html"),
         ],
@@ -12035,7 +12107,7 @@ def build_design_build_vs_bid_page() -> str:
         [faq_ld(faqs)],
         canonical=f"{BASE_URL}design-build-vs-bid.html",
         breadcrumbs=[
-            ("About", BASE_URL),
+            ("Home", BASE_URL),
             ("Learn", f"{BASE_URL}learn.html"),
             ("Design-build vs bid", f"{BASE_URL}design-build-vs-bid.html"),
         ],
@@ -12188,7 +12260,7 @@ def build_remodel_cost_factors_page() -> str:
         [faq_ld(faqs)],
         canonical=f"{BASE_URL}remodel-cost-factors.html",
         breadcrumbs=[
-            ("About", BASE_URL),
+            ("Home", BASE_URL),
             ("Learn", f"{BASE_URL}learn.html"),
             ("Remodel cost factors", f"{BASE_URL}remodel-cost-factors.html"),
         ],
@@ -12274,7 +12346,7 @@ def build_kitchen_cost_factors_page() -> str:
         [faq_ld(faqs)],
         canonical=f"{BASE_URL}kitchen-cost-factors.html",
         breadcrumbs=[
-            ("About", BASE_URL),
+            ("Home", BASE_URL),
             ("Learn", f"{BASE_URL}learn.html"),
             ("Kitchen cost factors", f"{BASE_URL}kitchen-cost-factors.html"),
         ],
@@ -12357,7 +12429,7 @@ def build_bathroom_cost_factors_page() -> str:
         [faq_ld(faqs)],
         canonical=f"{BASE_URL}bathroom-cost-factors.html",
         breadcrumbs=[
-            ("About", BASE_URL),
+            ("Home", BASE_URL),
             ("Learn", f"{BASE_URL}learn.html"),
             ("Bathroom cost factors", f"{BASE_URL}bathroom-cost-factors.html"),
         ],
@@ -12440,7 +12512,7 @@ def build_addition_cost_factors_page() -> str:
         [faq_ld(faqs)],
         canonical=f"{BASE_URL}addition-cost-factors.html",
         breadcrumbs=[
-            ("About", BASE_URL),
+            ("Home", BASE_URL),
             ("Learn", f"{BASE_URL}learn.html"),
             ("Addition cost factors", f"{BASE_URL}addition-cost-factors.html"),
         ],
@@ -12523,7 +12595,7 @@ def build_adu_cost_factors_page() -> str:
         [faq_ld(faqs)],
         canonical=f"{BASE_URL}adu-cost-factors.html",
         breadcrumbs=[
-            ("About", BASE_URL),
+            ("Home", BASE_URL),
             ("Learn", f"{BASE_URL}learn.html"),
             ("ADU cost factors", f"{BASE_URL}adu-cost-factors.html"),
         ],
@@ -12615,7 +12687,7 @@ def build_financing_and_draws_page() -> str:
         [faq_ld(faqs)],
         canonical=f"{BASE_URL}financing-and-draws.html",
         breadcrumbs=[
-            ("About", BASE_URL),
+            ("Home", BASE_URL),
             ("Learn", f"{BASE_URL}learn.html"),
             ("Financing & draws", f"{BASE_URL}financing-and-draws.html"),
         ],
@@ -12693,7 +12765,7 @@ def build_living_through_remodel_page() -> str:
         [faq_ld(faqs)],
         canonical=f"{BASE_URL}living-through-remodel.html",
         breadcrumbs=[
-            ("About", BASE_URL),
+            ("Home", BASE_URL),
             ("Learn", f"{BASE_URL}learn.html"),
             ("Living through a remodel", f"{BASE_URL}living-through-remodel.html"),
         ],
@@ -12771,7 +12843,7 @@ def build_selecting_finishes_page() -> str:
         [faq_ld(faqs)],
         canonical=f"{BASE_URL}selecting-finishes.html",
         breadcrumbs=[
-            ("About", BASE_URL),
+            ("Home", BASE_URL),
             ("Learn", f"{BASE_URL}learn.html"),
             ("Selecting finishes", f"{BASE_URL}selecting-finishes.html"),
         ],
@@ -12869,7 +12941,7 @@ def build_contractor_contract_basics_page() -> str:
         [faq_ld(faqs)],
         canonical=f"{BASE_URL}contractor-contract-basics.html",
         breadcrumbs=[
-            ("About", BASE_URL),
+            ("Home", BASE_URL),
             ("Learn", f"{BASE_URL}learn.html"),
             ("Contractor contract basics", f"{BASE_URL}contractor-contract-basics.html"),
         ],
@@ -13372,7 +13444,7 @@ def build_directory_hub() -> str:
     body = (
         _hub_header(
             "Hire shortlists · Editorial · Not paid placement",
-            "Contractor directories",
+            "Contractor directories for King and Snohomish",
             "Board of Project Stewardship directories for the Pacific Northwest — King County, Snohomish County, and Seattle. Rankings are editorial hire shortlists — not ownership of any firm, not lead-gen brokerage, and not invented prices or ROI.",
         )
         + _hub_photo_strip(
@@ -13443,7 +13515,7 @@ def build_directory_hub() -> str:
         + education_closing("directories", "verify", "hire", official_keys=["lni_verify", "lni_home", "lni_hire_smart", "mybuildingpermit"])
     )
     return page_shell(
-        "Directories | Board of Project Stewardship",
+        "Contractor directories | Board of Project Stewardship",
         "Contractor directories for King County, Snohomish County, and Seattle — additions, kitchen, bath, custom homes, trades, and Edmonds Top 30.",
         "directory",
         body,
@@ -13524,7 +13596,7 @@ def build_directory_page() -> str:
         )
     )
     return page_shell(
-        "Directories | Board of Project Stewardship",
+        "Contractor directories | Board of Project Stewardship",
         "Board of Project Stewardship contractor directories for King County, Snohomish County, and Seattle — additions, kitchen, bath, custom homes, trades. Editorial shortlists; re-verify at WA L&I.",
         "directory",
         body,
@@ -13693,7 +13765,7 @@ def build_write_page() -> str:
         canonical=f"{BASE_URL}write.html",
         extra_scripts=extra_scripts,
         robots="noindex, follow",
-        breadcrumbs=[("About", BASE_URL), ("Blog", f"{BASE_URL}blog.html"), ("Contribute", f"{BASE_URL}write.html")],
+        breadcrumbs=[("Home", BASE_URL), ("Blog", f"{BASE_URL}blog.html"), ("Contribute", f"{BASE_URL}write.html")],
     )
 
 
@@ -13777,21 +13849,36 @@ def build_404_page() -> str:
   })();
   </script>
 """,
-        breadcrumbs=[("About", BASE_URL), ("Page not found", f"{BASE_URL}404.html")],
+        breadcrumbs=[("Home", BASE_URL), ("Page not found", f"{BASE_URL}404.html")],
     )
 
 
 def _tool_seo_block(title: str, description: str, canonical: str, og_image: str) -> str:
-    ld = {
-        "@context": "https://schema.org",
+    title = clamp_title(title)
+    description = clamp_description(description)
+    updated = stored_lastmod(_rel_from_canonical(canonical))
+    crumb = title.split("|", 1)[0].strip() or "Tool"
+    graph = list(board_organization_website_ld()["@graph"])
+    graph.append({
         "@type": "WebPage",
+        "@id": canonical.split("#")[0] + "#webpage",
         "name": title,
         "url": canonical,
         "description": description,
+        "dateModified": updated,
         "isPartOf": {"@id": "https://boardofprojectstewardship.com/#website"},
         "publisher": {"@id": "https://boardofprojectstewardship.com/#organization"},
         "inLanguage": "en-US",
-    }
+    })
+    graph.append({
+        "@type": "BreadcrumbList",
+        "@id": canonical.split("#")[0] + "#breadcrumb",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": BASE_URL},
+            {"@type": "ListItem", "position": 2, "name": crumb, "item": canonical},
+        ],
+    })
+    ld = {"@context": "https://schema.org", "@graph": graph}
     fav = favicon_tags()
     return (
         "<!-- board-tool-seo -->\n"
@@ -13899,6 +13986,7 @@ def patch_tool_pages() -> None:
         if not path.is_file():
             continue
         text = path.read_text(encoding="utf-8")
+        text = re.sub(r"<title>[^<]*</title>", f"<title>{esc(clamp_title(title))}</title>", text, count=1, flags=re.I)
         if path.name == "index.html" and "another-story" in str(path):
             text = reframe_another_story_chrome(text)
         text = _strip_tool_seo_blocks(text)
@@ -14005,6 +14093,42 @@ def emit_stamp_of_trust_page() -> None:
     # Relative ./ links would resolve under /stamp-of-trust/ and miss site-root pages.
     if re.search(r'href="\./[^"]+\.html"', html_text):
         raise SystemExit("Stamp of Trust source uses ./ page links; use root paths like /verify-contractor.html")
+
+    def _clamp_meta(match: re.Match) -> str:
+        raw = html.unescape(match.group(2))
+        return f'{match.group(1)}{esc(clamp_description(raw))}"'
+
+    html_text = re.sub(
+        r'(<meta[^>]+(?:name="description"|property="og:description"|name="twitter:description")[^>]*content=")([^"]*)"',
+        _clamp_meta,
+        html_text,
+        flags=re.I,
+    )
+    if "BreadcrumbList" not in html_text:
+        updated = stored_lastmod("stamp-of-trust/index.html")
+        desc_m = re.search(r'<meta[^>]+name="description"[^>]+content="([^"]*)"', html_text, re.I)
+        description = html.unescape(desc_m.group(1)) if desc_m else ""
+        graph = list(board_organization_website_ld()["@graph"])
+        graph.append({
+            "@type": "WebPage",
+            "@id": f"{SITE_ORIGIN}/stamp-of-trust/#webpage",
+            "url": f"{SITE_ORIGIN}/stamp-of-trust/",
+            "name": "Stamp of Trust",
+            "description": description,
+            "dateModified": updated,
+            "isPartOf": {"@id": "https://boardofprojectstewardship.com/#website"},
+            "publisher": {"@id": "https://boardofprojectstewardship.com/#organization"},
+            "inLanguage": "en-US",
+        })
+        graph.append({
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": "Home", "item": BASE_URL},
+                {"@type": "ListItem", "position": 2, "name": "Stamp of Trust", "item": f"{SITE_ORIGIN}/stamp-of-trust/"},
+            ],
+        })
+        block = '<script type="application/ld+json">' + json.dumps({"@context": "https://schema.org", "@graph": graph}, separators=(",", ":")) + "</script>\n"
+        html_text = html_text.replace("</head>", block + "</head>", 1)
     dest_dir = SITE_DIR / "stamp-of-trust"
     dest_dir.mkdir(parents=True, exist_ok=True)
     (dest_dir / "index.html").write_text(html_text, encoding="utf-8")
