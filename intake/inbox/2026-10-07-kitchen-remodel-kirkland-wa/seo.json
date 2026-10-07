@@ -1,0 +1,46 @@
+{
+  "producer": "openclaw",
+  "agent": "seo-specialist",
+  "slug": "kitchen-remodel-kirkland-wa",
+  "title": "Kitchen Remodel Kirkland WA \u2014 Permit Exemptions, City Electrical Permits & Range-Hood Makeup Air",
+  "description": "Kitchen remodel guidance for Kirkland homeowners: which finish work the Kirkland Municipal Code exempts from a building permit, why electrical permits come from the City of Kirkland rather than L&I, planning makeup air for a bigger range hood, and how to verify contractors.",
+  "category": "Kitchen",
+  "keywords": [
+    "kitchen remodel Kirkland WA",
+    "Kirkland kitchen permit exemption",
+    "Kirkland electrical permit kitchen",
+    "range hood makeup air Washington",
+    "kitchen remodeling contractors Kirkland",
+    "verify kitchen contractor Washington L&I"
+  ],
+  "outline": [
+    "Key Takeaways",
+    "Kirkland kitchens and the houses around them",
+    "What Kirkland exempts \u2014 and what it does not",
+    "Electrical: the city's permit, not L&I's",
+    "Range hoods and makeup air",
+    "Materials Worth Knowing",
+    "How to shortlist and verify contractors",
+    "Where Pacific Pro Group fits",
+    "Next steps for a Kirkland kitchen"
+  ],
+  "search_intent": "A Kirkland homeowner planning a kitchen remodel wants to know which work needs permits, who issues electrical permits, and how to vet contractors.",
+  "local_angles": [
+    "KMC 21.06.215 finish-work permit exemption (cabinets, countertops) and its critical-area / flood / WUI carve-outs",
+    "Kirkland issues its own electrical permits and inspections (L&I city list; KMC 21.06.210)",
+    "KMC 21.06.247 contractor registration + Kirkland business license before permit issuance",
+    "Range-hood makeup air planning; MyBuildingPermit.com portal"
+  ],
+  "internal_links": [
+    "../kirkland.html",
+    "../kitchens.html",
+    "../kitchen-remodel-planning.html",
+    "../verify-contractor.html",
+    "../permits.html"
+  ],
+  "notes": "Box-authored fallback brief (PC openclaw brief was Mountlake Terrace kitchen, duplicate of 2026-08-23). Internal links must appear in the draft. PPG only as Board #1 -> https://pacificprogroup.com/.",
+  "generation": {
+    "agent": "box-authored",
+    "mode": "box-fallback"
+  }
+}

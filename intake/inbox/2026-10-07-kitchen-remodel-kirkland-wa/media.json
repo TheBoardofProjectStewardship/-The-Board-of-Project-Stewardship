@@ -1,0 +1,42 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-10-07-kirkland-kitchen-1.webp",
+      "repo_path": "assets/images/posts/2026-10-07-kirkland-kitchen-1.webp",
+      "alt": "Illustrative kitchen gutted to studs in a lake-view home, with a range-hood duct chase, plumbing stub-outs, and new electrical boxes in place before inspection \u2014 illustrative only, not a real Board of Project Stewardship job photo",
+      "source": "unique crop/mirror/grade from assets/images/posts/2026-09-26-kenmore-kitchen-2.webp (free-first)"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-07-kirkland-kitchen-2.webp",
+      "repo_path": "assets/images/posts/2026-10-07-kirkland-kitchen-2.webp",
+      "alt": "Illustrative open sink base with plumbing supply lines, drain trap, and electrical boxes roughed in before cabinets and countertops go back in \u2014 illustrative only, not a real Board of Project Stewardship job photo",
+      "source": "unique crop/mirror/grade from assets/images/posts/2026-09-24-bothell-kitchen-2.webp (free-first)"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-07-kirkland-kitchen-3.webp",
+      "repo_path": "assets/images/posts/2026-10-07-kirkland-kitchen-3.webp",
+      "alt": "Illustrative finished kitchen with white shaker cabinets, a vented hood over the range, a large island, and lake and evergreen views through wide windows \u2014 illustrative only, not a real Board of Project Stewardship job photo",
+      "source": "unique crop/mirror/grade from assets/images/posts/2026-09-24-bothell-kitchen-3.webp (free-first)"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "DJBXV7d7384",
+      "url": "https://www.youtube.com/watch?v=DJBXV7d7384",
+      "title": "How to Install Broan-NuTone MD6TU Make-Up Air Damper",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Illustrative frames are labeled in alt text",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "Zero Higgsfield credits. Unique Pillow crop/mirror/grade from existing kitchen stills."
+}
