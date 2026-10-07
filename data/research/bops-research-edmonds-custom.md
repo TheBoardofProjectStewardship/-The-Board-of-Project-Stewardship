@@ -10,7 +10,7 @@ Original research markdown was not in the repository.
 | 2 | Chermak Construction Inc | https://www.chermak.com | Edmonds, WA |  | High-quality custom homes and remodels in Edmonds. | Luxury Homes | luxury |
 | 3 | Platinum General Construction LLC |  | Edmonds, WA |  | Custom and spec homes in Edmonds area. | Traditional Builds | traditional |
 | 4 | Lentz Construction LLC |  | Edmonds, WA |  | Modern custom builds in Edmonds. | Modern Design | modern |
-| 5 | Revive Project Pros | http://www.reviveprojectpros.com | Edmonds, WA |  | Luxury custom homes and additions in Edmonds. | Luxury Custom | luxury |
+| 5 | Revive Project Pros | https://www.reviveprojectpros.com | Edmonds, WA |  | Luxury custom homes and additions in Edmonds. | Luxury Custom | luxury |
 | 6 | R G H Incorporated |  | Edmonds, WA |  | Custom renovations and builds in Edmonds. | Custom Renovations | traditional |
 | 7 | Prime Home Renovations LLC |  | Edmonds, WA |  | Sustainable custom homes in Edmonds. | Sustainable Builds | sustainable |
 | 8 | J Hanby LLC |  | Edmonds, WA |  | Craftsmanship-focused modern builds in Edmonds. | Modern Custom | modern |

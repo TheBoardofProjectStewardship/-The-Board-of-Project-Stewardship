@@ -289,6 +289,33 @@ def main() -> None:
             if alt and not alt.lower().startswith("illustrative:"):
                 fail(f"{path.name} generated image alt missing Illustrative: prefix: {alt[:80]}")
 
+    dead_official = (
+        "https://www.cityoffederalway.com/page/permits",
+        "https://www.mercerisland.gov/community-planning-development",
+        "https://www.desmoineswa.gov/city_hall/departments/planning_and_building",
+        "https://www.burienwa.gov/city_hall/departments/building_services",
+        "https://www.maplevalleywa.gov/216/Building",
+        "https://www.covingtonwa.gov/city_hall/departments/community_development",
+        "https://www.arlingtonwa.gov/147/Building",
+        "https://stanwoodwa.org/147/Building-Department",
+        "https://www.lakestevenswa.gov/141/Planning-Community-Development",
+        "https://www.snohomishwa.gov/147/Building-Department",
+        "https://newcastlewa.gov/community_development/",
+        "https://www.cityofenumclaw.net/149/Building-Department",
+        "https://northbendwa.gov/147/Community-Development",
+        "https://www.snoqualmiewa.gov/178/Building",
+        "https://www.duvallwa.gov/157/Building-Department",
+        "https://marysvillewa.gov/147/Community-Development",
+        "https://monroewa.gov/147/Building-Services",
+    )
+    spec_blob = ""
+    for spec in (ROOT / "places").glob("_place_specs_wave*.json"):
+        spec_blob += spec.read_text(encoding="utf-8")
+    html_blob = "\n".join(path.read_text(encoding="utf-8") for path in html_files)
+    for url in dead_official:
+        if url in spec_blob or url in html_blob:
+            fail(f"dead official permit URL still published: {url}")
+
     print(f"OK: checked {len(html_files)} HTML files; BreadcrumbList on {crumbs}")
 
 
