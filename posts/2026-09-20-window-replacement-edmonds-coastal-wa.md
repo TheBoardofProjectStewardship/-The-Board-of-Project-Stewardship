@@ -89,7 +89,7 @@ Finally, keep a simple owner file: proposals, product cut sheets, permit numbers
 
 New window and addition work in Edmonds / King & Snohomish is checked against the **WSEC-R 2021** single-family prescriptive path (eff. March 15, 2024). Use this Board worksheet to total fuel-normalization and Table R406.3 credits against the dwelling-size requirement before drawings go to permit.
 
-![Illustrative Pacific Northwest home with energy-efficient windows — Illustrative editorial photo — not a project photograph](../assets/images/tools/energy-credits-hero.png)
+![Illustrative Pacific Northwest home with energy-efficient windows — Illustrative editorial photo — not a project photograph](../assets/images/tools/energy-credits-hero.webp)
 
 tool:energy-credit
 

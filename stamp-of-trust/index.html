@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
+  <link rel="stylesheet" href="/assets/css/site.css">
+  <link rel="preload" href="/assets/fonts/InterLatin.woff2" as="font" type="font/woff2" crossorigin>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Official Stamp of Trust and Integrity Shield from the Board of Project Stewardship — how Pacific Northwest contractors earn verification and how homeowners can check a stamp.">
@@ -25,37 +27,8 @@
   <link rel="apple-touch-icon" href="https://boardofprojectstewardship.com/assets/icons/apple-touch-icon.png">
   <link rel="canonical" href="https://boardofprojectstewardship.com/stamp-of-trust/">
   <title>Stamp of Trust | Board of Project Stewardship</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            obsidian: '#0a0a0a',
-            charcoal: '#1a1a1a',
-            'dark-gray': '#2a2a2a',
-            primary: '#166534',
-            secondary: '#4ade80',
-            seal: '#d4af37',
-            ambersoft: '#fbbf24',
-          },
-          boxShadow: {
-            'glow-sleek': '0 0 15px -5px rgba(22, 101, 52, 0.3)',
-            'seal': '0 0 40px -10px rgba(212, 175, 55, 0.35)',
-            'cert': '0 24px 60px rgba(0,0,0,0.45), 0 0 0 1px rgba(212,175,55,0.25)',
-          },
-          fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-          }
-        }
-      }
-    }
-  </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <style>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
     body { font-family: 'Inter', system-ui, sans-serif; background: #0a0a0a; color: #e0e0e0; }
     .bg-grid-pattern {
       background-image:
@@ -212,15 +185,15 @@
       <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-3">Stewardship field context (illustrative)</p>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <figure class="overflow-hidden rounded-xl border border-white/10 bg-obsidian">
-          <a href="/verify-contractor.html" class="block focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary/60" aria-label="Verify a contractor"><img src="/assets/images/hubs/hub-rank-2.webp" alt="Illustrative Washington L&amp;I contractor license record prepared for verification — not a real Board job photo" class="w-full h-40 sm:h-48 object-cover transition hover:opacity-90" width="800" height="450" loading="lazy"></a>
+          <a href="/verify-contractor.html" class="block focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary/60" aria-label="Verify a contractor"><img src="/assets/images/hubs/hub-rank-2-800.webp" alt="Illustrative Washington L&amp;I contractor license record prepared for verification — not a real Board job photo" class="w-full h-40 sm:h-48 object-cover transition hover:opacity-90" width="800" height="450" loading="eager" srcset="/assets/images/hubs/hub-rank-2-480.webp 480w, /assets/images/hubs/hub-rank-2-800.webp 800w, /assets/images/hubs/hub-rank-2-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px" fetchpriority="high"></a>
           <figcaption class="px-3 py-2 text-[11px] text-slate-500 font-light leading-snug">License lookup is separate from the Stamp</figcaption>
         </figure>
         <figure class="overflow-hidden rounded-xl border border-white/10 bg-obsidian">
-          <a href="/permits.html" class="block focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary/60" aria-label="Permit hub"><img src="/assets/images/hubs/hub-directory-2.webp" alt="Illustrative permit drawings and jurisdiction documents on a review table — not a real Board job photo" class="w-full h-40 sm:h-48 object-cover transition hover:opacity-90" width="800" height="450" loading="lazy"></a>
+          <a href="/permits.html" class="block focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary/60" aria-label="Permit hub"><img src="/assets/images/hubs/hub-directory-2-800.webp" alt="Illustrative permit drawings and jurisdiction documents on a review table — not a real Board job photo" class="w-full h-40 sm:h-48 object-cover transition hover:opacity-90" width="800" height="450" loading="lazy" srcset="/assets/images/hubs/hub-directory-2-480.webp 480w, /assets/images/hubs/hub-directory-2-800.webp 800w, /assets/images/hubs/hub-directory-2-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px"></a>
           <figcaption class="px-3 py-2 text-[11px] text-slate-500 font-light leading-snug">Permit ownership stays with the project</figcaption>
         </figure>
         <figure class="overflow-hidden rounded-xl border border-white/10 bg-obsidian">
-          <a href="/how-we-rank.html" class="block focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary/60" aria-label="How we rank"><img src="/assets/images/hubs/hub-rank-3.webp" alt="Illustrative finished Pacific Northwest remodel used as quality context — not a real Board job photo" class="w-full h-40 sm:h-48 object-cover transition hover:opacity-90" width="800" height="450" loading="lazy"></a>
+          <a href="/how-we-rank.html" class="block focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary/60" aria-label="How we rank"><img src="/assets/images/hubs/hub-rank-3-800.webp" alt="Illustrative finished Pacific Northwest remodel used as quality context — not a real Board job photo" class="w-full h-40 sm:h-48 object-cover transition hover:opacity-90" width="800" height="450" loading="lazy" srcset="/assets/images/hubs/hub-rank-3-480.webp 480w, /assets/images/hubs/hub-rank-3-800.webp 800w, /assets/images/hubs/hub-rank-3-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px"></a>
           <figcaption class="px-3 py-2 text-[11px] text-slate-500 font-light leading-snug">Finished work is context, not a warranty</figcaption>
         </figure>
       </div>

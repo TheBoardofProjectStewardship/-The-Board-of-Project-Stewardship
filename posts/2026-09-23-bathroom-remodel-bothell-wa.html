@@ -26,224 +26,9 @@
   <link rel="icon" href="https://boardofprojectstewardship.com/assets/icons/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="https://boardofprojectstewardship.com/assets/icons/apple-touch-icon.png">
   <title>Bathroom Remodel Bothell WA | Board of Project Stewardship</title>
-  <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
-  <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
-  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-  <link rel="preload" href="/assets/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            obsidian: '#0a0a0a',
-            charcoal: '#1a1a1a',
-            'dark-gray': '#2a2a2a',
-            primary: '#166534',
-            secondary: '#4ade80',
-          },
-          boxShadow: {
-            'glow-sleek': '0 0 15px -5px rgba(22, 101, 52, 0.3)',
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    @font-face {
-      font-family: 'Inter';
-      font-style: normal;
-      font-weight: 100 900;
-      font-display: swap;
-      src: url('/assets/fonts/InterVariable.woff2') format('woff2');
-    }
-    @font-face {
-      font-family: 'Inter';
-      font-style: normal;
-      font-weight: 400;
-      font-display: swap;
-      src: url('/assets/fonts/Inter-Regular.woff2') format('woff2');
-    }
-    @font-face {
-      font-family: 'Inter';
-      font-style: normal;
-      font-weight: 500;
-      font-display: swap;
-      src: url('/assets/fonts/Inter-Medium.woff2') format('woff2');
-    }
-    @font-face {
-      font-family: 'Inter';
-      font-style: normal;
-      font-weight: 600;
-      font-display: swap;
-      src: url('/assets/fonts/Inter-SemiBold.woff2') format('woff2');
-    }
-    @font-face {
-      font-family: 'Inter';
-      font-style: normal;
-      font-weight: 700;
-      font-display: swap;
-      src: url('/assets/fonts/Inter-Bold.woff2') format('woff2');
-    }
-    body { font-family: 'Inter', system-ui, sans-serif; background-color: #0a0a0a; color: #e0e0e0; }
-    .bg-grid-pattern {
-      background-image:
-        linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-    }
-    .card-hover { transition: transform 0.25s ease, border-color 0.25s ease; }
-    .card-hover:hover { transform: translateY(-3px); }
-    .rank-badge {
-      min-width: 2.75rem; height: 2.75rem;
-      display: flex; align-items: center; justify-content: center;
-      border-radius: 0.5rem; font-weight: 800; font-size: 0.95rem;
-      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: #94a3b8;
-    }
-    .prose-board a { color: #4ade80; text-decoration: underline; }
-    .prose-board h2 { font-size: 1.5rem; font-weight: 800; color: white; margin: 1.75rem 0 0.75rem; }
-    .prose-board h3 { font-size: 1.15rem; font-weight: 700; color: white; margin: 1.25rem 0 0.5rem; }
-    .prose-board p, .prose-board li { color: #cbd5e1; font-weight: 300; line-height: 1.7; margin-bottom: 0.85rem; }
-    .prose-board ul { list-style: disc; padding-left: 1.25rem; margin-bottom: 1rem; }
-    .prose-board ol { list-style: decimal; padding-left: 1.25rem; margin-bottom: 1rem; }
-    .prose-board strong { color: #fff; font-weight: 600; }
-    .prose-board .post-figure {
-      margin: 1.5rem 0;
-      border-radius: 0.75rem;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.02);
-    }
-    .prose-board .post-figure img {
-      display: block;
-      width: 100%;
-      height: auto;
-      max-height: 32rem;
-      object-fit: cover;
-    }
-    .prose-board .post-figure figcaption {
-      padding: 0.65rem 0.9rem;
-      font-size: 0.85rem;
-      color: #94a3b8;
-      font-weight: 300;
-      line-height: 1.4;
-      border-top: 1px solid rgba(255,255,255,0.06);
-    }
-    .prose-board .video-embed {
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%; /* 16:9 */
-      height: 0;
-      margin: 1.5rem 0;
-      border-radius: 0.75rem;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: #000;
-    }
-    .prose-board .video-embed iframe {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      border: 0;
-    }
-    #tools input, #tools select, #tools textarea {
-      color-scheme: dark;
-    }
-    #tools input::placeholder, #tools textarea::placeholder { color: #64748b; }
-    #calc-result { letter-spacing: -0.02em; }
-    .skip-link {
-      position: absolute;
-      left: 0.75rem;
-      top: -3.25rem;
-      z-index: 80;
-      background: #166534;
-      color: #fff;
-      padding: 0.55rem 0.9rem;
-      border-radius: 0.375rem;
-      font-size: 0.7rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-decoration: none;
-    }
-    .skip-link:focus {
-      top: 0.75rem;
-      outline: 2px solid #4ade80;
-      outline-offset: 2px;
-    }
-    #more-dropdown, #mobile-nav { display: none; }
-    #more-dropdown.is-open { display: block; }
-    #mobile-nav.is-open { display: block; }
-    /* Full primary nav does not fit beside the full brand name below 1280px.
-       Keep the hamburger through that range so the name stays one line. */
-    @media (min-width: 1280px) {
-      #mobile-nav.is-open { display: none !important; }
-    }
-    header .site-header-inner { width: 100%; }
-    header .site-header-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-      height: 4rem;
-      flex-wrap: nowrap;
-    }
-    header .site-brand {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      flex-shrink: 0;
-      min-width: max-content;
-      text-decoration: none;
-    }
-    header .site-brand-name {
-      white-space: nowrap;
-      flex-shrink: 0;
-      font-weight: 900;
-      color: #fff;
-      line-height: 1.2;
-      letter-spacing: 0.03em;
-      font-size: clamp(0.7rem, 3.5vw, 0.875rem);
-    }
-    @media (min-width: 480px) {
-      header .site-brand-name {
-        font-size: 0.875rem;
-        letter-spacing: 0.05em;
-      }
-    }
-    @media (min-width: 1280px) {
-      header .site-brand-name {
-        font-size: 1rem;
-        letter-spacing: 0.05em;
-      }
-    }
-    header .site-nav-desktop { display: none; }
-    header .site-nav-burger { display: inline-flex; flex-shrink: 0; }
-    @media (min-width: 1280px) {
-      header .site-nav-desktop {
-        display: flex;
-        align-items: center;
-        flex-shrink: 0;
-        gap: 0.5rem;
-      }
-      header .site-nav-burger { display: none !important; }
-    }
-    @media (min-width: 1440px) {
-      header .site-nav-desktop { gap: 0.9rem; }
-    }
-    @media (min-width: 1680px) {
-      header .site-nav-desktop { gap: 1.25rem; }
-    }
-    .nav-burger {
-      width: 1.35rem; height: 1.05rem;
-      display: flex; flex-direction: column; justify-content: space-between;
-    }
-    .nav-burger span { display: block; height: 2px; background: #e2e8f0; border-radius: 1px; }
-    body.nav-open { overflow: hidden; }
-    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
-    details.board-faq > summary:focus-visible { outline: 2px solid #4ade80; outline-offset: 2px; }
-  </style>
+  <link rel="preload" href="/assets/fonts/InterLatin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/site.css">
+
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -412,7 +197,7 @@
       </ol>
     </nav>
     <div class="mb-8 overflow-hidden rounded-xl border border-white/10">
-      <img src="../assets/images/posts/2026-09-23-bothell-bath-1.webp" alt="Bathroom Remodel Bothell WA — Moisture, Permits &amp; Licensed Pros" class="w-full h-52 sm:h-72 object-cover" width="1600" height="900" loading="eager">
+      <img src="../assets/images/posts/2026-09-23-bothell-bath-1-800.webp" alt="Bathroom Remodel Bothell WA — Moisture, Permits &amp; Licensed Pros" class="w-full h-52 sm:h-72 object-cover" width="1600" height="900" loading="eager" srcset="../assets/images/posts/2026-09-23-bothell-bath-1-480.webp 480w, ../assets/images/posts/2026-09-23-bothell-bath-1-800.webp 800w, ../assets/images/posts/2026-09-23-bothell-bath-1-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px" fetchpriority="high">
     </div>
     <div class="text-[11px] uppercase tracking-widest text-secondary font-bold mb-3">Bathrooms · 2026-09-23</div>
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-4">Bathroom Remodel Bothell WA — Moisture, Permits &amp; Licensed Pros</h1>
@@ -425,7 +210,7 @@
 <li>Shortlist from our <a href="../bathrooms.html">bathroom remodel directory</a>, then verify every contractor at <a href="https://secure.lni.wa.gov/verify/">L&amp;I Verify</a>.</li>
 </ul>
 <p>Bothell straddles North Creek, the Sammamish River corridor, and a mix of ranch, split-level, and newer Eastside stock. A bathroom remodel here is not a Seattle bluff project and not a waterfront Edmonds envelope job — but winter humidity, slow-drying wet rooms, and older drain stacks still punish thin waterproofing and undersized exhaust. Durable scopes treat the wet assembly, permits, and trade coordination as the product, then pick tile and fixtures that fit that sequence.</p>
-<figure class="post-figure"><img src="../assets/images/posts/2026-09-23-bathroom-bothell-2.webp" alt="Illustrative: Bothell, Washington — a bathroom floor prepared for tile over heat cable, bright coastal haze — not a real Board of Project Stewardship job photo" loading="lazy" width="1200" height="675"><figcaption>Illustrative: Bothell, Washington — a bathroom floor prepared for tile over heat cable, bright coastal haze — not a real Board of Project Stewardship job photo</figcaption></figure>
+<figure class="post-figure"><img src="../assets/images/posts/2026-09-23-bathroom-bothell-2-800.webp" alt="Illustrative: Bothell, Washington — a bathroom floor prepared for tile over heat cable, bright coastal haze — not a real Board of Project Stewardship job photo" loading="lazy" width="1200" height="675" srcset="../assets/images/posts/2026-09-23-bathroom-bothell-2-480.webp 480w, ../assets/images/posts/2026-09-23-bathroom-bothell-2-800.webp 800w, ../assets/images/posts/2026-09-23-bathroom-bothell-2-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px"><figcaption>Illustrative: Bothell, Washington — a bathroom floor prepared for tile over heat cable, bright coastal haze — not a real Board of Project Stewardship job photo</figcaption></figure>
 <h2>Neighborhood and house-stock context</h2>
 <p>Whether you are near downtown Bothell, Canyon Park, North Creek, or closer to the river greenway, staging still matters. Dumpsters, tile pallets, and overnight protection for open wet walls need a plan before demolition day. Mid-century baths often hide undersized vents, galvanized supply, and pans that were never flood-tested. Ask bidders how they protect finished floors on the way to an upstairs bath, how they handle discovery of soft subfloor at the shower, and who owns change-order language when a valve wall must move for code clearance.</p>
 <p>HOA or design-review rules can affect exterior exhaust terminations, window changes in a bath, or visible roof penetrations even when the wet room itself is interior-only. Put those constraints in the proposal so they are not discovered after rough-in is underway. Cross-check <a href="../plumber.html">plumber.html</a> and <a href="../electrician.html">electrician.html</a> when fixture moves and circuit work share the same critical path.</p>
@@ -439,17 +224,17 @@
 <li>Size exhaust to outdoor termination before finish selections freeze the rough-in.</li>
 <li>Submit trade permits and hold cover-up until inspections clear.</li>
 </ol>
-<figure class="post-figure"><img src="../assets/images/posts/2026-09-23-bothell-bath-2.webp" alt="Illustrative close-up of bathroom waterproofing membrane at shower curb and niche — illustrative only, not a real job photo" loading="lazy" width="1200" height="675"><figcaption>Illustrative close-up of bathroom waterproofing membrane at shower curb and niche — illustrative only, not a real job photo</figcaption></figure>
+<figure class="post-figure"><img src="../assets/images/posts/2026-09-23-bothell-bath-2-800.webp" alt="Illustrative close-up of bathroom waterproofing membrane at shower curb and niche — illustrative only, not a real job photo" loading="lazy" width="1200" height="675" srcset="../assets/images/posts/2026-09-23-bothell-bath-2-480.webp 480w, ../assets/images/posts/2026-09-23-bothell-bath-2-800.webp 800w, ../assets/images/posts/2026-09-23-bothell-bath-2-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px"><figcaption>Illustrative close-up of bathroom waterproofing membrane at shower curb and niche — illustrative only, not a real job photo</figcaption></figure>
 <h2>Process video: wet-wall waterproofing fundamentals</h2>
 <p>A clear public walkthrough of Schluter-style KERDI-BOARD wet-wall layout, fastening, banding, and sealing at tub or pan interfaces (general best practice — still follow your product’s install guide and the Bothell inspection path):</p>
-<div class="video-embed"><iframe src="https://www.youtube.com/embed/qrObaJbftcE" title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
-<p><a href="../assets/videos/posts/2026-09-shared-waterproofing.mp4">Watch the short process clip</a></p>
+<div class="video-embed"><div class="embed-facade-frame"><button type="button" class="embed-facade" data-embed-src="https://www.youtube-nocookie.com/embed/qrObaJbftcE" data-embed-title="YouTube video">Play video</button></div></div>
+<p><a href="../assets/videos/posts/2026-09-shared-waterproofing-720.mp4">Watch the short process clip</a></p>
 <h2>Design, trades, and coordination</h2>
 <p>Measure the wet zone, valve height, niche, and glass opening before you lock a catalog number. Glass lead times can dominate the end of the schedule — measure only after walls are true. Coordinate plumber and electrician so one trade’s fastener line does not puncture the membrane the next trade just finished. Keep exhaust duct routing visible on the plan so it is not improvised through joist bays after tile is ordered.</p>
 <p>If the bath sits inside a larger kitchen, addition, or second-story package, keep waterproofing on the same critical path as structure and mechanical penetrations. Relative planning companions: <a href="../kitchen.html">kitchen.html</a>, <a href="../additions.html">additions.html</a>, and <a href="../trades.html">trades.html</a> when multiple specialties share the same rough-in window.</p>
-<figure class="post-figure"><img src="../assets/images/posts/2026-09-23-bothell-bath-3.webp" alt="Illustrative finished primary bathroom with walk-in shower and floating vanity — illustrative only, not a real job photo" loading="lazy" width="1200" height="675"><figcaption>Illustrative finished primary bathroom with walk-in shower and floating vanity — illustrative only, not a real job photo</figcaption></figure>
+<figure class="post-figure"><img src="../assets/images/posts/2026-09-23-bothell-bath-3-800.webp" alt="Illustrative finished primary bathroom with walk-in shower and floating vanity — illustrative only, not a real job photo" loading="lazy" width="1200" height="675" srcset="../assets/images/posts/2026-09-23-bothell-bath-3-480.webp 480w, ../assets/images/posts/2026-09-23-bothell-bath-3-800.webp 800w, ../assets/images/posts/2026-09-23-bothell-bath-3-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px"><figcaption>Illustrative finished primary bathroom with walk-in shower and floating vanity — illustrative only, not a real job photo</figcaption></figure>
 <p>For design-build continuity, many Bothell homeowners start with editorial rankings on <a href="../bathrooms.html">bathrooms.html</a>. <strong>Pacific Pro Group</strong> is listed as the Board’s #1 design-build pick for kitchen, bath, and additions coverage in this market — see <a href="https://pacificprogroup.com/">pacificprogroup.com</a> (WA license PACIFPG765OF). Always re-check status at <a href="https://secure.lni.wa.gov/verify/">L&amp;I Verify</a> before you sign. Browse related guides on the <a href="../blog.html">blog</a> for waterproofing and hiring checklists that pair with this city focus.</p>
-<figure class="post-figure"><img src="../assets/images/posts/2026-09-23-bathroom-bothell-3.webp" alt="Illustrative: Bothell, Washington — a bathroom floor with heat cable and thinset ridges, rainy daylight — not a real Board of Project Stewardship job photo" loading="lazy" width="1200" height="675"><figcaption>Illustrative: Bothell, Washington — a bathroom floor with heat cable and thinset ridges, rainy daylight — not a real Board of Project Stewardship job photo</figcaption></figure>
+<figure class="post-figure"><img src="../assets/images/posts/2026-09-23-bathroom-bothell-3-800.webp" alt="Illustrative: Bothell, Washington — a bathroom floor with heat cable and thinset ridges, rainy daylight — not a real Board of Project Stewardship job photo" loading="lazy" width="1200" height="675" srcset="../assets/images/posts/2026-09-23-bathroom-bothell-3-480.webp 480w, ../assets/images/posts/2026-09-23-bathroom-bothell-3-800.webp 800w, ../assets/images/posts/2026-09-23-bathroom-bothell-3-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px"><figcaption>Illustrative: Bothell, Washington — a bathroom floor with heat cable and thinset ridges, rainy daylight — not a real Board of Project Stewardship job photo</figcaption></figure>
 <h2>Materials Worth Knowing</h2>
 <p>Manufacturer product pages for wet-area assemblies and fixtures when you compare scopes (no prices or endorsements implied):</p>
 <ul>
@@ -562,7 +347,7 @@
 
   <section id="another-story-sea-embed" class="max-w-6xl mx-auto px-4 py-12 relative z-20 border-t border-white/5">
     <div class="mb-6 overflow-hidden rounded-xl border border-white/10">
-      <img src="../assets/images/another-story-banner.webp" alt="Conceptual before-and-after second-story idea for Another Story SEA" class="w-full h-48 sm:h-64 object-cover" width="1200" height="630" loading="eager">
+      <img src="../assets/images/another-story-banner-800.webp" alt="Conceptual before-and-after second-story idea for Another Story SEA" class="w-full h-48 sm:h-64 object-cover" width="1200" height="630" loading="lazy" srcset="../assets/images/another-story-banner-480.webp 480w, ../assets/images/another-story-banner-800.webp 800w, ../assets/images/another-story-banner-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
     </div>
     <div class="mb-5">
       <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Board feature</p>
@@ -634,72 +419,7 @@
       </div>
     </div>
   </footer>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-  <script>
-  (function () {
-    var moreBtn = document.getElementById('more-toggle');
-    var morePanel = document.getElementById('more-dropdown');
-    var burger = document.getElementById('nav-toggle');
-    var drawer = document.getElementById('mobile-nav');
-    function setOpen(btn, panel, open) {
-      if (!btn || !panel) return;
-      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      if (open) panel.classList.add('is-open');
-      else panel.classList.remove('is-open');
-    }
-    if (moreBtn && morePanel) {
-      moreBtn.addEventListener('click', function (e) {
-        e.stopPropagation();
-        setOpen(moreBtn, morePanel, moreBtn.getAttribute('aria-expanded') !== 'true');
-      });
-    }
-    if (burger && drawer) {
-      burger.addEventListener('click', function () {
-        var open = burger.getAttribute('aria-expanded') !== 'true';
-        setOpen(burger, drawer, open);
-        document.body.classList.toggle('nav-open', open);
-        burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-        if (open) {
-          var first = drawer.querySelector('a');
-          if (first) first.focus();
-        }
-      });
-      drawer.querySelectorAll('a').forEach(function (a) {
-        a.addEventListener('click', function () {
-          setOpen(burger, drawer, false);
-          document.body.classList.remove('nav-open');
-          burger.setAttribute('aria-label', 'Open menu');
-        });
-      });
-    }
-    document.addEventListener('click', function (e) {
-      if (moreBtn && morePanel && e.target !== moreBtn && !morePanel.contains(e.target)) {
-        setOpen(moreBtn, morePanel, false);
-      }
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') {
-        setOpen(moreBtn, morePanel, false);
-        if (burger && burger.getAttribute('aria-expanded') === 'true') {
-          setOpen(burger, drawer, false);
-          document.body.classList.remove('nav-open');
-          burger.setAttribute('aria-label', 'Open menu');
-          burger.focus();
-        }
-        return;
-      }
-      if (e.key !== 'Tab' || !drawer || !burger) return;
-      if (burger.getAttribute('aria-expanded') !== 'true') return;
-      var focusable = [burger].concat(Array.prototype.slice.call(drawer.querySelectorAll('a, button')));
-      if (!focusable.length) return;
-      var first = focusable[0];
-      var last = focusable[focusable.length - 1];
-      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-    });
-  })();
-  </script>
+  <script src="/assets/js/site.js" defer></script>
 
   <script>
   (function () {

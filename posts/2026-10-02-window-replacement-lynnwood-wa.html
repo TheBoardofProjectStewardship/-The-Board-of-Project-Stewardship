@@ -26,224 +26,9 @@
   <link rel="icon" href="https://boardofprojectstewardship.com/assets/icons/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="https://boardofprojectstewardship.com/assets/icons/apple-touch-icon.png">
   <title>Window Replacement Lynnwood WA | Board of Project Stewardship</title>
-  <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
-  <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
-  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-  <link rel="preload" href="/assets/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            obsidian: '#0a0a0a',
-            charcoal: '#1a1a1a',
-            'dark-gray': '#2a2a2a',
-            primary: '#166534',
-            secondary: '#4ade80',
-          },
-          boxShadow: {
-            'glow-sleek': '0 0 15px -5px rgba(22, 101, 52, 0.3)',
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    @font-face {
-      font-family: 'Inter';
-      font-style: normal;
-      font-weight: 100 900;
-      font-display: swap;
-      src: url('/assets/fonts/InterVariable.woff2') format('woff2');
-    }
-    @font-face {
-      font-family: 'Inter';
-      font-style: normal;
-      font-weight: 400;
-      font-display: swap;
-      src: url('/assets/fonts/Inter-Regular.woff2') format('woff2');
-    }
-    @font-face {
-      font-family: 'Inter';
-      font-style: normal;
-      font-weight: 500;
-      font-display: swap;
-      src: url('/assets/fonts/Inter-Medium.woff2') format('woff2');
-    }
-    @font-face {
-      font-family: 'Inter';
-      font-style: normal;
-      font-weight: 600;
-      font-display: swap;
-      src: url('/assets/fonts/Inter-SemiBold.woff2') format('woff2');
-    }
-    @font-face {
-      font-family: 'Inter';
-      font-style: normal;
-      font-weight: 700;
-      font-display: swap;
-      src: url('/assets/fonts/Inter-Bold.woff2') format('woff2');
-    }
-    body { font-family: 'Inter', system-ui, sans-serif; background-color: #0a0a0a; color: #e0e0e0; }
-    .bg-grid-pattern {
-      background-image:
-        linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-    }
-    .card-hover { transition: transform 0.25s ease, border-color 0.25s ease; }
-    .card-hover:hover { transform: translateY(-3px); }
-    .rank-badge {
-      min-width: 2.75rem; height: 2.75rem;
-      display: flex; align-items: center; justify-content: center;
-      border-radius: 0.5rem; font-weight: 800; font-size: 0.95rem;
-      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: #94a3b8;
-    }
-    .prose-board a { color: #4ade80; text-decoration: underline; }
-    .prose-board h2 { font-size: 1.5rem; font-weight: 800; color: white; margin: 1.75rem 0 0.75rem; }
-    .prose-board h3 { font-size: 1.15rem; font-weight: 700; color: white; margin: 1.25rem 0 0.5rem; }
-    .prose-board p, .prose-board li { color: #cbd5e1; font-weight: 300; line-height: 1.7; margin-bottom: 0.85rem; }
-    .prose-board ul { list-style: disc; padding-left: 1.25rem; margin-bottom: 1rem; }
-    .prose-board ol { list-style: decimal; padding-left: 1.25rem; margin-bottom: 1rem; }
-    .prose-board strong { color: #fff; font-weight: 600; }
-    .prose-board .post-figure {
-      margin: 1.5rem 0;
-      border-radius: 0.75rem;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.02);
-    }
-    .prose-board .post-figure img {
-      display: block;
-      width: 100%;
-      height: auto;
-      max-height: 32rem;
-      object-fit: cover;
-    }
-    .prose-board .post-figure figcaption {
-      padding: 0.65rem 0.9rem;
-      font-size: 0.85rem;
-      color: #94a3b8;
-      font-weight: 300;
-      line-height: 1.4;
-      border-top: 1px solid rgba(255,255,255,0.06);
-    }
-    .prose-board .video-embed {
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%; /* 16:9 */
-      height: 0;
-      margin: 1.5rem 0;
-      border-radius: 0.75rem;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: #000;
-    }
-    .prose-board .video-embed iframe {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      border: 0;
-    }
-    #tools input, #tools select, #tools textarea {
-      color-scheme: dark;
-    }
-    #tools input::placeholder, #tools textarea::placeholder { color: #64748b; }
-    #calc-result { letter-spacing: -0.02em; }
-    .skip-link {
-      position: absolute;
-      left: 0.75rem;
-      top: -3.25rem;
-      z-index: 80;
-      background: #166534;
-      color: #fff;
-      padding: 0.55rem 0.9rem;
-      border-radius: 0.375rem;
-      font-size: 0.7rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-decoration: none;
-    }
-    .skip-link:focus {
-      top: 0.75rem;
-      outline: 2px solid #4ade80;
-      outline-offset: 2px;
-    }
-    #more-dropdown, #mobile-nav { display: none; }
-    #more-dropdown.is-open { display: block; }
-    #mobile-nav.is-open { display: block; }
-    /* Full primary nav does not fit beside the full brand name below 1280px.
-       Keep the hamburger through that range so the name stays one line. */
-    @media (min-width: 1280px) {
-      #mobile-nav.is-open { display: none !important; }
-    }
-    header .site-header-inner { width: 100%; }
-    header .site-header-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-      height: 4rem;
-      flex-wrap: nowrap;
-    }
-    header .site-brand {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      flex-shrink: 0;
-      min-width: max-content;
-      text-decoration: none;
-    }
-    header .site-brand-name {
-      white-space: nowrap;
-      flex-shrink: 0;
-      font-weight: 900;
-      color: #fff;
-      line-height: 1.2;
-      letter-spacing: 0.03em;
-      font-size: clamp(0.7rem, 3.5vw, 0.875rem);
-    }
-    @media (min-width: 480px) {
-      header .site-brand-name {
-        font-size: 0.875rem;
-        letter-spacing: 0.05em;
-      }
-    }
-    @media (min-width: 1280px) {
-      header .site-brand-name {
-        font-size: 1rem;
-        letter-spacing: 0.05em;
-      }
-    }
-    header .site-nav-desktop { display: none; }
-    header .site-nav-burger { display: inline-flex; flex-shrink: 0; }
-    @media (min-width: 1280px) {
-      header .site-nav-desktop {
-        display: flex;
-        align-items: center;
-        flex-shrink: 0;
-        gap: 0.5rem;
-      }
-      header .site-nav-burger { display: none !important; }
-    }
-    @media (min-width: 1440px) {
-      header .site-nav-desktop { gap: 0.9rem; }
-    }
-    @media (min-width: 1680px) {
-      header .site-nav-desktop { gap: 1.25rem; }
-    }
-    .nav-burger {
-      width: 1.35rem; height: 1.05rem;
-      display: flex; flex-direction: column; justify-content: space-between;
-    }
-    .nav-burger span { display: block; height: 2px; background: #e2e8f0; border-radius: 1px; }
-    body.nav-open { overflow: hidden; }
-    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
-    details.board-faq > summary:focus-visible { outline: 2px solid #4ade80; outline-offset: 2px; }
-  </style>
+  <link rel="preload" href="/assets/fonts/InterLatin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/site.css">
+
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -412,7 +197,7 @@
       </ol>
     </nav>
     <div class="mb-8 overflow-hidden rounded-xl border border-white/10">
-      <img src="../assets/images/posts/2026-10-02-lynnwood-window-1.webp" alt="Window Replacement Lynnwood WA — Energy Efficiency, Modern Styles &amp; Local Permit Guides" class="w-full h-52 sm:h-72 object-cover" width="1600" height="900" loading="eager">
+      <img src="../assets/images/posts/2026-10-02-lynnwood-window-1-800.webp" alt="Window Replacement Lynnwood WA — Energy Efficiency, Modern Styles &amp; Local Permit Guides" class="w-full h-52 sm:h-72 object-cover" width="1600" height="900" loading="eager" srcset="../assets/images/posts/2026-10-02-lynnwood-window-1-480.webp 480w, ../assets/images/posts/2026-10-02-lynnwood-window-1-800.webp 800w" sizes="(max-width: 640px) 100vw, 800px" fetchpriority="high">
     </div>
     <div class="text-[11px] uppercase tracking-widest text-secondary font-bold mb-3">Guides · 2026-10-02</div>
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-4">Window Replacement Lynnwood WA — Energy Efficiency, Modern Styles &amp; Local Permit Guides</h1>
@@ -424,7 +209,7 @@
 <li>Confirm whether your scope is a pocket (insert) replacement or a full-frame / resized opening — that choice usually decides whether City of Lynnwood or Snohomish County permits apply.</li>
 <li>Re-check every installation contractor on <a href="https://secure.lni.wa.gov/verify/">Washington L&amp;I Verify</a> before anyone touches the envelope.</li>
 </ul>
-<figure class="post-figure"><img src="../assets/images/posts/2026-10-02-lynnwood-window-4.webp" alt="Illustrative Pacific Northwest window rough-opening and unit fit-up detail for a Lynnwood-area replacement conversation — illustrative only, not a real Board of Project Stewardship job photo" loading="lazy" width="1200" height="675"><figcaption>Illustrative Pacific Northwest window rough-opening and unit fit-up detail for a Lynnwood-area replacement conversation — illustrative only, not a real Board of Project Stewardship job photo</figcaption></figure>
+<figure class="post-figure"><img src="../assets/images/posts/2026-10-02-lynnwood-window-4-800.webp" alt="Illustrative Pacific Northwest window rough-opening and unit fit-up detail for a Lynnwood-area replacement conversation — illustrative only, not a real Board of Project Stewardship job photo" loading="lazy" width="1200" height="675" srcset="../assets/images/posts/2026-10-02-lynnwood-window-4-480.webp 480w, ../assets/images/posts/2026-10-02-lynnwood-window-4-800.webp 800w, ../assets/images/posts/2026-10-02-lynnwood-window-4-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px"><figcaption>Illustrative Pacific Northwest window rough-opening and unit fit-up detail for a Lynnwood-area replacement conversation — illustrative only, not a real Board of Project Stewardship job photo</figcaption></figure>
 <h2>Why window upgrades matter in Lynnwood</h2>
 <p>For homeowners in Lynnwood, replacing windows is rarely only about looks. Pacific Northwest weather brings high humidity and long grey winters. In older residential pockets across the city, many houses still carry single-pane glass or early double-pane units whose seals have failed.</p>
 <p>Failed windows show up as winter drafts, uneven room temperatures, and higher heating demand. Condensation on interior glass migrates onto wood sills and trim — a moisture path that can stain finishes and invite mold. Modern, thermally broken assemblies help regulate surface temperatures and cut that condensation risk when they are flashed and insulated correctly.</p>
@@ -435,7 +220,7 @@
 <p><strong>Fiberglass and composite</strong> frames add stiffness and dimensional stability in wet weather while keeping a cleaner line than early vinyl profiles.</p>
 <p><strong>Wood</strong> still fits traditional architecture, but bare wood exteriors need diligent maintenance. Wood-clad or hybrid units keep a warm interior while putting a weather-resistant skin outside — often the practical path for Lynnwood homes that want wood character without constant scraping and painting.</p>
 <p>Match frame choice to exposure: windward elevations, second-story suites, and rooms over garages all see different condensation and egress demands. When you compare bids, ask for U-factor and Solar Heat Gain Coefficient (SHGC) in writing so “energy efficient” is not a slogan.</p>
-<figure class="post-figure"><img src="../assets/images/posts/2026-10-02-lynnwood-window-2.webp" alt="Illustrative window flashing and rough-opening preparation during a Pacific Northwest remodel — illustrative only, not a real Board of Project Stewardship job photo" loading="lazy" width="1200" height="675"><figcaption>Illustrative window flashing and rough-opening preparation during a Pacific Northwest remodel — illustrative only, not a real Board of Project Stewardship job photo</figcaption></figure>
+<figure class="post-figure"><img src="../assets/images/posts/2026-10-02-lynnwood-window-2-800.webp" alt="Illustrative window flashing and rough-opening preparation during a Pacific Northwest remodel — illustrative only, not a real Board of Project Stewardship job photo" loading="lazy" width="1200" height="675" srcset="../assets/images/posts/2026-10-02-lynnwood-window-2-480.webp 480w, ../assets/images/posts/2026-10-02-lynnwood-window-2-800.webp 800w" sizes="(max-width: 640px) 100vw, 800px"><figcaption>Illustrative window flashing and rough-opening preparation during a Pacific Northwest remodel — illustrative only, not a real Board of Project Stewardship job photo</figcaption></figure>
 <h2>Energy performance: Low-E, gas fills, and thermal breaks</h2>
 <p>In Lynnwood, winter comfort hinges on keeping heat inside and stopping cold bridging at the frame.</p>
 <ul>
@@ -468,7 +253,7 @@
 <h2>Installation quality and contractor verification</h2>
 <p>The highest-spec window still fails if flashing tape, shims, and insulation are wrong. In PNW rain, water that sneaks behind cladding finds the rough opening first. Professional installation levels the unit, shims without distorting the frame, and integrates flashing with the weather-resistive barrier so the wall cavity stays dry.</p>
 <p>Protect the investment by verifying every firm on <a href="https://secure.lni.wa.gov/verify/">Washington L&amp;I Verify</a>. Registration, bonding, and insurance status are public; a company that cannot be found there may leave the homeowner exposed on injuries or property damage. More Board guidance sits in <a href="../verify-contractor.html">verify a contractor</a>.</p>
-<div class="video-embed"><iframe src="https://www.youtube.com/embed/s8Rlfs7gZOo" title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+<div class="video-embed"><div class="embed-facade-frame"><button type="button" class="embed-facade" data-embed-src="https://www.youtube-nocookie.com/embed/s8Rlfs7gZOo" data-embed-title="YouTube video">Play video</button></div></div>
 <h2>Materials Worth Knowing</h2>
 <p>Fresh manufacturer references for envelope and glazing coordination on Lynnwood window projects (rotated versus recent posts):</p>
 <ul>
@@ -476,7 +261,7 @@
 <li><a href="https://www.owenscorning.com/en-us/insulation">Owens Corning insulation</a> — cavity and perimeter insulation that supports thermal comfort once new units are set and rough openings are sealed.</li>
 <li><a href="https://www.certainteed.com/">CertainTeed building products</a> — insulation, gypsum, and exterior product lines commonly coordinated on major residential remodels that reopen walls around windows.</li>
 </ul>
-<figure class="post-figure"><img src="../assets/images/posts/2026-10-02-lynnwood-window-3.webp" alt="Illustrative finished residential window elevation after replacement in a Pacific Northwest setting — illustrative only, not a real Board of Project Stewardship job photo" loading="lazy" width="1200" height="675"><figcaption>Illustrative finished residential window elevation after replacement in a Pacific Northwest setting — illustrative only, not a real Board of Project Stewardship job photo</figcaption></figure>
+<figure class="post-figure"><img src="../assets/images/posts/2026-10-02-lynnwood-window-3-800.webp" alt="Illustrative finished residential window elevation after replacement in a Pacific Northwest setting — illustrative only, not a real Board of Project Stewardship job photo" loading="lazy" width="1200" height="675" srcset="../assets/images/posts/2026-10-02-lynnwood-window-3-480.webp 480w, ../assets/images/posts/2026-10-02-lynnwood-window-3-800.webp 800w" sizes="(max-width: 640px) 100vw, 800px"><figcaption>Illustrative finished residential window elevation after replacement in a Pacific Northwest setting — illustrative only, not a real Board of Project Stewardship job photo</figcaption></figure>
 <h2>Getting started on a Lynnwood window project</h2>
 <ol>
 <li><strong>Audit</strong> — walk every elevation; note fogged panes, drafts, soft sills, and failed exterior caulk.</li>
@@ -584,7 +369,7 @@
 
   <section id="another-story-sea-embed" class="max-w-6xl mx-auto px-4 py-12 relative z-20 border-t border-white/5">
     <div class="mb-6 overflow-hidden rounded-xl border border-white/10">
-      <img src="../assets/images/another-story-banner.webp" alt="Conceptual before-and-after second-story idea for Another Story SEA" class="w-full h-48 sm:h-64 object-cover" width="1200" height="630" loading="eager">
+      <img src="../assets/images/another-story-banner-800.webp" alt="Conceptual before-and-after second-story idea for Another Story SEA" class="w-full h-48 sm:h-64 object-cover" width="1200" height="630" loading="lazy" srcset="../assets/images/another-story-banner-480.webp 480w, ../assets/images/another-story-banner-800.webp 800w, ../assets/images/another-story-banner-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
     </div>
     <div class="mb-5">
       <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Board feature</p>
@@ -656,72 +441,7 @@
       </div>
     </div>
   </footer>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-  <script>
-  (function () {
-    var moreBtn = document.getElementById('more-toggle');
-    var morePanel = document.getElementById('more-dropdown');
-    var burger = document.getElementById('nav-toggle');
-    var drawer = document.getElementById('mobile-nav');
-    function setOpen(btn, panel, open) {
-      if (!btn || !panel) return;
-      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      if (open) panel.classList.add('is-open');
-      else panel.classList.remove('is-open');
-    }
-    if (moreBtn && morePanel) {
-      moreBtn.addEventListener('click', function (e) {
-        e.stopPropagation();
-        setOpen(moreBtn, morePanel, moreBtn.getAttribute('aria-expanded') !== 'true');
-      });
-    }
-    if (burger && drawer) {
-      burger.addEventListener('click', function () {
-        var open = burger.getAttribute('aria-expanded') !== 'true';
-        setOpen(burger, drawer, open);
-        document.body.classList.toggle('nav-open', open);
-        burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-        if (open) {
-          var first = drawer.querySelector('a');
-          if (first) first.focus();
-        }
-      });
-      drawer.querySelectorAll('a').forEach(function (a) {
-        a.addEventListener('click', function () {
-          setOpen(burger, drawer, false);
-          document.body.classList.remove('nav-open');
-          burger.setAttribute('aria-label', 'Open menu');
-        });
-      });
-    }
-    document.addEventListener('click', function (e) {
-      if (moreBtn && morePanel && e.target !== moreBtn && !morePanel.contains(e.target)) {
-        setOpen(moreBtn, morePanel, false);
-      }
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') {
-        setOpen(moreBtn, morePanel, false);
-        if (burger && burger.getAttribute('aria-expanded') === 'true') {
-          setOpen(burger, drawer, false);
-          document.body.classList.remove('nav-open');
-          burger.setAttribute('aria-label', 'Open menu');
-          burger.focus();
-        }
-        return;
-      }
-      if (e.key !== 'Tab' || !drawer || !burger) return;
-      if (burger.getAttribute('aria-expanded') !== 'true') return;
-      var focusable = [burger].concat(Array.prototype.slice.call(drawer.querySelectorAll('a, button')));
-      if (!focusable.length) return;
-      var first = focusable[0];
-      var last = focusable[focusable.length - 1];
-      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-    });
-  })();
-  </script>
+  <script src="/assets/js/site.js" defer></script>
 
   <script>
   (function () {
