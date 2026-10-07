@@ -29,6 +29,7 @@
 ## Guides
 
 - [Learn](https://boardofprojectstewardship.com/learn.html): Guide index.
+- [Plan to 3D Walkthrough](https://boardofprojectstewardship.com/plan-walkthrough/): Trace a plan in the browser and walk the sketch. Illustration only, not for construction.
 - [Hiring a contractor](https://boardofprojectstewardship.com/hiring-a-contractor.html): Questions to ask before you hire.
 - [Remodel cost factors](https://boardofprojectstewardship.com/remodel-cost-factors.html): What moves a remodel scope. No prices.
 - [Kitchen cost factors](https://boardofprojectstewardship.com/kitchen-cost-factors.html): What moves a kitchen scope. No prices.

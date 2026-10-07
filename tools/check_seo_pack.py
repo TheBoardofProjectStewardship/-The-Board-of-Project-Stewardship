@@ -15,6 +15,15 @@ GEN = (ROOT / "generate_site.py").read_text(encoding="utf-8")
 EDITORIAL = "editorial@boardofprojectstewardship.com"
 
 
+def published_html() -> list[Path]:
+    """Root pages, posts, and the plan walkthrough directory page."""
+    files = list(ROOT.glob("*.html")) + list((ROOT / "posts").glob("*.html"))
+    extra = ROOT / "plan-walkthrough" / "index.html"
+    if extra.is_file():
+        files.append(extra)
+    return files
+
+
 def fail(msg: str) -> None:
     print(f"FAIL: {msg}")
     sys.exit(1)
@@ -40,7 +49,7 @@ def main() -> None:
     if re.search(r"[>|]\s*BOPS\b", GEN) or re.search(r">BOPS<", GEN):
         fail("generator still emits public-facing BOPS chrome")
 
-    html_files = list(ROOT.glob("*.html")) + list((ROOT / "posts").glob("*.html"))
+    html_files = published_html()
     if not html_files:
         fail("no generated HTML found")
 
@@ -326,7 +335,7 @@ def check_public_regressions() -> None:
     """Checks safe to run in CI. Does not judge the required Board #1 header link."""
     import generate_site as gs
 
-    html_files = list(ROOT.glob("*.html")) + list((ROOT / "posts").glob("*.html"))
+    html_files = published_html()
     if not html_files:
         fail("no generated HTML found")
 
@@ -393,6 +402,20 @@ def check_public_regressions() -> None:
         for path in html_files:
             if url in path.read_text(encoding="utf-8"):
                 fail(f"dead official permit URL still in {path.relative_to(ROOT)}: {url}")
+
+    home = (ROOT / "index.html").read_text(encoding="utf-8")
+    if "plan-walkthrough/" not in home:
+        fail("nav missing plan walkthrough")
+    sitemap_txt = (ROOT / "sitemap.xml").read_text(encoding="utf-8") if (ROOT / "sitemap.xml").is_file() else ""
+    if "plan-walkthrough/" not in sitemap_txt:
+        fail("sitemap missing plan walkthrough")
+    plan_page = ROOT / "plan-walkthrough" / "index.html"
+    if plan_page.is_file():
+        plan_html = plan_page.read_text(encoding="utf-8")
+        if "plan-walkthrough.js" not in plan_html:
+            fail("plan walkthrough page missing its script")
+        if "three.module.js" in plan_html or "pdf.min.mjs" in plan_html:
+            fail("plan walkthrough page should load 3D and PDF libraries from the page script, not the HTML")
 
     print(f"OK: public regressions checked on {len(html_files)} HTML files")
 
