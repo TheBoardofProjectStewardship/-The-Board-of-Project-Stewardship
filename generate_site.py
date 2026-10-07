@@ -1253,6 +1253,34 @@ def _set_attr(inner: str, name: str, value: str) -> str:
     return f'{inner} {name}="{value}"'
 
 
+# Generated stills must say so. Empty alt stays empty (decorative layers).
+_ILLUSTRATIVE_ASSET = re.compile(
+    r"(?:^|/)(?:assets/images/(?:posts|places|hubs|tools|walkthrough)/|assets/hero/)"
+    r"|(?:^|/)assets/images/(?:dir-|home-)"
+    r"|another-story-banner",
+    re.I,
+)
+
+
+def illustrative_asset_alt(alt: str, rel: str) -> str:
+    """One alt normalizer for generated stills. Does not invent a scene description."""
+    text = re.sub(r"\s+", " ", (alt or "").strip())
+    if not text:
+        return ""
+    path = (rel or "").split("?", 1)[0].split("#", 1)[0]
+    if not _ILLUSTRATIVE_ASSET.search(path):
+        return text
+    if text.lower().startswith("illustrative:"):
+        return text
+    if text.lower().startswith("illustrative"):
+        rest = text[len("illustrative") :].lstrip(" :.-").strip()
+        return f"Illustrative: {rest}" if rest else "Illustrative:"
+    return f"Illustrative: {text}"
+
+
+_unescape_attr = html.unescape
+
+
 def apply_image_pass(html: str) -> str:
     """srcset for local images; the first image is the LCP candidate."""
     state = {"first": True}
@@ -1297,6 +1325,12 @@ def apply_image_pass(html: str) -> str:
         else:
             inner = _set_attr(inner, "loading", "lazy")
             inner = re.sub(r'\s+fetchpriority="high"', "", inner)
+        alt_m = re.search(r'\balt\s*=\s*"([^"]*)"', inner)
+        if alt_m and rel:
+            current = _unescape_attr(alt_m.group(1))
+            fixed = illustrative_asset_alt(current, rel)
+            if fixed != current:
+                inner = _set_attr(inner, "alt", esc(fixed))
         return "<img" + inner + ">"
 
     return _IMG_RE.sub(repl, html)
@@ -1486,15 +1520,17 @@ def nav_html(active: str = "", prefix: str = "") -> str:
 
     primary = [
         ("home", href("index.html"), "Home"),
-        ("about", href("about.html"), "About"),
         ("directory", href("directory.html"), "Directories"),
         ("locations", href("locations.html"), "Locations"),
         ("learn", href("learn.html"), "Learn"),
         ("permits", href("permits.html"), "Permits"),
         ("verify-contractor", href("verify-contractor.html"), "Verify"),
-        ("stamp-of-trust", href("stamp-of-trust/"), "Stamp of Trust"),
         ("how-we-rank", href("how-we-rank.html"), "How we rank"),
         ("blog", href("blog.html"), "Blog"),
+    ]
+    more_site = [
+        ("about", href("about.html"), "About"),
+        ("stamp-of-trust", href("stamp-of-trust/"), "Stamp of Trust"),
     ]
     # Place hubs: primary Locations tab → locations.html; cities also on Learn/Directories.
     more_dirs = [
@@ -1523,7 +1559,7 @@ def nav_html(active: str = "", prefix: str = "") -> str:
         ("glossary", href("glossary.html"), "Glossary"),
         ("story", href("another-story.html"), "Another Story · Board feature"),
     ]
-    more = more_dirs + more_tools
+    more = more_site + more_dirs + more_tools
     more_keys = {k for k, _, _ in more}
     more_open = active in more_keys
     primary_html = "".join(_nav_link(h, label, key, active) for key, h, label in primary)
@@ -1537,13 +1573,17 @@ def nav_html(active: str = "", prefix: str = "") -> str:
         )
 
     more_items = (
-        '<p class="px-4 pt-1 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Directories</p>'
+        '<p class="px-4 pt-1 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Site</p>'
+        + "".join(_more_link(k, h, lab) for k, h, lab in more_site)
+        + '<p class="px-4 pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Directories</p>'
         + "".join(_more_link(k, h, lab) for k, h, lab in more_dirs)
         + '<p class="px-4 pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Tools</p>'
         + "".join(_more_link(k, h, lab) for k, h, lab in more_tools)
     )
     mobile_html = (
         "".join(_nav_link(h, label, key, active, extra_cls="block py-2") for key, h, label in primary)
+        + '<p class="pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Site</p>'
+        + "".join(_nav_link(h, label, key, active, extra_cls="block py-2") for key, h, label in more_site)
         + '<p class="pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Directories</p>'
         + "".join(_nav_link(h, label, key, active, extra_cls="block py-2") for key, h, label in more_dirs)
         + '<p class="pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Tools</p>'
@@ -1661,28 +1701,28 @@ def footer_html(prefix: str = "./", active: str = "", updated: str = "") -> str:
         <p class="mt-3 font-light leading-relaxed text-sm">Board #1 hire (outbound): <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a> — independent design-build GC; not Board-owned.</p>
       </div>
       <div>
-        <h4 class="text-white font-bold text-xs uppercase tracking-widest mb-4">Site</h4>
+        <h2 class="text-white font-bold text-xs uppercase tracking-widest mb-4">Site</h2>
         <ul class="space-y-2 font-light text-sm">
           {_lis(site)}
         </ul>
-        <h4 class="text-white font-bold text-xs uppercase tracking-widest mb-4 mt-8">Directories</h4>
+        <h2 class="text-white font-bold text-xs uppercase tracking-widest mb-4 mt-8">Directories</h2>
         <ul class="space-y-2 font-light text-sm">
           {_lis(directories)}
         </ul>
       </div>
       <div>
-        <h4 class="text-white font-bold text-xs uppercase tracking-widest mb-4">Locations</h4>
+        <h2 class="text-white font-bold text-xs uppercase tracking-widest mb-4">Locations</h2>
         <p class="font-light leading-relaxed text-xs text-slate-500 mb-3">Editorial place hubs for remodel planning across King County, Snohomish County, and Seattle neighborhoods.</p>
         <ul class="space-y-2 font-light text-sm">
           {_lis(locations)}
         </ul>
       </div>
       <div>
-        <h4 class="text-white font-bold text-xs uppercase tracking-widest mb-4">Learn &amp; tools</h4>
+        <h2 class="text-white font-bold text-xs uppercase tracking-widest mb-4">Learn &amp; tools</h2>
         <ul class="space-y-2 font-light text-sm">
           {_lis(learn_tools)}
         </ul>
-        <h4 class="text-white font-bold text-xs uppercase tracking-widest mb-4 mt-8">Disclaimer</h4>
+        <h2 class="text-white font-bold text-xs uppercase tracking-widest mb-4 mt-8">Disclaimer</h2>
         <p class="mb-3 font-light leading-relaxed text-sm">Listing is not an endorsement of quality. Verify licenses, insurance, bonds, and references before hiring. Membership in trade associations does not guarantee outcomes. Re-check status at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>.</p>
         <p class="text-xs text-slate-600">&copy; {YEAR} Board of Project Stewardship · {EDITORIAL_EMAIL}</p>
       </div>
@@ -1805,7 +1845,7 @@ def another_story_embed(prefix: str = "") -> str:
         banner = (
             '    <div class="mb-6 overflow-hidden rounded-xl border border-white/10">\n'
             f'      <img src="{prefix_asset("assets/images/another-story-banner.webp", prefix)}" '
-            'alt="Conceptual before-and-after second-story idea for Another Story SEA" '
+            'alt="Illustrative: conceptual before-and-after second-story idea for Another Story SEA" '
             'class="w-full h-48 sm:h-64 object-cover" width="1200" height="630" loading="eager">\n'
             '    </div>\n'
         )
@@ -1877,7 +1917,7 @@ def another_story_cta(prefix: str = "") -> str:
         src_img = prefix_asset("assets/images/another-story-banner.webp", prefix)
         img = (
             '      <div class="md:w-2/5 shrink-0">\n'
-            f'        <img src="{src_img}" alt="Conceptual before-and-after second-story idea for Another Story SEA" '
+            f'        <img src="{src_img}" alt="Illustrative: conceptual before-and-after second-story idea for Another Story SEA" '
             'class="w-full h-40 md:h-full object-cover" width="640" height="360" loading="lazy">\n'
             '      </div>\n'
         )
@@ -1997,12 +2037,12 @@ def build_walkthrough_home_section(prefix: str = "") -> str:
         thumbs.append(
             "        <figure class=\"shrink-0 w-36 sm:w-40 rounded-lg overflow-hidden border border-white/10 bg-charcoal relative\">\n"
             f'          <div class="aspect-[4/3] bg-obsidian relative">\n'
-            f'            <img src="{img}" alt="Stage {i}: {esc(label)} — {esc(blurb)}" '
+            f'            <img src="{img}" alt="{esc(illustrative_asset_alt(f"Stage {i}: {label} — {blurb}", rel))}" '
             'class="absolute inset-0 w-full h-full object-cover" width="320" height="240" loading="lazy">\n'
             f'            <span class="absolute bottom-0 inset-x-0 z-10 text-[10px] uppercase tracking-wider text-secondary font-bold px-2 py-1 bg-black/65">'
             f"{i} · {esc(label)}</span>\n"
             "          </div>\n"
-            f'          <figcaption class="px-2 py-1.5 text-[10px] text-slate-500 font-light leading-snug">{esc(blurb)}</figcaption>\n'
+            f'          <figcaption class="px-2 py-1.5 text-xs text-slate-300 font-light leading-snug">{esc(blurb)}</figcaption>\n'
             "        </figure>"
         )
     strip = "\n".join(thumbs)
@@ -2257,6 +2297,55 @@ def _stamp_date_modified(ld_objs: list, updated: str, canon: str, title: str) ->
     })
 
 
+def crumb_href(url: str, prefix: str) -> str:
+    """Turn a canonical crumb URL into a link that works from this page."""
+    raw = (url or "").strip()
+    origin = SITE_ORIGIN.rstrip("/")
+    if raw.rstrip("/") == origin:
+        if prefix == "/":
+            return "/"
+        if prefix in ("", "./"):
+            return "./"
+        return prefix if prefix.endswith("/") else f"{prefix}/"
+    path = ""
+    if raw.startswith(BASE_URL):
+        path = raw[len(BASE_URL) :]
+    elif raw.startswith(origin + "/"):
+        path = raw[len(origin) + 1 :]
+    else:
+        return raw
+    if prefix:
+        return f"{prefix}{path}"
+    return path if path.startswith(("./", "../", "/")) else f"./{path}"
+
+
+def visible_breadcrumb_nav(crumbs: list | None, prefix: str, body: str) -> str:
+    """Visible trail from the same crumbs as BreadcrumbList. Skip when the body already has one."""
+    if not crumbs or len(crumbs) < 2:
+        return ""
+    if 'aria-label="Breadcrumb"' in (body or ""):
+        return ""
+    items: list[str] = []
+    last = len(crumbs) - 1
+    for i, pair in enumerate(crumbs):
+        label, url = pair[0], pair[1]
+        if i:
+            items.append('<li aria-hidden="true" class="text-slate-500">/</li>')
+        if i == last:
+            items.append(f'<li class="text-slate-200" aria-current="page">{esc(str(label))}</li>')
+        else:
+            href = crumb_href(str(url), prefix)
+            items.append(
+                f'<li><a href="{esc(href)}" class="hover:text-secondary">{esc(str(label))}</a></li>'
+            )
+    inner = "".join(items)
+    return (
+        '  <nav aria-label="Breadcrumb" class="max-w-6xl mx-auto px-4 pt-6 text-xs text-slate-300">\n'
+        f'    <ol class="flex flex-wrap items-center gap-2">{inner}</ol>\n'
+        "  </nav>\n"
+    )
+
+
 def page_shell(
     title: str,
     description: str,
@@ -2307,7 +2396,9 @@ def page_shell(
         tools_block = steward_cta_strip(pfx)
     else:
         tools_block = ""
-    story_block = another_story_embed(pfx) if include_story_embed else ""
+    # Another Story stays a real lazy iframe on every page_shell page.
+    story_block = another_story_embed(pfx)
+    crumb_nav = visible_breadcrumb_nav(breadcrumbs, pfx, body)
     fav = favicon_tags(prefix if prefix else "./")
     contact_strip = ""
     return apply_performance_pass(f"""<!DOCTYPE html>
@@ -2341,7 +2432,7 @@ def page_shell(
 <body class="bg-obsidian bg-grid-pattern min-h-screen antialiased">
 {nav_html(active, prefix)}
 <main id="main-content">
-{body}
+{crumb_nav}{body}
 {f'''  <div class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
 {ppg_widgets_html(pfx)}
   </div>
@@ -2373,7 +2464,7 @@ def firm_card(firm: dict, show_rank: bool = True) -> str:
     badge = f'<div class="rank-badge shrink-0">{rank}</div>' if show_rank else ""
     website_btn = ""
     if website.startswith("http"):
-        website_btn = f'''<a href="{esc(website)}" target="_blank" rel="noopener" class="shrink-0 text-xs font-bold uppercase tracking-wider text-secondary border border-secondary/40 hover:bg-secondary/10 px-4 py-2.5 rounded transition whitespace-nowrap">Website <i class="fas fa-external-link-alt ml-1 text-[9px]"></i></a>'''
+        website_btn = f'''<a href="{esc(website)}" target="_blank" rel="noopener" aria-label="{name} website (opens in a new tab)" class="shrink-0 text-xs font-bold uppercase tracking-wider text-secondary border border-secondary/40 hover:bg-secondary/10 px-4 py-2.5 rounded transition whitespace-nowrap">Website <i class="fas fa-external-link-alt ml-1 text-[9px]" aria-hidden="true"></i></a>'''
     return f"""        <article class="bg-charcoal border border-white/5 hover:border-primary/30 p-5 rounded-lg flex flex-col md:flex-row justify-between items-start md:items-center gap-5 card-hover">
           <div class="flex items-start gap-4 w-full">
             {badge}
@@ -2866,7 +2957,7 @@ def hero(badge: str, title_html: str, subtitle: str, checks: list[str], image_re
     media = ""
     if image_rel and asset_exists(image_rel):
         src = prefix_asset(image_rel, "")
-        alt = esc(image_alt or "Board of Project Stewardship")
+        alt = esc(illustrative_asset_alt(image_alt or "Board of Project Stewardship", image_rel))
         media = (
             f'    <div class="max-w-5xl mx-auto px-4 relative z-10 mt-10">\n'
             f'      <div class="overflow-hidden rounded-xl border border-white/10 shadow-2xl">\n'
@@ -3267,7 +3358,8 @@ def home_flashlight_hero() -> tuple[str, str, str] | None:
         video_html = f"""      <video class="hero-ambient-video" muted loop playsinline preload="none" poster="{poster}">
         <source src="{video}" type="video/mp4">
       </video>
-      <button type="button" class="hero-play" id="home-hero-play">Play video</button>"""
+      <button type="button" class="hero-play" id="home-hero-play">Play video</button>
+      <button type="button" class="hero-play hero-pause" id="home-hero-pause">Pause video</button>"""
     html_block = f"""  <section class="flashlight-hero" id="home-hero" aria-labelledby="home-hero-title">
     <div class="hero-stage">
       <img class="hero-layer hero-layer-finished" src="{finished}"{fin_attr} alt="Illustrative Pacific Northwest home concept for Board of Project Stewardship — not a bid or stamped plan" width="1280" height="723" decoding="async" fetchpriority="high">
@@ -3361,7 +3453,9 @@ def home_flashlight_hero() -> tuple[str, str, str] | None:
     }}
     .flashlight-hero .hero-play:hover,
     .flashlight-hero .hero-play:focus-visible {{ color: #4ade80; border-color: #4ade80; outline: none; }}
-    .flashlight-hero.is-video-playing .hero-play,
+    .flashlight-hero .hero-pause {{ display: none; }}
+    .flashlight-hero.is-video-playing .hero-play:not(.hero-pause) {{ display: none; }}
+    .flashlight-hero.is-video-playing .hero-pause {{ display: inline-block; }}
     .flashlight-hero.is-reduced .hero-play,
     .flashlight-hero.is-flashlight .hero-play {{ display: none; }}
     .flashlight-hero.is-video-playing {{
@@ -3700,6 +3794,14 @@ def home_flashlight_hero() -> tuple[str, str, str] | None:
       playHeroVideo();
     });
   }
+  var pauseBtn = document.getElementById('home-hero-pause');
+  if (pauseBtn) {
+    pauseBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      e.preventDefault();
+      showStill();
+    });
+  }
 
   hero.addEventListener('pointerdown', function (e) {
     if (reduced() || videoMode || !flashlightArmed) return;
@@ -3809,7 +3911,7 @@ def build_about() -> str:
         src = prefix_asset(rel, "")
         return f"""        <figure class="overflow-hidden rounded-xl border border-white/10 bg-charcoal">
           <img src="{src}" alt="{esc(alt)}" class="w-full h-44 sm:h-52 object-cover" width="1200" height="675" loading="lazy">
-          <figcaption class="px-3 py-2 text-[11px] text-slate-500 font-light leading-snug">{esc(caption)}</figcaption>
+          <figcaption class="px-3 py-2 text-xs text-slate-300 font-light leading-snug">{esc(caption)}</figcaption>
         </figure>"""
 
     process_steps = [
@@ -4617,9 +4719,10 @@ def edmonds_rank_card(firm: dict, sticky: bool = False) -> str:
     if website.startswith("http"):
         website_btn = (
             f'<a href="{esc(website)}" target="_blank" rel="noopener" '
+            f'aria-label="{name} website (opens in a new tab)" '
             f'class="shrink-0 text-xs font-bold uppercase tracking-wider text-secondary '
             f'border border-secondary/40 hover:bg-secondary/10 px-4 py-2.5 rounded transition whitespace-nowrap">'
-            f'Website <i class="fas fa-external-link-alt ml-1 text-[9px]"></i></a>'
+            f'Website <i class="fas fa-external-link-alt ml-1 text-[9px]" aria-hidden="true"></i></a>'
         )
     sticky_cls = " edmonds-sticky-ppg border-secondary/35" if sticky or is_ppg else ""
     badges = ""
@@ -7488,7 +7591,7 @@ def _hub_photo_strip(
         figures.append(
             f"""        <figure class="overflow-hidden rounded-xl border border-white/10 bg-obsidian">
           {img}
-          <figcaption class="px-3 py-2 text-[11px] text-slate-500 font-light leading-snug">{esc(caption)}</figcaption>
+          <figcaption class="px-3 py-2 text-xs text-slate-300 font-light leading-snug">{esc(caption)}</figcaption>
         </figure>"""
         )
     if not figures:
@@ -13018,7 +13121,7 @@ def build_restoration_page() -> str:
             "        <figure class=\"overflow-hidden rounded-xl border border-white/10 bg-obsidian mb-6\">\n"
             f"          <img src=\"{prefix_asset(rel)}\" alt=\"{esc(alt)}\" "
             f"class=\"w-full h-56 sm:h-80 object-cover\" width=\"1600\" height=\"900\" loading=\"{loading}\">\n"
-            f"          <figcaption class=\"px-4 py-3 text-xs text-slate-500 font-light leading-relaxed\">{esc(caption)}</figcaption>\n"
+            f"          <figcaption class=\"px-4 py-3 text-xs text-slate-300 font-light leading-relaxed\">{esc(caption)}</figcaption>\n"
             "        </figure>\n"
         )
 
