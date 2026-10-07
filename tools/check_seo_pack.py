@@ -271,6 +271,24 @@ def main() -> None:
         if title_bit.lower() not in ltxt.lower():
             fail(f"{rel} missing expected title copy ({title_bit})")
 
+    illustrative_src = re.compile(
+        r"(?:assets/images/(?:posts|places|hubs|tools|walkthrough)/|assets/hero/|"
+        r"assets/images/(?:dir-|home-)|another-story-banner)",
+        re.I,
+    )
+    for path in html_files:
+        text = path.read_text(encoding="utf-8")
+        for tag in re.findall(r"<img\b([^>]*?)>", text, flags=re.I | re.S):
+            src_m = re.search(r'\bsrc\s*=\s*"([^"]*)"', tag)
+            alt_m = re.search(r'\balt\s*=\s*"([^"]*)"', tag)
+            if not src_m or not alt_m:
+                continue
+            if not illustrative_src.search(src_m.group(1)):
+                continue
+            alt = html.unescape(alt_m.group(1)).strip()
+            if alt and not alt.lower().startswith("illustrative:"):
+                fail(f"{path.name} generated image alt missing Illustrative: prefix: {alt[:80]}")
+
     print(f"OK: checked {len(html_files)} HTML files; BreadcrumbList on {crumbs}")
 
 
