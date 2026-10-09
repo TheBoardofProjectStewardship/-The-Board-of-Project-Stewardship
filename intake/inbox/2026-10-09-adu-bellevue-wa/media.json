@@ -4,24 +4,24 @@
   "files": [
     {
       "role": "hero",
-      "intake_file": "media/2026-10-09-bellevue-adu-1.webp",
-      "repo_path": "assets/images/posts/2026-10-09-bellevue-adu-1.webp",
-      "alt": "Illustrative backyard accessory dwelling unit under construction, with form boards, a framed wall going up, and lumber staged beside the main house \u2014 illustrative only, not a real Board of Project Stewardship job photo",
-      "source": "unique crop/mirror/grade from assets/images/posts/2026-09-07-edmonds-adu-1.webp (free-first)"
+      "intake_file": "media/2026-10-09-adu-bellevue-1.webp",
+      "repo_path": "assets/images/posts/2026-10-09-adu-bellevue-1.webp",
+      "alt": "Illustrative: Bellevue backyard accessory dwelling unit with dark horizontal siding, a wood soffit, black-framed windows, and a paver path through the lawn among tall evergreens \u2014 not a real Board of Project Stewardship job photo",
+      "source": "Fresh 1280x720 still for the Bellevue backyard ADU exterior"
     },
     {
       "role": "in-body",
-      "intake_file": "media/2026-10-09-bellevue-adu-2.webp",
-      "repo_path": "assets/images/posts/2026-10-09-bellevue-adu-2.webp",
-      "alt": "Illustrative finished detached accessory dwelling unit at dusk, with tall windows, a small deck, and a stepping-stone path from the main house \u2014 illustrative only, not a real Board of Project Stewardship job photo",
-      "source": "unique crop/mirror/grade from assets/images/posts/2026-09-07-edmonds-adu-3.webp (free-first)"
+      "intake_file": "media/2026-10-09-adu-bellevue-2.webp",
+      "repo_path": "assets/images/posts/2026-10-09-adu-bellevue-2.webp",
+      "alt": "Illustrative: Bellevue accessory dwelling unit at the framing stage, with roof trusses, open stud walls on a concrete slab, and lumber staged beside the muddy lot \u2014 not a real Board of Project Stewardship job photo",
+      "source": "Fresh 1280x720 still for the Bellevue ADU framing stage"
     },
     {
       "role": "in-body",
-      "intake_file": "media/2026-10-09-bellevue-adu-3.webp",
-      "repo_path": "assets/images/posts/2026-10-09-bellevue-adu-3.webp",
-      "alt": "Illustrative small wood-sided detached cottage among tall evergreens, with a covered porch and a stone path \u2014 illustrative only, not a real Board of Project Stewardship job photo",
-      "source": "unique crop/mirror/grade from assets/images/posts/2026-09-07-adu-edmonds-2.webp (free-first)"
+      "intake_file": "media/2026-10-09-adu-bellevue-3.webp",
+      "repo_path": "assets/images/posts/2026-10-09-adu-bellevue-3.webp",
+      "alt": "Illustrative: finished Bellevue accessory dwelling unit interior with sage kitchen cabinets, light wood floors, a sofa under a skylight, and a window looking into evergreen trees \u2014 not a real Board of Project Stewardship job photo",
+      "source": "Fresh 1280x720 still for the finished Bellevue ADU interior"
     }
   ],
   "youtube": [
@@ -38,5 +38,5 @@
     "Illustrative frames are labeled in alt text",
     "Free image sources first; no paid media credits"
   ],
-  "notes": "Zero Higgsfield credits. Unique Pillow crop/mirror/grade from existing ADU stills."
+  "notes": "Fresh exterior, framing, and interior stills. No paid image generation."
 }
