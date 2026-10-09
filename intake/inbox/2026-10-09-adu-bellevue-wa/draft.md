@@ -12,7 +12,7 @@ slug: "adu-bellevue-wa"
 - Each ADU is capped at 1,200 square feet of floor area, with director-approved exceptions for a unit on a single floor of the house, an addition to an existing detached accessory structure, or a conversion of one, and up to 300 square feet of parking or unheated storage per unit does not count.
 - Parking depends on size and location: no extra stall for a unit under 1,000 square feet or within a half mile of a major transit stop, otherwise one space per ADU. Bellevue also issues its own electrical permits, so the wiring permit comes from the city rather than Washington L&I.
 
-![Illustrative backyard accessory dwelling unit under construction, with form boards, a framed wall going up, and lumber staged beside the main house — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-09-bellevue-adu-1.webp)
+![Illustrative: Bellevue backyard accessory dwelling unit with dark horizontal siding, a wood soffit, black-framed windows, and a paver path through the lawn among tall evergreens — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-09-adu-bellevue-1.webp)
 
 ## Why Bellevue lots are getting a second look
 
@@ -39,7 +39,7 @@ The director may approve more floor area in three situations: the ADU sits entir
 
 For comparison, the state statute says a city may not set an ADU floor-area maximum below 1,000 square feet and may not hold roof height below 24 feet unless the house itself is held lower. Bellevue's numbers sit at or above those floors.
 
-![Illustrative finished detached accessory dwelling unit at dusk, with tall windows, a small deck, and a stepping-stone path from the main house — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-09-bellevue-adu-2.webp)
+![Illustrative: Bellevue accessory dwelling unit at the framing stage, with roof trusses, open stud walls on a concrete slab, and lumber staged beside the muddy lot — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-09-adu-bellevue-2.webp)
 
 ## Garage conversions without a setback fight
 
@@ -63,7 +63,7 @@ An ADU is new living space, so expect building, mechanical, plumbing, and electr
 
 Electrical work is the piece people miss. Washington L&I lists Bellevue among the [cities that do their own electrical permits and inspections](https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections), so the electrical permit for a new subpanel, kitchen circuits, heat pump, and lighting comes from the city, not from L&I. If a bid says "electrician pulls an L&I permit," ask who is really pulling the Bellevue permit and when the rough-in inspection is scheduled. The Board's [permits](../permits.html) page walks through how inspections usually sequence on a remodel or addition.
 
-![Illustrative small wood-sided detached cottage among tall evergreens, with a covered porch and a stone path — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-09-bellevue-adu-3.webp)
+![Illustrative: finished Bellevue accessory dwelling unit interior with sage kitchen cabinets, light wood floors, a sofa under a skylight, and a window looking into evergreen trees — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-09-adu-bellevue-3.webp)
 
 ## Materials Worth Knowing
 
