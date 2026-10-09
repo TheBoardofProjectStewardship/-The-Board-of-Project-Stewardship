@@ -1,0 +1,42 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-10-09-bellevue-adu-1.webp",
+      "repo_path": "assets/images/posts/2026-10-09-bellevue-adu-1.webp",
+      "alt": "Illustrative backyard accessory dwelling unit under construction, with form boards, a framed wall going up, and lumber staged beside the main house \u2014 illustrative only, not a real Board of Project Stewardship job photo",
+      "source": "unique crop/mirror/grade from assets/images/posts/2026-09-07-edmonds-adu-1.webp (free-first)"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-09-bellevue-adu-2.webp",
+      "repo_path": "assets/images/posts/2026-10-09-bellevue-adu-2.webp",
+      "alt": "Illustrative finished detached accessory dwelling unit at dusk, with tall windows, a small deck, and a stepping-stone path from the main house \u2014 illustrative only, not a real Board of Project Stewardship job photo",
+      "source": "unique crop/mirror/grade from assets/images/posts/2026-09-07-edmonds-adu-3.webp (free-first)"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-09-bellevue-adu-3.webp",
+      "repo_path": "assets/images/posts/2026-10-09-bellevue-adu-3.webp",
+      "alt": "Illustrative small wood-sided detached cottage among tall evergreens, with a covered porch and a stone path \u2014 illustrative only, not a real Board of Project Stewardship job photo",
+      "source": "unique crop/mirror/grade from assets/images/posts/2026-09-07-adu-edmonds-2.webp (free-first)"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "M172vM8DngI",
+      "url": "https://www.youtube.com/watch?v=M172vM8DngI",
+      "title": "How to Build your own ADU Garage Conversion - Episode 4, Framing",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Illustrative frames are labeled in alt text",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "Zero Higgsfield credits. Unique Pillow crop/mirror/grade from existing ADU stills."
+}

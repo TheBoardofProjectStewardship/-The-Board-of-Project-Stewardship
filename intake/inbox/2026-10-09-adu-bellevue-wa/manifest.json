@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-10-09-adu-bellevue-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-10-09T17:50:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "ADU Bellevue WA \u2014 Two-Unit Rule, the 1,200 sq ft Cap, Garage Conversions & Parking",
+    "date": "2026-10-09",
+    "slug": "adu-bellevue-wa",
+    "description": "Accessory dwelling unit guidance for Bellevue homeowners: how many ADUs the Bellevue Land Use Code allows per lot, the 1,200 square foot floor-area cap and its exceptions, garage conversions, parking triggers, height limits, and who issues the electrical permit.",
+    "category": "Additions"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC (DESKTOP-B69F181) was disconnected at the 09:25 wake and at 10:30; no PC packets for 2026-10-09. Producer role fields kept per intake contract."
+}

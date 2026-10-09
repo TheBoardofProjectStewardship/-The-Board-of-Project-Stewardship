@@ -1,0 +1,47 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Bellevue",
+    "service": "ADU",
+    "slug": "adu-bellevue-wa"
+  },
+  "sources": [
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "Washington L&I Verify a Contractor, Tradesperson or Business",
+      "retrieved": "2026-10-09",
+      "supports": "Official portal to confirm contractor registration, bond, and insurance."
+    },
+    {
+      "url": "https://bellevue.municipal.codes/LUC/20.20.120",
+      "title": "Bellevue Land Use Code 20.20.120 \u2014 Accessory dwelling units",
+      "retrieved": "2026-10-09",
+      "supports": "Up to two ADUs per lot; 1,200 sq ft cap and director exceptions; 300 sq ft parking/storage exemption; conversions of existing structures; parking rules; home occupation conflict; detached height 24/28 ft; alley lot line siting; amended by Ord. 6931 pending codification."
+    },
+    {
+      "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.681",
+      "title": "RCW 36.70A.681 \u2014 Accessory dwelling units, limitations on local regulation",
+      "retrieved": "2026-10-09",
+      "supports": "Two-ADU minimum and configurations; no owner-occupancy requirement; impact fees capped at 50% of principal unit; floor-area floor 1,000 sq ft; 24 ft height floor; alley siting."
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "title": "Washington L&I \u2014 Cities that do their own electrical permits and inspections",
+      "retrieved": "2026-10-09",
+      "supports": "Lists Bellevue (450 110th Ave NE) among cities issuing their own electrical permits and inspections."
+    },
+    {
+      "url": "https://www.mybuildingpermit.com/",
+      "title": "MyBuildingPermit.com",
+      "retrieved": "2026-10-09",
+      "supports": "Shared online permit portal; Bellevue listed among participating jurisdictions."
+    }
+  ],
+  "generation": {
+    "agent": "box-authored",
+    "hermes_status": "box-fallback-verified",
+    "verified_count": 5,
+    "supports_mode": "box-verified",
+    "note": "All URLs HTTP 200 from box on 2026-10-09. Bellevue city ADU page URL returned 404, so not linked."
+  }
+}

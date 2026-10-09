@@ -1,0 +1,49 @@
+{
+  "producer": "openclaw",
+  "agent": "seo-specialist",
+  "slug": "adu-bellevue-wa",
+  "title": "ADU Bellevue WA \u2014 Two-Unit Rule, the 1,200 sq ft Cap, Garage Conversions & Parking",
+  "description": "Accessory dwelling unit guidance for Bellevue homeowners: how many ADUs the Bellevue Land Use Code allows per lot, the 1,200 square foot floor-area cap and its exceptions, garage conversions, parking triggers, height limits, and who issues the electrical permit.",
+  "category": "Additions",
+  "keywords": [
+    "ADU Bellevue WA",
+    "Bellevue accessory dwelling unit rules",
+    "Bellevue garage conversion ADU",
+    "Bellevue ADU parking",
+    "two ADUs per lot Washington",
+    "Bellevue ADU contractors"
+  ],
+  "outline": [
+    "Key Takeaways",
+    "Why Bellevue lots are getting a second look",
+    "How many units, and in what shape",
+    "The 1,200 square foot cap and its exceptions",
+    "Garage conversions without a setback fight",
+    "Parking, fees, and occupancy",
+    "Permits and the electrical twist",
+    "Materials Worth Knowing",
+    "How to shortlist and verify contractors",
+    "Where Pacific Pro Group fits",
+    "Next steps for a Bellevue ADU"
+  ],
+  "search_intent": "A Bellevue homeowner considering an ADU wants to know how many units are allowed, size and height limits, garage conversion rules, parking, and permits.",
+  "local_angles": [
+    "LUC 20.20.120 two ADUs per lot, 1,200 sq ft cap with director exceptions, 300 sq ft parking/storage exemption",
+    "Garage conversions allowed despite nonconforming setbacks/lot coverage",
+    "Parking waived under 1,000 sq ft or within half mile of major transit stop",
+    "Bellevue issues its own electrical permits (L&I city list); MyBuildingPermit.com"
+  ],
+  "internal_links": [
+    "../bellevue.html",
+    "../adu.html",
+    "../adu-checklist.html",
+    "../adu-cost-factors.html",
+    "../verify-contractor.html",
+    "../permits.html"
+  ],
+  "notes": "Box-authored fallback brief. PPG only as Board #1 -> https://pacificprogroup.com/.",
+  "generation": {
+    "agent": "box-authored",
+    "mode": "box-fallback"
+  }
+}
