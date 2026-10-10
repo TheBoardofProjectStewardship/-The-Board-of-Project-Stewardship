@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-10-10-deck-replacement-snohomish-county-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-10-10T17:40:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Deck Replacement Snohomish County WA — When Unincorporated Lots Need a Permit, Setbacks & Ledger Details",
+    "date": "2026-10-10",
+    "slug": "deck-replacement-snohomish-county-wa",
+    "description": "Deck replacement guidance for homeowners in unincorporated Snohomish County: when the county requires a building permit, what the deck submittal needs, how setbacks apply to decks, Washington's deck footing and post tables, ledger flashing for a wet climate, and how to verify a contractor.",
+    "category": "Permits"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC (DESKTOP-B69F181) was disconnected at the 09:29 wake and still offline at 10:18 PT; no PC packets for 2026-10-10. Producer role fields kept per intake contract."
+}

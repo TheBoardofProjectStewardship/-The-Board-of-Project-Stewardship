@@ -1,0 +1,16 @@
+{
+  "submission_id": "2026-10-10-deck-replacement-snohomish-county-wa",
+  "idempotency_key": "sha256:f6cecca60a3652d2357559b89f07fbc29696213e8f979c4f963f886266ef443f",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-10-10T17:21:04Z",
+  "outputs": [
+    "posts/2026-10-10-deck-replacement-snohomish-county-wa.md",
+    "posts/2026-10-10-deck-replacement-snohomish-county-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 66
+}
