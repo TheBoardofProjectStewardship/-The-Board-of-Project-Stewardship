@@ -51,6 +51,9 @@ Base: `https://boardofprojectstewardship.com/`
 | `stamp-of-trust/` | Stamp of Trust credential |
 | `blog/rss.xml` | Blog RSS feed |
 | `404.html` | Branded Board 404 |
+| `posts/2026-10-10-deck-replacement-snohomish-county-wa.html` | Deck Replacement Snohomish County WA — When Unincorporated Lots Need a Permit, Setbacks & Ledger Details |
+| `posts/2026-10-09-adu-bellevue-wa.html` | ADU Bellevue WA — Two-Unit Rule, the 1,200 sq ft Cap, Garage Conversions & Parking |
+| `posts/2026-10-07-kitchen-remodel-kirkland-wa.html` | Kitchen Remodel Kirkland WA — Permit Exemptions, City Electrical Permits & Range-Hood Makeup Air |
 | `posts/2026-10-06-window-replacement-shoreline-wa.html` | Window Replacement Shoreline WA — Permit Exemptions, Lead-Safe Rules & Drained Openings |
 | `posts/2026-10-05-roof-replacement-ballard-wa.html` | Roof Replacement Ballard WA — SDCI Re-Roof Rules, Underlayment & Wet-Season Sequencing |
 | `posts/2026-10-04-window-replacement-mill-creek-wa.html` | Window Replacement Mill Creek WA — Planning, Permits & Licensed Pros |

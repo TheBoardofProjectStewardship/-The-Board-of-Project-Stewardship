@@ -1,0 +1,46 @@
+{
+  "producer": "openclaw",
+  "agent": "seo-specialist",
+  "slug": "deck-replacement-snohomish-county-wa",
+  "title": "Deck Replacement Snohomish County WA — When Unincorporated Lots Need a Permit, Setbacks & Ledger Details",
+  "description": "Deck replacement guidance for homeowners in unincorporated Snohomish County: when the county requires a building permit, what the deck submittal needs, how setbacks apply to decks, Washington's deck footing and post tables, ledger flashing for a wet climate, and how to verify a contractor.",
+  "category": "Permits",
+  "keywords": [
+    "deck replacement Snohomish County WA",
+    "Snohomish County deck permit",
+    "unincorporated Snohomish County deck setbacks",
+    "deck ledger flashing Washington",
+    "WAC 51-51-0507 deck footings",
+    "Snohomish County deck contractors"
+  ],
+  "outline": [
+    "Key Takeaways",
+    "Why so many county decks are due",
+    "When the county requires a permit",
+    "What the county wants in a deck submittal",
+    "Setbacks: where a deck can sit",
+    "The ledger is where decks fail",
+    "Footings, posts, and guards",
+    "Materials Worth Knowing",
+    "How to shortlist and verify contractors",
+    "Where Pacific Pro Group fits",
+    "Next steps for a Snohomish County deck"
+  ],
+  "search_intent": "A homeowner in unincorporated Snohomish County replacing an old deck wants to know when a permit is required, what to submit, setback limits, and how to build the ledger and footings correctly.",
+  "local_angles": [
+    "Assistance Bulletin #21 (rev. Jan 2025) four permit triggers: >30 in within 36 in of open side, over basement/story, accessible route, roof cover",
+    "Online path: Construction Permit / Residential Building Permit / Deck / New, Repair or Replacement",
+    "Setback projection: uncovered <=4 ft high, >=30 in from property line, <=6 ft into street setback",
+    "WAC 51-51-0507 Washington R507 footing and post tables; L&I electrical in unincorporated areas"
+  ],
+  "internal_links": [
+    "../snohomish-county.html",
+    "../permits.html",
+    "../verify-contractor.html"
+  ],
+  "notes": "Box-authored fallback brief. PPG only as Board #1 -> https://pacificprogroup.com/.",
+  "generation": {
+    "agent": "box-authored",
+    "mode": "box-fallback"
+  }
+}

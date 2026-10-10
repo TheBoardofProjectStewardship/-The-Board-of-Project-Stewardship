@@ -1,0 +1,42 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-10-10-snohomish-deck-1.webp",
+      "repo_path": "assets/images/posts/2026-10-10-snohomish-deck-1.webp",
+      "alt": "Illustrative: a craftsman-style house with a deep covered front porch, wood posts, a short run of entry steps, and a fern garden under tall evergreens — not a real Board of Project Stewardship job photo",
+      "source": "Crop, mirror, and regrade of existing repo still 2026-09-28-edmonds-permit-news-5.webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-10-snohomish-deck-2.webp",
+      "repo_path": "assets/images/posts/2026-10-10-snohomish-deck-2.webp",
+      "alt": "Illustrative: a house wall wrapped in weather-resistive barrier with dark flashing tape at the seams and around a window, the kind of layered wall a deck ledger must be flashed into — not a real Board of Project Stewardship job photo",
+      "source": "Crop, mirror, and regrade of existing repo still 2026-09-22-edmonds-siding-2.webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-10-snohomish-deck-3.webp",
+      "repo_path": "assets/images/posts/2026-10-10-snohomish-deck-3.webp",
+      "alt": "Illustrative: a covered entry porch with a stained wood door, wood ceiling, stone-clad column bases, and a built-in bench — a roof-covered porch like this always needs a permit — not a real Board of Project Stewardship job photo",
+      "source": "Crop and regrade of existing repo still 2026-09-02-edmonds-custom-home-4.webp"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "2a9waUpVg-Y",
+      "url": "https://www.youtube.com/watch?v=2a9waUpVg-Y",
+      "title": "Deck Ledger Board Installation: EVERYTHING You NEED to Know for a Safe Deck!",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Illustrative frames are labeled in alt text",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "Reused and regraded existing repo stills. No paid image generation."
+}
