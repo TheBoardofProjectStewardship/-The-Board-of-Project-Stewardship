@@ -1206,7 +1206,7 @@ def _apply(packet, root, manifest, checked, planned, force_lock) -> dict:
             match = next((p for p in posts if p["slug"] == manifest["post"]["slug"]), None)
             if match is None:
                 raise IntakeFailure("publish_failed", "new markdown did not load")
-            html = gs.build_post_page(match)
+            html = gs.build_post_page(match, posts)
             if "cloudfront.net" in html.lower():
                 raise IntakeFailure(
                     "media_path_rejected",
