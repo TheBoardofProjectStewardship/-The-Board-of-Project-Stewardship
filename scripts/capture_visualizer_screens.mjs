@@ -39,7 +39,7 @@ await shot(phone, "home-phone-390x844.png");
 
 await phone.locator("#see-address").fill("100 Main St, Edmonds, WA");
 await phone.locator("#see-file").setInputFiles(photo);
-await phone.getByText("Photo ready.").waitFor();
+await phone.getByText("Embedded photo metadata was removed.").waitFor();
 await phone.locator("#see-render").click();
 await phone.locator("#see-result").waitFor({ state: "visible" });
 await phone.locator("#see-result-range").scrollIntoViewIfNeeded();

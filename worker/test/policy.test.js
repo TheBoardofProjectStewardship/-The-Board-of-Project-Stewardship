@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { createLedger } from "../src/ledger.js";
 import { buildModelRequest, buildPrompt } from "../src/prompts.js";
 import {
   CONSENT_TEXT_VERSION,
@@ -33,12 +34,12 @@ test("default provider is Gemini flash lite image", () => {
   });
 });
 
-test("OpenAI backup is selected by IMAGE_PROVIDER", () => {
+test("OpenAI backup defaults to gpt-image-2", () => {
   assert.deepEqual(selectProvider({ IMAGE_PROVIDER: "openai" }), {
     provider: "openai",
-    model: "gpt-image-1.5",
+    model: "gpt-image-2",
   });
-  assert.equal(selectProvider({ IMAGE_PROVIDER: "openai", IMAGE_MODEL: "gpt-image-2" }).model, "gpt-image-2");
+  assert.equal(selectProvider({ IMAGE_PROVIDER: "openai", IMAGE_MODEL: "gpt-image-1.5" }).model, "gpt-image-1.5");
 });
 
 test("unknown provider name stays on the Gemini default", () => {
@@ -116,5 +117,48 @@ test("prompt uses only the upload and a filtered note", () => {
   );
   assert.equal(request.body.contents[0].parts.length, 2);
   assert.equal(JSON.stringify(request).includes("streetView"), false);
-  assert.equal(request.body.contents[0].parts[1].inlineData.byteLength, 3);
+  assert.equal(request.body.contents[0].parts[1].inlineData.data, "CQkJ");
+  assert.equal(request.body.contents[0].parts[1].inlineData.mimeType, "image/jpeg");
+
+  const openai = buildModelRequest(
+    { provider: "openai", model: "gpt-image-2" },
+    built.prompt,
+    new Uint8Array([9, 9, 9]),
+  );
+  assert.equal(openai.body.images[0].image_url, "data:image/jpeg;base64,CQkJ");
+  assert.equal(openai.body.input_fidelity, undefined);
+  assert.equal(built.prompt.includes("Dormer"), true);
+  assert.match(built.prompt, /Keep the maple tree/);
+});
+
+test("concurrent spend holds cannot pass the same dollar twice", async () => {
+  const ledger = createLedger();
+  const cap = 60_000;
+  const results = await Promise.all(Array.from({ length: 20 }, (_, index) => ledger.transact({
+    type: "hold",
+    reservationId: "r" + index,
+    costMicro: cap,
+    capMicro: cap,
+    sessionId: "session-" + index,
+    ipHash: "ip-" + index,
+    mode: "addition",
+    leadId: "",
+  })));
+  assert.equal(results.filter((result) => result.ok).length, 1);
+  const winner = results.find((result) => result.ok);
+  await ledger.transact({ type: "release", reservationId: winner.reservationId });
+  assert.equal(ledger.snapshot().committedMicro, 0);
+  const again = await ledger.transact({
+    type: "hold",
+    reservationId: "after-release",
+    costMicro: cap,
+    capMicro: cap,
+    sessionId: "session-new",
+    ipHash: "ip-new",
+    mode: "kitchen",
+    leadId: "",
+  });
+  assert.equal(again.ok, true);
+  await ledger.transact({ type: "settle", reservationId: again.reservationId });
+  assert.equal(ledger.snapshot().committedMicro, cap);
 });

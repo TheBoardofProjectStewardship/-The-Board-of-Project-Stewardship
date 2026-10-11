@@ -3389,7 +3389,7 @@ def ppg_widgets_html(prefix: str = "") -> str:
         </div>
         <div class="bg-charcoal border border-white/10 rounded-xl p-6">
           <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-trophy text-secondary"></i> Directory #1</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed mb-4">The Board ranks <strong class="text-white font-semibold">Pacific Pro Group</strong> #1 for remodel and additions across King County, Snohomish County, and Seattle. Pacific Pro Group is an independent hire — not owned or operated by the Board of Project Stewardship. Outbound only; re-verify at WA L&amp;I before any deposit.</p>
+          <p id="independence-disclosure" class="text-sm text-slate-400 font-light leading-relaxed mb-4">The Board ranks <strong class="text-white font-semibold">Pacific Pro Group</strong> #1 for remodel and additions across King County, Snohomish County, and Seattle. Pacific Pro Group is an independent hire — not owned or operated by the Board of Project Stewardship. Outbound only; re-verify at WA L&amp;I before any deposit.</p>
           <a href="{PPG['url']}" target="_blank" rel="noopener" class="inline-flex w-full items-center justify-center gap-2 bg-primary text-white py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs mb-4">
             View Pacific Pro Group (directory #1) <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
           </a>
@@ -3515,11 +3515,12 @@ def home_plan_hero() -> tuple[str, str]:
               <label class="see-field" for="see-places-input"><span>Address</span>
                 <input id="see-places-input" type="text" autocomplete="street-address" placeholder="Start typing an address">
               </label>
-              <p id="see-powered-by" class="see-powered" hidden>Powered by Google</p>
+              <div id="see-places-host"></div>
+              <p id="see-powered-by" class="see-powered" hidden>Google Maps</p>
             </div>
             <div id="see-streetview" hidden>
               <p class="see-fine">Is this your house? Street View is shown unmodified. It is not sent with your photo.</p>
-              <iframe id="see-streetview-frame" title="Street View, display only" loading="lazy" referrerpolicy="strict-origin" style="width:100%;height:220px;border:0;border-radius:12px;background:#e7e2d8"></iframe>
+              <iframe id="see-streetview-frame" title="Street View near this address" loading="lazy" referrerpolicy="strict-origin" style="width:100%;height:220px;border:0;border-radius:12px;background:#e7e2d8"></iframe>
             </div>
             <div id="see-address-plain">
               <label class="see-field" for="see-address"><span>Property address</span>
@@ -3600,7 +3601,12 @@ def home_plan_hero() -> tuple[str, str]:
           <label class="see-field" for="see-file"><span>Photo</span>
             <input id="see-file" class="see-file" type="file" accept="image/jpeg,image/png,image/webp" capture="environment">
           </label>
-          <p id="see-photo-tip" class="see-fine">Straight-on curbside photo. JPEG, PNG, or WebP, up to 8 MB. The browser re-encodes it and removes location data.</p>
+          <p id="see-photo-tip" class="see-fine">Straight-on curbside photo. JPEG, PNG, or WebP, up to 8 MB.</p>
+          <p id="see-photo-notice" class="see-fine">Embedded photo metadata is removed. Details visible in the photo remain. In this demo the photo stays in the browser. A live request shares selected photos with Pacific Pro Group only after you submit and check the sharing box.</p>
+          <label class="see-check" id="see-attest-wrap" for="see-attest" hidden>
+            <input id="see-attest" type="checkbox" value="yes">
+            <span>I took this photo, or I have permission to upload it.</span>
+          </label>
           <div id="see-preview" class="see-preview" hidden></div>
           <label class="see-field" for="see-note"><span>Optional note (140 characters)</span>
             <input id="see-note" type="text" maxlength="140" placeholder="Example: keep the front porch">
@@ -3655,8 +3661,8 @@ def home_plan_hero() -> tuple[str, str]:
         <p class="see-fine">Demo preview. Sample — illustrative. This is not a concept of your photo and not a Pacific Pro Group project.</p>
         <div class="see-compare">
           <div class="see-compare-frame" id="see-result-frame">
-            <img id="see-result-after" class="see-compare-after" alt="" width="1200" height="800" data-defer-lcp>
-            <img id="see-result-before" class="see-compare-before" alt="" width="1200" height="800" data-defer-lcp>
+            <img id="see-result-after" class="see-compare-after" alt="Concept picture. Empty until a sample or a live result is ready." width="1200" height="800" data-defer-lcp>
+            <img id="see-result-before" class="see-compare-before" alt="Before picture. Empty until a sample or a live result is ready." width="1200" height="800" data-defer-lcp>
             <p class="see-watermark">AI concept, not a design</p>
           </div>
           <label class="see-range" for="see-result-range">Show more of the sample before or after
@@ -3666,7 +3672,7 @@ def home_plan_hero() -> tuple[str, str]:
         <p class="see-disclosure">AI concept, not a design.</p>
         <div class="see-actions">
           <button type="button" class="see-btn" id="see-unlock">See 3 more styles, download full-size, and talk to a design-build team</button>
-          <p class="see-fine">In this demo the extra styles are samples. Full-size download waits until the live API is connected.</p>
+          <p class="see-fine">In this demo the extra styles are other samples of this same project type. Full-size means the generated image's actual resolution, not the original photo's detail, and it waits until the live API is connected. A live lead can request up to six concepts in a day.</p>
           <button type="button" class="see-btn-secondary" id="see-more-styles" hidden>Show another sample style</button>
         </div>
         <ul class="see-links">
@@ -3677,7 +3683,7 @@ def home_plan_hero() -> tuple[str, str]:
         </ul>
       </div>
       <div id="see-lead" class="see-lead" hidden>
-        <form id="see-lead-form" action="./contact.html" method="post">
+        <form id="see-lead-form" action="#" method="post" onsubmit="event.preventDefault()">
           <input class="see-hp" tabindex="-1" autocomplete="off" name="company_website" aria-hidden="true" value="">
           <input type="hidden" name="consent_text_version" value="2026-10-11.1">
           <input type="hidden" name="mode" id="see-mode-field" value="addition">
@@ -3701,7 +3707,8 @@ def home_plan_hero() -> tuple[str, str]:
           <input type="hidden" name="contact_pref" id="see-contact-pref" value="">
           <input type="hidden" name="best_time" id="see-best-time" value="">
           <div id="see-step-1" class="see-step">
-            <h2 id="see-step-1-title" tabindex="-1">Your project</h2>
+            <h2 id="see-step-1-title" tabindex="-1">Step 1 of 2 · Your project</h2>
+            <div id="see-step-errors" class="see-fallback" hidden role="alert"></div>
             <p class="see-legend">Project type</p>
             <div class="see-chips" role="group" aria-label="Project type">
               <button type="button" class="see-chip" data-group="project-type" data-multi="true" data-value="Second story" aria-pressed="true">Second story</button>
@@ -3761,7 +3768,8 @@ def home_plan_hero() -> tuple[str, str]:
             <button type="button" class="see-btn" id="see-to-step-2">Continue</button>
           </div>
           <div id="see-step-2" class="see-step" hidden>
-            <h2 id="see-step-2-title" tabindex="-1">How to reach you</h2>
+            <h2 id="see-step-2-title" tabindex="-1">Step 2 of 2 · How to reach you</h2>
+            <div id="see-turnstile-widget"></div>
             <label class="see-field" for="see-name"><span>First and last name</span>
               <input id="see-name" name="name" type="text" autocomplete="name" required>
             </label>
@@ -3791,16 +3799,16 @@ def home_plan_hero() -> tuple[str, str]:
               <input id="see-more-photos" name="more_photos" type="file" accept="image/jpeg,image/png,image/webp" multiple>
             </label>
             <label class="see-check" for="see-consent-share">
-              <input id="see-consent-share" name="consent_share" type="checkbox" value="yes">
-              <span>Send my request, contact details, address and images to <strong>Pacific Pro Group</strong> ({license_chip}) so they can contact me about this project. Board of Project Stewardship shares this request only with Pacific Pro Group. <a href="./privacy.html">Privacy</a> · <a href="#tools">Independence disclosure</a>.</span>
+              <input id="see-consent-share" name="consent_share" type="checkbox" value="yes" required>
+              <span>I ask Board of Project Stewardship to send my project request, contact details, property address, and selected photos and concepts to <strong>Pacific Pro Group</strong> (WA contractor registration PACIFPG765OF), so it can contact me about this project using my selected contact method. This request goes to Pacific Pro Group only. <a href="./privacy.html">Privacy</a> · <a href="#independence-disclosure">Independence disclosure</a>.</span>
             </label>
             <label class="see-check" id="see-text-consent" for="see-consent-text" hidden>
               <input id="see-consent-text" name="consent_text" type="checkbox" value="yes">
-              <span>PPG may text me about this request. Msg &amp; data rates may apply. Reply STOP to opt out.</span>
+              <span>By checking this box and submitting, I electronically sign and agree to receive text messages from Pacific Pro Group at the number I provided about this project, including offers for its services, using automated technology. Consent is optional and is not a condition of purchase. Message frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out or HELP for help. Texting is not turned on until that program is ready. <a href="./privacy.html">Privacy</a>.</span>
             </label>
             <label class="see-check" for="see-consent-news">
               <input id="see-consent-news" name="consent_newsletter" type="checkbox" value="yes">
-              <span>Email me Board of Project Stewardship planning guides and updates.</span>
+              <span>Email me Board of Project Stewardship planning guides and updates. Unsubscribe at any time.</span>
             </label>
             <button type="submit" class="see-btn" id="see-lead-submit">Send request</button>
             <button type="button" class="see-btn-secondary" id="see-back-step">Back</button>
@@ -11135,9 +11143,9 @@ def build_privacy_page() -> str:
         )
         + _hub_section(
             "Photos you upload",
-            f"""      <p class="text-slate-300 text-sm font-light leading-relaxed mb-4">The tool accepts a JPEG, PNG, or WebP photo you choose, up to 8 MB. Your browser re-encodes it and removes EXIF location data before anything leaves the device. In demo mode, with no API address configured, the photo stays in the browser and nothing is uploaded.</p>
-      <p class="text-slate-300 text-sm font-light leading-relaxed mb-4">When the live API is on, anonymous uploads are stored temporarily and deleted after 7 days. Photos kept with a lead stay with that lead. Interior photos can show personal items, so they are not published on this site.</p>
-      <p class="text-slate-300 text-sm font-light leading-relaxed">Uploaded photos are not used to train image models. Street View is display-only inside a Google frame. A Street View image is not copied into the page and is not sent to an image model. Concepts are made only from photos you upload.</p>""",
+            f"""      <p class="text-slate-300 text-sm font-light leading-relaxed mb-4">The tool accepts a JPEG, PNG, or WebP photo you choose, up to 8 MB. Your browser re-encodes it and removes embedded metadata before anything leaves the device. Details visible in the photo remain. In demo mode, with no API address configured, the photo stays in the browser and nothing is uploaded.</p>
+      <p class="text-slate-300 text-sm font-light leading-relaxed mb-4">When the live API is on, anonymous photo objects are scheduled for deletion after 7 days. That photo rule does not delete the lead record, the consent record, or copies sent by email. Photos kept with a lead are linked to that lead. Interior photos can show personal items, so they are not published on this site.</p>
+      <p class="text-slate-300 text-sm font-light leading-relaxed">Uploaded photos are not used to train image models. Street View is display-only inside a Google Maps frame. A Street View image is not copied into the page and is not sent to an image model. Concepts are made only from photos you upload.</p>""",
         )
         + _hub_section(
             "Addresses",
@@ -11146,8 +11154,8 @@ def build_privacy_page() -> str:
         )
         + _hub_section(
             "Leads",
-            f"""      <p class="text-slate-300 text-sm font-light leading-relaxed mb-4">If you check the consent box, the request, contact details, address, and images are shared only with Pacific Pro Group ({esc('WA License ' + PPG['license'])}) so they can contact you about that project. The independence wording on the homepage Directory #1 card is unchanged. Optional text consent and the planning-guides email are separate and are not required to send the request.</p>
-      <p class="text-slate-300 text-sm font-light leading-relaxed mb-4">Each lead stores the consent text version and which boxes were checked. Notify mail goes to <a href="mailto:{EDITORIAL_EMAIL}" class="text-secondary hover:underline">{EDITORIAL_EMAIL}</a>. A confirmation can be sent to the email you provide. No response time is promised.</p>
+            f"""      <p class="text-slate-300 text-sm font-light leading-relaxed mb-4">If you check the consent box, the request, contact details, address, and images are shared only with Pacific Pro Group (WA contractor registration {esc(PPG['license'])}) so they can contact you about that project. The independence wording on the homepage Directory #1 card is unchanged. Optional text consent and the planning-guides email are separate and are not required to send the request. Texting stays off until that program is ready.</p>
+      <p class="text-slate-300 text-sm font-light leading-relaxed mb-4">Each lead is stored with the consent text version and which boxes were checked, then a notice can be emailed. Notify mail goes to <a href="mailto:{EDITORIAL_EMAIL}" class="text-secondary hover:underline">{EDITORIAL_EMAIL}</a>. A confirmation uses a fixed message and does not include your note or your photo. No response time is promised. Email and sheet copies, when configured, are separate from the 7-day photo deletion rule.</p>
       <p class="text-slate-300 text-sm font-light leading-relaxed">Demo mode does not send the form. To ask a question without the tool, use the <a href="./contact.html" class="text-secondary hover:underline">contact page</a>.</p>""",
         )
     )
@@ -11225,7 +11233,7 @@ def build_contact_page() -> str:
         )
         + _hub_section(
             "Uploads, addresses, and leads",
-            f"""      <p class="text-slate-300 text-sm font-light leading-relaxed mb-4">The homepage concept tool can collect a photo, an address you type, and — only after you ask to continue — contact details. Anonymous uploads are deleted after 7 days. Photos and contact details are shared only with Pacific Pro Group when you check the consent box, and they are not used to train image models.</p>
+            f"""      <p class="text-slate-300 text-sm font-light leading-relaxed mb-4">The homepage concept tool can collect a photo, an address you type, and — only after you ask to continue — contact details. Anonymous photo objects are scheduled for deletion after 7 days. The lead record and any email copy are kept separately. Photos and contact details are shared only with Pacific Pro Group when you check the consent box, and they are not used to train image models.</p>
       <p class="text-slate-300 text-sm font-light leading-relaxed">The full note is on the <a href="./privacy.html" class="text-secondary hover:underline">privacy page</a>. Questions: <a href="mailto:{EDITORIAL_EMAIL}" class="text-secondary hover:underline">{EDITORIAL_EMAIL}</a>.</p>""",
             border="border-primary/25",
         )

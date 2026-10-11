@@ -2,7 +2,9 @@
 .see-project {
   background: linear-gradient(180deg, #ffffff 0%, #f6f3ec 100%);
   color: #0f172a;
-  padding: 1.25rem 1rem 1.5rem;
+  /* Matches header .site-header-row (4rem) so the first line clears the sticky header. */
+  padding: 4rem 1rem 1.5rem;
+  scroll-margin-top: 4rem;
 }
 .see-project-inner {
   max-width: 72rem;
@@ -15,6 +17,13 @@
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+}
+.see-project h1,
+.see-kicker,
+.see-result,
+.see-lead,
+.see-step h2 {
+  scroll-margin-top: 4rem;
 }
 .see-project h1 {
   margin: 0.4rem 0 0;
@@ -287,8 +296,14 @@
   outline-offset: 3px;
 }
 .see-powered { margin: 0.25rem 0 0.6rem; color: #334155; font-size: 0.75rem; }
+.see-compare-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.45rem;
+}
 @media (min-width: 900px) {
-  .see-project { padding: 2rem 1.5rem 1.75rem; }
+  .see-project { padding: 4rem 1.5rem 1.75rem; }
   .see-grid { grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr); gap: 1.75rem; }
   .see-actions { flex-direction: row; align-items: center; }
   .see-btn { width: auto; }

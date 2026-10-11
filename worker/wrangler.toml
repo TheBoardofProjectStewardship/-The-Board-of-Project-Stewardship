@@ -10,14 +10,19 @@ workers_dev = false
 #          wrangler secret put MAPS_SERVER_KEY
 #          wrangler secret put RESEND_API_KEY
 #          wrangler secret put IP_HASH_SALT
+#          wrangler secret put SESSION_SIGNING_KEY
+# DAILY_SPEND_CAP_USD is required and has no default. Set it before
+# LIVE_ENABLED=true. An unset cap fails closed.
 
 [vars]
 ALLOWED_ORIGIN = "https://boardofprojectstewardship.com"
 LEAD_NOTIFY_EMAIL = "editorial@boardofprojectstewardship.com"
 IMAGE_PROVIDER = "gemini"
 IMAGE_MODEL = "gemini-3.1-flash-lite-image"
-DAILY_SPEND_CAP_USD = "25"
 EMAIL_PROVIDER = "resend"
+LIVE_ENABLED = "false"
+SMS_ENABLED = "false"
+TURNSTILE_HOSTNAME = "boardofprojectstewardship.com"
 # Optional public sender once SPF/DKIM exist. Not a secret.
 EMAIL_FROM = "Board of Project Stewardship <editorial@boardofprojectstewardship.com>"
 
@@ -29,6 +34,13 @@ bucket_name = "see-project-uploads"
 binding = "LIMITS"
 id = "00000000000000000000000000000000"
 preview_id = "00000000000000000000000000000000"
+
+[durable_objects]
+bindings = [{ name = "LEDGER", class_name = "DailyLedger" }]
+
+[[migrations]]
+tag = "v1-ledger"
+new_sqlite_classes = ["DailyLedger"]
 
 # Apply worker/r2-lifecycle.json to the bucket (anonymous prefix, 7 days).
 # This pull request does not deploy the Worker or create the bucket.

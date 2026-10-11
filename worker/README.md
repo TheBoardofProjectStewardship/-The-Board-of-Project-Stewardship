@@ -38,11 +38,19 @@ wrangler secret put TURNSTILE_SECRET
 wrangler secret put MAPS_SERVER_KEY
 wrangler secret put RESEND_API_KEY
 wrangler secret put IP_HASH_SALT
+wrangler secret put SESSION_SIGNING_KEY
+# Then set DAILY_SPEND_CAP_USD to the real daily ceiling. There is no default.
 ```
 
-Non-secret vars live in `wrangler.toml` (`IMAGE_PROVIDER`, `IMAGE_MODEL`, `DAILY_SPEND_CAP_USD`, `LEAD_NOTIFY_EMAIL`, `ALLOWED_ORIGIN`). Copy `worker/.dev.vars.example` to `worker/.dev.vars` for local dev. Do not commit `.dev.vars`.
+Non-secret vars live in `wrangler.toml` (`IMAGE_PROVIDER`, `IMAGE_MODEL`, `LIVE_ENABLED`, `LEAD_NOTIFY_EMAIL`, `ALLOWED_ORIGIN`). `DAILY_SPEND_CAP_USD` is not listed there. Copy `worker/.dev.vars.example` to `worker/.dev.vars` for local dev. Do not commit `.dev.vars`.
 
-Replace the placeholder KV namespace id before deploy. Default model is `gemini-3.1-flash-lite-image`. Set `IMAGE_PROVIDER=openai` and `IMAGE_MODEL=gpt-image-1.5` for the backup.
+Replace the placeholder KV namespace id before deploy. Default model is `gemini-3.1-flash-lite-image`. Set `IMAGE_PROVIDER=openai` for the backup, which defaults to `gpt-image-2`. `gpt-image-1.5` can still be selected and is scheduled to shut down on December 1, 2026, so it is not the default backup.
+
+`LIVE_ENABLED` defaults to `false`. `DAILY_SPEND_CAP_USD` has no default and the Worker fails closed when it is unset. Set the cap with `wrangler secret put` or a var before turning `LIVE_ENABLED` on. Do not put a guessed dollar amount in `wrangler.toml`.
+
+Sessions are server-issued HMAC tokens (`SESSION_SIGNING_KEY`). The page must not send a client-chosen visitor id or lead id. Spend is held only when a provider call is about to run, settled only after a billed success, and released when the attempt is known to be unbilled. The image HTTP call itself still returns `provider_call_pending_keys` and does not spend.
+
+Leads are written to the `LIMITS` KV namespace before any email. A 7-day R2 lifecycle covers `anon/` photos only. Consent records and email copies are separate. The visitor confirmation is a fixed template and is rate-limited per recipient.
 
 ## R2 lifecycle
 
