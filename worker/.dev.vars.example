@@ -1,0 +1,10 @@
+# Copy to .dev.vars for local `wrangler dev`. Never commit .dev.vars.
+# Leave values empty until Alex creates the accounts. Empty values keep routes in stub mode.
+
+GEMINI_API_KEY=
+OPENAI_API_KEY=
+TURNSTILE_SECRET=
+MAPS_SERVER_KEY=
+RESEND_API_KEY=
+IP_HASH_SALT=
+SHEET_WEBHOOK_URL=

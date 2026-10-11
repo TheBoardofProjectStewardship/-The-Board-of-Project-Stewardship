@@ -1,0 +1,17 @@
+{
+  "rules": [
+    {
+      "id": "delete-anonymous-uploads-after-7-days",
+      "enabled": true,
+      "conditions": {
+        "prefix": "anon/"
+      },
+      "deleteObjectsTransition": {
+        "condition": {
+          "type": "Age",
+          "maxAge": 604800
+        }
+      }
+    }
+  ]
+}

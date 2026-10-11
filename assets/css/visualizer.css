@@ -1,0 +1,298 @@
+/* Homepage "See your addition / remodel" tool. Light panel, AA contrast on #f6f3ec. */
+.see-project {
+  background: linear-gradient(180deg, #ffffff 0%, #f6f3ec 100%);
+  color: #0f172a;
+  padding: 1.25rem 1rem 1.5rem;
+}
+.see-project-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+}
+.see-kicker {
+  margin: 0;
+  color: #0f766e;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.see-project h1 {
+  margin: 0.4rem 0 0;
+  max-width: 16ch;
+  color: #0f172a;
+  font-family: Inter, system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 6vw, 3.15rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+.see-dek {
+  margin: 0.75rem 0 0;
+  max-width: 40rem;
+  color: #334155;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.see-note {
+  margin: 0.45rem 0 0;
+  color: #334155;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+.see-grid {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 1.1rem;
+  align-items: start;
+}
+.see-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0 0 0.85rem;
+}
+.see-tab,
+.see-chip,
+.see-btn,
+.see-btn-secondary,
+.see-file {
+  font: inherit;
+}
+.see-tab {
+  min-height: 44px;
+  padding: 0.55rem 0.9rem;
+  border-radius: 999px;
+  border: 2px solid #0f172a;
+  background: #fff;
+  color: #0f172a;
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+.see-tab[aria-selected="true"] {
+  background: #14532d;
+  border-color: #14532d;
+  color: #fff;
+}
+.see-field {
+  display: block;
+  margin: 0 0 0.75rem;
+}
+.see-field span,
+.see-legend {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #0f172a;
+}
+.see-field input,
+.see-field select,
+.see-field textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.6rem 0.75rem;
+  border: 2px solid #334155;
+  border-radius: 0.5rem;
+  background: #fff;
+  color: #0f172a;
+  font: inherit;
+  font-size: 1rem;
+}
+.see-field textarea { min-height: 6.5rem; resize: vertical; }
+.see-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0 0 0.75rem;
+}
+.see-chip {
+  min-height: 44px;
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  border: 2px solid #334155;
+  background: #fff;
+  color: #0f172a;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-align: left;
+}
+.see-chip[aria-pressed="true"] {
+  background: #14532d;
+  border-color: #14532d;
+  color: #fff;
+}
+.see-chip small {
+  display: block;
+  font-weight: 500;
+  font-size: 0.75rem;
+  line-height: 1.3;
+}
+.see-btn,
+.see-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0.7rem 1rem;
+  border-radius: 0.55rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+.see-btn {
+  width: 100%;
+  border: 2px solid #14532d;
+  background: #14532d;
+  color: #fff;
+}
+.see-btn-secondary {
+  border: 2px solid #0f172a;
+  background: #fff;
+  color: #0f172a;
+}
+.see-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.35rem;
+}
+.see-disclosure,
+.see-fine {
+  margin: 0.65rem 0 0;
+  color: #1e293b;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+.see-fine { color: #334155; font-size: 0.84rem; }
+.see-fallback {
+  margin-top: 0.9rem;
+  padding: 0.85rem 1rem;
+  border: 2px solid #0f172a;
+  border-radius: 0.6rem;
+  background: #fff;
+  color: #0f172a;
+}
+.see-fallback a { color: #14532d; font-weight: 700; }
+.see-compare {
+  --pos: 50%;
+  margin: 0;
+}
+.see-compare-frame {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  border: 2px solid #0f172a;
+  background: #e7e2d8;
+}
+.see-compare-frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.see-compare-before {
+  clip-path: inset(0 calc(100% - var(--pos)) 0 0);
+}
+.see-watermark {
+  position: absolute;
+  left: 0.6rem;
+  bottom: 0.55rem;
+  z-index: 2;
+  margin: 0;
+  padding: 0.25rem 0.45rem;
+  border-radius: 0.35rem;
+  background: rgba(15, 23, 42, 0.88);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.see-range {
+  display: block;
+  margin-top: 0.55rem;
+}
+.see-range input[type="range"] {
+  width: 100%;
+  accent-color: #14532d;
+  min-height: 44px;
+}
+.see-caption {
+  margin: 0.35rem 0 0;
+  color: #1e293b;
+  font-size: 0.84rem;
+  line-height: 1.4;
+}
+.see-status {
+  min-height: 1.4rem;
+  margin: 0.55rem 0 0;
+  color: #0f172a;
+  font-weight: 600;
+}
+.see-preview {
+  margin-top: 0.6rem;
+}
+.see-preview img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 0.6rem;
+  border: 2px solid #334155;
+}
+.see-result,
+.see-lead {
+  margin-top: 1rem;
+  padding-top: 0.25rem;
+}
+.see-result h2,
+.see-lead h2,
+.see-step h3 {
+  margin: 0 0 0.45rem;
+  color: #0f172a;
+  font-size: 1.35rem;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+}
+.see-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1rem;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.see-links a { color: #14532d; font-weight: 700; }
+.see-check {
+  display: flex;
+  gap: 0.65rem;
+  align-items: flex-start;
+  margin: 0.7rem 0;
+  color: #0f172a;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+.see-check input { width: 1.15rem; height: 1.15rem; margin-top: 0.2rem; flex: none; }
+.see-check a { color: #14532d; font-weight: 700; }
+.see-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.see-project :focus-visible {
+  outline: 3px solid #0f172a;
+  outline-offset: 3px;
+}
+.see-powered { margin: 0.25rem 0 0.6rem; color: #334155; font-size: 0.75rem; }
+@media (min-width: 900px) {
+  .see-project { padding: 2rem 1.5rem 1.75rem; }
+  .see-grid { grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr); gap: 1.75rem; }
+  .see-actions { flex-direction: row; align-items: center; }
+  .see-btn { width: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .see-project * { scroll-behavior: auto; }
+}

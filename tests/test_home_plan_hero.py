@@ -1,4 +1,4 @@
-"""Homepage leads with the plan walkthrough and keeps ranking copy."""
+"""Homepage leads with the concept tool and keeps ranking copy."""
 from __future__ import annotations
 
 import re
@@ -7,7 +7,30 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGE = ROOT / "index.html"
-FORBIDDEN = re.compile(r"\b(?:BOPS|ChatGPT|Gemini|Imagen|Veo|Higgsfield|Pollinations)\b|\bAI\b")
+VENDOR = re.compile(r"\b(?:BOPS|ChatGPT|Gemini|Imagen|Veo|Higgsfield|Pollinations)\b")
+AI = re.compile(r"\bAI\b")
+ALLOWED_AI = (
+    "AI concept, not a design",
+    "AI-generated concept",
+)
+
+
+def visible_copy(html: str) -> str:
+    alts = " ".join(re.findall(r'\balt="([^"]*)"', html))
+    text = re.sub(r"<script\b[^>]*>.*?</script>", " ", html, flags=re.S | re.I)
+    text = re.sub(r"<style\b[^>]*>.*?</style>", " ", text, flags=re.S | re.I)
+    text = re.sub(r"<[^>]+>", " ", text)
+    return html_unescape(text + " " + alts)
+
+
+def html_unescape(text: str) -> str:
+    return (
+        text.replace("&amp;", "&")
+        .replace("&lt;", "<")
+        .replace("&gt;", ">")
+        .replace("&#39;", "'")
+        .replace("&quot;", '"')
+    )
 
 
 class HomePlanHeroTests(unittest.TestCase):
@@ -15,15 +38,32 @@ class HomePlanHeroTests(unittest.TestCase):
         self.html = PAGE.read_text(encoding="utf-8")
 
     def test_walkthrough_cta_is_the_only_h1(self):
+        """The concept tool is the only H1. The 3D walkthrough is a nav link.
+
+        Alex: this replaces the previous assertion that the walkthrough sentence
+        was the homepage H1, and it allows the disclosure phrases below while
+        vendor and model names stay banned.
+        """
         self.assertEqual(self.html.count("<h1"), 1)
-        self.assertIn('<h1 id="plan-home-title">Walk through a home in 3D</h1>', self.html)
-        self.assertIn('class="plan-home-btn" href="./plan-walkthrough/">Walk through a home in 3D</a>', self.html)
-        self.assertIn('class="plan-home-stage" href="./plan-walkthrough/"', self.html)
+        self.assertIn('<h1 id="see-project-title">See your addition / remodel</h1>', self.html)
+        self.assertIn("See your home project before you build.", self.html)
+        self.assertIn(">3D Walkthrough</a>", self.html)
+        self.assertIn('href="./plan-walkthrough/"', self.html)
+        self.assertNotIn("Walk through a home in 3D", self.html)
         self.assertNotIn("three.module.js", self.html)
         self.assertNotIn("plan-walkthrough.js", self.html)
         self.assertNotIn('rel="preload" as="image"', self.html)
         self.assertNotIn("fetchpriority", self.html)
-        self.assertIsNone(FORBIDDEN.search(self.html))
+        self.assertIn('data-api-base=""', self.html)
+        self.assertIn("Sample — illustrative", self.html)
+        self.assertIn("WA License PACIFPG765OF", self.html)
+        visible = visible_copy(self.html)
+        for phrase in ALLOWED_AI:
+            self.assertIn(phrase, visible)
+            visible = visible.replace(phrase, "")
+        self.assertIsNone(AI.search(visible))
+        self.assertIsNone(VENDOR.search(self.html))
+        self.assertIsNone(VENDOR.search(visible))
 
     def test_existing_media_and_ranking_stay(self):
         self.assertIn('id="another-story-sea"', self.html)

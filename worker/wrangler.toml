@@ -1,0 +1,34 @@
+name = "see-project-visualizer"
+main = "src/index.js"
+compatibility_date = "2026-10-11"
+workers_dev = false
+
+# Placeholders only. Do not put API keys in this file.
+# Secrets: wrangler secret put GEMINI_API_KEY
+#          wrangler secret put OPENAI_API_KEY
+#          wrangler secret put TURNSTILE_SECRET
+#          wrangler secret put MAPS_SERVER_KEY
+#          wrangler secret put RESEND_API_KEY
+#          wrangler secret put IP_HASH_SALT
+
+[vars]
+ALLOWED_ORIGIN = "https://boardofprojectstewardship.com"
+LEAD_NOTIFY_EMAIL = "editorial@boardofprojectstewardship.com"
+IMAGE_PROVIDER = "gemini"
+IMAGE_MODEL = "gemini-3.1-flash-lite-image"
+DAILY_SPEND_CAP_USD = "25"
+EMAIL_PROVIDER = "resend"
+# Optional public sender once SPF/DKIM exist. Not a secret.
+EMAIL_FROM = "Board of Project Stewardship <editorial@boardofprojectstewardship.com>"
+
+[[r2_buckets]]
+binding = "IMAGES"
+bucket_name = "see-project-uploads"
+
+[[kv_namespaces]]
+binding = "LIMITS"
+id = "00000000000000000000000000000000"
+preview_id = "00000000000000000000000000000000"
+
+# Apply worker/r2-lifecycle.json to the bucket (anonymous prefix, 7 days).
+# This pull request does not deploy the Worker or create the bucket.

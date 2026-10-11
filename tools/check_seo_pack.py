@@ -342,6 +342,8 @@ def check_public_regressions() -> None:
     forbidden = re.compile(
         r"\b(?:BOPS|ChatGPT|Gemini|Imagen|Veo|Higgsfield|Pollinations)\b|\bAI\b"
     )
+    # Disclosure phrases on the concept tool. Vendor and model names stay banned.
+    allowed_ai = ("AI concept, not a design", "AI-generated concept")
     illustrative_src = re.compile(
         r"(?:assets/images/(?:posts|places|hubs|tools|walkthrough)/|assets/hero/|"
         r"assets/images/(?:dir-|home-)|another-story-banner)",
@@ -349,7 +351,10 @@ def check_public_regressions() -> None:
     )
     for path in html_files:
         text = path.read_text(encoding="utf-8")
-        if forbidden.search(text):
+        scanned = text
+        for phrase in allowed_ai:
+            scanned = scanned.replace(phrase, "")
+        if forbidden.search(scanned):
             fail(f"{path.relative_to(ROOT)} contains a forbidden public term")
         title_m = re.search(r"<title>(.*?)</title>", text, flags=re.S)
         if title_m:
