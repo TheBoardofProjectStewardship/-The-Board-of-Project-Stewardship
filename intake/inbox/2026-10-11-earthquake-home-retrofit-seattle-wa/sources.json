@@ -1,0 +1,77 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Seattle",
+    "service": "Earthquake home retrofit",
+    "slug": "earthquake-home-retrofit-seattle-wa"
+  },
+  "sources": [
+    {
+      "url": "https://www.seattle.gov/sdci/permits/permits-we-issue-(a-z)/earthquake-home-retrofit-permit",
+      "title": "SDCI \u2014 Earthquake Home Retrofit Permit",
+      "retrieved": "2026-10-11",
+      "supports": "Formerly Project Impact; prescriptive plan sets; ABC; reduced fees for plan-set projects plus technology fee; initial review typically two weeks; Table 1 on Sheet S0; engineered plans requirements; Seattle Services Portal; fee payment and permit posting."
+    },
+    {
+      "url": "https://www.seattle.gov/documents/Departments/SDCI/Forms/EarthquakeHomeRetrofitPlanset.pdf",
+      "title": "SDCI \u2014 Earthquake Home Retrofit Plan Set (PDF)",
+      "retrieved": "2026-10-11",
+      "supports": "Sheet list 01, S0, S1-S4, S3.1, D1-D3.1; Sheets X1-X5 examples."
+    },
+    {
+      "url": "https://www.seattle.gov/documents/Departments/SDCI/Permits/ProtectYourHomeFromEarthquakeDamage.pdf",
+      "title": "SDCI \u2014 Protect Your Home From Earthquake Damage (PDF)",
+      "retrieved": "2026-10-11",
+      "supports": "Since 1998; developed with FEMA and Seattle OEM; eligibility summary; most damage from sliding off foundation or pony wall collapse; no appointment; reduced fee."
+    },
+    {
+      "url": "https://www.seattle.gov/documents/Departments/SDCI/Resources/Home%20Fair%20Presentations/EarthquakeHomeRetrofit_HomeFair2025.pdf",
+      "title": "SDCI \u2014 Earthquake Home Retrofit, 2025 Home Fair presentation (PDF)",
+      "retrieved": "2026-10-11",
+      "supports": "History (Northridge 1994, FEMA P-1100, WABO); 11 eligibility questions; post-early-1980s note; cripple wall 7 ft max, 2 ft min panel; key sheets; items not addressed; substantial alteration seismic upgrade requirement; not earthquake-proof."
+    },
+    {
+      "url": "https://www.seattle.gov/sdci/permits/permits-we-issue-(a-z)/construction-permit---subject-to-field-inspection",
+      "title": "SDCI \u2014 Construction Permit, Subject to Field Inspection",
+      "retrieved": "2026-10-11",
+      "supports": "Engineered voluntary retrofit permit path."
+    },
+    {
+      "url": "https://www.seattle.gov/sdci/resources/send-us-a-question",
+      "title": "SDCI \u2014 Send Us a Question",
+      "retrieved": "2026-10-11",
+      "supports": "Contact for eligibility questions."
+    },
+    {
+      "url": "https://www.dnr.wa.gov/programs-and-services/geology/geologic-hazards/earthquakes-and-faults",
+      "title": "WA DNR \u2014 Earthquakes and Faults",
+      "retrieved": "2026-10-11",
+      "supports": "State earthquake and fault information."
+    },
+    {
+      "url": "https://mil.wa.gov/earthquake",
+      "title": "Washington Emergency Management Division \u2014 Earthquake",
+      "retrieved": "2026-10-11",
+      "supports": "State earthquake preparedness."
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/",
+      "title": "Washington L&I \u2014 Electrical permits, fees, and inspections",
+      "retrieved": "2026-10-11",
+      "supports": "Electrical permit agency context."
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "Washington L&I Verify a Contractor",
+      "retrieved": "2026-10-11",
+      "supports": "Contractor registration, bond, insurance check."
+    }
+  ],
+  "generation": {
+    "agent": "box-authored",
+    "hermes_status": "box-fallback-verified",
+    "verified_count": 10,
+    "supports_mode": "box-verified",
+    "note": "All URLs HTTP 200 from box on 2026-10-11."
+  }
+}

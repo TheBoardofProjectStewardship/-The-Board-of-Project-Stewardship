@@ -1,0 +1,18 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {"role": "hero", "intake_file": "media/2026-10-11-seattle-retrofit-1.webp", "repo_path": "assets/images/posts/2026-10-11-seattle-retrofit-1.webp",
+     "alt": "Illustrative: a craftsman-style two-story house with a dark roof and tall evergreens behind it, the kind of older wood-frame home Seattle's retrofit program is aimed at — not a real Board of Project Stewardship job photo",
+     "source": "Crop, mirror, and regrade of existing repo still 2026-08-09-second-story-teardown-edmonds-3.webp"},
+    {"role": "in-body", "intake_file": "media/2026-10-11-seattle-retrofit-2.webp", "repo_path": "assets/images/posts/2026-10-11-seattle-retrofit-2.webp",
+     "alt": "Illustrative: an exposed wood-framed wall with studs, sheathing, and a window opening during a remodel — the kind of framing a braced wall panel ties together — not a real Board of Project Stewardship job photo",
+     "source": "Crop, mirror, and regrade of existing repo still 2026-08-09-second-story-teardown-3.webp"},
+    {"role": "in-body", "intake_file": "media/2026-10-11-seattle-retrofit-3.webp", "repo_path": "assets/images/posts/2026-10-11-seattle-retrofit-3.webp",
+     "alt": "Illustrative: the side of a house showing an exposed concrete foundation wall below the siding line next to a narrow side yard — not a real Board of Project Stewardship job photo",
+     "source": "Crop and regrade of existing repo still 2026-08-20-home-addition-bothell-4.webp"}
+  ],
+  "youtube": [{"id": "xpagdWz3Yes", "url": "https://www.youtube.com/watch?v=xpagdWz3Yes", "title": "Stay Safe 16: Seismic Retrofit Your Home - Part 1 of 2", "oembed_status": 200}],
+  "rules": ["Public markdown images use ../assets/images/posts/*.webp only", "No CloudFront URLs", "Illustrative frames are labeled in alt text", "Free image sources first; no paid media credits"],
+  "notes": "Reused and regraded existing repo stills. No paid image generation."
+}
