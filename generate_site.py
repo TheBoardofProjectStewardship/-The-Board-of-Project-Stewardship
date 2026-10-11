@@ -3213,8 +3213,27 @@ def posts_matching_place(place_slug: str, posts: list[dict], limit: int = 4) -> 
     return hits
 
 
+def _related_post_href(out_name: str, prefix: str) -> str:
+    """Href from a generated page to another file in ``posts/``.
+
+    Post pages pass ``prefix="../"`` so site-root links (``../permits.html``)
+    resolve from ``/posts/<slug>.html``. Another post is a sibling in that
+    same directory, so the href is the bare filename. Prepending ``../``
+    resolves to ``/<slug>.html`` at the site root and 404s.
+    """
+    if prefix in ("../", ".."):
+        return out_name
+    base = prefix or "./"
+    if not base.endswith("/"):
+        base += "/"
+    return f"{base}posts/{out_name}"
+
+
 def related_guides_for_post(post: dict, posts: list[dict], prefix: str = "../") -> list[tuple[str, str]]:
-    """Other published posts that share this post's city or category."""
+    """Other published posts that share this post's city or category.
+
+    Links are sibling filenames under ``posts/`` (see ``_related_post_href``).
+    """
     own = post.get("out_name") or ""
     slug = (post.get("slug") or "").lower()
     city = ""
@@ -3231,7 +3250,7 @@ def related_guides_for_post(post: dict, posts: list[dict], prefix: str = "../") 
         if not name or name == own or name in seen:
             return
         seen.add(name)
-        picked.append((other["title"], f"{prefix}{name}"))
+        picked.append((other["title"], _related_post_href(name, prefix)))
 
     if city:
         for other in posts:
