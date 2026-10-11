@@ -1,0 +1,15 @@
+{
+  "producer": "openclaw",
+  "agent": "seo-specialist",
+  "slug": "earthquake-home-retrofit-seattle-wa",
+  "title": "Earthquake Home Retrofit Seattle WA — SDCI's Prescriptive Plan Set, Cripple Walls & Foundation Bolting",
+  "description": "A homeowner's guide to a voluntary earthquake retrofit in Seattle: what SDCI's Earthquake Home Retrofit Permit covers, the eligibility questions on Sheet S0, how the anchor-brace-connect work is done in a crawlspace or basement, when you need an engineer instead, and how to verify a contractor.",
+  "category": "Permits",
+  "keywords": ["earthquake home retrofit Seattle", "Seattle seismic retrofit permit", "SDCI prescriptive retrofit plan set", "cripple wall bracing Seattle", "foundation bolting Seattle WA", "Project Impact Seattle"],
+  "outline": ["Key Takeaways", "Why older Seattle houses are the focus", "What the permit program actually offers", "Does your house qualify? Sheet S0, Table 1", "Anchor, brace, connect: what the work looks like", "Preparing the plan set and applying", "When you need an engineer instead", "Materials Worth Knowing", "How to shortlist and verify contractors", "Where Pacific Pro Group fits", "Next steps for a Seattle retrofit"],
+  "search_intent": "A Seattle homeowner with an older wood-frame house wants to know whether it qualifies for the city's prescriptive earthquake retrofit permit, what the work involves, and how to apply.",
+  "local_angles": ["SDCI Earthquake Home Retrofit Permit (formerly Project Impact), reduced fees, ~2-week initial review", "Sheet S0 Table 1 eligibility (11 questions)", "Cripple wall max 7 ft, braced panel min 2 ft", "Engineered alternative via subject-to-field-inspection permit; substantial alteration trigger"],
+  "internal_links": ["../seattle.html", "../permits.html", "../verify-contractor.html"],
+  "notes": "Box-authored fallback brief. PPG only as Board #1 -> https://pacificprogroup.com/.",
+  "generation": {"agent": "box-authored", "mode": "box-fallback"}
+}

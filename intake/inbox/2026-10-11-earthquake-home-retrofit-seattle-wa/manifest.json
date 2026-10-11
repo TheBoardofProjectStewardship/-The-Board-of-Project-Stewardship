@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-10-11-earthquake-home-retrofit-seattle-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-10-11T17:30:00Z",
+  "target": {"site": "https://boardofprojectstewardship.com/", "content_type": "blog-post"},
+  "roles": {"assembler": "chief-of-staff", "draft": "ollama", "sources": "hermes", "seo": "openclaw", "media": "grok-build"},
+  "post": {
+    "title": "Earthquake Home Retrofit Seattle WA — SDCI's Prescriptive Plan Set, Cripple Walls & Foundation Bolting",
+    "date": "2026-10-11",
+    "slug": "earthquake-home-retrofit-seattle-wa",
+    "description": "A homeowner's guide to a voluntary earthquake retrofit in Seattle: what SDCI's Earthquake Home Retrofit Permit covers, the eligibility questions on Sheet S0, how the anchor-brace-connect work is done in a crawlspace or basement, when you need an engineer instead, and how to verify a contractor.",
+    "category": "Permits"
+  },
+  "artifacts": {"draft": "draft.md", "sources": "sources.json", "seo": "seo.json", "media": "media.json"},
+  "notes": "Box-authored fallback. Home PC (DESKTOP-B69F181) disconnected at the 09:28 wake and still offline at 10:20 PT re-check; no PC packets for 2026-10-11. Producer role fields kept per intake contract."
+}

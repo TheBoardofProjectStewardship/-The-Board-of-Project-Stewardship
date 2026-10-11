@@ -1,0 +1,19 @@
+{
+  "submission_id": "2026-10-11-earthquake-home-retrofit-seattle-wa",
+  "idempotency_key": "sha256:0374f2879d06631ed6cc82ae87fc149db8346d603e1754b2b4c37ad040f98b05",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-10-11T17:24:18Z",
+  "outputs": [
+    "assets/images/posts/2026-10-11-seattle-retrofit-1.webp",
+    "assets/images/posts/2026-10-11-seattle-retrofit-2.webp",
+    "assets/images/posts/2026-10-11-seattle-retrofit-3.webp",
+    "posts/2026-10-11-earthquake-home-retrofit-seattle-wa.md",
+    "posts/2026-10-11-earthquake-home-retrofit-seattle-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 67
+}
