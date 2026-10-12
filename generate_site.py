@@ -1326,7 +1326,8 @@ def apply_image_pass(html: str) -> str:
         else:
             is_first = state["first"]
             state["first"] = False
-        if rel and "srcset=" not in inner:
+        visualizer_still = bool(rel) and "assets/images/visualizer/" in rel.replace("\\", "/")
+        if rel and "srcset=" not in inner and not visualizer_still:
             variants = variant_rels(rel)
             sibling = ""
             if Path(rel).suffix.lower() in {".png", ".jpg", ".jpeg"}:
@@ -1560,6 +1561,7 @@ def nav_html(active: str = "", prefix: str = "") -> str:
         ("verify-contractor", href("verify-contractor.html"), "Verify"),
         ("how-we-rank", href("how-we-rank.html"), "How we rank"),
         ("blog", href("blog.html"), "Blog"),
+        ("plan-walkthrough", href("plan-walkthrough/"), "3D Walkthrough"),
     ]
     more_site = [
         ("about", href("about.html"), "About"),
@@ -1581,6 +1583,7 @@ def nav_html(active: str = "", prefix: str = "") -> str:
         ("faq", href("faq.html"), "FAQ"),
         ("adu", href("adu.html"), "Edmonds ADU"),
         ("contact", href("contact.html"), "Contact"),
+        ("privacy", href("privacy.html"), "Privacy"),
         ("steward", href("good-steward.html"), "Good Steward"),
         ("floor-plan-3d", href("floor-plan-3d.html"), "Floor Plan to 3D"),
         ("plan-walkthrough", href("plan-walkthrough/"), "Plan Walkthrough"),
@@ -1682,6 +1685,7 @@ def footer_html(prefix: str = "./", active: str = "", updated: str = "") -> str:
         ("stamp-of-trust", f"{prefix}stamp-of-trust/", "Stamp of Trust"),
         ("blog", f"{prefix}blog.html", "Blog"),
         ("contact", f"{prefix}contact.html", "Contact"),
+        ("privacy", f"{prefix}privacy.html", "Privacy"),
     ]
     directories = [
         ("additions", f"{prefix}additions.html", "Additions Top 30"),
@@ -1841,7 +1845,7 @@ POST_ROOT_HUB_STEMS = frozenset({
     "hiring-a-contractor", "how-we-rank", "verify-contractor", "learn", "directory",
     "adu", "adu-checklist", "change-orders", "coastal-waterproofing", "materials",
     "glossary", "contact", "about", "faq", "site-visit", "pm-dashboard",
-    "energy-credit", "build-walkthrough", "floor-plan-3d", "pascal-editor", "good-steward", "another-story",
+    "energy-credit", "build-walkthrough", "floor-plan-3d", "pascal-editor", "good-steward", "another-story", "privacy",
     "kitchen", "bathrooms", "additions", "custom-homes", "edmonds-custom-homes",
     "trades", "blog", "index", "windows", "roofing", "insulation", "siding",
     "commercial", "spec-homes", "videos", "write", "bid-comparison",
@@ -3386,7 +3390,7 @@ def ppg_widgets_html(prefix: str = "") -> str:
         </div>
         <div class="bg-charcoal border border-white/10 rounded-xl p-6">
           <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-trophy text-secondary"></i> Directory #1</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed mb-4">The Board ranks <strong class="text-white font-semibold">Pacific Pro Group</strong> #1 for remodel and additions across King County, Snohomish County, and Seattle. Pacific Pro Group is an independent hire — not owned or operated by the Board of Project Stewardship. Outbound only; re-verify at WA L&amp;I before any deposit.</p>
+          <p id="independence-disclosure" class="text-sm text-slate-400 font-light leading-relaxed mb-4">The Board ranks <strong class="text-white font-semibold">Pacific Pro Group</strong> #1 for remodel and additions across King County, Snohomish County, and Seattle. Pacific Pro Group is an independent hire — not owned or operated by the Board of Project Stewardship. Outbound only; re-verify at WA L&amp;I before any deposit.</p>
           <a href="{PPG['url']}" target="_blank" rel="noopener" class="inline-flex w-full items-center justify-center gap-2 bg-primary text-white py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs mb-4">
             View Pacific Pro Group (directory #1) <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
           </a>
@@ -3472,235 +3476,423 @@ def ppg_widgets_script() -> str:
 # ---------- Page builders ----------
 
 def home_plan_hero() -> tuple[str, str]:
-    """White homepage hero. CSS dollhouse only — the 3D library stays on the plan page."""
-    html_block = f"""  <section class="plan-home-hero" id="plan-home-hero" aria-labelledby="plan-home-title">
-    <div class="plan-home-grid">
-      <div class="plan-home-copy">
-        <p class="plan-home-kicker">{GEO_KICKER_HTML}</p>
-        <h1 id="plan-home-title">Walk through a home in 3D</h1>
-        <p class="plan-home-dek">Trace a builder plan, watch the walls rise, and step inside Cedar Lane House, a two-storey sample. Illustration only. Confirm the drawing with your builder, architect, or the permit set. Not for construction.</p>
-        <div class="plan-home-ctas">
-          <a class="plan-home-btn" href="./plan-walkthrough/">Walk through a home in 3D</a>
-          <a class="plan-home-text" href="./directory.html">Browse directories</a>
-        </div>
+    """Homepage concept tool. The 3D walkthrough stays on its own page."""
+    cities = [
+        "Seattle",
+        "Edmonds",
+        "Shoreline",
+        "Lynnwood",
+        "Mountlake Terrace",
+        "Bothell",
+        "Kirkland",
+        "Bellevue",
+        "Mercer Island",
+        "Everett",
+        "Mukilteo",
+        "Mill Creek",
+        "Lake Forest Park",
+        "Redmond",
+        "Other",
+    ]
+    city_options = "\n".join(
+        f'              <option value="{esc(city)}">{esc(city)}</option>' for city in cities
+    )
+    license_chip = f"WA License {PPG['license']}"
+    html_block = f"""  <section class="see-project" id="plan-home-hero" aria-labelledby="see-project-title" data-api-base="" data-maps-key="" data-turnstile-sitekey="">
+    <div class="see-project-inner">
+      <div class="see-stepper" role="tablist" aria-label="Steps">
+        <button type="button" class="see-stepper-btn" id="see-stepper-photo" role="tab" aria-selected="true" aria-controls="see-flow-photo" data-flow="photo">1 Photo</button>
+        <button type="button" class="see-stepper-btn" id="see-stepper-project" role="tab" aria-selected="false" aria-controls="see-flow-project" data-flow="project">2 Project</button>
+        <button type="button" class="see-stepper-btn" id="see-stepper-see" role="tab" aria-selected="false" aria-controls="see-result" data-flow="preview">3 Preview</button>
+        <button type="button" class="see-stepper-btn" id="see-stepper-request" role="tab" aria-selected="false" aria-controls="see-lead" data-flow="request">4 Request</button>
       </div>
-      <a class="plan-home-stage" href="./plan-walkthrough/" aria-label="Walk through a home in 3D">
-        <span class="ph-sheet" aria-hidden="true">
-          <i class="ph-trace a"></i>
-          <i class="ph-trace b"></i>
-          <i class="ph-trace c"></i>
-          <i class="ph-trace d"></i>
-        </span>
-        <span class="ph-build" aria-hidden="true">
-          <span class="ph-roof"></span>
-          <span class="ph-floor upper"><i></i><i class="win"></i><i></i></span>
-          <span class="ph-floor main"><i></i><i class="door"></i><i></i><i></i></span>
-        </span>
-        <span class="ph-caption">Cedar Lane House</span>
-      </a>
+      <div class="see-hero" id="see-hero">
+        <div class="see-hero-copy">
+          <p class="see-kicker">{GEO_KICKER_HTML}</p>
+          <h1 id="see-project-title">See what your home could become.</h1>
+          <p class="see-dek">Upload a photo of your house, kitchen or bathroom and explore a concept for your addition or remodel.</p>
+          <p class="see-note">No email or phone required for your first preview.</p>
+          <div class="see-tabs" role="tablist" aria-label="Project type">
+            <button type="button" class="see-tab" id="see-tab-addition" role="tab" aria-selected="true" aria-controls="see-panel-addition" data-mode="addition">Addition</button>
+            <button type="button" class="see-tab" id="see-tab-kitchen" role="tab" aria-selected="false" tabindex="-1" aria-controls="see-panel-kitchen" data-mode="kitchen">Kitchen</button>
+            <button type="button" class="see-tab" id="see-tab-bathroom" role="tab" aria-selected="false" tabindex="-1" aria-controls="see-panel-bathroom" data-mode="bathroom">Bathroom</button>
+          </div>
+          <div id="see-flow-photo" class="see-flow-panel" role="tabpanel" aria-labelledby="see-stepper-photo">
+            <div class="see-drop" id="see-drop">
+              <p class="see-drop-title">Choose a photo of your house or room.</p>
+              <p id="see-photo-tip" class="see-fine">Straight-on curbside photo. JPEG, PNG, or WebP, up to 8 MB.</p>
+              <label class="see-btn see-file-btn" id="see-file-label" for="see-file"><span id="see-file-label-text">Upload my photo</span>
+                <input id="see-file" class="see-file" type="file" accept="image/jpeg,image/png,image/webp" capture="environment">
+              </label>
+              <div id="see-preview" class="see-preview" hidden></div>
+            </div>
+            <p id="see-photo-notice" class="see-fine">Embedded photo metadata is removed. Details visible in the photo remain.</p>
+            <label class="see-check" id="see-attest-wrap" for="see-attest" hidden>
+              <input id="see-attest" type="checkbox" value="yes">
+              <span>I took this photo, or I have permission to upload it.</span>
+            </label>
+            <div class="see-actions">
+              <button type="button" class="see-btn" id="see-to-project" hidden>Next: choose your project</button>
+            </div>
+          </div>
+          <div id="see-flow-project" class="see-flow-panel" role="tabpanel" aria-labelledby="see-stepper-project" hidden>
+            <h2>What should change?</h2>
+            <div id="see-panel-addition" role="tabpanel" aria-labelledby="see-tab-addition" data-mode-panel="addition">
+              <div class="see-selects">
+                <label class="see-field" for="see-addition-type"><span>Addition</span>
+                  <select id="see-addition-type">
+                    <option value="Second story" selected>Second story</option>
+                    <option value="Partial second story">Partial second story</option>
+                    <option value="Dormer">Dormer</option>
+                    <option value="Bump-out">Bump-out</option>
+                    <option value="ADU">ADU</option>
+                    <option value="Garage conversion">Garage conversion</option>
+                    <option value="Porch">Porch</option>
+                  </select>
+                </label>
+                <label class="see-field" for="see-addition-style"><span>Style</span>
+                  <select id="see-addition-style">
+                    <option value="Match existing" selected>Match existing</option>
+                    <option value="Northwest contemporary">Northwest contemporary</option>
+                    <option value="Craftsman">Craftsman</option>
+                    <option value="Modern farmhouse">Modern farmhouse</option>
+                  </select>
+                </label>
+                <label class="see-field" for="see-roof"><span>Roof</span>
+                  <select id="see-roof">
+                    <option value="Match" selected>Match existing</option>
+                    <option value="Gable">Gable</option>
+                    <option value="Shed">Shed</option>
+                    <option value="Flat">Flat</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+            <div id="see-panel-kitchen" role="tabpanel" aria-labelledby="see-tab-kitchen" data-mode-panel="kitchen" hidden>
+              <div class="see-selects">
+                <label class="see-field" for="see-kitchen-scope"><span>Kitchen scope</span>
+                  <select id="see-kitchen-scope">
+                    <option value="refresh" selected>Refresh</option>
+                    <option value="full-same">Full remodel, same layout</option>
+                    <option value="layout-change">Layout change</option>
+                  </select>
+                </label>
+                <label class="see-field" for="see-kitchen-style"><span>Style</span>
+                  <select id="see-kitchen-style">
+                    <option value="Northwest modern" selected>Northwest modern</option>
+                    <option value="Warm wood / Scandinavian">Warm wood / Scandinavian</option>
+                    <option value="Transitional">Transitional</option>
+                    <option value="Modern farmhouse">Modern farmhouse</option>
+                    <option value="Classic white">Classic white</option>
+                    <option value="Spa">Spa</option>
+                  </select>
+                </label>
+              </div>
+              <p id="see-layout-flag" class="see-fine" hidden>Layout change may involve structure, plumbing, electrical and permits.</p>
+            </div>
+            <div id="see-panel-bathroom" role="tabpanel" aria-labelledby="see-tab-bathroom" data-mode-panel="bathroom" hidden>
+              <div class="see-selects">
+                <label class="see-field" for="see-bath-scope"><span>Bathroom scope</span>
+                  <select id="see-bath-scope">
+                    <option value="refresh" selected>Refresh</option>
+                    <option value="full">Full remodel</option>
+                    <option value="tub-to-shower">Tub-to-shower conversion</option>
+                    <option value="curbless">Curbless walk-in shower</option>
+                    <option value="double-vanity">Double vanity</option>
+                  </select>
+                </label>
+                <label class="see-field" for="see-bath-style"><span>Style</span>
+                  <select id="see-bath-style">
+                    <option value="Northwest modern" selected>Northwest modern</option>
+                    <option value="Warm wood / Scandinavian">Warm wood / Scandinavian</option>
+                    <option value="Transitional">Transitional</option>
+                    <option value="Modern farmhouse">Modern farmhouse</option>
+                    <option value="Classic white">Classic white</option>
+                    <option value="Spa">Spa</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+            <div class="see-selects">
+              <label class="see-field" for="see-color"><span id="see-color-legend">Color direction (optional)</span>
+                <select id="see-color">
+                  <option value="No preference" selected>No preference</option>
+                  <option value="White">White</option>
+                  <option value="Warm wood">Warm wood</option>
+                  <option value="Sage">Sage</option>
+                  <option value="Navy">Navy</option>
+                  <option value="Black">Black</option>
+                </select>
+              </label>
+              <label class="see-field" for="see-note"><span>Anything you want to keep? (optional, 140 characters)</span>
+                <input id="see-note" type="text" maxlength="140" placeholder="Example: keep the front porch">
+              </label>
+            </div>
+            <div class="see-actions">
+              <button type="button" class="see-btn" id="see-render">See concept</button>
+            </div>
+          </div>
+          <noscript>
+            <div class="see-fallback">
+              <p>The concept preview needs JavaScript. Email <a href="mailto:{EDITORIAL_EMAIL}">{EDITORIAL_EMAIL}</a> or use the <a href="./contact.html">contact page</a>. Include the city and what you want to explore. This desk does not dispatch a crew.</p>
+            </div>
+          </noscript>
+        </div>
+        <figure class="see-stage" id="see-sample">
+          <div class="see-compare" data-sample="addition">
+            <div class="see-compare-frame" id="see-sample-frame-addition">
+              <picture>
+                <source type="image/webp" srcset="./assets/images/visualizer/exterior-after-800.webp 800w, ./assets/images/visualizer/exterior-after.webp 1600w" sizes="(max-width: 960px) 100vw, 680px">
+                <img class="see-compare-after" src="./assets/images/visualizer/exterior-after.jpg" alt="Sample — illustrative. Two-story concept of the same house. Not a Pacific Pro Group project." width="1600" height="1075">
+              </picture>
+              <picture>
+                <source type="image/webp" srcset="./assets/images/visualizer/exterior-before-800.webp 800w, ./assets/images/visualizer/exterior-before.webp 1600w" sizes="(max-width: 960px) 100vw, 680px">
+                <img class="see-compare-before" src="./assets/images/visualizer/exterior-before.jpg" alt="Sample — illustrative. The same house before a second story. Not a Pacific Pro Group project." width="1600" height="1075" data-defer-lcp>
+              </picture>
+              <p class="see-tag see-tag-before">Before</p>
+              <p class="see-tag see-tag-after">Concept</p>
+              <span class="see-handle" aria-hidden="true"></span>
+              <label class="see-range see-range-overlay" for="see-sample-range-addition"><span class="see-sr">Drag to compare. Use arrow keys to move the handle.</span>
+                <input id="see-sample-range-addition" data-range="see-sample-frame-addition" type="range" min="0" max="100" value="50" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+              </label>
+            </div>
+          </div>
+          <div class="see-compare" data-sample="kitchen" hidden>
+            <div class="see-compare-frame" id="see-sample-frame-kitchen">
+              <picture>
+                <source type="image/webp" srcset="./assets/images/visualizer/kitchen-after.webp">
+                <img class="see-compare-after" src="./assets/images/visualizer/kitchen-after.jpg" alt="Sample — illustrative. The same kitchen after a remodel concept. Not a Pacific Pro Group project." width="1600" height="1075" data-defer-lcp>
+              </picture>
+              <picture>
+                <source type="image/webp" srcset="./assets/images/visualizer/kitchen-before.webp">
+                <img class="see-compare-before" src="./assets/images/visualizer/kitchen-before.jpg" alt="Sample — illustrative. The same kitchen before a remodel concept. Not a Pacific Pro Group project." width="1600" height="1075" data-defer-lcp>
+              </picture>
+              <p class="see-tag see-tag-before">Before</p>
+              <p class="see-tag see-tag-after">Concept</p>
+              <span class="see-handle" aria-hidden="true"></span>
+              <label class="see-range see-range-overlay" for="see-sample-range-kitchen"><span class="see-sr">Drag to compare. Use arrow keys to move the handle.</span>
+                <input id="see-sample-range-kitchen" data-range="see-sample-frame-kitchen" type="range" min="0" max="100" value="50" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+              </label>
+            </div>
+          </div>
+          <div class="see-compare" data-sample="bathroom" hidden>
+            <div class="see-compare-frame" id="see-sample-frame-bathroom">
+              <picture>
+                <source type="image/webp" srcset="./assets/images/visualizer/bathroom-after.webp">
+                <img class="see-compare-after" src="./assets/images/visualizer/bathroom-after.jpg" alt="Sample — illustrative. The same bathroom after a remodel concept. Not a Pacific Pro Group project." width="1600" height="1075" data-defer-lcp>
+              </picture>
+              <picture>
+                <source type="image/webp" srcset="./assets/images/visualizer/bathroom-before.webp">
+                <img class="see-compare-before" src="./assets/images/visualizer/bathroom-before.jpg" alt="Sample — illustrative. The same bathroom before a remodel concept. Not a Pacific Pro Group project." width="1600" height="1075" data-defer-lcp>
+              </picture>
+              <p class="see-tag see-tag-before">Before</p>
+              <p class="see-tag see-tag-after">Concept</p>
+              <span class="see-handle" aria-hidden="true"></span>
+              <label class="see-range see-range-overlay" for="see-sample-range-bathroom"><span class="see-sr">Drag to compare. Use arrow keys to move the handle.</span>
+                <input id="see-sample-range-bathroom" data-range="see-sample-frame-bathroom" type="range" min="0" max="100" value="50" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+              </label>
+            </div>
+          </div>
+          <figcaption class="see-caption">Sample — illustrative. Not a Pacific Pro Group project.</figcaption>
+          <p class="see-drag-hint">Drag to compare.</p>
+        </figure>
+      </div>
+      <p id="see-status" class="see-status" role="status" aria-live="polite"></p>
+      <div id="see-result" class="see-result" hidden>
+        <h2>Concept preview</h2>
+        <p class="see-fine">Sample — illustrative. Not a Pacific Pro Group project. This is not a concept of your photo.</p>
+        <p class="see-fine">Concept only. Structure, setbacks, permits and cost need separate review.</p>
+        <div class="see-compare">
+          <div class="see-compare-frame" id="see-result-frame">
+            <img id="see-result-after" class="see-compare-after" alt="Concept picture. Empty until a sample is ready." width="1600" height="1075" data-defer-lcp>
+            <img id="see-result-before" class="see-compare-before" alt="Before picture. Empty until a sample is ready." width="1600" height="1075" data-defer-lcp>
+            <p class="see-tag see-tag-before">Before</p>
+            <p class="see-tag see-tag-after">Concept</p>
+            <span class="see-handle" aria-hidden="true"></span>
+            <label class="see-range see-range-overlay" for="see-result-range"><span class="see-sr">Drag to compare. Use arrow keys to move the handle.</span>
+              <input id="see-result-range" data-range="see-result-frame" type="range" min="0" max="100" value="50" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+            </label>
+          </div>
+        </div>
+        <p class="see-trust">Your request goes to <strong>Pacific Pro Group</strong> (WA contractor registration PACIFPG765OF). Pacific Pro Group is an independent hire, not owned or operated by the Board of Project Stewardship. <a href="{LNI_URL}" target="_blank" rel="noopener">Check the registration at WA L&amp;I</a> · <a href="#independence-disclosure">Independence disclosure</a>.</p>
+        <div class="see-actions">
+          <button type="button" class="see-btn" id="see-unlock">Request a consultation</button>
+        </div>
+        <p class="see-learn-row"><a id="see-learn-link" href="./home-addition-planning.html">Home addition planning</a></p>
+      </div>
+      <div id="see-lead" class="see-lead" hidden>
+        <p class="see-fine">A request goes to Pacific Pro Group only after you submit and check the sharing box.</p>
+        <form id="see-lead-form" action="#" method="post" onsubmit="event.preventDefault()">
+          <input class="see-hp" tabindex="-1" autocomplete="off" name="company_website" aria-hidden="true" value="">
+          <input type="hidden" name="consent_text_version" value="2026-10-11.1">
+          <input type="hidden" name="mode" id="see-mode-field" value="addition">
+          <input type="hidden" name="turnstile_token" id="see-turnstile" value="">
+          <input type="hidden" name="place_id" id="see-place-id" value="">
+          <input type="hidden" name="render_ids" id="see-render-ids" value="">
+          <input type="hidden" name="model_used" id="see-model-used" value="">
+          <input type="hidden" name="prompt_options" id="see-prompt-options" value="">
+          <input type="hidden" name="utm_source" id="see-utm-source" value="">
+          <input type="hidden" name="utm_medium" id="see-utm-medium" value="">
+          <input type="hidden" name="utm_campaign" id="see-utm-campaign" value="">
+          <input type="hidden" name="referrer" id="see-referrer" value="">
+          <input type="hidden" name="landing_page" id="see-landing" value="">
+          <input type="hidden" name="timestamp_pt" id="see-timestamp-pt" value="">
+          <input type="hidden" name="checkbox_state" id="see-checkbox-state" value="">
+          <input type="hidden" name="project_types" id="see-project-types" value="">
+          <input type="hidden" name="timeline" id="see-timeline" value="">
+          <input type="hidden" name="budget" id="see-budget" value="">
+          <input type="hidden" name="relationship" id="see-relationship" value="">
+          <input type="hidden" name="plans" id="see-plans" value="">
+          <input type="hidden" name="contact_pref" id="see-contact-pref" value="">
+          <input type="hidden" name="best_time" id="see-best-time" value="">
+          <div id="see-step-1" class="see-step">
+            <h2 id="see-step-1-title" tabindex="-1">Your project</h2>
+            <div id="see-step-errors" class="see-fallback" hidden role="alert"></div>
+            <p class="see-legend">Project type</p>
+            <div class="see-chips" role="group" aria-label="Project type">
+              <button type="button" class="see-chip" data-group="project-type" data-multi="true" data-value="Second story" aria-pressed="true">Second story</button>
+              <button type="button" class="see-chip" data-group="project-type" data-multi="true" data-value="Partial second story" aria-pressed="false">Partial second story</button>
+              <button type="button" class="see-chip" data-group="project-type" data-multi="true" data-value="Home addition / bump-out" aria-pressed="false">Home addition / bump-out</button>
+              <button type="button" class="see-chip" data-group="project-type" data-multi="true" data-value="ADU" aria-pressed="false">ADU</button>
+              <button type="button" class="see-chip" data-group="project-type" data-multi="true" data-value="Dormer" aria-pressed="false">Dormer</button>
+              <button type="button" class="see-chip" data-group="project-type" data-multi="true" data-value="Garage conversion" aria-pressed="false">Garage conversion</button>
+              <button type="button" class="see-chip" data-group="project-type" data-multi="true" data-value="Kitchen remodel" aria-pressed="false">Kitchen remodel</button>
+              <button type="button" class="see-chip" data-group="project-type" data-multi="true" data-value="Bathroom remodel" aria-pressed="false">Bathroom remodel</button>
+              <button type="button" class="see-chip" data-group="project-type" data-multi="true" data-value="Whole-home remodel" aria-pressed="false">Whole-home remodel</button>
+              <button type="button" class="see-chip" data-group="project-type" data-multi="true" data-value="Other" aria-pressed="false">Other</button>
+            </div>
+            <p class="see-legend">Timeline to start</p>
+            <div class="see-chips" role="group" aria-label="Timeline to start">
+              <button type="button" class="see-chip" data-group="timeline" data-value="Within 3 months" aria-pressed="false">Within 3 months</button>
+              <button type="button" class="see-chip" data-group="timeline" data-value="3–6 months" aria-pressed="false">3–6 months</button>
+              <button type="button" class="see-chip" data-group="timeline" data-value="6–12 months" aria-pressed="false">6–12 months</button>
+              <button type="button" class="see-chip" data-group="timeline" data-value="12+ months" aria-pressed="false">12+ months</button>
+              <button type="button" class="see-chip" data-group="timeline" data-value="Just exploring" aria-pressed="false">Just exploring</button>
+            </div>
+            <p class="see-legend">Your rough budget, which helps us prepare</p>
+            <div class="see-chips" role="group" aria-label="Your rough budget, which helps us prepare">
+              <button type="button" class="see-chip" data-group="budget" data-value="Under $50k" aria-pressed="false">Under $50k</button>
+              <button type="button" class="see-chip" data-group="budget" data-value="$50k–$100k" aria-pressed="false">$50k–$100k</button>
+              <button type="button" class="see-chip" data-group="budget" data-value="$100k–$250k" aria-pressed="false">$100k–$250k</button>
+              <button type="button" class="see-chip" data-group="budget" data-value="$250k–$500k" aria-pressed="false">$250k–$500k</button>
+              <button type="button" class="see-chip" data-group="budget" data-value="$500k+" aria-pressed="false">$500k+</button>
+              <button type="button" class="see-chip" data-group="budget" data-value="Not sure yet" aria-pressed="false">Not sure yet</button>
+            </div>
+            <p class="see-legend">Your relationship to the property</p>
+            <div class="see-chips" role="group" aria-label="Your relationship to the property">
+              <button type="button" class="see-chip" data-group="relationship" data-value="I own it" aria-pressed="false">I own it</button>
+              <button type="button" class="see-chip" data-group="relationship" data-value="Buying it" aria-pressed="false">Buying it</button>
+              <button type="button" class="see-chip" data-group="relationship" data-value="Renting" aria-pressed="false">Renting</button>
+              <button type="button" class="see-chip" data-group="relationship" data-value="Other" aria-pressed="false">Other</button>
+            </div>
+            <p class="see-legend">Plans so far (optional)</p>
+            <div class="see-chips" role="group" aria-label="Plans so far">
+              <button type="button" class="see-chip" data-group="plans" data-value="Just ideas" aria-pressed="false">Just ideas</button>
+              <button type="button" class="see-chip" data-group="plans" data-value="Have sketches/photos" aria-pressed="false">Have sketches/photos</button>
+              <button type="button" class="see-chip" data-group="plans" data-value="Working with an architect/designer" aria-pressed="false">Working with an architect/designer</button>
+              <button type="button" class="see-chip" data-group="plans" data-value="Have drawings/permit set" aria-pressed="false">Have drawings/permit set</button>
+            </div>
+            <div id="see-places" hidden>
+              <label class="see-field" for="see-places-input"><span>Address</span>
+                <input id="see-places-input" type="text" autocomplete="street-address" placeholder="Start typing an address">
+              </label>
+              <div id="see-places-host"></div>
+              <p id="see-powered-by" class="see-powered" hidden>Google Maps</p>
+            </div>
+            <div id="see-streetview" hidden>
+              <p class="see-fine">Is this your house? Street View is shown unmodified. It is not sent with your photo.</p>
+              <iframe id="see-streetview-frame" title="Street View near this address" loading="lazy" referrerpolicy="strict-origin" style="width:100%;height:220px;border:0;border-radius:12px;background:#e7e2d8"></iframe>
+            </div>
+            <div id="see-address-plain">
+              <label class="see-field" id="see-lead-address-wrap" for="see-lead-address"><span>Property address (optional)</span>
+                <input id="see-lead-address" name="address" type="text" autocomplete="street-address" placeholder="Street, city, Washington">
+              </label>
+            </div>
+            <label class="see-field" for="see-city"><span>City</span>
+              <select id="see-city" name="city">
+              <option value="">Choose a city</option>
+{city_options}
+              </select>
+            </label>
+            <label class="see-field" for="see-zip"><span>ZIP</span>
+              <input id="see-zip" name="zip" type="text" inputmode="numeric" maxlength="5" autocomplete="postal-code" pattern="[0-9]{{5}}">
+            </label>
+            <button type="button" class="see-btn" id="see-to-step-2">Continue</button>
+          </div>
+          <div id="see-step-2" class="see-step" hidden>
+            <h2 id="see-step-2-title" tabindex="-1">How to reach you</h2>
+            <div id="see-turnstile-widget"></div>
+            <label class="see-field" for="see-name"><span>First and last name</span>
+              <input id="see-name" name="name" type="text" autocomplete="name" required>
+            </label>
+            <label class="see-field" for="see-email"><span>Email</span>
+              <input id="see-email" name="email" type="email" autocomplete="email" required>
+            </label>
+            <label class="see-field" for="see-phone"><span>Phone (optional)</span>
+              <input id="see-phone" name="phone" type="tel" autocomplete="tel">
+            </label>
+            <p class="see-legend">Preferred contact</p>
+            <div class="see-chips" role="group" aria-label="Preferred contact">
+              <button type="button" class="see-chip" data-group="contact-pref" data-value="Email" aria-pressed="true">Email</button>
+              <button type="button" class="see-chip" data-group="contact-pref" data-value="Phone call" aria-pressed="false">Phone call</button>
+              <button type="button" class="see-chip" data-group="contact-pref" data-value="Text" aria-pressed="false">Text</button>
+            </div>
+            <p class="see-legend">Best time</p>
+            <div class="see-chips" role="group" aria-label="Best time">
+              <button type="button" class="see-chip" data-group="best-time" data-value="Mornings" aria-pressed="false">Mornings</button>
+              <button type="button" class="see-chip" data-group="best-time" data-value="Afternoons" aria-pressed="false">Afternoons</button>
+              <button type="button" class="see-chip" data-group="best-time" data-value="Evenings" aria-pressed="false">Evenings</button>
+              <button type="button" class="see-chip" data-group="best-time" data-value="Weekends" aria-pressed="false">Weekends</button>
+            </div>
+            <label class="see-field" for="see-else"><span>Anything else? (optional, 500 characters)</span>
+              <textarea id="see-else" name="note" maxlength="500"></textarea>
+            </label>
+            <label class="see-field" for="see-more-photos"><span>Add more photos (optional, up to 5)</span>
+              <input id="see-more-photos" name="more_photos" type="file" accept="image/jpeg,image/png,image/webp" multiple>
+            </label>
+            <label class="see-check" for="see-consent-share">
+              <input id="see-consent-share" name="consent_share" type="checkbox" value="yes" required>
+              <span>I ask Board of Project Stewardship to send my project request, contact details, property address, and selected photos and concepts to <strong>Pacific Pro Group</strong> (WA contractor registration PACIFPG765OF), so it can contact me about this project using my selected contact method. This request goes to Pacific Pro Group only. <a href="./privacy.html">Privacy</a> · <a href="#independence-disclosure">Independence disclosure</a>.</span>
+            </label>
+            <label class="see-check" id="see-text-consent" for="see-consent-text" hidden>
+              <input id="see-consent-text" name="consent_text" type="checkbox" value="yes">
+              <span>By checking this box and submitting, I electronically sign and agree to receive text messages from Pacific Pro Group at the number I provided about this project, including offers for its services, using automated technology. Consent is optional and is not a condition of purchase. Message frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out or HELP for help. Texting is not turned on until that program is ready. <a href="./privacy.html">Privacy</a>.</span>
+            </label>
+            <label class="see-check" for="see-consent-news">
+              <input id="see-consent-news" name="consent_newsletter" type="checkbox" value="yes">
+              <span>Email me Board of Project Stewardship planning guides and updates. Unsubscribe at any time.</span>
+            </label>
+            <button type="submit" class="see-btn" id="see-lead-submit">Send request</button>
+            <button type="button" class="see-btn-secondary" id="see-back-step">Back</button>
+            <p id="see-demo-success" class="see-fallback" hidden>Nothing was sent. Use the contact page while the concept service is not connected.</p>
+          </div>
+        </form>
+      </div>
     </div>
-    <nav class="plan-home-jumps" aria-label="Start here">
-      <a href="./plan-walkthrough/">Plan to 3D</a>
-      <a href="./directory.html">Directories</a>
-      <a href="./verify-contractor.html">Verify a contractor</a>
-      <a href="./how-we-rank.html">How we rank</a>
-      <a href="./good-steward.html">Good Steward</a>
-    </nav>
+    <script>
+    (function () {{
+      var root = document.getElementById("plan-home-hero");
+      if (!root) return;
+      function load() {{
+        if (root.getAttribute("data-js") === "1") return;
+        root.setAttribute("data-js", "1");
+        var s = document.createElement("script");
+        s.type = "module";
+        s.src = "/assets/js/visualizer.js";
+        document.body.appendChild(s);
+      }}
+      if (!("IntersectionObserver" in window)) {{ load(); return; }}
+      var io = new IntersectionObserver(function (entries) {{
+        for (var i = 0; i < entries.length; i++) {{
+          if (entries[i].isIntersecting) {{ load(); io.disconnect(); break; }}
+        }}
+      }}, {{ rootMargin: "240px" }});
+      io.observe(root);
+    }})();
+    </script>
   </section>"""
-    css = """  <style>
-    .plan-home-hero {
-      background: linear-gradient(180deg, #ffffff 0%, #f4f0e8 100%);
-      color: #0f172a;
-      padding: 1.25rem 1rem 1.1rem;
-    }
-    .plan-home-grid {
-      max-width: 72rem;
-      margin: 0 auto;
-      display: grid;
-      gap: 1.25rem;
-      align-items: center;
-    }
-    .plan-home-kicker {
-      margin: 0;
-      color: #0e7490;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-    .plan-home-hero h1 {
-      margin: 0.45rem 0 0;
-      max-width: 12ch;
-      color: #0f172a;
-      font-family: Inter, system-ui, sans-serif;
-      font-weight: 700;
-      font-size: clamp(2.05rem, 8vw, 3.5rem);
-      line-height: 1.02;
-      letter-spacing: -0.03em;
-    }
-    .plan-home-dek {
-      margin: 0.85rem 0 0;
-      max-width: 42rem;
-      color: #334155;
-      font-size: 1rem;
-      line-height: 1.55;
-    }
-    .plan-home-ctas {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0.85rem 1.25rem;
-      margin-top: 1.15rem;
-    }
-    .plan-home-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 3rem;
-      padding: 0.8rem 1.15rem;
-      border-radius: 999px;
-      background: #0f172a;
-      color: #f8fafc;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 0.98rem;
-      box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.55);
-    }
-    .plan-home-btn:hover { background: #1e293b; }
-    .plan-home-text {
-      color: #0f172a;
-      font-weight: 700;
-      text-decoration: none;
-      border-bottom: 2px solid #22d3ee;
-      padding-bottom: 0.1rem;
-    }
-    .plan-home-hero a:focus-visible {
-      outline: 2px solid #0891b2;
-      outline-offset: 3px;
-    }
-    .plan-home-stage {
-      position: relative;
-      display: block;
-      height: 16rem;
-      border-radius: 1.1rem;
-      overflow: hidden;
-      text-decoration: none;
-      background: #f4f0e8;
-      border: 1px solid rgba(15, 23, 42, 0.08);
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
-    }
-    .ph-sheet, .ph-build { position: absolute; inset: 0; }
-    .ph-trace {
-      position: absolute;
-      height: 2px;
-      background: #22d3ee;
-      transform-origin: left center;
-      transform: scaleX(0);
-      animation: ph-draw 0.7s ease forwards;
-    }
-    .ph-trace.a { left: 16%; top: 38%; width: 46%; }
-    .ph-trace.b { left: 16%; top: 62%; width: 68%; animation-delay: 0.15s; }
-    .ph-trace.c, .ph-trace.d {
-      width: 2px;
-      height: 24%;
-      top: 38%;
-      transform-origin: center top;
-      transform: scaleY(0);
-      animation-name: ph-draw-y;
-    }
-    .ph-trace.c { left: 16%; animation-delay: 0.28s; }
-    .ph-trace.d { left: 62%; animation-delay: 0.4s; }
-    .ph-build {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-end;
-      padding-bottom: 2.4rem;
-    }
-    .ph-roof {
-      width: 0;
-      height: 0;
-      border-left: 5.1rem solid transparent;
-      border-right: 5.1rem solid transparent;
-      border-bottom: 2.15rem solid #0f172a;
-      transform-origin: top center;
-      animation: ph-drop 0.55s ease 1.35s both;
-    }
-    .ph-floor {
-      width: 9.2rem;
-      height: 2.7rem;
-      display: flex;
-      align-items: stretch;
-      gap: 0.28rem;
-      margin-top: 0.2rem;
-    }
-    .ph-floor i {
-      flex: 1;
-      background: #fff;
-      border: 2px solid #67e8f9;
-      border-bottom: 0;
-      transform-origin: center bottom;
-      transform: scaleY(0);
-      animation: ph-rise 0.7s ease forwards;
-    }
-    .ph-floor.main i { animation-delay: 0.55s; }
-    .ph-floor.upper i { animation-delay: 1.05s; }
-    .ph-floor i.door { background: linear-gradient(#fff 55%, #0f172a 55%); }
-    .ph-floor i.win { background: linear-gradient(#fff 20%, #22d3ee 20% 70%, #fff 70%); }
-    .ph-caption {
-      position: absolute;
-      left: 0.8rem;
-      bottom: 0.7rem;
-      margin: 0;
-      color: #0f172a;
-      background: rgba(255, 255, 255, 0.88);
-      border-radius: 999px;
-      padding: 0.28rem 0.7rem;
-      font-size: 0.75rem;
-      font-weight: 700;
-    }
-    .plan-home-jumps {
-      max-width: 72rem;
-      margin: 1rem auto 0;
-      display: flex;
-      gap: 0.5rem;
-      overflow-x: auto;
-      padding-bottom: 0.15rem;
-    }
-    .plan-home-jumps a {
-      flex: 0 0 auto;
-      color: #0f172a;
-      text-decoration: none;
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      border: 1px solid rgba(15, 23, 42, 0.14);
-      background: #fff;
-      border-radius: 999px;
-      padding: 0.45rem 0.75rem;
-    }
-    .plan-home-jumps a:hover { border-color: #22d3ee; }
-    @media (min-width: 860px) {
-      .plan-home-hero { padding: 2.25rem 1.5rem 1.35rem; }
-      .plan-home-grid { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 2.5rem; }
-      .plan-home-stage { height: 22rem; }
-      .plan-home-btn { width: auto; }
-    }
-    @media (max-width: 859px) {
-      .plan-home-btn { width: 100%; }
-    }
-    @keyframes ph-draw { to { transform: scaleX(1); } }
-    @keyframes ph-draw-y { to { transform: scaleY(1); } }
-    @keyframes ph-rise { to { transform: scaleY(1); } }
-    @keyframes ph-drop { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: none; } }
-    @media (prefers-reduced-motion: reduce) {
-      .ph-trace, .ph-floor i, .ph-roof { animation: none; transform: none; opacity: 1; }
-    }
-  </style>
-"""
+    css = '  <link rel="stylesheet" href="/assets/css/visualizer.css">\n'
     return html_block, css
-
 
 def home_flashlight_hero(supporting: bool = False) -> tuple[str, str, str] | None:
     """Homepage hero: ambient sketch-to-home video, flashlight only if playback fails.
@@ -6516,7 +6708,8 @@ Base: `{BASE_URL}`
 
 | Path | Page |
 |------|------|
-| `index.html` | About — Board mission & standards |
+| `index.html` | About — Board mission & standards. Homepage opens with the concept tool. |
+| `privacy.html` | Privacy for uploads, addresses, and leads |
 | `additions.html` | Top 30 home addition contractors |
 | `custom-homes.html` | Custom home builders (PPG #1 + ranks 2–15) |
 | `edmonds-custom-homes.html` | Edmonds Custom Homes Top 30 (filters, permit guide, tools) |
@@ -6805,6 +6998,7 @@ def write_sitemap(posts: list[dict]) -> None:
         "contractor-contract-basics.html",
         "materials.html",
         "contact.html",
+        "privacy.html",
         "glossary.html",
         "videos.html",
         "search.html",
@@ -10991,6 +11185,44 @@ def build_materials_index_page() -> str:
     )
 
 
+def build_privacy_page() -> str:
+    body = (
+        _hub_header(
+            "Privacy",
+            "Uploads, addresses, and leads",
+            f"How the concept tool on the homepage handles photos, addresses, and contact details. Questions: {EDITORIAL_EMAIL}.",
+        )
+        + _hub_section(
+            "Photos you upload",
+            f"""      <p class="text-slate-300 text-sm font-light leading-relaxed mb-4">The tool accepts a JPEG, PNG, or WebP photo you choose, up to 8 MB. Your browser re-encodes it and removes embedded metadata before anything leaves the device. Details visible in the photo remain. When this site is not connected to the concept service, the photo stays in the browser and nothing is uploaded.</p>
+      <p class="text-slate-300 text-sm font-light leading-relaxed mb-4">When the concept service is connected, anonymous photo objects are scheduled for deletion after 7 days. That photo rule does not delete the lead record, the consent record, or copies sent by email. Photos kept with a lead are linked to that lead. Interior photos can show personal items, so they are not published on this site.</p>
+      <p class="text-slate-300 text-sm font-light leading-relaxed">Uploaded photos are not used to train image models. Street View is display-only inside a Google Maps frame. A Street View image is not copied into the page and is not sent to an image model. Concepts are made only from photos you upload.</p>""",
+        )
+        + _hub_section(
+            "Addresses",
+            """      <p class="text-slate-300 text-sm font-light leading-relaxed mb-4">The address stored is the one you type or confirm. If Google Places is enabled later, only the place id from that selection is kept in addition to the address text you confirmed. Without a Maps key, the page shows a plain address field and does not call Google.</p>
+      <p class="text-slate-300 text-sm font-light leading-relaxed">City and ZIP on the request form are what you select. The city list is a planning aid for King County and Snohomish County. It is not a promise of service at every address.</p>""",
+        )
+        + _hub_section(
+            "Leads",
+            f"""      <p class="text-slate-300 text-sm font-light leading-relaxed mb-4">If you check the consent box, the request, contact details, address, and images are shared only with Pacific Pro Group (WA contractor registration {esc(PPG['license'])}) so they can contact you about that project. The independence wording on the homepage Directory #1 card is unchanged. Optional text consent and the planning-guides email are separate and are not required to send the request. Texting stays off until that program is ready.</p>
+      <p class="text-slate-300 text-sm font-light leading-relaxed mb-4">Each lead is stored with the consent text version and which boxes were checked, then a notice can be emailed. Notify mail goes to <a href="mailto:{EDITORIAL_EMAIL}" class="text-secondary hover:underline">{EDITORIAL_EMAIL}</a>. A confirmation uses a fixed message and does not include your note or your photo. No response time is promised. Email and sheet copies, when configured, are separate from the 7-day photo deletion rule.</p>
+      <p class="text-slate-300 text-sm font-light leading-relaxed">If the concept service is not connected, the form does not send anything. To ask a question without the tool, use the <a href="./contact.html" class="text-secondary hover:underline">contact page</a>.</p>""",
+        )
+    )
+    return page_shell(
+        "Privacy | Board of Project Stewardship",
+        f"Photos, addresses, and leads for the concept tool. Contact {EDITORIAL_EMAIL}. Anonymous uploads delete after 7 days.",
+        "privacy",
+        body,
+        canonical=f"{BASE_URL}privacy.html",
+        breadcrumbs=[("Home", BASE_URL), ("Privacy", f"{BASE_URL}privacy.html")],
+        include_widgets=False,
+        include_story_embed=True,
+        include_tools_embed=False,
+    )
+
+
 def build_contact_page() -> str:
     faqs = [
         (
@@ -11048,7 +11280,12 @@ def build_contact_page() -> str:
       <p class="text-slate-300 text-sm font-light leading-relaxed mb-4">Email <a href="mailto:{EDITORIAL_EMAIL}" class="text-secondary hover:underline font-semibold">{EDITORIAL_EMAIL}</a> when you spot a dead firm URL, a wrong jurisdiction note, or a sourcing question about a Board directory or Learn guide. Include the page URL and the correction you want us to review.</p>
       <p class="text-slate-400 text-sm font-light leading-relaxed mb-4">Response expectations: the desk is editorial, not a call center. We review notes as capacity allows and do not promise same-day replies, contractor matching, or bid packaging. If you need a crew on site, shortlist from Board directories and call the firm after you verify the license.</p>
       <p class="text-slate-400 text-sm font-light leading-relaxed mb-4">For hiring: use <a href="./additions.html" class="text-secondary hover:underline">Additions</a>, <a href="./kitchen.html" class="text-secondary hover:underline">Kitchen</a>, <a href="./bathrooms.html" class="text-secondary hover:underline">Bathrooms</a>, or <a href="./trades.html" class="text-secondary hover:underline">Trades</a>, then verify at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>. Board #1 hire ranking links to <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(PPG['url'])}</a> — contact that firm directly for project inquiries.</p>
-      <p class="text-slate-400 text-sm font-light leading-relaxed"><a href="./about.html" class="text-secondary hover:underline">About</a> · <a href="./faq.html" class="text-secondary hover:underline">FAQ</a> · <a href="./how-we-rank.html" class="text-secondary hover:underline">How we rank</a> · <a href="./learn.html" class="text-secondary hover:underline">Learn hub</a> · <a href="./write.html" class="text-secondary hover:underline">Contribute (draft tool)</a></p>""",
+      <p class="text-slate-400 text-sm font-light leading-relaxed"><a href="./about.html" class="text-secondary hover:underline">About</a> · <a href="./faq.html" class="text-secondary hover:underline">FAQ</a> · <a href="./how-we-rank.html" class="text-secondary hover:underline">How we rank</a> · <a href="./learn.html" class="text-secondary hover:underline">Learn hub</a> · <a href="./privacy.html" class="text-secondary hover:underline">Privacy for uploads and leads</a> · <a href="./write.html" class="text-secondary hover:underline">Contribute (draft tool)</a></p>""",
+        )
+        + _hub_section(
+            "Uploads, addresses, and leads",
+            f"""      <p class="text-slate-300 text-sm font-light leading-relaxed mb-4">The homepage concept tool can collect a photo, an address you type, and — only after you ask to continue — contact details. Anonymous photo objects are scheduled for deletion after 7 days. The lead record and any email copy are kept separately. Photos and contact details are shared only with Pacific Pro Group when you check the consent box, and they are not used to train image models.</p>
+      <p class="text-slate-300 text-sm font-light leading-relaxed">The full note is on the <a href="./privacy.html" class="text-secondary hover:underline">privacy page</a>. Questions: <a href="mailto:{EDITORIAL_EMAIL}" class="text-secondary hover:underline">{EDITORIAL_EMAIL}</a>.</p>""",
             border="border-primary/25",
         )
         + f'  <div class="max-w-6xl mx-auto px-4 pb-8">\n{faq_section(faqs, "Contact FAQ")}\n  </div>\n'
@@ -15263,6 +15500,9 @@ def main(argv: list[str] | None = None) -> None:
     # Footer links are omitted until the target file exists, so publish this
     # page before any chrome that lists it.
     (SITE_DIR / "pascal-editor.html").write_text(build_pascal_editor_page(), encoding="utf-8")
+    _privacy = SITE_DIR / "privacy.html"
+    _privacy.write_text(" ", encoding="utf-8")
+    _privacy.write_text(build_privacy_page(), encoding="utf-8")
     (SITE_DIR / "index.html").write_text(build_about(), encoding="utf-8")
     (SITE_DIR / "additions.html").write_text(build_additions(additions), encoding="utf-8")
     (SITE_DIR / "custom-homes.html").write_text(build_custom_homes(custom_homes), encoding="utf-8")

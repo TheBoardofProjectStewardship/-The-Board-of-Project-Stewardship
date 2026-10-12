@@ -120,8 +120,8 @@
     "hash": "ee80e93c0418ebf020dd"
   },
   "contact.html": {
-    "date": "2026-10-07",
-    "hash": "ba3fdd54e4b4537ad379"
+    "date": "2026-10-11",
+    "hash": "c6f142eb651f0a18a51a"
   },
   "contractor-contract-basics.html": {
     "date": "2026-10-07",
@@ -264,8 +264,8 @@
     "hash": "b8a6c5d5b51ee4678dbb"
   },
   "index.html": {
-    "date": "2026-10-09",
-    "hash": "2f2a605f78f0d2b7617b"
+    "date": "2026-10-12",
+    "hash": "45406eed6bb3b3033618"
   },
   "insulation.html": {
     "date": "2026-10-07",
@@ -414,6 +414,10 @@
   "pm-dashboard.html": {
     "date": "2026-10-07",
     "hash": "6ef16a5e9ba144f20700"
+  },
+  "privacy.html": {
+    "date": "2026-10-12",
+    "hash": "af97f5398ecd35cdd109"
   },
   "project-timeline.html": {
     "date": "2026-10-07",

@@ -24,6 +24,10 @@ assets-b64/
 !assets/images/walkthrough/
 !assets/images/walkthrough/**
 
+# Visualizer demo samples (original illustrations, must ship on GitHub Pages)
+!assets/images/visualizer/
+!assets/images/visualizer/**
+
 # Local publish lock (no secrets; not a site page)
 intake/lock/*
 !intake/lock/.gitkeep

@@ -14,7 +14,8 @@ Base: `https://boardofprojectstewardship.com/`
 
 | Path | Page |
 |------|------|
-| `index.html` | About — Board mission & standards |
+| `index.html` | About — Board mission & standards. Homepage opens with the concept tool. |
+| `privacy.html` | Privacy for uploads, addresses, and leads |
 | `additions.html` | Top 30 home addition contractors |
 | `custom-homes.html` | Custom home builders (PPG #1 + ranks 2–15) |
 | `edmonds-custom-homes.html` | Edmonds Custom Homes Top 30 (filters, permit guide, tools) |

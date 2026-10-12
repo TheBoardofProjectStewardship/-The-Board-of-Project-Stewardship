@@ -1,0 +1,17 @@
+# Copy to .dev.vars for local `wrangler dev`. Never commit .dev.vars.
+# Leave values empty until Alex creates the accounts.
+# LIVE_ENABLED stays false until the cap and secrets are set.
+# DAILY_SPEND_CAP_USD has no default. An empty value fails closed.
+
+LIVE_ENABLED=false
+SMS_ENABLED=false
+DAILY_SPEND_CAP_USD=
+GEMINI_API_KEY=
+OPENAI_API_KEY=
+TURNSTILE_SECRET=
+MAPS_SERVER_KEY=
+RESEND_API_KEY=
+IP_HASH_SALT=
+SESSION_SIGNING_KEY=
+SHEET_WEBHOOK_URL=
+SHEET_WEBHOOK_TOKEN=
