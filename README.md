@@ -183,15 +183,15 @@ After generate (or after Pages ships `main`):
 
 ```bash
 python3 generate_site.py --indexnow
-# or, ping the current sitemap only:
+# or, ping URLs changed since the previous commit:
 python3 generate_site.py --indexnow-only
 ```
 
-CI: `.github/workflows/indexnow.yml` runs `--indexnow-only` on push to `main`. Soft-fails if offline. Key file is hosted at `/{32-hex}.txt` and preserved in `.well-known/indexnow-key.txt`.
+CI: `.github/workflows/indexnow.yml` runs `--indexnow-only` on push to `main` and pings only URLs changed in that push. Soft-fails if offline. Key file is hosted at `/{32-hex}.txt` and preserved in `.well-known/indexnow-key.txt`.
 
-## Search Console / Bing Webmaster (ops — not this PR)
+## Search Console / Bing Webmaster
 
-GSC and Bing Webmaster registration stay with the site owner (Alex login). Do not register them from this generator.
+Verification meta tags are a commented config in `generate_site.py` (`GOOGLE_SITE_VERIFICATION`, `BING_SITE_VERIFICATION`). Leave them empty until Alex supplies the codes. Do not invent codes, and do not register the accounts from this generator.
 
 ## Draft / noindex
 

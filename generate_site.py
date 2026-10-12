@@ -57,11 +57,17 @@ BOARD_ONE_LINER = (
     "The Board of Project Stewardship publishes construction standards and contractor "
     f"directories for {GEO_FOOTPRINT} — shortlists firms homeowners can hire with confidence."
 )
-HOME_TITLE = f"Remodel directories & guides{TITLE_SUFFIX}"
+HOME_TITLE = f"Puget Sound Visualizer & 3D{TITLE_SUFFIX}"
 HOME_DESCRIPTION = (
-    "Construction standards and contractor directories for the Pacific Northwest — "
-    "King County, Snohomish County, and Seattle."
+    "Free photo visualizer and 3D plan walkthrough for Puget Sound and Seattle-area remodels, "
+    "plus contractor directories for King County and Snohomish County."
 )
+# Search-console verification. Codes arrive later — do not invent them.
+# Uncomment and paste both values when Alex supplies them:
+# GOOGLE_SITE_VERIFICATION = ""  # <meta name="google-site-verification" content="...">
+# BING_SITE_VERIFICATION = ""    # <meta name="msvalidate.01" content="...">
+GOOGLE_SITE_VERIFICATION = ""
+BING_SITE_VERIFICATION = ""
 
 # Directory page -> hero image (relative to site root)
 DIR_HERO_IMAGES = {
@@ -552,12 +558,30 @@ def clamp_title(title: str, limit: int = 60) -> str:
     return cut if cut else title[:limit]
 
 
+def published_meta_len(text: str) -> int:
+    """Bytes in the escaped meta attribute. Crawlers measure the source, including entities."""
+    return len(html.escape(text or "", quote=True).encode("utf-8"))
+
+
 def clamp_description(desc: str, limit: int = 160) -> str:
-    """Aim ≤160 characters; never truncate mid-word in templates."""
+    """Keep the published meta description at or under 160 source bytes.
+
+    Apostrophes become ``&#x27;`` and an em dash is three UTF-8 bytes, so a
+    160-character string can still publish long. Cut on word boundaries.
+    """
     desc = re.sub(r"\s+", " ", (desc or "").strip())
-    if len(desc) <= limit:
+    if published_meta_len(desc) <= limit:
         return desc
-    cut = desc[:limit].rsplit(" ", 1)[0].rstrip(" .,;:")
+    words = desc.split(" ")
+    while words and published_meta_len(" ".join(words).rstrip(" .,;:—–-")) > limit:
+        words.pop()
+    cut = " ".join(words).rstrip(" .,;:—–-")
+    cut = re.sub(
+        r"(?:\s+(?:of|and|the|a|an|for|to|from|with|in|on|or|&))+$",
+        "",
+        cut,
+        flags=re.I,
+    ).rstrip(" .,;:—–-")
     return cut if cut else desc[:limit]
 
 
@@ -2394,6 +2418,20 @@ def visible_breadcrumb_nav(crumbs: list | None, prefix: str, body: str) -> str:
     )
 
 
+def verification_meta_html() -> str:
+    """Emit Google and Bing verification tags only after real codes are set."""
+    tags: list[str] = []
+    google = (GOOGLE_SITE_VERIFICATION or "").strip()
+    bing = (BING_SITE_VERIFICATION or "").strip()
+    if google:
+        tags.append(f'  <meta name="google-site-verification" content="{esc(google)}">')
+    if bing:
+        tags.append(f'  <meta name="msvalidate.01" content="{esc(bing)}">')
+    if not tags:
+        return ""
+    return "\n".join(tags) + "\n"
+
+
 def page_shell(
     title: str,
     description: str,
@@ -2456,7 +2494,7 @@ def page_shell(
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="{esc(description)}">
 {kw_tag}  <meta name="robots" content="{esc(robots)}">
-  <meta name="theme-color" content="#0a0a0a">
+{verification_meta_html()}  <meta name="theme-color" content="#0a0a0a">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta property="og:title" content="{esc(title)}">
   <meta property="og:description" content="{esc(description)}">
@@ -2732,6 +2770,14 @@ def howto_ld(
             for i, (title, body) in enumerate(steps, 1)
         ],
     }
+
+
+def free_planning_tool_links() -> list[tuple[str, str]]:
+    """Homepage photo visualizer and the in-browser plan walkthrough."""
+    return [
+        ("Photo visualizer", "./index.html#plan-home-hero"),
+        ("Plan to 3D Walkthrough", "./plan-walkthrough/"),
+    ]
 
 
 def related_learning_strip(
@@ -3937,7 +3983,7 @@ def home_flashlight_hero(supporting: bool = False) -> tuple[str, str, str] | Non
     html_block = f"""  <section class="{section_cls}" id="home-hero" aria-labelledby="home-hero-title">
     <div class="hero-stage">
       <img class="hero-layer hero-layer-finished" src="{finished}"{fin_attr} alt="Illustrative Pacific Northwest home concept for Board of Project Stewardship — not a bid or stamped plan" width="1280" height="723"{finished_attrs}>
-      <img class="hero-layer hero-layer-wire" id="home-hero-wire" src="{wire}"{wire_attr} alt="" width="1280" height="723"{wire_attrs}>
+      <img class="hero-layer hero-layer-wire" id="home-hero-wire" src="{wire}"{wire_attr} alt="Illustrative: line drawing of the same Pacific Northwest home, the plan layer under the finished view — not a bid or stamped plan" width="1280" height="723"{wire_attrs}>
 {video_html}
     </div>
     <div class="hero-scrim" aria-hidden="true"></div>
@@ -4964,6 +5010,7 @@ def build_additions(additions: list[dict]) -> str:
             extra_links=[
                 ("Addition cost factors", "./addition-cost-factors.html"),
                 ("Second story vs teardown", "./second-story-vs-teardown.html"),
+                *free_planning_tool_links(),
             ],
         )}
 {related_learning_strip([
@@ -4974,6 +5021,7 @@ def build_additions(additions: list[dict]) -> str:
             ("Permit hub", "./permits.html"),
             ("Project timeline", "./project-timeline.html"),
             ("Learn hub", "./learn.html"),
+            *free_planning_tool_links(),
         ], heading="Related learning for additions")}
 {faq_section(faqs, "Home addition FAQ")}
   </div>"""
@@ -5162,9 +5210,9 @@ def build_kb_page(kind: str, firms: list[dict]) -> str:
             learn_href=("./kitchen-remodel-planning.html" if is_kitchen else "./bathroom-waterproofing-guide.html"),
             learn_label=("Kitchen remodel planning" if is_kitchen else "Bathroom waterproofing guide"),
             extra_links=(
-                [("Kitchen cost factors", "./kitchen-cost-factors.html"), ("Hire questions", "./hire-questions.html")]
+                [("Kitchen cost factors", "./kitchen-cost-factors.html"), ("Hire questions", "./hire-questions.html"), *free_planning_tool_links()]
                 if is_kitchen
-                else [("Bathroom cost factors", "./bathroom-cost-factors.html"), ("Coastal waterproofing", "./coastal-waterproofing.html")]
+                else [("Bathroom cost factors", "./bathroom-cost-factors.html"), ("Coastal waterproofing", "./coastal-waterproofing.html"), *free_planning_tool_links()]
             ),
         )}
 {related_learning_strip(
@@ -5176,6 +5224,7 @@ def build_kb_page(kind: str, firms: list[dict]) -> str:
                 ("Permit hub", "./permits.html"),
                 ("Materials index", "./materials.html"),
                 ("Learn hub", "./learn.html"),
+                *free_planning_tool_links(),
             ]
             if is_kitchen
             else [
@@ -5186,6 +5235,7 @@ def build_kb_page(kind: str, firms: list[dict]) -> str:
                 ("Permit hub", "./permits.html"),
                 ("Materials index", "./materials.html"),
                 ("Learn hub", "./learn.html"),
+                *free_planning_tool_links(),
             ],
             heading=f"Related learning for {label.lower()}s",
         )}
@@ -6558,6 +6608,14 @@ def _strip_leading_hero_figure(article_html: str, hero_rel: str | None) -> str:
     return article_html[: match.start()] + article_html[match.end() :]
 
 
+# Document titles that would otherwise clamp to the same string.
+POST_SEO_TITLES = {
+    "bathroom-remodel-lake-forest-park": "Lake Forest Park Bath Guide",
+    "bathroom-remodel-lake-forest-park-wa": "LFP Bath iWorQ Permit Guide",
+    "second-story-vs-teardown-edmonds": "Edmonds Story vs Teardown",
+}
+
+
 def build_post_page(post: dict, posts: list[dict] | None = None) -> str:
     hero_rel = resolve_post_hero(post)
     article_html = _strip_leading_hero_figure(
@@ -6616,8 +6674,9 @@ def build_post_page(post: dict, posts: list[dict] | None = None) -> str:
     </div>
 {post_outro_html(post, prefix="../", posts=posts)}
   </div>"""
+    document_title = POST_SEO_TITLES.get(post.get("slug") or "", "") or post["title"]
     return page_shell(
-        f"{post['title']} | Board of Project Stewardship",
+        f"{document_title} | Board of Project Stewardship",
         post["description"] or post["title"],
         "blog",
         body,
@@ -6797,15 +6856,15 @@ After generate (or after Pages ships `main`):
 
 ```bash
 python3 generate_site.py --indexnow
-# or, ping the current sitemap only:
+# or, ping URLs changed since the previous commit:
 python3 generate_site.py --indexnow-only
 ```
 
-CI: `.github/workflows/indexnow.yml` runs `--indexnow-only` on push to `main`. Soft-fails if offline. Key file is hosted at `/{{32-hex}}.txt` and preserved in `.well-known/indexnow-key.txt`.
+CI: `.github/workflows/indexnow.yml` runs `--indexnow-only` on push to `main` and pings only URLs changed in that push. Soft-fails if offline. Key file is hosted at `/{{32-hex}}.txt` and preserved in `.well-known/indexnow-key.txt`.
 
-## Search Console / Bing Webmaster (ops — not this PR)
+## Search Console / Bing Webmaster
 
-GSC and Bing Webmaster registration stay with the site owner (Alex login). Do not register them from this generator.
+Verification meta tags are a commented config in `generate_site.py` (`GOOGLE_SITE_VERIFICATION`, `BING_SITE_VERIFICATION`). Leave them empty until Alex supplies the codes. Do not invent codes, and do not register the accounts from this generator.
 
 ## Draft / noindex
 
@@ -7886,8 +7945,8 @@ def build_plan_walkthrough_page() -> str:
         "name": "Plan to 3D Walkthrough",
         "url": page_url,
         "description": description,
-        "applicationCategory": "DesignApplication",
-        "operatingSystem": "Any web browser",
+        "applicationCategory": "BrowserApplication",
+        "operatingSystem": "Web browser",
         "browserRequirements": "Requires JavaScript. WebGL is used for the 3D view.",
         "isAccessibleForFree": True,
         "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
@@ -8061,6 +8120,8 @@ def build_plan_walkthrough_page() -> str:
             faq_ld(faqs),
         ],
         canonical=page_url,
+        og_image="assets/images/tools/plan-walkthrough/plan-walkthrough-og.webp",
+        og_image_alt="Illustrative two-storey floor plan for the free Plan to 3D Walkthrough, not a construction drawing",
         include_widgets=False,
         include_tools_embed=False,
         extra_head='  <link rel="stylesheet" href="/assets/css/plan-walkthrough.css">\n',
@@ -9111,6 +9172,7 @@ def build_adu_page() -> str:
           ("ADU cost factors", "./adu-cost-factors.html"),
           ("Permit jurisdiction hub", "./permits.html"),
           ("Another Story — Board feature for second-story concepts", "./another-story.html"),
+          *free_planning_tool_links(),
       ])}""",
         )
         + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Edmonds ADU FAQ')}\n  </div>\n"
@@ -9350,6 +9412,19 @@ def build_verify_contractor_page() -> str:
     )
 
 
+def county_and_rank_links(slug: str, county_text: str = "") -> list[tuple[str, str]]:
+    """In-body links from a city or neighborhood page to its county hub and the ranking method."""
+    legacy = {row[0]: row[2] for row in EXISTING_PLACE_HUB_META}
+    blob = f"{county_text} {legacy.get(slug, '')}".lower()
+    links: list[tuple[str, str]] = []
+    if slug != "king-county" and "king" in blob:
+        links.append(("King County hub", "./king-county.html"))
+    if slug != "snohomish-county" and "snohomish" in blob:
+        links.append(("Snohomish County hub", "./snohomish-county.html"))
+    links.append(("How we rank", "./how-we-rank.html"))
+    return links
+
+
 def build_city_hub_page(
     slug: str,
     place: str,
@@ -9484,6 +9559,7 @@ def build_city_hub_page(
                 ("Hiring a contractor", "./hiring-a-contractor.html"),
                 ("Remodel cost factors", "./remodel-cost-factors.html"),
                 ("FAQ", "./faq.html"),
+                *county_and_rank_links(slug, county_note),
             ],
             heading=f"Related learning for {place}",
         )
@@ -10024,6 +10100,7 @@ def build_place_seo_page(spec: dict, hire_pack: dict | None = None) -> str:
                 ("Hiring a contractor", "./hiring-a-contractor.html"),
                 ("Remodel cost factors", "./remodel-cost-factors.html"),
                 ("FAQ", "./faq.html"),
+                *county_and_rank_links(slug, spec.get("county") or county_note),
             ],
             heading=f"Related learning for {place}",
         )
@@ -11654,6 +11731,7 @@ def build_kitchen_remodel_planning_page() -> str:
                     ("Pascal Editor sketch", "./pascal-editor.html"),
                     ("Floor Plan to 3D", "./floor-plan-3d.html"),
                     ("Plan to 3D Walkthrough", "./plan-walkthrough/"),
+                    ("Photo visualizer", "./index.html#plan-home-hero"),
                 ]
             ),
         )
@@ -12019,6 +12097,7 @@ def build_home_addition_planning_page() -> str:
                     ("Pascal Editor sketch", "./pascal-editor.html"),
                     ("Floor Plan to 3D", "./floor-plan-3d.html"),
                     ("Plan to 3D Walkthrough", "./plan-walkthrough/"),
+                    ("Photo visualizer", "./index.html#plan-home-hero"),
                     ("Site Visit Checklist", "./site-visit.html"),
                     ("Good Steward", "./good-steward.html"),
                 ]
@@ -15343,12 +15422,60 @@ def collect_indexnow_urls() -> list[str]:
     return re.findall(r"<loc>(https://[^<]+)</loc>", sitemap.read_text(encoding="utf-8"))
 
 
+def _public_url_for_repo_path(rel: str) -> str | None:
+    rel = rel.strip().lstrip("./")
+    if not rel.endswith(".html"):
+        return None
+    if rel == "index.html":
+        return BASE_URL
+    if rel.endswith("/index.html"):
+        return f"{SITE_ORIGIN}/{rel[: -len('index.html')]}"
+    return f"{SITE_ORIGIN}/{rel}"
+
+
+def changed_indexnow_urls() -> list[str]:
+    """Sitemap URLs whose files changed in this push, or in the working tree."""
+    sitemap = set(collect_indexnow_urls())
+    before = os.environ.get("INDEXNOW_BEFORE", "").strip()
+    if before and set(before) <= set("0"):
+        before = ""
+    commands: list[list[str]] = []
+    if before:
+        commands.append(["git", "diff", "--name-only", before, "HEAD"])
+    else:
+        commands.append(["git", "diff", "--name-only", "HEAD"])
+        commands.append(["git", "diff", "--name-only", "--cached"])
+        commands.append(["git", "diff", "--name-only", "HEAD~1", "HEAD"])
+    rels: list[str] = []
+    for cmd in commands:
+        try:
+            out = subprocess.check_output(
+                cmd,
+                cwd=SITE_DIR,
+                text=True,
+                stderr=subprocess.DEVNULL,
+            )
+        except (subprocess.CalledProcessError, OSError):
+            continue
+        rels.extend(line.strip() for line in out.splitlines() if line.strip())
+    urls: list[str] = []
+    seen: set[str] = set()
+    for rel in rels:
+        url = _public_url_for_repo_path(rel)
+        if not url or url not in sitemap or url in seen:
+            continue
+        seen.add(url)
+        urls.append(url)
+    return urls
+
+
 def ping_indexnow(urls: list[str] | None = None) -> None:
-    """POST changed/canonical URLs to IndexNow. Soft-fail if offline."""
+    """POST changed canonical URLs to IndexNow. Soft-fail if offline."""
     key = ensure_indexnow_key()
-    urls = urls or collect_indexnow_urls()
+    if urls is None:
+        urls = changed_indexnow_urls()
     if not urls:
-        print("  IndexNow: no URLs to ping")
+        print("  IndexNow: no changed URLs to ping")
         return
     payload = {
         "host": "boardofprojectstewardship.com",
@@ -15472,8 +15599,8 @@ def emit_stamp_of_trust_page() -> None:
 
 def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description="Generate the Board of Project Stewardship static site.")
-    parser.add_argument("--indexnow", action="store_true", help="Ping IndexNow after generate.")
-    parser.add_argument("--indexnow-only", action="store_true", help="Ping IndexNow from sitemap; do not regenerate.")
+    parser.add_argument("--indexnow", action="store_true", help="Ping IndexNow with changed URLs after generate.")
+    parser.add_argument("--indexnow-only", action="store_true", help="Ping IndexNow for changed URLs; do not regenerate.")
     args = parser.parse_args(argv)
     if args.indexnow_only:
         ping_indexnow()

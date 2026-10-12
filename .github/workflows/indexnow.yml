@@ -9,5 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Ping IndexNow from sitemap
+        with:
+          fetch-depth: 0
+      - name: Ping IndexNow for changed URLs
+        env:
+          INDEXNOW_BEFORE: ${{ github.event.before }}
         run: python3 generate_site.py --indexnow-only
