@@ -9,10 +9,6 @@ ROOT = Path(__file__).resolve().parents[1]
 PAGE = ROOT / "index.html"
 VENDOR = re.compile(r"\b(?:BOPS|ChatGPT|Gemini|Imagen|Veo|Higgsfield|Pollinations)\b")
 AI = re.compile(r"\bAI\b")
-ALLOWED_AI = (
-    "AI concept, not a design",
-    "AI-generated concept",
-)
 
 
 def visible_copy(html: str) -> str:
@@ -40,9 +36,8 @@ class HomePlanHeroTests(unittest.TestCase):
     def test_walkthrough_cta_is_the_only_h1(self):
         """The concept tool is the only H1. The 3D walkthrough is a nav link.
 
-        Alex: this replaces the previous assertion that the walkthrough sentence
-        was the homepage H1, and it allows the disclosure phrases below while
-        vendor and model names stay banned.
+        The word AI stays banned on the public homepage, including the concept
+        tool. Vendor and model names stay banned.
         """
         self.assertEqual(self.html.count("<h1"), 1)
         self.assertIn('<h1 id="see-project-title">See your addition / remodel</h1>', self.html)
@@ -56,11 +51,12 @@ class HomePlanHeroTests(unittest.TestCase):
         self.assertNotIn("fetchpriority", self.html)
         self.assertIn('data-api-base=""', self.html)
         self.assertIn("Sample — illustrative", self.html)
+        self.assertIn("Not a Pacific Pro Group project", self.html)
+        self.assertNotIn("AI concept, not a design", self.html)
+        self.assertNotIn("AI-generated concept", self.html)
         self.assertIn("WA License PACIFPG765OF", self.html)
         visible = visible_copy(self.html)
-        for phrase in ALLOWED_AI:
-            self.assertIn(phrase, visible)
-            visible = visible.replace(phrase, "")
+        self.assertIsNone(AI.search(self.html))
         self.assertIsNone(AI.search(visible))
         self.assertIsNone(VENDOR.search(self.html))
         self.assertIsNone(VENDOR.search(visible))

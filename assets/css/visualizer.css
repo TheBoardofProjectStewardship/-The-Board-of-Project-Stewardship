@@ -167,7 +167,6 @@
   gap: 0.5rem;
   margin-top: 0.35rem;
 }
-.see-disclosure,
 .see-fine {
   margin: 0.65rem 0 0;
   color: #1e293b;
@@ -205,19 +204,6 @@
 }
 .see-compare-before {
   clip-path: inset(0 calc(100% - var(--pos)) 0 0);
-}
-.see-watermark {
-  position: absolute;
-  left: 0.6rem;
-  bottom: 0.55rem;
-  z-index: 2;
-  margin: 0;
-  padding: 0.25rem 0.45rem;
-  border-radius: 0.35rem;
-  background: rgba(15, 23, 42, 0.88);
-  color: #fff;
-  font-size: 0.75rem;
-  font-weight: 700;
 }
 .see-range {
   display: block;
