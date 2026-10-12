@@ -56,7 +56,7 @@ await shot(phone, "home-phone-390x844.png");
 await phone.getByRole("button", { name: "Upload my photo" }).waitFor();
 await phone.locator("#see-file").setInputFiles(photo);
 await phone.getByText("Embedded photo metadata was removed.").waitFor();
-await phone.locator("#see-drop").scrollIntoViewIfNeeded();
+await phone.locator("#see-to-project").scrollIntoViewIfNeeded();
 await shot(phone, "upload-step-phone-390x844.png");
 
 await phone.locator("#see-to-project").click();
