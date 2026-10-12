@@ -1,0 +1,18 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {"role": "hero", "intake_file": "media/2026-10-12-sammamish-bath-1.webp", "repo_path": "assets/images/posts/2026-10-12-sammamish-bath-1.webp",
+     "alt": "Illustrative: a tiled bathroom vanity and mirror in soft daylight — the kind of finished wet room a Sammamish remodel aims for — not a real Board of Project Stewardship job photo",
+     "source": "Crop, mirror, and regrade of existing repo still 2026-08-13-phinney-bath-1.webp"},
+    {"role": "in-body", "intake_file": "media/2026-10-12-sammamish-bath-2.webp", "repo_path": "assets/images/posts/2026-10-12-sammamish-bath-2.webp",
+     "alt": "Illustrative: open wall framing and electrical rough-in during a bathroom remodel — the stage where GFCI circuits and exhaust fans get inspected — not a real Board of Project Stewardship job photo",
+     "source": "Crop and regrade of existing repo still 2026-08-10-electrical-bath-2.webp"},
+    {"role": "in-body", "intake_file": "media/2026-10-12-sammamish-bath-3.webp", "repo_path": "assets/images/posts/2026-10-12-sammamish-bath-3.webp",
+     "alt": "Illustrative: a shower niche and tiled wet wall under warm lighting — membrane continuity behind the tile matters more than the finish pattern — not a real Board of Project Stewardship job photo",
+     "source": "Crop, mirror, and regrade of existing repo still 2026-08-13-phinney-bath-3.webp"}
+  ],
+  "youtube": [{"id": "BfUrGF3_imc", "url": "https://www.youtube.com/watch?v=BfUrGF3_imc", "title": "How to install Schluter®-KERDI-SHOWER Trays", "oembed_status": 200}],
+  "rules": ["Public markdown images use ../assets/images/posts/*.webp only", "No CloudFront URLs", "Illustrative frames are labeled in alt text", "Free image sources first; no paid media credits"],
+  "notes": "Reused and regraded existing repo stills. No paid image generation."
+}
