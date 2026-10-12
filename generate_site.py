@@ -1590,6 +1590,7 @@ def nav_html(active: str = "", prefix: str = "") -> str:
         ("kitchen-remodel-planning", href("kitchen-remodel-planning.html"), "Kitchen Remodel Planning"),
         ("bathroom-waterproofing-guide", href("bathroom-waterproofing-guide.html"), "Bathroom Waterproofing"),
         ("home-addition-planning", href("home-addition-planning.html"), "Home Addition Planning"),
+        ("field-sketches-to-measured-plans", href("field-sketches-to-measured-plans.html"), "Field Sketches"),
         ("glossary", href("glossary.html"), "Glossary"),
         ("story", href("another-story.html"), "Another Story · Board feature"),
     ]
@@ -1698,6 +1699,7 @@ def footer_html(prefix: str = "./", active: str = "", updated: str = "") -> str:
         ("kitchen-remodel-planning", f"{prefix}kitchen-remodel-planning.html", "Kitchen remodel planning"),
         ("bathroom-waterproofing-guide", f"{prefix}bathroom-waterproofing-guide.html", "Bathroom waterproofing"),
         ("home-addition-planning", f"{prefix}home-addition-planning.html", "Home addition planning"),
+        ("field-sketches-to-measured-plans", f"{prefix}field-sketches-to-measured-plans.html", "Field sketches to plans"),
         ("pascal-editor", f"{prefix}pascal-editor.html", "Pascal Editor sketch"),
         ("plan-walkthrough", f"{prefix}plan-walkthrough/", "Plan to 3D walkthrough"),
         ("steward", f"{prefix}good-steward.html", "Good Steward"),
@@ -1794,6 +1796,7 @@ def public_tool_href(slug: str, prefix: str = "") -> str:
         "floor-plan-3d": "floor-plan-3d.html",
         "plan-walkthrough": "plan-walkthrough/",
         "pascal-editor": "pascal-editor.html",
+        "field-sketches-to-measured-plans": "field-sketches-to-measured-plans.html",
         "story": "another-story.html",
         "steward": "good-steward.html",
         "permits": "permits.html",
@@ -1846,6 +1849,7 @@ POST_ROOT_HUB_STEMS = frozenset({
     "trades", "blog", "index", "windows", "roofing", "insulation", "siding",
     "commercial", "spec-homes", "videos", "write", "bid-comparison",
     "home-addition-planning", "kitchen-remodel-planning", "bathroom-waterproofing-guide",
+    "field-sketches-to-measured-plans",
     "second-story-vs-teardown", "bonds-and-insurance", "contractor-contract-basics",
     "design-build-vs-bid",
     "locations",
@@ -6532,6 +6536,7 @@ Base: `{BASE_URL}`
 | `build-walkthrough.html` | Build Walkthrough landing |
 | `plan-walkthrough/` | Plan to 3D walkthrough |
 | `pascal-editor.html` | Pascal Editor remodel sketch walkthrough |
+| `field-sketches-to-measured-plans.html` | Field sketches that become measured plans |
 | `site-visit.html` | Site Visit & Discovery landing |
 | `pm-dashboard.html` | PM Execution Dashboard landing |
 | `energy-credit.html` | WSEC-R energy credits landing |
@@ -6666,6 +6671,7 @@ def write_llms_txt() -> None:
 
 - [Learn](https://boardofprojectstewardship.com/learn.html): Guide index.
 - [Plan to 3D Walkthrough](https://boardofprojectstewardship.com/plan-walkthrough/): Trace a plan in the browser and walk the sketch. Illustration only, not for construction.
+- [Field sketches to measured plans](https://boardofprojectstewardship.com/field-sketches-to-measured-plans.html): Site-walk note habits so openings and dimensions read cleanly for measured-plan drafting.
 - [Hiring a contractor](https://boardofprojectstewardship.com/hiring-a-contractor.html): Questions to ask before you hire.
 - [Remodel cost factors](https://boardofprojectstewardship.com/remodel-cost-factors.html): What moves a remodel scope. No prices.
 - [Kitchen cost factors](https://boardofprojectstewardship.com/kitchen-cost-factors.html): What moves a kitchen scope. No prices.
@@ -6788,6 +6794,7 @@ def write_sitemap(posts: list[dict]) -> None:
         "bathroom-waterproofing-guide.html",
         "hiring-a-contractor.html",
         "home-addition-planning.html",
+        "field-sketches-to-measured-plans.html",
         "bid-comparison.html",
         "red-flags-hiring.html",
         "project-timeline.html",
@@ -7049,6 +7056,7 @@ def build_good_steward_page() -> str:
       <li><strong class="text-white">Build Walkthrough</strong> — visual sales-to-build stages with homeowner checklists</li>
       <li><strong class="text-white">Pascal Editor sketch</strong> — how to draw a remodel or addition in the free open-source Pascal Editor before a contractor meeting</li>
       <li><strong class="text-white">Site Visit &amp; Discovery</strong> — what to observe and ask before plans or pricing (includes feasibility &amp; estimate calculator)</li>
+      <li><strong class="text-white">Field sketches to measured plans</strong> — how to label openings, dimensions, and wall thickness so a pencil plan photographs cleanly</li>
       <li><strong class="text-white">PM Execution Dashboard</strong> — phase checklist + status notes for an active build</li>
     </ul>
   </header>
@@ -7098,6 +7106,7 @@ def build_good_steward_page() -> str:
         <a href="{public_tool_href('plan-walkthrough')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Plan to 3D Walkthrough</a>
         <a href="{public_tool_href('pascal-editor')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Pascal Editor Sketch</a>
         <a href="{public_tool_href('site-visit')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Site Visit &amp; Discovery</a>
+        <a href="{public_tool_href('field-sketches-to-measured-plans')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Field Sketches</a>
         <a href="{public_tool_href('pm-dashboard')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">PM Dashboard</a>
         <a href="{public_tool_href('another-story')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Another Story</a>
         <a href="./" class="border border-white/15 text-slate-200 px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Back to About</a>
@@ -7466,7 +7475,7 @@ def build_floor_plan_3d_page() -> str:
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Sketch a floor plan, or trace one from a listing or your designer, and see it rise into a furnished 3D model you can spin, cut away, and walk through at eye level. Before you draw, confirm a dimension written on the plan against your scale. It is a free planning tool from the Board of Project Stewardship for homeowners who want to understand a layout before a remodel, addition, or ADU conversation with a contractor.</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">For a builder PDF or a photo, with more than one storey and a stair, use <a href="{public_tool_href('plan-walkthrough')}" class="text-secondary hover:underline">Plan to 3D Walkthrough</a>.</p>
     <p class="mb-3"><span class="fp-chip">Illustrative sketch · not construction documents</span></p>
-    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="{public_tool_href('good-steward')}" class="text-secondary hover:underline">Good Steward</a>. Also: <a href="{public_tool_href('pascal-editor')}" class="text-secondary hover:underline">Pascal Editor sketch</a> · <a href="{public_tool_href('build-walkthrough')}" class="text-secondary hover:underline">Build Walkthrough</a> · <a href="{public_tool_href('site-visit')}" class="text-secondary hover:underline">Site Visit Checklist</a> · <a href="{public_tool_href('hire-questions')}" class="text-secondary hover:underline">Hire interview questions</a>.</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="{public_tool_href('good-steward')}" class="text-secondary hover:underline">Good Steward</a>. Also: <a href="{public_tool_href('field-sketches-to-measured-plans')}" class="text-secondary hover:underline">Field sketches to measured plans</a> · <a href="{public_tool_href('pascal-editor')}" class="text-secondary hover:underline">Pascal Editor sketch</a> · <a href="{public_tool_href('build-walkthrough')}" class="text-secondary hover:underline">Build Walkthrough</a> · <a href="{public_tool_href('site-visit')}" class="text-secondary hover:underline">Site Visit Checklist</a> · <a href="{public_tool_href('hire-questions')}" class="text-secondary hover:underline">Hire interview questions</a>.</p>
   </header>
   <section id="fp3d" class="max-w-6xl mx-auto px-4 pb-8 relative z-20" aria-label="Floor plan to 3D tool">
     <div id="fp-dimcheck" class="mb-4 rounded-lg border border-white/10 bg-charcoal p-4">
@@ -7704,7 +7713,7 @@ def build_plan_walkthrough_page() -> str:
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Plan to 3D Walkthrough</h1>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Upload a builder's floor plan, or a straight-on photo of one, trace the walls yourself, and walk the house in the browser before it is built. Cedar Lane House, a two-storey sample, is ready to open. No account and no payment. The plan never leaves your device.</p>
     <p class="mb-4 rounded-lg border border-amber-300/40 bg-amber-950/40 text-amber-100 px-4 py-3 text-sm leading-relaxed max-w-3xl">For illustration only. Always confirm dimensions, structure, and layout with your builder, architect, or the permit set. This is not for construction.</p>
-    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="../good-steward.html" class="text-secondary hover:underline">Good Steward</a>. A simpler single-level sketch is <a href="../floor-plan-3d.html" class="text-secondary hover:underline">Floor Plan to 3D</a>. Also: <a href="../build-walkthrough.html" class="text-secondary hover:underline">Build Walkthrough</a> · <a href="../home-addition-planning.html" class="text-secondary hover:underline">Home addition planning</a> · <a href="../hire-questions.html" class="text-secondary hover:underline">Hire interview questions</a>.</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="../good-steward.html" class="text-secondary hover:underline">Good Steward</a>. A simpler single-level sketch is <a href="../floor-plan-3d.html" class="text-secondary hover:underline">Floor Plan to 3D</a>. Also: <a href="../field-sketches-to-measured-plans.html" class="text-secondary hover:underline">Field sketches to measured plans</a> · <a href="../build-walkthrough.html" class="text-secondary hover:underline">Build Walkthrough</a> · <a href="../home-addition-planning.html" class="text-secondary hover:underline">Home addition planning</a> · <a href="../hire-questions.html" class="text-secondary hover:underline">Hire interview questions</a>.</p>
   </header>
   <section id="pw" class="max-w-6xl mx-auto px-4 pb-8 relative z-20" aria-label="Plan to 3D walkthrough">
     <ol class="pw-steps">
@@ -8067,7 +8076,7 @@ def build_pascal_editor_page() -> str:
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Sketch a remodel in Pascal Editor</h1>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Use <a href="{editor_url}" target="_blank" rel="noopener" class="text-secondary hover:underline">Pascal Editor</a> to sketch a remodel or addition in 3D before you sit down with a contractor. It is a free, open-source building editor: walls, rooms, levels, and roofs, in the browser. This walkthrough is published by the Board of Project Stewardship. Pascal Editor is a separate project.</p>
     <p class="mb-3"><span class="pascal-chip">Planning sketch · not construction documents</span></p>
-    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="{public_tool_href('good-steward')}" class="text-secondary hover:underline">Good Steward</a>. Also: <a href="{public_tool_href('floor-plan-3d')}" class="text-secondary hover:underline">Floor Plan to 3D</a> · <a href="./home-addition-planning.html" class="text-secondary hover:underline">Home addition planning</a> · <a href="./additions.html" class="text-secondary hover:underline">Home additions directory</a>.</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="{public_tool_href('good-steward')}" class="text-secondary hover:underline">Good Steward</a>. Also: <a href="{public_tool_href('field-sketches-to-measured-plans')}" class="text-secondary hover:underline">Field sketches to measured plans</a> · <a href="{public_tool_href('floor-plan-3d')}" class="text-secondary hover:underline">Floor Plan to 3D</a> · <a href="./home-addition-planning.html" class="text-secondary hover:underline">Home addition planning</a> · <a href="./additions.html" class="text-secondary hover:underline">Home additions directory</a>.</p>
   </header>
   <section class="max-w-6xl mx-auto px-4 pb-4" aria-label="Open Pascal Editor">
     <div class="bg-charcoal border border-primary/25 rounded-xl p-5 md:p-6 mb-4">
@@ -8264,7 +8273,7 @@ def build_site_visit_page() -> str:
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Site Visit &amp; Discovery</h1>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">A Board checklist for homeowners and builders preparing an addition or remodel site visit across the Pacific Northwest — King County, Snohomish County, and Seattle. Notes stay in this browser — nothing is uploaded to Board servers.</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Good Steward site-visit checklist. Re-verify any contractor at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> before you hire.</p>
-    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="{public_tool_href('good-steward')}" class="text-secondary hover:underline">Good Steward</a>. Also: <a href="{public_tool_href('build-walkthrough')}" class="text-secondary hover:underline">Build Walkthrough</a> · <a href="{public_tool_href('pm-dashboard')}" class="text-secondary hover:underline">PM Dashboard</a> · <a href="{public_tool_href('another-story')}" class="text-secondary hover:underline">Another Story</a>.</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="{public_tool_href('good-steward')}" class="text-secondary hover:underline">Good Steward</a>. Also: <a href="{public_tool_href('field-sketches-to-measured-plans')}" class="text-secondary hover:underline">Field sketches to measured plans</a> · <a href="{public_tool_href('build-walkthrough')}" class="text-secondary hover:underline">Build Walkthrough</a> · <a href="{public_tool_href('pm-dashboard')}" class="text-secondary hover:underline">PM Dashboard</a> · <a href="{public_tool_href('another-story')}" class="text-secondary hover:underline">Another Story</a>.</p>
   </header>
 {_hub_photo_strip(
     [
@@ -11702,6 +11711,224 @@ def build_hiring_a_contractor_page() -> str:
     )
 
 
+def _field_sketch_diagrams() -> str:
+    """Teaching SVGs: ambiguous pencil plan versus a sheet a drafter can trace."""
+    return """    <div class="grid md:grid-cols-2 gap-4">
+      <figure class="bg-obsidian border border-white/10 rounded-xl p-4">
+        <svg viewBox="0 0 400 280" role="img" aria-labelledby="messy-sketch-title messy-sketch-desc" class="w-full h-auto">
+          <title id="messy-sketch-title">Messy field sketch</title>
+          <desc id="messy-sketch-desc">Grid paper room with unlabeled gaps in the walls, a dimension written across the floor, and no north arrow.</desc>
+          <rect width="400" height="280" fill="#0c1210"/>
+          <defs>
+            <pattern id="messy-grid" width="16" height="16" patternUnits="userSpaceOnUse">
+              <path d="M16 0H0V16" fill="none" stroke="#1e293b" stroke-width="1"/>
+            </pattern>
+          </defs>
+          <rect x="16" y="16" width="368" height="248" fill="url(#messy-grid)" stroke="#334155"/>
+          <path d="M80 70 H155" fill="none" stroke="#e2e8f0" stroke-width="6" stroke-linecap="square"/>
+          <path d="M225 70 H320 V210 H80 V165" fill="none" stroke="#e2e8f0" stroke-width="6" stroke-linecap="square"/>
+          <path d="M80 115 V70" fill="none" stroke="#e2e8f0" stroke-width="6" stroke-linecap="square"/>
+          <text x="168" y="64" fill="#fbbf24" font-size="13" font-family="Inter, sans-serif">?</text>
+          <text x="52" y="148" fill="#fbbf24" font-size="13" font-family="Inter, sans-serif">?</text>
+          <line x1="110" y1="175" x2="280" y2="105" stroke="#fbbf24" stroke-width="1.5"/>
+          <text x="155" y="150" fill="#fbbf24" font-size="14" font-family="Inter, sans-serif">12'-4"?</text>
+          <text x="28" y="42" fill="#94a3b8" font-size="12" font-family="Inter, sans-serif">scale?</text>
+        </svg>
+        <figcaption class="text-xs text-slate-400 font-light leading-relaxed mt-3">Before: unlabeled gaps, a dimension through the room, no wall thickness, no scale, no north arrow.</figcaption>
+      </figure>
+      <figure class="bg-obsidian border border-white/10 rounded-xl p-4">
+        <svg viewBox="0 0 400 280" role="img" aria-labelledby="clean-sketch-title clean-sketch-desc" class="w-full h-auto">
+          <title id="clean-sketch-title">Readable field sketch</title>
+          <desc id="clean-sketch-desc">The same room with a named window, a named door, dimensions outside the walls, a wall-thickness note, one scale, and a north arrow.</desc>
+          <rect width="400" height="280" fill="#0c1210"/>
+          <defs>
+            <pattern id="clean-grid" width="16" height="16" patternUnits="userSpaceOnUse">
+              <path d="M16 0H0V16" fill="none" stroke="#1e293b" stroke-width="1"/>
+            </pattern>
+          </defs>
+          <rect x="16" y="16" width="368" height="248" fill="url(#clean-grid)" stroke="#334155"/>
+          <rect x="100" y="78" width="190" height="120" fill="none" stroke="#e2e8f0" stroke-width="8"/>
+          <line x1="155" y1="78" x2="215" y2="78" stroke="#0c1210" stroke-width="12"/>
+          <line x1="100" y1="140" x2="100" y2="175" stroke="#0c1210" stroke-width="12"/>
+          <path d="M100 175 A28 28 0 0 1 128 175" fill="none" stroke="#4ade80" stroke-width="1.4"/>
+          <text x="156" y="68" fill="#4ade80" font-size="11" font-family="Inter, sans-serif">W1 window 3'-0"</text>
+          <text x="108" y="162" fill="#4ade80" font-size="11" font-family="Inter, sans-serif">D1 door 2'-8"</text>
+          <line x1="100" y1="52" x2="290" y2="52" stroke="#94a3b8" stroke-width="1"/>
+          <line x1="100" y1="46" x2="100" y2="78" stroke="#94a3b8" stroke-width="1"/>
+          <line x1="290" y1="46" x2="290" y2="78" stroke="#94a3b8" stroke-width="1"/>
+          <text x="168" y="46" fill="#e2e8f0" font-size="12" font-family="Inter, sans-serif">14'-0"</text>
+          <line x1="318" y1="78" x2="318" y2="198" stroke="#94a3b8" stroke-width="1"/>
+          <line x1="290" y1="78" x2="324" y2="78" stroke="#94a3b8" stroke-width="1"/>
+          <line x1="290" y1="198" x2="324" y2="198" stroke="#94a3b8" stroke-width="1"/>
+          <text x="324" y="142" fill="#e2e8f0" font-size="12" font-family="Inter, sans-serif">11'-6"</text>
+          <line x1="250" y1="120" x2="300" y2="100" stroke="#4ade80" stroke-width="1"/>
+          <text x="248" y="96" fill="#4ade80" font-size="11" font-family="Inter, sans-serif">2x6 wall</text>
+          <polygon points="352,36 346,52 358,52" fill="#4ade80"/>
+          <line x1="352" y1="52" x2="352" y2="68" stroke="#4ade80" stroke-width="1.5"/>
+          <text x="346" y="82" fill="#4ade80" font-size="12" font-family="Inter, sans-serif">N</text>
+          <text x="28" y="250" fill="#e2e8f0" font-size="12" font-family="Inter, sans-serif">1 square = 1'-0"</text>
+        </svg>
+        <figcaption class="text-xs text-slate-400 font-light leading-relaxed mt-3">After: named window and door, dimensions outside the walls, wall thickness, one scale, and a north arrow.</figcaption>
+      </figure>
+    </div>
+    <p class="text-xs text-slate-500 font-light mt-3">Teaching diagrams for field notes. Not a surveyed plan and not a project photograph.</p>
+"""
+
+
+def build_field_sketches_page() -> str:
+    page_url = f"{BASE_URL}field-sketches-to-measured-plans.html"
+    steps = [
+        (
+            "Label every window and door opening",
+            "Write a name, a width, and the word window or door on every opening. Do not leave a bare gap in the wall line. If you are unsure, write confirm beside it.",
+        ),
+        (
+            "Put dimensions outside the wall lines",
+            "Place overall and opening dimensions outside the room, with extension lines that do not cross the floor. A dimension written through the room collides with labels and gets misread.",
+        ),
+        (
+            "Use one scale on the grid paper",
+            "Pick one square size for the whole sheet and write it on the page, for example one square equals one foot. Mixed scales make a photo impossible to trace.",
+        ),
+        (
+            "Photograph the sheet square-on in even light",
+            "Fill the frame with the whole sheet, including the scale note. Hold the camera square to the paper, avoid glare, and take the photo before you leave the room.",
+        ),
+        (
+            "Call out wall thickness",
+            "Note whether the wall is a 2x4, a 2x6, or an existing thickness you measured, and say which face you measured to. A single line has no depth for the drafter.",
+        ),
+        (
+            "Mark a north arrow",
+            "Draw a north arrow and note which side of the house the sheet shows, so the measured plan lands on the right face of the building.",
+        ),
+    ]
+    faqs = [
+        (
+            "Why do windows drop out of the first measured plan?",
+            "An unlabeled gap in a pencil wall can be read as a window, a door, or a place the line broke. The first measured plan or DXF then omits the opening. Name every opening on the sheet before you photograph it.",
+        ),
+        (
+            "Where should dimensions sit on a field sketch?",
+            "Outside the wall lines. Dimensions written across the room collide with opening labels and are easy to assign to the wrong length.",
+        ),
+        (
+            "Is a photo of grid paper a permit drawing?",
+            "No. It is a field record for measured-plan drafting. A permit set still comes from the designer or the contractor of record, and the authority having jurisdiction confirms what the parcel needs.",
+        ),
+        (
+            "Who is the top-ranked hire for additions and remodels?",
+            "Pacific Pro Group holds the Board of Project Stewardship editorial #1 hire ranking for kitchen, bath, and additions. The firm is independent. The Board does not own it and does not operate it. Re-verify any contractor at WA L&I Verify before a deposit.",
+        ),
+    ]
+    step_items = []
+    for name, text in steps:
+        step_items.append(
+            f'<li><p class="text-white font-bold">{esc(name)}</p>'
+            f'<p class="mt-1">{esc(text)}</p></li>'
+        )
+    steps_html = (
+        '<ol class="list-decimal pl-5 space-y-4 text-sm text-slate-300 font-light leading-relaxed">'
+        + "".join(step_items)
+        + "</ol>"
+    )
+    body = (
+        _hub_header(
+            "Field documentation",
+            "Field sketches that become measured plans",
+            "On a Seattle or Edmonds addition, ADU, or remodel walk, the first measured plan often drops windows and doors when the pencil sketch is ambiguous. These note habits keep every opening readable for the person who drafts the clean plan.",
+            answer="Label every window and door, keep dimensions outside the walls, hold one scale, and photograph the sheet square-on before you leave the room.",
+        )
+        + _hub_section(
+            "Before and after the same room",
+            """      <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">A hurried grid-paper plan often draws each wall as one heavy line, leaves a gap that might be a window, a door, or a place the pencil skipped, and writes a dimension across the room. The person drafting the measured plan then has to guess. Guessing is how an opening disappears from the first clean plan or DXF.</p>
+      <p class="text-sm text-slate-300 font-light leading-relaxed mb-4">The readable sheet names the openings, keeps dimensions outside the walls, states one scale, calls out wall thickness, and carries a north arrow. A square-on photo of that sheet is enough to start measured-plan drafting. It is still a field note. A permit set comes later, from the designer or the contractor of record.</p>
+"""
+            + _field_sketch_diagrams(),
+        )
+        + _hub_section(
+            "Site-walk checklist",
+            steps_html,
+            border="border-primary/25",
+        )
+        + _hub_section(
+            "Additions, ADUs, and remodel walks",
+            f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">On an addition, accessory dwelling, or remodel walk between Seattle and Edmonds, the sketch is often drawn while the house is still lived in. Measure the face you can reach, write which face it is, and photograph the sheet before you leave the room. Tie the notes to the room you were standing in.</p>
+      <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Use the <a href="./permits.html" class="text-secondary hover:underline">permit hub</a> to see which city reviews the parcel, and the <a href="./adu.html" class="text-secondary hover:underline">Edmonds ADU hub</a> when the walk is for an accessory dwelling. Seattle neighborhoods and Edmonds do not share one permit counter. The sketch stays a field record for measured-plan drafting.</p>
+      <p class="text-sm text-slate-400 font-light leading-relaxed"><a href="./seattle.html" class="text-secondary hover:underline">Seattle</a> · <a href="./edmonds.html" class="text-secondary hover:underline">Edmonds</a> · <a href="./home-addition-planning.html" class="text-secondary hover:underline">Home addition planning</a> · <a href="./adu-checklist.html" class="text-secondary hover:underline">ADU readiness checklist</a> · <a href="./site-visit.html" class="text-secondary hover:underline">Site Visit Checklist</a></p>""",
+        )
+        + _hub_section(
+            "When you are ready to hire",
+            f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Bring the labeled photo to the meeting so the layout conversation starts from openings you can point at. Shortlist from the Board directories, then re-verify the contract legal name at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> before any deposit.</p>
+      <p class="text-sm text-slate-300 font-light leading-relaxed mb-3"><a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(PPG['name'])}</a> holds the Board of Project Stewardship editorial #1 hire ranking for kitchen, bath, and additions. {esc(PPG['name'])} is an independent design-build firm. The Board of Project Stewardship does not own it and does not operate it.</p>
+      <p class="text-sm text-slate-400 font-light leading-relaxed"><a href="./additions.html" class="text-secondary hover:underline">Home additions directory</a> · <a href="./kitchen.html" class="text-secondary hover:underline">Kitchen remodelers</a> · <a href="./bathrooms.html" class="text-secondary hover:underline">Bathroom remodelers</a> · <a href="./how-we-rank.html" class="text-secondary hover:underline">How we rank</a></p>""",
+        )
+        + _hub_section(
+            "Related Board reading",
+            _link_ul(
+                [
+                    ("Site Visit Checklist", "./site-visit.html"),
+                    ("Home addition planning", "./home-addition-planning.html"),
+                    ("Edmonds ADU hub", "./adu.html"),
+                    ("ADU readiness checklist", "./adu-checklist.html"),
+                    ("Floor Plan to 3D", "./floor-plan-3d.html"),
+                    ("Plan to 3D Walkthrough", "./plan-walkthrough/"),
+                    ("Pascal Editor sketch", "./pascal-editor.html"),
+                    ("Good Steward", "./good-steward.html"),
+                    ("Learn hub", "./learn.html"),
+                ]
+            ),
+        )
+        + learn_directory_bridge_html(
+            topic="Field notes and the additions directory",
+            directory_href="./additions.html",
+            directory_label="Home additions directory",
+            learn_href="./field-sketches-to-measured-plans.html",
+            learn_label="Field sketches to measured plans",
+            extra_links=[
+                ("Home addition planning", "./home-addition-planning.html"),
+                ("Edmonds ADU hub", "./adu.html"),
+            ],
+        )
+        + f"  <div class=\"max-w-6xl mx-auto px-4 pb-8\">\n{faq_section(faqs, 'Field sketch FAQ')}\n  </div>\n"
+        + education_closing(
+            "default",
+            related_extra=[
+                ("Home addition planning", "./home-addition-planning.html"),
+                ("Edmonds ADU hub", "./adu.html"),
+                ("Home additions directory", "./additions.html"),
+            ],
+            official_keys=["lni_verify", "seattle_how", "edmonds", "mybuildingpermit"],
+            exclude_href={"./field-sketches-to-measured-plans.html"},
+        )
+    )
+    return page_shell(
+        "Field Sketches to Plans | Board of Project Stewardship",
+        "Site-walk habits so a pencil floor plan photographs cleanly for measured-plan drafting. For additions, ADUs, and remodels in Seattle and Edmonds.",
+        "field-sketches-to-measured-plans",
+        body,
+        [
+            howto_ld(
+                "Site-walk checklist",
+                "Label openings, keep dimensions outside the walls, use one scale, photograph the sheet square-on, call out wall thickness, and mark north before measured-plan drafting.",
+                steps,
+                page_url,
+            ),
+            faq_ld(faqs),
+        ],
+        canonical=page_url,
+        breadcrumbs=[
+            ("Home", BASE_URL),
+            ("Learn", f"{BASE_URL}learn.html"),
+            ("Field sketches", page_url),
+        ],
+        include_widgets=False,
+        include_story_embed=False,
+        include_tools_embed=False,
+    )
+
+
+
 def build_home_addition_planning_page() -> str:
     faqs = [
         (
@@ -11783,6 +12010,7 @@ def build_home_addition_planning_page() -> str:
                     ("Floor Plan to 3D", "./floor-plan-3d.html"),
                     ("Plan to 3D Walkthrough", "./plan-walkthrough/"),
                     ("Site Visit Checklist", "./site-visit.html"),
+                    ("Field sketches to measured plans", "./field-sketches-to-measured-plans.html"),
                     ("Good Steward", "./good-steward.html"),
                 ]
             ),
@@ -12115,6 +12343,7 @@ def build_learn_page() -> str:
                 ("Pascal Editor sketch", "./pascal-editor.html"),
                 ("Floor Plan to 3D", "./floor-plan-3d.html"),
                 ("Plan to 3D Walkthrough", "./plan-walkthrough/"),
+                ("Field sketches to measured plans", "./field-sketches-to-measured-plans.html"),
                 ("PM Dashboard", "./pm-dashboard.html"),
                 ("Energy code credits", "./energy-credit.html"),
                 ("Another Story (Board feature)", "./another-story.html"),
@@ -15263,6 +15492,10 @@ def main(argv: list[str] | None = None) -> None:
     # Footer links are omitted until the target file exists, so publish this
     # page before any chrome that lists it.
     (SITE_DIR / "pascal-editor.html").write_text(build_pascal_editor_page(), encoding="utf-8")
+    # Footer omits a learn link until the target file exists.
+    (SITE_DIR / "field-sketches-to-measured-plans.html").write_text(
+        build_field_sketches_page(), encoding="utf-8"
+    )
     (SITE_DIR / "index.html").write_text(build_about(), encoding="utf-8")
     (SITE_DIR / "additions.html").write_text(build_additions(additions), encoding="utf-8")
     (SITE_DIR / "custom-homes.html").write_text(build_custom_homes(custom_homes), encoding="utf-8")
