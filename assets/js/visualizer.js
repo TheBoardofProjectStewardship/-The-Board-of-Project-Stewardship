@@ -12,9 +12,9 @@ if (root) {
     bathroom: "bathroom-before.webp",
   };
   const AFTER = {
-    addition: ["exterior-after.webp", "exterior-after-b.webp"],
-    kitchen: ["kitchen-after.webp", "kitchen-after-b.webp"],
-    bathroom: ["bathroom-after.webp", "bathroom-after-b.webp"],
+    addition: "exterior-after.webp",
+    kitchen: "kitchen-after.webp",
+    bathroom: "bathroom-after.webp",
   };
   const LEARN = {
     addition: ["./home-addition-planning.html", "Home addition planning"],
@@ -35,12 +35,11 @@ if (root) {
   const fileInput = document.getElementById("see-file");
   const preview = document.getElementById("see-preview");
   const form = document.getElementById("see-lead-form");
-  const styleIndex = { addition: 0, kitchen: 0, bathroom: 0 };
   let mode = "addition";
   let prepared = null;
+  let previewReady = false;
   let photoRevision = 0;
   let streetRev = 0;
-  let demoSuccess = false;
   let phase = "demo";
   let sessionToken = "";
   let renderBusy = false;
@@ -108,13 +107,6 @@ if (root) {
     });
     const modeField = document.getElementById("see-mode-field");
     if (modeField) modeField.value = next;
-    const addressWrap = document.getElementById("see-lead-address-wrap");
-    const addressInput = document.getElementById("see-lead-address");
-    if (addressWrap && addressInput) {
-      const required = next === "addition";
-      addressInput.required = required;
-      addressWrap.querySelector("span").textContent = required ? "Property address" : "Property address (optional)";
-    }
     document.querySelectorAll('.see-chip[data-group="project-type"]').forEach((chip) => {
       const match = chip.getAttribute("data-value") === PROJECT_BY_MODE[next];
       if (match) chip.setAttribute("aria-pressed", "true");
@@ -154,48 +146,47 @@ if (root) {
     scope.querySelectorAll("[data-range]").forEach((input) => {
       input.addEventListener("input", () => applyRange(input));
       applyRange(input);
-      const host = input.closest(".see-compare");
-      if (!host || host.querySelector(".see-compare-actions")) return;
-      const actions = document.createElement("div");
-      actions.className = "see-compare-actions";
-      [["Show before", "0"], ["Show concept", "100"]].forEach(([label, value]) => {
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "see-btn-secondary";
-        button.textContent = label;
-        button.addEventListener("click", () => {
-          input.value = value;
-          applyRange(input);
-        });
-        actions.appendChild(button);
-      });
-      host.appendChild(actions);
     });
+  }
+
+  function setPhotoChosen(on) {
+    const labelText = document.getElementById("see-file-label-text");
+    const label = document.getElementById("see-file-label");
+    const next = document.getElementById("see-to-project");
+    if (labelText) labelText.textContent = on ? "Choose another photo" : "Upload my photo";
+    if (label) {
+      label.classList.toggle("see-btn", !on);
+      label.classList.toggle("see-btn-secondary", on);
+    }
+    if (next) next.hidden = !on;
   }
 
   function showFlow(name) {
     const photo = document.getElementById("see-flow-photo");
     const project = document.getElementById("see-flow-project");
+    const hero = document.getElementById("see-hero");
+    const unlock = document.getElementById("see-unlock");
     if (photo) photo.hidden = name !== "photo";
     if (project) project.hidden = name !== "project";
+    if (hero) hero.hidden = name === "preview" || name === "request";
+    if (resultEl) resultEl.hidden = name !== "preview" && name !== "request";
+    if (leadEl && name !== "request") leadEl.hidden = true;
+    if (unlock) unlock.hidden = name === "request";
     root.querySelectorAll(".see-stepper-btn").forEach((button) => {
       const on = button.getAttribute("data-flow") === name;
       button.setAttribute("aria-selected", on ? "true" : "false");
     });
-    if (name === "see") document.getElementById("see-result")?.scrollIntoView({ block: "start" });
-    if (name === "photo") document.getElementById("see-sample") && (document.getElementById("see-sample").hidden = false);
+    if (name === "preview") resultEl?.scrollIntoView({ block: "start" });
+    if (name === "request") {
+      if (leadEl) leadEl.hidden = false;
+      if (step1) step1.hidden = false;
+      if (step2) step2.hidden = true;
+      leadEl?.scrollIntoView({ block: "start" });
+    }
   }
 
   function wireFlow() {
     document.getElementById("see-to-project")?.addEventListener("click", () => {
-      if (mode === "addition") {
-        const address = (document.getElementById("see-address")?.value || "").trim();
-        if (!address) {
-          say("Add the property address, then choose a photo.");
-          document.getElementById("see-address")?.focus();
-          return;
-        }
-      }
       if (!prepared) {
         say("Choose a JPEG, PNG, or WebP photo first.");
         fileInput?.focus();
@@ -203,23 +194,24 @@ if (root) {
       }
       say("");
       showFlow("project");
-      document.getElementById("see-tab-" + mode)?.focus();
     });
     root.querySelectorAll(".see-stepper-btn").forEach((button) => {
       button.addEventListener("click", () => {
         const next = button.getAttribute("data-flow");
-        if (next === "project" && !prepared) {
+        if ((next === "project" || next === "preview" || next === "request") && !prepared) {
           say("Choose a JPEG, PNG, or WebP photo first.");
           showFlow("photo");
           fileInput?.focus();
           return;
         }
-        if (next === "see") {
-          if (resultEl?.hidden) {
-            say("Use the button on the project step first.");
+        if (next === "preview" || next === "request") {
+          if (!previewReady) {
+            say("Use See concept on the project step first.");
+            showFlow("project");
             return;
           }
-          showFlow("see");
+          showFlow(next);
+          if (next === "request") document.getElementById("see-step-1-title")?.focus();
           return;
         }
         showFlow(next);
@@ -289,9 +281,7 @@ if (root) {
     streetRev += 1;
     const placeField = document.getElementById("see-place-id");
     if (placeField) placeField.value = nextPlaceId || "";
-    const source = document.getElementById("see-address");
     const target = document.getElementById("see-lead-address");
-    if (source) source.value = value;
     if (target) target.value = value;
     const wrap = document.getElementById("see-streetview");
     const frame = document.getElementById("see-streetview-frame");
@@ -398,7 +388,7 @@ if (root) {
     let img = preview.querySelector("img");
     if (!img) {
       img = document.createElement("img");
-      img.alt = "Your photo, re-encoded in this browser. Not uploaded while the demo is on.";
+      img.alt = "Your photo, re-encoded in this browser.";
       preview.appendChild(img);
     }
     if (img.dataset.url) URL.revokeObjectURL(img.dataset.url);
@@ -419,6 +409,7 @@ if (root) {
     }
     const file = fileInput.files && fileInput.files[0];
     if (!file) {
+      setPhotoChosen(false);
       if (renderBtn && phase !== "unavailable") renderBtn.disabled = false;
       return;
     }
@@ -427,9 +418,11 @@ if (root) {
       if (revision !== photoRevision) return;
       prepared = blob;
       showPreview(blob);
+      setPhotoChosen(true);
       say("Embedded photo metadata was removed. Details visible in the photo remain.");
     } catch (err) {
       if (revision !== photoRevision) return;
+      setPhotoChosen(false);
       say(err.message || "That photo could not be used.");
     } finally {
       if (revision === photoRevision && renderBtn && phase !== "unavailable") renderBtn.disabled = false;
@@ -457,7 +450,7 @@ if (root) {
   function fillResult() {
     const before = document.getElementById("see-result-before");
     const after = document.getElementById("see-result-after");
-    const afterFile = AFTER[mode][styleIndex[mode] % AFTER[mode].length];
+    const afterFile = AFTER[mode];
     before.src = sampleSrc(BEFORE[mode]);
     after.src = sampleSrc(afterFile);
     before.alt = "Sample — illustrative " + mode + " starting picture. Not a customer house and not a Pacific Pro Group project.";
@@ -467,18 +460,8 @@ if (root) {
       learn.href = LEARN[mode][0];
       learn.textContent = LEARN[mode][1];
     }
-    resultEl.hidden = false;
-    const sample = document.getElementById("see-sample");
-    if (sample) sample.hidden = true;
-    root.querySelectorAll(".see-stepper-btn").forEach((button) => {
-      const on = button.getAttribute("data-flow") === "see";
-      button.setAttribute("aria-selected", on ? "true" : "false");
-    });
-    const photo = document.getElementById("see-flow-photo");
-    const project = document.getElementById("see-flow-project");
-    if (photo) photo.hidden = true;
-    if (project) project.hidden = true;
-    resultEl.scrollIntoView({ block: "start" });
+    previewReady = true;
+    showFlow("preview");
   }
 
   async function uploadPhoto(blob) {
@@ -496,16 +479,6 @@ if (root) {
 
   document.getElementById("see-render")?.addEventListener("click", async () => {
     if (renderBusy) return;
-    if (mode === "addition") {
-      const address = (document.getElementById("see-address")?.value || "").trim();
-      if (!address) {
-        say("Add the property address, then choose a photo.");
-        document.getElementById("see-address")?.focus();
-        return;
-      }
-      const leadAddress = document.getElementById("see-lead-address");
-      if (leadAddress && !leadAddress.value) leadAddress.value = address;
-    }
     if (!prepared) {
       say("Choose a JPEG, PNG, or WebP photo first.");
       fileInput?.focus();
@@ -513,15 +486,15 @@ if (root) {
     }
     if (phase === "demo") {
       fillResult();
-      say("Demo preview. Sample — illustrative. This is not a concept of your photo.");
+      say("");
       const model = document.getElementById("see-model-used");
-      if (model) model.value = "demo-sample";
+      if (model) model.value = "sample";
       const opts = document.getElementById("see-prompt-options");
       if (opts) opts.value = JSON.stringify({ ...optionsPayload(), note: (document.getElementById("see-note")?.value || "").slice(0, 140) });
       return;
     }
     if (phase !== "ready") {
-      say("The live tool is not available. Use the contact page. Nothing was sent.");
+      say("The concept service is not available. Use the contact page. Nothing was sent.");
       return;
     }
     const attest = document.getElementById("see-attest");
@@ -539,7 +512,7 @@ if (root) {
     try {
       const imageId = await uploadPhoto(snapshot);
       if (revision !== photoRevision || snapshotMode !== mode) {
-        say("The photo changed. Choose Preview again.");
+        say("The photo changed. Choose See concept again.");
         return;
       }
       const response = await fetch(apiBase() + "/api/render", {
@@ -559,21 +532,23 @@ if (root) {
       if (imageField && imageField.dataset) imageField.dataset.imageId = imageId;
       root.dataset.imageId = imageId;
       if (!response.ok) {
-        say("The live concept service is not available yet. Nothing was charged.");
+        say("The concept service is not available yet. Nothing was sent.");
         return;
       }
       say("Request received. The concept is processing.");
     } catch {
-      say("The live tool is not available. Use the contact page. Nothing was sent.");
+      say("The concept service is not available. Use the contact page. Nothing was sent.");
     } finally {
       renderBusy = false;
     }
   });
 
   document.getElementById("see-unlock")?.addEventListener("click", () => {
-    if (leadEl) leadEl.hidden = false;
-    if (step1) step1.hidden = false;
-    if (step2) step2.hidden = true;
+    if (!previewReady) {
+      say("Use See concept on the project step first.");
+      return;
+    }
+    showFlow("request");
     document.getElementById("see-step-1-title")?.focus();
   });
 
@@ -620,9 +595,6 @@ if (root) {
     const zip = document.getElementById("see-zip");
     if (!city?.value) missing.push({ id: "see-city", label: "city" });
     if (!/^\d{5}$/.test((zip?.value || "").trim())) missing.push({ id: "see-zip", label: "a 5-digit ZIP" });
-    if (mode === "addition" && !(document.getElementById("see-lead-address")?.value || "").trim()) {
-      missing.push({ id: "see-lead-address", label: "property address" });
-    }
     if (missing.length) {
       showStepErrors(missing);
       return;
@@ -694,13 +666,13 @@ if (root) {
     }
     if (phase !== "ready") {
       if (phase === "demo") {
-        demoSuccess = true;
         const ok = document.getElementById("see-demo-success");
         if (ok) ok.hidden = false;
-        say("Demo only. Nothing was sent.");
-        document.getElementById("see-more-styles").hidden = false;
+        say("Nothing was sent. Use the contact page while the concept service is not connected.");
+        const more = document.getElementById("see-more-styles");
+        if (more) more.hidden = false;
       } else {
-        say("The live tool is not available. Use the contact page. Nothing was sent.");
+        say("The concept service is not available. Use the contact page. Nothing was sent.");
       }
       return;
     }
@@ -760,27 +732,18 @@ if (root) {
         say("The request was not accepted. Nothing else was sent.");
         return;
       }
-      say(data.status === "received" ? "Request received." : "Request received.");
-      document.getElementById("see-more-styles").hidden = false;
+      say("Request received.");
+      const more = document.getElementById("see-more-styles");
+      if (more) more.hidden = false;
     } catch {
-      say("The live tool is not available. Use the contact page. Nothing was sent.");
+      say("The concept service is not available. Use the contact page. Nothing was sent.");
     }
-  });
-
-  document.getElementById("see-more-styles")?.addEventListener("click", () => {
-    if (!demoSuccess && phase === "demo") {
-      say("Share the request in the form before another sample.");
-      return;
-    }
-    styleIndex[mode] = (styleIndex[mode] + 1) % AFTER[mode].length;
-    fillResult();
-    say("Another sample style — illustrative. Still this project type, and still not a concept of your photo.");
   });
 
   async function maybeStreetMeta() {
     if (isDemo() || !mapsKey() || !sessionToken) return;
     const revision = streetRev;
-    const address = (document.getElementById("see-address")?.value || "").trim();
+    const address = (document.getElementById("see-lead-address")?.value || "").trim();
     if (!address) return;
     const response = await fetch(apiBase() + "/api/streetview-meta", {
       method: "POST",
@@ -795,22 +758,18 @@ if (root) {
   }
 
   function captureAddressSync() {
-    const source = document.getElementById("see-address");
     const target = document.getElementById("see-lead-address");
     const placeField = document.getElementById("see-place-id");
-    source?.addEventListener("input", () => {
+    target?.addEventListener("input", () => {
       if (placeField) placeField.value = "";
-      if (target && document.activeElement !== target) target.value = source.value;
     });
-    source?.addEventListener("change", () => { maybeStreetMeta(); });
+    target?.addEventListener("change", () => { maybeStreetMeta(); });
   }
 
   async function initLive() {
     if (isDemo()) {
       phase = "demo";
       root.dataset.phase = "demo";
-      const renderBtn = document.getElementById("see-render");
-      if (renderBtn) renderBtn.textContent = "Preview sample concept";
       return;
     }
     phase = "initializing";
@@ -818,12 +777,12 @@ if (root) {
     if (renderBtn) renderBtn.disabled = true;
     const attest = document.getElementById("see-attest-wrap");
     if (attest) attest.hidden = false;
-    say("Preparing the live tool…");
+    say("");
     try {
       const token = await turnstileToken("session");
       if (!token) {
         phase = "unavailable";
-        say("The live tool is not available. Use the contact page. Nothing was sent.");
+        say("The concept service is not available. Use the contact page. Nothing was sent.");
         return;
       }
       const response = await fetch(apiBase() + "/api/session", {
@@ -834,7 +793,7 @@ if (root) {
       const data = await response.json();
       if (!response.ok || !data.token) {
         phase = "unavailable";
-        say("The live tool is not available. Use the contact page. Nothing was sent.");
+        say("The concept service is not available. Use the contact page. Nothing was sent.");
         return;
       }
       sessionToken = data.token;
@@ -843,7 +802,7 @@ if (root) {
       say("");
     } catch {
       phase = "unavailable";
-      say("The live tool is not available. Use the contact page. Nothing was sent.");
+      say("The concept service is not available. Use the contact page. Nothing was sent.");
     }
   }
 

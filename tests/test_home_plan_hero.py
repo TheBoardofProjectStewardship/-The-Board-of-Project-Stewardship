@@ -40,8 +40,22 @@ class HomePlanHeroTests(unittest.TestCase):
         tool. Vendor and model names stay banned.
         """
         self.assertEqual(self.html.count("<h1"), 1)
-        self.assertIn('<h1 id="see-project-title">See your addition / remodel</h1>', self.html)
-        self.assertIn("See your home project before you build.", self.html)
+        self.assertIn('<h1 id="see-project-title">See what your home could become.</h1>', self.html)
+        self.assertIn(
+            "Upload a photo of your house, kitchen or bathroom and explore a concept for your addition or remodel.",
+            self.html,
+        )
+        self.assertIn("No email or phone required for your first preview.", self.html)
+        self.assertIn(">Upload my photo</span>", self.html)
+        self.assertIn("Sample — illustrative. Not a Pacific Pro Group project.", self.html)
+        self.assertIn("WA contractor registration PACIFPG765OF", self.html)
+        self.assertIn("Drag to compare.", self.html)
+        self.assertNotIn("Preview sample concept", self.html)
+        self.assertNotIn("Show before", self.html)
+        self.assertNotIn("Show another sample style", self.html)
+        self.assertNotIn("live API", self.html)
+        self.assertNotIn("Demo preview", self.html)
+        self.assertNotIn("a live lead", self.html)
         self.assertIn(">3D Walkthrough</a>", self.html)
         self.assertIn('href="./plan-walkthrough/"', self.html)
         self.assertNotIn("Walk through a home in 3D", self.html)
@@ -50,7 +64,7 @@ class HomePlanHeroTests(unittest.TestCase):
         self.assertNotIn('rel="preload" as="image"', self.html)
         self.assertEqual(self.html.count('fetchpriority="high"'), 1)
         hero_img = re.search(
-            r'<img\b[^>]*assets/images/visualizer/exterior-after\.webp[^>]*>',
+            r'<img\b[^>]*assets/images/visualizer/exterior-after\.jpg[^>]*>',
             self.html,
         )
         self.assertIsNotNone(hero_img)

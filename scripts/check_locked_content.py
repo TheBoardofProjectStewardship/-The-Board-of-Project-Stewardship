@@ -45,6 +45,14 @@ def section(html: str, section_id: str) -> str:
 
 
 def anchors(html: str) -> str:
+    # The visualizer trust line links to L&I on purpose. It is outside the
+    # locked slices, so it is not part of this hash.
+    hero_at = html.find('id="plan-home-hero"')
+    if hero_at >= 0:
+        start = html.rfind("<section", 0, hero_at)
+        end = html.find("</section>", hero_at)
+        if start >= 0 and end > start:
+            html = html[:start] + html[end + len("</section>") :]
     found = re.findall(
         r"<a\b[^>]*https://secure\.lni\.wa\.gov/verify/[^>]*>.*?</a>",
         html,

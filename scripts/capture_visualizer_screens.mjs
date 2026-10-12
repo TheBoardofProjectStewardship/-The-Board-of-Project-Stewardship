@@ -53,14 +53,14 @@ await phone.locator("#see-sample-range-addition").evaluate((el) => {
 });
 await shot(phone, "home-phone-390x844.png");
 
+await phone.getByRole("button", { name: "Upload my photo" }).waitFor();
+await phone.locator("#see-file").setInputFiles(photo);
+await phone.getByText("Embedded photo metadata was removed.").waitFor();
 await phone.locator("#see-drop").scrollIntoViewIfNeeded();
 await shot(phone, "upload-step-phone-390x844.png");
 
-await phone.locator("#see-address").fill("100 Main St, Edmonds, WA");
-await phone.locator("#see-file").setInputFiles(photo);
-await phone.getByText("Embedded photo metadata was removed.").waitFor();
 await phone.locator("#see-to-project").click();
-await phone.getByRole("button", { name: "Preview sample concept" }).waitFor();
+await phone.getByRole("button", { name: "See concept", exact: true }).waitFor();
 await phone.locator("#see-render").click();
 await phone.locator("#see-result").waitFor({ state: "visible" });
 await phone.locator("#see-result-range").scrollIntoViewIfNeeded();

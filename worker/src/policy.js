@@ -276,7 +276,6 @@ export function validateLead(body) {
   const mode = source.mode == null || source.mode === "" ? "" : enumField(source.mode, MODES);
   if (source.mode && !mode) errors.push("mode");
   const address = bounded(source.address, 180);
-  if (mode === "addition" && !address) errors.push("address");
   const phone = bounded(source.phone, 20);
   if (sms.value && !phone) errors.push("text_consent_without_phone");
   const note = bounded(source.note, 500);
