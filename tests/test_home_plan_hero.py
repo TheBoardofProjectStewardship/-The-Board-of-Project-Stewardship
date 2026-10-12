@@ -48,7 +48,13 @@ class HomePlanHeroTests(unittest.TestCase):
         self.assertNotIn("three.module.js", self.html)
         self.assertNotIn("plan-walkthrough.js", self.html)
         self.assertNotIn('rel="preload" as="image"', self.html)
-        self.assertNotIn("fetchpriority", self.html)
+        self.assertEqual(self.html.count('fetchpriority="high"'), 1)
+        hero_img = re.search(
+            r'<img\b[^>]*assets/images/visualizer/exterior-after\.webp[^>]*>',
+            self.html,
+        )
+        self.assertIsNotNone(hero_img)
+        self.assertIn('fetchpriority="high"', hero_img.group(0))
         self.assertIn('data-api-base=""', self.html)
         self.assertIn("Sample — illustrative", self.html)
         self.assertIn("Not a Pacific Pro Group project", self.html)

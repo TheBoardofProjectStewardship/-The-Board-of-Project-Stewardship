@@ -3503,169 +3503,212 @@ def home_plan_hero() -> tuple[str, str]:
       <h1 id="see-project-title">See your addition / remodel</h1>
       <p class="see-dek">See your home project before you build.</p>
       <p class="see-note">The first concept does not ask for contact details. Upload a photo you took.</p>
-      <div class="see-grid">
-        <div>
+      <figure class="see-stage" id="see-sample">
+        <div class="see-compare" data-sample="addition">
+          <div class="see-compare-frame" id="see-sample-frame-addition">
+            <img class="see-compare-after" src="./assets/images/visualizer/exterior-after.webp" alt="Sample — illustrative two-story exterior photograph. Not a customer house and not a Pacific Pro Group project." width="960" height="640">
+            <img class="see-compare-before" src="./assets/images/visualizer/exterior-before.webp" alt="Sample — illustrative one-story exterior photograph. Not a customer house and not a Pacific Pro Group project." width="960" height="640" data-defer-lcp>
+            <p class="see-tag see-tag-before">Before</p>
+            <p class="see-tag see-tag-after">Concept</p>
+            <span class="see-handle" aria-hidden="true"></span>
+            <label class="see-range see-range-overlay" for="see-sample-range-addition"><span class="see-sr">Compare the sample. Drag or use arrow keys.</span>
+              <input id="see-sample-range-addition" data-range="see-sample-frame-addition" type="range" min="0" max="100" value="50" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+            </label>
+          </div>
+        </div>
+        <div class="see-compare" data-sample="kitchen" hidden>
+          <div class="see-compare-frame" id="see-sample-frame-kitchen">
+            <img class="see-compare-after" src="./assets/images/visualizer/kitchen-after.webp" alt="Sample — illustrative newer kitchen photograph. Not a customer kitchen and not a Pacific Pro Group project." width="960" height="640" data-defer-lcp>
+            <img class="see-compare-before" src="./assets/images/visualizer/kitchen-before.webp" alt="Sample — illustrative older kitchen photograph. Not a customer kitchen and not a Pacific Pro Group project." width="960" height="640" data-defer-lcp>
+            <p class="see-tag see-tag-before">Before</p>
+            <p class="see-tag see-tag-after">Concept</p>
+            <span class="see-handle" aria-hidden="true"></span>
+            <label class="see-range see-range-overlay" for="see-sample-range-kitchen"><span class="see-sr">Compare the sample. Drag or use arrow keys.</span>
+              <input id="see-sample-range-kitchen" data-range="see-sample-frame-kitchen" type="range" min="0" max="100" value="50" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+            </label>
+          </div>
+        </div>
+        <div class="see-compare" data-sample="bathroom" hidden>
+          <div class="see-compare-frame" id="see-sample-frame-bathroom">
+            <img class="see-compare-after" src="./assets/images/visualizer/bathroom-after.webp" alt="Sample — illustrative newer bathroom photograph. Not a customer bathroom and not a Pacific Pro Group project." width="960" height="640" data-defer-lcp>
+            <img class="see-compare-before" src="./assets/images/visualizer/bathroom-before.webp" alt="Sample — illustrative older bathroom photograph. Not a customer bathroom and not a Pacific Pro Group project." width="960" height="640" data-defer-lcp>
+            <p class="see-tag see-tag-before">Before</p>
+            <p class="see-tag see-tag-after">Concept</p>
+            <span class="see-handle" aria-hidden="true"></span>
+            <label class="see-range see-range-overlay" for="see-sample-range-bathroom"><span class="see-sr">Compare the sample. Drag or use arrow keys.</span>
+              <input id="see-sample-range-bathroom" data-range="see-sample-frame-bathroom" type="range" min="0" max="100" value="50" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+            </label>
+          </div>
+        </div>
+        <figcaption class="see-caption">Sample — illustrative. Not a Pacific Pro Group project and not a photo of a customer's house.</figcaption>
+      </figure>
+      <div class="see-flow">
+        <div class="see-stepper" role="tablist" aria-label="Steps">
+          <button type="button" class="see-stepper-btn" id="see-stepper-photo" role="tab" aria-selected="true" aria-controls="see-flow-photo" data-flow="photo">1 Photo</button>
+          <button type="button" class="see-stepper-btn" id="see-stepper-project" role="tab" aria-selected="false" aria-controls="see-flow-project" data-flow="project">2 Project</button>
+          <button type="button" class="see-stepper-btn" id="see-stepper-see" role="tab" aria-selected="false" aria-controls="see-result" data-flow="see">3 See it</button>
+        </div>
+        <div id="see-flow-photo" class="see-flow-panel" role="tabpanel" aria-labelledby="see-stepper-photo">
+          <h2>Photo</h2>
+          <div id="see-places" hidden>
+            <label class="see-field" for="see-places-input"><span>Address</span>
+              <input id="see-places-input" type="text" autocomplete="street-address" placeholder="Start typing an address">
+            </label>
+            <div id="see-places-host"></div>
+            <p id="see-powered-by" class="see-powered" hidden>Google Maps</p>
+          </div>
+          <div id="see-streetview" hidden>
+            <p class="see-fine">Is this your house? Street View is shown unmodified. It is not sent with your photo.</p>
+            <iframe id="see-streetview-frame" title="Street View near this address" loading="lazy" referrerpolicy="strict-origin" style="width:100%;height:220px;border:0;border-radius:12px;background:#e7e2d8"></iframe>
+          </div>
+          <div id="see-address-plain">
+            <label class="see-field" for="see-address"><span>Property address</span>
+              <input id="see-address" name="address" type="text" autocomplete="street-address" placeholder="Street, city, Washington">
+            </label>
+          </div>
+          <div class="see-drop" id="see-drop">
+            <p class="see-drop-title">Drop a photo here, or take one</p>
+            <p id="see-photo-tip" class="see-fine">Straight-on curbside photo. JPEG, PNG, or WebP, up to 8 MB.</p>
+            <label class="see-file-btn" for="see-file">Take or choose a photo
+              <input id="see-file" class="see-file" type="file" accept="image/jpeg,image/png,image/webp" capture="environment">
+            </label>
+            <div id="see-preview" class="see-preview" hidden></div>
+          </div>
+          <p id="see-photo-notice" class="see-fine">Embedded photo metadata is removed. Details visible in the photo remain. In this demo the photo stays in the browser. A live request shares selected photos with Pacific Pro Group only after you submit and check the sharing box.</p>
+          <label class="see-check" id="see-attest-wrap" for="see-attest" hidden>
+            <input id="see-attest" type="checkbox" value="yes">
+            <span>I took this photo, or I have permission to upload it.</span>
+          </label>
+          <div class="see-actions">
+            <button type="button" class="see-btn" id="see-to-project">Continue</button>
+          </div>
+        </div>
+        <div id="see-flow-project" class="see-flow-panel" role="tabpanel" aria-labelledby="see-stepper-project" hidden>
+          <h2>Project</h2>
           <div class="see-tabs" role="tablist" aria-label="Project type">
             <button type="button" class="see-tab" id="see-tab-addition" role="tab" aria-selected="true" aria-controls="see-panel-addition" data-mode="addition">Addition</button>
             <button type="button" class="see-tab" id="see-tab-kitchen" role="tab" aria-selected="false" tabindex="-1" aria-controls="see-panel-kitchen" data-mode="kitchen">Kitchen</button>
             <button type="button" class="see-tab" id="see-tab-bathroom" role="tab" aria-selected="false" tabindex="-1" aria-controls="see-panel-bathroom" data-mode="bathroom">Bathroom</button>
           </div>
           <div id="see-panel-addition" role="tabpanel" aria-labelledby="see-tab-addition" data-mode-panel="addition">
-            <div id="see-places" hidden>
-              <label class="see-field" for="see-places-input"><span>Address</span>
-                <input id="see-places-input" type="text" autocomplete="street-address" placeholder="Start typing an address">
+            <div class="see-selects">
+              <label class="see-field" for="see-addition-type"><span>Addition</span>
+                <select id="see-addition-type">
+                  <option value="Second story" selected>Second story</option>
+                  <option value="Partial second story">Partial second story</option>
+                  <option value="Dormer">Dormer</option>
+                  <option value="Bump-out">Bump-out</option>
+                  <option value="ADU">ADU</option>
+                  <option value="Garage conversion">Garage conversion</option>
+                  <option value="Porch">Porch</option>
+                </select>
               </label>
-              <div id="see-places-host"></div>
-              <p id="see-powered-by" class="see-powered" hidden>Google Maps</p>
-            </div>
-            <div id="see-streetview" hidden>
-              <p class="see-fine">Is this your house? Street View is shown unmodified. It is not sent with your photo.</p>
-              <iframe id="see-streetview-frame" title="Street View near this address" loading="lazy" referrerpolicy="strict-origin" style="width:100%;height:220px;border:0;border-radius:12px;background:#e7e2d8"></iframe>
-            </div>
-            <div id="see-address-plain">
-              <label class="see-field" for="see-address"><span>Property address</span>
-                <input id="see-address" name="address" type="text" autocomplete="street-address" placeholder="Street, city, Washington">
+              <label class="see-field" for="see-addition-style"><span>Style</span>
+                <select id="see-addition-style">
+                  <option value="Match existing" selected>Match existing</option>
+                  <option value="Northwest contemporary">Northwest contemporary</option>
+                  <option value="Craftsman">Craftsman</option>
+                  <option value="Modern farmhouse">Modern farmhouse</option>
+                </select>
               </label>
-            </div>
-            <p class="see-legend">Addition</p>
-            <div class="see-chips" role="group" aria-label="Addition type">
-              <button type="button" class="see-chip" data-group="addition-type" data-value="Second story" aria-pressed="true">Second story</button>
-              <button type="button" class="see-chip" data-group="addition-type" data-value="Partial second story" aria-pressed="false">Partial second story</button>
-              <button type="button" class="see-chip" data-group="addition-type" data-value="Dormer" aria-pressed="false">Dormer</button>
-              <button type="button" class="see-chip" data-group="addition-type" data-value="Bump-out" aria-pressed="false">Bump-out</button>
-              <button type="button" class="see-chip" data-group="addition-type" data-value="ADU" aria-pressed="false">ADU</button>
-              <button type="button" class="see-chip" data-group="addition-type" data-value="Garage conversion" aria-pressed="false">Garage conversion</button>
-              <button type="button" class="see-chip" data-group="addition-type" data-value="Porch" aria-pressed="false">Porch</button>
-            </div>
-            <p class="see-legend">Style</p>
-            <div class="see-chips" role="group" aria-label="Addition style">
-              <button type="button" class="see-chip" data-group="addition-style" data-value="Match existing" aria-pressed="true">Match existing</button>
-              <button type="button" class="see-chip" data-group="addition-style" data-value="Northwest contemporary" aria-pressed="false">Northwest contemporary</button>
-              <button type="button" class="see-chip" data-group="addition-style" data-value="Craftsman" aria-pressed="false">Craftsman</button>
-              <button type="button" class="see-chip" data-group="addition-style" data-value="Modern farmhouse" aria-pressed="false">Modern farmhouse</button>
-            </div>
-            <p class="see-legend">Roof</p>
-            <div class="see-chips" role="group" aria-label="Roof">
-              <button type="button" class="see-chip" data-group="roof" data-value="Match" aria-pressed="true">Match existing</button>
-              <button type="button" class="see-chip" data-group="roof" data-value="Gable" aria-pressed="false">Gable</button>
-              <button type="button" class="see-chip" data-group="roof" data-value="Shed" aria-pressed="false">Shed</button>
-              <button type="button" class="see-chip" data-group="roof" data-value="Flat" aria-pressed="false">Flat</button>
+              <label class="see-field" for="see-roof"><span>Roof</span>
+                <select id="see-roof">
+                  <option value="Match" selected>Match existing</option>
+                  <option value="Gable">Gable</option>
+                  <option value="Shed">Shed</option>
+                  <option value="Flat">Flat</option>
+                </select>
+              </label>
             </div>
           </div>
           <div id="see-panel-kitchen" role="tabpanel" aria-labelledby="see-tab-kitchen" data-mode-panel="kitchen" hidden>
-            <p class="see-legend">Kitchen scope</p>
-            <div class="see-chips" role="group" aria-label="Kitchen scope">
-              <button type="button" class="see-chip" data-group="kitchen-scope" data-value="refresh" aria-pressed="true">Refresh<small>Paint, hardware, lighting, backsplash</small></button>
-              <button type="button" class="see-chip" data-group="kitchen-scope" data-value="full-same" aria-pressed="false">Full remodel, same layout<small>Cabinets, counters, backsplash, flooring, lighting, appliances</small></button>
-              <button type="button" class="see-chip" data-group="kitchen-scope" data-value="layout-change" aria-pressed="false">Layout change<small>Add an island, open a wall</small></button>
+            <div class="see-selects">
+              <label class="see-field" for="see-kitchen-scope"><span>Kitchen scope</span>
+                <select id="see-kitchen-scope">
+                  <option value="refresh" selected>Refresh</option>
+                  <option value="full-same">Full remodel, same layout</option>
+                  <option value="layout-change">Layout change</option>
+                </select>
+              </label>
+              <label class="see-field" for="see-kitchen-style"><span>Style</span>
+                <select id="see-kitchen-style">
+                  <option value="Northwest modern" selected>Northwest modern</option>
+                  <option value="Warm wood / Scandinavian">Warm wood / Scandinavian</option>
+                  <option value="Transitional">Transitional</option>
+                  <option value="Modern farmhouse">Modern farmhouse</option>
+                  <option value="Classic white">Classic white</option>
+                  <option value="Spa">Spa</option>
+                </select>
+              </label>
             </div>
             <p id="see-layout-flag" class="see-fine" hidden>Layout change may involve structure, plumbing, electrical and permits.</p>
-            <p class="see-legend">Style</p>
-            <div class="see-chips" role="group" aria-label="Kitchen style">
-              <button type="button" class="see-chip" data-group="kitchen-style" data-value="Northwest modern" aria-pressed="true">Northwest modern</button>
-              <button type="button" class="see-chip" data-group="kitchen-style" data-value="Warm wood / Scandinavian" aria-pressed="false">Warm wood / Scandinavian</button>
-              <button type="button" class="see-chip" data-group="kitchen-style" data-value="Transitional" aria-pressed="false">Transitional</button>
-              <button type="button" class="see-chip" data-group="kitchen-style" data-value="Modern farmhouse" aria-pressed="false">Modern farmhouse</button>
-              <button type="button" class="see-chip" data-group="kitchen-style" data-value="Classic white" aria-pressed="false">Classic white</button>
-              <button type="button" class="see-chip" data-group="kitchen-style" data-value="Spa" aria-pressed="false">Spa</button>
-            </div>
           </div>
           <div id="see-panel-bathroom" role="tabpanel" aria-labelledby="see-tab-bathroom" data-mode-panel="bathroom" hidden>
-            <p class="see-legend">Bathroom scope</p>
-            <div class="see-chips" role="group" aria-label="Bathroom scope">
-              <button type="button" class="see-chip" data-group="bath-scope" data-value="refresh" aria-pressed="true">Refresh</button>
-              <button type="button" class="see-chip" data-group="bath-scope" data-value="full" aria-pressed="false">Full remodel</button>
-              <button type="button" class="see-chip" data-group="bath-scope" data-value="tub-to-shower" aria-pressed="false">Tub-to-shower conversion</button>
-              <button type="button" class="see-chip" data-group="bath-scope" data-value="curbless" aria-pressed="false">Curbless walk-in shower</button>
-              <button type="button" class="see-chip" data-group="bath-scope" data-value="double-vanity" aria-pressed="false">Double vanity</button>
-            </div>
-            <p class="see-legend">Style</p>
-            <div class="see-chips" role="group" aria-label="Bathroom style">
-              <button type="button" class="see-chip" data-group="bath-style" data-value="Northwest modern" aria-pressed="true">Northwest modern</button>
-              <button type="button" class="see-chip" data-group="bath-style" data-value="Warm wood / Scandinavian" aria-pressed="false">Warm wood / Scandinavian</button>
-              <button type="button" class="see-chip" data-group="bath-style" data-value="Transitional" aria-pressed="false">Transitional</button>
-              <button type="button" class="see-chip" data-group="bath-style" data-value="Modern farmhouse" aria-pressed="false">Modern farmhouse</button>
-              <button type="button" class="see-chip" data-group="bath-style" data-value="Classic white" aria-pressed="false">Classic white</button>
-              <button type="button" class="see-chip" data-group="bath-style" data-value="Spa" aria-pressed="false">Spa</button>
+            <div class="see-selects">
+              <label class="see-field" for="see-bath-scope"><span>Bathroom scope</span>
+                <select id="see-bath-scope">
+                  <option value="refresh" selected>Refresh</option>
+                  <option value="full">Full remodel</option>
+                  <option value="tub-to-shower">Tub-to-shower conversion</option>
+                  <option value="curbless">Curbless walk-in shower</option>
+                  <option value="double-vanity">Double vanity</option>
+                </select>
+              </label>
+              <label class="see-field" for="see-bath-style"><span>Style</span>
+                <select id="see-bath-style">
+                  <option value="Northwest modern" selected>Northwest modern</option>
+                  <option value="Warm wood / Scandinavian">Warm wood / Scandinavian</option>
+                  <option value="Transitional">Transitional</option>
+                  <option value="Modern farmhouse">Modern farmhouse</option>
+                  <option value="Classic white">Classic white</option>
+                  <option value="Spa">Spa</option>
+                </select>
+              </label>
             </div>
           </div>
-          <p class="see-legend" id="see-color-legend">Color direction (optional)</p>
-          <div class="see-chips" role="group" aria-label="Color direction">
-            <button type="button" class="see-chip" data-group="color" data-value="No preference" aria-pressed="true">No preference</button>
-            <button type="button" class="see-chip" data-group="color" data-value="White" aria-pressed="false">White</button>
-            <button type="button" class="see-chip" data-group="color" data-value="Warm wood" aria-pressed="false">Warm wood</button>
-            <button type="button" class="see-chip" data-group="color" data-value="Sage" aria-pressed="false">Sage</button>
-            <button type="button" class="see-chip" data-group="color" data-value="Navy" aria-pressed="false">Navy</button>
-            <button type="button" class="see-chip" data-group="color" data-value="Black" aria-pressed="false">Black</button>
+          <div class="see-selects">
+            <label class="see-field" for="see-color"><span id="see-color-legend">Color direction (optional)</span>
+              <select id="see-color">
+                <option value="No preference" selected>No preference</option>
+                <option value="White">White</option>
+                <option value="Warm wood">Warm wood</option>
+                <option value="Sage">Sage</option>
+                <option value="Navy">Navy</option>
+                <option value="Black">Black</option>
+              </select>
+            </label>
+            <label class="see-field" for="see-note"><span>Optional note (140 characters)</span>
+              <input id="see-note" type="text" maxlength="140" placeholder="Example: keep the front porch">
+            </label>
           </div>
-          <label class="see-field" for="see-file"><span>Photo</span>
-            <input id="see-file" class="see-file" type="file" accept="image/jpeg,image/png,image/webp" capture="environment">
-          </label>
-          <p id="see-photo-tip" class="see-fine">Straight-on curbside photo. JPEG, PNG, or WebP, up to 8 MB.</p>
-          <p id="see-photo-notice" class="see-fine">Embedded photo metadata is removed. Details visible in the photo remain. In this demo the photo stays in the browser. A live request shares selected photos with Pacific Pro Group only after you submit and check the sharing box.</p>
-          <label class="see-check" id="see-attest-wrap" for="see-attest" hidden>
-            <input id="see-attest" type="checkbox" value="yes">
-            <span>I took this photo, or I have permission to upload it.</span>
-          </label>
-          <div id="see-preview" class="see-preview" hidden></div>
-          <label class="see-field" for="see-note"><span>Optional note (140 characters)</span>
-            <input id="see-note" type="text" maxlength="140" placeholder="Example: keep the front porch">
-          </label>
           <div class="see-actions">
             <button type="button" class="see-btn" id="see-render">See concept</button>
           </div>
-          <p id="see-status" class="see-status" role="status" aria-live="polite"></p>
-          <noscript>
-            <div class="see-fallback">
-              <p>The concept preview needs JavaScript. Email <a href="mailto:{EDITORIAL_EMAIL}">{EDITORIAL_EMAIL}</a> or use the <a href="./contact.html">contact page</a>. Include the city and what you want to explore. This desk does not dispatch a crew.</p>
-            </div>
-          </noscript>
         </div>
-        <figure class="see-sample" id="see-sample">
-          <div class="see-compare" data-sample="addition">
-            <div class="see-compare-frame" id="see-sample-frame-addition">
-              <img class="see-compare-after" src="./assets/images/visualizer/exterior-after.webp" alt="Sample — illustrative exterior with a second story drawn for this page. Not a customer house and not a Pacific Pro Group project." width="1200" height="800" data-defer-lcp>
-              <img class="see-compare-before" src="./assets/images/visualizer/exterior-before.webp" alt="Sample — illustrative one-story exterior drawn for this page. Not a customer house and not a Pacific Pro Group project." width="1200" height="800" data-defer-lcp>
-            </div>
-            <label class="see-range" for="see-sample-range-addition">Compare the sample
-              <input id="see-sample-range-addition" data-range="see-sample-frame-addition" type="range" min="0" max="100" value="50">
-            </label>
+        <noscript>
+          <div class="see-fallback">
+            <p>The concept preview needs JavaScript. Email <a href="mailto:{EDITORIAL_EMAIL}">{EDITORIAL_EMAIL}</a> or use the <a href="./contact.html">contact page</a>. Include the city and what you want to explore. This desk does not dispatch a crew.</p>
           </div>
-          <div class="see-compare" data-sample="kitchen" hidden>
-            <div class="see-compare-frame" id="see-sample-frame-kitchen">
-              <img class="see-compare-after" src="./assets/images/visualizer/kitchen-after.webp" alt="Sample — illustrative kitchen drawing. Not a customer kitchen and not a Pacific Pro Group project." width="1200" height="800" data-defer-lcp>
-              <img class="see-compare-before" src="./assets/images/visualizer/kitchen-before.webp" alt="Sample — illustrative older kitchen drawing. Not a customer kitchen and not a Pacific Pro Group project." width="1200" height="800" data-defer-lcp>
-            </div>
-            <label class="see-range" for="see-sample-range-kitchen">Compare the sample
-              <input id="see-sample-range-kitchen" data-range="see-sample-frame-kitchen" type="range" min="0" max="100" value="50">
-            </label>
-          </div>
-          <div class="see-compare" data-sample="bathroom" hidden>
-            <div class="see-compare-frame" id="see-sample-frame-bathroom">
-              <img class="see-compare-after" src="./assets/images/visualizer/bathroom-after.webp" alt="Sample — illustrative bathroom drawing. Not a customer bathroom and not a Pacific Pro Group project." width="1200" height="800" data-defer-lcp>
-              <img class="see-compare-before" src="./assets/images/visualizer/bathroom-before.webp" alt="Sample — illustrative older bathroom drawing. Not a customer bathroom and not a Pacific Pro Group project." width="1200" height="800" data-defer-lcp>
-            </div>
-            <label class="see-range" for="see-sample-range-bathroom">Compare the sample
-              <input id="see-sample-range-bathroom" data-range="see-sample-frame-bathroom" type="range" min="0" max="100" value="50">
-            </label>
-          </div>
-          <figcaption class="see-caption">Sample — illustrative. Not a Pacific Pro Group project and not a photo of a customer's house.</figcaption>
-        </figure>
+        </noscript>
       </div>
+      <p id="see-status" class="see-status" role="status" aria-live="polite"></p>
       <div id="see-result" class="see-result" hidden>
         <h2>Sample concept</h2>
         <p class="see-fine">Demo preview. Sample — illustrative. This is not a concept of your photo and not a Pacific Pro Group project.</p>
         <div class="see-compare">
           <div class="see-compare-frame" id="see-result-frame">
-            <img id="see-result-after" class="see-compare-after" alt="Concept picture. Empty until a sample or a live result is ready." width="1200" height="800" data-defer-lcp>
-            <img id="see-result-before" class="see-compare-before" alt="Before picture. Empty until a sample or a live result is ready." width="1200" height="800" data-defer-lcp>
+            <img id="see-result-after" class="see-compare-after" alt="Concept picture. Empty until a sample or a live result is ready." width="960" height="640" data-defer-lcp>
+            <img id="see-result-before" class="see-compare-before" alt="Before picture. Empty until a sample or a live result is ready." width="960" height="640" data-defer-lcp>
+            <p class="see-tag see-tag-before">Before</p>
+            <p class="see-tag see-tag-after">Concept</p>
+            <span class="see-handle" aria-hidden="true"></span>
+            <label class="see-range see-range-overlay" for="see-result-range"><span class="see-sr">Show more of the sample before or after. Drag or use arrow keys.</span>
+              <input id="see-result-range" data-range="see-result-frame" type="range" min="0" max="100" value="50" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+            </label>
           </div>
-          <label class="see-range" for="see-result-range">Show more of the sample before or after
-            <input id="see-result-range" data-range="see-result-frame" type="range" min="0" max="100" value="50">
-          </label>
         </div>
         <div class="see-actions">
-          <button type="button" class="see-btn" id="see-unlock">See 3 more styles, download full-size, and talk to a design-build team</button>
+          <button type="button" class="see-btn" id="see-unlock">Talk with a design-build team</button>
           <p class="see-fine">In this demo the extra styles are other samples of this same project type. Full-size means the generated image's actual resolution, not the original photo's detail, and it waits until the live API is connected. A live lead can request up to six concepts in a day.</p>
           <button type="button" class="see-btn-secondary" id="see-more-styles" hidden>Show another sample style</button>
         </div>

@@ -28,18 +28,39 @@ await mkdir(out, { recursive: true });
 
 const desktop = await browser.newPage({ viewport: { width: 1440, height: 900 } });
 await desktop.goto(base + "/", { waitUntil: "networkidle" });
-await desktop.getByRole("button", { name: "Preview sample concept" }).waitFor();
+await desktop.locator("#plan-home-hero[data-phase='demo']").waitFor();
+await desktop.locator("#see-sample-frame-addition img").first().waitFor();
 await shot(desktop, "home-desktop-1440x900.png");
 await desktop.close();
 
 const phone = await browser.newPage({ viewport: { width: 390, height: 844 } });
 await phone.goto(base + "/", { waitUntil: "networkidle" });
-await phone.getByRole("button", { name: "Preview sample concept" }).waitFor();
+await phone.locator("#plan-home-hero[data-phase='demo']").waitFor();
+await phone.locator("#see-sample-frame-addition img").first().waitFor();
+const heroText = await phone.locator("#plan-home-hero").innerText();
+if (/\bAI\b/.test(heroText)) throw new Error("public hero contains the word AI");
+if (!heroText.includes("Sample — illustrative")) throw new Error("missing sample note");
+if (!heroText.includes("Not a Pacific Pro Group project")) throw new Error("missing sample disclaimer");
+await phone.locator("#see-sample-range-addition").evaluate((el) => {
+  el.value = "20";
+  el.dispatchEvent(new Event("input", { bubbles: true }));
+});
+const pos = await phone.locator("#see-sample-frame-addition").evaluate((el) => el.style.getPropertyValue("--pos"));
+if (pos !== "20%") throw new Error("slider did not move: " + pos);
+await phone.locator("#see-sample-range-addition").evaluate((el) => {
+  el.value = "50";
+  el.dispatchEvent(new Event("input", { bubbles: true }));
+});
 await shot(phone, "home-phone-390x844.png");
+
+await phone.locator("#see-drop").scrollIntoViewIfNeeded();
+await shot(phone, "upload-step-phone-390x844.png");
 
 await phone.locator("#see-address").fill("100 Main St, Edmonds, WA");
 await phone.locator("#see-file").setInputFiles(photo);
 await phone.getByText("Embedded photo metadata was removed.").waitFor();
+await phone.locator("#see-to-project").click();
+await phone.getByRole("button", { name: "Preview sample concept" }).waitFor();
 await phone.locator("#see-render").click();
 await phone.locator("#see-result").waitFor({ state: "visible" });
 await phone.locator("#see-result-range").scrollIntoViewIfNeeded();

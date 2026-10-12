@@ -146,6 +146,7 @@ if (root) {
     const frame = document.getElementById(input.getAttribute("data-range"));
     const before = Number(input.value);
     if (frame) frame.style.setProperty("--pos", before + "%");
+    input.setAttribute("aria-valuenow", String(before));
     input.setAttribute("aria-valuetext", before + "% before, " + (100 - before) + "% concept");
   }
 
@@ -153,7 +154,8 @@ if (root) {
     scope.querySelectorAll("[data-range]").forEach((input) => {
       input.addEventListener("input", () => applyRange(input));
       applyRange(input);
-      if (input.parentElement.querySelector(".see-compare-actions")) return;
+      const host = input.closest(".see-compare");
+      if (!host || host.querySelector(".see-compare-actions")) return;
       const actions = document.createElement("div");
       actions.className = "see-compare-actions";
       [["Show before", "0"], ["Show concept", "100"]].forEach(([label, value]) => {
@@ -167,7 +169,87 @@ if (root) {
         });
         actions.appendChild(button);
       });
-      input.parentElement.appendChild(actions);
+      host.appendChild(actions);
+    });
+  }
+
+  function showFlow(name) {
+    const photo = document.getElementById("see-flow-photo");
+    const project = document.getElementById("see-flow-project");
+    if (photo) photo.hidden = name !== "photo";
+    if (project) project.hidden = name !== "project";
+    root.querySelectorAll(".see-stepper-btn").forEach((button) => {
+      const on = button.getAttribute("data-flow") === name;
+      button.setAttribute("aria-selected", on ? "true" : "false");
+    });
+    if (name === "see") document.getElementById("see-result")?.scrollIntoView({ block: "start" });
+    if (name === "photo") document.getElementById("see-sample") && (document.getElementById("see-sample").hidden = false);
+  }
+
+  function wireFlow() {
+    document.getElementById("see-to-project")?.addEventListener("click", () => {
+      if (mode === "addition") {
+        const address = (document.getElementById("see-address")?.value || "").trim();
+        if (!address) {
+          say("Add the property address, then choose a photo.");
+          document.getElementById("see-address")?.focus();
+          return;
+        }
+      }
+      if (!prepared) {
+        say("Choose a JPEG, PNG, or WebP photo first.");
+        fileInput?.focus();
+        return;
+      }
+      say("");
+      showFlow("project");
+      document.getElementById("see-tab-" + mode)?.focus();
+    });
+    root.querySelectorAll(".see-stepper-btn").forEach((button) => {
+      button.addEventListener("click", () => {
+        const next = button.getAttribute("data-flow");
+        if (next === "project" && !prepared) {
+          say("Choose a JPEG, PNG, or WebP photo first.");
+          showFlow("photo");
+          fileInput?.focus();
+          return;
+        }
+        if (next === "see") {
+          if (resultEl?.hidden) {
+            say("Use the button on the project step first.");
+            return;
+          }
+          showFlow("see");
+          return;
+        }
+        showFlow(next);
+      });
+    });
+    document.getElementById("see-kitchen-scope")?.addEventListener("change", (event) => {
+      const flag = document.getElementById("see-layout-flag");
+      if (flag) flag.hidden = event.target.value !== "layout-change";
+    });
+  }
+
+  function wireDrop() {
+    const drop = document.getElementById("see-drop");
+    if (!drop || !fileInput) return;
+    ["dragenter", "dragover"].forEach((type) => {
+      drop.addEventListener(type, (event) => {
+        event.preventDefault();
+        drop.classList.add("is-hot");
+      });
+    });
+    drop.addEventListener("dragleave", () => drop.classList.remove("is-hot"));
+    drop.addEventListener("drop", (event) => {
+      event.preventDefault();
+      drop.classList.remove("is-hot");
+      const file = event.dataTransfer && event.dataTransfer.files && event.dataTransfer.files[0];
+      if (!file) return;
+      const transfer = new DataTransfer();
+      transfer.items.add(file);
+      fileInput.files = transfer.files;
+      fileInput.dispatchEvent(new Event("change"));
     });
   }
 
@@ -354,16 +436,21 @@ if (root) {
     }
   });
 
+  function fieldValue(id) {
+    const el = document.getElementById(id);
+    return el ? el.value : "";
+  }
+
   function optionsPayload() {
     return {
-      additionType: selected("addition-type"),
-      additionStyle: selected("addition-style"),
-      roof: selected("roof"),
-      kitchenScope: selected("kitchen-scope"),
-      kitchenStyle: selected("kitchen-style"),
-      bathScope: selected("bath-scope"),
-      bathStyle: selected("bath-style"),
-      color: selected("color"),
+      additionType: fieldValue("see-addition-type"),
+      additionStyle: fieldValue("see-addition-style"),
+      roof: fieldValue("see-roof"),
+      kitchenScope: fieldValue("see-kitchen-scope"),
+      kitchenStyle: fieldValue("see-kitchen-style"),
+      bathScope: fieldValue("see-bath-scope"),
+      bathStyle: fieldValue("see-bath-style"),
+      color: fieldValue("see-color"),
     };
   }
 
@@ -381,6 +468,16 @@ if (root) {
       learn.textContent = LEARN[mode][1];
     }
     resultEl.hidden = false;
+    const sample = document.getElementById("see-sample");
+    if (sample) sample.hidden = true;
+    root.querySelectorAll(".see-stepper-btn").forEach((button) => {
+      const on = button.getAttribute("data-flow") === "see";
+      button.setAttribute("aria-selected", on ? "true" : "false");
+    });
+    const photo = document.getElementById("see-flow-photo");
+    const project = document.getElementById("see-flow-project");
+    if (photo) photo.hidden = true;
+    if (project) project.hidden = true;
     resultEl.scrollIntoView({ block: "start" });
   }
 
@@ -711,6 +808,7 @@ if (root) {
   async function initLive() {
     if (isDemo()) {
       phase = "demo";
+      root.dataset.phase = "demo";
       const renderBtn = document.getElementById("see-render");
       if (renderBtn) renderBtn.textContent = "Preview sample concept";
       return;
@@ -754,7 +852,10 @@ if (root) {
   wireTabs();
   wireChips(root);
   wireRanges(root);
+  wireFlow();
+  wireDrop();
   captureAddressSync();
   showMode("addition");
+  showFlow("photo");
   initLive();
 }

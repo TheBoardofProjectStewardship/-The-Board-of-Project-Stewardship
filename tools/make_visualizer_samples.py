@@ -151,6 +151,11 @@ def bathroom(refreshed: bool, spa: bool = False) -> Image.Image:
 
 
 def main() -> None:
+    import sys
+    if "--drawings" not in sys.argv:
+        raise SystemExit(
+            "Homepage samples are licensed photographs. Pass --drawings to overwrite them with the older drawings."
+        )
     OUT.mkdir(parents=True, exist_ok=True)
     pairs = {
         "exterior-before.webp": exterior(False),
