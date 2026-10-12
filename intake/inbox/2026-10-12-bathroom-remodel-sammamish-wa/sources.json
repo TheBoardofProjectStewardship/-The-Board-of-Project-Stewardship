@@ -1,0 +1,101 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Sammamish",
+    "service": "Bathroom remodel",
+    "slug": "bathroom-remodel-sammamish-wa"
+  },
+  "sources": [
+    {
+      "url": "https://www.sammamish.us/government/community-development/permit-center/getting-started-and-faqs/",
+      "title": "City of Sammamish — Permit Center Getting Started and FAQs",
+      "retrieved": "2026-10-12",
+      "supports": "All permit applications online at MyBuildingPermit.com; Project Guidance free service; examples of work that may need a permit; inspections scheduled online; inspections@sammamish.us."
+    },
+    {
+      "url": "https://www.sammamish.us/government/community-development/permit-center/applications-and-forms/",
+      "title": "City of Sammamish — Permit Center Applications and Forms",
+      "retrieved": "2026-10-12",
+      "supports": "Residential Remodel Submittal Checklist; Building Permit Application; Residential Fixture Count Form links."
+    },
+    {
+      "url": "https://www.sammamish.us/media/4fwlmvgw/submittal-checklist-residential-remodel1-1.pdf",
+      "title": "City of Sammamish — Residential Remodel Submittal Checklist (2026-01-RMDL)",
+      "retrieved": "2026-10-12",
+      "supports": "MBP path Building / Single-Family Residential / Remodel; required items: Acceptance of Financial Responsibility, Historic Resources Affidavit, legal description, plan set as-is and proposed, project narrative, Residential Fixture Count Form; potentially sewer/water certificates when adding fixtures or exceeding 50% assessed value; Sammamish Plateau Water or Northeast Sammamish Water & Sewer District; PermitTech@Sammamish.us; address 801 228th Ave SE."
+    },
+    {
+      "url": "https://www.sammamish.us/media/jtihco2v/building-permit.pdf",
+      "title": "City of Sammamish — Building Permit Application",
+      "retrieved": "2026-10-12",
+      "supports": "Submit via MyBuildingPermit.com; for single-family alterations a separate Electrical Permit is required when electrical work occurs; mechanical and plumbing can be included with fixture count; Owner-as-Builder affidavit path."
+    },
+    {
+      "url": "https://www.mybuildingpermit.com/",
+      "title": "MyBuildingPermit.com",
+      "retrieved": "2026-10-12",
+      "supports": "Regional online permitting portal used by Sammamish."
+    },
+    {
+      "url": "https://www.mybuildingpermit.com/sites/default/files/TS-00_Permits%20Required%20and%20Not%20Required_FINAL_6.11.26.pdf",
+      "title": "MyBuildingPermit Tip Sheet 00 — Permits Required / Not Required (June 11, 2026)",
+      "retrieved": "2026-10-12",
+      "supports": "Sammamish listed with electrical circuits/services required by City; bathroom and kitchen fixture replacements without plumbing line modifications typically not requiring building permit; tub and shower replacement does require a permit; critical/shoreline/sensitive area caveat."
+    },
+    {
+      "url": "https://www.sammamish.us/government/community-development/permit-center/project-guidance-form/",
+      "title": "City of Sammamish — Project Guidance form",
+      "retrieved": "2026-10-12",
+      "supports": "Free early code information service before full permit submittal."
+    },
+    {
+      "url": "https://www.sammamish.us/government/community-development/permit-center/fees-permits-and-applications/",
+      "title": "City of Sammamish — Fees, Permits and Applications",
+      "retrieved": "2026-10-12",
+      "supports": "Fee schedule landing; links to 2026 Development Fee Schedule."
+    },
+    {
+      "url": "https://www.sammamish.us/media/15mpbygw/2026-development-fee-schedule.pdf",
+      "title": "City of Sammamish — 2026 Development Fee Schedule (PDF)",
+      "retrieved": "2026-10-12",
+      "supports": "Published building, electrical, mechanical, and plumbing fee categories for residential remodel/addition work."
+    },
+    {
+      "url": "https://www.sammamish.us/media/zl4l0pvn/fixture-count-residential.pdf",
+      "title": "City of Sammamish — Residential Fixture Count Form (PDF)",
+      "retrieved": "2026-10-12",
+      "supports": "Residential fixture count form required with remodel submittals."
+    },
+    {
+      "url": "https://www.spwater.org/",
+      "title": "Sammamish Plateau Water",
+      "retrieved": "2026-10-12",
+      "supports": "Water/sewer utility for portions of Sammamish; availability certificates and meter sizing context."
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "Washington L&I Verify a Contractor",
+      "retrieved": "2026-10-12",
+      "supports": "Contractor registration, bond, insurance check."
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/",
+      "title": "Washington L&I — Electrical permits, fees, and inspections",
+      "retrieved": "2026-10-12",
+      "supports": "State electrical permitting context; Sammamish tip sheet shows City issues electrical for circuits/services, so L&I page used for general licensing context and Verify cross-check only."
+    },
+    {
+      "url": "https://inspection.mybuildingpermit.com/",
+      "title": "MyBuildingPermit — Inspection scheduling",
+      "retrieved": "2026-10-12",
+      "supports": "Online inspection scheduling portal referenced from Sammamish Permit Center."
+    }
+  ],
+  "generation": {
+    "agent": "box-authored",
+    "hermes_status": "box-fallback-verified",
+    "verified_count": 14,
+    "supports_mode": "box-verified",
+    "note": "All URLs HTTP 200 from box on 2026-10-12. Dropped Northeast Sammamish Water & Sewer District homepage (406 from box); still named from City checklist text only."
+  }
+}

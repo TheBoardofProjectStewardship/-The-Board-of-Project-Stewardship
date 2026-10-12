@@ -1,0 +1,16 @@
+{
+  "submission_id": "2026-10-12-bathroom-remodel-sammamish-wa",
+  "idempotency_key": "sha256:675a10353241d5244e28a544846523831f60f435f653fb4ec9235ef5afbea9af",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-10-12T17:37:25Z",
+  "outputs": [
+    "posts/2026-10-12-bathroom-remodel-sammamish-wa.md",
+    "posts/2026-10-12-bathroom-remodel-sammamish-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 68
+}

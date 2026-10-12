@@ -51,6 +51,7 @@ Base: `https://boardofprojectstewardship.com/`
 | `stamp-of-trust/` | Stamp of Trust credential |
 | `blog/rss.xml` | Blog RSS feed |
 | `404.html` | Branded Board 404 |
+| `posts/2026-10-12-bathroom-remodel-sammamish-wa.html` | Bathroom Remodel Sammamish WA — MyBuildingPermit Remodel Path, Fixture Counts & Wet Assemblies |
 | `posts/2026-10-11-earthquake-home-retrofit-seattle-wa.html` | Earthquake Home Retrofit Seattle WA — SDCI's Prescriptive Plan Set, Cripple Walls & Foundation Bolting |
 | `posts/2026-10-10-deck-replacement-snohomish-county-wa.html` | Deck Replacement Snohomish County WA — When Unincorporated Lots Need a Permit, Setbacks & Ledger Details |
 | `posts/2026-10-09-adu-bellevue-wa.html` | ADU Bellevue WA — Two-Unit Rule, the 1,200 sq ft Cap, Garage Conversions & Parking |

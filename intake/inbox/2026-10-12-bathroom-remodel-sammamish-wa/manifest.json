@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-10-12-bathroom-remodel-sammamish-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-10-12T17:35:00Z",
+  "target": {"site": "https://boardofprojectstewardship.com/", "content_type": "blog-post"},
+  "roles": {"assembler": "chief-of-staff", "draft": "ollama", "sources": "hermes", "seo": "openclaw", "media": "grok-build"},
+  "post": {
+    "title": "Bathroom Remodel Sammamish WA — MyBuildingPermit Remodel Path, Fixture Counts & Wet Assemblies",
+    "date": "2026-10-12",
+    "slug": "bathroom-remodel-sammamish-wa",
+    "description": "A Sammamish homeowner's guide to a bathroom remodel: when MyBuildingPermit remodel permits apply, how tub and shower replacement differs from simple fixture swaps, fixture-count and sewer/water certificates, City electrical vs building paths, and wet-assembly details that survive Eastside winters.",
+    "category": "Bathrooms"
+  },
+  "artifacts": {"draft": "draft.md", "sources": "sources.json", "seo": "seo.json", "media": "media.json"},
+  "notes": "Box-authored fallback. Home PC (DESKTOP-B69F181) disconnected at the 09:47 wake (see intake-pc/2026-10-12/wake.md; fourth day offline); no PC packets for 2026-10-12. Producer role fields kept per intake contract."
+}
