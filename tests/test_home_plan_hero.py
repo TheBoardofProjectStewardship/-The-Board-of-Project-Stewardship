@@ -111,9 +111,10 @@ class HomePlanHeroTests(unittest.TestCase):
         """A scroll plan builds a house, with tappable notes and a still fallback."""
         self.assertLess(self.html.find('id="scroll-house"'), self.html.find('id="plan-home-hero"'))
         self.assertIn(">Plan</li>", self.html)
-        self.assertIn(">Frame</li>", self.html)
-        self.assertIn(">Build</li>", self.html)
-        self.assertIn(">Your addition</li>", self.html)
+        self.assertIn(">Walls</li>", self.html)
+        self.assertIn(">Upper</li>", self.html)
+        self.assertIn(">Shell</li>", self.html)
+        self.assertIn(">Massing</li>", self.html)
         self.assertIn('href="#plan-home-hero"', self.html)
         self.assertIn('href="./plan-walkthrough/"', self.html)
         self.assertIn("See what your home could become", self.html)
@@ -131,6 +132,9 @@ class HomePlanHeroTests(unittest.TestCase):
             "Footings.",
             "Structure.",
             "Stairs.",
+            "Porch.",
+            "Balcony.",
+            "garage door",
             "load-bearing walls",
             "This sketch does not size them.",
             "Teaching sketch. Not a structural design.",

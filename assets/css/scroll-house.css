@@ -6,7 +6,7 @@
   position: relative;
 }
 .scroll-house-track {
-  height: 420svh;
+  height: 460svh;
 }
 .scroll-house-sticky {
   position: sticky;
@@ -21,7 +21,7 @@
   z-index: 1;
 }
 @media (min-width: 800px) {
-  .scroll-house-track { height: 560svh; }
+  .scroll-house-track { height: 640svh; }
 }
 @media (min-width: 1280px) {
   .scroll-house { --sh-top: 7.25rem; }
@@ -250,7 +250,7 @@
   .sh-progress,
   .sh-hint { display: none; }
   .scroll-house-still { display: block; }
-  .sh-stages li[data-stage="addition"] {
+  .sh-stages li[data-stage="massing"] {
     background: #4ade80;
     border-color: #4ade80;
     color: #04140c;

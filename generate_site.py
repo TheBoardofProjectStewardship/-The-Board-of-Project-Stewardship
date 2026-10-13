@@ -3522,12 +3522,12 @@ def ppg_widgets_script() -> str:
 # ---------- Page builders ----------
 
 def home_scroll_house() -> tuple[str, str]:
-    """Sticky scroll section: a plan extrudes into a Pacific Northwest house.
+    """Sticky scroll section: this house plan extrudes into a line-drawing massing.
 
-    Original geometry. casa-serra ships without a license, so none of its
-    code or assets are reused. The cut, the long lens, and the walk in from
-    the door follow that project's public starter prompt. The tap labels are
-    original plain-language notes for this sketch.
+    Original geometry from the supplied main-floor, upper-floor, and exterior
+    sheets. casa-serra ships without a license, so none of its code or assets
+    are reused. The cut and the long lens follow that project's public starter
+    prompt. The tap labels are original plain-language notes for this sketch.
     """
     fragment = (SITE_DIR / "sections" / "scroll-house.html").read_text(encoding="utf-8")
     fragment = fragment.replace("__KICKER__", GEO_KICKER_HTML)

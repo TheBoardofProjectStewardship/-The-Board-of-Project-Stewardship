@@ -1,13 +1,16 @@
 /**
- * Scroll-built Pacific Northwest house for the Board homepage.
+ * Scroll massing of the supplied house plan.
  *
- * Samnang Aing's casa-serra (github.com/Sam1983Aing/casa-serra) has no
- * license file, and GitHub reports no license. None of its code, rooms,
- * textures, or assets are reused. The cut through the walls, the long lens
- * from straight above, and the walk in from the front door follow the
- * technique described in that project's public starter prompt. This is a
- * different house: one story, then a second story, drawn with a small
- * original WebGL shader instead of a scene library.
+ * The footprint follows the main-floor and upper-floor sheets: a two-story
+ * house about 42 ft wide, a 22 by 19 ft garage, the breezeway between them,
+ * and the rooms named on those sheets. The exterior follows the front
+ * elevation and the axonometric: a front gable with board-and-batten, lap
+ * siding, a dormer, a porch, a balcony, and a garage gable. Sizes are the
+ * about-dimensions from those drawings, not a stamped survey.
+ *
+ * casa-serra publishes no license, so none of its code or assets are used.
+ * The cut-from-above idea follows that project's public starter prompt.
+ * This file is an original line-drawing massing, not a copy of the sheets.
  */
 (function (factory) {
   var api = factory();
@@ -16,43 +19,47 @@
 })(function () {
   "use strict";
 
-  var PAPER = [0.937, 0.922, 0.886];
-  var INK = [0.11, 0.1, 0.09];
-  var SIDE = [0.62, 0.56, 0.48];
-  var PAD = [0.71, 0.66, 0.58];
-  var OAK = [0.58, 0.42, 0.26];
-  var CEDAR = [0.48, 0.28, 0.16];
-  var PLASTER = [0.83, 0.78, 0.7];
-  var ROOF_C = [0.24, 0.27, 0.3];
-  var GLASS_C = [0.62, 0.76, 0.8];
-  var DOOR_C = [0.13, 0.28, 0.2];
-  var HEADER_C = [0.36, 0.22, 0.12];
-  var STUD_C = [0.74, 0.6, 0.4];
-  var GREEN = [0.29, 0.4, 0.26];
-  var TREE = [0.16, 0.32, 0.2];
-  var HL = [0.114, 0.306, 0.847];
+  var PAPER = [0.973, 0.969, 0.961];
+  var INK = [0.16, 0.16, 0.17];
+  var SIDE = [0.9, 0.89, 0.87];
+  var PAD = [0.82, 0.81, 0.78];
+  var FLOOR_C = [0.94, 0.93, 0.91];
+  var ROOF_C = [0.75, 0.74, 0.71];
+  var ROOF_INK = [0.45, 0.44, 0.42];
+  var GLASS_C = [0.72, 0.8, 0.84];
+  var WOOD = [0.55, 0.5, 0.44];
+  var SHADOW = [0.62, 0.61, 0.58];
 
   var STAGES = [
-    { id: "plan", line: "A flat plan, cut through the walls and seen from above.", until: 0.16 },
-    { id: "frame", line: "The cut rises, and the walls grow off the sheet.", until: 0.4 },
-    { id: "build", line: "Down to the front door: floor, roof, windows, and a door.", until: 0.68 },
-    { id: "addition", line: "A second story rises, and the roof lifts with it.", until: 2 }
+    { id: "plan", line: "The main floor, cut flat and seen from above.", until: 0.16 },
+    { id: "walls", line: "The main-floor walls rise off the drawing.", until: 0.36 },
+    { id: "upper", line: "The upper floor stacks on.", until: 0.56 },
+    { id: "shell", line: "Roofs, siding, and windows come in.", until: 0.78 },
+    { id: "massing", line: "The finished house, in the massing view.", until: 2 }
   ];
 
+  /* Plan orientation matches the sheet: garage on the left, street at high Z
+     (top of the plan), patio toward low Z. The front elevation looks back
+     at that street face, so its left and right swap. */
   var ROOMS = [
-    { name: "Living", x: 10, z: 7.4 },
-    { name: "Kitchen", x: 27.2, z: 7.4 },
-    { name: "Bed", x: 10, z: 20.4 },
-    { name: "Bath", x: 23.6, z: 20.4 },
-    { name: "Stair", x: 32, z: 20.6 }
+    { name: "Garage", x: 11, z: 22 },
+    { name: "Mech", x: 36, z: 26.5 },
+    { name: "Stair", x: 36.5, z: 15 },
+    { name: "Kitchen", x: 49, z: 25.5 },
+    { name: "Dining", x: 49, z: 14 },
+    { name: "Living", x: 64, z: 16 },
+    { name: "Powder", x: 59, z: 28.2, minor: true },
+    { name: "Mud", x: 59, z: 23.5, minor: true },
+    { name: "Entry", x: 67, z: 27.5 },
+    { name: "Office", x: 64, z: 5 },
+    { name: "Storage", x: 49, z: 4.5, minor: true },
+    { name: "Patio", x: 52, z: -4.5 }
   ];
 
   function clamp01(t) { return t < 0 ? 0 : t > 1 ? 1 : t; }
   function smooth(t) { t = clamp01(t); return t * t * (3 - 2 * t); }
   function lerp(a, b, t) { return a + (b - a) * t; }
-  function lerp3(a, b, t) {
-    return [lerp(a[0], b[0], t), lerp(a[1], b[1], t), lerp(a[2], b[2], t)];
-  }
+  function lerp3(a, b, t) { return [lerp(a[0], b[0], t), lerp(a[1], b[1], t), lerp(a[2], b[2], t)]; }
   function hypot3(x, y, z) { return Math.hypot(x, y, z) || 1; }
 
   function stageAt(p) {
@@ -62,42 +69,31 @@
   }
 
   function sceneState(p) {
-    var wallH = lerp(4, 8.9, smooth((p - 0.05) / 0.24));
-    var lift = smooth((p - 0.66) / 0.22);
-    var eave = 9 + 8 * lift;
-    var ridge = eave + 7.4;
     return {
       p: p,
-      wallH: wallH,
-      lift: lift,
-      eave: eave,
-      ridge: ridge,
-      mat: smooth((p - 0.36) / 0.18),
-      studs: p >= 0.12 && p < 0.44,
-      roof: p >= 0.38,
-      upper: lift > 0.02,
-      trees: p >= 0.32
+      wallH: lerp(0.45, 9, smooth((p - 0.04) / 0.2)),
+      upper: smooth((p - 0.36) / 0.16),
+      shell: smooth((p - 0.56) / 0.14),
+      studs: p >= 0.16 && p < 0.4
     };
   }
 
   function frameFov(distance, aspect) {
-    var v = 2 * Math.atan(16.5 / distance);
-    var h = 2 * Math.atan(24 / distance);
+    var v = 2 * Math.atan(30 / distance);
+    var h = 2 * Math.atan(44 / distance);
     var vFromH = 2 * Math.atan(Math.tan(h / 2) / Math.max(0.35, aspect));
     return Math.max(v, vFromH) * 180 / Math.PI;
   }
 
   function cameraFor(p, aspect) {
     var keys = [
-      { p: 0, eye: [18, 240, 13], look: [18, 0, 13], fov: 8 },
-      { p: 0.17, eye: [18, 240, 13], look: [18, 0, 13], fov: 8 },
-      { p: 0.26, eye: [52, 20, -22], look: [18, 4, 12], fov: 32 },
-      { p: 0.42, eye: [50, 12, -24], look: [18, 5, 11], fov: 30 },
-      { p: 0.55, eye: [48, 9.2, -22], look: [18, 5.2, 12], fov: 30 },
-      { p: 0.66, eye: [16, 5.6, -9], look: [15, 5.2, 11], fov: 42 },
-      { p: 0.78, eye: [50, 18, -26], look: [18, 9, 12], fov: 30 },
-      { p: 0.9, eye: [56, 28, -32], look: [18, 12, 13], fov: 28 },
-      { p: 1, eye: [50, 22, -26], look: [18, 11, 13], fov: 28 }
+      { p: 0, eye: [36, 340, 14], look: [36, 0, 14], fov: 8 },
+      { p: 0.12, eye: [36, 340, 14], look: [36, 0, 14], fov: 8 },
+      { p: 0.26, eye: [-12, 28, 78], look: [40, 4, 16], fov: 36 },
+      { p: 0.48, eye: [-18, 34, 82], look: [44, 10, 15], fov: 32 },
+      { p: 0.7, eye: [-24, 42, 88], look: [44, 11, 14], fov: 30 },
+      { p: 0.92, eye: [-28, 46, 94], look: [42, 10, 14], fov: 28 },
+      { p: 1, eye: [-24, 44, 90], look: [42, 10, 14], fov: 28 }
     ];
     var i = 0;
     while (i < keys.length - 2 && p > keys[i + 1].p) i++;
@@ -107,16 +103,19 @@
     var eye = lerp3(a.eye, b.eye, t);
     var look = lerp3(a.look, b.look, t);
     var fov = lerp(a.fov, b.fov, t);
-    if (p < 0.17) {
-      eye = [18, 240, 13];
-      look = [18, 0, 13];
-      fov = frameFov(240, aspect || 1.6);
+    if (p < 0.12) {
+      eye = [36, 340, 14];
+      look = [36, 0, 14];
+      fov = frameFov(340, aspect || 1.6);
+    } else if (aspect && aspect < 1.15) {
+      fov = fov * Math.min(1.45, 1.15 / aspect);
     }
     var dx = look[0] - eye[0];
     var dy = look[1] - eye[1];
     var dz = look[2] - eye[2];
     var steep = clamp01((-dy / hypot3(dx, dy, dz) - 0.42) / 0.4);
-    var up = [0, 1 - steep, steep];
+    var overhead = p < 0.12 ? 1 : clamp01((0.17 - p) / 0.05);
+    var up = [0, 1 - overhead, -overhead];
     var ul = hypot3(up[0], up[1], up[2]);
     up[0] /= ul; up[1] /= ul; up[2] /= ul;
     return { eye: eye, look: look, fov: fov, up: up, steep: steep };
@@ -164,11 +163,7 @@
     var r;
     for (c = 0; c < 4; c++) {
       for (r = 0; r < 4; r++) {
-        o[c * 4 + r] =
-          a[r] * b[c * 4] +
-          a[4 + r] * b[c * 4 + 1] +
-          a[8 + r] * b[c * 4 + 2] +
-          a[12 + r] * b[c * 4 + 3];
+        o[c * 4 + r] = a[r] * b[c * 4] + a[4 + r] * b[c * 4 + 1] + a[8 + r] * b[c * 4 + 2] + a[12 + r] * b[c * 4 + 3];
       }
     }
     return o;
@@ -178,16 +173,17 @@
     if (!focus) return 0;
     if (role === focus) return 1;
     if (focus === "foundation" && (role === "foundation" || role === "bearing")) return 1;
-    if (focus === "structure" && (role === "structure" || role === "upperfloor")) return 1;
+    if (focus === "structure" && (role === "structure" || role === "upperfloor" || role === "balcony")) return 1;
     if (focus === "framing" && (role === "stud" || role === "plate")) return 1;
     if (focus === "stairs" && role === "stair") return 1;
     if (focus === "header" && role === "header") return 1;
+    if (focus === "porch" && role === "porch") return 1;
+    if (focus === "balcony" && role === "balcony") return 1;
+    if (focus === "roof" && role === "roof") return 1;
     return 0;
   }
 
-  function makeBuf() {
-    return { n: 0, data: new Float32Array(16 * 4096) };
-  }
+  function makeBuf() { return { n: 0, data: new Float32Array(16 * 8192) }; }
 
   function pushVert(buf, x, y, z, nx, ny, nz, ink, mat, h, alpha) {
     var i = buf.n;
@@ -212,23 +208,12 @@
   }
 
   function addFace(buf, a, b, c, d, hint, ink, mat, h, alpha) {
-    var ax = b[0] - a[0];
-    var ay = b[1] - a[1];
-    var az = b[2] - a[2];
-    var bx = d[0] - a[0];
-    var by = d[1] - a[1];
-    var bz = d[2] - a[2];
-    var nx = ay * bz - az * by;
-    var ny = az * bx - ax * bz;
-    var nz = ax * by - ay * bx;
-    var p0 = a;
-    var p1 = b;
-    var p2 = c;
-    var p3 = d;
+    var ax = b[0] - a[0], ay = b[1] - a[1], az = b[2] - a[2];
+    var bx = d[0] - a[0], by = d[1] - a[1], bz = d[2] - a[2];
+    var nx = ay * bz - az * by, ny = az * bx - ax * bz, nz = ax * by - ay * bx;
+    var p0 = a, p1 = b, p2 = c, p3 = d;
     if (nx * hint[0] + ny * hint[1] + nz * hint[2] < 0) {
-      p1 = d;
-      p3 = b;
-      nx = -nx; ny = -ny; nz = -nz;
+      p1 = d; p3 = b; nx = -nx; ny = -ny; nz = -nz;
     }
     var len = hypot3(nx, ny, nz);
     nx /= len; ny /= len; nz /= len;
@@ -236,142 +221,162 @@
     pushTri(buf, p0, p2, p3, nx, ny, nz, ink, mat, h, alpha);
   }
 
-  function addBox(buf, x0, y0, z0, x1, y1, z1, ink, mat, h, alpha, skipBottom, capInk) {
+  function line(buf, a, b) {
+    var i = buf.n;
+    if (i + 6 > buf.data.length) {
+      var next = new Float32Array(buf.data.length * 2);
+      next.set(buf.data);
+      buf.data = next;
+    }
+    var d = buf.data;
+    d[i] = a[0]; d[i + 1] = a[1]; d[i + 2] = a[2];
+    d[i + 3] = b[0]; d[i + 4] = b[1]; d[i + 5] = b[2];
+    buf.n = i + 6;
+  }
+
+  function addBox(solid, lines, x0, y0, z0, x1, y1, z1, ink, mat, h, alpha, skipBottom, capInk) {
     if (x1 < x0) { var tx = x0; x0 = x1; x1 = tx; }
     if (y1 < y0) { var ty = y0; y0 = y1; y1 = ty; }
     if (z1 < z0) { var tz = z0; z0 = z1; z1 = tz; }
     if (x1 - x0 < 0.02 || y1 - y0 < 0.02 || z1 - z0 < 0.02) return;
-    addFace(buf, [x0, y1, z1], [x1, y1, z1], [x1, y1, z0], [x0, y1, z0], [0, 1, 0], capInk || ink, mat, h, alpha);
-    if (!skipBottom) addFace(buf, [x0, y0, z0], [x1, y0, z0], [x1, y0, z1], [x0, y0, z1], [0, -1, 0], ink, mat, h, alpha);
-    addFace(buf, [x0, y0, z1], [x1, y0, z1], [x1, y1, z1], [x0, y1, z1], [0, 0, 1], ink, mat, h, alpha);
-    addFace(buf, [x1, y0, z0], [x0, y0, z0], [x0, y1, z0], [x1, y1, z0], [0, 0, -1], ink, mat, h, alpha);
-    addFace(buf, [x1, y0, z1], [x1, y0, z0], [x1, y1, z0], [x1, y1, z1], [1, 0, 0], ink, mat, h, alpha);
-    addFace(buf, [x0, y0, z0], [x0, y0, z1], [x0, y1, z1], [x0, y1, z0], [-1, 0, 0], ink, mat, h, alpha);
+    var topInk = capInk || ink;
+    addFace(solid, [x0, y1, z1], [x1, y1, z1], [x1, y1, z0], [x0, y1, z0], [0, 1, 0], topInk, mat, h, alpha);
+    if (!skipBottom) addFace(solid, [x0, y0, z0], [x1, y0, z0], [x1, y0, z1], [x0, y0, z1], [0, -1, 0], ink, mat, h, alpha);
+    addFace(solid, [x0, y0, z1], [x1, y0, z1], [x1, y1, z1], [x0, y1, z1], [0, 0, 1], ink, mat, h, alpha);
+    addFace(solid, [x1, y0, z0], [x0, y0, z0], [x0, y1, z0], [x1, y1, z0], [0, 0, -1], ink, mat, h, alpha);
+    addFace(solid, [x1, y0, z1], [x1, y0, z0], [x1, y1, z0], [x1, y1, z1], [1, 0, 0], ink, mat, h, alpha);
+    addFace(solid, [x0, y0, z0], [x0, y0, z1], [x0, y1, z1], [x0, y1, z0], [-1, 0, 0], ink, mat, h, alpha);
+    if (!lines || alpha < 0.9) return;
+    var yb = y0 + 0.02;
+    var yt = y1 + 0.03;
+    line(lines, [x0, yt, z0], [x1, yt, z0]);
+    line(lines, [x1, yt, z0], [x1, yt, z1]);
+    line(lines, [x1, yt, z1], [x0, yt, z1]);
+    line(lines, [x0, yt, z1], [x0, yt, z0]);
+    line(lines, [x0, yb, z0], [x0, yt, z0]);
+    line(lines, [x1, yb, z0], [x1, yt, z0]);
+    line(lines, [x1, yb, z1], [x1, yt, z1]);
+    line(lines, [x0, yb, z1], [x0, yt, z1]);
   }
 
   function inHole(at, holes) {
     var i;
-    for (i = 0; i < holes.length; i++) {
-      if (Math.abs(at - holes[i].at) < holes[i].w * 0.5) return true;
-    }
+    for (i = 0; i < holes.length; i++) if (Math.abs(at - holes[i].at) < holes[i].w * 0.5) return true;
     return false;
   }
 
-  function wallStrip(buf, axis, fixed, a0, a1, y0, y1, thick, holes, role, inkSide, mat, focus, studs, outSign) {
+  function wallStrip(solid, lines, axis, fixed, a0, a1, y0, y1, thick, holes, role, focus, studs, outSign) {
     var top = y1;
     if (top - y0 < 0.08) return;
     var h = hot(role, focus);
     var hs = hot("header", focus);
-    var cursor = a0;
     var sorted = holes.slice().sort(function (a, b) { return a.at - b.at; });
-    function solid(a, b, yb, yt, roleName, ink, m, hh) {
+    var cursor = a0;
+    function solidBox(a, b, yb, yt, hh, cap) {
       if (b - a < 0.04 || yt - yb < 0.04) return;
-      var cap = roleName === "header" ? HEADER_C : INK;
-      if (axis === "x") addBox(buf, a, yb, fixed - thick / 2, b, yt, fixed + thick / 2, ink, m, hh, 1, true, cap);
-      else addBox(buf, fixed - thick / 2, yb, a, fixed + thick / 2, yt, b, ink, m, hh, 1, true, cap);
+      if (axis === "x") addBox(solid, lines, a, yb, fixed - thick / 2, b, yt, fixed + thick / 2, SIDE, SIDE, hh, 1, true, cap || INK);
+      else addBox(solid, lines, fixed - thick / 2, yb, a, fixed + thick / 2, yt, b, SIDE, SIDE, hh, 1, true, cap || INK);
     }
     var i;
     for (i = 0; i < sorted.length; i++) {
       var hole = sorted[i];
       var lo = hole.at - hole.w / 2;
       var hi = hole.at + hole.w / 2;
-      solid(cursor, Math.max(cursor, lo), y0, top, role, inkSide, mat, h);
-      var sill = Math.min(top, hole.sill);
-      if (sill > y0) solid(lo, hi, y0, sill, role, inkSide, mat, h);
-      var beamTop = Math.min(top, hole.head + 0.62);
-      if (beamTop > hole.head && top > hole.head) {
-        solid(lo - 0.2, hi + 0.2, hole.head, beamTop, "header", HEADER_C, HEADER_C, hs || h * 0.15);
-        if (top > beamTop) solid(lo, hi, beamTop, top, role, inkSide, mat, h);
-      }
-      if (hole.sill < 0.2 && focus !== "header" && beamTop > 2) {
-        /* door leaf fades in with materials; drawn by the caller via role door */
+      solidBox(cursor, Math.max(cursor, lo), y0, top, h);
+      if (hole.sill > y0) solidBox(lo, hi, y0, Math.min(top, hole.sill), h);
+      var beamTop = Math.min(top, hole.head + 0.55);
+      if (top > hole.head && beamTop > hole.head) {
+        solidBox(lo - 0.25, hi + 0.25, hole.head, beamTop, hs, hs ? INK : WOOD);
+        if (top > beamTop) solidBox(lo, hi, beamTop, top, h);
       }
       cursor = Math.max(cursor, hi);
     }
-    solid(cursor, a1, y0, top, role, inkSide, mat, h);
+    solidBox(cursor, a1, y0, top, h);
     if (!studs) return;
     var studHot = hot("stud", focus);
-    var plateHot = hot("plate", focus);
-    solid(a0, a1, y0, Math.min(top, y0 + 0.22), "plate", STUD_C, STUD_C, plateHot);
-    if (top - y0 > 1.2) solid(a0, a1, top - 0.2, top, "plate", STUD_C, STUD_C, plateHot);
-    var at;
     var outward = outSign || 1;
-    var face = fixed + outward * (thick / 2 + 0.02);
-    var outer = face + outward * 0.38;
+    var face = fixed + outward * (thick / 2 + 0.04);
+    var outer = face + outward * 0.22;
     var s0 = Math.min(face, outer);
     var s1 = Math.max(face, outer);
-    for (at = a0 + 0.9; at < a1 - 0.4; at += 1.65) {
+    var at;
+    for (at = a0 + 1.1; at < a1 - 0.5; at += 1.8) {
       if (inHole(at, sorted)) continue;
-      var studTop = Math.max(y0 + 0.3, top - 0.22);
-      if (studTop - (y0 + 0.22) < 0.4) continue;
-      if (axis === "x") addBox(buf, at, y0 + 0.22, s0, at + 0.28, studTop, s1, INK, STUD_C, studHot, 1, true, INK);
-      else addBox(buf, s0, y0 + 0.22, at, s1, studTop, at + 0.28, INK, STUD_C, studHot, 1, true, INK);
+      var studTop = top - 0.2;
+      if (studTop < y0 + 1) continue;
+      if (axis === "x") addBox(solid, lines, at, y0 + 0.2, s0, at + 0.16, studTop, s1, INK, WOOD, studHot, 1, true, INK);
+      else addBox(solid, lines, s0, y0 + 0.2, at, s1, studTop, at + 0.16, INK, WOOD, studHot, 1, true, INK);
     }
   }
 
-  function addGlass(buf, axis, fixed, hole, thick, focus) {
-    var h = 0;
-    var ink = PAPER;
-    var y0 = hole.sill + 0.06;
-    var y1 = hole.head - 0.06;
+  function addGlass(buf, axis, fixed, hole) {
+    var y0 = hole.sill + 0.08;
+    var y1 = hole.head - 0.08;
     if (y1 - y0 < 0.2) return;
-    var a = hole.at - hole.w / 2 + 0.08;
-    var b = hole.at + hole.w / 2 - 0.08;
-    if (axis === "x") addBox(buf, a, y0, fixed - 0.04, b, y1, fixed + 0.04, ink, GLASS_C, h, 0.38, true);
-    else addBox(buf, fixed - 0.04, y0, a, fixed + 0.04, y1, b, ink, GLASS_C, h, 0.38, true);
-    if (thick) { /* thickness kept for call symmetry */ }
-    if (focus) { /* glass is never the highlighted part */ }
+    var a = hole.at - hole.w / 2 + 0.1;
+    var b = hole.at + hole.w / 2 - 0.1;
+    if (axis === "x") addBox(buf, null, a, y0, fixed - 0.05, b, y1, fixed + 0.05, PAPER, GLASS_C, 0, 0.4, true, PAPER);
+    else addBox(buf, null, fixed - 0.05, y0, a, fixed + 0.05, y1, b, PAPER, GLASS_C, 0, 0.4, true, PAPER);
   }
 
-  function addStairs(buf, yBase, rise, focus, limit) {
-    var h = hot("stair", focus);
-    var n = 12;
-    var i;
-    var run = 7.2 / n;
-    var step = rise / n;
-    for (i = 0; i < n; i++) {
-      var yb = yBase + i * step;
-      if (yb >= limit - 0.02) continue;
-      var yt = Math.min(limit, yBase + (i + 1) * step);
-      if (yt - yb < 0.04) continue;
-      var z0 = 16.5 + i * run;
-      addBox(buf, 29.1, yb, z0, 35.1, yt, z0 + run * 0.92, INK, OAK, h, 1, true, INK);
+  function addTri(buf, a, b, c, hint, ink, mat, h) {
+    var ax = b[0] - a[0], ay = b[1] - a[1], az = b[2] - a[2];
+    var bx = c[0] - a[0], by = c[1] - a[1], bz = c[2] - a[2];
+    var nx = ay * bz - az * by, ny = az * bx - ax * bz, nz = ax * by - ay * bx;
+    if (nx * hint[0] + ny * hint[1] + nz * hint[2] < 0) {
+      var swap = b; b = c; c = swap; nx = -nx; ny = -ny; nz = -nz;
+    }
+    var len = hypot3(nx, ny, nz);
+    nx /= len; ny /= len; nz /= len;
+    pushTri(buf, a, b, c, nx, ny, nz, ink, mat, h, 1);
+  }
+
+  /* Ridge runs left-right. The right end is a gable; hipRun pulls the
+     ridge back from the left end so that end is a hip. */
+  function addMainRoof(solid, lines, x0, x1, z0, z1, eave, ridgeY, hipRun, focus) {
+    var h = hot("roof", focus);
+    var mid = (z0 + z1) / 2;
+    var ridgeX0 = x0 + hipRun;
+    addFace(solid, [x0, eave, z1], [x1, eave, z1], [x1, ridgeY, mid], [ridgeX0, ridgeY, mid], [0, 0.65, 1], ROOF_INK, ROOF_C, h, 1);
+    addFace(solid, [x1, eave, z0], [x0, eave, z0], [ridgeX0, ridgeY, mid], [x1, ridgeY, mid], [0, 0.65, -1], ROOF_INK, ROOF_C, h, 1);
+    addTri(solid, [x0, eave, z0], [x0, eave, z1], [ridgeX0, ridgeY, mid], [-1, 0.4, 0], ROOF_INK, ROOF_C, h);
+    addTri(solid, [x1, eave, z1], [x1, eave, z0], [x1, ridgeY, mid], [1, 0, 0], SIDE, SIDE, h);
+    line(lines, [ridgeX0, ridgeY + 0.05, mid], [x1, ridgeY + 0.05, mid]);
+    line(lines, [x0, eave + 0.04, z1], [x1, eave + 0.04, z1]);
+    line(lines, [x0, eave + 0.04, z0], [x1, eave + 0.04, z0]);
+    line(lines, [x0, eave + 0.04, z0], [ridgeX0, ridgeY + 0.05, mid]);
+    line(lines, [x0, eave + 0.04, z1], [ridgeX0, ridgeY + 0.05, mid]);
+    line(lines, [x1, eave + 0.04, z0], [x1, ridgeY + 0.05, mid]);
+    line(lines, [x1, eave + 0.04, z1], [x1, ridgeY + 0.05, mid]);
+    var z;
+    var half = (z1 - z0) / 2;
+    for (z = z0 + 1.3; z < z1 - 0.6; z += 1.35) {
+      var yTop = ridgeY - (ridgeY - eave) * (Math.abs(z - mid) / half);
+      if (yTop < eave + 0.5) continue;
+      line(lines, [x1 + 0.08, eave + 0.2, z], [x1 + 0.08, yTop - 0.08, z]);
     }
   }
 
-  function addRoof(buf, eave, ridge, focus) {
+  function addGarageRoof(solid, lines, x0, x1, z0, z1, eave, ridgeY, focus) {
     var h = hot("roof", focus);
-    var x0 = -1.15;
-    var x1 = 37.15;
-    var zMid = 13;
-    var ink = [0.16, 0.17, 0.18];
-    addFace(buf,
-      [x0, eave, -1.15], [x1, eave, -1.15], [x1, ridge, zMid], [x0, ridge, zMid],
-      [0, zMid + 1.15, ridge - eave], ink, ROOF_C, h, 1);
-    addFace(buf,
-      [x1, eave, 27.15], [x0, eave, 27.15], [x0, ridge, zMid], [x1, ridge, zMid],
-      [0, 27.15 - zMid, ridge - eave], ink, ROOF_C, h, 1);
-    addFace(buf,
-      [x0, eave, -1.15], [x0, ridge, zMid], [x0, eave, 27.15], [x0, eave - 0.02, 27.15],
-      [-1, 0, 0], ink, ROOF_C, h, 1);
-    addFace(buf,
-      [x1, ridge, zMid], [x1, eave, -1.15], [x1, eave, 27.15], [x1, eave - 0.02, -1.15],
-      [1, 0, 0], ink, ROOF_C, h, 1);
+    var mid = (z0 + z1) / 2;
+    addFace(solid, [x0, eave, z1], [x1, eave, z1], [x1, ridgeY, mid], [x0, ridgeY, mid], [0, 0.7, 1], ROOF_INK, ROOF_C, h, 1);
+    addFace(solid, [x1, eave, z0], [x0, eave, z0], [x0, ridgeY, mid], [x1, ridgeY, mid], [0, 0.7, -1], ROOF_INK, ROOF_C, h, 1);
+    addTri(solid, [x0, eave, z0], [x0, eave, z1], [x0, ridgeY, mid], [-1, 0, 0], SIDE, SIDE, h);
+    addTri(solid, [x1, eave, z1], [x1, eave, z0], [x1, ridgeY, mid], [1, 0, 0], SIDE, SIDE, h);
+    line(lines, [x0, ridgeY + 0.05, mid], [x1, ridgeY + 0.05, mid]);
+    line(lines, [x0, eave + 0.04, z1], [x1, eave + 0.04, z1]);
+    line(lines, [x0, eave + 0.04, z0], [x1, eave + 0.04, z0]);
+    line(lines, [x0, eave + 0.04, z0], [x0, ridgeY + 0.05, mid]);
+    line(lines, [x0, eave + 0.04, z1], [x0, ridgeY + 0.05, mid]);
   }
 
-  function cone(buf, x, z, radius, height) {
-    var seg = 7;
-    var i;
-    for (i = 0; i < seg; i++) {
-      var a0 = (i / seg) * Math.PI * 2;
-      var a1 = ((i + 1) / seg) * Math.PI * 2;
-      addFace(buf,
-        [x, height, z],
-        [x + Math.cos(a1) * radius, 0, z + Math.sin(a1) * radius],
-        [x + Math.cos(a0) * radius, 0, z + Math.sin(a0) * radius],
-        [x + Math.cos(a0) * radius, 0, z + Math.sin(a0) * radius],
-        [Math.cos((a0 + a1) / 2), 0.4, Math.sin((a0 + a1) / 2)],
-        TREE, TREE, 0, 1);
+  function addRail(solid, lines, x0, x1, z, y, focus, role) {
+    var h = hot(role, focus);
+    addBox(solid, lines, x0, y + 2.6, z - 0.08, x1, y + 2.85, z + 0.08, INK, INK, h, 1, true, INK);
+    var x;
+    for (x = x0; x <= x1 + 0.1; x += 4) {
+      addBox(solid, lines, x, y, z - 0.08, x + 0.14, y + 2.7, z + 0.08, INK, INK, h, 1, true, INK);
     }
   }
 
@@ -379,107 +384,149 @@
     var state = sceneState(p);
     var solid = makeBuf();
     var glass = makeBuf();
-    var showStuds = state.studs || focus === "framing";
-    var southHoles = [
-      { at: 6.2, w: 4.2, sill: 2.55, head: 7.05 },
-      { at: 14.2, w: 3.05, sill: 0, head: 7.2 },
-      { at: 27.4, w: 5, sill: 2.55, head: 7.05 }
-    ];
-    var northHoles = [
-      { at: 10, w: 4, sill: 2.7, head: 6.9 },
-      { at: 24, w: 3.1, sill: 3.3, head: 6.6 }
-    ];
-    var westHoles = [{ at: 18.2, w: 3.4, sill: 2.7, head: 6.9 }];
-    var eastHoles = [
-      { at: 8, w: 3.6, sill: 2.55, head: 7.05 },
-      { at: 20.6, w: 3.3, sill: 1.4, head: 7.2 }
-    ];
-    var crossHoles = [
-      { at: 10, w: 2.7, sill: 0, head: 7 },
-      { at: 31.4, w: 2.7, sill: 0, head: 7 }
-    ];
-    var splitHoles = [{ at: 7.2, w: 2.7, sill: 0, head: 7 }];
-
-    addBox(solid, -2.2, -0.55, -3.2, 38.2, 0.015, 28.2, PAD, [0.45, 0.42, 0.38], hot("foundation", focus), 1, true, PAD);
-    addBox(solid, -8, -0.62, -10, 46, -0.04, 38, PAPER, GREEN, 0, 1, true, PAPER);
-    addBox(solid, 0.08, 0.03, 0.08, 35.92, 0.07, 25.92, PAPER, OAK, 0, 1, true, PAPER);
-    addBox(solid, 10, 0.07, -3.2, 18.6, 0.22, 0.02, SIDE, [0.5, 0.48, 0.44], 0, 1, true, SIDE);
-
+    var lines = makeBuf();
     var yTop = state.wallH;
-    wallStrip(solid, "x", 0.36, 0, 36, 0, yTop, 0.72, southHoles, "bearing", SIDE, CEDAR, focus, showStuds, -1);
-    wallStrip(solid, "x", 25.64, 0, 36, 0, yTop, 0.72, northHoles, "bearing", SIDE, CEDAR, focus, showStuds, 1);
-    wallStrip(solid, "z", 0.36, 0.72, 25.28, 0, yTop, 0.72, westHoles, "bearing", SIDE, CEDAR, focus, showStuds, -1);
-    wallStrip(solid, "z", 35.64, 0.72, 25.28, 0, yTop, 0.72, eastHoles, "bearing", SIDE, CEDAR, focus, showStuds, 1);
-    wallStrip(solid, "z", 20, 0.75, 25.25, 0, yTop, 0.42, splitHoles, "partition", SIDE, PLASTER, focus, false, 1);
-    wallStrip(solid, "x", 15, 0.75, 35.25, 0, yTop, 0.42, crossHoles, "partition", SIDE, PLASTER, focus, false, 1);
+    var showStuds = state.studs || focus === "framing";
+    var HX0 = 30;
+    var HX1 = 72;
+    var HZ0 = 0;
+    var HZ1 = 32;
+    var houseFront = [
+      { at: 47, w: 4.2, sill: 2.3, head: 6.6 },
+      { at: 58, w: 3.2, sill: 0, head: 7.1 },
+      { at: 67, w: 3.4, sill: 2.4, head: 6.5 }
+    ];
+    var houseBack = [
+      { at: 40, w: 3.6, sill: 2.5, head: 6.4 },
+      { at: 64, w: 4.4, sill: 2.4, head: 6.6 }
+    ];
+    var houseLeft = [
+      { at: 24, w: 3, sill: 0, head: 7 },
+      { at: 27.5, w: 2.4, sill: 3.2, head: 5.6 }
+    ];
+    var houseRight = [
+      { at: 6, w: 3.2, sill: 2.6, head: 6.2 },
+      { at: 16, w: 3.6, sill: 2.2, head: 6.6 }
+    ];
+    var garageDoor = [{ at: 11, w: 16, sill: 0, head: 7 }];
+    var gTop = Math.min(yTop, 9);
 
-    if (state.mat > 0.35 && yTop > 6.5) {
-      addBox(solid, 13.05, 0.02, 0.15, 13.42, 7.05, 3.05, DOOR_C, DOOR_C, 0, 1, true);
+    addBox(solid, lines, -2, -0.45, -12, 76, 0.02, 42, PAD, PAD, hot("foundation", focus), 1, true, PAD);
+    addBox(solid, null, HX0 + 0.5, 0.06, HZ0 + 0.5, HX1 - 0.5, 0.1, HZ1 - 0.5, PAPER, FLOOR_C, 0, 1, true, PAPER);
+    addBox(solid, null, 0.5, 0.06, 13.5, 21.5, 0.1, 31.5, PAPER, FLOOR_C, 0, 1, true, PAPER);
+    addBox(solid, null, 40, 0.07, -9.2, 64, 0.12, -0.15, PAPER, [0.84, 0.86, 0.8], 0, 1, true, PAPER);
+    addBox(solid, null, 23.2, 0.08, 18, 28.8, 0.32, 28, [0.62, 0.66, 0.58], [0.7, 0.74, 0.66], 0, 1, true, [0.55, 0.58, 0.5]);
+
+    wallStrip(solid, lines, "x", 31.68, HX0, HX1, 0, yTop, 0.64, houseFront, "bearing", focus, showStuds, 1);
+    wallStrip(solid, lines, "x", 0.32, HX0, HX1, 0, yTop, 0.64, houseBack, "bearing", focus, showStuds, -1);
+    wallStrip(solid, lines, "z", 30.32, 0.64, 31.36, 0, yTop, 0.64, houseLeft, "bearing", focus, showStuds, -1);
+    wallStrip(solid, lines, "z", 71.68, 0.64, 31.36, 0, yTop, 0.64, houseRight, "bearing", focus, showStuds, 1);
+
+    wallStrip(solid, lines, "z", 42, 0.7, 31.3, 0, yTop, 0.36, [{ at: 14, w: 2.8, sill: 0, head: 7 }, { at: 24, w: 2.6, sill: 0, head: 7 }], "partition", focus, false, 1);
+    wallStrip(solid, lines, "x", 20, 42.2, 71.3, 0, yTop, 0.36, [{ at: 49, w: 2.8, sill: 0, head: 7 }, { at: 64, w: 2.8, sill: 0, head: 7 }], "partition", focus, false, 1);
+    wallStrip(solid, lines, "z", 56, 20.2, 31.3, 0, yTop, 0.32, [{ at: 26, w: 2.6, sill: 0, head: 7 }], "partition", focus, false, 1);
+    wallStrip(solid, lines, "z", 62, 22, 31.3, 0, yTop, 0.32, [{ at: 27.5, w: 2.4, sill: 0, head: 7 }], "partition", focus, false, 1);
+    wallStrip(solid, lines, "x", 10, 30.6, 71.3, 0, yTop, 0.32, [{ at: 46, w: 2.6, sill: 0, head: 7 }, { at: 64, w: 2.6, sill: 0, head: 7 }], "partition", focus, false, 1);
+    wallStrip(solid, lines, "z", 56, 0.6, 9.7, 0, yTop, 0.32, [{ at: 5, w: 2.4, sill: 0, head: 7 }], "partition", focus, false, 1);
+
+    var goal = state.upper > 0.02 ? 9 + 9 * state.upper : Math.min(yTop, 9);
+    var steps = 16;
+    var rise = goal / steps;
+    var s;
+    for (s = 0; s < steps; s++) {
+      var yb = s * rise;
+      if (yb >= goal - 0.04) break;
+      if (state.upper < 0.02 && yb >= yTop - 0.04) break;
+      var yt = Math.min(goal, yb + rise);
+      if (state.upper < 0.02) yt = Math.min(yt, yTop);
+      if (yt - yb < 0.05) continue;
+      addBox(solid, lines, 33.5, yb, 10.4 + s * 0.55, 39.4, yt, 10.9 + s * 0.55, INK, WOOD, hot("stair", focus), 1, true, INK);
     }
-    if (state.mat > 0.2 && yTop > 4) {
-      var g;
-      var lists = [
-        ["x", 0.36, southHoles],
-        ["x", 25.64, northHoles],
-        ["z", 0.36, westHoles],
-        ["z", 35.64, eastHoles]
+    addBox(solid, lines, 45.2, 0.12, 22.2, 52.4, Math.min(3.1, yTop), 26.2, INK, WOOD, 0, 1, true, INK);
+    addBox(solid, lines, 66.2, 0.12, 17.2, 69.4, Math.min(4.2, yTop), 19.6, INK, INK, 0, 1, true, INK);
+
+    if (yTop < 5) {
+      addBox(solid, lines, 2.2, 0.12, 18, 9.2, 0.22, 28, INK, INK, 0, 1, true, INK);
+      addBox(solid, lines, 12.8, 0.12, 18, 19.8, 0.22, 28, INK, INK, 0, 1, true, INK);
+    }
+
+    wallStrip(solid, lines, "x", 31.68, 0, 22, 0, gTop, 0.6, garageDoor, "bearing", focus, showStuds, 1);
+    wallStrip(solid, lines, "x", 13.32, 0, 22, 0, gTop, 0.6, [], "bearing", focus, false, -1);
+    wallStrip(solid, lines, "z", 0.32, 13.6, 31.4, 0, gTop, 0.6, [{ at: 22, w: 2.6, sill: 3.1, head: 5.4 }], "bearing", focus, showStuds, -1);
+    wallStrip(solid, lines, "z", 21.68, 13.6, 31.4, 0, gTop, 0.6, [{ at: 22, w: 3, sill: 0, head: 7 }], "bearing", focus, false, 1);
+
+    if (state.upper > 0.02) {
+      var uy1 = 9 + 9 * state.upper;
+      addBox(solid, lines, 30.4, 9.02, 0.4, 71.6, 9.18, 10.2, PAPER, FLOOR_C, hot("upperfloor", focus), 1, true, PAPER);
+      addBox(solid, lines, 30.4, 9.02, 10.2, 32.6, 9.18, 20.2, PAPER, FLOOR_C, hot("upperfloor", focus), 1, true, PAPER);
+      addBox(solid, lines, 40.2, 9.02, 10.2, 71.6, 9.18, 31.6, PAPER, FLOOR_C, hot("upperfloor", focus), 1, true, PAPER);
+      addBox(solid, lines, 30.4, 9.02, 20.2, 71.6, 9.18, 31.6, PAPER, FLOOR_C, hot("upperfloor", focus), 1, true, PAPER);
+      var uFront = [
+        { at: 46, w: 3.6, sill: 11.5, head: 15.4 },
+        { at: 60, w: 4.2, sill: 11.4, head: 15.6 }
       ];
-      for (g = 0; g < lists.length; g++) {
-        var li;
-        for (li = 0; li < lists[g][2].length; li++) {
-          if (lists[g][2][li].sill < 0.2) continue;
-          addGlass(glass, lists[g][0], lists[g][1], lists[g][2][li]);
-        }
+      var uBack = [{ at: 58, w: 4, sill: 11.5, head: 15.3 }];
+      var uRight = [{ at: 8, w: 3.2, sill: 11.6, head: 15.2 }, { at: 22, w: 3.4, sill: 11.5, head: 15.4 }];
+      wallStrip(solid, lines, "x", 31.68, HX0, HX1, 9, uy1, 0.64, uFront, "structure", focus, false, 1);
+      wallStrip(solid, lines, "x", 0.32, HX0, HX1, 9, uy1, 0.64, uBack, "structure", focus, false, -1);
+      wallStrip(solid, lines, "z", 30.32, 0.64, 31.36, 9, uy1, 0.64, [], "structure", focus, false, -1);
+      wallStrip(solid, lines, "z", 71.68, 0.64, 31.36, 9, uy1, 0.64, uRight, "structure", focus, false, 1);
+      wallStrip(solid, lines, "x", 16, 42, 71.2, 9, uy1, 0.32, [{ at: 52, w: 2.6, sill: 9, head: 16 }], "partition", focus, false, 1);
+      wallStrip(solid, lines, "z", 58, 16.2, 31.2, 9, uy1, 0.32, [{ at: 24, w: 2.6, sill: 9, head: 16 }], "partition", focus, false, 1);
+      wallStrip(solid, lines, "z", 48, 0.6, 15.6, 9, uy1, 0.32, [{ at: 8, w: 2.4, sill: 9, head: 16 }], "partition", focus, false, 1);
+      wallStrip(solid, lines, "x", 8, 48.2, 71.2, 9, uy1, 0.28, [], "partition", focus, false, 1);
+      addBox(solid, lines, 44, 9.06, 32.15, 66, 9.24, 37.4, SIDE, FLOOR_C, hot("balcony", focus), 1, true, FLOOR_C);
+      if (uy1 > 11.5) {
+        addRail(solid, lines, 44.2, 65.8, 37.1, 9.24, focus, "balcony");
+        addRail(solid, lines, 44.2, 44.35, 32.3, 9.24, focus, "balcony");
+        addRail(solid, lines, 65.6, 65.75, 32.3, 9.24, focus, "balcony");
+      }
+      if (state.shell > 0.25 && uy1 > 14) {
+        addGlass(glass, "x", 31.68, uFront[0]);
+        addGlass(glass, "x", 31.68, uFront[1]);
+        addGlass(glass, "x", 0.32, uBack[0]);
+        addGlass(glass, "z", 71.68, uRight[0]);
       }
     }
 
-    if (state.wallH < 5.2) {
-      var ti;
-      for (ti = 0; ti < 12; ti++) {
-        var tz = 16.5 + ti * (7.2 / 12);
-        addBox(solid, 29.15, 0.08, tz, 35.05, 0.12, tz + 0.28, INK, OAK, hot("stair", focus), 1, true, INK);
+    if (state.shell > 0.04) {
+      addMainRoof(solid, lines, 29.2, 73.2, -1.1, 33.4, 18, 25.4, 8, focus);
+      addGarageRoof(solid, lines, -0.6, 22.6, 12.6, 32.8, 9.15, 13.4, focus);
+      addBox(solid, lines, 22.2, 8.7, 18.2, 29.8, 9.05, 28.2, ROOF_INK, ROOF_C, hot("roof", focus), 1, true, ROOF_C);
+      addBox(solid, lines, 52, 20.6, 24.5, 60.5, 23.6, 31.2, SIDE, SIDE, hot("roof", focus), 1, true, SIDE);
+      addGarageRoof(solid, lines, 51.6, 60.9, 24.2, 31.6, 23.4, 25.8, focus);
+      addBox(solid, lines, 42, 0.14, 32.2, 68, 0.4, 38.2, SIDE, FLOOR_C, hot("porch", focus), 1, true, FLOOR_C);
+      addBox(solid, lines, 42, 8.15, 32.15, 68, 8.5, 38.4, ROOF_INK, ROOF_C, hot("porch", focus), 1, true, ROOF_C);
+      addBox(solid, lines, 43.1, 0.4, 37.3, 43.45, 8.2, 37.65, INK, INK, hot("porch", focus), 1, true, INK);
+      addBox(solid, lines, 66.4, 0.4, 37.3, 66.75, 8.2, 37.65, INK, INK, hot("porch", focus), 1, true, INK);
+      addRail(solid, lines, 43.4, 66.3, 37.9, 0.4, focus, "porch");
+      if (state.shell > 0.3) {
+        addGlass(glass, "x", 31.68, houseFront[0]);
+        addGlass(glass, "x", 31.68, houseFront[2]);
+        addGlass(glass, "x", 0.32, houseBack[0]);
+        addGlass(glass, "x", 0.32, houseBack[1]);
+        addGlass(glass, "z", 71.68, houseRight[0]);
+        addGlass(glass, "z", 71.68, houseRight[1]);
+        addGlass(glass, "z", 0.32, { at: 22, w: 2.6, sill: 3.1, head: 5.4 });
+        addBox(solid, null, 3.2, 0.2, 31.15, 18.8, 6.85, 31.55, [0.78, 0.78, 0.76], [0.82, 0.82, 0.8], hot("header", focus) * 0.15, 1, true);
       }
-    } else {
-      addStairs(solid, 0, 9, focus, state.wallH);
-    }
-
-    if (state.roof) {
-      addRoof(solid, state.eave, state.ridge, focus);
-      if (state.upper) {
-        var uy0 = 9;
-        var uy1 = state.eave;
-        var uSouth = [{ at: 16, w: 4.4, sill: 11.2, head: 15.4 }];
-        var uNorth = [{ at: 12, w: 3.6, sill: 11.3, head: 15.2 }];
-        var uWest = [{ at: 20, w: 3.2, sill: 11.4, head: 15.1 }];
-        var uEast = [
-          { at: 10, w: 3.2, sill: 11.3, head: 15.2 },
-          { at: 20.6, w: 3.3, sill: 11.1, head: 15.6 }
-        ];
-        wallStrip(solid, "x", 0.36, 0, 36, uy0, uy1, 0.72, uSouth, "structure", SIDE, CEDAR, focus, false);
-        wallStrip(solid, "x", 25.64, 0, 36, uy0, uy1, 0.72, uNorth, "structure", SIDE, CEDAR, focus, false);
-        wallStrip(solid, "z", 0.36, 0.72, 25.28, uy0, uy1, 0.72, uWest, "structure", SIDE, CEDAR, focus, false);
-        wallStrip(solid, "z", 35.64, 0.72, 25.28, uy0, uy1, 0.72, uEast, "structure", SIDE, CEDAR, focus, false);
-        addBox(solid, 0.8, 9.02, 0.8, 35.2, 9.16, 15.7, PAPER, OAK, hot("upperfloor", focus), 1, true);
-        addBox(solid, 0.8, 9.02, 15.7, 28.4, 9.16, 25.2, PAPER, OAK, hot("upperfloor", focus), 1, true);
-        if (state.mat > 0.45 && uy1 > 14) {
-          addGlass(glass, "x", 0.36, uSouth[0]);
-          addGlass(glass, "x", 25.64, uNorth[0]);
-          addGlass(glass, "z", 0.36, uWest[0]);
-          addGlass(glass, "z", 35.64, uEast[0]);
-          addGlass(glass, "z", 35.64, uEast[1]);
-        }
-        addStairs(solid, 9, Math.max(0.4, (state.eave - 9) * 0.92), focus, state.eave);
-        addBox(solid, -0.45, 8.72, -0.55, 36.45, 9.18, 26.55, [0.93, 0.9, 0.84], [0.9, 0.86, 0.78], hot("structure", focus), 1, true, [0.93, 0.9, 0.84]);
+      var yy;
+      for (yy = 1.15; yy < 8.3; yy += 0.85) {
+        line(lines, [30.15, yy, 32.08], [71.85, yy, 32.08]);
+        line(lines, [72.08, yy, 0.3], [72.08, yy, 31.7]);
+        line(lines, [0.05, yy, 13.5], [0.05, yy, 31.6]);
+      }
+      for (yy = 10.2; yy < 17.2; yy += 0.85) {
+        line(lines, [30.15, yy, 32.08], [71.85, yy, 32.08]);
+        line(lines, [72.08, yy, 0.3], [72.08, yy, 31.7]);
       }
     }
 
-    if (state.trees) {
-      cone(solid, -5.5, 8, 2.3, 11);
-      cone(solid, 42.2, 18, 2.6, 13);
-      cone(solid, 40, 4, 1.7, 8);
+    if (state.shell > 0.2) {
+      addBox(glass, null, 2, 0.025, -6, 80, 0.045, 46, SHADOW, SHADOW, 0, 0.22, true, SHADOW);
     }
 
-    return { solid: solid, glass: glass, state: state };
+    return { solid: solid, glass: glass, lines: lines, state: state };
   }
 
   var VS = [
@@ -517,14 +564,16 @@
     "void main(){",
     "  vec3 n=normalize(vN);",
     "  float ndl=abs(dot(n,normalize(uLight)));",
-    "  float ao=mix(0.76,1.0,smoothstep(0.0,2.6,vPos.y));",
-    "  vec3 lit=vMat*(0.38+0.62*ndl)*ao;",
+    "  vec3 lit=vMat*(0.72+0.28*ndl);",
     "  vec3 col=mix(vInk,lit,uMat);",
-    "  col=mix(col,uPaper,uDim*(1.0-vHot)*0.7);",
-    "  col=mix(col,vec3(0.114,0.306,0.847),clamp(vHot,0.0,1.0)*0.92);",
+    "  col=mix(col,uPaper,uDim*(1.0-vHot)*0.55);",
+    "  col=mix(col,vec3(0.12,0.28,0.72),clamp(vHot,0.0,1.0)*0.88);",
     "  gl_FragColor=vec4(col,vAlpha);",
     "}"
   ].join("\n");
+
+  var LVS = "attribute vec3 aPos; uniform mat4 uMvp; void main(){ gl_Position=uMvp*vec4(aPos,1.0); }";
+  var LFS = "precision mediump float; uniform vec3 uColor; void main(){ gl_FragColor=vec4(uColor,1.0); }";
 
   function projectPoint(mvp, x, y, z, w, h) {
     var clipX = mvp[0] * x + mvp[4] * y + mvp[8] * z + mvp[12];
@@ -546,13 +595,12 @@
     var sheet = root.querySelector(".scroll-house-sheet");
     var track = root.querySelector(".scroll-house-track");
     var sticky = root.querySelector(".scroll-house-sticky");
-    var line = root.querySelector(".scroll-house-line");
+    var lineEl = root.querySelector(".scroll-house-line");
     var bar = root.querySelector(".sh-progress > span");
     var labels = root.querySelector(".sh-labels");
     var stageNodes = root.querySelectorAll(".sh-stages li");
     if (!canvas || !sheet || !track || !sticky) return;
     var gl = canvas.getContext("webgl", { alpha: false, antialias: true, depth: true, stencil: false, powerPreference: "low-power" });
-    if (!gl) gl = canvas.getContext("experimental-webgl", { alpha: false, antialias: true, depth: true });
     if (!gl) return;
 
     function shader(type, src) {
@@ -562,15 +610,20 @@
       if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) return null;
       return sh;
     }
-    var vs = shader(gl.VERTEX_SHADER, VS);
-    var fs = shader(gl.FRAGMENT_SHADER, FS);
-    if (!vs || !fs) return;
-    var prog = gl.createProgram();
-    gl.attachShader(prog, vs);
-    gl.attachShader(prog, fs);
-    gl.linkProgram(prog);
-    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
-    gl.useProgram(prog);
+    function program(vsSrc, fsSrc) {
+      var vs = shader(gl.VERTEX_SHADER, vsSrc);
+      var fs = shader(gl.FRAGMENT_SHADER, fsSrc);
+      if (!vs || !fs) return null;
+      var prog = gl.createProgram();
+      gl.attachShader(prog, vs);
+      gl.attachShader(prog, fs);
+      gl.linkProgram(prog);
+      if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return null;
+      return prog;
+    }
+    var prog = program(VS, FS);
+    var lineProg = program(LVS, LFS);
+    if (!prog || !lineProg) return;
     var loc = {
       pos: gl.getAttribLocation(prog, "aPos"),
       nrm: gl.getAttribLocation(prog, "aNrm"),
@@ -584,24 +637,25 @@
       light: gl.getUniformLocation(prog, "uLight"),
       paper: gl.getUniformLocation(prog, "uPaper")
     };
+    var lpos = gl.getAttribLocation(lineProg, "aPos");
+    var lmvp = gl.getUniformLocation(lineProg, "uMvp");
+    var lcolor = gl.getUniformLocation(lineProg, "uColor");
     var solidGl = gl.createBuffer();
     var glassGl = gl.createBuffer();
+    var lineGl = gl.createBuffer();
     gl.enable(gl.DEPTH_TEST);
     gl.clearColor(PAPER[0], PAPER[1], PAPER[2], 1);
 
     var labelNodes = [];
     if (labels) {
+      var items = ROOMS.concat([{ name: "42 ft", x: 51, z: 35.2, dim: true }, { name: "22 ft", x: 11, z: 35.2, dim: true }]);
       var li;
-      var items = ROOMS.concat([
-        { name: "36 ft", x: 18, z: -1.7, dim: true },
-        { name: "26 ft", x: -1.6, z: 13, dim: true }
-      ]);
       for (li = 0; li < items.length; li++) {
         var node = document.createElement("span");
         node.className = "sh-label" + (items[li].dim ? " is-dim" : "");
         node.textContent = items[li].name;
         labels.appendChild(node);
-        labelNodes.push({ node: node, x: items[li].x, z: items[li].z });
+        labelNodes.push({ node: node, x: items[li].x, z: items[li].z, minor: !!items[li].minor });
       }
     }
 
@@ -645,9 +699,7 @@
 
     function showStageSet(stageId) {
       var i;
-      for (i = 0; i < learnSets.length; i++) {
-        learnSets[i].hidden = learnSets[i].getAttribute("data-stage") !== stageId;
-      }
+      for (i = 0; i < learnSets.length; i++) learnSets[i].hidden = learnSets[i].getAttribute("data-stage") !== stageId;
       if (!focusBelongs(stageId)) applyFocus("");
     }
 
@@ -664,10 +716,7 @@
       return scrolled / travel;
     }
 
-    function drawBuffer(buffer, glBuf, alphaPass) {
-      if (!buffer.n) return;
-      gl.bindBuffer(gl.ARRAY_BUFFER, glBuf);
-      gl.bufferData(gl.ARRAY_BUFFER, buffer.data.subarray(0, buffer.n), gl.DYNAMIC_DRAW);
+    function bindAttribs() {
       var stride = 56;
       gl.enableVertexAttribArray(loc.pos);
       gl.enableVertexAttribArray(loc.nrm);
@@ -681,6 +730,13 @@
       gl.vertexAttribPointer(loc.mat, 3, gl.FLOAT, false, stride, 36);
       gl.vertexAttribPointer(loc.hot, 1, gl.FLOAT, false, stride, 48);
       gl.vertexAttribPointer(loc.alpha, 1, gl.FLOAT, false, stride, 52);
+    }
+
+    function drawBuffer(buffer, glBuf, alphaPass) {
+      if (!buffer.n) return;
+      gl.bindBuffer(gl.ARRAY_BUFFER, glBuf);
+      gl.bufferData(gl.ARRAY_BUFFER, buffer.data.subarray(0, buffer.n), gl.DYNAMIC_DRAW);
+      bindAttribs();
       if (alphaPass) {
         gl.enable(gl.BLEND);
         gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
@@ -710,28 +766,41 @@
       var stage = stageAt(p);
       var cam = cameraFor(p, cssW / cssH);
       var built = buildGeometry(p, focusId);
-      var view = lookAt(cam.eye, cam.look, cam.up);
-      var proj = perspective(cam.fov, cssW / Math.max(1, cssH), 0.08, 500);
-      var mvp = mul(proj, view);
+      var mvp = mul(perspective(cam.fov, cssW / Math.max(1, cssH), 0.08, 600), lookAt(cam.eye, cam.look, cam.up));
+      if (p < 0.13) {
+        mvp[1] = -mvp[1];
+        mvp[5] = -mvp[5];
+        mvp[9] = -mvp[9];
+        mvp[13] = -mvp[13];
+      }
       gl.viewport(0, 0, bw, bh);
       gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
       gl.useProgram(prog);
       gl.uniformMatrix4fv(loc.mvp, false, mvp);
-      gl.uniform1f(loc.matAmt, built.state.mat);
+      gl.uniform1f(loc.matAmt, built.state.shell);
       gl.uniform1f(loc.dim, focusId ? 1 : 0);
-      gl.uniform3f(loc.light, -0.35, 0.82, -0.45);
+      gl.uniform3f(loc.light, -0.45, 0.75, -0.4);
       gl.uniform3f(loc.paper, PAPER[0], PAPER[1], PAPER[2]);
       drawBuffer(built.solid, solidGl, false);
       drawBuffer(built.glass, glassGl, true);
+      if (built.lines.n) {
+        gl.useProgram(lineProg);
+        gl.uniformMatrix4fv(lmvp, false, mvp);
+        gl.uniform3f(lcolor, 0.15, 0.15, 0.16);
+        gl.bindBuffer(gl.ARRAY_BUFFER, lineGl);
+        gl.bufferData(gl.ARRAY_BUFFER, built.lines.data.subarray(0, built.lines.n), gl.DYNAMIC_DRAW);
+        gl.enableVertexAttribArray(lpos);
+        gl.vertexAttribPointer(lpos, 3, gl.FLOAT, false, 12, 0);
+        gl.drawArrays(gl.LINES, 0, built.lines.n / 3);
+      }
       var showLabels = cam.steep > 0.72;
       root.classList.toggle("is-plan", showLabels);
       var n;
       for (n = 0; n < labelNodes.length; n++) {
         var item = labelNodes[n];
-        var pt = showLabels ? projectPoint(mvp, item.x, 0.4, item.z, cssW, cssH) : null;
-        if (!pt || pt[0] < 8 || pt[1] < 8 || pt[0] > cssW - 8 || pt[1] > cssH - 8) {
-          item.node.style.display = "none";
-        } else {
+        var pt = showLabels && !(item.minor && cssW < 720) ? projectPoint(mvp, item.x, 0.5, item.z, cssW, cssH) : null;
+        if (!pt || pt[0] < 4 || pt[1] < 4 || pt[0] > cssW - 4 || pt[1] > cssH - 4) item.node.style.display = "none";
+        else {
           item.node.style.display = "block";
           item.node.style.left = pt[0].toFixed(1) + "px";
           item.node.style.top = pt[1].toFixed(1) + "px";
@@ -743,7 +812,7 @@
       root.classList.add("is-drawn");
       if (stage.id !== current) {
         current = stage.id;
-        if (line) line.textContent = stage.line;
+        if (lineEl) lineEl.textContent = stage.line;
         for (n = 0; n < stageNodes.length; n++) {
           var on = stageNodes[n].getAttribute("data-stage") === stage.id;
           stageNodes[n].classList.toggle("is-on", on);
@@ -767,7 +836,6 @@
       applyFocus(focusId === id ? "" : id);
       requestDraw();
     });
-
     window.addEventListener("scroll", requestDraw, { passive: true });
     window.addEventListener("resize", requestDraw, { passive: true });
     document.addEventListener("visibilitychange", function () {
@@ -794,7 +862,6 @@
     perspective: perspective,
     mul: mul,
     STAGES: STAGES,
-    PAPER: PAPER,
-    HL: HL
+    PAPER: PAPER
   };
 });
