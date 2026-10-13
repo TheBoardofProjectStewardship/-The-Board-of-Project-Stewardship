@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Free photo visualizer and 3D plan walkthrough for Puget Sound and Seattle-area remodels, plus contractor directories for King County and Snohomish County.">
   <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#f6f1e6">
+  <meta name="theme-color" content="#0a0a0a">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta property="og:title" content="Puget Sound Visualizer &amp; 3D | Board of Project Stewardship">
   <meta property="og:description" content="Free photo visualizer and 3D plan walkthrough for Puget Sound and Seattle-area remodels, plus contractor directories for King County and Snohomish County.">
@@ -31,6 +31,285 @@
 
   <link rel="stylesheet" href="/assets/css/scroll-house.css">
   <link rel="stylesheet" href="/assets/css/visualizer.css">
+
+  <style>
+    .flashlight-hero {
+      --hero-gutter: clamp(18px, 4.6vw, 72px);
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      min-height: max(560px, calc(100dvh - 4rem));
+      height: max(560px, calc(100dvh - 4rem));
+      background: #0c0c0c;
+      color: #F2F2EE;
+      cursor: none;
+      touch-action: pan-y;
+    }
+    @media (hover: none) {
+      .flashlight-hero { cursor: auto; }
+    }
+    .flashlight-hero .hero-stage,
+    .flashlight-hero .hero-layer,
+    .flashlight-hero .hero-ambient-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .flashlight-hero .hero-stage { z-index: 0; background: #0c0c0c; }
+    .flashlight-hero .hero-layer {
+      object-fit: cover;
+      object-position: center center;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+    .flashlight-hero .hero-layer-finished { z-index: 1; }
+    .flashlight-hero .hero-layer-wire {
+      z-index: 2;
+      display: none;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+    }
+    .flashlight-hero.is-flashlight .hero-layer-wire { display: block; }
+    .flashlight-hero .hero-ambient-video {
+      display: none;
+      z-index: 2;
+      object-fit: cover;
+      object-position: center center;
+      pointer-events: none;
+    }
+    .flashlight-hero.is-video-playing .hero-ambient-video { display: block; }
+    .flashlight-hero .hero-play {
+      position: absolute;
+      z-index: 7;
+      top: 46%;
+      left: 62%;
+      transform: translate(-50%, -50%);
+      margin: 0;
+      padding: 0.9rem 1.1rem;
+      border: 1px solid #F2F2EE;
+      border-radius: 999px;
+      background: rgba(12,12,12,0.72);
+      color: #F2F2EE;
+      font: 700 11px/1 Inter, system-ui, sans-serif;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .flashlight-hero .hero-play:hover,
+    .flashlight-hero .hero-play:focus-visible { color: #4ade80; border-color: #4ade80; outline: none; }
+    .flashlight-hero .hero-pause { display: none; }
+    .flashlight-hero.is-video-playing .hero-play:not(.hero-pause) { display: none; }
+    .flashlight-hero.is-video-playing .hero-pause { display: inline-block; }
+    .flashlight-hero.is-reduced .hero-play,
+    .flashlight-hero.is-flashlight .hero-play { display: none; }
+    .flashlight-hero.is-video-playing {
+      cursor: auto;
+    }
+    .flashlight-hero.is-video-playing .hero-layer-wire,
+    .flashlight-hero.is-video-playing .hero-cursor {
+      display: none !important;
+    }
+    .flashlight-hero.is-video-playing .hero-hint-flashlight {
+      display: none !important;
+    }
+    .flashlight-hero:not(.is-video-playing) .hero-hint-video {
+      display: none !important;
+    }
+    .flashlight-hero .hero-scrim,
+    .flashlight-hero .hero-vignette {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+    }
+    .flashlight-hero .hero-scrim {
+      background:
+        linear-gradient(90deg, rgba(6,7,7,.94) 0%, rgba(6,7,7,.82) 24%, rgba(6,7,7,.42) 46%, rgba(6,7,7,0) 64%),
+        linear-gradient(0deg, rgba(8,9,9,.78) 0%, rgba(8,9,9,0) 36%),
+        linear-gradient(180deg, rgba(8,9,9,.55) 0%, rgba(8,9,9,0) 18%);
+    }
+    .flashlight-hero .hero-vignette {
+      background: radial-gradient(ellipse at 62% 48%, transparent 42%, rgba(0,0,0,.45) 100%);
+    }
+    .flashlight-hero .hero-cursor {
+      position: absolute;
+      z-index: 6;
+      top: 0;
+      left: 0;
+      width: 28px;
+      height: 28px;
+      margin: -14px 0 0 -14px;
+      border: 1px solid rgba(242,242,238,.55);
+      border-radius: 50%;
+      box-shadow: 0 0 0 1px rgba(0,0,0,.35);
+      pointer-events: none;
+      opacity: 0;
+      will-change: transform;
+    }
+    .flashlight-hero.is-hovering .hero-cursor { opacity: 1; }
+    .flashlight-hero .hero-hint {
+      position: absolute;
+      z-index: 5;
+      top: 1.25rem;
+      right: var(--hero-gutter);
+      max-width: 26ch;
+      margin: 0;
+      text-align: right;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      line-height: 1.5;
+      color: rgba(242,242,238,.62);
+      pointer-events: none;
+      transition: opacity .35s ease;
+    }
+    .flashlight-hero .hero-hint-coarse { display: none; }
+    .flashlight-hero .hero-copy {
+      position: absolute;
+      z-index: 5;
+      left: var(--hero-gutter);
+      bottom: clamp(64px, 11vh, 120px);
+      max-width: 36rem;
+    }
+    .flashlight-hero .hero-kicker {
+      margin: 0;
+      color: #4ade80;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .flashlight-hero h1,
+    .flashlight-hero h2 {
+      margin: 14px 0 0;
+      max-width: 16ch;
+      color: #fff;
+      font-family: Inter, system-ui, sans-serif;
+      font-weight: 600;
+      font-size: clamp(34px, 4.4vw, 58px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+    .flashlight-hero .hero-dek {
+      margin: 16px 0 0;
+      max-width: 42ch;
+      color: rgba(242,242,238,.8);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.55;
+    }
+    .flashlight-hero .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 22px 28px;
+      margin-top: 28px;
+    }
+    .flashlight-hero .hero-btn,
+    .flashlight-hero .hero-link {
+      cursor: pointer;
+    }
+    .flashlight-hero .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 14px 18px;
+      background: #F2F2EE;
+      color: #0E0F0F;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      border: 1px solid #F2F2EE;
+      transition: background .35s ease, color .35s ease;
+    }
+    .flashlight-hero .hero-btn:hover {
+      background: transparent;
+      color: #F2F2EE;
+    }
+    .flashlight-hero .hero-link {
+      color: #F2F2EE;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(242,242,238,.35);
+      padding-bottom: 3px;
+    }
+    .flashlight-hero .hero-link:hover {
+      color: #4ade80;
+      border-color: #4ade80;
+    }
+    .flashlight-hero a:focus-visible {
+      outline: 2px solid #4ade80;
+      outline-offset: 3px;
+    }
+    .flashlight-hero .hero-credit {
+      position: absolute;
+      z-index: 5;
+      right: var(--hero-gutter);
+      bottom: 22px;
+      margin: 0;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(242,242,238,.45);
+      pointer-events: none;
+    }
+    @media (max-width: 860px) {
+      .flashlight-hero {
+        height: auto;
+        min-height: max(640px, calc(100dvh - 4rem));
+        cursor: auto;
+      }
+      .flashlight-hero .hero-cursor { display: none; }
+      .flashlight-hero .hero-hint {
+        top: auto;
+        right: auto;
+        left: var(--hero-gutter);
+        bottom: auto;
+        text-align: left;
+        position: relative;
+        margin: 0 0 12px;
+      }
+      .flashlight-hero .hero-copy {
+        right: var(--hero-gutter);
+        max-width: none;
+      }
+      .flashlight-hero .hero-scrim {
+        background: linear-gradient(0deg, rgba(6,7,7,.94) 0%, rgba(6,7,7,.55) 46%, rgba(6,7,7,.35) 100%);
+      }
+    }
+    @media (hover: none), (pointer: coarse) {
+      .flashlight-hero .hero-hint-fine { display: none; }
+      .flashlight-hero .hero-hint-coarse { display: inline; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .flashlight-hero { cursor: auto; }
+      .flashlight-hero .hero-btn { transition: none; }
+      .flashlight-hero .hero-layer-wire,
+      .flashlight-hero .hero-cursor,
+      .flashlight-hero .hero-hint,
+      .flashlight-hero .hero-play,
+      .flashlight-hero .hero-ambient-video { display: none !important; }
+    }
+    .flashlight-hero.is-supporting {
+      min-height: 22rem;
+      height: 22rem;
+      cursor: auto;
+    }
+    .flashlight-hero.is-supporting .hero-cursor { display: none; }
+    @media (max-width: 860px) {
+      .flashlight-hero.is-supporting {
+        min-height: 28rem;
+        height: 28rem;
+      }
+    }
+  </style>
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -176,6 +455,146 @@
     </nav>
   </header>
 <main id="main-content">
+  <section class="scroll-house" id="scroll-house" aria-labelledby="scroll-house-title">
+    <div class="scroll-house-track">
+      <div class="scroll-house-sticky">
+        <div class="sh-top">
+          <p class="sh-kicker">Pacific Northwest · King &amp; Snohomish · Seattle</p>
+          <p class="sh-title" id="scroll-house-title">From the plan up</p>
+          <p class="sh-dek">This house, from the main-floor plan to the finished massing.</p>
+        </div>
+        <ol class="sh-stages" aria-label="Build stages">
+          <li class="is-on" tabindex="0" data-stage="plan" data-sh-progress="0.04" aria-current="step">Plan</li>
+          <li tabindex="0" data-stage="walls" data-sh-progress="0.26">Walls</li>
+          <li tabindex="0" data-stage="upper" data-sh-progress="0.50">Upper</li>
+          <li tabindex="0" data-stage="shell" data-sh-progress="0.74">Shell</li>
+          <li tabindex="0" data-stage="massing" data-sh-progress="0.94">Massing</li>
+        </ol>
+        <div class="sh-progress" aria-hidden="true"><span></span></div>
+        <label class="sh-scrub-label">Build progress
+          <input class="sh-scrub" type="range" min="0" max="1000" step="1" value="0" aria-valuetext="Plan, 0 percent">
+        </label>
+        <div class="scroll-house-live">
+          <p class="sh-hint" aria-hidden="true">Scroll <span class="sh-hint-chevron">↓</span></p>
+          <div class="scroll-house-sheet">
+            <svg class="scroll-house-plan" viewBox="0 0 400 230" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+              <g fill="none" stroke="#1c1916" stroke-linejoin="round" stroke-linecap="butt">
+                <rect x="16" y="36" width="78" height="150" stroke-width="4"/>
+                <path stroke-width="4" d="M118 28 H150 V70 H250 V28 H330 V168 H250 V188 H118 V150 H250"/>
+                <path stroke-width="2" d="M150 78 H286 M168 92 H250 M118 150 H250"/>
+                <path stroke-width="1.5" d="M118 188 H250 V208 H150 V188"/>
+              </g>
+              <g fill="#1c1916" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" text-anchor="middle">
+                <text x="55" y="116">Garage</text>
+                <text x="200" y="108">Stair</text>
+                <text x="210" y="64">Kitchen</text>
+                <text x="292" y="100">Living</text>
+                <text x="184" y="172">Patio</text>
+                <text x="290" y="156">Office</text>
+              </g>
+            </svg>
+            <canvas class="scroll-house-canvas" width="960" height="540" tabindex="0" aria-label="House drawing. In explore, drag to turn it, or use the arrow keys. Plus and minus zoom."></canvas>
+            <div class="sh-labels" aria-hidden="true"></div>
+            <div class="sh-explore" hidden>
+              <button type="button" class="sh-explore-toggle" aria-pressed="false" aria-describedby="sh-explore-help">Explore the house</button>
+              <button type="button" class="sh-explore-reset" hidden>Reset view</button>
+              <p id="sh-explore-help" class="sh-explore-help">Drag or use arrow keys to look around. Plus and minus zoom. Reset view returns to the scroll camera.</p>
+            </div>
+          </div>
+          <p class="scroll-house-line" id="scroll-house-line">The main floor, cut flat and seen from above.</p>
+        </div>
+        <figure class="scroll-house-still">
+          <div class="sh-still-img" role="img" aria-label="Line drawing of this two-story house with a garage, porch, and balcony. Not a bid or stamped plan."></div>
+          <figcaption class="scroll-house-line">The finished massing, held still.</figcaption>
+        </figure>
+        <div class="sh-learn">
+          <div class="sh-learn-set" data-stage="plan">
+            <button type="button" class="sh-call" data-callout="foundation" aria-pressed="false" aria-controls="sh-note-foundation">Foundation</button>
+            <button type="button" class="sh-call" data-callout="bearing" aria-pressed="false" aria-controls="sh-note-bearing">Bearing walls</button>
+            <button type="button" class="sh-call" data-callout="partition" aria-pressed="false" aria-controls="sh-note-partition">Partitions</button>
+          </div>
+          <div class="sh-learn-set" data-stage="walls" hidden>
+            <button type="button" class="sh-call" data-callout="framing" aria-pressed="false" aria-controls="sh-note-framing">Framing</button>
+            <button type="button" class="sh-call" data-callout="header" aria-pressed="false" aria-controls="sh-note-header">Headers</button>
+          </div>
+          <div class="sh-learn-set" data-stage="upper" hidden>
+            <button type="button" class="sh-call" data-callout="structure" aria-pressed="false" aria-controls="sh-note-structure">Structure</button>
+            <button type="button" class="sh-call" data-callout="stairs" aria-pressed="false" aria-controls="sh-note-stairs">Stairs</button>
+            <button type="button" class="sh-call" data-callout="balcony" aria-pressed="false" aria-controls="sh-note-balcony">Balcony</button>
+          </div>
+          <div class="sh-learn-set" data-stage="shell" hidden>
+            <button type="button" class="sh-call" data-callout="roof" aria-pressed="false" aria-controls="sh-note-roof">Roof</button>
+            <button type="button" class="sh-call" data-callout="porch" aria-pressed="false" aria-controls="sh-note-porch">Porch</button>
+          </div>
+          <div class="sh-learn-set" data-stage="massing" hidden>
+            <button type="button" class="sh-call" data-callout="footings" aria-pressed="false" aria-controls="sh-note-footings">Footings</button>
+          </div>
+          <div class="sh-learn-copy">
+            <p class="sh-learn-prompt" id="sh-learn-prompt">Tap a label to learn what that part does.</p>
+            <p class="sh-note" id="sh-note-foundation" data-callout="foundation"><strong>Foundation.</strong> The outer line is this house and the garage. A foundation under it spreads the weight into the ground and keeps the wood frame off the soil.</p>
+            <p class="sh-note" id="sh-note-bearing" data-callout="bearing"><strong>Bearing walls.</strong> The outside walls of the house and the garage carry the floors and the roof down to the foundation. In this sketch they are the load-bearing walls.</p>
+            <p class="sh-note" id="sh-note-partition" data-callout="partition"><strong>Partitions.</strong> The inside walls divide the kitchen, living room, bedrooms, and the other rooms. This sketch does not use them to hold up the floor. On a real house, check what sits on a wall before anyone takes it out.</p>
+            <p class="sh-note" id="sh-note-framing" data-callout="framing"><strong>Framing.</strong> Studs stand between a bottom plate and a top plate. That skeleton is the frame. Lap siding and the board-and-batten gable cover it later.</p>
+            <p class="sh-note" id="sh-note-header" data-callout="header"><strong>Headers.</strong> The garage door and the windows take studs out of the wall. A header, a short beam across each opening, carries that load to the studs on both sides. This sketch does not size them.</p>
+            <p class="sh-note" id="sh-note-roof" data-callout="roof"><strong>Roof.</strong> The east face is a board-and-batten gable. A hip roof and a dormer cover the west wing, and the garage roof sits lower. The slopes send rain out to the eaves.</p>
+            <p class="sh-note" id="sh-note-porch" data-callout="porch"><strong>Porch.</strong> The porch is the covered landing by the court, with a rail. The patio under the upper floor stays open.</p>
+            <p class="sh-note" id="sh-note-balcony" data-callout="balcony"><strong>Balcony.</strong> The balcony is the open floor on the west side, beside the garage. It needs a rail.</p>
+            <p class="sh-note" id="sh-note-footings" data-callout="footings"><strong>Footings.</strong> The upper floor and the garage send weight down the walls into the footings. Those footings have to suit that load. This sketch does not size them.</p>
+            <p class="sh-note" id="sh-note-structure" data-callout="structure"><strong>Structure.</strong> The upper floor stacks on the main-floor walls: a floor, walls, and the roof above. It has to tie into the frame already there.</p>
+            <p class="sh-note" id="sh-note-stairs" data-callout="stairs"><strong>Stairs.</strong> The stair drawn on both floors runs across the plan and ends at the upper floor. A stair needs a clear path, headroom, and a rail. The exact stair is worked out for the house.</p>
+          </div>
+          <p class="sh-learn-aside">Teaching sketch. Not a structural design.</p>
+        </div>
+        <div class="scroll-house-cta">
+          <div class="sh-cta-row">
+            <a class="sh-btn" href="#plan-home-hero">See what your home could become</a>
+            <a class="sh-link" href="./plan-walkthrough/">Plan walkthrough</a>
+          </div>
+          <p class="sh-fine">Illustrative concept. Not a bid or stamped plan.</p>
+        </div>
+      </div>
+    </div>
+    <noscript>
+      <style>
+        .scroll-house-track { height: auto !important; }
+        .scroll-house-sticky { position: relative !important; top: auto !important; height: auto !important; }
+        .scroll-house-live, .sh-progress, .sh-hint, .sh-learn-set, .sh-learn-prompt { display: none !important; }
+        .scroll-house-still, .sh-note { display: block !important; }
+      </style>
+    </noscript>
+    <script>
+    (function () {
+      var root = document.getElementById("scroll-house");
+      if (!root) return;
+      var mq = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+      function load() {
+        if (root.getAttribute("data-js") === "1") return;
+        root.setAttribute("data-js", "1");
+        var s = document.createElement("script");
+        s.src = "/assets/js/scroll-house.js";
+        document.body.appendChild(s);
+      }
+      function sync() {
+        if (mq && mq.matches) {
+          root.classList.add("is-still");
+          return;
+        }
+        root.classList.remove("is-still");
+        if (!("IntersectionObserver" in window)) { load(); return; }
+        if (root.getAttribute("data-js") === "1") return;
+        var io = new IntersectionObserver(function (entries) {
+          for (var i = 0; i < entries.length; i++) {
+            if (entries[i].isIntersecting) { load(); io.disconnect(); break; }
+          }
+        }, { rootMargin: "160px" });
+        io.observe(root);
+      }
+      if (mq && mq.addEventListener) mq.addEventListener("change", sync);
+      sync();
+    })();
+    </script>
+  </section>
+
   <section class="see-project" id="plan-home-hero" aria-labelledby="see-project-title" data-api-base="" data-maps-key="" data-turnstile-sitekey="">
     <div class="see-project-inner">
       <div class="see-stepper" role="tablist" aria-label="Steps">
@@ -583,146 +1002,6 @@
     })();
     </script>
   </section>
-  <section class="scroll-house" id="scroll-house" aria-labelledby="scroll-house-title">
-    <div class="scroll-house-track">
-      <div class="scroll-house-sticky">
-        <div class="sh-top">
-          <p class="sh-kicker">Pacific Northwest · King &amp; Snohomish · Seattle</p>
-          <p class="sh-title" id="scroll-house-title">From the plan up</p>
-          <p class="sh-dek">This house, from the main-floor plan to the finished massing.</p>
-        </div>
-        <ol class="sh-stages" aria-label="Build stages">
-          <li class="is-on" tabindex="0" data-stage="plan" data-sh-progress="0.04" aria-current="step">Plan</li>
-          <li tabindex="0" data-stage="walls" data-sh-progress="0.26">Walls</li>
-          <li tabindex="0" data-stage="upper" data-sh-progress="0.50">Upper</li>
-          <li tabindex="0" data-stage="shell" data-sh-progress="0.74">Shell</li>
-          <li tabindex="0" data-stage="massing" data-sh-progress="0.94">Massing</li>
-        </ol>
-        <div class="sh-progress" aria-hidden="true"><span></span></div>
-        <label class="sh-scrub-label">Build progress
-          <input class="sh-scrub" type="range" min="0" max="1000" step="1" value="0" aria-valuetext="Plan, 0 percent">
-        </label>
-        <div class="scroll-house-live">
-          <p class="sh-hint" aria-hidden="true">Scroll <span class="sh-hint-chevron">↓</span></p>
-          <div class="scroll-house-sheet">
-            <svg class="scroll-house-plan" viewBox="0 0 400 230" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-              <g fill="none" stroke="#1c1916" stroke-linejoin="round" stroke-linecap="butt">
-                <rect x="16" y="36" width="78" height="150" stroke-width="4"/>
-                <path stroke-width="4" d="M118 28 H150 V70 H250 V28 H330 V168 H250 V188 H118 V150 H250"/>
-                <path stroke-width="2" d="M150 78 H286 M168 92 H250 M118 150 H250"/>
-                <path stroke-width="1.5" d="M118 188 H250 V208 H150 V188"/>
-              </g>
-              <g fill="#1c1916" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" text-anchor="middle">
-                <text x="55" y="116">Garage</text>
-                <text x="200" y="108">Stair</text>
-                <text x="210" y="64">Kitchen</text>
-                <text x="292" y="100">Living</text>
-                <text x="184" y="172">Patio</text>
-                <text x="290" y="156">Office</text>
-              </g>
-            </svg>
-            <canvas class="scroll-house-canvas" width="960" height="540" tabindex="0" aria-label="House drawing. In explore, drag to turn it, or use the arrow keys. Plus and minus zoom."></canvas>
-            <div class="sh-labels" aria-hidden="true"></div>
-            <div class="sh-explore" hidden>
-              <button type="button" class="sh-explore-toggle" aria-pressed="false" aria-describedby="sh-explore-help">Explore the house</button>
-              <button type="button" class="sh-explore-reset" hidden>Reset view</button>
-              <p id="sh-explore-help" class="sh-explore-help">Drag or use arrow keys to look around. Plus and minus zoom. Reset view returns to the scroll camera.</p>
-            </div>
-          </div>
-          <p class="scroll-house-line" id="scroll-house-line">The main floor, cut flat and seen from above.</p>
-        </div>
-        <figure class="scroll-house-still">
-          <div class="sh-still-img" role="img" aria-label="Line drawing of this two-story house with a garage, porch, and balcony. Not a bid or stamped plan."></div>
-          <figcaption class="scroll-house-line">The finished massing, held still.</figcaption>
-        </figure>
-        <div class="sh-learn">
-          <div class="sh-learn-set" data-stage="plan">
-            <button type="button" class="sh-call" data-callout="foundation" aria-pressed="false" aria-controls="sh-note-foundation">Foundation</button>
-            <button type="button" class="sh-call" data-callout="bearing" aria-pressed="false" aria-controls="sh-note-bearing">Bearing walls</button>
-            <button type="button" class="sh-call" data-callout="partition" aria-pressed="false" aria-controls="sh-note-partition">Partitions</button>
-          </div>
-          <div class="sh-learn-set" data-stage="walls" hidden>
-            <button type="button" class="sh-call" data-callout="framing" aria-pressed="false" aria-controls="sh-note-framing">Framing</button>
-            <button type="button" class="sh-call" data-callout="header" aria-pressed="false" aria-controls="sh-note-header">Headers</button>
-          </div>
-          <div class="sh-learn-set" data-stage="upper" hidden>
-            <button type="button" class="sh-call" data-callout="structure" aria-pressed="false" aria-controls="sh-note-structure">Structure</button>
-            <button type="button" class="sh-call" data-callout="stairs" aria-pressed="false" aria-controls="sh-note-stairs">Stairs</button>
-            <button type="button" class="sh-call" data-callout="balcony" aria-pressed="false" aria-controls="sh-note-balcony">Balcony</button>
-          </div>
-          <div class="sh-learn-set" data-stage="shell" hidden>
-            <button type="button" class="sh-call" data-callout="roof" aria-pressed="false" aria-controls="sh-note-roof">Roof</button>
-            <button type="button" class="sh-call" data-callout="porch" aria-pressed="false" aria-controls="sh-note-porch">Porch</button>
-          </div>
-          <div class="sh-learn-set" data-stage="massing" hidden>
-            <button type="button" class="sh-call" data-callout="footings" aria-pressed="false" aria-controls="sh-note-footings">Footings</button>
-          </div>
-          <div class="sh-learn-copy">
-            <p class="sh-learn-prompt" id="sh-learn-prompt">Tap a label to learn what that part does.</p>
-            <p class="sh-note" id="sh-note-foundation" data-callout="foundation"><strong>Foundation.</strong> The outer line is this house and the garage. A foundation under it spreads the weight into the ground and keeps the wood frame off the soil.</p>
-            <p class="sh-note" id="sh-note-bearing" data-callout="bearing"><strong>Bearing walls.</strong> The outside walls of the house and the garage carry the floors and the roof down to the foundation. In this sketch they are the load-bearing walls.</p>
-            <p class="sh-note" id="sh-note-partition" data-callout="partition"><strong>Partitions.</strong> The inside walls divide the kitchen, living room, bedrooms, and the other rooms. This sketch does not use them to hold up the floor. On a real house, check what sits on a wall before anyone takes it out.</p>
-            <p class="sh-note" id="sh-note-framing" data-callout="framing"><strong>Framing.</strong> Studs stand between a bottom plate and a top plate. That skeleton is the frame. Lap siding and the board-and-batten gable cover it later.</p>
-            <p class="sh-note" id="sh-note-header" data-callout="header"><strong>Headers.</strong> The garage door and the windows take studs out of the wall. A header, a short beam across each opening, carries that load to the studs on both sides. This sketch does not size them.</p>
-            <p class="sh-note" id="sh-note-roof" data-callout="roof"><strong>Roof.</strong> The east face is a board-and-batten gable. A hip roof and a dormer cover the west wing, and the garage roof sits lower. The slopes send rain out to the eaves.</p>
-            <p class="sh-note" id="sh-note-porch" data-callout="porch"><strong>Porch.</strong> The porch is the covered landing by the court, with a rail. The patio under the upper floor stays open.</p>
-            <p class="sh-note" id="sh-note-balcony" data-callout="balcony"><strong>Balcony.</strong> The balcony is the open floor on the west side, beside the garage. It needs a rail.</p>
-            <p class="sh-note" id="sh-note-footings" data-callout="footings"><strong>Footings.</strong> The upper floor and the garage send weight down the walls into the footings. Those footings have to suit that load. This sketch does not size them.</p>
-            <p class="sh-note" id="sh-note-structure" data-callout="structure"><strong>Structure.</strong> The upper floor stacks on the main-floor walls: a floor, walls, and the roof above. It has to tie into the frame already there.</p>
-            <p class="sh-note" id="sh-note-stairs" data-callout="stairs"><strong>Stairs.</strong> The stair drawn on both floors runs across the plan and ends at the upper floor. A stair needs a clear path, headroom, and a rail. The exact stair is worked out for the house.</p>
-          </div>
-          <p class="sh-learn-aside">Teaching sketch. Not a structural design.</p>
-        </div>
-        <div class="scroll-house-cta">
-          <div class="sh-cta-row">
-            <a class="sh-btn" href="#plan-home-hero">See what your home could become</a>
-            <a class="sh-link" href="./plan-walkthrough/">Plan walkthrough</a>
-          </div>
-          <p class="sh-fine">Illustrative concept. Not a bid or stamped plan.</p>
-        </div>
-      </div>
-    </div>
-    <noscript>
-      <style>
-        .scroll-house-track { height: auto !important; }
-        .scroll-house-sticky { position: relative !important; top: auto !important; height: auto !important; }
-        .scroll-house-live, .sh-progress, .sh-hint, .sh-learn-set, .sh-learn-prompt { display: none !important; }
-        .scroll-house-still, .sh-note { display: block !important; }
-      </style>
-    </noscript>
-    <script>
-    (function () {
-      var root = document.getElementById("scroll-house");
-      if (!root) return;
-      var mq = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
-      function load() {
-        if (root.getAttribute("data-js") === "1") return;
-        root.setAttribute("data-js", "1");
-        var s = document.createElement("script");
-        s.src = "/assets/js/scroll-house.js";
-        document.body.appendChild(s);
-      }
-      function sync() {
-        if (mq && mq.matches) {
-          root.classList.add("is-still");
-          return;
-        }
-        root.classList.remove("is-still");
-        if (!("IntersectionObserver" in window)) { load(); return; }
-        if (root.getAttribute("data-js") === "1") return;
-        var io = new IntersectionObserver(function (entries) {
-          for (var i = 0; i < entries.length; i++) {
-            if (entries[i].isIntersecting) { load(); io.disconnect(); break; }
-          }
-        }, { rootMargin: "160px" });
-        io.observe(root);
-      }
-      if (mq && mq.addEventListener) mq.addEventListener("change", sync);
-      sync();
-    })();
-    </script>
-  </section>
-
   <div class="max-w-6xl mx-auto px-4 pt-10 relative z-20">
     <section id="why-ppg-number-one" class="bg-charcoal rounded-xl p-8 md:p-10 border border-secondary/35 mb-14 relative overflow-hidden">
       <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-primary"></div>
@@ -778,33 +1057,50 @@
       </div>
     </section>
 
-    <section id="home-directories" class="mb-14">
+    <section class="mb-14">
       <div class="mb-6 border-b border-white/10 pb-4">
         <span class="text-secondary text-xs font-bold uppercase tracking-widest">Directories</span>
         <h2 class="text-2xl font-black text-white tracking-tight">Explore the Board’s listings</h2>
-        <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Directories emphasize editorial fit for King County, Snohomish County, and Seattle — not whoever bought the top ad slot.</p>
-        <p class="text-slate-300 font-light leading-relaxed mt-3">Pacific Pro Group ranks #1 with a verified <strong class="text-white font-semibold">4.9 · 190 reviews (as of Sept 2026; re-check live)</strong>.</p>
       </div>
-      <ol class="home-dirlist">
-        <li><a href="./additions.html"><span class="home-rank">01</span><span><span class="home-name">Additions</span><span class="home-note">Board directory #1</span></span></a></li>
-        <li><a href="./custom-homes.html"><span class="home-rank">02</span><span class="home-name">Custom Homes</span></a></li>
-        <li><a href="./edmonds-custom-homes.html"><span class="home-rank">03</span><span class="home-name">Edmonds custom homes</span></a></li>
-        <li><a href="./kitchen.html"><span class="home-rank">04</span><span class="home-name">Kitchen</span></a></li>
-        <li><a href="./bathrooms.html"><span class="home-rank">05</span><span class="home-name">Bathrooms</span></a></li>
-        <li><a href="./restoration.html"><span class="home-rank">06</span><span class="home-name">Restoration</span></a></li>
-        <li><a href="./commercial.html"><span class="home-rank">07</span><span class="home-name">Commercial</span></a></li>
-        <li><a href="./spec-homes.html"><span class="home-rank">08</span><span class="home-name">Spec Homes</span></a></li>
-        <li><a href="./trades.html"><span class="home-rank">09</span><span class="home-name">Trades</span></a></li>
-      </ol>
+      <div class="flex flex-wrap gap-3">
+        <a href="./additions.html" class="bg-primary text-white hover:bg-emerald-700 shadow-glow-sleek px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">Browse Additions Directory</a><a href="./custom-homes.html" class="border border-white/20 bg-white/5 text-white hover:border-secondary hover:text-secondary px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">Custom Homes</a><a href="./edmonds-custom-homes.html" class="border border-white/20 bg-white/5 text-white hover:border-secondary hover:text-secondary px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">Edmonds custom homes</a><a href="./kitchen.html" class="border border-white/20 bg-white/5 text-white hover:border-secondary hover:text-secondary px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">Kitchen</a><a href="./bathrooms.html" class="border border-white/20 bg-white/5 text-white hover:border-secondary hover:text-secondary px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">Bathrooms</a><a href="./commercial.html" class="border border-white/20 bg-white/5 text-white hover:border-secondary hover:text-secondary px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">Commercial</a><a href="./spec-homes.html" class="border border-white/20 bg-white/5 text-white hover:border-secondary hover:text-secondary px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">Spec Homes</a><a href="./trades.html" class="border border-white/20 bg-white/5 text-white hover:border-secondary hover:text-secondary px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">Trades</a><a href="./blog.html" class="border border-white/20 bg-white/5 text-white hover:border-secondary hover:text-secondary px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">Blog</a><a href="./good-steward.html" class="border border-white/20 bg-white/5 text-white hover:border-secondary hover:text-secondary px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">Good Steward</a>
+      </div>
+    </section>
+
+    <section id="why-homeowners" class="mb-14">
+      <div class="mb-8 border-b border-white/10 pb-4">
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">For homeowners</span>
+        <h2 class="text-3xl font-black text-white tracking-tight">Why homeowners use the Board</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4 mb-6">
+        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-filter text-secondary mr-2"></i>Standards over lead-gen</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Directories emphasize editorial fit for King County, Snohomish County, and Seattle — not whoever bought the top ad slot.</p>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-clipboard-list text-secondary mr-2"></i>Tools that travel with you</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Good Steward checklists keep discovery notes and phase status in your browser — useful with any licensed GC.</p>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-shield-halved text-secondary mr-2"></i>Verify before you hire</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Every ranking page points you back to <a href="https://secure.lni.wa.gov/verify/" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> before deposits or demolition.</p>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <a href="./good-steward.html" class="bg-primary text-white px-5 py-3.5 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs shadow-glow-sleek">Good Steward guide &amp; tools</a>
+        <a href="./build-walkthrough.html" class="border border-white/20 bg-white/5 text-white px-5 py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Build Walkthrough</a>
+        <a href="./site-visit.html" class="border border-white/20 bg-white/5 text-white px-5 py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Site Visit Checklist</a>
+        <a href="./pm-dashboard.html" class="border border-white/20 bg-white/5 text-white px-5 py-3.5 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">PM Dashboard</a>
+      </div>
     </section>
 
     <section id="how-the-board-works" class="mb-14">
       <div class="mb-8 border-b border-white/10 pb-4">
-        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Standards</span>
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Process</span>
         <h2 class="text-3xl font-black text-white tracking-tight">How the Board works</h2>
         <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">A repeatable filter: research the work, verify public signals, weight local mastery, then publish an editorial shortlist homeowners can use.</p>
       </div>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="grid sm:grid-cols-2 gap-4">
         <div class="bg-charcoal border border-white/10 hover:border-primary/40 rounded-xl p-5 card-hover">
           <img src="./assets/images/home-process-research-800.webp" alt="Illustrative: editorial photo of plans and research materials for Board process" class="w-full h-36 object-cover rounded-lg border border-white/10 mb-4" width="800" height="450" loading="lazy" data-defer-lcp srcset="./assets/images/home-process-research-480.webp 480w, ./assets/images/home-process-research-800.webp 800w, ./assets/images/home-process-research-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
           <div class="flex items-center gap-3 mb-3">
@@ -842,22 +1138,386 @@
           <p class="text-sm text-slate-400 font-light leading-relaxed">Publish ranked directories and field guides so homeowners can compare firms against standards — not paid placement.</p>
         </div>
       </div>
-      <p class="text-sm text-slate-400 font-light leading-relaxed mt-6">Every ranking page points you back to <a href="https://secure.lni.wa.gov/verify/" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> before deposits or demolition.</p>
-      <p class="text-sm text-slate-400 font-light leading-relaxed">Confirm active contractor license, bonding, and insurance on <a href="https://secure.lni.wa.gov/verify/" target="_blank" rel="noopener" class="text-secondary hover:underline">L&amp;I Verify</a> before any deposit or start date.</p>
     </section>
 
-    <section id="home-planning-tools" class="mb-14">
+    <section class="mb-14">
       <div class="mb-8 border-b border-white/10 pb-4">
-        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Good Steward tools</span>
-        <h2 class="text-3xl font-black text-white tracking-tight">Planning tools that travel with you</h2>
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Homeowner practice</span>
+        <h2 class="text-3xl font-black text-white tracking-tight">What a good steward does</h2>
+        <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Concrete habits that keep remodels, additions, and custom work accountable — whether you hire a design-build firm or self-manage trades.</p>
       </div>
-      <ul class="home-tools">
-        <li><a href="./good-steward.html"><h3>Good Steward</h3><p>Checklists keep discovery notes and phase status in your browser — useful with any licensed GC.</p></a></li>
-        <li><a href="./plan-walkthrough/"><h3>Plan to 3D Walkthrough</h3><p>See the build emerge from the plan. Educational homeowner concept.</p></a></li>
-        <li><a href="./site-visit.html"><h3>Site Visit Checklist</h3><p>Data stays in your browser on this device.</p></a></li>
-        <li><a href="./pm-dashboard.html"><h3>PM Dashboard</h3><p>Good Steward tools for King County, Snohomish County, and Seattle.</p></a></li>
-      </ul>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+        <div class="bg-charcoal border border-white/10 rounded-xl p-5">
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-id-card text-secondary mr-2"></i>Verify WA L&amp;I</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Confirm active contractor license, bonding, and insurance on <a href="https://secure.lni.wa.gov/verify/" target="_blank" rel="noopener" class="text-secondary hover:underline">L&amp;I Verify</a> before any deposit or start date.</p>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-5">
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-file-contract text-secondary mr-2"></i>Written scope</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Insist on a written scope of work, allowances, and exclusions — not a handshake estimate — before demolition or ordering long-lead materials.</p>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-5">
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-user-tie text-secondary mr-2"></i>One steward contact</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Name a single project steward for decisions and schedule. Avoid salesman-to-crew handoffs with no continuity.</p>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-5">
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-stamp text-secondary mr-2"></i>Permit ownership</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Know who pulls and owns each permit, who schedules inspections, and how corrections are closed before cover-up.</p>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-5">
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-exchange-alt text-secondary mr-2"></i>Change-order discipline</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Require written change orders with price and schedule impact before extra work starts — no verbal “we’ll figure it out.”</p>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-5">
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-cloud-rain text-secondary mr-2"></i>Weather &amp; dry-in</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">For additions and roof work, demand a dry-in plan: temporary weather protection, sequencing, and moisture checks before finishes.</p>
+        </div>
+        <div class="bg-charcoal border border-white/10 rounded-xl p-5 sm:col-span-2 lg:col-span-3">
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-clipboard-check text-secondary mr-2"></i>Punch list before final pay</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Walk a written punch list with photos, retain final payment until items are closed, and keep manuals/warranty contacts with the project file.</p>
+        </div>
+      </div>
     </section>
+
+    <section class="mb-14" id="cornerstone-reading">
+      <div class="mb-8 border-b border-white/10 pb-4">
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">From the Board journal</span>
+        <h2 class="text-3xl font-black text-white tracking-tight">Cornerstone reading</h2>
+        <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Six editorial posts that pair with Board directories and Good Steward tools — permits, hiring, waterproofing, and addition path decisions. Educational only; no invented prices or timelines.</p>
+      </div>
+      <ul class="grid sm:grid-cols-2 gap-3 text-sm text-slate-300 font-light">
+        <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-08-12-edmonds-home-addition-permit-basics.html" class="text-secondary hover:underline font-semibold">Edmonds home addition permit basics</a> — AHJ start-here habits before design freeze.</li>
+        <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-08-11-hire-design-build-edmonds.html" class="text-secondary hover:underline font-semibold">Hire design-build in Edmonds</a> — when one steward beats a trade-only chase.</li>
+        <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-08-18-pnw-bathroom-waterproofing-essentials.html" class="text-secondary hover:underline font-semibold">PNW bathroom waterproofing essentials</a> — wet-area discipline for coastal baths.</li>
+        <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-08-09-second-story-vs-teardown-edmonds.html" class="text-secondary hover:underline font-semibold">Second story vs teardown (Edmonds)</a> — compare paths without invented cost claims.</li>
+        <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-08-12-hire-kitchen-remodeler-king-snohomish.html" class="text-secondary hover:underline font-semibold">Hire a kitchen remodeler (King &amp; Snohomish)</a> — shortlist habits before cabinet day.</li>
+        <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-09-07-adu-planning-edmonds-wa.html" class="text-secondary hover:underline font-semibold">ADU planning Edmonds WA</a> — parcel and portal honesty before stock plans.</li>
+      </ul>
+      <p class="text-sm text-slate-500 font-light mt-4"><a href="./blog.html" class="text-secondary hover:underline">Browse the full blog</a> · <a href="./learn.html" class="text-secondary hover:underline">Learn hub</a> · <a href="./how-we-rank.html" class="text-secondary hover:underline">How we rank</a></p>
+    </section>
+
+    <section class="mb-14" id="learn">
+      <div class="mb-8 border-b border-white/10 pb-4">
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Learn before you hire</span>
+        <h2 class="text-3xl font-black text-white tracking-tight">Planning hubs &amp; client tools</h2>
+        <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Educational Board guides for remodels and additions — paired with verification tools. No invented prices, licenses, or awards.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+        <a href="./hiring-a-contractor.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover block">
+          <h3 class="text-base font-black text-white mb-2">Hiring a contractor</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">L&amp;I verify path, interview habits, and how Board rankings work.</p>
+        </a>
+        <a href="./kitchen-remodel-planning.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover block">
+          <h3 class="text-base font-black text-white mb-2">Kitchen remodel planning</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Layout, allowances, and permit ownership before cabinet day.</p>
+        </a>
+        <a href="./bathroom-waterproofing-guide.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover block">
+          <h3 class="text-base font-black text-white mb-2">Bathroom waterproofing</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Wet-area systems and coastal moisture habits for Puget Sound baths.</p>
+        </a>
+        <a href="./home-addition-planning.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover block">
+          <h3 class="text-base font-black text-white mb-2">Home addition planning</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Jurisdiction, dry-in sequencing, and addition shortlist links.</p>
+        </a>
+        <a href="./second-story-vs-teardown.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover block">
+          <h3 class="text-base font-black text-white mb-2">Second story vs teardown</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">Compare paths without invented cost guarantees.</p>
+        </a>
+        <div class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover">
+          <h3 class="text-base font-black text-white mb-2">Bid comparison &amp; red flags</h3>
+          <p class="text-sm text-slate-400 font-light leading-relaxed"><a href="./bid-comparison.html" class="text-secondary hover:underline">Bid checklist</a> · <a href="./red-flags-hiring.html" class="text-secondary hover:underline">red flags</a> · <a href="./project-timeline.html" class="text-secondary hover:underline">timeline phases</a>.</p>
+        </div>
+      </div>
+      <p class="text-sm text-slate-400 font-light mb-3"><a href="./learn.html" class="text-secondary hover:underline font-semibold">Browse the full Learn hub</a> — permits, ADU, verify, checklists, stewardship layers, glossary, videos, and Good Steward tools.</p>
+      <p class="text-sm text-slate-500 font-light">City hubs: <a href="./edmonds.html" class="text-secondary hover:underline">Edmonds</a> · <a href="./greenwood.html" class="text-secondary hover:underline">Greenwood</a> · <a href="./lake-forest-park.html" class="text-secondary hover:underline">Lake Forest Park</a> · <a href="./mountlake-terrace.html" class="text-secondary hover:underline">Mountlake Terrace</a> · <a href="./mill-creek.html" class="text-secondary hover:underline">Mill Creek</a> · <a href="./mukilteo.html" class="text-secondary hover:underline">Mukilteo</a> · <a href="./kirkland.html" class="text-secondary hover:underline">Kirkland</a> · <a href="./bothell.html" class="text-secondary hover:underline">Bothell</a> · <a href="./queen-anne.html" class="text-secondary hover:underline">Queen Anne</a> · <a href="./phinney-ridge.html" class="text-secondary hover:underline">Phinney Ridge</a> · <a href="./shoreline.html" class="text-secondary hover:underline">Shoreline</a> · <a href="./lynnwood.html" class="text-secondary hover:underline">Lynnwood</a> · <a href="./ballard.html" class="text-secondary hover:underline">Ballard</a> · <a href="./magnolia.html" class="text-secondary hover:underline">Magnolia</a></p>
+    </section>
+
+    <section class="bg-charcoal rounded-xl p-8 md:p-10 border border-primary/25 mb-14 relative overflow-hidden">
+      <div class="absolute -bottom-20 -right-20 w-56 h-56 bg-primary/15 blur-[70px] pointer-events-none rounded-full"></div>
+      <div class="relative z-10 md:flex md:items-center md:justify-between gap-8">
+        <div class="mb-6 md:mb-0">
+          <span class="text-secondary font-bold text-xs uppercase tracking-[0.15em] flex items-center mb-3">
+            <i class="fas fa-map-location-dot mr-2"></i> Edmonds directory
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-3">Edmonds custom home builders</h2>
+          <p class="text-slate-300 font-light leading-relaxed max-w-2xl">
+            Edmonds-first editorial list, a local permit guide, and planning tools.
+            Pacific Pro Group ranks #1 with a verified <strong class="text-white font-semibold">4.9 · 190 reviews (as of Sept 2026; re-check live)</strong>.
+          </p>
+        </div>
+        <a href="./edmonds-custom-homes.html" class="shrink-0 bg-primary text-white text-center py-3.5 px-6 rounded font-bold hover:bg-emerald-700 transition shadow-glow-sleek uppercase tracking-wider text-sm whitespace-nowrap">
+          Open Edmonds directory <i class="fas fa-arrow-right ml-1 text-xs"></i>
+        </a>
+      </div>
+    </section>
+
+    <section id="field-gallery" class="mb-4">
+      <div class="mb-8 border-b border-white/10 pb-4">
+        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Field gallery</span>
+        <h2 class="text-3xl font-black text-white tracking-tight">Standards you can see</h2>
+        <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Editorial process and remodel imagery for Pacific Northwest work in King County, Snohomish County, and Seattle. Editorial and stock frames are labeled illustrative in alt text.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <figure class="overflow-hidden rounded-xl border border-white/10 bg-charcoal">
+          <img src="./assets/images/home-process-build-800.webp" alt="Illustrative: PNW home addition exterior for Board editorial" class="w-full h-44 sm:h-52 object-cover" width="1200" height="675" loading="lazy" data-defer-lcp srcset="./assets/images/home-process-build-480.webp 480w, ./assets/images/home-process-build-800.webp 800w, ./assets/images/home-process-build-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
+          <figcaption class="px-3 py-2 text-xs text-slate-300 font-light leading-snug">Additions &amp; coastal detailing</figcaption>
+        </figure>
+        <figure class="overflow-hidden rounded-xl border border-white/10 bg-charcoal">
+          <img src="./assets/images/home-ppg-addition-800.webp" alt="Illustrative: PNW remodel exterior for Board #1 listing" class="w-full h-44 sm:h-52 object-cover" width="1200" height="675" loading="lazy" data-defer-lcp srcset="./assets/images/home-ppg-addition-480.webp 480w, ./assets/images/home-ppg-addition-800.webp 800w, ./assets/images/home-ppg-addition-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
+          <figcaption class="px-3 py-2 text-xs text-slate-300 font-light leading-snug">Board #1 — quality remodel craft</figcaption>
+        </figure>
+        <figure class="overflow-hidden rounded-xl border border-white/10 bg-charcoal">
+          <img src="./assets/images/home-ppg-interior-800.webp" alt="Illustrative: remodeled kitchen interior for Board editorial" class="w-full h-44 sm:h-52 object-cover" width="1200" height="675" loading="lazy" data-defer-lcp srcset="./assets/images/home-ppg-interior-480.webp 480w, ./assets/images/home-ppg-interior-800.webp 800w, ./assets/images/home-ppg-interior-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
+          <figcaption class="px-3 py-2 text-xs text-slate-300 font-light leading-snug">Finish discipline indoors</figcaption>
+        </figure>
+        <figure class="overflow-hidden rounded-xl border border-white/10 bg-charcoal">
+          <img src="./assets/images/home-gallery-dryin-800.webp" alt="Illustrative: dry-in / framing stage for Board editorial" class="w-full h-44 sm:h-52 object-cover" width="1200" height="675" loading="lazy" data-defer-lcp srcset="./assets/images/home-gallery-dryin-480.webp 480w, ./assets/images/home-gallery-dryin-800.webp 800w, ./assets/images/home-gallery-dryin-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
+          <figcaption class="px-3 py-2 text-xs text-slate-300 font-light leading-snug">Dry-in &amp; weather protection</figcaption>
+        </figure>
+        <figure class="overflow-hidden rounded-xl border border-white/10 bg-charcoal">
+          <img src="./assets/images/home-gallery-finish-800.webp" alt="Illustrative: finished remodel interior for Board editorial" class="w-full h-44 sm:h-52 object-cover" width="1200" height="675" loading="lazy" data-defer-lcp srcset="./assets/images/home-gallery-finish-480.webp 480w, ./assets/images/home-gallery-finish-800.webp 800w, ./assets/images/home-gallery-finish-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
+          <figcaption class="px-3 py-2 text-xs text-slate-300 font-light leading-snug">Punch-ready finishes</figcaption>
+        </figure>
+        <figure class="overflow-hidden rounded-xl border border-white/10 bg-charcoal">
+          <img src="./assets/images/home-process-research-800.webp" alt="Illustrative: plans and research desk for Board editorial" class="w-full h-44 sm:h-52 object-cover" width="1200" height="675" loading="lazy" data-defer-lcp srcset="./assets/images/home-process-research-480.webp 480w, ./assets/images/home-process-research-800.webp 800w, ./assets/images/home-process-research-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
+          <figcaption class="px-3 py-2 text-xs text-slate-300 font-light leading-snug">Research before ranking</figcaption>
+        </figure>
+      </div>
+    </section>
+  </div>
+  <section class="flashlight-hero is-supporting" id="home-hero" aria-labelledby="home-hero-title">
+    <div class="hero-stage">
+      <img class="hero-layer hero-layer-finished" src="./assets/hero/hero-finished-1280.webp" srcset="./assets/hero/hero-finished-640.webp 640w, ./assets/hero/hero-finished-1280.webp 1280w" sizes="100vw" alt="Illustrative: Pacific Northwest home concept for Board of Project Stewardship — not a bid or stamped plan" width="1280" height="723" decoding="async" data-defer-lcp loading="lazy">
+      <img class="hero-layer hero-layer-wire" id="home-hero-wire" src="./assets/hero/hero-wireframe-1280.webp" srcset="./assets/hero/hero-wireframe-640.webp 640w, ./assets/hero/hero-wireframe-1280.webp 1280w" sizes="100vw" alt="Illustrative: line drawing of the same Pacific Northwest home, the plan layer under the finished view — not a bid or stamped plan" width="1280" height="723" decoding="async" data-defer-lcp loading="lazy">
+      <video class="hero-ambient-video" muted loop playsinline preload="none" poster="./assets/hero/board-sketch-to-home-poster.webp">
+        <source src="./assets/hero/board-sketch-to-home-720.mp4" type="video/mp4">
+      </video>
+      <button type="button" class="hero-play" id="home-hero-play">Play video</button>
+      <button type="button" class="hero-play hero-pause" id="home-hero-pause">Pause video</button>
+    </div>
+    <div class="hero-scrim" aria-hidden="true"></div>
+    <div class="hero-vignette" aria-hidden="true"></div>
+    <div class="hero-cursor" id="home-hero-ring" aria-hidden="true"></div>
+    <p class="hero-hint" id="home-hero-hint"><span class="hero-hint-video">Plans assemble into the finished home</span><span class="hero-hint-flashlight"><span class="hero-hint-fine">Hover to reveal the finished home</span><span class="hero-hint-coarse">Drag to reveal the finished home</span></span></p>
+    <div class="hero-copy">
+      <p class="hero-kicker">Pacific Northwest · King &amp; Snohomish · Seattle</p>
+      <h2 id="home-hero-title">Remodel directories and permit guides</h2>
+      <p class="hero-dek">See the build emerge from the plan. Educational homeowner concept — framing to finished cedar and glass. Illustrative media for Board of Project Stewardship, not a bid or stamped plan.</p>
+      <div class="hero-ctas">
+        <a class="hero-btn" href="./directory.html">Browse directories</a>
+        <a class="hero-link" href="./build-walkthrough.html">Explore walkthrough</a>
+      </div>
+    </div>
+    <p class="hero-credit">Educational concept · not a bid or stamped plan</p>
+  </section>
+  <noscript><style>.flashlight-hero .hero-layer-wire,.flashlight-hero .hero-hint,.flashlight-hero .hero-cursor{display:none!important}</style></noscript>
+  <div class="max-w-6xl mx-auto px-4 pt-10 relative z-20 pb-24">
+    <section id="mission" class="mb-12">
+    <iframe
+      id="mesh-flow-mission"
+      class="board-section-frame"
+      src="./sections/mesh-flow-backdrop.html"
+      title="Mission — Board of Project Stewardship"
+      loading="lazy"
+      style="display:block;width:100%;height:1100px;border:0;border-radius:18px;background:#0a0a0a;"
+    ></iframe>
+    <script>
+    (function () {
+      var frame = document.getElementById("mesh-flow-mission");
+      if (!frame) return;
+      window.addEventListener('message', function (event) {
+        if (!event.data || event.data.type !== 'board-section:resize') return;
+        if (event.data.id !== "mesh-flow-mission") return;
+        if (event.source !== frame.contentWindow) return;
+        var trusted = new URL(frame.src, window.location.href).origin;
+        if (event.origin !== trusted) return;
+        var next = Number(event.data.height);
+        if (Number.isFinite(next) && next >= 280 && next <= 6400) {
+          frame.style.height = Math.ceil(next) + 'px';
+        }
+      });
+    })();
+    </script>
+    </section>
+
+
+  <section id="build-walkthrough" class="mb-14">
+    <div class="mb-6 border-b border-white/10 pb-4">
+      <span class="text-secondary text-xs font-bold uppercase tracking-widest">Good Steward Tools</span>
+      <h2 class="text-3xl font-black text-white tracking-tight">See how a project is built</h2>
+      <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">One cohesive illustrative house from the Board of Project Stewardship, scrubbed through 17 stages from Discovery to Handoff. The plan stays on the sheet, then the walls rise into the same model. Honesty chips: illustrative media, not engineering documents. <a href="./build-walkthrough.html" class="text-secondary hover:underline">Open full landing</a>.</p>
+    </div>
+    <iframe
+      id="build-walkthrough-home"
+      src="./tools/build-walkthrough/index.html"
+      title="Build Walkthrough — Board of Project Stewardship"
+      loading="lazy"
+      style="display:block;width:100%;height:1280px;border:0;border-radius:18px;background:#f3efe6;"
+    ></iframe>
+    <script>
+    (() => {
+      const frame = document.getElementById('build-walkthrough-home');
+      if (!frame) return;
+      const trustedOrigin = new URL(frame.src, window.location.href).origin;
+      window.addEventListener('message', (event) => {
+        if (event.origin !== trustedOrigin || event.source !== frame.contentWindow) return;
+        if (event.data?.type !== 'build-walkthrough:resize') return;
+        const height = Number(event.data.height);
+        if (Number.isFinite(height) && height >= 400 && height <= 16000) {
+          frame.style.height = `${Math.min(Math.ceil(height) + 2, 1900)}px`;
+        }
+      });
+    })();
+    </script>
+    <div class="mt-5">
+      <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-3">Plan photo strip</p>
+      <div class="flex gap-3 overflow-x-auto pb-2 -mx-1 px-1">
+        <figure class="shrink-0 w-36 sm:w-40 rounded-lg overflow-hidden border border-white/10 bg-charcoal relative">
+          <div class="aspect-[4/3] bg-obsidian relative">
+            <img src="./assets/images/tools/build-walkthrough/01-sales-discovery-800.webp" alt="Illustrative: Stage 1: Sales / discovery — Vision, budget reality, coastal site notes" class="absolute inset-0 w-full h-full object-cover" width="320" height="240" loading="lazy" srcset="./assets/images/tools/build-walkthrough/01-sales-discovery-480.webp 480w, ./assets/images/tools/build-walkthrough/01-sales-discovery-800.webp 800w, ./assets/images/tools/build-walkthrough/01-sales-discovery-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
+            <span class="absolute bottom-0 inset-x-0 z-10 text-[10px] uppercase tracking-wider text-secondary font-bold px-2 py-1 bg-black/65">1 · Sales / discovery</span>
+          </div>
+          <figcaption class="px-2 py-1.5 text-xs text-slate-300 font-light leading-snug">Vision, budget reality, coastal site notes</figcaption>
+        </figure>
+        <figure class="shrink-0 w-36 sm:w-40 rounded-lg overflow-hidden border border-white/10 bg-charcoal relative">
+          <div class="aspect-[4/3] bg-obsidian relative">
+            <img src="./assets/images/tools/build-walkthrough/02-plans-blueprints-800.webp" alt="Illustrative: Stage 2: Plans &amp; blueprints — Layouts and elevations — illustrative only" class="absolute inset-0 w-full h-full object-cover" width="320" height="240" loading="lazy" srcset="./assets/images/tools/build-walkthrough/02-plans-blueprints-480.webp 480w, ./assets/images/tools/build-walkthrough/02-plans-blueprints-800.webp 800w, ./assets/images/tools/build-walkthrough/02-plans-blueprints-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
+            <span class="absolute bottom-0 inset-x-0 z-10 text-[10px] uppercase tracking-wider text-secondary font-bold px-2 py-1 bg-black/65">2 · Plans &amp; blueprints</span>
+          </div>
+          <figcaption class="px-2 py-1.5 text-xs text-slate-300 font-light leading-snug">Layouts and elevations — illustrative only</figcaption>
+        </figure>
+        <figure class="shrink-0 w-36 sm:w-40 rounded-lg overflow-hidden border border-white/10 bg-charcoal relative">
+          <div class="aspect-[4/3] bg-obsidian relative">
+            <img src="./assets/images/tools/build-walkthrough/03-permits-lni-800.webp" alt="Illustrative: Stage 3: Permits &amp; L&amp;I — Posted permits and license hygiene" class="absolute inset-0 w-full h-full object-cover" width="320" height="240" loading="lazy" srcset="./assets/images/tools/build-walkthrough/03-permits-lni-480.webp 480w, ./assets/images/tools/build-walkthrough/03-permits-lni-800.webp 800w, ./assets/images/tools/build-walkthrough/03-permits-lni-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
+            <span class="absolute bottom-0 inset-x-0 z-10 text-[10px] uppercase tracking-wider text-secondary font-bold px-2 py-1 bg-black/65">3 · Permits &amp; L&amp;I</span>
+          </div>
+          <figcaption class="px-2 py-1.5 text-xs text-slate-300 font-light leading-snug">Posted permits and license hygiene</figcaption>
+        </figure>
+        <figure class="shrink-0 w-36 sm:w-40 rounded-lg overflow-hidden border border-white/10 bg-charcoal relative">
+          <div class="aspect-[4/3] bg-obsidian relative">
+            <img src="./assets/images/tools/build-walkthrough/04-site-foundation-800.webp" alt="Illustrative: Stage 4: Site / foundation — Excavation, rebar, pour, waterproofing" class="absolute inset-0 w-full h-full object-cover" width="320" height="240" loading="lazy" srcset="./assets/images/tools/build-walkthrough/04-site-foundation-480.webp 480w, ./assets/images/tools/build-walkthrough/04-site-foundation-800.webp 800w, ./assets/images/tools/build-walkthrough/04-site-foundation-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
+            <span class="absolute bottom-0 inset-x-0 z-10 text-[10px] uppercase tracking-wider text-secondary font-bold px-2 py-1 bg-black/65">4 · Site / foundation</span>
+          </div>
+          <figcaption class="px-2 py-1.5 text-xs text-slate-300 font-light leading-snug">Excavation, rebar, pour, waterproofing</figcaption>
+        </figure>
+        <figure class="shrink-0 w-36 sm:w-40 rounded-lg overflow-hidden border border-white/10 bg-charcoal relative">
+          <div class="aspect-[4/3] bg-obsidian relative">
+            <img src="./assets/images/tools/build-walkthrough/05-framing-800.webp" alt="Illustrative: Stage 5: Framing — Stud walls rising — featured 3D moment" class="absolute inset-0 w-full h-full object-cover" width="320" height="240" loading="lazy" srcset="./assets/images/tools/build-walkthrough/05-framing-480.webp 480w, ./assets/images/tools/build-walkthrough/05-framing-800.webp 800w, ./assets/images/tools/build-walkthrough/05-framing-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
+            <span class="absolute bottom-0 inset-x-0 z-10 text-[10px] uppercase tracking-wider text-secondary font-bold px-2 py-1 bg-black/65">5 · Framing</span>
+          </div>
+          <figcaption class="px-2 py-1.5 text-xs text-slate-300 font-light leading-snug">Stud walls rising — featured 3D moment</figcaption>
+        </figure>
+        <figure class="shrink-0 w-36 sm:w-40 rounded-lg overflow-hidden border border-white/10 bg-charcoal relative">
+          <div class="aspect-[4/3] bg-obsidian relative">
+            <img src="./assets/images/tools/build-walkthrough/06-sheathing-dryin-800.webp" alt="Illustrative: Stage 6: Sheathing / dry-in — OSB, WRB, roof weather-tight" class="absolute inset-0 w-full h-full object-cover" width="320" height="240" loading="lazy" srcset="./assets/images/tools/build-walkthrough/06-sheathing-dryin-480.webp 480w, ./assets/images/tools/build-walkthrough/06-sheathing-dryin-800.webp 800w, ./assets/images/tools/build-walkthrough/06-sheathing-dryin-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
+            <span class="absolute bottom-0 inset-x-0 z-10 text-[10px] uppercase tracking-wider text-secondary font-bold px-2 py-1 bg-black/65">6 · Sheathing / dry-in</span>
+          </div>
+          <figcaption class="px-2 py-1.5 text-xs text-slate-300 font-light leading-snug">OSB, WRB, roof weather-tight</figcaption>
+        </figure>
+        <figure class="shrink-0 w-36 sm:w-40 rounded-lg overflow-hidden border border-white/10 bg-charcoal relative">
+          <div class="aspect-[4/3] bg-obsidian relative">
+            <img src="./assets/images/tools/build-walkthrough/07-mep-roughin-800.webp" alt="Illustrative: Stage 7: MEP rough-in — HVAC, plumbing, electrical in open walls" class="absolute inset-0 w-full h-full object-cover" width="320" height="240" loading="lazy" srcset="./assets/images/tools/build-walkthrough/07-mep-roughin-480.webp 480w, ./assets/images/tools/build-walkthrough/07-mep-roughin-800.webp 800w, ./assets/images/tools/build-walkthrough/07-mep-roughin-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
+            <span class="absolute bottom-0 inset-x-0 z-10 text-[10px] uppercase tracking-wider text-secondary font-bold px-2 py-1 bg-black/65">7 · MEP rough-in</span>
+          </div>
+          <figcaption class="px-2 py-1.5 text-xs text-slate-300 font-light leading-snug">HVAC, plumbing, electrical in open walls</figcaption>
+        </figure>
+        <figure class="shrink-0 w-36 sm:w-40 rounded-lg overflow-hidden border border-white/10 bg-charcoal relative">
+          <div class="aspect-[4/3] bg-obsidian relative">
+            <img src="./assets/images/tools/build-walkthrough/08-insulation-wrb-800.webp" alt="Illustrative: Stage 8: Insulation / WRB — Cavity fill and energy-path habits" class="absolute inset-0 w-full h-full object-cover" width="320" height="240" loading="lazy" srcset="./assets/images/tools/build-walkthrough/08-insulation-wrb-480.webp 480w, ./assets/images/tools/build-walkthrough/08-insulation-wrb-800.webp 800w, ./assets/images/tools/build-walkthrough/08-insulation-wrb-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
+            <span class="absolute bottom-0 inset-x-0 z-10 text-[10px] uppercase tracking-wider text-secondary font-bold px-2 py-1 bg-black/65">8 · Insulation / WRB</span>
+          </div>
+          <figcaption class="px-2 py-1.5 text-xs text-slate-300 font-light leading-snug">Cavity fill and energy-path habits</figcaption>
+        </figure>
+        <figure class="shrink-0 w-36 sm:w-40 rounded-lg overflow-hidden border border-white/10 bg-charcoal relative">
+          <div class="aspect-[4/3] bg-obsidian relative">
+            <img src="./assets/images/tools/build-walkthrough/09-drywall-paint-800.webp" alt="Illustrative: Stage 9: Drywall / paint — Hang, tape, texture, primer, paint" class="absolute inset-0 w-full h-full object-cover" width="320" height="240" loading="lazy" srcset="./assets/images/tools/build-walkthrough/09-drywall-paint-480.webp 480w, ./assets/images/tools/build-walkthrough/09-drywall-paint-800.webp 800w, ./assets/images/tools/build-walkthrough/09-drywall-paint-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
+            <span class="absolute bottom-0 inset-x-0 z-10 text-[10px] uppercase tracking-wider text-secondary font-bold px-2 py-1 bg-black/65">9 · Drywall / paint</span>
+          </div>
+          <figcaption class="px-2 py-1.5 text-xs text-slate-300 font-light leading-snug">Hang, tape, texture, primer, paint</figcaption>
+        </figure>
+        <figure class="shrink-0 w-36 sm:w-40 rounded-lg overflow-hidden border border-white/10 bg-charcoal relative">
+          <div class="aspect-[4/3] bg-obsidian relative">
+            <img src="./assets/images/tools/build-walkthrough/10-finishes-fixtures-800.webp" alt="Illustrative: Stage 10: Finishes / fixtures — Cabinets, counters, flooring, fixtures" class="absolute inset-0 w-full h-full object-cover" width="320" height="240" loading="lazy" srcset="./assets/images/tools/build-walkthrough/10-finishes-fixtures-480.webp 480w, ./assets/images/tools/build-walkthrough/10-finishes-fixtures-800.webp 800w, ./assets/images/tools/build-walkthrough/10-finishes-fixtures-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
+            <span class="absolute bottom-0 inset-x-0 z-10 text-[10px] uppercase tracking-wider text-secondary font-bold px-2 py-1 bg-black/65">10 · Finishes / fixtures</span>
+          </div>
+          <figcaption class="px-2 py-1.5 text-xs text-slate-300 font-light leading-snug">Cabinets, counters, flooring, fixtures</figcaption>
+        </figure>
+        <figure class="shrink-0 w-36 sm:w-40 rounded-lg overflow-hidden border border-white/10 bg-charcoal relative">
+          <div class="aspect-[4/3] bg-obsidian relative">
+            <img src="./assets/images/tools/build-walkthrough/11-punch-closeout-800.webp" alt="Illustrative: Stage 11: Punch / closeout — Walkthrough, finals, touch-ups" class="absolute inset-0 w-full h-full object-cover" width="320" height="240" loading="lazy" srcset="./assets/images/tools/build-walkthrough/11-punch-closeout-480.webp 480w, ./assets/images/tools/build-walkthrough/11-punch-closeout-800.webp 800w, ./assets/images/tools/build-walkthrough/11-punch-closeout-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
+            <span class="absolute bottom-0 inset-x-0 z-10 text-[10px] uppercase tracking-wider text-secondary font-bold px-2 py-1 bg-black/65">11 · Punch / closeout</span>
+          </div>
+          <figcaption class="px-2 py-1.5 text-xs text-slate-300 font-light leading-snug">Walkthrough, finals, touch-ups</figcaption>
+        </figure>
+        <figure class="shrink-0 w-36 sm:w-40 rounded-lg overflow-hidden border border-white/10 bg-charcoal relative">
+          <div class="aspect-[4/3] bg-obsidian relative">
+            <img src="./assets/images/tools/build-walkthrough/12-warranty-handoff-800.webp" alt="Illustrative: Stage 12: Warranty handoff — Finished house and steward contacts" class="absolute inset-0 w-full h-full object-cover" width="320" height="240" loading="lazy" srcset="./assets/images/tools/build-walkthrough/12-warranty-handoff-480.webp 480w, ./assets/images/tools/build-walkthrough/12-warranty-handoff-800.webp 800w, ./assets/images/tools/build-walkthrough/12-warranty-handoff-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
+            <span class="absolute bottom-0 inset-x-0 z-10 text-[10px] uppercase tracking-wider text-secondary font-bold px-2 py-1 bg-black/65">12 · Warranty handoff</span>
+          </div>
+          <figcaption class="px-2 py-1.5 text-xs text-slate-300 font-light leading-snug">Finished house and steward contacts</figcaption>
+        </figure>
+      </div>
+      <p class="text-[11px] text-slate-600 mt-2 leading-relaxed">Illustrative stages for homeowners — not a bid, permit set, or schedule commitment.</p>
+    </div>
+  </section>
+
+
+    <section id="integrity-shield" class="mb-14">
+    <iframe
+      id="integrity-shield-showcase"
+      class="board-section-frame"
+      src="./sections/integrity-shield-showcase.html"
+      title="Integrity Shield — six stewardship layers"
+      loading="lazy"
+      style="display:block;width:100%;height:1400px;border:0;border-radius:18px;background:#0a0a0a;"
+    ></iframe>
+    <script>
+    (function () {
+      var frame = document.getElementById("integrity-shield-showcase");
+      if (!frame) return;
+      window.addEventListener('message', function (event) {
+        if (!event.data || event.data.type !== 'board-section:resize') return;
+        if (event.data.id !== "integrity-shield-showcase") return;
+        if (event.source !== frame.contentWindow) return;
+        var trusted = new URL(frame.src, window.location.href).origin;
+        if (event.origin !== trusted) return;
+        var next = Number(event.data.height);
+        if (Number.isFinite(next) && next >= 280 && next <= 6400) {
+          frame.style.height = Math.ceil(next) + 'px';
+        }
+      });
+    })();
+    </script>
+    </section>
+
+
+    <section id="topic-carousel" class="mb-14">
+    <iframe
+      id="circular-directory"
+      class="board-section-frame"
+      src="./sections/circular-directory.html"
+      title="Pacific Northwest topic directory — Board of Project Stewardship"
+      loading="lazy"
+      style="display:block;width:100%;height:1100px;border:0;border-radius:18px;background:#0a0a0a;"
+    ></iframe>
+    <script>
+    (function () {
+      var frame = document.getElementById("circular-directory");
+      if (!frame) return;
+      window.addEventListener('message', function (event) {
+        if (!event.data || event.data.type !== 'board-section:resize') return;
+        if (event.data.id !== "circular-directory") return;
+        if (event.source !== frame.contentWindow) return;
+        var trusted = new URL(frame.src, window.location.href).origin;
+        if (event.origin !== trusted) return;
+        var next = Number(event.data.height);
+        if (Number.isFinite(next) && next >= 280 && next <= 6400) {
+          frame.style.height = Math.ceil(next) + 'px';
+        }
+      });
+    })();
+    </script>
+    </section>
+
   </div>
   <div class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
     <section id="tools" class="mb-6">
@@ -1056,6 +1716,230 @@
     if (drivers) drivers.addEventListener('change', update);
     update();
   })();
+  </script>
+  <script>
+(function () {
+  var hero = document.getElementById('home-hero');
+  var wire = document.getElementById('home-hero-wire');
+  var ring = document.getElementById('home-hero-ring');
+  var hint = document.getElementById('home-hero-hint');
+  var video = hero ? hero.querySelector('.hero-ambient-video') : null;
+  if (!hero || !wire) return;
+
+  var motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var hoverQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
+  var mx = 0.62;
+  var my = 0.46;
+  var radiusPx = 0;
+  var targetR = 0;
+  var hovering = false;
+  var activePointer = null;
+  var rafId = 0;
+  var videoMode = false;
+  var flashlightArmed = false;
+
+  function reduced() { return motionQuery.matches; }
+  function finePointer() { return hoverQuery.matches; }
+
+  function baseRadius() {
+    return Math.min(hero.clientWidth, hero.clientHeight) * 0.34;
+  }
+
+  function applyMask() {
+    var w = hero.clientWidth;
+    var h = hero.clientHeight;
+    var x = mx * w;
+    var y = my * h;
+    var r = Math.max(0, radiusPx);
+    if (ring) ring.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)';
+    if (reduced() || videoMode || r < 2) {
+      wire.style.webkitMaskImage = 'none';
+      wire.style.maskImage = 'none';
+      return;
+    }
+    var soft = Math.max(42, r * 0.58);
+    var inner = Math.max(0, r * 0.42);
+    var hole = 'radial-gradient(circle ' + (r + soft).toFixed(1) + 'px at ' + x.toFixed(1) + 'px ' + y.toFixed(1) + 'px, transparent 0%, transparent ' + inner.toFixed(1) + 'px, rgba(0,0,0,0.28) ' + r.toFixed(1) + 'px, #000 ' + (r + soft).toFixed(1) + 'px)';
+    wire.style.webkitMaskImage = hole;
+    wire.style.maskImage = hole;
+  }
+
+  function onPoint(clientX, clientY) {
+    var rect = hero.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+    mx = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
+    my = Math.min(1, Math.max(0, (clientY - rect.top) / rect.height));
+  }
+
+  function openSpotlight() {
+    hovering = true;
+    hero.classList.add('is-hovering');
+    targetR = baseRadius();
+    if (hint) hint.style.opacity = '0.28';
+  }
+
+  function closeSpotlight() {
+    hovering = false;
+    activePointer = null;
+    hero.classList.remove('is-hovering');
+    targetR = 0;
+    if (hint) hint.style.opacity = '';
+  }
+
+  function interactiveTarget(node) {
+    return node && node.closest && node.closest('a, button');
+  }
+
+  function stopFlashlightLoop() {
+    if (rafId) {
+      window.cancelAnimationFrame(rafId);
+      rafId = 0;
+    }
+  }
+
+  function startFlashlightLoop() {
+    if (!rafId) rafId = window.requestAnimationFrame(tick);
+  }
+
+  function enableVideoMode() {
+    videoMode = true;
+    flashlightArmed = false;
+    hero.classList.add('is-video-playing');
+    hero.classList.remove('is-flashlight');
+    closeSpotlight();
+    stopFlashlightLoop();
+    radiusPx = 0;
+    targetR = 0;
+    applyMask();
+    if (video) {
+      video.style.display = '';
+    }
+  }
+
+  function enableFlashlightFallback() {
+    videoMode = false;
+    flashlightArmed = true;
+    hero.classList.remove('is-video-playing');
+    hero.classList.add('is-flashlight');
+    if (video) {
+      try { video.pause(); } catch (err) {}
+      video.style.display = 'none';
+    }
+    if (!reduced()) startFlashlightLoop();
+  }
+
+  var playBtn = document.getElementById('home-hero-play');
+  function showStill() {
+    videoMode = false;
+    hero.classList.remove('is-video-playing');
+    if (video) {
+      try { video.pause(); } catch (err) {}
+    }
+  }
+  function playHeroVideo() {
+    if (reduced() || !video) return;
+    video.muted = true;
+    video.setAttribute('playsinline', '');
+    video.preload = 'auto';
+    var onFail = function () { enableFlashlightFallback(); };
+    video.addEventListener('error', onFail, { once: true });
+    var started = function () {
+      if (!video.paused) enableVideoMode();
+      else onFail();
+    };
+    var playPromise = video.play();
+    if (playPromise && typeof playPromise.then === 'function') playPromise.then(started).catch(onFail);
+    else started();
+  }
+  if (playBtn) {
+    playBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      e.preventDefault();
+      playHeroVideo();
+    });
+  }
+  var pauseBtn = document.getElementById('home-hero-pause');
+  if (pauseBtn) {
+    pauseBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      e.preventDefault();
+      showStill();
+    });
+  }
+
+  hero.addEventListener('pointerdown', function (e) {
+    if (reduced() || videoMode || !flashlightArmed) return;
+    if (e.pointerType === 'touch' || e.pointerType === 'pen') {
+      if (interactiveTarget(e.target)) return;
+      activePointer = e.pointerId;
+      try { hero.setPointerCapture(e.pointerId); } catch (err) {}
+    }
+    onPoint(e.clientX, e.clientY);
+    openSpotlight();
+  });
+
+  hero.addEventListener('pointermove', function (e) {
+    if (reduced() || videoMode || !flashlightArmed) return;
+    if (e.pointerType === 'touch' || e.pointerType === 'pen') {
+      if (activePointer !== e.pointerId) return;
+    }
+    onPoint(e.clientX, e.clientY);
+    openSpotlight();
+  });
+
+  hero.addEventListener('pointerup', function (e) {
+    if (activePointer === e.pointerId) activePointer = null;
+    if (!finePointer()) closeSpotlight();
+  });
+
+  hero.addEventListener('pointercancel', function () {
+    if (!finePointer()) closeSpotlight();
+  });
+
+  hero.addEventListener('pointerleave', function () {
+    if (activePointer !== null) return;
+    closeSpotlight();
+  });
+
+  function tick() {
+    if (!reduced() && flashlightArmed && !videoMode) {
+      targetR = hovering ? baseRadius() : 0;
+      radiusPx += (targetR - radiusPx) * 0.12;
+      if (!hovering && radiusPx < 0.6) radiusPx = 0;
+      applyMask();
+    }
+    rafId = window.requestAnimationFrame(tick);
+  }
+
+  function syncMotion() {
+    hero.classList.toggle('is-reduced', reduced());
+    if (reduced()) {
+      closeSpotlight();
+      radiusPx = 0;
+      targetR = 0;
+      applyMask();
+      videoMode = false;
+      flashlightArmed = false;
+      hero.classList.remove('is-video-playing');
+      hero.classList.remove('is-flashlight');
+      if (video) {
+        try { video.pause(); } catch (err) {}
+        video.style.display = 'none';
+      }
+      stopFlashlightLoop();
+      return;
+    }
+    showStill();
+  }
+
+  if (motionQuery.addEventListener) motionQuery.addEventListener('change', syncMotion);
+  else if (motionQuery.addListener) motionQuery.addListener(syncMotion);
+  window.addEventListener('resize', function () {
+    if (hovering && flashlightArmed && !videoMode) targetR = baseRadius();
+    applyMask();
+  });
+  syncMotion();
+})();
   </script>
 </body>
 </html>
