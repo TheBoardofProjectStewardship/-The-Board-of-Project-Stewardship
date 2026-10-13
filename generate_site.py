@@ -8941,10 +8941,10 @@ def build_permits_page() -> str:
         ),
         (
             "Snohomish County",
-            "Snohomish County Planning and Development Services (PDS) covers county-jurisdiction work. City projects (Edmonds, Lynnwood, and others) use the city or MyBuildingPermit path instead.",
+            "Snohomish County Planning and Development Services (PDS) covers unincorporated county work, and those applications go through the county's own PDS Permit Portal. City projects (Edmonds, Lynnwood, and others) use the city or MyBuildingPermit path instead.",
             [
+                ("Snohomish County PDS Permit Portal", "https://snohomishcountywa.gov/3920/Online-Permitting"),
                 ("Snohomish County PDS", "https://www.snohomishcountywa.gov/198/Planning-Development-Services"),
-                ("MyBuildingPermit", "https://mybuildingpermit.com/"),
             ],
         ),
         (
@@ -13116,6 +13116,7 @@ def build_snohomish_county_hub() -> str:
         "Snohomish County Planning and Development Services (PDS) covers county-jurisdiction work. City projects (Edmonds, Lynnwood, Mukilteo, Mountlake Terrace, Mill Creek, and others) use the city portal or MyBuildingPermit path instead — confirm which AHJ owns your parcel.",
         [
             ("Snohomish County PDS", "https://www.snohomishcountywa.gov/198/Planning-Development-Services"),
+            ("Snohomish County PDS Permit Portal", "https://snohomishcountywa.gov/3920/Online-Permitting"),
             ("MyBuildingPermit", "https://mybuildingpermit.com/"),
         ],
         [

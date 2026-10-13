@@ -52,6 +52,7 @@ Base: `https://boardofprojectstewardship.com/`
 | `stamp-of-trust/` | Stamp of Trust credential |
 | `blog/rss.xml` | Blog RSS feed |
 | `404.html` | Branded Board 404 |
+| `posts/2026-10-13-kitchen-remodel-issaquah-wa.html` | Kitchen Remodel Issaquah WA — MyBuildingPermit Remodel Path, L&I Electrical & Fixture Counts |
 | `posts/2026-10-12-bathroom-remodel-sammamish-wa.html` | Bathroom Remodel Sammamish WA — MyBuildingPermit Remodel Path, Fixture Counts & Wet Assemblies |
 | `posts/2026-10-11-earthquake-home-retrofit-seattle-wa.html` | Earthquake Home Retrofit Seattle WA — SDCI's Prescriptive Plan Set, Cripple Walls & Foundation Bolting |
 | `posts/2026-10-10-deck-replacement-snohomish-county-wa.html` | Deck Replacement Snohomish County WA — When Unincorporated Lots Need a Permit, Setbacks & Ledger Details |

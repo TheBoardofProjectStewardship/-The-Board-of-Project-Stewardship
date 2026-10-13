@@ -1,0 +1,77 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Issaquah",
+    "service": "Kitchen remodel",
+    "slug": "kitchen-remodel-issaquah-wa"
+  },
+  "sources": [
+    {
+      "url": "https://www.issaquahwa.gov/3060/Remodel",
+      "title": "City of Issaquah — Remodel permit",
+      "retrieved": "2026-10-13",
+      "supports": "Remodel permit required for all SF/duplex interior remodels; apply online only via MyBuildingPermit; paper not accepted; links to submittal packet and fee categories (valuation-based permit, plan check %, mechanical/plumbing schedules, technology surcharge, state building code fee); water meter sizing form; King County sewer form if ADU."
+    },
+    {
+      "url": "https://www.issaquahwa.gov/DocumentCenter/View/10594/14-FINAL_UPLOAD-SFR-Interior-Remodel-Submittal-Requirements-1",
+      "title": "City of Issaquah — Single-Family Interior Remodel Submittal Requirements",
+      "retrieved": "2026-10-13",
+      "supports": "MBP path Building / Single-Family Residential / Remodel / Residence; plumbing and mechanical included with remodel package; cover sheet, site plan, architectural, plumbing/mechanical drawings; fixture counts; water meter sizing; utility service application; electrical permits by Washington L&I; City business license required; CPD@issaquahwa.gov; 425-837-3100."
+    },
+    {
+      "url": "https://www.issaquahwa.gov/183/Do-I-Need-a-Permit",
+      "title": "City of Issaquah — Do I Need a Permit?",
+      "retrieved": "2026-10-13",
+      "supports": "City administers permits inside city limits; Klahanie under Sammamish; Mirrormont unincorporated King County; general permit trigger language; finish-work style exemptions list; Permit Center 425-837-3100; address 130 E Sunset Way."
+    },
+    {
+      "url": "https://www.issaquahwa.gov/146/Permitting",
+      "title": "City of Issaquah — Permitting",
+      "retrieved": "2026-10-13",
+      "supports": "MyBuildingPermit submittals; CPD@issaquahwa.gov; Permit Center phone 425-837-3100; status/inspections via MyBuildingPermit; 2021 IBC/IFC adoption note effective March 15, 2024."
+    },
+    {
+      "url": "https://www.mybuildingpermit.com/",
+      "title": "MyBuildingPermit.com",
+      "retrieved": "2026-10-13",
+      "supports": "Regional online permitting portal used by Issaquah for remodel applications."
+    },
+    {
+      "url": "https://www.mybuildingpermit.com/sites/default/files/TS-00_Permits%20Required%20and%20Not%20Required_FINAL_6.11.26.pdf",
+      "title": "MyBuildingPermit Tip Sheet 00 — Permits Required / Not Required (June 11, 2026)",
+      "retrieved": "2026-10-13",
+      "supports": "Issaquah listed among MBP members; kitchen/bath fixture replacements without plumbing line modifications typically not requiring building permit; interior finish work; critical/shoreline/sensitive/WUI caveat; Issaquah electrical circuits/services shown as required."
+    },
+    {
+      "url": "https://inspection.mybuildingpermit.com/",
+      "title": "MyBuildingPermit — Inspection scheduling",
+      "retrieved": "2026-10-13",
+      "supports": "Online inspection scheduling portal used with MyBuildingPermit jurisdictions."
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "title": "Washington L&I — City electrical permits and inspections list",
+      "retrieved": "2026-10-13",
+      "supports": "Cities that issue their own electrical permits; Issaquah not listed (unlike Bellevue, Kirkland, Redmond, Renton, Sammamish)."
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/",
+      "title": "Washington L&I — Electrical permits, fees, and inspections",
+      "retrieved": "2026-10-13",
+      "supports": "State electrical permitting overview for jurisdictions where L&I issues electrical permits."
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "Washington L&I Verify a Contractor",
+      "retrieved": "2026-10-13",
+      "supports": "Contractor registration, bond, insurance check."
+    }
+  ],
+  "generation": {
+    "agent": "box-authored",
+    "hermes_status": "box-fallback-verified",
+    "verified_count": 10,
+    "supports_mode": "box-verified",
+    "note": "Issaquah HTML/PDF pages return HTTP 403 to plain curl from the box (bot filter) but were retrieved successfully via WebFetch on 2026-10-13 with full content. MyBuildingPermit tip sheet PDF, MBP home, inspection portal, and L&I pages returned HTTP 200 via curl. Dropped Process Overview and Fees hub URLs that 404'd via WebFetch."
+  }
+}

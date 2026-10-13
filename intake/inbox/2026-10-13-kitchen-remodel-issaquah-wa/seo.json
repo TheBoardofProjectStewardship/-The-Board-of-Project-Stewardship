@@ -1,0 +1,15 @@
+{
+  "producer": "openclaw",
+  "agent": "seo-specialist",
+  "slug": "kitchen-remodel-issaquah-wa",
+  "title": "Kitchen Remodel Issaquah WA — MyBuildingPermit Remodel Path, L&I Electrical & Fixture Counts",
+  "description": "An Issaquah homeowner's guide to a kitchen remodel: City remodel permits on MyBuildingPermit, why electrical runs through Washington L&I instead of the city, when fixture swaps skip a building permit, water-meter sizing, and moisture-smart kitchen details for Eastside winters.",
+  "category": "Kitchen",
+  "keywords": ["kitchen remodel Issaquah WA", "Issaquah MyBuildingPermit remodel", "Issaquah L&I electrical permit", "Issaquah kitchen fixture permit", "Issaquah water meter sizing remodel", "kitchen ventilation Issaquah"],
+  "outline": ["Key Takeaways", "Why Issaquah kitchens need their own permit map", "When a building permit is required", "MyBuildingPermit remodel path and the submittal packet", "Electrical is L&I's lane in Issaquah", "Moisture, ventilation, and Eastside kitchen details", "Materials Worth Knowing", "How to shortlist and verify contractors", "Where Pacific Pro Group fits", "Next steps for an Issaquah kitchen remodel"],
+  "search_intent": "An Issaquah homeowner planning a kitchen remodel wants to know which permits run through MyBuildingPermit, why electrical is L&I instead of the city, when fixture swaps skip a building permit, and how to hire a verified contractor.",
+  "local_angles": ["City of Issaquah via MyBuildingPermit — Building / Single-Family Residential / Remodel / Residence", "Plumbing and mechanical included with remodel package; electrical via Washington L&I", "MBP Tip Sheet 00: kitchen fixture swap without line changes may be exempt; critical-area caveat", "Klahanie = Sammamish; Mirrormont = King County — confirm jurisdiction", "Water meter sizing form and fixture counts on remodel submittal"],
+  "internal_links": ["../issaquah.html", "../kitchens.html", "../kitchen-remodel-planning.html", "../permits.html", "../verify-contractor.html"],
+  "notes": "Box-authored fallback brief. PPG only as Board #1 -> https://pacificprogroup.com/.",
+  "generation": {"agent": "box-authored", "mode": "box-fallback"}
+}
