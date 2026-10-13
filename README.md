@@ -188,7 +188,7 @@ python3 generate_site.py --indexnow
 python3 generate_site.py --indexnow-only
 ```
 
-CI: `.github/workflows/indexnow.yml` runs `--indexnow-only` on push to `main` and pings only URLs changed in that push. Soft-fails if offline. Key file is hosted at `/{32-hex}.txt` and preserved in `.well-known/indexnow-key.txt`.
+CI: `.github/workflows/indexnow.yml` runs `--indexnow-only` after the GitHub Pages deploy succeeds. It pings only URLs changed in that deploy, after those URLs return HTTP 200. A 4xx from IndexNow fails the job. Key file is hosted at `/{32-hex}.txt` and preserved in `.well-known/indexnow-key.txt`.
 
 ## Search Console / Bing Webmaster
 

@@ -1,17 +1,24 @@
 name: IndexNow ping
 
+# Ping only after GitHub Pages has finished deploying main. The managed
+# Pages workflow is named "pages build and deployment". changed_indexnow_urls
+# still submits only sitemap URLs whose files differ from the previous main
+# commit (the merge commit's first parent).
 on:
-  push:
-    branches: [main]
+  workflow_run:
+    workflows: ["pages build and deployment"]
+    types: [completed]
 
 jobs:
   ping:
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: ${{ github.event.workflow_run.head_sha }}
           fetch-depth: 0
       - name: Ping IndexNow for changed URLs
-        env:
-          INDEXNOW_BEFORE: ${{ github.event.before }}
-        run: python3 generate_site.py --indexnow-only
+        run: |
+          BEFORE=$(git rev-parse HEAD^1)
+          INDEXNOW_BEFORE="$BEFORE" python3 generate_site.py --indexnow-only

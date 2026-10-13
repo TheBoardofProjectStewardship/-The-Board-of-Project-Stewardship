@@ -21,6 +21,7 @@ import json
 import os
 import re
 import subprocess
+import time
 import urllib.error
 import urllib.request
 from datetime import datetime
@@ -2348,14 +2349,40 @@ def stored_lastmod(rel: str) -> str:
     return _git_commit_date(rel) or datetime.now().strftime("%Y-%m-%d")
 
 
+def page_date_modified(rel: str) -> str:
+    """YYYY-MM-DD dateModified written on the page, else the stored lastmod."""
+    path = SITE_DIR / rel
+    if path.is_file():
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        days = re.findall(r'"dateModified"\s*:\s*"(\d{4}-\d{2}-\d{2})', text)
+        unique = list(dict.fromkeys(days))
+        if len(unique) == 1:
+            return unique[0]
+        if unique:
+            times = re.findall(r'<time datetime="(\d{4}-\d{2}-\d{2})"', text)
+            if times and times[-1] in unique:
+                return times[-1]
+            return unique[-1]
+    return stored_lastmod(rel)[:10]
+
+
 def _stamp_date_modified(ld_objs: list, updated: str, canon: str, title: str) -> None:
+    """One dateModified per page, shared by the page node and any BlogPosting."""
     page_types = {"WebPage", "AboutPage", "CollectionPage", "FAQPage", "ContactPage", "ItemPage"}
+    article_types = {"BlogPosting", "Article", "NewsArticle"}
+    found_page = False
     for obj in ld_objs:
+        if not isinstance(obj, dict):
+            continue
         typ = obj.get("@type")
         names = typ if isinstance(typ, list) else [typ]
-        if any(name in page_types for name in names):
+        names = [name for name in names if name]
+        if any(name in article_types or name in page_types for name in names):
             obj["dateModified"] = updated
-            return
+        if any(name in page_types for name in names):
+            found_page = True
+    if found_page:
+        return
     ld_objs.append({
         "@context": "https://schema.org",
         "@type": "WebPage",
@@ -6652,7 +6679,7 @@ def build_post_page(post: dict, posts: list[dict] | None = None) -> str:
         "@type": ["BlogPosting", "Article"],
         "headline": post["title"],
         "datePublished": iso_datetime(post["date"]),
-        "dateModified": iso_datetime(post["date"]),
+        "dateModified": stored_lastmod(f"posts/{post['out_name']}"),
         "description": post["description"],
         "author": {"@id": "https://boardofprojectstewardship.com/#organization"},
         "publisher": {"@id": "https://boardofprojectstewardship.com/#organization"},
@@ -6877,7 +6904,7 @@ python3 generate_site.py --indexnow
 python3 generate_site.py --indexnow-only
 ```
 
-CI: `.github/workflows/indexnow.yml` runs `--indexnow-only` on push to `main` and pings only URLs changed in that push. Soft-fails if offline. Key file is hosted at `/{{32-hex}}.txt` and preserved in `.well-known/indexnow-key.txt`.
+CI: `.github/workflows/indexnow.yml` runs `--indexnow-only` after the GitHub Pages deploy succeeds. It pings only URLs changed in that deploy, after those URLs return HTTP 200. A 4xx from IndexNow fails the job. Key file is hosted at `/{{32-hex}}.txt` and preserved in `.well-known/indexnow-key.txt`.
 
 ## Search Console / Bing Webmaster
 
@@ -7089,26 +7116,6 @@ def write_sitemap(posts: list[dict]) -> None:
         if _fn not in extras and (SITE_DIR / _fn).is_file():
             extras.append(_fn)
 
-    lastmod_store = _load_lastmod_store()
-
-    def file_lastmod(rel: str) -> str:
-        """Date of the last real content change, not the build clock.
-
-        The first time a URL is seen, seed from the last git commit that
-        touched the file. Later runs keep that date until the rendered
-        main text changes.
-        """
-        digest = _main_text_hash(rel)
-        prev = lastmod_store.get(rel)
-        if isinstance(prev, dict) and prev.get("hash") == digest and prev.get("date"):
-            return str(prev["date"])
-        if isinstance(prev, dict) and prev.get("hash") and prev.get("hash") != digest:
-            date = datetime.now().strftime("%Y-%m-%d")
-        else:
-            date = _git_commit_date(rel) or datetime.now().strftime("%Y-%m-%d")
-        lastmod_store[rel] = {"hash": digest, "date": date}
-        return date
-
     def url_entry(loc: str, lastmod: str, priority: str) -> str:
         return (
             "  <url>\n"
@@ -7119,26 +7126,25 @@ def write_sitemap(posts: list[dict]) -> None:
             "  </url>"
         )
 
-    entries = [url_entry(BASE_URL, file_lastmod("index.html"), "1.0")]
+    entries = [url_entry(BASE_URL, page_date_modified("index.html"), "1.0")]
     for path in ranking:
-        entries.append(url_entry(f"{BASE_URL}{path}", file_lastmod(path), "0.8"))
+        entries.append(url_entry(f"{BASE_URL}{path}", page_date_modified(path), "0.8"))
     for path in extras:
-        entries.append(url_entry(f"{BASE_URL}{path}", file_lastmod(path), "0.6"))
+        entries.append(url_entry(f"{BASE_URL}{path}", page_date_modified(path), "0.6"))
     for p in posts:
         post_path = f"posts/{p['out_name']}"
-        lastmod = p.get("date") or file_lastmod(post_path)
-        entries.append(url_entry(f"{BASE_URL}{post_path}", lastmod, "0.6"))
+        entries.append(url_entry(f"{BASE_URL}{post_path}", page_date_modified(post_path), "0.6"))
     entries.append(
         url_entry(
             f"{BASE_URL}stamp-of-trust/",
-            file_lastmod("stamp-of-trust/index.html"),
+            page_date_modified("stamp-of-trust/index.html"),
             "0.7",
         )
     )
     entries.append(
         url_entry(
             f"{BASE_URL}plan-walkthrough/",
-            file_lastmod("plan-walkthrough/index.html"),
+            page_date_modified("plan-walkthrough/index.html"),
             "0.7",
         )
     )
@@ -7150,7 +7156,6 @@ def write_sitemap(posts: list[dict]) -> None:
         + "\n</urlset>\n"
     )
     (SITE_DIR / "sitemap.xml").write_text(xml, encoding="utf-8")
-    _save_lastmod_store(lastmod_store)
 
 
 def build_search_page() -> str:
@@ -15487,14 +15492,67 @@ def changed_indexnow_urls() -> list[str]:
     return urls
 
 
+def _print_indexnow(status: int | str, urls: list[str]) -> None:
+    print(f"  IndexNow HTTP {status}")
+    print("  IndexNow submitted URLs:")
+    for url in urls:
+        print(f"    {url}")
+
+
+def _url_status(url: str) -> int | None:
+    """HTTP status for a public URL. HEAD, then GET if the server rejects HEAD."""
+    for method in ("HEAD", "GET"):
+        req = urllib.request.Request(
+            url,
+            method=method,
+            headers={"User-Agent": "BoardIndexNow/1.0"},
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=20) as resp:
+                return int(resp.status)
+        except urllib.error.HTTPError as exc:
+            if exc.code == 405 and method == "HEAD":
+                continue
+            return int(exc.code)
+        except (urllib.error.URLError, TimeoutError, OSError):
+            return None
+    return None
+
+
+def _wait_for_live_urls(urls: list[str]) -> None:
+    """Poll until each changed URL returns 200, so the ping follows the Pages deploy."""
+    if os.environ.get("INDEXNOW_SKIP_WAIT") == "1":
+        return
+    timeout = int(os.environ.get("INDEXNOW_WAIT_SECONDS", "300"))
+    interval = 15
+    deadline = time.time() + timeout
+    pending = list(urls)
+    while pending:
+        still: list[str] = []
+        for url in pending:
+            if _url_status(url) != 200:
+                still.append(url)
+        if not still:
+            print(f"  IndexNow: {len(urls)} changed URLs returned HTTP 200")
+            return
+        pending = still
+        if time.time() >= deadline:
+            print("  IndexNow: changed URLs were not live yet:")
+            for url in pending:
+                print(f"    {url}")
+            raise SystemExit(1)
+        time.sleep(interval)
+
+
 def ping_indexnow(urls: list[str] | None = None) -> None:
-    """POST changed canonical URLs to IndexNow. Soft-fail if offline."""
+    """POST changed canonical URLs to IndexNow after those URLs are live."""
     key = ensure_indexnow_key()
     if urls is None:
         urls = changed_indexnow_urls()
     if not urls:
         print("  IndexNow: no changed URLs to ping")
         return
+    _wait_for_live_urls(urls)
     payload = {
         "host": "boardofprojectstewardship.com",
         "key": key,
@@ -15509,9 +15567,17 @@ def ping_indexnow(urls: list[str] | None = None) -> None:
     )
     try:
         with urllib.request.urlopen(req, timeout=20) as resp:
-            print(f"  IndexNow pinged {len(urls)} URLs (HTTP {resp.status})")
+            _print_indexnow(resp.status, urls)
+    except urllib.error.HTTPError as exc:
+        _print_indexnow(exc.code, urls)
+        if 400 <= int(exc.code) < 500:
+            raise SystemExit(f"IndexNow rejected the request with HTTP {exc.code}")
+        print(f"  IndexNow ping failed: HTTP {exc.code}")
     except (urllib.error.URLError, TimeoutError, OSError) as exc:
         print(f"  IndexNow ping skipped/failed: {exc}")
+        print("  IndexNow submitted URLs:")
+        for url in urls:
+            print(f"    {url}")
 
 
 def load_all_rankings() -> tuple:
