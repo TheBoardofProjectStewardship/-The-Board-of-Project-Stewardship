@@ -36,8 +36,13 @@
                 <text x="290" y="156">Office</text>
               </g>
             </svg>
-            <canvas class="scroll-house-canvas" width="960" height="540" aria-hidden="true"></canvas>
+            <canvas class="scroll-house-canvas" width="960" height="540" tabindex="0" aria-label="House drawing. In explore, drag to turn it, or use the arrow keys. Plus and minus zoom."></canvas>
             <div class="sh-labels" aria-hidden="true"></div>
+            <div class="sh-explore" hidden>
+              <button type="button" class="sh-explore-toggle" aria-pressed="false" aria-describedby="sh-explore-help">Explore the house</button>
+              <button type="button" class="sh-explore-reset" hidden>Reset view</button>
+              <p id="sh-explore-help" class="sh-explore-help">Drag or use arrow keys to look around. Plus and minus zoom. Reset view returns to the scroll camera.</p>
+            </div>
           </div>
           <p class="scroll-house-line" id="scroll-house-line">The main floor, cut flat and seen from above.</p>
         </div>

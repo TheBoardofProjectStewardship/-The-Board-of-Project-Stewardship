@@ -357,15 +357,37 @@ function visibleHeight(p, bounds) {
  * An explicit basis avoids lookAt's singularity when looking straight down.
  * The frustum fits ALL eight visible bounding-box corners at every aspect ratio.
  */
-function cameraFor(progress, width, height, bounds = DEFAULT_BOUNDS) {
+function scrollPose(progress) {
+  const p = clamp(Number.isFinite(progress) ? progress : 0);
+  return {
+    angle: (
+      20 * smooth(0.10, 0.30, p) +
+      10 * smooth(0.38, 0.55, p) +
+      25 * smooth(0.62, 0.94, p)
+    ) * Math.PI / 180,
+    heading: -33 * smooth(0.15, 0.92, p) * Math.PI / 180,
+  };
+}
+
+function cameraFor(progress, width, height, bounds = DEFAULT_BOUNDS, orbit) {
   const p = clamp(Number.isFinite(progress) ? progress : 0);
   const aspect = Math.max(1, width) / Math.max(1, height);
-  const angle = (
-    20 * smooth(0.10, 0.30, p) +
-    10 * smooth(0.38, 0.55, p) +
-    25 * smooth(0.62, 0.94, p)
-  ) * Math.PI / 180;
-  const heading = -33 * smooth(0.15, 0.92, p) * Math.PI / 180;
+  const pose = scrollPose(p);
+  let angle = pose.angle;
+  let heading = pose.heading;
+  let zoom = 1;
+  if (orbit) {
+    heading += Number.isFinite(orbit.yaw) ? orbit.yaw : 0;
+    angle += Number.isFinite(orbit.pitch) ? orbit.pitch : 0;
+    // Stay above a true top-down view and below a ground-level flip.
+    const minAngle = 0.02;
+    const maxAngle = 78 * Math.PI / 180;
+    if (angle < minAngle) angle = minAngle;
+    if (angle > maxAngle) angle = maxAngle;
+    zoom = Number.isFinite(orbit.zoom) ? orbit.zoom : 1;
+    if (zoom < 0.55) zoom = 0.55;
+    if (zoom > 2.4) zoom = 2.4;
+  }
   const back = [Math.sin(angle) * Math.sin(heading), Math.cos(angle), Math.sin(angle) * Math.cos(heading)];
   const right = [Math.cos(heading), 0, -Math.sin(heading)];
   const up = [-Math.cos(angle) * Math.sin(heading), Math.sin(angle), -Math.cos(angle) * Math.cos(heading)];
@@ -388,7 +410,7 @@ function cameraFor(progress, width, height, bounds = DEFAULT_BOUNDS) {
   }
   const centerX = (left + rightEdge) / 2, centerY = (bottom + upper) / 2;
   for (let i = 0; i < 3; i++) target[i] += right[i] * centerX + up[i] * centerY;
-  const halfHeight = Math.max((upper - bottom) / 2, (rightEdge - left) / (2 * aspect)) * 1.075;
+  const halfHeight = Math.max((upper - bottom) / 2, (rightEdge - left) / (2 * aspect)) * 1.075 * zoom;
   const halfWidth = halfHeight * aspect;
   const eye = target.map((v, i) => v + back[i] * 200);
   return { eye, target, right, up, back, halfWidth, halfHeight, near: 0.1, far: 400, angle, heading };
@@ -660,7 +682,7 @@ function createRenderer(canvas) {
     else { gl.disable(gl.BLEND); gl.depthMask(true); }
   }
 
-  function render(progress, focusId, width, height) {
+  function render(progress, focusId, width, height, orbit) {
     if (disposed) throw new Error('The drawing has been disposed.');
     if (gl.isContextLost()) throw new Error('The drawing context was lost.');
     const p = clamp(Number.isFinite(progress) ? progress : 0);
@@ -684,7 +706,7 @@ function createRenderer(canvas) {
     gl.depthMask(true);
     gl.disable(gl.BLEND);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-    const camera = cameraFor(p, cssW, cssH, model.bounds || DEFAULT_BOUNDS);
+    const camera = cameraFor(p, cssW, cssH, model.bounds || DEFAULT_BOUNDS, orbit);
     const mvp = computeMVP(camera);
     function focusFor(id, groupId) {
       let role = 0, lift = 0;
@@ -790,9 +812,13 @@ function createRenderer(canvas) {
     var learnNotes = root.querySelectorAll(".sh-note");
     var learnPrompt = root.querySelector(".sh-learn-prompt");
     var callButtons = root.querySelectorAll(".sh-call");
+    var exploreBar = root.querySelector(".sh-explore");
+    var exploreToggle = root.querySelector(".sh-explore-toggle");
+    var exploreReset = root.querySelector(".sh-explore-reset");
     var reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     var removers = [];
     var labelNodes = [];
+    var pointers = new Map();
     var engine = null;
     var focusId = "";
     var current = "";
@@ -803,6 +829,18 @@ function createRenderer(canvas) {
     var dirty = true;
     var lost = false;
     var disposed = false;
+    var explore = false;
+    var exploreDismissed = false;
+    var exploreDismissedAt = "";
+    var yaw = 0;
+    var pitch = 0;
+    var zoom = 1;
+    var dragging = false;
+    var pinchStart = 0;
+    var zoomAtPinch = 1;
+    var lastInteract = (typeof performance !== "undefined" ? performance.now() : 0);
+    var ZOOM_MIN = 0.55;
+    var ZOOM_MAX = 2.4;
 
     function on(target, type, handler, options) {
       target.addEventListener(type, handler, options);
@@ -874,6 +912,96 @@ function createRenderer(canvas) {
       if (!focusBelongs(stageId)) applyFocus("");
     }
 
+    function orbitArgs() {
+      if (!explore) return null;
+      return { yaw: yaw, pitch: pitch, zoom: zoom };
+    }
+
+    function clampOrbit(p) {
+      var pose = scrollPose(p);
+      var angle = pose.angle + pitch;
+      var minAngle = 0.02;
+      var maxAngle = 78 * Math.PI / 180;
+      if (angle < minAngle) pitch += minAngle - angle;
+      else if (angle > maxAngle) pitch -= angle - maxAngle;
+      if (zoom < ZOOM_MIN) zoom = ZOOM_MIN;
+      if (zoom > ZOOM_MAX) zoom = ZOOM_MAX;
+    }
+
+    function markInteract() {
+      lastInteract = typeof performance !== "undefined" ? performance.now() : 0;
+    }
+
+    function setExplore(on) {
+      var stageId = current || stageByProgress(rendered).id;
+      if (on && stageId === "plan") return;
+      explore = !!on;
+      if (!explore) dragging = false;
+      root.classList.toggle("is-explore", explore);
+      if (exploreToggle) {
+        exploreToggle.setAttribute("aria-pressed", explore ? "true" : "false");
+        exploreToggle.classList.toggle("is-on", explore);
+      }
+      if (exploreReset) exploreReset.hidden = !explore;
+      if (canvas) canvas.setAttribute("aria-pressed", explore ? "true" : "false");
+      dirty = true;
+      kick();
+    }
+
+    function updateExploreChrome(stageId) {
+      var allowed = stageId !== "plan";
+      if (exploreBar) exploreBar.hidden = !allowed;
+      if (!allowed) {
+        if (explore) setExplore(false);
+        return;
+      }
+      var settled = Math.abs(scrollProgress() - rendered) < 0.004;
+      var dismissedHere = exploreDismissed && exploreDismissedAt === "massing";
+      if (stageId === "massing" && !dismissedHere && !explore && pointers.size === 0 && settled) {
+        setExplore(true);
+      }
+    }
+
+    function resetOrbit() {
+      yaw = 0;
+      pitch = 0;
+      zoom = 1;
+      markInteract();
+      dirty = true;
+      kick();
+    }
+
+    function nudgeYaw(delta) {
+      yaw += delta;
+      markInteract();
+      dirty = true;
+      kick();
+    }
+
+    function nudgePitch(delta) {
+      pitch += delta;
+      clampOrbit(rendered);
+      markInteract();
+      dirty = true;
+      kick();
+    }
+
+    function nudgeZoom(factor) {
+      zoom = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, zoom * factor));
+      markInteract();
+      dirty = true;
+      kick();
+    }
+
+    function pointerDistance() {
+      var pts = [];
+      pointers.forEach(function (pt) { pts.push(pt); });
+      if (pts.length < 2) return 0;
+      var dx = pts[0].x - pts[1].x;
+      var dy = pts[0].y - pts[1].y;
+      return Math.hypot(dx, dy);
+    }
+
     function renderLabels(labels, width, height) {
       var accepted = labels || [];
       var i, node, item;
@@ -901,7 +1029,7 @@ function createRenderer(canvas) {
     function paint(p) {
       if (!engine || lost) return;
       var rect = sheet.getBoundingClientRect();
-      var result = engine.render(p, focusId, Math.max(1, rect.width), Math.max(1, rect.height));
+      var result = engine.render(p, focusId, Math.max(1, rect.width), Math.max(1, rect.height), orbitArgs());
       renderLabels(result && result.labels);
       if (bar) bar.style.transform = "scaleX(" + p.toFixed(5) + ")";
       if (range && document.activeElement !== range) {
@@ -925,6 +1053,7 @@ function createRenderer(canvas) {
         }
         showStageSet(stage.id);
       }
+      updateExploreChrome(stage.id);
     }
 
     function kick() {
@@ -942,6 +1071,14 @@ function createRenderer(canvas) {
       if (Math.abs(diff) < 0.0004) rendered = target;
       else rendered += diff * (1 - Math.exp(-dt / 70));
       var moving = Math.abs(target - rendered) >= 0.0004;
+      var stageNow = stageByProgress(Math.abs(target - rendered) < 0.0004 ? target : rendered);
+      var idleFor = (typeof performance !== "undefined" ? performance.now() : 0) - lastInteract;
+      var spinning = explore && !reduced.matches && !dragging && pointers.size === 0 &&
+        stageNow.id === "massing" && rendered > 0.9 && idleFor > 1600 && !moving;
+      if (spinning) {
+        yaw += (dt / 1000) * 0.22;
+        dirty = true;
+      }
       if (moving || dirty) {
         try {
           paint(rendered);
@@ -951,7 +1088,7 @@ function createRenderer(canvas) {
           return;
         }
       }
-      if (moving) raf = window.requestAnimationFrame(draw);
+      if (moving || spinning) raf = window.requestAnimationFrame(draw);
       else lastTime = 0;
     }
 
@@ -1034,7 +1171,95 @@ function createRenderer(canvas) {
     if (range) {
       on(range, "input", function () { scrollToProgress(Number(range.value) / 1000); });
     }
-    on(window, "scroll", function () { dirty = true; kick(); }, { passive: true });
+    if (exploreToggle) {
+      on(exploreToggle, "click", function () {
+        var next = !explore;
+        exploreDismissed = !next;
+        exploreDismissedAt = next ? "" : (current || stageByProgress(rendered).id);
+        markInteract();
+        setExplore(next);
+      });
+    }
+    if (exploreReset) {
+      on(exploreReset, "click", function () {
+        resetOrbit();
+      });
+    }
+    on(canvas, "keydown", function (event) {
+      if (stageByProgress(rendered).id === "plan") return;
+      var handled = true;
+      if (event.key === "ArrowLeft") nudgeYaw(0.14);
+      else if (event.key === "ArrowRight") nudgeYaw(-0.14);
+      else if (event.key === "ArrowUp") nudgePitch(-0.08);
+      else if (event.key === "ArrowDown") nudgePitch(0.08);
+      else if (event.key === "+" || event.key === "=") nudgeZoom(1 / 1.12);
+      else if (event.key === "-" || event.key === "_") nudgeZoom(1.12);
+      else handled = false;
+      if (!handled) return;
+      event.preventDefault();
+      if (!explore) {
+        exploreDismissed = false;
+        setExplore(true);
+      }
+    });
+    on(sheet, "wheel", function (event) {
+      var focused = document.activeElement === canvas;
+      if (!explore && !focused) return;
+      if (stageByProgress(rendered).id === "plan") return;
+      if (exploreBar && exploreBar.contains(event.target)) return;
+      event.preventDefault();
+      if (!explore) {
+        exploreDismissed = false;
+        setExplore(true);
+      }
+      nudgeZoom(Math.exp(event.deltaY * 0.0011));
+    }, { passive: false });
+    function rememberPointer(event) {
+      pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+    }
+    on(canvas, "pointerdown", function (event) {
+      if (!explore) return;
+      if (event.pointerType === "mouse" && event.button !== 0) return;
+      if (exploreBar && exploreBar.contains(event.target)) return;
+      rememberPointer(event);
+      if (canvas.setPointerCapture) {
+        try { canvas.setPointerCapture(event.pointerId); } catch (e) { /* already released */ }
+      }
+      dragging = true;
+      root.classList.add("is-dragging");
+      markInteract();
+      if (pointers.size >= 2) {
+        pinchStart = pointerDistance();
+        zoomAtPinch = zoom;
+      }
+    });
+    on(canvas, "pointermove", function (event) {
+      if (!pointers.has(event.pointerId)) return;
+      var prev = pointers.get(event.pointerId);
+      rememberPointer(event);
+      if (pointers.size >= 2 && pinchStart > 8) {
+        var dist = pointerDistance();
+        if (dist > 8) zoom = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, zoomAtPinch * (pinchStart / dist)));
+      } else if (pointers.size === 1 && prev) {
+        nudgeYaw(-(event.clientX - prev.x) * 0.0075);
+        pitch -= (event.clientY - prev.y) * 0.0045;
+        clampOrbit(rendered);
+      }
+      dirty = true;
+      kick();
+    });
+    function releasePointer(event) {
+      pointers.delete(event.pointerId);
+      if (pointers.size < 2) pinchStart = 0;
+      if (pointers.size === 0) {
+        dragging = false;
+        root.classList.remove("is-dragging");
+        markInteract();
+      }
+    }
+    on(canvas, "pointerup", releasePointer);
+    on(canvas, "pointercancel", releasePointer);
+    on(window, "scroll", function () { markInteract(); dirty = true; kick(); }, { passive: true });
     on(window, "resize", function () { dirty = true; kick(); }, { passive: true });
     on(window, "orientationchange", function () { dirty = true; kick(); }, { passive: true });
     on(document, "visibilitychange", function () {

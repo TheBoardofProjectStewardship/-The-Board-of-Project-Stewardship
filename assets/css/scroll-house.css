@@ -33,24 +33,24 @@
 .sh-kicker {
   margin: 0;
   color: #4ade80;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  font-size: 0.625rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 .sh-title {
-  margin: 0.15rem 0 0;
-  font-size: clamp(1.35rem, 2.6vw, 2.05rem);
-  font-weight: 900;
+  margin: 0.1rem 0 0;
+  font-size: clamp(1.05rem, 2vw, 1.55rem);
+  font-weight: 750;
   letter-spacing: -0.02em;
   line-height: 1.15;
   color: #fff;
 }
 .sh-dek {
-  margin: 0.25rem auto 0;
+  margin: 0.2rem auto 0;
   max-width: 38rem;
   color: rgba(242, 242, 238, 0.72);
-  font-size: 0.92rem;
+  font-size: max(1rem, 16px);
   font-weight: 300;
   line-height: 1.4;
 }
@@ -66,13 +66,16 @@
 }
 .sh-stages li {
   margin: 0;
-  padding: 0.28rem 0.6rem;
+  padding: 0.35rem 0.55rem;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.14);
-  color: rgba(242, 242, 238, 0.55);
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  color: rgba(242, 242, 238, 0.62);
+  font-size: 0.75rem;
+  font-weight: 650;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   cursor: pointer;
 }
@@ -128,6 +131,61 @@
 }
 .scroll-house.is-drawn .scroll-house-plan { visibility: hidden; }
 .scroll-house-canvas { touch-action: pan-y; background: #efebe2; }
+.scroll-house.is-explore .scroll-house-canvas { touch-action: none; cursor: grab; }
+.scroll-house.is-explore.is-dragging .scroll-house-canvas { cursor: grabbing; }
+.scroll-house-canvas:focus-visible {
+  outline: 2px solid #1c1916;
+  outline-offset: -3px;
+}
+.sh-explore {
+  position: absolute;
+  left: 0.45rem;
+  right: 0.45rem;
+  bottom: 0.4rem;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.35rem;
+  pointer-events: none;
+}
+.sh-explore[hidden] { display: none; }
+.sh-explore-toggle,
+.sh-explore-reset {
+  pointer-events: auto;
+  appearance: none;
+  min-height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(28, 25, 22, 0.28);
+  background: rgba(239, 235, 226, 0.92);
+  color: #1c1916;
+  font: 650 0.875rem/1.2 Inter, system-ui, sans-serif;
+  letter-spacing: 0.02em;
+  padding: 0.4rem 0.75rem;
+  cursor: pointer;
+}
+.sh-explore-toggle.is-on,
+.sh-explore-toggle[aria-pressed="true"] {
+  background: #1c1916;
+  color: #efebe2;
+  border-color: #1c1916;
+}
+.sh-explore-toggle:focus-visible,
+.sh-explore-reset:focus-visible {
+  outline: 2px solid #166534;
+  outline-offset: 2px;
+}
+.sh-explore-help {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 .sh-labels {
   position: absolute;
   inset: 0;
@@ -193,8 +251,8 @@
   margin: 0;
   text-align: center;
   color: rgba(242, 242, 238, 0.86);
-  font-size: 0.95rem;
-  font-weight: 500;
+  font-size: max(1rem, 16px);
+  font-weight: 400;
   line-height: 1.35;
 }
 .sh-hint {
@@ -299,8 +357,8 @@
   }
 }
 @media (max-width: 640px) {
-  .sh-stages li { letter-spacing: 0.08em; padding: 0.26rem 0.45rem; }
-  .sh-btn, .sh-link { letter-spacing: 0.04em; }
+  .sh-stages li { letter-spacing: 0.03em; padding: 0.35rem 0.45rem; }
+  .sh-btn, .sh-link { letter-spacing: 0.03em; }
 }
 .sh-still-img {
   aspect-ratio: 960 / 540;
@@ -324,8 +382,8 @@
   border-radius: 999px;
   min-height: 44px;
   padding: 0.45rem 0.85rem;
-  font: 700 0.72rem/1.2 Inter, system-ui, sans-serif;
-  letter-spacing: 0.06em;
+  font: 650 0.875rem/1.2 Inter, system-ui, sans-serif;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
   cursor: pointer;
 }
@@ -349,7 +407,7 @@
   max-width: 40rem;
   text-align: center;
   color: rgba(242, 242, 238, 0.9);
-  font-size: 0.92rem;
+  font-size: max(1rem, 16px);
   font-weight: 400;
   line-height: 1.45;
 }
