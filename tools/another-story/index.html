@@ -423,7 +423,11 @@ ${NEGATIVE}`;
   $('logout').addEventListener('click',safe(async()=>{await jsonRequest('session',{method:'DELETE'});state.authenticated=false;refresh();notify('Private rendering locked. Local files remain in this tab until you clear the session.');}));
   $('reset').addEventListener('click',()=>{if(state.source && !window.confirm('Clear the photo, mask, result, prompt, and visual review from this tab?'))return;state.abort?.abort();location.reload();});
   syncFootprints();refresh();
-  if(/^https?:$/.test(location.protocol)) jsonRequest('config').then(data=>{state.backend=data.renderingEnabled===true;state.authenticated=data.authenticated===true;refresh();}).catch(()=>{});
+  const offlineNote = 'Live rendering is not connected. Build a prompt here, or import an image you rendered elsewhere. Photos stay in this browser.';
+  if(/^https?:$/.test(location.protocol)) jsonRequest('config').then(data=>{
+    state.backend=data.renderingEnabled===true; state.authenticated=data.authenticated===true; refresh();
+    if(!state.backend) notify(offlineNote);
+  }).catch(()=>{ notify(offlineNote); });
 })();
 
 // Same-origin iframe autosizing. Only a height is sent, never photo or project data.

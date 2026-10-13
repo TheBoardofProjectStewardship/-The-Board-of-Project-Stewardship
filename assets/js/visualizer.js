@@ -1,7 +1,8 @@
 /**
  * See your addition / remodel.
  * Demo mode when data-api-base and window.BOPS_VISUALIZER_API are both empty:
- * no network calls; sample illustrations only.
+ * no network calls and no concept image. The labeled sample comparison stays
+ * on the page. The request form still opens and does not send.
  * Live mode posts only to the Worker. The form never submits to a static page.
  */
 const root = document.getElementById("plan-home-hero");
@@ -447,6 +448,8 @@ if (root) {
     };
   }
 
+  // Stock samples stay in the labeled comparison. They are not shown as a
+  // concept of the photo someone uploaded.
   function fillResult() {
     const before = document.getElementById("see-result-before");
     const after = document.getElementById("see-result-after");
@@ -484,17 +487,23 @@ if (root) {
       fileInput?.focus();
       return;
     }
-    if (phase === "demo") {
-      fillResult();
-      say("");
+    if (phase !== "ready") {
+      const offline = phase === "demo"
+        ? "The concept service is not connected, so this photo was not turned into a concept. Nothing was uploaded. Pictures on this page are labeled samples, not your house. You can still fill in this request. Submitting does not send it while the service is offline. Use the contact page to reach the desk."
+        : "The concept service is not available. Nothing was uploaded. You can still fill in this request. Submitting does not send it. Use the contact page to reach the desk.";
+      say(offline);
+      const box = document.getElementById("see-step-errors");
+      if (box) {
+        box.hidden = false;
+        box.textContent = offline;
+      }
+      previewReady = true;
       const model = document.getElementById("see-model-used");
-      if (model) model.value = "sample";
+      if (model) model.value = "";
       const opts = document.getElementById("see-prompt-options");
       if (opts) opts.value = JSON.stringify({ ...optionsPayload(), note: (document.getElementById("see-note")?.value || "").slice(0, 140) });
-      return;
-    }
-    if (phase !== "ready") {
-      say("The concept service is not available. Use the contact page. Nothing was sent.");
+      showFlow("request");
+      if (resultEl) resultEl.hidden = true;
       return;
     }
     const attest = document.getElementById("see-attest");
@@ -770,6 +779,7 @@ if (root) {
     if (isDemo()) {
       phase = "demo";
       root.dataset.phase = "demo";
+      say("The concept service is not connected. See concept will not create a picture of your photo. The comparison is a labeled sample. The request form stays available and does not send while the service is offline.");
       return;
     }
     phase = "initializing";
