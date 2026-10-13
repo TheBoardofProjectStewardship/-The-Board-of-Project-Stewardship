@@ -1,0 +1,18 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {"role": "hero", "intake_file": "media/2026-10-13-issaquah-kitchen-1.webp", "repo_path": "assets/images/posts/2026-10-13-issaquah-kitchen-1.webp",
+     "alt": "Illustrative: a bright Eastside kitchen with white cabinets, a center island, and daylight from tall windows — the finished look an Issaquah remodel aims for after rough-in and inspection — not a real Board of Project Stewardship job photo",
+     "source": "Crop, mirror, and regrade of existing repo still 2026-09-16-magnolia-kitchen-1.webp"},
+    {"role": "in-body", "intake_file": "media/2026-10-13-issaquah-kitchen-2.webp", "repo_path": "assets/images/posts/2026-10-13-issaquah-kitchen-2.webp",
+     "alt": "Illustrative: kitchen gutted to open framing with plumbing stub-outs, electrical boxes, and a range-hood duct chase ready for rough-in inspection — the Issaquah stage where City remodel and L&I electrical paths meet — not a real Board of Project Stewardship job photo",
+     "source": "Crop and regrade of existing repo still 2026-08-14-greenwood-kitchen-2.webp"},
+    {"role": "in-body", "intake_file": "media/2026-10-13-issaquah-kitchen-3.webp", "repo_path": "assets/images/posts/2026-10-13-issaquah-kitchen-3.webp",
+     "alt": "Illustrative: finished kitchen island with seating, pendant lighting, and a vented cooktop wall — the homeowner view after City remodel and L&I electrical inspections clear — not a real Board of Project Stewardship job photo",
+     "source": "Crop, mirror, and regrade of existing repo still 2026-09-04-kitchen-ballard-4.webp"}
+  ],
+  "youtube": [{"id": "5xN9kPD7ddU", "url": "https://www.youtube.com/watch?v=5xN9kPD7ddU", "title": "How to Install Kitchen Cabinets | Ask This Old House", "oembed_status": 200}],
+  "rules": ["Public markdown images use ../assets/images/posts/*.webp only", "No CloudFront URLs", "Illustrative frames are labeled in alt text", "Free image sources first; no paid media credits"],
+  "notes": "Reused and regraded existing repo stills. No paid image generation."
+}
