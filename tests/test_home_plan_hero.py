@@ -86,30 +86,30 @@ class HomePlanHeroTests(unittest.TestCase):
         self.assertIn('id="another-story-sea"', self.html)
         self.assertIn('src="./tools/another-story/index.html"', self.html)
         self.assertIn("https://secure.lni.wa.gov/verify/", self.html)
+        self.assertIn("board-sketch-to-home", self.html)
         self.assertIn("hero-finished", self.html)
+        self.assertIn("hero-wireframe", self.html)
+        self.assertIn('class="flashlight-hero is-supporting"', self.html)
+        self.assertIn("<h2 id=\"home-hero-title\">Remodel directories and permit guides</h2>", self.html)
         self.assertIn("Why Pacific Pro Group ranks #1", self.html)
         self.assertIn("not owned or operated by the Board of Project Stewardship", self.html)
         self.assertIn("Pacific Pro Group ranks #1 with a verified", self.html)
-        self.assertIn('id="home-directories"', self.html)
-        self.assertIn('id="how-the-board-works"', self.html)
-        self.assertIn('id="home-planning-tools"', self.html)
-        self.assertIn('id="independence-disclosure"', self.html)
+        self.assertIn("mesh-flow-mission", self.html)
+        self.assertIn("integrity-shield-showcase", self.html)
+        self.assertIn("circular-directory", self.html)
+        self.assertIn('id="build-walkthrough-home"', self.html)
         self.assertLess(
             self.html.find('id="plan-home-hero"'),
-            self.html.find('id="scroll-house"'),
-        )
-        self.assertLess(
-            self.html.find('id="scroll-house"'),
             self.html.find('id="why-ppg-number-one"'),
         )
         self.assertLess(
             self.html.find('id="why-ppg-number-one"'),
-            self.html.find('id="home-directories"'),
+            self.html.find('id="home-hero"'),
         )
 
     def test_scroll_house_teaches_and_stays_light(self):
         """A scroll plan builds a house, with tappable notes and a still fallback."""
-        self.assertLess(self.html.find('id="plan-home-hero"'), self.html.find('id="scroll-house"'))
+        self.assertLess(self.html.find('id="scroll-house"'), self.html.find('id="plan-home-hero"'))
         self.assertIn(">Plan</li>", self.html)
         self.assertIn(">Walls</li>", self.html)
         self.assertIn(">Upper</li>", self.html)
