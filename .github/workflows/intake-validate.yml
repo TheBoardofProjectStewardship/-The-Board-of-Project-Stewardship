@@ -20,5 +20,7 @@ jobs:
         run: python3 -m unittest discover -s tests -v
       - name: Public page integrity
         run: python3 tools/check_seo_pack.py --ci
+      - name: Public copy ban
+        run: python3 scripts/check_public_ai.py
       - name: Image byte duplicates
         run: python3 tools/dup-scan.py
