@@ -6,7 +6,7 @@
   position: relative;
 }
 .scroll-house-track {
-  height: 340svh;
+  height: 420svh;
 }
 .scroll-house-sticky {
   position: sticky;
@@ -21,7 +21,7 @@
   z-index: 1;
 }
 @media (min-width: 800px) {
-  .scroll-house-track { height: 430svh; }
+  .scroll-house-track { height: 560svh; }
 }
 @media (min-width: 1280px) {
   .scroll-house { --sh-top: 7.25rem; }
@@ -107,7 +107,7 @@
   position: relative;
   flex: 1 1 auto;
   min-height: 200px;
-  background: #f4efe4;
+  background: #efebe2;
   border-radius: 2px;
   overflow: hidden;
   box-shadow: 0 18px 46px rgba(0, 0, 0, 0.38), inset 0 0 0 1px rgba(28, 25, 22, 0.14);
@@ -122,7 +122,31 @@
   display: block;
 }
 .scroll-house.is-drawn .scroll-house-plan { visibility: hidden; }
-.scroll-house-canvas { touch-action: pan-y; }
+.scroll-house-canvas { touch-action: pan-y; background: #efebe2; }
+.sh-labels {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0;
+}
+.scroll-house.is-plan .sh-labels { opacity: 1; }
+.sh-label {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  color: #1c1916;
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.sh-label.is-dim {
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  font-size: 11px;
+  color: #3f3830;
+}
 .scroll-house-line {
   margin: 0;
   text-align: center;
@@ -238,7 +262,7 @@
 }
 .sh-still-img {
   aspect-ratio: 960 / 540;
-  background: #f4efe4 url("/assets/images/scroll-house-still.svg") center / contain no-repeat;
+  background: #efebe2 url("/assets/images/scroll-house-still.svg") center / contain no-repeat;
 }
 .sh-learn {
   width: min(960px, 100%);

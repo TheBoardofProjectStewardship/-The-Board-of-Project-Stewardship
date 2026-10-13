@@ -3524,10 +3524,10 @@ def ppg_widgets_script() -> str:
 def home_scroll_house() -> tuple[str, str]:
     """Sticky scroll section: a plan extrudes into a Pacific Northwest house.
 
-    Original geometry. A public demo shows a plan as the building from above;
-    this page uses a small canvas instead of a 3D library. casa-serra ships
-    without a license, so none of its code or assets are reused. The tap
-    labels are original plain-language notes for this sketch.
+    Original geometry. casa-serra ships without a license, so none of its
+    code or assets are reused. The cut, the long lens, and the walk in from
+    the door follow that project's public starter prompt. The tap labels are
+    original plain-language notes for this sketch.
     """
     fragment = (SITE_DIR / "sections" / "scroll-house.html").read_text(encoding="utf-8")
     fragment = fragment.replace("__KICKER__", GEO_KICKER_HTML)

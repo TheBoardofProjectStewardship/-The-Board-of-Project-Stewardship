@@ -1,9 +1,13 @@
 /**
- * Original scroll-built Pacific Northwest house for the Board homepage.
+ * Scroll-built Pacific Northwest house for the Board homepage.
  *
- * casa-serra (github.com/Sam1983Aing/casa-serra) ships with no license file.
- * None of its code, rooms, or assets are copied. This file draws its own
- * plan, walls, roof, and second story on a canvas.
+ * Samnang Aing's casa-serra (github.com/Sam1983Aing/casa-serra) has no
+ * license file, and GitHub reports no license. None of its code, rooms,
+ * textures, or assets are reused. The cut through the walls, the long lens
+ * from straight above, and the walk in from the front door follow the
+ * technique described in that project's public starter prompt. This is a
+ * different house: one story, then a second story, drawn with a small
+ * original WebGL shader instead of a scene library.
  */
 (function (factory) {
   var api = factory();
@@ -12,984 +16,522 @@
 })(function () {
   "use strict";
 
-  var INK = [28, 25, 22];
-  var CEDAR = [184, 142, 106];
-  var CEDAR_DARK = [112, 78, 52];
-  var FLOOR = [214, 186, 150];
-  var ROOF = [48, 56, 64];
-  var ROOF_LIT = [72, 82, 90];
-  var GLASS = [168, 206, 214];
-  var DOOR = [27, 68, 56];
-  var TRIM = [236, 230, 218];
-  var FOUND = [110, 106, 100];
-  var TREE = [27, 74, 52];
-  var TREE_DARK = [16, 48, 34];
-  var PAPER = [244, 239, 228];
+  var PAPER = [0.937, 0.922, 0.886];
+  var INK = [0.11, 0.1, 0.09];
+  var SIDE = [0.62, 0.56, 0.48];
+  var PAD = [0.71, 0.66, 0.58];
+  var OAK = [0.58, 0.42, 0.26];
+  var CEDAR = [0.48, 0.28, 0.16];
+  var PLASTER = [0.83, 0.78, 0.7];
+  var ROOF_C = [0.24, 0.27, 0.3];
+  var GLASS_C = [0.62, 0.76, 0.8];
+  var DOOR_C = [0.13, 0.28, 0.2];
+  var HEADER_C = [0.36, 0.22, 0.12];
+  var STUD_C = [0.74, 0.6, 0.4];
+  var GREEN = [0.29, 0.4, 0.26];
+  var TREE = [0.16, 0.32, 0.2];
+  var HL = [0.114, 0.306, 0.847];
 
   var STAGES = [
-    { id: "plan", name: "Plan", line: "Flat lines for a one-story house.", until: 0.14 },
-    { id: "frame", name: "Frame", line: "Walls rise off the drawing.", until: 0.42 },
-    { id: "build", name: "Build", line: "Floor, roof, windows, and a door.", until: 0.7 },
-    { id: "addition", name: "Your addition", line: "A second story rises on top.", until: 1.01 }
-  ];
-
-  function smooth(t) {
-    if (t <= 0) return 0;
-    if (t >= 1) return 1;
-    return t * t * (3 - 2 * t);
-  }
-
-  function values(p) {
-    return {
-      walls: smooth((p - 0.05) / 0.18),
-      tilt: smooth((p - 0.08) / 0.2),
-      finish: smooth((p - 0.4) / 0.24),
-      addition: smooth((p - 0.66) / 0.22)
-    };
-  }
-
-  function stageAt(p) {
-    var i;
-    for (i = 0; i < STAGES.length; i++) {
-      if (p < STAGES[i].until) return STAGES[i];
-    }
-    return STAGES[STAGES.length - 1];
-  }
-
-  function mix(a, b, t) {
-    return [
-      (a[0] + (b[0] - a[0]) * t) | 0,
-      (a[1] + (b[1] - a[1]) * t) | 0,
-      (a[2] + (b[2] - a[2]) * t) | 0
-    ];
-  }
-
-  function rgba(c, a) {
-    var alpha = a < 0 ? 0 : a > 1 ? 1 : a;
-    return "rgba(" + c[0] + "," + c[1] + "," + c[2] + "," + Math.round(alpha * 1000) / 1000 + ")";
-  }
-
-  function project(x, y, z, tilt) {
-    var sx0 = x;
-    var sy0 = -y;
-    var sx1 = x - y * 0.66;
-    var sy1 = -y * 0.5 - z * 1.12;
-    return {
-      x: sx0 + (sx1 - sx0) * tilt,
-      y: sy0 + (sy1 - sy0) * tilt
-    };
-  }
-
-  function cameraFor(w, h, tilt) {
-    var fit = [
-      [-10, -8, 0], [44, -8, 0], [44, 32, 0], [-10, 32, 0],
-      [-10, -8, 24], [44, -8, 24], [18, 13, 26], [-9, 6, 14], [43, 20, 14]
-    ];
-    var minX = Infinity;
-    var minY = Infinity;
-    var maxX = -Infinity;
-    var maxY = -Infinity;
-    var i;
-    var p;
-    for (i = 0; i < fit.length; i++) {
-      p = project(fit[i][0], fit[i][1], fit[i][2], tilt);
-      if (p.x < minX) minX = p.x;
-      if (p.y < minY) minY = p.y;
-      if (p.x > maxX) maxX = p.x;
-      if (p.y > maxY) maxY = p.y;
-    }
-    var bw = Math.max(1, maxX - minX);
-    var bh = Math.max(1, maxY - minY);
-    var scale = Math.min((w * 0.86) / bw, (h * 0.82) / bh);
-    return {
-      scale: scale,
-      ox: w / 2 - ((minX + maxX) / 2) * scale,
-      oy: h / 2 - ((minY + maxY) / 2) * scale + h * 0.02,
-      tilt: tilt
-    };
-  }
-
-  function wall(x1, y1, x2, y2, openings, exterior) {
-    return {
-      x1: x1,
-      y1: y1,
-      x2: x2,
-      y2: y2,
-      openings: openings || [],
-      exterior: !!exterior
-    };
-  }
-
-  function wallLen(w) {
-    return Math.hypot(w.x2 - w.x1, w.y2 - w.y1);
-  }
-
-  function at(w, t) {
-    var dx = w.x2 - w.x1;
-    var dy = w.y2 - w.y1;
-    var len = Math.hypot(dx, dy) || 1;
-    var u = t / len;
-    return [w.x1 + dx * u, w.y1 + dy * u];
-  }
-
-  function pieces(length, openings) {
-    var items = (openings || []).slice().sort(function (a, b) { return a.t - b.t; });
-    var out = [];
-    var cursor = 0;
-    var i;
-    var op;
-    var t0;
-    var t1;
-    for (i = 0; i < items.length; i++) {
-      op = items[i];
-      t0 = Math.max(0, op.t);
-      t1 = Math.min(length, op.t + op.w);
-      if (t1 <= t0) continue;
-      if (t0 > cursor + 0.04) out.push({ t0: cursor, t1: t0, kind: "wall" });
-      out.push({ t0: t0, t1: t1, kind: op.kind });
-      cursor = t1;
-    }
-    if (cursor < length - 0.04) out.push({ t0: cursor, t1: length, kind: "wall" });
-    return out;
-  }
-
-  function shadeOf(w) {
-    var dx = w.x2 - w.x1;
-    var dy = w.y2 - w.y1;
-    var len = Math.hypot(dx, dy) || 1;
-    var nx = dy / len;
-    var ny = -dx / len;
-    var lx = 0.2;
-    var ly = -1;
-    var ll = Math.hypot(lx, ly);
-    var dot = (nx * lx + ny * ly) / ll;
-    return 0.58 + 0.42 * Math.max(0, dot);
-  }
-
-  var STORY = [
-    wall(0, 0, 36, 0, [
-      { t: 3.2, w: 5.6, kind: "window" },
-      { t: 13.6, w: 3.8, kind: "entry" },
-      { t: 23.4, w: 7.2, kind: "window" }
-    ], true),
-    wall(36, 0, 36, 26, [
-      { t: 3, w: 5, kind: "window" },
-      { t: 16.5, w: 5, kind: "window" }
-    ], true),
-    wall(36, 26, 0, 26, [
-      { t: 6, w: 6, kind: "window" },
-      { t: 20, w: 5, kind: "window" }
-    ], true),
-    wall(0, 26, 0, 0, [
-      { t: 4, w: 5, kind: "window" },
-      { t: 15, w: 5.2, kind: "window" }
-    ], true),
-    wall(20, 0, 20, 26, [
-      { t: 5.2, w: 3, kind: "door" },
-      { t: 17.2, w: 3, kind: "door" }
-    ], false),
-    wall(0, 15, 36, 15, [
-      { t: 7.5, w: 3, kind: "door" },
-      { t: 23.2, w: 3, kind: "door" }
-    ], false)
-  ];
-
-  var UPPER = [
-    wall(0.6, 0.6, 35.4, 0.6, [
-      { t: 3.4, w: 5.4, kind: "window" },
-      { t: 13.2, w: 7.4, kind: "window" },
-      { t: 24.6, w: 5.6, kind: "window" }
-    ], true),
-    wall(35.4, 0.6, 35.4, 25.4, [
-      { t: 3.2, w: 4.8, kind: "window" },
-      { t: 14.5, w: 4.8, kind: "window" }
-    ], true),
-    wall(35.4, 25.4, 0.6, 25.4, [
-      { t: 8, w: 6, kind: "window" }
-    ], true),
-    wall(0.6, 25.4, 0.6, 0.6, [
-      { t: 4, w: 4.8, kind: "window" },
-      { t: 14, w: 4.8, kind: "window" }
-    ], true)
+    { id: "plan", line: "A flat plan, cut through the walls and seen from above.", until: 0.16 },
+    { id: "frame", line: "The cut rises, and the walls grow off the sheet.", until: 0.4 },
+    { id: "build", line: "Down to the front door: floor, roof, windows, and a door.", until: 0.68 },
+    { id: "addition", line: "A second story rises, and the roof lifts with it.", until: 2 }
   ];
 
   var ROOMS = [
-    { name: "Living", x: 10, y: 7.4 },
-    { name: "Kitchen", x: 28, y: 7.4 },
-    { name: "Bed", x: 10, y: 20.6 },
-    { name: "Bath", x: 24.2, y: 20.6 },
-    { name: "Stair", x: 32, y: 16.4 }
+    { name: "Living", x: 10, z: 7.4 },
+    { name: "Kitchen", x: 27.2, z: 7.4 },
+    { name: "Bed", x: 10, z: 20.4 },
+    { name: "Bath", x: 23.6, z: 20.4 },
+    { name: "Stair", x: 32, z: 20.6 }
   ];
 
-  var HL = [29, 78, 216];
-
-  function sceneOps(w, h, progress, focus) {
-    var p = progress < 0 ? 0 : progress > 1 ? 1 : progress;
-    focus = focus || "";
-    var v = values(p);
-    var cam = cameraFor(w, h, v.tilt);
-    var ops = [];
-    var planAlpha = 1 - smooth(Math.max(v.tilt, v.walls * 0.85) / 0.62);
-    var eaveZ = 9 + 8 * v.addition;
-    var ridgeZ = eaveZ + 4.7;
-    var cedar = mix(INK, CEDAR, v.finish);
-    var cedarDeep = mix(INK, CEDAR_DARK, v.finish);
-    var inkStroke = rgba(INK, 0.92);
-
-    function toScreen(x, y, z) {
-      var q = project(x, y, z, cam.tilt);
-      return { x: cam.ox + q.x * cam.scale, y: cam.oy + q.y * cam.scale };
-    }
-
-    function pushPoly(pts, fill, stroke, lw, alpha) {
-      if (!pts || pts.length < 3) return;
-      if ((alpha == null ? 1 : alpha) < 0.02 && !stroke) return;
-      ops.push({
-        type: "poly",
-        pts: pts,
-        fill: fill || null,
-        stroke: stroke || null,
-        lw: lw || 1,
-        alpha: alpha == null ? 1 : alpha
-      });
-    }
-
-    function pushLine(pts, stroke, lw, alpha) {
-      if (!pts || pts.length < 2 || (alpha != null && alpha < 0.02)) return;
-      ops.push({
-        type: "line",
-        pts: pts,
-        stroke: stroke,
-        lw: lw || 1,
-        alpha: alpha == null ? 1 : alpha
-      });
-    }
-
-    function quad(a, b, c, d, fill, stroke, lw, alpha) {
-      pushPoly([
-        toScreen(a[0], a[1], a[2]),
-        toScreen(b[0], b[1], b[2]),
-        toScreen(c[0], c[1], c[2]),
-        toScreen(d[0], d[1], d[2])
-      ], fill, stroke, lw, alpha);
-    }
-
-    function emitWalls(list, z0, z1) {
-      var ordered = list.slice().sort(function (a, b) {
-        var dy = (b.y1 + b.y2) - (a.y1 + a.y2);
-        if (Math.abs(dy) > 1) return dy;
-        return (b.x1 + b.x2) - (a.x1 + a.x2);
-      });
-      var i;
-      for (i = 0; i < ordered.length; i++) emitWall(ordered[i], z0, z1);
-    }
-
-    function emitWall(wll, z0, z1) {
-      if (z1 - z0 < 0.08) return;
-      var len = wallLen(wll);
-      var parts = pieces(len, wll.openings);
-      var shade = shadeOf(wll);
-      var face = mix(cedar, [255, 255, 255], 0);
-      face = [
-        Math.min(255, face[0] * shade) | 0,
-        Math.min(255, face[1] * shade) | 0,
-        Math.min(255, face[2] * shade) | 0
-      ];
-      var fill = v.finish > 0.02
-        ? rgba(face, v.finish * (wll.exterior ? 1 : 0.92))
-        : rgba([90, 78, 64], wll.exterior ? 0.14 : 0.08);
-      var stroke = rgba(mix(INK, cedarDeep, v.finish), 0.95);
-      var lw = Math.max(1, cam.scale * 0.045);
-      var thick = Math.max(2.4, cam.scale * (wll.exterior ? 0.42 : 0.26));
-      var j;
-      var part;
-      var p0;
-      var p1;
-      var sill;
-      var head;
-      for (j = 0; j < parts.length; j++) {
-        part = parts[j];
-        p0 = at(wll, part.t0);
-        p1 = at(wll, part.t1);
-        if (planAlpha > 0.03) {
-          if (part.kind === "wall") {
-            pushLine(
-              [toScreen(p0[0], p0[1], 0.02), toScreen(p1[0], p1[1], 0.02)],
-              inkStroke,
-              thick,
-              planAlpha
-            );
-          } else if (part.kind === "window") {
-            pushLine(
-              [toScreen(p0[0], p0[1], 0.02), toScreen(p1[0], p1[1], 0.02)],
-              rgba(INK, 0.85),
-              Math.max(1, cam.scale * 0.08),
-              planAlpha
-            );
-          }
-        }
-        if (part.kind === "wall") {
-          quad(
-            [p0[0], p0[1], z0],
-            [p1[0], p1[1], z0],
-            [p1[0], p1[1], z1],
-            [p0[0], p0[1], z1],
-            fill,
-            stroke,
-            lw,
-            1
-          );
-          emitStuds(p0, p1, z0, z1, stroke);
-          if (wll.exterior && v.finish > 0.4) emitSiding(p0, p1, z0, z1, shade);
-        } else if (part.kind === "window") {
-          sill = z0 + 3.05;
-          head = z0 + Math.min(7.05, (z1 - z0) * 0.78);
-          if (z1 > z0 + 0.4) {
-            quad(
-              [p0[0], p0[1], z0],
-              [p1[0], p1[1], z0],
-              [p1[0], p1[1], Math.min(sill, z1)],
-              [p0[0], p0[1], Math.min(sill, z1)],
-              fill,
-              stroke,
-              lw,
-              1
-            );
-          }
-          if (z1 > head) {
-            quad(
-              [p0[0], p0[1], head],
-              [p1[0], p1[1], head],
-              [p1[0], p1[1], z1],
-              [p0[0], p0[1], z1],
-              fill,
-              stroke,
-              lw,
-              1
-            );
-          }
-          if (v.finish > 0.08 && z1 > sill + 0.4) {
-            emitGlass(p0, p1, sill, Math.min(head, z1), lw);
-          }
-        } else if (part.kind === "entry" || part.kind === "door") {
-          head = z0 + Math.min(7.35, z1 - z0);
-          if (z1 > head) {
-            quad(
-              [p0[0], p0[1], head],
-              [p1[0], p1[1], head],
-              [p1[0], p1[1], z1],
-              [p0[0], p0[1], z1],
-              fill,
-              stroke,
-              lw,
-              1
-            );
-          }
-          if (part.kind === "entry" && v.finish > 0.12 && z1 > z0 + 2) {
-            emitDoor(p0, p1, z0, Math.min(head, z1), lw);
-          }
-        }
-      }
-      if (wll.exterior && v.finish > 0.45 && z1 - z0 > 2) {
-        var b0 = at(wll, 0);
-        var b1 = at(wll, len);
-        quad(
-          [b0[0], b0[1], z0],
-          [b1[0], b1[1], z0],
-          [b1[0], b1[1], z0 + 0.55],
-          [b0[0], b0[1], z0 + 0.55],
-          rgba(FOUND, v.finish),
-          null,
-          0,
-          1
-        );
-      }
-    }
-
-    function emitStuds(p0, p1, z0, z1, stroke) {
-      var studA = (1 - v.finish) * smooth((z1 - z0) / 3);
-      var col = stroke;
-      if (focus === "framing") {
-        studA = Math.max(studA, 0.95);
-        col = rgba(HL, 0.95);
-      }
-      if (studA < 0.05) return;
-      var dx = p1[0] - p0[0];
-      var dy = p1[1] - p0[1];
-      var len = Math.hypot(dx, dy);
-      var n = Math.max(1, Math.round(len / (focus === "framing" ? 3.2 : 4)));
-      var s;
-      var u;
-      var x;
-      var y;
-      for (s = 1; s < n; s++) {
-        u = s / n;
-        x = p0[0] + dx * u;
-        y = p0[1] + dy * u;
-        pushLine(
-          [toScreen(x, y, z0), toScreen(x, y, z1)],
-          col,
-          Math.max(1.15, cam.scale * (focus === "framing" ? 0.07 : 0.05)),
-          studA
-        );
-      }
-    }
-
-    function emitSiding(p0, p1, z0, z1, shade) {
-      var alpha = smooth((v.finish - 0.35) / 0.5) * 0.55;
-      if (alpha < 0.04) return;
-      var col = rgba([
-        Math.min(255, CEDAR_DARK[0] * shade) | 0,
-        Math.min(255, CEDAR_DARK[1] * shade) | 0,
-        Math.min(255, CEDAR_DARK[2] * shade) | 0
-      ], alpha);
-      var z = z0 + 0.9;
-      while (z < z1 - 0.3) {
-        pushLine(
-          [toScreen(p0[0], p0[1], z), toScreen(p1[0], p1[1], z)],
-          col,
-          Math.max(0.6, cam.scale * 0.025),
-          1
-        );
-        z += 0.72;
-      }
-    }
-
-    function emitGlass(p0, p1, z0, z1, lw) {
-      var inset = 0.12;
-      quad(
-        [p0[0], p0[1], z0 + inset],
-        [p1[0], p1[1], z0 + inset],
-        [p1[0], p1[1], z1 - inset],
-        [p0[0], p0[1], z1 - inset],
-        rgba(GLASS, 0.28 + v.finish * 0.6),
-        rgba(mix(INK, TRIM, v.finish), 0.9),
-        Math.max(1, lw),
-        1
-      );
-      var midX = (p0[0] + p1[0]) / 2;
-      var midY = (p0[1] + p1[1]) / 2;
-      var midZ = (z0 + z1) / 2;
-      pushLine(
-        [toScreen(p0[0], p0[1], midZ), toScreen(p1[0], p1[1], midZ)],
-        rgba(mix(INK, TRIM, v.finish), 0.55),
-        Math.max(0.6, cam.scale * 0.02),
-        v.finish
-      );
-      pushLine(
-        [toScreen(midX, midY, z0), toScreen(midX, midY, z1)],
-        rgba(mix(INK, TRIM, v.finish), 0.55),
-        Math.max(0.6, cam.scale * 0.02),
-        v.finish
-      );
-    }
-
-    function emitDoor(p0, p1, z0, z1, lw) {
-      quad(
-        [p0[0], p0[1], z0],
-        [p1[0], p1[1], z0],
-        [p1[0], p1[1], z1],
-        [p0[0], p0[1], z1],
-        rgba(mix(INK, DOOR, v.finish), 0.25 + v.finish * 0.75),
-        rgba(mix(INK, [12, 36, 28], v.finish), 0.95),
-        Math.max(1, lw),
-        1
-      );
-      if (v.finish > 0.35) {
-        var lite0 = z0 + (z1 - z0) * 0.62;
-        var lite1 = z0 + (z1 - z0) * 0.9;
-        var dx = p1[0] - p0[0];
-        var dy = p1[1] - p0[1];
-        quad(
-          [p0[0] + dx * 0.22, p0[1] + dy * 0.22, lite0],
-          [p0[0] + dx * 0.78, p0[1] + dy * 0.78, lite0],
-          [p0[0] + dx * 0.78, p0[1] + dy * 0.78, lite1],
-          [p0[0] + dx * 0.22, p0[1] + dy * 0.22, lite1],
-          rgba(GLASS, 0.75),
-          rgba(TRIM, 0.8),
-          Math.max(0.7, cam.scale * 0.02),
-          1
-        );
-      }
-    }
-
-    function emitRoof() {
-      if (v.finish < 0.04) return;
-      var a = v.finish;
-      var front = rgba(ROOF_LIT, a);
-      var back = rgba(ROOF, a);
-      var edge = rgba([24, 28, 32], a);
-      quad([-1.2, -1.25, eaveZ], [37.2, -1.25, eaveZ], [37.2, 13, ridgeZ], [-1.2, 13, ridgeZ], front, edge, 1, 1);
-      quad([-1.2, 13, ridgeZ], [37.2, 13, ridgeZ], [37.2, 27.25, eaveZ], [-1.2, 27.25, eaveZ], back, edge, 1, 1);
-      pushPoly([
-        toScreen(36, 0, eaveZ),
-        toScreen(36, 26, eaveZ),
-        toScreen(36, 13, ridgeZ)
-      ], rgba(mix(CEDAR, CEDAR_DARK, 0.35), a), rgba(cedarDeep, a), Math.max(1, cam.scale * 0.04), 1);
-      pushPoly([
-        toScreen(0, 0, eaveZ),
-        toScreen(0, 13, ridgeZ),
-        toScreen(0, 26, eaveZ)
-      ], rgba(mix(CEDAR, [90, 64, 42], 0.4), a * 0.95), rgba(cedarDeep, a), Math.max(1, cam.scale * 0.04), 1);
-      pushLine(
-        [toScreen(-1.2, 13, ridgeZ), toScreen(37.2, 13, ridgeZ)],
-        rgba([20, 24, 28], a),
-        Math.max(1.2, cam.scale * 0.06),
-        1
-      );
-      quad([-1.2, -1.25, eaveZ - 0.45], [37.2, -1.25, eaveZ - 0.45], [37.2, -1.25, eaveZ], [-1.2, -1.25, eaveZ], rgba(TRIM, a * 0.9), null, 0, 1);
-    }
-
-    function emitPorch() {
-      if (v.finish < 0.05) return;
-      var a = v.finish;
-      quad([11, -5.2, 0.32], [24, -5.2, 0.32], [24, 0.05, 0.32], [11, 0.05, 0.32], rgba(mix(PAPER, [196, 184, 166], a), a), rgba(INK, a * 0.5), 1, 1);
-      quad([10.6, -5.7, 8.15], [24.4, -5.7, 8.15], [24.4, 0.15, 8.35], [10.6, 0.15, 8.35], rgba(ROOF, a), rgba([24, 28, 32], a), 1, 1);
-      quad([11.15, -5.15, 0.32], [11.55, -5.15, 0.32], [11.55, -5.15, 8.15], [11.15, -5.15, 8.15], rgba(mix(INK, TRIM, v.finish), a), null, 0, 1);
-      quad([23.45, -5.15, 0.32], [23.85, -5.15, 0.32], [23.85, -5.15, 8.15], [23.45, -5.15, 8.15], rgba(mix(INK, TRIM, v.finish), a), null, 0, 1);
-    }
-
-    function emitTree(x, y) {
-      var alpha = v.finish;
-      if (alpha < 0.03) return;
-      quad([x - 0.28, y, 0], [x + 0.28, y, 0], [x + 0.28, y, 2.3], [x - 0.28, y, 2.3], rgba([92, 64, 40], alpha), null, 0, 1);
-      pushPoly([
-        toScreen(x, y, 11.4),
-        toScreen(x - 2.3, y + 0.2, 1.5),
-        toScreen(x + 2.15, y - 0.15, 1.5)
-      ], rgba(TREE_DARK, alpha), null, 0, 1);
-      pushPoly([
-        toScreen(x, y, 9.3),
-        toScreen(x - 1.7, y, 3.5),
-        toScreen(x + 1.6, y, 3.5)
-      ], rgba(TREE, alpha), null, 0, 1);
-      pushPoly([
-        toScreen(x, y, 7.2),
-        toScreen(x - 1.15, y, 4.8),
-        toScreen(x + 1.05, y, 4.8)
-      ], rgba([46, 110, 74], alpha), null, 0, 1);
-    }
-
-    function emitPlanExtras() {
-      var i;
-      var y;
-      var size;
-      if (planAlpha < 0.04) return;
-      if (v.walls > 0.35 && v.finish < 0.8) {
-        for (i = 1; i < 8; i++) {
-          y = (26 / 8) * i;
-          pushLine(
-            [toScreen(0.4, y, 0.08), toScreen(35.6, y, 0.08)],
-            rgba(INK, 0.45),
-            1,
-            planAlpha * (1 - v.finish) * 0.8
-          );
-        }
-      }
-      pushLine(
-        [toScreen(14, 0.05, 0.06), toScreen(14, 3.7, 0.06)],
-        inkStroke,
-        Math.max(1, cam.scale * 0.045),
-        planAlpha
-      );
-      var arc = [];
-      for (i = 0; i <= 10; i++) {
-        var a = (Math.PI / 2) * (i / 10);
-        arc.push(toScreen(14 + Math.cos(a) * 3.7, Math.sin(a) * 3.7, 0.06));
-      }
-      pushLine(arc, rgba(INK, 0.7), 1, planAlpha);
-      for (i = 0; i < 6; i++) {
-        y = 18 + i * 1.05;
-        pushLine([toScreen(29.1, y, 0.05), toScreen(34.6, y, 0.05)], rgba(INK, 0.75), 1, planAlpha);
-      }
-      size = Math.max(11, Math.min(18, cam.scale * 0.4));
-      for (i = 0; i < ROOMS.length; i++) {
-        var s = toScreen(ROOMS[i].x, ROOMS[i].y, 0.2);
-        ops.push({
-          type: "text",
-          x: s.x,
-          y: s.y,
-          text: ROOMS[i].name,
-          size: size,
-          fill: rgba(INK, 0.9),
-          align: "center",
-          weight: "600",
-          alpha: planAlpha
-        });
-      }
-      var treeMark = toScreen(-6.5, 8, 0);
-      ops.push({
-        type: "circle",
-        x: treeMark.x,
-        y: treeMark.y,
-        r: Math.max(6, cam.scale * 1.15),
-        stroke: rgba(INK, 0.8),
-        lw: 1.25,
-        alpha: planAlpha
-      });
-    }
-
-    var groundA = smooth((v.tilt - 0.05) / 0.45) * 0.55 + v.finish * 0.25;
-    if (groundA > 0.03) {
-      var c = toScreen(18, 12, 0);
-      ops.push({
-        type: "ellipse",
-        x: c.x,
-        y: c.y + cam.scale * 0.6,
-        rx: cam.scale * 18,
-        ry: cam.scale * (4.2 + v.tilt * 2.4),
-        fill: rgba(INK, 0.13 * Math.max(v.tilt, v.finish)),
-        alpha: 1
-      });
-      quad(
-        [-3, -7, 0],
-        [39, -7, 0],
-        [39, 29, 0],
-        [-3, 29, 0],
-        rgba(mix(PAPER, [214, 206, 190], Math.max(v.tilt, v.finish)), Math.min(0.95, groundA)),
-        null,
-        0,
-        1
-      );
-    }
-
-    quad(
-      [0, 0, 0.06],
-      [36, 0, 0.06],
-      [36, 26, 0.06],
-      [0, 26, 0.06],
-      rgba(mix(PAPER, FLOOR, v.finish), 0.2 + v.finish * 0.8),
-      null,
-      0,
-      1
-    );
-    if (v.finish > 0.25) {
-      var plank;
-      for (plank = 1; plank < 6; plank++) {
-        var px = (36 / 6) * plank;
-        pushLine(
-          [toScreen(px, 0.3, 0.08), toScreen(px, 25.7, 0.08)],
-          rgba(CEDAR_DARK, 0.28 * v.finish),
-          1,
-          1
-        );
-      }
-    }
-
-    emitTree(42.5, 20);
-    emitPlanExtras();
-
-    if (v.walls > 0.02) emitWalls(STORY, 0, 9 * v.walls);
-    if (v.addition > 0.02) {
-      quad(
-        [0.6, 0.6, 9],
-        [35.4, 0.6, 9],
-        [35.4, 25.4, 9],
-        [0.6, 25.4, 9],
-        rgba(FLOOR, 0.35 + v.addition * 0.6),
-        rgba(cedarDeep, v.addition),
-        1,
-        1
-      );
-      emitWalls(UPPER, 9, 9 + 8 * v.addition);
-    }
-    emitRoof();
-    emitPorch();
-    emitTree(-6.5, 8);
-
-    if (planAlpha > 0.2) {
-      var nBase = toScreen(40.5, 23.5, 0);
-      pushLine(
-        [nBase, { x: nBase.x, y: nBase.y - Math.max(16, cam.scale * 1.4) }],
-        rgba(INK, 0.8),
-        1.25,
-        planAlpha
-      );
-      ops.push({
-        type: "text",
-        x: nBase.x,
-        y: nBase.y - Math.max(24, cam.scale * 1.9),
-        text: "N",
-        size: Math.max(11, cam.scale * 0.34),
-        fill: rgba(INK, 0.85),
-        align: "center",
-        weight: "700",
-        alpha: planAlpha
-      });
-    }
-
-    ops.push({
-      type: "text",
-      x: w - 16,
-      y: h - 28,
-      text: "CONCEPT SKETCH",
-      size: 11,
-      fill: rgba(INK, 0.62),
-      align: "right",
-      weight: "700",
-      alpha: 1
-    });
-    ops.push({
-      type: "text",
-      x: w - 16,
-      y: h - 14,
-      text: "Not a bid or stamped plan",
-      size: 10,
-      fill: rgba(INK, 0.5),
-      align: "right",
-      weight: "500",
-      alpha: 1
-    });
-
-    emitFocus();
-    return ops;
-
-    function emitFocus() {
-      if (!focus) return;
-      var stroke = rgba(HL, 0.96);
-      var wash = rgba(HL, 0.2);
-      var lw = Math.max(2.4, cam.scale * 0.11);
-      var wallTop = 9 * Math.max(v.walls, focus === "foundation" ? 0 : 0.2);
-
-      function markLine(x1, y1, x2, y2, z, width) {
-        pushLine([toScreen(x1, y1, z), toScreen(x2, y2, z)], stroke, width || lw, 1);
-      }
-
-      function markWall(x1, y1, x2, y2, z0, z1) {
-        if (z1 - z0 < 0.2) {
-          markLine(x1, y1, x2, y2, 0.25, lw);
-          return;
-        }
-        quad(
-          [x1, y1, z0],
-          [x2, y2, z0],
-          [x2, y2, z1],
-          [x1, y1, z1],
-          wash,
-          stroke,
-          Math.max(1.4, cam.scale * 0.05),
-          1
-        );
-      }
-
-      if (focus === "foundation") {
-        markLine(-0.8, -0.8, 36.8, -0.8, 0.2, lw);
-        markLine(36.8, -0.8, 36.8, 26.8, 0.2, lw);
-        markLine(36.8, 26.8, -0.8, 26.8, 0.2, lw);
-        markLine(-0.8, 26.8, -0.8, -0.8, 0.2, lw);
-        quad([-1.5, -1.6, 0.02], [37.5, -1.6, 0.02], [37.5, 27.6, 0.02], [-1.5, 27.6, 0.02], rgba(HL, 0.08), null, 0, 1);
-      } else if (focus === "bearing") {
-        markWall(0, 0, 36, 0, 0, wallTop);
-        markWall(36, 0, 36, 26, 0, wallTop);
-        markWall(36, 26, 0, 26, 0, wallTop);
-        markWall(0, 26, 0, 0, 0, wallTop);
-      } else if (focus === "partition") {
-        markWall(20, 0, 20, 26, 0, wallTop);
-        markWall(0, 15, 36, 15, 0, wallTop);
-      } else if (focus === "framing") {
-        markLine(0, 0, 36, 0, 0.15, Math.max(2, cam.scale * 0.08));
-        markLine(0, 0, 36, 0, wallTop, Math.max(2, cam.scale * 0.08));
-        markLine(0, 26, 36, 26, 0.15, Math.max(2, cam.scale * 0.08));
-        markLine(0, 26, 36, 26, wallTop, Math.max(2, cam.scale * 0.08));
-      } else if (focus === "header") {
-        var openings = [
-          [3.2, 8.8, 0],
-          [13.6, 17.4, 0],
-          [23.4, 30.6, 0],
-          [3, 8, 1],
-          [16.5, 21.5, 1]
-        ];
-        var n;
-        var beamZ = Math.min(7.15, Math.max(2.4, wallTop - 0.2));
-        for (n = 0; n < openings.length; n++) {
-          var op = openings[n];
-          if (op[2] === 0) {
-            quad(
-              [op[0] - 0.45, 0, beamZ - 0.9],
-              [op[1] + 0.45, 0, beamZ - 0.9],
-              [op[1] + 0.45, 0, beamZ],
-              [op[0] - 0.45, 0, beamZ],
-              rgba(HL, 0.55),
-              stroke,
-              1.4,
-              1
-            );
-          } else {
-            quad(
-              [36, op[0] - 0.45, beamZ - 0.9],
-              [36, op[1] + 0.45, beamZ - 0.9],
-              [36, op[1] + 0.45, beamZ],
-              [36, op[0] - 0.45, beamZ],
-              rgba(HL, 0.55),
-              stroke,
-              1.4,
-              1
-            );
-          }
-        }
-      } else if (focus === "roof") {
-        var r;
-        for (r = 0; r <= 8; r++) {
-          var rx = -1.2 + (38.4 * r) / 8;
-          pushLine([toScreen(rx, -1.25, eaveZ), toScreen(rx, 13, ridgeZ)], stroke, Math.max(1.3, cam.scale * 0.045), 1);
-          pushLine([toScreen(rx, 13, ridgeZ), toScreen(rx, 27.25, eaveZ)], rgba(HL, 0.75), Math.max(1.1, cam.scale * 0.04), 1);
-        }
-        pushLine([toScreen(-1.2, 13, ridgeZ), toScreen(37.2, 13, ridgeZ)], stroke, Math.max(2.5, cam.scale * 0.09), 1);
-      } else if (focus === "footings") {
-        var pads = [[0, 0], [36, 0], [36, 26], [0, 26], [18, 0], [18, 26], [0, 13], [36, 13]];
-        var pi;
-        for (pi = 0; pi < pads.length; pi++) {
-          var fx = pads[pi][0];
-          var fy = pads[pi][1];
-          quad(
-            [fx - 1.35, fy - 1.35, 0.04],
-            [fx + 1.35, fy - 1.35, 0.04],
-            [fx + 1.35, fy + 1.35, 0.04],
-            [fx - 1.35, fy + 1.35, 0.04],
-            rgba(HL, 0.38),
-            stroke,
-            1.5,
-            1
-          );
-        }
-      } else if (focus === "structure") {
-        var up = 9 + 8 * Math.max(v.addition, 0.15);
-        markWall(0.6, 0.6, 35.4, 0.6, 9, up);
-        markWall(35.4, 0.6, 35.4, 25.4, 9, up);
-        markLine(0.6, 0.6, 35.4, 0.6, 9, lw);
-        markLine(0.6, 25.4, 35.4, 25.4, up, lw);
-      } else if (focus === "stairs") {
-        quad([28.2, 15.2, 0.3], [35.6, 15.2, 0.3], [35.6, 25.6, 0.3], [28.2, 25.6, 0.3], wash, stroke, 1.6, 1);
-        var step;
-        for (step = 0; step < 6; step++) {
-          var sy = 18 + step * 1.05;
-          pushLine([toScreen(29.1, sy, 0.4), toScreen(34.6, sy, 0.4)], stroke, Math.max(1.2, cam.scale * 0.04), 1);
-        }
-        pushLine([toScreen(32, 21, 0.5), toScreen(32, 21, 9 + 8 * v.addition)], stroke, Math.max(2, cam.scale * 0.07), 1);
-        var label = toScreen(32, 16.2, 9.4 + 4 * v.addition);
-        ops.push({
-          type: "text",
-          x: label.x,
-          y: label.y,
-          text: "Stair",
-          size: Math.max(12, cam.scale * 0.36),
-          fill: stroke,
-          align: "center",
-          weight: "700",
-          alpha: 1
-        });
-      }
-    }
+  function clamp01(t) { return t < 0 ? 0 : t > 1 ? 1 : t; }
+  function smooth(t) { t = clamp01(t); return t * t * (3 - 2 * t); }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function lerp3(a, b, t) {
+    return [lerp(a[0], b[0], t), lerp(a[1], b[1], t), lerp(a[2], b[2], t)];
   }
+  function hypot3(x, y, z) { return Math.hypot(x, y, z) || 1; }
 
-  function paint(ctx, op) {
-    ctx.globalAlpha = op.alpha == null ? 1 : op.alpha;
-    if (op.type === "poly" || op.type === "line") {
-      if (!op.pts.length) return;
-      ctx.beginPath();
-      ctx.moveTo(op.pts[0].x, op.pts[0].y);
-      var i;
-      for (i = 1; i < op.pts.length; i++) ctx.lineTo(op.pts[i].x, op.pts[i].y);
-      if (op.type === "poly") ctx.closePath();
-      if (op.fill) {
-        ctx.fillStyle = op.fill;
-        ctx.fill();
-      }
-      if (op.stroke) {
-        ctx.strokeStyle = op.stroke;
-        ctx.lineWidth = op.lw || 1;
-        ctx.stroke();
-      }
-    } else if (op.type === "text") {
-      ctx.fillStyle = op.fill;
-      ctx.font = (op.weight || "600") + " " + op.size + "px Inter, system-ui, sans-serif";
-      ctx.textAlign = op.align || "center";
-      ctx.textBaseline = "middle";
-      ctx.fillText(op.text, op.x, op.y);
-    } else if (op.type === "circle") {
-      ctx.beginPath();
-      ctx.arc(op.x, op.y, op.r, 0, Math.PI * 2);
-      if (op.fill) {
-        ctx.fillStyle = op.fill;
-        ctx.fill();
-      }
-      if (op.stroke) {
-        ctx.strokeStyle = op.stroke;
-        ctx.lineWidth = op.lw || 1;
-        ctx.stroke();
-      }
-    } else if (op.type === "ellipse") {
-      ctx.beginPath();
-      ctx.ellipse(op.x, op.y, op.rx, op.ry, 0, 0, Math.PI * 2);
-      ctx.fillStyle = op.fill;
-      ctx.fill();
-    }
-    ctx.globalAlpha = 1;
-  }
-
-  function esc(text) {
-    return String(text)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
-  }
-
-  function num(n) {
-    return Math.round(n * 10) / 10;
-  }
-
-  function opsToSVG(ops, w, h) {
-    var parts = [];
+  function stageAt(p) {
     var i;
-    var op;
-    var pts;
-    parts.push(
-      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + w + " " + h +
-      '" role="img" aria-label="Illustrative Pacific Northwest house with a second-story addition. Not a bid or stamped plan.">'
-    );
-    parts.push('<rect width="' + w + '" height="' + h + '" fill="#f4efe4"/>');
-    for (i = 0; i < ops.length; i++) {
-      op = ops[i];
-      if (op.alpha != null && op.alpha < 0.03) continue;
-      if (op.type === "poly" || op.type === "line") {
-        pts = op.pts.map(function (pt) { return num(pt.x) + "," + num(pt.y); }).join(" ");
-        if (op.type === "poly") {
-          parts.push(
-            '<polygon points="' + pts + '" fill="' + (op.fill || "none") + '" stroke="' +
-            (op.stroke || "none") + '" stroke-width="' + num(op.lw || 1) +
-            '" stroke-linejoin="round"' + (op.alpha < 1 ? ' opacity="' + num(op.alpha) + '"' : "") + "/>"
-          );
-        } else {
-          parts.push(
-            '<polyline points="' + pts + '" fill="none" stroke="' + op.stroke + '" stroke-width="' +
-            num(op.lw || 1) + '" stroke-linecap="round" stroke-linejoin="round"' +
-            (op.alpha < 1 ? ' opacity="' + num(op.alpha) + '"' : "") + "/>"
-          );
-        }
-      } else if (op.type === "text") {
-        parts.push(
-          '<text x="' + num(op.x) + '" y="' + num(op.y) + '" text-anchor="' +
-          (op.align === "right" ? "end" : op.align === "left" ? "start" : "middle") +
-          '" dominant-baseline="middle" font-family="Inter, system-ui, sans-serif" font-size="' +
-          num(op.size) + '" font-weight="' + (op.weight || "600") + '" fill="' + op.fill + '"' +
-          (op.alpha < 1 ? ' opacity="' + num(op.alpha) + '"' : "") + ">" + esc(op.text) + "</text>"
-        );
-      } else if (op.type === "circle") {
-        parts.push(
-          '<circle cx="' + num(op.x) + '" cy="' + num(op.y) + '" r="' + num(op.r) + '" fill="' +
-          (op.fill || "none") + '" stroke="' + (op.stroke || "none") + '" stroke-width="' +
-          num(op.lw || 1) + '"' + (op.alpha < 1 ? ' opacity="' + num(op.alpha) + '"' : "") + "/>"
-        );
-      } else if (op.type === "ellipse") {
-        parts.push(
-          '<ellipse cx="' + num(op.x) + '" cy="' + num(op.y) + '" rx="' + num(op.rx) + '" ry="' +
-          num(op.ry) + '" fill="' + op.fill + '"/>'
-        );
+    for (i = 0; i < STAGES.length; i++) if (p < STAGES[i].until) return STAGES[i];
+    return STAGES[STAGES.length - 1];
+  }
+
+  function sceneState(p) {
+    var wallH = lerp(4, 8.9, smooth((p - 0.05) / 0.24));
+    var lift = smooth((p - 0.66) / 0.22);
+    var eave = 9 + 8 * lift;
+    var ridge = eave + 7.4;
+    return {
+      p: p,
+      wallH: wallH,
+      lift: lift,
+      eave: eave,
+      ridge: ridge,
+      mat: smooth((p - 0.36) / 0.18),
+      studs: p >= 0.12 && p < 0.44,
+      roof: p >= 0.38,
+      upper: lift > 0.02,
+      trees: p >= 0.32
+    };
+  }
+
+  function frameFov(distance, aspect) {
+    var v = 2 * Math.atan(16.5 / distance);
+    var h = 2 * Math.atan(24 / distance);
+    var vFromH = 2 * Math.atan(Math.tan(h / 2) / Math.max(0.35, aspect));
+    return Math.max(v, vFromH) * 180 / Math.PI;
+  }
+
+  function cameraFor(p, aspect) {
+    var keys = [
+      { p: 0, eye: [18, 240, 13], look: [18, 0, 13], fov: 8 },
+      { p: 0.17, eye: [18, 240, 13], look: [18, 0, 13], fov: 8 },
+      { p: 0.26, eye: [52, 20, -22], look: [18, 4, 12], fov: 32 },
+      { p: 0.42, eye: [50, 12, -24], look: [18, 5, 11], fov: 30 },
+      { p: 0.55, eye: [48, 9.2, -22], look: [18, 5.2, 12], fov: 30 },
+      { p: 0.66, eye: [16, 5.6, -9], look: [15, 5.2, 11], fov: 42 },
+      { p: 0.78, eye: [50, 18, -26], look: [18, 9, 12], fov: 30 },
+      { p: 0.9, eye: [56, 28, -32], look: [18, 12, 13], fov: 28 },
+      { p: 1, eye: [50, 22, -26], look: [18, 11, 13], fov: 28 }
+    ];
+    var i = 0;
+    while (i < keys.length - 2 && p > keys[i + 1].p) i++;
+    var a = keys[i];
+    var b = keys[i + 1];
+    var t = smooth((p - a.p) / ((b.p - a.p) || 1));
+    var eye = lerp3(a.eye, b.eye, t);
+    var look = lerp3(a.look, b.look, t);
+    var fov = lerp(a.fov, b.fov, t);
+    if (p < 0.17) {
+      eye = [18, 240, 13];
+      look = [18, 0, 13];
+      fov = frameFov(240, aspect || 1.6);
+    }
+    var dx = look[0] - eye[0];
+    var dy = look[1] - eye[1];
+    var dz = look[2] - eye[2];
+    var steep = clamp01((-dy / hypot3(dx, dy, dz) - 0.42) / 0.4);
+    var up = [0, 1 - steep, steep];
+    var ul = hypot3(up[0], up[1], up[2]);
+    up[0] /= ul; up[1] /= ul; up[2] /= ul;
+    return { eye: eye, look: look, fov: fov, up: up, steep: steep };
+  }
+
+  function lookAt(eye, target, up) {
+    var zx = eye[0] - target[0];
+    var zy = eye[1] - target[1];
+    var zz = eye[2] - target[2];
+    var zl = hypot3(zx, zy, zz);
+    zx /= zl; zy /= zl; zz /= zl;
+    var xx = up[1] * zz - up[2] * zy;
+    var xy = up[2] * zx - up[0] * zz;
+    var xz = up[0] * zy - up[1] * zx;
+    var xl = hypot3(xx, xy, xz);
+    xx /= xl; xy /= xl; xz /= xl;
+    var yx = zy * xz - zz * xy;
+    var yy = zz * xx - zx * xz;
+    var yz = zx * xy - zy * xx;
+    return new Float32Array([
+      xx, yx, zx, 0,
+      xy, yy, zy, 0,
+      xz, yz, zz, 0,
+      -(xx * eye[0] + xy * eye[1] + xz * eye[2]),
+      -(yx * eye[0] + yy * eye[1] + yz * eye[2]),
+      -(zx * eye[0] + zy * eye[1] + zz * eye[2]),
+      1
+    ]);
+  }
+
+  function perspective(fov, aspect, near, far) {
+    var f = 1 / Math.tan(fov * Math.PI / 360);
+    var nf = 1 / (near - far);
+    return new Float32Array([
+      f / aspect, 0, 0, 0,
+      0, f, 0, 0,
+      0, 0, (far + near) * nf, -1,
+      0, 0, 2 * far * near * nf, 0
+    ]);
+  }
+
+  function mul(a, b) {
+    var o = new Float32Array(16);
+    var c;
+    var r;
+    for (c = 0; c < 4; c++) {
+      for (r = 0; r < 4; r++) {
+        o[c * 4 + r] =
+          a[r] * b[c * 4] +
+          a[4 + r] * b[c * 4 + 1] +
+          a[8 + r] * b[c * 4 + 2] +
+          a[12 + r] * b[c * 4 + 3];
       }
     }
-    parts.push("</svg>");
-    return parts.join("");
+    return o;
+  }
+
+  function hot(role, focus) {
+    if (!focus) return 0;
+    if (role === focus) return 1;
+    if (focus === "foundation" && (role === "foundation" || role === "bearing")) return 1;
+    if (focus === "structure" && (role === "structure" || role === "upperfloor")) return 1;
+    if (focus === "framing" && (role === "stud" || role === "plate")) return 1;
+    if (focus === "stairs" && role === "stair") return 1;
+    if (focus === "header" && role === "header") return 1;
+    return 0;
+  }
+
+  function makeBuf() {
+    return { n: 0, data: new Float32Array(16 * 4096) };
+  }
+
+  function pushVert(buf, x, y, z, nx, ny, nz, ink, mat, h, alpha) {
+    var i = buf.n;
+    if (i + 14 > buf.data.length) {
+      var next = new Float32Array(buf.data.length * 2);
+      next.set(buf.data);
+      buf.data = next;
+    }
+    var d = buf.data;
+    d[i] = x; d[i + 1] = y; d[i + 2] = z;
+    d[i + 3] = nx; d[i + 4] = ny; d[i + 5] = nz;
+    d[i + 6] = ink[0]; d[i + 7] = ink[1]; d[i + 8] = ink[2];
+    d[i + 9] = mat[0]; d[i + 10] = mat[1]; d[i + 11] = mat[2];
+    d[i + 12] = h; d[i + 13] = alpha;
+    buf.n = i + 14;
+  }
+
+  function pushTri(buf, a, b, c, nx, ny, nz, ink, mat, h, alpha) {
+    pushVert(buf, a[0], a[1], a[2], nx, ny, nz, ink, mat, h, alpha);
+    pushVert(buf, b[0], b[1], b[2], nx, ny, nz, ink, mat, h, alpha);
+    pushVert(buf, c[0], c[1], c[2], nx, ny, nz, ink, mat, h, alpha);
+  }
+
+  function addFace(buf, a, b, c, d, hint, ink, mat, h, alpha) {
+    var ax = b[0] - a[0];
+    var ay = b[1] - a[1];
+    var az = b[2] - a[2];
+    var bx = d[0] - a[0];
+    var by = d[1] - a[1];
+    var bz = d[2] - a[2];
+    var nx = ay * bz - az * by;
+    var ny = az * bx - ax * bz;
+    var nz = ax * by - ay * bx;
+    var p0 = a;
+    var p1 = b;
+    var p2 = c;
+    var p3 = d;
+    if (nx * hint[0] + ny * hint[1] + nz * hint[2] < 0) {
+      p1 = d;
+      p3 = b;
+      nx = -nx; ny = -ny; nz = -nz;
+    }
+    var len = hypot3(nx, ny, nz);
+    nx /= len; ny /= len; nz /= len;
+    pushTri(buf, p0, p1, p2, nx, ny, nz, ink, mat, h, alpha);
+    pushTri(buf, p0, p2, p3, nx, ny, nz, ink, mat, h, alpha);
+  }
+
+  function addBox(buf, x0, y0, z0, x1, y1, z1, ink, mat, h, alpha, skipBottom, capInk) {
+    if (x1 < x0) { var tx = x0; x0 = x1; x1 = tx; }
+    if (y1 < y0) { var ty = y0; y0 = y1; y1 = ty; }
+    if (z1 < z0) { var tz = z0; z0 = z1; z1 = tz; }
+    if (x1 - x0 < 0.02 || y1 - y0 < 0.02 || z1 - z0 < 0.02) return;
+    addFace(buf, [x0, y1, z1], [x1, y1, z1], [x1, y1, z0], [x0, y1, z0], [0, 1, 0], capInk || ink, mat, h, alpha);
+    if (!skipBottom) addFace(buf, [x0, y0, z0], [x1, y0, z0], [x1, y0, z1], [x0, y0, z1], [0, -1, 0], ink, mat, h, alpha);
+    addFace(buf, [x0, y0, z1], [x1, y0, z1], [x1, y1, z1], [x0, y1, z1], [0, 0, 1], ink, mat, h, alpha);
+    addFace(buf, [x1, y0, z0], [x0, y0, z0], [x0, y1, z0], [x1, y1, z0], [0, 0, -1], ink, mat, h, alpha);
+    addFace(buf, [x1, y0, z1], [x1, y0, z0], [x1, y1, z0], [x1, y1, z1], [1, 0, 0], ink, mat, h, alpha);
+    addFace(buf, [x0, y0, z0], [x0, y0, z1], [x0, y1, z1], [x0, y1, z0], [-1, 0, 0], ink, mat, h, alpha);
+  }
+
+  function inHole(at, holes) {
+    var i;
+    for (i = 0; i < holes.length; i++) {
+      if (Math.abs(at - holes[i].at) < holes[i].w * 0.5) return true;
+    }
+    return false;
+  }
+
+  function wallStrip(buf, axis, fixed, a0, a1, y0, y1, thick, holes, role, inkSide, mat, focus, studs, outSign) {
+    var top = y1;
+    if (top - y0 < 0.08) return;
+    var h = hot(role, focus);
+    var hs = hot("header", focus);
+    var cursor = a0;
+    var sorted = holes.slice().sort(function (a, b) { return a.at - b.at; });
+    function solid(a, b, yb, yt, roleName, ink, m, hh) {
+      if (b - a < 0.04 || yt - yb < 0.04) return;
+      var cap = roleName === "header" ? HEADER_C : INK;
+      if (axis === "x") addBox(buf, a, yb, fixed - thick / 2, b, yt, fixed + thick / 2, ink, m, hh, 1, true, cap);
+      else addBox(buf, fixed - thick / 2, yb, a, fixed + thick / 2, yt, b, ink, m, hh, 1, true, cap);
+    }
+    var i;
+    for (i = 0; i < sorted.length; i++) {
+      var hole = sorted[i];
+      var lo = hole.at - hole.w / 2;
+      var hi = hole.at + hole.w / 2;
+      solid(cursor, Math.max(cursor, lo), y0, top, role, inkSide, mat, h);
+      var sill = Math.min(top, hole.sill);
+      if (sill > y0) solid(lo, hi, y0, sill, role, inkSide, mat, h);
+      var beamTop = Math.min(top, hole.head + 0.62);
+      if (beamTop > hole.head && top > hole.head) {
+        solid(lo - 0.2, hi + 0.2, hole.head, beamTop, "header", HEADER_C, HEADER_C, hs || h * 0.15);
+        if (top > beamTop) solid(lo, hi, beamTop, top, role, inkSide, mat, h);
+      }
+      if (hole.sill < 0.2 && focus !== "header" && beamTop > 2) {
+        /* door leaf fades in with materials; drawn by the caller via role door */
+      }
+      cursor = Math.max(cursor, hi);
+    }
+    solid(cursor, a1, y0, top, role, inkSide, mat, h);
+    if (!studs) return;
+    var studHot = hot("stud", focus);
+    var plateHot = hot("plate", focus);
+    solid(a0, a1, y0, Math.min(top, y0 + 0.22), "plate", STUD_C, STUD_C, plateHot);
+    if (top - y0 > 1.2) solid(a0, a1, top - 0.2, top, "plate", STUD_C, STUD_C, plateHot);
+    var at;
+    var outward = outSign || 1;
+    var face = fixed + outward * (thick / 2 + 0.02);
+    var outer = face + outward * 0.38;
+    var s0 = Math.min(face, outer);
+    var s1 = Math.max(face, outer);
+    for (at = a0 + 0.9; at < a1 - 0.4; at += 1.65) {
+      if (inHole(at, sorted)) continue;
+      var studTop = Math.max(y0 + 0.3, top - 0.22);
+      if (studTop - (y0 + 0.22) < 0.4) continue;
+      if (axis === "x") addBox(buf, at, y0 + 0.22, s0, at + 0.28, studTop, s1, INK, STUD_C, studHot, 1, true, INK);
+      else addBox(buf, s0, y0 + 0.22, at, s1, studTop, at + 0.28, INK, STUD_C, studHot, 1, true, INK);
+    }
+  }
+
+  function addGlass(buf, axis, fixed, hole, thick, focus) {
+    var h = 0;
+    var ink = PAPER;
+    var y0 = hole.sill + 0.06;
+    var y1 = hole.head - 0.06;
+    if (y1 - y0 < 0.2) return;
+    var a = hole.at - hole.w / 2 + 0.08;
+    var b = hole.at + hole.w / 2 - 0.08;
+    if (axis === "x") addBox(buf, a, y0, fixed - 0.04, b, y1, fixed + 0.04, ink, GLASS_C, h, 0.38, true);
+    else addBox(buf, fixed - 0.04, y0, a, fixed + 0.04, y1, b, ink, GLASS_C, h, 0.38, true);
+    if (thick) { /* thickness kept for call symmetry */ }
+    if (focus) { /* glass is never the highlighted part */ }
+  }
+
+  function addStairs(buf, yBase, rise, focus, limit) {
+    var h = hot("stair", focus);
+    var n = 12;
+    var i;
+    var run = 7.2 / n;
+    var step = rise / n;
+    for (i = 0; i < n; i++) {
+      var yb = yBase + i * step;
+      if (yb >= limit - 0.02) continue;
+      var yt = Math.min(limit, yBase + (i + 1) * step);
+      if (yt - yb < 0.04) continue;
+      var z0 = 16.5 + i * run;
+      addBox(buf, 29.1, yb, z0, 35.1, yt, z0 + run * 0.92, INK, OAK, h, 1, true, INK);
+    }
+  }
+
+  function addRoof(buf, eave, ridge, focus) {
+    var h = hot("roof", focus);
+    var x0 = -1.15;
+    var x1 = 37.15;
+    var zMid = 13;
+    var ink = [0.16, 0.17, 0.18];
+    addFace(buf,
+      [x0, eave, -1.15], [x1, eave, -1.15], [x1, ridge, zMid], [x0, ridge, zMid],
+      [0, zMid + 1.15, ridge - eave], ink, ROOF_C, h, 1);
+    addFace(buf,
+      [x1, eave, 27.15], [x0, eave, 27.15], [x0, ridge, zMid], [x1, ridge, zMid],
+      [0, 27.15 - zMid, ridge - eave], ink, ROOF_C, h, 1);
+    addFace(buf,
+      [x0, eave, -1.15], [x0, ridge, zMid], [x0, eave, 27.15], [x0, eave - 0.02, 27.15],
+      [-1, 0, 0], ink, ROOF_C, h, 1);
+    addFace(buf,
+      [x1, ridge, zMid], [x1, eave, -1.15], [x1, eave, 27.15], [x1, eave - 0.02, -1.15],
+      [1, 0, 0], ink, ROOF_C, h, 1);
+  }
+
+  function cone(buf, x, z, radius, height) {
+    var seg = 7;
+    var i;
+    for (i = 0; i < seg; i++) {
+      var a0 = (i / seg) * Math.PI * 2;
+      var a1 = ((i + 1) / seg) * Math.PI * 2;
+      addFace(buf,
+        [x, height, z],
+        [x + Math.cos(a1) * radius, 0, z + Math.sin(a1) * radius],
+        [x + Math.cos(a0) * radius, 0, z + Math.sin(a0) * radius],
+        [x + Math.cos(a0) * radius, 0, z + Math.sin(a0) * radius],
+        [Math.cos((a0 + a1) / 2), 0.4, Math.sin((a0 + a1) / 2)],
+        TREE, TREE, 0, 1);
+    }
+  }
+
+  function buildGeometry(p, focus) {
+    var state = sceneState(p);
+    var solid = makeBuf();
+    var glass = makeBuf();
+    var showStuds = state.studs || focus === "framing";
+    var southHoles = [
+      { at: 6.2, w: 4.2, sill: 2.55, head: 7.05 },
+      { at: 14.2, w: 3.05, sill: 0, head: 7.2 },
+      { at: 27.4, w: 5, sill: 2.55, head: 7.05 }
+    ];
+    var northHoles = [
+      { at: 10, w: 4, sill: 2.7, head: 6.9 },
+      { at: 24, w: 3.1, sill: 3.3, head: 6.6 }
+    ];
+    var westHoles = [{ at: 18.2, w: 3.4, sill: 2.7, head: 6.9 }];
+    var eastHoles = [
+      { at: 8, w: 3.6, sill: 2.55, head: 7.05 },
+      { at: 20.6, w: 3.3, sill: 1.4, head: 7.2 }
+    ];
+    var crossHoles = [
+      { at: 10, w: 2.7, sill: 0, head: 7 },
+      { at: 31.4, w: 2.7, sill: 0, head: 7 }
+    ];
+    var splitHoles = [{ at: 7.2, w: 2.7, sill: 0, head: 7 }];
+
+    addBox(solid, -2.2, -0.55, -3.2, 38.2, 0.015, 28.2, PAD, [0.45, 0.42, 0.38], hot("foundation", focus), 1, true, PAD);
+    addBox(solid, -8, -0.62, -10, 46, -0.04, 38, PAPER, GREEN, 0, 1, true, PAPER);
+    addBox(solid, 0.08, 0.03, 0.08, 35.92, 0.07, 25.92, PAPER, OAK, 0, 1, true, PAPER);
+    addBox(solid, 10, 0.07, -3.2, 18.6, 0.22, 0.02, SIDE, [0.5, 0.48, 0.44], 0, 1, true, SIDE);
+
+    var yTop = state.wallH;
+    wallStrip(solid, "x", 0.36, 0, 36, 0, yTop, 0.72, southHoles, "bearing", SIDE, CEDAR, focus, showStuds, -1);
+    wallStrip(solid, "x", 25.64, 0, 36, 0, yTop, 0.72, northHoles, "bearing", SIDE, CEDAR, focus, showStuds, 1);
+    wallStrip(solid, "z", 0.36, 0.72, 25.28, 0, yTop, 0.72, westHoles, "bearing", SIDE, CEDAR, focus, showStuds, -1);
+    wallStrip(solid, "z", 35.64, 0.72, 25.28, 0, yTop, 0.72, eastHoles, "bearing", SIDE, CEDAR, focus, showStuds, 1);
+    wallStrip(solid, "z", 20, 0.75, 25.25, 0, yTop, 0.42, splitHoles, "partition", SIDE, PLASTER, focus, false, 1);
+    wallStrip(solid, "x", 15, 0.75, 35.25, 0, yTop, 0.42, crossHoles, "partition", SIDE, PLASTER, focus, false, 1);
+
+    if (state.mat > 0.35 && yTop > 6.5) {
+      addBox(solid, 13.05, 0.02, 0.15, 13.42, 7.05, 3.05, DOOR_C, DOOR_C, 0, 1, true);
+    }
+    if (state.mat > 0.2 && yTop > 4) {
+      var g;
+      var lists = [
+        ["x", 0.36, southHoles],
+        ["x", 25.64, northHoles],
+        ["z", 0.36, westHoles],
+        ["z", 35.64, eastHoles]
+      ];
+      for (g = 0; g < lists.length; g++) {
+        var li;
+        for (li = 0; li < lists[g][2].length; li++) {
+          if (lists[g][2][li].sill < 0.2) continue;
+          addGlass(glass, lists[g][0], lists[g][1], lists[g][2][li]);
+        }
+      }
+    }
+
+    if (state.wallH < 5.2) {
+      var ti;
+      for (ti = 0; ti < 12; ti++) {
+        var tz = 16.5 + ti * (7.2 / 12);
+        addBox(solid, 29.15, 0.08, tz, 35.05, 0.12, tz + 0.28, INK, OAK, hot("stair", focus), 1, true, INK);
+      }
+    } else {
+      addStairs(solid, 0, 9, focus, state.wallH);
+    }
+
+    if (state.roof) {
+      addRoof(solid, state.eave, state.ridge, focus);
+      if (state.upper) {
+        var uy0 = 9;
+        var uy1 = state.eave;
+        var uSouth = [{ at: 16, w: 4.4, sill: 11.2, head: 15.4 }];
+        var uNorth = [{ at: 12, w: 3.6, sill: 11.3, head: 15.2 }];
+        var uWest = [{ at: 20, w: 3.2, sill: 11.4, head: 15.1 }];
+        var uEast = [
+          { at: 10, w: 3.2, sill: 11.3, head: 15.2 },
+          { at: 20.6, w: 3.3, sill: 11.1, head: 15.6 }
+        ];
+        wallStrip(solid, "x", 0.36, 0, 36, uy0, uy1, 0.72, uSouth, "structure", SIDE, CEDAR, focus, false);
+        wallStrip(solid, "x", 25.64, 0, 36, uy0, uy1, 0.72, uNorth, "structure", SIDE, CEDAR, focus, false);
+        wallStrip(solid, "z", 0.36, 0.72, 25.28, uy0, uy1, 0.72, uWest, "structure", SIDE, CEDAR, focus, false);
+        wallStrip(solid, "z", 35.64, 0.72, 25.28, uy0, uy1, 0.72, uEast, "structure", SIDE, CEDAR, focus, false);
+        addBox(solid, 0.8, 9.02, 0.8, 35.2, 9.16, 15.7, PAPER, OAK, hot("upperfloor", focus), 1, true);
+        addBox(solid, 0.8, 9.02, 15.7, 28.4, 9.16, 25.2, PAPER, OAK, hot("upperfloor", focus), 1, true);
+        if (state.mat > 0.45 && uy1 > 14) {
+          addGlass(glass, "x", 0.36, uSouth[0]);
+          addGlass(glass, "x", 25.64, uNorth[0]);
+          addGlass(glass, "z", 0.36, uWest[0]);
+          addGlass(glass, "z", 35.64, uEast[0]);
+          addGlass(glass, "z", 35.64, uEast[1]);
+        }
+        addStairs(solid, 9, Math.max(0.4, (state.eave - 9) * 0.92), focus, state.eave);
+        addBox(solid, -0.45, 8.72, -0.55, 36.45, 9.18, 26.55, [0.93, 0.9, 0.84], [0.9, 0.86, 0.78], hot("structure", focus), 1, true, [0.93, 0.9, 0.84]);
+      }
+    }
+
+    if (state.trees) {
+      cone(solid, -5.5, 8, 2.3, 11);
+      cone(solid, 42.2, 18, 2.6, 13);
+      cone(solid, 40, 4, 1.7, 8);
+    }
+
+    return { solid: solid, glass: glass, state: state };
+  }
+
+  var VS = [
+    "attribute vec3 aPos;",
+    "attribute vec3 aNrm;",
+    "attribute vec3 aInk;",
+    "attribute vec3 aMat;",
+    "attribute float aHot;",
+    "attribute float aAlpha;",
+    "uniform mat4 uMvp;",
+    "varying vec3 vPos;",
+    "varying vec3 vN;",
+    "varying vec3 vInk;",
+    "varying vec3 vMat;",
+    "varying float vHot;",
+    "varying float vAlpha;",
+    "void main(){",
+    "  vPos=aPos; vN=aNrm; vInk=aInk; vMat=aMat; vHot=aHot; vAlpha=aAlpha;",
+    "  gl_Position=uMvp*vec4(aPos,1.0);",
+    "}"
+  ].join("\n");
+
+  var FS = [
+    "precision mediump float;",
+    "uniform float uMat;",
+    "uniform float uDim;",
+    "uniform vec3 uLight;",
+    "uniform vec3 uPaper;",
+    "varying vec3 vPos;",
+    "varying vec3 vN;",
+    "varying vec3 vInk;",
+    "varying vec3 vMat;",
+    "varying float vHot;",
+    "varying float vAlpha;",
+    "void main(){",
+    "  vec3 n=normalize(vN);",
+    "  float ndl=abs(dot(n,normalize(uLight)));",
+    "  float ao=mix(0.76,1.0,smoothstep(0.0,2.6,vPos.y));",
+    "  vec3 lit=vMat*(0.38+0.62*ndl)*ao;",
+    "  vec3 col=mix(vInk,lit,uMat);",
+    "  col=mix(col,uPaper,uDim*(1.0-vHot)*0.7);",
+    "  col=mix(col,vec3(0.114,0.306,0.847),clamp(vHot,0.0,1.0)*0.92);",
+    "  gl_FragColor=vec4(col,vAlpha);",
+    "}"
+  ].join("\n");
+
+  function projectPoint(mvp, x, y, z, w, h) {
+    var clipX = mvp[0] * x + mvp[4] * y + mvp[8] * z + mvp[12];
+    var clipY = mvp[1] * x + mvp[5] * y + mvp[9] * z + mvp[13];
+    var clipW = mvp[3] * x + mvp[7] * y + mvp[11] * z + mvp[15];
+    if (clipW <= 0.05) return null;
+    return [(clipX / clipW * 0.5 + 0.5) * w, (1 - (clipY / clipW * 0.5 + 0.5)) * h];
   }
 
   function mount() {
@@ -1006,12 +548,64 @@
     var sticky = root.querySelector(".scroll-house-sticky");
     var line = root.querySelector(".scroll-house-line");
     var bar = root.querySelector(".sh-progress > span");
+    var labels = root.querySelector(".sh-labels");
     var stageNodes = root.querySelectorAll(".sh-stages li");
     if (!canvas || !sheet || !track || !sticky) return;
-    var ctx = canvas.getContext("2d", { alpha: true });
-    if (!ctx) return;
-    root.setAttribute("data-ready", "1");
+    var gl = canvas.getContext("webgl", { alpha: false, antialias: true, depth: true, stencil: false, powerPreference: "low-power" });
+    if (!gl) gl = canvas.getContext("experimental-webgl", { alpha: false, antialias: true, depth: true });
+    if (!gl) return;
 
+    function shader(type, src) {
+      var sh = gl.createShader(type);
+      gl.shaderSource(sh, src);
+      gl.compileShader(sh);
+      if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) return null;
+      return sh;
+    }
+    var vs = shader(gl.VERTEX_SHADER, VS);
+    var fs = shader(gl.FRAGMENT_SHADER, FS);
+    if (!vs || !fs) return;
+    var prog = gl.createProgram();
+    gl.attachShader(prog, vs);
+    gl.attachShader(prog, fs);
+    gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
+    gl.useProgram(prog);
+    var loc = {
+      pos: gl.getAttribLocation(prog, "aPos"),
+      nrm: gl.getAttribLocation(prog, "aNrm"),
+      ink: gl.getAttribLocation(prog, "aInk"),
+      mat: gl.getAttribLocation(prog, "aMat"),
+      hot: gl.getAttribLocation(prog, "aHot"),
+      alpha: gl.getAttribLocation(prog, "aAlpha"),
+      mvp: gl.getUniformLocation(prog, "uMvp"),
+      matAmt: gl.getUniformLocation(prog, "uMat"),
+      dim: gl.getUniformLocation(prog, "uDim"),
+      light: gl.getUniformLocation(prog, "uLight"),
+      paper: gl.getUniformLocation(prog, "uPaper")
+    };
+    var solidGl = gl.createBuffer();
+    var glassGl = gl.createBuffer();
+    gl.enable(gl.DEPTH_TEST);
+    gl.clearColor(PAPER[0], PAPER[1], PAPER[2], 1);
+
+    var labelNodes = [];
+    if (labels) {
+      var li;
+      var items = ROOMS.concat([
+        { name: "36 ft", x: 18, z: -1.7, dim: true },
+        { name: "26 ft", x: -1.6, z: 13, dim: true }
+      ]);
+      for (li = 0; li < items.length; li++) {
+        var node = document.createElement("span");
+        node.className = "sh-label" + (items[li].dim ? " is-dim" : "");
+        node.textContent = items[li].name;
+        labels.appendChild(node);
+        labelNodes.push({ node: node, x: items[li].x, z: items[li].z });
+      }
+    }
+
+    root.setAttribute("data-ready", "1");
     var current = "";
     var focusId = "";
     var scheduled = false;
@@ -1038,11 +632,10 @@
     function focusBelongs(stageId) {
       var s;
       var b;
-      var buttons;
       if (!focusId) return true;
       for (s = 0; s < learnSets.length; s++) {
         if (learnSets[s].getAttribute("data-stage") !== stageId) continue;
-        buttons = learnSets[s].querySelectorAll(".sh-call");
+        var buttons = learnSets[s].querySelectorAll(".sh-call");
         for (b = 0; b < buttons.length; b++) {
           if (buttons[b].getAttribute("data-callout") === focusId) return true;
         }
@@ -1071,33 +664,79 @@
       return scrolled / travel;
     }
 
-    function resize() {
-      var rect = sheet.getBoundingClientRect();
-      var cssW = Math.max(1, rect.width);
-      var cssH = Math.max(1, rect.height);
-      var dpr = Math.min(window.devicePixelRatio || 1, cssW < 700 ? 1.5 : 2);
-      var bw = Math.round(cssW * dpr);
-      var bh = Math.round(cssH * dpr);
-      if (canvas.width !== bw || canvas.height !== bh) {
-        canvas.width = bw;
-        canvas.height = bh;
+    function drawBuffer(buffer, glBuf, alphaPass) {
+      if (!buffer.n) return;
+      gl.bindBuffer(gl.ARRAY_BUFFER, glBuf);
+      gl.bufferData(gl.ARRAY_BUFFER, buffer.data.subarray(0, buffer.n), gl.DYNAMIC_DRAW);
+      var stride = 56;
+      gl.enableVertexAttribArray(loc.pos);
+      gl.enableVertexAttribArray(loc.nrm);
+      gl.enableVertexAttribArray(loc.ink);
+      gl.enableVertexAttribArray(loc.mat);
+      gl.enableVertexAttribArray(loc.hot);
+      gl.enableVertexAttribArray(loc.alpha);
+      gl.vertexAttribPointer(loc.pos, 3, gl.FLOAT, false, stride, 0);
+      gl.vertexAttribPointer(loc.nrm, 3, gl.FLOAT, false, stride, 12);
+      gl.vertexAttribPointer(loc.ink, 3, gl.FLOAT, false, stride, 24);
+      gl.vertexAttribPointer(loc.mat, 3, gl.FLOAT, false, stride, 36);
+      gl.vertexAttribPointer(loc.hot, 1, gl.FLOAT, false, stride, 48);
+      gl.vertexAttribPointer(loc.alpha, 1, gl.FLOAT, false, stride, 52);
+      if (alphaPass) {
+        gl.enable(gl.BLEND);
+        gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+        gl.depthMask(false);
       }
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      return { w: cssW, h: cssH };
+      gl.drawArrays(gl.TRIANGLES, 0, buffer.n / 14);
+      if (alphaPass) {
+        gl.disable(gl.BLEND);
+        gl.depthMask(true);
+      }
     }
 
     function draw() {
       scheduled = false;
       if (!running) return;
-      var size = resize();
+      var rect = sheet.getBoundingClientRect();
+      var cssW = Math.max(1, rect.width);
+      var cssH = Math.max(1, rect.height);
+      var dpr = Math.min(window.devicePixelRatio || 1, cssW < 700 ? 1.5 : 2);
+      var bw = Math.max(1, Math.round(cssW * dpr));
+      var bh = Math.max(1, Math.round(cssH * dpr));
+      if (canvas.width !== bw || canvas.height !== bh) {
+        canvas.width = bw;
+        canvas.height = bh;
+      }
       var p = progress();
       var stage = stageAt(p);
-      ctx.clearRect(0, 0, size.w, size.h);
-      ctx.lineJoin = "round";
-      ctx.lineCap = "round";
-      var ops = sceneOps(size.w, size.h, p, focusId);
-      var i;
-      for (i = 0; i < ops.length; i++) paint(ctx, ops[i]);
+      var cam = cameraFor(p, cssW / cssH);
+      var built = buildGeometry(p, focusId);
+      var view = lookAt(cam.eye, cam.look, cam.up);
+      var proj = perspective(cam.fov, cssW / Math.max(1, cssH), 0.08, 500);
+      var mvp = mul(proj, view);
+      gl.viewport(0, 0, bw, bh);
+      gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+      gl.useProgram(prog);
+      gl.uniformMatrix4fv(loc.mvp, false, mvp);
+      gl.uniform1f(loc.matAmt, built.state.mat);
+      gl.uniform1f(loc.dim, focusId ? 1 : 0);
+      gl.uniform3f(loc.light, -0.35, 0.82, -0.45);
+      gl.uniform3f(loc.paper, PAPER[0], PAPER[1], PAPER[2]);
+      drawBuffer(built.solid, solidGl, false);
+      drawBuffer(built.glass, glassGl, true);
+      var showLabels = cam.steep > 0.72;
+      root.classList.toggle("is-plan", showLabels);
+      var n;
+      for (n = 0; n < labelNodes.length; n++) {
+        var item = labelNodes[n];
+        var pt = showLabels ? projectPoint(mvp, item.x, 0.4, item.z, cssW, cssH) : null;
+        if (!pt || pt[0] < 8 || pt[1] < 8 || pt[0] > cssW - 8 || pt[1] > cssH - 8) {
+          item.node.style.display = "none";
+        } else {
+          item.node.style.display = "block";
+          item.node.style.left = pt[0].toFixed(1) + "px";
+          item.node.style.top = pt[1].toFixed(1) + "px";
+        }
+      }
       if (bar) bar.style.transform = "scaleX(" + p.toFixed(4) + ")";
       root.classList.toggle("is-scrolled", p > 0.04);
       root.classList.toggle("is-late", p > 0.8);
@@ -1105,11 +744,11 @@
       if (stage.id !== current) {
         current = stage.id;
         if (line) line.textContent = stage.line;
-        for (i = 0; i < stageNodes.length; i++) {
-          var on = stageNodes[i].getAttribute("data-stage") === stage.id;
-          stageNodes[i].classList.toggle("is-on", on);
-          if (on) stageNodes[i].setAttribute("aria-current", "step");
-          else stageNodes[i].removeAttribute("aria-current");
+        for (n = 0; n < stageNodes.length; n++) {
+          var on = stageNodes[n].getAttribute("data-stage") === stage.id;
+          stageNodes[n].classList.toggle("is-on", on);
+          if (on) stageNodes[n].setAttribute("aria-current", "step");
+          else stageNodes[n].removeAttribute("aria-current");
         }
         showStageSet(stage.id);
       }
@@ -1134,26 +773,28 @@
     document.addEventListener("visibilitychange", function () {
       if (!document.hidden) requestDraw();
     });
-    if (window.ResizeObserver) {
-      var ro = new ResizeObserver(requestDraw);
-      ro.observe(sheet);
-    }
+    if (window.ResizeObserver) new ResizeObserver(requestDraw).observe(sheet);
     if (window.IntersectionObserver) {
-      var io = new IntersectionObserver(function (entries) {
+      new IntersectionObserver(function (entries) {
         running = entries.some(function (entry) { return entry.isIntersecting; });
         if (running) requestDraw();
-      });
-      io.observe(track);
+      }).observe(track);
     }
     requestDraw();
   }
 
   return {
     mount: mount,
-    sceneOps: sceneOps,
     stageAt: stageAt,
-    values: values,
-    opsToSVG: opsToSVG,
-    STAGES: STAGES
+    sceneState: sceneState,
+    cameraFor: cameraFor,
+    buildGeometry: buildGeometry,
+    projectPoint: projectPoint,
+    lookAt: lookAt,
+    perspective: perspective,
+    mul: mul,
+    STAGES: STAGES,
+    PAPER: PAPER,
+    HL: HL
   };
 });
