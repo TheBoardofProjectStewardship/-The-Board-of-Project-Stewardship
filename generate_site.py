@@ -3521,6 +3521,20 @@ def ppg_widgets_script() -> str:
 
 # ---------- Page builders ----------
 
+def home_scroll_house() -> tuple[str, str]:
+    """Sticky scroll section: a plan extrudes into a Pacific Northwest house.
+
+    Original geometry. A public demo shows a plan as the building from above;
+    this page uses a small canvas instead of a 3D library. casa-serra ships
+    without a license, so none of its code or assets are reused. The tap
+    labels are original plain-language notes for this sketch.
+    """
+    fragment = (SITE_DIR / "sections" / "scroll-house.html").read_text(encoding="utf-8")
+    fragment = fragment.replace("__KICKER__", GEO_KICKER_HTML)
+    css = '  <link rel="stylesheet" href="/assets/css/scroll-house.css">\n'
+    return fragment, css
+
+
 def home_plan_hero() -> tuple[str, str]:
     """Homepage concept tool. The 3D walkthrough stays on its own page."""
     cities = [
@@ -4637,16 +4651,18 @@ def build_about() -> str:
         )
     )
 
+    scroll_html, scroll_css = home_scroll_house()
     plan_html, plan_css = home_plan_hero()
     flash = home_flashlight_hero(supporting=True)
     if flash:
         hero_html, hero_head, hero_js = flash
     else:
         hero_html, hero_head, hero_js = "", "", ""
-    hero_head = plan_css + hero_head
+    hero_head = scroll_css + plan_css + hero_head
     content_open = '  <div class="max-w-6xl mx-auto px-4 pt-10 relative z-20">'
     content_resume = '  <div class="max-w-6xl mx-auto px-4 pt-10 relative z-20 pb-24">'
-    body = f"""{plan_html}
+    body = f"""{scroll_html}
+{plan_html}
 {content_open}
     <section id="why-ppg-number-one" class="bg-charcoal rounded-xl p-8 md:p-10 border border-secondary/35 mb-14 relative overflow-hidden">
       <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-primary"></div>

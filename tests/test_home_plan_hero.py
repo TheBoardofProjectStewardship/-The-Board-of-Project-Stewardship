@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import re
+import subprocess
 import unittest
 from pathlib import Path
 
@@ -105,6 +106,44 @@ class HomePlanHeroTests(unittest.TestCase):
             self.html.find('id="why-ppg-number-one"'),
             self.html.find('id="home-hero"'),
         )
+
+    def test_scroll_house_teaches_and_stays_light(self):
+        """A scroll plan builds a house, with tappable notes and a still fallback."""
+        self.assertLess(self.html.find('id="scroll-house"'), self.html.find('id="plan-home-hero"'))
+        self.assertIn(">Plan</li>", self.html)
+        self.assertIn(">Frame</li>", self.html)
+        self.assertIn(">Build</li>", self.html)
+        self.assertIn(">Your addition</li>", self.html)
+        self.assertIn('href="#plan-home-hero"', self.html)
+        self.assertIn('href="./plan-walkthrough/"', self.html)
+        self.assertIn("See what your home could become", self.html)
+        self.assertIn("/assets/css/scroll-house.css", self.html)
+        self.assertIn('/assets/js/scroll-house.js', self.html)
+        self.assertNotIn('<script src="/assets/js/scroll-house.js"', self.html)
+        self.assertNotIn("three.module.js", self.html)
+        for snippet in (
+            "Foundation.",
+            "Bearing walls.",
+            "Partitions.",
+            "Framing.",
+            "Headers.",
+            "Roof.",
+            "Footings.",
+            "Structure.",
+            "Stairs.",
+            "load-bearing walls",
+            "This sketch does not size them.",
+            "Teaching sketch. Not a structural design.",
+            "prefers-reduced-motion: reduce",
+        ):
+            self.assertIn(snippet, self.html if "prefers-reduced" not in snippet else (ROOT / "assets/css/scroll-house.css").read_text(encoding="utf-8"))
+        self.assertIn("scroll-house-still.svg", (ROOT / "assets/css/scroll-house.css").read_text(encoding="utf-8"))
+        self.assertEqual(self.html.count("<h1"), 1)
+        self.assertEqual(self.html.count('fetchpriority="high"'), 1)
+        visible = visible_copy(self.html)
+        self.assertIsNone(AI.search(self.html))
+        self.assertIsNone(AI.search(visible))
+        subprocess.check_call(["node", "--check", "assets/js/scroll-house.js"], cwd=ROOT)
 
 
 if __name__ == "__main__":

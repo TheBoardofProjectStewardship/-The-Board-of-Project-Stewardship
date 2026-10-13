@@ -1,0 +1,116 @@
+  <section class="scroll-house" id="scroll-house" aria-labelledby="scroll-house-title">
+    <div class="scroll-house-track">
+      <div class="scroll-house-sticky">
+        <div class="sh-top">
+          <p class="sh-kicker">__KICKER__</p>
+          <p class="sh-title" id="scroll-house-title">From the plan up</p>
+          <p class="sh-dek">An illustrative Pacific Northwest house, from a flat plan to a second story.</p>
+        </div>
+        <ol class="sh-stages" aria-label="Build stages">
+          <li class="is-on" data-stage="plan" aria-current="step">Plan</li>
+          <li data-stage="frame">Frame</li>
+          <li data-stage="build">Build</li>
+          <li data-stage="addition">Your addition</li>
+        </ol>
+        <div class="sh-progress" aria-hidden="true"><span></span></div>
+        <div class="scroll-house-live">
+          <p class="sh-hint" aria-hidden="true">Scroll <span class="sh-hint-chevron">↓</span></p>
+          <div class="scroll-house-sheet">
+            <svg class="scroll-house-plan" viewBox="0 0 360 260" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+              <g fill="none" stroke="#1c1916" stroke-linejoin="round" stroke-linecap="butt">
+                <path stroke-width="7" d="M62 196 H122 M168 196 H214 M262 196 H298 M298 196 V168 M298 132 V78 M298 78 H250 M214 78 H62 M62 78 V120 M62 156 V196"/>
+                <path stroke-width="2" d="M122 196 H168 M214 196 H262"/>
+                <path stroke-width="4.5" d="M193 196 V78 M62 133 H298"/>
+                <path stroke-width="1.4" d="M78 168 H118 M168 158 V188"/>
+              </g>
+              <g fill="#1c1916" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" text-anchor="middle">
+                <text x="128" y="168">Living</text>
+                <text x="246" y="168">Kitchen</text>
+                <text x="128" y="112">Bed</text>
+                <text x="228" y="112">Bath</text>
+                <text x="278" y="100">Stair</text>
+              </g>
+            </svg>
+            <canvas class="scroll-house-canvas" width="960" height="540" aria-hidden="true"></canvas>
+          </div>
+          <p class="scroll-house-line" id="scroll-house-line">Flat lines for a one-story house.</p>
+        </div>
+        <figure class="scroll-house-still">
+          <div class="sh-still-img" role="img" aria-label="Illustrative Pacific Northwest house with a second-story addition. Not a bid or stamped plan."></div>
+          <figcaption class="scroll-house-line">Your addition. A finished concept, held still.</figcaption>
+        </figure>
+        <div class="sh-learn">
+          <div class="sh-learn-set" data-stage="plan">
+            <button type="button" class="sh-call" data-callout="foundation" aria-pressed="false" aria-controls="sh-note-foundation">Foundation</button>
+            <button type="button" class="sh-call" data-callout="bearing" aria-pressed="false" aria-controls="sh-note-bearing">Bearing walls</button>
+            <button type="button" class="sh-call" data-callout="partition" aria-pressed="false" aria-controls="sh-note-partition">Partitions</button>
+          </div>
+          <div class="sh-learn-set" data-stage="frame" hidden>
+            <button type="button" class="sh-call" data-callout="framing" aria-pressed="false" aria-controls="sh-note-framing">Framing</button>
+            <button type="button" class="sh-call" data-callout="header" aria-pressed="false" aria-controls="sh-note-header">Headers</button>
+          </div>
+          <div class="sh-learn-set" data-stage="build" hidden>
+            <button type="button" class="sh-call" data-callout="roof" aria-pressed="false" aria-controls="sh-note-roof">Roof</button>
+          </div>
+          <div class="sh-learn-set" data-stage="addition" hidden>
+            <button type="button" class="sh-call" data-callout="footings" aria-pressed="false" aria-controls="sh-note-footings">Footings</button>
+            <button type="button" class="sh-call" data-callout="structure" aria-pressed="false" aria-controls="sh-note-structure">Structure</button>
+            <button type="button" class="sh-call" data-callout="stairs" aria-pressed="false" aria-controls="sh-note-stairs">Stairs</button>
+          </div>
+          <div class="sh-learn-copy">
+            <p class="sh-learn-prompt" id="sh-learn-prompt">Tap a label to learn what that part does.</p>
+            <p class="sh-note" id="sh-note-foundation" data-callout="foundation"><strong>Foundation.</strong> The outer line is the footprint. A foundation under it spreads the house’s weight into the ground and keeps the wood frame off the soil.</p>
+            <p class="sh-note" id="sh-note-bearing" data-callout="bearing"><strong>Bearing walls.</strong> The outside walls carry the floors and the roof down to the foundation. In this sketch they are the load-bearing walls.</p>
+            <p class="sh-note" id="sh-note-partition" data-callout="partition"><strong>Partitions.</strong> The inside walls divide the rooms. This sketch does not use them to hold up the floor. On a real house, check what sits on a wall before anyone takes it out.</p>
+            <p class="sh-note" id="sh-note-framing" data-callout="framing"><strong>Framing.</strong> Studs stand between a bottom plate and a top plate. That skeleton is the frame. Finishes cover it later.</p>
+            <p class="sh-note" id="sh-note-header" data-callout="header"><strong>Headers.</strong> A window or door takes studs out of the wall. A header, a short beam across the opening, carries that load to the studs on both sides.</p>
+            <p class="sh-note" id="sh-note-roof" data-callout="roof"><strong>Roof.</strong> Rafters slope up from the walls and meet at the ridge. The slope sends rain out to the eaves.</p>
+            <p class="sh-note" id="sh-note-footings" data-callout="footings"><strong>Footings.</strong> A second story adds weight. That weight goes down the walls into the footings. Those footings have to suit the new load. This sketch does not size them.</p>
+            <p class="sh-note" id="sh-note-structure" data-callout="structure"><strong>Structure.</strong> The new work is a floor, walls, and a roof lifted above the first story. The new frame has to tie into the frame already there.</p>
+            <p class="sh-note" id="sh-note-stairs" data-callout="stairs"><strong>Stairs.</strong> The stair bay is the way up to the new floor. A stair needs a clear path, headroom, and a rail. The exact stair is worked out for the house.</p>
+          </div>
+          <p class="sh-learn-aside">Teaching sketch. Not a structural design.</p>
+        </div>
+        <div class="scroll-house-cta">
+          <div class="sh-cta-row">
+            <a class="sh-btn" href="#plan-home-hero">See what your home could become</a>
+            <a class="sh-link" href="./plan-walkthrough/">Plan walkthrough</a>
+          </div>
+          <p class="sh-fine">Illustrative concept. Not a bid or stamped plan.</p>
+        </div>
+      </div>
+    </div>
+    <noscript>
+      <style>
+        .scroll-house-track { height: auto !important; }
+        .scroll-house-sticky { position: relative !important; top: auto !important; height: auto !important; }
+        .scroll-house-live, .sh-progress, .sh-hint, .sh-learn-set, .sh-learn-prompt { display: none !important; }
+        .scroll-house-still, .sh-note { display: block !important; }
+      </style>
+    </noscript>
+    <script>
+    (function () {
+      var root = document.getElementById("scroll-house");
+      if (!root) return;
+      var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduce) {
+        root.classList.add("is-still");
+        return;
+      }
+      function load() {
+        if (root.getAttribute("data-js") === "1") return;
+        root.setAttribute("data-js", "1");
+        var s = document.createElement("script");
+        s.src = "/assets/js/scroll-house.js";
+        document.body.appendChild(s);
+      }
+      if (!("IntersectionObserver" in window)) { load(); return; }
+      var io = new IntersectionObserver(function (entries) {
+        for (var i = 0; i < entries.length; i++) {
+          if (entries[i].isIntersecting) { load(); io.disconnect(); break; }
+        }
+      }, { rootMargin: "160px" });
+      io.observe(root);
+    })();
+    </script>
+  </section>
