@@ -464,31 +464,33 @@
           <p class="sh-dek">This house, from the main-floor plan to the finished massing.</p>
         </div>
         <ol class="sh-stages" aria-label="Build stages">
-          <li class="is-on" data-stage="plan" aria-current="step">Plan</li>
-          <li data-stage="walls">Walls</li>
-          <li data-stage="upper">Upper</li>
-          <li data-stage="shell">Shell</li>
-          <li data-stage="massing">Massing</li>
+          <li class="is-on" tabindex="0" data-stage="plan" data-sh-progress="0.04" aria-current="step">Plan</li>
+          <li tabindex="0" data-stage="walls" data-sh-progress="0.26">Walls</li>
+          <li tabindex="0" data-stage="upper" data-sh-progress="0.50">Upper</li>
+          <li tabindex="0" data-stage="shell" data-sh-progress="0.74">Shell</li>
+          <li tabindex="0" data-stage="massing" data-sh-progress="0.94">Massing</li>
         </ol>
         <div class="sh-progress" aria-hidden="true"><span></span></div>
+        <label class="sh-scrub-label">Build progress
+          <input class="sh-scrub" type="range" min="0" max="1000" step="1" value="0" aria-valuetext="Plan, 0 percent">
+        </label>
         <div class="scroll-house-live">
           <p class="sh-hint" aria-hidden="true">Scroll <span class="sh-hint-chevron">↓</span></p>
           <div class="scroll-house-sheet">
-            <svg class="scroll-house-plan" viewBox="0 0 400 250" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <svg class="scroll-house-plan" viewBox="0 0 400 230" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
               <g fill="none" stroke="#1c1916" stroke-linejoin="round" stroke-linecap="butt">
-                <rect x="18" y="46" width="86" height="78" stroke-width="4"/>
-                <rect x="128" y="36" width="246" height="156" stroke-width="5"/>
-                <path stroke-width="2" d="M104 78 H128 M104 118 H128"/>
-                <path stroke-width="2" d="M214 36 V192 M262 36 V192 M128 118 H374 M262 78 H374"/>
+                <rect x="16" y="36" width="78" height="150" stroke-width="4"/>
+                <path stroke-width="4" d="M118 28 H150 V70 H250 V28 H330 V168 H250 V188 H118 V150 H250"/>
+                <path stroke-width="2" d="M150 78 H286 M168 92 H250 M118 150 H250"/>
+                <path stroke-width="1.5" d="M118 188 H250 V208 H150 V188"/>
               </g>
-              <g fill="#1c1916" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" text-anchor="middle">
-                <text x="61" y="90">Garage</text>
-                <text x="170" y="78">Mech</text>
-                <text x="236" y="78">Kitchen</text>
-                <text x="236" y="156">Dining</text>
-                <text x="318" y="150">Living</text>
-                <text x="330" y="64">Entry</text>
-                <text x="318" y="186">Office</text>
+              <g fill="#1c1916" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" text-anchor="middle">
+                <text x="55" y="116">Garage</text>
+                <text x="200" y="108">Stair</text>
+                <text x="210" y="64">Kitchen</text>
+                <text x="292" y="100">Living</text>
+                <text x="184" y="172">Patio</text>
+                <text x="290" y="156">Office</text>
               </g>
             </svg>
             <canvas class="scroll-house-canvas" width="960" height="540" aria-hidden="true"></canvas>
@@ -529,12 +531,12 @@
             <p class="sh-note" id="sh-note-partition" data-callout="partition"><strong>Partitions.</strong> The inside walls divide the kitchen, living room, bedrooms, and the other rooms. This sketch does not use them to hold up the floor. On a real house, check what sits on a wall before anyone takes it out.</p>
             <p class="sh-note" id="sh-note-framing" data-callout="framing"><strong>Framing.</strong> Studs stand between a bottom plate and a top plate. That skeleton is the frame. Lap siding and the board-and-batten gable cover it later.</p>
             <p class="sh-note" id="sh-note-header" data-callout="header"><strong>Headers.</strong> The garage door and the windows take studs out of the wall. A header, a short beam across each opening, carries that load to the studs on both sides. This sketch does not size them.</p>
-            <p class="sh-note" id="sh-note-roof" data-callout="roof"><strong>Roof.</strong> The main roof is a gable, with a dormer on the slope. The garage has its own gable. The slope sends rain out to the eaves.</p>
-            <p class="sh-note" id="sh-note-porch" data-callout="porch"><strong>Porch.</strong> The porch is the covered landing at the front, with a rail. The balcony sits above it.</p>
-            <p class="sh-note" id="sh-note-balcony" data-callout="balcony"><strong>Balcony.</strong> The balcony is the open floor over the roof below. It needs a rail.</p>
+            <p class="sh-note" id="sh-note-roof" data-callout="roof"><strong>Roof.</strong> The east face is a board-and-batten gable. A hip roof and a dormer cover the west wing, and the garage roof sits lower. The slopes send rain out to the eaves.</p>
+            <p class="sh-note" id="sh-note-porch" data-callout="porch"><strong>Porch.</strong> The porch is the covered landing by the court, with a rail. The patio under the upper floor stays open.</p>
+            <p class="sh-note" id="sh-note-balcony" data-callout="balcony"><strong>Balcony.</strong> The balcony is the open floor on the west side, beside the garage. It needs a rail.</p>
             <p class="sh-note" id="sh-note-footings" data-callout="footings"><strong>Footings.</strong> The upper floor and the garage send weight down the walls into the footings. Those footings have to suit that load. This sketch does not size them.</p>
             <p class="sh-note" id="sh-note-structure" data-callout="structure"><strong>Structure.</strong> The upper floor stacks on the main-floor walls: a floor, walls, and the roof above. It has to tie into the frame already there.</p>
-            <p class="sh-note" id="sh-note-stairs" data-callout="stairs"><strong>Stairs.</strong> The stair drawn on both floors is the way between them. A stair needs a clear path, headroom, and a rail. The exact stair is worked out for the house.</p>
+            <p class="sh-note" id="sh-note-stairs" data-callout="stairs"><strong>Stairs.</strong> The stair drawn on both floors runs across the plan and ends at the upper floor. A stair needs a clear path, headroom, and a rail. The exact stair is worked out for the house.</p>
           </div>
           <p class="sh-learn-aside">Teaching sketch. Not a structural design.</p>
         </div>
@@ -559,11 +561,7 @@
     (function () {
       var root = document.getElementById("scroll-house");
       if (!root) return;
-      var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (reduce) {
-        root.classList.add("is-still");
-        return;
-      }
+      var mq = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
       function load() {
         if (root.getAttribute("data-js") === "1") return;
         root.setAttribute("data-js", "1");
@@ -571,13 +569,23 @@
         s.src = "/assets/js/scroll-house.js";
         document.body.appendChild(s);
       }
-      if (!("IntersectionObserver" in window)) { load(); return; }
-      var io = new IntersectionObserver(function (entries) {
-        for (var i = 0; i < entries.length; i++) {
-          if (entries[i].isIntersecting) { load(); io.disconnect(); break; }
+      function sync() {
+        if (mq && mq.matches) {
+          root.classList.add("is-still");
+          return;
         }
-      }, { rootMargin: "160px" });
-      io.observe(root);
+        root.classList.remove("is-still");
+        if (!("IntersectionObserver" in window)) { load(); return; }
+        if (root.getAttribute("data-js") === "1") return;
+        var io = new IntersectionObserver(function (entries) {
+          for (var i = 0; i < entries.length; i++) {
+            if (entries[i].isIntersecting) { load(); io.disconnect(); break; }
+          }
+        }, { rootMargin: "160px" });
+        io.observe(root);
+      }
+      if (mq && mq.addEventListener) mq.addEventListener("change", sync);
+      sync();
     })();
     </script>
   </section>
