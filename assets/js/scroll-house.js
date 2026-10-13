@@ -1,0 +1,1101 @@
+/* Original line-drawing house for this page.
+   The mesh is built once from the supplied plan sheets. The upper sheet's
+   overall width is 45 feet, so the main envelope runs 45 feet. Scroll changes
+   the cut height and an orthographic camera; it does not rebuild the mesh
+   or flip the view. casa-serra ships without a license, so none of its code
+   or assets are used. The cut follows that project's public starter prompt.
+*/
+(function (factory) {
+  var api = factory();
+  if (typeof module === "object" && module.exports) module.exports = api;
+  if (typeof document !== "undefined") {
+    var start = function () { api.mount(); };
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
+    else start();
+  }
+})(function () {
+/** Original illustrative model reconstructed from the supplied raster references.
+ * Units are approximate feet, not surveyed dimensions or structural member sizes.
+ * X goes left to right on the plan; Z goes from sheet top to sheet bottom; Y is up.
+ * All coordinates are built once. The renderer changes cut heights, never topology.
+ */
+const WALL = [0.965,0.962,0.95], FLOOR = [0.95,0.948,0.938];
+const ROOF = [0.92,0.921,0.916], GLASS = [0.79,0.825,0.825];
+const INK = [0.29,0.31,0.31], DETAIL = [0.60,0.62,0.61];
+const FURN = [0.92,0.925,0.914], PLANT = [0.82,0.85,0.76];
+function buildModel() {
+  const groups = [], labels = [];
+  const group = id => { const g = {id,solid:[],lines:[]}; groups.push(g); return g; };
+  const site=group('site'), lower=group('lower'), slab=group('upperfloor');
+  const upper=group('upper'), roofs=group('roof'), garageRoof=group('garageRoof');
+  const porchRoof=group('porchRoof'), finish=group('finish');
+  const sub=(a,b)=>a.map((v,i)=>v-b[i]);
+  const cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+  function tri(g,a,b,c,color=WALL,role=0,baseY=Math.min(a[1],b[1],c[1])) {
+    const n=cross(sub(b,a),sub(c,a)); const d=Math.hypot(...n)||1;
+    for (const p of [a,b,c]) g.solid.push(...p,...n.map(v=>v/d),...color,role,baseY);
+  }
+  function line(g,a,b,color=INK,role=0,baseY=Math.min(a[1],b[1])) {g.lines.push(...a,...color,role,baseY,...b,...color,role,baseY);}
+  function face(g,pts,color=WALL,role=0,edge=true,baseY=Math.min(...pts.map(p=>p[1]))) {
+    for(let i=1;i<pts.length-1;i++) tri(g,pts[0],pts[i],pts[i+1],color,role,baseY);
+    if(edge) for(let i=0;i<pts.length;i++) line(g,pts[i],pts[(i+1)%pts.length],INK,role,baseY);
+  }
+  function box(g,x0,y0,z0,x1,y1,z1,color=WALL,role=0,edge=true) {
+    if(x1<=x0||y1<=y0||z1<=z0) return;
+    const p=[[x0,y0,z0],[x1,y0,z0],[x1,y0,z1],[x0,y0,z1],
+             [x0,y1,z0],[x1,y1,z0],[x1,y1,z1],[x0,y1,z1]];
+    for(const idx of [[4,7,6,5],[0,1,2,3],[0,4,5,1],[3,2,6,7],[0,3,7,4],[1,5,6,2]]) face(g,idx.map(i=>p[i]),color,role,false,y0);
+    if(edge) for(const [a,b] of [[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]]) line(g,p[a],p[b],INK,role,y0);
+  }
+  // Openings [start,end,sill,head,kind]. Every opening is cut from the wall;
+  // siding strokes are interrupted at those same intervals.
+  function wall(g,axis,fixed,a,b,y0,y1,holes=[],exterior=false,sign=1,t=.5,bodyRole=0) {
+    const body = exterior ? 5 : bodyRole;
+    const sorted=[...holes].sort((a,b)=>a[0]-b[0]);
+    function segment(u,v,bot,top,role=body) {
+      if(axis==='x')box(g,u,bot,fixed-t/2,v,top,fixed+t/2,WALL,role);
+      else box(g,fixed-t/2,bot,u,fixed+t/2,top,v,WALL,role);
+    }
+    let cursor=a;
+    for(const h of sorted) {
+      const lo=Math.max(a,h[0]),hi=Math.min(b,h[1]); if(hi<=lo) continue;
+      segment(cursor,lo,y0,y1); segment(lo,hi,y0,Math.min(y1,h[2]));
+      segment(lo,hi,Math.max(y0,h[3]),Math.min(y1,h[3]+.6),exterior?2:body);
+      segment(lo,hi,Math.max(y0,h[3]+.6),y1);cursor=hi;
+      if(exterior) {
+        const f=fixed+sign*(t/2+.04),s=lo+.1,e=hi-.1,bot=h[2]+.08,top=h[3]-.08;
+        function rect(u,v,l,h,col) {
+          if(axis==='x')box(finish,u,l,f-.05,v,h,f+.05,col,0,false);
+          else box(finish,f-.05,l,u,f+.05,h,v,col,0,false);
+        }
+        rect(s,e,bot,top,h[4]==='door'?[.88,.89,.87]:GLASS);
+        if(h[4]!=='garage') {
+          rect(lo-.08,lo+.08,bot-.14,top+.14,WALL);rect(hi-.08,hi+.08,bot-.14,top+.14,WALL);
+          rect(lo,hi,bot-.14,bot+.02,WALL);rect(lo,hi,top-.02,top+.14,WALL);
+          if(h[4]!=='door')rect(lo,hi,(bot+top)/2-.05,(bot+top)/2+.05,WALL);
+          if(hi-lo>5) rect((lo+hi)/2-.05,(lo+hi)/2+.05,bot,top,WALL);
+        } else {
+          for(let yy=1;yy<h[3];yy+=1.25) {
+            const p=axis==='x'?[[lo,yy,f+.06],[hi,yy,f+.06]]:[[f+.06,yy,lo],[f+.06,yy,hi]];
+            line(finish,...p,DETAIL);
+          }
+          for(let xx=lo+.5;xx<hi-1;xx+=2.5)rect(xx,Math.min(xx+2,hi-.3),h[3]-1.35,h[3]-.5,GLASS);
+        }
+      }
+    }
+    segment(cursor,b,y0,y1);
+    if(exterior) {
+      for(let y=y0+.55;y<y1-.1;y+=.55) {
+        let start=a;
+        for(const h of sorted) {
+          if(y<h[2]-.16||y>h[3]+.16)continue;
+          stroke(start,Math.max(start,h[0]-.13),y);start=Math.max(start,h[1]+.13);
+        }
+        stroke(start,b,y);
+      }
+    }
+    function stroke(u,v,y) {
+      // The east upper front uses vertical battens instead of lap courses.
+      if(axis==='x' && fixed===32 && y0>10) v=Math.min(v,57.3);
+      if(v<=u)return;const f=fixed+sign*(t/2+.015);
+      line(finish,axis==='x'?[u,y,f]:[f,y,u],axis==='x'?[v,y,f]:[f,y,v],DETAIL);
+    }
+  }
+  const windowAt=(at,w,y=0)=>[at-w/2,at+w/2,y+2.7,y+7.2,'window'];
+  const doorAt=(at,w=3,y=0)=>[at-w/2,at+w/2,y,y+7.3,'door'];
+  function partition(g,axis,f,a,b,y,holes=[]) {wall(g,axis,f,a,b,y,y+10,holes,false,1,.3,6);}
+  function outline(g,points,y,color=DETAIL) {for(let i=0;i<points.length;i++) line(g,[points[i][0],y,points[i][1]],[points[(i+1)%points.length][0],y,points[(i+1)%points.length][1]],color);}
+  function planLabel(text,x,z,minor=false,floor='main',y=.25) {labels.push({text,position:[x,y,z],minor,floor});}
+  // Ground slabs follow the two buildings, the open court, and the recessed patio.
+  box(site,0,-.28,5,22,0,27,FLOOR,7);
+  box(site,31,-.3,0,37,0,24,FLOOR,7);
+  box(site,37,-.3,7,58,0,24,FLOOR,7);
+  box(site,58,-.3,0,73,0,11,FLOOR,7);
+  box(site,58,-.3,11,76,0,32,FLOOR,7);
+  box(site,57,-.3,24,58,0,32,FLOOR,7);
+  box(site,31,-.23,24,57,0,33,FLOOR,3);
+  box(site,37,-.2,0,58,0,7,[.91,.926,.885],3);
+  box(site,73,-.22,0,76,0,11,FLOOR,7);
+  box(site,22,-.26,5,31,-.05,27,[.88,.9,.84]);
+  // Narrow planted strip and two path ribbons. No private plan image is embedded.
+  box(site,24,-.04,5.5,25.5,.16,26.4,PLANT);
+  box(site,27,-.03,5.5,28.25,.06,26.4,FLOOR);
+  box(site,29,-.03,11,30,.06,24,FLOOR);
+  // Main lower envelope. Open patio and rear court remain outside this polygon.
+  wall(lower,'x',0,31,37,0,10,[windowAt(34,2.5)],true,-1);
+  wall(lower,'z',31,0,24,0,10,[windowAt(5,2),doorAt(17,3)],true,-1);
+  wall(lower,'z',37,0,7,0,10,[],true,1);
+  wall(lower,'x',7,37,58,0,10,[windowAt(41,2),windowAt(45,2),windowAt(49,2),windowAt(53,2)],true,-1);
+  wall(lower,'z',58,0,7,0,10,[],true,-1);
+  wall(lower,'x',0,58,73,0,10,[windowAt(61,2),windowAt(68,3)],true,-1);
+  wall(lower,'z',73,0,11,0,10,[doorAt(9)],true,1);
+  wall(lower,'x',11,73,76,0,10,[],true,-1);
+  wall(lower,'z',76,11,32,0,10,[windowAt(17,7),windowAt(28,3)],true,1);
+  wall(lower,'x',32,57,76,0,10,[windowAt(61,2.5),windowAt(70,6.5)],true,1);
+  wall(lower,'z',57,24,32,0,10,[doorAt(26)],true,-1);
+  wall(lower,'x',24,31,57,0,10,[windowAt(34,2.5),[39,48,0,8,'door'],windowAt(53,3)],true,1);
+  // Utility, pantry, stair enclosure, powder, mudroom and front office.
+  partition(lower,'z',37,7,14.5,0,[doorAt(13)]);
+  partition(lower,'x',14.5,31,37,0,[doorAt(34)]);
+  partition(lower,'x',19,31,37,0,[doorAt(34)]);
+  partition(lower,'z',37,19,24,0,[doorAt(21.5)]);
+  partition(lower,'x',11.3,37,54.5,0); // long stair south edge, opens at right
+  partition(lower,'z',58,7,11.5,0);
+  partition(lower,'z',64,0,11,0,[doorAt(8.5,2.5)]);
+  partition(lower,'x',6.3,64,73,0,[doorAt(67)]);
+  partition(lower,'x',11,58,64,0,[doorAt(61)]);
+  partition(lower,'x',24,57,76,0,[doorAt(61)]);
+  partition(lower,'z',62,28,32,0);
+  partition(lower,'x',28,57,62,0,[doorAt(59.5,2.4)]);
+  // Garage door faces the patio side, as in the axonometric reference.
+  wall(lower,'x',27,0,22,0,10,[[2,20,0,8,'garage']],true,1,.6);
+  wall(lower,'x',5,0,22,0,10,[],true,-1,.6);
+  wall(lower,'z',0,5,27,0,10,[windowAt(12,3),windowAt(21,3)],true,-1,.6);
+  wall(lower,'z',22,5,27,0,10,[doorAt(10,3)],true,1,.6);
+  // Fixed rise to the upper FLOOR (10.5), not to its wall or roof height.
+  // Thin tread prisms make a readable flight; they are a diagram, not stair detailing.
+  for(let i=0;i<17;i++) {
+    const x=39+i*.94,yt=(i+1)*.53;
+    box(lower,x,Math.max(.05,yt-.16),7.6,x+.94,yt,10.7,FLOOR,1);
+  }
+  // Plan-only tread marks lie on the lower slab, under the rising stair.
+  for(let i=0;i<=17;i++)line(site,[39+i*.94,.07,7.6],[39+i*.94,.07,10.7],DETAIL,1);
+  line(site,[39,.07,9.1],[56,.07,9.1],DETAIL,1);
+  box(lower,55,8.86,7.6,57.4,9.05,10.7,FLOOR,1);
+  for(let i=0;i<3;i++)box(lower,54.5,9.05+i*.48,10.7+i*.86,57.4,9.23+(i+1)*.42,11.56+i*.86,FLOOR,1);
+  box(lower,54.2,10.32,13.28,58,10.5,15.05,FLOOR,1);
+  // Kitchen perimeter, island, dining and living furnishings stay pale in plan.
+  box(lower,37.4,.05,22.1,55.5,3,23.5,FURN);
+  box(lower,37.4,.05,16.5,38.8,3,22.1,FURN);
+  box(lower,41,0,17.3,47.8,3,20.8,FURN);
+  outline(lower,[[42,18],[44.3,18],[44.3,20],[42,20]],3.03);
+  box(lower,51.1,.05,16,56.4,2.7,19.5,FURN);
+  for(const x of [51.5,54.2])for(const z of [15,19.8])box(lower,x,.1,z,x+1.2,1.5,z+1.2,FURN);
+  box(lower,67,.05,13,73,1.6,15.4,FURN);
+  box(lower,65.4,.05,15.3,67.4,1.6,21.7,FURN);
+  box(lower,68.2,.05,16.8,71.8,1.15,19.8,FURN);
+  box(lower,73.8,.05,20,75.5,4,23,FURN);
+  box(lower,67,.05,24.5,74.8,2.4,26,FURN);
+  box(lower,58.3,.05,1,60.3,2.4,2.6,FURN);
+  box(lower,70,.05,1,72.5,2.5,5.5,FURN);
+  // Cars are outlines, not black blocks; they remain legible beneath room labels.
+  for(const x of [2.4,12]) {
+    outline(site,[[x,9],[x+1,8],[x+5.3,8],[x+6.3,9],[x+6.3,22],[x+5.3,23],[x+1,23],[x,22]],.04);
+    outline(site,[[x+.6,12],[x+5.7,12],[x+5.5,19],[x+.8,19]],.05);
+  }
+  // Deck balusters and complete returns. Spacing is visual, not a code assertion.
+  function rail(g,axis,f,a,b,y,role) {
+    const at=(u,h)=>axis==='x'?[u,h,f]:[f,h,u];
+    const prism=(u,v,y0,y1,w=.075)=>axis==='x'?box(g,u,y0,f-w,v,y1,f+w,WALL,role):box(g,f-w,y0,u,f+w,y1,v,WALL,role);
+    prism(a,b,y+2.95,y+3.08,.11);prism(a,b,y+.16,y+.25,.07);
+    for(let x=a;x<=b+.001;x+=.48)line(g,at(x,y+.22),at(x,y+2.98),INK,role);
+    for(let x=a;x<=b+.001;x+=4)prism(x,Math.min(x+.13,b+.13),y,y+3.08,.095);
+  }
+  rail(lower,'x',32.8,35.5,56.6,.05,3);
+  rail(lower,'z',31.3,25,32.8,.05,3);
+  rail(lower,'z',56.6,25,32.8,.05,3);
+  box(lower,31.3,.05,31.8,31.65,10,32.15,WALL,3);
+  box(lower,56.5,.05,31.8,56.85,10,32.15,WALL,3);
+  box(lower,32,0,28,38,1.6,30,FURN,3);
+  box(lower,43,0,28,48,1.6,30,FURN,3);
+  // Upper slab has BOTH outdoor recesses and a real stair opening.
+  box(slab,31,10,15,76,10.5,32,FLOOR);
+  box(slab,58,10,0,76,10.5,15,FLOOR);
+  box(slab,37,10,6.5,58,10.5,7.4,FLOOR);
+  box(slab,37,10,7.4,38.8,10.5,15,FLOOR);
+  box(slab,38.8,10,11.5,54.2,10.5,15,FLOOR);
+  // side balcony x31..37, beside garage rather than along full front wall
+  box(slab,31,10.08,0,37,10.5,15,FLOOR,4);
+  // Upper exterior is stepped in plan: balcony, stair recess, bedroom wing.
+  wall(upper,'x',32,31,76,10.5,20.5,[windowAt(35,2,10.5),windowAt(44,3.4,10.5),windowAt(52,2,10.5),windowAt(67,3.4,10.5)],true,1);
+  wall(upper,'z',31,15,32,10.5,20.5,[windowAt(26,2,10.5)],true,-1);
+  wall(upper,'x',15,31,37,10.5,20.5,[],true,-1);
+  wall(upper,'z',37,6.5,15,10.5,20.5,[doorAt(13,3,10.5)],true,-1);
+  wall(upper,'x',6.5,37,58,10.5,20.5,[windowAt(41,1.4,10.5),windowAt(45,1.4,10.5),windowAt(49,1.4,10.5),windowAt(53,1.4,10.5)],true,-1);
+  wall(upper,'z',58,0,6.5,10.5,20.5,[],true,-1);
+  wall(upper,'x',0,58,76,10.5,20.5,[windowAt(65,3,10.5)],true,-1);
+  wall(upper,'z',76,0,32,10.5,20.5,[windowAt(6,3,10.5),windowAt(16,2,10.5),windowAt(26,3,10.5)],true,1);
+  // Primary suite, two right-side bedrooms, two hall baths, laundry and circulation.
+  partition(upper,'z',37,15,32,10.5,[doorAt(17.5,2.5,10.5),doorAt(23,2.5,10.5)]);
+  partition(upper,'x',21,31,37,10.5);
+  partition(upper,'x',15,37,52,10.5,[doorAt(50,3,10.5)]);
+  partition(upper,'z',52,15,32,10.5,[doorAt(18,3,10.5)]);
+  partition(upper,'z',58,22,32,10.5,[doorAt(23.7,3,10.5)]);
+  partition(upper,'x',22,52,58,10.5,[doorAt(55,3,10.5)]);
+  partition(upper,'x',11,58,76,10.5,[doorAt(61,3,10.5)]);
+  partition(upper,'z',64,11,22,10.5,[doorAt(13,2.5,10.5),doorAt(20,2.5,10.5)]);
+  partition(upper,'x',16.5,64,76,10.5);
+  partition(upper,'x',22,58,76,10.5,[doorAt(61,3,10.5)]);
+  // Guard beside the actual upper stair opening, no slab through the flight.
+  rail(upper,'x',11.4,39,53.8,10.5,1);
+  rail(upper,'x',.3,31.3,36.8,10.5,4);
+  rail(upper,'z',31.3,.3,14.7,10.5,4);
+  rail(upper,'x',14.7,31.3,36.8,10.5,4);
+  function bed(x,z,w=5,d=6) {
+    box(upper,x,10.55,z,x+w,12.1,z+d,FURN);
+    for(let i=0;i<2;i++)box(upper,x+.22+i*w/2,12.1,z+.25,x+w/2-.22+i*w/2,12.28,z+1.6,WALL);
+  }
+  bed(41,24,6.1,6.5);bed(67,2,5.8,6.7);bed(67,24,5.8,6.7);
+  for(const z of [12,17.5]) {
+    box(upper,73,10.55,z,75.5,12.1,z+3.4,FURN);
+    outline(upper,[[73.3,z+.3],[75.2,z+.3],[75.2,z+3.1],[73.3,z+3.1]],12.12);
+    box(upper,65,10.55,z,67.5,13,z+1.6,FURN);
+  }
+  box(upper,31.6,10.55,28.5,36.2,12.1,31.4,FURN);
+  box(upper,32,10.55,23,33.6,13,25.5,FURN);
+  box(upper,32,10.55,15.8,36.2,16.5,17,FURN);
+  for(const z of [25,28])box(upper,52.5,10.55,z,55.2,13,z+2.6,FURN);
+  // Roof primitives. Eastern bedroom gable runs north/south; west cross roof
+  // ends in a hip beside the balcony. Shared depth testing resolves their valleys.
+  function roofX(g,x0,x1,z0,z1,eave,ridge,hip=0,role=0) {
+    const m=(z0+z1)/2,r0=x0+hip;
+    face(g,[[x0,eave,z0],[x1,eave,z0],[x1,ridge,m],[r0,ridge,m]],ROOF,role);
+    face(g,[[x0,eave,z1],[r0,ridge,m],[x1,ridge,m],[x1,eave,z1]],ROOF,role);
+    if(hip)face(g,[[x0,eave,z0],[r0,ridge,m],[x0,eave,z1]],ROOF,role);
+    else face(g,[[x0,eave,z0],[x0,eave,z1],[x0,ridge,m]],WALL,role);
+    face(g,[[x1,eave,z0],[x1,ridge,m],[x1,eave,z1]],WALL,role);
+    const half=(z1-z0)/2;
+    for(let z=z0+.9;z<z1-.5;z+=1.2) {
+      const frac=1-Math.abs(z-m)/half,y=eave+(ridge-eave)*frac;
+      line(g,[x0+hip*frac,y+.015,z],[x1,y+.015,z],[.75,.77,.76],role);
+    }
+  }
+  function roofZ(g,x0,x1,z0,z1,eave,ridge) {
+    const m=(x0+x1)/2;
+    face(g,[[x0,eave,z0],[m,ridge,z0],[m,ridge,z1],[x0,eave,z1]],ROOF);
+    face(g,[[m,ridge,z0],[x1,eave,z0],[x1,eave,z1],[m,ridge,z1]],ROOF);
+    face(g,[[x0,eave,z0],[x1,eave,z0],[m,ridge,z0]],WALL);
+    const frontGableZ=g===roofs && x1===77 ? 32.27 : z1;
+    face(g,[[x0,eave,frontGableZ],[m,ridge,frontGableZ],[x1,eave,frontGableZ]],WALL,0,!(g===roofs && x1===77));
+    for(let x=x0+.9;x<x1-.5;x+=1.2) {
+      const y=eave+(ridge-eave)*(1-Math.abs(x-m)/((x1-x0)/2));
+      line(g,[x,y+.015,z0],[x,y+.015,z1],[.75,.77,.76]);
+    }
+  }
+  roofX(garageRoof,-.8,22.8,4.2,27.8,10.05,15,0);
+  roofX(roofs,30,66,14,33,20.5,27.8,8.8);
+  roofZ(roofs,57,77,-.8,33,20.5,29.3);
+  // Subordinate rear roof above long stair; preserves the open outside court.
+  roofX(roofs,36.4,65,5.8,15.5,20.5,24.4,4.5);
+  roofX(porchRoof,36.5,58.2,-.5,6.6,10.05,11.1,0,3);
+  // Roof over breezeway: sloped shallow connector, below the side balcony.
+  face(porchRoof,[[22.5,9.5,5],[30.6,9.5,5],[30.6,10,25.7],[22.5,10,25.7]],ROOF);
+  // Dormer cut into the FRONT west slope, with cheeks meeting its pitch.
+  face(roofs,[[43,22.3,30.9],[49.5,22.3,30.9],[49.5,25.2,30.9],[43,25.2,30.9]],WALL);
+  face(roofs,[[43,22.3,30.9],[43,25.2,30.9],[43,26.1,25.8]],WALL);
+  face(roofs,[[49.5,22.3,30.9],[49.5,26.1,25.8],[49.5,25.2,30.9]],WALL);
+  roofZ(roofs,42.5,50,25.8,31.4,25.2,27.1);
+  box(roofs,43.8,23.25,30.92,48.7,24.75,31.02,GLASS,0);
+  line(roofs,[43.8,24,31.03],[48.7,24,31.03],INK);
+  // Board-and-batten on upper east gable; mask the upper bedroom window.
+  for(let x=57.4;x<76;x+=1.15) {
+    const top=20.5+(29.3-20.5)*(1-Math.abs(x-67)/10);
+    if(x>65.15&&x<68.85) {
+      line(finish,[x,10.5,32.5],[x,13.05,32.5],DETAIL);
+      line(finish,[x,17.87,32.5],[x,top,32.5],DETAIL);
+    } else line(finish,[x,10.5,32.5],[x,top,32.5],DETAIL);
+  }
+  // Upper-sheet overall width is 45 ft. Garage width is 22 ft. No other
+  // dimension is printed; small figures on the sheets are too blurred to certify.
+  planLabel('45 ft',53.5,0.55);
+  planLabel('22 ft',11,4.15);
+  for(const r of [
+    ['Garage',11,15],['Utility',34,8],['Pantry',34,21.5,true],
+    ['Stair',46.5,9.4],['Kitchen',44,14.7],['Dining',53.5,21.5],
+    ['Living',70.5,19.5],['Powder',61,5,true],['Mudroom',68.4,3.8,true],
+    ['Foyer',68.3,9],['Office',69,29],['Storage',59.5,30.4,true],
+    ['Patio',44,26],['Court',47,3.1,true]
+  ])planLabel(...r);
+  for(const r of [
+    ['Primary',44,20],['Closet',34,18.8,true],['Bath',34.5,26,true],
+    ['Bedroom 1',68,8.8],['Bedroom 2',67,23.4],['Bath',69,13.8,true],
+    ['Bath',69,19.4,true],['Laundry',55,24,true],['Balcony',34,8],['Stair',46,9]
+  ])planLabel(r[0],r[1],r[2],!!r[3],'upper',10.65);
+  return {groups:groups.map(g=>({id:g.id,solid:new Float32Array(g.solid),lines:new Float32Array(g.lines)})),labels,
+    bounds:{min:[-1,-.5,-1.2],max:[77.4,29.5,34]},
+    notes:'Illustrative raster reconstruction. Main and upper reference dimensions differ; no measurement certification.'};
+}
+
+const DEFAULT_BOUNDS = { min: [-1, -0.5, -1.2], max: [77.2, 29.5, 34.5] };
+const PAPER = [0.9686, 0.9647, 0.9451];
+const MAX_PIXELS = 1600000;
+const clamp = (n, lo = 0, hi = 1) => Math.min(hi, Math.max(lo, n));
+const mix = (a, b, t) => a + (b - a) * t;
+const smooth = (a, b, p) => { const t = clamp((p - a) / (b - a)); return t * t * (3 - 2 * t); };
+const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+
+function stageAt(progress) {
+  const p = clamp(progress);
+  return p < 0.16 ? 0 : p < 0.38 ? 1 : p < 0.63 ? 2 : p < 0.86 ? 3 : 4;
+}
+
+/** Pure scene state. Reversing the scroll retraces precisely the same build. */
+function groupState(id, progress) {
+  const p = clamp(progress);
+  const state = (visible, cut = 100, opacity = 1) => ({ visible, cut, opacity });
+  switch (id) {
+    case 'site': return state(true);
+    case 'lower': return state(true, mix(0.16, 10.5, smooth(0.14, 0.38, p)));
+    case 'upperfloor': return state(p >= 0.39, mix(9.8, 10.5, smooth(0.39, 0.44, p)));
+    case 'upper': return state(p >= 0.44, mix(10.5, 20.5, smooth(0.44, 0.62, p)));
+    case 'garageRoof': return state(p >= 0.63, mix(10, 16, smooth(0.63, 0.76, p)));
+    case 'porchRoof': return state(p >= 0.66, mix(10, 13, smooth(0.66, 0.79, p)));
+    case 'roof': return state(p >= 0.65, mix(20.5, 30, smooth(0.65, 0.84, p)));
+    case 'finish': return state(p > 0.73, mix(20.5, 30, smooth(0.65, 0.84, p)), smooth(0.73, 0.87, p));
+    default: return state(true);
+  }
+}
+
+function visibleHeight(p, bounds) {
+  if (p < 0.44) return mix(0.16, 10.5, smooth(0.14, 0.38, p));
+  if (p < 0.65) return mix(10.5, 20.5, smooth(0.44, 0.62, p));
+  return Math.min(bounds.max[1], mix(20.5, 30, smooth(0.65, 0.84, p)));
+}
+
+/**
+ * Orthographic camera: exact plan first; readable cutaways; garage-left finish.
+ * An explicit basis avoids lookAt's singularity when looking straight down.
+ * The frustum fits ALL eight visible bounding-box corners at every aspect ratio.
+ */
+function cameraFor(progress, width, height, bounds = DEFAULT_BOUNDS) {
+  const p = clamp(Number.isFinite(progress) ? progress : 0);
+  const aspect = Math.max(1, width) / Math.max(1, height);
+  const angle = (
+    20 * smooth(0.10, 0.30, p) +
+    10 * smooth(0.38, 0.55, p) +
+    25 * smooth(0.62, 0.94, p)
+  ) * Math.PI / 180;
+  const heading = -33 * smooth(0.15, 0.92, p) * Math.PI / 180;
+  const back = [Math.sin(angle) * Math.sin(heading), Math.cos(angle), Math.sin(angle) * Math.cos(heading)];
+  const right = [Math.cos(heading), 0, -Math.sin(heading)];
+  const up = [-Math.cos(angle) * Math.sin(heading), Math.sin(angle), -Math.cos(angle) * Math.cos(heading)];
+  const top = visibleHeight(p, bounds);
+  const target = [
+    (bounds.min[0] + bounds.max[0]) / 2,
+    (bounds.min[1] + top) / 2,
+    (bounds.min[2] + bounds.max[2]) / 2,
+  ];
+  let left = Infinity, rightEdge = -Infinity, bottom = Infinity, upper = -Infinity;
+  for (const x of [bounds.min[0], bounds.max[0]]) {
+    for (const y of [bounds.min[1], top]) {
+      for (const z of [bounds.min[2], bounds.max[2]]) {
+        const delta = [x - target[0], y - target[1], z - target[2]];
+        const px = dot(delta, right), py = dot(delta, up);
+        left = Math.min(left, px); rightEdge = Math.max(rightEdge, px);
+        bottom = Math.min(bottom, py); upper = Math.max(upper, py);
+      }
+    }
+  }
+  const centerX = (left + rightEdge) / 2, centerY = (bottom + upper) / 2;
+  for (let i = 0; i < 3; i++) target[i] += right[i] * centerX + up[i] * centerY;
+  const halfHeight = Math.max((upper - bottom) / 2, (rightEdge - left) / (2 * aspect)) * 1.075;
+  const halfWidth = halfHeight * aspect;
+  const eye = target.map((v, i) => v + back[i] * 200);
+  return { eye, target, right, up, back, halfWidth, halfHeight, near: 0.1, far: 400, angle, heading };
+}
+
+/** Column-major view/projection matrix, shared with the static preview tools. */
+function computeMVP(camera) {
+  const { right: r, up: u, back: b, eye, halfWidth: w, halfHeight: h, near, far } = camera;
+  const dz = -2 / (far - near);
+  return new Float32Array([
+    r[0] / w, u[0] / h, b[0] * dz, 0,
+    r[1] / w, u[1] / h, b[1] * dz, 0,
+    r[2] / w, u[2] / h, b[2] * dz, 0,
+    -dot(r, eye) / w, -dot(u, eye) / h,
+    -dot(b, eye) * dz - (far + near) / (far - near), 1,
+  ]);
+}
+
+function projectPoint(m, position, width, height) {
+  const [x, y, z] = position;
+  const w = m[3] * x + m[7] * y + m[11] * z + m[15];
+  return {
+    x: (0.5 + (m[0] * x + m[4] * y + m[8] * z + m[12]) / w * 0.5) * width,
+    y: (0.5 - (m[1] * x + m[5] * y + m[9] * z + m[13]) / w * 0.5) * height,
+    depth: (m[2] * x + m[6] * y + m[10] * z + m[14]) / w,
+  };
+}
+
+const SOLID_VERTEX = `
+attribute vec3 aPosition;
+attribute vec3 aNormal;
+attribute vec3 aColor;
+attribute float aRole;
+attribute float aBaseY;
+uniform mat4 uMvp;
+uniform mediump float uCut;
+varying mediump vec3 vNormal;
+varying mediump vec3 vColor;
+varying mediump float vRole;
+varying mediump float vBaseY;
+void main() {
+  vec3 p = aPosition;
+  p.y = min(p.y, uCut);
+  gl_Position = uMvp * vec4(p, 1.0);
+  vNormal = aNormal;
+  vColor = aColor;
+  vRole = aRole;
+  vBaseY = aBaseY;
+}`;
+
+const SOLID_FRAGMENT = `
+precision mediump float;
+uniform float uFocus;
+uniform float uLift;
+uniform float uOpacity;
+uniform mediump float uCut;
+varying mediump vec3 vNormal;
+varying mediump vec3 vColor;
+varying mediump float vRole;
+varying mediump float vBaseY;
+void main() {
+  if (vBaseY > uCut + 0.001) discard;
+  vec3 normal = normalize(vNormal);
+  if (!gl_FrontFacing) normal = -normal;
+  float light = 0.80 + 0.20 * max(0.0, dot(normal, normalize(vec3(-0.55, 0.86, 0.38))));
+  vec3 color = vColor * light;
+  float mark = uLift;
+  if (uFocus > 0.5 && abs(vRole - uFocus) < 0.1) mark = 1.0;
+  if (mark > 0.0) color = mix(color, vec3(0.12, 0.28, 0.72), 0.50 * mark);
+  gl_FragColor = vec4(color, uOpacity);
+}`;
+
+const LINE_VERTEX = `
+attribute vec3 aPosition;
+attribute vec3 aColor;
+attribute float aRole;
+attribute float aBaseY;
+uniform mat4 uMvp;
+uniform mediump float uCut;
+varying mediump vec3 vColor;
+varying mediump float vRole;
+varying mediump float vBaseY;
+void main() {
+  vec3 p = aPosition;
+  p.y = min(p.y, uCut);
+  gl_Position = uMvp * vec4(p, 1.0);
+  vColor = aColor;
+  vRole = aRole;
+  vBaseY = aBaseY;
+}`;
+
+const LINE_FRAGMENT = `
+precision mediump float;
+uniform float uFocus;
+uniform float uLift;
+uniform float uOpacity;
+uniform mediump float uCut;
+varying mediump vec3 vColor;
+varying mediump float vRole;
+varying mediump float vBaseY;
+void main() {
+  if (vBaseY > uCut + 0.001) discard;
+  vec3 color = vColor;
+  float mark = uLift;
+  if (uFocus > 0.5 && abs(vRole - uFocus) < 0.1) mark = 1.0;
+  if (mark > 0.0) color = mix(color, vec3(0.08, 0.20, 0.55), mark);
+  gl_FragColor = vec4(color, uOpacity);
+}`;
+
+const SHADOW_VERTEX = `
+attribute vec3 aPosition;
+uniform mat4 uMvp;
+varying mediump vec2 vGround;
+void main() {
+  vGround = aPosition.xz;
+  gl_Position = uMvp * vec4(aPosition, 1.0);
+}`;
+
+const SHADOW_FRAGMENT = `
+precision mediump float;
+uniform vec3 uPaper;
+uniform float uStrength;
+varying mediump vec2 vGround;
+float rectangle(vec2 p, vec2 center, vec2 halfSize) {
+  vec2 q = abs(p - center) - halfSize;
+  return length(max(q, 0.0)) + min(max(q.x, q.y), 0.0);
+}
+void main() {
+  float a = rectangle(vGround, vec2(55.0, 14.5), vec2(22.5, 16.0));
+  float b = rectangle(vGround, vec2(12.0, 15.0), vec2(11.0, 11.0));
+  float c = rectangle(vGround, vec2(54.0, 31.0), vec2(20.0, 2.5));
+  float d = max(min(min(a, b), c), 0.0);
+  float shadow = exp(-d * d / 7.0) * uStrength;
+  gl_FragColor = vec4(uPaper * (1.0 - shadow), 1.0);
+}`;
+
+function labelsFor(model, progress, mvp, width, height) {
+  const main = progress <= 0.19;
+  const upper = progress >= 0.45 && progress <= 0.61;
+  if (!main && !upper) return [];
+  const opacity = main ? 1 - smooth(0.13, 0.19, progress)
+    : smooth(0.45, 0.48, progress) * (1 - smooth(0.58, 0.61, progress));
+  if (opacity < 0.015) return [];
+  const floor = main ? 'main' : 'upper';
+  const labels = [];
+  // Major rooms take priority when the phone view cannot fit every annotation.
+  const candidates = model.labels.filter(label => label.floor === floor && (!label.minor || width >= 620));
+  candidates.sort((a, b) => Number(!!a.minor) - Number(!!b.minor));
+  for (const label of candidates) {
+    const projected = projectPoint(mvp, label.position, width, height);
+    const half = Math.min(label.text.length * (label.minor ? 2.55 : 2.9), 60);
+    const box = { left: projected.x - half - 3, right: projected.x + half + 3, top: projected.y - 9, bottom: projected.y + 9 };
+    if (box.left < 3 || box.right > width - 3 || box.top < 3 || box.bottom > height - 3) continue;
+    if (labels.some(l => box.left < l.box.right && box.right > l.box.left && box.top < l.box.bottom && box.bottom > l.box.top)) continue;
+    labels.push({ text: label.text, x: projected.x, y: projected.y, minor: !!label.minor, opacity, box });
+  }
+  return labels.map(({ box, ...label }) => label);
+}
+
+function createRenderer(canvas) {
+  const gl = canvas.getContext('webgl', {
+    alpha: false, antialias: false, depth: true, stencil: false,
+    premultipliedAlpha: false, preserveDrawingBuffer: false, powerPreference: 'low-power',
+  });
+  if (!gl) throw new Error('The drawing context is unavailable.');
+  const buffers = [], programs = [];
+  let disposed = false;
+  const stats = { drawCalls: 0, triangles: 0, lineSegments: 0, bufferBytes: 0, renderCount: 0, pixelRatio: 1 };
+
+  function makeProgram(vertexSource, fragmentSource, attributes, uniforms) {
+    const shaders = [];
+    let program = null;
+    try {
+      for (const [type, source] of [[gl.VERTEX_SHADER, vertexSource], [gl.FRAGMENT_SHADER, fragmentSource]]) {
+        const shader = gl.createShader(type);
+        if (!shader) throw new Error('A drawing shader could not be allocated.');
+        shaders.push(shader);
+        gl.shaderSource(shader, source);
+        gl.compileShader(shader);
+        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) throw new Error('A drawing shader could not be compiled.');
+      }
+      program = gl.createProgram();
+      if (!program) throw new Error('The drawing program could not be allocated.');
+      for (const shader of shaders) gl.attachShader(program, shader);
+      gl.linkProgram(program);
+      if (!gl.getProgramParameter(program, gl.LINK_STATUS)) throw new Error('The drawing program could not be linked.');
+      programs.push(program);
+      return {
+        program,
+        attributes: Object.fromEntries(attributes.map(name => [name, gl.getAttribLocation(program, name)])),
+        uniforms: Object.fromEntries(uniforms.map(name => [name, gl.getUniformLocation(program, name)])),
+      };
+    } catch (error) {
+      if (program && !programs.includes(program)) gl.deleteProgram(program);
+      throw error;
+    } finally {
+      for (const shader of shaders) gl.deleteShader(shader);
+    }
+  }
+
+  function upload(data, stride) {
+    if (!data || data.length === 0) return null;
+    if (!(data instanceof Float32Array) || data.length % stride !== 0) throw new Error('The drawing mesh is invalid.');
+    const buffer = gl.createBuffer();
+    if (!buffer) throw new Error('The drawing mesh could not be allocated.');
+    buffers.push(buffer);
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+    gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW);
+    stats.bufferBytes += data.byteLength;
+    return { buffer, count: data.length / stride };
+  }
+
+  function dispose() {
+    if (disposed) return;
+    disposed = true;
+    for (const buffer of buffers) gl.deleteBuffer(buffer);
+    for (const program of programs) gl.deleteProgram(program);
+    buffers.length = programs.length = 0;
+  }
+
+  let model, meshes, solidProgram, lineProgram, shadowProgram, shadow;
+  try {
+    model = buildModel();
+    solidProgram = makeProgram(SOLID_VERTEX, SOLID_FRAGMENT,
+      ['aPosition', 'aNormal', 'aColor', 'aRole', 'aBaseY'], ['uMvp', 'uCut', 'uFocus', 'uLift', 'uOpacity']);
+    lineProgram = makeProgram(LINE_VERTEX, LINE_FRAGMENT,
+      ['aPosition', 'aColor', 'aRole', 'aBaseY'], ['uMvp', 'uCut', 'uFocus', 'uLift', 'uOpacity']);
+    shadowProgram = makeProgram(SHADOW_VERTEX, SHADOW_FRAGMENT,
+      ['aPosition'], ['uMvp', 'uPaper', 'uStrength']);
+    meshes = model.groups.map(group => ({ id: group.id, solid: upload(group.solid, 11), lines: upload(group.lines, 8) }));
+    // A single procedural contact-shadow surface; no shadow map or texture fetch.
+    const [x0, z0, x1, z1] = [-6, -7, 83, 40];
+    shadow = upload(new Float32Array([
+      x0, -0.46, z0, x1, -0.46, z0, x1, -0.46, z1,
+      x0, -0.46, z0, x1, -0.46, z1, x0, -0.46, z1,
+    ]), 3);
+    if (gl.getError() !== gl.NO_ERROR) throw new Error('The drawing buffers could not be initialized.');
+  } catch (error) {
+    dispose();
+    throw error;
+  }
+
+  const maximumSize = gl.getParameter(gl.MAX_RENDERBUFFER_SIZE);
+  const viewportLimit = gl.getParameter(gl.MAX_VIEWPORT_DIMS);
+  gl.clearColor(...PAPER, 1);
+  gl.enable(gl.DEPTH_TEST);
+  gl.depthFunc(gl.LEQUAL);
+  gl.disable(gl.CULL_FACE); // Thin roof and gable faces are intentionally two-sided.
+  gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+  gl.lineWidth(1); // Portable on iOS and desktop; no unsupported thick GL lines.
+
+  const enabledAttributes = new Set();
+  function use(program) {
+    for (const location of enabledAttributes) gl.disableVertexAttribArray(location);
+    enabledAttributes.clear();
+    gl.useProgram(program.program);
+  }
+
+  function attribute(program, name, size, stride, offset) {
+    const location = program.attributes[name];
+    if (location < 0) return;
+    gl.enableVertexAttribArray(location);
+    enabledAttributes.add(location);
+    gl.vertexAttribPointer(location, size, gl.FLOAT, false, stride * 4, offset * 4);
+  }
+
+  function setOpacity(opacity) {
+    if (opacity < 0.999) { gl.enable(gl.BLEND); gl.depthMask(false); }
+    else { gl.disable(gl.BLEND); gl.depthMask(true); }
+  }
+
+  function render(progress, focusId, width, height) {
+    if (disposed) throw new Error('The drawing has been disposed.');
+    if (gl.isContextLost()) throw new Error('The drawing context was lost.');
+    const p = clamp(Number.isFinite(progress) ? progress : 0);
+    const cssW = Math.max(1, Number.isFinite(width) ? width : canvas.clientWidth);
+    const cssH = Math.max(1, Number.isFinite(height) ? height : canvas.clientHeight);
+    const displayDpr = Math.max(1, globalThis.devicePixelRatio || 1);
+    const dpr = Math.min(displayDpr, cssW < 600 ? 1.5 : 2,
+      Math.sqrt(MAX_PIXELS / (cssW * cssH)),
+      maximumSize / cssW, maximumSize / cssH,
+      viewportLimit[0] / cssW, viewportLimit[1] / cssH);
+    const bufferWidth = Math.max(1, Math.floor(cssW * dpr));
+    const bufferHeight = Math.max(1, Math.floor(cssH * dpr));
+    if (canvas.width !== bufferWidth || canvas.height !== bufferHeight) {
+      canvas.width = bufferWidth;
+      canvas.height = bufferHeight;
+      gl.viewport(0, 0, bufferWidth, bufferHeight);
+    }
+    stats.pixelRatio = dpr;
+    stats.drawCalls = stats.triangles = stats.lineSegments = 0;
+    stats.renderCount++;
+    gl.depthMask(true);
+    gl.disable(gl.BLEND);
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    const camera = cameraFor(p, cssW, cssH, model.bounds || DEFAULT_BOUNDS);
+    const mvp = computeMVP(camera);
+    function focusFor(id, groupId) {
+      let role = 0, lift = 0;
+      if (id === 'stairs') role = 1;
+      else if (id === 'header') role = 2;
+      else if (id === 'porch') role = 3;
+      else if (id === 'balcony') role = 4;
+      else if (id === 'bearing' || id === 'framing') role = 5;
+      else if (id === 'partition') role = 6;
+      else if (id === 'foundation' || id === 'footings') role = 7;
+      else if (id === 'roof' && (groupId === 'roof' || groupId === 'garageRoof' || groupId === 'porchRoof')) lift = 1;
+      else if (id === 'structure' && (groupId === 'upper' || groupId === 'upperfloor')) lift = 1;
+      return { role, lift };
+    }
+    const states = meshes.map(mesh => groupState(mesh.id, p));
+
+    use(shadowProgram);
+    gl.bindBuffer(gl.ARRAY_BUFFER, shadow.buffer);
+    attribute(shadowProgram, 'aPosition', 3, 3, 0);
+    gl.uniformMatrix4fv(shadowProgram.uniforms.uMvp, false, mvp);
+    gl.uniform3fv(shadowProgram.uniforms.uPaper, PAPER);
+    gl.uniform1f(shadowProgram.uniforms.uStrength, mix(0.04, 0.14, smooth(0.16, 0.84, p)));
+    gl.drawArrays(gl.TRIANGLES, 0, shadow.count);
+    stats.drawCalls++;
+    stats.triangles += 2;
+
+    gl.enable(gl.POLYGON_OFFSET_FILL);
+    gl.polygonOffset(1, 1);
+    use(solidProgram);
+    gl.uniformMatrix4fv(solidProgram.uniforms.uMvp, false, mvp);
+    for (let i = 0; i < meshes.length; i++) {
+      const { solid } = meshes[i], state = states[i];
+      if (!solid || !state.visible || state.opacity < 0.001) continue;
+      const mark = focusFor(focusId, meshes[i].id);
+      gl.uniform1f(solidProgram.uniforms.uFocus, mark.role);
+      gl.uniform1f(solidProgram.uniforms.uLift, mark.lift);
+      setOpacity(state.opacity);
+      gl.bindBuffer(gl.ARRAY_BUFFER, solid.buffer);
+      attribute(solidProgram, 'aPosition', 3, 11, 0);
+      attribute(solidProgram, 'aNormal', 3, 11, 3);
+      attribute(solidProgram, 'aColor', 3, 11, 6);
+      attribute(solidProgram, 'aRole', 1, 11, 9);
+      attribute(solidProgram, 'aBaseY', 1, 11, 10);
+      gl.uniform1f(solidProgram.uniforms.uCut, state.cut);
+      gl.uniform1f(solidProgram.uniforms.uOpacity, state.opacity);
+      gl.drawArrays(gl.TRIANGLES, 0, solid.count);
+      stats.drawCalls++;
+      stats.triangles += solid.count / 3;
+    }
+    gl.disable(gl.POLYGON_OFFSET_FILL);
+
+    // Edges follow every solid pass, so walls hide edges behind them correctly.
+    use(lineProgram);
+    gl.uniformMatrix4fv(lineProgram.uniforms.uMvp, false, mvp);
+    for (let i = 0; i < meshes.length; i++) {
+      const { lines } = meshes[i], state = states[i];
+      if (!lines || !state.visible || state.opacity < 0.001) continue;
+      const mark = focusFor(focusId, meshes[i].id);
+      gl.uniform1f(lineProgram.uniforms.uFocus, mark.role);
+      gl.uniform1f(lineProgram.uniforms.uLift, mark.lift);
+      setOpacity(state.opacity);
+      gl.bindBuffer(gl.ARRAY_BUFFER, lines.buffer);
+      attribute(lineProgram, 'aPosition', 3, 8, 0);
+      attribute(lineProgram, 'aColor', 3, 8, 3);
+      attribute(lineProgram, 'aRole', 1, 8, 6);
+      attribute(lineProgram, 'aBaseY', 1, 8, 7);
+      gl.uniform1f(lineProgram.uniforms.uCut, state.cut);
+      gl.uniform1f(lineProgram.uniforms.uOpacity, state.opacity);
+      gl.drawArrays(gl.LINES, 0, lines.count);
+      stats.drawCalls++;
+      stats.lineSegments += lines.count / 2;
+    }
+    gl.depthMask(true);
+    gl.disable(gl.BLEND);
+    return { labels: labelsFor(model, p, mvp, cssW, cssH), stageIndex: stageAt(p) };
+  }
+
+  return { render, dispose, stats };
+}
+
+  var STAGES = [
+    { id: "plan", end: 0.16, line: "The main floor, cut flat and seen from above." },
+    { id: "walls", end: 0.38, line: "The main-floor walls rise from the same footprint." },
+    { id: "upper", end: 0.63, line: "The upper floor stacks around the stair opening, over the open patio." },
+    { id: "shell", end: 0.86, line: "The east gable, west hip, dormer, and garage roof close the shell." },
+    { id: "massing", end: 2, line: "The finished house, in the massing view." }
+  ];
+
+  function mount() {
+    var root = document.getElementById("scroll-house");
+    if (!root || root.getAttribute("data-ready") === "1") return;
+    root.setAttribute("data-ready", "1");
+    var track = root.querySelector(".scroll-house-track");
+    var sticky = root.querySelector(".scroll-house-sticky");
+    var sheet = root.querySelector(".scroll-house-sheet");
+    var canvas = root.querySelector(".scroll-house-canvas");
+    var labelsEl = root.querySelector(".sh-labels");
+    var lineEl = root.querySelector("#scroll-house-line");
+    var bar = root.querySelector(".sh-progress span");
+    var range = root.querySelector(".sh-scrub");
+    var stageNodes = root.querySelectorAll(".sh-stages li");
+    var learnSets = root.querySelectorAll(".sh-learn-set");
+    var learnNotes = root.querySelectorAll(".sh-note");
+    var learnPrompt = root.querySelector(".sh-learn-prompt");
+    var callButtons = root.querySelectorAll(".sh-call");
+    var reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    var removers = [];
+    var labelNodes = [];
+    var engine = null;
+    var focusId = "";
+    var current = "";
+    var rendered = 0;
+    var lastTime = 0;
+    var raf = 0;
+    var running = false;
+    var dirty = true;
+    var lost = false;
+    var disposed = false;
+
+    function on(target, type, handler, options) {
+      target.addEventListener(type, handler, options);
+      removers.push(function () { target.removeEventListener(type, handler, options); });
+    }
+
+    function stageByProgress(p) {
+      var i;
+      for (i = 0; i < STAGES.length; i++) if (p < STAGES[i].end) return STAGES[i];
+      return STAGES[STAGES.length - 1];
+    }
+
+    function stickyTop() {
+      var raw = window.getComputedStyle(sticky).top;
+      if (!raw || raw === "auto") return 0;
+      return parseFloat(raw) || 0;
+    }
+
+    function scrollProgress() {
+      var rect = track.getBoundingClientRect();
+      var travel = track.offsetHeight - sticky.offsetHeight;
+      if (travel <= 1) return 0;
+      var scrolled = stickyTop() - rect.top;
+      if (scrolled <= 0) return 0;
+      if (scrolled >= travel) return 1;
+      return scrolled / travel;
+    }
+
+    function scrollToProgress(p) {
+      var rect = track.getBoundingClientRect();
+      var travel = Math.max(1, track.offsetHeight - sticky.offsetHeight);
+      var y = window.scrollY + rect.top - stickyTop() + travel * Math.max(0, Math.min(1, p));
+      window.scrollTo(0, y);
+      dirty = true;
+      kick();
+    }
+
+    function applyFocus(id) {
+      focusId = id || "";
+      var i;
+      for (i = 0; i < callButtons.length; i++) {
+        var onNote = callButtons[i].getAttribute("data-callout") === focusId && focusId !== "";
+        callButtons[i].setAttribute("aria-pressed", onNote ? "true" : "false");
+        callButtons[i].classList.toggle("is-on", onNote);
+      }
+      for (i = 0; i < learnNotes.length; i++) {
+        learnNotes[i].classList.toggle("is-open", learnNotes[i].getAttribute("data-callout") === focusId && focusId !== "");
+      }
+      if (learnPrompt) learnPrompt.classList.toggle("is-hidden", focusId !== "");
+      dirty = true;
+    }
+
+    function focusBelongs(stageId) {
+      var s, b;
+      if (!focusId) return true;
+      for (s = 0; s < learnSets.length; s++) {
+        if (learnSets[s].getAttribute("data-stage") !== stageId) continue;
+        var buttons = learnSets[s].querySelectorAll(".sh-call");
+        for (b = 0; b < buttons.length; b++) {
+          if (buttons[b].getAttribute("data-callout") === focusId) return true;
+        }
+      }
+      return false;
+    }
+
+    function showStageSet(stageId) {
+      var i;
+      for (i = 0; i < learnSets.length; i++) learnSets[i].hidden = learnSets[i].getAttribute("data-stage") !== stageId;
+      if (!focusBelongs(stageId)) applyFocus("");
+    }
+
+    function renderLabels(labels, width, height) {
+      var accepted = labels || [];
+      var i, node, item;
+      for (i = 0; i < accepted.length; i++) {
+        item = accepted[i];
+        node = labelNodes[i];
+        if (!node) {
+          node = document.createElement("span");
+          node.className = "sh-label";
+          labelsEl.appendChild(node);
+          labelNodes.push(node);
+        }
+        node.hidden = false;
+        node.classList.toggle("is-dim", !!item.minor);
+        if (node.textContent !== item.text) node.textContent = item.text;
+        node.style.left = item.x.toFixed(1) + "px";
+        node.style.top = item.y.toFixed(1) + "px";
+        node.style.opacity = String(item.opacity);
+      }
+      for (i = accepted.length; i < labelNodes.length; i++) labelNodes[i].hidden = true;
+      root.classList.toggle("is-plan", rendered <= 0.2 && accepted.length > 0);
+      root.classList.toggle("is-upper-labels", rendered > 0.4 && rendered < 0.62 && accepted.length > 0);
+    }
+
+    function paint(p) {
+      if (!engine || lost) return;
+      var rect = sheet.getBoundingClientRect();
+      var result = engine.render(p, focusId, Math.max(1, rect.width), Math.max(1, rect.height));
+      renderLabels(result && result.labels);
+      if (bar) bar.style.transform = "scaleX(" + p.toFixed(5) + ")";
+      if (range && document.activeElement !== range) {
+        range.value = String(Math.round(p * 1000));
+        var stageName = stageByProgress(p).id;
+        range.setAttribute("aria-valuetext", stageName + ", " + Math.round(p * 100) + " percent");
+      }
+      root.classList.toggle("is-scrolled", p > 0.04);
+      root.classList.toggle("is-late", p > 0.8);
+      root.classList.add("is-drawn");
+      var stage = stageByProgress(p);
+      if (stage.id !== current) {
+        current = stage.id;
+        if (lineEl) lineEl.textContent = stage.line;
+        var n;
+        for (n = 0; n < stageNodes.length; n++) {
+          var on = stageNodes[n].getAttribute("data-stage") === stage.id;
+          stageNodes[n].classList.toggle("is-on", on);
+          if (on) stageNodes[n].setAttribute("aria-current", "step");
+          else stageNodes[n].removeAttribute("aria-current");
+        }
+        showStageSet(stage.id);
+      }
+    }
+
+    function kick() {
+      if (disposed || lost || !running || raf) return;
+      raf = window.requestAnimationFrame(draw);
+    }
+
+    function draw(now) {
+      raf = 0;
+      if (disposed || lost || !running || !engine || document.hidden) return;
+      var target = scrollProgress();
+      var dt = lastTime ? Math.min(64, Math.max(1, now - lastTime)) : 16;
+      lastTime = now;
+      var diff = target - rendered;
+      if (Math.abs(diff) < 0.0004) rendered = target;
+      else rendered += diff * (1 - Math.exp(-dt / 70));
+      var moving = Math.abs(target - rendered) >= 0.0004;
+      if (moving || dirty) {
+        try {
+          paint(rendered);
+          dirty = false;
+        } catch (error) {
+          fail();
+          return;
+        }
+      }
+      if (moving) raf = window.requestAnimationFrame(draw);
+      else lastTime = 0;
+    }
+
+    function destroyEngine() {
+      if (!engine) return;
+      try { engine.dispose(); } catch (e) { /* context may already be gone */ }
+      engine = null;
+    }
+
+    function fail() {
+      lost = true;
+      running = false;
+      if (raf) window.cancelAnimationFrame(raf);
+      raf = 0;
+      destroyEngine();
+      root.classList.add("is-fallback");
+      root.classList.remove("is-drawn");
+    }
+
+    function start() {
+      if (disposed || lost || reduced.matches) return;
+      root.classList.remove("is-still");
+      if (!engine) {
+        try { engine = createRenderer(canvas); }
+        catch (e) { fail(); return; }
+      }
+      rendered = scrollProgress();
+      dirty = true;
+      running = true;
+      kick();
+    }
+
+    function stop() {
+      running = false;
+      if (raf) window.cancelAnimationFrame(raf);
+      raf = 0;
+      lastTime = 0;
+    }
+
+    function destroy() {
+      if (disposed) return;
+      disposed = true;
+      stop();
+      destroyEngine();
+      removers.forEach(function (fn) { fn(); });
+    }
+
+    on(root, "click", function (event) {
+      var btn = event.target && event.target.closest ? event.target.closest(".sh-call") : null;
+      if (btn && root.contains(btn)) {
+        var id = btn.getAttribute("data-callout");
+        applyFocus(focusId === id ? "" : id);
+        kick();
+        return;
+      }
+      var li = event.target && event.target.closest ? event.target.closest(".sh-stages li") : null;
+      if (li && root.contains(li)) scrollToProgress(parseFloat(li.getAttribute("data-sh-progress")) || 0);
+    });
+    on(root, "keydown", function (event) {
+      var li = event.target && event.target.closest ? event.target.closest(".sh-stages li") : null;
+      if (!li || !root.contains(li)) return;
+      var items = Array.prototype.slice.call(stageNodes);
+      var index = items.indexOf(li);
+      var next = null;
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        scrollToProgress(parseFloat(li.getAttribute("data-sh-progress")) || 0);
+      } else if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+        event.preventDefault();
+        next = items[Math.min(items.length - 1, index + 1)];
+      } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+        event.preventDefault();
+        next = items[Math.max(0, index - 1)];
+      }
+      if (next) {
+        next.focus();
+        scrollToProgress(parseFloat(next.getAttribute("data-sh-progress")) || 0);
+      }
+    });
+    if (range) {
+      on(range, "input", function () { scrollToProgress(Number(range.value) / 1000); });
+    }
+    on(window, "scroll", function () { dirty = true; kick(); }, { passive: true });
+    on(window, "resize", function () { dirty = true; kick(); }, { passive: true });
+    on(window, "orientationchange", function () { dirty = true; kick(); }, { passive: true });
+    on(document, "visibilitychange", function () {
+      if (document.hidden) {
+        if (raf) window.cancelAnimationFrame(raf);
+        raf = 0;
+        lastTime = 0;
+      } else kick();
+    });
+    on(canvas, "webglcontextlost", function (event) {
+      event.preventDefault();
+      fail();
+    });
+    on(canvas, "webglcontextrestored", function () {
+      if (disposed || reduced.matches) return;
+      lost = false;
+      root.classList.remove("is-fallback");
+      destroyEngine();
+      start();
+    });
+    if (reduced.addEventListener) on(reduced, "change", function () {
+      if (reduced.matches) {
+        root.classList.add("is-still");
+        stop();
+        destroyEngine();
+      } else {
+        lost = false;
+        root.classList.remove("is-still", "is-fallback");
+        start();
+      }
+    });
+    on(window, "pagehide", destroy);
+    if (window.ResizeObserver) {
+      var resizeObserver = new ResizeObserver(function () { dirty = true; kick(); });
+      resizeObserver.observe(sheet);
+      removers.push(function () { resizeObserver.disconnect(); });
+    }
+    if (window.IntersectionObserver) {
+      var visibleObserver = new IntersectionObserver(function (entries) {
+        running = !lost && !reduced.matches && entries.some(function (entry) { return entry.isIntersecting; });
+        if (running) { dirty = true; kick(); }
+        else if (raf) { window.cancelAnimationFrame(raf); raf = 0; lastTime = 0; }
+      });
+      visibleObserver.observe(sheet);
+      removers.push(function () { visibleObserver.disconnect(); });
+    } else {
+      running = true;
+    }
+    if (!reduced.matches) start();
+    else root.classList.add("is-still");
+  }
+
+  return {
+    mount: mount,
+    buildModel: buildModel,
+    cameraFor: cameraFor,
+    computeMVP: computeMVP,
+    projectPoint: projectPoint,
+    groupState: groupState,
+    stageAt: stageAt,
+    STAGES: STAGES,
+    PAPER: PAPER
+  };
+});

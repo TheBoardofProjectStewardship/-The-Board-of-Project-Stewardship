@@ -29,6 +29,7 @@
   <link rel="preload" href="/assets/fonts/InterLatin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/css/site.css">
 
+  <link rel="stylesheet" href="/assets/css/scroll-house.css">
   <link rel="stylesheet" href="/assets/css/visualizer.css">
 
   <style>
@@ -454,6 +455,141 @@
     </nav>
   </header>
 <main id="main-content">
+  <section class="scroll-house" id="scroll-house" aria-labelledby="scroll-house-title">
+    <div class="scroll-house-track">
+      <div class="scroll-house-sticky">
+        <div class="sh-top">
+          <p class="sh-kicker">Pacific Northwest · King &amp; Snohomish · Seattle</p>
+          <p class="sh-title" id="scroll-house-title">From the plan up</p>
+          <p class="sh-dek">This house, from the main-floor plan to the finished massing.</p>
+        </div>
+        <ol class="sh-stages" aria-label="Build stages">
+          <li class="is-on" tabindex="0" data-stage="plan" data-sh-progress="0.04" aria-current="step">Plan</li>
+          <li tabindex="0" data-stage="walls" data-sh-progress="0.26">Walls</li>
+          <li tabindex="0" data-stage="upper" data-sh-progress="0.50">Upper</li>
+          <li tabindex="0" data-stage="shell" data-sh-progress="0.74">Shell</li>
+          <li tabindex="0" data-stage="massing" data-sh-progress="0.94">Massing</li>
+        </ol>
+        <div class="sh-progress" aria-hidden="true"><span></span></div>
+        <label class="sh-scrub-label">Build progress
+          <input class="sh-scrub" type="range" min="0" max="1000" step="1" value="0" aria-valuetext="Plan, 0 percent">
+        </label>
+        <div class="scroll-house-live">
+          <p class="sh-hint" aria-hidden="true">Scroll <span class="sh-hint-chevron">↓</span></p>
+          <div class="scroll-house-sheet">
+            <svg class="scroll-house-plan" viewBox="0 0 400 230" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+              <g fill="none" stroke="#1c1916" stroke-linejoin="round" stroke-linecap="butt">
+                <rect x="16" y="36" width="78" height="150" stroke-width="4"/>
+                <path stroke-width="4" d="M118 28 H150 V70 H250 V28 H330 V168 H250 V188 H118 V150 H250"/>
+                <path stroke-width="2" d="M150 78 H286 M168 92 H250 M118 150 H250"/>
+                <path stroke-width="1.5" d="M118 188 H250 V208 H150 V188"/>
+              </g>
+              <g fill="#1c1916" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" text-anchor="middle">
+                <text x="55" y="116">Garage</text>
+                <text x="200" y="108">Stair</text>
+                <text x="210" y="64">Kitchen</text>
+                <text x="292" y="100">Living</text>
+                <text x="184" y="172">Patio</text>
+                <text x="290" y="156">Office</text>
+              </g>
+            </svg>
+            <canvas class="scroll-house-canvas" width="960" height="540" aria-hidden="true"></canvas>
+            <div class="sh-labels" aria-hidden="true"></div>
+          </div>
+          <p class="scroll-house-line" id="scroll-house-line">The main floor, cut flat and seen from above.</p>
+        </div>
+        <figure class="scroll-house-still">
+          <div class="sh-still-img" role="img" aria-label="Line drawing of this two-story house with a garage, porch, and balcony. Not a bid or stamped plan."></div>
+          <figcaption class="scroll-house-line">The finished massing, held still.</figcaption>
+        </figure>
+        <div class="sh-learn">
+          <div class="sh-learn-set" data-stage="plan">
+            <button type="button" class="sh-call" data-callout="foundation" aria-pressed="false" aria-controls="sh-note-foundation">Foundation</button>
+            <button type="button" class="sh-call" data-callout="bearing" aria-pressed="false" aria-controls="sh-note-bearing">Bearing walls</button>
+            <button type="button" class="sh-call" data-callout="partition" aria-pressed="false" aria-controls="sh-note-partition">Partitions</button>
+          </div>
+          <div class="sh-learn-set" data-stage="walls" hidden>
+            <button type="button" class="sh-call" data-callout="framing" aria-pressed="false" aria-controls="sh-note-framing">Framing</button>
+            <button type="button" class="sh-call" data-callout="header" aria-pressed="false" aria-controls="sh-note-header">Headers</button>
+          </div>
+          <div class="sh-learn-set" data-stage="upper" hidden>
+            <button type="button" class="sh-call" data-callout="structure" aria-pressed="false" aria-controls="sh-note-structure">Structure</button>
+            <button type="button" class="sh-call" data-callout="stairs" aria-pressed="false" aria-controls="sh-note-stairs">Stairs</button>
+            <button type="button" class="sh-call" data-callout="balcony" aria-pressed="false" aria-controls="sh-note-balcony">Balcony</button>
+          </div>
+          <div class="sh-learn-set" data-stage="shell" hidden>
+            <button type="button" class="sh-call" data-callout="roof" aria-pressed="false" aria-controls="sh-note-roof">Roof</button>
+            <button type="button" class="sh-call" data-callout="porch" aria-pressed="false" aria-controls="sh-note-porch">Porch</button>
+          </div>
+          <div class="sh-learn-set" data-stage="massing" hidden>
+            <button type="button" class="sh-call" data-callout="footings" aria-pressed="false" aria-controls="sh-note-footings">Footings</button>
+          </div>
+          <div class="sh-learn-copy">
+            <p class="sh-learn-prompt" id="sh-learn-prompt">Tap a label to learn what that part does.</p>
+            <p class="sh-note" id="sh-note-foundation" data-callout="foundation"><strong>Foundation.</strong> The outer line is this house and the garage. A foundation under it spreads the weight into the ground and keeps the wood frame off the soil.</p>
+            <p class="sh-note" id="sh-note-bearing" data-callout="bearing"><strong>Bearing walls.</strong> The outside walls of the house and the garage carry the floors and the roof down to the foundation. In this sketch they are the load-bearing walls.</p>
+            <p class="sh-note" id="sh-note-partition" data-callout="partition"><strong>Partitions.</strong> The inside walls divide the kitchen, living room, bedrooms, and the other rooms. This sketch does not use them to hold up the floor. On a real house, check what sits on a wall before anyone takes it out.</p>
+            <p class="sh-note" id="sh-note-framing" data-callout="framing"><strong>Framing.</strong> Studs stand between a bottom plate and a top plate. That skeleton is the frame. Lap siding and the board-and-batten gable cover it later.</p>
+            <p class="sh-note" id="sh-note-header" data-callout="header"><strong>Headers.</strong> The garage door and the windows take studs out of the wall. A header, a short beam across each opening, carries that load to the studs on both sides. This sketch does not size them.</p>
+            <p class="sh-note" id="sh-note-roof" data-callout="roof"><strong>Roof.</strong> The east face is a board-and-batten gable. A hip roof and a dormer cover the west wing, and the garage roof sits lower. The slopes send rain out to the eaves.</p>
+            <p class="sh-note" id="sh-note-porch" data-callout="porch"><strong>Porch.</strong> The porch is the covered landing by the court, with a rail. The patio under the upper floor stays open.</p>
+            <p class="sh-note" id="sh-note-balcony" data-callout="balcony"><strong>Balcony.</strong> The balcony is the open floor on the west side, beside the garage. It needs a rail.</p>
+            <p class="sh-note" id="sh-note-footings" data-callout="footings"><strong>Footings.</strong> The upper floor and the garage send weight down the walls into the footings. Those footings have to suit that load. This sketch does not size them.</p>
+            <p class="sh-note" id="sh-note-structure" data-callout="structure"><strong>Structure.</strong> The upper floor stacks on the main-floor walls: a floor, walls, and the roof above. It has to tie into the frame already there.</p>
+            <p class="sh-note" id="sh-note-stairs" data-callout="stairs"><strong>Stairs.</strong> The stair drawn on both floors runs across the plan and ends at the upper floor. A stair needs a clear path, headroom, and a rail. The exact stair is worked out for the house.</p>
+          </div>
+          <p class="sh-learn-aside">Teaching sketch. Not a structural design.</p>
+        </div>
+        <div class="scroll-house-cta">
+          <div class="sh-cta-row">
+            <a class="sh-btn" href="#plan-home-hero">See what your home could become</a>
+            <a class="sh-link" href="./plan-walkthrough/">Plan walkthrough</a>
+          </div>
+          <p class="sh-fine">Illustrative concept. Not a bid or stamped plan.</p>
+        </div>
+      </div>
+    </div>
+    <noscript>
+      <style>
+        .scroll-house-track { height: auto !important; }
+        .scroll-house-sticky { position: relative !important; top: auto !important; height: auto !important; }
+        .scroll-house-live, .sh-progress, .sh-hint, .sh-learn-set, .sh-learn-prompt { display: none !important; }
+        .scroll-house-still, .sh-note { display: block !important; }
+      </style>
+    </noscript>
+    <script>
+    (function () {
+      var root = document.getElementById("scroll-house");
+      if (!root) return;
+      var mq = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+      function load() {
+        if (root.getAttribute("data-js") === "1") return;
+        root.setAttribute("data-js", "1");
+        var s = document.createElement("script");
+        s.src = "/assets/js/scroll-house.js";
+        document.body.appendChild(s);
+      }
+      function sync() {
+        if (mq && mq.matches) {
+          root.classList.add("is-still");
+          return;
+        }
+        root.classList.remove("is-still");
+        if (!("IntersectionObserver" in window)) { load(); return; }
+        if (root.getAttribute("data-js") === "1") return;
+        var io = new IntersectionObserver(function (entries) {
+          for (var i = 0; i < entries.length; i++) {
+            if (entries[i].isIntersecting) { load(); io.disconnect(); break; }
+          }
+        }, { rootMargin: "160px" });
+        io.observe(root);
+      }
+      if (mq && mq.addEventListener) mq.addEventListener("change", sync);
+      sync();
+    })();
+    </script>
+  </section>
+
   <section class="see-project" id="plan-home-hero" aria-labelledby="see-project-title" data-api-base="" data-maps-key="" data-turnstile-sitekey="">
     <div class="see-project-inner">
       <div class="see-stepper" role="tablist" aria-label="Steps">
