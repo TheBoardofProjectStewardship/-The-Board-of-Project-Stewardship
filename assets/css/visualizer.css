@@ -143,10 +143,13 @@
   width: 100%;
   height: 100%;
   margin: 0;
-  background: transparent;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
   cursor: ew-resize;
-  appearance: none;
-  -webkit-appearance: none;
+  appearance: none !important;
+  -webkit-appearance: none !important;
 }
 .see-range-overlay input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
