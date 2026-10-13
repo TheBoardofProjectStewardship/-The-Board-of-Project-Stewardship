@@ -1,0 +1,16 @@
+{
+  "submission_id": "2026-10-13-kitchen-remodel-issaquah-wa",
+  "idempotency_key": "sha256:92bd486db6c43bf07826572f1f0e69788b0debf71720917a7b785d89a50eb09e",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-10-13T17:40:02Z",
+  "outputs": [
+    "posts/2026-10-13-kitchen-remodel-issaquah-wa.md",
+    "posts/2026-10-13-kitchen-remodel-issaquah-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 69
+}

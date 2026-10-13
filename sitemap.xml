@@ -164,7 +164,7 @@
   </url>
   <url>
     <loc>https://boardofprojectstewardship.com/blog.html</loc>
-    <lastmod>2026-10-12</lastmod>
+    <lastmod>2026-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -572,7 +572,7 @@
   </url>
   <url>
     <loc>https://boardofprojectstewardship.com/issaquah.html</loc>
-    <lastmod>2026-10-12</lastmod>
+    <lastmod>2026-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -819,6 +819,12 @@
   <url>
     <loc>https://boardofprojectstewardship.com/yarrow-point.html</loc>
     <lastmod>2026-10-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://boardofprojectstewardship.com/posts/2026-10-13-kitchen-remodel-issaquah-wa.html</loc>
+    <lastmod>2026-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
