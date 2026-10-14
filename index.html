@@ -460,19 +460,20 @@
       <div class="scroll-house-sticky">
         <div class="sh-top">
           <p class="sh-kicker">Pacific Northwest · King &amp; Snohomish · Seattle</p>
-          <p class="sh-title" id="scroll-house-title">From the plan up</p>
-          <p class="sh-dek">This house, from the main-floor plan to the finished massing.</p>
+          <p class="sh-title" id="scroll-house-title">The house, taken apart</p>
+          <p class="sh-dek">Start with the finished house. Scroll peels the roof, the floors, and the foundation.</p>
         </div>
         <ol class="sh-stages" aria-label="Build stages">
-          <li class="is-on" tabindex="0" data-stage="plan" data-sh-progress="0.04" aria-current="step">Plan</li>
-          <li tabindex="0" data-stage="walls" data-sh-progress="0.26">Walls</li>
-          <li tabindex="0" data-stage="upper" data-sh-progress="0.50">Upper</li>
-          <li tabindex="0" data-stage="shell" data-sh-progress="0.74">Shell</li>
-          <li tabindex="0" data-stage="massing" data-sh-progress="0.94">Massing</li>
+          <li class="is-on" tabindex="0" data-stage="house" data-sh-progress="0.04" aria-current="step">House</li>
+          <li tabindex="0" data-stage="front" data-sh-progress="0.22">Front</li>
+          <li tabindex="0" data-stage="roof" data-sh-progress="0.38">Roof</li>
+          <li tabindex="0" data-stage="upper" data-sh-progress="0.56">Upper</li>
+          <li tabindex="0" data-stage="plan" data-sh-progress="0.74">Plan</li>
+          <li tabindex="0" data-stage="foundation" data-sh-progress="0.93">Slab</li>
         </ol>
         <div class="sh-progress" aria-hidden="true"><span></span></div>
         <label class="sh-scrub-label">Build progress
-          <input class="sh-scrub" type="range" min="0" max="1000" step="1" value="0" aria-valuetext="Plan, 0 percent">
+          <input class="sh-scrub" type="range" min="0" max="1000" step="1" value="0" aria-valuetext="House, 0 percent">
         </label>
         <div class="scroll-house-live">
           <p class="sh-hint" aria-hidden="true">Scroll <span class="sh-hint-chevron">↓</span></p>
@@ -501,32 +502,37 @@
               <p id="sh-explore-help" class="sh-explore-help">Drag or use arrow keys to look around. Plus and minus zoom. Reset view returns to the scroll camera.</p>
             </div>
           </div>
-          <p class="scroll-house-line" id="scroll-house-line">The main floor, cut flat and seen from above.</p>
+          <p class="scroll-house-line" id="scroll-house-line">The finished house. Tap it, then drag to turn it.</p>
         </div>
         <figure class="scroll-house-still">
           <div class="sh-still-img" role="img" aria-label="Line drawing of this two-story house with a garage, porch, and balcony. Not a bid or stamped plan."></div>
           <figcaption class="scroll-house-line">The finished massing, held still.</figcaption>
         </figure>
         <div class="sh-learn">
-          <div class="sh-learn-set" data-stage="plan">
-            <button type="button" class="sh-call" data-callout="foundation" aria-pressed="false" aria-controls="sh-note-foundation">Foundation</button>
-            <button type="button" class="sh-call" data-callout="bearing" aria-pressed="false" aria-controls="sh-note-bearing">Bearing walls</button>
-            <button type="button" class="sh-call" data-callout="partition" aria-pressed="false" aria-controls="sh-note-partition">Partitions</button>
+          <div class="sh-learn-set" data-stage="house">
+            <button type="button" class="sh-call" data-callout="roof" aria-pressed="false" aria-controls="sh-note-roof">Roof</button>
+            <button type="button" class="sh-call" data-callout="porch" aria-pressed="false" aria-controls="sh-note-porch">Porch</button>
+            <button type="button" class="sh-call" data-callout="balcony" aria-pressed="false" aria-controls="sh-note-balcony">Balcony</button>
           </div>
-          <div class="sh-learn-set" data-stage="walls" hidden>
+          <div class="sh-learn-set" data-stage="front" hidden>
             <button type="button" class="sh-call" data-callout="framing" aria-pressed="false" aria-controls="sh-note-framing">Framing</button>
             <button type="button" class="sh-call" data-callout="header" aria-pressed="false" aria-controls="sh-note-header">Headers</button>
+          </div>
+          <div class="sh-learn-set" data-stage="roof" hidden>
+            <button type="button" class="sh-call" data-callout="roof" aria-pressed="false" aria-controls="sh-note-roof">Roof</button>
+            <button type="button" class="sh-call" data-callout="structure" aria-pressed="false" aria-controls="sh-note-structure">Structure</button>
           </div>
           <div class="sh-learn-set" data-stage="upper" hidden>
             <button type="button" class="sh-call" data-callout="structure" aria-pressed="false" aria-controls="sh-note-structure">Structure</button>
             <button type="button" class="sh-call" data-callout="stairs" aria-pressed="false" aria-controls="sh-note-stairs">Stairs</button>
             <button type="button" class="sh-call" data-callout="balcony" aria-pressed="false" aria-controls="sh-note-balcony">Balcony</button>
           </div>
-          <div class="sh-learn-set" data-stage="shell" hidden>
-            <button type="button" class="sh-call" data-callout="roof" aria-pressed="false" aria-controls="sh-note-roof">Roof</button>
-            <button type="button" class="sh-call" data-callout="porch" aria-pressed="false" aria-controls="sh-note-porch">Porch</button>
+          <div class="sh-learn-set" data-stage="plan" hidden>
+            <button type="button" class="sh-call" data-callout="foundation" aria-pressed="false" aria-controls="sh-note-foundation">Foundation</button>
+            <button type="button" class="sh-call" data-callout="bearing" aria-pressed="false" aria-controls="sh-note-bearing">Bearing walls</button>
+            <button type="button" class="sh-call" data-callout="partition" aria-pressed="false" aria-controls="sh-note-partition">Partitions</button>
           </div>
-          <div class="sh-learn-set" data-stage="massing" hidden>
+          <div class="sh-learn-set" data-stage="foundation" hidden>
             <button type="button" class="sh-call" data-callout="footings" aria-pressed="false" aria-controls="sh-note-footings">Footings</button>
           </div>
           <div class="sh-learn-copy">

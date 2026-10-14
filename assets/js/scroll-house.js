@@ -19,10 +19,10 @@
  * X goes left to right on the plan; Z goes from sheet top to sheet bottom; Y is up.
  * All coordinates are built once. The renderer changes cut heights, never topology.
  */
-const WALL = [0.965,0.962,0.95], FLOOR = [0.95,0.948,0.938];
-const ROOF = [0.92,0.921,0.916], GLASS = [0.79,0.825,0.825];
-const INK = [0.29,0.31,0.31], DETAIL = [0.60,0.62,0.61];
-const FURN = [0.92,0.925,0.914], PLANT = [0.82,0.85,0.76];
+const WALL = [0.985,0.982,0.972], FLOOR = [0.965,0.962,0.95];
+const ROOF = [0.90,0.905,0.898], GLASS = [0.78,0.83,0.84];
+const INK = [0.12,0.13,0.13], DETAIL = [0.42,0.44,0.43];
+const FURN = [0.93,0.932,0.922], PLANT = [0.80,0.84,0.74];
 function buildModel() {
   const groups = [], labels = [];
   const group = id => { const g = {id,solid:[],lines:[]}; groups.push(g); return g; };
@@ -303,13 +303,14 @@ function buildModel() {
     ['Garage',11,15],['Utility',34,8],['Pantry',34,21.5,true],
     ['Stair',46.5,9.4],['Kitchen',44,14.7],['Dining',53.5,21.5],
     ['Living',70.5,19.5],['Powder',61,5,true],['Mudroom',68.4,3.8,true],
-    ['Foyer',68.3,9],['Office',69,29],['Storage',59.5,30.4,true],
-    ['Patio',44,26],['Court',47,3.1,true]
+    ['Foyer',68.3,9],['Entrance',73.2,6.2,true],['Office',69,29],['Storage',59.5,30.4,true],
+    ['Patio',44,26],['Exit',33.2,16.5,true]
   ])planLabel(...r);
   for(const r of [
-    ['Primary',44,20],['Closet',34,18.8,true],['Bath',34.5,26,true],
+    ['Primary',44,20],['Walk-in',33.6,18.6],['Bath',34.5,26,true],
     ['Bedroom 1',68,8.8],['Bedroom 2',67,23.4],['Bath',69,13.8,true],
-    ['Bath',69,19.4,true],['Laundry',55,24,true],['Balcony',34,8],['Stair',46,9]
+    ['Bath',69,19.4,true],['Laundry',55,24],['Balcony',34,8],['Stair',46,9],
+    ['Roof below',11,16,true]
   ])planLabel(r[0],r[1],r[2],!!r[3],'upper',10.65);
   return {groups:groups.map(g=>({id:g.id,solid:new Float32Array(g.solid),lines:new Float32Array(g.lines)})),labels,
     bounds:{min:[-1,-.5,-1.2],max:[77.4,29.5,34]},
@@ -317,7 +318,7 @@ function buildModel() {
 }
 
 const DEFAULT_BOUNDS = { min: [-1, -0.5, -1.2], max: [77.2, 29.5, 34.5] };
-const PAPER = [0.9686, 0.9647, 0.9451];
+const PAPER = [0.969, 0.965, 0.949];
 const MAX_PIXELS = 1600000;
 const clamp = (n, lo = 0, hi = 1) => Math.min(hi, Math.max(lo, n));
 const mix = (a, b, t) => a + (b - a) * t;
@@ -326,30 +327,37 @@ const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 
 function stageAt(progress) {
   const p = clamp(progress);
-  return p < 0.16 ? 0 : p < 0.38 ? 1 : p < 0.63 ? 2 : p < 0.86 ? 3 : 4;
+  return p < 0.16 ? 0 : p < 0.32 ? 1 : p < 0.48 ? 2 : p < 0.66 ? 3 : p < 0.84 ? 4 : 5;
 }
 
-/** Pure scene state. Reversing the scroll retraces precisely the same build. */
+/** Scroll peels the finished house. Progress 0 is the whole building. */
 function groupState(id, progress) {
   const p = clamp(progress);
   const state = (visible, cut = 100, opacity = 1) => ({ visible, cut, opacity });
+  const roofFade = 1 - smooth(0.32, 0.46, p);
+  const roofCut = mix(32, 19.6, smooth(0.30, 0.46, p));
+  const upperCut = mix(21.2, 10.35, smooth(0.48, 0.64, p));
+  const upperFade = p < 0.50 ? 1 : 1 - smooth(0.58, 0.66, p);
+  const lowerCut = mix(10.6, 0.42, smooth(0.72, 0.94, p));
   switch (id) {
     case 'site': return state(true);
-    case 'lower': return state(true, mix(0.16, 10.5, smooth(0.14, 0.38, p)));
-    case 'upperfloor': return state(p >= 0.39, mix(9.8, 10.5, smooth(0.39, 0.44, p)));
-    case 'upper': return state(p >= 0.44, mix(10.5, 20.5, smooth(0.44, 0.62, p)));
-    case 'garageRoof': return state(p >= 0.63, mix(10, 16, smooth(0.63, 0.76, p)));
-    case 'porchRoof': return state(p >= 0.66, mix(10, 13, smooth(0.66, 0.79, p)));
-    case 'roof': return state(p >= 0.65, mix(20.5, 30, smooth(0.65, 0.84, p)));
-    case 'finish': return state(p > 0.73, mix(20.5, 30, smooth(0.65, 0.84, p)), smooth(0.73, 0.87, p));
+    case 'lower': return state(true, lowerCut);
+    case 'upperfloor': return state(p < 0.67, mix(10.5, 10.15, smooth(0.58, 0.66, p)), upperFade);
+    case 'upper': return state(p < 0.67, upperCut, upperFade);
+    case 'garageRoof':
+    case 'porchRoof':
+    case 'roof': return state(roofFade > 0.02, roofCut, roofFade);
+    case 'finish': return state(p < 0.67, p < 0.48 ? roofCut : upperCut, p < 0.32 ? 1 : upperFade);
     default: return state(true);
   }
 }
 
 function visibleHeight(p, bounds) {
-  if (p < 0.44) return mix(0.16, 10.5, smooth(0.14, 0.38, p));
-  if (p < 0.65) return mix(10.5, 20.5, smooth(0.44, 0.62, p));
-  return Math.min(bounds.max[1], mix(20.5, 30, smooth(0.65, 0.84, p)));
+  const full = bounds.max[1];
+  if (p < 0.30) return full;
+  if (p < 0.50) return mix(full, 20.6, smooth(0.30, 0.46, p));
+  if (p < 0.70) return mix(20.6, 11.2, smooth(0.48, 0.66, p));
+  return mix(11.2, 1.4, smooth(0.72, 0.94, p));
 }
 
 /**
@@ -359,13 +367,14 @@ function visibleHeight(p, bounds) {
  */
 function scrollPose(progress) {
   const p = clamp(Number.isFinite(progress) ? progress : 0);
+  const axon = 52 * Math.PI / 180;
+  const front = 76 * Math.PI / 180;
+  const plan = 0.05;
+  const toFront = smooth(0.10, 0.28, p);
+  const toPlan = smooth(0.40, 0.62, p);
   return {
-    angle: (
-      20 * smooth(0.10, 0.30, p) +
-      10 * smooth(0.38, 0.55, p) +
-      25 * smooth(0.62, 0.94, p)
-    ) * Math.PI / 180,
-    heading: -33 * smooth(0.15, 0.92, p) * Math.PI / 180,
+    angle: mix(mix(axon, front, toFront), plan, toPlan),
+    heading: mix(mix(-36 * Math.PI / 180, Math.PI, toFront), -0.2, toPlan),
   };
 }
 
@@ -475,7 +484,7 @@ void main() {
   if (vBaseY > uCut + 0.001) discard;
   vec3 normal = normalize(vNormal);
   if (!gl_FrontFacing) normal = -normal;
-  float light = 0.80 + 0.20 * max(0.0, dot(normal, normalize(vec3(-0.55, 0.86, 0.38))));
+  float light = 0.93 + 0.07 * max(0.0, dot(normal, normalize(vec3(-0.35, 0.9, 0.28))));
   vec3 color = vColor * light;
   float mark = uLift;
   if (uFocus > 0.5 && abs(vRole - uFocus) < 0.1) mark = 1.0;
@@ -548,11 +557,12 @@ void main() {
 }`;
 
 function labelsFor(model, progress, mvp, width, height) {
-  const main = progress <= 0.19;
-  const upper = progress >= 0.45 && progress <= 0.61;
+  const upper = progress >= 0.50 && progress <= 0.66;
+  const main = progress >= 0.68 && progress <= 0.84;
   if (!main && !upper) return [];
-  const opacity = main ? 1 - smooth(0.13, 0.19, progress)
-    : smooth(0.45, 0.48, progress) * (1 - smooth(0.58, 0.61, progress));
+  const opacity = upper
+    ? smooth(0.50, 0.54, progress) * (1 - smooth(0.62, 0.66, progress))
+    : smooth(0.68, 0.72, progress) * (1 - smooth(0.80, 0.84, progress));
   if (opacity < 0.015) return [];
   const floor = main ? 'main' : 'upper';
   const labels = [];
@@ -731,7 +741,7 @@ function createRenderer(canvas) {
     attribute(shadowProgram, 'aPosition', 3, 3, 0);
     gl.uniformMatrix4fv(shadowProgram.uniforms.uMvp, false, mvp);
     gl.uniform3fv(shadowProgram.uniforms.uPaper, PAPER);
-    gl.uniform1f(shadowProgram.uniforms.uStrength, mix(0.04, 0.14, smooth(0.16, 0.84, p)));
+    gl.uniform1f(shadowProgram.uniforms.uStrength, mix(0.18, 0.05, smooth(0.28, 0.78, p)));
     gl.drawArrays(gl.TRIANGLES, 0, shadow.count);
     stats.drawCalls++;
     stats.triangles += 2;
@@ -791,11 +801,12 @@ function createRenderer(canvas) {
 }
 
   var STAGES = [
-    { id: "plan", end: 0.16, line: "The main floor, cut flat and seen from above." },
-    { id: "walls", end: 0.38, line: "The main-floor walls rise from the same footprint." },
-    { id: "upper", end: 0.63, line: "The upper floor stacks around the stair opening, over the open patio." },
-    { id: "shell", end: 0.86, line: "The east gable, west hip, dormer, and garage roof close the shell." },
-    { id: "massing", end: 2, line: "The finished house, in the massing view." }
+    { id: "house", end: 0.16, line: "The finished house. Tap it, then drag to turn it." },
+    { id: "front", end: 0.32, line: "The front: board-and-batten gable, dormer, porch, and the two-car garage." },
+    { id: "roof", end: 0.48, line: "The roof lifts off. Hip, gable, dormer, and the lower garage roof." },
+    { id: "upper", end: 0.66, line: "The upper floor: primary suite, two bedrooms, laundry, and the stair." },
+    { id: "plan", end: 0.84, line: "The main floor, cut flat and seen from above." },
+    { id: "foundation", end: 2, line: "The foundation, the slab the frame stands on." }
   ];
 
   function mount() {
@@ -937,7 +948,7 @@ function createRenderer(canvas) {
 
     function setExplore(on) {
       var stageId = current || stageByProgress(rendered).id;
-      if (on && stageId === "plan") return;
+      if (on && stageId !== "house") return;
       explore = !!on;
       if (!explore) dragging = false;
       root.classList.toggle("is-explore", explore);
@@ -952,7 +963,7 @@ function createRenderer(canvas) {
     }
 
     function updateExploreChrome(stageId) {
-      var allowed = stageId !== "plan";
+      var allowed = stageId === "house";
       if (exploreBar) exploreBar.hidden = !allowed;
       if (!allowed) {
         if (explore) setExplore(false);
@@ -1020,8 +1031,8 @@ function createRenderer(canvas) {
         node.style.opacity = String(item.opacity);
       }
       for (i = accepted.length; i < labelNodes.length; i++) labelNodes[i].hidden = true;
-      root.classList.toggle("is-plan", rendered <= 0.2 && accepted.length > 0);
-      root.classList.toggle("is-upper-labels", rendered > 0.4 && rendered < 0.62 && accepted.length > 0);
+      root.classList.toggle("is-plan", rendered >= 0.68 && rendered <= 0.84 && accepted.length > 0);
+      root.classList.toggle("is-upper-labels", rendered >= 0.50 && rendered < 0.67 && accepted.length > 0);
     }
 
     function paint(p) {
@@ -1072,7 +1083,7 @@ function createRenderer(canvas) {
       var stageNow = stageByProgress(Math.abs(target - rendered) < 0.0004 ? target : rendered);
       var idleFor = (typeof performance !== "undefined" ? performance.now() : 0) - lastInteract;
       var spinning = explore && !reduced.matches && !dragging && pointers.size === 0 &&
-        stageNow.id === "massing" && rendered > 0.9 && idleFor > 1600 && !moving;
+        stageNow.id === "house" && rendered < 0.14 && idleFor > 1600 && !moving;
       if (spinning) {
         yaw += (dt / 1000) * 0.22;
         dirty = true;
@@ -1184,7 +1195,7 @@ function createRenderer(canvas) {
       });
     }
     on(canvas, "keydown", function (event) {
-      if (stageByProgress(rendered).id === "plan") return;
+      if (stageByProgress(rendered).id !== "house") return;
       var handled = true;
       if (event.key === "ArrowLeft") nudgeYaw(0.14);
       else if (event.key === "ArrowRight") nudgeYaw(-0.14);
@@ -1202,7 +1213,7 @@ function createRenderer(canvas) {
     });
     on(canvas, "click", function () {
       if (explore) return;
-      if ((current || stageByProgress(rendered).id) !== "massing") return;
+      if ((current || stageByProgress(rendered).id) !== "house") return;
       exploreDismissed = false;
       exploreDismissedAt = "";
       setExplore(true);
