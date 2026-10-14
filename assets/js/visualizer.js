@@ -85,6 +85,9 @@ if (root) {
         }
         const next = button.getAttribute("aria-pressed") !== "true";
         button.setAttribute("aria-pressed", next ? "true" : "false");
+        button.removeAttribute("aria-invalid");
+        const chipGroup = button.closest("[role='group']");
+        if (chipGroup) chipGroup.removeAttribute("aria-invalid");
         if (group === "kitchen-scope") {
           const flag = document.getElementById("see-layout-flag");
           if (flag) flag.hidden = selected("kitchen-scope") !== "layout-change";
@@ -545,6 +548,30 @@ if (root) {
         return;
       }
       say("Request received. The concept is processing.");
+      const renderUrl = data.url || data.imageUrl || data.afterUrl;
+      if (renderUrl) {
+        const before = document.getElementById("see-result-before");
+        const after = document.getElementById("see-result-after");
+        const shot = preview && preview.querySelector("img");
+        const uploaded = shot && shot.dataset.url;
+        if (before && uploaded) {
+          before.src = uploaded;
+          before.alt = "Uploaded photo used for this concept preview.";
+        }
+        if (after) {
+          after.src = renderUrl;
+          after.alt = "Concept preview from the uploaded photo. Not a bid or a permit drawing.";
+        }
+        const learn = document.getElementById("see-learn-link");
+        if (learn && LEARN[snapshotMode]) {
+          learn.href = LEARN[snapshotMode][0];
+          learn.textContent = LEARN[snapshotMode][1];
+        }
+        previewReady = true;
+        showFlow("preview");
+      } else {
+        fillResult();
+      }
     } catch {
       say("The concept service is not available. Use the contact page. Nothing was sent.");
     } finally {
@@ -563,6 +590,24 @@ if (root) {
 
   function groupChosen(group) {
     return root.querySelector('.see-chip[data-group="' + group + '"][aria-pressed="true"]');
+  }
+
+  function chipTargetId(group) {
+    const chip = root.querySelector('.see-chip[data-group="' + group + '"]');
+    if (!chip) return "";
+    if (!chip.id) chip.setAttribute("id", "see-chip-" + group);
+    return chip.id;
+  }
+
+  function markInvalid(target) {
+    if (!target) return;
+    const tag = target.tagName;
+    if (tag === "INPUT" || tag === "SELECT" || tag === "TEXTAREA" || target.getAttribute("role") === "group") {
+      target.setAttribute("aria-invalid", "true");
+      return;
+    }
+    const group = target.closest ? target.closest("[role='group']") : null;
+    if (group) group.setAttribute("aria-invalid", "true");
   }
 
   function showStepErrors(missing) {
@@ -584,7 +629,7 @@ if (root) {
         event.preventDefault();
         const target = document.getElementById(item.id);
         if (!target) return;
-        target.setAttribute("aria-invalid", "true");
+        markInvalid(target);
         target.focus();
       });
       box.appendChild(document.createElement("br"));
@@ -596,10 +641,10 @@ if (root) {
 
   document.getElementById("see-to-step-2")?.addEventListener("click", () => {
     const missing = [];
-    if (!groupChosen("project-type")) missing.push({ id: "see-step-1-title", label: "project type" });
-    if (!groupChosen("timeline")) missing.push({ id: "see-step-1-title", label: "timeline" });
-    if (!groupChosen("budget")) missing.push({ id: "see-step-1-title", label: "budget" });
-    if (!groupChosen("relationship")) missing.push({ id: "see-step-1-title", label: "relationship to the property" });
+    if (!groupChosen("project-type")) missing.push({ id: chipTargetId("project-type"), label: "project type" });
+    if (!groupChosen("timeline")) missing.push({ id: chipTargetId("timeline"), label: "timeline" });
+    if (!groupChosen("budget")) missing.push({ id: chipTargetId("budget"), label: "budget" });
+    if (!groupChosen("relationship")) missing.push({ id: chipTargetId("relationship"), label: "relationship to the property" });
     const city = document.getElementById("see-city");
     const zip = document.getElementById("see-zip");
     if (!city?.value) missing.push({ id: "see-city", label: "city" });
@@ -815,6 +860,19 @@ if (root) {
       say("The concept service is not available. Use the contact page. Nothing was sent.");
     }
   }
+
+  root.addEventListener("input", (event) => {
+    const el = event.target;
+    if (!el || !el.tagName) return;
+    const tag = el.tagName;
+    if (tag === "INPUT" || tag === "SELECT" || tag === "TEXTAREA") el.removeAttribute("aria-invalid");
+  });
+  root.addEventListener("change", (event) => {
+    const el = event.target;
+    if (!el || !el.tagName) return;
+    const tag = el.tagName;
+    if (tag === "INPUT" || tag === "SELECT" || tag === "TEXTAREA") el.removeAttribute("aria-invalid");
+  });
 
   hideMapsUi();
   loadPlaces();

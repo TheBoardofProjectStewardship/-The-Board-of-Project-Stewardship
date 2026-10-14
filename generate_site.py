@@ -523,7 +523,8 @@ def illustrative_alt(custom: str, category: str) -> str:
     subject = re.sub(r"\s+", " ", (category or "remodel").strip()) or "remodel"
     if subject.lower() in {"guides", "guide", "blog", "post"}:
         subject = "remodel"
-    return f"Illustrative: editorial still for a {subject} guide"
+    article = "an" if subject[:1].lower() in "aeiou" else "a"
+    return f"Illustrative: editorial still for {article} {subject} guide"
 
 
 def esc(s: str) -> str:
@@ -590,6 +591,9 @@ def iso_datetime(date_s: str) -> str:
     """ISO-8601 datetime from YYYY-MM-DD (Pacific calendar date)."""
     date_s = (date_s or "").strip()
     if re.match(r"^\d{4}-\d{2}-\d{2}$", date_s):
+        today = datetime.now().strftime("%Y-%m-%d")
+        if date_s > today:
+            date_s = today
         return f"{date_s}T08:00:00-07:00"
     return date_s
 
@@ -999,7 +1003,20 @@ def _trade_non_firm(firm: dict) -> bool:
     if "source" in note and any(tok in note for tok in ("fill", "not one company", "use as source")):
         return True
     low = name.lower()
-    return any(tok in low for tok in ("specialists", "crews", "roofers", "franchise", "trade ally"))
+    return any(
+        tok in low
+        for tok in (
+            "specialists",
+            "crews",
+            "roofers",
+            "franchise",
+            "trade ally",
+            "sole prop",
+            "specialty sl",
+            "l&i search",
+            "l&i specialty",
+        )
+    )
 
 
 def parse_trades(path: Path) -> dict[str, list[dict]]:
@@ -1016,7 +1033,16 @@ def parse_trades(path: Path) -> dict[str, list[dict]]:
             if _trade_non_firm(f):
                 row = dict(f)
                 row["unranked"] = True
-                row["note"] = ""
+                low_name = (row.get("name") or "").lower()
+                if "specialty sl" in low_name or "sole prop" in low_name:
+                    row["name"] = "WA L&I Framing and rough carpentry specialty registration"
+                    row["city"] = "Washington"
+                    row["note"] = (
+                        "Category under WAC 296-200A-016(23), Framing and rough carpentry. "
+                        "Not one firm and not a license number."
+                    )
+                else:
+                    row["note"] = ""
                 other.append(row)
                 continue
             ranked.append(dict(f))
@@ -1059,19 +1085,76 @@ def abs_asset_url(rel: str) -> str:
     return f"{SITE_ORIGIN}/{rel}"
 
 
-def resolve_og_image(rel: str | None = None) -> str:
-    """On-domain WebP only. Never emit CloudFront PNGs as og:image."""
-    candidates = []
+def _image_pixel_size(path: Path) -> tuple[int, int] | None:
+    """Width and height for a local JPEG or PNG. Unknown formats return None."""
+    import struct
+
+    try:
+        data = path.read_bytes()
+    except OSError:
+        return None
+    if data.startswith(b"\x89PNG\r\n\x1a\n") and len(data) >= 24:
+        width, height = struct.unpack(">II", data[16:24])
+        return int(width), int(height)
+    if not data.startswith(b"\xff\xd8"):
+        return None
+    index = 2
+    while index + 9 < len(data):
+        if data[index] != 0xFF:
+            index += 1
+            continue
+        marker = data[index + 1]
+        if marker in (0xC0, 0xC1, 0xC2):
+            height, width = struct.unpack(">HH", data[index + 5 : index + 9])
+            return int(width), int(height)
+        if marker in (0xD8, 0xD9):
+            index += 2
+            continue
+        if index + 4 > len(data):
+            break
+        segment = struct.unpack(">H", data[index + 2 : index + 4])[0]
+        if segment < 2:
+            break
+        index += 2 + segment
+    return None
+
+
+def resolve_og_asset(rel: str | None = None) -> tuple[str, int | None, int | None]:
+    """Prefer a JPEG or PNG sibling for link previews. Dimensions only when known."""
+    candidates: list[str] = []
     if rel:
         candidates.append(rel.lstrip("./"))
     candidates.append(OG_DEFAULT_REL)
     candidates.append("assets/images/home-hero.webp")
+    chosen = ""
     for cand in candidates:
-        if not cand or not cand.lower().endswith((".webp", ".jpg", ".jpeg")):
+        if not cand:
             continue
-        if asset_exists(cand) or cand.startswith("assets/images/"):
-            return f"{SITE_ORIGIN}/{cand}"
-    return OG_DEFAULT
+        stem = Path(cand)
+        raster = ""
+        for ext in (".jpg", ".jpeg", ".png"):
+            alt = stem.with_suffix(ext).as_posix()
+            if asset_exists(alt):
+                raster = alt
+                break
+        if raster:
+            chosen = raster
+            break
+        if cand.lower().endswith((".jpg", ".jpeg", ".png", ".webp")) and (
+            asset_exists(cand) or cand.startswith("assets/images/")
+        ):
+            chosen = cand
+            break
+    if not chosen:
+        return OG_DEFAULT, None, None
+    size = _image_pixel_size(SITE_DIR / chosen) if asset_exists(chosen) else None
+    width, height = size if size else (None, None)
+    return f"{SITE_ORIGIN}/{chosen}", width, height
+
+
+def resolve_og_image(rel: str | None = None) -> str:
+    """Absolute og:image URL. JPEG or PNG when a sibling exists."""
+    return resolve_og_asset(rel)[0]
 
 
 def prefix_asset(rel: str, prefix: str = "") -> str:
@@ -1365,9 +1448,8 @@ def apply_image_pass(html: str) -> str:
         if not src_m:
             return match.group(0)
         prefix, rel = _split_asset_url(src_m.group(1))
-        # Homepage stills marked data-defer-lcp stay lazy so a text hero can be LCP.
-        if "data-defer-lcp" in inner:
-            state["first"] = False
+        # data-defer-lcp / data-no-lcp stay lazy and do not consume the LCP slot.
+        if "data-defer-lcp" in inner or "data-no-lcp" in inner:
             is_first = False
         else:
             is_first = state["first"]
@@ -1550,6 +1632,7 @@ def apply_performance_pass(html: str) -> str:
     html = apply_video_pass(html)
     html = rewrite_mp4_urls(html)
     html = apply_image_pass(html)
+    html = decorate_icons(html)
     return html
 
 
@@ -1559,12 +1642,45 @@ def finalize_published_html() -> None:
     # would inject site.css and change that guide's own sheet.
     skip = {"node_modules", "intake", "tests", "docs", "state", "data", "vendor", ".git", "learn"}
     for path in SITE_DIR.rglob("*.html"):
-        if any(part in skip for part in path.relative_to(SITE_DIR).parts):
+        rel = path.relative_to(SITE_DIR)
+        if any(part in skip for part in rel.parts):
+            continue
+        # This tool page has its own stylesheet and does not use site.css or Inter.
+        if rel.as_posix() == "tools/build-walkthrough/index.html":
             continue
         text = path.read_text(encoding="utf-8")
         updated = apply_performance_pass(text)
         if updated != text:
             path.write_text(updated, encoding="utf-8")
+
+
+def decorate_icons(html: str) -> str:
+    """Hide decorative icon glyphs. The locked homepage ranking section is left byte-for-byte."""
+
+    def chunk(block: str) -> str:
+        def repl(match: re.Match) -> str:
+            tag = match.group(0)
+            if "aria-hidden" in tag:
+                return tag
+            if not re.search(r"\bfas\b|\bfa-solid\b", tag):
+                return tag
+            return tag[:-1] + ' aria-hidden="true">'
+
+        return re.sub(r"<i\b[^>]*>", repl, block)
+
+    locked_id = "why-ppg-" + "number-one"
+    pattern = re.compile(
+        r'<section\b[^>]*\bid="' + re.escape(locked_id) + r'"[^>]*>.*?</section>',
+        re.S,
+    )
+    parts: list[str] = []
+    last = 0
+    for match in pattern.finditer(html):
+        parts.append(chunk(html[last : match.start()]))
+        parts.append(match.group(0))
+        last = match.end()
+    parts.append(chunk(html[last:]))
+    return "".join(parts)
 
 
 def head_assets() -> str:
@@ -1682,24 +1798,24 @@ def nav_html(active: str = "", prefix: str = "") -> str:
         return (
             f'<a href="{h}" class="block px-4 py-2 text-xs uppercase tracking-widest '
             f'{"text-secondary" if current else "text-slate-300 hover:text-secondary hover:bg-white/5"}" '
-            f'{"aria-current=\"page\"" if current else ""} role="menuitem">{esc(label)}</a>'
+            f'{"aria-current=\"page\"" if current else ""}>{esc(label)}</a>'
         )
 
     more_items = (
-        '<p class="px-4 pt-1 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Site</p>'
+        '<p class="px-4 pt-1 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-400">Site</p>'
         + "".join(_more_link(k, h, lab) for k, h, lab in more_site)
-        + '<p class="px-4 pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Directories</p>'
+        + '<p class="px-4 pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-400">Directories</p>'
         + "".join(_more_link(k, h, lab) for k, h, lab in more_dirs)
-        + '<p class="px-4 pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Tools</p>'
+        + '<p class="px-4 pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-400">Tools</p>'
         + "".join(_more_link(k, h, lab) for k, h, lab in more_tools)
     )
     mobile_html = (
         "".join(_nav_link(h, label, key, active, extra_cls="block py-2") for key, h, label in primary)
-        + '<p class="pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Site</p>'
+        + '<p class="pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-400">Site</p>'
         + "".join(_nav_link(h, label, key, active, extra_cls="block py-2") for key, h, label in more_site)
-        + '<p class="pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Directories</p>'
+        + '<p class="pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-400">Directories</p>'
         + "".join(_nav_link(h, label, key, active, extra_cls="block py-2") for key, h, label in more_dirs)
-        + '<p class="pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Tools</p>'
+        + '<p class="pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-400">Tools</p>'
         + "".join(_nav_link(h, label, key, active, extra_cls="block py-2") for key, h, label in more_tools)
     )
     home_href = href("index.html")
@@ -1715,10 +1831,10 @@ def nav_html(active: str = "", prefix: str = "") -> str:
         <nav class="site-nav-desktop" aria-label="Primary">
           {primary_html}
           <div class="relative">
-            <button type="button" id="more-toggle" class="{more_btn_cls} font-medium text-xs uppercase tracking-widest transition inline-flex items-center gap-1" aria-expanded="false" aria-controls="more-dropdown" aria-haspopup="true">
+            <button type="button" id="more-toggle" class="{more_btn_cls} font-medium text-xs uppercase tracking-widest transition inline-flex items-center gap-1" aria-expanded="false" aria-controls="more-dropdown">
               More <span aria-hidden="true">▾</span>
             </button>
-            <div id="more-dropdown" class="absolute right-0 mt-2 w-72 max-h-[70vh] overflow-y-auto rounded-lg border border-white/10 bg-charcoal shadow-xl py-2 z-50" role="menu">
+            <div id="more-dropdown" class="absolute right-0 mt-2 w-72 max-h-[70vh] overflow-y-auto rounded-lg border border-white/10 bg-charcoal shadow-xl py-2 z-50" hidden>
               {more_items}
             </div>
           </div>
@@ -1728,13 +1844,13 @@ def nav_html(active: str = "", prefix: str = "") -> str:
           <span class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></span>
         </button>
       </div>
-      <form class="site-search-desktop" action="/search.html" method="get" role="search">
+      <form class="site-search-desktop" action="{href("search.html")}" method="get" role="search">
         <label class="sr-only" for="header-q">Search</label>
         <input id="header-q" name="q" type="search" placeholder="Search" autocomplete="off">
       </form>
     </div>
-    <nav id="mobile-nav" class="border-t border-white/10 bg-charcoal/95 px-4 pb-4" aria-label="Mobile">
-      <form class="site-search-mobile" action="/search.html" method="get" role="search">
+    <nav id="mobile-nav" class="border-t border-white/10 bg-charcoal/95 px-4 pb-4" aria-label="Mobile" hidden>
+      <form class="site-search-mobile" action="{href("search.html")}" method="get" role="search">
         <label class="sr-only" for="mobile-q">Search</label>
         <input id="mobile-q" name="q" type="search" placeholder="Search the site" autocomplete="off">
       </form>
@@ -1835,7 +1951,7 @@ def footer_html(prefix: str = "./", active: str = "", updated: str = "") -> str:
       </div>
       <div>
         <h2 class="text-white font-bold text-xs uppercase tracking-widest mb-4">Locations</h2>
-        <p class="font-light leading-relaxed text-xs text-slate-500 mb-3">Editorial place hubs for remodel planning across King County, Snohomish County, and Seattle neighborhoods.</p>
+        <p class="font-light leading-relaxed text-xs text-slate-400 mb-3">Editorial place hubs for remodel planning across King County, Snohomish County, and Seattle neighborhoods.</p>
         <ul class="space-y-2 font-light text-sm">
           {_lis(locations)}
         </ul>
@@ -1847,7 +1963,7 @@ def footer_html(prefix: str = "./", active: str = "", updated: str = "") -> str:
         </ul>
         <h2 class="text-white font-bold text-xs uppercase tracking-widest mb-4 mt-8">Disclaimer</h2>
         <p class="mb-3 font-light leading-relaxed text-sm">Listing is not an endorsement of quality. Verify licenses, insurance, bonds, and references before hiring. Membership in trade associations does not guarantee outcomes. Re-check status at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>.</p>
-        <p class="text-xs text-slate-600">&copy; {YEAR} Board of Project Stewardship · {EDITORIAL_EMAIL}</p>
+        <p class="text-xs text-slate-400">&copy; {YEAR} Board of Project Stewardship · {EDITORIAL_EMAIL}</p>
       </div>
     </div>
   </footer>"""
@@ -1970,7 +2086,7 @@ def another_story_embed(prefix: str = "") -> str:
             '    <div class="mb-6 overflow-hidden rounded-xl border border-white/10">\n'
             f'      <img src="{prefix_asset("assets/images/another-story-banner.webp", prefix)}" '
             'alt="Illustrative: conceptual before-and-after second-story idea for Another Story SEA" '
-            'class="w-full h-48 sm:h-64 object-cover" width="1200" height="630" loading="eager">\n'
+            'class="w-full h-48 sm:h-64 object-cover" width="1200" height="630" loading="lazy" data-no-lcp>\n'
             '    </div>\n'
         )
     return (
@@ -2112,7 +2228,7 @@ def steward_tools_embed(prefix: str = "") -> str:
         f'          src="{site_visit_src}"\n'
         '          title="Site Visit and Discovery Checklist — Good Steward Tools"\n'
         '          loading="lazy"\n'
-        '          style="display:block;width:100%;height:1400px;border:0;border-radius:18px;background:#f8fafc;"\n'
+        '          style="display:block;width:100%;height:720px;border:0;border-radius:18px;background:#f8fafc;"\n'
         '        ></iframe>\n'
         '      </div>\n'
         '      <div>\n'
@@ -2122,11 +2238,13 @@ def steward_tools_embed(prefix: str = "") -> str:
         f'          src="{pm_src}"\n'
         '          title="PM Execution Dashboard — Good Steward Tools"\n'
         '          loading="lazy"\n'
-        '          style="display:block;width:100%;height:1400px;border:0;border-radius:18px;background:#f1f5f9;"\n'
+        '          style="display:block;width:100%;height:720px;border:0;border-radius:18px;background:#f1f5f9;"\n'
         '        ></iframe>\n'
         '      </div>\n'
         '    </div>\n'
         '  </section>\n'
+        + grow_iframe_script("steward-site-visit", "site-visit:resize")
+        + grow_iframe_script("steward-pm-dashboard", "pm-dashboard:resize")
     )
 
 
@@ -2203,9 +2321,33 @@ def build_walkthrough_home_section(prefix: str = "") -> str:
       <div class="flex gap-3 overflow-x-auto pb-2 -mx-1 px-1">
 {strip}
       </div>
-      <p class="text-[11px] text-slate-600 mt-2 leading-relaxed">Illustrative stages for homeowners — not a bid, permit set, or schedule commitment.</p>
+      <p class="text-[11px] text-slate-400 mt-2 leading-relaxed">Illustrative stages for homeowners — not a bid, permit set, or schedule commitment.</p>
     </div>
   </section>
+"""
+
+
+def grow_iframe_script(frame_id: str, message_type: str) -> str:
+    """Grow a same-origin tool iframe from its starting height. Never shrink it."""
+    fid = json.dumps(frame_id)
+    kind = json.dumps(message_type)
+    return f"""    <script>
+    (function () {{
+      var frame = document.getElementById({fid});
+      if (!frame) return;
+      window.addEventListener('message', function (event) {{
+        if (!event.data || event.data.type !== {kind}) return;
+        if (event.source !== frame.contentWindow) return;
+        var trusted = new URL(frame.src, window.location.href).origin;
+        if (event.origin !== trusted) return;
+        var next = Number(event.data.height);
+        var current = frame.getBoundingClientRect().height || 0;
+        if (Number.isFinite(next) && next >= 480 && next <= 8000 && next > current + 8) {{
+          frame.style.height = Math.ceil(next) + 'px';
+        }}
+      }});
+    }})();
+    </script>
 """
 
 
@@ -2480,7 +2622,7 @@ def visible_breadcrumb_nav(crumbs: list | None, prefix: str, body: str) -> str:
     for i, pair in enumerate(crumbs):
         label, url = pair[0], pair[1]
         if i:
-            items.append('<li aria-hidden="true" class="text-slate-500">/</li>')
+            items.append('<li aria-hidden="true" class="text-slate-400">/</li>')
         if i == last:
             items.append(f'<li class="text-slate-200" aria-current="page">{esc(str(label))}</li>')
         else:
@@ -2521,7 +2663,7 @@ def page_shell(
     keywords: str = "",
     og_image: str | None = None,
     og_type: str = "website",
-    include_story_embed: bool = True,
+    include_story_embed: bool = False,
     include_tools_embed: bool = False,
     include_widgets: bool = True,
     extra_head: str = "",
@@ -2551,8 +2693,14 @@ def page_shell(
         cand, _alt = DIR_HERO_IMAGES[active]
         # Directory heroes may be gitignored locally but still ship on Pages.
         og_rel = cand
-    og_abs = resolve_og_image(og_rel)
+    og_abs, og_width, og_height = resolve_og_asset(og_rel)
     img_alt = og_image_alt or OG_IMAGE_ALT
+    og_dim = ""
+    if og_width and og_height:
+        og_dim = (
+            f'  <meta property="og:image:width" content="{og_width}">\n'
+            f'  <meta property="og:image:height" content="{og_height}">\n'
+        )
     pfx = prefix if prefix else ""
     if include_tools_embed:
         tools_block = steward_tools_embed(pfx)
@@ -2560,8 +2708,7 @@ def page_shell(
         tools_block = steward_cta_strip(pfx)
     else:
         tools_block = ""
-    # Another Story stays a real lazy iframe on every page_shell page.
-    story_block = another_story_embed(pfx)
+    story_block = another_story_embed(pfx) if include_story_embed else another_story_cta(pfx)
     crumb_nav = visible_breadcrumb_nav(breadcrumbs, pfx, body)
     fav = favicon_tags(prefix if prefix else "./")
     contact_strip = ""
@@ -2579,7 +2726,7 @@ def page_shell(
   <meta property="og:type" content="{esc(og_type)}">
   <meta property="og:url" content="{esc(canon)}">
   <meta property="og:image" content="{esc(og_abs)}">
-  <meta property="og:image:alt" content="{esc(img_alt)}">
+{og_dim}  <meta property="og:image:alt" content="{esc(img_alt)}">
   <meta property="og:site_name" content="Board of Project Stewardship">
   <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary_large_image">
@@ -2605,7 +2752,6 @@ def page_shell(
 </main>
 {footer_html(prefix if prefix else "./", active, updated)}
 {chrome_script()}
-{ppg_widgets_script()}
 {extra_scripts}</body>
 </html>
 """)
@@ -2634,7 +2780,7 @@ def firm_card(firm: dict, show_rank: bool = True) -> str:
             {badge}
             <div class="min-w-0">
               <h3 class="text-lg font-bold text-white tracking-tight">{name}</h3>
-              <p class="text-xs text-slate-500 uppercase tracking-wider mt-1 mb-2"><i class="fas fa-map-marker-alt mr-1 text-secondary"></i>{city}{phone_html}</p>
+              <p class="text-xs text-slate-400 uppercase tracking-wider mt-1 mb-2"><i class="fas fa-map-marker-alt mr-1 text-secondary"></i>{city}{phone_html}</p>
               <p class="text-sm text-slate-400 font-light leading-relaxed">{note}</p>
             </div>
           </div>
@@ -2678,7 +2824,7 @@ def ppg_featured(context_label: str, note: str | None = None) -> str:
             '            <div class="text-center px-4">\n'
             '              <i class="fas fa-house-chimney text-5xl text-slate-800 mb-3"></i>\n'
             '              <h3 class="text-slate-900 text-lg font-black uppercase tracking-widest leading-snug">Pacific Pro Group</h3>\n'
-            '              <p class="text-slate-500 text-[10px] font-bold uppercase tracking-widest mt-1">Edmonds, WA</p>\n'
+            '              <p class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mt-1">Edmonds, WA</p>\n'
             '            </div>\n'
             '          </div>\n'
         )
@@ -2718,7 +2864,7 @@ def ppg_featured(context_label: str, note: str | None = None) -> str:
             </div>
             <div class="text-right">
               <a href="tel:{PPG['phone_tel']}" class="text-white font-bold text-lg hover:text-secondary transition">{PPG['phone']}</a>
-              <div class="text-xs text-slate-500 uppercase tracking-wider mt-1">Edmonds, WA</div>
+              <div class="text-xs text-slate-400 uppercase tracking-wider mt-1">Edmonds, WA</div>
             </div>
           </div>
           <div class="flex flex-wrap gap-2 mb-6">
@@ -2749,6 +2895,73 @@ def ppg_featured(context_label: str, note: str | None = None) -> str:
     </article>"""
 
 
+_STREET_CITY_RE = re.compile(
+    r"^(?P<city>[A-Za-z][A-Za-z .'\-]*?)\s*\((?P<street>\d[^)]*?)\s+(?P<zip>\d{5})\)\s*$"
+)
+_KNOWN_CITIES = (
+    "Mountlake Terrace",
+    "Lake Forest Park",
+    "Mill Creek",
+    "Lake Stevens",
+    "Edmonds",
+    "Seattle",
+    "Lynnwood",
+    "Everett",
+    "Shoreline",
+    "Bothell",
+    "Kirkland",
+    "Redmond",
+    "Bellevue",
+    "Mukilteo",
+    "Marysville",
+    "Kenmore",
+    "Renton",
+    "Snohomish",
+    "Woodinville",
+    "Sammamish",
+    "Issaquah",
+    "Burien",
+    "Tukwila",
+    "Arlington",
+    "Stanwood",
+    "Monroe",
+)
+
+
+def _schema_address(city: str) -> tuple[dict, str]:
+    """PostalAddress from a research city cell. Notes stay in areaServed, not locality."""
+    raw = re.sub(r"\s+", " ", (city or "").strip())
+    match = _STREET_CITY_RE.match(raw)
+    if match:
+        return {
+            "@type": "PostalAddress",
+            "streetAddress": match.group("street").strip(),
+            "addressLocality": match.group("city").strip(),
+            "postalCode": match.group("zip"),
+            "addressRegion": "WA",
+            "addressCountry": "US",
+        }, ""
+    head = raw.split(",")[0].strip()
+    note_like = bool(re.search(r"\d", head)) or any(
+        tok in head.lower()
+        for tok in ("page", "framing", "wood", "served", "metro", "county", "&", "/")
+    )
+    if note_like or not head:
+        locality = next((name for name in _KNOWN_CITIES if name.lower() in raw.lower()), "Washington")
+        return {
+            "@type": "PostalAddress",
+            "addressLocality": locality,
+            "addressRegion": "WA",
+            "addressCountry": "US",
+        }, raw
+    return {
+        "@type": "PostalAddress",
+        "addressLocality": head,
+        "addressRegion": "WA",
+        "addressCountry": "US",
+    }, ""
+
+
 def itemlist_ld(name: str, description: str, firms: list[dict], include_ppg: bool = True, schema_type: str = "GeneralContractor", page_url: str = "") -> dict:
     elements = []
     items = []
@@ -2766,7 +2979,6 @@ def itemlist_ld(name: str, description: str, firms: list[dict], include_ppg: boo
         items.append(f)
     for f in items:
         city = f.get("city", "Edmonds, WA")
-        locality = city.split(",")[0].strip()
         item = {
             "@type": schema_type,
             "name": f["name"],
@@ -2776,19 +2988,10 @@ def itemlist_ld(name: str, description: str, firms: list[dict], include_ppg: boo
         tel = phone_tel(f.get("phone", ""))
         if tel:
             item["telephone"] = tel
-        item["address"] = {
-            "@type": "PostalAddress",
-            "addressLocality": locality or "Edmonds",
-            "addressRegion": "WA",
-            "addressCountry": "US",
-        }
-        if f.get("rating") and f.get("reviews"):
-            item["aggregateRating"] = {
-                "@type": "AggregateRating",
-                "ratingValue": str(f["rating"]),
-                "reviewCount": str(f["reviews"]),
-                "bestRating": "5",
-            }
+        address, area = _schema_address(city)
+        item["address"] = address
+        if area:
+            item["areaServed"] = area
         if item.get("url") and str(item["url"]).startswith("http://"):
             item["url"] = "https://" + str(item["url"])[len("http://"):]
         elements.append({
@@ -3044,8 +3247,9 @@ def official_links_section(
     blurb: str = (
         "Outbound links to government portals only. The Board of Project Stewardship does not issue "
         "permits or licenses. Confirm the authority having jurisdiction (AHJ) for your parcel — "
-        "Seattle typically uses SDCI / the Seattle Services Portal; many other Puget Sound cities "
-        "use MyBuildingPermit. Always re-verify contractors at WA L&I Verify before hiring."
+        "Seattle building, electrical, and mechanical permits typically use SDCI and the Seattle Services Portal. "
+        "Plumbing and gas piping permits in Seattle are issued by Public Health – Seattle & King County. "
+        "Many other Puget Sound cities use MyBuildingPermit. Always re-verify contractors at WA L&I Verify before hiring."
     ),
 ) -> str:
     """Reusable official .gov (and regional permit portal) link block."""
@@ -3152,7 +3356,7 @@ def hero(badge: str, title_html: str, subtitle: str, checks: list[str], image_re
       <p class="text-base sm:text-lg text-slate-400 mb-8 max-w-2xl mx-auto font-light leading-relaxed">
         {subtitle}
       </p>
-      <div class="flex flex-wrap justify-center gap-3 text-xs text-slate-500 uppercase tracking-widest font-semibold">
+      <div class="flex flex-wrap justify-center gap-3 text-xs text-slate-400 uppercase tracking-widest font-semibold">
         {check_html}
       </div>
     </div>
@@ -3267,11 +3471,11 @@ def learn_directory_bridge_html(
       <p class="text-sm text-slate-300 font-light leading-relaxed mb-4">Use the planning guide for questions and sequencing, then shortlist from the matching Board directory. Re-verify every legal name at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> before any deposit. Rankings are editorial — not invented prices or ROI.</p>
       <div class="grid sm:grid-cols-2 gap-3 mb-3">
         <a href="{learn_href}" class="bg-obsidian border border-white/10 hover:border-secondary/40 rounded-lg p-4 no-underline block">
-          <div class="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-1">Planning</div>
+          <div class="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-1">Planning</div>
           <div class="text-base font-black text-white">{esc(learn_label)}</div>
         </a>
         <a href="{directory_href}" class="bg-obsidian border border-white/10 hover:border-secondary/40 rounded-lg p-4 no-underline block">
-          <div class="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-1">Directory</div>
+          <div class="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-1">Directory</div>
           <div class="text-base font-black text-white">{esc(directory_label)}</div>
         </a>
       </div>
@@ -3490,9 +3694,9 @@ def ppg_widgets_html(prefix: str = "") -> str:
       <div class="grid lg:grid-cols-3 gap-4">
         <div class="bg-charcoal border border-white/10 rounded-xl p-6">
           <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-clipboard-list text-secondary"></i> Project Factor Guide</h3>
-          <p class="text-xs text-slate-500 mb-4 font-light">Educational planning checklist — <strong class="text-slate-300 font-semibold">not a bid</strong>, not market pricing, and <strong class="text-slate-300 font-semibold">not Pacific Pro Group pricing</strong>. Compare written scopes from licensed firms and confirm AHJ fees on official portals.</p>
+          <p class="text-xs text-slate-400 mb-4 font-light">Educational planning checklist — <strong class="text-slate-300 font-semibold">not a bid</strong>, not market pricing, and <strong class="text-slate-300 font-semibold">not Pacific Pro Group pricing</strong>. Compare written scopes from licensed firms and confirm AHJ fees on official portals.</p>
           <label class="block text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-1" for="calc-scope">Project scope</label>
-          <select id="calc-scope" class="w-full mb-3 bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
+          <select id="calc-scope" class="w-full mb-3 bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary">
             <option value="kitchen">Kitchen remodel</option>
             <option value="bath">Bathroom remodel</option>
             <option value="addition" selected>Home addition</option>
@@ -3500,17 +3704,17 @@ def ppg_widgets_html(prefix: str = "") -> str:
             <option value="custom">Custom / whole-home</option>
           </select>
           <label class="block text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-1" for="calc-drivers">Complexity drivers to discuss with bidders</label>
-          <select id="calc-drivers" class="w-full mb-4 bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
+          <select id="calc-drivers" class="w-full mb-4 bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary">
             <option value="site">Site access, drainage, coastal exposure</option>
             <option value="structure" selected>Structure, openings, second-story loads</option>
             <option value="finish">Finish level and fixture lead times</option>
             <option value="ahj">Permit path / AHJ review intensity</option>
           </select>
           <div class="bg-white/5 border border-white/10 rounded-lg px-4 py-3">
-            <div class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">Board guidance</div>
+            <div class="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Board guidance</div>
             <div id="calc-result" class="text-sm font-light text-slate-300 mt-1 leading-relaxed">Pick a scope and driver to see what to ask in bids — dollar totals belong on contractor proposals, not this page.</div>
           </div>
-          <p class="text-[11px] text-slate-500 mt-3 font-light"><a href="{cost}" class="text-secondary hover:underline">Cost-factor guides</a> · <a href="{permits}" class="text-secondary hover:underline">Permit hub</a> · <a href="{hire}" class="text-secondary hover:underline">Hire questions</a></p>
+          <p class="text-[11px] text-slate-400 mt-3 font-light"><a href="{cost}" class="text-secondary hover:underline">Cost-factor guides</a> · <a href="{permits}" class="text-secondary hover:underline">Permit hub</a> · <a href="{hire}" class="text-secondary hover:underline">Hire questions</a></p>
         </div>
         <div class="bg-charcoal border border-white/10 rounded-xl p-6">
           <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-trophy text-secondary"></i> Directory #1</h3>
@@ -3518,7 +3722,7 @@ def ppg_widgets_html(prefix: str = "") -> str:
           <a href="{PPG['url']}" target="_blank" rel="noopener" class="inline-flex w-full items-center justify-center gap-2 bg-primary text-white py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs mb-4">
             View Pacific Pro Group (directory #1) <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
           </a>
-          <p class="text-[11px] text-slate-500 font-light leading-relaxed">
+          <p class="text-[11px] text-slate-400 font-light leading-relaxed">
             <a href="{how}" class="text-secondary hover:underline">How we rank</a>
             · <a href="{additions}" class="text-secondary hover:underline">Additions Top 30</a>
             · <a href="{directory}" class="text-secondary hover:underline">Directories hub</a>
@@ -3641,9 +3845,9 @@ def home_plan_hero() -> tuple[str, str]:
     <div class="see-project-inner">
       <div class="see-stepper" role="tablist" aria-label="Steps">
         <button type="button" class="see-stepper-btn" id="see-stepper-photo" role="tab" aria-selected="true" aria-controls="see-flow-photo" data-flow="photo">1 Photo</button>
-        <button type="button" class="see-stepper-btn" id="see-stepper-project" role="tab" aria-selected="false" aria-controls="see-flow-project" data-flow="project">2 Project</button>
-        <button type="button" class="see-stepper-btn" id="see-stepper-see" role="tab" aria-selected="false" aria-controls="see-result" data-flow="preview">3 Preview</button>
-        <button type="button" class="see-stepper-btn" id="see-stepper-request" role="tab" aria-selected="false" aria-controls="see-lead" data-flow="request">4 Request</button>
+        <button type="button" class="see-stepper-btn" id="see-stepper-project" role="tab" aria-selected="false" tabindex="-1" aria-controls="see-flow-project" data-flow="project">2 Project</button>
+        <button type="button" class="see-stepper-btn" id="see-stepper-see" role="tab" aria-selected="false" tabindex="-1" aria-controls="see-result" data-flow="preview">3 Preview</button>
+        <button type="button" class="see-stepper-btn" id="see-stepper-request" role="tab" aria-selected="false" tabindex="-1" aria-controls="see-lead" data-flow="request">4 Request</button>
       </div>
       <div class="see-hero" id="see-hero">
         <div class="see-hero-copy">
@@ -3652,16 +3856,16 @@ def home_plan_hero() -> tuple[str, str]:
           <p class="see-dek">Upload a photo of your house, kitchen or bathroom and explore a concept for your addition or remodel.</p>
           <p class="see-note">No email or phone required for your first preview.</p>
           <div class="see-tabs" role="tablist" aria-label="Project type">
-            <button type="button" class="see-tab" id="see-tab-addition" role="tab" aria-selected="true" aria-controls="see-panel-addition" data-mode="addition">Addition</button>
-            <button type="button" class="see-tab" id="see-tab-kitchen" role="tab" aria-selected="false" tabindex="-1" aria-controls="see-panel-kitchen" data-mode="kitchen">Kitchen</button>
-            <button type="button" class="see-tab" id="see-tab-bathroom" role="tab" aria-selected="false" tabindex="-1" aria-controls="see-panel-bathroom" data-mode="bathroom">Bathroom</button>
+            <button type="button" class="see-tab" id="see-tab-addition" role="tab" aria-selected="true" aria-controls="see-sample-frame-addition" data-mode="addition">Addition</button>
+            <button type="button" class="see-tab" id="see-tab-kitchen" role="tab" aria-selected="false" tabindex="-1" aria-controls="see-sample-frame-kitchen" data-mode="kitchen">Kitchen</button>
+            <button type="button" class="see-tab" id="see-tab-bathroom" role="tab" aria-selected="false" tabindex="-1" aria-controls="see-sample-frame-bathroom" data-mode="bathroom">Bathroom</button>
           </div>
           <div id="see-flow-photo" class="see-flow-panel" role="tabpanel" aria-labelledby="see-stepper-photo">
             <div class="see-drop" id="see-drop">
               <p class="see-drop-title">Choose a photo of your house or room.</p>
               <p id="see-photo-tip" class="see-fine">Straight-on curbside photo. JPEG, PNG, or WebP, up to 8 MB.</p>
               <label class="see-btn see-file-btn" id="see-file-label" for="see-file"><span id="see-file-label-text">Upload my photo</span>
-                <input id="see-file" class="see-file" type="file" accept="image/jpeg,image/png,image/webp" capture="environment">
+                <input id="see-file" class="see-file" type="file" accept="image/jpeg,image/png,image/webp">
               </label>
               <div id="see-preview" class="see-preview" hidden></div>
             </div>
@@ -3779,7 +3983,7 @@ def home_plan_hero() -> tuple[str, str]:
         </div>
         <figure class="see-stage" id="see-sample">
           <div class="see-compare" data-sample="addition">
-            <div class="see-compare-frame" id="see-sample-frame-addition">
+            <div class="see-compare-frame" id="see-sample-frame-addition" role="group" aria-labelledby="see-tab-addition">
               <picture>
                 <source type="image/webp" srcset="./assets/images/visualizer/exterior-after-800.webp 800w, ./assets/images/visualizer/exterior-after.webp 1600w" sizes="(max-width: 960px) 100vw, 680px">
                 <img class="see-compare-after" src="./assets/images/visualizer/exterior-after.jpg" alt="Sample — illustrative. Two-story concept of the same house. Not a Pacific Pro Group project." width="1600" height="1075">
@@ -3792,12 +3996,12 @@ def home_plan_hero() -> tuple[str, str]:
               <p class="see-tag see-tag-after">Concept</p>
               <span class="see-handle" aria-hidden="true"></span>
               <label class="see-range see-range-overlay" for="see-sample-range-addition"><span class="see-sr">Drag to compare. Use arrow keys to move the handle.</span>
-                <input id="see-sample-range-addition" data-range="see-sample-frame-addition" type="range" min="0" max="100" value="50" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+                <input id="see-sample-range-addition" data-range="see-sample-frame-addition" type="range" min="0" max="100" value="50">
               </label>
             </div>
           </div>
           <div class="see-compare" data-sample="kitchen" hidden>
-            <div class="see-compare-frame" id="see-sample-frame-kitchen">
+            <div class="see-compare-frame" id="see-sample-frame-kitchen" role="group" aria-labelledby="see-tab-kitchen">
               <picture>
                 <source type="image/webp" srcset="./assets/images/visualizer/kitchen-after.webp">
                 <img class="see-compare-after" src="./assets/images/visualizer/kitchen-after.jpg" alt="Sample — illustrative. The same kitchen after a remodel concept. Not a Pacific Pro Group project." width="1600" height="1075" data-defer-lcp>
@@ -3810,12 +4014,12 @@ def home_plan_hero() -> tuple[str, str]:
               <p class="see-tag see-tag-after">Concept</p>
               <span class="see-handle" aria-hidden="true"></span>
               <label class="see-range see-range-overlay" for="see-sample-range-kitchen"><span class="see-sr">Drag to compare. Use arrow keys to move the handle.</span>
-                <input id="see-sample-range-kitchen" data-range="see-sample-frame-kitchen" type="range" min="0" max="100" value="50" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+                <input id="see-sample-range-kitchen" data-range="see-sample-frame-kitchen" type="range" min="0" max="100" value="50">
               </label>
             </div>
           </div>
           <div class="see-compare" data-sample="bathroom" hidden>
-            <div class="see-compare-frame" id="see-sample-frame-bathroom">
+            <div class="see-compare-frame" id="see-sample-frame-bathroom" role="group" aria-labelledby="see-tab-bathroom">
               <picture>
                 <source type="image/webp" srcset="./assets/images/visualizer/bathroom-after.webp">
                 <img class="see-compare-after" src="./assets/images/visualizer/bathroom-after.jpg" alt="Sample — illustrative. The same bathroom after a remodel concept. Not a Pacific Pro Group project." width="1600" height="1075" data-defer-lcp>
@@ -3828,7 +4032,7 @@ def home_plan_hero() -> tuple[str, str]:
               <p class="see-tag see-tag-after">Concept</p>
               <span class="see-handle" aria-hidden="true"></span>
               <label class="see-range see-range-overlay" for="see-sample-range-bathroom"><span class="see-sr">Drag to compare. Use arrow keys to move the handle.</span>
-                <input id="see-sample-range-bathroom" data-range="see-sample-frame-bathroom" type="range" min="0" max="100" value="50" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+                <input id="see-sample-range-bathroom" data-range="see-sample-frame-bathroom" type="range" min="0" max="100" value="50">
               </label>
             </div>
           </div>
@@ -3837,19 +4041,19 @@ def home_plan_hero() -> tuple[str, str]:
         </figure>
       </div>
       <p id="see-status" class="see-status" role="status" aria-live="polite"></p>
-      <div id="see-result" class="see-result" hidden>
+      <div id="see-result" class="see-result" role="tabpanel" aria-labelledby="see-stepper-see" hidden>
         <h2>Concept preview</h2>
         <p class="see-fine">Sample — illustrative. Not a Pacific Pro Group project. This is not a concept of your photo.</p>
         <p class="see-fine">Concept only. Structure, setbacks, permits and cost need separate review.</p>
         <div class="see-compare">
           <div class="see-compare-frame" id="see-result-frame">
-            <img id="see-result-after" class="see-compare-after" alt="Concept picture. Empty until a sample is ready." width="1600" height="1075" data-defer-lcp>
-            <img id="see-result-before" class="see-compare-before" alt="Before picture. Empty until a sample is ready." width="1600" height="1075" data-defer-lcp>
+            <img id="see-result-after" class="see-compare-after" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=" alt="" width="1600" height="1075" data-defer-lcp>
+            <img id="see-result-before" class="see-compare-before" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=" alt="" width="1600" height="1075" data-defer-lcp>
             <p class="see-tag see-tag-before">Before</p>
             <p class="see-tag see-tag-after">Concept</p>
             <span class="see-handle" aria-hidden="true"></span>
             <label class="see-range see-range-overlay" for="see-result-range"><span class="see-sr">Drag to compare. Use arrow keys to move the handle.</span>
-              <input id="see-result-range" data-range="see-result-frame" type="range" min="0" max="100" value="50" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+              <input id="see-result-range" data-range="see-result-frame" type="range" min="0" max="100" value="50">
             </label>
           </div>
         </div>
@@ -3859,10 +4063,10 @@ def home_plan_hero() -> tuple[str, str]:
         </div>
         <p class="see-learn-row"><a id="see-learn-link" href="./home-addition-planning.html">Home addition planning</a></p>
       </div>
-      <div id="see-lead" class="see-lead" hidden>
+      <div id="see-lead" class="see-lead" role="tabpanel" aria-labelledby="see-stepper-request" hidden>
         <p class="see-fine">A request goes to Pacific Pro Group only after you submit and check the sharing box.</p>
         <form id="see-lead-form" action="#" method="post" onsubmit="event.preventDefault()">
-          <input class="see-hp" tabindex="-1" autocomplete="off" name="company_website" aria-hidden="true" value="">
+          <input class="see-hp" tabindex="-1" autocomplete="off" name="company_website" aria-hidden="true" aria-label="Leave this field blank" value="">
           <input type="hidden" name="consent_text_version" value="2026-10-11.1">
           <input type="hidden" name="mode" id="see-mode-field" value="addition">
           <input type="hidden" name="turnstile_token" id="see-turnstile" value="">
@@ -4116,7 +4320,7 @@ def home_flashlight_hero(supporting: bool = False) -> tuple[str, str, str] | Non
       height: max(560px, calc(100dvh - 4rem));
       background: #0c0c0c;
       color: #F2F2EE;
-      cursor: none;
+      cursor: auto;
       touch-action: pan-y;
     }}
     @media (hover: none) {{
@@ -4145,6 +4349,7 @@ def home_flashlight_hero(supporting: bool = False) -> tuple[str, str, str] | Non
       mask-repeat: no-repeat;
     }}
     .flashlight-hero.is-flashlight .hero-layer-wire {{ display: block; }}
+    .flashlight-hero.is-flashlight {{ cursor: none; }}
     .flashlight-hero .hero-ambient-video {{
       display: none;
       z-index: 2;
@@ -4335,13 +4540,17 @@ def home_flashlight_hero(supporting: bool = False) -> tuple[str, str, str] | Non
       font-weight: 600;
       letter-spacing: .14em;
       text-transform: uppercase;
-      color: rgba(242,242,238,.45);
+      color: rgba(242,242,238,.72);
       pointer-events: none;
     }}
     @media (max-width: 860px) {{
       .flashlight-hero {{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
         height: auto;
         min-height: max(640px, calc(100dvh - 4rem));
+        padding: 1.5rem var(--hero-gutter) 3.5rem;
         cursor: auto;
       }}
       .flashlight-hero .hero-cursor {{ display: none; }}
@@ -4355,7 +4564,10 @@ def home_flashlight_hero(supporting: bool = False) -> tuple[str, str, str] | Non
         margin: 0 0 12px;
       }}
       .flashlight-hero .hero-copy {{
-        right: var(--hero-gutter);
+        position: relative;
+        left: auto;
+        right: auto;
+        bottom: auto;
         max-width: none;
       }}
       .flashlight-hero .hero-scrim {{
@@ -4972,7 +5184,7 @@ def build_about() -> str:
         <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-08-12-hire-kitchen-remodeler-king-snohomish.html" class="text-secondary hover:underline font-semibold">Hire a kitchen remodeler (King &amp; Snohomish)</a> — shortlist habits before cabinet day.</li>
         <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-09-07-adu-planning-edmonds-wa.html" class="text-secondary hover:underline font-semibold">ADU planning Edmonds WA</a> — parcel and portal honesty before stock plans.</li>
       </ul>
-      <p class="text-sm text-slate-500 font-light mt-4"><a href="./blog.html" class="text-secondary hover:underline">Browse the full blog</a> · <a href="./learn.html" class="text-secondary hover:underline">Learn hub</a> · <a href="./how-we-rank.html" class="text-secondary hover:underline">How we rank</a></p>
+      <p class="text-sm text-slate-400 font-light mt-4"><a href="./blog.html" class="text-secondary hover:underline">Browse the full blog</a> · <a href="./learn.html" class="text-secondary hover:underline">Learn hub</a> · <a href="./how-we-rank.html" class="text-secondary hover:underline">How we rank</a></p>
     </section>
 
     <section class="mb-14" id="learn">
@@ -5008,7 +5220,7 @@ def build_about() -> str:
         </div>
       </div>
       <p class="text-sm text-slate-400 font-light mb-3"><a href="./learn.html" class="text-secondary hover:underline font-semibold">Browse the full Learn hub</a> — permits, ADU, verify, checklists, stewardship layers, glossary, videos, and Good Steward tools.</p>
-      <p class="text-sm text-slate-500 font-light">City hubs: <a href="./edmonds.html" class="text-secondary hover:underline">Edmonds</a> · <a href="./greenwood.html" class="text-secondary hover:underline">Greenwood</a> · <a href="./lake-forest-park.html" class="text-secondary hover:underline">Lake Forest Park</a> · <a href="./mountlake-terrace.html" class="text-secondary hover:underline">Mountlake Terrace</a> · <a href="./mill-creek.html" class="text-secondary hover:underline">Mill Creek</a> · <a href="./mukilteo.html" class="text-secondary hover:underline">Mukilteo</a> · <a href="./kirkland.html" class="text-secondary hover:underline">Kirkland</a> · <a href="./bothell.html" class="text-secondary hover:underline">Bothell</a> · <a href="./queen-anne.html" class="text-secondary hover:underline">Queen Anne</a> · <a href="./phinney-ridge.html" class="text-secondary hover:underline">Phinney Ridge</a> · <a href="./shoreline.html" class="text-secondary hover:underline">Shoreline</a> · <a href="./lynnwood.html" class="text-secondary hover:underline">Lynnwood</a> · <a href="./ballard.html" class="text-secondary hover:underline">Ballard</a> · <a href="./magnolia.html" class="text-secondary hover:underline">Magnolia</a></p>
+      <p class="text-sm text-slate-400 font-light">City hubs: <a href="./edmonds.html" class="text-secondary hover:underline">Edmonds</a> · <a href="./greenwood.html" class="text-secondary hover:underline">Greenwood</a> · <a href="./lake-forest-park.html" class="text-secondary hover:underline">Lake Forest Park</a> · <a href="./mountlake-terrace.html" class="text-secondary hover:underline">Mountlake Terrace</a> · <a href="./mill-creek.html" class="text-secondary hover:underline">Mill Creek</a> · <a href="./mukilteo.html" class="text-secondary hover:underline">Mukilteo</a> · <a href="./kirkland.html" class="text-secondary hover:underline">Kirkland</a> · <a href="./bothell.html" class="text-secondary hover:underline">Bothell</a> · <a href="./queen-anne.html" class="text-secondary hover:underline">Queen Anne</a> · <a href="./phinney-ridge.html" class="text-secondary hover:underline">Phinney Ridge</a> · <a href="./shoreline.html" class="text-secondary hover:underline">Shoreline</a> · <a href="./lynnwood.html" class="text-secondary hover:underline">Lynnwood</a> · <a href="./ballard.html" class="text-secondary hover:underline">Ballard</a> · <a href="./magnolia.html" class="text-secondary hover:underline">Magnolia</a></p>
     </section>
 
     <section class="bg-charcoal rounded-xl p-8 md:p-10 border border-primary/25 mb-14 relative overflow-hidden">
@@ -5154,7 +5366,7 @@ def build_additions(additions: list[dict]) -> str:
           <span class="text-secondary text-xs font-bold uppercase tracking-widest">Full Ranking</span>
           <h2 class="text-3xl font-black text-white tracking-tight">Ranks 2–30</h2>
         </div>
-        <p class="text-xs text-slate-500 font-medium uppercase tracking-widest max-w-sm md:text-right">
+        <p class="text-xs text-slate-400 font-medium uppercase tracking-widest max-w-sm md:text-right">
           Editorial shortlist · King &amp; Snohomish Counties
         </p>
       </div>
@@ -5371,7 +5583,7 @@ def build_kb_page(kind: str, firms: list[dict]) -> str:
           <span class="text-secondary text-xs font-bold uppercase tracking-widest">Full Ranking</span>
           <h2 class="text-3xl font-black text-white tracking-tight">Ranks 2–15</h2>
         </div>
-        <p class="text-xs text-slate-500 font-medium uppercase tracking-widest max-w-sm md:text-right">
+        <p class="text-xs text-slate-400 font-medium uppercase tracking-widest max-w-sm md:text-right">
           Editorial shortlist · King &amp; Snohomish Counties
         </p>
       </div>
@@ -5494,7 +5706,7 @@ def build_custom_homes(firms: list[dict]) -> str:
 {_hub_photo_strip([
         (
             "assets/images/hubs/hub-edmonds-1.webp",
-            "Illustrative Edmonds-area custom home exterior context for coastal King County builds",
+            "Illustrative Edmonds-area custom home exterior context for coastal Snohomish County builds",
             "Coastal custom context (illustrative)",
             "./edmonds-custom-homes.html",
             "Edmonds custom homes directory",
@@ -5521,7 +5733,7 @@ def build_custom_homes(firms: list[dict]) -> str:
           <span class="text-secondary text-xs font-bold uppercase tracking-widest">Full Ranking</span>
           <h2 class="text-3xl font-black text-white tracking-tight">Ranks 2–15</h2>
         </div>
-        <p class="text-xs text-slate-500 font-medium uppercase tracking-widest max-w-sm md:text-right">
+        <p class="text-xs text-slate-400 font-medium uppercase tracking-widest max-w-sm md:text-right">
           Editorial shortlist · King &amp; Snohomish Counties
         </p>
       </div>
@@ -5596,7 +5808,7 @@ def edmonds_rank_card(firm: dict, sticky: bool = False) -> str:
         f'            <div class="rank-badge shrink-0">{rank}</div>\n'
         f'            <div class="min-w-0">\n'
         f'              <h3 class="text-lg font-bold text-white tracking-tight">{name}</h3>\n'
-        f'              <p class="text-xs text-slate-500 uppercase tracking-wider mt-1 mb-1">'
+        f'              <p class="text-xs text-slate-400 uppercase tracking-wider mt-1 mb-1">'
         f'<i class="fas fa-map-marker-alt mr-1 text-secondary"></i>{city}'
         f'{(" · " + esc(cat_label)) if is_ppg else ""}</p>\n'
         f'              {f"<p class=\"text-sm text-slate-400 font-light leading-relaxed\">{note}</p>" if is_ppg else ""}\n'
@@ -5678,8 +5890,9 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
             if key == "all"
             else "bg-white/5 text-slate-300 border-white/15 hover:border-secondary hover:text-secondary"
         )
+        pressed = "true" if key == "all" else "false"
         filter_btns.append(
-            f'<button type="button" data-filter="{key}" class="edmonds-filter {active_cls} '
+            f'<button type="button" data-filter="{key}" aria-pressed="{pressed}" class="edmonds-filter {active_cls} '
             f'px-3.5 py-2 rounded text-[11px] font-bold uppercase tracking-wider border transition">{label}</button>'
         )
 
@@ -5699,7 +5912,7 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
         <div class="absolute -top-16 -left-16 w-72 h-72 bg-primary/10 blur-[90px] pointer-events-none rounded-full"></div>
         <div class="md:w-1/3 mb-8 md:mb-0 relative z-10 flex flex-col gap-4">
           <div class="h-48 w-full rounded-lg overflow-hidden border border-white/10 shadow-inner">
-            <img src="{prefix_asset('assets/images/home-hero.webp')}" alt="Custom home construction in Edmonds and coastal King County" class="w-full h-full object-cover" width="800" height="600" loading="lazy">
+            <img src="{prefix_asset('assets/images/home-hero.webp')}" alt="Custom home construction in Edmonds and coastal Snohomish County" class="w-full h-full object-cover" width="800" height="600" loading="lazy">
           </div>
           <div class="grid grid-cols-2 gap-2">
             <div class="bg-white/5 border border-white/10 rounded-lg px-3 py-3 text-center">
@@ -5729,7 +5942,7 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
             </div>
             <div class="text-right">
               <a href="tel:{PPG['phone_tel']}" class="text-white font-bold text-lg hover:text-secondary transition">{PPG['phone']}</a>
-              <div class="text-xs text-slate-500 uppercase tracking-wider mt-1">Edmonds, WA</div>
+              <div class="text-xs text-slate-400 uppercase tracking-wider mt-1">Edmonds, WA</div>
             </div>
           </div>
           <div class="flex flex-wrap gap-2 mb-6">
@@ -5798,6 +6011,7 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
         var on = b.getAttribute('data-filter') === cat;
         b.className = 'edmonds-filter px-3.5 py-2 rounded text-[11px] font-bold uppercase tracking-wider border transition ' +
           (on ? 'bg-primary text-white border-primary' : 'bg-white/5 text-slate-300 border-white/15 hover:border-secondary hover:text-secondary');
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
       });
       firms.forEach(function (el) {
         var match = cat === 'all' || el.getAttribute('data-category') === cat;
@@ -5863,7 +6077,7 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
             ),
             (
                 "assets/images/posts/2026-09-02-edmonds-custom-2.webp",
-                "Illustrative coastal King County custom home construction context",
+                "Illustrative coastal Snohomish County custom home construction context",
                 "Coastal custom context (illustrative)",
                 "./edmonds.html",
                 "Edmonds city hub",
@@ -5890,7 +6104,7 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
           <span class="text-secondary text-xs font-bold uppercase tracking-widest">Full Ranking</span>
           <h2 class="text-3xl font-black text-white tracking-tight">Edmonds custom home builders</h2>
         </div>
-        <p class="text-xs text-slate-500 font-medium uppercase tracking-widest max-w-sm md:text-right">
+        <p class="text-xs text-slate-400 font-medium uppercase tracking-widest max-w-sm md:text-right">
           Name, city, and website or phone
         </p>
       </div>
@@ -6032,7 +6246,7 @@ def build_commercial(firms: list[dict]) -> str:
         <li>Institutional or public reputation signals where available — never invented awards or review scores.</li>
         <li>Homeowners and owners must still re-verify every legal name at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> and confirm bonding capacity for the job size.</li>
       </ul>
-      <p class="text-sm text-slate-500 font-light leading-relaxed">Full methodology: <a href="./how-we-rank.html" class="text-secondary hover:underline">How we rank</a>. Residential remodel packages belong on <a href="./kitchen.html" class="text-secondary hover:underline">Kitchen</a> / <a href="./additions.html" class="text-secondary hover:underline">Additions</a>, not this list.</p>
+      <p class="text-sm text-slate-400 font-light leading-relaxed">Full methodology: <a href="./how-we-rank.html" class="text-secondary hover:underline">How we rank</a>. Residential remodel packages belong on <a href="./kitchen.html" class="text-secondary hover:underline">Kitchen</a> / <a href="./additions.html" class="text-secondary hover:underline">Additions</a>, not this list.</p>
     </section>
 {callout}
     <section id="rankings" class="mb-20">
@@ -6041,7 +6255,7 @@ def build_commercial(firms: list[dict]) -> str:
           <span class="text-secondary text-xs font-bold uppercase tracking-widest">Full Ranking</span>
           <h2 class="text-3xl font-black text-white tracking-tight">Ranks 1–15</h2>
         </div>
-        <p class="text-xs text-slate-500 font-medium uppercase tracking-widest max-w-sm md:text-right">
+        <p class="text-xs text-slate-400 font-medium uppercase tracking-widest max-w-sm md:text-right">
           Commercial GC &amp; TI firms · King &amp; Snohomish Counties
         </p>
       </div>
@@ -6149,7 +6363,7 @@ def build_spec_homes(firms: list[dict]) -> str:
         <li>Transparent sales or company contact paths — no invented community inventories or price bands on Board pages.</li>
         <li>Owner-custom one-off builds belong on <a href="./custom-homes.html" class="text-secondary hover:underline">Custom homes</a>; remodel packages on <a href="./additions.html" class="text-secondary hover:underline">Additions</a>.</li>
       </ul>
-      <p class="text-sm text-slate-500 font-light leading-relaxed">Methodology: <a href="./how-we-rank.html" class="text-secondary hover:underline">How we rank</a>. Re-verify: <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>.</p>
+      <p class="text-sm text-slate-400 font-light leading-relaxed">Methodology: <a href="./how-we-rank.html" class="text-secondary hover:underline">How we rank</a>. Re-verify: <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>.</p>
     </section>
     <section id="rankings" class="mb-20">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 border-b border-white/10 pb-4 gap-3">
@@ -6157,7 +6371,7 @@ def build_spec_homes(firms: list[dict]) -> str:
           <span class="text-secondary text-xs font-bold uppercase tracking-widest">Full Ranking</span>
           <h2 class="text-3xl font-black text-white tracking-tight">Ranks 1–14</h2>
         </div>
-        <p class="text-xs text-slate-500 font-medium uppercase tracking-widest max-w-sm md:text-right">
+        <p class="text-xs text-slate-400 font-medium uppercase tracking-widest max-w-sm md:text-right">
           Spec / production builders · King &amp; Snohomish Counties
         </p>
       </div>
@@ -6228,7 +6442,7 @@ def build_trades_hub() -> str:
         f"Trade directories · Updated {YEAR}",
         'Trade Contractors<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">King County, Snohomish County, and Seattle</span>',
         "Board-published shortlists of specialty trade contractors that homeowners and GCs use alongside remodel and addition projects.",
-        ["14 trade pages", "Locality-first", "Verify at L&amp;I"],
+        ["14 trade pages", "Locality-first", "Verify at L&I"],
     )}
   <div class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
     <section class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-16">
@@ -6320,9 +6534,10 @@ def build_trade_page(slug: str, title: str, icon: str, blurb: str, firms: list[d
         TRADE_PHOTO_STRIPS.get(slug, []),
         title=f"{title.split('/')[0].strip()} field context (illustrative)",
     )
+    spoken = " or ".join(part.strip().lower() for part in title.split("/"))
     faqs = [
         (
-            f"How should I hire a {title.lower()} in King County, Snohomish County, or Seattle?",
+            f"How should I hire a {spoken} contractor in King County, Snohomish County, or Seattle?",
             "Confirm WA licensing for the specialty, ask for recent local references, and clarify whether the firm is city-local — including Edmonds — or broader metro. Re-verify at L&I before hiring.",
         ),
         (
@@ -6338,10 +6553,10 @@ def build_trade_page(slug: str, title: str, icon: str, blurb: str, firms: list[d
         f"{esc(title)} · King County, Snohomish County, and Seattle · {YEAR}",
         f'{esc(title)}<span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-secondary via-white to-secondary">Contractor Directory</span>',
         esc(blurb),
-        ["Editorial shortlist", "Locality-first", "Verify at L&amp;I"],
+        ["Editorial shortlist", "Locality-first", "Verify at L&I"],
     )}
   <div class="max-w-6xl mx-auto px-4 -mt-14 relative z-20 pb-24">
-    <p class="text-sm text-slate-500 mb-4"><a href="./trades.html" class="text-secondary hover:underline">← All trades</a></p>
+    <p class="text-sm text-slate-400 mb-4"><a href="./trades.html" class="text-secondary hover:underline">← All trades</a></p>
     <section class="bg-charcoal rounded-xl p-5 md:p-6 border border-primary/20 mb-10">
       <h2 class="text-base font-black text-white mb-2 tracking-tight">Specialty vs GC · license check</h2>
       <p class="text-sm text-slate-400 font-light leading-relaxed mb-2">
@@ -6414,14 +6629,18 @@ def build_trade_page(slug: str, title: str, icon: str, blurb: str, firms: list[d
             ("HVAC directory", "./hvac.html"),
         ],
     )
-    if "King County, Snohomish County, and Seattle" in blurb:
-        trade_desc = blurb if blurb.endswith(".") else blurb + "."
+    blurb_clean = blurb.strip()
+    if blurb_clean and not blurb_clean.endswith("."):
+        blurb_clean += "."
+    if "King County, Snohomish County, and Seattle" in blurb_clean:
+        trade_desc = blurb_clean
     else:
-        trade_desc = f"{blurb.rstrip('.')} Directory for King County, Snohomish County, and Seattle."
+        trade_desc = f"{blurb_clean} Directory for King County, Snohomish County, and Seattle."
+    short_title = title.replace(" / ", " & ")
     return page_shell(
-        f"{title} · King & Snohomish | Board of Project Stewardship",
+        f"{short_title} · WA | Board of Project Stewardship",
         trade_desc,
-        "trades",
+        slug,
         body,
         ld,
         canonical=f"{BASE_URL}{slug}.html",
@@ -6462,7 +6681,7 @@ def md_to_html(md: str) -> str:
         r"https?://(?:www\.)?youtube\.com/watch\?v=([A-Za-z0-9_-]{6,20})(?:&\S*)?"
         r"|https?://youtu\.be/([A-Za-z0-9_-]{6,20})(?:\?\S*)?"
         r"|https?://(?:www\.)?youtube\.com/embed/([A-Za-z0-9_-]{6,20})(?:\?\S*)?"
-        r"|youtube:([A-Za-z0-9_-]{6,20})"
+        r"|youtube:([A-Za-z0-9_-]{6,20})(?:\|([^\r\n]+))?"
         r")$"
     )
     img_line_re = re.compile(r"^!\[([^\]]*)\]\(([^)]+)\)$")
@@ -6476,11 +6695,12 @@ def md_to_html(md: str) -> str:
             out.append("</ol>")
             in_ol = False
 
-    def youtube_embed(vid: str) -> str:
+    def youtube_embed(vid: str, yt_title: str = "") -> str:
+        label = (yt_title or "").strip() or f"YouTube video ({vid})"
         return (
             f'<div class="video-embed">'
             f'<iframe src="https://www.youtube.com/embed/{esc(vid)}" '
-            f'title="YouTube video" '
+            f'title="{esc(label)}" '
             f'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" '
             f'allowfullscreen loading="lazy"></iframe></div>'
         )
@@ -6527,12 +6747,19 @@ def md_to_html(md: str) -> str:
         parts: list[str] = []
         last = 0
         for m in re.finditer(r"!\[([^\]]*)\]\(([^)]+)\)", s):
-            parts.append(esc(s[last:m.start()]))
+            end = m.start()
+            parts.append(esc(s[last:end]))
             parts.append(figure_html(m.group(1), m.group(2)))
             last = m.end()
         parts.append(esc(s[last:]))
         s = "".join(parts)
-        s = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", r'<a href="\2">\1</a>', s)
+        def _md_link(match: re.Match) -> str:
+            label, href = match.group(1), match.group(2)
+            if href.lower().split("?", 1)[0].endswith(".mp4"):
+                return local_video_embed(href)
+            return f'<a href="{esc(href)}">{label}</a>'
+
+        s = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", _md_link, s)
         s = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", s)
         s = re.sub(r"(?<!\*)\*([^*]+)\*(?!\*)", r"<em>\1</em>", s)
         return s
@@ -6554,8 +6781,10 @@ def md_to_html(md: str) -> str:
                 '<h2 class="text-xl font-black text-white tracking-tight mb-2">WSEC-R prescriptive credits</h2>'
                 '<p class="text-slate-400 text-sm font-light mb-4">WSEC-R 2021 single-family / townhouse prescriptive energy credit worksheet. '
                 f'<a class="text-secondary hover:underline" href="{land}">Open full Board landing</a>.</p>'
-                f'<iframe src="{src}" title="WSEC-R prescriptive credits" loading="lazy" '
-                'style="display:block;width:100%;height:1180px;border:0;border-radius:18px;background:#f8fafc;"></iframe>'
+                f'<iframe id="energy-credit-post" src="{src}" title="WSEC-R prescriptive credits" loading="lazy" '
+                'style="display:block;width:100%;min-height:70vh;height:720px;border:0;border-radius:18px;background:#f8fafc;"></iframe>'
+                + grow_iframe_script("energy-credit-post", "energy-credit:resize")
+                + 
                 '</div>'
             )
             i += 1
@@ -6563,9 +6792,11 @@ def md_to_html(md: str) -> str:
         yt = yt_line_re.match(stripped)
         if yt:
             close_lists()
-            vid = next(g for g in yt.groups() if g)
+            groups = [g for g in yt.groups()]
+            vid = next(g for g in groups[:4] if g)
+            yt_title = groups[4] if len(groups) > 4 and groups[4] else ""
             if yt_id_re.match(vid):
-                out.append(youtube_embed(vid))
+                out.append(youtube_embed(vid, yt_title))
             else:
                 out.append(f"<p>{inline(stripped)}</p>")
             i += 1
@@ -6653,7 +6884,7 @@ def build_blog_index(posts: list[dict]) -> str:
           <div class="text-[11px] uppercase tracking-widest text-secondary font-bold mb-2">{esc(p['category'])} · {esc(p['date'])}</div>
           <h2 class="text-xl font-bold text-white mb-2"><a href="./posts/{esc(p['out_name'])}" class="hover:text-secondary transition">{esc(p['title'])}</a></h2>
           <p class="text-sm text-slate-400 font-light leading-relaxed mb-4">{esc(p['description'])}</p>
-          <p class="text-xs text-slate-500">By {AUTHOR}</p>
+          <p class="text-xs text-slate-400">By {AUTHOR}</p>
         </article>"""
         )
     featured_block = ""
@@ -6704,16 +6935,16 @@ def build_blog_index(posts: list[dict]) -> str:
       <div id="blog-tags" class="flex flex-wrap gap-2"></div>
       <div class="sm:ml-auto flex items-center gap-3 w-full sm:w-auto">
         <label for="blog-search" class="sr-only">Search posts</label>
-        <input id="blog-search" type="search" placeholder="Search guides…" class="w-full sm:w-64 bg-black/40 border border-white/15 rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-secondary">
-        <span id="blog-count" class="text-xs text-slate-500 whitespace-nowrap"></span>
+        <input id="blog-search" type="search" placeholder="Search guides…" class="w-full sm:w-64 bg-black/40 border border-white/15 rounded px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary">
+        <span id="blog-count" class="text-xs text-slate-400 whitespace-nowrap"></span>
       </div>
     </div>
-    <p id="blog-feed-status" class="text-xs text-slate-600 mb-4"></p>
+    <p id="blog-feed-status" class="text-xs text-slate-400 mb-4"></p>
     <div id="blog-grid" class="grid gap-4 mb-6" data-exclude-slug="{esc(featured_slug)}">
 {chr(10).join(cards) if cards else '<p class="text-slate-400">No posts yet.</p>'}
     </div>
     <p id="blog-empty" class="hidden text-slate-400 text-sm">No posts match your filters.</p>
-    <p class="text-sm text-slate-500 mt-8">Have a local guide to share? <a href="./write.html" class="text-secondary hover:underline">Contribute</a>.</p>
+    <p class="text-sm text-slate-400 mt-8">Have a local guide to share? <a href="./write.html" class="text-secondary hover:underline">Contribute</a>.</p>
   </div>"""
     collection_items = [
         {
@@ -6788,7 +7019,7 @@ def _strip_leading_hero_figure(article_html: str, hero_rel: str | None) -> str:
 POST_SEO_TITLES = {
     "bathroom-remodel-lake-forest-park": "Lake Forest Park Bath Guide",
     "bathroom-remodel-lake-forest-park-wa": "LFP Bath iWorQ Permit Guide",
-    "second-story-vs-teardown-edmonds": "Edmonds Story vs Teardown",
+    "second-story-vs-teardown-edmonds": "Second Story vs Teardown",
 }
 
 
@@ -6833,18 +7064,18 @@ def build_post_page(post: dict, posts: list[dict] | None = None) -> str:
             f'    </div>\n'
         )
     body = f"""  <div class="max-w-3xl mx-auto px-4 py-16 relative z-20">
-    <nav aria-label="Breadcrumb" class="text-xs text-slate-500 mb-6">
+    <nav aria-label="Breadcrumb" class="text-xs text-slate-400 mb-6">
       <ol class="flex flex-wrap items-center gap-2">
         <li><a href="../" class="hover:text-secondary">Home</a></li>
-        <li aria-hidden="true" class="text-slate-600">/</li>
+        <li aria-hidden="true" class="text-slate-400">/</li>
         <li><a href="../blog.html" class="hover:text-secondary">Blog</a></li>
-        <li aria-hidden="true" class="text-slate-600">/</li>
+        <li aria-hidden="true" class="text-slate-400">/</li>
         <li class="text-slate-400" aria-current="page">{esc(post['title'])}</li>
       </ol>
     </nav>
 {hero_html}    <div class="text-[11px] uppercase tracking-widest text-secondary font-bold mb-3">{esc(post['category'])} · {esc(post['date'])}</div>
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-4">{esc(post['title'])}</h1>
-    <p class="text-sm text-slate-500 mb-10">By {AUTHOR}</p>
+    <p class="text-sm text-slate-400 mb-10">By {AUTHOR}</p>
     <div class="prose-board">
 {article_html}
     </div>
@@ -6854,7 +7085,7 @@ def build_post_page(post: dict, posts: list[dict] | None = None) -> str:
     return page_shell(
         f"{document_title} | Board of Project Stewardship",
         post["description"] or post["title"],
-        "blog",
+        "post",
         body,
         ld,
         prefix="../",
@@ -7461,7 +7692,7 @@ def build_good_steward_page() -> str:
       <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a>
       (Board #1 design-build). They are not bids, permits, contracts, or schedules. Always
       <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">verify a contractor’s WA L&amp;I license</a>
-      before you hire. <em class="text-slate-500">Contractor-ops language in either tool is labeled as an internal template, not a required sales script.</em>
+      before you hire. <em class="text-slate-400">Contractor-ops language in either tool is labeled as an internal template, not a required sales script.</em>
     </p>
     <ul class="text-sm text-slate-300 space-y-1 mb-2 list-disc pl-5">
       <li><strong class="text-white">Build Walkthrough</strong> — visual sales-to-build stages with homeowner checklists</li>
@@ -7555,7 +7786,7 @@ def build_good_steward_page() -> str:
         canonical=f"{BASE_URL}good-steward.html",
         breadcrumbs=[("Home", BASE_URL), ("Good Steward", f"{BASE_URL}good-steward.html")],
         include_tools_embed=True,
-        include_story_embed=True,
+        include_story_embed=False,
         include_widgets=False,
     )
 
@@ -7617,8 +7848,8 @@ def build_energy_credit_page() -> str:
     body = f"""  <header class="max-w-6xl mx-auto px-4 pt-10 pb-2">
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">WSEC-R prescriptive credits</h1>
-    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">The IRS page on the Energy Efficient Home Improvement Credit says the credit can be claimed for improvements made through December 31, 2025. This Board page does not calculate a credit or quote a dollar amount. Confirm Washington WSEC-R with the State Building Code Council. <a href="https://www.irs.gov/credits-deductions/energy-efficient-home-improvement-credit" target="_blank" rel="noopener" class="text-secondary hover:underline">IRS — Energy Efficient Home Improvement Credit</a>.</p>
-    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Upload plan PDFs to auto-suggest WSEC-R 2021 single-family / townhouse credits, then confirm dwelling size, Table R406.2 fuel normalization, and Table R406.3 options.</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">WSEC-R Table R406 credits are mandatory Washington State Energy Code compliance points for residential permits. They are not federal IRS tax credits. The adopted code referenced here is the 2021 WSEC-R (as amended, effective March 15, 2024). Check every R406 value against the adopted state and city amendment package, including any Seattle SDCI amendment, before you rely on a worksheet. This page does not calculate a tax credit or quote a dollar amount. The IRS Energy Efficient Home Improvement Credit could be claimed for improvements made through December 31, 2025. <a href="https://sbcc.wa.gov/" target="_blank" rel="noopener" class="text-secondary hover:underline">State Building Code Council</a> · <a href="https://www.irs.gov/credits-deductions/energy-efficient-home-improvement-credit" target="_blank" rel="noopener" class="text-secondary hover:underline">IRS — Energy Efficient Home Improvement Credit</a>.</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Upload plan PDFs to review 2021 WSEC-R single-family and townhouse credit options, then confirm dwelling size, Table R406.2 fuel normalization, and Table R406.3 options against the adopted package.</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">WSEC-R 2021 single-family prescriptive path credit worksheet (fuel normalization + Table R406.3). When you hire, shortlist from Board directories — Board #1: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a>.</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Also: <a href="{public_tool_href('site-visit')}" class="text-secondary hover:underline">Site Visit Checklist</a> · <a href="./posts/2026-09-20-window-replacement-edmonds-coastal-wa.html" class="text-secondary hover:underline">Edmonds window replacement guide</a>.</p>
   </header>
@@ -7649,16 +7880,17 @@ def build_energy_credit_page() -> str:
     title="Energy-code context (illustrative)",
 )}  <section class="max-w-6xl mx-auto px-4 pb-8 relative z-20">
     <iframe id="energy-credit-tool" src="{src}" title="WSEC-R prescriptive credits" loading="lazy"
-      style="display:block;width:100%;height:1200px;border:0;border-radius:18px;background:#f8fafc;"></iframe>
+      style="display:block;width:100%;min-height:70vh;height:720px;border:0;border-radius:18px;background:#f8fafc;"></iframe>
+    {grow_iframe_script("energy-credit-tool", "energy-credit:resize")}
   </section>
 """ + education_closing("tools", "default", official_keys=["lni_verify", "sbcc", "lni_home"])
     return page_shell(
         "WSEC-R Prescriptive Credits | Board of Project Stewardship",
-        "WSEC-R 2021 single-family prescriptive energy credit worksheet for Pacific Northwest projects in King County, Snohomish County, and Seattle.",
+        "2021 WSEC-R (as amended, effective March 15, 2024) prescriptive credit worksheet. Check R406 values against the adopted state and city package. Not a tax-credit calculator.",
         "energy-credit",
         body,
         canonical=f"{BASE_URL}energy-credit.html",
-        include_story_embed=True,
+        include_story_embed=False,
         include_tools_embed=False,
         include_widgets=False,
         breadcrumbs=[
@@ -7728,7 +7960,7 @@ def build_build_walkthrough_page() -> str:
       }});
     }})();
     </script>
-    <p class="text-[11px] text-slate-600 mt-3 leading-relaxed">One persistent house. Honesty chips: Illustrative media · not engineering documents. Illustrative model · not a site scan.</p>
+    <p class="text-[11px] text-slate-400 mt-3 leading-relaxed">One persistent house. Honesty chips: Illustrative media · not engineering documents. Illustrative model · not a site scan.</p>
     <section class="mt-8" id="seventeen-stages" aria-labelledby="seventeen-stages-h">
       <h2 id="seventeen-stages-h" class="text-xl font-black text-white tracking-tight mb-3">Seventeen stages, one house</h2>
       <p class="text-sm text-slate-400 font-light max-w-3xl leading-relaxed mb-4">Drag the scrubber on the same illustrative model. Views are educational diagrams from the Board of Project Stewardship, not construction documents or a promised sequence.</p>
@@ -7786,7 +8018,7 @@ def build_build_walkthrough_page() -> str:
         body,
         json_ld=[walk_howto],
         canonical=f"{BASE_URL}build-walkthrough.html",
-        include_story_embed=True,
+        include_story_embed=False,
         include_tools_embed=False,
         include_widgets=False,
         breadcrumbs=[
@@ -7826,9 +8058,15 @@ FLOOR_PLAN_3D_STYLE = """  <style>
     #fp3d .fp-panel { background:#111814; border:1px solid rgba(255,255,255,0.08); border-radius:1rem; overflow:hidden; display:flex; flex-direction:column; }
     #fp3d .fp-head { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:0.5rem; padding:0.6rem 0.75rem; border-bottom:1px solid rgba(255,255,255,0.06); }
     #fp3d .fp-title { font-size:0.7rem; font-weight:800; letter-spacing:0.16em; text-transform:uppercase; color:#94a3b8; }
-    #fp-plan { display:block; width:100%; height:26rem; touch-action:none; user-select:none; -webkit-user-select:none; background:#0d120f; }
+    #fp-plan, #fp-canvas { touch-action: pan-y; }
+    @media (hover: hover) and (pointer: fine) { #fp-plan, #fp-canvas { touch-action: none; } }
+    #fp3d.is-gesture #fp-plan, #fp3d.is-gesture #fp-canvas { touch-action: none; }
+    #fp-gesture { display: none; }
+    @media (hover: none), (pointer: coarse) { #fp-gesture { display: inline-flex; } }
+    #fp3d .fp-btn:focus-within { outline: 2px solid #4ade80; outline-offset: 2px; }
+    #fp-plan { display:block; width:100%; height:26rem; touch-action:pan-y; user-select:none; -webkit-user-select:none; background:#0d120f; }
     #fp-3d { position:relative; width:100%; height:26rem; background:#0f1512; }
-    #fp-canvas { display:block; width:100%; height:100%; touch-action:none; }
+    #fp-canvas { display:block; width:100%; height:100%; touch-action:pan-y; }
     #fp-fallback { position:absolute; inset:0; display:flex; flex-direction:column; }
     #fp-fallback[hidden] { display:none; }
     #fp-iso { flex:1; min-height:0; padding:0.5rem; }
@@ -7910,7 +8148,7 @@ def build_floor_plan_3d_page() -> str:
         <button type="button" class="fp-btn" id="fp-match-scale" hidden>Match scale to the label</button>
         <button type="button" class="fp-btn" id="fp-build-anyway" hidden>Build with this scale anyway</button>
       </div>
-      <p class="text-[11px] text-slate-500 mt-2 leading-relaxed">Ceiling height is used for the full-height model, the roof, and walking through. A typical residential range is 7 ft to 12 ft.</p>
+      <p class="text-[11px] text-slate-400 mt-2 leading-relaxed">Ceiling height is used for the full-height model, the roof, and walking through. A typical residential range is 7 ft to 12 ft.</p>
       <div id="fp-check-summary" hidden>
         <p id="fp-check-heading"></p>
         <ul id="fp-check-list"></ul>
@@ -7938,11 +8176,12 @@ def build_floor_plan_3d_page() -> str:
       <button type="button" class="fp-btn" id="fp-undo"><i class="fas fa-rotate-left" aria-hidden="true"></i>Undo</button>
       <button type="button" class="fp-btn" id="fp-fit"><i class="fas fa-expand" aria-hidden="true"></i>Fit</button>
       <button type="button" class="fp-btn" id="fp-clear"><i class="fas fa-eraser" aria-hidden="true"></i>Blank grid</button>
-      <span id="fp-selinfo" class="text-xs text-slate-500 ml-1">Nothing selected</span>
+      <span id="fp-selinfo" class="text-xs text-slate-400 ml-1">Nothing selected</span>
     </div>
     <div class="grid lg:grid-cols-2 gap-4">
       <div class="fp-panel">
-        <div class="fp-head"><span class="fp-title">Plan · feet</span><span class="text-[11px] text-slate-500">Grid: 1 ft · bold every 5 ft</span></div>
+        <div class="fp-head"><span class="fp-title">Plan · feet</span><span class="text-[11px] text-slate-400">Grid: 1 ft · bold every 5 ft</span></div>
+        <button type="button" class="fp-btn" id="fp-gesture" aria-pressed="false">Tap to edit</button>
         <svg id="fp-plan" role="application" aria-label="Floor plan editor" tabindex="0"></svg>
       </div>
       <div class="fp-panel">
@@ -7956,7 +8195,7 @@ def build_floor_plan_3d_page() -> str:
           </div>
         </div>
         <div id="fp-3d">
-          <canvas id="fp-canvas" aria-label="3D model of the floor plan. Drag to orbit; in Walk mode drag to look and use the arrow pad to move."></canvas>
+          <canvas id="fp-canvas" tabindex="0" role="application" aria-label="3D model of the floor plan. Drag to orbit; in Walk mode drag to look and use the arrow pad to move."></canvas>
           <div id="fp-3d-loading">Loading 3D view…</div>
           <div id="fp-walkpad" hidden>
             <span></span><button type="button" data-walk="f:1" aria-label="Walk forward">▲</button><span></span>
@@ -7983,7 +8222,7 @@ def build_floor_plan_3d_page() -> str:
         <button type="button" class="fp-btn" id="fp-export"><i class="fas fa-download" aria-hidden="true"></i>Download sketch</button>
         <label class="fp-btn cursor-pointer"><i class="fas fa-upload" aria-hidden="true"></i>Open sketch<input id="fp-import" type="file" accept="application/json,.json" class="sr-only"></label>
       </div>
-      <p class="text-xs text-slate-500 mt-3 leading-relaxed">Your tracing image and sketch never leave this device. Sketches autosave in this browser only. After you set the tracing width, check a dimension written on the plan so that length matches this scale.</p>
+      <p class="text-xs text-slate-400 mt-3 leading-relaxed">Your tracing image and sketch never leave this device. Sketches autosave in this browser only. After you set the tracing width, check a dimension written on the plan so that length matches this scale.</p>
     </details>
     <noscript><p class="text-sm text-amber-300 mt-3">This planning tool needs JavaScript. The guidance below still applies.</p></noscript>
   </section>
@@ -8133,12 +8372,12 @@ def build_plan_walkthrough_page() -> str:
     </ol>
     <div class="pw-bar" role="toolbar" aria-label="Tracing tools">
       <label class="pw-file">Upload plan<input id="pw-file" type="file" accept=".pdf,.png,.jpg,.jpeg,.heic,.heif,image/*,application/pdf"></label>
-      <button type="button" class="pw-btn" data-tool="scale">Scale</button>
-      <button type="button" class="pw-btn" data-tool="wall">Wall</button>
-      <button type="button" class="pw-btn" data-tool="door">Door</button>
-      <button type="button" class="pw-btn" data-tool="window">Window</button>
-      <button type="button" class="pw-btn" data-tool="room">Room</button>
-      <button type="button" class="pw-btn" data-tool="stair">Stair</button>
+      <button type="button" class="pw-btn" data-tool="scale" aria-pressed="false">Scale</button>
+      <button type="button" class="pw-btn" data-tool="wall" aria-pressed="false">Wall</button>
+      <button type="button" class="pw-btn" data-tool="door" aria-pressed="false">Door</button>
+      <button type="button" class="pw-btn" data-tool="window" aria-pressed="false">Window</button>
+      <button type="button" class="pw-btn" data-tool="room" aria-pressed="false">Room</button>
+      <button type="button" class="pw-btn" data-tool="stair" aria-pressed="false">Stair</button>
       <button type="button" class="pw-btn" data-tool="select" aria-pressed="true">Select</button>
     </div>
     <div class="pw-sub">
@@ -8152,7 +8391,7 @@ def build_plan_walkthrough_page() -> str:
       <button type="button" class="pw-btn" id="pw-sample">Sample home</button>
       <button type="button" class="pw-btn" id="pw-blank">Blank</button>
     </div>
-    <div class="pw-sub" id="pw-storeys" aria-label="Storeys"></div>
+    <div class="pw-sub" id="pw-storeys" role="group" aria-label="Storeys"></div>
     <div class="pw-sub">
       <button type="button" class="pw-btn" id="pw-add-storey">Add storey</button>
       <button type="button" class="pw-btn" id="pw-copy-below">Copy walls from below</button>
@@ -8180,9 +8419,9 @@ def build_plan_walkthrough_page() -> str:
       </div>
     </div>
     <div id="pw-stage" class="pw-stage">
-      <canvas id="pw-plan" aria-label="Plan board. Tap to trace walls, doors, windows, rooms, and stairs."></canvas>
+      <canvas id="pw-plan" tabindex="0" role="application" aria-label="Plan board. Tap to trace walls, doors, windows, rooms, and stairs."></canvas>
       <div id="pw-view3d" hidden>
-        <canvas id="pw-gl" aria-label="3D model of the traced plan. Drag to orbit. In walk mode, drag to look."></canvas>
+        <canvas id="pw-gl" tabindex="0" role="application" aria-label="3D model of the traced plan. Drag to orbit. In walk mode, drag to look. Arrow keys and WASD walk when this canvas is focused."></canvas>
         <div id="pw-3dbar">
           <label class="pw-field" for="pw-roof">Lift roof<input id="pw-roof" type="range" min="0" max="1" step="0.01" value="0"></label>
           <label class="pw-field" for="pw-level-view">Storeys in view
@@ -8190,7 +8429,7 @@ def build_plan_walkthrough_page() -> str:
           </label>
         </div>
         <p id="pw-walkhint" hidden>Drag to look. Joystick or WASD to move. You cannot walk through walls.</p>
-        <div id="pw-joy" hidden aria-label="Move joystick"><div id="pw-joy-knob"></div></div>
+        <div id="pw-joy" hidden aria-hidden="true"><div id="pw-joy-knob"></div></div>
         <p id="pw-3d-loading" hidden>Loading the 3D view…</p>
         <p id="pw-3d-error" hidden></p>
       </div>
@@ -8497,7 +8736,7 @@ def build_pascal_editor_page() -> str:
         <a class="pascal-cta" href="{editor_url}" target="_blank" rel="noopener">Open Pascal Editor<span class="sr-only"> (opens in new window)</span></a>
         <a class="pascal-cta-secondary" href="{first_scene_url}" target="_blank" rel="noopener">Pascal’s first-scene guide<span class="sr-only"> (opens in new window)</span></a>
       </div>
-      <p class="text-xs text-slate-500 font-light leading-relaxed mt-4 mb-0">Source: <a href="{repo_url}" target="_blank" rel="noopener" class="text-secondary hover:underline">pascalorg/editor</a> on GitHub, <a href="{license_url}" target="_blank" rel="noopener" class="text-secondary hover:underline">MIT License</a>, copyright 2026 Pascal Group Inc. Guides: <a href="{docs_url}" target="_blank" rel="noopener" class="text-secondary hover:underline">editor.pascal.app/docs</a>.</p>
+      <p class="text-xs text-slate-400 font-light leading-relaxed mt-4 mb-0">Source: <a href="{repo_url}" target="_blank" rel="noopener" class="text-secondary hover:underline">pascalorg/editor</a> on GitHub, <a href="{license_url}" target="_blank" rel="noopener" class="text-secondary hover:underline">MIT License</a>, copyright 2026 Pascal Group Inc. Guides: <a href="{docs_url}" target="_blank" rel="noopener" class="text-secondary hover:underline">editor.pascal.app/docs</a>.</p>
     </div>
     <nav class="pascal-jump" aria-label="Walkthrough steps">
       <a href="#start">1. Start</a>
@@ -8717,8 +8956,9 @@ def build_site_visit_page() -> str:
       src="{src}"
       title="Site Visit and Discovery Checklist — Good Steward Tools"
       loading="lazy"
-      style="display:block;width:100%;height:1400px;border:0;border-radius:18px;background:#f8fafc;"
+      style="display:block;width:100%;height:720px;border:0;border-radius:18px;background:#f8fafc;"
     ></iframe>
+{grow_iframe_script("site-visit-tool", "site-visit:resize")}
   </section>
 """ + education_closing("tools", "hire", "default", official_keys=["lni_verify", "edmonds", "mybuildingpermit"])
     return page_shell(
@@ -8727,7 +8967,7 @@ def build_site_visit_page() -> str:
         "site-visit",
         body,
         canonical=f"{BASE_URL}site-visit.html",
-        include_story_embed=True,
+        include_story_embed=False,
         include_tools_embed=False,
         include_widgets=False,
         breadcrumbs=[
@@ -8779,8 +9019,9 @@ def build_pm_dashboard_page() -> str:
       src="{src}"
       title="PM Execution Dashboard — Good Steward Tools"
       loading="lazy"
-      style="display:block;width:100%;height:1400px;border:0;border-radius:18px;background:#f1f5f9;"
+      style="display:block;width:100%;height:720px;border:0;border-radius:18px;background:#f1f5f9;"
     ></iframe>
+{grow_iframe_script("pm-dashboard-tool", "pm-dashboard:resize")}
   </section>
 """ + education_closing("tools", "default", official_keys=["lni_verify", "lni_home"])
     return page_shell(
@@ -8789,7 +9030,7 @@ def build_pm_dashboard_page() -> str:
         "pm-dashboard",
         body,
         canonical=f"{BASE_URL}pm-dashboard.html",
-        include_story_embed=True,
+        include_story_embed=False,
         include_tools_embed=False,
         include_widgets=False,
         breadcrumbs=[
@@ -8818,8 +9059,8 @@ def _hub_header(eyebrow: str, title: str, lead: str, answer: str = "", note: str
     note_html = f"    {note}\n" if note else ""
     return f"""  <header class="max-w-6xl mx-auto px-4 pt-10 pb-6">
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">{esc(eyebrow)}</p>
-    <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">{title}</h1>
-{answer_html}    <p class="text-slate-400 font-light max-w-3xl leading-relaxed">{lead}</p>
+    <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">{esc(html.unescape(title or ""))}</h1>
+{answer_html}    <p class="text-slate-400 font-light max-w-3xl leading-relaxed">{esc(html.unescape(lead or ""))}</p>
 {note_html}  </header>
 """
 
@@ -8837,12 +9078,14 @@ def _hub_section(title: str, inner: str, border: str = "border-white/10") -> str
 def _link_ul(items: list[tuple[str, str]], external: bool = False) -> str:
     lis = []
     for label, href in items:
-        if external:
+        is_ext = external and str(href).startswith(("http://", "https://"))
+        if is_ext:
             lis.append(
-                f'<li><a href="{href}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(label)}</a></li>'
+                f'<li><a href="{esc(href)}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(label)}'
+                f'<span class="sr-only"> (opens in new window)</span></a></li>'
             )
         else:
-            lis.append(f'<li><a href="{href}" class="text-secondary hover:underline">{esc(label)}</a></li>')
+            lis.append(f'<li><a href="{esc(href)}" class="text-secondary hover:underline">{esc(label)}</a></li>')
     return '<ul class="space-y-2 text-sm text-slate-300 font-light">\n' + "\n".join(lis) + "\n</ul>"
 
 
@@ -8855,16 +9098,25 @@ def _check_ul(items: list[str]) -> str:
 
 
 def _simple_table(headers: list[str], rows: list[list[str]], *, link_col: int | None = None) -> str:
-    ths = "".join(f'<th scope="col">{esc(h)}</th>' for h in headers)
+    show_headers = list(headers)
+    if link_col is not None and link_col == len(show_headers) - 1:
+        show_headers = show_headers[:-1]
+    ths = "".join(f'<th scope="col">{esc(h)}</th>' for h in show_headers)
     body = []
     for row in rows:
         cells = []
         for i, cell in enumerate(row):
-            if link_col is not None and i == link_col and cell.startswith(("http://", "https://", "./")):
+            if link_col is not None and i == link_col:
+                continue
+            url = row[link_col] if link_col is not None and link_col < len(row) else ""
+            if link_col is not None and i == link_col - 1 and str(url).startswith(("http://", "https://", "./")):
+                external = str(url).startswith("http")
                 inner = (
-                    f'<a href="{esc(cell)}" class="text-secondary hover:underline"'
-                    + (' target="_blank" rel="noopener"' if cell.startswith("http") else "")
-                    + f">{esc(cell)}</a>"
+                    f'<a href="{esc(url)}" class="text-secondary hover:underline"'
+                    + (' target="_blank" rel="noopener"' if external else "")
+                    + f">{esc(cell)}"
+                    + ('<span class="sr-only"> (opens in new window)</span>' if external else "")
+                    + "</a>"
                 )
             else:
                 inner = esc(cell)
@@ -8955,12 +9207,14 @@ def _hub_photo_strip(
                 f'focus-visible:ring-2 focus-visible:ring-secondary/60" '
                 f'aria-label="{aria}">'
                 f'<img src="{src}" alt="{esc(alt)}" class="{img_class}" '
-                f'width="800" height="450" loading="lazy"></a>'
+                f'width="800" height="450" loading="lazy" data-no-lcp '
+                f'sizes="(max-width: 640px) 100vw, (max-width: 1200px) 33vw, 370px"></a>'
             )
         else:
             img = (
                 f'<img src="{src}" alt="{esc(alt)}" class="{img_class}" '
-                f'width="800" height="450" loading="lazy">'
+                f'width="800" height="450" loading="lazy" data-no-lcp '
+                f'sizes="(max-width: 640px) 100vw, (max-width: 1200px) 33vw, 370px">'
             )
         figures.append(
             f"""        <figure class="overflow-hidden rounded-xl border border-white/10 bg-obsidian">
@@ -8980,100 +9234,26 @@ def _hub_photo_strip(
 
 
 
-def build_about_org_page() -> str:
-    """Dedicated About page for the Board of Project Stewardship (not the homepage)."""
-    faqs = [
-        (
-            "Is the Board of Project Stewardship a general contractor?",
-            "No. The Board of Project Stewardship is an independent publisher of construction standards and contractor directories. It does not perform construction under the Board name and does not sell contractor leads.",
-        ),
-        (
-            "Does the Board own Pacific Pro Group?",
-            f"No. {PPG['name']} appears as Board directory #1 — an editorial hire ranking that links to {PPG['url']}. Ranking is not ownership, parentage, or brand control of the Board.",
-        ),
-        (
-            "Where should I verify a contractor?",
-            f"Use the official WA L&I Verify tool at {LNI_URL}. Board directories are shortlists — L&I remains the source of truth for license, bond, and insurance status.",
-        ),
-        (
-            "How do I contact the Board?",
-            f"Email the editorial desk at {EDITORIAL_EMAIL} for directory corrections, source questions, or press notes — not for dispatching a contractor.",
-        ),
-    ]
-    body = (
-        _hub_header(
-            "Independent publisher · King County, Snohomish County, and Seattle",
-            "About the Board of Project Stewardship",
-            "The Board of Project Stewardship publishes construction standards and contractor directories so homeowners can shortlist firms with clearer habits — verification, permits, and written scope — before they hire.",
-        )
-        + _hub_section(
-            "What we are",
-            f"""      <p class="text-slate-300 text-sm font-light leading-relaxed mb-3">An independent editorial publisher. We maintain ranked directories (kitchen, bath, additions, custom homes, trades, and more), Good Steward educational tools, city hubs, and planning guides for the Pacific Northwest — King County, Snohomish County, and Seattle.</p>
-      <p class="text-slate-400 text-sm font-light leading-relaxed mb-3">Public contact: <a href="mailto:{EDITORIAL_EMAIL}" class="text-secondary hover:underline">{EDITORIAL_EMAIL}</a>. Read <a href="./how-we-rank.html" class="text-secondary hover:underline">How we rank</a> for methodology, and re-verify every bidder at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>.</p>
-      <p class="text-slate-400 text-sm font-light leading-relaxed">Board #1 hire ranking currently points homeowners to <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(PPG['name'])}</a> — contact that firm directly for project work. The Board does not take project deposits or run contractor dispatch.</p>""",
-            border="border-primary/25",
-        )
-        + _hub_section(
-            "What we are not",
-            _check_ul(
-                [
-                    "Not a general contractor and not a substitute for your architect, engineer, or AHJ.",
-                    "Not a lead-generation marketplace and not a paid placement list.",
-                    "Not Pacific Pro Group customer service — PPG is ranked #1 outbound, not Board ownership.",
-                    "Not a source of invented prices, ROI, licenses, years in business, or review counts.",
-                    "Not a permit desk — use official city/county portals linked from our Permit hub.",
-                ]
-            ),
-        )
-        + _hub_section(
-            "Start here",
-            _link_ul(
-                [
-                    ("How we rank", "./how-we-rank.html"),
-                    ("Learn hub", "./learn.html"),
-                    ("Sitewide FAQ", "./faq.html"),
-                    ("Verify a WA contractor", "./verify-contractor.html"),
-                    ("Permit jurisdiction hub", "./permits.html"),
-                    ("Editorial contact", "./contact.html"),
-                    ("Home", "./"),
-                ]
-            ),
-        )
-        + f'  <div class="max-w-6xl mx-auto px-4 pb-8">\n{faq_section(faqs, "About FAQ")}\n  </div>\n'
-        + education_closing("default", "learn", official_keys=["lni_verify", "lni_home", "edmonds", "mybuildingpermit"])
-    )
-    return page_shell(
-        "About | Board of Project Stewardship",
-        "About the Board of Project Stewardship — standards and directories for King County, Snohomish County, and Seattle.",
-        "about",
-        body,
-        [faq_ld(faqs)],
-        canonical=f"{BASE_URL}about.html",
-        breadcrumbs=[("Home", BASE_URL), ("About", f"{BASE_URL}about.html")],
-        include_widgets=False,
-        include_story_embed=False,
-        include_tools_embed=False,
-    )
-
-
 def build_permits_page() -> str:
     jurisdictions = [
         (
             "Edmonds",
-            "Most Edmonds residential building, plumbing, and mechanical applications go through MyBuildingPermit. Use city permit-assistance pages for tip sheets and contacts.",
+            "The City of Edmonds accepts building, engineering, and land-use applications, including plan review for additions, ADUs, and structural remodels, through MyBuildingPermit. Paper applications are no longer accepted. Confirm the parcel is inside Edmonds city limits; many Edmonds mailing addresses are unincorporated Snohomish County.",
             [
                 ("MyBuildingPermit", "https://mybuildingpermit.com/"),
                 ("City of Edmonds", "https://www.edmondswa.gov/"),
+                ("Edmonds apply for a permit", "https://www.edmondswa.gov/services/permit_assistance/apply_for_a_permit"),
                 ("Edmonds permit assistance", "https://www.edmondswa.gov/services/permit_assistance"),
             ],
         ),
         (
             "Seattle",
-            "Seattle Department of Construction and Inspections (SDCI) applications typically run through the Seattle Services Portal — not MyBuildingPermit. Use official SDCI fee pages and the Fee Subtitle PDF for permit cost context; the Board does not invent Seattle project prices or fee invoices.",
+            "Building, electrical, and mechanical permits run through SDCI and the Seattle Services Portal. Plumbing and gas piping permits are issued separately by Public Health – Seattle & King County, not SDCI. Use official SDCI fee pages and the Fee Subtitle PDF for permit cost context; the Board does not invent Seattle project prices or fee invoices.",
             [
                 ("How to get a Seattle permit (SDCI)", "https://www.seattle.gov/construction-and-inspections/permits/how-do-you-get-a-permit"),
                 ("Seattle Services Portal", "https://cosaccela.seattle.gov/portal/"),
                 ("SDCI home", "https://www.seattle.gov/sdci"),
+            ("Public Health plumbing and gas piping permits", "https://kingcounty.gov/en/dept/dph/health-safety/environmental-health/plumbing-gas-piping/applications-and-permits"),
                 ("SDCI fees overview", "https://seattle.gov/sdci/codes/codes-we-enforce-(a-z)/fees"),
                 ("How much will your permit cost?", "https://seattle.gov/sdci/permits/how-much-will-your-permit-cost"),
                 ("2026 Fee Subtitle (PDF)", "https://seattle.gov/documents/Departments/SDCI/Codes/FeeSubtitleFinal.pdf"),
@@ -9139,7 +9319,7 @@ def build_permits_page() -> str:
         ),
         (
             "What is MyBuildingPermit?",
-            "MyBuildingPermit.com is a shared online portal used by many Puget Sound cities and counties (including Edmonds) for residential permit applications and tip sheets.",
+            "MyBuildingPermit.com is the portal the City of Edmonds uses for building, engineering, and land-use applications, including plan review. Confirm the parcel is inside Edmonds city limits before you apply. Other Puget Sound cities also use the same portal for their own application types.",
         ),
         (
             "Who pulls the permit — homeowner or contractor?",
@@ -9311,7 +9491,7 @@ def build_adu_page() -> str:
           ("MyBuildingPermit", "https://mybuildingpermit.com/"),
           ("City of Edmonds", "https://www.edmondswa.gov/"),
       ], external=True)}
-      <p class="text-slate-500 text-xs font-light mt-4">Handout URLs are city-hosted PDFs; if a link moves, use Edmonds permit-assistance pages and search for current ADU handouts.</p>""",
+      <p class="text-slate-400 text-xs font-light mt-4">Handout URLs are city-hosted PDFs; if a link moves, use Edmonds permit-assistance pages and search for current ADU handouts.</p>""",
             border="border-primary/25",
         )
         + _hub_section(
@@ -9532,7 +9712,7 @@ def build_verify_contractor_page() -> str:
     <div class="bg-charcoal rounded-xl p-8 border border-primary/25 text-center">
       <p class="text-slate-300 text-sm font-light mb-4">Open the official tool in a new tab:</p>
       <a href="{LNI_URL}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-secondary text-obsidian font-black uppercase tracking-widest text-sm px-6 py-3 rounded hover:opacity-90 transition">WA L&amp;I Verify <i class="fas fa-external-link-alt text-xs" aria-hidden="true"></i></a>
-      <p class="text-xs text-slate-500 mt-3 break-all">{esc(LNI_URL)}</p>
+      <p class="text-xs text-slate-400 mt-3 break-all">{esc(LNI_URL)}</p>
     </div>
   </section>
   <section class="max-w-6xl mx-auto px-4 pb-8">
@@ -9676,7 +9856,7 @@ def build_city_hub_page(
             f"Who permits work in {place}?",
             f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-4">{esc(permit_blurb)}</p>
       {_link_ul([("WA L&I Verify (contractor license)", LNI_URL)] + [p for p in permit_links if "lni.wa.gov" not in p[1]], external=True)}
-      <p class="text-sm text-slate-500 font-light mt-4"><a href="./permits.html" class="text-secondary hover:underline">Full permit jurisdiction hub</a> · <a href="./verify-contractor.html" class="text-secondary hover:underline">Verify contractor</a> · <a href="./learn.html" class="text-secondary hover:underline">Learn hub</a></p>""",
+      <p class="text-sm text-slate-400 font-light mt-4"><a href="./permits.html" class="text-secondary hover:underline">Full permit jurisdiction hub</a> · <a href="./verify-contractor.html" class="text-secondary hover:underline">Verify contractor</a> · <a href="./learn.html" class="text-secondary hover:underline">Learn hub</a></p>""",
             border="border-primary/25",
         )
         + county_table
@@ -9738,7 +9918,7 @@ def build_city_hub_page(
         body,
         [faq_ld(faqs)],
         canonical=f"{BASE_URL}{slug}.html",
-        breadcrumbs=[("Home", BASE_URL), ("Learn", f"{BASE_URL}learn.html"), (place, f"{BASE_URL}{slug}.html")],
+        breadcrumbs=[("Home", BASE_URL), ("Locations", f"{BASE_URL}locations.html"), (place, f"{BASE_URL}{slug}.html")],
         include_widgets=False,
         include_story_embed=False,
         include_tools_embed=False,
@@ -10015,41 +10195,67 @@ def _hub_video_embed_html(
         vid = (video.get("youtube_id") or "").strip()
         if not vid or len(vid) < 6:
             return ""
+        thumb = f"https://i.ytimg.com/vi/{vid}/hqdefault.jpg"
         body = (
-            f'<div class="hub-video-embed">'
-            f'<iframe src="https://www.youtube.com/embed/{esc(vid)}" '
+            f'<div class="relative w-full pb-[56.25%] h-0 rounded-xl overflow-hidden border border-white/10 bg-black">'
+            f'<iframe class="absolute top-0 left-0 w-full h-full border-0" src="https://www.youtube.com/embed/{esc(vid)}" '
             f'title="{iframe_title}" '
             f'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" '
             f'allowfullscreen loading="lazy"></iframe></div>'
         )
+        video_ld = {
+            "@context": "https://schema.org",
+            "@type": "VideoObject",
+            "name": title,
+            "description": caption,
+            "thumbnailUrl": thumb,
+            "embedUrl": f"https://www.youtube.com/embed/{vid}",
+        }
     elif kind in ("mp4", "local", "video"):
         rel = (video.get("rel") or video.get("src") or "").lstrip("./")
         if not rel or not asset_exists(rel):
             return ""
         src = prefix_asset(rel, "")
+        poster_rel = (video.get("poster") or "").lstrip("./")
+        if not poster_rel:
+            for ext in (".jpg", ".jpeg", ".png", ".webp"):
+                guess = Path(rel).with_suffix(ext).as_posix()
+                if asset_exists(guess):
+                    poster_rel = guess
+                    break
+        poster_attr = f' poster="{esc(prefix_asset(poster_rel, ""))}"' if poster_rel else ""
+        thumb = abs_asset_url(poster_rel) if poster_rel else ""
         body = (
-            f'<div class="hub-video-embed">'
-            f'<video controls playsinline preload="metadata" '
-            f'title="{iframe_title}">'
+            f'<div class="relative w-full pb-[56.25%] h-0 rounded-xl overflow-hidden border border-white/10 bg-black">'
+            f'<video class="absolute top-0 left-0 w-full h-full border-0" controls playsinline preload="metadata" '
+            f'title="{iframe_title}"{poster_attr}>'
             f'<source src="{esc(src)}" type="video/mp4">'
             f'</video></div>'
         )
+        video_ld = {
+            "@context": "https://schema.org",
+            "@type": "VideoObject",
+            "name": title,
+            "description": caption,
+            "contentUrl": abs_asset_url(rel),
+        }
+        if thumb:
+            video_ld["thumbnailUrl"] = thumb
     else:
         return ""
-    return f"""  <style>
-    .hub-video-embed {{
-      position: relative; width: 100%; padding-bottom: 56.25%; height: 0;
-      border-radius: 0.75rem; overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.08); background: #000;
-    }}
-    .hub-video-embed iframe, .hub-video-embed video {{
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;
-    }}
-  </style>
-  <section class="max-w-6xl mx-auto px-4 pb-8" aria-label="{esc(heading)}">
+    upload = (video.get("uploadDate") or video.get("upload_date") or "").strip()
+    if re.match(r"^\d{4}-\d{2}-\d{2}", upload):
+        video_ld["uploadDate"] = upload[:10]
+    ld_html = (
+        '<script type="application/ld+json">'
+        + json.dumps(video_ld, separators=(",", ":"))
+        + "</script>"
+    )
+    return f"""  <section class="max-w-6xl mx-auto px-4 pb-8" aria-label="{esc(heading)}">
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-3">{esc(heading)}</p>
     {body}
-    <p class="text-[11px] text-slate-500 font-light leading-snug mt-3">{esc(caption)}</p>
+    <p class="text-[11px] text-slate-400 font-light leading-snug mt-3">{esc(caption)}</p>
+    {ld_html}
   </section>
 """
 
@@ -10207,15 +10413,15 @@ def build_place_seo_page(spec: dict, hire_pack: dict | None = None) -> str:
     body = (
         _hub_header(
             f"Board of Project Stewardship · {place} · {county_note}",
-            esc(spec["h1"]),
-            esc(spec["blurb"]),
+            spec["h1"],
+            spec["blurb"],
         )
         + place_seo_media_html(slug, place)
         + _hub_section(
             f"Who permits work in {place}?",
             f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-4">{esc(spec['permit_blurb'])}</p>
       {_link_ul([("WA L&I Verify (contractor license)", LNI_URL)] + [p for p in permit_links if "lni.wa.gov" not in p[1]], external=True)}
-      <p class="text-sm text-slate-500 font-light mt-4"><a href="./permits.html" class="text-secondary hover:underline">Full permit jurisdiction hub</a> · <a href="./verify-contractor.html" class="text-secondary hover:underline">Verify contractor</a> · <a href="./learn.html" class="text-secondary hover:underline">Learn hub</a></p>""",
+      <p class="text-sm text-slate-400 font-light mt-4"><a href="./permits.html" class="text-secondary hover:underline">Full permit jurisdiction hub</a> · <a href="./verify-contractor.html" class="text-secondary hover:underline">Verify contractor</a> · <a href="./learn.html" class="text-secondary hover:underline">Learn hub</a></p>""",
             border="border-primary/25",
         )
         + _hub_section(
@@ -10227,17 +10433,17 @@ def build_place_seo_page(spec: dict, hire_pack: dict | None = None) -> str:
         + _hub_section(
             kitchen.get("h2") or f"Kitchens in {place}",
             f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-4">{esc(kitchen['prose'])}</p>
-      <p class="text-sm text-slate-500 font-light"><a href="./kitchen.html" class="text-secondary hover:underline">Kitchen remodelers directory</a> · <a href="./kitchen-remodel-planning.html" class="text-secondary hover:underline">Kitchen remodel planning</a></p>""",
+      <p class="text-sm text-slate-400 font-light"><a href="./kitchen.html" class="text-secondary hover:underline">Kitchen remodelers directory</a> · <a href="./kitchen-remodel-planning.html" class="text-secondary hover:underline">Kitchen remodel planning</a></p>""",
         )
         + _hub_section(
             bathroom.get("h2") or f"Bathrooms in {place}",
             f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-4">{esc(bathroom['prose'])}</p>
-      <p class="text-sm text-slate-500 font-light"><a href="./bathrooms.html" class="text-secondary hover:underline">Bathroom remodelers directory</a> · <a href="./bathroom-waterproofing-guide.html" class="text-secondary hover:underline">Bathroom waterproofing guide</a></p>""",
+      <p class="text-sm text-slate-400 font-light"><a href="./bathrooms.html" class="text-secondary hover:underline">Bathroom remodelers directory</a> · <a href="./bathroom-waterproofing-guide.html" class="text-secondary hover:underline">Bathroom waterproofing guide</a></p>""",
         )
         + _hub_section(
             additions.get("h2") or f"Home additions in {place}",
             f"""      <p class="text-sm text-slate-300 font-light leading-relaxed mb-4">{esc(additions['prose'])}</p>
-      <p class="text-sm text-slate-500 font-light"><a href="./additions.html" class="text-secondary hover:underline">Home additions directory</a> · <a href="./home-addition-planning.html" class="text-secondary hover:underline">Home addition planning</a></p>""",
+      <p class="text-sm text-slate-400 font-light"><a href="./additions.html" class="text-secondary hover:underline">Home additions directory</a> · <a href="./home-addition-planning.html" class="text-secondary hover:underline">Home addition planning</a></p>""",
         )
         + hire_terms_section_html(spec, hire_pack)
         + maps_service_area_embed_html(place)
@@ -10491,7 +10697,7 @@ def _locations_group_html(title: str, blurb: str, hubs: list[dict], heading_id: 
         return ""
     lis = "".join(
         f'<li><a href="{esc(h["href"])}" class="text-secondary hover:underline font-medium">{esc(h["place"])}</a>'
-        f'<span class="text-slate-500 text-xs ml-2">{esc(h.get("kind") or "")}</span></li>'
+        f'<span class="text-slate-400 text-xs ml-2">{esc(h.get("kind") or "")}</span></li>'
         for h in hubs
     )
     return f"""    <section class="mb-12" aria-labelledby="{esc(heading_id)}">
@@ -10513,7 +10719,7 @@ def build_locations_page() -> str:
 
     body = f"""  <section class="relative overflow-hidden border-b border-white/5">
     <div class="max-w-6xl mx-auto px-4 pt-14 pb-10">
-      <nav class="text-xs text-slate-500 font-light mb-4" aria-label="Breadcrumb">
+      <nav class="text-xs text-slate-400 font-light mb-4" aria-label="Breadcrumb">
         <ol class="flex flex-wrap items-center gap-2 list-none pl-0">
           <li><a href="./" class="text-secondary hover:underline">Home</a></li>
           <li aria-hidden="true">/</li>
@@ -10531,7 +10737,7 @@ def build_locations_page() -> str:
         Currently indexed: <strong class="text-white font-semibold">{total}</strong> live place hubs.
         New place SEO waves appear here automatically when their pages ship.
       </p>
-      <p class="text-sm text-slate-500 font-light leading-relaxed max-w-3xl">
+      <p class="text-sm text-slate-400 font-light leading-relaxed max-w-3xl">
         Board #1 hire (outbound only): <a href="{esc(ppg_url)}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(ppg_name)}</a>
         — independent design-build GC; not owned or operated by the Board of Project Stewardship.
         Re-verify every legal name at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> before any deposit.
@@ -11461,7 +11667,7 @@ def build_privacy_page() -> str:
         canonical=f"{BASE_URL}privacy.html",
         breadcrumbs=[("Home", BASE_URL), ("Privacy", f"{BASE_URL}privacy.html")],
         include_widgets=False,
-        include_story_embed=True,
+        include_story_embed=False,
         include_tools_embed=False,
     )
 
@@ -11670,7 +11876,7 @@ def build_videos_page() -> str:
         <li><a href="./build-walkthrough.html" class="text-secondary hover:underline">Build Walkthrough</a> — interactive stage tool</li>
         <li><a href="./another-story.html" class="text-secondary hover:underline">Another Story</a> — Board feature concept studio</li>
       </ul>
-      <p class="text-xs text-slate-500 mt-4 font-light">Prefer the post page for captions and honesty labels. Illustrative clips are not project guarantees.</p>""",
+      <p class="text-xs text-slate-400 mt-4 font-light">Prefer the post page for captions and honesty labels. Illustrative clips are not project guarantees.</p>""",
         )
         + "  <div class=\"pb-12\"></div>\n"
         + education_closing("learn", "tools", "default", official_keys=["lni_verify", "lni_home"])
@@ -12156,6 +12362,7 @@ def build_hiring_a_contractor_page() -> str:
             "verify",
             "directories",
             official_keys=["lni_verify", "lni_hire_smart", "lni_hiring_hub", "lni_hire_pdf", "lni_protect", "lni_home"],
+            exclude_href={"./hiring-a-contractor.html"},
         )
         + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, 'Hiring a contractor FAQ')}\n  </div>\n"
     )
@@ -12882,9 +13089,10 @@ def build_edmonds_hub() -> str:
         "Edmonds",
         "Snohomish County",
         "Board of Project Stewardship project hub for Edmonds remodels and additions — official MyBuildingPermit links, Board directories, and local posts. Distinct from the Edmonds custom homes ranked directory.",
-        "Most Edmonds residential building, plumbing, and mechanical applications go through MyBuildingPermit. Use city permit-assistance pages for tip sheets and contacts; confirm the live path for your parcel.",
+        "The City of Edmonds accepts building, engineering, and land-use applications, including plan review for additions, ADUs, and structural remodels, through MyBuildingPermit. Paper applications are no longer accepted. Confirm the parcel is inside Edmonds city limits; many Edmonds mailing addresses are unincorporated Snohomish County.",
         [
             ("MyBuildingPermit", "https://mybuildingpermit.com/"),
+            ("Edmonds apply for a permit", "https://www.edmondswa.gov/services/permit_assistance/apply_for_a_permit"),
             ("Edmonds permit assistance", "https://www.edmondswa.gov/services/permit_assistance"),
             ("City of Edmonds", "https://www.edmondswa.gov/"),
         ],
@@ -13197,7 +13405,7 @@ def build_seattle_hub() -> str:
         "Seattle",
         "King County",
         "Board of Project Stewardship city hub for Seattle remodels and additions — SDCI permitting orientation, Board directories, and neighborhood posts. Educational aggregation, not a complete contractor roster.",
-        "Seattle Department of Construction and Inspections (SDCI) applications typically run through the Seattle Services Portal — not MyBuildingPermit. Confirm parcel zoning and permit type with SDCI before design freeze.",
+        "Building, electrical, and mechanical permits run through SDCI and the Seattle Services Portal. Plumbing and gas piping permits are issued separately by Public Health – Seattle & King County, not SDCI. Confirm parcel zoning and permit type with SDCI before design freeze.",
         [
             ("How to get a Seattle permit (SDCI)", "https://www.seattle.gov/construction-and-inspections/permits/how-do-you-get-a-permit"),
             ("Seattle Services Portal", "https://cosaccela.seattle.gov/portal/"),
@@ -13690,7 +13898,7 @@ SEATTLE_FEES_URL = "https://seattle.gov/sdci/codes/codes-we-enforce-(a-z)/fees"
 SEATTLE_FEE_SUBTITLE_PDF = "https://seattle.gov/documents/Departments/SDCI/Codes/FeeSubtitleFinal.pdf"
 SEATTLE_FEE_HOW_MUCH = "https://seattle.gov/sdci/permits/how-much-will-your-permit-cost"
 SEATTLE_PERMIT_HOW = "https://www.seattle.gov/construction-and-inspections/permits/how-do-you-get-a-permit"
-WA_CONTRACTOR_REG_URL = "https://www.lni.wa.gov/licensing-permits/electrical/electrical-contractors-administrators-and-masters/contractor-registration"
+WA_CONTRACTOR_REG_URL = "https://www.lni.wa.gov/licensing-permits/contractors/register-as-a-contractor"
 WA_CONSUMER_PROTECT_URL = "https://www.lni.wa.gov/licensing-permits/contractors/hiring-a-contractor"
 MYBUILDINGPERMIT_URL = "https://mybuildingpermit.com/"
 
@@ -14631,12 +14839,10 @@ def build_restoration_page() -> str:
         ("King County", "king-county.html"),
         ("Snohomish County", "snohomish-county.html"),
     ]
-    place_items = []
-    for label, slug in place_rows:
-        if (SITE_DIR / slug).is_file():
-            place_items.append(
-                f'<li><a href="./{slug}" class="text-secondary hover:underline">{esc(label)}</a></li>'
-            )
+    place_items = [
+        f'<li><a href="./{slug}" class="text-secondary hover:underline">{esc(label)}</a></li>'
+        for label, slug in place_rows
+    ]
     places_html = "\n".join(place_items)
 
     faqs = [
@@ -14732,24 +14938,24 @@ def build_restoration_page() -> str:
         <p class="text-sm text-slate-300 font-light leading-relaxed mb-4">DK Production is ranked #1 on the Board of Project Stewardship restoration list. The rank is an editorial shortlist. It is not ownership, and it is not an affiliation between the firm and the Board.</p>
         <dl class="grid sm:grid-cols-2 gap-3 text-sm mb-4">
           <div class="bg-white/5 border border-white/10 rounded-lg px-4 py-3">
-            <dt class="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-1">WA L&amp;I license</dt>
+            <dt class="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-1">WA L&amp;I license</dt>
             <dd class="text-slate-200 font-light leading-relaxed">DKPROPL872OC · Active · General specialty · expires 12/05/2026</dd>
           </div>
           <div class="bg-white/5 border border-white/10 rounded-lg px-4 py-3">
-            <dt class="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-1">Bond and insurance</dt>
+            <dt class="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-1">Bond and insurance</dt>
             <dd class="text-slate-200 font-light leading-relaxed">Bond and insurance on file with L&amp;I.</dd>
           </div>
           <div class="bg-white/5 border border-white/10 rounded-lg px-4 py-3">
-            <dt class="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-1">Service area</dt>
+            <dt class="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-1">Service area</dt>
             <dd class="text-slate-200 font-light leading-relaxed">Based in Marysville. Serves Snohomish County, including Everett, and the greater Seattle metro.</dd>
           </div>
           <div class="bg-white/5 border border-white/10 rounded-lg px-4 py-3">
-            <dt class="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-1">Emergency line</dt>
+            <dt class="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-1">Emergency line</dt>
             <dd class="text-slate-200 font-light leading-relaxed">24/7 emergency line at <a href="tel:{dk_tel}" class="text-secondary hover:underline">{dk_phone}</a>. Secondary email <a href="mailto:{dk_email}" class="text-secondary hover:underline">{dk_email}</a>.</dd>
           </div>
         </dl>
         <p class="text-sm text-slate-300 font-light leading-relaxed mb-3">Services listed by DK Production: water damage and flood restoration, including drying and sewage backup; fire and smoke damage restoration, including board-up, roof tarping, and soot and odor cleanup; mold remediation; reconstruction after damage; remodeling; and insurance-claim help.</p>
-        <p class="text-xs text-slate-500 font-light">Review profiles, links only: <a href="{dk_thumbtack}" target="_blank" rel="noopener" class="text-secondary hover:underline">Thumbtack profile</a> · <a href="{dk_yelp}" target="_blank" rel="noopener" class="text-secondary hover:underline">Yelp profile</a>. Re-check the license at <a href="{dk_lni}" target="_blank" rel="noopener" class="text-secondary hover:underline">Verify on L&amp;I</a> before any deposit.</p>
+        <p class="text-xs text-slate-400 font-light">Review profiles, links only: <a href="{dk_thumbtack}" target="_blank" rel="noopener" class="text-secondary hover:underline">Thumbtack profile</a> · <a href="{dk_yelp}" target="_blank" rel="noopener" class="text-secondary hover:underline">Yelp profile</a>. Re-check the license at <a href="{dk_lni}" target="_blank" rel="noopener" class="text-secondary hover:underline">Verify on L&amp;I</a> before any deposit.</p>
       </div>
     </article>
 
@@ -15000,6 +15206,20 @@ def build_directory_hub() -> str:
             "Open trades hub",
         ),
         (
+            "fa-wrench",
+            "Plumbers",
+            "Trade directory — re-verify every firm at WA L&I.",
+            "./plumber.html",
+            "Open plumber directory",
+        ),
+        (
+            "fa-bolt",
+            "Electricians",
+            "Trade directory — re-verify every firm at WA L&I.",
+            "./electrician.html",
+            "Open electrician directory",
+        ),
+        (
             "fa-building",
             "Commercial contractors",
             "Commercial / light commercial firms serving the corridor — still re-verify every license at WA L&I before award.",
@@ -15072,6 +15292,11 @@ def build_directory_hub() -> str:
     </div>
   </section>
 """
+        + '  <div class="max-w-6xl mx-auto px-4">\n'
+        + integrity_shield_html(
+            "Directory rankings inherit these six stewardship layers — public signals and local mastery, not paid placement."
+        )
+        + "  </div>\n"
         + _hub_section(
             "How to use these directories",
             _check_ul(
@@ -15111,9 +15336,26 @@ def build_directory_hub() -> str:
 
 
 def build_meta_redirect(target_rel: str, title: str, blurb: str) -> str:
-    """Static GitHub Pages soft-redirect (meta refresh + link). target_rel like kitchen.html."""
-    dest = f"./{target_rel}"
-    canon = f"{BASE_URL}{target_rel}"
+    """Static GitHub Pages soft-redirect (meta refresh + link).
+
+    Accepts a site-relative file (kitchen.html), a root-relative path
+    (/directory.html), or an absolute http(s) URL. Root-relative and
+    absolute targets are not prefixed with ./.
+    """
+    raw = (target_rel or "").strip()
+    if raw.startswith(("http://", "https://")):
+        dest = raw
+        canon = raw
+        label = raw
+    elif raw.startswith("/"):
+        dest = raw
+        canon = f"{SITE_ORIGIN}{raw}"
+        label = raw
+    else:
+        rel = raw[2:] if raw.startswith("./") else raw
+        dest = f"./{rel}"
+        canon = f"{BASE_URL}{rel}"
+        label = rel
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15121,86 +15363,17 @@ def build_meta_redirect(target_rel: str, title: str, blurb: str) -> str:
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{esc(title)} | Board of Project Stewardship</title>
   <meta name="robots" content="noindex, follow">
-  <meta http-equiv="refresh" content="0;url={dest}">
-  <link rel="canonical" href="{canon}">
+  <meta http-equiv="refresh" content="0;url={esc(dest)}">
+  <link rel="canonical" href="{esc(canon)}">
   <script>location.replace({json.dumps(dest)});</script>
 </head>
 <body style="font-family:system-ui,sans-serif;background:#0b1220;color:#e2e8f0;padding:2rem;max-width:40rem;margin:auto">
   <h1 style="font-size:1.25rem">{esc(title)}</h1>
-  <p>{esc(blurb)} <a href="{dest}" style="color:#4ade80">{esc(target_rel)}</a>.</p>
+  <p>{esc(blurb)} <a href="{esc(dest)}" style="color:#4ade80">{esc(label)}</a>.</p>
 </body>
 </html>
 """
 
-
-
-def build_directory_page() -> str:
-    """Directories index hub — ends soft-404 on /directory.html."""
-    cards = [
-        ("./additions.html", "Additions", "Top editorial shortlist for King County, Snohomish County, and Seattle additions."),
-        ("./kitchen.html", "Kitchen", "Kitchen remodel directory with Board #1 hire path."),
-        ("./bathrooms.html", "Bathrooms", "Bath remodel shortlist — waterproofing discipline emphasized."),
-        ("./restoration.html", "Restoration", "Water, fire, smoke, and mold damage restoration — Board #1 restoration contractor and homeowner guidance."),
-        ("./custom-homes.html", "Custom homes", "Custom home builders serving King & Snohomish."),
-        ("./edmonds-custom-homes.html", "Edmonds custom homes", "Edmonds-focused Top 30 custom home shortlist."),
-        ("./commercial.html", "Commercial", "Commercial GC shortlist — research aid, not a brokerage."),
-        ("./spec-homes.html", "Spec homes", "Spec / production builders under Board review."),
-        ("./trades.html", "Trades hub", "Plumber, electrician, HVAC, and specialty trades."),
-        ("./plumber.html", "Plumber", "Trade directory — re-verify every firm at WA L&I."),
-        ("./electrician.html", "Electrician", "Trade directory — re-verify every firm at WA L&I."),
-        ("./verify-contractor.html", "Verify contractor", "Walkthrough companion to official L&I Verify."),
-        ("./how-we-rank.html", "How we rank", "Published editorial method — not paid placement."),
-    ]
-    parts = []
-    for href, title, blurb in cards:
-        parts.append(
-            "        <a href=\"%s\" class=\"bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 block no-underline card-hover\">\n"
-            "          <h2 class=\"text-lg font-black text-white mb-1 tracking-tight\">%s</h2>\n"
-            "          <p class=\"text-sm text-slate-400 font-light leading-relaxed\">%s</p>\n"
-            "        </a>\n" % (href, esc(title), esc(blurb))
-        )
-    lis = "".join(parts)
-    body = (
-        _hub_header(
-            "Directories",
-            "Board contractor directories",
-            "Editorial shortlists for the Pacific Northwest — King County, Snohomish County, and Seattle, with Edmonds as one city hub. Listing is a research aid — not a government certification. Re-verify every firm at WA L&I before deposits. Board #1 hire ranking links outbound to Pacific Pro Group; the Board does not own that firm.",
-        )
-        + "  <section class=\"max-w-6xl mx-auto px-4 pb-8\">\n"
-        + "    <div class=\"grid sm:grid-cols-2 lg:grid-cols-3 gap-4\">\n"
-        + lis
-        + "    </div>\n"
-        + "    <p class=\"text-sm text-slate-500 font-light mt-8\"><a href=\"./learn.html\" class=\"text-secondary hover:underline\">Learn hub</a> · <a href=\"./permits.html\" class=\"text-secondary hover:underline\">Permit hub</a> · <a href=\""
-        + LNI_URL
-        + "\" target=\"_blank\" rel=\"noopener\" class=\"text-secondary hover:underline\">WA L&amp;I Verify</a> · <a href=\"./about.html\" class=\"text-secondary hover:underline\">About the Board</a></p>\n"
-        + "  </section>\n"
-        + integrity_shield_html(
-            "Directory rankings inherit these six stewardship layers — public signals and local mastery, not paid placement."
-        )
-    )
-    return page_shell(
-        "Contractor directories | Board of Project Stewardship",
-        "Board of Project Stewardship contractor directories for King County, Snohomish County, and Seattle — additions, kitchen, bath, custom homes, trades. Editorial shortlists; re-verify at WA L&I.",
-        "directory",
-        body,
-        canonical=f"{BASE_URL}directory.html",
-        breadcrumbs=[("Home", BASE_URL), ("Directories", f"{BASE_URL}directory.html")],
-        include_widgets=False,
-        include_story_embed=False,
-        include_tools_embed=False,
-    )
-
-
-def build_redirect_page(target: str, title: str) -> str:
-    """Static HTML redirect for plural slug soft-404s."""
-    return (
-        "<!DOCTYPE html>\n<html lang=\"en\"><head><meta charset=\"utf-8\">"
-        f"<meta http-equiv=\"refresh\" content=\"0; url={target}\">"
-        f"<link rel=\"canonical\" href=\"{BASE_URL}{target.lstrip('./')}\">"
-        f"<title>{esc(title)} — redirect</title>"
-        f"<script>location.replace({target!r});</script></head>"
-        f"<body class=\"bg-obsidian text-slate-300 p-8\"><p>Moved to <a href=\"{target}\">{esc(title)}</a>.</p></body></html>\n"
-    )
 
 
 def build_write_page() -> str:
@@ -15218,11 +15391,13 @@ def build_write_page() -> str:
         if (open) {
           box.classList.add('hidden');
           btn.textContent = 'Toggle preview';
+          btn.setAttribute('aria-expanded', 'false');
           return;
         }
         out.textContent = body.value || '(empty)';
         box.classList.remove('hidden');
         btn.textContent = 'Hide preview';
+        btn.setAttribute('aria-expanded', 'true');
       });
     }
     var form = document.getElementById('blog-submission');
@@ -15277,28 +15452,28 @@ def build_write_page() -> str:
       <i class="fas fa-circle-info text-secondary mt-0.5"></i>
       <div class="text-sm text-slate-300 font-light leading-relaxed">
         <p class="mb-2"><strong class="text-white font-semibold">Reviewed before live.</strong> This form opens your email client to <a href="mailto:{EDITORIAL_EMAIL}" class="text-secondary hover:underline">{EDITORIAL_EMAIL}</a> — a review-only inbox. Editors check facts, L&amp;I honesty, and Board directory #1 attribution rules before publishing under <em>Board of Project Stewardship Editorial</em>.</p>
-        <p class="text-xs text-slate-500 mb-0">Do not invent ratings. PPG links: <a href="https://pacificprogroup.com/" class="text-secondary hover:underline" target="_blank" rel="noopener">https://pacificprogroup.com/</a> only. Re-verify WA L&amp;I before recommending any contractor.</p>
+        <p class="text-xs text-slate-400 mb-0">Do not invent ratings. PPG links: <a href="https://pacificprogroup.com/" class="text-secondary hover:underline" target="_blank" rel="noopener">https://pacificprogroup.com/</a> only. Re-verify WA L&amp;I before recommending any contractor.</p>
       </div>
     </div>
     <form id="blog-submission" name="blog-submission" class="bg-charcoal border border-white/10 rounded-xl p-6 sm:p-8 space-y-5 shadow-glow-sleek">
       <div class="grid sm:grid-cols-2 gap-4">
         <div>
           <label for="submitter-name" class="block text-[11px] uppercase tracking-widest text-slate-400 font-bold mb-1">Your name</label>
-          <input id="submitter-name" name="name" type="text" required maxlength="120" class="w-full bg-black/40 border border-white/15 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
+          <input id="submitter-name" name="name" type="text" required maxlength="120" class="w-full bg-black/40 border border-white/15 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary">
         </div>
         <div>
           <label for="submitter-email" class="block text-[11px] uppercase tracking-widest text-slate-400 font-bold mb-1">Email</label>
-          <input id="submitter-email" name="email" type="email" required maxlength="200" class="w-full bg-black/40 border border-white/15 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
+          <input id="submitter-email" name="email" type="email" required maxlength="200" class="w-full bg-black/40 border border-white/15 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary">
         </div>
       </div>
       <div>
         <label for="post-title" class="block text-[11px] uppercase tracking-widest text-slate-400 font-bold mb-1">Proposed title</label>
-        <input id="post-title" name="title" type="text" required maxlength="200" class="w-full bg-black/40 border border-white/15 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
+        <input id="post-title" name="title" type="text" required maxlength="200" class="w-full bg-black/40 border border-white/15 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary">
       </div>
       <div class="grid sm:grid-cols-2 gap-4">
         <div>
           <label for="post-category" class="block text-[11px] uppercase tracking-widest text-slate-400 font-bold mb-1">Category / tag</label>
-          <select id="post-category" name="category" required class="w-full bg-black/40 border border-white/15 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
+          <select id="post-category" name="category" required class="w-full bg-black/40 border border-white/15 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary">
             <option value="Guides">Guides</option>
             <option value="Hiring Guides">Hiring Guides</option>
             <option value="Permits">Permits</option>
@@ -15310,22 +15485,22 @@ def build_write_page() -> str:
         </div>
         <div>
           <label for="post-slug" class="block text-[11px] uppercase tracking-widest text-slate-400 font-bold mb-1">Suggested slug (optional)</label>
-          <input id="post-slug" name="slug" type="text" maxlength="120" class="w-full bg-black/40 border border-white/15 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
+          <input id="post-slug" name="slug" type="text" maxlength="120" class="w-full bg-black/40 border border-white/15 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary">
         </div>
       </div>
       <div>
         <label for="post-description" class="block text-[11px] uppercase tracking-widest text-slate-400 font-bold mb-1">One-sentence description</label>
-        <input id="post-description" name="description" type="text" required maxlength="300" class="w-full bg-black/40 border border-white/15 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
+        <input id="post-description" name="description" type="text" required maxlength="300" class="w-full bg-black/40 border border-white/15 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary">
       </div>
       <div>
         <div class="flex items-center justify-between gap-2 mb-1">
           <label for="post-body" class="block text-[11px] uppercase tracking-widest text-slate-400 font-bold">Article body (Markdown)</label>
-          <button type="button" id="btn-preview" class="text-[11px] font-bold uppercase tracking-widest text-secondary hover:underline">Toggle preview</button>
+          <button type="button" id="btn-preview" class="text-[11px] font-bold uppercase tracking-widest text-secondary hover:underline" aria-expanded="false" aria-controls="md-preview">Toggle preview</button>
         </div>
-        <textarea id="post-body" name="body" required rows="14" class="w-full bg-black/40 border border-white/15 rounded-lg px-3 py-2.5 text-white text-sm font-mono focus:outline-none focus:border-secondary leading-relaxed"></textarea>
+        <textarea id="post-body" name="body" required rows="14" class="w-full bg-black/40 border border-white/15 rounded-lg px-3 py-2.5 text-white text-sm font-mono focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary leading-relaxed"></textarea>
         <div id="md-preview" class="hidden mt-3 bg-black/40 border border-white/10 rounded-lg p-4 prose-board text-sm">
-          <p class="text-[11px] uppercase tracking-widest text-slate-500 font-bold mb-3">Preview stub</p>
-          <pre id="md-preview-body" class="text-slate-300 font-light text-sm m-0 font-sans"></pre>
+          <p class="text-[11px] uppercase tracking-widest text-slate-400 font-bold mb-3">Preview stub</p>
+          <pre id="md-preview-body" class="text-slate-300 font-light text-sm m-0 font-sans whitespace-pre-wrap break-words"></pre>
         </div>
       </div>
       <div class="flex items-start gap-3">
@@ -15334,9 +15509,9 @@ def build_write_page() -> str:
       </div>
       <div class="pt-2 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
         <button type="submit" class="inline-flex justify-center items-center gap-2 px-6 py-3 rounded-lg bg-primary text-white text-xs font-bold uppercase tracking-widest hover:bg-emerald-700 transition shadow-glow-sleek">Email draft for review</button>
-        <a href="./blog.html" class="text-center text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-secondary transition">← Back to magazine</a>
+        <a href="./blog.html" class="text-center text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-secondary transition">← Back to magazine</a>
       </div>
-      <p class="text-[11px] text-slate-500 font-light">Opens your mail app to {EDITORIAL_EMAIL}. If nothing opens, email that address directly with your draft attached.</p>
+      <p class="text-[11px] text-slate-400 font-light">Opens your mail app to {EDITORIAL_EMAIL}. If nothing opens, email that address directly with your draft attached.</p>
     </form>
   </div>
 """
@@ -15408,7 +15583,7 @@ def build_404_page() -> str:
         prefix="/",
         canonical=f"{BASE_URL}404.html",
         robots="noindex, follow",
-        include_story_embed=True,
+        include_story_embed=False,
         include_tools_embed=False,
         include_widgets=False,
         extra_scripts="""  <script>
@@ -15428,7 +15603,10 @@ def build_404_page() -> str:
       return;
     }
     if (!slug || slug.indexOf('.') !== -1) return;
-    window.location.replace(slug + '.html');
+    var next = slug + '.html';
+    fetch(next, { method: 'HEAD' }).then(function (resp) {
+      if (resp && resp.ok) window.location.replace(next);
+    }).catch(function () {});
   })();
   </script>
 """,
@@ -15466,7 +15644,7 @@ def _tool_seo_block(title: str, description: str, canonical: str, og_image: str)
     return (
         "<!-- board-tool-seo -->\n"
         f'<meta name="description" content="{esc(description)}">\n'
-        '<meta name="robots" content="index, follow">\n'
+        '<meta name="robots" content="noindex, follow">\n'
         f'<link rel="canonical" href="{esc(canonical)}">\n'
         f'<meta property="og:title" content="{esc(title)}">\n'
         f'<meta property="og:description" content="{esc(description)}">\n'
@@ -15537,7 +15715,7 @@ def patch_tool_pages() -> None:
         (
             SITE_DIR / "tools" / "build-walkthrough" / "index.html",
             "Build Walkthrough | Board of Project Stewardship",
-            "One cohesive illustrative house through 17 stages from the Board of Project Stewardship. Educational media only — not engineering documents, bids, or schedules.",
+            "Illustrative 17-stage house. Educational media only — not engineering documents, bids, or schedules.",
             f"{SITE_ORIGIN}/build-walkthrough.html",
         ),
         (
@@ -15561,7 +15739,7 @@ def patch_tool_pages() -> None:
         (
             SITE_DIR / "tools" / "energy-credit" / "index.html",
             "WSEC-R 2021 Prescriptive Credits | Board of Project Stewardship",
-            "WSEC-R 2021 prescriptive credits for King County, Snohomish County, and Seattle. Educational — no invented tax amounts.",
+            "2021 WSEC-R (as amended, effective March 15, 2024) prescriptive credits. Check R406 values against the adopted state and city package. Educational — no invented tax amounts.",
             f"{SITE_ORIGIN}/energy-credit.html",
         ),
     ]
@@ -15573,6 +15751,19 @@ def patch_tool_pages() -> None:
         if path.name == "index.html" and "another-story" in str(path):
             text = reframe_another_story_chrome(text)
         text = _strip_tool_seo_blocks(text)
+        if path.parent.name == "build-walkthrough":
+            text = re.sub(
+                r"\s*<link rel=\"stylesheet\" href=\"/assets/css/site\.css\">\s*",
+                "\n",
+                text,
+                count=1,
+            )
+            text = re.sub(
+                r"\s*<link rel=\"preload\" href=\"/assets/fonts/InterLatin\.woff2\" as=\"font\" type=\"font/woff2\" crossorigin>\s*",
+                "\n",
+                text,
+                count=1,
+            )
         if path.parent.name == "energy-credit":
             # The hand-written tool already has these tags. Drop the first of each
             # so the injected block is the only canonical.
@@ -15891,11 +16082,8 @@ def main(argv: list[str] | None = None) -> None:
     write_place_seo_wave1()
     write_place_seo_wave2()
     write_locations_page()
-    (SITE_DIR / "directory.html").write_text(build_directory_page(), encoding="utf-8")
-    (SITE_DIR / "kitchens.html").write_text(build_redirect_page("./kitchen.html", "Kitchen directory"), encoding="utf-8")
-    (SITE_DIR / "plumbing.html").write_text(build_redirect_page("./plumber.html", "Plumber directory"), encoding="utf-8")
     (SITE_DIR / "directories.html").write_text(
-        build_redirect_page("/directory.html", "Directories hub"),
+        build_meta_redirect("/directory.html", "Directories hub", "The directories hub now lives at"),
         encoding="utf-8",
     )
     (SITE_DIR / "write.html").write_text(build_write_page(), encoding="utf-8")
@@ -15916,7 +16104,7 @@ def main(argv: list[str] | None = None) -> None:
     ):
         _dir = SITE_DIR / _slug
         _dir.mkdir(parents=True, exist_ok=True)
-        (_dir / "index.html").write_text(build_redirect_page(_target, _title), encoding="utf-8")
+        (_dir / "index.html").write_text(build_meta_redirect(_target, _title, "This page now lives at"), encoding="utf-8")
     (SITE_DIR / "404.html").write_text(build_404_page(), encoding="utf-8")
 
     # Steward hubs (P0/P1/P2)
@@ -15991,7 +16179,7 @@ def main(argv: list[str] | None = None) -> None:
     # The worksheet itself stays at tools/energy-credit/ and canonicalizes to the landing page.
     (SITE_DIR / "tools" / "energy-credits").mkdir(parents=True, exist_ok=True)
     (SITE_DIR / "tools" / "energy-credits" / "index.html").write_text(
-        build_redirect_page("/energy-credit.html", "Energy code credits"),
+        build_meta_redirect("/energy-credit.html", "Energy code credits", "The energy code credits page now lives at"),
         encoding="utf-8",
     )
     leftover_methodology = SITE_DIR / "methodology.md"

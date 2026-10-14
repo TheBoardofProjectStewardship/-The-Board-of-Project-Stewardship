@@ -50,6 +50,7 @@
   let labelGroups = [];
   let geos = [];
   let labelTextures = [];
+  let labelMaterials = [];
   let mats = null;
   let anim = null;
   let frameState = null;
@@ -1462,6 +1463,8 @@
     geos = [];
     labelTextures.forEach((t) => t.dispose());
     labelTextures = [];
+    labelMaterials.forEach((m) => m.dispose());
+    labelMaterials = [];
     if (house) house.clear();
   }
 
@@ -1582,6 +1585,7 @@
       storey.rooms.forEach((room) => {
         const tex = labelTexture(room.name);
         const mat = new THREE.MeshBasicMaterial({ map: tex, transparent: true, depthWrite: false });
+        labelMaterials.push(mat);
         const wtag = Math.max(3.2, room.name.length * 0.72);
         const geo = new THREE.PlaneGeometry(wtag, 1.15);
         const mesh = new THREE.Mesh(geo, mat);
@@ -1818,16 +1822,37 @@
 
   function bind3DInput() {
     let look = null;
+    const glPointers = new Map();
+    let glPinch = 0;
     glCanvas.addEventListener("pointerdown", (e) => {
       if (e.target !== glCanvas) return;
+      glPointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      capturePointer(glCanvas, e.pointerId);
+      userOrbit = true;
+      if (glPointers.size >= 2) {
+        const arr = [...glPointers.values()];
+        glPinch = Math.hypot(arr[0].x - arr[1].x, arr[0].y - arr[1].y);
+        look = null;
+        return;
+      }
       if (viewMode === "walk") {
         glCanvas.requestPointerLock && glCanvas.requestPointerLock();
       }
       look = { id: e.pointerId, x: e.clientX, y: e.clientY };
-      capturePointer(glCanvas, e.pointerId);
-      userOrbit = true;
     });
     glCanvas.addEventListener("pointermove", (e) => {
+      if (glPointers.has(e.pointerId)) glPointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (glPointers.size >= 2 && glPinch > 0) {
+        const arr = [...glPointers.values()];
+        const dist = Math.hypot(arr[0].x - arr[1].x, arr[0].y - arr[1].y);
+        if (dist > 0) {
+          const factor = dist / glPinch;
+          orbit.dist = Math.max(8, Math.min(140, orbit.dist / factor));
+          glPinch = dist;
+          userOrbit = true;
+        }
+        return;
+      }
       if (!look || e.pointerId !== look.id) return;
       const dx = e.clientX - look.x;
       const dy = e.clientY - look.y;
@@ -1842,7 +1867,13 @@
         orbit.phi = Math.max(0.25, Math.min(1.35, orbit.phi - dy * 0.004));
       }
     });
-    glCanvas.addEventListener("pointerup", () => { look = null; });
+    function endGlPointer(e) {
+      if (e && e.pointerId != null) glPointers.delete(e.pointerId);
+      if (glPointers.size < 2) glPinch = 0;
+      if (!look || !e || e.pointerId === look.id) look = null;
+    }
+    glCanvas.addEventListener("pointerup", endGlPointer);
+    glCanvas.addEventListener("pointercancel", endGlPointer);
     glCanvas.addEventListener("wheel", (e) => {
       e.preventDefault();
       orbit.dist = Math.max(8, Math.min(140, orbit.dist * Math.exp(e.deltaY * 0.001)));

@@ -785,6 +785,7 @@ def head(name: str, desc: str, canon_path: str, extra_ld: str, depth: int, og_ty
   <meta name="twitter:description" content="{esc(desc)}">
   <meta name="twitter:image" content="{OG}">
   <link rel="canonical" href="{canon}">
+  <link rel="preload" href="/assets/fonts/InterLatin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="alternate" type="application/rss+xml" title="{BRAND} Blog" href="{ORIGIN}/blog/rss.xml">
   <link rel="icon" href="{ORIGIN}/assets/icons/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="{ORIGIN}/assets/icons/favicon.ico" sizes="any">
@@ -800,12 +801,12 @@ def head(name: str, desc: str, canon_path: str, extra_ld: str, depth: int, og_ty
     <a class="learn-brand" href="{root}">{seal_picture("header")}<span class="learn-brand-name">Board of Project Stewardship</span></a>
     <button type="button" class="learn-menu" aria-expanded="false" aria-controls="learn-menu-panel">Menu</button>
     <nav class="learn-nav" id="learn-menu-panel" aria-label="Primary">
-      <a href="{root}">Home</a>
-      <a href="{root}learn.html">Learn hub</a>
-      <a href="{root}learn/">This house</a>
-      <a href="{root}learn/sequence/">Build order</a>
-      <a href="{root}learn/explore/">Explore</a>
-      <a href="{root}learn/compare/">Compare</a>
+      <a href="{root}"{ ' aria-current="page"' if canon_path in ("", "index.html") else ""}>Home</a>
+      <a href="{root}learn.html"{ ' aria-current="page"' if canon_path == "learn.html" else ""}>Learn hub</a>
+      <a href="{root}learn/"{ ' aria-current="page"' if canon_path == "learn/" else ""}>This house</a>
+      <a href="{root}learn/sequence/"{ ' aria-current="page"' if canon_path == "learn/sequence/" else ""}>Build order</a>
+      <a href="{root}learn/explore/"{ ' aria-current="page"' if canon_path == "learn/explore/" else ""}>Explore</a>
+      <a href="{root}learn/compare/"{ ' aria-current="page"' if canon_path == "learn/compare/" else ""}>Compare</a>
     </nav>
   </header>
 """
@@ -847,7 +848,7 @@ def footer(depth: int, viewer_script: bool = False) -> str:
 def viewer(preset: str, label: str) -> str:
     return (
         f'<figure class="learn-still" data-learn-view="still" data-preset="{esc(preset)}">'
-        f'<canvas width="960" height="540" tabindex="0" aria-describedby="learn-keys" aria-label="{esc(label)}"></canvas>'
+        f'<canvas width="960" height="540" tabindex="0" role="application" aria-describedby="learn-keys" aria-label="{esc(label)}"></canvas>'
         f'<div class="learn-actions">'
         f'<button type="button" class="learn-btn" data-learn-zoom="in">Zoom in</button>'
         f'<button type="button" class="learn-btn" data-learn-zoom="out">Zoom out</button>'
@@ -898,6 +899,7 @@ def build_article(item: dict) -> str:
         "dateModified": DATE,
         "url": url,
         "mainEntityOfPage": url,
+        "image": OG,
         "author": {"@type": "Organization", "name": BRAND, "@id": ORIGIN + "/#organization"},
         "publisher": {"@id": ORIGIN + "/#organization"},
         "inLanguage": "en-US",
@@ -913,7 +915,7 @@ def build_article(item: dict) -> str:
     body.append(related(item["related"]))
     return (
         head(item["name"], desc, canon, article + crumb_ld([(n, ORIGIN + "/" + (h or "")) for n, h in crumbs]), 2, "article")
-        + f'<main id="main-content">\n{crumb_nav(crumbs, 2)}\n'
+        + f'<main id="main-content" tabindex="-1">\n{crumb_nav(crumbs, 2)}\n'
         + '<article class="learn-wrap learn-hero">'
         + f'<p class="learn-kicker">How a house is built</p><h1>{esc(item["name"])}</h1>'
         + f'<p class="learn-dek">{esc(desc)}</p>'
@@ -960,7 +962,7 @@ def build_sequence() -> str:
         )
     crumbs = [("Home", ""), ("How a house is built", "learn/"), ("Build order", canon)]
     sticky = f"""
-<main id="main-content">
+<main id="main-content" tabindex="-1">
 {crumb_nav(crumbs, 2)}
 <section class="learn-seq" id="learn-seq" data-learn-view="sequence" aria-labelledby="learn-seq-title">
   <div class="learn-seq-track">
@@ -1042,7 +1044,7 @@ def build_explore() -> str:
         fallback_links.append(f'<li><a href="{esc(href)}">{esc(link)}</a></li>')
     crumbs = [("Home", ""), ("How a house is built", "learn/"), ("Explore", canon)]
     main = f"""
-<main id="main-content">
+<main id="main-content" tabindex="-1">
 {crumb_nav(crumbs, 2)}
 <div class="learn-explore" data-learn-view="explore">
   <div>
@@ -1103,12 +1105,13 @@ def build_compare() -> str:
         "dateModified": DATE,
         "url": url,
         "mainEntityOfPage": url,
+        "image": OG,
         "author": {"@type": "Organization", "name": BRAND, "@id": ORIGIN + "/#organization"},
         "publisher": {"@id": ORIGIN + "/#organization"},
     })
     crumbs = [("Home", ""), ("How a house is built", "learn/"), ("Compare", canon)]
     main = f"""
-<main id="main-content">
+<main id="main-content" tabindex="-1">
 {crumb_nav(crumbs, 2)}
 <article class="learn-wrap learn-hero">
   <p class="learn-kicker">Choices</p>
@@ -1165,7 +1168,7 @@ def build_landing() -> str:
     })
     crumbs = [("Home", ""), ("How a house is built", canon)]
     main = f"""
-<main id="main-content">
+<main id="main-content" tabindex="-1">
 {crumb_nav(crumbs, 1)}
 <article class="learn-wrap">
   <header class="learn-hero">

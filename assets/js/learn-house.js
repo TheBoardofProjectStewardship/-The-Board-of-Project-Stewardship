@@ -126,9 +126,24 @@
     var button = document.querySelector(".learn-menu");
     var panel = document.getElementById("learn-menu-panel");
     if (!button || !panel) return;
+    function closeMenu() {
+      document.body.classList.remove("learn-nav-open");
+      button.setAttribute("aria-expanded", "false");
+    }
     button.addEventListener("click", function () {
       var open = document.body.classList.toggle("learn-nav-open");
       button.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key !== "Escape" || !document.body.classList.contains("learn-nav-open")) return;
+      closeMenu();
+      button.focus();
+    });
+    document.addEventListener("click", function (event) {
+      if (!document.body.classList.contains("learn-nav-open")) return;
+      var target = event.target;
+      if (target === button || button.contains(target) || panel.contains(target)) return;
+      closeMenu();
     });
   }
 
@@ -440,11 +455,16 @@
     }
 
     function maybeEnhance() {
-      if (!view || view.dead || reducedMotion() || shortViewport() || largeText()) return;
       var sticky = root.querySelector(".learn-seq-sticky");
-      if (!sticky || sticky.scrollHeight > window.innerHeight - 8) return;
+      if (!view || view.dead || reducedMotion() || shortViewport() || largeText() || !sticky) {
+        root.classList.remove("is-enhanced");
+        return;
+      }
+      root.classList.remove("is-enhanced");
+      if (sticky.scrollHeight > window.innerHeight - 8) return;
       root.classList.add("is-enhanced");
     }
+    window.addEventListener("resize", maybeEnhance);
 
     var params = new URLSearchParams(window.location.search);
     var queried = stepFromQuery(params.get("step"), steps.length);

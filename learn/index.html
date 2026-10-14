@@ -19,6 +19,7 @@
   <meta name="twitter:description" content="How this house is built, from the ground up, with the parts you can open. Teaching sketch, not a structural design.">
   <meta name="twitter:image" content="https://boardofprojectstewardship.com/assets/images/home-hero.webp">
   <link rel="canonical" href="https://boardofprojectstewardship.com/learn/">
+  <link rel="preload" href="/assets/fonts/InterLatin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="alternate" type="application/rss+xml" title="Board of Project Stewardship Blog" href="https://boardofprojectstewardship.com/blog/rss.xml">
   <link rel="icon" href="https://boardofprojectstewardship.com/assets/icons/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="https://boardofprojectstewardship.com/assets/icons/favicon.ico" sizes="any">
@@ -220,14 +221,14 @@
     <nav class="learn-nav" id="learn-menu-panel" aria-label="Primary">
       <a href="../">Home</a>
       <a href="../learn.html">Learn hub</a>
-      <a href="../learn/">This house</a>
+      <a href="../learn/" aria-current="page">This house</a>
       <a href="../learn/sequence/">Build order</a>
       <a href="../learn/explore/">Explore</a>
       <a href="../learn/compare/">Compare</a>
     </nav>
   </header>
 
-<main id="main-content">
+<main id="main-content" tabindex="-1">
 <nav class="learn-crumb" aria-label="Breadcrumb"><a href="../">Home</a><span aria-hidden="true">/</span><span aria-current="page">How a house is built</span></nav>
 <article class="learn-wrap">
   <header class="learn-hero">
@@ -235,7 +236,7 @@
     <h1>How a house is built</h1>
     <p class="learn-dek">The same house as the homepage drawing. Follow it from the ground up, open a part, or compare two ways of building. Written pages are finished. Anything still unnamed as a page is marked coming soon.</p>
   </header>
-  <figure class="learn-still" data-learn-view="still" data-preset="grade"><canvas width="960" height="540" tabindex="0" aria-describedby="learn-keys" aria-label="The finished house used throughout this guide"></canvas><div class="learn-actions"><button type="button" class="learn-btn" data-learn-zoom="in">Zoom in</button><button type="button" class="learn-btn" data-learn-zoom="out">Zoom out</button><button type="button" class="learn-btn" data-learn-reset>Reset view</button></div><p id="learn-keys" class="learn-keys">Arrow keys turn the house. Plus and minus, or the zoom buttons, change the zoom. A horizontal drag turns it after you tap the drawing. Reset view returns to the step camera.</p><figcaption class="learn-caption">Teaching sketch of this house. Not a structural design.</figcaption><p class="learn-fallback">The drawing needs WebGL. The notes on the page still stand.</p></figure>
+  <figure class="learn-still" data-learn-view="still" data-preset="grade"><canvas width="960" height="540" tabindex="0" role="application" aria-describedby="learn-keys" aria-label="The finished house used throughout this guide"></canvas><div class="learn-actions"><button type="button" class="learn-btn" data-learn-zoom="in">Zoom in</button><button type="button" class="learn-btn" data-learn-zoom="out">Zoom out</button><button type="button" class="learn-btn" data-learn-reset>Reset view</button></div><p id="learn-keys" class="learn-keys">Arrow keys turn the house. Plus and minus, or the zoom buttons, change the zoom. A horizontal drag turns it after you tap the drawing. Reset view returns to the step camera.</p><figcaption class="learn-caption">Teaching sketch of this house. Not a structural design.</figcaption><p class="learn-fallback">The drawing needs WebGL. The notes on the page still stand.</p></figure>
   <div class="learn-actions">
     <a class="learn-btn is-primary" href="sequence/">Build order</a>
     <a class="learn-btn" href="explore/">Explore the house</a>
