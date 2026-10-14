@@ -832,7 +832,7 @@ def stamp_badge(root: str) -> str:
     return (
         f'<a class="stamp-badge" href="{root}stamp-of-trust/">'
         f'<img class="stamp-badge-mark" src="/assets/icons/seal-96.png" width="22" height="22" '
-        f'alt="Stamp of Trust from the Board of Project Stewardship" loading="lazy" decoding="async">'
+        f'alt="" loading="lazy" decoding="async">'
         f'<span class="stamp-badge-copy"><span class="stamp-badge-kicker">Stamp of Trust</span>'
         f'<span class="stamp-badge-name">Board of Project Stewardship</span></span></a>'
     )

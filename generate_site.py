@@ -1748,16 +1748,16 @@ def head_assets() -> str:
 SEAL_ALT = "The Board of Project Stewardship seal"
 
 
-STAMP_BADGE_ALT = "Stamp of Trust from the Board of Project Stewardship"
-
-
 def stamp_badge_html(href: str) -> str:
-    """Official Stamp of Trust pill from the credential page, linked back to it."""
+    """Official Stamp of Trust pill from the credential page, linked back to it.
+
+    The seal image is decorative: the link already names Stamp of Trust.
+    """
     return (
         f'<a class="stamp-badge" href="{href}">'
         f'<img class="stamp-badge-mark" src="/assets/icons/seal-96.png" '
         f'srcset="/assets/icons/seal-96.png 96w, /assets/icons/seal-192.png 192w" '
-        f'sizes="26px" width="26" height="26" alt="{STAMP_BADGE_ALT}" '
+        f'sizes="26px" width="26" height="26" alt="" '
         f'loading="lazy" decoding="async" data-no-lcp>'
         f'<span class="stamp-badge-copy">'
         f'<span class="stamp-badge-kicker">Stamp of Trust</span>'
@@ -2007,7 +2007,7 @@ def footer_html(prefix: str = "./", active: str = "", updated: str = "") -> str:
 
     def _group(title: str, body: str) -> str:
         return (
-            f'<details class="site-footer-group">'
+            f'<details class="site-footer-group" open>'
             f'<summary>{title}</summary>'
             f'<div class="site-footer-group-body">{body}</div>'
             f"</details>"
@@ -2056,8 +2056,21 @@ def footer_html(prefix: str = "./", active: str = "", updated: str = "") -> str:
     function sync() {{
       groups.forEach(function (item) {{ item.open = desktop.matches; }});
     }}
+    function blockToggle(event) {{
+      if (!desktop.matches) return;
+      var key = event.key;
+      if (event.type === "keydown" && key !== "Enter" && key !== " " && key !== "Spacebar") return;
+      event.preventDefault();
+    }}
+    groups.forEach(function (item) {{
+      var summary = item.querySelector("summary");
+      if (!summary) return;
+      summary.addEventListener("click", blockToggle);
+      summary.addEventListener("keydown", blockToggle);
+    }});
     sync();
     if (desktop.addEventListener) desktop.addEventListener("change", sync);
+    else if (desktop.addListener) desktop.addListener(sync);
   }})();
   </script>"""
 
@@ -3871,7 +3884,7 @@ def feasibility_calculator_html() -> str:
               <span class="feas-price">$5,000</span>
             </label>
             <details class="feas-details">
-              <summary>Show Details</summary>
+              <summary>Show Details<span class="sr-only"> for Feasibility Study</span></summary>
               <div class="feas-detail-body">
                 <p>Detailed feasibility study to understand zoning requirements and structural possibilities for your project. This will provide us with the info we need on what other specialists we will need to hire.</p>
                 <p><strong>Specialists Included:</strong></p>
@@ -3893,7 +3906,7 @@ def feasibility_calculator_html() -> str:
               <span class="feas-price">$6,000</span>
             </label>
             <details class="feas-details">
-              <summary>Show Details</summary>
+              <summary>Show Details<span class="sr-only"> for Permits</span></summary>
               <div class="feas-detail-body">
                 <p>Covers the full process of securing building permits, zoning approvals, environmental clearances, and utility hookups from local authorities. Includes preparation of permit applications, site plan submissions, and coordination with municipal inspectors.</p>
                 <p><strong>Timeline:</strong> 4–8 months.</p>
@@ -3908,7 +3921,7 @@ def feasibility_calculator_html() -> str:
               <span class="feas-price">$12,000</span>
             </label>
             <details class="feas-details">
-              <summary>Show Details</summary>
+              <summary>Show Details<span class="sr-only"> for Blueprints &amp; Layouts</span></summary>
               <div class="feas-detail-body">
                 <p><strong>Architectural Layouts:</strong> Involves creating detailed floor plans, elevations, sections to visualize the project's spatial organization, aesthetics, and functionality. Ensures compliance with client vision and code requirements.</p>
               </div>
@@ -3921,7 +3934,7 @@ def feasibility_calculator_html() -> str:
               <span class="feas-price">$7,000</span>
             </label>
             <details class="feas-details">
-              <summary>Show Details</summary>
+              <summary>Show Details<span class="sr-only"> for Design &amp; Materials</span></summary>
               <div class="feas-detail-body">
                 <p><strong>Material Selection &amp; Specification Package:</strong></p>
                 <ul>
@@ -3939,7 +3952,7 @@ def feasibility_calculator_html() -> str:
               <span class="feas-price">$15,000</span>
             </label>
             <details class="feas-details">
-              <summary>Show Details</summary>
+              <summary>Show Details<span class="sr-only"> for Geotechnical Engineering</span></summary>
               <div class="feas-detail-body">
                 <p>Detailed geotechnical engineering assessment to analyze soil, groundwater, and subsurface conditions for your project. Ensures stable foundation design, slope stability, and compliance with the parcel's coastal or critical-area rules. Edmonds, Seattle, and county codes differ.</p>
                 <p><strong>Rough Timeline (4-6 weeks):</strong></p>
@@ -3966,7 +3979,7 @@ def feasibility_calculator_html() -> str:
               <span class="feas-price">$12,000</span>
             </label>
             <details class="feas-details">
-              <summary>Show Details</summary>
+              <summary>Show Details<span class="sr-only"> for Structural Engineering</span></summary>
               <div class="feas-detail-body">
                 <p>Focuses on the technical analysis and design of load-bearing elements, foundations, framing, and seismic/wind resistance. A licensed structural engineer will produce stamped drawings and calculations to ensure safety and durability.</p>
               </div>
@@ -3979,7 +3992,7 @@ def feasibility_calculator_html() -> str:
               <span class="feas-price">$5,000</span>
             </label>
             <details class="feas-details">
-              <summary>Show Details</summary>
+              <summary>Show Details<span class="sr-only"> for Survey</span></summary>
               <div class="feas-detail-body">
                 <p>Precisely measures and maps the property's boundaries, easements, setbacks, and existing physical features (topography, utility lines, and structures). Establishes horizontal and vertical controls needed for plans.</p>
               </div>
@@ -4046,7 +4059,7 @@ def feasibility_calculator_html() -> str:
                 </ul>
                 <p><strong>Material Tier Pricing:</strong></p>
                 <ul>
-                  <li>Good ($40k-$50k): Locally sourced materials approved by PPG</li>
+                  <li>Good (about $45k): Locally sourced materials approved by PPG</li>
                   <li>Better ($50k-$75k): Custom cabinets and high-end materials</li>
                   <li>Best ($75k+): Luxury custom design, designer-selected materials</li>
                 </ul>
@@ -7470,7 +7483,7 @@ def news_story_href(story: dict, prefix: str) -> str:
 
 def news_related_html(related: list[dict] | None, prefix: str) -> str:
     items = []
-    for story in related or []:
+    for story in (related or [])[:4]:
         place = news_place_label(story)
         kicker = f'<span class="news-kicker">{esc(place)}</span>' if place else ""
         items.append(
