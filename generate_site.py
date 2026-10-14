@@ -7094,6 +7094,7 @@ def inspect_news_file(path: Path) -> dict:
             "sources": [],
             "hero": "",
             "alt": "",
+            "hero_credit": "",
             "body_md": "",
             "out_name": "",
             "problems": [f"{path.name} could not be read ({exc.__class__.__name__})"],
@@ -7110,6 +7111,7 @@ def inspect_news_file(path: Path) -> dict:
     slug = str(meta.get("slug") or file_slug or "").strip()
     hero = str(meta.get("hero") or meta.get("hero_image") or "").strip()
     alt = str(meta.get("alt") or meta.get("hero_alt") or "").strip()
+    hero_credit = str(meta.get("hero_credit") or "").strip()
     sources = _news_source_urls(meta.get("sources"))
     problems: list[str] = []
     if path.name.startswith("_"):
@@ -7151,6 +7153,7 @@ def inspect_news_file(path: Path) -> dict:
         "sources": sources,
         "hero": hero,
         "alt": alt,
+        "hero_credit": hero_credit,
         "body_md": body,
         "out_name": f"{slug}.html" if slug else "",
         "problems": problems,
@@ -7177,6 +7180,63 @@ def load_news(root: Path | None = None) -> list[dict]:
         raise SystemExit("news contract failed:\n" + "\n".join(problems))
     stories.sort(key=lambda story: (story["date"], story["slug"]), reverse=True)
     return stories
+
+
+_NEWS_CREDIT_URL_RE = re.compile(r"https://[^\s)]+")
+
+
+def news_hero_ready(rel: str) -> bool:
+    """True when the hero file or a sized WebP variant is on disk."""
+    rel = (rel or "").lstrip("./")
+    return bool(rel) and (asset_exists(rel) or bool(variant_rels(rel)))
+
+
+def news_hero_credit_html(credit: str) -> str:
+    """Visible credit under the photo. Links the license and the Commons file."""
+    raw = re.sub(r"\s+", " ", (credit or "").strip())
+    if not raw:
+        return ""
+    license_url = ""
+    commons_url = ""
+    for url in _NEWS_CREDIT_URL_RE.findall(raw):
+        if "creativecommons.org/licenses/" in url and not license_url:
+            license_url = url
+        elif "commons.wikimedia.org/" in url and not commons_url:
+            commons_url = url
+    display = raw
+    if license_url:
+        display = display.replace(f"({license_url})", " ")
+        display = display.replace(license_url, " ")
+    if commons_url:
+        display = display.replace(commons_url, " ")
+    display = re.sub(r"\s*:\s*", " ", display)
+    display = re.sub(r"\s+,", ",", display)
+    display = re.sub(r"\s+", " ", display).strip(" ,;:-")
+    html_text = esc(display)
+    if license_url and "CC BY-SA 3.0" in display:
+        html_text = html_text.replace(
+            "CC BY-SA 3.0",
+            f'<a href="{esc(license_url)}" rel="license noopener" target="_blank">CC BY-SA 3.0</a>',
+            1,
+        )
+    elif license_url:
+        html_text += (
+            f' <a href="{esc(license_url)}" rel="license noopener" target="_blank">CC BY-SA 3.0</a>'
+        )
+    if commons_url and "Wikimedia Commons" in display:
+        html_text = html_text.replace(
+            "Wikimedia Commons",
+            f'<a href="{esc(commons_url)}" rel="noopener" target="_blank">Wikimedia Commons</a>',
+            1,
+        )
+    elif commons_url:
+        html_text += (
+            f' <a href="{esc(commons_url)}" rel="noopener" target="_blank">Wikimedia Commons</a>'
+        )
+    return (
+        '      <figcaption class="mt-2 text-xs text-slate-400 font-light leading-snug">'
+        f"{html_text}</figcaption>\n"
+    )
 
 
 def news_sources_html(sources: list[str]) -> str:
@@ -7222,19 +7282,23 @@ def build_news_story_page(story: dict, news_names: set[str] | None = None) -> st
     place_html = f" · {esc(place)}" if place else ""
     hero_html = ""
     image_obj = None
-    if hero_rel and asset_exists(hero_rel):
+    if news_hero_ready(hero_rel):
         src = prefix_asset(hero_rel, "../")
+        credit_html = news_hero_credit_html(story.get("hero_credit") or "")
         hero_html = (
-            '    <div class="mb-8 overflow-hidden rounded-xl border border-white/10">\n'
-            f'      <img src="{src}" alt="{esc(story.get("alt") or "")}" class="w-full h-52 sm:h-72 object-cover" '
-            'width="1600" height="900" loading="eager">\n'
-            "    </div>\n"
+            '    <figure class="mb-8">\n'
+            '      <div class="overflow-hidden rounded-xl border border-white/10">\n'
+            f'        <img src="{src}" alt="{esc(story.get("alt") or "")}" class="w-full h-52 sm:h-72 object-cover" '
+            'width="1200" height="900" loading="eager">\n'
+            "      </div>\n"
+            f"{credit_html}"
+            "    </figure>\n"
         )
         image_obj = {
             "@type": "ImageObject",
             "url": resolve_og_image(hero_rel),
             "width": 1600,
-            "height": 900,
+            "height": 1200,
         }
     article = {
         "@context": "https://schema.org",

@@ -108,7 +108,7 @@ A blog bundle needs at least three webp images, a YouTube process URL or a repo 
 
 ## News
 
-News is not a blog post. Stories are markdown files in `news/YYYY-MM-DD-slug.md` (see `news/_template.md`). `generate_site.py` writes `news/<slug>.html`, `news.html`, and `news/rss.xml`. Those pages are not added to `posts.json`, `blog.html`, `blog/rss.xml`, or the post cards.
+News is not a blog post. Stories are markdown files in `news/YYYY-MM-DD-slug.md` (see `news/_template.md`). `generate_site.py` writes `news/<slug>.html`, `news.html`, and `news/rss.xml`. Those pages are not added to `posts.json`, `blog.html`, `blog/rss.xml`, or the post cards. A real photo ships as `assets/images/news/<stem>.webp` plus the 480, 800, and 1200 variants. `hero_credit` is the visible line under the photo.
 
 `python3 tools/board_intake.py validate` checks the news library with the post contract: each story needs a title, date, description, and at least one real `https` source URL. Public news HTML must not contain AI, ChatGPT, Gemini, Higgsfield, Ghost, or Netlify. A slug or story URL that appears in both news and the blog is `conflict`. `publish --apply` of a post-bundle never writes the news section. The morning routine still publishes one blog post.
 

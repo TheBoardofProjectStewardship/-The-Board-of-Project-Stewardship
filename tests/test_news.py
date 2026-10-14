@@ -38,39 +38,71 @@ def _story_md(*, title, date, description, slug, sources, city="Edmonds", county
 
 
 class NewsContractTests(unittest.TestCase):
-    def test_live_library_is_empty_and_separate_from_the_blog(self):
+    def test_live_library_is_the_published_story_and_separate_from_the_blog(self):
+        story_url = "https://boardofprojectstewardship.com/news/snohomish-health-septic-permit-grant.html"
+        story_href = "./news/snohomish-health-septic-permit-grant.html"
         stories = gs.load_news(ROOT)
-        self.assertEqual(stories, [])
+        self.assertEqual([item["slug"] for item in stories], ["snohomish-health-septic-permit-grant"])
+        self.assertEqual(stories[0]["date"], "2026-10-14")
+        self.assertTrue(stories[0]["title"])
+        self.assertTrue(stories[0]["description"])
+        self.assertGreaterEqual(len(stories[0]["sources"]), 1)
+        self.assertIn("Emersb", stories[0]["hero_credit"])
         self.assertTrue((ROOT / "news" / "_template.md").is_file())
-        self.assertFalse(list((ROOT / "news").glob("[0-9]*.md")))
+        self.assertEqual(
+            [path.name for path in (ROOT / "news").glob("[0-9]*.md")],
+            ["2026-10-14-snohomish-health-septic-permit-grant.md"],
+        )
         result = intake.validate_news_library(ROOT)
         self.assertTrue(result["ok"], result)
         self.assertEqual(result["status"], "ready")
-        self.assertEqual(result["stories"], 0)
+        self.assertEqual(result["stories"], 1)
         self.assertEqual(gs.news_blog_overlap(ROOT), [])
+        self.assertIn("First stories coming soon", gs.build_news_index([]))
 
         news_html = (ROOT / "news.html").read_text(encoding="utf-8")
-        self.assertIn("First stories coming soon", news_html)
+        self.assertIn(stories[0]["title"], news_html)
+        self.assertIn(story_href, news_html)
+        self.assertNotIn("First stories coming soon", news_html)
         self.assertIn(">News</a>", news_html)
         self.assertIn("editorial@boardofprojectstewardship.com", news_html)
         self.assertIsNone(gs.news_forbidden_term(news_html))
         self.assertNotIn('id="another-story-sea"', news_html)
         self.assertIn('id="another-story-cta"', news_html)
+        self.assertNotIn("snohomish-health-septic-permit-grant", (ROOT / "blog.html").read_text(encoding="utf-8"))
+
+        page = (ROOT / "news" / "snohomish-health-septic-permit-grant.html").read_text(encoding="utf-8")
+        self.assertIn("Emersb", page)
+        self.assertIn('href="https://creativecommons.org/licenses/by-sa/3.0/"', page)
+        self.assertIn(">CC BY-SA 3.0</a>", page)
+        self.assertIn(
+            'href="https://commons.wikimedia.org/wiki/File:Everett_-_County_Campus.jpg"',
+            page,
+        )
+        self.assertIn(">Wikimedia Commons</a>", page)
+        self.assertIn("2026-10-14-snohomish-health-septic-permit-grant-480.webp", page)
+        self.assertIn("2026-10-14-snohomish-health-septic-permit-grant-800.webp", page)
+        self.assertIn("2026-10-14-snohomish-health-septic-permit-grant-1200.webp", page)
+        self.assertIsNone(gs.news_forbidden_term(page))
+        self.assertNotIn("/posts/", page)
 
         rss = (ROOT / "news" / "rss.xml").read_text(encoding="utf-8")
         self.assertIn("Board of Project Stewardship News", rss)
-        self.assertNotIn("<item>", rss)
+        self.assertIn("<item>", rss)
+        self.assertIn(story_url, rss)
         self.assertNotIn("/posts/", rss)
 
         sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
         self.assertIn("https://boardofprojectstewardship.com/news.html", sitemap)
-        blog = (ROOT / "blog.html").read_text(encoding="utf-8")
+        self.assertIn(story_url, sitemap)
         blog_rss = (ROOT / "blog" / "rss.xml").read_text(encoding="utf-8")
         posts_json = (ROOT / "posts.json").read_text(encoding="utf-8")
+        self.assertNotIn("snohomish-health-septic-permit-grant", blog_rss)
+        self.assertNotIn("snohomish-health-septic-permit-grant", posts_json)
         self.assertNotIn("/news/", blog_rss)
         self.assertNotIn('"path": "./news/', posts_json)
         self.assertNotIn("./posts/", news_html)
-        self.assertIn(">News</a>", blog)
+        self.assertIn(">News</a>", (ROOT / "blog.html").read_text(encoding="utf-8"))
         self.assertIn("Pacific Pro Group", (ROOT / "index.html").read_text(encoding="utf-8"))
 
     def test_story_page_matches_post_chrome_and_stays_out_of_the_blog(self):
