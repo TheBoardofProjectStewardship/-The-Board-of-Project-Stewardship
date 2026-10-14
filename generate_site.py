@@ -2952,68 +2952,150 @@ def ppg_featured(context_label: str, note: str | None = None) -> str:
 _STREET_CITY_RE = re.compile(
     r"^(?P<city>[A-Za-z][A-Za-z .'\-]*?)\s*\((?P<street>\d[^)]*?)\s+(?P<zip>\d{5})\)\s*$"
 )
-_KNOWN_CITIES = (
-    "Mountlake Terrace",
-    "Lake Forest Park",
-    "Mill Creek",
-    "Lake Stevens",
-    "Edmonds",
-    "Seattle",
-    "Lynnwood",
-    "Everett",
-    "Shoreline",
-    "Bothell",
-    "Kirkland",
-    "Redmond",
-    "Bellevue",
-    "Mukilteo",
-    "Marysville",
-    "Kenmore",
-    "Renton",
-    "Snohomish",
-    "Woodinville",
-    "Sammamish",
-    "Issaquah",
-    "Burien",
-    "Tukwila",
-    "Arlington",
-    "Stanwood",
-    "Monroe",
+_SCHEMA_NOTE_WORD = re.compile(
+    r"\b(?:page|pages|framing|wood|served|serves|serving|service|services|metro|county|"
+    r"area|base|focus|brand|office|showroom|corridor|incl|including|mobile|claim|mailing|"
+    r"projects|installers|contractor|permits|related|counties|verify|emergency|hardwood|"
+    r"greater|local|tile|window|siding)\b",
+    re.I,
 )
+_SCHEMA_NOT_A_CITY = {
+    "west",
+    "east",
+    "north",
+    "south",
+    "greater",
+    "metro",
+    "local",
+    "king",
+    "washington",
+    "wa",
+    "puget",
+    "sound",
+    "eastside",
+    "skagit",
+    "pierce",
+    "northwest",
+    "northeast",
+    "southwest",
+    "southeast",
+}
+_SCHEMA_PLACE_RE = re.compile(r"^[A-Z][A-Za-z'\-]*(?:[ ][A-Z][A-Za-z'\-]*)*$")
+
+
+def _schema_postal(locality: str = "", **extra: str) -> dict:
+    address = {"@type": "PostalAddress"}
+    if locality:
+        address["addressLocality"] = locality
+    address["addressRegion"] = "WA"
+    address["addressCountry"] = "US"
+    address.update(extra)
+    return address
+
+
+def _schema_is_place(text: str) -> bool:
+    text = (text or "").strip()
+    if not text or text.lower() in _SCHEMA_NOT_A_CITY:
+        return False
+    if re.search(r"\d", text) or _SCHEMA_NOTE_WORD.search(text):
+        return False
+    return bool(_SCHEMA_PLACE_RE.match(text))
+
+
+def _schema_leading_place(text: str) -> tuple[str, str]:
+    """Longest leading place name, plus the leftover words."""
+    words = text.split()
+    best = ""
+    count = 0
+    for size in range(1, min(4, len(words)) + 1):
+        candidate = " ".join(words[:size])
+        if _schema_is_place(candidate):
+            best = candidate
+            count = size
+            continue
+        # Compass and region words can open a longer name such as West Seattle.
+        if candidate.lower() in _SCHEMA_NOT_A_CITY and size < len(words):
+            continue
+        break
+    return best, " ".join(words[count:]).strip()
 
 
 def _schema_address(city: str) -> tuple[dict, str]:
-    """PostalAddress from a research city cell. Notes stay in areaServed, not locality."""
+    """PostalAddress from a research city cell.
+
+    A real city stays in addressLocality. Service notes, counties, and page
+    mentions go to areaServed. Unknown text does not become a guessed city.
+    """
     raw = re.sub(r"\s+", " ", (city or "").strip())
+    if not raw:
+        return _schema_postal(), ""
     match = _STREET_CITY_RE.match(raw)
-    if match:
-        return {
-            "@type": "PostalAddress",
-            "streetAddress": match.group("street").strip(),
-            "addressLocality": match.group("city").strip(),
-            "postalCode": match.group("zip"),
-            "addressRegion": "WA",
-            "addressCountry": "US",
-        }, ""
-    head = raw.split(",")[0].strip()
-    note_like = bool(re.search(r"\d", head)) or any(
-        tok in head.lower()
-        for tok in ("page", "framing", "wood", "served", "metro", "county", "&", "/")
-    )
-    if note_like or not head:
-        locality = next((name for name in _KNOWN_CITIES if name.lower() in raw.lower()), "Washington")
-        return {
-            "@type": "PostalAddress",
-            "addressLocality": locality,
-            "addressRegion": "WA",
-            "addressCountry": "US",
-        }, raw
-    return {
-        "@type": "PostalAddress",
-        "addressLocality": head,
-        "addressRegion": "WA",
-        "addressCountry": "US",
-    }, ""
+    if match and _schema_is_place(match.group("city").strip()):
+        return _schema_postal(
+            match.group("city").strip(),
+            streetAddress=match.group("street").strip(),
+            postalCode=match.group("zip"),
+        ), ""
+
+    head, paren, tail = raw, "", ""
+    wrapped = re.match(r"^(?P<head>.*?)\s*\((?P<extra>[^)]*)\)\s*(?P<tail>.*)$", raw)
+    if wrapped and wrapped.group("head").strip():
+        head = wrapped.group("head").strip()
+        paren = wrapped.group("extra").strip()
+        tail = wrapped.group("tail").strip()
+
+    head = re.sub(r",\s*(?:WA|Washington)\b", "", head, flags=re.I).strip(" ,")
+    postal = ""
+    zip_match = re.match(r"^(?P<head>.*?)[\s,]+(?P<zip>\d{5})$", head)
+    if zip_match:
+        head = zip_match.group("head").strip(" ,")
+        postal = zip_match.group("zip")
+    if re.match(r"^(?:serves|serving)\b", head, re.I):
+        return _schema_postal(), raw
+
+    semi = ""
+    if tail.startswith(";"):
+        semi = tail.lstrip("; ").strip()
+        tail = ""
+    elif ";" in head:
+        head, semi = [part.strip() for part in head.split(";", 1)]
+
+    segments = [part.strip() for part in re.split(r"\s*(?:/|\+|&)\s*", head) if part.strip()]
+    first = segments[0] if segments else ""
+    place, rest = _schema_leading_place(first)
+    if place and rest.lower().startswith("county"):
+        place = ""
+    if not place:
+        return _schema_postal(), raw
+
+    extra: dict[str, str] = {}
+    if postal:
+        extra["postalCode"] = postal
+    if paren and re.search(r"\d", paren):
+        extra["streetAddress"] = paren
+        paren = ""
+    area_bits = []
+    if rest:
+        area_bits.append(rest)
+    for part in segments[1:]:
+        area_bits.append(part)
+    if semi:
+        area_bits.append(semi)
+    if paren:
+        area_bits.append(paren)
+    if tail:
+        area_bits.append(tail)
+    if not place:
+        return _schema_postal(**extra), raw
+    area = "; ".join(bit for bit in area_bits if bit).strip()
+    if area and re.fullmatch(
+        r"(?:page|pages|area|base|focus|brand|service|services|framing|hardwood|emergency|office|showroom|corridor)"
+        r"(?:\s+(?:page|pages|area|base|focus|brand|service|services|framing|hardwood|emergency|office|showroom|corridor))*",
+        area,
+        flags=re.I,
+    ):
+        area = raw
+    return _schema_postal(place, **extra), area
 
 
 def itemlist_ld(name: str, description: str, firms: list[dict], include_ppg: bool = True, schema_type: str = "GeneralContractor", page_url: str = "") -> dict:

@@ -575,10 +575,15 @@ async function init3D() {
   let THREE;
   try { THREE = await import(RENDER_LIB); } catch (e) { return showFallback('The 3D viewer could not load right now, so you are seeing a simplified drawing. The plan editor still works fully.'); }
   const canvas = $('fp-canvas');
+  function makeRenderer() {
+    const next = new THREE.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: true });
+    next.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    next.shadowMap.enabled = true;
+    next.shadowMap.type = THREE.PCFSoftShadowMap;
+    return next;
+  }
   let renderer;
-  try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: true }); } catch (e) { return showFallback('The 3D viewer could not start on this device, so you are seeing a simplified drawing.'); }
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-  renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  try { renderer = makeRenderer(); } catch (e) { return showFallback('The 3D viewer could not start on this device, so you are seeing a simplified drawing.'); }
   const scene = new THREE.Scene(); scene.background = new THREE.Color('#0f1512');
   scene.fog = new THREE.Fog('#0f1512', 120, 260);
   const camera = new THREE.PerspectiveCamera(50, 1, 0.2, 600);
@@ -764,6 +769,16 @@ async function init3D() {
     framePending = false;
     renderer.dispose();
   }
+  function resumeRenderer() {
+    if (glDisposed) {
+      try { renderer = makeRenderer(); }
+      catch (err) { return; }
+      glDisposed = false;
+    }
+    dirty = true;
+    resize();
+    requestTick();
+  }
   if (holder && window.IntersectionObserver) {
     const vis = new IntersectionObserver((entries) => {
       viewVisible = entries.some((entry) => entry.isIntersecting);
@@ -772,8 +787,11 @@ async function init3D() {
     vis.observe(holder);
   }
   document.addEventListener('visibilitychange', () => { if (!document.hidden) requestTick(); });
-  window.addEventListener('pagehide', disposeRenderer);
-  window.addEventListener('beforeunload', disposeRenderer);
+  window.addEventListener('pagehide', (event) => {
+    if (event.persisted) return;
+    disposeRenderer();
+  });
+  window.addEventListener('pageshow', resumeRenderer);
   scene3D.rebuild = rebuild;
   scene3D.setWalk = (on) => { opts.walk = on; rebuild(); if (on) startWalk(); $('fp-walkpad').hidden = !on; dirty = true; requestTick(); };
   scene3D.snapshot = () => { placeCamera(); renderer.render(scene, camera); return canvas.toDataURL('image/png'); };
