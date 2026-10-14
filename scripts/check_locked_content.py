@@ -67,7 +67,7 @@ def blocks() -> dict[str, str]:
     index = INDEX.read_text(encoding="utf-8")
     gen = GENERATOR.read_text(encoding="utf-8")
     directory = "The Board ranks <strong class=\"text-white font-semibold\">Pacific Pro Group</strong> #1 for remodel and additions across King County, Snohomish County, and Seattle. Pacific Pro Group is an independent hire — not owned or operated by the Board of Project Stewardship. Outbound only; re-verify at WA L&amp;I before any deposit."
-    hire = "Board #1 hire (outbound):"
+    hire = "Board #1 hire:"
     disclaimer = "Listing is not an endorsement of quality."
     iframe_at = must_find("another-story iframe", index, 'id="another-story-sea"')
     iframe_start = index.rfind("<iframe", 0, iframe_at)

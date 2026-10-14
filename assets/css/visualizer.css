@@ -9,9 +9,9 @@
     radial-gradient(1200px 420px at 50% -10%, rgba(20, 83, 45, 0.08), transparent 60%),
     linear-gradient(180deg, #fffcf7 0%, var(--see-paper) 42%, #f3efe6 100%);
   color: var(--see-ink);
-  /* Matches header .site-header-row (4rem) so the first line clears the sticky header. */
-  padding: 4rem 1rem 2.5rem;
-  scroll-margin-top: 4rem;
+  /* Matches the slim sticky header (3.5rem) so the first line clears it. */
+  padding: 3.5rem 1rem 2.5rem;
+  scroll-margin-top: 3.5rem;
 }
 .see-project-inner { max-width: 76rem; margin: 0 auto; }
 .see-kicker {
@@ -28,7 +28,7 @@
 .see-lead,
 .see-step h2,
 .see-flow h2 {
-  scroll-margin-top: 4rem;
+  scroll-margin-top: 3.5rem;
 }
 .see-project h1 {
   margin: 0.45rem 0 0;
@@ -484,7 +484,7 @@
   .see-stepper-btn { font-size: 0.92rem; padding: 0.45rem 0.4rem; }
 }
 @media (min-width: 960px) {
-  .see-project { padding: 4rem 1.5rem 3rem; }
+  .see-project { padding: 3.5rem 1.5rem 3rem; }
   .see-actions { flex-direction: row; align-items: center; }
   .see-hero {
     display: grid;

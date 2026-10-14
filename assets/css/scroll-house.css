@@ -1,6 +1,6 @@
 /* Scroll-built house. Original drawing. Motion is transform and opacity only. */
 .scroll-house {
-  --sh-top: 4rem;
+  --sh-top: 3.5rem;
   background: #0c0c0c;
   color: #f2f2ee;
   position: relative;
@@ -22,7 +22,7 @@
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
-  padding: 0.7rem 1rem calc(0.75rem + env(safe-area-inset-bottom));
+  padding: 2.35rem 1rem calc(0.75rem + env(safe-area-inset-bottom));
   gap: 0.4rem;
   z-index: 1;
 }
@@ -40,7 +40,14 @@
   .scroll-house.is-enhanced .scroll-house-track { height: 250svh; }
 }
 @media (min-width: 1280px) {
-  .scroll-house { --sh-top: 7.25rem; }
+  .scroll-house { --sh-top: 3rem; }
+}
+.home-stamp {
+  position: absolute;
+  top: 0.3rem;
+  right: 0.55rem;
+  z-index: 4;
+  margin: 0;
 }
 .sh-top {
   width: min(960px, 100%);
@@ -501,7 +508,7 @@
   .scroll-house-sticky {
     height: auto;
     gap: 0.18rem;
-    padding: 0.3rem 0.7rem 0.4rem;
+    padding: 2.55rem 0.7rem 0.4rem;
   }
   .sh-top, .sh-stages, .sh-progress, .sh-learn, .scroll-house-cta, .sh-hint { flex: 0 0 auto; }
   .scroll-house-live { flex: 0 0 auto; overflow: visible; gap: 0.15rem; }

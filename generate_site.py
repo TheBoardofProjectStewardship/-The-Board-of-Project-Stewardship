@@ -1496,7 +1496,7 @@ def apply_image_pass(html: str) -> str:
     def repl(match: re.Match) -> str:
         inner = match.group(1)
         # Header and footer seals carry their own srcset and must not become the LCP image.
-        if "site-seal" in inner or "site-footer-seal" in inner:
+        if "site-seal" in inner or "site-footer-seal" in inner or "stamp-badge-mark" in inner:
             return match.group(0)
         src_m = re.search(r'\bsrc\s*=\s*"([^"]*)"', inner)
         if not src_m:
@@ -1748,6 +1748,24 @@ def head_assets() -> str:
 SEAL_ALT = "The Board of Project Stewardship seal"
 
 
+def stamp_badge_html(href: str) -> str:
+    """Official Stamp of Trust pill from the credential page, linked back to it.
+
+    The seal image is decorative: the link already names Stamp of Trust.
+    """
+    return (
+        f'<a class="stamp-badge" href="{href}">'
+        f'<img class="stamp-badge-mark" src="/assets/icons/seal-96.png" '
+        f'srcset="/assets/icons/seal-96.png 96w, /assets/icons/seal-192.png 192w" '
+        f'sizes="26px" width="26" height="26" alt="" '
+        f'loading="lazy" decoding="async" data-no-lcp>'
+        f'<span class="stamp-badge-copy">'
+        f'<span class="stamp-badge-kicker">Stamp of Trust</span>'
+        f'<span class="stamp-badge-name">Board of Project Stewardship</span>'
+        f"</span></a>"
+    )
+
+
 def seal_picture(kind: str) -> str:
     """Official seal. WebP source with a PNG srcset fallback. Root-absolute."""
     base = "/assets/icons/"
@@ -1755,13 +1773,13 @@ def seal_picture(kind: str) -> str:
     png = f"{base}seal-96.png 96w, {base}seal-192.png 192w, {base}seal-512.png 512w"
     if kind == "header":
         cls = "site-seal"
-        sizes = "(min-width: 1280px) 52px, 40px"
-        width = height = 40
+        sizes = "(min-width: 1280px) 32px, 28px"
+        width = height = 28
         loading = "eager"
     else:
         cls = "site-footer-seal"
-        sizes = "112px"
-        width = height = 112
+        sizes = "(min-width: 641px) 64px, 48px"
+        width = height = 48
         loading = "lazy"
     return (
         f'<picture class="{cls}-picture">'
@@ -1875,8 +1893,10 @@ def nav_html(active: str = "", prefix: str = "") -> str:
     )
     home_href = href("index.html")
     more_btn_cls = "text-secondary" if more_open else "text-slate-300 hover:text-secondary"
+    # One slim bar. Search sits in the row on desktop and in the menu on phones.
+    # The outbound directory #1 link stays in the page body and footer, not this bar.
     return f"""  <a href="#main-content" class="skip-link">Skip to content</a>
-  <header class="bg-charcoal/80 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
+  <header class="site-header bg-charcoal/80 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
     <div class="site-header-inner mx-auto px-4 sm:px-6 lg:px-8">
       <div class="site-header-row">
         <a href="{home_href}" class="site-brand">
@@ -1893,25 +1913,24 @@ def nav_html(active: str = "", prefix: str = "") -> str:
               {more_items}
             </div>
           </div>
-          <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="hidden lg:inline-flex items-center gap-1 ml-1 px-2.5 py-1 rounded border border-secondary/40 text-[10px] font-bold uppercase tracking-widest text-secondary hover:bg-secondary/10 transition" title="Board directory #1 hire ranking">Board #1 · PPG<span class="sr-only"> — Pacific Pro Group (opens in new window)</span></a>
         </nav>
+        <form class="site-search-desktop" action="{href("search.html")}" method="get" role="search">
+          <label class="sr-only" for="header-q">Search</label>
+          <input id="header-q" name="q" type="search" placeholder="Search" autocomplete="off">
+        </form>
         <button type="button" id="nav-toggle" class="site-nav-burger p-2 -mr-1 text-slate-200" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
           <span class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></span>
         </button>
       </div>
-      <form class="site-search-desktop" action="{href("search.html")}" method="get" role="search">
-        <label class="sr-only" for="header-q">Search</label>
-        <input id="header-q" name="q" type="search" placeholder="Search" autocomplete="off">
-      </form>
     </div>
-    <nav id="mobile-nav" class="border-t border-white/10 bg-charcoal/95 px-4 pb-4" aria-label="Mobile" hidden>
+  </header>
+  <nav id="mobile-nav" class="site-mobile-nav border-t border-white/10 bg-charcoal px-4 pb-6" aria-label="Mobile" hidden>
       <form class="site-search-mobile" action="{href("search.html")}" method="get" role="search">
         <label class="sr-only" for="mobile-q">Search</label>
         <input id="mobile-q" name="q" type="search" placeholder="Search the site" autocomplete="off">
       </form>
       {mobile_html}
-    </nav>
-  </header>"""
+  </nav>"""
 
 
 def footer_html(prefix: str = "./", active: str = "", updated: str = "") -> str:
@@ -1986,45 +2005,74 @@ def footer_html(prefix: str = "./", active: str = "", updated: str = "") -> str:
             )
         return "".join(items)
 
-    return f"""  <footer class="bg-obsidian py-14 text-sm border-t border-white/5">
-    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 lg:grid-cols-4 gap-10 text-slate-400">
-      <div>
-        <a href="{prefix if prefix else "./"}" class="site-footer-brand">
+    def _group(title: str, body: str) -> str:
+        return (
+            f'<details class="site-footer-group" open>'
+            f'<summary>{title}</summary>'
+            f'<div class="site-footer-group-body">{body}</div>'
+            f"</details>"
+        )
+
+    home_href = prefix if prefix else "./"
+    stamp_href = f"{prefix}stamp-of-trust/"
+    groups = "".join([
+        _group("Site", f'<ul class="site-footer-links">{_lis(site)}</ul>'),
+        _group("Directories", f'<ul class="site-footer-links">{_lis(directories)}</ul>'),
+        _group(
+            "Locations",
+            '<p class="site-footer-note">Editorial place hubs for remodel planning across King County, Snohomish County, and Seattle neighborhoods.</p>'
+            f'<ul class="site-footer-links">{_lis(locations)}</ul>',
+        ),
+        _group("Learn &amp; tools", f'<ul class="site-footer-links">{_lis(learn_tools)}</ul>'),
+        _group(
+            "Disclaimer",
+            f'<p class="site-footer-note">Listing is not an endorsement of quality. Verify licenses, insurance, bonds, and references before hiring. Membership in trade associations does not guarantee outcomes. Re-check status at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>.</p>',
+        ),
+    ])
+    return f"""  <footer class="site-footer bg-obsidian text-sm border-t border-white/5">
+    <div class="site-footer-inner max-w-6xl mx-auto px-4">
+      <div class="site-footer-brandcol">
+        <a href="{home_href}" class="site-footer-brand">
           {seal_picture("footer")}
-          <span class="font-black text-base tracking-wider text-white">Board of Project Stewardship</span>
+          <span class="font-black tracking-wider text-white">Board of Project Stewardship</span>
         </a>
-        <p class="font-light leading-relaxed text-sm">{esc(BOARD_ONE_LINER)} Last updated <time datetime="{esc(updated)}">{esc(updated)}</time>.</p>
-        <p class="mt-3 font-light leading-relaxed text-sm">Public contact: <a href="mailto:{EDITORIAL_EMAIL}" class="text-secondary hover:underline">{EDITORIAL_EMAIL}</a></p>
-        <p class="mt-3 font-light leading-relaxed text-sm">Board #1 hire (outbound): <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a> — independent design-build GC; not Board-owned.</p>
+        <p class="site-footer-blurb">Standards and contractor directories for King County, Snohomish County, and Seattle.</p>
+        <p class="site-footer-meta">Updated <time datetime="{esc(updated)}">{esc(updated)}</time></p>
+        <p class="site-footer-contact">Public contact: <a href="mailto:{EDITORIAL_EMAIL}">{EDITORIAL_EMAIL}</a></p>
+        <p class="site-footer-ppg">Board #1 hire: <a href="https://pacificprogroup.com/" target="_blank" rel="noopener">Pacific Pro Group</a></p>
+        {stamp_badge_html(stamp_href)}
       </div>
-      <div>
-        <h2 class="text-white font-bold text-xs uppercase tracking-widest mb-4">Site</h2>
-        <ul class="space-y-2 font-light text-sm">
-          {_lis(site)}
-        </ul>
-        <h2 class="text-white font-bold text-xs uppercase tracking-widest mb-4 mt-8">Directories</h2>
-        <ul class="space-y-2 font-light text-sm">
-          {_lis(directories)}
-        </ul>
+      <div class="site-footer-groups">
+        {groups}
       </div>
-      <div>
-        <h2 class="text-white font-bold text-xs uppercase tracking-widest mb-4">Locations</h2>
-        <p class="font-light leading-relaxed text-xs text-slate-400 mb-3">Editorial place hubs for remodel planning across King County, Snohomish County, and Seattle neighborhoods.</p>
-        <ul class="space-y-2 font-light text-sm">
-          {_lis(locations)}
-        </ul>
-      </div>
-      <div>
-        <h2 class="text-white font-bold text-xs uppercase tracking-widest mb-4">Learn &amp; tools</h2>
-        <ul class="space-y-2 font-light text-sm">
-          {_lis(learn_tools)}
-        </ul>
-        <h2 class="text-white font-bold text-xs uppercase tracking-widest mb-4 mt-8">Disclaimer</h2>
-        <p class="mb-3 font-light leading-relaxed text-sm">Listing is not an endorsement of quality. Verify licenses, insurance, bonds, and references before hiring. Membership in trade associations does not guarantee outcomes. Re-check status at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>.</p>
-        <p class="text-xs text-slate-400">&copy; {YEAR} Board of Project Stewardship · {EDITORIAL_EMAIL}</p>
-      </div>
+      <p class="site-footer-copy">&copy; {YEAR} Board of Project Stewardship · {EDITORIAL_EMAIL}</p>
     </div>
-  </footer>"""
+  </footer>
+  <script>
+  (function () {{
+    var groups = document.querySelectorAll(".site-footer-group");
+    if (!groups.length || !window.matchMedia) return;
+    var desktop = window.matchMedia("(min-width: 641px)");
+    function sync() {{
+      groups.forEach(function (item) {{ item.open = desktop.matches; }});
+    }}
+    function blockToggle(event) {{
+      if (!desktop.matches) return;
+      var key = event.key;
+      if (event.type === "keydown" && key !== "Enter" && key !== " " && key !== "Spacebar") return;
+      event.preventDefault();
+    }}
+    groups.forEach(function (item) {{
+      var summary = item.querySelector("summary");
+      if (!summary) return;
+      summary.addEventListener("click", blockToggle);
+      summary.addEventListener("keydown", blockToggle);
+    }});
+    sync();
+    if (desktop.addEventListener) desktop.addEventListener("change", sync);
+    else if (desktop.addListener) desktop.addListener(sync);
+  }})();
+  </script>"""
 
 
 def tools_href(slug: str, prefix: str = "", filename: str = "") -> str:
@@ -3816,46 +3864,226 @@ def integrity_shield_html(
     </section>"""
 
 
+def feasibility_calculator_html() -> str:
+    """Live Feasibility & Estimate Calculator from the site-visit salesman guide.
+
+    Line items and prices match tools/site-visit/index.html. Do not reprice them.
+    """
+    return """        <div class="feas-calc bg-charcoal border border-white/10 rounded-xl p-4 sm:p-5" id="feasibility-calculator">
+          <h3 class="feas-title">Live Feasibility &amp; Estimate Calculator</h3>
+          <p class="feas-note">Planning estimate, not a bid.</p>
+          <div class="feas-total-bar">
+            <span id="feas-total-label">Estimated total</span>
+            <strong id="calc_total_display" aria-live="polite" aria-atomic="true">$62,000</strong>
+          </div>
+          <h4 class="feas-section">Pre-Construction Package</h4>
+          <div class="feas-item">
+            <label class="feas-row">
+              <input type="checkbox" id="cb_feasibility" class="feas-input" checked>
+              <span class="feas-name">Feasibility Study</span>
+              <span class="feas-price">$5,000</span>
+            </label>
+            <details class="feas-details">
+              <summary>Show Details<span class="sr-only"> for Feasibility Study</span></summary>
+              <div class="feas-detail-body">
+                <p>Detailed feasibility study to understand zoning requirements and structural possibilities for your project. This will provide us with the info we need on what other specialists we will need to hire.</p>
+                <p><strong>Specialists Included:</strong></p>
+                <ul>
+                  <li><strong>Civil Engineer:</strong> Required for designing drainage systems, roadway improvements &amp; other site infrastructure.</li>
+                  <li><strong>Geotechnical Engineer:</strong> Assesses soil conditions for foundation design/site work.</li>
+                  <li><strong>Septic Design Engineer:</strong> Needed if property is not on municipal sewer.</li>
+                  <li><strong>Land Surveyor:</strong> Collects field data to create property map &amp; establish boundaries.</li>
+                  <li><strong>Critical Area Consultant:</strong> Assesses impacts on wetlands/shorelines &amp; mitigates.</li>
+                  <li><strong>Arborist:</strong> Evaluates health/impact of trees advising protection or removal.</li>
+                </ul>
+              </div>
+            </details>
+          </div>
+          <div class="feas-item">
+            <label class="feas-row">
+              <input type="checkbox" id="cb_permits" class="feas-input" checked>
+              <span class="feas-name">Permits</span>
+              <span class="feas-price">$6,000</span>
+            </label>
+            <details class="feas-details">
+              <summary>Show Details<span class="sr-only"> for Permits</span></summary>
+              <div class="feas-detail-body">
+                <p>Covers the full process of securing building permits, zoning approvals, environmental clearances, and utility hookups from local authorities. Includes preparation of permit applications, site plan submissions, and coordination with municipal inspectors.</p>
+                <p><strong>Timeline:</strong> 4–8 months.</p>
+                <p><strong>Assumptions:</strong> No variances or appeals needed; standard compliance with local codes.</p>
+              </div>
+            </details>
+          </div>
+          <div class="feas-item">
+            <label class="feas-row">
+              <input type="checkbox" id="cb_plans" class="feas-input" checked>
+              <span class="feas-name">Blueprints &amp; Layouts</span>
+              <span class="feas-price">$12,000</span>
+            </label>
+            <details class="feas-details">
+              <summary>Show Details<span class="sr-only"> for Blueprints &amp; Layouts</span></summary>
+              <div class="feas-detail-body">
+                <p><strong>Architectural Layouts:</strong> Involves creating detailed floor plans, elevations, sections to visualize the project's spatial organization, aesthetics, and functionality. Ensures compliance with client vision and code requirements.</p>
+              </div>
+            </details>
+          </div>
+          <div class="feas-item">
+            <label class="feas-row">
+              <input type="checkbox" id="cb_design_pkg" class="feas-input" checked>
+              <span class="feas-name">Design &amp; Materials</span>
+              <span class="feas-price">$7,000</span>
+            </label>
+            <details class="feas-details">
+              <summary>Show Details<span class="sr-only"> for Design &amp; Materials</span></summary>
+              <div class="feas-detail-body">
+                <p><strong>Material Selection &amp; Specification Package:</strong></p>
+                <ul>
+                  <li>3D Renders of key project areas illustrating material application.</li>
+                  <li>Project Spec Sheets detailing material manufacturer, product name, code, cost, and lead time.</li>
+                  <li>Mood Board (physical or digital) communicating the design aesthetic and material palette.</li>
+                </ul>
+              </div>
+            </details>
+          </div>
+          <div class="feas-item">
+            <label class="feas-row">
+              <input type="checkbox" id="cb_geotech" class="feas-input" checked>
+              <span class="feas-name">Geotechnical Engineering</span>
+              <span class="feas-price">$15,000</span>
+            </label>
+            <details class="feas-details">
+              <summary>Show Details<span class="sr-only"> for Geotechnical Engineering</span></summary>
+              <div class="feas-detail-body">
+                <p>Detailed geotechnical engineering assessment to analyze soil, groundwater, and subsurface conditions for your project. Ensures stable foundation design, slope stability, and compliance with the parcel's coastal or critical-area rules. Edmonds, Seattle, and county codes differ.</p>
+                <p><strong>Rough Timeline (4-6 weeks):</strong></p>
+                <ul>
+                  <li>Week 1: Initial site visit &amp; proposal approval.</li>
+                  <li>Weeks 2-3: Field investigations (borings) &amp; sampling.</li>
+                  <li>Weeks 4-5: Lab analysis &amp; draft report.</li>
+                  <li>Week 6: Final report delivery.</li>
+                </ul>
+                <p><strong>Specialists:</strong></p>
+                <ul>
+                  <li><strong>Geotechnical Engineer:</strong> Leads testing &amp; recommends foundations (piles/footings).</li>
+                  <li><strong>Soil Technician:</strong> Conducts on-site borings.</li>
+                  <li><strong>Lab Analyst:</strong> Performs tests on soil bearing capacity/shear strength.</li>
+                  <li><strong>Environmental Consultant:</strong> Integrates findings with critical area assessments.</li>
+                </ul>
+              </div>
+            </details>
+          </div>
+          <div class="feas-item">
+            <label class="feas-row">
+              <input type="checkbox" id="cb_structural" class="feas-input" checked>
+              <span class="feas-name">Structural Engineering</span>
+              <span class="feas-price">$12,000</span>
+            </label>
+            <details class="feas-details">
+              <summary>Show Details<span class="sr-only"> for Structural Engineering</span></summary>
+              <div class="feas-detail-body">
+                <p>Focuses on the technical analysis and design of load-bearing elements, foundations, framing, and seismic/wind resistance. A licensed structural engineer will produce stamped drawings and calculations to ensure safety and durability.</p>
+              </div>
+            </details>
+          </div>
+          <div class="feas-item">
+            <label class="feas-row">
+              <input type="checkbox" id="cb_survey" class="feas-input" checked>
+              <span class="feas-name">Survey</span>
+              <span class="feas-price">$5,000</span>
+            </label>
+            <details class="feas-details">
+              <summary>Show Details<span class="sr-only"> for Survey</span></summary>
+              <div class="feas-detail-body">
+                <p>Precisely measures and maps the property's boundaries, easements, setbacks, and existing physical features (topography, utility lines, and structures). Establishes horizontal and vertical controls needed for plans.</p>
+              </div>
+            </details>
+          </div>
+          <h4 class="feas-section">Construction Cost Estimation</h4>
+          <div class="feas-schedule">
+            <p class="feas-schedule-title">Anticipated Project Schedule</p>
+            <p><strong>Total Duration:</strong> 10 – 14 months</p>
+            <p><strong>Planning/Permitting:</strong> 4 – 6 months</p>
+            <p><strong>Construction:</strong> 6 – 8 months</p>
+          </div>
+          <label class="feas-field">Estimated Square Footage
+            <span class="feas-sqft-wrap">
+              <input type="number" id="est_sqft" class="feas-input" inputmode="numeric" min="0" step="1" placeholder="e.g., 500">
+              <span class="feas-unit">sq ft</span>
+            </span>
+          </label>
+          <fieldset class="feas-tiers">
+            <legend>Material &amp; Finish Tier</legend>
+            <label class="feas-tier">
+              <input type="radio" name="est_tier" id="tier_good" value="300" class="feas-input">
+              <span class="feas-tier-copy">
+                <span class="feas-tier-line"><span class="feas-tier-name">Good Tier</span><span>~$300/SF</span></span>
+                <span class="feas-tier-note">Solid, durable selections with proven local materials, standard appliances, and clean, timeless finishes.</span>
+              </span>
+            </label>
+            <label class="feas-tier">
+              <input type="radio" name="est_tier" id="tier_better" value="500" class="feas-input" checked>
+              <span class="feas-tier-copy">
+                <span class="feas-tier-line"><span class="feas-tier-name">Better Tier</span><span>~$500/SF</span></span>
+                <span class="feas-tier-note">Elevated materials, custom millwork, upgraded appliances/windows, enhanced detailing, and energy-efficient systems.</span>
+              </span>
+            </label>
+            <label class="feas-tier">
+              <input type="radio" name="est_tier" id="tier_best" value="700" class="feas-input">
+              <span class="feas-tier-copy">
+                <span class="feas-tier-line"><span class="feas-tier-name">Best Tier</span><span>~$700/SF</span></span>
+                <span class="feas-tier-note">Premium/luxury selections, high-end custom cabinetry, designer fixtures, architectural upgrades, and top-tier features.</span>
+              </span>
+            </label>
+          </fieldset>
+          <h4 class="feas-section">Common Additions</h4>
+          <div class="feas-item">
+            <label class="feas-row">
+              <input type="checkbox" id="cb_bathroom" class="feas-input">
+              <span class="feas-name">Add Bathroom</span>
+              <span class="feas-price">$45,000 Base</span>
+            </label>
+            <details class="feas-details">
+              <summary>Show Scope &amp; Tier Pricing</summary>
+              <div class="feas-detail-body">
+                <p><strong>Included Scope:</strong></p>
+                <ul>
+                  <li>Demo everything required for new project</li>
+                  <li>Plumbing: reroute pipes, install new supply/drains</li>
+                  <li>Electrical: upgrade wiring, add GFCI, switches, recessed lighting, exhaust fan</li>
+                  <li>Install new drywall, mud, texture, primer</li>
+                  <li>Add walk-in shower with glass enclosure</li>
+                  <li>Install new porcelain floor tiles</li>
+                  <li>Mount vanity with countertop</li>
+                  <li>Install modern faucet and mirror</li>
+                  <li>Paint walls and trim</li>
+                </ul>
+                <p><strong>Material Tier Pricing:</strong></p>
+                <ul>
+                  <li>Good (about $45k): Locally sourced materials approved by PPG</li>
+                  <li>Better ($50k-$75k): Custom cabinets and high-end materials</li>
+                  <li>Best ($75k+): Luxury custom design, designer-selected materials</li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </div>"""
+
+
 def ppg_widgets_html(prefix: str = "") -> str:
-    """Project Factor Guide, Directory #1 outbound, and Service Region — sitewide above footer."""
+    """Feasibility calculator, Directory #1 outbound, and Service Region — sitewide above footer."""
     pfx = prefix if prefix else "./"
     how = f"{pfx}how-we-rank.html"
     additions = f"{pfx}additions.html"
     directory = f"{pfx}directory.html"
     verify = f"{pfx}verify-contractor.html"
-    cost = f"{pfx}remodel-cost-factors.html"
-    permits = f"{pfx}permits.html"
-    hire = f"{pfx}hire-questions.html"
+    calc = feasibility_calculator_html()
     return f"""    <section id="tools" class="mb-6">
       <div class="mb-8 border-b border-white/10 pb-4">
         <span class="text-secondary text-xs font-bold uppercase tracking-widest">Planning Tools</span>
         <h2 class="text-3xl font-black text-white tracking-tight">Planning tools · Directory #1 · Service region</h2>
       </div>
       <div class="grid lg:grid-cols-3 gap-4">
-        <div class="bg-charcoal border border-white/10 rounded-xl p-6">
-          <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-clipboard-list text-secondary"></i> Project Factor Guide</h3>
-          <p class="text-xs text-slate-400 mb-4 font-light">Educational planning checklist — <strong class="text-slate-300 font-semibold">not a bid</strong>, not market pricing, and <strong class="text-slate-300 font-semibold">not Pacific Pro Group pricing</strong>. Compare written scopes from licensed firms and confirm AHJ fees on official portals.</p>
-          <label class="block text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-1" for="calc-scope">Project scope</label>
-          <select id="calc-scope" class="w-full mb-3 bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary">
-            <option value="kitchen">Kitchen remodel</option>
-            <option value="bath">Bathroom remodel</option>
-            <option value="addition" selected>Home addition</option>
-            <option value="adu">ADU / DADU</option>
-            <option value="custom">Custom / whole-home</option>
-          </select>
-          <label class="block text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-1" for="calc-drivers">Complexity drivers to discuss with bidders</label>
-          <select id="calc-drivers" class="w-full mb-4 bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary">
-            <option value="site">Site access, drainage, coastal exposure</option>
-            <option value="structure" selected>Structure, openings, second-story loads</option>
-            <option value="finish">Finish level and fixture lead times</option>
-            <option value="ahj">Permit path / AHJ review intensity</option>
-          </select>
-          <div class="bg-white/5 border border-white/10 rounded-lg px-4 py-3">
-            <div class="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Board guidance</div>
-            <div id="calc-result" class="text-sm font-light text-slate-300 mt-1 leading-relaxed">Pick a scope and driver to see what to ask in bids — dollar totals belong on contractor proposals, not this page.</div>
-          </div>
-          <p class="text-[11px] text-slate-400 mt-3 font-light"><a href="{cost}" class="text-secondary hover:underline">Cost-factor guides</a> · <a href="{permits}" class="text-secondary hover:underline">Permit hub</a> · <a href="{hire}" class="text-secondary hover:underline">Hire questions</a></p>
-        </div>
+{calc}
         <div class="bg-charcoal border border-white/10 rounded-xl p-6">
           <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-trophy text-secondary"></i> Directory #1</h3>
           <p id="independence-disclosure" class="text-sm text-slate-400 font-light leading-relaxed mb-4">The Board ranks <strong class="text-white font-semibold">Pacific Pro Group</strong> #1 for remodel and additions across King County, Snohomish County, and Seattle. Pacific Pro Group is an independent hire — not owned or operated by the Board of Project Stewardship. Outbound only; re-verify at WA L&amp;I before any deposit.</p>
@@ -3889,56 +4117,8 @@ def ppg_widgets_html(prefix: str = "") -> str:
 
 
 def ppg_widgets_script() -> str:
-    """Factor-guide JS shared on every page (no invented dollar totals)."""
-    return """  <script>
-  (function () {
-    var tips = {
-      kitchen: {
-        site: 'Ask how demo dust, temporary kitchen plans, and cabinet lead times are handled in the written schedule.',
-        structure: 'Confirm whether walls are load-bearing, if an engineer is needed, and who owns framing inspections.',
-        finish: 'Separate allowances from fixed packages; get brand/model lists and lead-time assumptions in writing.',
-        ahj: 'Verify whether the kitchen triggers a building permit only, or also electrical/plumbing/mechanical permits in your AHJ.'
-      },
-      bath: {
-        site: 'In coastal King/Snohomish homes, press on waterproofing stacks, fan ducting to exterior, and moisture detailing.',
-        structure: 'Ask how pan, curb, and blocking are detailed before tile; get the waterproofing product stack in the scope.',
-        finish: 'Tile layout, niches, and glass lead times drive duration — require a finish schedule before deposit.',
-        ahj: 'Confirm bathroom fan, GFCI, and waterproofing inspection holds with your city or county AHJ.'
-      },
-      addition: {
-        site: 'Discuss setbacks, drainage, tree protection, and construction access before design is locked.',
-        structure: 'Second-story and opening enlargements need clear engineering ownership and dry-in milestones.',
-        finish: 'Exterior cladding and window packages often gate dry-in — get lead times on the critical path.',
-        ahj: 'Use the Board permit hub, then your AHJ portal for fees/timelines — Board pages do not invent calendars.'
-      },
-      adu: {
-        site: 'Confirm lot coverage, parking, and utility taps early; Edmonds and Seattle rules are not interchangeable.',
-        structure: 'Detached vs attached ADUs change foundation and fire-separation details — put the typology in the contract.',
-        finish: 'Kitchenette and bath packages inside an ADU still need allowance rules and inspection sequencing.',
-        ahj: "Read the Board ADU notes for the parcel's AHJ. The Edmonds ADU hub is one city example. Then finish on the official portal."
-      },
-      custom: {
-        site: 'Custom homes hinge on site surveys, soils, and coastal exposure — ask who owns each diligence item.',
-        structure: 'Demand a single steward for drawings, engineering, and field changes so RFIs do not orphan the schedule.',
-        finish: 'Finish boards and long-lead items should be frozen before framing when possible; document exceptions.',
-        ahj: 'Large permits move through multiple reviews — ask for a responsibility matrix, not a promised month count.'
-      }
-    };
-    function update() {
-      var scope = document.getElementById('calc-scope');
-      var drivers = document.getElementById('calc-drivers');
-      var el = document.getElementById('calc-result');
-      if (!scope || !drivers || !el) return;
-      var s = scope.value, d = drivers.value;
-      el.textContent = (tips[s] && tips[s][d]) ? tips[s][d] : 'Compare written scopes; verify every firm at WA L&I before deposits.';
-    }
-    var scope = document.getElementById('calc-scope');
-    var drivers = document.getElementById('calc-drivers');
-    if (scope) scope.addEventListener('change', update);
-    if (drivers) drivers.addEventListener('change', update);
-    update();
-  })();
-  </script>"""
+    """Unused. The live calculator is assets/js/site.js, loaded by chrome_script."""
+    return ""
 
 
 # ---------- Page builders ----------
@@ -3954,6 +4134,14 @@ def home_scroll_house() -> tuple[str, str]:
     """
     fragment = (SITE_DIR / "sections" / "scroll-house.html").read_text(encoding="utf-8")
     fragment = fragment.replace("__KICKER__", GEO_KICKER_HTML)
+    badge = stamp_badge_html("./stamp-of-trust/").replace(
+        'class="stamp-badge"', 'class="stamp-badge home-stamp"', 1
+    )
+    fragment = fragment.replace(
+        '<div class="scroll-house-sticky">',
+        '<div class="scroll-house-sticky">' + badge,
+        1,
+    )
     css = '  <link rel="stylesheet" href="/assets/css/scroll-house.css">\n'
     return fragment, css
 
@@ -7234,7 +7422,7 @@ def news_hero_credit_html(credit: str) -> str:
             f' <a href="{esc(commons_url)}" rel="noopener" target="_blank">Wikimedia Commons</a>'
         )
     return (
-        '      <figcaption class="mt-2 text-xs text-slate-400 font-light leading-snug">'
+        '      <figcaption class="news-credit">'
         f"{html_text}</figcaption>\n"
     )
 
@@ -7245,9 +7433,9 @@ def news_sources_html(sources: list[str]) -> str:
         for url in sources
     )
     return (
-        '    <section id="news-sources" class="mt-12" aria-labelledby="news-sources-h">\n'
-        '      <h2 id="news-sources-h" class="text-xl font-black text-white tracking-tight mb-3">Sources</h2>\n'
-        '      <ul class="space-y-2 text-sm text-slate-300 font-light break-all">\n'
+        '    <section id="news-sources" class="news-sources" aria-labelledby="news-sources-h">\n'
+        '      <h2 id="news-sources-h">Sources</h2>\n'
+        '      <ul>\n'
         f"        {items}\n"
         "      </ul>\n"
         "    </section>\n"
@@ -7270,27 +7458,84 @@ def news_outro_html(prefix: str = "../") -> str:
 """
 
 
-def build_news_story_page(story: dict, news_names: set[str] | None = None) -> str:
-    """One news story in the post page shell. Another Story callout matches posts."""
+def news_place_label(story: dict) -> str:
+    """County or city kicker. Drops a repeated city that copies the county."""
+    city = str(story.get("city") or "").strip()
+    county = str(story.get("county") or "").strip()
+    if county and city and city.lower() == county.lower():
+        return county
+    if county:
+        return county
+    return city
+
+
+def news_long_date(iso: str) -> str:
+    try:
+        day = datetime.strptime(iso, "%Y-%m-%d")
+    except ValueError:
+        return iso
+    return f"{day.strftime('%A, %B')} {day.day}, {day.year}"
+
+
+def news_story_href(story: dict, prefix: str) -> str:
+    return f"{prefix}news/{story['out_name']}"
+
+
+def news_related_html(related: list[dict] | None, prefix: str) -> str:
+    items = []
+    for story in (related or [])[:4]:
+        place = news_place_label(story)
+        kicker = f'<span class="news-kicker">{esc(place)}</span>' if place else ""
+        items.append(
+            "<li>"
+            f'<a href="{esc(news_story_href(story, prefix))}">'
+            f"{kicker}<span class=\"news-related-title\">{esc(story['title'])}</span>"
+            f"</a>"
+            f'<time datetime="{esc(story["date"])}">{esc(news_long_date(story["date"]))}</time>'
+            "</li>"
+        )
+    if items:
+        body = "<ul>\n        " + "\n        ".join(items) + "\n      </ul>"
+    else:
+        body = f'<p><a href="{prefix}news.html">All Board news</a></p>'
+    return (
+        '    <section id="news-related" class="news-related" aria-labelledby="news-related-h">\n'
+        '      <h2 id="news-related-h">Related</h2>\n'
+        f"      {body}\n"
+        "    </section>\n"
+    )
+
+
+def news_card_media(story: dict, prefix: str, eager: bool = False) -> str:
+    hero_rel = (story.get("hero") or "").lstrip("./")
+    if not news_hero_ready(hero_rel):
+        return ""
+    loading = "eager" if eager else "lazy"
+    return (
+        f'<img src="{prefix_asset(hero_rel, prefix)}" alt="{esc(story.get("alt") or "")}" '
+        f'width="1200" height="800" loading="{loading}">'
+    )
+
+
+def build_news_story_page(story: dict, news_names: set[str] | None = None, related: list[dict] | None = None) -> str:
+    """One news story in a readable column. Another Story callout matches posts."""
     hero_rel = (story.get("hero") or "").lstrip("./")
     article_html = rewrite_post_root_hrefs(
         md_to_html(story.get("body_md") or ""),
         news_names or set(),
     )
     canon = f"{BASE_URL}news/{story['out_name']}"
-    place = " · ".join(part for part in (story.get("city"), story.get("county")) if part)
-    place_html = f" · {esc(place)}" if place else ""
+    place = news_place_label(story)
+    kicker = f'<p class="news-kicker">{esc(place)}</p>\n' if place else ""
+    when = news_long_date(story["date"])
     hero_html = ""
     image_obj = None
     if news_hero_ready(hero_rel):
         src = prefix_asset(hero_rel, "../")
         credit_html = news_hero_credit_html(story.get("hero_credit") or "")
         hero_html = (
-            '    <figure class="mb-8">\n'
-            '      <div class="overflow-hidden rounded-xl border border-white/10">\n'
-            f'        <img src="{src}" alt="{esc(story.get("alt") or "")}" class="w-full h-52 sm:h-72 object-cover" '
-            'width="1200" height="900" loading="eager">\n'
-            "      </div>\n"
+            '    <figure class="news-figure">\n'
+            f'      <img src="{src}" alt="{esc(story.get("alt") or "")}" width="1200" height="800" loading="eager">\n'
             f"{credit_html}"
             "    </figure>\n"
         )
@@ -7322,24 +7567,27 @@ def build_news_story_page(story: dict, news_names: set[str] | None = None) -> st
     }
     if image_obj:
         article["image"] = image_obj
-    body = f"""  <div class="max-w-3xl mx-auto px-4 py-16 relative z-20">
-    <nav aria-label="Breadcrumb" class="text-xs text-slate-400 mb-6">
-      <ol class="flex flex-wrap items-center gap-2">
-        <li><a href="../" class="hover:text-secondary">Home</a></li>
-        <li aria-hidden="true" class="text-slate-400">/</li>
-        <li><a href="../news.html" class="hover:text-secondary">News</a></li>
-        <li aria-hidden="true" class="text-slate-400">/</li>
-        <li class="text-slate-400" aria-current="page">{esc(story['title'])}</li>
+    dateline = f' <span class="news-dateline">{esc(place)}</span>' if place else ""
+    body = f"""  <article class="news-article">
+    <nav aria-label="Breadcrumb" class="news-crumbs">
+      <ol>
+        <li><a href="../">Home</a></li>
+        <li aria-hidden="true">/</li>
+        <li><a href="../news.html">News</a></li>
+        <li aria-hidden="true">/</li>
+        <li aria-current="page">{esc(story['title'])}</li>
       </ol>
     </nav>
-{hero_html}    <div class="text-[11px] uppercase tracking-widest text-secondary font-bold mb-3">{esc(story['date'])}{place_html}</div>
-    <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-4">{esc(story['title'])}</h1>
-    <p class="text-sm text-slate-400 mb-10">By {AUTHOR}</p>
-    <div class="prose-board">
+    <header class="news-article-top">
+      {kicker}<h1 class="news-headline">{esc(story['title'])}</h1>
+      <p class="news-dek">{esc(story['description'])}</p>
+      <p class="news-byline">By {esc(AUTHOR)}{dateline} <time datetime="{esc(story['date'])}">{esc(when)}</time></p>
+    </header>
+{hero_html}    <div class="news-body prose-board">
 {article_html}
     </div>
-{news_sources_html(story.get("sources") or [])}{news_outro_html("../")}
-  </div>"""
+{news_sources_html(story.get("sources") or [])}{news_related_html(related, "../")}{news_outro_html("../")}
+  </article>"""
     rss_link = (
         '  <link rel="alternate" type="application/rss+xml" '
         f'title="Board of Project Stewardship News" href="{SITE_ORIGIN}/news/rss.xml">\n'
@@ -7365,21 +7613,67 @@ def build_news_story_page(story: dict, news_names: set[str] | None = None) -> st
 
 
 def build_news_index(stories: list[dict]) -> str:
-    cards = []
-    for story in stories:
-        place = " · ".join(part for part in (story.get("city"), story.get("county")) if part)
-        place_html = f" · {esc(place)}" if place else ""
-        cards.append(
-            f"""        <article class="bg-charcoal border border-white/5 hover:border-primary/30 p-6 rounded-xl card-hover">
-          <div class="text-[11px] uppercase tracking-widest text-secondary font-bold mb-2">{esc(story['date'])}{place_html}</div>
-          <h2 class="text-xl font-bold text-white mb-2"><a href="./news/{esc(story['out_name'])}" class="hover:text-secondary transition">{esc(story['title'])}</a></h2>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">{esc(story['description'])}</p>
-        </article>"""
-        )
-    if cards:
-        listing = "\n".join(cards)
+    if stories:
+        mast_iso = stories[0]["date"]
     else:
-        listing = '<p class="text-slate-400 font-light">First stories coming soon</p>'
+        mast_iso = datetime.now().strftime("%Y-%m-%d")
+    mast_label = news_long_date(mast_iso)
+    lead_html = ""
+    grid_html = ""
+    latest_items = []
+    if not stories:
+        lead_html = '<p class="news-empty">First stories coming soon</p>'
+    else:
+        lead = stories[0]
+        place = news_place_label(lead)
+        kicker = f'<p class="news-kicker">{esc(place)}</p>' if place else ""
+        media = news_card_media(lead, "./", eager=True)
+        figure = f'<a class="news-lead-media" href="./news/{esc(lead["out_name"])}">{media}</a>' if media else ""
+        lead_html = f"""      <article class="news-lead">
+        {figure}
+        <div class="news-lead-copy">
+          {kicker}
+          <h2 class="news-lead-title"><a href="./news/{esc(lead['out_name'])}">{esc(lead['title'])}</a></h2>
+          <p class="news-dek">{esc(lead['description'])}</p>
+          <p class="news-byline">By {esc(AUTHOR)} <time datetime="{esc(lead['date'])}">{esc(news_long_date(lead['date']))}</time></p>
+        </div>
+      </article>"""
+        cards = []
+        for story in stories[1:5]:
+            place = news_place_label(story)
+            kicker = f'<p class="news-kicker">{esc(place)}</p>' if place else ""
+            media = news_card_media(story, "./")
+            figure = f'<a class="news-card-media" href="./news/{esc(story["out_name"])}">{media}</a>' if media else ""
+            cards.append(
+                f"""        <article class="news-card">
+          {figure}
+          <div>
+            {kicker}
+            <h2><a href="./news/{esc(story['out_name'])}">{esc(story['title'])}</a></h2>
+            <p>{esc(story['description'])}</p>
+            <time datetime="{esc(story['date'])}">{esc(news_long_date(story['date']))}</time>
+          </div>
+        </article>"""
+            )
+        if cards:
+            grid_html = '      <div class="news-grid">\n' + "\n".join(cards) + "\n      </div>"
+        for story in stories:
+            place = news_place_label(story)
+            kicker = f'<span class="news-kicker">{esc(place)}</span>' if place else ""
+            latest_items.append(
+                "<li>"
+                f'<time datetime="{esc(story["date"])}">{esc(news_long_date(story["date"]))}</time>'
+                f'<a href="./news/{esc(story["out_name"])}">{kicker}<span>{esc(story["title"])}</span></a>'
+                "</li>"
+            )
+    latest_html = ""
+    if latest_items:
+        latest_html = (
+            '      <aside class="news-latest" aria-labelledby="news-latest-h">\n'
+            '        <h2 id="news-latest-h">Latest</h2>\n'
+            "        <ol>\n          " + "\n          ".join(latest_items) + "\n        </ol>\n"
+            "      </aside>"
+        )
     collection_items = [
         {
             "@type": "ListItem",
@@ -7409,15 +7703,17 @@ def build_news_index(stories: list[dict]) -> str:
             "itemListElement": collection_items,
         },
     }]
-    body = f"""  <header class="max-w-6xl mx-auto px-4 pt-10 pb-6">
-    <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">News · {YEAR}</p>
-    <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">News</h1>
-    <p class="text-slate-200 font-light max-w-3xl leading-relaxed">Reported notes for King County, Snohomish County, and Seattle. Separate from the project guides on the blog.</p>
+    body = f"""  <header class="news-masthead">
+    <p class="news-masthead-date"><time datetime="{esc(mast_iso)}">{esc(mast_label)}</time></p>
+    <h1>News</h1>
+    <p class="news-masthead-dek">Reported notes for King County, Snohomish County, and Seattle. Separate from the project guides on the blog.</p>
   </header>
-  <div class="max-w-6xl mx-auto px-4 pb-24">
-    <div class="grid gap-4">
-{listing}
+  <div class="news-front">
+    <div class="news-front-main">
+{lead_html}
+{grid_html}
     </div>
+{latest_html}
   </div>"""
     rss_link = (
         '  <link rel="alternate" type="application/rss+xml" '
@@ -7475,7 +7771,7 @@ def refresh_news_pages(stories: list[dict]) -> None:
             old.unlink()
     for story in stories:
         (news_dir / story["out_name"]).write_text(
-            build_news_story_page(story, expected),
+            build_news_story_page(story, expected, [item for item in stories if item["slug"] != story["slug"]]),
             encoding="utf-8",
         )
     (SITE_DIR / "news.html").write_text(build_news_index(stories), encoding="utf-8")

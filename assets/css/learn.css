@@ -97,9 +97,26 @@ body {
   text-decoration: none;
 }
 .learn-foot .site-footer-seal {
-  width: 112px;
-  height: 112px;
+  width: 48px;
+  height: 48px;
 }
+.learn-foot-brand { flex-direction: row; align-items: center; max-width: none; }
+.stamp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.65rem;
+  padding: 0.22rem 0.55rem 0.22rem 0.28rem;
+  background: #022c22;
+  border: 1px solid #d4af37;
+  border-radius: 999px;
+  color: #fff;
+  text-decoration: none;
+}
+.stamp-badge-mark { width: 22px; height: 22px; object-fit: contain; }
+.stamp-badge-copy { display: flex; flex-direction: column; line-height: 1.05; }
+.stamp-badge-kicker { color: #d4af37; font-size: 0.56rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
+.stamp-badge-name { color: #fff; font-size: 0.66rem; font-weight: 700; }
 .learn-foot-name {
   font-size: 0.875rem;
   font-weight: 500;

@@ -828,6 +828,16 @@ def crumb_nav(items: list[tuple[str, str]], depth: int) -> str:
     return '<nav class="learn-crumb" aria-label="Breadcrumb">' + "".join(parts) + "</nav>"
 
 
+def stamp_badge(root: str) -> str:
+    return (
+        f'<a class="stamp-badge" href="{root}stamp-of-trust/">'
+        f'<img class="stamp-badge-mark" src="/assets/icons/seal-96.png" width="22" height="22" '
+        f'alt="" loading="lazy" decoding="async">'
+        f'<span class="stamp-badge-copy"><span class="stamp-badge-kicker">Stamp of Trust</span>'
+        f'<span class="stamp-badge-name">Board of Project Stewardship</span></span></a>'
+    )
+
+
 def footer(depth: int, viewer_script: bool = False) -> str:
     root = "../" * depth
     scripts = '<script src="/assets/js/learn-house.js" defer></script>'
@@ -838,6 +848,7 @@ def footer(depth: int, viewer_script: bool = False) -> str:
     <a class="learn-foot-brand" href="{root}">{seal_picture("footer")}<span class="learn-foot-name">Board of Project Stewardship</span></a>
     <p>Teaching sketch. Not a structural design, a bid, or a permit set. Confirm the work with the drawings and the jurisdiction.</p>
     <p><a href="{root}">Home</a> · <a href="{root}learn.html">Learn hub</a> · <a href="{root}learn/">How a house is built</a> · <a href="mailto:editorial@boardofprojectstewardship.com">editorial@boardofprojectstewardship.com</a></p>
+    {stamp_badge(root)}
   </footer>
   {scripts}
 </body>
