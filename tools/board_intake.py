@@ -6,6 +6,10 @@ Steward is the only publisher. This tool validates, deduplicates, and — only
 with publish --apply — copies a post bundle onto the static site and updates
 posts.json, blog.html, sitemap.xml, and blog/rss.xml.
 
+News is a separate section. Stories in news/ are validated here the same way
+public post copy is checked, and publish never writes them into the blog,
+posts.json, or blog/rss.xml.
+
 There is no network listener and no credential file. Dry-run is the default
 for publish.
 """
@@ -896,6 +900,8 @@ def _validate_duplicate(root, packet, title, slug, date, draft, errors) -> None:
     md_name = f"{date}-{slug}.md" if date else ""
     if md_name and (root / "posts" / md_name).is_file():
         errors.append({"code": "duplicate", "message": f"posts/{md_name} already exists"})
+    if slug and slug in {item.get("slug") for item in gs.iter_news_identities(root)}:
+        errors.append({"code": "duplicate", "message": f"slug {slug} is already a news story"})
     new_hash = _body_hash(draft)
     posts_dir = root / "posts"
     if posts_dir.is_dir():
@@ -1226,6 +1232,11 @@ def _apply(packet, root, manifest, checked, planned, force_lock) -> dict:
             wrote.append("blog.html")
             gs.write_rss(after_posts)
             wrote.append("blog/rss.xml")
+        if any(item == "news.html" or item.startswith("news/") for item in wrote):
+            raise IntakeFailure("publish_failed", "post publish tried to write the news section")
+        overlap = gs.news_blog_overlap(root)
+        if overlap:
+            raise IntakeFailure("conflict", overlap[0])
         sitemap_path = root / "sitemap.xml"
         if not sitemap_path.is_file():
             raise IntakeFailure("index_guard_failed", "sitemap.xml is missing")
@@ -1463,6 +1474,54 @@ def morning_run(
     return finish(published)
 
 
+def validate_news_library(root: Path) -> dict:
+    """Contract check for news/*.md and public news HTML.
+
+    Same failure codes as post intake. A news story needs a title, date,
+    description, and at least one real source URL. Public news HTML must not
+    name AI, ChatGPT, Gemini, Higgsfield, Ghost, or Netlify. News slugs and
+    story URLs must not also appear in the blog.
+    """
+    root = root.resolve()
+    errors: list[dict] = []
+    news_dir = root / "news"
+    if news_dir.is_dir():
+        for path in sorted(news_dir.glob("*.md")):
+            if path.name.startswith("_"):
+                continue
+            item = gs.inspect_news_file(path)
+            for problem in item["problems"]:
+                code = "missing_sources" if "source" in problem else "invalid_artifact"
+                errors.append({"code": code, "message": problem})
+        for path in [news_dir / "rss.xml", *sorted(news_dir.glob("*.html"))]:
+            if not path.is_file():
+                continue
+            term = gs.news_forbidden_term(path.read_text(encoding="utf-8", errors="ignore"))
+            if term:
+                errors.append({
+                    "code": "forbidden_public_copy",
+                    "message": f"{path.relative_to(root).as_posix()} contains {term}",
+                })
+    news_index = root / "news.html"
+    if news_index.is_file():
+        term = gs.news_forbidden_term(news_index.read_text(encoding="utf-8", errors="ignore"))
+        if term:
+            errors.append({
+                "code": "forbidden_public_copy",
+                "message": f"news.html contains {term}",
+            })
+    for message in gs.news_blog_overlap(root):
+        errors.append({"code": "conflict", "message": message})
+    status = _priority_status([item["code"] for item in errors], "ready")
+    return _result(
+        ok=not errors,
+        status=status if errors else "ready",
+        message="news library matches the contract" if not errors else "news library failed the contract",
+        errors=errors,
+        extra={"stories": len(gs.iter_news_identities(root))},
+    )
+
+
 def validate_inbox(root: Path) -> dict:
     inbox = root / "intake" / "inbox"
     results = []
@@ -1470,12 +1529,20 @@ def validate_inbox(root: Path) -> dict:
         for child in sorted(inbox.iterdir()):
             if child.is_dir() and (child / "manifest.json").is_file():
                 results.append(validate_packet(child, root))
-    ok = all(item["ok"] for item in results)
+    news = validate_news_library(root)
+    ok = all(item["ok"] for item in results) and news["ok"]
+    if not news["ok"]:
+        status = news["status"]
+    elif not ok:
+        status = "invalid_manifest"
+    else:
+        status = "ready"
     return _result(
         ok=ok,
-        status="ready" if ok else "invalid_manifest",
+        status=status,
         message="no submissions" if not results else f"validated {len(results)} packet(s)",
-        extra={"results": results},
+        errors=news["errors"] if not news["ok"] else [],
+        extra={"results": results, "news": news},
     )
 
 

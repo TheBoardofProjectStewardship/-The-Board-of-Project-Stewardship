@@ -44,3 +44,6 @@ intake/lock/*
 !assets/images/**/*-800.webp
 !assets/images/**/*-1200.webp
 !assets/images/**/*-1280.webp
+# News story photos (credited stills, must ship on GitHub Pages)
+!assets/images/news/
+!assets/images/news/*.webp

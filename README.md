@@ -40,6 +40,7 @@ Base: `https://boardofprojectstewardship.com/`
 | `insulation.html` | Insulation directory |
 | `excavation.html` | Excavation / Site Work directory |
 | `blog.html` | Blog index |
+| `news.html` | News index (separate from the blog) |
 | `good-steward.html` | Good Steward hub |
 | `build-walkthrough.html` | Build Walkthrough landing |
 | `plan-walkthrough/` | Plan to 3D walkthrough |
@@ -51,6 +52,7 @@ Base: `https://boardofprojectstewardship.com/`
 | `locations.html` | Locations hub (live place pages) |
 | `stamp-of-trust/` | Stamp of Trust credential |
 | `blog/rss.xml` | Blog RSS feed |
+| `news/rss.xml` | News RSS feed |
 | `404.html` | Branded Board 404 |
 | `posts/2026-10-14-basement-finishing-renton-wa.html` | Basement Finishing Renton WA — Interior Remodel Permits, City Electrical & Moisture Details |
 | `posts/2026-10-13-kitchen-remodel-issaquah-wa.html` | Kitchen Remodel Issaquah WA — MyBuildingPermit Remodel Path, L&I Electrical & Fixture Counts |
@@ -142,7 +144,7 @@ cd bops-site
 python3 generate_site.py
 ```
 
-Sources: `data/research/top30-addition-contractors.md`, `data/research/bops-research-kitchen-bath.md`, `data/research/bops-research-custom-commercial-spec.md`, `data/research/bops-research-edmonds-custom.md`, `data/research/bops-research-trades.md`, and `posts/*.md`.
+Sources: `data/research/top30-addition-contractors.md`, `data/research/bops-research-kitchen-bath.md`, `data/research/bops-research-custom-commercial-spec.md`, `data/research/bops-research-edmonds-custom.md`, `data/research/bops-research-trades.md`, `posts/*.md`, and `news/*.md`. News stories stay out of the blog.
 
 ## Agent intake
 
