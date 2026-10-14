@@ -62,7 +62,55 @@ body {
   min-height: 44px;
   display: inline-flex;
   align-items: center;
+  gap: 0.5rem;
   margin-right: auto;
+  min-width: 0;
+}
+.learn-brand-name {
+  min-width: 0;
+}
+.site-seal-picture,
+.site-footer-seal-picture {
+  display: block;
+  flex-shrink: 0;
+  line-height: 0;
+}
+.learn-top .site-seal,
+.learn-foot .site-footer-seal {
+  display: block;
+  object-fit: contain;
+  flex-shrink: 0;
+  max-width: none;
+}
+.learn-top .site-seal {
+  width: 40px;
+  height: 40px;
+}
+@media (min-width: 1280px) {
+  .learn-top .site-seal {
+    width: 52px;
+    height: 52px;
+  }
+  .learn-top { min-height: 68px; }
+}
+.learn-foot-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin: 0 0 0.85rem;
+  max-width: 16rem;
+  color: var(--ink);
+  text-decoration: none;
+}
+.learn-foot .site-footer-seal {
+  width: 112px;
+  height: 112px;
+}
+.learn-foot-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ink);
 }
 .learn-nav {
   display: flex;

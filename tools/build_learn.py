@@ -733,6 +733,31 @@ def webpage_ld(name: str, url: str, desc: str) -> str:
 
 
 OG_ALT = "Illustrative Pacific Northwest home concept for Board of Project Stewardship — not a bid or stamped plan"
+SEAL_ALT = "The Board of Project Stewardship seal"
+
+
+def seal_picture(kind: str) -> str:
+    """Same official seal as the site header and footer. Root-absolute."""
+    base = "/assets/icons/"
+    webp = f"{base}seal-96.webp 96w, {base}seal-192.webp 192w, {base}seal-512.webp 512w"
+    png = f"{base}seal-96.png 96w, {base}seal-192.png 192w, {base}seal-512.png 512w"
+    if kind == "header":
+        cls = "site-seal"
+        sizes = "(min-width: 1280px) 52px, 40px"
+        width = height = 40
+        loading = "eager"
+    else:
+        cls = "site-footer-seal"
+        sizes = "112px"
+        width = height = 112
+        loading = "lazy"
+    return (
+        f'<picture class="{cls}-picture">'
+        f'<source type="image/webp" srcset="{webp}" sizes="{sizes}">'
+        f'<img class="{cls}" src="{base}seal-192.png" srcset="{png}" sizes="{sizes}" '
+        f'width="{width}" height="{height}" alt="{SEAL_ALT}" loading="{loading}" decoding="async">'
+        f"</picture>"
+    )
 
 
 def head(name: str, desc: str, canon_path: str, extra_ld: str, depth: int, og_type: str = "website") -> str:
@@ -772,7 +797,7 @@ def head(name: str, desc: str, canon_path: str, extra_ld: str, depth: int, og_ty
 <body>
   <a class="learn-skip" href="#main-content">Skip to content</a>
   <header class="learn-top">
-    <a class="learn-brand" href="{root}">Board of Project Stewardship</a>
+    <a class="learn-brand" href="{root}">{seal_picture("header")}<span class="learn-brand-name">Board of Project Stewardship</span></a>
     <button type="button" class="learn-menu" aria-expanded="false" aria-controls="learn-menu-panel">Menu</button>
     <nav class="learn-nav" id="learn-menu-panel" aria-label="Primary">
       <a href="{root}">Home</a>
@@ -809,6 +834,7 @@ def footer(depth: int, viewer_script: bool = False) -> str:
         scripts = '<script src="/assets/js/scroll-house.js" defer></script>\n  ' + scripts
     return f"""
   <footer class="learn-foot">
+    <a class="learn-foot-brand" href="{root}">{seal_picture("footer")}<span class="learn-foot-name">Board of Project Stewardship</span></a>
     <p>Teaching sketch. Not a structural design, a bid, or a permit set. Confirm the work with the drawings and the jurisdiction.</p>
     <p><a href="{root}">Home</a> · <a href="{root}learn.html">Learn hub</a> · <a href="{root}learn/">How a house is built</a> · <a href="mailto:editorial@boardofprojectstewardship.com">editorial@boardofprojectstewardship.com</a></p>
   </footer>
