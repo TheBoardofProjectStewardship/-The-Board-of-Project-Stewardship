@@ -4063,12 +4063,15 @@ def home_flashlight_hero(supporting: bool = False) -> tuple[str, str, str] | Non
     wire_attr = f' srcset="{wire_set}" sizes="100vw"' if wire_set else ""
     fin_attr = f' srcset="{fin_set}" sizes="100vw"' if fin_set else ""
     video_html = ""
+    play_html = ""
     if video:
         video_html = f"""      <video class="hero-ambient-video" muted loop playsinline preload="none" poster="{poster}">
         <source src="{video}" type="video/mp4">
-      </video>
+      </video>"""
+        play_html = """    <div class="hero-play-slot">
       <button type="button" class="hero-play" id="home-hero-play">Play video</button>
-      <button type="button" class="hero-play hero-pause" id="home-hero-pause">Pause video</button>"""
+      <button type="button" class="hero-play hero-pause" id="home-hero-pause">Pause video</button>
+    </div>"""
     section_cls = "flashlight-hero is-supporting" if supporting else "flashlight-hero"
     heading = "h2" if supporting else "h1"
     finished_attrs = ' decoding="async" data-defer-lcp loading="lazy"' if supporting else ' decoding="async" fetchpriority="high"'
@@ -4083,6 +4086,7 @@ def home_flashlight_hero(supporting: bool = False) -> tuple[str, str, str] | Non
     <div class="hero-vignette" aria-hidden="true"></div>
     <div class="hero-cursor" id="home-hero-ring" aria-hidden="true"></div>
     <p class="hero-hint" id="home-hero-hint"><span class="hero-hint-video">Plans assemble into the finished home</span><span class="hero-hint-flashlight"><span class="hero-hint-fine">Hover to reveal the finished home</span><span class="hero-hint-coarse">Drag to reveal the finished home</span></span></p>
+{play_html}
     <div class="hero-copy">
       <p class="hero-kicker">{GEO_KICKER_HTML}</p>
       <{heading} id="home-hero-title">Remodel directories and permit guides</{heading}>
@@ -4149,12 +4153,16 @@ def home_flashlight_hero(supporting: bool = False) -> tuple[str, str, str] | Non
       pointer-events: none;
     }}
     .flashlight-hero.is-video-playing .hero-ambient-video {{ display: block; }}
-    .flashlight-hero .hero-play {{
+    .flashlight-hero .hero-play-slot {{
       position: absolute;
       z-index: 7;
       top: 46%;
       left: 62%;
       transform: translate(-50%, -50%);
+    }}
+    .flashlight-hero .hero-play {{
+      position: static;
+      z-index: 7;
       margin: 0;
       padding: 0.9rem 1.1rem;
       border: 1px solid #F2F2EE;
@@ -4368,15 +4376,88 @@ def home_flashlight_hero(supporting: bool = False) -> tuple[str, str, str] | Non
       .flashlight-hero .hero-ambient-video {{ display: none !important; }}
     }}
     .flashlight-hero.is-supporting {{
-      min-height: 22rem;
-      height: 22rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      height: auto;
+      min-height: 34rem;
+      padding: 1.35rem var(--hero-gutter) 1.25rem;
       cursor: auto;
     }}
     .flashlight-hero.is-supporting .hero-cursor {{ display: none; }}
-    @media (max-width: 860px) {{
+    .flashlight-hero.is-supporting .hero-hint {{
+      position: relative;
+      z-index: 5;
+      top: auto;
+      right: auto;
+      left: auto;
+      align-self: flex-start;
+      max-width: 22rem;
+      margin: 0 12rem 0 0;
+      text-align: left;
+      color: rgba(242,242,238,.94);
+    }}
+    .flashlight-hero.is-supporting .hero-play-slot {{
+      position: absolute;
+      z-index: 7;
+      top: 1.35rem;
+      right: var(--hero-gutter);
+      left: auto;
+      transform: none;
+    }}
+    .flashlight-hero.is-supporting .hero-copy {{
+      position: relative;
+      z-index: 5;
+      left: auto;
+      right: auto;
+      bottom: auto;
+      max-width: min(36rem, calc(100% - 12rem));
+      margin-top: auto;
+      padding-top: 1.5rem;
+    }}
+    .flashlight-hero.is-supporting .hero-credit {{
+      position: relative;
+      z-index: 5;
+      right: auto;
+      bottom: auto;
+      align-self: flex-end;
+      max-width: 28rem;
+      margin-top: 1rem;
+      text-align: right;
+      color: rgba(242,242,238,.78);
+    }}
+    .flashlight-hero.is-supporting .hero-scrim {{
+      background:
+        linear-gradient(180deg, rgba(8,9,9,.78) 0%, rgba(8,9,9,.18) 24%, rgba(8,9,9,.2) 52%, rgba(8,9,9,.86) 100%),
+        linear-gradient(90deg, rgba(6,7,7,.9) 0%, rgba(6,7,7,.62) 40%, rgba(6,7,7,.16) 72%, rgba(6,7,7,0) 100%);
+    }}
+    @media (max-width: 900px) {{
       .flashlight-hero.is-supporting {{
-        min-height: 28rem;
-        height: 28rem;
+        min-height: 40rem;
+      }}
+      .flashlight-hero.is-supporting .hero-hint {{
+        margin: 0 0 0.9rem;
+        max-width: none;
+      }}
+      .flashlight-hero.is-supporting .hero-play-slot {{
+        position: relative;
+        top: auto;
+        right: auto;
+        align-self: flex-start;
+        margin: 0 0 1.25rem;
+      }}
+      .flashlight-hero.is-supporting .hero-copy {{
+        max-width: none;
+        margin-top: 0;
+        padding-top: 0;
+      }}
+      .flashlight-hero.is-supporting .hero-credit {{
+        align-self: flex-start;
+        text-align: left;
+        max-width: none;
+      }}
+      .flashlight-hero.is-supporting .hero-scrim {{
+        background: linear-gradient(180deg, rgba(6,7,7,.84) 0%, rgba(6,7,7,.68) 48%, rgba(6,7,7,.9) 100%);
       }}
     }}
   </style>
