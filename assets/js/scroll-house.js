@@ -562,9 +562,9 @@ function labelsFor(model, progress, mvp, width, height) {
   for (const label of candidates) {
     const projected = projectPoint(mvp, label.position, width, height);
     const narrow = width < 640;
-    const char = narrow ? (label.minor ? 1.9 : 2.15) : (label.minor ? 2.55 : 2.9);
-    const half = Math.min(label.text.length * char, narrow ? 46 : 60);
-    const vy = narrow ? 6 : 9;
+    const char = narrow ? (label.minor ? 1.55 : 1.8) : (label.minor ? 2.35 : 2.65);
+    const half = Math.min(label.text.length * char, narrow ? 38 : 54);
+    const vy = narrow ? 5 : 8;
     const box = { left: projected.x - half - 2, right: projected.x + half + 2, top: projected.y - vy, bottom: projected.y + vy };
     if (box.left < 3 || box.right > width - 3 || box.top < 3 || box.bottom > height - 3) continue;
     if (labels.some(l => box.left < l.box.right && box.right > l.box.left && box.top < l.box.bottom && box.bottom > l.box.top)) continue;
@@ -958,11 +958,6 @@ function createRenderer(canvas) {
         if (explore) setExplore(false);
         return;
       }
-      var settled = Math.abs(scrollProgress() - rendered) < 0.004;
-      var dismissedHere = exploreDismissed && exploreDismissedAt === "massing";
-      if (stageId === "massing" && !dismissedHere && !explore && pointers.size === 0 && settled) {
-        setExplore(true);
-      }
     }
 
     function resetOrbit() {
@@ -1205,16 +1200,18 @@ function createRenderer(canvas) {
         setExplore(true);
       }
     });
+    on(canvas, "click", function () {
+      if (explore) return;
+      if ((current || stageByProgress(rendered).id) !== "massing") return;
+      exploreDismissed = false;
+      exploreDismissedAt = "";
+      setExplore(true);
+    });
     on(sheet, "wheel", function (event) {
-      var focused = document.activeElement === canvas;
-      if (!explore && !focused) return;
+      if (!explore) return;
       if (stageByProgress(rendered).id === "plan") return;
       if (exploreBar && exploreBar.contains(event.target)) return;
       event.preventDefault();
-      if (!explore) {
-        exploreDismissed = false;
-        setExplore(true);
-      }
       nudgeZoom(Math.exp(event.deltaY * 0.0011));
     }, { passive: false });
     function rememberPointer(event) {
