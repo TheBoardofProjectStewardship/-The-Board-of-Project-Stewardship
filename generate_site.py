@@ -1221,9 +1221,27 @@ def _ico_from_png(png: bytes, size: int = 32) -> bytes:
 
 
 def write_board_icons() -> None:
-    """Write favicon.ico + apple-touch-icon.png so they deploy (not 404)."""
+    """Write favicon.ico + apple-touch-icon.png so they deploy (not 404).
+
+    The official seal rasters in assets/icons/ are the source of truth. Keep
+    them, mirror logo-512.png to the same artwork, and copy favicon.ico to
+    the site root. The compass raster remains only when the seal is absent.
+    """
     icon_dir = SITE_DIR / "assets" / "icons"
     icon_dir.mkdir(parents=True, exist_ok=True)
+    master = icon_dir / "seal-512.png"
+    if master.is_file():
+        data = master.read_bytes()
+        logo = icon_dir / "logo-512.png"
+        if not logo.is_file() or logo.read_bytes() != data:
+            logo.write_bytes(data)
+        ico = icon_dir / "favicon.ico"
+        if ico.is_file():
+            blob = ico.read_bytes()
+            root_ico = SITE_DIR / "favicon.ico"
+            if not root_ico.is_file() or root_ico.read_bytes() != blob:
+                root_ico.write_bytes(blob)
+        return
     png32 = _png_rgba(32, 32, _board_icon_pixels(32))
     png180 = _png_rgba(180, 180, _board_icon_pixels(180))
     (icon_dir / "apple-touch-icon.png").write_bytes(png180)
@@ -1340,6 +1358,9 @@ def apply_image_pass(html: str) -> str:
 
     def repl(match: re.Match) -> str:
         inner = match.group(1)
+        # Header and footer seals carry their own srcset and must not become the LCP image.
+        if "site-seal" in inner or "site-footer-seal" in inner:
+            return match.group(0)
         src_m = re.search(r'\bsrc\s*=\s*"([^"]*)"', inner)
         if not src_m:
             return match.group(0)
@@ -1552,6 +1573,33 @@ def head_assets() -> str:
 
 
 
+SEAL_ALT = "The Board of Project Stewardship seal"
+
+
+def seal_picture(kind: str) -> str:
+    """Official seal. WebP source with a PNG srcset fallback. Root-absolute."""
+    base = "/assets/icons/"
+    webp = f"{base}seal-96.webp 96w, {base}seal-192.webp 192w, {base}seal-512.webp 512w"
+    png = f"{base}seal-96.png 96w, {base}seal-192.png 192w, {base}seal-512.png 512w"
+    if kind == "header":
+        cls = "site-seal"
+        sizes = "(min-width: 1280px) 52px, 40px"
+        width = height = 40
+        loading = "eager"
+    else:
+        cls = "site-footer-seal"
+        sizes = "112px"
+        width = height = 112
+        loading = "lazy"
+    return (
+        f'<picture class="{cls}-picture">'
+        f'<source type="image/webp" srcset="{webp}" sizes="{sizes}">'
+        f'<img class="{cls}" src="{base}seal-192.png" srcset="{png}" sizes="{sizes}" '
+        f'width="{width}" height="{height}" alt="{SEAL_ALT}" loading="{loading}" decoding="async">'
+        f"</picture>"
+    )
+
+
 def _nav_link(href: str, label: str, key: str, active: str, extra_cls: str = "") -> str:
     is_current = key == active
     cls = "text-secondary" if is_current else "text-slate-300 hover:text-secondary"
@@ -1658,7 +1706,7 @@ def nav_html(active: str = "", prefix: str = "") -> str:
     <div class="site-header-inner mx-auto px-4 sm:px-6 lg:px-8">
       <div class="site-header-row">
         <a href="{home_href}" class="site-brand">
-          <i class="fas fa-compass-drafting text-secondary text-xl shrink-0" aria-hidden="true"></i>
+          {seal_picture("header")}
           <span class="site-brand-name">Board of Project Stewardship</span>
         </a>
         <nav class="site-nav-desktop" aria-label="Primary">
@@ -1764,10 +1812,10 @@ def footer_html(prefix: str = "./", active: str = "", updated: str = "") -> str:
     return f"""  <footer class="bg-obsidian py-14 text-sm border-t border-white/5">
     <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 lg:grid-cols-4 gap-10 text-slate-400">
       <div>
-        <div class="flex items-center mb-4 gap-2">
-          <i class="fas fa-compass-drafting text-secondary"></i>
+        <a href="{prefix if prefix else "./"}" class="site-footer-brand">
+          {seal_picture("footer")}
           <span class="font-black text-base tracking-wider text-white">Board of Project Stewardship</span>
-        </div>
+        </a>
         <p class="font-light leading-relaxed text-sm">{esc(BOARD_ONE_LINER)} Last updated <time datetime="{esc(updated)}">{esc(updated)}</time>.</p>
         <p class="mt-3 font-light leading-relaxed text-sm">Public contact: <a href="mailto:{EDITORIAL_EMAIL}" class="text-secondary hover:underline">{EDITORIAL_EMAIL}</a></p>
         <p class="mt-3 font-light leading-relaxed text-sm">Board #1 hire (outbound): <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a> — independent design-build GC; not Board-owned.</p>
@@ -2252,7 +2300,7 @@ def board_organization_website_ld() -> dict:
                 "email": EDITORIAL_EMAIL,
                 "logo": {
                     "@type": "ImageObject",
-                    "url": f"{SITE_ORIGIN}/assets/icons/logo-512.png",
+                    "url": f"{SITE_ORIGIN}/assets/icons/seal-512.png",
                     "width": 512,
                     "height": 512,
                 },
