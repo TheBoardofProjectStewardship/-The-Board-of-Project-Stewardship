@@ -1,7 +1,7 @@
 ---
 title: "Kitchen Remodel Issaquah WA — MyBuildingPermit Remodel Path, L&I Electrical & Fixture Counts"
 date: "2026-10-13"
-description: "An Issaquah homeowner's guide to a kitchen remodel: City remodel permits on MyBuildingPermit, why electrical runs through Washington L&I instead of the city, when fixture swaps skip a building permit, water-meter sizing, and moisture-smart kitchen details for Eastside winters."
+description: "An Issaquah kitchen remodel guide: City permits on MyBuildingPermit, why electrical runs through Washington L&I, and when fixture swaps skip a permit."
 category: "Kitchen"
 slug: "kitchen-remodel-issaquah-wa"
 ---

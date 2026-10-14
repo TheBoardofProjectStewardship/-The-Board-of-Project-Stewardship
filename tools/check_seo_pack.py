@@ -229,8 +229,8 @@ def main() -> None:
         fail("apple-touch-icon.png missing (must deploy, not gitignore-only)")
 
     additions = (ROOT / "additions.html").read_text(encoding="utf-8")
-    if 'id="another-story-sea-embed"' not in additions:
-        fail("directory pages must keep sitewide Another Story embed (Alex lock)")
+    if 'id="another-story-cta"' not in additions or 'id="another-story-sea"' in additions:
+        fail("directory pages use the Another Story callout, not the 1900px iframe")
     if 'id="good-steward-tools-embed"' in additions:
         fail("directory pages must not embed twin Good Steward 1400px iframes")
     if 'id="good-steward-cta"' not in additions:
@@ -242,8 +242,8 @@ def main() -> None:
     steward_page = (ROOT / "good-steward.html").read_text(encoding="utf-8")
     if 'id="good-steward-tools-embed"' not in steward_page:
         fail("good-steward.html must keep full tool embeds")
-    if 'id="another-story-sea-embed"' not in steward_page:
-        fail("good-steward.html must keep sitewide Another Story embed")
+    if 'id="another-story-cta"' not in steward_page or 'id="another-story-sea"' in steward_page:
+        fail("good-steward.html uses the Another Story callout, not the 1900px iframe")
 
     for path in html_files:
         text = path.read_text(encoding="utf-8")
@@ -362,8 +362,17 @@ def check_public_regressions() -> None:
             title = re.sub(r"\s+", " ", html.unescape(title_m.group(1))).strip()
             if len(title) > 60 or title.endswith("...") or title.endswith("…"):
                 fail(f"{path.relative_to(ROOT)} title is truncated or over 60 characters: {title}")
-        if 'id="nav-toggle"' in text and 'id="another-story-sea"' not in text:
-            fail(f"{path.relative_to(ROOT)} is missing the Another Story iframe")
+        if 'id="nav-toggle"' in text:
+            rel = path.relative_to(ROOT).as_posix()
+            has_iframe = 'id="another-story-sea"' in text
+            has_cta = 'id="another-story-cta"' in text
+            if rel in ("index.html", "another-story.html"):
+                if not has_iframe:
+                    fail(f"{rel} is missing the Another Story iframe")
+            elif not has_cta:
+                fail(f"{rel} is missing the Another Story callout")
+            elif has_iframe:
+                fail(f"{rel} still embeds the full Another Story iframe")
         for tag in re.findall(r"<img\b([^>]*?)>", text, flags=re.I | re.S):
             src_m = re.search(r'\bsrc\s*=\s*"([^"]*)"', tag)
             alt_m = re.search(r'\balt\s*=\s*"([^"]*)"', tag)

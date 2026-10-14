@@ -1,7 +1,7 @@
 ---
 title: "Home Addition Mukilteo WA — Going Up or Out on a Coastal Lot: City Permits, Tree Rules, and Weatherproof-First Sequencing"
 date: "2026-09-28"
-description: "Planning a home addition or second story in Mukilteo: confirm city jurisdiction, use the City of Mukilteo online permit portal, check tree and steep-slope rules, file electrical with L&I, and keep dry-in on the critical path."
+description: "Planning a home addition or second story in Mukilteo: confirm city jurisdiction, use the online permit portal, and check tree and steep-slope rules."
 category: "Additions"
 slug: "home-addition-mukilteo-wa"
 ---

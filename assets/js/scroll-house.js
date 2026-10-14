@@ -933,8 +933,28 @@ function createRenderer(canvas, options) {
       return scrolled / travel;
     }
 
+    function paintStill(p) {
+      if (disposed || lost) return;
+      if (!engine) {
+        try { engine = createRenderer(canvas); }
+        catch (e) { fail(); return; }
+      }
+      rendered = Math.max(0, Math.min(1, p));
+      try {
+        paint(rendered);
+        dirty = false;
+      } catch (error) {
+        fail();
+      }
+    }
+
     function scrollToProgress(p) {
       p = Math.max(0, Math.min(1, Number.isFinite(p) ? p : 0));
+      if (reduced.matches) {
+        manual = p;
+        paintStill(p);
+        return;
+      }
       if (!root.classList.contains("is-enhanced")) {
         manual = p;
         dirty = true;
@@ -1016,7 +1036,10 @@ function createRenderer(canvas, options) {
       if (exploreReset) exploreReset.hidden = !explore;
       if (zoomIn) zoomIn.hidden = !explore;
       if (zoomOut) zoomOut.hidden = !explore;
-      if (canvas) canvas.setAttribute("aria-pressed", explore ? "true" : "false");
+      if (canvas) {
+        canvas.setAttribute("aria-pressed", explore ? "true" : "false");
+        canvas.style.touchAction = explore ? "none" : "pan-y pinch-zoom";
+      }
       dirty = true;
       kick();
     }
@@ -1310,26 +1333,48 @@ function createRenderer(canvas, options) {
       if (!explore) return;
       if (event.pointerType === "mouse" && event.button !== 0) return;
       if (exploreBar && exploreBar.contains(event.target)) return;
-      if (orbitPointer !== null) return;
       var origin = { id: event.pointerId, x: event.clientX, y: event.clientY, type: event.pointerType };
       pointers.set(event.pointerId, origin);
+      if (pointers.size >= 2) {
+        pinchStart = pointerDistance();
+        zoomAtPinch = zoom;
+        dragging = true;
+        root.classList.add("is-dragging");
+        markInteract();
+        return;
+      }
+      if (orbitPointer !== null) return;
       if (event.pointerType === "mouse" || event.pointerType === "pen") beginOrbit(event);
     });
     on(canvas, "pointermove", function (event) {
       var tracked = pointers.get(event.pointerId);
       if (!tracked) return;
+      if (explore && pointers.size >= 2) {
+        pointers.set(event.pointerId, { x: event.clientX, y: event.clientY, type: tracked.type });
+        var dist = pointerDistance();
+        if (pinchStart > 0 && dist > 0) {
+          zoom = zoomAtPinch * (dist / pinchStart);
+          if (zoom < ZOOM_MIN) zoom = ZOOM_MIN;
+          if (zoom > ZOOM_MAX) zoom = ZOOM_MAX;
+          markInteract();
+          dirty = true;
+          kick();
+        }
+        return;
+      }
       if (orbitPointer === null) {
         var dx = event.clientX - tracked.x;
         var dy = event.clientY - tracked.y;
         var adx = Math.abs(dx);
         var ady = Math.abs(dy);
         if (adx < 10 && ady < 10) return;
-        if (!(adx > ady)) {
+        if (explore || adx > ady) {
+          beginOrbit(event);
+          tracked = pointers.get(event.pointerId);
+        } else {
           pointers.delete(event.pointerId);
           return;
         }
-        beginOrbit(event);
-        tracked = pointers.get(event.pointerId);
       }
       if (orbitPointer !== event.pointerId || !tracked) return;
       var prev = { x: tracked.x, y: tracked.y };
@@ -1345,6 +1390,7 @@ function createRenderer(canvas, options) {
         if (event) pointers.delete(event.pointerId);
         if (!event || orbitPointer === event.pointerId) orbitPointer = null;
       }
+      if (pointers.size < 2) pinchStart = 0;
       if (pointers.size === 0 || orbitPointer === null) {
         dragging = false;
         root.classList.remove("is-dragging");
@@ -1376,6 +1422,7 @@ function createRenderer(canvas, options) {
       start();
     });
     if (reduced.addEventListener) on(reduced, "change", function () {
+      syncFlow();
       if (reduced.matches) {
         root.classList.add("is-still");
         stop();
@@ -1403,6 +1450,7 @@ function createRenderer(canvas, options) {
     } else {
       running = true;
     }
+    syncFlow();
     if (!reduced.matches) start();
     else root.classList.add("is-still");
   }

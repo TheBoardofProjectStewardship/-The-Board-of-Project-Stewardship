@@ -1,7 +1,7 @@
 ---
 title: "Second-Story Addition Woodinville WA — Stay-in-Home Sequencing, Permits & Weatherproof-First"
 date: "2026-09-28"
-description: "Woodinville second-story addition guidance for stay-in-home sequencing, Accela permitting vs King County jurisdiction, Sammamish Valley lot context, and weatherproof-first dry-in."
+description: "Woodinville second-story addition guidance for stay-in-home sequencing, Accela permitting versus King County jurisdiction, and Sammamish Valley lots."
 category: "Additions"
 slug: "second-story-addition-woodinville-wa"
 ---

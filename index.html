@@ -12,6 +12,8 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://boardofprojectstewardship.com/">
   <meta property="og:image" content="https://boardofprojectstewardship.com/assets/hero/hero-finished.jpg">
+  <meta property="og:image:width" content="1920">
+  <meta property="og:image:height" content="1085">
   <meta property="og:image:alt" content="Illustrative Pacific Northwest home concept for Board of Project Stewardship — not a bid or stamped plan">
   <meta property="og:site_name" content="Board of Project Stewardship">
   <meta property="og:locale" content="en_US">
@@ -42,7 +44,7 @@
       height: max(560px, calc(100dvh - 4rem));
       background: #0c0c0c;
       color: #F2F2EE;
-      cursor: none;
+      cursor: auto;
       touch-action: pan-y;
     }
     @media (hover: none) {
@@ -71,6 +73,7 @@
       mask-repeat: no-repeat;
     }
     .flashlight-hero.is-flashlight .hero-layer-wire { display: block; }
+    .flashlight-hero.is-flashlight { cursor: none; }
     .flashlight-hero .hero-ambient-video {
       display: none;
       z-index: 2;
@@ -261,13 +264,17 @@
       font-weight: 600;
       letter-spacing: .14em;
       text-transform: uppercase;
-      color: rgba(242,242,238,.45);
+      color: rgba(242,242,238,.72);
       pointer-events: none;
     }
     @media (max-width: 860px) {
       .flashlight-hero {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
         height: auto;
         min-height: max(640px, calc(100dvh - 4rem));
+        padding: 1.5rem var(--hero-gutter) 3.5rem;
         cursor: auto;
       }
       .flashlight-hero .hero-cursor { display: none; }
@@ -281,7 +288,10 @@
         margin: 0 0 12px;
       }
       .flashlight-hero .hero-copy {
-        right: var(--hero-gutter);
+        position: relative;
+        left: auto;
+        right: auto;
+        bottom: auto;
         max-width: none;
       }
       .flashlight-hero .hero-scrim {
@@ -505,11 +515,11 @@
         <nav class="site-nav-desktop" aria-label="Primary">
           <a href="./" class="text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition " aria-current="page">Home</a><a href="./directory.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition ">Directories</a><a href="./locations.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition ">Locations</a><a href="./learn.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition ">Learn</a><a href="./permits.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition ">Permits</a><a href="./verify-contractor.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition ">Verify</a><a href="./how-we-rank.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition ">How we rank</a><a href="./blog.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition ">Blog</a><a href="./plan-walkthrough/" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition ">3D Walkthrough</a>
           <div class="relative">
-            <button type="button" id="more-toggle" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest transition inline-flex items-center gap-1" aria-expanded="false" aria-controls="more-dropdown" aria-haspopup="true">
+            <button type="button" id="more-toggle" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest transition inline-flex items-center gap-1" aria-expanded="false" aria-controls="more-dropdown">
               More <span aria-hidden="true">▾</span>
             </button>
-            <div id="more-dropdown" class="absolute right-0 mt-2 w-72 max-h-[70vh] overflow-y-auto rounded-lg border border-white/10 bg-charcoal shadow-xl py-2 z-50" role="menu">
-              <p class="px-4 pt-1 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Site</p><a href="./about.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">About</a><a href="./stamp-of-trust/" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Stamp of Trust</a><p class="px-4 pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Directories</p><a href="./additions.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Additions</a><a href="./custom-homes.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Custom Homes</a><a href="./edmonds-custom-homes.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Edmonds custom homes</a><a href="./kitchen.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Kitchen</a><a href="./bathrooms.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Bathrooms</a><a href="./restoration.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Restoration</a><a href="./commercial.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Commercial</a><a href="./spec-homes.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Spec</a><a href="./trades.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Trades</a><p class="px-4 pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Tools</p><a href="./faq.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">FAQ</a><a href="./adu.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Edmonds ADU</a><a href="./contact.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Contact</a><a href="./privacy.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Privacy</a><a href="./good-steward.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Good Steward</a><a href="./floor-plan-3d.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Floor Plan to 3D</a><a href="./plan-walkthrough/" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Plan Walkthrough</a><a href="./learn/" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">How a house is built</a><a href="./pascal-editor.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Pascal Editor Sketch</a><a href="./hire-questions.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Hire Questions</a><a href="./hiring-a-contractor.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Hiring a Contractor</a><a href="./kitchen-remodel-planning.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Kitchen Remodel Planning</a><a href="./bathroom-waterproofing-guide.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Bathroom Waterproofing</a><a href="./home-addition-planning.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Home Addition Planning</a><a href="./glossary.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Glossary</a><a href="./another-story.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5"  role="menuitem">Another Story · Board feature</a>
+            <div id="more-dropdown" class="absolute right-0 mt-2 w-72 max-h-[70vh] overflow-y-auto rounded-lg border border-white/10 bg-charcoal shadow-xl py-2 z-50" hidden>
+              <p class="px-4 pt-1 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-400">Site</p><a href="./about.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5" >About</a><a href="./stamp-of-trust/" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5" >Stamp of Trust</a><p class="px-4 pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-400">Directories</p><a href="./additions.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5" >Additions</a><a href="./custom-homes.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5" >Custom Homes</a><a href="./edmonds-custom-homes.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5" >Edmonds custom homes</a><a href="./kitchen.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5" >Kitchen</a><a href="./bathrooms.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5" >Bathrooms</a><a href="./restoration.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5" >Restoration</a><a href="./commercial.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5" >Commercial</a><a href="./spec-homes.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5" >Spec</a><a href="./trades.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5" >Trades</a><p class="px-4 pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-400">Tools</p><a href="./faq.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5" >FAQ</a><a href="./adu.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5" >Edmonds ADU</a><a href="./contact.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5" >Contact</a><a href="./privacy.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5" >Privacy</a><a href="./good-steward.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5" >Good Steward</a><a href="./floor-plan-3d.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5" >Floor Plan to 3D</a><a href="./plan-walkthrough/" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5" >Plan Walkthrough</a><a href="./learn/" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5" >How a house is built</a><a href="./pascal-editor.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5" >Pascal Editor Sketch</a><a href="./hire-questions.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5" >Hire Questions</a><a href="./hiring-a-contractor.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5" >Hiring a Contractor</a><a href="./kitchen-remodel-planning.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5" >Kitchen Remodel Planning</a><a href="./bathroom-waterproofing-guide.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5" >Bathroom Waterproofing</a><a href="./home-addition-planning.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5" >Home Addition Planning</a><a href="./glossary.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5" >Glossary</a><a href="./another-story.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-slate-300 hover:text-secondary hover:bg-white/5" >Another Story · Board feature</a>
             </div>
           </div>
           <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="hidden lg:inline-flex items-center gap-1 ml-1 px-2.5 py-1 rounded border border-secondary/40 text-[10px] font-bold uppercase tracking-widest text-secondary hover:bg-secondary/10 transition" title="Board directory #1 hire ranking">Board #1 · PPG<span class="sr-only"> — Pacific Pro Group (opens in new window)</span></a>
@@ -518,17 +528,17 @@
           <span class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></span>
         </button>
       </div>
-      <form class="site-search-desktop" action="/search.html" method="get" role="search">
+      <form class="site-search-desktop" action="./search.html" method="get" role="search">
         <label class="sr-only" for="header-q">Search</label>
         <input id="header-q" name="q" type="search" placeholder="Search" autocomplete="off">
       </form>
     </div>
-    <nav id="mobile-nav" class="border-t border-white/10 bg-charcoal/95 px-4 pb-4" aria-label="Mobile">
-      <form class="site-search-mobile" action="/search.html" method="get" role="search">
+    <nav id="mobile-nav" class="border-t border-white/10 bg-charcoal/95 px-4 pb-4" aria-label="Mobile" hidden>
+      <form class="site-search-mobile" action="./search.html" method="get" role="search">
         <label class="sr-only" for="mobile-q">Search</label>
         <input id="mobile-q" name="q" type="search" placeholder="Search the site" autocomplete="off">
       </form>
-      <a href="./" class="text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2" aria-current="page">Home</a><a href="./directory.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Directories</a><a href="./locations.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Locations</a><a href="./learn.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Learn</a><a href="./permits.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Permits</a><a href="./verify-contractor.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Verify</a><a href="./how-we-rank.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">How we rank</a><a href="./blog.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Blog</a><a href="./plan-walkthrough/" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">3D Walkthrough</a><p class="pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Site</p><a href="./about.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">About</a><a href="./stamp-of-trust/" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Stamp of Trust</a><p class="pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Directories</p><a href="./additions.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Additions</a><a href="./custom-homes.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Custom Homes</a><a href="./edmonds-custom-homes.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Edmonds custom homes</a><a href="./kitchen.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Kitchen</a><a href="./bathrooms.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Bathrooms</a><a href="./restoration.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Restoration</a><a href="./commercial.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Commercial</a><a href="./spec-homes.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Spec</a><a href="./trades.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Trades</a><p class="pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">Tools</p><a href="./faq.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">FAQ</a><a href="./adu.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Edmonds ADU</a><a href="./contact.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Contact</a><a href="./privacy.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Privacy</a><a href="./good-steward.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Good Steward</a><a href="./floor-plan-3d.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Floor Plan to 3D</a><a href="./plan-walkthrough/" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Plan Walkthrough</a><a href="./learn/" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">How a house is built</a><a href="./pascal-editor.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Pascal Editor Sketch</a><a href="./hire-questions.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Hire Questions</a><a href="./hiring-a-contractor.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Hiring a Contractor</a><a href="./kitchen-remodel-planning.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Kitchen Remodel Planning</a><a href="./bathroom-waterproofing-guide.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Bathroom Waterproofing</a><a href="./home-addition-planning.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Home Addition Planning</a><a href="./glossary.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Glossary</a><a href="./another-story.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Another Story · Board feature</a>
+      <a href="./" class="text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2" aria-current="page">Home</a><a href="./directory.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Directories</a><a href="./locations.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Locations</a><a href="./learn.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Learn</a><a href="./permits.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Permits</a><a href="./verify-contractor.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Verify</a><a href="./how-we-rank.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">How we rank</a><a href="./blog.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Blog</a><a href="./plan-walkthrough/" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">3D Walkthrough</a><p class="pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-400">Site</p><a href="./about.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">About</a><a href="./stamp-of-trust/" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Stamp of Trust</a><p class="pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-400">Directories</p><a href="./additions.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Additions</a><a href="./custom-homes.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Custom Homes</a><a href="./edmonds-custom-homes.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Edmonds custom homes</a><a href="./kitchen.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Kitchen</a><a href="./bathrooms.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Bathrooms</a><a href="./restoration.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Restoration</a><a href="./commercial.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Commercial</a><a href="./spec-homes.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Spec</a><a href="./trades.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Trades</a><p class="pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-slate-400">Tools</p><a href="./faq.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">FAQ</a><a href="./adu.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Edmonds ADU</a><a href="./contact.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Contact</a><a href="./privacy.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Privacy</a><a href="./good-steward.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Good Steward</a><a href="./floor-plan-3d.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Floor Plan to 3D</a><a href="./plan-walkthrough/" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Plan Walkthrough</a><a href="./learn/" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">How a house is built</a><a href="./pascal-editor.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Pascal Editor Sketch</a><a href="./hire-questions.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Hire Questions</a><a href="./hiring-a-contractor.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Hiring a Contractor</a><a href="./kitchen-remodel-planning.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Kitchen Remodel Planning</a><a href="./bathroom-waterproofing-guide.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Bathroom Waterproofing</a><a href="./home-addition-planning.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Home Addition Planning</a><a href="./glossary.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Glossary</a><a href="./another-story.html" class="text-slate-300 hover:text-secondary font-medium text-xs uppercase tracking-widest whitespace-nowrap transition block py-2">Another Story · Board feature</a>
     </nav>
   </header>
 <main id="main-content">
@@ -688,9 +698,9 @@
     <div class="see-project-inner">
       <div class="see-stepper" role="tablist" aria-label="Steps">
         <button type="button" class="see-stepper-btn" id="see-stepper-photo" role="tab" aria-selected="true" aria-controls="see-flow-photo" data-flow="photo">1 Photo</button>
-        <button type="button" class="see-stepper-btn" id="see-stepper-project" role="tab" aria-selected="false" aria-controls="see-flow-project" data-flow="project">2 Project</button>
-        <button type="button" class="see-stepper-btn" id="see-stepper-see" role="tab" aria-selected="false" aria-controls="see-result" data-flow="preview">3 Preview</button>
-        <button type="button" class="see-stepper-btn" id="see-stepper-request" role="tab" aria-selected="false" aria-controls="see-lead" data-flow="request">4 Request</button>
+        <button type="button" class="see-stepper-btn" id="see-stepper-project" role="tab" aria-selected="false" tabindex="-1" aria-controls="see-flow-project" data-flow="project">2 Project</button>
+        <button type="button" class="see-stepper-btn" id="see-stepper-see" role="tab" aria-selected="false" tabindex="-1" aria-controls="see-result" data-flow="preview">3 Preview</button>
+        <button type="button" class="see-stepper-btn" id="see-stepper-request" role="tab" aria-selected="false" tabindex="-1" aria-controls="see-lead" data-flow="request">4 Request</button>
       </div>
       <div class="see-hero" id="see-hero">
         <div class="see-hero-copy">
@@ -699,16 +709,16 @@
           <p class="see-dek">Upload a photo of your house, kitchen or bathroom and explore a concept for your addition or remodel.</p>
           <p class="see-note">No email or phone required for your first preview.</p>
           <div class="see-tabs" role="tablist" aria-label="Project type">
-            <button type="button" class="see-tab" id="see-tab-addition" role="tab" aria-selected="true" aria-controls="see-panel-addition" data-mode="addition">Addition</button>
-            <button type="button" class="see-tab" id="see-tab-kitchen" role="tab" aria-selected="false" tabindex="-1" aria-controls="see-panel-kitchen" data-mode="kitchen">Kitchen</button>
-            <button type="button" class="see-tab" id="see-tab-bathroom" role="tab" aria-selected="false" tabindex="-1" aria-controls="see-panel-bathroom" data-mode="bathroom">Bathroom</button>
+            <button type="button" class="see-tab" id="see-tab-addition" role="tab" aria-selected="true" aria-controls="see-sample-addition" data-mode="addition">Addition</button>
+            <button type="button" class="see-tab" id="see-tab-kitchen" role="tab" aria-selected="false" tabindex="-1" aria-controls="see-sample-kitchen" data-mode="kitchen">Kitchen</button>
+            <button type="button" class="see-tab" id="see-tab-bathroom" role="tab" aria-selected="false" tabindex="-1" aria-controls="see-sample-bathroom" data-mode="bathroom">Bathroom</button>
           </div>
           <div id="see-flow-photo" class="see-flow-panel" role="tabpanel" aria-labelledby="see-stepper-photo">
             <div class="see-drop" id="see-drop">
               <p class="see-drop-title">Choose a photo of your house or room.</p>
               <p id="see-photo-tip" class="see-fine">Straight-on curbside photo. JPEG, PNG, or WebP, up to 8 MB.</p>
               <label class="see-btn see-file-btn" id="see-file-label" for="see-file"><span id="see-file-label-text">Upload my photo</span>
-                <input id="see-file" class="see-file" type="file" accept="image/jpeg,image/png,image/webp" capture="environment">
+                <input id="see-file" class="see-file" type="file" accept="image/jpeg,image/png,image/webp">
               </label>
               <div id="see-preview" class="see-preview" hidden></div>
             </div>
@@ -825,8 +835,8 @@
           </noscript>
         </div>
         <figure class="see-stage" id="see-sample">
-          <div class="see-compare" data-sample="addition">
-            <div class="see-compare-frame" id="see-sample-frame-addition">
+          <div class="see-compare" id="see-sample-addition" data-sample="addition" role="tabpanel" aria-labelledby="see-tab-addition">
+            <div class="see-compare-frame" id="see-sample-frame-addition" role="group" aria-labelledby="see-tab-addition">
               <picture>
                 <source type="image/webp" srcset="./assets/images/visualizer/exterior-after-800.webp 800w, ./assets/images/visualizer/exterior-after.webp 1600w" sizes="(max-width: 960px) 100vw, 680px">
                 <img class="see-compare-after" src="./assets/images/visualizer/exterior-after.jpg" alt="Sample — illustrative. Two-story concept of the same house. Not a Pacific Pro Group project." width="1600" height="1075" loading="eager" fetchpriority="high">
@@ -839,12 +849,12 @@
               <p class="see-tag see-tag-after">Concept</p>
               <span class="see-handle" aria-hidden="true"></span>
               <label class="see-range see-range-overlay" for="see-sample-range-addition"><span class="see-sr">Drag to compare. Use arrow keys to move the handle.</span>
-                <input id="see-sample-range-addition" data-range="see-sample-frame-addition" type="range" min="0" max="100" value="50" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+                <input id="see-sample-range-addition" data-range="see-sample-frame-addition" type="range" min="0" max="100" value="50">
               </label>
             </div>
           </div>
-          <div class="see-compare" data-sample="kitchen" hidden>
-            <div class="see-compare-frame" id="see-sample-frame-kitchen">
+          <div class="see-compare" id="see-sample-kitchen" data-sample="kitchen" role="tabpanel" aria-labelledby="see-tab-kitchen" hidden>
+            <div class="see-compare-frame" id="see-sample-frame-kitchen" role="group" aria-labelledby="see-tab-kitchen">
               <picture>
                 <source type="image/webp" srcset="./assets/images/visualizer/kitchen-after.webp">
                 <img class="see-compare-after" src="./assets/images/visualizer/kitchen-after.jpg" alt="Sample — illustrative. The same kitchen after a remodel concept. Not a Pacific Pro Group project." width="1600" height="1075" data-defer-lcp loading="lazy">
@@ -857,12 +867,12 @@
               <p class="see-tag see-tag-after">Concept</p>
               <span class="see-handle" aria-hidden="true"></span>
               <label class="see-range see-range-overlay" for="see-sample-range-kitchen"><span class="see-sr">Drag to compare. Use arrow keys to move the handle.</span>
-                <input id="see-sample-range-kitchen" data-range="see-sample-frame-kitchen" type="range" min="0" max="100" value="50" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+                <input id="see-sample-range-kitchen" data-range="see-sample-frame-kitchen" type="range" min="0" max="100" value="50">
               </label>
             </div>
           </div>
-          <div class="see-compare" data-sample="bathroom" hidden>
-            <div class="see-compare-frame" id="see-sample-frame-bathroom">
+          <div class="see-compare" id="see-sample-bathroom" data-sample="bathroom" role="tabpanel" aria-labelledby="see-tab-bathroom" hidden>
+            <div class="see-compare-frame" id="see-sample-frame-bathroom" role="group" aria-labelledby="see-tab-bathroom">
               <picture>
                 <source type="image/webp" srcset="./assets/images/visualizer/bathroom-after.webp">
                 <img class="see-compare-after" src="./assets/images/visualizer/bathroom-after.jpg" alt="Sample — illustrative. The same bathroom after a remodel concept. Not a Pacific Pro Group project." width="1600" height="1075" data-defer-lcp loading="lazy">
@@ -875,7 +885,7 @@
               <p class="see-tag see-tag-after">Concept</p>
               <span class="see-handle" aria-hidden="true"></span>
               <label class="see-range see-range-overlay" for="see-sample-range-bathroom"><span class="see-sr">Drag to compare. Use arrow keys to move the handle.</span>
-                <input id="see-sample-range-bathroom" data-range="see-sample-frame-bathroom" type="range" min="0" max="100" value="50" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+                <input id="see-sample-range-bathroom" data-range="see-sample-frame-bathroom" type="range" min="0" max="100" value="50">
               </label>
             </div>
           </div>
@@ -884,19 +894,19 @@
         </figure>
       </div>
       <p id="see-status" class="see-status" role="status" aria-live="polite"></p>
-      <div id="see-result" class="see-result" hidden>
+      <div id="see-result" class="see-result" role="tabpanel" aria-labelledby="see-stepper-see" hidden>
         <h2>Concept preview</h2>
         <p class="see-fine">Sample — illustrative. Not a Pacific Pro Group project. This is not a concept of your photo.</p>
         <p class="see-fine">Concept only. Structure, setbacks, permits and cost need separate review.</p>
         <div class="see-compare">
           <div class="see-compare-frame" id="see-result-frame">
-            <img id="see-result-after" class="see-compare-after" alt="Concept picture. Empty until a sample is ready." width="1600" height="1075" data-defer-lcp>
-            <img id="see-result-before" class="see-compare-before" alt="Before picture. Empty until a sample is ready." width="1600" height="1075" data-defer-lcp>
+            <img id="see-result-after" class="see-compare-after" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=" alt="" width="1600" height="1075" data-defer-lcp loading="lazy">
+            <img id="see-result-before" class="see-compare-before" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=" alt="" width="1600" height="1075" data-defer-lcp loading="lazy">
             <p class="see-tag see-tag-before">Before</p>
             <p class="see-tag see-tag-after">Concept</p>
             <span class="see-handle" aria-hidden="true"></span>
             <label class="see-range see-range-overlay" for="see-result-range"><span class="see-sr">Drag to compare. Use arrow keys to move the handle.</span>
-              <input id="see-result-range" data-range="see-result-frame" type="range" min="0" max="100" value="50" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+              <input id="see-result-range" data-range="see-result-frame" type="range" min="0" max="100" value="50">
             </label>
           </div>
         </div>
@@ -906,10 +916,10 @@
         </div>
         <p class="see-learn-row"><a id="see-learn-link" href="./home-addition-planning.html">Home addition planning</a></p>
       </div>
-      <div id="see-lead" class="see-lead" hidden>
+      <div id="see-lead" class="see-lead" role="tabpanel" aria-labelledby="see-stepper-request" hidden>
         <p class="see-fine">A request goes to Pacific Pro Group only after you submit and check the sharing box.</p>
         <form id="see-lead-form" action="#" method="post" onsubmit="event.preventDefault()">
-          <input class="see-hp" tabindex="-1" autocomplete="off" name="company_website" aria-hidden="true" value="">
+          <input class="see-hp" tabindex="-1" autocomplete="off" name="company_website" aria-hidden="true" aria-label="Leave this field blank" value="">
           <input type="hidden" name="consent_text_version" value="2026-10-11.1">
           <input type="hidden" name="mode" id="see-mode-field" value="addition">
           <input type="hidden" name="turnstile_token" id="see-turnstile" value="">
@@ -1163,15 +1173,15 @@
       </div>
       <div class="grid md:grid-cols-3 gap-4 mb-6">
         <div class="bg-charcoal border border-white/10 rounded-xl p-6">
-          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-filter text-secondary mr-2"></i>Standards over lead-gen</h3>
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-filter text-secondary mr-2" aria-hidden="true"></i>Standards over lead-gen</h3>
           <p class="text-sm text-slate-400 font-light leading-relaxed">Directories emphasize editorial fit for King County, Snohomish County, and Seattle — not whoever bought the top ad slot.</p>
         </div>
         <div class="bg-charcoal border border-white/10 rounded-xl p-6">
-          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-clipboard-list text-secondary mr-2"></i>Tools that travel with you</h3>
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-clipboard-list text-secondary mr-2" aria-hidden="true"></i>Tools that travel with you</h3>
           <p class="text-sm text-slate-400 font-light leading-relaxed">Good Steward checklists keep discovery notes and phase status in your browser — useful with any licensed GC.</p>
         </div>
         <div class="bg-charcoal border border-white/10 rounded-xl p-6">
-          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-shield-halved text-secondary mr-2"></i>Verify before you hire</h3>
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-shield-halved text-secondary mr-2" aria-hidden="true"></i>Verify before you hire</h3>
           <p class="text-sm text-slate-400 font-light leading-relaxed">Every ranking page points you back to <a href="https://secure.lni.wa.gov/verify/" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> before deposits or demolition.</p>
         </div>
       </div>
@@ -1194,7 +1204,7 @@
           <img src="./assets/images/home-process-research-800.webp" alt="Illustrative: editorial photo of plans and research materials for Board process" class="w-full h-36 object-cover rounded-lg border border-white/10 mb-4" width="800" height="450" loading="lazy" data-defer-lcp srcset="./assets/images/home-process-research-480.webp 480w, ./assets/images/home-process-research-800.webp 800w, ./assets/images/home-process-research-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
           <div class="flex items-center gap-3 mb-3">
             <span class="text-secondary font-black text-sm tracking-widest">01</span>
-            <i class="fas fa-magnifying-glass-chart text-secondary"></i>
+            <i class="fas fa-magnifying-glass-chart text-secondary" aria-hidden="true"></i>
             <h3 class="text-lg font-black text-white tracking-tight">Research</h3>
           </div>
           <p class="text-sm text-slate-400 font-light leading-relaxed">Study how additions and remodels actually run across King County, Snohomish County, and Seattle — AHJ norms, coastal detailing, and stay-in-home vs vacate patterns.</p>
@@ -1203,7 +1213,7 @@
           <img src="./assets/images/home-process-verify-800.webp" alt="Illustrative: verification and standards-check visual for Board editorial" class="w-full h-36 object-cover rounded-lg border border-white/10 mb-4" width="800" height="450" loading="lazy" data-defer-lcp srcset="./assets/images/home-process-verify-480.webp 480w, ./assets/images/home-process-verify-800.webp 800w, ./assets/images/home-process-verify-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
           <div class="flex items-center gap-3 mb-3">
             <span class="text-secondary font-black text-sm tracking-widest">02</span>
-            <i class="fas fa-id-card text-secondary"></i>
+            <i class="fas fa-id-card text-secondary" aria-hidden="true"></i>
             <h3 class="text-lg font-black text-white tracking-tight">Verify</h3>
           </div>
           <p class="text-sm text-slate-400 font-light leading-relaxed">Cross-check public WA L&amp;I signals and third-party review aggregates. Prefer firms homeowners can re-verify themselves before a deposit.</p>
@@ -1212,7 +1222,7 @@
           <img src="./assets/images/home-process-build-800.webp" alt="Illustrative: Pacific Northwest home addition construction for Board editorial" class="w-full h-36 object-cover rounded-lg border border-white/10 mb-4" width="800" height="450" loading="lazy" data-defer-lcp srcset="./assets/images/home-process-build-480.webp 480w, ./assets/images/home-process-build-800.webp 800w, ./assets/images/home-process-build-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
           <div class="flex items-center gap-3 mb-3">
             <span class="text-secondary font-black text-sm tracking-widest">03</span>
-            <i class="fas fa-house-chimney-window text-secondary"></i>
+            <i class="fas fa-house-chimney-window text-secondary" aria-hidden="true"></i>
             <h3 class="text-lg font-black text-white tracking-tight">Local mastery</h3>
           </div>
           <p class="text-sm text-slate-400 font-light leading-relaxed">Weight local height limits, critical areas, and coastal weather sequencing — including Edmonds Bowl rules where they apply — not generic statewide marketing claims.</p>
@@ -1221,7 +1231,7 @@
           <img src="./assets/images/home-process-shortlist-800.webp" alt="Illustrative: curated shortlist / directory editorial photo" class="w-full h-36 object-cover rounded-lg border border-white/10 mb-4" width="800" height="450" loading="lazy" data-defer-lcp srcset="./assets/images/home-process-shortlist-480.webp 480w, ./assets/images/home-process-shortlist-800.webp 800w, ./assets/images/home-process-shortlist-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
           <div class="flex items-center gap-3 mb-3">
             <span class="text-secondary font-black text-sm tracking-widest">04</span>
-            <i class="fas fa-list-check text-secondary"></i>
+            <i class="fas fa-list-check text-secondary" aria-hidden="true"></i>
             <h3 class="text-lg font-black text-white tracking-tight">Editorial shortlist</h3>
           </div>
           <p class="text-sm text-slate-400 font-light leading-relaxed">Publish ranked directories and field guides so homeowners can compare firms against standards — not paid placement.</p>
@@ -1237,31 +1247,31 @@
       </div>
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
         <div class="bg-charcoal border border-white/10 rounded-xl p-5">
-          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-id-card text-secondary mr-2"></i>Verify WA L&amp;I</h3>
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-id-card text-secondary mr-2" aria-hidden="true"></i>Verify WA L&amp;I</h3>
           <p class="text-sm text-slate-400 font-light leading-relaxed">Confirm active contractor license, bonding, and insurance on <a href="https://secure.lni.wa.gov/verify/" target="_blank" rel="noopener" class="text-secondary hover:underline">L&amp;I Verify</a> before any deposit or start date.</p>
         </div>
         <div class="bg-charcoal border border-white/10 rounded-xl p-5">
-          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-file-contract text-secondary mr-2"></i>Written scope</h3>
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-file-contract text-secondary mr-2" aria-hidden="true"></i>Written scope</h3>
           <p class="text-sm text-slate-400 font-light leading-relaxed">Insist on a written scope of work, allowances, and exclusions — not a handshake estimate — before demolition or ordering long-lead materials.</p>
         </div>
         <div class="bg-charcoal border border-white/10 rounded-xl p-5">
-          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-user-tie text-secondary mr-2"></i>One steward contact</h3>
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-user-tie text-secondary mr-2" aria-hidden="true"></i>One steward contact</h3>
           <p class="text-sm text-slate-400 font-light leading-relaxed">Name a single project steward for decisions and schedule. Avoid salesman-to-crew handoffs with no continuity.</p>
         </div>
         <div class="bg-charcoal border border-white/10 rounded-xl p-5">
-          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-stamp text-secondary mr-2"></i>Permit ownership</h3>
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-stamp text-secondary mr-2" aria-hidden="true"></i>Permit ownership</h3>
           <p class="text-sm text-slate-400 font-light leading-relaxed">Know who pulls and owns each permit, who schedules inspections, and how corrections are closed before cover-up.</p>
         </div>
         <div class="bg-charcoal border border-white/10 rounded-xl p-5">
-          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-exchange-alt text-secondary mr-2"></i>Change-order discipline</h3>
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-exchange-alt text-secondary mr-2" aria-hidden="true"></i>Change-order discipline</h3>
           <p class="text-sm text-slate-400 font-light leading-relaxed">Require written change orders with price and schedule impact before extra work starts — no verbal “we’ll figure it out.”</p>
         </div>
         <div class="bg-charcoal border border-white/10 rounded-xl p-5">
-          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-cloud-rain text-secondary mr-2"></i>Weather &amp; dry-in</h3>
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-cloud-rain text-secondary mr-2" aria-hidden="true"></i>Weather &amp; dry-in</h3>
           <p class="text-sm text-slate-400 font-light leading-relaxed">For additions and roof work, demand a dry-in plan: temporary weather protection, sequencing, and moisture checks before finishes.</p>
         </div>
         <div class="bg-charcoal border border-white/10 rounded-xl p-5 sm:col-span-2 lg:col-span-3">
-          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-clipboard-check text-secondary mr-2"></i>Punch list before final pay</h3>
+          <h3 class="text-base font-black text-white mb-2"><i class="fas fa-clipboard-check text-secondary mr-2" aria-hidden="true"></i>Punch list before final pay</h3>
           <p class="text-sm text-slate-400 font-light leading-relaxed">Walk a written punch list with photos, retain final payment until items are closed, and keep manuals/warranty contacts with the project file.</p>
         </div>
       </div>
@@ -1281,7 +1291,7 @@
         <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-08-12-hire-kitchen-remodeler-king-snohomish.html" class="text-secondary hover:underline font-semibold">Hire a kitchen remodeler (King &amp; Snohomish)</a> — shortlist habits before cabinet day.</li>
         <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-09-07-adu-planning-edmonds-wa.html" class="text-secondary hover:underline font-semibold">ADU planning Edmonds WA</a> — parcel and portal honesty before stock plans.</li>
       </ul>
-      <p class="text-sm text-slate-500 font-light mt-4"><a href="./blog.html" class="text-secondary hover:underline">Browse the full blog</a> · <a href="./learn.html" class="text-secondary hover:underline">Learn hub</a> · <a href="./how-we-rank.html" class="text-secondary hover:underline">How we rank</a></p>
+      <p class="text-sm text-slate-400 font-light mt-4"><a href="./blog.html" class="text-secondary hover:underline">Browse the full blog</a> · <a href="./learn.html" class="text-secondary hover:underline">Learn hub</a> · <a href="./how-we-rank.html" class="text-secondary hover:underline">How we rank</a></p>
     </section>
 
     <section class="mb-14" id="learn">
@@ -1317,7 +1327,7 @@
         </div>
       </div>
       <p class="text-sm text-slate-400 font-light mb-3"><a href="./learn.html" class="text-secondary hover:underline font-semibold">Browse the full Learn hub</a> — permits, ADU, verify, checklists, stewardship layers, glossary, videos, and Good Steward tools.</p>
-      <p class="text-sm text-slate-500 font-light">City hubs: <a href="./edmonds.html" class="text-secondary hover:underline">Edmonds</a> · <a href="./greenwood.html" class="text-secondary hover:underline">Greenwood</a> · <a href="./lake-forest-park.html" class="text-secondary hover:underline">Lake Forest Park</a> · <a href="./mountlake-terrace.html" class="text-secondary hover:underline">Mountlake Terrace</a> · <a href="./mill-creek.html" class="text-secondary hover:underline">Mill Creek</a> · <a href="./mukilteo.html" class="text-secondary hover:underline">Mukilteo</a> · <a href="./kirkland.html" class="text-secondary hover:underline">Kirkland</a> · <a href="./bothell.html" class="text-secondary hover:underline">Bothell</a> · <a href="./queen-anne.html" class="text-secondary hover:underline">Queen Anne</a> · <a href="./phinney-ridge.html" class="text-secondary hover:underline">Phinney Ridge</a> · <a href="./shoreline.html" class="text-secondary hover:underline">Shoreline</a> · <a href="./lynnwood.html" class="text-secondary hover:underline">Lynnwood</a> · <a href="./ballard.html" class="text-secondary hover:underline">Ballard</a> · <a href="./magnolia.html" class="text-secondary hover:underline">Magnolia</a></p>
+      <p class="text-sm text-slate-400 font-light">City hubs: <a href="./edmonds.html" class="text-secondary hover:underline">Edmonds</a> · <a href="./greenwood.html" class="text-secondary hover:underline">Greenwood</a> · <a href="./lake-forest-park.html" class="text-secondary hover:underline">Lake Forest Park</a> · <a href="./mountlake-terrace.html" class="text-secondary hover:underline">Mountlake Terrace</a> · <a href="./mill-creek.html" class="text-secondary hover:underline">Mill Creek</a> · <a href="./mukilteo.html" class="text-secondary hover:underline">Mukilteo</a> · <a href="./kirkland.html" class="text-secondary hover:underline">Kirkland</a> · <a href="./bothell.html" class="text-secondary hover:underline">Bothell</a> · <a href="./queen-anne.html" class="text-secondary hover:underline">Queen Anne</a> · <a href="./phinney-ridge.html" class="text-secondary hover:underline">Phinney Ridge</a> · <a href="./shoreline.html" class="text-secondary hover:underline">Shoreline</a> · <a href="./lynnwood.html" class="text-secondary hover:underline">Lynnwood</a> · <a href="./ballard.html" class="text-secondary hover:underline">Ballard</a> · <a href="./magnolia.html" class="text-secondary hover:underline">Magnolia</a></p>
     </section>
 
     <section class="bg-charcoal rounded-xl p-8 md:p-10 border border-primary/25 mb-14 relative overflow-hidden">
@@ -1325,7 +1335,7 @@
       <div class="relative z-10 md:flex md:items-center md:justify-between gap-8">
         <div class="mb-6 md:mb-0">
           <span class="text-secondary font-bold text-xs uppercase tracking-[0.15em] flex items-center mb-3">
-            <i class="fas fa-map-location-dot mr-2"></i> Edmonds directory
+            <i class="fas fa-map-location-dot mr-2" aria-hidden="true"></i> Edmonds directory
           </span>
           <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-3">Edmonds custom home builders</h2>
           <p class="text-slate-300 font-light leading-relaxed max-w-2xl">
@@ -1334,7 +1344,7 @@
           </p>
         </div>
         <a href="./edmonds-custom-homes.html" class="shrink-0 bg-primary text-white text-center py-3.5 px-6 rounded font-bold hover:bg-emerald-700 transition shadow-glow-sleek uppercase tracking-wider text-sm whitespace-nowrap">
-          Open Edmonds directory <i class="fas fa-arrow-right ml-1 text-xs"></i>
+          Open Edmonds directory <i class="fas fa-arrow-right ml-1 text-xs" aria-hidden="true"></i>
         </a>
       </div>
     </section>
@@ -1547,7 +1557,7 @@
           <figcaption class="px-2 py-1.5 text-xs text-slate-300 font-light leading-snug">Finished house and steward contacts</figcaption>
         </figure>
       </div>
-      <p class="text-[11px] text-slate-600 mt-2 leading-relaxed">Illustrative stages for homeowners — not a bid, permit set, or schedule commitment.</p>
+      <p class="text-[11px] text-slate-400 mt-2 leading-relaxed">Illustrative stages for homeowners — not a bid, permit set, or schedule commitment.</p>
     </div>
   </section>
 
@@ -1618,10 +1628,10 @@
       </div>
       <div class="grid lg:grid-cols-3 gap-4">
         <div class="bg-charcoal border border-white/10 rounded-xl p-6">
-          <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-clipboard-list text-secondary"></i> Project Factor Guide</h3>
-          <p class="text-xs text-slate-500 mb-4 font-light">Educational planning checklist — <strong class="text-slate-300 font-semibold">not a bid</strong>, not market pricing, and <strong class="text-slate-300 font-semibold">not Pacific Pro Group pricing</strong>. Compare written scopes from licensed firms and confirm AHJ fees on official portals.</p>
+          <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-clipboard-list text-secondary" aria-hidden="true"></i> Project Factor Guide</h3>
+          <p class="text-xs text-slate-400 mb-4 font-light">Educational planning checklist — <strong class="text-slate-300 font-semibold">not a bid</strong>, not market pricing, and <strong class="text-slate-300 font-semibold">not Pacific Pro Group pricing</strong>. Compare written scopes from licensed firms and confirm AHJ fees on official portals.</p>
           <label class="block text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-1" for="calc-scope">Project scope</label>
-          <select id="calc-scope" class="w-full mb-3 bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
+          <select id="calc-scope" class="w-full mb-3 bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary">
             <option value="kitchen">Kitchen remodel</option>
             <option value="bath">Bathroom remodel</option>
             <option value="addition" selected>Home addition</option>
@@ -1629,25 +1639,25 @@
             <option value="custom">Custom / whole-home</option>
           </select>
           <label class="block text-[11px] uppercase tracking-wider text-slate-400 font-bold mb-1" for="calc-drivers">Complexity drivers to discuss with bidders</label>
-          <select id="calc-drivers" class="w-full mb-4 bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:border-secondary">
+          <select id="calc-drivers" class="w-full mb-4 bg-black/40 border border-white/15 rounded px-3 py-2.5 text-white text-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary">
             <option value="site">Site access, drainage, coastal exposure</option>
             <option value="structure" selected>Structure, openings, second-story loads</option>
             <option value="finish">Finish level and fixture lead times</option>
             <option value="ahj">Permit path / AHJ review intensity</option>
           </select>
           <div class="bg-white/5 border border-white/10 rounded-lg px-4 py-3">
-            <div class="text-[10px] uppercase tracking-wider text-slate-500 font-bold">Board guidance</div>
+            <div class="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Board guidance</div>
             <div id="calc-result" class="text-sm font-light text-slate-300 mt-1 leading-relaxed">Pick a scope and driver to see what to ask in bids — dollar totals belong on contractor proposals, not this page.</div>
           </div>
-          <p class="text-[11px] text-slate-500 mt-3 font-light"><a href="./remodel-cost-factors.html" class="text-secondary hover:underline">Cost-factor guides</a> · <a href="./permits.html" class="text-secondary hover:underline">Permit hub</a> · <a href="./hire-questions.html" class="text-secondary hover:underline">Hire questions</a></p>
+          <p class="text-[11px] text-slate-400 mt-3 font-light"><a href="./remodel-cost-factors.html" class="text-secondary hover:underline">Cost-factor guides</a> · <a href="./permits.html" class="text-secondary hover:underline">Permit hub</a> · <a href="./hire-questions.html" class="text-secondary hover:underline">Hire questions</a></p>
         </div>
         <div class="bg-charcoal border border-white/10 rounded-xl p-6">
-          <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-trophy text-secondary"></i> Directory #1</h3>
+          <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-trophy text-secondary" aria-hidden="true"></i> Directory #1</h3>
           <p id="independence-disclosure" class="text-sm text-slate-400 font-light leading-relaxed mb-4">The Board ranks <strong class="text-white font-semibold">Pacific Pro Group</strong> #1 for remodel and additions across King County, Snohomish County, and Seattle. Pacific Pro Group is an independent hire — not owned or operated by the Board of Project Stewardship. Outbound only; re-verify at WA L&amp;I before any deposit.</p>
           <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="inline-flex w-full items-center justify-center gap-2 bg-primary text-white py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs mb-4">
-            View Pacific Pro Group (directory #1) <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+            View Pacific Pro Group (directory #1) <i class="fas fa-arrow-up-right-from-square text-[10px]" aria-hidden="true"></i>
           </a>
-          <p class="text-[11px] text-slate-500 font-light leading-relaxed">
+          <p class="text-[11px] text-slate-400 font-light leading-relaxed">
             <a href="./how-we-rank.html" class="text-secondary hover:underline">How we rank</a>
             · <a href="./additions.html" class="text-secondary hover:underline">Additions Top 30</a>
             · <a href="./directory.html" class="text-secondary hover:underline">Directories hub</a>
@@ -1656,16 +1666,16 @@
           </p>
         </div>
         <div class="bg-charcoal border border-white/10 rounded-xl p-6">
-          <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-location-dot text-secondary"></i> Service Region</h3>
+          <h3 class="text-lg font-black text-white mb-2 tracking-tight flex items-center gap-2"><i class="fas fa-location-dot text-secondary" aria-hidden="true"></i> Service Region</h3>
           <p class="text-sm text-slate-400 font-light leading-relaxed mb-4">Primary coverage for Board directories in the Pacific Northwest:</p>
           <ul class="space-y-2 text-sm text-slate-300 font-light mb-5">
-            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>King County · Snohomish County · Seattle</li>
-            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>Edmonds &amp; the Edmonds Bowl</li>
-            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>Shoreline · Lynnwood · Mukilteo · Mountlake Terrace</li>
-            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle"></i>Other Puget Sound cities, by firm</li>
+            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle" aria-hidden="true"></i>King County · Snohomish County · Seattle</li>
+            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle" aria-hidden="true"></i>Edmonds &amp; the Edmonds Bowl</li>
+            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle" aria-hidden="true"></i>Shoreline · Lynnwood · Mukilteo · Mountlake Terrace</li>
+            <li><i class="fas fa-circle text-[6px] text-secondary mr-2 align-middle" aria-hidden="true"></i>Other Puget Sound cities, by firm</li>
           </ul>
           <a href="https://pacificprogroup.com/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-secondary hover:underline">
-            Pacific Pro Group site (directory #1) <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+            Pacific Pro Group site (directory #1) <i class="fas fa-arrow-up-right-from-square text-[10px]" aria-hidden="true"></i>
           </a>
         </div>
       </div>
@@ -1685,7 +1695,7 @@
 
   <section id="another-story-sea-embed" class="max-w-6xl mx-auto px-4 py-12 relative z-20 border-t border-white/5">
     <div class="mb-6 overflow-hidden rounded-xl border border-white/10">
-      <img src="./assets/images/another-story-banner-800.webp" alt="Illustrative: conceptual before-and-after second-story idea for Another Story SEA" class="w-full h-48 sm:h-64 object-cover" width="1200" height="630" loading="lazy" srcset="./assets/images/another-story-banner-480.webp 480w, ./assets/images/another-story-banner-800.webp 800w, ./assets/images/another-story-banner-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
+      <img src="./assets/images/another-story-banner-800.webp" alt="Illustrative: conceptual before-and-after second-story idea for Another Story SEA" class="w-full h-48 sm:h-64 object-cover" width="1200" height="630" loading="lazy" data-no-lcp srcset="./assets/images/another-story-banner-480.webp 480w, ./assets/images/another-story-banner-800.webp 800w, ./assets/images/another-story-banner-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px">
     </div>
     <div class="mb-5">
       <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Board feature</p>
@@ -1741,7 +1751,7 @@
       </div>
       <div>
         <h2 class="text-white font-bold text-xs uppercase tracking-widest mb-4">Locations</h2>
-        <p class="font-light leading-relaxed text-xs text-slate-500 mb-3">Editorial place hubs for remodel planning across King County, Snohomish County, and Seattle neighborhoods.</p>
+        <p class="font-light leading-relaxed text-xs text-slate-400 mb-3">Editorial place hubs for remodel planning across King County, Snohomish County, and Seattle neighborhoods.</p>
         <ul class="space-y-2 font-light text-sm">
           <li><a href="./locations.html" class="hover:text-secondary transition">All service areas</a></li><li><a href="./king-county.html" class="hover:text-secondary transition">King County</a></li><li><a href="./snohomish-county.html" class="hover:text-secondary transition">Snohomish County</a></li><li><a href="./seattle.html" class="hover:text-secondary transition">Seattle</a></li><li><a href="./edmonds.html" class="hover:text-secondary transition">Edmonds</a></li><li><a href="./bellevue.html" class="hover:text-secondary transition">Bellevue</a></li><li><a href="./everett.html" class="hover:text-secondary transition">Everett</a></li><li><a href="./kirkland.html" class="hover:text-secondary transition">Kirkland</a></li><li><a href="./redmond.html" class="hover:text-secondary transition">Redmond</a></li><li><a href="./shoreline.html" class="hover:text-secondary transition">Shoreline</a></li><li><a href="./lynnwood.html" class="hover:text-secondary transition">Lynnwood</a></li><li><a href="./ballard.html" class="hover:text-secondary transition">Ballard</a></li>
         </ul>
@@ -1753,61 +1763,12 @@
         </ul>
         <h2 class="text-white font-bold text-xs uppercase tracking-widest mb-4 mt-8">Disclaimer</h2>
         <p class="mb-3 font-light leading-relaxed text-sm">Listing is not an endorsement of quality. Verify licenses, insurance, bonds, and references before hiring. Membership in trade associations does not guarantee outcomes. Re-check status at <a href="https://secure.lni.wa.gov/verify/" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>.</p>
-        <p class="text-xs text-slate-600">&copy; 2026 Board of Project Stewardship · editorial@boardofprojectstewardship.com</p>
+        <p class="text-xs text-slate-400">&copy; 2026 Board of Project Stewardship · editorial@boardofprojectstewardship.com</p>
       </div>
     </div>
   </footer>
   <script src="/assets/js/site.js" defer></script>
 
-  <script>
-  (function () {
-    var tips = {
-      kitchen: {
-        site: 'Ask how demo dust, temporary kitchen plans, and cabinet lead times are handled in the written schedule.',
-        structure: 'Confirm whether walls are load-bearing, if an engineer is needed, and who owns framing inspections.',
-        finish: 'Separate allowances from fixed packages; get brand/model lists and lead-time assumptions in writing.',
-        ahj: 'Verify whether the kitchen triggers a building permit only, or also electrical/plumbing/mechanical permits in your AHJ.'
-      },
-      bath: {
-        site: 'In coastal King/Snohomish homes, press on waterproofing stacks, fan ducting to exterior, and moisture detailing.',
-        structure: 'Ask how pan, curb, and blocking are detailed before tile; get the waterproofing product stack in the scope.',
-        finish: 'Tile layout, niches, and glass lead times drive duration — require a finish schedule before deposit.',
-        ahj: 'Confirm bathroom fan, GFCI, and waterproofing inspection holds with your city or county AHJ.'
-      },
-      addition: {
-        site: 'Discuss setbacks, drainage, tree protection, and construction access before design is locked.',
-        structure: 'Second-story and opening enlargements need clear engineering ownership and dry-in milestones.',
-        finish: 'Exterior cladding and window packages often gate dry-in — get lead times on the critical path.',
-        ahj: 'Use the Board permit hub, then your AHJ portal for fees/timelines — Board pages do not invent calendars.'
-      },
-      adu: {
-        site: 'Confirm lot coverage, parking, and utility taps early; Edmonds and Seattle rules are not interchangeable.',
-        structure: 'Detached vs attached ADUs change foundation and fire-separation details — put the typology in the contract.',
-        finish: 'Kitchenette and bath packages inside an ADU still need allowance rules and inspection sequencing.',
-        ahj: "Read the Board ADU notes for the parcel's AHJ. The Edmonds ADU hub is one city example. Then finish on the official portal."
-      },
-      custom: {
-        site: 'Custom homes hinge on site surveys, soils, and coastal exposure — ask who owns each diligence item.',
-        structure: 'Demand a single steward for drawings, engineering, and field changes so RFIs do not orphan the schedule.',
-        finish: 'Finish boards and long-lead items should be frozen before framing when possible; document exceptions.',
-        ahj: 'Large permits move through multiple reviews — ask for a responsibility matrix, not a promised month count.'
-      }
-    };
-    function update() {
-      var scope = document.getElementById('calc-scope');
-      var drivers = document.getElementById('calc-drivers');
-      var el = document.getElementById('calc-result');
-      if (!scope || !drivers || !el) return;
-      var s = scope.value, d = drivers.value;
-      el.textContent = (tips[s] && tips[s][d]) ? tips[s][d] : 'Compare written scopes; verify every firm at WA L&I before deposits.';
-    }
-    var scope = document.getElementById('calc-scope');
-    var drivers = document.getElementById('calc-drivers');
-    if (scope) scope.addEventListener('change', update);
-    if (drivers) drivers.addEventListener('change', update);
-    update();
-  })();
-  </script>
   <script>
 (function () {
   var hero = document.getElementById('home-hero');

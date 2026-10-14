@@ -99,8 +99,8 @@ function padNumber(n) {
 }
 
 function currentStatus() {
-  if (choreo === "walls") return "Ground floor: raising the walls";
-  if (choreo === "stack") return "First floor: stacking on";
+  if (choreo === "walls") return "Main floor: raising the walls";
+  if (choreo === "stack") return "Second floor: stacking on";
   return STAGES[stageIndex].status;
 }
 
@@ -899,9 +899,9 @@ function start(THREE) {
   drive.position.set(13.6, -0.44, -2.2);
   lotGroup.add(lot, drive);
 
-  const groundCaption = makeCaption("GROUND FLOOR");
+  const groundCaption = makeCaption("MAIN FLOOR");
   groundCaption.position.set(PLAN_W / 2, 0.04, -0.72);
-  const firstCaption = makeCaption("FIRST FLOOR");
+  const firstCaption = makeCaption("SECOND FLOOR");
   firstCaption.position.set(MAIN_W / 2, 0.04, -0.72);
   namesG.add(groundCaption);
   namesF.add(firstCaption);

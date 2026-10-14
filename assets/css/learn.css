@@ -1,15 +1,8 @@
 /* Illustrated house guide. Paper sheet, small type, 44px controls. */
 @font-face {
   font-family: "Learn Inter";
-  src: url("/assets/fonts/Inter-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Learn Inter";
-  src: url("/assets/fonts/Inter-Medium.woff2") format("woff2");
-  font-weight: 500;
+  src: url("/assets/fonts/InterLatin.woff2") format("woff2");
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
@@ -286,6 +279,14 @@ h1 {
   height: 100svh;
   max-height: 100svh;
   overflow: visible;
+}
+@media (max-height: 800px) {
+  .learn-seq.is-enhanced .learn-seq-sticky {
+    height: auto;
+    max-height: 100svh;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
 }
 .learn-seq-sticky h1 { font-size: 1rem; margin: 0; }
 .learn-sheet { flex: 1 1 auto; min-height: 26svh; height: auto; }

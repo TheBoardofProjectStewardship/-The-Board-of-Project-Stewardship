@@ -571,7 +571,7 @@ export function toSvg() {
     ${svgFurniture(0, pad, groundOy, scale, PLAN_D)}
     ${svgWalls(g.pieces, pad, groundOy, scale, PLAN_D)}
     ${labels(GROUND_ROOMS, pad, groundOy, PLAN_D)}
-    <text x="${pad + gw / 2}" y="${groundOy + gd + 16}" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="9" letter-spacing="1.5" fill="#6d675e">GROUND FLOOR</text>
+    <text x="${pad + gw / 2}" y="${groundOy + gd + 16}" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="9" letter-spacing="1.5" fill="#6d675e">MAIN FLOOR</text>
     <g id="svg-stamp" class="stamp">
       <rect x="${pad + gw - 118}" y="${groundOy + 8}" width="108" height="42" rx="6" fill="none" stroke="#1e4d3a" stroke-width="1.5"/>
       <text x="${pad + gw - 64}" y="${groundOy + 24}" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="8" font-weight="700" fill="#1e4d3a">EDUCATIONAL</text>
@@ -583,7 +583,7 @@ export function toSvg() {
     ${svgFurniture(1, pad, firstOy, scale, PLAN_D)}
     ${svgWalls(f.pieces, pad, firstOy, scale, PLAN_D)}
     ${labels(FIRST_ROOMS, pad, firstOy, PLAN_D)}
-    <text x="${pad + fw / 2}" y="${firstOy + fd + 16}" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="9" letter-spacing="1.5" fill="#6d675e">FIRST FLOOR</text>
+    <text x="${pad + fw / 2}" y="${firstOy + fd + 16}" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="9" letter-spacing="1.5" fill="#6d675e">SECOND FLOOR</text>
   </g>
 </svg>`;
 }

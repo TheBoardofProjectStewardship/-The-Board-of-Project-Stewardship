@@ -5,6 +5,11 @@
     "description": "About the Board of Project Stewardship \u2014 standards and directories for King County, Snohomish County, and Seattle."
   },
   {
+    "title": "Adding a story | Board of Project Stewardship",
+    "url": "/learn/second-story/",
+    "description": "Adding a story loads the walls and foundation that are already there, and it opens the roof. This drawing is already two stories."
+  },
+  {
     "title": "Addition Cost Factors | Board of Project Stewardship",
     "url": "/addition-cost-factors.html",
     "description": "Home addition cost factors for North Sound projects \u2014 structure, envelope, utilities, and AHJ drivers. Not a bid, square-foot price table, or ROI claim."
@@ -12,7 +17,7 @@
   {
     "title": "ADU Bellevue WA \u2014 Two-Unit | Board of Project Stewardship",
     "url": "/posts/2026-10-09-adu-bellevue-wa.html",
-    "description": "Accessory dwelling unit guidance for Bellevue homeowners: how many ADUs the Bellevue Land Use Code allows per lot, the 1,200 square foot floor-area cap and its"
+    "description": "Bellevue ADU guidance: how many units the Land Use Code allows per lot, the 1,200 square foot floor-area cap, garage conversions, and parking triggers."
   },
   {
     "title": "ADU Cost Factors | Board of Project Stewardship",
@@ -32,7 +37,7 @@
   {
     "title": "Algona Remodels: City | Board of Project Stewardship",
     "url": "/algona.html",
-    "description": "Algona building permits require a City business license for contractors; a 2021 floor-elevation ordinance (71 ft ASL or one foot above abutting street) shapes"
+    "description": "Algona building permits require a City business license for contractors."
   },
   {
     "title": "Another Story Method | Board of Project Stewardship",
@@ -47,12 +52,17 @@
   {
     "title": "Arlington Remodels | Board of Project Stewardship",
     "url": "/arlington.html",
-    "description": "Stillaguamish floodway plus 200 ft of adjacent floodplain under the city SMP; published SMP FAQ separates shoreline vs building paths \u2014 Board of Project"
+    "description": "Stillaguamish floodway plus 200 ft of adjacent floodplain under the city SMP; published SMP FAQ separates shoreline vs building paths."
+  },
+  {
+    "title": "Attic room or storage | Board of Project Stewardship",
+    "url": "/learn/trussed-rafters/",
+    "description": "A trussed rafter spans like a rafter pair but uses webs. A raised heel leaves room for insulation at the eaves."
   },
   {
     "title": "Auburn Remodel Notes | Board of Project Stewardship",
     "url": "/auburn.html",
-    "description": "White/Green river shoreline management stacks with a separate floodplain track near the confluence; King vs Pierce parcel county can change accompanying rules"
+    "description": "White/Green river shoreline management stacks with a separate floodplain track near the confluence; King vs Pierce parcel county can change accompanying rules."
   },
   {
     "title": "Ballard Remodel & Addition | Board of Project Stewardship",
@@ -112,7 +122,7 @@
   {
     "title": "Bathroom Remodel Sammamish | Board of Project Stewardship",
     "url": "/posts/2026-10-12-bathroom-remodel-sammamish-wa.html",
-    "description": "A Sammamish homeowner's guide to a bathroom remodel: when MyBuildingPermit remodel permits apply, how tub and shower replacement differs from simple"
+    "description": "A Sammamish bathroom remodel guide: when MyBuildingPermit remodel permits apply, and how tub and shower replacement differs from fixture swaps."
   },
   {
     "title": "Bathroom Remodel Shoreline WA | Board of Project Stewardship",
@@ -122,7 +132,7 @@
   {
     "title": "Bathroom Remodelers \u00b7 King | Board of Project Stewardship",
     "url": "/bathrooms.html",
-    "description": "Editorial bathroom remodel ranking for King County, Snohomish County, and Seattle. Ask about the waterproofing system and photos before tile. Pacific Pro Group"
+    "description": "Editorial bathroom remodel ranking for King County, Snohomish County, and Seattle. Ask about the waterproofing system and photos before tile."
   },
   {
     "title": "Bathroom Waterproofing Guide | Board of Project Stewardship",
@@ -130,14 +140,19 @@
     "description": "Bathroom waterproofing guide for Puget Sound remodels \u2014 Board learning hub with wet-area habits, coastal checklist links, and no product ROI claims."
   },
   {
+    "title": "Beams over openings | Board of Project Stewardship",
+    "url": "/learn/beams/",
+    "description": "A beam carries load sideways to its supports. A header is a short beam over an opening. This sketch does not size one."
+  },
+  {
     "title": "Beaux Arts Village Remodels | Board of Project Stewardship",
     "url": "/beaux-arts-village.html",
-    "description": "Beaux Arts Village (~300 residents on Lake Washington\u2019s east shore) issues its own building, grading, plumbing, and tree permits \u2014 but shoreline permit"
+    "description": "Beaux Arts Village (~300 residents on Lake Washington\u2019s east shore) issues its own building, grading, plumbing, and tree permits."
   },
   {
     "title": "Bellevue Remodel Guides | Board of Project Stewardship",
     "url": "/bellevue.html",
-    "description": "Steep-slope toe setbacks under LUC 20.25H and Shoreline Overlay 20.25E on Lake Washington, Lake Sammamish, Phantom Lake, and lower Kelsey Creek shape Bellevue"
+    "description": "Steep-slope toe setbacks under LUC 20.25H and Shoreline Overlay 20.25E on Lake Washington and lower Kelsey Creek shape Bellevue additions."
   },
   {
     "title": "Bid Comparison Checklist | Board of Project Stewardship",
@@ -147,7 +162,7 @@
   {
     "title": "Black Diamond Remodels | Board of Project Stewardship",
     "url": "/black-diamond.html",
-    "description": "Historic coal-townsite fabric plus master-planned growth-area design standards beyond base zoning in SE King foothills \u2014 Board of Project Stewardship Black"
+    "description": "Historic coal-townsite fabric plus master-planned growth-area design standards beyond base zoning in SE King foothills."
   },
   {
     "title": "Blog | Board of Project Stewardship",
@@ -162,7 +177,7 @@
   {
     "title": "Brier Remodels: Upland | Board of Project Stewardship",
     "url": "/brier.html",
-    "description": "No Puget Sound marine SMP; stream/wetland/steep-slope critical areas and tree/zoning rules define this quiet Northshore AHJ between Mountlake Terrace"
+    "description": "No Puget Sound marine SMP. Stream, wetland, steep-slope, and tree rules define this Northshore city between Mountlake Terrace and Kenmore."
   },
   {
     "title": "Build Walkthrough | Board of Project Stewardship",
@@ -172,12 +187,12 @@
   {
     "title": "Burien Remodels: Five Miles | Board of Project Stewardship",
     "url": "/burien.html",
-    "description": "About five miles of Puget Sound marine shoreline plus Lake Burien under BMC Title 20 create dual marine/freshwater environments Highline mid-century remodels"
+    "description": "About five miles of Puget Sound shoreline plus Lake Burien under BMC Title 20 create dual marine and freshwater rules for Highline remodels."
   },
   {
     "title": "Carnation Remodels Inside | Board of Project Stewardship",
     "url": "/carnation.html",
-    "description": "Ecology-final SMP Appendix B Channel Migration Zone map can refine on-site; structural flood protection inside CMZs/floodways is restricted \u2014 Board of Project"
+    "description": "Ecology-final SMP Appendix B Channel Migration Zone map can refine on-site; structural flood protection inside CMZs/floodways is restricted."
   },
   {
     "title": "Change Orders & Allowances | Board of Project Stewardship",
@@ -187,7 +202,7 @@
   {
     "title": "Clyde Hill Remodels: 25-Foot | Board of Project Stewardship",
     "url": "/clyde-hill.html",
-    "description": "Clyde Hill\u2019s Citizen\u2019s Connect portal and a 25-foot maximum height above city-determined original grade shape hillside kitchen, bath, and addition envelopes"
+    "description": "Clyde Hill's Citizen's Connect portal and a 25-foot height limit above original grade shape hillside kitchen, bath, and addition envelopes."
   },
   {
     "title": "Coastal Moisture Primary | Board of Project Stewardship",
@@ -205,9 +220,9 @@
     "description": "Commercial and TI contractors for King County, Snohomish County, and Seattle. Editorial ranking, updated 2026."
   },
   {
-    "title": "Concrete / Foundation \u00b7 King | Board of Project Stewardship",
+    "title": "Concrete & Foundation \u00b7 WA | Board of Project Stewardship",
     "url": "/concrete.html",
-    "description": "Foundations, slabs, flatwork, and structural concrete Directory for King County, Snohomish County, and Seattle."
+    "description": "Foundations, slabs, flatwork, and structural concrete. Directory for King County, Snohomish County, and Seattle."
   },
   {
     "title": "Contact | Board of Project Stewardship",
@@ -227,7 +242,7 @@
   {
     "title": "Covington Remodels: Flood | Board of Project Stewardship",
     "url": "/covington.html",
-    "description": "CMC 16.15 floodplain provisions regulate special flood hazard areas and channel migration zones across Soos/Jenkins creek basins \u2014 Board of Project"
+    "description": "CMC 16.15 floodplain provisions regulate special flood hazard areas and channel migration zones across Soos/Jenkins creek basins."
   },
   {
     "title": "Custom Home Builders \u00b7 King | Board of Project Stewardship",
@@ -237,17 +252,17 @@
   {
     "title": "Darrington Remodels: Sauk / | Board of Project Stewardship",
     "url": "/darrington.html",
-    "description": "Sauk/Stillaguamish headwaters flood studies and mountain-gateway critical areas dominate over urban design districts at Town Hall \u2014 Board of Project"
+    "description": "Sauk/Stillaguamish headwaters flood studies and mountain-gateway critical areas dominate over urban design districts at Town Hall."
   },
   {
     "title": "Deck Replacement Snohomish | Board of Project Stewardship",
     "url": "/posts/2026-10-10-deck-replacement-snohomish-county-wa.html",
-    "description": "Deck replacement guidance for homeowners in unincorporated Snohomish County: when the county requires a building permit, what the deck submittal needs, how"
+    "description": "Deck replacement in unincorporated Snohomish County: when a building permit is required, what the submittal needs, and how setbacks apply to decks."
   },
   {
     "title": "Des Moines Soundfront | Board of Project Stewardship",
     "url": "/des-moines.html",
-    "description": "East Passage marine SMP (~200 ft landward of OHWM) near the marina; Building Division worksheets stay separate from planning shoreline packets \u2014 Board"
+    "description": "East Passage marine SMP (~200 ft landward of OHWM) near the marina; Building Division worksheets stay separate from planning shoreline packets."
   },
   {
     "title": "Design-Build vs Bid-Build | Board of Project Stewardship",
@@ -255,19 +270,24 @@
     "description": "Design-build vs traditional bid-build process education for North Sound homeowners \u2014 Board learning without invented savings, prices, or ROI claims."
   },
   {
-    "title": "Drywall \u00b7 King & Snohomish | Board of Project Stewardship",
+    "title": "Digging and backfill | Board of Project Stewardship",
+    "url": "/learn/excavation/",
+    "description": "Dig to the footing depth, keep the hole stable, then put soil back only after the wall and the drain can take it."
+  },
+  {
+    "title": "Drywall \u00b7 WA | Board of Project Stewardship",
     "url": "/drywall.html",
-    "description": "Hang, tape, and Level 4\u20135 finish for remodel interiors Directory for King County, Snohomish County, and Seattle."
+    "description": "Hang, tape, and Level 4\u20135 finish for remodel interiors. Directory for King County, Snohomish County, and Seattle."
   },
   {
     "title": "Duvall Remodels: Snoqualmie | Board of Project Stewardship",
     "url": "/duvall.html",
-    "description": "Snoqualmie River SMP with Lower Snoqualmie CMZ awareness west of SR 203 can stack shoreline, sensitive areas, and floodplain before town-scale kitchen work"
+    "description": "Snoqualmie River SMP with Lower Snoqualmie CMZ awareness west of SR 203 can stack shoreline, sensitive areas, and floodplain before town-scale kitchen work."
   },
   {
     "title": "Earthquake Home Retrofit | Board of Project Stewardship",
     "url": "/posts/2026-10-11-earthquake-home-retrofit-seattle-wa.html",
-    "description": "A homeowner's guide to a voluntary earthquake retrofit in Seattle: what SDCI's Earthquake Home Retrofit Permit covers, the eligibility questions"
+    "description": "A homeowner guide to a voluntary earthquake retrofit in Seattle: what SDCI's Earthquake Home Retrofit Permit covers and the eligibility questions."
   },
   {
     "title": "Eastside vs Coastal Bath | Board of Project Stewardship",
@@ -300,14 +320,9 @@
     "description": "Edmonds hub for Snohomish County \u2014 permit orientation, Board directories, and local posts. Educational, not a complete roster."
   },
   {
-    "title": "Edmonds Story vs Teardown | Board of Project Stewardship",
-    "url": "/posts/2026-08-09-second-story-vs-teardown-edmonds.html",
-    "description": "Edmonds homeowners comparing second-story addition versus teardown-and-rebuild: decision criteria, risk, timeline shape, and professional evaluation steps."
-  },
-  {
     "title": "Edmonds-Area Homeowner News | Board of Project Stewardship",
     "url": "/posts/2026-09-28-edmonds-area-remodel-permit-news-2026-09-28.html",
-    "description": "Local news for Edmonds, Esperance, Lynnwood, and Kenmore homeowners planning remodels: annexation and permit jurisdiction, new city budgets, a utility rate"
+    "description": "Local news for Edmonds, Esperance, Lynnwood, and Kenmore homeowners planning remodels: annexation, permit jurisdiction, city budgets, and a utility rate freeze."
   },
   {
     "title": "Electrical Upgrades | Board of Project Stewardship",
@@ -315,24 +330,34 @@
     "description": "Electrical upgrades common in Washington bathroom remodels: GFCI, circuits, heated floors, fans, panels, permits, and hiring licensed electricians."
   },
   {
-    "title": "Electrician / Electrical \u00b7 | Board of Project Stewardship",
+    "title": "Electrician & Electrical \u00b7 WA | Board of Project Stewardship",
     "url": "/electrician.html",
-    "description": "Panel upgrades, rewires, EV chargers, and remodel electrical Directory for King County, Snohomish County, and Seattle."
+    "description": "Panel upgrades, rewires, EV chargers, and remodel electrical. Directory for King County, Snohomish County, and Seattle."
   },
   {
     "title": "Enumclaw Plateau Remodels | Board of Project Stewardship",
     "url": "/enumclaw.html",
-    "description": "Cascade foothills plateau geology near White/Green headwaters makes flood and geologic-hazard screening part of permit completeness; CA\u2013SSDP land-use packets"
+    "description": "Cascade foothills plateau geology near White/Green headwaters makes flood and geologic-hazard screening part of permit completeness."
   },
   {
     "title": "Everett Remodels: Port | Board of Project Stewardship",
     "url": "/everett.html",
-    "description": "Port Gardner marine and riverine SSDP/JARPA packages; height thresholds within 200 ft of OHWM may elevate EMC land-use review for additions \u2014 Board of Project"
+    "description": "Port Gardner marine and riverine SSDP/JARPA packages; height thresholds within 200 ft of OHWM may elevate EMC land-use review for additions."
   },
   {
-    "title": "Excavation / Site Work \u00b7 | Board of Project Stewardship",
+    "title": "Excavation & Site Work \u00b7 WA | Board of Project Stewardship",
     "url": "/excavation.html",
-    "description": "Site prep, grading, drainage, and foundation digs Directory for King County, Snohomish County, and Seattle."
+    "description": "Site prep, grading, drainage, and foundation digs. Directory for King County, Snohomish County, and Seattle."
+  },
+  {
+    "title": "Explore this house | Board of Project Stewardship",
+    "url": "/learn/explore/",
+    "description": "Start with this house. Turn a system on, pick a part, and follow it to a closer explanation."
+  },
+  {
+    "title": "Face versus structure | Board of Project Stewardship",
+    "url": "/learn/masonry-bonding/",
+    "description": "Overlapped joints let masonry act together. Brick on a wood house is usually a cladding, not the structure."
   },
   {
     "title": "FAQ | Board of Project Stewardship",
@@ -342,7 +367,7 @@
   {
     "title": "Federal Way Remodels | Board of Project Stewardship",
     "url": "/federal-way.html",
-    "description": "Marine SMP for Admiralty Inlet/Central Sound frontage, mandatory upload-link e-submittal, and Dash Point coastal-plateau envelope pressure \u2014 Board of Project"
+    "description": "Marine SMP for Admiralty Inlet/Central Sound frontage, mandatory upload-link e-submittal, and Dash Point coastal-plateau envelope pressure."
   },
   {
     "title": "Fiber-Cement Siding | Board of Project Stewardship",
@@ -365,14 +390,14 @@
     "description": "Sketch or trace a floor plan, then orbit and walk it in 3D. A free Board of Project Stewardship planning tool for talking through layouts before you hire."
   },
   {
-    "title": "Flooring \u00b7 King & Snohomish | Board of Project Stewardship",
+    "title": "Flooring \u00b7 WA | Board of Project Stewardship",
     "url": "/flooring.html",
-    "description": "Hardwood, LVP, laminate, carpet, and refinishing Directory for King County, Snohomish County, and Seattle."
+    "description": "Hardwood, LVP, laminate, carpet, and refinishing. Directory for King County, Snohomish County, and Seattle."
   },
   {
-    "title": "Framing / Carpentry \u00b7 King | Board of Project Stewardship",
+    "title": "Framing & Carpentry \u00b7 WA | Board of Project Stewardship",
     "url": "/framing.html",
-    "description": "Structural framing and carpentry for additions and remodels Directory for King County, Snohomish County, and Seattle."
+    "description": "Structural framing and carpentry for additions and remodels. Directory for King County, Snohomish County, and Seattle."
   },
   {
     "title": "Glossary | Board of Project Stewardship",
@@ -382,7 +407,7 @@
   {
     "title": "Gold Bar Remodels: Skykomish | Board of Project Stewardship",
     "url": "/gold-bar.html",
-    "description": "Upper Skykomish valley FEMA/county floodplain mapping and tiny-city intake at cityofgoldbar.us (confirm before County PDS assumptions) \u2014 Board of Project"
+    "description": "Upper Skykomish valley FEMA/county floodplain mapping and tiny-city intake at cityofgoldbar.us (confirm before County PDS assumptions)."
   },
   {
     "title": "Good Steward Tools | Board of Project Stewardship",
@@ -392,12 +417,22 @@
   {
     "title": "Granite Falls Remodels | Board of Project Stewardship",
     "url": "/granite-falls.html",
-    "description": "South Fork Stillaguamish river-specific flood and shoreline screening at the Mountain Loop gateway, with county geologic-hazard science as background \u2014 Board"
+    "description": "South Fork Stillaguamish river-specific flood and shoreline screening at the Mountain Loop gateway, with county geologic-hazard science as background."
   },
   {
     "title": "Greenwood Remodel & Addition | Board of Project Stewardship",
     "url": "/greenwood.html",
     "description": "Greenwood hub for Seattle \u00b7 King County \u2014 permit orientation, Board directories, and local posts. Educational, not a complete roster."
+  },
+  {
+    "title": "Heat and cooling | Board of Project Stewardship",
+    "url": "/learn/heating-and-cooling/",
+    "description": "A heat pump moves heat. A furnace makes it. Either one needs a path for air, and this sketch does not size the equipment."
+  },
+  {
+    "title": "Heat, leaks, and drying | Board of Project Stewardship",
+    "url": "/learn/heat-air-moisture/",
+    "description": "Insulation slows heat. Sealing stops leaks. The wall still has to dry after rain. Marine climate zone 4C."
   },
   {
     "title": "Heated Floors in Edmonds | Board of Project Stewardship",
@@ -417,22 +452,27 @@
   {
     "title": "Hiring a Remodeler Mountlake | Board of Project Stewardship",
     "url": "/posts/2026-09-29-hiring-a-remodeler-mountlake-terrace-wa.html",
-    "description": "Hiring a remodeler in Mountlake Terrace: verify L&I credentials, use the City eTRAKiT permit portal, watch Snohomish County jurisdiction, and compare"
+    "description": "Hiring a remodeler in Mountlake Terrace: verify L&I credentials, use the City eTRAKiT permit portal, and watch Snohomish County jurisdiction."
   },
   {
     "title": "Hiring a Remodeler Queen | Board of Project Stewardship",
     "url": "/posts/2026-10-03-hiring-a-remodeler-queen-anne-wa.html",
-    "description": "How Queen Anne Seattle homeowners can vet remodelers: SDCI permit paths, steep-slope logistics, historic character care, and Washington L&I Verify before"
+    "description": "How Queen Anne Seattle homeowners can vet remodelers: SDCI permit paths, steep-slope logistics, historic character, and L&I Verify before you sign."
   },
   {
     "title": "Hiring a Remodeler Redmond | Board of Project Stewardship",
     "url": "/posts/2026-10-01-hiring-a-remodeler-redmond-wa.html",
-    "description": "Ensure your home transformation is seamless with our comprehensive guide to choosing the right remodeling contractor in Redmond, from initial vetting"
+    "description": "A guide to choosing a remodeling contractor in Redmond, from initial vetting through King County permit checks. Educational, not a bid."
   },
   {
     "title": "Hiring a Tile Contractor | Board of Project Stewardship",
     "url": "/posts/2026-09-01-hiring-tile-contractor-edmonds.html",
     "description": "How to hire a tile contractor in Edmonds: substrate prep, wet-area standards, questions to ask, and how tile fits a larger bath or kitchen remodel."
+  },
+  {
+    "title": "Hold points on this house | Board of Project Stewardship",
+    "url": "/learn/sequence/",
+    "description": "Nineteen hold points for this slab house, from the survey to the final walk. Teaching sketch, not a structural design."
   },
   {
     "title": "Home Addition Bothell WA | Board of Project Stewardship",
@@ -462,17 +502,22 @@
   {
     "title": "Home Addition Mukilteo WA | Board of Project Stewardship",
     "url": "/posts/2026-09-28-home-addition-mukilteo-wa.html",
-    "description": "Planning a home addition or second story in Mukilteo: confirm city jurisdiction, use the City of Mukilteo online permit portal, check tree and steep-slope rules"
+    "description": "Planning a home addition or second story in Mukilteo: confirm city jurisdiction, use the online permit portal, and check tree and steep-slope rules."
   },
   {
     "title": "Home Addition Planning | Board of Project Stewardship",
     "url": "/home-addition-planning.html",
-    "description": "Home addition planning hub \u2014 permits, weather sequencing, and hire habits for King County, Snohomish County, and Seattle from the Board of Project Stewardship"
+    "description": "Home addition planning hub \u2014 permits, weather sequencing, and hire habits for King County, Snohomish County, and Seattle."
   },
   {
     "title": "Home Addition Shoreline WA | Board of Project Stewardship",
     "url": "/posts/2026-09-10-home-addition-shoreline-wa.html",
     "description": "Shoreline home addition guide: lot constraints, tie-in weatherproofing, permitting, and how to evaluate structural contractors."
+  },
+  {
+    "title": "How a house is built | Board of Project Stewardship",
+    "url": "/learn/",
+    "description": "How this house is built, from the ground up, with the parts you can open. Teaching sketch, not a structural design."
   },
   {
     "title": "How to Hire a Bathroom | Board of Project Stewardship",
@@ -495,39 +540,44 @@
     "description": "How the Board of Project Stewardship ranks contractors: independent editorial directories, Board #1 as hire ranking not ownership, and the L&I Verify habit."
   },
   {
-    "title": "Hunts Point Remodels | Board of Project Stewardship",
-    "url": "/hunts-point.html",
-    "description": "Hunts Point Town Hall and building intake are appointment-only; the 2015 SMP covers land within 200 ft of Lake Washington OHWM and may require SSDP or exemption"
+    "title": "How wide the concrete is | Board of Project Stewardship",
+    "url": "/learn/spread-footings/",
+    "description": "A footing is wider than the wall so the same load presses the soil more gently. This sketch does not size one."
   },
   {
-    "title": "HVAC \u00b7 King & Snohomish | Board of Project Stewardship",
+    "title": "Hunts Point Remodels | Board of Project Stewardship",
+    "url": "/hunts-point.html",
+    "description": "Hunts Point Town Hall and building intake are appointment-only."
+  },
+  {
+    "title": "HVAC \u00b7 WA | Board of Project Stewardship",
     "url": "/hvac.html",
     "description": "Heating, cooling, and heat-pump specialists for King County, Snohomish County, and Seattle."
   },
   {
     "title": "Index Remodels: Floodplain | Board of Project Stewardship",
     "url": "/index-wa.html",
-    "description": "Town of Index requires a floodplain development permit before work in mapped flood hazard areas, plus Shoreline Master Program chapter 16.20 paths"
+    "description": "Town of Index requires a floodplain development permit in mapped flood hazard areas, plus SMP chapter 16.20 along the Skykomish River canyon."
   },
   {
-    "title": "Insulation \u00b7 King & Snohomish | Board of Project Stewardship",
+    "title": "Insulation \u00b7 WA | Board of Project Stewardship",
     "url": "/insulation.html",
-    "description": "Attic, crawlspace, spray foam, and air sealing Directory for King County, Snohomish County, and Seattle."
+    "description": "Attic, crawlspace, spray foam, and air sealing. Directory for King County, Snohomish County, and Seattle."
   },
   {
     "title": "Issaquah Remodels: Lake | Board of Project Stewardship",
     "url": "/issaquah.html",
-    "description": "SMP limited to Lake Sammamish plus mainstem and East Fork Issaquah Creek; Chapter 18.802 coal-mine hazard classes can gate grading before kitchen demo \u2014 Board"
+    "description": "SMP limited to Lake Sammamish plus mainstem and East Fork Issaquah Creek; Chapter 18.802 coal-mine hazard classes can gate grading before kitchen demo."
   },
   {
     "title": "Kenmore Lakeside Remodels | Board of Project Stewardship",
     "url": "/kenmore.html",
-    "description": "Dual shoreline jurisdiction on Lake Washington and Swamp Creek (still a Shoreline of the State), with preapplication before SSDP/exemption \u2014 Board of Project"
+    "description": "Dual shoreline jurisdiction on Lake Washington and Swamp Creek (still a Shoreline of the State), with preapplication before SSDP/exemption."
   },
   {
     "title": "Kent Remodel Guides Under | Board of Project Stewardship",
     "url": "/kent.html",
-    "description": "Kent\u2019s Citizen Permit Portal (not MyBuildingPermit) plus KMC 14.09 flood-hazard rules on Green River valley floors and East Hill mid-century streets \u2014 Board"
+    "description": "Kent\u2019s Citizen Permit Portal (not MyBuildingPermit) plus KMC 14.09 flood-hazard rules on Green River valley floors and East Hill mid-century streets."
   },
   {
     "title": "King & Snohomish Addition | Board of Project Stewardship",
@@ -562,7 +612,7 @@
   {
     "title": "Kitchen Remodel Bothell WA | Board of Project Stewardship",
     "url": "/posts/2026-09-24-kitchen-remodel-bothell-wa.html",
-    "description": "Practical Bothell kitchen remodel guidance for King County layouts, MyBuildingPermit paths, cabinet sequencing, and how to shortlist licensed design-build firms"
+    "description": "Practical Bothell kitchen remodel guidance for King County layouts, MyBuildingPermit paths, cabinet sequencing, and how to shortlist licensed firms."
   },
   {
     "title": "Kitchen Remodel Greenwood | Board of Project Stewardship",
@@ -572,17 +622,17 @@
   {
     "title": "Kitchen Remodel Issaquah WA | Board of Project Stewardship",
     "url": "/posts/2026-10-13-kitchen-remodel-issaquah-wa.html",
-    "description": "An Issaquah homeowner's guide to a kitchen remodel: City remodel permits on MyBuildingPermit, why electrical runs through Washington L&I instead"
+    "description": "An Issaquah kitchen remodel guide: City permits on MyBuildingPermit, why electrical runs through Washington L&I, and when fixture swaps skip a permit."
   },
   {
     "title": "Kitchen Remodel Kenmore WA | Board of Project Stewardship",
     "url": "/posts/2026-09-26-kitchen-remodel-kenmore-wa.html",
-    "description": "Kenmore kitchen remodel guidance for King County layout, MyBuildingPermit paths, moisture-smart hood and wet-zone specs, and how to shortlist licensed"
+    "description": "Kenmore kitchen remodel guidance for King County layout, MyBuildingPermit paths, moisture-smart hood and wet-zone specs, and how to shortlist firms."
   },
   {
     "title": "Kitchen Remodel Kirkland WA | Board of Project Stewardship",
     "url": "/posts/2026-10-07-kitchen-remodel-kirkland-wa.html",
-    "description": "Kitchen remodel guidance for Kirkland homeowners: which finish work the Kirkland Municipal Code exempts from a building permit, why electrical permits come"
+    "description": "Kirkland kitchen remodel guidance: which finish work is exempt from a building permit, why electrical permits come from the city, and how to verify firms."
   },
   {
     "title": "Kitchen Remodel Lynnwood WA | Board of Project Stewardship",
@@ -627,7 +677,7 @@
   {
     "title": "Kitchen Remodelers \u00b7 King | Board of Project Stewardship",
     "url": "/kitchen.html",
-    "description": "Editorial kitchen remodel ranking for King County, Snohomish County, and Seattle. Compare cabinet allowances and who pulls permits. Pacific Pro Group is Board"
+    "description": "Editorial kitchen remodel ranking for King County, Snohomish County, and Seattle. Compare cabinet allowances and who pulls permits."
   },
   {
     "title": "Lake Forest Park Bath Guide | Board of Project Stewardship",
@@ -642,7 +692,12 @@
   {
     "title": "Lake Stevens Remodels: Lake | Board of Project Stewardship",
     "url": "/lake-stevens.html",
-    "description": "SMP User Guide covers Lake Stevens, Stitch Lake, Catherine Creek, and Little Pilchuck Creek with lakeside vs creek environment standards \u2014 Board of Project"
+    "description": "SMP User Guide covers Lake Stevens, Stitch Lake, Catherine Creek, and Little Pilchuck Creek with lakeside vs creek environment standards."
+  },
+  {
+    "title": "Layers of an outside wall | Board of Project Stewardship",
+    "url": "/learn/wall-assembly/",
+    "description": "Cladding, a drainage gap, the weather barrier, sheathing, the stud cavity, and the interior board. One wall, several jobs."
   },
   {
     "title": "Learn Hub | Board of Project Stewardship",
@@ -650,9 +705,14 @@
     "description": "Learn hub for King County, Snohomish County, and Seattle \u2014 permits, ADU, verify, planning, and Good Steward tools."
   },
   {
+    "title": "Leveling a sloping lot | Board of Project Stewardship",
+    "url": "/learn/cut-and-fill/",
+    "description": "How a sloping lot is cut and filled to make a level pad, and why the soil under the house is not topsoil."
+  },
+  {
     "title": "LFP Bath iWorQ Permit Guide | Board of Project Stewardship",
     "url": "/posts/2026-09-30-bathroom-remodel-lake-forest-park-wa.html",
-    "description": "Lake Forest Park bathroom remodel guide: City iWorQ Permit Portal, separate L&I electrical path, canopy and staging constraints, and waterproofing that"
+    "description": "Lake Forest Park bathroom remodel guide: City iWorQ Permit Portal, separate L&I electrical path, staging constraints, and waterproofing for damp seasons."
   },
   {
     "title": "Living Through a Remodel | Board of Project Stewardship",
@@ -662,7 +722,7 @@
   {
     "title": "Locations \u2014 King & Snohomish | Board of Project Stewardship",
     "url": "/locations.html",
-    "description": "Board of Project Stewardship locations index: crawlable place hubs for King County, Snohomish County, and Seattle neighborhoods \u2014 remodel and addition"
+    "description": "Board of Project Stewardship locations index: crawlable place hubs for King County, Snohomish County, and Seattle neighborhoods."
   },
   {
     "title": "Lynnwood Remodel & Addition | Board of Project Stewardship",
@@ -682,12 +742,12 @@
   {
     "title": "Maple Valley Remodels: Cedar | Board of Project Stewardship",
     "url": "/maple-valley.html",
-    "description": "King County Surface Water Design Manual plus Maple Valley Addendum maps Cedar River and Jenkins Creek buffers atypical of Seattle ridge lots \u2014 Board"
+    "description": "King County Surface Water Design Manual plus Maple Valley Addendum maps Cedar River and Jenkins Creek buffers atypical of Seattle ridge lots."
   },
   {
     "title": "Marysville Remodels: Ebey | Board of Project Stewardship",
     "url": "/marysville.html",
-    "description": "2020 SMP maps Ebey Slough and Quilceda Creek shoreline environments with delta flood and dike/breach inundation topics \u2014 Board of Project Stewardship"
+    "description": "2020 SMP maps Ebey Slough and Quilceda Creek shoreline environments with delta flood and dike/breach inundation topics."
   },
   {
     "title": "Materials Worth Knowing | Board of Project Stewardship",
@@ -697,12 +757,12 @@
   {
     "title": "Medina Points Remodels: Lake | Board of Project Stewardship",
     "url": "/medina.html",
-    "description": "Evergreen Point Lake Washington shoreline setbacks on large custom and mid-century estates; Points counter is not Bellevue Development Services \u2014 Board"
+    "description": "Evergreen Point Lake Washington shoreline setbacks on large custom and mid-century estates; Points counter is not Bellevue Development Services."
   },
   {
     "title": "Mercer Island Remodels | Board of Project Stewardship",
     "url": "/mercer-island.html",
-    "description": "Wet-season grading/foundation ban Oct 1\u2013Apr 1 in landslide/steep-slope/erosion zones unless geotech waiver; Lake Washington shoreline still needs city review"
+    "description": "Wet-season grading/foundation ban Oct 1\u2013Apr 1 in landslide/steep-slope/erosion zones unless geotech waiver."
   },
   {
     "title": "Mill Creek Remodel | Board of Project Stewardship",
@@ -712,12 +772,12 @@
   {
     "title": "Milton Remodels: One City | Board of Project Stewardship",
     "url": "/milton.html",
-    "description": "City of Milton Building Division permits parcels inside city limits whether the address sits in Pierce or King County \u2014 PermitTrax portal, county checkbox"
+    "description": "City of Milton Building Division permits parcels inside city limits whether the address sits in Pierce or King County."
   },
   {
     "title": "Monroe Remodels | Board of Project Stewardship",
     "url": "/monroe.html",
-    "description": "Skykomish\u2013Snohomish confluence geography puts FEMA FIRM and city critical-areas screening ahead of US-2 corridor kitchen or addition demo \u2014 Board of Project"
+    "description": "Skykomish\u2013Snohomish confluence geography puts FEMA FIRM and city critical-areas screening ahead of US-2 corridor kitchen or addition demo."
   },
   {
     "title": "Mountlake Terrace Remodel | Board of Project Stewardship",
@@ -732,27 +792,32 @@
   {
     "title": "Newcastle Hillside Remodels | Board of Project Stewardship",
     "url": "/newcastle.html",
-    "description": "Historic coal-mining landscape between Bellevue and Renton; iMap layers only screen \u2014 qualified surveys set critical-area boundaries; rebuild can end"
+    "description": "Historic coal-mining landscape between Bellevue and Renton; iMap layers only screen \u2014 qualified surveys set critical-area boundaries."
   },
   {
     "title": "Normandy Park Remodels | Board of Project Stewardship",
     "url": "/normandy-park.html",
-    "description": "East-shore Puget Sound bluff waterproofing between Burien and Des Moines under a standalone small-city AHJ \u2014 Board of Project Stewardship Normandy Park"
+    "description": "East-shore Puget Sound bluff waterproofing between Burien and Des Moines under a standalone small-city AHJ."
   },
   {
     "title": "North Bend Remodels | Board of Project Stewardship",
     "url": "/north-bend.html",
-    "description": "NBMC 14.12 Floodplain Development Permits (three plan sets when required) often lead South Fork Snoqualmie SFHA remodel sequencing \u2014 Board of Project"
+    "description": "NBMC 14.12 Floodplain Development Permits (three plan sets when required) often lead South Fork Snoqualmie SFHA remodel sequencing."
+  },
+  {
+    "title": "One house, four jobs | Board of Project Stewardship",
+    "url": "/learn/building-systems/",
+    "description": "Structure, enclosure, services, and finishes are four different jobs in the same house."
   },
   {
     "title": "Pacific Remodels: White | Board of Project Stewardship",
     "url": "/pacific.html",
-    "description": "City of Pacific Flood Control (PMC 23.40) requires floodplain development permits in FEMA SFHA along the White River corridor \u2014 separate from ordinary"
+    "description": "City of Pacific Flood Control (PMC 23.40) requires floodplain development permits in FEMA SFHA along the White River corridor."
   },
   {
-    "title": "Painting \u00b7 King & Snohomish | Board of Project Stewardship",
+    "title": "Painting \u00b7 WA | Board of Project Stewardship",
     "url": "/painting.html",
-    "description": "Interior and exterior painting with coastal prep know-how Directory for King County, Snohomish County, and Seattle."
+    "description": "Interior and exterior painting with coastal prep know-how. Directory for King County, Snohomish County, and Seattle."
   },
   {
     "title": "Permit Jurisdiction Hub | Board of Project Stewardship",
@@ -770,9 +835,9 @@
     "description": "Upload a builder plan, trace the walls, and walk the house in 3D before it is built. Free in your browser. Illustration only, not for construction."
   },
   {
-    "title": "Plumber / Plumbing \u00b7 King | Board of Project Stewardship",
+    "title": "Plumber & Plumbing \u00b7 WA | Board of Project Stewardship",
     "url": "/plumber.html",
-    "description": "Licensed plumbers for residential service, remodels, and new work Directory for King County, Snohomish County, and Seattle."
+    "description": "Licensed plumbers for residential service, remodels, and new work. Directory for King County, Snohomish County, and Seattle."
   },
   {
     "title": "PM Dashboard | Board of Project Stewardship",
@@ -783,6 +848,16 @@
     "title": "PNW Bathroom Waterproofing | Board of Project Stewardship",
     "url": "/posts/2026-08-18-pnw-bathroom-waterproofing-essentials.html",
     "description": "Pacific Northwest bathroom waterproofing essentials: membranes, slopes, niches, inspections, and how to hold contractors accountable."
+  },
+  {
+    "title": "Posts you can see | Board of Project Stewardship",
+    "url": "/learn/columns/",
+    "description": "A column carries load in compression. On this house the porch posts are the columns you can see."
+  },
+  {
+    "title": "Power from the meter | Board of Project Stewardship",
+    "url": "/learn/electrical/",
+    "description": "Power arrives at a meter and a panel, then leaves on branch circuits. This is not a load calculation."
   },
   {
     "title": "Primary Suite Addition | Board of Project Stewardship",
@@ -810,6 +885,11 @@
     "description": "Queen Anne hub for Seattle \u00b7 King County \u2014 permit orientation, Board directories, and local posts. Educational, not a complete roster."
   },
   {
+    "title": "Rain in this region | Board of Project Stewardship",
+    "url": "/learn/marine-climate/",
+    "description": "Western Washington is wet and slow to dry. Overhangs, drained cladding, and grade that falls away match that weather."
+  },
+  {
     "title": "Red Flags When Hiring | Board of Project Stewardship",
     "url": "/red-flags-hiring.html",
     "description": "Red flags when hiring a Washington contractor \u2014 Board education on L&I, bond, and insurance warning signs without invented scare statistics."
@@ -817,7 +897,7 @@
   {
     "title": "Redmond Remodel Hub | Board of Project Stewardship",
     "url": "/redmond.html",
-    "description": "REPS/land.redmond.gov replaces MyBuildingPermit for Redmond parcels; Bear Creek, Evans Creek, Sammamish River, and Lake Sammamish shoreline packets may attach"
+    "description": "REPS/land.redmond.gov replaces MyBuildingPermit for Redmond parcels."
   },
   {
     "title": "Remodel Cost Factors | Board of Project Stewardship",
@@ -827,12 +907,12 @@
   {
     "title": "Renton Kitchen, Bath | Board of Project Stewardship",
     "url": "/renton.html",
-    "description": "Residential addition checklists in Renton flag coal-mine hazards beside wetlands, steep slopes, and creeks; Highlands mid-century stock differs from valley"
+    "description": "Residential addition checklists in Renton flag coal-mine hazards beside wetlands, steep slopes, and creeks."
   },
   {
     "title": "Roof Replacement Ballard WA | Board of Project Stewardship",
     "url": "/posts/2026-10-05-roof-replacement-ballard-wa.html",
-    "description": "Roof replacement guidance for Ballard homeowners: when Seattle SDCI requires a re-roof permit, how underlayment and flashing handle Salmon Bay weather, and how"
+    "description": "Roof replacement guidance for Ballard: when Seattle SDCI requires a re-roof permit, how flashing handles Salmon Bay weather, and how to verify roofers."
   },
   {
     "title": "Roof Replacement Edmonds WA | Board of Project Stewardship",
@@ -840,14 +920,19 @@
     "description": "Edmonds roof replacement guide: coastal moisture, underlayment, flashing, MyBuildingPermit, and licensed roofers."
   },
   {
-    "title": "Roofing \u00b7 King & Snohomish | Board of Project Stewardship",
+    "title": "Roofing \u00b7 WA | Board of Project Stewardship",
     "url": "/roofing.html",
     "description": "Roof replacement and repair for King County, Snohomish County, and Seattle."
   },
   {
+    "title": "Rooms on this drawing | Board of Project Stewardship",
+    "url": "/learn/rooms/",
+    "description": "The rooms drawn on this house: garage and main floor, then bedrooms, baths, and laundry above."
+  },
+  {
     "title": "Sammamish Plateau Remodel | Board of Project Stewardship",
     "url": "/sammamish.html",
-    "description": "Hire diligence first on the plateau: Lake Sammamish OHWM setbacks, mandatory critical-areas affidavits, sewer-vs-septic pockets for ADUs \u2014 Board of Project"
+    "description": "Hire diligence first on the plateau: Lake Sammamish OHWM setbacks, mandatory critical-areas affidavits, sewer-vs-septic pockets for ADUs."
   },
   {
     "title": "Search | Board of Project Stewardship",
@@ -857,7 +942,7 @@
   {
     "title": "SeaTac Remodels: Sound | Board of Project Stewardship",
     "url": "/seatac.html",
-    "description": "SMC 13.240 Sound Transmission Code inside Port SEA Noise Remedy areas sets outdoor-to-indoor dB targets for additions; LAMA portal is the city AHJ \u2014 Board"
+    "description": "SMC 13.240 Sound Transmission Code inside Port SEA Noise Remedy areas sets outdoor-to-indoor dB targets for additions; LAMA portal is the city AHJ."
   },
   {
     "title": "Seattle Bathroom Remodel | Board of Project Stewardship",
@@ -880,9 +965,14 @@
     "description": "Second-story vs teardown for King County, Snohomish County, and Seattle. Board learning hub, not a cost guarantee."
   },
   {
+    "title": "Second Story vs Teardown | Board of Project Stewardship",
+    "url": "/posts/2026-08-09-second-story-vs-teardown-edmonds.html",
+    "description": "Edmonds homeowners comparing second-story addition versus teardown-and-rebuild: decision criteria, risk, timeline shape, and professional evaluation steps."
+  },
+  {
     "title": "Second-Story Addition | Board of Project Stewardship",
     "url": "/posts/2026-09-28-second-story-addition-woodinville-wa.html",
-    "description": "Woodinville second-story addition guidance for stay-in-home sequencing, Accela permitting vs King County jurisdiction, Sammamish Valley lot context"
+    "description": "Woodinville second-story addition guidance for stay-in-home sequencing, Accela permitting versus King County jurisdiction, and Sammamish Valley lots."
   },
   {
     "title": "Selecting Finishes | Board of Project Stewardship",
@@ -895,9 +985,9 @@
     "description": "Shoreline hub for North King County \u2014 permit orientation, Board directories, and local posts. Educational, not a complete roster."
   },
   {
-    "title": "Siding \u00b7 King & Snohomish | Board of Project Stewardship",
+    "title": "Siding \u00b7 WA | Board of Project Stewardship",
     "url": "/siding.html",
-    "description": "Exterior siding, Hardie, and coastal-ready cladding Directory for King County, Snohomish County, and Seattle."
+    "description": "Exterior siding, Hardie, and coastal-ready cladding. Directory for King County, Snohomish County, and Seattle."
   },
   {
     "title": "Site Visit Checklist | Board of Project Stewardship",
@@ -912,7 +1002,7 @@
   {
     "title": "Skykomish remodel guides | Board of Project Stewardship",
     "url": "/skykomish.html",
-    "description": "Town of Skykomish SMP covers the Skykomish River and Maloney Creek; Flood Damage Prevention Ordinance #255 and mountain railroad-era housing shape cabin kitchen"
+    "description": "Town of Skykomish SMP covers the Skykomish River and Maloney Creek."
   },
   {
     "title": "Snohomish County Remodel | Board of Project Stewardship",
@@ -922,12 +1012,12 @@
   {
     "title": "Snohomish Remodels Inside | Board of Project Stewardship",
     "url": "/snohomish.html",
-    "description": "2017 Historic District Design Standards plus Pilchuck and Midtown special design districts require extra elevations/materials with building permits \u2014 Board"
+    "description": "2017 Historic District Design Standards plus Pilchuck and Midtown special design districts require extra elevations/materials with building permits."
   },
   {
     "title": "Snoqualmie Remodels | Board of Project Stewardship",
     "url": "/snoqualmie.html",
-    "description": "Historic overlay design review under SMC 17.35 can precede building/grading/demo permits downtown; floodplain applications stack near the Falls \u2014 Board"
+    "description": "Historic overlay design review under SMC 17.35 can precede building/grading/demo permits downtown; floodplain applications stack near the Falls."
   },
   {
     "title": "Spec Home Builders \u00b7 King | Board of Project Stewardship",
@@ -942,7 +1032,7 @@
   {
     "title": "Stanwood Remodels | Board of Project Stewardship",
     "url": "/stanwood.html",
-    "description": "Stillaguamish estuary shoreline jurisdiction maps highlight associated wetlands; low delta geography stacks floodplain with shoreline \u2014 Board of Project"
+    "description": "Stillaguamish estuary shoreline jurisdiction maps highlight associated wetlands; low delta geography stacks floodplain with shoreline."
   },
   {
     "title": "Stay-in-Home Second Story | Board of Project Stewardship",
@@ -952,12 +1042,27 @@
   {
     "title": "Sultan remodel guides | Board of Project Stewardship",
     "url": "/sultan.html",
-    "description": "Skykomish/Sultan confluence SFHA near downtown makes flood elevation and shoreline rules dominate addition feasibility over design-district theater \u2014 Board"
+    "description": "Skykomish/Sultan confluence SFHA near downtown makes flood elevation and shoreline rules dominate addition feasibility over design-district theater."
   },
   {
-    "title": "Tile \u00b7 King & Snohomish | Board of Project Stewardship",
+    "title": "The flight of stairs | Board of Project Stewardship",
+    "url": "/learn/stairs/",
+    "description": "The stair on this house links the two floors. Rise, run, headroom, and a guard are the teaching points, not a stair design."
+  },
+  {
+    "title": "The plate at a joint | Board of Project Stewardship",
+    "url": "/learn/truss-connections/",
+    "description": "The plate or gusset at a truss joint transfers the force. The joint is not a place to cut or drill."
+  },
+  {
+    "title": "The roof shape | Board of Project Stewardship",
+    "url": "/learn/roof-framing/",
+    "description": "Rafters and trusses make the roof shape and tie the walls. This house shows a gable, a hip, and a dormer."
+  },
+  {
+    "title": "Tile \u00b7 WA | Board of Project Stewardship",
     "url": "/tile.html",
-    "description": "Tile and stone setters for kitchens, baths, and floors Directory for King County, Snohomish County, and Seattle."
+    "description": "Tile and stone setters for kitchens, baths, and floors. Directory for King County, Snohomish County, and Seattle."
   },
   {
     "title": "Trade Contractors \u00b7 King | Board of Project Stewardship",
@@ -965,9 +1070,19 @@
     "description": "Board directories of plumbers, electricians, HVAC, roofing, and other trades for King County, Snohomish County, and Seattle."
   },
   {
+    "title": "Triangles in the roof | Board of Project Stewardship",
+    "url": "/learn/trusses/",
+    "description": "A truss is a frame of triangles. The members stay in tension or compression when the joints are left intact."
+  },
+  {
     "title": "Tukwila Remodels Along | Board of Project Stewardship",
     "url": "/tukwila.html",
-    "description": "Green/Duwamish shoreline (~13 river miles) and Flood Zone Control Permits due with the earliest building/shoreline/grading filing in SFHAs \u2014 Board of Project"
+    "description": "Green/Duwamish shoreline (~13 river miles) and Flood Zone Control Permits due with the earliest building/shoreline/grading filing in SFHAs."
+  },
+  {
+    "title": "Two floors stacked | Board of Project Stewardship",
+    "url": "/learn/platform-framing/",
+    "description": "Each story is a deck. The next walls stand on that deck. This house is drawn as two platforms."
   },
   {
     "title": "Verify a WA Contractor | Board of Project Stewardship",
@@ -990,9 +1105,39 @@
     "description": "Magnolia walk-in shower remodel guide: curbless vs curbed, waterproofing, Seattle permits, glass, and accessibility considerations."
   },
   {
+    "title": "Water in and waste out | Board of Project Stewardship",
+    "url": "/learn/plumbing/",
+    "description": "Supply, a water heater, fixtures, and drains with vents. The wet rooms on this plan are the kitchen, baths, and laundry."
+  },
+  {
     "title": "Water, Fire & Mold Damage Restoration | King & Snohomish",
     "url": "/restoration.html",
     "description": "Water, fire, and mold damage restoration in Seattle, Everett, Edmonds, and King & Snohomish County. Drying, smoke cleanup, claims notes, and hiring steps."
+  },
+  {
+    "title": "What the house sits on | Board of Project Stewardship",
+    "url": "/learn/foundation-types/",
+    "description": "Slab, crawl space, basement, and piers solve different ground, frost, and access problems. This house is drawn as a slab-level pad."
+  },
+  {
+    "title": "Where the weight goes | Board of Project Stewardship",
+    "url": "/learn/load-path/",
+    "description": "Gravity load moves from the roof through the walls and into the ground. This sketch does not size that path."
+  },
+  {
+    "title": "Why there is no arch | Board of Project Stewardship",
+    "url": "/learn/arches-and-vaults/",
+    "description": "An arch works in compression and pushes outward. This wood house uses bending members instead."
+  },
+  {
+    "title": "Why this, not that | Board of Project Stewardship",
+    "url": "/learn/compare/",
+    "description": "Construction choices side by side. Neither column is a rule. The right one depends on the site, the code, and the house."
+  },
+  {
+    "title": "Wind and earthquakes | Board of Project Stewardship",
+    "url": "/learn/lateral-stability/",
+    "description": "Wind and earthquakes push sideways. Floors share that push with braced walls. This sketch does not show the nailing."
   },
   {
     "title": "Window Replacement Edmonds | Board of Project Stewardship",
@@ -1002,7 +1147,7 @@
   {
     "title": "Window Replacement Lynnwood | Board of Project Stewardship",
     "url": "/posts/2026-10-02-window-replacement-lynnwood-wa.html",
-    "description": "Upgrade your Lynnwood home with high-performance windows designed for Snohomish County weather \u2014 thermal performance, styles, and verified City of Lynnwood"
+    "description": "High-performance windows for Lynnwood and Snohomish County weather, with styles, thermal performance, and verified City of Lynnwood permit paths."
   },
   {
     "title": "Window Replacement Mill | Board of Project Stewardship",
@@ -1012,176 +1157,31 @@
   {
     "title": "Window Replacement Shoreline | Board of Project Stewardship",
     "url": "/posts/2026-10-06-window-replacement-shoreline-wa.html",
-    "description": "Window replacement guidance for Shoreline homeowners: when the City of Shoreline code exempts a window swap from a building permit, lead-safe rules for pre-1978"
+    "description": "Window replacement guidance for Shoreline: when a window swap is exempt from a building permit, lead-safe rules for pre-1978 homes, and drained flashing."
   },
   {
-    "title": "Windows & Doors \u00b7 King | Board of Project Stewardship",
+    "title": "Windows & Doors \u00b7 WA | Board of Project Stewardship",
     "url": "/windows.html",
-    "description": "Replacement windows, patio doors, and entry systems Directory for King County, Snohomish County, and Seattle."
+    "description": "Replacement windows, patio doors, and entry systems. Directory for King County, Snohomish County, and Seattle."
   },
   {
     "title": "Woodinville Valley Remodels | Board of Project Stewardship",
     "url": "/woodinville.html",
-    "description": "Sammamish River WMC 21.72\u201321.73 shoreline tables stack with floodplain and critical-area studies inside ~200 ft of OHWM on valley lots \u2014 Board of Project"
+    "description": "Sammamish River WMC 21.72\u201321.73 shoreline tables stack with floodplain and critical-area studies inside ~200 ft of OHWM on valley lots."
   },
   {
     "title": "Woodway Remodels: Two-Acre | Board of Project Stewardship",
     "url": "/woodway.html",
-    "description": "Woodway\u2019s historic two-acre minimum fabric and Environmentally Critical Areas checklist (marine bluff / geologic hazard integrated into building permits"
+    "description": "Woodway's two-acre lots and critical-areas checklist (marine bluff and geologic hazard, folded into the building permit) shape site-sensitive work."
   },
   {
     "title": "WSEC-R Prescriptive Credits | Board of Project Stewardship",
     "url": "/energy-credit.html",
-    "description": "WSEC-R 2021 single-family prescriptive energy credit worksheet for Pacific Northwest projects in King County, Snohomish County, and Seattle."
+    "description": "2021 WSEC-R (as amended, effective March 15, 2024) credit worksheet. Check R406 values against the adopted state and city package. Not a tax-credit calculator."
   },
   {
     "title": "Yarrow Point Remodels | Board of Project Stewardship",
     "url": "/yarrow-point.html",
-    "description": "Yarrow Point\u2019s ~231-acre Lake Washington peninsula (one entry/exit, Wetherill Nature Preserve) uses town Permit Forms and SMP shoreline setbacks \u2014 about"
-  },
-  {
-    "title": "How a house is built | Board of Project Stewardship",
-    "url": "/learn/",
-    "description": "How this house is built, from the ground up, with the parts you can open. Teaching sketch, not a structural design."
-  },
-  {
-    "title": "Hold points on this house | Board of Project Stewardship",
-    "url": "/learn/sequence/",
-    "description": "Nineteen hold points for this slab house, from the survey to the final walk. Teaching sketch, not a structural design."
-  },
-  {
-    "title": "Explore this house | Board of Project Stewardship",
-    "url": "/learn/explore/",
-    "description": "Start with this house. Turn a system on, pick a part, and follow it to a closer explanation."
-  },
-  {
-    "title": "Why this, not that | Board of Project Stewardship",
-    "url": "/learn/compare/",
-    "description": "Construction choices side by side. Neither column is a rule. The right one depends on the site, the code, and the house."
-  },
-  {
-    "title": "Leveling a sloping lot | Board of Project Stewardship",
-    "url": "/learn/cut-and-fill/",
-    "description": "How a sloping lot is cut and filled to make a level pad, and why the soil under the house is not topsoil."
-  },
-  {
-    "title": "One house, four jobs | Board of Project Stewardship",
-    "url": "/learn/building-systems/",
-    "description": "Structure, enclosure, services, and finishes are four different jobs in the same house."
-  },
-  {
-    "title": "Where the weight goes | Board of Project Stewardship",
-    "url": "/learn/load-path/",
-    "description": "Gravity load moves from the roof through the walls and into the ground. This sketch does not size that path."
-  },
-  {
-    "title": "Posts you can see | Board of Project Stewardship",
-    "url": "/learn/columns/",
-    "description": "A column carries load in compression. On this house the porch posts are the columns you can see."
-  },
-  {
-    "title": "Beams over openings | Board of Project Stewardship",
-    "url": "/learn/beams/",
-    "description": "A beam carries load sideways to its supports. A header is a short beam over an opening. This sketch does not size one."
-  },
-  {
-    "title": "Triangles in the roof | Board of Project Stewardship",
-    "url": "/learn/trusses/",
-    "description": "A truss is a frame of triangles. The members stay in tension or compression when the joints are left intact."
-  },
-  {
-    "title": "Wind and earthquakes | Board of Project Stewardship",
-    "url": "/learn/lateral-stability/",
-    "description": "Wind and earthquakes push sideways. Floors share that push with braced walls. This sketch does not show the nailing."
-  },
-  {
-    "title": "Why there is no arch | Board of Project Stewardship",
-    "url": "/learn/arches-and-vaults/",
-    "description": "An arch works in compression and pushes outward. This wood house uses bending members instead."
-  },
-  {
-    "title": "What the house sits on | Board of Project Stewardship",
-    "url": "/learn/foundation-types/",
-    "description": "Slab, crawl space, basement, and piers solve different ground, frost, and access problems. This house is drawn as a slab-level pad."
-  },
-  {
-    "title": "Digging and backfill | Board of Project Stewardship",
-    "url": "/learn/excavation/",
-    "description": "Dig to the footing depth, keep the hole stable, then put soil back only after the wall and the drain can take it."
-  },
-  {
-    "title": "How wide the concrete is | Board of Project Stewardship",
-    "url": "/learn/spread-footings/",
-    "description": "A footing is wider than the wall so the same load presses the soil more gently. This sketch does not size one."
-  },
-  {
-    "title": "Face versus structure | Board of Project Stewardship",
-    "url": "/learn/masonry-bonding/",
-    "description": "Overlapped joints let masonry act together. Brick on a wood house is usually a cladding, not the structure."
-  },
-  {
-    "title": "Two floors stacked | Board of Project Stewardship",
-    "url": "/learn/platform-framing/",
-    "description": "Each story is a deck. The next walls stand on that deck. This house is drawn as two platforms."
-  },
-  {
-    "title": "The roof shape | Board of Project Stewardship",
-    "url": "/learn/roof-framing/",
-    "description": "Rafters and trusses make the roof shape and tie the walls. This house shows a gable, a hip, and a dormer."
-  },
-  {
-    "title": "The plate at a joint | Board of Project Stewardship",
-    "url": "/learn/truss-connections/",
-    "description": "The plate or gusset at a truss joint transfers the force. The joint is not a place to cut or drill."
-  },
-  {
-    "title": "Attic room or storage | Board of Project Stewardship",
-    "url": "/learn/trussed-rafters/",
-    "description": "A trussed rafter spans like a rafter pair but uses webs. A raised heel leaves room for insulation at the eaves."
-  },
-  {
-    "title": "Layers of an outside wall | Board of Project Stewardship",
-    "url": "/learn/wall-assembly/",
-    "description": "Cladding, a drainage gap, the weather barrier, sheathing, the stud cavity, and the interior board. One wall, several jobs."
-  },
-  {
-    "title": "The flight of stairs | Board of Project Stewardship",
-    "url": "/learn/stairs/",
-    "description": "The stair on this house links the two floors. Rise, run, headroom, and a guard are the teaching points, not a stair design."
-  },
-  {
-    "title": "Heat and cooling | Board of Project Stewardship",
-    "url": "/learn/heating-and-cooling/",
-    "description": "A heat pump moves heat. A furnace makes it. Either one needs a path for air, and this sketch does not size the equipment."
-  },
-  {
-    "title": "Water in and waste out | Board of Project Stewardship",
-    "url": "/learn/plumbing/",
-    "description": "Supply, a water heater, fixtures, and drains with vents. The wet rooms on this plan are the kitchen, baths, and laundry."
-  },
-  {
-    "title": "Power from the meter | Board of Project Stewardship",
-    "url": "/learn/electrical/",
-    "description": "Power arrives at a meter and a panel, then leaves on branch circuits. This is not a load calculation."
-  },
-  {
-    "title": "Adding a story | Board of Project Stewardship",
-    "url": "/learn/second-story/",
-    "description": "Adding a story loads the walls and foundation that are already there, and it opens the roof. This drawing is already two stories."
-  },
-  {
-    "title": "Heat, leaks, and drying | Board of Project Stewardship",
-    "url": "/learn/heat-air-moisture/",
-    "description": "Insulation slows heat. Sealing stops leaks. The wall still has to dry after rain. Marine climate zone 4C."
-  },
-  {
-    "title": "Rooms on this drawing | Board of Project Stewardship",
-    "url": "/learn/rooms/",
-    "description": "The rooms drawn on this house: garage and main floor, then bedrooms, baths, and laundry above."
-  },
-  {
-    "title": "Rain in this region | Board of Project Stewardship",
-    "url": "/learn/marine-climate/",
-    "description": "Western Washington is wet and slow to dry. Overhangs, drained cladding, and grade that falls away match that weather."
+    "description": "Yarrow Point\u2019s ~231-acre Lake Washington peninsula (one entry/exit, Wetherill Nature Preserve) uses town Permit Forms and SMP shoreline setbacks."
   }
 ]

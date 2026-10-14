@@ -289,8 +289,86 @@ function clampOpening(o, w) {
   o.t = Math.max(m, Math.min(1 - m, o.t));
 }
 let drag = null;
+const svgPointers = new Map();
+let viewGesture = null;
+function zoomPlan(factor, clientX, clientY) {
+  const rect = svg.getBoundingClientRect();
+  const fx = rect.width ? (clientX - rect.left) / rect.width : 0.5;
+  const fy = rect.height ? (clientY - rect.top) / rect.height : 0.5;
+  const anchorX = view.x + fx * view.w;
+  const anchorY = view.y + fy * view.h;
+  const aspect = view.w > 0 ? view.h / view.w : 0.8;
+  const nextW = Math.min(240, Math.max(6, view.w / factor));
+  view.w = nextW;
+  view.h = nextW * aspect;
+  view.x = anchorX - fx * view.w;
+  view.y = anchorY - fy * view.h;
+  render2D();
+}
+function pointerPair() {
+  const pts = [...svgPointers.values()];
+  if (pts.length < 2) return null;
+  return {
+    dist: Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y) || 1,
+    x: (pts[0].x + pts[1].x) / 2,
+    y: (pts[0].y + pts[1].y) / 2,
+  };
+}
+function beginPinch() {
+  const mid = pointerPair();
+  if (!mid) return;
+  if (drag && drag.moved) {
+    history.push(drag.snapshot);
+    if (history.length > 60) history.shift();
+  }
+  drag = null;
+  preview = null;
+  measureLine = null;
+  viewGesture = { kind: 'pinch', dist: mid.dist, x: mid.x, y: mid.y };
+}
+function beginLabel(p) {
+  const info = $('fp-selinfo');
+  if (!info) return;
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.value = 'Room';
+  input.maxLength = 28;
+  input.setAttribute('aria-label', 'Room label');
+  input.autocomplete = 'off';
+  input.style.minWidth = '8rem';
+  input.style.minHeight = '2rem';
+  input.style.padding = '0.15rem 0.4rem';
+  input.style.font = 'inherit';
+  info.replaceChildren(input);
+  input.focus();
+  input.select();
+  let done = false;
+  function finish(save) {
+    if (done) return;
+    done = true;
+    const text = save ? input.value.trim().slice(0, 28) : '';
+    input.remove();
+    if (!text) { updateSelectionUI(); return; }
+    pushHistory();
+    const label = { id: nid('l'), text, x: snapTo(p.x, 0.5), y: snapTo(p.y, 0.5) };
+    plan.labels.push(label);
+    selected = { type: 'label', id: label.id };
+    changed(false);
+  }
+  input.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Enter') { ev.preventDefault(); ev.stopPropagation(); finish(true); }
+    else if (ev.key === 'Escape') { ev.preventDefault(); ev.stopPropagation(); finish(false); }
+  });
+  input.addEventListener('blur', () => finish(true));
+}
 svg.addEventListener('pointerdown', (e) => {
   if (e.button > 0) return;
+  svgPointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+  if (svgPointers.size >= 2) {
+    beginPinch();
+    try { svg.setPointerCapture(e.pointerId); } catch (err) { /* pointer already released */ }
+    return;
+  }
   const p = toPlan(e);
   if (measureMode) {
     measureLine = { x1: p.x, y1: p.y, x2: p.x, y2: p.y };
@@ -300,7 +378,14 @@ svg.addEventListener('pointerdown', (e) => {
   }
   const hit = e.target.closest('.fp-hit');
   if (tool === 'select') {
-    if (!hit) { selected = null; render2D(); updateSelectionUI(); return; }
+    if (!hit) {
+      selected = null;
+      viewGesture = { kind: 'pan', id: e.pointerId, x: e.clientX, y: e.clientY, vx: view.x, vy: view.y, vw: view.w, vh: view.h };
+      svg.setPointerCapture(e.pointerId);
+      render2D();
+      updateSelectionUI();
+      return;
+    }
     selected = { type: hit.dataset.type, id: hit.dataset.id };
     if (selected.type === 'item' || selected.type === 'opening' || selected.type === 'label') {
       const obj = findSel(); drag = { start: p, orig: clone(obj), moved: false, snapshot: JSON.stringify(plan) };
@@ -321,13 +406,33 @@ svg.addEventListener('pointerdown', (e) => {
     const it = { id: nid('i'), kind, x: snapTo(p.x, 0.25), y: snapTo(p.y, 0.25), rot: 0 };
     plan.items.push(it); selected = { type: 'item', id: it.id }; changed(false); status(`Placed ${CATALOG[kind].label}. Press R or Rotate to turn it.`); return;
   }
-  if (tool === 'label') {
-    const text = (window.prompt('Room label', 'Room') || '').trim().slice(0, 28); if (!text) return;
-    pushHistory(); const l = { id: nid('l'), text, x: snapTo(p.x, 0.5), y: snapTo(p.y, 0.5) };
-    plan.labels.push(l); selected = { type: 'label', id: l.id }; changed(false);
-  }
+  if (tool === 'label') beginLabel(p);
 });
 svg.addEventListener('pointermove', (e) => {
+  if (svgPointers.has(e.pointerId)) svgPointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+  if (viewGesture && viewGesture.kind === 'pinch' && svgPointers.size >= 2) {
+    const mid = pointerPair();
+    if (!mid) return;
+    const factor = mid.dist / viewGesture.dist;
+    zoomPlan(factor, viewGesture.x, viewGesture.y);
+    const rect = svg.getBoundingClientRect();
+    view.x -= (mid.x - viewGesture.x) * (rect.width ? view.w / rect.width : 0);
+    view.y -= (mid.y - viewGesture.y) * (rect.height ? view.h / rect.height : 0);
+    viewGesture.dist = mid.dist;
+    viewGesture.x = mid.x;
+    viewGesture.y = mid.y;
+    render2D();
+    return;
+  }
+  if (viewGesture && viewGesture.kind === 'pan' && e.pointerId === viewGesture.id) {
+    const rect = svg.getBoundingClientRect();
+    const dx = e.clientX - viewGesture.x;
+    const dy = e.clientY - viewGesture.y;
+    view.x = viewGesture.vx - dx * (rect.width ? viewGesture.vw / rect.width : 0);
+    view.y = viewGesture.vy - dy * (rect.height ? viewGesture.vh / rect.height : 0);
+    render2D();
+    return;
+  }
   const p = toPlan(e);
   if (measureLine) { measureLine.x2 = p.x; measureLine.y2 = p.y; render2D(); return; }
   if (preview) {
@@ -370,8 +475,22 @@ function endPointer() {
   }
   if (drag) { if (drag.moved) { history.push(drag.snapshot); if (history.length > 60) history.shift(); changed(false); } drag = null; }
 }
-svg.addEventListener('pointerup', endPointer);
-svg.addEventListener('pointercancel', endPointer);
+function releaseSvgPointer(e) {
+  svgPointers.delete(e.pointerId);
+  if (viewGesture && viewGesture.kind === 'pinch') {
+    if (svgPointers.size >= 2) beginPinch();
+    else viewGesture = null;
+    if (svgPointers.size > 0) return;
+  }
+  if (viewGesture && viewGesture.kind === 'pan' && viewGesture.id === e.pointerId) viewGesture = null;
+  endPointer();
+}
+svg.addEventListener('pointerup', releaseSvgPointer);
+svg.addEventListener('pointercancel', releaseSvgPointer);
+svg.addEventListener('wheel', (e) => {
+  e.preventDefault();
+  zoomPlan(Math.exp(-e.deltaY * 0.001), e.clientX, e.clientY);
+}, { passive: false });
 function findSel() {
   if (!selected) return null;
   const list = { item: plan.items, wall: plan.walls, opening: plan.openings, label: plan.labels }[selected.type] || [];
@@ -403,7 +522,7 @@ function setTool(t) {
   tool = t;
   document.querySelectorAll('[data-fp-tool]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.fpTool === t ? 'true' : 'false'));
   svg.style.cursor = t === 'select' ? 'default' : 'crosshair';
-  const hints = { select: 'Select: tap to pick, drag to move furniture, doors, windows, or labels.', wall: 'Wall: press and drag to draw. Ends snap to nearby corners.', door: 'Door: tap a wall to add a 3-foot door.', window: 'Window: tap a wall to add a 4-foot window.', item: 'Furniture: choose a piece, then tap the plan to place it.', label: 'Label: tap the plan to name a room.' };
+  const hints = { select: 'Select: tap to pick, drag empty space to pan, or drag furniture, doors, windows, and labels.', wall: 'Wall: press and drag to draw. Ends snap to nearby corners.', door: 'Door: tap a wall to add a 3-foot door.', window: 'Window: tap a wall to add a 4-foot window.', item: 'Furniture: choose a piece, then tap the plan to place it.', label: 'Label: tap the plan, then type a room name in the toolbar.' };
   status(hints[t] || '');
 }
 
@@ -456,10 +575,15 @@ async function init3D() {
   let THREE;
   try { THREE = await import(RENDER_LIB); } catch (e) { return showFallback('The 3D viewer could not load right now, so you are seeing a simplified drawing. The plan editor still works fully.'); }
   const canvas = $('fp-canvas');
+  function makeRenderer() {
+    const next = new THREE.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: true });
+    next.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    next.shadowMap.enabled = true;
+    next.shadowMap.type = THREE.PCFSoftShadowMap;
+    return next;
+  }
   let renderer;
-  try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: true }); } catch (e) { return showFallback('The 3D viewer could not start on this device, so you are seeing a simplified drawing.'); }
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-  renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  try { renderer = makeRenderer(); } catch (e) { return showFallback('The 3D viewer could not start on this device, so you are seeing a simplified drawing.'); }
   const scene = new THREE.Scene(); scene.background = new THREE.Color('#0f1512');
   scene.fog = new THREE.Fog('#0f1512', 120, 260);
   const camera = new THREE.PerspectiveCamera(50, 1, 0.2, 600);
@@ -482,6 +606,9 @@ async function init3D() {
   const orbit = { theta: -0.75, phi: 0.95, r: 50 };
   const walk = { x: 0, z: 0, yaw: 0, pitch: 0 };
   let dirty = true;
+  let framePending = false;
+  let viewVisible = true;
+  let glDisposed = false;
 
   function boxMesh(w, h, d, mat, edges) {
     const g = new THREE.BoxGeometry(w, h, d); const m = new THREE.Mesh(g, mat); m.castShadow = true; m.receiveShadow = true;
@@ -541,6 +668,7 @@ async function init3D() {
     sun.target.position.set(center.x, 0, center.z); sun.position.set(center.x - 30, 60, center.z - 20);
     orbit.r = Math.min(Math.max(orbit.r, radius * 0.5), radius * 3);
     dirty = true;
+    requestTick();
   }
   function blocked(x, z) {
     for (const pc of pieces) {
@@ -574,6 +702,7 @@ async function init3D() {
   function resize() {
     const w = holder.clientWidth, h = holder.clientHeight; if (!w || !h) return;
     renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); dirty = true;
+    requestTick();
   }
   new ResizeObserver(resize).observe(holder); resize();
 
@@ -586,15 +715,16 @@ async function init3D() {
     if (pts.size === 2) {
       const [a, b] = [...pts.values()]; const d = Math.hypot(a.x - b.x, a.y - b.y);
       if (pinch && !opts.walk) orbit.r = Math.min(radius * 3, Math.max(radius * 0.4, orbit.r * pinch / d));
-      pinch = d; dirty = true; return;
+      pinch = d; dirty = true; requestTick(); return;
     }
     if (opts.walk) { walk.yaw -= dx * 0.005; walk.pitch = Math.max(-1.2, Math.min(1.2, walk.pitch - dy * 0.004)); }
     else { orbit.theta -= dx * 0.008; orbit.phi = Math.max(0.12, Math.min(1.45, orbit.phi - dy * 0.006)); }
     dirty = true;
+    requestTick();
   });
   const up = (e) => { pts.delete(e.pointerId); if (pts.size < 2) pinch = 0; };
   canvas.addEventListener('pointerup', up); canvas.addEventListener('pointercancel', up);
-  canvas.addEventListener('wheel', (e) => { if (opts.walk) return; e.preventDefault(); orbit.r = Math.min(radius * 3, Math.max(radius * 0.4, orbit.r * (1 + Math.sign(e.deltaY) * 0.1))); dirty = true; }, { passive: false });
+  canvas.addEventListener('wheel', (e) => { if (opts.walk) return; e.preventDefault(); orbit.r = Math.min(radius * 3, Math.max(radius * 0.4, orbit.r * (1 + Math.sign(e.deltaY) * 0.1))); dirty = true; requestTick(); }, { passive: false });
 
   // walking: keys + on-screen pad
   const move = { f: 0, t: 0 }; const keys = new Set();
@@ -608,7 +738,17 @@ async function init3D() {
     btn.addEventListener('pointerdown', on); btn.addEventListener('pointerup', off); btn.addEventListener('pointerleave', off); btn.addEventListener('pointercancel', off);
   });
   let last = performance.now();
+  function sceneNeedsFrame() {
+    return viewVisible && !document.hidden && (dirty || opts.walk);
+  }
+  function requestTick() {
+    if (framePending || glDisposed || !sceneNeedsFrame()) return;
+    framePending = true;
+    requestAnimationFrame(tick);
+  }
   function tick(now) {
+    framePending = false;
+    if (glDisposed || !viewVisible || document.hidden) return;
     const dt = Math.min(0.05, (now - last) / 1000); last = now;
     if (opts.walk) {
       const f = move.f + (keys.has('w') || keys.has('arrowup') ? 1 : 0) - (keys.has('s') || keys.has('arrowdown') ? 1 : 0);
@@ -621,13 +761,42 @@ async function init3D() {
       }
     }
     if (dirty) { placeCamera(); renderer.render(scene, camera); dirty = false; }
-    requestAnimationFrame(tick);
+    if (sceneNeedsFrame()) requestTick();
   }
+  function disposeRenderer() {
+    if (glDisposed) return;
+    glDisposed = true;
+    framePending = false;
+    renderer.dispose();
+  }
+  function resumeRenderer() {
+    if (glDisposed) {
+      try { renderer = makeRenderer(); }
+      catch (err) { return; }
+      glDisposed = false;
+    }
+    dirty = true;
+    resize();
+    requestTick();
+  }
+  if (holder && window.IntersectionObserver) {
+    const vis = new IntersectionObserver((entries) => {
+      viewVisible = entries.some((entry) => entry.isIntersecting);
+      if (viewVisible) requestTick();
+    });
+    vis.observe(holder);
+  }
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) requestTick(); });
+  window.addEventListener('pagehide', (event) => {
+    if (event.persisted) return;
+    disposeRenderer();
+  });
+  window.addEventListener('pageshow', resumeRenderer);
   scene3D.rebuild = rebuild;
-  scene3D.setWalk = (on) => { opts.walk = on; rebuild(); if (on) startWalk(); $('fp-walkpad').hidden = !on; dirty = true; };
+  scene3D.setWalk = (on) => { opts.walk = on; rebuild(); if (on) startWalk(); $('fp-walkpad').hidden = !on; dirty = true; requestTick(); };
   scene3D.snapshot = () => { placeCamera(); renderer.render(scene, camera); return canvas.toDataURL('image/png'); };
   scene3D.ready = true;
-  rebuild(); requestAnimationFrame(tick);
+  rebuild();
   $('fp-3d-loading').hidden = true;
 }
 
@@ -849,6 +1018,21 @@ function wire() {
       selected = null; preview = null; render2D(); updateSelectionUI();
     }
   });
+  function wireGesture(id, className, label) {
+    var btn = $(id);
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var root = document.getElementById('fp3d');
+      if (!root) return;
+      var on = root.classList.toggle(className);
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      var text = on ? 'Done editing' : 'Tap to edit';
+      btn.textContent = text;
+      if (label) btn.setAttribute('aria-label', text + ' ' + label);
+    });
+  }
+  wireGesture('fp-gesture', 'is-gesture', '');
+  wireGesture('fp-gesture-3d', 'is-gesture-3d', 'the 3D view');
   new ResizeObserver(() => render2D()).observe(svg);
 }
 

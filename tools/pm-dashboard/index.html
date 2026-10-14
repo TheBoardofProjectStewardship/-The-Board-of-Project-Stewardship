@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- board-tool-seo -->
 <meta name="description" content="Good Steward PM dashboard for remodel phases in King County, Snohomish County, and Seattle. Browser-local Board template — not a schedule commitment.">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, follow">
 <link rel="canonical" href="https://boardofprojectstewardship.com/pm-dashboard.html">
 <meta property="og:title" content="PM Execution Dashboard | Board of Project Stewardship">
 <meta property="og:description" content="Good Steward PM dashboard for remodel phases in King County, Snohomish County, and Seattle. Browser-local Board template — not a schedule commitment.">
@@ -2502,5 +2502,26 @@
         })();
 
     </script>
+
+<script>
+(function () {
+  var kind = 'pm-dashboard:resize';
+  function report() {
+    var root = document.documentElement;
+    var body = document.body;
+    var h = Math.max(root ? root.scrollHeight : 0, body ? body.scrollHeight : 0);
+    if (!h) return;
+    try {
+      window.parent.postMessage({ type: kind, height: h }, "*");
+    } catch (err) {}
+  }
+  window.addEventListener("load", report);
+  window.addEventListener("resize", report);
+  if (window.ResizeObserver && document.documentElement) {
+    new ResizeObserver(report).observe(document.documentElement);
+  }
+  report();
+})();
+</script>
 </body>
 </html>

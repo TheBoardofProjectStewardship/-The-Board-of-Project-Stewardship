@@ -1,7 +1,7 @@
 ---
 title: "ADU Bellevue WA — Two-Unit Rule, the 1,200 sq ft Cap, Garage Conversions & Parking"
 date: "2026-10-09"
-description: "Accessory dwelling unit guidance for Bellevue homeowners: how many ADUs the Bellevue Land Use Code allows per lot, the 1,200 square foot floor-area cap and its exceptions, garage conversions, parking triggers, height limits, and who issues the electrical permit."
+description: "Bellevue ADU guidance: how many units the Land Use Code allows per lot, the 1,200 square foot floor-area cap, garage conversions, and parking triggers."
 category: "Additions"
 slug: "adu-bellevue-wa"
 ---

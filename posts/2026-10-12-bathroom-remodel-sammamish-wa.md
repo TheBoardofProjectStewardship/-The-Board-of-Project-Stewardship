@@ -1,7 +1,7 @@
 ---
 title: "Bathroom Remodel Sammamish WA — MyBuildingPermit Remodel Path, Fixture Counts & Wet Assemblies"
 date: "2026-10-12"
-description: "A Sammamish homeowner's guide to a bathroom remodel: when MyBuildingPermit remodel permits apply, how tub and shower replacement differs from simple fixture swaps, fixture-count and sewer/water certificates, City electrical vs building paths, and wet-assembly details that survive Eastside winters."
+description: "A Sammamish bathroom remodel guide: when MyBuildingPermit remodel permits apply, and how tub and shower replacement differs from fixture swaps."
 category: "Bathrooms"
 slug: "bathroom-remodel-sammamish-wa"
 ---

@@ -70,9 +70,11 @@ function axisWalls(walls) {
 function roomWarning(spanX, spanY, area) {
   const short = Math.min(spanX, spanY);
   const long = Math.max(spanX, spanY);
-  const closet = short >= 2 && short <= 6 && long <= 10 && area >= 6 && area <= 60;
-  const hall = short >= 3 && short <= 6 && long >= 6 && long <= 40;
-  const room = short >= 6 && short <= 28 && long <= 36 && area >= 36 && area <= 900;
+  // Near-square spaces (a 6 ft by 6 ft box, for example) are not closets or halls.
+  const elongated = long >= short * 1.5;
+  const closet = elongated && short >= 2 && short <= 6 && long <= 10 && area >= 6 && area <= 60;
+  const hall = elongated && short >= 3 && short <= 6 && long >= 6 && long <= 40;
+  const room = short >= 7 && short <= 28 && long <= 36 && area >= 70 && area <= 900;
   if (closet || hall || room) return null;
   const size = `${fmtFeet(spanX)} by ${fmtFeet(spanY)}`;
   const sq = Math.round(area);
@@ -82,7 +84,7 @@ function roomWarning(spanX, spanY, area) {
   if (short < 3) {
     return `One space is about ${size}, narrower than a typical residential room or hall.`;
   }
-  return `One space is about ${size} (about ${sq} square feet), outside a typical residential room size.`;
+  return `One space is about ${size} (about ${sq} square feet). Habitable rooms are generally at least 70 square feet and 7 feet in each direction under the residential code, while baths and utility spaces can be smaller.`;
 }
 
 /** Closed rectilinear rooms from axis-aligned walls. Doors stay on the wall line, so they do not merge rooms. */

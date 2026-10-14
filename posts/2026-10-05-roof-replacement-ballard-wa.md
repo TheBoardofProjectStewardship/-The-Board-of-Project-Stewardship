@@ -1,7 +1,7 @@
 ---
 title: "Roof Replacement Ballard WA — SDCI Re-Roof Rules, Underlayment & Wet-Season Sequencing"
 date: "2026-10-05"
-description: "Roof replacement guidance for Ballard homeowners: when Seattle SDCI requires a re-roof permit, how underlayment and flashing handle Salmon Bay weather, and how to verify roofers on Washington L&I."
+description: "Roof replacement guidance for Ballard: when Seattle SDCI requires a re-roof permit, how flashing handles Salmon Bay weather, and how to verify roofers."
 category: "Guides"
 slug: "roof-replacement-ballard-wa"
 ---
