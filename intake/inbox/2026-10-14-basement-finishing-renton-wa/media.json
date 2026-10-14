@@ -1,0 +1,45 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-10-14-renton-basement-1.webp",
+      "repo_path": "assets/images/posts/2026-10-14-renton-basement-1.webp",
+      "alt": "Illustrative: a finished lower-level living room with daylight and seating \u2014 the homeowner view after a Renton basement remodel clears building and trade inspections \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "8e2078e47dc1db2c6f18a85613204490",
+      "source": "Crop, mirror, and regrade of existing repo still 2026-08-15-primary-suite-addition-edmonds-2.webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-14-renton-basement-2.webp",
+      "repo_path": "assets/images/posts/2026-10-14-renton-basement-2.webp",
+      "alt": "Illustrative: open framing and unfinished lower-level space ready for insulation, electrical rough-in, and City of Renton remodel review \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "2527e96ba30b960e1c23e6165a05392f",
+      "source": "Crop and regrade of existing repo still 2026-08-12-edmonds-addition-permit-3.webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-14-renton-basement-3.webp",
+      "repo_path": "assets/images/posts/2026-10-14-renton-basement-3.webp",
+      "alt": "Illustrative: a completed interior suite with windows and finished walls \u2014 the kind of livable basement outcome Renton homeowners plan under the City interior remodel path \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "f2b3f30f2263d0a50a1d71ac2be31f9a",
+      "source": "Crop, mirror, and regrade of existing repo still 2026-08-20-bothell-addition-2.webp"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "i0q6xpAnk-E",
+      "url": "https://www.youtube.com/watch?v=i0q6xpAnk-E",
+      "title": "Basement Finishing From Scratch, Remodel Time Lapse",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Illustrative frames are labeled in alt text",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "Reused and regraded existing repo stills. No paid image generation."
+}

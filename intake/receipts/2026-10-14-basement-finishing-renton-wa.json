@@ -1,0 +1,16 @@
+{
+  "submission_id": "2026-10-14-basement-finishing-renton-wa",
+  "idempotency_key": "sha256:87a2dbc80bcb824bffe95d88859be8538eacf27da89bf2818e626dc718a66f27",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-10-14T17:28:33Z",
+  "outputs": [
+    "posts/2026-10-14-basement-finishing-renton-wa.md",
+    "posts/2026-10-14-basement-finishing-renton-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 70
+}

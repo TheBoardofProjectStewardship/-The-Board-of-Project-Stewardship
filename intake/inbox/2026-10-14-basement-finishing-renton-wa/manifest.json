@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-10-14-basement-finishing-renton-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-10-14T17:28:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Basement Finishing Renton WA \u2014 Interior Remodel Permits, City Electrical & Moisture Details",
+    "date": "2026-10-14",
+    "slug": "basement-finishing-renton-wa",
+    "description": "A Renton homeowner's guide to finishing a basement: City interior remodel permits (not MyBuildingPermit), separate electrical/plumbing/mechanical on the Civic Access portal, asbestos surveys, septic bedroom rules, and moisture-smart framing for South King County winters.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 connected and produced openclaw-seo (thin Kirkland roof fallback), edmonds-news, and another-story Redmond addition drafts \u2014 none passed rich-post bar (templated / thin sources / recent roof duplicate risk). Topic switched to basement finishing Renton WA (fresh city+type vs last 14). Producer role fields kept per intake contract."
+}

@@ -1,0 +1,46 @@
+{
+  "producer": "openclaw",
+  "agent": "seo-specialist",
+  "slug": "basement-finishing-renton-wa",
+  "title": "Basement Finishing Renton WA \u2014 Interior Remodel Permits, City Electrical & Moisture Details",
+  "description": "A Renton homeowner's guide to finishing a basement: City interior remodel permits (not MyBuildingPermit), separate electrical/plumbing/mechanical on the Civic Access portal, asbestos surveys, septic bedroom rules, and moisture-smart framing for South King County winters.",
+  "category": "Guides",
+  "keywords": [
+    "basement finishing Renton WA",
+    "Renton interior remodel permit",
+    "Renton basement permit",
+    "Renton Civic Access electrical plumbing",
+    "finish basement Renton moisture"
+  ],
+  "outline": [
+    "Key Takeaways",
+    "Why Renton basements need their own permit map",
+    "Interior remodel building permit and submittal package",
+    "Separate trade permits on the City portal",
+    "Asbestos, septic bedrooms, and early blockers",
+    "Moisture, egress, and South King County basement details",
+    "Materials Worth Knowing",
+    "How to shortlist and verify contractors",
+    "Where Pacific Pro Group fits",
+    "Next steps for a Renton basement finish"
+  ],
+  "search_intent": "A Renton homeowner planning to finish a basement wants to know which City permits apply, why electrical is city-issued rather than L&I statewide, and how moisture and egress affect the scope.",
+  "local_angles": [
+    "City of Renton Residential Interior Remodel path \u2014 not MyBuildingPermit",
+    "Email permittech@rentonwa.gov for FTP upload link; no paper",
+    "Electrical, plumbing, mechanical are separate OTC permits on Civic Access / Online Permit Portal",
+    "Renton is on L&I city-electrical list (city issues electrical)",
+    "Asbestos survey before renovation; King County Env Health if septic + new bedroom/bath"
+  ],
+  "internal_links": [
+    "../renton.html",
+    "../permits.html",
+    "../verify-contractor.html",
+    "../additions.html"
+  ],
+  "notes": "Box-authored fallback brief using PC openclaw SEO only as soft research (PC topic was thin Kirkland roof). PPG only as Board #1 -> https://pacificprogroup.com/.",
+  "generation": {
+    "agent": "box-authored",
+    "mode": "box-fallback"
+  }
+}

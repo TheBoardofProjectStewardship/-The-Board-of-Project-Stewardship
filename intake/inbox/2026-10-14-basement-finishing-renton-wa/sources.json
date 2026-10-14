@@ -1,0 +1,65 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Renton",
+    "service": "Basement finishing",
+    "slug": "basement-finishing-renton-wa"
+  },
+  "sources": [
+    {
+      "url": "https://www.rentonwa.gov/City-Services/Permit-Services/Building-Fire-and-Signs/Residential-Interior-Remodels",
+      "title": "City of Renton \u2014 Residential Interior Remodels",
+      "retrieved": "2026-10-14",
+      "supports": "Interior remodel submittal: building area, existing/proposed floor layout, windows/doors, fixtures, wall section, structural stamp if needed, WSEC-R energy checklist; separate electrical/plumbing/mechanical/fire permits; email permittech@rentonwa.gov for FTP upload; no paper; first review typically 2-3 weeks; asbestos survey note; septic bedroom/bath needs King County Environmental Health approval letter; OTC list on Online Permitting Portal; inspection scheduling 425-430-7202 or portal."
+    },
+    {
+      "url": "https://www.rentonwa.gov/City-Services/Permit-Services/Building-Fire-and-Signs/Building-Permits-FAQ",
+      "title": "City of Renton \u2014 Building Permits FAQ",
+      "retrieved": "2026-10-14",
+      "supports": "RMC 4-5-060E.1 permit trigger; OTC mechanical/electrical/plumbing/PV/re-roof via Civic Access Self-Service Portal (CASSP); plan-review permits via PermitTech@rentonwa.gov; no expedite option; no Basics Program; State WA contractor license + City business license required before issuance; owner may do own work except electrical (3-year residency rule); construction hours for SF remodel; COR Maps for city-limits check; cannot start work before permit issued."
+    },
+    {
+      "url": "https://www.rentonwa.gov/City-Services/Permit-Services/Online-Permit-Portal",
+      "title": "City of Renton \u2014 Online Permit Portal (CASSP)",
+      "retrieved": "2026-10-14",
+      "supports": "Civic Access / Online Permit Portal landing used for OTC permits, inspections, and account self-service."
+    },
+    {
+      "url": "https://www.rentonwa.gov/City-Services/Permit-Services/Building-Fire-and-Signs",
+      "title": "City of Renton \u2014 Building, Fire, and Signs",
+      "retrieved": "2026-10-14",
+      "supports": "Hub linking Residential Interior Remodels, FAQ, Online Permit Portal (CASSP), inspection scheduling phones, fee schedule."
+    },
+    {
+      "url": "https://www.rentonwa.gov/City-Services/Permit-Services",
+      "title": "City of Renton \u2014 Permit Services",
+      "retrieved": "2026-10-14",
+      "supports": "Permit required language for alter/convert/electrical/gas/mechanical/plumbing; PermitTech contact 425-430-7215 / permittech@rentonwa.gov."
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "title": "Washington L&I \u2014 City electrical permits and inspections list",
+      "retrieved": "2026-10-14",
+      "supports": "Renton listed among cities that issue their own electrical permits (contrast with jurisdictions where L&I issues electrical)."
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "Washington L&I Verify a Contractor",
+      "retrieved": "2026-10-14",
+      "supports": "Contractor registration, bond, and insurance verification before hire."
+    },
+    {
+      "url": "https://www.pscleanair.gov/",
+      "title": "Puget Sound Clean Air Agency",
+      "retrieved": "2026-10-14",
+      "supports": "Regional asbestos rules referenced by Renton remodel page for surveys before renovation or demolition."
+    }
+  ],
+  "generation": {
+    "agent": "box-authored",
+    "hermes_status": "box-fallback-verified",
+    "verified_count": 8,
+    "supports_mode": "box-verified",
+    "note": "All listed URLs returned HTTP 200 via curl or WebFetch on 2026-10-14. Renton is NOT a MyBuildingPermit jurisdiction for interior remodel; City uses email FTP for plan review and Civic Access for OTC trades. Dropped King County Environmental Health deep links that 404'd; septic caveat cited from Renton remodel page only."
+  }
+}
