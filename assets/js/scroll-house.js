@@ -561,8 +561,11 @@ function labelsFor(model, progress, mvp, width, height) {
   candidates.sort((a, b) => Number(!!a.minor) - Number(!!b.minor));
   for (const label of candidates) {
     const projected = projectPoint(mvp, label.position, width, height);
-    const half = Math.min(label.text.length * (label.minor ? 2.55 : 2.9), 60);
-    const box = { left: projected.x - half - 3, right: projected.x + half + 3, top: projected.y - 9, bottom: projected.y + 9 };
+    const narrow = width < 640;
+    const char = narrow ? (label.minor ? 1.9 : 2.15) : (label.minor ? 2.55 : 2.9);
+    const half = Math.min(label.text.length * char, narrow ? 46 : 60);
+    const vy = narrow ? 6 : 9;
+    const box = { left: projected.x - half - 2, right: projected.x + half + 2, top: projected.y - vy, bottom: projected.y + vy };
     if (box.left < 3 || box.right > width - 3 || box.top < 3 || box.bottom > height - 3) continue;
     if (labels.some(l => box.left < l.box.right && box.right > l.box.left && box.top < l.box.bottom && box.bottom > l.box.top)) continue;
     labels.push({ text: label.text, x: projected.x, y: projected.y, minor: !!label.minor, opacity, box });
@@ -1015,7 +1018,7 @@ function createRenderer(canvas) {
           labelNodes.push(node);
         }
         node.hidden = false;
-        node.classList.toggle("is-dim", !!item.minor);
+        node.classList.toggle("is-dim", !!item.minor || /\bft\b/i.test(item.text));
         if (node.textContent !== item.text) node.textContent = item.text;
         node.style.left = item.x.toFixed(1) + "px";
         node.style.top = item.y.toFixed(1) + "px";

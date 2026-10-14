@@ -40,8 +40,8 @@
 }
 .sh-title {
   margin: 0.1rem 0 0;
-  font-size: clamp(1.05rem, 2vw, 1.55rem);
-  font-weight: 750;
+  font-size: clamp(1rem, 1.8vw, 1.4rem);
+  font-weight: 650;
   letter-spacing: -0.02em;
   line-height: 1.15;
   color: #fff;
@@ -50,7 +50,7 @@
   margin: 0.2rem auto 0;
   max-width: 38rem;
   color: rgba(242, 242, 238, 0.72);
-  font-size: max(1rem, 16px);
+  font-size: 0.9375rem;
   font-weight: 300;
   line-height: 1.4;
 }
@@ -74,8 +74,8 @@
   border: 1px solid rgba(255, 255, 255, 0.14);
   color: rgba(242, 242, 238, 0.62);
   font-size: 0.75rem;
-  font-weight: 650;
-  letter-spacing: 0.04em;
+  font-weight: 550;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
   cursor: pointer;
 }
@@ -236,22 +236,23 @@
   transform: translate(-50%, -50%);
   color: #1c1916;
   font-size: 12px;
-  font-weight: 650;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-transform: none;
   white-space: nowrap;
 }
 .sh-label.is-dim {
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  font-size: 11px;
+  font-weight: 450;
+  letter-spacing: 0.02em;
+  font-size: 12px;
   color: #3f3830;
 }
 .scroll-house-line {
   margin: 0;
+  flex: 0 0 auto;
   text-align: center;
   color: rgba(242, 242, 238, 0.86);
-  font-size: max(1rem, 16px);
+  font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.35;
 }
@@ -356,10 +357,6 @@
     color: #04140c;
   }
 }
-@media (max-width: 640px) {
-  .sh-stages li { letter-spacing: 0.03em; padding: 0.35rem 0.45rem; }
-  .sh-btn, .sh-link { letter-spacing: 0.03em; }
-}
 .sh-still-img {
   aspect-ratio: 960 / 540;
   background: #efebe2 url("/assets/images/scroll-house-still.svg") center / contain no-repeat;
@@ -382,8 +379,8 @@
   border-radius: 999px;
   min-height: 44px;
   padding: 0.45rem 0.85rem;
-  font: 650 0.875rem/1.2 Inter, system-ui, sans-serif;
-  letter-spacing: 0.03em;
+  font: 550 0.75rem/1.2 Inter, system-ui, sans-serif;
+  letter-spacing: 0.015em;
   text-transform: uppercase;
   cursor: pointer;
 }
@@ -407,7 +404,7 @@
   max-width: 40rem;
   text-align: center;
   color: rgba(242, 242, 238, 0.9);
-  font-size: max(1rem, 16px);
+  font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.45;
 }
@@ -419,7 +416,7 @@
   margin: 0.2rem 0 0;
   text-align: center;
   color: rgba(242, 242, 238, 0.5);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 300;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -428,4 +425,47 @@
   .sh-learn-aside { display: none; }
   .sh-note { display: block; text-align: left; margin: 0.65rem auto; }
   .sh-learn-copy { min-height: 0; }
+}
+@media (max-width: 640px) {
+  .sh-kicker { font-size: 0.5625rem; font-weight: 550; letter-spacing: 0.04em; }
+  .sh-title { font-size: 0.95rem; font-weight: 600; }
+  .sh-dek { font-size: 0.8125rem; font-weight: 300; line-height: 1.3; }
+  .sh-stages li {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    min-height: 44px;
+    padding: 0.2rem 0.42rem;
+  }
+  .sh-call {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    min-height: 44px;
+    padding: 0.2rem 0.65rem;
+  }
+  .scroll-house-line,
+  .sh-learn-prompt,
+  .sh-note {
+    font-size: 0.8125rem;
+    font-weight: 300;
+    line-height: 1.35;
+  }
+  .sh-fine,
+  .sh-learn-aside { font-size: 0.6875rem; font-weight: 300; }
+  .sh-btn, .sh-link { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.02em; }
+  .sh-label { font-size: 8px; font-weight: 500; letter-spacing: 0; }
+  .sh-label.is-dim { font-size: 7px; font-weight: 400; letter-spacing: 0.01em; }
+  .scroll-house-plan text { font-size: 8px; letter-spacing: 0; }
+  /* The sheet used to keep a 200px floor inside a shrinking live box, so the
+     caption spilled out and sat under the note chips. Let the drawing shrink
+     and keep the caption, then the chips, in normal flow. */
+  .scroll-house-sticky { gap: 0.28rem; }
+  .sh-top, .sh-stages, .sh-progress, .sh-learn, .scroll-house-cta, .sh-hint { flex: 0 0 auto; }
+  .scroll-house-live { overflow: hidden; }
+  .scroll-house-sheet { min-height: 0; }
+  .scroll-house-line { margin-top: 0.4rem; }
+  .sh-learn { margin-top: 0.55rem; }
+  .sh-learn-set { gap: 0.45rem 0.4rem; }
+  .sh-learn-copy { min-height: 2.6em; }
 }
