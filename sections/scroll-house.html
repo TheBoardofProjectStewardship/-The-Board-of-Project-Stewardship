@@ -7,12 +7,12 @@
           <p class="sh-dek">Start with the finished house. Scroll peels the roof, the floors, and the foundation.</p>
         </div>
         <ol class="sh-stages" aria-label="Build stages">
-          <li class="is-on" tabindex="0" data-stage="house" data-sh-progress="0.04" aria-current="step">House</li>
-          <li tabindex="0" data-stage="front" data-sh-progress="0.22">Front</li>
-          <li tabindex="0" data-stage="roof" data-sh-progress="0.38">Roof</li>
-          <li tabindex="0" data-stage="upper" data-sh-progress="0.56">Upper</li>
-          <li tabindex="0" data-stage="plan" data-sh-progress="0.74">Plan</li>
-          <li tabindex="0" data-stage="foundation" data-sh-progress="0.93">Slab</li>
+          <li class="is-on" data-stage="house"><button type="button" data-stage="house" data-sh-progress="0.04" aria-current="step">House</button></li>
+          <li data-stage="front"><button type="button" data-stage="front" data-sh-progress="0.22">Front</button></li>
+          <li data-stage="roof"><button type="button" data-stage="roof" data-sh-progress="0.38">Roof</button></li>
+          <li data-stage="upper"><button type="button" data-stage="upper" data-sh-progress="0.56">Upper</button></li>
+          <li data-stage="plan"><button type="button" data-stage="plan" data-sh-progress="0.74">Plan</button></li>
+          <li data-stage="foundation"><button type="button" data-stage="foundation" data-sh-progress="0.93">Slab</button></li>
         </ol>
         <div class="sh-progress" aria-hidden="true"><span></span></div>
         <label class="sh-scrub-label">Build progress
@@ -28,23 +28,28 @@
                 <path stroke-width="2" d="M150 78 H286 M168 92 H250 M118 150 H250"/>
                 <path stroke-width="1.5" d="M118 188 H250 V208 H150 V188"/>
               </g>
-              <g fill="#1c1916" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" text-anchor="middle">
+              <g fill="#1c1916" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="600" text-anchor="middle">
                 <text x="55" y="116">Garage</text>
-                <text x="200" y="108">Stair</text>
                 <text x="210" y="64">Kitchen</text>
                 <text x="292" y="100">Living</text>
-                <text x="184" y="172">Patio</text>
-                <text x="290" y="156">Office</text>
               </g>
             </svg>
-            <canvas class="scroll-house-canvas" width="960" height="540" tabindex="0" aria-label="House drawing. In explore, drag to turn it, or use the arrow keys. Plus and minus zoom."></canvas>
+            <canvas class="scroll-house-canvas" width="960" height="540" tabindex="0" aria-describedby="sh-explore-help" aria-label="House drawing. Arrow keys turn it. Plus and minus, or the zoom buttons, change the zoom."></canvas>
             <div class="sh-labels" aria-hidden="true"></div>
             <div class="sh-explore" hidden>
               <button type="button" class="sh-explore-toggle" aria-pressed="false" aria-describedby="sh-explore-help">Explore the house</button>
+              <button type="button" class="sh-zoom" data-zoom="in" hidden>Zoom in</button>
+              <button type="button" class="sh-zoom" data-zoom="out" hidden>Zoom out</button>
               <button type="button" class="sh-explore-reset" hidden>Reset view</button>
-              <p id="sh-explore-help" class="sh-explore-help">Drag or use arrow keys to look around. Plus and minus zoom. Reset view returns to the scroll camera.</p>
+              <p id="sh-explore-help" class="sh-explore-help">Arrow keys turn the house. Plus and minus, or the zoom buttons, change the zoom. A horizontal drag turns it after you tap the house. Reset view returns to the scroll camera.</p>
             </div>
           </div>
+          <ul class="sh-rooms" data-rooms="main" hidden>
+            <li>Garage</li><li>Kitchen</li><li>Living</li><li>Stair</li><li>Patio</li><li>Office</li>
+          </ul>
+          <ul class="sh-rooms" data-rooms="upper" hidden>
+            <li>Primary bedroom</li><li>Bedrooms</li><li>Laundry</li><li>Bath</li><li>Balcony</li>
+          </ul>
           <p class="scroll-house-line" id="scroll-house-line">The finished house. Tap it, then drag to turn it.</p>
         </div>
         <figure class="scroll-house-still">

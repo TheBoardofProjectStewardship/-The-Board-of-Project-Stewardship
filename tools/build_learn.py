@@ -5,6 +5,7 @@ from __future__ import annotations
 import html
 import json
 import re
+import xml.etree.ElementTree as ET
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -15,44 +16,44 @@ OG = f"{ORIGIN}/assets/images/home-hero.webp"
 FORBIDDEN = re.compile(r"\b(?:BOPS|ChatGPT|Gemini|Imagen|Veo|Higgsfield|Pollinations)\b|\bAI\b")
 
 STEPS = [
-    ("survey", "survey", "Survey", "Survey and soils", "Before digging",
+    ("survey", "survey", "Survey", "What the survey has to settle", "The lot",
      "The house has to sit on a known piece of ground. A survey locates the property lines and the grades. When the site needs it, a soils report says what the ground can carry and where water sits. This drawing is not a survey and not a soils report. It only shows the footprint of this house and its garage."),
-    ("stake", "stake", "Stake", "Stake the corners", "Before digging",
+    ("stake", "stake", "Corners", "Corners that survive the dig", "The lot",
      "The corners of the house and the garage are marked on the ground from the survey, with offsets so the marks survive the digging. On these plan sheets the main wing is about 45 feet and the garage is about 22 feet. Those figures are not a substitute for stakes on a real lot."),
-    ("clear", "clear", "Clear", "Clear and protect", "Before digging",
+    ("clear", "clear", "Trees", "Trees and topsoil", "The lot",
      "Trees, shrubs, and paving that stay are fenced before machines arrive. Topsoil can be stripped and saved for planting beds. It is a poor material under a footing. The sketch keeps the paths and the planted strip beside the garage so the finished ground has something to aim at."),
-    ("excavate", "excavate", "Dig", "Excavate", "Groundwork",
-     "The pad is dug to the depth the foundation needs, and wide enough to form the footings. On a slope, soil is cut from the high side and may be placed on the low side. Fill under a footing has to be proper material, placed in layers and compacted. This model shows the pad, not the hole."),
-    ("footings", "footings", "Footings", "Footings", "Groundwork",
-     "Footings are the wide concrete bases that spread wall and post loads into the soil. A continuous footing follows a bearing wall. A pad footing sits under a post, such as a porch post. Width and thickness come from the load and the soil. This sketch does not calculate them."),
-    ("foundwall", "foundwall", "Walls", "Foundation walls", "Groundwork",
-     "Walls rise off the footings to the height the floor needs. On a slab they may be short stem walls. A crawl space or a basement needs taller walls. This house is drawn as a low pad, so the model shows a low base, not a basement."),
-    ("damp", "damp", "Drain", "Dampproof and drain", "Groundwork",
-     "Concrete against soil needs a way for water to leave. A dampproof coating suits a wall that is drained. A waterproof membrane is for water that can press on the wall. A perforated drain at the footing, set in clean stone, leads water to daylight or a sump. The sketch does not draw the pipe. The base is where that work sits."),
-    ("slab", "slab", "Slab", "Under-slab work and the slab", "Groundwork",
-     "Before the slab is poured, drains that run under the floor are in place, stone breaks the path of moisture rising from the ground, and a vapor retarder goes under the concrete. The slab is then poured. In this model the floor line is the top of that work. Pipes are not located."),
-    ("sill", "sill", "Sill", "Sill and first floor", "Groundwork",
-     "A sill, usually treated wood, is anchored to the foundation. On a crawl space the first floor is a platform of rim, joists, and subfloor. On a slab, the wall plates bear on the concrete. This house is drawn on a slab, so the main-floor walls start at that line."),
-    ("backfill", "backfill", "Fill", "Backfill and rough grade", "Groundwork",
+    ("excavate", "excavate", "Hole", "The hole for a slab house", "The lot",
+     "Before anyone enters an excavation, a competent person evaluates the soil, water, adjacent loads, and required protective system. Protection can be needed in shallow cuts as well as deep ones. Dewatering and safe access are planned as part of that work. On a slope, soil is cut from the high side. Fill under a footing has to be proper material, placed in layers and compacted. This model shows the pad, not the hole."),
+    ("footings", "footings", "Spread", "Concrete that spreads the walls", "The slab hold",
+     "Footings are the wide concrete bases that spread wall and post loads into the soil. A continuous footing follows a bearing wall. A pad footing sits under a post, such as a porch post. On this slab house the walls that rise off those footings are short stem walls, not a basement. Width and thickness come from the load and the soil. This sketch does not calculate them."),
+    ("drains", "slab", "Drains", "Drains the slab will bury", "The slab hold",
+     "Drains that run under the floor go in before the concrete. A trap needs a vent, and an under-slab drain cannot be moved after the pour. Stone under the slab breaks the path of moisture rising from the ground, and a vapor retarder goes on that stone. The sketch names the idea. It does not route a pipe."),
+    ("slab", "slab", "Slab", "The floor you walk on", "The slab hold",
+     "The slab is poured on that prepared base. In this model the floor line is the top of that work. A treated sill, or the wall plates themselves, is anchored to the concrete so the wood frame starts off the soil. A crawl-space house would build a wood platform here instead. This house is drawn on a slab."),
+    ("damp", "damp", "Water", "Water at the outside of the concrete", "The slab hold",
+     "Concrete against soil needs a way for water to leave. A dampproof coating suits a wall that is drained. A waterproof membrane is for water that can press on the wall. A perforated drain at the footing, set in clean stone and outside the footing, leads water to daylight or a sump. The sketch does not draw the pipe."),
+    ("backfill", "backfill", "Fill", "Soil back, sloping away", "The slab hold",
      "Soil goes back against the foundation only after the wall can take the pressure and the drain is in place. It is placed in layers. The rough grade slopes away so rain does not stand at the wall. Planting waits until the heavy work is done."),
-    ("frame1", "frame1", "Frame", "First-floor walls", "Framing",
-     "Exterior walls are framed on the platform: bottom plate, studs, headers over openings, and top plates. The garage door and the wide windows need headers because studs are missing there. Partitions that only divide rooms are not the load path in this sketch. Nothing here sizes a header."),
-    ("frame2", "frame2", "Upper", "Second floor and walls", "Framing",
+    ("frame1", "frame1", "Studs", "The first story of studs", "The frame hold",
+     "Exterior walls are framed on the slab: bottom plate, studs, headers over openings, and top plates. The garage door and the wide windows need headers because studs are missing there. Partitions that only divide rooms are not the load path in this sketch. Nothing here sizes a header."),
+    ("frame2", "frame2", "Upper", "The bedroom floor and the stair hole", "The frame hold",
      "The upper floor is another platform on the walls below, then the upper walls. The stair opening is framed before that deck is closed. On this house the upper floor holds the primary bedroom, two other bedrooms, baths, and the laundry. The balcony is an outdoor piece of that floor, and it needs a guard."),
-    ("roof", "roof", "Roof", "Roof framing", "Framing",
-     "Rafters or trusses set the roof shape and tie the tops of the walls. This house has a gable on the east, a hip toward the balcony, a dormer on the front slope, and lower roofs on the garage and the porch. The drawing shows those planes. It does not show every member, and it is not a truss design."),
-    ("dryin", "dryin", "Dry-in", "Dry in", "Closing in",
+    ("roof", "roof", "Roofs", "Gable, hip, and the lower roofs", "The frame hold",
+     "Site-built rafters are assembled on site. A conventional ridge-board roof uses ties to resist outward thrust; a designed structural ridge-beam roof uses a different support arrangement. This house has a gable on the east, a hip toward the balcony, a dormer on the front slope, and lower roofs on the garage and the porch. The drawing shows those planes. It is not a truss design."),
+    ("brace", "systemsFrame", "Brace", "Brace it before it is covered", "The frame hold",
+     "Before the walls are covered, the frame that resists wind and earthquakes has to be in place: structural sheathing, the nailing the design calls for, and hold-downs where the shear walls end. A framing inspection looks at that work while it is still visible. This sketch highlights the walls. It does not give a nailing schedule."),
+    ("dryin", "dryin", "Dry-in", "A roof that sheds", "Close and finish",
      "The frame is dried in when the roof sheds water and the openings are covered: sheathing, underlayment, and a cover at the windows and doors. Siding can wait. In a wet climate an open roof is the emergency, so this comes before interior finishes. At this step the roof planes are on and the siding strokes are still off."),
-    ("rough", "rough", "Rough", "Rough-in", "Closing in",
+    ("rough", "rough", "Trades", "Open walls for the trades", "Close and finish",
      "With the shell closed to weather, plumbing, heating, and electrical lines run in the open walls and floors. Drains, vents, and ducts have to miss the joists where the structure needs the wood. The baths, kitchen, and laundry are the rooms that need water. The sketch does not route a pipe."),
-    ("insulate", "insulate", "Seal", "Insulate and air-seal", "Closing in",
-     "Insulation slows heat moving through the assembly. Sealing stops the leaks that carry both heat and moisture. Gaps at plates, windows, and penetrations are closed, then the cavities are filled. In a marine climate the wall also has to be able to dry. The sketch shows the open frame, not a product."),
-    ("siding", "siding", "Siding", "Siding and trim", "Finishing",
-     "Cladding is the rain coat. On this house the east gable reads as board-and-batten and the other walls as horizontal courses. A drainage plane behind the siding lets water that gets past the face run out. Trim covers the edges of openings. The strokes are that skin, not a siding order."),
-    ("drywall", "drywall", "Inside", "Drywall and finishes", "Finishing",
+    ("insulate", "insulate", "Energy", "The energy check", "Close and finish",
+     "Insulation slows heat moving through the assembly. Sealing stops the leaks that carry both heat and moisture. Gaps at plates, windows, and penetrations are closed, then the cavities are filled. An energy inspection looks at that work before it is covered. In a marine climate the wall also has to be able to dry. The sketch shows the open frame, not a product."),
+    ("siding", "siding", "Coat", "The rain coat", "Close and finish",
+     "Direct-applied siding still relies on a properly integrated water-resistive barrier and flashing behind it. A separate drainage gap can improve drainage and drying. Whether that gap is required depends on the cladding, assembly, manufacturer's instructions, and applicable code. On this house the east gable reads as board-and-batten and the other walls as horizontal courses."),
+    ("drywall", "drywall", "Rooms", "Rooms you can live in", "Close and finish",
      "Interior board closes the walls. Joints are finished, then the rooms are painted, floored, and fitted. Cabinets and fixtures come after the surfaces they sit on. The plan shows how this house is divided. It does not name a finish."),
-    ("grade", "grade", "Grade", "Final grade and landscape", "Finishing",
-     "The ground is finished so water leaves the house: slope, downspouts that discharge away from the wall, and planting that does not hold water at the siding. Walks and the patio are set to those elevations. The model returns to the whole house."),
+    ("grade", "grade", "Grade", "Gutters and the final walk", "Close and finish",
+     "The ground is finished so water leaves the house: slope, gutters, downspouts that discharge away from the wall, and planting that does not hold water at the siding. Walks and the patio are set to those elevations. The final walk checks that the house matches the approved work. The model returns to the whole house."),
 ]
 
 
@@ -81,25 +82,31 @@ TXT = 'fill="#1c1916" font-family="system-ui,sans-serif" font-size="11"'
 
 DIAGRAMS = {
     "cutfill": svg(
-        f'<path {INK} d="M20 150 L120 70 L240 70 L340 160"/>'
-        f'<path {SOFT} d="M120 70 L120 150 L240 150 L240 70"/>'
-        f'<path {INK} d="M128 150 H232"/>'
-        f'<path {SOFT} d="M40 140 L100 90 M55 145 L115 95 M70 150 L130 100"/>'
-        f'<path {SOFT} d="M250 90 L320 155 M265 85 L335 150"/>'
-        f'<text {TXT} x="36" y="40">Cut</text>'
-        f'<text {TXT} x="286" y="40">Fill</text>'
-        f'<text {TXT} x="150" y="172">Level pad</text>',
-        "A slope cut on the high side and filled on the low side",
+        f'<path {SOFT} stroke-dasharray="6 4" d="M16 46 L170 112 L346 184"/>'
+        f'<path {INK} d="M72 112 H252"/>'
+        f'<path {INK} d="M72 112 V120 H252 V112"/>'
+        f'<path {SOFT} d="M84 78 L108 102 M100 70 L128 98 M118 78 L148 108 M136 88 L164 116"/>'
+        f'<path {SOFT} d="M176 124 H240 M184 136 H258 M196 148 H272 M208 160 H286"/>'
+        f'<text {TXT} x="28" y="36">Cut</text>'
+        f'<text {TXT} x="286" y="176">Fill</text>'
+        f'<text {TXT} x="128" y="108">Level pad</text>',
+        "Existing grade falls across a level pad, cut above it and fill below it",
     ),
     "footing": svg(
         f'<path {SOFT} d="M20 168 H340"/>'
         f'<path {INK} d="M70 168 H290 V148 H250 V70 H110 V148 H70 Z"/>'
         f'<path {INK} d="M40 188 H320 V168"/>'
-        f'<circle {INK} cx="78" cy="160" r="4"/>'
-        f'<path {SOFT} d="M78 164 V188 M86 176 H150"/>'
+        f'<circle fill="#8d877c" stroke="none" cx="46" cy="152" r="2.2"/>'
+        f'<circle fill="#8d877c" stroke="none" cx="54" cy="148" r="2"/>'
+        f'<circle fill="#8d877c" stroke="none" cx="60" cy="156" r="2.1"/>'
+        f'<circle fill="#8d877c" stroke="none" cx="50" cy="160" r="1.8"/>'
+        f'<circle fill="#8d877c" stroke="none" cx="58" cy="164" r="2"/>'
+        f'<circle {INK} cx="54" cy="160" r="3.5"/>'
+        f'<path {SOFT} stroke-dasharray="3 3" d="M54 164 V186"/>'
         f'<text {TXT} x="118" y="58">Wall</text>'
-        f'<text {TXT} x="130" y="204">Footing wider than the wall</text>',
-        "A wall sitting on a wider footing, with a drain at the base",
+        f'<text {TXT} x="24" y="144">Stone</text>'
+        f'<text {TXT} x="118" y="204">Footing wider than the wall</text>',
+        "A wall on a wider footing, with stone and a drain outside the footing",
     ),
     "wall": svg(
         f'<path {INK} d="M40 30 H70 V180 H40 Z"/>'
@@ -127,22 +134,25 @@ DIAGRAMS = {
         "A simple roof truss: two top chords, a bottom chord, and webs",
     ),
     "gusset": svg(
-        f'<path {INK} d="M40 150 L180 40"/>'
-        f'<path {INK} d="M180 40 L320 150"/>'
-        f'<path {INK} d="M70 150 H290"/>'
-        f'<rect {INK} x="150" y="78" width="60" height="44"/>'
-        f'<path {SOFT} d="M158 86 H202 M158 96 H202 M158 106 H202 M166 78 V122 M178 78 V122 M190 78 V122"/>'
-        f'<text {TXT} x="130" y="190">Plate at the joint, not a cut in the wood</text>',
-        "A gusset plate at a truss joint",
+        f'<path {INK} d="M28 164 L180 72"/>'
+        f'<path {INK} d="M180 72 L332 164"/>'
+        f'<path {INK} d="M36 164 H324"/>'
+        f'<path {INK} d="M180 72 V164"/>'
+        f'<rect {INK} x="152" y="48" width="56" height="52"/>'
+        f'<path {SOFT} d="M160 56 H200 M160 66 H200 M160 76 H200 M168 48 V100 M180 48 V100 M192 48 V100"/>'
+        f'<text {TXT} x="118" y="196">Plate overlapping the joint</text>',
+        "A gusset plate overlapping the members where they meet",
     ),
     "attic": svg(
-        f'<path {INK} d="M30 160 L180 36 L330 160"/>'
-        f'<path {INK} d="M30 160 H330"/>'
-        f'<path {INK} d="M80 160 V100 H280 V160"/>'
-        f'<path {INK} d="M80 100 L180 36 L280 100"/>'
-        f'<text {TXT} x="132" y="150">Open middle</text>'
-        f'<text {TXT} x="120" y="28">Raised heel at the wall</text>',
-        "A room-in-attic truss, with a raised heel at the eaves",
+        f'<path {INK} d="M36 168 H324"/>'
+        f'<path {INK} d="M36 168 V116"/>'
+        f'<path {INK} d="M324 116 V168"/>'
+        f'<path {INK} d="M36 116 L180 30 L324 116"/>'
+        f'<path {INK} d="M96 168 V108 H264 V168"/>'
+        f'<text {TXT} x="128" y="148">Room inside</text>'
+        f'<text {TXT} x="8" y="108">Heel</text>'
+        f'<text {TXT} x="300" y="108">Heel</text>',
+        "A room-in-attic truss with a raised heel, the room kept inside the roof",
     ),
     "arch": svg(
         f'<path {INK} d="M50 160 A110 90 0 0 1 310 160"/>'
@@ -254,7 +264,7 @@ def p(text: str) -> str:
 ARTICLES = [
     {
         "slug": "cut-and-fill",
-        "name": "Cut and fill",
+        "name": "Leveling a sloping lot",
         "desc": "How a sloping lot is cut and filled to make a level pad, and why the soil under the house is not topsoil.",
         "preset": "excavate",
         "diagram": "cutfill",
@@ -270,7 +280,7 @@ ARTICLES = [
     },
     {
         "slug": "building-systems",
-        "name": "Building systems",
+        "name": "One house, four jobs",
         "desc": "Structure, enclosure, services, and finishes are four different jobs in the same house.",
         "preset": "grade",
         "switches": [("systemsFrame", "Frame only"), ("systemsSkin", "With the skin"), ("grade", "Whole house")],
@@ -283,7 +293,7 @@ ARTICLES = [
     },
     {
         "slug": "load-path",
-        "name": "Load path",
+        "name": "Where the weight goes",
         "desc": "Gravity load moves from the roof through the walls and into the ground. This sketch does not size that path.",
         "preset": "load",
         "diagram": "load",
@@ -296,7 +306,7 @@ ARTICLES = [
     },
     {
         "slug": "columns",
-        "name": "Columns",
+        "name": "Posts you can see",
         "desc": "A column carries load in compression. On this house the porch posts are the columns you can see.",
         "preset": "columns",
         "body": [
@@ -307,7 +317,7 @@ ARTICLES = [
     },
     {
         "slug": "beams",
-        "name": "Beams",
+        "name": "Beams over openings",
         "desc": "A beam carries load sideways to its supports. A header is a short beam over an opening. This sketch does not size one.",
         "preset": "beams",
         "body": [
@@ -318,7 +328,7 @@ ARTICLES = [
     },
     {
         "slug": "trusses",
-        "name": "Trusses",
+        "name": "Triangles in the roof",
         "desc": "A truss is a frame of triangles. The members stay in tension or compression when the joints are left intact.",
         "diagram": "truss",
         "preset": "roof",
@@ -330,7 +340,7 @@ ARTICLES = [
     },
     {
         "slug": "lateral-stability",
-        "name": "Lateral stability",
+        "name": "Wind and earthquakes",
         "desc": "Wind and earthquakes push sideways. Floors share that push with braced walls. This sketch does not show the nailing.",
         "diagram": "shear",
         "preset": "systemsFrame",
@@ -342,7 +352,7 @@ ARTICLES = [
     },
     {
         "slug": "arches-and-vaults",
-        "name": "Arches and vaults",
+        "name": "Why there is no arch",
         "desc": "An arch works in compression and pushes outward. This wood house uses bending members instead.",
         "diagram": "arch",
         "preset": "grade",
@@ -354,7 +364,7 @@ ARTICLES = [
     },
     {
         "slug": "foundation-types",
-        "name": "Foundation types",
+        "name": "What the house sits on",
         "desc": "Slab, crawl space, basement, and piers solve different ground, frost, and access problems. This house is drawn as a slab-level pad.",
         "diagram": "footing",
         "preset": "footings",
@@ -366,12 +376,12 @@ ARTICLES = [
     },
     {
         "slug": "excavation",
-        "name": "Excavation and backfill",
+        "name": "Digging and backfill",
         "desc": "Dig to the footing depth, keep the hole stable, then put soil back only after the wall and the drain can take it.",
         "preset": "excavate",
         "diagram": "footing",
         "body": [
-            p("Excavation opens the ground to the bottom of the footings, wide enough to form them and to stand safely. The sides of a deep cut have to be sloped, benched, or supported under the safety rules for that depth. Water in the hole is pumped out so concrete is not poured into mud."),
+            p("Before anyone enters an excavation, a competent person evaluates the soil, water, adjacent loads, and required protective system. Protection can be needed in shallow cuts as well as deep ones. Dewatering and safe access are planned as part of that work."),
             p("Backfill waits until the foundation wall can resist the pressure and the drain at the footing is in place. Soil goes back in layers. The finished grade slopes away from the house. This model shows the pad those steps are aiming at."),
         ],
         "related": [
@@ -382,7 +392,7 @@ ARTICLES = [
     },
     {
         "slug": "spread-footings",
-        "name": "Spread footings",
+        "name": "How wide the concrete is",
         "desc": "A footing is wider than the wall so the same load presses the soil more gently. This sketch does not size one.",
         "diagram": "footing",
         "preset": "footings",
@@ -394,7 +404,7 @@ ARTICLES = [
     },
     {
         "slug": "masonry-bonding",
-        "name": "Masonry bonding",
+        "name": "Face versus structure",
         "desc": "Overlapped joints let masonry act together. Brick on a wood house is usually a cladding, not the structure.",
         "diagram": "masonry",
         "preset": "siding",
@@ -406,7 +416,7 @@ ARTICLES = [
     },
     {
         "slug": "platform-framing",
-        "name": "Platform framing",
+        "name": "Two floors stacked",
         "desc": "Each story is a deck. The next walls stand on that deck. This house is drawn as two platforms.",
         "diagram": "platform",
         "preset": "frame2",
@@ -418,19 +428,19 @@ ARTICLES = [
     },
     {
         "slug": "roof-framing",
-        "name": "Roof framing",
+        "name": "The roof shape",
         "desc": "Rafters and trusses make the roof shape and tie the walls. This house shows a gable, a hip, and a dormer.",
         "diagram": "rafter",
         "preset": "roof",
         "body": [
-            p("A common rafter runs from the wall to the ridge. A tie or a ceiling joist keeps the two eaves from spreading. A hip rafter runs to an outside corner. A valley rafter sits where two slopes meet in a gutter. A dormer is a small roof and wall cut into a slope, and it has to flash into that slope."),
+            p("Site-built rafters are assembled on site. A conventional ridge-board roof uses ties to resist outward thrust; a designed structural ridge-beam roof uses a different support arrangement. In a conventional tied-rafter roof, a rafter tie or suitably connected ceiling joist keeps the two eaves from spreading. A hip rafter runs to an outside corner. A valley rafter sits where two slopes meet in a gutter. A dormer is a small roof and wall cut into a slope, and it has to flash into that slope."),
             p("This house has an east gable, a hip toward the balcony, a dormer on the front, and lower roofs on the garage and the porch. Trusses can make the same shapes. The planes are drawn. The members inside them are not."),
         ],
         "related": [("../trusses/", "Trusses"), ("../trussed-rafters/", "Trussed rafters"), ("../sequence/#roof", "Roof framing in order")],
     },
     {
         "slug": "truss-connections",
-        "name": "Truss connections",
+        "name": "The plate at a joint",
         "desc": "The plate or gusset at a truss joint transfers the force. The joint is not a place to cut or drill.",
         "diagram": "gusset",
         "preset": "roof",
@@ -442,24 +452,24 @@ ARTICLES = [
     },
     {
         "slug": "trussed-rafters",
-        "name": "Trussed rafters",
+        "name": "Attic room or storage",
         "desc": "A trussed rafter spans like a rafter pair but uses webs. A raised heel leaves room for insulation at the eaves.",
         "diagram": "attic",
         "preset": "roof",
         "body": [
             p("A common truss has webs that fill the attic, which is fine until someone wants storage or a deep insulation blanket at the wall. A raised heel lifts the top chord at the eaves so the insulation can keep its depth where the roof meets the wall. An attic truss leaves a clear middle for a room and carries the loads in the webs at the sides."),
-            p("Site-built rafters are cut one by one and need a ridge and ties. Trussed rafters arrive designed as units. Neither is drawn inside this roof. The shape of the house could be built either way."),
+            p("Site-built rafters are assembled on site. A conventional ridge-board roof uses ties to resist outward thrust; a designed structural ridge-beam roof uses a different support arrangement. Trussed rafters arrive designed as units. Neither is drawn inside this roof. The shape of the house could be built either way."),
         ],
         "related": [("../roof-framing/", "Roof framing"), ("../trusses/", "Trusses"), ("../heat-air-moisture/", "Heat, air, and moisture")],
     },
     {
         "slug": "wall-assembly",
-        "name": "Wall assembly",
+        "name": "Layers of an outside wall",
         "desc": "Cladding, a drainage gap, the weather barrier, sheathing, the stud cavity, and the interior board. One wall, several jobs.",
         "diagram": "wall",
         "preset": "siding",
         "body": [
-            p("From the weather inward, a typical wood wall here is cladding, a gap or drainage plane, a weather-resistive barrier, sheathing, studs with insulation in the cavity, and interior board. The cladding sheds most of the rain. The gap lets the rest drain and the back of the siding dry. The barrier is the second line. Sheathing may also be the brace against sideways load."),
+            p("From the weather inward, this example shows cladding, a drainage gap, a water-resistive barrier, sheathing, insulated stud cavities, and interior board. The barrier and its flashings form the drainage plane. Sheathing may also brace the wall against sideways load."),
             p("Western Washington is marine climate zone 4C. Rain is the main wetting, and winter drying is slow. Whether the interior face uses a vapor retarder, and which class, depends on the whole assembly and the code edition. A sheet of plastic on the inside can trap water if the outside cannot dry. This section is the idea of the layers. It is not a wall specification for this house."),
         ],
         "related": [
@@ -471,7 +481,7 @@ ARTICLES = [
     },
     {
         "slug": "stairs",
-        "name": "Stairs",
+        "name": "The flight of stairs",
         "desc": "The stair on this house links the two floors. Rise, run, headroom, and a guard are the teaching points, not a stair design.",
         "diagram": "stair",
         "preset": "stairs",
@@ -483,7 +493,7 @@ ARTICLES = [
     },
     {
         "slug": "heating-and-cooling",
-        "name": "Heating and cooling",
+        "name": "Heat and cooling",
         "desc": "A heat pump moves heat. A furnace makes it. Either one needs a path for air, and this sketch does not size the equipment.",
         "diagram": "heat",
         "preset": "rough",
@@ -495,7 +505,7 @@ ARTICLES = [
     },
     {
         "slug": "plumbing",
-        "name": "Plumbing",
+        "name": "Water in and waste out",
         "desc": "Supply, a water heater, fixtures, and drains with vents. The wet rooms on this plan are the kitchen, baths, and laundry.",
         "diagram": "plumb",
         "preset": "rough",
@@ -507,12 +517,12 @@ ARTICLES = [
     },
     {
         "slug": "electrical",
-        "name": "Electrical",
+        "name": "Power from the meter",
         "desc": "Power arrives at a meter and a panel, then leaves on branch circuits. This is not a load calculation.",
         "diagram": "power",
         "preset": "rough",
         "body": [
-            p("The utility lands at a meter. A panel beside it splits the service into branch circuits, each with an overcurrent device. Equipment grounds and the neutral are separated as the code requires at the service. Kitchens, baths, and laundry have extra rules for dedicated circuits and for protection against ground faults. Bedrooms need smoke alarms. Those rules are in the electrical code, not in this sketch."),
+            p("At the service disconnect, the neutral is bonded to the grounding system. Downstream panels keep neutral conductors isolated from equipment grounds. The exact arrangement follows the approved electrical design and applicable code. The utility lands at a meter, and a panel splits the service into branch circuits. Kitchens, baths, and laundry have extra rules for dedicated circuits and for protection against ground faults. Bedrooms need smoke alarms. Those rules are in the electrical code, not in this sketch."),
             p("The utility room is a plausible panel location because it is inside, dry, and reachable. The model does not show a panel, a wire, or a service size."),
         ],
         "related": [
@@ -523,7 +533,7 @@ ARTICLES = [
     },
     {
         "slug": "second-story",
-        "name": "Second-story addition",
+        "name": "Adding a story",
         "desc": "Adding a story loads the walls and foundation that are already there, and it opens the roof. This drawing is already two stories.",
         "preset": "frame2",
         "body": [
@@ -541,7 +551,7 @@ ARTICLES = [
     },
     {
         "slug": "heat-air-moisture",
-        "name": "Heat, air, moisture",
+        "name": "Heat, leaks, and drying",
         "desc": "Insulation slows heat. Sealing stops leaks. The wall still has to dry after rain. Marine climate zone 4C.",
         "diagram": "wall",
         "preset": "insulate",
@@ -553,7 +563,7 @@ ARTICLES = [
     },
     {
         "slug": "rooms",
-        "name": "Rooms on this plan",
+        "name": "Rooms on this drawing",
         "desc": "The rooms drawn on this house: garage and main floor, then bedrooms, baths, and laundry above.",
         "preset": "drywall",
         "body": [
@@ -565,7 +575,7 @@ ARTICLES = [
     },
     {
         "slug": "marine-climate",
-        "name": "Marine climate",
+        "name": "Rain in this region",
         "desc": "Western Washington is wet and slow to dry. Overhangs, drained cladding, and grade that falls away match that weather.",
         "preset": "siding",
         "body": [
@@ -581,41 +591,36 @@ ARTICLES = [
 ]
 
 COLLECTION = [
-    ("cut-and-fill", "Cut and fill"),
-    ("sequence", "Building a house"),
-    ("building-systems", "Building systems"),
-    ("load-path", "Load path"),
-    ("columns", "Columns"),
-    ("beams", "Beams"),
-    ("trusses", "Trusses"),
-    ("lateral-stability", "Lateral stability"),
-    ("arches-and-vaults", "Arches and vaults"),
-    ("foundation-types", "Foundation types"),
-    ("excavation", "Excavation and backfill"),
-    ("spread-footings", "Spread footings"),
-    ("masonry-bonding", "Masonry bonding"),
-    ("platform-framing", "Platform framing"),
-    ("roof-framing", "Roof framing"),
-    ("truss-connections", "Truss connections"),
-    ("trussed-rafters", "Trussed rafters"),
-    ("wall-assembly", "Wall assembly"),
-    ("stairs", "Stairs"),
-    ("heating-and-cooling", "Heating and cooling"),
-    ("plumbing", "Plumbing"),
-    ("electrical", "Electrical"),
+    ("sequence", "The work, hold by hold"),
+    ("cut-and-fill", "Leveling a sloping lot"),
+    ("excavation", "Digging and backfill"),
+    ("foundation-types", "What the house sits on"),
+    ("spread-footings", "How wide the concrete is"),
+    ("load-path", "Where the weight goes"),
+    ("columns", "Posts you can see"),
+    ("beams", "Beams over openings"),
+    ("platform-framing", "Two floors stacked"),
+    ("roof-framing", "The roof shape"),
+    ("trusses", "Triangles in the roof"),
+    ("truss-connections", "The plate at a joint"),
+    ("trussed-rafters", "Attic room or storage"),
+    ("stairs", "The flight of stairs"),
+    ("lateral-stability", "Wind and earthquakes"),
+    ("arches-and-vaults", "Why there is no arch"),
+    ("masonry-bonding", "Face versus structure"),
+    ("wall-assembly", "Layers of an outside wall"),
+    ("building-systems", "One house, four jobs"),
+    ("heating-and-cooling", "Heat and cooling"),
+    ("plumbing", "Water in and waste out"),
+    ("electrical", "Power from the meter"),
 ]
 
 CATEGORIES = [
-    ("Design", "Rooms, use, and the walk between them.", ["rooms"], ["Daylight from each room", "Furniture clearances"]),
-    ("Site and ground", "Soil, slope, water, and the foundation line.", ["cut-and-fill", "excavation", "foundation-types", "spread-footings"], ["Reading a soils report", "Roof water to the street"]),
-    ("Structure", "Loads, members, and what keeps the house from racking.", ["load-path", "columns", "beams", "trusses", "lateral-stability", "arches-and-vaults", "platform-framing", "roof-framing", "truss-connections", "trussed-rafters", "stairs"], ["Diaphragm nailing"]),
-    ("Envelope", "The layers that separate weather from the rooms.", ["wall-assembly"], ["Window flashing", "Roof edge and gutter"]),
-    ("Building physics", "Heat, air, and moisture moving through the shell.", ["heat-air-moisture"], ["Sound between rooms", "Daylight levels"]),
-    ("Services", "Water, heat, and power.", ["heating-and-cooling", "plumbing", "electrical"], ["Outdoor-air ventilation rates"]),
-    ("Interiors", "The rooms after the shell is closed.", ["rooms"], ["Finish floors", "Accessible bathroom clearances"]),
-    ("Construction", "The order of the work, and the systems as one house.", ["sequence", "building-systems"], ["Temporary bracing as its own page"]),
-    ("Remodeling existing homes", "What is already standing has to carry the new work.", ["second-story"], ["Finding rot", "Seismic retrofit of an older house"]),
-    ("PNW regional construction", "Rain, slow drying, and seismic design in this region.", ["marine-climate"], ["Cedar shingle walls", "Steep-slope roofing"]),
+    ("Understanding the site", "The lot, the soil, the pad, and the rain that falls on it.", ["cut-and-fill", "excavation", "foundation-types", "spread-footings", "rooms", "marine-climate"], ["Reading a soils report", "Roof water to the street"]),
+    ("Following loads", "Where the weight goes, and what keeps the house from racking.", ["load-path", "columns", "beams", "platform-framing", "roof-framing", "trusses", "truss-connections", "trussed-rafters", "stairs", "lateral-stability", "arches-and-vaults", "masonry-bonding"], ["Diaphragm nailing"]),
+    ("Keeping rain out", "The layers that shed water, and how the wall dries.", ["wall-assembly", "heat-air-moisture"], ["Window flashing", "Roof edge", "Sound between rooms", "Daylight levels"]),
+    ("Coordinating services", "Structure, water, heat, and power as one house.", ["building-systems", "heating-and-cooling", "plumbing", "electrical"], ["Outdoor-air rates"]),
+    ("Changing an existing home", "A second story loads walls and a foundation that are already there.", ["second-story"], ["Finding rot", "Seismic retrofit"]),
 ]
 
 COMPARISONS = [
@@ -629,7 +634,7 @@ COMPARISONS = [
      "The two floor lines on this model are platform framing."),
     ("Roof trusses, or site-built rafters",
      "Trusses are designed as units and set quickly. The webs are part of the structure. You do not cut them to make an attic.",
-     "Rafters are cut on site, one pair at a time, with a ridge and ties. They leave the attic more open, and they take more labor.",
+     "Site-built rafters are assembled on site. A conventional ridge-board roof uses ties to resist outward thrust; a designed structural ridge-beam roof uses a different support arrangement.",
      "The roof planes on this house could be either. The drawing does not decide."),
     ("A gable end, or a hip",
      "A gable is a triangular wall. It is simple, and it takes wind on that flat face. The east end of this house is a gable.",
@@ -641,7 +646,7 @@ COMPARISONS = [
      "The model shows the frame, not an insulation product."),
     ("Cladding that drains, or cladding tight to the wall",
      "A gap or a drainage mat behind the siding lets water that passes the face run out and lets the back dry.",
-     "Siding nailed tight over the barrier relies on the face and the laps alone. It can work in a protected wall. It is less forgiving in wind-driven rain.",
+     "Direct-applied siding still relies on a properly integrated water-resistive barrier and flashing behind it. A separate drainage gap can improve drainage and drying. Whether that gap is required depends on the cladding, assembly, manufacturer's instructions, and applicable code.",
      "The siding strokes on this house stand for a drained skin."),
     ("Dampproofing, or waterproofing",
      "A dampproof coating on a foundation resists moisture when water is drained away and does not press on the wall.",
@@ -673,7 +678,7 @@ COMPARISONS = [
      "This plan does not choose a pipe."),
     ("A tank heater, or a tankless heater",
      "A tank stores hot water. The recovery rate and the tank size set how long it lasts. A gas tank needs a vent. An electric tank needs a circuit.",
-     "A tankless unit heats water as it flows. It needs enough gas or electrical capacity for the peak, and a vent or a condensate drain. It does not store a long shower.",
+     "A tankless unit heats water as it flows. Its capacity depends on the required flow and temperature rise, together with the available gas or electrical supply. Indoor gas units need approved combustion venting; condensing gas units also need condensate drainage. Electric tankless units do not need a combustion vent.",
      "The utility room could hold either. The sketch does not size one."),
 ]
 
@@ -687,7 +692,7 @@ SOON_COMPARISONS = [
 
 def article_by_slug(slug: str) -> dict:
     if slug == "sequence":
-        return {"name": "Building a house", "desc": "Nineteen steps from the survey to the finished grade, on this one house.", "href": "sequence/"}
+        return {"name": "The work, hold by hold", "desc": "Nineteen hold points from the survey to the final walk, on this slab house.", "href": "sequence/"}
     for item in ARTICLES:
         if item["slug"] == slug:
             found = dict(item)
@@ -719,6 +724,7 @@ def webpage_ld(name: str, url: str, desc: str) -> str:
         "url": url,
         "name": name,
         "description": desc,
+        "datePublished": DATE,
         "dateModified": DATE,
         "isPartOf": {"@id": ORIGIN + "/#website"},
         "publisher": {"@id": ORIGIN + "/#organization"},
@@ -726,7 +732,10 @@ def webpage_ld(name: str, url: str, desc: str) -> str:
     })
 
 
-def head(name: str, desc: str, canon_path: str, extra_ld: str, depth: int) -> str:
+OG_ALT = "Illustrative Pacific Northwest home concept for Board of Project Stewardship — not a bid or stamped plan"
+
+
+def head(name: str, desc: str, canon_path: str, extra_ld: str, depth: int, og_type: str = "website") -> str:
     title = title_of(name)
     canon = ORIGIN + "/" + canon_path
     root = "../" * depth
@@ -740,10 +749,10 @@ def head(name: str, desc: str, canon_path: str, extra_ld: str, depth: int) -> st
   <meta name="theme-color" content="#14181c">
   <meta property="og:title" content="{esc(title)}">
   <meta property="og:description" content="{esc(desc)}">
-  <meta property="og:type" content="article">
+  <meta property="og:type" content="{esc(og_type)}">
   <meta property="og:url" content="{canon}">
   <meta property="og:image" content="{OG}">
-  <meta property="og:image:alt" content="Board of Project Stewardship">
+  <meta property="og:image:alt" content="{esc(OG_ALT)}">
   <meta property="og:site_name" content="{BRAND}">
   <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary_large_image">
@@ -793,15 +802,17 @@ def crumb_nav(items: list[tuple[str, str]], depth: int) -> str:
     return '<nav class="learn-crumb" aria-label="Breadcrumb">' + "".join(parts) + "</nav>"
 
 
-def footer(depth: int) -> str:
+def footer(depth: int, viewer_script: bool = False) -> str:
     root = "../" * depth
+    scripts = '<script src="/assets/js/learn-house.js" defer></script>'
+    if viewer_script:
+        scripts = '<script src="/assets/js/scroll-house.js" defer></script>\n  ' + scripts
     return f"""
   <footer class="learn-foot">
     <p>Teaching sketch. Not a structural design, a bid, or a permit set. Confirm the work with the drawings and the jurisdiction.</p>
     <p><a href="{root}">Home</a> · <a href="{root}learn.html">Learn hub</a> · <a href="{root}learn/">How a house is built</a> · <a href="mailto:editorial@boardofprojectstewardship.com">editorial@boardofprojectstewardship.com</a></p>
   </footer>
-  <script src="/assets/js/scroll-house.js" defer></script>
-  <script src="/assets/js/learn-house.js" defer></script>
+  {scripts}
 </body>
 </html>
 """
@@ -810,8 +821,14 @@ def footer(depth: int) -> str:
 def viewer(preset: str, label: str) -> str:
     return (
         f'<figure class="learn-still" data-learn-view="still" data-preset="{esc(preset)}">'
-        f'<canvas width="960" height="540" tabindex="0" aria-label="{esc(label)}"></canvas>'
-        f'<figcaption class="learn-caption">Tap the drawing, then drag to turn it. Teaching sketch of this house. Not a structural design.</figcaption>'
+        f'<canvas width="960" height="540" tabindex="0" aria-describedby="learn-keys" aria-label="{esc(label)}"></canvas>'
+        f'<div class="learn-actions">'
+        f'<button type="button" class="learn-btn" data-learn-zoom="in">Zoom in</button>'
+        f'<button type="button" class="learn-btn" data-learn-zoom="out">Zoom out</button>'
+        f'<button type="button" class="learn-btn" data-learn-reset>Reset view</button>'
+        f'</div>'
+        f'<p id="learn-keys" class="learn-keys">Arrow keys turn the house. Plus and minus, or the zoom buttons, change the zoom. A horizontal drag turns it after you tap the drawing. Reset view returns to the step camera.</p>'
+        f'<figcaption class="learn-caption">Teaching sketch of this house. Not a structural design.</figcaption>'
         f'<p class="learn-fallback">The drawing needs WebGL. The notes on the page still stand.</p>'
         f"</figure>"
     )
@@ -869,19 +886,19 @@ def build_article(item: dict) -> str:
     body.append('<div class="learn-prose">' + "".join(item["body"]) + "</div>")
     body.append(related(item["related"]))
     return (
-        head(item["name"], desc, canon, article + crumb_ld([(n, ORIGIN + "/" + (h or "")) for n, h in crumbs]), 2)
+        head(item["name"], desc, canon, article + crumb_ld([(n, ORIGIN + "/" + (h or "")) for n, h in crumbs]), 2, "article")
         + f'<main id="main-content">\n{crumb_nav(crumbs, 2)}\n'
         + '<article class="learn-wrap learn-hero">'
         + f'<p class="learn-kicker">How a house is built</p><h1>{esc(item["name"])}</h1>'
         + f'<p class="learn-dek">{esc(desc)}</p>'
         + "".join(body)
         + "</article></main>"
-        + footer(2)
+        + footer(2, bool(item.get("preset")))
     )
 
 
 def build_sequence() -> str:
-    desc = "Nineteen steps from survey and soils to final grade, drawn on one house. Teaching sketch, not a structural design."
+    desc = "Nineteen hold points for this slab house, from the survey to the final walk. Teaching sketch, not a structural design."
     canon = "learn/sequence/"
     url = ORIGIN + "/" + canon
     howto_steps = []
@@ -899,6 +916,7 @@ def build_sequence() -> str:
         "name": "How this house goes together from the ground up",
         "description": desc,
         "url": url,
+        "datePublished": DATE,
         "dateModified": DATE,
         "step": howto_steps,
     })
@@ -921,25 +939,28 @@ def build_sequence() -> str:
 <section class="learn-seq" id="learn-seq" data-learn-view="sequence" aria-labelledby="learn-seq-title">
   <div class="learn-seq-track">
     <div class="learn-seq-sticky">
-      <p class="learn-kicker" id="learn-step-phase">Before digging</p>
-      <h1 id="learn-seq-title">Building this house, in order</h1>
+      <p class="learn-kicker" id="learn-step-phase">{esc(STEPS[0][4])}</p>
+      <h1 id="learn-seq-title">Hold points on this house</h1>
       <ol class="learn-rail" aria-label="Build steps">{''.join('<li>'+b+'</li>' for b in rail)}</ol>
       <label class="learn-scrub">Step <span id="learn-step-count">01 of 19</span>
-        <input type="range" min="1" max="19" value="1" aria-valuemin="1" aria-valuemax="19" aria-valuetext="Survey and soils">
+        <input type="range" min="1" max="19" value="1" aria-valuemin="1" aria-valuemax="19" aria-valuetext="{esc(STEPS[0][3])}">
       </label>
       <div class="learn-sheet">
-        <canvas width="960" height="540" tabindex="0" aria-label="This house at the current build step. Tap, then drag to turn it."></canvas>
+        <canvas width="960" height="540" tabindex="0" aria-describedby="learn-keys" aria-label="This house at the current build step."></canvas>
       </div>
       <div class="learn-copy">
-        <h2 id="learn-step-title">Survey and soils</h2>
+        <h2 id="learn-step-title">{esc(STEPS[0][3])}</h2>
         <p id="learn-step-body">{esc(STEPS[0][5])}</p>
       </div>
-      <p class="learn-aside">Teaching sketch. Not a structural design. Scroll this page or use the steps.</p>
+      <p id="learn-keys" class="learn-keys">Arrow keys turn the house. Plus and minus, or the zoom buttons, change the zoom. A horizontal drag turns it after you tap the drawing. Reset view returns to the step camera.</p>
       <div class="learn-dirs">
-        <button type="button" class="learn-btn" data-learn-dir="-1">Previous</button>
+        <button type="button" class="learn-btn" data-learn-zoom="in">Zoom in</button>
+        <button type="button" class="learn-btn" data-learn-zoom="out">Zoom out</button>
+        <button type="button" class="learn-btn" data-learn-reset>Reset view</button>
+        <button type="button" class="learn-btn" data-learn-dir="-1" disabled>Previous</button>
         <button type="button" class="learn-btn" data-learn-dir="1">Next</button>
       </div>
-      <p class="learn-fallback">The drawing needs WebGL. The written steps are below.</p>
+      <p class="learn-fallback">The drawing needs WebGL. The written steps below still stand.</p>
     </div>
   </div>
 </section>
@@ -951,7 +972,7 @@ def build_sequence() -> str:
 </section>
 </main>
 """
-    return head("House build sequence", desc, canon, extra + crumb_ld([(n, ORIGIN + "/" + (h or "")) for n, h in crumbs]), 2) + sticky + footer(2)
+    return head("Hold points on this house", desc, canon, extra + crumb_ld([(n, ORIGIN + "/" + (h or "")) for n, h in crumbs]), 2) + sticky + footer(2, True)
 
 
 def build_explore() -> str:
@@ -988,9 +1009,11 @@ def build_explore() -> str:
     ]
     payload = []
     buttons = []
+    fallback_links = []
     for pid, label, preset, title, body, href, link in parts:
         payload.append({"id": pid, "preset": preset, "title": title, "body": body, "href": href, "link": link})
         buttons.append(f'<button type="button" class="learn-btn" data-part="{pid}">{esc(label)}</button>')
+        fallback_links.append(f'<li><a href="{esc(href)}">{esc(link)}</a></li>')
     crumbs = [("Home", ""), ("How a house is built", "learn/"), ("Explore", canon)]
     main = f"""
 <main id="main-content">
@@ -1001,9 +1024,17 @@ def build_explore() -> str:
     <h1>Explore this house</h1>
     <p class="learn-dek">{esc(desc)}</p>
     <div class="learn-sheet">
-      <canvas width="960" height="540" tabindex="0" aria-label="This house. Choose a part, then tap and drag to turn the drawing."></canvas>
+      <canvas width="960" height="540" tabindex="0" aria-describedby="learn-keys" aria-label="This house. Choose a part, then turn the drawing."></canvas>
     </div>
-    <p class="learn-fallback">The drawing needs WebGL. The part list still links to the written pages.</p>
+    <div class="learn-actions">
+      <button type="button" class="learn-btn" data-learn-zoom="in">Zoom in</button>
+      <button type="button" class="learn-btn" data-learn-zoom="out">Zoom out</button>
+      <button type="button" class="learn-btn" data-learn-reset>Reset view</button>
+    </div>
+    <p id="learn-keys" class="learn-keys">Arrow keys turn the house. Plus and minus, or the zoom buttons, change the zoom. A horizontal drag turns it after you tap the drawing. Reset view returns to the part camera.</p>
+    <p id="learn-status" class="learn-status" aria-live="polite"></p>
+    <p class="learn-fallback">The drawing needs WebGL. The written pages below still stand.</p>
+    <ul class="learn-fallback-links">{''.join(fallback_links)}</ul>
   </div>
   <div>
     <div class="learn-parts" role="group" aria-label="Parts of the house">{''.join(buttons)}</div>
@@ -1017,7 +1048,7 @@ def build_explore() -> str:
 <script type="application/json" id="learn-parts">{json.dumps(payload)}</script>
 </main>
 """
-    return head("Explore this house", desc, canon, crumb_ld([(n, ORIGIN + "/" + (h or "")) for n, h in crumbs]), 2) + main + footer(2)
+    return head("Explore this house", desc, canon, crumb_ld([(n, ORIGIN + "/" + (h or "")) for n, h in crumbs]), 2) + main + footer(2, True)
 
 
 def build_compare() -> str:
@@ -1066,7 +1097,7 @@ def build_compare() -> str:
 </article>
 </main>
 """
-    return head("Why this, not that", desc, canon, extra + crumb_ld([(n, ORIGIN + "/" + (h or "")) for n, h in crumbs]), 2) + main + footer(2)
+    return head("Why this, not that", desc, canon, extra + crumb_ld([(n, ORIGIN + "/" + (h or "")) for n, h in crumbs]), 2, "article") + main + footer(2)
 
 
 def build_landing() -> str:
@@ -1102,6 +1133,7 @@ def build_landing() -> str:
         "name": "How a house is built",
         "description": desc,
         "url": url,
+        "datePublished": DATE,
         "dateModified": DATE,
         "mainEntity": {"@type": "ItemList", "itemListElement": item_ld},
     })
@@ -1139,30 +1171,46 @@ def build_landing() -> str:
 </article>
 </main>
 """
-    return head("How a house is built", desc, canon, extra + crumb_ld([(n, ORIGIN + "/" + (h or "")) for n, h in crumbs]), 1) + main + footer(1)
+    return head("How a house is built", desc, canon, extra + crumb_ld([(n, ORIGIN + "/" + (h or "")) for n, h in crumbs]), 1) + main + footer(1, True)
 
 
-def update_sitemap(paths: list[str]) -> None:
-    sitemap = ROOT / "sitemap.xml"
-    text = sitemap.read_text(encoding="utf-8")
-    text = re.sub(
-        r"\n  <url>\n    <loc>https://boardofprojectstewardship.com/learn/.*?</url>",
-        "",
-        text,
-        flags=re.S,
-    )
-    block = []
+SITEMAP_NS = "http://www.sitemaps.org/schemas/sitemap/0.9"
+
+
+def update_sitemap(paths: list[str], sitemap_path: Path | None = None) -> None:
+    sitemap_path = sitemap_path or (ROOT / "sitemap.xml")
+    ET.register_namespace("", SITEMAP_NS)
+    tree = ET.parse(sitemap_path)
+    root = tree.getroot()
+    ns = {"sm": SITEMAP_NS}
+    for url in list(root):
+        loc = url.find("sm:loc", ns)
+        if loc is None or not loc.text:
+            continue
+        text = loc.text.strip()
+        if "/learn/" in text and not text.rstrip("/").endswith("learn.html"):
+            root.remove(url)
     for path in paths:
-        block.append(
-            "  <url>\n"
-            f"    <loc>{ORIGIN}/{path}</loc>\n"
-            f"    <lastmod>{DATE}</lastmod>\n"
-            "    <changefreq>weekly</changefreq>\n"
-            "    <priority>0.7</priority>\n"
-            "  </url>"
-        )
-    text = text.replace("</urlset>", "\n".join(block) + "\n</urlset>")
-    sitemap.write_text(text, encoding="utf-8")
+        url = ET.SubElement(root, f"{{{SITEMAP_NS}}}url")
+        loc = ET.SubElement(url, f"{{{SITEMAP_NS}}}loc")
+        loc.text = f"{ORIGIN}/{path}"
+        lastmod = ET.SubElement(url, f"{{{SITEMAP_NS}}}lastmod")
+        lastmod.text = DATE
+        freq = ET.SubElement(url, f"{{{SITEMAP_NS}}}changefreq")
+        freq.text = "weekly"
+        priority = ET.SubElement(url, f"{{{SITEMAP_NS}}}priority")
+        priority.text = "0.7"
+    locs = []
+    for url in root:
+        loc = url.find("sm:loc", ns)
+        if loc is not None and loc.text:
+            locs.append(loc.text.strip())
+    duplicates = sorted({item for item in locs if locs.count(item) > 1})
+    if duplicates:
+        raise SystemExit(f"duplicate sitemap locs: {duplicates}")
+    ET.indent(root, space="  ")
+    body = ET.tostring(root, encoding="unicode")
+    sitemap_path.write_text('<?xml version="1.0" encoding="UTF-8"?>\n' + body + "\n", encoding="utf-8")
 
 
 def update_search(entries: list[dict]) -> None:
@@ -1173,28 +1221,38 @@ def update_search(entries: list[dict]) -> None:
     path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
 
 
-def main() -> None:
-    pages: list[tuple[str, str, str, str]] = []
-    landing = build_landing()
-    write(ROOT / "learn" / "index.html", landing)
-    pages.append(("learn/", "How a house is built", "How this house is built, from the ground up, with the parts you can open. Teaching sketch, not a structural design.", "learn/index.html"))
-    sequence = build_sequence()
-    write(ROOT / "learn" / "sequence" / "index.html", sequence)
-    pages.append(("learn/sequence/", "House build sequence", "Nineteen steps from survey and soils to final grade, drawn on one house. Teaching sketch, not a structural design.", "learn/sequence/index.html"))
-    explore = build_explore()
-    write(ROOT / "learn" / "explore" / "index.html", explore)
-    pages.append(("learn/explore/", "Explore this house", "Start with this house. Turn a system on, pick a part, and follow it to a closer explanation.", "learn/explore/index.html"))
-    compare = build_compare()
-    write(ROOT / "learn" / "compare" / "index.html", compare)
-    pages.append(("learn/compare/", "Why this, not that", "Construction choices side by side. Neither column is a rule for every house.", "learn/compare/index.html"))
+def page_set() -> list[tuple[str, str, str, str]]:
+    landing_desc = "How this house is built, from the ground up, with the parts you can open. Teaching sketch, not a structural design."
+    sequence_desc = "Nineteen hold points for this slab house, from the survey to the final walk. Teaching sketch, not a structural design."
+    explore_desc = "Start with this house. Turn a system on, pick a part, and follow it to a closer explanation."
+    compare_desc = "Construction choices side by side. Neither column is a rule. The right one depends on the site, the code, and the house."
+    pages = [
+        ("learn/", "How a house is built", landing_desc, build_landing()),
+        ("learn/sequence/", "Hold points on this house", sequence_desc, build_sequence()),
+        ("learn/explore/", "Explore this house", explore_desc, build_explore()),
+        ("learn/compare/", "Why this, not that", compare_desc, build_compare()),
+    ]
     for item in ARTICLES:
-        write(ROOT / "learn" / item["slug"] / "index.html", build_article(item))
-        pages.append((f"learn/{item['slug']}/", item["name"], item["desc"], f"learn/{item['slug']}/index.html"))
-    update_sitemap([p[0] for p in pages])
-    update_search([
-        {"title": title_of(name), "url": "/" + url, "description": desc}
-        for url, name, desc, _rel in pages
-    ])
+        pages.append((f"learn/{item['slug']}/", item["name"], item["desc"], build_article(item)))
+    return pages
+
+
+def write_pages(dest: Path, update_indexes: bool = True) -> list[tuple[str, str, str]]:
+    written = []
+    for url, name, desc, html_text in page_set():
+        write(dest / url / "index.html", html_text)
+        written.append((url, name, desc))
+    if update_indexes and dest == ROOT:
+        update_sitemap([url for url, _name, _desc in written])
+        update_search([
+            {"title": title_of(name), "url": "/" + url, "description": desc}
+            for url, name, desc in written
+        ])
+    return written
+
+
+def main() -> None:
+    pages = write_pages(ROOT, update_indexes=True)
     print(f"wrote {len(pages)} learn pages")
 
 

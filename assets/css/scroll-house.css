@@ -6,12 +6,18 @@
   position: relative;
 }
 .scroll-house-track {
+  height: auto;
+}
+.scroll-house.is-enhanced .scroll-house-track {
   height: 230svh;
 }
+.scroll-house.is-flow .scroll-house-track {
+  height: auto;
+}
 .scroll-house-sticky {
-  position: sticky;
-  top: var(--sh-top);
-  height: calc(100svh - var(--sh-top));
+  position: relative;
+  top: auto;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,8 +26,18 @@
   gap: 0.4rem;
   z-index: 1;
 }
+.scroll-house.is-enhanced .scroll-house-sticky {
+  position: sticky;
+  top: var(--sh-top);
+  height: calc(100svh - var(--sh-top));
+}
+.scroll-house.is-flow .scroll-house-sticky {
+  position: relative;
+  top: auto;
+  height: auto;
+}
 @media (min-width: 800px) {
-  .scroll-house-track { height: 250svh; }
+  .scroll-house.is-enhanced .scroll-house-track { height: 250svh; }
 }
 @media (min-width: 1280px) {
   .scroll-house { --sh-top: 7.25rem; }
@@ -64,26 +80,30 @@
   padding: 0;
   width: min(960px, 100%);
 }
-.sh-stages li {
+.sh-stages li { margin: 0; padding: 0; }
+.sh-stages button {
+  appearance: none;
   margin: 0;
-  padding: 0.35rem 0.55rem;
+  padding: 0.35rem 0.7rem;
   min-height: 44px;
+  min-width: 44px;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.14);
+  background: transparent;
   color: rgba(242, 242, 238, 0.62);
-  font-size: 0.6875rem;
-  font-weight: 550;
+  font: 550 0.6875rem/1.2 Inter, system-ui, sans-serif;
   letter-spacing: 0.015em;
   text-transform: uppercase;
   cursor: pointer;
 }
-.sh-stages li:focus-visible {
+.sh-stages button:focus-visible {
   outline: 2px solid #4ade80;
   outline-offset: 3px;
 }
-.sh-stages li.is-on {
+.sh-stages button[aria-current="step"] {
   background: #4ade80;
   border-color: #4ade80;
   color: #04140c;
@@ -119,7 +139,7 @@
   border-radius: 2px;
   overflow: hidden;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22), inset 0 0 0 1px rgba(28, 25, 22, 0.08);
-  touch-action: pan-y;
+  touch-action: pan-y pinch-zoom;
 }
 .scroll-house-plan,
 .scroll-house-canvas {
@@ -130,8 +150,8 @@
   display: block;
 }
 .scroll-house.is-drawn .scroll-house-plan { visibility: hidden; }
-.scroll-house-canvas { touch-action: pan-y; background: #f7f6f2; }
-.scroll-house.is-explore .scroll-house-canvas { touch-action: none; cursor: grab; }
+.scroll-house-canvas { touch-action: pan-y pinch-zoom; background: #f7f6f2; }
+.scroll-house.is-explore .scroll-house-canvas { touch-action: pan-y pinch-zoom; cursor: grab; }
 .scroll-house.is-explore.is-dragging .scroll-house-canvas { cursor: grabbing; }
 .scroll-house-canvas:focus-visible {
   outline: 2px solid #1c1916;
@@ -151,7 +171,8 @@
 }
 .sh-explore[hidden] { display: none; }
 .sh-explore-toggle,
-.sh-explore-reset {
+.sh-explore-reset,
+.sh-zoom {
   pointer-events: auto;
   appearance: none;
   min-height: 44px;
@@ -171,7 +192,8 @@
   border-color: #1c1916;
 }
 .sh-explore-toggle:focus-visible,
-.sh-explore-reset:focus-visible {
+.sh-explore-reset:focus-visible,
+.sh-zoom:focus-visible {
   outline: 2px solid #166534;
   outline-offset: 2px;
 }
@@ -235,7 +257,7 @@
   position: absolute;
   transform: translate(-50%, -50%);
   color: #1c1916;
-  font-size: 11px;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0;
   text-transform: none;
@@ -244,9 +266,22 @@
 .sh-label.is-dim {
   font-weight: 500;
   letter-spacing: 0.01em;
-  font-size: 11px;
+  font-size: 0.75rem;
   color: #1c1916;
 }
+.sh-rooms {
+  width: min(960px, 100%);
+  margin: 0.15rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.2rem 0.7rem;
+  font-size: 0.75rem;
+  line-height: 1.3;
+}
+.sh-rooms[hidden] { display: none; }
 .scroll-house-line {
   margin: 0;
   flex: 0 0 auto;
@@ -433,11 +468,12 @@
   .sh-kicker { font-size: 8px; font-weight: 550; letter-spacing: 0.03em; }
   .sh-title { font-size: 0.85rem; font-weight: 600; }
   .sh-dek { font-size: 0.75rem; font-weight: 300; line-height: 1.25; margin-top: 0.1rem; }
-  .sh-stages li {
+  .sh-stages button {
     font-size: 0.625rem;
     font-weight: 500;
     letter-spacing: 0.01em;
     min-height: 44px;
+    min-width: 44px;
     padding: 0.15rem 0.38rem;
   }
   .sh-call {
@@ -458,9 +494,8 @@
   .sh-learn-aside { font-size: 0.625rem; font-weight: 300; }
   .sh-btn, .sh-link { font-size: 0.625rem; font-weight: 600; letter-spacing: 0.02em; }
   .sh-btn { min-height: 44px; padding: 0.4rem 0.7rem; }
-  .sh-label { font-size: 7px; font-weight: 600; letter-spacing: 0; }
-  .sh-label.is-dim { font-size: 6px; font-weight: 500; letter-spacing: 0; color: #1c1916; }
-  .scroll-house-plan text { font-size: 7px; letter-spacing: 0; }
+  .sh-label, .sh-label.is-dim { font-size: 0.75rem; letter-spacing: 0; }
+  .scroll-house-plan text { font-size: 16px; letter-spacing: 0; }
   .scroll-house-sticky {
     height: auto;
     gap: 0.18rem;

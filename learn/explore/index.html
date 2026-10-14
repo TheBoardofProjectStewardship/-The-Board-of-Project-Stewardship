@@ -8,10 +8,10 @@
   <meta name="theme-color" content="#14181c">
   <meta property="og:title" content="Explore this house | Board of Project Stewardship">
   <meta property="og:description" content="Start with this house. Turn a system on, pick a part, and follow it to a closer explanation.">
-  <meta property="og:type" content="article">
+  <meta property="og:type" content="website">
   <meta property="og:url" content="https://boardofprojectstewardship.com/learn/explore/">
   <meta property="og:image" content="https://boardofprojectstewardship.com/assets/images/home-hero.webp">
-  <meta property="og:image:alt" content="Board of Project Stewardship">
+  <meta property="og:image:alt" content="Illustrative Pacific Northwest home concept for Board of Project Stewardship — not a bid or stamped plan">
   <meta property="og:site_name" content="Board of Project Stewardship">
   <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary_large_image">
@@ -33,6 +33,7 @@
   "url": "https://boardofprojectstewardship.com/learn/explore/",
   "name": "Explore this house | Board of Project Stewardship",
   "description": "Start with this house. Turn a system on, pick a part, and follow it to a closer explanation.",
+  "datePublished": "2026-10-14",
   "dateModified": "2026-10-14",
   "isPartOf": {
     "@id": "https://boardofprojectstewardship.com/#website"
@@ -93,9 +94,17 @@
     <h1>Explore this house</h1>
     <p class="learn-dek">Start with this house. Turn a system on, pick a part, and follow it to a closer explanation.</p>
     <div class="learn-sheet">
-      <canvas width="960" height="540" tabindex="0" aria-label="This house. Choose a part, then tap and drag to turn the drawing."></canvas>
+      <canvas width="960" height="540" tabindex="0" aria-describedby="learn-keys" aria-label="This house. Choose a part, then turn the drawing."></canvas>
     </div>
-    <p class="learn-fallback">The drawing needs WebGL. The part list still links to the written pages.</p>
+    <div class="learn-actions">
+      <button type="button" class="learn-btn" data-learn-zoom="in">Zoom in</button>
+      <button type="button" class="learn-btn" data-learn-zoom="out">Zoom out</button>
+      <button type="button" class="learn-btn" data-learn-reset>Reset view</button>
+    </div>
+    <p id="learn-keys" class="learn-keys">Arrow keys turn the house. Plus and minus, or the zoom buttons, change the zoom. A horizontal drag turns it after you tap the drawing. Reset view returns to the part camera.</p>
+    <p id="learn-status" class="learn-status" aria-live="polite"></p>
+    <p class="learn-fallback">The drawing needs WebGL. The written pages below still stand.</p>
+    <ul class="learn-fallback-links"><li><a href="../sequence/">Follow the build order</a></li><li><a href="../spread-footings/">Follow the footing</a></li><li><a href="../load-path/">Follow the load path</a></li><li><a href="../platform-framing/">Follow the platform</a></li><li><a href="../roof-framing/">Follow the roof</a></li><li><a href="../stairs/">Follow the stair</a></li><li><a href="../columns/">Follow the posts</a></li><li><a href="../wall-assembly/">Follow the wall layers</a></li><li><a href="../rooms/">Follow the rooms</a></li></ul>
   </div>
   <div>
     <div class="learn-parts" role="group" aria-label="Parts of the house"><button type="button" class="learn-btn" data-part="whole">Whole house</button><button type="button" class="learn-btn" data-part="ground">Ground</button><button type="button" class="learn-btn" data-part="walls">Walls</button><button type="button" class="learn-btn" data-part="upper">Upper floor</button><button type="button" class="learn-btn" data-part="roof">Roof</button><button type="button" class="learn-btn" data-part="stairs">Stairs</button><button type="button" class="learn-btn" data-part="porch">Porch</button><button type="button" class="learn-btn" data-part="skin">Skin</button><button type="button" class="learn-btn" data-part="rooms">Rooms</button></div>

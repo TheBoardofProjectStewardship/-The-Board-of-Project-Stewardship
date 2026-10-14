@@ -572,14 +572,20 @@ function labelsFor(model, progress, mvp, width, height) {
   const floor = main ? 'main' : 'upper';
   const labels = [];
   // Major rooms take priority when the phone view cannot fit every annotation.
-  const candidates = model.labels.filter(label => label.floor === floor && (!label.minor || width >= 620));
-  candidates.sort((a, b) => Number(!!a.minor) - Number(!!b.minor));
+  const narrow = width < 640;
+  const fontPx = 12;
+  const candidates = model.labels.filter(label => label.floor === floor && (!label.minor || !narrow));
+  candidates.sort((a, b) => {
+    const rank = (label) => Number(!!label.minor) + (narrow && /\bft\b/i.test(label.text) ? 1 : 0);
+    return rank(a) - rank(b);
+  });
+  const limit = narrow ? 4 : candidates.length;
   for (const label of candidates) {
+    if (labels.length >= limit) break;
     const projected = projectPoint(mvp, label.position, width, height);
-    const narrow = width < 640;
-    const char = narrow ? (label.minor ? 1.55 : 1.8) : (label.minor ? 2.35 : 2.65);
-    const half = Math.min(label.text.length * char, narrow ? 38 : 54);
-    const vy = narrow ? 5 : 8;
+    const char = fontPx * 0.56;
+    const half = Math.min(label.text.length * char * 0.5, narrow ? fontPx * 6 : fontPx * 8);
+    const vy = fontPx * 0.55;
     const box = { left: projected.x - half - 2, right: projected.x + half + 2, top: projected.y - vy, bottom: projected.y + vy };
     if (box.left < 3 || box.right > width - 3 || box.top < 3 || box.bottom > height - 3) continue;
     if (labels.some(l => box.left < l.box.right && box.right > l.box.left && box.top < l.box.bottom && box.bottom > l.box.top)) continue;
@@ -703,7 +709,7 @@ function createRenderer(canvas, options) {
 
   function render(progress, focusId, width, height, orbit, groupView) {
     if (disposed) throw new Error('The drawing has been disposed.');
-    if (gl.isContextLost()) throw new Error('The drawing context was lost.');
+    if (gl.isContextLost()) return null;
     const p = clamp(Number.isFinite(progress) ? progress : 0);
     const cssW = Math.max(1, Number.isFinite(width) ? width : canvas.clientWidth);
     const cssH = Math.max(1, Number.isFinite(height) ? height : canvas.clientHeight);
@@ -836,7 +842,7 @@ function createRenderer(canvas, options) {
     var lineEl = root.querySelector("#scroll-house-line");
     var bar = root.querySelector(".sh-progress span");
     var range = root.querySelector(".sh-scrub");
-    var stageNodes = root.querySelectorAll(".sh-stages li");
+    var stageNodes = root.querySelectorAll(".sh-stages button");
     var learnSets = root.querySelectorAll(".sh-learn-set");
     var learnNotes = root.querySelectorAll(".sh-note");
     var learnPrompt = root.querySelector(".sh-learn-prompt");
@@ -844,6 +850,8 @@ function createRenderer(canvas, options) {
     var exploreBar = root.querySelector(".sh-explore");
     var exploreToggle = root.querySelector(".sh-explore-toggle");
     var exploreReset = root.querySelector(".sh-explore-reset");
+    var zoomIn = root.querySelector("[data-zoom='in']");
+    var zoomOut = root.querySelector("[data-zoom='out']");
     var reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     var removers = [];
     var labelNodes = [];
@@ -888,10 +896,37 @@ function createRenderer(canvas, options) {
       return parseFloat(raw) || 0;
     }
 
+    var manual = null;
+    var fitted = false;
+
+    function contentFits() {
+      if (window.matchMedia("(max-height: 520px)").matches) return false;
+      var rootFont = parseFloat(window.getComputedStyle(document.documentElement).fontSize) || 16;
+      if (rootFont > 20) return false;
+      var wasEnhanced = root.classList.contains("is-enhanced");
+      root.classList.remove("is-enhanced");
+      var natural = sticky.scrollHeight;
+      if (wasEnhanced) root.classList.add("is-enhanced");
+      return natural <= window.innerHeight - 8;
+    }
+
+    function syncFlow() {
+      if (reduced.matches || lost) {
+        root.classList.remove("is-enhanced");
+        root.classList.add("is-flow");
+        return;
+      }
+      var fits = contentFits();
+      root.classList.toggle("is-enhanced", fits);
+      root.classList.toggle("is-flow", !fits);
+      if (fits) manual = null;
+    }
+
     function scrollProgress() {
+      if (!root.classList.contains("is-enhanced")) return manual == null ? 0 : manual;
       var rect = track.getBoundingClientRect();
       var travel = track.offsetHeight - sticky.offsetHeight;
-      if (travel <= 1) return 0;
+      if (travel <= 1) return manual == null ? 0 : manual;
       var scrolled = stickyTop() - rect.top;
       if (scrolled <= 0) return 0;
       if (scrolled >= travel) return 1;
@@ -899,10 +934,17 @@ function createRenderer(canvas, options) {
     }
 
     function scrollToProgress(p) {
+      p = Math.max(0, Math.min(1, Number.isFinite(p) ? p : 0));
+      if (!root.classList.contains("is-enhanced")) {
+        manual = p;
+        dirty = true;
+        kick();
+        return;
+      }
       var rect = track.getBoundingClientRect();
       var travel = Math.max(1, track.offsetHeight - sticky.offsetHeight);
-      var y = window.scrollY + rect.top - stickyTop() + travel * Math.max(0, Math.min(1, p));
-      window.scrollTo(0, y);
+      var y = window.scrollY + rect.top - stickyTop() + travel * p;
+      window.scrollTo({ top: y, behavior: "instant" });
       dirty = true;
       kick();
     }
@@ -972,6 +1014,8 @@ function createRenderer(canvas, options) {
         exploreToggle.classList.toggle("is-on", explore);
       }
       if (exploreReset) exploreReset.hidden = !explore;
+      if (zoomIn) zoomIn.hidden = !explore;
+      if (zoomOut) zoomOut.hidden = !explore;
       if (canvas) canvas.setAttribute("aria-pressed", explore ? "true" : "false");
       dirty = true;
       kick();
@@ -1054,7 +1098,15 @@ function createRenderer(canvas, options) {
       if (!engine || lost) return;
       var rect = sheet.getBoundingClientRect();
       var result = engine.render(p, focusId, Math.max(1, rect.width), Math.max(1, rect.height), orbitArgs());
-      renderLabels(result && result.labels);
+      if (!result) { fail(); return; }
+      renderLabels(result.labels);
+      var narrowLabels = rect.width < 640;
+      var roomNodes = root.querySelectorAll(".sh-rooms");
+      for (var r = 0; r < roomNodes.length; r++) {
+        var which = roomNodes[r].getAttribute("data-rooms");
+        var showRooms = narrowLabels && ((which === "main" && p >= 0.68 && p <= 0.84) || (which === "upper" && p >= 0.50 && p < 0.67));
+        roomNodes[r].hidden = !showRooms;
+      }
       if (bar) bar.style.transform = "scaleX(" + p.toFixed(5) + ")";
       if (range && document.activeElement !== range) {
         range.value = String(Math.round(p * 1000));
@@ -1064,6 +1116,7 @@ function createRenderer(canvas, options) {
       root.classList.toggle("is-scrolled", p > 0.04);
       root.classList.toggle("is-late", p > 0.8);
       root.classList.add("is-drawn");
+      if (!fitted) { fitted = true; syncFlow(); }
       var stage = stageByProgress(p);
       if (stage.id !== current) {
         current = stage.id;
@@ -1071,7 +1124,8 @@ function createRenderer(canvas, options) {
         var n;
         for (n = 0; n < stageNodes.length; n++) {
           var on = stageNodes[n].getAttribute("data-stage") === stage.id;
-          stageNodes[n].classList.toggle("is-on", on);
+          var item = stageNodes[n].parentElement;
+          if (item) item.classList.toggle("is-on", on);
           if (on) stageNodes[n].setAttribute("aria-current", "step");
           else stageNodes[n].removeAttribute("aria-current");
         }
@@ -1168,19 +1222,16 @@ function createRenderer(canvas, options) {
         kick();
         return;
       }
-      var li = event.target && event.target.closest ? event.target.closest(".sh-stages li") : null;
-      if (li && root.contains(li)) scrollToProgress(parseFloat(li.getAttribute("data-sh-progress")) || 0);
+      var stageButton = event.target && event.target.closest ? event.target.closest(".sh-stages button") : null;
+      if (stageButton && root.contains(stageButton)) scrollToProgress(parseFloat(stageButton.getAttribute("data-sh-progress")) || 0);
     });
     on(root, "keydown", function (event) {
-      var li = event.target && event.target.closest ? event.target.closest(".sh-stages li") : null;
-      if (!li || !root.contains(li)) return;
+      var stageButton = event.target && event.target.closest ? event.target.closest(".sh-stages button") : null;
+      if (!stageButton || !root.contains(stageButton)) return;
       var items = Array.prototype.slice.call(stageNodes);
-      var index = items.indexOf(li);
+      var index = items.indexOf(stageButton);
       var next = null;
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        scrollToProgress(parseFloat(li.getAttribute("data-sh-progress")) || 0);
-      } else if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+      if (event.key === "ArrowRight" || event.key === "ArrowDown") {
         event.preventDefault();
         next = items[Math.min(items.length - 1, index + 1)];
       } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
@@ -1209,6 +1260,8 @@ function createRenderer(canvas, options) {
         resetOrbit();
       });
     }
+    if (zoomIn) on(zoomIn, "click", function () { nudgeZoom(1 / 1.12); });
+    if (zoomOut) on(zoomOut, "click", function () { nudgeZoom(1.12); });
     on(canvas, "keydown", function (event) {
       if (stageByProgress(rendered).id !== "house") return;
       var handled = true;
@@ -1234,19 +1287,17 @@ function createRenderer(canvas, options) {
       setExplore(true);
     });
     on(sheet, "wheel", function (event) {
-      if (!explore) return;
-      if (stageByProgress(rendered).id === "plan") return;
+      if (!explore || (!event.ctrlKey && !event.metaKey)) return;
       if (exploreBar && exploreBar.contains(event.target)) return;
       event.preventDefault();
       nudgeZoom(Math.exp(event.deltaY * 0.0011));
     }, { passive: false });
+    var orbitPointer = null;
     function rememberPointer(event) {
       pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
     }
-    on(canvas, "pointerdown", function (event) {
-      if (!explore) return;
-      if (event.pointerType === "mouse" && event.button !== 0) return;
-      if (exploreBar && exploreBar.contains(event.target)) return;
+    function beginOrbit(event) {
+      orbitPointer = event.pointerId;
       rememberPointer(event);
       if (canvas.setPointerCapture) {
         try { canvas.setPointerCapture(event.pointerId); } catch (e) { /* already released */ }
@@ -1254,30 +1305,47 @@ function createRenderer(canvas, options) {
       dragging = true;
       root.classList.add("is-dragging");
       markInteract();
-      if (pointers.size >= 2) {
-        pinchStart = pointerDistance();
-        zoomAtPinch = zoom;
-      }
+    }
+    on(canvas, "pointerdown", function (event) {
+      if (!explore) return;
+      if (event.pointerType === "mouse" && event.button !== 0) return;
+      if (exploreBar && exploreBar.contains(event.target)) return;
+      if (orbitPointer !== null) return;
+      var origin = { id: event.pointerId, x: event.clientX, y: event.clientY, type: event.pointerType };
+      pointers.set(event.pointerId, origin);
+      if (event.pointerType === "mouse" || event.pointerType === "pen") beginOrbit(event);
     });
     on(canvas, "pointermove", function (event) {
-      if (!pointers.has(event.pointerId)) return;
-      var prev = pointers.get(event.pointerId);
-      rememberPointer(event);
-      if (pointers.size >= 2 && pinchStart > 8) {
-        var dist = pointerDistance();
-        if (dist > 8) zoom = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, zoomAtPinch * (pinchStart / dist)));
-      } else if (pointers.size === 1 && prev) {
-        nudgeYaw(-(event.clientX - prev.x) * 0.0075);
-        pitch -= (event.clientY - prev.y) * 0.0045;
-        clampOrbit(rendered);
+      var tracked = pointers.get(event.pointerId);
+      if (!tracked) return;
+      if (orbitPointer === null) {
+        var dx = event.clientX - tracked.x;
+        var dy = event.clientY - tracked.y;
+        var adx = Math.abs(dx);
+        var ady = Math.abs(dy);
+        if (adx < 10 && ady < 10) return;
+        if (!(adx > ady)) {
+          pointers.delete(event.pointerId);
+          return;
+        }
+        beginOrbit(event);
+        tracked = pointers.get(event.pointerId);
       }
+      if (orbitPointer !== event.pointerId || !tracked) return;
+      var prev = { x: tracked.x, y: tracked.y };
+      rememberPointer(event);
+      nudgeYaw(-(event.clientX - prev.x) * 0.0075);
+      pitch -= (event.clientY - prev.y) * 0.0045;
+      clampOrbit(rendered);
       dirty = true;
       kick();
     });
     function releasePointer(event) {
-      pointers.delete(event.pointerId);
-      if (pointers.size < 2) pinchStart = 0;
-      if (pointers.size === 0) {
+      if (!event || pointers.has(event.pointerId) || orbitPointer === event.pointerId) {
+        if (event) pointers.delete(event.pointerId);
+        if (!event || orbitPointer === event.pointerId) orbitPointer = null;
+      }
+      if (pointers.size === 0 || orbitPointer === null) {
         dragging = false;
         root.classList.remove("is-dragging");
         markInteract();
@@ -1285,9 +1353,10 @@ function createRenderer(canvas, options) {
     }
     on(canvas, "pointerup", releasePointer);
     on(canvas, "pointercancel", releasePointer);
+    on(canvas, "lostpointercapture", releasePointer);
     on(window, "scroll", function () { markInteract(); dirty = true; kick(); }, { passive: true });
-    on(window, "resize", function () { dirty = true; kick(); }, { passive: true });
-    on(window, "orientationchange", function () { dirty = true; kick(); }, { passive: true });
+    on(window, "resize", function () { fitted = false; dirty = true; kick(); }, { passive: true });
+    on(window, "orientationchange", function () { fitted = false; dirty = true; kick(); }, { passive: true });
     on(document, "visibilitychange", function () {
       if (document.hidden) {
         if (raf) window.cancelAnimationFrame(raf);
