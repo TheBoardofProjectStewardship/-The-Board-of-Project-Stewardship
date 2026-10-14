@@ -1555,7 +1555,9 @@ def apply_performance_pass(html: str) -> str:
 
 def finalize_published_html() -> None:
     """Performance pass for pages that are not built by page_shell (tools, stamp)."""
-    skip = {"node_modules", "intake", "tests", "docs", "state", "data", "vendor", ".git"}
+    # /learn/ is owned by tools/build_learn.py. The site performance pass
+    # would inject site.css and change that guide's own sheet.
+    skip = {"node_modules", "intake", "tests", "docs", "state", "data", "vendor", ".git", "learn"}
     for path in SITE_DIR.rglob("*.html"):
         if any(part in skip for part in path.relative_to(SITE_DIR).parts):
             continue
@@ -1660,6 +1662,7 @@ def nav_html(active: str = "", prefix: str = "") -> str:
         ("steward", href("good-steward.html"), "Good Steward"),
         ("floor-plan-3d", href("floor-plan-3d.html"), "Floor Plan to 3D"),
         ("plan-walkthrough", href("plan-walkthrough/"), "Plan Walkthrough"),
+        ("house", href("learn/"), "How a house is built"),
         ("pascal-editor", href("pascal-editor.html"), "Pascal Editor Sketch"),
         ("hire-questions", href("hire-questions.html"), "Hire Questions"),
         ("hiring-a-contractor", href("hiring-a-contractor.html"), "Hiring a Contractor"),
@@ -7196,6 +7199,12 @@ def write_sitemap(posts: list[dict]) -> None:
             "0.7",
         )
     )
+    learn_dir = SITE_DIR / "learn"
+    if learn_dir.is_dir():
+        for path in sorted(learn_dir.rglob("index.html")):
+            rel = path.relative_to(SITE_DIR).as_posix()
+            loc = f"{BASE_URL}{rel[: -len('index.html')]}"
+            entries.append(url_entry(loc, page_date_modified(rel), "0.7"))
 
     xml = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
@@ -7304,6 +7313,11 @@ def write_search_index() -> None:
     plan_walk = SITE_DIR / "plan-walkthrough" / "index.html"
     if plan_walk.is_file():
         add(plan_walk, "/plan-walkthrough/")
+    learn_dir = SITE_DIR / "learn"
+    if learn_dir.is_dir():
+        for path in sorted(learn_dir.rglob("index.html")):
+            rel = path.relative_to(SITE_DIR).as_posix()
+            add(path, "/" + rel[: -len("index.html")])
     rows.sort(key=lambda row: row["title"].lower())
     (SITE_DIR / "search-index.json").write_text(json.dumps(rows, indent=2) + "\n", encoding="utf-8")
 
@@ -8714,17 +8728,18 @@ def build_pm_dashboard_page() -> str:
 # ---------------------------------------------------------------------------
 
 
-def _hub_header(eyebrow: str, title: str, lead: str, answer: str = "") -> str:
+def _hub_header(eyebrow: str, title: str, lead: str, answer: str = "", note: str = "") -> str:
     answer_html = (
         f'    <p class="text-slate-200 font-light max-w-3xl leading-relaxed mb-3">{answer}</p>\n'
         if answer
         else ""
     )
+    note_html = f"    {note}\n" if note else ""
     return f"""  <header class="max-w-6xl mx-auto px-4 pt-10 pb-6">
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">{esc(eyebrow)}</p>
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">{title}</h1>
 {answer_html}    <p class="text-slate-400 font-light max-w-3xl leading-relaxed">{lead}</p>
-  </header>
+{note_html}  </header>
 """
 
 
@@ -12546,6 +12561,7 @@ def build_learn_page() -> str:
             "Learning · Board of Project Stewardship",
             "Learn hub",
             "Start with verification and your AHJ portal, then pick a planning pillar and a Board directory. Educational — not invented prices, ROI, or a brokerage.",
+            note='<p class="text-slate-400 font-light max-w-3xl leading-relaxed mt-3"><a href="./learn/" class="text-secondary hover:underline">How a house is built</a> opens the same house as the homepage drawing: the build order, the parts, and the choices. Teaching sketch, not a structural design.</p>',
         )
         + _hub_photo_strip(
             [

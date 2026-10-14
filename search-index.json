@@ -1038,5 +1038,150 @@
     "title": "Yarrow Point Remodels | Board of Project Stewardship",
     "url": "/yarrow-point.html",
     "description": "Yarrow Point\u2019s ~231-acre Lake Washington peninsula (one entry/exit, Wetherill Nature Preserve) uses town Permit Forms and SMP shoreline setbacks \u2014 about"
+  },
+  {
+    "title": "How a house is built | Board of Project Stewardship",
+    "url": "/learn/",
+    "description": "How this house is built, from the ground up, with the parts you can open. Teaching sketch, not a structural design."
+  },
+  {
+    "title": "Hold points on this house | Board of Project Stewardship",
+    "url": "/learn/sequence/",
+    "description": "Nineteen hold points for this slab house, from the survey to the final walk. Teaching sketch, not a structural design."
+  },
+  {
+    "title": "Explore this house | Board of Project Stewardship",
+    "url": "/learn/explore/",
+    "description": "Start with this house. Turn a system on, pick a part, and follow it to a closer explanation."
+  },
+  {
+    "title": "Why this, not that | Board of Project Stewardship",
+    "url": "/learn/compare/",
+    "description": "Construction choices side by side. Neither column is a rule. The right one depends on the site, the code, and the house."
+  },
+  {
+    "title": "Leveling a sloping lot | Board of Project Stewardship",
+    "url": "/learn/cut-and-fill/",
+    "description": "How a sloping lot is cut and filled to make a level pad, and why the soil under the house is not topsoil."
+  },
+  {
+    "title": "One house, four jobs | Board of Project Stewardship",
+    "url": "/learn/building-systems/",
+    "description": "Structure, enclosure, services, and finishes are four different jobs in the same house."
+  },
+  {
+    "title": "Where the weight goes | Board of Project Stewardship",
+    "url": "/learn/load-path/",
+    "description": "Gravity load moves from the roof through the walls and into the ground. This sketch does not size that path."
+  },
+  {
+    "title": "Posts you can see | Board of Project Stewardship",
+    "url": "/learn/columns/",
+    "description": "A column carries load in compression. On this house the porch posts are the columns you can see."
+  },
+  {
+    "title": "Beams over openings | Board of Project Stewardship",
+    "url": "/learn/beams/",
+    "description": "A beam carries load sideways to its supports. A header is a short beam over an opening. This sketch does not size one."
+  },
+  {
+    "title": "Triangles in the roof | Board of Project Stewardship",
+    "url": "/learn/trusses/",
+    "description": "A truss is a frame of triangles. The members stay in tension or compression when the joints are left intact."
+  },
+  {
+    "title": "Wind and earthquakes | Board of Project Stewardship",
+    "url": "/learn/lateral-stability/",
+    "description": "Wind and earthquakes push sideways. Floors share that push with braced walls. This sketch does not show the nailing."
+  },
+  {
+    "title": "Why there is no arch | Board of Project Stewardship",
+    "url": "/learn/arches-and-vaults/",
+    "description": "An arch works in compression and pushes outward. This wood house uses bending members instead."
+  },
+  {
+    "title": "What the house sits on | Board of Project Stewardship",
+    "url": "/learn/foundation-types/",
+    "description": "Slab, crawl space, basement, and piers solve different ground, frost, and access problems. This house is drawn as a slab-level pad."
+  },
+  {
+    "title": "Digging and backfill | Board of Project Stewardship",
+    "url": "/learn/excavation/",
+    "description": "Dig to the footing depth, keep the hole stable, then put soil back only after the wall and the drain can take it."
+  },
+  {
+    "title": "How wide the concrete is | Board of Project Stewardship",
+    "url": "/learn/spread-footings/",
+    "description": "A footing is wider than the wall so the same load presses the soil more gently. This sketch does not size one."
+  },
+  {
+    "title": "Face versus structure | Board of Project Stewardship",
+    "url": "/learn/masonry-bonding/",
+    "description": "Overlapped joints let masonry act together. Brick on a wood house is usually a cladding, not the structure."
+  },
+  {
+    "title": "Two floors stacked | Board of Project Stewardship",
+    "url": "/learn/platform-framing/",
+    "description": "Each story is a deck. The next walls stand on that deck. This house is drawn as two platforms."
+  },
+  {
+    "title": "The roof shape | Board of Project Stewardship",
+    "url": "/learn/roof-framing/",
+    "description": "Rafters and trusses make the roof shape and tie the walls. This house shows a gable, a hip, and a dormer."
+  },
+  {
+    "title": "The plate at a joint | Board of Project Stewardship",
+    "url": "/learn/truss-connections/",
+    "description": "The plate or gusset at a truss joint transfers the force. The joint is not a place to cut or drill."
+  },
+  {
+    "title": "Attic room or storage | Board of Project Stewardship",
+    "url": "/learn/trussed-rafters/",
+    "description": "A trussed rafter spans like a rafter pair but uses webs. A raised heel leaves room for insulation at the eaves."
+  },
+  {
+    "title": "Layers of an outside wall | Board of Project Stewardship",
+    "url": "/learn/wall-assembly/",
+    "description": "Cladding, a drainage gap, the weather barrier, sheathing, the stud cavity, and the interior board. One wall, several jobs."
+  },
+  {
+    "title": "The flight of stairs | Board of Project Stewardship",
+    "url": "/learn/stairs/",
+    "description": "The stair on this house links the two floors. Rise, run, headroom, and a guard are the teaching points, not a stair design."
+  },
+  {
+    "title": "Heat and cooling | Board of Project Stewardship",
+    "url": "/learn/heating-and-cooling/",
+    "description": "A heat pump moves heat. A furnace makes it. Either one needs a path for air, and this sketch does not size the equipment."
+  },
+  {
+    "title": "Water in and waste out | Board of Project Stewardship",
+    "url": "/learn/plumbing/",
+    "description": "Supply, a water heater, fixtures, and drains with vents. The wet rooms on this plan are the kitchen, baths, and laundry."
+  },
+  {
+    "title": "Power from the meter | Board of Project Stewardship",
+    "url": "/learn/electrical/",
+    "description": "Power arrives at a meter and a panel, then leaves on branch circuits. This is not a load calculation."
+  },
+  {
+    "title": "Adding a story | Board of Project Stewardship",
+    "url": "/learn/second-story/",
+    "description": "Adding a story loads the walls and foundation that are already there, and it opens the roof. This drawing is already two stories."
+  },
+  {
+    "title": "Heat, leaks, and drying | Board of Project Stewardship",
+    "url": "/learn/heat-air-moisture/",
+    "description": "Insulation slows heat. Sealing stops leaks. The wall still has to dry after rain. Marine climate zone 4C."
+  },
+  {
+    "title": "Rooms on this drawing | Board of Project Stewardship",
+    "url": "/learn/rooms/",
+    "description": "The rooms drawn on this house: garage and main floor, then bedrooms, baths, and laundry above."
+  },
+  {
+    "title": "Rain in this region | Board of Project Stewardship",
+    "url": "/learn/marine-climate/",
+    "description": "Western Washington is wet and slow to dry. Overhangs, drained cladding, and grade that falls away match that weather."
   }
 ]

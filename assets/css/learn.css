@@ -1,0 +1,351 @@
+/* Illustrated house guide. Paper sheet, small type, 44px controls. */
+@font-face {
+  font-family: "Learn Inter";
+  src: url("/assets/fonts/Inter-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Learn Inter";
+  src: url("/assets/fonts/Inter-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  --paper: #f6f4ee;
+  --ink: #1c1916;
+  --muted: #4a463e;
+  --line: #d9d3c7;
+  --green: #1f4d3a;
+  --bar: #14181c;
+  --bar-text: #e7e2d8;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: auto; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Learn Inter", system-ui, sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  font-weight: 400;
+}
+.learn-skip {
+  position: absolute;
+  left: 8px;
+  top: -40px;
+  background: #fff;
+  color: var(--ink);
+  padding: 0.4rem 0.7rem;
+  z-index: 40;
+}
+.learn-skip:focus { top: 8px; }
+.learn-top {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 52px;
+  padding: 0 0.6rem 0 0.85rem;
+  background: var(--bar);
+  color: var(--bar-text);
+}
+.learn-brand {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-right: auto;
+  min-width: 0;
+}
+.learn-brand-name {
+  min-width: 0;
+}
+.site-seal-picture,
+.site-footer-seal-picture {
+  display: block;
+  flex-shrink: 0;
+  line-height: 0;
+}
+.learn-top .site-seal,
+.learn-foot .site-footer-seal {
+  display: block;
+  object-fit: contain;
+  flex-shrink: 0;
+  max-width: none;
+}
+.learn-top .site-seal {
+  width: 40px;
+  height: 40px;
+}
+@media (min-width: 1280px) {
+  .learn-top .site-seal {
+    width: 52px;
+    height: 52px;
+  }
+  .learn-top { min-height: 68px; }
+}
+.learn-foot-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin: 0 0 0.85rem;
+  max-width: 16rem;
+  color: var(--ink);
+  text-decoration: none;
+}
+.learn-foot .site-footer-seal {
+  width: 112px;
+  height: 112px;
+}
+.learn-foot-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+.learn-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+}
+.learn-nav a {
+  color: var(--bar-text);
+  text-decoration: none;
+  font-size: 0.6875rem;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 0.55rem;
+}
+.learn-nav a[aria-current="page"] { color: #fff; text-decoration: underline; text-underline-offset: 0.25em; }
+.learn-menu {
+  display: none;
+  min-height: 44px;
+  min-width: 44px;
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  font: 500 0.6875rem/1 "Learn Inter", system-ui, sans-serif;
+}
+.learn-crumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: center;
+  padding: 0.65rem 1rem 0;
+  font-size: 0.6875rem;
+  color: var(--muted);
+}
+.learn-crumb a { color: var(--green); }
+.learn-wrap { width: min(1080px, calc(100% - 2rem)); margin: 0 auto; }
+.learn-hero { padding: 1rem 0 0.4rem; }
+.learn-kicker {
+  margin: 0;
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--green);
+  font-weight: 500;
+}
+h1 {
+  margin: 0.2rem 0 0.45rem;
+  font-size: 1.35rem;
+  line-height: 1.15;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+.learn-dek { margin: 0; max-width: 40rem; color: var(--muted); font-size: 0.875rem; }
+.learn-still, .learn-sheet, .learn-fig {
+  position: relative;
+  background: var(--paper);
+  margin: 0.7rem 0;
+}
+.learn-sheet {
+  margin: 0;
+  border: 1px solid var(--line);
+  min-height: 42svh;
+  height: 48svh;
+}
+.learn-still { height: auto; border: 0; }
+.learn-still canvas, .learn-sheet canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: pan-y pinch-zoom;
+  background: #f7f6f2;
+}
+.learn-still canvas {
+  height: 46svh;
+  border: 1px solid var(--line);
+}
+.learn-still canvas.is-armed, .learn-sheet canvas.is-armed { cursor: grab; }
+.learn-fallback { display: none; margin: 0.4rem 0 0; color: var(--muted); font-size: 0.75rem; }
+.is-fallback .learn-fallback { display: block; }
+.learn-caption, .learn-aside {
+  margin: 0.35rem 0 0;
+  color: var(--muted);
+  font-size: 0.6875rem;
+}
+.learn-actions, .learn-switch, .learn-rail, .learn-dirs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.7rem 0;
+}
+.learn-rail { flex-wrap: nowrap; overflow-x: auto; margin: 0.35rem 0; padding: 0 0 0.15rem; list-style: none; }
+.learn-rail li { flex: 0 0 auto; }
+.learn-btn {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 0.7rem;
+  border: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  font: 500 0.6875rem/1.2 "Learn Inter", system-ui, sans-serif;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.learn-btn[aria-current="step"], .learn-btn[aria-pressed="true"], .learn-btn.is-primary {
+  background: var(--ink);
+  color: var(--paper);
+}
+.learn-btn:disabled { opacity: 0.38; cursor: default; }
+.learn-scrub {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.6875rem;
+  color: var(--muted);
+  min-height: 44px;
+}
+.learn-scrub input { flex: 1; min-height: 44px; }
+.learn-section { padding: 1.4rem 0 0.2rem; }
+.learn-section h2, .learn-read h2, .learn-choice h2 {
+  margin: 0 0 0.45rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+.learn-cats { display: grid; gap: 0.7rem; }
+.learn-cat {
+  border-top: 1px solid var(--line);
+  padding-top: 0.65rem;
+}
+.learn-cat h3 { margin: 0 0 0.15rem; font-size: 0.875rem; font-weight: 500; }
+.learn-cat p { margin: 0 0 0.35rem; color: var(--muted); font-size: 0.75rem; }
+.learn-cat ol, .learn-index, .learn-read ol { margin: 0; padding: 0; list-style: none; }
+.learn-cat li, .learn-index li { margin: 0.15rem 0; font-size: 0.8125rem; }
+.learn-cat a, .learn-prose a, .learn-read a, .learn-follow { color: var(--green); }
+.is-soon { color: var(--muted); }
+.is-soon em { font-style: normal; font-size: 0.6875rem; letter-spacing: 0.03em; text-transform: uppercase; }
+.learn-prose p, .learn-read li p, .learn-choice p { margin: 0.4rem 0; }
+.learn-prose h2 { font-size: 1.05rem; font-weight: 500; margin: 1.1rem 0 0.3rem; }
+.learn-fig { margin: 0.8rem 0; }
+.learn-fig svg { width: 100%; height: auto; display: block; background: #f7f6f2; border: 1px solid var(--line); }
+.learn-fig figcaption { margin-top: 0.3rem; color: var(--muted); font-size: 0.6875rem; }
+.learn-related { padding: 0.2rem 0 1.4rem; font-size: 0.8125rem; }
+.learn-related ul { margin: 0.3rem 0 0; padding-left: 1.1rem; }
+.learn-foot {
+  border-top: 1px solid var(--line);
+  padding: 1rem;
+  color: var(--muted);
+  font-size: 0.6875rem;
+}
+.learn-foot a { color: var(--green); }
+.learn-choice { border-top: 1px solid var(--line); padding: 0.9rem 0; }
+.learn-choice-grid { display: grid; gap: 0.6rem; }
+.learn-choice h3 { margin: 0; font-size: 0.8125rem; font-weight: 500; }
+.learn-choice-note { color: var(--muted); font-size: 0.75rem; }
+.learn-seq-track { height: auto; }
+.learn-seq-sticky {
+  position: relative;
+  top: auto;
+  height: auto;
+  max-height: none;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  padding: 0.45rem 0.75rem 0.55rem;
+  background: var(--paper);
+}
+.learn-seq.is-enhanced .learn-seq-track { height: 560svh; }
+.learn-seq.is-enhanced .learn-seq-sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  max-height: 100svh;
+  overflow: visible;
+}
+.learn-seq-sticky h1 { font-size: 1rem; margin: 0; }
+.learn-sheet { flex: 1 1 auto; min-height: 26svh; height: auto; }
+.learn-copy { flex: 0 1 auto; max-height: none; overflow: visible; }
+.learn-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.learn-fallback-links { margin: 0.4rem 0 0; padding-left: 1.1rem; }
+.learn-keys { margin: 0.35rem 0 0; }
+.learn-copy h2 { margin: 0.2rem 0; font-size: 0.9375rem; font-weight: 500; }
+.learn-copy p { margin: 0.15rem 0; font-size: 0.8125rem; }
+.learn-phase { margin: 0.15rem 0 0; font-size: 0.6875rem; color: var(--green); }
+.learn-read { width: min(760px, calc(100% - 2rem)); margin: 0 auto 2rem; }
+.learn-read li { margin: 0.85rem 0; }
+.learn-read h3 { margin: 0; font-size: 0.875rem; font-weight: 500; }
+.learn-explore {
+  width: min(1080px, calc(100% - 1.5rem));
+  margin: 0.6rem auto 1.5rem;
+}
+.learn-parts { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.6rem 0; }
+@media (min-width: 800px) {
+  h1 { font-size: 1.7rem; }
+  .learn-still { height: auto; }
+  .learn-still canvas { height: 58svh; }
+  .learn-cats { grid-template-columns: 1fr 1fr; gap: 0.4rem 1.4rem; }
+  .learn-choice-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .learn-explore { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr); gap: 1rem; align-items: start; }
+  .learn-sheet { height: min(70svh, 640px); }
+  .learn-seq .learn-sheet { height: min(42svh, 420px); min-height: 180px; }
+  .learn-seq.is-enhanced .learn-sheet { height: auto; flex: 1 1 auto; min-height: 160px; }
+  .learn-menu { display: none; }
+}
+@media (max-width: 799px) {
+  .learn-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    background: var(--bar);
+    z-index: 30;
+    padding-bottom: 0.4rem;
+  }
+  body.learn-nav-open .learn-nav { display: flex; }
+  .learn-menu { display: inline-flex; align-items: center; justify-content: center; }
+  .learn-nav a { padding: 0 0.9rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .learn-seq-track, .learn-seq.is-enhanced .learn-seq-track { height: auto; }
+  .learn-seq-sticky, .learn-seq.is-enhanced .learn-seq-sticky { position: relative; height: auto; max-height: none; }
+  .learn-sheet { height: 46svh; flex: none; }
+}
