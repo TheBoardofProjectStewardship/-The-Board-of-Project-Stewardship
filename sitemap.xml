@@ -169,6 +169,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://boardofprojectstewardship.com/news.html</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://boardofprojectstewardship.com/another-story.html</loc>
     <lastmod>2026-10-07</lastmod>
     <changefreq>weekly</changefreq>

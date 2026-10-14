@@ -34,3 +34,4 @@
 - [Remodel cost factors](https://boardofprojectstewardship.com/remodel-cost-factors.html): What moves a remodel scope. No prices.
 - [Kitchen cost factors](https://boardofprojectstewardship.com/kitchen-cost-factors.html): What moves a kitchen scope. No prices.
 - [Blog](https://boardofprojectstewardship.com/blog.html): Local permit and remodel guides.
+- [News](https://boardofprojectstewardship.com/news.html): Reported local notes. Not the blog.

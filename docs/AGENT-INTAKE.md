@@ -106,6 +106,12 @@ The draft must reference images as `../assets/images/posts/<name>.webp`. A Cloud
 
 A blog bundle needs at least three webp images, a YouTube process URL or a repo mp4 path, and three manufacturer or product `https` links that are not the Board site, YouTube, a `.gov` host, or `pacificprogroup.com`.
 
+## News
+
+News is not a blog post. Stories are markdown files in `news/YYYY-MM-DD-slug.md` (see `news/_template.md`). `generate_site.py` writes `news/<slug>.html`, `news.html`, and `news/rss.xml`. Those pages are not added to `posts.json`, `blog.html`, `blog/rss.xml`, or the post cards.
+
+`python3 tools/board_intake.py validate` checks the news library with the post contract: each story needs a title, date, description, and at least one real `https` source URL. Public news HTML must not contain AI, ChatGPT, Gemini, Higgsfield, Ghost, or Netlify. A slug or story URL that appears in both news and the blog is `conflict`. `publish --apply` of a post-bundle never writes the news section. The morning routine still publishes one blog post.
+
 ### Public-copy locks inside the draft, title, description, and alt text
 
 Spell out Board of Project Stewardship. Do not write BOPS. Do not write AI, ChatGPT, Grok, Higgsfield, LLM, artificial intelligence, or other internal tool names. Do not invent prices, ROI, awards, star ratings, review counts, or founding years. Pacific Pro Group may appear only as the Board number-one contractor, with a link to `https://pacificprogroup.com/` (never `/contact/`). The only license token the checker accepts beside that name is the already published `PACIFPG765OF`.

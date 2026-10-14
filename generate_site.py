@@ -1806,6 +1806,7 @@ def nav_html(active: str = "", prefix: str = "") -> str:
         ("verify-contractor", href("verify-contractor.html"), "Verify"),
         ("how-we-rank", href("how-we-rank.html"), "How we rank"),
         ("blog", href("blog.html"), "Blog"),
+        ("news", href("news.html"), "News"),
         ("plan-walkthrough", href("plan-walkthrough/"), "3D Walkthrough"),
     ]
     more_site = [
@@ -1930,6 +1931,7 @@ def footer_html(prefix: str = "./", active: str = "", updated: str = "") -> str:
         ("verify-contractor", f"{prefix}verify-contractor.html", "Verify contractor"),
         ("stamp-of-trust", f"{prefix}stamp-of-trust/", "Stamp of Trust"),
         ("blog", f"{prefix}blog.html", "Blog"),
+        ("news", f"{prefix}news.html", "News"),
         ("contact", f"{prefix}contact.html", "Contact"),
         ("privacy", f"{prefix}privacy.html", "Privacy"),
     ]
@@ -1974,7 +1976,9 @@ def footer_html(prefix: str = "./", active: str = "", updated: str = "") -> str:
         items = []
         for key, href, label in rows:
             rel = href.replace(prefix, "", 1) if href.startswith(prefix) else href.lstrip("./")
-            if rel.endswith(".html") and not (SITE_DIR / rel).is_file() and key != "locations":
+            # News is written in the same generate run. Keep the link even if
+            # news.html is not on disk yet when the first footers render.
+            if rel.endswith(".html") and not (SITE_DIR / rel).is_file() and key not in ("locations", "news"):
                 continue
             current = ' aria-current="page"' if key == active else ""
             items.append(
@@ -6980,6 +6984,532 @@ def md_to_html(md: str) -> str:
     return "\n".join(out)
 
 
+NEWS_NAME_RE = re.compile(
+    r"^(?P<date>\d{4}-\d{2}-\d{2})-(?P<slug>[a-z0-9]+(?:-[a-z0-9]+)*)\.md$"
+)
+NEWS_SLUG_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+NEWS_DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+NEWS_FORBIDDEN_TERMS = (
+    (re.compile(r"(?<![A-Za-z])AI(?![A-Za-z])"), "AI"),
+    (re.compile(r"\bChatGPT\b", re.I), "ChatGPT"),
+    (re.compile(r"\bGemini\b", re.I), "Gemini"),
+    (re.compile(r"\bHiggsfield\b", re.I), "Higgsfield"),
+    (re.compile(r"\bGhost\b", re.I), "Ghost"),
+    (re.compile(r"\bNetlify\b", re.I), "Netlify"),
+)
+_NEWS_SOURCE_HOST_SKIP = {"example.com", "example.org", "example.net", "localhost"}
+
+
+def news_forbidden_term(text: str) -> str | None:
+    """Word the public news pages must not contain, or None."""
+    for pattern, label in NEWS_FORBIDDEN_TERMS:
+        if pattern.search(text or ""):
+            return label
+    return None
+
+
+def parse_news_frontmatter(text: str) -> tuple[dict, str]:
+    """Front matter with scalar fields and a one-level sources list."""
+    if not text.startswith("---"):
+        return {}, text
+    parts = text.split("---", 2)
+    if len(parts) < 3:
+        return {}, text
+    meta: dict = {}
+    key_re = re.compile(r"^([A-Za-z0-9_]+):\s*(.*)$")
+    lines = parts[1].strip("\n").splitlines()
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        if not line.strip() or line.lstrip().startswith("#"):
+            i += 1
+            continue
+        match = key_re.match(line)
+        if not match:
+            i += 1
+            continue
+        key, rest = match.group(1), match.group(2).strip()
+        if rest in ("", "|", ">"):
+            items: list[str] = []
+            i += 1
+            while i < len(lines):
+                item_line = lines[i]
+                stripped = item_line.strip()
+                if stripped.startswith("- "):
+                    items.append(stripped[2:].strip().strip('"').strip("'"))
+                    i += 1
+                    continue
+                if not stripped:
+                    i += 1
+                    continue
+                break
+            meta[key] = items
+            continue
+        if rest.startswith("[") and rest.endswith("]"):
+            inner = rest[1:-1].strip()
+            meta[key] = [
+                part.strip().strip('"').strip("'")
+                for part in inner.split(",")
+                if part.strip()
+            ] if inner else []
+            i += 1
+            continue
+        meta[key] = rest.strip().strip('"').strip("'")
+        i += 1
+    return meta, parts[2].strip()
+
+
+def _news_source_urls(value) -> list[str]:
+    if isinstance(value, str):
+        value = [value] if value.strip() else []
+    if not isinstance(value, list):
+        return []
+    return [str(item).strip() for item in value if str(item).strip()]
+
+
+def news_source_url_ok(url: str) -> bool:
+    if not isinstance(url, str) or not url.startswith("https://"):
+        return False
+    host = url[8:].split("/", 1)[0].split("@")[-1].split(":")[0].lower()
+    if host.startswith("www."):
+        host = host[4:]
+    if not host or "." not in host or host in _NEWS_SOURCE_HOST_SKIP:
+        return False
+    return True
+
+
+def inspect_news_file(path: Path) -> dict:
+    """Read one news markdown file and list contract problems. Does not publish."""
+    try:
+        text = path.read_text(encoding="utf-8")
+    except (OSError, UnicodeError) as exc:
+        return {
+            "source": path.name,
+            "slug": "",
+            "date": "",
+            "title": "",
+            "description": "",
+            "city": "",
+            "county": "",
+            "sources": [],
+            "hero": "",
+            "alt": "",
+            "body_md": "",
+            "out_name": "",
+            "problems": [f"{path.name} could not be read ({exc.__class__.__name__})"],
+        }
+    meta, body = parse_news_frontmatter(text)
+    name_match = NEWS_NAME_RE.match(path.name)
+    file_date = name_match.group("date") if name_match else ""
+    file_slug = name_match.group("slug") if name_match else ""
+    title = str(meta.get("title") or "").strip()
+    date = str(meta.get("date") or "").strip()
+    description = str(meta.get("description") or "").strip()
+    city = str(meta.get("city") or meta.get("city_county") or "").strip()
+    county = str(meta.get("county") or "").strip()
+    slug = str(meta.get("slug") or file_slug or "").strip()
+    hero = str(meta.get("hero") or meta.get("hero_image") or "").strip()
+    alt = str(meta.get("alt") or meta.get("hero_alt") or "").strip()
+    sources = _news_source_urls(meta.get("sources"))
+    problems: list[str] = []
+    if path.name.startswith("_"):
+        problems.append(f"{path.name} is a template and is not a story")
+    if not name_match:
+        problems.append(f"{path.name} must be named YYYY-MM-DD-slug.md")
+    if not title:
+        problems.append(f"{path.name} needs a title")
+    if not date or not NEWS_DATE_RE.match(date):
+        problems.append(f"{path.name} needs a YYYY-MM-DD date")
+    elif file_date and date != file_date:
+        problems.append(f"{path.name} date {date} does not match the filename")
+    if not description:
+        problems.append(f"{path.name} needs a description")
+    if not city and not county:
+        problems.append(f"{path.name} needs a city or county")
+    if not slug or not NEWS_SLUG_RE.match(slug):
+        problems.append(f"{path.name} needs a lowercase hyphenated slug")
+    elif file_slug and slug != file_slug:
+        problems.append(f"{path.name} slug {slug} does not match the filename")
+    if not sources:
+        problems.append(f"{path.name} needs at least one source URL")
+    else:
+        for url in sources:
+            if not news_source_url_ok(url):
+                problems.append(f"{path.name} source is not a real https URL: {url}")
+    if not hero:
+        problems.append(f"{path.name} needs a hero image path")
+    if not alt:
+        problems.append(f"{path.name} needs hero alt text")
+    return {
+        "source": path.name,
+        "slug": slug,
+        "date": date,
+        "title": title,
+        "description": description,
+        "city": city,
+        "county": county,
+        "sources": sources,
+        "hero": hero,
+        "alt": alt,
+        "body_md": body,
+        "out_name": f"{slug}.html" if slug else "",
+        "problems": problems,
+    }
+
+
+def load_news(root: Path | None = None) -> list[dict]:
+    """Published news stories, newest first. Skips news/_template.md. Not blog posts."""
+    base = root or SITE_DIR
+    news_dir = base / "news"
+    if not news_dir.is_dir():
+        return []
+    stories = []
+    problems: list[str] = []
+    for path in sorted(news_dir.glob("*.md")):
+        if path.name.startswith("_"):
+            continue
+        item = inspect_news_file(path)
+        if item["problems"]:
+            problems.extend(item["problems"])
+            continue
+        stories.append(item)
+    if problems and root is None:
+        raise SystemExit("news contract failed:\n" + "\n".join(problems))
+    stories.sort(key=lambda story: (story["date"], story["slug"]), reverse=True)
+    return stories
+
+
+def news_sources_html(sources: list[str]) -> str:
+    items = "".join(
+        f'<li><a href="{esc(url)}" target="_blank" rel="noopener" class="text-secondary hover:underline">{esc(url)}</a></li>'
+        for url in sources
+    )
+    return (
+        '    <section id="news-sources" class="mt-12" aria-labelledby="news-sources-h">\n'
+        '      <h2 id="news-sources-h" class="text-xl font-black text-white tracking-tight mb-3">Sources</h2>\n'
+        '      <ul class="space-y-2 text-sm text-slate-300 font-light break-all">\n'
+        f"        {items}\n"
+        "      </ul>\n"
+        "    </section>\n"
+    )
+
+
+def news_outro_html(prefix: str = "../") -> str:
+    """L&I Verify links in the same role as the blog post outro. No blog post URLs."""
+    return f"""    <section id="news-outro" class="mt-8 mb-4 bg-charcoal border border-white/10 rounded-xl p-6 md:p-8" aria-labelledby="news-outro-h">
+      <span class="text-secondary text-xs font-bold uppercase tracking-widest">Next steps</span>
+      <h2 id="news-outro-h" class="text-xl font-black text-white tracking-tight mt-1 mb-3">Directory · ranking method · L&amp;I Verify</h2>
+      <p class="text-sm text-slate-300 font-light leading-relaxed mb-4">This story is Board of Project Stewardship reporting — not a bid, schedule guarantee, or price list. Shortlist from a matching directory, read how rankings work, then re-verify every contract legal name on the official WA L&amp;I tool before deposits.</p>
+      <ul class="space-y-2 text-sm text-slate-300 font-light">
+        <li><a href="{prefix}directory.html" class="text-secondary hover:underline font-semibold">Directories</a></li>
+        <li><a href="{prefix}how-we-rank.html" class="text-secondary hover:underline">How we rank</a> — published editorial method, not paid placement.</li>
+        <li><a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a> — official contractor license lookup.</li>
+        <li><a href="{prefix}verify-contractor.html" class="text-secondary hover:underline">Board verify walkthrough</a> · <a href="{prefix}news.html" class="text-secondary hover:underline">News</a></li>
+      </ul>
+    </section>
+"""
+
+
+def build_news_story_page(story: dict, news_names: set[str] | None = None) -> str:
+    """One news story in the post page shell. Another Story callout matches posts."""
+    hero_rel = (story.get("hero") or "").lstrip("./")
+    article_html = rewrite_post_root_hrefs(
+        md_to_html(story.get("body_md") or ""),
+        news_names or set(),
+    )
+    canon = f"{BASE_URL}news/{story['out_name']}"
+    place = " · ".join(part for part in (story.get("city"), story.get("county")) if part)
+    place_html = f" · {esc(place)}" if place else ""
+    hero_html = ""
+    image_obj = None
+    if hero_rel and asset_exists(hero_rel):
+        src = prefix_asset(hero_rel, "../")
+        hero_html = (
+            '    <div class="mb-8 overflow-hidden rounded-xl border border-white/10">\n'
+            f'      <img src="{src}" alt="{esc(story.get("alt") or "")}" class="w-full h-52 sm:h-72 object-cover" '
+            'width="1600" height="900" loading="eager">\n'
+            "    </div>\n"
+        )
+        image_obj = {
+            "@type": "ImageObject",
+            "url": resolve_og_image(hero_rel),
+            "width": 1600,
+            "height": 900,
+        }
+    article = {
+        "@context": "https://schema.org",
+        "@type": "NewsArticle",
+        "headline": story["title"],
+        "datePublished": iso_datetime(story["date"]),
+        "description": story["description"],
+        "author": {
+            "@type": "Organization",
+            "name": "Board of Project Stewardship",
+            "@id": "https://boardofprojectstewardship.com/#organization",
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Board of Project Stewardship",
+            "@id": "https://boardofprojectstewardship.com/#organization",
+        },
+        "mainEntityOfPage": canon,
+        "citation": list(story.get("sources") or []),
+        "isPartOf": {"@id": f"{BASE_URL}news.html#collection"},
+    }
+    if image_obj:
+        article["image"] = image_obj
+    body = f"""  <div class="max-w-3xl mx-auto px-4 py-16 relative z-20">
+    <nav aria-label="Breadcrumb" class="text-xs text-slate-400 mb-6">
+      <ol class="flex flex-wrap items-center gap-2">
+        <li><a href="../" class="hover:text-secondary">Home</a></li>
+        <li aria-hidden="true" class="text-slate-400">/</li>
+        <li><a href="../news.html" class="hover:text-secondary">News</a></li>
+        <li aria-hidden="true" class="text-slate-400">/</li>
+        <li class="text-slate-400" aria-current="page">{esc(story['title'])}</li>
+      </ol>
+    </nav>
+{hero_html}    <div class="text-[11px] uppercase tracking-widest text-secondary font-bold mb-3">{esc(story['date'])}{place_html}</div>
+    <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-4">{esc(story['title'])}</h1>
+    <p class="text-sm text-slate-400 mb-10">By {AUTHOR}</p>
+    <div class="prose-board">
+{article_html}
+    </div>
+{news_sources_html(story.get("sources") or [])}{news_outro_html("../")}
+  </div>"""
+    rss_link = (
+        '  <link rel="alternate" type="application/rss+xml" '
+        f'title="Board of Project Stewardship News" href="{SITE_ORIGIN}/news/rss.xml">\n'
+    )
+    return page_shell(
+        f"{story['title']} | Board of Project Stewardship",
+        story["description"] or story["title"],
+        "news",
+        body,
+        [article],
+        prefix="../",
+        canonical=canon,
+        og_image=hero_rel or None,
+        og_type="article",
+        og_image_alt=story.get("alt") or "",
+        extra_head=rss_link,
+        breadcrumbs=[
+            ("Home", BASE_URL),
+            ("News", f"{BASE_URL}news.html"),
+            (story["title"], canon),
+        ],
+    )
+
+
+def build_news_index(stories: list[dict]) -> str:
+    cards = []
+    for story in stories:
+        place = " · ".join(part for part in (story.get("city"), story.get("county")) if part)
+        place_html = f" · {esc(place)}" if place else ""
+        cards.append(
+            f"""        <article class="bg-charcoal border border-white/5 hover:border-primary/30 p-6 rounded-xl card-hover">
+          <div class="text-[11px] uppercase tracking-widest text-secondary font-bold mb-2">{esc(story['date'])}{place_html}</div>
+          <h2 class="text-xl font-bold text-white mb-2"><a href="./news/{esc(story['out_name'])}" class="hover:text-secondary transition">{esc(story['title'])}</a></h2>
+          <p class="text-sm text-slate-400 font-light leading-relaxed">{esc(story['description'])}</p>
+        </article>"""
+        )
+    if cards:
+        listing = "\n".join(cards)
+    else:
+        listing = '<p class="text-slate-400 font-light">First stories coming soon</p>'
+    collection_items = [
+        {
+            "@type": "ListItem",
+            "position": i,
+            "url": f"{BASE_URL}news/{story['out_name']}",
+            "name": story["title"],
+        }
+        for i, story in enumerate(stories, 1)
+    ]
+    ld = [{
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "@id": f"{BASE_URL}news.html#collection",
+        "name": "Board of Project Stewardship News",
+        "url": f"{BASE_URL}news.html",
+        "description": "Local construction news from the Board of Project Stewardship for King County, Snohomish County, and Seattle.",
+        "isPartOf": {"@id": "https://boardofprojectstewardship.com/#website"},
+        "publisher": {
+            "@type": "Organization",
+            "name": "Board of Project Stewardship",
+            "@id": "https://boardofprojectstewardship.com/#organization",
+        },
+        "mainEntity": {
+            "@type": "ItemList",
+            "name": "Board news stories",
+            "numberOfItems": len(collection_items),
+            "itemListElement": collection_items,
+        },
+    }]
+    body = f"""  <header class="max-w-6xl mx-auto px-4 pt-10 pb-6">
+    <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">News · {YEAR}</p>
+    <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">News</h1>
+    <p class="text-slate-200 font-light max-w-3xl leading-relaxed">Reported notes for King County, Snohomish County, and Seattle. Separate from the project guides on the blog.</p>
+  </header>
+  <div class="max-w-6xl mx-auto px-4 pb-24">
+    <div class="grid gap-4">
+{listing}
+    </div>
+  </div>"""
+    rss_link = (
+        '  <link rel="alternate" type="application/rss+xml" '
+        f'title="Board of Project Stewardship News" href="{SITE_ORIGIN}/news/rss.xml">\n'
+    )
+    return page_shell(
+        "News | Board of Project Stewardship",
+        "Local construction news from the Board of Project Stewardship for King County, Snohomish County, and Seattle.",
+        "news",
+        body,
+        ld,
+        canonical=f"{BASE_URL}news.html",
+        extra_head=rss_link,
+        breadcrumbs=[("Home", BASE_URL), ("News", f"{BASE_URL}news.html")],
+    )
+
+
+def write_news_rss(stories: list[dict]) -> None:
+    news_dir = SITE_DIR / "news"
+    news_dir.mkdir(parents=True, exist_ok=True)
+    items = []
+    for story in stories:
+        link = f"{BASE_URL}news/{story['out_name']}"
+        items.append(
+            "    <item>\n"
+            f"      <title>{esc(story['title'])}</title>\n"
+            f"      <link>{link}</link>\n"
+            f"      <guid>{link}</guid>\n"
+            f"      <pubDate>{rss_pubdate(story['date'])}</pubDate>\n"
+            f"      <description>{esc(story['description'])}</description>\n"
+            "    </item>"
+        )
+    body = ("\n".join(items) + "\n") if items else ""
+    xml = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<rss version="2.0">\n'
+        "  <channel>\n"
+        "    <title>Board of Project Stewardship News</title>\n"
+        f"    <link>{BASE_URL}news.html</link>\n"
+        "    <description>Local construction news from the Board of Project Stewardship for King County, Snohomish County, and Seattle.</description>\n"
+        "    <language>en-us</language>\n"
+        + body
+        + "  </channel>\n</rss>\n"
+    )
+    (news_dir / "rss.xml").write_text(xml, encoding="utf-8")
+
+
+def refresh_news_pages(stories: list[dict]) -> None:
+    """Write news/<slug>.html, news.html, and news/rss.xml. Never touches the blog."""
+    news_dir = SITE_DIR / "news"
+    news_dir.mkdir(parents=True, exist_ok=True)
+    expected = {story["out_name"] for story in stories}
+    for old in sorted(news_dir.glob("*.html")):
+        if old.name not in expected:
+            old.unlink()
+    for story in stories:
+        (news_dir / story["out_name"]).write_text(
+            build_news_story_page(story, expected),
+            encoding="utf-8",
+        )
+    (SITE_DIR / "news.html").write_text(build_news_index(stories), encoding="utf-8")
+    write_news_rss(stories)
+
+
+def iter_news_identities(root: Path) -> list[dict]:
+    news_dir = root / "news"
+    if not news_dir.is_dir():
+        return []
+    found = []
+    for path in sorted(news_dir.glob("*.md")):
+        if path.name.startswith("_"):
+            continue
+        item = inspect_news_file(path)
+        if item.get("slug"):
+            found.append(item)
+    return found
+
+
+def iter_post_identities(root: Path) -> list[dict]:
+    """Blog post slug and public path. Reads posts.json, then posts/*.md. Not news."""
+    posts_json = root / "posts.json"
+    if posts_json.is_file():
+        try:
+            data = json.loads(posts_json.read_text(encoding="utf-8"))
+        except (OSError, UnicodeError, json.JSONDecodeError):
+            data = None
+        if isinstance(data, list):
+            found = []
+            for item in data:
+                if not isinstance(item, dict) or not item.get("slug"):
+                    continue
+                path = str(item.get("path") or "")
+                name = path.split("/")[-1]
+                found.append({
+                    "slug": str(item["slug"]),
+                    "url_path": f"posts/{name}" if name else "",
+                })
+            if found:
+                return found
+    posts_dir = root / "posts"
+    if not posts_dir.is_dir():
+        return []
+    found = []
+    for path in sorted(posts_dir.glob("*.md")):
+        if path.name.startswith("_"):
+            continue
+        meta, _body = parse_frontmatter(path.read_text(encoding="utf-8"))
+        slug = str(meta.get("slug") or "").strip()
+        if not slug:
+            continue
+        found.append({"slug": slug, "url_path": f"posts/{path.stem}.html"})
+    return found
+
+
+def news_blog_overlap(root: Path) -> list[str]:
+    """Slugs or story URLs that show up on both the news side and the blog side."""
+    messages: list[str] = []
+    news = iter_news_identities(root)
+    posts = iter_post_identities(root)
+    news_slugs = {item["slug"] for item in news}
+    post_slugs = {item["slug"] for item in posts}
+    for slug in sorted(news_slugs & post_slugs):
+        messages.append(f"slug {slug} is in both news and the blog")
+    news_paths = {f"news/{item['out_name']}" for item in news if item.get("out_name")}
+    post_paths = {item["url_path"] for item in posts if item.get("url_path")}
+    for rel in sorted(news_paths & post_paths):
+        messages.append(f"URL {rel} is in both news and the blog")
+    blog_parts: list[str] = []
+    for rel in ("blog.html", "posts.json", "blog/rss.xml"):
+        path = root / rel
+        if path.is_file():
+            blog_parts.append(path.read_text(encoding="utf-8", errors="ignore"))
+    posts_dir = root / "posts"
+    if posts_dir.is_dir():
+        for path in sorted(posts_dir.glob("*.html")):
+            blog_parts.append(path.read_text(encoding="utf-8", errors="ignore"))
+    blog_blob = "\n".join(blog_parts)
+    news_parts: list[str] = []
+    for rel in ("news.html", "news/rss.xml"):
+        path = root / rel
+        if path.is_file():
+            news_parts.append(path.read_text(encoding="utf-8", errors="ignore"))
+    news_dir = root / "news"
+    if news_dir.is_dir():
+        for path in sorted(news_dir.glob("*.html")):
+            news_parts.append(path.read_text(encoding="utf-8", errors="ignore"))
+    news_blob = "\n".join(news_parts)
+    for rel in sorted(news_paths):
+        if rel in blog_blob or f"https://boardofprojectstewardship.com/{rel}" in blog_blob:
+            messages.append(f"{rel} appears in the blog index, blog feed, or a post")
+    for rel in sorted(post_paths):
+        if rel in news_blob or f"https://boardofprojectstewardship.com/{rel}" in news_blob:
+            messages.append(f"{rel} appears on a news page or in the news feed")
+    return messages
+
+
 def load_posts() -> list[dict]:
     posts_dir = SITE_DIR / "posts"
     posts = []
@@ -7326,6 +7856,7 @@ Base: `{BASE_URL}`
 | `trades.html` | Trade contractor hub |
 {trade_lines}
 | `blog.html` | Blog index |
+| `news.html` | News index (separate from the blog) |
 | `good-steward.html` | Good Steward hub |
 | `build-walkthrough.html` | Build Walkthrough landing |
 | `plan-walkthrough/` | Plan to 3D walkthrough |
@@ -7337,6 +7868,7 @@ Base: `{BASE_URL}`
 | `locations.html` | Locations hub (live place pages) |
 | `stamp-of-trust/` | Stamp of Trust credential |
 | `blog/rss.xml` | Blog RSS feed |
+| `news/rss.xml` | News RSS feed |
 | `404.html` | Branded Board 404 |
 {post_lines}
 | `POSTING.md` | Publishing agent workflow (ops) |
@@ -7359,7 +7891,7 @@ cd bops-site
 python3 generate_site.py
 ```
 
-Sources: `data/research/top30-addition-contractors.md`, `data/research/bops-research-kitchen-bath.md`, `data/research/bops-research-custom-commercial-spec.md`, `data/research/bops-research-edmonds-custom.md`, `data/research/bops-research-trades.md`, and `posts/*.md`.
+Sources: `data/research/top30-addition-contractors.md`, `data/research/bops-research-kitchen-bath.md`, `data/research/bops-research-custom-commercial-spec.md`, `data/research/bops-research-edmonds-custom.md`, `data/research/bops-research-trades.md`, `posts/*.md`, and `news/*.md`. News stories stay out of the blog.
 
 ## Agent intake
 
@@ -7468,6 +8000,7 @@ def write_llms_txt() -> None:
 - [Remodel cost factors](https://boardofprojectstewardship.com/remodel-cost-factors.html): What moves a remodel scope. No prices.
 - [Kitchen cost factors](https://boardofprojectstewardship.com/kitchen-cost-factors.html): What moves a kitchen scope. No prices.
 - [Blog](https://boardofprojectstewardship.com/blog.html): Local permit and remodel guides.
+- [News](https://boardofprojectstewardship.com/news.html): Reported local notes. Not the blog.
 """
     (SITE_DIR / "llms.txt").write_text(text, encoding="utf-8")
 
@@ -7546,6 +8079,7 @@ def write_sitemap(posts: list[dict]) -> None:
         "faq.html",
         "directory.html",
         "blog.html",
+        "news.html",
         "another-story.html",
         "good-steward.html",
         "build-walkthrough.html",
@@ -7636,6 +8170,10 @@ def write_sitemap(posts: list[dict]) -> None:
     for p in posts:
         post_path = f"posts/{p['out_name']}"
         entries.append(url_entry(f"{BASE_URL}{post_path}", page_date_modified(post_path), "0.6"))
+    # News is its own section. Story URLs live under /news/, never under /posts/.
+    for story in load_news():
+        story_path = f"news/{story['out_name']}"
+        entries.append(url_entry(f"{BASE_URL}{story_path}", page_date_modified(story_path), "0.6"))
     entries.append(
         url_entry(
             f"{BASE_URL}stamp-of-trust/",
@@ -7758,6 +8296,10 @@ def write_search_index() -> None:
     if posts_dir.is_dir():
         for path in sorted(posts_dir.glob("*.html")):
             add(path, f"/posts/{path.name}")
+    news_dir = SITE_DIR / "news"
+    if news_dir.is_dir():
+        for path in sorted(news_dir.glob("*.html")):
+            add(path, f"/news/{path.name}")
     stamp = SITE_DIR / "stamp-of-trust" / "index.html"
     if stamp.is_file():
         add(stamp, "/stamp-of-trust/")
@@ -16184,6 +16726,11 @@ def main(argv: list[str] | None = None) -> None:
     if len(edmonds_custom) < 30:
         raise SystemExit(f"Expected 30 Edmonds custom firms, got {len(edmonds_custom)}")
 
+    # News is a separate section from the blog. Write it before other pages so
+    # footers can link to news.html. Stories never enter posts.json or blog/rss.xml.
+    news = load_news()
+    refresh_news_pages(news)
+
     # Footer links are omitted until the target file exists, so publish this
     # page before any chrome that lists it.
     (SITE_DIR / "pascal-editor.html").write_text(build_pascal_editor_page(), encoding="utf-8")
@@ -16338,8 +16885,9 @@ def main(argv: list[str] | None = None) -> None:
     for slug, _, _, _ in TRADES:
         print(f"  {slug}: {len(trades_data.get(slug, []))} firms")
     print(f"  blog posts: {len(posts)}")
+    print(f"  news stories: {len(news)}")
     indexnow_key = ensure_indexnow_key()
-    print("  robots.txt + sitemap.xml + posts.json + blog/rss.xml + 404.html + write.html written (CNAME left untouched)")
+    print("  robots.txt + sitemap.xml + posts.json + blog/rss.xml + news/rss.xml + 404.html + write.html written (CNAME left untouched)")
     print(f"  IndexNow key hosted at /{indexnow_key}.txt (preserved via .well-known/indexnow-key.txt)")
     if args.indexnow or os.environ.get("INDEXNOW_PING") == "1":
         ping_indexnow()
