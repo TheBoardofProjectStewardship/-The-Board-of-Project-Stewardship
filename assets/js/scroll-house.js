@@ -8,6 +8,7 @@
 (function (factory) {
   var api = factory();
   if (typeof module === "object" && module.exports) module.exports = api;
+  if (typeof globalThis !== "undefined") globalThis.BoardHouse = api;
   if (typeof document !== "undefined") {
     var start = function () { api.mount(); };
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
@@ -385,6 +386,10 @@ function cameraFor(progress, width, height, bounds = DEFAULT_BOUNDS, orbit) {
   let angle = pose.angle;
   let heading = pose.heading;
   let zoom = 1;
+  if (orbit && Number.isFinite(orbit.lockAngle)) {
+    angle = orbit.lockAngle;
+    if (Number.isFinite(orbit.lockHeading)) heading = orbit.lockHeading;
+  }
   if (orbit) {
     heading += Number.isFinite(orbit.yaw) ? orbit.yaw : 0;
     angle += Number.isFinite(orbit.pitch) ? orbit.pitch : 0;
@@ -583,10 +588,11 @@ function labelsFor(model, progress, mvp, width, height) {
   return labels.map(({ box, ...label }) => label);
 }
 
-function createRenderer(canvas) {
+function createRenderer(canvas, options) {
+  options = options || {};
   const gl = canvas.getContext('webgl', {
     alpha: false, antialias: false, depth: true, stencil: false,
-    premultipliedAlpha: false, preserveDrawingBuffer: false, powerPreference: 'low-power',
+    premultipliedAlpha: false, preserveDrawingBuffer: !!options.preserveDrawingBuffer, powerPreference: 'low-power',
   });
   if (!gl) throw new Error('The drawing context is unavailable.');
   const buffers = [], programs = [];
@@ -695,7 +701,7 @@ function createRenderer(canvas) {
     else { gl.disable(gl.BLEND); gl.depthMask(true); }
   }
 
-  function render(progress, focusId, width, height, orbit) {
+  function render(progress, focusId, width, height, orbit, groupView) {
     if (disposed) throw new Error('The drawing has been disposed.');
     if (gl.isContextLost()) throw new Error('The drawing context was lost.');
     const p = clamp(Number.isFinite(progress) ? progress : 0);
@@ -734,7 +740,16 @@ function createRenderer(canvas) {
       else if (id === 'structure' && (groupId === 'upper' || groupId === 'upperfloor')) lift = 1;
       return { role, lift };
     }
-    const states = meshes.map(mesh => groupState(mesh.id, p));
+    const states = groupView
+      ? meshes.map(mesh => {
+          const g = groupView[mesh.id] || { visible: false, cut: 0, opacity: 0 };
+          return {
+            visible: !!g.visible,
+            cut: Number.isFinite(g.cut) ? g.cut : 100,
+            opacity: Number.isFinite(g.opacity) ? g.opacity : 1,
+          };
+        })
+      : meshes.map(mesh => groupState(mesh.id, p));
 
     use(shadowProgram);
     gl.bindBuffer(gl.ARRAY_BUFFER, shadow.buffer);
@@ -1323,6 +1338,19 @@ function createRenderer(canvas) {
     else root.classList.add("is-still");
   }
 
+  function openViewer(canvas) {
+    var engine = createRenderer(canvas, { preserveDrawingBuffer: true });
+    return {
+      draw: function (spec) {
+        spec = spec || {};
+        var w = spec.width || canvas.clientWidth || 320;
+        var h = spec.height || canvas.clientHeight || 180;
+        return engine.render(spec.progress || 0, spec.focus || "", w, h, spec.orbit || null, spec.groups || null);
+      },
+      dispose: function () { engine.dispose(); }
+    };
+  }
+
   return {
     mount: mount,
     buildModel: buildModel,
@@ -1331,6 +1359,7 @@ function createRenderer(canvas) {
     projectPoint: projectPoint,
     groupState: groupState,
     stageAt: stageAt,
+    openViewer: openViewer,
     STAGES: STAGES,
     PAPER: PAPER
   };

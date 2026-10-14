@@ -311,6 +311,9 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
 }
 .sh-link:hover { text-decoration: underline; }
 .sh-btn:focus-visible,

@@ -21,6 +21,12 @@ def published_html() -> list[Path]:
     extra = ROOT / "plan-walkthrough" / "index.html"
     if extra.is_file():
         files.append(extra)
+    learn = ROOT / "learn"
+    if learn.is_dir():
+        landing = learn / "index.html"
+        if landing.is_file():
+            files.append(landing)
+        files.extend(sorted(learn.glob("*/index.html")))
     return files
 
 
