@@ -84,7 +84,7 @@
       *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
     }
   </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://boardofprojectstewardship.com/#organization","name":"Board of Project Stewardship","url":"https://boardofprojectstewardship.com/","description":"The Board of Project Stewardship publishes construction standards and contractor directories for the Pacific Northwest \u2014 King County, Snohomish County, and Seattle \u2014 shortlists firms homeowners can hire with confidence.","areaServed":[{"@type":"AdministrativeArea","name":"Pacific Northwest","containedInPlace":{"@type":"Country","name":"United States"}},{"@type":"AdministrativeArea","name":"King County","containedInPlace":{"@type":"State","name":"Washington"}},{"@type":"AdministrativeArea","name":"Snohomish County","containedInPlace":{"@type":"State","name":"Washington"}},{"@type":"City","name":"Seattle","containedInPlace":{"@type":"State","name":"Washington"}},{"@type":"City","name":"Edmonds","containedInPlace":{"@type":"State","name":"Washington"}}],"email":"editorial@boardofprojectstewardship.com","logo":{"@type":"ImageObject","url":"https://boardofprojectstewardship.com/assets/icons/logo-512.png","width":512,"height":512}},{"@type":"WebSite","@id":"https://boardofprojectstewardship.com/#website","url":"https://boardofprojectstewardship.com/","name":"Board of Project Stewardship","publisher":{"@id":"https://boardofprojectstewardship.com/#organization"},"inLanguage":"en-US"},{"@type":"WebPage","@id":"https://boardofprojectstewardship.com/stamp-of-trust/#webpage","url":"https://boardofprojectstewardship.com/stamp-of-trust/","name":"Stamp of Trust","description":"Stamp of Trust from the Board of Project Stewardship: how Pacific Northwest contractors earn verification and how homeowners check a stamp.","dateModified":"2026-10-06","isPartOf":{"@id":"https://boardofprojectstewardship.com/#website"},"publisher":{"@id":"https://boardofprojectstewardship.com/#organization"},"inLanguage":"en-US"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://boardofprojectstewardship.com/"},{"@type":"ListItem","position":2,"name":"Stamp of Trust","item":"https://boardofprojectstewardship.com/stamp-of-trust/"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://boardofprojectstewardship.com/#organization","name":"Board of Project Stewardship","url":"https://boardofprojectstewardship.com/","description":"The Board of Project Stewardship publishes construction standards and contractor directories for the Pacific Northwest \u2014 King County, Snohomish County, and Seattle \u2014 shortlists firms homeowners can hire with confidence.","areaServed":[{"@type":"AdministrativeArea","name":"Pacific Northwest","containedInPlace":{"@type":"Country","name":"United States"}},{"@type":"AdministrativeArea","name":"King County","containedInPlace":{"@type":"State","name":"Washington"}},{"@type":"AdministrativeArea","name":"Snohomish County","containedInPlace":{"@type":"State","name":"Washington"}},{"@type":"City","name":"Seattle","containedInPlace":{"@type":"State","name":"Washington"}},{"@type":"City","name":"Edmonds","containedInPlace":{"@type":"State","name":"Washington"}}],"email":"editorial@boardofprojectstewardship.com","logo":{"@type":"ImageObject","url":"https://boardofprojectstewardship.com/assets/icons/seal-512.png","width":512,"height":512}},{"@type":"WebSite","@id":"https://boardofprojectstewardship.com/#website","url":"https://boardofprojectstewardship.com/","name":"Board of Project Stewardship","publisher":{"@id":"https://boardofprojectstewardship.com/#organization"},"inLanguage":"en-US"},{"@type":"WebPage","@id":"https://boardofprojectstewardship.com/stamp-of-trust/#webpage","url":"https://boardofprojectstewardship.com/stamp-of-trust/","name":"Stamp of Trust","description":"Stamp of Trust from the Board of Project Stewardship: how Pacific Northwest contractors earn verification and how homeowners check a stamp.","dateModified":"2026-10-06","isPartOf":{"@id":"https://boardofprojectstewardship.com/#website"},"publisher":{"@id":"https://boardofprojectstewardship.com/#organization"},"inLanguage":"en-US"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://boardofprojectstewardship.com/"},{"@type":"ListItem","position":2,"name":"Stamp of Trust","item":"https://boardofprojectstewardship.com/stamp-of-trust/"}]}]}</script>
 </head>
 <body class="bg-obsidian text-slate-200 antialiased">
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -93,9 +93,10 @@
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-16 items-center gap-3">
         <a href="/" class="flex items-center gap-2.5 no-underline min-w-0">
-          <span class="w-9 h-9 rounded-full bg-primary border border-seal/50 flex items-center justify-center text-ambersoft shrink-0" aria-hidden="true">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.2 4.6 5 .5-3.7 3.3 1.1 4.9L12 14.2 7.4 16.3l1.1-4.9L4.8 8.1l5-.5L12 3z" stroke="currentColor" stroke-width="1.6"/></svg>
-          </span>
+          <picture class="site-seal-picture">
+            <source type="image/webp" srcset="/assets/icons/seal-96.webp 96w, /assets/icons/seal-192.webp 192w, /assets/icons/seal-512.webp 512w" sizes="(min-width: 1280px) 52px, 40px">
+            <img class="site-seal" src="/assets/icons/seal-192.png" srcset="/assets/icons/seal-96.png 96w, /assets/icons/seal-192.png 192w, /assets/icons/seal-512.png 512w" sizes="(min-width: 1280px) 52px, 40px" width="40" height="40" alt="The Board of Project Stewardship seal" loading="eager" decoding="async">
+          </picture>
           <span class="min-w-0">
             <span class="block font-black text-sm sm:text-base tracking-wider text-white leading-tight">Board of Project Stewardship</span>
             <span class="hidden sm:block text-[9px] font-semibold uppercase tracking-[0.16em] text-slate-500 mt-0.5">Construction standards &amp; directories</span>
@@ -509,10 +510,13 @@
   <footer class="bg-obsidian py-14 text-sm border-t border-white/5">
     <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-10 text-slate-400">
       <div>
-        <div class="flex items-center mb-4 gap-2">
-          <span class="w-8 h-8 rounded-full bg-primary border border-seal/40 flex items-center justify-center text-ambersoft text-xs" aria-hidden="true">◆</span>
+        <a href="/" class="site-footer-brand">
+          <picture class="site-footer-seal-picture">
+            <source type="image/webp" srcset="/assets/icons/seal-96.webp 96w, /assets/icons/seal-192.webp 192w, /assets/icons/seal-512.webp 512w" sizes="112px">
+            <img class="site-footer-seal" src="/assets/icons/seal-192.png" srcset="/assets/icons/seal-96.png 96w, /assets/icons/seal-192.png 192w, /assets/icons/seal-512.png 512w" sizes="112px" width="112" height="112" alt="The Board of Project Stewardship seal" loading="lazy" decoding="async">
+          </picture>
           <span class="font-black text-base tracking-wider text-white">Board of Project Stewardship</span>
-        </div>
+        </a>
         <p class="font-light leading-relaxed text-sm">Independent publisher of construction standards and contractor directories for King &amp; Snohomish Counties and the broader Seattle / Pacific Northwest area. Updated 2026.</p>
         <p class="mt-3 font-light text-sm">Public contact: <a href="mailto:editorial@boardofprojectstewardship.com" class="text-secondary hover:underline">editorial@boardofprojectstewardship.com</a></p>
       </div>

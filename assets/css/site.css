@@ -313,3 +313,39 @@ body { font-family: 'Inter', system-ui, sans-serif; background-color: #0a0a0a; c
   vertical-align: top;
 }
 .board-table a { color: #4ade80; word-break: break-word; }
+.site-seal-picture,
+.site-footer-seal-picture {
+  display: block;
+  flex-shrink: 0;
+  line-height: 0;
+}
+header .site-seal,
+.site-footer-seal {
+  display: block;
+  object-fit: contain;
+  flex-shrink: 0;
+  max-width: none;
+}
+header .site-seal {
+  width: 40px;
+  height: 40px;
+}
+@media (min-width: 1280px) {
+  header .site-seal {
+    width: 52px;
+    height: 52px;
+  }
+}
+.site-footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.85rem;
+  margin-bottom: 1rem;
+  max-width: 16rem;
+  text-decoration: none;
+}
+.site-footer-seal {
+  width: 112px;
+  height: 112px;
+}
