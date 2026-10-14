@@ -1,7 +1,7 @@
 ---
 title: "Bathroom Remodel Lake Forest Park WA — iWorQ Permits, Tree Canopy & Wet Assemblies"
 date: "2026-09-30"
-description: "Lake Forest Park bathroom remodel guide: City iWorQ Permit Portal, separate L&I electrical path, canopy and staging constraints, and waterproofing that survives PNW damp seasons."
+description: "Lake Forest Park bathroom remodel guide: City iWorQ Permit Portal, separate L&I electrical path, staging constraints, and waterproofing for damp seasons."
 category: "Bathrooms"
 slug: "bathroom-remodel-lake-forest-park-wa"
 ---

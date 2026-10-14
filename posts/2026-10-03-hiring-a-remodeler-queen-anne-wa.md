@@ -1,7 +1,7 @@
 ---
 title: "Hiring a Remodeler Queen Anne WA — Local Permitting, Historic Home Care & Design-Build Value"
 date: "2026-10-03"
-description: "How Queen Anne Seattle homeowners can vet remodelers: SDCI permit paths, steep-slope logistics, historic character care, and Washington L&I Verify before you sign."
+description: "How Queen Anne Seattle homeowners can vet remodelers: SDCI permit paths, steep-slope logistics, historic character, and L&I Verify before you sign."
 category: "Hiring Guides"
 slug: "hiring-a-remodeler-queen-anne-wa"
 ---

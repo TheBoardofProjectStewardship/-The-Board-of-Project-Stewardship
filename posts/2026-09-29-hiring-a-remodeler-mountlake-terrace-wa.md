@@ -1,7 +1,7 @@
 ---
 title: "Hiring a Remodeler Mountlake Terrace WA — Vetting Pros, Local Permit Tips & Design-Build Benefits"
 date: "2026-09-29"
-description: "Hiring a remodeler in Mountlake Terrace: verify L&I credentials, use the City eTRAKiT permit portal, watch Snohomish County jurisdiction, and compare design-build delivery for mid-century homes."
+description: "Hiring a remodeler in Mountlake Terrace: verify L&I credentials, use the City eTRAKiT permit portal, and watch Snohomish County jurisdiction."
 category: "Hiring Guides"
 slug: "hiring-a-remodeler-mountlake-terrace-wa"
 ---

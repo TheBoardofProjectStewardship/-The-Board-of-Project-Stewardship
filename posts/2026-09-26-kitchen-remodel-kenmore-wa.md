@@ -1,7 +1,7 @@
 ---
 title: "Kitchen Remodel Kenmore WA — Layout, Permits & Moisture-Smart Specs"
 date: "2026-09-26"
-description: "Kenmore kitchen remodel guidance for King County layout, MyBuildingPermit paths, moisture-smart hood and wet-zone specs, and how to shortlist licensed design-build firms."
+description: "Kenmore kitchen remodel guidance for King County layout, MyBuildingPermit paths, moisture-smart hood and wet-zone specs, and how to shortlist firms."
 category: "Kitchen"
 slug: "kitchen-remodel-kenmore-wa"
 ---

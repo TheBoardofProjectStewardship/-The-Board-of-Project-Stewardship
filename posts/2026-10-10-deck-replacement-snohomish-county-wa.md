@@ -1,7 +1,7 @@
 ---
 title: "Deck Replacement Snohomish County WA — When Unincorporated Lots Need a Permit, Setbacks & Ledger Details"
 date: "2026-10-10"
-description: "Deck replacement guidance for homeowners in unincorporated Snohomish County: when the county requires a building permit, what the deck submittal needs, how setbacks apply to decks, Washington's deck footing and post tables, ledger flashing for a wet climate, and how to verify a contractor."
+description: "Deck replacement in unincorporated Snohomish County: when a building permit is required, what the submittal needs, and how setbacks apply to decks."
 category: "Permits"
 slug: "deck-replacement-snohomish-county-wa"
 ---

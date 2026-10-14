@@ -1,7 +1,7 @@
 ---
 title: "Kitchen Remodel Bothell WA — Layout, Permits & Licensed Pros"
 date: "2026-09-24"
-description: "Practical Bothell kitchen remodel guidance for King County layouts, MyBuildingPermit paths, cabinet sequencing, and how to shortlist licensed design-build firms."
+description: "Practical Bothell kitchen remodel guidance for King County layouts, MyBuildingPermit paths, cabinet sequencing, and how to shortlist licensed firms."
 category: "Kitchen"
 slug: "kitchen-remodel-bothell-wa"
 ---

@@ -1,7 +1,7 @@
 ---
 title: "Hiring a Remodeler Redmond WA — Vetting Experts, Budgeting Tips & Permit Guidance"
 date: "2026-10-01"
-description: "Ensure your home transformation is seamless with our comprehensive guide to choosing the right remodeling contractor in Redmond, from initial vetting to navigating King County permits."
+description: "A guide to choosing a remodeling contractor in Redmond, from initial vetting through King County permit checks. Educational, not a bid."
 category: "Hiring Guides"
 slug: "hiring-a-remodeler-redmond-wa"
 ---

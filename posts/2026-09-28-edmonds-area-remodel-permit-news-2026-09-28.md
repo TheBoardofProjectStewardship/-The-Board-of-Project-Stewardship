@@ -1,7 +1,7 @@
 ---
 title: "Edmonds-Area Homeowner News, September 28, 2026: Esperance Annexation, Budgets, and Utility Rates"
 date: "2026-09-28"
-description: "Local news for Edmonds, Esperance, Lynnwood, and Kenmore homeowners planning remodels: annexation and permit jurisdiction, new city budgets, a utility rate freeze vote, and a long sidewalk closure."
+description: "Local news for Edmonds, Esperance, Lynnwood, and Kenmore homeowners planning remodels: annexation, permit jurisdiction, city budgets, and a utility rate freeze."
 category: "Permits"
 slug: "edmonds-area-remodel-permit-news-2026-09-28"
 ---

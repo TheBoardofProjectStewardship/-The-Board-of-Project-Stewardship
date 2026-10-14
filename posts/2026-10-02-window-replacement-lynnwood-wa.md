@@ -1,7 +1,7 @@
 ---
 title: "Window Replacement Lynnwood WA — Energy Efficiency, Modern Styles & Local Permit Guides"
 date: "2026-10-02"
-description: "Upgrade your Lynnwood home with high-performance windows designed for Snohomish County weather — thermal performance, styles, and verified City of Lynnwood permit paths."
+description: "High-performance windows for Lynnwood and Snohomish County weather, with styles, thermal performance, and verified City of Lynnwood permit paths."
 category: "Guides"
 slug: "window-replacement-lynnwood-wa"
 ---

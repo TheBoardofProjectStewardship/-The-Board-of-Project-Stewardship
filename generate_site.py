@@ -565,26 +565,80 @@ def published_meta_len(text: str) -> int:
     return len(html.escape(text or "", quote=True).encode("utf-8"))
 
 
+_META_DANGLING = re.compile(
+    r"(?:\s+(?:of|and|the|a|an|for|to|from|with|in|on|or|&|how|that|its|before|instead|vs|versus))+$",
+    re.I,
+)
+
+
+def _meta_balanced(text: str) -> bool:
+    return (
+        text.count("(") == text.count(")")
+        and text.count("[") == text.count("]")
+        and text.count("“") == text.count("”")
+    )
+
+
 def clamp_description(desc: str, limit: int = 160) -> str:
     """Keep the published meta description at or under 160 source bytes.
 
     Apostrophes become ``&#x27;`` and an em dash is three UTF-8 bytes, so a
-    160-character string can still publish long. Cut on word boundaries.
+    160-character string can still publish long. Prefer a complete sentence.
+    If the first sentence itself is too long, end at the last semicolon or
+    dash that still fits. Otherwise cut on word boundaries.
     """
     desc = re.sub(r"\s+", " ", (desc or "").strip())
     if published_meta_len(desc) <= limit:
         return desc
+    sentences = re.split(r"(?<=[.!?])\s+(?=[A-Z\"“])", desc)
+    kept: list[str] = []
+    for sentence in sentences:
+        trial = " ".join(kept + [sentence]).strip()
+        if published_meta_len(trial) <= limit and trial.rstrip().endswith((".", "!", "?")):
+            kept.append(sentence)
+        else:
+            break
+    if kept:
+        return " ".join(kept).strip()
+    best = ""
+    for match in re.finditer(r"[.!?]\s+|;\s+| — | – ", desc):
+        mark = desc[match.start()]
+        if mark in ".!?":
+            prefix = desc[: match.start() + 1].strip()
+        else:
+            prefix = desc[: match.start()].rstrip(" ,;:—–-")
+            prefix = _META_DANGLING.sub("", prefix).rstrip(" ,;:—–-")
+            if not prefix:
+                continue
+            prefix += "."
+        if not _meta_balanced(prefix):
+            continue
+        if published_meta_len(prefix) <= limit and len(prefix) > len(best):
+            best = prefix
+    if len(best) >= 40:
+        return best
     words = desc.split(" ")
     while words and published_meta_len(" ".join(words).rstrip(" .,;:—–-")) > limit:
         words.pop()
     cut = " ".join(words).rstrip(" .,;:—–-")
-    cut = re.sub(
-        r"(?:\s+(?:of|and|the|a|an|for|to|from|with|in|on|or|&))+$",
-        "",
-        cut,
-        flags=re.I,
-    ).rstrip(" .,;:—–-")
+    cut = _META_DANGLING.sub("", cut).rstrip(" .,;:—–-")
     return cut if cut else desc[:limit]
+
+
+def replace_published_descriptions(html_text: str, description: str) -> str:
+    """Rewrite description, Open Graph, and Twitter meta tags to the clamped copy."""
+    description = clamp_description(description)
+    escaped = esc(description)
+
+    def repl(match: re.Match) -> str:
+        return f'{match.group(1)}{escaped}"'
+
+    return re.sub(
+        r'(<meta\b[^>]*\b(?:name="description"|property="og:description"|name="twitter:description")[^>]*\bcontent=")([^"]*)"',
+        repl,
+        html_text,
+        flags=re.I,
+    )
 
 
 def iso_datetime(date_s: str) -> str:
@@ -3856,9 +3910,9 @@ def home_plan_hero() -> tuple[str, str]:
           <p class="see-dek">Upload a photo of your house, kitchen or bathroom and explore a concept for your addition or remodel.</p>
           <p class="see-note">No email or phone required for your first preview.</p>
           <div class="see-tabs" role="tablist" aria-label="Project type">
-            <button type="button" class="see-tab" id="see-tab-addition" role="tab" aria-selected="true" aria-controls="see-sample-frame-addition" data-mode="addition">Addition</button>
-            <button type="button" class="see-tab" id="see-tab-kitchen" role="tab" aria-selected="false" tabindex="-1" aria-controls="see-sample-frame-kitchen" data-mode="kitchen">Kitchen</button>
-            <button type="button" class="see-tab" id="see-tab-bathroom" role="tab" aria-selected="false" tabindex="-1" aria-controls="see-sample-frame-bathroom" data-mode="bathroom">Bathroom</button>
+            <button type="button" class="see-tab" id="see-tab-addition" role="tab" aria-selected="true" aria-controls="see-sample-addition" data-mode="addition">Addition</button>
+            <button type="button" class="see-tab" id="see-tab-kitchen" role="tab" aria-selected="false" tabindex="-1" aria-controls="see-sample-kitchen" data-mode="kitchen">Kitchen</button>
+            <button type="button" class="see-tab" id="see-tab-bathroom" role="tab" aria-selected="false" tabindex="-1" aria-controls="see-sample-bathroom" data-mode="bathroom">Bathroom</button>
           </div>
           <div id="see-flow-photo" class="see-flow-panel" role="tabpanel" aria-labelledby="see-stepper-photo">
             <div class="see-drop" id="see-drop">
@@ -3982,7 +4036,7 @@ def home_plan_hero() -> tuple[str, str]:
           </noscript>
         </div>
         <figure class="see-stage" id="see-sample">
-          <div class="see-compare" data-sample="addition">
+          <div class="see-compare" id="see-sample-addition" data-sample="addition" role="tabpanel" aria-labelledby="see-tab-addition">
             <div class="see-compare-frame" id="see-sample-frame-addition" role="group" aria-labelledby="see-tab-addition">
               <picture>
                 <source type="image/webp" srcset="./assets/images/visualizer/exterior-after-800.webp 800w, ./assets/images/visualizer/exterior-after.webp 1600w" sizes="(max-width: 960px) 100vw, 680px">
@@ -4000,7 +4054,7 @@ def home_plan_hero() -> tuple[str, str]:
               </label>
             </div>
           </div>
-          <div class="see-compare" data-sample="kitchen" hidden>
+          <div class="see-compare" id="see-sample-kitchen" data-sample="kitchen" role="tabpanel" aria-labelledby="see-tab-kitchen" hidden>
             <div class="see-compare-frame" id="see-sample-frame-kitchen" role="group" aria-labelledby="see-tab-kitchen">
               <picture>
                 <source type="image/webp" srcset="./assets/images/visualizer/kitchen-after.webp">
@@ -4018,7 +4072,7 @@ def home_plan_hero() -> tuple[str, str]:
               </label>
             </div>
           </div>
-          <div class="see-compare" data-sample="bathroom" hidden>
+          <div class="see-compare" id="see-sample-bathroom" data-sample="bathroom" role="tabpanel" aria-labelledby="see-tab-bathroom" hidden>
             <div class="see-compare-frame" id="see-sample-frame-bathroom" role="group" aria-labelledby="see-tab-bathroom">
               <picture>
                 <source type="image/webp" srcset="./assets/images/visualizer/bathroom-after.webp">
@@ -7143,6 +7197,9 @@ def refresh_post_html(posts: list[dict]) -> None:
         if dest.is_file():
             existing = dest.read_text(encoding="utf-8")
             if post_html_should_be_preserved(existing, regenerated):
+                patched = replace_published_descriptions(existing, post["description"] or post["title"])
+                if patched != existing:
+                    dest.write_text(patched, encoding="utf-8")
                 print(
                     f"  keep post HTML {dest.name}: regenerate would replace "
                     "repo asset paths or polished markup"
@@ -7886,7 +7943,7 @@ def build_energy_credit_page() -> str:
 """ + education_closing("tools", "default", official_keys=["lni_verify", "sbcc", "lni_home"])
     return page_shell(
         "WSEC-R Prescriptive Credits | Board of Project Stewardship",
-        "2021 WSEC-R (as amended, effective March 15, 2024) prescriptive credit worksheet. Check R406 values against the adopted state and city package. Not a tax-credit calculator.",
+        "2021 WSEC-R (as amended, effective March 15, 2024) credit worksheet. Check R406 values against the adopted state and city package. Not a tax-credit calculator.",
         "energy-credit",
         body,
         canonical=f"{BASE_URL}energy-credit.html",
@@ -8060,13 +8117,13 @@ FLOOR_PLAN_3D_STYLE = """  <style>
     #fp3d .fp-title { font-size:0.7rem; font-weight:800; letter-spacing:0.16em; text-transform:uppercase; color:#94a3b8; }
     #fp-plan, #fp-canvas { touch-action: pan-y; }
     @media (hover: hover) and (pointer: fine) { #fp-plan, #fp-canvas { touch-action: none; } }
-    #fp3d.is-gesture #fp-plan, #fp3d.is-gesture #fp-canvas { touch-action: none; }
-    #fp-gesture { display: none; }
-    @media (hover: none), (pointer: coarse) { #fp-gesture { display: inline-flex; } }
+    #fp3d.is-gesture #fp-plan, #fp3d.is-gesture-3d #fp-canvas { touch-action: none; }
+    #fp3d #fp-gesture, #fp3d #fp-gesture-3d { display: none; margin: 0.45rem 0.75rem 0; }
+    @media (hover: none), (pointer: coarse) { #fp3d #fp-gesture, #fp3d #fp-gesture-3d { display: inline-flex; } }
     #fp3d .fp-btn:focus-within { outline: 2px solid #4ade80; outline-offset: 2px; }
-    #fp-plan { display:block; width:100%; height:26rem; touch-action:pan-y; user-select:none; -webkit-user-select:none; background:#0d120f; }
+    #fp-plan { display:block; width:100%; height:26rem; user-select:none; -webkit-user-select:none; background:#0d120f; }
     #fp-3d { position:relative; width:100%; height:26rem; background:#0f1512; }
-    #fp-canvas { display:block; width:100%; height:100%; touch-action:pan-y; }
+    #fp-canvas { display:block; width:100%; height:100%; }
     #fp-fallback { position:absolute; inset:0; display:flex; flex-direction:column; }
     #fp-fallback[hidden] { display:none; }
     #fp-iso { flex:1; min-height:0; padding:0.5rem; }
@@ -8194,6 +8251,7 @@ def build_floor_plan_3d_page() -> str:
             <button type="button" class="fp-btn fp-needs-3d" id="fp-snap"><i class="fas fa-camera" aria-hidden="true"></i>Snapshot</button>
           </div>
         </div>
+        <button type="button" class="fp-btn" id="fp-gesture-3d" aria-pressed="false" aria-label="Tap to edit the 3D view">Tap to edit</button>
         <div id="fp-3d">
           <canvas id="fp-canvas" tabindex="0" role="application" aria-label="3D model of the floor plan. Drag to orbit; in Walk mode drag to look and use the arrow pad to move."></canvas>
           <div id="fp-3d-loading">Loading 3D view…</div>
@@ -12491,7 +12549,7 @@ def build_home_addition_planning_page() -> str:
     )
     return page_shell(
         "Home Addition Planning | Board of Project Stewardship",
-        "Home addition planning hub — permits, weather sequencing, and hire habits for King County, Snohomish County, and Seattle from the Board of Project Stewardship.",
+        "Home addition planning hub — permits, weather sequencing, and hire habits for King County, Snohomish County, and Seattle.",
         "home-addition-planning",
         body,
         [faq_ld(faqs)],
@@ -15739,7 +15797,7 @@ def patch_tool_pages() -> None:
         (
             SITE_DIR / "tools" / "energy-credit" / "index.html",
             "WSEC-R 2021 Prescriptive Credits | Board of Project Stewardship",
-            "2021 WSEC-R (as amended, effective March 15, 2024) prescriptive credits. Check R406 values against the adopted state and city package. Educational — no invented tax amounts.",
+            "2021 WSEC-R (as amended, effective March 15, 2024) prescriptive credits. Check R406 against the state and city package. Educational, no invented tax amounts.",
             f"{SITE_ORIGIN}/energy-credit.html",
         ),
     ]

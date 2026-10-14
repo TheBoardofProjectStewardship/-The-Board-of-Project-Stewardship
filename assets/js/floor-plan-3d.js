@@ -1000,16 +1000,21 @@ function wire() {
       selected = null; preview = null; render2D(); updateSelectionUI();
     }
   });
-  var gesture = $('fp-gesture');
-  if (gesture) {
-    gesture.addEventListener('click', function () {
+  function wireGesture(id, className, label) {
+    var btn = $(id);
+    if (!btn) return;
+    btn.addEventListener('click', function () {
       var root = document.getElementById('fp3d');
       if (!root) return;
-      var on = root.classList.toggle('is-gesture');
-      gesture.setAttribute('aria-pressed', on ? 'true' : 'false');
-      gesture.textContent = on ? 'Done editing' : 'Tap to edit';
+      var on = root.classList.toggle(className);
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      var text = on ? 'Done editing' : 'Tap to edit';
+      btn.textContent = text;
+      if (label) btn.setAttribute('aria-label', text + ' ' + label);
     });
   }
+  wireGesture('fp-gesture', 'is-gesture', '');
+  wireGesture('fp-gesture-3d', 'is-gesture-3d', 'the 3D view');
   new ResizeObserver(() => render2D()).observe(svg);
 }
 

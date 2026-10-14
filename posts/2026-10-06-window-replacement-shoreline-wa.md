@@ -1,7 +1,7 @@
 ---
 title: "Window Replacement Shoreline WA — Permit Exemptions, Lead-Safe Rules & Drained Openings"
 date: "2026-10-06"
-description: "Window replacement guidance for Shoreline homeowners: when the City of Shoreline code exempts a window swap from a building permit, lead-safe rules for pre-1978 homes, flashing that drains, and how to verify installers on Washington L&I."
+description: "Window replacement guidance for Shoreline: when a window swap is exempt from a building permit, lead-safe rules for pre-1978 homes, and drained flashing."
 category: "Guides"
 slug: "window-replacement-shoreline-wa"
 ---

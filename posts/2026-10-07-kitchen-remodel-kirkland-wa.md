@@ -1,7 +1,7 @@
 ---
 title: "Kitchen Remodel Kirkland WA — Permit Exemptions, City Electrical Permits & Range-Hood Makeup Air"
 date: "2026-10-07"
-description: "Kitchen remodel guidance for Kirkland homeowners: which finish work the Kirkland Municipal Code exempts from a building permit, why electrical permits come from the City of Kirkland rather than L&I, planning makeup air for a bigger range hood, and how to verify contractors."
+description: "Kirkland kitchen remodel guidance: which finish work is exempt from a building permit, why electrical permits come from the city, and how to verify firms."
 category: "Kitchen"
 slug: "kitchen-remodel-kirkland-wa"
 ---

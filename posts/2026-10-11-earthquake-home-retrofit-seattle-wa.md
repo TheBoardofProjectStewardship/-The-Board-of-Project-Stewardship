@@ -1,7 +1,7 @@
 ---
 title: "Earthquake Home Retrofit Seattle WA — SDCI's Prescriptive Plan Set, Cripple Walls & Foundation Bolting"
 date: "2026-10-11"
-description: "A homeowner's guide to a voluntary earthquake retrofit in Seattle: what SDCI's Earthquake Home Retrofit Permit covers, the eligibility questions on Sheet S0, how the anchor-brace-connect work is done in a crawlspace or basement, when you need an engineer instead, and how to verify a contractor."
+description: "A homeowner guide to a voluntary earthquake retrofit in Seattle: what SDCI's Earthquake Home Retrofit Permit covers and the eligibility questions."
 category: "Permits"
 slug: "earthquake-home-retrofit-seattle-wa"
 ---

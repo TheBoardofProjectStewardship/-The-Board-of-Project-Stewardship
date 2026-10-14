@@ -709,9 +709,9 @@
           <p class="see-dek">Upload a photo of your house, kitchen or bathroom and explore a concept for your addition or remodel.</p>
           <p class="see-note">No email or phone required for your first preview.</p>
           <div class="see-tabs" role="tablist" aria-label="Project type">
-            <button type="button" class="see-tab" id="see-tab-addition" role="tab" aria-selected="true" aria-controls="see-sample-frame-addition" data-mode="addition">Addition</button>
-            <button type="button" class="see-tab" id="see-tab-kitchen" role="tab" aria-selected="false" tabindex="-1" aria-controls="see-sample-frame-kitchen" data-mode="kitchen">Kitchen</button>
-            <button type="button" class="see-tab" id="see-tab-bathroom" role="tab" aria-selected="false" tabindex="-1" aria-controls="see-sample-frame-bathroom" data-mode="bathroom">Bathroom</button>
+            <button type="button" class="see-tab" id="see-tab-addition" role="tab" aria-selected="true" aria-controls="see-sample-addition" data-mode="addition">Addition</button>
+            <button type="button" class="see-tab" id="see-tab-kitchen" role="tab" aria-selected="false" tabindex="-1" aria-controls="see-sample-kitchen" data-mode="kitchen">Kitchen</button>
+            <button type="button" class="see-tab" id="see-tab-bathroom" role="tab" aria-selected="false" tabindex="-1" aria-controls="see-sample-bathroom" data-mode="bathroom">Bathroom</button>
           </div>
           <div id="see-flow-photo" class="see-flow-panel" role="tabpanel" aria-labelledby="see-stepper-photo">
             <div class="see-drop" id="see-drop">
@@ -835,7 +835,7 @@
           </noscript>
         </div>
         <figure class="see-stage" id="see-sample">
-          <div class="see-compare" data-sample="addition">
+          <div class="see-compare" id="see-sample-addition" data-sample="addition" role="tabpanel" aria-labelledby="see-tab-addition">
             <div class="see-compare-frame" id="see-sample-frame-addition" role="group" aria-labelledby="see-tab-addition">
               <picture>
                 <source type="image/webp" srcset="./assets/images/visualizer/exterior-after-800.webp 800w, ./assets/images/visualizer/exterior-after.webp 1600w" sizes="(max-width: 960px) 100vw, 680px">
@@ -853,7 +853,7 @@
               </label>
             </div>
           </div>
-          <div class="see-compare" data-sample="kitchen" hidden>
+          <div class="see-compare" id="see-sample-kitchen" data-sample="kitchen" role="tabpanel" aria-labelledby="see-tab-kitchen" hidden>
             <div class="see-compare-frame" id="see-sample-frame-kitchen" role="group" aria-labelledby="see-tab-kitchen">
               <picture>
                 <source type="image/webp" srcset="./assets/images/visualizer/kitchen-after.webp">
@@ -871,7 +871,7 @@
               </label>
             </div>
           </div>
-          <div class="see-compare" data-sample="bathroom" hidden>
+          <div class="see-compare" id="see-sample-bathroom" data-sample="bathroom" role="tabpanel" aria-labelledby="see-tab-bathroom" hidden>
             <div class="see-compare-frame" id="see-sample-frame-bathroom" role="group" aria-labelledby="see-tab-bathroom">
               <picture>
                 <source type="image/webp" srcset="./assets/images/visualizer/bathroom-after.webp">
