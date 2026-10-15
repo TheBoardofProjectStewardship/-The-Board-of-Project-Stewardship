@@ -47,3 +47,6 @@ intake/lock/*
 # News story photos (credited stills, must ship on GitHub Pages)
 !assets/images/news/
 !assets/images/news/*.webp
+# Editorial art: news masthead, stamp seal, footer blueprint
+!assets/images/art/
+!assets/images/art/**

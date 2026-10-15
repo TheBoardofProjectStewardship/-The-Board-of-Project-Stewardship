@@ -148,6 +148,9 @@ class HomePlanHeroTests(unittest.TestCase):
         ):
             self.assertIn(snippet, self.html if "prefers-reduced" not in snippet else (ROOT / "assets/css/scroll-house.css").read_text(encoding="utf-8"))
         self.assertIn("scroll-house-still.svg", (ROOT / "assets/css/scroll-house.css").read_text(encoding="utf-8"))
+        self.assertNotIn("home-stamp", self.html)
+        self.assertNotIn("stamp-of-trust-seal", self.html)
+        self.assertIn('class="stamp-badge"', self.html)
         self.assertEqual(self.html.count("<h1"), 1)
         self.assertEqual(self.html.count('fetchpriority="high"'), 1)
         visible = visible_copy(self.html)

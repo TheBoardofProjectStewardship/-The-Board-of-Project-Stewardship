@@ -1503,7 +1503,10 @@ def apply_image_pass(html: str) -> str:
             return match.group(0)
         prefix, rel = _split_asset_url(src_m.group(1))
         # data-defer-lcp / data-no-lcp stay lazy and do not consume the LCP slot.
-        if "data-defer-lcp" in inner or "data-no-lcp" in inner:
+        # data-above-fold stays eager even when a later image is also on screen.
+        forced_lazy = "data-defer-lcp" in inner or "data-no-lcp" in inner
+        above_fold = "data-above-fold" in inner and not forced_lazy
+        if forced_lazy:
             is_first = False
         else:
             is_first = state["first"]
@@ -1535,9 +1538,12 @@ def apply_image_pass(html: str) -> str:
                         inner = _set_attr(inner, "sizes", sizes)
                 else:
                     inner = _set_attr(inner, "src", _url_for(prefix, sibling))
-        if is_first:
+        if is_first or above_fold:
             inner = _set_attr(inner, "loading", "eager")
-            inner = _set_attr(inner, "fetchpriority", "high")
+            if is_first:
+                inner = _set_attr(inner, "fetchpriority", "high")
+            else:
+                inner = re.sub(r'\s+fetchpriority="high"', "", inner)
         else:
             inner = _set_attr(inner, "loading", "lazy")
             inner = re.sub(r'\s+fetchpriority="high"', "", inner)
@@ -4069,6 +4075,21 @@ def feasibility_calculator_html() -> str:
         </div>"""
 
 
+def place_hub_calculator_html() -> str:
+    """Shared Live Feasibility calculator for place hubs, before the FAQ.
+
+    The block and its prices come from feasibility_calculator_html. The wrapper
+    only keeps the form a readable width inside the hub column.
+    """
+    return (
+        '  <div class="max-w-6xl mx-auto px-4 pb-8">\n'
+        '    <div class="max-w-xl">\n'
+        + feasibility_calculator_html()
+        + "\n    </div>\n"
+        "  </div>\n"
+    )
+
+
 def ppg_widgets_html(prefix: str = "") -> str:
     """Feasibility calculator, Directory #1 outbound, and Service Region — sitewide above footer."""
     pfx = prefix if prefix else "./"
@@ -4134,14 +4155,6 @@ def home_scroll_house() -> tuple[str, str]:
     """
     fragment = (SITE_DIR / "sections" / "scroll-house.html").read_text(encoding="utf-8")
     fragment = fragment.replace("__KICKER__", GEO_KICKER_HTML)
-    badge = stamp_badge_html("./stamp-of-trust/").replace(
-        'class="stamp-badge"', 'class="stamp-badge home-stamp"', 1
-    )
-    fragment = fragment.replace(
-        '<div class="scroll-house-sticky">',
-        '<div class="scroll-house-sticky">' + badge,
-        1,
-    )
     css = '  <link rel="stylesheet" href="/assets/css/scroll-house.css">\n'
     return fragment, css
 
@@ -7510,10 +7523,10 @@ def news_card_media(story: dict, prefix: str, eager: bool = False) -> str:
     hero_rel = (story.get("hero") or "").lstrip("./")
     if not news_hero_ready(hero_rel):
         return ""
-    loading = "eager" if eager else "lazy"
+    above = " data-above-fold" if eager else ""
     return (
         f'<img src="{prefix_asset(hero_rel, prefix)}" alt="{esc(story.get("alt") or "")}" '
-        f'width="1200" height="800" loading="{loading}">'
+        f'width="1200" height="800"{above}>'
     )
 
 
@@ -7703,7 +7716,14 @@ def build_news_index(stories: list[dict]) -> str:
             "itemListElement": collection_items,
         },
     }]
+    banner = (
+        '<img class="news-masthead-banner" src="/assets/images/art/news-masthead-16x9.webp" '
+        'alt="Illustrative: Puget Sound homes under renovation on an overcast day" '
+        'width="1344" height="752" decoding="async" data-above-fold '
+        'sizes="(max-width: 1152px) 100vw, 1152px">'
+    )
     body = f"""  <header class="news-masthead">
+    {banner}
     <p class="news-masthead-date"><time datetime="{esc(mast_iso)}">{esc(mast_label)}</time></p>
     <h1>News</h1>
     <p class="news-masthead-dek">Reported notes for King County, Snohomish County, and Seattle. Separate from the project guides on the blog.</p>
@@ -10951,6 +10971,7 @@ def build_city_hub_page(
             ],
             heading=f"Related learning for {place}",
         )
+        + place_hub_calculator_html()
         + f"  <div class=\"max-w-6xl mx-auto px-4 pb-16\">\n{faq_section(faqs, f'{place} hub FAQ')}\n  </div>\n"
     )
     return page_shell(
@@ -11127,8 +11148,60 @@ def place_spec_is_complete(spec: dict) -> tuple[bool, str]:
     return True, "ok"
 
 
+def _strip_one_shared_calculator(text: str) -> str:
+    """Remove one shared feasibility calculator block from comparison text."""
+    marker = 'id="feasibility-calculator"'
+    start = text.find(marker)
+    if start == -1:
+        plain = text.find("Live Feasibility")
+        if plain == -1:
+            return text
+        end = text.find("Best ($75k+)", plain)
+        if end == -1:
+            return text
+        line_end = text.find("\n", end)
+        return text[:plain] + (text[line_end:] if line_end != -1 else "")
+    open_at = text.rfind("<div", 0, start)
+    if open_at == -1:
+        return text
+    i = open_at
+    depth = 0
+    lower = text.lower()
+    while i < len(text):
+        next_open = lower.find("<div", i)
+        next_close = lower.find("</div>", i)
+        if next_close == -1:
+            return text[:open_at]
+        if next_open != -1 and next_open < next_close:
+            depth += 1
+            i = next_open + 4
+        else:
+            depth -= 1
+            i = next_close + len("</div>")
+            if depth == 0:
+                return text[:open_at] + text[i:]
+    return text[:open_at]
+
+
+def _strip_shared_calculator(text: str) -> str:
+    """Remove every shared feasibility calculator so it cannot raise Jaccard.
+
+    Place copy is compared without this block. Nested divs are walked by depth
+    so the unique prose around the calculator stays in the comparison.
+    """
+    if not text:
+        return ""
+    previous = None
+    current = text
+    while current != previous:
+        previous = current
+        current = _strip_one_shared_calculator(current)
+    return current
+
+
 def _norm_place_text(place: str, text: str) -> str:
-    t = re.sub(re.escape(place), "{P}", text or "", flags=re.I)
+    text = _strip_shared_calculator(text or "")
+    t = re.sub(re.escape(place), "{P}", text, flags=re.I)
     return re.sub(r"\s+", " ", t).strip().lower()
 
 
@@ -11137,7 +11210,8 @@ def place_specs_uniqueness_report(specs: list[dict], jaccard_flag: float = 0.40)
 
     Alex uniqueness lock (2026-09-24): reject Mad-Lib hubs. Default Jaccard
     threshold is 0.40 on blurbs, section prose, and the combined bundle —
-    not only exact swap-dupes.
+    not only exact swap-dupes. The shared Live Feasibility calculator is
+    removed before that comparison.
     """
     flags: list[str] = []
 
@@ -11518,6 +11592,7 @@ def build_place_seo_page(spec: dict, hire_pack: dict | None = None) -> str:
             ],
             heading=f"Related learning for {place}",
         )
+        + place_hub_calculator_html()
         + f'  <div class="max-w-6xl mx-auto px-4 pb-16">\n{faq_section(faqs, f"{place} hub FAQ")}\n  </div>\n'
     )
 

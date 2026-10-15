@@ -42,13 +42,6 @@
 @media (min-width: 1280px) {
   .scroll-house { --sh-top: 3rem; }
 }
-.home-stamp {
-  position: absolute;
-  top: 0.3rem;
-  right: 0.55rem;
-  z-index: 4;
-  margin: 0;
-}
 .sh-top {
   width: min(960px, 100%);
   text-align: center;
@@ -508,7 +501,7 @@
   .scroll-house-sticky {
     height: auto;
     gap: 0.18rem;
-    padding: 2.55rem 0.7rem 0.4rem;
+    padding: 0.3rem 0.7rem 0.4rem;
   }
   .sh-top, .sh-stages, .sh-progress, .sh-learn, .scroll-house-cta, .sh-hint { flex: 0 0 auto; }
   .scroll-house-live { flex: 0 0 auto; overflow: visible; gap: 0.15rem; }

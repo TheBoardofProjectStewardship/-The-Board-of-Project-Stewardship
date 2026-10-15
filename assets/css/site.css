@@ -163,6 +163,14 @@ body { font-family: 'Inter', system-ui, sans-serif; background-color: #0a0a0a; c
     }
     #mobile-nav a { white-space: normal; }
     @media (min-width: 1280px) {
+      header.site-header {
+        background-image:
+          linear-gradient(rgba(26, 26, 26, 0.9), rgba(26, 26, 26, 0.9)),
+          url("/assets/images/art/blueprint-band-21x9.webp");
+        background-size: auto, cover;
+        background-position: center, center;
+        background-repeat: no-repeat;
+      }
       header.site-header,
       header .site-header-inner,
       header .site-header-row { height: 3rem; }
@@ -302,8 +310,20 @@ header .site-seal {
   }
 }
 .site-footer {
+  position: relative;
+  isolation: isolate;
   padding: 0.85rem 0 0.7rem;
 }
+.site-footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: url("/assets/images/art/blueprint-band-21x9.webp") center / cover no-repeat;
+  opacity: 0.28;
+}
+.site-footer-inner { position: relative; z-index: 1; }
 .site-footer-brandcol { min-width: 0; }
 .site-footer-brand {
   display: flex;
@@ -390,7 +410,7 @@ header .site-seal {
 .site-footer-links a:hover { color: #4ade80; }
 .site-footer-copy {
   margin: 0.55rem 0 0;
-  color: #64748b;
+  color: #94a3b8;
   font-size: 0.68rem;
 }
 @media (min-width: 641px) {
@@ -633,7 +653,32 @@ header .site-seal {
 .feas-tier-note { color: #94a3b8; font-size: 0.75rem; font-weight: 300; line-height: 1.35; }
 .news-masthead,
 .news-article { color: #e2e8f0; }
-.news-masthead { margin: 0 0 1.5rem; padding-bottom: 0.85rem; border-bottom: 1px solid rgba(255,255,255,0.12); }
+.news-masthead,
+.news-front {
+  box-sizing: border-box;
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.news-masthead { margin-bottom: 1.5rem; padding-bottom: 0.85rem; border-bottom: 1px solid rgba(255,255,255,0.12); }
+.news-masthead-banner {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 38vh;
+  margin: 0 0 1rem;
+  object-fit: cover;
+  object-position: center 42%;
+  border-radius: 0.35rem;
+}
+.stamp-hero-seal {
+  display: block;
+  width: min(280px, 78vw);
+  height: auto;
+  border-radius: 1rem;
+}
 .news-masthead-date {
   margin: 0 0 0.35rem;
   color: #94a3b8;
