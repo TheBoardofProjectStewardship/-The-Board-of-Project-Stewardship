@@ -1,0 +1,83 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Mercer Island",
+    "service": "Bathroom remodel",
+    "slug": "bathroom-remodel-mercer-island-wa"
+  },
+  "sources": [
+    {
+      "url": "https://www.mercerisland.gov/cpd/page/simple-residential-projects-over-counter-otc",
+      "title": "City of Mercer Island \u2014 Simple Residential Projects (OTC)",
+      "retrieved": "2026-10-15",
+      "http_status": 200,
+      "supports": "Non-structural interior remodels are Simple Residential Projects; OTC building reviews currently not available; electronic submittal via Permit Submittal Portal; required forms (application w/ valuation, Single Family Plan Coversheet, Fire Area and Valuation Form, Water Meter Sizing Worksheet if adding fixtures or re-piping >1 bath/kitchen, Site Development worksheet, Owner as Contractor); plan formatting 11x17 single PDF; contractor Mercer Island business license; complex projects routed to standard review."
+    },
+    {
+      "url": "https://www.mercerisland.gov/cpd/page/building-permits-when-are-they-required",
+      "title": "City of Mercer Island \u2014 Building Permits: When Are They Required?",
+      "retrieved": "2026-10-15",
+      "http_status": 200,
+      "supports": "MICC 17.14.010 Section 105.1 permit trigger; Section 105.2 exemptions incl. painting, tiling, cabinets, countertops finish work; exemption from permit is not exemption from code; critical-area/flood-hazard exemptions do not apply unless work entirely within or on exterior envelope of existing building; mapping portal."
+    },
+    {
+      "url": "https://www.mercerisland.gov/cpd/page/electrical-permits",
+      "title": "City of Mercer Island \u2014 Electrical Permits",
+      "retrieved": "2026-10-15",
+      "http_status": 200,
+      "supports": "Single family electrical permits obtained online at MyBuildingPermit."
+    },
+    {
+      "url": "https://www.mercerisland.gov/cpd/page/single-family-residential-plumbing-permits",
+      "title": "City of Mercer Island \u2014 Single Family Residential Plumbing Permits",
+      "retrieved": "2026-10-15",
+      "http_status": 200,
+      "supports": "Most SFR plumbing permits on MyBuildingPermit; water supply line/backflow for non-licensed via form to epermit.tech@mercerisland.gov; combination permits cover MEP inspections; Permit Counter 206-275-7605."
+    },
+    {
+      "url": "https://www.mercerisland.gov/cpd/page/plumbing-permits",
+      "title": "City of Mercer Island \u2014 Plumbing Permits",
+      "retrieved": "2026-10-15",
+      "http_status": 200,
+      "supports": "SFR plumbing via MyBuildingPermit; contact 9611 SE 36th St, 206-275-7605, epermit.tech@mercerisland.gov."
+    },
+    {
+      "url": "https://www.mercerisland.gov/sites/default/files/fileattachments/planning/page/1741/tip_sheet_0_permits_required_0.pdf",
+      "title": "Regional Construction Tip Sheet 0 \u2014 Permits Required (Mercer Island-hosted)",
+      "retrieved": "2026-10-15",
+      "http_status": 200,
+      "supports": "Interior remodels and water heater installation typically require permits; fixture replacements without plumbing line modifications typically not; note tub and shower replacement does require a permit."
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "title": "Washington L&I \u2014 City electrical permits and inspections",
+      "retrieved": "2026-10-15",
+      "http_status": 200,
+      "supports": "Mercer Island (9611 SE 36th St, 206-275-7605) listed among cities issuing their own electrical permits."
+    },
+    {
+      "url": "https://www.mybuildingpermit.com/",
+      "title": "MyBuildingPermit",
+      "retrieved": "2026-10-15",
+      "http_status": 200,
+      "supports": "Online portal for Mercer Island SFR electrical and plumbing permits."
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "Washington L&I Verify",
+      "retrieved": "2026-10-15",
+      "http_status": 200,
+      "supports": "Contractor/trade license verification."
+    },
+    {
+      "url": "https://www.pscleanair.gov/",
+      "title": "Puget Sound Clean Air Agency",
+      "retrieved": "2026-10-15",
+      "http_status": 200,
+      "supports": "Asbestos requirements before demolition (general pointer)."
+    }
+  ],
+  "dropped": [
+    "Exact Mercer Island permit fees and review timelines not cited (not verified on pages read)"
+  ]
+}

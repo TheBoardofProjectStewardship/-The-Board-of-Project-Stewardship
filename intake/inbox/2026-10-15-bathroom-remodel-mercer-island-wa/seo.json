@@ -1,0 +1,49 @@
+{
+  "producer": "openclaw",
+  "agent": "seo-specialist",
+  "slug": "bathroom-remodel-mercer-island-wa",
+  "title": "Bathroom Remodel Mercer Island WA \u2014 Simple Residential Permits, City Electrical & Wet-Area Details",
+  "description": "A Mercer Island homeowner's guide to remodeling a bathroom: when the City requires a permit, the Simple Residential electronic review path, plumbing and electrical permits on MyBuildingPermit, the water meter sizing worksheet, critical-area rules, and wet-area details worth writing into the scope.",
+  "category": "Guides",
+  "keywords": [
+    "bathroom remodel Mercer Island WA",
+    "Mercer Island bathroom permit",
+    "Mercer Island simple residential permit",
+    "Mercer Island electrical permit MyBuildingPermit",
+    "Mercer Island water meter sizing worksheet"
+  ],
+  "outline": [
+    "Key Takeaways",
+    "Why a Mercer Island bathroom needs its own permit map",
+    "Three common scopes, three different permit answers",
+    "The Simple Residential path and what goes in the packet",
+    "Plumbing and electrical: City permits through MyBuildingPermit",
+    "Critical areas, hillsides, and the building envelope",
+    "Wet-area details worth writing into the scope",
+    "Materials Worth Knowing",
+    "How to shortlist and verify contractors",
+    "Where Pacific Pro Group fits",
+    "Next steps for a Mercer Island bathroom remodel"
+  ],
+  "search_intent": "A Mercer Island homeowner planning a bathroom remodel wants to know when a permit is needed, how the City's electronic Simple Residential review works, and why electrical and plumbing are City permits on MyBuildingPermit.",
+  "local_angles": [
+    "Simple Residential electronic submittal; OTC reviews currently unavailable",
+    "Mercer Island on L&I city-electrical list",
+    "Combination permits may already cover MEP inspections",
+    "Water Meter Sizing Worksheet trigger",
+    "Critical-area exemption limits (MICC 17.14.010)"
+  ],
+  "internal_links": [
+    "../mercer-island.html",
+    "../bathrooms.html",
+    "../permits.html",
+    "../bathroom-waterproofing-guide.html",
+    "../bathroom-cost-factors.html",
+    "../verify-contractor.html"
+  ],
+  "notes": "Box-authored fallback brief. PPG only as Board #1 -> https://pacificprogroup.com/.",
+  "generation": {
+    "agent": "box-authored",
+    "mode": "box-fallback"
+  }
+}

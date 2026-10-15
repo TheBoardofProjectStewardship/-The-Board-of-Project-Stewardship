@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-10-15-bathroom-remodel-mercer-island-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-10-15T17:35:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Bathroom Remodel Mercer Island WA \u2014 Simple Residential Permits, City Electrical & Wet-Area Details",
+    "date": "2026-10-15",
+    "slug": "bathroom-remodel-mercer-island-wa",
+    "description": "A Mercer Island homeowner's guide to remodeling a bathroom: when the City requires a permit, the Simple Residential electronic review path, plumbing and electrical permits on MyBuildingPermit, the water meter sizing worksheet, critical-area rules, and wet-area details worth writing into the scope.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 connected and produced openclaw-seo/ollama roof-replacement-mountlake-terrace-wa (roof theme too recent after 2026-10-05 Ballard; thin sources), another-story home-addition-redmond-wa (templated; Redmond used 2026-10-01), edmonds-news (thin roundup), and approved rotating checklist template \u2014 none passed rich-post bar. Topic switched to bathroom remodel Mercer Island WA (fresh city vs last 14). Producer role fields kept per intake contract."
+}

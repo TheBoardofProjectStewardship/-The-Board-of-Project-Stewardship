@@ -1,0 +1,16 @@
+{
+  "submission_id": "2026-10-15-bathroom-remodel-mercer-island-wa",
+  "idempotency_key": "sha256:fa7ecb0526edb30bc6b7d21b67256313590d97adcd444193448d89a5a737055d",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-10-15T17:22:50Z",
+  "outputs": [
+    "posts/2026-10-15-bathroom-remodel-mercer-island-wa.md",
+    "posts/2026-10-15-bathroom-remodel-mercer-island-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 71
+}
