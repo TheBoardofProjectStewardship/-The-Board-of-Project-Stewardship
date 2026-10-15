@@ -43,9 +43,16 @@ TITLE_SUFFIX = f" | {BRAND_NAME}"
 RSS_HREF = f"{SITE_ORIGIN}/blog/rss.xml"
 GITHUB_ORG = "https://github.com/TheBoardofProjectStewardship"
 GITHUB_REPO = "https://github.com/TheBoardofProjectStewardship/-The-Board-of-Project-Stewardship"
-# sameAs only for profiles the Board actually controls. The GitHub repo is the
-# site source, not an organization profile, so it is not listed.
-BOARD_SAME_AS: list[str] = []
+# sameAs only for profiles the Board actually controls. The GitHub organization
+# profile belongs in this list. The GitHub source repo URL does not — it is the
+# site source, not an organization profile.
+BOARD_SAME_AS: list[str] = [
+    "https://github.com/TheBoardofProjectStewardship",
+    "https://boardofprojectstewardship.substack.com/",
+    "https://medium.com/@editorial_35632",
+    "https://app.qwoted.com/sources/board-of-project-stewardship",
+    "https://issuu.com/boardofprojectstewardship",
+]
 EDITORIAL_EMAIL = "editorial@boardofprojectstewardship.com"
 # Public geography. Edmonds stays a city hub and local example, not the Board's sole HQ.
 GEO_KICKER = "Pacific Northwest · King & Snohomish · Seattle"
