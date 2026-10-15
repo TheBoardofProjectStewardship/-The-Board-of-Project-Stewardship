@@ -1,0 +1,45 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-10-15-mercer-island-bath-1.webp",
+      "repo_path": "assets/images/posts/2026-10-15-mercer-island-bath-1.webp",
+      "alt": "Illustrative: a calm remodeled bathroom with a wood vanity, wall mirror, and a window onto evergreen trees \u2014 the finished view Mercer Island homeowners plan toward \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "a748b591f692570ccffa396dacaf8a54",
+      "source": "Crop, mirror, and regrade of existing repo still 2026-09-17-bathroom-magnolia-4.webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-15-mercer-island-bath-2.webp",
+      "repo_path": "assets/images/posts/2026-10-15-mercer-island-bath-2.webp",
+      "alt": "Illustrative: a curbless tiled shower with a linear floor drain and wall-mounted shower head \u2014 the kind of wet-area detail that drives plumbing permits and waterproofing inspections \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "26804c5b3c0632d99b76539b9b093bbe",
+      "source": "Crop and regrade of existing repo still 2026-09-13-bathroom-edmonds-4.webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-15-mercer-island-bath-3.webp",
+      "repo_path": "assets/images/posts/2026-10-15-mercer-island-bath-3.webp",
+      "alt": "Illustrative: a freestanding soaking tub beside a large window looking onto trees \u2014 a finished bath that still depends on hidden plumbing, waterproofing, and ventilation done right \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "eb30d20803e37660f08052eaad6a6cbc",
+      "source": "Crop, mirror, and regrade of existing repo still 2026-08-28-bathroom-mukilteo-4.webp"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "XewECgaUQ84",
+      "url": "https://www.youtube.com/watch?v=XewECgaUQ84",
+      "title": "How To: Waterproof and Tile A Shower Like A Pro",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Illustrative frames are labeled in alt text",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "Reused and regraded existing repo stills. No paid image generation."
+}

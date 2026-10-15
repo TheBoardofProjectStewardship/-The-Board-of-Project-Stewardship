@@ -54,6 +54,7 @@ Base: `https://boardofprojectstewardship.com/`
 | `blog/rss.xml` | Blog RSS feed |
 | `news/rss.xml` | News RSS feed |
 | `404.html` | Branded Board 404 |
+| `posts/2026-10-15-bathroom-remodel-mercer-island-wa.html` | Bathroom Remodel Mercer Island WA — Simple Residential Permits, City Electrical & Wet-Area Details |
 | `posts/2026-10-14-basement-finishing-renton-wa.html` | Basement Finishing Renton WA — Interior Remodel Permits, City Electrical & Moisture Details |
 | `posts/2026-10-13-kitchen-remodel-issaquah-wa.html` | Kitchen Remodel Issaquah WA — MyBuildingPermit Remodel Path, L&I Electrical & Fixture Counts |
 | `posts/2026-10-12-bathroom-remodel-sammamish-wa.html` | Bathroom Remodel Sammamish WA — MyBuildingPermit Remodel Path, Fixture Counts & Wet Assemblies |
