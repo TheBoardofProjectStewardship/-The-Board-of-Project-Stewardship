@@ -403,6 +403,208 @@
       </a>
       </div>
     </section>
+  <div class="max-w-6xl mx-auto px-4 pb-8">
+    <div class="max-w-xl">
+        <div class="feas-calc bg-charcoal border border-white/10 rounded-xl p-4 sm:p-5" id="feasibility-calculator">
+          <h3 class="feas-title">Live Feasibility &amp; Estimate Calculator</h3>
+          <p class="feas-note">Planning estimate, not a bid.</p>
+          <div class="feas-total-bar">
+            <span id="feas-total-label">Estimated total</span>
+            <strong id="calc_total_display" aria-live="polite" aria-atomic="true">$62,000</strong>
+          </div>
+          <h4 class="feas-section">Pre-Construction Package</h4>
+          <div class="feas-item">
+            <label class="feas-row">
+              <input type="checkbox" id="cb_feasibility" class="feas-input" checked>
+              <span class="feas-name">Feasibility Study</span>
+              <span class="feas-price">$5,000</span>
+            </label>
+            <details class="feas-details">
+              <summary>Show Details<span class="sr-only"> for Feasibility Study</span></summary>
+              <div class="feas-detail-body">
+                <p>Detailed feasibility study to understand zoning requirements and structural possibilities for your project. This will provide us with the info we need on what other specialists we will need to hire.</p>
+                <p><strong>Specialists Included:</strong></p>
+                <ul>
+                  <li><strong>Civil Engineer:</strong> Required for designing drainage systems, roadway improvements &amp; other site infrastructure.</li>
+                  <li><strong>Geotechnical Engineer:</strong> Assesses soil conditions for foundation design/site work.</li>
+                  <li><strong>Septic Design Engineer:</strong> Needed if property is not on municipal sewer.</li>
+                  <li><strong>Land Surveyor:</strong> Collects field data to create property map &amp; establish boundaries.</li>
+                  <li><strong>Critical Area Consultant:</strong> Assesses impacts on wetlands/shorelines &amp; mitigates.</li>
+                  <li><strong>Arborist:</strong> Evaluates health/impact of trees advising protection or removal.</li>
+                </ul>
+              </div>
+            </details>
+          </div>
+          <div class="feas-item">
+            <label class="feas-row">
+              <input type="checkbox" id="cb_permits" class="feas-input" checked>
+              <span class="feas-name">Permits</span>
+              <span class="feas-price">$6,000</span>
+            </label>
+            <details class="feas-details">
+              <summary>Show Details<span class="sr-only"> for Permits</span></summary>
+              <div class="feas-detail-body">
+                <p>Covers the full process of securing building permits, zoning approvals, environmental clearances, and utility hookups from local authorities. Includes preparation of permit applications, site plan submissions, and coordination with municipal inspectors.</p>
+                <p><strong>Timeline:</strong> 4–8 months.</p>
+                <p><strong>Assumptions:</strong> No variances or appeals needed; standard compliance with local codes.</p>
+              </div>
+            </details>
+          </div>
+          <div class="feas-item">
+            <label class="feas-row">
+              <input type="checkbox" id="cb_plans" class="feas-input" checked>
+              <span class="feas-name">Blueprints &amp; Layouts</span>
+              <span class="feas-price">$12,000</span>
+            </label>
+            <details class="feas-details">
+              <summary>Show Details<span class="sr-only"> for Blueprints &amp; Layouts</span></summary>
+              <div class="feas-detail-body">
+                <p><strong>Architectural Layouts:</strong> Involves creating detailed floor plans, elevations, sections to visualize the project's spatial organization, aesthetics, and functionality. Ensures compliance with client vision and code requirements.</p>
+              </div>
+            </details>
+          </div>
+          <div class="feas-item">
+            <label class="feas-row">
+              <input type="checkbox" id="cb_design_pkg" class="feas-input" checked>
+              <span class="feas-name">Design &amp; Materials</span>
+              <span class="feas-price">$7,000</span>
+            </label>
+            <details class="feas-details">
+              <summary>Show Details<span class="sr-only"> for Design &amp; Materials</span></summary>
+              <div class="feas-detail-body">
+                <p><strong>Material Selection &amp; Specification Package:</strong></p>
+                <ul>
+                  <li>3D Renders of key project areas illustrating material application.</li>
+                  <li>Project Spec Sheets detailing material manufacturer, product name, code, cost, and lead time.</li>
+                  <li>Mood Board (physical or digital) communicating the design aesthetic and material palette.</li>
+                </ul>
+              </div>
+            </details>
+          </div>
+          <div class="feas-item">
+            <label class="feas-row">
+              <input type="checkbox" id="cb_geotech" class="feas-input" checked>
+              <span class="feas-name">Geotechnical Engineering</span>
+              <span class="feas-price">$15,000</span>
+            </label>
+            <details class="feas-details">
+              <summary>Show Details<span class="sr-only"> for Geotechnical Engineering</span></summary>
+              <div class="feas-detail-body">
+                <p>Detailed geotechnical engineering assessment to analyze soil, groundwater, and subsurface conditions for your project. Ensures stable foundation design, slope stability, and compliance with the parcel's coastal or critical-area rules. Edmonds, Seattle, and county codes differ.</p>
+                <p><strong>Rough Timeline (4-6 weeks):</strong></p>
+                <ul>
+                  <li>Week 1: Initial site visit &amp; proposal approval.</li>
+                  <li>Weeks 2-3: Field investigations (borings) &amp; sampling.</li>
+                  <li>Weeks 4-5: Lab analysis &amp; draft report.</li>
+                  <li>Week 6: Final report delivery.</li>
+                </ul>
+                <p><strong>Specialists:</strong></p>
+                <ul>
+                  <li><strong>Geotechnical Engineer:</strong> Leads testing &amp; recommends foundations (piles/footings).</li>
+                  <li><strong>Soil Technician:</strong> Conducts on-site borings.</li>
+                  <li><strong>Lab Analyst:</strong> Performs tests on soil bearing capacity/shear strength.</li>
+                  <li><strong>Environmental Consultant:</strong> Integrates findings with critical area assessments.</li>
+                </ul>
+              </div>
+            </details>
+          </div>
+          <div class="feas-item">
+            <label class="feas-row">
+              <input type="checkbox" id="cb_structural" class="feas-input" checked>
+              <span class="feas-name">Structural Engineering</span>
+              <span class="feas-price">$12,000</span>
+            </label>
+            <details class="feas-details">
+              <summary>Show Details<span class="sr-only"> for Structural Engineering</span></summary>
+              <div class="feas-detail-body">
+                <p>Focuses on the technical analysis and design of load-bearing elements, foundations, framing, and seismic/wind resistance. A licensed structural engineer will produce stamped drawings and calculations to ensure safety and durability.</p>
+              </div>
+            </details>
+          </div>
+          <div class="feas-item">
+            <label class="feas-row">
+              <input type="checkbox" id="cb_survey" class="feas-input" checked>
+              <span class="feas-name">Survey</span>
+              <span class="feas-price">$5,000</span>
+            </label>
+            <details class="feas-details">
+              <summary>Show Details<span class="sr-only"> for Survey</span></summary>
+              <div class="feas-detail-body">
+                <p>Precisely measures and maps the property's boundaries, easements, setbacks, and existing physical features (topography, utility lines, and structures). Establishes horizontal and vertical controls needed for plans.</p>
+              </div>
+            </details>
+          </div>
+          <h4 class="feas-section">Construction Cost Estimation</h4>
+          <div class="feas-schedule">
+            <p class="feas-schedule-title">Anticipated Project Schedule</p>
+            <p><strong>Total Duration:</strong> 10 – 14 months</p>
+            <p><strong>Planning/Permitting:</strong> 4 – 6 months</p>
+            <p><strong>Construction:</strong> 6 – 8 months</p>
+          </div>
+          <label class="feas-field">Estimated Square Footage
+            <span class="feas-sqft-wrap">
+              <input type="number" id="est_sqft" class="feas-input" inputmode="numeric" min="0" step="1" placeholder="e.g., 500">
+              <span class="feas-unit">sq ft</span>
+            </span>
+          </label>
+          <fieldset class="feas-tiers">
+            <legend>Material &amp; Finish Tier</legend>
+            <label class="feas-tier">
+              <input type="radio" name="est_tier" id="tier_good" value="300" class="feas-input">
+              <span class="feas-tier-copy">
+                <span class="feas-tier-line"><span class="feas-tier-name">Good Tier</span><span>~$300/SF</span></span>
+                <span class="feas-tier-note">Solid, durable selections with proven local materials, standard appliances, and clean, timeless finishes.</span>
+              </span>
+            </label>
+            <label class="feas-tier">
+              <input type="radio" name="est_tier" id="tier_better" value="500" class="feas-input" checked>
+              <span class="feas-tier-copy">
+                <span class="feas-tier-line"><span class="feas-tier-name">Better Tier</span><span>~$500/SF</span></span>
+                <span class="feas-tier-note">Elevated materials, custom millwork, upgraded appliances/windows, enhanced detailing, and energy-efficient systems.</span>
+              </span>
+            </label>
+            <label class="feas-tier">
+              <input type="radio" name="est_tier" id="tier_best" value="700" class="feas-input">
+              <span class="feas-tier-copy">
+                <span class="feas-tier-line"><span class="feas-tier-name">Best Tier</span><span>~$700/SF</span></span>
+                <span class="feas-tier-note">Premium/luxury selections, high-end custom cabinetry, designer fixtures, architectural upgrades, and top-tier features.</span>
+              </span>
+            </label>
+          </fieldset>
+          <h4 class="feas-section">Common Additions</h4>
+          <div class="feas-item">
+            <label class="feas-row">
+              <input type="checkbox" id="cb_bathroom" class="feas-input">
+              <span class="feas-name">Add Bathroom</span>
+              <span class="feas-price">$45,000 Base</span>
+            </label>
+            <details class="feas-details">
+              <summary>Show Scope &amp; Tier Pricing</summary>
+              <div class="feas-detail-body">
+                <p><strong>Included Scope:</strong></p>
+                <ul>
+                  <li>Demo everything required for new project</li>
+                  <li>Plumbing: reroute pipes, install new supply/drains</li>
+                  <li>Electrical: upgrade wiring, add GFCI, switches, recessed lighting, exhaust fan</li>
+                  <li>Install new drywall, mud, texture, primer</li>
+                  <li>Add walk-in shower with glass enclosure</li>
+                  <li>Install new porcelain floor tiles</li>
+                  <li>Mount vanity with countertop</li>
+                  <li>Install modern faucet and mirror</li>
+                  <li>Paint walls and trim</li>
+                </ul>
+                <p><strong>Material Tier Pricing:</strong></p>
+                <ul>
+                  <li>Good (about $45k): Locally sourced materials approved by PPG</li>
+                  <li>Better ($50k-$75k): Custom cabinets and high-end materials</li>
+                  <li>Best ($75k+): Luxury custom design, designer-selected materials</li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </div>
+    </div>
+  </div>
   <div class="max-w-6xl mx-auto px-4 pb-16">
     <section id="faq" class="mb-8">
       <h2 class="text-3xl font-black text-white tracking-tight mb-6">Stanwood hub FAQ</h2>
