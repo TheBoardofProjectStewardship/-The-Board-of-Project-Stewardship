@@ -7383,7 +7383,9 @@ def load_news(root: Path | None = None) -> list[dict]:
     return stories
 
 
-_NEWS_CREDIT_URL_RE = re.compile(r"https://[^\s)]+")
+# Parentheses are allowed inside a URL (Wikimedia filenames) but not as wrappers.
+_NEWS_CREDIT_URL_RE = re.compile(r"https://(?:[^\s()]|\([^)\s]*\))+")
+_CC_LABEL_RE = re.compile(r"CC BY(?:-[A-Z]+)* \d+(?:\.\d+)?|CC0(?: \d+(?:\.\d+)?)?")
 
 
 def news_hero_ready(rel: str) -> bool:
@@ -7414,15 +7416,17 @@ def news_hero_credit_html(credit: str) -> str:
     display = re.sub(r"\s+,", ",", display)
     display = re.sub(r"\s+", " ", display).strip(" ,;:-")
     html_text = esc(display)
-    if license_url and "CC BY-SA 3.0" in display:
+    label_match = _CC_LABEL_RE.search(display)
+    if license_url and label_match:
+        label = label_match.group(0)
         html_text = html_text.replace(
-            "CC BY-SA 3.0",
-            f'<a href="{esc(license_url)}" rel="license noopener" target="_blank">CC BY-SA 3.0</a>',
+            label,
+            f'<a href="{esc(license_url)}" rel="license noopener" target="_blank">{esc(label)}</a>',
             1,
         )
     elif license_url:
         html_text += (
-            f' <a href="{esc(license_url)}" rel="license noopener" target="_blank">CC BY-SA 3.0</a>'
+            f' <a href="{esc(license_url)}" rel="license noopener" target="_blank">license</a>'
         )
     if commons_url and "Wikimedia Commons" in display:
         html_text = html_text.replace(

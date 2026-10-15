@@ -42,21 +42,32 @@ class NewsContractTests(unittest.TestCase):
         story_url = "https://boardofprojectstewardship.com/news/snohomish-health-septic-permit-grant.html"
         story_href = "./news/snohomish-health-septic-permit-grant.html"
         stories = gs.load_news(ROOT)
-        self.assertEqual([item["slug"] for item in stories], ["snohomish-health-septic-permit-grant"])
-        self.assertEqual(stories[0]["date"], "2026-10-14")
+        self.assertEqual(
+            [item["slug"] for item in stories],
+            [
+                "snohomish-county-administrative-lot-splits",
+                "snohomish-health-septic-permit-grant",
+            ],
+        )
+        self.assertEqual(stories[0]["date"], "2026-10-15")
+        self.assertEqual(stories[1]["date"], "2026-10-14")
         self.assertTrue(stories[0]["title"])
         self.assertTrue(stories[0]["description"])
         self.assertGreaterEqual(len(stories[0]["sources"]), 1)
-        self.assertIn("Emersb", stories[0]["hero_credit"])
+        self.assertIn("Robert Ashworth", stories[0]["hero_credit"])
+        self.assertIn("Emersb", stories[1]["hero_credit"])
         self.assertTrue((ROOT / "news" / "_template.md").is_file())
         self.assertEqual(
-            [path.name for path in (ROOT / "news").glob("[0-9]*.md")],
-            ["2026-10-14-snohomish-health-septic-permit-grant.md"],
+            sorted(path.name for path in (ROOT / "news").glob("[0-9]*.md")),
+            [
+                "2026-10-14-snohomish-health-septic-permit-grant.md",
+                "2026-10-15-snohomish-county-administrative-lot-splits.md",
+            ],
         )
         result = intake.validate_news_library(ROOT)
         self.assertTrue(result["ok"], result)
         self.assertEqual(result["status"], "ready")
-        self.assertEqual(result["stories"], 1)
+        self.assertEqual(result["stories"], 2)
         self.assertEqual(gs.news_blog_overlap(ROOT), [])
         self.assertIn("First stories coming soon", gs.build_news_index([]))
 
@@ -69,7 +80,31 @@ class NewsContractTests(unittest.TestCase):
         self.assertIsNone(gs.news_forbidden_term(news_html))
         self.assertNotIn('id="another-story-sea"', news_html)
         self.assertIn('id="another-story-cta"', news_html)
-        self.assertNotIn("snohomish-health-septic-permit-grant", (ROOT / "blog.html").read_text(encoding="utf-8"))
+        blog_html = (ROOT / "blog.html").read_text(encoding="utf-8")
+        self.assertNotIn("snohomish-health-septic-permit-grant", blog_html)
+        self.assertNotIn("snohomish-county-administrative-lot-splits", blog_html)
+
+        lot_url = "https://boardofprojectstewardship.com/news/snohomish-county-administrative-lot-splits.html"
+        lot_href = "./news/snohomish-county-administrative-lot-splits.html"
+        self.assertIn(stories[0]["title"], news_html)
+        self.assertIn(lot_href, news_html)
+        lot = (ROOT / "news" / "snohomish-county-administrative-lot-splits.html").read_text(encoding="utf-8")
+        self.assertIn("Snohomish County government buildings in downtown Everett, Washington", lot)
+        self.assertNotIn("Illustrative:", lot.split("<figure", 1)[1].split("</figure>", 1)[0])
+        self.assertIn('href="https://creativecommons.org/licenses/by/2.0/"', lot)
+        self.assertIn(">CC BY 2.0</a>", lot)
+        self.assertNotIn("CC BY-SA", lot)
+        self.assertIn(
+            'href="https://commons.wikimedia.org/wiki/File:Snohomish_County_buildings_(7319122734).jpg"',
+            lot,
+        )
+        self.assertIn("editorial@boardofprojectstewardship.com", lot)
+        self.assertIn("Ordinance 26-036", lot)
+        self.assertIn("2026-10-15-snohomish-county-administrative-lot-splits-480.webp", lot)
+        self.assertIn("2026-10-15-snohomish-county-administrative-lot-splits-800.webp", lot)
+        self.assertIn("2026-10-15-snohomish-county-administrative-lot-splits-1200.webp", lot)
+        self.assertIsNone(gs.news_forbidden_term(lot))
+        self.assertNotIn("/posts/", lot)
 
         page = (ROOT / "news" / "snohomish-health-septic-permit-grant.html").read_text(encoding="utf-8")
         self.assertIn("Emersb", page)
@@ -90,20 +125,51 @@ class NewsContractTests(unittest.TestCase):
         self.assertIn("Board of Project Stewardship News", rss)
         self.assertIn("<item>", rss)
         self.assertIn(story_url, rss)
+        self.assertIn(lot_url, rss)
         self.assertNotIn("/posts/", rss)
 
         sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
         self.assertIn("https://boardofprojectstewardship.com/news.html", sitemap)
         self.assertIn(story_url, sitemap)
+        self.assertIn(lot_url, sitemap)
         blog_rss = (ROOT / "blog" / "rss.xml").read_text(encoding="utf-8")
         posts_json = (ROOT / "posts.json").read_text(encoding="utf-8")
         self.assertNotIn("snohomish-health-septic-permit-grant", blog_rss)
         self.assertNotIn("snohomish-health-septic-permit-grant", posts_json)
+        self.assertNotIn("snohomish-county-administrative-lot-splits", blog_rss)
+        self.assertNotIn("snohomish-county-administrative-lot-splits", posts_json)
         self.assertNotIn("/news/", blog_rss)
         self.assertNotIn('"path": "./news/', posts_json)
         self.assertNotIn("./posts/", news_html)
         self.assertIn(">News</a>", (ROOT / "blog.html").read_text(encoding="utf-8"))
         self.assertIn("Pacific Pro Group", (ROOT / "index.html").read_text(encoding="utf-8"))
+
+    def test_credit_links_the_license_named_on_the_photo(self):
+        cc_by = gs.news_hero_credit_html(
+            "Photo by Robert Ashworth, licensed under CC BY 2.0 "
+            "(https://creativecommons.org/licenses/by/2.0/), via Wikimedia Commons: "
+            "https://commons.wikimedia.org/wiki/File:Snohomish_County_buildings_(7319122734).jpg"
+        )
+        self.assertIn('href="https://creativecommons.org/licenses/by/2.0/"', cc_by)
+        self.assertIn(">CC BY 2.0</a>", cc_by)
+        self.assertNotIn("CC BY-SA", cc_by)
+        self.assertIn(
+            'href="https://commons.wikimedia.org/wiki/File:Snohomish_County_buildings_(7319122734).jpg"',
+            cc_by,
+        )
+        self.assertIn(">Wikimedia Commons</a>", cc_by)
+        self.assertNotIn("Commons .jpg", cc_by)
+        share_alike = gs.news_hero_credit_html(
+            "Photo by Emersb, licensed under CC BY-SA 3.0 "
+            "(https://creativecommons.org/licenses/by-sa/3.0/), via Wikimedia Commons: "
+            "https://commons.wikimedia.org/wiki/File:Everett_-_County_Campus.jpg"
+        )
+        self.assertIn(">CC BY-SA 3.0</a>", share_alike)
+        self.assertIn('href="https://creativecommons.org/licenses/by-sa/3.0/"', share_alike)
+        self.assertIn(
+            'href="https://commons.wikimedia.org/wiki/File:Everett_-_County_Campus.jpg"',
+            share_alike,
+        )
 
     def test_story_page_matches_post_chrome_and_stays_out_of_the_blog(self):
         story = {
