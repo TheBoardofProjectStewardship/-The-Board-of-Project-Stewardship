@@ -1,0 +1,64 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Burien",
+    "service": "Home addition",
+    "slug": "home-addition-burien-wa"
+  },
+  "sources": [
+    {
+      "url": "https://www.burienwa.gov/business/community_development/permit_center/applications",
+      "title": "City of Burien \u2014 Permit Application Information",
+      "retrieved": "2026-10-16",
+      "http_status": 200,
+      "supports": "Permit submittals only accepted through MyBuildingPermit (fire permits current exception); contractors need state license + City of Burien endorsement via WA DOR, verified before any permit issued; utility applications approved by provider prior to submittal and uploaded on MyBuildingPermit; permittech@burienwa.gov."
+    },
+    {
+      "url": "https://www.burienwa.gov/business/community_development/permit_center/submittal_checklists",
+      "title": "City of Burien \u2014 Submittal Checklists",
+      "retrieved": "2026-10-16",
+      "http_status": 200,
+      "supports": "Lists 2021 Residential Prescriptive Energy Code Worksheet, Whole House Ventilation Worksheet, Residential Structures checklist, Residential Uncovered Deck and Porch Guide, critical-area checklists (CARA, FWHCA, Geologically Hazardous, Streams, Wetland), Septic and Private Water System Checklist, Seattle City Light service links; 400 SW 152nd St Ste 300; (206) 241-4647."
+    },
+    {
+      "url": "https://cdnsm5-hosted.civiclive.com/UserFiles/Servers/Server_11045935/File/Business/Building%20&%20Construction/Permit%20Center/Submittal%20Checklists/Residential%20Structures%20Submittal%20Checklist.pdf",
+      "title": "City of Burien \u2014 Residential Structures Submittal Checklist (PDF)",
+      "retrieved": "2026-10-16",
+      "http_status": 200,
+      "supports": "Applied for online at MyBuildingPermit; application contents incl. state contractor license copy and Burien business license number; energy code form; water/fire hydrant/sewer availability forms; stamped structural calcs; geotech if applicable; GIS AutoCAD site plans if adding 2000 sf+; 1/4in=1ft on 11x17; site plan items; foundation connection details new to existing; height above average natural grade; 500 sf addition triggers energy code + indoor air quality; noise reduction zones for new and moved structures; FEMA flood elevation certificate; Small Project Drainage Review if any impervious surface added (BMC 13.10, KCSWDM App C); tree permit/retention/planting (BMC 19.26)."
+    },
+    {
+      "url": "https://cdnsm5-hosted.civiclive.com/UserFiles/Servers/Server_11045935/File/Business/Building%20&%20Construction/Permit%20Center/Applications/Information/Construction%20Permit%20Application%20Information.pdf",
+      "title": "City of Burien \u2014 Construction Permit Application Information (PDF)",
+      "retrieved": "2026-10-16",
+      "http_status": 200,
+      "supports": "Applications, payments, inspections via MyBuildingPermit; list of work not requiring a building permit (200 sf sheds, decks <=30in, retaining walls <=4ft no surcharge, finish work, etc.); permit tech (206) 241-4647; fees by scope, plan review fees based on fair market value; review goals single-family addition 3 wk initial comments / 3 wk resubmittal / 6 wk target issuance."
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "title": "Washington L&I \u2014 City electrical permits and inspections",
+      "retrieved": "2026-10-16",
+      "http_status": 200,
+      "supports": "Burien (400 SW 152nd St Ste 300, 206-439-3157) listed among cities issuing their own electrical permits."
+    },
+    {
+      "url": "https://www.mybuildingpermit.com/",
+      "title": "MyBuildingPermit",
+      "retrieved": "2026-10-16",
+      "http_status": 200,
+      "supports": "Online portal for Burien permit submittals."
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "Washington L&I Verify",
+      "retrieved": "2026-10-16",
+      "http_status": 200,
+      "supports": "Contractor/trade license verification."
+    }
+  ],
+  "dropped": [
+    "Exact Burien permit fees not cited (fee table not read)",
+    "Water/sewer district names not cited (not verified on pages read)",
+    "Noise zone applicability to additions not asserted (checklist says new and moved structures)"
+  ]
+}

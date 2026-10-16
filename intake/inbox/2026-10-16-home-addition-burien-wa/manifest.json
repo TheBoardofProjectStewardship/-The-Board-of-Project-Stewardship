@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-10-16-home-addition-burien-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-10-16T17:50:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Home Addition Burien WA \u2014 MyBuildingPermit Submittals, Utility Certificates & Drainage Review",
+    "date": "2026-10-16",
+    "slug": "home-addition-burien-wa",
+    "description": "A Burien homeowner's guide to a home addition: MyBuildingPermit-only submittals, utility certificates, the contractor endorsement check, 500-square-foot energy and tree triggers, drainage review, critical areas, and the City's review goals.",
+    "category": "Additions"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 connected and produced openclaw-seo/hermes/ollama/grok-build kitchen-remodel-woodinville-wa (third kitchen in last 14 after Kirkland 10-07 and Issaquah 10-13; templated 'Planning, Permits & Licensed Pros' copy; hermes timed out with only 2 sources; openclaw fallback with no keywords; media plan without bytes), another-story adu-sammamish-wa (Sammamish used 10-12; 2 sources; templated), edmonds-news roundup (thin), and approved rotating King County permit-basics checklist template \u2014 none passed rich-post bar. Topic switched to home addition Burien WA (fresh city; additions not used in last 14). Producer role fields kept per intake contract."
+}
