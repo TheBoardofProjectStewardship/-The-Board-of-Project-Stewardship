@@ -1,0 +1,55 @@
+{
+  "producer": "openclaw",
+  "agent": "seo-specialist",
+  "slug": "home-addition-burien-wa",
+  "title": "Home Addition Burien WA \u2014 MyBuildingPermit Submittals, Utility Certificates & Drainage Review",
+  "description": "A Burien homeowner's guide to a home addition: MyBuildingPermit-only submittals, utility certificates, the contractor endorsement check, 500-square-foot energy and tree triggers, drainage review, critical areas, and the City's review goals.",
+  "category": "Additions",
+  "keywords": [
+    "home addition Burien WA",
+    "Burien building permit addition",
+    "Burien MyBuildingPermit",
+    "Burien residential submittal checklist",
+    "Burien utility availability certificate"
+  ],
+  "outline": [
+    "Key Takeaways",
+    "Why a Burien addition needs its own plan",
+    "Step one: confirm what is in scope for a permit",
+    "Step two: the utility certificates come first",
+    "Step three: build the plan set the checklist describes",
+    "The 500-square-foot line and other triggers",
+    "Critical areas and sloped lots",
+    "What the City says about review timing",
+    "Electrical: a City permit in Burien",
+    "Weatherproof first: details to write into the scope",
+    "Materials Worth Knowing",
+    "How to shortlist and verify contractors",
+    "Where Pacific Pro Group fits",
+    "Next steps for a Burien home addition"
+  ],
+  "search_intent": "A Burien homeowner planning a home addition wants to know how the City's MyBuildingPermit-only submittal works, which utility certificates and plan sheets are required, what size triggers apply, and how long review is expected to take.",
+  "local_angles": [
+    "MyBuildingPermit-only submittals",
+    "Utility availability certificates approved before submittal",
+    "Burien endorsement via DOR checked before issuance",
+    "500 sf energy/IAQ and tree triggers",
+    "Small Project Drainage Review",
+    "Noise reduction zones near Sea-Tac",
+    "Burien on L&I city-electrical list",
+    "Published review goals for SFR additions"
+  ],
+  "internal_links": [
+    "../burien.html",
+    "../additions.html",
+    "../home-addition-planning.html",
+    "../king-county.html",
+    "../addition-cost-factors.html",
+    "../verify-contractor.html"
+  ],
+  "notes": "Box-authored fallback brief. PPG only as Board #1 -> https://pacificprogroup.com/.",
+  "generation": {
+    "agent": "box-authored",
+    "mode": "box-fallback"
+  }
+}

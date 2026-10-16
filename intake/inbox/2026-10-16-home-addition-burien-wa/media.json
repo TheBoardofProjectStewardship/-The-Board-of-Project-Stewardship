@@ -1,0 +1,45 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-10-16-burien-addition-1.webp",
+      "repo_path": "assets/images/posts/2026-10-16-burien-addition-1.webp",
+      "alt": "Illustrative: new wall framing and sheathing tied into the side of an existing gray-shingled house on a concrete stem wall \u2014 the stage where an addition meets the original structure \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "430646fb1e02c086cebc0408b6a9d275",
+      "source": "Crop, mirror, and regrade of existing repo still 2026-09-28-home-addition-mukilteo-3.webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-16-burien-addition-2.webp",
+      "repo_path": "assets/images/posts/2026-10-16-burien-addition-2.webp",
+      "alt": "Illustrative: a formed concrete footing with rebar and anchor bolts beside a new pressure-treated sill on wet ground \u2014 the foundation tie-in detail Burien's checklist asks to see on the plans \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "99fa20cbff9245aad2e34e2278a08a33",
+      "source": "Crop and regrade of existing repo still 2026-09-25-mlt-addition-2.webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-16-burien-addition-3.webp",
+      "repo_path": "assets/images/posts/2026-10-16-burien-addition-3.webp",
+      "alt": "Illustrative: a single-story addition wrapped in black water-resistive barrier with window openings cut in, beside an evergreen yard \u2014 the dry-in stage before siding \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "af8174371aead8625139c985285e8405",
+      "source": "Crop, mirror, and regrade of existing repo still 2026-09-10-home-addition-shoreline-3.webp"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "rz3CaoTbmgk",
+      "url": "https://www.youtube.com/watch?v=rz3CaoTbmgk",
+      "title": "Building an Addition: Concrete Footings, Walls and Floor",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Illustrative frames are labeled in alt text",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "Reused and regraded existing repo stills. No paid image generation."
+}
