@@ -38,7 +38,7 @@ const SKETCH_ROOF = [0.90,0.905,0.898], FRAME = [0.13,0.135,0.14], FASCIA = [0.1
 const INK = [0.12,0.13,0.13], DETAIL = [0.42,0.44,0.43];
 const FURN = [0.93,0.932,0.922], PLANT = [0.80,0.84,0.74];
 const EARTH = [0.915,0.918,0.895];
-const MAIN = 8.5, PLATE = 17.5, ROOF_HI = 22.4, ROOF_Z0 = -1.5, ROOF_PITCH = 1/12;
+const MAIN = 8.5, PLATE = 17.5, ROOF_HI = 22.4, ROOF_Z0 = -1.8, ROOF_PITCH = 1/12;
 const roofY = z => ROOF_HI - (z - ROOF_Z0) * ROOF_PITCH;
 // Garage: interior 12'x20' drawn as a 12.5'x20.5' shell; 3/12 shed, high at the door.
 // Placed per the garage set's site plan A100: at the Constance Dr W lot line, right side.
@@ -109,7 +109,7 @@ function buildModel() {
     segment(cursor,b,y0,y1);
     if(exterior) {
       // White vertical siding: one stroke per board, broken at every opening.
-      for(let u=a+.6;u<b-.1;u+=.6) {
+      for(let u=a+.75;u<b-.1;u+=.75) {
         let bottom=y0;
         for(const h of [...sorted].sort((p,q)=>p[2]-q[2])) {
           if(u<h[0]-.13||u>h[1]+.13)continue;
@@ -157,14 +157,19 @@ function buildModel() {
     }
   }
   // Main level outline, from A202 (75'-0" across, 49'-0" west wall; jogs scaled).
-  const P=[[0,6],[32.5,6],[32.5,11.3],[55,11.3],[55,0],[75,0],[75,46.5],[31,46.5],[31,55],[0,55]];
+  // Outline traced from the ADU set's site plan A100 (lot 85.00 ft wide sets the scale;
+// 75 ft overall and the 49 ft west wall match A202). Jogs are approximate (about +-1 ft).
+  const P=[[0,6],[32.3,6],[32.3,13.5],[50.3,13.5],[50.3,7.7],[55.3,7.7],[55.3,-.3],[75.3,-.3],
+           [75.3,41],[62,41],[62,42.7],[49,42.7],[49,38.5],[32.3,38.5],[32.3,55.7],[0,55.7]];
+  // Plan rectangles that tile P (used for slabs and the crawl space).
+  const TILES=[[0,32.3,6,55.7],[32.3,49,13.5,38.5],[49,62,13.5,42.7],[62,75.3,13.5,41],[50.3,75.3,7.7,13.5],[55.3,75.3,-.3,7.7]];
   // ---- Site, from the ADU and garage site plans (A100) and the survey sheet.
   // Grade: the lot falls toward Magnolia Blvd W, so the basement daylights on that side.
   // The raised block on the Constance Dr W side stands in for grade at the main level.
   // Slope heights are not printed; the hatch shows direction only.
   const SITE_LINE=[.55,.57,.55], TREE=[.52,.60,.48];
-  box(site,LOT.x0,0,55.25,31,MAIN-.2,LOT.z1,EARTH,0);
-  box(site,31,0,46.75,LOT.x1,MAIN-.2,LOT.z1,EARTH,0);
+  for(const [x0,x1,z0] of [[LOT.x0,32.55,55.95],[32.55,48.75,38.75],[48.75,62.25,42.95],[62.25,LOT.x1,41.25]])
+    box(site,x0,0,z0,x1,MAIN-.2,LOT.z1,EARTH,0);
   box(site,-14,-.3,-47,95,0,LOT.z1,[.93,.935,.91],7,false);
   // Constance Dr W: street at the upper grade along the bottom lot line.
   box(site,-14,0,LOT.z1,95,MAIN-.2,100,[.9,.9,.885],0);
@@ -180,7 +185,7 @@ function buildModel() {
   dash([LOT.x0,.04,LOT.z0],[LOT.x1,.04,LOT.z0]);
   dash([LOT.x0,ly(LOT.z1),LOT.z1],[LOT.x1,ly(LOT.z1),LOT.z1]);
   // Side lines climb where the grade block starts on each side.
-  for(const [x,zs] of [[LOT.x0,55.25],[LOT.x1,46.75]]){dash([x,.04,LOT.z0],[x,.04,zs-.25]);line(site,[x,.04,zs-.25],[x,MAIN-.15,zs],INK);dash([x,MAIN-.15,zs],[x,MAIN-.15,LOT.z1]);}
+  for(const [x,zs] of [[LOT.x0,55.95],[LOT.x1,41.25]]){dash([x,.04,LOT.z0],[x,.04,zs-.25]);line(site,[x,.04,zs-.25],[x,MAIN-.15,zs],INK);dash([x,MAIN-.15,zs],[x,MAIN-.15,LOT.z1]);}
   // Existing block walls / rockery on the bluff (heavy lines on the site plan).
   for(const pts of [[[-4.5,-27],[3,-27.5],[11,-26]],[[31,-45],[33,-38],[38,-39],[44,-36]],[[52,-38],[58,-35],[66,-34],[71,-39],[76,-33]]])
     for(let i=0;i<pts.length-1;i++) box(site,Math.min(pts[i][0],pts[i+1][0])-.2,0,Math.min(pts[i][1],pts[i+1][1])-.2,Math.max(pts[i][0],pts[i+1][0])+.2,1.4,Math.max(pts[i][1],pts[i+1][1])+.2,WALL,0);
@@ -196,11 +201,12 @@ function buildModel() {
   // Driveway to the garage door.
   box(site,G.x0+.8,MAIN-.2,G.z1,G.x1-.8,MAIN-.12,LOT.z1+5,FLOOR,0);
   // ---- Basement (lower). Deck-side walls daylight; the rest are foundation walls.
+  // Daylight faces (edges 1-6) get siding and openings; the rest are buried foundation walls.
   ring(lower,P,0,MAIN,[
-    null, [], [], [], [windowAt(65,3)]
-  ],i=>i>=1&&i<=4,7);
+    null, [], [windowAt(41,4)], [], [], [], [windowAt(60,3),windowAt(70,3)]
+  ],i=>i>=1&&i<=6,7);
   // The ADU's daylight face is its own wall (role 8) so the ADU callout can mark it.
-  wall(lower,'x',6,0,32.5,0,MAIN,[doorAt(9,6),doorAt(20,3),windowAt(27,5)],true,-1,.5,8);
+  wall(lower,'x',6,0,32.3,0,MAIN,[doorAt(9,6),doorAt(20,3),windowAt(27,5)],true,-1,.5,8);
   // ADU 865 SF (A202 of the ADU set): 32'-0" wide at the deck side.
   box(lower,0.25,.02,6.25,32,.06,33,[.94,.945,.955],8,false);
   partition(lower,'x',33,0,32,0,[doorAt(26,3)],MAIN,8);
@@ -214,21 +220,26 @@ function buildModel() {
   box(lower,19,.06,19.5,31.5,3,21.5,FURN,8);
   box(lower,22,.06,8,27,1.6,14,FURN,8);
   // Crawl space beyond the ADU: low fill, not habitable.
-  box(lower,32.25,.02,11.55,74.75,3.2,46.25,EARTH,7);
-  box(lower,55.25,.02,.25,74.75,3.2,11.55,EARTH,7);
+  // Contiguous fill, inset 0.25 ft from the foundation walls.
+  for(const [x0,z0,x1,z1] of [[55.55,-.05,75.05,7.95],[50.55,7.95,75.05,13.75],[32.55,13.75,75.05,38.25],[49.25,38.25,75.05,40.75],[49.25,40.75,61.75,42.45]])
+    box(lower,x0,.02,z0,x1,3.2,z1,EARTH,7);
   // Existing stair from the main level down to the basement.
   for(let i=0;i<13;i++) {
     const x=30-i*.75, yt=MAIN-(i+1)*.654;
     box(lower,x-.75,Math.max(.05,yt-.16),27,x,Math.max(.2,yt),30.5,FLOOR,1);
   }
-  // ADU entry landing (24 SF, "porch @ ADU access").
-  box(lower,16,-.05,1.5,22,.3,6,FLOOR,3);
+  // ADU entry landing (24 SF, "porch @ ADU access") with steps down to grade ("by others").
+  box(lower,16,-.05,2,22,.6,6,FLOOR,3);
+  for(let i=0;i<2;i++) box(lower,16.5,-.05,2-(i+1)*1,21.5,.4-i*.2,2-i*1,FLOOR,3);
   // ---- Deck side, per the photos: main deck in the notch between the wings with a
   // stair down to a lower deck at grade, and a narrow deck along the left wing.
   // Depths and the lower deck size are scaled by eye from the photos.
-  box(lower,32.5,MAIN-.3,-3,55,MAIN,11.3,FLOOR,4);
+  box(lower,32.3,MAIN-.3,-3,50.3,MAIN,13.5,FLOOR,4);
+  box(lower,50.3,MAIN-.3,-3,55.3,MAIN,7.7,FLOOR,4);
   box(lower,0,MAIN-.3,1.5,18,MAIN,6,FLOOR,4);
-  for(const [x,z] of [[33.2,-2.6],[40,-2.6],[47,-2.6],[54.3,-2.6],[.6,2],[9,2],[17.4,2]])box(lower,x-.3,0,z-.3,x+.3,MAIN-.3,z+.3,FRAME,4);
+  for(let x=32.9;x<55.3;x+=.9) line(lower,[x,MAIN+.01,-3],[x,MAIN+.01,x<50.3?13.5:7.7],DETAIL,4);
+  for(const [x,z] of [[32.9,-2.6],[39,-2.6],[45,-2.6],[50.1,-2.6],[.6,2],[9,2],[17.4,2]])box(lower,x-.3,0,z-.3,x+.3,MAIN-.3,z+.3,FRAME,4);
+  box(lower,32.3,MAIN-.9,-3.15,55.3,MAIN-.3,-2.85,FRAME,4);
   // Lower deck / patio at grade.
   box(lower,50.5,-.02,-15,74,.45,-3,FLOOR,4);
   for(let x=51.1;x<74;x+=1.2) line(lower,[x,.46,-15],[x,.46,-3],DETAIL,4);
@@ -240,33 +251,46 @@ function buildModel() {
     for(let k=1;k<4;k++){const yy=y+.26+k*.78;axis==='x'?line(g,[a,yy,f],[b,yy,f],FRAME,role):line(g,[f,yy,a],[f,yy,b],FRAME,role);}
   }
   // Rails sit in the main-level group so the level cut peels them with the walls.
-  rail(upper,'x',-2.9,32.6,51,MAIN,4);
-  rail(upper,'z',32.6,-2.9,6,MAIN,4);
+  rail(upper,'x',-2.9,32.4,50.5,MAIN,4);
+  rail(upper,'z',32.4,-2.9,6,MAIN,4);
   rail(upper,'x',1.6,0.1,17.9,MAIN,4);
   rail(upper,'z',17.9,1.6,6,MAIN,4);
   // Deck stair down to the lower deck, with black stringers.
   for(let i=0;i<12;i++) {
     const z=-3-i*.75, yt=MAIN-(i+1)*.68;
-    box(lower,51,Math.max(.5,yt-.16),z-.75,55,Math.max(.6,yt),z,FLOOR,4);
+    box(lower,50.8,Math.max(.5,yt-.16),z-.75,54.8,Math.max(.6,yt),z,FLOOR,4);
   }
-  for(const x of [51,55]) face(lower,[[x,MAIN,-3],[x,MAIN-.6,-3],[x,.45,-12],[x,1.05,-12]],FRAME,4,false);
+  for(const x of [50.8,54.8]) {
+    face(lower,[[x,MAIN,-3],[x,MAIN-.6,-3],[x,.45,-12],[x,1.05,-12]],FRAME,4,false);
+    // Black stair rail: sloped top rail and three posts, in the main-level group like the deck rails.
+    box(upper,x-.07,.45,-12.1,x+.07,3.95,-11.9,FRAME,4); box(upper,x-.07,MAIN,-3.1,x+.07,MAIN+3.5,-2.9,FRAME,4);
+    face(upper,[[x,MAIN+3.4,-3],[x,MAIN+3.5,-3],[x,3.95,-12],[x,3.85,-12]],FRAME,4,false);
+    line(upper,[x,MAIN+1.8,-3],[x,2.3,-12],FRAME,4);
+  }
   // Existing open porch, 60 SF, at the entry.
-  box(lower,36,MAIN-.25,46.75,45,MAIN+.05,53.4,FLOOR,3);
+  // In the entry notch per the site plan; size from 60 SF (approximate shape).
+  box(lower,35,MAIN-.25,38.75,45,MAIN+.05,44.8,FLOOR,3);
   // ---- Main level floor.
-  box(slab,0,MAIN,6,31,MAIN+.5,55,FLOOR);
-  box(slab,31,MAIN,11.3,75,MAIN+.5,46.5,FLOOR);
-  box(slab,55,MAIN,0,75,MAIN+.5,11.3,FLOOR);
-  box(slab,31,MAIN,6,32.5,MAIN+.5,11.3,FLOOR);
+  for(const [x0,x1,z0,z1] of TILES) box(slab,x0,MAIN,z0,x1,MAIN+.5,z1,FLOOR);
   const M0 = MAIN+.5;
+  // Openings per the A301 elevations and the photos: glass walls on the deck side,
+  // punched windows elsewhere. Panel widths are approximate.
+  const glass=(a,b)=>[a,b,M0+.25,M0+7.7,'window'];
   ring(upper,P,M0,PLATE,[
-    [tallAt(4,3,M0),tallAt(9,3,M0),tallAt(14,3,M0),tallAt(20,3.5,M0),tallAt(25,3.5,M0),tallAt(30,3,M0)],
+    [glass(1.5,13.5),glass(16,30.8)],
+    [glass(7,12.6)],
+    [glass(33.4,49.2)],
+    [glass(8.4,12.8)],
     [],
-    [tallAt(35.5,4,M0),[38.5,45.5,M0,M0+6.9,'door'],tallAt(48.5,4,M0),tallAt(52.5,3,M0)],
-    [windowAt(5.5,3,M0)],
-    [windowAt(59,3,M0),windowAt(64,3,M0),windowAt(70,3,M0)],
-    [windowAt(7,3.5,M0),windowAt(21,3.5,M0),windowAt(27,3.5,M0),windowAt(36,3,M0),windowAt(42,3,M0)],
-    [windowAt(70,3,M0),windowAt(63,3,M0),windowAt(51,3,M0),doorAt(41,3,M0)],
+    [glass(.4,7)],
+    [glass(56.4,74.2)],
+    [windowAt(12,3.5,M0),windowAt(30,5,M0)],
+    [windowAt(69,3,M0)],
     [],
+    [windowAt(55,3,M0)],
+    [],
+    [windowAt(36,2.5,M0),doorAt(42,3,M0)],
+    [windowAt(47,3,M0)],
     [windowAt(9,7,M0),windowAt(24,3,M0)],
     [windowAt(14,3.5,M0),windowAt(36,3,M0),windowAt(46,3,M0)],
   ],true);
@@ -280,13 +304,13 @@ function buildModel() {
   partition(upper,'x',32,0,12.5,M0,[doorAt(9,2.5,M0)]);
   partition(upper,'x',38,0,20,M0,[doorAt(16,3,M0)]);
   partition(upper,'z',20,38,55,M0,[doorAt(41,3,M0)]);
-  partition(upper,'x',15.5,12.5,32.5,M0,[doorAt(28,3,M0)]);
+  partition(upper,'x',15.5,12.5,32.3,M0,[doorAt(28,3,M0)]);
   partition(upper,'z',59,17,40,M0,[doorAt(20,3,M0)]);
   partition(upper,'x',17,59,75,M0);
   partition(upper,'x',30,59,75,M0,[doorAt(61,2.5,M0)]);
-  partition(upper,'x',32,37,52,M0);
-  partition(upper,'z',37,32,46.5,M0,[doorAt(35,2.5,M0)]);
-  partition(upper,'z',44,32,46.5,M0,[doorAt(35,2.5,M0)]);
+  partition(upper,'x',32,37,49,M0);
+  partition(upper,'z',37,32,38.5,M0,[doorAt(35,2.5,M0)]);
+  partition(upper,'z',44,32,38.5,M0,[doorAt(35,2.5,M0)]);
   // Kitchen island (8'-0" on A202), beds.
   box(upper,61,M0,8.5,69,M0+3,12,FURN);
   function bed(x,z,w=5,d=6.5) {
@@ -305,10 +329,11 @@ function buildModel() {
     face(g,[[x0,y0-t,z0],[x1,y0-t,z0],[x1,y1-t,z1],[x0,y1-t,z1]],col,role,false);
     for(let x=x0+seam;x<x1-.2;x+=seam) line(g,[x,y0+.03,z0],[x,y1+.03,z1],seamCol,role);
   }
-  const R=[[-1.5,4.5],[53.5,4.5],[53.5,-1.5],[76.5,-1.5],[76.5,48],[32.5,48],[32.5,56.5],[-1.5,56.5]];
-  roofRect(roofs,-1.5,53.5,4.5,48,roofY,1.5);
-  roofRect(roofs,53.5,76.5,-1.5,48,roofY,1.5);
-  roofRect(roofs,-1.5,32.5,48,56.5,roofY,1.5);
+  // 1'-6" overhang (A203); the roof spans the deck notch as on the roof plan.
+  const R=[[-1.5,4.5],[55.3,4.5],[55.3,-1.8],[76.8,-1.8],[76.8,44.2],[33.8,44.2],[33.8,57.2],[-1.5,57.2]];
+  roofRect(roofs,-1.5,33.8,4.5,57.2,roofY,1.5);
+  roofRect(roofs,33.8,55.3,4.5,44.2,roofY,1.5);
+  roofRect(roofs,55.3,76.8,-1.8,44.2,roofY,1.5);
   for(let i=0;i<R.length;i++) {
     const [ax,az]=R[i],[bx,bz]=R[(i+1)%R.length];
     face(roofs,[[ax,roofY(az)-1.1,az],[bx,roofY(bz)-1.1,bz],[bx,roofY(bz),bz],[ax,roofY(az),az]],FASCIA,0,true);
@@ -335,13 +360,13 @@ function buildModel() {
     ['75 ft',37.5,-1,true],['49 ft',-1.8,30,true],
     ['Bedroom',6,24],['Office / craft',22.5,10.5],['Living',22,21],['Dining',46,24],
     ['Kitchen',65,6],['Bedroom',67,26],['Bedroom',10,48],['Bath',6,35,true],
-    ['Laundry',47.5,40,true],['Powder',40.5,40,true],['Bath',67,35,true],
-    ['Deck',20,1.5],['Magnolia Blvd W',30,-48.5,true],['Constance Dr W',30,LOT.z1+3,true],['Stair',26,28.7,true],['Porch',40.5,50,true],['Garage',64.2,66.5]
+    ['Laundry',46.5,35,true],['Powder',40.5,35,true],['Bath',67,35,true],
+    ['Deck',20,1.5],['Magnolia Blvd W',30,-48.5,true],['Constance Dr W',30,LOT.z1+3,true],['Stair',26,28.7,true],['Porch',40,41.8,true],['Entry',42,37,true],['Garage',64.2,66.5]
   ])planLabel(r[0],r[1],r[2],!!r[3],'upper',r[2]<-40?.1:r[2]>LOT.z1?MAIN:(r[1]>55&&r[2]>55?G.floor+.2:M0+.15));
   for(const r of [
     ['ADU 865 SF',8,13],['Living',8,19,true],['Bedroom',24,11.5],['Kitchen',25,24],
-    ['Bath',6,29.5,true],['Laundry',16.5,30.5,true],['Existing basement',16,44],
-    ['Crawl space',53,29],['32 ft',16,7,true],['Entry',19,3,true],['Magnolia Blvd W',30,-48.5,true],['Garage',64.2,66.5,true]
+    ['Bath',6,29.5,true],['Laundry',16.5,30.5,true],['Existing basement',16,44.5],['ADU entry',19,1,true],
+    ['Crawl space',53,29],['32 ft',16,7,true],['Magnolia Blvd W',30,-48.5,true],['Garage',64.2,66.5,true]
   ])planLabel(r[0],r[1],r[2],!!r[3],'main',r[2]<-40?.1:(r[1]>55&&r[2]>55?G.floor+.2:.25));
   return {groups:groups.map(g=>({id:g.id,solid:new Float32Array(g.solid),lines:new Float32Array(g.lines)})),labels,
     bounds:{min:[-6,-.5,-50],max:[82,23,84]},
@@ -521,7 +546,7 @@ void main() {
   if (vBaseY > uCut + 0.001) discard;
   vec3 normal = normalize(vNormal);
   if (!gl_FrontFacing) normal = -normal;
-  float light = 0.93 + 0.07 * max(0.0, dot(normal, normalize(vec3(-0.35, 0.9, 0.28))));
+  float light = 0.9 + 0.1 * (0.5 + 0.5 * dot(normal, normalize(vec3(-0.35, 0.9, 0.28))));
   vec3 color = vColor * light;
   float mark = uLift;
   if (uFocus > 0.5 && abs(vRole - uFocus) < 0.1) mark = 1.0;
@@ -585,11 +610,11 @@ float rectangle(vec2 p, vec2 center, vec2 halfSize) {
   return length(max(q, 0.0)) + min(max(q.x, q.y), 0.0);
 }
 void main() {
-  float a = rectangle(vGround, vec2(37.5, 27.5), vec2(37.5, 27.5));
+  float a = rectangle(vGround, vec2(37.65, 27.7), vec2(37.7, 28.0));
   float b = rectangle(vGround, vec2(64.2, 66.5), vec2(6.2, 10.2));
   float c = rectangle(vGround, vec2(27.5, 2.0), vec2(27.5, 4.0));
   float d = max(min(min(a, b), c), 0.0);
-  float shadow = exp(-d * d / 7.0) * uStrength;
+  float shadow = exp(-d * d / 13.0) * uStrength;
   gl_FragColor = vec4(uPaper * (1.0 - shadow), 1.0);
 }`;
 
@@ -746,7 +771,7 @@ function createRenderer(canvas, options) {
     const cssW = Math.max(1, Number.isFinite(width) ? width : canvas.clientWidth);
     const cssH = Math.max(1, Number.isFinite(height) ? height : canvas.clientHeight);
     const displayDpr = Math.max(1, globalThis.devicePixelRatio || 1);
-    const dpr = Math.min(displayDpr, cssW < 600 ? 1.5 : 2,
+    const dpr = Math.min(displayDpr, cssW < 600 ? 1.35 : 2,
       Math.sqrt(MAX_PIXELS / (cssW * cssH)),
       maximumSize / cssW, maximumSize / cssH,
       viewportLimit[0] / cssW, viewportLimit[1] / cssH);
@@ -796,7 +821,7 @@ function createRenderer(canvas, options) {
     attribute(shadowProgram, 'aPosition', 3, 3, 0);
     gl.uniformMatrix4fv(shadowProgram.uniforms.uMvp, false, mvp);
     gl.uniform3fv(shadowProgram.uniforms.uPaper, PAPER);
-    gl.uniform1f(shadowProgram.uniforms.uStrength, mix(0.18, 0.05, smooth(0.28, 0.78, p)));
+    gl.uniform1f(shadowProgram.uniforms.uStrength, mix(0.14, 0.04, smooth(0.28, 0.78, p)));
     gl.drawArrays(gl.TRIANGLES, 0, shadow.count);
     stats.drawCalls++;
     stats.triangles += 2;

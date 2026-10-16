@@ -22,3 +22,16 @@
 .bops-strip img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:4px}
 .bops-strip figcaption{font-size:.85rem;line-height:1.45;margin-top:.45rem}
 @media (max-width:700px){.bops-strip{grid-template-columns:1fr}.bops-hero{min-height:62vh}}
+.bops-tool-head{background:#111;color:#fff;text-align:center;padding:1.4rem 1.25rem .4rem}
+.bops-tool-head h1{font-size:clamp(1.35rem,4vw,2.1rem);font-weight:800;line-height:1.15;margin:.3rem 0 0}
+.bops-tool-head .bops-project-address{color:#e7e5e0;margin:.3rem 0 0}
+.bops-hero h2{font-size:clamp(1.3rem,4vw,2rem);font-weight:800;margin:.3rem 0 0;text-shadow:0 1px 12px rgba(0,0,0,.4)}
+.bops-copy{background:#f7f6f2;color:#1c1916;padding:.5rem 1.25rem 3rem}
+.bops-copy h2{font-size:clamp(1.25rem,3.4vw,1.7rem);font-weight:800;line-height:1.2;margin:2rem 0 .7rem}
+.bops-copy h3{font-size:1.05rem;font-weight:700;margin:1.2rem 0 .35rem}
+.bops-copy p,.bops-copy li{font-size:1rem;line-height:1.65;max-width:46rem}
+.bops-copy ul{padding-left:1.2rem;margin:.6rem 0}
+.bops-copy li{margin:.35rem 0}
+.bops-copy a{color:#15803d;text-decoration:underline}
+.bops-ppg{list-style:none;padding:0!important}
+.bops-fine-print{font-size:.85rem!important;color:#5b574f}
