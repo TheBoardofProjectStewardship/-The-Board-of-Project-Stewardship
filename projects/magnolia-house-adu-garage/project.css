@@ -35,3 +35,10 @@
 .bops-copy a{color:#15803d;text-decoration:underline}
 .bops-ppg{list-style:none;padding:0!important}
 .bops-fine-print{font-size:.85rem!important;color:#5b574f}
+.bops-plans{background:#f7f6f2;padding:1.5rem 1.25rem 2rem;color:#1c1916}
+.bops-plans h2{font-size:clamp(1.2rem,3vw,1.6rem);font-weight:800;margin:.5rem 0}
+.bops-plans-note{font-size:.92rem;color:#5b574f;max-width:46rem}
+.bops-plan-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin:1rem 0}
+.bops-plan-tabs button{font:inherit;font-weight:700;padding:.55rem 1rem;border-radius:999px;border:1px solid #c9c4b8;background:#efece4;color:#1c1916;cursor:pointer}
+.bops-plan-tabs button[aria-selected=true]{background:#1c1916;color:#fff;border-color:#1c1916}
+.bops-plans [role=tabpanel] img{width:100%;height:auto;max-width:880px;display:block;border:1px solid #e1ddd3;background:#f7f6f2}

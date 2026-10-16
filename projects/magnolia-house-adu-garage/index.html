@@ -428,7 +428,7 @@
    "@type": "CreativeWork",
    "@id": "https://boardofprojectstewardship.com/projects/magnolia-house-adu-garage/#project",
    "name": "Magnolia, Seattle home remodel, basement ADU, and detached garage",
-   "description": "Main-level remodel with a low-slope standing seam metal roof, a new 865 SF basement ADU, and a detached 225 SF one-car garage on a 9,350 SF NR3 lot.",
+   "description": "Main-level remodel with a low-slope standing seam metal roof, a new 865 SF basement ADU, and a detached 240 SF one-car garage on a 9,350 SF NR3 lot.",
    "creator": {
     "@id": "https://pacificprogroup.com/#org"
    },
@@ -610,7 +610,7 @@
         <div class="sh-top">
           <p class="sh-kicker">House, ADU, garage</p>
           <h2 class="sh-title" id="scroll-house-title">The house, taken apart</h2>
-          <p class="sh-dek">Start with the finished house, the ADU, and the garage on their real lot. Scroll peels the roof, the main level, and the basement.</p>
+          <p class="sh-dek">A to-scale model of the finished house, the ADU, and the garage on their real lot, traced from the permit sheets: walls, rooms, windows, and doors are placed at their drawn sizes, within a few inches. Scroll peels the roof, the main level, and the basement. Approximate where noted.</p>
         </div>
         <ol class="sh-stages" aria-label="Build stages">
           <li class="is-on" data-stage="house"><button type="button" data-stage="house" data-sh-progress="0.04" aria-current="step">House</button></li>
@@ -707,6 +707,7 @@
             <p class="sh-note" id="sh-note-structure" data-callout="structure"><strong>Structure.</strong> The main level sits on the basement walls: a floor, walls, and the roof above. A new roof has to tie into the frame already there.</p>
             <p class="sh-note" id="sh-note-stairs" data-callout="stairs"><strong>Stairs.</strong> The existing stair runs from the main level down to the basement. A stair needs a clear path, headroom, and a rail.</p>
           </div>
+          <p class="sh-learn-aside sh-key"><span aria-hidden="true" style="display:inline-block;width:.8em;height:.8em;margin-right:.35em;vertical-align:-.05em;background:#8cc2b3;border:1px solid #3f8f7c"></span>Green-gray marks new work: the 27 SF dining addition, the new entry door with side lites, the new egress window, the glass deck railings, the electric fireplace and the ADU entry door. Furniture is drawn paler: it is placed only to show scale, and the permit sheets do not show it. Zoom in to see cabinet doors, faucets, trim and floor joints.</p>
           <p class="sh-learn-aside">Teaching sketch. Not a structural design.</p>
         </div>
         <div class="scroll-house-cta">
@@ -759,6 +760,25 @@
     })();
     </script>
   </section>
+  <section class="bops-plans" id="plans" aria-labelledby="plans-title">
+    <div class="bops-project-wrap">
+      <h2 id="plans-title">Plan: each level, dimensioned</h2>
+      <p class="bops-plans-note">Walls, rooms, and areas are traced from the permit sheets, which are drawn at 1/4" = 1'-0". Dimensions and room areas are the printed figures; the garage is 12'-0" by 20'-0", 240 SF.</p>
+      <div class="bops-plan-tabs" role="tablist" aria-label="Floor plans">
+        <button type="button" role="tab" id="tab-plan-main" aria-controls="panel-plan-main" aria-selected="true">Main level</button>
+        <button type="button" role="tab" id="tab-plan-adu" aria-controls="panel-plan-adu" aria-selected="false" tabindex="-1">ADU / basement</button>
+        <button type="button" role="tab" id="tab-plan-garage" aria-controls="panel-plan-garage" aria-selected="false" tabindex="-1">Garage</button>
+      </div>
+      <div role="tabpanel" tabindex="0" id="panel-plan-main" aria-labelledby="tab-plan-main"><img src="plans/plan-main.svg" width="880" height="700" alt="Main level floor plan with room names, areas, and the printed dimensions 75 feet by 49 feet." loading="lazy"></div>
+      <div role="tabpanel" tabindex="0" id="panel-plan-adu" aria-labelledby="tab-plan-adu" hidden><img src="plans/plan-adu.svg" width="480" height="500" alt="Basement plan of the 865 square foot ADU: living, bedroom, kitchen, bathroom, laundry, utility room." loading="lazy"></div>
+      <div role="tabpanel" tabindex="0" id="panel-plan-garage" aria-labelledby="tab-plan-garage" hidden><img src="plans/plan-garage.svg" width="300" height="360" alt="Detached one-car garage plan, 12 feet by 20 feet inside, 240 square feet." loading="lazy"></div>
+    </div>
+    <script>
+    (function(){var tabs=[].slice.call(document.querySelectorAll('.bops-plan-tabs [role=tab]'));
+      function pick(t){tabs.forEach(function(b){var on=b===t;b.setAttribute('aria-selected',on);b.tabIndex=on?0:-1;document.getElementById(b.getAttribute('aria-controls')).hidden=!on;});t.focus();}
+      tabs.forEach(function(b,i){b.addEventListener('click',function(){pick(b);});b.addEventListener('keydown',function(e){var k=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(k){e.preventDefault();pick(tabs[(i+k+tabs.length)%tabs.length]);}});});})();
+    </script>
+  </section>
   <section class="bops-hero" aria-labelledby="hero-title">
     <picture>
       <source type="image/webp" srcset="/projects/magnolia-house-adu-garage/photos/finished-rear-1200.webp 1200w, /projects/magnolia-house-adu-garage/photos/finished-rear-2000.webp 2000w" sizes="100vw">
@@ -776,7 +796,7 @@
         <div><dt>House</dt><dd>One story over a daylight basement. Main level 3,117 SF.</dd></div>
         <div><dt>Main level</dt><dd>Roof redesign due to existing roof leakage. Main bedroom and bath expanded; living room, kitchen, and dining rearranged; two bedrooms and the laundry moved; 27 SF of the deck added to dining.</dd></div>
         <div><dt>ADU</dt><dd>New 865 SF unit in the existing basement: living, bedroom, kitchen, bathroom, and laundry. Its own entry landing.</dd></div>
-        <div><dt>Garage</dt><dd>Detached one-car garage, 225 SF inside (12'-0" by 20'-0"), proposed height 12'-0", metal roof.</dd></div>
+        <div><dt>Garage</dt><dd>Detached one-car garage, 240 SF inside (12'-0" by 20'-0"), proposed height 12'-0", metal roof.</dd></div>
         <div><dt>Lot</dt><dd>9,350 SF (85.00 by 110.0 feet), zoned NR3, City of Seattle. Between Magnolia Blvd W and Constance Dr W; the basement daylights on the Magnolia Blvd W side.</dd></div>
         <div><dt>Roof</dt><dd>Standing seam metal on the house and on the garage.</dd></div>
       </dl>
@@ -799,7 +819,7 @@
         <li><strong>Roof:</strong> a roof redesign because the existing roof leaked, replaced with a single low-slope standing seam metal roof.</li>
         <li><strong>Remodel:</strong> the master bedroom and bath expanded; the living room, kitchen, and dining area rearranged; two bedrooms and the laundry moved; and 27 SF of the deck brought into the dining space.</li>
         <li><strong>Basement ADU:</strong> a new 865 SF accessory dwelling unit in the existing basement, with a living room, bedroom, kitchen, bathroom, laundry, and its own entry landing.</li>
-        <li><strong>Garage:</strong> a detached one-car garage, 225 SF inside (12'-0" by 20'-0"), with a proposed height of 12'-0" and a metal roof.</li>
+        <li><strong>Garage:</strong> a detached one-car garage, 240 SF inside (12'-0" by 20'-0"), with a proposed height of 12'-0" and a metal roof.</li>
       </ul>
       <p>The drone photos above show the finished deck side: the black standing seam roof with its deep fascia, white vertical siding, black-framed glass walls, and the deck and stair over the daylight basement. The <a href="#scroll-house">taken-apart drawing</a> at the top of the page peels that same house back to its main level, the ADU, and the foundation.</p>
 
