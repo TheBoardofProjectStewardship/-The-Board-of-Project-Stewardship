@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 import sys
 import tempfile
 import unittest
@@ -45,29 +46,33 @@ class NewsContractTests(unittest.TestCase):
         self.assertEqual(
             [item["slug"] for item in stories],
             [
+                "mount-baker-redevelopment-groundbreaking",
                 "snohomish-county-administrative-lot-splits",
                 "snohomish-health-septic-permit-grant",
             ],
         )
-        self.assertEqual(stories[0]["date"], "2026-10-15")
-        self.assertEqual(stories[1]["date"], "2026-10-14")
+        self.assertEqual(stories[0]["date"], "2026-10-16")
+        self.assertEqual(stories[1]["date"], "2026-10-15")
+        self.assertEqual(stories[2]["date"], "2026-10-14")
         self.assertTrue(stories[0]["title"])
         self.assertTrue(stories[0]["description"])
         self.assertGreaterEqual(len(stories[0]["sources"]), 1)
-        self.assertIn("Robert Ashworth", stories[0]["hero_credit"])
-        self.assertIn("Emersb", stories[1]["hero_credit"])
+        self.assertIn("SounderBruce", stories[0]["hero_credit"])
+        self.assertIn("Robert Ashworth", stories[1]["hero_credit"])
+        self.assertIn("Emersb", stories[2]["hero_credit"])
         self.assertTrue((ROOT / "news" / "_template.md").is_file())
         self.assertEqual(
             sorted(path.name for path in (ROOT / "news").glob("[0-9]*.md")),
             [
                 "2026-10-14-snohomish-health-septic-permit-grant.md",
                 "2026-10-15-snohomish-county-administrative-lot-splits.md",
+                "2026-10-16-mount-baker-redevelopment-groundbreaking.md",
             ],
         )
         result = intake.validate_news_library(ROOT)
         self.assertTrue(result["ok"], result)
         self.assertEqual(result["status"], "ready")
-        self.assertEqual(result["stories"], 2)
+        self.assertEqual(result["stories"], 3)
         self.assertEqual(gs.news_blog_overlap(ROOT), [])
         self.assertIn("First stories coming soon", gs.build_news_index([]))
 
@@ -83,6 +88,12 @@ class NewsContractTests(unittest.TestCase):
         blog_html = (ROOT / "blog.html").read_text(encoding="utf-8")
         self.assertNotIn("snohomish-health-septic-permit-grant", blog_html)
         self.assertNotIn("snohomish-county-administrative-lot-splits", blog_html)
+        self.assertNotIn("mount-baker-redevelopment-groundbreaking", blog_html)
+        baker_url = "https://boardofprojectstewardship.com/news/mount-baker-redevelopment-groundbreaking.html"
+        baker_href = "./news/mount-baker-redevelopment-groundbreaking.html"
+        lead = news_html.split('class="news-lead"', 1)[1].split("</article>", 1)[0]
+        self.assertIn(baker_href, lead)
+        self.assertIn(stories[0]["title"], lead)
 
         lot_url = "https://boardofprojectstewardship.com/news/snohomish-county-administrative-lot-splits.html"
         lot_href = "./news/snohomish-county-administrative-lot-splits.html"
@@ -121,23 +132,46 @@ class NewsContractTests(unittest.TestCase):
         self.assertIsNone(gs.news_forbidden_term(page))
         self.assertNotIn("/posts/", page)
 
+        baker = (ROOT / "news" / "mount-baker-redevelopment-groundbreaking.html").read_text(encoding="utf-8")
+        self.assertIn("Mount Baker Link light-rail station in Seattle, seen from Martin Luther King Jr. Way", baker)
+        self.assertIn("SounderBruce", baker)
+        self.assertIn('href="https://creativecommons.org/licenses/by-sa/2.0/"', baker)
+        self.assertIn(">CC BY-SA 2.0</a>", baker)
+        self.assertIn(
+            'href="https://commons.wikimedia.org/wiki/File:Mount_Baker_Station_from_MLK_Way_(20400419804).jpg"',
+            baker,
+        )
+        self.assertIn("2026-10-16-mount-baker-redevelopment-groundbreaking-480.webp", baker)
+        self.assertIn("2026-10-16-mount-baker-redevelopment-groundbreaking-800.webp", baker)
+        self.assertIn("2026-10-16-mount-baker-redevelopment-groundbreaking-1200.webp", baker)
+        for source in stories[0]["sources"]:
+            self.assertIn(source, baker)
+        emails = set(re.findall(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}", baker))
+        self.assertEqual(emails, {"editorial@boardofprojectstewardship.com"})
+        self.assertIsNone(gs.news_forbidden_term(baker))
+        self.assertNotIn("/posts/", baker)
+
         rss = (ROOT / "news" / "rss.xml").read_text(encoding="utf-8")
         self.assertIn("Board of Project Stewardship News", rss)
         self.assertIn("<item>", rss)
         self.assertIn(story_url, rss)
         self.assertIn(lot_url, rss)
+        self.assertIn(baker_url, rss)
         self.assertNotIn("/posts/", rss)
 
         sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
         self.assertIn("https://boardofprojectstewardship.com/news.html", sitemap)
         self.assertIn(story_url, sitemap)
         self.assertIn(lot_url, sitemap)
+        self.assertIn(baker_url, sitemap)
         blog_rss = (ROOT / "blog" / "rss.xml").read_text(encoding="utf-8")
         posts_json = (ROOT / "posts.json").read_text(encoding="utf-8")
         self.assertNotIn("snohomish-health-septic-permit-grant", blog_rss)
         self.assertNotIn("snohomish-health-septic-permit-grant", posts_json)
         self.assertNotIn("snohomish-county-administrative-lot-splits", blog_rss)
         self.assertNotIn("snohomish-county-administrative-lot-splits", posts_json)
+        self.assertNotIn("mount-baker-redevelopment-groundbreaking", blog_rss)
+        self.assertNotIn("mount-baker-redevelopment-groundbreaking", posts_json)
         self.assertNotIn("/news/", blog_rss)
         self.assertNotIn('"path": "./news/', posts_json)
         self.assertNotIn("./posts/", news_html)
