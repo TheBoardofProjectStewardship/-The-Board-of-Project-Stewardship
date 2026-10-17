@@ -1,0 +1,16 @@
+{
+  "submission_id": "2026-10-17-siding-replacement-bellevue-wa",
+  "idempotency_key": "sha256:3e021524bf1aeddb21565c2ba9d32bc2297e40e0ba07e118de9e73a42bea68f1",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-10-17T17:21:39Z",
+  "outputs": [
+    "posts/2026-10-17-siding-replacement-bellevue-wa.md",
+    "posts/2026-10-17-siding-replacement-bellevue-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 73
+}
