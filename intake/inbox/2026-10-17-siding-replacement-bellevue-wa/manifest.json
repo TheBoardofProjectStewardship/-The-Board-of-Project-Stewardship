@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-10-17-siding-replacement-bellevue-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-10-17T17:40:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Siding Replacement Bellevue WA \u2014 When the City Requires a Permit, Asbestos and Lead Checks & Rain-Ready Details",
+    "date": "2026-10-17",
+    "slug": "siding-replacement-bellevue-wa",
+    "description": "A Bellevue homeowner's guide to replacing siding: the City's permit exemption and its stucco and veneer limits, when window or structural work needs a permit, asbestos survey rules, lead-safe work in older homes, and flashing details for the scope.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 connected and produced openclaw-seo/hermes/ollama/grok-build window-replacement-redmond-wa (window replacement already used 10-02, 10-04, 10-06; templated 'Planning, Permits & Licensed Pros' copy; hermes timed out with 2 sources; openclaw fallback with no keywords; media plan without bytes), another-story second-story-addition-shoreline-wa (duplicates 2026-08-24 slug; additions used 10-16; templated), edmonds-news roundup (thin), and approved rotating Snohomish County design-build template - none passed rich-post bar. Topic: siding replacement Bellevue WA (siding last used 09-22; Bellevue pages curl-verifiable). Producer role fields kept per intake contract."
+}

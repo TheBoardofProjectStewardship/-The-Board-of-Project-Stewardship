@@ -1,0 +1,45 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-10-17-bellevue-siding-1.webp",
+      "repo_path": "assets/images/posts/2026-10-17-bellevue-siding-1.webp",
+      "alt": "Illustrative: a finished house clad in painted fiber-cement lap siding with a covered porch, evergreen trees, and water in the distance under a gray Northwest sky \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "f6e2ddd31e962a2a29602e2cab1610c4",
+      "source": "Crop, mirror, and regrade of existing repo still 2026-09-22-siding-edmonds-coastal-3.webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-17-bellevue-siding-2.webp",
+      "repo_path": "assets/images/posts/2026-10-17-bellevue-siding-2.webp",
+      "alt": "Illustrative: a house wall covered in white weather-resistive barrier with dark seam tape around a window, and a stack of new siding boards on the ground \u2014 the stage between tear-off and new cladding \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "e1f83559724de2967a18cdcb69c64cde",
+      "source": "Crop, mirror, and regrade of existing repo still 2026-09-22-edmonds-siding-2.webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-17-bellevue-siding-3.webp",
+      "repo_path": "assets/images/posts/2026-10-17-bellevue-siding-3.webp",
+      "alt": "Illustrative: painted lap siding meeting a wood corner board, with a metal drip cap flashing over a window head \u2014 the kind of detail worth writing into a siding contract \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "d3508bb13d5f4356cc46d510178dd7cc",
+      "source": "Crop and regrade of existing repo still 2026-09-22-edmonds-siding-3.webp"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "38DQRt4aS48",
+      "url": "https://www.youtube.com/watch?v=38DQRt4aS48",
+      "title": "Fiber Cement Siding Installation with Rainscreen - Corrugated Lath Strip",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Illustrative frames are labeled in alt text",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "Reused and regraded existing repo stills. No paid image generation."
+}

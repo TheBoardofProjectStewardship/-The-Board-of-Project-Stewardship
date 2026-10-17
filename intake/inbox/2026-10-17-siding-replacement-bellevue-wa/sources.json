@@ -1,0 +1,98 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Bellevue",
+    "service": "Siding replacement",
+    "slug": "siding-replacement-bellevue-wa"
+  },
+  "sources": [
+    {
+      "url": "https://bellevuewa.gov/city-government/departments/development/permits/faqs/work-requiring-permits",
+      "title": "City of Bellevue - Work Requiring Permits",
+      "retrieved": "2026-10-17",
+      "http_status": 200,
+      "supports": "Siding replacement needs no permit except stucco and brick/stone veneer >4 ft above grade plane; installing/moving/widening exterior doors, skylights, windows needs permit with plan review; same-size same-location replacement needs none."
+    },
+    {
+      "url": "https://bellevue.municipal.codes/BCC/23.05.090",
+      "title": "Bellevue City Code 23.05.090 Permits required",
+      "retrieved": "2026-10-17",
+      "http_status": 200,
+      "supports": "Exemption for replacement of nonstructural siding on IRC structures except stucco and brick/stone veneer >4 ft; exemptions do not authorize code violations; one-code exemption does not exempt other technical codes; ordinary repairs exclude cutting structural beams/load-bearing supports."
+    },
+    {
+      "url": "https://bellevuewa.gov/city-government/departments/development/permits/residential-building-permits",
+      "title": "City of Bellevue - Residential Building Permits",
+      "retrieved": "2026-10-17",
+      "http_status": 200,
+      "supports": "Permit types BS/BR/BU/BT/BE; Earthquake Home Retrofit Program; Permit Center 425-452-4898, permits@bellevuewa.gov."
+    },
+    {
+      "url": "https://bellevuewa.gov/city-government/departments/development/permits/residential-building-permits/single-family-remodel-permit",
+      "title": "City of Bellevue - Single-Family Remodel Permit (BU)",
+      "retrieved": "2026-10-17",
+      "http_status": 200,
+      "supports": "BU covers enlarging window/door openings, installing or relocating doorway headers, earthquake home retrofit; apply on MyBuildingPermit."
+    },
+    {
+      "url": "https://bellevuewa.gov/city-government/departments/development/permits/residential-building-permits/single-family-remodel-permit-no-plan-review",
+      "title": "City of Bellevue - Single-Family Remodel Permit, No Plan Review (BT)",
+      "retrieved": "2026-10-17",
+      "http_status": 200,
+      "supports": "Nonstructural work usually no plan review, same-day issuance; inspections required; inspector may require plans, plan review may involve three-week turnaround."
+    },
+    {
+      "url": "https://www.pscleanair.gov/192/Homeowner-Renovation",
+      "title": "Puget Sound Clean Air Agency - Homeowner Renovation",
+      "retrieved": "2026-10-17",
+      "http_status": 200,
+      "supports": "Owner-occupant may survey own single-family house for renovation; otherwise AHERA inspector; share results; friable removal needs Single-Family Residence Notification with a filing fee; renters/landlords/condos hire certified abatement contractor."
+    },
+    {
+      "url": "https://www.pscleanair.gov/155/Asbestos",
+      "title": "Puget Sound Clean Air Agency - Asbestos",
+      "retrieved": "2026-10-17",
+      "http_status": 200,
+      "supports": "Agency asbestos program hub."
+    },
+    {
+      "url": "https://www.epa.gov/lead/renovation-repair-and-painting-program",
+      "title": "EPA - Lead Renovation, Repair and Painting Program",
+      "retrieved": "2026-10-17",
+      "http_status": 200,
+      "supports": "Anyone paid to disturb painted surfaces in pre-1978 homes must be certified, employees trained; generally does not apply to homeowners on own homes."
+    },
+    {
+      "url": "https://allurausa.com/resources/installation-manual-allura-fiber-cement-exterior-products",
+      "title": "Allura fiber cement installation manual",
+      "retrieved": "2026-10-17",
+      "http_status": 200,
+      "supports": "Flashing at window/door heads and horizontal penetrations sloped to drain; kickout flashing at roof-wall intersections."
+    },
+    {
+      "url": "https://mybuildingpermit.com/",
+      "title": "MyBuildingPermit",
+      "retrieved": "2026-10-17",
+      "http_status": 200,
+      "supports": "Bellevue permit applications portal."
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "Washington L&I Verify",
+      "retrieved": "2026-10-17",
+      "http_status": 200,
+      "supports": "Contractor registration lookup."
+    }
+  ],
+  "dropped": [
+    "Kirkland chosen first but kirklandwa.gov returns 403 to curl; switched to Bellevue",
+    "BASC flashing guide (curl 400) not cited; no above-grade clearance number asserted",
+    "No Bellevue permit fee amounts cited",
+    "PSCAA filing fee amount not printed (price lock)"
+  ],
+  "generation": {
+    "agent": "box-authored",
+    "mode": "box-fallback",
+    "verified_count": 11
+  }
+}

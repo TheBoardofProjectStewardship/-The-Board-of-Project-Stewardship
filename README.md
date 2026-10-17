@@ -54,6 +54,7 @@ Base: `https://boardofprojectstewardship.com/`
 | `blog/rss.xml` | Blog RSS feed |
 | `news/rss.xml` | News RSS feed |
 | `404.html` | Branded Board 404 |
+| `posts/2026-10-17-siding-replacement-bellevue-wa.html` | Siding Replacement Bellevue WA — When the City Requires a Permit, Asbestos and Lead Checks & Rain-Ready Details |
 | `posts/2026-10-16-home-addition-burien-wa.html` | Home Addition Burien WA — MyBuildingPermit Submittals, Utility Certificates & Drainage Review |
 | `posts/2026-10-15-bathroom-remodel-mercer-island-wa.html` | Bathroom Remodel Mercer Island WA — Simple Residential Permits, City Electrical & Wet-Area Details |
 | `posts/2026-10-14-basement-finishing-renton-wa.html` | Basement Finishing Renton WA — Interior Remodel Permits, City Electrical & Moisture Details |
