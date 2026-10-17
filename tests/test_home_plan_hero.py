@@ -111,26 +111,46 @@ class HomePlanHeroTests(unittest.TestCase):
         )
 
     def test_scroll_house_teaches_and_stays_light(self):
-        """A scroll plan builds a house, with tappable notes and a still fallback."""
+        """The Magnolia scroll house leads the page, with tappable notes and a still fallback.
+
+        Stage buttons keep the model stages and show the Magnolia labels.
+        The drawing script loads on view, not as a blocking tag, and the
+        page still has one H1 and one high-priority image.
+        """
         self.assertLess(self.html.find('id="scroll-house"'), self.html.find('id="plan-home-hero"'))
-        self.assertIn(">House</button>", self.html)
-        self.assertIn(">Front</button>", self.html)
-        self.assertIn(">Roof</button>", self.html)
-        self.assertIn(">Upper</button>", self.html)
-        self.assertIn(">Plan</button>", self.html)
-        self.assertIn(">Slab</button>", self.html)
-        self.assertIn('type="button"', self.html)
-        self.assertIn('aria-current="step"', self.html)
+        stages = (
+            ("house", "House", "0.04", True),
+            ("front", "Front", "0.22", False),
+            ("roof", "Roof", "0.38", False),
+            ("upper", "Main", "0.56", False),
+            ("plan", "ADU", "0.74", False),
+            ("foundation", "Slab", "0.93", False),
+        )
+        for stage, label, progress, current in stages:
+            current_attr = ' aria-current="step"' if current else ""
+            button = (
+                f'<button type="button" data-stage="{stage}" '
+                f'data-sh-progress="{progress}"{current_attr}>{label}</button>'
+            )
+            self.assertIn(button, self.html)
+            item = (
+                f'<li class="is-on" data-stage="{stage}">'
+                if current
+                else f'<li data-stage="{stage}">'
+            )
+            self.assertIn(item + button, self.html)
+        self.assertNotIn(">Upper</button>", self.html)
+        self.assertNotIn(">Plan</button>", self.html)
         self.assertIn('href="#plan-home-hero"', self.html)
         self.assertIn('href="./plan-walkthrough/"', self.html)
         self.assertIn("See what your home could become", self.html)
         self.assertIn("/assets/css/scroll-house.css", self.html)
-        self.assertIn('/assets/js/scroll-house.js', self.html)
-        self.assertNotIn('<script src="/assets/js/scroll-house.js"', self.html)
+        self.assertIn('s.src = "/assets/js/scroll-house-magnolia.js?v=9"', self.html)
+        self.assertNotIn("/assets/js/scroll-house.js", self.html)
+        self.assertNotIn('<script src="/assets/js/scroll-house-magnolia.js"', self.html)
         self.assertNotIn("three.module.js", self.html)
         for snippet in (
             "Foundation.",
-            "Bearing walls.",
             "Partitions.",
             "Framing.",
             "Headers.",
@@ -139,15 +159,18 @@ class HomePlanHeroTests(unittest.TestCase):
             "Structure.",
             "Stairs.",
             "Porch.",
-            "Balcony.",
-            "garage door",
-            "load-bearing walls",
+            "Deck.",
+            "ADU.",
+            "The existing deck runs along the main level on the downhill side",
+            "The new 865 SF accessory dwelling unit",
+            "The tall windows and doors on the deck side take studs out of the wall.",
             "This sketch does not size them.",
             "Teaching sketch. Not a structural design.",
             "prefers-reduced-motion: reduce",
         ):
             self.assertIn(snippet, self.html if "prefers-reduced" not in snippet else (ROOT / "assets/css/scroll-house.css").read_text(encoding="utf-8"))
-        self.assertIn("scroll-house-still.svg", (ROOT / "assets/css/scroll-house.css").read_text(encoding="utf-8"))
+        css = (ROOT / "assets/css/scroll-house.css").read_text(encoding="utf-8")
+        self.assertIn("scroll-house-still.svg", css)
         self.assertNotIn("home-stamp", self.html)
         self.assertNotIn("stamp-of-trust-seal", self.html)
         self.assertIn('class="stamp-badge"', self.html)
@@ -157,6 +180,7 @@ class HomePlanHeroTests(unittest.TestCase):
         self.assertIsNone(AI.search(self.html))
         self.assertIsNone(AI.search(visible))
         subprocess.check_call(["node", "--check", "assets/js/scroll-house.js"], cwd=ROOT)
+        subprocess.check_call(["node", "--check", "assets/js/scroll-house-magnolia.js"], cwd=ROOT)
 
 
 if __name__ == "__main__":

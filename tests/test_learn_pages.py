@@ -38,6 +38,21 @@ CATEGORIES = [
     "Coordinating services",
     "Changing an existing home",
 ]
+def touch_action_declarations(css: str):
+    """Return (selector, value) for every touch-action declaration."""
+    css = re.sub(r"/\*.*?\*/", "", css, flags=re.S)
+    found = []
+    for block in re.finditer(r"([^{}]+)\{([^{}]+)\}", css):
+        selector = " ".join(block.group(1).split())
+        # A media-query header can sit on the same line as the first rule.
+        selector = selector.split("}")[-1].strip()
+        if not selector or selector.startswith("@"):
+            continue
+        for prop in re.finditer(r"touch-action\s*:\s*([^;]+)", block.group(2)):
+            found.append((selector, " ".join(prop.group(1).split())))
+    return found
+
+
 COLLECTION = [
     "cut-and-fill/",
     "sequence/",
@@ -96,9 +111,23 @@ class LearnPagesTests(unittest.TestCase):
         for step in STEPS:
             self.assertIn(step, html)
         self.assertIn("scroll-house.js", html)
-        self.assertIn("pan-y pinch-zoom", (ROOT / "assets/css/learn.css").read_text(encoding="utf-8"))
-        self.assertNotIn("touch-action: none", (ROOT / "assets/css/learn.css").read_text(encoding="utf-8"))
-        self.assertNotIn("touch-action: none", (ROOT / "assets/css/scroll-house.css").read_text(encoding="utf-8"))
+        learn_css = (ROOT / "assets/css/learn.css").read_text(encoding="utf-8")
+        house_css = (ROOT / "assets/css/scroll-house.css").read_text(encoding="utf-8")
+        self.assertIn("pan-y pinch-zoom", learn_css)
+        self.assertNotIn("touch-action: none", learn_css)
+        self.assertNotIn("touch-action:none", learn_css)
+        # Zoomed-in room labels may capture the gesture. Everything else,
+        # including the sheet and the canvas at rest, must still scroll the page.
+        capture = ".scroll-house.is-captured .sh-labels .sh-label { touch-action: none; }"
+        self.assertEqual(house_css.count(capture), 1)
+        rest = house_css.replace(capture, "", 1)
+        self.assertNotIn("touch-action: none", rest)
+        self.assertNotIn("touch-action:none", rest)
+        decls = touch_action_declarations(house_css)
+        none = [(sel, val) for sel, val in decls if val == "none"]
+        self.assertEqual(none, [(".scroll-house.is-captured .sh-labels .sh-label", "none")])
+        self.assertIn((".scroll-house-sheet", "pan-y pinch-zoom"), decls)
+        self.assertIn((".scroll-house-canvas", "pan-y pinch-zoom"), decls)
         self.assertNotIn("three.module.js", html)
         self.assertIsNone(FORBIDDEN.search(html))
 
