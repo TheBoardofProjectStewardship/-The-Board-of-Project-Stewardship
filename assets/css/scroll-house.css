@@ -151,7 +151,7 @@
 }
 .scroll-house.is-drawn .scroll-house-plan { visibility: hidden; }
 .scroll-house-canvas { touch-action: pan-y pinch-zoom; background: #f7f6f2; }
-.scroll-house.is-explore .scroll-house-canvas { touch-action: pan-y pinch-zoom; cursor: grab; }
+.scroll-house.is-explore .scroll-house-canvas { touch-action: pan-y; cursor: grab; }
 .scroll-house.is-explore.is-dragging .scroll-house-canvas { cursor: grabbing; }
 .scroll-house-canvas:focus-visible {
   outline: 2px solid #1c1916;
@@ -518,4 +518,80 @@
   .sh-learn-copy { min-height: 0; }
   .sh-fine { margin-top: 0.15rem; }
   .sh-hint { font-size: 0.5625rem; }
+}
+
+/* v9: every stage is explorable. Labels are buttons (tap to fly in); fixtures appear when close. */
+.scroll-house.has-labels .sh-labels { opacity: 1; }
+.sh-labels .sh-label {
+  left: 0;
+  top: 0;
+  pointer-events: auto;
+  appearance: none;
+  margin: 0;
+  border: 0;
+  border-radius: 3px;
+  background: none;
+  padding: 4px 6px;
+  min-height: 24px;
+  line-height: 1.2;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #1c1916;
+  text-shadow: 0 0 3px #f7f6f2, 0 0 3px #f7f6f2, 0 0 6px #f7f6f2;
+  cursor: pointer;
+  touch-action: pan-y;
+  transition: opacity 0.22s linear;
+}
+.sh-labels .sh-label[hidden] { display: none; }
+.sh-labels .sh-label:hover { text-decoration: underline; text-underline-offset: 2px; }
+.sh-labels .sh-label:focus-visible { outline: 2px solid #166534; outline-offset: 1px; background: rgba(247, 246, 242, 0.9); }
+.sh-labels .sh-label.is-dim { font-weight: 500; }
+.sh-labels .sh-label.is-close { text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700; }
+.sh-labels .sh-label.is-fix { font-size: 0.6875rem; font-weight: 500; color: #3d3a35; letter-spacing: 0; text-transform: none; }
+.sh-labels .sh-label.is-fix::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 4px;
+  border-radius: 50%;
+  background: #166534;
+  vertical-align: 1px;
+}
+.scroll-house.is-captured .sh-labels .sh-label { touch-action: none; }
+.scroll-house.is-explore .sh-explore-toggle { background: #1c1916; color: #efebe2; border-color: #1c1916; }
+.sh-explore .sh-zoom { min-width: 44px; padding: 0.3rem 0.6rem; font-size: 1.125rem; line-height: 1; }
+.sh-gesture {
+  position: absolute;
+  top: 0.5rem;
+  left: 50%;
+  z-index: 3;
+  max-width: calc(100% - 1rem);
+  margin: 0;
+  padding: 0.4rem 0.75rem;
+  transform: translate(-50%, -4px);
+  border-radius: 999px;
+  background: rgba(28, 25, 22, 0.88);
+  color: #f2f2ee;
+  font: 600 0.75rem/1.35 Inter, system-ui, sans-serif;
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.sh-gesture.is-shown { opacity: 1; transform: translate(-50%, 0); }
+@media (prefers-reduced-motion: reduce) {
+  .sh-labels .sh-label, .sh-gesture { transition: none; }
+}
+.scroll-house.is-fallback .sh-explore,
+.scroll-house.is-still .sh-explore,
+.scroll-house.is-fallback .sh-gesture { display: none; }
+/* Short desktop sheets: keep the explore controls compact and out of the middle of the drawing. */
+@media (hover: hover) and (pointer: fine) and (max-height: 860px) {
+  .sh-explore { justify-content: flex-end; }
+  .sh-explore .sh-explore-toggle,
+  .sh-explore .sh-explore-reset,
+  .sh-explore .sh-zoom { min-height: 32px; padding: 0.25rem 0.65rem; font-size: 0.8125rem; }
+  .sh-explore .sh-zoom { min-width: 32px; font-size: 1rem; }
 }

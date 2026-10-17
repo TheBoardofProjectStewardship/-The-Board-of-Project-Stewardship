@@ -569,11 +569,35 @@ function buildModel() {
     ['Bathroom 96 SF',6.4,27.5,true],['Laundry 22 SF',12.3,24.5,true],['Utility',11,33,true],['Pantry',17.2,21.4,true],['Closet',17,4.6,true],
     ['Crawl space',55,22],["32'-0\"",16,-.6,true],['Stair',26,25,true]
   ])planLabel(r[0],r[1],r[2],!!r[3],'main',.25);
+  // v9: fixture names that only appear once the camera is close (tier 2), from the same layout data.
+  const FIX_NAMES={range:'Range',sink:'Sink',sink2:'Sink',fridge:'Fridge',island:'Island',dw:'Dishwasher',tub:'Tub',shower:'Shower',
+    toilet:'Toilet',washer:'Washer',dryer:'Dryer',bed:'Bed',fireplace:'Fireplace',desk:'Desk',sofa:'Sofa',wh:'Water heater',whr:'Water heater',
+    vanity:'Vanity',vanity2:'Vanity',table:'Table',tv:'TV wall',pantry:'Pantry'};
+  for(const it of LV.items){
+    const name=FIX_NAMES[it.kind]; if(!name||it.lvl==='garage') continue;
+    const adu=it.lvl==='adu',r=it.r,dz=adu?LV.aduZ:0;
+    labels.push({text:adu&&it.kind==='island'?'Peninsula':name,position:[(r[0]+r[2])/2,(adu?0:F)+2.6,(r[1]+r[3])/2+dz],minor:true,tier:2,floor:adu?'main':'upper'});
+  }
+  // v9: room boxes for tap-a-room-to-fly-in: the printed room label plus the fixtures traced inside it.
+  const rooms=[];
+  for(const l of labels){
+    if(l.tier||/^\d|Blvd|Dr W|addition|^ADU 865|^Stair$/.test(l.text)) continue;
+    const ln=l.text.toLowerCase().replace(/\s+sf$/,'');
+    let b=[l.position[0]-3,l.position[2]-3,l.position[0]+3,l.position[2]+3];
+    for(const it of LV.items){
+      if(it.lvl==='garage'||(it.lvl==='adu'?'main':'upper')!==l.floor) continue;
+      const rn=it.room.toLowerCase().replace(/^adu /,'');
+      if(rn==='ceiling'||!(ln.startsWith(rn)||rn.startsWith(ln))) continue;
+      const dz=it.lvl==='adu'?LV.aduZ:0;
+      b=[Math.min(b[0],it.r[0]-1),Math.min(b[1],it.r[1]+dz-1),Math.max(b[2],it.r[2]+1),Math.max(b[3],it.r[3]+dz+1)];
+    }
+    rooms.push({text:l.text,floor:l.floor,minor:!!l.minor,center:[(b[0]+b[2])/2,l.floor==='main'?0.25:MF,(b[1]+b[3])/2],box:b});
+  }
   XF=LEG;
   planLabel('Garage 240 SF',64.2,66.5,false,'upper',G.floor+.2);planLabel('Garage',64.2,66.5,true,'main',G.floor+.2);
   planLabel('Magnolia Blvd W',30,-48.5,true,'upper',.1);planLabel('Constance Dr W',30,LOT.z1+3,true,'upper',MAIN);planLabel('Magnolia Blvd W',30,-48.5,true,'main',.1);
   XF=null;
-  return {groups:groups.map(g=>({id:g.id,solid:new Float32Array(g.solid),lines:new Float32Array(g.lines)})),labels,
+  return {groups:groups.map(g=>({id:g.id,solid:new Float32Array(g.solid),lines:new Float32Array(g.lines)})),labels,rooms,
     bounds:{min:[-6,-.5,-56],max:[82,23.2,78]},
     notes:'Teaching sketch from the permit sets. Unprinted dimensions are scaled by eye.'};
 }
@@ -617,6 +641,20 @@ function groupState(id, progress) {
     case 'vault': return state(p > 0.30 && p < 0.52, 100, smooth(0.30, 0.36, p) * (1 - smooth(0.46, 0.52, p)) * 0.9);
     default: return state(true);
   }
+}
+
+/**
+ * v9 zoom dive: zooming in (orbit.zoom below ~0.7) reveals the interior progressively.
+ * On the roofed stages the roof lifts and the walls cut down to the main-level plan cut;
+ * the camera stays where the visitor put it, only the cutaway changes.
+ */
+function diveAmount(orbit) {
+  if (!orbit || !Number.isFinite(orbit.zoom)) return 0;
+  return 1 - smooth(0.36, 0.72, orbit.zoom);
+}
+function interiorProgress(p, dive) {
+  if (dive <= 0 || p >= 0.48) return p;
+  return mix(p, 0.575, dive);
 }
 
 function visibleHeight(p, bounds) {
@@ -665,7 +703,7 @@ function cameraFor(progress, width, height, bounds = DEFAULT_BOUNDS, orbit) {
     if (angle < minAngle) angle = minAngle;
     if (angle > maxAngle) angle = maxAngle;
     zoom = Number.isFinite(orbit.zoom) ? orbit.zoom : 1;
-    const zMin = orbit && Array.isArray(orbit.focus) ? 0.08 : 0.3;
+    const zMin = orbit && Array.isArray(orbit.focus) ? 0.05 : 0.3;
     if (zoom < zMin) zoom = zMin;
     if (zoom > 2.4) zoom = 2.4;
   }
@@ -848,15 +886,17 @@ void main() {
   gl_FragColor = vec4(uPaper * (1.0 - shadow), 1.0);
 }`;
 
-function labelsFor(model, progress, mvp, width, height) {
+function labelsFor(model, progress, mvp, width, height, dive = 0) {
   const upper = progress >= 0.50 && progress <= 0.66;
   const main = progress >= 0.68 && progress <= 0.84;
-  if (!main && !upper) return [];
-  const opacity = upper
+  let opacity = upper
     ? smooth(0.50, 0.54, progress) * (1 - smooth(0.62, 0.66, progress))
-    : smooth(0.68, 0.72, progress) * (1 - smooth(0.80, 0.84, progress));
+    : main ? smooth(0.68, 0.72, progress) * (1 - smooth(0.80, 0.84, progress)) : 0;
+  // v9: on every stage, zooming in brings the room names up, then the fixtures.
+  opacity = Math.max(opacity, smooth(0.2, 0.6, dive));
   if (opacity < 0.015) return [];
-  const floor = main ? 'main' : 'upper';
+  const floor = progress < 0.67 ? 'upper' : 'main';
+  const slab = progress >= 0.84;
   const labels = [];
   // Major rooms take priority when the phone view cannot fit every annotation.
   const narrow = width < 640;
@@ -864,23 +904,29 @@ function labelsFor(model, progress, mvp, width, height) {
   // Declutter: measure feet-to-pixels on screen; minor rooms only show when there is room for them.
   const a = projectPoint(mvp, [0, 0, 0], width, height), b = projectPoint(mvp, [10, 0, 0], width, height);
   const ppf = Math.hypot(b.x - a.x, b.y - a.y) / 10;
-  const roomy = !narrow && ppf >= 9;
-  const candidates = model.labels.filter(label => label.floor === floor && (!label.minor || roomy));
+  const minorAt = narrow ? 12 : 8.5;
+  const fixAt = narrow ? 14 : 15;
+  const tierAlpha = (label) => label.tier === 2 ? (slab ? 0 : smooth(fixAt, fixAt + 5, ppf))
+    : label.minor ? smooth(minorAt, minorAt + 1.5, ppf) : 1;
+  const candidates = model.labels.filter(label => label.floor === floor && tierAlpha(label) > 0.02);
   candidates.sort((a, b) => {
-    const rank = (label) => Number(!!label.minor) + (narrow && /\bft\b/i.test(label.text) ? 1 : 0);
+    const rank = (label) => (label.tier === 2 ? 4 : 0) + Number(!!label.minor) + (narrow && /\bft\b/i.test(label.text) ? 1 : 0);
     return rank(a) - rank(b);
   });
-  const limit = narrow ? 4 : candidates.length;
+  const limit = narrow ? (ppf < 13 ? 4 : 16) : candidates.length;
+  const close = ppf >= 14;
   for (const label of candidates) {
     if (labels.length >= limit) break;
     const projected = projectPoint(mvp, label.position, width, height);
-    const char = fontPx * 0.62;
+    const px = label.tier === 2 ? 11 : fontPx;
+    const char = px * (close && label.tier !== 2 ? 0.74 : 0.62);
     const half = label.text.length * char * 0.5 + 4;
-    const vy = fontPx * 0.8;
+    const vy = px * 0.8;
     const box = { left: projected.x - half - 2, right: projected.x + half + 2, top: projected.y - vy, bottom: projected.y + vy };
     if (box.left < 3 || box.right > width - 3 || box.top < 3 || box.bottom > height - 3) continue;
     if (labels.some(l => box.left < l.box.right && box.right > l.box.left && box.top < l.box.bottom && box.bottom > l.box.top)) continue;
-    labels.push({ text: label.text, x: projected.x, y: projected.y, minor: !!label.minor, opacity, box });
+    labels.push({ text: label.text, x: projected.x, y: projected.y, minor: !!label.minor, tier: label.tier || (label.minor ? 1 : 0),
+      close, world: label.position, opacity: opacity * tierAlpha(label), box });
   }
   return labels.map(({ box, ...label }) => label);
 }
@@ -1039,6 +1085,7 @@ function createRenderer(canvas, options) {
       else if (id === 'structure' && (groupId === 'upper' || groupId === 'upperfloor')) lift = 1;
       return { role, lift };
     }
+    const dive = diveAmount(orbit);
     const states = groupView
       ? meshes.map(mesh => {
           const g = groupView[mesh.id] || { visible: false, cut: 0, opacity: 0 };
@@ -1048,14 +1095,20 @@ function createRenderer(canvas, options) {
             opacity: Number.isFinite(g.opacity) ? g.opacity : 1,
           };
         })
-      : meshes.map(mesh => groupState(mesh.id, p));
+      : meshes.map(mesh => groupState(mesh.id, interiorProgress(p, dive)));
     // Fine interior detail (handles, joints, faucets, trim) only when zoomed in enough to read:
     // measured as screen pixels per foot, so phones and small windows skip it until zoomed.
     const zt = camera.target, zr = camera.right;
     const za = projectPoint(mvp, zt, cssW, cssH), zb = projectPoint(mvp, [zt[0] + zr[0] * 10, zt[1] + zr[1] * 10, zt[2] + zr[2] * 10], cssW, cssH);
     const pxPerFoot = Math.hypot(zb.x - za.x, zb.y - za.y) / 10;
     stats.pxPerFoot = pxPerFoot;
-    for (let i = 0; i < meshes.length; i++) if (/Fine$/.test(meshes[i].id) && pxPerFoot < 11) states[i] = { visible: false, cut: 0, opacity: 0 };
+    // v9: fade fine detail in as the camera closes in, instead of popping it on.
+    const fineIn = smooth(9, 13, pxPerFoot);
+    for (let i = 0; i < meshes.length; i++) {
+      if (!/Fine$/.test(meshes[i].id)) continue;
+      if (fineIn < 0.02) states[i] = { visible: false, cut: 0, opacity: 0 };
+      else states[i] = { visible: states[i].visible, cut: states[i].cut, opacity: states[i].opacity * fineIn };
+    }
 
     use(shadowProgram);
     gl.bindBuffer(gl.ARRAY_BUFFER, shadow.buffer);
@@ -1115,20 +1168,22 @@ function createRenderer(canvas, options) {
     }
     gl.depthMask(true);
     gl.disable(gl.BLEND);
-    return { labels: labelsFor(model, p, mvp, cssW, cssH), stageIndex: stageAt(p) };
+    return { labels: labelsFor(model, p, mvp, cssW, cssH, dive), stageIndex: stageAt(p), camera, pxPerFoot, dive };
   }
 
-  return { render, dispose, stats };
+  return { render, dispose, stats, model };
 }
 
   var STAGES = [
-    { id: "house", end: 0.16, line: "The finished house, the ADU below it, and the garage. Tap it, then drag to turn it." },
-    { id: "front", end: 0.32, line: "The deck side: tall glass on the main level, the deck and stair, and the daylight basement below." },
-    { id: "roof", end: 0.48, line: "The roof lifts off. One low-slope standing seam metal roof, and the garage's own metal roof." },
-    { id: "upper", end: 0.66, line: "The main level: living, dining, kitchen, office, and three bedrooms." },
-    { id: "plan", end: 0.84, line: "The basement, cut flat: the new 865 SF ADU beside the existing basement." },
-    { id: "foundation", end: 2, line: "The foundation, the slabs the house and the garage stand on." }
+    { id: "house", end: 0.16, noun: "house", line: "The finished house, the ADU below it, and the garage. Tap a room to fly in, or drag to turn it." },
+    { id: "front", end: 0.32, noun: "deck side", line: "The deck side: tall glass on the main level, the deck and stair, and the daylight basement below." },
+    { id: "roof", end: 0.48, noun: "roof", line: "The roof lifts off. One low-slope standing seam metal roof, and the garage's own metal roof." },
+    { id: "upper", end: 0.66, noun: "main level", line: "The main level: living, dining, kitchen, office, and three bedrooms." },
+    { id: "plan", end: 0.84, noun: "ADU", line: "The basement, cut flat: the new 865 SF ADU beside the existing basement." },
+    { id: "foundation", end: 2, noun: "slab", line: "The foundation, the slabs the house and the garage stand on." }
   ];
+  // Camera angle a fly-in settles at, per stage: a three-quarter look down into the rooms.
+  var FLY_ANGLE = { house: 0.70, front: 0.70, roof: 0.66, upper: 0.56, plan: 0.48, foundation: 0.52 };
 
   function mount() {
     var root = document.getElementById("scroll-house");
@@ -1153,8 +1208,9 @@ function createRenderer(canvas, options) {
     var zoomIn = root.querySelector("[data-zoom='in']");
     var zoomOut = root.querySelector("[data-zoom='out']");
     var reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    var coarse = window.matchMedia("(hover: none), (pointer: coarse)");
     var removers = [];
-    var labelNodes = [];
+    var labelNodes = new Map();
     var pointers = new Map();
     var engine = null;
     var focusId = "";
@@ -1167,17 +1223,20 @@ function createRenderer(canvas, options) {
     var lost = false;
     var disposed = false;
     var explore = false;
-    var exploreDismissed = false;
-    var exploreDismissedAt = "";
-    var yaw = 0;
-    var pitch = 0;
-    var zoom = 1;
     var dragging = false;
-    var pinchStart = 0;
-    var zoomAtPinch = 1;
+    var sheetW = 1, sheetH = 1, sheetLeft = 0, sheetTop = 0;
     var lastInteract = (typeof performance !== "undefined" ? performance.now() : 0);
-    var ZOOM_MIN = 0.3;
-    var ZOOM_MAX = 2.4;
+    // View state: `view` is what is drawn, `goal` is where the camera is heading.
+    // Every input edits `goal`; each frame `view` eases toward it, so all moves are smooth.
+    var view = { yaw: 0, pitch: 0, zoom: 1, focus: null };
+    var goal = { yaw: 0, pitch: 0, zoom: 1, focus: null };
+    var releaseFocus = false;
+    var tau = 90;
+    var ZOOM_MAX = 1.25;
+    var gesture = null;
+    var hintEl = null;
+    var hintTimer = 0;
+    var touchMode = "";
 
     function on(target, type, handler, options) {
       target.addEventListener(type, handler, options);
@@ -1303,116 +1362,303 @@ function createRenderer(canvas, options) {
       if (!focusBelongs(stageId)) applyFocus("");
     }
 
+    function now() { return typeof performance !== "undefined" ? performance.now() : Date.now(); }
+    function markInteract() { lastInteract = now(); }
+    function stageId() { return current || stageByProgress(rendered).id; }
+    function stageInfo() { return stageByProgress(rendered); }
+    function floorKey() { return rendered < 0.67 ? "upper" : "main"; }
+    function floorY() { return floorKey() === "main" ? 0.25 : 8.15; }
+
+    function isDefault(s) {
+      return Math.abs(s.yaw) < 1e-4 && Math.abs(s.pitch) < 1e-4 && Math.abs(s.zoom - 1) < 1e-4 && !s.focus;
+    }
+    function orbitFrom(s) { return { yaw: s.yaw, pitch: s.pitch, zoom: s.zoom, focus: s.focus }; }
     function orbitArgs() {
-      if (!explore) return null;
-      return { yaw: yaw, pitch: pitch, zoom: zoom };
+      if (!explore && isDefault(view) && isDefault(goal)) return null;
+      return orbitFrom(view);
+    }
+    function camFor(s) { return cameraFor(rendered, sheetW, sheetH, DEFAULT_BOUNDS, orbitFrom(s)); }
+    // Slide a point along the view direction onto a floor plane: the picture does not change,
+    // but turning the model then pivots on the floor point under the pointer.
+    function toFloor(pt, cam, y) {
+      var by = cam.back[1] > 0.05 ? cam.back[1] : 0.05;
+      var t = (pt[1] - y) / by;
+      return [pt[0] - cam.back[0] * t, pt[1] - cam.back[1] * t, pt[2] - cam.back[2] * t];
+    }
+    function clampFocus(f) {
+      return [Math.min(95, Math.max(-20, f[0])), f[1], Math.min(85, Math.max(-60, f[2]))];
+    }
+    function zoomMin() {
+      var c = cameraFor(rendered, sheetW, sheetH, DEFAULT_BOUNDS, { yaw: goal.yaw, pitch: goal.pitch, zoom: 1, focus: goal.focus || [0, 0, 0] });
+      // Closest view still shows about ten feet across the narrow side of the drawing.
+      return Math.max(0.05, 5 / Math.max(1, Math.min(c.halfHeight, c.halfWidth)));
+    }
+    function defaultFocus() {
+      var c = camFor({ yaw: goal.yaw, pitch: goal.pitch, zoom: 1, focus: null });
+      return toFloor(c.target, c, floorY());
+    }
+    function ensureFocus() {
+      if (!goal.focus) {
+        var c = camFor(goal);
+        goal.focus = toFloor(c.target, c, floorY());
+      }
+      if (!view.focus) {
+        var v = camFor(view);
+        view.focus = toFloor(v.target, v, floorY());
+      }
+    }
+    function clampPitch(s) {
+      var angle = scrollPose(rendered).angle + s.pitch;
+      var minAngle = 0.02, maxAngle = 78 * Math.PI / 180;
+      if (angle < minAngle) s.pitch += minAngle - angle;
+      else if (angle > maxAngle) s.pitch -= angle - maxAngle;
+    }
+    function ndc(clientX, clientY) {
+      if (!Number.isFinite(clientX)) return { x: 0, y: 0 };
+      return { x: (clientX - sheetLeft) / sheetW * 2 - 1, y: 1 - (clientY - sheetTop) / sheetH * 2 };
+    }
+    function screenToFloor(clientX, clientY, s, y) {
+      var c = camFor(s), o = ndc(clientX, clientY), i, pt = [];
+      for (i = 0; i < 3; i++) pt[i] = c.target[i] + c.right[i] * o.x * c.halfWidth + c.up[i] * o.y * c.halfHeight;
+      return toFloor(pt, c, y);
+    }
+    function wake(speed) {
+      if (speed) tau = speed;
+      markInteract();
+      dirty = true;
+      updateTouch();
+      kick();
     }
 
-    function clampOrbit(p) {
-      var pose = scrollPose(p);
-      var angle = pose.angle + pitch;
-      var minAngle = 0.02;
-      var maxAngle = 78 * Math.PI / 180;
-      if (angle < minAngle) pitch += minAngle - angle;
-      else if (angle > maxAngle) pitch -= angle - maxAngle;
-      if (zoom < ZOOM_MIN) zoom = ZOOM_MIN;
-      if (zoom > ZOOM_MAX) zoom = ZOOM_MAX;
+    /** Zoom toward a screen point: the spot under the cursor or fingers stays put. */
+    function zoomAt(clientX, clientY, factor, speed) {
+      ensureFocus();
+      releaseFocus = false;
+      var c = camFor(goal);
+      var nz = Math.min(ZOOM_MAX, Math.max(zoomMin(), goal.zoom * factor));
+      if (factor > 1 && nz >= 0.985 && goal.zoom < 0.985) { resetView(false, true); return; }
+      var f = nz / goal.zoom, o = ndc(clientX, clientY), i, nt = [];
+      var ox = o.x * c.halfWidth, oy = o.y * c.halfHeight;
+      for (i = 0; i < 3; i++) nt[i] = c.target[i] + (c.right[i] * ox + c.up[i] * oy) * (1 - f);
+      goal.focus = clampFocus(toFloor(nt, c, floorY()));
+      goal.zoom = nz;
+      wake(speed || 90);
+    }
+    function panBy(dx, dy) {
+      ensureFocus();
+      releaseFocus = false;
+      var c = camFor(goal), sx = 2 * c.halfWidth / sheetW, sy = 2 * c.halfHeight / sheetH, i, nt = [];
+      for (i = 0; i < 3; i++) nt[i] = c.target[i] - c.right[i] * dx * sx + c.up[i] * dy * sy;
+      goal.focus = clampFocus(toFloor(nt, c, floorY()));
+      wake(60);
+    }
+    function orbitBy(dx, dy) {
+      goal.yaw -= dx * 0.0075;
+      goal.pitch -= dy * 0.0045;
+      clampPitch(goal);
+      wake(60);
+    }
+    /** Smooth fly-in: the camera dives to a point, settling into a three-quarter look. */
+    function flyTo(point, zoomTarget, angle) {
+      ensureFocus();
+      releaseFocus = false;
+      goal.focus = clampFocus(point);
+      goal.zoom = Math.min(ZOOM_MAX, Math.max(zoomMin(), zoomTarget));
+      if (Number.isFinite(angle)) {
+        goal.pitch = angle - scrollPose(rendered).angle;
+        clampPitch(goal);
+      }
+      wake(190);
+    }
+    function roomFit(room) {
+      var c1 = cameraFor(rendered, sheetW, sheetH, DEFAULT_BOUNDS, { yaw: goal.yaw, pitch: goal.pitch, zoom: 1, focus: room.center });
+      var bw = room.box[2] - room.box[0], bd = room.box[3] - room.box[1];
+      var need = Math.hypot(bw, bd) * 0.5 / Math.min(1, sheetW / sheetH) * 0.86;
+      return Math.min(0.34, need / c1.halfHeight);
+    }
+    function flyToRoom(room) {
+      var z = roomFit(room);
+      // Already this close: keep diving instead of pulling back out to frame the room.
+      if (goal.zoom <= z * 1.05) z = goal.zoom * 0.6;
+      flyTo(room.center, z, FLY_ANGLE[stageId()]);
+      announce("Flying into " + room.text.replace(/ SF$/, " square feet"));
+    }
+    function resetView(instant, keepAngle) {
+      releaseFocus = true;
+      goal.zoom = 1;
+      if (!keepAngle) { goal.yaw = 0; goal.pitch = 0; }
+      goal.focus = (goal.focus || view.focus) ? defaultFocus() : null;
+      if (!goal.focus) releaseFocus = false;
+      if (instant) {
+        view.yaw = goal.yaw; view.pitch = goal.pitch; view.zoom = 1;
+        view.focus = goal.focus = null; releaseFocus = false;
+      }
+      wake(170);
+    }
+    function nudgeZoom(factor) { zoomAt(null, null, factor, 140); }
+
+    function roomAt(clientX, clientY) {
+      var model = engine && engine.model;
+      if (!model || !model.rooms) return null;
+      var key = floorKey();
+      var pt = screenToFloor(clientX, clientY, view, key === "main" ? 0 : 8);
+      var best = null, bestArea = Infinity, near = null, nearD = 9, i, r;
+      for (i = 0; i < model.rooms.length; i++) {
+        r = model.rooms[i];
+        if (r.floor !== key) continue;
+        if (pt[0] >= r.box[0] && pt[0] <= r.box[2] && pt[2] >= r.box[1] && pt[2] <= r.box[3]) {
+          var area = (r.box[2] - r.box[0]) * (r.box[3] - r.box[1]);
+          if (area < bestArea) { bestArea = area; best = r; }
+        }
+        var d = Math.hypot(pt[0] - r.center[0], pt[2] - r.center[2]);
+        if (d < nearD) { nearD = d; near = r; }
+      }
+      return best || near;
+    }
+    function roomNamed(text) {
+      var model = engine && engine.model, i;
+      if (!model || !model.rooms) return null;
+      for (i = 0; i < model.rooms.length; i++) if (model.rooms[i].text === text && model.rooms[i].floor === floorKey()) return model.rooms[i];
+      return null;
+    }
+    function tapAt(clientX, clientY) {
+      var room = roomAt(clientX, clientY);
+      // Tap a room to fly into it; once inside, a tap dives further toward the tapped spot.
+      if (room && goal.zoom > roomFit(room) * 1.05) flyToRoom(room);
+      else zoomAt(clientX, clientY, 0.5, 190);
     }
 
-    function markInteract() {
-      lastInteract = typeof performance !== "undefined" ? performance.now() : 0;
+    var live = document.createElement("p");
+    live.className = "sh-explore-help";
+    live.setAttribute("aria-live", "polite");
+    sheet.appendChild(live);
+    function announce(text) { live.textContent = text; }
+
+    function showHint() {
+      if (!hintEl) {
+        hintEl = document.createElement("p");
+        hintEl.className = "sh-gesture";
+        hintEl.setAttribute("aria-hidden", "true");
+        sheet.appendChild(hintEl);
+      }
+      hintEl.textContent = coarse.matches
+        ? "Drag to turn \u00b7 Pinch to zoom \u00b7 Two fingers pan \u00b7 Tap a room to fly in"
+        : "Drag to turn \u00b7 Scroll to zoom \u00b7 Right-drag to pan \u00b7 Click a room to fly in \u00b7 Esc to finish";
+      hintEl.classList.add("is-shown");
+      if (hintTimer) clearTimeout(hintTimer);
+      hintTimer = setTimeout(function () { if (hintEl) hintEl.classList.remove("is-shown"); }, 3400);
+    }
+
+    function updateTouch() {
+      // Outside explore, and in explore at the scroll camera, a vertical swipe still scrolls the page
+      // (sideways drags turn the model, pinches zoom). Once zoomed in, the drawing takes every gesture.
+      var mode = !explore ? "pan-y pinch-zoom" : (isDefault(goal) || goal.zoom >= 0.985 ? "pan-y" : "none");
+      if (mode !== touchMode) {
+        touchMode = mode;
+        canvas.style.touchAction = mode;
+        root.classList.toggle("is-captured", mode === "none");
+      }
+    }
+
+    function toggleText() {
+      if (!exploreToggle) return;
+      exploreToggle.textContent = explore ? "Done exploring" : "Explore the " + stageInfo().noun;
     }
 
     function setExplore(on) {
-      var stageId = current || stageByProgress(rendered).id;
-      if (on && stageId !== "house") return;
-      explore = !!on;
-      if (!explore) dragging = false;
+      on = !!on;
+      if (on === explore) return;
+      explore = on;
       root.classList.toggle("is-explore", explore);
-      if (exploreToggle) {
-        exploreToggle.setAttribute("aria-pressed", explore ? "true" : "false");
-        exploreToggle.classList.toggle("is-on", explore);
-      }
+      toggleText();
       if (exploreReset) exploreReset.hidden = !explore;
       if (zoomIn) zoomIn.hidden = !explore;
       if (zoomOut) zoomOut.hidden = !explore;
-      if (canvas) {
-        canvas.setAttribute("aria-pressed", explore ? "true" : "false");
-        canvas.style.touchAction = explore ? "none" : "pan-y pinch-zoom";
+      if (labelsEl) labelsEl.setAttribute("aria-hidden", explore ? "false" : "true");
+      if (!explore) {
+        dragging = false;
+        gesture = null;
+        pointers.clear();
+        root.classList.remove("is-dragging");
+        if (hintEl) hintEl.classList.remove("is-shown");
+        resetView(false);
+      } else {
+        showHint();
       }
-      dirty = true;
-      kick();
+      announce(explore ? "Exploring the " + stageInfo().noun + "." : "");
+      wake();
     }
 
-    function updateExploreChrome(stageId) {
-      var allowed = stageId === "house";
-      if (exploreBar) exploreBar.hidden = !allowed;
-      if (!allowed) {
-        if (explore) setExplore(false);
-        return;
+    function updateExploreChrome(stageChanged) {
+      if (exploreBar) exploreBar.hidden = false;
+      if (stageChanged) {
+        toggleText();
+        if (!isDefault(goal)) resetView(false);
       }
     }
 
-    function resetOrbit() {
-      yaw = 0;
-      pitch = 0;
-      zoom = 1;
-      markInteract();
-      dirty = true;
-      kick();
+    function stepView(dt) {
+      var k = 1 - Math.exp(-dt / tau);
+      var moving = false, d, i;
+      d = goal.yaw - view.yaw;
+      if (Math.abs(d) > 1e-4) { view.yaw += d * k; moving = true; } else view.yaw = goal.yaw;
+      d = goal.pitch - view.pitch;
+      if (Math.abs(d) > 1e-4) { view.pitch += d * k; moving = true; } else view.pitch = goal.pitch;
+      d = Math.log(goal.zoom) - Math.log(view.zoom);
+      if (Math.abs(d) > 1e-4) { view.zoom = Math.exp(Math.log(view.zoom) + d * k); moving = true; } else view.zoom = goal.zoom;
+      if (goal.focus) {
+        if (!view.focus) view.focus = goal.focus.slice();
+        var far = 0;
+        for (i = 0; i < 3; i++) { d = goal.focus[i] - view.focus[i]; far = Math.max(far, Math.abs(d)); view.focus[i] += d * k; }
+        if (far > 0.002) moving = true; else view.focus = goal.focus.slice();
+      } else view.focus = null;
+      if (!moving && releaseFocus) {
+        view.focus = goal.focus = null;
+        releaseFocus = false;
+        updateTouch();
+        return true;
+      }
+      return moving;
     }
 
-    function nudgeYaw(delta) {
-      yaw += delta;
-      markInteract();
-      dirty = true;
-      kick();
-    }
-
-    function nudgePitch(delta) {
-      pitch += delta;
-      clampOrbit(rendered);
-      markInteract();
-      dirty = true;
-      kick();
-    }
-
-    function nudgeZoom(factor) {
-      zoom = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, zoom * factor));
-      markInteract();
-      dirty = true;
-      kick();
-    }
-
-    function pointerDistance() {
-      var pts = [];
-      pointers.forEach(function (pt) { pts.push(pt); });
-      if (pts.length < 2) return 0;
-      var dx = pts[0].x - pts[1].x;
-      var dy = pts[0].y - pts[1].y;
-      return Math.hypot(dx, dy);
-    }
-
-    function renderLabels(labels, width, height) {
+    function renderLabels(labels) {
       var accepted = labels || [];
-      var i, node, item;
+      var seen = new Set(), i, item, key, node;
+      var interactive = explore;
       for (i = 0; i < accepted.length; i++) {
         item = accepted[i];
-        node = labelNodes[i];
+        key = item.text + "@" + item.world[0].toFixed(1) + "," + item.world[2].toFixed(1);
+        seen.add(key);
+        node = labelNodes.get(key);
         if (!node) {
-          node = document.createElement("span");
+          node = document.createElement("button");
+          node.type = "button";
           node.className = "sh-label";
+          node.textContent = item.text;
+          node.setAttribute("data-key", key);
+          node.setAttribute("data-text", item.text);
+          node.setAttribute("data-tier", String(item.tier));
+          node.setAttribute("data-x", String(item.world[0]));
+          node.setAttribute("data-y", String(item.world[1]));
+          node.setAttribute("data-z", String(item.world[2]));
+          node.setAttribute("aria-label", (item.tier === 2 ? "Zoom to " : "Fly into ") + item.text.replace(/ SF$/, " square feet"));
+          node.classList.toggle("is-fix", item.tier === 2);
+          node.classList.toggle("is-dim", item.tier === 1 || /\bft\b/i.test(item.text));
           labelsEl.appendChild(node);
-          labelNodes.push(node);
+          labelNodes.set(key, node);
         }
         node.hidden = false;
-        node.classList.toggle("is-dim", !!item.minor || /\bft\b/i.test(item.text));
-        if (node.textContent !== item.text) node.textContent = item.text;
-        node.style.left = item.x.toFixed(1) + "px";
-        node.style.top = item.y.toFixed(1) + "px";
-        node.style.opacity = String(item.opacity);
+        node.tabIndex = interactive ? 0 : -1;
+        node.classList.toggle("is-close", !!item.close && item.tier !== 2);
+        node.style.transform = "translate(" + item.x.toFixed(1) + "px," + item.y.toFixed(1) + "px) translate(-50%,-50%)";
+        node.style.opacity = String(Math.round(item.opacity * 100) / 100);
       }
-      for (i = accepted.length; i < labelNodes.length; i++) labelNodes[i].hidden = true;
+      labelNodes.forEach(function (n, k) {
+        if (seen.has(k)) return;
+        if (n === document.activeElement) { n.style.opacity = "0"; return; }
+        n.hidden = true;
+      });
+      root.classList.toggle("has-labels", accepted.length > 0);
       root.classList.toggle("is-plan", rendered >= 0.68 && rendered <= 0.84 && accepted.length > 0);
       root.classList.toggle("is-upper-labels", rendered >= 0.50 && rendered < 0.67 && accepted.length > 0);
     }
@@ -1420,9 +1666,12 @@ function createRenderer(canvas, options) {
     function paint(p) {
       if (!engine || lost) return;
       var rect = sheet.getBoundingClientRect();
-      var result = engine.render(p, focusId, Math.max(1, rect.width), Math.max(1, rect.height), orbitArgs());
+      sheetW = Math.max(1, rect.width); sheetH = Math.max(1, rect.height);
+      sheetLeft = rect.left; sheetTop = rect.top;
+      var result = engine.render(p, focusId, sheetW, sheetH, orbitArgs());
       if (!result) { fail(); return; }
       renderLabels(result.labels);
+      root.classList.toggle("is-dive", result.dive > 0.05);
       var narrowLabels = rect.width < 640;
       var roomNodes = root.querySelectorAll(".sh-rooms");
       for (var r = 0; r < roomNodes.length; r++) {
@@ -1441,7 +1690,8 @@ function createRenderer(canvas, options) {
       root.classList.add("is-drawn");
       if (!fitted) { fitted = true; syncFlow(); }
       var stage = stageByProgress(p);
-      if (stage.id !== current) {
+      var changed = stage.id !== current;
+      if (changed) {
         current = stage.id;
         if (lineEl) lineEl.textContent = stage.line;
         var n;
@@ -1454,7 +1704,7 @@ function createRenderer(canvas, options) {
         }
         showStageSet(stage.id);
       }
-      updateExploreChrome(stage.id);
+      updateExploreChrome(changed);
     }
 
     function kick() {
@@ -1462,25 +1712,29 @@ function createRenderer(canvas, options) {
       raf = window.requestAnimationFrame(draw);
     }
 
-    function draw(now) {
+    function draw(t) {
       raf = 0;
       if (disposed || lost || !running || !engine || document.hidden) return;
       var target = scrollProgress();
-      var dt = lastTime ? Math.min(64, Math.max(1, now - lastTime)) : 16;
-      lastTime = now;
+      var dt = lastTime ? Math.min(64, Math.max(1, t - lastTime)) : 16;
+      lastTime = t;
       var diff = target - rendered;
       if (Math.abs(diff) < 0.0004) rendered = target;
       else rendered += diff * (1 - Math.exp(-dt / 70));
       var moving = Math.abs(target - rendered) >= 0.0004;
-      var stageNow = stageByProgress(Math.abs(target - rendered) < 0.0004 ? target : rendered);
-      var idleFor = (typeof performance !== "undefined" ? performance.now() : 0) - lastInteract;
-      var spinning = explore && !reduced.matches && !dragging && pointers.size === 0 &&
-        stageNow.id === "house" && rendered < 0.14 && idleFor > 1600 && !moving;
-      if (spinning) {
-        yaw += (dt / 1000) * 0.22;
+      var stageNow = stageByProgress(moving ? rendered : target);
+      var idleFor = now() - lastInteract;
+      var spinning = false;
+      // Gentle turntable only on the opening view, only while untouched and not zoomed.
+      if (explore && !reduced.matches && !dragging && pointers.size === 0 && stageNow.id === "house" &&
+          rendered < 0.14 && idleFor > 2200 && !moving && goal.zoom >= 0.985 && !goal.focus && !releaseFocus) {
+        spinning = true;
+        goal.yaw += (dt / 1000) * 0.22;
+        view.yaw = goal.yaw;
         dirty = true;
       }
-      if (moving || dirty) {
+      var animating = stepView(dt);
+      if (moving || dirty || animating) {
         try {
           paint(rendered);
           dirty = false;
@@ -1489,7 +1743,8 @@ function createRenderer(canvas, options) {
           return;
         }
       }
-      if (moving || spinning) raf = window.requestAnimationFrame(draw);
+      if (!animating) tau = 90;
+      if (moving || spinning || animating) raf = window.requestAnimationFrame(draw);
       else lastTime = 0;
     }
 
@@ -1570,136 +1825,148 @@ function createRenderer(canvas, options) {
       on(range, "input", function () { scrollToProgress(Number(range.value) / 1000); });
     }
     if (exploreToggle) {
-      on(exploreToggle, "click", function () {
-        var next = !explore;
-        exploreDismissed = !next;
-        exploreDismissedAt = next ? "" : (current || stageByProgress(rendered).id);
-        markInteract();
-        setExplore(next);
-      });
+      on(exploreToggle, "click", function () { setExplore(!explore); });
     }
     if (exploreReset) {
-      on(exploreReset, "click", function () {
-        resetOrbit();
-      });
+      on(exploreReset, "click", function () { resetView(false); announce("View reset."); });
     }
-    if (zoomIn) on(zoomIn, "click", function () { nudgeZoom(1 / 1.12); });
-    if (zoomOut) on(zoomOut, "click", function () { nudgeZoom(1.12); });
+    if (zoomIn) on(zoomIn, "click", function () { nudgeZoom(1 / 1.6); });
+    if (zoomOut) on(zoomOut, "click", function () { nudgeZoom(1.6); });
+    on(root, "keydown", function (event) {
+      if (event.key === "Escape" && explore) { event.preventDefault(); setExplore(false); if (canvas) canvas.focus({ preventScroll: true }); }
+    });
     on(canvas, "keydown", function (event) {
-      if (stageByProgress(rendered).id !== "house") return;
-      var handled = true;
-      if (event.key === "ArrowLeft") nudgeYaw(0.14);
-      else if (event.key === "ArrowRight") nudgeYaw(-0.14);
-      else if (event.key === "ArrowUp") nudgePitch(-0.08);
-      else if (event.key === "ArrowDown") nudgePitch(0.08);
-      else if (event.key === "+" || event.key === "=") nudgeZoom(1 / 1.12);
-      else if (event.key === "-" || event.key === "_") nudgeZoom(1.12);
+      var handled = true, step = event.shiftKey;
+      if (event.key === "ArrowLeft") step ? panBy(40, 0) : orbitBy(-18, 0);
+      else if (event.key === "ArrowRight") step ? panBy(-40, 0) : orbitBy(18, 0);
+      else if (event.key === "ArrowUp") step ? panBy(0, 40) : orbitBy(0, 18);
+      else if (event.key === "ArrowDown") step ? panBy(0, -40) : orbitBy(0, -18);
+      else if (event.key === "+" || event.key === "=") nudgeZoom(1 / 1.6);
+      else if (event.key === "-" || event.key === "_") nudgeZoom(1.6);
+      else if (event.key === "0" || event.key === "Home") resetView(false);
+      else if ((event.key === "Enter" || event.key === " ") && !explore) { /* turns explore on below */ }
       else handled = false;
       if (!handled) return;
       event.preventDefault();
-      if (!explore) {
-        exploreDismissed = false;
-        setExplore(true);
-      }
+      if (!explore) setExplore(true);
     });
-    on(canvas, "click", function () {
+    on(canvas, "click", function (event) {
       if (explore) return;
-      if ((current || stageByProgress(rendered).id) !== "house") return;
-      exploreDismissed = false;
-      exploreDismissedAt = "";
       setExplore(true);
+      if (event.detail > 0) tapAt(event.clientX, event.clientY);
     });
+    on(sheet, "contextmenu", function (event) { if (explore && !onChrome(event)) event.preventDefault(); });
+    if (labelsEl) {
+      on(labelsEl, "click", function (event) {
+        var node = event.target && event.target.closest ? event.target.closest(".sh-label") : null;
+        if (!node) return;
+        if (!explore) setExplore(true);
+        var text = node.getAttribute("data-text");
+        var world = [parseFloat(node.getAttribute("data-x")), parseFloat(node.getAttribute("data-y")), parseFloat(node.getAttribute("data-z"))];
+        var room = node.getAttribute("data-tier") === "2" ? null : roomNamed(text);
+        if (room) flyToRoom(room);
+        else { flyTo(world, Math.min(goal.zoom * 0.5, 0.14), FLY_ANGLE[stageId()]); announce("Zooming to " + text); }
+      });
+    }
     on(sheet, "wheel", function (event) {
-      if (!explore || (!event.ctrlKey && !event.metaKey)) return;
       if (exploreBar && exploreBar.contains(event.target)) return;
-      event.preventDefault();
-      nudgeZoom(Math.exp(event.deltaY * 0.0011));
-    }, { passive: false });
-    var orbitPointer = null;
-    function rememberPointer(event) {
-      pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
-    }
-    function beginOrbit(event) {
-      orbitPointer = event.pointerId;
-      rememberPointer(event);
-      if (canvas.setPointerCapture) {
-        try { canvas.setPointerCapture(event.pointerId); } catch (e) { /* already released */ }
+      if (!explore) {
+        if (!event.ctrlKey) return; // plain wheel keeps scrolling the page
+        setExplore(true); // trackpad pinch over the drawing
       }
-      dragging = true;
-      root.classList.add("is-dragging");
-      markInteract();
+      var dy = event.deltaY * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? 400 : 1);
+      // Fully zoomed out at the scroll camera: let the wheel scroll the page again.
+      if (dy > 0 && !event.ctrlKey && goal.zoom >= 0.985) return;
+      event.preventDefault();
+      dy = Math.max(-160, Math.min(160, dy));
+      zoomAt(event.clientX, event.clientY, Math.exp(dy * (event.ctrlKey ? 0.012 : 0.0024)), 80);
+    }, { passive: false });
+
+    function midpoint() {
+      var xs = 0, ys = 0, n = 0;
+      pointers.forEach(function (pt) { xs += pt.x; ys += pt.y; n++; });
+      return { x: xs / Math.max(1, n), y: ys / Math.max(1, n) };
     }
-    on(canvas, "pointerdown", function (event) {
-      if (!explore) return;
-      if (event.pointerType === "mouse" && event.button !== 0) return;
-      if (exploreBar && exploreBar.contains(event.target)) return;
-      var origin = { id: event.pointerId, x: event.clientX, y: event.clientY, type: event.pointerType };
-      pointers.set(event.pointerId, origin);
+    function spread() {
+      var pts = [];
+      pointers.forEach(function (pt) { pts.push(pt); });
+      return pts.length < 2 ? 0 : Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+    }
+    function capture(id) {
+      try { sheet.setPointerCapture(id); } catch (e) { /* already released */ }
+    }
+    function onChrome(event) {
+      var t = event.target;
+      return !!(t && t.closest && (t.closest(".sh-explore") || t.closest(".sh-gesture")));
+    }
+    // Gestures are read on the whole sheet, so a drag or pinch that starts on a room label still works.
+    on(sheet, "pointerdown", function (event) {
+      if (!explore || onChrome(event)) return;
+      if (event.pointerType === "mouse" && event.button > 2) return;
+      pointers.set(event.pointerId, { x: event.clientX, y: event.clientY, label: !!(event.target && event.target.closest && event.target.closest(".sh-label")) });
+      // Capture right away, except on a label: capturing there would retarget its click to the sheet.
+      if (!pointers.get(event.pointerId).label) capture(event.pointerId);
       if (pointers.size >= 2) {
-        pinchStart = pointerDistance();
-        zoomAtPinch = zoom;
+        gesture = { kind: "pinch", dist: spread(), mid: midpoint(), moved: true };
+      } else {
+        var pan = event.pointerType === "mouse" && (event.button === 1 || event.button === 2 || event.shiftKey);
+        gesture = { kind: pan ? "pan" : "orbit", sx: event.clientX, sy: event.clientY, t: now(), moved: false };
+      }
+      if (event.pointerType === "mouse") event.preventDefault();
+      markInteract();
+    });
+    on(sheet, "pointermove", function (event) {
+      var tracked = pointers.get(event.pointerId);
+      if (!tracked || !explore || !gesture) return;
+      var prev = { x: tracked.x, y: tracked.y };
+      tracked.x = event.clientX; tracked.y = event.clientY;
+      if (gesture.kind === "pinch") {
+        if (pointers.size < 2) return;
+        if (tracked.label) { tracked.label = false; capture(event.pointerId); }
+        var dist = spread(), mid = midpoint();
+        if (gesture.dist > 0 && dist > 0) zoomAt(mid.x, mid.y, gesture.dist / dist, 50);
+        panBy(mid.x - gesture.mid.x, mid.y - gesture.mid.y);
+        gesture.dist = dist; gesture.mid = mid;
+        return;
+      }
+      if (!gesture.moved && Math.hypot(event.clientX - gesture.sx, event.clientY - gesture.sy) < 6) return;
+      if (!gesture.moved) {
+        gesture.moved = true;
+        if (tracked.label) capture(event.pointerId);
         dragging = true;
         root.classList.add("is-dragging");
-        markInteract();
-        return;
       }
-      if (orbitPointer !== null) return;
-      if (event.pointerType === "mouse" || event.pointerType === "pen") beginOrbit(event);
-    });
-    on(canvas, "pointermove", function (event) {
-      var tracked = pointers.get(event.pointerId);
-      if (!tracked) return;
-      if (explore && pointers.size >= 2) {
-        pointers.set(event.pointerId, { x: event.clientX, y: event.clientY, type: tracked.type });
-        var dist = pointerDistance();
-        if (pinchStart > 0 && dist > 0) {
-          zoom = zoomAtPinch * (dist / pinchStart);
-          if (zoom < ZOOM_MIN) zoom = ZOOM_MIN;
-          if (zoom > ZOOM_MAX) zoom = ZOOM_MAX;
-          markInteract();
-          dirty = true;
-          kick();
-        }
-        return;
-      }
-      if (orbitPointer === null) {
-        var dx = event.clientX - tracked.x;
-        var dy = event.clientY - tracked.y;
-        var adx = Math.abs(dx);
-        var ady = Math.abs(dy);
-        if (adx < 10 && ady < 10) return;
-        if (explore || adx > ady) {
-          beginOrbit(event);
-          tracked = pointers.get(event.pointerId);
-        } else {
-          pointers.delete(event.pointerId);
-          return;
-        }
-      }
-      if (orbitPointer !== event.pointerId || !tracked) return;
-      var prev = { x: tracked.x, y: tracked.y };
-      rememberPointer(event);
-      nudgeYaw(-(event.clientX - prev.x) * 0.0075);
-      pitch -= (event.clientY - prev.y) * 0.0045;
-      clampOrbit(rendered);
-      dirty = true;
-      kick();
+      if (gesture.kind === "pan") panBy(event.clientX - prev.x, event.clientY - prev.y);
+      else orbitBy(event.clientX - prev.x, event.clientY - prev.y);
     });
     function releasePointer(event) {
-      if (!event || pointers.has(event.pointerId) || orbitPointer === event.pointerId) {
-        if (event) pointers.delete(event.pointerId);
-        if (!event || orbitPointer === event.pointerId) orbitPointer = null;
+      var had = pointers.has(event.pointerId);
+      if (!had) return;
+      // Moving capture to the sheet makes a label or the canvas lose its implicit touch capture;
+      // only the sheet's own capture ending means the pointer is gone.
+      if (event.type === "lostpointercapture" && event.target !== sheet) return;
+      var g = gesture;
+      var onLabel = pointers.get(event.pointerId).label;
+      pointers.delete(event.pointerId);
+      // A tap on a label is handled by the label's own click (keyboard and screen readers use it too).
+      if (event.type === "pointerup" && !onLabel && g && g.kind !== "pinch" && !g.moved && now() - g.t < 600 && pointers.size === 0) {
+        tapAt(event.clientX, event.clientY);
       }
-      if (pointers.size < 2) pinchStart = 0;
-      if (pointers.size === 0 || orbitPointer === null) {
+      if (pointers.size === 1 && g && g.kind === "pinch") {
+        // One finger left after a pinch: carry on turning from where it is, without a jump.
+        var rest = null;
+        pointers.forEach(function (pt) { rest = pt; });
+        gesture = { kind: "orbit", sx: rest.x, sy: rest.y, t: 0, moved: true };
+      } else if (pointers.size === 0) {
+        gesture = null;
         dragging = false;
         root.classList.remove("is-dragging");
-        markInteract();
       }
+      markInteract();
     }
-    on(canvas, "pointerup", releasePointer);
-    on(canvas, "pointercancel", releasePointer);
-    on(canvas, "lostpointercapture", releasePointer);
+    on(sheet, "pointerup", releasePointer);
+    on(sheet, "pointercancel", releasePointer);
+    on(sheet, "lostpointercapture", releasePointer);
     on(window, "scroll", function () { markInteract(); dirty = true; kick(); }, { passive: true });
     on(window, "resize", function () { fitted = false; dirty = true; kick(); }, { passive: true });
     on(window, "orientationchange", function () { fitted = false; dirty = true; kick(); }, { passive: true });
@@ -1743,13 +2010,22 @@ function createRenderer(canvas, options) {
       var visibleObserver = new IntersectionObserver(function (entries) {
         running = !lost && !reduced.matches && entries.some(function (entry) { return entry.isIntersecting; });
         if (running) { dirty = true; kick(); }
-        else if (raf) { window.cancelAnimationFrame(raf); raf = 0; lastTime = 0; }
+        else {
+          if (explore) { setExplore(false); resetView(true); }
+          if (raf) { window.cancelAnimationFrame(raf); raf = 0; lastTime = 0; }
+        }
       });
       visibleObserver.observe(sheet);
       removers.push(function () { visibleObserver.disconnect(); });
     } else {
       running = true;
     }
+    removers.push(function () { if (hintTimer) clearTimeout(hintTimer); });
+    // The toggle's visible name changes ("Explore the roof" / "Done exploring"), so it carries no aria-pressed state.
+    if (exploreToggle) exploreToggle.removeAttribute("aria-pressed");
+    toggleText();
+    if (exploreBar) exploreBar.hidden = false;
+    updateTouch();
     syncFlow();
     if (!reduced.matches) start();
     else root.classList.add("is-still");

@@ -9,7 +9,7 @@
   <link rel="canonical" href="https://boardofprojectstewardship.com/projects/magnolia-house-adu-garage/">
   <base target="_top">
   <link rel="stylesheet" href="/assets/css/site.css">
-  <link rel="stylesheet" href="/assets/css/scroll-house.css">
+  <link rel="stylesheet" href="/assets/css/scroll-house.css?v=9">
   <link rel="stylesheet" href="/projects/magnolia-house-adu-garage/project.css">
   <style>
     html, body { margin: 0; background: #0c0c0c; }
@@ -53,14 +53,14 @@
                 <text x="292" y="150">Garage</text>
               </g>
             </svg>
-            <canvas class="scroll-house-canvas" width="960" height="540" tabindex="0" aria-describedby="sh-explore-help" aria-label="House drawing. Arrow keys turn it. Plus and minus, or the zoom buttons, change the zoom."></canvas>
+            <canvas class="scroll-house-canvas" width="960" height="540" tabindex="0" aria-describedby="sh-explore-help" aria-label="House drawing. Press Enter or click to explore this stage: drag or arrow keys turn it, scroll, pinch or plus and minus zoom, and a room click flies into it."></canvas>
             <div class="sh-labels" aria-hidden="true"></div>
             <div class="sh-explore" hidden>
-              <button type="button" class="sh-explore-toggle" aria-pressed="false" aria-describedby="sh-explore-help">Explore the house</button>
-              <button type="button" class="sh-zoom" data-zoom="in" hidden>Zoom in</button>
-              <button type="button" class="sh-zoom" data-zoom="out" hidden>Zoom out</button>
+              <button type="button" class="sh-explore-toggle" aria-describedby="sh-explore-help">Explore the house</button>
+              <button type="button" class="sh-zoom" data-zoom="in" aria-label="Zoom in" hidden>+</button>
+              <button type="button" class="sh-zoom" data-zoom="out" aria-label="Zoom out" hidden>−</button>
               <button type="button" class="sh-explore-reset" hidden>Reset view</button>
-              <p id="sh-explore-help" class="sh-explore-help">Arrow keys turn the house. Plus and minus, or the zoom buttons, change the zoom. A horizontal drag turns it after you tap the house. Reset view returns to the scroll camera.</p>
+              <p id="sh-explore-help" class="sh-explore-help">Every stage can be explored. Explore turns on drag to turn, scroll or pinch to zoom toward the pointer, right-drag or two fingers to pan, and tap a room or its label to fly in. Arrow keys turn, Shift with arrow keys pans, plus and minus zoom, zero resets, and Escape ends exploring. Zooming in lifts the roof and shows room names, then fixtures. Reset view returns to the scroll camera.</p>
             </div>
           </div>
           <ul class="sh-rooms" data-rooms="main" hidden>
@@ -69,7 +69,7 @@
           <ul class="sh-rooms" data-rooms="upper" hidden>
             <li>Living</li><li>Dining</li><li>Kitchen</li><li>Office / craft</li><li>Bedrooms</li><li>Deck</li>
           </ul>
-          <p class="scroll-house-line" id="scroll-house-line">The finished house. Tap it, then drag to turn it.</p>
+          <p class="scroll-house-line" id="scroll-house-line">The finished house, the ADU below it, and the garage. Tap a room to fly in, or drag to turn it.</p>
         </div>
         <figure class="scroll-house-still">
           <div class="sh-still-img" role="img" aria-label="Line drawing of this one-story house over a basement ADU, with a deck, a porch, and a detached garage. Not a bid or stamped plan."></div>
@@ -150,7 +150,7 @@
         if (root.getAttribute("data-js") === "1") return;
         root.setAttribute("data-js", "1");
         var s = document.createElement("script");
-        s.src = "/assets/js/scroll-house-magnolia.js";
+        s.src = "/assets/js/scroll-house-magnolia.js?v=9";
         document.body.appendChild(s);
       }
       function sync() {
