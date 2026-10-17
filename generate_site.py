@@ -1715,6 +1715,10 @@ def finalize_published_html() -> None:
         # This tool page has its own stylesheet and does not use site.css or Inter.
         if rel.as_posix() == "tools/build-walkthrough/index.html":
             continue
+        # The Magnolia project page and its embed are authored by hand.
+        # The image pass would swap the hero priority and the progress-photo files.
+        if rel.as_posix().startswith("projects/magnolia-house-adu-garage/"):
+            continue
         text = path.read_text(encoding="utf-8")
         updated = apply_performance_pass(text)
         if updated != text:
@@ -2653,11 +2657,32 @@ def _rel_from_canonical(canon: str) -> str:
     return path
 
 
+def _published_date_modified(rel: str) -> str:
+    """The single dateModified already written on a page, or empty."""
+    path = SITE_DIR / rel
+    if not path.is_file():
+        return ""
+    text = path.read_text(encoding="utf-8", errors="ignore")
+    days = list(dict.fromkeys(re.findall(r'"dateModified"\s*:\s*"(\d{4}-\d{2}-\d{2})"', text)))
+    if len(days) == 1:
+        return days[0]
+    return ""
+
+
 def stored_lastmod(rel: str) -> str:
-    """Date already recorded for this URL, else the last git commit that touched it."""
+    """Date already recorded for this URL, else the last git commit that touched it.
+
+    News HTML is rewritten on every regen so related links stay current. That
+    rewrite is not a new story, so keep the dateModified already on the page
+    instead of the commit that only refreshed those links.
+    """
     prev = _load_lastmod_store().get(rel)
     if isinstance(prev, dict) and re.match(r"^\d{4}-\d{2}-\d{2}$", str(prev.get("date") or "")):
         return str(prev["date"])
+    if rel == "news.html" or (rel.startswith("news/") and rel.endswith(".html")):
+        published = _published_date_modified(rel)
+        if published:
+            return published
     return _git_commit_date(rel) or datetime.now().strftime("%Y-%m-%d")
 
 
@@ -4162,7 +4187,7 @@ def home_scroll_house() -> tuple[str, str]:
     """
     fragment = (SITE_DIR / "sections" / "scroll-house.html").read_text(encoding="utf-8")
     fragment = fragment.replace("__KICKER__", GEO_KICKER_HTML)
-    css = '  <link rel="stylesheet" href="/assets/css/scroll-house.css">\n'
+    css = '  <link rel="stylesheet" href="/assets/css/scroll-house.css?v=9">\n'
     return fragment, css
 
 
@@ -5431,6 +5456,7 @@ def build_about() -> str:
         </div>
       </div>
     </section>
+
 
     <section class="mb-14">
       <div class="mb-6 border-b border-white/10 pb-4">
@@ -8543,12 +8569,12 @@ def write_sitemap(posts: list[dict]) -> None:
         if _fn not in extras and (SITE_DIR / _fn).is_file():
             extras.append(_fn)
 
-    def url_entry(loc: str, lastmod: str, priority: str) -> str:
+    def url_entry(loc: str, lastmod: str, priority: str, changefreq: str = "weekly") -> str:
         return (
             "  <url>\n"
             f"    <loc>{loc}</loc>\n"
             f"    <lastmod>{lastmod}</lastmod>\n"
-            "    <changefreq>weekly</changefreq>\n"
+            f"    <changefreq>{changefreq}</changefreq>\n"
             f"    <priority>{priority}</priority>\n"
             "  </url>"
         )
@@ -8585,6 +8611,18 @@ def write_sitemap(posts: list[dict]) -> None:
             rel = path.relative_to(SITE_DIR).as_posix()
             loc = f"{BASE_URL}{rel[: -len('index.html')]}"
             entries.append(url_entry(loc, page_date_modified(rel), "0.7"))
+    # Hand-published project. Monthly, and dated from the project page's last commit
+    # (the page has no dateModified of its own).
+    project_rel = "projects/magnolia-house-adu-garage/index.html"
+    if (SITE_DIR / project_rel).is_file():
+        entries.append(
+            url_entry(
+                f"{BASE_URL}projects/magnolia-house-adu-garage/",
+                page_date_modified(project_rel),
+                "0.8",
+                changefreq="monthly",
+            )
+        )
 
     xml = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
