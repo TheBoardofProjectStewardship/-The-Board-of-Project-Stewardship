@@ -555,13 +555,15 @@
           <p class="sh-kicker">Pacific Northwest · King &amp; Snohomish · Seattle</p>
           <p class="sh-title" id="scroll-house-title">The house, taken apart</p>
           <p class="sh-dek">Start with the finished house. Scroll peels the roof, the floors, and the foundation.</p>
+          <p class="sh-project">Magnolia house, ADU and garage, built and permitted by Pacific Pro Group. <a href="/projects/magnolia-house-adu-garage/">See the project</a></p>
         </div>
+        <style>#scroll-house .sh-still-img{background-image:url("/projects/magnolia-house-adu-garage/magnolia-still.png")}#scroll-house.is-fallback .scroll-house-sheet{background-image:url("/projects/magnolia-house-adu-garage/magnolia-still.png")}#scroll-house .sh-top .sh-project{-webkit-text-size-adjust:100%;text-size-adjust:100%;margin:.5rem auto 0;max-width:40rem;font-size:.8125rem;line-height:1.45;color:#cbd5e1}#scroll-house .sh-project a{display:inline-block;padding:.8rem .25rem;margin:-.8rem 0;font-weight:600;text-decoration:underline;text-underline-offset:2px;color:#4ade80}#scroll-house .sh-project a:focus-visible{outline:3px solid #4ade80;outline-offset:2px;border-radius:2px}</style>
         <ol class="sh-stages" aria-label="Build stages">
           <li class="is-on" data-stage="house"><button type="button" data-stage="house" data-sh-progress="0.04" aria-current="step">House</button></li>
           <li data-stage="front"><button type="button" data-stage="front" data-sh-progress="0.22">Front</button></li>
           <li data-stage="roof"><button type="button" data-stage="roof" data-sh-progress="0.38">Roof</button></li>
-          <li data-stage="upper"><button type="button" data-stage="upper" data-sh-progress="0.56">Upper</button></li>
-          <li data-stage="plan"><button type="button" data-stage="plan" data-sh-progress="0.74">Plan</button></li>
+          <li data-stage="upper"><button type="button" data-stage="upper" data-sh-progress="0.56">Main</button></li>
+          <li data-stage="plan"><button type="button" data-stage="plan" data-sh-progress="0.74">ADU</button></li>
           <li data-stage="foundation"><button type="button" data-stage="foundation" data-sh-progress="0.93">Slab</button></li>
         </ol>
         <div class="sh-progress" aria-hidden="true"><span></span></div>
@@ -572,16 +574,15 @@
           <p class="sh-hint" aria-hidden="true">Scroll <span class="sh-hint-chevron">↓</span></p>
           <div class="scroll-house-sheet">
             <svg class="scroll-house-plan" viewBox="0 0 400 230" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-              <g fill="none" stroke="#1c1916" stroke-linejoin="round" stroke-linecap="butt">
-                <rect x="16" y="36" width="78" height="150" stroke-width="4"/>
-                <path stroke-width="4" d="M118 28 H150 V70 H250 V28 H330 V168 H250 V188 H118 V150 H250"/>
-                <path stroke-width="2" d="M150 78 H286 M168 92 H250 M118 150 H250"/>
-                <path stroke-width="1.5" d="M118 188 H250 V208 H150 V188"/>
+              <g fill="none" stroke="#1c1916" stroke-linejoin="round">
+                <path stroke-width="4" d="M40 30 H120 V43 H175 V16 H225 V128 H117 V148 H40 Z"/>
+                <path stroke-width="2" d="M40 30 H118 V96 H40"/>
+                <rect x="276" y="160" width="32" height="52" stroke-width="4"/>
               </g>
-              <g fill="#1c1916" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="600" text-anchor="middle">
-                <text x="55" y="116">Garage</text>
-                <text x="210" y="64">Kitchen</text>
-                <text x="292" y="100">Living</text>
+              <g fill="#1c1916" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" text-anchor="middle">
+                <text x="78" y="68">ADU</text>
+                <text x="170" y="92">House</text>
+                <text x="292" y="150">Garage</text>
               </g>
             </svg>
             <canvas class="scroll-house-canvas" width="960" height="540" tabindex="0" aria-describedby="sh-explore-help" aria-label="House drawing. Arrow keys turn it. Plus and minus, or the zoom buttons, change the zoom."></canvas>
@@ -595,26 +596,29 @@
             </div>
           </div>
           <ul class="sh-rooms" data-rooms="main" hidden>
-            <li>Garage</li><li>Kitchen</li><li>Living</li><li>Stair</li><li>Patio</li><li>Office</li>
+            <li>ADU living</li><li>ADU bedroom</li><li>ADU kitchen</li><li>ADU bath</li><li>Laundry</li><li>Existing basement</li>
           </ul>
           <ul class="sh-rooms" data-rooms="upper" hidden>
-            <li>Primary bedroom</li><li>Bedrooms</li><li>Laundry</li><li>Bath</li><li>Balcony</li>
+            <li>Living</li><li>Dining</li><li>Kitchen</li><li>Office / craft</li><li>Bedrooms</li><li>Deck</li>
           </ul>
           <p class="scroll-house-line" id="scroll-house-line">The finished house. Tap it, then drag to turn it.</p>
         </div>
         <figure class="scroll-house-still">
-          <div class="sh-still-img" role="img" aria-label="Line drawing of this two-story house with a garage, porch, and balcony. Not a bid or stamped plan."></div>
+          <div class="sh-still-img" role="img" aria-label="Line drawing of this one-story house over a basement ADU, with a deck, a porch, and a detached garage. Not a bid or stamped plan."></div>
           <figcaption class="scroll-house-line">The finished massing, held still.</figcaption>
         </figure>
         <div class="sh-learn">
           <div class="sh-learn-set" data-stage="house">
             <button type="button" class="sh-call" data-callout="roof" aria-pressed="false" aria-controls="sh-note-roof">Roof</button>
             <button type="button" class="sh-call" data-callout="porch" aria-pressed="false" aria-controls="sh-note-porch">Porch</button>
-            <button type="button" class="sh-call" data-callout="balcony" aria-pressed="false" aria-controls="sh-note-balcony">Balcony</button>
+            <button type="button" class="sh-call" data-callout="deck" aria-pressed="false" aria-controls="sh-note-deck">Deck</button>
+            <button type="button" class="sh-call" data-callout="garage" aria-pressed="false" aria-controls="sh-note-garage">Garage</button>
           </div>
           <div class="sh-learn-set" data-stage="front" hidden>
             <button type="button" class="sh-call" data-callout="framing" aria-pressed="false" aria-controls="sh-note-framing">Framing</button>
             <button type="button" class="sh-call" data-callout="header" aria-pressed="false" aria-controls="sh-note-header">Headers</button>
+            <button type="button" class="sh-call" data-callout="deck" aria-pressed="false" aria-controls="sh-note-deck">Deck</button>
+            <button type="button" class="sh-call" data-callout="adu" aria-pressed="false" aria-controls="sh-note-adu">ADU</button>
           </div>
           <div class="sh-learn-set" data-stage="roof" hidden>
             <button type="button" class="sh-call" data-callout="roof" aria-pressed="false" aria-controls="sh-note-roof">Roof</button>
@@ -623,30 +627,33 @@
           <div class="sh-learn-set" data-stage="upper" hidden>
             <button type="button" class="sh-call" data-callout="structure" aria-pressed="false" aria-controls="sh-note-structure">Structure</button>
             <button type="button" class="sh-call" data-callout="stairs" aria-pressed="false" aria-controls="sh-note-stairs">Stairs</button>
-            <button type="button" class="sh-call" data-callout="balcony" aria-pressed="false" aria-controls="sh-note-balcony">Balcony</button>
+            <button type="button" class="sh-call" data-callout="partition" aria-pressed="false" aria-controls="sh-note-partition">Partitions</button>
           </div>
           <div class="sh-learn-set" data-stage="plan" hidden>
+            <button type="button" class="sh-call" data-callout="adu" aria-pressed="false" aria-controls="sh-note-adu">ADU</button>
             <button type="button" class="sh-call" data-callout="foundation" aria-pressed="false" aria-controls="sh-note-foundation">Foundation</button>
-            <button type="button" class="sh-call" data-callout="bearing" aria-pressed="false" aria-controls="sh-note-bearing">Bearing walls</button>
             <button type="button" class="sh-call" data-callout="partition" aria-pressed="false" aria-controls="sh-note-partition">Partitions</button>
           </div>
           <div class="sh-learn-set" data-stage="foundation" hidden>
             <button type="button" class="sh-call" data-callout="footings" aria-pressed="false" aria-controls="sh-note-footings">Footings</button>
+            <button type="button" class="sh-call" data-callout="garage" aria-pressed="false" aria-controls="sh-note-garage">Garage</button>
           </div>
           <div class="sh-learn-copy">
             <p class="sh-learn-prompt" id="sh-learn-prompt">Tap a label to learn what that part does.</p>
-            <p class="sh-note" id="sh-note-foundation" data-callout="foundation"><strong>Foundation.</strong> The outer line is this house and the garage. A foundation under it spreads the weight into the ground and keeps the wood frame off the soil.</p>
-            <p class="sh-note" id="sh-note-bearing" data-callout="bearing"><strong>Bearing walls.</strong> The outside walls of the house and the garage carry the floors and the roof down to the foundation. In this sketch they are the load-bearing walls.</p>
-            <p class="sh-note" id="sh-note-partition" data-callout="partition"><strong>Partitions.</strong> The inside walls divide the kitchen, living room, bedrooms, and the other rooms. This sketch does not use them to hold up the floor. On a real house, check what sits on a wall before anyone takes it out.</p>
-            <p class="sh-note" id="sh-note-framing" data-callout="framing"><strong>Framing.</strong> Studs stand between a bottom plate and a top plate. That skeleton is the frame. Lap siding and the board-and-batten gable cover it later.</p>
-            <p class="sh-note" id="sh-note-header" data-callout="header"><strong>Headers.</strong> The garage door and the windows take studs out of the wall. A header, a short beam across each opening, carries that load to the studs on both sides. This sketch does not size them.</p>
-            <p class="sh-note" id="sh-note-roof" data-callout="roof"><strong>Roof.</strong> The east face is a board-and-batten gable. A hip roof and a dormer cover the west wing, and the garage roof sits lower. The slopes send rain out to the eaves.</p>
-            <p class="sh-note" id="sh-note-porch" data-callout="porch"><strong>Porch.</strong> The porch is the covered landing by the court, with a rail. The patio under the upper floor stays open.</p>
-            <p class="sh-note" id="sh-note-balcony" data-callout="balcony"><strong>Balcony.</strong> The balcony is the open floor on the west side, beside the garage. It needs a rail.</p>
-            <p class="sh-note" id="sh-note-footings" data-callout="footings"><strong>Footings.</strong> The upper floor and the garage send weight down the walls into the footings. Those footings have to suit that load. This sketch does not size them.</p>
-            <p class="sh-note" id="sh-note-structure" data-callout="structure"><strong>Structure.</strong> The upper floor stacks on the main-floor walls: a floor, walls, and the roof above. It has to tie into the frame already there.</p>
-            <p class="sh-note" id="sh-note-stairs" data-callout="stairs"><strong>Stairs.</strong> The stair drawn on both floors runs across the plan and ends at the upper floor. A stair needs a clear path, headroom, and a rail. The exact stair is worked out for the house.</p>
+            <p class="sh-note" id="sh-note-roof" data-callout="roof"><strong>Roof.</strong> The house gets one new low-slope roof of standing seam metal. It falls toward a gutter on the street side and overhangs the walls. The garage has its own metal roof. The plans call it a roof redesign because the old roof leaked.</p>
+            <p class="sh-note" id="sh-note-porch" data-callout="porch"><strong>Porch.</strong> The existing 60 SF open porch sits at the entry on the street side. The ADU gets a small new landing of its own at the basement level.</p>
+            <p class="sh-note" id="sh-note-deck" data-callout="deck"><strong>Deck.</strong> The existing deck runs along the main level on the downhill side, with a stair to grade. The plans replace its railings with glass railings and fold 27 SF of it into the dining room.</p>
+            <p class="sh-note" id="sh-note-adu" data-callout="adu"><strong>ADU.</strong> The new 865 SF accessory dwelling unit fills part of the existing basement, on the side where the lot falls away and the basement wall is out of the ground. It has a living room, bedroom, kitchen, bathroom, and laundry, and its own door.</p>
+            <p class="sh-note" id="sh-note-garage" data-callout="garage"><strong>Garage.</strong> A detached one-car garage, 12 by 20 feet inside, stands near the street with its own slab and a single overhead door. The plans give it a 12-foot height.</p>
+            <p class="sh-note" id="sh-note-foundation" data-callout="foundation"><strong>Foundation.</strong> The basement walls carry the house down to the footings. On the uphill side they hold back soil; on the downhill side they rise out of the ground with doors and windows.</p>
+            <p class="sh-note" id="sh-note-partition" data-callout="partition"><strong>Partitions.</strong> The inside walls divide the rooms. On a real house, check what sits on a wall before anyone takes it out. The remodel moves several of them.</p>
+            <p class="sh-note" id="sh-note-framing" data-callout="framing"><strong>Framing.</strong> Studs stand between a bottom plate and a top plate. That skeleton is the frame. Siding and the glass go on it later.</p>
+            <p class="sh-note" id="sh-note-header" data-callout="header"><strong>Headers.</strong> The tall windows and doors on the deck side take studs out of the wall. A header, a short beam across each opening, carries that load to the studs on both sides. This sketch does not size them.</p>
+            <p class="sh-note" id="sh-note-footings" data-callout="footings"><strong>Footings.</strong> The house and the garage send weight down their walls into the footings. Those footings have to suit that load. This sketch does not size them.</p>
+            <p class="sh-note" id="sh-note-structure" data-callout="structure"><strong>Structure.</strong> The main level sits on the basement walls: a floor, walls, and the roof above. A new roof has to tie into the frame already there.</p>
+            <p class="sh-note" id="sh-note-stairs" data-callout="stairs"><strong>Stairs.</strong> The existing stair runs from the main level down to the basement. A stair needs a clear path, headroom, and a rail.</p>
           </div>
+          <p class="sh-learn-aside sh-key"><span aria-hidden="true" style="display:inline-block;width:.8em;height:.8em;margin-right:.35em;vertical-align:-.05em;background:#8cc2b3;border:1px solid #3f8f7c"></span>Green-gray marks new work: the 27 SF dining addition, the new entry door with side lites, the new egress window, the glass deck railings, the electric fireplace and the ADU entry door. Furniture is drawn paler: it is placed only to show scale, and the permit sheets do not show it. Zoom in to see cabinet doors, faucets, trim and floor joints.</p>
           <p class="sh-learn-aside">Teaching sketch. Not a structural design.</p>
         </div>
         <div class="scroll-house-cta">
@@ -676,7 +683,7 @@
         if (root.getAttribute("data-js") === "1") return;
         root.setAttribute("data-js", "1");
         var s = document.createElement("script");
-        s.src = "/assets/js/scroll-house.js";
+        s.src = "/assets/js/scroll-house-magnolia.js";
         document.body.appendChild(s);
       }
       function sync() {
@@ -1162,69 +1169,6 @@
       </div>
     </section>
 
-    <section id="featured-magnolia" class="mb-14" aria-labelledby="featured-magnolia-title">
-      <style>
-        #featured-magnolia .fm-frame { position: relative; aspect-ratio: 16 / 10; min-height: 520px; background: #0c0c0c; border-radius: 0.75rem; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
-        #featured-magnolia .fm-poster { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; padding: 0; border: 0; background: #0c0c0c; cursor: pointer; border-radius: inherit; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; }
-        #featured-magnolia .fm-poster img { width: 100%; height: auto; max-height: calc(100% - 5rem); object-fit: contain; display: block; }
-        #featured-magnolia .fm-poster span { min-height: 44px; display: inline-flex; align-items: center; padding: 0 1.1rem; border-radius: 0.25rem; background: #166534; color: #fff; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; }
-        #featured-magnolia .fm-poster:focus-visible { outline: 3px solid #4ade80; outline-offset: -3px; }
-        #featured-magnolia iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
-        @media (max-width: 640px) { #featured-magnolia .fm-frame { aspect-ratio: auto; height: 78svh; min-height: 520px; } }
-      </style>
-      <div class="mb-6 border-b border-white/10 pb-4">
-        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Featured project</span>
-        <h2 id="featured-magnolia-title" class="text-2xl font-black text-white tracking-tight">Magnolia house, ADU and garage</h2>
-      </div>
-      <figure class="m-0">
-        <div class="fm-frame" id="featured-magnolia-frame">
-          <button type="button" class="fm-poster" id="featured-magnolia-load">
-            <img src="/projects/magnolia-house-adu-garage/magnolia-still.png" width="1200" height="675" loading="lazy" decoding="async" alt="Line drawing of the Magnolia house over its basement ADU, with the deck and the detached garage. Not a bid or stamped plan.">
-            <span>Explore the drawing</span>
-          </button>
-        </div>
-        <figcaption class="mt-3 text-sm text-slate-300 font-light leading-relaxed">
-          Magnolia house, ADU and garage, built and permitted by Pacific Pro Group.
-          <a href="/projects/magnolia-house-adu-garage/" class="text-secondary font-semibold hover:underline">See the project</a>
-        </figcaption>
-      </figure>
-      <script>
-      (function () {
-        var frame = document.getElementById("featured-magnolia-frame");
-        var btn = document.getElementById("featured-magnolia-load");
-        if (!frame || !btn) return;
-        var loaded = false, io = null;
-        function load() {
-          if (loaded) return frame.querySelector("iframe");
-          loaded = true;
-          if (io) io.disconnect();
-          var f = document.createElement("iframe");
-          f.src = "/projects/magnolia-house-adu-garage/embed.html";
-          f.title = "Interactive drawing of the Magnolia house, ADU and garage";
-          f.setAttribute("loading", "lazy");
-          f.tabIndex = -1;
-          f.setAttribute("inert", "");
-          f.setAttribute("aria-hidden", "true");
-          frame.insertBefore(f, btn);
-          return f;
-        }
-        btn.addEventListener("click", function () {
-          var f = frame.querySelector("iframe") || load();
-          if (btn.parentNode) btn.parentNode.removeChild(btn);
-          f.removeAttribute("tabindex");
-          f.removeAttribute("inert");
-          f.removeAttribute("aria-hidden");
-          f.focus();
-        });
-        if ("IntersectionObserver" in window) {
-          io = new IntersectionObserver(function (entries) {
-            for (var i = 0; i < entries.length; i++) if (entries[i].isIntersecting) { load(); break; }
-          }, { rootMargin: "200px" });
-          io.observe(frame);
-        }
-      })();
-      </script>
-    </section>
 
     <section class="mb-14">
       <div class="mb-6 border-b border-white/10 pb-4">
