@@ -18,7 +18,7 @@ slug: "kitchen-remodel-kirkland-wa"
 
 Kirkland stretches along the east shore of Lake Washington, from Houghton and Moss Bay near downtown up through Juanita, Finn Hill, Rose Hill, and the Totem Lake area. The housing mix runs from mid-century ramblers and split-levels to 1970s and 1980s two-stories, newer infill, and townhomes. Each era brings its own kitchen problems: closed-off galley layouts in older homes, undersized electrical service and too few small-appliance circuits, recirculating hoods that never vented outdoors, and soffits hiding ductwork or plumbing that limit how tall new cabinets can go.
 
-That mix is why a Kirkland kitchen remodel should start with scope, not finishes. The question that sets your budget, schedule, and permit path is what you are changing behind the walls. Neighborhood context for comparing local firms is in the Board's [Kirkland directory](../kirkland.html), and trade orientation lives in the [kitchens](../kitchens.html) hub and the [kitchen remodel planning](../kitchen-remodel-planning.html) guide.
+That mix is why a Kirkland kitchen remodel should start with scope, not finishes. The question that sets your budget, schedule, and permit path is what you are changing behind the walls. Neighborhood context for comparing local firms is in the Board's [Kirkland directory](../kirkland.html), and trade orientation lives in the [kitchens](../kitchen.html) hub and the [kitchen remodel planning](../kitchen-remodel-planning.html) guide.
 
 ## What Kirkland exempts — and what it does not
 

@@ -3257,7 +3257,7 @@ def howto_ld(
 def free_planning_tool_links() -> list[tuple[str, str]]:
     """Homepage photo visualizer and the in-browser plan walkthrough."""
     return [
-        ("Photo visualizer", "./index.html#plan-home-hero"),
+        ("Photo visualizer", "./#plan-home-hero"),
         ("Plan to 3D Walkthrough", "./plan-walkthrough/"),
     ]
 
@@ -4161,6 +4161,9 @@ def home_scroll_house() -> tuple[str, str]:
     plain-language notes for this sketch.
     """
     fragment = (SITE_DIR / "sections" / "scroll-house.html").read_text(encoding="utf-8")
+    # The public fragment URL is noindex. Drop that tag before inlining so a
+    # homepage regen does not inherit it.
+    fragment = fragment.replace('<meta name="robots" content="noindex">\n', "", 1)
     fragment = fragment.replace("__KICKER__", GEO_KICKER_HTML)
     css = '  <link rel="stylesheet" href="/assets/css/scroll-house.css">\n'
     return fragment, css
@@ -13231,7 +13234,7 @@ def build_kitchen_remodel_planning_page() -> str:
                     ("Pascal Editor sketch", "./pascal-editor.html"),
                     ("Floor Plan to 3D", "./floor-plan-3d.html"),
                     ("Plan to 3D Walkthrough", "./plan-walkthrough/"),
-                    ("Photo visualizer", "./index.html#plan-home-hero"),
+                    ("Photo visualizer", "./#plan-home-hero"),
                 ]
             ),
         )
@@ -13598,7 +13601,7 @@ def build_home_addition_planning_page() -> str:
                     ("Pascal Editor sketch", "./pascal-editor.html"),
                     ("Floor Plan to 3D", "./floor-plan-3d.html"),
                     ("Plan to 3D Walkthrough", "./plan-walkthrough/"),
-                    ("Photo visualizer", "./index.html#plan-home-hero"),
+                    ("Photo visualizer", "./#plan-home-hero"),
                     ("Site Visit Checklist", "./site-visit.html"),
                     ("Good Steward", "./good-steward.html"),
                 ]
