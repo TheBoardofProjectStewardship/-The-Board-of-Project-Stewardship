@@ -67,8 +67,10 @@ def timeline() -> str:
 
 NEWS = {
     "badge": (
-        '<aside class="ap-badge ap-badge-text" aria-label="Award"><p class="ap-badge-cat">BRONZE - Bathroom Remodeler</p>'
-        "<p>2026 The Seattle Times Best in the PNW</p></aside>"
+        '<figure class="ap-badge"><img src="' + NEWS_IMG + '2026bpnw-bronze-badge.webp" width="180" height="180" '
+        'alt="The Seattle Times Best in the PNW 2026 Bronze winner badge" loading="lazy">'
+        '<figcaption><span class="ap-badge-cat">BRONZE - Bathroom Remodeler</span>'
+        "2026 The Seattle Times Best in the PNW. Original badge file supplied with the award, shown unchanged.</figcaption></figure>"
     ),
     "pullquote": (
         '<blockquote class="ap-pull"><p>\u201cBest in the PNW nominations and winners are solely chosen by the public through online nominations and voting.\u201d</p>'
