@@ -1,0 +1,19 @@
+{
+  "submission_id": "2026-10-18-heat-pump-installation-bothell-wa",
+  "idempotency_key": "sha256:032c613f60f2d5c37920cf0be361b26a8eb24b75f2648428542177fcceab1a3f",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-10-18T17:21:55Z",
+  "outputs": [
+    "assets/images/posts/2026-10-18-bothell-heat-pump-1.webp",
+    "assets/images/posts/2026-10-18-bothell-heat-pump-2.webp",
+    "assets/images/posts/2026-10-18-bothell-heat-pump-3.webp",
+    "posts/2026-10-18-heat-pump-installation-bothell-wa.md",
+    "posts/2026-10-18-heat-pump-installation-bothell-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 74
+}

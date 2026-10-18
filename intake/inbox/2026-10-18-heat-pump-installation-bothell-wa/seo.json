@@ -1,0 +1,48 @@
+{
+  "producer": "openclaw",
+  "agent": "seo-specialist",
+  "slug": "heat-pump-installation-bothell-wa",
+  "title": "Heat Pump Installation Bothell WA \u2014 Mechanical Permit, L&I Electrical Permit & Where the Outdoor Unit Can Go",
+  "description": "A Bothell homeowner's guide to installing a heat pump: the City mechanical permit, why the electrical permit comes from Washington L&I, the City's siting rules for the outdoor unit, refrigerant certification, and what to put in the contract.",
+  "category": "Guides",
+  "keywords": [
+    "heat pump installation Bothell WA",
+    "Bothell mechanical permit heat pump",
+    "Bothell electrical permit L&I",
+    "heat pump setback Bothell",
+    "ductless heat pump Bothell"
+  ],
+  "outline": [
+    "Key Takeaways",
+    "Why Bothell homeowners are looking at heat pumps",
+    "The City mechanical permit",
+    "The electrical permit comes from L&I, not the City",
+    "Where the outdoor unit can go",
+    "Refrigerant work needs certified technicians",
+    "What to write into a Bothell heat pump contract",
+    "Materials Worth Knowing",
+    "How to shortlist and verify HVAC contractors",
+    "Where Pacific Pro Group fits",
+    "Next steps for a Bothell heat pump installation"
+  ],
+  "search_intent": "A Bothell homeowner planning a heat pump wants to know which permits apply, who issues the electrical permit, where the outdoor unit can legally go, and what to require from installers.",
+  "local_angles": [
+    "Bothell mechanical permit via MyBuildingPermit",
+    "Electrical permits through L&I (Bothell not a city electrical jurisdiction)",
+    "Pad-mounted equipment siting: no front setback, 3 ft from property line/structure/fence, screened",
+    "King/Snohomish split and unincorporated Bothell addresses",
+    "Inspections and final inspection responsibility"
+  ],
+  "internal_links": [
+    "../bothell.html",
+    "../hvac.html",
+    "../electrician.html",
+    "../permits.html",
+    "../verify-contractor.html"
+  ],
+  "notes": "Box-authored fallback brief. PPG only as Board #1 -> https://pacificprogroup.com/.",
+  "generation": {
+    "agent": "box-authored",
+    "mode": "box-fallback"
+  }
+}

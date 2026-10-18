@@ -1,0 +1,45 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-10-18-bothell-heat-pump-1.webp",
+      "repo_path": "assets/images/posts/2026-10-18-bothell-heat-pump-1.webp",
+      "alt": "Illustrative: the narrow side yard of a lap-sided house with a gravel strip along the foundation and a wood fence behind \u2014 the kind of space where an outdoor heat pump unit has to meet setback and clearance rules \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "6655e5b4b1c94720e872f171c4ceb209",
+      "source": "Crop, mirror, and regrade of existing repo still 2026-10-11-seattle-retrofit-3.webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-18-bothell-heat-pump-2.webp",
+      "repo_path": "assets/images/posts/2026-10-18-bothell-heat-pump-2.webp",
+      "alt": "Illustrative: an opened-up exterior wall with wood framing and new electrical boxes and cable roughed in below a window \u2014 the stage where a new circuit is run and inspected before the wall is closed \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "50694a1ebd07eba1bcec0ec97d174fcd",
+      "source": "Crop and regrade of existing repo still 2026-08-10-electrical-upgrades-bathroom-remodels-3.webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-18-bothell-heat-pump-3.webp",
+      "repo_path": "assets/images/posts/2026-10-18-bothell-heat-pump-3.webp",
+      "alt": "Illustrative: lap siding meeting a wall wrapped in weather-resistive barrier with dark flashing tape and a metal flashing ledge \u2014 the layers a line-set penetration has to be sealed through \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "1f7911184dc347adf500eca7f25fbd20",
+      "source": "Crop, mirror, and regrade of existing repo still 2026-10-11-seattle-retrofit-2.webp"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "JQkth-AM5CE",
+      "url": "https://www.youtube.com/watch?v=JQkth-AM5CE",
+      "title": "Full Installation of Mini Split Ductless Unit, Step by Step!",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Illustrative frames are labeled in alt text",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "Reused and regraded existing repo stills. No paid image generation."
+}
