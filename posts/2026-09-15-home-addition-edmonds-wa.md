@@ -14,7 +14,7 @@ slug: "home-addition-edmonds-wa"
 
 Expanding an Edmonds home — whether a rear bump-out, side addition, or vertical expansion — is a structural project with neighborhood-specific wrinkles: marine weather, mature lots, and city review expectations that differ from a pure interior remodel.
 
-![Illustrative: Edmonds, Washington — the empty interior of a new addition with three tall windows to fir trees — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-15-home-addition-edmonds-3.webp)
+![Illustrative: Edmonds, Washington — the empty interior of a new addition with three tall windows to fir trees](../assets/images/posts/2026-09-15-home-addition-edmonds-3.webp)
 
 ## Local Edmonds context
 
@@ -24,7 +24,7 @@ Edmonds neighborhoods from the Bowl to Perrinville and Meadowdale mix mid-centur
 
 Coastal Snohomish County weather rewards continuous weather barriers, thoughtful flashing at the old-to-new joint, and ventilation that keeps cavities dry. City of Edmonds building permits are typical for structural additions; electrical, plumbing, and mechanical permits usually follow. Critical areas, steep slopes, or shoreline-adjacent parcels can require extra documentation. Design and permitting often consume a large share of the calendar — ask bidders for realistic review timelines rather than optimistic construction-only schedules.
 
-![Illustrative: Edmonds, Washington — a small bump-out addition with a shed roof over a kitchen window — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-15-home-addition-edmonds-4.webp)
+![Illustrative: Edmonds, Washington — a small bump-out addition with a shed roof over a kitchen window](../assets/images/posts/2026-09-15-home-addition-edmonds-4.webp)
 
 ## Process video: weather-barrier install fundamentals
 
@@ -36,7 +36,7 @@ https://www.youtube.com/watch?v=X81Q2oaTAJo
 
 Strong addition processes usually include survey/plot plan as needed, structural design, energy-code compliance, weatherproofing details at the tie-in, and a temporary protection plan if the roof or walls are opened. Match foundation type and drainage to existing conditions; poor grading against a new wall invites moisture problems within a few wet seasons.
 
-![Illustrative finished rear home addition exterior blended with existing Edmonds-style house — Illustrative editorial photo — not a project photograph](../assets/images/posts/2026-09-15-edmonds-addition-3.webp)
+![Illustrative: finished rear home addition exterior blended with existing Edmonds-style house](../assets/images/posts/2026-09-15-edmonds-addition-3.webp)
 
 ## Materials Worth Knowing
 

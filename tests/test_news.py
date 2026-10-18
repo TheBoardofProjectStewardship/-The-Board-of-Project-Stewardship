@@ -220,7 +220,7 @@ class NewsContractTests(unittest.TestCase):
 
         panel = (ROOT / "news" / "king-county-permitting-advisory-panel.html").read_text(encoding="utf-8")
         self.assertIn(
-            "The King County Courthouse and the King County Administration Building in downtown Seattle, seen across City Hall Park with fall-colored street trees",
+            "King County Courthouse and administration building across City Hall Park in downtown Seattle",
             panel,
         )
         self.assertIn("Joe Mabel", panel)

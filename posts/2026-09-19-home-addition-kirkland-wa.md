@@ -14,7 +14,7 @@ slug: "home-addition-kirkland-wa"
 
 Kirkland’s mix of waterfront-adjacent neighborhoods, mid-century ranches, and newer planned pockets means a home addition here is often a zoning and site story as much as a framing story. Many households want a primary suite, a kitchen expansion, or a family-room wing without leaving the Eastside school and commute pattern — and the durable projects start with what the lot and the city will actually allow.
 
-![Illustrative: Kirkland, Washington — the empty interior of a new addition looking out to a garden, blue hour — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-19-home-addition-kirkland-2.webp)
+![Illustrative: Kirkland, Washington — the empty interior of a new addition looking out to a garden, blue hour](../assets/images/posts/2026-09-19-home-addition-kirkland-2.webp)
 
 ## Neighborhood context
 
@@ -28,7 +28,7 @@ King County’s wet season and Eastside clay/silty soils punish weak drainage de
 
 Structural openings into existing walls, beam upgrades for open plans, and second-story loads on older foundations belong on the critical path with the engineer — not as a late “field clarification.” Cross-check [trades.html](../trades.html) for excavation, concrete, framing, and roofing context when your scope touches the envelope.
 
-![Illustrative framing and structural opening detail during a residential addition — illustrative only, not a real job photo](../assets/images/posts/2026-09-19-kirkland-addition-2.webp)
+![Illustrative: framing and structural opening detail during a residential addition in Kirkland](../assets/images/posts/2026-09-19-kirkland-addition-2.webp)
 
 ## Design, process, and coordination
 
@@ -42,9 +42,9 @@ https://www.youtube.com/watch?v=XrOYQ77kSbE
 
 [Watch the short process clip](../assets/videos/posts/2026-09-25-mlt-addition.mp4)
 
-![Illustrative nearly weatherproofed PNW home addition with siding and roof sheathing underway — illustrative only, not a real job photo](../assets/images/posts/2026-09-19-kirkland-addition-3.webp)
+![Illustrative: nearly weatherproofed PNW home addition with siding and roof sheathing underway in Kirkland](../assets/images/posts/2026-09-19-kirkland-addition-3.webp)
 
-![Illustrative Kirkland-style home addition with housewrap, blue flashing tape, and roof sheathing tying into the existing roof — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-19-kirkland-addition-4.webp)
+![Illustrative: Kirkland-style home addition with housewrap, blue flashing tape, and roof sheathing tying](../assets/images/posts/2026-09-19-kirkland-addition-4.webp)
 
 If a second story or ADU-related utility upgrade is on the table, treat it as one coordination problem so stairs, lateral bracing, and roof weatherproofing are not trapped. Relative planning context lives on [another-story.html](../another-story.html) and [edmonds-custom-homes.html](../edmonds-custom-homes.html); Kirkland’s own code and lot still govern your project.
 

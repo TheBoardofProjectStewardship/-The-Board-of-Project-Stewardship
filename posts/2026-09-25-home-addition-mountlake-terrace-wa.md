@@ -14,7 +14,7 @@ slug: "home-addition-mountlake-terrace-wa"
 
 Mountlake Terrace sits in south Snohomish County between Edmonds, Shoreline, and the I-5 corridor — a compact city of mid-century ranches, split-levels, and newer infill where a home addition is often a setback, drainage, and sequencing story as much as a framing story. Many households want a primary suite, a kitchen bump-out, or a family-room wing without leaving the North Sound commute pattern. Durable projects start with what the lot and the City will actually allow, then lock design-build coordination so temporary weather protection, inspections, and finishes share one critical path.
 
-![Illustrative: Mountlake Terrace, Washington — a house with a new one-story addition and a matching roof, late afternoon sun through firs — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-2.webp)
+![Illustrative: Mountlake Terrace, Washington — a house with a new one-story addition and a matching roof, late afternoon sun](../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-2.webp)
 
 ## Neighborhood and jurisdiction context
 
@@ -22,9 +22,9 @@ Whether you are near Town Center, the Interurban Trail corridor, Lake Ballinger�
 
 HOA or neighborhood design expectations can affect exterior materials, window proportions, and dumpster placement even when the addition itself is clearly allowed. Put those constraints in the proposal so they are not discovered after framing starts. Cross-check [trades.html](../trades.html) for excavation, concrete, framing, and roofing context when your scope touches the envelope.
 
-![Illustrative: Mountlake Terrace, Washington — a new foundation and stem wall beside an existing house, rainy daylight — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-3.webp)
+![Illustrative: Mountlake Terrace, Washington — a new foundation and stem wall beside an existing house, rainy daylight](../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-3.webp)
 
-![Illustrative Snohomish County home addition — how a new wing meets the existing house when you check setbacks and lot coverage, not a Mountlake Terrace permit photo](../assets/images/places/snohomish/snohomish-home-addition-pnw.webp)
+![Illustrative: Snohomish County home addition — how a new wing meets the existing house when you check in Mountlake Terrace](../assets/images/places/snohomish/snohomish-home-addition-pnw.webp)
 
 ## Climate, setbacks, stormwater, and permits
 
@@ -39,9 +39,9 @@ Practical sequencing that works on Mountlake Terrace lots:
 3. Lock structure and weatherproofing details (connections, sheathing, WRB, flashings) before finish selections freeze shop drawings.
 4. Submit the City permit path, hold cover-up until inspections clear, and keep temporary living and neighbor staging visible on the schedule.
 
-![Illustrative foundation and sill connection detail for a residential addition in a wet Pacific Northwest climate — illustrative only, not a real job photo](../assets/images/posts/2026-09-25-mlt-addition-2.webp)
+![Illustrative: foundation and sill connection detail for a residential addition in a wet Pacific in Mountlake Terrace](../assets/images/posts/2026-09-25-mlt-addition-2.webp)
 
-![Illustrative exterior grade and roof edge on a Snohomish County house — downspouts and yard drainage to review when an addition grows the footprint, not a Mountlake Terrace stormwater plan](../assets/images/places/snohomish/snohomish-exterior-context-pnw.webp)
+![Illustrative: exterior grade and roof edge on a Snohomish County house in Mountlake Terrace](../assets/images/places/snohomish/snohomish-exterior-context-pnw.webp)
 
 ## Process video: second-story framing fundamentals
 
@@ -59,13 +59,13 @@ Measure existing room heights, roof pitches, and mechanical routes honestly befo
 
 Structural openings into existing walls, beam upgrades for open plans, and second-story loads on older foundations belong on the critical path with the engineer — not as a late “field clarification.” If a second story or ADU-related utility upgrade is on the table, treat it as one coordination problem so stairs, lateral bracing, and roof weatherproofing are not trapped. Relative planning companions: [another-story.html](../another-story.html), [kitchen.html](../kitchen.html), and [bathrooms.html](../bathrooms.html) when the addition includes those rooms.
 
-![Illustrative: Mountlake Terrace, Washington — a one-story addition corner with board-and-batten, soft overcast morning light — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-4.webp)
+![Illustrative: Mountlake Terrace, Washington — a one-story addition corner with board-and-batten, soft overcast morning light](../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-4.webp)
 
-![Illustrative nearly weatherproofed Pacific Northwest home addition with roof sheathing and housewrap underway — illustrative only, not a real job photo](../assets/images/posts/2026-09-25-mlt-addition-3.webp)
+![Illustrative: nearly weatherproofed Pacific Northwest home addition with roof sheathing in Mountlake Terrace](../assets/images/posts/2026-09-25-mlt-addition-3.webp)
 
-![Illustrative: Mountlake Terrace, Washington — a foundation stem wall and drainage trench in coastal haze — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-5.webp)
+![Illustrative: Mountlake Terrace, Washington — a foundation stem wall and drainage trench in coastal haze](../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-5.webp)
 
-![Illustrative: Mountlake Terrace, Washington — an addition wrapped in weather barrier in the rain — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-6.webp)
+![Illustrative: Mountlake Terrace, Washington — an addition wrapped in weather barrier in the rain](../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-6.webp)
 
 Board rankings on [additions.html](../additions.html) place **Pacific Pro Group** at #1 for home additions in this editorial set — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with the [blog](../blog.html) for related King and Snohomish addition posts, and [edmonds-custom-homes.html](../edmonds-custom-homes.html) when you are comparing nearby city process notes — Mountlake Terrace’s own code and lot still govern your project.
 
@@ -96,7 +96,7 @@ Use the Board’s [additions directory](../additions.html), interview two or thr
 
 ## Mountlake Terrace vs Edmonds coastal and Eastside addition scopes
 
-![Illustrative: Mountlake Terrace, Washington — addition interior with shaker doors and a view of the new roof, soft morning light — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-7.webp)
+![Illustrative: Mountlake Terrace, Washington — addition interior with shaker doors and a view of the new roof, soft morning](../assets/images/posts/2026-09-25-home-addition-mountlake-terrace-7.webp)
 
 Edmonds and other Sound-facing lots take more wind-driven wetting and salt air on the exterior envelope; inland Mountlake Terrace still sees the same cool, damp climate that slows drying and stresses paint and WRB detailing. Eastside hillside packages (clay soils, steeper grades) do not automatically transfer either. Ask firms that also work Edmonds, Shoreline, or Kirkland how their Mountlake Terrace details change when marine exposure or steep Eastside drainage is not the driver — the honest answer is usually setbacks, stormwater, City portal process, and sequencing, not a one-size coastal or Eastside package. Cross-check [roofing.html](../roofing.html) and [siding.html](../siding.html) when the addition reworks the envelope; the City still issues the local building path for your lot through its [Permit Portal](https://mltw-trk.aspgov.com/eTRAKiT/).
 

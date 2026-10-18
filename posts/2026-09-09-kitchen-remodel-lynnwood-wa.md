@@ -14,7 +14,7 @@ slug: "kitchen-remodel-lynnwood-wa"
 
 Lynnwood’s housing mix includes suburban two-stories, townhomes, and updated ranches. Kitchen remodels here frequently chase storage, homework seating, and durability for busy households near Alderwood and the freeway corridors.
 
-![Illustrative: Lynnwood, Washington — a kitchen rough-in with open studs and a metal hood duct, from the side yard — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-09-kitchen-lynnwood-2.webp)
+![Illustrative: Lynnwood, Washington — a kitchen rough-in with open studs and a metal hood duct, from the side yard](../assets/images/posts/2026-09-09-kitchen-lynnwood-2.webp)
 
 
 ## Local context
@@ -22,7 +22,7 @@ Lynnwood’s housing mix includes suburban two-stories, townhomes, and updated r
 Material staging is often easier than in dense Seattle neighborhoods, but HOA rules in some communities restrict dumpsters and parking. Clarify association requirements before you sign a start date.
 
 ## Climate and permitting
-![Illustrative editorial photo — quartz countertop work during a Lynnwood kitchen remodel](../assets/images/posts/2026-09-09-lynnwood-kitchen-2.webp)
+![Illustrative: kitchen remodel on a home in Lynnwood](../assets/images/posts/2026-09-09-lynnwood-kitchen-2.webp)
 
 
 Specify outdoor-exhaust range ventilation when possible. Under-sink waterproofing trays and moisture-tolerant flooring transitions help in the PNW. Electrical capacity checks precede induction ranges and extra microwave circuits. Substantive plumbing and electrical changes typically need permits — know which jurisdiction covers your parcel.
@@ -33,7 +33,7 @@ Design around how you cook and store, not only showroom islands. Confirm refrige
 
 **Pacific Pro Group** ranks Board #1 for kitchen remodels in our editorial directories — [pacificprogroup.com](https://pacificprogroup.com/), PACIFPG765OF. Browse [kitchen.html](../kitchen.html), verify licenses at [L&I Verify](https://secure.lni.wa.gov/verify/), and use [blog.html](../blog.html) for related hiring guides.
 
-![Illustrative editorial photo — finished modern Lynnwood kitchen with island seating](../assets/images/posts/2026-09-09-lynnwood-kitchen-3.webp)
+![Illustrative: kitchen remodel on a home in Lynnwood](../assets/images/posts/2026-09-09-lynnwood-kitchen-3.webp)
 
 
 ## Process video

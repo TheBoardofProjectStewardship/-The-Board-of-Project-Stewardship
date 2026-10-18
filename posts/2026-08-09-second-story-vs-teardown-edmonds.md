@@ -14,7 +14,7 @@ slug: "second-story-vs-teardown-edmonds"
 
 Edmonds owners with small footprints often debate lifting a second story versus tearing down and building new. Neither path is universally cheaper or easier.
 
-![Illustrative: Edmonds, Washington — two new dormers on a roof among fir trees — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-09-second-story-teardown-edmonds-3.webp)
+![Illustrative: Edmonds, Washington — two new dormers on a roof among fir trees](../assets/images/posts/2026-08-09-second-story-teardown-edmonds-3.webp)
 
 ## When second story makes sense
 
@@ -30,7 +30,7 @@ Edmonds owners with small footprints often debate lifting a second story versus 
 - Hazardous materials, poor foundations, or extensive rot dominate contingencies
 - You need a fully contemporary plan that fights the old structure at every turn
 
-![Illustrative: Edmonds, Washington — an unfinished stair to a new upper floor with temporary rails, rain outside — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-09-second-story-teardown-edmonds-2.webp)
+![Illustrative: Edmonds, Washington — an unfinished stair to a new upper floor with temporary rails, rain outside](../assets/images/posts/2026-08-09-second-story-teardown-edmonds-2.webp)
 
 ## Decision process
 
@@ -69,7 +69,7 @@ Second stories carry discovery risk inside existing walls and foundations. Teard
 
 Visit both types of completed Edmonds projects if you can — living next to a vertical addition feels different from moving back into a new build.
 
-![Illustrative editorial photo — not a project photograph; Edmonds addition dry-in and roof-plane context — design preview only](../assets/images/posts/2026-08-09-second-story-teardown-3.webp)
+![Illustrative: second story vs teardown on a home in Edmonds](../assets/images/posts/2026-08-09-second-story-teardown-3.webp)
 
 ## Zoning and neighborhood fit
 

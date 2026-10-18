@@ -163,6 +163,7 @@ python3 tools/board_intake.py publish intake/inbox/submission-id --dry-run
 
 ## Notes
 
+- New content photos use the file name `yyyy-mm-dd-<city>-<topic>-N.webp` (lowercase city and topic, N starting at 1). Do not rename a photo that is already published.
 - Always re-verify WA contractor status at [L&I Verify](https://secure.lni.wa.gov/verify/) before hiring.
 - Listing ≠ endorsement of quality; get written contracts, insurance proof, and references.
 - Public pages are authored as **Board of Project Stewardship Editorial**.

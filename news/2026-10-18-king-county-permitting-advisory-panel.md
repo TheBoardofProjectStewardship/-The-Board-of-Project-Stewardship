@@ -15,7 +15,7 @@ sources:
   - https://kingcounty.gov/en/dept/council/governance-leadership/county-council/newsroom/2024/12-3-perry-permit-review-update-release
   - https://kingcounty.gov/-/media/king-county/depts/executive/zahilay/documents/2026/Final-Transition-Committee-Recommendations-for-Executive-Zahilay
 hero: "assets/images/news/2026-10-18-king-county-permitting-advisory-panel.webp"
-hero_alt: "The King County Courthouse and the King County Administration Building in downtown Seattle, seen across City Hall Park with fall-colored street trees"
+hero_alt: "King County Courthouse and administration building across City Hall Park in downtown Seattle"
 hero_credit: "Photo by Joe Mabel, licensed under CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/), via Wikimedia Commons: https://commons.wikimedia.org/wiki/File:Seattle_-_King_County_Courthouse_and_King_County_Administration_Building_01.jpg"
 ---
 

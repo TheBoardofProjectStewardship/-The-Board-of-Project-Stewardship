@@ -14,7 +14,7 @@ slug: "kitchen-remodel-kenmore-wa"
 
 Kenmore sits on the north end of Lake Washington between Lake Forest Park, Bothell, and the SR-522 corridor — a compact King County city of mid-century ranches, split-levels, and newer lakefront and hillside infill. A kitchen remodel here is often a layout, moisture, and permitting story as much as a cabinet story. Many households want an island, a better work triangle, and outdoor-ducted ventilation without treating the job like a Seattle condo gut or an Edmonds waterfront envelope rebuild. Durable projects start with what the City and the lot will actually allow, then lock trade coordination so rough-in, inspections, and finishes share one critical path.
 
-![Illustrative: Kenmore, Washington — a kitchen pantry with open oak shelves and a zinc counter, pale winter sun — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-26-kitchen-kenmore-2.webp)
+![Illustrative: Kenmore, Washington — a kitchen pantry with open oak shelves and a zinc counter, pale winter sun](../assets/images/posts/2026-09-26-kitchen-kenmore-2.webp)
 
 ## Neighborhood and house-stock context
 
@@ -37,7 +37,7 @@ Practical sequencing that works on Kenmore lots:
 3. Size outdoor-terminated range-hood ducting and wet-zone assemblies before finish selections freeze the rough-in.
 4. Submit City trade permits through MyBuildingPermit, file L&I electrical where required, and hold cover-up until inspections clear.
 
-![Illustrative kitchen rough-in with open studs, range-hood duct chase, and plumbing stub-outs — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-26-kenmore-kitchen-2.webp)
+![Illustrative: kitchen rough-in with open studs, range-hood duct chase, and plumbing stub-outs in Kenmore](../assets/images/posts/2026-09-26-kenmore-kitchen-2.webp)
 
 ## Process video: kitchen layout fundamentals
 
@@ -51,11 +51,11 @@ Measure appliance depths, island overhangs, and glass or window openings honestl
 
 If the kitchen sits inside a larger bath, addition, or second-story package, keep mechanical penetrations on the same critical path as structure. Relative planning companions: [bathrooms.html](../bathrooms.html), [kitchen.html](../kitchen.html), and [trades.html](../trades.html) when multiple specialties share the same rough-in window.
 
-![Illustrative finished Pacific Northwest kitchen with island plans and material samples staged for layout review — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-26-kenmore-kitchen-3.webp)
+![Illustrative: finished Pacific Northwest kitchen with island plans and material samples staged for layout review in Kenmore](../assets/images/posts/2026-09-26-kenmore-kitchen-3.webp)
 
 Board rankings on [kitchen.html](../kitchen.html) place **Pacific Pro Group** at #1 for kitchen remodels in this editorial set — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with the [blog](../blog.html) for related King County kitchen posts, and nearby city notes only as planning context — Kenmore’s own code and MyBuildingPermit path still govern your lot.
 
-![Illustrative: Kenmore, Washington — a finished kitchen with a farmhouse sink under a rain-streaked window, late afternoon sun through firs — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-26-kitchen-kenmore-3.webp)
+![Illustrative: Kenmore, Washington — a finished kitchen with a farmhouse sink under a rain-streaked window, late afternoon](../assets/images/posts/2026-09-26-kitchen-kenmore-3.webp)
 
 ## Materials Worth Knowing
 

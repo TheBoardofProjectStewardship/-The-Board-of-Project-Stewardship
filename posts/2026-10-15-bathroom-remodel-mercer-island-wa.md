@@ -12,7 +12,7 @@ slug: "bathroom-remodel-mercer-island-wa"
 - **Mercer Island issues its own electrical permits.** It appears on Washington L&I's [city electrical permits list](https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections), and single-family electrical and most plumbing permits are obtained through [MyBuildingPermit](https://www.mybuildingpermit.com/) — unless the work is already covered by a combination building permit ([Electrical Permits](https://www.mercerisland.gov/cpd/page/electrical-permits); [Single Family Residential Plumbing Permits](https://www.mercerisland.gov/cpd/page/single-family-residential-plumbing-permits)).
 - Adding fixtures or re-piping more than one bathroom or kitchen triggers the City's **Water Meter Sizing Worksheet**, and contractors need a **Mercer Island business license** — then re-check every firm on [Washington L&I Verify](https://secure.lni.wa.gov/verify/) before you sign.
 
-![Illustrative: a calm remodeled bathroom with a wood vanity, wall mirror, and a window onto evergreen trees — the finished view Mercer Island homeowners plan toward — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-15-mercer-island-bath-1.webp)
+![Illustrative: a calm remodeled bathroom with a wood vanity, wall mirror, and a window onto evergreen trees in Mercer Island](../assets/images/posts/2026-10-15-mercer-island-bath-1.webp)
 
 ## Why a Mercer Island bathroom needs its own permit map
 
@@ -53,7 +53,7 @@ Construction documents must show a floor plan that clearly identifies the area o
 
 Complex projects are not eligible for express review and go through the standard process. The City's examples include structurally complex remodels, work outside the building envelope that needs detailed land use review, projects needing a separate land use approval such as critical area review, and projects requiring arborist or civil engineering review. A bathroom that grows into the yard or adds a bump-out is no longer a simple interior remodel.
 
-![Illustrative: a curbless tiled shower with a linear floor drain and wall-mounted shower head — the kind of wet-area detail that drives plumbing permits and waterproofing inspections — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-15-mercer-island-bath-2.webp)
+![Illustrative: a curbless tiled shower with a linear floor drain and wall-mounted shower head in Mercer Island](../assets/images/posts/2026-10-15-mercer-island-bath-2.webp)
 
 ## Plumbing and electrical: City permits through MyBuildingPermit
 
@@ -98,7 +98,7 @@ Manufacturer references commonly evaluated on Mercer Island-scale bathroom remod
 
 Brand names are a starting point. Installation details, the written specification, and the inspection sign-offs matter more than the logo on the box.
 
-![Illustrative: a freestanding soaking tub beside a large window looking onto trees — a finished bath that still depends on hidden plumbing, waterproofing, and ventilation done right — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-15-mercer-island-bath-3.webp)
+![Illustrative: a freestanding soaking tub beside a large window looking onto trees in Mercer Island](../assets/images/posts/2026-10-15-mercer-island-bath-3.webp)
 
 ## How to shortlist and verify contractors
 

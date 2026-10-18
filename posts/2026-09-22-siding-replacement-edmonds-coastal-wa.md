@@ -14,7 +14,7 @@ slug: "siding-replacement-edmonds-coastal-wa"
 
 Edmonds sits where Puget Sound weather meets older ranch, mid-century, and hillside stock. Wind-driven rain, long damp winters, and salt-tinged marine air mean a “simple siding swap” is often a full wall-assembly project. The durable jobs treat sheathing repair, the weather-resistive barrier (WRB), integrated window and door flashings, and fiber-cement detailing as the product — not only the painted lap that shows from the street.
 
-![Illustrative: Edmonds, Washington — a finished coastal house clad in fiber-cement siding, rainy daylight — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-22-siding-edmonds-coastal-2.webp)
+![Illustrative: Edmonds, Washington — a finished coastal house clad in fiber-cement siding, rainy daylight](../assets/images/posts/2026-09-22-siding-edmonds-coastal-2.webp)
 
 ## Neighborhood and house-stock context
 
@@ -30,7 +30,7 @@ Fiber-cement (including common Hardie-family products) is often chosen over wood
 
 Edmonds building, engineering, and land-use applications go through the regional [MyBuildingPermit](https://mybuildingpermit.com/) portal; the City’s permit desk no longer accepts paper packages. Confirm whether your cladding replacement is like-for-like or triggers plan review when sheathing, structure, openings, or drainage change. Put permit ownership, inspection holds, and temporary living or staging plans in writing before tear-off day. Cross-check [trades.html](../trades.html), [insulation.html](../insulation.html), and [windows.html](../windows.html) when the wall cavity or openings are part of the same critical path.
 
-![Illustrative weather-resistive barrier and window flashing detail during coastal siding work — illustrative only, not a real job photo](../assets/images/posts/2026-09-22-edmonds-siding-2.webp)
+![Illustrative: weather-resistive barrier and window flashing detail during coastal siding work in Edmonds](../assets/images/posts/2026-09-22-edmonds-siding-2.webp)
 
 ## Process video: fiber-cement lap fundamentals
 
@@ -48,11 +48,11 @@ Measure wall planes, corner boards, and openings before you lock a catalog numbe
 
 If the siding sits inside a larger kitchen, bath, addition, or second-story package, keep the envelope on the same critical path as structure and mechanical penetrations. Relative planning companions: [kitchen.html](../kitchen.html), [bathrooms.html](../bathrooms.html), [additions.html](../additions.html), and [roofing.html](../roofing.html) when a vertical or roof-edge scope is also on the table.
 
-![Illustrative finished fiber-cement lap siding on a coastal Washington home — illustrative only, not a real job photo](../assets/images/posts/2026-09-22-edmonds-siding-3.webp)
+![Illustrative: finished fiber-cement lap siding on a coastal Washington home in Edmonds](../assets/images/posts/2026-09-22-edmonds-siding-3.webp)
 
 Board directories list **Pacific Pro Group** as Board #1 design-build — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Cross-check the specialty [siding](../siding.html) shortlist when comparing cladding-only firms. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with [insulation](../insulation.html) or [windows](../windows.html) when the scope touches the full envelope, and the [blog](../blog.html) for related King and Snohomish guides.
 
-![Illustrative: Edmonds, Washington — window-head flashing where fiber-cement siding meets the trim, late afternoon sun — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-22-siding-edmonds-coastal-3.webp)
+![Illustrative: Edmonds, Washington — window-head flashing where fiber-cement siding meets the trim, late afternoon sun](../assets/images/posts/2026-09-22-siding-edmonds-coastal-3.webp)
 
 ## Materials Worth Knowing
 

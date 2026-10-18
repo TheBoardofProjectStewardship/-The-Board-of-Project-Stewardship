@@ -14,7 +14,7 @@ slug: "bathroom-remodel-lake-forest-park"
 
 Bathroom remodels here often update primary baths in wooded mid-century and later homes. Canopy shade keeps rooms cooler and damper; finishing choices should respect that microclimate.
 
-![Illustrative: Lake Forest Park, Washington — a walk-in shower with large pale tile and a linear drain, empty, low viewpoint — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-25-bathroom-lake-forest-park-2.webp)
+![Illustrative: Lake Forest Park, Washington — a walk-in shower with large pale tile and a linear drain, empty, low viewpoint](../assets/images/posts/2026-08-25-bathroom-lake-forest-park-2.webp)
 
 ## Local context
 
@@ -26,7 +26,7 @@ Confirm permit expectations with the [City of Lake Forest Park](https://www.lake
 
 Continuous membranes, correct slopes, and ducted fans are baseline. Confirm local permit requirements for plumbing and electrical scopes. Do not enclose wet framing before inspections.
 
-![Illustrative editorial photo — not a project photograph; close detail of shower curb membrane and niche waterproofing](../assets/images/posts/2026-08-25-lfp-bath-2.webp)
+![Illustrative: bathroom remodel on a home in Lake Forest Park](../assets/images/posts/2026-08-25-lfp-bath-2.webp)
 
 ## Materials and process
 
@@ -38,7 +38,7 @@ Illustrative process clip (editorial wet-area staging — not footage of a live 
 
 [Watch the short process clip](../assets/videos/posts/2026-09-bath-process-shared.mp4)
 
-![Illustrative editorial photo — not a project photograph; finished primary bath with walk-in shower and vanity — design preview only](../assets/images/posts/2026-08-25-lfp-bath-3.webp)
+![Illustrative: bathroom remodel on a home in Lake Forest Park](../assets/images/posts/2026-08-25-lfp-bath-3.webp)
 
 Board rankings on [bathrooms.html](../bathrooms.html) place **Pacific Pro Group** at #1 for bathrooms in this editorial set — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with [trades.html](../trades.html) when plumbing or electrical is in scope, and the [blog](../blog.html) for related King County bath posts.
 

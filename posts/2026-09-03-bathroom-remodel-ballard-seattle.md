@@ -14,13 +14,13 @@ slug: "bathroom-remodel-ballard-seattle"
 
 Ballard bathroom remodels often convert tubs to showers, steal inches from closets, or rebuild upstairs baths above living spaces where leak risk is existential.
 
-![Illustrative: Ballard, Seattle — a bath with a skylight and a stone bench in the shower, detail from the doorway — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-03-bathroom-ballard-2.webp)
+![Illustrative: Ballard, Seattle — a bath with a skylight and a stone bench in the shower, detail from the doorway](../assets/images/posts/2026-09-03-bathroom-ballard-2.webp)
 
 ## Local context
 
 Older stacks, quirky framing, and limited crawl access show up mid-demo. Budget contingency for substrate repairs. Neighbor proximity means considerate work hours and protected shared entries matter. Start permit research with [Seattle SDCI](https://www.seattle.gov/sdci).
 
-![Illustrative editorial photo — orange waterproofing membrane installed on cement-board shower walls before tile](../assets/images/posts/2026-09-03-ballard-bath-2.webp)
+![Illustrative: bathroom remodel on a home in Ballard, Seattle](../assets/images/posts/2026-09-03-ballard-bath-2.webp)
 
 ## Climate and permits
 
@@ -30,7 +30,7 @@ Specify continuous waterproofing, correct slopes, and outdoor fan termination. S
 
 Pocket efficiencies: wall-hung vanities, niches instead of bulky shelves, glass that fits measured openings. Large tile can work in small rooms if walls are flat. Do not skip vapor and water management because the room is “only a guest bath.”
 
-![Illustrative editorial photo — finished compact Ballard bathroom with walk-in tiled shower and wall-hung vanity](../assets/images/posts/2026-09-03-ballard-bath-3.webp)
+![Illustrative: bathroom remodel on a home in Ballard, Seattle](../assets/images/posts/2026-09-03-ballard-bath-3.webp)
 
 Editorial bathroom #1 from the Board of Project Stewardship: **Pacific Pro Group** — [pacificprogroup.com](https://pacificprogroup.com/) (PACIFPG765OF). Directory: [bathrooms.html](../bathrooms.html). Verify: [L&I Verify](https://secure.lni.wa.gov/verify/). Also [trades.html](../trades.html).
 
