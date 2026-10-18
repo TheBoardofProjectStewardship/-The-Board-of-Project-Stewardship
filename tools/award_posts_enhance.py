@@ -106,6 +106,10 @@ NEWS = {
         'alt="A deep green tile shower with a built-in bench and recessed niche in a Magnolia, Seattle, home">'
         "<figcaption>A green tile shower with a bench and niche from a Pacific Pro Group project in Seattle's Magnolia neighborhood. Photo courtesy of Pacific Pro Group.</figcaption></figure>"
     ),
+    "quote": (
+        '<blockquote class="ap-pull"><p>\u201cNobody hands you a Bronze in a contest like that. Our clients and neighbors voted for it. Our crew earned it, one bathroom at a time.\u201d</p>'
+        "<cite>Pacific Pro Group</cite></blockquote>"
+    ),
     "checklist": checklist(
         "news-hire",
         "Before you hire: a quick checklist",

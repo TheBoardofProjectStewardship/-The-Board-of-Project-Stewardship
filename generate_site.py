@@ -8231,7 +8231,7 @@ def _figcaption_by_src(html: str) -> dict[str, str]:
 def preserve_news_body_wording(rel: str, generated: str) -> str:
     """Keep published news sentences. Regen may change alt text and figcaptions only."""
     published = _git_head_text(rel)
-    if not published:
+    if not published or rel in os.environ.get("BOPS_REFRESH_NEWS", "").split(","):
         return generated
     alts = _img_alt_by_src(generated)
     captions = _figcaption_by_src(generated)

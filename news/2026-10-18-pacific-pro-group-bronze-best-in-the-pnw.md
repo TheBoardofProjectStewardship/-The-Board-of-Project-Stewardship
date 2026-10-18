@@ -81,6 +81,8 @@ Its company profile points to coastal houses as a specialty, a natural fit for a
 
 Pacific Pro Group is listed with Built Green and the Master Builders Association of King and Snohomish Counties. On Trustindex, which pulls public reviews into one score, it held a 4.9 rating from 229 reviews as of Oct. 15.
 
+[[ap:quote]]
+
 ## Why a bathroom vote is hard to win
 
 A bathroom remodel puts a crew inside someone's home for weeks. Water lines, drains, venting, waterproofing, tile and glass all land in a small room, usually in a house where people are still living.
