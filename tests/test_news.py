@@ -46,6 +46,7 @@ class NewsContractTests(unittest.TestCase):
         self.assertEqual(
             [item["slug"] for item in stories],
             [
+                "king-county-permitting-advisory-panel",
                 "edmonds-landmark-tree-ordinance-extension",
                 "seattle-environmentally-critical-areas-update",
                 "mount-baker-redevelopment-groundbreaking",
@@ -53,19 +54,21 @@ class NewsContractTests(unittest.TestCase):
                 "snohomish-health-septic-permit-grant",
             ],
         )
-        self.assertEqual(stories[0]["date"], "2026-10-17")
-        self.assertEqual(stories[1]["date"], "2026-10-16")
+        self.assertEqual(stories[0]["date"], "2026-10-18")
+        self.assertEqual(stories[1]["date"], "2026-10-17")
         self.assertEqual(stories[2]["date"], "2026-10-16")
-        self.assertEqual(stories[3]["date"], "2026-10-15")
-        self.assertEqual(stories[4]["date"], "2026-10-14")
+        self.assertEqual(stories[3]["date"], "2026-10-16")
+        self.assertEqual(stories[4]["date"], "2026-10-15")
+        self.assertEqual(stories[5]["date"], "2026-10-14")
         self.assertTrue(stories[0]["title"])
         self.assertTrue(stories[0]["description"])
         self.assertGreaterEqual(len(stories[0]["sources"]), 1)
         self.assertIn("Joe Mabel", stories[0]["hero_credit"])
-        self.assertEqual(stories[1]["hero_credit"], "")
-        self.assertIn("SounderBruce", stories[2]["hero_credit"])
-        self.assertIn("Robert Ashworth", stories[3]["hero_credit"])
-        self.assertIn("Emersb", stories[4]["hero_credit"])
+        self.assertIn("Joe Mabel", stories[1]["hero_credit"])
+        self.assertEqual(stories[2]["hero_credit"], "")
+        self.assertIn("SounderBruce", stories[3]["hero_credit"])
+        self.assertIn("Robert Ashworth", stories[4]["hero_credit"])
+        self.assertIn("Emersb", stories[5]["hero_credit"])
         self.assertTrue((ROOT / "news" / "_template.md").is_file())
         self.assertEqual(
             sorted(path.name for path in (ROOT / "news").glob("[0-9]*.md")),
@@ -75,12 +78,13 @@ class NewsContractTests(unittest.TestCase):
                 "2026-10-16-mount-baker-redevelopment-groundbreaking.md",
                 "2026-10-16-seattle-environmentally-critical-areas-update.md",
                 "2026-10-17-edmonds-landmark-tree-ordinance-extension.md",
+                "2026-10-18-king-county-permitting-advisory-panel.md",
             ],
         )
         result = intake.validate_news_library(ROOT)
         self.assertTrue(result["ok"], result)
         self.assertEqual(result["status"], "ready")
-        self.assertEqual(result["stories"], 5)
+        self.assertEqual(result["stories"], 6)
         self.assertEqual(gs.news_blog_overlap(ROOT), [])
         self.assertIn("First stories coming soon", gs.build_news_index([]))
 
@@ -99,15 +103,17 @@ class NewsContractTests(unittest.TestCase):
         self.assertNotIn("mount-baker-redevelopment-groundbreaking", blog_html)
         self.assertNotIn("seattle-environmentally-critical-areas-update", blog_html)
         self.assertNotIn("edmonds-landmark-tree-ordinance-extension", blog_html)
+        self.assertNotIn("king-county-permitting-advisory-panel", blog_html)
         baker_url = "https://boardofprojectstewardship.com/news/mount-baker-redevelopment-groundbreaking.html"
         eca_url = "https://boardofprojectstewardship.com/news/seattle-environmentally-critical-areas-update.html"
         tree_url = "https://boardofprojectstewardship.com/news/edmonds-landmark-tree-ordinance-extension.html"
-        tree_href = "./news/edmonds-landmark-tree-ordinance-extension.html"
+        panel_url = "https://boardofprojectstewardship.com/news/king-county-permitting-advisory-panel.html"
+        panel_href = "./news/king-county-permitting-advisory-panel.html"
         lead = news_html.split('class="news-lead"', 1)[1].split("</article>", 1)[0]
-        self.assertIn(tree_href, lead)
+        self.assertIn(panel_href, lead)
         self.assertIn(stories[0]["title"], lead)
-        self.assertIn("October 17, 2026", lead)
-        self.assertNotIn("seattle-environmentally-critical-areas-update", lead)
+        self.assertIn("October 18, 2026", lead)
+        self.assertNotIn("edmonds-landmark-tree-ordinance-extension", lead)
 
         lot_url = "https://boardofprojectstewardship.com/news/snohomish-county-administrative-lot-splits.html"
         lot_href = "./news/snohomish-county-administrative-lot-splits.html"
@@ -212,9 +218,40 @@ class NewsContractTests(unittest.TestCase):
         self.assertIsNone(gs.news_forbidden_term(tree))
         self.assertNotIn("/posts/", tree)
 
+        panel = (ROOT / "news" / "king-county-permitting-advisory-panel.html").read_text(encoding="utf-8")
+        self.assertIn(
+            "The King County Courthouse and the King County Administration Building in downtown Seattle, seen across City Hall Park with fall-colored street trees",
+            panel,
+        )
+        self.assertIn("Joe Mabel", panel)
+        self.assertIn('href="https://creativecommons.org/licenses/by-sa/4.0/"', panel)
+        self.assertIn(">CC BY-SA 4.0</a>", panel)
+        self.assertIn(
+            'href="https://commons.wikimedia.org/wiki/File:Seattle_-_King_County_Courthouse_and_King_County_Administration_Building_01.jpg"',
+            panel,
+        )
+        self.assertIn("2026-10-18-king-county-permitting-advisory-panel-480.webp", panel)
+        self.assertIn("2026-10-18-king-county-permitting-advisory-panel-800.webp", panel)
+        self.assertIn("2026-10-18-king-county-permitting-advisory-panel-1200.webp", panel)
+        self.assertIn("History and background", panel)
+        self.assertIn(
+            'href="https://app.leg.wa.gov/billsummary?BillNumber=5290&amp;Year=2023&amp;Initiative=false"',
+            panel,
+        )
+        panel_story = next(item for item in stories if item["slug"] == "king-county-permitting-advisory-panel")
+        for source in panel_story["sources"]:
+            self.assertIn(source, panel)
+        emails = set(re.findall(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}", panel))
+        self.assertEqual(emails, {"editorial@boardofprojectstewardship.com"})
+        self.assertNotIn("parentOrganization", panel)
+        self.assertNotIn("isRelatedTo", panel)
+        self.assertIsNone(gs.news_forbidden_term(panel))
+        self.assertNotIn("/posts/", panel)
+
         rss = (ROOT / "news" / "rss.xml").read_text(encoding="utf-8")
         self.assertIn("Board of Project Stewardship News", rss)
         self.assertIn("<item>", rss)
+        self.assertTrue(rss.index(panel_url) < rss.index(tree_url))
         self.assertTrue(rss.index(tree_url) < rss.index(eca_url))
         self.assertTrue(rss.index(eca_url) < rss.index(baker_url))
         self.assertIn(story_url, rss)
@@ -222,6 +259,7 @@ class NewsContractTests(unittest.TestCase):
         self.assertIn(baker_url, rss)
         self.assertIn(eca_url, rss)
         self.assertIn(tree_url, rss)
+        self.assertIn(panel_url, rss)
         self.assertNotIn("/posts/", rss)
 
         sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
@@ -231,6 +269,8 @@ class NewsContractTests(unittest.TestCase):
         self.assertIn(baker_url, sitemap)
         self.assertIn(eca_url, sitemap)
         self.assertIn(tree_url, sitemap)
+        self.assertIn(panel_url, sitemap)
+        self.assertIn("https://boardofprojectstewardship.com/projects/magnolia-house-adu-garage/", sitemap)
         blog_rss = (ROOT / "blog" / "rss.xml").read_text(encoding="utf-8")
         posts_json = (ROOT / "posts.json").read_text(encoding="utf-8")
         self.assertNotIn("snohomish-health-septic-permit-grant", blog_rss)
@@ -243,6 +283,8 @@ class NewsContractTests(unittest.TestCase):
         self.assertNotIn("seattle-environmentally-critical-areas-update", posts_json)
         self.assertNotIn("edmonds-landmark-tree-ordinance-extension", blog_rss)
         self.assertNotIn("edmonds-landmark-tree-ordinance-extension", posts_json)
+        self.assertNotIn("king-county-permitting-advisory-panel", blog_rss)
+        self.assertNotIn("king-county-permitting-advisory-panel", posts_json)
         self.assertNotIn("/news/", blog_rss)
         self.assertNotIn('"path": "./news/', posts_json)
         self.assertNotIn("./posts/", news_html)
