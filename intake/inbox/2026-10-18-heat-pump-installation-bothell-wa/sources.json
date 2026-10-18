@@ -1,0 +1,82 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Bothell",
+    "service": "Heat pump installation",
+    "slug": "heat-pump-installation-bothell-wa"
+  },
+  "sources": [
+    {
+      "url": "https://www.bothellwa.gov/337/Permit-Center",
+      "title": "City of Bothell - Permit Center",
+      "retrieved": "2026-10-18",
+      "http_status": 200,
+      "supports": "All permit applications online only through MyBuildingPermit; permit status lookup; Permit Center phone 425-806-6400 and permits@bothellwa.gov; 'Electrical permits are obtained through Labor and Industries.'"
+    },
+    {
+      "url": "https://www.bothellwa.gov/Faq.aspx?QID=322",
+      "title": "City of Bothell - FAQ: When is a permit necessary?",
+      "retrieved": "2026-10-18",
+      "http_status": 200,
+      "supports": "New construction, remodels or repairs to existing structures or systems generally require a permit; replacing a water heater or furnace may require one; homeowner responsible for all required inspections incl. final; inspection requests by 4pm previous business day; insurance and disclosure reasons for permits."
+    },
+    {
+      "url": "https://www.bothellwa.gov/DocumentCenter/View/859/Residential-Plumbing-and-Mechanical-Permit---9",
+      "title": "City of Bothell - Residential Plumbing and/or Mechanical Alterations/Additions/Replacement form",
+      "retrieved": "2026-10-18",
+      "http_status": 200,
+      "supports": "Line items for compressors, air conditioners and heat pumps, heating equipment incl. ductwork; pad-mounted heat pumps/AC not in front yard setback, at least three feet from adjacent property line or structure incl. fences, screened from public right-of-way; screening removable or 3 ft away. (Fee amounts not used.)"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "title": "Washington L&I - City Electrical Permits & Inspections",
+      "retrieved": "2026-10-18",
+      "http_status": 200,
+      "supports": "List of cities issuing their own electrical permits (Bellevue, Kirkland, Lynnwood, Mountlake Terrace, Seattle, etc.; Bothell not listed); DOR address lookup to confirm city vs county jurisdiction."
+    },
+    {
+      "url": "https://www.lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/purchase-permits-request-inspections",
+      "title": "Washington L&I - Purchase Permits & Request Inspections",
+      "retrieved": "2026-10-18",
+      "http_status": 200,
+      "supports": "Homeowners should only buy an electrical permit for their own work; L&I strongly encourages hiring an electrical contractor; hired electrical contractor must purchase the permit for their work."
+    },
+    {
+      "url": "https://www.epa.gov/section608/section-608-technician-certification-0",
+      "title": "EPA - Section 608 Technician Certification",
+      "retrieved": "2026-10-18",
+      "http_status": 200,
+      "supports": "Technicians who maintain, service, repair, or dispose of equipment that could release ozone-depleting refrigerants must be certified."
+    },
+    {
+      "url": "https://www.epa.gov/section608",
+      "title": "EPA - Section 608 of the Clean Air Act",
+      "retrieved": "2026-10-18",
+      "http_status": 200,
+      "supports": "National Recycling and Emission Reduction Program; prohibits intentionally venting refrigerants."
+    },
+    {
+      "url": "https://www.mybuildingpermit.com/",
+      "title": "MyBuildingPermit",
+      "retrieved": "2026-10-18",
+      "http_status": 200,
+      "supports": "Online permit application portal used by Bothell."
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "Washington L&I Verify",
+      "retrieved": "2026-10-18",
+      "http_status": 200,
+      "supports": "Verify contractor registration, license, and bond."
+    }
+  ],
+  "dropped": [
+    "Bothell mechanical permit fee amounts (price lock)",
+    "BMC 20.02.095 direct link (bothell.municipal.codes returns 403 to curl; exemption point cited via City FAQ)",
+    "Utility rebate programs/amounts (unverified)"
+  ],
+  "generation": {
+    "agent": "box-authored",
+    "mode": "box-fallback"
+  }
+}

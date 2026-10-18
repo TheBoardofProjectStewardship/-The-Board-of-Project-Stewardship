@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-10-18-heat-pump-installation-bothell-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-10-18T17:35:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Heat Pump Installation Bothell WA \u2014 Mechanical Permit, L&I Electrical Permit & Where the Outdoor Unit Can Go",
+    "date": "2026-10-18",
+    "slug": "heat-pump-installation-bothell-wa",
+    "description": "A Bothell homeowner's guide to installing a heat pump: the City mechanical permit, why the electrical permit comes from Washington L&I, the City's siting rules for the outdoor unit, refrigerant certification, and what to put in the contract.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 connected; cron packets landed 09:35-09:52 PT: openclaw/hermes/ollama/grok-build roof-replacement-edmonds-wa (roofing used 09-21 Edmonds coastal and 10-05; templated 'Planning, Permits & Licensed Pros' copy; hermes timed out with 1 source; openclaw no keywords/angles; media plan without bytes), another-story second-story-addition-bothell-wa (additions used 10-16; templated), edmonds-news roundup (thin), approved verify-contractor-license template (~700 words) - none passed rich-post bar. Topic: heat pump installation Bothell WA (HVAC never used as a post topic; bothellwa.gov curl 200). Producer role fields kept per intake contract."
+}
