@@ -10,22 +10,22 @@
       "photos": [
         {
           "rel": "assets/images/places/bellevue/bellevue-exterior-context-pnw.webp",
-          "alt": "Illustrative Bellevue residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Bellevue exterior context (illustrative)",
+          "alt": "Illustrative: Bellevue residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Bellevue residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "origin": "gemini-imagen-computerUse-2026-09-24"
         },
         {
           "rel": "assets/images/places/bellevue/bellevue-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Bellevue homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Bellevue kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Bellevue homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Bellevue homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "origin": "gemini-imagen-computerUse-2026-09-24"
         },
         {
           "rel": "assets/images/places/bellevue/bellevue-bathroom-remodel-pnw.webp",
-          "alt": "Illustrative bathroom remodel scene for Bellevue \u2014 waterproofing-minded PNW context; not a real Board job photo",
-          "caption": "Bellevue bathroom (illustrative)",
+          "alt": "Illustrative: bathroom remodel scene for Bellevue \u2014 waterproofing-minded PNW context",
+          "caption": "Bathroom remodel scene for Bellevue \u2014 waterproofing-minded PNW context.",
           "role": "bathroom",
           "origin": "gemini-imagen-computerUse-2026-09-24"
         }
@@ -46,22 +46,22 @@
       "photos": [
         {
           "rel": "assets/images/places/redmond/redmond-exterior-context-pnw.webp",
-          "alt": "Illustrative Redmond residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Redmond exterior context (illustrative)",
+          "alt": "Illustrative: Redmond residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Redmond residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "origin": "gemini-imagen-computerUse-2026-09-24"
         },
         {
           "rel": "assets/images/places/redmond/redmond-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Redmond homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Redmond kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Redmond homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Redmond homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "origin": "gemini-imagen-computerUse-2026-09-24"
         },
         {
           "rel": "assets/images/places/redmond/redmond-bathroom-remodel-pnw.webp",
-          "alt": "Illustrative bathroom remodel scene for Redmond \u2014 waterproofing-minded PNW context; not a real Board job photo",
-          "caption": "Redmond bathroom (illustrative)",
+          "alt": "Illustrative: bathroom remodel scene for Redmond \u2014 waterproofing-minded PNW context",
+          "caption": "Bathroom remodel scene for Redmond \u2014 waterproofing-minded PNW context.",
           "role": "bathroom",
           "origin": "gemini-imagen-computerUse-2026-09-24"
         }
@@ -81,22 +81,22 @@
       "photos": [
         {
           "rel": "assets/images/places/renton/renton-exterior-context-pnw.webp",
-          "alt": "Illustrative Renton residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Renton exterior context (illustrative)",
+          "alt": "Illustrative: Renton residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Renton residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "origin": "gemini-imagen-computerUse-2026-09-24"
         },
         {
           "rel": "assets/images/places/renton/renton-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Renton homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Renton kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Renton homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Renton homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "origin": "gemini-imagen-computerUse-2026-09-24"
         },
         {
           "rel": "assets/images/places/renton/renton-home-addition-pnw.webp",
-          "alt": "Illustrative home addition / exterior massing for Renton \u2014 PNW cedar-fir context; not a real Board job photo",
-          "caption": "Renton addition (illustrative)",
+          "alt": "Illustrative: home addition / exterior massing for Renton \u2014 PNW cedar-fir context",
+          "caption": "Home addition / exterior massing for Renton \u2014 PNW cedar-fir context.",
           "role": "addition",
           "origin": "gemini-imagen-computerUse-2026-09-24"
         }
@@ -117,24 +117,24 @@
       "photos": [
         {
           "rel": "assets/images/places/kent/kent-exterior-context-pnw.webp",
-          "alt": "Illustrative Kent residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Kent exterior context (illustrative)",
+          "alt": "Illustrative: Kent residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Kent residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/hubs/hub-edmonds-1.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/kent/kent-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Kent homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Kent kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Kent homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Kent homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/dir-kitchen-hero.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/kent/kent-bathroom-remodel-pnw.webp",
-          "alt": "Illustrative bathroom remodel scene for Kent \u2014 waterproofing-minded PNW context; not a real Board job photo",
-          "caption": "Kent bathroom (illustrative)",
+          "alt": "Illustrative: bathroom remodel scene for Kent \u2014 waterproofing-minded PNW context",
+          "caption": "Bathroom remodel scene for Kent \u2014 waterproofing-minded PNW context.",
           "role": "bathroom",
           "source": "assets/images/posts/2026-08-10-electrical-bath-3.webp",
           "origin": "unique-crop-reuse"
@@ -156,24 +156,24 @@
       "photos": [
         {
           "rel": "assets/images/places/auburn/auburn-exterior-context-pnw.webp",
-          "alt": "Illustrative Auburn residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Auburn exterior context (illustrative)",
+          "alt": "Illustrative: Auburn residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Auburn residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/home-process-build.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/auburn/auburn-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Auburn homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Auburn kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Auburn homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Auburn homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-21-queen-anne-kitchen-3.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/auburn/auburn-home-addition-pnw.webp",
-          "alt": "Illustrative home addition / exterior massing for Auburn \u2014 PNW cedar-fir context; not a real Board job photo",
-          "caption": "Auburn addition (illustrative)",
+          "alt": "Illustrative: home addition / exterior massing for Auburn \u2014 PNW cedar-fir context",
+          "caption": "Home addition / exterior massing for Auburn \u2014 PNW cedar-fir context.",
           "role": "addition",
           "source": "assets/images/posts/2026-08-12-edmonds-addition-permit-2.webp",
           "origin": "unique-crop-reuse"
@@ -195,24 +195,24 @@
       "photos": [
         {
           "rel": "assets/images/places/federal-way/federal-way-exterior-context-pnw.webp",
-          "alt": "Illustrative Federal Way residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Federal Way exterior context (illustrative)",
+          "alt": "Illustrative: Federal Way residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Federal Way residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/home-process-build.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/federal-way/federal-way-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Federal Way homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Federal Way kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Federal Way homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Federal Way homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-12-hire-kitchen-3.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/federal-way/federal-way-home-addition-pnw.webp",
-          "alt": "Illustrative home addition / exterior massing for Federal Way \u2014 PNW cedar-fir context; not a real Board job photo",
-          "caption": "Federal Way addition (illustrative)",
+          "alt": "Illustrative: home addition / exterior massing for Federal Way \u2014 PNW cedar-fir context",
+          "caption": "Home addition / exterior massing for Federal Way \u2014 PNW cedar-fir context.",
           "role": "addition",
           "source": "assets/images/home-ppg-addition.webp",
           "origin": "unique-crop-reuse"
@@ -234,24 +234,24 @@
       "photos": [
         {
           "rel": "assets/images/places/issaquah/issaquah-exterior-context-pnw.webp",
-          "alt": "Illustrative Issaquah residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Issaquah exterior context (illustrative)",
+          "alt": "Illustrative: Issaquah residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Issaquah residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/home-gallery-dryin.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/issaquah/issaquah-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Issaquah homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Issaquah kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Issaquah homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Issaquah homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-21-queen-anne-kitchen-2.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/issaquah/issaquah-bathroom-remodel-pnw.webp",
-          "alt": "Illustrative bathroom remodel scene for Issaquah \u2014 waterproofing-minded PNW context; not a real Board job photo",
-          "caption": "Issaquah bathroom (illustrative)",
+          "alt": "Illustrative: bathroom remodel scene for Issaquah \u2014 waterproofing-minded PNW context",
+          "caption": "Bathroom remodel scene for Issaquah \u2014 waterproofing-minded PNW context.",
           "role": "bathroom",
           "source": "assets/images/posts/2026-08-16-magnolia-shower-3.webp",
           "origin": "unique-crop-reuse"
@@ -273,24 +273,24 @@
       "photos": [
         {
           "rel": "assets/images/places/sammamish/sammamish-exterior-context-pnw.webp",
-          "alt": "Illustrative Sammamish residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Sammamish exterior context (illustrative)",
+          "alt": "Illustrative: Sammamish residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Sammamish residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/dir-additions-hero.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/sammamish/sammamish-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Sammamish homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Sammamish kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Sammamish homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Sammamish homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-12-hire-kitchen-2.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/sammamish/sammamish-home-addition-pnw.webp",
-          "alt": "Illustrative home addition / exterior massing for Sammamish \u2014 PNW cedar-fir context; not a real Board job photo",
-          "caption": "Sammamish addition (illustrative)",
+          "alt": "Illustrative: home addition / exterior massing for Sammamish \u2014 PNW cedar-fir context",
+          "caption": "Home addition / exterior massing for Sammamish \u2014 PNW cedar-fir context.",
           "role": "addition",
           "source": "assets/images/posts/2026-08-12-edmonds-addition-permit-3.webp",
           "origin": "unique-crop-reuse"
@@ -312,24 +312,24 @@
       "photos": [
         {
           "rel": "assets/images/places/mercer-island/mercer-island-exterior-context-pnw.webp",
-          "alt": "Illustrative Mercer Island residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Mercer Island exterior context (illustrative)",
+          "alt": "Illustrative: Mercer Island residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Mercer Island residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/home-ppg-addition.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/mercer-island/mercer-island-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Mercer Island homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Mercer Island kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Mercer Island homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Mercer Island homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-21-queen-anne-kitchen-1.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/mercer-island/mercer-island-bathroom-remodel-pnw.webp",
-          "alt": "Illustrative bathroom remodel scene for Mercer Island \u2014 waterproofing-minded PNW context; not a real Board job photo",
-          "caption": "Mercer Island bathroom (illustrative)",
+          "alt": "Illustrative: bathroom remodel scene for Mercer Island \u2014 waterproofing-minded PNW context",
+          "caption": "Bathroom remodel scene for Mercer Island \u2014 waterproofing-minded PNW context.",
           "role": "bathroom",
           "source": "assets/images/posts/2026-08-13-phinney-bath-3.webp",
           "origin": "unique-crop-reuse"
@@ -351,24 +351,24 @@
       "photos": [
         {
           "rel": "assets/images/places/kenmore/kenmore-exterior-context-pnw.webp",
-          "alt": "Illustrative Kenmore residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Kenmore exterior context (illustrative)",
+          "alt": "Illustrative: Kenmore residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Kenmore residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/home-process-build.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/kenmore/kenmore-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Kenmore homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Kenmore kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Kenmore homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Kenmore homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-12-hire-kitchen-2.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/kenmore/kenmore-bathroom-remodel-pnw.webp",
-          "alt": "Illustrative bathroom remodel scene for Kenmore \u2014 waterproofing-minded PNW context; not a real Board job photo",
-          "caption": "Kenmore bathroom (illustrative)",
+          "alt": "Illustrative: bathroom remodel scene for Kenmore \u2014 waterproofing-minded PNW context",
+          "caption": "Bathroom remodel scene for Kenmore \u2014 waterproofing-minded PNW context.",
           "role": "bathroom",
           "source": "assets/images/posts/2026-08-16-magnolia-shower-1.webp",
           "origin": "unique-crop-reuse"
@@ -390,24 +390,24 @@
       "photos": [
         {
           "rel": "assets/images/places/woodinville/woodinville-exterior-context-pnw.webp",
-          "alt": "Illustrative Woodinville residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Woodinville exterior context (illustrative)",
+          "alt": "Illustrative: Woodinville residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Woodinville residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/home-gallery-finish.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/woodinville/woodinville-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Woodinville homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Woodinville kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Woodinville homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Woodinville homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-21-queen-anne-kitchen-3.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/woodinville/woodinville-home-addition-pnw.webp",
-          "alt": "Illustrative home addition / exterior massing for Woodinville \u2014 PNW cedar-fir context; not a real Board job photo",
-          "caption": "Woodinville addition (illustrative)",
+          "alt": "Illustrative: home addition / exterior massing for Woodinville \u2014 PNW cedar-fir context",
+          "caption": "Home addition / exterior massing for Woodinville \u2014 PNW cedar-fir context.",
           "role": "addition",
           "source": "assets/images/home-ppg-addition.webp",
           "origin": "unique-crop-reuse"
@@ -429,24 +429,24 @@
       "photos": [
         {
           "rel": "assets/images/places/newcastle/newcastle-exterior-context-pnw.webp",
-          "alt": "Illustrative Newcastle residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Newcastle exterior context (illustrative)",
+          "alt": "Illustrative: Newcastle residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Newcastle residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/home-gallery-finish.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/newcastle/newcastle-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Newcastle homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Newcastle kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Newcastle homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Newcastle homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/dir-kitchen-hero.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/newcastle/newcastle-bathroom-remodel-pnw.webp",
-          "alt": "Illustrative bathroom remodel scene for Newcastle \u2014 waterproofing-minded PNW context; not a real Board job photo",
-          "caption": "Newcastle bathroom (illustrative)",
+          "alt": "Illustrative: bathroom remodel scene for Newcastle \u2014 waterproofing-minded PNW context",
+          "caption": "Bathroom remodel scene for Newcastle \u2014 waterproofing-minded PNW context.",
           "role": "bathroom",
           "source": "assets/images/posts/2026-08-16-magnolia-shower-3.webp",
           "origin": "unique-crop-reuse"
@@ -468,24 +468,24 @@
       "photos": [
         {
           "rel": "assets/images/places/des-moines/des-moines-exterior-context-pnw.webp",
-          "alt": "Illustrative Des Moines residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Des Moines exterior context (illustrative)",
+          "alt": "Illustrative: Des Moines residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Des Moines residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/dir-custom-homes-hero.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/des-moines/des-moines-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Des Moines homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Des Moines kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Des Moines homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Des Moines homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-21-queen-anne-kitchen-1.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/des-moines/des-moines-home-addition-pnw.webp",
-          "alt": "Illustrative home addition / exterior massing for Des Moines \u2014 PNW cedar-fir context; not a real Board job photo",
-          "caption": "Des Moines addition (illustrative)",
+          "alt": "Illustrative: home addition / exterior massing for Des Moines \u2014 PNW cedar-fir context",
+          "caption": "Home addition / exterior massing for Des Moines \u2014 PNW cedar-fir context.",
           "role": "addition",
           "source": "assets/images/posts/2026-08-12-edmonds-addition-permit-2.webp",
           "origin": "unique-crop-reuse"
@@ -507,24 +507,24 @@
       "photos": [
         {
           "rel": "assets/images/places/burien/burien-exterior-context-pnw.webp",
-          "alt": "Illustrative Burien residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Burien exterior context (illustrative)",
+          "alt": "Illustrative: Burien residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Burien residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/dir-custom-homes-hero.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/burien/burien-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Burien homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Burien kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Burien homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Burien homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/home-ppg-interior.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/burien/burien-bathroom-remodel-pnw.webp",
-          "alt": "Illustrative bathroom remodel scene for Burien \u2014 waterproofing-minded PNW context; not a real Board job photo",
-          "caption": "Burien bathroom (illustrative)",
+          "alt": "Illustrative: bathroom remodel scene for Burien \u2014 waterproofing-minded PNW context",
+          "caption": "Bathroom remodel scene for Burien \u2014 waterproofing-minded PNW context.",
           "role": "bathroom",
           "source": "assets/images/posts/2026-08-10-electrical-bath-3.webp",
           "origin": "unique-crop-reuse"
@@ -546,24 +546,24 @@
       "photos": [
         {
           "rel": "assets/images/places/tukwila/tukwila-exterior-context-pnw.webp",
-          "alt": "Illustrative Tukwila residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Tukwila exterior context (illustrative)",
+          "alt": "Illustrative: Tukwila residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Tukwila residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/home-gallery-dryin.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/tukwila/tukwila-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Tukwila homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Tukwila kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Tukwila homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Tukwila homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-12-hire-kitchen-2.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/tukwila/tukwila-home-addition-pnw.webp",
-          "alt": "Illustrative home addition / exterior massing for Tukwila \u2014 PNW cedar-fir context; not a real Board job photo",
-          "caption": "Tukwila addition (illustrative)",
+          "alt": "Illustrative: home addition / exterior massing for Tukwila \u2014 PNW cedar-fir context",
+          "caption": "Home addition / exterior massing for Tukwila \u2014 PNW cedar-fir context.",
           "role": "addition",
           "source": "assets/images/posts/2026-08-20-bothell-addition-3.webp",
           "origin": "unique-crop-reuse"
@@ -585,24 +585,24 @@
       "photos": [
         {
           "rel": "assets/images/places/seatac/seatac-exterior-context-pnw.webp",
-          "alt": "Illustrative SeaTac residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "SeaTac exterior context (illustrative)",
+          "alt": "Illustrative: SeaTac residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "SeaTac residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/home-gallery-dryin.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/seatac/seatac-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for SeaTac homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "SeaTac kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for SeaTac homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for SeaTac homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-12-hire-kitchen-1.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/seatac/seatac-bathroom-remodel-pnw.webp",
-          "alt": "Illustrative bathroom remodel scene for SeaTac \u2014 waterproofing-minded PNW context; not a real Board job photo",
-          "caption": "SeaTac bathroom (illustrative)",
+          "alt": "Illustrative: bathroom remodel scene for SeaTac \u2014 waterproofing-minded PNW context",
+          "caption": "Bathroom remodel scene for SeaTac \u2014 waterproofing-minded PNW context.",
           "role": "bathroom",
           "source": "assets/images/posts/2026-08-10-electrical-bath-1.webp",
           "origin": "unique-crop-reuse"
@@ -624,24 +624,24 @@
       "photos": [
         {
           "rel": "assets/images/places/maple-valley/maple-valley-exterior-context-pnw.webp",
-          "alt": "Illustrative Maple Valley residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Maple Valley exterior context (illustrative)",
+          "alt": "Illustrative: Maple Valley residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Maple Valley residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/home-gallery-finish.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/maple-valley/maple-valley-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Maple Valley homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Maple Valley kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Maple Valley homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Maple Valley homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-14-greenwood-kitchen-2.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/maple-valley/maple-valley-home-addition-pnw.webp",
-          "alt": "Illustrative home addition / exterior massing for Maple Valley \u2014 PNW cedar-fir context; not a real Board job photo",
-          "caption": "Maple Valley addition (illustrative)",
+          "alt": "Illustrative: home addition / exterior massing for Maple Valley \u2014 PNW cedar-fir context",
+          "caption": "Home addition / exterior massing for Maple Valley \u2014 PNW cedar-fir context.",
           "role": "addition",
           "source": "assets/images/posts/2026-08-20-bothell-addition-1.webp",
           "origin": "unique-crop-reuse"
@@ -663,24 +663,24 @@
       "photos": [
         {
           "rel": "assets/images/places/covington/covington-exterior-context-pnw.webp",
-          "alt": "Illustrative Covington residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Covington exterior context (illustrative)",
+          "alt": "Illustrative: Covington residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Covington residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/hubs/hub-edmonds-2.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/covington/covington-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Covington homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Covington kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Covington homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Covington homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-14-greenwood-kitchen-3.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/covington/covington-bathroom-remodel-pnw.webp",
-          "alt": "Illustrative bathroom remodel scene for Covington \u2014 waterproofing-minded PNW context; not a real Board job photo",
-          "caption": "Covington bathroom (illustrative)",
+          "alt": "Illustrative: bathroom remodel scene for Covington \u2014 waterproofing-minded PNW context",
+          "caption": "Bathroom remodel scene for Covington \u2014 waterproofing-minded PNW context.",
           "role": "bathroom",
           "source": "assets/images/posts/2026-08-16-magnolia-shower-3.webp",
           "origin": "unique-crop-reuse"
@@ -702,24 +702,24 @@
       "photos": [
         {
           "rel": "assets/images/places/enumclaw/enumclaw-exterior-context-pnw.webp",
-          "alt": "Illustrative Enumclaw residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Enumclaw exterior context (illustrative)",
+          "alt": "Illustrative: Enumclaw residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Enumclaw residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/home-gallery-finish.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/enumclaw/enumclaw-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Enumclaw homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Enumclaw kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Enumclaw homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Enumclaw homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-14-greenwood-kitchen-2.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/enumclaw/enumclaw-home-addition-pnw.webp",
-          "alt": "Illustrative home addition / exterior massing for Enumclaw \u2014 PNW cedar-fir context; not a real Board job photo",
-          "caption": "Enumclaw addition (illustrative)",
+          "alt": "Illustrative: home addition / exterior massing for Enumclaw \u2014 PNW cedar-fir context",
+          "caption": "Home addition / exterior massing for Enumclaw \u2014 PNW cedar-fir context.",
           "role": "addition",
           "source": "assets/images/posts/2026-08-20-bothell-addition-3.webp",
           "origin": "unique-crop-reuse"
@@ -741,24 +741,24 @@
       "photos": [
         {
           "rel": "assets/images/places/north-bend/north-bend-exterior-context-pnw.webp",
-          "alt": "Illustrative North Bend residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "North Bend exterior context (illustrative)",
+          "alt": "Illustrative: North Bend residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "North Bend residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/dir-additions-hero.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/north-bend/north-bend-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for North Bend homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "North Bend kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for North Bend homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for North Bend homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/home-ppg-interior.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/north-bend/north-bend-bathroom-remodel-pnw.webp",
-          "alt": "Illustrative bathroom remodel scene for North Bend \u2014 waterproofing-minded PNW context; not a real Board job photo",
-          "caption": "North Bend bathroom (illustrative)",
+          "alt": "Illustrative: bathroom remodel scene for North Bend \u2014 waterproofing-minded PNW context",
+          "caption": "Bathroom remodel scene for North Bend \u2014 waterproofing-minded PNW context.",
           "role": "bathroom",
           "source": "assets/images/posts/2026-08-13-phinney-bath-3.webp",
           "origin": "unique-crop-reuse"
@@ -780,24 +780,24 @@
       "photos": [
         {
           "rel": "assets/images/places/snoqualmie/snoqualmie-exterior-context-pnw.webp",
-          "alt": "Illustrative Snoqualmie residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Snoqualmie exterior context (illustrative)",
+          "alt": "Illustrative: Snoqualmie residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Snoqualmie residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/home-process-build.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/snoqualmie/snoqualmie-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Snoqualmie homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Snoqualmie kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Snoqualmie homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Snoqualmie homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-14-greenwood-kitchen-1.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/snoqualmie/snoqualmie-bathroom-remodel-pnw.webp",
-          "alt": "Illustrative bathroom remodel scene for Snoqualmie \u2014 waterproofing-minded PNW context; not a real Board job photo",
-          "caption": "Snoqualmie bathroom (illustrative)",
+          "alt": "Illustrative: bathroom remodel scene for Snoqualmie \u2014 waterproofing-minded PNW context",
+          "caption": "Bathroom remodel scene for Snoqualmie \u2014 waterproofing-minded PNW context.",
           "role": "bathroom",
           "source": "assets/images/posts/2026-08-16-magnolia-shower-1.webp",
           "origin": "unique-crop-reuse"
@@ -819,24 +819,24 @@
       "photos": [
         {
           "rel": "assets/images/places/duvall/duvall-exterior-context-pnw.webp",
-          "alt": "Illustrative Duvall residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Duvall exterior context (illustrative)",
+          "alt": "Illustrative: Duvall residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Duvall residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/hubs/hub-edmonds-2.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/duvall/duvall-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Duvall homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Duvall kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Duvall homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Duvall homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-14-greenwood-kitchen-3.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/duvall/duvall-home-addition-pnw.webp",
-          "alt": "Illustrative home addition / exterior massing for Duvall \u2014 PNW cedar-fir context; not a real Board job photo",
-          "caption": "Duvall addition (illustrative)",
+          "alt": "Illustrative: home addition / exterior massing for Duvall \u2014 PNW cedar-fir context",
+          "caption": "Home addition / exterior massing for Duvall \u2014 PNW cedar-fir context.",
           "role": "addition",
           "source": "assets/images/posts/2026-08-20-bothell-addition-2.webp",
           "origin": "unique-crop-reuse"
@@ -858,24 +858,24 @@
       "photos": [
         {
           "rel": "assets/images/places/carnation/carnation-exterior-context-pnw.webp",
-          "alt": "Illustrative Carnation residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Carnation exterior context (illustrative)",
+          "alt": "Illustrative: Carnation residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Carnation residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/hubs/hub-edmonds-3.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/carnation/carnation-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Carnation homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Carnation kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Carnation homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Carnation homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/home-ppg-interior.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/carnation/carnation-bathroom-remodel-pnw.webp",
-          "alt": "Illustrative bathroom remodel scene for Carnation \u2014 waterproofing-minded PNW context; not a real Board job photo",
-          "caption": "Carnation bathroom (illustrative)",
+          "alt": "Illustrative: bathroom remodel scene for Carnation \u2014 waterproofing-minded PNW context",
+          "caption": "Bathroom remodel scene for Carnation \u2014 waterproofing-minded PNW context.",
           "role": "bathroom",
           "source": "assets/images/posts/2026-08-10-electrical-bath-1.webp",
           "origin": "unique-crop-reuse"
@@ -897,22 +897,22 @@
       "photos": [
         {
           "rel": "assets/images/places/everett/everett-exterior-context-pnw.webp",
-          "alt": "Illustrative Everett residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Everett exterior context (illustrative)",
+          "alt": "Illustrative: Everett residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Everett residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "origin": "gemini-imagen-computerUse-2026-09-24"
         },
         {
           "rel": "assets/images/places/everett/everett-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Everett homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Everett kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Everett homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Everett homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "origin": "gemini-imagen-computerUse-2026-09-24"
         },
         {
           "rel": "assets/images/places/everett/everett-bathroom-remodel-pnw.webp",
-          "alt": "Illustrative bathroom remodel scene for Everett \u2014 waterproofing-minded PNW context; not a real Board job photo",
-          "caption": "Everett bathroom (illustrative)",
+          "alt": "Illustrative: bathroom remodel scene for Everett \u2014 waterproofing-minded PNW context",
+          "caption": "Bathroom remodel scene for Everett \u2014 waterproofing-minded PNW context.",
           "role": "bathroom",
           "origin": "gemini-imagen-computerUse-2026-09-24"
         }
@@ -933,24 +933,24 @@
       "photos": [
         {
           "rel": "assets/images/places/marysville/marysville-exterior-context-pnw.webp",
-          "alt": "Illustrative Marysville residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Marysville exterior context (illustrative)",
+          "alt": "Illustrative: Marysville residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Marysville residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/home-gallery-finish.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/marysville/marysville-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Marysville homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Marysville kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Marysville homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Marysville homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-21-queen-anne-kitchen-1.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/marysville/marysville-bathroom-remodel-pnw.webp",
-          "alt": "Illustrative bathroom remodel scene for Marysville \u2014 waterproofing-minded PNW context; not a real Board job photo",
-          "caption": "Marysville bathroom (illustrative)",
+          "alt": "Illustrative: bathroom remodel scene for Marysville \u2014 waterproofing-minded PNW context",
+          "caption": "Bathroom remodel scene for Marysville \u2014 waterproofing-minded PNW context.",
           "role": "bathroom",
           "source": "assets/images/posts/2026-08-13-phinney-bath-3.webp",
           "origin": "unique-crop-reuse"
@@ -972,24 +972,24 @@
       "photos": [
         {
           "rel": "assets/images/places/arlington/arlington-exterior-context-pnw.webp",
-          "alt": "Illustrative Arlington residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Arlington exterior context (illustrative)",
+          "alt": "Illustrative: Arlington residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Arlington residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/hubs/hub-edmonds-3.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/arlington/arlington-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Arlington homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Arlington kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Arlington homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Arlington homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-14-greenwood-kitchen-2.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/arlington/arlington-bathroom-remodel-pnw.webp",
-          "alt": "Illustrative bathroom remodel scene for Arlington \u2014 waterproofing-minded PNW context; not a real Board job photo",
-          "caption": "Arlington bathroom (illustrative)",
+          "alt": "Illustrative: bathroom remodel scene for Arlington \u2014 waterproofing-minded PNW context",
+          "caption": "Bathroom remodel scene for Arlington \u2014 waterproofing-minded PNW context.",
           "role": "bathroom",
           "source": "assets/images/posts/2026-08-16-magnolia-shower-1.webp",
           "origin": "unique-crop-reuse"
@@ -1011,24 +1011,24 @@
       "photos": [
         {
           "rel": "assets/images/places/stanwood/stanwood-exterior-context-pnw.webp",
-          "alt": "Illustrative Stanwood residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Stanwood exterior context (illustrative)",
+          "alt": "Illustrative: Stanwood residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Stanwood residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/dir-additions-hero.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/stanwood/stanwood-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Stanwood homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Stanwood kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Stanwood homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Stanwood homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-21-queen-anne-kitchen-1.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/stanwood/stanwood-home-addition-pnw.webp",
-          "alt": "Illustrative home addition / exterior massing for Stanwood \u2014 PNW cedar-fir context; not a real Board job photo",
-          "caption": "Stanwood addition (illustrative)",
+          "alt": "Illustrative: home addition / exterior massing for Stanwood \u2014 PNW cedar-fir context",
+          "caption": "Home addition / exterior massing for Stanwood \u2014 PNW cedar-fir context.",
           "role": "addition",
           "source": "assets/images/posts/2026-08-08-weatherproof-first-3.webp",
           "origin": "unique-crop-reuse"
@@ -1050,24 +1050,24 @@
       "photos": [
         {
           "rel": "assets/images/places/lake-stevens/lake-stevens-exterior-context-pnw.webp",
-          "alt": "Illustrative Lake Stevens residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Lake Stevens exterior context (illustrative)",
+          "alt": "Illustrative: Lake Stevens residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Lake Stevens residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/home-ppg-addition.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/lake-stevens/lake-stevens-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Lake Stevens homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Lake Stevens kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Lake Stevens homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Lake Stevens homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-14-greenwood-kitchen-3.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/lake-stevens/lake-stevens-bathroom-remodel-pnw.webp",
-          "alt": "Illustrative bathroom remodel scene for Lake Stevens \u2014 waterproofing-minded PNW context; not a real Board job photo",
-          "caption": "Lake Stevens bathroom (illustrative)",
+          "alt": "Illustrative: bathroom remodel scene for Lake Stevens \u2014 waterproofing-minded PNW context",
+          "caption": "Bathroom remodel scene for Lake Stevens \u2014 waterproofing-minded PNW context.",
           "role": "bathroom",
           "source": "assets/images/dir-bathrooms-hero.webp",
           "origin": "unique-crop-reuse"
@@ -1089,24 +1089,24 @@
       "photos": [
         {
           "rel": "assets/images/places/monroe/monroe-exterior-context-pnw.webp",
-          "alt": "Illustrative Monroe residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Monroe exterior context (illustrative)",
+          "alt": "Illustrative: Monroe residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Monroe residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/hubs/hub-edmonds-1.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/monroe/monroe-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Monroe homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Monroe kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Monroe homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Monroe homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-21-queen-anne-kitchen-3.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/monroe/monroe-home-addition-pnw.webp",
-          "alt": "Illustrative home addition / exterior massing for Monroe \u2014 PNW cedar-fir context; not a real Board job photo",
-          "caption": "Monroe addition (illustrative)",
+          "alt": "Illustrative: home addition / exterior massing for Monroe \u2014 PNW cedar-fir context",
+          "caption": "Home addition / exterior massing for Monroe \u2014 PNW cedar-fir context.",
           "role": "addition",
           "source": "assets/images/posts/2026-08-08-weatherproof-first-3.webp",
           "origin": "unique-crop-reuse"
@@ -1128,24 +1128,24 @@
       "photos": [
         {
           "rel": "assets/images/places/snohomish/snohomish-exterior-context-pnw.webp",
-          "alt": "Illustrative Snohomish residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Snohomish exterior context (illustrative)",
+          "alt": "Illustrative: Snohomish residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Snohomish residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/hubs/hub-edmonds-3.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/snohomish/snohomish-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Snohomish homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Snohomish kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Snohomish homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Snohomish homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-14-greenwood-kitchen-3.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/snohomish/snohomish-home-addition-pnw.webp",
-          "alt": "Illustrative home addition / exterior massing for Snohomish \u2014 PNW cedar-fir context; not a real Board job photo",
-          "caption": "Snohomish addition (illustrative)",
+          "alt": "Illustrative: home addition / exterior massing for Snohomish \u2014 PNW cedar-fir context",
+          "caption": "Home addition / exterior massing for Snohomish \u2014 PNW cedar-fir context.",
           "role": "addition",
           "source": "assets/images/home-ppg-addition.webp",
           "origin": "unique-crop-reuse"
@@ -1167,24 +1167,24 @@
       "photos": [
         {
           "rel": "assets/images/places/sultan/sultan-exterior-context-pnw.webp",
-          "alt": "Illustrative Sultan residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Sultan exterior context (illustrative)",
+          "alt": "Illustrative: Sultan residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Sultan residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/home-gallery-finish.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/sultan/sultan-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Sultan homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Sultan kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Sultan homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Sultan homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-12-hire-kitchen-1.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/sultan/sultan-home-addition-pnw.webp",
-          "alt": "Illustrative home addition / exterior massing for Sultan \u2014 PNW cedar-fir context; not a real Board job photo",
-          "caption": "Sultan addition (illustrative)",
+          "alt": "Illustrative: home addition / exterior massing for Sultan \u2014 PNW cedar-fir context",
+          "caption": "Home addition / exterior massing for Sultan \u2014 PNW cedar-fir context.",
           "role": "addition",
           "source": "assets/images/home-ppg-addition.webp",
           "origin": "unique-crop-reuse"
@@ -1206,24 +1206,24 @@
       "photos": [
         {
           "rel": "assets/images/places/gold-bar/gold-bar-exterior-context-pnw.webp",
-          "alt": "Illustrative Gold Bar residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Gold Bar exterior context (illustrative)",
+          "alt": "Illustrative: Gold Bar residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Gold Bar residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/dir-edmonds-custom-hero.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/gold-bar/gold-bar-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Gold Bar homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Gold Bar kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Gold Bar homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Gold Bar homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-14-greenwood-kitchen-2.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/gold-bar/gold-bar-bathroom-remodel-pnw.webp",
-          "alt": "Illustrative bathroom remodel scene for Gold Bar \u2014 waterproofing-minded PNW context; not a real Board job photo",
-          "caption": "Gold Bar bathroom (illustrative)",
+          "alt": "Illustrative: bathroom remodel scene for Gold Bar \u2014 waterproofing-minded PNW context",
+          "caption": "Bathroom remodel scene for Gold Bar \u2014 waterproofing-minded PNW context.",
           "role": "bathroom",
           "source": "assets/images/dir-bathrooms-hero.webp",
           "origin": "unique-crop-reuse"
@@ -1245,24 +1245,24 @@
       "photos": [
         {
           "rel": "assets/images/places/granite-falls/granite-falls-exterior-context-pnw.webp",
-          "alt": "Illustrative Granite Falls residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Granite Falls exterior context (illustrative)",
+          "alt": "Illustrative: Granite Falls residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Granite Falls residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/hubs/hub-edmonds-1.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/granite-falls/granite-falls-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Granite Falls homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Granite Falls kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Granite Falls homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Granite Falls homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-14-greenwood-kitchen-3.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/granite-falls/granite-falls-home-addition-pnw.webp",
-          "alt": "Illustrative home addition / exterior massing for Granite Falls \u2014 PNW cedar-fir context; not a real Board job photo",
-          "caption": "Granite Falls addition (illustrative)",
+          "alt": "Illustrative: home addition / exterior massing for Granite Falls \u2014 PNW cedar-fir context",
+          "caption": "Home addition / exterior massing for Granite Falls \u2014 PNW cedar-fir context.",
           "role": "addition",
           "source": "assets/images/home-ppg-addition.webp",
           "origin": "unique-crop-reuse"
@@ -1284,24 +1284,24 @@
       "photos": [
         {
           "rel": "assets/images/places/brier/brier-exterior-context-pnw.webp",
-          "alt": "Illustrative Brier residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Brier exterior context (illustrative)",
+          "alt": "Illustrative: Brier residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Brier residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/dir-additions-hero.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/brier/brier-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Brier homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Brier kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Brier homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Brier homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-21-queen-anne-kitchen-2.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/brier/brier-bathroom-remodel-pnw.webp",
-          "alt": "Illustrative bathroom remodel scene for Brier \u2014 waterproofing-minded PNW context; not a real Board job photo",
-          "caption": "Brier bathroom (illustrative)",
+          "alt": "Illustrative: bathroom remodel scene for Brier \u2014 waterproofing-minded PNW context",
+          "caption": "Bathroom remodel scene for Brier \u2014 waterproofing-minded PNW context.",
           "role": "bathroom",
           "source": "assets/images/posts/2026-08-13-phinney-bath-2.webp",
           "origin": "unique-crop-reuse"
@@ -1323,24 +1323,24 @@
       "photos": [
         {
           "rel": "assets/images/places/medina/medina-exterior-context-pnw.webp",
-          "alt": "Illustrative Medina residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Medina exterior context (illustrative)",
+          "alt": "Illustrative: Medina residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Medina residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/dir-edmonds-custom-hero.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/medina/medina-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Medina homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Medina kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Medina homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Medina homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/dir-kitchen-hero.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/medina/medina-home-addition-pnw.webp",
-          "alt": "Illustrative home addition / exterior massing for Medina \u2014 PNW cedar-fir context; not a real Board job photo",
-          "caption": "Medina addition (illustrative)",
+          "alt": "Illustrative: home addition / exterior massing for Medina \u2014 PNW cedar-fir context",
+          "caption": "Home addition / exterior massing for Medina \u2014 PNW cedar-fir context.",
           "role": "addition",
           "source": "assets/images/posts/2026-08-08-weatherproof-first-1.webp",
           "origin": "unique-crop-reuse"
@@ -1362,24 +1362,24 @@
       "photos": [
         {
           "rel": "assets/images/places/normandy-park/normandy-park-exterior-context-pnw.webp",
-          "alt": "Illustrative Normandy Park residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Normandy Park exterior context (illustrative)",
+          "alt": "Illustrative: Normandy Park residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Normandy Park residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/dir-edmonds-custom-hero.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/normandy-park/normandy-park-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Normandy Park homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Normandy Park kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Normandy Park homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Normandy Park homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-21-queen-anne-kitchen-1.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/normandy-park/normandy-park-home-addition-pnw.webp",
-          "alt": "Illustrative home addition / exterior massing for Normandy Park \u2014 PNW cedar-fir context; not a real Board job photo",
-          "caption": "Normandy Park addition (illustrative)",
+          "alt": "Illustrative: home addition / exterior massing for Normandy Park \u2014 PNW cedar-fir context",
+          "caption": "Home addition / exterior massing for Normandy Park \u2014 PNW cedar-fir context.",
           "role": "addition",
           "source": "assets/images/posts/2026-08-12-edmonds-addition-permit-1.webp",
           "origin": "unique-crop-reuse"
@@ -1401,24 +1401,24 @@
       "photos": [
         {
           "rel": "assets/images/places/black-diamond/black-diamond-exterior-context-pnw.webp",
-          "alt": "Illustrative Black Diamond residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Black Diamond exterior context (illustrative)",
+          "alt": "Illustrative: Black Diamond residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Black Diamond residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/home-gallery-dryin.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/black-diamond/black-diamond-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Black Diamond homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Black Diamond kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Black Diamond homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Black Diamond homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/home-ppg-interior.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/black-diamond/black-diamond-home-addition-pnw.webp",
-          "alt": "Illustrative home addition / exterior massing for Black Diamond \u2014 PNW cedar-fir context; not a real Board job photo",
-          "caption": "Black Diamond addition (illustrative)",
+          "alt": "Illustrative: home addition / exterior massing for Black Diamond \u2014 PNW cedar-fir context",
+          "caption": "Home addition / exterior massing for Black Diamond \u2014 PNW cedar-fir context.",
           "role": "addition",
           "source": "assets/images/posts/2026-08-12-edmonds-addition-permit-3.webp",
           "origin": "unique-crop-reuse"
@@ -1440,24 +1440,24 @@
       "photos": [
         {
           "rel": "assets/images/places/darrington/darrington-exterior-context-pnw.webp",
-          "alt": "Illustrative Darrington residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Darrington exterior context (illustrative)",
+          "alt": "Illustrative: Darrington residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Darrington residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/hubs/hub-edmonds-2.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/darrington/darrington-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Darrington homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Darrington kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Darrington homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Darrington homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-12-hire-kitchen-1.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/darrington/darrington-bathroom-remodel-pnw.webp",
-          "alt": "Illustrative bathroom remodel scene for Darrington \u2014 waterproofing-minded PNW context; not a real Board job photo",
-          "caption": "Darrington bathroom (illustrative)",
+          "alt": "Illustrative: bathroom remodel scene for Darrington \u2014 waterproofing-minded PNW context",
+          "caption": "Bathroom remodel scene for Darrington \u2014 waterproofing-minded PNW context.",
           "role": "bathroom",
           "source": "assets/images/posts/2026-08-13-phinney-bath-2.webp",
           "origin": "unique-crop-reuse"
@@ -1479,24 +1479,24 @@
       "photos": [
         {
           "rel": "assets/images/places/algona/algona-exterior-context-pnw.webp",
-          "alt": "Illustrative Algona residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Algona exterior context (illustrative)",
+          "alt": "Illustrative: Algona residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Algona residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/dir-edmonds-custom-hero.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/algona/algona-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Algona homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Algona kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Algona homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Algona homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-14-greenwood-kitchen-2.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/algona/algona-bathroom-remodel-pnw.webp",
-          "alt": "Illustrative bathroom remodel scene for Algona \u2014 waterproofing-minded PNW context; not a real Board job photo",
-          "caption": "Algona bathroom (illustrative)",
+          "alt": "Illustrative: bathroom remodel scene for Algona \u2014 waterproofing-minded PNW context",
+          "caption": "Bathroom remodel scene for Algona \u2014 waterproofing-minded PNW context.",
           "role": "bathroom",
           "source": "assets/images/posts/2026-08-16-magnolia-shower-3.webp",
           "origin": "unique-crop-reuse"
@@ -1518,24 +1518,24 @@
       "photos": [
         {
           "rel": "assets/images/places/beaux-arts-village/beaux-arts-village-exterior-context-pnw.webp",
-          "alt": "Illustrative Beaux Arts Village residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Beaux Arts Village exterior context (illustrative)",
+          "alt": "Illustrative: Beaux Arts Village residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Beaux Arts Village residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/home-ppg-addition.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/beaux-arts-village/beaux-arts-village-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Beaux Arts Village homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Beaux Arts Village kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Beaux Arts Village homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Beaux Arts Village homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/home-ppg-interior.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/beaux-arts-village/beaux-arts-village-bathroom-remodel-pnw.webp",
-          "alt": "Illustrative bathroom remodel scene for Beaux Arts Village \u2014 waterproofing-minded PNW context; not a real Board job photo",
-          "caption": "Beaux Arts Village bathroom (illustrative)",
+          "alt": "Illustrative: bathroom remodel scene for Beaux Arts Village \u2014 waterproofing-minded PNW context",
+          "caption": "Bathroom remodel scene for Beaux Arts Village \u2014 waterproofing-minded PNW context.",
           "role": "bathroom",
           "source": "assets/images/posts/2026-08-16-magnolia-shower-3.webp",
           "origin": "unique-crop-reuse"
@@ -1557,24 +1557,24 @@
       "photos": [
         {
           "rel": "assets/images/places/clyde-hill/clyde-hill-exterior-context-pnw.webp",
-          "alt": "Illustrative Clyde Hill residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Clyde Hill exterior context (illustrative)",
+          "alt": "Illustrative: Clyde Hill residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Clyde Hill residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/dir-edmonds-custom-hero.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/clyde-hill/clyde-hill-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Clyde Hill homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Clyde Hill kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Clyde Hill homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Clyde Hill homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-12-hire-kitchen-3.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/clyde-hill/clyde-hill-home-addition-pnw.webp",
-          "alt": "Illustrative home addition / exterior massing for Clyde Hill \u2014 PNW cedar-fir context; not a real Board job photo",
-          "caption": "Clyde Hill addition (illustrative)",
+          "alt": "Illustrative: home addition / exterior massing for Clyde Hill \u2014 PNW cedar-fir context",
+          "caption": "Home addition / exterior massing for Clyde Hill \u2014 PNW cedar-fir context.",
           "role": "addition",
           "source": "assets/images/posts/2026-08-20-bothell-addition-1.webp",
           "origin": "unique-crop-reuse"
@@ -1596,24 +1596,24 @@
       "photos": [
         {
           "rel": "assets/images/places/hunts-point/hunts-point-exterior-context-pnw.webp",
-          "alt": "Illustrative Hunts Point residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Hunts Point exterior context (illustrative)",
+          "alt": "Illustrative: Hunts Point residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Hunts Point residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/dir-custom-homes-hero.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/hunts-point/hunts-point-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Hunts Point homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Hunts Point kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Hunts Point homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Hunts Point homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-12-hire-kitchen-2.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/hunts-point/hunts-point-bathroom-remodel-pnw.webp",
-          "alt": "Illustrative bathroom remodel scene for Hunts Point \u2014 waterproofing-minded PNW context; not a real Board job photo",
-          "caption": "Hunts Point bathroom (illustrative)",
+          "alt": "Illustrative: bathroom remodel scene for Hunts Point \u2014 waterproofing-minded PNW context",
+          "caption": "Bathroom remodel scene for Hunts Point \u2014 waterproofing-minded PNW context.",
           "role": "bathroom",
           "source": "assets/images/posts/2026-08-13-phinney-bath-1.webp",
           "origin": "unique-crop-reuse"
@@ -1635,24 +1635,24 @@
       "photos": [
         {
           "rel": "assets/images/places/index-wa/index-wa-exterior-context-pnw.webp",
-          "alt": "Illustrative Index residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Index exterior context (illustrative)",
+          "alt": "Illustrative: Index residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Index residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/home-ppg-addition.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/index-wa/index-wa-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Index homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Index kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Index homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Index homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-21-queen-anne-kitchen-2.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/index-wa/index-wa-home-addition-pnw.webp",
-          "alt": "Illustrative home addition / exterior massing for Index \u2014 PNW cedar-fir context; not a real Board job photo",
-          "caption": "Index addition (illustrative)",
+          "alt": "Illustrative: home addition / exterior massing for Index \u2014 PNW cedar-fir context",
+          "caption": "Home addition / exterior massing for Index \u2014 PNW cedar-fir context.",
           "role": "addition",
           "source": "assets/images/posts/2026-08-12-edmonds-addition-permit-1.webp",
           "origin": "unique-crop-reuse"
@@ -1674,24 +1674,24 @@
       "photos": [
         {
           "rel": "assets/images/places/milton/milton-exterior-context-pnw.webp",
-          "alt": "Illustrative Milton residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Milton exterior context (illustrative)",
+          "alt": "Illustrative: Milton residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Milton residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/home-gallery-finish.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/milton/milton-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Milton homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Milton kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Milton homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Milton homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-14-greenwood-kitchen-1.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/milton/milton-home-addition-pnw.webp",
-          "alt": "Illustrative home addition / exterior massing for Milton \u2014 PNW cedar-fir context; not a real Board job photo",
-          "caption": "Milton addition (illustrative)",
+          "alt": "Illustrative: home addition / exterior massing for Milton \u2014 PNW cedar-fir context",
+          "caption": "Home addition / exterior massing for Milton \u2014 PNW cedar-fir context.",
           "role": "addition",
           "source": "assets/images/home-ppg-addition.webp",
           "origin": "unique-crop-reuse"
@@ -1713,24 +1713,24 @@
       "photos": [
         {
           "rel": "assets/images/places/pacific/pacific-exterior-context-pnw.webp",
-          "alt": "Illustrative Pacific residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Pacific exterior context (illustrative)",
+          "alt": "Illustrative: Pacific residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Pacific residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/hubs/hub-edmonds-1.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/pacific/pacific-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Pacific homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Pacific kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Pacific homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Pacific homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-21-queen-anne-kitchen-2.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/pacific/pacific-home-addition-pnw.webp",
-          "alt": "Illustrative home addition / exterior massing for Pacific \u2014 PNW cedar-fir context; not a real Board job photo",
-          "caption": "Pacific addition (illustrative)",
+          "alt": "Illustrative: home addition / exterior massing for Pacific \u2014 PNW cedar-fir context",
+          "caption": "Home addition / exterior massing for Pacific \u2014 PNW cedar-fir context.",
           "role": "addition",
           "source": "assets/images/posts/2026-08-20-bothell-addition-1.webp",
           "origin": "unique-crop-reuse"
@@ -1752,24 +1752,24 @@
       "photos": [
         {
           "rel": "assets/images/places/skykomish/skykomish-exterior-context-pnw.webp",
-          "alt": "Illustrative Skykomish residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Skykomish exterior context (illustrative)",
+          "alt": "Illustrative: Skykomish residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Skykomish residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/dir-edmonds-custom-hero.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/skykomish/skykomish-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Skykomish homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Skykomish kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Skykomish homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Skykomish homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-14-greenwood-kitchen-2.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/skykomish/skykomish-home-addition-pnw.webp",
-          "alt": "Illustrative home addition / exterior massing for Skykomish \u2014 PNW cedar-fir context; not a real Board job photo",
-          "caption": "Skykomish addition (illustrative)",
+          "alt": "Illustrative: home addition / exterior massing for Skykomish \u2014 PNW cedar-fir context",
+          "caption": "Home addition / exterior massing for Skykomish \u2014 PNW cedar-fir context.",
           "role": "addition",
           "source": "assets/images/posts/2026-08-08-weatherproof-first-3.webp",
           "origin": "unique-crop-reuse"
@@ -1791,24 +1791,24 @@
       "photos": [
         {
           "rel": "assets/images/places/woodway/woodway-exterior-context-pnw.webp",
-          "alt": "Illustrative Woodway residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Woodway exterior context (illustrative)",
+          "alt": "Illustrative: Woodway residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Woodway residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/home-process-build.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/woodway/woodway-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Woodway homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Woodway kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Woodway homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Woodway homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-12-hire-kitchen-2.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/woodway/woodway-bathroom-remodel-pnw.webp",
-          "alt": "Illustrative bathroom remodel scene for Woodway \u2014 waterproofing-minded PNW context; not a real Board job photo",
-          "caption": "Woodway bathroom (illustrative)",
+          "alt": "Illustrative: bathroom remodel scene for Woodway \u2014 waterproofing-minded PNW context",
+          "caption": "Bathroom remodel scene for Woodway \u2014 waterproofing-minded PNW context.",
           "role": "bathroom",
           "source": "assets/images/dir-bathrooms-hero.webp",
           "origin": "unique-crop-reuse"
@@ -1830,24 +1830,24 @@
       "photos": [
         {
           "rel": "assets/images/places/yarrow-point/yarrow-point-exterior-context-pnw.webp",
-          "alt": "Illustrative Yarrow Point residential exterior remodel context \u2014 Pacific Northwest light; not a real Board job photo",
-          "caption": "Yarrow Point exterior context (illustrative)",
+          "alt": "Illustrative: Yarrow Point residential exterior remodel context \u2014 Pacific Northwest light",
+          "caption": "Yarrow Point residential exterior remodel context \u2014 Pacific Northwest light.",
           "role": "context",
           "source": "assets/images/home-process-build.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/yarrow-point/yarrow-point-kitchen-remodel-pnw.webp",
-          "alt": "Illustrative kitchen remodel interior for Yarrow Point homeowners \u2014 PNW materials; not a real Board job photo",
-          "caption": "Yarrow Point kitchen (illustrative)",
+          "alt": "Illustrative: kitchen remodel interior for Yarrow Point homeowners \u2014 PNW materials",
+          "caption": "Kitchen remodel interior for Yarrow Point homeowners \u2014 PNW materials.",
           "role": "kitchen",
           "source": "assets/images/posts/2026-08-21-queen-anne-kitchen-2.webp",
           "origin": "unique-crop-reuse"
         },
         {
           "rel": "assets/images/places/yarrow-point/yarrow-point-home-addition-pnw.webp",
-          "alt": "Illustrative home addition / exterior massing for Yarrow Point \u2014 PNW cedar-fir context; not a real Board job photo",
-          "caption": "Yarrow Point addition (illustrative)",
+          "alt": "Illustrative: home addition / exterior massing for Yarrow Point \u2014 PNW cedar-fir context",
+          "caption": "Home addition / exterior massing for Yarrow Point \u2014 PNW cedar-fir context.",
           "role": "addition",
           "source": "assets/images/posts/2026-08-20-bothell-addition-1.webp",
           "origin": "unique-crop-reuse"
@@ -1868,22 +1868,22 @@
     "photos": [
       {
         "rel": "assets/images/places/_locations/locations-king-snohomish-overview-pnw.webp",
-        "alt": "Illustrative King & Snohomish overview for Board of Project Stewardship Locations hub \u2014 not a real Board job photo",
-        "caption": "King & Snohomish overview (illustrative)",
+        "alt": "Illustrative: King & Snohomish overview for Board of Project Stewardship Locations hub in Puget Sound",
+        "caption": "King & Snohomish overview for Board of Project Stewardship Locations hub in Puget Sound.",
         "role": "context",
         "origin": "gemini-imagen-computerUse-2026-09-24"
       },
       {
         "rel": "assets/images/places/_locations/locations-kitchen-remodel-pnw.webp",
-        "alt": "Illustrative Kitchen remodel context for Board of Project Stewardship Locations hub \u2014 not a real Board job photo",
-        "caption": "Kitchen remodel context (illustrative)",
+        "alt": "Illustrative: Kitchen remodel context for Board of Project Stewardship Locations hub in Puget Sound",
+        "caption": "Kitchen remodel context for Board of Project Stewardship Locations hub in Puget Sound.",
         "role": "kitchen",
         "origin": "gemini-imagen-computerUse-2026-09-24"
       },
       {
         "rel": "assets/images/places/_locations/locations-home-addition-pnw.webp",
-        "alt": "Illustrative Home addition context for Board of Project Stewardship Locations hub \u2014 not a real Board job photo",
-        "caption": "Home addition context (illustrative)",
+        "alt": "Illustrative: Home addition context for Board of Project Stewardship Locations hub in Puget Sound",
+        "caption": "Home addition context for Board of Project Stewardship Locations hub in Puget Sound.",
         "role": "addition",
         "origin": "gemini-imagen-computerUse-2026-09-24"
       }

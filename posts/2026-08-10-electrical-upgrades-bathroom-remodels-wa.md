@@ -14,7 +14,7 @@ slug: "electrical-upgrades-bathroom-remodels-wa"
 
 Bathroom electrical work in Washington is about safety and moisture. Remodels that ignore capacity and protection create inspection failures — or worse, hazards.
 
-![Illustrative: Pacific Northwest — a bathroom ceiling with new recessed lights above a stone tub deck, rainy daylight — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-10-electrical-upgrades-bathroom-remodels-2.webp)
+![Illustrative: a bathroom ceiling with new recessed lights above a stone tub deck, rainy daylight in Puget Sound](../assets/images/posts/2026-08-10-electrical-upgrades-bathroom-remodels-2.webp)
 
 ## Common upgrades
 
@@ -29,7 +29,7 @@ Bathroom electrical work in Washington is about safety and moisture. Remodels th
 
 Have the electrician walk the project during design, not after tile is selected. Coordinate fan routing with framing. Schedule rough electrical inspection before insulation and drywall in opened walls.
 
-![Illustrative: the Pacific Northwest — an open bathroom wall with electrical boxes and cable, cover plates off, no readable printing — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-10-electrical-upgrades-bathroom-remodels-3.webp)
+![Illustrative: an open bathroom wall with electrical boxes and cable, cover plates off, no readable printing in Puget Sound](../assets/images/posts/2026-08-10-electrical-upgrades-bathroom-remodels-3.webp)
 
 ## Hiring
 
@@ -66,7 +66,7 @@ Heat mats, niche lighting, and fog-free mirrors introduce penetrations and low-v
 
 Fans deserve duct design, not flexible foil spaghetti crushed in joist bays. Short, smooth ducts with proper exterior terminations outperform high CFM ratings stuck behind a clogged route. In two-story homes, confirm whether the fan can terminate through a sidewall or needs a roof jack — and who patches the roof.
 
-![Illustrative editorial photo — not a project photograph; bath plumbing and device-coordination context before cover](../assets/images/posts/2026-08-10-electrical-bath-3.webp)
+![Illustrative: electrical upgrades bathroom remodels on a home in Puget Sound](../assets/images/posts/2026-08-10-electrical-bath-3.webp)
 
 ## Panel and service reality checks
 

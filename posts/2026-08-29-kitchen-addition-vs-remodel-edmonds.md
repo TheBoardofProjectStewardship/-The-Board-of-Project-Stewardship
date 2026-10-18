@@ -14,14 +14,14 @@ slug: "kitchen-addition-vs-remodel-edmonds"
 
 Edmonds owners often ask whether to gut the existing kitchen or bump out for an island and dining connection. These are different project types wearing the same “kitchen” label.
 
-![Illustrative: Edmonds, Washington — a white oak island and a garden window, empty stools pulled in, from the side yard — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-29-kitchen-addition-edmonds-5.webp)
+![Illustrative: Edmonds, Washington — a white oak island and a garden window, empty stools pulled in, from the side yard](../assets/images/posts/2026-08-29-kitchen-addition-edmonds-5.webp)
 
 
 ## When a remodel is enough
 
 If circulation, storage, and light can be fixed by layout, windows, and systems upgrades inside current walls, a remodel avoids foundation and major roof work. You still may need electrical capacity, hood ducting, and trade permits — but the weather envelope mostly stays intact.
 
-![Illustrative: Edmonds, Washington — a finished kitchen with a farmhouse sink under a rain-streaked window, late afternoon sun through firs — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-29-kitchen-addition-edmonds-3.webp)
+![Illustrative: Edmonds, Washington — a finished kitchen with a farmhouse sink under a rain-streaked window, late afternoon](../assets/images/posts/2026-08-29-kitchen-addition-edmonds-3.webp)
 
 ## When an addition earns its keep
 
@@ -48,7 +48,7 @@ Yes, if the first design does not block future openings. Tell your designer abou
 **What permit difference matters most?**  
 Additions typically trigger building permits and exterior reviews; in-place remodels lean on trade permits unless walls move structurally.
 
-![Illustrative: Edmonds, Washington — a kitchen with a long counter and a tile backsplash, soft overcast morning light — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-29-kitchen-addition-edmonds-2.webp)
+![Illustrative: Edmonds, Washington — a kitchen with a long counter and a tile backsplash, soft overcast morning light](../assets/images/posts/2026-08-29-kitchen-addition-edmonds-2.webp)
 
 ../assets/videos/posts/2026-09-07-edmonds-adu-framing.mp4
 

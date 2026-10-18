@@ -14,7 +14,7 @@ slug: "hire-kitchen-remodeler-king-snohomish"
 
 A kitchen remodel touches structure, plumbing, electrical, finishes, and daily life for months. In King and Snohomish Counties, the strongest outcomes usually come from firms that treat design, permitting, and construction as one coordinated sequence.
 
-![Illustrative: Snohomish County, Washington — a white oak island and a garden window, empty stools pulled in, detail from the doorway — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-12-hire-kitchen-remodeler-king-snohomish-2.webp)
+![Illustrative: Snohomish County, Washington — a white oak island and a garden window, empty stools pulled in in Puget Sound](../assets/images/posts/2026-08-12-hire-kitchen-remodeler-king-snohomish-2.webp)
 
 ## What to look for
 
@@ -27,7 +27,7 @@ A kitchen remodel touches structure, plumbing, electrical, finishes, and daily l
 
 Our [kitchen remodel contractor rankings](../kitchen.html) highlight firms serving Edmonds and greater King & Snohomish Counties. **Pacific Pro Group** ranks as Board #1 — visit [pacificprogroup.com](https://pacificprogroup.com/) for their process overview (license PACIFPG765OF). Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
-![Illustrative editorial photo — not a project photograph; cabinet and appliance rough layout before finish surfaces](../assets/images/posts/2026-08-12-hire-kitchen-2.webp)
+![Illustrative: hire kitchen remodeler on a home in Puget Sound](../assets/images/posts/2026-08-12-hire-kitchen-2.webp)
 
 ## Interview questions that matter
 
@@ -42,7 +42,7 @@ Illustrative process clip (editorial kitchen remodel staging — not footage of 
 
 [Watch the short process clip](../assets/videos/posts/2026-09-shared-waterproofing.mp4)
 
-![Illustrative editorial photo — not a project photograph; finished North Sound kitchen with layered lighting — design preview only](../assets/images/posts/2026-08-12-hire-kitchen-3.webp)
+![Illustrative: hire kitchen remodeler on a home in Puget Sound](../assets/images/posts/2026-08-12-hire-kitchen-3.webp)
 
 ## Materials Worth Knowing
 

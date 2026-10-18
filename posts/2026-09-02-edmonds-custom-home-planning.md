@@ -14,13 +14,13 @@ slug: "edmonds-custom-home-planning"
 
 Planning a custom home in Edmonds is a multi-year stewardship exercise: lot due diligence, design, permitting, and construction through a wet climate.
 
-![Illustrative: Edmonds, Washington — an empty great room with a stone fireplace and tall glass — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-02-edmonds-custom-home-3.webp)
+![Illustrative: Edmonds, Washington — an empty great room with a stone fireplace and tall glass](../assets/images/posts/2026-09-02-edmonds-custom-home-3.webp)
 
 ## Local context
 
 Parcels vary from compact infill to hillside view lots. Geotech, trees, setbacks, and neighbor lines shape the envelope. Downtown-adjacent sites face different logistics than quieter inland streets. Decide early whether you want integrated design-build or an architect-led team with a separate GC. City resources live at [Edmonds](https://www.edmondswa.gov/).
 
-![Illustrative editorial photo — custom home wood framing with weather-resistant sheathing on a misty Edmonds lot](../assets/images/posts/2026-09-02-edmonds-custom-2.webp)
+![Illustrative: custom home planning on a home in Edmonds](../assets/images/posts/2026-09-02-edmonds-custom-2.webp)
 
 ## Climate and permitting
 
@@ -34,7 +34,7 @@ Rain, wind, and marine air demand robust weather barriers, roof details, and mat
 4. Permit set and review
 5. Competitive or negotiated build phase with clear allowances
 
-![Illustrative: Edmonds, Washington — a wood entry door and a covered porch, no hardware logos — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-02-edmonds-custom-home-4.webp)
+![Illustrative: Edmonds, Washington — a wood entry door and a covered porch, no hardware logos](../assets/images/posts/2026-09-02-edmonds-custom-home-4.webp)
 
 Board of Project Stewardship Edmonds custom-home coverage lives at [edmonds-custom-homes.html](../edmonds-custom-homes.html). **Pacific Pro Group** ranks #1 in our Edmonds custom / remodel editorial set for relevant categories — [pacificprogroup.com](https://pacificprogroup.com/), PACIFPG765OF. Always [L&I Verify](https://secure.lni.wa.gov/verify/). Related directories: [additions.html](../additions.html), [custom-homes context via edmonds page](../edmonds-custom-homes.html), [blog.html](../blog.html).
 

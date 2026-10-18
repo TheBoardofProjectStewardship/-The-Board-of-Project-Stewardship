@@ -14,7 +14,7 @@ slug: "walk-in-shower-remodel-magnolia"
 
 Converting a tub to a walk-in shower is one of the most common Magnolia bath upgrades. Done well, it improves daily use and accessibility; done poorly, it leaks into living spaces below.
 
-![Illustrative: Magnolia, Seattle — a curbless shower with a linear drain and large tile, glass panel open — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-16-walk-in-shower-magnolia-2.webp)
+![Illustrative: Magnolia, Seattle — a curbless shower with a linear drain and large tile, glass panel open](../assets/images/posts/2026-08-16-walk-in-shower-magnolia-2.webp)
 
 ## Neighborhood context
 
@@ -24,7 +24,7 @@ Older Magnolia homes may have joist layouts that complicate curbless transitions
 
 Seattle plumbing permits typically apply when valves and drains move. Waterproofing must be continuous at the entire wet zone. Outdoor exhaust remains essential. Linear drains and center drains each have detailing implications — pick with your installer, not a catalog alone.
 
-![Illustrative editorial photo — not a project photograph; continuous shower waterproofing membrane before tile](../assets/images/posts/2026-08-16-magnolia-shower-2.webp)
+![Illustrative: walk in shower remodel on a home in Magnolia, Seattle](../assets/images/posts/2026-08-16-magnolia-shower-2.webp)
 
 ## Design choices
 
@@ -40,7 +40,7 @@ Illustrative process clip (editorial shower waterproofing staging — not footag
 
 [Watch the short process clip](../assets/videos/posts/2026-09-shared-waterproofing.mp4)
 
-![Illustrative editorial photo — not a project photograph; finished walk-in shower with glass and niche — design preview only](../assets/images/posts/2026-08-16-magnolia-shower-3.webp)
+![Illustrative: walk in shower remodel on a home in Magnolia, Seattle](../assets/images/posts/2026-08-16-magnolia-shower-3.webp)
 
 ## Materials Worth Knowing
 

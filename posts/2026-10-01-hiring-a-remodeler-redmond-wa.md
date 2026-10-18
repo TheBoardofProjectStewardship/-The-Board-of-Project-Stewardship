@@ -14,7 +14,7 @@ slug: "hiring-a-remodeler-redmond-wa"
 
 Redmond sits on the Eastside of King County with a housing stock that ranges from mid-century neighborhoods to newer tech-corridor estates. Hiring a remodeler here is less about chasing a single low bid and more about verifying credentials, confirming who owns the City of Redmond permit path, and locking written scope for structure, envelope, and finishes before demolition. The Board of Project Stewardship treats license checks, permit ownership, and moisture detailing as part of the same decision — not optional add-ons after you like a portfolio photo.
 
-![Illustrative: Redmond, Washington — a homeowner and remodeler review a contract in a rain-streaked sunroom — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-01-redmond-hiring-4.webp)
+![Illustrative: Redmond, Washington — a homeowner and remodeler review a contract in a rain-streaked sunroom](../assets/images/posts/2026-10-01-redmond-hiring-4.webp)
 
 ## Defining your project goals and budget
 
@@ -34,7 +34,7 @@ Second, interview the firm about Redmond’s local building process. Someone who
 
 Third, ask for references from projects completed in the last two years in King County — preferably Redmond, Bellevue, Kirkland, or adjacent Eastside cities. Drive by if you can. A current crew and local supplier relationships matter more than a national marketing claim.
 
-![Illustrative remodel rough-in with open framing and mechanical coordination underway — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-01-redmond-hiring-2.webp)
+![Illustrative: remodel rough-in with open framing and mechanical coordination underway in Redmond](../assets/images/posts/2026-10-01-redmond-hiring-2.webp)
 
 ## Understanding the City of Redmond and King County permitting path
 
@@ -86,7 +86,7 @@ Before you shortlist firms, it helps to hear a clear walkthrough of scope writin
 
 https://www.youtube.com/watch?v=Ygv6UBq5zoc
 
-![Illustrative Pacific Northwest remodel progress with envelope and finish coordination — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-01-redmond-hiring-3.webp)
+![Illustrative: Pacific Northwest remodel progress with envelope and finish coordination in Redmond](../assets/images/posts/2026-10-01-redmond-hiring-3.webp)
 
 ## Materials Worth Knowing
 

@@ -12,7 +12,7 @@ slug: "bathroom-remodel-sammamish-wa"
 - Under the regional [MyBuildingPermit Tip Sheet 00](https://www.mybuildingpermit.com/sites/default/files/TS-00_Permits%20Required%20and%20Not%20Required_FINAL_6.11.26.pdf), swapping a sink or toilet without moving plumbing lines often skips a building permit, but **tub and shower replacement does require a permit**. Critical areas, shorelines, and sensitive overlays can change that answer — ask first.
 - Adding fixtures can trigger sewer and water availability paperwork from Sammamish Plateau Water or the Northeast Sammamish Water & Sewer District. Put waterproofing, exhaust, and inspection holds in the written scope before demo day, and re-check every firm on [Washington L&I Verify](https://secure.lni.wa.gov/verify/).
 
-![Illustrative: a tiled bathroom vanity and mirror in soft daylight — the kind of finished wet room a Sammamish remodel aims for — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-12-sammamish-bath-1.webp)
+![Illustrative: a tiled bathroom vanity and mirror in soft daylight in Sammamish](../assets/images/posts/2026-10-12-sammamish-bath-1.webp)
 
 ## Why Sammamish bathrooms are their own permitting lane
 
@@ -51,7 +51,7 @@ Fees live on the City's [Fees, Permits and Applications](https://www.sammamish.u
 
 Inspections are scheduled online through MyBuildingPermit; the City also points to [inspection.mybuildingpermit.com](https://inspection.mybuildingpermit.com/) and inspections@sammamish.us when you are unsure which inspections are on the card. Keep the issued permit and stamped plans on site when the inspector arrives.
 
-![Illustrative: open wall framing and electrical rough-in during a bathroom remodel — the stage where GFCI circuits and exhaust fans get inspected — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-12-sammamish-bath-2.webp)
+![Illustrative: open wall framing and electrical rough-in during a bathroom remodel in Sammamish](../assets/images/posts/2026-10-12-sammamish-bath-2.webp)
 
 ## Fixture counts, sewer, and water certificates
 
@@ -87,7 +87,7 @@ https://www.youtube.com/watch?v=BfUrGF3_imc
 
 Staging on Sammamish lots is usually friendlier than a Seattle bungalow with a six-foot side yard, but HOA rules, steep driveways near the plateau edge, and protected trees can still constrain dumpsters and tile pallets. Ask bidders how they protect finished floors on the haul path, who owns change orders when a valve wall has to move for clearance, and how they sequence rough-in inspections before cover-up.
 
-![Illustrative: a shower niche and tiled wet wall under warm lighting — membrane continuity behind the tile matters more than the finish pattern — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-12-sammamish-bath-3.webp)
+![Illustrative: a shower niche and tiled wet wall under warm lighting in Sammamish](../assets/images/posts/2026-10-12-sammamish-bath-3.webp)
 
 ## Materials Worth Knowing
 

@@ -14,7 +14,7 @@ slug: "bathroom-remodel-phinney-ridge"
 
 Phinney Ridge bathroom remodels serve walkable North Seattle living: older homes, precious square footage, and upstairs baths that must not fail onto living rooms.
 
-![Illustrative: Phinney Ridge, Seattle — a freestanding tub under a window with rain on the glass, low viewpoint — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-13-bathroom-phinney-ridge-2.webp)
+![Illustrative: Phinney Ridge, Seattle — a freestanding tub under a window with rain on the glass, low viewpoint](../assets/images/posts/2026-08-13-bathroom-phinney-ridge-2.webp)
 
 ## Local context
 
@@ -24,7 +24,7 @@ Tight stairwells affect tub removal and glass delivery. Neighbor proximity encou
 
 Membranes, slopes, and outdoor exhaust are mandatory for durability. Confirm Seattle permit path before demo. Photo-document waterproofing before tile.
 
-![Illustrative editorial photo — not a project photograph; bath interior finish and fixture planning for a compact North Seattle remodel](../assets/images/posts/2026-08-13-phinney-bath-2.webp)
+![Illustrative: bathroom remodel on a home in Phinney Ridge, Seattle](../assets/images/posts/2026-08-13-phinney-bath-2.webp)
 
 ## Materials and process
 
@@ -36,7 +36,7 @@ Illustrative process clip (editorial bath remodel staging — not footage of a l
 
 [Watch the short process clip](../assets/videos/posts/2026-09-bath-process-shared.mp4)
 
-![Illustrative editorial photo — not a project photograph; finished bath surfaces and lighting preview — design reference only](../assets/images/posts/2026-08-13-phinney-bath-3.webp)
+![Illustrative: bathroom remodel on a home in Phinney Ridge, Seattle](../assets/images/posts/2026-08-13-phinney-bath-3.webp)
 
 ## Materials Worth Knowing
 

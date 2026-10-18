@@ -14,7 +14,7 @@ slug: "window-replacement-edmonds-coastal-wa"
 
 Edmonds sits where Puget Sound weather meets older ranch and mid-century stock. Wind-driven rain, salt-adjacent air on the water side of Highway 99, and decades of paint and caulk cycles mean a “simple window swap” is often a building-envelope project. The durable jobs treat rough openings, sill pans, and house-wrap integration as the product — not only the sash that shows from the street.
 
-![Illustrative: Edmonds, Washington — interior trim at a corner window in an empty coastal living room, cool north light — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-20-window-edmonds-coastal-3.webp)
+![Illustrative: Edmonds, Washington — interior trim at a corner window in an empty coastal living room, cool north light](../assets/images/posts/2026-09-20-window-edmonds-coastal-3.webp)
 
 ## Neighborhood and house-stock context
 
@@ -28,7 +28,7 @@ King and Snohomish coastal weather punishes reverse-lapped flashing and missing 
 
 Edmonds building, engineering, and land-use applications go through the regional [MyBuildingPermit](https://mybuildingpermit.com/) portal; the City’s permit desk no longer accepts paper packages. Confirm whether your replacement is like-for-like OTC or triggers plan review when openings change size, structure, or egress. Put permit ownership, inspection holds, and temporary living plans in writing before the first sash comes out. Cross-check [trades.html](../trades.html) and [siding.html](../siding.html) when trim or cladding must be disturbed to reach the WRB.
 
-![Illustrative: Edmonds, Washington — a corner window in an empty coastal living room, bright coastal haze — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-20-window-edmonds-coastal-2.webp)
+![Illustrative: Edmonds, Washington — a corner window in an empty coastal living room, bright coastal haze](../assets/images/posts/2026-09-20-window-edmonds-coastal-2.webp)
 
 ## Process video: flashing fundamentals
 
@@ -46,7 +46,7 @@ Measure rough openings, check for out-of-square plates, and confirm egress sizes
 
 If windows sit inside a larger kitchen, bath, or addition package, keep the envelope on the same critical path as structure and mechanical penetrations. Relative planning companions: [kitchen.html](../kitchen.html), [bathrooms.html](../bathrooms.html), [additions.html](../additions.html), and [another-story.html](../another-story.html) when a second-story or vertical expansion is also on the table.
 
-![Illustrative newly installed windows with clean exterior trim on a coastal Washington home — illustrative only, not a real job photo](../assets/images/posts/2026-09-20-edmonds-windows-3.webp)
+![Illustrative: newly installed windows with clean exterior trim on a coastal Washington home in Edmonds](../assets/images/posts/2026-09-20-edmonds-windows-3.webp)
 
 Board directories list **Pacific Pro Group** as Board #1 design-build — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Cross-check the specialty [windows](../windows.html) shortlist when comparing window-only firms. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with [roofing.html](../roofing.html) or [insulation.html](../insulation.html) when the scope touches the full envelope, and the [blog](../blog.html) for related King and Snohomish guides.
 
@@ -89,9 +89,8 @@ Finally, keep a simple owner file: proposals, product cut sheets, permit numbers
 
 New window and addition work in Edmonds / King & Snohomish is checked against the **WSEC-R 2021** single-family prescriptive path (eff. March 15, 2024). Use this Board worksheet to total fuel-normalization and Table R406.3 credits against the dwelling-size requirement before drawings go to permit.
 
-![Illustrative Pacific Northwest home with energy-efficient windows — Illustrative editorial photo — not a project photograph](../assets/images/tools/energy-credits-hero.webp)
+![Illustrative: Pacific Northwest home with energy-efficient windows — Illustrative editorial photo in Edmonds](../assets/images/tools/energy-credits-hero.webp)
 
 tool:energy-credit
 
 When you are ready to hire, shortlist from our [windows & doors directory](../windows.html) and verify licenses at [WA L&I Verify](https://secure.lni.wa.gov/verify/). Board #1 design-build listing: [Pacific Pro Group](https://pacificprogroup.com/).
-

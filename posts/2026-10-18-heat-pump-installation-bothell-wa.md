@@ -12,7 +12,7 @@ slug: "heat-pump-installation-bothell-wa"
 - **The outdoor unit has siting rules.** Bothell's [residential mechanical permit form](https://www.bothellwa.gov/DocumentCenter/View/859/Residential-Plumbing-and-Mechanical-Permit---9) says pad-mounted heat pumps and air conditioners cannot sit in the front yard setback, must be at least three feet from any adjacent property line or structure, including fences, and must be screened from the public right-of-way.
 - **Verify the people, not just the equipment.** Anyone handling refrigerant needs EPA Section 608 certification, the electrical contractor buys the electrical permit for the work it does, and every firm should check out on [Washington L&I Verify](https://secure.lni.wa.gov/verify/) before you sign.
 
-![Illustrative: the narrow side yard of a lap-sided house with a gravel strip along the foundation and a wood fence behind — the kind of space where an outdoor heat pump unit has to meet setback and clearance rules — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-18-bothell-heat-pump-1.webp)
+![Illustrative: the narrow side yard of a lap-sided house with a gravel strip along the foundation and a wood fence in Bothell](../assets/images/posts/2026-10-18-bothell-heat-pump-1.webp)
 
 ## Why Bothell homeowners are looking at heat pumps
 
@@ -22,7 +22,7 @@ It is also a project that touches more than one trade at once: refrigerant pipin
 
 The Board of Project Stewardship's [Bothell directory](../bothell.html), [HVAC guide](../hvac.html), [electrician page](../electrician.html), and [permits overview](../permits.html) give broader context. This guide sticks to what the City of Bothell and the agencies that regulate this work actually publish.
 
-![Illustrative: ductless heat pump head unit mounted high on a living-room wall with evergreen views](../assets/images/posts/2026-10-18-bothell-heat-pump-5.webp)
+![Illustrative: ductless heat pump head unit mounted high on a living-room wall with evergreen views in Bothell](../assets/images/posts/2026-10-18-bothell-heat-pump-5.webp)
 
 ## The City mechanical permit
 
@@ -37,7 +37,7 @@ A few practical points from the City's own pages:
 
 The FAQ also makes the case for permitting honestly: permits let code experts review the plan before work starts, insurers increasingly decline to cover damage from unpermitted work, and improvements must be disclosed at sale whether or not they were permitted. A permitted, inspected heat pump is a cleaner story for a future buyer.
 
-![Illustrative: old oil furnace beside a new heat pump air handler in a basement during a heating swap](../assets/images/posts/2026-10-18-bothell-heat-pump-7.webp)
+![Illustrative: old oil furnace beside a new heat pump air handler in a basement during a heating swap in Bothell](../assets/images/posts/2026-10-18-bothell-heat-pump-7.webp)
 
 ## The electrical permit comes from L&I, not the City
 
@@ -47,7 +47,7 @@ That means a typical Bothell heat pump job has a City mechanical permit and a se
 
 Because Bothell straddles two counties and has unincorporated neighborhoods around it with Bothell mailing addresses, confirm which jurisdiction your address is actually in. L&I suggests checking the address in the state Department of Revenue lookup tool linked from its city list page: if no city is named for the address, it is in the county, and the county's rules apply instead of the City's.
 
-![Illustrative: an opened-up exterior wall with wood framing and new electrical boxes and cable roughed in below a window — the stage where a new circuit is run and inspected before the wall is closed — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-18-bothell-heat-pump-2.webp)
+![Illustrative: opened exterior wall with electrical cable roughed in below a window in Bothell](../assets/images/posts/2026-10-18-bothell-heat-pump-2.webp)
 
 ## Where the outdoor unit can go
 
@@ -71,7 +71,7 @@ The installation steps worth seeing done right — line-set routing, flaring and
 
 https://www.youtube.com/watch?v=JQkth-AM5CE
 
-![Illustrative: technician connecting refrigerant gauges to a heat pump outdoor unit](../assets/images/posts/2026-10-18-bothell-heat-pump-6.webp)
+![Illustrative: technician connecting refrigerant gauges to a heat pump outdoor unit in Bothell](../assets/images/posts/2026-10-18-bothell-heat-pump-6.webp)
 
 ## What to write into a Bothell heat pump contract
 
@@ -85,7 +85,7 @@ A heat pump bid is easy to compare on equipment and hard to compare on everythin
 - **Old equipment.** Removal and disposal of the furnace, oil tank, or old condenser, and refrigerant recovery by certified technicians.
 - **Startup and handoff.** Startup test results in writing, thermostat setup, filter locations, and the manufacturer warranty registration.
 
-![Illustrative: lap siding meeting a wall wrapped in weather-resistive barrier with dark flashing tape and a metal flashing ledge — the layers a line-set penetration has to be sealed through — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-18-bothell-heat-pump-3.webp)
+![Illustrative: lap siding meeting a wall wrapped in weather-resistive barrier with dark flashing tape in Bothell](../assets/images/posts/2026-10-18-bothell-heat-pump-3.webp)
 
 ## Materials Worth Knowing
 

@@ -14,7 +14,7 @@ slug: "hiring-a-remodeler-mountlake-terrace-wa"
 
 Mountlake Terrace sits in south Snohomish County with a deep stock of mid-century ranch and split-level houses. Those layouts remodel well into open living spaces, but they also hide structural quirks, aging electrical panels, and envelopes that were never detailed for today’s rain. Hiring well here means checking license status, confirming who pulls permits, and picking a team that designs and prices the moisture work before finishes.
 
-![Illustrative: Mountlake Terrace, Washington — a mid-century living room staged with blank remodel drawings and material samples, rain on the picture window — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-29-mountlake-terrace-hiring-4.webp)
+![Illustrative: Mountlake Terrace, Washington — a mid-century living room staged with blank remodel drawings](../assets/images/posts/2026-09-29-mountlake-terrace-hiring-4.webp)
 
 ## Understanding the Mountlake Terrace remodeling landscape
 
@@ -33,7 +33,7 @@ Use the Board of Project Stewardship [hiring a contractor](../hiring-a-contracto
 3. **Who submits permits and responds to plan-check comments?** Clarify whether the firm owns the eTRAKiT (city) or PDS portal (county) workflow end to end.
 4. **Can you share recent local references from the last two years?** Same city or adjacent cities beat generic regional lists.
 
-![Illustrative kitchen remodel rough-in with open studs and mechanical stub-outs — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-29-mountlake-terrace-hiring-2.webp)
+![Illustrative: kitchen remodel rough-in with open studs and mechanical stub-outs in Mountlake Terrace](../assets/images/posts/2026-09-29-mountlake-terrace-hiring-2.webp)
 
 ## Navigating permits and codes in Mountlake Terrace and Snohomish County
 
@@ -70,7 +70,7 @@ Cross-check the Board’s [red flags](../red-flags-hiring.html) directory. Disqu
 
 Always re-check [L&I Verify](https://secure.lni.wa.gov/verify/) yourself. Portfolio photos do not override a bad registration. More verification steps live on the Board’s [verify contractor](../verify-contractor.html) page.
 
-![Illustrative Pacific Northwest remodel progress with envelope and finish coordination underway — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-29-mountlake-terrace-hiring-3.webp)
+![Illustrative: Pacific Northwest remodel progress with envelope and finish coordination underway in Mountlake Terrace](../assets/images/posts/2026-09-29-mountlake-terrace-hiring-3.webp)
 
 ## Process video: window flashing that keeps water out
 

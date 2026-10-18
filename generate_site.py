@@ -11,6 +11,11 @@ ItemList may type the ranked firm as HomeAndConstructionBusiness.
 
 The Board is an independent publisher of construction standards and contractor directories.
 Pacific Pro Group appears only as Board directory #1 outbound, never as owner.
+
+New content photos use the file name ``yyyy-mm-dd-<city>-<topic>-N.webp``
+(city and topic in lowercase words, N starting at 1). Do not rename a photo
+that is already published — indexed image URLs and srcsets stay on the
+existing file name.
 """
 from __future__ import annotations
 
@@ -79,17 +84,17 @@ BING_SITE_VERIFICATION = ""
 
 # Directory page -> hero image (relative to site root)
 DIR_HERO_IMAGES = {
-    "about": ("assets/images/home-hero.webp", "Illustrative Pacific Northwest home exterior — Board editorial for King County, Snohomish County, and Seattle"),
-    "additions": ("assets/images/dir-additions-hero.webp", "Home with a clean second-story addition in the Pacific Northwest"),
-    "kitchen": ("assets/images/dir-kitchen-hero.webp", "Remodeled Pacific Northwest kitchen with island and garden window"),
-    "bathrooms": ("assets/images/dir-bathrooms-hero.webp", "Walk-in shower bathroom remodel with careful waterproofing details"),
-    "custom-homes": ("assets/images/dir-custom-homes-hero.webp", "Contemporary custom home exterior in a forested Pacific Northwest setting"),
-    "edmonds": ("assets/images/dir-edmonds-custom-hero.webp", "Custom home on a hillside with soft Puget Sound light"),
-    "blog": ("assets/images/blog-featured.webp", "Editorial workspace with blueprints suggesting project stewardship guides"),
-    "story": ("assets/images/another-story-banner.webp", "Conceptual before-and-after second-story idea for Another Story SEA"),
+    "about": ("assets/images/home-hero.webp", "Illustrative: home exterior in Puget Sound"),
+    "additions": ("assets/images/dir-additions-hero.webp", "Illustrative: home with a second-story addition in Puget Sound"),
+    "kitchen": ("assets/images/dir-kitchen-hero.webp", "Illustrative: remodeled kitchen with an island in Puget Sound"),
+    "bathrooms": ("assets/images/dir-bathrooms-hero.webp", "Illustrative: walk-in shower in a Puget Sound bathroom remodel"),
+    "custom-homes": ("assets/images/dir-custom-homes-hero.webp", "Illustrative: custom home exterior among evergreens in Puget Sound"),
+    "edmonds": ("assets/images/dir-edmonds-custom-hero.webp", "Illustrative: custom home on a hillside in Edmonds"),
+    "blog": ("assets/images/blog-featured.webp", "Illustrative: blueprints on a desk for a Puget Sound remodel guide"),
+    "story": ("assets/images/another-story-banner.webp", "Illustrative: before-and-after second-story concept in Puget Sound"),
     "restoration": (
         "assets/images/restoration-water-drying.webp",
-        "Illustrative: air movers and a dehumidifier drying a water-damaged hardwood floor in a Pacific Northwest living room",
+        "Illustrative: air movers and a dehumidifier drying a hardwood floor in Puget Sound",
     ),
 }
 
@@ -1468,19 +1473,306 @@ _ILLUSTRATIVE_ASSET = re.compile(
 
 
 def illustrative_asset_alt(alt: str, rel: str) -> str:
-    """One alt normalizer for generated stills. Does not invent a scene description."""
+    """One alt normalizer for generated stills. Real photos keep their own alt."""
     text = re.sub(r"\s+", " ", (alt or "").strip())
     if not text:
         return ""
     path = (rel or "").split("?", 1)[0].split("#", 1)[0]
     if not _ILLUSTRATIVE_ASSET.search(path):
         return text
+    place = detect_photo_place(text) or "Puget Sound"
+    return polish_photo_alt(text, place, illustrative=True)
+
+
+# Longer tokens first so "mercer-island" wins over a shorter fragment.
+_SLUG_PLACES: tuple[tuple[str, str], ...] = (
+    ("mountlake-terrace", "Mountlake Terrace"),
+    ("lake-forest-park", "Lake Forest Park"),
+    ("mercer-island", "Mercer Island"),
+    ("mill-creek", "Mill Creek"),
+    ("queen-anne", "Queen Anne, Seattle"),
+    ("phinney-ridge", "Phinney Ridge, Seattle"),
+    ("snohomish-county", "Snohomish County"),
+    ("king-snohomish", "Puget Sound"),
+    ("magnolia", "Magnolia, Seattle"),
+    ("woodinville", "Woodinville"),
+    ("greenwood", "Greenwood, Seattle"),
+    ("shoreline", "Shoreline"),
+    ("sammamish", "Sammamish"),
+    ("mukilteo", "Mukilteo"),
+    ("bellevue", "Bellevue"),
+    ("bothell", "Bothell"),
+    ("burien", "Burien"),
+    ("edmonds", "Edmonds"),
+    ("everett", "Everett"),
+    ("issaquah", "Issaquah"),
+    ("kenmore", "Kenmore"),
+    ("kirkland", "Kirkland"),
+    ("lynnwood", "Lynnwood"),
+    ("redmond", "Redmond"),
+    ("renton", "Renton"),
+    ("ballard", "Ballard, Seattle"),
+    ("seattle", "Seattle"),
+    ("eastside", "Puget Sound"),
+    ("coastal", "Puget Sound"),
+    ("pnw", "Puget Sound"),
+)
+
+_PLACE_NAMES: tuple[str, ...] = tuple(
+    dict.fromkeys(
+        [
+            "Mountlake Terrace",
+            "Lake Forest Park",
+            "Mercer Island",
+            "Mill Creek",
+            "Queen Anne",
+            "Phinney Ridge",
+            "Snohomish County",
+            "King County",
+            "Magnolia",
+            "Woodinville",
+            "Greenwood",
+            "Shoreline",
+            "Sammamish",
+            "Mukilteo",
+            "Bellevue",
+            "Bothell",
+            "Burien",
+            "Edmonds",
+            "Everett",
+            "Issaquah",
+            "Kenmore",
+            "Kirkland",
+            "Lynnwood",
+            "Redmond",
+            "Renton",
+            "Ballard",
+            "Seattle",
+            "Puget Sound",
+            "Pacific Northwest",
+        ]
+    )
+)
+
+_PHOTO_BOILERPLATE = (
+    re.compile(
+        r"\s*[—–:;,-]\s*not a real Board of Project Stewardship job photo\.?\s*$",
+        re.I,
+    ),
+    re.compile(r"\s*[—–:;,-]\s*not a real Board job photo\.?\s*$", re.I),
+    re.compile(
+        r"\s*[—–:;,-]\s*free generative image, not a real Board job photo\.?\s*$",
+        re.I,
+    ),
+    re.compile(r"\s*[—–:;,-]\s*not a bid or stamped plan\.?\s*$", re.I),
+    re.compile(r"\s*[—–]\s*illustrative only\.?\s*$", re.I),
+    re.compile(r"\s+for Board editorial\b.*$", re.I),
+    re.compile(r"\s+for Board process\b.*$", re.I),
+    re.compile(r"\s*[—–]\s*Board editorial\b.*$", re.I),
+)
+_PHOTO_GENERIC = re.compile(
+    r"^(?:an? )?(?:editorial still|editorial photo|editorial workspace|curated shortlist).*$",
+    re.I,
+)
+_PHOTO_DANGLING = re.compile(
+    r"(?:\s+(?:of|and|the|a|an|for|to|from|with|in|on|or|at|its|into|by|below|above|under|over|beside|near|along))+$",
+    re.I,
+)
+_PHOTO_CTX = {"place": "Puget Sound", "topic": "remodel"}
+
+
+def photo_place_for_slug(slug: str) -> str:
+    """City or county named by a post, news, or place slug."""
+    low = (slug or "").lower()
+    for token, label in _SLUG_PLACES:
+        if token in low:
+            return label
+    return "Puget Sound"
+
+
+def photo_topic_for_slug(slug: str) -> str:
+    """Project topic from a slug, with the place tokens removed."""
+    text = (slug or "").lower()
+    for token, _label in _SLUG_PLACES:
+        text = text.replace(token, " ")
+    text = re.sub(r"\bwa\b", " ", text)
+    text = text.replace("-", " ")
+    text = re.sub(r"\s+", " ", text).strip()
+    return text or "remodel"
+
+
+def _place_key(place: str) -> str:
+    return (place or "").split(",")[0].strip()
+
+
+def detect_photo_place(text: str) -> str:
+    """First known city or county already written in the alt, if any."""
+    low = text or ""
+    found: list[tuple[int, str]] = []
+    for name in _PLACE_NAMES:
+        match = re.search(rf"\b{re.escape(name)}\b", low, re.I)
+        if match:
+            found.append((match.start(), name))
+    if not found:
+        return ""
+    found.sort()
+    name = found[0][1]
+    if name == "Pacific Northwest":
+        return "Puget Sound"
+    if name in {"Queen Anne", "Phinney Ridge", "Magnolia", "Greenwood", "Ballard"}:
+        return f"{name}, Seattle"
+    return name
+
+
+def _strip_photo_boilerplate(text: str) -> str:
+    text = re.sub(r"\s+", " ", (text or "").strip())
+    text = re.sub(r"\s*\(illustrative\)", "", text, flags=re.I)
+    text = re.sub(r"\bbest in pnw\b", "", text, flags=re.I)
+    changed = True
+    while changed and text:
+        changed = False
+        for pattern in _PHOTO_BOILERPLATE:
+            nxt = pattern.sub("", text).strip(" —–-:;,")
+            if nxt != text:
+                text = nxt
+                changed = True
+    return re.sub(r"\s+", " ", text).strip(" —–-:;,")
+
+
+def _strip_illustrative_prefix(text: str) -> str:
     if text.lower().startswith("illustrative:"):
-        return text
+        return text.split(":", 1)[1].strip()
     if text.lower().startswith("illustrative"):
-        rest = text[len("illustrative") :].lstrip(" :.-").strip()
-        return f"Illustrative: {rest}" if rest else "Illustrative:"
-    return f"Illustrative: {text}"
+        return text[len("illustrative") :].lstrip(" :.-").strip()
+    return text
+
+
+def _place_present(text: str, place: str) -> bool:
+    key = _place_key(place)
+    if not key:
+        return True
+    if re.search(rf"\b{re.escape(key)}\b", text or "", re.I):
+        return True
+    if key.lower() == "puget sound" and re.search(r"\b(?:Pacific Northwest|PNW)\b", text or "", re.I):
+        return True
+    return False
+
+
+def _fit_photo_sentence(text: str, limit: int) -> str:
+    text = re.sub(r"\s+", " ", (text or "").strip()).rstrip(".")
+    if len(text) <= limit:
+        return text
+    window = text[:limit]
+    for sep in (" — ", " – ", "; "):
+        idx = window.rfind(sep)
+        if idx >= 48:
+            return window[:idx].rstrip(" ,;:-—")
+    cut = window.rsplit(" ", 1)[0]
+    cut = _PHOTO_DANGLING.sub("", cut)
+    cut = re.sub(
+        r"(?:,)?\s+(?:and|with|below|above|under|over|beside|near|along|into)\s+(?:a|an|the)?\s*[\w-]{0,16}$",
+        "",
+        cut,
+        flags=re.I,
+    )
+    cut = _PHOTO_DANGLING.sub("", cut).rstrip(" ,;:-—")
+    return cut or window.rstrip()
+
+
+def polish_photo_alt(
+    raw: str,
+    place: str,
+    *,
+    illustrative: bool = True,
+    topic: str = "",
+    limit: int = 125,
+) -> str:
+    """One natural alt sentence. Illustrative stills keep the honesty prefix.
+
+    City (or county) once, topic once, no job-photo boilerplate, no firm name
+    on an illustrative still.
+    """
+    place = (place or detect_photo_place(raw) or "Puget Sound").strip()
+    if place == "Pacific Northwest":
+        place = "Puget Sound"
+    body = _strip_illustrative_prefix(_strip_photo_boilerplate(raw))
+    if illustrative:
+        body = re.sub(r"\bPacific Pro Group\b", "", body, flags=re.I)
+        body = re.sub(r"\s{2,}", " ", body).strip(" ,;-—")
+    body = re.sub(
+        r"\s*[—–-]\s*(?:the\s+)?Pacific Northwest(?:\s+light)?\.?$",
+        "",
+        body,
+        flags=re.I,
+    )
+    if place == "Puget Sound":
+        stripped = re.sub(
+            r"^(?:the\s+)?(?:Pacific Northwest|PNW)\b\s*[—–-]?\s*",
+            "",
+            body,
+            flags=re.I,
+        )
+        if stripped != body:
+            body = stripped
+        else:
+            body = re.sub(r"\bPacific Northwest\b", "Puget Sound", body, flags=re.I)
+            body = re.sub(r"\bPNW\b", "Puget Sound", body)
+    prefix = "Illustrative: " if illustrative else ""
+    room = limit - len(prefix)
+    if not body or _PHOTO_GENERIC.match(body):
+        subject = (topic or _PHOTO_CTX.get("topic") or "remodel").strip()
+        body = f"{subject} on a home in {place}"
+    elif not _place_present(body, place):
+        suffix = f" in {place}"
+        body = _fit_photo_sentence(body, max(24, room - len(suffix)))
+        body = f"{body}{suffix}"
+    sentence = _fit_photo_sentence(body, room)
+    if sentence and not _place_present(sentence, place) and _place_present(body, place):
+        suffix = f" in {place}"
+        sentence = _fit_photo_sentence(sentence, max(24, room - len(suffix))) + suffix
+        sentence = _fit_photo_sentence(sentence, room)
+    return f"{prefix}{sentence}" if sentence else prefix.rstrip()
+
+
+def polish_photo_caption(raw: str, place: str, *, topic: str = "") -> str:
+    """Visible caption: what the photo shows, plus the city, without the honesty prefix."""
+    alt = polish_photo_alt(raw, place, illustrative=False, topic=topic, limit=220)
+    caption = alt.strip()
+    if caption:
+        caption = caption[0].upper() + caption[1:]
+    if caption and not caption.endswith("."):
+        caption += "."
+    return caption
+
+
+def news_photo_place(story: dict) -> str:
+    """City on the story, or the county when the story is county-wide."""
+    city = str(story.get("city") or "").strip()
+    county = str(story.get("county") or "").strip()
+    slug = str(story.get("slug") or "").lower()
+    if any(token in slug for token in ("king-county", "snohomish-county", "snohomish-health")):
+        return county or city or "Puget Sound"
+    if city and city.lower() not in {"king county", "snohomish county", "puget sound"}:
+        return city
+    return county or city or "Puget Sound"
+
+
+def ranking_photo_caption_html(topic: str, place: str) -> str:
+    """#1 listing caption. The firm is the ranked contractor, not the Board's owner."""
+    topic_text = re.sub(r"\s+", " ", (topic or "remodel").strip()).rstrip(".")
+    place_text = (place or "Puget Sound").strip()
+    return (
+        f'<a href="{PPG["url"]}" target="_blank" rel="noopener">Pacific Pro Group</a>, '
+        f"ranked #1 by the Board for King &amp; Snohomish — {esc(topic_text)} in {esc(place_text)}"
+    )
+
+
+def first_markdown_image(md: str) -> tuple[str, str] | None:
+    """First markdown image as (alt, src), if the body has one."""
+    match = re.search(r"!\[([^\]]*)\]\(([^)]+)\)", md or "")
+    if not match:
+        return None
+    return match.group(1).strip(), match.group(2).strip()
 
 
 _unescape_attr = html.unescape
@@ -1697,13 +1989,17 @@ def finalize_published_html() -> None:
     """Performance pass for pages that are not built by page_shell (tools, stamp)."""
     # /learn/ is owned by tools/build_learn.py. The site performance pass
     # would inject site.css and change that guide's own sheet.
-    skip = {"node_modules", "intake", "tests", "docs", "state", "data", "vendor", ".git", "learn"}
+    skip = {"node_modules", "intake", "tests", "docs", "state", "data", "vendor", ".git", "learn", "projects"}
     for path in SITE_DIR.rglob("*.html"):
         rel = path.relative_to(SITE_DIR)
         if any(part in skip for part in rel.parts):
             continue
-        # This tool page has its own stylesheet and does not use site.css or Inter.
-        if rel.as_posix() == "tools/build-walkthrough/index.html":
+        # Hand-published fragments keep their own head. Do not inject site.css.
+        if rel.as_posix() in {
+            "tools/build-walkthrough/index.html",
+            "tools/another-story/embed-snippet.html",
+            "sections/scroll-house.html",
+        }:
             continue
         text = path.read_text(encoding="utf-8")
         updated = apply_performance_pass(text)
@@ -2385,15 +2681,17 @@ def build_walkthrough_home_section(prefix: str = "") -> str:
         if not asset_exists(rel):
             continue
         img = prefix_asset(rel, prefix)
+        stage_alt = polish_photo_alt(f"{label} during a house build", "Puget Sound", illustrative=True, topic=label)
+        stage_cap = polish_photo_caption(f"{label}: {blurb}", "Puget Sound", topic=label)
         thumbs.append(
             "        <figure class=\"shrink-0 w-36 sm:w-40 rounded-lg overflow-hidden border border-white/10 bg-charcoal relative\">\n"
             f'          <div class="aspect-[4/3] bg-obsidian relative">\n'
-            f'            <img src="{img}" alt="{esc(illustrative_asset_alt(f"Stage {i}: {label} — {blurb}", rel))}" '
+            f'            <img src="{img}" alt="{esc(stage_alt)}" '
             'class="absolute inset-0 w-full h-full object-cover" width="320" height="240" loading="lazy">\n'
             f'            <span class="absolute bottom-0 inset-x-0 z-10 text-[10px] uppercase tracking-wider text-secondary font-bold px-2 py-1 bg-black/65">'
             f"{i} · {esc(label)}</span>\n"
             "          </div>\n"
-            f'          <figcaption class="px-2 py-1.5 text-xs text-slate-300 font-light leading-snug">{esc(blurb)}</figcaption>\n'
+            f'          <figcaption class="px-2 py-1.5 text-xs text-slate-300 font-light leading-snug">{esc(stage_cap)}</figcaption>\n'
             "        </figure>"
         )
     strip = "\n".join(thumbs)
@@ -2643,11 +2941,42 @@ def _rel_from_canonical(canon: str) -> str:
     return path
 
 
+def _published_date_modified(rel: str) -> str:
+    """dateModified already published in HEAD, so a caption regen keeps that day."""
+    cache = getattr(_published_date_modified, "_cache", None)
+    if cache is None:
+        cache = {}
+        setattr(_published_date_modified, "_cache", cache)
+    if rel in cache:
+        return cache[rel]
+    date = ""
+    try:
+        text = subprocess.check_output(
+            ["git", "show", f"HEAD:{rel}"],
+            cwd=SITE_DIR,
+            stderr=subprocess.DEVNULL,
+        ).decode("utf-8", "ignore")
+    except (subprocess.CalledProcessError, OSError):
+        text = ""
+    days = re.findall(r'"dateModified"\s*:\s*"(\d{4}-\d{2}-\d{2})', text)
+    unique = list(dict.fromkeys(days))
+    if len(unique) == 1:
+        date = unique[0]
+    elif unique:
+        times = re.findall(r'<time datetime="(\d{4}-\d{2}-\d{2})"', text)
+        date = times[-1] if times and times[-1] in unique else unique[-1]
+    cache[rel] = date
+    return date
+
+
 def stored_lastmod(rel: str) -> str:
-    """Date already recorded for this URL, else the last git commit that touched it."""
+    """Date already recorded for this URL, else the day published on the page."""
     prev = _load_lastmod_store().get(rel)
     if isinstance(prev, dict) and re.match(r"^\d{4}-\d{2}-\d{2}$", str(prev.get("date") or "")):
         return str(prev["date"])
+    published = _published_date_modified(rel)
+    if published:
+        return published
     return _git_commit_date(rel) or datetime.now().strftime("%Y-%m-%d")
 
 
@@ -2901,31 +3230,42 @@ def ppg_featured(context_label: str, note: str | None = None) -> str:
     # Prefer CDN-backed URLs (local webp is gitignored and 404s on Netlify).
     # Context-aware hero: bathroom/kitchen/addition pages get matching cool photos.
     label_l = (context_label or "").lower()
+    place = "Edmonds" if "edmonds" in label_l else "Puget Sound"
     if "bath" in label_l:
         photo_rel = "assets/images/dir-bathrooms-hero.webp"
-        alt = "Luxury walk-in shower bathroom remodel in King County, Snohomish County, and Seattle"
+        topic = "bathroom remodel"
+        alt = "walk-in shower in a bathroom remodel"
     elif "kitchen" in label_l:
         photo_rel = "assets/images/dir-kitchen-hero.webp"
-        alt = "Luxury kitchen remodel in King County, Snohomish County, and Seattle"
+        topic = "kitchen remodel"
+        alt = "kitchen remodel with an island and garden window"
     elif "addition" in label_l or "home addition" in label_l:
         photo_rel = "assets/images/dir-additions-hero.webp"
-        alt = "Home addition design-build project in King County, Snohomish County, and Seattle"
+        topic = "home addition"
+        alt = "home with a second-story addition"
     elif "custom" in label_l or "builder" in label_l:
         photo_rel = "assets/images/dir-custom-homes-hero.webp"
-        alt = "Custom home construction in King County, Snohomish County, and Seattle"
+        topic = "custom home"
+        alt = "custom home exterior in a forested setting"
     else:
         photo_rel = "assets/images/ppg-featured-photo.webp"
-        alt = "Pacific Pro Group design-build remodel in King County, Snohomish County, and Seattle"
+        topic = "remodel"
+        alt = "design-build remodel exterior"
+    alt = polish_photo_alt(alt, place, illustrative=True, topic=topic)
+    rank_caption = ranking_photo_caption_html(topic, place)
     # Fall back through CDN map keys if preferred missing
     if photo_rel not in CDN_MAP and "assets/images/ppg-featured-photo.webp" in CDN_MAP:
         photo_rel = "assets/images/ppg-featured-photo.webp"
     photo_src = prefix_asset(photo_rel)
     if photo_src and (photo_rel in CDN_MAP or asset_exists(photo_rel) or photo_src.startswith("http")):
         left_visual = (
+            f'          <figure>\n'
             f'          <div class="h-48 w-full rounded-lg overflow-hidden border border-white/10 shadow-inner">\n'
             f'            <img src="{photo_src}" alt="{esc(alt)}" '
             f'class="w-full h-full object-cover" width="800" height="600" loading="lazy">\n'
             f'          </div>\n'
+            f'          <figcaption class="mt-2 text-xs text-slate-300 font-light leading-snug">{rank_caption}</figcaption>\n'
+            f'          </figure>\n'
         )
     else:
         left_visual = (
@@ -3526,12 +3866,15 @@ def hero(badge: str, title_html: str, subtitle: str, checks: list[str], image_re
     media = ""
     if image_rel and asset_exists(image_rel):
         src = prefix_asset(image_rel, "")
-        alt = esc(illustrative_asset_alt(image_alt or "Board of Project Stewardship", image_rel))
+        place = detect_photo_place(image_alt) or "Puget Sound"
+        alt_text = polish_photo_alt(image_alt or "home exterior", place, illustrative=True)
+        caption = polish_photo_caption(image_alt or alt_text, place)
         media = (
             f'    <div class="max-w-5xl mx-auto px-4 relative z-10 mt-10">\n'
-            f'      <div class="overflow-hidden rounded-xl border border-white/10 shadow-2xl">\n'
-            f'        <img src="{src}" alt="{alt}" class="w-full h-52 sm:h-72 md:h-80 object-cover" width="1600" height="900" loading="eager">\n'
-            f'      </div>\n'
+            f'      <figure class="overflow-hidden rounded-xl border border-white/10 shadow-2xl">\n'
+            f'        <img src="{src}" alt="{esc(alt_text)}" class="w-full h-52 sm:h-72 md:h-80 object-cover" width="1600" height="900" loading="eager">\n'
+            f'        <figcaption class="px-4 py-2 text-xs text-slate-400 font-light">{esc(caption)}</figcaption>\n'
+            f'      </figure>\n'
             f'    </div>\n'
         )
     return f"""  <header class="relative pt-20 pb-28 overflow-hidden">
@@ -4144,12 +4487,25 @@ def ppg_widgets_script() -> str:
 def home_scroll_house() -> tuple[str, str]:
     """Sticky scroll section: this house plan extrudes into a line-drawing massing.
 
-    Original geometry from the supplied main-floor, upper-floor, and exterior
-    sheets. The upper sheet's overall width is 45 feet. casa-serra ships
-    without a license, so none of its code or assets are reused. The cut
-    follows that project's public starter prompt. The tap labels are original
-    plain-language notes for this sketch.
+    The published homepage keeps its hand-edited Magnolia house, ADU, and
+    garage scroll block. The public fragment at sections/scroll-house.html
+    stays noindex and is only the fallback when that block is absent.
     """
+    index_path = SITE_DIR / "index.html"
+    if index_path.is_file():
+        existing = index_path.read_text(encoding="utf-8")
+        if "scroll-house-magnolia.js" in existing:
+            start = existing.find('<section class="scroll-house" id="scroll-house"')
+            end = existing.find("</section>", start)
+            if start >= 0 and end > start:
+                line_start = existing.rfind("\n", 0, start) + 1
+                fragment = existing[line_start : end + len("</section>")] + "\n"
+                css_match = re.search(
+                    r'<link rel="stylesheet" href="(/assets/css/scroll-house\.css[^"]*)"',
+                    existing,
+                )
+                href = css_match.group(1) if css_match else "/assets/css/scroll-house.css?v=9"
+                return fragment, f'  <link rel="stylesheet" href="{href}">\n'
     fragment = (SITE_DIR / "sections" / "scroll-house.html").read_text(encoding="utf-8")
     # The public fragment URL is noindex. Drop that tag before inlining so a
     # homepage regen does not inherit it.
@@ -4623,8 +4979,8 @@ def home_flashlight_hero(supporting: bool = False) -> tuple[str, str, str] | Non
     wire_attrs = ' decoding="async" data-defer-lcp loading="lazy"'
     html_block = f"""  <section class="{section_cls}" id="home-hero" aria-labelledby="home-hero-title">
     <div class="hero-stage">
-      <img class="hero-layer hero-layer-finished" src="{finished}"{fin_attr} alt="Illustrative Pacific Northwest home concept for Board of Project Stewardship — not a bid or stamped plan" width="1280" height="723"{finished_attrs}>
-      <img class="hero-layer hero-layer-wire" id="home-hero-wire" src="{wire}"{wire_attr} alt="Illustrative: line drawing of the same Pacific Northwest home, the plan layer under the finished view — not a bid or stamped plan" width="1280" height="723"{wire_attrs}>
+      <img class="hero-layer hero-layer-finished" src="{finished}"{fin_attr} alt="Illustrative: finished home concept in Puget Sound" width="1280" height="723"{finished_attrs}>
+      <img class="hero-layer hero-layer-wire" id="home-hero-wire" src="{wire}"{wire_attr} alt="Illustrative: line drawing of the same home concept in Puget Sound" width="1280" height="723"{wire_attrs}>
 {video_html}
     </div>
     <div class="hero-scrim" aria-hidden="true"></div>
@@ -4641,7 +4997,7 @@ def home_flashlight_hero(supporting: bool = False) -> tuple[str, str, str] | Non
         <a class="hero-link" href="./build-walkthrough.html">Explore walkthrough</a>
       </div>
     </div>
-    <p class="hero-credit">Educational concept · not a bid or stamped plan</p>
+    <p class="hero-credit">Finished home concept and its plan drawing in Puget Sound.</p>
   </section>
   <noscript><style>.flashlight-hero .hero-layer-wire,.flashlight-hero .hero-hint,.flashlight-hero .hero-cursor{{display:none!important}}</style></noscript>"""
     if supporting:
@@ -5267,13 +5623,15 @@ def build_about() -> str:
             f'<a href="{href}" class="{cls} px-5 py-3.5 rounded font-bold uppercase tracking-wider text-xs transition text-center">{esc(label)}</a>'
         )
 
-    def img_card(rel: str, alt: str, caption: str) -> str:
+    def img_card(rel: str, alt: str, caption: str, *, html_caption: str | None = None) -> str:
         if not asset_exists(rel):
             return ""
         src = prefix_asset(rel, "")
+        alt_text = polish_photo_alt(alt, "Puget Sound", illustrative=True)
+        cap_html = html_caption if html_caption is not None else esc(polish_photo_caption(caption or alt, "Puget Sound"))
         return f"""        <figure class="overflow-hidden rounded-xl border border-white/10 bg-charcoal">
-          <img src="{src}" alt="{esc(alt)}" class="w-full h-44 sm:h-52 object-cover" width="1200" height="675" loading="lazy" data-defer-lcp>
-          <figcaption class="px-3 py-2 text-xs text-slate-300 font-light leading-snug">{esc(caption)}</figcaption>
+          <img src="{src}" alt="{esc(alt_text)}" class="w-full h-44 sm:h-52 object-cover" width="1200" height="675" loading="lazy" data-defer-lcp>
+          <figcaption class="px-3 py-2 text-xs text-slate-300 font-light leading-snug">{cap_html}</figcaption>
         </figure>"""
 
     process_steps = [
@@ -5283,7 +5641,7 @@ def build_about() -> str:
             "Research",
             "Study how additions and remodels actually run across King County, Snohomish County, and Seattle — AHJ norms, coastal detailing, and stay-in-home vs vacate patterns.",
             "assets/images/home-process-research.webp",
-            "Illustrative editorial photo of plans and research materials for Board process",
+            "Illustrative: plans and research materials for a Puget Sound remodel",
         ),
         (
             "02",
@@ -5291,7 +5649,7 @@ def build_about() -> str:
             "Verify",
             "Cross-check public WA L&I signals and third-party review aggregates. Prefer firms homeowners can re-verify themselves before a deposit.",
             "assets/images/home-process-verify.webp",
-            "Illustrative verification and standards-check visual for Board editorial",
+            "Illustrative: license and standards check for a Puget Sound remodel",
         ),
         (
             "03",
@@ -5299,7 +5657,7 @@ def build_about() -> str:
             "Local mastery",
             "Weight local height limits, critical areas, and coastal weather sequencing — including Edmonds Bowl rules where they apply — not generic statewide marketing claims.",
             "assets/images/home-process-build.webp",
-            "Illustrative Pacific Northwest home addition construction for Board editorial",
+            "Illustrative: home addition under construction in Puget Sound",
         ),
         (
             "04",
@@ -5307,7 +5665,7 @@ def build_about() -> str:
             "Editorial shortlist",
             "Publish ranked directories and field guides so homeowners can compare firms against standards — not paid placement.",
             "assets/images/home-process-shortlist.webp",
-            "Illustrative curated shortlist / directory editorial photo",
+            "Illustrative: directory shortlist notes for Puget Sound remodelers",
         ),
     ]
     process_cards = []
@@ -5315,7 +5673,14 @@ def build_about() -> str:
         media = ""
         if asset_exists(rel):
             src = prefix_asset(rel, "")
-            media = f'<img src="{src}" alt="{esc(alt)}" class="w-full h-36 object-cover rounded-lg border border-white/10 mb-4" width="800" height="450" loading="lazy" data-defer-lcp>'
+            alt_text = polish_photo_alt(alt, "Puget Sound", illustrative=True)
+            cap = polish_photo_caption(alt, "Puget Sound")
+            media = (
+                f'<figure class="mb-4"><img src="{src}" alt="{esc(alt_text)}" '
+                f'class="w-full h-36 object-cover rounded-lg border border-white/10" '
+                f'width="800" height="450" loading="lazy" data-defer-lcp>'
+                f'<figcaption class="mt-2 text-xs text-slate-400 font-light leading-snug">{esc(cap)}</figcaption></figure>'
+            )
         process_cards.append(f"""        <div class="bg-charcoal border border-white/10 hover:border-primary/40 rounded-xl p-5 card-hover">
           {media}
           <div class="flex items-center gap-3 mb-3">
@@ -5332,33 +5697,33 @@ def build_about() -> str:
             [
                 img_card(
                     "assets/images/home-process-build.webp",
-                    "Illustrative PNW home addition exterior for Board editorial",
-                    "Additions & coastal detailing",
+                    "Illustrative: home addition exterior in Puget Sound",
+                    "Home addition exterior in Puget Sound.",
                 ),
                 img_card(
                     "assets/images/home-ppg-addition.webp",
-                    "Illustrative PNW remodel exterior for Board #1 listing",
-                    "Board #1 — quality remodel craft",
+                    "Illustrative: remodel exterior on a Puget Sound house",
+                    "Remodel exterior on a Puget Sound house.",
                 ),
                 img_card(
                     "assets/images/home-ppg-interior.webp",
-                    "Illustrative remodeled kitchen interior for Board editorial",
-                    "Finish discipline indoors",
+                    "Illustrative: remodeled kitchen interior in Puget Sound",
+                    "Remodeled kitchen interior in Puget Sound.",
                 ),
                 img_card(
                     "assets/images/home-gallery-dryin.webp",
-                    "Illustrative dry-in / framing stage for Board editorial",
-                    "Dry-in & weather protection",
+                    "Illustrative: framed house at dry-in in Puget Sound",
+                    "Framed house at dry-in in Puget Sound.",
                 ),
                 img_card(
                     "assets/images/home-gallery-finish.webp",
-                    "Illustrative finished remodel interior for Board editorial",
-                    "Punch-ready finishes",
+                    "Illustrative: finished remodel interior in Puget Sound",
+                    "Finished remodel interior in Puget Sound.",
                 ),
                 img_card(
                     "assets/images/home-process-research.webp",
-                    "Illustrative plans and research desk for Board editorial",
-                    "Research before ranking",
+                    "Illustrative: plans on a research desk for a Puget Sound remodel",
+                    "Plans on a research desk for a Puget Sound remodel.",
                 ),
             ],
         )
@@ -5419,8 +5784,8 @@ def build_about() -> str:
           </div>
         </div>
         <div class="grid grid-cols-2 gap-3">
-          {img_card("assets/images/home-ppg-addition.webp", "Illustrative PNW addition exterior highlighting Board #1 craft standards", "Additions craft")}
-          {img_card("assets/images/home-ppg-interior.webp", "Illustrative remodel interior highlighting Board #1 finish standards", "Interior finish")}
+          {img_card("assets/images/home-ppg-addition.webp", "Illustrative: home addition exterior in Puget Sound", "", html_caption=ranking_photo_caption_html("home addition", "Puget Sound"))}
+          {img_card("assets/images/home-ppg-interior.webp", "Illustrative: remodeled kitchen interior in Puget Sound", "", html_caption=ranking_photo_caption_html("kitchen remodel", "Puget Sound"))}
         </div>
       </div>
     </section>
@@ -5624,7 +5989,7 @@ def build_about() -> str:
     )}
   </div>"""
 
-    og_alt = "Illustrative Pacific Northwest home concept for Board of Project Stewardship — not a bid or stamped plan"
+    og_alt = "Illustrative: finished home concept in Puget Sound"
     return page_shell(
         HOME_TITLE,
         HOME_DESCRIPTION,
@@ -6252,9 +6617,12 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
       <div class="p-6 md:p-10 md:flex gap-10 relative">
         <div class="absolute -top-16 -left-16 w-72 h-72 bg-primary/10 blur-[90px] pointer-events-none rounded-full"></div>
         <div class="md:w-1/3 mb-8 md:mb-0 relative z-10 flex flex-col gap-4">
+          <figure>
           <div class="h-48 w-full rounded-lg overflow-hidden border border-white/10 shadow-inner">
-            <img src="{prefix_asset('assets/images/home-hero.webp')}" alt="Custom home construction in Edmonds and coastal Snohomish County" class="w-full h-full object-cover" width="800" height="600" loading="lazy">
+            <img src="{prefix_asset('assets/images/home-hero.webp')}" alt="{esc(polish_photo_alt('custom home under construction', 'Edmonds', illustrative=True, topic='custom home'))}" class="w-full h-full object-cover" width="800" height="600" loading="lazy">
           </div>
+          <figcaption class="mt-2 text-xs text-slate-300 font-light leading-snug">{ranking_photo_caption_html("custom home", "Edmonds")}</figcaption>
+          </figure>
           <div class="grid grid-cols-2 gap-2">
             <div class="bg-white/5 border border-white/10 rounded-lg px-3 py-3 text-center">
               <div class="text-2xl font-black text-secondary">{PPG['rating']}</div>
@@ -7010,7 +7378,7 @@ def parse_frontmatter(text: str) -> tuple[dict, str]:
     return meta, parts[2].strip()
 
 
-def md_to_html(md: str) -> str:
+def md_to_html(md: str, *, link_unescape: bool = False) -> str:
     lines = md.splitlines()
     out: list[str] = []
     i = 0
@@ -7076,10 +7444,14 @@ def md_to_html(md: str) -> str:
                 resolved = f"../{rel}"
             elif rel in CDN_MAP:
                 resolved = CDN_MAP[rel]
-        cap = f"<figcaption>{esc(alt)}</figcaption>" if alt.strip() else ""
+        place = _PHOTO_CTX.get("place") or detect_photo_place(alt) or "Puget Sound"
+        topic = str(_PHOTO_CTX.get("topic") or "")
+        alt_text = polish_photo_alt(alt, place, illustrative=True, topic=topic)
+        caption = polish_photo_caption(alt, place, topic=topic)
+        cap = f"<figcaption>{esc(caption)}</figcaption>" if caption else ""
         return (
             f'<figure class="post-figure">'
-            f'<img src="{esc(resolved)}" alt="{esc(alt)}" loading="lazy" width="1200" height="675">'
+            f'<img src="{esc(resolved)}" alt="{esc(alt_text)}" loading="lazy" width="1200" height="675">'
             f"{cap}</figure>"
         )
 
@@ -7096,6 +7468,8 @@ def md_to_html(md: str) -> str:
         s = "".join(parts)
         def _md_link(match: re.Match) -> str:
             label, href = match.group(1), match.group(2)
+            if link_unescape:
+                href = html.unescape(href)
             if href.lower().split("?", 1)[0].endswith(".mp4"):
                 return local_video_embed(href)
             return f'<a href="{esc(href)}">{label}</a>'
@@ -7528,8 +7902,13 @@ def news_card_media(story: dict, prefix: str, eager: bool = False) -> str:
     if not news_hero_ready(hero_rel):
         return ""
     above = " data-above-fold" if eager else ""
+    place = news_photo_place(story)
+    raw_alt = story.get("alt") or ""
+    credited = bool((story.get("hero_credit") or "").strip())
+    illustrative = (not credited) and raw_alt.lower().startswith("illustrative")
+    alt_text = polish_photo_alt(raw_alt, place, illustrative=illustrative)
     return (
-        f'<img src="{prefix_asset(hero_rel, prefix)}" alt="{esc(story.get("alt") or "")}" '
+        f'<img src="{prefix_asset(hero_rel, prefix)}" alt="{esc(alt_text)}" '
         f'width="1200" height="800"{above}>'
     )
 
@@ -7537,6 +7916,9 @@ def news_card_media(story: dict, prefix: str, eager: bool = False) -> str:
 def build_news_story_page(story: dict, news_names: set[str] | None = None, related: list[dict] | None = None) -> str:
     """One news story in a readable column. Another Story callout matches posts."""
     hero_rel = (story.get("hero") or "").lstrip("./")
+    photo_place = news_photo_place(story)
+    _PHOTO_CTX["place"] = photo_place
+    _PHOTO_CTX["topic"] = "news"
     article_html = rewrite_post_root_hrefs(
         md_to_html(story.get("body_md") or ""),
         news_names or set(),
@@ -7549,10 +7931,23 @@ def build_news_story_page(story: dict, news_names: set[str] | None = None, relat
     image_obj = None
     if news_hero_ready(hero_rel):
         src = prefix_asset(hero_rel, "../")
+        raw_alt = story.get("alt") or ""
+        credited = bool((story.get("hero_credit") or "").strip())
+        illustrative = (not credited) and raw_alt.lower().startswith("illustrative")
+        alt_text = polish_photo_alt(raw_alt, photo_place, illustrative=illustrative, topic="")
+        caption = polish_photo_caption(raw_alt, photo_place)
         credit_html = news_hero_credit_html(story.get("hero_credit") or "")
+        if credit_html:
+            credit_html = credit_html.replace(
+                '<figcaption class="news-credit">',
+                f'<figcaption class="news-credit">{esc(caption)} ',
+                1,
+            )
+        else:
+            credit_html = f'      <figcaption>{esc(caption)}</figcaption>\n'
         hero_html = (
             '    <figure class="news-figure">\n'
-            f'      <img src="{src}" alt="{esc(story.get("alt") or "")}" width="1200" height="800" loading="eager">\n'
+            f'      <img src="{src}" alt="{esc(alt_text)}" width="1200" height="800" loading="eager">\n'
             f"{credit_html}"
             "    </figure>\n"
         )
@@ -7619,7 +8014,7 @@ def build_news_story_page(story: dict, news_names: set[str] | None = None, relat
         canonical=canon,
         og_image=hero_rel or None,
         og_type="article",
-        og_image_alt=story.get("alt") or "",
+        og_image_alt=alt_text if news_hero_ready(hero_rel) else (story.get("alt") or ""),
         extra_head=rss_link,
         breadcrumbs=[
             ("Home", BASE_URL),
@@ -7785,6 +8180,87 @@ def write_news_rss(stories: list[dict]) -> None:
     (news_dir / "rss.xml").write_text(xml, encoding="utf-8")
 
 
+def _git_head_text(rel: str) -> str:
+    try:
+        return subprocess.check_output(
+            ["git", "show", f"HEAD:{rel}"],
+            cwd=SITE_DIR,
+            stderr=subprocess.DEVNULL,
+        ).decode("utf-8")
+    except (subprocess.CalledProcessError, OSError):
+        return ""
+
+
+def _img_alt_by_src(html: str) -> dict[str, str]:
+    found: dict[str, str] = {}
+    for match in re.finditer(r"<img\b[^>]*>", html):
+        tag = match.group(0)
+        src = re.search(r'\bsrc="([^"]+)"', tag)
+        alt = re.search(r'\balt="([^"]*)"', tag)
+        if src and alt:
+            found[src.group(1)] = alt.group(1)
+    return found
+
+
+def _figcaption_by_src(html: str) -> dict[str, str]:
+    found: dict[str, str] = {}
+    for match in re.finditer(r"<figure\b[^>]*>.*?</figure>", html, flags=re.S):
+        block = match.group(0)
+        src = re.search(r'\bsrc="([^"]+)"', block)
+        cap = re.search(r"<figcaption\b[^>]*>.*?</figcaption>", block, flags=re.S)
+        if src and cap:
+            found[src.group(1)] = cap.group(0)
+    return found
+
+
+def preserve_news_body_wording(rel: str, generated: str) -> str:
+    """Keep published news sentences. Regen may change alt text and figcaptions only."""
+    published = _git_head_text(rel)
+    if not published:
+        return generated
+    alts = _img_alt_by_src(generated)
+    captions = _figcaption_by_src(generated)
+
+    def repl_img(match: re.Match) -> str:
+        tag = match.group(0)
+        src = re.search(r'\bsrc="([^"]+)"', tag)
+        if not src or src.group(1) not in alts or 'alt="' not in tag:
+            return tag
+        return re.sub(r'\balt="[^"]*"', f'alt="{alts[src.group(1)]}"', tag, count=1)
+
+    merged = re.sub(r"<img\b[^>]*>", repl_img, published)
+
+    def repl_figure(match: re.Match) -> str:
+        block = match.group(0)
+        src = re.search(r'\bsrc="([^"]+)"', block)
+        if not src or src.group(1) not in captions:
+            return block
+        new_cap = captions[src.group(1)]
+        old = re.search(r"<figcaption\b[^>]*>.*?</figcaption>", block, flags=re.S)
+        if old:
+            return block[: old.start()] + new_cap + block[old.end() :]
+        return block.replace("</figure>", new_cap + "</figure>", 1)
+
+    merged = re.sub(r"<figure\b[^>]*>.*?</figure>", repl_figure, merged, flags=re.S)
+    for prop in ("og:image:alt", "twitter:image:alt"):
+        new_tag = re.search(
+            rf'<meta\b[^>]*(?:property|name)="{re.escape(prop)}"[^>]*>',
+            generated,
+        )
+        if not new_tag:
+            continue
+        content = re.search(r'\bcontent="([^"]*)"', new_tag.group(0))
+        if not content:
+            continue
+        merged = re.sub(
+            rf'(<meta\b[^>]*(?:property|name)="{re.escape(prop)}"[^>]*\bcontent=")[^"]*(")',
+            rf"\1{content.group(1)}\2",
+            merged,
+            count=1,
+        )
+    return merged
+
+
 def refresh_news_pages(stories: list[dict]) -> None:
     """Write news/<slug>.html, news.html, and news/rss.xml. Never touches the blog."""
     news_dir = SITE_DIR / "news"
@@ -7794,11 +8270,19 @@ def refresh_news_pages(stories: list[dict]) -> None:
         if old.name not in expected:
             old.unlink()
     for story in stories:
+        rel = f"news/{story['out_name']}"
+        generated = build_news_story_page(
+            story, expected, [item for item in stories if item["slug"] != story["slug"]]
+        )
         (news_dir / story["out_name"]).write_text(
-            build_news_story_page(story, expected, [item for item in stories if item["slug"] != story["slug"]]),
+            preserve_news_body_wording(rel, generated),
             encoding="utf-8",
         )
-    (SITE_DIR / "news.html").write_text(build_news_index(stories), encoding="utf-8")
+    generated_index = build_news_index(stories)
+    (SITE_DIR / "news.html").write_text(
+        preserve_news_body_wording("news.html", generated_index),
+        encoding="utf-8",
+    )
     write_news_rss(stories)
 
 
@@ -7952,17 +8436,22 @@ def build_blog_index(posts: list[dict]) -> str:
                 if asset_exists(alt_name) and alt_name != hero_img:
                     card_img = alt_name
                     break
-        card_alt = (
-            f"Illustrative cover for {top['title']} — not a real Board of Project Stewardship job photo"
-            if card_img
-            else ""
-        )
+        card_place = photo_place_for_slug(top.get("slug") or "")
+        card_topic = photo_topic_for_slug(top.get("slug") or "")
+        pin = load_post_hero_pins().get(top.get("slug") or "")
+        card_raw = str(pin.get("alt") or "").strip() if isinstance(pin, dict) else ""
+        if not card_raw:
+            first = first_markdown_image(top.get("body_md") or "")
+            card_raw = first[0] if first else card_topic
+        card_alt = polish_photo_alt(card_raw, card_place, illustrative=True, topic=card_topic) if card_img else ""
+        card_caption = polish_photo_caption(card_raw, card_place, topic=card_topic) if card_img else ""
         thumb = ""
         if card_img:
             thumb = (
-                f'<div class="mb-5 overflow-hidden rounded-lg border border-white/10">'
+                f'<figure class="mb-5 overflow-hidden rounded-lg border border-white/10">'
                 f'<img src="{prefix_asset(card_img)}" alt="{esc(card_alt)}" '
-                f'class="w-full h-48 sm:h-64 object-cover" width="1600" height="686" loading="eager"></div>'
+                f'class="w-full h-48 sm:h-64 object-cover" width="1600" height="686" loading="eager">'
+                f'<figcaption class="px-3 py-2 text-xs text-slate-400 font-light">{esc(card_caption)}</figcaption></figure>'
             )
         featured_block = f"""    <section class="mb-10 bg-charcoal border border-secondary/25 rounded-xl p-6 md:p-8">
       <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-3">Featured</p>
@@ -8080,6 +8569,10 @@ POST_SEO_TITLES = {
 
 
 def build_post_page(post: dict, posts: list[dict] | None = None) -> str:
+    place = photo_place_for_slug(post.get("slug") or "")
+    topic = photo_topic_for_slug(post.get("slug") or "")
+    _PHOTO_CTX["place"] = place
+    _PHOTO_CTX["topic"] = topic
     hero_rel = resolve_post_hero(post)
     article_html = _strip_leading_hero_figure(
         rewrite_post_root_hrefs(md_to_html(post["body_md"])),
@@ -8109,15 +8602,26 @@ def build_post_page(post: dict, posts: list[dict] | None = None) -> str:
     custom_alt = ""
     if isinstance(pin, dict):
         custom_alt = str(pin.get("alt") or "").strip()
-    hero_alt_text = illustrative_alt(custom_alt, post.get("category") or "remodel guide")
+    if not custom_alt:
+        first = first_markdown_image(post.get("body_md") or "")
+        if first:
+            custom_alt = first[0]
+    hero_alt_text = polish_photo_alt(
+        custom_alt,
+        place,
+        illustrative=True,
+        topic=topic,
+    )
+    hero_caption = polish_photo_caption(custom_alt or hero_alt_text, place, topic=topic)
     hero_html = ""
     if hero_rel and asset_exists(hero_rel):
         src = prefix_asset(hero_rel, "../")
         hero_html = (
-            f'    <div class="mb-8 overflow-hidden rounded-xl border border-white/10">\n'
+            f'    <figure class="mb-8 overflow-hidden rounded-xl border border-white/10">\n'
             f'      <img src="{src}" alt="{esc(hero_alt_text)}" class="w-full h-52 sm:h-72 object-cover" '
             f'width="1600" height="900" loading="eager">\n'
-            f'    </div>\n'
+            f'      <figcaption class="px-4 py-2 text-xs text-slate-400 font-light">{esc(hero_caption)}</figcaption>\n'
+            f'    </figure>\n'
         )
     body = f"""  <div class="max-w-3xl mx-auto px-4 py-16 relative z-20">
     <nav aria-label="Breadcrumb" class="text-xs text-slate-400 mb-6">
@@ -8148,7 +8652,7 @@ def build_post_page(post: dict, posts: list[dict] | None = None) -> str:
         canonical=canon,
         og_image=hero_rel,
         og_type="article",
-        og_image_alt=custom_alt,
+        og_image_alt=hero_alt_text,
         breadcrumbs=[
             ("Home", BASE_URL),
             ("Blog", f"{BASE_URL}blog.html"),
@@ -8296,6 +8800,7 @@ python3 tools/board_intake.py publish intake/inbox/submission-id --dry-run
 
 ## Notes
 
+- New content photos use the file name `yyyy-mm-dd-<city>-<topic>-N.webp` (lowercase city and topic, N starting at 1). Do not rename a photo that is already published.
 - Always re-verify WA contractor status at [L&I Verify](https://secure.lni.wa.gov/verify/) before hiring.
 - Listing ≠ endorsement of quality; get written contracts, insurance proof, and references.
 - Public pages are authored as **{AUTHOR}**.
@@ -8584,6 +9089,27 @@ def write_sitemap(posts: list[dict]) -> None:
             rel = path.relative_to(SITE_DIR).as_posix()
             loc = f"{BASE_URL}{rel[: -len('index.html')]}"
             entries.append(url_entry(loc, page_date_modified(rel), "0.7"))
+
+    # Hand-published Magnolia project. Regen must keep this URL.
+    magnolia_loc = f"{BASE_URL}projects/magnolia-house-adu-garage/"
+    if not any(magnolia_loc in entry for entry in entries):
+        magnolia_lastmod = "2026-10-16"
+        sitemap_path = SITE_DIR / "sitemap.xml"
+        if sitemap_path.is_file():
+            prior = re.search(
+                rf"<loc>{re.escape(magnolia_loc)}</loc>\s*<lastmod>([^<]+)</lastmod>",
+                sitemap_path.read_text(encoding="utf-8"),
+            )
+            if prior:
+                magnolia_lastmod = prior.group(1)
+        entries.append(
+            "  <url>\n"
+            f"    <loc>{magnolia_loc}</loc>\n"
+            f"    <lastmod>{magnolia_lastmod}</lastmod>\n"
+            "    <changefreq>monthly</changefreq>\n"
+            "    <priority>0.8</priority>\n"
+            "  </url>"
+        )
 
     xml = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
@@ -10252,6 +10778,7 @@ def _hub_photo_strip(
     *,
     title: str = "Field context (illustrative)",
     asset_prefix: str = "",
+    place: str = "",
 ) -> str:
     """Reusable 3-up photo strip for thin learning hubs. Skips missing assets.
 
@@ -10269,6 +10796,10 @@ def _hub_photo_strip(
         link_label = item[4] if len(item) >= 5 else None
         if not asset_exists(rel):
             continue
+        photo_place = place or detect_photo_place(f"{alt} {caption}") or "Puget Sound"
+        alt = polish_photo_alt(str(alt), photo_place, illustrative=True)
+        thin = (not caption) or "(illustrative)" in str(caption).lower() or len(str(caption)) < 28
+        caption = polish_photo_caption(str(alt if thin else caption), photo_place)
         src = prefix_asset(rel, asset_prefix)
         img_class = "w-full h-40 sm:h-48 object-cover"
         if href:
@@ -10912,7 +11443,7 @@ def build_city_hub_page(
             + '<p class="text-sm text-slate-400 font-light mt-4">City projects use the city portal or MyBuildingPermit. County-jurisdiction work goes through Snohomish County Planning and Development Services.</p>',
         )
     strip = (
-        _hub_photo_strip(photo_strip, title=photo_strip_title)
+        _hub_photo_strip(photo_strip, title=photo_strip_title, place=place)
         if photo_strip
         else ""
     )
@@ -11453,6 +11984,7 @@ def place_seo_media_html(slug: str, place: str) -> str:
     strip = _hub_photo_strip(
         items,
         title=f"Field context · {place} (illustrative)",
+        place=place,
     )
     video_html = _hub_video_embed_html(
         entry.get("video"),
@@ -15919,12 +16451,38 @@ def build_restoration_page() -> str:
     dk_lni = "https://secure.lni.wa.gov/verify/Detail.aspx?UBI=603327330&LIC=DKPROPL872OC&SAW="
     dk_thumbtack = "https://www.thumbtack.com/wa/marysville/subfloor-repair-contractors/dk-production-llc/service/384150803013025804"
     dk_yelp = "https://www.yelp.com/biz/dk-production-marysville-4"
-    water_alt = "Illustrative: air movers and a dehumidifier drying a water-damaged hardwood floor in a Pacific Northwest living room"
-    fire_alt = "Illustrative: a fire- and smoke-damaged kitchen with exposed framing, a dehumidifier, and plastic sheeting"
-    mold_alt = "Illustrative: plastic containment, a negative-air duct, and mold on open wall framing during remediation"
-    storm_alt = "Illustrative: a windstorm-damaged Pacific Northwest house with a blue roof tarp and a fallen evergreen"
-    addition_alt = "Illustrative: a finished Pacific Northwest home addition, reused as reconstruction context and not a DK Production job photo"
-    build_alt = "Illustrative: build-phase work on a Pacific Northwest addition, reused as reconstruction context and not a DK Production job photo"
+    water_alt = polish_photo_alt(
+        "air movers and a dehumidifier drying a water-damaged hardwood floor in a living room",
+        "Puget Sound",
+        illustrative=True,
+    )
+    fire_alt = polish_photo_alt(
+        "a fire- and smoke-damaged kitchen with exposed framing, a dehumidifier, and plastic sheeting",
+        "Puget Sound",
+        illustrative=True,
+    )
+    mold_alt = polish_photo_alt(
+        "plastic containment, a negative-air duct, and mold on open wall framing during remediation",
+        "Puget Sound",
+        illustrative=True,
+    )
+    storm_alt = polish_photo_alt(
+        "a windstorm-damaged house with a blue roof tarp and a fallen evergreen",
+        "Puget Sound",
+        illustrative=True,
+    )
+    addition_alt = polish_photo_alt(
+        "a finished home addition reused as reconstruction context",
+        "Puget Sound",
+        illustrative=True,
+        topic="home addition",
+    )
+    build_alt = polish_photo_alt(
+        "build-phase work on a home addition",
+        "Puget Sound",
+        illustrative=True,
+        topic="home addition",
+    )
     og_alt = water_alt
 
     def _photo(stem: str, alt: str, caption: str, eager: bool = False) -> str:
@@ -16010,33 +16568,45 @@ def build_restoration_page() -> str:
     water_photo = _photo(
         "restoration-water-drying",
         water_alt,
-        "Illustrative drying setup on an opened hardwood floor. Not a DK Production job photo.",
+        polish_photo_caption(
+            "air movers and a dehumidifier drying a water-damaged hardwood floor in a living room",
+            "Puget Sound",
+        ),
         eager=True,
     )
     fire_photo = _photo(
         "restoration-fire-smoke",
         fire_alt,
-        "Illustrative fire and smoke damage in a kitchen. Not a DK Production job photo.",
+        polish_photo_caption(
+            "a fire- and smoke-damaged kitchen with exposed framing, a dehumidifier, and plastic sheeting",
+            "Puget Sound",
+        ),
     )
     mold_photo = _photo(
         "restoration-mold-containment",
         mold_alt,
-        "Illustrative mold containment at open framing. Not a DK Production job photo.",
+        polish_photo_caption(
+            "plastic containment, a negative-air duct, and mold on open wall framing during remediation",
+            "Puget Sound",
+        ),
     )
     storm_photo = _photo(
         "restoration-storm-tarp",
         storm_alt,
-        "Illustrative windstorm roof tarp and fallen evergreen. Not a DK Production photo.",
+        polish_photo_caption(
+            "a windstorm-damaged house with a blue roof tarp and a fallen evergreen",
+            "Puget Sound",
+        ),
     )
     addition_photo = _photo(
         "dir-additions-hero",
         addition_alt,
-        "Existing Board addition still, reused for rebuild context. Not a DK Production project.",
+        polish_photo_caption("a finished home addition", "Puget Sound", topic="home addition"),
     )
     build_photo = _photo(
         "home-process-build",
         build_alt,
-        "Existing Board build-phase still, reused here. Not a DK Production project.",
+        polish_photo_caption("build-phase work on a home addition", "Puget Sound", topic="home addition"),
     )
 
     body = f"""  <header class="max-w-6xl mx-auto px-4 pt-8 pb-4">

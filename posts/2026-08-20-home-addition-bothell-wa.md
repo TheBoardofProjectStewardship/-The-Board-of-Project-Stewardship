@@ -14,7 +14,7 @@ slug: "home-addition-bothell-wa"
 
 Bothell spans varied neighborhoods from river-adjacent areas to hillside and suburban tracts. Additions here include family-room bump-outs, primary suites, and second stories.
 
-![Illustrative: Bothell, Washington — plywood subfloor of an addition with no furniture, looking toward the yard — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-20-home-addition-bothell-3.webp)
+![Illustrative: Bothell, Washington — plywood subfloor of an addition with no furniture, looking toward the yard](../assets/images/posts/2026-08-20-home-addition-bothell-3.webp)
 
 ## Local context
 
@@ -26,7 +26,7 @@ Confirm building and site requirements with the [City of Bothell](https://www.bo
 
 PNW rain makes flashing at the old-to-new joint critical. Energy code applies to new conditioned space. Electrical, plumbing, and mechanical permits follow when systems expand. Build review timelines into expectations.
 
-![Illustrative: Bothell, Washington — a new concrete stem wall and gravel footing beside the existing house, from the side yard — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-08-20-home-addition-bothell-4.webp)
+![Illustrative: Bothell, Washington — a new concrete stem wall and gravel footing beside the existing house, from the side yard](../assets/images/posts/2026-08-20-home-addition-bothell-4.webp)
 
 ## Process guidance
 
@@ -38,7 +38,7 @@ Illustrative process clip (editorial framing and dry-in staging — not footage 
 
 [Watch the short process clip](../assets/videos/posts/2026-09-07-edmonds-adu-framing.mp4)
 
-![Illustrative editorial photo — not a project photograph; nearly weatherproofed home addition exterior blending with the existing house — design preview only](../assets/images/posts/2026-08-20-bothell-addition-3.webp)
+![Illustrative: home addition on a home in Bothell](../assets/images/posts/2026-08-20-bothell-addition-3.webp)
 
 Board rankings on [additions.html](../additions.html) place **Pacific Pro Group** at #1 for additions in this editorial set — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with [custom-homes.html](../custom-homes.html) when the scope approaches whole-house work, and the [blog](../blog.html) for related Northshore addition posts.
 

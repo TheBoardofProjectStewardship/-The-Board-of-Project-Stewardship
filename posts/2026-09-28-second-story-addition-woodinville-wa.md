@@ -14,7 +14,7 @@ slug: "second-story-addition-woodinville-wa"
 
 Woodinville sits at the edge of the Sammamish Valley — wine-country tourism along SR-202 and Woodinville-Redmond Road, equestrian and larger-lot pockets toward Hollywood Hill and the rural edges, and denser neighborhoods closer to Downtown and the Tourist District. A second-story addition here is not a Seattle bluff envelope job and not an Edmonds waterfront salt-air rebuild — but inland Eastside winters still bring long wet seasons that punish an open roof deck, thin temporary cover, and stair shafts left unprotected overnight. Durable scopes treat structure, weatherproof-first sequencing, Accela (or county) permit ownership, and stay-in-home phasing as the product, then pick upstairs layouts that fit that critical path.
 
-![Illustrative: Woodinville, Washington — wall sheathing wrapped in a weather barrier during a second-story addition, rainy daylight — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-28-second-story-addition-woodinville-2.webp)
+![Illustrative: Woodinville, Washington — wall sheathing wrapped in a weather barrier during a second-story addition, rainy](../assets/images/posts/2026-09-28-second-story-addition-woodinville-2.webp)
 
 ## Neighborhood and lot context
 
@@ -43,7 +43,7 @@ Practical sequencing that works on Woodinville lots:
 3. Write weatherproof-first milestones: temporary roofing, sheathing/dry-in, WRB, and roofing — with rain-delay rules that do not leave the existing floor open overnight.
 4. Submit City Accela (or the correct county portal), file L&I electrical where required, and hold cover-up until inspections clear.
 
-![Illustrative close-up of weatherproof sheathing and roof dry-in staging on a Pacific Northwest vertical addition — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-28-woodinville-second-story-2.webp)
+![Illustrative: close-up of weatherproof sheathing and roof dry-in staging on a Pacific Northwest vertical in Woodinville](../assets/images/posts/2026-09-28-woodinville-second-story-2.webp)
 
 ## Process video: second-level sheathing and dry-in
 
@@ -61,7 +61,7 @@ Measure stair geometry, upstairs bath stacks, HVAC risers, and egress windows be
 
 If the second story sits inside a larger kitchen, bath, or whole-house package, keep envelope dry-in on the same critical path as structure and mechanical penetrations. Relative planning companions: [additions.html](../additions.html), [another-story.html](../another-story.html), [roofing.html](../roofing.html), [siding.html](../siding.html), [kitchen.html](../kitchen.html), [bathrooms.html](../bathrooms.html), and [trades.html](../trades.html) when multiple specialties share the same rough-in window.
 
-![Illustrative Pacific Northwest home volume after second-story framing with envelope context — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-28-woodinville-second-story-3.webp)
+![Illustrative: Pacific Northwest home volume after second-story framing with envelope context in Woodinville](../assets/images/posts/2026-09-28-woodinville-second-story-3.webp)
 
 Board rankings on [additions.html](../additions.html) place **Pacific Pro Group** at #1 for home additions in this editorial set — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with [another-story.html](../another-story.html) when vertical expansion is the primary move, and the [blog](../blog.html) for related Eastside and Snohomish County addition posts — Woodinville’s own Accela path (or the correct county portal) and L&I electrical still govern your lot.
 

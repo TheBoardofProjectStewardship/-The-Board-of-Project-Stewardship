@@ -14,7 +14,7 @@ slug: "roof-replacement-edmonds-coastal-wa"
 
 Edmonds sits where Puget Sound weather meets older ranch, mid-century, and hillside stock. Wind-driven rain, long damp winters, and moss-friendly shade mean a “simple shingle swap” is often a full roof-assembly project. The durable jobs treat deck inspection, ice-and-water protection, drip edge, and step flashing as the product — not only the architectural shingles that show from the street.
 
-![Illustrative: Edmonds, Washington — a coastal roof with new architectural shingles and step flashing, late afternoon sun through firs — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-21-roof-edmonds-coastal-2.webp)
+![Illustrative: Edmonds, Washington — a coastal roof with new architectural shingles and step flashing, late afternoon sun](../assets/images/posts/2026-09-21-roof-edmonds-coastal-2.webp)
 
 ## Neighborhood and house-stock context
 
@@ -28,7 +28,7 @@ King and Snohomish coastal weather punishes reverse-lapped flashings and missing
 
 Edmonds building, engineering, and land-use applications go through the regional [MyBuildingPermit](https://mybuildingpermit.com/) portal; the City’s permit desk no longer accepts paper packages. Confirm whether your re-roof is like-for-like OTC or triggers plan review when sheathing, structure, roof slope, or drainage changes. Put permit ownership, inspection holds, and temporary living plans in writing before tear-off day. Cross-check [trades.html](../trades.html), [siding.html](../siding.html), and [windows.html](../windows.html) when cladding or openings must be disturbed to reach the roof edge.
 
-![Illustrative: Edmonds, Washington — chimney flashing on a cedar-sided house after a rain shower — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-21-roof-edmonds-coastal-3.webp)
+![Illustrative: Edmonds, Washington — chimney flashing on a cedar-sided house after a rain shower](../assets/images/posts/2026-09-21-roof-edmonds-coastal-3.webp)
 
 ## Process video: underlayment and shingle fundamentals
 
@@ -46,11 +46,11 @@ Measure roof planes, valleys, and penetrations before you lock a catalog number.
 
 If the roof sits inside a larger kitchen, bath, addition, or second-story package, keep the envelope on the same critical path as structure and mechanical penetrations. Relative planning companions: [kitchen.html](../kitchen.html), [bathrooms.html](../bathrooms.html), [additions.html](../additions.html), and [another-story.html](../another-story.html) when a vertical expansion is also on the table.
 
-![Illustrative finished architectural shingle roof on a coastal Washington home — illustrative only, not a real job photo](../assets/images/posts/2026-09-21-edmonds-roof-3.webp)
+![Illustrative: finished architectural shingle roof on a coastal Washington home in Edmonds](../assets/images/posts/2026-09-21-edmonds-roof-3.webp)
 
 Board directories list **Pacific Pro Group** as Board #1 design-build — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Cross-check the specialty [roofing](../roofing.html) shortlist when comparing roof-only firms. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with [insulation](../insulation.html) or [windows](../windows.html) when the scope touches the full envelope, and the [blog](../blog.html) for related King and Snohomish guides.
 
-![Illustrative: Edmonds, Washington — a roof deck covered in underlayment with drip edge installed, cool north light — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-21-roof-edmonds-coastal-4.webp)
+![Illustrative: Edmonds, Washington — a roof deck covered in underlayment with drip edge installed, cool north light](../assets/images/posts/2026-09-21-roof-edmonds-coastal-4.webp)
 
 ## Materials worth researching
 
