@@ -1757,13 +1757,28 @@ def news_photo_place(story: dict) -> str:
     return county or city or "Puget Sound"
 
 
+_RANKING_TOPIC_PLURAL = {
+    "home addition": "home additions",
+    "bathroom remodel": "bathroom remodels",
+    "kitchen remodel": "kitchen remodels",
+    "custom home": "custom homes",
+    "remodel": "remodels",
+}
+
+
 def ranking_photo_caption_html(topic: str, place: str) -> str:
-    """#1 listing caption. The firm is the ranked contractor, not the Board's owner."""
+    """#1 listing caption. The still is illustrative; the firm is the ranked contractor.
+
+    The photo is not described as a Pacific Pro Group job. The name appears only
+    as the Board's #1 hire for that topic.
+    """
     topic_text = re.sub(r"\s+", " ", (topic or "remodel").strip()).rstrip(".")
     place_text = (place or "Puget Sound").strip()
+    plural = _RANKING_TOPIC_PLURAL.get(topic_text.lower(), topic_text)
     return (
-        f'<a href="{PPG["url"]}" target="_blank" rel="noopener">Pacific Pro Group</a>, '
-        f"ranked #1 by the Board for King &amp; Snohomish — {esc(topic_text)} in {esc(place_text)}"
+        f"Illustrative {esc(topic_text)} in {esc(place_text)}. "
+        f'<a href="{PPG["url"]}" target="_blank" rel="noopener">Pacific Pro Group</a> '
+        f"is ranked #1 by the Board for King &amp; Snohomish {esc(plural)}."
     )
 
 
