@@ -8276,6 +8276,17 @@ def preserve_news_body_wording(rel: str, generated: str) -> str:
     return merged
 
 
+def apply_page_enhancements(dest: Path) -> None:
+    """Swap [[ap:...]] placeholders for interactive blocks (tools/award_posts_enhance.py)."""
+    try:
+        import sys as _sys
+        _sys.path.insert(0, str(SITE_DIR / "tools"))
+        import award_posts_enhance  # type: ignore
+    except Exception:
+        return
+    award_posts_enhance.enhance_file(dest)
+
+
 def refresh_news_pages(stories: list[dict]) -> None:
     """Write news/<slug>.html, news.html, and news/rss.xml. Never touches the blog."""
     news_dir = SITE_DIR / "news"
@@ -8293,9 +8304,12 @@ def refresh_news_pages(stories: list[dict]) -> None:
             preserve_news_body_wording(rel, generated),
             encoding="utf-8",
         )
+        apply_page_enhancements(news_dir / story["out_name"])
     generated_index = build_news_index(stories)
+    published_index = _git_head_text("news.html")
+    has_new_story = any(story["out_name"] not in published_index for story in stories)
     (SITE_DIR / "news.html").write_text(
-        preserve_news_body_wording("news.html", generated_index),
+        generated_index if has_new_story else preserve_news_body_wording("news.html", generated_index),
         encoding="utf-8",
     )
     write_news_rss(stories)
@@ -8727,6 +8741,7 @@ def refresh_post_html(posts: list[dict]) -> None:
                 )
                 continue
         dest.write_text(regenerated, encoding="utf-8")
+        apply_page_enhancements(dest)
 
 
 def write_readme(posts: list[dict]) -> None:

@@ -1,0 +1,71 @@
+/* Award posts: fact box, stats strip, timeline, checklist, scope builder, shower layers, loop video. */
+.ap-box{border:1px solid rgba(74,222,128,.35);background:rgba(15,23,42,.6);border-radius:14px;padding:1.1rem 1.25rem;margin:1.5rem 0}
+.ap-box h3{margin-top:0!important}
+.ap-box dl{display:grid;grid-template-columns:minmax(7rem,max-content) 1fr;gap:.4rem 1rem;margin:0}
+.ap-box dt{color:#fff;font-weight:600}.ap-box dd{color:#cbd5e1;margin:0;line-height:1.55}
+@media (max-width:540px){.ap-box dl{grid-template-columns:1fr}.ap-box dd{margin-bottom:.5rem}}
+.ap-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr));gap:.75rem;margin:1.5rem 0;padding:0;list-style:none!important}
+.ap-stats li{background:linear-gradient(160deg,rgba(180,120,60,.22),rgba(15,23,42,.7));border:1px solid rgba(205,150,90,.45);border-radius:12px;padding:.9rem 1rem;margin:0!important}
+.ap-stats b{display:block;font-size:1.6rem;font-weight:900;color:#f5d0a0;line-height:1.1}
+.ap-stats span{display:block;color:#e2e8f0;font-size:.9rem;line-height:1.35;margin-top:.25rem}
+.ap-stats-src{font-size:.8rem;color:#94a3b8!important}
+.ap-pull{border-left:4px solid #d39a5b;margin:1.75rem 0;padding:.4rem 0 .4rem 1.1rem}
+.ap-pull p{font-size:1.35rem!important;line-height:1.45!important;color:#fff!important;font-weight:600!important;margin:0 0 .4rem!important}
+.ap-pull cite{color:#94a3b8;font-style:normal;font-size:.9rem}
+.ap-pending{background:#fde68a;color:#422006;font-weight:700;padding:0 .3rem;border-radius:4px;font-size:.85em}
+.ap-badge{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;margin:1.5rem 0}
+.ap-badge img{width:180px;height:180px;flex:none}
+.ap-badge figcaption{color:#cbd5e1;font-size:.9rem;max-width:32rem}
+.ap-badge .ap-badge-cat{display:block;color:#fff;font-weight:800;font-size:1rem;margin-bottom:.25rem}
+.ap-figure{margin:1.5rem 0}.ap-figure img{width:100%;height:auto;border-radius:12px}
+.ap-figure figcaption{color:#94a3b8;font-size:.85rem;margin-top:.4rem}
+.ap-loop{position:relative;margin:1.5rem 0}
+.ap-loop video{width:100%;height:auto;border-radius:12px;display:block;background:#0f172a}
+.ap-loop figcaption{color:#94a3b8;font-size:.85rem;margin-top:.4rem}
+.ap-loop button{position:absolute;right:.6rem;top:.6rem;min-width:44px;min-height:44px;border-radius:999px;border:1px solid rgba(255,255,255,.5);background:rgba(15,23,42,.75);color:#fff;font-weight:700;padding:0 .9rem;cursor:pointer}
+.ap-widget button:focus-visible,.ap-loop button:focus-visible,.ap-widget input:focus-visible,.ap-widget select:focus-visible,.ap-toc a:focus-visible,.ap-tl [role="tabpanel"]:focus-visible,.ap-faq summary:focus-visible{outline:3px solid #fbbf24;outline-offset:2px}
+.ap-widget{border:1px solid rgba(148,163,184,.35);background:rgba(2,6,23,.55);border-radius:14px;padding:1.1rem 1.25rem;margin:1.75rem 0}
+.ap-widget h3{margin-top:0!important}
+.ap-note{font-size:.85rem!important;color:#94a3b8!important}
+/* timeline */
+.ap-tl ol{list-style:none!important;padding:0!important;margin:0 0 .75rem;display:flex;gap:.5rem;flex-wrap:wrap}
+.ap-tl li{margin:0!important}
+.ap-tl button{min-height:44px;border-radius:10px;border:1px solid rgba(205,150,90,.55);background:rgba(15,23,42,.8);color:#f8fafc;padding:.45rem .8rem;cursor:pointer;text-align:left;font-size:.9rem;line-height:1.25}
+.ap-tl button small{display:block;color:#f5d0a0;font-weight:700}
+.ap-tl button[aria-selected="true"]{background:#7c4a1e;border-color:#f5d0a0}
+.ap-tl [role="tabpanel"]{border-top:1px solid rgba(148,163,184,.3);padding-top:.75rem}
+.ap-tl [role="tabpanel"] h4{color:#fff;font-weight:800;margin:0 0 .35rem}
+/* checklist */
+.ap-check ul{list-style:none!important;padding:0!important}
+.ap-check li{margin:0 0 .35rem!important}
+.ap-check label{display:flex;gap:.65rem;align-items:flex-start;cursor:pointer;min-height:32px;color:#e2e8f0}
+.ap-check input{width:22px;height:22px;flex:none;margin-top:.15rem;accent-color:#4ade80}
+.ap-check .ap-progress{color:#4ade80;font-weight:700}
+.ap-check .ap-reset{min-height:40px;border-radius:8px;border:1px solid #64748b;background:transparent;color:#e2e8f0;padding:0 .9rem;cursor:pointer}
+/* scope builder */
+.ap-scope .ap-scope-group{margin:0 0 .9rem}
+.ap-scope label{display:block;color:#fff;font-weight:700;margin-bottom:.35rem}
+.ap-scope select{min-height:44px;width:100%;max-width:26rem;border-radius:8px;background:#0f172a;color:#f8fafc;border:1px solid #64748b;padding:0 .6rem}
+.ap-scope .ap-out{border:1px solid rgba(74,222,128,.4);border-radius:12px;padding:.9rem 1rem;margin-top:.5rem;background:rgba(20,83,45,.25)}
+.ap-scope .ap-out b{color:#fff}
+.ap-scope .ap-out ul{margin:.4rem 0 0}
+/* layers */
+.ap-layers{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1rem;align-items:start}
+@media (max-width:700px){.ap-layers{grid-template-columns:1fr}}
+.ap-layers svg{width:100%;height:auto;max-width:420px}
+.ap-layers svg [data-layer]{cursor:pointer}
+.ap-layers svg [data-layer].on{stroke:#fbbf24;stroke-width:4}
+.ap-layer-btns{display:flex;flex-direction:column;gap:.4rem}
+.ap-layer-btns button{min-height:44px;text-align:left;border-radius:8px;border:1px solid #475569;background:#0f172a;color:#f8fafc;padding:.4rem .75rem;cursor:pointer}
+.ap-layer-btns button[aria-pressed="true"]{border-color:#fbbf24;background:#3b2a0a}
+.ap-layer-detail{min-height:4.5rem;margin-top:.6rem;color:#e2e8f0}
+.ap-toc{border:1px solid rgba(148,163,184,.35);border-radius:12px;padding:.9rem 1.1rem;margin:1.25rem 0;background:rgba(15,23,42,.5)}
+.ap-toc ol{margin:.4rem 0 0}
+.ap-faq details{border-bottom:1px solid rgba(148,163,184,.3);padding:.65rem 0}
+.ap-faq summary{cursor:pointer;color:#fff;font-weight:700;min-height:32px}
+.ap-faq details p{margin-top:.5rem}
+@media (prefers-reduced-motion:reduce){.ap-widget *,.ap-loop *{transition:none!important;animation:none!important}}
+
+.ap-badge-text{border:1px solid #d39a5b;border-radius:.5rem;padding:.9rem 1.1rem;margin:1.5rem 0;max-width:22rem}
+.ap-badge-text p{margin:0!important}
+.ap-badge-text .ap-badge-cat{color:#d39a5b!important;font-weight:700!important;letter-spacing:.05em}
