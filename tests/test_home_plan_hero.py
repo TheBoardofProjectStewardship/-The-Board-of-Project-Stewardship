@@ -3,10 +3,13 @@ from __future__ import annotations
 
 import re
 import subprocess
+import sys
 import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+import generate_site as gs  # noqa: E402
 PAGE = ROOT / "index.html"
 VENDOR = re.compile(r"\b(?:BOPS|ChatGPT|Gemini|Imagen|Veo|Higgsfield|Pollinations)\b")
 AI = re.compile(r"\bAI\b")
@@ -181,6 +184,39 @@ class HomePlanHeroTests(unittest.TestCase):
         self.assertIsNone(AI.search(visible))
         subprocess.check_call(["node", "--check", "assets/js/scroll-house.js"], cwd=ROOT)
         subprocess.check_call(["node", "--check", "assets/js/scroll-house-magnolia.js"], cwd=ROOT)
+
+    def test_visualizer_links_skip_index_html_and_fragments_stay_noindex(self):
+        self.assertNotIn("./index.html#plan-home-hero", (ROOT / "generate_site.py").read_text(encoding="utf-8"))
+        for name in (
+            "additions.html",
+            "adu.html",
+            "bathrooms.html",
+            "home-addition-planning.html",
+            "kitchen-remodel-planning.html",
+            "kitchen.html",
+        ):
+            text = (ROOT / name).read_text(encoding="utf-8")
+            self.assertIn('href="./#plan-home-hero"', text)
+            self.assertNotIn("./index.html#plan-home-hero", text)
+        section = (ROOT / "sections" / "scroll-house.html").read_text(encoding="utf-8")
+        self.assertIn('<meta name="robots" content="noindex">', section)
+        fragment, _css = gs.home_scroll_house()
+        self.assertNotIn('name="robots"', fragment)
+        self.assertTrue(fragment.lstrip().startswith("<section"))
+        snippet = (ROOT / "tools" / "another-story" / "embed-snippet.html").read_text(encoding="utf-8")
+        self.assertIn('<meta name="robots" content="noindex">', snippet)
+        self.assertIn('id="another-story-sea"', snippet)
+        self.assertIn('src="/tools/another-story/index.html"', snippet)
+        self.assertIn("another-story:resize", snippet)
+        for name in (
+            "posts/2026-10-13-kitchen-remodel-issaquah-wa.html",
+            "posts/2026-10-13-kitchen-remodel-issaquah-wa.md",
+            "posts/2026-10-07-kitchen-remodel-kirkland-wa.html",
+            "posts/2026-10-07-kitchen-remodel-kirkland-wa.md",
+        ):
+            text = (ROOT / name).read_text(encoding="utf-8")
+            self.assertNotIn("kitchens.html", text)
+            self.assertIn("kitchen.html", text)
 
 
 if __name__ == "__main__":
