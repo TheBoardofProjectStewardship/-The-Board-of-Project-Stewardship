@@ -539,32 +539,22 @@ def esc(s: str) -> str:
 
 
 def clamp_title(title: str, limit: int = 60) -> str:
-    """Keep titles reasonable; never cut mid-word or chop the Board name.
+    """Keep the full headline, including the city. Never chop the Board name.
 
-    Prefer the full ``Board of Project Stewardship`` suffix. If the string is
-    still long, shorten the page-specific left side — never emit
-    ``Board of Project`` or ``Board of``.
+    Prefer ``headline | Board of Project Stewardship`` when it fits. When it
+    does not, drop that suffix before cutting any headline words. A city name
+    and the rest of the post or story title are kept whole, even when the
+    headline itself is longer than ``limit``.
     """
     title = re.sub(r"\s+", " ", (title or "").strip())
     if len(title) <= limit:
         return title
     if title.endswith(TITLE_SUFFIX):
         left = title[: -len(TITLE_SUFFIX)].rstrip()
-        room = max(limit - len(TITLE_SUFFIX), 0)
-        if room < 8:
+        if not left:
             return BRAND_NAME
-        if len(left) <= room:
-            return f"{left}{TITLE_SUFFIX}"
-        cut = left[:room].rsplit(" ", 1)[0]
-        cut = re.sub(
-            r"(\s+(?:in|of|for|and|the|a|an|to|vs|versus|on|at|by|with|from|near|&|—|–|-))+$",
-            "",
-            cut,
-            flags=re.I,
-        ).rstrip(" |-,;:—–")
-        return f"{cut}{TITLE_SUFFIX}" if cut else BRAND_NAME
-    cut = title[:limit].rsplit(" ", 1)[0].rstrip(" |-,;:")
-    return cut if cut else title[:limit]
+        return left
+    return title
 
 
 def published_meta_len(text: str) -> int:
@@ -8076,10 +8066,16 @@ def _strip_leading_hero_figure(article_html: str, hero_rel: str | None) -> str:
 
 
 # Document titles that would otherwise clamp to the same string.
+# The Bothell heat-pump guide keeps its city in the tab title. The headline
+# uses the same words, with a comma in "Bothell, WA" so the city is not dropped.
 POST_SEO_TITLES = {
     "bathroom-remodel-lake-forest-park": "Lake Forest Park Bath Guide",
     "bathroom-remodel-lake-forest-park-wa": "LFP Bath iWorQ Permit Guide",
     "second-story-vs-teardown-edmonds": "Second Story vs Teardown",
+    "heat-pump-installation-bothell-wa": (
+        "Heat Pump Installation Bothell, WA — Mechanical Permit, "
+        "L&I Electrical Permit & Where the Outdoor Unit Can Go"
+    ),
 }
 
 

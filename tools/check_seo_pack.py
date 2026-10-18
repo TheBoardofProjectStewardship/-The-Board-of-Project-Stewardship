@@ -360,8 +360,11 @@ def check_public_regressions() -> None:
         title_m = re.search(r"<title>(.*?)</title>", text, flags=re.S)
         if title_m:
             title = re.sub(r"\s+", " ", html.unescape(title_m.group(1))).strip()
-            if len(title) > 60 or title.endswith("...") or title.endswith("…"):
-                fail(f"{path.relative_to(ROOT)} title is truncated or over 60 characters: {title}")
+            # Full headlines may exceed 60 characters. clamp_title drops
+            # " | Board of Project Stewardship" before it cuts a city or any
+            # other headline words, so length alone is not a truncated title.
+            if title.endswith("...") or title.endswith("…"):
+                fail(f"{path.relative_to(ROOT)} title is truncated: {title}")
         if 'id="nav-toggle"' in text:
             rel = path.relative_to(ROOT).as_posix()
             has_iframe = 'id="another-story-sea"' in text
