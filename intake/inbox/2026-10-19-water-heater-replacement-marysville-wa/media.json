@@ -1,0 +1,45 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-10-19-marysville-water-heater-1.webp",
+      "repo_path": "assets/images/posts/2026-10-19-marysville-water-heater-1.webp",
+      "alt": "Illustrative: a tall tank water heater with copper supply lines and a valve on top, set in a bright utility corner beside a window and a base cabinet \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "c41c4be77fa10c78b0aa512550fe6ab4",
+      "source": "Crop, mirror, and regrade of existing repo still 2026-08-31-magnolia-plumbing-7.webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-19-marysville-water-heater-2.webp",
+      "repo_path": "assets/images/posts/2026-10-19-marysville-water-heater-2.webp",
+      "alt": "Illustrative: copper supply and distribution piping roughed in across an open wall in a finished room \u2014 the kind of water piping that may need to be rerouted when a new tank does not line up with the old connections \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "0339fcff73a7e403c1b3d0825de43a2b",
+      "source": "Crop, mirror, and regrade of existing repo still 2026-08-31-magnolia-plumbing-4.webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-19-marysville-water-heater-3.webp",
+      "repo_path": "assets/images/posts/2026-10-19-marysville-water-heater-3.webp",
+      "alt": "Illustrative: a finished wall with a single exposed pipe dropping to a floor drain in a utility space \u2014 the kind of drain point a relief-valve discharge line or condensate line has to reach \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "2a3492428065f69893eacf625a1090fc",
+      "source": "Crop, mirror, and regrade of existing repo still 2026-08-31-magnolia-plumbing-5.webp"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "_jWMQWQJyAU",
+      "url": "https://www.youtube.com/watch?v=_jWMQWQJyAU",
+      "title": "Water Heater Installation Step-by-Step \u2014 Complete Pro Guide from a Master Plumber",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Illustrative frames are labeled in alt text",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "Built-in image generator produced images but files did not reach the box; reused and regraded existing repo stills. No paid image generation."
+}

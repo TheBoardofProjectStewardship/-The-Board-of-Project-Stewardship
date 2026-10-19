@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-10-19-water-heater-replacement-marysville-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-10-19T22:20:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Water Heater Replacement Marysville WA \u2014 Plumbing Permit, City Electrical Permit & Who Can Do the Work",
+    "date": "2026-10-19",
+    "slug": "water-heater-replacement-marysville-wa",
+    "description": "A Marysville homeowner's guide to replacing a water heater: the City plumbing permit through the online Permit Portal, why Marysville issues its own electrical permits, who is allowed to do the plumbing, and what to put in the bid.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 connected; packets landed 09:33-09:50 PT: openclaw/hermes/ollama/grok-build remodel-permits-marysville-wa (~1,421 words; generic templated permit copy, hermes timed out with 2 sources, unverified 'coastal-adjacent/maritime' angle, media plan with no bytes), another-story home-addition-greenwood-wa (~1,205 words; templated 'Planning, Permits & Licensed Pros'; additions used 10-16), edmonds-news roundup (thin news roundup) - none passed rich-post bar. Topic: water heater replacement Marysville WA (water heaters never a post topic; Marysville never a post city). Producer role fields kept per intake contract."
+}

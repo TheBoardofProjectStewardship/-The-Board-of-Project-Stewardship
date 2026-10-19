@@ -1,0 +1,19 @@
+{
+  "submission_id": "2026-10-19-water-heater-replacement-marysville-wa",
+  "idempotency_key": "sha256:7f1f0d19ee56f3f1c02ff41b22ae90c8ceedcced3b733f02fd15a415fbc06a46",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-10-19T22:16:44Z",
+  "outputs": [
+    "assets/images/posts/2026-10-19-marysville-water-heater-1.webp",
+    "assets/images/posts/2026-10-19-marysville-water-heater-2.webp",
+    "assets/images/posts/2026-10-19-marysville-water-heater-3.webp",
+    "posts/2026-10-19-water-heater-replacement-marysville-wa.md",
+    "posts/2026-10-19-water-heater-replacement-marysville-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 76
+}
