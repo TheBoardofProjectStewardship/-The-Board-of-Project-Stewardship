@@ -54,6 +54,7 @@ Base: `https://boardofprojectstewardship.com/`
 | `blog/rss.xml` | Blog RSS feed |
 | `news/rss.xml` | News RSS feed |
 | `404.html` | Branded Board 404 |
+| `posts/2026-10-19-water-heater-replacement-marysville-wa.html` | Water Heater Replacement Marysville WA — Plumbing Permit, City Electrical Permit & Who Can Do the Work |
 | `posts/2026-10-18-heat-pump-installation-bothell-wa.html` | Heat Pump Installation Bothell WA — Mechanical Permit, L&I Electrical Permit & Where the Outdoor Unit Can Go |
 | `posts/2026-10-18-hiring-a-bathroom-remodeler-seattle-edmonds.html` | Living Through a Seattle-Area Bathroom Remodel, Stage by Stage: What to Expect and What to Ask |
 | `posts/2026-10-17-siding-replacement-bellevue-wa.html` | Siding Replacement Bellevue WA — When the City Requires a Permit, Asbestos and Lead Checks & Rain-Ready Details |

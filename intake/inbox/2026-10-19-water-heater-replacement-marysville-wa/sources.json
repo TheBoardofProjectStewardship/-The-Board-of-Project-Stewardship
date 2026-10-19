@@ -1,0 +1,96 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Marysville",
+    "service": "Water heater replacement",
+    "slug": "water-heater-replacement-marysville-wa"
+  },
+  "sources": [
+    {
+      "url": "https://ecode360.com/49264480",
+      "title": "Marysville Municipal Code Chapter 16.08 Plumbing Code",
+      "retrieved": "2026-10-19",
+      "http_status": 200,
+      "supports": "Adopts 2021 UPC for plumbing, drainage, fixtures and water heating and treating equipment; amended fee table lists unit items for each water heater and/or vent, gas piping systems, water piping alterations. (Fee amounts not used.)"
+    },
+    {
+      "url": "https://permits.marysvillewa.gov/",
+      "title": "City of Marysville Online Permit and Licensing Portal",
+      "retrieved": "2026-10-19",
+      "http_status": 200,
+      "supports": "Residential plumbing, mechanical, electrical permit types; inspection requests online by 3:30 PM for next business day; MSVLpermits@marysvillewa.gov, 360-363-8223; fraud alert: no wire transfer payments; contractor and permit search."
+    },
+    {
+      "url": "https://www.marysvillewa.gov/97/Building-services",
+      "title": "City of Marysville - Building Services",
+      "retrieved": "2026-10-19",
+      "http_status": 200,
+      "supports": "Reviews/inspects for building, plumbing, mechanical codes and newly added electrical permit processing; all building permit applications via Permit Portal."
+    },
+    {
+      "url": "https://www.marysvillewa.gov/1440/Permit-Services",
+      "title": "City of Marysville - Permit Services",
+      "retrieved": "2026-10-19",
+      "http_status": 200,
+      "supports": "Fully online permit portal with real-time status; Permit Tech MsvlPermits@marysvillewa.gov / 360.363.8223."
+    },
+    {
+      "url": "https://marysvillewa.gov/DocumentCenter/View/9063/Exempted-Work-2021-IBC",
+      "title": "City of Marysville - Exempted Work (2021 IBC)",
+      "retrieved": "2026-10-19",
+      "http_status": 200,
+      "supports": "Exempt structures list; separate plumbing, electrical, mechanical permits may be required; call 360-363-8100 to verify."
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "title": "Washington L&I - City Electrical Permits & Inspections",
+      "retrieved": "2026-10-19",
+      "http_status": 200,
+      "supports": "Marysville listed as a city issuing its own electrical permits, 80 Columbia Avenue, 360-363-8231; address lookup for city vs county."
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/plumbing/about-the-plumber-program",
+      "title": "Washington L&I - About the Plumber Program",
+      "retrieved": "2026-10-19",
+      "http_status": 200,
+      "supports": "Only L&I-certified plumbers can legally perform plumbing work on someone else's property; owners can do their own."
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/plumbing/plumber-certification/",
+      "title": "Washington L&I - Plumber Certification",
+      "retrieved": "2026-10-19",
+      "http_status": 200,
+      "supports": "Water heaters listed among plumbing systems covered by certification."
+    },
+    {
+      "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=18.106.150",
+      "title": "RCW 18.106.150 Exemptions",
+      "retrieved": "2026-10-19",
+      "http_status": 200,
+      "supports": "No license required for plumbing at own residence/property; householder may receive unpaid help from non-trade friend/relative."
+    },
+    {
+      "url": "https://www.energystar.gov/products/heat_pump_water_heaters",
+      "title": "ENERGY STAR - Heat Pump Water Heaters",
+      "retrieved": "2026-10-19",
+      "http_status": 200,
+      "supports": "Neutral product-category reference."
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "Washington L&I Verify",
+      "retrieved": "2026-10-19",
+      "http_status": 200,
+      "supports": "Contractor registration, license, bond lookup."
+    }
+  ],
+  "dropped": [
+    "Marysville plumbing permit fee amounts (price lock)",
+    "Snohomish PUD / utility rebates (snopud.com 403; unverified)",
+    "Specific UPC section numbers for strapping/T&P (not fetched)"
+  ],
+  "generation": {
+    "agent": "box-authored",
+    "mode": "box-fallback"
+  }
+}
