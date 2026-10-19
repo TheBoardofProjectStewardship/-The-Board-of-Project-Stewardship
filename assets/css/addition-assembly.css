@@ -20,8 +20,8 @@
 .aa-view {
   position: relative;
   min-height: 220px;
-  background: #121816;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #f7f6f2;
+  border: 1px solid rgba(28, 25, 22, 0.16);
   border-radius: 1rem;
   overflow: hidden;
 }
@@ -48,7 +48,7 @@
   left: 0.75rem;
   bottom: 0.65rem;
   margin: 0;
-  color: #94a3b8;
+  color: #44403c;
   font-size: 0.75rem;
   pointer-events: none;
 }
