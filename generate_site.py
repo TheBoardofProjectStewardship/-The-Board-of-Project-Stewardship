@@ -2410,6 +2410,7 @@ def public_tool_href(slug: str, prefix: str = "") -> str:
         "floor-plan-3d": "floor-plan-3d.html",
         "plan-walkthrough": "plan-walkthrough/",
         "pascal-editor": "pascal-editor.html",
+        "addition-assembly": "addition-assembly.html",
         "story": "another-story.html",
         "steward": "good-steward.html",
         "permits": "permits.html",
@@ -9010,6 +9011,7 @@ def write_sitemap(posts: list[dict]) -> None:
         "build-walkthrough.html",
         "floor-plan-3d.html",
         "pascal-editor.html",
+        "addition-assembly.html",
         "site-visit.html",
         "pm-dashboard.html",
         "energy-credit.html",
@@ -9324,6 +9326,7 @@ def build_good_steward_page() -> str:
     <ul class="text-sm text-slate-300 space-y-1 mb-2 list-disc pl-5">
       <li><strong class="text-white">Build Walkthrough</strong> — visual sales-to-build stages with homeowner checklists</li>
       <li><strong class="text-white">Pascal Editor sketch</strong> — how to draw a remodel or addition in the free open-source Pascal Editor before a contractor meeting</li>
+      <li><strong class="text-white">Rear addition sequence</strong> — scroll a simple rear addition from the footing to the siding. Illustration only.</li>
       <li><strong class="text-white">Site Visit &amp; Discovery</strong> — what to observe and ask before plans or pricing (includes feasibility &amp; estimate calculator)</li>
       <li><strong class="text-white">PM Execution Dashboard</strong> — phase checklist + status notes for an active build</li>
     </ul>
@@ -9373,6 +9376,7 @@ def build_good_steward_page() -> str:
         <a href="{public_tool_href('floor-plan-3d')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Floor Plan to 3D</a>
         <a href="{public_tool_href('plan-walkthrough')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Plan to 3D Walkthrough</a>
         <a href="{public_tool_href('pascal-editor')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Pascal Editor Sketch</a>
+        <a href="{public_tool_href('addition-assembly')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Rear Addition Sequence</a>
         <a href="{public_tool_href('site-visit')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Site Visit &amp; Discovery</a>
         <a href="{public_tool_href('pm-dashboard')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">PM Dashboard</a>
         <a href="{public_tool_href('another-story')}" class="border border-white/20 bg-white/5 text-white px-5 py-3 rounded font-bold hover:border-secondary hover:text-secondary transition uppercase tracking-wider text-xs">Another Story</a>
@@ -9708,6 +9712,179 @@ FLOOR_PLAN_3D_STYLE = """  <style>
     @media (max-width: 480px) { #fp-plan, #fp-3d { height:20rem; } #fp3d .fp-btn { padding:0.45rem 0.6rem; font-size:0.62rem; } #fp-dimcheck .fp-field { flex:1 1 100%; } #fp-dimcheck .fp-field input { width:100%; } }
   </style>
 """
+
+
+def build_addition_assembly_page() -> str:
+    """Scroll illustration of a rear addition. Geometry is assets/js/addition-assembly.js."""
+    page_url = f"{BASE_URL}addition-assembly.html"
+    stages = [
+        (
+            "plan",
+            "The drawing",
+            "A rear addition, still flat",
+            "Plan",
+            "The pale sheet is the existing house, and the rectangle on the back is a simple rear addition. Scroll to watch that addition go up in the order a wood-frame shell is usually closed in a wet Pacific Northwest winter.",
+        ),
+        (
+            "footing",
+            "Stage 1 of 7",
+            "Footing and foundation tie-in",
+            "Footing",
+            "The new footing is dug to firm soil and tied into the existing foundation, so the addition does not sit beside the house as a separate box. Where the ground stays wet, a drain beside the footing and a cover over the crawlspace soil keep damp soil air from becoming the new floor's problem.",
+        ),
+        (
+            "floor",
+            "Stage 2 of 7",
+            "Floor framing",
+            "Floor",
+            "Joists span from a ledger on the existing house to the new wall, then a subfloor closes the crawlspace. A capillary break under the mudsill keeps concrete moisture out of the lumber, and the crawlspace still has to be able to dry.",
+        ),
+        (
+            "walls",
+            "Stage 3 of 7",
+            "Wall framing",
+            "Walls",
+            "Studs, plates, and headers stand up next and carry the roof and the window and door openings. The new walls have to fasten into the existing house, so wind has a path into the older structure and not only into the fresh lumber.",
+        ),
+        (
+            "sheathing",
+            "Stage 4 of 7",
+            "Sheathing and weather barrier",
+            "Sheathing",
+            "Sheathing stiffens those walls, then a weather-resistive barrier goes on the outside, lapped so water runs down and out. The wall is expected to get wet in this climate, so a gap stays in front of that barrier for water to drain before the siding covers it.",
+        ),
+        (
+            "roof",
+            "Stage 5 of 7",
+            "Roof framing and roofing",
+            "Roof",
+            "Rafters, roof sheathing, underlayment, and the roofing close the top before the walls are finished on the outside. Where the shed roof dies into the existing wall, apron flashing goes in so the barrier above can lap over it, and a kick-out at each end turns water onto the roof instead of into the corner.",
+        ),
+        (
+            "openings",
+            "Stage 6 of 7",
+            "Windows and doors with flashing",
+            "Openings",
+            "The door and windows go into flashed openings: a sill pan first, then the unit, then side flashing, then head flashing that laps over the weather barrier. Reversing that order lets wind-driven rain run in behind the trim.",
+        ),
+        (
+            "siding",
+            "Stage 7 of 7",
+            "Siding and trim",
+            "Siding",
+            "Siding and trim finish the rain screen, and the gap behind the siding lets water that gets past the cladding drain and dry. The siding stops above grade so the bottom edge is not sitting in splash water from a wet Pacific Northwest yard.",
+        ),
+    ]
+    buttons = []
+    articles = []
+    for i, (slug, kicker, title, short, text) in enumerate(stages):
+        buttons.append(
+            f'<li><button type="button" data-stage-jump="{i}">{esc(short)}</button></li>'
+        )
+        articles.append(
+            f'    <article id="aa-{slug}" data-kicker="{esc(kicker)}" data-title="{esc(title)}">\n'
+            f"      <h3>{esc(title)}</h3>\n"
+            f"      <p>{esc(text)}</p>\n"
+            "    </article>"
+        )
+    plan_kicker, plan_title, plan_text = stages[0][1], stages[0][2], stages[0][4]
+    build_steps = [(title, text) for _slug, _kicker, title, _short, text in stages[1:]]
+    faqs = [
+        (
+            "Is this model a construction document?",
+            "No. It shows one common one-story rear addition: a crawlspace, wood framing, and a shed roof that dies into the existing wall. Soil, roof shape, and the existing house can call for a different assembly. Permit drawings come from the designer, engineer, and contractor after they measure the site.",
+        ),
+        (
+            "Why this order?",
+            "The shell is closed against rain before the finish layers. The roof and the flashed openings depend on the weather barrier being in place so each layer can lap the one below it. Crews overlap these stages on a real job. The model separates them so the laps are easier to see.",
+        ),
+        (
+            "What does the model leave out?",
+            "Insulation, interior finishes, wiring, plumbing, and heat. It also leaves out grading that carries yard water away from the house. Layers are drawn thicker than real materials so the gap and the flashing can be seen.",
+        ),
+        (
+            "What if scrolling is difficult?",
+            "The stages are written in order under the model. Choose a stage and the model jumps there, with no animated scroll. The same list is what you get when the browser asks for less motion.",
+        ),
+    ]
+    body = f"""  <header class="max-w-6xl mx-auto px-4 pt-10 pb-4">
+    <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>
+    <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">A rear addition, built as you scroll</h1>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">A one-story rear addition closes in on the back of an existing house, from the footing to the siding. It is a teaching model from the Board of Project Stewardship for homeowners who want to see why the weather layers go on in a particular order in a wet climate.</p>
+    <p class="mb-3"><span class="aa-chip">Illustration only · not a permit drawing</span></p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="{public_tool_href('good-steward')}" class="text-secondary hover:underline">Good Steward</a>. This page does not measure your house. <a href="{public_tool_href('floor-plan-3d')}" class="text-secondary hover:underline">Floor Plan to 3D</a> can check a dimension written on a plan you already have. The <a href="{public_tool_href('pascal-editor')}" class="text-secondary hover:underline">Pascal Editor walkthrough</a> covers taping the rooms and drawing them to those numbers.</p>
+  </header>
+  <section class="aa" aria-label="Rear addition sequence">
+    <div class="aa-track" id="aa-track">
+      <div class="aa-sticky">
+        <div class="aa-layout">
+          <div class="aa-view" id="aa-view">
+            <canvas id="aa-canvas" aria-hidden="true"></canvas>
+            <p id="aa-status" class="aa-status">Loading the model…</p>
+            <div class="aa-fallback">
+              <svg viewBox="0 0 320 280" role="img" aria-label="Line drawing of an existing house with a rear addition outlined on the back wall.">
+                <rect x="30" y="20" width="260" height="150" fill="none" stroke="#1c1916" stroke-width="4"/>
+                <text x="160" y="100" text-anchor="middle" fill="#1c1916" font-family="sans-serif" font-size="16">Existing house</text>
+                <rect x="90" y="170" width="140" height="84" fill="none" stroke="#1c1916" stroke-width="4"/>
+                <text x="160" y="218" text-anchor="middle" fill="#1c1916" font-family="sans-serif" font-size="14">Rear addition</text>
+              </svg>
+            </div>
+          </div>
+          <div class="aa-panel" aria-live="polite">
+            <p class="aa-kicker" id="aa-kicker">{esc(plan_kicker)}</p>
+            <h2 id="aa-title">{esc(plan_title)}</h2>
+            <p class="aa-copy" id="aa-copy">{esc(plan_text)}</p>
+            <div class="aa-progress" aria-hidden="true"><span id="aa-progress-bar"></span></div>
+            <ol class="aa-jumps">
+              {''.join(buttons)}
+            </ol>
+            <p class="aa-hint" id="aa-hint">Scroll to build the addition. The page still scrolls normally on a phone.</p>
+            <p class="aa-reduce-note">Motion is reduced, so the model holds the stage you pick. The full sequence is written below.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="aa-sequence" id="aa-sequence">
+{chr(10).join(articles)}
+    </div>
+  </section>
+  <section class="max-w-6xl mx-auto px-4 pb-6 prose-board">
+    <h2>What you are looking at</h2>
+    <p>The existing house stays put. The addition is a crawlspace with wood joists, stud walls, a weather-resistive barrier, a shed roof that dies into the old wall, flashed openings, and siding held off the barrier. That is a common one-story rear addition in this region. A slab, a basement, or a second story is a different assembly.</p>
+    <p>Layers in the model are drawn thicker than real materials so the rain-screen gap and the flashing can be seen. Nothing in the model is uploaded, and there is no file to download. It is not a bid, a structural calculation, or a permit set.</p>
+    <p>Read <a href="./home-addition-planning.html">home addition planning</a> before you hire, and <a href="./coastal-waterproofing.html">coastal waterproofing</a> for the same wet-wall habits on an existing house. The <a href="{public_tool_href('build-walkthrough')}">Build Walkthrough</a> is the longer homeowner checklist from sale through handoff.</p>
+    <noscript><p>This model needs JavaScript. The stage notes above still explain the sequence.</p></noscript>
+  </section>
+  <div class="max-w-6xl mx-auto px-4">
+{faq_section(faqs, "Rear addition sequence FAQ")}
+  </div>
+"""
+    return page_shell(
+        "Rear Addition on Scroll | Board of Project Stewardship",
+        "Scroll a simple rear addition from footing to siding. A Board of Project Stewardship illustration for wet Pacific Northwest weather, not a permit drawing.",
+        "addition-assembly",
+        body,
+        json_ld=[
+            howto_ld(
+                "How a rear addition shell goes together",
+                "Footing, floor, walls, sheathing, roof, flashed openings, then siding. An illustration for a wet climate, not a permit drawing.",
+                build_steps,
+                page_url,
+            ),
+            faq_ld(faqs),
+        ],
+        canonical=page_url,
+        include_story_embed=False,
+        include_tools_embed=False,
+        include_widgets=False,
+        extra_head='  <link rel="stylesheet" href="/assets/css/addition-assembly.css">\n',
+        extra_scripts='  <script type="module" src="/assets/js/addition-assembly.js"></script>\n',
+        breadcrumbs=[
+            ("Home", BASE_URL),
+            ("Good Steward", f"{BASE_URL}good-steward.html"),
+            ("Rear addition", page_url),
+        ],
+    )
 
 
 def build_floor_plan_3d_page() -> str:
@@ -17804,6 +17981,7 @@ def main(argv: list[str] | None = None) -> None:
     (SITE_DIR / "good-steward.html").write_text(build_good_steward_page(), encoding="utf-8")
     (SITE_DIR / "build-walkthrough.html").write_text(build_build_walkthrough_page(), encoding="utf-8")
     (SITE_DIR / "floor-plan-3d.html").write_text(build_floor_plan_3d_page(), encoding="utf-8")
+    (SITE_DIR / "addition-assembly.html").write_text(build_addition_assembly_page(), encoding="utf-8")
     _plan_dir = SITE_DIR / "plan-walkthrough"
     _plan_dir.mkdir(parents=True, exist_ok=True)
     (_plan_dir / "index.html").write_text(build_plan_walkthrough_page(), encoding="utf-8")
