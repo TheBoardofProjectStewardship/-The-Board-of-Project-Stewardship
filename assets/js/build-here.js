@@ -109,7 +109,7 @@
   /* ---------- data model ---------- */
   var state = null;
   function blank() {
-    return { input: "", matched: "", lon: null, lat: null, county: "", city: "", juris: "other", jurisLabel: "", parcel: "", assessorUrl: "", lot: null, lotSrc: "", zone: "", zoneSrc: "", existing: null, existingSrc: "", footprint: null, footprintSrc: "", yearBuilt: "", yearSrc: "", rings: null, hazards: [], hazardNotes: [], permits: [], permitNote: "", permitLinks: [], imagery: null, sources: [], manual: [] };
+    return { input: "", matched: "", lon: null, lat: null, county: "", city: "", juris: "other", jurisLabel: "", parcel: "", assessorUrl: "", lot: null, lotSrc: "", zone: "", zoneSrc: "", existing: null, existingSrc: "", footprint: null, footprintSrc: "", yearBuilt: "", yearSrc: "", rings: null, hazards: [], hazardNotes: [], nearNotices: [], frontDir: "", permits: [], permitNote: "", permitLinks: [], imagery: null, sources: [], manual: [] };
   }
   function log(s, ok, name, note) { s.sources.push({ name: name, ok: ok, note: note || "" }); }
 
@@ -126,7 +126,7 @@
         var g = m.geographies || {};
         s.county = ((g.Counties || [])[0] || {}).NAME || "";
         s.city = (((g["Incorporated Places"] || [])[0] || {}).NAME || "").replace(/ city$| town$/i, "");
-        if (/^King/.test(s.county)) s.juris = s.city === "Seattle" ? "seattle" : (s.city ? "other" : "kc");
+        if (/^King/.test(s.county)) s.juris = s.city === "Seattle" ? "seattle" : s.city === "Kenmore" ? "kenmore" : (s.city ? "other" : "kc");
         else if (/^Snohomish/.test(s.county)) s.juris = s.city === "Edmonds" ? "edmonds" : (s.city ? "other" : "sno");
         else s.juris = "outside";
         s.jurisLabel = s.city ? "City of " + s.city + ", " + s.county : (s.county ? "Unincorporated " + s.county : "Unknown");
@@ -259,9 +259,17 @@
       });
       s.hazardSource = "City of Seattle Environmentally Critical Areas map layers";
     } else if (/^King/.test(s.county)) {
-      [[1, "Potential landslide hazard (King County 2016)"], [4, "Potential steep slope hazard (King County 2016)"], [8, "Seismic hazard (King County 1990 map)"], [7, "Erosion hazard (King County 1990 map)"], [22, "Wetland (National Wetland Inventory 2024)"], [12, "Sensitive area notice on title"], [15, "Channel migration hazard area"]].forEach(function (L) {
+      [[1, "Potential landslide hazard (King County 2016)"], [3, "Landslide hazard (King County 1990 map, incorporated areas)"], [4, "Potential steep slope hazard (King County 2016)"], [8, "Seismic hazard (King County 1990 map)"], [7, "Erosion hazard (King County 1990 map)"], [22, "Wetland (National Wetland Inventory 2024)"], [15, "Channel migration hazard area"]].forEach(function (L) {
         jobs.push(countHit(EP.kcSensitive + L[0] + "/query", rings, L[1], h, s, "King County Sensitive Areas"));
       });
+      if (s.rings) jobs.push(getJSON(EP.kcSensitive + "12/query", polyQuery(s.rings, { distance: 15, units: "esriSRUnit_Meter", outFields: "PIN,LANDSLIDE,EROSION,STEEPSLOPE,RECORDING_,PERMIT_NO", returnGeometry: false })).then(function (j) {
+        (j.features || []).forEach(function (f) {
+          var a = f.attributes, what = [a.LANDSLIDE ? "landslide" : "", a.STEEPSLOPE ? "steep slope" : "", a.EROSION ? "erosion" : ""].filter(Boolean).join(", ");
+          var txt = (what ? what + "; " : "") + (a.RECORDING_ ? "recording " + a.RECORDING_ : "") + (a.PERMIT_NO ? ", permit " + a.PERMIT_NO : "");
+          if (String(a.PIN) === String(s.parcel)) h.push("Sensitive area notice on title for this parcel (" + txt + ")");
+          else s.nearNotices.push("parcel " + a.PIN + " (" + txt + ")");
+        });
+      }).catch(function () { s.hazardNotes.push("Sensitive area notices: layer did not answer"); }));
       s.hazardSource = "King County Sensitive Areas map service";
     } else if (/^Snohomish/.test(s.county)) {
       jobs.push(countHit(EP.snoSlope, rings, "Steep slope 33% or more (county map)", h, s, "SAS_Steep_Slopes"));
@@ -282,6 +290,7 @@
         log(s, true, "Seattle issued and finaled residential permits");
       }).catch(function (e) { log(s, false, "Seattle residential permits", e.message); });
     }
+    if (s.juris === "kenmore") { s.permitLinks = [{ label: "MyBuildingPermit permit search (Kenmore records)", url: LINKS.mbp }, { label: "King County permit records before Kenmore incorporated (1998)", url: LINKS.kcPortal }]; return Promise.resolve(); }
     if (s.juris === "kc") { s.permitLinks = [{ label: "King County Permitting portal (search by parcel number)", url: LINKS.kcPortal }]; return Promise.resolve(); }
     if (s.juris === "edmonds") { s.permitLinks = [{ label: "MyBuildingPermit permit search (Edmonds records)", url: LINKS.mbp }, { label: "Edmonds Development Services", url: LINKS.edmDev }]; return Promise.resolve(); }
     if (s.juris === "sno") {
@@ -336,45 +345,111 @@
     }
     return best;
   }
+  /* Site plan: the real parcel ring, inset edge by edge (front, side, rear setbacks).
+     The envelope is every point inside the parcel that is at least the required
+     distance from each lot line, sampled on a grid and drawn as merged rows. */
+  function segDist(px, py, a, b) {
+    var dx = b[0] - a[0], dy = b[1] - a[1], L = dx * dx + dy * dy;
+    var t = L ? ((px - a[0]) * dx + (py - a[1]) * dy) / L : 0;
+    t = t < 0 ? 0 : t > 1 ? 1 : t;
+    var x = a[0] + t * dx - px, y = a[1] + t * dy - py;
+    return Math.sqrt(x * x + y * y);
+  }
+  function inRing(px, py, ring) {
+    var c = false;
+    for (var i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+      var a = ring[i], b = ring[j];
+      if ((a[1] > py) !== (b[1] > py) && px < (b[0] - a[0]) * (py - a[1]) / (b[1] - a[1]) + a[0]) c = !c;
+    }
+    return c;
+  }
+  function classifyEdges(ring, st, dir) {
+    var n = ring.length - 1, area = 0, i;
+    for (i = 0; i < n; i++) area += ring[i][0] * ring[i + 1][1] - ring[i + 1][0] * ring[i][1];
+    var sgn = area > 0 ? 1 : -1; // counter-clockwise rings have the outside on the right
+    var edges = [];
+    for (i = 0; i < n; i++) {
+      var a = ring[i], b = ring[i + 1], dx = b[0] - a[0], dy = b[1] - a[1], L = Math.sqrt(dx * dx + dy * dy) || 1;
+      edges.push({ a: a, b: b, len: L, nx: sgn * dy / L, ny: -sgn * dx / L, mx: (a[0] + b[0]) / 2, my: (a[1] + b[1]) / 2, d: segDist(st[0], st[1], a, b) });
+    }
+    var D = { N: [0, 1], E: [1, 0], S: [0, -1], W: [-1, 0] }[dir];
+    var near = D ? edges.reduce(function (m, e) { var sc = (e.nx * D[0] + e.ny * D[1]) * Math.sqrt(e.len), sm = (m.nx * D[0] + m.ny * D[1]) * Math.sqrt(m.len); return sc > sm ? e : m; }, edges[0])
+      : edges.reduce(function (m, e) { return e.d < m.d ? e : m; }, edges[0]);
+    if (D) edges.forEach(function (e) { e.d = e === near ? 0 : (e.nx * near.nx + e.ny * near.ny > 0.7 ? 0 : 999); });
+    edges.forEach(function (e) { e.kind = "side"; if (e.nx * near.nx + e.ny * near.ny > 0.7 && e.d < near.d + 25) e.kind = "front"; });
+    var fx = 0, fy = 0, fl = 0;
+    edges.forEach(function (e) { if (e.kind === "front") { fx += e.mx * e.len; fy += e.my * e.len; fl += e.len; } });
+    fx /= fl; fy /= fl;
+    var rear = edges.filter(function (e) { return e.kind === "side" && e.nx * near.nx + e.ny * near.ny < -0.6; });
+    if (!rear.length) { // no lot line faces away from the street, so use the one farthest from it
+      var far = null;
+      edges.forEach(function (e) { if (e.kind === "side" && e.nx * near.nx + e.ny * near.ny < 0 && (!far || Math.hypot(e.mx - fx, e.my - fy) > Math.hypot(far.mx - fx, far.my - fy))) far = e; });
+      if (far) rear = [far];
+    }
+    rear.forEach(function (e) { e.kind = "rear"; });
+    return { edges: edges, near: near, fx: fx, fy: fy };
+  }
+  function envelopeRows(ring, edges, dist) {
+    var b = [Infinity, Infinity, -Infinity, -Infinity];
+    ring.forEach(function (p) { b[0] = Math.min(b[0], p[0]); b[1] = Math.min(b[1], p[1]); b[2] = Math.max(b[2], p[0]); b[3] = Math.max(b[3], p[1]); });
+    var cell = Math.max(0.5, Math.sqrt((b[2] - b[0]) * (b[3] - b[1]) / 120000));
+    var rows = [], count = 0;
+    for (var y = b[1] + cell / 2; y < b[3]; y += cell) {
+      var run = null;
+      for (var x = b[0] + cell / 2; x < b[2] + cell; x += cell) {
+        var ok = x < b[2] && inRing(x, y, ring);
+        for (var k = 0; ok && k < edges.length; k++) if (segDist(x, y, edges[k].a, edges[k].b) < dist(edges[k])) ok = false;
+        if (ok) { count++; if (!run) run = [x - cell / 2, y - cell / 2]; }
+        else if (run) { rows.push([run[0], run[1], x - cell / 2 - run[0], cell]); run = null; }
+      }
+    }
+    return { rows: rows, area: count * cell * cell };
+  }
   function sitePlanSVG(s, rs) {
     if (!s.rings) return '<p class="bh-muted">No parcel outline was available, so no diagram can be drawn.</p>';
     var b = bbox(s.rings), lat0 = (b[1] + b[3]) / 2, lon0 = (b[0] + b[2]) / 2;
     var ring = toFeet([s.rings[0]], lat0, lon0)[0];
-    var street = toFeet([[[s.lon, s.lat]]], lat0, lon0)[0][0];
-    var r = minRect(ring);
-    if (!r) return "";
-    // Rotate into the rectangle frame (u along one edge, v across it).
-    var rot = function (p) { return [p[0] * r.ux + p[1] * r.uy, -p[0] * r.uy + p[1] * r.ux]; };
-    var pr = ring.map(rot), st = rot(street);
-    var minU = r.mn[0], maxU = r.mx[0], minV = r.mn[1], maxV = r.mx[1];
-    // The front is the rectangle side nearest the geocoded street point.
-    var d = { minV: Math.abs(st[1] - minV), maxV: Math.abs(st[1] - maxV), minU: Math.abs(st[0] - minU), maxU: Math.abs(st[0] - maxU) };
-    var front = Object.keys(d).sort(function (x, y) { return d[x] - d[y]; })[0];
+    if (ring.length < 4) return "";
+    if (ring[0][0] !== ring[ring.length - 1][0] || ring[0][1] !== ring[ring.length - 1][1]) ring.push(ring[0]);
+    var st = toFeet([[[s.lon, s.lat]]], lat0, lon0)[0][0];
     var sb = rs && rs.setbacks || {};
     var F = sb.front, Rr = sb.rear, S = sb.side;
-    var inset = { minU: S, maxU: S, minV: S, maxV: S };
-    var opp = { minV: "maxV", maxV: "minV", minU: "maxU", maxU: "minU" };
-    inset[front] = F; inset[opp[front]] = Rr;
     var known = [F, Rr, S].every(function (x) { return typeof x === "number"; });
-    var pad = 30, W = 560, H = 420;
-    var sw = maxU - minU, sh = maxV - minV, sc = Math.min((W - 2 * pad) / sw, (H - 2 * pad) / sh);
-    var X = function (u) { return pad + (u - minU) * sc + ((W - 2 * pad) - sw * sc) / 2; };
-    var Y = function (v) { return H - pad - (v - minV) * sc - ((H - 2 * pad) - sh * sc) / 2; };
-    var poly = pr.map(function (p, i) { return (i ? "L" : "M") + X(p[0]).toFixed(1) + " " + Y(p[1]).toFixed(1); }).join(" ") + " Z";
-    var env = "";
+    var ce = classifyEdges(ring, st, s.frontDir);
+    var minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    ring.forEach(function (p) { minX = Math.min(minX, p[0]); minY = Math.min(minY, p[1]); maxX = Math.max(maxX, p[0]); maxY = Math.max(maxY, p[1]); });
+    var pad = 46, W = 560, H = 420;
+    var sw = maxX - minX || 1, sh = maxY - minY || 1, sc = Math.min((W - 2 * pad) / sw, (H - 2 * pad) / sh);
+    var ox = (W - sw * sc) / 2, oy = (H - sh * sc) / 2;
+    var X = function (x) { return ox + (x - minX) * sc; };
+    var Y = function (y) { return H - oy - (y - minY) * sc; };
+    var f1 = function (n) { return n.toFixed(1); };
+    var poly = ring.map(function (p, i) { return (i ? "L" : "M") + f1(X(p[0])) + " " + f1(Y(p[1])); }).join(" ") + " Z";
+    var lines = ce.edges.map(function (e) {
+      return '<line x1="' + f1(X(e.a[0])) + '" y1="' + f1(Y(e.a[1])) + '" x2="' + f1(X(e.b[0])) + '" y2="' + f1(Y(e.b[1])) + '" class="bh-edge bh-edge-' + e.kind + '"/>';
+    }).join("");
+    var env = "", envArea = null;
     if (known) {
-      var eu0 = minU + inset.minU, eu1 = maxU - inset.maxU, ev0 = minV + inset.minV, ev1 = maxV - inset.maxV;
-      if (eu1 > eu0 && ev1 > ev0) {
-        env = '<rect x="' + X(eu0).toFixed(1) + '" y="' + Y(ev1).toFixed(1) + '" width="' + ((eu1 - eu0) * sc).toFixed(1) + '" height="' + ((ev1 - ev0) * sc).toFixed(1) + '" class="bh-env"/>' +
-          '<text x="' + X((eu0 + eu1) / 2).toFixed(1) + '" y="' + Y((ev0 + ev1) / 2).toFixed(1) + '" class="bh-envlabel" text-anchor="middle">Buildable envelope about ' + fmt((eu1 - eu0) * (ev1 - ev0)) + ' sf</text>';
+      var er = envelopeRows(ring, ce.edges, function (e) { return e.kind === "front" ? F : e.kind === "rear" ? Rr : S; });
+      envArea = er.area;
+      if (er.rows.length) {
+        var d = er.rows.map(function (r) { return "M" + f1(X(r[0])) + " " + f1(Y(r[1] + r[3])) + "h" + f1(r[2] * sc + 0.4) + "v" + f1(r[3] * sc + 0.4) + "h" + f1(-(r[2] * sc + 0.4)) + "z"; }).join("");
+        env = '<path d="' + d + '" class="bh-env"/>';
       }
     }
-    var fl = { minV: [X((minU + maxU) / 2), Y(minV) + 18, "middle"], maxV: [X((minU + maxU) / 2), Y(maxV) - 8, "middle"], minU: [X(minU) - 4, Y((minV + maxV) / 2), "end"], maxU: [X(maxU) + 4, Y((minV + maxV) / 2), "start"] }[front];
+    var clamp = function (v, lo, hi) { return Math.max(lo, Math.min(hi, v)); };
+    // Street label: just outside the front lot line, kept inside the drawing.
+    var lx = clamp(X(ce.fx + ce.near.nx * 14), 70, W - 70), ly = clamp(Y(ce.fy + ce.near.ny * 14), 16, H - 30);
     var label = function (v) { return typeof v === "number" ? v + " ft" : "verify"; };
-    return '<svg viewBox="0 0 ' + W + " " + H + '" class="bh-siteplan" role="img" aria-label="Diagrammatic site plan of the parcel outline with setback envelope">' +
-      '<path d="' + poly + '" class="bh-lot"/>' + env +
-      '<text x="' + fl[0].toFixed(1) + '" y="' + fl[1].toFixed(1) + '" class="bh-front" text-anchor="' + fl[2] + '">Street side (front ' + label(F) + ')</text>' +
-      '<text x="' + (W - 8) + '" y="' + (H - 8) + '" class="bh-note" text-anchor="end">Side ' + label(S) + ' · Rear ' + label(Rr) + ' · scale approximate</text>' +
+    var cx = 0, cy = 0, cn = 0;
+    ring.slice(0, -1).forEach(function (p) { cx += p[0]; cy += p[1]; cn++; });
+    var envText = envArea != null ? (envArea > 0 ? "Envelope about " + fmt(Math.round(envArea / 10) * 10) + " sf" : "No envelope left after setbacks") : "Setbacks not verified";
+    return '<svg viewBox="0 0 ' + W + " " + H + '" class="bh-siteplan" role="img" aria-label="Diagrammatic site plan: parcel outline, front, side and rear setbacks, and the remaining buildable envelope. ' + esc(envText) + '.">' +
+      '<path d="' + poly + '" class="bh-lot"/>' + env + lines +
+      '<text x="' + f1(lx) + '" y="' + f1(ly) + '" class="bh-front" text-anchor="middle">Street side, front ' + label(F) + '</text>' +
+      '<text x="' + f1(clamp(X(cx / cn), 80, W - 80)) + '" y="' + f1(clamp(Y(cy / cn), 20, H - 34)) + '" class="bh-envlabel" text-anchor="middle">' + esc(envText) + '</text>' +
+      '<g class="bh-north" transform="translate(' + (W - 24) + ',30)"><path d="M0 -14 L6 4 L0 0 L-6 4 Z"/><text y="18" text-anchor="middle">N</text></g>' +
+      '<text x="12" y="' + (H - 10) + '" class="bh-note" text-anchor="start"><tspan class="bh-k-front">Front ' + label(F) + '</tspan>  <tspan class="bh-k-side">Side ' + label(S) + '</tspan>  <tspan class="bh-k-rear">Rear ' + label(Rr) + '</tspan>  Scale approximate</text>' +
       "</svg>";
   }
 
@@ -395,8 +470,9 @@
 
   function render() {
     var s = state;
-    var v = { lot: num("bh-lot"), zone: $("bh-zone").value.trim(), existing: num("bh-existing"), footprint: num("bh-footprint"), stories: parseInt($("bh-stories").value, 10) || 1, type: $("bh-type").value };
-    var rs = v.lot && ["seattle", "kc", "sno", "edmonds"].indexOf(s.juris) >= 0 ? R.pick({ juris: s.juris, zone: v.zone, lot: v.lot, units: 1 }) : null;
+    var v = { lot: num("bh-lot"), zone: $("bh-zone").value.trim(), existing: num("bh-existing"), footprint: num("bh-footprint"), imperv: num("bh-imperv"), front: $("bh-front").value, stories: parseInt($("bh-stories").value, 10) || 1, type: $("bh-type").value };
+    var rs = v.lot && ["seattle", "kc", "sno", "edmonds", "kenmore"].indexOf(s.juris) >= 0 ? R.pick({ juris: s.juris, zone: v.zone, lot: v.lot, units: 1 }) : null;
+    s.frontDir = v.front || "";
     var out = [];
     var place = s.city ? s.city.toUpperCase() : (s.county || "").replace(" County", "").toUpperCase() + " COUNTY";
     var page = function (title, body, cls) { return '<section class="bh-page ' + (cls || "") + '"><div class="bh-page-body">' + body + '</div><footer class="bh-page-foot"><span>' + esc(place) + ' | WA</span><strong>' + esc(title) + '</strong><span class="bh-brand">Board of Project Stewardship</span></footer></section>'; };
@@ -428,7 +504,7 @@
     // Code review
     var cr;
     if (!rs) {
-      var why = s.juris === "other" ? "This tool covers the City of Seattle, the City of Edmonds, and unincorporated King and Snohomish counties. For " + esc(s.jurisLabel) + ", check with your city." : (s.juris === "outside" ? "This address is outside King and Snohomish counties." : "We do not have verified rules coded for zone " + esc(v.zone || "(blank)") + " here. Verify with the jurisdiction.");
+      var why = s.juris === "other" ? "This tool covers the Cities of Seattle, Kenmore and Edmonds, and unincorporated King and Snohomish counties. For " + esc(s.jurisLabel) + ", check with your city." : (s.juris === "outside" ? "This address is outside King and Snohomish counties." : "We do not have verified rules coded for zone " + esc(v.zone || "(blank)") + " here. Verify with the jurisdiction.");
       cr = '<p class="bh-verify">' + why + '</p><p><a href="./permits.html">The Board permit hub</a> lists city and county permit offices.</p>';
     } else {
       cr = '<h3>' + esc(rs.title) + '</h3><table class="bh-table bh-rules"><thead><tr><th scope="col">Standard</th><th scope="col">What the code says</th><th scope="col">Source (checked ' + R.CHECKED + ')</th></tr></thead><tbody>' +
@@ -443,18 +519,26 @@
       if (rs.floorCap) {
         var room = v.existing != null ? rs.floorCap - v.existing : null;
         lines.push(["Floor area cap", fmt(rs.floorCap) + " sf (" + esc(rs.floorCapLabel) + ")"]);
-        if (room != null) lines.push(["Existing counted area (your entry)", fmt(v.existing) + " sf"], ["Room left under the cap", room > 0 ? "About " + fmt(room) + " sf" : "None. The house is at or over the cap as entered."]);
-        lines.push(["Before you rely on this", "Below-grade floor area may be exempt, so the counted existing area can be lower than the finished area. A detached or attached ADU of up to 1,000 sf does not count against FAR in Seattle NR zones."]);
+        if (room != null) lines.push(["Existing counted area (your entry)", fmt(v.existing) + " sf"], ["Room left under the cap", room > 0 ? "<strong>About " + fmt(room) + " sf</strong> (" + fmt(rs.floorCap) + " cap minus " + fmt(v.existing) + " existing)" : "None. The house is at or over the cap as entered."]);
+        else lines.push(["Room left under the cap", "Enter the existing finished area in step 2 to see the room left."]);
+        lines.push(["Before you rely on this", "Below-grade floor area may be exempt, so the counted existing area can be lower than the finished area." + (rs.key === "seattle-nr" ? " Since January 2026, ADU floor area counts toward FAR in Seattle NR zones." : "")]);
       } else { lines.push(["Floor area", esc(rs.floorCapLabel)]); }
       if (rs.coverage) {
         lines.push(["Lot coverage cap", fmt(rs.coverage) + " sf"]);
         if (v.footprint) { var left = rs.coverage - v.footprint; lines.push(["Footprint room left", left > 0 ? "About " + fmt(left) + " sf of new footprint" : "None at the ground floor as entered. Building up may still work."]); }
       }
-      if (rs.impervious) lines.push(["Impervious surface cap", fmt(rs.impervious) + " sf (all hard surfaces)"]);
+      if (rs.impervious) {
+        lines.push(["Impervious surface cap", fmt(rs.impervious) + " sf (all hard surfaces)" + (rs.imperviousMax ? "; up to " + fmt(rs.imperviousMax) + " sf with approved low impact development" : "")]);
+        if (v.imperv != null) { var il = rs.impervious - v.imperv; lines.push(["Existing impervious (your entry)", fmt(v.imperv) + " sf"], ["Impervious room left", il > 0 ? "<strong>About " + fmt(il) + " sf</strong> at the base limit" + (rs.imperviousMax ? ", about " + fmt(rs.imperviousMax - v.imperv) + " sf at the maximum" : "") : "None at the base limit as entered" + (rs.imperviousMax && rs.imperviousMax > v.imperv ? "; about " + fmt(rs.imperviousMax - v.imperv) + " sf at the maximum with low impact development" : "") + "."]); }
+        else lines.push(["Impervious room left", '<span class="bh-tbd">TBD.</span> Enter the existing impervious surface in step 2. It is not in the public records we can read.']);
+      }
+      if (!rs.floorCap && v.existing == null) lines.push(["Existing house size", '<span class="bh-tbd">TBD.</span> Enter the finished area from the assessor record in step 2.']);
+      if (rs.sideNote) lines.push(["Side setback split", esc(rs.sideNote)]);
       var typeNote = {
         addition: "An addition keeps the existing foundation and grandfathered conditions where they comply. It must fit the room left under the caps above.",
         adu: "An ADU or detached ADU is often the largest gain on a lot that is near its house size cap, because ADU area is governed by its own size limit.",
         teardown: "A teardown resets the lot to current setbacks, height and caps. Size the new house to the full cap, not the room left over.",
+        shop: "A shop can attach to the house (it then follows the house setbacks and adds to its footprint) or stand alone as an accessory building. Either way it counts toward impervious surface, and a vehicle door facing the street needs the driveway length the zone requires.",
         remodel: "An interior remodel inside the existing walls usually does not change floor area, coverage or setbacks. Permits still apply to structural, plumbing, electrical and mechanical work."
       }[v.type];
       lines.push(["For your project type", typeNote]);
@@ -464,7 +548,7 @@
 
     // Lot imagery and site plan
     var img = s.imagery ? '<figure class="bh-aerial"><div class="bh-aerial-frame"><img src="' + esc(s.imagery.url) + '" alt="Aerial photo of the parcel with the county parcel outline drawn on top" width="' + s.imagery.W + '" height="' + s.imagery.H + '" crossorigin="anonymous"><svg viewBox="0 0 ' + s.imagery.W + " " + s.imagery.H + '" aria-hidden="true"><path d="' + s.imagery.path + '" class="bh-outline"/></svg></div><figcaption>' + esc(s.imagery.credit) + ". Parcel outline: " + (/^Snohomish/.test(s.county) ? "Snohomish County Assessor parcels" : "King County GIS parcels") + ". Outlines are approximate and are not a survey. The photo uses a web map projection, so it is not to scale.</figcaption></figure>" : '<p class="bh-muted">No parcel outline was found, so no aerial view is shown.</p>';
-    out.push(page("Existing lot", '<div class="bh-cols"><div>' + img + '</div><div><h3>Site plan diagram</h3>' + sitePlanSVG(s, rs) + '<p class="bh-muted">Diagrammatic only. Drawn from the county parcel outline, simplified to its bounding rectangle for the setback envelope. The street side is a guess from the address point. A licensed surveyor sets the real lines.</p></div></div>'));
+    out.push(page("Existing lot", '<div class="bh-cols"><div>' + img + '</div><div><h3>Site plan diagram</h3>' + sitePlanSVG(s, rs) + '<p class="bh-muted">Diagrammatic only. Drawn from the county parcel outline. The shaded envelope is every point at least the required setback from each lot line. ' + (s.frontDir ? "The street side was set by hand in step 2." : "Which line is the front, side or rear is our guess from the address point; set the street side in step 2 if it is wrong.") + ' A licensed surveyor sets the real lines.</p></div></div>'));
 
     // Plans and permits
     var pm = "<h3>House plans and permit history</h3>";
@@ -494,10 +578,14 @@
       f.push('An asbestos survey by a certified inspector is required before demolition in the Puget Sound region (<a href="' + R.SRC.pscaa.url + '" target="_blank" rel="noopener">Puget Sound Clean Air Agency</a>). Older houses can also have lead paint.');
       f.push("A new house loses any grandfathered setbacks or size the old one had.");
     }
-    if (v.type === "addition") f.push("An addition ties into old framing and foundations. Expect surprises in houses built before modern codes, and budget for engineering.");
-    if (v.type === "addition" || v.type === "teardown") f.push("Basements or deep footings close to a lot line can need shoring and neighbor coordination. Ask your engineer early.");
+    if (s.hazards.some(function (h) { return /1990/.test(h); }) && !s.hazards.some(function (h) { return /2016/.test(h); })) f.push("The older 1990 county maps flag this parcel but the 2016 landslide and steep slope maps do not. The city may still ask for a geotechnical report to settle it; budget for one.");
+    if (s.nearNotices && s.nearNotices.length) f.push("A sensitive area notice is recorded on title for a neighboring parcel: " + esc(s.nearNotices.join("; ")) + ". That points to slope or erosion conditions next door, so expect the city to ask about this lot too.");
+    if (s.juris === "kenmore") f.push("If any part of the lot is within 200 ft of Lake Washington or the Sammamish River, Kenmore's Shoreline Master Program applies (RCW 90.58), with its own setbacks and permits. The county shoreline layer we read covers unincorporated areas only, so verify with the city.");
+    if (v.type === "shop") f.push("A shop near a slope or lot line may need retaining walls or engineered footings. Drainage from the new roof and driveway must be managed on site.");
+    if (v.type === "addition" || v.type === "shop") f.push("An addition ties into old framing and foundations. Expect surprises in houses built before modern codes, and budget for engineering.");
+    if (v.type === "addition" || v.type === "teardown" || v.type === "shop") f.push("Basements or deep footings close to a lot line can need shoring and neighbor coordination. Ask your engineer early.");
     if (s.yearBuilt && +s.yearBuilt < 1980) f.push("Built " + esc(s.yearBuilt) + ": plan for possible asbestos and lead paint testing before any demolition or remodel work.");
-    if (rs && rs.floorCap && v.existing != null && v.existing >= rs.floorCap) f.push("The existing house is at or over the floor area cap as entered. Adding area may not be allowed except through an ADU or below-grade space.");
+    if (rs && rs.floorCap && v.existing != null && v.existing >= rs.floorCap) f.push("The existing house is at or over the floor area cap as entered. Adding counted floor area may not be allowed. Below-grade space or a different unit count can change the cap, so ask the city.");
     if (!f.length) f.push("No red flags from the data we could read. That is not a clean bill; a site visit matters.");
     return "<h3>Red flags to check</h3><ul class=\"bh-flags\">" + f.map(function (x) { return "<li>" + x + "</li>"; }).join("") + "</ul>";
   }
@@ -553,5 +641,5 @@
     if (p) { $("bh-address").value = p; $("bh-go").click(); }
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
-  window.BuildHere = { polyAreaSqft: polyAreaSqft, minRect: minRect };
+  window.BuildHere = { polyAreaSqft: polyAreaSqft, minRect: minRect, classifyEdges: classifyEdges, envelopeRows: envelopeRows };
 })();

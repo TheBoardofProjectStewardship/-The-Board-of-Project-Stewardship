@@ -55,7 +55,11 @@
 .bh-aerial figcaption{font-size:.72rem;color:#616e7c;margin-top:.4rem;line-height:1.4}
 .bh-siteplan{width:100%;height:auto;background:#fff;border:1px solid #e4e1d8}
 .bh-lot{fill:#f3f1ea;stroke:#1f2933;stroke-width:2}
-.bh-env{fill:rgba(22,101,52,.12);stroke:#166534;stroke-width:1.5;stroke-dasharray:6 4}
+.bh-env{fill:rgba(22,101,52,.28);stroke:none}
+.bh-edge{stroke-width:3;stroke-linecap:round}.bh-edge-front{stroke:#b45309}.bh-edge-side{stroke:#1f2933}.bh-edge-rear{stroke:#1d4ed8}
+.bh-k-front{fill:#b45309}.bh-k-rear{fill:#1d4ed8}.bh-k-side{fill:#1f2933}
+.bh-north path{fill:#1f2933}.bh-north text{font:700 10px Inter,system-ui,sans-serif;fill:#1f2933}
+.bh-siteplan{overflow:visible}
 .bh-envlabel,.bh-front,.bh-note{font:600 11px Inter,system-ui,sans-serif;fill:#14532d}
 .bh-note{fill:#52606d;font-weight:500}
 .bh-steps li{margin-bottom:.5rem}
@@ -70,10 +74,16 @@
   body *{visibility:hidden}
   #bh-report,#bh-report *{visibility:visible}
   #bh-report{position:absolute;left:0;top:0;width:100%;display:block}
-  .bh-page{box-shadow:none;border-radius:0;break-after:page;page-break-after:always;min-height:7.2in}
+  .bh-page{box-shadow:none;border-radius:0;break-after:page;page-break-after:always;min-height:8.4in}
   .bh-page:last-child{break-after:auto;page-break-after:auto}
   .bh-page a{text-decoration:none}
-  .bh-page,.bh-env,.bh-outline,.bh-disclaimer,.bh-cta{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .bh-page,.bh-env,.bh-edge,.bh-outline,.bh-disclaimer,.bh-cta{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .bh-aerial-frame,.bh-siteplan,.bh-table tr{break-inside:avoid;page-break-inside:avoid}
   .bh-cta .bh-btn{border:1px solid #166534;background:#fff}
+  .bh-page{font-size:10.5px;padding:.3in .4in .2in!important}
+  .bh-page h3{margin:.35em 0 .3em}
+  .bh-table th,.bh-table td{padding:3px 6px!important;line-height:1.3}
+  .bh-flags li{margin:.15em 0}
 }
+
+.bh-tbd{display:inline-block;background:#fef3c7;color:#92400e;font-weight:700;padding:0 .35em;border-radius:3px}

@@ -8,13 +8,14 @@
 
   var SRC = {
     smc2344: { label: "SMC ch. 23.44 (Neighborhood Residential)", url: "https://library.municode.com/wa/seattle/codes/municipal_code?nodeId=TIT23LAUSCO_SUBTITLE_IIILAUSRE_CH23.44NERE" },
-    smc2344pdf: { label: "Seattle OPCD: ch. 23.44 and 23.42.022 as amended by Ord. 127211 and 127219 (eff. June 30, 2025)", url: "https://www.seattle.gov/documents/departments/opcd/seattleplan/oneseattleplanchapter23.44-amended.pdf" },
-    smc23010: { label: "SMC 23.44.010 lot coverage", url: "https://library.municode.com/wa/seattle/codes/municipal_code?nodeId=TIT23LAUSCO_SUBTITLE_IIILAUSRE_CH23.44NERE" },
-    smc23011: { label: "SMC 23.44.011 floor area (FAR)", url: "https://library.municode.com/wa/seattle/codes/municipal_code?nodeId=TIT23LAUSCO_SUBTITLE_IIILAUSRE_CH23.44NERE" },
-    smc23012: { label: "SMC 23.44.012 height", url: "https://library.municode.com/wa/seattle/codes/municipal_code?nodeId=TIT23LAUSCO_SUBTITLE_IIILAUSRE_CH23.44NERE" },
-    smc23014: { label: "SMC 23.44.014 yards", url: "https://library.municode.com/wa/seattle/codes/municipal_code?nodeId=TIT23LAUSCO_SUBTITLE_IIILAUSRE_CH23.44NERE" },
-    smc23017: { label: "SMC 23.44.017 density", url: "https://library.municode.com/wa/seattle/codes/municipal_code?nodeId=TIT23LAUSCO_SUBTITLE_IIILAUSRE_CH23.44NERE" },
-    smc42022: { label: "SMC 23.42.022 accessory dwelling units", url: "https://www.seattle.gov/documents/departments/opcd/seattleplan/oneseattleplanchapter23.44-amended.pdf" },
+    smc2344pdf: { label: "Seattle Ord. 127376 (CB 120993), new ch. 23.44 and amended 23.42.022, signed Dec. 22, 2025, in effect January 2026", url: "https://clerk.seattle.gov/~archives/Ordinances/Ord_127376.pdf" },
+    sdciNR: { label: "SDCI Neighborhood Residential zoning summary (January 2026)", url: "https://www.seattle.gov/documents/Departments/SDCI/Codes/NeighborhoodResidentialSummary.pdf" },
+    smc23080: { label: "SMC 23.44.080 lot coverage", url: "https://library.municode.com/wa/seattle/codes/municipal_code?nodeId=TIT23LAUSCO_SUBTITLE_IIILAUSRE_CH23.44NERE_23.44.080LOCO" },
+    smc23050: { label: "SMC 23.44.050 floor area (FAR)", url: "https://library.municode.com/wa/seattle/codes/municipal_code?nodeId=TIT23LAUSCO_SUBTITLE_IIILAUSRE_CH23.44NERE" },
+    smc23070: { label: "SMC 23.44.070 structure height", url: "https://library.municode.com/wa/seattle/codes/municipal_code?nodeId=TIT23LAUSCO_SUBTITLE_IIILAUSRE_CH23.44NERE" },
+    smc23090: { label: "SMC 23.44.090 setbacks", url: "https://library.municode.com/wa/seattle/codes/municipal_code?nodeId=TIT23LAUSCO_SUBTITLE_IIILAUSRE_CH23.44NERE" },
+    smc23060: { label: "SMC 23.44.060 maximum density", url: "https://library.municode.com/wa/seattle/codes/municipal_code?nodeId=TIT23LAUSCO_SUBTITLE_IIILAUSRE_CH23.44NERE" },
+    smc42022: { label: "SMC 23.42.022 accessory dwelling units (as amended by Ord. 127376)", url: "https://clerk.seattle.gov/~archives/Ordinances/Ord_127376.pdf" },
     kc21a: { label: "King County Code Title 21A (zoning), current code file", url: "https://aqua.kingcounty.gov/council/clerk/code/24-30_Title_21A.pdf" },
     kc09h: { label: "KCC 21A.09H.030 urban residential density and dimensions", url: "https://aqua.kingcounty.gov/council/clerk/code/24-30_Title_21A.pdf" },
     kc09t: { label: "KCC 21A.09T.030 rural area density and dimensions", url: "https://aqua.kingcounty.gov/council/clerk/code/24-30_Title_21A.pdf" },
@@ -27,6 +28,9 @@
     scc23040: { label: "SCC 30.23.040 bulk matrix reference notes", url: "https://snohomish.county.codes/SCC/30.23.040" },
     scc28010: { label: "SCC 30.28.010 accessory dwelling units", url: "https://snohomish.county.codes/SCC/30.28.010" },
     scc50103: { label: "SCC 30.50.103 work exempt from permit", url: "https://snohomish.county.codes/SCC/30.50.103" },
+    kmc21030: { label: "KMC 18.21.030 Table B, R-1, R-4 and R-6 development standards", url: "https://www.codepublishing.com/WA/Kenmore/html/Kenmore18/Kenmore1821.html" },
+    kmcCrit: { label: "Kenmore critical areas code, KMC Title 18 (geologically hazardous areas)", url: "https://www.codepublishing.com/WA/Kenmore/html/Kenmore18/Kenmore18.html" },
+    kenPermits: { label: "City of Kenmore permits (MyBuildingPermit)", url: "https://www.kenmorewa.gov/government/departments/development-services/permit-center" },
     pscaa: { label: "Puget Sound Clean Air Agency: asbestos survey before renovation or demolition", url: "https://pscleanair.gov/185/Asbestos" },
     wsec: { label: "WA State Building Code Council: energy code (residential)", url: "https://sbcc.wa.gov/state-codes-regulations-guidelines/state-building-code/energy-code" },
     hb1337: { label: "RCW 36.70A.680 and .681 (ADU rules from HB 1337)", url: "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.681" }
@@ -35,34 +39,34 @@
   function verify(label, src, note) { return { label: label, value: null, src: src, note: note || "" }; }
   function rule(label, value, src, note, num) { return { label: label, value: value, src: src, note: note || "", num: num }; }
 
-  /* ---- Seattle NR1, NR2, NR3 ---- */
+  /* ---- Seattle NR1, NR2, NR3 (new ch. 23.44, Ord. 127376, in effect January 2026) ---- */
   function seattleNR(v) {
     var lot = v.lot, units = v.units || 1;
-    var far = 0.6; // Table A for 23.44.011, density less dense than 1 unit per 4,000 sf
+    var far = 0.6; // Table A for 23.44.050: less dense than 1 unit per 4,000 sf
     var perUnit = lot / units;
-    if (perUnit <= 1600) far = 1.2; else if (perUnit <= 2200) far = 1.0; else if (perUnit <= 4000) far = 0.8;
+    if (perUnit <= 1600) far = 1.6; else if (perUnit <= 2200) far = 1.0; else if (perUnit <= 4000) far = 0.8;
     var cap = Math.round(far * lot);
     if (lot < 5000 && cap < 2500) cap = 2500;
-    var cov = lot >= 5000 ? 0.35 * lot : Math.min(1000 + 0.15 * lot, 0.5 * lot);
+    var cov = Math.round(0.5 * lot); // 23.44.080.A
     return {
       key: "seattle-nr",
       title: "City of Seattle, Neighborhood Residential (" + v.zone + ")",
       floorCap: cap,
       floorCapLabel: "FAR " + far + " x " + fmt(lot) + " sf lot" + (lot < 5000 ? " (lots under 5,000 sf get at least 2,500 sf)" : ""),
-      coverage: Math.round(cov),
+      coverage: cov,
       setbacks: { front: 15, rear: 15, side: 5, rearAlley: 0 },
       rules: [
-        rule("Maximum floor area (FAR)", fmt(cap) + " sf", SRC.smc23011, "FAR " + far + " in NR1, NR2 and NR3 for " + (units === 1 ? "one unit" : units + " units") + " on this lot. Underground stories and story portions no more than 4 ft above grade are exempt. ADU floor area is exempt from FAR in NR zones (23.42.022.C.3).", cap),
-        rule("Maximum lot coverage", fmt(Math.round(cov)) + " sf (" + (lot >= 5000 ? "35%" : "1,000 sf + 15%") + ")", SRC.smc23010, "Applies with one principal unit and no detached ADU. With two or more principal units or detached ADUs the limit is 50%.", Math.round(cov)),
-        rule("Maximum height", "32 ft, plus 5 ft for a pitched roof at 4:12 or steeper", SRC.smc23012),
-        rule("Front yard", "15 ft (10 ft with three or more units)", SRC.smc23014),
-        rule("Rear yard", "15 ft (10 ft with three or more units; none when the lot abuts an alley)", SRC.smc23014),
-        rule("Side yards", "5 ft", SRC.smc23014),
-        rule("Dwelling units per lot", "Up to 4, or 6 within a quarter mile walk of a major transit stop", SRC.smc23017, "Counts principal and accessory units. Interim rules effective June 30, 2025; confirm the permanent version at SDCI."),
-        rule("ADUs", "Up to 2 per lot, attached or detached, each up to 1,000 sf gross floor area", SRC.smc42022, "Detached ADU height follows the principal house limit. Keep 5 ft eave to eave from the house. No parking required."),
+        rule("Maximum floor area (FAR)", fmt(cap) + " sf", SRC.smc23050, "FAR " + far + " for " + (units === 1 ? "one unit" : units + " units") + " on this lot (Table A for 23.44.050). Higher FAR applies at higher density: 0.8 or 1.0 from 1 unit per 4,000 sf, 1.0 or 1.2 from 1 per 2,200 sf, 1.6 from 1 per 1,600 sf. Underground stories and story portions no more than 4 ft above grade are exempt. ADU floor area now counts toward FAR; the old NR exemption was repealed.", cap),
+        rule("Maximum lot coverage", "50% = " + fmt(cov) + " sf", SRC.smc23080, "Riparian corridors, wetlands and buffers, shoreline setback areas and steep slope non-disturbance areas are taken out of the lot area first. Decks 36 in. or less above grade and the first 36 in. of eaves do not count.", cov),
+        rule("Maximum height", "32 ft, plus 5 ft for a pitched roof at 4:12 or steeper", SRC.smc23070, "42 ft in some cases, such as retaining a Tier 1 or Tier 2 tree, or three or more principal units with a 20 ft front setback."),
+        rule("Front setback", "15 ft with one or two units (10 ft with three or more)", SRC.smc23090),
+        rule("Rear setback", "15 ft with one or two principal units (10 ft with three or more; none when it abuts an alley)", SRC.smc23090, "ADU rear setback is 5 ft."),
+        rule("Side setbacks", "5 ft average, 3 ft minimum", SRC.smc23090, "3 ft on lots under 5,000 sf in frequent transit service areas."),
+        rule("Dwelling units per lot", "The greater of 1 per 1,250 sf of lot area or 4 units; 6 near a major transit stop or with two affordable units", SRC.sdciNR, "Counts principal and accessory units. Reduced on lots with critical areas."),
+        rule("ADUs", "Up to 2 per lot, attached, detached or stacked; 1,000 sf gross floor area (1,200 sf with three or more bedrooms)", SRC.smc42022, "Detached ADU height follows the principal house limit. No parking required for ADUs."),
         verify("Permit-exempt accessory structures", SRC.smc2344, "Seattle exemption thresholds live in the building code, not the zoning chapter. Verify with SDCI.")
       ],
-      sources: [SRC.smc2344pdf, SRC.smc2344]
+      sources: [SRC.smc2344pdf, SRC.sdciNR, SRC.smc2344]
     };
   }
 
@@ -170,12 +174,38 @@
     };
   }
 
+  /* ---- City of Kenmore R-4 and R-6 (KMC 18.21.030 Table B) ---- */
+  var KEN = { "R-4": { imp: 0.45, impMax: 0.55, h: 35 }, "R-6": { imp: 0.60, impMax: 0.70, h: 35 } };
+  function kenmore(v) {
+    var z = KEN[v.zone], imp = Math.round(z.imp * v.lot), impMax = Math.round(z.impMax * v.lot);
+    return {
+      key: "kenmore", title: "City of Kenmore, " + v.zone,
+      floorCap: null, floorCapLabel: "Table B sets no floor area ratio. Setbacks, height and impervious surface limit size.",
+      coverage: null, impervious: imp, imperviousMax: impMax,
+      setbacks: { front: 15, rear: 20, side: 7.5 },
+      sideNote: "5 ft minimum each side, 15 ft combined. The diagram splits it 7.5 ft and 7.5 ft; you can shift it, say 5 ft and 10 ft.",
+      rules: [
+        rule("Street setback", "15 ft", SRC.kmc21030, "Note 8: 10 ft if the development provides alleys or is townhouses."),
+        rule("Garage driveway apron", "At least 20 linear ft of driveway between a garage, carport or fenced parking area and the street line", SRC.kmc21030, "Note 9, measured along the driveway centerline. A shop with a vehicle door facing the street should plan for this."),
+        rule("Side setbacks", "5 ft minimum each side, 15 ft combined", SRC.kmc21030, "Note 11."),
+        rule("Rear setback", "20 ft", SRC.kmc21030),
+        rule("Maximum height", "35 ft", SRC.kmc21030),
+        rule("Impervious surface", Math.round(z.imp * 100) + "% base = " + fmt(imp) + " sf; " + Math.round(z.impMax * 100) + "% maximum = " + fmt(impMax) + " sf", SRC.kmc21030, "Note 14: applies to each lot. The higher number needs approved low impact development measures. Roofs, driveways, patios and walks all count.", imp),
+        rule("Density", z === KEN["R-4"] ? "4 units per acre base, 6 maximum with incentives" : "6 units per acre base, 9 maximum with incentives", SRC.kmc21030),
+        verify("Accessory structure and ADU limits", SRC.kmc21030, "Kenmore accessory building and ADU size rules are in other KMC chapters we did not verify for this release. Verify with Kenmore Development Services."),
+        verify("Critical areas buffers and setbacks", SRC.kmcCrit, "If the site is in or near a landslide or erosion hazard area, Kenmore's critical areas code can add buffers, building setbacks and a geotechnical report. Verify with the city.")
+      ],
+      sources: [SRC.kmc21030]
+    };
+  }
+
   function pick(v) {
     var z = String(v.zone || "").toUpperCase().replace(/\s+/g, "");
     if (v.juris === "seattle") {
       if (/^NR[123]?$/.test(z)) return seattleNR({ lot: v.lot, units: v.units, zone: z === "NR" ? "NR" : z });
       return null;
     }
+    if (v.juris === "kenmore") { z = z.replace(/^R-?(\d)$/, "R-$1"); if (KEN[z]) return kenmore({ lot: v.lot, zone: z }); return null; }
     if (v.juris === "edmonds") { if (EDM[z]) return edmonds({ lot: v.lot, zone: z }); return null; }
     if (v.juris === "kc") {
       z = z.replace(/^(RA|R)-?(\d)/, "$1-$2");

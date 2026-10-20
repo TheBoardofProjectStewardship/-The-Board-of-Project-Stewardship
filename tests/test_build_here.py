@@ -58,7 +58,7 @@ class BuildHereTest(unittest.TestCase):
         """
         data = json.loads(subprocess.check_output(["node", "-e", script, str(ROOT / "assets/js/build-here-rules.js")], text=True))
         self.assertEqual(data["surber"]["floorCap"], 3730)
-        self.assertEqual(data["surber"]["coverage"], 2176)
+        self.assertEqual(data["surber"]["coverage"], 3108)
         self.assertEqual(data["surber"]["setbacks"], {"front": 15, "rear": 15, "side": 5, "rearAlley": 0})
         self.assertEqual(data["small"]["floorCap"], 2500)
         self.assertEqual(data["edm"]["coverage"], 3500)
