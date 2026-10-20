@@ -348,7 +348,7 @@
   /* Site plan: the real parcel ring, inset edge by edge (front, side, rear setbacks).
      The envelope is every point inside the parcel that is at least the required
      distance from each lot line, sampled on a grid and drawn as merged rows. */
-  function segDist(px, py, a, b) {
+  function segDistXY(px, py, a, b) {
     var dx = b[0] - a[0], dy = b[1] - a[1], L = dx * dx + dy * dy;
     var t = L ? ((px - a[0]) * dx + (py - a[1]) * dy) / L : 0;
     t = t < 0 ? 0 : t > 1 ? 1 : t;
@@ -370,7 +370,7 @@
     var edges = [];
     for (i = 0; i < n; i++) {
       var a = ring[i], b = ring[i + 1], dx = b[0] - a[0], dy = b[1] - a[1], L = Math.sqrt(dx * dx + dy * dy) || 1;
-      edges.push({ a: a, b: b, len: L, nx: sgn * dy / L, ny: -sgn * dx / L, mx: (a[0] + b[0]) / 2, my: (a[1] + b[1]) / 2, d: segDist(st[0], st[1], a, b) });
+      edges.push({ a: a, b: b, len: L, nx: sgn * dy / L, ny: -sgn * dx / L, mx: (a[0] + b[0]) / 2, my: (a[1] + b[1]) / 2, d: segDistXY(st[0], st[1], a, b) });
     }
     var D = { N: [0, 1], E: [1, 0], S: [0, -1], W: [-1, 0] }[dir];
     var near = D ? edges.reduce(function (m, e) { var sc = (e.nx * D[0] + e.ny * D[1]) * Math.sqrt(e.len), sm = (m.nx * D[0] + m.ny * D[1]) * Math.sqrt(m.len); return sc > sm ? e : m; }, edges[0])
@@ -398,7 +398,7 @@
       var run = null;
       for (var x = b[0] + cell / 2; x < b[2] + cell; x += cell) {
         var ok = x < b[2] && inRing(x, y, ring);
-        for (var k = 0; ok && k < edges.length; k++) if (segDist(x, y, edges[k].a, edges[k].b) < dist(edges[k])) ok = false;
+        for (var k = 0; ok && k < edges.length; k++) if (segDistXY(x, y, edges[k].a, edges[k].b) < dist(edges[k])) ok = false;
         if (ok) { count++; if (!run) run = [x - cell / 2, y - cell / 2]; }
         else if (run) { rows.push([run[0], run[1], x - cell / 2 - run[0], cell]); run = null; }
       }

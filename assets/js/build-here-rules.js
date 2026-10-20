@@ -177,7 +177,9 @@
   /* ---- City of Kenmore R-4 and R-6 (KMC 18.21.030 Table B) ---- */
   var KEN = { "R-4": { imp: 0.45, impMax: 0.55, h: 35 }, "R-6": { imp: 0.60, impMax: 0.70, h: 35 } };
   function kenmore(v) {
-    var z = KEN[v.zone], imp = Math.round(z.imp * v.lot), impMax = Math.round(z.impMax * v.lot);
+    var z = KEN[v.zone];
+    if (!z || !v.lot) return null;
+    var imp = Math.round(z.imp * v.lot), impMax = Math.round(z.impMax * v.lot);
     return {
       key: "kenmore", title: "City of Kenmore, " + v.zone,
       floorCap: null, floorCapLabel: "Table B sets no floor area ratio. Setbacks, height and impervious surface limit size.",
