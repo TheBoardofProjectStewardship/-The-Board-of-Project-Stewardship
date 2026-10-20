@@ -1,0 +1,177 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Federal Way",
+    "service": "Electrical panel / service upgrade",
+    "slug": "electrical-panel-upgrade-federal-way-wa"
+  },
+  "sources": [
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "title": "Washington L&I - City Electrical Permits & Inspections",
+      "retrieved": "2026-10-20",
+      "http_status": 200,
+      "supports": "Listed cities issue electrical permits and perform inspections in city limits; L&I does not. Federal Way Permit Center, 33325 8th Ave South, 253-835-2607. Links DOR address lookup; verify jurisdiction before buying a permit."
+    },
+    {
+      "url": "https://www.federalwaywa.gov/page/permit-center",
+      "title": "City of Federal Way - Permit Center",
+      "retrieved": "2026-10-20",
+      "http_status": 200,
+      "supports": "Population approx. 102,000; wire-transfer fraud alert; staff hours 9-4 Mon/Tue/Thu/Fri, closed Wednesdays; permitcenter@federalwaywa.gov, 253-835-2607; residential electrical/mechanical/plumbing permits via MyBuildingPermit; E-Permits archive for past permits only."
+    },
+    {
+      "url": "https://mybuildingpermit.com/",
+      "title": "MyBuildingPermit",
+      "retrieved": "2026-10-20",
+      "http_status": 200,
+      "supports": "Online application portal the City names for residential electrical permits."
+    },
+    {
+      "url": "https://epermits.cityoffederalway.com/PublicPortal/FederalWayDev/common/index.jsp",
+      "title": "City of Federal Way - E-Permits Archive",
+      "retrieved": "2026-10-20",
+      "http_status": 200,
+      "supports": "Archive for past residential electrical, mechanical and plumbing permits."
+    },
+    {
+      "url": "https://docs.cityoffederalway.com/WebLink/ElectronicFile.aspx?docid=2106670&dbid=0&repo=cityoffederalway",
+      "title": "City of Federal Way - Electrical Permit Application",
+      "retrieved": "2026-10-20",
+      "http_status": 200,
+      "supports": "Asks for electrical contractor's WA contractor license number, expiration date, UBI number, project valuation, and work description."
+    },
+    {
+      "url": "https://www.federalwaywa.gov/page/construction-codes",
+      "title": "City of Federal Way - Construction Codes",
+      "retrieved": "2026-10-20",
+      "http_status": 200,
+      "supports": "NEC 2023 edition with Washington amendments WAC 296-46B and RCW 19.28; Federal Way Revised Code holds local amendments."
+    },
+    {
+      "url": "https://www.codepublishing.com/WA/FederalWay/",
+      "title": "Federal Way Revised Code",
+      "retrieved": "2026-10-20",
+      "http_status": 200,
+      "supports": "Local amendments to state-adopted codes and administrative procedures."
+    },
+    {
+      "url": "https://www.federalwaywa.gov/page/residential-permit-exemptions",
+      "title": "City of Federal Way - Residential Permit Exemptions",
+      "retrieved": "2026-10-20",
+      "http_status": 200,
+      "supports": "Electrical exemptions limited to cord-and-plug decorative lighting, reinstalling plug receptacles, replacing branch-circuit overcurrent devices of required capacity in same location, low-voltage work, minor repairs; if in doubt call 253.835.2607."
+    },
+    {
+      "url": "https://www.lni.wa.gov/licensing-permits/electrical/electrical-basics-for-home-business-owners/electrical-permit-basics",
+      "title": "Washington L&I - Electrical Permit Basics",
+      "retrieved": "2026-10-20",
+      "http_status": 200,
+      "supports": "Whoever performs the work buys the permit; a hired person asking owner to buy permit is against the law and permit not valid; like-in-kind circuit breaker exemption is branch-circuit only."
+    },
+    {
+      "url": "https://app.leg.wa.gov/WAC/default.aspx?cite=296-46B-901",
+      "title": "WAC 296-46B-901",
+      "retrieved": "2026-10-20",
+      "http_status": 200,
+      "supports": "Statewide list of electrical work that does or does not require a permit and inspection."
+    },
+    {
+      "url": "https://www.pse.com/en/construction-services/permits-and-inspections",
+      "title": "Puget Sound Energy - Permits and inspections",
+      "retrieved": "2026-10-20",
+      "http_status": 200,
+      "supports": "Federal Way listed among city jurisdictions that perform their own electrical inspections."
+    },
+    {
+      "url": "https://www.pse.com/en/construction-services/construction-faq",
+      "title": "Puget Sound Energy - Construction Tips and FAQs",
+      "retrieved": "2026-10-20",
+      "http_status": 200,
+      "supports": "For weatherhead/meter base/panel repair or replacement PSE disconnects service so the electrical contractor can work safely; cost depends on labor and crew; call 1-888-321-7779 at least 5 business days ahead. (No dollar amounts used.)"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/purchase-permits-request-inspections",
+      "title": "Washington L&I - Purchase Permits & Request Inspections",
+      "retrieved": "2026-10-20",
+      "http_status": 200,
+      "supports": "Contact serving utility when power must be disconnected and reconnected; comply with its requirements; hired contractor must buy the permit."
+    },
+    {
+      "url": "https://www.pse.com/en/pages/meter-tampering-and-diversion",
+      "title": "Puget Sound Energy - Meter Tampering and Diversion",
+      "retrieved": "2026-10-20",
+      "http_status": 200,
+      "supports": "Tampering includes unauthorized meter removal, cutting seals, opening meter base, self-reconnects; adding an EV charging station listed among projects that may require PSE notice."
+    },
+    {
+      "url": "https://www.federalwaywa.gov/page/inspection-information",
+      "title": "City of Federal Way - Inspection Information",
+      "retrieved": "2026-10-20",
+      "http_status": 200,
+      "supports": "Phone IVR being phased out; schedule at inspection.mybuildingpermit.com; may take up to 48 hours; reasons inspections will not be performed."
+    },
+    {
+      "url": "https://inspection.mybuildingpermit.com/",
+      "title": "MyBuildingPermit Inspections",
+      "retrieved": "2026-10-20",
+      "http_status": 200,
+      "supports": "Online inspection scheduling used by Federal Way."
+    },
+    {
+      "url": "https://docs.cityoffederalway.com/WebLink/ElectronicFile.aspx?docid=2107042&dbid=0&repo=cityoffederalway",
+      "title": "City of Federal Way - Bulletin #163 Scheduling Inspections Electrical/Mechanical/Plumbing (March 18, 2026)",
+      "retrieved": "2026-10-20",
+      "http_status": 200,
+      "supports": "Request before 4:00 pm; inspections typically 8:30-4:00 M-F; up to 72 hours; electrical inspection types incl. Service, Feeders/Sub-Panels, Rough Electrical, UFER Ground, Final Electrical."
+    },
+    {
+      "url": "https://www.pse.com/-/media/Feature/PSE/Construction-Service/Technical-Resource-Documents/Electric-Service-SingleFamily-Residential-Permanent-and-Temporary-Service/1218-Electric_Service_handbook.pdf",
+      "title": "Puget Sound Energy - Electric Service Handbook 2026, Single-Family Residential",
+      "retrieved": "2026-10-20",
+      "http_status": 200,
+      "supports": "Installation must pass electrical inspection by state or city jurisdiction before PSE energizes; permit must be present for customer-side work; modified services may be energized if permit present and work safe/complete with inspection next day."
+    },
+    {
+      "url": "https://docs.cityoffederalway.com/WebLink/ElectronicFile.aspx?docid=2107039&dbid=0&repo=cityoffederalway",
+      "title": "City of Federal Way - Property Owner Electrical Work Permit Affidavit (Bulletin #170)",
+      "retrieved": "2026-10-20",
+      "http_status": 200,
+      "supports": "Only licensed electrical contractors may perform electrical work in WA; owner exemption via affidavit under RCW 19.28.261; name must be on deed; agents/property managers/relatives cannot buy permit for owner; renters need rental agreement."
+    },
+    {
+      "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=19.28.261",
+      "title": "RCW 19.28.261 Exemptions",
+      "retrieved": "2026-10-20",
+      "http_status": 200,
+      "supports": "Owner may do electrical work on own residence/property without license unless new building for rent/sale/lease or property offered for sale within 12 months after obtaining it."
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-basics-for-home-business-owners/hiring-an-electrical-contractor",
+      "title": "Washington L&I - Hiring an Electrical Contractor",
+      "retrieved": "2026-10-20",
+      "http_status": 200,
+      "supports": "Verify license, bond and electrician certification; contractor gets permits/inspections; city-permitted jobsites search records with the city; unpermitted work may cause problems at sale."
+    },
+    {
+      "url": "https://webgis.dor.wa.gov/taxratelookup/SalesTax.aspx",
+      "title": "Washington DOR - Tax Rate Lookup",
+      "retrieved": "2026-10-20",
+      "http_status": 200,
+      "supports": "Address lookup L&I uses to confirm whether an address is within city limits."
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "Washington L&I - Verify a Contractor, Tradesperson or Business",
+      "retrieved": "2026-10-20",
+      "http_status": 200,
+      "supports": "Contractor license, bond, insurance and electrician certification lookup."
+    }
+  ],
+  "dropped": [
+    "Federal Way 2026 permit fee amounts (not used; price lock)",
+    "PSE disconnect/reconnect charges (no amounts published; not used)",
+    "NEC section numbers (not used)",
+    "Eaton and Square D product pages (bot-blocked / 403 to curl)"
+  ]
+}

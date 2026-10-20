@@ -1,0 +1,50 @@
+{
+  "producer": "openclaw",
+  "agent": "seo-specialist",
+  "slug": "electrical-panel-upgrade-federal-way-wa",
+  "title": "Electrical Panel Upgrade Federal Way WA \u2014 City Electrical Permit, PSE Disconnect & Who Can Do the Work",
+  "description": "A Federal Way homeowner's guide to an electrical panel or service upgrade: why the City, not L&I, issues the electrical permit, how the utility disconnect and inspections fit together, who may legally do the work, and what to put in the bid.",
+  "category": "Guides",
+  "keywords": [
+    "electrical panel upgrade Federal Way WA",
+    "Federal Way electrical permit",
+    "200 amp service upgrade Federal Way",
+    "PSE disconnect reconnect panel replacement",
+    "licensed electrical contractor Washington L&I"
+  ],
+  "outline": [
+    "Key Takeaways",
+    "Why panel upgrades keep coming up in Federal Way",
+    "The electrical permit comes from the City, not L&I",
+    "Which code applies",
+    "Why a panel is not exempt",
+    "The utility disconnect: PSE has to be in the schedule",
+    "Inspections in Federal Way",
+    "Who is allowed to do the work",
+    "What to write into a Federal Way panel upgrade bid",
+    "Materials Worth Knowing",
+    "How to shortlist and verify an electrical contractor",
+    "Where Pacific Pro Group fits",
+    "Next steps for a Federal Way panel upgrade"
+  ],
+  "search_intent": "A Federal Way homeowner planning a panel or service upgrade wants to know which office issues the electrical permit, how the utility disconnect and inspections are sequenced, who may legally do the work, and what to require in a bid.",
+  "local_angles": [
+    "Federal Way issues its own electrical permits (L&I city list; PSE city-jurisdiction list)",
+    "Residential EMP permits via MyBuildingPermit; Permit Center closed Wednesdays",
+    "Residential permit exemptions: only like-capacity branch breaker replacement exempt",
+    "Bulletin #163 inspection types incl. Service, Feeders/Sub-Panels, UFER Ground, Final Electrical",
+    "PSE disconnect/reconnect with 5 business days notice; inspection before energizing"
+  ],
+  "internal_links": [
+    "../federal-way.html",
+    "../electrician.html",
+    "../hvac.html",
+    "../permits.html",
+    "../verify-contractor.html"
+  ],
+  "notes": "Box-authored fallback brief. PPG only as Board #1 -> https://pacificprogroup.com/.",
+  "generation": {
+    "agent": "box-authored",
+    "mode": "box-fallback"
+  }
+}
