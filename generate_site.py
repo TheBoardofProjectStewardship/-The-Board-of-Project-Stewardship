@@ -2162,7 +2162,6 @@ def nav_html(active: str = "", prefix: str = "") -> str:
     more_tools = [
         ("faq", href("faq.html"), "FAQ"),
         ("adu", href("adu.html"), "Edmonds ADU"),
-        ("buildhere", href("build-here.html"), "What can I build here?"),
         ("contact", href("contact.html"), "Contact"),
         ("privacy", href("privacy.html"), "Privacy"),
         ("steward", href("good-steward.html"), "Good Steward"),
