@@ -48,7 +48,7 @@ class BuildHereTest(unittest.TestCase):
         for needle in ("budget-calculator", "hc-example", "home-calculator", "Budget and resale calculator"):
             self.assertNotIn(needle, home)
         self.assertIn('id="feasibility-calculator"', home)
-        self.assertIn('id="build-walkthrough"', home)
+        self.assertIn('id="scroll-house"', home)
         self.assertFalse((ROOT / "assets/js/home-calculator.js").exists())
         self.assertFalse((ROOT / "assets/css/home-calculator.css").exists())
         js = (ROOT / "assets/js/build-here.js").read_text(encoding="utf-8")

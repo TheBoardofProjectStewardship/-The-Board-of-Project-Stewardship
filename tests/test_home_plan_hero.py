@@ -63,7 +63,7 @@ class HomePlanHeroTests(unittest.TestCase):
         self.assertIn('href="./plan-walkthrough/"', self.html)
         self.assertNotIn("three.module.js", self.html)
         self.assertNotIn("plan-walkthrough.js", self.html)
-        order = [self.html.find(x) for x in ('id="scroll-house"', 'id="bh-home"', '<section id="mission"', 'id="why-ppg-number-one"', 'id="build-walkthrough"', 'id="integrity-shield"')]
+        order = [self.html.find(x) for x in ('id="scroll-house"', 'id="bh-home"', '<section id="mission"', 'id="why-ppg-number-one"', 'id="integrity-shield"')]
         self.assertNotIn(-1, order)
         self.assertEqual(order, sorted(order))
         visible = visible_copy(self.html)
@@ -90,7 +90,11 @@ class HomePlanHeroTests(unittest.TestCase):
         self.assertIn("mesh-flow-mission", self.html)
         self.assertIn("integrity-shield-showcase", self.html)
         self.assertIn("circular-directory", self.html)
-        self.assertIn('id="build-walkthrough-home"', self.html)
+        self.assertNotIn('id="build-walkthrough-home"', self.html)
+        self.assertNotIn('<section id="build-walkthrough"', self.html)
+        self.assertNotIn("See how a project is built", self.html)
+        self.assertTrue((ROOT / "build-walkthrough.html").exists())
+        self.assertTrue((ROOT / "tools/build-walkthrough/index.html").exists())
         self.assertLess(
             self.html.find('id="scroll-house"'),
             self.html.find('id="why-ppg-number-one"'),

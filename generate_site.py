@@ -2713,69 +2713,6 @@ def home_feasibility_tool_section() -> str:
   </section>"""
 
 
-def build_walkthrough_home_section(prefix: str = "") -> str:
-    """Prominent homepage embed: Build Walkthrough iframe + plan-photos strip."""
-    src = tools_href("build-walkthrough", prefix, "index.html")
-    land = public_tool_href("build-walkthrough", prefix)
-    thumbs = []
-    for i, (fname, label, blurb) in enumerate(WALKTHROUGH_STAGES, 1):
-        rel = f"assets/images/tools/build-walkthrough/{fname}"
-        if not asset_exists(rel):
-            continue
-        img = prefix_asset(rel, prefix)
-        stage_alt = polish_photo_alt(f"{label} during a house build", "Puget Sound", illustrative=True, topic=label)
-        stage_cap = polish_photo_caption(f"{label}: {blurb}", "Puget Sound", topic=label)
-        thumbs.append(
-            "        <figure class=\"shrink-0 w-36 sm:w-40 rounded-lg overflow-hidden border border-white/10 bg-charcoal relative\">\n"
-            f'          <div class="aspect-[4/3] bg-obsidian relative">\n'
-            f'            <img src="{img}" alt="{esc(stage_alt)}" '
-            'class="absolute inset-0 w-full h-full object-cover" width="320" height="240" loading="lazy">\n'
-            f'            <span class="absolute bottom-0 inset-x-0 z-10 text-[10px] uppercase tracking-wider text-secondary font-bold px-2 py-1 bg-black/65">'
-            f"{i} · {esc(label)}</span>\n"
-            "          </div>\n"
-            f'          <figcaption class="px-2 py-1.5 text-xs text-slate-300 font-light leading-snug">{esc(stage_cap)}</figcaption>\n'
-            "        </figure>"
-        )
-    strip = "\n".join(thumbs)
-    return f"""  <section id="build-walkthrough" class="mb-14">
-    <div class="mb-6 border-b border-white/10 pb-4">
-      <span class="text-secondary text-xs font-bold uppercase tracking-widest">Good Steward Tools</span>
-      <h2 class="text-3xl font-black text-white tracking-tight">See how a project is built</h2>
-      <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">One cohesive illustrative house from the Board of Project Stewardship, scrubbed through 17 stages from Discovery to Handoff. The plan stays on the sheet, then the walls rise into the same model. Honesty chips: illustrative media, not engineering documents. <a href="{land}" class="text-secondary hover:underline">Open full landing</a>.</p>
-    </div>
-    <iframe
-      id="build-walkthrough-home"
-      src="{src}"
-      title="Build Walkthrough — Board of Project Stewardship"
-      loading="lazy"
-      style="display:block;width:100%;height:1280px;border:0;border-radius:18px;background:#f3efe6;"
-    ></iframe>
-    <script>
-    (() => {{
-      const frame = document.getElementById('build-walkthrough-home');
-      if (!frame) return;
-      const trustedOrigin = new URL(frame.src, window.location.href).origin;
-      window.addEventListener('message', (event) => {{
-        if (event.origin !== trustedOrigin || event.source !== frame.contentWindow) return;
-        if (event.data?.type !== 'build-walkthrough:resize') return;
-        const height = Number(event.data.height);
-        if (Number.isFinite(height) && height >= 400 && height <= 16000) {{
-          frame.style.height = `${{Math.min(Math.ceil(height) + 2, 1900)}}px`;
-        }}
-      }});
-    }})();
-    </script>
-    <div class="mt-5">
-      <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-3">Plan photo strip</p>
-      <div class="flex gap-3 overflow-x-auto pb-2 -mx-1 px-1">
-{strip}
-      </div>
-      <p class="text-[11px] text-slate-400 mt-2 leading-relaxed">Illustrative stages for homeowners — not a bid, permit set, or schedule commitment.</p>
-    </div>
-  </section>
-"""
-
-
 def grow_iframe_script(frame_id: str, message_type: str) -> str:
     """Grow a same-origin tool iframe from its starting height. Never shrink it."""
     fid = json.dumps(frame_id)
@@ -5944,8 +5881,6 @@ def build_about() -> str:
   </div>
 {hero_html}
 {content_resume}
-{build_walkthrough_home_section()}
-
 {board_section_embed(
         "integrity-shield",
         "integrity-shield-showcase",
