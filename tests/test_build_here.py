@@ -58,10 +58,17 @@ class BuildHereTest(unittest.TestCase):
 
     def test_report_tool_on_homepage(self):
         home = (ROOT / "index.html").read_text(encoding="utf-8")
-        i = home.index('id="build-walkthrough"')
+        # Directly after the 3D Magnolia scroll house (#scroll-house), inside one layout wrapper.
+        import sys
+        sys.path.insert(0, str(ROOT))
+        import generate_site
+        frag, _css = generate_site.home_scroll_house()
+        end = home.index(frag.strip()[-200:]) + 200
         j = home.index('id="bh-home"')
-        between = home[home.index("</section>", i) + len("</section>"):j]
-        self.assertEqual(between.split(), ["<section"])
+        between = home[end:j]
+        self.assertEqual(between.split()[:2], ['<div', 'class="max-w-6xl'])
+        self.assertEqual(between.count("<section"), 1)
+        self.assertNotIn("</section>", between)
         k = home.index('<section id="mission"')
         self.assertLess(j, k)
         self.assertLess(k, home.index('id="integrity-shield"'))

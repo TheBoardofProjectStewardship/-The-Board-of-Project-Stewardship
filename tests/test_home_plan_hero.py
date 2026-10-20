@@ -63,7 +63,7 @@ class HomePlanHeroTests(unittest.TestCase):
         self.assertIn('href="./plan-walkthrough/"', self.html)
         self.assertNotIn("three.module.js", self.html)
         self.assertNotIn("plan-walkthrough.js", self.html)
-        order = [self.html.find(x) for x in ('id="scroll-house"', 'id="why-ppg-number-one"', 'id="build-walkthrough"', 'id="bh-home"', '<section id="mission"', 'id="integrity-shield"')]
+        order = [self.html.find(x) for x in ('id="scroll-house"', 'id="bh-home"', '<section id="mission"', 'id="why-ppg-number-one"', 'id="build-walkthrough"', 'id="integrity-shield"')]
         self.assertNotIn(-1, order)
         self.assertEqual(order, sorted(order))
         visible = visible_copy(self.html)

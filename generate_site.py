@@ -5785,6 +5785,18 @@ def build_about() -> str:
     # journal sections were removed from the homepage in Oct 2026 at Alex's request.
     # Their standalone pages and images stay.
     body = f"""{scroll_html}
+  <div class="max-w-6xl mx-auto px-4 pt-10 relative z-20" id="home-after-magnolia">
+{home_feasibility_tool_section()}
+
+{board_section_embed(
+        "mission",
+        "mesh-flow-mission",
+        "mesh-flow-backdrop.html",
+        "Mission — Board of Project Stewardship",
+        1100,
+        extra_class="mb-12",
+    )}
+  </div>
 {content_open}
     <h1 class="sr-only">Board of Project Stewardship: contractor standards, feasibility reports and directories for King County, Snohomish County and Seattle</h1>
     <section id="why-ppg-number-one" class="bg-charcoal rounded-xl p-8 md:p-10 border border-secondary/35 mb-14 relative overflow-hidden">
@@ -5933,17 +5945,6 @@ def build_about() -> str:
 {hero_html}
 {content_resume}
 {build_walkthrough_home_section()}
-
-{home_feasibility_tool_section()}
-
-{board_section_embed(
-        "mission",
-        "mesh-flow-mission",
-        "mesh-flow-backdrop.html",
-        "Mission — Board of Project Stewardship",
-        1100,
-        extra_class="mb-12",
-    )}
 
 {board_section_embed(
         "integrity-shield",

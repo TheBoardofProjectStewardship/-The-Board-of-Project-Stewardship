@@ -705,6 +705,83 @@
     })();
     </script>
   </section>
+  <div class="max-w-6xl mx-auto px-4 pt-10 relative z-20" id="home-after-magnolia">
+  <section id="bh-home" class="mb-14" aria-labelledby="bh-home-h">
+    <link rel="stylesheet" href="/assets/css/build-here.css">
+    <div class="mb-6 border-b border-white/10 pb-4">
+      <span class="text-secondary text-xs font-bold uppercase tracking-widest">Good Steward Tools</span>
+      <h2 id="bh-home-h" class="text-3xl font-black text-white tracking-tight">What can I build here?</h2>
+      <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Type an address in King or Snohomish County and get a free first-pass feasibility report: zone, parcel, aerial, cited setbacks, floor area and ADU rules, a site plan and red flags. Covered today: Seattle (Neighborhood Residential), Edmonds (LDR), Kenmore (R-1, R-4, R-6), unincorporated King County and unincorporated Snohomish County.</p>
+    </div>
+    <section class="bh-card" aria-labelledby="bh-step1">
+      <h2 id="bh-step1">1. Find the lot</h2>
+      <form id="bh-form" class="bh-row" novalidate>
+        <div class="bh-grow">
+          <label class="bh-label" for="bh-address">Street address, city and ZIP</label>
+          <input id="bh-address" name="address" class="bh-input" type="text" autocomplete="street-address" placeholder="4125 NE Surber Dr, Seattle, WA 98105" aria-describedby="bh-address-help">
+          <p id="bh-address-help" class="bh-help">The address goes to the US Census geocoder and to county and city map services. We do not store it.</p>
+        </div>
+        <div style="align-self:end;padding-bottom:1.7rem"><button id="bh-go" class="bh-btn" type="submit">Look it up</button></div>
+      </form>
+      <p id="bh-status" class="bh-status" role="status" aria-live="polite"></p>
+    </section>
+
+    <section id="bh-confirm" class="bh-card" aria-labelledby="bh-step2" hidden>
+      <h2 id="bh-step2">2. Check the numbers</h2>
+      <p class="text-sm">Public records can be stale or missing. Fix anything that looks wrong; the report uses what you see here.</p>
+      <form id="bh-confirm-form">
+        <div class="bh-grid">
+          <div><label class="bh-label" for="bh-lot">Lot size (sq ft)</label><input id="bh-lot" class="bh-input" inputmode="numeric" aria-describedby="bh-lot-src"><p id="bh-lot-src" class="bh-help"></p></div>
+          <div><label class="bh-label" for="bh-zone">Zone</label><input id="bh-zone" class="bh-input" aria-describedby="bh-zone-src"><p id="bh-zone-src" class="bh-help"></p></div>
+          <div><label class="bh-label" for="bh-existing">Existing house (finished sq ft)</label><input id="bh-existing" class="bh-input" inputmode="numeric" aria-describedby="bh-existing-src"><p id="bh-existing-src" class="bh-help"></p></div>
+          <div><label class="bh-label" for="bh-footprint">Building footprint (sq ft)</label><input id="bh-footprint" class="bh-input" inputmode="numeric" aria-describedby="bh-footprint-src"><p id="bh-footprint-src" class="bh-help"></p></div>
+          <div><label class="bh-label" for="bh-imperv">Existing impervious surface (sq ft)</label><input id="bh-imperv" class="bh-input" inputmode="numeric" aria-describedby="bh-imperv-src"><p id="bh-imperv-src" class="bh-help">Optional. Roofs, driveway, patios and walks. Used where the zone caps impervious surface.</p></div>
+          <div><label class="bh-label" for="bh-front">Street side of the lot</label><select id="bh-front" class="bh-input" aria-describedby="bh-front-help"><option value="">Guess from the address point</option><option value="N">North</option><option value="E">East</option><option value="S">South</option><option value="W">West</option></select><p id="bh-front-help" class="bh-help">Sets which lot line gets the front setback on the site plan.</p></div>
+          <div><label class="bh-label" for="bh-units">Homes on the lot after the project</label><select id="bh-units" class="bh-input" aria-describedby="bh-units-help"><option value="1">1 (one house)</option><option value="2">2 (house plus ADU, or a duplex)</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select><p id="bh-units-help" class="bh-help">Counts the house and any ADUs. In Seattle more homes on a lot raise the floor area limit.</p></div>
+          <div><label class="bh-label" for="bh-stories">Existing stories</label><select id="bh-stories" class="bh-input"><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
+          <div><label class="bh-label" for="bh-type">Project type</label><select id="bh-type" class="bh-input"><option value="addition">Addition</option><option value="shop">Shop or garage (attached or detached)</option><option value="adu">ADU or detached ADU</option><option value="teardown">Teardown and new house</option><option value="remodel">Remodel inside the existing house</option></select></div>
+        </div>
+        <p><button class="bh-btn" type="submit">Update the report</button></p>
+      </form>
+    </section>
+
+    <section id="bh-report-wrap" aria-labelledby="bh-step3" hidden>
+      <div class="bh-toolbar"><h2 id="bh-step3" class="text-xl font-black text-white">3. Your feasibility snapshot</h2><button id="bh-print" class="bh-btn" type="button">Print or save as PDF</button></div>
+      <div id="bh-report" class="bh-report" tabindex="-1"></div>
+    </section>
+    <p class="text-xs text-slate-400 font-light leading-relaxed">A planning estimate, not a legal, zoning or permit determination. Confirm every number with the city or county and a licensed professional. <a href="./build-here.html" class="text-secondary hover:underline">Open the full tool page</a> for the editor review form and the full disclaimer.</p>
+    <script src="/assets/js/build-here-rules.js" defer></script>
+    <script src="/assets/js/build-here.js" defer></script>
+  </section>
+
+    <section id="mission" class="mb-12">
+    <iframe
+      id="mesh-flow-mission"
+      class="board-section-frame"
+      src="./sections/mesh-flow-backdrop.html"
+      title="Mission — Board of Project Stewardship"
+      loading="lazy"
+      style="display:block;width:100%;height:1100px;border:0;border-radius:18px;background:#0a0a0a;"
+    ></iframe>
+    <script>
+    (function () {
+      var frame = document.getElementById("mesh-flow-mission");
+      if (!frame) return;
+      window.addEventListener('message', function (event) {
+        if (!event.data || event.data.type !== 'board-section:resize') return;
+        if (event.data.id !== "mesh-flow-mission") return;
+        if (event.source !== frame.contentWindow) return;
+        var trusted = new URL(frame.src, window.location.href).origin;
+        if (event.origin !== trusted) return;
+        var next = Number(event.data.height);
+        if (Number.isFinite(next) && next >= 280 && next <= 6400) {
+          frame.style.height = Math.ceil(next) + 'px';
+        }
+      });
+    })();
+    </script>
+    </section>
+  </div>
 
   <div class="max-w-6xl mx-auto px-4 pt-10 relative z-20">
     <h1 class="sr-only">Board of Project Stewardship: contractor standards, feasibility reports and directories for King County, Snohomish County and Seattle</h1>
@@ -1008,80 +1085,6 @@
     </div>
   </section>
 
-  <section id="bh-home" class="mb-14" aria-labelledby="bh-home-h">
-    <link rel="stylesheet" href="/assets/css/build-here.css">
-    <div class="mb-6 border-b border-white/10 pb-4">
-      <span class="text-secondary text-xs font-bold uppercase tracking-widest">Good Steward Tools</span>
-      <h2 id="bh-home-h" class="text-3xl font-black text-white tracking-tight">What can I build here?</h2>
-      <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Type an address in King or Snohomish County and get a free first-pass feasibility report: zone, parcel, aerial, cited setbacks, floor area and ADU rules, a site plan and red flags. Covered today: Seattle (Neighborhood Residential), Edmonds (LDR), Kenmore (R-1, R-4, R-6), unincorporated King County and unincorporated Snohomish County.</p>
-    </div>
-    <section class="bh-card" aria-labelledby="bh-step1">
-      <h2 id="bh-step1">1. Find the lot</h2>
-      <form id="bh-form" class="bh-row" novalidate>
-        <div class="bh-grow">
-          <label class="bh-label" for="bh-address">Street address, city and ZIP</label>
-          <input id="bh-address" name="address" class="bh-input" type="text" autocomplete="street-address" placeholder="4125 NE Surber Dr, Seattle, WA 98105" aria-describedby="bh-address-help">
-          <p id="bh-address-help" class="bh-help">The address goes to the US Census geocoder and to county and city map services. We do not store it.</p>
-        </div>
-        <div style="align-self:end;padding-bottom:1.7rem"><button id="bh-go" class="bh-btn" type="submit">Look it up</button></div>
-      </form>
-      <p id="bh-status" class="bh-status" role="status" aria-live="polite"></p>
-    </section>
-
-    <section id="bh-confirm" class="bh-card" aria-labelledby="bh-step2" hidden>
-      <h2 id="bh-step2">2. Check the numbers</h2>
-      <p class="text-sm">Public records can be stale or missing. Fix anything that looks wrong; the report uses what you see here.</p>
-      <form id="bh-confirm-form">
-        <div class="bh-grid">
-          <div><label class="bh-label" for="bh-lot">Lot size (sq ft)</label><input id="bh-lot" class="bh-input" inputmode="numeric" aria-describedby="bh-lot-src"><p id="bh-lot-src" class="bh-help"></p></div>
-          <div><label class="bh-label" for="bh-zone">Zone</label><input id="bh-zone" class="bh-input" aria-describedby="bh-zone-src"><p id="bh-zone-src" class="bh-help"></p></div>
-          <div><label class="bh-label" for="bh-existing">Existing house (finished sq ft)</label><input id="bh-existing" class="bh-input" inputmode="numeric" aria-describedby="bh-existing-src"><p id="bh-existing-src" class="bh-help"></p></div>
-          <div><label class="bh-label" for="bh-footprint">Building footprint (sq ft)</label><input id="bh-footprint" class="bh-input" inputmode="numeric" aria-describedby="bh-footprint-src"><p id="bh-footprint-src" class="bh-help"></p></div>
-          <div><label class="bh-label" for="bh-imperv">Existing impervious surface (sq ft)</label><input id="bh-imperv" class="bh-input" inputmode="numeric" aria-describedby="bh-imperv-src"><p id="bh-imperv-src" class="bh-help">Optional. Roofs, driveway, patios and walks. Used where the zone caps impervious surface.</p></div>
-          <div><label class="bh-label" for="bh-front">Street side of the lot</label><select id="bh-front" class="bh-input" aria-describedby="bh-front-help"><option value="">Guess from the address point</option><option value="N">North</option><option value="E">East</option><option value="S">South</option><option value="W">West</option></select><p id="bh-front-help" class="bh-help">Sets which lot line gets the front setback on the site plan.</p></div>
-          <div><label class="bh-label" for="bh-units">Homes on the lot after the project</label><select id="bh-units" class="bh-input" aria-describedby="bh-units-help"><option value="1">1 (one house)</option><option value="2">2 (house plus ADU, or a duplex)</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select><p id="bh-units-help" class="bh-help">Counts the house and any ADUs. In Seattle more homes on a lot raise the floor area limit.</p></div>
-          <div><label class="bh-label" for="bh-stories">Existing stories</label><select id="bh-stories" class="bh-input"><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
-          <div><label class="bh-label" for="bh-type">Project type</label><select id="bh-type" class="bh-input"><option value="addition">Addition</option><option value="shop">Shop or garage (attached or detached)</option><option value="adu">ADU or detached ADU</option><option value="teardown">Teardown and new house</option><option value="remodel">Remodel inside the existing house</option></select></div>
-        </div>
-        <p><button class="bh-btn" type="submit">Update the report</button></p>
-      </form>
-    </section>
-
-    <section id="bh-report-wrap" aria-labelledby="bh-step3" hidden>
-      <div class="bh-toolbar"><h2 id="bh-step3" class="text-xl font-black text-white">3. Your feasibility snapshot</h2><button id="bh-print" class="bh-btn" type="button">Print or save as PDF</button></div>
-      <div id="bh-report" class="bh-report" tabindex="-1"></div>
-    </section>
-    <p class="text-xs text-slate-400 font-light leading-relaxed">A planning estimate, not a legal, zoning or permit determination. Confirm every number with the city or county and a licensed professional. <a href="./build-here.html" class="text-secondary hover:underline">Open the full tool page</a> for the editor review form and the full disclaimer.</p>
-    <script src="/assets/js/build-here-rules.js" defer></script>
-    <script src="/assets/js/build-here.js" defer></script>
-  </section>
-    <section id="mission" class="mb-12">
-    <iframe
-      id="mesh-flow-mission"
-      class="board-section-frame"
-      src="./sections/mesh-flow-backdrop.html"
-      title="Mission — Board of Project Stewardship"
-      loading="lazy"
-      style="display:block;width:100%;height:1100px;border:0;border-radius:18px;background:#0a0a0a;"
-    ></iframe>
-    <script>
-    (function () {
-      var frame = document.getElementById("mesh-flow-mission");
-      if (!frame) return;
-      window.addEventListener('message', function (event) {
-        if (!event.data || event.data.type !== 'board-section:resize') return;
-        if (event.data.id !== "mesh-flow-mission") return;
-        if (event.source !== frame.contentWindow) return;
-        var trusted = new URL(frame.src, window.location.href).origin;
-        if (event.origin !== trusted) return;
-        var next = Number(event.data.height);
-        if (Number.isFinite(next) && next >= 280 && next <= 6400) {
-          frame.style.height = Math.ceil(next) + 'px';
-        }
-      });
-    })();
-    </script>
-    </section>
 
 
     <section id="integrity-shield" class="mb-14">
