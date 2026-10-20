@@ -38,6 +38,9 @@ intake/lock/*
 # Place SEO hub stills (wave1/wave2 + Locations) — must ship on GitHub Pages
 !assets/images/places/
 !assets/images/places/**
+# Learn house stills — must ship on GitHub Pages
+!assets/images/learn/
+!assets/images/learn/**
 # Responsive derivatives of tracked stills
 !assets/images/**/*-480.webp
 !assets/images/**/*-640.webp
