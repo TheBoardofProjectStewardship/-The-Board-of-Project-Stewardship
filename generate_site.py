@@ -70,9 +70,9 @@ BOARD_ONE_LINER = (
     "The Board of Project Stewardship publishes construction standards and contractor "
     f"directories for {GEO_FOOTPRINT} — shortlists firms homeowners can hire with confidence."
 )
-HOME_TITLE = f"Puget Sound Visualizer & 3D{TITLE_SUFFIX}"
+HOME_TITLE = f"Puget Sound Feasibility & 3D{TITLE_SUFFIX}"
 HOME_DESCRIPTION = (
-    "Free photo visualizer and 3D plan walkthrough for Puget Sound and Seattle-area remodels, "
+    "Free address feasibility reports and a 3D build walkthrough for Puget Sound and Seattle-area remodels, "
     "plus contractor directories for King County and Snohomish County."
 )
 # Search-console verification. Codes arrive later — do not invent them.
@@ -3629,7 +3629,7 @@ def howto_ld(
 def free_planning_tool_links() -> list[tuple[str, str]]:
     """Homepage photo visualizer and the in-browser plan walkthrough."""
     return [
-        ("Photo visualizer", "./#plan-home-hero"),
+        ("What can I build here?", "./build-here.html"),
         ("Plan to 3D Walkthrough", "./plan-walkthrough/"),
     ]
 
@@ -5773,18 +5773,20 @@ def build_about() -> str:
     )
 
     scroll_html, scroll_css = home_scroll_house()
-    plan_html, plan_css = home_plan_hero()
     flash = home_flashlight_hero(supporting=True)
     if flash:
         hero_html, hero_head, hero_js = flash
     else:
         hero_html, hero_head, hero_js = "", "", ""
-    hero_head = scroll_css + plan_css + hero_head
+    hero_head = scroll_css + hero_head
     content_open = '  <div class="max-w-6xl mx-auto px-4 pt-10 relative z-20">'
     content_resume = '  <div class="max-w-6xl mx-auto px-4 pt-10 relative z-20 pb-24">'
+    # The photo visualizer (home_plan_hero) and the process, gallery, learn and
+    # journal sections were removed from the homepage in Oct 2026 at Alex's request.
+    # Their standalone pages and images stay.
     body = f"""{scroll_html}
-{plan_html}
 {content_open}
+    <h1 class="sr-only">Board of Project Stewardship: contractor standards, feasibility reports and directories for King County, Snohomish County and Seattle</h1>
     <section id="why-ppg-number-one" class="bg-charcoal rounded-xl p-8 md:p-10 border border-secondary/35 mb-14 relative overflow-hidden">
       <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-primary"></div>
       <div class="absolute -top-16 -left-16 w-72 h-72 bg-primary/10 blur-[90px] pointer-events-none rounded-full"></div>
@@ -5870,17 +5872,6 @@ def build_about() -> str:
       </div>
     </section>
 
-    <section id="how-the-board-works" class="mb-14">
-      <div class="mb-8 border-b border-white/10 pb-4">
-        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Process</span>
-        <h2 class="text-3xl font-black text-white tracking-tight">How the Board works</h2>
-        <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">A repeatable filter: research the work, verify public signals, weight local mastery, then publish an editorial shortlist homeowners can use.</p>
-      </div>
-      <div class="grid sm:grid-cols-2 gap-4">
-{chr(10).join(process_cards)}
-      </div>
-    </section>
-
     <section class="mb-14">
       <div class="mb-8 border-b border-white/10 pb-4">
         <span class="text-secondary text-xs font-bold uppercase tracking-widest">Homeowner practice</span>
@@ -5919,59 +5910,6 @@ def build_about() -> str:
       </div>
     </section>
 
-    <section class="mb-14" id="cornerstone-reading">
-      <div class="mb-8 border-b border-white/10 pb-4">
-        <span class="text-secondary text-xs font-bold uppercase tracking-widest">From the Board journal</span>
-        <h2 class="text-3xl font-black text-white tracking-tight">Cornerstone reading</h2>
-        <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Six editorial posts that pair with Board directories and Good Steward tools — permits, hiring, waterproofing, and addition path decisions. Educational only; no invented prices or timelines.</p>
-      </div>
-      <ul class="grid sm:grid-cols-2 gap-3 text-sm text-slate-300 font-light">
-        <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-08-12-edmonds-home-addition-permit-basics.html" class="text-secondary hover:underline font-semibold">Edmonds home addition permit basics</a> — AHJ start-here habits before design freeze.</li>
-        <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-08-11-hire-design-build-edmonds.html" class="text-secondary hover:underline font-semibold">Hire design-build in Edmonds</a> — when one steward beats a trade-only chase.</li>
-        <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-08-18-pnw-bathroom-waterproofing-essentials.html" class="text-secondary hover:underline font-semibold">PNW bathroom waterproofing essentials</a> — wet-area discipline for coastal baths.</li>
-        <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-08-09-second-story-vs-teardown-edmonds.html" class="text-secondary hover:underline font-semibold">Second story vs teardown (Edmonds)</a> — compare paths without invented cost claims.</li>
-        <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-08-12-hire-kitchen-remodeler-king-snohomish.html" class="text-secondary hover:underline font-semibold">Hire a kitchen remodeler (King &amp; Snohomish)</a> — shortlist habits before cabinet day.</li>
-        <li class="bg-charcoal border border-white/10 rounded-xl p-4"><a href="./posts/2026-09-07-adu-planning-edmonds-wa.html" class="text-secondary hover:underline font-semibold">ADU planning Edmonds WA</a> — parcel and portal honesty before stock plans.</li>
-      </ul>
-      <p class="text-sm text-slate-400 font-light mt-4"><a href="./blog.html" class="text-secondary hover:underline">Browse the full blog</a> · <a href="./learn.html" class="text-secondary hover:underline">Learn hub</a> · <a href="./how-we-rank.html" class="text-secondary hover:underline">How we rank</a></p>
-    </section>
-
-    <section class="mb-14" id="learn">
-      <div class="mb-8 border-b border-white/10 pb-4">
-        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Learn before you hire</span>
-        <h2 class="text-3xl font-black text-white tracking-tight">Planning hubs &amp; client tools</h2>
-        <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Educational Board guides for remodels and additions — paired with verification tools. No invented prices, licenses, or awards.</p>
-      </div>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-        <a href="./hiring-a-contractor.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover block">
-          <h3 class="text-base font-black text-white mb-2">Hiring a contractor</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">L&amp;I verify path, interview habits, and how Board rankings work.</p>
-        </a>
-        <a href="./kitchen-remodel-planning.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover block">
-          <h3 class="text-base font-black text-white mb-2">Kitchen remodel planning</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Layout, allowances, and permit ownership before cabinet day.</p>
-        </a>
-        <a href="./bathroom-waterproofing-guide.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover block">
-          <h3 class="text-base font-black text-white mb-2">Bathroom waterproofing</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Wet-area systems and coastal moisture habits for Puget Sound baths.</p>
-        </a>
-        <a href="./home-addition-planning.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover block">
-          <h3 class="text-base font-black text-white mb-2">Home addition planning</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Jurisdiction, dry-in sequencing, and addition shortlist links.</p>
-        </a>
-        <a href="./second-story-vs-teardown.html" class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover block">
-          <h3 class="text-base font-black text-white mb-2">Second story vs teardown</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed">Compare paths without invented cost guarantees.</p>
-        </a>
-        <div class="bg-charcoal border border-white/10 hover:border-secondary/40 rounded-xl p-5 card-hover">
-          <h3 class="text-base font-black text-white mb-2">Bid comparison &amp; red flags</h3>
-          <p class="text-sm text-slate-400 font-light leading-relaxed"><a href="./bid-comparison.html" class="text-secondary hover:underline">Bid checklist</a> · <a href="./red-flags-hiring.html" class="text-secondary hover:underline">red flags</a> · <a href="./project-timeline.html" class="text-secondary hover:underline">timeline phases</a>.</p>
-        </div>
-      </div>
-      <p class="text-sm text-slate-400 font-light mb-3"><a href="./learn.html" class="text-secondary hover:underline font-semibold">Browse the full Learn hub</a> — permits, ADU, verify, checklists, stewardship layers, glossary, videos, and Good Steward tools.</p>
-      <p class="text-sm text-slate-400 font-light">City hubs: <a href="./edmonds.html" class="text-secondary hover:underline">Edmonds</a> · <a href="./greenwood.html" class="text-secondary hover:underline">Greenwood</a> · <a href="./lake-forest-park.html" class="text-secondary hover:underline">Lake Forest Park</a> · <a href="./mountlake-terrace.html" class="text-secondary hover:underline">Mountlake Terrace</a> · <a href="./mill-creek.html" class="text-secondary hover:underline">Mill Creek</a> · <a href="./mukilteo.html" class="text-secondary hover:underline">Mukilteo</a> · <a href="./kirkland.html" class="text-secondary hover:underline">Kirkland</a> · <a href="./bothell.html" class="text-secondary hover:underline">Bothell</a> · <a href="./queen-anne.html" class="text-secondary hover:underline">Queen Anne</a> · <a href="./phinney-ridge.html" class="text-secondary hover:underline">Phinney Ridge</a> · <a href="./shoreline.html" class="text-secondary hover:underline">Shoreline</a> · <a href="./lynnwood.html" class="text-secondary hover:underline">Lynnwood</a> · <a href="./ballard.html" class="text-secondary hover:underline">Ballard</a> · <a href="./magnolia.html" class="text-secondary hover:underline">Magnolia</a></p>
-    </section>
-
     <section class="bg-charcoal rounded-xl p-8 md:p-10 border border-primary/25 mb-14 relative overflow-hidden">
       <div class="absolute -bottom-20 -right-20 w-56 h-56 bg-primary/15 blur-[70px] pointer-events-none rounded-full"></div>
       <div class="relative z-10 md:flex md:items-center md:justify-between gap-8">
@@ -5991,16 +5929,6 @@ def build_about() -> str:
       </div>
     </section>
 
-    <section id="field-gallery" class="mb-4">
-      <div class="mb-8 border-b border-white/10 pb-4">
-        <span class="text-secondary text-xs font-bold uppercase tracking-widest">Field gallery</span>
-        <h2 class="text-3xl font-black text-white tracking-tight">Standards you can see</h2>
-        <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Editorial process and remodel imagery for Pacific Northwest work in King County, Snohomish County, and Seattle. Editorial and stock frames are labeled illustrative in alt text.</p>
-      </div>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-{gallery}
-      </div>
-    </section>
   </div>
 {hero_html}
 {content_resume}
@@ -13998,7 +13926,7 @@ def build_kitchen_remodel_planning_page() -> str:
                     ("Pascal Editor sketch", "./pascal-editor.html"),
                     ("Floor Plan to 3D", "./floor-plan-3d.html"),
                     ("Plan to 3D Walkthrough", "./plan-walkthrough/"),
-                    ("Photo visualizer", "./#plan-home-hero"),
+                    ("What can I build here?", "./build-here.html"),
                 ]
             ),
         )
@@ -14365,7 +14293,7 @@ def build_home_addition_planning_page() -> str:
                     ("Pascal Editor sketch", "./pascal-editor.html"),
                     ("Floor Plan to 3D", "./floor-plan-3d.html"),
                     ("Plan to 3D Walkthrough", "./plan-walkthrough/"),
-                    ("Photo visualizer", "./#plan-home-hero"),
+                    ("What can I build here?", "./build-here.html"),
                     ("Site Visit Checklist", "./site-visit.html"),
                     ("Good Steward", "./good-steward.html"),
                 ]

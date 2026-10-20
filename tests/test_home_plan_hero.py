@@ -37,48 +37,35 @@ class HomePlanHeroTests(unittest.TestCase):
     def setUp(self):
         self.html = PAGE.read_text(encoding="utf-8")
 
-    def test_walkthrough_cta_is_the_only_h1(self):
-        """The concept tool is the only H1. The 3D walkthrough is a nav link.
-
-        The word AI stays banned on the public homepage, including the concept
-        tool. Vendor and model names stay banned.
+    def test_removed_sections_stay_off_the_homepage(self):
+        """Oct 2026: the photo visualizer, process, field gallery, learn and
+        journal sections were removed from the homepage. Their pages and
+        images stay. The page keeps one H1 and the word AI stays banned.
         """
         self.assertEqual(self.html.count("<h1"), 1)
-        self.assertIn('<h1 id="see-project-title">See what your home could become.</h1>', self.html)
-        self.assertIn(
-            "Upload a photo of your house, kitchen or bathroom and explore a concept for your addition or remodel.",
-            self.html,
-        )
-        self.assertIn("No email or phone required for your first preview.", self.html)
-        self.assertIn(">Upload my photo</span>", self.html)
-        self.assertIn("Sample — illustrative. Not a Pacific Pro Group project.", self.html)
-        self.assertIn("WA contractor registration PACIFPG765OF", self.html)
-        self.assertIn("Drag to compare.", self.html)
-        self.assertNotIn("Preview sample concept", self.html)
-        self.assertNotIn("Show before", self.html)
-        self.assertNotIn("Show another sample style", self.html)
-        self.assertNotIn("live API", self.html)
-        self.assertNotIn("Demo preview", self.html)
-        self.assertNotIn("a live lead", self.html)
+        self.assertIn('<h1 class="sr-only">Board of Project Stewardship:', self.html)
+        for gone in (
+            'id="plan-home-hero"', "See what your home could become", "Upload my photo", "/assets/js/visualizer.js",
+            "/assets/css/visualizer.css", 'id="how-the-board-works"', "How the Board works",
+            'id="field-gallery"', "Standards you can see", 'id="learn"', "Planning hubs &amp; client tools",
+            'id="cornerstone-reading"', "Cornerstone reading", "Photo visualizer",
+        ):
+            self.assertNotIn(gone, self.html)
+        for anchor in ("plan-home-hero", "how-the-board-works", "field-gallery", "cornerstone-reading"):
+            self.assertNotIn("#" + anchor, self.html)
+        self.assertNotIn('href="#learn"', self.html)
+        self.assertNotIn('href="./#learn"', self.html)
+        gen = (ROOT / "generate_site.py").read_text(encoding="utf-8")
+        self.assertNotIn("{plan_html}", gen)
+        for f in ("assets/js/visualizer.js", "assets/css/visualizer.css"):
+            self.assertTrue((ROOT / f).exists(), f)
         self.assertIn(">3D Walkthrough</a>", self.html)
         self.assertIn('href="./plan-walkthrough/"', self.html)
-        self.assertNotIn("Walk through a home in 3D", self.html)
         self.assertNotIn("three.module.js", self.html)
         self.assertNotIn("plan-walkthrough.js", self.html)
-        self.assertNotIn('rel="preload" as="image"', self.html)
-        self.assertEqual(self.html.count('fetchpriority="high"'), 1)
-        hero_img = re.search(
-            r'<img\b[^>]*assets/images/visualizer/exterior-after\.jpg[^>]*>',
-            self.html,
-        )
-        self.assertIsNotNone(hero_img)
-        self.assertIn('fetchpriority="high"', hero_img.group(0))
-        self.assertIn('data-api-base=""', self.html)
-        self.assertIn("Sample — illustrative", self.html)
-        self.assertIn("Not a Pacific Pro Group project", self.html)
-        self.assertNotIn("AI concept, not a design", self.html)
-        self.assertNotIn("AI-generated concept", self.html)
-        self.assertIn("WA License PACIFPG765OF", self.html)
+        order = [self.html.find(x) for x in ('id="scroll-house"', 'id="why-ppg-number-one"', 'id="build-walkthrough"', 'id="bh-home"', '<section id="mission"', 'id="integrity-shield"')]
+        self.assertNotIn(-1, order)
+        self.assertEqual(order, sorted(order))
         visible = visible_copy(self.html)
         self.assertIsNone(AI.search(self.html))
         self.assertIsNone(AI.search(visible))
@@ -105,7 +92,7 @@ class HomePlanHeroTests(unittest.TestCase):
         self.assertIn("circular-directory", self.html)
         self.assertIn('id="build-walkthrough-home"', self.html)
         self.assertLess(
-            self.html.find('id="plan-home-hero"'),
+            self.html.find('id="scroll-house"'),
             self.html.find('id="why-ppg-number-one"'),
         )
         self.assertLess(
@@ -120,7 +107,7 @@ class HomePlanHeroTests(unittest.TestCase):
         The drawing script loads on view, not as a blocking tag, and the
         page still has one H1 and one high-priority image.
         """
-        self.assertLess(self.html.find('id="scroll-house"'), self.html.find('id="plan-home-hero"'))
+        self.assertLess(self.html.find('id="scroll-house"'), self.html.find('id="why-ppg-number-one"'))
         stages = (
             ("house", "House", "0.04", True),
             ("front", "Front", "0.22", False),
@@ -144,9 +131,8 @@ class HomePlanHeroTests(unittest.TestCase):
             self.assertIn(item + button, self.html)
         self.assertNotIn(">Upper</button>", self.html)
         self.assertNotIn(">Plan</button>", self.html)
-        self.assertIn('href="#plan-home-hero"', self.html)
+        self.assertIn('<a class="sh-btn" href="#bh-home">What can I build here?</a>', self.html)
         self.assertIn('href="./plan-walkthrough/"', self.html)
-        self.assertIn("See what your home could become", self.html)
         self.assertIn("/assets/css/scroll-house.css", self.html)
         self.assertIn('s.src = "/assets/js/scroll-house-magnolia.js?v=9"', self.html)
         self.assertNotIn("/assets/js/scroll-house.js", self.html)
@@ -178,7 +164,7 @@ class HomePlanHeroTests(unittest.TestCase):
         self.assertNotIn("stamp-of-trust-seal", self.html)
         self.assertIn('class="stamp-badge"', self.html)
         self.assertEqual(self.html.count("<h1"), 1)
-        self.assertEqual(self.html.count('fetchpriority="high"'), 1)
+        self.assertLessEqual(self.html.count('fetchpriority="high"'), 1)
         visible = visible_copy(self.html)
         self.assertIsNone(AI.search(self.html))
         self.assertIsNone(AI.search(visible))
@@ -186,7 +172,7 @@ class HomePlanHeroTests(unittest.TestCase):
         subprocess.check_call(["node", "--check", "assets/js/scroll-house-magnolia.js"], cwd=ROOT)
 
     def test_visualizer_links_skip_index_html_and_fragments_stay_noindex(self):
-        self.assertNotIn("./index.html#plan-home-hero", (ROOT / "generate_site.py").read_text(encoding="utf-8"))
+        self.assertNotIn("#plan-home-hero", (ROOT / "generate_site.py").read_text(encoding="utf-8"))
         for name in (
             "additions.html",
             "adu.html",
@@ -196,8 +182,8 @@ class HomePlanHeroTests(unittest.TestCase):
             "kitchen.html",
         ):
             text = (ROOT / name).read_text(encoding="utf-8")
-            self.assertIn('href="./#plan-home-hero"', text)
-            self.assertNotIn("./index.html#plan-home-hero", text)
+            self.assertIn('href="./build-here.html"', text)
+            self.assertNotIn("#plan-home-hero", text)
         section = (ROOT / "sections" / "scroll-house.html").read_text(encoding="utf-8")
         self.assertIn('<meta name="robots" content="noindex">', section)
         fragment, _css = gs.home_scroll_house()
