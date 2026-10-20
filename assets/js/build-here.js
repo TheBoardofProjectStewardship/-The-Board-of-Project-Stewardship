@@ -40,7 +40,10 @@
   function getJSON(url, params) {
     var ctl = new AbortController();
     var t = setTimeout(function () { ctl.abort(); }, TIMEOUT);
-    return fetch(url + "?" + qs(params), { signal: ctl.signal }).finally(function () { clearTimeout(t); }).then(function (r) {
+    var q = qs(params);
+    // Long geometry queries go by POST: ArcGIS Online answers 404 to long GET URLs.
+    var req = q.length > 1800 ? fetch(url, { method: "POST", body: q, headers: { "Content-Type": "application/x-www-form-urlencoded" }, signal: ctl.signal }) : fetch(url + "?" + q, { signal: ctl.signal });
+    return req.finally(function () { clearTimeout(t); }).then(function (r) {
       if (!r.ok) throw new Error("HTTP " + r.status);
       return r.json();
     }).then(function (j) { if (j && j.error) throw new Error(j.error.message || "service error"); return j; });
@@ -374,7 +377,7 @@
     var x = a[0] + t * dx - px, y = a[1] + t * dy - py;
     return Math.sqrt(x * x + y * y);
   }
-  function inRing(px, py, ring) {
+  function inRingXY(px, py, ring) {
     var c = false;
     for (var i = 0, j = ring.length - 1; i < ring.length; j = i++) {
       var a = ring[i], b = ring[j];
@@ -416,7 +419,7 @@
     for (var y = b[1] + cell / 2; y < b[3]; y += cell) {
       var run = null;
       for (var x = b[0] + cell / 2; x < b[2] + cell; x += cell) {
-        var ok = x < b[2] && inRing(x, y, ring);
+        var ok = x < b[2] && inRingXY(x, y, ring);
         for (var k = 0; ok && k < edges.length; k++) if (segDistXY(x, y, edges[k].a, edges[k].b) < dist(edges[k])) ok = false;
         if (ok) { count++; if (!run) run = [x - cell / 2, y - cell / 2]; }
         else if (run) { rows.push([run[0], run[1], x - cell / 2 - run[0], cell]); run = null; }
