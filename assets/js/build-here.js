@@ -262,8 +262,8 @@
     return Promise.resolve();
   }
 
-  function countHit(url, rings, label, list, s, srcName) {
-    return getJSON(url, polyQuery(rings, { returnCountOnly: true })).then(function (j) {
+  function countHit(url, rings, label, list, s, srcName, where) {
+    return getJSON(url, polyQuery(rings, where ? { returnCountOnly: true, where: where } : { returnCountOnly: true })).then(function (j) {
       if (j.count > 0) list.push(label);
     }).catch(function () { s.hazardNotes.push(label + ": layer did not answer (" + srcName + ")"); });
   }
@@ -309,8 +309,8 @@
       }
     } else if (/^Snohomish/.test(s.county)) {
       jobs.push(countHit(EP.snoSlope, rings, "Steep slope 33% or more (county map)", h, s, "SAS_Steep_Slopes"));
-      [["TOPOGRAPHY__LANDSLIDE__county_lha_model", "Landslide hazard area (county model)"], ["ENVIRONMENTAL__wetlands", "Mapped wetland"], ["ENVIRONMENTAL__fema_flood", "FEMA flood hazard area", 1]].forEach(function (L) {
-        jobs.push(countHit(EP.snoHost + L[0] + "/FeatureServer/" + (L[2] || 0) + "/query", rings, L[1], h, s, L[0]));
+      [["TOPOGRAPHY__LANDSLIDE__county_lha_model", "Landslide hazard area (county model)"], ["ENVIRONMENTAL__wetlands", "Mapped wetland"], ["ENVIRONMENTAL__fema_flood", "FEMA special flood hazard area (100-year floodplain)", 1, "sfha_tf='T'"]].forEach(function (L) {
+        jobs.push(countHit(EP.snoHost + L[0] + "/FeatureServer/" + (L[2] || 0) + "/query", rings, L[1], h, s, L[0], L[3]));
       });
       s.hazardSource = "Snohomish County hosted environmental layers";
     }
