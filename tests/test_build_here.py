@@ -80,6 +80,10 @@ class BuildHereTest(unittest.TestCase):
         sys.path.insert(0, str(ROOT))
         import generate_site
         self.assertIn(generate_site.home_feasibility_tool_section(), home)
+        self.assertNotIn('id="bh-lead"', sec)
+        js = (ROOT / "assets/js/build-here.js").read_text(encoding="utf-8")
+        self.assertIn('if ($("bh-lead-address"))', js)
+        self.assertIn('if ($("bh-lead"))', js)
 
     def test_rules_math_and_sources(self):
         script = r"""

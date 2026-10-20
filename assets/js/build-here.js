@@ -636,7 +636,7 @@
 
     $("bh-report").innerHTML = out.join("");
     $("bh-report-wrap").hidden = false;
-    $("bh-lead-address").value = s.matched || s.input;
+    if ($("bh-lead-address")) $("bh-lead-address").value = s.matched || s.input;
   }
 
   function redFlags(s, v, rs) {

@@ -100,4 +100,4 @@
 /* Homepage embed (#bh-home), under the 3D walkthrough */
 #bh-home .bh-card{background:#141414;border-color:rgba(255,255,255,.1)}
 #bh-home .bh-card h2,#bh-home .bh-toolbar h2{font-size:1.25rem}
-@media (max-width:639px){#bh-home .bh-row{flex-direction:column;align-items:stretch}#bh-home .bh-row>div[style]{padding-bottom:0!important;align-self:stretch!important}#bh-home .bh-btn{width:100%}#bh-home .bh-card{padding:1rem}#bh-home .bh-page-body{padding:1.25rem 1rem 1rem}#bh-home .bh-page-foot{padding:.75rem 1rem;flex-wrap:wrap}}
+@media (max-width:639px){#bh-home .bh-row{flex-direction:column;align-items:stretch}#bh-home .bh-row>.bh-grow{flex:none}#bh-home .bh-row>div[style]{padding-bottom:0!important;align-self:stretch!important}#bh-home .bh-btn{width:100%}#bh-home .bh-card{padding:1rem}#bh-home .bh-page-body{padding:1.25rem 1rem 1rem}#bh-home .bh-page-foot{padding:.75rem 1rem;flex-wrap:wrap}}
