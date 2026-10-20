@@ -5,7 +5,8 @@
 .bh-card p,.bh-card label,.bh-card legend{color:#cbd5e1}
 .bh-label{display:block;font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#e2e8f0;margin-bottom:.35rem}
 .bh-input{width:100%;background:#0a0a0a;color:#f8fafc;border:1px solid #475569;border-radius:.5rem;padding:.7rem .8rem;font-size:1rem;line-height:1.4}
-.bh-input:focus-visible,.bh-btn:focus-visible,.bh-report a:focus-visible{outline:3px solid #4ade80;outline-offset:2px}
+.bh-input:focus-visible,.bh-btn:focus-visible{outline:3px solid #4ade80;outline-offset:2px}
+.bh-report a:focus-visible,.bh-page .bh-btn:focus-visible{outline:3px solid #166534;outline-offset:2px}
 .bh-row{display:flex;gap:.75rem;flex-wrap:wrap}
 .bh-row>.bh-grow{flex:1 1 18rem}
 .bh-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr))}
@@ -87,3 +88,7 @@
 }
 
 .bh-tbd{display:inline-block;background:#fef3c7;color:#92400e;font-weight:700;padding:0 .35em;border-radius:3px}
+
+.bh-siteplan{max-width:100%;height:auto}
+@media screen and (max-width:699px){.bh-page .bh-table:not(.bh-rules){display:block;overflow-x:auto}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}

@@ -11,6 +11,7 @@
     census: "https://geocoding.geo.census.gov/geocoder/geographies/onelineaddress",
     kcParcel: "https://gismaps.kingcounty.gov/arcgis/rest/services/Property/KingCo_PropertyInfo/MapServer/2/query",
     kcZoning: "https://gismaps.kingcounty.gov/arcgis/rest/services/Planning/KingCo_Zoning/MapServer/1/query",
+    kenGis: "https://gwa.kenmorewa.gov/arcgis/rest/services/",
     kcSensitive: "https://gismaps.kingcounty.gov/arcgis/rest/services/Environment/KingCo_SensitiveAreas/MapServer/",
     kcAerial: "https://gismaps.kingcounty.gov/arcgis/rest/services/BaseMaps/KingCo_Aerial_2025/MapServer/export",
     seaZoning: "https://services.arcgis.com/ZOyb2t4B0UYuYNYH/arcgis/rest/services/Current_Land_Use_Zoning_Detail_2/FeatureServer/0/query",
@@ -271,6 +272,24 @@
         });
       }).catch(function () { s.hazardNotes.push("Sensitive area notices: layer did not answer"); }));
       s.hazardSource = "King County Sensitive Areas map service";
+      if (s.juris === "kenmore" && s.rings) {
+        s.hazardSource += " and City of Kenmore critical area and shoreline maps";
+        jobs.push(getJSON(EP.kenGis + "Shoreline_Designations/FeatureServer/0/query", polyQuery(s.rings, { outFields: "env_des_LF,Env_Des" })).then(function (j) {
+          var f = (j.features || [])[0];
+          if (f) { s.shoreline = (f.attributes.env_des_LF || f.attributes.Env_Des || "").trim(); h.push("Kenmore shoreline jurisdiction (" + s.shoreline + " environment, Shoreline Master Program)"); }
+        }).catch(function () { s.hazardNotes.push("Kenmore shoreline map did not answer"); }));
+        [[3, "Landslide hazard (City of Kenmore critical areas map)", "Class"], [1, "Erosion hazard (City of Kenmore critical areas map)"], [4, "Seismic hazard (City of Kenmore critical areas map)"], [0, "Stream (City of Kenmore critical areas map)"], [5, "Wetland (City of Kenmore critical areas map)"]].forEach(function (L) {
+          jobs.push(getJSON(EP.kenGis + "Critical_Areas/FeatureServer/" + L[0] + "/query", polyQuery(s.rings, { outFields: "*" })).then(function (j) {
+            var fs = j.features || []; if (!fs.length) return;
+            var cls = L[2] ? fs.map(function (f) { return f.attributes[L[2]]; }).filter(Boolean).filter(function (x, i, a) { return a.indexOf(x) === i; }) : [];
+            h.push(L[1] + (cls.length ? ": " + cls.join(", ") : ""));
+          }).catch(function () { s.hazardNotes.push(L[1] + ": layer did not answer"); }));
+        });
+        if (s.parcel) jobs.push(getJSON(EP.kenGis + "Impervious_Surface_by_Parcel_2024/FeatureServer/0/query", { f: "json", where: "PIN='" + String(s.parcel).replace(/'/g, "") + "'", outFields: "SUM_impervious_area_update,impervious_percent", returnGeometry: false }).then(function (j) {
+          var f = (j.features || [])[0];
+          if (f && f.attributes.SUM_impervious_area_update) { s.imperv = Math.round(f.attributes.SUM_impervious_area_update); s.impervSrc = "City of Kenmore impervious surface by parcel (2025 data)"; log(s, true, "City of Kenmore impervious surface by parcel"); }
+        }).catch(function () {}));
+      }
     } else if (/^Snohomish/.test(s.county)) {
       jobs.push(countHit(EP.snoSlope, rings, "Steep slope 33% or more (county map)", h, s, "SAS_Steep_Slopes"));
       [["TOPOGRAPHY__LANDSLIDE__county_lha_model", "Landslide hazard area (county model)"], ["ENVIRONMENTAL__wetlands", "Mapped wetland"], ["ENVIRONMENTAL__fema_flood", "FEMA flood hazard area"]].forEach(function (L) {
@@ -465,6 +484,7 @@
     $("bh-zone-src").textContent = s.zone ? "From: " + s.zoneSrc : "Not found. Enter the zone from the city or county zoning map.";
     $("bh-existing-src").textContent = s.juris === "sno" || /^King/.test(s.county) ? "The assessor's living area is not published through a browser-callable service. Read it on the assessor page and enter it here." : "Enter the existing finished floor area.";
     $("bh-footprint-src").textContent = s.footprint ? "From: " + s.footprintSrc + ". Edit if you know the real footprint." : "Optional. The ground-floor footprint of all buildings, for the coverage check.";
+    if (s.imperv) { $("bh-imperv").value = s.imperv; $("bh-imperv-src").textContent = "From: " + s.impervSrc + ". Measured from imagery for stormwater billing; edit if you know better."; }
     $("bh-confirm").hidden = false;
   }
 
@@ -578,9 +598,10 @@
       f.push('An asbestos survey by a certified inspector is required before demolition in the Puget Sound region (<a href="' + R.SRC.pscaa.url + '" target="_blank" rel="noopener">Puget Sound Clean Air Agency</a>). Older houses can also have lead paint.');
       f.push("A new house loses any grandfathered setbacks or size the old one had.");
     }
-    if (s.hazards.some(function (h) { return /1990/.test(h); }) && !s.hazards.some(function (h) { return /2016/.test(h); })) f.push("The older 1990 county maps flag this parcel but the 2016 landslide and steep slope maps do not. The city may still ask for a geotechnical report to settle it; budget for one.");
+    if (s.hazards.some(function (h) { return /1990/.test(h); }) && !s.hazards.some(function (h) { return /2016|City of Kenmore critical/.test(h); })) f.push("The older 1990 county maps flag this parcel but the 2016 landslide and steep slope maps do not. The city may still ask for a geotechnical report to settle it; budget for one.");
     if (s.nearNotices && s.nearNotices.length) f.push("A sensitive area notice is recorded on title for a neighboring parcel: " + esc(s.nearNotices.join("; ")) + ". That points to slope or erosion conditions next door, so expect the city to ask about this lot too.");
-    if (s.juris === "kenmore") f.push("If any part of the lot is within 200 ft of Lake Washington or the Sammamish River, Kenmore's Shoreline Master Program applies (RCW 90.58), with its own setbacks and permits. The county shoreline layer we read covers unincorporated areas only, so verify with the city.");
+    if (s.juris === "kenmore") f.push(s.shoreline ? "The parcel is inside Kenmore shoreline jurisdiction (" + esc(s.shoreline) + "). Work here follows the Shoreline Master Program (KMC Title 16): shoreline buffers and setbacks, vegetation rules, and possibly a shoreline exemption or permit before the building permit." : "We did not find this parcel in Kenmore's shoreline map. If any part of the lot is within 200 ft of Lake Washington or the Sammamish River, the Shoreline Master Program still applies (RCW 90.58), so verify with the city.");
+    if (s.juris === "kenmore" && s.hazards.some(function (h) { return /City of Kenmore critical/.test(h); })) f.push("Kenmore's own critical areas map shows a hazard on this parcel. Under KMC 18.55 expect a geotechnical report. Landslide hazard areas carry a buffer of at least the slope height or 50 ft, which a qualified study can reduce to 25 ft (KMC 18.55 Article XVIII). Erosion areas need sediment control and seasonal limits on clearing.");
     if (v.type === "shop") f.push("A shop near a slope or lot line may need retaining walls or engineered footings. Drainage from the new roof and driveway must be managed on site.");
     if (v.type === "addition" || v.type === "shop") f.push("An addition ties into old framing and foundations. Expect surprises in houses built before modern codes, and budget for engineering.");
     if (v.type === "addition" || v.type === "teardown" || v.type === "shop") f.push("Basements or deep footings close to a lot line can need shoring and neighbor coordination. Ask your engineer early.");

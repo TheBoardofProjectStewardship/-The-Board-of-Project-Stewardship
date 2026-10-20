@@ -29,7 +29,8 @@
     scc28010: { label: "SCC 30.28.010 accessory dwelling units", url: "https://snohomish.county.codes/SCC/30.28.010" },
     scc50103: { label: "SCC 30.50.103 work exempt from permit", url: "https://snohomish.county.codes/SCC/30.50.103" },
     kmc21030: { label: "KMC 18.21.030 Table B, R-1, R-4 and R-6 development standards", url: "https://www.codepublishing.com/WA/Kenmore/html/Kenmore18/Kenmore1821.html" },
-    kmcCrit: { label: "Kenmore critical areas code, KMC Title 18 (geologically hazardous areas)", url: "https://www.codepublishing.com/WA/Kenmore/html/Kenmore18/Kenmore18.html" },
+    kmcCrit: { label: "Kenmore critical areas code, KMC 18.55 (geologically hazardous areas)", url: "https://www.codepublishing.com/WA/Kenmore/html/Kenmore18/Kenmore1855.html" },
+    kmcSmp: { label: "Kenmore Shoreline Master Program, KMC Title 16", url: "https://www.codepublishing.com/WA/Kenmore/html/Kenmore16/Kenmore16.html" },
     kenPermits: { label: "City of Kenmore permits (MyBuildingPermit)", url: "https://www.kenmorewa.gov/government/departments/development-services/permit-center" },
     pscaa: { label: "Puget Sound Clean Air Agency: asbestos survey before renovation or demolition", url: "https://pscleanair.gov/185/Asbestos" },
     wsec: { label: "WA State Building Code Council: energy code (residential)", url: "https://sbcc.wa.gov/state-codes-regulations-guidelines/state-building-code/energy-code" },
@@ -71,7 +72,7 @@
   }
 
   /* ---- King County unincorporated, urban R-1 to R-8 ---- */
-  var KC_URBAN = { "R-1": { street: 20, interior: 5, h: 35, imp: 0.08, impNote: "8%, or 30% under condition 12" }, "R-4": { street: 10, interior: 5, h: 35, imp: 0.55 }, "R-6": { street: 10, interior: 5, h: 35, imp: 0.70 }, "R-8": { street: 10, interior: 5, h: 35, imp: 0.75 } };
+  var KC_URBAN = { "R-1": { street: 20, interior: 5, h: 35, imp: 0.08, impNote: "30% allowed under condition 12" }, "R-4": { street: 10, interior: 5, h: 35, imp: 0.55 }, "R-6": { street: 10, interior: 5, h: 35, imp: 0.70 }, "R-8": { street: 10, interior: 5, h: 35, imp: 0.75 } };
   function kcUrban(v) {
     var z = KC_URBAN[v.zone];
     var imp = Math.round(z.imp * v.lot);
@@ -82,7 +83,7 @@
       setbacks: { front: z.street, rear: z.interior, side: z.interior },
       rules: [
         rule("Maximum floor area (FAR)", "None set for detached houses in the table", SRC.kc09h),
-        rule("Maximum impervious surface", (z.impNote || Math.round(z.imp * 100) + "%") + " = about " + fmt(imp) + " sf", SRC.kc09h, "Roof, driveway, patios and walks all count.", imp),
+        rule("Maximum impervious surface", Math.round(z.imp * 100) + "% = about " + fmt(imp) + " sf" + (z.impNote ? " (" + z.impNote + ")" : ""), SRC.kc09h, "Roof, driveway, patios and walks all count.", imp),
         rule("Base height", z.h + " ft (up to 45 ft under listed conditions)", SRC.kc09h),
         rule("Street setback", z.street + " ft (20 ft for a garage or carport facing the street)", SRC.kc09h),
         rule("Interior setbacks", z.interior + " ft", SRC.kc09h),
@@ -193,11 +194,11 @@
         rule("Rear setback", "20 ft", SRC.kmc21030),
         rule("Maximum height", "35 ft", SRC.kmc21030),
         rule("Impervious surface", Math.round(z.imp * 100) + "% base = " + fmt(imp) + " sf; " + Math.round(z.impMax * 100) + "% maximum = " + fmt(impMax) + " sf", SRC.kmc21030, "Note 14: applies to each lot. The higher number needs approved low impact development measures. Roofs, driveways, patios and walks all count.", imp),
-        rule("Density", z === KEN["R-4"] ? "4 units per acre base, 6 maximum with incentives" : "6 units per acre base, 9 maximum with incentives", SRC.kmc21030),
+        rule("Density", v.zone === "R-4" ? "4 units per acre base, 6 maximum with incentives" : "6 units per acre base, 9 maximum with incentives", SRC.kmc21030),
         verify("Accessory structure and ADU limits", SRC.kmc21030, "Kenmore accessory building and ADU size rules are in other KMC chapters we did not verify for this release. Verify with Kenmore Development Services."),
         verify("Critical areas buffers and setbacks", SRC.kmcCrit, "If the site is in or near a landslide or erosion hazard area, Kenmore's critical areas code can add buffers, building setbacks and a geotechnical report. Verify with the city.")
       ],
-      sources: [SRC.kmc21030]
+      sources: [SRC.kmc21030, SRC.kmcCrit, SRC.kmcSmp]
     };
   }
 
