@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-10-20-electrical-panel-upgrade-federal-way-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-10-20T11:00:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Electrical Panel Upgrade Federal Way WA \u2014 City Electrical Permit, PSE Disconnect & Who Can Do the Work",
+    "date": "2026-10-20",
+    "slug": "electrical-panel-upgrade-federal-way-wa",
+    "description": "A Federal Way homeowner's guide to an electrical panel or service upgrade: why the City, not L&I, issues the electrical permit, how the utility disconnect and inspections fit together, who may legally do the work, and what to put in the bid.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 connected at ~03:45 PT but had no 2026-10-20 packets yet (latest approved draft and board-intake inbox packets are dated 2026-10-19; PC SEO runners wake ~09:30-09:50 PT). Topic: electrical panel / service upgrade, Federal Way WA (panel upgrades never a post topic; Federal Way never a post city). Producer role fields kept per intake contract."
+}
