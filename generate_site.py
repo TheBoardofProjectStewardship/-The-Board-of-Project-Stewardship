@@ -2689,46 +2689,6 @@ WALKTHROUGH_STAGES = [
 ]
 
 
-def home_budget_calculator_section() -> str:
-    """Budget and resale calculator, homepage section under the build walkthrough.
-
-    Moved from build-here.html (Oct 2026). Every starting value is labeled
-    Example; the math runs in assets/js/home-calculator.js.
-    """
-    fields = [
-        ("fc-price", "Purchase price ($)", "900000"),
-        ("fc-sf", "Square feet built", "700"),
-        ("fc-cps", "Construction cost per sq ft ($)", "400"),
-        ("fc-soft", "Design, permit and soft costs (% of construction)", "15"),
-        ("fc-arv", "Value after the work ($)", "1500000"),
-        ("fc-months", "Holding months", "12"),
-        ("fc-rate", "Interest rate (% per year)", "10"),
-        ("fc-ltv", "Share financed (% of all costs)", "80"),
-        ("fc-sell", "Selling costs (% of value)", "6"),
-    ]
-    inputs = "\n".join(
-        f'          <div><label class="hc-label" for="{fid}">{esc(label)} <span class="hc-example">Example</span></label>'
-        f'<input id="{fid}" class="hc-input" type="text" inputmode="decimal" autocomplete="off" value="{value}"></div>'
-        for fid, label, value in fields
-    )
-    return f"""  <section id="budget-calculator" class="mb-14" aria-labelledby="budget-calculator-h">
-    <link rel="stylesheet" href="/assets/css/home-calculator.css">
-    <div class="mb-6 border-b border-white/10 pb-4">
-      <span class="text-secondary text-xs font-bold uppercase tracking-widest">Good Steward Tools</span>
-      <h2 id="budget-calculator-h" class="text-3xl font-black text-white tracking-tight">Budget and resale calculator</h2>
-      <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Plain math on your own numbers for a remodel, addition or flip. The starting values are <strong class="text-white font-semibold">examples only</strong>, not market data or a quote. Replace every one.</p>
-    </div>
-    <div class="bg-charcoal border border-white/10 rounded-xl p-4 sm:p-6">
-      <div class="hc-grid">
-{inputs}
-      </div>
-      <div id="fc-out" class="hc-out" aria-live="polite"></div>
-      <p class="text-xs text-slate-400 font-light mt-3 leading-relaxed">Interest is simple interest on the full loan for every month, which overstates carry on a loan that draws down over time. Taxes, insurance and utilities are not included; add them to soft costs if you want them counted. To check what a lot allows first, try <a href="./build-here.html" class="text-secondary hover:underline">What can I build here?</a></p>
-    </div>
-    <script src="/assets/js/home-calculator.js" defer></script>
-  </section>"""
-
-
 def build_walkthrough_home_section(prefix: str = "") -> str:
     """Prominent homepage embed: Build Walkthrough iframe + plan-photos strip."""
     src = tools_href("build-walkthrough", prefix, "index.html")
@@ -6030,8 +5990,6 @@ def build_about() -> str:
     )}
 
 {build_walkthrough_home_section()}
-
-{home_budget_calculator_section()}
 
 {board_section_embed(
         "integrity-shield",

@@ -43,23 +43,18 @@ class BuildHereTest(unittest.TestCase):
         self.assertNotIn("fc-price", text)
         self.assertNotIn("Budget and resale calculator", text)
 
-    def test_budget_calculator_on_homepage(self):
+    def test_budget_calculator_removed(self):
         home = (ROOT / "index.html").read_text(encoding="utf-8")
-        i = home.index('id="build-walkthrough"')
-        j = home.index('id="budget-calculator"')
-        self.assertLess(i, j)
-        between = home[home.index("</section>", i) + len("</section>"):j]
-        self.assertEqual(between.split(), ["<section"])
-        sec = home[j:home.index("</section>", j)]
-        self.assertEqual(sec.count('class="hc-example">Example<'), 9)
-        self.assertIn("examples only", sec)
-        self.assertIn("not market data or a quote", sec)
-        self.assertNotIn("\u2014", sec)
-        import sys
-        sys.path.insert(0, str(ROOT))
-        import generate_site
-        self.assertIn(generate_site.home_budget_calculator_section(), home)
-        self.assertTrue((ROOT / "assets/js/home-calculator.js").exists())
+        for needle in ("budget-calculator", "hc-example", "home-calculator", "Budget and resale calculator"):
+            self.assertNotIn(needle, home)
+        self.assertIn('id="feasibility-calculator"', home)
+        self.assertIn('id="build-walkthrough"', home)
+        self.assertFalse((ROOT / "assets/js/home-calculator.js").exists())
+        self.assertFalse((ROOT / "assets/css/home-calculator.css").exists())
+        js = (ROOT / "assets/js/build-here.js").read_text(encoding="utf-8")
+        self.assertNotIn("budget-calculator", js)
+        gen = (ROOT / "generate_site.py").read_text(encoding="utf-8")
+        self.assertNotIn("home_budget_calculator", gen)
 
     def test_rules_math_and_sources(self):
         script = r"""
