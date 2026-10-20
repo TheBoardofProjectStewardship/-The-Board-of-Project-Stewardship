@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>The house, taken apart: Magnolia house, ADU and garage | Board of Project Stewardship</title>
+  <base href="https://boardofprojectstewardship.com/" target="_blank">
+  <link rel="stylesheet" href="/assets/css/scroll-house.css?v=9">
+  <style>
+    html, body { margin: 0; padding: 0; background: #0c0c0c; overflow: hidden; }
+    .scroll-house[data-sh-embed] .sh-hint { display: none !important; }
+    body { font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-text-size-adjust: 100%; }
+    .scroll-house { --sh-top: 0px; }
+    .scroll-house .sh-call, .scroll-house .sh-stages button { min-height: 44px; }
+    /* Size from width only. Heights tied to the frame height would feed back into the auto-resize. */
+    .scroll-house[data-sh-embed] .scroll-house-track,
+    .scroll-house[data-sh-embed] .scroll-house-sticky { height: auto; }
+    .scroll-house[data-sh-embed] .scroll-house-live { flex: 0 0 auto; }
+    .scroll-house[data-sh-embed] .scroll-house-sheet { flex: 0 0 auto; height: clamp(320px, 58vw, 640px); min-height: 0; }
+  </style>
+</head>
+<body>
+<main id="main-content">
+  <section class="scroll-house" id="scroll-house" data-sh-embed="1" aria-labelledby="scroll-house-title">
+    <div class="scroll-house-track">
+      <div class="scroll-house-sticky">
+        <div class="sh-top">
+          <p class="sh-kicker">Pacific Northwest · King &amp; Snohomish · Seattle</p>
+          <h1 class="sh-title" id="scroll-house-title">The house, taken apart</h1>
+          <p class="sh-dek">Start with the finished house. Tap a stage to peel the roof, the floors, and the foundation. Drag to turn it.</p>
+          <p class="sh-project">Magnolia house, ADU and garage, built and permitted by Pacific Pro Group. <a href="https://boardofprojectstewardship.com/projects/magnolia-house-adu-garage/">See the project</a></p>
+        </div>
+        <style>#scroll-house .sh-still-img{background-image:url("/projects/magnolia-house-adu-garage/magnolia-still.png")}#scroll-house.is-fallback .scroll-house-sheet{background-image:url("/projects/magnolia-house-adu-garage/magnolia-still.png")}#scroll-house .sh-top .sh-project{-webkit-text-size-adjust:100%;text-size-adjust:100%;margin:.5rem auto 0;max-width:40rem;font-size:.8125rem;line-height:1.45;color:#cbd5e1}#scroll-house .sh-project a{display:inline-block;padding:.8rem .25rem;margin:-.8rem 0;font-weight:600;text-decoration:underline;text-underline-offset:2px;color:#4ade80}#scroll-house .sh-project a:focus-visible{outline:3px solid #4ade80;outline-offset:2px;border-radius:2px}</style>
+        <ol class="sh-stages" aria-label="Build stages">
+          <li class="is-on" data-stage="house"><button type="button" data-stage="house" data-sh-progress="0.04" aria-current="step">House</button></li>
+          <li data-stage="front"><button type="button" data-stage="front" data-sh-progress="0.22">Front</button></li>
+          <li data-stage="roof"><button type="button" data-stage="roof" data-sh-progress="0.38">Roof</button></li>
+          <li data-stage="upper"><button type="button" data-stage="upper" data-sh-progress="0.56">Main</button></li>
+          <li data-stage="plan"><button type="button" data-stage="plan" data-sh-progress="0.74">ADU</button></li>
+          <li data-stage="foundation"><button type="button" data-stage="foundation" data-sh-progress="0.93">Slab</button></li>
+        </ol>
+        <div class="sh-progress" aria-hidden="true"><span></span></div>
+        <label class="sh-scrub-label">Build progress
+          <input class="sh-scrub" type="range" min="0" max="1000" step="1" value="0" aria-valuetext="House, 0 percent">
+        </label>
+        <div class="scroll-house-live">
+          <p class="sh-hint" aria-hidden="true">Scroll <span class="sh-hint-chevron">↓</span></p>
+          <div class="scroll-house-sheet">
+            <svg class="scroll-house-plan" viewBox="0 0 400 230" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+              <g fill="none" stroke="#1c1916" stroke-linejoin="round">
+                <path stroke-width="4" d="M40 30 H120 V43 H175 V16 H225 V128 H117 V148 H40 Z"/>
+                <path stroke-width="2" d="M40 30 H118 V96 H40"/>
+                <rect x="276" y="160" width="32" height="52" stroke-width="4"/>
+              </g>
+              <g fill="#1c1916" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" text-anchor="middle">
+                <text x="78" y="68">ADU</text>
+                <text x="170" y="92">House</text>
+                <text x="292" y="150">Garage</text>
+              </g>
+            </svg>
+            <canvas class="scroll-house-canvas" width="960" height="540" tabindex="0" aria-describedby="sh-explore-help" aria-label="House drawing. Press Enter or click to explore this stage: drag or arrow keys turn it, scroll, pinch or plus and minus zoom, and a room click flies into it."></canvas>
+            <div class="sh-labels" aria-hidden="true"></div>
+            <div class="sh-explore" hidden>
+              <button type="button" class="sh-explore-toggle" aria-describedby="sh-explore-help">Explore the house</button>
+              <button type="button" class="sh-zoom" data-zoom="in" aria-label="Zoom in" hidden>+</button>
+              <button type="button" class="sh-zoom" data-zoom="out" aria-label="Zoom out" hidden>−</button>
+              <button type="button" class="sh-explore-reset" hidden>Reset view</button>
+              <p id="sh-explore-help" class="sh-explore-help">Every stage can be explored. Explore turns on drag to turn, scroll or pinch to zoom toward the pointer, right-drag or two fingers to pan, and tap a room or its label to fly in. Arrow keys turn, Shift with arrow keys pans, plus and minus zoom, zero resets, and Escape ends exploring. Zooming in lifts the roof and shows room names, then fixtures. Reset view returns to the scroll camera.</p>
+            </div>
+          </div>
+          <ul class="sh-rooms" data-rooms="main" hidden>
+            <li>ADU living</li><li>ADU bedroom</li><li>ADU kitchen</li><li>ADU bath</li><li>Laundry</li><li>Existing basement</li>
+          </ul>
+          <ul class="sh-rooms" data-rooms="upper" hidden>
+            <li>Living</li><li>Dining</li><li>Kitchen</li><li>Office / craft</li><li>Bedrooms</li><li>Deck</li>
+          </ul>
+          <p class="scroll-house-line" id="scroll-house-line">The finished house, the ADU below it, and the garage. Tap a room to fly in, or drag to turn it.</p>
+        </div>
+        <figure class="scroll-house-still">
+          <div class="sh-still-img" role="img" aria-label="Line drawing of this one-story house over a basement ADU, with a deck, a porch, and a detached garage. Not a bid or stamped plan."></div>
+          <figcaption class="scroll-house-line">The finished massing, held still.</figcaption>
+        </figure>
+        <div class="sh-learn">
+          <div class="sh-learn-set" data-stage="house">
+            <button type="button" class="sh-call" data-callout="roof" aria-pressed="false" aria-controls="sh-note-roof">Roof</button>
+            <button type="button" class="sh-call" data-callout="porch" aria-pressed="false" aria-controls="sh-note-porch">Porch</button>
+            <button type="button" class="sh-call" data-callout="deck" aria-pressed="false" aria-controls="sh-note-deck">Deck</button>
+            <button type="button" class="sh-call" data-callout="garage" aria-pressed="false" aria-controls="sh-note-garage">Garage</button>
+          </div>
+          <div class="sh-learn-set" data-stage="front" hidden>
+            <button type="button" class="sh-call" data-callout="framing" aria-pressed="false" aria-controls="sh-note-framing">Framing</button>
+            <button type="button" class="sh-call" data-callout="header" aria-pressed="false" aria-controls="sh-note-header">Headers</button>
+            <button type="button" class="sh-call" data-callout="deck" aria-pressed="false" aria-controls="sh-note-deck">Deck</button>
+            <button type="button" class="sh-call" data-callout="adu" aria-pressed="false" aria-controls="sh-note-adu">ADU</button>
+          </div>
+          <div class="sh-learn-set" data-stage="roof" hidden>
+            <button type="button" class="sh-call" data-callout="roof" aria-pressed="false" aria-controls="sh-note-roof">Roof</button>
+            <button type="button" class="sh-call" data-callout="structure" aria-pressed="false" aria-controls="sh-note-structure">Structure</button>
+          </div>
+          <div class="sh-learn-set" data-stage="upper" hidden>
+            <button type="button" class="sh-call" data-callout="structure" aria-pressed="false" aria-controls="sh-note-structure">Structure</button>
+            <button type="button" class="sh-call" data-callout="stairs" aria-pressed="false" aria-controls="sh-note-stairs">Stairs</button>
+            <button type="button" class="sh-call" data-callout="partition" aria-pressed="false" aria-controls="sh-note-partition">Partitions</button>
+          </div>
+          <div class="sh-learn-set" data-stage="plan" hidden>
+            <button type="button" class="sh-call" data-callout="adu" aria-pressed="false" aria-controls="sh-note-adu">ADU</button>
+            <button type="button" class="sh-call" data-callout="foundation" aria-pressed="false" aria-controls="sh-note-foundation">Foundation</button>
+            <button type="button" class="sh-call" data-callout="partition" aria-pressed="false" aria-controls="sh-note-partition">Partitions</button>
+          </div>
+          <div class="sh-learn-set" data-stage="foundation" hidden>
+            <button type="button" class="sh-call" data-callout="footings" aria-pressed="false" aria-controls="sh-note-footings">Footings</button>
+            <button type="button" class="sh-call" data-callout="garage" aria-pressed="false" aria-controls="sh-note-garage">Garage</button>
+          </div>
+          <div class="sh-learn-copy">
+            <p class="sh-learn-prompt" id="sh-learn-prompt">Tap a label to learn what that part does.</p>
+            <p class="sh-note" id="sh-note-roof" data-callout="roof"><strong>Roof.</strong> The house gets one new low-slope roof of standing seam metal. It falls toward a gutter on the street side and overhangs the walls. The garage has its own metal roof. The plans call it a roof redesign because the old roof leaked.</p>
+            <p class="sh-note" id="sh-note-porch" data-callout="porch"><strong>Porch.</strong> The existing 60 SF open porch sits at the entry on the street side. The ADU gets a small new landing of its own at the basement level.</p>
+            <p class="sh-note" id="sh-note-deck" data-callout="deck"><strong>Deck.</strong> The existing deck runs along the main level on the downhill side, with a stair to grade. The plans replace its railings with glass railings and fold 27 SF of it into the dining room.</p>
+            <p class="sh-note" id="sh-note-adu" data-callout="adu"><strong>ADU.</strong> The new 865 SF accessory dwelling unit fills part of the existing basement, on the side where the lot falls away and the basement wall is out of the ground. It has a living room, bedroom, kitchen, bathroom, and laundry, and its own door.</p>
+            <p class="sh-note" id="sh-note-garage" data-callout="garage"><strong>Garage.</strong> A detached one-car garage, 12 by 20 feet inside, stands near the street with its own slab and a single overhead door. The plans give it a 12-foot height.</p>
+            <p class="sh-note" id="sh-note-foundation" data-callout="foundation"><strong>Foundation.</strong> The basement walls carry the house down to the footings. On the uphill side they hold back soil; on the downhill side they rise out of the ground with doors and windows.</p>
+            <p class="sh-note" id="sh-note-partition" data-callout="partition"><strong>Partitions.</strong> The inside walls divide the rooms. On a real house, check what sits on a wall before anyone takes it out. The remodel moves several of them.</p>
+            <p class="sh-note" id="sh-note-framing" data-callout="framing"><strong>Framing.</strong> Studs stand between a bottom plate and a top plate. That skeleton is the frame. Siding and the glass go on it later.</p>
+            <p class="sh-note" id="sh-note-header" data-callout="header"><strong>Headers.</strong> The tall windows and doors on the deck side take studs out of the wall. A header, a short beam across each opening, carries that load to the studs on both sides. This sketch does not size them.</p>
+            <p class="sh-note" id="sh-note-footings" data-callout="footings"><strong>Footings.</strong> The house and the garage send weight down their walls into the footings. Those footings have to suit that load. This sketch does not size them.</p>
+            <p class="sh-note" id="sh-note-structure" data-callout="structure"><strong>Structure.</strong> The main level sits on the basement walls: a floor, walls, and the roof above. A new roof has to tie into the frame already there.</p>
+            <p class="sh-note" id="sh-note-stairs" data-callout="stairs"><strong>Stairs.</strong> The existing stair runs from the main level down to the basement. A stair needs a clear path, headroom, and a rail.</p>
+          </div>
+          <p class="sh-learn-aside sh-key"><span aria-hidden="true" style="display:inline-block;width:.8em;height:.8em;margin-right:.35em;vertical-align:-.05em;background:#8cc2b3;border:1px solid #3f8f7c"></span>Green-gray marks new work: the 27 SF dining addition, the new entry door with side lites, the new egress window, the glass deck railings, the electric fireplace and the ADU entry door. Furniture is drawn paler: it is placed only to show scale, and the permit sheets do not show it. Zoom in to see cabinet doors, faucets, trim and floor joints.</p>
+          <p class="sh-learn-aside">Teaching sketch. Not a structural design.</p>
+        </div>
+        <div class="scroll-house-cta">
+          <div class="sh-cta-row">
+            <a class="sh-btn" href="https://boardofprojectstewardship.com/#bh-home">What can I build here?</a>
+            <a class="sh-link" href="https://boardofprojectstewardship.com/plan-walkthrough/">Plan walkthrough</a>
+            <a class="sh-link" href="https://boardofprojectstewardship.com/learn/">How a house is built</a>
+          </div>
+          <p class="sh-fine">Illustrative concept. Not a bid or stamped plan.</p>
+        </div>
+      </div>
+    </div>
+    <noscript>
+      <style>
+        .scroll-house-track { height: auto !important; }
+        .scroll-house-sticky { position: relative !important; top: auto !important; height: auto !important; }
+        .scroll-house-live, .sh-progress, .sh-hint, .sh-learn-set, .sh-learn-prompt { display: none !important; }
+        .scroll-house-still, .sh-note { display: block !important; }
+      </style>
+    </noscript>
+    <script>
+    (function () {
+      var root = document.getElementById("scroll-house");
+      if (!root) return;
+      var mq = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+      function load() {
+        if (root.getAttribute("data-js") === "1") return;
+        root.setAttribute("data-js", "1");
+        var s = document.createElement("script");
+        s.src = "/assets/js/scroll-house-magnolia.js?v=9";
+        document.body.appendChild(s);
+      }
+      function sync() {
+        if (mq && mq.matches) {
+          root.classList.add("is-still");
+          return;
+        }
+        root.classList.remove("is-still");
+        if (!("IntersectionObserver" in window)) { load(); return; }
+        if (root.getAttribute("data-js") === "1") return;
+        var io = new IntersectionObserver(function (entries) {
+          for (var i = 0; i < entries.length; i++) {
+            if (entries[i].isIntersecting) { load(); io.disconnect(); break; }
+          }
+        }, { rootMargin: "160px" });
+        io.observe(root);
+      }
+      if (mq && mq.addEventListener) mq.addEventListener("change", sync);
+      sync();
+    })();
+    </script>
+  </section>
+</main>
+  <script>
+  (function () {
+    if (window.parent === window) return;
+    var last = 0;
+    function send() {
+      // Measure the content, not the viewport, so the frame can shrink as well as grow.
+      var main = document.getElementById("main-content");
+      var h = Math.ceil(main ? main.getBoundingClientRect().height : document.body.scrollHeight);
+      if (Math.abs(h - last) < 2) return;
+      last = h;
+      window.parent.postMessage({ type: "bops-magnolia:resize", height: h }, "*");
+    }
+    var target = document.getElementById("main-content") || document.body;
+    if ("ResizeObserver" in window) new ResizeObserver(send).observe(target);
+    window.addEventListener("message", function (e) {
+      if (e.source === window.parent && e.data === "bops-magnolia:ping") { last = 0; send(); }
+    });
+    window.addEventListener("load", send);
+    send();
+  })();
+  </script>
+</body>
+</html>

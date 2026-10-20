@@ -1275,7 +1275,10 @@ function createRenderer(canvas, options) {
         root.classList.add("is-flow");
         return;
       }
-      var fits = contentFits();
+      // Embedded in an iframe (embed/magnolia-house.html): no page scroll to
+      // drive the peel, so stay in flow mode where stage buttons, the
+      // scrubber and drag set the stage directly.
+      var fits = root.hasAttribute("data-sh-embed") ? false : contentFits();
       root.classList.toggle("is-enhanced", fits);
       root.classList.toggle("is-flow", !fits);
       if (fits) manual = null;

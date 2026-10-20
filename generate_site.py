@@ -2016,6 +2016,7 @@ def finalize_published_html() -> None:
             "tools/build-walkthrough/index.html",
             "tools/another-story/embed-snippet.html",
             "sections/scroll-house.html",
+            MAGNOLIA_EMBED_PATH,
         }:
             continue
         text = path.read_text(encoding="utf-8")
@@ -8772,6 +8773,102 @@ Verification meta tags are a commented config in `generate_site.py` (`GOOGLE_SIT
 Rankings researched / updated **{YEAR}**.
 """
     (SITE_DIR / "README.md").write_text(text, encoding="utf-8")
+
+
+MAGNOLIA_EMBED_PATH = "embed/magnolia-house.html"
+
+
+def magnolia_embed_html() -> str:
+    """Chrome-free page with only the 3D Magnolia model (#scroll-house), for iframes.
+
+    Built from the same block the homepage shows. data-sh-embed puts the
+    model in flow mode, so the stage buttons, scrubber and drag drive it
+    without page scroll. Links open on the Board site in a new tab, and the
+    page posts its height to the parent for auto-sizing.
+    """
+    fragment, css = home_scroll_house()
+    fragment = fragment.replace(
+        '<section class="scroll-house" id="scroll-house"',
+        '<section class="scroll-house" id="scroll-house" data-sh-embed="1"',
+        1,
+    )
+    # The page's own heading: the model title becomes the H1 of this document.
+    fragment = fragment.replace(
+        '<p class="sh-title" id="scroll-house-title">The house, taken apart</p>',
+        '<h1 class="sh-title" id="scroll-house-title">The house, taken apart</h1>',
+        1,
+    )
+    fragment = fragment.replace(
+        "Start with the finished house. Scroll peels the roof, the floors, and the foundation.",
+        "Start with the finished house. Tap a stage to peel the roof, the floors, and the foundation. Drag to turn it.",
+        1,
+    )
+
+    def absolutize(match: re.Match) -> str:
+        url = match.group(2)
+        if url.startswith("#"):
+            url = BASE_URL + url
+        elif url.startswith("./"):
+            url = BASE_URL + url[2:]
+        elif url.startswith("/") and not url.startswith("//"):
+            url = SITE_ORIGIN + url
+        return f'{match.group(1)}"{url}"'
+
+    fragment = re.sub(r'(\shref=)"([^"]*)"', absolutize, fragment)
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>The house, taken apart: Magnolia house, ADU and garage | Board of Project Stewardship</title>
+  <base href="{BASE_URL}" target="_blank">
+{css}  <style>
+    html, body {{ margin: 0; padding: 0; background: #0c0c0c; overflow: hidden; }}
+    .scroll-house[data-sh-embed] .sh-hint {{ display: none !important; }}
+    body {{ font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-text-size-adjust: 100%; }}
+    .scroll-house {{ --sh-top: 0px; }}
+    .scroll-house .sh-call, .scroll-house .sh-stages button {{ min-height: 44px; }}
+    /* Size from width only. Heights tied to the frame height would feed back into the auto-resize. */
+    .scroll-house[data-sh-embed] .scroll-house-track,
+    .scroll-house[data-sh-embed] .scroll-house-sticky {{ height: auto; }}
+    .scroll-house[data-sh-embed] .scroll-house-live {{ flex: 0 0 auto; }}
+    .scroll-house[data-sh-embed] .scroll-house-sheet {{ flex: 0 0 auto; height: clamp(320px, 58vw, 640px); min-height: 0; }}
+  </style>
+</head>
+<body>
+<main id="main-content">
+{fragment}</main>
+  <script>
+  (function () {{
+    if (window.parent === window) return;
+    var last = 0;
+    function send() {{
+      // Measure the content, not the viewport, so the frame can shrink as well as grow.
+      var main = document.getElementById("main-content");
+      var h = Math.ceil(main ? main.getBoundingClientRect().height : document.body.scrollHeight);
+      if (Math.abs(h - last) < 2) return;
+      last = h;
+      window.parent.postMessage({{ type: "bops-magnolia:resize", height: h }}, "*");
+    }}
+    var target = document.getElementById("main-content") || document.body;
+    if ("ResizeObserver" in window) new ResizeObserver(send).observe(target);
+    window.addEventListener("message", function (e) {{
+      if (e.source === window.parent && e.data === "bops-magnolia:ping") {{ last = 0; send(); }}
+    }});
+    window.addEventListener("load", send);
+    send();
+  }})();
+  </script>
+</body>
+</html>
+"""
+
+
+def write_magnolia_embed() -> None:
+    path = SITE_DIR / MAGNOLIA_EMBED_PATH
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(magnolia_embed_html(), encoding="utf-8")
 
 
 def write_robots() -> None:
@@ -17972,6 +18069,7 @@ def main(argv: list[str] | None = None) -> None:
     emit_stamp_of_trust_page()
     write_readme(posts)
     write_robots()
+    write_magnolia_embed()
     write_llms_txt()
     write_posts_json(posts)
     write_rss(posts)
