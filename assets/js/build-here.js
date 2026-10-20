@@ -170,7 +170,8 @@
         var a = f.attributes;
         s.parcel = a.PIN; s.rings = f.geometry && f.geometry.rings;
         s.assessorUrl = "https://blue.kingcounty.com/Assessor/eRealProperty/Detail.aspx?ParcelNbr=" + a.PIN;
-        s.lot = a.LOTSQFT || (s.rings ? Math.round(polyAreaSqft(s.rings)) : null); s.lotSrc = "King County Assessor (LOTSQFT)";
+        if (a.LOTSQFT) { s.lot = a.LOTSQFT; s.lotSrc = "King County Assessor (LOTSQFT)"; }
+        else if (s.rings) { s.lot = Math.round(polyAreaSqft(s.rings)); s.lotSrc = "Computed from the county parcel outline (the assessor lot size was blank)"; }
         s.zone = (a.KCA_ZONING || "").trim(); s.zoneSrc = "King County Assessor zoning field";
         s.presentUse = (a.PREUSE_DESC || "").trim();
         log(s, true, "King County parcels (KingCo_PropertyInfo)");
@@ -210,7 +211,7 @@
               var c = b.geometry.rings[0][0];
               if (s.rings.some(function (r) { return b.geometry.rings[0].some(function (pt) { return inRing(pt, r); }); })) total += polyAreaSqft(b.geometry.rings);
             });
-            if (total > 0) { s.footprint = Math.round(total); s.footprintSrc = "Snohomish County mapped roof outlines (not floor area)"; }
+            if (total > 0) { s.footprint = Math.round(total); s.footprintSrc = "Snohomish County mapped roof outlines (includes eaves, so it can read high for coverage; not floor area)"; }
             log(s, true, "Snohomish County roof outlines");
           }).catch(function (e) { log(s, false, "Snohomish County roof outlines", e.message); });
       })
@@ -487,10 +488,12 @@
     var lines = ce.edges.map(function (e) {
       return '<line x1="' + f1(X(e.a[0])) + '" y1="' + f1(Y(e.a[1])) + '" x2="' + f1(X(e.b[0])) + '" y2="' + f1(Y(e.b[1])) + '" class="bh-edge bh-edge-' + e.kind + '"/>';
     }).join("");
-    var env = "", envArea = null;
+    var env = "", envArea = null, envC = null, ecx = 0, ecy = 0;
     if (known) {
       var er = envelopeRows(ring, ce.edges, function (e) { return e.kind === "front" ? F : e.kind === "rear" ? Rr : S; });
       envArea = er.area;
+      var ca = 0; er.rows.forEach(function (r) { var a = r[2] * r[3]; ca += a; ecx += (r[0] + r[2] / 2) * a; ecy += (r[1] + r[3] / 2) * a; });
+      if (ca) { ecx /= ca; ecy /= ca; envC = [ecx, ecy]; }
       if (er.rows.length) {
         var d = er.rows.map(function (r) { return "M" + f1(X(r[0])) + " " + f1(Y(r[1] + r[3])) + "h" + f1(r[2] * sc + 0.4) + "v" + f1(r[3] * sc + 0.4) + "h" + f1(-(r[2] * sc + 0.4)) + "z"; }).join("");
         env = '<path d="' + d + '" class="bh-env"/>';
@@ -502,13 +505,19 @@
     var label = function (v) { return typeof v === "number" ? v + " ft" : "verify"; };
     var cx = 0, cy = 0, cn = 0;
     ring.slice(0, -1).forEach(function (p) { cx += p[0]; cy += p[1]; cn++; });
+    // Envelope label at the envelope's own centroid; nudge it clear of the street label.
+    var elx = clamp(envC ? X(envC[0]) : X(cx / cn), 80, W - 80), ely = clamp(envC ? Y(envC[1]) : Y(cy / cn), 20, H - 34);
+    var tw = function (t) { return t.length * 6.2; };
+    var streetTxt = "Street side, front " + label(F);
+    for (var tries = 0; tries < 8 && Math.abs(ely - ly) < 16 && Math.abs(elx - lx) < (tw(streetTxt) + 160) / 2; tries++) ely = clamp(ely + (ely >= ly ? 18 : -18), 20, H - 34);
+    if (Math.abs(ely - ly) < 16 && Math.abs(elx - lx) < (tw(streetTxt) + 160) / 2) ely = ly > H / 2 ? ly - 22 : ly + 22;
     var envText = envArea != null ? (envArea > 0 ? "Envelope about " + fmt(Math.round(envArea / 10) * 10) + " sf" : "No envelope left after setbacks") : "Setbacks not verified";
     return '<svg viewBox="0 0 ' + W + " " + H + '" class="bh-siteplan" role="img" aria-label="Diagrammatic site plan: parcel outline, front, side and rear setbacks, and the remaining buildable envelope. ' + esc(envText) + '.">' +
       '<path d="' + poly + '" class="bh-lot"/>' + env + lines +
-      '<text x="' + f1(lx) + '" y="' + f1(ly) + '" class="bh-front" text-anchor="middle">Street side, front ' + label(F) + '</text>' +
-      '<text x="' + f1(clamp(X(cx / cn), 80, W - 80)) + '" y="' + f1(clamp(Y(cy / cn), 20, H - 34)) + '" class="bh-envlabel" text-anchor="middle">' + esc(envText) + '</text>' +
-      '<g class="bh-north" transform="translate(' + (W - 24) + ',30)"><path d="M0 -14 L6 4 L0 0 L-6 4 Z"/><text y="18" text-anchor="middle">N</text></g>' +
-      '<text x="12" y="' + (H - 10) + '" class="bh-note" text-anchor="start"><tspan class="bh-k-front">Front ' + label(F) + '</tspan>  <tspan class="bh-k-side">Side ' + label(S) + '</tspan>  <tspan class="bh-k-rear">Rear ' + label(Rr) + '</tspan>  Scale approximate</text>' +
+      '<text x="' + f1(lx) + '" y="' + f1(ly) + '" class="bh-front" text-anchor="middle" aria-hidden="true">Street side, front ' + label(F) + '</text>' +
+      '<text x="' + f1(elx) + '" y="' + f1(ely) + '" class="bh-envlabel" text-anchor="middle" aria-hidden="true">' + esc(envText) + '</text>' +
+      '<g class="bh-north" aria-hidden="true" transform="translate(' + (W - 24) + ',30)"><path d="M0 -14 L6 4 L0 0 L-6 4 Z"/><text y="18" text-anchor="middle">N</text></g>' +
+      '<text x="12" y="' + (H - 10) + '" class="bh-note" text-anchor="start" aria-hidden="true"><tspan class="bh-k-front">Front ' + label(F) + '</tspan>  <tspan class="bh-k-side">Side ' + label(S) + '</tspan>  <tspan class="bh-k-rear">Rear ' + label(Rr) + '</tspan>  Scale approximate</text>' +
       "</svg>";
   }
 
@@ -530,8 +539,8 @@
 
   function render() {
     var s = state;
-    var v = { lot: num("bh-lot"), zone: $("bh-zone").value.trim(), existing: num("bh-existing"), footprint: num("bh-footprint"), imperv: num("bh-imperv"), front: $("bh-front").value, stories: parseInt($("bh-stories").value, 10) || 1, type: $("bh-type").value };
-    var rs = v.lot && ["seattle", "kc", "sno", "edmonds", "kenmore"].indexOf(s.juris) >= 0 ? R.pick({ juris: s.juris, zone: v.zone, lot: v.lot, units: 1 }) : null;
+    var v = { lot: num("bh-lot"), zone: $("bh-zone").value.trim(), existing: num("bh-existing"), footprint: num("bh-footprint"), imperv: num("bh-imperv"), front: $("bh-front").value, units: parseInt($("bh-units").value, 10) || 1, stories: parseInt($("bh-stories").value, 10) || 1, type: $("bh-type").value };
+    var rs = v.lot && ["seattle", "kc", "sno", "edmonds", "kenmore"].indexOf(s.juris) >= 0 ? R.pick({ juris: s.juris, zone: v.zone, lot: v.lot, units: v.units }) : null;
     s.frontDir = v.front || "";
     var out = [];
     var place = s.city ? s.city.toUpperCase() : (s.county || "").replace(" County", "").toUpperCase() + " COUNTY";
@@ -653,7 +662,7 @@
 
   /* ---------- budget calculator ---------- */
   function calc() {
-    var g = function (id) { var x = parseFloat($(id).value); return isFinite(x) ? x : 0; };
+    var g = function (id) { var x = parseFloat(String($(id).value).replace(/[$,\s]/g, "")); return isFinite(x) ? x : 0; };
     var price = g("fc-price"), cps = g("fc-cps"), sf = g("fc-sf"), arv = g("fc-arv"), months = g("fc-months"), rate = g("fc-rate") / 100, ltv = g("fc-ltv") / 100, sell = g("fc-sell") / 100, soft = g("fc-soft") / 100;
     var build = cps * sf, softC = build * soft, basis = price + build + softC;
     var loan = basis * ltv;
@@ -671,9 +680,25 @@
     e.preventDefault();
     var f = e.target;
     if (f.company_website && f.company_website.value) return;
-    var body = ["Build-here report request", "Name: " + f.name.value, "Email: " + f.email.value, "Phone: " + f.phone.value, "Address: " + f.address.value, "Project type: " + $("bh-type").value, "Notes: " + f.note.value, "", "Sent from boardofprojectstewardship.com/build-here.html"].join("\n");
-    window.location.href = "mailto:editorial@boardofprojectstewardship.com?subject=" + encodeURIComponent("Build-here question: " + f.address.value) + "&body=" + encodeURIComponent(body);
-    $("bh-lead-status").textContent = "Your email app should open with the message filled in. Nothing is sent until you press send there.";
+    var facts = [];
+    if (state) {
+      if (state.parcel) facts.push("Parcel: " + state.parcel);
+      if (state.jurisLabel) facts.push("Jurisdiction: " + state.jurisLabel);
+      var lotv = num("bh-lot"), zv = $("bh-zone").value.trim(), exv = num("bh-existing");
+      if (lotv) facts.push("Lot: " + Math.round(lotv) + " sf");
+      if (zv) facts.push("Zone: " + zv);
+      if (exv) facts.push("Existing house: " + Math.round(exv) + " sf");
+    }
+    var body = ["Build-here report request", "Name: " + f.name.value, "Email: " + f.email.value, "Phone: " + f.phone.value, "Address: " + f.address.value, "Project type: " + $("bh-type").selectedOptions[0].text, "Notes: " + f.note.value, "", facts.length ? "From the report (public records, unverified):\n" + facts.join("\n") : "", "", "Sent from boardofprojectstewardship.com/build-here.html"].join("\n");
+    var subject = "Build-here question: " + (f.address.value || "no address");
+    var href = "mailto:editorial@boardofprojectstewardship.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+    window.location.href = href;
+    var st = $("bh-lead-status");
+    st.innerHTML = "Your email app should open with the message filled in. Nothing is sent until you press send there. No email app? <button type=\"button\" class=\"bh-linkbtn\" id=\"bh-lead-copy\">Copy the message</button> and send it to <a href=\"mailto:editorial@boardofprojectstewardship.com\">editorial@boardofprojectstewardship.com</a>.";
+    $("bh-lead-copy").addEventListener("click", function () {
+      var done = function () { $("bh-lead-copy").textContent = "Copied"; };
+      if (navigator.clipboard) navigator.clipboard.writeText(subject + "\n\n" + body).then(done, function () {}); 
+    });
   }
 
   function setStatus(t) { $("bh-status").textContent = t; }

@@ -39,7 +39,7 @@
 .bh-table thead th{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#166534;border-bottom:2px solid #166534}
 .bh-rules th[scope=row]{width:24%}
 .bh-total th,.bh-total td{font-weight:800;color:#102a1c}
-.bh-muted{color:#616e7c!important;font-size:.8rem!important}
+.bh-muted{color:#52606d!important;font-size:.8rem!important}
 .bh-verify{color:#8a4b08!important;font-weight:700}
 .bh-flags li{margin-bottom:.35rem}
 .bh-cover{display:flex;flex-direction:column;justify-content:center;min-height:30rem;text-align:center}
@@ -92,3 +92,5 @@
 .bh-siteplan{max-width:100%;height:auto}
 @media screen and (max-width:699px){.bh-page .bh-table:not(.bh-rules){display:block;overflow-x:auto}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.bh-envlabel,.bh-front{paint-order:stroke;stroke:#fbfaf7;stroke-width:4px;stroke-linejoin:round}
+.bh-linkbtn{background:none;border:0;padding:0;color:#4ade80;text-decoration:underline;font:inherit;cursor:pointer;min-height:24px}

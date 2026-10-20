@@ -176,26 +176,29 @@
   }
 
   /* ---- City of Kenmore R-4 and R-6 (KMC 18.21.030 Table B) ---- */
-  var KEN = { "R-4": { imp: 0.45, impMax: 0.55, h: 35 }, "R-6": { imp: 0.60, impMax: 0.70, h: 35 } };
+  var KEN = { "R-1": { imp: 0.30, impMax: 0.30, h: 35, street: 20, side: 5, rear: 5 }, "R-4": { imp: 0.45, impMax: 0.55, h: 35, street: 15, side: 7.5, rear: 20 }, "R-6": { imp: 0.60, impMax: 0.70, h: 35, street: 15, side: 7.5, rear: 20 } };
   function kenmore(v) {
+    // Table B note 7: an R-1 lot under 15,000 sf uses the R-4 standards.
+    if (v.zone === "R-1" && v.lot && v.lot < 15000) return kenmore({ lot: v.lot, zone: "R-4", from: "R-1" });
     var z = KEN[v.zone];
     if (!z || !v.lot) return null;
     var imp = Math.round(z.imp * v.lot), impMax = Math.round(z.impMax * v.lot);
     return {
-      key: "kenmore", title: "City of Kenmore, " + v.zone,
+      key: "kenmore", title: "City of Kenmore, " + (v.from ? v.from + " (R-4 standards apply on lots under 15,000 sf, Table B note 7)" : v.zone),
       floorCap: null, floorCapLabel: "Table B sets no floor area ratio. Setbacks, height and impervious surface limit size.",
       coverage: null, impervious: imp, imperviousMax: impMax,
-      setbacks: { front: 15, rear: 20, side: 7.5 },
-      sideNote: "5 ft minimum each side, 15 ft combined. The diagram splits it 7.5 ft and 7.5 ft; you can shift it, say 5 ft and 10 ft.",
+      setbacks: { front: z.street, rear: z.rear, side: z.side },
+      sideNote: v.zone === "R-1" ? "" : "5 ft minimum each side, 15 ft combined. The diagram splits it 7.5 ft and 7.5 ft; you can shift it, say 5 ft and 10 ft.",
       rules: [
-        rule("Street setback", "15 ft", SRC.kmc21030, "Note 8: 10 ft if the development provides alleys or is townhouses."),
+        rule("Street setback", z.street + " ft", SRC.kmc21030, v.zone === "R-1" ? "" : "Note 8: 10 ft if the development provides alleys or is townhouses."),
         rule("Garage driveway apron", "At least 20 linear ft of driveway between a garage, carport or fenced parking area and the street line", SRC.kmc21030, "Note 9, measured along the driveway centerline. A shop with a vehicle door facing the street should plan for this."),
-        rule("Side setbacks", "5 ft minimum each side, 15 ft combined", SRC.kmc21030, "Note 11."),
-        rule("Rear setback", "20 ft", SRC.kmc21030),
+        rule("Side setbacks", v.zone === "R-1" ? "5 ft" : "5 ft minimum each side, 15 ft combined", SRC.kmc21030, v.zone === "R-1" ? "" : "Note 11."),
+        rule("Rear setback", z.rear + " ft", SRC.kmc21030),
         rule("Maximum height", "35 ft", SRC.kmc21030),
         rule("Impervious surface", Math.round(z.imp * 100) + "% base = " + fmt(imp) + " sf; " + Math.round(z.impMax * 100) + "% maximum = " + fmt(impMax) + " sf", SRC.kmc21030, "Note 14: applies to each lot. The higher number needs approved low impact development measures. Roofs, driveways, patios and walks all count.", imp),
-        rule("Density", v.zone === "R-4" ? "4 units per acre base, 6 maximum with incentives" : "6 units per acre base, 9 maximum with incentives", SRC.kmc21030),
-        verify("Accessory structure and ADU limits", SRC.kmc21030, "Kenmore accessory building and ADU size rules are in other KMC chapters we did not verify for this release. Verify with Kenmore Development Services."),
+        rule("Density", v.zone === "R-1" ? "1 unit per acre" : v.zone === "R-4" ? "4 units per acre base, 6 maximum with incentives" : "6 units per acre base, 9 maximum with incentives", SRC.kmc21030),
+        rule("ADUs (state law)", "Cities inside the urban growth area must allow two ADUs per lot", SRC.hb1337, "RCW 36.70A.681, from HB 1337. Kenmore's own ADU size and design limits are in a KMC chapter we did not verify; ask Kenmore Development Services."),
+        verify("Accessory building size limits", SRC.kmc21030, "Kenmore accessory building rules are in other KMC chapters we did not verify for this release. Verify with Kenmore Development Services."),
         verify("Critical areas buffers and setbacks", SRC.kmcCrit, "If the site is in or near a landslide or erosion hazard area, Kenmore's critical areas code can add buffers, building setbacks and a geotechnical report. Verify with the city.")
       ],
       sources: [SRC.kmc21030, SRC.kmcCrit, SRC.kmcSmp]

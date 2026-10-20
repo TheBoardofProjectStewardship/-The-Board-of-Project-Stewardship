@@ -52,7 +52,11 @@ class BuildHereTest(unittest.TestCase):
           kc: R.pick({juris:'kc', zone:'R6', lot:7200}),
           sno: R.pick({juris:'sno', zone:'R-5', lot:217800}),
           snoUrban: R.pick({juris:'sno', zone:'R-7200', lot:7200}),
-          other: R.pick({juris:'other', zone:'R-1', lot:7200})
+          other: R.pick({juris:'other', zone:'R-1', lot:7200}),
+          surber2: R.pick({juris:'seattle', zone:'NR1', lot:6216, units:2}),
+          ken4: R.pick({juris:'kenmore', zone:'R4', lot:15603}),
+          ken1small: R.pick({juris:'kenmore', zone:'R-1', lot:12000}),
+          ken1: R.pick({juris:'kenmore', zone:'R-1', lot:20000})
         };
         console.log(JSON.stringify(out));
         """
@@ -65,11 +69,18 @@ class BuildHereTest(unittest.TestCase):
         self.assertEqual(data["kc"]["impervious"], 5040)
         self.assertEqual(data["sno"]["coverage"], 76230)
         self.assertIsNone(data["other"])
+        self.assertEqual(data["surber2"]["floorCap"], 4973)
+        self.assertEqual(data["ken4"]["impervious"], 7021)
+        self.assertEqual(data["ken4"]["imperviousMax"], 8582)
+        self.assertEqual(data["ken4"]["setbacks"], {"front": 15, "rear": 20, "side": 7.5})
+        self.assertEqual(data["ken1small"]["setbacks"]["rear"], 20)
+        self.assertEqual(data["ken1"]["setbacks"], {"front": 20, "rear": 5, "side": 5})
+        self.assertEqual(data["ken1"]["impervious"], 6000)
         self.assertTrue(all(r["value"] is None for r in data["snoUrban"]["rules"][:2]))
-        for key in ("surber", "edm", "kc", "sno", "snoUrban"):
+        for key in ("surber", "edm", "kc", "sno", "snoUrban", "ken4"):
             for rule in data[key]["rules"]:
                 self.assertTrue(rule["src"]["url"].startswith("https://"), rule)
-                self.assertTrue(re.search(r"seattle\.gov|municode\.com|kingcounty\.gov|edmonds\.municipal\.codes|snohomish\.county\.codes", rule["src"]["url"]), rule)
+                self.assertTrue(re.search(r"seattle\.gov|municode\.com|kingcounty\.gov|edmonds\.municipal\.codes|snohomish\.county\.codes|codepublishing\.com|leg\.wa\.gov", rule["src"]["url"]), rule)
 
 
 if __name__ == "__main__":

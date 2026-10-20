@@ -29,6 +29,64 @@
   <link rel="preload" href="/assets/fonts/InterLatin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/css/site.css">
   <link rel="stylesheet" href="/assets/css/build-here.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://boardofprojectstewardship.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Permits",
+      "item": "https://boardofprojectstewardship.com/permits.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "What can I build here?",
+      "item": "https://boardofprojectstewardship.com/build-here.html"
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "@id": "https://boardofprojectstewardship.com/build-here.html#app",
+  "name": "What can I build here? Lot feasibility report",
+  "url": "https://boardofprojectstewardship.com/build-here.html",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any (web browser)",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "areaServed": [
+    {
+      "@type": "AdministrativeArea",
+      "name": "King County, Washington"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Snohomish County, Washington"
+    }
+  ],
+  "description": "Free first-pass lot feasibility report from public county records: zone, parcel, lot size, cited setbacks, floor area and ADU rules, red flags, a site plan diagram and a budget calculator. Planning estimate only.",
+  "publisher": {
+    "@id": "https://boardofprojectstewardship.com/#organization"
+  },
+  "dateModified": "2026-10-20"
+}
+  </script>
 </head>
 <body class="bg-obsidian bg-grid-pattern min-h-screen antialiased">
   <a href="#main-content" class="skip-link">Skip to content</a>
@@ -103,6 +161,7 @@
           <div><label class="bh-label" for="bh-footprint">Building footprint (sq ft)</label><input id="bh-footprint" class="bh-input" inputmode="numeric" aria-describedby="bh-footprint-src"><p id="bh-footprint-src" class="bh-help"></p></div>
           <div><label class="bh-label" for="bh-imperv">Existing impervious surface (sq ft)</label><input id="bh-imperv" class="bh-input" inputmode="numeric" aria-describedby="bh-imperv-src"><p id="bh-imperv-src" class="bh-help">Optional. Roofs, driveway, patios and walks. Used where the zone caps impervious surface.</p></div>
           <div><label class="bh-label" for="bh-front">Street side of the lot</label><select id="bh-front" class="bh-input" aria-describedby="bh-front-help"><option value="">Guess from the address point</option><option value="N">North</option><option value="E">East</option><option value="S">South</option><option value="W">West</option></select><p id="bh-front-help" class="bh-help">Sets which lot line gets the front setback on the site plan.</p></div>
+          <div><label class="bh-label" for="bh-units">Homes on the lot after the project</label><select id="bh-units" class="bh-input" aria-describedby="bh-units-help"><option value="1">1 (one house)</option><option value="2">2 (house plus ADU, or a duplex)</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select><p id="bh-units-help" class="bh-help">Counts the house and any ADUs. In Seattle more homes on a lot raise the floor area limit.</p></div>
           <div><label class="bh-label" for="bh-stories">Existing stories</label><select id="bh-stories" class="bh-input"><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
           <div><label class="bh-label" for="bh-type">Project type</label><select id="bh-type" class="bh-input"><option value="addition">Addition</option><option value="shop">Shop or garage (attached or detached)</option><option value="adu">ADU or detached ADU</option><option value="teardown">Teardown and new house</option><option value="remodel">Remodel inside the existing house</option></select></div>
         </div>
@@ -119,15 +178,15 @@
       <h2 id="fc-h">Budget and resale calculator</h2>
       <p class="text-sm">Plain math on your own numbers. The starting values are <strong>examples only</strong>, not market data or a quote. Replace every one.</p>
       <div class="bh-grid">
-        <div><label class="bh-label" for="fc-price">Purchase price ($) <span class="bh-example">Example</span></label><input id="fc-price" class="bh-input" type="number" min="0" step="1000" value="900000"></div>
-        <div><label class="bh-label" for="fc-sf">Square feet built <span class="bh-example">Example</span></label><input id="fc-sf" class="bh-input" type="number" min="0" step="10" value="700"></div>
-        <div><label class="bh-label" for="fc-cps">Construction cost per sq ft ($) <span class="bh-example">Example</span></label><input id="fc-cps" class="bh-input" type="number" min="0" step="5" value="400"></div>
-        <div><label class="bh-label" for="fc-soft">Design, permit and soft costs (% of construction) <span class="bh-example">Example</span></label><input id="fc-soft" class="bh-input" type="number" min="0" step="1" value="15"></div>
-        <div><label class="bh-label" for="fc-arv">Value after the work ($) <span class="bh-example">Example</span></label><input id="fc-arv" class="bh-input" type="number" min="0" step="1000" value="1500000"></div>
-        <div><label class="bh-label" for="fc-months">Holding months <span class="bh-example">Example</span></label><input id="fc-months" class="bh-input" type="number" min="0" step="1" value="12"></div>
-        <div><label class="bh-label" for="fc-rate">Interest rate (% per year) <span class="bh-example">Example</span></label><input id="fc-rate" class="bh-input" type="number" min="0" step="0.25" value="10"></div>
-        <div><label class="bh-label" for="fc-ltv">Share financed (% of all costs) <span class="bh-example">Example</span></label><input id="fc-ltv" class="bh-input" type="number" min="0" max="100" step="1" value="80"></div>
-        <div><label class="bh-label" for="fc-sell">Selling costs (% of value) <span class="bh-example">Example</span></label><input id="fc-sell" class="bh-input" type="number" min="0" step="0.5" value="6"></div>
+        <div><label class="bh-label" for="fc-price">Purchase price ($) <span class="bh-example">Example</span></label><input id="fc-price" class="bh-input" type="text" inputmode="decimal" value="900000"></div>
+        <div><label class="bh-label" for="fc-sf">Square feet built <span class="bh-example">Example</span></label><input id="fc-sf" class="bh-input" type="text" inputmode="decimal" value="700"></div>
+        <div><label class="bh-label" for="fc-cps">Construction cost per sq ft ($) <span class="bh-example">Example</span></label><input id="fc-cps" class="bh-input" type="text" inputmode="decimal" value="400"></div>
+        <div><label class="bh-label" for="fc-soft">Design, permit and soft costs (% of construction) <span class="bh-example">Example</span></label><input id="fc-soft" class="bh-input" type="text" inputmode="decimal" value="15"></div>
+        <div><label class="bh-label" for="fc-arv">Value after the work ($) <span class="bh-example">Example</span></label><input id="fc-arv" class="bh-input" type="text" inputmode="decimal" value="1500000"></div>
+        <div><label class="bh-label" for="fc-months">Holding months <span class="bh-example">Example</span></label><input id="fc-months" class="bh-input" type="text" inputmode="decimal" value="12"></div>
+        <div><label class="bh-label" for="fc-rate">Interest rate (% per year) <span class="bh-example">Example</span></label><input id="fc-rate" class="bh-input" type="text" inputmode="decimal" value="10"></div>
+        <div><label class="bh-label" for="fc-ltv">Share financed (% of all costs) <span class="bh-example">Example</span></label><input id="fc-ltv" class="bh-input" type="text" inputmode="decimal" value="80"></div>
+        <div><label class="bh-label" for="fc-sell">Selling costs (% of value) <span class="bh-example">Example</span></label><input id="fc-sell" class="bh-input" type="text" inputmode="decimal" value="6"></div>
       </div>
       <div id="fc-out" class="bh-page" style="min-height:0;margin-top:1rem;padding:1rem 1.25rem" aria-live="polite"></div>
       <p class="bh-help">Interest is simple interest on the full loan for every month, which overstates carry on a loan that draws down over time. Taxes, insurance and utilities are not included; add them to soft costs if you want them counted.</p>
