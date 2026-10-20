@@ -224,7 +224,7 @@
     var url = /^King/.test(s.county) ? EP.kcParcel : /^Snohomish/.test(s.county) ? EP.snoParcel : null;
     if (!url) return Promise.resolve();
     var b = bbox(s.rings), pad = 0.0003;
-    return getJSON(url, { f: "json", geometry: [b[0] - pad, b[1] - pad, b[2] + pad, b[3] + pad].join(","), geometryType: "esriGeometryEnvelope", inSR: 4326, spatialRel: "esriSpatialRelIntersects", outFields: "", returnGeometry: true, outSR: 4326 })
+    return getJSON(url, { f: "json", geometry: [b[0] - pad, b[1] - pad, b[2] + pad, b[3] + pad].join(","), geometryType: "esriGeometryEnvelope", inSR: 4326, spatialRel: "esriSpatialRelIntersects", outFields: url === EP.kcParcel ? "PIN" : "PARCEL_ID", returnGeometry: true, outSR: 4326 })
       .then(function (j) { s.neighborRings = []; (j.features || []).forEach(function (f) { if (f.geometry && f.geometry.rings) f.geometry.rings.forEach(function (r) { s.neighborRings.push(r); }); }); })
       .catch(function () { s.neighborRings = null; });
   }
