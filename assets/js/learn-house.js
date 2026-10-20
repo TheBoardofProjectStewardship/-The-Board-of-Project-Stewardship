@@ -4,6 +4,7 @@
   var api = factory();
   if (typeof module === "object" && module.exports) module.exports = api;
   if (typeof document === "undefined") return;
+  if (typeof window !== "undefined") window.LearnHouse = api;
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", api.boot);
   else api.boot();
 })(function () {
@@ -536,6 +537,7 @@
 
   return {
     boot: boot,
+    presets: PRESETS,
     clampPitch: clampPitch,
     clampIndex: clampIndex,
     stepFromQuery: stepFromQuery,

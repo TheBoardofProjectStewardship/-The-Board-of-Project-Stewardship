@@ -309,5 +309,46 @@ assert.strictEqual(api.shouldPaintStep(2, 3), true);
                             self.assertIn(f'id="{fragment}"', page.read_text(encoding="utf-8"), href)
 
 
+    def test_each_page_has_one_content_poster(self):
+        pages = [ROOT / "learn" / "index.html"] + sorted((ROOT / "learn").glob("*/index.html"))
+        self.assertEqual(len(pages), 29)
+        for path in pages:
+            text = path.read_text(encoding="utf-8")
+            slug = "index" if path.parent.name == "learn" else path.parent.name
+            posters = []
+            for tag in re.findall(r"<img\b([^>]*?)>", text, flags=re.I | re.S):
+                src_m = re.search(r'\bsrc="([^"]+)"', tag)
+                if src_m and "/assets/images/learn/" in src_m.group(1):
+                    posters.append((tag, src_m.group(1)))
+            self.assertEqual(len(posters), 1, path)
+            tag, src = posters[0]
+            self.assertEqual(src, f"/assets/images/learn/learn-{slug}-poster.webp")
+            alt = html_lib.unescape(re.search(r'\balt="([^"]*)"', tag).group(1))
+            self.assertTrue(alt.startswith("Illustrative"), alt)
+            self.assertIn('width="1200"', tag)
+            self.assertIn('height="675"', tag)
+            self.assertIn('decoding="async"', tag)
+            self.assertIn('loading="eager"', tag)
+            self.assertIn(f"/assets/images/learn/learn-{slug}-poster-640.webp 640w", tag)
+            full = ROOT / src.lstrip("/")
+            small = ROOT / f"assets/images/learn/learn-{slug}-poster-640.webp"
+            self.assertTrue(full.is_file(), full)
+            self.assertTrue(small.is_file(), small)
+            self.assertGreater(full.stat().st_size, 800, full)
+            self.assertLess(full.stat().st_size, 150 * 1024, full)
+            self.assertLess(small.stat().st_size, 150 * 1024, small)
+            self.assertTrue(full.read_bytes().startswith(b"RIFF"), full)
+            absolute = "https://boardofprojectstewardship.com" + src
+            self.assertIn(f'property="og:image" content="{absolute}"', text)
+            self.assertIn(f'name="twitter:image" content="{absolute}"', text)
+            self.assertIn(f'"image": "{absolute}"', text)
+            self.assertNotIn("home-hero.webp", text)
+            if slug == "load-path":
+                self.assertIn('data-preset="load"', text)
+                self.assertIn("<canvas", text)
+            if slug == "compare":
+                self.assertNotIn("scroll-house.js", text)
+
+
 if __name__ == "__main__":
     unittest.main()
