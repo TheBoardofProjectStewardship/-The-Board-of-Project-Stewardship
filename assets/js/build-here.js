@@ -39,8 +39,7 @@
   function getJSON(url, params) {
     var ctl = new AbortController();
     var t = setTimeout(function () { ctl.abort(); }, TIMEOUT);
-    return fetch(url + "?" + qs(params), { signal: ctl.signal }).then(function (r) {
-      clearTimeout(t);
+    return fetch(url + "?" + qs(params), { signal: ctl.signal }).finally(function () { clearTimeout(t); }).then(function (r) {
       if (!r.ok) throw new Error("HTTP " + r.status);
       return r.json();
     }).then(function (j) { if (j && j.error) throw new Error(j.error.message || "service error"); return j; });
@@ -65,7 +64,7 @@
   function polyQuery(rings, extra) {
     var n = rings.reduce(function (a, r) { return a + r.length; }, 0);
     var geom, type;
-    if (n > 150) { var b = bbox(rings); geom = JSON.stringify({ xmin: b[0], ymin: b[1], xmax: b[2], ymax: b[3], spatialReference: { wkid: 4326 } }); type = "esriGeometryEnvelope"; }
+    if (n > 150) { var b = bbox(rings); geom = b.join(","); type = "esriGeometryEnvelope"; }
     else { geom = JSON.stringify({ rings: rings, spatialReference: { wkid: 4326 } }); type = "esriGeometryPolygon"; }
     return Object.assign({ f: "json", geometry: geom, geometryType: type, inSR: 4326, spatialRel: "esriSpatialRelIntersects", returnGeometry: false }, extra || {});
   }
@@ -79,12 +78,12 @@
     var k = Math.PI / 180, R = 20925646; // earth radius in feet
     return rings.map(function (r) { return r.map(function (p) { return [(p[0] - lon0) * k * R * Math.cos(lat0 * k), (p[1] - lat0) * k * R]; }); });
   }
-  function ringArea(r) { var a = 0; for (var i = 0, j = r.length - 1; i < r.length; j = i++) a += (r[j][0] + r[i][0]) * (r[j][1] - r[i][1]); return Math.abs(a / 2); }
+  function ringArea(r) { var a = 0; for (var i = 0, j = r.length - 1; i < r.length; j = i++) a += r[i][0] * r[j][1] - r[j][0] * r[i][1]; return a / 2; }
   function polyAreaSqft(rings) {
     var b = bbox(rings), lat0 = (b[1] + b[3]) / 2, lon0 = (b[0] + b[2]) / 2;
-    var f = toFeet(rings, lat0, lon0), outer = 0, holes = 0;
-    f.forEach(function (r, i) { if (i === 0) outer += ringArea(r); else holes += ringArea(r); });
-    return outer - holes;
+    var total = 0; // signed areas: ArcGIS outer rings and holes wind opposite ways
+    toFeet(rings, lat0, lon0).forEach(function (r) { total += ringArea(r); });
+    return Math.abs(total);
   }
   function merc(lon, lat) { var k = Math.PI / 180, R = 6378137; return [R * lon * k, R * Math.log(Math.tan(Math.PI / 4 + lat * k / 2))]; }
   function inRing(pt, ring) {
@@ -154,7 +153,7 @@
 
   function kingParcel(s) {
     var hs = houseAndStreet(s.matched), zip = zipOf(s.matched);
-    var where = "ADDR_FULL LIKE '" + hs.full.replace(/'/g, "''") + "%'" + (zip ? " AND ZIP5='" + zip + "'" : "");
+    var where = "ADDR_FULL LIKE '" + hs.full.replace(/[%_]/g, "").replace(/'/g, "''") + "%'" + (zip ? " AND ZIP5='" + zip + "'" : "");
     var fields = "PIN,ADDR_FULL,CTYNAME,LOTSQFT,KCA_ZONING,PREUSE_DESC";
     return getJSON(EP.kcParcel, { f: "json", where: where, outFields: fields, returnGeometry: true, outSR: 4326 })
       .then(function (j) {
@@ -205,7 +204,7 @@
             (j.features || []).forEach(function (b) {
               if (!b.geometry || !b.geometry.rings) return;
               var c = b.geometry.rings[0][0];
-              if (s.rings.some(function (r) { return inRing(c, r); })) total += polyAreaSqft(b.geometry.rings);
+              if (s.rings.some(function (r) { return b.geometry.rings[0].some(function (pt) { return inRing(pt, r); }); })) total += polyAreaSqft(b.geometry.rings);
             });
             if (total > 0) { s.footprint = Math.round(total); s.footprintSrc = "Snohomish County mapped roof outlines (not floor area)"; }
             log(s, true, "Snohomish County roof outlines");
@@ -278,8 +277,8 @@
     if (s.juris === "seattle") {
       s.permitLinks = [{ label: "Seattle Services Portal (search by address for permits and records)", url: LINKS.seaPortal }, { label: "SDCI permits and records help", url: LINKS.seaSdci }];
       if (!s.rings) return Promise.resolve();
-      return getJSON(EP.seaPermits, polyQuery(s.rings, { outFields: "PRMT_NR,STGLSTTITL,APTYPE,ISS_DATE,FINAL_DATE,VALUE,ADDRESS", orderByFields: "ISS_DATE DESC" })).then(function (j) {
-        s.permits = (j.features || []).map(function (f) { var a = f.attributes; return { id: a.PRMT_NR, type: a.APTYPE, desc: a.STGLSTTITL, issued: a.ISS_DATE ? new Date(a.ISS_DATE).toISOString().slice(0, 10) : "", final: a.FINAL_DATE ? new Date(a.FINAL_DATE).toISOString().slice(0, 10) : "" }; });
+      return getJSON(EP.seaPermits, polyQuery(s.rings, { outFields: "PRMT_NR,STGLSTTITL,APTYPE,ISS_DATE,FINAL_DATE,VALUE,ADDRESS" })).then(function (j) {
+        s.permits = (j.features || []).sort(function (x, y) { return (y.attributes.ISS_DATE || 0) - (x.attributes.ISS_DATE || 0); }).map(function (f) { var a = f.attributes; return { id: a.PRMT_NR, type: a.APTYPE, desc: a.STGLSTTITL, issued: a.ISS_DATE ? new Date(a.ISS_DATE).toISOString().slice(0, 10) : "", final: a.FINAL_DATE ? new Date(a.FINAL_DATE).toISOString().slice(0, 10) : "" }; });
         log(s, true, "Seattle issued and finaled residential permits");
       }).catch(function (e) { log(s, false, "Seattle residential permits", e.message); });
     }
@@ -370,11 +369,11 @@
           '<text x="' + X((eu0 + eu1) / 2).toFixed(1) + '" y="' + Y((ev0 + ev1) / 2).toFixed(1) + '" class="bh-envlabel" text-anchor="middle">Buildable envelope about ' + fmt((eu1 - eu0) * (ev1 - ev0)) + ' sf</text>';
       }
     }
-    var fl = { minV: [X((minU + maxU) / 2), Y(minV) + 18], maxV: [X((minU + maxU) / 2), Y(maxV) - 8], minU: [X(minU) - 4, Y((minV + maxV) / 2)], maxU: [X(maxU) + 4, Y((minV + maxV) / 2)] }[front];
+    var fl = { minV: [X((minU + maxU) / 2), Y(minV) + 18, "middle"], maxV: [X((minU + maxU) / 2), Y(maxV) - 8, "middle"], minU: [X(minU) - 4, Y((minV + maxV) / 2), "end"], maxU: [X(maxU) + 4, Y((minV + maxV) / 2), "start"] }[front];
     var label = function (v) { return typeof v === "number" ? v + " ft" : "verify"; };
     return '<svg viewBox="0 0 ' + W + " " + H + '" class="bh-siteplan" role="img" aria-label="Diagrammatic site plan of the parcel outline with setback envelope">' +
       '<path d="' + poly + '" class="bh-lot"/>' + env +
-      '<text x="' + fl[0].toFixed(1) + '" y="' + fl[1].toFixed(1) + '" class="bh-front" text-anchor="middle">Street side (front ' + label(F) + ')</text>' +
+      '<text x="' + fl[0].toFixed(1) + '" y="' + fl[1].toFixed(1) + '" class="bh-front" text-anchor="' + fl[2] + '">Street side (front ' + label(F) + ')</text>' +
       '<text x="' + (W - 8) + '" y="' + (H - 8) + '" class="bh-note" text-anchor="end">Side ' + label(S) + ' · Rear ' + label(Rr) + ' · scale approximate</text>' +
       "</svg>";
   }
@@ -464,7 +463,7 @@
     out.push(page("Zoning review", "<h3>How much could you add?</h3>" + cap + redFlags(s, v, rs)));
 
     // Lot imagery and site plan
-    var img = s.imagery ? '<figure class="bh-aerial"><div class="bh-aerial-frame"><img src="' + esc(s.imagery.url) + '" alt="Aerial photo of the parcel with the county parcel outline drawn on top" width="' + s.imagery.W + '" height="' + s.imagery.H + '" crossorigin="anonymous"><svg viewBox="0 0 ' + s.imagery.W + " " + s.imagery.H + '" aria-hidden="true"><path d="' + s.imagery.path + '" class="bh-outline"/></svg></div><figcaption>' + esc(s.imagery.credit) + ". Parcel outline: " + (/^Snohomish/.test(s.county) ? "Snohomish County Assessor parcels" : "King County GIS parcels") + ". Outlines are approximate and are not a survey.</figcaption></figure>" : '<p class="bh-muted">No parcel outline was found, so no aerial view is shown.</p>';
+    var img = s.imagery ? '<figure class="bh-aerial"><div class="bh-aerial-frame"><img src="' + esc(s.imagery.url) + '" alt="Aerial photo of the parcel with the county parcel outline drawn on top" width="' + s.imagery.W + '" height="' + s.imagery.H + '" crossorigin="anonymous"><svg viewBox="0 0 ' + s.imagery.W + " " + s.imagery.H + '" aria-hidden="true"><path d="' + s.imagery.path + '" class="bh-outline"/></svg></div><figcaption>' + esc(s.imagery.credit) + ". Parcel outline: " + (/^Snohomish/.test(s.county) ? "Snohomish County Assessor parcels" : "King County GIS parcels") + ". Outlines are approximate and are not a survey. The photo uses a web map projection, so it is not to scale.</figcaption></figure>" : '<p class="bh-muted">No parcel outline was found, so no aerial view is shown.</p>';
     out.push(page("Existing lot", '<div class="bh-cols"><div>' + img + '</div><div><h3>Site plan diagram</h3>' + sitePlanSVG(s, rs) + '<p class="bh-muted">Diagrammatic only. Drawn from the county parcel outline, simplified to its bounding rectangle for the setback envelope. The street side is a guess from the address point. A licensed surveyor sets the real lines.</p></div></div>'));
 
     // Plans and permits
@@ -551,7 +550,7 @@
     $("bh-lead").addEventListener("submit", lead);
     calc();
     var p = new URLSearchParams(location.search).get("address");
-    if (p) { $("bh-address").value = p; $("bh-form").requestSubmit(); }
+    if (p) { $("bh-address").value = p; $("bh-go").click(); }
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
   window.BuildHere = { polyAreaSqft: polyAreaSqft, minRect: minRect };

@@ -73,5 +73,7 @@
   .bh-page{box-shadow:none;border-radius:0;break-after:page;page-break-after:always;min-height:7.2in}
   .bh-page:last-child{break-after:auto;page-break-after:auto}
   .bh-page a{text-decoration:none}
+  .bh-page,.bh-env,.bh-outline,.bh-disclaimer,.bh-cta{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .bh-aerial-frame,.bh-siteplan,.bh-table tr{break-inside:avoid;page-break-inside:avoid}
   .bh-cta .bh-btn{border:1px solid #166534;background:#fff}
 }
