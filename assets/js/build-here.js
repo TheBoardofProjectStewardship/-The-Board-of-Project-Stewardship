@@ -239,10 +239,12 @@
       }).catch(function (e) { log(s, false, "King County zoning", e.message); });
     }
     if (s.juris === "sno") {
-      return getJSON(EP.snoHost + "Current_Zoning_2025/FeatureServer/0/query", ptQuery(s.lon, s.lat, { outFields: "abbrev,label" })).then(function (j) {
+      var zq = function (svc) { return getJSON(EP.snoHost + svc + "/FeatureServer/0/query", ptQuery(s.lon, s.lat, { outFields: "abbrev,label" })); };
+      // PLANNING__zoning is the county's live layer; Current_Zoning_2025 was found empty in Oct 2026 and stays as a fallback.
+      return zq("PLANNING__zoning").then(function (j) { return (j.features || []).length ? j : zq("Current_Zoning_2025"); }).then(function (j) {
         var f = (j.features || [])[0];
         if (f) { s.zone = (f.attributes.abbrev || f.attributes.label || "").trim(); s.zoneSrc = "Snohomish County zoning map"; }
-        log(s, true, "Snohomish County zoning (Current_Zoning_2025)");
+        log(s, true, "Snohomish County zoning (PLANNING__zoning)");
       }).catch(function (e) { log(s, false, "Snohomish County zoning", e.message); });
     }
     return Promise.resolve();
@@ -295,8 +297,8 @@
       }
     } else if (/^Snohomish/.test(s.county)) {
       jobs.push(countHit(EP.snoSlope, rings, "Steep slope 33% or more (county map)", h, s, "SAS_Steep_Slopes"));
-      [["TOPOGRAPHY__LANDSLIDE__county_lha_model", "Landslide hazard area (county model)"], ["ENVIRONMENTAL__wetlands", "Mapped wetland"], ["ENVIRONMENTAL__fema_flood", "FEMA flood hazard area"]].forEach(function (L) {
-        jobs.push(countHit(EP.snoHost + L[0] + "/FeatureServer/0/query", rings, L[1], h, s, L[0]));
+      [["TOPOGRAPHY__LANDSLIDE__county_lha_model", "Landslide hazard area (county model)"], ["ENVIRONMENTAL__wetlands", "Mapped wetland"], ["ENVIRONMENTAL__fema_flood", "FEMA flood hazard area", 1]].forEach(function (L) {
+        jobs.push(countHit(EP.snoHost + L[0] + "/FeatureServer/" + (L[2] || 0) + "/query", rings, L[1], h, s, L[0]));
       });
       s.hazardSource = "Snohomish County hosted environmental layers";
     }
