@@ -139,7 +139,7 @@
         if (/^Snohomish/.test(s.county)) return snoParcel(s);
         return s;
       })
-      .then(function () { return Promise.all([zoning(s), hazards(s), permits(s), extras(s)]); })
+      .then(function () { return Promise.all([zoning(s), hazards(s), permits(s), extras(s), neighbors(s)]); })
       .then(function () { buildImagery(s); return s; })
       .catch(function (e) {
         if (e && e.message === "nomatch") return s;
@@ -215,6 +215,18 @@
           }).catch(function (e) { log(s, false, "Snohomish County roof outlines", e.message); });
       })
       .catch(function (e) { log(s, false, "Snohomish County parcels", e.message); });
+  }
+
+  /* Neighboring parcel outlines, used only to tell which lot lines face a street
+     (no parcel on the other side) and which are shared with a neighbor. */
+  function neighbors(s) {
+    if (!s.rings) return Promise.resolve();
+    var url = /^King/.test(s.county) ? EP.kcParcel : /^Snohomish/.test(s.county) ? EP.snoParcel : null;
+    if (!url) return Promise.resolve();
+    var b = bbox(s.rings), pad = 0.0003;
+    return getJSON(url, { f: "json", geometry: [b[0] - pad, b[1] - pad, b[2] + pad, b[3] + pad].join(","), geometryType: "esriGeometryEnvelope", inSR: 4326, spatialRel: "esriSpatialRelIntersects", outFields: "", returnGeometry: true, outSR: 4326 })
+      .then(function (j) { s.neighborRings = []; (j.features || []).forEach(function (f) { if (f.geometry && f.geometry.rings) f.geometry.rings.forEach(function (r) { s.neighborRings.push(r); }); }); })
+      .catch(function () { s.neighborRings = null; });
   }
 
   function zoning(s) {
@@ -387,7 +399,7 @@
     }
     return c;
   }
-  function classifyEdges(ring, st, dir) {
+  function classifyEdges(ring, st, dir, nb) {
     var n = ring.length - 1, area = 0, i;
     for (i = 0; i < n; i++) area += ring[i][0] * ring[i + 1][1] - ring[i + 1][0] * ring[i][1];
     var sgn = area > 0 ? 1 : -1; // counter-clockwise rings have the outside on the right
@@ -396,18 +408,40 @@
       var a = ring[i], b = ring[i + 1], dx = b[0] - a[0], dy = b[1] - a[1], L = Math.sqrt(dx * dx + dy * dy) || 1;
       edges.push({ a: a, b: b, len: L, nx: sgn * dy / L, ny: -sgn * dx / L, mx: (a[0] + b[0]) / 2, my: (a[1] + b[1]) / 2, d: segDistXY(st[0], st[1], a, b) });
     }
+    // An edge is "open" when the ground just outside it is in no other parcel: a street, or sometimes water.
+    if (nb && nb.length) edges.forEach(function (e) {
+      var px = e.mx + e.nx * 6, py = e.my + e.ny * 6;
+      e.open = !nb.some(function (r) { return inRingXY(px, py, r); });
+    });
+    var openEdges = edges.filter(function (e) { return e.open; });
     var D = { N: [0, 1], E: [1, 0], S: [0, -1], W: [-1, 0] }[dir];
+    if (!D && openEdges.length && openEdges.length < edges.length) {
+      var nearOpen = openEdges.reduce(function (m, e) { return e.d < m.d ? e : m; }, openEdges[0]);
+      edges.forEach(function (e) { e.kind = "side"; });
+      // Walk both ways from the nearest open edge while edges stay open (curved frontage is many short edges).
+      var idx = edges.indexOf(nearOpen), n2 = edges.length, k;
+      nearOpen.kind = "front";
+      for (k = 1; k < n2 && edges[(idx + k) % n2].open; k++) edges[(idx + k) % n2].kind = "front";
+      for (k = 1; k < n2 && edges[(idx - k + n2) % n2].open; k++) edges[(idx - k + n2) % n2].kind = "front";
+      var sx = 0, sy = 0, sl = 0;
+      edges.forEach(function (e) { if (e.kind === "front") { sx += e.nx * e.len; sy += e.ny * e.len; sl += e.len; } });
+      var L2 = Math.hypot(sx, sy) || 1; D = null;
+      return finishEdges(edges, nearOpen, { nx: sx / L2, ny: sy / L2 });
+    }
     var near = D ? edges.reduce(function (m, e) { var sc = (e.nx * D[0] + e.ny * D[1]) * Math.sqrt(e.len), sm = (m.nx * D[0] + m.ny * D[1]) * Math.sqrt(m.len); return sc > sm ? e : m; }, edges[0])
       : edges.reduce(function (m, e) { return e.d < m.d ? e : m; }, edges[0]);
     if (D) edges.forEach(function (e) { e.d = e === near ? 0 : (e.nx * near.nx + e.ny * near.ny > 0.7 ? 0 : 999); });
     edges.forEach(function (e) { e.kind = "side"; if (e.nx * near.nx + e.ny * near.ny > 0.7 && e.d < near.d + 25) e.kind = "front"; });
+    return finishEdges(edges, near, near);
+  }
+  function finishEdges(edges, near, fn) {
     var fx = 0, fy = 0, fl = 0;
     edges.forEach(function (e) { if (e.kind === "front") { fx += e.mx * e.len; fy += e.my * e.len; fl += e.len; } });
     fx /= fl; fy /= fl;
-    var rear = edges.filter(function (e) { return e.kind === "side" && e.nx * near.nx + e.ny * near.ny < -0.6; });
+    var rear = edges.filter(function (e) { return e.kind === "side" && e.nx * fn.nx + e.ny * fn.ny < -0.6; });
     if (!rear.length) { // no lot line faces away from the street, so use the one farthest from it
       var far = null;
-      edges.forEach(function (e) { if (e.kind === "side" && e.nx * near.nx + e.ny * near.ny < 0 && (!far || Math.hypot(e.mx - fx, e.my - fy) > Math.hypot(far.mx - fx, far.my - fy))) far = e; });
+      edges.forEach(function (e) { if (e.kind === "side" && e.nx * fn.nx + e.ny * fn.ny < 0 && (!far || Math.hypot(e.mx - fx, e.my - fy) > Math.hypot(far.mx - fx, far.my - fy))) far = e; });
       if (far) rear = [far];
     }
     rear.forEach(function (e) { e.kind = "rear"; });
@@ -439,7 +473,8 @@
     var sb = rs && rs.setbacks || {};
     var F = sb.front, Rr = sb.rear, S = sb.side;
     var known = [F, Rr, S].every(function (x) { return typeof x === "number"; });
-    var ce = classifyEdges(ring, st, s.frontDir);
+    var nbFeet = s.neighborRings ? toFeet(s.neighborRings, lat0, lon0) : null;
+    var ce = classifyEdges(ring, st, s.frontDir, nbFeet);
     var minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
     ring.forEach(function (p) { minX = Math.min(minX, p[0]); minY = Math.min(minY, p[1]); maxX = Math.max(maxX, p[0]); maxY = Math.max(maxY, p[1]); });
     var pad = 46, W = 560, H = 420;
@@ -573,7 +608,7 @@
 
     // Lot imagery and site plan
     var img = s.imagery ? '<figure class="bh-aerial"><div class="bh-aerial-frame"><img src="' + esc(s.imagery.url) + '" alt="Aerial photo of the parcel with the county parcel outline drawn on top" width="' + s.imagery.W + '" height="' + s.imagery.H + '" crossorigin="anonymous"><svg viewBox="0 0 ' + s.imagery.W + " " + s.imagery.H + '" aria-hidden="true"><path d="' + s.imagery.path + '" class="bh-outline"/></svg></div><figcaption>' + esc(s.imagery.credit) + ". Parcel outline: " + (/^Snohomish/.test(s.county) ? "Snohomish County Assessor parcels" : "King County GIS parcels") + ". Outlines are approximate and are not a survey. The photo uses a web map projection, so it is not to scale.</figcaption></figure>" : '<p class="bh-muted">No parcel outline was found, so no aerial view is shown.</p>';
-    out.push(page("Existing lot", '<div class="bh-cols"><div>' + img + '</div><div><h3>Site plan diagram</h3>' + sitePlanSVG(s, rs) + '<p class="bh-muted">Diagrammatic only. Drawn from the county parcel outline. The shaded envelope is every point at least the required setback from each lot line. ' + (s.frontDir ? "The street side was set by hand in step 2." : "Which line is the front, side or rear is our guess from the address point; set the street side in step 2 if it is wrong.") + ' A licensed surveyor sets the real lines.</p></div></div>'));
+    out.push(page("Existing lot", '<div class="bh-cols"><div>' + img + '</div><div><h3>Site plan diagram</h3>' + sitePlanSVG(s, rs) + '<p class="bh-muted">Diagrammatic only. Drawn from the county parcel outline. The shaded envelope is every point at least the required setback from each lot line. ' + (s.frontDir ? "The street side was set by hand in step 2." : (s.neighborRings ? "The street side is the lot line with no parcel beyond it nearest the address point; check it against the aerial and set it in step 2 if it is wrong." : "Which line is the front, side or rear is our guess from the address point; set the street side in step 2 if it is wrong.")) + ' A licensed surveyor sets the real lines.</p></div></div>'));
 
     // Plans and permits
     var pm = "<h3>House plans and permit history</h3>";
