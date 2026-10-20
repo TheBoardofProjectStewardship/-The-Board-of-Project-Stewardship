@@ -1,4 +1,4 @@
-/* What can I build here? Address lookup, report builder and budget math.
+/* What can I build here? Address lookup, report builder and red flags.
    Runs fully in the browser against free public GIS services. */
 (function () {
   "use strict";
@@ -567,7 +567,7 @@
     out.push(page("Project summary", '<div class="bh-cols"><div><h3>Site data</h3><table class="bh-table">' + rows.map(function (r) { return "<tr><th scope=\"row\">" + r[0] + "</th><td>" + r[1] + "</td></tr>"; }).join("") + '</table></div><div><h3>Special site features</h3>' + haz +
       '<h3>Soils and geotechnical</h3><p>No soils report is on file with this snapshot. Slopes, fill or a mapped hazard often lead the jurisdiction to ask for a geotechnical report on bearing soil and drainage.</p>' +
       '<h3>Drainage and civil</h3><p>Larger additions and new houses usually trigger stormwater review. The size thresholds come from the local stormwater code; ask the jurisdiction which applies before design.</p>' +
-      '<h3>Construction cost</h3><p>Not estimated here. Use the budget calculator below with your own numbers or a contractor\'s bid.</p>' +
+      '<h3>Construction cost</h3><p>Not estimated here. Try the <a href="./#budget-calculator">budget and resale calculator</a> on our home page with your own numbers, or get a contractor\'s bid.</p>' +
       '<h3>Codes that will apply</h3><p>Local zoning (cited below), the Washington State Residential Code and the <a href="' + R.SRC.wsec.url + '" target="_blank" rel="noopener">Washington State Energy Code</a>. Energy credits depend on project size and type; your designer confirms them.</p></div></div>'));
 
     // Code review
@@ -660,21 +660,6 @@
     return "<h3>Red flags to check</h3><ul class=\"bh-flags\">" + f.map(function (x) { return "<li>" + x + "</li>"; }).join("") + "</ul>";
   }
 
-  /* ---------- budget calculator ---------- */
-  function calc() {
-    var g = function (id) { var x = parseFloat(String($(id).value).replace(/[$,\s]/g, "")); return isFinite(x) ? x : 0; };
-    var price = g("fc-price"), cps = g("fc-cps"), sf = g("fc-sf"), arv = g("fc-arv"), months = g("fc-months"), rate = g("fc-rate") / 100, ltv = g("fc-ltv") / 100, sell = g("fc-sell") / 100, soft = g("fc-soft") / 100;
-    var build = cps * sf, softC = build * soft, basis = price + build + softC;
-    var loan = basis * ltv;
-    var interest = loan * rate * months / 12; // simple interest on the full balance, a conservative shortcut
-    var selling = arv * sell;
-    var total = basis + interest + selling;
-    var profit = arv - total;
-    var cash = basis - loan + interest;
-    var m = function (x) { return (x < 0 ? "-$" : "$") + fmt(Math.abs(x)); };
-    $("fc-out").innerHTML = '<table class="bh-table"><tr><th scope="row">Construction (' + fmt(sf) + " sf x $" + fmt(cps) + ")</th><td>" + m(build) + '</td></tr><tr><th scope="row">Soft costs (' + (soft * 100).toFixed(0) + '%)</th><td>' + m(softC) + '</td></tr><tr><th scope="row">Loan amount</th><td>' + m(loan) + '</td></tr><tr><th scope="row">Interest over ' + months + ' months</th><td>' + m(interest) + '</td></tr><tr><th scope="row">Selling costs</th><td>' + m(selling) + '</td></tr><tr><th scope="row">All-in cost</th><td>' + m(total) + '</td></tr><tr class="bh-total"><th scope="row">Profit before tax</th><td>' + m(profit) + '</td></tr><tr><th scope="row">Margin on resale value</th><td>' + (arv ? (profit / arv * 100).toFixed(1) + "%" : "n/a") + '</td></tr><tr><th scope="row">Cash in (down payment plus interest)</th><td>' + m(cash) + "</td></tr></table>";
-  }
-
   /* ---------- lead form ---------- */
   function lead(e) {
     e.preventDefault();
@@ -720,9 +705,7 @@
     });
     $("bh-confirm-form").addEventListener("submit", function (e) { e.preventDefault(); if (state) { render(); $("bh-report").focus(); } });
     $("bh-print").addEventListener("click", function () { window.print(); });
-    ["fc-price", "fc-cps", "fc-sf", "fc-arv", "fc-months", "fc-rate", "fc-ltv", "fc-sell", "fc-soft"].forEach(function (id) { $(id).addEventListener("input", calc); });
     $("bh-lead").addEventListener("submit", lead);
-    calc();
     var p = new URLSearchParams(location.search).get("address");
     if (p) { $("bh-address").value = p; $("bh-go").click(); }
   }

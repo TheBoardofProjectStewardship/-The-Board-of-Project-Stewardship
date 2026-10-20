@@ -1574,6 +1574,31 @@
     </div>
   </section>
 
+  <section id="budget-calculator" class="mb-14" aria-labelledby="budget-calculator-h">
+    <link rel="stylesheet" href="/assets/css/home-calculator.css">
+    <div class="mb-6 border-b border-white/10 pb-4">
+      <span class="text-secondary text-xs font-bold uppercase tracking-widest">Good Steward Tools</span>
+      <h2 id="budget-calculator-h" class="text-3xl font-black text-white tracking-tight">Budget and resale calculator</h2>
+      <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Plain math on your own numbers for a remodel, addition or flip. The starting values are <strong class="text-white font-semibold">examples only</strong>, not market data or a quote. Replace every one.</p>
+    </div>
+    <div class="bg-charcoal border border-white/10 rounded-xl p-4 sm:p-6">
+      <div class="hc-grid">
+          <div><label class="hc-label" for="fc-price">Purchase price ($) <span class="hc-example">Example</span></label><input id="fc-price" class="hc-input" type="text" inputmode="decimal" autocomplete="off" value="900000"></div>
+          <div><label class="hc-label" for="fc-sf">Square feet built <span class="hc-example">Example</span></label><input id="fc-sf" class="hc-input" type="text" inputmode="decimal" autocomplete="off" value="700"></div>
+          <div><label class="hc-label" for="fc-cps">Construction cost per sq ft ($) <span class="hc-example">Example</span></label><input id="fc-cps" class="hc-input" type="text" inputmode="decimal" autocomplete="off" value="400"></div>
+          <div><label class="hc-label" for="fc-soft">Design, permit and soft costs (% of construction) <span class="hc-example">Example</span></label><input id="fc-soft" class="hc-input" type="text" inputmode="decimal" autocomplete="off" value="15"></div>
+          <div><label class="hc-label" for="fc-arv">Value after the work ($) <span class="hc-example">Example</span></label><input id="fc-arv" class="hc-input" type="text" inputmode="decimal" autocomplete="off" value="1500000"></div>
+          <div><label class="hc-label" for="fc-months">Holding months <span class="hc-example">Example</span></label><input id="fc-months" class="hc-input" type="text" inputmode="decimal" autocomplete="off" value="12"></div>
+          <div><label class="hc-label" for="fc-rate">Interest rate (% per year) <span class="hc-example">Example</span></label><input id="fc-rate" class="hc-input" type="text" inputmode="decimal" autocomplete="off" value="10"></div>
+          <div><label class="hc-label" for="fc-ltv">Share financed (% of all costs) <span class="hc-example">Example</span></label><input id="fc-ltv" class="hc-input" type="text" inputmode="decimal" autocomplete="off" value="80"></div>
+          <div><label class="hc-label" for="fc-sell">Selling costs (% of value) <span class="hc-example">Example</span></label><input id="fc-sell" class="hc-input" type="text" inputmode="decimal" autocomplete="off" value="6"></div>
+      </div>
+      <div id="fc-out" class="hc-out" aria-live="polite"></div>
+      <p class="text-xs text-slate-400 font-light mt-3 leading-relaxed">Interest is simple interest on the full loan for every month, which overstates carry on a loan that draws down over time. Taxes, insurance and utilities are not included; add them to soft costs if you want them counted. To check what a lot allows first, try <a href="./build-here.html" class="text-secondary hover:underline">What can I build here?</a></p>
+    </div>
+    <script src="/assets/js/home-calculator.js" defer></script>
+  </section>
+
 
     <section id="integrity-shield" class="mb-14">
     <iframe
