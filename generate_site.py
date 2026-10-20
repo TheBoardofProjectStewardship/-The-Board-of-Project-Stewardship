@@ -2689,6 +2689,30 @@ WALKTHROUGH_STAGES = [
 ]
 
 
+def home_feasibility_tool_section() -> str:
+    """Address-entry feasibility report tool, embedded under the 3D walkthrough.
+
+    The markup for steps 1 to 3 is read from build-here.html, so the standalone
+    page and the homepage run the same form and the same build-here JS/CSS.
+    """
+    page = (Path(__file__).resolve().parent / "build-here.html").read_text(encoding="utf-8")
+    start = page.index('    <section class="bh-card" aria-labelledby="bh-step1">')
+    end = page.index("</section>", page.index('<section id="bh-report-wrap"')) + len("</section>")
+    tool = page[start:end].replace('<h2 id="bh-step3" class="text-2xl font-black text-white">', '<h2 id="bh-step3" class="text-xl font-black text-white">')
+    return f"""  <section id="bh-home" class="mb-14" aria-labelledby="bh-home-h">
+    <link rel="stylesheet" href="/assets/css/build-here.css">
+    <div class="mb-6 border-b border-white/10 pb-4">
+      <span class="text-secondary text-xs font-bold uppercase tracking-widest">Good Steward Tools</span>
+      <h2 id="bh-home-h" class="text-3xl font-black text-white tracking-tight">What can I build here?</h2>
+      <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Type an address in King or Snohomish County and get a free first-pass feasibility report: zone, parcel, aerial, cited setbacks, floor area and ADU rules, a site plan and red flags. Covered today: Seattle (Neighborhood Residential), Edmonds (LDR), Kenmore (R-1, R-4, R-6), unincorporated King County and unincorporated Snohomish County.</p>
+    </div>
+{tool}
+    <p class="text-xs text-slate-400 font-light leading-relaxed">A planning estimate, not a legal, zoning or permit determination. Confirm every number with the city or county and a licensed professional. <a href="./build-here.html" class="text-secondary hover:underline">Open the full tool page</a> for the editor review form and the full disclaimer.</p>
+    <script src="/assets/js/build-here-rules.js" defer></script>
+    <script src="/assets/js/build-here.js" defer></script>
+  </section>"""
+
+
 def build_walkthrough_home_section(prefix: str = "") -> str:
     """Prominent homepage embed: Build Walkthrough iframe + plan-photos strip."""
     src = tools_href("build-walkthrough", prefix, "index.html")
@@ -5980,6 +6004,10 @@ def build_about() -> str:
   </div>
 {hero_html}
 {content_resume}
+{build_walkthrough_home_section()}
+
+{home_feasibility_tool_section()}
+
 {board_section_embed(
         "mission",
         "mesh-flow-mission",
@@ -5988,8 +6016,6 @@ def build_about() -> str:
         1100,
         extra_class="mb-12",
     )}
-
-{build_walkthrough_home_section()}
 
 {board_section_embed(
         "integrity-shield",

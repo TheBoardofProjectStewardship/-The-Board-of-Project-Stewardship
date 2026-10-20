@@ -75,6 +75,8 @@
   body *{visibility:hidden}
   #bh-report,#bh-report *{visibility:visible}
   #bh-report{position:absolute;left:0;top:0;width:100%;display:block}
+  body.bh-printing>*:not(#bh-print-host){display:none!important}
+  body.bh-printing #bh-print-host,body.bh-printing #bh-print-host *{visibility:visible}
   .bh-page{box-shadow:none;border-radius:0;break-after:page;page-break-after:always;min-height:8.4in}
   .bh-page:last-child{break-after:auto;page-break-after:auto}
   .bh-page a{text-decoration:none}
@@ -94,3 +96,8 @@
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 .bh-envlabel,.bh-front{paint-order:stroke;stroke:#fbfaf7;stroke-width:4px;stroke-linejoin:round}
 .bh-linkbtn{background:none;border:0;padding:0;color:#4ade80;text-decoration:underline;font:inherit;cursor:pointer;min-height:24px}
+
+/* Homepage embed (#bh-home), under the 3D walkthrough */
+#bh-home .bh-card{background:#141414;border-color:rgba(255,255,255,.1)}
+#bh-home .bh-card h2,#bh-home .bh-toolbar h2{font-size:1.25rem}
+@media (max-width:639px){#bh-home .bh-row{flex-direction:column;align-items:stretch}#bh-home .bh-row>div[style]{padding-bottom:0!important;align-self:stretch!important}#bh-home .bh-btn{width:100%}#bh-home .bh-card{padding:1rem}#bh-home .bh-page-body{padding:1.25rem 1rem 1rem}#bh-home .bh-page-foot{padding:.75rem 1rem;flex-wrap:wrap}}

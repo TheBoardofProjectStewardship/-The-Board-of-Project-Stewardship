@@ -56,6 +56,31 @@ class BuildHereTest(unittest.TestCase):
         gen = (ROOT / "generate_site.py").read_text(encoding="utf-8")
         self.assertNotIn("home_budget_calculator", gen)
 
+    def test_report_tool_on_homepage(self):
+        home = (ROOT / "index.html").read_text(encoding="utf-8")
+        i = home.index('id="build-walkthrough"')
+        j = home.index('id="bh-home"')
+        between = home[home.index("</section>", i) + len("</section>"):j]
+        self.assertEqual(between.split(), ["<section"])
+        k = home.index('<section id="mission"')
+        self.assertLess(j, k)
+        self.assertLess(k, home.index('id="integrity-shield"'))
+        tail = home[home.index("</section>", home.index('id="bh-report-wrap"')) + len("</section>"):k]
+        self.assertEqual(tail.count("</section>"), 1)
+        self.assertNotIn("<section", tail)
+        sec = home[j:k]
+        for needle in ('id="bh-form"', 'id="bh-address"', 'id="bh-confirm"', 'id="bh-report"', 'id="bh-print"',
+                       "/assets/js/build-here.js", "/assets/js/build-here-rules.js", "/assets/css/build-here.css",
+                       "not a legal, zoning or permit determination", "./build-here.html"):
+            self.assertIn(needle, sec)
+        self.assertEqual(home.count('id="bh-address"'), 1)
+        self.assertEqual(home.count("<h1"), 1)
+        self.assertNotIn("\u2014", sec)
+        import sys
+        sys.path.insert(0, str(ROOT))
+        import generate_site
+        self.assertIn(generate_site.home_feasibility_tool_section(), home)
+
     def test_rules_math_and_sources(self):
         script = r"""
         const R = require(process.argv[1]);

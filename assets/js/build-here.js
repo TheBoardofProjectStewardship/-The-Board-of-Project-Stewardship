@@ -688,7 +688,24 @@
 
   function setStatus(t) { $("bh-status").textContent = t; }
 
+  /* On the homepage the report sits inside a long page, so print a copy of
+     the report on its own instead of the whole homepage. */
+  function printReport() {
+    if (!document.getElementById("bh-home")) { window.print(); return; }
+    var host = document.createElement("div");
+    host.id = "bh-print-host";
+    host.className = "bh-report";
+    host.innerHTML = $("bh-report").innerHTML;
+    document.body.appendChild(host);
+    document.body.classList.add("bh-printing");
+    var done = function () { document.body.classList.remove("bh-printing"); if (host.parentNode) host.parentNode.removeChild(host); window.removeEventListener("afterprint", done); };
+    window.addEventListener("afterprint", done);
+    window.print();
+    setTimeout(function () { if (!window.matchMedia("print").matches) done(); }, 1000);
+  }
+
   function init() {
+    if (!$("bh-form")) return;
     $("bh-form").addEventListener("submit", function (e) {
       e.preventDefault();
       var a = $("bh-address").value.trim();
@@ -704,8 +721,8 @@
       });
     });
     $("bh-confirm-form").addEventListener("submit", function (e) { e.preventDefault(); if (state) { render(); $("bh-report").focus(); } });
-    $("bh-print").addEventListener("click", function () { window.print(); });
-    $("bh-lead").addEventListener("submit", lead);
+    $("bh-print").addEventListener("click", printReport);
+    if ($("bh-lead")) $("bh-lead").addEventListener("submit", lead);
     var p = new URLSearchParams(location.search).get("address");
     if (p) { $("bh-address").value = p; $("bh-go").click(); }
   }
