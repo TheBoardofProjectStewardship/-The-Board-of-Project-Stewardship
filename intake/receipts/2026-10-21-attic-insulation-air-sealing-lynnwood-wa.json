@@ -1,0 +1,19 @@
+{
+  "submission_id": "2026-10-21-attic-insulation-air-sealing-lynnwood-wa",
+  "idempotency_key": "sha256:674d9046f363b58d1d5509872490a35a013fe7ffbd87043b312d674bd21dcd5f",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-10-21T10:49:44Z",
+  "outputs": [
+    "assets/images/posts/2026-10-21-lynnwood-attic-insulation-1.webp",
+    "assets/images/posts/2026-10-21-lynnwood-attic-insulation-2.webp",
+    "assets/images/posts/2026-10-21-lynnwood-attic-insulation-3.webp",
+    "posts/2026-10-21-attic-insulation-air-sealing-lynnwood-wa.md",
+    "posts/2026-10-21-attic-insulation-air-sealing-lynnwood-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 78
+}

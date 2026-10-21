@@ -1,0 +1,45 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-10-21-lynnwood-attic-insulation-1.webp",
+      "repo_path": "assets/images/posts/2026-10-21-lynnwood-attic-insulation-1.webp",
+      "alt": "Illustrative: an attic in a Lynnwood, WA home with fresh blown-in insulation, eave baffles keeping the soffit vents open, and a raised plank walkway \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "28ca256b52a20df7b035b35d0f48326c",
+      "source": "Newly generated illustrative image (built-in image generator, 2026-10-21 ~03:42 PT), resized to 1600 px webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-21-lynnwood-attic-insulation-2.webp",
+      "repo_path": "assets/images/posts/2026-10-21-lynnwood-attic-insulation-2.webp",
+      "alt": "Illustrative: foam-sealed pipe and wire penetrations through a top plate next to a gasketed attic hatch, the air sealing step that comes before insulation in a Lynnwood, WA attic \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "4e4f8d762e62c70c85a3c67f9d682534",
+      "source": "Newly generated illustrative image (built-in image generator, 2026-10-21 ~03:42 PT), resized to 1600 px webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-21-lynnwood-attic-insulation-3.webp",
+      "repo_path": "assets/images/posts/2026-10-21-lynnwood-attic-insulation-3.webp",
+      "alt": "Illustrative: a split-level house in Lynnwood, WA on a wet, overcast autumn day, showing the roofline and soffits where attic ventilation begins \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "c5f553ccfaadbc9c17edfe2d122305be",
+      "source": "Newly generated illustrative image (built-in image generator, 2026-10-21 ~03:42 PT), resized to 1600 px webp"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "GuC1O-tmMuM",
+      "url": "https://www.youtube.com/watch?v=GuC1O-tmMuM",
+      "title": "The Attic Problem Nobody's Talking About That Affects Your Energy Bill",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Illustrative frames are labeled in alt text",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "3 newly generated images (built-in generator), 0 regraded stills, 0 paid media."
+}
