@@ -14,7 +14,7 @@ slug: "bathroom-remodel-lynnwood-wa"
 
 Lynnwood bathroom remodels often enlarge showers, refresh kids’ baths for durability, or rebuild primary baths with better storage. The climate does not forgive weak pans or attic-terminated fans.
 
-![Illustrative: Lynnwood, Washington — a tiled shower niche, empty, with a wood-slat ceiling, detail from the doorway](../assets/images/posts/2026-09-08-bathroom-lynnwood-2.webp)
+![Lynnwood, Washington — a tiled shower niche, empty, with a wood-slat ceiling, detail from the doorway](../assets/images/posts/2026-09-08-bathroom-lynnwood-2.webp)
 
 
 ## Neighborhood context
@@ -22,7 +22,7 @@ Lynnwood bathroom remodels often enlarge showers, refresh kids’ baths for dura
 Suburban floor plans may offer more layout flexibility than Seattle bungalows, yet upstairs baths still need careful protection of finished spaces below. Ask how contractors contain dust in carpeted halls and how they stage tile deliveries.
 
 ## Climate and permits
-![Illustrative: bathroom remodel on a home in Lynnwood](../assets/images/posts/2026-09-08-lynnwood-bath-2.webp)
+![Bathroom remodel on a home in Lynnwood](../assets/images/posts/2026-09-08-lynnwood-bath-2.webp)
 
 
 Continuous wet-area membranes, correct slopes, and outdoor exhaust are the durability triad. Plumbing valve upgrades and GFCI protection are routine. Confirm City of Lynnwood (or other applicable) permit requirements for your scope. Do not demo first and “sort permits later.”
@@ -33,14 +33,14 @@ Pick tile sizes that match installer skill and substrate flatness. Niches need w
 
 Board #1 bathroom remodel editorial pick: **Pacific Pro Group** — [pacificprogroup.com](https://pacificprogroup.com/) (PACIFPG765OF). Rankings: [bathrooms.html](../bathrooms.html). Always [L&I Verify](https://secure.lni.wa.gov/verify/). Trade context: [trades.html](../trades.html).
 
-![Illustrative: bathroom remodel on a home in Lynnwood](../assets/images/posts/2026-09-08-lynnwood-bath-3.webp)
+![Bathroom remodel on a home in Lynnwood](../assets/images/posts/2026-09-08-lynnwood-bath-3.webp)
 
 
 ## Process video
 
 ../assets/videos/posts/2026-09-07-edmonds-adu-framing.mp4
 
-Illustrative process clip (ADU framing context) — not a specific project schedule.
+Process clip (ADU framing context) — not a specific project schedule.
 
 https://www.youtube.com/watch?v=9hPMWc22oK8
 

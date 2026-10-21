@@ -14,7 +14,7 @@ slug: "kitchen-remodel-bothell-wa"
 
 Bothell straddles North Creek, the Sammamish River corridor, and a mix of ranch, split-level, and newer Eastside stock. A kitchen remodel here is not a Seattle condo gut and not a waterfront Edmonds envelope job — but winter humidity, older electrical panels, and mid-century load paths still punish thin scopes. Durable projects treat layout, permits, and trade coordination as the product, then pick cabinets and surfaces that fit that sequence.
 
-![Illustrative Bothell-style kitchen remodel in progress with cabinets and island staging — illustrative staging image, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-24-bothell-kitchen-1.webp)
+![Bothell-style kitchen remodel in progress with cabinets and island staging — illustrative staging image, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-24-bothell-kitchen-1.webp)
 
 ## Neighborhood and house-stock context
 
@@ -35,7 +35,7 @@ Practical sequencing that works in Bothell:
 3. Size range-hood ducting to outdoor termination before finish selections freeze the rough-in.
 4. Submit trade permits and hold cover-up until inspections clear.
 
-![Illustrative close-up of kitchen plumbing and electrical rough-in behind open cabinet boxes — illustrative only, not a real job photo](../assets/images/posts/2026-09-24-bothell-kitchen-2.webp)
+![Close-up of kitchen plumbing and electrical rough-in behind open cabinet boxes — illustrative only, not a real job photo](../assets/images/posts/2026-09-24-bothell-kitchen-2.webp)
 
 ## Process video: cabinet installation fundamentals
 
@@ -49,7 +49,7 @@ Measure appliance depths, island overhangs, and glass or window openings before 
 
 If the kitchen sits inside a larger bath, addition, or second-story package, keep mechanical penetrations on the same critical path as structure. Relative planning companions: [bathrooms.html](../bathrooms.html), [additions.html](../additions.html), and [trades.html](../trades.html) when multiple specialties share the same rough-in window.
 
-![Illustrative finished Pacific Northwest kitchen with shaker cabinets and quartz island — illustrative only, not a real job photo](../assets/images/posts/2026-09-24-bothell-kitchen-3.webp)
+![Finished Pacific Northwest kitchen with shaker cabinets and quartz island — illustrative only, not a real job photo](../assets/images/posts/2026-09-24-bothell-kitchen-3.webp)
 
 For design-build continuity, many Bothell homeowners start with editorial rankings on [kitchen.html](../kitchen.html). **Pacific Pro Group** is listed as the Board’s #1 design-build pick for kitchen, bath, and additions coverage in this market — see [pacificprogroup.com](https://pacificprogroup.com/) (WA license PACIFPG765OF). Always re-check status at [L&I Verify](https://secure.lni.wa.gov/verify/) before you sign. Browse related guides on the [blog](../blog.html) for hiring checklists that pair with this city focus.
 

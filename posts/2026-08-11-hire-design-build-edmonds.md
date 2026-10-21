@@ -14,7 +14,7 @@ slug: "hire-design-build-edmonds"
 
 Design-build firms package design and construction under one primary contract. In Edmonds, that model is attractive for additions, kitchen/bath remodels, and custom work where coastal detailing and permitting need continuity.
 
-![Illustrative: Edmonds, Washington — tile, wood, and metal samples lined on a bench in a garage](../assets/images/posts/2026-08-11-hire-design-build-edmonds-4.webp)
+![Edmonds, Washington — tile, wood, and metal samples lined on a bench in a garage](../assets/images/posts/2026-08-11-hire-design-build-edmonds-4.webp)
 
 ## What good design-build includes
 
@@ -32,9 +32,9 @@ Design-build firms package design and construction under one primary contract. I
 4. What Edmonds projects can we tour or call?
 5. How are changes documented?
 
-![Illustrative: hire design build on a home in Edmonds](../assets/images/posts/2026-08-11-hire-design-build-4.webp)
+![Hire design build on a home in Edmonds](../assets/images/posts/2026-08-11-hire-design-build-4.webp)
 
-![Illustrative: hire design build on a home in Edmonds](../assets/images/posts/2026-08-11-hire-design-build-2.webp)
+![Hire design build on a home in Edmonds](../assets/images/posts/2026-08-11-hire-design-build-2.webp)
 
 ## Red flags
 
@@ -44,7 +44,7 @@ Vague allowances, reluctance to pull permits, no local references, and pressure 
 
 https://www.youtube.com/watch?v=3Y6KDfmAP5Q
 
-Illustrative process clip (editorial construction sequencing — not footage of a live Board of Project Stewardship job):
+Process clip (editorial construction sequencing — not footage of a live Board of Project Stewardship job):
 
 [Watch the short process clip](../assets/videos/posts/2026-09-07-edmonds-adu-framing.mp4)
 
@@ -73,7 +73,7 @@ Look for phases: feasibility, schematic, design development, permit set, and con
 
 Ask how the firm handles coastal weather detailing on additions and wet-area assemblies on baths. Edmonds projects punish generic inland details. Request examples of flashing at old-to-new joints and shower membrane photo logs.
 
-![Illustrative: Edmonds, Washington — a covered side entry with a clean walkway and no signs](../assets/images/posts/2026-08-11-hire-design-build-edmonds-5.webp)
+![Edmonds, Washington — a covered side entry with a clean walkway and no signs](../assets/images/posts/2026-08-11-hire-design-build-edmonds-5.webp)
 
 ## Team roster transparency
 
@@ -81,11 +81,11 @@ Know who your day-to-day PM is, who designs, who engineers, and which trades are
 
 ## Aligning incentives
 
-![Illustrative: Edmonds, Washington — a kitchen table with closed folders and unlabeled finish samples](../assets/images/posts/2026-08-11-hire-design-build-edmonds-2.webp)
+![Edmonds, Washington — a kitchen table with closed folders and unlabeled finish samples](../assets/images/posts/2026-08-11-hire-design-build-edmonds-2.webp)
 
 Progress payments should track visible milestones: design deliverables, permit submission, dry-in, rough inspections, and substantial completion. Avoid schedules that front-load payment before weatherproofing on vertical work.
 
-![Illustrative: hire design build on a home in Edmonds](../assets/images/posts/2026-08-11-hire-design-build-6.webp)
+![Hire design build on a home in Edmonds](../assets/images/posts/2026-08-11-hire-design-build-6.webp)
 
 ## Putting it together for homeowners
 

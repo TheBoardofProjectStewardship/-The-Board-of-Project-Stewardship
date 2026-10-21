@@ -12,7 +12,7 @@ slug: "water-heater-replacement-marysville-wa"
 - **Electrical permits are local here, too.** Washington L&I's list of [cities that run their own electrical permits and inspections](https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections) includes Marysville, and the City's [Building Services](https://www.marysvillewa.gov/97/Building-services) page notes its electrical permit processing. That matters if you are moving to a heat pump water heater or adding a circuit.
 - **Paid plumbing work needs a certified plumber.** L&I's [plumber program](https://lni.wa.gov/licensing-permits/plumbing/about-the-plumber-program) says only L&I-certified plumbers can legally do plumbing on someone else's property; owners can do their own. Check any firm on [Washington L&I Verify](https://secure.lni.wa.gov/verify/) before you sign.
 
-![Illustrative: a tall tank water heater with copper supply lines and a valve on top, set in a bright utility corner beside a window and a base cabinet — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-19-marysville-water-heater-1.webp)
+![A tall tank water heater with copper supply lines and a valve on top, set in a bright utility corner beside a window and a base cabinet — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-19-marysville-water-heater-1.webp)
 
 ## Why water heaters come up so often in Marysville
 
@@ -33,7 +33,7 @@ How the process works, from the City's own pages:
 - **Questions go to a Permit Tech.** The City lists MSVLPermits@marysvillewa.gov and 360-363-8223 for portal help, and Building Services can be reached at 360-363-8100 to confirm whether a permit is required.
 - **Watch for payment scams.** The portal carries a fraud alert: the City will never request payment by wire transfer.
 
-![Illustrative: copper supply and distribution piping roughed in across an open wall in a finished room — the kind of water piping that may need to be rerouted when a new tank does not line up with the old connections — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-19-marysville-water-heater-2.webp)
+![Copper supply and distribution piping roughed in across an open wall in a finished room — the kind of water piping that may need to be rerouted when a new tank does not line up with the old connections — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-19-marysville-water-heater-2.webp)
 
 ## The electrical permit comes from the City, not L&I
 
@@ -72,7 +72,7 @@ A one-line quote ("replace 50-gal tank") leaves too much open. Ask for these in 
 - **Haul-away and cleanup:** removal and disposal of the old tank.
 - **Warranty:** what the installer warrants on labor, separate from the manufacturer's tank warranty.
 
-![Illustrative: a finished wall with a single exposed pipe dropping to a floor drain in a utility space — the kind of drain point a relief-valve discharge line or condensate line has to reach — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-19-marysville-water-heater-3.webp)
+![A finished wall with a single exposed pipe dropping to a floor drain in a utility space — the kind of drain point a relief-valve discharge line or condensate line has to reach — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-19-marysville-water-heater-3.webp)
 
 ## Materials Worth Knowing
 

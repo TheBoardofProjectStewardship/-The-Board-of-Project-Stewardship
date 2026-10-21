@@ -12,7 +12,7 @@ slug: "window-replacement-lynnwood-wa"
 - Confirm whether your scope is a pocket (insert) replacement or a full-frame / resized opening — that choice usually decides whether City of Lynnwood or Snohomish County permits apply.
 - Re-check every installation contractor on [Washington L&I Verify](https://secure.lni.wa.gov/verify/) before anyone touches the envelope.
 
-![Illustrative: Pacific Northwest window rough-opening and unit fit-up detail for a Lynnwood-area replacement conversation](../assets/images/posts/2026-10-02-lynnwood-window-4.webp)
+![Pacific Northwest window rough-opening and unit fit-up detail for a Lynnwood-area replacement conversation](../assets/images/posts/2026-10-02-lynnwood-window-4.webp)
 
 ## Why window upgrades matter in Lynnwood
 
@@ -34,7 +34,7 @@ Moisture is the primary longevity stressor for windows in this region.
 
 Match frame choice to exposure: windward elevations, second-story suites, and rooms over garages all see different condensation and egress demands. When you compare bids, ask for U-factor and Solar Heat Gain Coefficient (SHGC) in writing so “energy efficient” is not a slogan.
 
-![Illustrative: window flashing and rough-opening preparation during a Pacific Northwest remodel in Lynnwood](../assets/images/posts/2026-10-02-lynnwood-window-2.webp)
+![Window flashing and rough-opening preparation during a Pacific Northwest remodel in Lynnwood](../assets/images/posts/2026-10-02-lynnwood-window-2.webp)
 
 ## Energy performance: Low-E, gas fills, and thermal breaks
 
@@ -92,7 +92,7 @@ Fresh manufacturer references for envelope and glazing coordination on Lynnwood 
 - [Owens Corning insulation](https://www.owenscorning.com/en-us/insulation) — cavity and perimeter insulation that supports thermal comfort once new units are set and rough openings are sealed.
 - [CertainTeed building products](https://www.certainteed.com/) — insulation, gypsum, and exterior product lines commonly coordinated on major residential remodels that reopen walls around windows.
 
-![Illustrative: finished residential window elevation after replacement in a Pacific Northwest setting in Lynnwood](../assets/images/posts/2026-10-02-lynnwood-window-3.webp)
+![Finished residential window elevation after replacement in a Pacific Northwest setting in Lynnwood](../assets/images/posts/2026-10-02-lynnwood-window-3.webp)
 
 ## Getting started on a Lynnwood window project
 

@@ -14,13 +14,13 @@ slug: "edmonds-home-addition-permit-basics"
 
 Planning a structural home addition in Edmonds usually means more than a single building permit. Most projects need a coordinated package that covers design, site constraints, and the trade permits that follow. Start with the City of Edmonds building and planning resources before you freeze design: [Apply for a Permit (Edmonds)](https://edmondswa.gov/services/permit_assistance/apply_for_a_permit) via [MyBuildingPermit](https://www.mybuildingpermit.com/), and keep the [informational handouts](https://edmondswa.gov/services/permit_assistance/permit_information___forms/informational_handouts) (including B61 Residential Addition/Remodel/Alteration) nearby.
 
-![Illustrative: Edmonds, Washington — an addition framed and sheathed with a weather barrier, bright coastal haze](../assets/images/posts/2026-08-12-edmonds-home-addition-permit-2.webp)
+![Edmonds, Washington — an addition framed and sheathed with a weather barrier, bright coastal haze](../assets/images/posts/2026-08-12-edmonds-home-addition-permit-2.webp)
 
 ## Start with the building permit
 
 Structural additions — bump-outs, second stories, and ADU-style expansions — typically require a **building permit** from the City of Edmonds. Expect plan review for structure, energy code, and life-safety items. Coastal, critical-area, or steep-slope lots can trigger extra site or environmental review before construction starts.
 
-![Illustrative: home addition permit basics on a home in Edmonds](../assets/images/posts/2026-08-12-edmonds-addition-permit-4.webp)
+![Home addition permit basics on a home in Edmonds](../assets/images/posts/2026-08-12-edmonds-addition-permit-4.webp)
 
 ## Related trade permits
 
@@ -32,7 +32,7 @@ Alongside the building permit, additions commonly need:
 
 Experienced design-build firms often assemble this package so homeowners are not chasing agencies alone. See our [Top home addition contractors](../additions.html) for firms that regularly manage Edmonds and nearby permitting.
 
-![Illustrative: Edmonds, Washington — an addition roof being tied into the existing roof, underlayment only](../assets/images/posts/2026-08-12-edmonds-home-addition-permit-3.webp)
+![Edmonds, Washington — an addition roof being tied into the existing roof, underlayment only](../assets/images/posts/2026-08-12-edmonds-home-addition-permit-3.webp)
 
 ## Timeline expectations
 
@@ -40,11 +40,11 @@ Design and permitting often consume a large share of the calendar. Many resident
 
 https://www.youtube.com/watch?v=LquaPVqh6tw
 
-Illustrative process clip (editorial addition framing staging — not footage of a live Board of Project Stewardship job):
+Process clip (editorial addition framing staging — not footage of a live Board of Project Stewardship job):
 
 [Watch the short process clip](../assets/videos/posts/2026-09-07-edmonds-adu-framing.mp4)
 
-![Illustrative: Edmonds, Washington — the empty interior of a new addition with three tall windows to fir trees, from the side](../assets/images/posts/2026-08-12-edmonds-home-addition-permit-4.webp)
+![Edmonds, Washington — the empty interior of a new addition with three tall windows to fir trees, from the side](../assets/images/posts/2026-08-12-edmonds-home-addition-permit-4.webp)
 
 ## Materials Worth Knowing
 
@@ -65,13 +65,13 @@ Manufacturer product pages useful when comparing structural connectors, weather-
 
 ## Edmonds-specific site cues
 
-![Illustrative: home addition permit basics on a home in Edmonds](../assets/images/posts/2026-08-12-edmonds-addition-permit-5.webp)
+![Home addition permit basics on a home in Edmonds](../assets/images/posts/2026-08-12-edmonds-addition-permit-5.webp)
 
 Edmonds lots near the Sound can raise drainage, setback, and critical-area questions that interior-only remodelers may not flag early. Ask whether your survey, soils note, or height calculation is already in the drawing set before the first permit submittal. A clean first submittal usually beats a faster, incomplete one that comes back with correction cycles.
 
 Weather windows matter when an addition opens an existing roof or wall. Require a written dry-in plan: temporary weather protection, sequencing of sheathing and WRB, and who owns storm response if rain arrives mid-tie-in.
 
-![Illustrative: home addition permit basics on a home in Edmonds](../assets/images/posts/2026-08-12-edmonds-addition-permit-6.webp)
+![Home addition permit basics on a home in Edmonds](../assets/images/posts/2026-08-12-edmonds-addition-permit-6.webp)
 
 ## Putting it together for homeowners
 

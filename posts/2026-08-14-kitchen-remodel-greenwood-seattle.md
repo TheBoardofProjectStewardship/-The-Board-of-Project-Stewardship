@@ -14,7 +14,7 @@ slug: "kitchen-remodel-greenwood-seattle"
 
 Greenwood and nearby North Seattle streets feature kitchens ready for better circulation, daylight, and durability. Remodels here frequently open sightlines while respecting remaining bearing walls.
 
-![Illustrative: Greenwood, Seattle — a farmhouse sink under a wet window and sage cabinets, from the side yard](../assets/images/posts/2026-08-14-kitchen-greenwood-2.webp)
+![Greenwood, Seattle — a farmhouse sink under a wet window and sage cabinets, from the side yard](../assets/images/posts/2026-08-14-kitchen-greenwood-2.webp)
 
 ## Local context
 
@@ -24,7 +24,7 @@ Parking and staging are manageable compared with denser cores but still need pla
 
 Outdoor-exhaust hoods, panel checks, and moisture-aware finishes matter in the PNW. Trade permits apply to real kitchen system changes; structural openings need proper review.
 
-![Illustrative: kitchen remodel on a home in Greenwood, Seattle](../assets/images/posts/2026-08-14-greenwood-kitchen-2.webp)
+![Kitchen remodel on a home in Greenwood, Seattle](../assets/images/posts/2026-08-14-greenwood-kitchen-2.webp)
 
 ## Materials and process
 
@@ -32,11 +32,11 @@ Lock appliances early, design lighting layers, and specify under-sink protection
 
 https://www.youtube.com/watch?v=5zhTNUo-4WI
 
-Illustrative process clip (editorial kitchen remodel staging — not footage of a live Board of Project Stewardship job):
+Process clip (editorial kitchen remodel staging — not footage of a live Board of Project Stewardship job):
 
 [Watch the short process clip](../assets/videos/posts/2026-09-shared-waterproofing.mp4)
 
-![Illustrative: kitchen remodel on a home in Greenwood, Seattle](../assets/images/posts/2026-08-14-greenwood-kitchen-3.webp)
+![Kitchen remodel on a home in Greenwood, Seattle](../assets/images/posts/2026-08-14-greenwood-kitchen-3.webp)
 
 ## Materials Worth Knowing
 

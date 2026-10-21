@@ -14,7 +14,7 @@ slug: "bathroom-remodel-queen-anne-seattle"
 
 Queen Anne bathroom projects range from classic home powder rooms to primary suites with view exposure. Steep streets and limited parking shape contractor logistics as much as tile choice.
 
-![Illustrative: Queen Anne, Seattle — a compact bath with a glass shower and a frosted garden window, from the side yard](../assets/images/posts/2026-08-22-bathroom-queen-anne-3.webp)
+![Queen Anne, Seattle — a compact bath with a glass shower and a frosted garden window, from the side yard](../assets/images/posts/2026-08-22-bathroom-queen-anne-3.webp)
 
 ## Local context
 
@@ -26,7 +26,7 @@ Confirm plumbing and electrical permit expectations with [Seattle Department of 
 
 Seattle dampness plus hot showers demands membranes, slopes, and outdoor exhaust. Plumbing and electrical permits are typical; structural changes pull building review. Schedule inspections into the critical path.
 
-![Illustrative: Queen Anne, Seattle — a walk-in shower with large pale tile and a linear drain, empty, detail from the doorway](../assets/images/posts/2026-08-22-bathroom-queen-anne-4.webp)
+![Queen Anne, Seattle — a walk-in shower with large pale tile and a linear drain, empty, detail from the doorway](../assets/images/posts/2026-08-22-bathroom-queen-anne-4.webp)
 
 ## Materials and process
 
@@ -34,11 +34,11 @@ Prioritize waterproofing details, quiet ventilation, and layouts that respect sm
 
 https://www.youtube.com/watch?v=mMbSgZCcsDU
 
-Illustrative process clip (editorial wet-area staging — not footage of a live Board of Project Stewardship job):
+Process clip (editorial wet-area staging — not footage of a live Board of Project Stewardship job):
 
 [Watch the short process clip](../assets/videos/posts/2026-09-bath-process-shared.mp4)
 
-![Illustrative: Queen Anne, Seattle — a bathroom at waterproofing stage, orange membrane on the walls, detail from the doorway](../assets/images/posts/2026-08-22-bathroom-queen-anne-5.webp)
+![Queen Anne, Seattle — a bathroom at waterproofing stage, orange membrane on the walls, detail from the doorway](../assets/images/posts/2026-08-22-bathroom-queen-anne-5.webp)
 
 Board rankings on [bathrooms.html](../bathrooms.html) place **Pacific Pro Group** at #1 for bathrooms in this editorial set — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with [trades.html](../trades.html) when plumbing or electrical is in scope, and the [blog](../blog.html) for related Seattle bath posts.
 

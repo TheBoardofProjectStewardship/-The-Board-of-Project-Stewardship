@@ -11,7 +11,7 @@ sources:
   - https://seattle.gov/construction-and-inspections/codes/changes-to-code/environmentally-critical-areas-update/project-documents
   - https://www.seattle.gov/documents/Departments/SDCI/Codes/ChangesToCodes/ECAUpdate/Public%20Participation%20Plan.pdf
 hero: "assets/images/news/2026-10-16-seattle-environmentally-critical-areas-update.webp"
-hero_alt: "Illustrative: a hillside home set back from a wooded ravine and creek in Seattle"
+hero_alt: "A hillside home set back from a wooded ravine and creek in Seattle"
 ---
 
 ## Key Takeaways
@@ -46,7 +46,7 @@ The ECA code update focuses on areas of Seattle that require additional regulati
 
 The city states that these regulations are necessary to protect the environment and public safety by promoting development that is stable and compatible, while avoiding or mitigating adverse impacts. SDCI said the update is meant to improve the effectiveness of these policies to better manage development in hazardous areas and enhance the urban environment by protecting wetlands, fish and wildlife habitat, riparian corridors and other ecological resources. The department described the health of these areas as an important indicator of the overall health and well-being of the city.
 
-![Illustrative: steep wooded slope behind houses in a Seattle neighborhood](../assets/images/news/2026-10-16-seattle-critical-areas-2.webp)
+![Steep wooded slope behind houses in a Seattle neighborhood](../assets/images/news/2026-10-16-seattle-critical-areas-2.webp)
 
 ## How the process works
 
@@ -76,7 +76,7 @@ According to the [SDCI project page](https://seattle.gov/construction-and-inspec
 
 The 2026 update is intended to incorporate current BAS and align the code with updated state statutes and local planning documents, specifically the One Seattle Plan (Comprehensive Plan Update).
 
-![Illustrative: homeowner reviewing a site plan with a marked slope buffer for a Seattle remodel](../assets/images/news/2026-10-16-seattle-critical-areas-3.webp)
+![Homeowner reviewing a site plan with a marked slope buffer for a Seattle remodel](../assets/images/news/2026-10-16-seattle-critical-areas-3.webp)
 
 ## What it means for homeowners
 

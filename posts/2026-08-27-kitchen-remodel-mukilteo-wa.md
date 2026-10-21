@@ -14,7 +14,7 @@ slug: "kitchen-remodel-mukilteo-wa"
 
 Kitchen remodels in Mukilteo range from compact updates to open-concept expansions toward views. The right plan respects wind exposure at openings, traffic from outdoor living, and electrical capacity for modern cooking — not only cabinet door style.
 
-![Illustrative: Mukilteo, Washington — a remodeled kitchen with a white oak island and a garden window after rain](../assets/images/posts/2026-08-27-kitchen-mukilteo-3.webp)
+![Mukilteo, Washington — a remodeled kitchen with a white oak island and a garden window after rain](../assets/images/posts/2026-08-27-kitchen-mukilteo-3.webp)
 
 ## Neighborhood context
 
@@ -28,7 +28,7 @@ Salt air and humidity argue for quality hardware and well-sealed exterior doors 
 
 Soft-close mechanisms still fail early if salt air and grit are ignored — ask about finish grades suited to coastal exposure when the kitchen opens to a deck. Keep exterior door weatherseals in scope if the kitchen connects outdoors.
 
-![Illustrative: Mukilteo, Washington — a farmhouse sink under a wet window and sage cabinets](../assets/images/posts/2026-08-27-kitchen-mukilteo-4.webp)
+![Mukilteo, Washington — a farmhouse sink under a wet window and sage cabinets](../assets/images/posts/2026-08-27-kitchen-mukilteo-4.webp)
 
 ## Design, process, and coordination
 
@@ -36,11 +36,11 @@ Sequence design → systems feasibility → permits → rough-in → finishes. S
 
 https://www.youtube.com/watch?v=9MD50WRgQ60
 
-Illustrative process clip (shared editorial staging for remodel sequencing — not footage of a live Board of Project Stewardship job):
+Process clip (shared editorial staging for remodel sequencing — not footage of a live Board of Project Stewardship job):
 
 [Watch the short process clip](../assets/videos/posts/2026-09-bath-process-shared.mp4)
 
-![Illustrative: Mukilteo, Washington — a breakfast nook with a built-in bench and fir trees outside](../assets/images/posts/2026-08-27-kitchen-mukilteo-5.webp)
+![Mukilteo, Washington — a breakfast nook with a built-in bench and fir trees outside](../assets/images/posts/2026-08-27-kitchen-mukilteo-5.webp)
 
 Board rankings on [kitchen.html](../kitchen.html) place **Pacific Pro Group** at #1 for kitchen remodels in this editorial set — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with [trades.html](../trades.html) when you need electrician or plumber context, [additions.html](../additions.html) if a bump-out is on the table, and the [blog](../blog.html) for related Snohomish County kitchen posts.
 

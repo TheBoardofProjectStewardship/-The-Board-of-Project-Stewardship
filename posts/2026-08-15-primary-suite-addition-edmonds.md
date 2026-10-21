@@ -14,7 +14,7 @@ slug: "primary-suite-addition-edmonds"
 
 Adding a primary suite in Edmonds — bedroom, bath, and often closet — is one of the highest-impact ways to modernize a home without leaving the neighborhood.
 
-![Illustrative: Edmonds, Washington — wall framing of a new addition before sheathing, floor joists visible](../assets/images/posts/2026-08-15-primary-suite-addition-edmonds-3.webp)
+![Edmonds, Washington — wall framing of a new addition before sheathing, floor joists visible](../assets/images/posts/2026-08-15-primary-suite-addition-edmonds-3.webp)
 
 ## Local context
 
@@ -24,7 +24,7 @@ Suites may land as ground-floor wings for aging-in-place or as second-story expa
 
 Expect building permits for the addition plus plumbing/electrical/mechanical for the new bath and conditioning. Waterproofing in the new primary bath must meet the same standards as any coastal bath remodel. Ventilation and heating should be designed, not guessed.
 
-![Illustrative: Edmonds, Washington — a new concrete stem wall and gravel footing beside the existing house](../assets/images/posts/2026-08-15-primary-suite-addition-edmonds-4.webp)
+![Edmonds, Washington — a new concrete stem wall and gravel footing beside the existing house](../assets/images/posts/2026-08-15-primary-suite-addition-edmonds-4.webp)
 
 ## Process guidance
 
@@ -32,11 +32,11 @@ Program the suite (bath size, closet, office nook) before exterior massing freez
 
 https://www.youtube.com/watch?v=U4vnuIdHHK8
 
-Illustrative process clip (editorial addition framing staging — not footage of a live Board of Project Stewardship job):
+Process clip (editorial addition framing staging — not footage of a live Board of Project Stewardship job):
 
 [Watch the short process clip](../assets/videos/posts/2026-09-07-edmonds-adu-framing.mp4)
 
-![Illustrative: primary suite addition on a home in Edmonds](../assets/images/posts/2026-08-15-primary-suite-3.webp)
+![Primary suite addition on a home in Edmonds](../assets/images/posts/2026-08-15-primary-suite-3.webp)
 
 ## Materials Worth Knowing
 

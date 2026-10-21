@@ -564,7 +564,7 @@ export function toSvg() {
   const sheet = (x, y, w, h) =>
     `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="8" fill="#fbf8f3" stroke="#e3dcd0"/>`;
   return `<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width.toFixed(0)} ${height.toFixed(0)}" role="img" aria-label="Illustrative ground floor and first floor plan">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width.toFixed(0)} ${height.toFixed(0)}" role="img" aria-label="Ground floor and first floor plan">
   <rect width="100%" height="100%" fill="#f3efe6"/>
   <g id="svg-ground">
     ${sheet(pad - 8, groundOy - 22, gw + 16, gd + 40)}

@@ -14,7 +14,7 @@ slug: "another-story-method-weatherproof-first"
 
 “Another story” additions fail in the Puget Sound when teams chase framing progress while weather enters the old volume. A weatherproof-first method flips the priority: protect, dry in, then refine.
 
-![Illustrative: a roof temporarily tented with tarps while an upper floor is opened in Puget Sound](../assets/images/posts/2026-08-08-another-story-weatherproof-first-3.webp)
+![A roof temporarily tented with tarps while an upper floor is opened in Puget Sound](../assets/images/posts/2026-08-08-another-story-weatherproof-first-3.webp)
 
 ## Why weatherproof-first
 
@@ -28,9 +28,9 @@ Opening a roof in Edmonds, Shoreline, or nearby coastal communities exposes inte
 4. **Rapid dry-in** — roof planes and critical flashings before interior focus upstairs
 5. **Only then** — full interior systems and finishes in the new level
 
-![Illustrative: another story method weatherproof first on a home in Puget Sound](../assets/images/posts/2026-08-08-weatherproof-first-4.webp)
+![Another story method weatherproof first on a home in Puget Sound](../assets/images/posts/2026-08-08-weatherproof-first-4.webp)
 
-![Illustrative: another story method weatherproof first on a home in Puget Sound](../assets/images/posts/2026-08-08-weatherproof-first-2.webp)
+![Another story method weatherproof first on a home in Puget Sound](../assets/images/posts/2026-08-08-weatherproof-first-2.webp)
 
 ## Contractor interview prompts
 
@@ -43,7 +43,7 @@ Board addition rankings: [additions.html](../additions.html). Edmonds context: [
 
 https://www.youtube.com/watch?v=mwsYi2m8KMI
 
-Illustrative process clip (editorial waterproofing / dry-in process — not footage of a live Board of Project Stewardship job):
+Process clip (editorial waterproofing / dry-in process — not footage of a live Board of Project Stewardship job):
 
 [Watch the short process clip](../assets/videos/posts/2026-09-shared-waterproofing.mp4)
 
@@ -68,15 +68,15 @@ Stop, dry, assess, document. Hidden moisture becomes mold if ignored. Contracts 
 
 ## Owner behaviors that support the method
 
-![Illustrative: another story method weatherproof first on a home in Puget Sound](../assets/images/posts/2026-08-08-weatherproof-first-5.webp)
+![Another story method weatherproof first on a home in Puget Sound](../assets/images/posts/2026-08-08-weatherproof-first-5.webp)
 
 Do not pressure crews to “keep going” in unsafe weather to hit a party date. Protecting the existing home is the schedule. Store furniture away from second-story work zones, maintain clear paths for emergency covering materials, and designate an owner decision-maker reachable during storms.
 
 Ask for daily end-of-day photos during the open-roof period. Documentation encourages discipline and helps insurance conversations if something goes wrong despite best efforts.
 
-![Illustrative: another story method weatherproof first on a home in Puget Sound](../assets/images/posts/2026-08-08-weatherproof-first-3.webp)
+![Another story method weatherproof first on a home in Puget Sound](../assets/images/posts/2026-08-08-weatherproof-first-3.webp)
 
-![Illustrative: wall sheathing wrapped in a weather barrier with taped seams, pale winter light in Puget Sound](../assets/images/posts/2026-08-08-another-story-weatherproof-first-2.webp)
+![Wall sheathing wrapped in a weather barrier with taped seams, pale winter light in Puget Sound](../assets/images/posts/2026-08-08-another-story-weatherproof-first-2.webp)
 
 ## Putting it together for homeowners
 

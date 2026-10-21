@@ -14,7 +14,7 @@ slug: "hire-bathroom-remodeler-king-snohomish"
 
 Hiring a bathroom remodeler in King and Snohomish Counties means evaluating moisture detailing skill as much as aesthetics. The region’s climate exposes weak pans and poor exhaust quickly.
 
-![Illustrative: Snohomish County, Washington — a bathroom floor of charcoal porcelain, vanity in white oak in Puget Sound](../assets/images/posts/2026-09-05-hire-bathroom-remodeler-king-snohomish-3.webp)
+![Snohomish County, Washington — a bathroom floor of charcoal porcelain, vanity in white oak in Puget Sound](../assets/images/posts/2026-09-05-hire-bathroom-remodeler-king-snohomish-3.webp)
 
 ## What to look for
 
@@ -24,7 +24,7 @@ Hiring a bathroom remodeler in King and Snohomish Counties means evaluating mois
 - Written specs for membrane type, pan method, niche detailing, and fan model/termination
 - Realistic schedule with rough-in and inspection gates
 
-![Illustrative: Snohomish County, Washington — a corner soaking tub and a pebble floor at the threshold, detail in Puget Sound](../assets/images/posts/2026-09-05-hire-bathroom-remodeler-king-snohomish-4.webp)
+![Snohomish County, Washington — a corner soaking tub and a pebble floor at the threshold, detail in Puget Sound](../assets/images/posts/2026-09-05-hire-bathroom-remodeler-king-snohomish-4.webp)
 
 ## Interview questions that matter
 
@@ -40,13 +40,13 @@ Our [bathroom remodel directory](../bathrooms.html) covers King and Snohomish fi
 
 Also see [trades.html](../trades.html) for specialty trade context and [kitchen.html](../kitchen.html) if a joint kitchen-bath project is planned.
 
-![Illustrative: hire bathroom remodeler on a home in Puget Sound](../assets/images/posts/2026-09-05-hire-bath-3.webp)
+![Hire bathroom remodeler on a home in Puget Sound](../assets/images/posts/2026-09-05-hire-bath-3.webp)
 
 ## Process video
 
 ../assets/videos/posts/2026-09-bath-process-shared.mp4
 
-Illustrative process clip (wet-area framing / waterproofing context) — not a specific contractor’s jobsite.
+Process clip (wet-area framing / waterproofing context) — not a specific contractor’s jobsite.
 
 https://www.youtube.com/watch?v=3PCsTfEbda0
 

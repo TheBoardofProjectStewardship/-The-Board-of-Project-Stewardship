@@ -12,7 +12,7 @@ slug: "deck-replacement-snohomish-county-wa"
 - Replacement counts: the county's online application path lists "Deck" as the sub type with "New, Repair or Replacement" as the work type, and it asks for a scaled site plan plus structural plans that show the ledger connection and any openings below the ledger.
 - Uncovered decks no higher than 4 feet may project into a required setback if they stay at least 30 inches from any property line and no more than 6 feet into a street setback. Taller decks and any covered deck must meet the full building setback.
 
-![Illustrative: a craftsman-style house with a deep covered front porch, wood posts, a short run of entry steps, and a fern garden under tall evergreens — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-10-snohomish-deck-1.webp)
+![A craftsman-style house with a deep covered front porch, wood posts, a short run of entry steps, and a fern garden under tall evergreens — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-10-snohomish-deck-1.webp)
 
 ## Why so many county decks are due
 
@@ -35,7 +35,7 @@ That height measurement is the one that catches people. Many older county decks 
 
 The statewide baseline lives in the Washington State Building Code. Washington adopts the International Residential Code with its own amendments in [Chapter 51-51 WAC](https://app.leg.wa.gov/wac/default.aspx?cite=51-51), and the deck section, [WAC 51-51-0507 (Section R507)](https://app.leg.wa.gov/wac/default.aspx?cite=51-51-0507), carries Washington's own tables for minimum deck footing size and maximum deck post height. Those tables key off soil bearing value, the deck area each post supports, and load. Building codes are updated on a regular cycle, so ask the county which edition applies on the date you apply.
 
-![Illustrative: a house wall wrapped in weather-resistive barrier with dark flashing tape at the seams and around a window, the kind of layered wall a deck ledger must be flashed into — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-10-snohomish-deck-2.webp)
+![A house wall wrapped in weather-resistive barrier with dark flashing tape at the seams and around a window, the kind of layered wall a deck ledger must be flashed into — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-10-snohomish-deck-2.webp)
 
 ## What the county wants in a deck submittal
 
@@ -80,7 +80,7 @@ Where the walking surface is more than 30 inches above grade, the deck needs gua
 
 If you plan to add deck lighting, a heater, or outlets, that is electrical work with its own permit. In unincorporated areas, Washington L&I issues electrical permits and inspections unless a city runs its own program; see L&I's [electrical permits, fees, and inspections](https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/) page.
 
-![Illustrative: a covered entry porch with a stained wood door, wood ceiling, stone-clad column bases, and a built-in bench — a roof-covered porch like this always needs a permit — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-10-snohomish-deck-3.webp)
+![A covered entry porch with a stained wood door, wood ceiling, stone-clad column bases, and a built-in bench — a roof-covered porch like this always needs a permit — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-10-snohomish-deck-3.webp)
 
 ## Materials Worth Knowing
 

@@ -12,7 +12,7 @@ slug: "kitchen-remodel-kirkland-wa"
 - Almost every real kitchen remodel touches wiring, and Kirkland is one of the Washington cities that issues its own electrical permits and inspections, so the permit comes from the city, not from Washington L&I ([L&I city electrical list](https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections); [KMC 21.06.210](https://kirkland.municipal.codes/KMC/21.06.210)).
 - A larger range hood can trigger makeup-air requirements, and the city asks for your contractor's state registration number and Kirkland business license number before it issues a permit — check both on [Washington L&I Verify](https://secure.lni.wa.gov/verify/) before you sign anything ([KMC 21.06.247](https://kirkland.municipal.codes/KMC/21.06.247)).
 
-![Illustrative kitchen gutted to studs in a lake-view home, with a range-hood duct chase, plumbing stub-outs, and new electrical boxes in place before inspection — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-07-kirkland-kitchen-1.webp)
+![Kitchen gutted to studs in a lake-view home, with a range-hood duct chase, plumbing stub-outs, and new electrical boxes in place before inspection — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-07-kirkland-kitchen-1.webp)
 
 ## Kirkland kitchens and the houses around them
 
@@ -39,7 +39,7 @@ In most of Washington, homeowners and contractors buy electrical permits from th
 
 In practice that covers new countertop receptacles, island circuits, under-cabinet lighting, a dedicated circuit for an induction range or a wall oven, and the hood itself. If your bid assumes "the electrician will pull an L&I permit," ask who is actually pulling the city electrical permit and when the rough-in inspection happens. If a gas line, a new range location, or an induction conversion is part of the plan, put it in the scope early: it changes both panel capacity and the inspection sequence.
 
-![Illustrative open sink base with plumbing supply lines, drain trap, and electrical boxes roughed in before cabinets and countertops go back in — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-07-kirkland-kitchen-2.webp)
+![Open sink base with plumbing supply lines, drain trap, and electrical boxes roughed in before cabinets and countertops go back in — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-07-kirkland-kitchen-2.webp)
 
 ## Range hoods and makeup air
 
@@ -65,7 +65,7 @@ Manufacturer references commonly evaluated on Kirkland-scale kitchen remodels (r
 
 Brand names are a starting point. Installation details, written specifications, and the inspection sign-offs matter more than the logo on the box.
 
-![Illustrative finished kitchen with white shaker cabinets, a vented hood over the range, a large island, and lake and evergreen views through wide windows — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-07-kirkland-kitchen-3.webp)
+![Finished kitchen with white shaker cabinets, a vented hood over the range, a large island, and lake and evergreen views through wide windows — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-07-kirkland-kitchen-3.webp)
 
 ## How to shortlist and verify contractors
 

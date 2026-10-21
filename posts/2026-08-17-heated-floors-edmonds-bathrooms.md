@@ -14,7 +14,7 @@ slug: "heated-floors-edmonds-bathrooms"
 
 Radiant floor heat under bathroom tile is popular in Edmonds for cold mornings and faster drying after showers. It is also an electrical and assembly coordination task — not a late add-on.
 
-![Illustrative: Edmonds, Washington — a heat mat with combed thinset, no person, rainy window](../assets/images/posts/2026-08-17-heated-floors-edmonds-bathrooms-4.webp)
+![Edmonds, Washington — a heat mat with combed thinset, no person, rainy window](../assets/images/posts/2026-08-17-heated-floors-edmonds-bathrooms-4.webp)
 
 ## Local context
 
@@ -30,7 +30,7 @@ Cool coastal mornings make warm floors feel transformative. Primary baths and ki
 
 Permits: electrical work for floor heat typically requires permitted electrical scope — include it explicitly.
 
-![Illustrative: Edmonds, Washington — electric floor-heat cable on a bathroom subfloor, bright coastal haze](../assets/images/posts/2026-08-17-heated-floors-edmonds-bathrooms-2.webp)
+![Edmonds, Washington — electric floor-heat cable on a bathroom subfloor, bright coastal haze](../assets/images/posts/2026-08-17-heated-floors-edmonds-bathrooms-2.webp)
 
 ## Hiring notes
 
@@ -38,11 +38,11 @@ Ask who installs the heat system versus who tiles, and how warranties split. Pho
 
 https://www.youtube.com/watch?v=Y8VG3STo6VM
 
-Illustrative process clip (editorial radiant-floor staging — not footage of a live Board of Project Stewardship job):
+Process clip (editorial radiant-floor staging — not footage of a live Board of Project Stewardship job):
 
 [Watch the short process clip](../assets/videos/posts/2026-09-bath-process-shared.mp4)
 
-![Illustrative: heated floors bathrooms on a home in Edmonds](../assets/images/posts/2026-08-17-heated-floors-3.webp)
+![Heated floors bathrooms on a home in Edmonds](../assets/images/posts/2026-08-17-heated-floors-3.webp)
 
 ## Materials Worth Knowing
 

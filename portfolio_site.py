@@ -169,7 +169,7 @@ def model_section(entry: dict, cfg: dict | None, *, standalone: bool = False, st
         </div>
         <div class="ppgm-house-live">
           <p class="ppgm-hint" aria-hidden="true">Scroll <span class="ppgm-hint-chevron">↓</span></p>
-          <div class="ppgm-house-sheet" role="img" aria-label="Illustrative drawing of {esc(title)}.">
+          <div class="ppgm-house-sheet" role="img" aria-label="Drawing of {esc(title)}.">
             <canvas class="ppgm-house-canvas" width="960" height="540" tabindex="0" aria-describedby="ppgm-explore-help" aria-label="Interactive model: {esc(title)}"></canvas>
             <div class="ppgm-labels" aria-hidden="true"></div>
           </div>

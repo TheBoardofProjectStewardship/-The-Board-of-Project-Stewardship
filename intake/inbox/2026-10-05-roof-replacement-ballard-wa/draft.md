@@ -12,7 +12,7 @@ slug: "roof-replacement-ballard-wa"
 - In Ballard's long wet season, the underlayment, eave and valley membranes, and flashing do more to protect the house than the shingle brand. Ask every bidder to write those layers into the scope.
 - Re-check every roofer and specialty trade on [Washington L&I Verify](https://secure.lni.wa.gov/verify/) yourself before a deposit or tear-off. Registration, bond, and insurance are public records.
 
-![Illustrative image of a Ballard craftsman bungalow mid roof replacement, with underlayment and a metal drip edge under an overcast sky — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-05-ballard-roof-4.webp)
+![Image of a Ballard craftsman bungalow mid roof replacement, with underlayment and a metal drip edge under an overcast sky — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-05-ballard-roof-4.webp)
 
 ## Why Ballard roofs work harder
 
@@ -34,7 +34,7 @@ SDCI's [Roof Replacement Affidavit](https://www.seattle.gov/documents/Department
 
 Historic context matters too. The city's Ballard Avenue page notes that within the Ballard Avenue Landmark District, any change to the outside of a building needs a Certificate of Approval from the district board. That covers most commercial and mixed-use buildings on the avenue, not typical single-family streets. If your property is near the district, check the city's boundary map early. For a broader orientation on permit types, see the Board's [permits](../permits.html) guide.
 
-![Illustrative roof deck covered in synthetic underlayment with drip edge at the eave, tall evergreens behind — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-05-ballard-roof-2.webp)
+![Roof deck covered in synthetic underlayment with drip edge at the eave, tall evergreens behind — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-05-ballard-roof-2.webp)
 
 ## The layers that keep water out
 
@@ -69,7 +69,7 @@ The Board of Project Stewardship does not endorse a single brand. These manufact
 - [Simpson Strong-Tie connectors](https://www.strongtie.com/): rafter and truss ties that connect roof framing to walls when reframing or structural repair is part of the scope.
 - [ROCKWOOL insulation](https://www.rockwool.com/north-america/): mineral wool insulation worth discussing when attic insulation is added or replaced during the re-roof.
 
-![Illustrative brick chimney with a metal cricket and flashing on a rain-wet roof — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-05-ballard-roof-3.webp)
+![Brick chimney with a metal cricket and flashing on a rain-wet roof — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-05-ballard-roof-3.webp)
 
 ## Signs it is time to plan, not patch
 

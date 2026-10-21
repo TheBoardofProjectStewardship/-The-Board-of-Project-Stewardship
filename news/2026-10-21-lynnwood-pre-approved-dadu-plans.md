@@ -39,7 +39,7 @@ Answering Councilmember Escamilla's questions about cost, Almgren said the desig
 
 Owners of plans selected for pre-approval must sign a memorandum of agreement with the city before their work is featured as a pre-approved plan set, the city says.
 
-![Illustrative: a small detached backyard cottage, the kind of DADU Lynnwood's pre-approved plan gallery covers, behind a two-story home in Lynnwood](../assets/images/news/2026-10-21-lynnwood-dadu-backyard-cottage-1.webp "Illustrative image of a detached accessory dwelling unit in a Lynnwood backyard. Lynnwood's pre-approved plans range from about 490 to about 1,000 square feet.")
+![A small detached backyard cottage, the kind of DADU Lynnwood's pre-approved plan gallery covers, behind a two-story home in Lynnwood](../assets/images/news/2026-10-21-lynnwood-dadu-backyard-cottage-1.webp "Image of a detached accessory dwelling unit in a Lynnwood backyard. Lynnwood's pre-approved plans range from about 490 to about 1,000 square feet.")
 
 ## The review pipeline and timing
 
@@ -49,7 +49,7 @@ Almgren said five more plans came in the week before the meeting and four reache
 
 Councilmember David Parshall asked about flexibility, since some plans might not suit every type of land. Not all plans will work on every site, Almgren said, "but it does allow somebody to see something and say, 'That's what I like. What do I need to do for that to fit on my site?'"
 
-![Illustrative: floor plan and elevation drawings for a small backyard cottage on a kitchen table, the kind of pre-approved DADU plan set Lynnwood is reviewing](../assets/images/news/2026-10-21-lynnwood-dadu-plans-2.webp "Illustrative image of a DADU plan set. Lynnwood will post pre-approved backyard cottage plans as they are approved, with the first expected by the end of October or in November.")
+![Floor plan and elevation drawings for a small backyard cottage on a kitchen table, the kind of pre-approved DADU plan set Lynnwood is reviewing](../assets/images/news/2026-10-21-lynnwood-dadu-plans-2.webp "Image of a DADU plan set. Lynnwood will post pre-approved backyard cottage plans as they are approved, with the first expected by the end of October or in November.")
 
 ## History and background
 
@@ -71,6 +71,6 @@ State law allows two ADUs on most urban residential lots. Owners may also be abl
 
 Before choosing a plan, confirm your lot's requirements with Lynnwood planning at 425-670-5410 or Planning@LynnwoodWA.gov. When it is time to hire, any contractor's license can be checked at [Washington L&I Verify](https://secure.lni.wa.gov/verify/).
 
-![Illustrative: foundation forms and a utility trench dug for a backyard cottage in a Snohomish County yard, site work Lynnwood's pre-approved DADU plans do not cover](../assets/images/news/2026-10-21-lynnwood-dadu-site-work-3.webp "Illustrative image of DADU site work in Snohomish County. Lynnwood's pre-approved plans cover the building only, so grading and utilities still need site-specific review.")
+![Foundation forms and a utility trench dug for a backyard cottage in a Snohomish County yard, site work Lynnwood's pre-approved DADU plans do not cover](../assets/images/news/2026-10-21-lynnwood-dadu-site-work-3.webp "Image of DADU site work in Snohomish County. Lynnwood's pre-approved plans cover the building only, so grading and utilities still need site-specific review.")
 
 Questions or corrections: editorial@boardofprojectstewardship.com

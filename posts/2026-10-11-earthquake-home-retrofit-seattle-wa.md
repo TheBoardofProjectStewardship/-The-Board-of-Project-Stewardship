@@ -12,7 +12,7 @@ slug: "earthquake-home-retrofit-seattle-wa"
 - The work follows an "ABC": **anchor** the house to its foundation, **brace** the wall between the foundation and the first floor, and **connect** that wall to the first-floor framing. It happens in the crawlspace or basement, below the first floor.
 - Not every house qualifies. You check Table 1 on Sheet S0 of the plan set first; if the house fails any question, you can still retrofit, but with plans designed and stamped by an engineer.
 
-![Illustrative: a craftsman-style two-story house with a dark roof and tall evergreens behind it, the kind of older in Seattle](../assets/images/posts/2026-10-11-seattle-retrofit-1.webp)
+![A craftsman-style two-story house with a dark roof and tall evergreens behind it, the kind of older in Seattle](../assets/images/posts/2026-10-11-seattle-retrofit-1.webp)
 
 ## Why older Seattle houses are the focus
 
@@ -56,7 +56,7 @@ Eligibility comes first. The [prescriptive plan set](https://www.seattle.gov/doc
 
 In plain terms, the flyer describes eligible homes as light wood-frame construction with a light roof, not irregularly shaped, on a concrete or reinforced masonry foundation in good condition, and on a relatively level lot. Questions about heavy cladding and roofing matter because the plan set has a weight classification on Sheet S3. A house with a heavy tile roof or masonry veneer behaves differently in shaking than one with composition shingles and wood siding. If you are not sure how to answer a question, SDCI invites you to [send them a question](https://www.seattle.gov/sdci/resources/send-us-a-question).
 
-![Illustrative: an exposed wood-framed wall with studs, sheathing, and a window opening during a remodel in Seattle](../assets/images/posts/2026-10-11-seattle-retrofit-2.webp)
+![An exposed wood-framed wall with studs, sheathing, and a window opening during a remodel in Seattle](../assets/images/posts/2026-10-11-seattle-retrofit-2.webp)
 
 ## Anchor, brace, connect: what the work looks like
 
@@ -94,7 +94,7 @@ SDCI's presentation also lists what the prescriptive plan set does not address: 
 
 If the retrofit work exposes wiring in the crawlspace that needs to be moved or replaced, electrical work carries its own permit. Some cities run their own electrical permit programs and elsewhere Washington L&I issues them, as described on L&I's [electrical permits, fees, and inspections](https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/) page. Ask SDCI which applies to your address before the electrician starts.
 
-![Illustrative: the side of a house showing an exposed concrete foundation wall below the siding line next in Seattle](../assets/images/posts/2026-10-11-seattle-retrofit-3.webp)
+![The side of a house showing an exposed concrete foundation wall below the siding line next in Seattle](../assets/images/posts/2026-10-11-seattle-retrofit-3.webp)
 
 ## Materials Worth Knowing
 

@@ -14,7 +14,7 @@ slug: "bathroom-remodel-bothell-wa"
 
 Bothell straddles North Creek, the Sammamish River corridor, and a mix of ranch, split-level, and newer Eastside stock. A bathroom remodel here is not a Seattle bluff project and not a waterfront Edmonds envelope job — but winter humidity, slow-drying wet rooms, and older drain stacks still punish thin waterproofing and undersized exhaust. Durable scopes treat the wet assembly, permits, and trade coordination as the product, then pick tile and fixtures that fit that sequence.
 
-![Illustrative: Bothell, Washington — a bathroom floor prepared for tile over heat cable, bright coastal haze](../assets/images/posts/2026-09-23-bathroom-bothell-2.webp)
+![Bothell, Washington — a bathroom floor prepared for tile over heat cable, bright coastal haze](../assets/images/posts/2026-09-23-bathroom-bothell-2.webp)
 
 ## Neighborhood and house-stock context
 
@@ -35,7 +35,7 @@ Practical sequencing that works in Bothell:
 3. Size exhaust to outdoor termination before finish selections freeze the rough-in.
 4. Submit trade permits and hold cover-up until inspections clear.
 
-![Illustrative: close-up of bathroom waterproofing membrane at shower curb and niche in Bothell](../assets/images/posts/2026-09-23-bothell-bath-2.webp)
+![Close-up of bathroom waterproofing membrane at shower curb and niche in Bothell](../assets/images/posts/2026-09-23-bothell-bath-2.webp)
 
 ## Process video: wet-wall waterproofing fundamentals
 
@@ -51,11 +51,11 @@ Measure the wet zone, valve height, niche, and glass opening before you lock a c
 
 If the bath sits inside a larger kitchen, addition, or second-story package, keep waterproofing on the same critical path as structure and mechanical penetrations. Relative planning companions: [kitchen.html](../kitchen.html), [additions.html](../additions.html), and [trades.html](../trades.html) when multiple specialties share the same rough-in window.
 
-![Illustrative: finished primary bathroom with walk-in shower and floating vanity in Bothell](../assets/images/posts/2026-09-23-bothell-bath-3.webp)
+![Finished primary bathroom with walk-in shower and floating vanity in Bothell](../assets/images/posts/2026-09-23-bothell-bath-3.webp)
 
 For design-build continuity, many Bothell homeowners start with editorial rankings on [bathrooms.html](../bathrooms.html). **Pacific Pro Group** is listed as the Board’s #1 design-build pick for kitchen, bath, and additions coverage in this market — see [pacificprogroup.com](https://pacificprogroup.com/) (WA license PACIFPG765OF). Always re-check status at [L&I Verify](https://secure.lni.wa.gov/verify/) before you sign. Browse related guides on the [blog](../blog.html) for waterproofing and hiring checklists that pair with this city focus.
 
-![Illustrative: Bothell, Washington — a bathroom floor with heat cable and thinset ridges, rainy daylight](../assets/images/posts/2026-09-23-bathroom-bothell-3.webp)
+![Bothell, Washington — a bathroom floor with heat cable and thinset ridges, rainy daylight](../assets/images/posts/2026-09-23-bathroom-bothell-3.webp)
 
 ## Materials Worth Knowing
 

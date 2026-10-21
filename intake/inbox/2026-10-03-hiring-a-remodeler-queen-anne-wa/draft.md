@@ -12,7 +12,7 @@ slug: "hiring-a-remodeler-queen-anne-wa"
 - Treat [Seattle Department of Construction & Inspections (SDCI)](https://www.seattle.gov/sdci) permitting as part of the schedule: most Queen Anne envelope or footprint changes route through the [Seattle Services Portal](https://services.seattle.gov/Portal/Customization/SEATTLE/Welcome.aspx), not a handshake on the curb.
 - Ask remodelers how they stage materials on steep, narrow streets and how they join new structure to old-growth framing — Queen Anne logistics and historic stock punish generic suburban playbooks.
 
-![Illustrative residential remodel staging and site walk-through for a Queen Anne Seattle hiring decision — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-03-queen-anne-hiring-1.webp)
+![Residential remodel staging and site walk-through for a Queen Anne Seattle hiring decision — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-03-queen-anne-hiring-1.webp)
 
 ## Why Queen Anne remodeling is its own hiring problem
 
@@ -32,7 +32,7 @@ Design review and landmark constraints can add exterior-material and massing scr
 
 Board-wide permit orientation (not Seattle-specific) is in the [permits](../permits.html) guide.
 
-![Illustrative design-build coordination and plan review materials during a Pacific Northwest remodel hire — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-03-queen-anne-hiring-2.webp)
+![Design-build coordination and plan review materials during a Pacific Northwest remodel hire — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-03-queen-anne-hiring-2.webp)
 
 ## Design-build vs. design-bid-build on steep historic lots
 
@@ -75,7 +75,7 @@ Manufacturer references often coordinated on Queen Anne-scale residential remode
 - [Benjamin Moore paint](https://www.benjaminmoore.com/) — interior coating systems used when historic millwork and new surfaces need durable, carefully matched finishes.
 - [Sherwin-Williams coatings](https://www.sherwin-williams.com/) — exterior and specialty coatings frequently paired with siding and trim maintenance cycles in damp Pacific Northwest exposures.
 
-![Illustrative finished residential exterior elevation after a coordinated remodel — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-03-queen-anne-hiring-3.webp)
+![Finished residential exterior elevation after a coordinated remodel — illustrative only, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-03-queen-anne-hiring-3.webp)
 
 ## Next steps for a Queen Anne hire
 

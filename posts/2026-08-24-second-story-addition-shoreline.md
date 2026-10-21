@@ -14,7 +14,7 @@ slug: "second-story-addition-shoreline"
 
 Going up in Shoreline preserves yard space but temporarily removes the roof that keeps your house dry. Treat that as the central engineering and logistics problem.
 
-![Illustrative: Shoreline, Washington — the empty upper bedroom of an addition with knee walls and a window](../assets/images/posts/2026-08-24-second-story-addition-shoreline-2.webp)
+![Shoreline, Washington — the empty upper bedroom of an addition with knee walls and a window](../assets/images/posts/2026-08-24-second-story-addition-shoreline-2.webp)
 
 ## Local context
 
@@ -26,7 +26,7 @@ Confirm permit and zoning expectations with the [City of Shoreline](https://www.
 
 Wet-season exposure is the enemy. Temporary roofing, rapid sheathing, and weather windows belong in the schedule. Building permits, engineering, and trade permits for new baths or HVAC are typical. Energy code and egress apply to new bedrooms.
 
-![Illustrative: Shoreline, Washington — sheathing on a second-story wall, weather barrier half installed](../assets/images/posts/2026-08-24-second-story-addition-shoreline-3.webp)
+![Shoreline, Washington — sheathing on a second-story wall, weather barrier half installed](../assets/images/posts/2026-08-24-second-story-addition-shoreline-3.webp)
 
 ## Process guidance
 
@@ -34,11 +34,11 @@ Ask for dry-in milestones, stair access plans, and how rain delays are handled. 
 
 https://www.youtube.com/watch?v=7n0NE2WJegw
 
-Illustrative process clip (shared editorial staging for framing and envelope sequencing — not footage of a live Board of Project Stewardship job):
+Process clip (shared editorial staging for framing and envelope sequencing — not footage of a live Board of Project Stewardship job):
 
 [Watch the short process clip](../assets/videos/posts/2026-09-07-edmonds-adu-framing.mp4)
 
-![Illustrative: second story addition on a home in Shoreline](../assets/images/posts/2026-08-24-shoreline-addition-3.webp)
+![Second story addition on a home in Shoreline](../assets/images/posts/2026-08-24-shoreline-addition-3.webp)
 
 Board rankings on [additions.html](../additions.html) place **Pacific Pro Group** at #1 for home additions in this editorial set — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with [another-story.html](../another-story.html) when vertical expansion is on the table, [bathrooms.html](../bathrooms.html) or [kitchen.html](../kitchen.html) when those rooms move upstairs, and the [blog](../blog.html) for related Shoreline addition posts.
 

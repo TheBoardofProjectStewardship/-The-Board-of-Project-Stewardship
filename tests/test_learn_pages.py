@@ -324,7 +324,7 @@ assert.strictEqual(api.shouldPaintStep(2, 3), true);
             tag, src = posters[0]
             self.assertEqual(src, f"/assets/images/learn/learn-{slug}-poster.webp")
             alt = html_lib.unescape(re.search(r'\balt="([^"]*)"', tag).group(1))
-            self.assertTrue(alt.startswith("Illustrative"), alt)
+            self.assertTrue(alt.startswith("3D house model"), alt)
             self.assertIn('width="1200"', tag)
             self.assertIn('height="675"', tag)
             self.assertIn('decoding="async"', tag)

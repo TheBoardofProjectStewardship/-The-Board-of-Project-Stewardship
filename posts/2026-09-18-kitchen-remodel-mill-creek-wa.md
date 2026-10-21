@@ -14,7 +14,7 @@ slug: "kitchen-remodel-mill-creek-wa"
 
 Mill Creek’s mix of planned neighborhoods, cul-de-sac lots, and mid-1990s through 2010s housing stock means kitchen remodels here often start with circulation and storage — not only cabinets. Many homes already have open dining connections; the real work is making the work triangle, pantry, and ventilation match how the household cooks today.
 
-![Illustrative: Mill Creek, Washington — a kitchen with a long counter and a tile backsplash after a rain shower](../assets/images/posts/2026-09-18-kitchen-mill-creek-2.webp)
+![Mill Creek, Washington — a kitchen with a long counter and a tile backsplash after a rain shower](../assets/images/posts/2026-09-18-kitchen-mill-creek-2.webp)
 
 ## Neighborhood context
 
@@ -24,7 +24,7 @@ Whether you are near the Town Center, along the 527 corridor, or in a quieter re
 
 The PNW damp season rewards quiet, adequately sized range hoods that duct outdoors, not recirculating units that leave grease and moisture in the house. If you move gas, enlarge openings, or change structural beams for a wider opening to the family room, expect building review in addition to trade permits. Confirm with the Mill Creek permit desk (or Snohomish County when the jurisdiction routes that way) whether your scope is fixture-only or needs plan review. Put permit ownership, inspection sequencing, and temporary kitchen plans in the proposal — not in a handshake after demolition starts.
 
-![Illustrative: kitchen rough-in showing electrical, hood duct chase, and plumbing stub-outs in Mill Creek](../assets/images/posts/2026-09-18-mill-creek-kitchen-2.webp)
+![Kitchen rough-in showing electrical, hood duct chase, and plumbing stub-outs in Mill Creek](../assets/images/posts/2026-09-18-mill-creek-kitchen-2.webp)
 
 ## Layout, materials, and process
 
@@ -38,9 +38,9 @@ https://www.youtube.com/watch?v=9egwOazPJis
 
 [Watch the short process clip](../assets/videos/posts/2026-09-25-mill-creek-kitchen-hood.mp4)
 
-![Illustrative: finished contemporary PNW kitchen with ducted range hood and island seating in Mill Creek](../assets/images/posts/2026-09-18-mill-creek-kitchen-3.webp)
+![Finished contemporary PNW kitchen with ducted range hood and island seating in Mill Creek](../assets/images/posts/2026-09-18-mill-creek-kitchen-3.webp)
 
-![Illustrative: Mill Creek–style kitchen remodel with light oak cabinets, cooktop, and exposed foil-wrapped range-hood duct](../assets/images/posts/2026-09-18-mill-creek-kitchen-4.webp)
+![Mill Creek–style kitchen remodel with light oak cabinets, cooktop, and exposed foil-wrapped range-hood duct](../assets/images/posts/2026-09-18-mill-creek-kitchen-4.webp)
 
 Board rankings on [kitchen.html](../kitchen.html) place **Pacific Pro Group** at #1 for kitchen remodels in this editorial set — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with [trades.html](../trades.html) when you need electrician or plumber context, [additions.html](../additions.html) if a bump-out is on the table, and the [blog](../blog.html) for related King and Snohomish kitchen posts.
 
