@@ -83,13 +83,13 @@ function buildFromConfig(cfg) {
     if (edge) for (let i = 0; i < pts.length; i++) line(g, pts[i], pts[(i + 1) % pts.length], C_INK, role, baseY);
   }
   /** Vertical prism over a plan polygon, from y0 to y1. */
-  function prism(g, poly, y0, y1, color, role = 0, edge = true, edgeColor = C_INK) {
+  function prism(g, poly, y0, y1, color, role = 0, edge = true, edgeColor = C_INK, cutBase = y0) {
     if (y1 <= y0 || poly.length < 3) return;
-    for (const t of triangulate(poly)) { tri(g, [t[0][0], y1, t[0][1]], [t[2][0], y1, t[2][1]], [t[1][0], y1, t[1][1]], color, role, y0); }
+    for (const t of triangulate(poly)) { tri(g, [t[0][0], y1, t[0][1]], [t[2][0], y1, t[2][1]], [t[1][0], y1, t[1][1]], color, role, cutBase); }
     for (let i = 0; i < poly.length; i++) {
       const a = poly[i], b = poly[(i + 1) % poly.length];
-      face(g, [[a[0], y0, a[1]], [b[0], y0, b[1]], [b[0], y1, b[1]], [a[0], y1, a[1]]], color, role, false, y0);
-      if (edge) { line(g, [a[0], y1, a[1]], [b[0], y1, b[1]], edgeColor, role, y0); line(g, [a[0], y0, a[1]], [b[0], y0, b[1]], edgeColor, role, y0); line(g, [a[0], y0, a[1]], [a[0], y1, a[1]], edgeColor, role, y0); }
+      face(g, [[a[0], y0, a[1]], [b[0], y0, b[1]], [b[0], y1, b[1]], [a[0], y1, a[1]]], color, role, false, cutBase);
+      if (edge) { line(g, [a[0], y1, a[1]], [b[0], y1, b[1]], edgeColor, role, cutBase); line(g, [a[0], y0, a[1]], [b[0], y0, b[1]], edgeColor, role, cutBase); line(g, [a[0], y0, a[1]], [a[0], y1, a[1]], edgeColor, role, cutBase); }
     }
   }
   const rect = r => [[r[0], r[1]], [r[2], r[1]], [r[2], r[3]], [r[0], r[3]]];
@@ -139,7 +139,9 @@ function buildFromConfig(cfg) {
         prism(finish, g, sill, head, C_GLASS, 0, true, C_FASCIA);
       } else if (o.kind === 'D' || o.kind === 'D2' || o.kind === 'DG') {
         if (F > W0 + 0.01) mid(W0, F, C_WALL, walls);
-        mid(F + DOOR, h, C_WALL, walls);
+        // A door set below the main floor (garage) keeps its gap in the plan cut, like the main floor doors.
+        if (o.cutBase != null) prism(walls, s, F + DOOR, h, C_WALL, 5, true, C_INK, o.cutBase);
+        else mid(F + DOOR, h, C_WALL, walls);
         if (o.kind === 'DG') prism(finish, g, F, F + DOOR, C_GLASS, 0, true, C_FASCIA);
       } else if (o.kind === 'G') {
         if (F > W0 + 0.01) mid(W0, F, C_WALL, walls);
@@ -292,7 +294,7 @@ function buildFromConfig(cfg) {
   const LY = F + 0.15;
   for (const r of cfg.rooms) {
     const text = r.text || (r.name + ' ' + (Math.round(r.area * 100) / 100) + ' SF');
-    const minor = (r.area ?? 100) < 60;
+    const minor = r.minor ?? ((r.area ?? 100) < 60);
     const floors = LV ? [r.lvl ? 'upper' : 'main'] : ['upper', 'main'];
     const ly = LV ? baseOf(r) + 0.15 : LY;
     for (const floor of floors) {
