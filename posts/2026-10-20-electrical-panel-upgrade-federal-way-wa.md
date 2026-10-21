@@ -65,7 +65,7 @@ Ask each bidder:
 3. Will the meter base, mast, or underground conduit change?
 4. How long will the house be without power, and what happens if the inspection is not passed the same day?
 
-![Illustrative: electric meter and service mast on the side of a Federal Way, WA house before a panel upgrade](../assets/images/posts/2026-10-20-federal-way-panel-4.webp)
+![Electric meter and service mast on the side of a Federal Way, WA house before a panel upgrade](../assets/images/posts/2026-10-20-federal-way-panel-4.webp)
 
 ## Inspections in Federal Way
 
@@ -83,7 +83,7 @@ https://www.youtube.com/watch?v=gDozp7t7A0Y
 
 The video above follows an electrician through a 200-amp main panel replacement, from the permit and the utility disconnect to labeling circuits, setting the new panel, flashing a new mast, and torquing the lugs. Treat it as background rather than a do-it-yourself lesson: it shows what a careful job looks like, so you can ask better questions of the people bidding yours.
 
-![Illustrative: new residential breaker panel with neatly labeled circuits awaiting inspection in a Federal Way, WA home](../assets/images/posts/2026-10-20-federal-way-panel-5.webp)
+![New residential breaker panel with neatly labeled circuits awaiting inspection in a Federal Way, WA home](../assets/images/posts/2026-10-20-federal-way-panel-5.webp)
 
 ## Who is allowed to do the work
 

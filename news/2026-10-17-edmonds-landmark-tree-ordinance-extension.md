@@ -40,7 +40,7 @@ Council President Michelle Dotsch also spoke in favor of the extension, reiterat
 
 The council met at 6 p.m. in the council chambers at the Public Safety Complex, 250 5th Ave. N., according to the [meeting preview](https://myedmondsnews.com/2026/10/four-public-hearings-on-edmonds-city-council-agenda-oct-13/). Written comments on the hearing were accepted through the city's [public comment page](https://www.edmondswa.gov/publiccomment), according to the notice.
 
-![Illustrative: large evergreen tree beside a single-family home in Edmonds](../assets/images/news/2026-10-17-edmonds-landmark-tree-2.webp)
+![Large evergreen tree beside a single-family home in Edmonds](../assets/images/news/2026-10-17-edmonds-landmark-tree-2.webp)
 
 ## Interim process for short plat vacations
 
@@ -64,7 +64,7 @@ Under the chapter's [exemptions](https://edmonds.municipal.codes/ECDC/17.130.040
 
 The chapter's [prohibitions](https://edmonds.municipal.codes/ECDC/17.130.050) bar removing trees from a vacant lot before project development, except for hazard and nuisance trees. Tree removal as part of a permitted demolition is prohibited except as required to reasonably conduct the demolition, subject to the director's approval, and removed trees must be replaced. In critical areas, their buffers and native growth protection easements, tree removal is prohibited except as allowed under Chapter 23.10 of the development code.
 
-![Illustrative: arborist measuring a tree trunk's diameter in an Edmonds backyard before a home project](../assets/images/news/2026-10-17-edmonds-landmark-tree-3.webp)
+![Arborist measuring a tree trunk's diameter in an Edmonds backyard before a home project](../assets/images/news/2026-10-17-edmonds-landmark-tree-3.webp)
 
 ## What it means for homeowners
 

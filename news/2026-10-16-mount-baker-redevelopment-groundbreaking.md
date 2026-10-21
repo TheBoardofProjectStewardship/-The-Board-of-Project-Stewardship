@@ -41,7 +41,7 @@ The city is investing $40.6 million in phase one for the 239 homes next to the M
 
 “There is an ongoing role for the community and our broader network of partners,” Estela Ortega, executive director of El Centro de la Raza, said, according to UW News. “This development means a life of dignity for families in our community — access to safe and affordable housing, supportive services and the opportunity to build a better future. As this project takes shape, we invite our neighbors, community members and partners to be part of the journey, share the story, and help create a place where families feel supported, connected, and rooted in our community for generations to come.”
 
-![Illustrative: crew framing a multistory affordable housing building in Seattle's Mount Baker neighborhood](../assets/images/news/2026-10-16-seattle-mount-baker-housing-2.webp)
+![Crew framing a multistory affordable housing building in Seattle's Mount Baker neighborhood](../assets/images/news/2026-10-16-seattle-mount-baker-housing-2.webp)
 
 ## Rainier Rising Early Learning Campus
 
@@ -57,7 +57,7 @@ Plans also call for 20,000 square feet of public open space, a 6,000-square-foot
 
 Phase one of the redevelopment and the early learning campus are scheduled for completion by 2029. Runberg Architecture Group is the architect for the housing redevelopment, Beacon Development Group is the developer consultant, and Walsh Construction is the builder. For Rainier Rising, Mithun is the architect and Walsh Construction is the builder, UW News reported.
 
-![Illustrative: excavator clearing a redevelopment site near light rail in Seattle's Mount Baker neighborhood](../assets/images/news/2026-10-16-seattle-mount-baker-housing-3.webp)
+![Excavator clearing a redevelopment site near light rail in Seattle's Mount Baker neighborhood](../assets/images/news/2026-10-16-seattle-mount-baker-housing-3.webp)
 
 ## History and background
 
