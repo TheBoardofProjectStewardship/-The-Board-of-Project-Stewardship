@@ -1,0 +1,56 @@
+{
+  "producer": "openclaw",
+  "agent": "seo-specialist",
+  "slug": "attic-insulation-air-sealing-lynnwood-wa",
+  "title": "Attic Insulation & Air Sealing Lynnwood WA \u2014 Permits, Energy Code Basics & What to Check First",
+  "description": "A Lynnwood homeowner's guide to attic insulation and air sealing: when to call the City about a permit, what the Washington State Energy Code says about attics, baffles and hatches, knob-and-tube and recessed light cautions, vermiculite, and Snohomish County PUD rebates.",
+  "category": "Guides",
+  "keywords": [
+    "attic insulation Lynnwood WA",
+    "attic air sealing Lynnwood",
+    "Lynnwood insulation permit",
+    "Washington State Energy Code attic insulation",
+    "Snohomish County PUD insulation rebate"
+  ],
+  "outline": [
+    "Key Takeaways",
+    "Why attic work keeps coming up in Lynnwood",
+    "Do you need a permit in Lynnwood?",
+    "What the energy code says about attics",
+    "Alterations follow new-construction rules for the parts you touch",
+    "R-49 over the top plate can satisfy an R-60 requirement",
+    "Loose-fill limits, eave baffles and hatches",
+    "Air sealing: penetrations, hatches and recessed lights",
+    "Ventilation and moisture in a wet climate",
+    "Cautions before anyone adds insulation",
+    "Knob-and-tube wiring",
+    "Vermiculite insulation",
+    "Snohomish County PUD weatherization rebates",
+    "What to write into a Lynnwood attic bid",
+    "Materials Worth Knowing",
+    "How to shortlist and verify an insulation contractor",
+    "Where Pacific Pro Group fits",
+    "Next steps for a Lynnwood attic"
+  ],
+  "search_intent": "A Lynnwood homeowner planning attic insulation or air sealing wants to know whether the City requires a permit, what the energy code expects in an attic, what wiring and vermiculite cautions apply, and whether PUD rebates are available.",
+  "local_angles": [
+    "Lynnwood Work Exempt list does not name insulation/air sealing; ask DBS",
+    "Lynnwood issues its own electrical permits (L&I city list)",
+    "Residential remodel energy code form",
+    "Online portal; 4:00 p.m. next-day inspection cutoff",
+    "Snohomish County PUD weatherization rebates for electrically heated homes"
+  ],
+  "internal_links": [
+    "../lynnwood.html",
+    "../insulation.html",
+    "../roofing.html",
+    "../hvac.html",
+    "../permits.html",
+    "../verify-contractor.html"
+  ],
+  "notes": "Box-authored fallback brief. PPG only as Board #1 -> https://pacificprogroup.com/.",
+  "generation": {
+    "agent": "box-authored",
+    "mode": "box-fallback"
+  }
+}

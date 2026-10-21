@@ -54,6 +54,7 @@ Base: `https://boardofprojectstewardship.com/`
 | `blog/rss.xml` | Blog RSS feed |
 | `news/rss.xml` | News RSS feed |
 | `404.html` | Branded Board 404 |
+| `posts/2026-10-21-attic-insulation-air-sealing-lynnwood-wa.html` | Attic Insulation & Air Sealing Lynnwood WA — Permits, Energy Code Basics & What to Check First |
 | `posts/2026-10-20-electrical-panel-upgrade-federal-way-wa.html` | Electrical Panel Upgrade Federal Way WA — City Electrical Permit, PSE Disconnect & Who Can Do the Work |
 | `posts/2026-10-19-water-heater-replacement-marysville-wa.html` | Water Heater Replacement Marysville WA — Plumbing Permit, City Electrical Permit & Who Can Do the Work |
 | `posts/2026-10-18-heat-pump-installation-bothell-wa.html` | Heat Pump Installation Bothell WA — Mechanical Permit, L&I Electrical Permit & Where the Outdoor Unit Can Go |

@@ -1,0 +1,185 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Lynnwood",
+    "service": "Attic insulation and air sealing",
+    "slug": "attic-insulation-air-sealing-lynnwood-wa"
+  },
+  "sources": [
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R-40241",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R-40241",
+      "retrieved": "2026-10-21",
+      "http_status": 200,
+      "supports": "Cited in draft; retrieved 2026-10-21 with HTTP 200."
+    },
+    {
+      "url": "https://www.energystar.gov/saveathome/seal_insulate",
+      "title": "https://www.energystar.gov/saveathome/seal_insulate",
+      "retrieved": "2026-10-21",
+      "http_status": 200,
+      "supports": "Cited in draft; retrieved 2026-10-21 with HTTP 200."
+    },
+    {
+      "url": "https://www.lynnwoodwa.gov/files/sharedassets/public/v/1/dbs/checklists/building/work-exempted-from-building-permit-2024.06.pdf",
+      "title": "https://www.lynnwoodwa.gov/files/sharedassets/public/v/1/dbs/checklists/building/work-exempted-from-building-permit-2024.06.pdf",
+      "retrieved": "2026-10-21",
+      "http_status": 200,
+      "supports": "Cited in draft; retrieved 2026-10-21 with HTTP 200."
+    },
+    {
+      "url": "https://www.lynnwoodwa.gov/files/sharedassets/public/v/1/dbs/checklists/building/energy-conde-compliance-form-residential-remodel-2024.06.pdf",
+      "title": "https://www.lynnwoodwa.gov/files/sharedassets/public/v/1/dbs/checklists/building/energy-conde-compliance-form-residential-remodel-2024.06.pdf",
+      "retrieved": "2026-10-21",
+      "http_status": 200,
+      "supports": "Cited in draft; retrieved 2026-10-21 with HTTP 200."
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=296-46B-394",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=296-46B-394",
+      "retrieved": "2026-10-21",
+      "http_status": 200,
+      "supports": "Cited in draft; retrieved 2026-10-21 with HTTP 200."
+    },
+    {
+      "url": "https://www.epa.gov/asbestos/protect-your-family-asbestos-contaminated-vermiculite-insulation",
+      "title": "https://www.epa.gov/asbestos/protect-your-family-asbestos-contaminated-vermiculite-insulation",
+      "retrieved": "2026-10-21",
+      "http_status": 200,
+      "supports": "Cited in draft; retrieved 2026-10-21 with HTTP 200."
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-10-21",
+      "http_status": 200,
+      "supports": "Cited in draft; retrieved 2026-10-21 with HTTP 200."
+    },
+    {
+      "url": "https://www.lynnwoodwa.gov/Services/Apply-for-a-Permit/Adopted-Codes-City-Design-Guidelines-Plans",
+      "title": "https://www.lynnwoodwa.gov/Services/Apply-for-a-Permit/Adopted-Codes-City-Design-Guidelines-Plans",
+      "retrieved": "2026-10-21",
+      "http_status": 200,
+      "supports": "Cited in draft; retrieved 2026-10-21 with HTTP 200."
+    },
+    {
+      "url": "https://www.lynnwoodwa.gov/Services/Apply-for-a-Permit/Guide-to-Getting-a-Permit",
+      "title": "https://www.lynnwoodwa.gov/Services/Apply-for-a-Permit/Guide-to-Getting-a-Permit",
+      "retrieved": "2026-10-21",
+      "http_status": 200,
+      "supports": "Cited in draft; retrieved 2026-10-21 with HTTP 200."
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "title": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "retrieved": "2026-10-21",
+      "http_status": 200,
+      "supports": "Cited in draft; retrieved 2026-10-21 with HTTP 200."
+    },
+    {
+      "url": "https://www.lynnwoodwa.gov/files/sharedassets/public/v/1/dbs/checklists/building/work-exempted-from-electrical-permit-2024.06.pdf",
+      "title": "https://www.lynnwoodwa.gov/files/sharedassets/public/v/1/dbs/checklists/building/work-exempted-from-electrical-permit-2024.06.pdf",
+      "retrieved": "2026-10-21",
+      "http_status": 200,
+      "supports": "Cited in draft; retrieved 2026-10-21 with HTTP 200."
+    },
+    {
+      "url": "https://www.lynnwoodwa.gov/Services/Apply-for-a-Permit/Online-Permit-Portal-Apply-Review-Pay-Issue-Permits-Inspections",
+      "title": "https://www.lynnwoodwa.gov/Services/Apply-for-a-Permit/Online-Permit-Portal-Apply-Review-Pay-Issue-Permits-Inspections",
+      "retrieved": "2026-10-21",
+      "http_status": 200,
+      "supports": "Cited in draft; retrieved 2026-10-21 with HTTP 200."
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R",
+      "retrieved": "2026-10-21",
+      "http_status": 200,
+      "supports": "Cited in draft; retrieved 2026-10-21 with HTTP 200."
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R-50300",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R-50300",
+      "retrieved": "2026-10-21",
+      "http_status": 200,
+      "supports": "Cited in draft; retrieved 2026-10-21 with HTTP 200."
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R-40220",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R-40220",
+      "retrieved": "2026-10-21",
+      "http_status": 200,
+      "supports": "Cited in draft; retrieved 2026-10-21 with HTTP 200."
+    },
+    {
+      "url": "https://www.energystar.gov/saveathome/seal_insulate/identify-problems-you-want-fix/diy-checks-inspections/insulation-r-values",
+      "title": "https://www.energystar.gov/saveathome/seal_insulate/identify-problems-you-want-fix/diy-checks-inspections/insulation-r-values",
+      "retrieved": "2026-10-21",
+      "http_status": 200,
+      "supports": "Cited in draft; retrieved 2026-10-21 with HTTP 200."
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R-40240",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R-40240",
+      "retrieved": "2026-10-21",
+      "http_status": 200,
+      "supports": "Cited in draft; retrieved 2026-10-21 with HTTP 200."
+    },
+    {
+      "url": "https://www.epa.gov/asbestos/protect-your-family-exposures-asbestos",
+      "title": "https://www.epa.gov/asbestos/protect-your-family-exposures-asbestos",
+      "retrieved": "2026-10-21",
+      "http_status": 200,
+      "supports": "Cited in draft; retrieved 2026-10-21 with HTTP 200."
+    },
+    {
+      "url": "https://www.snopud.com/save-energy/residential/rebates/weatherization/",
+      "title": "https://www.snopud.com/save-energy/residential/rebates/weatherization/",
+      "retrieved": "2026-10-21",
+      "http_status": 200,
+      "supports": "Cited in draft; retrieved 2026-10-21 with HTTP 200."
+    },
+    {
+      "url": "https://www.snopud.com/rebates/",
+      "title": "https://www.snopud.com/rebates/",
+      "retrieved": "2026-10-21",
+      "http_status": 200,
+      "supports": "Cited in draft; retrieved 2026-10-21 with HTTP 200."
+    },
+    {
+      "url": "https://www.jm.com/",
+      "title": "https://www.jm.com/",
+      "retrieved": "2026-10-21",
+      "http_status": 200,
+      "supports": "Cited in draft; retrieved 2026-10-21 with HTTP 200."
+    },
+    {
+      "url": "https://www.knaufnorthamerica.com/en-us/",
+      "title": "https://www.knaufnorthamerica.com/en-us/",
+      "retrieved": "2026-10-21",
+      "http_status": 200,
+      "supports": "Cited in draft; retrieved 2026-10-21 with HTTP 200."
+    },
+    {
+      "url": "https://www.greenfiber.com/",
+      "title": "https://www.greenfiber.com/",
+      "retrieved": "2026-10-21",
+      "http_status": 200,
+      "supports": "Cited in draft; retrieved 2026-10-21 with HTTP 200."
+    },
+    {
+      "url": "https://www.airvent.com/",
+      "title": "https://www.airvent.com/",
+      "retrieved": "2026-10-21",
+      "http_status": 200,
+      "supports": "Cited in draft; retrieved 2026-10-21 with HTTP 200."
+    }
+  ],
+  "dropped": [
+    "everettwa.gov permit pages (403 to box and PC curl; switched city to Lynnwood)",
+    "energy.gov Energy Saver insulation pages (404)",
+    "Puget Sound Clean Air asbestos pages (404)",
+    "SnoPUD rebate dollar amounts (omitted)",
+    "Washington Residential Code attic ventilation ratios (not fetched)"
+  ]
+}

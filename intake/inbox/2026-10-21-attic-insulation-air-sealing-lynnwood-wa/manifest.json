@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-10-21-attic-insulation-air-sealing-lynnwood-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-10-21T11:00:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Attic Insulation & Air Sealing Lynnwood WA \u2014 Permits, Energy Code Basics & What to Check First",
+    "date": "2026-10-21",
+    "slug": "attic-insulation-air-sealing-lynnwood-wa",
+    "description": "A Lynnwood homeowner's guide to attic insulation and air sealing: when to call the City about a permit, what the Washington State Energy Code says about attics, baffles and hatches, knob-and-tube and recessed light cautions, vermiculite, and Snohomish County PUD rebates.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 connected at ~03:43 PT but had no 2026-10-21 packets (WSL board-intake inbox latest *-2026-10-20). Topic: attic insulation and air sealing, Lynnwood WA (attic/insulation never a post topic; Lynnwood not in the last 14 posts). Everett was preferred but everettwa.gov returned 403 to box and PC curl, so Lynnwood was used. Producer role fields kept per intake contract."
+}
