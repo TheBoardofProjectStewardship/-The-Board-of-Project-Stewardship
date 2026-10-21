@@ -43,6 +43,8 @@ Natalie Reber, a government affairs manager with the Master Builders Association
 
 "Sometimes somebody can split the lot and make it a conservation space or something else," Reber said after the meeting. "We're hopeful it will create more homes."
 
+![Illustrative: surveyor staking a new property line across a residential lot in Snohomish County](../assets/images/news/2026-10-15-snohomish-county-lot-split-2.webp)
+
 ## Affordability and growth targets
 
 The proposal underwent review by county staff, the Master Builders Association, Snohomish County Public Works and the public, according to the council's legislative file. The item received an executive recommendation on Aug. 5, and the council continued the item twice during that month before the October hearing.
@@ -66,6 +68,8 @@ The legal framework for dividing land in Washington is governed by chapter 58.17
 In 2025, the Washington Legislature passed [House Bill 1096](https://app.leg.wa.gov/billsummary?BillNumber=1096&Year=2025&Initiative=false) (E2SHB 1096, chapter 301, Laws of 2025), titled "Increasing housing options through lot splitting." The bill passed the House 93-4 and the Senate 43-4, with the House concurring 94-4. The governor signed the bill May 17, 2025, and it took effect July 27, 2025.
 
 According to the Legislature's [final bill report](https://lawfilesext.leg.wa.gov/biennium/2025-26/Pdf/Bill%20Reports/House/1096-S2.E%20HBR%20FBR%2025.pdf), HB 1096 requires cities to provide an administrative lot-split review decided by a planning director or designee using clear and objective standards, without a pre-decision public hearing. The law specifies that only one new lot may be created, both lots must meet minimum size requirements, the parent lot must be in a residential zone, and the parent lot may not have been the result of a previous lot split. Additionally, water and sewer providers must certify availability, and a lot split survey must be recorded with the county auditor noting that no future lot splits are permitted. Cities with a comprehensive plan update due in 2027 must comply by that update; others must comply within two years of the effective date. The law applies to cities, not counties, which is why Snohomish County was not required to act but chose to use it as a starting point, Saponaro told the council.
+
+![Illustrative: detached backyard cottage behind a single-family home in Snohomish County](../assets/images/news/2026-10-15-snohomish-county-lot-split-3.webp)
 
 ## What it means for homeowners
 

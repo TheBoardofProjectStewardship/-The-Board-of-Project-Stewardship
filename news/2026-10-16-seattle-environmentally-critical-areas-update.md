@@ -46,6 +46,8 @@ The ECA code update focuses on areas of Seattle that require additional regulati
 
 The city states that these regulations are necessary to protect the environment and public safety by promoting development that is stable and compatible, while avoiding or mitigating adverse impacts. SDCI said the update is meant to improve the effectiveness of these policies to better manage development in hazardous areas and enhance the urban environment by protecting wetlands, fish and wildlife habitat, riparian corridors and other ecological resources. The department described the health of these areas as an important indicator of the overall health and well-being of the city.
 
+![Illustrative: steep wooded slope behind houses in a Seattle neighborhood](../assets/images/news/2026-10-16-seattle-critical-areas-2.webp)
+
 ## How the process works
 
 The update process is guided by a [Public Participation Plan](https://www.seattle.gov/documents/Departments/SDCI/Codes/ChangesToCodes/ECAUpdate/Public%20Participation%20Plan.pdf) designed to ensure transparency and follow state requirements. The process includes several stages of engagement and review:
@@ -73,6 +75,8 @@ The current regulations for Environmentally Critical Areas are found in [Seattle
 According to the [SDCI project page](https://seattle.gov/construction-and-inspections/codes/changes-to-code/environmentally-critical-areas-update), the update is driven by the state Growth Management Act (GMA), which requires local governments to adopt development regulations that protect critical areas to maintain wildlife habitat and reduce risks such as flooding and landslides. The GMA requires local governments to include Best Available Science (BAS) in developing policies and regulations to protect the functions and values of critical areas, and several state agencies provide guidance on meeting that requirement.
 
 The 2026 update is intended to incorporate current BAS and align the code with updated state statutes and local planning documents, specifically the One Seattle Plan (Comprehensive Plan Update).
+
+![Illustrative: homeowner reviewing a site plan with a marked slope buffer for a Seattle remodel](../assets/images/news/2026-10-16-seattle-critical-areas-3.webp)
 
 ## What it means for homeowners
 
