@@ -59,9 +59,16 @@ function triangulate(poly) {
 function buildFromConfig(cfg) {
   const groups = [], labels = [], rooms = [];
   const group = id => { const g = { id, solid: [], lines: [] }; groups.push(g); return g; };
-  const site = group('site'), slab = group('upperfloor'), walls = group('upper'), finish = group('finish');
+  // Two-level configs (cfg.levels) keep the main floor in its own groups so the upper floor can lift away.
+  const LV = cfg.levels || null;
+  const site = group('site');
+  const low = LV ? { slab: group('lowerfloor'), walls: group('lower'), finish: group('lowerFinish'), fix: group('lowerFix') } : null;
+  const slab = group('upperfloor'), walls = group('upper'), finish = group('finish');
   const fix = group('fixtures'), roof = group('roof');
   const F = cfg.floor || 0;
+  const up = { slab, walls, finish, fix };
+  const G = o => (low && !o.lvl ? low : up);
+  const baseOf = o => o.base != null ? o.base : (LV ? LV[o.lvl || 0].y : F);
   const sub = (a, b) => a.map((v, i) => v - b[i]);
   const cross = (a, b) => [a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1]*b[0]];
   function tri(g, a, b, c, color, role = 0, baseY = Math.min(a[1], b[1], c[1])) {
@@ -90,22 +97,31 @@ function buildFromConfig(cfg) {
     return [[a[0] + nx, a[1] + nz], [b[0] + nx, b[1] + nz], [b[0] - nx, b[1] - nz], [a[0] - nx, a[1] - nz]];
   }
   const H = cfg.assume || {};
-  const SILL = H.sill ?? 3, HEAD = H.head ?? 7, DOOR = H.door ?? 6.67, GDOOR = H.garageDoor ?? 10, BAYSILL = H.baySill ?? 2;
+  const SILL0 = H.sill ?? 3, HEAD0 = H.head ?? 7, DOOR0 = H.door ?? 6.67, GDOOR0 = H.garageDoor ?? 10, BAYSILL = H.baySill ?? 2;
 
   // Site: lawn plate under everything, pads (patio, porch, drive) as thin slabs.
   const B = cfg.bounds;
   prism(site, rect([B.min[0], B.min[2], B.max[0], B.max[2]]), -0.3, 0, C_LAWN, 7, false);
-  for (const p of cfg.pads || []) prism(site, p.poly, 0, p.kind === 'drive' ? 0.05 : F, C_PAVE, 7, true, C_DETAIL);
+  for (const p of cfg.pads || []) prism(site, p.poly, 0, p.y1 != null ? p.y1 : p.kind === 'drive' ? 0.05 : F, C_PAVE, 7, true, C_DETAIL);
+  // Floor decks of a two-level house: slab on grade, the garage slab, the upper floor framing.
+  for (const d of cfg.decks || []) prism(G(d).slab, d.poly, d.y0, d.y1, C_FLOOR, 7, !!d.edge, C_DETAIL);
   // Slab and room floors.
   for (const r of cfg.rooms) {
     if (!r.poly) continue;
-    const wet = /bath|shower|^tc$|laundry|water heater/i.test(r.name);
-    prism(slab, r.poly, 0, F, wet ? C_TILE : C_FLOOR, 7, false);
+    const wet = /bath|shower|^tc$|laundry|water heater|powder/i.test(r.name);
+    if (!LV) { prism(slab, r.poly, 0, F, wet ? C_TILE : C_FLOOR, 7, false); continue; }
+    if (wet && r.ch) { const b = baseOf(r); prism(G(r).slab, r.poly, b, b + 0.02, C_TILE, 7, false); }
   }
   // Walls: every traced wall piece, from the slab edge up to its room's ceiling height.
-  for (const w of cfg.walls) prism(walls, w.q, 0, F + w.h, C_WALL, 5, true);
+  for (const w of cfg.walls) {
+    const b = baseOf(w), y0 = w.y0 != null ? w.y0 : (LV && w.lvl ? b : 0);
+    prism(G(w).walls, w.q, y0, b + w.h, C_WALL, 5, true);
+  }
   // Openings: sills, headers, glass and door panels fill the traced gaps.
   for (const o of cfg.openings) {
+    const F = baseOf(o), walls = G(o).walls, finish = G(o).finish, slab = G(o).slab;
+    const W0 = LV && o.lvl ? F : 0;
+    const SILL = o.sill ?? SILL0, HEAD = o.head ?? HEAD0, DOOR = o.door ?? DOOR0, GDOOR = o.door ?? GDOOR0;
     const h = F + (o.h || 9);
     const segs = [];
     if (o.poly) for (let i = 0; i < o.poly.length - 1; i++) segs.push([o.poly[i], o.poly[i + 1]]);
@@ -116,12 +132,15 @@ function buildFromConfig(cfg) {
       const mid = (y0, y1, col, grp, edge = true) => prism(grp, s, y0, y1, col, 5, edge);
       if (o.kind === 'W' || o.kind === 'bay') {
         const sill = F + (o.kind === 'bay' ? BAYSILL : SILL), head = F + HEAD;
-        if (o.kind === 'bay') mid(0, sill, C_WALL, walls); else mid(0, sill, C_WALL, walls);
+        mid(W0, sill, C_WALL, walls);
         mid(head, o.kind === 'bay' ? F + 9 : h, C_WALL, walls);
         prism(finish, g, sill, head, C_GLASS, 0, true, C_FASCIA);
-      } else if (o.kind === 'D' || o.kind === 'D2') {
+      } else if (o.kind === 'D' || o.kind === 'D2' || o.kind === 'DG') {
+        if (F > W0 + 0.01) mid(W0, F, C_WALL, walls);
         mid(F + DOOR, h, C_WALL, walls);
+        if (o.kind === 'DG') prism(finish, g, F, F + DOOR, C_GLASS, 0, true, C_FASCIA);
       } else if (o.kind === 'G') {
+        if (F > W0 + 0.01) mid(W0, F, C_WALL, walls);
         mid(F + GDOOR, h, C_WALL, walls);
         prism(finish, g, F, F + GDOOR, C_DOOR, 0, true);
         const L = Math.hypot(b[0] - a[0], b[1] - a[1]);
@@ -139,7 +158,17 @@ function buildFromConfig(cfg) {
   }
   // Fixtures and furniture from the plan symbols.
   for (const f of cfg.fixtures || []) {
-    const r = f.r;
+    const r = f.r, F = baseOf(f), fix = G(f).fix;
+    if (f.kind === 'stair') {
+      // Straight run: n risers from this floor up to the next, climbing toward f.up.
+      const n = f.n || 16, rise = (f.rise || 9) / n, neg = f.up === '-z' || f.up === '-x', alongZ = /z/.test(f.up || 'z');
+      const a0 = alongZ ? r[1] : r[0], a1 = alongZ ? r[3] : r[2], run = (a1 - a0) / (n - 1);
+      for (let i = 0; i < n - 1; i++) {
+        const s0 = neg ? a1 - (i + 1) * run : a0 + i * run, s1 = s0 + run;
+        prism(fix, rect(alongZ ? [r[0], s0, r[2], s1] : [s0, r[1], s1, r[3]]), F, F + (i + 1) * rise, C_FURN, 1, true, C_DETAIL);
+      }
+      continue;
+    }
     prism(fix, rect(r), F, F + f.h, C_FURN, 0, true, C_DETAIL);
     if (f.kind === 'bed') prism(fix, rect([r[0], r[1], r[2], r[1] + Math.min(1.6, (r[3] - r[1]) * 0.25)]), F + f.h, F + f.h + 0.4, C_FURN, 0, true, C_DETAIL);
     if (f.kind === 'tub') { const i = 0.35; for (const [a, b] of [[[r[0]+i, r[1]+i], [r[2]-i, r[1]+i]], [[r[2]-i, r[1]+i], [r[2]-i, r[3]-i]], [[r[2]-i, r[3]-i], [r[0]+i, r[3]-i]], [[r[0]+i, r[3]-i], [r[0]+i, r[1]+i]]]) line(fix, [a[0], F + f.h + 0.02, a[1]], [b[0], F + f.h + 0.02, b[1]], C_DETAIL, 0, F); }
@@ -154,7 +183,8 @@ function buildFromConfig(cfg) {
   }
   // Roof: one cap per ceiling-height zone (the plan has no roof drawing; see assumptions).
   const RT = H.roofThickness ?? 1.0, RA = H.roofAbove ?? 0.25;
-  if (cfg.pitchedRoof) hipRoofs(cfg.pitchedRoof);
+  if (cfg.gableRoof) gableRoofs(cfg.gableRoof);
+  else if (cfg.pitchedRoof) hipRoofs(cfg.pitchedRoof);
   else for (const c of cfg.roof || []) prism(roof, c.poly, F + c.y + RA, F + c.y + RA + RT, C_ROOF, 0, true, C_FASCIA);
   /** Hipped roof per wing over a plan rectangle. Overlapping wings at one pitch meet in true valleys.
       Eaves overhang the walls, with a fascia band, a soffit and standing seams down each plane. */
@@ -199,23 +229,83 @@ function buildFromConfig(cfg) {
     // Posts under roofs with no walls below (covered patio, entry porch).
     for (const p of spec.posts || []) prism(roof, rect([p[0] - 0.3, p[1] - 0.3, p[0] + 0.3, p[1] + 0.3]), F, F + p[2], C_WALL, 0, true);
   }
+  /** Gable roofs from a roof plan: two planes per gable, rake and eave overhangs, fascia, soffit, shingle courses and
+      the gable-end wall. Gables at different pitches overlap; the depth test draws their true valleys.
+      g.ridge is the ridge direction ('x' or 'z'); g.ends says which ends get a gable wall; g.rake their overhang. */
+  function gableRoofs(spec) {
+    const o0 = spec.overhang ?? 1.5, FH = spec.fascia ?? 0.6, CS = spec.course ?? 1.25;
+    const C_SEAM = [0.30, 0.31, 0.32], C_SOFFIT = [0.86, 0.85, 0.82];
+    for (const g of spec.gables || []) {
+      const k = g.pitch / 12, o = g.overhang ?? o0, alongZ = g.ridge === 'z';
+      const [x0, z0, x1, z1] = g.r;
+      const u0 = alongZ ? x0 : z0, u1 = alongZ ? x1 : z1, v0 = alongZ ? z0 : x0, v1 = alongZ ? z1 : x1;
+      const P = (u, y, v) => alongZ ? [u, y, v] : [v, y, u];
+      const um = (u0 + u1) / 2, yr = g.plate + (um - u0) * k, ye = g.plate - o * k;
+      const rk = g.rake || [o, o], va = v0 - rk[0], vb = v1 + rk[1];
+      const planes = [[P(u0 - o, ye, va), P(um, yr, va), P(um, yr, vb), P(u0 - o, ye, vb)], [P(u1 + o, ye, vb), P(um, yr, vb), P(um, yr, va), P(u1 + o, ye, va)]];
+      planes.forEach((f, side) => {
+        face(roof, f, C_ROOF, 0, true, ye);
+        const ue = side ? u1 + o : u0 - o, run = um - ue;
+        for (let t = CS; t < Math.abs(run) - 0.2; t += CS) {
+          const u = ue + Math.sign(run) * t, y = ye + t * k + 0.03;
+          line(roof, P(u, y, va), P(u, y, vb), C_SEAM, 0, ye);
+        }
+        face(roof, [P(ue, ye, va), P(ue, ye, vb), P(ue, ye - FH, vb), P(ue, ye - FH, va)], C_FASCIA, 0, true, ye - FH);
+        const uw = side ? u1 : u0;
+        face(roof, [P(ue, ye - FH, va), P(uw, ye - FH, va), P(uw, ye - FH, vb), P(ue, ye - FH, vb)], C_SOFFIT, 0, false, ye - FH);
+      });
+      // Rake boards and gable-end walls.
+      [[va, v0, 0], [vb, v1, 1]].forEach(([vr, vw, i]) => {
+        if (rk[i] > 0) {
+          for (const ue of [u0 - o, u1 + o]) face(roof, [P(ue, ye, vr), P(um, yr, vr), P(um, yr - FH, vr), P(ue, ye - FH, vr)], C_FASCIA, 0, true, ye - FH);
+        }
+        if (g.ends && g.ends[i]) {
+          const b = g.endBase ?? g.plate;
+          face(roof, [P(u0, b, vw), P(u1, b, vw), P(u1, g.plate, vw), P(um, yr, vw), P(u0, g.plate, vw)].filter((p, j, a) => j === 0 || Math.abs(p[1] - a[j - 1][1]) > 1e-6 || p[0] !== a[j - 1][0] || p[2] !== a[j - 1][2]), C_WALL, 5, true, b);
+        }
+      });
+    }
+    // Shed roofs sloping away from a wall (porch roof).
+    for (const sh of spec.sheds || []) {
+      const k = sh.pitch / 12, o = sh.overhang ?? o0, [x0, z0, x1, z1] = sh.r, sd = sh.sides || [o, o];
+      const hi = sh.high || 'z0', alongX = hi[0] === 'z', far = hi[1] === '0' ? 1 : -1;
+      const P = (u, y, v) => alongX ? [u, y, v] : [v, y, u];
+      const ua = (alongX ? x0 : z0) - sd[0], ub = (alongX ? x1 : z1) + sd[1];
+      const vh = hi[1] === '0' ? (alongX ? z0 : x0) : (alongX ? z1 : x1), vl = (hi[1] === '0' ? (alongX ? z1 : x1) : (alongX ? z0 : x0)) + far * o;
+      const yl = sh.top - Math.abs(vl - vh) * k;
+      face(roof, [P(ua, sh.top, vh), P(ub, sh.top, vh), P(ub, yl, vl), P(ua, yl, vl)], C_ROOF, 0, true, yl);
+      for (let t = CS; t < Math.abs(vl - vh) - 0.2; t += CS) { const v = vl - far * t, y = yl + t * k + 0.03; line(roof, P(ua, y, v), P(ub, y, v), C_SEAM, 0, yl); }
+      face(roof, [P(ua, yl, vl), P(ub, yl, vl), P(ub, yl - FH, vl), P(ua, yl - FH, vl)], C_FASCIA, 0, true, yl - FH);
+      for (const u of [ua, ub]) face(roof, [P(u, sh.top, vh), P(u, yl, vl), P(u, yl - FH, vl), P(u, sh.top - FH, vh)], C_FASCIA, 0, true, yl - FH);
+      face(roof, [P(ua, yl - FH, vl), P(ub, yl - FH, vl), P(ub, sh.top - FH, vh), P(ua, sh.top - FH, vh)], C_SOFFIT, 0, false, yl - FH);
+    }
+    for (const p of spec.posts || []) prism(roof, rect([p[0] - 0.3, p[1] - 0.3, p[0] + 0.3, p[1] + 0.3]), p[3] ?? F, p[2], C_WALL, 0, true);
+    // Glass set in a gable wall (the attic window in the dormer).
+    for (const q of spec.glass || []) {
+      const s = q.axis === 'x' ? strip([q.a, q.at], [q.b, q.at], 0.08) : strip([q.at, q.a], [q.at, q.b], 0.08);
+      prism(roof, s, q.y0, q.y1, C_GLASS, 0, true, C_FASCIA);
+    }
+  }
   // Labels and tap targets: printed room names and areas.
   const LY = F + 0.15;
   for (const r of cfg.rooms) {
-    const text = r.name + ' ' + (Math.round(r.area * 100) / 100) + ' SF';
-    const minor = r.area < 60;
-    for (const floor of ['upper', 'main']) {
-      labels.push({ text, position: [r.label[0], LY, r.label[1]], minor, floor });
-      if (r.box) rooms.push({ text, floor, minor, center: [(r.box[0] + r.box[2]) / 2, LY, (r.box[1] + r.box[3]) / 2], box: r.box });
+    const text = r.text || (r.name + ' ' + (Math.round(r.area * 100) / 100) + ' SF');
+    const minor = (r.area ?? 100) < 60;
+    const floors = LV ? [r.lvl ? 'upper' : 'main'] : ['upper', 'main'];
+    const ly = LV ? baseOf(r) + 0.15 : LY;
+    for (const floor of floors) {
+      labels.push({ text, position: [r.label[0], ly, r.label[1]], minor, floor });
+      if (r.box) rooms.push({ text, floor, minor, center: [(r.box[0] + r.box[2]) / 2, ly, (r.box[1] + r.box[3]) / 2], box: r.box });
     }
   }
-  for (const d of cfg.dims || []) for (const floor of ['upper', 'main']) labels.push({ text: d.text, position: [d.at[0], LY, d.at[1]], minor: true, floor });
+  for (const d of cfg.dims || []) for (const floor of (LV ? [d.lvl ? 'upper' : 'main'] : ['upper', 'main'])) labels.push({ text: d.text, position: [d.at[0], LV ? LV[d.lvl || 0].y + 0.15 : LY, d.at[1]], minor: true, floor });
   return { groups: groups.map(g => ({ id: g.id, solid: new Float32Array(g.solid), lines: new Float32Array(g.lines) })), labels, rooms,
     bounds: cfg.bounds, notes: cfg.source || '' };
 }
 
 /** Camera and stage profile for a one-level house config. */
 function profileFor(cfg) {
+  if (cfg.levels) return profileTwoLevel(cfg);
   const F = cfg.floor || 0, B = cfg.bounds, top = B.max[1];
   const plate = F + Math.max(...cfg.walls.map(w => w.h));
   const cl = (n, lo = 0, hi = 1) => Math.min(hi, Math.max(lo, n));
@@ -269,6 +359,56 @@ function profileFor(cfg) {
   };
 }
 
+/** Camera and stage profile for a two-level house config: the roof lifts, the upper floor cuts down and lifts away,
+    then the main floor cuts down to the slab. */
+function profileTwoLevel(cfg) {
+  const F = cfg.levels[0].y, U = cfg.levels[1].y, B = cfg.bounds;
+  const mainTop = F + (cfg.levels[0].ch || 9), upperTop = U + (cfg.levels[1].ch || 9);
+  const cl = (n, lo = 0, hi = 1) => Math.min(hi, Math.max(lo, n));
+  const mx = (a, b, t) => a + (b - a) * t;
+  const sm = (a, b, p) => { const t = cl((p - a) / (b - a)); return t * t * (3 - 2 * t); };
+  const upperCut = p => p < 0.47 ? 100 : mx(upperTop + 0.5, U + 4.5, sm(0.48, 0.60, p));
+  const lowerCut = p => p < 0.62 ? 100 : p < 0.85 ? mx(mainTop + 0.5, F + 4.5, sm(0.64, 0.76, p)) : mx(F + 4.5, F + 0.02, sm(0.86, 0.93, p));
+  const state = (visible, cut = 100, opacity = 1) => ({ visible, cut, opacity });
+  const shadow = (cfg.shadow || []).slice(0, 3);
+  while (shadow.length < 3) shadow.push(shadow[0] || [0, 0, 0, 0]);
+  const deg = Math.PI / 180, hd = cfg.heading || {};
+  return {
+    id: cfg.slug,
+    config: cfg,
+    build: () => buildFromConfig(cfg),
+    groupState(id, p) {
+      const roofFade = 1 - sm(0.30, 0.37, p), upFade = 1 - sm(0.62, 0.67, p);
+      switch (id) {
+        case 'site': case 'lowerfloor': return state(true);
+        case 'lower': case 'lowerFinish': return state(true, lowerCut(p));
+        case 'lowerFix': return state(p >= 0.30 && p < 0.88, lowerCut(p), 1 - sm(0.84, 0.88, p));
+        case 'upperfloor': return state(p < 0.67, 100, upFade);
+        case 'upper': case 'finish': return state(p < 0.67, upperCut(p), upFade);
+        case 'fixtures': return state(p >= 0.30 && p < 0.67, upperCut(p), upFade);
+        case 'roof': return state(roofFade > 0.02, 100, roofFade);
+        default: return state(true);
+      }
+    },
+    visibleHeight(p, bounds) {
+      const full = bounds.max[1];
+      if (p < 0.30) return full;
+      if (p < 0.50) return mx(full, upperTop + 0.6, sm(0.30, 0.46, p));
+      if (p < 0.64) return mx(upperTop + 0.6, U + 4.6, sm(0.48, 0.60, p));
+      return mx(U + 4.6, F + 4.6, sm(0.64, 0.76, p)) - (p > 0.86 ? 3.0 * sm(0.86, 0.93, p) : 0);
+    },
+    bounds: B,
+    tight: cfg.planBounds,
+    frontAngle: cfg.frontAngle || 64,
+    heading: { axon: (hd.axon ?? -36) * deg, front: (hd.front ?? 0) * deg, plan: (hd.plan ?? 0) * deg },
+    floorY: { main: F + 0.15, upper: U + 0.15 },
+    pickY: { main: F, upper: U },
+    shadow,
+    stages: cfg.stages,
+    flyAngle: cfg.flyAngle || { house: 0.70, front: 0.70, roof: 0.66, upper: 0.56, plan: 0.48, foundation: 0.52 },
+    sheetLabel: cfg.sheetLabel || ('Static drawing of ' + cfg.title + '.')
+  };
+}
 
 const PAPER = [0.969, 0.965, 0.949];
 const MAX_PIXELS = 1600000;

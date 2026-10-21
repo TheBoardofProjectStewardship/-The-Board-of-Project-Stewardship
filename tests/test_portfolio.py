@@ -109,6 +109,42 @@ console.log(JSON.stringify({{a:a.groups.length,b:b.groups.map(g=>g.id),tris:b.gr
         self.assertEqual(cuts[0], 100)
         self.assertTrue(cuts[1] >= cuts[2] > cuts[3] > cuts[4])
 
+    def test_two_story_config_is_plan_data(self):
+        p = next(p for p in self.projects if p["slug"] == "snohomish-two-story")
+        cfg = ps.load_config(p)
+        self.assertEqual([l["id"] for l in cfg["levels"]], ["main", "upper"])
+        self.assertEqual([l["ch"] for l in cfg["levels"]], [10.0, 9.0])
+        area = {(r["name"], r["lvl"]): r["area"] for r in cfg["rooms"]}
+        for key, val in {("Kitchen", 0): 319.86, ("Dining Room", 0): 279.65, ("Garage", 0): 460.0,
+                         ("Master Bedroom", 1): 230.92, ("Bedroom 01", 1): 199.33, ("Bedroom 02", 1): 162.18}.items():
+            self.assertEqual(area[key], val)
+        for r in cfg["rooms"]:  # traced room polygons stay within 7 percent of the printed area
+            if r["area"] and r["ch"]:
+                self.assertLess(abs(r["traced"] - r["area"]) / r["area"], 0.07, r["name"])
+        pitches = sorted(g["pitch"] for g in cfg["gableRoof"]["gables"])
+        self.assertEqual(pitches, [5, 9.625, 10, 11])
+        self.assertTrue(p.get("assumptions"))
+        self.assertEqual([s["id"] for s in cfg["stages"]], list(ps.STAGE_PROGRESS))
+
+    @unittest.skipUnless(shutil.which("node"), "node not installed")
+    def test_engine_builds_two_story(self):
+        script = f"""
+const H=require({json.dumps(str(ENGINE))});
+const cfg=require({json.dumps(str(ps.DATA / 'snohomish-two-story.json'))});
+H.register('house2',cfg);H.useProfile('house2');
+const m=H.buildModel();
+const st=p=>['upper','lower','roof'].map(id=>H.groupState(id,p));
+console.log(JSON.stringify({{ids:m.groups.map(g=>g.id),floors:[...new Set(m.labels.map(l=>l.floor))],s:[0.04,0.56,0.74,0.93].map(st)}}));
+"""
+        out = json.loads(subprocess.run(["node", "-e", script], capture_output=True, text=True, check=True).stdout)
+        self.assertEqual(out["ids"], ["site", "lowerfloor", "lower", "lowerFinish", "lowerFix", "upperfloor", "upper", "finish", "fixtures", "roof"])
+        self.assertEqual(sorted(out["floors"]), ["main", "upper"])
+        house, upper, main, slab = out["s"]
+        self.assertTrue(all(g["visible"] and g["cut"] == 100 for g in house))  # opens on the roofed exterior
+        self.assertTrue(upper[0]["visible"] and upper[0]["cut"] < 25 and not upper[2]["visible"])
+        self.assertFalse(main[0]["visible"])
+        self.assertLess(slab[1]["cut"], main[1]["cut"])
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -44,13 +44,15 @@ def svg_plan(cfg: dict) -> str:
              f'<rect width="960" height="{h}" fill="#f7f6f2"/>']
     for p in cfg.get("pads", []):
         parts.append(f'<polygon points="{" ".join(P(v) for v in p["poly"])}" fill="#e6e5df" stroke="#8a8c88" stroke-width="0.8"/>')
+    main = lambda o: not o.get("lvl")  # two-level configs: the still shows the main floor
     for r in cfg["rooms"]:
-        if r.get("poly"):
+        if r.get("poly") and main(r):
             parts.append(f'<polygon points="{" ".join(P(v) for v in r["poly"])}" fill="#fbfaf7"/>')
     for w in cfg["walls"]:
-        parts.append(f'<polygon points="{" ".join(P(v) for v in w["q"])}" fill="#1f2021"/>')
+        if main(w):
+            parts.append(f'<polygon points="{" ".join(P(v) for v in w["q"])}" fill="#1f2021"/>')
     for r in cfg["rooms"]:
-        if r["area"] < 60:
+        if (r["area"] or 0) < 60 or not main(r):
             continue
         x, z = r["label"]
         parts.append(f'<text x="{(x - x0) * sc:.1f}" y="{(z - z0) * sc:.1f}" font-family="system-ui, sans-serif" font-size="9" text-anchor="middle" fill="#1f2021">{esc(r["name"])}</text>')
@@ -71,6 +73,9 @@ def stage_list(entry: dict, cfg: dict | None) -> list[tuple[str, str]]:
 
 def room_lists(entry: dict, cfg: dict | None) -> dict:
     if cfg:
+        if cfg.get("levels"):
+            pick = lambda lvl: [r["name"] for r in cfg["rooms"] if r.get("lvl", 0) == lvl and (r["area"] or 0) >= 150 and r.get("poly")]
+            return {"main": pick(0), "upper": pick(1)}
         big = [r["name"] for r in cfg["rooms"] if r["area"] >= 150 and r.get("poly")]
         return {"main": big, "upper": big}
     return entry["rooms"]
@@ -109,10 +114,12 @@ def model_section(entry: dict, cfg: dict | None, *, standalone: bool = False, st
     learn = ""
     if cfg:
         sets = []
+        learn_map = entry.get("learn", LEARN_CONFIG)
+        notes_map = {k: tuple(v) for k, v in entry["notes"].items()} if entry.get("notes") else NOTES_CONFIG
         for i, (sid, _l) in enumerate(stages):
-            btns = "".join(f'\n            <button type="button" class="ppgm-call" data-ppgm-callout="{c}" aria-pressed="false" aria-controls="ppgm-note-{c}">{CALL_LABEL[c]}</button>' for c in LEARN_CONFIG[sid])
+            btns = "".join(f'\n            <button type="button" class="ppgm-call" data-ppgm-callout="{c}" aria-pressed="false" aria-controls="ppgm-note-{c}">{CALL_LABEL[c]}</button>' for c in learn_map[sid])
             sets.append(f'          <div class="ppgm-learn-set" data-ppgm-stage="{sid}"{" hidden" if i else ""}>{btns}\n          </div>')
-        notes = "".join(f'\n            <p class="ppgm-note" id="ppgm-note-{k}" data-ppgm-callout="{k}"><strong>{t}.</strong> {esc(b)}</p>' for k, (t, b) in NOTES_CONFIG.items())
+        notes = "".join(f'\n            <p class="ppgm-note" id="ppgm-note-{k}" data-ppgm-callout="{k}"><strong>{t}.</strong> {esc(b)}</p>' for k, (t, b) in notes_map.items())
         learn = f'''        <div class="ppgm-learn">
           <p class="ppgm-section-label">How the model was made</p>
 {chr(10).join(sets)}
@@ -229,11 +236,20 @@ def model_page(entry: dict) -> str:
     if entry.get("projectPage"):
         links.append(f'<a href="{esc(entry["projectPage"])}" class="text-secondary hover:underline">See the project</a>')
     facts = "".join(f'<li style="margin-right:1.5rem">{esc(f)}</li>' for f in entry["facts"])
+    assumptions = ""
+    if entry.get("assumptions"):
+        items = "".join(f"\n      <li>{esc(a)}</li>" for a in entry["assumptions"])
+        assumptions = f'''
+    <div class="portfolio-assumptions">
+      <p class="text-slate-200 font-bold">Assumptions (not printed on the plans)</p>
+      <ul style="list-style:disc;padding-left:1.25rem" aria-label="Modeling assumptions">{items}
+      </ul>
+    </div>'''
     body = f'''<div class="max-w-6xl mx-auto px-4 pt-6 pb-10 relative z-20 portfolio-model">
 {section}
   <div class="mt-6 text-sm text-slate-300 space-y-3">
     <ul class="flex flex-wrap gap-x-6 gap-y-1 text-slate-200" aria-label="Project facts">{facts}</ul>
-    <p>{esc(entry["sourceNote"])}</p>
+    <p>{esc(entry["sourceNote"])}</p>{assumptions}
     <p class="flex flex-wrap gap-x-6">{" ".join(links)}</p>
   </div>
 </div>'''

@@ -28,6 +28,75 @@
       "thumb": "/portfolio/one-story-house-shop/thumb.png",
       "dek": "Explore this one-story layout layer by layer: the finished house, the roof, the floor plan with every room, and the slab.",
       "sourceNote": "Modeled from a one-page layout plan. Walls, openings, room names, areas and ceiling heights come from the plan. The roof, window sills and heads, and door heights are not drawn on the plan and are shown as labeled assumptions."
+    },
+    {
+      "slug": "snohomish-two-story",
+      "engine": "config",
+      "config": "snohomish-two-story.json",
+      "title": "Two-story house with attached garage",
+      "card": "A two-story house from an approved permit set, 3,063 SF conditioned: open dining, kitchen and living under a 10 foot ceiling, a dining room open to the floor above, a primary suite, two bedrooms, two offices and a 12 foot garage.",
+      "facts": [
+        "3,063 SF conditioned",
+        "3 bedrooms and 2 offices",
+        "42' x 46'-6\" footprint"
+      ],
+      "kicker": "Snohomish County, permit set",
+      "thumb": "/portfolio/snohomish-two-story/thumb.png",
+      "dek": "Explore this two-story house layer by layer: the finished house, the roof, the upper floor, the main floor with every room, and the slab.",
+      "sourceNote": "Modeled from the approved permit set: both floor plans, the roof plan, four elevations, the building section and the window and door schedules. Walls, openings, room names, areas, ceiling heights, roof pitches and the overall height come from those sheets. Anything the sheets do not print is listed below as an assumption.",
+      "learn": {
+        "house": [
+          "roof",
+          "garage"
+        ],
+        "front": [
+          "header",
+          "garage"
+        ],
+        "roof": [
+          "roof"
+        ],
+        "upper": [
+          "partition"
+        ],
+        "plan": [
+          "partition"
+        ],
+        "foundation": [
+          "foundation"
+        ]
+      },
+      "notes": {
+        "roof": [
+          "Roof",
+          "From the roof plan and elevations: a 5:12 main gable, a 10:12 cross gable with gable ends on both sides, a 9 5/8:12 gable over the garage, an 11:12 dormer gable and a 5:12 porch roof on three posts. Overhangs are 18 inches and the roofing is asphalt shingle. The highest point is 32'-2\" above average grade, as printed."
+        ],
+        "garage": [
+          "Garage",
+          "The garage is 460 SF with a 12 foot ceiling. Its slab sits three risers below the main floor, with a 16 by 7 foot overhead door and a side door."
+        ],
+        "header": [
+          "Openings",
+          "Window and door sizes come from the schedules and sit in the wall gaps drawn on the plans. Heads are set at 6'-8\" to line up with the doors, as the elevations show; sills follow from each scheduled window height."
+        ],
+        "partition": [
+          "Room layout",
+          "Room names, areas and ceiling heights are the ones printed on the plans: 10 feet on the main floor, 9 feet upstairs and 12 feet in the garage. The dining room is open to the upper floor. Select a room to fly in."
+        ],
+        "foundation": [
+          "Slab",
+          "A slab on grade under the main floor, and the garage slab three risers lower."
+        ]
+      },
+      "assumptions": [
+        "Window heads at 6'-8\" are scaled from the elevations, where they line up with the door heads. Sills are the head minus the scheduled window height.",
+        "Upper floor framing is drawn 1'-6\" deep, scaled from the elevation level lines.",
+        "The main floor sits 1'-11\" above the garage slab (three printed risers at 7 3/4 inches). The ground is drawn flat at the garage slab.",
+        "Dormer eave and porch roof heights are scaled from the south and west elevations.",
+        "The stair is drawn as a straight run of 18 risers at the printed 7 3/4 inch rise. The turn at its foot is simplified.",
+        "Furniture and fixtures sit where the plan symbols are, scaled from the drawing. Interior doors are shown as open frames.",
+        "Siding, stone veneer, deck and porch railings, trim colors and the markups on the approved set are not modeled."
+      ]
     }
   ]
 }
