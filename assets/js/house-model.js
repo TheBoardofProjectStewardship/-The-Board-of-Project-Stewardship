@@ -21,6 +21,8 @@ var PROJECTS = {};
 var PROFILE = null;
 function register(id, def) {
   PROJECTS[id] = def && typeof def.build === "function" ? def : profileFor(def);
+  // Optional per-project render settings (antialias, full device pixel ratio); other projects keep the defaults.
+  if (def && def.render && !PROJECTS[id].render) PROJECTS[id].render = def.render;
   return PROJECTS[id];
 }
 
@@ -714,8 +716,9 @@ function createRenderer(canvas, options) {
   options = options || {};
   const labelPointer = typeof globalThis.matchMedia === 'function'
     ? globalThis.matchMedia('(pointer: coarse)') : null;
+  const RS = (PROFILE && PROFILE.render) || {};
   const gl = canvas.getContext('webgl', {
-    alpha: false, antialias: false, depth: true, stencil: false,
+    alpha: false, antialias: !!RS.antialias, depth: true, stencil: false,
     premultipliedAlpha: false, preserveDrawingBuffer: !!options.preserveDrawingBuffer, powerPreference: 'low-power',
   });
   if (!gl) throw new Error('The drawing context is unavailable.');
@@ -846,7 +849,7 @@ function createRenderer(canvas, options) {
     const cssW = Math.max(1, Number.isFinite(width) ? width : canvas.clientWidth);
     const cssH = Math.max(1, Number.isFinite(height) ? height : canvas.clientHeight);
     const displayDpr = Math.max(1, globalThis.devicePixelRatio || 1);
-    const dpr = Math.min(displayDpr, cssW < 600 ? 1.35 : 2,
+    const dpr = Math.min(displayDpr, RS.fullPixelRatio ? 3 : cssW < 600 ? 1.35 : 2,
       Math.sqrt(MAX_PIXELS / (cssW * cssH)),
       maximumSize / cssW, maximumSize / cssH,
       viewportLimit[0] / cssW, viewportLimit[1] / cssH);
