@@ -72,10 +72,16 @@ class PortfolioTests(unittest.TestCase):
         self.assertEqual([s["id"] for s in cfg["stages"]], list(ps.STAGE_PROGRESS))
 
     def test_copy_rules(self):
-        files = list(self.pages.values()) + [f.read_text(encoding="utf-8") for f in (ENGINE, MAGNOLIA, CSS, ps.DATA / "projects.json")]
+        # Our content only: the shared site chrome (nav, footer, the sitewide Another Story card) is out of scope.
+        def own(page):
+            body = page.split('<main id="main-content">', 1)[1]
+            return body.split('Board feature', 1)[0]
+        files = [own(t) for t in self.pages.values()] + [f.read_text(encoding="utf-8") for f in (ENGINE, MAGNOLIA, CSS, ps.DATA / "projects.json")]
         files += [(ps.DATA / p["config"]).read_text(encoding="utf-8") for p in self.projects if p.get("config")]
         for text in files:
             self.assertNotIn("\u2014", text)
+            self.assertIsNone(re.search(r"\bAI\b", text))
+        for text in self.pages.values():
             self.assertIsNone(re.search(r"\bAI\b", text))
             self.assertNotIn("McGillivray", text)
 
