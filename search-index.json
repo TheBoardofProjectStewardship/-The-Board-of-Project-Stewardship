@@ -765,6 +765,11 @@
     "description": "Board of Project Stewardship locations index: crawlable place hubs for King County, Snohomish County, and Seattle neighborhoods."
   },
   {
+    "title": "Lynnwood expects its first pre-approved backyard cottage plans this fall",
+    "url": "/news/lynnwood-pre-approved-dadu-plans.html",
+    "description": "Lynnwood staff told the City Council on Oct. 5 that the first designs in a new gallery of pre-approved detached accessory dwelling units should post by the end"
+  },
+  {
     "title": "Lynnwood Remodel & Addition Hub",
     "url": "/lynnwood.html",
     "description": "Lynnwood hub for Snohomish County \u2014 permit orientation, Board directories, and local posts. Educational, not a complete roster."
@@ -930,9 +935,9 @@
     "description": "Typical remodel and addition phases \u2014 \u201coften\u201d ranges with an explicit non-guarantee from the Board of Project Stewardship."
   },
   {
-    "title": "Puget Sound Visualizer & 3D | Board of Project Stewardship",
+    "title": "Puget Sound Feasibility & 3D | Board of Project Stewardship",
     "url": "/",
-    "description": "Free photo visualizer and 3D plan walkthrough for Puget Sound and Seattle-area remodels, plus contractor directories for King County and Snohomish County."
+    "description": "Free address feasibility reports and a 3D build walkthrough for Puget Sound and Seattle-area remodels, plus contractor directories for King County and Snohomish County."
   },
   {
     "title": "Queen Anne Remodel & Addition Hub",
@@ -1208,6 +1213,11 @@
     "title": "Water, Fire & Mold Damage Restoration | King & Snohomish County",
     "url": "/restoration.html",
     "description": "Water, fire, and mold damage restoration in Seattle, Everett, Edmonds, and King & Snohomish County. Drying, smoke cleanup, claims notes, and hiring steps."
+  },
+  {
+    "title": "What Can I Build Here? Free Lot Feasibility Report | Board of Project Stewardship",
+    "url": "/build-here.html",
+    "description": "Enter a King or Snohomish County address and get a free first-pass feasibility report: zone, parcel, lot size, cited setbacks, floor area and ADU rules and red flags."
   },
   {
     "title": "What the house sits on | Board of Project Stewardship",
