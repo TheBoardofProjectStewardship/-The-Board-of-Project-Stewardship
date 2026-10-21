@@ -1,6 +1,7 @@
 """Portfolio grid and per-project 3D model pages (shared house model engine)."""
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 import shutil
@@ -33,7 +34,7 @@ class PortfolioTests(unittest.TestCase):
         hrefs = re.findall(r'<a href="/portfolio/([^"/]+)/" class="block', grid)
         self.assertEqual(hrefs, [p["slug"] for p in self.projects])
         self.assertEqual(hrefs[0], "magnolia")
-        self.assertIn("mcgillivray", hrefs)
+        self.assertIn("one-story-house-shop", hrefs)
         self.assertEqual(grid.count('class="portfolio-card'), len(self.projects))
         for p in self.projects:
             self.assertTrue((ROOT / p["thumb"].lstrip("/")).is_file(), p["thumb"])
@@ -83,7 +84,8 @@ class PortfolioTests(unittest.TestCase):
             self.assertIsNone(re.search(r"\bAI\b", text))
         for text in self.pages.values():
             self.assertIsNone(re.search(r"\bAI\b", text))
-            self.assertNotIn("McGillivray", text)
+            words = {hashlib.sha256(w.encode()).hexdigest() for w in re.findall(r"[a-z]+", text.lower())}
+            self.assertNotIn("647416db44109913416c6018f221224f8d7ecc370923031579ecb0a4f6dce8ae", words)  # private client surname, stored only as a hash
 
     @unittest.skipUnless(shutil.which("node"), "node not installed")
     def test_engine_builds_each_project(self):
