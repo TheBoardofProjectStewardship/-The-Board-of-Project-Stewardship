@@ -689,6 +689,101 @@ SOON_COMPARISONS = [
     "Specific code editions side by side",
 ]
 
+# One still per /learn/ page, rendered from the house model state that page opens on.
+# Alts are public copy and must stay clear of the forbidden-term check.
+POSTER_W = 1200
+POSTER_H = 675
+POSTER_SMALL_W = 640
+POSTER_META = {
+    "index": ("grade",
+              "Illustrative 3D house model of the finished house used throughout this guide",
+              "The finished house. Teaching sketch, not a structural design."),
+    "sequence": ("survey",
+                 "Illustrative 3D house model of the lot at the survey step, before the house is framed",
+                 "The lot at the first hold point. Teaching sketch, not a survey."),
+    "explore": ("grade",
+                "Illustrative 3D house model of the finished house you can turn and open by part",
+                "The finished house, ready to open by part. Teaching sketch, not a structural design."),
+    "compare": ("grade",
+                "Illustrative 3D house model of the finished house these construction choices refer to",
+                "The house these choices refer to. Teaching sketch, not a specification."),
+    "cut-and-fill": ("excavate",
+                     "Illustrative 3D house model of the level pad after cut and fill",
+                     "The level pad. Teaching sketch, not a grading plan."),
+    "building-systems": ("grade",
+                         "Illustrative 3D house model showing structure, enclosure, and the finished house",
+                         "Structure and skin on one house. Teaching sketch, not a structural design."),
+    "load-path": ("load",
+                  "Illustrative 3D house model showing the load path from roof to footings",
+                  "Load from the roof down to the footings. Teaching sketch, not a structural design."),
+    "columns": ("columns",
+                "Illustrative 3D house model showing the porch posts that carry the porch roof",
+                "Porch posts. Teaching sketch, not a column design."),
+    "beams": ("beams",
+              "Illustrative 3D house model showing beams and headers over openings",
+              "Headers over openings. Teaching sketch, not a beam schedule."),
+    "trusses": ("roof",
+                "Illustrative 3D house model showing the roof planes a truss roof would follow",
+                "Roof planes. Teaching sketch, not a truss design."),
+    "lateral-stability": ("systemsFrame",
+                          "Illustrative 3D house model showing the frame that braces the house against wind and earthquakes",
+                          "The braced frame. Teaching sketch, not a nailing schedule."),
+    "arches-and-vaults": ("grade",
+                          "Illustrative 3D house model of the wood house that uses bending members instead of an arch",
+                          "A wood house, not an arch. Teaching sketch, not a structural design."),
+    "foundation-types": ("footings",
+                         "Illustrative 3D house model showing the slab-level foundation this house sits on",
+                         "A slab-level pad. Teaching sketch, not a soils report."),
+    "excavation": ("excavate",
+                   "Illustrative 3D house model of the pad the excavation and backfill are aiming at",
+                   "The pad those steps aim at. Teaching sketch, not an excavation plan."),
+    "spread-footings": ("footings",
+                        "Illustrative 3D house model showing spread footings under the walls",
+                        "Footings wider than the walls. Teaching sketch, not a footing design."),
+    "masonry-bonding": ("siding",
+                        "Illustrative 3D house model showing the siding face, which is cladding rather than structure",
+                        "Siding as a rain coat. Teaching sketch, not a masonry specification."),
+    "platform-framing": ("frame2",
+                         "Illustrative 3D house model showing two stacked floor platforms",
+                         "Two platforms stacked. Teaching sketch, not a framing plan."),
+    "roof-framing": ("roof",
+                     "Illustrative 3D house model showing the gable, hip, dormer, and lower roofs",
+                     "Gable, hip, dormer, and the lower roofs. Teaching sketch, not a rafter plan."),
+    "truss-connections": ("roof",
+                          "Illustrative 3D house model showing the roof where truss joints would sit",
+                          "The roof those joints belong to. Teaching sketch, not a plate specification."),
+    "trussed-rafters": ("roof",
+                        "Illustrative 3D house model showing the roof shape a trussed rafter could span",
+                        "The roof shape. Teaching sketch, not a truss design."),
+    "wall-assembly": ("siding",
+                      "Illustrative 3D house model showing the finished outside wall and roof cover",
+                      "The finished outside. Teaching sketch, not a wall specification."),
+    "stairs": ("stairs",
+               "Illustrative 3D house model showing the stair that links the two floors",
+               "The flight between floors. Teaching sketch, not a stair design."),
+    "heating-and-cooling": ("rough",
+                            "Illustrative 3D house model of the open main floor where heating equipment would land",
+                            "The open main floor. Teaching sketch, not an equipment schedule."),
+    "plumbing": ("rough",
+                 "Illustrative 3D house model of the open main floor and the rooms that need water",
+                 "The open main floor. Teaching sketch, not a pipe route."),
+    "electrical": ("rough",
+                   "Illustrative 3D house model of the open main floor where power would be distributed",
+                   "The open main floor. Teaching sketch, not a load calculation."),
+    "second-story": ("frame2",
+                     "Illustrative 3D house model showing a second story stacked on the main floor",
+                     "A second story already stacked. Teaching sketch, not an addition design."),
+    "heat-air-moisture": ("insulate",
+                          "Illustrative 3D house model of the open frame before insulation is covered",
+                          "The open frame. Teaching sketch, not an insulation product."),
+    "rooms": ("drywall",
+              "Illustrative 3D house model of the main floor rooms with the plan cut open",
+              "The main floor, cut open. Teaching sketch, not a finish schedule."),
+    "marine-climate": ("siding",
+                       "Illustrative 3D house model of the finished house built for a rainy marine climate",
+                       "The finished house in the rain. Teaching sketch, not a coastal assembly."),
+}
+
 
 def article_by_slug(slug: str) -> dict:
     if slug == "sequence":
@@ -716,8 +811,52 @@ def crumb_ld(items: list[tuple[str, str]]) -> str:
     })
 
 
-def webpage_ld(name: str, url: str, desc: str) -> str:
-    return json_ld({
+def poster_slug_ok() -> None:
+    expected = {item["slug"] for item in ARTICLES} | {"index", "sequence", "explore", "compare"}
+    if set(POSTER_META) != expected:
+        missing = sorted(expected - set(POSTER_META))
+        extra = sorted(set(POSTER_META) - expected)
+        raise SystemExit(f"poster map does not match learn pages: missing={missing} extra={extra}")
+    for item in ARTICLES:
+        preset = POSTER_META[item["slug"]][0]
+        if preset != item["preset"]:
+            raise SystemExit(f"poster preset for {item['slug']} is {preset}, page opens on {item['preset']}")
+    for slug, (preset, alt, caption) in POSTER_META.items():
+        if not alt.startswith("Illustrative") or not alt.strip() or not caption.strip():
+            raise SystemExit(f"poster copy for {slug} needs an Illustrative alt and a caption")
+        if preset not in {
+            "survey", "excavate", "footings", "frame2", "roof", "systemsFrame", "grade",
+            "load", "columns", "beams", "stairs", "rough", "insulate", "siding", "drywall",
+        }:
+            raise SystemExit(f"unknown poster preset {preset} for {slug}")
+
+
+def poster_src(slug: str, small: bool = False) -> str:
+    suffix = "-640" if small else ""
+    return f"/assets/images/learn/learn-{slug}-poster{suffix}.webp"
+
+
+def poster_abs(slug: str) -> str:
+    return ORIGIN + poster_src(slug)
+
+
+def poster_figure(slug: str, loading: str = "eager") -> str:
+    _preset, alt, caption = POSTER_META[slug]
+    full = poster_src(slug)
+    small = poster_src(slug, small=True)
+    return (
+        '<figure class="learn-poster">'
+        f'<img src="{full}" srcset="{small} {POSTER_SMALL_W}w, {full} {POSTER_W}w" '
+        f'sizes="(min-width: 1100px) 1048px, calc(100vw - 2rem)" '
+        f'width="{POSTER_W}" height="{POSTER_H}" alt="{esc(alt)}" '
+        f'loading="{loading}" decoding="async">'
+        f"<figcaption>{esc(caption)}</figcaption>"
+        "</figure>"
+    )
+
+
+def webpage_ld(name: str, url: str, desc: str, image: str = "") -> str:
+    payload = {
         "@context": "https://schema.org",
         "@type": "WebPage",
         "@id": url + "#webpage",
@@ -729,7 +868,10 @@ def webpage_ld(name: str, url: str, desc: str) -> str:
         "isPartOf": {"@id": ORIGIN + "/#website"},
         "publisher": {"@id": ORIGIN + "/#organization"},
         "inLanguage": "en-US",
-    })
+    }
+    if image:
+        payload["image"] = image
+    return json_ld(payload)
 
 
 OG_ALT = "Illustrative Pacific Northwest home concept for Board of Project Stewardship — not a bid or stamped plan"
@@ -760,10 +902,12 @@ def seal_picture(kind: str) -> str:
     )
 
 
-def head(name: str, desc: str, canon_path: str, extra_ld: str, depth: int, og_type: str = "website") -> str:
+def head(name: str, desc: str, canon_path: str, extra_ld: str, depth: int, og_type: str = "website", poster: str = "") -> str:
     title = title_of(name)
     canon = ORIGIN + "/" + canon_path
     root = "../" * depth
+    image = poster_abs(poster) if poster else OG
+    image_alt = POSTER_META[poster][1] if poster else OG_ALT
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -776,14 +920,15 @@ def head(name: str, desc: str, canon_path: str, extra_ld: str, depth: int, og_ty
   <meta property="og:description" content="{esc(desc)}">
   <meta property="og:type" content="{esc(og_type)}">
   <meta property="og:url" content="{canon}">
-  <meta property="og:image" content="{OG}">
-  <meta property="og:image:alt" content="{esc(OG_ALT)}">
+  <meta property="og:image" content="{image}">
+  <meta property="og:image:alt" content="{esc(image_alt)}">
   <meta property="og:site_name" content="{BRAND}">
   <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{esc(title)}">
   <meta name="twitter:description" content="{esc(desc)}">
-  <meta name="twitter:image" content="{OG}">
+  <meta name="twitter:image" content="{image}">
+  <meta name="twitter:image:alt" content="{esc(image_alt)}">
   <link rel="canonical" href="{canon}">
   <link rel="preload" href="/assets/fonts/InterLatin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="alternate" type="application/rss+xml" title="{BRAND} Blog" href="{ORIGIN}/blog/rss.xml">
@@ -792,7 +937,7 @@ def head(name: str, desc: str, canon_path: str, extra_ld: str, depth: int, og_ty
   <link rel="apple-touch-icon" href="{ORIGIN}/assets/icons/apple-touch-icon.png">
   <title>{esc(title)}</title>
   <link rel="stylesheet" href="/assets/css/learn.css">
-  {webpage_ld(title, canon, desc)}
+  {webpage_ld(title, canon, desc, image if poster else "")}
   {extra_ld}
 </head>
 <body>
@@ -910,7 +1055,7 @@ def build_article(item: dict) -> str:
         "dateModified": DATE,
         "url": url,
         "mainEntityOfPage": url,
-        "image": OG,
+        "image": poster_abs(slug),
         "author": {"@type": "Organization", "name": BRAND, "@id": ORIGIN + "/#organization"},
         "publisher": {"@id": ORIGIN + "/#organization"},
         "inLanguage": "en-US",
@@ -925,11 +1070,12 @@ def build_article(item: dict) -> str:
     body.append('<div class="learn-prose">' + "".join(item["body"]) + "</div>")
     body.append(related(item["related"]))
     return (
-        head(item["name"], desc, canon, article + crumb_ld([(n, ORIGIN + "/" + (h or "")) for n, h in crumbs]), 2, "article")
+        head(item["name"], desc, canon, article + crumb_ld([(n, ORIGIN + "/" + (h or "")) for n, h in crumbs]), 2, "article", slug)
         + f'<main id="main-content" tabindex="-1">\n{crumb_nav(crumbs, 2)}\n'
         + '<article class="learn-wrap learn-hero">'
         + f'<p class="learn-kicker">How a house is built</p><h1>{esc(item["name"])}</h1>'
         + f'<p class="learn-dek">{esc(desc)}</p>'
+        + poster_figure(slug)
         + "".join(body)
         + "</article></main>"
         + footer(2, bool(item.get("preset")))
@@ -957,6 +1103,7 @@ def build_sequence() -> str:
         "url": url,
         "datePublished": DATE,
         "dateModified": DATE,
+        "image": poster_abs("sequence"),
         "step": howto_steps,
     })
     steps_json = []
@@ -975,6 +1122,7 @@ def build_sequence() -> str:
     sticky = f"""
 <main id="main-content" tabindex="-1">
 {crumb_nav(crumbs, 2)}
+<div class="learn-wrap">{poster_figure("sequence")}</div>
 <section class="learn-seq" id="learn-seq" data-learn-view="sequence" aria-labelledby="learn-seq-title">
   <div class="learn-seq-track">
     <div class="learn-seq-sticky">
@@ -1011,7 +1159,7 @@ def build_sequence() -> str:
 </section>
 </main>
 """
-    return head("Hold points on this house", desc, canon, extra + crumb_ld([(n, ORIGIN + "/" + (h or "")) for n, h in crumbs]), 2) + sticky + footer(2, True)
+    return head("Hold points on this house", desc, canon, extra + crumb_ld([(n, ORIGIN + "/" + (h or "")) for n, h in crumbs]), 2, poster="sequence") + sticky + footer(2, True)
 
 
 def build_explore() -> str:
@@ -1062,6 +1210,7 @@ def build_explore() -> str:
     <p class="learn-kicker">One house</p>
     <h1>Explore this house</h1>
     <p class="learn-dek">{esc(desc)}</p>
+    {poster_figure("explore")}
     <div class="learn-sheet">
       <canvas width="960" height="540" tabindex="0" aria-describedby="learn-keys" aria-label="This house. Choose a part, then turn the drawing."></canvas>
     </div>
@@ -1087,7 +1236,7 @@ def build_explore() -> str:
 <script type="application/json" id="learn-parts">{json.dumps(payload)}</script>
 </main>
 """
-    return head("Explore this house", desc, canon, crumb_ld([(n, ORIGIN + "/" + (h or "")) for n, h in crumbs]), 2) + main + footer(2, True)
+    return head("Explore this house", desc, canon, crumb_ld([(n, ORIGIN + "/" + (h or "")) for n, h in crumbs]), 2, poster="explore") + main + footer(2, True)
 
 
 def build_compare() -> str:
@@ -1116,7 +1265,7 @@ def build_compare() -> str:
         "dateModified": DATE,
         "url": url,
         "mainEntityOfPage": url,
-        "image": OG,
+        "image": poster_abs("compare"),
         "author": {"@type": "Organization", "name": BRAND, "@id": ORIGIN + "/#organization"},
         "publisher": {"@id": ORIGIN + "/#organization"},
     })
@@ -1128,6 +1277,7 @@ def build_compare() -> str:
   <p class="learn-kicker">Choices</p>
   <h1>Why this, not that</h1>
   <p class="learn-dek">{esc(desc)}</p>
+  {poster_figure("compare")}
   {''.join(blocks)}
   <section class="learn-section">
     <h2>Still to write</h2>
@@ -1137,7 +1287,7 @@ def build_compare() -> str:
 </article>
 </main>
 """
-    return head("Why this, not that", desc, canon, extra + crumb_ld([(n, ORIGIN + "/" + (h or "")) for n, h in crumbs]), 2, "article") + main + footer(2)
+    return head("Why this, not that", desc, canon, extra + crumb_ld([(n, ORIGIN + "/" + (h or "")) for n, h in crumbs]), 2, "article", "compare") + main + footer(2)
 
 
 def build_landing() -> str:
@@ -1175,6 +1325,7 @@ def build_landing() -> str:
         "url": url,
         "datePublished": DATE,
         "dateModified": DATE,
+        "image": poster_abs("index"),
         "mainEntity": {"@type": "ItemList", "itemListElement": item_ld},
     })
     crumbs = [("Home", ""), ("How a house is built", canon)]
@@ -1187,6 +1338,7 @@ def build_landing() -> str:
     <h1>How a house is built</h1>
     <p class="learn-dek">The same house as the homepage drawing. Follow it from the ground up, open a part, or compare two ways of building. Written pages are finished. Anything still unnamed as a page is marked coming soon.</p>
   </header>
+  {poster_figure("index")}
   {viewer("grade", "The finished house used throughout this guide")}
   <div class="learn-actions">
     <a class="learn-btn is-primary" href="sequence/">Build order</a>
@@ -1211,7 +1363,7 @@ def build_landing() -> str:
 </article>
 </main>
 """
-    return head("How a house is built", desc, canon, extra + crumb_ld([(n, ORIGIN + "/" + (h or "")) for n, h in crumbs]), 1) + main + footer(1, True)
+    return head("How a house is built", desc, canon, extra + crumb_ld([(n, ORIGIN + "/" + (h or "")) for n, h in crumbs]), 1, poster="index") + main + footer(1, True)
 
 
 SITEMAP_NS = "http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -1262,6 +1414,7 @@ def update_search(entries: list[dict]) -> None:
 
 
 def page_set() -> list[tuple[str, str, str, str]]:
+    poster_slug_ok()
     landing_desc = "How this house is built, from the ground up, with the parts you can open. Teaching sketch, not a structural design."
     sequence_desc = "Nineteen hold points for this slab house, from the survey to the final walk. Teaching sketch, not a structural design."
     explore_desc = "Start with this house. Turn a system on, pick a part, and follow it to a closer explanation."

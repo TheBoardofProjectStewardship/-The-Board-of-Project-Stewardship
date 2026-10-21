@@ -147,5 +147,77 @@
   "fe2af8ea9945600776570d70692dc279": [
     "assets/images/posts/2026-08-11-hire-design-build-6.webp",
     "assets/images/posts/2026-09-02-edmonds-custom-3.webp"
+  ],
+  "45a38833b2efffed74d993ae3f0463c5": [
+    "assets/images/learn/learn-electrical-poster-640.webp",
+    "assets/images/learn/learn-heating-and-cooling-poster-640.webp",
+    "assets/images/learn/learn-plumbing-poster-640.webp",
+    "assets/images/learn/learn-rooms-poster-640.webp"
+  ],
+  "32b033bd54735644c500a0d71b76b2ad": [
+    "assets/images/learn/learn-marine-climate-poster-640.webp",
+    "assets/images/learn/learn-masonry-bonding-poster-640.webp",
+    "assets/images/learn/learn-wall-assembly-poster-640.webp"
+  ],
+  "ee51db2b205f0d9ba5267aff4e5e33cf": [
+    "assets/images/learn/learn-roof-framing-poster.webp",
+    "assets/images/learn/learn-truss-connections-poster.webp",
+    "assets/images/learn/learn-trussed-rafters-poster.webp",
+    "assets/images/learn/learn-trusses-poster.webp"
+  ],
+  "975993c6f1d5ece085765148a540e87d": [
+    "assets/images/learn/learn-cut-and-fill-poster-640.webp",
+    "assets/images/learn/learn-excavation-poster-640.webp"
+  ],
+  "cfbc7b04cbf443aaed05861fa9b1fdc6": [
+    "assets/images/learn/learn-foundation-types-poster-640.webp",
+    "assets/images/learn/learn-spread-footings-poster-640.webp"
+  ],
+  "3fd9c6cc1a9115a97f68179838eab99e": [
+    "assets/images/learn/learn-platform-framing-poster.webp",
+    "assets/images/learn/learn-second-story-poster.webp"
+  ],
+  "56102808b23fd7e0253ae917c9122ac6": [
+    "assets/images/learn/learn-arches-and-vaults-poster-640.webp",
+    "assets/images/learn/learn-building-systems-poster-640.webp",
+    "assets/images/learn/learn-compare-poster-640.webp",
+    "assets/images/learn/learn-explore-poster-640.webp",
+    "assets/images/learn/learn-index-poster-640.webp"
+  ],
+  "492eb99162225ab1af5569dd5fef9725": [
+    "assets/images/learn/learn-roof-framing-poster-640.webp",
+    "assets/images/learn/learn-truss-connections-poster-640.webp",
+    "assets/images/learn/learn-trussed-rafters-poster-640.webp",
+    "assets/images/learn/learn-trusses-poster-640.webp"
+  ],
+  "8ab61a05a055f7ac681c487a566d5d4c": [
+    "assets/images/learn/learn-platform-framing-poster-640.webp",
+    "assets/images/learn/learn-second-story-poster-640.webp"
+  ],
+  "b7a2f96a1b47103e2efcf5c0e49e1f37": [
+    "assets/images/learn/learn-electrical-poster.webp",
+    "assets/images/learn/learn-heating-and-cooling-poster.webp",
+    "assets/images/learn/learn-plumbing-poster.webp",
+    "assets/images/learn/learn-rooms-poster.webp"
+  ],
+  "ce0b29847ab0acbab9c1ab6691d86d6b": [
+    "assets/images/learn/learn-arches-and-vaults-poster.webp",
+    "assets/images/learn/learn-building-systems-poster.webp",
+    "assets/images/learn/learn-compare-poster.webp",
+    "assets/images/learn/learn-explore-poster.webp",
+    "assets/images/learn/learn-index-poster.webp"
+  ],
+  "8ef7480cf429447eda4d7c5f3f1a36c5": [
+    "assets/images/learn/learn-marine-climate-poster.webp",
+    "assets/images/learn/learn-masonry-bonding-poster.webp",
+    "assets/images/learn/learn-wall-assembly-poster.webp"
+  ],
+  "820d06e66ca24759dca1d4d074bc7996": [
+    "assets/images/learn/learn-cut-and-fill-poster.webp",
+    "assets/images/learn/learn-excavation-poster.webp"
+  ],
+  "64733e20316eae4f0c4cdeb4c53c720b": [
+    "assets/images/learn/learn-foundation-types-poster.webp",
+    "assets/images/learn/learn-spread-footings-poster.webp"
   ]
 }
