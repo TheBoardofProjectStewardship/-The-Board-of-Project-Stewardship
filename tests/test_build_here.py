@@ -21,8 +21,14 @@ class BuildHereTest(unittest.TestCase):
         for path in [PAGE, *JS]:
             text = path.read_text(encoding="utf-8")
             body = main_text() if path == PAGE else text
+            # The shared Another Story callout uses the sitewide em dash.
+            prose = re.sub(
+                r'\s*<section id="another-story-cta"[\s\S]*?</section>',
+                "",
+                body,
+            ) if path == PAGE else body
             self.assertIsNone(re.search(r"\bAI\b", text), path.name)
-            self.assertNotIn("\u2014", body, path.name)
+            self.assertNotIn("\u2014", prose, path.name)
             self.assertIsNone(re.search(r"\bBOPS\b", body), path.name)
 
     def test_never_calls_ppg_new(self):
@@ -40,6 +46,8 @@ class BuildHereTest(unittest.TestCase):
         for href in ("./additions.html", "./how-we-rank.html"):
             self.assertIn(href, text)
         self.assertIn("editorial@boardofprojectstewardship.com", text)
+        self.assertIn('id="another-story-cta"', text)
+        self.assertNotIn('id="another-story-sea"', text)
         self.assertNotIn("fc-price", text)
         self.assertNotIn("Budget and resale calculator", text)
 
