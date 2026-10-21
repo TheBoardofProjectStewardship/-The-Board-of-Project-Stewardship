@@ -228,7 +228,7 @@ def model_page(entry: dict) -> str:
     links = ['<a href="/portfolio/" class="text-secondary hover:underline">All portfolio models</a>']
     if entry.get("projectPage"):
         links.append(f'<a href="{esc(entry["projectPage"])}" class="text-secondary hover:underline">See the project</a>')
-    facts = "".join(f"<li>{esc(f)}</li>" for f in entry["facts"])
+    facts = "".join(f'<li style="margin-right:1.5rem">{esc(f)}</li>' for f in entry["facts"])
     body = f'''<div class="max-w-6xl mx-auto px-4 pt-6 pb-10 relative z-20 portfolio-model">
 {section}
   <div class="mt-6 text-sm text-slate-300 space-y-3">
@@ -245,7 +245,7 @@ def model_page(entry: dict) -> str:
         description=f"Interactive 3D model of a Pacific Pro Group project: {entry['card']}",
         active="portfolio",
         body=body,
-        prefix="../../",
+        prefix="/",
         canonical=canon,
         include_widgets=False,
         extra_head='  <link rel="stylesheet" href="/assets/css/house-model.css">\n',
@@ -258,7 +258,7 @@ def grid_page(projects: list[dict]) -> str:
     gs = _gs()
     cards = []
     for e in projects:
-        facts = "".join(f'<li>{esc(f)}</li>' for f in e["facts"])
+        facts = "".join(f'<li style="margin-right:1rem">{esc(f)}</li>' for f in e["facts"])
         cards.append(f'''    <li class="portfolio-card bg-charcoal border border-white/5 hover:border-primary/30 rounded-lg overflow-hidden card-hover">
       <a href="/portfolio/{esc(e["slug"])}/" class="block h-full">
         <img src="{esc(e["thumb"])}" alt="3D model of {esc(e["title"])}" width="1200" height="675" loading="lazy" class="w-full aspect-video object-cover bg-white">
