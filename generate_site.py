@@ -5758,7 +5758,8 @@ def build_about() -> str:
     # The photo visualizer (home_plan_hero) and the process, gallery, learn and
     # journal sections were removed from the homepage in Oct 2026 at Alex's request.
     # Their standalone pages and images stay.
-    body = f"""{scroll_html}
+    body = f"""  <div id="portfolio-top-link" class="max-w-6xl mx-auto px-4 pt-3 pb-1 text-right text-xs relative z-20"><a href="/portfolio/" class="text-slate-400 hover:text-secondary underline-offset-4 hover:underline transition-colors">See more of our projects &rarr;</a></div>
+{scroll_html}
   <div class="max-w-6xl mx-auto px-4 pt-10 relative z-20" id="home-after-magnolia">
 {home_feasibility_tool_section()}
 
