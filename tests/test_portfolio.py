@@ -33,7 +33,7 @@ class PortfolioTests(unittest.TestCase):
         hrefs = re.findall(r'<a href="/portfolio/([^"/]+)/" class="block', grid)
         self.assertEqual(hrefs, [p["slug"] for p in self.projects])
         self.assertEqual(hrefs[0], "magnolia")
-        self.assertIn("one-story-house-shop-garage", hrefs)
+        self.assertIn("mcgillivray", hrefs)
         self.assertEqual(grid.count('class="portfolio-card'), len(self.projects))
         for p in self.projects:
             self.assertTrue((ROOT / p["thumb"].lstrip("/")).is_file(), p["thumb"])

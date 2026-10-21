@@ -18,14 +18,14 @@
       "sourceNote": "Traced from the permit sets. Unprinted dimensions are scaled by eye from the sheets."
     },
     {
-      "slug": "one-story-house-shop-garage",
+      "slug": "mcgillivray",
       "engine": "config",
       "config": "one-story-house-shop-garage.json",
       "title": "One-story house with shop and garage",
       "card": "A one-story layout, 6,720 SF total as printed: primary suite, two bedrooms, open kitchen, living and dining with a 14 foot ceiling, a den, and a large attached garage with a shop.",
       "facts": ["6,720 SF total", "3 bedrooms and a den", "Garage 2,511 SF, shop 406 SF"],
       "kicker": "Layout plan",
-      "thumb": "/portfolio/one-story-house-shop-garage/thumb.png",
+      "thumb": "/portfolio/mcgillivray/thumb.png",
       "dek": "Explore this one-story layout layer by layer: the finished house, the roof, the floor plan with every room, and the slab.",
       "sourceNote": "Modeled from a one-page layout plan. Walls, openings, room names, areas and ceiling heights come from the plan. The roof, window sills and heads, and door heights are not drawn on the plan and are shown as labeled assumptions."
     }
