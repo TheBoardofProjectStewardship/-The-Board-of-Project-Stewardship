@@ -3740,6 +3740,7 @@
     10.5
    ],
    "traced": 96.146,
+   "text": "Laundry 96 SF",
    "redlined": true
   },
   {
@@ -4852,14 +4853,14 @@
  "sheetLabel": "Static plan of a two-story house with an attached garage.",
  "bounds": {
   "min": [
-   -19.5,
+   -21.5,
    -0.5,
-   -2
+   -3.5
   ],
   "max": [
-   44,
+   45.5,
    33.69,
-   48.5
+   51.5
   ]
  },
  "planBounds": {
