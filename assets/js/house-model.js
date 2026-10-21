@@ -110,7 +110,7 @@ function buildFromConfig(cfg) {
   // Slab and room floors.
   for (const r of cfg.rooms) {
     if (!r.poly) continue;
-    const wet = /bath|shower|^tc$|laundry|water heater|powder/i.test(r.name);
+    const wet = /bath|shower|^[tw]c$|laundry|water heater|powder/i.test(r.name);
     if (!LV) { prism(slab, r.poly, 0, F, wet ? C_TILE : C_FLOOR, 7, false); continue; }
     if (wet && r.ch) { const b = baseOf(r); prism(G(r).slab, r.poly, b, b + 0.02, C_TILE, 7, false); }
   }
@@ -188,6 +188,7 @@ function buildFromConfig(cfg) {
   // Roof: one cap per ceiling-height zone (the plan has no roof drawing; see assumptions).
   const RT = H.roofThickness ?? 1.0, RA = H.roofAbove ?? 0.25;
   if (cfg.gableRoof) gableRoofs(cfg.gableRoof);
+  else if (cfg.fieldRoof) fieldRoofs(cfg.fieldRoof);
   else if (cfg.pitchedRoof) hipRoofs(cfg.pitchedRoof);
   else for (const c of cfg.roof || []) prism(roof, c.poly, F + c.y + RA, F + c.y + RA + RT, C_ROOF, 0, true, C_FASCIA);
   /** Hipped roof per wing over a plan rectangle. Overlapping wings at one pitch meet in true valleys.
@@ -231,6 +232,77 @@ function buildFromConfig(cfg) {
         face(roof, [[q[0], ys, q[1]], [q[2], ys, q[1]], [q[2], ys, q[3]], [q[0], ys, q[3]]], C_SOFFIT, 0, false, ys);
     }
     // Posts under roofs with no walls below (covered patio, entry porch).
+    for (const p of spec.posts || []) prism(roof, rect([p[0] - 0.3, p[1] - 0.3, p[0] + 0.3, p[1] + 0.3]), F, F + p[2], C_WALL, 0, true);
+  }
+  /** Hipped roof over the union of plan rectangles, one zone per plate height. For a footprint made of
+      axis-aligned rectangles the hip roof at one pitch is the chessboard (L-infinity) distance to the eave line,
+      so wings, L and T junctions get true hips and valleys with no seams between pieces. Lower zones tuck under
+      higher ones. Courses are drawn as level lines; a fascia band runs round the eave and a soffit under it. */
+  function fieldRoofs(spec) {
+    const C_SEAM = [0.30, 0.31, 0.32], C_SOFFIT = [0.86, 0.85, 0.82];
+    const FH = spec.fascia ?? 0.6, SP = spec.seam ?? 1.5, S = spec.step ?? 0.5;
+    for (const zn of spec.zones) {
+      const o = zn.overhang ?? spec.overhang ?? 1.5, k = (zn.pitch ?? spec.pitch ?? 4) / 12, ye = F + zn.plate - o * k;
+      const R = zn.rects.map(r => [r[0] - o, r[1] - o, r[2] + o, r[3] + o]), Wl = zn.rects;
+      const inR = (x, z, L) => L.some(r => x > r[0] && x < r[2] && z > r[1] && z < r[3]);
+      const uniq = a => { a.sort((p, q) => p - q); const out = []; for (const v of a) if (!out.length || v - out[out.length - 1] > 0.05) out.push(v); return out; };
+      const ex = uniq(R.flatMap(r => [r[0], r[2]])), ez = uniq(R.flatMap(r => [r[1], r[3]]));
+      // Exterior as rectangles: coarse cells outside the union, plus a far border.
+      const BIG = 1e4, cx = [-BIG, ...ex, BIG], cz = [-BIG, ...ez, BIG], out = [];
+      for (let i = 0; i < cx.length - 1; i++) for (let j = 0; j < cz.length - 1; j++) {
+        const mx = (cx[i] + cx[i + 1]) / 2, mz = (cz[j] + cz[j + 1]) / 2;
+        if (!inR(mx, mz, R)) out.push([cx[i], cz[j], cx[i + 1], cz[j + 1]]);
+      }
+      const dist = (x, z) => { let d = Infinity; for (const q of out) { const dx = Math.max(q[0] - x, 0, x - q[2]), dz = Math.max(q[1] - z, 0, z - q[3]); const m = Math.max(dx, dz); if (m < d) d = m; } return d; };
+      const hy = (x, z) => ye + k * dist(x, z);
+      const fill = (e) => { const a = [...e]; for (let v = Math.ceil(e[0] / S) * S; v < e[e.length - 1]; v += S) a.push(v); return uniq(a); };
+      const xs = fill(ex), zs = fill(ez);
+      const Hm = xs.map(x => zs.map(z => hy(x, z)));
+      const inside = xs.map((x, i) => zs.map((z, j) => i < xs.length - 1 && j < zs.length - 1 && inR((x + xs[i + 1]) / 2, (z + zs[j + 1]) / 2, R)));
+      const isIn = (i, j) => i >= 0 && j >= 0 && i < xs.length - 1 && j < zs.length - 1 && inside[i][j];
+      const up = (a, b, c) => { const n = cross(sub(b, a), sub(c, a)); return n[1] >= 0 ? [a, b, c] : [a, c, b]; };
+      // Each triangle faces +x, -x, +z or -z (the slope of a chessboard-distance roof is always axis aligned).
+      const cls = t => { const [p, q, r] = t, u = sub(q, p), v = sub(r, p), n = cross(u, v); return Math.abs(n[0]) > Math.abs(n[2]) ? (n[0] * n[1] > 0 ? 0 : 1) : (n[2] * n[1] > 0 ? 2 : 3); };
+      const seams = (t, c) => { // standing seams run down the slope: cut the triangle with planes across it every SP
+        const ax = c < 2 ? 2 : 0, vs = t.map(p => p[ax]), lo = Math.min(...vs), hi = Math.max(...vs);
+        for (let L = Math.ceil((lo - 0.37) / SP) * SP + 0.37; L < hi; L += SP) { // offset keeps cuts off the grid lines
+          const pts = [];
+          for (let e = 0; e < 3; e++) { const p = t[e], q = t[(e + 1) % 3]; if ((p[ax] - L) * (q[ax] - L) < 0) { const s2 = (L - p[ax]) / (q[ax] - p[ax]); pts.push(p.map((w, m) => w + (q[m] - w) * s2 + (m === 1 ? 0.03 : 0))); } }
+          if (pts.length === 2) line(roof, pts[0], pts[1], C_SEAM, 0, ye);
+        }
+      };
+      const CL = xs.map(() => zs.map(() => null));
+      for (let i = 0; i < xs.length - 1; i++) for (let j = 0; j < zs.length - 1; j++) {
+        if (!inside[i][j]) continue;
+        const x0 = xs[i], x1 = xs[i + 1], z0 = zs[j], z1 = zs[j + 1];
+        const a = [x0, Hm[i][j], z0], b = [x1, Hm[i + 1][j], z0], c = [x1, Hm[i + 1][j + 1], z1], d = [x0, Hm[i][j + 1], z1];
+        const hc = hy((x0 + x1) / 2, (z0 + z1) / 2);
+        const tris = Math.abs((a[1] + c[1]) / 2 - hc) <= Math.abs((b[1] + d[1]) / 2 - hc) ? [[a, b, c], [a, c, d]] : [[a, b, d], [b, c, d]];
+        const cc = tris.map(cls), split = tris[0][2] === c;
+        // which triangle touches edges [top z0, right x1, bottom z1, left x0]
+        CL[i][j] = split ? [cc[0], cc[0], cc[1], cc[1]] : [cc[0], cc[1], cc[1], cc[0]];
+        tris.forEach((t, n) => { const u = up(...t); tri(roof, u[0], u[1], u[2], C_ROOF, 0, ye); seams(t, cc[n]); });
+        if (cc[0] !== cc[1]) { const [p, q] = split ? [a, c] : [b, d]; line(roof, [p[0], p[1] + 0.04, p[2]], [q[0], q[1] + 0.04, q[2]], C_INK, 0, ye); }
+        // Fascia on eave edges, soffit under the overhang.
+        const edges = [[i, j - 1, a, b], [i + 1, j, b, c], [i, j + 1, c, d], [i - 1, j, d, a]];
+        for (const [ni, nj, p, q] of edges) if (!isIn(ni, nj)) {
+          face(roof, [[p[0], ye, p[2]], [q[0], ye, q[2]], [q[0], ye - FH, q[2]], [p[0], ye - FH, p[2]]], C_FASCIA, 0, false, ye - FH);
+          line(roof, [p[0], ye, p[2]], [q[0], ye, q[2]], C_INK, 0, ye - FH); line(roof, [p[0], ye - FH, p[2]], [q[0], ye - FH, q[2]], C_INK, 0, ye - FH);
+        }
+        if (!inR((x0 + x1) / 2, (z0 + z1) / 2, Wl)) face(roof, [[x0, ye - FH, z0], [x0, ye - FH, z1], [x1, ye - FH, z1], [x1, ye - FH, z0]], C_SOFFIT, 0, false, ye - FH);
+      }
+      // Hips, ridges and valleys: cell edges where the facing changes.
+      for (let i = 0; i < xs.length - 1; i++) for (let j = 0; j < zs.length - 1; j++) {
+        if (!CL[i][j]) continue;
+        if (CL[i + 1] && CL[i + 1][j] && CL[i][j][1] !== CL[i + 1][j][3]) line(roof, [xs[i + 1], Hm[i + 1][j] + 0.04, zs[j]], [xs[i + 1], Hm[i + 1][j + 1] + 0.04, zs[j + 1]], C_INK, 0, ye);
+        if (CL[i][j + 1] && CL[i][j][2] !== CL[i][j + 1][0]) line(roof, [xs[i], Hm[i][j + 1] + 0.04, zs[j + 1]], [xs[i + 1], Hm[i + 1][j + 1] + 0.04, zs[j + 1]], C_INK, 0, ye);
+      }
+    }
+    // Clerestory walls where a raised zone stands above a lower roof (drawn full height; the lower roof hides the rest).
+    for (const c of spec.cheeks || []) {
+      const [a, b] = c.seg, y0 = F + c.y0, y1 = F + c.y1;
+      face(roof, [[a[0], y0, a[1]], [b[0], y0, b[1]], [b[0], y1, b[1]], [a[0], y1, a[1]]], C_WALL, 5, true, y0);
+    }
     for (const p of spec.posts || []) prism(roof, rect([p[0] - 0.3, p[1] - 0.3, p[0] + 0.3, p[1] + 0.3]), F, F + p[2], C_WALL, 0, true);
   }
   /** Gable roofs from a roof plan: two planes per gable, rake and eave overhangs, fascia, soffit, shingle courses and

@@ -27,7 +27,8 @@
       "kicker": "Layout plan",
       "thumb": "/portfolio/one-story-house-shop/thumb.png",
       "dek": "Explore this one-story layout layer by layer: the finished house, the roof, the floor plan with every room, and the slab.",
-      "sourceNote": "Modeled from a one-page layout plan. Walls, openings, room names, areas and ceiling heights come from the plan. The roof, window sills and heads, and door heights are not drawn on the plan and are shown as labeled assumptions."
+      "sourceNote": "Modeled from a one-page layout plan. Walls, openings, room names, areas and ceiling heights come from the plan. The roof, window sills and heads, and door heights are not drawn on the plan and are shown as labeled assumptions.",
+      "assumptions": ["Roof: not drawn on the layout. Hipped roofs at 4:12 with 18 inch overhangs over every wing, meeting in hips and valleys.", "The garage and shop roof sits on 12 foot walls; the house roof sits on 9 foot walls and tucks under the garage eave.", "The living and dining room roof is raised over its 14 foot ceiling, with short clerestory walls above the main roof."]
     },
     {
       "slug": "snohomish-two-story",
