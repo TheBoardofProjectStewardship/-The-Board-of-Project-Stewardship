@@ -17,6 +17,8 @@ Septic reviews for new homes in Snohomish County could start sooner next year af
 
 The Washington State Department of Commerce announced the award as part of $475,000 in grants to eight local governments to speed up the review of residential building permits. My Edmonds News reported Oct. 13 that the health department will have that help sometime early next year.
 
+![Illustrative: septic drainfield trenches dug for a new home in rural Snohomish County](../assets/images/news/2026-10-14-snohomish-county-septic-2.webp)
+
 ## Why septic reviews lag
 
 Residential development applications in the county are usually filed online with Snohomish County Planning and Development Services. That department passes information about on-site septic systems to the health department, which reviews septic systems for new homes outside sewer service areas.

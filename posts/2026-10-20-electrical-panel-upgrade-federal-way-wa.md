@@ -65,6 +65,8 @@ Ask each bidder:
 3. Will the meter base, mast, or underground conduit change?
 4. How long will the house be without power, and what happens if the inspection is not passed the same day?
 
+![Illustrative: electric meter and service mast on the side of a Federal Way, WA house before a panel upgrade](../assets/images/posts/2026-10-20-federal-way-panel-4.webp)
+
 ## Inspections in Federal Way
 
 Inspections are scheduled online. The City's [inspection page](https://www.federalwaywa.gov/page/inspection-information) says its phone system is being phased out in favor of [inspection.mybuildingpermit.com](https://inspection.mybuildingpermit.com/). The City's [electrical, mechanical, and plumbing scheduling bulletin](https://docs.cityoffederalway.com/WebLink/ElectronicFile.aspx?docid=2107042&dbid=0&repo=cityoffederalway) (Bulletin #163, March 18, 2026) lists the inspection types a panel job is likely to touch, including **Service**, **Feeders/Sub-Panels**, **Rough Electrical**, **UFER Ground**, and **Final Electrical**, each with its own code for the scheduling system.
@@ -80,6 +82,8 @@ PSE's [2026 Electric Service Handbook for single-family homes](https://www.pse.c
 https://www.youtube.com/watch?v=gDozp7t7A0Y
 
 The video above follows an electrician through a 200-amp main panel replacement, from the permit and the utility disconnect to labeling circuits, setting the new panel, flashing a new mast, and torquing the lugs. Treat it as background rather than a do-it-yourself lesson: it shows what a careful job looks like, so you can ask better questions of the people bidding yours.
+
+![Illustrative: new residential breaker panel with neatly labeled circuits awaiting inspection in a Federal Way, WA home](../assets/images/posts/2026-10-20-federal-way-panel-5.webp)
 
 ## Who is allowed to do the work
 
