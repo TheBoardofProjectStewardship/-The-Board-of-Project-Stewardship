@@ -112,3 +112,14 @@ console.log(JSON.stringify({{a:a.groups.length,b:b.groups.map(g=>g.id),tris:b.gr
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class StartViewTests(unittest.TestCase):
+    def test_engine_starts_in_3d_exterior(self):
+        js = ENGINE.read_text(encoding="utf-8")
+        self.assertIn("var START_PROGRESS = 0;", js)
+        self.assertIn('history.scrollRestoration = "manual"', js)
+        for p in ps.load_projects():
+            html = ps.pages()[f"portfolio/{p['slug']}/index.html"]
+            self.assertIn('data-ppgm-view="perspective" aria-pressed="true"', html)
+            self.assertIn('class="ppgm-is-on" data-ppgm-stage="house"', html)

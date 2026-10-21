@@ -933,6 +933,11 @@ function createRenderer(canvas, options) {
     var touchMode = "";
     var roomFloor = "";
     var selectedView = "";
+    // Every model starts on its first stage: the full 3D exterior with the roof on, never the plan
+    // or top view. The layer is driven by scroll, so a restored scroll position would open on a
+    // later stage; load at the top instead (a #link target still scrolls where it points).
+    var START_PROGRESS = 0;
+    try { if (!location.hash && "scrollRestoration" in history) history.scrollRestoration = "manual"; } catch (e) {}
     var inViewport = true;
     var resizeObserver = null;
     var visibleObserver = null;
@@ -986,10 +991,10 @@ function createRenderer(canvas, options) {
     }
 
     function scrollProgress() {
-      if (!root.classList.contains("ppgm-is-enhanced")) return manual == null ? 0 : manual;
+      if (!root.classList.contains("ppgm-is-enhanced")) return manual == null ? START_PROGRESS : manual;
       var rect = track.getBoundingClientRect();
       var travel = track.offsetHeight - sticky.offsetHeight;
-      if (travel <= 1) return manual == null ? 0 : manual;
+      if (travel <= 1) return manual == null ? START_PROGRESS : manual;
       var scrolled = stickyTop() - rect.top;
       if (scrolled <= 0) return 0;
       if (scrolled >= travel) return 1;
