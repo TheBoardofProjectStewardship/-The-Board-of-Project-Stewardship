@@ -143,6 +143,7 @@ function buildFromConfig(cfg) {
         if (o.cutBase != null) prism(walls, s, F + DOOR, h, C_WALL, 5, true, C_INK, o.cutBase);
         else mid(F + DOOR, h, C_WALL, walls);
         if (o.kind === 'DG') prism(finish, g, F, F + DOOR, C_GLASS, 0, true, C_FASCIA);
+        else if (o.leaf) prism(finish, g, F, F + DOOR, C_DOOR, 0, true, C_FASCIA); // exterior door leaf (o.leaf)
       } else if (o.kind === 'G') {
         if (F > W0 + 0.01) mid(W0, F, C_WALL, walls);
         mid(F + GDOOR, h, C_WALL, walls);
@@ -158,6 +159,8 @@ function buildFromConfig(cfg) {
     if (o.kind === 'bay' && o.poly) {
       prism(slab, o.poly, 0, F, C_FLOOR, 7, false);
       prism(roof, o.poly.map(p => [p[0], p[1]]), F + 9, F + 9.8, C_ROOF, 0, true, C_FASCIA);
+      // A bay in a taller room: close the main wall line above the bay roof up to the room's wall height.
+      if (o.closeAbove && h > F + 9.8) prism(walls, strip(o.poly[0], o.poly[o.poly.length - 1], t), F + 9.8, h, C_WALL, 5, true);
     }
   }
   // Fixtures and furniture from the plan symbols.
@@ -246,7 +249,11 @@ function buildFromConfig(cfg) {
       const R = zn.rects.map(r => [r[0] - o, r[1] - o, r[2] + o, r[3] + o]), Wl = zn.rects;
       const inR = (x, z, L) => L.some(r => x > r[0] && x < r[2] && z > r[1] && z < r[3]);
       const uniq = a => { a.sort((p, q) => p - q); const out = []; for (const v of a) if (!out.length || v - out[out.length - 1] > 0.05) out.push(v); return out; };
-      const ex = uniq(R.flatMap(r => [r[0], r[2]])), ez = uniq(R.flatMap(r => [r[1], r[3]]));
+      // zn.clip: plan rects (taller walls) where this roof stops; zn.cap: run beyond which the slope eases to zn.deck (in 12), so wings of
+      // different widths share one ridge height instead of stepping.
+      const CLIP = zn.clip || [], cap = zn.cap, kd = (zn.deck ?? 0.5) / 12;
+      const ex = uniq(R.flatMap(r => [r[0], r[2], ...(cap != null ? [r[0] + cap, r[2] - cap] : [])]).concat(CLIP.flatMap(r => [r[0], r[2]])));
+      const ez = uniq(R.flatMap(r => [r[1], r[3], ...(cap != null ? [r[1] + cap, r[3] - cap] : [])]).concat(CLIP.flatMap(r => [r[1], r[3]])));
       // Exterior as rectangles: coarse cells outside the union, plus a far border.
       const BIG = 1e4, cx = [-BIG, ...ex, BIG], cz = [-BIG, ...ez, BIG], out = [];
       for (let i = 0; i < cx.length - 1; i++) for (let j = 0; j < cz.length - 1; j++) {
@@ -254,7 +261,7 @@ function buildFromConfig(cfg) {
         if (!inR(mx, mz, R)) out.push([cx[i], cz[j], cx[i + 1], cz[j + 1]]);
       }
       const dist = (x, z) => { let d = Infinity; for (const q of out) { const dx = Math.max(q[0] - x, 0, x - q[2]), dz = Math.max(q[1] - z, 0, z - q[3]); const m = Math.max(dx, dz); if (m < d) d = m; } return d; };
-      const hy = (x, z) => ye + k * dist(x, z);
+      const hy = (x, z) => { const d = dist(x, z); return cap != null && d > cap ? ye + k * cap + kd * (d - cap) : ye + k * d; };
       const fill = (e) => { const a = [...e]; for (let v = Math.ceil(e[0] / S) * S; v < e[e.length - 1]; v += S) a.push(v); return uniq(a); };
       const xs = fill(ex), zs = fill(ez);
       const Hm = xs.map(x => zs.map(z => hy(x, z)));
@@ -274,6 +281,7 @@ function buildFromConfig(cfg) {
       const CL = xs.map(() => zs.map(() => null));
       for (let i = 0; i < xs.length - 1; i++) for (let j = 0; j < zs.length - 1; j++) {
         if (!inside[i][j]) continue;
+        if (CLIP.length && inR((xs[i] + xs[i + 1]) / 2, (zs[j] + zs[j + 1]) / 2, CLIP)) continue;
         const x0 = xs[i], x1 = xs[i + 1], z0 = zs[j], z1 = zs[j + 1];
         const a = [x0, Hm[i][j], z0], b = [x1, Hm[i + 1][j], z0], c = [x1, Hm[i + 1][j + 1], z1], d = [x0, Hm[i][j + 1], z1];
         const hc = hy((x0 + x1) / 2, (z0 + z1) / 2);
@@ -989,7 +997,11 @@ function createRenderer(canvas, options) {
     gl.uniform3fv(shadowProgram.uniforms.uPaper, PAPER);
     gl.uniform4fv(shadowProgram.uniforms.uRects, new Float32Array(PROFILE.shadow.flat()));
     gl.uniform1f(shadowProgram.uniforms.uStrength, mix(0.14, 0.04, smooth(0.28, 0.78, p)));
+    // The contact shadow sits under the lawn plate: no depth write, so a low-precision depth buffer (phones) cannot let it
+    // z-fight the lawn and leave only dotted lawn edges.
+    gl.depthMask(false);
     gl.drawArrays(gl.TRIANGLES, 0, shadow.count);
+    gl.depthMask(true);
     stats.drawCalls++;
     stats.triangles += 2;
 
