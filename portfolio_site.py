@@ -225,6 +225,10 @@ def _gs():
     return gs
 
 
+def _no_dash(html: str) -> str:
+    return html.replace("your photo \u2014 concept preview only", "your photo. Concept preview only")
+
+
 def model_page(entry: dict) -> str:
     gs = _gs()
     cfg = load_config(entry)
@@ -256,7 +260,8 @@ def model_page(entry: dict) -> str:
     scripts = '  <script src="/assets/js/house-model.js" defer></script>\n'
     if entry["engine"] == "magnolia":
         scripts = '  <script src="/assets/js/house-model-magnolia.js" defer></script>\n' + scripts
-    return gs.page_shell(
+    # Model pages carry no em dashes, including the shared Another Story card.
+    return _no_dash(gs.page_shell(
         title=f"{entry['title']}: 3D model",
         description=f"Interactive 3D model of a Pacific Pro Group project: {entry['card']}",
         active="portfolio",
@@ -267,7 +272,7 @@ def model_page(entry: dict) -> str:
         extra_head='  <link rel="stylesheet" href="/assets/css/house-model.css">\n',
         extra_scripts=scripts,
         breadcrumbs=[("Home", ORIGIN + "/"), ("Portfolio", ORIGIN + "/portfolio/"), (entry["title"], canon)],
-    )
+    ))
 
 
 def grid_page(projects: list[dict]) -> str:
