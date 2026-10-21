@@ -154,7 +154,51 @@ function buildFromConfig(cfg) {
   }
   // Roof: one cap per ceiling-height zone (the plan has no roof drawing; see assumptions).
   const RT = H.roofThickness ?? 1.0, RA = H.roofAbove ?? 0.25;
-  for (const c of cfg.roof || []) prism(roof, c.poly, F + c.y + RA, F + c.y + RA + RT, C_ROOF, 0, true, C_FASCIA);
+  if (cfg.pitchedRoof) hipRoofs(cfg.pitchedRoof);
+  else for (const c of cfg.roof || []) prism(roof, c.poly, F + c.y + RA, F + c.y + RA + RT, C_ROOF, 0, true, C_FASCIA);
+  /** Hipped roof per wing over a plan rectangle. Overlapping wings at one pitch meet in true valleys.
+      Eaves overhang the walls, with a fascia band, a soffit and standing seams down each plane. */
+  function hipRoofs(spec) {
+    const k = (spec.pitch ?? 6) / 12, o0 = spec.overhang ?? 1.5, FH = spec.fascia ?? 0.7, SP = spec.seam ?? 1.5;
+    const C_SEAM = [0.30, 0.31, 0.32], C_SOFFIT = [0.86, 0.85, 0.82];
+    for (const w of spec.wings) {
+      const o = w.overhang ?? o0, y = F + w.plate;
+      const [x0, z0, x1, z1] = [w.r[0] - o, w.r[1] - o, w.r[2] + o, w.r[3] + o];
+      const ye = y - o * k, alongX = (x1 - x0) >= (z1 - z0), h = (alongX ? z1 - z0 : x1 - x0) / 2, yr = ye + h * k;
+      const A = [x0, ye, z0], B2 = [x1, ye, z0], C = [x1, ye, z1], D = [x0, ye, z1];
+      let faces;
+      if (alongX) {
+        const zm = (z0 + z1) / 2, R1 = [x0 + h, yr, zm], R2 = [x1 - h, yr, zm];
+        faces = [[A, B2, R2, R1], [B2, C, R2], [C, D, R1, R2], [D, A, R1]];
+      } else {
+        const xm = (x0 + x1) / 2, R1 = [xm, yr, z0 + h], R2 = [xm, yr, z1 - h];
+        faces = [[A, B2, R1], [B2, C, R2, R1], [C, D, R2], [D, A, R1, R2]];
+      }
+      for (const f of faces) {
+        face(roof, f, C_ROOF, 0, true, ye);
+        // Standing seams run down the slope, perpendicular to the face's eave edge.
+        const e0 = f[0], e1 = f[1], ex = Math.abs(e1[0] - e0[0]) > Math.abs(e1[2] - e0[2]);
+        const lo = Math.min(ex ? e0[0] : e0[2], ex ? e1[0] : e1[2]), hi = Math.max(ex ? e0[0] : e0[2], ex ? e1[0] : e1[2]);
+        for (let c = lo + SP; c < hi - 0.2; c += SP) {
+          const hits = [];
+          for (let i = 0; i < f.length; i++) {
+            const p = f[i], q = f[(i + 1) % f.length], pa = ex ? p[0] : p[2], qa = ex ? q[0] : q[2];
+            if ((pa - c) * (qa - c) > 0 || pa === qa) continue;
+            const s = (c - pa) / (qa - pa); hits.push(p.map((v, j) => v + (q[j] - v) * s));
+          }
+          if (hits.length >= 2) { const a = hits[0], b = hits[hits.length - 1]; line(roof, [a[0], a[1] + 0.03, a[2]], [b[0], b[1] + 0.03, b[2]], C_SEAM, 0, ye); }
+        }
+        // Fascia band below the eave edge.
+        face(roof, [[e0[0], ye, e0[2]], [e1[0], ye, e1[2]], [e1[0], ye - FH, e1[2]], [e0[0], ye - FH, e0[2]]], C_FASCIA, 0, true, ye - FH);
+      }
+      // Soffit: the underside ring between the wall line and the eave.
+      const ys = ye - FH, r = w.r;
+      for (const q of [[x0, z0, x1, r[1]], [x0, r[3], x1, z1], [x0, r[1], r[0], r[3]], [r[2], r[1], x1, r[3]]])
+        face(roof, [[q[0], ys, q[1]], [q[2], ys, q[1]], [q[2], ys, q[3]], [q[0], ys, q[3]]], C_SOFFIT, 0, false, ys);
+    }
+    // Posts under roofs with no walls below (covered patio, entry porch).
+    for (const p of spec.posts || []) prism(roof, rect([p[0] - 0.3, p[1] - 0.3, p[0] + 0.3, p[1] + 0.3]), F, F + p[2], C_WALL, 0, true);
+  }
   // Labels and tap targets: printed room names and areas.
   const LY = F + 0.15;
   for (const r of cfg.rooms) {

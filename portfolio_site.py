@@ -85,7 +85,7 @@ LEARN_CONFIG = {
     "foundation": ["foundation"],
 }
 NOTES_CONFIG = {
-    "roof": ("Roof", "The layout does not draw the roof, so this model shows a simple low-slope roof over each ceiling height. The living and dining room rises above the rest."),
+    "roof": ("Roof", "The layout does not draw the roof or give a pitch. Assumed: a hipped roof over each wing at a 6:12 pitch, 18 inch overhangs with fascia and soffit, and standing-seam metal. The garage and shop share one roof. The living and dining roof sits higher over its 14 foot ceiling."),
     "garage": ("Garage and shop", "The garage, 2,511 SF as printed, wraps around a 406 SF shop and a small bath. Its overhead doors face the apron."),
     "header": ("Openings", "Windows, doors and the two bays are placed where the layout leaves gaps in the walls. Sill and head heights are typical values, not printed."),
     "partition": ("Room layout", "Room names, areas and ceiling heights are the ones printed on the layout. Select a room to fly in."),
