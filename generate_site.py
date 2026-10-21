@@ -606,6 +606,16 @@ def clamp_description(desc: str, limit: int = 160) -> str:
     for match in re.finditer(r"[.!?]\s+|;\s+| — | – ", desc):
         mark = desc[match.start()]
         if mark in ".!?":
+            # "Oct. 5" is not the end of a sentence.
+            before = desc[: match.start()].rstrip()
+            token = before.split(" ")[-1] if before else ""
+            if mark == "." and token.lower().rstrip(".") in {
+                "jan", "feb", "mar", "apr", "jun", "jul", "aug", "sep", "sept",
+                "oct", "nov", "dec", "mr", "mrs", "ms", "dr", "jr", "sr", "st",
+                "ave", "gov", "sen", "rep", "no", "fig", "gen", "mt", "ft",
+                "inc", "ltd", "co", "prof", "vs", "approx",
+            }:
+                continue
             prefix = desc[: match.start() + 1].strip()
         else:
             prefix = desc[: match.start()].rstrip(" ,;:—–-")
@@ -1784,12 +1794,22 @@ def ranking_photo_caption_html(topic: str, place: str) -> str:
     )
 
 
+def _split_img_dest(dest: str) -> tuple[str, str | None]:
+    """Image destination, plus a title used verbatim as the figcaption."""
+    dest = (dest or "").strip()
+    match = re.fullmatch(r'(\S+)\s+"([^"]*)"', dest)
+    if match:
+        return match.group(1), match.group(2)
+    return dest, None
+
+
 def first_markdown_image(md: str) -> tuple[str, str] | None:
     """First markdown image as (alt, src), if the body has one."""
     match = re.search(r"!\[([^\]]*)\]\(([^)]+)\)", md or "")
     if not match:
         return None
-    return match.group(1).strip(), match.group(2).strip()
+    src, _caption = _split_img_dest(match.group(2))
+    return match.group(1).strip(), src
 
 
 _unescape_attr = html.unescape
@@ -7341,7 +7361,7 @@ def md_to_html(md: str, *, link_unescape: bool = False) -> str:
         )
 
 
-    def figure_html(alt: str, src: str) -> str:
+    def figure_html(alt: str, src: str, caption: str | None = None) -> str:
         # Resolve ../assets/... relative to posts/ through CDN_MAP when present
         # so live GH Pages works even when binary assets are gitignored.
         resolved = src
@@ -7354,11 +7374,16 @@ def md_to_html(md: str, *, link_unescape: bool = False) -> str:
                 resolved = f"../{rel}"
             elif rel in CDN_MAP:
                 resolved = CDN_MAP[rel]
-        place = _PHOTO_CTX.get("place") or detect_photo_place(alt) or "Puget Sound"
-        topic = str(_PHOTO_CTX.get("topic") or "")
-        alt_text = polish_photo_alt(alt, place, illustrative=True, topic=topic)
-        caption = polish_photo_caption(alt, place, topic=topic)
-        cap = f"<figcaption>{esc(caption)}</figcaption>" if caption else ""
+        # A markdown title is the authored figcaption and alt, used as written.
+        if caption is None:
+            place = _PHOTO_CTX.get("place") or detect_photo_place(alt) or "Puget Sound"
+            topic = str(_PHOTO_CTX.get("topic") or "")
+            alt_text = polish_photo_alt(alt, place, illustrative=True, topic=topic)
+            caption_text = polish_photo_caption(alt, place, topic=topic)
+        else:
+            alt_text = alt.strip()
+            caption_text = caption.strip()
+        cap = f"<figcaption>{esc(caption_text)}</figcaption>" if caption_text else ""
         return (
             f'<figure class="post-figure">'
             f'<img src="{esc(resolved)}" alt="{esc(alt_text)}" loading="lazy" width="1200" height="675">'
@@ -7372,7 +7397,8 @@ def md_to_html(md: str, *, link_unescape: bool = False) -> str:
         for m in re.finditer(r"!\[([^\]]*)\]\(([^)]+)\)", s):
             end = m.start()
             parts.append(esc(s[last:end]))
-            parts.append(figure_html(m.group(1), m.group(2)))
+            src, caption = _split_img_dest(m.group(2))
+            parts.append(figure_html(m.group(1), src, caption))
             last = m.end()
         parts.append(esc(s[last:]))
         s = "".join(parts)
@@ -7435,7 +7461,8 @@ def md_to_html(md: str, *, link_unescape: bool = False) -> str:
         img = img_line_re.match(stripped)
         if img:
             close_lists()
-            out.append(figure_html(img.group(1), img.group(2)))
+            src, caption = _split_img_dest(img.group(2))
+            out.append(figure_html(img.group(1), src, caption))
             i += 1
             continue
         if line.startswith("## "):
@@ -9128,6 +9155,27 @@ def write_sitemap(posts: list[dict]) -> None:
             "  <url>\n"
             f"    <loc>{magnolia_loc}</loc>\n"
             f"    <lastmod>{magnolia_lastmod}</lastmod>\n"
+            "    <changefreq>monthly</changefreq>\n"
+            "    <priority>0.8</priority>\n"
+            "  </url>"
+        )
+
+    # Hand-published lot-feasibility page. Regen must keep this URL.
+    build_here_loc = f"{BASE_URL}build-here.html"
+    if not any(build_here_loc in entry for entry in entries):
+        build_here_lastmod = "2026-10-20"
+        sitemap_path = SITE_DIR / "sitemap.xml"
+        if sitemap_path.is_file():
+            prior = re.search(
+                rf"<loc>{re.escape(build_here_loc)}</loc>\s*<lastmod>([^<]+)</lastmod>",
+                sitemap_path.read_text(encoding="utf-8"),
+            )
+            if prior:
+                build_here_lastmod = prior.group(1)
+        entries.append(
+            "  <url>\n"
+            f"    <loc>{build_here_loc}</loc>\n"
+            f"    <lastmod>{build_here_lastmod}</lastmod>\n"
             "    <changefreq>monthly</changefreq>\n"
             "    <priority>0.8</priority>\n"
             "  </url>"

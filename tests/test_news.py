@@ -46,6 +46,7 @@ class NewsContractTests(unittest.TestCase):
         self.assertEqual(
             [item["slug"] for item in stories],
             [
+                "lynnwood-pre-approved-dadu-plans",
                 "seattle-centers-corridors-rezoning-on-hold",
                 "mountlake-terrace-shed-permit-exemption-flat-fees",
                 "pacific-pro-group-bronze-best-in-the-pnw",
@@ -57,27 +58,29 @@ class NewsContractTests(unittest.TestCase):
                 "snohomish-health-septic-permit-grant",
             ],
         )
-        self.assertEqual(stories[0]["date"], "2026-10-20")
-        self.assertEqual(stories[1]["date"], "2026-10-19")
-        self.assertEqual(stories[2]["date"], "2026-10-18")
+        self.assertEqual(stories[0]["date"], "2026-10-21")
+        self.assertEqual(stories[1]["date"], "2026-10-20")
+        self.assertEqual(stories[2]["date"], "2026-10-19")
         self.assertEqual(stories[3]["date"], "2026-10-18")
-        self.assertEqual(stories[4]["date"], "2026-10-17")
-        self.assertEqual(stories[5]["date"], "2026-10-16")
+        self.assertEqual(stories[4]["date"], "2026-10-18")
+        self.assertEqual(stories[5]["date"], "2026-10-17")
         self.assertEqual(stories[6]["date"], "2026-10-16")
-        self.assertEqual(stories[7]["date"], "2026-10-15")
-        self.assertEqual(stories[8]["date"], "2026-10-14")
+        self.assertEqual(stories[7]["date"], "2026-10-16")
+        self.assertEqual(stories[8]["date"], "2026-10-15")
+        self.assertEqual(stories[9]["date"], "2026-10-14")
         self.assertTrue(stories[0]["title"])
         self.assertTrue(stories[0]["description"])
         self.assertGreaterEqual(len(stories[0]["sources"]), 1)
-        self.assertIn("Spicypepper999", stories[0]["hero_credit"])
-        self.assertIn("ECTran71", stories[1]["hero_credit"])
-        self.assertIn("Illustration", stories[2]["hero_credit"])
-        self.assertIn("Joe Mabel", stories[3]["hero_credit"])
+        self.assertIn("Smlowe5", stories[0]["hero_credit"])
+        self.assertIn("Spicypepper999", stories[1]["hero_credit"])
+        self.assertIn("ECTran71", stories[2]["hero_credit"])
+        self.assertIn("Illustration", stories[3]["hero_credit"])
         self.assertIn("Joe Mabel", stories[4]["hero_credit"])
-        self.assertEqual(stories[5]["hero_credit"], "")
-        self.assertIn("SounderBruce", stories[6]["hero_credit"])
-        self.assertIn("Robert Ashworth", stories[7]["hero_credit"])
-        self.assertIn("Emersb", stories[8]["hero_credit"])
+        self.assertIn("Joe Mabel", stories[5]["hero_credit"])
+        self.assertEqual(stories[6]["hero_credit"], "")
+        self.assertIn("SounderBruce", stories[7]["hero_credit"])
+        self.assertIn("Robert Ashworth", stories[8]["hero_credit"])
+        self.assertIn("Emersb", stories[9]["hero_credit"])
         self.assertTrue((ROOT / "news" / "_template.md").is_file())
         self.assertEqual(
             sorted(path.name for path in (ROOT / "news").glob("[0-9]*.md")),
@@ -91,12 +94,13 @@ class NewsContractTests(unittest.TestCase):
                 "2026-10-18-pacific-pro-group-bronze-best-in-the-pnw.md",
                 "2026-10-19-mountlake-terrace-shed-permit-exemption-flat-fees.md",
                 "2026-10-20-seattle-centers-corridors-rezoning-on-hold.md",
+                "2026-10-21-lynnwood-pre-approved-dadu-plans.md",
             ],
         )
         result = intake.validate_news_library(ROOT)
         self.assertTrue(result["ok"], result)
         self.assertEqual(result["status"], "ready")
-        self.assertEqual(result["stories"], 9)
+        self.assertEqual(result["stories"], 10)
         self.assertEqual(gs.news_blog_overlap(ROOT), [])
         self.assertIn("First stories coming soon", gs.build_news_index([]))
 
@@ -118,6 +122,7 @@ class NewsContractTests(unittest.TestCase):
         self.assertNotIn("king-county-permitting-advisory-panel", blog_html)
         self.assertNotIn("mountlake-terrace-shed-permit-exemption-flat-fees", blog_html)
         self.assertNotIn("seattle-centers-corridors-rezoning-on-hold", blog_html)
+        self.assertNotIn("lynnwood-pre-approved-dadu-plans", blog_html)
         baker_url = "https://boardofprojectstewardship.com/news/mount-baker-redevelopment-groundbreaking.html"
         eca_url = "https://boardofprojectstewardship.com/news/seattle-environmentally-critical-areas-update.html"
         tree_url = "https://boardofprojectstewardship.com/news/edmonds-landmark-tree-ordinance-extension.html"
@@ -127,13 +132,16 @@ class NewsContractTests(unittest.TestCase):
         shed_href = "./news/mountlake-terrace-shed-permit-exemption-flat-fees.html"
         corridors_url = "https://boardofprojectstewardship.com/news/seattle-centers-corridors-rezoning-on-hold.html"
         corridors_href = "./news/seattle-centers-corridors-rezoning-on-hold.html"
+        lynnwood_url = "https://boardofprojectstewardship.com/news/lynnwood-pre-approved-dadu-plans.html"
+        lynnwood_href = "./news/lynnwood-pre-approved-dadu-plans.html"
         lead = news_html.split('class="news-lead"', 1)[1].split("</article>", 1)[0]
-        self.assertIn(corridors_href, lead)
+        self.assertIn(lynnwood_href, lead)
+        self.assertNotIn(corridors_href, lead)
         self.assertNotIn(shed_href, lead)
         self.assertIn("./news/pacific-pro-group-bronze-best-in-the-pnw.html", news_html)
         self.assertIn(panel_href, news_html)
         self.assertIn(stories[0]["title"], lead)
-        self.assertIn("October 20, 2026", lead)
+        self.assertIn("October 21, 2026", lead)
         self.assertNotIn("edmonds-landmark-tree-ordinance-extension", lead)
 
         lot_url = "https://boardofprojectstewardship.com/news/snohomish-county-administrative-lot-splits.html"
@@ -351,9 +359,77 @@ class NewsContractTests(unittest.TestCase):
         prose = corridors.split('class="news-body prose-board"', 1)[1].split("news-sources", 1)[0]
         self.assertNotIn("Pacific Pro Group", prose)
 
+        lynnwood = (ROOT / "news" / "lynnwood-pre-approved-dadu-plans.html").read_text(encoding="utf-8")
+        self.assertIn(
+            "Two-story single-family homes with front lawns and garages along a curving residential street, 167th Street Southwest, in Lynnwood, Washington",
+            lynnwood,
+        )
+        self.assertIn("Smlowe5", lynnwood)
+        self.assertIn("public domain", lynnwood)
+        self.assertIn(
+            'href="https://commons.wikimedia.org/wiki/File:Lynnwood_Washington_neighborhood.jpg"',
+            lynnwood,
+        )
+        for name in (
+            "2026-10-21-lynnwood-pre-approved-dadu-plans",
+            "2026-10-21-lynnwood-dadu-backyard-cottage-1",
+            "2026-10-21-lynnwood-dadu-plans-2",
+            "2026-10-21-lynnwood-dadu-site-work-3",
+        ):
+            for width in (480, 800, 1200):
+                self.assertIn(f"{name}-{width}.webp", lynnwood)
+        self.assertIn(
+            "Illustrative: a small detached backyard cottage, the kind of DADU Lynnwood&#x27;s pre-approved plan gallery covers, behind a two-story home in Lynnwood",
+            lynnwood,
+        )
+        self.assertIn(
+            "Illustrative image of a detached accessory dwelling unit in a Lynnwood backyard. Lynnwood&#x27;s pre-approved plans range from about 490 to about 1,000 square feet.",
+            lynnwood,
+        )
+        self.assertIn(
+            "Illustrative: floor plan and elevation drawings for a small backyard cottage on a kitchen table, the kind of pre-approved DADU plan set Lynnwood is reviewing",
+            lynnwood,
+        )
+        self.assertIn(
+            "Illustrative image of a DADU plan set. Lynnwood will post pre-approved backyard cottage plans as they are approved, with the first expected by the end of October or in November.",
+            lynnwood,
+        )
+        self.assertIn(
+            "Illustrative: foundation forms and a utility trench dug for a backyard cottage in a Snohomish County yard, site work Lynnwood&#x27;s pre-approved DADU plans do not cover",
+            lynnwood,
+        )
+        self.assertIn(
+            "Illustrative image of DADU site work in Snohomish County. Lynnwood&#x27;s pre-approved plans cover the building only, so grading and utilities still need site-specific review.",
+            lynnwood,
+        )
+        body = lynnwood.split('class="news-body prose-board"', 1)[1].split("news-sources", 1)[0]
+        self.assertLess(body.index("How the program will work"), body.index("lynnwood-dadu-backyard-cottage-1"))
+        self.assertLess(body.index("lynnwood-dadu-backyard-cottage-1"), body.index("The review pipeline and timing"))
+        self.assertLess(body.index("The review pipeline and timing"), body.index("lynnwood-dadu-plans-2"))
+        self.assertLess(body.index("lynnwood-dadu-plans-2"), body.index("History and background"))
+        self.assertLess(body.index("What it means for homeowners"), body.index("lynnwood-dadu-site-work-3"))
+        self.assertEqual(body.count('loading="lazy"'), 3)
+        self.assertIn("History and background", lynnwood)
+        self.assertIn('id="another-story-cta"', lynnwood)
+        self.assertNotIn('id="another-story-sea"', lynnwood)
+        lynnwood_story = next(item for item in stories if item["slug"] == "lynnwood-pre-approved-dadu-plans")
+        for source in lynnwood_story["sources"]:
+            self.assertIn(source, lynnwood)
+        emails = set(re.findall(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}", lynnwood))
+        self.assertEqual(
+            emails,
+            {"editorial@boardofprojectstewardship.com", "Planning@LynnwoodWA.gov"},
+        )
+        self.assertNotIn("Pacific Pro Group", body)
+        self.assertNotIn("parentOrganization", lynnwood)
+        self.assertNotIn("isRelatedTo", lynnwood)
+        self.assertIsNone(gs.news_forbidden_term(lynnwood))
+        self.assertNotIn("/posts/", lynnwood)
+
         rss = (ROOT / "news" / "rss.xml").read_text(encoding="utf-8")
         self.assertIn("Board of Project Stewardship News", rss)
         self.assertIn("<item>", rss)
+        self.assertTrue(rss.index(lynnwood_url) < rss.index(corridors_url))
         self.assertTrue(rss.index(corridors_url) < rss.index(shed_url))
         self.assertTrue(rss.index(shed_url) < rss.index(panel_url))
         self.assertTrue(rss.index(panel_url) < rss.index(tree_url))
@@ -367,6 +443,7 @@ class NewsContractTests(unittest.TestCase):
         self.assertIn(panel_url, rss)
         self.assertIn(shed_url, rss)
         self.assertIn(corridors_url, rss)
+        self.assertIn(lynnwood_url, rss)
         self.assertNotIn("/posts/", rss)
 
         sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
@@ -379,6 +456,7 @@ class NewsContractTests(unittest.TestCase):
         self.assertIn(panel_url, sitemap)
         self.assertIn(shed_url, sitemap)
         self.assertIn(corridors_url, sitemap)
+        self.assertIn(lynnwood_url, sitemap)
         self.assertIn("https://boardofprojectstewardship.com/projects/magnolia-house-adu-garage/", sitemap)
         blog_rss = (ROOT / "blog" / "rss.xml").read_text(encoding="utf-8")
         posts_json = (ROOT / "posts.json").read_text(encoding="utf-8")
@@ -398,6 +476,8 @@ class NewsContractTests(unittest.TestCase):
         self.assertNotIn("mountlake-terrace-shed-permit-exemption-flat-fees", posts_json)
         self.assertNotIn("seattle-centers-corridors-rezoning-on-hold", blog_rss)
         self.assertNotIn("seattle-centers-corridors-rezoning-on-hold", posts_json)
+        self.assertNotIn("lynnwood-pre-approved-dadu-plans", blog_rss)
+        self.assertNotIn("lynnwood-pre-approved-dadu-plans", posts_json)
         self.assertNotIn("/news/", blog_rss)
         self.assertNotIn('"path": "./news/', posts_json)
         self.assertNotIn("./posts/", news_html)
