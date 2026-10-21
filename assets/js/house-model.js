@@ -258,7 +258,7 @@ function buildFromConfig(cfg) {
       const BIG = 1e4, cx = [-BIG, ...ex, BIG], cz = [-BIG, ...ez, BIG], out = [];
       for (let i = 0; i < cx.length - 1; i++) for (let j = 0; j < cz.length - 1; j++) {
         const mx = (cx[i] + cx[i + 1]) / 2, mz = (cz[j] + cz[j + 1]) / 2;
-        if (!inR(mx, mz, R)) out.push([cx[i], cz[j], cx[i + 1], cz[j + 1]]);
+        if (!inR(mx, mz, R) && !inR(mx, mz, CLIP)) out.push([cx[i], cz[j], cx[i + 1], cz[j + 1]]); // a clip wall is no eave: the roof rises into it
       }
       const dist = (x, z) => { let d = Infinity; for (const q of out) { const dx = Math.max(q[0] - x, 0, x - q[2]), dz = Math.max(q[1] - z, 0, z - q[3]); const m = Math.max(dx, dz); if (m < d) d = m; } return d; };
       const hy = (x, z) => { const d = dist(x, z); return cap != null && d > cap ? ye + k * cap + kd * (d - cap) : ye + k * d; };
