@@ -1,0 +1,33 @@
+{
+  "note": "Portfolio of Pacific Pro Group project models. Add a project: put its house config next to this file, add an entry here, run python3 portfolio_site.py.",
+  "projects": [
+    {
+      "slug": "magnolia",
+      "engine": "magnolia",
+      "title": "Magnolia house, basement ADU and garage",
+      "card": "Remodel of a one-story house over a daylight basement, with a new 865 SF basement ADU and a detached one-car garage.",
+      "facts": ["Main level 75'-0\" wide", "865 SF basement ADU", "Detached garage"],
+      "kicker": "Seattle, Magnolia",
+      "projectPage": "/projects/magnolia-house-adu-garage/",
+      "still": "/projects/magnolia-house-adu-garage/magnolia-still.png",
+      "thumb": "/portfolio/magnolia/thumb.png",
+      "stages": [["house", "House"], ["front", "Deck side"], ["roof", "Roof"], ["upper", "Main level"], ["plan", "ADU"], ["foundation", "Foundation"]],
+      "firstLine": "The finished house, the ADU below it, and the garage. Choose Explore to turn the model or go to a room.",
+      "rooms": {"main": ["ADU living", "ADU bedroom", "ADU kitchen", "ADU bath", "Laundry", "Existing basement"], "upper": ["Living", "Dining", "Kitchen", "Office / craft", "Bedrooms", "Deck"]},
+      "dek": "Explore the Magnolia project layer by layer: the finished house, the roof, the main level, the basement ADU and the foundation.",
+      "sourceNote": "Traced from the permit sets. Unprinted dimensions are scaled by eye from the sheets."
+    },
+    {
+      "slug": "one-story-house-shop-garage",
+      "engine": "config",
+      "config": "one-story-house-shop-garage.json",
+      "title": "One-story house with shop and garage",
+      "card": "A one-story layout, 6,720 SF total as printed: primary suite, two bedrooms, open kitchen, living and dining with a 14 foot ceiling, a den, and a large attached garage with a shop.",
+      "facts": ["6,720 SF total", "3 bedrooms and a den", "Garage 2,511 SF, shop 406 SF"],
+      "kicker": "Layout plan",
+      "thumb": "/portfolio/one-story-house-shop-garage/thumb.png",
+      "dek": "Explore this one-story layout layer by layer: the finished house, the roof, the floor plan with every room, and the slab.",
+      "sourceNote": "Modeled from a one-page layout plan. Walls, openings, room names, areas and ceiling heights come from the plan. The roof, window sills and heads, and door heights are not drawn on the plan and are shown as labeled assumptions."
+    }
+  ]
+}
