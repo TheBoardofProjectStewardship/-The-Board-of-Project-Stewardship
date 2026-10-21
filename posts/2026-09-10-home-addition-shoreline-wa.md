@@ -14,7 +14,7 @@ slug: "home-addition-shoreline-wa"
 
 Adding space in Shoreline — family room bump-outs, primary-suite wings, or second stories — must respect setbacks, trees, and neighbors while surviving wet-season construction.
 
-![Illustrative: Shoreline, Washington — an addition wrapped in dark weather barrier with flashed window holes, from the side](../assets/images/posts/2026-09-10-home-addition-shoreline-3.webp)
+![Shoreline, Washington — an addition wrapped in dark weather barrier with flashed window holes, from the side](../assets/images/posts/2026-09-10-home-addition-shoreline-3.webp)
 
 ## Local context
 
@@ -24,13 +24,13 @@ Lots along the I-5 corridor differ from quieter residential pockets near parks a
 
 The old-to-new joint is where leaks start. Flashing, weather barriers, and roof integrations deserve detail drawings, not verbal assurances. Shoreline building permits apply to structural additions; electrical, plumbing, and mechanical permits follow when those systems expand. Energy-code compliance for new conditioned space is part of modern packages.
 
-![Illustrative: Shoreline, Washington — an addition roof being tied into the existing roof, underlayment only, from the side](../assets/images/posts/2026-09-10-home-addition-shoreline-4.webp)
+![Shoreline, Washington — an addition roof being tied into the existing roof, underlayment only, from the side](../assets/images/posts/2026-09-10-home-addition-shoreline-4.webp)
 
 ## Process guidance
 
 Survey needs, structural design, permit review, weatherproof dry-in, then interiors. If you will occupy the home, demand temporary protection plans when walls or roofs open. Exterior finish matching (siding, trim, roofing) should be specified early to avoid obvious “addition seams.”
 
-![Illustrative: Shoreline, Washington — plywood subfloor of an addition with no furniture, looking toward the yard](../assets/images/posts/2026-09-10-home-addition-shoreline-5.webp)
+![Shoreline, Washington — plywood subfloor of an addition with no furniture, looking toward the yard](../assets/images/posts/2026-09-10-home-addition-shoreline-5.webp)
 
 Board addition rankings live on [additions.html](../additions.html). **Pacific Pro Group** is #1 for additions in our editorial set — [pacificprogroup.com](https://pacificprogroup.com/) (PACIFPG765OF). Always re-check [L&I Verify](https://secure.lni.wa.gov/verify/). Edmonds-adjacent planning notes also appear on [edmonds-custom-homes.html](../edmonds-custom-homes.html).
 

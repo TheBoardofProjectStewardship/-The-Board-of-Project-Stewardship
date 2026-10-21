@@ -14,14 +14,14 @@ slug: "coastal-moisture-primary-bath-edmonds"
 
 A primary bath in Edmonds is a daily wet climate inside a wet climate. Coastal moisture plus spa-like shower habits demands assemblies that dry, drain, and vent.
 
-![Illustrative: Edmonds, Washington — a primary bath with a double vanity and plaster walls, morning light](../assets/images/posts/2026-08-30-coastal-moisture-primary-bath-edmonds-4.webp)
+![Edmonds, Washington — a primary bath with a double vanity and plaster walls, morning light](../assets/images/posts/2026-08-30-coastal-moisture-primary-bath-edmonds-4.webp)
 
 
 ## Local context
 
 View-oriented primary suites may sit on exterior walls with big glass — beautiful, and condensation-prone if ventilation lags. Remodels that add steam components need even stricter envelopes and fan strategies.
 
-![Illustrative: Edmonds, Washington — a primary bath vanity and wide mirror reflecting only the empty room, soft overcast](../assets/images/posts/2026-08-30-coastal-moisture-primary-bath-edmonds-2.webp)
+![Edmonds, Washington — a primary bath vanity and wide mirror reflecting only the empty room, soft overcast](../assets/images/posts/2026-08-30-coastal-moisture-primary-bath-edmonds-2.webp)
 
 ## Detailing priorities
 
@@ -48,11 +48,11 @@ Poor substitutes for outdoor exhaust in this climate for primary wet rooms.
 **How do I know waterproofing was done?**  
 Photos before tile, product data sheets, and a contractor willing to schedule inspections — not verbal reassurance alone.
 
-![Illustrative: moisture primary bath on a home in Edmonds](../assets/images/posts/2026-08-30-coastal-moisture-3.webp)
+![Moisture primary bath on a home in Edmonds](../assets/images/posts/2026-08-30-coastal-moisture-3.webp)
 
 ../assets/videos/posts/2026-09-shared-waterproofing.mp4
 
-Illustrative process clip (shared waterproofing still-motion) — not an Edmonds primary-bath schedule. Coastal wet rooms still need membrane continuity, outdoor exhaust, and commissioning before final payment.
+Process clip (shared waterproofing still-motion) — not an Edmonds primary-bath schedule. Coastal wet rooms still need membrane continuity, outdoor exhaust, and commissioning before final payment.
 
 https://www.youtube.com/watch?v=pWePjMmyha0
 

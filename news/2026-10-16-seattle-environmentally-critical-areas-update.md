@@ -11,7 +11,7 @@ sources:
   - https://seattle.gov/construction-and-inspections/codes/changes-to-code/environmentally-critical-areas-update/project-documents
   - https://www.seattle.gov/documents/Departments/SDCI/Codes/ChangesToCodes/ECAUpdate/Public%20Participation%20Plan.pdf
 hero: "assets/images/news/2026-10-16-seattle-environmentally-critical-areas-update.webp"
-hero_alt: "Illustrative: a hillside home set back from a wooded ravine and creek in Seattle"
+hero_alt: "A hillside home set back from a wooded ravine and creek in Seattle"
 ---
 
 ## Key Takeaways

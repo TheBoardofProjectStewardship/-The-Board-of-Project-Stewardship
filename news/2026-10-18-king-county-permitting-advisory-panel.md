@@ -39,7 +39,7 @@ King County Council Chair Sarah Perry said, "I've heard repeatedly from resident
 
 Leon Richardson, director of the county's Department of Local Services, said the county wants recommendations "on ways to make permitting faster, less costly, and more predictable, while maintaining public safety, labor standards, and environmental protections."
 
-![Illustrative: homeowner discussing building plans at a county permit counter](../assets/images/news/2026-10-18-king-county-permitting-advisory-panel-2.webp)
+![Homeowner discussing building plans at a county permit counter](../assets/images/news/2026-10-18-king-county-permitting-advisory-panel-2.webp)
 
 ## Who is on the panel
 
@@ -74,7 +74,7 @@ The longer office hours followed Zahilay's requirement that county staff work mo
 
 Dr. Sandra J. Valenciano, director and health officer for Public Health – Seattle & King County, said, "Septic system permitting is an essential part of keeping our communities healthy and safe."
 
-![Illustrative: wood-framed home addition going up on a single-story King County house](../assets/images/news/2026-10-18-king-county-permitting-advisory-panel-3.webp)
+![Wood-framed home addition going up on a single-story King County house](../assets/images/news/2026-10-18-king-county-permitting-advisory-panel-3.webp)
 
 ## History and background
 
@@ -86,7 +86,7 @@ On Dec. 3, 2024, the King County Council approved legislation sponsored by Perry
 
 Zahilay's transition committee, with more than 100 members, met from Nov. 13 to Dec. 12, 2025. Its [report](https://kingcounty.gov/-/media/king-county/depts/executive/zahilay/documents/2026/Final-Transition-Committee-Recommendations-for-Executive-Zahilay) recommended that the county reform residential permitting by creating a task force to recommend ways to increase housing production and shorten the time it takes to build, starting in urban unincorporated King County and including how to expand accessory dwelling units, or ADUs. The report noted that its ideas had not yet been analyzed for policy and budget feasibility.
 
-![Illustrative: blueprints, laptop and hard hat on a kitchen table while preparing a permit application](../assets/images/news/2026-10-18-king-county-permitting-advisory-panel-4.webp)
+![Blueprints, laptop and hard hat on a kitchen table while preparing a permit application](../assets/images/news/2026-10-18-king-county-permitting-advisory-panel-4.webp)
 
 ## What it means for homeowners
 

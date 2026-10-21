@@ -98,9 +98,9 @@ NEWS = {
         "<li><b>3</b><span>counties: Snohomish, King and Pierce</span></li>"
         '</ul><p class="ap-stats-src">Source: The Seattle Times, <a href="https://www.shopbestinthepnw.com/">Best in the PNW program site</a> and official rules.</p>'
     ),
-    "loop1": loop(NEWS_VID + "2026-10-18-ppg-bronze-loop-1", "Sunset light moving across bronze fixtures in a finished bathroom", "Illustrative clip, not a real project."),
-    "loop2": loop(NEWS_VID + "2026-10-18-ppg-bronze-loop-2", "Rain on a waterfront street at dusk", "Illustrative clip of a Puget Sound waterfront street in the rain, not a specific place."),
-    "loop3": loop(NEWS_VID + "2026-10-18-ppg-bronze-loop-3", "Rain falling on a hillside house with a lit upstairs window", "Illustrative clip, not a real project."),
+    "loop1": loop(NEWS_VID + "2026-10-18-ppg-bronze-loop-1", "Sunset light moving across bronze fixtures in a finished bathroom", "Clip, not a real project."),
+    "loop2": loop(NEWS_VID + "2026-10-18-ppg-bronze-loop-2", "Rain on a waterfront street at dusk", "Clip of a Puget Sound waterfront street in the rain, not a specific place."),
+    "loop3": loop(NEWS_VID + "2026-10-18-ppg-bronze-loop-3", "Rain falling on a hillside house with a lit upstairs window", "Clip, not a real project."),
     "magnolia": (
         '<figure class="ap-figure"><img src="' + NEWS_IMG + '2026-10-18-ppg-bronze-bathroom-remodeler-magnolia-shower.webp" width="1138" height="1400" loading="lazy" '
         'alt="A deep green tile shower with a built-in bench and recessed niche in a Magnolia, Seattle, home">'
@@ -229,9 +229,9 @@ POST = {
     "toc": '<nav class="ap-toc" aria-labelledby="ap-toc-h"><strong id="ap-toc-h">In this guide</strong><ol>'
     + "".join(f'<li><a href="#{i}">{html.escape(t)}</a></li>' for i, t in TOC)
     + "</ol></nav>",
-    "loop1": loop(POST_VID + "2026-10-18-ppg-bronze-bath-loop-1", "Rain running down a window beside a green tile shower", "Illustrative clip, not a real project."),
-    "loop2": loop(POST_VID + "2026-10-18-ppg-bronze-bath-loop-2", "Water flowing across shower floor tile into a linear drain", "Illustrative clip: water sheeting toward a linear drain."),
-    "loop3": loop(POST_VID + "2026-10-18-ppg-bronze-bath-loop-3", "Steam drifting toward a ceiling exhaust fan", "Illustrative clip: steam drawn toward an exhaust fan."),
+    "loop1": loop(POST_VID + "2026-10-18-ppg-bronze-bath-loop-1", "Rain running down a window beside a green tile shower", "Clip, not a real project."),
+    "loop2": loop(POST_VID + "2026-10-18-ppg-bronze-bath-loop-2", "Water flowing across shower floor tile into a linear drain", "Clip: water sheeting toward a linear drain."),
+    "loop3": loop(POST_VID + "2026-10-18-ppg-bronze-bath-loop-3", "Steam drifting toward a ceiling exhaust fan", "Clip: steam drawn toward an exhaust fan."),
     "layers": layers_html(),
     "scope": scope_html(),
     "checklist": checklist(

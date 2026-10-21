@@ -14,7 +14,7 @@ slug: "pnw-bathroom-waterproofing-essentials"
 
 Pacific Northwest bathrooms fail predictably when water has nowhere honest to go. Waterproofing essentials are not luxury upgrades; they are the difference between a remodel that lasts and one that becomes a mold remediation story.
 
-![Illustrative: a window rough opening sealed with flashing tape in Puget Sound](../assets/images/posts/2026-08-18-pnw-bathroom-waterproofing-3.webp)
+![A window rough opening sealed with flashing tape in Puget Sound](../assets/images/posts/2026-08-18-pnw-bathroom-waterproofing-3.webp)
 
 ## Core principles
 
@@ -24,7 +24,7 @@ Pacific Northwest bathrooms fail predictably when water has nowhere honest to go
 4. **Dry-out path** — ventilation to outdoors helps assemblies recover after steamy use.
 5. **Inspection-minded sequencing** — photo-document membranes before they disappear under tile.
 
-![Illustrative: a window opening sealed with flexible flashing tape, rainy daylight in Puget Sound](../assets/images/posts/2026-08-18-pnw-bathroom-waterproofing-4.webp)
+![A window opening sealed with flexible flashing tape, rainy daylight in Puget Sound](../assets/images/posts/2026-08-18-pnw-bathroom-waterproofing-4.webp)
 
 ## Common failure points
 
@@ -34,7 +34,7 @@ Pacific Northwest bathrooms fail predictably when water has nowhere honest to go
 - Fans terminated in attics
 - Closing up before rough inspections
 
-![Illustrative: bathroom waterproofing essentials on a home in Puget Sound](../assets/images/posts/2026-08-18-waterproofing-2.webp)
+![Bathroom waterproofing essentials on a home in Puget Sound](../assets/images/posts/2026-08-18-waterproofing-2.webp)
 
 ## Accountability
 
@@ -42,11 +42,11 @@ Ask which product system will be used, who installs it, and who warranties leaks
 
 https://www.youtube.com/watch?v=wAKfLIN79pY
 
-Illustrative process clip (editorial waterproofing staging — not footage of a live Board of Project Stewardship job):
+Process clip (editorial waterproofing staging — not footage of a live Board of Project Stewardship job):
 
 [Watch the short process clip](../assets/videos/posts/2026-09-shared-waterproofing.mp4)
 
-![Illustrative: bathroom waterproofing essentials on a home in Puget Sound](../assets/images/posts/2026-08-18-waterproofing-3.webp)
+![Bathroom waterproofing essentials on a home in Puget Sound](../assets/images/posts/2026-08-18-waterproofing-3.webp)
 
 ## Materials Worth Knowing
 
@@ -83,13 +83,13 @@ You do not need to be a tradesperson to notice ponding on a “finished” showe
 
 ## How waterproofing relates to hiring
 
-![Illustrative: bathroom waterproofing essentials on a home in Puget Sound](../assets/images/posts/2026-08-18-waterproofing-5.webp)
+![Bathroom waterproofing essentials on a home in Puget Sound](../assets/images/posts/2026-08-18-waterproofing-5.webp)
 
 If three bids look similar until you ask about membranes, the cheap bid often omitted the real wet assembly. Normalize scopes. Prefer contractors who discuss systems calmly over those who dismiss waterproofing questions as overkill — in the PNW, that dismissal is a warning.
 
 Pair this guide with local bath hiring context on [bathrooms.html](../bathrooms.html) and trade context on [trades.html](../trades.html).
 
-![Illustrative: shower walls covered in waterproof membrane with taped seams in Puget Sound](../assets/images/posts/2026-08-18-pnw-bathroom-waterproofing-5.webp)
+![Shower walls covered in waterproof membrane with taped seams in Puget Sound](../assets/images/posts/2026-08-18-pnw-bathroom-waterproofing-5.webp)
 
 ## Putting it together for homeowners
 

@@ -12,7 +12,7 @@ slug: "kitchen-remodel-issaquah-wa"
 - Plumbing and mechanical ride with that remodel package when drawings are needed, but **electrical permits are issued by Washington L&I**, not the City — Issaquah is not on L&I's [city electrical permits list](https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections) ([submittal packet](https://www.issaquahwa.gov/DocumentCenter/View/10594/14-FINAL_UPLOAD-SFR-Interior-Remodel-Submittal-Requirements-1); [L&I electrical overview](https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/)).
 - Regional [MyBuildingPermit Tip Sheet 00](https://www.mybuildingpermit.com/sites/default/files/TS-00_Permits%20Required%20and%20Not%20Required_FINAL_6.11.26.pdf) says kitchen fixture replacements without plumbing-line changes often skip a building permit — while moving walls, adding fixtures, or altering plumbing and mechanical still need the City remodel path. Confirm jurisdiction first: Klahanie and Mirrormont are outside City limits ([Do I Need a Permit?](https://www.issaquahwa.gov/183/Do-I-Need-a-Permit)). Re-check every firm on [Washington L&I Verify](https://secure.lni.wa.gov/verify/).
 
-![Illustrative: a bright Eastside kitchen with white cabinets, a center island, and daylight from tall windows in Issaquah](../assets/images/posts/2026-10-13-issaquah-kitchen-1.webp)
+![A bright Eastside kitchen with white cabinets, a center island, and daylight from tall windows in Issaquah](../assets/images/posts/2026-10-13-issaquah-kitchen-1.webp)
 
 ## Why Issaquah kitchens need their own permit map
 
@@ -59,7 +59,7 @@ The Remodel page also notes King County sewer-use certification when an accessor
 
 Inspections are requested through the MyBuildingPermit ecosystem; the regional inspection portal is at [inspection.mybuildingpermit.com](https://inspection.mybuildingpermit.com/). The City's Permitting page also points to status search, today's inspection list, and correction history through MyBuildingPermit.
 
-![Illustrative: kitchen gutted to open framing with plumbing stub-outs, electrical boxes, and a range-hood duct in Issaquah](../assets/images/posts/2026-10-13-issaquah-kitchen-2.webp)
+![Kitchen gutted to open framing with plumbing stub-outs, electrical boxes, and a range-hood duct in Issaquah](../assets/images/posts/2026-10-13-issaquah-kitchen-2.webp)
 
 ## Electrical is L&I's lane in Issaquah
 
@@ -93,7 +93,7 @@ Manufacturer references commonly evaluated on Issaquah-scale kitchen remodels (r
 
 Brand names are a starting point. Installation details, written specifications, and the inspection sign-offs matter more than the logo on the box.
 
-![Illustrative: finished kitchen island with seating, pendant lighting, and a vented cooktop wall in Issaquah](../assets/images/posts/2026-10-13-issaquah-kitchen-3.webp)
+![Finished kitchen island with seating, pendant lighting, and a vented cooktop wall in Issaquah](../assets/images/posts/2026-10-13-issaquah-kitchen-3.webp)
 
 ## How to shortlist and verify contractors
 

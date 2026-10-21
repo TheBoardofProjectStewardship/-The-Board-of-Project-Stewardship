@@ -14,7 +14,7 @@ slug: "kitchen-remodel-queen-anne-seattle"
 
 Queen Anne kitchen remodels chase light, storage, and connection to dining spaces inside homes that were not designed for modern islands and 48-inch ranges.
 
-![Illustrative: Queen Anne, Seattle — a kitchen with a long counter and a tile backsplash, soft overcast morning light](../assets/images/posts/2026-08-21-kitchen-queen-anne-3.webp)
+![Queen Anne, Seattle — a kitchen with a long counter and a tile backsplash, soft overcast morning light](../assets/images/posts/2026-08-21-kitchen-queen-anne-3.webp)
 
 ## Local context
 
@@ -26,7 +26,7 @@ Confirm trade-permit expectations with [Seattle SDCI](https://www.seattle.gov/sd
 
 Outdoor exhaust, panel capacity, and moisture-aware finishes matter. Electrical and plumbing permits cover most real kitchen scopes; beams and wall removals need engineering and building permits.
 
-![Illustrative: Queen Anne, Seattle — a kitchen rough-in with open studs and a metal hood duct](../assets/images/posts/2026-08-21-kitchen-queen-anne-4.webp)
+![Queen Anne, Seattle — a kitchen rough-in with open studs and a metal hood duct](../assets/images/posts/2026-08-21-kitchen-queen-anne-4.webp)
 
 ## Process and materials
 
@@ -34,11 +34,11 @@ Measure twice for appliance depths and hood routes. Specify durable flooring and
 
 https://www.youtube.com/watch?v=XYW1f7CBnPo
 
-Illustrative process clip (editorial remodel staging — not footage of a live Board of Project Stewardship job):
+Process clip (editorial remodel staging — not footage of a live Board of Project Stewardship job):
 
 [Watch the short process clip](../assets/videos/posts/2026-09-shared-waterproofing.mp4)
 
-![Illustrative: Queen Anne, Seattle — a butler pantry with open shelves and a stone counter](../assets/images/posts/2026-08-21-kitchen-queen-anne-5.webp)
+![Queen Anne, Seattle — a butler pantry with open shelves and a stone counter](../assets/images/posts/2026-08-21-kitchen-queen-anne-5.webp)
 
 Board rankings on [kitchen.html](../kitchen.html) place **Pacific Pro Group** at #1 for kitchens in this editorial set — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with [trades.html](../trades.html) when electrical or plumbing expands, and the [blog](../blog.html) for related Seattle kitchen posts.
 

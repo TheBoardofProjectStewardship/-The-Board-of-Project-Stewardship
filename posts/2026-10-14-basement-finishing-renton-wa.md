@@ -12,7 +12,7 @@ slug: "basement-finishing-renton-wa"
 - **Electrical, plumbing, and mechanical are separate permits** from the building remodel. Over-the-counter trades run on the City's [Online Permit Portal (CASSP / Civic Access)](https://www.rentonwa.gov/City-Services/Permit-Services/Online-Permit-Portal); Renton issues its own electrical permits and appears on Washington L&I's [city electrical list](https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections) ([Building Permits FAQ](https://www.rentonwa.gov/City-Services/Permit-Services/Building-Fire-and-Signs/Building-Permits-FAQ)).
 - Before demolition, plan an **asbestos survey** under Puget Sound Clean Air and L&I rules the City cites, and if the house is on septic and you are adding a bedroom or bath, obtain King County Environmental Health approval first — then re-check every firm on [Washington L&I Verify](https://secure.lni.wa.gov/verify/) ([Residential Interior Remodels](https://www.rentonwa.gov/City-Services/Permit-Services/Building-Fire-and-Signs/Residential-Interior-Remodels); [Puget Sound Clean Air Agency](https://www.pscleanair.gov/)).
 
-![Illustrative: a finished lower-level living room with daylight and seating in Renton](../assets/images/posts/2026-10-14-renton-basement-1.webp)
+![A finished lower-level living room with daylight and seating in Renton](../assets/images/posts/2026-10-14-renton-basement-1.webp)
 
 ## Why Renton basements need their own permit map
 
@@ -47,7 +47,7 @@ The person signing the application must be the owner or the person responsible f
 
 Do not start work before the permit is issued and on site. The FAQ is explicit: work may not legally begin before the permit is obtained ([Building Permits FAQ](https://www.rentonwa.gov/City-Services/Permit-Services/Building-Fire-and-Signs/Building-Permits-FAQ)).
 
-![Illustrative: open framing and unfinished lower-level space ready for insulation, electrical rough-in, and City of Renton](../assets/images/posts/2026-10-14-renton-basement-2.webp)
+![Open framing and unfinished lower-level space ready for insulation, electrical rough-in, and City of Renton](../assets/images/posts/2026-10-14-renton-basement-2.webp)
 
 ## Separate trade permits on the City portal
 
@@ -95,7 +95,7 @@ Manufacturer references commonly evaluated on Renton-scale basement finishes (ro
 
 Brand names are a starting point. Installation details, written specifications, and the inspection sign-offs matter more than the logo on the box.
 
-![Illustrative: a completed interior suite with windows and finished walls in Renton](../assets/images/posts/2026-10-14-renton-basement-3.webp)
+![A completed interior suite with windows and finished walls in Renton](../assets/images/posts/2026-10-14-renton-basement-3.webp)
 
 ## How to shortlist and verify contractors
 

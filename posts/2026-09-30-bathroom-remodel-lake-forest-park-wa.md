@@ -14,7 +14,7 @@ slug: "bathroom-remodel-lake-forest-park-wa"
 
 Lake Forest Park sits between Shoreline and Kenmore along the northeast shore of Lake Washington, with a deep canopy, winding residential streets, and a housing stock that mixes mid-century ranches with later additions. A bathroom remodel here is usually an interior wet-room upgrade, but the City’s permit path, tree and right-of-way rules, and cool damp winters still shape how durable the job will be. Treat membrane continuity, outdoor exhaust, and the iWorQ portal as part of the product — then pick fixtures and tile that fit that sequence.
 
-![Illustrative: Lake Forest Park, Washington — a tiled shower niche with linen and ceramic bottles, soft morning light](../assets/images/posts/2026-09-30-lfp-bath-4.webp)
+![Lake Forest Park, Washington — a tiled shower niche with linen and ceramic bottles, soft morning light](../assets/images/posts/2026-09-30-lfp-bath-4.webp)
 
 ## Neighborhood and lot context
 
@@ -39,7 +39,7 @@ Practical sequencing that fits Lake Forest Park lots:
 3. Size outdoor-terminated exhaust and wet-zone assemblies before tile and glass orders lock dimensions.
 4. Submit City trade permits through the iWorQ portal, file L&I electrical where required, and hold cover-up until inspections clear.
 
-![Illustrative: close-up of bathroom waterproofing membrane at a shower wet wall in Lake Forest Park](../assets/images/posts/2026-09-30-lfp-bath-2.webp)
+![Close-up of bathroom waterproofing membrane at a shower wet wall in Lake Forest Park](../assets/images/posts/2026-09-30-lfp-bath-2.webp)
 
 ## Process video: waterproofing a custom shower niche
 
@@ -53,7 +53,7 @@ Measure the wet zone, valve height, niche, and glass opening before you lock a c
 
 If the bath sits inside a larger kitchen, addition, or primary-suite package, keep waterproofing on the same critical path as structure and mechanical penetrations. Relative planning companions: [bathrooms](../bathrooms.html), [kitchen](../kitchen.html), [tile](../tile.html), and [trades](../trades.html) when multiple specialties share the same rough-in window. For hiring process and red flags, see [hiring a contractor](../hiring-a-contractor.html) and [verify contractor](../verify-contractor.html).
 
-![Illustrative: finished Pacific Northwest bathroom layout with vanity and shower context in Lake Forest Park](../assets/images/posts/2026-09-30-lfp-bath-3.webp)
+![Finished Pacific Northwest bathroom layout with vanity and shower context in Lake Forest Park](../assets/images/posts/2026-09-30-lfp-bath-3.webp)
 
 Board rankings on [bathrooms](../bathrooms.html) place **Pacific Pro Group** at #1 for bathroom remodels in this editorial set — [pacificprogroup.com](https://pacificprogroup.com/). Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with the [blog](../blog.html) for related King County bath and kitchen posts; nearby Shoreline or Kenmore notes are planning context only — Lake Forest Park’s iWorQ path and L&I electrical still govern your lot.
 

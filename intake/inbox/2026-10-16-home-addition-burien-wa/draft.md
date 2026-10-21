@@ -12,7 +12,7 @@ slug: "home-addition-burien-wa"
 - **Size matters on paper.** The City's checklist says an addition of 500 square feet triggers energy code and indoor air quality requirements, adding any impervious surface triggers Small Project Drainage Review at a minimum, and building 500 square feet or more may bring tree-planting requirements.
 - **Burien checks contractor credentials before it issues a permit:** a state contractor license plus a City of Burien endorsement through the Washington Department of Revenue. Verify every firm on [Washington L&I Verify](https://secure.lni.wa.gov/verify/) before you sign.
 
-![Illustrative: new wall framing and sheathing tied into the side of an existing gray-shingled house on a concrete stem wall — the stage where an addition meets the original structure — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-16-burien-addition-1.webp)
+![New wall framing and sheathing tied into the side of an existing gray-shingled house on a concrete stem wall — the stage where an addition meets the original structure — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-16-burien-addition-1.webp)
 
 ## Why a Burien addition needs its own plan
 
@@ -52,7 +52,7 @@ The residential checklist is specific. Beyond the application itself — site ad
 
 Two details are easy to miss. Elevations must show existing natural grade, the proposed building height above average natural grade, and the maximum height allowed. And if the addition adds 2,000 square feet or more, the checklist says site plans must follow the City's GIS AutoCAD requirements.
 
-![Illustrative: a formed concrete footing with rebar and anchor bolts beside a new pressure-treated sill on wet ground — the foundation tie-in detail Burien's checklist asks to see on the plans — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-16-burien-addition-2.webp)
+![A formed concrete footing with rebar and anchor bolts beside a new pressure-treated sill on wet ground — the foundation tie-in detail Burien's checklist asks to see on the plans — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-16-burien-addition-2.webp)
 
 ## The 500-square-foot line and other triggers
 
@@ -97,7 +97,7 @@ https://www.youtube.com/watch?v=rz3CaoTbmgk
 
 Ask bidders which products they actually specify, and why, for your exposure and your existing siding.
 
-![Illustrative: a single-story addition wrapped in black water-resistive barrier with window openings cut in, beside an evergreen yard — the dry-in stage before siding — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-16-burien-addition-3.webp)
+![A single-story addition wrapped in black water-resistive barrier with window openings cut in, beside an evergreen yard — the dry-in stage before siding — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-16-burien-addition-3.webp)
 
 ## How to shortlist and verify contractors
 

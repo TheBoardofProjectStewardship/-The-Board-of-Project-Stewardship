@@ -84,17 +84,17 @@ BING_SITE_VERIFICATION = ""
 
 # Directory page -> hero image (relative to site root)
 DIR_HERO_IMAGES = {
-    "about": ("assets/images/home-hero.webp", "Illustrative: home exterior in Puget Sound"),
-    "additions": ("assets/images/dir-additions-hero.webp", "Illustrative: home with a second-story addition in Puget Sound"),
-    "kitchen": ("assets/images/dir-kitchen-hero.webp", "Illustrative: remodeled kitchen with an island in Puget Sound"),
-    "bathrooms": ("assets/images/dir-bathrooms-hero.webp", "Illustrative: walk-in shower in a Puget Sound bathroom remodel"),
-    "custom-homes": ("assets/images/dir-custom-homes-hero.webp", "Illustrative: custom home exterior among evergreens in Puget Sound"),
-    "edmonds": ("assets/images/dir-edmonds-custom-hero.webp", "Illustrative: custom home on a hillside in Edmonds"),
-    "blog": ("assets/images/blog-featured.webp", "Illustrative: blueprints on a desk for a Puget Sound remodel guide"),
-    "story": ("assets/images/another-story-banner.webp", "Illustrative: before-and-after second-story concept in Puget Sound"),
+    "about": ("assets/images/home-hero.webp", "Home exterior in Puget Sound"),
+    "additions": ("assets/images/dir-additions-hero.webp", "Home with a second-story addition in Puget Sound"),
+    "kitchen": ("assets/images/dir-kitchen-hero.webp", "Remodeled kitchen with an island in Puget Sound"),
+    "bathrooms": ("assets/images/dir-bathrooms-hero.webp", "Walk-in shower in a Puget Sound bathroom remodel"),
+    "custom-homes": ("assets/images/dir-custom-homes-hero.webp", "Custom home exterior among evergreens in Puget Sound"),
+    "edmonds": ("assets/images/dir-edmonds-custom-hero.webp", "Custom home on a hillside in Edmonds"),
+    "blog": ("assets/images/blog-featured.webp", "Blueprints on a desk for a Puget Sound remodel guide"),
+    "story": ("assets/images/another-story-banner.webp", "Before-and-after second-story concept in Puget Sound"),
     "restoration": (
         "assets/images/restoration-water-drying.webp",
-        "Illustrative: air movers and a dehumidifier drying a hardwood floor in Puget Sound",
+        "Air movers and a dehumidifier drying a hardwood floor in Puget Sound",
     ),
 }
 
@@ -198,21 +198,21 @@ TRADE_PHOTO_STRIPS: dict[str, list[tuple[str, str, str, str, str]]] = {
     "plumber": [
         (
             "assets/images/posts/2026-08-31-magnolia-plumbing-1.webp",
-            "Illustrative plumbing rough-in for a Pacific Northwest bath remodel",
+            "Plumbing rough-in for a Pacific Northwest bath remodel",
             "Rough-in context (illustrative)",
             "./bathrooms.html",
             "Bathroom remodelers directory",
         ),
         (
             "assets/images/posts/2026-08-31-magnolia-plumbing-2.webp",
-            "Illustrative fixture layout planning for a residential plumbing remodel",
+            "Fixture layout planning for a residential plumbing remodel",
             "Fixture planning (illustrative)",
             "./kitchen.html",
             "Kitchen remodelers directory",
         ),
         (
             "assets/images/posts/2026-08-31-magnolia-plumbing-3.webp",
-            "Illustrative finished bath plumbing details after a careful remodel",
+            "Finished bath plumbing details after a careful remodel",
             "Finish details (illustrative)",
             "./bathrooms.html",
             "Bathroom remodelers directory",
@@ -221,21 +221,21 @@ TRADE_PHOTO_STRIPS: dict[str, list[tuple[str, str, str, str, str]]] = {
     "electrician": [
         (
             "assets/images/posts/2026-08-10-electrical-bath-1.webp",
-            "Illustrative electrical rough-in during a bathroom remodel",
+            "Electrical rough-in during a bathroom remodel",
             "Bath electrical rough-in (illustrative)",
             "./bathrooms.html",
             "Bathroom remodelers directory",
         ),
         (
             "assets/images/posts/2026-08-10-electrical-bath-2.webp",
-            "Illustrative lighting and receptacle planning for a remodel electrical scope",
+            "Lighting and receptacle planning for a remodel electrical scope",
             "Device layout (illustrative)",
             "./kitchen.html",
             "Kitchen remodelers directory",
         ),
         (
             "assets/images/posts/2026-08-10-electrical-bath-3.webp",
-            "Illustrative finished electrical details in a remodeled bath",
+            "Finished electrical details in a remodeled bath",
             "Finish electrical (illustrative)",
             "./learn.html",
             "Learn hub",
@@ -244,21 +244,21 @@ TRADE_PHOTO_STRIPS: dict[str, list[tuple[str, str, str, str, str]]] = {
     "hvac": [
         (
             "assets/images/posts/2026-08-17-heated-floors-1.webp",
-            "Illustrative radiant floor tubing staged before finish flooring",
+            "Radiant floor tubing staged before finish flooring",
             "Radiant layout (illustrative)",
             "./additions.html",
             "Home additions directory",
         ),
         (
             "assets/images/posts/2026-08-17-heated-floors-2.webp",
-            "Illustrative mechanical coordination space in a Pacific Northwest remodel",
+            "Mechanical coordination space in a Pacific Northwest remodel",
             "Mechanical coordination (illustrative)",
             "./learn.html",
             "Learn hub",
         ),
         (
             "assets/images/posts/2026-08-17-heated-floors-3.webp",
-            "Illustrative finished floor over a conditioned radiant assembly",
+            "Finished floor over a conditioned radiant assembly",
             "Comfort finish (illustrative)",
             "./locations.html",
             "Locations hub",
@@ -267,21 +267,21 @@ TRADE_PHOTO_STRIPS: dict[str, list[tuple[str, str, str, str, str]]] = {
     "framing": [
         (
             "assets/images/posts/2026-08-20-bothell-addition-1.webp",
-            "Illustrative framing for a Pacific Northwest home addition",
+            "Framing for a Pacific Northwest home addition",
             "Addition framing (illustrative)",
             "./additions.html",
             "Home additions directory",
         ),
         (
             "assets/images/posts/2026-08-12-edmonds-addition-permit-1.webp",
-            "Illustrative structural opening and framing coordination on an addition",
+            "Structural opening and framing coordination on an addition",
             "Structural openings (illustrative)",
             "./additions.html",
             "Home additions directory",
         ),
         (
             "assets/images/posts/2026-08-24-shoreline-addition-2.webp",
-            "Illustrative framed addition volume under coastal Pacific Northwest light",
+            "Framed addition volume under coastal Pacific Northwest light",
             "Framed volume (illustrative)",
             "./locations.html",
             "Locations hub",
@@ -290,21 +290,21 @@ TRADE_PHOTO_STRIPS: dict[str, list[tuple[str, str, str, str, str]]] = {
     "tile": [
         (
             "assets/images/posts/2026-09-01-tile-edmonds-1.webp",
-            "Illustrative tile layout for an Edmonds-area bath remodel",
+            "Tile layout for an Edmonds-area bath remodel",
             "Tile layout (illustrative)",
             "./bathrooms.html",
             "Bathroom remodelers directory",
         ),
         (
             "assets/images/posts/2026-09-01-tile-edmonds-2.webp",
-            "Illustrative shower tile work with careful waterproofing substrate",
+            "Shower tile work with careful waterproofing substrate",
             "Shower tile (illustrative)",
             "./bathrooms.html",
             "Bathroom remodelers directory",
         ),
         (
             "assets/images/posts/2026-09-01-tile-edmonds-3.webp",
-            "Illustrative finished tile surfaces in a Pacific Northwest remodel",
+            "Finished tile surfaces in a Pacific Northwest remodel",
             "Finished tile (illustrative)",
             "./kitchen.html",
             "Kitchen remodelers directory",
@@ -313,21 +313,21 @@ TRADE_PHOTO_STRIPS: dict[str, list[tuple[str, str, str, str, str]]] = {
     "siding": [
         (
             "assets/images/posts/2026-09-22-edmonds-siding-1.webp",
-            "Illustrative coastal Edmonds home staged for siding replacement",
+            "Coastal Edmonds home staged for siding replacement",
             "Coastal siding context (illustrative)",
             "./locations.html",
             "Locations hub",
         ),
         (
             "assets/images/posts/2026-09-22-edmonds-siding-2.webp",
-            "Illustrative weather-resistive barrier and siding underlayment detail",
+            "Weather-resistive barrier and siding underlayment detail",
             "WRB / cladding prep (illustrative)",
             "./learn.html",
             "Learn hub",
         ),
         (
             "assets/images/posts/2026-09-22-edmonds-siding-3.webp",
-            "Illustrative finished fiber-cement siding on a coastal Washington home",
+            "Finished fiber-cement siding on a coastal Washington home",
             "Finished cladding (illustrative)",
             "./additions.html",
             "Home additions directory",
@@ -336,21 +336,21 @@ TRADE_PHOTO_STRIPS: dict[str, list[tuple[str, str, str, str, str]]] = {
     "roofing": [
         (
             "assets/images/posts/2026-09-21-edmonds-roof-1.webp",
-            "Illustrative coastal Edmonds home staged for roof replacement",
+            "Coastal Edmonds home staged for roof replacement",
             "Roof replacement context (illustrative)",
             "./locations.html",
             "Locations hub",
         ),
         (
             "assets/images/posts/2026-09-21-edmonds-roof-2.webp",
-            "Illustrative roof deck with underlayment and drip-edge detail",
+            "Roof deck with underlayment and drip-edge detail",
             "Underlayment detail (illustrative)",
             "./learn.html",
             "Learn hub",
         ),
         (
             "assets/images/posts/2026-09-21-edmonds-roof-3.webp",
-            "Illustrative finished architectural shingle roof on a coastal home",
+            "Finished architectural shingle roof on a coastal home",
             "Finished roof (illustrative)",
             "./additions.html",
             "Home additions directory",
@@ -359,21 +359,21 @@ TRADE_PHOTO_STRIPS: dict[str, list[tuple[str, str, str, str, str]]] = {
     "concrete": [
         (
             "assets/images/posts/2026-08-12-edmonds-addition-permit-2.webp",
-            "Illustrative foundation and site work context for an Edmonds addition",
+            "Foundation and site work context for an Edmonds addition",
             "Foundation context (illustrative)",
             "./additions.html",
             "Home additions directory",
         ),
         (
             "assets/images/posts/2026-08-12-edmonds-addition-permit-3.webp",
-            "Illustrative concrete and structural interface on a residential addition",
+            "Concrete and structural interface on a residential addition",
             "Structural interface (illustrative)",
             "./additions.html",
             "Home additions directory",
         ),
         (
             "assets/images/posts/2026-08-24-shoreline-addition-1.webp",
-            "Illustrative addition massing where foundation work sets the envelope",
+            "Addition massing where foundation work sets the envelope",
             "Envelope from foundation (illustrative)",
             "./locations.html",
             "Locations hub",
@@ -382,21 +382,21 @@ TRADE_PHOTO_STRIPS: dict[str, list[tuple[str, str, str, str, str]]] = {
     "drywall": [
         (
             "assets/images/posts/2026-08-18-waterproofing-1.webp",
-            "Illustrative wall substrate prep before finish drywall in a wet area",
+            "Wall substrate prep before finish drywall in a wet area",
             "Substrate prep (illustrative)",
             "./bathrooms.html",
             "Bathroom remodelers directory",
         ),
         (
             "assets/images/posts/2026-08-18-waterproofing-2.webp",
-            "Illustrative interior remodel walls ready for tape and finish levels",
+            "Interior remodel walls ready for tape and finish levels",
             "Interior walls (illustrative)",
             "./kitchen.html",
             "Kitchen remodelers directory",
         ),
         (
             "assets/images/posts/2026-08-18-waterproofing-3.webp",
-            "Illustrative smooth wall finish ahead of paint in a Pacific Northwest remodel",
+            "Smooth wall finish ahead of paint in a Pacific Northwest remodel",
             "Finish level (illustrative)",
             "./learn.html",
             "Learn hub",
@@ -405,21 +405,21 @@ TRADE_PHOTO_STRIPS: dict[str, list[tuple[str, str, str, str, str]]] = {
     "painting": [
         (
             "assets/images/posts/2026-08-19-eastside-coastal-1.webp",
-            "Illustrative Pacific Northwest exterior ready for paint and coastal prep",
+            "Pacific Northwest exterior ready for paint and coastal prep",
             "Exterior paint context (illustrative)",
             "./locations.html",
             "Locations hub",
         ),
         (
             "assets/images/posts/2026-08-19-eastside-coastal-2.webp",
-            "Illustrative trim and siding surfaces staged for finish paint",
+            "Trim and siding surfaces staged for finish paint",
             "Trim and cladding (illustrative)",
             "./learn.html",
             "Learn hub",
         ),
         (
             "assets/images/posts/2026-08-11-hire-design-build-6.webp",
-            "Illustrative finished interior surfaces after remodel painting",
+            "Finished interior surfaces after remodel painting",
             "Interior finish (illustrative)",
             "./kitchen.html",
             "Kitchen remodelers directory",
@@ -428,21 +428,21 @@ TRADE_PHOTO_STRIPS: dict[str, list[tuple[str, str, str, str, str]]] = {
     "flooring": [
         (
             "assets/images/posts/2026-08-17-heated-floors-1.webp",
-            "Illustrative floor assembly staged before finish flooring",
+            "Floor assembly staged before finish flooring",
             "Floor assembly (illustrative)",
             "./kitchen.html",
             "Kitchen remodelers directory",
         ),
         (
             "assets/images/posts/2026-08-17-heated-floors-2.webp",
-            "Illustrative underlayment and radiant coordination for finish floors",
+            "Underlayment and radiant coordination for finish floors",
             "Underlayment coordination (illustrative)",
             "./bathrooms.html",
             "Bathroom remodelers directory",
         ),
         (
             "assets/images/posts/2026-08-17-heated-floors-3.webp",
-            "Illustrative finished floor surface in a Pacific Northwest remodel",
+            "Finished floor surface in a Pacific Northwest remodel",
             "Finished flooring (illustrative)",
             "./learn.html",
             "Learn hub",
@@ -451,21 +451,21 @@ TRADE_PHOTO_STRIPS: dict[str, list[tuple[str, str, str, str, str]]] = {
     "windows": [
         (
             "assets/images/posts/2026-09-20-edmonds-windows-1.webp",
-            "Illustrative coastal Edmonds home staged for window replacement",
+            "Coastal Edmonds home staged for window replacement",
             "Window replacement context (illustrative)",
             "./locations.html",
             "Locations hub",
         ),
         (
             "assets/images/posts/2026-09-20-edmonds-windows-2.webp",
-            "Illustrative window rough opening with weather-resistive barrier and flashing",
+            "Window rough opening with weather-resistive barrier and flashing",
             "Flashing detail (illustrative)",
             "./learn.html",
             "Learn hub",
         ),
         (
             "assets/images/posts/2026-09-20-edmonds-windows-3.webp",
-            "Illustrative newly installed windows with clean exterior trim",
+            "Newly installed windows with clean exterior trim",
             "Installed windows (illustrative)",
             "./additions.html",
             "Home additions directory",
@@ -474,21 +474,21 @@ TRADE_PHOTO_STRIPS: dict[str, list[tuple[str, str, str, str, str]]] = {
     "insulation": [
         (
             "assets/images/posts/2026-08-08-weatherproof-first-1.webp",
-            "Illustrative weatherproofing and insulation coordination on a PNW shell",
+            "Weatherproofing and insulation coordination on a PNW shell",
             "Shell coordination (illustrative)",
             "./learn.html",
             "Learn hub",
         ),
         (
             "assets/images/posts/2026-08-30-coastal-moisture-1.webp",
-            "Illustrative coastal moisture control layers relevant to insulation choices",
+            "Coastal moisture control layers relevant to insulation choices",
             "Moisture control (illustrative)",
             "./locations.html",
             "Locations hub",
         ),
         (
             "assets/images/posts/2026-08-08-weatherproof-first-3.webp",
-            "Illustrative insulated wall assembly before interior finishes",
+            "Insulated wall assembly before interior finishes",
             "Insulated assembly (illustrative)",
             "./additions.html",
             "Home additions directory",
@@ -497,21 +497,21 @@ TRADE_PHOTO_STRIPS: dict[str, list[tuple[str, str, str, str, str]]] = {
     "excavation": [
         (
             "assets/images/posts/2026-08-12-edmonds-addition-permit-1.webp",
-            "Illustrative site and dig context ahead of an Edmonds home addition",
+            "Site and dig context ahead of an Edmonds home addition",
             "Site / dig context (illustrative)",
             "./additions.html",
             "Home additions directory",
         ),
         (
             "assets/images/posts/2026-08-12-edmonds-addition-permit-2.webp",
-            "Illustrative grading and foundation interface for residential site work",
+            "Grading and foundation interface for residential site work",
             "Grading interface (illustrative)",
             "./additions.html",
             "Home additions directory",
         ),
         (
             "assets/images/posts/2026-08-24-shoreline-addition-3.webp",
-            "Illustrative addition footprint where excavation sets drainage and pad",
+            "Addition footprint where excavation sets drainage and pad",
             "Footprint from site work (illustrative)",
             "./locations.html",
             "Locations hub",
@@ -522,21 +522,33 @@ TRADE_PHOTO_STRIPS: dict[str, list[tuple[str, str, str, str, str]]] = {
 
 
 
-def illustrative_alt(custom: str, category: str) -> str:
-    """Alt for a generated still. Never the post title, and always marked illustrative."""
-    text = re.sub(r"\s+", " ", (custom or "").strip())
-    if text.lower().startswith("illustrative:"):
-        return text
-    if text.lower().startswith("illustrative"):
-        rest = text.split(" ", 1)[1] if " " in text else ""
+def _drop_illustrative_lead(text: str) -> str:
+    """Drop a leading Illustrative: or Illustrative word. Capitalize the new first letter."""
+    raw = re.sub(r"\s+", " ", (text or "").strip())
+    lowered = raw.lower()
+    if lowered.startswith("illustrative:"):
+        rest = raw.split(":", 1)[1].strip()
+    elif lowered.startswith("illustrative"):
+        rest = raw.split(" ", 1)[1].strip() if " " in raw else ""
         rest = rest.lstrip(":").strip()
-        if rest:
-            return f"Illustrative: {rest}"
+    else:
+        return raw
+    if rest[:1].isalpha() and rest[:1].islower():
+        rest = rest[:1].upper() + rest[1:]
+    return rest
+
+
+def illustrative_alt(custom: str, category: str) -> str:
+    """Alt for a generated still. Never the post title."""
+    text = _drop_illustrative_lead(custom)
+    if text:
+        return text
     subject = re.sub(r"\s+", " ", (category or "remodel").strip()) or "remodel"
     if subject.lower() in {"guides", "guide", "blog", "post"}:
         subject = "remodel"
     article = "an" if subject[:1].lower() in "aeiou" else "a"
-    return f"Illustrative: editorial still for {article} {subject} guide"
+    sentence = f"Editorial still for {article} {subject} guide"
+    return sentence
 
 
 def esc(s: str) -> str:
@@ -1473,7 +1485,7 @@ def _set_attr(inner: str, name: str, value: str) -> str:
     return f'{inner} {name}="{value}"'
 
 
-# Generated stills must say so. Empty alt stays empty (decorative layers).
+# Empty alt stays empty (decorative layers).
 _ILLUSTRATIVE_ASSET = re.compile(
     r"(?:^|/)(?:assets/images/(?:posts|places|hubs|tools|walkthrough)/|assets/hero/)"
     r"|(?:^|/)assets/images/(?:dir-|home-)"
@@ -1699,7 +1711,7 @@ def polish_photo_alt(
     topic: str = "",
     limit: int = 125,
 ) -> str:
-    """One natural alt sentence. Illustrative stills keep the honesty prefix.
+    """One natural alt sentence.
 
     City (or county) once, topic once, no job-photo boilerplate, no firm name
     on an illustrative still.
@@ -1729,8 +1741,9 @@ def polish_photo_alt(
         else:
             body = re.sub(r"\bPacific Northwest\b", "Puget Sound", body, flags=re.I)
             body = re.sub(r"\bPNW\b", "Puget Sound", body)
-    prefix = "Illustrative: " if illustrative else ""
-    room = limit - len(prefix)
+    # Published alts no longer carry an Illustrative prefix. Keep the old
+    # character budget on illustrative stills so existing sentences are not refit.
+    room = limit - (len("Illustrative: ") if illustrative else 0)
     if not body or _PHOTO_GENERIC.match(body):
         subject = (topic or _PHOTO_CTX.get("topic") or "remodel").strip()
         body = f"{subject} on a home in {place}"
@@ -1743,11 +1756,13 @@ def polish_photo_alt(
         suffix = f" in {place}"
         sentence = _fit_photo_sentence(sentence, max(24, room - len(suffix))) + suffix
         sentence = _fit_photo_sentence(sentence, room)
-    return f"{prefix}{sentence}" if sentence else prefix.rstrip()
+    if illustrative and sentence[:1].isalpha() and sentence[:1].islower():
+        sentence = sentence[:1].upper() + sentence[1:]
+    return sentence
 
 
 def polish_photo_caption(raw: str, place: str, *, topic: str = "") -> str:
-    """Visible caption: what the photo shows, plus the city, without the honesty prefix."""
+    """Visible caption: what the photo shows, plus the city."""
     alt = polish_photo_alt(raw, place, illustrative=False, topic=topic, limit=220)
     caption = alt.strip()
     if caption:
@@ -1787,8 +1802,9 @@ def ranking_photo_caption_html(topic: str, place: str) -> str:
     topic_text = re.sub(r"\s+", " ", (topic or "remodel").strip()).rstrip(".")
     place_text = (place or "Puget Sound").strip()
     plural = _RANKING_TOPIC_PLURAL.get(topic_text.lower(), topic_text)
+    shown = topic_text[:1].upper() + topic_text[1:] if topic_text else topic_text
     return (
-        f"Illustrative {esc(topic_text)} in {esc(place_text)}. "
+        f"{esc(shown)} in {esc(place_text)}. "
         f'<a href="{PPG["url"]}" target="_blank" rel="noopener">Pacific Pro Group</a> '
         f"is ranked #1 by the Board for King &amp; Snohomish {esc(plural)}."
     )
@@ -2529,7 +2545,7 @@ def another_story_embed(prefix: str = "") -> str:
         banner = (
             '    <div class="mb-6 overflow-hidden rounded-xl border border-white/10">\n'
             f'      <img src="{prefix_asset("assets/images/another-story-banner.webp", prefix)}" '
-            'alt="Illustrative: conceptual before-and-after second-story idea for Another Story SEA" '
+            'alt="Conceptual before-and-after second-story idea for Another Story SEA" '
             'class="w-full h-48 sm:h-64 object-cover" width="1200" height="630" loading="lazy" data-no-lcp>\n'
             '    </div>\n'
         )
@@ -2601,7 +2617,7 @@ def another_story_cta(prefix: str = "") -> str:
         src_img = prefix_asset("assets/images/another-story-banner.webp", prefix)
         img = (
             '      <div class="md:w-2/5 shrink-0">\n'
-            f'        <img src="{src_img}" alt="Illustrative: conceptual before-and-after second-story idea for Another Story SEA" '
+            f'        <img src="{src_img}" alt="Conceptual before-and-after second-story idea for Another Story SEA" '
             'class="w-full h-40 md:h-full object-cover" width="640" height="360" loading="lazy">\n'
             '      </div>\n'
         )
@@ -4980,8 +4996,8 @@ def home_flashlight_hero(supporting: bool = False) -> tuple[str, str, str] | Non
     wire_attrs = ' decoding="async" data-defer-lcp loading="lazy"'
     html_block = f"""  <section class="{section_cls}" id="home-hero" aria-labelledby="home-hero-title">
     <div class="hero-stage">
-      <img class="hero-layer hero-layer-finished" src="{finished}"{fin_attr} alt="Illustrative: finished home concept in Puget Sound" width="1280" height="723"{finished_attrs}>
-      <img class="hero-layer hero-layer-wire" id="home-hero-wire" src="{wire}"{wire_attr} alt="Illustrative: line drawing of the same home concept in Puget Sound" width="1280" height="723"{wire_attrs}>
+      <img class="hero-layer hero-layer-finished" src="{finished}"{fin_attr} alt="Finished home concept in Puget Sound" width="1280" height="723"{finished_attrs}>
+      <img class="hero-layer hero-layer-wire" id="home-hero-wire" src="{wire}"{wire_attr} alt="Line drawing of the same home concept in Puget Sound" width="1280" height="723"{wire_attrs}>
 {video_html}
     </div>
     <div class="hero-scrim" aria-hidden="true"></div>
@@ -5642,7 +5658,7 @@ def build_about() -> str:
             "Research",
             "Study how additions and remodels actually run across King County, Snohomish County, and Seattle — AHJ norms, coastal detailing, and stay-in-home vs vacate patterns.",
             "assets/images/home-process-research.webp",
-            "Illustrative: plans and research materials for a Puget Sound remodel",
+            "Plans and research materials for a Puget Sound remodel",
         ),
         (
             "02",
@@ -5650,7 +5666,7 @@ def build_about() -> str:
             "Verify",
             "Cross-check public WA L&I signals and third-party review aggregates. Prefer firms homeowners can re-verify themselves before a deposit.",
             "assets/images/home-process-verify.webp",
-            "Illustrative: license and standards check for a Puget Sound remodel",
+            "License and standards check for a Puget Sound remodel",
         ),
         (
             "03",
@@ -5658,7 +5674,7 @@ def build_about() -> str:
             "Local mastery",
             "Weight local height limits, critical areas, and coastal weather sequencing — including Edmonds Bowl rules where they apply — not generic statewide marketing claims.",
             "assets/images/home-process-build.webp",
-            "Illustrative: home addition under construction in Puget Sound",
+            "Home addition under construction in Puget Sound",
         ),
         (
             "04",
@@ -5666,7 +5682,7 @@ def build_about() -> str:
             "Editorial shortlist",
             "Publish ranked directories and field guides so homeowners can compare firms against standards — not paid placement.",
             "assets/images/home-process-shortlist.webp",
-            "Illustrative: directory shortlist notes for Puget Sound remodelers",
+            "Directory shortlist notes for Puget Sound remodelers",
         ),
     ]
     process_cards = []
@@ -5698,32 +5714,32 @@ def build_about() -> str:
             [
                 img_card(
                     "assets/images/home-process-build.webp",
-                    "Illustrative: home addition exterior in Puget Sound",
+                    "Home addition exterior in Puget Sound",
                     "Home addition exterior in Puget Sound.",
                 ),
                 img_card(
                     "assets/images/home-ppg-addition.webp",
-                    "Illustrative: remodel exterior on a Puget Sound house",
+                    "Remodel exterior on a Puget Sound house",
                     "Remodel exterior on a Puget Sound house.",
                 ),
                 img_card(
                     "assets/images/home-ppg-interior.webp",
-                    "Illustrative: remodeled kitchen interior in Puget Sound",
+                    "Remodeled kitchen interior in Puget Sound",
                     "Remodeled kitchen interior in Puget Sound.",
                 ),
                 img_card(
                     "assets/images/home-gallery-dryin.webp",
-                    "Illustrative: framed house at dry-in in Puget Sound",
+                    "Framed house at dry-in in Puget Sound",
                     "Framed house at dry-in in Puget Sound.",
                 ),
                 img_card(
                     "assets/images/home-gallery-finish.webp",
-                    "Illustrative: finished remodel interior in Puget Sound",
+                    "Finished remodel interior in Puget Sound",
                     "Finished remodel interior in Puget Sound.",
                 ),
                 img_card(
                     "assets/images/home-process-research.webp",
-                    "Illustrative: plans on a research desk for a Puget Sound remodel",
+                    "Plans on a research desk for a Puget Sound remodel",
                     "Plans on a research desk for a Puget Sound remodel.",
                 ),
             ],
@@ -5799,8 +5815,8 @@ def build_about() -> str:
           </div>
         </div>
         <div class="grid grid-cols-2 gap-3">
-          {img_card("assets/images/home-ppg-addition.webp", "Illustrative: home addition exterior in Puget Sound", "", html_caption=ranking_photo_caption_html("home addition", "Puget Sound"))}
-          {img_card("assets/images/home-ppg-interior.webp", "Illustrative: remodeled kitchen interior in Puget Sound", "", html_caption=ranking_photo_caption_html("kitchen remodel", "Puget Sound"))}
+          {img_card("assets/images/home-ppg-addition.webp", "Home addition exterior in Puget Sound", "", html_caption=ranking_photo_caption_html("home addition", "Puget Sound"))}
+          {img_card("assets/images/home-ppg-interior.webp", "Remodeled kitchen interior in Puget Sound", "", html_caption=ranking_photo_caption_html("kitchen remodel", "Puget Sound"))}
         </div>
       </div>
     </section>
@@ -5919,7 +5935,7 @@ def build_about() -> str:
     )}
   </div>"""
 
-    og_alt = "Illustrative: finished home concept in Puget Sound"
+    og_alt = "Finished home concept in Puget Sound"
     return page_shell(
         HOME_TITLE,
         HOME_DESCRIPTION,
@@ -5975,21 +5991,21 @@ def build_additions(additions: list[dict]) -> str:
 {_hub_photo_strip([
         (
             "assets/images/posts/2026-09-28-woodinville-second-story-1.webp",
-            "Illustrative second-story addition exterior for a Woodinville-area home",
+            "Second-story addition exterior for a Woodinville-area home",
             "Woodinville second-story context (illustrative)",
             "./posts/2026-09-28-second-story-addition-woodinville-wa.html",
             "Woodinville second-story addition",
         ),
         (
             "assets/images/posts/2026-08-12-edmonds-addition-permit-1.webp",
-            "Illustrative permit and plan-set context for an Edmonds home addition",
+            "Permit and plan-set context for an Edmonds home addition",
             "Permit / plan-set context (illustrative)",
             "./posts/2026-08-12-edmonds-home-addition-permit-basics.html",
             "Edmonds home addition permit basics",
         ),
         (
             "assets/images/posts/2026-08-24-shoreline-addition-2.webp",
-            "Illustrative second-story addition framing for a Shoreline-area home",
+            "Second-story addition framing for a Shoreline-area home",
             "Second-story framing context (illustrative)",
             "./posts/2026-08-24-second-story-addition-shoreline.html",
             "Shoreline second-story addition",
@@ -6151,21 +6167,21 @@ def build_kb_page(kind: str, firms: list[dict]) -> str:
             [
                 (
                     "assets/images/posts/2026-09-26-kenmore-kitchen-1.webp",
-                    "Illustrative Pacific Northwest kitchen remodel with island and natural light",
+                    "Pacific Northwest kitchen remodel with island and natural light",
                     "Kitchen remodel context (illustrative)",
                     "./kitchen-remodel-planning.html",
                     "Kitchen remodel planning",
                 ),
                 (
                     "assets/images/posts/2026-09-24-bothell-kitchen-2.webp",
-                    "Illustrative kitchen cabinet and finish selection context for a Bothell-area remodel",
+                    "Kitchen cabinet and finish selection context for a Bothell-area remodel",
                     "Cabinetry / finishes context (illustrative)",
                     "./kitchen-cost-factors.html",
                     "Kitchen cost factors",
                 ),
                 (
                     "assets/images/posts/2026-08-21-queen-anne-kitchen-1.webp",
-                    "Illustrative Queen Anne kitchen layout planning for Seattle remodels",
+                    "Queen Anne kitchen layout planning for Seattle remodels",
                     "Layout planning context (illustrative)",
                     "./materials.html",
                     "Materials index",
@@ -6178,21 +6194,21 @@ def build_kb_page(kind: str, firms: list[dict]) -> str:
             [
                 (
                     "assets/images/posts/2026-09-30-lfp-bath-1.webp",
-                    "Illustrative bathroom vanity and residential bath interior for a Lake Forest Park remodel",
+                    "Bathroom vanity and residential bath interior for a Lake Forest Park remodel",
                     "Bath remodel context (illustrative)",
                     "./bathroom-waterproofing-guide.html",
                     "Bathroom waterproofing guide",
                 ),
                 (
                     "assets/images/posts/2026-09-27-mill-creek-bath-2.webp",
-                    "Illustrative Mill Creek bathroom layout and wet-area sequencing",
+                    "Mill Creek bathroom layout and wet-area sequencing",
                     "Wet-area sequencing (illustrative)",
                     "./bathroom-cost-factors.html",
                     "Bathroom cost factors",
                 ),
                 (
                     "assets/images/posts/2026-08-18-waterproofing-2.webp",
-                    "Illustrative shower wet-wall waterproofing membrane for PNW baths",
+                    "Shower wet-wall waterproofing membrane for PNW baths",
                     "Waterproofing membrane (illustrative)",
                     "./coastal-waterproofing.html",
                     "Coastal waterproofing checklist",
@@ -6342,21 +6358,21 @@ def build_custom_homes(firms: list[dict]) -> str:
 {_hub_photo_strip([
         (
             "assets/images/hubs/hub-edmonds-1.webp",
-            "Illustrative Edmonds-area custom home exterior context for coastal Snohomish County builds",
+            "Edmonds-area custom home exterior context for coastal Snohomish County builds",
             "Coastal custom context (illustrative)",
             "./edmonds-custom-homes.html",
             "Edmonds custom homes directory",
         ),
         (
             "assets/images/posts/2026-08-29-kitchen-addition-1.webp",
-            "Illustrative kitchen and living layout planning for a custom or speculative home",
+            "Kitchen and living layout planning for a custom or speculative home",
             "Interior planning context (illustrative)",
             "./spec-homes.html",
             "Spec homes directory",
         ),
         (
             "assets/images/posts/2026-08-24-shoreline-addition-1.webp",
-            "Illustrative home addition framing for Pacific Northwest custom home projects",
+            "Home addition framing for Pacific Northwest custom home projects",
             "Addition sequencing context (illustrative)",
             "./home-addition-planning.html",
             "Home addition planning",
@@ -6702,21 +6718,21 @@ def build_edmonds_custom_homes(firms: list[dict]) -> str:
         [
             (
                 "assets/images/hubs/hub-edmonds-1.webp",
-                "Illustrative Edmonds-area custom home exterior under soft Puget Sound light",
+                "Edmonds-area custom home exterior under soft Puget Sound light",
                 "Edmonds custom exterior (illustrative)",
                 "./custom-homes.html",
                 "Custom homes directory",
             ),
             (
                 "assets/images/posts/2026-09-02-edmonds-custom-1.webp",
-                "Illustrative Edmonds custom home planning and design-build context",
+                "Edmonds custom home planning and design-build context",
                 "Design-build planning (illustrative)",
                 "./home-addition-planning.html",
                 "Home addition planning",
             ),
             (
                 "assets/images/posts/2026-09-02-edmonds-custom-2.webp",
-                "Illustrative coastal Snohomish County custom home construction context",
+                "Coastal Snohomish County custom home construction context",
                 "Coastal custom context (illustrative)",
                 "./edmonds.html",
                 "Edmonds city hub",
@@ -6852,21 +6868,21 @@ def build_commercial(firms: list[dict]) -> str:
 {_hub_photo_strip([
         (
             "assets/images/posts/2026-08-11-hire-design-build-1.webp",
-            "Illustrative design-build jobsite staging for Pacific Northwest commercial and residential scopes",
+            "Design-build jobsite staging for Pacific Northwest commercial and residential scopes",
             "Jobsite staging (illustrative)",
             "./custom-homes.html",
             "Custom homes directory",
         ),
         (
             "assets/images/posts/2026-08-21-queen-anne-kitchen-1.webp",
-            "Illustrative tenant-improvement style kitchen remodel interior in the Puget Sound",
+            "Tenant-improvement style kitchen remodel interior in the Puget Sound",
             "TI / interior remodel context (illustrative)",
             "./kitchen.html",
             "Kitchen remodelers directory",
         ),
         (
             "assets/images/posts/2026-08-20-bothell-addition-1.webp",
-            "Illustrative structural addition framing related to light commercial and expansion work",
+            "Structural addition framing related to light commercial and expansion work",
             "Structural expansion context (illustrative)",
             "./additions.html",
             "Home additions directory",
@@ -6967,21 +6983,21 @@ def build_spec_homes(firms: list[dict]) -> str:
 {_hub_photo_strip([
         (
             "assets/images/posts/2026-09-02-edmonds-custom-1.webp",
-            "Illustrative custom home planning context for King and Snohomish County builders",
+            "Custom home planning context for King and Snohomish County builders",
             "Custom planning context (illustrative)",
             "./custom-homes.html",
             "Custom homes directory",
         ),
         (
             "assets/images/dir-custom-homes-hero.webp",
-            "Illustrative finished exterior for a Pacific Northwest custom or speculative home",
+            "Finished exterior for a Pacific Northwest custom or speculative home",
             "Finished exterior context (illustrative)",
             "./edmonds-custom-homes.html",
             "Edmonds custom homes directory",
         ),
         (
             "assets/images/posts/2026-08-26-lfp-addition-2.webp",
-            "Illustrative addition framing and dry-in related to speculative home build sequencing",
+            "Addition framing and dry-in related to speculative home build sequencing",
             "Framing / dry-in context (illustrative)",
             "./additions.html",
             "Home additions directory",
@@ -7097,21 +7113,21 @@ def build_trades_hub() -> str:
 {_hub_photo_strip([
         (
             "assets/images/posts/2026-08-31-magnolia-plumbing-1.webp",
-            "Illustrative plumbing rough-in for a Pacific Northwest remodel",
+            "Plumbing rough-in for a Pacific Northwest remodel",
             "Plumbing context (illustrative)",
             "./plumber.html",
             "Plumber directory",
         ),
         (
             "assets/images/posts/2026-08-10-electrical-bath-1.webp",
-            "Illustrative electrical rough-in during a bathroom remodel",
+            "Electrical rough-in during a bathroom remodel",
             "Electrical context (illustrative)",
             "./electrician.html",
             "Electrician directory",
         ),
         (
             "assets/images/posts/2026-09-21-edmonds-roof-1.webp",
-            "Illustrative coastal Edmonds home staged for roof work",
+            "Coastal Edmonds home staged for roof work",
             "Roofing context (illustrative)",
             "./roofing.html",
             "Roofing directory",
@@ -7842,7 +7858,8 @@ def news_card_media(story: dict, prefix: str, eager: bool = False) -> str:
     place = news_photo_place(story)
     raw_alt = story.get("alt") or ""
     credited = bool((story.get("hero_credit") or "").strip())
-    illustrative = (not credited) and raw_alt.lower().startswith("illustrative")
+    # Uncredited heroes are generated stills. The old Illustrative prefix is not the signal.
+    illustrative = (not credited) and bool(raw_alt.strip())
     alt_text = polish_photo_alt(raw_alt, place, illustrative=illustrative)
     return (
         f'<img src="{prefix_asset(hero_rel, prefix)}" alt="{esc(alt_text)}" '
@@ -7870,7 +7887,7 @@ def build_news_story_page(story: dict, news_names: set[str] | None = None, relat
         src = prefix_asset(hero_rel, "../")
         raw_alt = story.get("alt") or ""
         credited = bool((story.get("hero_credit") or "").strip())
-        illustrative = (not credited) and raw_alt.lower().startswith("illustrative")
+        illustrative = (not credited) and bool(raw_alt.strip())
         alt_text = polish_photo_alt(raw_alt, photo_place, illustrative=illustrative, topic="")
         caption = polish_photo_caption(raw_alt, photo_place)
         credit_html = news_hero_credit_html(story.get("hero_credit") or "")
@@ -8054,7 +8071,7 @@ def build_news_index(stories: list[dict]) -> str:
     }]
     banner = (
         '<img class="news-masthead-banner" src="/assets/images/art/news-masthead-16x9.webp" '
-        'alt="Illustrative: Puget Sound homes under renovation on an overcast day" '
+        'alt="Puget Sound homes under renovation on an overcast day" '
         'width="1344" height="752" decoding="async" data-above-fold '
         'sizes="(max-width: 1152px) 100vw, 1152px">'
     )
@@ -9373,21 +9390,21 @@ def build_good_steward_page() -> str:
     [
         (
             "assets/images/posts/2026-08-11-hire-design-build-edmonds-2.webp",
-            "Illustrative plan review before hiring a remodeler — not a real Board job photo",
+            "Plan review before hiring a remodeler — not a real Board job photo",
             "Written scope before work starts",
             "./hiring-a-contractor.html",
             "Hiring a contractor",
         ),
         (
             "assets/images/posts/2026-08-12-edmonds-home-addition-permit-2.webp",
-            "Illustrative permit set reviewed before an addition — not a real Board job photo",
+            "Permit set reviewed before an addition — not a real Board job photo",
             "Know who owns the permit",
             "./permits.html",
             "Permit hub",
         ),
         (
             "assets/images/hubs/hub-directory-3.webp",
-            "Illustrative exterior walk of a Pacific Northwest house before a project — not a real Board job photo",
+            "Exterior walk of a Pacific Northwest house before a project — not a real Board job photo",
             "Look at the house before you hire",
             "./site-visit.html",
             "Site Visit Checklist",
@@ -9474,21 +9491,21 @@ def build_another_story_page() -> str:
     [
         (
             "assets/images/posts/2026-08-09-second-story-teardown-2.webp",
-            "Illustrative second-story massing concept over an existing house — not a real Board job photo",
+            "Second-story massing concept over an existing house — not a real Board job photo",
             "Massing idea, not a permit set",
             "./second-story-vs-teardown.html",
             "Second story vs teardown",
         ),
         (
             "assets/images/posts/2026-08-24-second-story-addition-shoreline-2.webp",
-            "Illustrative finished second-story addition with new windows and siding — not a real Board job photo",
+            "Finished second-story addition with new windows and siding — not a real Board job photo",
             "Another story on the same house",
             "./additions.html",
             "Home additions directory",
         ),
         (
             "assets/images/posts/2026-08-08-another-story-weatherproof-first-2.webp",
-            "Illustrative second-story addition during weatherproofing — not a real Board job photo",
+            "Second-story addition during weatherproofing — not a real Board job photo",
             "Weatherproof the new story first",
             "./home-addition-planning.html",
             "Home addition planning",
@@ -9526,21 +9543,21 @@ def build_energy_credit_page() -> str:
     [
         (
             "assets/images/posts/2026-09-20-window-edmonds-coastal-2.webp",
-            "Illustrative new window set in an existing wall opening — not a real Board job photo",
+            "New window set in an existing wall opening — not a real Board job photo",
             "Window performance is a credit input",
             "./windows.html",
             "Windows directory",
         ),
         (
             "assets/images/posts/2026-10-04-mill-creek-window-4.webp",
-            "Illustrative high-performance window unit for a residential opening — not a real Board job photo",
+            "High-performance window unit for a residential opening — not a real Board job photo",
             "Glazing choices affect the energy path",
             "./posts/2026-10-04-window-replacement-mill-creek-wa.html",
             "Mill Creek window notes",
         ),
         (
             "assets/images/tools/build-walkthrough/08-insulation-wrb.webp",
-            "Illustrative wall insulation and weather-resistive barrier — not a real Board job photo",
+            "Wall insulation and weather-resistive barrier — not a real Board job photo",
             "Envelope continuity before cover-up",
             "./insulation.html",
             "Insulation directory",
@@ -9577,7 +9594,7 @@ def build_build_walkthrough_page() -> str:
     body = f"""  <header class="max-w-6xl mx-auto px-4 pt-10 pb-2">
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Build Walkthrough</h1>
-    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">One cohesive illustrative house from the Board of Project Stewardship, scrubbed through 17 stages from Discovery to Handoff. The same model stays on screen as a floor plan whose walls rise into a 3D house. Honesty chips read “Illustrative media · not engineering documents” and “Illustrative model · not a site scan.”</p>
+    <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">One cohesive illustrative house from the Board of Project Stewardship, scrubbed through 17 stages from Discovery to Handoff. The same model stays on screen as a floor plan whose walls rise into a 3D house. Honesty chips read “Illustrative media · not engineering documents” and “Model · not a site scan.”</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-3">Educational Board tool. When you hire, shortlist from Board directories — Board #1: <a href="{PPG['url']}" target="_blank" rel="noopener" class="text-secondary hover:underline">Pacific Pro Group</a>. Re-verify any contractor at <a href="{LNI_URL}" target="_blank" rel="noopener" class="text-secondary hover:underline">WA L&amp;I Verify</a>.</p>
     <p class="text-slate-400 font-light max-w-3xl leading-relaxed mb-2">Part of <a href="{public_tool_href('good-steward')}" class="text-secondary hover:underline">Good Steward</a>. Also: <a href="{public_tool_href('site-visit')}" class="text-secondary hover:underline">Site Visit Checklist</a> · <a href="{public_tool_href('pm-dashboard')}" class="text-secondary hover:underline">PM Dashboard</a> · <a href="{public_tool_href('energy-credit')}" class="text-secondary hover:underline">Energy code credits</a>.</p>
   </header>
@@ -9585,21 +9602,21 @@ def build_build_walkthrough_page() -> str:
     [
         (
             "assets/images/tools/build-walkthrough-hero.webp",
-            "Illustrative 3D house model moving through build stages — not a site scan or engineering document",
+            "3D house model moving through build stages — not a site scan or engineering document",
             "One model, many stages",
             "./project-timeline.html",
             "Project timeline",
         ),
         (
             "assets/images/tools/build-walkthrough/02-plans-blueprints.webp",
-            "Illustrative architectural plans and a scale model before construction — not a real Board job photo",
+            "Architectural plans and a scale model before construction — not a real Board job photo",
             "Plans before the shell",
             "./good-steward.html",
             "Good Steward",
         ),
         (
             "assets/images/tools/build-walkthrough/06-sheathing-dryin.webp",
-            "Illustrative sheathed house at dry-in — not a real Board job photo",
+            "Sheathed house at dry-in — not a real Board job photo",
             "Dry-in before finishes",
             "./coastal-waterproofing.html",
             "Coastal waterproofing",
@@ -9629,7 +9646,7 @@ def build_build_walkthrough_page() -> str:
       }});
     }})();
     </script>
-    <p class="text-[11px] text-slate-400 mt-3 leading-relaxed">One persistent house. Honesty chips: Illustrative media · not engineering documents. Illustrative model · not a site scan.</p>
+    <p class="text-[11px] text-slate-400 mt-3 leading-relaxed">One persistent house. Honesty chips: Illustrative media · not engineering documents. Model · not a site scan.</p>
     <section class="mt-8" id="seventeen-stages" aria-labelledby="seventeen-stages-h">
       <h2 id="seventeen-stages-h" class="text-xl font-black text-white tracking-tight mb-3">Seventeen stages, one house</h2>
       <p class="text-sm text-slate-400 font-light max-w-3xl leading-relaxed mb-4">Drag the scrubber on the same illustrative model. Views are educational diagrams from the Board of Project Stewardship, not construction documents or a promised sequence.</p>
@@ -10073,21 +10090,21 @@ def build_floor_plan_3d_page() -> str:
     [
         (
             "assets/images/posts/2026-08-14-kitchen-greenwood-2.webp",
-            "Illustrative kitchen with sage green cabinets, white counters, and a wood-top island — not a real Board job photo",
+            "Kitchen with sage green cabinets, white counters, and a wood-top island — not a real Board job photo",
             "A kitchen layout to compare with a sketch",
             "./kitchen.html",
             "Kitchen remodelers directory",
         ),
         (
             "assets/images/posts/2026-09-11-bathroom-shoreline-3.webp",
-            "Illustrative bathroom with a floating vanity, glass walk-in shower, and freestanding tub — not a real Board job photo",
+            "Bathroom with a floating vanity, glass walk-in shower, and freestanding tub — not a real Board job photo",
             "A bath layout with a walk-in shower",
             "./bathrooms.html",
             "Bathroom remodelers directory",
         ),
         (
             "assets/images/posts/2026-08-26-home-addition-lake-forest-park-3.webp",
-            "Illustrative two-story addition with light siding beside a darker existing house — not a real Board job photo",
+            "Two-story addition with light siding beside a darker existing house — not a real Board job photo",
             "An addition beside the existing house",
             "./additions.html",
             "Home additions directory",
@@ -10298,21 +10315,21 @@ def build_plan_walkthrough_page() -> str:
     [
         (
             "assets/images/posts/2026-09-04-kitchen-ballard-6.webp",
-            "Illustrative galley kitchen with white cabinets and a stainless range — not a real Board job photo",
+            "Galley kitchen with white cabinets and a stainless range — not a real Board job photo",
             "A galley kitchen to walk in the model",
             "../kitchen.html",
             "Kitchen remodelers directory",
         ),
         (
             "assets/images/posts/2026-08-25-lfp-bath-3.webp",
-            "Illustrative bathroom with a double vanity, glass shower, and freestanding tub — not a real Board job photo",
+            "Bathroom with a double vanity, glass shower, and freestanding tub — not a real Board job photo",
             "Check clearances around a bath",
             "../bathrooms.html",
             "Bathroom remodelers directory",
         ),
         (
             "assets/images/posts/2026-09-28-second-story-addition-woodinville-2.webp",
-            "Illustrative second-story addition with dark horizontal siding and a gable roof — not a real Board job photo",
+            "Second-story addition with dark horizontal siding and a gable roof — not a real Board job photo",
             "See where a new storey meets the roof",
             "../additions.html",
             "Home additions directory",
@@ -10368,7 +10385,7 @@ def build_plan_walkthrough_page() -> str:
         ],
         canonical=page_url,
         og_image="assets/images/tools/plan-walkthrough/plan-walkthrough-og.webp",
-        og_image_alt="Illustrative two-storey floor plan for the free Plan to 3D Walkthrough, not a construction drawing",
+        og_image_alt="Two-storey floor plan for the free Plan to 3D Walkthrough, not a construction drawing",
         include_widgets=False,
         include_tools_embed=False,
         extra_head='  <link rel="stylesheet" href="/assets/css/plan-walkthrough.css">\n',
@@ -10594,21 +10611,21 @@ def build_pascal_editor_page() -> str:
     [
         (
             "assets/images/posts/2026-08-21-kitchen-queen-anne-4.webp",
-            "Illustrative kitchen with white shaker cabinets, a marble island, and a gold faucet — not a real Board job photo",
+            "Kitchen with white shaker cabinets, a marble island, and a gold faucet — not a real Board job photo",
             "Draw the kitchen before the meeting",
             "./kitchen.html",
             "Kitchen remodelers directory",
         ),
         (
             "assets/images/posts/2026-08-18-pnw-bathroom-waterproofing-4.webp",
-            "Illustrative primary bathroom with a freestanding tub and a glass shower — not a real Board job photo",
+            "Primary bathroom with a freestanding tub and a glass shower — not a real Board job photo",
             "A primary bath to name in the sketch",
             "./bathrooms.html",
             "Bathroom remodelers directory",
         ),
         (
             "assets/images/posts/2026-08-15-primary-suite-addition-edmonds-2.webp",
-            "Illustrative second-story addition with a gable roof and new windows — not a real Board job photo",
+            "Second-story addition with a gable roof and new windows — not a real Board job photo",
             "A second storey changes the roof",
             "./additions.html",
             "Home additions directory",
@@ -10772,21 +10789,21 @@ def build_site_visit_page() -> str:
     [
         (
             "assets/images/tools/build-walkthrough/01-sales-discovery.webp",
-            "Illustrative discovery conversation before drawings or pricing — not a real Board job photo",
+            "Discovery conversation before drawings or pricing — not a real Board job photo",
             "What to ask on the first visit",
             "./good-steward.html",
             "Good Steward",
         ),
         (
             "assets/images/tools/build-walkthrough/04-site-foundation.webp",
-            "Illustrative residential site and foundation conditions to note on a visit — not a real Board job photo",
+            "Residential site and foundation conditions to note on a visit — not a real Board job photo",
             "Site conditions come before pricing",
             "./home-addition-planning.html",
             "Home addition planning",
         ),
         (
             "assets/images/posts/2026-08-09-second-story-teardown-edmonds-2.webp",
-            "Illustrative Pacific Northwest house exterior before a site visit — not a real Board job photo",
+            "Pacific Northwest house exterior before a site visit — not a real Board job photo",
             "Photograph the existing house",
             "./verify-contractor.html",
             "Verify a contractor",
@@ -10835,21 +10852,21 @@ def build_pm_dashboard_page() -> str:
     [
         (
             "assets/images/tools/build-walkthrough/09-drywall-paint.webp",
-            "Illustrative drywall and paint stage of a residential build — not a real Board job photo",
+            "Drywall and paint stage of a residential build — not a real Board job photo",
             "Track the phase you are in",
             "./project-timeline.html",
             "Project timeline",
         ),
         (
             "assets/images/tools/build-walkthrough/11-punch-closeout.webp",
-            "Illustrative punch-list walkthrough before closeout — not a real Board job photo",
+            "Punch-list walkthrough before closeout — not a real Board job photo",
             "Punch items before final pay",
             "./final-walkthrough.html",
             "Final walkthrough",
         ),
         (
             "assets/images/tools/build-walkthrough/12-warranty-handoff.webp",
-            "Illustrative warranty and handoff documents at project close — not a real Board job photo",
+            "Warranty and handoff documents at project close — not a real Board job photo",
             "Keep the closeout file",
             "./build-walkthrough.html",
             "Build Walkthrough",
@@ -11214,17 +11231,17 @@ def build_permits_page() -> str:
             [
                 (
                     "assets/images/posts/2026-08-12-edmonds-addition-permit-4.webp",
-                    "Illustrative Edmonds-area addition permit planning context",
+                    "Edmonds-area addition permit planning context",
                     "Addition permit context",
                 ),
                 (
                     "assets/images/posts/2026-08-12-edmonds-addition-permit-5.webp",
-                    "Illustrative residential permit document and plan review materials",
+                    "Residential permit document and plan review materials",
                     "Plan review readiness",
                 ),
                 (
                     "assets/images/posts/2026-09-06-seattle-bath-permits-1.webp",
-                    "Illustrative Seattle bathroom remodel permit orientation",
+                    "Seattle bathroom remodel permit orientation",
                     "City vs county AHJ",
                 ),
             ],
@@ -11307,21 +11324,21 @@ def build_adu_page() -> str:
             [
                 (
                     "assets/images/posts/2026-09-07-edmonds-adu-1.webp",
-                    "Illustrative Edmonds-area ADU planning context",
+                    "Edmonds-area ADU planning context",
                     "ADU planning context (illustrative)",
                     "./posts/2026-09-07-adu-planning-edmonds-wa.html",
                     "ADU planning Edmonds",
                 ),
                 (
                     "assets/images/posts/2026-09-07-edmonds-adu-2.webp",
-                    "Illustrative Edmonds-area ADU site and yard context",
+                    "Edmonds-area ADU site and yard context",
                     "Lot and yard context (illustrative)",
                     "./adu-checklist.html",
                     "ADU readiness checklist",
                 ),
                 (
                     "assets/images/posts/2026-09-07-edmonds-adu-3.webp",
-                    "Illustrative Edmonds-area accessory dwelling exterior context",
+                    "Edmonds-area accessory dwelling exterior context",
                     "Accessory dwelling context (illustrative)",
                     "./edmonds-custom-homes.html",
                     "Edmonds custom homes directory",
@@ -11419,17 +11436,17 @@ def build_how_we_rank_page() -> str:
             [
                 (
                     "assets/images/hubs/hub-rank-1.webp",
-                    "Illustrative contractor ranking scorecard staging — free generative image, not a real Board job photo",
+                    "Contractor ranking scorecard staging — free generative image, not a real Board job photo",
                     "Editorial scorecard habit",
                 ),
                 (
                     "assets/images/hubs/hub-rank-2.webp",
-                    "Illustrative sealed-bid comparison staging — free generative image, not a real Board job photo",
+                    "Sealed-bid comparison staging — free generative image, not a real Board job photo",
                     "Compare written proposals",
                 ),
                 (
                     "assets/images/hubs/hub-rank-3.webp",
-                    "Illustrative framed-house walk-through notebook staging — free generative image, not a real Board job photo",
+                    "Framed-house walk-through notebook staging — free generative image, not a real Board job photo",
                     "Site walk notes",
                 ),
             ],
@@ -11540,17 +11557,17 @@ def build_verify_contractor_page() -> str:
             [
                 (
                     "assets/images/home-process-verify.webp",
-                    "Illustrative WA contractor verification workflow for homeowners",
+                    "WA contractor verification workflow for homeowners",
                     "Open official L&I Verify",
                 ),
                 (
                     "assets/images/posts/2026-08-11-hire-design-build-5.webp",
-                    "Illustrative contract legal-name match before remodel deposit",
+                    "Contract legal-name match before remodel deposit",
                     "Match legal name on contract",
                 ),
                 (
                     "assets/images/posts/2026-08-12-hire-kitchen-1.webp",
-                    "Illustrative kitchen remodel bidder diligence in King & Snohomish",
+                    "Kitchen remodel bidder diligence in King & Snohomish",
                     "Save proof before deposit",
                 ),
             ],
@@ -12217,7 +12234,7 @@ def place_seo_media_html(slug: str, place: str) -> str:
     items: list[tuple] = []
     for ph in photos:
         rel = ph.get("rel") or ""
-        alt = ph.get("alt") or f"Illustrative remodel context for {place}"
+        alt = ph.get("alt") or f"Remodel context for {place}"
         caption = ph.get("caption") or f"{place} (illustrative)"
         if not rel:
             continue
@@ -12247,7 +12264,7 @@ def locations_hub_media_html() -> str:
     items: list[tuple] = []
     for ph in photos:
         rel = ph.get("rel") or ""
-        alt = ph.get("alt") or "Illustrative Locations hub remodel context"
+        alt = ph.get("alt") or "Locations hub remodel context"
         caption = ph.get("caption") or "Locations (illustrative)"
         if not rel:
             continue
@@ -12745,17 +12762,17 @@ def build_shoreline_hub() -> str:
         photo_strip=[
             (
                 "assets/images/posts/2026-09-12-shoreline-kitchen-1.webp",
-                "Illustrative Shoreline kitchen remodel context — not a real Board job photo",
+                "Shoreline kitchen remodel context — not a real Board job photo",
                 "Kitchen scopes",
             ),
             (
                 "assets/images/posts/2026-09-11-shoreline-bath-1.webp",
-                "Illustrative Shoreline bath remodel context — not a real Board job photo",
+                "Shoreline bath remodel context — not a real Board job photo",
                 "Bath scopes",
             ),
             (
                 "assets/images/posts/2026-10-06-shoreline-window-4.webp",
-                "Illustrative: flashing membrane on a Shoreline window rough opening under an overcast sky — not a real Board job photo",
+                "Flashing membrane on a Shoreline window rough opening under an overcast sky — not a real Board job photo",
                 "Window flashing",
                 "./posts/2026-10-06-window-replacement-shoreline-wa.html",
                 "Shoreline window replacement",
@@ -12790,21 +12807,21 @@ def build_lynnwood_hub() -> str:
         photo_strip=[
             (
                 "assets/images/posts/2026-09-09-lynnwood-kitchen-1.webp",
-                "Illustrative Lynnwood kitchen remodel context — not a real Board job photo",
+                "Lynnwood kitchen remodel context — not a real Board job photo",
                 "Kitchen scopes",
                 "./kitchen.html",
                 "Kitchen remodelers directory",
             ),
             (
                 "assets/images/posts/2026-09-08-lynnwood-bath-1.webp",
-                "Illustrative Lynnwood bath remodel context — not a real Board job photo",
+                "Lynnwood bath remodel context — not a real Board job photo",
                 "Bath scopes",
                 "./bathrooms.html",
                 "Bathroom remodelers directory",
             ),
             (
                 "assets/images/posts/2026-10-02-lynnwood-window-2.webp",
-                "Illustrative image of white-trimmed windows on light siding under an overcast sky — not a real Board job photo",
+                "Image of white-trimmed windows on light siding under an overcast sky — not a real Board job photo",
                 "Window elevation",
                 "./windows.html",
                 "Windows directory",
@@ -12840,21 +12857,21 @@ def build_ballard_hub() -> str:
         photo_strip=[
             (
                 "assets/images/posts/2026-09-04-kitchen-ballard-1.webp",
-                "Illustrative Ballard kitchen remodel context — not a real Board job photo",
+                "Ballard kitchen remodel context — not a real Board job photo",
                 "Kitchen scopes",
                 "./kitchen.html",
                 "Kitchen remodelers directory",
             ),
             (
                 "assets/images/posts/2026-09-03-ballard-bath-1.webp",
-                "Illustrative Ballard bath remodel context — not a real Board job photo",
+                "Ballard bath remodel context — not a real Board job photo",
                 "Bath scopes",
                 "./bathrooms.html",
                 "Bathroom remodelers directory",
             ),
             (
                 "assets/images/posts/2026-10-05-ballard-roof-2.webp",
-                "Illustrative image of synthetic roof underlayment and a metal drip edge at the eave — not a real Board job photo",
+                "Image of synthetic roof underlayment and a metal drip edge at the eave — not a real Board job photo",
                 "Underlayment and drip edge",
                 "./roofing.html",
                 "Roofing directory",
@@ -12891,21 +12908,21 @@ def build_magnolia_hub() -> str:
         photo_strip=[
             (
                 "assets/images/posts/2026-09-17-magnolia-bathroom-1.webp",
-                "Illustrative Magnolia bath remodel context — not a real Board job photo",
+                "Magnolia bath remodel context — not a real Board job photo",
                 "Bath scopes",
                 "./bathrooms.html",
                 "Bathroom remodelers directory",
             ),
             (
                 "assets/images/posts/2026-09-16-magnolia-kitchen-1.webp",
-                "Illustrative Magnolia kitchen remodel context — not a real Board job photo",
+                "Magnolia kitchen remodel context — not a real Board job photo",
                 "Kitchen scopes",
                 "./kitchen.html",
                 "Kitchen remodelers directory",
             ),
             (
                 "assets/images/posts/2026-09-16-magnolia-kitchen-2.webp",
-                "Illustrative image of a kitchen with white cabinets, wood floors, and a pendant light — not a real Board job photo",
+                "Image of a kitchen with white cabinets, wood floors, and a pendant light — not a real Board job photo",
                 "Kitchen finishes",
                 "./kitchen.html",
                 "Kitchen remodelers directory",
@@ -12938,17 +12955,17 @@ def build_adu_checklist_page() -> str:
             [
                 (
                     "assets/images/posts/2026-09-07-edmonds-adu-1.webp",
-                    "Illustrative ADU / small-dwelling planning context — not a real Board job photo",
+                    "ADU / small-dwelling planning context — not a real Board job photo",
                     "Parcel & program fit",
                 ),
                 (
                     "assets/images/posts/2026-08-12-edmonds-addition-permit-3.webp",
-                    "Illustrative permit plan set review for small dwellings — not a real Board job photo",
+                    "Permit plan set review for small dwellings — not a real Board job photo",
                     "Portal readiness",
                 ),
                 (
                     "assets/images/home-process-research.webp",
-                    "Illustrative Board research desk for ADU standards — not a real Board job photo",
+                    "Board research desk for ADU standards — not a real Board job photo",
                     "Standards before stock plans",
                 ),
             ],
@@ -13013,17 +13030,17 @@ def build_change_orders_page() -> str:
             [
                 (
                     "assets/images/posts/2026-08-11-hire-design-build-3.webp",
-                    "Illustrative written scope and selection review — not a real Board job photo",
+                    "Written scope and selection review — not a real Board job photo",
                     "Freeze scope before long-leads",
                 ),
                 (
                     "assets/images/home-process-verify.webp",
-                    "Illustrative verification habit before approving extras — not a real Board job photo",
+                    "Verification habit before approving extras — not a real Board job photo",
                     "Price & schedule in writing",
                 ),
                 (
                     "assets/images/posts/2026-08-12-hire-kitchen-2.webp",
-                    "Illustrative kitchen remodel selection boards — not a real Board job photo",
+                    "Kitchen remodel selection boards — not a real Board job photo",
                     "Allowances need rules",
                 ),
             ],
@@ -13077,17 +13094,17 @@ def build_coastal_waterproofing_page() -> str:
             [
                 (
                     "assets/images/home-gallery-dryin.webp",
-                    "Illustrative weather-resistive dry-in on a Pacific Northwest home — not a real Board job photo",
+                    "Weather-resistive dry-in on a Pacific Northwest home — not a real Board job photo",
                     "Dry-in before finishes",
                 ),
                 (
                     "assets/images/posts/2026-08-08-weatherproof-first-2.webp",
-                    "Illustrative coastal weatherproofing assembly — not a real Board job photo",
+                    "Coastal weatherproofing assembly — not a real Board job photo",
                     "WRB & flashing first",
                 ),
                 (
                     "assets/images/posts/2026-09-22-edmonds-siding-1.webp",
-                    "Illustrative fiber-cement cladding context for coastal Edmonds — not a real Board job photo",
+                    "Fiber-cement cladding context for coastal Edmonds — not a real Board job photo",
                     "Cladding after WRB",
                 ),
             ],
@@ -13202,17 +13219,17 @@ def build_hire_questions_page() -> str:
             [
                 (
                     "assets/images/posts/2026-08-11-hire-design-build-4.webp",
-                    "Illustrative hire interview over plans — not a real Board job photo",
+                    "Hire interview over plans — not a real Board job photo",
                     "Same questions every firm",
                 ),
                 (
                     "assets/images/home-process-verify.webp",
-                    "Illustrative L&I verification before deposit — not a real Board job photo",
+                    "L&I verification before deposit — not a real Board job photo",
                     "License before handshake",
                 ),
                 (
                     "assets/images/home-process-shortlist.webp",
-                    "Illustrative shortlist comparison — not a real Board job photo",
+                    "Shortlist comparison — not a real Board job photo",
                     "Compare written scopes",
                 ),
             ],
@@ -13276,17 +13293,17 @@ def build_about_page() -> str:
             [
                 (
                     "assets/images/home-process-research.webp",
-                    "Illustrative Board research and standards desk — not a real Board job photo",
+                    "Board research and standards desk — not a real Board job photo",
                     "Editorial research",
                 ),
                 (
                     "assets/images/home-process-verify.webp",
-                    "Illustrative verification habit for Board directories — not a real Board job photo",
+                    "Verification habit for Board directories — not a real Board job photo",
                     "Verify before hire",
                 ),
                 (
                     "assets/images/posts/2026-08-11-hire-design-build-5.webp",
-                    "Illustrative design-build hire planning context — not a real Board job photo",
+                    "Design-build hire planning context — not a real Board job photo",
                     "Shortlist with clear scope",
                 ),
             ],
@@ -13421,17 +13438,17 @@ def build_faq_page() -> str:
             [
                 (
                     "assets/images/home-process-shortlist.webp",
-                    "Illustrative homeowner shortlist review — not a real Board job photo",
+                    "Homeowner shortlist review — not a real Board job photo",
                     "Start with a shortlist",
                 ),
                 (
                     "assets/images/home-process-verify.webp",
-                    "Illustrative WA L&I verification workflow — not a real Board job photo",
+                    "WA L&I verification workflow — not a real Board job photo",
                     "Re-verify at L&I",
                 ),
                 (
                     "assets/images/posts/2026-08-12-edmonds-addition-permit-5.webp",
-                    "Illustrative permit plan-review materials — not a real Board job photo",
+                    "Permit plan-review materials — not a real Board job photo",
                     "Confirm the AHJ path",
                 ),
             ],
@@ -13489,21 +13506,21 @@ def build_materials_index_page() -> str:
             [
                 (
                     "assets/images/posts/2026-09-22-edmonds-siding-1.webp",
-                    "Illustrative Edmonds-area siding and cladding context",
+                    "Edmonds-area siding and cladding context",
                     "Cladding context (illustrative)",
                     "./posts/2026-09-22-siding-replacement-edmonds-coastal-wa.html",
                     "Edmonds coastal siding notes",
                 ),
                 (
                     "assets/images/posts/2026-09-20-edmonds-windows-1.webp",
-                    "Illustrative Edmonds-area window and flashing context",
+                    "Edmonds-area window and flashing context",
                     "Window assembly context (illustrative)",
                     "./posts/2026-09-20-window-replacement-edmonds-coastal-wa.html",
                     "Edmonds coastal window notes",
                 ),
                 (
                     "assets/images/tools/build-walkthrough/08-insulation-wrb.webp",
-                    "Illustrative weather-resistive barrier and insulation context",
+                    "Weather-resistive barrier and insulation context",
                     "WRB and dry-in context (illustrative)",
                     "./coastal-waterproofing.html",
                     "Coastal waterproofing",
@@ -13601,21 +13618,21 @@ def build_contact_page() -> str:
             [
                 (
                     "assets/images/hubs/hub-directory-1.webp",
-                    "Illustrative contractor directory files on an editorial desk — not a real Board job photo",
+                    "Contractor directory files on an editorial desk — not a real Board job photo",
                     "Directory corrections start with the page",
                     "./directory.html",
                     "Directories",
                 ),
                 (
                     "assets/images/hubs/hub-rank-1.webp",
-                    "Illustrative ranking scorecard used when reviewing a directory note — not a real Board job photo",
+                    "Ranking scorecard used when reviewing a directory note — not a real Board job photo",
                     "Rankings follow published pillars",
                     "./how-we-rank.html",
                     "How we rank",
                 ),
                 (
                     "assets/images/posts/2026-08-11-hire-design-build-edmonds-4.webp",
-                    "Illustrative hire interview notes before a homeowner contacts a firm — not a real Board job photo",
+                    "Hire interview notes before a homeowner contacts a firm — not a real Board job photo",
                     "Hiring questions stay with the firm",
                     "./hiring-a-contractor.html",
                     "Hiring a contractor",
@@ -13706,17 +13723,17 @@ def build_glossary_page() -> str:
             [
                 (
                     "assets/images/home-process-research.webp",
-                    "Illustrative standards research desk — not a real Board job photo",
+                    "Standards research desk — not a real Board job photo",
                     "Shared vocabulary",
                 ),
                 (
                     "assets/images/home-process-verify.webp",
-                    "Illustrative verification language in practice — not a real Board job photo",
+                    "Verification language in practice — not a real Board job photo",
                     "Public records terms",
                 ),
                 (
                     "assets/images/home-gallery-dryin.webp",
-                    "Illustrative building-assembly context — not a real Board job photo",
+                    "Building-assembly context — not a real Board job photo",
                     "Assembly terms",
                 ),
             ],
@@ -13750,21 +13767,21 @@ def build_videos_page() -> str:
             [
                 (
                     "assets/images/posts/2026-09-07-adu-edmonds-2.webp",
-                    "Illustrative Edmonds-area ADU framing context",
+                    "Edmonds-area ADU framing context",
                     "ADU framing clip context (illustrative)",
                     "./posts/2026-09-07-adu-planning-edmonds-wa.html",
                     "ADU planning Edmonds",
                 ),
                 (
                     "assets/images/posts/2026-08-12-edmonds-addition-permit-1.webp",
-                    "Illustrative Edmonds home addition permit context",
+                    "Edmonds home addition permit context",
                     "Addition permit clip context (illustrative)",
                     "./posts/2026-08-12-edmonds-home-addition-permit-basics.html",
                     "Edmonds addition permit basics",
                 ),
                 (
                     "assets/images/tools/build-walkthrough/05-framing.webp",
-                    "Illustrative residential framing stage context",
+                    "Residential framing stage context",
                     "Build walkthrough stage (illustrative)",
                     "./build-walkthrough.html",
                     "Build Walkthrough",
@@ -13834,17 +13851,17 @@ def build_second_story_vs_teardown_page() -> str:
             [
                 (
                     "assets/images/posts/2026-08-09-second-story-teardown-1.webp",
-                    "Illustrative second-story vs teardown comparison context — not a real Board job photo",
+                    "Second-story vs teardown comparison context — not a real Board job photo",
                     "Compare paths honestly",
                 ),
                 (
                     "assets/images/posts/2026-08-09-second-story-teardown-2.webp",
-                    "Illustrative structural addition framing — not a real Board job photo",
+                    "Structural addition framing — not a real Board job photo",
                     "Structure drives path",
                 ),
                 (
                     "assets/images/posts/2026-08-09-second-story-teardown-3.webp",
-                    "Illustrative finished vertical addition massing — not a real Board job photo",
+                    "Finished vertical addition massing — not a real Board job photo",
                     "No invented cost deltas",
                 ),
             ],
@@ -13962,17 +13979,17 @@ def build_kitchen_remodel_planning_page() -> str:
             [
                 (
                     "assets/images/posts/2026-09-18-mill-creek-kitchen-1.webp",
-                    "Illustrative Mill Creek kitchen remodel layout planning context",
+                    "Mill Creek kitchen remodel layout planning context",
                     "Layout before long-lead cabinets",
                 ),
                 (
                     "assets/images/posts/2026-09-18-mill-creek-kitchen-2.webp",
-                    "Illustrative kitchen rough-in and allowance coordination",
+                    "Kitchen rough-in and allowance coordination",
                     "Allowances in writing",
                 ),
                 (
                     "assets/images/posts/2026-09-18-mill-creek-kitchen-3.webp",
-                    "Illustrative finished kitchen remodel craft standards for North Sound",
+                    "Finished kitchen remodel craft standards for North Sound",
                     "Compare scopes, not stickers",
                 ),
             ],
@@ -14077,17 +14094,17 @@ def build_bathroom_waterproofing_guide_page() -> str:
             [
                 (
                     "assets/images/posts/2026-08-18-waterproofing-4.webp",
-                    "Illustrative PNW bathroom waterproofing membrane stack",
+                    "PNW bathroom waterproofing membrane stack",
                     "Wet-area membrane discipline",
                 ),
                 (
                     "assets/images/posts/2026-08-18-waterproofing-5.webp",
-                    "Illustrative shower waterproofing detailing for coastal baths",
+                    "Shower waterproofing detailing for coastal baths",
                     "Shower detailing",
                 ),
                 (
                     "assets/images/posts/2026-08-18-waterproofing-6.webp",
-                    "Illustrative finished bath waterproofing craft for King & Snohomish",
+                    "Finished bath waterproofing craft for King & Snohomish",
                     "Inspect before cover-up",
                 ),
             ],
@@ -14218,17 +14235,17 @@ def build_hiring_a_contractor_page() -> str:
             [
                 (
                     "assets/images/posts/2026-08-11-hire-design-build-4.webp",
-                    "Illustrative design-build hire conversation and plan review",
+                    "Design-build hire conversation and plan review",
                     "Interview every bidder the same way",
                 ),
                 (
                     "assets/images/home-process-verify.webp",
-                    "Illustrative contractor license verification habit before deposit",
+                    "Contractor license verification habit before deposit",
                     "L&I before any deposit",
                 ),
                 (
                     "assets/images/posts/2026-09-05-hire-bath-1.webp",
-                    "Illustrative bathroom remodel hire shortlist context for North Sound homes",
+                    "Bathroom remodel hire shortlist context for North Sound homes",
                     "Match directory to scope",
                 ),
             ],
@@ -14323,17 +14340,17 @@ def build_home_addition_planning_page() -> str:
             [
                 (
                     "assets/images/posts/2026-09-19-kirkland-addition-1.webp",
-                    "Illustrative Kirkland home addition exterior framing context",
+                    "Kirkland home addition exterior framing context",
                     "Freeze jurisdiction early",
                 ),
                 (
                     "assets/images/posts/2026-09-19-kirkland-addition-2.webp",
-                    "Illustrative home addition dry-in and weather protection",
+                    "Home addition dry-in and weather protection",
                     "Written dry-in plan",
                 ),
                 (
                     "assets/images/posts/2026-09-10-shoreline-addition-1.webp",
-                    "Illustrative Shoreline home addition planning for occupied sites",
+                    "Shoreline home addition planning for occupied sites",
                     "Occupied-site staging",
                 ),
             ],
@@ -14437,17 +14454,17 @@ def build_mukilteo_hub() -> str:
         photo_strip=[
             (
                 "assets/images/posts/2026-08-27-mukilteo-kitchen-1.webp",
-                "Illustrative Mukilteo kitchen remodel context — not a real Board job photo",
+                "Mukilteo kitchen remodel context — not a real Board job photo",
                 "Kitchen scopes",
             ),
             (
                 "assets/images/posts/2026-08-28-mukilteo-bath-1.webp",
-                "Illustrative Mukilteo bath remodel context — not a real Board job photo",
+                "Mukilteo bath remodel context — not a real Board job photo",
                 "Bath scopes",
             ),
             (
                 "assets/images/posts/2026-08-27-mukilteo-kitchen-2.webp",
-                "Illustrative Mukilteo finish discipline — not a real Board job photo",
+                "Mukilteo finish discipline — not a real Board job photo",
                 "Finish habits",
             ),
         ],
@@ -14480,17 +14497,17 @@ def build_kirkland_hub() -> str:
         photo_strip=[
             (
                 "assets/images/posts/2026-09-19-kirkland-addition-1.webp",
-                "Illustrative Kirkland home addition context — not a real Board job photo",
+                "Kirkland home addition context — not a real Board job photo",
                 "Addition planning",
             ),
             (
                 "assets/images/posts/2026-09-19-kirkland-addition-2.webp",
-                "Illustrative Kirkland addition framing and structural opening — not a real Board job photo",
+                "Kirkland addition framing and structural opening — not a real Board job photo",
                 "Framing detail",
             ),
             (
                 "assets/images/posts/2026-09-19-kirkland-addition-3.webp",
-                "Illustrative Kirkland addition with siding and roof sheathing underway — not a real Board job photo",
+                "Kirkland addition with siding and roof sheathing underway — not a real Board job photo",
                 "Siding and sheathing",
             ),
         ],
@@ -14524,17 +14541,17 @@ def build_bothell_hub() -> str:
         photo_strip=[
             (
                 "assets/images/posts/2026-09-23-bothell-bath-1.webp",
-                "Illustrative Bothell-style bath waterproofing in progress — not a real Board job photo",
+                "Bothell-style bath waterproofing in progress — not a real Board job photo",
                 "Wet-room discipline",
             ),
             (
                 "assets/images/posts/2026-09-23-bothell-bath-2.webp",
-                "Illustrative shower membrane at curb — not a real Board job photo",
+                "Shower membrane at curb — not a real Board job photo",
                 "Membrane details",
             ),
             (
                 "assets/images/posts/2026-08-20-bothell-addition-1.webp",
-                "Illustrative Bothell addition context — not a real Board job photo",
+                "Bothell addition context — not a real Board job photo",
                 "Addition & remodel hub",
             ),
         ],
@@ -14568,17 +14585,17 @@ def build_queen_anne_hub() -> str:
         photo_strip=[
             (
                 "assets/images/posts/2026-08-21-queen-anne-kitchen-1.webp",
-                "Illustrative Queen Anne kitchen remodel context — not a real Board job photo",
+                "Queen Anne kitchen remodel context — not a real Board job photo",
                 "Kitchen scopes",
             ),
             (
                 "assets/images/posts/2026-08-22-queen-anne-bath-1.webp",
-                "Illustrative Queen Anne bath remodel context — not a real Board job photo",
+                "Queen Anne bath remodel context — not a real Board job photo",
                 "Bath scopes",
             ),
             (
                 "assets/images/posts/2026-08-21-queen-anne-kitchen-2.webp",
-                "Illustrative Queen Anne finish discipline — not a real Board job photo",
+                "Queen Anne finish discipline — not a real Board job photo",
                 "Finish habits",
             ),
         ],
@@ -14611,17 +14628,17 @@ def build_phinney_ridge_hub() -> str:
         photo_strip=[
             (
                 "assets/images/posts/2026-08-13-phinney-bath-1.webp",
-                "Illustrative Phinney Ridge bath remodel context — not a real Board job photo",
+                "Phinney Ridge bath remodel context — not a real Board job photo",
                 "Bath scopes",
             ),
             (
                 "assets/images/posts/2026-08-13-phinney-bath-2.webp",
-                "Illustrative Phinney Ridge wet-room discipline — not a real Board job photo",
+                "Phinney Ridge wet-room discipline — not a real Board job photo",
                 "Waterproofing",
             ),
             (
                 "assets/images/posts/2026-08-13-phinney-bath-3.webp",
-                "Illustrative Phinney Ridge finish context — not a real Board job photo",
+                "Phinney Ridge finish context — not a real Board job photo",
                 "Finish habits",
             ),
         ],
@@ -14759,21 +14776,21 @@ def build_learn_page() -> str:
             [
                 (
                     "assets/images/posts/2026-09-18-mill-creek-kitchen-2.webp",
-                    "Illustrative image of a bright kitchen with white cabinets, a wood island, and a garden window — not a real Board job photo",
+                    "Image of a bright kitchen with white cabinets, a wood island, and a garden window — not a real Board job photo",
                     "Kitchen layout",
                     "./kitchen.html",
                     "Kitchen remodelers directory",
                 ),
                 (
                     "assets/images/posts/2026-09-27-mill-creek-bath-3.webp",
-                    "Illustrative image of a bathroom vanity, wood floor, and window — not a real Board job photo",
+                    "Image of a bathroom vanity, wood floor, and window — not a real Board job photo",
                     "Bath finish layout",
                     "./bathrooms.html",
                     "Bathroom remodelers directory",
                 ),
                 (
                     "assets/images/posts/2026-09-28-home-addition-mukilteo-3.webp",
-                    "Illustrative image of a bright interior hallway with wood floors and tall windows — not a real Board job photo",
+                    "Image of a bright interior hallway with wood floors and tall windows — not a real Board job photo",
                     "Interior daylight",
                     "./additions.html",
                     "Home additions directory",
@@ -14836,17 +14853,17 @@ def build_greenwood_hub() -> str:
         photo_strip=[
             (
                 "assets/images/posts/2026-08-14-greenwood-kitchen-1.webp",
-                "Illustrative Greenwood kitchen remodel context — not a real Board job photo",
+                "Greenwood kitchen remodel context — not a real Board job photo",
                 "Kitchen scopes",
             ),
             (
                 "assets/images/posts/2026-08-14-greenwood-kitchen-2.webp",
-                "Illustrative Greenwood layout planning — not a real Board job photo",
+                "Greenwood layout planning — not a real Board job photo",
                 "Layout habits",
             ),
             (
                 "assets/images/posts/2026-08-14-greenwood-kitchen-3.webp",
-                "Illustrative Greenwood finish discipline — not a real Board job photo",
+                "Greenwood finish discipline — not a real Board job photo",
                 "Finish habits",
             ),
         ],
@@ -14881,17 +14898,17 @@ def build_lake_forest_park_hub() -> str:
         photo_strip=[
             (
                 "assets/images/posts/2026-08-25-lfp-bath-1.webp",
-                "Illustrative Lake Forest Park bath remodel context — not a real Board job photo",
+                "Lake Forest Park bath remodel context — not a real Board job photo",
                 "Bath scopes",
             ),
             (
                 "assets/images/posts/2026-08-26-lfp-addition-1.webp",
-                "Illustrative Lake Forest Park addition context — not a real Board job photo",
+                "Lake Forest Park addition context — not a real Board job photo",
                 "Addition scopes",
             ),
             (
                 "assets/images/posts/2026-08-25-lfp-bath-2.webp",
-                "Illustrative Lake Forest Park wet-room discipline — not a real Board job photo",
+                "Lake Forest Park wet-room discipline — not a real Board job photo",
                 "Waterproofing",
             ),
         ],
@@ -14924,17 +14941,17 @@ def build_mountlake_terrace_hub() -> str:
         photo_strip=[
             (
                 "assets/images/posts/2026-08-23-mlt-kitchen-1.webp",
-                "Illustrative Mountlake Terrace kitchen remodel context — not a real Board job photo",
+                "Mountlake Terrace kitchen remodel context — not a real Board job photo",
                 "Kitchen scopes",
             ),
             (
                 "assets/images/posts/2026-08-23-mlt-kitchen-2.webp",
-                "Illustrative Mountlake Terrace layout planning — not a real Board job photo",
+                "Mountlake Terrace layout planning — not a real Board job photo",
                 "Layout habits",
             ),
             (
                 "assets/images/posts/2026-08-23-mlt-kitchen-3.webp",
-                "Illustrative Mountlake Terrace finish discipline — not a real Board job photo",
+                "Mountlake Terrace finish discipline — not a real Board job photo",
                 "Finish habits",
             ),
         ],
@@ -14968,17 +14985,17 @@ def build_mill_creek_hub() -> str:
         photo_strip=[
             (
                 "assets/images/posts/2026-09-18-mill-creek-kitchen-1.webp",
-                "Illustrative Mill Creek kitchen remodel context — not a real Board job photo",
+                "Mill Creek kitchen remodel context — not a real Board job photo",
                 "Kitchen scopes",
             ),
             (
                 "assets/images/posts/2026-10-04-mill-creek-window-2.webp",
-                "Illustrative Mill Creek window opening and trim coordination — not a real Board job photo",
+                "Mill Creek window opening and trim coordination — not a real Board job photo",
                 "Window sequencing",
             ),
             (
                 "assets/images/posts/2026-09-27-mill-creek-bath-2.webp",
-                "Illustrative Mill Creek shower waterproofing — not a real Board job photo",
+                "Mill Creek shower waterproofing — not a real Board job photo",
                 "Bath wet wall",
             ),
         ],
@@ -15023,17 +15040,17 @@ def build_edmonds_hub() -> str:
         photo_strip=[
             (
                 "assets/images/hubs/hub-edmonds-1.webp",
-                "Illustrative Edmonds coastal craftsman with fiber-cement siding — free generative image, not a real Board job photo",
+                "Edmonds coastal craftsman with fiber-cement siding — free generative image, not a real Board job photo",
                 "Coastal cladding curb appeal",
             ),
             (
                 "assets/images/hubs/hub-edmonds-2.webp",
-                "Illustrative weather-resistive barrier and window flashing detail — free generative image, not a real Board job photo",
+                "Weather-resistive barrier and window flashing detail — free generative image, not a real Board job photo",
                 "WRB & flashing detail",
             ),
             (
                 "assets/images/hubs/hub-edmonds-3.webp",
-                "Illustrative Edmonds / Puget Sound waterfront context — free generative image, not a real Board job photo",
+                "Edmonds / Puget Sound waterfront context — free generative image, not a real Board job photo",
                 "Sound-side climate context",
             ),
         ],
@@ -15070,17 +15087,17 @@ def build_bid_comparison_page() -> str:
             [
                 (
                     "assets/images/home-process-shortlist.webp",
-                    "Illustrative homeowner bid shortlist review — not a real Board job photo",
+                    "Homeowner bid shortlist review — not a real Board job photo",
                     "Normalize the apples",
                 ),
                 (
                     "assets/images/posts/2026-08-11-hire-design-build-2.webp",
-                    "Illustrative design-build proposal review — not a real Board job photo",
+                    "Design-build proposal review — not a real Board job photo",
                     "Permit ownership lines",
                 ),
                 (
                     "assets/images/posts/2026-08-12-hire-kitchen-1.webp",
-                    "Illustrative kitchen remodel bid context — not a real Board job photo",
+                    "Kitchen remodel bid context — not a real Board job photo",
                     "Allowances & exclusions",
                 ),
             ],
@@ -15146,17 +15163,17 @@ def build_red_flags_hiring_page() -> str:
             [
                 (
                     "assets/images/home-process-verify.webp",
-                    "Illustrative license verification habit — not a real Board job photo",
+                    "License verification habit — not a real Board job photo",
                     "No deposit before L&I",
                 ),
                 (
                     "assets/images/posts/2026-08-11-hire-design-build-4.webp",
-                    "Illustrative careful hire interview — not a real Board job photo",
+                    "Careful hire interview — not a real Board job photo",
                     "Pushy urgency is a flag",
                 ),
                 (
                     "assets/images/home-process-shortlist.webp",
-                    "Illustrative comparing multiple bids — not a real Board job photo",
+                    "Comparing multiple bids — not a real Board job photo",
                     "Too-good bids need scrutiny",
                 ),
             ],
@@ -15240,17 +15257,17 @@ def build_project_timeline_page() -> str:
             [
                 (
                     "assets/images/home-process-build.webp",
-                    "Illustrative build-phase sequencing — not a real Board job photo",
+                    "Build-phase sequencing — not a real Board job photo",
                     "Rough-in before cover",
                 ),
                 (
                     "assets/images/home-gallery-dryin.webp",
-                    "Illustrative dry-in milestone — not a real Board job photo",
+                    "Dry-in milestone — not a real Board job photo",
                     "Weather holds matter",
                 ),
                 (
                     "assets/images/home-gallery-finish.webp",
-                    "Illustrative finish-phase sequencing — not a real Board job photo",
+                    "Finish-phase sequencing — not a real Board job photo",
                     "Finishes after inspections",
                 ),
             ],
@@ -15344,21 +15361,21 @@ def build_seattle_hub() -> str:
         photo_strip=[
             (
                 "assets/images/posts/2026-09-06-seattle-bath-permits-1.webp",
-                "Illustrative Seattle bath permit context — not a real Board job photo",
+                "Seattle bath permit context — not a real Board job photo",
                 "SDCI path differs",
                 "./permits.html",
                 "Permit jurisdiction hub",
             ),
             (
                 "assets/images/posts/2026-08-21-queen-anne-kitchen-2.webp",
-                "Illustrative image of a Queen Anne kitchen with white cabinets and a wood island — not a real Board job photo",
+                "Image of a Queen Anne kitchen with white cabinets and a wood island — not a real Board job photo",
                 "Kitchen layout",
                 "./kitchen.html",
                 "Kitchen remodelers directory",
             ),
             (
                 "assets/images/posts/2026-09-03-ballard-bath-2.webp",
-                "Illustrative image of a bathroom vanity with black fixtures and a wood floor — not a real Board job photo",
+                "Image of a bathroom vanity with black fixtures and a wood floor — not a real Board job photo",
                 "Bath finish",
                 "./bathrooms.html",
                 "Bathroom remodelers directory",
@@ -15408,21 +15425,21 @@ def build_snohomish_county_hub() -> str:
         photo_strip=[
             (
                 "assets/images/hubs/hub-edmonds-1.webp",
-                "Illustrative Snohomish coastal craftsman context — not a real Board job photo",
+                "Snohomish coastal craftsman context — not a real Board job photo",
                 "Coastal stock",
                 "./locations.html",
                 "Locations hub",
             ),
             (
                 "assets/images/posts/2026-09-18-mill-creek-kitchen-1.webp",
-                "Illustrative image of a white kitchen with an island and wood floors — not a real Board job photo",
+                "Image of a white kitchen with an island and wood floors — not a real Board job photo",
                 "Kitchen scopes",
                 "./kitchen.html",
                 "Kitchen remodelers directory",
             ),
             (
                 "assets/images/posts/2026-09-08-lynnwood-bath-2.webp",
-                "Illustrative image of a tiled walk-in shower with a niche and glass panel — not a real Board job photo",
+                "Image of a tiled walk-in shower with a niche and glass panel — not a real Board job photo",
                 "Shower waterproofing",
                 "./bathrooms.html",
                 "Bathroom remodelers directory",
@@ -15471,17 +15488,17 @@ def build_king_county_hub() -> str:
         photo_strip=[
             (
                 "assets/images/posts/2026-09-26-kenmore-kitchen-2.webp",
-                "Illustrative Kenmore kitchen rough-in with open studs — not a real Board job photo",
+                "Kenmore kitchen rough-in with open studs — not a real Board job photo",
                 "Kitchen rough-in",
             ),
             (
                 "assets/images/posts/2026-09-30-lfp-bath-2.webp",
-                "Illustrative Lake Forest Park shower waterproofing — not a real Board job photo",
+                "Lake Forest Park shower waterproofing — not a real Board job photo",
                 "Bath wet wall",
             ),
             (
                 "assets/images/posts/2026-09-10-home-addition-shoreline-3.webp",
-                "Illustrative Shoreline addition weather barrier — not a real Board job photo",
+                "Shoreline addition weather barrier — not a real Board job photo",
                 "Addition envelope",
             ),
         ],
@@ -15518,17 +15535,17 @@ def build_final_walkthrough_page() -> str:
             [
                 (
                     "assets/images/home-gallery-finish.webp",
-                    "Illustrative punch-ready finish walkthrough — not a real Board job photo",
+                    "Punch-ready finish walkthrough — not a real Board job photo",
                     "Walk with a written list",
                 ),
                 (
                     "assets/images/posts/2026-08-11-hire-design-build-6.webp",
-                    "Illustrative finished remodel ready for handoff — not a real Board job photo",
+                    "Finished remodel ready for handoff — not a real Board job photo",
                     "Manuals & warranties",
                 ),
                 (
                     "assets/images/home-ppg-interior.webp",
-                    "Illustrative interior finish quality check — not a real Board job photo",
+                    "Interior finish quality check — not a real Board job photo",
                     "Photo the punch items",
                 ),
             ],
@@ -15619,17 +15636,17 @@ def build_bonds_and_insurance_page() -> str:
             [
                 (
                     "assets/images/home-process-verify.webp",
-                    "Illustrative verifying contractor bond and insurance — not a real Board job photo",
+                    "Verifying contractor bond and insurance — not a real Board job photo",
                     "Re-check before deposit",
                 ),
                 (
                     "assets/images/posts/2026-08-11-hire-design-build-5.webp",
-                    "Illustrative hiring paperwork context — not a real Board job photo",
+                    "Hiring paperwork context — not a real Board job photo",
                     "Ask for certificates",
                 ),
                 (
                     "assets/images/home-process-shortlist.webp",
-                    "Illustrative shortlist after public-signal checks — not a real Board job photo",
+                    "Shortlist after public-signal checks — not a real Board job photo",
                     "Public signals first",
                 ),
             ],
@@ -15719,17 +15736,17 @@ def build_design_build_vs_bid_page() -> str:
             [
                 (
                     "assets/images/posts/2026-08-11-hire-design-build-1.webp",
-                    "Illustrative design-build continuity from discovery — not a real Board job photo",
+                    "Design-build continuity from discovery — not a real Board job photo",
                     "One steward path",
                 ),
                 (
                     "assets/images/home-process-build.webp",
-                    "Illustrative build phase coordination — not a real Board job photo",
+                    "Build phase coordination — not a real Board job photo",
                     "Trade coordination",
                 ),
                 (
                     "assets/images/posts/2026-08-11-hire-design-build-6.webp",
-                    "Illustrative finished remodel after coordinated delivery — not a real Board job photo",
+                    "Finished remodel after coordinated delivery — not a real Board job photo",
                     "Punch before final pay",
                 ),
             ],
@@ -15878,17 +15895,17 @@ def build_remodel_cost_factors_page() -> str:
             [
                 (
                     "assets/images/home-process-research.webp",
-                    "Illustrative remodel planning desk — not a real Board job photo",
+                    "Remodel planning desk — not a real Board job photo",
                     "Drivers, not dollar claims",
                 ),
                 (
                     "assets/images/posts/2026-08-12-edmonds-addition-permit-1.webp",
-                    "Illustrative addition complexity context — not a real Board job photo",
+                    "Addition complexity context — not a real Board job photo",
                     "Complexity moves cost",
                 ),
                 (
                     "assets/images/home-gallery-dryin.webp",
-                    "Illustrative envelope work as a cost driver — not a real Board job photo",
+                    "Envelope work as a cost driver — not a real Board job photo",
                     "Envelope & weather",
                 ),
             ],
@@ -15988,17 +16005,17 @@ def build_kitchen_cost_factors_page() -> str:
             [
                 (
                     "assets/images/posts/2026-09-24-bothell-kitchen-2.webp",
-                    "Illustrative Bothell kitchen plumbing and electrical rough-in — not a real Board job photo",
+                    "Bothell kitchen plumbing and electrical rough-in — not a real Board job photo",
                     "Rough-in behind cabinets",
                 ),
                 (
                     "assets/images/posts/2026-08-12-hire-kitchen-2.webp",
-                    "Illustrative kitchen selection boards — not a real Board job photo",
+                    "Kitchen selection boards — not a real Board job photo",
                     "Allowances matter",
                 ),
                 (
                     "assets/images/posts/2026-08-12-hire-kitchen-3.webp",
-                    "Illustrative finished kitchen context — not a real Board job photo",
+                    "Finished kitchen context — not a real Board job photo",
                     "Finishes last",
                 ),
             ],
@@ -16078,17 +16095,17 @@ def build_bathroom_cost_factors_page() -> str:
             [
                 (
                     "assets/images/posts/2026-09-30-lfp-bath-3.webp",
-                    "Illustrative Lake Forest Park finished bath layout — not a real Board job photo",
+                    "Lake Forest Park finished bath layout — not a real Board job photo",
                     "Finish layout",
                 ),
                 (
                     "assets/images/posts/2026-09-23-bothell-bath-2.webp",
-                    "Illustrative shower waterproofing membrane — not a real Board job photo",
+                    "Shower waterproofing membrane — not a real Board job photo",
                     "Membrane & slope",
                 ),
                 (
                     "assets/images/posts/2026-09-23-bothell-bath-3.webp",
-                    "Illustrative finished primary bath — not a real Board job photo",
+                    "Finished primary bath — not a real Board job photo",
                     "Glass lead times",
                 ),
             ],
@@ -16165,17 +16182,17 @@ def build_addition_cost_factors_page() -> str:
             [
                 (
                     "assets/images/posts/2026-09-28-woodinville-second-story-2.webp",
-                    "Illustrative Woodinville second-story sheathing and dry-in — not a real Board job photo",
+                    "Woodinville second-story sheathing and dry-in — not a real Board job photo",
                     "Sheathing and dry-in",
                 ),
                 (
                     "assets/images/home-ppg-addition.webp",
-                    "Illustrative Pacific Northwest addition massing — not a real Board job photo",
+                    "Pacific Northwest addition massing — not a real Board job photo",
                     "Envelope complexity",
                 ),
                 (
                     "assets/images/posts/2026-08-12-edmonds-addition-permit-4.webp",
-                    "Illustrative addition permit context — not a real Board job photo",
+                    "Addition permit context — not a real Board job photo",
                     "AHJ path matters",
                 ),
             ],
@@ -16252,17 +16269,17 @@ def build_adu_cost_factors_page() -> str:
             [
                 (
                     "assets/images/posts/2026-09-07-edmonds-adu-2.webp",
-                    "Illustrative ADU massing concept — not a real Board job photo",
+                    "ADU massing concept — not a real Board job photo",
                     "Path & utilities",
                 ),
                 (
                     "assets/images/posts/2026-09-07-edmonds-adu-3.webp",
-                    "Illustrative small-dwelling interior — not a real Board job photo",
+                    "Small-dwelling interior — not a real Board job photo",
                     "Program density",
                 ),
                 (
                     "assets/images/home-process-research.webp",
-                    "Illustrative ADU standards research — not a real Board job photo",
+                    "ADU standards research — not a real Board job photo",
                     "No invented ROI",
                 ),
             ],
@@ -16335,17 +16352,17 @@ def build_financing_and_draws_page() -> str:
             [
                 (
                     "assets/images/home-process-verify.webp",
-                    "Illustrative draw documentation habit — not a real Board job photo",
+                    "Draw documentation habit — not a real Board job photo",
                     "Paper trail for draws",
                 ),
                 (
                     "assets/images/posts/2026-08-12-edmonds-addition-permit-2.webp",
-                    "Illustrative inspection milestone context — not a real Board job photo",
+                    "Inspection milestone context — not a real Board job photo",
                     "Tie draws to inspections",
                 ),
                 (
                     "assets/images/home-process-research.webp",
-                    "Illustrative planning desk for remodel budgets — not a real Board job photo",
+                    "Planning desk for remodel budgets — not a real Board job photo",
                     "Budget without invented ROI",
                 ),
             ],
@@ -16427,17 +16444,17 @@ def build_living_through_remodel_page() -> str:
             [
                 (
                     "assets/images/home-ppg-interior.webp",
-                    "Illustrative lived-in remodel interior protection — not a real Board job photo",
+                    "Lived-in remodel interior protection — not a real Board job photo",
                     "Protect finished rooms",
                 ),
                 (
                     "assets/images/posts/2026-09-14-stay-home-1.webp",
-                    "Illustrative stay-in-home remodel staging — not a real Board job photo",
+                    "Stay-in-home remodel staging — not a real Board job photo",
                     "Staging & dust control",
                 ),
                 (
                     "assets/images/home-process-build.webp",
-                    "Illustrative active remodel work zone — not a real Board job photo",
+                    "Active remodel work zone — not a real Board job photo",
                     "Daily work zones",
                 ),
             ],
@@ -16505,17 +16522,17 @@ def build_selecting_finishes_page() -> str:
             [
                 (
                     "assets/images/home-gallery-finish.webp",
-                    "Illustrative finish selection context — not a real Board job photo",
+                    "Finish selection context — not a real Board job photo",
                     "Lock long-leads early",
                 ),
                 (
                     "assets/images/posts/2026-08-12-hire-kitchen-2.webp",
-                    "Illustrative material boards — not a real Board job photo",
+                    "Material boards — not a real Board job photo",
                     "Samples before orders",
                 ),
                 (
                     "assets/images/home-ppg-interior.webp",
-                    "Illustrative interior finish craft — not a real Board job photo",
+                    "Interior finish craft — not a real Board job photo",
                     "Coordinate trades",
                 ),
             ],
@@ -16587,17 +16604,17 @@ def build_contractor_contract_basics_page() -> str:
             [
                 (
                     "assets/images/posts/2026-08-11-hire-design-build-3.webp",
-                    "Illustrative written contract and scope review — not a real Board job photo",
+                    "Written contract and scope review — not a real Board job photo",
                     "Scope in writing",
                 ),
                 (
                     "assets/images/home-process-verify.webp",
-                    "Illustrative license and bond check — not a real Board job photo",
+                    "License and bond check — not a real Board job photo",
                     "Match legal name to L&I",
                 ),
                 (
                     "assets/images/home-process-shortlist.webp",
-                    "Illustrative comparing contract terms — not a real Board job photo",
+                    "Comparing contract terms — not a real Board job photo",
                     "Read exclusions",
                 ),
             ],
@@ -17196,17 +17213,17 @@ def build_directory_hub() -> str:
             [
                 (
                     "assets/images/hubs/hub-directory-1.webp",
-                    "Illustrative contractor license checklist still — free generative image, not a real Board job photo",
+                    "Contractor license checklist still — free generative image, not a real Board job photo",
                     "License checklist habit",
                 ),
                 (
                     "assets/images/hubs/hub-directory-2.webp",
-                    "Illustrative homeowner comparing sealed contractor bids — free generative image, not a real Board job photo",
+                    "Homeowner comparing sealed contractor bids — free generative image, not a real Board job photo",
                     "Compare written bids",
                 ),
                 (
                     "assets/images/hubs/hub-directory-3.webp",
-                    "Illustrative WA contractor license verification staging — free generative image, not a real Board job photo",
+                    "WA contractor license verification staging — free generative image, not a real Board job photo",
                     "L&I verify before hire",
                 ),
             ],
@@ -17657,7 +17674,7 @@ def patch_tool_pages() -> None:
         (
             SITE_DIR / "tools" / "build-walkthrough" / "index.html",
             "Build Walkthrough | Board of Project Stewardship",
-            "Illustrative 17-stage house. Educational media only — not engineering documents, bids, or schedules.",
+            "17-stage house. Educational media only — not engineering documents, bids, or schedules.",
             f"{SITE_ORIGIN}/build-walkthrough.html",
         ),
         (

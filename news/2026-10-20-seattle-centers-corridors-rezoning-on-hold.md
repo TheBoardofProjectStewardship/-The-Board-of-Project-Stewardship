@@ -30,7 +30,7 @@ The hold follows a Sept. 9 decision by the Central Puget Sound Growth Management
 
 The city said the extra analysis is due in one year and that work has started. Zoning changes the City Council has already adopted stay in effect while that study is prepared. Mayor Katie Wilson supports City Attorney Erika Evans's decision to appeal the hearings-board ruling in court, the city said.
 
-![Illustrative: Seattle City Council members at a curved dais during a Centers and Corridors zoning discussion](../assets/images/news/2026-10-20-seattle-centers-corridors-1.webp)
+![Seattle City Council members at a curved dais during a Centers and Corridors zoning discussion](../assets/images/news/2026-10-20-seattle-centers-corridors-1.webp)
 
 ## What the legislation would change
 
@@ -40,7 +40,7 @@ The council started review in April and stopped that work in July because of the
 
 The Urbanist reported Oct. 12 that the package is a holdover from the Bruce Harrell administration and would create about 30 neighborhood centers, with larger apartment buildings directly on transit corridors. New zoning that depends on the environmental study cannot be approved until the hearings board signs off. The deadline for the updated analysis is Sept. 9, 2027, with a compliance hearing later that fall, The Urbanist and Planetizen reported.
 
-![Illustrative: a planner reviewing a Seattle Centers and Corridors zoning map marked on hold](../assets/images/news/2026-10-20-seattle-centers-corridors-2.webp)
+![A planner reviewing a Seattle Centers and Corridors zoning map marked on hold](../assets/images/news/2026-10-20-seattle-centers-corridors-2.webp)
 
 ## History and background
 
@@ -50,7 +50,7 @@ Michael Hubner, OPCD's long-range planning manager, told the Seattle Planning Co
 
 Hubner described the required update as a technical addition to the existing study. "I think of it as really a technical add-in to our existing EIS, rather than changing anything fundamental about how we're planning for the next 20 years," he said. He also said finishing before the September 2027 deadline is unlikely: "It's a pretty heavy lift to essentially add that information to the Comprehensive Plan EIS."
 
-![Illustrative: a Seattle City Council hearing on the Centers and Corridors rezoning, with the proposal marked on hold](../assets/images/news/2026-10-20-seattle-centers-corridors-3.webp)
+![A Seattle City Council hearing on the Centers and Corridors rezoning, with the proposal marked on hold](../assets/images/news/2026-10-20-seattle-centers-corridors-3.webp)
 
 A separate set of city-level appeals, filed by Seattle Symphony musician Jennifer Godfrey and Mount Baker lawyer John M. Cary, is still in front of the Seattle hearing examiner after the Washington Court of Appeals sent the cases back. The Urbanist reported that a hearing on the merits, if one is held, could stretch into early 2027 and could require still more environmental work. The city council this summer limited city-level appeals of area-wide rezones and comprehensive-plan amendments, on a bill from Land Use Committee chair Eddie Lin that passed 5-4. Whether that change dismisses the pending appeals is not settled, Hubner told the commission.
 
@@ -62,7 +62,7 @@ Homeowners and builders should not assume the neighborhood-center or transit-cor
 
 The city plans to release a draft of the additional environmental review in 2027 for public comment before the final analysis goes back to the hearings board. People watching a specific corridor or a proposed neighborhood center can follow that draft and the council's land-use calendar rather than a map that has not been adopted.
 
-![Illustrative: Seattle planning staff presenting a zoning map marked on hold to the City Council](../assets/images/news/2026-10-20-seattle-centers-corridors-4.webp)
+![Seattle planning staff presenting a zoning map marked on hold to the City Council](../assets/images/news/2026-10-20-seattle-centers-corridors-4.webp)
 
 Anyone hiring a contractor for an addition, a remodel or a new building should confirm the parcel's zoning with the Seattle Department of Construction and Inspections and verify the contractor's license and bond through [Washington L&I Verify](https://secure.lni.wa.gov/verify/).
 

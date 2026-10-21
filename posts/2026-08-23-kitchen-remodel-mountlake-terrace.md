@@ -14,7 +14,7 @@ slug: "kitchen-remodel-mountlake-terrace"
 
 Mountlake Terrace’s residential fabric supports practical kitchen remodels oriented around family circulation, storage, and durability.
 
-![Illustrative: Mountlake Terrace, Washington — dark green cabinets, a stone island, and north light, from the side yard](../assets/images/posts/2026-08-23-kitchen-mountlake-terrace-2.webp)
+![Mountlake Terrace, Washington — dark green cabinets, a stone island, and north light, from the side yard](../assets/images/posts/2026-08-23-kitchen-mountlake-terrace-2.webp)
 
 ## Local context
 
@@ -26,7 +26,7 @@ Confirm permit expectations with the [City of Mountlake Terrace](https://www.cit
 
 Outdoor-exhaust hoods and under-sink waterproofing remain wise in the PNW. Trade permits apply to substantive changes. Panel capacity checks precede major appliance upgrades.
 
-![Illustrative: kitchen remodel on a home in Mountlake Terrace](../assets/images/posts/2026-08-23-mlt-kitchen-2.webp)
+![Kitchen remodel on a home in Mountlake Terrace](../assets/images/posts/2026-08-23-mlt-kitchen-2.webp)
 
 ## Materials and process
 
@@ -34,11 +34,11 @@ Design for clearances, then aesthetics. Soft-close cabinets, resilient flooring 
 
 https://www.youtube.com/watch?v=jU5cLOaqfTs
 
-Illustrative process clip (shared editorial staging for remodel sequencing — not footage of a live Board of Project Stewardship job):
+Process clip (shared editorial staging for remodel sequencing — not footage of a live Board of Project Stewardship job):
 
 [Watch the short process clip](../assets/videos/posts/2026-09-shared-waterproofing.mp4)
 
-![Illustrative: kitchen remodel on a home in Mountlake Terrace](../assets/images/posts/2026-08-23-mlt-kitchen-3.webp)
+![Kitchen remodel on a home in Mountlake Terrace](../assets/images/posts/2026-08-23-mlt-kitchen-3.webp)
 
 Board rankings on [kitchen.html](../kitchen.html) place **Pacific Pro Group** at #1 for kitchens in this editorial set — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with [trades.html](../trades.html) when electrical or plumbing is in scope, and the [blog](../blog.html) for related Snohomish County kitchen posts.
 

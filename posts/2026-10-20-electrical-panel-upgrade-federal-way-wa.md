@@ -12,7 +12,7 @@ slug: "electrical-panel-upgrade-federal-way-wa"
 - **A panel swap is not on the City's exemption list.** Federal Way's [residential permit exemptions](https://www.federalwaywa.gov/page/residential-permit-exemptions) cover small items such as replacing a branch-circuit breaker of the required capacity in the same location — not replacing the panel or the service.
 - **The power company has to be part of the plan.** Puget Sound Energy's [construction FAQ](https://www.pse.com/en/construction-services/construction-faq) says PSE disconnects service so your electrical contractor can replace a weatherhead, meter base, or panel safely, and asks for at least 5 business days' notice. Check any contractor on [Washington L&I Verify](https://secure.lni.wa.gov/verify/) before you sign.
 
-![Illustrative: basement utility room in a Federal Way, WA home, where an older electrical panel often sits before an upgrade](../assets/images/posts/2026-10-20-federal-way-panel-1.webp)
+![Basement utility room in a Federal Way, WA home, where an older electrical panel often sits before an upgrade](../assets/images/posts/2026-10-20-federal-way-panel-1.webp)
 
 ## Why panel upgrades keep coming up in Federal Way
 
@@ -48,7 +48,7 @@ The City's [residential permit exemptions](https://www.federalwaywa.gov/page/res
 
 L&I's [Electrical Permit Basics](https://www.lni.wa.gov/licensing-permits/electrical/electrical-basics-for-home-business-owners/electrical-permit-basics) makes the same distinction statewide: its like-in-kind breaker exemption covers a breaker used to protect a branch circuit, not the panel or the service equipment. The detailed statewide list is in [WAC 296-46B-901](https://app.leg.wa.gov/WAC/default.aspx?cite=296-46B-901).
 
-![Illustrative: opened wall with roughed-in electrical boxes during an electrical panel upgrade in Federal Way, WA](../assets/images/posts/2026-10-20-federal-way-panel-2.webp)
+![Opened wall with roughed-in electrical boxes during an electrical panel upgrade in Federal Way, WA](../assets/images/posts/2026-10-20-federal-way-panel-2.webp)
 
 ## The utility disconnect: PSE has to be in the schedule
 
@@ -97,7 +97,7 @@ Two more rules from L&I's [Electrical Permit Basics](https://www.lni.wa.gov/lice
 
 L&I's [Hiring an Electrical Contractor](https://lni.wa.gov/licensing-permits/electrical/electrical-basics-for-home-business-owners/hiring-an-electrical-contractor) page adds the practical warning: unpermitted electrical work can cause problems when you try to sell the property. L&I's [permit purchase page](https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/purchase-permits-request-inspections) goes further and strongly encourages property owners to hire an electrical contractor for all electrical work. A service change touches the utility, the meter, and the grounding system at once, so that advice carries extra weight here.
 
-![Illustrative: house side wall in weather barrier before siding during an electrical panel upgrade in Federal Way, WA](../assets/images/posts/2026-10-20-federal-way-panel-3.webp)
+![House side wall in weather barrier before siding during an electrical panel upgrade in Federal Way, WA](../assets/images/posts/2026-10-20-federal-way-panel-3.webp)
 
 ## What to write into a Federal Way panel upgrade bid
 

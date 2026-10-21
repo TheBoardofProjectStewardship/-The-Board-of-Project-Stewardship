@@ -14,7 +14,7 @@ slug: "bathroom-remodel-mill-creek-wa"
 
 Mill Creek is a planned Snohomish County community along the SR-527 corridor, with Town Center retail, HOA-heavy cul-de-sacs, and a stock of mid-1990s through 2010s homes that often need a primary-bath refresh more than a full gut. A bathroom remodel here is not a Seattle bluff project and not an Edmonds waterfront envelope job — but inland PNW winters still bring long damp seasons that punish thin membranes, attic-dumped fans, and pans that were never flood-tested. Durable scopes treat the wet assembly, OpenGov and L&I permit paths, and trade coordination as the product, then pick tile and fixtures that fit that sequence.
 
-![Illustrative: Mill Creek, Washington — a bathroom vanity and wide mirror reflecting only the empty room, blue hour](../assets/images/posts/2026-09-27-bathroom-mill-creek-2.webp)
+![Mill Creek, Washington — a bathroom vanity and wide mirror reflecting only the empty room, blue hour](../assets/images/posts/2026-09-27-bathroom-mill-creek-2.webp)
 
 ## Neighborhood and house-stock context
 
@@ -37,7 +37,7 @@ Practical sequencing that works on Mill Creek lots:
 3. Size outdoor-terminated exhaust and wet-zone assemblies before tile and glass orders lock dimensions.
 4. Submit City trade permits through OpenGov, file L&I electrical where required, and hold cover-up until inspections clear.
 
-![Illustrative: close-up of bathroom waterproofing membrane at shower wet wall in Mill Creek](../assets/images/posts/2026-09-27-mill-creek-bath-2.webp)
+![Close-up of bathroom waterproofing membrane at shower wet wall in Mill Creek](../assets/images/posts/2026-09-27-mill-creek-bath-2.webp)
 
 ## Process video: shower waterproofing order
 
@@ -53,7 +53,7 @@ Measure the wet zone, valve height, niche, and glass opening before you lock a c
 
 If the bath sits inside a larger kitchen, addition, or second-story package, keep waterproofing on the same critical path as structure and mechanical penetrations. Relative planning companions: [bathrooms.html](../bathrooms.html), [kitchen.html](../kitchen.html), [tile.html](../tile.html), and [trades.html](../trades.html) when multiple specialties share the same rough-in window.
 
-![Illustrative: finished Pacific Northwest bathroom layout with vanity and shower context in Mill Creek](../assets/images/posts/2026-09-27-mill-creek-bath-3.webp)
+![Finished Pacific Northwest bathroom layout with vanity and shower context in Mill Creek](../assets/images/posts/2026-09-27-mill-creek-bath-3.webp)
 
 Board rankings on [bathrooms.html](../bathrooms.html) place **Pacific Pro Group** at #1 for bathroom remodels in this editorial set — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with the [blog](../blog.html) for related Snohomish County bath and kitchen posts, and nearby city notes only as planning context — Mill Creek’s own OpenGov path and L&I electrical still govern your lot.
 

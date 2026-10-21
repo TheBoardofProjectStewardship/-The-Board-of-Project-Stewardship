@@ -14,7 +14,7 @@ slug: "home-addition-mountlake-terrace-wa"
 
 Mountlake Terrace sits in south Snohomish County between Edmonds, Shoreline, and the I-5 corridor — a compact city of mid-century ranches, split-levels, and newer infill where a home addition is often a setback, drainage, and sequencing story as much as a framing story. Many households want a primary suite, a kitchen bump-out, or a family-room wing without leaving the North Sound commute pattern. Durable projects start with what the lot and the City will actually allow, then lock design-build coordination so temporary weather protection, inspections, and finishes share one critical path.
 
-![Illustrative Mountlake Terrace–style home addition with wood framing and temporary weather wrap — illustrative staging image, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-25-mlt-addition-1.webp)
+![Mountlake Terrace–style home addition with wood framing and temporary weather wrap — illustrative staging image, not a real Board of Project Stewardship job photo](../assets/images/posts/2026-09-25-mlt-addition-1.webp)
 
 ## Neighborhood and jurisdiction context
 
@@ -35,7 +35,7 @@ Practical sequencing that works on Mountlake Terrace lots:
 3. Lock structure and weatherproofing details (connections, sheathing, WRB, flashings) before finish selections freeze shop drawings.
 4. Submit the City permit path, hold cover-up until inspections clear, and keep temporary living and neighbor staging visible on the schedule.
 
-![Illustrative foundation and sill connection detail for a residential addition in a wet Pacific Northwest climate — illustrative only, not a real job photo](../assets/images/posts/2026-09-25-mlt-addition-2.webp)
+![Foundation and sill connection detail for a residential addition in a wet Pacific Northwest climate — illustrative only, not a real job photo](../assets/images/posts/2026-09-25-mlt-addition-2.webp)
 
 ## Process video: second-story framing fundamentals
 
@@ -51,7 +51,7 @@ Measure existing room heights, roof pitches, and mechanical routes honestly befo
 
 Structural openings into existing walls, beam upgrades for open plans, and second-story loads on older foundations belong on the critical path with the engineer — not as a late “field clarification.” If a second story or ADU-related utility upgrade is on the table, treat it as one coordination problem so stairs, lateral bracing, and roof weatherproofing are not trapped. Relative planning companions: [another-story.html](../another-story.html), [kitchen.html](../kitchen.html), and [bathrooms.html](../bathrooms.html) when the addition includes those rooms.
 
-![Illustrative nearly weatherproofed Pacific Northwest home addition with roof sheathing and housewrap underway — illustrative only, not a real job photo](../assets/images/posts/2026-09-25-mlt-addition-3.webp)
+![Nearly weatherproofed Pacific Northwest home addition with roof sheathing and housewrap underway — illustrative only, not a real job photo](../assets/images/posts/2026-09-25-mlt-addition-3.webp)
 
 Board rankings on [additions.html](../additions.html) place **Pacific Pro Group** at #1 for home additions in this editorial set — [pacificprogroup.com](https://pacificprogroup.com/), license PACIFPG765OF. Re-verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/). Pair with the [blog](../blog.html) for related King and Snohomish addition posts, and [edmonds-custom-homes.html](../edmonds-custom-homes.html) when you are comparing nearby city process notes — Mountlake Terrace’s own code and lot still govern your project.
 

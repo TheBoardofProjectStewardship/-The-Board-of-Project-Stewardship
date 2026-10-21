@@ -14,7 +14,7 @@ slug: "kitchen-remodel-magnolia-seattle"
 
 A Magnolia kitchen remodel sits at the intersection of view-oriented living, older floor plans, and Seattle’s cool, moist climate. Galley kitchens, peninsula additions, and open-concept removals of non-bearing walls are common — each with different structural and mechanical consequences.
 
-![Illustrative: Magnolia, Seattle — a white oak island and a garden window, empty stools pulled in](../assets/images/posts/2026-09-16-kitchen-magnolia-2.webp)
+![Magnolia, Seattle — a white oak island and a garden window, empty stools pulled in](../assets/images/posts/2026-09-16-kitchen-magnolia-2.webp)
 
 ## Neighborhood context
 
@@ -24,7 +24,7 @@ Homes near Magnolia Village, Briarcliff, and the bluff streets frequently have c
 
 Cooking plus PNW humidity means range hoods that actually exhaust outdoors outperform recirculating units for long-term finish health. Electrical panels in mid-century Magnolia homes may need capacity checks before induction ranges or extra circuits. Seattle generally requires electrical and plumbing permits for kitchen rewires and sink/dishwasher moves; structural openings need building review. Ask who submits, who attends inspections, and how temporary kitchen use is handled.
 
-![Illustrative: close-up of outdoor-venting range hood ductwork and cabinet framing in Magnolia, Seattle](../assets/images/posts/2026-09-16-magnolia-kitchen-2.webp)
+![Close-up of outdoor-venting range hood ductwork and cabinet framing in Magnolia, Seattle](../assets/images/posts/2026-09-16-magnolia-kitchen-2.webp)
 
 ## Process video: range-hood install fundamentals
 
@@ -36,7 +36,7 @@ https://www.youtube.com/watch?v=D91yEmPE7tc
 
 Lock appliance depths and hood CFM early so cabinets and duct runs are not redesigned mid-job. Specify water-resistant assembly under sinks, durable flooring for wet-entry traffic from the porch, and lighting layers (task, ambient, under-cabinet). Soft-close hardware and mid-grade plywood boxes often outlast bargain particleboard in a damp climate.
 
-![Illustrative: finished Magnolia kitchen with shaker cabinets, quartz counters, and under-cabinet lighting](../assets/images/posts/2026-09-16-magnolia-kitchen-3.webp)
+![Finished Magnolia kitchen with shaker cabinets, quartz counters, and under-cabinet lighting](../assets/images/posts/2026-09-16-magnolia-kitchen-3.webp)
 
 ## Materials Worth Knowing
 

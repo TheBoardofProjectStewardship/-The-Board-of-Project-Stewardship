@@ -203,7 +203,7 @@ class NewsContractTests(unittest.TestCase):
 
         eca = (ROOT / "news" / "seattle-environmentally-critical-areas-update.html").read_text(encoding="utf-8")
         self.assertIn(
-            "Illustrative: a hillside home set back from a wooded ravine and creek in Seattle",
+            "A hillside home set back from a wooded ravine and creek in Seattle",
             eca,
         )
         self.assertIn("2026-10-16-seattle-environmentally-critical-areas-update-480.webp", eca)
@@ -331,19 +331,19 @@ class NewsContractTests(unittest.TestCase):
             for width in (480, 800, 1200):
                 self.assertIn(f"{name}-{width}.webp", corridors)
         self.assertIn(
-            "Illustrative: Seattle City Council members at a curved dais during a Centers and Corridors zoning discussion",
+            "Seattle City Council members at a curved dais during a Centers and Corridors zoning discussion",
             corridors,
         )
         self.assertIn(
-            "Illustrative: a planner reviewing a Seattle Centers and Corridors zoning map marked on hold",
+            "A planner reviewing a Seattle Centers and Corridors zoning map marked on hold",
             corridors,
         )
         self.assertIn(
-            "Illustrative: a Seattle City Council hearing on the Centers and Corridors rezoning, with the proposal marked on hold",
+            "A Seattle City Council hearing on the Centers and Corridors rezoning, with the proposal marked on hold",
             corridors,
         )
         self.assertIn(
-            "Illustrative: Seattle planning staff presenting a zoning map marked on hold to the City Council",
+            "Seattle planning staff presenting a zoning map marked on hold to the City Council",
             corridors,
         )
         self.assertIn("History and background", corridors)
@@ -379,27 +379,27 @@ class NewsContractTests(unittest.TestCase):
             for width in (480, 800, 1200):
                 self.assertIn(f"{name}-{width}.webp", lynnwood)
         self.assertIn(
-            "Illustrative: a small detached backyard cottage, the kind of DADU Lynnwood&#x27;s pre-approved plan gallery covers, behind a two-story home in Lynnwood",
+            "A small detached backyard cottage, the kind of DADU Lynnwood&#x27;s pre-approved plan gallery covers, behind a two-story home in Lynnwood",
             lynnwood,
         )
         self.assertIn(
-            "Illustrative image of a detached accessory dwelling unit in a Lynnwood backyard. Lynnwood&#x27;s pre-approved plans range from about 490 to about 1,000 square feet.",
+            "Image of a detached accessory dwelling unit in a Lynnwood backyard. Lynnwood&#x27;s pre-approved plans range from about 490 to about 1,000 square feet.",
             lynnwood,
         )
         self.assertIn(
-            "Illustrative: floor plan and elevation drawings for a small backyard cottage on a kitchen table, the kind of pre-approved DADU plan set Lynnwood is reviewing",
+            "Floor plan and elevation drawings for a small backyard cottage on a kitchen table, the kind of pre-approved DADU plan set Lynnwood is reviewing",
             lynnwood,
         )
         self.assertIn(
-            "Illustrative image of a DADU plan set. Lynnwood will post pre-approved backyard cottage plans as they are approved, with the first expected by the end of October or in November.",
+            "Image of a DADU plan set. Lynnwood will post pre-approved backyard cottage plans as they are approved, with the first expected by the end of October or in November.",
             lynnwood,
         )
         self.assertIn(
-            "Illustrative: foundation forms and a utility trench dug for a backyard cottage in a Snohomish County yard, site work Lynnwood&#x27;s pre-approved DADU plans do not cover",
+            "Foundation forms and a utility trench dug for a backyard cottage in a Snohomish County yard, site work Lynnwood&#x27;s pre-approved DADU plans do not cover",
             lynnwood,
         )
         self.assertIn(
-            "Illustrative image of DADU site work in Snohomish County. Lynnwood&#x27;s pre-approved plans cover the building only, so grading and utilities still need site-specific review.",
+            "Image of DADU site work in Snohomish County. Lynnwood&#x27;s pre-approved plans cover the building only, so grading and utilities still need site-specific review.",
             lynnwood,
         )
         body = lynnwood.split('class="news-body prose-board"', 1)[1].split("news-sources", 1)[0]

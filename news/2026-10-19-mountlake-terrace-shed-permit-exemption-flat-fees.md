@@ -33,7 +33,7 @@ The ordinance also establishes new dimensional standards for detached non-habita
 
 The city has set a maximum height of 25 feet for these buildings, and they may not exceed the footprint of the principal structure, with an absolute limit of 800 square feet. Eaves that extend more than 2 feet past the exterior wall are counted toward the footprint. For accessory buildings that are taller than 12 feet or larger than 200 square feet, the city requires an architectural style and building materials compatible with the primary structure or surrounding buildings.
 
-![Illustrative: small permit-exempt storage shed in a fenced backyard in Mountlake Terrace](../assets/images/news/2026-10-19-mountlake-terrace-shed-permit-1.webp)
+![Small permit-exempt storage shed in a fenced backyard in Mountlake Terrace](../assets/images/news/2026-10-19-mountlake-terrace-shed-permit-1.webp)
 
 Sidewalks and driveways remain exempt from building permits, though they are still subject to required civil permits. The ordinance notes that accessory dwelling units (ADUs) continue to be regulated separately under MTMC 19.30.050.
 
@@ -56,7 +56,7 @@ Selected fees in the draft schedule attached to the resolution include:
 
 According to a [staff report](https://mountlaketerracewa.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=4398,plainText=false)), the current rates ranked Mountlake Terrace on the high side compared to nearby cities such as Bothell, Edmonds, Lake Forest Park, Mill Creek, Shoreline and Lynnwood. Staff stated the new flat-rate system reduces upfront costs for applicants and makes the city more competitive.
 
-![Illustrative: homeowner reviewing a backyard shed site plan at a city permit counter in Mountlake Terrace](../assets/images/news/2026-10-19-mountlake-terrace-shed-permit-2.webp)
+![Homeowner reviewing a backyard shed site plan at a city permit counter in Mountlake Terrace](../assets/images/news/2026-10-19-mountlake-terrace-shed-permit-2.webp)
 
 ## History and background
 
@@ -80,7 +80,7 @@ That rule has drawn pushback. In July, homeowner Taylor Wolfe told the council d
 
 On Aug. 20, staff and the Planning Commission recommended that the council keep the 50% trigger but replace the requirement to meet "all safety requirements" with a prioritized list of defined upgrades and limit unrelated city-required upgrades to 10% of the project's value, according to the [staff report and presentation](https://mountlaketerracewa.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=4362,plainText=false)). Staff also listed raising the threshold to 75% as an option, and councilmembers discussed the options and direction for staff, according to the [meeting minutes](https://mountlaketerracewa.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=4383,plainText=false)). Homeowners planning additions should watch for that proposal on future council agendas.
 
-![Illustrative: homeowner framing a small backyard storage shed on a gravel pad in Mountlake Terrace](../assets/images/news/2026-10-19-mountlake-terrace-shed-permit-3.webp)
+![Homeowner framing a small backyard storage shed on a gravel pad in Mountlake Terrace](../assets/images/news/2026-10-19-mountlake-terrace-shed-permit-3.webp)
 
 The accessory structure ordinance takes effect five days after a summary is published in the city's official newspaper.
 
