@@ -77,6 +77,8 @@ The video below shows a crew air sealing an attic floor, adding baffles and deal
 
 https://www.youtube.com/watch?v=GuC1O-tmMuM
 
+![Illustrative: eave baffle keeping a soffit vent open above blown-in insulation in a Lynnwood, WA attic](../assets/images/posts/2026-10-21-lynnwood-attic-insulation-4.webp)
+
 ## Cautions before anyone adds insulation
 
 ### Knob-and-tube wiring
@@ -112,6 +114,8 @@ Ask every bidder to put these in writing:
 5. **Insulation:** material, target R-value and settled depth, depth markers, and how the hatch will be insulated and weatherstripped.
 6. **Rebates:** whether the company is a PUD registered contractor and whether the job qualifies under the PUD's current terms.
 7. **Clean-up and access:** protection of living space below, removal of debris, and any walkway kept above the insulation line for future service.
+
+![Illustrative: insulation depth ruler standing in blown-in attic insulation in a Lynnwood, WA home](../assets/images/posts/2026-10-21-lynnwood-attic-insulation-5.webp)
 
 ## Materials Worth Knowing
 
