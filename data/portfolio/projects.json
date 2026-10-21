@@ -98,7 +98,7 @@
         "The plan examiner's markups on the approved set are applied: the laundry wall moved 1'-6\" west, the Office 01 door moved to the hall side, an upstairs door replaced by a 40 inch archway into the primary bedroom, a floor to ceiling window on the main floor north wall, and the larger side patio.",
         "The markups print only 1'-6\", 18' and 40 inches. The moved office door, the archway, the new window and the patio's diagonal edge are scaled from the hand sketch and may be off by several inches.",
         "The floor to ceiling window runs from the floor to 9'-6\". Its head height is not printed.",
-        "Room areas are the printed ones. The laundry area was printed before its wall moved, so the modeled laundry is about 20 SF larger than the printed 75.84 SF. The open living room and the two halls have no drawn boundaries, so their outlines are approximate.",
+        "Room areas are the printed ones, except the upstairs laundry. Its area was printed as 75.84 SF before the markup moved its wall, so the label shows the redlined area as modeled, about 96 SF. The open living room and the two halls have no drawn boundaries, so their outlines are approximate.",
         "Siding, stone veneer, deck and porch railings and trim colors are not modeled."
       ]
     }
