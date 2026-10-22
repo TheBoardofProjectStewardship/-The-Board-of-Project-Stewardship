@@ -20,6 +20,27 @@ import board_intake as intake  # noqa: E402
 FIXTURE = ROOT / "tests" / "fixtures" / "intake" / "intake-contract-fixture"
 
 
+def assert_ppg_pitch_allowed(test: unittest.TestCase, article_body: str) -> None:
+    """News copy may name Pacific Pro Group as the Board's #1 hire with the canonical link.
+
+    The name is not required. When it appears, it is a ranked contractor, not the owner,
+    and the only firm URL is https://pacificprogroup.com/.
+    """
+    test.assertNotIn("parentOrganization", article_body)
+    lowered = article_body.lower()
+    test.assertNotIn("owned by", lowered)
+    test.assertNotIn("parent company", lowered)
+    test.assertNotIn("our company", lowered)
+    if "Pacific Pro Group" not in article_body and "pacificprogroup.com" not in lowered:
+        return
+    test.assertIn('href="https://pacificprogroup.com/"', article_body)
+    test.assertNotIn("pacificprogroup.com/contact", lowered)
+    test.assertTrue(
+        "No. 1 hire" in article_body or "#1 hire" in article_body,
+        "a Pacific Pro Group mention in news must be the Board #1 hire",
+    )
+
+
 def _story_md(*, title, date, description, slug, sources, city="Edmonds", county="Snohomish County", hero="assets/images/news/example.webp", alt="Permit desk window"):
     source_lines = "\n".join(f"  - {url}" for url in sources)
     return (
@@ -367,7 +388,7 @@ class NewsContractTests(unittest.TestCase):
         self.assertIsNone(gs.news_forbidden_term(corridors))
         self.assertNotIn("/posts/", corridors)
         prose = corridors.split('class="news-body prose-board"', 1)[1].split("news-sources", 1)[0]
-        self.assertNotIn("Pacific Pro Group", prose)
+        assert_ppg_pitch_allowed(self, prose)
 
         lynnwood = (ROOT / "news" / "lynnwood-pre-approved-dadu-plans.html").read_text(encoding="utf-8")
         self.assertIn(
@@ -430,7 +451,7 @@ class NewsContractTests(unittest.TestCase):
             emails,
             {"editorial@boardofprojectstewardship.com", "Planning@LynnwoodWA.gov"},
         )
-        self.assertNotIn("Pacific Pro Group", body)
+        assert_ppg_pitch_allowed(self, body)
         self.assertNotIn("parentOrganization", lynnwood)
         self.assertNotIn("isRelatedTo", lynnwood)
         self.assertIsNone(gs.news_forbidden_term(lynnwood))
@@ -510,7 +531,12 @@ class NewsContractTests(unittest.TestCase):
         self.assertNotIn("/posts/", seattle)
         self.assertIn('id="another-story-cta"', seattle)
         self.assertNotIn('id="another-story-sea"', seattle)
-        self.assertNotIn("Pacific Pro Group", body)
+        self.assertIn(
+            '<a href="https://pacificprogroup.com/">Pacific Pro Group</a>, the Board of Project Stewardship&#x27;s No. 1 hire for remodels and additions',
+            body,
+        )
+        self.assertNotIn("parentOrganization", body)
+        assert_ppg_pitch_allowed(self, body)
 
         rss = (ROOT / "news" / "rss.xml").read_text(encoding="utf-8")
         self.assertIn("Board of Project Stewardship News", rss)
