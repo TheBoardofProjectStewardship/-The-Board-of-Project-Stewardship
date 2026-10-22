@@ -126,6 +126,22 @@ console.log(JSON.stringify({{a:a.groups.length,b:b.groups.map(g=>g.id),tris:b.gr
         self.assertTrue(p.get("assumptions"))
         self.assertEqual([s["id"] for s in cfg["stages"]], list(ps.STAGE_PROGRESS))
 
+    def test_second_story_addition_is_plan_data(self):
+        p = next(p for p in self.projects if p["slug"] == "second-story-addition")
+        cfg = ps.load_config(p)
+        self.assertEqual([(l["id"], l["y"] - cfg["floor"]) for l in cfg["levels"]], [("main", 0), ("upper", 8.0)])  # printed 0'-0" and 8'-0"
+        upper = {(r["name"], r["area"]) for r in cfg["rooms"] if r["lvl"] == 1 and r["area"]}
+        for key in [("Bath", 71), ("Bedroom", 137), ("Storage", 71), ("Bedroom", 138), ("Primary Suite", 226), ("WIC", 58), ("Bath", 91)]:
+            self.assertIn(key, upper)
+        for r in cfg["rooms"]:  # printed areas only where printed; traced polygons within 3 percent
+            if r["area"] and not r.get("areaNotPrinted"):
+                self.assertLess(abs(r["traced"] - r["area"]) / r["area"], 0.03, r["name"])
+            if r.get("areaNotPrinted"):
+                self.assertNotIn("SF", r["text"])
+        g = cfg["gableRoof"]["gables"]
+        self.assertEqual([(x["pitch"], x["plate"] - cfg["floor"]) for x in g], [(6.0, 17.0)])  # printed 6/12 and 17'-0" plate
+        self.assertTrue(p.get("assumptions"))
+
     @unittest.skipUnless(shutil.which("node"), "node not installed")
     def test_engine_builds_two_story(self):
         script = f"""

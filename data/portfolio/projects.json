@@ -102,6 +102,71 @@
         "Room areas are the printed ones, except the upstairs laundry. Its area was printed as 75.84 SF before the markup moved its wall, so the label shows the redlined area as modeled, about 96 SF. The open living room and the two halls have no drawn boundaries, so their outlines are approximate.",
         "Siding, stone veneer, deck and porch railings and trim colors are not modeled."
       ]
+    },
+    {
+      "slug": "second-story-addition",
+      "engine": "config",
+      "config": "second-story-addition.json",
+      "title": "One-story house with a new second story",
+      "card": "A second-story addition from a plan set: a full new upper floor over an existing one-story house, with a primary suite, two bedrooms, two baths and a storage room under one 6:12 gable roof. The first floor keeps its rooms and gains a mudroom and a new stair.",
+      "facts": [
+        "2,040 SF on two floors",
+        "5 bedrooms after the addition",
+        "25'-8\" x 41'-2\" footprint"
+      ],
+      "kicker": "Seattle, second-story addition",
+      "thumb": "/portfolio/second-story-addition/thumb.png",
+      "dek": "Explore the addition layer by layer: the finished house, the roof, the new second floor, the existing first floor with its new mudroom and stair, and the floor platform.",
+      "sourceNote": "Modeled from the plan set: the proposed first and second floor plans, the roof plan and four proposed elevations. Walls, openings, room names, the printed areas, floor and plate heights, the roof pitch and the overhangs come from those sheets. Anything the sheets do not print is listed below as an assumption.",
+      "learn": {
+        "house": [
+          "roof",
+          "header"
+        ],
+        "front": [
+          "header"
+        ],
+        "roof": [
+          "roof"
+        ],
+        "upper": [
+          "partition"
+        ],
+        "plan": [
+          "partition"
+        ],
+        "foundation": [
+          "partition"
+        ]
+      },
+      "notes": {
+        "roof": [
+          "Roof",
+          "From the roof plan and elevations: one 6:12 gable over the whole house, with its gable ends on the deck side and the shed side, 18 inch overhangs and asphalt shingles. The new wall plate is printed at 17'-0\" above the first floor, so the ridge sits about 23'-5\" above it."
+        ],
+        "header": [
+          "Openings",
+          "New windows and doors use the sizes printed beside them on the plans, such as 72 by 60 inch bedroom windows and 30 by 80 inch doors. Existing first floor openings are only marked existing, so their widths are the wall gaps on the plan and their heights are scaled from the elevations."
+        ],
+        "partition": [
+          "Room layout",
+          "Second floor rooms show their printed areas, with 9 foot walls between the printed 8'-0\" second floor and the 17'-0\" plate. The existing first floor rooms have no printed areas, so they show names only. Select a room to fly in."
+        ]
+      },
+      "assumptions": [
+        "The overall size, 25'-8\" by 41'-2\", is printed with a note to verify it in the field. Walls are traced from the plan linework at 1/4 inch = 1 foot.",
+        "The first floor sits 2 feet above the ground, scaled from the deck skirt and stair on the deck-side elevation. The site slope is not modeled; the ground is drawn flat.",
+        "First floor walls run the printed 8'-0\" from the first floor to the second floor. The first floor ceiling height and the floor framing depth are not printed; the framing is drawn about 11 inches deep.",
+        "Window heads are scaled from the elevations: about 7'-0\" on the first floor and 8'-0\" above the second floor. Sills follow from the printed window heights. Existing first floor windows are drawn 4 feet tall, scaled.",
+        "The second floor stair window has no printed size. It is drawn 3 by 5 feet, scaled from the elevation.",
+        "Existing first floor openings are marked existing without sizes. Their widths are the wall gaps on the plan, and door heads are 6'-8\".",
+        "The ridge height is not printed. It follows from the printed 17'-0\" plate and the 6:12 pitch.",
+        "The stair is drawn as two straight flights with a landing, 15 risers in all. The riser count is not printed; the plans note a 7 inch maximum riser.",
+        "The existing shed and its roof stay as they are. Their heights are scaled from the elevations.",
+        "Existing first floor rooms have no printed areas, so their labels show names only.",
+        "Furniture and fixtures sit where the plan symbols are, scaled from the drawing. Interior doors are shown as open frames.",
+        "Siding, trim, deck railings and exterior lights are not modeled."
+      ]
     }
   ]
 }
