@@ -7325,7 +7325,7 @@ def parse_frontmatter(text: str) -> tuple[dict, str]:
     return meta, parts[2].strip()
 
 
-def md_to_html(md: str, *, link_unescape: bool = False) -> str:
+def md_to_html(md: str, *, link_unescape: bool = False, balanced_url_parens: bool = False) -> str:
     lines = md.splitlines()
     out: list[str] = []
     i = 0
@@ -7427,7 +7427,14 @@ def md_to_html(md: str, *, link_unescape: bool = False) -> str:
                 return local_video_embed(href)
             return f'<a href="{esc(href)}">{label}</a>'
 
-        s = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", _md_link, s)
+        # News sources include URLs such as permits-we-issue-(a-z). One level of
+        # parentheses stays inside the destination. Posts keep the older cut.
+        link_re = (
+            r"\[([^\]]+)\]\(((?:[^()]|\([^()]*\))+)\)"
+            if balanced_url_parens
+            else r"\[([^\]]+)\]\(([^)]+)\)"
+        )
+        s = re.sub(link_re, _md_link, s)
         s = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", s)
         s = re.sub(r"(?<!\*)\*([^*]+)\*(?!\*)", r"<em>\1</em>", s)
         return s
@@ -7740,7 +7747,9 @@ def news_hero_credit_html(credit: str) -> str:
         display = display.replace(license_url, " ")
     if commons_url:
         display = display.replace(commons_url, " ")
-    display = re.sub(r"\s*:\s*", " ", display)
+    # Drop only the colon that introduced a removed URL ("Commons: https://...").
+    # "Photo: Visitor7" stays, so the supplied credit remains readable.
+    display = re.sub(r":\s*$", "", display)
     display = re.sub(r"\s+,", ",", display)
     display = re.sub(r"\s+", " ", display).strip(" ,;:-")
     html_text = esc(display)
@@ -7875,7 +7884,7 @@ def build_news_story_page(story: dict, news_names: set[str] | None = None, relat
     _PHOTO_CTX["place"] = photo_place
     _PHOTO_CTX["topic"] = "news"
     article_html = rewrite_post_root_hrefs(
-        md_to_html(story.get("body_md") or ""),
+        md_to_html(story.get("body_md") or "", balanced_url_parens=True),
         news_names or set(),
     )
     canon = f"{BASE_URL}news/{story['out_name']}"

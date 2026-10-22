@@ -2,6 +2,7 @@
 """News is its own section. The intake contract checks it the way it checks posts."""
 from __future__ import annotations
 
+import html
 import json
 import re
 import sys
@@ -46,6 +47,7 @@ class NewsContractTests(unittest.TestCase):
         self.assertEqual(
             [item["slug"] for item in stories],
             [
+                "seattle-2027-permit-fee-increase",
                 "lynnwood-pre-approved-dadu-plans",
                 "seattle-centers-corridors-rezoning-on-hold",
                 "mountlake-terrace-shed-permit-exemption-flat-fees",
@@ -58,29 +60,32 @@ class NewsContractTests(unittest.TestCase):
                 "snohomish-health-septic-permit-grant",
             ],
         )
-        self.assertEqual(stories[0]["date"], "2026-10-21")
-        self.assertEqual(stories[1]["date"], "2026-10-20")
-        self.assertEqual(stories[2]["date"], "2026-10-19")
-        self.assertEqual(stories[3]["date"], "2026-10-18")
+        self.assertEqual(stories[0]["date"], "2026-10-22")
+        self.assertEqual(stories[1]["date"], "2026-10-21")
+        self.assertEqual(stories[2]["date"], "2026-10-20")
+        self.assertEqual(stories[3]["date"], "2026-10-19")
         self.assertEqual(stories[4]["date"], "2026-10-18")
-        self.assertEqual(stories[5]["date"], "2026-10-17")
-        self.assertEqual(stories[6]["date"], "2026-10-16")
+        self.assertEqual(stories[5]["date"], "2026-10-18")
+        self.assertEqual(stories[6]["date"], "2026-10-17")
         self.assertEqual(stories[7]["date"], "2026-10-16")
-        self.assertEqual(stories[8]["date"], "2026-10-15")
-        self.assertEqual(stories[9]["date"], "2026-10-14")
+        self.assertEqual(stories[8]["date"], "2026-10-16")
+        self.assertEqual(stories[9]["date"], "2026-10-15")
+        self.assertEqual(stories[10]["date"], "2026-10-14")
         self.assertTrue(stories[0]["title"])
         self.assertTrue(stories[0]["description"])
         self.assertGreaterEqual(len(stories[0]["sources"]), 1)
-        self.assertIn("Smlowe5", stories[0]["hero_credit"])
-        self.assertIn("Spicypepper999", stories[1]["hero_credit"])
-        self.assertIn("ECTran71", stories[2]["hero_credit"])
-        self.assertIn("Illustration", stories[3]["hero_credit"])
-        self.assertIn("Joe Mabel", stories[4]["hero_credit"])
+        self.assertIn("Visitor7", stories[0]["hero_credit"])
+        self.assertIn("CC BY-SA 3.0", stories[0]["hero_credit"])
+        self.assertIn("Smlowe5", stories[1]["hero_credit"])
+        self.assertIn("Spicypepper999", stories[2]["hero_credit"])
+        self.assertIn("ECTran71", stories[3]["hero_credit"])
+        self.assertIn("Illustration", stories[4]["hero_credit"])
         self.assertIn("Joe Mabel", stories[5]["hero_credit"])
-        self.assertEqual(stories[6]["hero_credit"], "")
-        self.assertIn("SounderBruce", stories[7]["hero_credit"])
-        self.assertIn("Robert Ashworth", stories[8]["hero_credit"])
-        self.assertIn("Emersb", stories[9]["hero_credit"])
+        self.assertIn("Joe Mabel", stories[6]["hero_credit"])
+        self.assertEqual(stories[7]["hero_credit"], "")
+        self.assertIn("SounderBruce", stories[8]["hero_credit"])
+        self.assertIn("Robert Ashworth", stories[9]["hero_credit"])
+        self.assertIn("Emersb", stories[10]["hero_credit"])
         self.assertTrue((ROOT / "news" / "_template.md").is_file())
         self.assertEqual(
             sorted(path.name for path in (ROOT / "news").glob("[0-9]*.md")),
@@ -95,12 +100,13 @@ class NewsContractTests(unittest.TestCase):
                 "2026-10-19-mountlake-terrace-shed-permit-exemption-flat-fees.md",
                 "2026-10-20-seattle-centers-corridors-rezoning-on-hold.md",
                 "2026-10-21-lynnwood-pre-approved-dadu-plans.md",
+                "2026-10-22-seattle-2027-permit-fee-increase.md",
             ],
         )
         result = intake.validate_news_library(ROOT)
         self.assertTrue(result["ok"], result)
         self.assertEqual(result["status"], "ready")
-        self.assertEqual(result["stories"], 10)
+        self.assertEqual(result["stories"], 11)
         self.assertEqual(gs.news_blog_overlap(ROOT), [])
         self.assertIn("First stories coming soon", gs.build_news_index([]))
 
@@ -123,6 +129,7 @@ class NewsContractTests(unittest.TestCase):
         self.assertNotIn("mountlake-terrace-shed-permit-exemption-flat-fees", blog_html)
         self.assertNotIn("seattle-centers-corridors-rezoning-on-hold", blog_html)
         self.assertNotIn("lynnwood-pre-approved-dadu-plans", blog_html)
+        self.assertNotIn("seattle-2027-permit-fee-increase", blog_html)
         baker_url = "https://boardofprojectstewardship.com/news/mount-baker-redevelopment-groundbreaking.html"
         eca_url = "https://boardofprojectstewardship.com/news/seattle-environmentally-critical-areas-update.html"
         tree_url = "https://boardofprojectstewardship.com/news/edmonds-landmark-tree-ordinance-extension.html"
@@ -134,14 +141,17 @@ class NewsContractTests(unittest.TestCase):
         corridors_href = "./news/seattle-centers-corridors-rezoning-on-hold.html"
         lynnwood_url = "https://boardofprojectstewardship.com/news/lynnwood-pre-approved-dadu-plans.html"
         lynnwood_href = "./news/lynnwood-pre-approved-dadu-plans.html"
+        seattle_url = "https://boardofprojectstewardship.com/news/seattle-2027-permit-fee-increase.html"
+        seattle_href = "./news/seattle-2027-permit-fee-increase.html"
         lead = news_html.split('class="news-lead"', 1)[1].split("</article>", 1)[0]
-        self.assertIn(lynnwood_href, lead)
+        self.assertIn(seattle_href, lead)
+        self.assertNotIn(lynnwood_href, lead)
         self.assertNotIn(corridors_href, lead)
         self.assertNotIn(shed_href, lead)
         self.assertIn("./news/pacific-pro-group-bronze-best-in-the-pnw.html", news_html)
         self.assertIn(panel_href, news_html)
-        self.assertIn(stories[0]["title"], lead)
-        self.assertIn("October 21, 2026", lead)
+        self.assertIn(html.escape(stories[0]["title"], quote=True), lead)
+        self.assertIn("October 22, 2026", lead)
         self.assertNotIn("edmonds-landmark-tree-ordinance-extension", lead)
 
         lot_url = "https://boardofprojectstewardship.com/news/snohomish-county-administrative-lot-splits.html"
@@ -426,9 +436,86 @@ class NewsContractTests(unittest.TestCase):
         self.assertIsNone(gs.news_forbidden_term(lynnwood))
         self.assertNotIn("/posts/", lynnwood)
 
+        seattle = (ROOT / "news" / "seattle-2027-permit-fee-increase.html").read_text(encoding="utf-8")
+        hero_alt = (
+            "The dark glass Seattle Municipal Tower in downtown Seattle, seen from Ninth Avenue and Columbia Street. "
+            "The Seattle Department of Construction and Inspections has its offices in the tower at 700 Fifth Ave."
+        )
+        self.assertIn(hero_alt, seattle)
+        self.assertIn("Photo: Visitor7, CC BY-SA 3.0, via", seattle)
+        self.assertIn(
+            'href="https://commons.wikimedia.org/wiki/File:Seattle_Municipal_Tower_1.JPG"',
+            seattle,
+        )
+        self.assertIn(">Wikimedia Commons</a>", seattle)
+        self.assertIn('"@type": "Organization"', seattle)
+        self.assertIn('"@type": "WebSite"', seattle)
+        self.assertNotIn("parentOrganization", seattle)
+        self.assertNotIn("isRelatedTo", seattle)
+        self.assertNotIn("Illustrative", seattle)
+        permit_url = (
+            "https://www.seattle.gov/construction-and-inspections/permits/permits-we-issue-(a-z)/"
+            "construction-permit%C2%A0--new-building-single-family-residential%C2%A0or-duplex"
+        )
+        self.assertIn(f'href="{permit_url}"', seattle)
+        self.assertNotIn("permits-we-issue-(a-z\"", seattle)
+        for name in (
+            "2026-10-22-seattle-2027-permit-fee-increase",
+            "2026-10-22-seattle-permit-fees-counter-1",
+            "2026-10-22-seattle-home-addition-permit-2",
+            "2026-10-22-seattle-furnace-inspection-fees-3",
+        ):
+            for width in (480, 800, 1200):
+                self.assertIn(f"{name}-{width}.webp", seattle)
+                self.assertTrue((ROOT / "assets" / "images" / "news" / f"{name}-{width}.webp").is_file())
+        self.assertIn(
+            "Homeowners review a building permit fee estimate and house plans with a staff member at a Seattle permit counter",
+            seattle,
+        )
+        self.assertIn(
+            "Seattle homeowners planning additions, remodels or backyard cottages could pay 10.7% more in city permit fees in 2027 under the proposed budget.",
+            seattle,
+        )
+        self.assertIn(
+            "A two-story wood-framed home addition under construction behind a Craftsman house in a Seattle neighborhood",
+            seattle,
+        )
+        self.assertIn(
+            "A home addition in Seattle. City building permit fees are based on project value, so larger additions and new houses carry larger fees.",
+            seattle,
+        )
+        self.assertIn(
+            "A technician installs a new furnace in the basement of a Seattle house, work that needs a separate mechanical permit and inspection",
+            seattle,
+        )
+        self.assertIn(
+            "Furnace replacement in a Seattle basement. Under the proposal, Seattle mechanical and furnace inspection fees would rise 15% above inflation.",
+            seattle,
+        )
+        body = seattle.split('class="news-body prose-board"', 1)[1].split("news-sources", 1)[0]
+        self.assertLess(body.index("What the city proposes"), body.index("seattle-permit-fees-counter-1"))
+        self.assertLess(body.index("seattle-permit-fees-counter-1"), body.index("Why the department says it needs the money"))
+        self.assertLess(body.index("Why the department says it needs the money"), body.index("seattle-home-addition-permit-2"))
+        self.assertLess(body.index("seattle-home-addition-permit-2"), body.index("The broader cost picture"))
+        self.assertLess(body.index("What it means for homeowners"), body.index("seattle-furnace-inspection-fees-3"))
+        self.assertEqual(body.count('loading="lazy"'), 3)
+        self.assertIn("checkpoint approach", seattle)
+        self.assertIn("Shane Muchow", seattle)
+        seattle_story = next(item for item in stories if item["slug"] == "seattle-2027-permit-fee-increase")
+        for source in seattle_story["sources"]:
+            self.assertIn(source, seattle)
+        emails = set(re.findall(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}", seattle))
+        self.assertEqual(emails, {"editorial@boardofprojectstewardship.com"})
+        self.assertIsNone(gs.news_forbidden_term(seattle))
+        self.assertNotIn("/posts/", seattle)
+        self.assertIn('id="another-story-cta"', seattle)
+        self.assertNotIn('id="another-story-sea"', seattle)
+        self.assertNotIn("Pacific Pro Group", body)
+
         rss = (ROOT / "news" / "rss.xml").read_text(encoding="utf-8")
         self.assertIn("Board of Project Stewardship News", rss)
         self.assertIn("<item>", rss)
+        self.assertTrue(rss.index(seattle_url) < rss.index(lynnwood_url))
         self.assertTrue(rss.index(lynnwood_url) < rss.index(corridors_url))
         self.assertTrue(rss.index(corridors_url) < rss.index(shed_url))
         self.assertTrue(rss.index(shed_url) < rss.index(panel_url))
@@ -444,6 +531,7 @@ class NewsContractTests(unittest.TestCase):
         self.assertIn(shed_url, rss)
         self.assertIn(corridors_url, rss)
         self.assertIn(lynnwood_url, rss)
+        self.assertIn(seattle_url, rss)
         self.assertNotIn("/posts/", rss)
 
         sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
@@ -457,6 +545,7 @@ class NewsContractTests(unittest.TestCase):
         self.assertIn(shed_url, sitemap)
         self.assertIn(corridors_url, sitemap)
         self.assertIn(lynnwood_url, sitemap)
+        self.assertIn(seattle_url, sitemap)
         self.assertIn("https://boardofprojectstewardship.com/projects/magnolia-house-adu-garage/", sitemap)
         blog_rss = (ROOT / "blog" / "rss.xml").read_text(encoding="utf-8")
         posts_json = (ROOT / "posts.json").read_text(encoding="utf-8")
@@ -478,6 +567,8 @@ class NewsContractTests(unittest.TestCase):
         self.assertNotIn("seattle-centers-corridors-rezoning-on-hold", posts_json)
         self.assertNotIn("lynnwood-pre-approved-dadu-plans", blog_rss)
         self.assertNotIn("lynnwood-pre-approved-dadu-plans", posts_json)
+        self.assertNotIn("seattle-2027-permit-fee-increase", blog_rss)
+        self.assertNotIn("seattle-2027-permit-fee-increase", posts_json)
         self.assertNotIn("/news/", blog_rss)
         self.assertNotIn('"path": "./news/', posts_json)
         self.assertNotIn("./posts/", news_html)
