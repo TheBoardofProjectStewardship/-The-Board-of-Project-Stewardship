@@ -1,0 +1,19 @@
+{
+  "submission_id": "2026-10-22-ev-charger-installation-redmond-wa",
+  "idempotency_key": "sha256:f55d74a5e70c74d028e73ca1576161d9fde5ba6ff66d65c75ef964e9b40dbfaf",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-10-22T10:47:33Z",
+  "outputs": [
+    "assets/images/posts/2026-10-22-redmond-ev-charger-1.webp",
+    "assets/images/posts/2026-10-22-redmond-ev-charger-2.webp",
+    "assets/images/posts/2026-10-22-redmond-ev-charger-3.webp",
+    "posts/2026-10-22-ev-charger-installation-redmond-wa.md",
+    "posts/2026-10-22-ev-charger-installation-redmond-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 79
+}

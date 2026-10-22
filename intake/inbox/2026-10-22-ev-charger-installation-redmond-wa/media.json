@@ -1,0 +1,44 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-10-22-redmond-ev-charger-1.webp",
+      "repo_path": "assets/images/posts/2026-10-22-redmond-ev-charger-1.webp",
+      "alt": "A Level 2 EV charger mounted on the wall of an attached garage in a Redmond, WA home, with the charging cable coiled on a hook and a short run of conduit to the panel \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "c1cbe1abc75f540ed899ee251932461c",
+      "source": "Newly generated image (built-in image generator, 2026-10-22), source gen-1.png 1280x720, resized to 1600x900 webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-22-redmond-ev-charger-2.webp",
+      "repo_path": "assets/images/posts/2026-10-22-redmond-ev-charger-2.webp",
+      "alt": "A licensed electrician checking an open main electrical panel in a Redmond, WA garage before adding a 240-volt circuit for an EV charger \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "4de82c85dc149a88cc1a8c5f38562fd9",
+      "source": "Newly generated image (built-in image generator, 2026-10-22), source gen-2.png 1280x720, resized to 1600x900 webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-22-redmond-ev-charger-3.webp",
+      "repo_path": "assets/images/posts/2026-10-22-redmond-ev-charger-3.webp",
+      "alt": "A Redmond, WA home with a wet driveway on an overcast autumn evening and an electric car plugged into a charger beside the garage door \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "d935d3434a8c4bce4dc09efb06afe6c1",
+      "source": "Newly generated image (built-in image generator, 2026-10-22), source gen-3.png 1280x720, resized to 1600x900 webp"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "87joDusz_ic",
+      "url": "https://www.youtube.com/watch?v=87joDusz_ic",
+      "title": "How to Install an EV Charger | Ask This Old House",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "3 newly generated images (built-in generator), 0 regraded stills, 0 paid media."
+}

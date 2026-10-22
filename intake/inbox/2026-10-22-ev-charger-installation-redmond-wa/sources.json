@@ -1,0 +1,101 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Redmond",
+    "service": "EV charger installation",
+    "slug": "ev-charger-installation-redmond-wa"
+  },
+  "sources": [
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "title": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "retrieved": "2026-10-22",
+      "http_status": 200,
+      "supports": "L&I list of cities issuing own electrical permits; Redmond 15670 NE 85th St, 425-556-2473"
+    },
+    {
+      "url": "https://www.redmond.gov/484/ElectricalMechanicalPlumbing-Permit",
+      "title": "https://www.redmond.gov/484/ElectricalMechanicalPlumbing-Permit",
+      "retrieved": "2026-10-22",
+      "http_status": 200,
+      "supports": "New or altered circuit/panel/service needs permit; OTC via REPS; in-person Mon-Thu 10-3; no paper; permit card on site"
+    },
+    {
+      "url": "https://www.redmond.gov/DocumentCenter/View/2198/Electrical-Application-PDF",
+      "title": "https://www.redmond.gov/DocumentCenter/View/2198/Electrical-Application-PDF",
+      "retrieved": "2026-10-22",
+      "http_status": 200,
+      "supports": "Permit required before electrical equipment installed/altered; plan review list incl. exterior appliance installations; contractor license + Redmond business license"
+    },
+    {
+      "url": "https://www.redmond.gov/1114/Redmond-ePermitting-Service-REPS",
+      "title": "https://www.redmond.gov/1114/Redmond-ePermitting-Service-REPS",
+      "retrieved": "2026-10-22",
+      "http_status": 200,
+      "supports": "REPS online permitting portal"
+    },
+    {
+      "url": "https://www.redmond.gov/504/Development-Services-Fees",
+      "title": "https://www.redmond.gov/504/Development-Services-Fees",
+      "retrieved": "2026-10-22",
+      "http_status": 200,
+      "supports": "Development Services fee schedule (no amounts quoted)"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=296-46B-010",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=296-46B-010",
+      "retrieved": "2026-10-22",
+      "http_status": 200,
+      "supports": "WA adopts NEC 2023; NEC 2026 effective Dec 31, 2026"
+    },
+    {
+      "url": "https://afdc.energy.gov/fuels/electricity-charging-home",
+      "title": "https://afdc.energy.gov/fuels/electricity-charging-home",
+      "retrieved": "2026-10-22",
+      "http_status": 200,
+      "supports": "Level 1 vs Level 2; outdoor-rated equipment safe in rain; capacity; continuous load; NEC Article 625; certified equipment"
+    },
+    {
+      "url": "https://www.energystar.gov/products/ev_chargers",
+      "title": "https://www.energystar.gov/products/ev_chargers",
+      "retrieved": "2026-10-22",
+      "http_status": 200,
+      "supports": "ENERGY STAR certified EV charger product finder"
+    },
+    {
+      "url": "https://www.pse.com/en/rebates/ev-home-charger",
+      "title": "https://www.pse.com/en/rebates/ev-home-charger",
+      "retrieved": "2026-10-22",
+      "http_status": 200,
+      "supports": "PSE rebate eligibility rules; 60-day window; one per residence per 5 years; Customer Construction Services 1-888-321-7779 capacity check"
+    },
+    {
+      "url": "https://www.pse.com/en/pages/electric-cars/Home-charging",
+      "title": "https://www.pse.com/en/pages/electric-cars/Home-charging",
+      "retrieved": "2026-10-22",
+      "http_status": 200,
+      "supports": "PSE Up & Go Electric Home Charging program overview"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-10-22",
+      "http_status": 200,
+      "supports": "L&I Verify contractor lookup"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=87joDusz_ic",
+      "title": "https://www.youtube.com/watch?v=87joDusz_ic",
+      "retrieved": "2026-10-22",
+      "http_status": 200,
+      "supports": "Ask This Old House Level 2 install video (oEmbed 200)"
+    }
+  ],
+  "dropped": [
+    "kentwa.gov permit pages (403 to box curl; city switched to Redmond)",
+    "L&I homeowner electrical work page (404)",
+    "RCW 19.28.261 owner exemption (page text not parsed; claim omitted)",
+    "Redmond and PSE fee/rebate dollar amounts (omitted)",
+    "se.com and chargepoint.com/products/home (403)"
+  ]
+}
