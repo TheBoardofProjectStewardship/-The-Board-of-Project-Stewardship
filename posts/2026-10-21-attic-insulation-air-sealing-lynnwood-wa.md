@@ -22,6 +22,8 @@ In a wet autumn and winter climate, that combination shows up as drafts, uneven 
 
 The Board of Project Stewardship's [Lynnwood directory](../lynnwood.html), [insulation page](../insulation.html), [roofing page](../roofing.html), [HVAC page](../hvac.html) and [permits overview](../permits.html) cover the wider picture. This guide sticks to what the City of Lynnwood, the Washington State Energy Code, Washington L&I, the EPA, ENERGY STAR and Snohomish County PUD actually publish.
 
+![Open attic hatch in a hallway ceiling of a Lynnwood, WA home before attic insulation and air sealing work](../assets/images/posts/2026-10-21-lynnwood-attic-insulation-6.webp)
+
 ## Do you need a permit in Lynnwood?
 
 Lynnwood's [Guide to Getting a Permit](https://www.lynnwoodwa.gov/Services/Apply-for-a-Permit/Guide-to-Getting-a-Permit) says Development and Business Services reviews and issues residential building permits and electrical permits, and that some projects do not require a permit. It points homeowners to the City's Work Exempt list and to staff for help deciding.
@@ -36,6 +38,8 @@ What that means in practice:
 - **Applications and inspections run online.** The City's [Online Permit Portal page](https://www.lynnwoodwa.gov/Services/Apply-for-a-Permit/Online-Permit-Portal-Apply-Review-Pay-Issue-Permits-Inspections) says building and electrical permits are applied for, paid and inspected through the portal, that permits are not valid until approved, paid for and issued, and that the cutoff for next-day inspection requests is 4:00 p.m. It also carries a scam notice about people impersonating City staff.
 
 Lynnwood's [Adopted Codes page](https://www.lynnwoodwa.gov/Services/Apply-for-a-Permit/Adopted-Codes-City-Design-Guidelines-Plans) lists the Washington State Energy Code, with the residential provisions in [Chapter 51-11R WAC](https://app.leg.wa.gov/wac/default.aspx?cite=51-11R) applying to single-family homes, duplexes and townhouses, and the 2023 National Electrical Code for electrical work.
+
+![Deep layer of blown-in attic insulation between ceiling joists in a Lynnwood, WA home](../assets/images/posts/2026-10-21-lynnwood-attic-insulation-7.webp)
 
 ## What the energy code says about attics
 
@@ -97,6 +101,8 @@ Vermiculite looks like small gray-brown or gold pebbles between the attic joists
 
 If you see vermiculite, stop the project there. Do not store boxes on it, walk through it or blow new insulation over it until a qualified professional has looked at it.
 
+![Insulation installer in protective gear blowing loose-fill insulation into an attic in a Lynnwood, WA home](../assets/images/posts/2026-10-21-lynnwood-attic-insulation-8.webp)
+
 ## Snohomish County PUD weatherization rebates
 
 Lynnwood is served by Snohomish County PUD. The PUD's [weatherization rebates page](https://www.snopud.com/save-energy/residential/rebates/weatherization/) says customers with electrically heated homes may be eligible for insulation rebates, among others. Its stated requirements include owning a single-family or manufactured home, or a townhouse or condo in a building with up to four attached homes; attic insulation going from R-19 or less up to R-49; and installation by a PUD registered contractor, who includes the rebate in the bill and submits the paperwork. The same page lists the PUD's Energy Hotline, 425-783-1700, and the PUD's [rebates hub](https://www.snopud.com/rebates/) links to its registered contractor search. Program terms change, so confirm eligibility with the PUD before you sign.
@@ -125,6 +131,8 @@ Ask every bidder to put these in writing:
 - [Air Vent](https://www.airvent.com/) — attic ventilation products for the intake and exhaust side of a vented attic.
 
 Ask which products a bidder actually installs, and confirm the insulation chosen fits any knob-and-tube or recessed light conditions in your attic.
+
+![Gable and soffit vents on a Lynnwood, WA house roofline under gray autumn skies, where attic ventilation and insulation work meet](../assets/images/posts/2026-10-21-lynnwood-attic-insulation-9.webp)
 
 ## How to shortlist and verify an insulation contractor
 

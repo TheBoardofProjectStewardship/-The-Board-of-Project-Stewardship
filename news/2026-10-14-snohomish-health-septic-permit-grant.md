@@ -29,6 +29,8 @@ The grant will help pay for new software, the Accela Civic Application platform.
 
 My Edmonds News quoted Ragina Gray, director of the health department's environmental health division: "We're upgrading to a new software package that will streamline online applications, provide greater access to data, and better integrate application materials with the County's planning and development services department."
 
+![Concrete septic tank set in an excavation beside a new home under construction in rural Snohomish County](../assets/images/news/2026-10-14-snohomish-county-septic-3.webp)
+
 ## Statewide demand far outstripped the money
 
 Commerce said demand for the program far exceeded the money available. The agency received 60 applications seeking a combined $3.7 million and funded eight.

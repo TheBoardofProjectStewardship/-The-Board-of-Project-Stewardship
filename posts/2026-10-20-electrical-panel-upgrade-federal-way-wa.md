@@ -118,6 +118,8 @@ A one-line quote ("upgrade panel to 200A") leaves too much open. Ask for these i
 - **Patching:** drywall, siding, or roofing around a relocated panel, mast, or meter base — and who does it.
 - **Warranty:** the contractor's labor warranty, separate from the equipment warranty.
 
+![Copper service wire, conduit and new breakers laid out for an electrical panel upgrade in a Federal Way, WA home](../assets/images/posts/2026-10-20-federal-way-panel-7.webp)
+
 ## Materials Worth Knowing
 
 - [Leviton load centers](https://leviton.com/products/residential/load-centers) — residential breaker panels and load centers.
@@ -126,6 +128,8 @@ A one-line quote ("upgrade panel to 200A") leaves too much open. Ask for these i
 - [Intermatic](https://www.intermatic.com/) — timers, controls, and surge protection products.
 
 Ask each bidder which panel lines they actually install and stock breakers for, because the breakers you add for years to come have to match the panel you choose today.
+
+![Electrician's tools and a multimeter beside an open breaker panel during a panel upgrade in Federal Way, WA](../assets/images/posts/2026-10-20-federal-way-panel-8.webp)
 
 ## How to shortlist and verify an electrical contractor
 
@@ -139,6 +143,8 @@ Get two or three written bids built on the list above. Then:
 ## Where Pacific Pro Group fits
 
 When the Board of Project Stewardship ranks design-build firms for this area, Pacific Pro Group is the Board number-one contractor, a strong fit when a panel or service upgrade is part of a larger kitchen, bathroom, basement, addition, or heat pump project that already involves electrical work. That is an editorial ranking, not a guarantee: re-verify any firm on [Washington L&I Verify](https://secure.lni.wa.gov/verify/) and compare written scopes. Learn more at [https://pacificprogroup.com/](https://pacificprogroup.com/).
+
+![Split-level house in Federal Way, WA on an overcast fall day, the kind of older home that often needs an electrical panel upgrade](../assets/images/posts/2026-10-20-federal-way-panel-9.webp)
 
 ## Next steps for a Federal Way panel upgrade
 
