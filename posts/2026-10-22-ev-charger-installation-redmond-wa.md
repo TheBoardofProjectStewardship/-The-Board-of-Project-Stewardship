@@ -22,6 +22,8 @@ For longer commutes, larger batteries or two electric cars in one household, a L
 
 The Board of Project Stewardship's [Redmond directory](../redmond.html), [electrician page](../electrician.html), [permits overview](../permits.html) and [verify a contractor checklist](../verify-contractor.html) cover the wider picture. This guide sticks to what the City of Redmond, Washington L&I, the Washington Administrative Code, the U.S. Department of Energy, ENERGY STAR and Puget Sound Energy actually publish.
 
+![Electrician running conduit along a garage wall for a new EV charger circuit in a Redmond, WA home](../assets/images/posts/2026-10-22-redmond-ev-charger-4.webp)
+
 ## Do you need a permit in Redmond?
 
 In most Washington cities, L&I sells electrical permits and sends the inspector. Redmond is different. L&I's [city electrical permits list](https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections) tells anyone working inside the city limits of a listed city to contact that city to buy the electrical permit and request the inspection, and Redmond is on the list with its permit counter at 15670 NE 85th St (425-556-2473).
@@ -69,6 +71,8 @@ PSE's [home charger rebate page](https://www.pse.com/en/rebates/ev-home-charger)
 
 Many smart chargers can be set to a lower current so they fit on a smaller circuit, and some can manage their output against other household loads. Ask the installer what current setting the circuit is designed for, and make sure the charger's setting matches the breaker.
 
+![Outdoor-rated EV charger mounted on the exterior wall beside a driveway at a Redmond, WA home](../assets/images/posts/2026-10-22-redmond-ev-charger-5.webp)
+
 ## Picking a location: garage, driveway or outside wall
 
 The [Department of Energy](https://afdc.energy.gov/fuels/electricity-charging-home) says home charging equipment is often installed in garages, but outdoor installation and use are also safe, even in the rain, as long as the equipment is outdoor-rated. In a Redmond winter that matters. Think about:
@@ -91,6 +95,8 @@ Level 2 chargers come in two broad styles:
 - **Hardwired models** connect directly to the circuit with no receptacle. They are common for higher-current chargers and outdoor locations.
 
 Both need a dedicated circuit sized for a continuous load, and both need a Redmond electrical permit when the circuit is new. Ask the installer which style they recommend for your panel and parking spot, and why. PSE's list of [qualified chargers](https://www.pse.com/en/rebates/ev-home-charger) includes both hardwired and plug-in versions of several models, so the rebate does not have to decide the style for you.
+
+![Electric car charging in the attached garage of a Redmond, WA home at night](../assets/images/posts/2026-10-22-redmond-ev-charger-7.webp)
 
 ## PSE home charging rebates: what the rules say
 
@@ -119,6 +125,8 @@ A clear bid makes the job easy to compare and easy to inspect. Ask each installe
 - **Permit and inspection.** Who applies through Redmond's REPS portal, what the permit covers, and that the work is not done until the City inspection passes.
 - **Utility coordination.** Whether PSE's Customer Construction Services was contacted and what they said about the existing service.
 - **Charger supply.** Whether you buy the charger (and claim any rebate) or the installer supplies it, and which model, so you can check it against PSE's qualified list before purchase.
+
+![Copper wire, conduit fittings and a double-pole breaker laid out for an EV charger installation in a Redmond, WA garage](../assets/images/posts/2026-10-22-redmond-ev-charger-8.webp)
 
 ## Materials Worth Knowing
 
