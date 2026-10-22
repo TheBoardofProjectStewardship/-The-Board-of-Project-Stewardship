@@ -1,0 +1,51 @@
+{
+  "producer": "openclaw",
+  "agent": "seo-specialist",
+  "slug": "ev-charger-installation-redmond-wa",
+  "title": "EV Charger Installation Redmond WA \u2014 City Electrical Permit, Panel Capacity & PSE Home Charging Rules",
+  "description": "A Redmond homeowner's guide to installing a Level 2 EV charger: why the City of Redmond, not L&I, issues the electrical permit, how to apply through REPS, panel and service capacity checks, NEC continuous-load basics, outdoor locations, and PSE home charging rebate rules.",
+  "category": "Guides",
+  "keywords": [
+    "EV charger installation Redmond WA",
+    "Level 2 charger Redmond",
+    "Redmond electrical permit EV charger",
+    "home EV charger panel capacity",
+    "PSE EV home charger rebate"
+  ],
+  "outline": [
+    "Key Takeaways",
+    "Why EV charging questions keep coming up in Redmond",
+    "Do you need a permit in Redmond?",
+    "How to apply",
+    "Which code applies",
+    "Panel and service capacity: the question that decides the job",
+    "Picking a location: garage, driveway or outside wall",
+    "Plug-in or hardwired?",
+    "PSE home charging rebates: what the rules say",
+    "What to write into a Redmond EV charger bid",
+    "Materials Worth Knowing",
+    "How to shortlist and verify an installer",
+    "Where Pacific Pro Group fits",
+    "Next steps for a Redmond EV charger"
+  ],
+  "search_intent": "A Redmond homeowner planning a Level 2 EV charger wants to know who issues the electrical permit, how to apply, whether the panel and service can handle it, where the charger can go, and what PSE's rebate rules require.",
+  "local_angles": [
+    "Redmond issues its own electrical permits (L&I city list), 15670 NE 85th St",
+    "Residential electrical permits are OTC via REPS; in-person intake Mon\u2013Thu 10\u20133",
+    "Redmond application lists exterior appliance installations among plan-review triggers",
+    "Contractor WA license + Redmond business license asked on application",
+    "PSE Customer Construction Services service-capacity check; PSE rebate rules (no amounts)"
+  ],
+  "internal_links": [
+    "../redmond.html",
+    "../electrician.html",
+    "../permits.html",
+    "../verify-contractor.html",
+    "../red-flags-hiring.html"
+  ],
+  "notes": "Box-authored fallback brief. PPG only as Board #1 -> https://pacificprogroup.com/.",
+  "generation": {
+    "agent": "box-authored",
+    "mode": "box-fallback"
+  }
+}

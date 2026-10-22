@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-10-22-ev-charger-installation-redmond-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-10-22T11:00:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "EV Charger Installation Redmond WA \u2014 City Electrical Permit, Panel Capacity & PSE Home Charging Rules",
+    "date": "2026-10-22",
+    "slug": "ev-charger-installation-redmond-wa",
+    "description": "A Redmond homeowner's guide to installing a Level 2 EV charger: why the City of Redmond, not L&I, issues the electrical permit, how to apply through REPS, panel and service capacity checks, NEC continuous-load basics, outdoor locations, and PSE home charging rebate rules.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 connected at ~03:38 PT but had no 2026-10-22 packets (WSL board-intake inbox latest *-2026-10-21). Topic: EV charger installation, Redmond WA (EV charging never a post topic; Redmond only used once, 2026-10-03 hiring guide, not in the last 14 posts). Kent was considered but kentwa.gov returned 403 to box curl. Producer role fields kept per intake contract."
+}
