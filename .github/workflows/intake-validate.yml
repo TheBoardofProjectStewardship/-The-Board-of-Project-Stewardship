@@ -18,6 +18,8 @@ jobs:
           fetch-depth: 0
       - name: Dry-run intake tests
         run: python3 -m unittest discover -s tests -v
+      - name: Jekyll publishes runtime fetches
+        run: python3 scripts/check_jekyll_publish.py
       - name: Public page integrity
         run: python3 tools/check_seo_pack.py --ci
       - name: Image byte duplicates

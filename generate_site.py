@@ -10796,7 +10796,12 @@ def build_pascal_editor_page() -> str:
     )
 
 def build_site_visit_page() -> str:
-    """Board-branded Site Visit landing; crawlable intro above the tool iframe."""
+    """Board-branded Site Visit landing; crawlable intro above the tool iframe.
+
+    The Live Feasibility calculator and the keyless parcel lookup live in the
+    hand-authored tool at tools/site-visit/index.html (parcel-lookup.js).
+    Regeneration writes this landing only and keeps that iframe src.
+    """
     src = tools_href("site-visit", "", "index.html")
     body = f"""  <header class="max-w-6xl mx-auto px-4 pt-10 pb-2">
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools</p>

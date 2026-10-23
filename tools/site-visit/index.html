@@ -52,6 +52,30 @@
         textarea::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
         textarea::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
         textarea::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        .parcel-address-row { display: flex; gap: 0.5rem; align-items: center; }
+        .parcel-address-row input { flex: 1 1 auto; min-width: 0; width: auto; }
+        #parcel_lookup_btn:disabled { opacity: 0.6; cursor: wait; }
+        #parcel_card { grid-column: 1 / -1; }
+        #parcel_facts { margin-top: 0.5rem; }
+        #parcel_facts dt { font-weight: 600; color: #334155; margin-top: 0.35rem; }
+        #parcel_facts dd { margin: 0; color: #0f172a; }
+        #parcel_facts em { color: #64748b; }
+        #parcel_chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+        #parcel_chips button {
+            background: #fff;
+            color: #0f766e;
+            border: 1px solid #99f6e4;
+            border-radius: 9999px;
+            padding: 0.35rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        #parcel_chips button:hover { background: #f0fdfa; }
+        #parcel_sources a { color: #0f766e; text-decoration: underline; margin-right: 0.35rem; }
+        #existing_sqft { width: 6.5rem; background: #fff; }
+        #existing_confirm { color: #92400e; font-size: 0.75rem; margin-top: 0.35rem; }
         
         /* Hide default details marker to make custom accordion */
         details > summary { list-style: none; }
@@ -174,7 +198,24 @@
                             </div>
                             <div>
                                 <label for="client_address" class="block text-sm font-medium text-slate-700 mb-1">Project Address</label>
-                                <input type="text" id="client_address" class="track-input primary-text w-full text-sm border border-slate-300 rounded-md px-3 py-2 focus:ring-teal-500 focus:border-teal-500" placeholder="123 Main St, Seattle, WA" data-phase="1">
+                                <div class="parcel-address-row">
+                                    <input type="text" id="client_address" class="track-input primary-text text-sm border border-slate-300 rounded-md px-3 py-2 focus:ring-teal-500 focus:border-teal-500" placeholder="123 Main St, Seattle, WA" data-phase="1">
+                                    <button type="button" id="parcel_lookup_btn" class="shrink-0 bg-teal-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-teal-700 transition-colors shadow-sm">Look up parcel</button>
+                                </div>
+                            </div>
+                            <div id="parcel_card" hidden class="border border-slate-200 rounded-lg bg-slate-50 p-4">
+                                <p class="text-sm font-bold text-slate-800">Parcel facts <span class="text-xs font-normal text-slate-500">(read-only)</span></p>
+                                <dl id="parcel_facts" class="text-sm"></dl>
+                                <div id="parcel_chips"></div>
+                                <div id="parcel_sources" class="text-xs text-slate-600 mt-3"></div>
+                                <div id="existing_house" class="mt-3 text-sm text-slate-700">
+                                    <label for="existing_sqft" class="font-medium text-slate-800">Existing house:</label>
+                                    <input type="text" id="existing_sqft" inputmode="numeric" class="text-sm border border-slate-300 rounded-md px-2 py-1 font-mono" autocomplete="off">
+                                    <span id="existing_detail"></span>
+                                    <p id="existing_confirm" hidden></p>
+                                </div>
+                                <p class="text-xs text-slate-500 mt-2">Public county records; not a permit or zoning determination.</p>
+                                <p class="text-xs text-slate-500">King County Assessor and Snohomish County Assessor public records</p>
                             </div>
                             <div>
                                 <label for="client_email" class="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
@@ -722,13 +763,15 @@
                                         <p><strong>Construction:</strong> 6 – 8 months</p>
                                     </div>
 
-                                    <!-- SF Input -->
+                                    <!-- SF Input: priced area is only what will be added or built -->
                                     <div>
-                                        <label class="block text-sm text-slate-300 mb-1 font-medium">Estimated Square Footage</label>
+                                        <label for="est_sqft" class="block text-sm text-slate-300 mb-1 font-medium">Square feet to add or build</label>
                                         <div class="relative">
                                             <input type="number" id="est_sqft" class="calc-input w-full bg-slate-700 border border-slate-500 text-white rounded-md px-3 py-3 focus:ring-sky-500 focus:border-sky-500 font-mono text-xl" placeholder="e.g., 500">
                                             <span class="absolute right-3 top-3.5 text-slate-400 font-bold">sq ft</span>
                                         </div>
+                                        <p id="house_size_total" class="text-xs text-slate-300 mt-2">Existing — + added — = — sq ft total house size</p>
+                                        <p class="text-xs text-slate-400 mt-1">King County Assessor and Snohomish County Assessor public records</p>
                                     </div>
                                     
                                     <!-- Tier Selection -->
@@ -1363,7 +1406,8 @@
                         <div class="estimate-box">
                             <h2 style="margin-top: 0; color: #166534; border-bottom-color: #bbf7d0;">Preliminary Estimate Breakdown</h2>
                             <ul>
-                                <li><span class="label" style="color: #15803d;">Estimated Square Footage:</span> <span class="value">${sqft} sq ft</span></li>
+                                <li><span class="label" style="color: #15803d;">Square feet to add or build:</span> <span class="value">${sqft} sq ft</span></li>
+                                <li><span class="label" style="color: #15803d;">Existing house + added = total:</span> <span class="value">${(document.getElementById('house_size_total') || {}).textContent || ''}</span></li>
                                 <li><span class="label" style="color: #15803d;">Selected Finish Tier:</span> <span class="value">${selectedTier}</span></li>
                                 <li><span class="label" style="color: #166534; font-size: 1.3em;">Total Estimated Cost:</span> <span class="value" style="color: #166534; font-size: 1.3em; font-weight: bold;">${calcTotal}</span></li>
                             </ul>
@@ -1551,5 +1595,8 @@
   report();
 })();
 </script>
+<script src="parcel-lookup.js"></script>
+<script src="house-size-lookup.js"></script>
+<script src="parcel-ui.js"></script>
 </body>
 </html>

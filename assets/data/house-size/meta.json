@@ -1,0 +1,14 @@
+{
+ "king": {
+  "parcels": 525509,
+  "shards": 805,
+  "bytes": 18379411,
+  "source": "https://aqua.kingcounty.gov/extranet/assessor/Residential%20Building.zip"
+ },
+ "snoh": {
+  "parcels": 276118,
+  "shards": 132,
+  "bytes": 11011186,
+  "source": "https://www.arcgis.com/sharing/rest/content/items/3c5edc985cec4fba8b3938d16ed1d3c3/data"
+ }
+}
