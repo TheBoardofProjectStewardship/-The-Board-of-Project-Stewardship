@@ -167,6 +167,72 @@
         "Furniture and fixtures sit where the plan symbols are, scaled from the drawing. Interior doors are shown as open frames.",
         "Siding, trim, deck railings and exterior lights are not modeled."
       ]
+    },
+    {
+      "slug": "hillside-lindal-adu",
+      "engine": "config",
+      "config": "hillside-lindal-adu.json",
+      "title": "Hillside post-and-beam house with a lower-level ADU",
+      "card": "Preliminary design for a new custom post-and-beam home on a sloping lot: a main floor with a planted roof, a primary suite upstairs and a daylight lower-level ADU with two bedrooms that opens to the back patio.",
+      "facts": [
+        "Preliminary design",
+        "3,587 SF on three levels",
+        "1,179 SF lower-level ADU"
+      ],
+      "kicker": "Seattle, preliminary design",
+      "thumb": "/portfolio/hillside-lindal-adu/thumb.png",
+      "dek": "Explore the preliminary design layer by layer: the house on its slope, the entry side, the flat and planted roofs, the upper floor, the main floor and the lower-level ADU.",
+      "sourceNote": "Preliminary design, modeled from the design drawings: the main, upper and lower level plans at 1/8 inch = 1 foot, four elevations and the 3D plan views. Walls, wall openings, room names, the level areas, the floor to floor heights and the roof outline come from those sheets. The design may still change. Anything the sheets do not print is listed below as an assumption.",
+      "learn": {
+        "house": [
+          "roof",
+          "header"
+        ],
+        "front": [
+          "header"
+        ],
+        "roof": [
+          "roof"
+        ],
+        "upper": [
+          "partition"
+        ],
+        "plan": [
+          "partition"
+        ],
+        "foundation": [
+          "partition"
+        ]
+      },
+      "notes": {
+        "roof": [
+          "Roof",
+          "From the elevations and the 3D views: two flat, low roofs with deep overhangs, one over the main floor and one over the upper floor. The main roof outline is drawn on the upper level plan, where it is labeled green roof. The back elevation prints three 10'-6\" steps, so the main roof sits 10'-6\" above the main floor and the upper roof 10'-6\" above the upper floor."
+        ],
+        "header": [
+          "Openings",
+          "Window and door widths are the gaps in the exterior walls on the plans, mostly 4'-11\" bays between the posts of the 5'-6\" building grid. The plans print no window schedule, so sills and heads are scaled from the elevations by window type: tall glass to the back, high transom windows on the street sides."
+        ],
+        "partition": [
+          "Room layout",
+          "The plans print the area of each level but no room areas, so rooms show their names only. Select a room to fly in."
+        ]
+      },
+      "assumptions": [
+        "This is a preliminary design. The drawings say the design may change.",
+        "Walls are traced from the plan drawings at 1/8 inch = 1 foot, checked against the printed 5'-6\" building grid. No overall dimensions are printed.",
+        "Floor to floor heights are the printed 10'-6\" steps on the back elevation. Walls stop 1'-0\" below the next level for the roof and floor edge; that depth is scaled from the elevations.",
+        "Window and door heights are scaled from the elevations by window type. There is no window or door schedule.",
+        "The main roof outline is the line drawn on the upper level plan. The upper roof overhang, about 2'-0\", is scaled from the elevations. Both roofs are drawn flat; their slope for drainage is not printed.",
+        "The green roof is drawn over the whole main roof outside the upper floor, as the upper level plan labels it. Planting and parapet details are not shown.",
+        "The ground is drawn as simple planes scaled from the side elevations: level with the lower floor behind the house, rising to the main floor on the street side, and stepping down beside the walk stair to the lower level entry. The lot shape, the full 16 foot fall across the lot and any retaining walls are not modeled.",
+        "The stairs are drawn as straight flights of 17 risers, scaled from the plans. The riser count is not printed.",
+        "The walk steps between the lower entry and the main level walk are the nine treads drawn on the plans; their rise is assumed even.",
+        "Two rooms with no printed name are labeled Bath (unlabeled) from their plumbing fixtures.",
+        "The main deck posts are placed at its outer corners, scaled from the back elevation. Railings are not modeled.",
+        "Furniture and fixtures sit where the plan symbols are, scaled from the drawing. Interior doors are shown as open gaps.",
+        "Siding, cedar trim, posts and beams inside the glass walls, and window mullions are not modeled."
+      ]
     }
   ]
 }

@@ -161,6 +161,40 @@ console.log(JSON.stringify({{ids:m.groups.map(g=>g.id),floors:[...new Set(m.labe
         self.assertFalse(main[0]["visible"])
         self.assertLess(slab[1]["cut"], main[1]["cut"])
 
+    def test_hillside_lindal_adu_is_plan_data(self):
+        p = next(p for p in self.projects if p["slug"] == "hillside-lindal-adu")
+        cfg = ps.load_config(p)
+        self.assertEqual([(l["id"], l["y"]) for l in cfg["levels"]], [("lower", 0), ("main", 10.5), ("upper", 21.0)])  # printed 10'-6" steps
+        self.assertEqual([s["id"] for s in cfg["stages"]], list(ps.STAGE_PROGRESS))
+        for r in cfg["rooms"]:  # the plans print no room areas
+            self.assertTrue(r.get("areaNotPrinted"), r["name"])
+            self.assertNotIn("SF", r["text"])
+        self.assertIn("preliminary design", (p["kicker"] + p["card"]).lower())
+        self.assertTrue(p.get("assumptions"))
+        self.assertTrue(cfg["terrain"] and all(v[1] >= 0 for t in cfg["terrain"] for v in t))
+        private = {'dbba921ce2051021', '2ea87d43675462ec', 'b7501c4da0b0cfc5', '77646f5a4f316663', '54acfadf2c86190a'}  # sha256 prefixes of the client's private words, kept out of the repo in plain text
+        words = set(re.findall(r"[a-z0-9]+", (json.dumps(p) + json.dumps(cfg)).lower()))
+        self.assertFalse({hashlib.sha256(w.encode()).hexdigest()[:16] for w in words} & private)
+
+    @unittest.skipUnless(shutil.which("node"), "node not installed")
+    def test_engine_builds_three_levels(self):
+        script = f"""
+const H=require({json.dumps(str(ENGINE))});
+const cfg=require({json.dumps(str(ps.DATA / 'hillside-lindal-adu.json'))});
+H.register('house3',cfg);H.useProfile('house3');
+const m=H.buildModel();
+const st=p=>['upper','lower','roof'].map(id=>H.groupState(id,p));
+console.log(JSON.stringify({{floors:[...new Set(m.labels.map(l=>l.floor))],s:[0.04,0.56,0.74,0.93].map(st)}}));
+"""
+        out = json.loads(subprocess.run(["node", "-e", script], capture_output=True, text=True, check=True).stdout)
+        self.assertEqual(sorted(out["floors"]), ["lower", "main", "upper"])
+        house, upper, main, lower = out["s"]
+        self.assertTrue(all(g["visible"] and g["cut"] == 100 for g in house))  # opens on the roofed exterior
+        self.assertTrue(upper[0]["visible"] and upper[0]["cut"] < 31 and upper[1]["cut"] == 100)
+        self.assertFalse(main[0]["visible"])
+        self.assertTrue(10.5 < main[1]["cut"] < 21)  # main floor plan cut
+        self.assertLess(lower[1]["cut"], 10.5)  # lower level plan cut
+
 
 if __name__ == "__main__":
     unittest.main()

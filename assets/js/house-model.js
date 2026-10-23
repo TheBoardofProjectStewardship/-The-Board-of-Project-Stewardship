@@ -69,7 +69,10 @@ function buildFromConfig(cfg) {
   const fix = group('fixtures'), roof = group('roof');
   const F = cfg.floor || 0;
   const up = { slab, walls, finish, fix };
-  const G = o => (low && !o.lvl ? low : up);
+  // Three-level configs (lower, main, upper): the lower and main floors share the lower groups, the top level lifts away.
+  const TOP = LV ? LV.length - 1 : 1, L3 = !!(LV && LV.length === 3);
+  const G = o => (low && (o.lvl || 0) < TOP ? low : up);
+  const floorOf = lvl => L3 ? ['lower', 'main', 'upper'][lvl || 0] : (lvl ? 'upper' : 'main');
   const baseOf = o => o.base != null ? o.base : (LV ? LV[o.lvl || 0].y : F);
   const sub = (a, b) => a.map((v, i) => v - b[i]);
   const cross = (a, b) => [a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1]*b[0]];
@@ -106,7 +109,10 @@ function buildFromConfig(cfg) {
   prism(site, rect([B.min[0], B.min[2], B.max[0], B.max[2]]), -0.3, 0, C_LAWN, 7, false);
   for (const p of cfg.pads || []) prism(site, p.poly, 0, p.y1 != null ? p.y1 : p.kind === 'drive' ? 0.05 : F, C_PAVE, 7, true, C_DETAIL);
   // Floor decks of a two-level house: slab on grade, the garage slab, the upper floor framing.
-  for (const d of cfg.decks || []) prism(G(d).slab, d.poly, d.y0, d.y1, C_FLOOR, 7, !!d.edge, C_DETAIL);
+  for (const d of cfg.decks || []) prism(L3 && d.lvl === 1 ? low.walls : L3 && d.lvl === 2 ? up.walls : G(d).slab, d.poly, d.y0, d.y1, C_FLOOR, 7, !!d.edge, C_DETAIL);
+  // Sloped ground (cfg.terrain): triangles [[x, y, z] x 3] around the footprint, and skirt quads at the lot edge.
+  for (const t of cfg.terrain || []) tri(site, t[0], t[1], t[2], C_LAWN, 7, 0);
+  for (const q of cfg.terrainSkirt || []) face(site, q, C_LAWN, 7, false, 0);
   // Slab and room floors.
   for (const r of cfg.rooms) {
     if (!r.poly) continue;
@@ -193,7 +199,11 @@ function buildFromConfig(cfg) {
   if (cfg.gableRoof) gableRoofs(cfg.gableRoof);
   else if (cfg.fieldRoof) fieldRoofs(cfg.fieldRoof);
   else if (cfg.pitchedRoof) hipRoofs(cfg.pitchedRoof);
-  else for (const c of cfg.roof || []) prism(roof, c.poly, F + c.y + RA, F + c.y + RA + RT, C_ROOF, 0, true, C_FASCIA);
+  else for (const c of cfg.roof || []) {
+    prism(roof, c.poly, F + c.y + RA, F + c.y + RA + (c.t ?? RT), C_ROOF, 0, true, C_FASCIA);
+    // A planted (green) roof: a thin lawn layer inside the parapet edge.
+    for (const g of c.green || []) prism(roof, g, F + c.y + RA + (c.t ?? RT), F + c.y + RA + (c.t ?? RT) + 0.08, C_LAWN, 0, false);
+  }
   /** Hipped roof per wing over a plan rectangle. Overlapping wings at one pitch meet in true valleys.
       Eaves overhang the walls, with a fascia band, a soffit and standing seams down each plane. */
   function hipRoofs(spec) {
@@ -375,14 +385,14 @@ function buildFromConfig(cfg) {
   for (const r of cfg.rooms) {
     const text = r.text || (r.name + ' ' + (Math.round(r.area * 100) / 100) + ' SF');
     const minor = r.minor ?? ((r.area ?? 100) < 60);
-    const floors = LV ? [r.lvl ? 'upper' : 'main'] : ['upper', 'main'];
+    const floors = LV ? [floorOf(r.lvl)] : ['upper', 'main'];
     const ly = LV ? baseOf(r) + 0.15 : LY;
     for (const floor of floors) {
       labels.push({ text, position: [r.label[0], ly, r.label[1]], minor, floor });
       if (r.box) rooms.push({ text, floor, minor, center: [(r.box[0] + r.box[2]) / 2, ly, (r.box[1] + r.box[3]) / 2], box: r.box });
     }
   }
-  for (const d of cfg.dims || []) for (const floor of (LV ? [d.lvl ? 'upper' : 'main'] : ['upper', 'main'])) labels.push({ text: d.text, position: [d.at[0], LV ? LV[d.lvl || 0].y + 0.15 : LY, d.at[1]], minor: true, floor });
+  for (const d of cfg.dims || []) for (const floor of (LV ? [floorOf(d.lvl)] : ['upper', 'main'])) labels.push({ text: d.text, position: [d.at[0], LV ? LV[d.lvl || 0].y + 0.15 : LY, d.at[1]], minor: true, floor });
   return { groups: groups.map(g => ({ id: g.id, solid: new Float32Array(g.solid), lines: new Float32Array(g.lines) })), labels, rooms,
     bounds: cfg.bounds, notes: cfg.source || '' };
 }
@@ -446,13 +456,16 @@ function profileFor(cfg) {
 /** Camera and stage profile for a two-level house config: the roof lifts, the upper floor cuts down and lifts away,
     then the main floor cuts down to the slab. */
 function profileTwoLevel(cfg) {
-  const F = cfg.levels[0].y, U = cfg.levels[1].y, B = cfg.bounds;
-  const mainTop = F + (cfg.levels[0].ch || 9), upperTop = U + (cfg.levels[1].ch || 9);
+  const L3 = cfg.levels.length === 3, LT = cfg.levels[cfg.levels.length - 1], LM = cfg.levels[L3 ? 1 : 0];
+  const F = cfg.levels[0].y, M = LM.y, U = LT.y, B = cfg.bounds;
+  const mainTop = M + (LM.ch || 9), upperTop = U + (LT.ch || 9);
   const cl = (n, lo = 0, hi = 1) => Math.min(hi, Math.max(lo, n));
   const mx = (a, b, t) => a + (b - a) * t;
   const sm = (a, b, p) => { const t = cl((p - a) / (b - a)); return t * t * (3 - 2 * t); };
   const upperCut = p => p < 0.47 ? 100 : mx(upperTop + 0.5, U + 4.5, sm(0.48, 0.60, p));
-  const lowerCut = p => p < 0.62 ? 100 : p < 0.85 ? mx(mainTop + 0.5, F + 4.5, sm(0.64, 0.76, p)) : mx(F + 4.5, F + 0.02, sm(0.86, 0.93, p));
+  // Three levels: the main floor plan cut holds through the main floor stage, then the cut drops to the lower floor plan.
+  const lowerCut = L3 ? (p => p < 0.62 ? 100 : p < 0.80 ? mx(mainTop + 0.5, M + 4.5, sm(0.64, 0.72, p)) : mx(M + 4.5, F + 4.5, sm(0.84, 0.90, p)))
+    : (p => p < 0.62 ? 100 : p < 0.85 ? mx(mainTop + 0.5, F + 4.5, sm(0.64, 0.76, p)) : mx(F + 4.5, F + 0.02, sm(0.86, 0.93, p)));
   const state = (visible, cut = 100, opacity = 1) => ({ visible, cut, opacity });
   const shadow = (cfg.shadow || []).slice(0, 3);
   while (shadow.length < 3) shadow.push(shadow[0] || [0, 0, 0, 0]);
@@ -479,14 +492,15 @@ function profileTwoLevel(cfg) {
       if (p < 0.30) return full;
       if (p < 0.50) return mx(full, upperTop + 0.6, sm(0.30, 0.46, p));
       if (p < 0.64) return mx(upperTop + 0.6, U + 4.6, sm(0.48, 0.60, p));
+      if (L3) return mx(U + 4.6, M + 4.6, sm(0.64, 0.72, p)) - (M - F) * sm(0.84, 0.90, p);
       return mx(U + 4.6, F + 4.6, sm(0.64, 0.76, p)) - (p > 0.86 ? 3.0 * sm(0.86, 0.93, p) : 0);
     },
     bounds: B,
     tight: cfg.planBounds,
     frontAngle: cfg.frontAngle || 64,
     heading: { axon: (hd.axon ?? -36) * deg, front: (hd.front ?? 0) * deg, plan: (hd.plan ?? 0) * deg },
-    floorY: { main: F + 0.15, upper: U + 0.15 },
-    pickY: { main: F, upper: U },
+    floorY: L3 ? { lower: F + 0.15, main: M + 0.15, upper: U + 0.15 } : { main: F + 0.15, upper: U + 0.15 },
+    pickY: L3 ? { lower: F, main: M, upper: U } : { main: F, upper: U },
     shadow,
     stages: cfg.stages,
     flyAngle: cfg.flyAngle || { house: 0.70, front: 0.70, roof: 0.66, upper: 0.56, plan: 0.48, foundation: 0.52 },
@@ -750,13 +764,15 @@ void main() {
 function labelsFor(model, progress, mvp, width, height, dive = 0, pixelsPerFoot = 0, largeTargets = false) {
   const upper = progress >= 0.50 && progress <= 0.66;
   const main = progress >= 0.68 && progress <= 0.84;
+  // Three-level models label the lower floor on the last stage.
+  const lower = progress >= 0.88 && model.labels.some(l => l.floor === 'lower');
   let opacity = upper
     ? smooth(0.50, 0.54, progress) * (1 - smooth(0.62, 0.66, progress))
-    : main ? smooth(0.68, 0.72, progress) * (1 - smooth(0.80, 0.84, progress)) : 0;
+    : main ? smooth(0.68, 0.72, progress) * (1 - smooth(0.80, 0.84, progress)) : lower ? smooth(0.88, 0.92, progress) : 0;
   // v9: on every stage, zooming in brings the room names up, then the fixtures.
   opacity = Math.max(opacity, smooth(0.2, 0.6, dive));
   if (opacity < 0.015) return [];
-  const floor = progress < 0.67 ? 'upper' : 'main';
+  const floor = progress < 0.67 ? 'upper' : lower ? 'lower' : 'main';
   const slab = progress >= 0.84;
   const labels = [];
   // Major rooms take priority when the phone view cannot fit every annotation.
@@ -1285,7 +1301,7 @@ function createRenderer(canvas, options) {
     function now() { return typeof performance !== "undefined" ? performance.now() : Date.now(); }
     function stageId() { return current || stageByProgress(rendered).id; }
     function stageInfo() { return stageByProgress(rendered); }
-    function floorKey() { return rendered < 0.67 ? "upper" : "main"; }
+    function floorKey() { return rendered < 0.67 ? "upper" : rendered >= 0.86 && PROFILE.floorY.lower != null ? "lower" : "main"; }
     function floorY() { return PROFILE.floorY[floorKey()]; }
 
     function isDefault(s) {
