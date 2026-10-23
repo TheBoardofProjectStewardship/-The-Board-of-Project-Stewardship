@@ -176,6 +176,23 @@ console.log(JSON.stringify({{ids:m.groups.map(g=>g.id),floors:[...new Set(m.labe
         words = set(re.findall(r"[a-z0-9]+", (json.dumps(p) + json.dumps(cfg)).lower()))
         self.assertFalse({hashlib.sha256(w.encode()).hexdigest()[:16] for w in words} & private)
 
+    def test_attached_house_second_story_is_plan_data(self):
+        p = next(p for p in self.projects if p["slug"] == "attached-house-second-story")
+        cfg = ps.load_config(p)
+        lv = {l["id"]: l["y"] for l in cfg["levels"]}
+        self.assertAlmostEqual(lv["upper"] - lv["main"], 9.553, places=3)  # printed 9'-6 5/8" floor to floor
+        self.assertEqual([s["id"] for s in cfg["stages"]], list(ps.STAGE_PROGRESS))
+        self.assertEqual(cfg["totalSqft"], 650)  # printed existing first floor
+        for r in cfg["rooms"]:  # the plans print no room areas
+            self.assertTrue(r.get("areaNotPrinted"), r["name"])
+            self.assertNotIn("SF", r["text"])
+        self.assertTrue(p.get("assumptions"))
+        self.assertTrue(any(g.get("rakeTop") for g in cfg["gableRoof"]["gables"]))  # flared rakes from the roof plan
+        private = {'05e29742892ffdff', '22b823edd9da9a72', '2b593750ed92d3ce', '4e679ce0a735d3dd', '91b53a8010f26961',
+                   '9c62fc31f992e53e', 'adb5d2ebaad179f0', 'ae600959378c54c5', 'c608d1c43be36183', 'c89d33260ec38adb'}  # sha256 prefixes of the client's private words, kept out of the repo in plain text
+        words = set(re.findall(r"[a-z0-9]+", (json.dumps(p) + json.dumps(cfg)).lower()))
+        self.assertFalse({hashlib.sha256(w.encode()).hexdigest()[:16] for w in words} & private)
+
     @unittest.skipUnless(shutil.which("node"), "node not installed")
     def test_engine_builds_three_levels(self):
         script = f"""

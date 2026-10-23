@@ -235,6 +235,73 @@
         "Beam ends under the overhangs are the dashed beam lines on the plans where they run past the walls. Their 1'-0\" depth is scaled from the back elevation.",
         "Siding, cedar trim and soffits, posts and beams inside the glass walls, and window mullions are not modeled. The entry door is shown in warm wood, as on the front elevation."
       ]
+    },
+    {
+      "slug": "attached-house-second-story",
+      "engine": "config",
+      "config": "attached-house-second-story.json",
+      "title": "Attached house with a new second story",
+      "card": "A second-story addition from a plan set: a full new upper floor over one side of a one-story duplex, with a primary bedroom, two walk-in closets, a large bath, a laundry closet and a third bedroom under a new 6:12 gable. The other unit keeps its one-story roof.",
+      "facts": [
+        "650 SF existing main floor",
+        "New upper floor over the whole unit",
+        "15 riser U stair"
+      ],
+      "kicker": "Seattle, second-story addition",
+      "thumb": "/portfolio/attached-house-second-story/thumb.png",
+      "dek": "Explore the addition layer by layer: the finished house beside its neighbor unit, the entry side, the new roof, the new upper floor, the main floor with its new stair and the floor platform.",
+      "sourceNote": "Modeled from the plan set: the proposed main and upper floor plans, the roof plan and the existing and proposed elevations at 1/4 inch = 1 foot. Walls, openings, window sizes, room names, the floor, plate and ridge heights, the roof pitch and the overhangs come from those sheets. Anything the sheets do not print is listed below as an assumption.",
+      "learn": {
+        "house": [
+          "roof",
+          "header"
+        ],
+        "front": [
+          "header"
+        ],
+        "roof": [
+          "roof"
+        ],
+        "upper": [
+          "partition"
+        ],
+        "plan": [
+          "partition"
+        ],
+        "foundation": [
+          "partition"
+        ]
+      },
+      "notes": {
+        "roof": [
+          "Roof",
+          "From the roof plan and elevations: a new 6:12 gable over the whole addition side with its ridge running front to back, 2'-0\" eaves and flared rakes that widen to about 2'-0\" at the ridge. A small gable covers the upstairs closet bump on the entry side and runs into the main roof. The other unit keeps its existing gable, and the porch roof along the entry side stays in the plane of the existing roof. The new ridge is printed 24'-0 5/8\" above the main floor."
+        ],
+        "header": [
+          "Openings",
+          "New windows use the sizes printed beside them, such as NEW 6046 (6'-0\" wide, 4'-6\" tall) and NEW 5070 for the new sliding door. Heads are the printed 7'-4 1/4\" on the main floor and 6'-11 3/8\" on the upper floor, so each sill follows from the printed height. Existing openings are marked existing only; their heights are scaled from the elevations."
+        ],
+        "partition": [
+          "Room layout",
+          "The plans print room names but no room areas, so rooms show their names only. The upper floor sits 9'-6 5/8\" above the main floor with a 9'-1 1/8\" plate. The other unit is outside the work and is shown as a closed shell. Select a room to fly in."
+        ]
+      },
+      "assumptions": [
+        "The house is one side of a one-story duplex. Only this side is in the work, so the other unit is drawn as a closed shell from the plan outline and the elevations, with no interior.",
+        "Walls are traced from the plan drawings at 1/4 inch = 1 foot. Few overall dimensions are printed; the traced main floor matches the printed 650 SF existing first floor within 1 percent.",
+        "The other unit's walls are drawn 5 1/2 inches thick inside its plan outline, the same as this side. Its windows and doors are placed from the elevations.",
+        "Existing window heads are the printed 7'-4 1/4\". The existing sills, about 2'-4\", and the high kitchen windows over the counter, about 4'-4\" to 6'-2\", are scaled from the elevations.",
+        "The two entry doors are shown 6'-8\" tall. Their tops are hidden behind the porch roof edge on the elevations.",
+        "The roof planes are set to meet the printed ridge at the printed +/-6:12 pitch, so the roof sits about 4 inches above the printed plate at the wall line (the rafter heel). The same rule sets the existing roof from its printed ridge.",
+        "The flared rakes are scaled from the roof plan: about 4 inches at the eave, widening to 2'-0\" at the ridge.",
+        "The porch roof along the entry side follows the existing roof plane out to the eave line drawn 2'-0\" past the bumps. Porch posts are not drawn on the plans and are not modeled.",
+        "The stair has the printed 15 risers, about 7 5/8 inches each. The landing after nine risers matches the landing line printed on the south elevation; the two steps on the lower landing are read from the plan lines.",
+        "The south stair window, NEW 4046, sits 2'-0\" above the landing, as printed on the south elevation.",
+        "The 2'-0\" deep bump on the south wall at the party line is drawn on the plans with no label. It is shown as a closed box up to the eave.",
+        "The concrete porch and the heat pump pad are scaled from the main floor plan. The ground is flat at the printed 9 inch floor height.",
+        "Kitchen, bath and closet fixtures sit where the plan symbols are, scaled from the drawing. Their heights are assumed. Interior doors are shown as open gaps.",
+        "Siding, the stone wainscot at the kitchen bumps, the trim bands at the floor line, window grids and the solar tubes are not modeled."
+      ]
     }
   ]
 }

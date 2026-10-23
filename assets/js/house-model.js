@@ -343,22 +343,25 @@ function buildFromConfig(cfg) {
       const P = (u, y, v) => alongZ ? [u, y, v] : [v, y, u];
       const um = (u0 + u1) / 2, yr = g.plate + (um - u0) * k, ye = g.plate - o * k;
       const rk = g.rake || [o, o], va = v0 - rk[0], vb = v1 + rk[1];
-      const planes = [[P(u0 - o, ye, va), P(um, yr, va), P(um, yr, vb), P(u0 - o, ye, vb)], [P(u1 + o, ye, vb), P(um, yr, vb), P(um, yr, va), P(u1 + o, ye, va)]];
+      // g.rakeTop: a flared rake, wider at the ridge than at the eave (rake overhang read at the ridge).
+      const rt = g.rakeTop || rk, ta = v0 - rt[0], tb = v1 + rt[1];
+      const vat = t => va + (ta - va) * t, vbt = t => vb + (tb - vb) * t;
+      const planes = [[P(u0 - o, ye, va), P(um, yr, ta), P(um, yr, tb), P(u0 - o, ye, vb)], [P(u1 + o, ye, vb), P(um, yr, tb), P(um, yr, ta), P(u1 + o, ye, va)]];
       planes.forEach((f, side) => {
         face(roof, f, C_ROOF, 0, true, ye);
         const ue = side ? u1 + o : u0 - o, run = um - ue;
         for (let t = CS; t < Math.abs(run) - 0.2; t += CS) {
-          const u = ue + Math.sign(run) * t, y = ye + t * k + 0.03;
-          line(roof, P(u, y, va), P(u, y, vb), C_SEAM, 0, ye);
+          const u = ue + Math.sign(run) * t, y = ye + t * k + 0.03, f = t / Math.abs(run);
+          line(roof, P(u, y, vat(f)), P(u, y, vbt(f)), C_SEAM, 0, ye);
         }
         face(roof, [P(ue, ye, va), P(ue, ye, vb), P(ue, ye - FH, vb), P(ue, ye - FH, va)], C_FASCIA, 0, true, ye - FH);
         const uw = side ? u1 : u0;
         face(roof, [P(ue, ye - FH, va), P(uw, ye - FH, va), P(uw, ye - FH, vb), P(ue, ye - FH, vb)], C_SOFFIT, 0, false, ye - FH);
       });
       // Rake boards and gable-end walls.
-      [[va, v0, 0], [vb, v1, 1]].forEach(([vr, vw, i]) => {
+      [[va, v0, 0, ta], [vb, v1, 1, tb]].forEach(([vr, vw, i, vt]) => {
         if (rk[i] > 0) {
-          for (const ue of [u0 - o, u1 + o]) face(roof, [P(ue, ye, vr), P(um, yr, vr), P(um, yr - FH, vr), P(ue, ye - FH, vr)], C_FASCIA, 0, true, ye - FH);
+          for (const ue of [u0 - o, u1 + o]) face(roof, [P(ue, ye, vr), P(um, yr, vt), P(um, yr - FH, vt), P(ue, ye - FH, vr)], C_FASCIA, 0, true, ye - FH);
         }
         if (g.ends && g.ends[i]) {
           const b = g.endBase ?? g.plate;
