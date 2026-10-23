@@ -1,0 +1,44 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-10-23-shoreline-roof-replacement-1.webp",
+      "repo_path": "assets/images/posts/2026-10-23-shoreline-roof-replacement-1.webp",
+      "alt": "A roofing crew in safety harnesses tearing off and reshingling a gray two-story home in Shoreline, WA on an overcast fall day, with bare roof sheathing exposed and a debris container in the driveway during a roof replacement \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "e11664b9ba0e1a64438b62d079fffd5c",
+      "source": "Newly generated image (built-in image generator, 2026-10-23), source gen-1.png 1280x720, resized to 1600x900 webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-23-shoreline-roof-replacement-2.webp",
+      "repo_path": "assets/images/posts/2026-10-23-shoreline-roof-replacement-2.webp",
+      "alt": "Close view of new architectural asphalt shingles at the eave of a Shoreline, WA home after rain, with water beading on the shingles, a metal drip edge and self-adhered underlayment visible at the edge of the roof replacement \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "98d4801fa3539f5afe6e1a5e0ddc29fc",
+      "source": "Newly generated image (built-in image generator, 2026-10-23), source gen-2.png 1280x720, resized to 1600x900 webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-23-shoreline-roof-replacement-3.webp",
+      "repo_path": "assets/images/posts/2026-10-23-shoreline-roof-replacement-3.webp",
+      "alt": "A finished roof replacement on a two-story home in Shoreline, WA after rain, with dark architectural shingles, gutters and downspouts, a wet walkway and tall evergreen trees around the house \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "2e90648cd3ce5f2a4524fa8d21eb4d59",
+      "source": "Newly generated image (built-in image generator, 2026-10-23), source gen-3.png 1280x720, resized to 1600x900 webp"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "z1vuU-3I52Y",
+      "url": "https://www.youtube.com/watch?v=z1vuU-3I52Y",
+      "title": "How to Tear Off the Roof Deck and Shingle Installation | Mastering the Roof by GAF",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "3 newly generated images (built-in generator), 0 regraded stills, 0 paid media."
+}

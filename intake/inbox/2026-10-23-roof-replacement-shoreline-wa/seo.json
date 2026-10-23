@@ -1,0 +1,49 @@
+{
+  "producer": "openclaw",
+  "agent": "seo-specialist",
+  "slug": "roof-replacement-shoreline-wa",
+  "title": "Roof Replacement Shoreline WA \u2014 When a Reroof Needs a City Permit, Tear-Off vs Overlay & Rain-Ready Details",
+  "description": "A Shoreline homeowner's guide to roof replacement: when the city's code exempts a reroof from a permit and when sheathing or framing work changes that, tear-off vs overlay limits, local design criteria, fall protection, and vetting roofers.",
+  "category": "Guides",
+  "keywords": [
+    "roof replacement Shoreline WA",
+    "Shoreline reroof permit",
+    "tear-off vs overlay roof",
+    "Shoreline roofing contractor",
+    "reroof permit exemption Shoreline"
+  ],
+  "outline": [
+    "Key Takeaways",
+    "Why roof replacement questions come up so often in Shoreline",
+    "Does a reroof need a permit in Shoreline?",
+    "Tear-off or overlay?",
+    "Shoreline's local design criteria",
+    "Rain-ready details to put in the bid",
+    "Safety on the roof",
+    "Materials Worth Knowing",
+    "How to shortlist and verify a roofer",
+    "Where Pacific Pro Group fits",
+    "Next steps for a Shoreline roof replacement"
+  ],
+  "search_intent": "A Shoreline homeowner planning a roof replacement wants to know when the City requires a permit for a reroof, whether the new roof can go over the old one, what rain-ready details belong in the bid, and how to verify a roofer.",
+  "local_angles": [
+    "SMC 15.05.040 R105.2(11): reroof exempt only where no structural elements (incl. roof diaphragm) are revised",
+    "SMC 15.05.030 IBC 105.2(14) matching exemption",
+    "Shoreline Table R301.2(1): 25 psf roof snow load, 85 mph wind, SDC D2, 27F winter design temp, ice shield underlayment listed as not required",
+    "Mid-century housing stock under tall evergreens; moss and fall rain"
+  ],
+  "internal_links": [
+    "../shoreline.html",
+    "../roofing.html",
+    "../permits.html",
+    "../verify-contractor.html",
+    "../hiring-a-contractor.html",
+    "../bonds-and-insurance.html",
+    "../red-flags-hiring.html"
+  ],
+  "notes": "Box-authored fallback brief. PPG only as Board #1 -> https://pacificprogroup.com/.",
+  "generation": {
+    "agent": "box-authored",
+    "mode": "box-fallback"
+  }
+}

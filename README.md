@@ -54,6 +54,7 @@ Base: `https://boardofprojectstewardship.com/`
 | `blog/rss.xml` | Blog RSS feed |
 | `news/rss.xml` | News RSS feed |
 | `404.html` | Branded Board 404 |
+| `posts/2026-10-23-roof-replacement-shoreline-wa.html` | Roof Replacement Shoreline WA — When a Reroof Needs a City Permit, Tear-Off vs Overlay & Rain-Ready Details |
 | `posts/2026-10-22-ev-charger-installation-redmond-wa.html` | EV Charger Installation Redmond WA — City Electrical Permit, Panel Capacity & PSE Home Charging Rules |
 | `posts/2026-10-21-attic-insulation-air-sealing-lynnwood-wa.html` | Attic Insulation & Air Sealing Lynnwood WA — Permits, Energy Code Basics & What to Check First |
 | `posts/2026-10-20-electrical-panel-upgrade-federal-way-wa.html` | Electrical Panel Upgrade Federal Way WA — City Electrical Permit, PSE Disconnect & Who Can Do the Work |
