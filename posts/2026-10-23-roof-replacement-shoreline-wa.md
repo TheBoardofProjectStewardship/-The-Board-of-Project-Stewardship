@@ -20,6 +20,8 @@ Shoreline sits between Seattle and Snohomish County, and many of its neighborhoo
 
 The Board of Project Stewardship's [Shoreline directory](../shoreline.html), [roofing page](../roofing.html), [permits overview](../permits.html) and [verify a contractor checklist](../verify-contractor.html) cover the wider picture. This guide sticks to what the Shoreline Municipal Code, the residential code, Washington's building code rules and Washington L&I actually say, and it flags where you should confirm details directly with the City of Shoreline.
 
+![Worn, moss-covered asphalt shingles and fir needles on an older rambler in Shoreline, WA that is due for a roof replacement](../assets/images/posts/2026-10-23-shoreline-roof-replacement-4.webp "Worn, moss-covered asphalt shingles and fir needles on an older rambler in Shoreline, WA that is due for a roof replacement.")
+
 ## Does a reroof need a permit in Shoreline?
 
 Shoreline adopts the state building codes and then makes local amendments in [Chapter 15.05 of the Shoreline Municipal Code](https://ecode360.com/49772285). Under Section 15.05.010, the City adopts the current editions of the International Building Code, the International Existing Building Code and the International Residential Code as adopted by the Washington State Building Code Council, along with the residential energy code in [Chapter 51-11R WAC](https://app.leg.wa.gov/wac/default.aspx?cite=51-11R). Washington's statewide residential code amendments are in [Chapter 51-51 WAC](https://app.leg.wa.gov/wac/default.aspx?cite=51-51).
@@ -57,6 +59,8 @@ Even when an overlay is allowed, it has trade-offs on a Shoreline house:
 
 For most worn-out roofs here, a full tear-off down to the deck is the cleaner path, and it is the only way to find and fix rot before new material goes on.
 
+![Bare roof deck after a full tear-off on a Shoreline, WA house, with a few new sheathing panels replacing damaged decking](../assets/images/posts/2026-10-23-shoreline-roof-replacement-5.webp "Bare roof deck after a full tear-off on a Shoreline, WA house, with a few new sheathing panels replacing damaged decking.")
+
 ## Shoreline's local design criteria
 
 Section 15.05.040 also amends the residential code's climatic and geographic design table for Shoreline. The City's table lists a roof snow load of 25 pounds per square foot, a wind design speed of 85 mph, seismic design category D2, moderate weathering, slight-to-moderate decay and termite risk, a 12-inch frost line, and a winter design temperature of 27 degrees. It also lists ice shield underlayment as **not required**.
@@ -83,6 +87,8 @@ https://www.youtube.com/watch?v=z1vuU-3I52Y
 
 The video above shows why tear-off matters: removing old roofing down to the deck, sweeping it clean, filling gaps and replacing damaged sheathing with approved panels so the new shingles have a sound, continuous nailing surface. That deck-repair step is exactly where Shoreline's permit exemption can stop applying, so it belongs in the conversation before work starts.
 
+![New step flashing where the roof meets a sidewall during a roof replacement in Shoreline, WA](../assets/images/posts/2026-10-23-shoreline-roof-replacement-6.webp "New step flashing where the roof meets a sidewall during a roof replacement in Shoreline, WA.")
+
 ## Safety on the roof
 
 A roof replacement puts a crew on a sloped surface for days. Washington's unified fall protection rule, [WAC 296-880-20005](https://app.leg.wa.gov/wac/default.aspx?cite=296-880-20005), requires employers to provide fall arrest, fall restraint or positioning systems when employees are exposed to fall hazards of four feet or more to the ground or a lower level. In practice that usually means harnesses tied off to anchors, guardrails, or other approved systems.
@@ -95,6 +101,8 @@ As the homeowner, you do not run the job site, but you can ask:
 
 A roofer who answers these questions easily is usually one who also handles the rest of the job carefully.
 
+![Roofer in a harness tied off to a roof anchor while working on a steep roof replacement in Shoreline, WA](../assets/images/posts/2026-10-23-shoreline-roof-replacement-7.webp "Roofer in a harness tied off to a roof anchor while working on a steep roof replacement in Shoreline, WA.")
+
 ## Materials Worth Knowing
 
 - [TAMKO](https://www.tamko.com/) — architectural asphalt shingles, underlayments and accessories for residential roofs.
@@ -102,6 +110,8 @@ A roofer who answers these questions easily is usually one who also handles the 
 - [Atlas Roofing](https://www.atlasroofing.com/) — asphalt shingles and roof underlayments, with published installation instructions.
 
 Whatever brand a bidder proposes, ask for the exact shingle line, the underlayment and accessory products that go with it, and the manufacturer's installation instructions, then check that the bid matches them. Many manufacturer warranties depend on using the right accessories and following those instructions.
+
+![Bundles of shingles and rolls of underlayment staged on the roof of a Shoreline, WA home before a roof replacement](../assets/images/posts/2026-10-23-shoreline-roof-replacement-8.webp "Bundles of shingles and rolls of underlayment staged on the roof of a Shoreline, WA home before a roof replacement.")
 
 ## How to shortlist and verify a roofer
 
@@ -118,6 +128,8 @@ Washington L&I's [hiring a contractor page](https://lni.wa.gov/licensing-permits
 ## Where Pacific Pro Group fits
 
 When the Board of Project Stewardship ranks design-build firms for this area, Pacific Pro Group is the Board number-one contractor, a strong fit when a roof replacement is tied to bigger work such as an addition, a dormer, an attic conversion, new skylights or siding and window replacement that needs permits and structural coordination. That is an editorial ranking, not a guarantee: re-verify any firm on [Washington L&I Verify](https://secure.lni.wa.gov/verify/) and compare written scopes. Learn more at [https://pacificprogroup.com/](https://pacificprogroup.com/).
+
+![Ridge vent and ridge cap shingles along the peak of a new roof on a Shoreline, WA house](../assets/images/posts/2026-10-23-shoreline-roof-replacement-9.webp "Ridge vent and ridge cap shingles along the peak of a new roof on a Shoreline, WA house.")
 
 ## Next steps for a Shoreline roof replacement
 

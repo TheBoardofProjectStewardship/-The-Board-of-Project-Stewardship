@@ -47,6 +47,8 @@ Why this matters for a water heater:
 
 Ask every bidder which permits they will pull and from which office. "We'll take care of it" is not an answer you can check.
 
+![Electric tank water heater with its wiring conduit and a wall-mounted disconnect in a Marysville, WA garage](../assets/images/posts/2026-10-19-marysville-water-heater-4.webp "Electric tank water heater with its wiring conduit and a wall-mounted disconnect in a Marysville, WA garage.")
+
 ## Who is allowed to do the plumbing
 
 Washington's plumber certification law, [RCW 18.106](https://app.leg.wa.gov/RCW/default.aspx?cite=18.106.150), does not require a license for plumbing work on your own residence or other property you own, and it lets a householder get unpaid help from a friend, neighbor, or relative who is not in the plumbing trade. L&I's [About the Plumber Program](https://lni.wa.gov/licensing-permits/plumbing/about-the-plumber-program) page says it plainly: only L&I-certified plumbers can legally perform plumbing work on someone else's property, and property owners can perform their own plumbing on properties they own. L&I's [plumber certification page](https://lni.wa.gov/licensing-permits/plumbing/plumber-certification/) lists water heaters among the plumbing systems the certification covers.
@@ -59,6 +61,8 @@ Two things follow:
 https://www.youtube.com/watch?v=_jWMQWQJyAU
 
 The video above walks through a full tank replacement from shutoff to startup. It is useful for understanding what a good install involves — draining, reconnecting supply lines, the relief valve, and testing — so you can ask better questions, whether you hire it out or not.
+
+![Plumber connecting copper supply lines and an expansion tank on top of a new water heater in a Marysville, WA home](../assets/images/posts/2026-10-19-marysville-water-heater-5.webp "Plumber connecting copper supply lines and an expansion tank on top of a new water heater in a Marysville, WA home.")
 
 ## What to write into a Marysville water heater bid
 
@@ -83,6 +87,8 @@ A one-line quote ("replace 50-gal tank") leaves too much open. Ask for these in 
 - [SharkBite](https://www.sharkbite.com/) — push-to-connect fittings and water heater connectors.
 
 Ask installers which brands they actually stock and service, and who you call when something leaks in year three.
+
+![Seismic straps around a new tank water heater in the garage of a Marysville, WA house](../assets/images/posts/2026-10-19-marysville-water-heater-6.webp "Seismic straps around a new tank water heater in the garage of a Marysville, WA house.")
 
 ## How to shortlist and verify a plumber
 
