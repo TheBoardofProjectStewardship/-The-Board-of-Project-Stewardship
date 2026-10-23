@@ -3125,6 +3125,7 @@ def page_shell(
     breadcrumbs: list | None = None,
     robots: str = "index, follow",
     og_image_alt: str = "",
+    emit_canonical: bool = True,
 ) -> str:
     # Sitewide Board Organization + WebSite (Packet 03); page json_ld appends after.
     title = clamp_title(title)
@@ -3166,6 +3167,8 @@ def page_shell(
     crumb_nav = visible_breadcrumb_nav(breadcrumbs, pfx, body)
     fav = favicon_tags(prefix if prefix else "./")
     contact_strip = ""
+    og_url_tag = f'  <meta property="og:url" content="{esc(canon)}">\n' if emit_canonical else ""
+    canonical_tag = f'  <link rel="canonical" href="{esc(canon)}">\n' if emit_canonical else ""
     return apply_performance_pass(f"""<!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
@@ -3178,8 +3181,7 @@ def page_shell(
   <meta property="og:title" content="{esc(title)}">
   <meta property="og:description" content="{esc(description)}">
   <meta property="og:type" content="{esc(og_type)}">
-  <meta property="og:url" content="{esc(canon)}">
-  <meta property="og:image" content="{esc(og_abs)}">
+{og_url_tag}  <meta property="og:image" content="{esc(og_abs)}">
 {og_dim}  <meta property="og:image:alt" content="{esc(img_alt)}">
   <meta property="og:site_name" content="Board of Project Stewardship">
   <meta property="og:locale" content="en_US">
@@ -3188,8 +3190,7 @@ def page_shell(
   <meta name="twitter:description" content="{esc(description)}">
   <meta name="twitter:image" content="{esc(og_abs)}">
   <meta name="twitter:image:alt" content="{esc(img_alt)}">
-  <link rel="canonical" href="{esc(canon)}">
-  <link rel="alternate" type="application/rss+xml" title="Board of Project Stewardship Blog" href="{RSS_HREF}">
+{canonical_tag}  <link rel="alternate" type="application/rss+xml" title="Board of Project Stewardship Blog" href="{RSS_HREF}">
 {fav}
   <title>{esc(title)}</title>
 {head_assets()}
@@ -17554,6 +17555,7 @@ def build_404_page() -> str:
         prefix="/",
         canonical=f"{BASE_URL}404.html",
         robots="noindex, follow",
+        emit_canonical=False,
         include_story_embed=False,
         include_tools_embed=False,
         include_widgets=False,
