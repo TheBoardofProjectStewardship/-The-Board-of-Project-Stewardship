@@ -37,7 +37,6 @@ exclude:
   - assets/css/tw-input.css
   - assets/css/chrome.css
   - assets/css/fa-subset.css
-  - assets/fonts/InterVariable.woff2
   - assets/fonts/Inter-Regular.woff2
   - assets/fonts/Inter-Medium.woff2
   - assets/fonts/Inter-SemiBold.woff2
