@@ -3,7 +3,7 @@
    Record shape: [sqft, yearBuilt, bedrooms, stories, kind, buildings?] */
 (function (root) {
   async function lookupHouse(county, pin, base) {
-    base = base || '/data/house-size';
+    base = base || '/assets/data/house-size';
     const name = String(county || '').toLowerCase();
     const c = name.indexOf('king') === 0 ? 'king' : 'snoh';
     let id = String(pin || '').replace(/\D/g, '');

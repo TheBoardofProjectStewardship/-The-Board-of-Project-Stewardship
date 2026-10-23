@@ -44,9 +44,13 @@ exclude:
 # Jekyll matches include against the entry name it is filtering, so a nested
 # underscore directory must be listed by its own name (`_locations`), not its
 # full path. There is only one such directory.
+# Jekyll 3.9 drops a file when its path starts with an exclude entry, not only
+# when it is inside that directory. `exclude: pages` therefore also drops
+# pages-build-stamp.txt. List the stamp here so /pages-build-stamp.txt is published.
 include:
   - .well-known
   - _locations
+  - pages-build-stamp.txt
 defaults:
   - scope:
       path: posts

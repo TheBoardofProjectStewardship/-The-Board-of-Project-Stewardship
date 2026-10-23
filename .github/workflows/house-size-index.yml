@@ -1,6 +1,7 @@
 name: House size index
 
-# Weekly rebuild of the static assessor house-size shards in data/house-size/.
+# Weekly rebuild of the static assessor house-size shards in assets/data/house-size/.
+# That path is published by GitHub Pages. data/ is excluded in _config.yml.
 # Separate from the morning blog intake. Does not publish intake submissions.
 on:
   schedule:
@@ -19,12 +20,12 @@ jobs:
       - name: Install builder dependency
         run: pip install openpyxl
       - name: Rebuild house-size index
-        run: python3 scripts/build_index.py --out data/house-size
+        run: python3 scripts/build_index.py --out assets/data/house-size
       - name: Commit and push index
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/house-size
+          git add assets/data/house-size
           if git diff --staged --quiet; then
             echo "Index unchanged"
           else

@@ -7,7 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGE = ROOT / "tools" / "site-visit" / "index.html"
-INDEX = ROOT / "data" / "house-size"
+INDEX = ROOT / "assets" / "data" / "house-size"
 CREDIT = "King County Assessor and Snohomish County Assessor public records"
 
 
@@ -33,7 +33,10 @@ class HouseSizePageTests(unittest.TestCase):
         yml = (ROOT / ".github" / "workflows" / "house-size-index.yml").read_text(encoding="utf-8")
         self.assertIn("workflow_dispatch", yml)
         self.assertIn("0 12 * * 1", yml)
-        self.assertIn("python3 scripts/build_index.py --out data/house-size", yml)
+        self.assertIn("python3 scripts/build_index.py --out assets/data/house-size", yml)
+        lookup = (ROOT / "tools" / "site-visit" / "house-size-lookup.js").read_text(encoding="utf-8")
+        self.assertIn("'/assets/data/house-size'", lookup)
+        self.assertNotIn("'/data/house-size'", lookup)
         self.assertNotIn("board_intake", yml)
         self.assertNotIn("--apply", yml)
         script = (ROOT / "scripts" / "build_index.py").read_text(encoding="utf-8")

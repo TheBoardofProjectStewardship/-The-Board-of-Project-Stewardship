@@ -6,7 +6,7 @@ Sources (free, public, keyless, no owner names):
   Snoh:  https://www.arcgis.com/sharing/rest/content/items/3c5edc985cec4fba8b3938d16ed1d3c3/data (Improvement Records xlsx)
 Output: out/{king,snoh}/<prefix>.json  -> {"PIN":[sqft_living, yr_built, bedrooms, stories, kind], ...}
 Only values present in source are written; blanks/0 become null. Never invents values.
-Usage: python3 scripts/build_index.py [--king EXTR_ResBldg.csv] [--snoh improvements.xlsx|.csv] [--out data/house-size]
+Usage: python3 scripts/build_index.py [--king EXTR_ResBldg.csv] [--snoh improvements.xlsx|.csv] [--out assets/data/house-size]
 """
 import csv, json, os, sys, argparse, collections, io, tempfile, zipfile, urllib.request
 KC_URL="https://aqua.kingcounty.gov/extranet/assessor/Residential%20Building.zip"
