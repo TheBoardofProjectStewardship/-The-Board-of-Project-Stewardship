@@ -52,6 +52,28 @@
         textarea::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
         textarea::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
         textarea::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        .parcel-address-row { display: flex; gap: 0.5rem; align-items: center; }
+        .parcel-address-row input { flex: 1 1 auto; min-width: 0; width: auto; }
+        #parcel_lookup_btn:disabled { opacity: 0.6; cursor: wait; }
+        #parcel_card { grid-column: 1 / -1; }
+        #parcel_facts { margin-top: 0.5rem; }
+        #parcel_facts dt { font-weight: 600; color: #334155; margin-top: 0.35rem; }
+        #parcel_facts dd { margin: 0; color: #0f172a; }
+        #parcel_facts em { color: #64748b; }
+        #parcel_chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+        #parcel_chips button {
+            background: #fff;
+            color: #0f766e;
+            border: 1px solid #99f6e4;
+            border-radius: 9999px;
+            padding: 0.35rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        #parcel_chips button:hover { background: #f0fdfa; }
+        #parcel_sources a { color: #0f766e; text-decoration: underline; margin-right: 0.35rem; }
         
         /* Hide default details marker to make custom accordion */
         details > summary { list-style: none; }
@@ -174,7 +196,17 @@
                             </div>
                             <div>
                                 <label for="client_address" class="block text-sm font-medium text-slate-700 mb-1">Project Address</label>
-                                <input type="text" id="client_address" class="track-input primary-text w-full text-sm border border-slate-300 rounded-md px-3 py-2 focus:ring-teal-500 focus:border-teal-500" placeholder="123 Main St, Seattle, WA" data-phase="1">
+                                <div class="parcel-address-row">
+                                    <input type="text" id="client_address" class="track-input primary-text text-sm border border-slate-300 rounded-md px-3 py-2 focus:ring-teal-500 focus:border-teal-500" placeholder="123 Main St, Seattle, WA" data-phase="1">
+                                    <button type="button" id="parcel_lookup_btn" class="shrink-0 bg-teal-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-teal-700 transition-colors shadow-sm">Look up parcel</button>
+                                </div>
+                            </div>
+                            <div id="parcel_card" hidden class="border border-slate-200 rounded-lg bg-slate-50 p-4">
+                                <p class="text-sm font-bold text-slate-800">Parcel facts <span class="text-xs font-normal text-slate-500">(read-only)</span></p>
+                                <dl id="parcel_facts" class="text-sm"></dl>
+                                <div id="parcel_chips"></div>
+                                <div id="parcel_sources" class="text-xs text-slate-600 mt-3"></div>
+                                <p class="text-xs text-slate-500 mt-2">Public county records; not a permit or zoning determination.</p>
                             </div>
                             <div>
                                 <label for="client_email" class="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
@@ -1551,5 +1583,7 @@
   report();
 })();
 </script>
+<script src="parcel-lookup.js"></script>
+<script src="parcel-ui.js"></script>
 </body>
 </html>
