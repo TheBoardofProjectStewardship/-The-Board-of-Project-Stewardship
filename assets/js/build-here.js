@@ -22,7 +22,9 @@
     snoHost: "https://gis.snoco.org/host/rest/services/Hosted/",
     snoSlope: "https://gis.snoco.org/sas/rest/services/SAS_Services/SAS_Steep_Slopes/MapServer/0/query",
     snoAerial: "https://gis.snoco.org/sas/rest/services/SAS_Services/SAS_Imagery_2024/MapServer/export",
-    edmZoning: "https://maps.edmondswa.gov/gis/rest/services/DevServices/Zoning/MapServer/5/query"
+    edmZoning: "https://maps.edmondswa.gov/gis/rest/services/DevServices/Zoning/MapServer/5/query",
+    esriGeo: "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates",
+    snoCities: "https://gis.snoco.org/sas/rest/services/SAS_Services/SAS_Cities/MapServer/0/query"
   };
 
   var LINKS = {
@@ -118,27 +120,68 @@
   function log(s, ok, name, note) { s.sources.push({ name: name, ok: ok, note: note || "" }); }
 
   /* ---------- lookup pipeline ---------- */
-  function lookup(address) {
-    var s = blank(); s.input = address;
-    setStatus("Looking up the address with the US Census geocoder...");
+  function titleCase(t) { return String(t || "").toLowerCase().replace(/\b[a-z]/g, function (c) { return c.toUpperCase(); }).replace(/^Seatac$/, "SeaTac"); }
+  function setJuris(s) {
+    var key = R.cityKey(s.city);
+    s.cityKey = "";
+    if (/^King/.test(s.county)) s.juris = s.city === "Seattle" ? "seattle" : s.city === "Kenmore" ? "kenmore" : (s.city ? "other" : "kc");
+    else if (/^Snohomish/.test(s.county)) s.juris = s.city === "Edmonds" ? "edmonds" : (s.city ? "other" : "sno");
+    else s.juris = "outside";
+    if (s.juris === "other" && R.CITY[key]) { s.juris = "city"; s.cityKey = key; s.city = R.CITY[key].name; }
+    s.jurisLabel = s.city ? "City of " + s.city + ", " + s.county : (s.county ? "Unincorporated " + s.county : "Unknown");
+  }
+  function geocode(s, address) {
     return jsonp(EP.census, { address: address, benchmark: "Public_AR_Current", vintage: "Current_Current", layers: "Counties,Incorporated Places" })
       .then(function (j) {
         var m = j && j.result && j.result.addressMatches && j.result.addressMatches[0];
-        if (!m) { log(s, false, "US Census geocoder", "No match for that address."); throw new Error("nomatch"); }
+        if (!m) throw new Error("census nomatch");
         log(s, true, "US Census geocoder");
         s.matched = m.matchedAddress; s.lon = m.coordinates.x; s.lat = m.coordinates.y;
         var g = m.geographies || {};
         s.county = ((g.Counties || [])[0] || {}).NAME || "";
         s.city = (((g["Incorporated Places"] || [])[0] || {}).NAME || "").replace(/ city$| town$/i, "");
-        if (/^King/.test(s.county)) s.juris = s.city === "Seattle" ? "seattle" : s.city === "Kenmore" ? "kenmore" : (s.city ? "other" : "kc");
-        else if (/^Snohomish/.test(s.county)) s.juris = s.city === "Edmonds" ? "edmonds" : (s.city ? "other" : "sno");
-        else s.juris = "outside";
-        s.jurisLabel = s.city ? "City of " + s.city + ", " + s.county : (s.county ? "Unincorporated " + s.county : "Unknown");
+      })
+      .catch(function () {
+        // Second try: the Esri World geocoder. It gives the county but only the postal city, so the city comes from the county parcel or city layer next.
+        return getJSON(EP.esriGeo, { SingleLine: address, f: "json", outFields: "Subregion,Region,Addr_type", maxLocations: 1, countryCode: "USA" }).then(function (j) {
+          var c = (j.candidates || [])[0];
+          if (!c || c.score < 85 || !/Washington/.test(c.attributes.Region || "")) { log(s, false, "Address geocoders (US Census, Esri World)", "No match for that address."); throw new Error("nomatch"); }
+          log(s, true, "Esri World geocoder (the US Census geocoder had no match)");
+          s.matched = c.address; s.lon = c.location.x; s.lat = c.location.y;
+          s.county = c.attributes.Subregion || ""; s.city = ""; s.cityFromParcel = true;
+        });
+      });
+  }
+  /* The county records say which city a parcel is in: the King County parcel
+     layer has CTYNAME, and Snohomish County publishes city limits. */
+  function cityCheck(s) {
+    if (/^King/.test(s.county) && s.kcCity !== undefined) {
+      var k = s.kcCity ? titleCase(s.kcCity) : "";
+      if (k !== s.city && (k || s.cityFromParcel || s.parcel)) s.city = k;
+      setJuris(s); return Promise.resolve();
+    }
+    if (/^Snohomish/.test(s.county) && s.lon != null) {
+      return getJSON(EP.snoCities, ptQuery(s.lon, s.lat, { outFields: "NAME" })).then(function (j) {
+        var f = (j.features || [])[0];
+        s.city = f ? titleCase(f.attributes.NAME) : "";
+        log(s, true, "Snohomish County city limits (SAS_Cities)");
+        setJuris(s);
+      }).catch(function (e) { log(s, false, "Snohomish County city limits", e.message); setJuris(s); });
+    }
+    setJuris(s); return Promise.resolve();
+  }
+  function lookup(address) {
+    var s = blank(); s.input = address;
+    setStatus("Looking up the address...");
+    return geocode(s, address)
+      .then(function () {
+        setJuris(s);
         setStatus("Found " + s.matched + ". Reading parcel records...");
         if (/^King/.test(s.county)) return kingParcel(s);
         if (/^Snohomish/.test(s.county)) return snoParcel(s);
         return s;
       })
+      .then(function () { return cityCheck(s); })
       .then(function () { return Promise.all([zoning(s), hazards(s), permits(s), extras(s), neighbors(s)]); })
       .then(function () { buildImagery(s); return s; })
       .catch(function (e) {
@@ -174,6 +217,7 @@
         else if (s.rings) { s.lot = Math.round(polyAreaSqft(s.rings)); s.lotSrc = "Computed from the county parcel outline (the assessor lot size was blank)"; }
         s.zone = (a.KCA_ZONING || "").trim(); s.zoneSrc = "King County Assessor zoning field";
         s.presentUse = (a.PREUSE_DESC || "").trim();
+        s.kcCity = (a.CTYNAME || "").trim();
         log(s, true, "King County parcels (KingCo_PropertyInfo)");
       })
       .catch(function (e) { log(s, false, "King County parcels", e.message); });
@@ -250,6 +294,19 @@
         if (f && f.attributes.CURRZONE) { s.zone = f.attributes.CURRZONE.trim(); s.zoneSrc = "King County zoning map"; }
         log(s, true, "King County zoning (KingCo_Zoning)");
       }).catch(function (e) { log(s, false, "King County zoning", e.message); });
+    }
+    if (s.juris === "city") {
+      var g = R.CITY[s.cityKey].gis;
+      if (!g) {
+        if (!s.zone) s.manualZone = true;
+        else s.zoneSrc = "King County Assessor zoning field (check it against the " + s.city + " zoning map)";
+        return Promise.resolve();
+      }
+      return getJSON(g.url + "/query", ptQuery(s.lon, s.lat, { outFields: g.field })).then(function (j) {
+        var f = (j.features || [])[0], z = f && String(f.attributes[g.field] || "").trim();
+        if (z) { s.zone = z; s.zoneSrc = g.name; }
+        log(s, true, g.name);
+      }).catch(function (e) { log(s, false, g.name, e.message + ". Enter the zone by hand."); });
     }
     if (s.juris === "sno") {
       var zq = function (svc) { return getJSON(EP.snoHost + svc + "/FeatureServer/0/query", ptQuery(s.lon, s.lat, { outFields: "abbrev,label" })); };
@@ -330,6 +387,12 @@
     if (s.juris === "kenmore") { s.permitLinks = [{ label: "MyBuildingPermit permit search (Kenmore records)", url: LINKS.mbp }, { label: "King County permit records before Kenmore incorporated (1998)", url: LINKS.kcPortal }]; return Promise.resolve(); }
     if (s.juris === "kc") { s.permitLinks = [{ label: "King County Permitting portal (search by parcel number)", url: LINKS.kcPortal }]; return Promise.resolve(); }
     if (s.juris === "edmonds") { s.permitLinks = [{ label: "MyBuildingPermit permit search (Edmonds records)", url: LINKS.mbp }, { label: "Edmonds Development Services", url: LINKS.edmDev }]; return Promise.resolve(); }
+    if (s.juris === "city") {
+      var c = R.CITY[s.cityKey];
+      s.permitLinks = [{ label: "City of " + c.name + " (permits, planning and records requests)", url: c.home }, { label: c.code.label, url: c.code.url }, { label: "MyBuildingPermit permit search (many King and Snohomish cities)", url: LINKS.mbp }];
+      if (/^King/.test(s.county)) s.permitLinks.push({ label: "King County permit records from before the area became a city", url: LINKS.kcPortal });
+      return Promise.resolve();
+    }
     if (s.juris === "sno") {
       s.permitLinks = [{ label: "Snohomish County PDS residential permits", url: LINKS.snoPds }];
       if (!s.rings) return Promise.resolve();
@@ -540,7 +603,7 @@
   function render() {
     var s = state;
     var v = { lot: num("bh-lot"), zone: $("bh-zone").value.trim(), existing: num("bh-existing"), footprint: num("bh-footprint"), imperv: num("bh-imperv"), front: $("bh-front").value, units: parseInt($("bh-units").value, 10) || 1, stories: parseInt($("bh-stories").value, 10) || 1, type: $("bh-type").value };
-    var rs = v.lot && ["seattle", "kc", "sno", "edmonds", "kenmore"].indexOf(s.juris) >= 0 ? R.pick({ juris: s.juris, zone: v.zone, lot: v.lot, units: v.units }) : null;
+    var rs = v.lot && ["seattle", "kc", "sno", "edmonds", "kenmore", "city"].indexOf(s.juris) >= 0 ? R.pick({ juris: s.juris, city: s.cityKey, zone: v.zone, lot: v.lot, units: v.units }) : null;
     s.frontDir = v.front || "";
     var out = [];
     var place = s.city ? s.city.toUpperCase() : (s.county || "").replace(" County", "").toUpperCase() + " COUNTY";
@@ -573,7 +636,7 @@
     // Code review
     var cr;
     if (!rs) {
-      var why = s.juris === "other" ? "This tool covers the Cities of Seattle, Kenmore and Edmonds, and unincorporated King and Snohomish counties. For " + esc(s.jurisLabel) + ", check with your city." : (s.juris === "outside" ? "This address is outside King and Snohomish counties." : "We do not have verified rules coded for zone " + esc(v.zone || "(blank)") + " here. Verify with the jurisdiction.");
+      var why = s.juris === "other" ? "We could not match " + esc(s.jurisLabel) + " to a city in our list. Verify the rules with the city." : (s.juris === "city" && !v.lot ? "Enter the lot size in step 2 to see the rules and the math for " + esc(s.jurisLabel) + "." : (s.juris === "outside" ? "This address is outside King and Snohomish counties." : "We do not have verified rules coded for zone " + esc(v.zone || "(blank)") + " here. Verify with the jurisdiction."));
       cr = '<p class="bh-verify">' + why + '</p><p><a href="./permits.html">The Board permit hub</a> lists city and county permit offices.</p>';
     } else {
       cr = '<h3>' + esc(rs.title) + '</h3><table class="bh-table bh-rules"><thead><tr><th scope="col">Standard</th><th scope="col">What the code says</th><th scope="col">Source (checked ' + R.CHECKED + ')</th></tr></thead><tbody>' +
@@ -612,7 +675,7 @@
       }[v.type];
       lines.push(["For your project type", typeNote]);
       cap = '<table class="bh-table">' + lines.map(function (l) { return "<tr><th scope=\"row\">" + l[0] + "</th><td>" + l[1] + "</td></tr>"; }).join("") + "</table>";
-    } else cap = '<p class="bh-verify">No capacity math without verified rules. Verify with the jurisdiction.</p>';
+    } else cap = '<p class="bh-verify">' + (v.lot ? "The size limits for this zone are not coded yet. Verify with the jurisdiction." : "Enter the lot size in step 2 to see the size limits.") + '</p>';
     out.push(page("Zoning review", "<h3>How much could you add?</h3>" + cap + redFlags(s, v, rs)));
 
     // Lot imagery and site plan
@@ -716,7 +779,7 @@
         state = s; $("bh-go").disabled = false;
         if (!s.matched) { setStatus("We could not match that address. Check the spelling and include the city and ZIP."); return; }
         fillForm(s);
-        setStatus(s.juris === "other" ? "Found it in " + s.jurisLabel + ". This tool does not cover that city yet; check with your city. You can still read the parcel data below." : "Found " + s.matched + ". Check the values below, then build the report.");
+        setStatus(s.juris === "other" ? "Found it in " + s.jurisLabel + ". We could not match that city to our list; verify the rules with the city. You can still read the parcel data below." : s.manualZone ? "Found " + s.matched + " in " + s.jurisLabel + ". " + s.city + " does not publish a zoning map we can read, so enter the zone from the city map below." : "Found " + s.matched + ". Check the values below, then build the report.");
         render();
       });
     });

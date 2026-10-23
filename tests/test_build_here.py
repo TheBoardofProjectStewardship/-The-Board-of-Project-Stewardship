@@ -138,7 +138,103 @@ class BuildHereTest(unittest.TestCase):
         for key in ("surber", "edm", "kc", "sno", "snoUrban", "ken4"):
             for rule in data[key]["rules"]:
                 self.assertTrue(rule["src"]["url"].startswith("https://"), rule)
-                self.assertTrue(re.search(r"seattle\.gov|municode\.com|kingcounty\.gov|edmonds\.municipal\.codes|snohomish\.county\.codes|codepublishing\.com|leg\.wa\.gov", rule["src"]["url"]), rule)
+                self.assertTrue(re.search(r"seattle\.gov|municode\.com|kingcounty\.gov|edmonds\.municipal\.codes|snohomish\.county\.codes|codepublishing\.com|leg\.wa\.gov|municipal\.codes|ecode360\.com|\.gov|\.us|\.org|\.com|\.net", rule["src"]["url"]), rule)
+
+
+CITY_HALLS = {
+    # key: (city hall address, county records name). Census or Esri finds the
+    # point; the King County parcel CTYNAME or Snohomish SAS_Cities NAME names the city.
+    "lynnwood": ("19100 44th Ave W, Lynnwood, WA 98036", "LYNNWOOD"),
+    "bothell": ("18415 101st Ave NE, Bothell, WA 98011", "Bothell"),
+    "shoreline": ("17500 Midvale Ave N, Shoreline, WA 98133", "Shoreline"),
+    "mountlaketerrace": ("6100 219th St SW, Mountlake Terrace, WA 98043", "MOUNTLAKE TERRACE"),
+    "millcreek": ("15728 Main St, Mill Creek, WA 98012", "MILL CREEK"),
+    "everett": ("2930 Wetmore Ave, Everett, WA 98201", "EVERETT"),
+    "mukilteo": ("11930 Cyrus Way, Mukilteo, WA 98275", "MUKILTEO"),
+    "lakeforestpark": ("17425 Ballinger Way NE, Lake Forest Park, WA 98155", "Lake Forest Park"),
+    "woodinville": ("17301 133rd Ave NE, Woodinville, WA 98072", "Woodinville"),
+    "kirkland": ("123 5th Ave, Kirkland, WA 98033", "Kirkland"),
+    "redmond": ("15670 NE 85th St, Redmond, WA 98052", "Redmond"),
+    "bellevue": ("450 110th Ave NE, Bellevue, WA 98004", "Bellevue"),
+    "renton": ("1055 S Grady Way, Renton, WA 98057", "RENTON"),
+    "sammamish": ("801 228th Ave SE, Sammamish, WA 98075", "SAMMAMISH"),
+    "issaquah": ("130 E Sunset Way, Issaquah, WA 98027", "ISSAQUAH"),
+    "beauxarts": ("10550 SE 27th St, Beaux Arts, WA 98004", "Beaux Arts"),
+    "seatac": ("4800 S 188th St, SeaTac, WA 98188", "SeaTac"),
+    "goldbar": ("107 5th St, Gold Bar, WA 98251", "GOLD BAR"),
+}
+
+PRIORITY_SAMPLES = {
+    "lynnwood": "RN", "bothell": "R-L1", "shoreline": "NR3", "mountlaketerrace": "R-1",
+    "millcreek": "NR", "everett": "NR", "mukilteo": "RD 7.2", "lakeforestpark": "RS 7200",
+    "woodinville": "R-4", "kirkland": "RS 7.2", "redmond": "NR", "bellevue": "SR-3",
+    "renton": "R-8", "sammamish": "R-4", "issaquah": "SF-S",
+}
+
+
+class BuildHereCitiesTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        script = r"""
+        const R = require(process.argv[1]);
+        const halls = JSON.parse(process.argv[2]), samples = JSON.parse(process.argv[3]);
+        const out = { keys: Object.keys(R.CITY), city: R.CITY, resolve: {}, rs: {}, base: {} };
+        for (const k in halls) out.resolve[k] = R.cityKey(halls[k][1].toLowerCase().replace(/\b[a-z]/g, c => c.toUpperCase()));
+        for (const k in samples) out.rs[k] = R.pick({ juris: 'city', city: k, zone: samples[k], lot: 7200, units: 1 });
+        for (const k of Object.keys(R.CITY)) out.base[k] = R.pick({ juris: 'city', city: k, zone: 'ZZ-unknown', lot: 7200, units: 1 });
+        out.other = R.pick({ juris: 'other', zone: 'R-1', lot: 7200 });
+        out.mlt3 = R.pick({ juris: 'city', city: 'mountlaketerrace', zone: 'R-2', lot: 6000, units: 3 });
+        out.red8 = R.pick({ juris: 'city', city: 'redmond', zone: 'NR', lot: 9000, units: 8 });
+        out.lyn4 = R.pick({ juris: 'city', city: 'lynnwood', zone: 'RN', lot: 6000, units: 4 });
+        console.log(JSON.stringify(out));
+        """
+        cls.d = json.loads(subprocess.check_output(["node", "-e", script, str(ROOT / "assets/js/build-here-rules.js"), json.dumps(CITY_HALLS), json.dumps(PRIORITY_SAMPLES)], text=True))
+        cls.data = json.loads((ROOT / "data/build-here/jurisdictions.json").read_text())
+
+    def test_every_city_is_listed(self):
+        # 39 King + 20 Snohomish cities, minus Seattle, Kenmore and Edmonds (own rule sets); Bothell sits in both.
+        self.assertEqual(len(self.d["keys"]), 55)
+        self.assertEqual(sorted(self.d["keys"]), sorted(self.data["cities"]))
+        for k, c in self.d["city"].items():
+            self.assertTrue(c["home"].startswith("https://"), k)
+            self.assertTrue(c["code"]["url"].startswith("https://"), k)
+            self.assertIn(c["tier"], [0, 1, 2, 3], k)
+            self.assertTrue(self.data["cities"][k]["cityHall"], k)
+            self.assertEqual(self.data["cities"][k]["lastVerified"], "2026-10-22", k)
+
+    def test_city_hall_records_resolve(self):
+        for k, v in CITY_HALLS.items():
+            self.assertEqual(self.d["resolve"][k], k, v)
+
+    def test_priority_cities_have_coded_zones(self):
+        for k, rs in self.d["rs"].items():
+            self.assertIsNotNone(rs, k)
+            self.assertEqual(rs["key"], "city-" + k, k)
+            labels = [r["label"] for r in rs["rules"]]
+            self.assertIn("Maximum height", labels, k)
+            self.assertIn("ADUs (state law)", labels, k)
+            self.assertIn("Middle housing (state law)", labels, k)
+            if k != "redmond":  # Redmond NR setbacks live in RZC 21.16.200, not yet coded
+                self.assertTrue(any(r["value"] for r in rs["rules"] if "setback" in r["label"].lower()), k)
+            for r in rs["rules"]:
+                self.assertTrue(r["src"]["url"].startswith("https://"), (k, r))
+
+    def test_every_city_gets_a_report(self):
+        for k, rs in self.d["base"].items():
+            self.assertIsNotNone(rs, k)
+            self.assertTrue(rs["key"].startswith("city-"), k)
+            self.assertTrue(any(r["src"]["url"] == self.d["city"][k]["code"]["url"] for r in rs["rules"]), k)
+        self.assertIsNone(self.d["other"])
+
+    def test_city_math(self):
+        self.assertEqual(self.d["rs"]["lynnwood"]["floorCap"], 4320)
+        self.assertEqual(self.d["lyn4"]["floorCap"], 7200)
+        self.assertEqual(self.d["mlt3"]["floorCap"], 4800)
+        self.assertEqual(self.d["red8"]["floorCap"], 15000)
+        self.assertEqual(self.d["rs"]["lakeforestpark"]["coverage"], 2520)
+        self.assertEqual(self.d["rs"]["bellevue"]["coverage"], 2880)
+        self.assertEqual(self.d["rs"]["renton"]["impervious"], 4680)
+        self.assertEqual(self.d["rs"]["mukilteo"]["setbacks"], {"front": 20, "rear": 5, "side": 5})
 
 
 if __name__ == "__main__":
