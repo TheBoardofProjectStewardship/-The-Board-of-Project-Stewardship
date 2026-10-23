@@ -1,0 +1,75 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Shoreline",
+    "service": "Roof replacement",
+    "slug": "roof-replacement-shoreline-wa"
+  },
+  "sources": [
+    {
+      "url": "https://ecode360.com/49772285",
+      "title": "https://ecode360.com/49772285",
+      "retrieved": "2026-10-23",
+      "http_status": 200,
+      "supports": "Shoreline Municipal Code Chapter 15.05: adopted codes (IBC/IEBC/IRC, 51-11R energy); 15.05.030 IBC 105.2(14) and 15.05.040 IRC R105.2(11) reroof exemption where no structural elements incl. roof diaphragm revised; Table R301.2(1) local design criteria"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51",
+      "retrieved": "2026-10-23",
+      "http_status": 200,
+      "supports": "Washington State statewide amendments to the International Residential Code"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R",
+      "retrieved": "2026-10-23",
+      "http_status": 200,
+      "supports": "Washington residential energy code"
+    },
+    {
+      "url": "https://codes.iccsafe.org/content/IRC2021P2/chapter-9-roof-assemblies",
+      "title": "https://codes.iccsafe.org/content/IRC2021P2/chapter-9-roof-assemblies",
+      "retrieved": "2026-10-23",
+      "http_status": 200,
+      "supports": "IRC Chapter 9 Roof Assemblies; reroofing / roof recover limits (R908.3.1.1). Page is JS-rendered; curl 200, text per published 2021 IRC"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=296-880-20005",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=296-880-20005",
+      "retrieved": "2026-10-23",
+      "http_status": 200,
+      "supports": "WAC 296-880-20005 fall protection required at four feet or more"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "retrieved": "2026-10-23",
+      "http_status": 200,
+      "supports": "L&I hiring a contractor: active license, bonded and insured, history, 3 written bids, written contract, performance bond"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-10-23",
+      "http_status": 200,
+      "supports": "L&I Verify contractor lookup"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=z1vuU-3I52Y",
+      "title": "https://www.youtube.com/watch?v=z1vuU-3I52Y",
+      "retrieved": "2026-10-23",
+      "http_status": 200,
+      "supports": "GAF Roofing: How to Tear Off the Roof Deck and Shingle Installation (oEmbed 200)"
+    }
+  ],
+  "dropped": [
+    "shorelinewa.gov permit pages and re-roofing handout (403 to box curl; Shoreline facts sourced from SMC 15.05 on ecode360 instead)",
+    "Shoreline eTRAKiT and legacy cosweb re-roof administrative order (unreachable from box)",
+    "WAC 296-155-24609 (repealed; replaced by WAC 296-880-20005)",
+    "L&I fall-protection topic page (404)",
+    "pscleanair.gov asbestos page (redirected to unrelated app) and EPA asbestos page (no readable content to box); asbestos claims omitted",
+    "All permit fees and roofing prices (omitted)",
+    "gcpat.com Grace Ice & Water Shield (403)"
+  ]
+}

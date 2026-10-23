@@ -1,0 +1,19 @@
+{
+  "submission_id": "2026-10-23-roof-replacement-shoreline-wa",
+  "idempotency_key": "sha256:a8c3b514d45a25664c02f498560465a2338b27d957932ee05f74a6601b23e222",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-10-23T10:51:36Z",
+  "outputs": [
+    "assets/images/posts/2026-10-23-shoreline-roof-replacement-1.webp",
+    "assets/images/posts/2026-10-23-shoreline-roof-replacement-2.webp",
+    "assets/images/posts/2026-10-23-shoreline-roof-replacement-3.webp",
+    "posts/2026-10-23-roof-replacement-shoreline-wa.md",
+    "posts/2026-10-23-roof-replacement-shoreline-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 80
+}

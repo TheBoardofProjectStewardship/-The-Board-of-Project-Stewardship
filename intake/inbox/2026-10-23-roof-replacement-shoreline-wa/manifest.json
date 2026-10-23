@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-10-23-roof-replacement-shoreline-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-10-23T11:00:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Roof Replacement Shoreline WA \u2014 When a Reroof Needs a City Permit, Tear-Off vs Overlay & Rain-Ready Details",
+    "date": "2026-10-23",
+    "slug": "roof-replacement-shoreline-wa",
+    "description": "A Shoreline homeowner's guide to roof replacement: when the city's code exempts a reroof from a permit and when sheathing or framing work changes that, tear-off vs overlay limits, local design criteria, fall protection, and vetting roofers.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 inbox had no 2026-10-23 packets (latest *-2026-10-21). Topic: roof replacement, Shoreline WA (roofing last used 2026-10-05 Ballard; Shoreline last used 2026-10-06 windows; neither in the last 14 posts). shorelinewa.gov returned 403 to box curl; Shoreline sources verified via the Shoreline Municipal Code on ecode360 (SMC 15.05, 200). Producer role fields kept per intake contract."
+}
