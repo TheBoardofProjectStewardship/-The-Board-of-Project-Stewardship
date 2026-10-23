@@ -61,6 +61,8 @@ Around the house, this stage mostly shows up as meetings, emails and a growing p
 Before you approve the layout, ask to see it from above and from the doorway, ask what a change would cost after this point and ask what goes into the plan set for the city.
 
 
+![Tile, stone and wood finish samples spread on a table while planning a bathroom remodel in Seattle](../assets/images/posts/2026-10-18-seattle-bathroom-remodel-4.webp "Tile, stone and wood finish samples spread on a table while planning a bathroom remodel in Seattle.")
+
 ## Stage 3: Waiting on the permit {#permit}
 
 Bathroom work that moves plumbing, changes walls or adds electrical circuits usually needs a permit. In Seattle, that goes through the [Seattle Department of Construction and Inspections](https://www.seattle.gov/sdci). In Edmonds, start with the city's [Development Services Department](https://www.edmondswa.gov/government/departments/development_services). Every city has its own rules on what needs a permit, so ask your contractor which ones your job requires and who files them. The Board's [permits overview](../permits.html) covers the general picture.
@@ -127,6 +129,8 @@ This stretch is often quieter at home, with different trades coming and going an
 Ask for the inspection result once it's in. Confirm the fan's route outside and its controls, and check that blocking is going in for a bench, grab bars or anything heavy.
 
 
+![Bathroom opened to the studs with new plumbing rough-in during a bathroom remodel in Seattle](../assets/images/posts/2026-10-18-seattle-bathroom-remodel-5.webp "Bathroom opened to the studs with new plumbing rough-in during a bathroom remodel in Seattle.")
+
 ## Stage 7: Behind the tile {#waterproof}
 
 This stage is short and it matters more than any other. Before tile goes on, the shower gets a continuous waterproof layer tied into the drain, either a sheet membrane bonded with thin-set mortar or a liquid membrane rolled on in coats. Grout and most tile aren't waterproof by themselves, so this layer is what keeps water out of the walls and floor.
@@ -142,6 +146,8 @@ https://www.youtube.com/watch?v=2CwOrDGYBDQ
 The manufacturer video above shows one sheet-membrane shower going together, from the pan to the walls. It's one system among several, shown here as an example.
 
 [[ap:loop2]]
+
+![Waterproofing membrane on the shower walls and a sloped floor before tile in a Seattle bathroom remodel](../assets/images/posts/2026-10-18-seattle-bathroom-remodel-6.webp "Waterproofing membrane on the shower walls and a sloped floor before tile in a Seattle bathroom remodel.")
 
 ## Stage 8: Tile, fixtures and glass {#finish}
 

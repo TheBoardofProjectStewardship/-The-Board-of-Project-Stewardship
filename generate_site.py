@@ -1893,7 +1893,15 @@ def apply_image_pass(html: str) -> str:
         if alt_m and rel:
             current = _unescape_attr(alt_m.group(1))
             fixed = illustrative_asset_alt(current, rel)
-            if fixed != current:
+            # Keep an authored alt the illustrative pass would only shorten, or
+            # would retitle as Puget Sound even though it already names Marysville.
+            # Other alts still get the normal place and boilerplate cleanup.
+            keep_authored = False
+            if fixed and fixed != current and len(current) <= 125:
+                keep_authored = current.startswith(fixed) or (
+                    "Marysville" in current and fixed.endswith(" in Puget Sound")
+                )
+            if fixed != current and not keep_authored:
                 inner = _set_attr(inner, "alt", esc(fixed))
         return "<img" + inner + ">"
 
