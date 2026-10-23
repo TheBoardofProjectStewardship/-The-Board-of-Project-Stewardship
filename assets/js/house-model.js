@@ -30,6 +30,9 @@ const C_WALL = [0.941,0.925,0.886], C_FLOOR = [0.955,0.95,0.935], C_INK = [0.12,
 const C_DETAIL = [0.42,0.44,0.43], C_ROOF = [0.17,0.175,0.18], C_FASCIA = [0.184,0.184,0.188];
 const C_GLASS = [0.34,0.42,0.47], C_FURN = [0.93,0.932,0.922], C_LAWN = [0.86,0.895,0.815];
 const C_PAVE = [0.90,0.90,0.885], C_DOOR = [0.80,0.80,0.79], C_TILE = [0.92,0.925,0.93];
+// Named finish colors a config may ask for (walls, door leaves, beams): warm wood and dark metal.
+const C_NAMED = { wood: [0.66,0.47,0.30], metal: [0.20,0.21,0.22] };
+const colorOf = (name, fallback) => C_NAMED[name] || fallback;
 
 /** Ear-clipping triangulation of a simple polygon [[x,z],...]. */
 function triangulate(poly) {
@@ -123,7 +126,7 @@ function buildFromConfig(cfg) {
   // Walls: every traced wall piece, from the slab edge up to its room's ceiling height.
   for (const w of cfg.walls) {
     const b = baseOf(w), y0 = w.y0 != null ? w.y0 : (LV && w.lvl ? b : 0);
-    prism(G(w).walls, w.q, y0, b + w.h, C_WALL, 5, true);
+    prism(G(w).walls, w.q, y0, b + w.h, colorOf(w.color, C_WALL), 5, true);
   }
   // Openings: sills, headers, glass and door panels fill the traced gaps.
   for (const o of cfg.openings) {
@@ -149,7 +152,7 @@ function buildFromConfig(cfg) {
         if (o.cutBase != null) prism(walls, s, F + DOOR, h, C_WALL, 5, true, C_INK, o.cutBase);
         else mid(F + DOOR, h, C_WALL, walls);
         if (o.kind === 'DG') prism(finish, g, F, F + DOOR, C_GLASS, 0, true, C_FASCIA);
-        else if (o.leaf) prism(finish, g, F, F + DOOR, C_DOOR, 0, true, C_FASCIA); // exterior door leaf (o.leaf)
+        else if (o.leaf) prism(finish, g, F, F + DOOR, colorOf(o.color, C_DOOR), 0, true, C_FASCIA); // exterior door leaf (o.leaf)
       } else if (o.kind === 'G') {
         if (F > W0 + 0.01) mid(W0, F, C_WALL, walls);
         mid(F + GDOOR, h, C_WALL, walls);
@@ -182,6 +185,8 @@ function buildFromConfig(cfg) {
       }
       continue;
     }
+    // Door leaves drawn as thin panels along plan segments (closet doors, bi-folds), as drawn open on the plan.
+    if (f.kind === 'panel') { for (const [a, b] of f.segs || []) prism(fix, strip(a, b, f.t || 0.12), F, F + f.h, C_FURN, 0, true, C_DETAIL); continue; }
     prism(fix, rect(r), F, F + f.h, C_FURN, 0, true, C_DETAIL);
     if (f.kind === 'bed') prism(fix, rect([r[0], r[1], r[2], r[1] + Math.min(1.6, (r[3] - r[1]) * 0.25)]), F + f.h, F + f.h + 0.4, C_FURN, 0, true, C_DETAIL);
     if (f.kind === 'tub') { const i = 0.35; for (const [a, b] of [[[r[0]+i, r[1]+i], [r[2]-i, r[1]+i]], [[r[2]-i, r[1]+i], [r[2]-i, r[3]-i]], [[r[2]-i, r[3]-i], [r[0]+i, r[3]-i]], [[r[0]+i, r[3]-i], [r[0]+i, r[1]+i]]]) line(fix, [a[0], F + f.h + 0.02, a[1]], [b[0], F + f.h + 0.02, b[1]], C_DETAIL, 0, F); }
@@ -204,6 +209,8 @@ function buildFromConfig(cfg) {
     // A planted (green) roof: a thin lawn layer inside the parapet edge.
     for (const g of c.green || []) prism(roof, g, F + c.y + RA + (c.t ?? RT), F + c.y + RA + (c.t ?? RT) + 0.08, C_LAWN, 0, false);
   }
+  // Exposed beam ends under the roof overhangs (cfg.beams): drawn with the roof so they lift away with it.
+  for (const b of cfg.beams || []) prism(roof, b.poly, b.y0, b.y1, colorOf(b.color, C_WALL), 0, true, C_FASCIA);
   /** Hipped roof per wing over a plan rectangle. Overlapping wings at one pitch meet in true valleys.
       Eaves overhang the walls, with a fascia band, a soffit and standing seams down each plane. */
   function hipRoofs(spec) {
@@ -479,7 +486,8 @@ function profileTwoLevel(cfg) {
       switch (id) {
         case 'site': case 'lowerfloor': return state(true);
         case 'lower': case 'lowerFinish': return state(true, lowerCut(p));
-        case 'lowerFix': return state(p >= 0.30 && p < 0.88, lowerCut(p), 1 - sm(0.84, 0.88, p));
+        // Three levels: the lower floor keeps its fixtures (stair, beds, counters) on the last stage; the main floor ones are above the cut.
+        case 'lowerFix': return L3 ? state(p >= 0.30, lowerCut(p)) : state(p >= 0.30 && p < 0.88, lowerCut(p), 1 - sm(0.84, 0.88, p));
         case 'upperfloor': return state(p < 0.67, 100, upFade);
         case 'upper': case 'finish': return state(p < 0.67, upperCut(p), upFade);
         case 'fixtures': return state(p >= 0.30 && p < 0.67, upperCut(p), upFade);
@@ -1466,7 +1474,8 @@ function createRenderer(canvas, options) {
     }
     function updateRoomChoices() {
       if (!roomSelect || !engine) return;
-      var floor = rendered >= 0.84 ? "" : floorKey();
+      // Three-level models list the lower floor rooms on the last stage; two-level models have only the slab there.
+      var floor = rendered >= 0.84 && PROFILE.floorY.lower == null ? "" : floorKey();
       if (floor !== roomFloor) {
         roomFloor = floor;
         roomSelect.replaceChildren();

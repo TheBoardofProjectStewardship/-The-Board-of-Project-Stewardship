@@ -229,9 +229,11 @@
         "The stairs are drawn as straight flights of 17 risers, scaled from the plans. The riser count is not printed.",
         "The walk steps between the lower entry and the main level walk are the nine treads drawn on the plans; their rise is assumed even.",
         "Two rooms with no printed name are labeled Bath (unlabeled) from their plumbing fixtures.",
-        "The main deck posts are placed at its outer corners, scaled from the back elevation. Railings are not modeled.",
-        "Furniture and fixtures sit where the plan symbols are, scaled from the drawing. Interior doors are shown as open gaps.",
-        "Siding, cedar trim, posts and beams inside the glass walls, and window mullions are not modeled."
+        "The two deck columns are the outlined 2'-0\" x 6\" rectangles on the deck edges of the main level plan. The deck guard follows the back and side elevations: horizontal metal bars with a dark top rail, about 3'-0\" above the deck (scaled), with a wood rim band under the deck edge.",
+        "The north walk stair to the lower level entry is drawn as on the plans. No retaining wall is drawn on the plans, so none is modeled.",
+        "Furniture and fixtures sit where the plan symbols are, scaled from the drawing. Their heights are assumed. Interior doors are shown as open gaps, except the upper laundry bi-fold doors and the bonus room closet doors, drawn open as the plan shows them.",
+        "Beam ends under the overhangs are the dashed beam lines on the plans where they run past the walls. Their 1'-0\" depth is scaled from the back elevation.",
+        "Siding, cedar trim and soffits, posts and beams inside the glass walls, and window mullions are not modeled. The entry door is shown in warm wood, as on the front elevation."
       ]
     }
   ]
