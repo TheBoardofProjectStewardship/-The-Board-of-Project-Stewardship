@@ -7749,6 +7749,8 @@ def news_hero_credit_html(credit: str) -> str:
         display = display.replace(commons_url, " ")
     # Drop only the colon that introduced a removed URL ("Commons: https://...").
     # "Photo: Visitor7" stays, so the supplied credit remains readable.
+    # A credit that wraps the Commons URL in parentheses should not leave "()".
+    display = re.sub(r"\(\s*\)", " ", display)
     display = re.sub(r":\s*$", "", display)
     display = re.sub(r"\s+,", ",", display)
     display = re.sub(r"\s+", " ", display).strip(" ,;:-")
