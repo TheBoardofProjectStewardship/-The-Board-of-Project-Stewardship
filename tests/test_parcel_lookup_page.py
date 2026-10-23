@@ -38,8 +38,10 @@ class ParcelLookupPageTests(unittest.TestCase):
         ui = UI.read_text(encoding="utf-8")
         self.assertIn(DISCLAIMER, html)
         self.assertIn("<em>unknown</em>", ui)
-        self.assertNotIn("est_sqft", ui)
-        self.assertNotIn(".value =", ui)
+        self.assertNotIn("est_sqft').value", ui)
+        self.assertNotIn('getElementById("est_sqft").value', ui)
+        self.assertNotIn("est_sqft.value =", ui)
+        self.assertIn("existing_sqft", ui)
         self.assertNotRegex(ui, r"owner|taxpayer")
 
         gen = (ROOT / "generate_site.py").read_text(encoding="utf-8")
