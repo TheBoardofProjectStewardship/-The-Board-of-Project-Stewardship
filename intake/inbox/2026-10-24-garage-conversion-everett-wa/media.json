@@ -1,0 +1,44 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-10-24-everett-garage-conversion-1.webp",
+      "repo_path": "assets/images/posts/2026-10-24-everett-garage-conversion-1.webp",
+      "alt": "A single-story home in Everett, WA with its attached garage opening framed in for a garage conversion, a worker checking the new wall framing above a wet driveway with tall evergreens behind the house \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "3f7d991d9ec6053d1051d87bfc518937",
+      "source": "Newly generated image (built-in image generator, 2026-10-24), source gen-1.jpg 1280x720, resized to 1600x900 webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-24-everett-garage-conversion-2.webp",
+      "repo_path": "assets/images/posts/2026-10-24-everett-garage-conversion-2.webp",
+      "alt": "Inside an Everett, WA garage conversion in progress, with rigid foam insulation and a plywood subfloor laid over the concrete slab, insulated stud walls, an electrical panel with new wiring and a newly framed window opening \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "74990a34ea2b67dea1080c62097fc340",
+      "source": "Newly generated image (built-in image generator, 2026-10-24), source gen-2.jpg 1280x720, resized to 1600x900 webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-24-everett-garage-conversion-3.webp",
+      "repo_path": "assets/images/posts/2026-10-24-everett-garage-conversion-3.webp",
+      "alt": "A finished bedroom in an Everett, WA garage conversion, with a wood-look floor, a large window looking out at rainy evergreens and a ductless heat pump head on the wall \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "dcd13daacaf29151bcbf64fe61e8fd22",
+      "source": "Newly generated image (built-in image generator, 2026-10-24), source gen-3.jpg 1280x720, resized to 1600x900 webp"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "4Jru8sqLjdY",
+      "url": "https://www.youtube.com/watch?v=4Jru8sqLjdY",
+      "title": "Framing Walls - Garage to Bedroom Conversion EP 2 - @HomeDepot",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "3 newly generated images (built-in generator), 0 regraded stills, 0 paid media."
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-10-24-garage-conversion-everett-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-10-24T11:00:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Garage Conversion Everett WA \u2014 Permits, Energy Code, Egress, Fire Separation & Rain-Ready Details",
+    "date": "2026-10-24",
+    "slug": "garage-conversion-everett-wa",
+    "description": "An Everett homeowner's guide to converting an attached garage into living space: why the work needs city building and electrical permits, energy code insulation for the slab, walls and ceiling, bedroom egress, garage fire separation, parking and ADU questions, and keeping a garage slab dry.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 inbox had no 2026-10-24 packets (latest *-2026-10-23). Topic: garage conversion, Everett WA (topic and Everett not in the last 14 posts; Everett never a post city). everettwa.gov returned 403 to box curl; Everett facts verified via the Everett Municipal Code (everett.municipal.codes, 200). Producer role fields kept per intake contract."
+}

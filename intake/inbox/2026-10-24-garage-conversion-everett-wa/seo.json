@@ -1,0 +1,53 @@
+{
+  "producer": "openclaw",
+  "agent": "seo-specialist",
+  "slug": "garage-conversion-everett-wa",
+  "title": "Garage Conversion Everett WA \u2014 Permits, Energy Code, Egress, Fire Separation & Rain-Ready Details",
+  "description": "An Everett homeowner's guide to converting an attached garage into living space: why the work needs city building and electrical permits, energy code insulation for the slab, walls and ceiling, bedroom egress, garage fire separation, parking and ADU questions, and keeping a garage slab dry.",
+  "category": "Guides",
+  "keywords": [
+    "garage conversion Everett WA",
+    "Everett garage conversion permit",
+    "convert garage to bedroom Everett",
+    "Everett electrical permit garage",
+    "garage to ADU Everett"
+  ],
+  "outline": [
+    "Key Takeaways",
+    "Why garage conversions come up so often in Everett",
+    "Does a garage conversion need a permit in Everett?",
+    "Energy code: slab, walls and ceiling",
+    "Bedrooms need an emergency escape opening",
+    "Fire separation if part of the garage stays a garage",
+    "Heat, ventilation and the electrical plan",
+    "Parking and the ADU question",
+    "PNW moisture: keep the old garage slab dry",
+    "Materials Worth Knowing",
+    "How to shortlist and verify a contractor",
+    "Where Pacific Pro Group fits",
+    "Next steps for an Everett garage conversion"
+  ],
+  "search_intent": "An Everett homeowner planning to convert an attached garage into a bedroom, office or unit wants to know what permits the City requires (including who issues the electrical permit), what the energy, egress and fire-separation rules are, how parking and ADU rules apply, and how to keep the space dry.",
+  "local_angles": [
+    "EMC 16.005.030 adopts IRC/51-51, WSEC 51-11, UPC, NEC",
+    "EMC 16.05.010 separate electrical permit from the building official",
+    "L&I lists Everett as a city that issues its own electrical permits and inspections",
+    "EMC 19.34.020 1 space per dwelling unit; 19.34.050 exceptions (<1,200 sf GFA; 1/2 mile of BRT/rail); 19.34.090 nonconforming parking",
+    "WAC 51-51-0302 R302.3 ADU within existing dwelling with interconnected smoke alarms",
+    "EMC 16.01.010 Table R301.2(1) 18-inch frost line"
+  ],
+  "internal_links": [
+    "../everett.html",
+    "../adu.html",
+    "../permits.html",
+    "../verify-contractor.html",
+    "../hiring-a-contractor.html",
+    "../bonds-and-insurance.html",
+    "../red-flags-hiring.html"
+  ],
+  "notes": "Box-authored fallback brief. PPG only as Board #1 -> https://pacificprogroup.com/.",
+  "generation": {
+    "agent": "box-authored",
+    "mode": "box-fallback"
+  }
+}
