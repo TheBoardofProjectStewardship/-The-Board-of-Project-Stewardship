@@ -7552,16 +7552,28 @@ def news_forbidden_term(text: str) -> str | None:
     return None
 
 
+def _split_news_frontmatter(text: str) -> tuple[str, str] | None:
+    """Split on fence lines. A source URL may contain --- (not a fence)."""
+    lines = text.splitlines()
+    if not lines or lines[0].strip() != "---":
+        return None
+    for index in range(1, len(lines)):
+        if lines[index].strip() == "---":
+            front = "\n".join(lines[1:index])
+            body = "\n".join(lines[index + 1 :])
+            return front, body
+    return None
+
+
 def parse_news_frontmatter(text: str) -> tuple[dict, str]:
     """Front matter with scalar fields and a one-level sources list."""
-    if not text.startswith("---"):
+    split = _split_news_frontmatter(text)
+    if split is None:
         return {}, text
-    parts = text.split("---", 2)
-    if len(parts) < 3:
-        return {}, text
+    front, body = split
     meta: dict = {}
     key_re = re.compile(r"^([A-Za-z0-9_]+):\s*(.*)$")
-    lines = parts[1].strip("\n").splitlines()
+    lines = front.strip("\n").splitlines()
     i = 0
     while i < len(lines):
         line = lines[i]
@@ -7600,7 +7612,7 @@ def parse_news_frontmatter(text: str) -> tuple[dict, str]:
             continue
         meta[key] = rest.strip().strip('"').strip("'")
         i += 1
-    return meta, parts[2].strip()
+    return meta, body.strip()
 
 
 def _news_source_urls(value) -> list[str]:
