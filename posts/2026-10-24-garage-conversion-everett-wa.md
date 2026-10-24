@@ -20,6 +20,8 @@ Everett has a lot of mid-century ramblers and split-levels with attached one- an
 
 The Board of Project Stewardship's [Everett directory](../everett.html), [ADU guide](../adu.html), [permits overview](../permits.html) and [verify a contractor checklist](../verify-contractor.html) cover the wider picture. This guide sticks to what the Everett Municipal Code, Washington's building code rules and Washington L&I actually say, and it flags the questions you should confirm directly with the City of Everett before you commit to a design.
 
+![A homeowner and a reviewer going over garage conversion plans on a workbench inside an emptied attached garage in Everett, WA, with a wet driveway and evergreens outside — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-24-everett-garage-conversion-4.webp)
+
 ## Does a garage conversion need a permit in Everett?
 
 Plan on yes. Everett adopts the state building codes by reference in [EMC 16.005.030](https://everett.municipal.codes/EMC/16.005.030). That section adopts the current International Residential Code as adopted by the Washington State Building Code Council in [Chapter 51-51 WAC](https://app.leg.wa.gov/wac/default.aspx?cite=51-51), the mechanical and fuel gas codes, the Uniform Plumbing Code, the Washington State Energy Code in Chapter 51-11 WAC, and the National Electrical Code as adopted by L&I. Everett's own amendments to the residential code are in [EMC 16.01.010](https://everett.municipal.codes/EMC/16.01.010).
@@ -46,11 +48,15 @@ Ask your designer or contractor which compliance path and which insulation value
 
 ![Inside an Everett, WA garage conversion in progress, with rigid foam insulation and a plywood subfloor laid over the concrete slab, insulated stud walls, an electrical panel with new wiring and a newly framed window opening — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-24-everett-garage-conversion-2.webp)
 
+![A new casement window framed into an insulated stud wall of a garage being turned into a bedroom in an Everett, WA home — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-24-everett-garage-conversion-5.webp)
+
 ## Bedrooms need an emergency escape opening
 
 If the converted space will be a bedroom, the residential code requires an emergency escape and rescue opening, usually a window, in every sleeping room. Under the published 2021 IRC (Section R310, in the [building planning chapter](https://codes.iccsafe.org/content/IRC2021P2/chapter-3-building-planning)), the opening needs a minimum net clear opening area (5.7 square feet, or 5 square feet for a grade-floor opening), at least 24 inches of clear height and 20 inches of clear width, and a sill no more than 44 inches above the floor. The opening has to work from the inside without keys or tools.
 
 Garage conversions often get this right by putting a large window in the new wall where the garage door used to be. Check the window's net clear opening on the manufacturer's sheet, not just the rough opening size, and confirm the requirement with the City for your plan.
+
+![A drywall separation wall and solid door between a converted room and the remaining garage space in an Everett, WA garage conversion — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-24-everett-garage-conversion-6.webp)
 
 ## Fire separation if part of the garage stays a garage
 
@@ -62,6 +68,8 @@ Many Everett conversions keep part of the garage for storage or a car. When that
 
 If the whole garage becomes living space, the old door between the house and the garage can become an ordinary interior door, but the new exterior wall and any new attached storage have to be designed together.
 
+![An electrician wiring outlet boxes in insulated walls of an Everett, WA garage conversion, with a bath fan duct in the ceiling framing — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-24-everett-garage-conversion-7.webp)
+
 ## Heat, ventilation and the electrical plan
 
 The new room needs a permanent heat source. A ductless heat pump head is a common choice for a single converted room, and extending ducts from the house system is another option if the equipment has capacity. Both need permits, and the energy code affects equipment and controls. Plan ventilation too, especially if you add a bathroom or laundry.
@@ -71,6 +79,8 @@ On the electrical side, think through outlets, lighting, smoke and carbon monoxi
 https://www.youtube.com/watch?v=4Jru8sqLjdY
 
 The video above shows the interior wall framing stage of a garage-to-bedroom conversion. Local code details in Everett can differ from what any video shows, so use it to understand the sequence, not as a code reference.
+
+![A small Everett, WA home after a garage conversion, the old garage door replaced with siding and a window, with a parking pad beside the house in the rain — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-24-everett-garage-conversion-8.webp)
 
 ## Parking and the ADU question
 
@@ -83,6 +93,8 @@ Converting a garage removes covered parking, so ask the City early whether you s
 Ask the City how those rules apply to your lot and plan, especially if you are adding a new dwelling unit rather than a room.
 
 If the plan is a separate unit for a relative or a tenant, the building code side matters too. Washington's amendment to R302.3 in WAC 51-51-0302 says one accessory dwelling unit built within an existing dwelling need not be treated as a separate unit in a two-family dwelling, and does not need a fire-rated separation, when all required smoke alarms in both units are interconnected so that one alarm sets off all of them. Zoning still decides whether a second unit is allowed on your lot and what standards apply, so confirm that with Everett's planning staff. The Board's [ADU guide](../adu.html) covers the wider planning questions.
+
+![A taped polyethylene vapor barrier over an old concrete garage slab with sleepers and rigid foam going down, and a moisture meter on the slab, in an Everett, WA garage conversion — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-24-everett-garage-conversion-9.webp)
 
 ## PNW moisture: keep the old garage slab dry
 
