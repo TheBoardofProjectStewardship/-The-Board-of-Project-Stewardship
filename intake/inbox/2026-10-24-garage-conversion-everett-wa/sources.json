@@ -1,0 +1,138 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Everett",
+    "service": "Garage conversion",
+    "slug": "garage-conversion-everett-wa"
+  },
+  "sources": [
+    {
+      "url": "https://everett.municipal.codes/EMC/16.005",
+      "title": "https://everett.municipal.codes/EMC/16.005",
+      "retrieved": "2026-10-24",
+      "http_status": 200,
+      "supports": "EMC Ch. 16.005 General Administration of Building Codes"
+    },
+    {
+      "url": "https://everett.municipal.codes/EMC/16.005.030",
+      "title": "https://everett.municipal.codes/EMC/16.005.030",
+      "retrieved": "2026-10-24",
+      "http_status": 200,
+      "supports": "EMC 16.005.030 adoption of codes: IBC/IRC (51-50/51-51 WAC), IMC/IFGC, IFC, UPC, WSEC 51-11 WAC, NEC per 296-46B WAC"
+    },
+    {
+      "url": "https://everett.municipal.codes/EMC/16.01.010",
+      "title": "https://everett.municipal.codes/EMC/16.01.010",
+      "retrieved": "2026-10-24",
+      "http_status": 200,
+      "supports": "EMC 16.01.010 IBC/IRC amendments; Table R301.2(1) incl. 18-inch frost line depth"
+    },
+    {
+      "url": "https://everett.municipal.codes/EMC/16.05.010",
+      "title": "https://everett.municipal.codes/EMC/16.05.010",
+      "retrieved": "2026-10-24",
+      "http_status": 200,
+      "supports": "EMC 16.05.010 NEC amendments: separate electrical permit from the building official for each installation, alteration, replacement or extension"
+    },
+    {
+      "url": "https://everett.municipal.codes/EMC/19.34",
+      "title": "https://everett.municipal.codes/EMC/19.34",
+      "retrieved": "2026-10-24",
+      "http_status": 200,
+      "supports": "EMC Ch. 19.34 parking, loading and access"
+    },
+    {
+      "url": "https://everett.municipal.codes/EMC/19.34.020",
+      "title": "https://everett.municipal.codes/EMC/19.34.020",
+      "retrieved": "2026-10-24",
+      "http_status": 200,
+      "supports": "EMC 19.34.020 Table 34-1: 1 off-street space per dwelling unit"
+    },
+    {
+      "url": "https://everett.municipal.codes/EMC/19.34.050",
+      "title": "https://everett.municipal.codes/EMC/19.34.050",
+      "retrieved": "2026-10-24",
+      "http_status": 200,
+      "supports": "EMC 19.34.050 exceptions: units under 1,200 sf GFA; Ch. 19.08 development within 1/2 mile of BRT/rail"
+    },
+    {
+      "url": "https://everett.municipal.codes/EMC/19.34.090",
+      "title": "https://everett.municipal.codes/EMC/19.34.090",
+      "retrieved": "2026-10-24",
+      "http_status": 200,
+      "supports": "EMC 19.34.090 nonconforming parking: no added parking for change of use; floor-area increase must add parking"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "title": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "retrieved": "2026-10-24",
+      "http_status": 200,
+      "supports": "L&I list of cities doing their own electrical permits/inspections; includes Everett, 3200 Cedar Street"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/",
+      "title": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/",
+      "retrieved": "2026-10-24",
+      "http_status": 200,
+      "supports": "L&I electrical permits, fees and inspections"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51",
+      "retrieved": "2026-10-24",
+      "http_status": 200,
+      "supports": "Washington State amendments to the IRC"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51-0302",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51-0302",
+      "retrieved": "2026-10-24",
+      "http_status": 200,
+      "supports": "WAC 51-51-0302 R302 amendments: R302.3 ADU within existing dwelling with interconnected smoke alarms; no change to R302.5/R302.6"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R",
+      "retrieved": "2026-10-24",
+      "http_status": 200,
+      "supports": "Washington residential energy code"
+    },
+    {
+      "url": "https://codes.iccsafe.org/content/IRC2021P2/chapter-3-building-planning",
+      "title": "https://codes.iccsafe.org/content/IRC2021P2/chapter-3-building-planning",
+      "retrieved": "2026-10-24",
+      "http_status": 200,
+      "supports": "IRC 2021 Ch. 3 (R302.5.1, R302.6, R310). JS-rendered; curl 200, text per published 2021 IRC"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "retrieved": "2026-10-24",
+      "http_status": 200,
+      "supports": "L&I hiring a contractor: registered, bonded, insured, history, 3 written bids, written contract"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-10-24",
+      "http_status": 200,
+      "supports": "L&I Verify contractor lookup"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=4Jru8sqLjdY",
+      "title": "https://www.youtube.com/watch?v=4Jru8sqLjdY",
+      "retrieved": "2026-10-24",
+      "http_status": 200,
+      "supports": "Daddy DIY: Framing Walls - Garage to Bedroom Conversion EP 2 (oEmbed 200)"
+    }
+  ],
+  "dropped": [
+    "everettwa.gov permit pages, home page and document center (403 to box curl; Everett facts sourced from the Everett Municipal Code on everett.municipal.codes instead)",
+    "codepublishing.com/WA/Everett redirects to municipal.codes (403 without browser headers; 200 with standard browser headers)",
+    "L&I 'where-to-get-an-electrical-permit' URL (404; city list page used instead)",
+    "Everett zoning ADU-specific standards (not located in EMC 19.05/19.08/19.13 in time; ADU zoning left to 'confirm with planning staff')",
+    "WAC 51-11R specific R-values/tables (section pages timed out; no numeric insulation values stated)",
+    "All permit fees and prices (omitted)",
+    "EMC 16.01.010 winter design temperature column (ambiguous in extracted table; omitted)"
+  ]
+}

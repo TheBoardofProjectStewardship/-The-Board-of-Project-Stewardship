@@ -1,0 +1,19 @@
+{
+  "submission_id": "2026-10-24-garage-conversion-everett-wa",
+  "idempotency_key": "sha256:69886f28a1b16eb518c35e4ff5fe65170cde2ec2437dcf0ea90025dfcc3e1c39",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-10-24T10:54:58Z",
+  "outputs": [
+    "assets/images/posts/2026-10-24-everett-garage-conversion-1.webp",
+    "assets/images/posts/2026-10-24-everett-garage-conversion-2.webp",
+    "assets/images/posts/2026-10-24-everett-garage-conversion-3.webp",
+    "posts/2026-10-24-garage-conversion-everett-wa.md",
+    "posts/2026-10-24-garage-conversion-everett-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 81
+}
