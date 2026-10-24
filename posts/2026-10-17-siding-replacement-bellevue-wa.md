@@ -33,6 +33,8 @@ Two sentences in that same code section matter just as much as the exemption:
 - Exemptions "shall not be deemed to grant authorization for any work to be done in any manner in violation of the provisions of this chapter, the technical codes or any other laws or ordinances of the city of Bellevue." No permit does not mean no rules; the new siding still has to be installed to code and to the manufacturer's instructions.
 - An exemption from one technical code "does not exempt work from the permit requirements of other technical codes." If the job moves an exterior light, outlet, or hose bib, those trades may need their own permits.
 
+![A worker pulls weathered siding off a Bellevue rambler during a siding replacement, sheathing beside a window](../assets/images/posts/2026-10-17-bellevue-siding-replacement-4.webp "A worker pulls weathered siding off a Bellevue rambler during a siding replacement, sheathing beside a window.")
+
 ## When a siding job turns into permit work
 
 The most common way a reclad picks up a permit is through the openings. Bellevue's page says a permit with plan review is required for "installing or moving an exterior door, skylight or window, including making an existing window wider," while "no permit is required for replacements of the same size in the same location." So swapping windows into the same rough openings during a reclad stays exempt; widening a living room window does not.
@@ -53,9 +55,13 @@ The survey results must be shared with anyone who may come in contact with the m
 
 Why this matters for siding: many mid-century houses carry older shingle siding, roofing felts, and patching materials whose contents nobody has checked. Settle it before the first board comes off, not after the dumpster is half full.
 
+![Cracked, peeling paint on old wood lap siding of a Bellevue house before a siding replacement](../assets/images/posts/2026-10-17-bellevue-siding-replacement-5.webp "Cracked, peeling paint on old wood lap siding of a Bellevue house before a siding replacement.")
+
 ## Lead paint in pre-1978 homes
 
 Many Bellevue houses built before 1978 have layers of old paint on the siding and trim. The EPA's [Renovation, Repair and Painting Program](https://www.epa.gov/lead/renovation-repair-and-painting-program) requires that anyone paid to perform work that disturbs painted surfaces in homes built before 1978 be certified, with employees trained in lead-safe work practices. The rule generally does not apply to homeowners working on their own homes, but if you hire the work out, ask each bidder for their firm certification and how they will contain dust and debris on your lot.
+
+![Metal kickout flashing where a roof meets the wall during a siding replacement on a Bellevue house in the rain](../assets/images/posts/2026-10-17-bellevue-siding-replacement-6.webp "Metal kickout flashing where a roof meets the wall during a siding replacement on a Bellevue house in the rain.")
 
 ## Rain-ready details to write into the scope
 

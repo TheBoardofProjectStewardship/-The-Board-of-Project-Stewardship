@@ -63,6 +63,8 @@ Several of Burien's requirements key off size or site work rather than project t
 - **Trees.** Removing a significant or exceptional tree requires a permit, work inside the critical root zone of a retained tree requires a tree retention plan, and a structure of 500 square feet or greater may require tree planting to meet minimum tree credits (BMC 19.26).
 - **Noise.** The checklist states that noise reduction is required in new and moved structures, with three zones and different construction methods depending on address. Ask the City early whether, and how, it applies to your addition.
 
+![A house on a steep wooded Burien lot during a home addition, with form boards and an excavator in the rain](../assets/images/posts/2026-10-16-burien-home-addition-4.webp "A house on a steep wooded Burien lot during a home addition, with form boards and an excavator in the rain.")
+
 ## Critical areas and sloped lots
 
 If the site plan shows a slope, stream, wetland, shoreline, or geologic hazard area, expect critical-area review alongside the building permit. Burien's [Submittal Checklists](https://www.burienwa.gov/business/community_development/permit_center/submittal_checklists) page lists separate critical-area checklists for Critical Aquifer Recharge Areas, Fish and Wildlife Habitat Conservation Areas, Geologically Hazardous Areas, Streams, and Wetlands. On a steep lot, the geotechnical report is often the long pole — commission it before the architect finalizes the footprint, not after.
@@ -71,9 +73,13 @@ If the site plan shows a slope, stream, wetland, shoreline, or geologic hazard a
 
 Burien publishes review goals in its [Construction Permit Application Information](https://cdnsm5-hosted.civiclive.com/UserFiles/Servers/Server_11045935/File/Business/Building%20&%20Construction/Permit%20Center/Applications/Information/Construction%20Permit%20Application%20Information.pdf) handout. For a single-family addition, the goal is comments within 3 weeks on the initial submittal, 3 weeks on resubmittals, and a target issuance date of 6 weeks. These are the City's stated goals, not a promise; incomplete submittals and extra review rounds push them out. The same handout says permit fees are determined by scope, with plan review fees based on the fair market value of the work — this guide does not estimate them.
 
+![An electrician pulling cable through open studs and mounting outlet boxes in a framed home addition in Burien](../assets/images/posts/2026-10-16-burien-home-addition-6.webp "An electrician pulling cable through open studs and mounting outlet boxes in a framed home addition in Burien.")
+
 ## Electrical: a City permit in Burien
 
 Burien appears on Washington L&I's list of [cities that issue their own electrical permits](https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections), at the City's permit center address, 400 SW 152nd St, Suite 300. For an addition, that means the electrical permit and inspections run through the City rather than state L&I, alongside the building, plumbing, and mechanical permits on MyBuildingPermit. Bidders who quote "L&I electrical" for a Burien job have not checked the local path.
+
+![Step flashing where a new home addition roof meets the existing roof in Burien, wet shingles after rain](../assets/images/posts/2026-10-16-burien-home-addition-5.webp "Step flashing where a new home addition roof meets the existing roof in Burien, wet shingles after rain.")
 
 ## Weatherproof first: details to write into the scope
 
