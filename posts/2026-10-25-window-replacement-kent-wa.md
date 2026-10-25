@@ -20,6 +20,8 @@ Kent covers a lot of ground: the valley floor along the Green River, East Hill a
 
 The window you pick matters, but most of the long-term risk is in the details around it: the energy rating on the label, whether a bedroom window still works as an escape route, and how the opening is flashed so rain ends up outside the wall instead of inside it. The Board of Project Stewardship's [Kent directory](../kent.html), [windows guide](../windows.html), [permits overview](../permits.html) and [verify a contractor checklist](../verify-contractor.html) cover the wider picture. This guide sticks to what the Kent City Code, Washington's building and energy codes and Washington L&I actually say, and it flags the questions to confirm directly with the City of Kent.
 
+![A homeowner couple and a reviewer going over a window replacement plan sheet and measurements at a kitchen table in Kent, WA, with rain on the window behind them — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-25-kent-window-replacement-4.webp)
+
 ## Does window replacement need a permit in Kent?
 
 Start with which codes apply. [Kent City Code 14.01.010](https://www.codepublishing.com/WA/Kent/html/Kent14/Kent1401.html) adopts by reference the 2021 International Residential Code as amended in Chapter 51-51 WAC, the 2021 International Existing Building Code, the mechanical and plumbing codes, and the 2021 International Energy Conservation Code as amended in Chapters 51-11C and 51-11R WAC (the Washington State Energy Code). Kent's local amendments to the residential code in KCC 14.01.050 deal with permit administration: when an application or permit expires, how permit valuation is set, and appeals. They do not add a list of window projects that can skip a permit.
@@ -37,6 +39,8 @@ Kent sets its fees separately, so ask the City for current fees rather than rely
 
 Most window replacements involve no wiring at all. But if the job adds an outlet for motorized shades, moves a switch or relocates an alarm sensor, it becomes electrical work. Washington L&I keeps a [list of cities that issue their own electrical permits and inspections](https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections). Kent is not on that list, and L&I says that if a jobsite is not inside one of the listed cities, the electrical permit is bought from L&I. L&I's [electrical permits, fees and inspections page](https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/) explains the process. L&I also suggests confirming that an address is actually inside a given city's limits, so check before you apply.
 
+![A new white vinyl replacement window with its energy performance label still on the glass, leaning in a garage in Kent, WA before installation — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-25-kent-window-replacement-5.webp)
+
 ## Energy code: what the U-factor on the label has to say
 
 This is the requirement Kent homeowners most often miss. Under Washington's residential energy code, [WAC 51-11R-50300](https://app.leg.wa.gov/wac/default.aspx?cite=51-11R-50300) (Section R503.1.1.1, replacement fenestration), when some or all of an existing window unit is replaced with a new product, including sash and glazing, the replacement has to meet the code's U-factor and SHGC requirements. When more than one window is replaced, an area-weighted average of all the replacement windows can be used to show compliance.
@@ -50,6 +54,8 @@ How to use that when you compare bids:
 - Storm windows installed over existing windows, and window film on existing single-pane glass, are listed as exceptions in R503.1.1, but those are different projects from replacement. If you are replacing the window, plan on meeting the U-factor.
 
 The broader chapter, [Chapter 51-11R WAC](https://app.leg.wa.gov/wac/default.aspx?cite=51-11R), also expects alterations not to make the house less energy-efficient than before. Gaps around new windows should be air-sealed, not just covered with trim.
+
+![A new casement window swung fully open in a bedroom of a Kent, WA home after window replacement, looking out on a green backyard — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-25-kent-window-replacement-6.webp)
 
 ## Bedroom egress: Washington skipped the replacement-window shortcut
 
@@ -81,9 +87,13 @@ https://www.youtube.com/watch?v=Qm-BRdqOJhQ
 
 The video above shows a sill pan being formed with stretch flashing tape in a framed opening. Local code details in Kent and your window manufacturer's instructions can differ from what any video shows, so use it to understand the sequence, not as a code reference.
 
+![A worker in a respirator and coveralls removing an old wood window inside plastic dust containment in an older Kent, WA home during window replacement — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-25-kent-window-replacement-7.webp)
+
 ## Older homes: lead-safe work
 
 If your Kent home was built before 1978, the old window paint may contain lead, and removing windows disturbs it. Washington's [Renovation, Repair and Painting program](https://www.commerce.wa.gov/lead-based-paint/rrp/) explains the lead-safe practices and certification that apply to renovation work in pre-1978 homes. Ask every bidder how they will contain dust and clean up, and whether their firm is certified.
+
+![New replacement windows stacked on moving blankets in a Kent, WA driveway beside an unmarked work van, ready for installation — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-25-kent-window-replacement-8.webp)
 
 ## Materials Worth Knowing
 
@@ -111,6 +121,8 @@ Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-per
 ## Where Pacific Pro Group fits
 
 When the Board of Project Stewardship ranks design-build firms for this area, Pacific Pro Group is the Board number-one contractor, a strong fit when window replacement involves new or enlarged openings, rot repair, flashing and siding work, or when it is part of a larger remodel. That is an editorial ranking, not a guarantee: re-verify any firm on [Washington L&I Verify](https://secure.lni.wa.gov/verify/) and compare written scopes. Learn more at [https://pacificprogroup.com/](https://pacificprogroup.com/).
+
+![A two-story Kent, WA home after window replacement, with new white windows and trim in light rain under tall evergreens — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-25-kent-window-replacement-9.webp)
 
 ## Next steps for a Kent window replacement
 
