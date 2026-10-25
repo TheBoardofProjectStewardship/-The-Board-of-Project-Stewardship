@@ -54,6 +54,7 @@ Base: `https://boardofprojectstewardship.com/`
 | `blog/rss.xml` | Blog RSS feed |
 | `news/rss.xml` | News RSS feed |
 | `404.html` | Branded Board 404 |
+| `posts/2026-10-25-window-replacement-kent-wa.html` | Window Replacement Kent WA — Permits, Energy Code U-Factors, Bedroom Egress & Rain-Ready Flashing |
 | `posts/2026-10-24-garage-conversion-everett-wa.html` | Garage Conversion Everett WA — Permits, Energy Code, Egress, Fire Separation & Rain-Ready Details |
 | `posts/2026-10-23-roof-replacement-shoreline-wa.html` | Roof Replacement Shoreline WA — When a Reroof Needs a City Permit, Tear-Off vs Overlay & Rain-Ready Details |
 | `posts/2026-10-22-ev-charger-installation-redmond-wa.html` | EV Charger Installation Redmond WA — City Electrical Permit, Panel Capacity & PSE Home Charging Rules |

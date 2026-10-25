@@ -1,0 +1,19 @@
+{
+  "submission_id": "2026-10-25-window-replacement-kent-wa",
+  "idempotency_key": "sha256:b5c696830b606a2f9558abb34592292b5c348edbe4bcf66f69574cf95e7ec01a",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-10-25T10:55:58Z",
+  "outputs": [
+    "assets/images/posts/2026-10-25-kent-window-replacement-1.webp",
+    "assets/images/posts/2026-10-25-kent-window-replacement-2.webp",
+    "assets/images/posts/2026-10-25-kent-window-replacement-3.webp",
+    "posts/2026-10-25-window-replacement-kent-wa.md",
+    "posts/2026-10-25-window-replacement-kent-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 82
+}

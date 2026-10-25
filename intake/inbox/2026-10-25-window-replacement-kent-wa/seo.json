@@ -1,0 +1,52 @@
+{
+  "producer": "openclaw",
+  "agent": "seo-specialist",
+  "slug": "window-replacement-kent-wa",
+  "title": "Window Replacement Kent WA \u2014 Permits, Energy Code U-Factors, Bedroom Egress & Rain-Ready Flashing",
+  "description": "A Kent homeowner's guide to window replacement: when to ask the City about a permit, the 0.30 U-factor Washington's energy code sets for replacement windows, bedroom egress rules, who issues electrical permits in Kent, and rain-ready flashing.",
+  "category": "Guides",
+  "keywords": [
+    "window replacement Kent WA",
+    "Kent window replacement permit",
+    "replacement window U-factor Washington",
+    "Kent bedroom egress window",
+    "window flashing Kent"
+  ],
+  "outline": [
+    "Key Takeaways",
+    "Why window replacement comes up so often in Kent",
+    "Does window replacement need a permit in Kent?",
+    "Electrical permits in Kent come from L&I",
+    "Energy code: what the U-factor on the label has to say",
+    "Bedroom egress: Washington skipped the replacement-window shortcut",
+    "Rain-ready flashing: where Kent window jobs succeed or fail",
+    "Older homes: lead-safe work",
+    "Materials Worth Knowing",
+    "How to shortlist and verify a window contractor",
+    "Where Pacific Pro Group fits",
+    "Next steps for a Kent window replacement"
+  ],
+  "search_intent": "A Kent homeowner replacing windows wants to know whether the City of Kent requires a permit, what energy code U-factor replacement windows must meet, how bedroom egress applies to replacements in Washington, who issues electrical permits in Kent, and how replacement windows should be flashed against rain.",
+  "local_angles": [
+    "KCC 14.01.010 adopts 2021 IRC (51-51 WAC), IEBC, IECC as amended by 51-11C/51-11R",
+    "KCC 14.01.050 IRC amendments: permit expiration (1 year/180 days), valuation, R105.3.1.1 flood-prone areas -> KCC 14.09",
+    "Kent not on L&I city electrical permit list -> electrical permits from L&I",
+    "WAC 51-11R-50300 R503.1.1.1 replacement fenestration; Table R402.1.2 U-0.30",
+    "WAC 51-51-03100: R310.5 replacement windows for EERO not adopted",
+    "WAC 51-51-0703 R703.1.1 water resistance"
+  ],
+  "internal_links": [
+    "../kent.html",
+    "../windows.html",
+    "../permits.html",
+    "../verify-contractor.html",
+    "../hiring-a-contractor.html",
+    "../bonds-and-insurance.html",
+    "../red-flags-hiring.html"
+  ],
+  "notes": "Box-authored fallback brief. PPG only as Board #1 -> https://pacificprogroup.com/.",
+  "generation": {
+    "agent": "box-authored",
+    "mode": "box-fallback"
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Kent",
+    "service": "Window replacement",
+    "slug": "window-replacement-kent-wa"
+  },
+  "sources": [
+    {
+      "url": "https://www.codepublishing.com/WA/Kent/html/Kent14/Kent1401.html",
+      "title": "https://www.codepublishing.com/WA/Kent/html/Kent14/Kent1401.html",
+      "retrieved": "2026-10-25",
+      "http_status": 200,
+      "supports": "KCC Ch. 14.01: 14.01.010 adopts 2021 IRC per 51-51 WAC, IEBC, IMC, UPC, IECC per 51-11C/51-11R; 14.01.050 IRC amendments (R105.3.1.1 flood-prone areas, R105.5 expiration 1 yr/180 days, R108.3 valuation)"
+    },
+    {
+      "url": "https://www.codepublishing.com/WA/Kent/html/Kent14/Kent1409.html",
+      "title": "https://www.codepublishing.com/WA/Kent/html/Kent14/Kent1409.html",
+      "retrieved": "2026-10-25",
+      "http_status": 200,
+      "supports": "KCC Ch. 14.09 Flood Hazard Regulations"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "title": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "retrieved": "2026-10-25",
+      "http_status": 200,
+      "supports": "L&I list of cities issuing own electrical permits; Kent not listed -> purchase from L&I"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/",
+      "title": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/",
+      "retrieved": "2026-10-25",
+      "http_status": 200,
+      "supports": "L&I electrical permits, fees and inspections"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R",
+      "retrieved": "2026-10-25",
+      "http_status": 200,
+      "supports": "Chapter 51-11R WAC residential energy code"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R-50300",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R-50300",
+      "retrieved": "2026-10-25",
+      "http_status": 200,
+      "supports": "R503.1 alterations; R503.1.1 exceptions (storm windows, film); R503.1.1.1 replacement fenestration U-factor/SHGC, area-weighted average"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R-40211",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R-40211",
+      "retrieved": "2026-10-25",
+      "http_status": 200,
+      "supports": "Table R402.1.2 fenestration U-factor 0.30 (CZ5/Marine 4); footnote 0.32 above 4000 ft"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51",
+      "retrieved": "2026-10-25",
+      "http_status": 200,
+      "supports": "Chapter 51-51 WAC (2021 IRC adoption)"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51-03100",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51-03100",
+      "retrieved": "2026-10-25",
+      "http_status": 200,
+      "supports": "R310.1 EERO in every sleeping room; R310.5 replacement windows not adopted"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51-0703",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51-0703",
+      "retrieved": "2026-10-25",
+      "http_status": 200,
+      "supports": "R703.1.1 water resistance, WRB and drainage"
+    },
+    {
+      "url": "https://codes.iccsafe.org/content/IRC2021P2/chapter-3-building-planning",
+      "title": "https://codes.iccsafe.org/content/IRC2021P2/chapter-3-building-planning",
+      "retrieved": "2026-10-25",
+      "http_status": 200,
+      "supports": "2021 IRC Ch. 3 (R310 EERO dimensions; R308 safety glazing)"
+    },
+    {
+      "url": "https://codes.iccsafe.org/content/IRC2021P2/chapter-7-wall-covering",
+      "title": "https://codes.iccsafe.org/content/IRC2021P2/chapter-7-wall-covering",
+      "retrieved": "2026-10-25",
+      "http_status": 200,
+      "supports": "2021 IRC Ch. 7 (R703.4 flashing)"
+    },
+    {
+      "url": "https://www.commerce.wa.gov/lead-based-paint/rrp/",
+      "title": "https://www.commerce.wa.gov/lead-based-paint/rrp/",
+      "retrieved": "2026-10-25",
+      "http_status": 200,
+      "supports": "WA Commerce RRP program (pre-1978 homes)"
+    },
+    {
+      "url": "https://nfrc.org/",
+      "title": "https://nfrc.org/",
+      "retrieved": "2026-10-25",
+      "http_status": 200,
+      "supports": "NFRC certified window labels"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "retrieved": "2026-10-25",
+      "http_status": 200,
+      "supports": "L&I hiring a contractor"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-10-25",
+      "http_status": 200,
+      "supports": "L&I Verify"
+    }
+  ],
+  "dropped": [
+    "kentwa.gov home and permit pages (403 to box curl; Kent facts sourced from the Kent City Code on codepublishing.com; permit questions left to 'confirm with the City of Kent permit center')",
+    "kent.municipal.codes (404)",
+    "WAC 51-51-0105 (no Washington R105 amendment; redirects to chapter)",
+    "Whether Kent exempts like-for-like window replacement from a building permit (not stated in KCC; left to the City)",
+    "All permit fees and prices (omitted)"
+  ]
+}
