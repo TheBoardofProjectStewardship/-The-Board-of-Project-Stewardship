@@ -1,5 +1,47 @@
+# Board of Project Stewardship — robots.txt
+# Keep in sync with: /llms.txt and /ai.txt
+#
+# AI search / user-fetch crawlers below are explicitly allowed on the same
+# public paths as User-agent: *. They affect whether answer engines can cite us.
+#
+# NOTE (Alex decision required): Training crawlers are UNCHANGED and still
+# fall under User-agent: *. Do NOT add separate Allow/Disallow for GPTBot,
+# Google-Extended, CCBot, anthropic-ai, Bytespider, ClaudeBot,
+# Applebot-Extended, or similar until Alex decides per bot. Blocking or
+# allowing training bots is independent of the search-bot rules above.
+
 User-agent: *
 Allow: /
 Disallow: /intake/
+
+# --- AI search / answer-engine crawlers (explicit Allow; same scope as *) ---
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /intake/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /intake/
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /intake/
+
+User-agent: Claude-User
+Allow: /
+Disallow: /intake/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /intake/
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /intake/
+
+# Machine-readable maps (informational; not a crawl directive)
+# llms.txt: https://boardofprojectstewardship.com/llms.txt
+# ai.txt:   https://boardofprojectstewardship.com/ai.txt
 
 Sitemap: https://boardofprojectstewardship.com/sitemap.xml
