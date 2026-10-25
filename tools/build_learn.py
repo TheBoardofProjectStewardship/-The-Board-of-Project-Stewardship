@@ -5,10 +5,14 @@ from __future__ import annotations
 import html
 import json
 import re
+import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+import generate_site as _site_generator
 DATE = "2026-10-14"
 BRAND = "Board of Project Stewardship"
 ORIGIN = "https://boardofprojectstewardship.com"
@@ -913,7 +917,7 @@ def head(name: str, desc: str, canon_path: str, extra_ld: str, depth: int, og_ty
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="{esc(desc)}">
+{_site_generator.google_tag_snippet()}  <meta name="description" content="{esc(desc)}">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#14181c">
   <meta property="og:title" content="{esc(title)}">
