@@ -49,6 +49,8 @@ Do not start work before the permit is issued and on site. The FAQ is explicit: 
 
 ![Open framing and unfinished lower-level space ready for insulation, electrical rough-in, and City of Renton](../assets/images/posts/2026-10-14-renton-basement-2.webp)
 
+![An electrician wiring outlet boxes in new stud walls during a Renton basement finishing project — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-14-renton-basement-4.webp)
+
 ## Separate trade permits on the City portal
 
 This is the detail that separates Renton from several nearby cities that push electrical through Washington L&I. On the remodel page, **separate permits are required for electrical, plumbing, mechanical, fire sprinklers, and alarms**. Over-the-counter electrical, mechanical, plumbing, residential photovoltaic, and re-roof permits can be applied for, paid, and printed on the City's [Online Permit Portal](https://www.rentonwa.gov/City-Services/Permit-Services/Online-Permit-Portal) — the Civic Access Self-Service Portal (CASSP) named in the FAQ ([Residential Interior Remodels](https://www.rentonwa.gov/City-Services/Permit-Services/Building-Fire-and-Signs/Residential-Interior-Remodels); [Building Permits FAQ](https://www.rentonwa.gov/City-Services/Permit-Services/Building-Fire-and-Signs/Building-Permits-FAQ)).
@@ -70,6 +72,8 @@ Also confirm licensing before issuance: the City requires a **State of Washingto
 
 Construction hours for single-family remodel work in residential areas are restricted (weekdays earlier than weekends); check the FAQ before you schedule noisy demolition or late deliveries ([Building Permits FAQ](https://www.rentonwa.gov/City-Services/Permit-Services/Building-Fire-and-Signs/Building-Permits-FAQ)).
 
+![A new basement egress window with a metal window well and ladder beside a Renton home — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-14-renton-basement-5.webp)
+
 ## Moisture, egress, and South King County basement details
 
 South King County winters keep foundation walls damp longer than a mood board suggests. A basement that looks finished in October can still fail quietly if moisture control, insulation, and egress were treated as afterthoughts. Practical points that belong in the scope before the FTP upload:
@@ -84,6 +88,8 @@ South King County winters keep foundation walls damp longer than a mood board su
 The video below walks through a full basement-finishing sequence from empty concrete to framed, insulated, and finished rooms — useful context for why moisture detailing and rough-in order matter before finishes land.
 
 https://www.youtube.com/watch?v=i0q6xpAnk-E
+
+![Rigid foam insulation with sealed seams on a concrete wall before framing in a Renton basement finishing project, with a dehumidifier running — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-14-renton-basement-6.webp)
 
 ## Materials Worth Knowing
 
