@@ -2049,24 +2049,32 @@ def apply_performance_pass(html: str) -> str:
 
 
 def finalize_published_html() -> None:
-    """Performance pass for pages that are not built by page_shell (tools, stamp)."""
+    """Performance pass for pages that are not built by page_shell (tools, stamp).
+
+    The Google tag is applied to every HTML document, including trees the
+    performance pass leaves alone (learn, projects, embeds, hand fragments).
+    """
     # /learn/ is owned by tools/build_learn.py. The site performance pass
     # would inject site.css and change that guide's own sheet.
-    skip = {"node_modules", "intake", "tests", "docs", "state", "data", "vendor", ".git", "learn", "projects"}
+    skip_tree = {"node_modules", "intake", "tests", "docs", "state", "data", "vendor", ".git"}
+    skip_perf = {"learn", "projects"}
+    # Hand-published fragments keep their own head. Do not inject site.css.
+    hand_fragments = {
+        "tools/build-walkthrough/index.html",
+        "tools/another-story/embed-snippet.html",
+        "sections/scroll-house.html",
+        MAGNOLIA_EMBED_PATH,
+    }
     for path in SITE_DIR.rglob("*.html"):
         rel = path.relative_to(SITE_DIR)
-        if any(part in skip for part in rel.parts):
-            continue
-        # Hand-published fragments keep their own head. Do not inject site.css.
-        if rel.as_posix() in {
-            "tools/build-walkthrough/index.html",
-            "tools/another-story/embed-snippet.html",
-            "sections/scroll-house.html",
-            MAGNOLIA_EMBED_PATH,
-        }:
+        if any(part in skip_tree for part in rel.parts):
             continue
         text = path.read_text(encoding="utf-8")
-        updated = apply_performance_pass(text)
+        updated = text
+        rel_posix = rel.as_posix()
+        if rel_posix not in hand_fragments and not any(part in skip_perf for part in rel.parts):
+            updated = apply_performance_pass(updated)
+        updated = inject_google_tag(updated)
         if updated != text:
             path.write_text(updated, encoding="utf-8")
 
@@ -2098,6 +2106,50 @@ def decorate_icons(html: str) -> str:
         last = match.end()
     parts.append(chunk(html[last:]))
     return "".join(parts)
+
+
+# Board of Project Stewardship only. Do not substitute a Pacific Pro Group ID.
+GA_MEASUREMENT_ID = "G-D35MVNCWZN"
+GOOGLE_TAG_SNIPPET = """<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-D35MVNCWZN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-D35MVNCWZN');
+</script>
+"""
+
+
+def google_tag_snippet() -> str:
+    """Exact sitewide Google tag. One snippet for every public document head."""
+    return GOOGLE_TAG_SNIPPET
+
+
+def inject_google_tag(html: str) -> str:
+    """Insert the Google tag once, after charset and viewport when those exist.
+
+    Trailing indentation on the next line is left in place. The snippet itself
+    stays byte-for-byte as supplied.
+    """
+    marker = f"https://www.googletagmanager.com/gtag/js?id={GA_MEASUREMENT_ID}"
+    if marker in html:
+        return html
+    match = re.search(
+        r"<meta\s+charset=[^>]*>[ \t]*\r?\n[ \t]*"
+        r"<meta\s+name=[\"']viewport[\"'][^>]*>[ \t]*\r?\n",
+        html,
+        flags=re.I,
+    )
+    if not match:
+        match = re.search(r"<meta\s+charset=[^>]*>[ \t]*\r?\n", html, flags=re.I)
+    if not match:
+        head_m = re.search(r"<head[^>]*>[ \t]*\r?\n?", html, flags=re.I)
+        if not head_m:
+            return html
+        return html[: head_m.end()] + GOOGLE_TAG_SNIPPET + html[head_m.end() :]
+    return html[: match.end()] + GOOGLE_TAG_SNIPPET + html[match.end() :]
 
 
 def head_assets() -> str:
@@ -3181,7 +3233,7 @@ def page_shell(
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="{esc(description)}">
+{google_tag_snippet()}  <meta name="description" content="{esc(description)}">
 {kw_tag}  <meta name="robots" content="{esc(robots)}">
 {verification_meta_html()}  <meta name="theme-color" content="#0a0a0a">
   <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -8898,7 +8950,7 @@ def magnolia_embed_html() -> str:
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex">
+{google_tag_snippet()}  <meta name="robots" content="noindex">
   <title>The house, taken apart: Magnolia house, ADU and garage | Board of Project Stewardship</title>
   <base href="{BASE_URL}" target="_blank">
 {css}  <style>
@@ -13617,6 +13669,10 @@ def build_privacy_page() -> str:
             f"""      <p class="text-slate-300 text-sm font-light leading-relaxed mb-4">If you check the consent box, the request, contact details, address, and images are shared only with Pacific Pro Group (WA contractor registration {esc(PPG['license'])}) so they can contact you about that project. The independence wording on the homepage Directory #1 card is unchanged. Optional text consent and the planning-guides email are separate and are not required to send the request. Texting stays off until that program is ready.</p>
       <p class="text-slate-300 text-sm font-light leading-relaxed mb-4">Each lead is stored with the consent text version and which boxes were checked, then a notice can be emailed. Notify mail goes to <a href="mailto:{EDITORIAL_EMAIL}" class="text-secondary hover:underline">{EDITORIAL_EMAIL}</a>. A confirmation uses a fixed message and does not include your note or your photo. No response time is promised. Email and sheet copies, when configured, are separate from the 7-day photo deletion rule.</p>
       <p class="text-slate-300 text-sm font-light leading-relaxed">If the concept service is not connected, the form does not send anything. To ask a question without the tool, use the <a href="./contact.html" class="text-secondary hover:underline">contact page</a>.</p>""",
+        )
+        + _hub_section(
+            "Site measurement",
+            """      <p class="text-slate-300 text-sm font-light leading-relaxed">This site uses Google Analytics (Measurement ID G-D35MVNCWZN) to understand aggregate traffic.</p>""",
         )
     )
     return page_shell(
