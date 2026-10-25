@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-10-25-window-replacement-kent-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-10-25T11:00:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Window Replacement Kent WA \u2014 Permits, Energy Code U-Factors, Bedroom Egress & Rain-Ready Flashing",
+    "date": "2026-10-25",
+    "slug": "window-replacement-kent-wa",
+    "description": "A Kent homeowner's guide to window replacement: when to ask the City about a permit, the 0.30 U-factor Washington's energy code sets for replacement windows, bedroom egress rules, who issues electrical permits in Kent, and rain-ready flashing.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 inbox had no 2026-10-25 packets (latest *-2026-10-24). Topic: window replacement, Kent WA (Kent never a post city; not in the last 14 posts). kentwa.gov returned 403 to box curl; Kent facts verified via the Kent City Code on codepublishing.com (200). Producer role fields kept per intake contract."
+}
