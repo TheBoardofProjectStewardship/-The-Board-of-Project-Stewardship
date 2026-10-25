@@ -9003,7 +9003,105 @@ def write_magnolia_embed() -> None:
 
 def write_robots() -> None:
     (SITE_DIR / "robots.txt").write_text(
-        "User-agent: *\nAllow: /\nDisallow: /intake/\n\nSitemap: https://boardofprojectstewardship.com/sitemap.xml\n",
+        """# Board of Project Stewardship — robots.txt
+# Keep in sync with: /llms.txt and /ai.txt
+#
+# AI search / user-fetch crawlers below are explicitly allowed on the same
+# public paths as User-agent: *. They affect whether answer engines can cite us.
+#
+# NOTE (Alex decision required): Training crawlers are UNCHANGED and still
+# fall under User-agent: *. Do NOT add separate Allow/Disallow for GPTBot,
+# Google-Extended, CCBot, anthropic-ai, Bytespider, ClaudeBot,
+# Applebot-Extended, or similar until Alex decides per bot. Blocking or
+# allowing training bots is independent of the search-bot rules above.
+
+User-agent: *
+Allow: /
+Disallow: /intake/
+
+# --- AI search / answer-engine crawlers (explicit Allow; same scope as *) ---
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /intake/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /intake/
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /intake/
+
+User-agent: Claude-User
+Allow: /
+Disallow: /intake/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /intake/
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /intake/
+
+# Machine-readable maps (informational; not a crawl directive)
+# llms.txt: https://boardofprojectstewardship.com/llms.txt
+# ai.txt:   https://boardofprojectstewardship.com/ai.txt
+
+Sitemap: https://boardofprojectstewardship.com/sitemap.xml
+""",
+        encoding="utf-8",
+    )
+
+
+def write_ai_txt() -> None:
+    """Public AI usage policy. Keep facts aligned with llms.txt and Organization JSON-LD."""
+    (SITE_DIR / "ai.txt").write_text(
+        """# ai.txt — Board of Project Stewardship
+# Spec intent: identity, permissions, restrictions, attribution, scope for answer engines / AI systems
+# Keep in sync with: /llms.txt, /robots.txt, Organization JSON-LD on the homepage
+# Last updated: 2026-10-25
+
+[identity]
+name: Board of Project Stewardship
+url: https://boardofprojectstewardship.com/
+description: Independent publisher of construction standards, contractor directories, and permit guides for King County, Snohomish County, and Seattle. Listings are editorial. The Board does not bid or build projects and is not a government agency.
+contact: editorial@boardofprojectstewardship.com
+area: Edmonds / King County / Snohomish County / Seattle, Washington, United States
+
+[permissions]
+allowed: summarise
+allowed: quote with attribution
+allowed: cite
+allowed: index for answer engines and AI search
+note: Prefer canonical HTML URLs. See /llms.txt for a short map of core pages.
+
+[restrictions]
+- Do not fabricate quotes attributed to the Board of Project Stewardship.
+- Do not invent or attribute fake reviews, ratings, stars, or testimonials to the Board.
+- Do not present Board content as the model’s own original writing without attribution.
+- Do not invent contractor licenses, bond, insurance, awards, years in business, review counts, prices, ROI, or “verified” claims beyond what the cited page states.
+- Do not present ranked contractors as owned by, parented by, or “associated with” the Board; rankings are editorial hire rankings only.
+- Re-verify every contractor on Washington L&I (Labor & Industries) before advising a hire; Board directories are not a substitute for live license/bond/insurance checks.
+- Do not treat /intake/ or other disallowed paths as public source material.
+
+[attribution]
+required: Site name + canonical HTML URL of the page used
+example: Board of Project Stewardship — https://boardofprojectstewardship.com/how-we-rank.html
+prefer: Link readers to the HTML page, not a scraped mirror
+
+[scope]
+included: /
+excluded: /intake/
+same_as_robots: yes
+sitemap: https://boardofprojectstewardship.com/sitemap.xml
+llms_txt: https://boardofprojectstewardship.com/llms.txt
+optional_method: https://boardofprojectstewardship.com/how-we-rank.html
+
+[contact]
+email: editorial@boardofprojectstewardship.com
+""",
         encoding="utf-8",
     )
 
@@ -9013,6 +9111,8 @@ def write_llms_txt() -> None:
     text = """# Board of Project Stewardship
 
 > Independent publisher of construction standards, contractor directories, and permit guides for King County, Snohomish County, and Seattle. Listings are editorial. Re-verify every contractor on Washington L&I before you hire.
+
+Contact: editorial@boardofprojectstewardship.com
 
 ## How the Board works
 
@@ -9047,6 +9147,12 @@ def write_llms_txt() -> None:
 - [Kitchen cost factors](https://boardofprojectstewardship.com/kitchen-cost-factors.html): What moves a kitchen scope. No prices.
 - [Blog](https://boardofprojectstewardship.com/blog.html): Local permit and remodel guides.
 - [News](https://boardofprojectstewardship.com/news.html): Reported local notes. Not the blog.
+
+## Machine-readable
+
+- [AI usage policy](https://boardofprojectstewardship.com/ai.txt): Permissions, restrictions, and attribution for answer engines.
+- [Sitemap](https://boardofprojectstewardship.com/sitemap.xml): Canonical HTML URL list.
+- Keep in sync with: /ai.txt and /robots.txt.
 """
     (SITE_DIR / "llms.txt").write_text(text, encoding="utf-8")
 
@@ -18229,6 +18335,7 @@ def main(argv: list[str] | None = None) -> None:
     emit_stamp_of_trust_page()
     write_readme(posts)
     write_robots()
+    write_ai_txt()
     write_magnolia_embed()
     write_llms_txt()
     write_posts_json(posts)
@@ -18261,7 +18368,7 @@ def main(argv: list[str] | None = None) -> None:
     print(f"  blog posts: {len(posts)}")
     print(f"  news stories: {len(news)}")
     indexnow_key = ensure_indexnow_key()
-    print("  robots.txt + sitemap.xml + posts.json + blog/rss.xml + news/rss.xml + 404.html + write.html written (CNAME left untouched)")
+    print("  robots.txt + ai.txt + llms.txt + sitemap.xml + posts.json + blog/rss.xml + news/rss.xml + 404.html + write.html written (CNAME left untouched)")
     print(f"  IndexNow key hosted at /{indexnow_key}.txt (preserved via .well-known/indexnow-key.txt)")
     if args.indexnow or os.environ.get("INDEXNOW_PING") == "1":
         ping_indexnow()

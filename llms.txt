@@ -2,6 +2,8 @@
 
 > Independent publisher of construction standards, contractor directories, and permit guides for King County, Snohomish County, and Seattle. Listings are editorial. Re-verify every contractor on Washington L&I before you hire.
 
+Contact: editorial@boardofprojectstewardship.com
+
 ## How the Board works
 
 - [How we rank](https://boardofprojectstewardship.com/how-we-rank.html): Editorial ranking method. Not a government list and not a paid placement.
@@ -35,3 +37,9 @@
 - [Kitchen cost factors](https://boardofprojectstewardship.com/kitchen-cost-factors.html): What moves a kitchen scope. No prices.
 - [Blog](https://boardofprojectstewardship.com/blog.html): Local permit and remodel guides.
 - [News](https://boardofprojectstewardship.com/news.html): Reported local notes. Not the blog.
+
+## Machine-readable
+
+- [AI usage policy](https://boardofprojectstewardship.com/ai.txt): Permissions, restrictions, and attribution for answer engines.
+- [Sitemap](https://boardofprojectstewardship.com/sitemap.xml): Canonical HTML URL list.
+- Keep in sync with: /ai.txt and /robots.txt.
