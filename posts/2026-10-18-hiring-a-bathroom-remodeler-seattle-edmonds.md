@@ -155,7 +155,7 @@ Now the room starts to look like the drawings. Tile goes on the floor and walls,
 
 There can be pauses here that feel strange: tile needs to cure, glass can take time to fabricate after it's measured, and a backordered fixture can hold up the last few steps. Ask for a realistic order of operations so the quiet days don't come as a surprise.
 
-![Patterned wallpaper, a round mirror and a small white vanity in a Seattle powder room by Pacific Pro Group](../assets/images/posts/2026-10-18-ppg-bronze-bath-magnolia-powder.webp)
+![Patterned wallpaper, a round mirror and a small white vanity in a Seattle powder room](../assets/images/posts/2026-10-18-ppg-bronze-bath-magnolia-powder.webp "Patterned wallpaper, a round mirror and a small white vanity in a Seattle powder room by Pacific Pro Group.")
 
 In a house near the water, finishes deserve a second look. Edmonds sits on Puget Sound, and exposed metal near an open window or a vent can corrode faster in salt air. Pacific Pro Group lists coastal properties as a particular focus in its company profile. Whoever you hire, ask how they choose hardware and fixtures for a coastal house.
 

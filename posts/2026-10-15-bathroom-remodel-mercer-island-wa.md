@@ -26,7 +26,7 @@ The regional [permit tip sheet](https://www.mercerisland.gov/sites/default/files
 
 The Board of Project Stewardship's [Mercer Island directory](../mercer-island.html), [bathrooms hub](../bathrooms.html), and [permits overview](../permits.html) give broader context. This guide stays on what the City and the state publish, and on the wet-area details that decide whether a bathroom still performs after a decade of daily showers.
 
-![A Mercer Island bathroom remodel opened to the studs, with exposed copper and PEX plumbing lines and the old fixtures removed — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-15-mercer-island-bath-4.webp)
+![A Mercer Island bathroom remodel opened to the studs, with exposed copper and PEX plumbing](../assets/images/posts/2026-10-15-mercer-island-bath-4.webp "A Mercer Island bathroom remodel opened to the studs, with exposed copper and PEX plumbing lines and the old fixtures removed.")
 
 ## Three common scopes, three different permit answers
 
@@ -67,7 +67,7 @@ Two details separate Mercer Island from some neighboring cities.
 
 There is one money-and-time detail worth asking about. The City notes that many of its building permits are **combination permits**: a fee has already been paid to cover the mechanical, electrical, and plumbing inspections associated with the work allowed under the building permit. Before anyone buys a separate trade permit, ask the general contractor — or call the Permit Counter at **206-275-7605** — whether the trade work is already covered. Duplicate permits waste money; missing permits stall inspections.
 
-![A wooded hillside home on Mercer Island with stepped retaining walls and a glimpse of Lake Washington, the kind of lot where critical-area rules can affect a bathroom remodel — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-15-mercer-island-bath-5.webp)
+![A wooded hillside home on Mercer Island where critical-area rules can affect a bathroom remodel](../assets/images/posts/2026-10-15-mercer-island-bath-5.webp "A wooded hillside home on Mercer Island with stepped retaining walls and a glimpse of Lake Washington, the kind of lot where critical-area rules can affect a bathroom remodel.")
 
 ## Critical areas, hillsides, and the building envelope
 
@@ -75,7 +75,7 @@ Mercer Island's code treats critical areas differently. On the City's permit-thr
 
 For a bathroom inside the existing house, that usually means the critical-area rule is not the main driver. It becomes relevant when the scope reaches outside: a bump-out, a new exterior door to a patio, or site work for a new side sewer or drainage. Check the map early so a "simple" bathroom does not surprise you with a separate land use review.
 
-![A shower waterproofed with sheet membrane and banded seams around a linear drain during a Mercer Island bathroom remodel — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-15-mercer-island-bath-6.webp)
+![A shower waterproofed with sheet membrane around a linear drain in a Mercer Island bathroom remodel](../assets/images/posts/2026-10-15-mercer-island-bath-6.webp "A shower waterproofed with sheet membrane and banded seams around a linear drain during a Mercer Island bathroom remodel.")
 
 ## Wet-area details worth writing into the scope
 
