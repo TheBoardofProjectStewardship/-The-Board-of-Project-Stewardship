@@ -12,7 +12,7 @@ slug: "crawl-space-moisture-control-auburn-wa"
 - **A sealed, "encapsulated" crawl space has its own checklist.** Washington's Section R408.3 drops the vents only when the exposed earth gets a continuous Class I vapor retarder with taped joints sealed 6 inches up the stem wall, a radon system, and continuously operated mechanical exhaust. A dehumidifier is not listed as a substitute, so confirm the design with the City of Auburn permit center before vents are closed.
 - **In Auburn's flood hazard areas, check before you seal.** The City's floodplain chapter ([ACC 15.68](https://auburn.municipal.codes/ACC/15.68)) requires flood openings in enclosed areas below the lowest floor for new construction and substantial improvements. Look up your lot on the [FEMA Flood Map Service Center](https://msc.fema.gov/portal/home), and verify every contractor on [Washington L&I Verify](https://secure.lni.wa.gov/verify/).
 
-![Crawl space moisture control under an Auburn, WA home: a technician in coveralls and a headlamp lays white reinforced vapor barrier with taped seams over gravel soil — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-26-auburn-crawl-space-1.webp)
+![A technician lays white reinforced vapor barrier with taped seams over a crawl space floor in Auburn, WA](../assets/images/posts/2026-10-26-auburn-crawl-space-1.webp)
 
 ## Why crawl space moisture comes up so often in Auburn
 
@@ -45,7 +45,7 @@ Most older Auburn houses have a vented crawl space, and that can work well when 
 
 In practice, many crawl space problems in vented houses come from a ground cover that is torn, bunched up, missing near the walls, or buried under debris. Blocked or crushed vents, and dryer or bath fans that dump into the crawl space instead of outdoors, cause trouble too. A careful contractor fixes those basics first.
 
-![Crawl space moisture control outside an Auburn, WA ranch home on a rainy day: a downspout extension and regraded soil slope water away from a screened crawl space vent — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-26-auburn-crawl-space-2.webp)
+![A downspout extension and regraded soil carry rain away from a crawl space vent at an Auburn, WA ranch home](../assets/images/posts/2026-10-26-auburn-crawl-space-2.webp "Crawl space moisture control outside an Auburn, WA ranch home on a rainy day: a downspout extension and regraded soil slope water away from a screened crawl space vent.")
 
 ## Start outside: water management before plastic
 
@@ -87,7 +87,7 @@ This is the step that is easy to miss in Auburn. The City's floodplain developme
 
 Sealing every vent, or placing a dehumidifier and new ductwork on the crawl space floor, can run into those rules on a lot in a mapped flood zone, and especially when the project counts as a substantial improvement. Check your address on the [FEMA Flood Map Service Center](https://msc.fema.gov/portal/home), and if any part of the lot is in a special flood hazard area, talk to the City of Auburn about the floodplain rules before choosing a sealed design.
 
-![Crawl space moisture check in Auburn, WA: a gloved hand holds a moisture meter to a stained, mold-spotted old joist beside a new sistered joist above white vapor barrier — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-26-auburn-crawl-space-3.webp)
+![A moisture meter on a stained old joist beside a new sistered joist in an Auburn, WA crawl space](../assets/images/posts/2026-10-26-auburn-crawl-space-3.webp "Crawl space moisture check in Auburn, WA: a gloved hand holds a moisture meter to a stained, mold-spotted old joist beside a new sistered joist above white vapor barrier.")
 
 ## Damage repair: joists, insulation and mold
 
