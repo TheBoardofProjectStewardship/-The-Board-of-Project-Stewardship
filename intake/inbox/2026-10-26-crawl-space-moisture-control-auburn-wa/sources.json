@@ -1,0 +1,150 @@
+{
+ "producer": "hermes",
+ "topic": {
+  "city": "Auburn",
+  "service": "Crawl space moisture control",
+  "slug": "crawl-space-moisture-control-auburn-wa"
+ },
+ "sources": [
+  {
+   "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R",
+   "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R",
+   "retrieved": "2026-10-26",
+   "http_status": 200,
+   "supports": "Chapter 51-11R WAC residential energy code"
+  },
+  {
+   "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R-40220",
+   "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R-40220",
+   "retrieved": "2026-10-26",
+   "http_status": 200,
+   "supports": "R402.2.4 access hatches/doors to crawl spaces insulated to same R-value; R402.2.4.1 weatherstripped"
+  },
+  {
+   "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51",
+   "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51",
+   "retrieved": "2026-10-26",
+   "http_status": 200,
+   "supports": "Chapter 51-51 WAC (IRC as amended)"
+  },
+  {
+   "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51-0408",
+   "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51-0408",
+   "retrieved": "2026-10-26",
+   "http_status": 200,
+   "supports": "WAC 51-51-0408 R408.1 ground cover 6-mil black poly, 6in laps; R408.2 1/300, 1/1500 w/ Class I, radon vent; R408.3 unvented requirements; R408.8 not adopted"
+  },
+  {
+   "url": "https://auburn.municipal.codes/ACC/15.07.010",
+   "title": "https://auburn.municipal.codes/ACC/15.07.010",
+   "retrieved": "2026-10-26",
+   "http_status": 200,
+   "supports": "ACC 15.07.010 D.2 adopts 2021 IRC per 51-51 WAC (excl. ch 11, plumbing, electrical chapters); adopts 2021 IECC as amended in 51-11C/51-11R"
+  },
+  {
+   "url": "https://auburn.municipal.codes/ACC/15.07.050",
+   "title": "https://auburn.municipal.codes/ACC/15.07.050",
+   "retrieved": "2026-10-26",
+   "http_status": 200,
+   "supports": "ACC 15.07.050 permit application contents incl. contractor registration number and city business license; dept of community development"
+  },
+  {
+   "url": "https://auburn.municipal.codes/ACC/15.28.010",
+   "title": "https://auburn.municipal.codes/ACC/15.28.010",
+   "retrieved": "2026-10-26",
+   "http_status": 200,
+   "supports": "ACC 15.28.010 electrical per state statutes; no additional permits beyond state law"
+  },
+  {
+   "url": "https://auburn.municipal.codes/ACC/15.68",
+   "title": "https://auburn.municipal.codes/ACC/15.68",
+   "retrieved": "2026-10-26",
+   "http_status": 200,
+   "supports": "ACC Ch. 15.68 Floodplain Development Management"
+  },
+  {
+   "url": "https://auburn.municipal.codes/ACC/15.68.310",
+   "title": "https://auburn.municipal.codes/ACC/15.68.310",
+   "retrieved": "2026-10-26",
+   "http_status": 200,
+   "supports": "ACC 15.68.310 flood protection standards: flood openings (2 min, 1 sq in per sf, bottom <=1 ft above grade), materials below FPE, equipment at/above FPE"
+  },
+  {
+   "url": "https://doh.wa.gov/community-and-environment/contaminants/radon",
+   "title": "https://doh.wa.gov/community-and-environment/contaminants/radon",
+   "retrieved": "2026-10-26",
+   "http_status": 200,
+   "supports": "WA DOH radon"
+  },
+  {
+   "url": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+   "title": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+   "retrieved": "2026-10-26",
+   "http_status": 200,
+   "supports": "L&I hiring a contractor"
+  },
+  {
+   "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+   "title": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+   "retrieved": "2026-10-26",
+   "http_status": 200,
+   "supports": "L&I list of cities issuing own electrical permits; Auburn not listed -> purchase from L&I"
+  },
+  {
+   "url": "https://msc.fema.gov/portal/home",
+   "title": "https://msc.fema.gov/portal/home",
+   "retrieved": "2026-10-26",
+   "http_status": 200,
+   "supports": "FEMA Flood Map Service Center (address lookup)"
+  },
+  {
+   "url": "https://secure.lni.wa.gov/verify/",
+   "title": "https://secure.lni.wa.gov/verify/",
+   "retrieved": "2026-10-26",
+   "http_status": 200,
+   "supports": "L&I Verify"
+  },
+  {
+   "url": "https://www.aprilaire.com/",
+   "title": "https://www.aprilaire.com/",
+   "retrieved": "2026-10-26",
+   "http_status": 200,
+   "supports": "Material: AprilAire dehumidifiers"
+  },
+  {
+   "url": "https://www.epa.gov/mold",
+   "title": "https://www.epa.gov/mold",
+   "retrieved": "2026-10-26",
+   "http_status": 200,
+   "supports": "EPA mold: moisture control is key"
+  },
+  {
+   "url": "https://www.epa.gov/radon",
+   "title": "https://www.epa.gov/radon",
+   "retrieved": "2026-10-26",
+   "http_status": 200,
+   "supports": "EPA radon"
+  },
+  {
+   "url": "https://www.santa-fe-products.com/",
+   "title": "https://www.santa-fe-products.com/",
+   "retrieved": "2026-10-26",
+   "http_status": 200,
+   "supports": "Material: Santa Fe dehumidifiers (crawl space coverage)"
+  },
+  {
+   "url": "https://www.stegoindustries.com/",
+   "title": "https://www.stegoindustries.com/",
+   "retrieved": "2026-10-26",
+   "http_status": 200,
+   "supports": "Material: Stego Industries (crawl space encapsulation vapor retarders)"
+  }
+ ],
+ "dropped": [
+  "codepublishing.com/WA/Auburn (301 to municipal.codes; Auburn code cited at auburn.municipal.codes instead)",
+  "Whether Auburn requires a building permit for ground cover replacement / vent sealing / crawl space fans (not stated in ACC; left to \"confirm with the City of Auburn permit center\")",
+  "Energy code crawl space wall insulation specifics (not verified in WAC 51-11R text today; omitted)",
+  "White River confluence claim (historic diversion; omitted)",
+  "All permit fees and prices (omitted)"
+ ]
+}
