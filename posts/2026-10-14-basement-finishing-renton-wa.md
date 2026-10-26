@@ -89,7 +89,7 @@ The video below walks through a full basement-finishing sequence from empty conc
 
 https://www.youtube.com/watch?v=i0q6xpAnk-E
 
-![Rigid foam insulation with sealed seams on a concrete wall before framing in a Renton basement finishing project, with a dehumidifier running — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-14-renton-basement-6.webp)
+![Rigid foam insulation with sealed seams on a concrete wall in a Renton basement finishing project](../assets/images/posts/2026-10-14-renton-basement-6.webp "Rigid foam insulation with sealed seams on a concrete wall before framing in a Renton basement finishing project, with a dehumidifier running.")
 
 ## Materials Worth Knowing
 
