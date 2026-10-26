@@ -302,6 +302,70 @@
         "Kitchen, bath and closet fixtures sit where the plan symbols are, scaled from the drawing. Their heights are assumed. Interior doors are shown as open gaps.",
         "Siding, the stone wainscot at the kitchen bumps, the trim bands at the floor line, window grids and the solar tubes are not modeled."
       ]
+    },
+    {
+      "slug": "daylight-basement-house",
+      "engine": "config",
+      "config": "daylight-basement-house.json",
+      "title": "Daylight basement house with an attached garage",
+      "card": "A permit set for an existing house, drawn as built: a one-story main floor with an attached garage over a finished daylight basement that opens to a deck on the low side of the lot, plus a basement bath remodel with a new tub and shower.",
+      "facts": [
+        "3,450 SF finished, two levels",
+        "1,920 SF main floor",
+        "Basement bath remodel"
+      ],
+      "kicker": "North King County, as-built permit and bath remodel",
+      "thumb": "/portfolio/daylight-basement-house/thumb.png",
+      "dek": "Explore the house layer by layer: the house on its slope, the street side, the roof, the main floor, the finished basement and the basement slab.",
+      "sourceNote": "Modeled from the plan set: the existing basement and main floor plans and the proposed basement plan at 1/4 inch = 1 foot. Walls, openings, room names, the stair, the decks and the bath remodel come from those sheets. The set has no elevations, roof plan, window schedule or ceiling heights, so every height and the roof are assumptions, listed below.",
+      "learn": {
+        "house": [
+          "roof",
+          "header"
+        ],
+        "front": [
+          "header"
+        ],
+        "roof": [
+          "roof"
+        ],
+        "upper": [
+          "partition"
+        ],
+        "plan": [
+          "partition"
+        ],
+        "foundation": [
+          "partition"
+        ]
+      },
+      "notes": {
+        "roof": [
+          "Roof",
+          "The plan set has no roof plan and no elevations, so the roof is an assumption: a hipped roof at 4:12 with 18 inch overhangs over the traced walls of the house and the garage, all at one plate height. The chimney for the two fireplaces is not drawn and is not modeled."
+        ],
+        "header": [
+          "Openings",
+          "Window and door widths are traced from the plans, where every opening is marked existing (EXST'G), some also EGRESS. The set has no window schedule, so every window is shown with an assumed 3'-0\" sill and 6'-10\" head, doors 6'-8\" tall and the garage door 7'-0\" tall."
+        ],
+        "partition": [
+          "Room layout",
+          "The plans print room names but no room areas, so rooms show their names only. Both levels are traced at 1/4 inch = 1 foot; the stair has the 14 risers drawn. Select a room to fly in."
+        ]
+      },
+      "assumptions": [
+        "Walls are traced from the existing basement and main floor plans at 1/4 inch = 1 foot and checked against the printed dimensions. The traced main floor is about 1,940 SF to the outside faces against the printed 1,920 SF, and the two decks trace to about 800 SF, as printed.",
+        "No ceiling or floor heights are printed. The stair has 14 risers drawn, so the main floor is set 8'-9\" above the basement floor (7 1/2 inch risers). Ceilings are assumed 7'-9\" in the basement and 8'-0\" on the main floor.",
+        "The roof is not drawn: a 4:12 hipped roof with 18 inch overhangs is assumed over the traced walls, with the house and the garage at one plate height. The chimney is not drawn and is not modeled.",
+        "Window sizes are not printed. Widths are traced from the plans; every window is shown with a 3'-0\" sill and a 6'-10\" head, doors 6'-8\" tall and the 16'-3\" garage door 7'-0\" tall.",
+        "The ground is not drawn. It is set level with the basement floor along the deck side and the shop end, where the basement has windows, a sliding door and an outside door, and 9 inches under the main floor on the street side, where the garage and the entry porch are. It slopes between the two along the kitchen end and the street side of the shop.",
+        "The garage slab is assumed 6 inches below the main floor. The porch and its step are scaled from the plan with assumed heights; the walk is drawn only as far as the sheet shows it.",
+        "The upper deck is drawn 5'-0\" deep at the main floor with a guard. Its posts are not drawn; posts are shown at the corners and about every 8 feet down to the lower deck. The lower deck follows the drawn outline at the basement floor.",
+        "Both fireplaces are shown as solid masonry blocks at their drawn size.",
+        "The basement bath is shown as remodeled on the proposed plan: vanity, toilet and a combination tub and shower between two new 2x6 walls.",
+        "The plans label two main floor rooms Bedroom and two Bath; they are numbered here so the room picker can tell them apart.",
+        "Kitchen, laundry and bath fixtures sit where the plan symbols are, scaled from the drawing. Their heights are assumed. Interior doors are shown as open gaps. Closet shelving, siding and trim are not modeled."
+      ]
     }
   ]
 }
