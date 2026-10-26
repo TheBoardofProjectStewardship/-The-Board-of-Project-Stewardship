@@ -118,7 +118,7 @@ A one-line quote ("upgrade panel to 200A") leaves too much open. Ask for these i
 - **Patching:** drywall, siding, or roofing around a relocated panel, mast, or meter base — and who does it.
 - **Warranty:** the contractor's labor warranty, separate from the equipment warranty.
 
-![Copper service wire, conduit and new breakers laid out for an electrical panel upgrade in a Federal Way, WA home](../assets/images/posts/2026-10-20-federal-way-panel-7.webp)
+![Copper service wire, conduit and new breakers for an electrical panel upgrade in a Federal Way, WA home](../assets/images/posts/2026-10-20-federal-way-panel-7.webp "Copper service wire, conduit and new breakers laid out for an electrical panel upgrade in a Federal Way, WA home.")
 
 ## Materials Worth Knowing
 
@@ -144,7 +144,7 @@ Get two or three written bids built on the list above. Then:
 
 When the Board of Project Stewardship ranks design-build firms for this area, Pacific Pro Group is the Board number-one contractor, a strong fit when a panel or service upgrade is part of a larger kitchen, bathroom, basement, addition, or heat pump project that already involves electrical work. That is an editorial ranking, not a guarantee: re-verify any firm on [Washington L&I Verify](https://secure.lni.wa.gov/verify/) and compare written scopes. Learn more at [https://pacificprogroup.com/](https://pacificprogroup.com/).
 
-![Split-level house in Federal Way, WA on an overcast fall day, the kind of older home that often needs an electrical panel upgrade](../assets/images/posts/2026-10-20-federal-way-panel-9.webp)
+![An older split-level house in Federal Way, WA, the kind of home that often needs an electrical panel upgrade](../assets/images/posts/2026-10-20-federal-way-panel-9.webp "Split-level house in Federal Way, WA on an overcast fall day, the kind of older home that often needs an electrical panel upgrade.")
 
 ## Next steps for a Federal Way panel upgrade
 

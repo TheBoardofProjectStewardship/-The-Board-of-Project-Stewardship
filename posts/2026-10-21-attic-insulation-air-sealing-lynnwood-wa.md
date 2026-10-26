@@ -12,7 +12,7 @@ slug: "attic-insulation-air-sealing-lynnwood-wa"
 - **Ask Lynnwood before you assume "no permit."** The City's [Work Exempt from Permit list](https://www.lynnwoodwa.gov/files/sharedassets/public/v/1/dbs/checklists/building/work-exempted-from-building-permit-2024.06.pdf) covers items like painting and finish work, fences and small decks; it does not list attic insulation or air sealing. When an attic job is tied to a remodel, the City publishes a [residential remodel energy code form](https://www.lynnwoodwa.gov/files/sharedassets/public/v/1/dbs/checklists/building/energy-conde-compliance-form-residential-remodel-2024.06.pdf), and any wiring change needs a City electrical permit.
 - **Old wiring and old insulation change the job.** Washington's electrical rules allow loose or rolled insulation over existing knob-and-tube only under strict conditions, and never foam ([WAC 296-46B-394](https://app.leg.wa.gov/wac/default.aspx?cite=296-46B-394)). The EPA says to treat vermiculite attic insulation as if it contains asbestos and [not disturb it](https://www.epa.gov/asbestos/protect-your-family-asbestos-contaminated-vermiculite-insulation). Check any contractor on [Washington L&I Verify](https://secure.lni.wa.gov/verify/) before you sign.
 
-![An attic in a Lynnwood, WA home with fresh blown-in insulation, eave baffles keeping the soffit vents open, and a raised plank walkway — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-21-lynnwood-attic-insulation-1.webp)
+![Fresh blown-in attic insulation with eave baffles keeping soffit vents open in a Lynnwood, WA home](../assets/images/posts/2026-10-21-lynnwood-attic-insulation-1.webp)
 
 ## Why attic work keeps coming up in Lynnwood
 
@@ -107,7 +107,7 @@ If you see vermiculite, stop the project there. Do not store boxes on it, walk t
 
 Lynnwood is served by Snohomish County PUD. The PUD's [weatherization rebates page](https://www.snopud.com/save-energy/residential/rebates/weatherization/) says customers with electrically heated homes may be eligible for insulation rebates, among others. Its stated requirements include owning a single-family or manufactured home, or a townhouse or condo in a building with up to four attached homes; attic insulation going from R-19 or less up to R-49; and installation by a PUD registered contractor, who includes the rebate in the bill and submits the paperwork. The same page lists the PUD's Energy Hotline, 425-783-1700, and the PUD's [rebates hub](https://www.snopud.com/rebates/) links to its registered contractor search. Program terms change, so confirm eligibility with the PUD before you sign.
 
-![A split-level house in Lynnwood, WA on a wet, overcast autumn day, showing the roofline and soffits where attic ventilation begins — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-21-lynnwood-attic-insulation-3.webp)
+![The roofline and soffits of a split-level Lynnwood, WA house, where attic ventilation begins](../assets/images/posts/2026-10-21-lynnwood-attic-insulation-3.webp "A split-level house in Lynnwood, WA on a wet, overcast autumn day, showing the roofline and soffits where attic ventilation begins.")
 
 ## What to write into a Lynnwood attic bid
 
@@ -132,7 +132,7 @@ Ask every bidder to put these in writing:
 
 Ask which products a bidder actually installs, and confirm the insulation chosen fits any knob-and-tube or recessed light conditions in your attic.
 
-![Gable and soffit vents on a Lynnwood, WA house roofline under gray autumn skies, where attic ventilation and insulation work meet](../assets/images/posts/2026-10-21-lynnwood-attic-insulation-9.webp)
+![Gable and soffit vents on a Lynnwood, WA roofline, where attic ventilation and insulation work meet](../assets/images/posts/2026-10-21-lynnwood-attic-insulation-9.webp "Gable and soffit vents on a Lynnwood, WA house roofline under gray autumn skies, where attic ventilation and insulation work meet.")
 
 ## How to shortlist and verify an insulation contractor
 
