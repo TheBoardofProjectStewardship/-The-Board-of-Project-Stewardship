@@ -1,5 +1,7 @@
 /* Rear addition, drawn in the browser. 1 unit = 1 foot.
-   Illustration of one wood-frame shell. Not a survey or a permit drawing. */
+   Illustration of one wood-frame shell. Not a survey or a permit drawing.
+   Paper, cream walls, black roof and frames, ink edges, and the orthographic
+   view match the homepage house drawing. */
 const RENDER_LIB = 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
 
 export const STAGE_COUNT = 8;
@@ -137,18 +139,17 @@ function boot() {
     }
     const small = Math.min(window.innerWidth, window.innerHeight) < 760;
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, small ? 1.25 : 1.5));
-    renderer.setClearColor(0x121816, 1);
+    renderer.setClearColor(0xf7f6f2, 1);
     if (THREE.SRGBColorSpace) renderer.outputColorSpace = THREE.SRGBColorSpace;
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(38, 1, 0.15, 220);
-    scene.add(new THREE.HemisphereLight(0xc5d4e8, 0x3a4638, 0.92));
-    const sun = new THREE.DirectionalLight(0xfff4e0, 1.2);
-    sun.position.set(-22, 34, 18);
+    scene.background = new THREE.Color(0xf7f6f2);
+    const camera = new THREE.OrthographicCamera(-20, 20, 20, -20, 0.1, 500);
+    scene.add(new THREE.AmbientLight(0xf4f6fb, 0.74));
+    const sun = new THREE.DirectionalLight(0xfff6ee, 0.22);
+    sun.position.set(-0.45, 0.82, 0.36);
     scene.add(sun);
-    const fill = new THREE.DirectionalLight(0x9db4c8, 0.38);
-    fill.position.set(16, 12, -12);
-    scene.add(fill);
+    scene.add(new THREE.HemisphereLight(0xf7f8fb, 0xe7e4da, 0.12));
 
     const geos = new Map();
     const mats = new Map();
@@ -157,9 +158,16 @@ function boot() {
       if (!geos.has(key)) geos.set(key, new THREE.BoxGeometry(w, h, d));
       return geos.get(key);
     }
+    const INK = 0x1f2121;
+    const DETAIL = 0x6b706e;
+    const inkMat = new THREE.LineBasicMaterial({ color: INK });
     function solid(hex) {
       const key = String(hex);
-      if (!mats.has(key)) mats.set(key, new THREE.MeshLambertMaterial({ color: hex }));
+      if (!mats.has(key)) {
+        mats.set(key, new THREE.MeshLambertMaterial({
+          color: hex, polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 1,
+        }));
+      }
       return mats.get(key);
     }
     function glass(hex, opacity) {
@@ -167,54 +175,95 @@ function boot() {
       if (!mats.has(key)) {
         mats.set(key, new THREE.MeshLambertMaterial({
           color: hex, transparent: true, opacity, depthWrite: false, side: THREE.DoubleSide,
+          polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 1,
         }));
       }
       return mats.get(key);
     }
+    function edgeGeometry(geometry) {
+      const key = `e${geometry.uuid}`;
+      if (!geos.has(key)) geos.set(key, new THREE.EdgesGeometry(geometry, 12));
+      return geos.get(key);
+    }
+    function addInk(mesh, material) {
+      mesh.add(new THREE.LineSegments(edgeGeometry(mesh.geometry), material || inkMat));
+    }
+    function strokeSet(parent, pairs, color, material) {
+      const data = [];
+      for (const [a, b] of pairs) data.push(a[0], a[1], a[2], b[0], b[1], b[2]);
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute('position', new THREE.Float32BufferAttribute(data, 3));
+      const line = new THREE.LineSegments(geometry, material || new THREE.LineBasicMaterial({ color }));
+      parent.add(line);
+      return line;
+    }
 
     const parts = [];
-    function addBox(parent, w, h, d, x, y, z, material) {
+    function addBox(parent, w, h, d, x, y, z, material, edge) {
       const mesh = new THREE.Mesh(geo(w, h, d), material);
       mesh.position.set(x, y, z);
+      if (edge) addInk(mesh, edge === true ? inkMat : edge);
       parent.add(mesh);
       return mesh;
     }
     function addRise(parent, w, h, d, x, base, z, material, stage, delay, span) {
-      const mesh = addBox(parent, w, h, d, x, base + h / 2, z, material);
+      const mesh = addBox(parent, w, h, d, x, base + h / 2, z, material, true);
       parts.push({ mesh, stage, delay: delay || 0, span: span || 0.62, mode: 'rise', base, h });
       return mesh;
     }
     function addFade(parent, mesh, material, stage, delay, span, maxOpacity) {
+      material = material.clone();
       material.transparent = true;
       material.opacity = 0;
       material.needsUpdate = true;
       mesh.material = material;
+      let lineMat = null;
+      if (mesh.isMesh) {
+        lineMat = new THREE.LineBasicMaterial({ color: INK, transparent: true, opacity: 0 });
+        mesh.add(new THREE.LineSegments(new THREE.EdgesGeometry(mesh.geometry, 12), lineMat));
+      }
       parent.add(mesh);
       parts.push({
-        mesh, stage, delay: delay || 0, span: span || 0.4, mode: 'fade', material, maxOpacity: maxOpacity ?? 1,
+        mesh, stage, delay: delay || 0, span: span || 0.4, mode: 'fade', material, lineMat, maxOpacity: maxOpacity ?? 1,
       });
       return mesh;
     }
 
-    const WOOD = 0xc4a574;
-    const CONCRETE = 0xa7adb4;
-    const TIE = 0x6f777f;
-    const SHEATH = 0xb08968;
-    const SHINGLE = 0x32383e;
-    const FLASH = 0xd5dbe3;
-    const SIDING = 0xe7e2d8;
-    const TRIM = 0xf6f3ec;
-    const FRAME = 0xf3f0e8;
-    const DOOR = 0x6d513c;
-    const EXIST = 0x8d8983;
-    const EXIST_ROOF = 0x3a4148;
-    const SOIL = 0x4a4034;
-    const COVER = 0xd5d0c4;
+    const PAPER = 0xf7f6f2;
+    const WALL = 0xf0ece2;
+    const FLOOR = 0xf4f2ee;
+    const WOOD = 0xe6dcc8;
+    const HEADER = 0xd7c4a8;
+    const CONCRETE = 0xc8cbc8;
+    const TIE = 0x8e9494;
+    const SHEATH = 0xd9c4a8;
+    const ROOF = 0x2b2d2e;
+    const SHINGLE = ROOF;
+    const FLASH = 0x5c5f62;
+    const SEAM = 0x4d4f51;
+    const SIDING = WALL;
+    const FRAME = 0x2f2f30;
+    const TRIM = FRAME;
+    const DOOR = FRAME;
+    const GLASS = 0x576b78;
+    const EXIST = WALL;
+    const EXIST_ROOF = ROOF;
+    const LAWN = 0xdbe4d0;
+    const SOIL = 0xc3c9b6;
+    const COVER = 0xe4e2d6;
 
     /* Yard with a hole where the addition is dug. */
     const yard = new THREE.Group();
     scene.add(yard);
-    const yardMat = solid(0x1c2820);
+    const yardMat = solid(LAWN);
+    const shadow = new THREE.Mesh(
+      new THREE.CircleGeometry(18, 40),
+      new THREE.MeshBasicMaterial({ color: 0xcfcabf, transparent: true, opacity: 0.38, depthWrite: false }),
+    );
+    shadow.rotation.x = -Math.PI / 2;
+    shadow.position.set(-2, 0.03, -6);
+    shadow.scale.set(1.15, 1, 0.85);
+    yard.add(shadow);
     const slabs = [
       [-24.6, 0, -2, 30.8, 0.08, 76],
       [24.6, 0, -2, 30.8, 0.08, 76],
@@ -239,11 +288,13 @@ function boot() {
       planMats.push(material);
       return material;
     }
-    addBox(plan, 46, 0.03, 44, 0, 0.05, -5, planMat(0xf3ead7, 1));
-    addBox(plan, 34.8, 0.02, 24.8, 0, 0.08, -12, planMat(0x1c1916, 1));
-    addBox(plan, 33.2, 0.025, 23.2, 0, 0.1, -12, planMat(0xf3ead7, 1));
-    addBox(plan, 17.2, 0.02, 13.2, 0, 0.08, 6.2, planMat(0x1c1916, 1));
-    addBox(plan, 15.2, 0.025, 11.2, 0, 0.1, 6.2, planMat(0xf6f1e6, 1));
+    const planInk = new THREE.LineBasicMaterial({ color: INK, transparent: true, opacity: 1 });
+    planMats.push(planInk);
+    addBox(plan, 46, 0.03, 44, 0, 0.05, -5, planMat(PAPER, 1), planInk);
+    addBox(plan, 34.8, 0.02, 24.8, 0, 0.08, -12, planMat(INK, 1));
+    addBox(plan, 33.2, 0.025, 23.2, 0, 0.1, -12, planMat(0xf4f1e8, 1));
+    addBox(plan, 17.2, 0.02, 13.2, 0, 0.08, 6.2, planMat(INK, 1));
+    addBox(plan, 15.2, 0.025, 11.2, 0, 0.1, 6.2, planMat(PAPER, 1));
     function labelTexture(text) {
       const board = document.createElement('canvas');
       board.width = 512;
@@ -267,33 +318,39 @@ function boot() {
       mesh.position.set(x, 0.12, z);
       plan.add(mesh);
     }
-    addLabel('Existing house', 0, -12, 14);
-    addLabel('Rear addition', 0, 6.2, 10);
+    addLabel('Existing house', 0, -12, 18);
+    addLabel('Rear addition', 0, 6.2, 12);
 
     const house = new THREE.Group();
     scene.add(house);
     const hx0 = -17, hx1 = 17, hz0 = -24, hz1 = 0;
-    addBox(house, 34, 2.4, 24, 0, -0.3, -12, solid(CONCRETE));
-    addBox(house, 33.2, 0.12, 23.2, 0, 1.14, -12, solid(WOOD));
-    addBox(house, 34.2, 13.6, 0.45, 0, 8, hz0, solid(EXIST));
-    addBox(house, 34.2, 13.6, 0.45, 0, 8, hz1, solid(EXIST));
-    addBox(house, 0.45, 13.6, 24, hx0, 8, -12, solid(EXIST));
-    addBox(house, 0.45, 13.6, 24, hx1, 8, -12, solid(EXIST));
+    addBox(house, 34, 2.4, 24, 0, -0.3, -12, solid(CONCRETE), true);
+    addBox(house, 33.2, 0.12, 23.2, 0, 1.14, -12, solid(FLOOR), true);
+    addBox(house, 34.2, 13.6, 0.45, 0, 8, hz0, solid(EXIST), true);
+    addBox(house, 34.2, 13.6, 0.45, 0, 8, hz1, solid(EXIST), true);
+    addBox(house, 0.45, 13.6, 24, hx0, 8, -12, solid(EXIST), true);
+    addBox(house, 0.45, 13.6, 24, hx1, 8, -12, solid(EXIST), true);
     /* Windows on the side walls and on the rear wall outside the addition. */
-    const winMat = glass(0x8ecae6, 0.55);
+    const winMat = glass(GLASS, 0.9);
     const frameMat = solid(FRAME);
     function houseWindow(x, y, z, w, h, d, axis) {
-      addBox(house, axis === 'x' ? 0.2 : w, h, axis === 'x' ? w : 0.2, x, y, z, winMat);
-      addBox(house, axis === 'x' ? 0.28 : w + 0.3, 0.16, axis === 'x' ? w + 0.3 : 0.28, x, y + h / 2, z, frameMat);
-      addBox(house, axis === 'x' ? 0.28 : w + 0.3, 0.16, axis === 'x' ? w + 0.3 : 0.28, x, y - h / 2, z, frameMat);
+      addBox(house, axis === 'x' ? 0.16 : w, h, axis === 'x' ? w : 0.16, x, y, z, winMat);
+      addBox(house, axis === 'x' ? 0.22 : w + 0.28, 0.14, axis === 'x' ? w + 0.28 : 0.22, x, y + h / 2, z, frameMat, true);
+      addBox(house, axis === 'x' ? 0.22 : w + 0.28, 0.14, axis === 'x' ? w + 0.28 : 0.22, x, y - h / 2, z, frameMat, true);
+      addBox(house, axis === 'x' ? 0.22 : w + 0.28, 0.1, axis === 'x' ? w + 0.28 : 0.22, x, y, z, frameMat, true);
+      addBox(house, axis === 'x' ? 0.18 : 0.1, h, axis === 'x' ? 0.1 : 0.18, x, y, z, frameMat);
     }
-    houseWindow(-10.5, 8.2, 0.28, 3.2, 4.2, 0.2, 'z');
-    houseWindow(10.5, 8.2, 0.28, 3.2, 4.2, 0.2, 'z');
-    houseWindow(-17.28, 8.2, -8, 3.2, 4.2, 0.2, 'x');
-    houseWindow(-17.28, 8.2, -16, 3.2, 4.2, 0.2, 'x');
-    houseWindow(17.28, 8.2, -8, 3.2, 4.2, 0.2, 'x');
-    houseWindow(17.28, 8.2, -16, 3.2, 4.2, 0.2, 'x');
-    const roofMat = new THREE.MeshLambertMaterial({ color: EXIST_ROOF, side: THREE.DoubleSide });
+    houseWindow(-10.5, 8.2, 0.36, 3.2, 4.2, 0.2, 'z');
+    houseWindow(10.5, 8.2, 0.36, 3.2, 4.2, 0.2, 'z');
+    houseWindow(-6, 8.4, -24.36, 4.2, 5.2, 0.2, 'z');
+    houseWindow(7, 8.4, -24.36, 4.2, 5.2, 0.2, 'z');
+    houseWindow(-17.36, 8.2, -8, 3.2, 4.2, 0.2, 'x');
+    houseWindow(-17.36, 8.2, -16, 3.2, 4.2, 0.2, 'x');
+    houseWindow(17.36, 8.2, -8, 3.2, 4.2, 0.2, 'x');
+    houseWindow(17.36, 8.2, -16, 3.2, 4.2, 0.2, 'x');
+    const roofMat = new THREE.MeshLambertMaterial({
+      color: EXIST_ROOF, side: THREE.DoubleSide, polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 1,
+    });
     const roofGeo = new THREE.BufferGeometry();
     const eave = 15;
     const ridge = 21.2;
@@ -307,7 +364,43 @@ function boot() {
     tri([xL, eave, zB], [xR, ridge, zMid], [xR, eave, zB]);
     roofGeo.setAttribute('position', new THREE.Float32BufferAttribute(rv, 3));
     roofGeo.computeVertexNormals();
-    house.add(new THREE.Mesh(roofGeo, roofMat));
+    const existRoof = new THREE.Mesh(roofGeo, roofMat);
+    existRoof.add(new THREE.LineSegments(new THREE.EdgesGeometry(roofGeo, 8), inkMat));
+    house.add(existRoof);
+    function existRoofY(z) {
+      if (z <= zMid) return eave + (ridge - eave) * ((z - zF) / (zMid - zF));
+      return ridge + (eave - ridge) * ((z - zMid) / (zB - zMid));
+    }
+    const seamPairs = [];
+    for (let x = xL + 1.333; x < xR - 0.2; x += 1.333) {
+      seamPairs.push([[x, existRoofY(zF) + 0.06, zF], [x, existRoofY(zMid) + 0.06, zMid]]);
+      seamPairs.push([[x, existRoofY(zMid) + 0.06, zMid], [x, existRoofY(zB) + 0.06, zB]]);
+    }
+    strokeSet(house, seamPairs, SEAM);
+    function wallStrokes(axis, fixed, from, to, y0, y1, holes) {
+      const pairs = [];
+      for (let u = from + 0.75; u < to - 0.15; u += 0.75) {
+        const cuts = holes.filter((hole) => u > hole.u0 && u < hole.u1).sort((a, b) => a.y0 - b.y0);
+        let y = y0;
+        for (const hole of cuts) {
+          if (hole.y0 > y + 0.05) {
+            pairs.push(axis === 'z' ? [[u, y, fixed], [u, hole.y0, fixed]] : [[fixed, y, u], [fixed, hole.y0, u]]);
+          }
+          y = Math.max(y, hole.y1);
+        }
+        if (y1 > y + 0.05) pairs.push(axis === 'z' ? [[u, y, fixed], [u, y1, fixed]] : [[fixed, y, u], [fixed, y1, u]]);
+      }
+      strokeSet(house, pairs, DETAIL);
+    }
+    const winHoles = (centers, half) => centers.map((u) => ({ u0: u - half, u1: u + half, y0: 6.05, y1: 10.4 }));
+    wallStrokes('z', -24.32, -16.6, 16.6, 1.35, 14.6, [
+      { u0: -8.2, u1: -3.8, y0: 5.7, y1: 11.1 },
+      { u0: 4.8, u1: 9.2, y0: 5.7, y1: 11.1 },
+    ]);
+    wallStrokes('z', 0.32, -16.6, -8.4, 1.35, 14.6, winHoles([-10.5], 1.7));
+    wallStrokes('z', 0.32, 8.4, 16.6, 1.35, 14.6, winHoles([10.5], 1.7));
+    wallStrokes('x', -17.4, -23.4, -0.6, 1.35, 14.6, [...winHoles([-16], 1.7), ...winHoles([-8], 1.7)]);
+    wallStrokes('x', 17.4, -23.4, -0.6, 1.35, 14.6, [...winHoles([-16], 1.7), ...winHoles([-8], 1.7)]);
 
     /* Addition shell. Stages: 1 footing, 2 floor, 3 walls, 4 sheathing, 5 roof, 6 openings, 7 siding. */
     const shell = new THREE.Group();
@@ -332,9 +425,9 @@ function boot() {
     addRise(shell, 0.5, stemH, 11.2, ax1 - 0.15, stemBase, 6.3, solid(CONCRETE), 1, 0.46, 0.4);
 
     /* Floor: capillary break, mudsill, joists, subfloor. Joists run left to right. */
-    addRise(shell, 16.2, 0.06, 0.5, 0, stemTop, az1 - 0.15, solid(0x1a1a1a), 2, 0.0, 0.25);
-    addRise(shell, 0.5, 0.06, 11.2, ax0 + 0.15, stemTop, 6.3, solid(0x1a1a1a), 2, 0.0, 0.25);
-    addRise(shell, 0.5, 0.06, 11.2, ax1 - 0.15, stemTop, 6.3, solid(0x1a1a1a), 2, 0.0, 0.25);
+    addRise(shell, 16.2, 0.06, 0.5, 0, stemTop, az1 - 0.15, solid(FRAME), 2, 0.0, 0.25);
+    addRise(shell, 0.5, 0.06, 11.2, ax0 + 0.15, stemTop, 6.3, solid(FRAME), 2, 0.0, 0.25);
+    addRise(shell, 0.5, 0.06, 11.2, ax1 - 0.15, stemTop, 6.3, solid(FRAME), 2, 0.0, 0.25);
     const sill = stemTop + 0.06;
     addRise(shell, 16.2, 0.18, 0.5, 0, sill, az0 + 0.2, solid(WOOD), 2, 0.12, 0.3);
     addRise(shell, 16.2, 0.18, 0.5, 0, sill, az1 - 0.15, solid(WOOD), 2, 0.12, 0.3);
@@ -345,7 +438,7 @@ function boot() {
     for (let z = 1.5; z <= 11.2; z += 1.333) {
       addRise(shell, 15.4, joistH, 0.14, 0, joistBase, z, solid(WOOD), 2, 0.28, 0.4);
     }
-    addRise(shell, 15.6, 0.1, 10.6, -0.15, joistBase + joistH, 6.1, solid(0x8d6e4c), 2, 0.62, 0.32);
+    addRise(shell, 15.6, 0.1, 10.6, -0.15, joistBase + joistH, 6.1, solid(FLOOR), 2, 0.62, 0.32);
 
     /* Walls. Rear wall is level. Side walls follow the shed roof. */
     const floorY = joistBase + joistH + 0.1;
@@ -372,7 +465,7 @@ function boot() {
         addRise(shell, 0.14, h, wallT, x, floorY + 0.16, az1, solid(WOOD), 3, 0.08, 0.5);
       }
       for (const [a, b, head] of [[-6.4, -3.2, 7.55], [-1.6, 1.6, 8.15]]) {
-        addRise(shell, b - a + 0.5, 0.7, wallT, (a + b) / 2, head, az1, solid(0x8a6239), 3, 0.42, 0.35);
+        addRise(shell, b - a + 0.5, 0.7, wallT, (a + b) / 2, head, az1, solid(HEADER), 3, 0.42, 0.35);
       }
     }
     addRise(shell, 15.4, 0.16, wallT, 0, floorY, az1, solid(WOOD), 3, 0.0, 0.3);
@@ -428,7 +521,7 @@ function boot() {
       return new THREE.Mesh(geometry, colorMaterial);
     }
     addFade(shell, shedMesh(shedMat, 0.12), shedMat, 5, 0.28, 0.28, 1);
-    const underMat = new THREE.MeshLambertMaterial({ color: 0x1b1b1b, transparent: true, opacity: 0, side: THREE.DoubleSide });
+    const underMat = new THREE.MeshLambertMaterial({ color: 0x3a3c3d, transparent: true, opacity: 0, side: THREE.DoubleSide });
     const under = shedMesh(underMat, 0.05);
     under.position.y += 0.08;
     addFade(shell, under, underMat, 5, 0.48, 0.2, 1);
@@ -436,6 +529,23 @@ function boot() {
     const shingles = shedMesh(shingleMat, 0.08);
     shingles.position.y += 0.16;
     addFade(shell, shingles, shingleMat, 5, 0.64, 0.28, 1);
+    const shedSeams = [];
+    for (let x = ax0 + 0.9; x < ax1 - 0.2; x += 1.333) {
+      shedSeams.push([
+        [x, roofY(roofZ0) + 0.28, roofZ0],
+        [x, roofY(roofZ1) + 0.28, roofZ1],
+      ]);
+    }
+    const shedSeamGeo = new THREE.BufferGeometry();
+    const shedSeamData = [];
+    for (const [a, b] of shedSeams) shedSeamData.push(a[0], a[1], a[2], b[0], b[1], b[2]);
+    shedSeamGeo.setAttribute('position', new THREE.Float32BufferAttribute(shedSeamData, 3));
+    const shedSeamMat = new THREE.LineBasicMaterial({ color: SEAM, transparent: true, opacity: 0 });
+    const shedSeamLines = new THREE.LineSegments(shedSeamGeo, shedSeamMat);
+    shell.add(shedSeamLines);
+    parts.push({
+      mesh: shedSeamLines, stage: 5, delay: 0.72, span: 0.24, mode: 'fade', material: shedSeamMat, maxOpacity: 1,
+    });
     addFade(
       shell,
       new THREE.Mesh(geo(16.8, 0.7, 0.08), new THREE.MeshLambertMaterial({ color: FLASH, transparent: true, opacity: 0 })),
@@ -460,7 +570,7 @@ function boot() {
       if (axis === 'z') {
         addFade(shell, new THREE.Mesh(geo(w + 0.5, 0.08, 0.55), pan), pan, 6, 0.0, 0.22, 1)
           .position.set(x, sill - 0.02, z + outward * 0.42);
-        addFade(shell, new THREE.Mesh(geo(w - 0.15, head - sill - 0.15, 0.12), glass(0x9fd3e6, 0.5)), glass(0x9fd3e6, 0.5), 6, 0.22, 0.3, 0.55)
+        addFade(shell, new THREE.Mesh(geo(w - 0.15, head - sill - 0.15, 0.12), glass(GLASS, 0.9)), glass(GLASS, 0.9), 6, 0.22, 0.3, 0.92)
           .position.set(x, (sill + head) / 2, z + outward * 0.34);
         addRise(shell, w + 0.25, 0.14, 0.2, x, head - 0.1, z + outward * 0.32, frame, 6, 0.28, 0.25);
         addRise(shell, w + 0.25, 0.14, 0.2, x, sill + 0.02, z + outward * 0.32, frame, 6, 0.28, 0.25);
@@ -511,9 +621,9 @@ function boot() {
     ).position.set(ax0 - 0.55, sideSill, 5.2);
     addFade(
       shell,
-      new THREE.Mesh(geo(0.12, sideHead - sideSill - 0.2, 2.8), glass(0x9fd3e6, 0.5)),
-      glass(0x9fd3e6, 0.5),
-      6, 0.24, 0.28, 0.55,
+      new THREE.Mesh(geo(0.12, sideHead - sideSill - 0.2, 2.8), glass(GLASS, 0.9)),
+      glass(GLASS, 0.9),
+      6, 0.24, 0.28, 0.92,
     ).position.set(ax0 - 0.48, (sideSill + sideHead) / 2, 5.2);
     addRise(shell, 0.18, 0.14, 3.2, ax0 - 0.48, sideHead - 0.1, 5.2, solid(FRAME), 6, 0.3, 0.24);
     addRise(shell, 0.18, 0.14, 3.2, ax0 - 0.48, sideSill + 0.02, 5.2, solid(FRAME), 6, 0.3, 0.24);
@@ -529,17 +639,37 @@ function boot() {
       6, 0.72, 0.22, 1,
     ).position.set(ax0 - 0.66, sideHead + 0.12, 5.2);
 
-    /* Siding courses and trim. Stop above grade. Leave the near corner open. */
-    let course = 0;
-    for (let y = floorY + 0.55; y < rearTop - 0.35; y += 0.48) {
-      const delay = 0.04 + course * 0.035;
-      addRise(shell, 12.4, 0.36, 0.1, -1.7, y, az1 + 0.7, solid(SIDING), 7, delay, 0.28);
-      const sideTop = Math.min(y + 0.36, roofY(4) - 0.4);
-      if (sideTop > y + 0.12) {
-        addRise(shell, 0.1, Math.min(0.36, sideTop - y), 7.2, ax0 - 0.72, y, 4.2, solid(SIDING), 7, delay, 0.28);
+    /* Cream vertical siding and black trim. Stop above grade. Leave the near corner open. */
+    const rearSkinH = rearTop - floorY - 0.7;
+    const rearSkin = addRise(shell, 12.4, rearSkinH, 0.1, -1.7, floorY + 0.4, az1 + 0.7, solid(SIDING), 7, 0.04, 0.45);
+    const sideSkinH = rearTop - floorY - 0.85;
+    const sideSkin = addRise(shell, 0.1, sideSkinH, 7.2, ax0 - 0.72, floorY + 0.4, 4.2, solid(SIDING), 7, 0.08, 0.45);
+    function boardLines(mesh, width, height, along, gaps) {
+      const pairs = [];
+      const halfW = width / 2;
+      const halfH = height / 2;
+      for (let u = -halfW + 0.75; u < halfW - 0.15; u += 0.75) {
+        const gap = gaps.find((item) => u > item.a && u < item.b);
+        const push = (a, b) => {
+          if (b <= a + 0.05) return;
+          pairs.push(along === 'x' ? [[u, a, 0.07], [u, b, 0.07]] : [[-0.07, a, u], [-0.07, b, u]]);
+        };
+        if (!gap) push(-halfH, halfH);
+        else { push(-halfH, gap.sill); push(gap.head, halfH); }
       }
-      course += 1;
+      if (pairs.length) strokeSet(mesh, pairs, DETAIL);
     }
+    const rearMid = floorY + 0.4 + rearSkinH / 2;
+    const rearLocal = (y) => y - rearMid;
+    boardLines(rearSkin, 12.4, rearSkinH, 'x', [
+      { a: -4.65, b: -1.55, sill: rearLocal(floorY + 2.55), head: rearLocal(floorY + 6.55) },
+      { a: 0.05, b: 3.35, sill: rearLocal(floorY + 0.2), head: rearLocal(floorY + 6.9) },
+    ]);
+    const sideMid = floorY + 0.4 + sideSkinH / 2;
+    const sideLocal = (y) => y - sideMid;
+    boardLines(sideSkin, 7.2, sideSkinH, 'z', [
+      { a: -0.4, b: 2.4, sill: sideLocal(sideSill), head: sideLocal(sideHead) },
+    ]);
     addRise(shell, 0.18, rearTop - floorY - 0.3, 0.18, -7.7, floorY + 0.4, az1 + 0.78, solid(TRIM), 7, 0.62, 0.3);
     addRise(shell, 3.5, 0.16, 0.16, -4.8, floorY + 6.7, az1 + 0.78, solid(TRIM), 7, 0.7, 0.25);
     addRise(shell, 3.5, 0.16, 0.16, -4.8, floorY + 2.45, az1 + 0.78, solid(TRIM), 7, 0.7, 0.25);
@@ -552,6 +682,58 @@ function boot() {
       if (stageFloat < part.stage) return 0;
       const local = stageFloat - part.stage;
       return smooth(clamp((local - part.delay) / part.span, 0, 1));
+    }
+
+    let viewAspect = 1;
+    function frameCamera(t, aspect) {
+      const angle = 0.02 + ((52 * Math.PI) / 180 - 0.02) * t;
+      const heading = ((-36 * Math.PI) / 180) * t;
+      const back = new THREE.Vector3(
+        Math.sin(angle) * Math.sin(heading),
+        Math.cos(angle),
+        Math.sin(angle) * Math.cos(heading),
+      );
+      const right = new THREE.Vector3(Math.cos(heading), 0, -Math.sin(heading));
+      const up = new THREE.Vector3(
+        -Math.cos(angle) * Math.sin(heading),
+        Math.sin(angle),
+        -Math.cos(angle) * Math.cos(heading),
+      );
+      const min = new THREE.Vector3(-24, -3.1, -28);
+      const max = new THREE.Vector3(24, -0.05 + 23 * t, 18);
+      const target = new THREE.Vector3().addVectors(min, max).multiplyScalar(0.5);
+      let left = Infinity;
+      let rightEdge = -Infinity;
+      let bottom = Infinity;
+      let upper = -Infinity;
+      for (const x of [min.x, max.x]) {
+        for (const y of [min.y, max.y]) {
+          for (const z of [min.z, max.z]) {
+            const delta = new THREE.Vector3(x, y, z).sub(target);
+            const px = delta.dot(right);
+            const py = delta.dot(up);
+            left = Math.min(left, px);
+            rightEdge = Math.max(rightEdge, px);
+            bottom = Math.min(bottom, py);
+            upper = Math.max(upper, py);
+          }
+        }
+      }
+      target.addScaledVector(right, (left + rightEdge) / 2);
+      target.addScaledVector(up, (bottom + upper) / 2);
+      const safeAspect = Math.max(aspect, 0.2);
+      const halfHeight = Math.max((upper - bottom) / 2, (rightEdge - left) / (2 * safeAspect)) * 1.08;
+      const halfWidth = halfHeight * safeAspect;
+      camera.left = -halfWidth;
+      camera.right = halfWidth;
+      camera.top = halfHeight;
+      camera.bottom = -halfHeight;
+      camera.near = 0.1;
+      camera.far = 500;
+      camera.position.copy(target).addScaledVector(back, 180);
+      camera.up.copy(up);
+      camera.quaternion.setFromRotationMatrix(new THREE.Matrix4().makeBasis(right, up, back));
+      camera.updateProjectionMatrix();
     }
 
     function apply(p) {
@@ -574,11 +756,10 @@ function boot() {
           part.mesh.visible = t > 0.04;
           part.material.opacity = (part.maxOpacity ?? 1) * t;
           part.material.depthWrite = part.material.opacity > 0.9;
+          if (part.lineMat) part.lineMat.opacity = t;
         }
       }
-      const camT = smooth(clamp(p, 0, 1));
-      camera.position.set(26 * camT, 62 + (14 - 62) * camT, -6 + 30 * camT);
-      camera.lookAt(0, 6 * camT, -6 + 12 * camT);
+      frameCamera(smooth(clamp(p, 0, 1)), viewAspect);
       const index = reduced ? chosen : stageIndex(p);
       showStage(index);
       renderer.render(scene, camera);
@@ -589,8 +770,7 @@ function boot() {
       const h = view.clientHeight;
       if (!w || !h) return;
       renderer.setSize(w, h, false);
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
+      viewAspect = w / h;
       apply(progress);
     }
     const observer = new ResizeObserver(resize);
