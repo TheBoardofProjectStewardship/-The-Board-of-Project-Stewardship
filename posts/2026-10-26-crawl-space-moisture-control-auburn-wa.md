@@ -22,6 +22,8 @@ Under a house, that moisture shows up in predictable ways: a musty smell in the 
 
 The good news is that crawl space moisture control is usually a set of clear, checkable steps. The steps are to get water away from the house, cover the ground properly, decide on purpose whether the space stays vented or becomes sealed, and then repair whatever the moisture already damaged. This guide walks through each step with the code sections Auburn actually uses.
 
+![A torn old ground cover, standing water and sagging insulation in a crawl space under an Auburn, WA home](../assets/images/posts/2026-10-26-auburn-crawl-space-4.webp "A crawl space under an older Auburn, WA ranch home before moisture control work, with a torn black ground cover, a puddle on the soil and insulation sagging out of the joists.")
+
 ## Which codes apply to an Auburn crawl space
 
 Auburn's Construction Administrative Code, [ACC 15.07.010](https://auburn.municipal.codes/ACC/15.07.010), adopts the 2021 International Residential Code as amended by Washington in [Chapter 51-51 WAC](https://app.leg.wa.gov/wac/default.aspx?cite=51-51). Energy requirements come from the Washington State Energy Code. The same section adopts the 2021 International Energy Conservation Code as amended in Chapters 51-11C and 51-11R WAC, which for houses is the [residential energy code, Chapter 51-11R WAC](https://app.leg.wa.gov/wac/default.aspx?cite=51-11R).
@@ -29,6 +31,8 @@ Auburn's Construction Administrative Code, [ACC 15.07.010](https://auburn.munici
 Permit applications in Auburn go through the City's community development department. Under [ACC 15.07.050](https://auburn.municipal.codes/ACC/15.07.050), an application has to describe the work, list the parcel and address, state the valuation, and include the prime contractor's business name, current state contractor registration number and city business license. That last requirement is a useful screen: a contractor who cannot give you a current Washington registration number cannot complete Auburn's permit application.
 
 The Auburn City Code does not spell out whether replacing a ground cover, sealing vents or adding a crawl space fan needs a building permit by itself. Projects that change how the crawl space is ventilated, add mechanical equipment, sister or replace framing, or alter drainage are the kind of work to ask about. Confirm with the City of Auburn permit center before work starts and get the answer in writing.
+
+![An electrician wiring a dedicated outlet beside a crawl space access hatch in an Auburn, WA home](../assets/images/posts/2026-10-26-auburn-crawl-space-5.webp "An electrician wiring a dedicated outlet beside the crawl space hatch in an Auburn, WA home, the kind of circuit a crawl space fan or dehumidifier may need.")
 
 ## Electrical permits in Auburn come from L&I
 
@@ -58,6 +62,8 @@ No vapor barrier can keep up with a foundation that is collecting roof water. Be
 
 If water still enters the crawl space after the outside is fixed, the next steps are usually interior drainage or a sump. Those are design decisions to get in writing, with the discharge location stated, especially on valley-floor lots.
 
+![A white liner sealed up the stem walls of an encapsulated crawl space in an Auburn, WA home](../assets/images/posts/2026-10-26-auburn-crawl-space-6.webp "A sealed crawl space in an Auburn, WA home, with a continuous white liner taped at the seams and fastened up the stem walls.")
+
 ## Sealed (encapsulated) crawl spaces: what Washington's R408.3 requires
 
 "Encapsulation" usually means covering the ground and often the walls with a heavier reinforced liner, sealing the seams, closing the vents and controlling humidity mechanically. It can be an effective way to keep a crawl space dry, but in Washington it has a specific code path. Section R408.3 in [WAC 51-51-0408](https://app.leg.wa.gov/wac/default.aspx?cite=51-51-0408) says the vent openings are not required only where:
@@ -73,9 +79,13 @@ https://www.youtube.com/watch?v=5YMJVn02ZyI
 
 The video above shows a reinforced liner going into a crawl space, with overlapped seams and the liner run up the foundation walls. Washington's code text and your liner manufacturer's instructions may differ from what any video shows, so use it to understand the sequence, not as a code reference.
 
+![A radon vent pipe and inline fan running up the side of a ranch home in Auburn, WA](../assets/images/posts/2026-10-26-auburn-crawl-space-7.webp "A radon vent pipe with an inline fan on the side of an Auburn, WA ranch home, the kind of system Washington's R408 calls for with reduced venting or a sealed crawl space.")
+
 ## Radon is part of the plan in Washington
 
 Radon comes up in two places in R408: when venting is reduced below 1/300 and when a crawl space is unvented. The [Washington State Department of Health radon page](https://doh.wa.gov/community-and-environment/contaminants/radon) and the [U.S. EPA radon page](https://www.epa.gov/radon) explain what radon is and how homes are tested. Testing the house before and after crawl space work is a simple way to know where you stand. If your contractor says radon "doesn't apply here," ask them to show you where R408 says so.
+
+![A flood vent set low in the foundation wall of a valley-floor home in Auburn, WA](../assets/images/posts/2026-10-26-auburn-crawl-space-8.webp "A flood opening set low in the foundation wall of a valley-floor home in Auburn, WA, where the City's floodplain rules can affect a sealed crawl space design.")
 
 ## Floodplain checks in Auburn before you close vents
 
@@ -106,6 +116,8 @@ Once the crawl space is open and lit, a good contractor documents what moisture 
 - [AprilAire](https://www.aprilaire.com/) — whole-home dehumidifiers and ventilation products, including models aimed at crawl space and basement moisture.
 
 Whatever products a bidder proposes, ask for the exact liner name and thickness, whether it qualifies as a Class I vapor retarder, the seam tape and wall attachment method, and the manufacturer's installation instructions. If equipment is proposed, ask for its capacity, where it drains, and how it fits the R408.3 exhaust requirement. Then check that the bid and the finished work match.
+
+![A homeowner comparing written crawl space bids with a liner sample at a kitchen table in Auburn, WA](../assets/images/posts/2026-10-26-auburn-crawl-space-9.webp "A homeowner in Auburn, WA comparing three written crawl space bids side by side, with a liner sample and seam tape on the table.")
 
 ## How to shortlist and verify a crawl space contractor
 
