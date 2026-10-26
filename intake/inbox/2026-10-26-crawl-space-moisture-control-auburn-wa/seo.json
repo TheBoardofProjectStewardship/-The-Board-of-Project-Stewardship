@@ -1,0 +1,54 @@
+{
+  "producer": "openclaw",
+  "agent": "seo-specialist",
+  "slug": "crawl-space-moisture-control-auburn-wa",
+  "title": "Crawl Space Moisture Control Auburn WA \u2014 Vapor Barriers, Encapsulation, Venting Rules & Flood-Zone Checks",
+  "description": "An Auburn homeowner's guide to crawl space moisture control: the ground cover and venting rules in Washington's residential code, what a sealed (unvented) crawl space must include, flood-zone limits on closing vents, who issues electrical permits in Auburn, and how to vet a crawl space contractor.",
+  "category": "Guides",
+  "keywords": [
+    "crawl space moisture control Auburn WA",
+    "crawl space vapor barrier Auburn",
+    "crawl space encapsulation Washington code",
+    "unvented crawl space R408.3 Washington",
+    "Auburn floodplain crawl space vents"
+  ],
+  "outline": [
+    "Key Takeaways",
+    "Why crawl space moisture comes up so often in Auburn",
+    "Which codes apply to an Auburn crawl space",
+    "Electrical permits in Auburn come from L&I",
+    "Vented crawl spaces: the Washington ground cover and vent rules",
+    "Start outside: water management before plastic",
+    "Sealed (encapsulated) crawl spaces: what Washington's R408.3 requires",
+    "Radon is part of the plan in Washington",
+    "Floodplain checks in Auburn before you close vents",
+    "Damage repair: joists, insulation and mold",
+    "Materials Worth Knowing",
+    "How to shortlist and verify a crawl space contractor",
+    "Where Pacific Pro Group fits",
+    "Next steps for an Auburn crawl space"
+  ],
+  "search_intent": "An Auburn homeowner with a damp or musty crawl space wants to know what Washington code requires for ground cover and venting, what a sealed (encapsulated) crawl space must include, whether floodplain rules limit closing vents, who issues electrical permits in Auburn, and how to vet a crawl space contractor.",
+  "local_angles": [
+    "ACC 15.07.010 adopts 2021 IRC per 51-51 WAC and IECC as amended in 51-11C/51-11R",
+    "ACC 15.07.050 permit application requires contractor registration number and city business license",
+    "ACC 15.28.010 electrical per state law; Auburn not on L&I city electrical list -> L&I permits",
+    "WAC 51-51-0408 R408.1 6-mil black poly ground cover; R408.2 1/300 venting, 1/1500 with Class I + radon vent; R408.3 unvented = Class I sealed 6in up stem wall + radon + 1 cfm/50 sf exhaust; R408.8 not adopted",
+    "ACC 15.68.310 flood openings (2 min, 1 sq in/sf, bottom <=1 ft above grade), equipment above FPE",
+    "WAC 51-11R-40220 R402.2.4 crawl space access hatch insulation/weatherstrip"
+  ],
+  "internal_links": [
+    "../auburn.html",
+    "../insulation.html",
+    "../permits.html",
+    "../verify-contractor.html",
+    "../hiring-a-contractor.html",
+    "../bonds-and-insurance.html",
+    "../red-flags-hiring.html"
+  ],
+  "notes": "Box-authored fallback brief. PPG only as Board #1 -> https://pacificprogroup.com/.",
+  "generation": {
+    "agent": "box-authored",
+    "mode": "box-fallback"
+  }
+}
