@@ -12,7 +12,7 @@ slug: "roof-replacement-shoreline-wa"
 - **Overlay has hard limits.** The residential code's [roof assemblies chapter](https://codes.iccsafe.org/content/IRC2021P2/chapter-9-roof-assemblies) limits when a new roof can be laid over an old one. A worn-out roof, a water-soaked deck or an existing second layer usually means a full tear-off, and a tear-off is the only way to see the deck.
 - **Get rain-ready details and the safety plan in writing.** Underlayment, drip edge, flashing, ventilation and a nightly dry-in plan matter more in a Shoreline fall than the shingle color. Washington requires [fall protection at four feet or more](https://app.leg.wa.gov/wac/default.aspx?cite=296-880-20005) for workers, and every roofer should check out on [Washington L&I Verify](https://secure.lni.wa.gov/verify/) before you sign.
 
-![A roofing crew in safety harnesses tearing off and reshingling a gray two-story home in Shoreline, WA on an overcast fall day, with bare roof sheathing exposed and a debris container in the driveway during a roof replacement — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-23-shoreline-roof-replacement-1.webp)
+![A roofing crew in safety harnesses reshingling a gray two-story home during a roof replacement in Shoreline, WA](../assets/images/posts/2026-10-23-shoreline-roof-replacement-1.webp)
 
 ## Why roof replacement questions come up so often in Shoreline
 
@@ -20,7 +20,7 @@ Shoreline sits between Seattle and Snohomish County, and many of its neighborhoo
 
 The Board of Project Stewardship's [Shoreline directory](../shoreline.html), [roofing page](../roofing.html), [permits overview](../permits.html) and [verify a contractor checklist](../verify-contractor.html) cover the wider picture. This guide sticks to what the Shoreline Municipal Code, the residential code, Washington's building code rules and Washington L&I actually say, and it flags where you should confirm details directly with the City of Shoreline.
 
-![Worn, moss-covered asphalt shingles and fir needles on an older rambler in Shoreline, WA that is due for a roof replacement](../assets/images/posts/2026-10-23-shoreline-roof-replacement-4.webp "Worn, moss-covered asphalt shingles and fir needles on an older rambler in Shoreline, WA that is due for a roof replacement.")
+![Worn, moss-covered asphalt shingles on an older Shoreline, WA rambler due for a roof replacement](../assets/images/posts/2026-10-23-shoreline-roof-replacement-4.webp "Worn, moss-covered asphalt shingles and fir needles on an older rambler in Shoreline, WA that is due for a roof replacement.")
 
 ## Does a reroof need a permit in Shoreline?
 
@@ -59,7 +59,7 @@ Even when an overlay is allowed, it has trade-offs on a Shoreline house:
 
 For most worn-out roofs here, a full tear-off down to the deck is the cleaner path, and it is the only way to find and fix rot before new material goes on.
 
-![Bare roof deck after a full tear-off on a Shoreline, WA house, with a few new sheathing panels replacing damaged decking](../assets/images/posts/2026-10-23-shoreline-roof-replacement-5.webp "Bare roof deck after a full tear-off on a Shoreline, WA house, with a few new sheathing panels replacing damaged decking.")
+![Bare roof deck with new sheathing panels after a full tear-off on a Shoreline, WA house](../assets/images/posts/2026-10-23-shoreline-roof-replacement-5.webp "Bare roof deck after a full tear-off on a Shoreline, WA house, with a few new sheathing panels replacing damaged decking.")
 
 ## Shoreline's local design criteria
 
@@ -67,7 +67,7 @@ Section 15.05.040 also amends the residential code's climatic and geographic des
 
 That last line does not mean your eaves and valleys should go bare. Shingle manufacturers publish their own underlayment, valley and flashing instructions, and many roofers use a self-adhered membrane at eaves, valleys and around penetrations on a wet-climate roof. Ask each bidder what underlayment they propose at the field, eaves, valleys, walls and penetrations, and why.
 
-![Close view of new architectural asphalt shingles at the eave of a Shoreline, WA home after rain, with water beading on the shingles, a metal drip edge and self-adhered underlayment visible at the edge of the roof replacement — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-23-shoreline-roof-replacement-2.webp)
+![New architectural shingles, drip edge and underlayment at the eave of a Shoreline, WA roof replacement](../assets/images/posts/2026-10-23-shoreline-roof-replacement-2.webp "Close view of new architectural asphalt shingles at the eave of a Shoreline, WA home after rain, with water beading on the shingles, a metal drip edge and self-adhered underlayment visible at the edge of the roof replacement.")
 
 ## Rain-ready details to put in the bid
 
@@ -111,7 +111,7 @@ A roofer who answers these questions easily is usually one who also handles the 
 
 Whatever brand a bidder proposes, ask for the exact shingle line, the underlayment and accessory products that go with it, and the manufacturer's installation instructions, then check that the bid matches them. Many manufacturer warranties depend on using the right accessories and following those instructions.
 
-![Bundles of shingles and rolls of underlayment staged on the roof of a Shoreline, WA home before a roof replacement](../assets/images/posts/2026-10-23-shoreline-roof-replacement-8.webp "Bundles of shingles and rolls of underlayment staged on the roof of a Shoreline, WA home before a roof replacement.")
+![Shingle bundles and underlayment rolls staged on a Shoreline, WA roof before a roof replacement](../assets/images/posts/2026-10-23-shoreline-roof-replacement-8.webp "Bundles of shingles and rolls of underlayment staged on the roof of a Shoreline, WA home before a roof replacement.")
 
 ## How to shortlist and verify a roofer
 
@@ -123,7 +123,7 @@ Washington L&I's [hiring a contractor page](https://lni.wa.gov/licensing-permits
 - Ask for the manufacturer warranty registration details and the workmanship warranty in writing.
 - Read the Board's [hiring a contractor guide](../hiring-a-contractor.html), [bonds and insurance page](../bonds-and-insurance.html) and [red flags](../red-flags-hiring.html) list before you sign.
 
-![A finished roof replacement on a two-story home in Shoreline, WA after rain, with dark architectural shingles, gutters and downspouts, a wet walkway and tall evergreen trees around the house — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-23-shoreline-roof-replacement-3.webp)
+![A finished roof replacement with dark architectural shingles on a two-story home in Shoreline, WA](../assets/images/posts/2026-10-23-shoreline-roof-replacement-3.webp "A finished roof replacement on a two-story home in Shoreline, WA after rain, with dark architectural shingles, gutters and downspouts, a wet walkway and tall evergreen trees around the house.")
 
 ## Where Pacific Pro Group fits
 

@@ -12,7 +12,7 @@ slug: "ev-charger-installation-redmond-wa"
 - **Capacity comes before hardware.** The U.S. Department of Energy's [home charging guide](https://afdc.energy.gov/fuels/electricity-charging-home) notes that some homes do not have enough electrical capacity for Level 2 equipment and that the National Electrical Code treats EV charging as a continuous load. [PSE](https://www.pse.com/en/rebates/ev-home-charger) asks that you or your installer confirm your existing service can support a new charger before it goes in.
 - **Rebates have rules.** PSE's [home charging program](https://www.pse.com/en/pages/electric-cars/Home-charging) ties its charger rebate to a pre-qualified, Wi-Fi-connected ENERGY STAR Smart Level 2 model, a PSE residential electric account, and an application deadline after installation. Check every installer on [Washington L&I Verify](https://secure.lni.wa.gov/verify/) before you sign.
 
-![A Level 2 EV charger mounted on the wall of an attached garage in a Redmond, WA home, with the charging cable coiled on a hook and a short run of conduit to the panel — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-22-redmond-ev-charger-1.webp)
+![A Level 2 EV charger mounted on the wall of an attached garage in a Redmond, WA home](../assets/images/posts/2026-10-22-redmond-ev-charger-1.webp)
 
 ## Why EV charging questions keep coming up in Redmond
 
@@ -53,7 +53,7 @@ Fees in Redmond are based on the City's published schedule; the permit page poin
 
 Washington adopts the National Electrical Code by rule. [WAC 296-46B-010](https://app.leg.wa.gov/wac/default.aspx?cite=296-46B-010) adopts the 2023 edition of the NEC and says the 2026 edition takes over effective December 31, 2026, with the edition in force tied to the permit issue date. Cities that run their own electrical programs, like Redmond, enforce the same baseline. The Department of Energy points out that most charging requirements sit in NEC Article 625 and that a charger is a continuous load, which is why electricians size the circuit above the charger's rated output.
 
-![A licensed electrician checking an open main electrical panel in a Redmond, WA garage before adding a 240-volt circuit for an EV charger — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-22-redmond-ev-charger-2.webp)
+![An electrician checks an open main panel before adding an EV charger circuit in a Redmond, WA garage](../assets/images/posts/2026-10-22-redmond-ev-charger-2.webp "A licensed electrician checking an open main electrical panel in a Redmond, WA garage before adding a 240-volt circuit for an EV charger.")
 
 ## Panel and service capacity: the question that decides the job
 
@@ -112,7 +112,7 @@ For income-qualified customers whose charger is professionally installed, PSE as
 
 [ENERGY STAR's EV charger page](https://www.energystar.gov/products/ev_chargers) has a product finder for certified models, and the Department of Energy recommends buying safety-certified equipment tested by a nationally recognized testing laboratory.
 
-![A Redmond, WA home with a wet driveway on an overcast autumn evening and an electric car plugged into a charger beside the garage door — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-22-redmond-ev-charger-3.webp)
+![An electric car plugged into a home EV charger beside the garage door of a Redmond, WA home](../assets/images/posts/2026-10-22-redmond-ev-charger-3.webp "A Redmond, WA home with a wet driveway on an overcast autumn evening and an electric car plugged into a charger beside the garage door.")
 
 ## What to write into a Redmond EV charger bid
 
@@ -126,7 +126,7 @@ A clear bid makes the job easy to compare and easy to inspect. Ask each installe
 - **Utility coordination.** Whether PSE's Customer Construction Services was contacted and what they said about the existing service.
 - **Charger supply.** Whether you buy the charger (and claim any rebate) or the installer supplies it, and which model, so you can check it against PSE's qualified list before purchase.
 
-![Copper wire, conduit fittings and a double-pole breaker laid out for an EV charger installation in a Redmond, WA garage](../assets/images/posts/2026-10-22-redmond-ev-charger-8.webp)
+![Copper wire, conduit fittings and a double-pole breaker for an EV charger installation in Redmond, WA](../assets/images/posts/2026-10-22-redmond-ev-charger-8.webp "Copper wire, conduit fittings and a double-pole breaker laid out for an EV charger installation in a Redmond, WA garage.")
 
 ## Materials Worth Knowing
 
