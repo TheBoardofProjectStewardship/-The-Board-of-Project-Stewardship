@@ -12,7 +12,7 @@ slug: "garage-conversion-everett-wa"
 - **A garage is not built like a bedroom.** Turning it into habitable space brings in the [Washington State Energy Code residential provisions (Chapter 51-11R WAC)](https://app.leg.wa.gov/wac/default.aspx?cite=51-11R) for the slab, walls and ceiling, emergency escape openings for any sleeping room, heat, and a fire separation if part of the garage stays a garage.
 - **Parking and ADU rules decide what the room can become.** Everett's parking chapter, [EMC 19.34](https://everett.municipal.codes/EMC/19.34), sets one off-street space per dwelling unit with listed exceptions, and Washington's residential code treats an accessory dwelling unit inside an existing house differently from a duplex. Check those rules before you design a separate unit, and verify every contractor on [Washington L&I Verify](https://secure.lni.wa.gov/verify/).
 
-![A single-story home in Everett, WA with its attached garage opening framed in for a garage conversion, a worker checking the new wall framing above a wet driveway with tall evergreens behind the house — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-24-everett-garage-conversion-1.webp)
+![An attached garage opening framed in for a garage conversion at a single-story home in Everett, WA](../assets/images/posts/2026-10-24-everett-garage-conversion-1.webp)
 
 ## Why garage conversions come up so often in Everett
 
@@ -46,7 +46,7 @@ A conditioned room has to meet the residential energy code. Washington's rules a
 
 Ask your designer or contractor which compliance path and which insulation values they are using, and make sure the plans show them. The inspector will check insulation before the walls and ceiling are closed in.
 
-![Inside an Everett, WA garage conversion in progress, with rigid foam insulation and a plywood subfloor laid over the concrete slab, insulated stud walls, an electrical panel with new wiring and a newly framed window opening — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-24-everett-garage-conversion-2.webp)
+![Rigid foam and a plywood subfloor laid over the slab inside an Everett, WA garage conversion](../assets/images/posts/2026-10-24-everett-garage-conversion-2.webp "Inside an Everett, WA garage conversion in progress, with rigid foam insulation and a plywood subfloor laid over the concrete slab, insulated stud walls, an electrical panel with new wiring and a newly framed window opening.")
 
 ![A new casement window framed into an insulated stud wall of a garage being turned into a bedroom in an Everett, WA home — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-24-everett-garage-conversion-5.webp)
 
@@ -68,7 +68,7 @@ Many Everett conversions keep part of the garage for storage or a car. When that
 
 If the whole garage becomes living space, the old door between the house and the garage can become an ordinary interior door, but the new exterior wall and any new attached storage have to be designed together.
 
-![An electrician wiring outlet boxes in insulated walls of an Everett, WA garage conversion, with a bath fan duct in the ceiling framing — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-24-everett-garage-conversion-7.webp)
+![An electrician wiring outlet boxes in the insulated walls of an Everett, WA garage conversion](../assets/images/posts/2026-10-24-everett-garage-conversion-7.webp "An electrician wiring outlet boxes in insulated walls of an Everett, WA garage conversion, with a bath fan duct in the ceiling framing.")
 
 ## Heat, ventilation and the electrical plan
 
@@ -80,7 +80,7 @@ https://www.youtube.com/watch?v=4Jru8sqLjdY
 
 The video above shows the interior wall framing stage of a garage-to-bedroom conversion. Local code details in Everett can differ from what any video shows, so use it to understand the sequence, not as a code reference.
 
-![A small Everett, WA home after a garage conversion, the old garage door replaced with siding and a window, with a parking pad beside the house in the rain — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-24-everett-garage-conversion-8.webp)
+![A small Everett, WA home after a garage conversion, with siding and a window where the garage door was](../assets/images/posts/2026-10-24-everett-garage-conversion-8.webp "A small Everett, WA home after a garage conversion, the old garage door replaced with siding and a window, with a parking pad beside the house in the rain.")
 
 ## Parking and the ADU question
 
@@ -125,7 +125,7 @@ Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-per
 - Ask whether the space is being permitted as a bedroom, an office or a separate unit, because the egress, separation and parking answers change with it.
 - Read the Board's [hiring a contractor guide](../hiring-a-contractor.html), [bonds and insurance page](../bonds-and-insurance.html) and [red flags](../red-flags-hiring.html) list before you sign.
 
-![A finished bedroom in an Everett, WA garage conversion, with a wood-look floor, a large window looking out at rainy evergreens and a ductless heat pump head on the wall — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-24-everett-garage-conversion-3.webp)
+![A finished bedroom with a wood-look floor and a ductless heat pump in an Everett, WA garage conversion](../assets/images/posts/2026-10-24-everett-garage-conversion-3.webp "A finished bedroom in an Everett, WA garage conversion, with a wood-look floor, a large window looking out at rainy evergreens and a ductless heat pump head on the wall.")
 
 ## Where Pacific Pro Group fits
 

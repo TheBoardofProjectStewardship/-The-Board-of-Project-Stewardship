@@ -12,7 +12,7 @@ slug: "window-replacement-kent-wa"
 - **Ask the City of Kent about the permit before you order.** Kent adopts the 2021 International Residential Code as amended by Washington in [Chapter 51-51 WAC](https://app.leg.wa.gov/wac/default.aspx?cite=51-51), but the Kent City Code does not list which window jobs are exempt. Changing an opening size, adding a window or touching structure points toward a permit. For a same-size swap, confirm with the City of Kent permit center.
 - **Bedroom windows and flashing are where replacements go wrong.** Washington did not adopt the model code's replacement-window relief for emergency escape openings ([WAC 51-51-03100](https://app.leg.wa.gov/wac/default.aspx?cite=51-51-03100)). In Kent's wet winters, a sloped sill pan and properly lapped flashing matter as much as the window. Verify every installer on [Washington L&I Verify](https://secure.lni.wa.gov/verify/).
 
-![A tan lap-sided two-story home in Kent, WA during a window replacement, with two installers on a ladder setting a new white window into a freshly flashed opening while the old aluminum window leans against the wall above a wet lawn, with tall firs behind the house — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-25-kent-window-replacement-1.webp)
+![Two installers on a ladder set a new white window in a tan two-story home during a Kent, WA window replacement](../assets/images/posts/2026-10-25-kent-window-replacement-1.webp)
 
 ## Why window replacement comes up so often in Kent
 
@@ -55,7 +55,7 @@ How to use that when you compare bids:
 
 The broader chapter, [Chapter 51-11R WAC](https://app.leg.wa.gov/wac/default.aspx?cite=51-11R), also expects alterations not to make the house less energy-efficient than before. Gaps around new windows should be air-sealed, not just covered with trim.
 
-![A new casement window swung fully open in a bedroom of a Kent, WA home after window replacement, looking out on a green backyard — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-25-kent-window-replacement-6.webp)
+![A new casement window swung open in a bedroom of a Kent, WA home after window replacement](../assets/images/posts/2026-10-25-kent-window-replacement-6.webp "A new casement window swung fully open in a bedroom of a Kent, WA home after window replacement, looking out on a green backyard.")
 
 ## Bedroom egress: Washington skipped the replacement-window shortcut
 
@@ -68,7 +68,7 @@ The model IRC includes a section, R310.5, that gives replacement windows some re
 
 Check the net clear opening on the manufacturer's sheet for the exact size and style you are buying, and if the numbers are close, ask the City of Kent how it reviews bedroom egress on a replacement. The same IRC chapter also covers safety glazing in hazardous locations, such as glass near doors, tubs and showers or close to the floor, so expect tempered glass in those spots.
 
-![Close-up of a window rough opening during a window replacement in Kent, WA, with a metal sill pan with end dams, dark self-adhered flashing on the jambs and head, and a gloved hand pressing the flashing onto the framing with a roller as rain beads on the siding — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-25-kent-window-replacement-2.webp)
+![A window rough opening with a metal sill pan and self-adhered flashing during a Kent, WA window replacement](../assets/images/posts/2026-10-25-kent-window-replacement-2.webp "Close-up of a window rough opening during a window replacement in Kent, WA, with a metal sill pan with end dams, dark self-adhered flashing on the jambs and head, and a gloved hand pressing the flashing onto the framing with a roller as rain beads on the siding.")
 
 ## Rain-ready flashing: where Kent window jobs succeed or fail
 
@@ -93,7 +93,7 @@ The video above shows a sill pan being formed with stretch flashing tape in a fr
 
 If your Kent home was built before 1978, the old window paint may contain lead, and removing windows disturbs it. Washington's [Renovation, Repair and Painting program](https://www.commerce.wa.gov/lead-based-paint/rrp/) explains the lead-safe practices and certification that apply to renovation work in pre-1978 homes. Ask every bidder how they will contain dust and clean up, and whether their firm is certified.
 
-![New replacement windows stacked on moving blankets in a Kent, WA driveway beside an unmarked work van, ready for installation — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-25-kent-window-replacement-8.webp)
+![New replacement windows stacked on moving blankets in a Kent, WA driveway, ready for installation](../assets/images/posts/2026-10-25-kent-window-replacement-8.webp "New replacement windows stacked on moving blankets in a Kent, WA driveway beside an unmarked work van, ready for installation.")
 
 ## Materials Worth Knowing
 
@@ -116,13 +116,13 @@ Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-per
 - Get in writing who will contact the City of Kent about the permit and, if any wiring changes, who will get the L&I electrical permit.
 - Read the Board's [hiring a contractor guide](../hiring-a-contractor.html), [bonds and insurance page](../bonds-and-insurance.html) and [red flags](../red-flags-hiring.html) list before you sign.
 
-![A living room in Kent, WA after a window replacement, with a new white double-hung window pair and a large picture window looking out at a rainy yard and evergreens, a beige sofa and a patterned rug on a wood floor — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-25-kent-window-replacement-3.webp)
+![A Kent, WA living room after window replacement, with a new double-hung pair and a picture window](../assets/images/posts/2026-10-25-kent-window-replacement-3.webp "A living room in Kent, WA after a window replacement, with a new white double-hung window pair and a large picture window looking out at a rainy yard and evergreens, a beige sofa and a patterned rug on a wood floor.")
 
 ## Where Pacific Pro Group fits
 
 When the Board of Project Stewardship ranks design-build firms for this area, Pacific Pro Group is the Board number-one contractor, a strong fit when window replacement involves new or enlarged openings, rot repair, flashing and siding work, or when it is part of a larger remodel. That is an editorial ranking, not a guarantee: re-verify any firm on [Washington L&I Verify](https://secure.lni.wa.gov/verify/) and compare written scopes. Learn more at [https://pacificprogroup.com/](https://pacificprogroup.com/).
 
-![A two-story Kent, WA home after window replacement, with new white windows and trim in light rain under tall evergreens — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-25-kent-window-replacement-9.webp)
+![A two-story Kent, WA home after window replacement, with new white windows and trim under tall evergreens](../assets/images/posts/2026-10-25-kent-window-replacement-9.webp "A two-story Kent, WA home after window replacement, with new white windows and trim in light rain under tall evergreens.")
 
 ## Next steps for a Kent window replacement
 
