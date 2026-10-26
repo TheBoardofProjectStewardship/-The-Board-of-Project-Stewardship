@@ -18,7 +18,7 @@ slug: "water-heater-replacement-marysville-wa"
 
 Marysville has grown fast, and its housing reflects that: older homes near downtown and along the State Avenue corridor, ramblers and split-levels from the 1970s and 1980s, and large newer subdivisions in areas like Sunnyside, Getchell, and Smokey Point. A tank water heater does not last forever, so every one of those eras eventually reaches the same moment — a leak at the base, rusty water, or a pilot that will not stay lit — usually on a weekday morning.
 
-That urgency is exactly when homeowners skip steps. A replacement looks like a one-for-one swap, but it touches water piping, a pressure-relief discharge line, sometimes gas piping and venting, sometimes electrical, and the anchoring that keeps a full tank from tipping in an earthquake. The Board of Project Stewardship's [Marysville directory](../marysville.html), [plumber page](../plumber.html), [plumbing guide](../plumbing.html), and [permits overview](../permits.html) cover the broader picture. This guide sticks to what the City of Marysville and Washington L&I actually publish.
+That urgency is exactly when homeowners skip steps. A replacement looks like a one-for-one swap, but it touches water piping, a pressure-relief discharge line, sometimes gas piping and venting, sometimes electrical, and the anchoring that keeps a full tank from tipping in an earthquake. The Board of Project Stewardship's [Marysville directory](../marysville.html), [plumber page](../plumber.html), [plumbing guide](../plumber.html), and [permits overview](../permits.html) cover the broader picture. This guide sticks to what the City of Marysville and Washington L&I actually publish.
 
 ## The City plumbing permit
 
