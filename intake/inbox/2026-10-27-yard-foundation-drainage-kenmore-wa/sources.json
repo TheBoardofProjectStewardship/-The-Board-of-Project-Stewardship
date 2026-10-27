@@ -1,0 +1,129 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Kenmore",
+    "service": "Yard and foundation drainage",
+    "slug": "yard-foundation-drainage-kenmore-wa"
+  },
+  "sources": [
+    {
+      "url": "https://ecode360.com/49597108",
+      "title": "https://ecode360.com/49597108",
+      "retrieved": "2026-10-27",
+      "http_status": 200,
+      "supports": "KMC 15.20.120 adopts 2021 IRC (excl. ch 1) with 51-51 WAC amendments"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51",
+      "retrieved": "2026-10-27",
+      "http_status": 200,
+      "supports": "Chapter 51-51 WAC section list: amends R403/R404/R408 etc.; no R401 or R405 amendment"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51-0403",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51-0403",
+      "retrieved": "2026-10-27",
+      "http_status": 200,
+      "supports": "WAC 51-51-0403 Washington amendment to IRC R403 footings"
+    },
+    {
+      "url": "https://ecode360.com/49597144",
+      "title": "https://ecode360.com/49597144",
+      "retrieved": "2026-10-27",
+      "http_status": 200,
+      "supports": "KMC 15.25 land alteration: definition; 15.25.070 permit + exemptions; 15.25.150 critical-area May 1-Oct 1; 15.25.160 ESC and concentrated water to natural watercourse/public storm drain/approved means"
+    },
+    {
+      "url": "https://ecode360.com/49596680",
+      "title": "https://ecode360.com/49596680",
+      "retrieved": "2026-10-27",
+      "http_status": 200,
+      "supports": "KMC 13.35.030 adopts July 2021 KC SWDM with addendum; 13.35.050 storm drainage work needs city manager approval"
+    },
+    {
+      "url": "https://kingcounty.gov/en/dept/dnrp/nature-recreation/environment-ecology-conservation/stormwater-surface-water-management/surface-water-design-manual/surface-water-design-manual-2021-amended-2024",
+      "title": "https://kingcounty.gov/en/dept/dnrp/nature-recreation/environment-ecology-conservation/stormwater-surface-water-management/surface-water-design-manual/surface-water-design-manual-2021-amended-2024",
+      "retrieved": "2026-10-27",
+      "http_status": 200,
+      "supports": "King County 2021 SWDM page"
+    },
+    {
+      "url": "https://ecology.wa.gov/regulations-permits/guidance-technical-assistance/stormwater-permittee-guidance-resources/stormwater-manuals",
+      "title": "https://ecology.wa.gov/regulations-permits/guidance-technical-assistance/stormwater-permittee-guidance-resources/stormwater-manuals",
+      "retrieved": "2026-10-27",
+      "http_status": 200,
+      "supports": "Ecology stormwater manuals"
+    },
+    {
+      "url": "https://gismaps.kingcounty.gov/iMap/",
+      "title": "https://gismaps.kingcounty.gov/iMap/",
+      "retrieved": "2026-10-27",
+      "http_status": 200,
+      "supports": "King County iMap parcel/critical-area lookup"
+    },
+    {
+      "url": "https://app.leg.wa.gov/rcw/default.aspx?cite=19.122.030",
+      "title": "https://app.leg.wa.gov/rcw/default.aspx?cite=19.122.030",
+      "retrieved": "2026-10-27",
+      "http_status": 200,
+      "supports": "RCW 19.122.030 white-line marking; notice to one-number locator 2-10 full business days before start"
+    },
+    {
+      "url": "https://www.washington811.com/",
+      "title": "https://www.washington811.com/",
+      "retrieved": "2026-10-27",
+      "http_status": 200,
+      "supports": "Washington 811 one-number locator"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "retrieved": "2026-10-27",
+      "http_status": 200,
+      "supports": "L&I hiring a contractor guidance"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-10-27",
+      "http_status": 200,
+      "supports": "L&I Verify"
+    },
+    {
+      "url": "https://www.ndspro.com/",
+      "title": "https://www.ndspro.com/",
+      "retrieved": "2026-10-27",
+      "http_status": 200,
+      "supports": "NDS catch basins/drains (material)"
+    },
+    {
+      "url": "https://www.adspipe.com/",
+      "title": "https://www.adspipe.com/",
+      "retrieved": "2026-10-27",
+      "http_status": 200,
+      "supports": "ADS drainage pipe (material)"
+    },
+    {
+      "url": "https://www.solmax.com/",
+      "title": "https://www.solmax.com/",
+      "retrieved": "2026-10-27",
+      "http_status": 200,
+      "supports": "Solmax geotextiles (material)"
+    },
+    {
+      "url": "https://pacificprogroup.com/",
+      "title": "https://pacificprogroup.com/",
+      "retrieved": "2026-10-27",
+      "http_status": 200,
+      "supports": "PPG Board #1"
+    }
+  ],
+  "dropped": [
+    "codepublishing.com/WA/Kenmore (now a pointer to ecode360 KE4493; Kenmore code cited at ecode360 instead)",
+    "kenmorewa.gov pages (403 to scripted fetch; not linked; 'confirm with the City of Kenmore permit center')",
+    "codes.iccsafe.org IRC R401.3/R405 text (403); R401/R405 described generally via KMC 15.20.120 + WAC 51-51 section list",
+    "Specific KC SWDM BMP thresholds (not quoted)",
+    "All permit fees and prices (omitted)"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "submission_id": "2026-10-27-yard-foundation-drainage-kenmore-wa",
+  "idempotency_key": "sha256:3533a8eede8a966be9cb7748a57f5528354853fb5875a503ffc30b3dd03cf5d3",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-10-27T10:52:56Z",
+  "outputs": [
+    "assets/images/posts/2026-10-27-kenmore-drainage-1.webp",
+    "assets/images/posts/2026-10-27-kenmore-drainage-2.webp",
+    "assets/images/posts/2026-10-27-kenmore-drainage-3.webp",
+    "posts/2026-10-27-yard-foundation-drainage-kenmore-wa.md",
+    "posts/2026-10-27-yard-foundation-drainage-kenmore-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 84
+}
