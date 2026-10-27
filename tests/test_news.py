@@ -70,6 +70,7 @@ class NewsContractTests(unittest.TestCase):
         self.assertEqual(
             [item["slug"] for item in stories],
             [
+                "edmonds-pre-approved-dadu-catalog-still-empty",
                 "edmonds-lot-split-rules-introduced",
                 "edmonds-deer-creek-aquifer-interim-rules",
                 "everett-lot-split-reforms",
@@ -87,44 +88,47 @@ class NewsContractTests(unittest.TestCase):
                 "snohomish-health-septic-permit-grant",
             ],
         )
-        self.assertEqual(stories[0]["date"], "2026-10-26")
-        self.assertEqual(stories[1]["date"], "2026-10-25")
-        self.assertEqual(stories[2]["date"], "2026-10-24")
-        self.assertEqual(stories[3]["date"], "2026-10-23")
-        self.assertEqual(stories[4]["date"], "2026-10-22")
-        self.assertEqual(stories[5]["date"], "2026-10-21")
-        self.assertEqual(stories[6]["date"], "2026-10-20")
-        self.assertEqual(stories[7]["date"], "2026-10-19")
-        self.assertEqual(stories[8]["date"], "2026-10-18")
+        self.assertEqual(stories[0]["date"], "2026-10-27")
+        self.assertEqual(stories[1]["date"], "2026-10-26")
+        self.assertEqual(stories[2]["date"], "2026-10-25")
+        self.assertEqual(stories[3]["date"], "2026-10-24")
+        self.assertEqual(stories[4]["date"], "2026-10-23")
+        self.assertEqual(stories[5]["date"], "2026-10-22")
+        self.assertEqual(stories[6]["date"], "2026-10-21")
+        self.assertEqual(stories[7]["date"], "2026-10-20")
+        self.assertEqual(stories[8]["date"], "2026-10-19")
         self.assertEqual(stories[9]["date"], "2026-10-18")
-        self.assertEqual(stories[10]["date"], "2026-10-17")
-        self.assertEqual(stories[11]["date"], "2026-10-16")
+        self.assertEqual(stories[10]["date"], "2026-10-18")
+        self.assertEqual(stories[11]["date"], "2026-10-17")
         self.assertEqual(stories[12]["date"], "2026-10-16")
-        self.assertEqual(stories[13]["date"], "2026-10-15")
-        self.assertEqual(stories[14]["date"], "2026-10-14")
+        self.assertEqual(stories[13]["date"], "2026-10-16")
+        self.assertEqual(stories[14]["date"], "2026-10-15")
+        self.assertEqual(stories[15]["date"], "2026-10-14")
         self.assertTrue(stories[0]["title"])
         self.assertTrue(stories[0]["description"])
         self.assertGreaterEqual(len(stories[0]["sources"]), 1)
         self.assertIn("Joe Mabel", stories[0]["hero_credit"])
         self.assertIn("CC BY-SA 3.0", stories[0]["hero_credit"])
-        self.assertIn("PinchyCC", stories[1]["hero_credit"])
-        self.assertIn("CC BY 4.0", stories[1]["hero_credit"])
-        self.assertIn("Joe Mabel", stories[2]["hero_credit"])
-        self.assertIn("CC BY-SA 3.0", stories[2]["hero_credit"])
+        self.assertIn("Joe Mabel", stories[1]["hero_credit"])
+        self.assertIn("CC BY-SA 3.0", stories[1]["hero_credit"])
+        self.assertIn("PinchyCC", stories[2]["hero_credit"])
+        self.assertIn("CC BY 4.0", stories[2]["hero_credit"])
         self.assertIn("Joe Mabel", stories[3]["hero_credit"])
         self.assertIn("CC BY-SA 3.0", stories[3]["hero_credit"])
-        self.assertIn("Visitor7", stories[4]["hero_credit"])
+        self.assertIn("Joe Mabel", stories[4]["hero_credit"])
         self.assertIn("CC BY-SA 3.0", stories[4]["hero_credit"])
-        self.assertIn("Smlowe5", stories[5]["hero_credit"])
-        self.assertIn("Spicypepper999", stories[6]["hero_credit"])
-        self.assertIn("ECTran71", stories[7]["hero_credit"])
-        self.assertIn("Illustration", stories[8]["hero_credit"])
-        self.assertIn("Joe Mabel", stories[9]["hero_credit"])
+        self.assertIn("Visitor7", stories[5]["hero_credit"])
+        self.assertIn("CC BY-SA 3.0", stories[5]["hero_credit"])
+        self.assertIn("Smlowe5", stories[6]["hero_credit"])
+        self.assertIn("Spicypepper999", stories[7]["hero_credit"])
+        self.assertIn("ECTran71", stories[8]["hero_credit"])
+        self.assertIn("Illustration", stories[9]["hero_credit"])
         self.assertIn("Joe Mabel", stories[10]["hero_credit"])
-        self.assertEqual(stories[11]["hero_credit"], "")
-        self.assertIn("SounderBruce", stories[12]["hero_credit"])
-        self.assertIn("Robert Ashworth", stories[13]["hero_credit"])
-        self.assertIn("Emersb", stories[14]["hero_credit"])
+        self.assertIn("Joe Mabel", stories[11]["hero_credit"])
+        self.assertEqual(stories[12]["hero_credit"], "")
+        self.assertIn("SounderBruce", stories[13]["hero_credit"])
+        self.assertIn("Robert Ashworth", stories[14]["hero_credit"])
+        self.assertIn("Emersb", stories[15]["hero_credit"])
         self.assertTrue((ROOT / "news" / "_template.md").is_file())
         self.assertEqual(
             sorted(path.name for path in (ROOT / "news").glob("[0-9]*.md")),
@@ -144,12 +148,13 @@ class NewsContractTests(unittest.TestCase):
                 "2026-10-24-everett-lot-split-reforms.md",
                 "2026-10-25-edmonds-deer-creek-aquifer-interim-rules.md",
                 "2026-10-26-edmonds-lot-split-rules-introduced.md",
+                "2026-10-27-edmonds-pre-approved-dadu-catalog-still-empty.md",
             ],
         )
         result = intake.validate_news_library(ROOT)
         self.assertTrue(result["ok"], result)
         self.assertEqual(result["status"], "ready")
-        self.assertEqual(result["stories"], 15)
+        self.assertEqual(result["stories"], 16)
         self.assertEqual(gs.news_blog_overlap(ROOT), [])
         self.assertIn("First stories coming soon", gs.build_news_index([]))
 
@@ -177,6 +182,7 @@ class NewsContractTests(unittest.TestCase):
         self.assertNotIn("everett-lot-split-reforms", blog_html)
         self.assertNotIn("edmonds-deer-creek-aquifer-interim-rules", blog_html)
         self.assertNotIn("edmonds-lot-split-rules-introduced", blog_html)
+        self.assertNotIn("edmonds-pre-approved-dadu-catalog-still-empty", blog_html)
         baker_url = "https://boardofprojectstewardship.com/news/mount-baker-redevelopment-groundbreaking.html"
         eca_url = "https://boardofprojectstewardship.com/news/seattle-environmentally-critical-areas-update.html"
         tree_url = "https://boardofprojectstewardship.com/news/edmonds-landmark-tree-ordinance-extension.html"
@@ -198,8 +204,11 @@ class NewsContractTests(unittest.TestCase):
         deer_href = "./news/edmonds-deer-creek-aquifer-interim-rules.html"
         split_url = "https://boardofprojectstewardship.com/news/edmonds-lot-split-rules-introduced.html"
         split_href = "./news/edmonds-lot-split-rules-introduced.html"
+        catalog_url = "https://boardofprojectstewardship.com/news/edmonds-pre-approved-dadu-catalog-still-empty.html"
+        catalog_href = "./news/edmonds-pre-approved-dadu-catalog-still-empty.html"
         lead = news_html.split('class="news-lead"', 1)[1].split("</article>", 1)[0]
-        self.assertIn(split_href, lead)
+        self.assertIn(catalog_href, lead)
+        self.assertNotIn(split_href, lead)
         self.assertNotIn(deer_href, lead)
         self.assertNotIn(everett_href, lead)
         self.assertNotIn(king_href, lead)
@@ -210,7 +219,7 @@ class NewsContractTests(unittest.TestCase):
         self.assertIn("./news/pacific-pro-group-bronze-best-in-the-pnw.html", news_html)
         self.assertIn(panel_href, news_html)
         self.assertIn(html.escape(stories[0]["title"], quote=True), lead)
-        self.assertIn("October 26, 2026", lead)
+        self.assertIn("October 27, 2026", lead)
         self.assertNotIn("edmonds-landmark-tree-ordinance-extension", lead)
 
         lot_url = "https://boardofprojectstewardship.com/news/snohomish-county-administrative-lot-splits.html"
@@ -576,6 +585,77 @@ class NewsContractTests(unittest.TestCase):
         self.assertNotIn("parentOrganization", body)
         assert_ppg_pitch_allowed(self, body)
 
+        catalog = (ROOT / "news" / "edmonds-pre-approved-dadu-catalog-still-empty.html").read_text(encoding="utf-8")
+        self.assertIn(
+            "House at 228 Sunset Ave. N. in Edmonds, Washington; neighborhood street scene, not a program cottage",
+            catalog,
+        )
+        self.assertIn("Joe Mabel / ", catalog)
+        self.assertIn(
+            'href="https://commons.wikimedia.org/wiki/File:Edmonds_WA_-_228_Sunset_Ave_N.jpg"',
+            catalog,
+        )
+        self.assertIn(">Wikimedia Commons</a>, CC BY-SA 3.0", catalog)
+        self.assertNotIn("Illustrative", catalog)
+        for name in (
+            "2026-10-27-edmonds-pre-approved-dadu-catalog-still-empty",
+            "2026-10-27-edmonds-dadu-catalog-yard-1",
+            "2026-10-27-edmonds-dadu-catalog-plans-2",
+            "2026-10-27-edmonds-dadu-catalog-homeowner-3",
+        ):
+            for width in (480, 800, 1200):
+                self.assertIn(f"{name}-{width}.webp", catalog)
+                self.assertTrue((ROOT / "assets" / "images" / "news" / f"{name}-{width}.webp").is_file())
+        self.assertIn(
+            "An empty grassy backyard beside a single-family house in Edmonds, where a detached backyard cottage could go",
+            catalog,
+        )
+        self.assertIn(
+            "Edmonds launched a pre-approved DADU program in late July, but its public catalog of plans is still empty because no architect or designer has formally applied.",
+            catalog,
+        )
+        self.assertIn(
+            "Architectural plans and a small backyard-cottage model on a drafting table for an Edmonds DADU project",
+            catalog,
+        )
+        self.assertIn(
+            "Under the Edmonds program, the city reviews a cottage design once for the catalog; a homeowner then buys the plan for no more than $1,000 and the permit review covers site elements only.",
+            catalog,
+        )
+        self.assertIn(
+            "Homeowner checklist, tape and city permitting handout on a kitchen table in Edmonds",
+            catalog,
+        )
+        self.assertIn(
+            "Until Edmonds has catalog plans to buy, homeowners still need a full design review with the site plan, and should check zoning, critical areas and the coming state code update.",
+            catalog,
+        )
+        body = catalog.split('class="news-body prose-board"', 1)[1].split("news-sources", 1)[0]
+        self.assertLess(body.index("Where the Edmonds program stands"), body.index("dadu-catalog-yard-1"))
+        self.assertLess(body.index("dadu-catalog-yard-1"), body.index("How the program works"))
+        self.assertLess(body.index("How the program works"), body.index("dadu-catalog-plans-2"))
+        self.assertLess(body.index("dadu-catalog-plans-2"), body.index("How neighboring cities compare"))
+        self.assertLess(body.index("What it means for homeowners"), body.index("dadu-catalog-homeowner-3"))
+        self.assertLess(body.index("dadu-catalog-homeowner-3"), body.index("Questions or corrections"))
+        self.assertEqual(body.count('loading="lazy"'), 3)
+        self.assertIn("editorial@boardofprojectstewardship.com", catalog)
+        catalog_story = next(item for item in stories if item["slug"] == "edmonds-pre-approved-dadu-catalog-still-empty")
+        for source in catalog_story["sources"]:
+            self.assertIn(source, catalog)
+        emails = set(re.findall(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}", catalog))
+        self.assertEqual(emails, {"editorial@boardofprojectstewardship.com"})
+        self.assertIsNone(gs.news_forbidden_term(catalog))
+        self.assertNotIn("/posts/", catalog)
+        self.assertNotIn("parentOrganization", catalog)
+        self.assertNotIn("isRelatedTo", catalog)
+        self.assertIn('id="another-story-cta"', catalog)
+        self.assertNotIn('id="another-story-sea"', catalog)
+        self.assertIn(
+            '<a href="https://pacificprogroup.com/">Pacific Pro Group</a>, the Board of Project Stewardship&#x27;s No. 1-ranked hire, is one contractor homeowners can ask to review a backyard cottage project.',
+            body,
+        )
+        assert_ppg_pitch_allowed(self, body)
+
         split = (ROOT / "news" / "edmonds-lot-split-rules-introduced.html").read_text(encoding="utf-8")
         self.assertIn(
             "Edmonds City Hall on Fifth Avenue North near Main Street in Edmonds, Washington, where the Planning Board meets",
@@ -865,6 +945,7 @@ class NewsContractTests(unittest.TestCase):
         rss = (ROOT / "news" / "rss.xml").read_text(encoding="utf-8")
         self.assertIn("Board of Project Stewardship News", rss)
         self.assertIn("<item>", rss)
+        self.assertTrue(rss.index(catalog_url) < rss.index(split_url))
         self.assertTrue(rss.index(split_url) < rss.index(deer_url))
         self.assertTrue(rss.index(deer_url) < rss.index(everett_url))
         self.assertTrue(rss.index(everett_url) < rss.index(king_url))
@@ -887,6 +968,7 @@ class NewsContractTests(unittest.TestCase):
         self.assertIn(lynnwood_url, rss)
         self.assertIn(seattle_url, rss)
         self.assertIn(king_url, rss)
+        self.assertIn(catalog_url, rss)
         self.assertIn(split_url, rss)
         self.assertIn(deer_url, rss)
         self.assertIn(everett_url, rss)
@@ -905,6 +987,7 @@ class NewsContractTests(unittest.TestCase):
         self.assertIn(lynnwood_url, sitemap)
         self.assertIn(seattle_url, sitemap)
         self.assertIn(king_url, sitemap)
+        self.assertIn(catalog_url, sitemap)
         self.assertIn(split_url, sitemap)
         self.assertIn(deer_url, sitemap)
         self.assertIn(everett_url, sitemap)
@@ -939,6 +1022,8 @@ class NewsContractTests(unittest.TestCase):
         self.assertNotIn("edmonds-deer-creek-aquifer-interim-rules", posts_json)
         self.assertNotIn("edmonds-lot-split-rules-introduced", blog_rss)
         self.assertNotIn("edmonds-lot-split-rules-introduced", posts_json)
+        self.assertNotIn("edmonds-pre-approved-dadu-catalog-still-empty", blog_rss)
+        self.assertNotIn("edmonds-pre-approved-dadu-catalog-still-empty", posts_json)
         self.assertNotIn("/news/", blog_rss)
         self.assertNotIn('"path": "./news/', posts_json)
         self.assertNotIn("./posts/", news_html)
