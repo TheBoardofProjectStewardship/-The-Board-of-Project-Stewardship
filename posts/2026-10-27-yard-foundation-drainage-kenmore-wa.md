@@ -54,6 +54,8 @@ The usual fixes are:
 
 If a tightline already exists, test it before replacing anything. Run a hose into each downspout and watch where the water comes out. Crushed, root-filled or disconnected lines are common on older houses and are often the whole problem.
 
+![A solid downspout tightline in a shallow trench leading away from a Kenmore, WA house foundation](../assets/images/posts/2026-10-27-kenmore-downspout-tightline-4.webp "A downspout tightline going in at a Kenmore, WA house: solid pipe carries roof water away from the foundation, with a cleanout at the downspout so the line can be flushed.")
+
 ## Grade the soil away from the house
 
 Grading is the cheapest drainage improvement and the one most often undone over time. Flower beds get built up with fresh bark every spring, patios settle toward the wall, and lawn edges creep higher than the siding. Walk the house in a steady rain and look for:
@@ -64,6 +66,8 @@ Grading is the cheapest drainage improvement and the one most often undone over 
 - downhill neighbors' yards, so water you redirect does not become their problem.
 
 On a hillside lot, regrading is also land alteration under KMC 15.25. Moving a small amount of soil to restore a slope away from the house is very different from cutting into a hillside, and the depth and volume thresholds in 15.25.070 matter. Section 15.25.160 also requires erosion and sediment control for any activity that clears, grades or disturbs the site, whether or not a permit is required, so the work should not send muddy water into the street or a storm drain.
+
+![Soil regraded to slope away from a house foundation in Kenmore, WA, with bark beds pulled below the siding](../assets/images/posts/2026-10-27-kenmore-regrading-5.webp "Regrading at a Kenmore, WA home: soil and bark pulled back below the siding and sloped away from the foundation so rain runs off instead of toward the wall.")
 
 ## French drains, curtain drains and foundation drains
 
@@ -80,6 +84,8 @@ The details that make these systems last are the same in each case:
 - **Continuous slope** to the outlet, checked with a level or laser, with no dips where water and silt can sit.
 - **Cleanouts** at the upper end and at changes in direction, so the line can be flushed and inspected with a camera.
 - **A real outlet**, covered in the next section.
+
+![A French drain trench in Kenmore, WA lined with filter fabric, with washed drain rock and perforated pipe](../assets/images/posts/2026-10-27-kenmore-french-drain-6.webp "A curtain drain trench on a sloping Kenmore, WA lawn, lined with non-woven filter fabric and filled with washed drain rock around perforated pipe, with a laser level checking the slope.")
 
 The video below shows a foundation perimeter drain going in: perforated pipe in a sock, set to drain to daylight, then surrounded by washed gravel and wrapped in non-woven geotextile fabric. Your house and your soils will differ, but it is a clear look at the steps to ask about.
 
@@ -105,9 +111,13 @@ This is the question that separates a careful drainage plan from a problem moved
 - **Streams, wetlands and steep slopes have extra rules.** Under KMC 15.25.150, land alteration for projects in critical areas (as defined in Chapter 18.55 KMC) is limited to May 1 through October 1, with grading stabilized by October 1, unless the City approves otherwise in writing. Swamp Creek and the Sammamish River run through Kenmore, and the city sits on the Lake Washington shoreline. Before you plan an outlet, check your parcel on [King County iMap](https://gismaps.kingcounty.gov/iMap/) and ask the City about any mapped critical areas near your lot.
 - **Old connections.** On older houses, ask whether any downspout line ties into the side sewer, and ask the City how it wants that handled as part of the project.
 
+![A drain outlet spreading roof water over river rock into a planted bed on a Kenmore, WA lot](../assets/images/posts/2026-10-27-kenmore-dispersion-outlet-8.webp "A dispersion outlet on a Kenmore, WA lot spreads roof water over a river-rock pad into a planted area away from the house; whether a lot qualifies is a design and City review question.")
+
 ## Call 811 before anyone digs
 
 Drain trenches, catch basins and tightlines all mean digging, often near gas, water, power and communication lines. Under [RCW 19.122.030](https://app.leg.wa.gov/rcw/default.aspx?cite=19.122.030), an excavator marks the dig area in white and notifies the one-number locator service at least two full business days, and no more than 10 full business days, before the scheduled start. In Washington that service is [Washington 811](https://www.washington811.com/). Ask your contractor to show you the locate ticket before excavation begins. Utility locates generally don't mark private lines such as your own tightlines or irrigation, so share any drawings you have.
+
+![White trench outline and utility locate flags on a Kenmore, WA front lawn before drainage digging](../assets/images/posts/2026-10-27-kenmore-utility-locate-7.webp "Before a drainage dig in Kenmore, WA: the planned trench is outlined in white and utility locate marks and flags show where buried lines run.")
 
 ## Materials Worth Knowing
 
@@ -141,5 +151,7 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 4. Check your parcel on [King County iMap](https://gismaps.kingcounty.gov/iMap/) for nearby streams, wetlands or steep slopes, and read [KMC 15.25](https://ecode360.com/49597144) on land alteration.
 5. Ask the City of Kenmore permit center whether your plan needs a permit or drainage review and where the water may legally discharge. Get at least three written bids that name the drain type, materials, slope, cleanouts and outlet.
 6. Make sure [Washington 811](https://www.washington811.com/) is called before digging, verify every firm on [L&I Verify](https://secure.lni.wa.gov/verify/), and keep trench photos, product sheets and any permit records with your house papers.
+
+![A finished yard drainage project in Kenmore, WA with restored lawn, a flush area drain and a rock swale](../assets/images/posts/2026-10-27-kenmore-finished-drainage-9.webp "A Kenmore, WA side yard after drainage work, with the lawn restored, a flush area drain grate and a river-rock swale carrying surface water away from the house.")
 
 Good drainage in Kenmore mostly comes down to the order of the work. Handle roof water first, then the grade at the wall, then a subsurface drain where the water actually moves, all sent to an outlet the City accepts. A contractor who explains that order in writing, with the outlet and the code sections spelled out, is usually the one whose drain still works ten winters from now.
