@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-10-27-yard-foundation-drainage-kenmore-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-10-27T10:50:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Yard and Foundation Drainage Kenmore WA \u2014 French Drains, Downspout Tightlines, Grading and Where the Water Can Go",
+    "date": "2026-10-27",
+    "slug": "yard-foundation-drainage-kenmore-wa",
+    "description": "A Kenmore homeowner's guide to yard and foundation drainage: grading away from the house, French and curtain drains, downspout tightlines and catch basins, when Kenmore's land alteration and drainage rules apply, where the water is allowed to go, and how to vet a drainage contractor.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 inbox had no 2026-10-27 packets. Topic: yard and foundation drainage, Kenmore WA (not in the last 14 posts; older kitchen-remodel-kenmore-wa is a different topic). Kenmore code moved from codepublishing.com to ecode360 (KE4493); Kenmore facts verified on ecode360 chapter pages (200). kenmorewa.gov returns 403 to scripted fetch, so not linked. Producer role fields kept per intake contract."
+}
