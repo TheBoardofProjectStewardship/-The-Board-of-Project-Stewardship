@@ -366,6 +366,67 @@
         "The plans label two main floor rooms Bedroom and two Bath; they are numbered here so the room picker can tell them apart.",
         "Kitchen, laundry and bath fixtures sit where the plan symbols are, scaled from the drawing. Their heights are assumed. Interior doors are shown as open gaps. Closet shelving, siding and trim are not modeled."
       ]
+    },
+    {
+      "slug": "one-story-house-bedroom-addition",
+      "engine": "config",
+      "config": "one-story-house-bedroom-addition.json",
+      "title": "One-story house with a bedroom addition and remodel",
+      "card": "An approved permit set for a one-story house: a new bedroom and hall filled in between the two west wings under a low hip roof, with the primary suite, both baths, the walk-in closet and the kitchen remodeled and the kitchen opened to the family room.",
+      "facts": [
+        "1,895 SF main floor",
+        "265 SF bedroom addition",
+        "Three bedrooms, two baths"
+      ],
+      "kicker": "Seattle, infill addition and remodel",
+      "thumb": "/portfolio/one-story-house-bedroom-addition/thumb.png",
+      "dek": "Explore the house layer by layer: the finished house, the entry side, the roof, the floor plan, the rooms and the floor.",
+      "sourceNote": "Modeled from the approved plan set: the proposed floor plan, roof plan, elevations and section at 1/4 inch = 1 foot. Walls, openings, room names, window sizes, the roof shape and pitches and the printed plate, header and ridge heights come from those sheets. Anything the sheets do not show is an assumption, listed below.",
+      "learn": {
+        "house": [
+          "roof",
+          "header"
+        ],
+        "front": [
+          "header"
+        ],
+        "roof": [
+          "roof"
+        ],
+        "upper": [
+          "partition"
+        ],
+        "plan": [
+          "partition"
+        ],
+        "foundation": [
+          "partition"
+        ]
+      },
+      "notes": {
+        "roof": [
+          "Roof",
+          "The roof follows the proposed roof plan: 6:12 gables over the primary bedroom wing, the family room wing, the second bedroom and the main block, and a hip at 4 5/32:12 over the new bedroom that meets the 6:12 slopes in hips and valleys. The elevations print the ridge 18'-8 1/4\" above the floor. Overhangs are scaled from the roof plan: 18 inches at the eaves, 2 feet at the addition and 3 inches at the rakes."
+        ],
+        "header": [
+          "Openings",
+          "Window and door widths are traced from the floor plan and their heights read off the elevations, which print a 6'-11 3/8\" window header. New windows carry their tags (5040, 3620, 5036: width and height in feet and inches); the rest are marked existing (EXST'G)."
+        ],
+        "partition": [
+          "Room layout",
+          "The plan prints room names but no room areas except the 265 SF addition, so rooms show their names only. Select a room to fly in."
+        ]
+      },
+      "assumptions": [
+        "Walls are traced from the proposed floor plan at 1/4 inch = 1 foot and checked against the printed dimensions. The traced house is about 1,934 SF to the outside faces against the printed 1,895 SF main floor; the addition traces to 265.6 SF against the printed 265 SF.",
+        "Heights come from the proposed elevations: top plate 8'-1 1/8\", window header 6'-11 3/8\" and ridge 18'-8 1/4\" above the floor. Ceilings are assumed 8'-0\" and interior doors 6'-8\".",
+        "The roof follows the proposed roof plan with the printed 6:12 and 4 5/32:12 pitches. Where the roof plan and the ridge height leave the eave height open, the roof planes are set to meet the printed ridge; the roof covering is shown as plain courses.",
+        "The ground is set from the elevations: about 2'-0\" below the floor on the north and west sides, falling to about 2'-5\" at the northeast corner and rising to about 1'-4\" below the floor at the southeast corner. The crawl space under the floor is not shown.",
+        "The entry stoop, its steps down along the wall and its railing are scaled from the floor plan and the east and north elevations; the number of steps is assumed.",
+        "Window widths are traced from the plan; window heights are read off the elevations. The 3'-4\" entry door is shown at the window header height.",
+        "The plans label two rooms Bath and three Bdrm; they are numbered here so the room picker can tell them apart.",
+        "Kitchen, bath, laundry and bedroom fixtures sit where the plan symbols are, scaled from the drawing. Their heights are assumed. Interior doors are shown as open gaps. Closet shelving, siding, the stone wainscot and trim are not modeled."
+      ]
     }
   ]
 }

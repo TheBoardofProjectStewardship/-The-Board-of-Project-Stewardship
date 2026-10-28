@@ -211,6 +211,29 @@ console.log(JSON.stringify({{ids:m.groups.map(g=>g.id),floors:[...new Set(m.labe
         words = set(re.findall(r"[a-z0-9]+", (json.dumps(p) + json.dumps(cfg)).lower()))
         self.assertFalse({hashlib.sha256(w.encode()).hexdigest()[:16] for w in words} & private)
 
+    def test_one_story_bedroom_addition_is_plan_data(self):
+        p = next(p for p in self.projects if p["slug"] == "one-story-house-bedroom-addition")
+        cfg = ps.load_config(p)
+        self.assertEqual([s["id"] for s in cfg["stages"]], list(ps.STAGE_PROGRESS))
+        self.assertEqual(cfg["totalSqft"], 1895)  # printed main floor area
+        self.assertAlmostEqual(cfg["floor"], 2.4, places=2)
+        heights = [w["h"] for w in cfg["walls"]]
+        self.assertAlmostEqual(max(set(heights), key=heights.count), 8.094, places=2)  # printed top plate 8'-1 1/8"
+        roof_top = max(pt[1] for f in cfg["gableRoof"]["faces"] for pt in f["p"])
+        self.assertAlmostEqual(roof_top - cfg["floor"], 18.688, places=1)  # printed ridge 18'-8 1/4"
+        for r in cfg["rooms"]:  # the plans print no room areas
+            self.assertTrue(r.get("areaNotPrinted"), r["name"])
+            self.assertNotIn("SF", r["text"])
+        tags = {o.get("tag") for o in cfg["openings"]}
+        self.assertTrue({"5040", "3620", "5036"} <= tags)  # new window tags on the plan
+        self.assertTrue(p.get("assumptions"))
+        private = {'d2d6ed71c9b07693', 'ccd2c586f1ed4008', 'b54f08623ae4039f', 'cc0b8a95a883bc0b', '7bf6d2e213a666d5',
+                   '5fffc9a409285b9b', 'fee35bb842d5feee', '2e414eb23f358c04', 'e01cde212a17f991', '3593dd140892c64f'}  # sha256 prefixes of the client's private words, kept out of the repo in plain text
+        text = (json.dumps(p) + json.dumps(cfg)).lower()
+        words = set(re.findall(r"[a-z0-9]+", text)) | set(re.findall(r"[a-z0-9]+", text.replace(".", "")))
+        words |= {w[:6] for w in words if w.isdigit()}
+        self.assertFalse({hashlib.sha256(w.encode()).hexdigest()[:16] for w in words} & private)
+
     @unittest.skipUnless(shutil.which("node"), "node not installed")
     def test_engine_builds_three_levels(self):
         script = f"""

@@ -369,6 +369,13 @@ function buildFromConfig(cfg) {
         }
       });
     }
+    // Free roof planes read off a roof plan (hips, valleys and mixed pitches): triangles or convex quads from the config,
+    // with c = 'fascia', 'soffit' or 'wall' (gable-end wall above the plate); lines are plane edges, or shingle courses when flagged.
+    for (const f of spec.faces || []) {
+      const col = f.c === 'fascia' ? C_FASCIA : f.c === 'soffit' ? C_SOFFIT : f.c === 'wall' ? C_WALL : C_ROOF;
+      face(roof, f.p, col, f.c === 'wall' ? 5 : 0, false, Math.min(...f.p.map(p => p[1])));
+    }
+    for (const l of spec.lines || []) line(roof, l[0], l[1], l[2] ? C_SEAM : C_INK, 0, Math.min(l[0][1], l[1][1]));
     // Shed roofs sloping away from a wall (porch roof).
     for (const sh of spec.sheds || []) {
       const k = sh.pitch / 12, o = sh.overhang ?? o0, [x0, z0, x1, z1] = sh.r, sd = sh.sides || [o, o];
