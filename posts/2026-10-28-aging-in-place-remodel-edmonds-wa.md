@@ -35,6 +35,8 @@ In practical terms, expect a permit when the job moves or adds plumbing, removes
 
 **Electrical work.** New lighting, a heated floor, an exhaust fan upgrade, or outlets for a powered lift or toilet seat all count as electrical work. L&I's [electrical permits page](https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/) explains that a hired electrical contractor must buy the permit for its own work, and that the permit and inspection come from the correct jurisdiction: a city that runs its own electrical program, or L&I everywhere else. Ask your contractor which applies to your Edmonds address and make sure the permit is on the job before walls close.
 
+![New wiring run through open bathroom wall studs during an aging-in-place remodel in Edmonds, WA](../assets/images/posts/2026-10-28-edmonds-bathroom-wiring-4.webp "Electrical rough-in during an Edmonds, WA aging-in-place remodel: new circuits for lighting, a fan and a heated floor go in while the wall is open, under an electrical permit.")
+
 ## The bathroom: from tub to curbless shower
 
 The bathroom is usually the center of an aging-in-place remodel, and the curbless (zero-threshold) shower is the feature people ask for most. It is also the one most often done badly, because the hard part is invisible once the tile is in.
@@ -45,9 +47,13 @@ The bathroom is usually the center of an aging-in-place remodel, and the curbles
 2. **Raise the rest of the bathroom floor** so the shower pan can be built on top of the existing subfloor. This avoids cutting joists but creates a step at the bathroom door unless the hall floor is also built up or a transition is designed in.
 3. **Use a slab or crawl-space advantage.** Houses with a crawl space below the bath sometimes allow the framing to be lowered from underneath; daylight-basement baths on a concrete slab may need the slab cut and the drain line lowered.
 
+![Bathroom floor joists reinforced and lowered for a curbless shower in an Edmonds, WA remodel](../assets/images/posts/2026-10-28-edmonds-recessed-shower-floor-5.webp "Recessing a curbless shower floor in an Edmonds, WA bathroom: the joists are reinforced and the shower area is framed lower, structural work that belongs on the permit drawings.")
+
 **Linear drains.** Long, narrow trench drains along the back wall or across the shower entrance let the floor slope in one direction instead of four. That makes a single flat plane easier to walk and roll across, and it allows larger floor tiles. The drain location still has to suit the plumbing below, so this is a decision to make with the plumber and the framer together.
 
 **Waterproofing.** Without a curb, the waterproofing membrane usually has to extend well beyond the shower area onto the bathroom floor. Ask the bidder which membrane system they use, how far it extends, and whether they flood-test the pan before tile. The Board's [bathroom waterproofing guide](../bathroom-waterproofing-guide.html) covers the layers in more detail.
+
+![Waterproofing membrane running from a curbless shower onto the bathroom floor in Edmonds, WA](../assets/images/posts/2026-10-28-edmonds-shower-waterproofing-6.webp "Waterproofing for a curbless shower in Edmonds, WA: with no curb, the membrane runs past the shower area onto the bathroom floor before any tile goes down.")
 
 **Fixtures that help.** A handheld shower on a slide bar, a pressure-balancing or thermostatic valve placed where a seated person can reach it, a fold-down or built-in seat, and slip-resistant floor tile all make the room easier to use. Lever handles are easier than knobs for hands with arthritis. None of this needs to look clinical.
 
@@ -76,6 +82,8 @@ Older Edmonds houses often have 24- to 28-inch interior doors on bathrooms and b
 - **Offset (swing-clear) hinges.** These move the door fully out of the opening and can add usable width without reframing.
 - **Lever handles and low thresholds.** Replacing round knobs with levers and flattening raised thresholds helps everyone in the house.
 
+![A widened bathroom doorway framed with a new header during an aging-in-place remodel in Edmonds, WA](../assets/images/posts/2026-10-28-edmonds-widened-doorway-7.webp "A narrow bathroom door widened in an Edmonds, WA house: the larger opening gets a new header, which in a bearing wall usually means a permit and plan review.")
+
 The main exterior entry door is also worth checking. The residential code's means-of-egress section sets a minimum clear width for the required egress door, and many older entries are narrower or have a raised threshold and a step down to the porch. Replacing the door, frame and sill is a common part of an aging-in-place project.
 
 ## Entries and ramps: getting in the front door
@@ -90,6 +98,8 @@ On a sloping Edmonds lot, the front door is often several steps above the drivew
 
 Our long, wet fall and winter matter here. Choose a textured, slip-resistant walking surface, light the path, cover the landing if possible, and keep gutters and downspouts from spilling onto the route.
 
+![A covered entry landing with a ramp, handrails and path lights at an Edmonds, WA house on a wet day](../assets/images/posts/2026-10-28-edmonds-entry-ramp-8.webp "A ramp to a covered landing at an Edmonds, WA house, with handrails, path lighting and a slip-resistant surface for the long wet season.")
+
 ## Bedrooms, kitchens and the rest of the house
 
 The bathroom and entry get most of the attention, but a full aging-in-place plan also looks at:
@@ -98,6 +108,8 @@ The bathroom and entry get most of the attention, but a full aging-in-place plan
 - **Lighting.** More and brighter light at stairs, halls and the bathroom, with switches at both ends of halls and stairs.
 - **Stairs that stay.** Sturdy handrails on both sides, good lighting, and contrasting edges on treads.
 - **Kitchen reach.** Pull-out shelves, drawers instead of low cabinets, and a counter section where someone can work seated.
+
+![A kitchen with pull-out shelves and a lowered seated work counter in an Edmonds, WA aging-in-place remodel](../assets/images/posts/2026-10-28-edmonds-accessible-kitchen-9.webp "Kitchen reach in an Edmonds, WA aging-in-place remodel: drawers and pull-out shelves instead of deep low cabinets, and a counter section where someone can work seated.")
 
 ## Materials Worth Knowing
 

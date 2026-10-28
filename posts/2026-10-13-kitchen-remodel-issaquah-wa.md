@@ -35,6 +35,8 @@ Read those two documents together as a scope test, not a slogan:
 - **New or relocated sinks, dishwashers, gas lines, or range hoods** usually pull plumbing and mechanical into the remodel package and can pull electrical into L&I.
 - **Exempt does not mean code-free.** Tip Sheet 00 says work must still be code compliant even when a building permit is not required.
 
+![A kitchen wall opened up with temporary shoring during a remodel in Issaquah, WA](../assets/images/posts/2026-10-13-issaquah-kitchen-wall-opening-4.webp "Removing a wall between kitchen and living room in Issaquah, WA is remodel work, not finish work: the opening is shored while the new beam goes in.")
+
 If you are unsure whether your Squak Mountain or Highlands lot sits in a critical area, use the City's [Permitting](https://www.issaquahwa.gov/146/Permitting) contacts — Community Planning & Development at cpd@issaquahwa.gov or 425-837-3100 — before you order cabinets.
 
 ## MyBuildingPermit remodel path and the submittal packet
@@ -67,6 +69,8 @@ This is the detail that separates Issaquah from several nearby Eastside cities. 
 
 In practice, almost every real kitchen remodel touches wiring: countertop receptacles, island circuits, under-cabinet lighting, a dedicated circuit for an induction range or wall oven, disposal and dishwasher circuits, and the range hood. Those items need an L&I electrical permit and inspection even when the building remodel runs through MyBuildingPermit. Put both ticket numbers in the written schedule: City remodel approval does not substitute for L&I electrical sign-off, and the reverse is also true.
 
+![New countertop outlets and under-cabinet lighting going in before the backsplash in an Issaquah, WA kitchen](../assets/images/posts/2026-10-13-issaquah-kitchen-outlets-lighting-5.webp "Countertop receptacles and under-cabinet lighting in an Issaquah, WA kitchen remodel, work that needs an L&I electrical permit and inspection.")
+
 Use L&I's [electrical permits, fees, and inspections](https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/) overview for the state path, and confirm the electrician — not only the general contractor — is registered on [Washington L&I Verify](https://secure.lni.wa.gov/verify/). The remodel packet also notes that a City of Issaquah business license is required for anyone operating a business in the city; ask for that number before you write a deposit check.
 
 ## Moisture, ventilation, and Eastside kitchen details
@@ -78,6 +82,8 @@ Issaquah winters are cool and damp. A kitchen that looks finished in October can
 - **Protect splash zones** at the sink and cooktop with surfaces and backsplash details that tolerate daily wetting; seal cuts at faucet holes and cooktop openings.
 - **Leave inspection access** for under-sink shutoffs, disposal wiring, and dishwasher supply lines so punch-list visits do not become cabinet surgery.
 - **Coordinate appliance deliveries with rough-in.** An induction range or double oven can change panel load and receptacle locations after the walls are closed if nobody checked early.
+
+![An open sink cabinet with reachable shutoff valves and a dishwasher supply line in an Issaquah, WA kitchen](../assets/images/posts/2026-10-13-issaquah-kitchen-sink-access-6.webp "Inspection access under the sink in an Issaquah, WA kitchen: shutoffs, the dishwasher supply and disposal wiring stay reachable without pulling cabinets apart.")
 
 The video below walks through a professional kitchen-cabinet installation sequence — useful context for why level lines, shims, and fastening to studs matter before counters and appliances land.
 
