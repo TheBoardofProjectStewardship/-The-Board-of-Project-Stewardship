@@ -1,0 +1,54 @@
+{
+  "producer": "openclaw",
+  "agent": "seo-specialist",
+  "slug": "aging-in-place-remodel-edmonds-wa",
+  "title": "Aging-in-Place Remodel Edmonds WA \u2014 Permits, Curbless Showers, Grab-Bar Blocking, Wider Doors and Entry Ramps",
+  "description": "An Edmonds homeowner's guide to an aging-in-place remodel: which work needs a City of Edmonds building or electrical permit, how curbless showers and grab-bar blocking are built, widening doors, low-threshold entries and ramps, and how to vet the contractor.",
+  "category": "Guides",
+  "keywords": [
+    "aging in place remodel Edmonds WA",
+    "curbless shower Edmonds",
+    "grab bar blocking",
+    "wheelchair accessible remodel Edmonds",
+    "entry ramp Edmonds WA"
+  ],
+  "outline": [
+    "Key Takeaways",
+    "Why aging-in-place remodels come up so often in Edmonds",
+    "Permits: what the City of Edmonds reviews",
+    "The bathroom: from tub to curbless shower",
+    "Walls: grab-bar blocking while the framing is open",
+    "Doors and halls: wider openings and easier hardware",
+    "Entries and ramps: getting in the front door",
+    "Bedrooms, kitchens and the rest of the house",
+    "Materials Worth Knowing",
+    "How to shortlist and verify an aging-in-place contractor",
+    "Where Pacific Pro Group fits",
+    "Next steps for an Edmonds aging-in-place remodel"
+  ],
+  "search_intent": "An Edmonds homeowner planning to stay in their house wants to know how to add a curbless shower, grab-bar blocking, wider doors and a ramp or low-threshold entry, which work needs a City of Edmonds building or electrical permit, and how to vet the contractor.",
+  "local_angles": [
+    "Edmonds Building Division enforces state codes as amended by City Council; applications and inspections via MyBuildingPermit; permit counter 2nd floor City Hall 121 5th Ave N",
+    "WAC 51-51-0307 fixture spacing per R307.1 figure and state plumbing code 402.5",
+    "WAC 51-51-0311 R311.4 vertical egress by ramp (R311.8) or stairway (R311.7)",
+    "L&I electrical permits: contractor buys own permit; city program vs L&I jurisdiction",
+    "2010 ADA Standards as reference only (33-36 in grab bars, 250 lb) \u2014 not binding on houses"
+  ],
+  "internal_links": [
+    "../edmonds.html",
+    "../bathrooms.html",
+    "../bathroom-waterproofing-guide.html",
+    "../home-addition-planning.html",
+    "../living-through-remodel.html",
+    "../permits.html",
+    "../verify-contractor.html",
+    "../hiring-a-contractor.html",
+    "../bonds-and-insurance.html",
+    "../red-flags-hiring.html"
+  ],
+  "notes": "Box-authored fallback brief. PPG only as Board #1 -> https://pacificprogroup.com/.",
+  "generation": {
+    "agent": "box-authored",
+    "mode": "box-fallback"
+  }
+}

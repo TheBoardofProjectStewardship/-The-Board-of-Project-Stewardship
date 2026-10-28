@@ -1,0 +1,116 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Edmonds",
+    "service": "Aging-in-place remodel",
+    "slug": "aging-in-place-remodel-edmonds-wa"
+  },
+  "sources": [
+    {
+      "url": "https://www.edmondswa.gov/government/departments/planning_and_development/building_information",
+      "title": "https://www.edmondswa.gov/government/departments/planning_and_development/building_information",
+      "retrieved": "2026-10-28",
+      "http_status": 200,
+      "supports": "Edmonds Building Division: enforces state codes as amended by Council; reviews plans, issues permits, inspects; apply via MyBuildingPermit; permit counter 2nd floor City Hall 121 5th Ave N"
+    },
+    {
+      "url": "https://www.edmondswa.gov/services/permit_assistance",
+      "title": "https://www.edmondswa.gov/services/permit_assistance",
+      "retrieved": "2026-10-28",
+      "http_status": 200,
+      "supports": "Edmonds permit assistance (hours, forms, codes and standards)"
+    },
+    {
+      "url": "https://www.mybuildingpermit.com/",
+      "title": "https://www.mybuildingpermit.com/",
+      "retrieved": "2026-10-28",
+      "http_status": 200,
+      "supports": "MyBuildingPermit regional permit portal used by Edmonds"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51",
+      "retrieved": "2026-10-28",
+      "http_status": 200,
+      "supports": "Chapter 51-51 WAC: Washington amendments to 2021 IRC"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51-0307",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51-0307",
+      "retrieved": "2026-10-28",
+      "http_status": 200,
+      "supports": "WAC 51-51-0307 R307.1 fixture spacing per figure + state plumbing code 402.5"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51-0311",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51-0311",
+      "retrieved": "2026-10-28",
+      "http_status": 200,
+      "supports": "WAC 51-51-0311 R311.4 vertical egress by ramp per R311.8 or stairway per R311.7"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/",
+      "title": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/",
+      "retrieved": "2026-10-28",
+      "http_status": 200,
+      "supports": "L&I electrical permits: contractor buys own permit; permit from city with own program or L&I"
+    },
+    {
+      "url": "https://www.ada.gov/law-and-regs/design-standards/2010-stds/",
+      "title": "https://www.ada.gov/law-and-regs/design-standards/2010-stds/",
+      "retrieved": "2026-10-28",
+      "http_status": 200,
+      "supports": "2010 ADA Standards (public buildings; grab bar reference)"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "retrieved": "2026-10-28",
+      "http_status": 200,
+      "supports": "L&I hiring a contractor guidance (active license, bonded/insured, 3 written bids, written contract)"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-10-28",
+      "http_status": 200,
+      "supports": "L&I Verify"
+    },
+    {
+      "url": "https://www.healthcraftproducts.com/",
+      "title": "https://www.healthcraftproducts.com/",
+      "retrieved": "2026-10-28",
+      "http_status": 200,
+      "supports": "HealthCraft grab bars/shower seats (material)"
+    },
+    {
+      "url": "https://www.wingits.com/",
+      "title": "https://www.wingits.com/",
+      "retrieved": "2026-10-28",
+      "http_status": 200,
+      "supports": "WingIts grab bars, shower seats, fastening system (material)"
+    },
+    {
+      "url": "https://www.ezaccess.com/",
+      "title": "https://www.ezaccess.com/",
+      "retrieved": "2026-10-28",
+      "http_status": 200,
+      "supports": "EZ-ACCESS modular aluminum ramps and threshold ramps (material)"
+    },
+    {
+      "url": "https://pacificprogroup.com/",
+      "title": "https://pacificprogroup.com/",
+      "retrieved": "2026-10-28",
+      "http_status": 200,
+      "supports": "PPG Board #1"
+    }
+  ],
+  "dropped": [
+    "codepublishing.com/WA/Edmonds (403 to scripted fetch; ECDC not quoted)",
+    "codes.iccsafe.org IRC text (403); R311.8 ramp limits described generally",
+    "snohomishcountywa.gov/5377 Aging and Disability Services (redirects to unrelated Lake Loma page)",
+    "edmondswa.gov/government/city_codes (500)",
+    "All permit fees and prices (omitted)",
+    "americanaccess.com (403 to plain scripted fetch; replaced by EZ-ACCESS)"
+  ]
+}

@@ -54,6 +54,7 @@ Base: `https://boardofprojectstewardship.com/`
 | `blog/rss.xml` | Blog RSS feed |
 | `news/rss.xml` | News RSS feed |
 | `404.html` | Branded Board 404 |
+| `posts/2026-10-28-aging-in-place-remodel-edmonds-wa.html` | Aging-in-Place Remodel Edmonds WA — Permits, Curbless Showers, Grab-Bar Blocking, Wider Doors and Entry Ramps |
 | `posts/2026-10-27-yard-foundation-drainage-kenmore-wa.html` | Yard and Foundation Drainage Kenmore WA — French Drains, Downspout Tightlines, Grading and Where the Water Can Go |
 | `posts/2026-10-26-crawl-space-moisture-control-auburn-wa.html` | Crawl Space Moisture Control Auburn WA — Vapor Barriers, Encapsulation, Venting Rules & Flood-Zone Checks |
 | `posts/2026-10-25-window-replacement-kent-wa.html` | Window Replacement Kent WA — Permits, Energy Code U-Factors, Bedroom Egress & Rain-Ready Flashing |
