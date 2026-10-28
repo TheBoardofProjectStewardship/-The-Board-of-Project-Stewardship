@@ -1,0 +1,19 @@
+{
+  "submission_id": "2026-10-28-aging-in-place-remodel-edmonds-wa",
+  "idempotency_key": "sha256:f673a570d374a11fc53a33285b0212aca15d37062e5aceb303013f6ec6bd5999",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-10-28T10:45:33Z",
+  "outputs": [
+    "assets/images/posts/2026-10-28-edmonds-aging-in-place-1.webp",
+    "assets/images/posts/2026-10-28-edmonds-aging-in-place-2.webp",
+    "assets/images/posts/2026-10-28-edmonds-aging-in-place-3.webp",
+    "posts/2026-10-28-aging-in-place-remodel-edmonds-wa.md",
+    "posts/2026-10-28-aging-in-place-remodel-edmonds-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 85
+}

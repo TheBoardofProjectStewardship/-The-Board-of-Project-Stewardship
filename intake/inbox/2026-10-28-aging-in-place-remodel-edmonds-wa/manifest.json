@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-10-28-aging-in-place-remodel-edmonds-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-10-28T10:55:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Aging-in-Place Remodel Edmonds WA \u2014 Permits, Curbless Showers, Grab-Bar Blocking, Wider Doors and Entry Ramps",
+    "date": "2026-10-28",
+    "slug": "aging-in-place-remodel-edmonds-wa",
+    "description": "An Edmonds homeowner's guide to an aging-in-place remodel: which work needs a City of Edmonds building or electrical permit, how curbless showers and grab-bar blocking are built, widening doors, low-threshold entries and ramps, and how to vet the contractor.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 inbox had no 2026-10-28 packets. Topic: aging-in-place remodel (curbless showers, grab-bar blocking, wider doors, entry ramps), Edmonds WA (not in the last 14 posts). Edmonds code on codepublishing.com returns 403 to scripted fetch, so not linked; City of Edmonds Building Division, permit assistance and MyBuildingPermit pages cited (200). Producer role fields kept per intake contract."
+}
