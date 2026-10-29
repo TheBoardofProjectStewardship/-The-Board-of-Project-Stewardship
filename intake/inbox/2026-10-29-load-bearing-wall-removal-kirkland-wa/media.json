@@ -1,0 +1,44 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-10-29-kirkland-wall-removal-1.webp",
+      "repo_path": "assets/images/posts/2026-10-29-kirkland-wall-removal-1.webp",
+      "alt": "Load-bearing wall removal in Kirkland, WA: new engineered beam on temporary steel shoring posts mid-remodel \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "fa413e25499d49a468d9b3100b8f6cb4",
+      "source": "Newly generated image (built-in image generator, 2026-10-29), source gen-1.jpg 1280x720, resized to 1600x900 webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-29-kirkland-wall-removal-2.webp",
+      "repo_path": "assets/images/posts/2026-10-29-kirkland-wall-removal-2.webp",
+      "alt": "Load-bearing wall removal in Kirkland, WA: engineered beam bearing on doubled jack and king studs with a metal connector \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "7cc547eb41c11c2da6208c7a612703dd",
+      "source": "Newly generated image (built-in image generator, 2026-10-29), source gen-2.jpg 1280x720, resized to 1600x900 webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-29-kirkland-wall-removal-3.webp",
+      "repo_path": "assets/images/posts/2026-10-29-kirkland-wall-removal-3.webp",
+      "alt": "Load-bearing wall removal in Kirkland, WA: finished open-concept kitchen and living room with a flush painted beam where the wall was \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "c112f252292bf4a9ec337f31ba5e80c0",
+      "source": "Newly generated image (built-in image generator, 2026-10-29), source gen-3.jpg 1280x720, resized to 1600x900 webp"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "ZCL9bFGt__Q",
+      "url": "https://www.youtube.com/watch?v=ZCL9bFGt__Q",
+      "title": "Start-to-Finish Load Bearing Wall Removal Process (3 WALLS REMOVED)",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "3 newly generated images (built-in generator), 0 regraded stills, 0 paid media."
+}

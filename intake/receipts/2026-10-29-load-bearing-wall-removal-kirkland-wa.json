@@ -1,0 +1,19 @@
+{
+  "submission_id": "2026-10-29-load-bearing-wall-removal-kirkland-wa",
+  "idempotency_key": "sha256:a323be10ff708b42cc8dc111d4a4c0c2b83a9c754b609d7df12181e985272b1d",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-10-29T10:49:01Z",
+  "outputs": [
+    "assets/images/posts/2026-10-29-kirkland-wall-removal-1.webp",
+    "assets/images/posts/2026-10-29-kirkland-wall-removal-2.webp",
+    "assets/images/posts/2026-10-29-kirkland-wall-removal-3.webp",
+    "posts/2026-10-29-load-bearing-wall-removal-kirkland-wa.md",
+    "posts/2026-10-29-load-bearing-wall-removal-kirkland-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 86
+}

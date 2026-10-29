@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-10-29-load-bearing-wall-removal-kirkland-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-10-29T10:55:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Load-Bearing Wall Removal Kirkland WA \u2014 Permits, Beams, Engineering and Open-Concept Remodels",
+    "date": "2026-10-29",
+    "slug": "load-bearing-wall-removal-kirkland-wa",
+    "description": "A Kirkland homeowner's guide to removing a load-bearing wall to open a kitchen to the living room: how to tell if a wall is bearing, why a structural engineer sizes the beam and posts, what the City of Kirkland permit and inspections cover, shoring, electrical moves and how to vet the contractor.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 inbox had no 2026-10-29 packets. Topic: load-bearing wall removal / opening a kitchen to the living room, Kirkland WA (not in the last 14 posts). kirklandwa.gov and kirkland.municipal.codes return 403 to scripted fetch, so not linked; MyBuildingPermit (lists Kirkland), Chapter 51-51 WAC, WAC 51-51-0301 and 51-51-0602 and L&I pages cited (200). Producer role fields kept per intake contract."
+}

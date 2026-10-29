@@ -1,0 +1,95 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Kirkland",
+    "service": "Load-bearing wall removal",
+    "slug": "load-bearing-wall-removal-kirkland-wa"
+  },
+  "sources": [
+    {
+      "url": "https://www.mybuildingpermit.com/",
+      "title": "https://www.mybuildingpermit.com/",
+      "retrieved": "2026-10-29",
+      "http_status": 200,
+      "supports": "MyBuildingPermit regional permit portal; Kirkland listed as member jurisdiction"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51",
+      "retrieved": "2026-10-29",
+      "http_status": 200,
+      "supports": "Chapter 51-51 WAC: Washington amendments to the IRC"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51-0301",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51-0301",
+      "retrieved": "2026-10-29",
+      "http_status": 200,
+      "supports": "WAC 51-51-0301 R301.2 climatic/geographic design criteria set by local jurisdiction; R301.5 live loads 40 psf non-sleeping, 30 psf sleeping"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51-0602",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51-0602",
+      "retrieved": "2026-10-29",
+      "http_status": 200,
+      "supports": "WAC 51-51-0602 wood wall framing amendments: braced wall panels, cripple wall bracing"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/",
+      "title": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/",
+      "retrieved": "2026-10-29",
+      "http_status": 200,
+      "supports": "L&I electrical permits: contractor buys own permit; permit from city with own program or L&I"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "retrieved": "2026-10-29",
+      "http_status": 200,
+      "supports": "L&I hiring a contractor guidance (active license, bonded/insured, 3 written bids, written contract)"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-10-29",
+      "http_status": 200,
+      "supports": "L&I Verify"
+    },
+    {
+      "url": "https://www.roseburg.com/products/engineered-wood/",
+      "title": "https://www.roseburg.com/products/engineered-wood/",
+      "retrieved": "2026-10-29",
+      "http_status": 200,
+      "supports": "Roseburg engineered wood incl. RigidLam LVL (material)"
+    },
+    {
+      "url": "https://www.anthonyforest.com/",
+      "title": "https://www.anthonyforest.com/",
+      "retrieved": "2026-10-29",
+      "http_status": 200,
+      "supports": "Anthony Forest Products glulam, Power Beam / Power Column (material)"
+    },
+    {
+      "url": "https://www.redbuilt.com/",
+      "title": "https://www.redbuilt.com/",
+      "retrieved": "2026-10-29",
+      "http_status": 200,
+      "supports": "RedBuilt LVL, I-joists, open-web trusses (material)"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ZCL9bFGt__Q",
+      "title": "https://www.youtube.com/watch?v=ZCL9bFGt__Q",
+      "retrieved": "2026-10-29",
+      "http_status": 200,
+      "supports": "YouTube: Start-to-Finish Load Bearing Wall Removal Process (Load Bearing Wall Pros), oEmbed 200"
+    }
+  ],
+  "dropped": [
+    "kirklandwa.gov building/permit pages (403 to scripted fetch)",
+    "kirkland.municipal.codes (403)",
+    "pacificwoodtech.com (no response)",
+    "lpcorp SolidStart LVL page (404)",
+    "strongtie/weyerhaeuser/bc.com/fastenmaster (already in rotation/repo)",
+    "all fees/prices/span numbers"
+  ]
+}
