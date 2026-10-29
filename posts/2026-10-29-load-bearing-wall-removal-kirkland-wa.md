@@ -20,6 +20,8 @@ Walk through a Kirkland house built in the 1960s, 1970s or 1980s, in neighborhoo
 
 Homeowners want the opposite today. They want to cook and still see the family, bring the light from the living room windows into the kitchen, and put an island where a wall used to be. Removing or partly removing the wall is usually the single change that makes that possible. It is also the step in a kitchen remodel that most often turns from a carpentry job into a structural project.
 
+![A closed-off 1970s kitchen behind a solid wall before a load-bearing wall removal in Kirkland, WA](../assets/images/posts/2026-10-29-kirkland-closed-kitchen-before-4.webp "The starting point for many Kirkland, WA open-concept remodels: a kitchen closed off behind a wall in the middle of the house, where the loads usually run.")
+
 This guide covers the work in the order a builder thinks about it: is the wall bearing, who designs the replacement, what the City reviews, how the structure is supported during the work, what happens to the wiring, plumbing and ducts in the wall, and how to choose the team. For the kitchen side of the project, the Board's [Kirkland kitchen remodel guide](../posts/2026-10-07-kitchen-remodel-kirkland-wa.html) and [kitchen remodel planning page](../kitchen-remodel-planning.html) are good companions.
 
 ## Is the wall load-bearing?
@@ -34,6 +36,8 @@ A wall is load-bearing when it carries weight from above (floor joists, ceiling 
 Clues are not a diagnosis. Trusses, previous remodels, hidden posts and point loads can all change the answer. The reliable path is to open a small inspection hole or two, look into the attic and the crawl space, and have a licensed structural engineer review the framing. Many walls that "look" non-bearing turn out to carry a point load, and some that look important turn out to be partitions. Plan the project around the engineer's answer, not the guess.
 
 Kitchen walls also tend to be full of services: a plumbing vent, a duct to the upstairs, a gas line, circuits for the counter outlets and switches. Those affect the plan as much as the structure does.
+
+![A vent pipe, wiring and a heating duct inside an opened kitchen wall in a Kirkland, WA house](../assets/images/posts/2026-10-29-kirkland-wall-services-5.webp "Opening a Kirkland, WA kitchen wall often turns up a plumbing vent, circuits and a duct, and each one needs a reroute plan before the wall comes out.")
 
 ## Engineering: who sizes the beam and posts
 
@@ -55,6 +59,8 @@ Kirkland is one of the cities on [MyBuildingPermit](https://www.mybuildingpermit
 
 In practice the permit set for a wall removal usually includes a floor plan showing the wall to be removed, the engineer's beam and post design, and any footing or foundation details. Inspections typically happen while the framing is still open, so the inspector can see the beam, the posts, the hangers and connectors, and the bearing below before drywall closes it in. Ask Kirkland permit staff which documents and inspections your specific scope needs, and keep the answer in writing. The Board's [permits page](../permits.html) explains how to read a permit record, and the [Kirkland page](../kirkland.html) collects other local guides.
 
+![A new concrete footing and post under a girder in the crawl space of a Kirkland, WA house](../assets/images/posts/2026-10-29-kirkland-crawl-space-footing-6.webp "Bearing below the new posts in a Kirkland, WA wall removal: a footing in the crawl space carries the point load down, and the inspector needs to see it before it is covered.")
+
 **Electrical work.** Kitchen walls almost always carry circuits, switches and outlets, and an open plan often adds an island with its own receptacles and new lighting. L&I's [electrical permits page](https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/) explains that a hired electrical contractor must buy the permit for its own work, and that the permit and inspection come from the correct jurisdiction: a city that runs its own electrical program, or L&I everywhere else. Ask your contractor which applies to your Kirkland address and make sure the electrical permit is on the job before walls and ceilings close.
 
 **Plumbing, gas and ducts.** A vent pipe or supply line in the wall has to be rerouted, often up into the attic or down into the crawl space. Gas lines and ductwork may need their own permits. Put each reroute on the plan so the bids are comparable.
@@ -62,6 +68,8 @@ In practice the permit set for a wall removal usually includes a floor plan show
 ## Shoring and demolition: how the house stays up
 
 The riskiest part of the job is the window between removing the wall and setting the new beam. During that time, the loads the wall carried have to go somewhere. Builders handle it with temporary shoring: temporary stud walls on one or both sides of the wall, adjustable steel shoring posts, or both, set on solid bearing and snugged up to the framing above so they pick up the load before any stud is cut.
+
+![A temporary stud wall shoring the ceiling beside a load-bearing wall in a Kirkland, WA remodel](../assets/images/posts/2026-10-29-kirkland-temporary-shoring-wall-7.webp "Temporary shoring in a Kirkland, WA load-bearing wall removal: a stud wall is built and snugged to the framing above before any stud in the old wall is cut.")
 
 A careful crew will usually:
 
@@ -71,6 +79,8 @@ A careful crew will usually:
 4. Build the temporary supports on both sides as needed, bearing on the floor framing in a way the engineer or builder has checked, with blocking below in the crawl space if the floor needs it.
 5. Remove the studs and plates, set the new beam and posts, install the specified connectors and hangers, and confirm the bearing below.
 6. Call for the framing inspection, then remove the temporary supports in the planned order.
+
+![A zip-door plastic dust barrier and floor protection around a wall removal in a Kirkland, WA home](../assets/images/posts/2026-10-29-kirkland-dust-barrier-8.webp "Dust control for a wall removal in an occupied Kirkland, WA home: a sealed plastic barrier, a protected walking path and air filtration before demolition starts.")
 
 The video below follows a contractor crew through a start-to-finish load-bearing wall removal. It is a useful picture of how the sequence fits together on a real job. It is not a substitute for an engineered design or a permit for your house.
 
@@ -86,6 +96,8 @@ The engineered beam gets most of the attention, but the details at each end carr
 - **Bearing below:** a beam, footing or foundation wall in the crawl space or basement that lines up with each post.
 
 On site, a good crew checks that the beam arrived as specified (the stamp and label are on the product), that the posts land on what the drawings say they land on, and that every connector has the right fasteners. Photograph the finished framing with a tape measure in the shot before the ceiling closes. Those photos are worth keeping with the permit record.
+
+![A flush engineered beam with joist hangers and a tape measure in an open ceiling in Kirkland, WA](../assets/images/posts/2026-10-29-kirkland-flush-beam-hangers-9.webp "A flush beam in a Kirkland, WA open-concept remodel, with joists hung on metal hangers. A framing photo with a tape in the shot is worth keeping with the permit record.")
 
 ## Finishing the open plan
 
