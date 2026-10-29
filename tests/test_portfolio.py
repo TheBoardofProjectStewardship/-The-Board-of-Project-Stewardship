@@ -193,6 +193,25 @@ console.log(JSON.stringify({{ids:m.groups.map(g=>g.id),floors:[...new Set(m.labe
         words = set(re.findall(r"[a-z0-9]+", (json.dumps(p) + json.dumps(cfg)).lower()))
         self.assertFalse({hashlib.sha256(w.encode()).hexdigest()[:16] for w in words} & private)
 
+    def test_split_level_duplex_conversion_is_plan_data(self):
+        p = next(p for p in self.projects if p["slug"] == "split-level-duplex-conversion")
+        cfg = ps.load_config(p)
+        lv = {l["id"]: l["y"] for l in cfg["levels"]}
+        self.assertEqual([lv["lower"], lv["main"], lv["upper"]], [0, 4.375, 8.75])  # half levels: 7 drawn risers at 7 1/2 in each
+        self.assertEqual([s["id"] for s in cfg["stages"]], list(ps.STAGE_PROGRESS))
+        self.assertNotIn("totalSqft", cfg)  # the sheets print no total
+        stairs = [f for f in cfg["fixtures"] if f.get("kind") == "stair" or f.get("type") == "stair"]
+        self.assertEqual(sum(1 for s in stairs if s.get("n") == 7), 2)
+        for r in cfg["rooms"]:  # printed rooms carry the printed area, the rest say so
+            if r.get("areaNotPrinted"):
+                self.assertNotIn("SF", r["text"])
+            else:
+                self.assertTrue(r["text"].endswith(" SF"), r["text"])
+        self.assertTrue(p.get("assumptions"))
+        private = {'8a1233f108b83952', '232762a64b9a3885'}  # sha256 prefixes of the client's private words, kept out of the repo in plain text
+        words = set(re.findall(r"[a-z0-9]+", (json.dumps(p) + json.dumps(cfg)).lower()))
+        self.assertFalse({hashlib.sha256(w.encode()).hexdigest()[:16] for w in words} & private)
+
     def test_daylight_basement_house_is_plan_data(self):
         p = next(p for p in self.projects if p["slug"] == "daylight-basement-house")
         cfg = ps.load_config(p)
