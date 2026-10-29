@@ -30,6 +30,8 @@ MyBuildingPermit's [Construction Tip Sheet 00 (Permits Required / Not Required)]
 
 That distinction matters on Sammamish projects. A like-for-like toilet on the same rough-in is a different animal from a acrylic tub cut out for a curb-less shower with a relocated valve and a new drain. The tip sheet also warns that critical areas, shoreline areas, sensitive areas, and wildland-urban interface overlays can pull exempt work back into permitting. If your house sits near lake shore, steep slopes, wetlands, or mapped buffers, do not assume the "fixture swap" exemption applies — confirm with the City.
 
+![An old fiberglass tub being cut out with the drain and valve exposed in a Sammamish, WA bathroom remodel](../assets/images/posts/2026-10-12-sammamish-tub-removal-4.webp "Tub and shower replacement in a Sammamish, WA bathroom is permit work under the regional tip sheet, unlike a like-for-like sink or toilet swap.")
+
 Interior paint and finish work remain in the typically-not-required list. Once you open walls for waterproofing, move drains, add circuits, or change the layout, you are back in permit territory. When in doubt, email PermitTech@Sammamish.us or file Project Guidance before you schedule demo.
 
 ## MyBuildingPermit remodel path and submittal checklist
@@ -47,6 +49,8 @@ Required submittal items on that checklist include an Acceptance of Financial Re
 
 That "as-is and proposed" plan-set note is where bathroom jobs stall. Reviewers need to see the existing layout next to the new one: fixture locations, walls that move, windows or exhaust paths, and any structural members you plan to cut. A single pretty finish board without a before/after floor plan is not a complete package.
 
+![A dated 1990s bathroom with an almond tub surround and oak vanity before a remodel in Sammamish, WA](../assets/images/posts/2026-10-12-sammamish-bath-before-5.webp "The as-is half of a Sammamish, WA remodel plan set: reviewers want the existing bathroom layout drawn next to the proposed one.")
+
 Fees live on the City's [Fees, Permits and Applications](https://www.sammamish.us/government/community-development/permit-center/fees-permits-and-applications/) page and the published [2026 Development Fee Schedule](https://www.sammamish.us/media/15mpbygw/2026-development-fee-schedule.pdf). We are not quoting dollar amounts here — valuations, fixture counts, and whether electrical or mechanical rides with the building permit all change the invoice. Read the current schedule and build fee payment into the job calendar rather than treating it as a surprise on issuance day.
 
 Inspections are scheduled online through MyBuildingPermit; the City also points to [inspection.mybuildingpermit.com](https://inspection.mybuildingpermit.com/) and inspections@sammamish.us when you are unsure which inspections are on the card. Keep the issued permit and stamped plans on site when the inspector arrives.
@@ -63,6 +67,8 @@ Potentially applicable items include:
 - **Water Availability Certificate** from the same utilities when fixtures are added, value thresholds are crossed, or fire sprinklers are involved.
 - **Water Meter Sizing Form** when fixture count increases on properties served by Sammamish Plateau Water.
 
+![New supply lines and drains roughed in for a second vanity sink in a Sammamish, WA bathroom](../assets/images/posts/2026-10-12-sammamish-double-vanity-rough-in-6.webp "Adding a second sink in a Sammamish, WA bathroom raises the fixture count, which can bring sewer and water certificate paperwork into the project.")
+
 [Sammamish Plateau Water](https://www.spwater.org/) is the utility many Sammamish addresses already know. Start those certificate requests early; utility turnaround is not the City's plan-review clock, and a bathroom waiting on a sewer letter is still a bathroom waiting.
 
 If the project stays on the same fixture count with no layout change and clearly below value triggers, you may not need those certificates — but the checklist still wants the Residential Fixture Count Form so reviewers can see what you are claiming. Fill it honestly.
@@ -75,6 +81,8 @@ That matches the regional tip sheet's Sammamish row, which marks electrical circ
 
 Plumbing and mechanical fixture counts belong in the same conversation as waterproofing. Moving a shower valve six inches, adding heated flooring, or upsizing an exhaust fan is not "finish work." Capture it on the forms the City already asks for.
 
+![Bathroom electrical rough-in with outlet boxes and an exhaust fan housing in a Sammamish, WA remodel](../assets/images/posts/2026-10-12-sammamish-bath-electrical-rough-in-7.webp "Electrical and exhaust rough-in in a Sammamish, WA bathroom. On alterations the City requires a separate electrical permit when circuits change.")
+
 Owner-builders have an Owner-as-Builder affidavit path on the building permit form. Even then, re-check anyone you hire as a specialty contractor on [L&I Verify](https://secure.lni.wa.gov/verify/) for registration, bond, and insurance. The Board's [verify-contractor](../verify-contractor.html) page walks through that habit.
 
 ## Wet assemblies that survive Eastside winters
@@ -83,9 +91,13 @@ Sammamish winters are cool and damp more often than bitterly cold. Bathrooms fai
 
 Prefer a continuous waterproofing approach in the wet zone — sheet membrane, foam-board system, liquid-applied, or a documented hybrid — with correct slope to the drain and sealed penetrations at valves and niches. The Board's [bathroom waterproofing guide](../bathroom-waterproofing-guide.html) covers assembly logic without tying you to one brand. Flood-test when the manufacturer and the inspector expect it, and do not set tile over a pan that still holds water overnight.
 
+![A waterproofed shower pan holding water during a flood test before tile in a Sammamish, WA bathroom](../assets/images/posts/2026-10-12-sammamish-shower-flood-test-8.webp "A flood test on a Sammamish, WA shower before tile: the drain is plugged and the continuous membrane is checked for leaks when the manufacturer and the inspector expect it.")
+
 https://www.youtube.com/watch?v=BfUrGF3_imc
 
 Staging on Sammamish lots is usually friendlier than a Seattle bungalow with a six-foot side yard, but HOA rules, steep driveways near the plateau edge, and protected trees can still constrain dumpsters and tile pallets. Ask bidders how they protect finished floors on the haul path, who owns change orders when a valve wall has to move for clearance, and how they sequence rough-in inspections before cover-up.
+
+![A dumpster and protected walkway on a sloped driveway during a bathroom remodel in Sammamish, WA](../assets/images/posts/2026-10-12-sammamish-remodel-staging-9.webp "Staging a Sammamish, WA bathroom remodel: driveway slope, HOA rules and protected trees shape where the dumpster and materials go.")
 
 ![A shower niche and tiled wet wall under warm lighting in Sammamish](../assets/images/posts/2026-10-12-sammamish-bath-3.webp)
 
