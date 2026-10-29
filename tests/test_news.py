@@ -70,6 +70,7 @@ class NewsContractTests(unittest.TestCase):
         self.assertEqual(
             [item["slug"] for item in stories],
             [
+                "washington-2024-residential-code-final-vote",
                 "edmonds-park-impact-fees-smaller-homes",
                 "edmonds-pre-approved-dadu-catalog-still-empty",
                 "edmonds-lot-split-rules-introduced",
@@ -89,50 +90,53 @@ class NewsContractTests(unittest.TestCase):
                 "snohomish-health-septic-permit-grant",
             ],
         )
-        self.assertEqual(stories[0]["date"], "2026-10-28")
-        self.assertEqual(stories[1]["date"], "2026-10-27")
-        self.assertEqual(stories[2]["date"], "2026-10-26")
-        self.assertEqual(stories[3]["date"], "2026-10-25")
-        self.assertEqual(stories[4]["date"], "2026-10-24")
-        self.assertEqual(stories[5]["date"], "2026-10-23")
-        self.assertEqual(stories[6]["date"], "2026-10-22")
-        self.assertEqual(stories[7]["date"], "2026-10-21")
-        self.assertEqual(stories[8]["date"], "2026-10-20")
-        self.assertEqual(stories[9]["date"], "2026-10-19")
-        self.assertEqual(stories[10]["date"], "2026-10-18")
+        self.assertEqual(stories[0]["date"], "2026-10-29")
+        self.assertEqual(stories[1]["date"], "2026-10-28")
+        self.assertEqual(stories[2]["date"], "2026-10-27")
+        self.assertEqual(stories[3]["date"], "2026-10-26")
+        self.assertEqual(stories[4]["date"], "2026-10-25")
+        self.assertEqual(stories[5]["date"], "2026-10-24")
+        self.assertEqual(stories[6]["date"], "2026-10-23")
+        self.assertEqual(stories[7]["date"], "2026-10-22")
+        self.assertEqual(stories[8]["date"], "2026-10-21")
+        self.assertEqual(stories[9]["date"], "2026-10-20")
+        self.assertEqual(stories[10]["date"], "2026-10-19")
         self.assertEqual(stories[11]["date"], "2026-10-18")
-        self.assertEqual(stories[12]["date"], "2026-10-17")
-        self.assertEqual(stories[13]["date"], "2026-10-16")
+        self.assertEqual(stories[12]["date"], "2026-10-18")
+        self.assertEqual(stories[13]["date"], "2026-10-17")
         self.assertEqual(stories[14]["date"], "2026-10-16")
-        self.assertEqual(stories[15]["date"], "2026-10-15")
-        self.assertEqual(stories[16]["date"], "2026-10-14")
+        self.assertEqual(stories[15]["date"], "2026-10-16")
+        self.assertEqual(stories[16]["date"], "2026-10-15")
+        self.assertEqual(stories[17]["date"], "2026-10-14")
         self.assertTrue(stories[0]["title"])
         self.assertTrue(stories[0]["description"])
         self.assertGreaterEqual(len(stories[0]["sources"]), 1)
         self.assertIn("Steven Pavlov", stories[0]["hero_credit"])
         self.assertIn("CC BY-SA 4.0", stories[0]["hero_credit"])
-        self.assertIn("Joe Mabel", stories[1]["hero_credit"])
-        self.assertIn("CC BY-SA 3.0", stories[1]["hero_credit"])
+        self.assertIn("Steven Pavlov", stories[1]["hero_credit"])
+        self.assertIn("CC BY-SA 4.0", stories[1]["hero_credit"])
         self.assertIn("Joe Mabel", stories[2]["hero_credit"])
         self.assertIn("CC BY-SA 3.0", stories[2]["hero_credit"])
-        self.assertIn("PinchyCC", stories[3]["hero_credit"])
-        self.assertIn("CC BY 4.0", stories[3]["hero_credit"])
-        self.assertIn("Joe Mabel", stories[4]["hero_credit"])
-        self.assertIn("CC BY-SA 3.0", stories[4]["hero_credit"])
+        self.assertIn("Joe Mabel", stories[3]["hero_credit"])
+        self.assertIn("CC BY-SA 3.0", stories[3]["hero_credit"])
+        self.assertIn("PinchyCC", stories[4]["hero_credit"])
+        self.assertIn("CC BY 4.0", stories[4]["hero_credit"])
         self.assertIn("Joe Mabel", stories[5]["hero_credit"])
         self.assertIn("CC BY-SA 3.0", stories[5]["hero_credit"])
-        self.assertIn("Visitor7", stories[6]["hero_credit"])
+        self.assertIn("Joe Mabel", stories[6]["hero_credit"])
         self.assertIn("CC BY-SA 3.0", stories[6]["hero_credit"])
-        self.assertIn("Smlowe5", stories[7]["hero_credit"])
-        self.assertIn("Spicypepper999", stories[8]["hero_credit"])
-        self.assertIn("ECTran71", stories[9]["hero_credit"])
-        self.assertIn("Illustration", stories[10]["hero_credit"])
-        self.assertIn("Joe Mabel", stories[11]["hero_credit"])
+        self.assertIn("Visitor7", stories[7]["hero_credit"])
+        self.assertIn("CC BY-SA 3.0", stories[7]["hero_credit"])
+        self.assertIn("Smlowe5", stories[8]["hero_credit"])
+        self.assertIn("Spicypepper999", stories[9]["hero_credit"])
+        self.assertIn("ECTran71", stories[10]["hero_credit"])
+        self.assertIn("Illustration", stories[11]["hero_credit"])
         self.assertIn("Joe Mabel", stories[12]["hero_credit"])
-        self.assertEqual(stories[13]["hero_credit"], "")
-        self.assertIn("SounderBruce", stories[14]["hero_credit"])
-        self.assertIn("Robert Ashworth", stories[15]["hero_credit"])
-        self.assertIn("Emersb", stories[16]["hero_credit"])
+        self.assertIn("Joe Mabel", stories[13]["hero_credit"])
+        self.assertEqual(stories[14]["hero_credit"], "")
+        self.assertIn("SounderBruce", stories[15]["hero_credit"])
+        self.assertIn("Robert Ashworth", stories[16]["hero_credit"])
+        self.assertIn("Emersb", stories[17]["hero_credit"])
         self.assertTrue((ROOT / "news" / "_template.md").is_file())
         self.assertEqual(
             sorted(path.name for path in (ROOT / "news").glob("[0-9]*.md")),
@@ -154,12 +158,13 @@ class NewsContractTests(unittest.TestCase):
                 "2026-10-26-edmonds-lot-split-rules-introduced.md",
                 "2026-10-27-edmonds-pre-approved-dadu-catalog-still-empty.md",
                 "2026-10-28-edmonds-park-impact-fees-smaller-homes.md",
+                "2026-10-29-washington-2024-residential-code-final-vote.md",
             ],
         )
         result = intake.validate_news_library(ROOT)
         self.assertTrue(result["ok"], result)
         self.assertEqual(result["status"], "ready")
-        self.assertEqual(result["stories"], 17)
+        self.assertEqual(result["stories"], 18)
         self.assertEqual(gs.news_blog_overlap(ROOT), [])
         self.assertIn("First stories coming soon", gs.build_news_index([]))
 
@@ -189,6 +194,7 @@ class NewsContractTests(unittest.TestCase):
         self.assertNotIn("edmonds-lot-split-rules-introduced", blog_html)
         self.assertNotIn("edmonds-pre-approved-dadu-catalog-still-empty", blog_html)
         self.assertNotIn("edmonds-park-impact-fees-smaller-homes", blog_html)
+        self.assertNotIn("washington-2024-residential-code-final-vote", blog_html)
         baker_url = "https://boardofprojectstewardship.com/news/mount-baker-redevelopment-groundbreaking.html"
         eca_url = "https://boardofprojectstewardship.com/news/seattle-environmentally-critical-areas-update.html"
         tree_url = "https://boardofprojectstewardship.com/news/edmonds-landmark-tree-ordinance-extension.html"
@@ -214,8 +220,11 @@ class NewsContractTests(unittest.TestCase):
         catalog_href = "./news/edmonds-pre-approved-dadu-catalog-still-empty.html"
         fees_url = "https://boardofprojectstewardship.com/news/edmonds-park-impact-fees-smaller-homes.html"
         fees_href = "./news/edmonds-park-impact-fees-smaller-homes.html"
+        code_url = "https://boardofprojectstewardship.com/news/washington-2024-residential-code-final-vote.html"
+        code_href = "./news/washington-2024-residential-code-final-vote.html"
         lead = news_html.split('class="news-lead"', 1)[1].split("</article>", 1)[0]
-        self.assertIn(fees_href, lead)
+        self.assertIn(code_href, lead)
+        self.assertNotIn(fees_href, lead)
         self.assertNotIn(catalog_href, lead)
         self.assertNotIn(split_href, lead)
         self.assertNotIn(deer_href, lead)
@@ -228,7 +237,7 @@ class NewsContractTests(unittest.TestCase):
         self.assertIn("./news/pacific-pro-group-bronze-best-in-the-pnw.html", news_html)
         self.assertIn(panel_href, news_html)
         self.assertIn(html.escape(stories[0]["title"], quote=True), lead)
-        self.assertIn("October 28, 2026", lead)
+        self.assertIn("October 29, 2026", lead)
         self.assertNotIn("edmonds-landmark-tree-ordinance-extension", lead)
 
         lot_url = "https://boardofprojectstewardship.com/news/snohomish-county-administrative-lot-splits.html"
@@ -593,6 +602,67 @@ class NewsContractTests(unittest.TestCase):
         )
         self.assertNotIn("parentOrganization", body)
         assert_ppg_pitch_allowed(self, body)
+
+        code = (ROOT / "news" / "washington-2024-residential-code-final-vote.html").read_text(encoding="utf-8")
+        self.assertIn("Steven Pavlov / ", code)
+        self.assertIn(
+            'href="https://commons.wikimedia.org/wiki/File:2024-05-26,_Washington_State_Capitol_Legislative_Building.jpg"',
+            code,
+        )
+        self.assertIn(">Wikimedia Commons</a>, CC BY-SA 4.0", code)
+        self.assertNotIn("Illustrative", code)
+        for name in (
+            "2026-10-29-washington-2024-residential-code-final-vote",
+            "2026-10-29-olympia-residential-code-1",
+            "2026-10-29-olympia-residential-code-2",
+            "2026-10-29-olympia-residential-code-3",
+        ):
+            for width in (480, 800, 1200):
+                self.assertIn(f"{name}-{width}.webp", code)
+                self.assertTrue((ROOT / "assets" / "images" / "news" / f"{name}-{width}.webp").is_file())
+        self.assertIn(
+            "A public meeting room with a council dais, microphones and rows of chairs, like the one where Washington&#x27;s State Building Code Council takes up the 2024 residential code in Olympia",
+            code,
+        )
+        self.assertIn(
+            "The framed interior of a small backyard cottage under construction in a Washington neighborhood, the kind of home affected by the 2024 residential code&#x27;s 120-square-foot room rule",
+            code,
+        )
+        self.assertIn(
+            "House plans and a building permit application on a kitchen table in a Washington home as an owner checks timing under the 2024 residential code",
+            code,
+        )
+        body = code.split('class="news-body prose-board"', 1)[1].split("news-sources", 1)[0]
+        self.assertLess(body.index("What is on Friday"), body.index("olympia-residential-code-1"))
+        self.assertLess(body.index("olympia-residential-code-1"), body.index("What changes in the residential code"))
+        self.assertLess(body.index("What changes in the residential code"), body.index("olympia-residential-code-2"))
+        self.assertLess(body.index("olympia-residential-code-2"), body.index("Timeline"))
+        self.assertLess(body.index("What it means for homeowners"), body.index("olympia-residential-code-3"))
+        self.assertLess(body.index("olympia-residential-code-3"), body.index("Questions or corrections"))
+        self.assertEqual(body.count('loading="lazy"'), 3)
+        self.assertIn("editorial@boardofprojectstewardship.com", code)
+        self.assertIn("https://secure.lni.wa.gov/verify/", code)
+        self.assertIn("May 3, 2027", code)
+        code_story = next(item for item in stories if item["slug"] == "washington-2024-residential-code-final-vote")
+        for source in code_story["sources"]:
+            self.assertIn(source, code)
+        emails = set(re.findall(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}", code))
+        self.assertEqual(emails, {"editorial@boardofprojectstewardship.com"})
+        self.assertIsNone(gs.news_forbidden_term(code))
+        self.assertNotIn("/posts/", code)
+        self.assertNotIn("parentOrganization", code)
+        self.assertNotIn("isRelatedTo", code)
+        self.assertIn('id="another-story-cta"', code)
+        self.assertNotIn('id="another-story-sea"', code)
+        self.assertEqual(body.count("https://pacificprogroup.com/"), 1)
+        self.assertIn(
+            'The Board of Project Stewardship&#x27;s No. 1-ranked contractor for remodels, additions and custom homes is <a href="https://pacificprogroup.com/">Pacific Pro Group</a>',
+            body,
+        )
+        self.assertIn(
+            '<a href="https://secure.lni.wa.gov/verify/">Washington L&amp;I Verify</a>',
+            body,
+        )
 
         fees = (ROOT / "news" / "edmonds-park-impact-fees-smaller-homes.html").read_text(encoding="utf-8")
         self.assertIn(
@@ -1037,6 +1107,7 @@ class NewsContractTests(unittest.TestCase):
         rss = (ROOT / "news" / "rss.xml").read_text(encoding="utf-8")
         self.assertIn("Board of Project Stewardship News", rss)
         self.assertIn("<item>", rss)
+        self.assertTrue(rss.index(code_url) < rss.index(fees_url))
         self.assertTrue(rss.index(fees_url) < rss.index(catalog_url))
         self.assertTrue(rss.index(catalog_url) < rss.index(split_url))
         self.assertTrue(rss.index(split_url) < rss.index(deer_url))
@@ -1062,6 +1133,7 @@ class NewsContractTests(unittest.TestCase):
         self.assertIn(seattle_url, rss)
         self.assertIn(king_url, rss)
         self.assertIn(fees_url, rss)
+        self.assertIn(code_url, rss)
         self.assertIn(catalog_url, rss)
         self.assertIn(split_url, rss)
         self.assertIn(deer_url, rss)
@@ -1082,6 +1154,7 @@ class NewsContractTests(unittest.TestCase):
         self.assertIn(seattle_url, sitemap)
         self.assertIn(king_url, sitemap)
         self.assertIn(fees_url, sitemap)
+        self.assertIn(code_url, sitemap)
         self.assertIn(catalog_url, sitemap)
         self.assertIn(split_url, sitemap)
         self.assertIn(deer_url, sitemap)
@@ -1121,6 +1194,8 @@ class NewsContractTests(unittest.TestCase):
         self.assertNotIn("edmonds-pre-approved-dadu-catalog-still-empty", posts_json)
         self.assertNotIn("edmonds-park-impact-fees-smaller-homes", blog_rss)
         self.assertNotIn("edmonds-park-impact-fees-smaller-homes", posts_json)
+        self.assertNotIn("washington-2024-residential-code-final-vote", blog_rss)
+        self.assertNotIn("washington-2024-residential-code-final-vote", posts_json)
         self.assertNotIn("/news/", blog_rss)
         self.assertNotIn('"path": "./news/', posts_json)
         self.assertNotIn("./posts/", news_html)
