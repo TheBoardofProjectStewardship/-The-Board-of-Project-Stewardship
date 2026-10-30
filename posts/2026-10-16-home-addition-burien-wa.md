@@ -20,6 +20,8 @@ Burien sits between Puget Sound and Sea-Tac Airport, with neighborhoods that run
 
 None of that means an addition is unusually hard here. It means the permit is decided as much by the lot as by the floor plan, and the homeowners who move fastest are the ones who map the site before they fall in love with a layout.
 
+![String lines and stakes marking an addition footprint in the backyard of a rambler in Burien, WA](../assets/images/posts/2026-10-16-burien-addition-footprint-7.webp "Mapping the lot comes first on a Burien, WA addition: setbacks, trees and slopes shape the footprint as much as the floor plan.")
+
 The Board of Project Stewardship's [Burien directory](../burien.html), [additions hub](../additions.html), [home addition planning guide](../home-addition-planning.html), and [King County overview](../king-county.html) give broader context. This guide stays with what the City and the state actually publish.
 
 ## Step one: confirm what is in scope for a permit
@@ -38,6 +40,8 @@ If the addition comes with a taller deck, a retaining wall above that height, or
 This is the step that surprises people. Burien's [Permit Application Information](https://www.burienwa.gov/business/community_development/permit_center/applications) page says completed utility applications must be approved by your utility provider *prior to* application submittal, and the certificates are uploaded with the permit on MyBuildingPermit. The [Residential Structures Submittal Checklist](https://cdnsm5-hosted.civiclive.com/UserFiles/Servers/Server_11045935/File/Business/Building%20&%20Construction/Permit%20Center/Submittal%20Checklists/Residential%20Structures%20Submittal%20Checklist.pdf) names them: water, fire hydrant, and sewer availability forms.
 
 So the first practical task is confirming which water and sewer providers serve your parcel and requesting their availability forms. The City's [Submittal Checklists](https://www.burienwa.gov/business/community_development/permit_center/submittal_checklists) page also lists a Septic and Private Water System Checklist for lots that are not on public sewer or water, and links to Seattle City Light's pages for finding an electrical service representative and applying for new or upgraded electric service — worth reading early if the addition will need a bigger service.
+
+![An open water meter box at the curb in front of a house in Burien, WA](../assets/images/posts/2026-10-16-burien-water-meter-box-8.webp "Burien, WA wants water, fire hydrant and sewer availability forms approved by the utility providers before an addition submittal goes in.")
 
 ## Step three: build the plan set the checklist describes
 
@@ -90,6 +94,8 @@ The checklist tells you what the City needs to see. A good scope also says how t
 - **Roof tie-in.** Whether the new roof ties into the existing plane or sits below it, and how valleys and step flashing are handled.
 - **Ventilation and heating.** How the addition is heated and ventilated, especially once the 500-square-foot energy and indoor air quality triggers apply.
 - **Drainage and erosion control.** Downspouts, footing drains, and storm tie-in shown on the site plan, plus TESC measures during excavation.
+
+![A perforated footing drain in gravel and silt fence beside a new addition foundation in Burien, WA](../assets/images/posts/2026-10-16-burien-footing-drain-9.webp "Footing drains, downspout routing and erosion control belong on the site plan for a Burien, WA addition, and new hard surface brings drainage review.")
 
 The Board's [addition cost factors](../addition-cost-factors.html) page explains which of those choices move a budget; this guide deliberately does not publish prices.
 
