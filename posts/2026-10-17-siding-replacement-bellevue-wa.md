@@ -12,7 +12,7 @@ slug: "siding-replacement-bellevue-wa"
 - **The exemption covers the siding, not everything around it.** Enlarging a window or door opening, adding a new one, or cutting into load-bearing framing is permit work, and the City's code says an exemption never authorizes work that violates its codes.
 - **Old siding has to be checked before it comes off.** The Puget Sound Clean Air Agency requires an asbestos survey before a renovation, and federal lead rules require firms paid to disturb paint in pre-1978 homes to be certified. Verify every bidder on [Washington L&I Verify](https://secure.lni.wa.gov/verify/).
 
-![A finished house clad in painted fiber-cement lap siding with a covered porch, evergreen trees in Bellevue](../assets/images/posts/2026-10-17-bellevue-siding-1.webp)
+![Painted lap siding meeting a wood corner board, with metal flashing at a window, on a house in Bellevue, WA](../assets/images/posts/2026-10-17-bellevue-siding-1.webp)
 
 ## Why siding in Bellevue deserves a real plan
 
@@ -86,7 +86,7 @@ https://www.youtube.com/watch?v=38DQRt4aS48
 
 Ask bidders which products they actually install and why, for your exposure, your trim style, and your budget.
 
-![Painted lap siding meeting a wood corner board, with a metal drip cap flashing over a window head in Bellevue](../assets/images/posts/2026-10-17-bellevue-siding-3.webp)
+![A finished two-story house clad in painted lap siding with a covered porch and evergreen trees in Bellevue, WA](../assets/images/posts/2026-10-17-bellevue-siding-3.webp)
 
 ## How to shortlist and verify siding contractors
 

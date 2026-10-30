@@ -12,13 +12,15 @@ slug: "kitchen-remodel-issaquah-wa"
 - Plumbing and mechanical ride with that remodel package when drawings are needed, but **electrical permits are issued by Washington L&I**, not the City — Issaquah is not on L&I's [city electrical permits list](https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections) ([submittal packet](https://www.issaquahwa.gov/DocumentCenter/View/10594/14-FINAL_UPLOAD-SFR-Interior-Remodel-Submittal-Requirements-1); [L&I electrical overview](https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/)).
 - Regional [MyBuildingPermit Tip Sheet 00](https://www.mybuildingpermit.com/sites/default/files/TS-00_Permits%20Required%20and%20Not%20Required_FINAL_6.11.26.pdf) says kitchen fixture replacements without plumbing-line changes often skip a building permit — while moving walls, adding fixtures, or altering plumbing and mechanical still need the City remodel path. Confirm jurisdiction first: Klahanie and Mirrormont are outside City limits ([Do I Need a Permit?](https://www.issaquahwa.gov/183/Do-I-Need-a-Permit)). Re-check every firm on [Washington L&I Verify](https://secure.lni.wa.gov/verify/).
 
-![A bright Eastside kitchen with white cabinets, a center island, and daylight from tall windows in Issaquah](../assets/images/posts/2026-10-13-issaquah-kitchen-1.webp)
+![A kitchen gutted to the framing with plumbing stub-outs, wiring and a range-hood duct during a remodel in Issaquah, WA](../assets/images/posts/2026-10-13-issaquah-kitchen-1.webp)
 
 ## Why Issaquah kitchens need their own permit map
 
 Issaquah sits where the Issaquah Alps meet the Eastside valley — Olde Town near Front Street, Squak Mountain and Talus hillside streets, Issaquah Highlands, and the plateau neighborhoods that look toward Sammamish. The housing stock mixes mid-century ranch houses, 1990s production tracts, and newer planned communities. Galley kitchens with recirculating hoods, undersized panel space, and closed walls between kitchen and living rooms show up in every era.
 
 Two early checks matter more than finish samples. First, confirm you are inside City of Issaquah limits. The City's [Do I Need a Permit?](https://www.issaquahwa.gov/183/Do-I-Need-a-Permit) page is explicit: **Klahanie** falls under the City of Sammamish Permit Center, and **Mirrormont** is unincorporated King County. Calling the wrong counter wastes weeks. Second, decide whether the job is finish-only or a true remodel that opens walls, moves plumbing, or adds circuits. That single decision sets the MyBuildingPermit path, the L&I electrical ticket, and how long you will be without a working sink.
+
+![A dated 1990s kitchen with oak cabinets and laminate counters before a remodel in Issaquah, WA](../assets/images/posts/2026-10-13-issaquah-kitchen-before-7.webp "Before an Issaquah, WA kitchen remodel, the first decision is whether the work is finish-only or a true remodel that opens walls, moves plumbing or adds circuits.")
 
 The Board of Project Stewardship's [Issaquah directory](../issaquah.html) and [kitchens](../kitchen.html) hub give broader market context. This guide stays on published City and state rules: how the remodel application is built, when Tip Sheet 00 exemptions still apply, why electrical is a separate L&I lane, and what to demand in a written contractor scope. For the regional sequencing picture, see the Board's [permits](../permits.html) page and [kitchen remodel planning](../kitchen-remodel-planning.html) guide.
 
@@ -61,7 +63,7 @@ The Remodel page also notes King County sewer-use certification when an accessor
 
 Inspections are requested through the MyBuildingPermit ecosystem; the regional inspection portal is at [inspection.mybuildingpermit.com](https://inspection.mybuildingpermit.com/). The City's Permitting page also points to status search, today's inspection list, and correction history through MyBuildingPermit.
 
-![Kitchen gutted to open framing with plumbing stub-outs, electrical boxes, and a range-hood duct in Issaquah](../assets/images/posts/2026-10-13-issaquah-kitchen-2.webp)
+![New gray cabinets going in before the countertops, with an open electrical panel in the wall, in an Issaquah, WA kitchen remodel](../assets/images/posts/2026-10-13-issaquah-kitchen-2.webp)
 
 ## Electrical is L&I's lane in Issaquah
 
@@ -74,6 +76,8 @@ In practice, almost every real kitchen remodel touches wiring: countertop recept
 Use L&I's [electrical permits, fees, and inspections](https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/) overview for the state path, and confirm the electrician — not only the general contractor — is registered on [Washington L&I Verify](https://secure.lni.wa.gov/verify/). The remodel packet also notes that a City of Issaquah business license is required for anyone operating a business in the city; ask for that number before you write a deposit check.
 
 ## Moisture, ventilation, and Eastside kitchen details
+
+![A range-hood exhaust wall cap sealed into the siding outside a remodeled kitchen in Issaquah, WA](../assets/images/posts/2026-10-13-issaquah-range-hood-wall-cap-8.webp "A ducted range hood in an Issaquah, WA kitchen ends at a sealed wall cap outdoors, carrying cooking moisture out of the house through a cool, damp winter.")
 
 Issaquah winters are cool and damp. A kitchen that looks finished in October can still fail quietly if the exhaust path, splash zones, and under-sink moisture details were treated as afterthoughts. Practical points that belong in the scope before demolition:
 
@@ -99,7 +103,7 @@ Manufacturer references commonly evaluated on Issaquah-scale kitchen remodels (r
 
 Brand names are a starting point. Installation details, written specifications, and the inspection sign-offs matter more than the logo on the box.
 
-![Finished kitchen island with seating, pendant lighting, and a vented cooktop wall in Issaquah](../assets/images/posts/2026-10-13-issaquah-kitchen-3.webp)
+![A long wood-fronted counter with a white top against a tiled wall in a finished Issaquah, WA kitchen](../assets/images/posts/2026-10-13-issaquah-kitchen-3.webp)
 
 ## How to shortlist and verify contractors
 
@@ -109,6 +113,8 @@ Ask each bidder for recent Issaquah or Eastside kitchen projects, photos of roug
 - Who pulls the MyBuildingPermit remodel application and who pulls the L&I electrical permit.
 - Whether water-meter sizing, fixture counts, and utility forms are in the submittal.
 - How long the kitchen will be offline and what temporary cooking setup is included.
+
+![A temporary kitchen with a microwave and hot plate on a folding table during a kitchen remodel in Issaquah, WA](../assets/images/posts/2026-10-13-issaquah-temporary-kitchen-9.webp "Ask Issaquah, WA kitchen bidders how long the kitchen will be offline and what temporary cooking setup is included.")
 
 Walk through the Board's [verify a contractor](../verify-contractor.html) checklist. Use [Washington L&I Verify](https://secure.lni.wa.gov/verify/) for the general contractor and every electrical or plumbing specialty license on the bid. Confirm the City business license the remodel packet requires. A firm that cannot explain why Issaquah electrical is L&I — while Kirkland or Sammamish electrical is often city-issued — has not done its homework on your parcel.
 

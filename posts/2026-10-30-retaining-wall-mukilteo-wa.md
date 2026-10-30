@@ -18,6 +18,8 @@ slug: "retaining-wall-mukilteo-wa"
 
 Mukilteo is built on hills. Houses in Old Town climb the slope above the ferry landing, streets around Olympus Terrace and Harbour Pointe step down toward the gulches and the bluffs over Possession Sound, and plenty of lots were cut and filled when they were first built. That gives homeowners views, and it gives them grade changes: a backyard that falls away from the house, a driveway cut into the hill, a side yard too steep to mow.
 
+![A steep backyard falling away from a house on a sloped lot in Mukilteo, WA before a retaining wall](../assets/images/posts/2026-10-30-mukilteo-sloped-yard-before-4.webp "Many Mukilteo, WA lots fall away from the house, which leaves a backyard too steep to use until a wall creates level ground.")
+
 A retaining wall is how you turn that slope into usable ground, whether for a flat lawn, a patio, a garden terrace, a wider driveway or a path to the back door. It is also one of the most underestimated projects in residential construction. A wall holds back soil that wants to move downhill, and in the Pacific Northwest that soil is often saturated for months at a time. The difference between a wall that lasts decades and one that leans, bulges or collapses usually comes down to three things: whether it was designed for what it actually holds back, whether it has a proper base, and whether water can get out from behind it.
 
 This guide walks through the questions in the order a builder works through them: permit and critical areas first, then engineering, drainage, materials, construction, the property line, and hiring. If your project is part of a larger remodel, the Board's [Mukilteo home addition guide](../posts/2026-09-28-home-addition-mukilteo-wa.html) and the [Mukilteo page](../mukilteo.html) cover other local work.
@@ -31,6 +33,8 @@ The City of Mukilteo answers this directly on its [Do You Need a Permit for That
 
 If the answer to both is no, the City says no permit is required. If the answer to either is yes, you need an engineering permit. Read the second question carefully, because on a sloped Mukilteo lot it often decides the answer. A wall that is under 4 feet tall but holds back a hillside above it, carries a driveway or parking area, sits near the house foundation, or is one of a pair of stepped terraces counts as load bearing under the City's description. Builders call that extra weight above the wall a surcharge, and it is exactly what turns a simple garden wall into an engineered structure.
 
+![A block retaining wall holding up the edge of a driveway on a hillside lot in Mukilteo, WA](../assets/images/posts/2026-10-30-mukilteo-driveway-wall-5.webp "Under 4 feet is not the whole test in Mukilteo, WA: the City counts a wall that supports a driveway as load bearing, which calls for an engineering permit.")
+
 Two more points from the same City page are worth knowing:
 
 - **Fences on walls.** When a fence sits on top of a retaining wall, Mukilteo adds the fence and wall heights together when measuring the fence. Plan the wall and any guard or fence at the top together.
@@ -43,6 +47,8 @@ Applications go through the City's online [permit portal](https://ci-mukilteo-wa
 Mukilteo's bluffs and ravines are why critical-areas rules matter here. The City's [Known Critical Areas map](https://mukilteowa.gov/DocumentCenter/View/21668/Known-Critical-Areas-PDF) shows mapped wetlands, streams and landslide hazards, and it carries two warnings worth repeating: the map is general guidance only, because the precise location of critical areas and their buffers is determined in the field by a qualified professional, and these areas are highly regulated under state law, with serious and costly penalties for harming them. The City asks owners to talk with the Planning Department before removing vegetation or placing structures in these areas.
 
 The rules are also changing. The City's [Building Permits page](https://mukilteowa.gov/207/Building-Permits) notes that the City Council adopted extensive updates to the critical area regulations on March 23, 2026 (Ord. 1533), and that the online code may take a few months to reflect them. The page points to the "2026 Critical Areas Ordinance Update" links in the City's document library for the latest regulations. If your lot is near a mapped landslide hazard, a ravine or a bluff, ask the Planning Department which version applies and what review your wall triggers before you design anything.
+
+![A steep wooded ravine slope at the back edge of a residential yard in Mukilteo, WA](../assets/images/posts/2026-10-30-mukilteo-ravine-slope-6.webp "Lots near Mukilteo, WA ravines and bluffs may sit in mapped landslide-hazard areas, where the exact boundary is set in the field by a qualified professional.")
 
 What that usually means in practice:
 
@@ -77,6 +83,8 @@ A sound drainage plan has a few parts:
 
 Where that water ends up is a City question, not just a construction detail. Mukilteo's [Engineering, Stormwater and Development Regulations page](https://mukilteowa.gov/252/Engineering-Stormwater-Development-Regul) explains that Public Works oversees new connections, reconnections and repairs to storm drainage, and lists the City's development standards and the 2024 Stormwater Management Manual for Western Washington. On a slope, dumping concentrated water over a bluff or onto a neighbor's lot can create the very slide you were trying to prevent. Make sure the outlet and any stormwater connection are on the plans. The Board's [Kenmore yard and foundation drainage guide](../posts/2026-10-27-yard-foundation-drainage-kenmore-wa.html) covers downspouts, grading and drain pipe in more depth.
 
+![A drain pipe daylighting onto a rock splash pad at the low end of a block retaining wall in Mukilteo, WA](../assets/images/posts/2026-10-30-mukilteo-wall-drain-outlet-7.webp "The drain behind a Mukilteo, WA retaining wall needs a real outlet, and where that water discharges belongs on the plans.")
+
 ## Block, concrete or timber
 
 Homeowners usually choose among three families of walls:
@@ -86,6 +94,8 @@ Homeowners usually choose among three families of walls:
 - **Timber.** Pressure-treated timber or tie walls cost less up front and look at home in a garden, but they have a shorter life in wet ground and are a poor fit for loaded walls on steep lots. If you have an old timber wall that is rotting or leaning, plan its replacement as a new wall, not a patch.
 
 Large precast block systems also exist for taller or heavier walls, usually set with equipment and designed by an engineer.
+
+![An old timber retaining wall leaning and rotting in a wet backyard in Mukilteo, WA](../assets/images/posts/2026-10-30-mukilteo-failing-timber-wall-8.webp "A rotting or leaning timber wall in a Mukilteo, WA yard is usually replaced as a new wall, not patched.")
 
 ## How the wall goes in
 
@@ -113,6 +123,8 @@ Mukilteo's slopes get months of steady rain, and the soil behind a wall can stay
 - **Schedule earthwork with the weather.** Excavating a slope in the middle of the wet season raises the risk of sloughing and muddy runoff. Ask your contractor how they will protect open cuts and stockpiles.
 - **Compaction needs workable soil.** Saturated backfill cannot be compacted properly. A good crew will reject soil that is too wet or replace it with suitable fill.
 - **Erosion control is not optional.** Silt fence, covered stockpiles and protected drains keep mud off the street and out of storm drains, and the City's checklist lists a temporary erosion and sediment control plan where one is required.
+
+![Silt fence and a covered soil stockpile on an excavated slope during retaining wall work in Mukilteo, WA](../assets/images/posts/2026-10-30-mukilteo-erosion-control-9.webp "Wet-season erosion control on a Mukilteo, WA wall job: silt fence, covered stockpiles and protected drains keep mud off the street and out of storm drains.")
 
 ## Property lines, neighbors and the survey
 
