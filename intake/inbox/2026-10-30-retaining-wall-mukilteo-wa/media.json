@@ -1,0 +1,44 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-10-30-mukilteo-retaining-wall-1.webp",
+      "repo_path": "assets/images/posts/2026-10-30-mukilteo-retaining-wall-1.webp",
+      "alt": "Retaining wall in Mukilteo, WA: crew building a segmental block wall on a sloped backyard, with drain rock and geogrid behind it and perforated drain pipe laid out \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "093957652d5471aea23bbd9365bee407",
+      "source": "Newly generated image (built-in image generator, 2026-10-30), source gen-1.jpg 1280x720, resized to 1600x900 webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-30-mukilteo-retaining-wall-2.webp",
+      "repo_path": "assets/images/posts/2026-10-30-mukilteo-retaining-wall-2.webp",
+      "alt": "Retaining wall in Mukilteo, WA: first course of block set level on a compacted base with a perforated drain pipe wrapped in filter fabric in drain rock \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "4030f1ccf77172ce7f5ecb02bb7c8942",
+      "source": "Newly generated image (built-in image generator, 2026-10-30), source gen-2.jpg 1280x720, resized to 1600x900 webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-30-mukilteo-retaining-wall-3.webp",
+      "repo_path": "assets/images/posts/2026-10-30-mukilteo-retaining-wall-3.webp",
+      "alt": "Retaining wall in Mukilteo, WA: finished terraced hillside yard with two low block walls, lawn and fern beds and a saltwater view \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "057f447280ed755bb12a63a5df51a295",
+      "source": "Newly generated image (built-in image generator, 2026-10-30), source gen-3.jpg 1280x720, resized to 1600x900 webp"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "pNPpXezR3Ic",
+      "url": "https://www.youtube.com/watch?v=pNPpXezR3Ic",
+      "title": "Build an AB Reinforced Retaining Wall with Geogrid Reinforcement - Installation Steps",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "3 newly generated images (built-in generator), 0 regraded stills, 0 paid media."
+}

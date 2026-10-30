@@ -1,0 +1,19 @@
+{
+  "submission_id": "2026-10-30-retaining-wall-mukilteo-wa",
+  "idempotency_key": "sha256:d7eec61a07e62ac8083a6e8f6d697feaf916d582843558dab0dd46a743eec4ce",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-10-30T10:53:25Z",
+  "outputs": [
+    "assets/images/posts/2026-10-30-mukilteo-retaining-wall-1.webp",
+    "assets/images/posts/2026-10-30-mukilteo-retaining-wall-2.webp",
+    "assets/images/posts/2026-10-30-mukilteo-retaining-wall-3.webp",
+    "posts/2026-10-30-retaining-wall-mukilteo-wa.md",
+    "posts/2026-10-30-retaining-wall-mukilteo-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 87
+}

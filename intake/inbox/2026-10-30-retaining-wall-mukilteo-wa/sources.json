@@ -1,0 +1,110 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Mukilteo",
+    "service": "Retaining wall",
+    "slug": "retaining-wall-mukilteo-wa"
+  },
+  "sources": [
+    {
+      "url": "https://mukilteowa.gov/210/Do-You-Need-a-Permit-for-That",
+      "title": "https://mukilteowa.gov/210/Do-You-Need-a-Permit-for-That",
+      "retrieved": "2026-10-30",
+      "http_status": 200,
+      "supports": "City of Mukilteo: retaining wall over 4 ft or load bearing needs engineering permit; fence+wall heights added; tree permits in critical areas"
+    },
+    {
+      "url": "https://mukilteowa.gov/207/Building-Permits",
+      "title": "https://mukilteowa.gov/207/Building-Permits",
+      "retrieved": "2026-10-30",
+      "http_status": 200,
+      "supports": "City of Mukilteo Building Permits; municipal code titles; critical area regulation update adopted Mar 23, 2026 (Ord. 1533)"
+    },
+    {
+      "url": "https://ci-mukilteo-wa.smartgovcommunity.com/Public/Home",
+      "title": "https://ci-mukilteo-wa.smartgovcommunity.com/Public/Home",
+      "retrieved": "2026-10-30",
+      "http_status": 200,
+      "supports": "City of Mukilteo online permit portal (SmartGov)"
+    },
+    {
+      "url": "https://ci-mukilteo-wa.smartgovcommunity.com/Public/DocumentsView/Download/fcd3b371-4eb3-49e1-99de-b0d7015df7b2",
+      "title": "https://ci-mukilteo-wa.smartgovcommunity.com/Public/DocumentsView/Download/fcd3b371-4eb3-49e1-99de-b0d7015df7b2",
+      "retrieved": "2026-10-30",
+      "http_status": 200,
+      "supports": "Mukilteo engineering permit checklist: geotechnical report or letter (MMC 17.52A.040), structural plans for engineered walls, drainage site plan, TESC plan"
+    },
+    {
+      "url": "https://mukilteowa.gov/DocumentCenter/View/21668/Known-Critical-Areas-PDF",
+      "title": "https://mukilteowa.gov/DocumentCenter/View/21668/Known-Critical-Areas-PDF",
+      "retrieved": "2026-10-30",
+      "http_status": 200,
+      "supports": "Mukilteo Known Critical Areas map: landslide hazards; general guidance only, field-determined by qualified professional; talk with Planning"
+    },
+    {
+      "url": "https://mukilteowa.gov/252/Engineering-Stormwater-Development-Regul",
+      "title": "https://mukilteowa.gov/252/Engineering-Stormwater-Development-Regul",
+      "retrieved": "2026-10-30",
+      "http_status": 200,
+      "supports": "Mukilteo Public Works storm drainage oversight; development standards; 2024 Stormwater Management Manual for Western Washington"
+    },
+    {
+      "url": "https://www.codepublishing.com/WA/Mukilteo/",
+      "title": "https://www.codepublishing.com/WA/Mukilteo/",
+      "retrieved": "2026-10-30",
+      "http_status": 200,
+      "supports": "Mukilteo Municipal Code online"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "retrieved": "2026-10-30",
+      "http_status": 200,
+      "supports": "L&I hiring a contractor guidance"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-10-30",
+      "http_status": 200,
+      "supports": "L&I Verify"
+    },
+    {
+      "url": "https://www.allanblock.com/",
+      "title": "https://www.allanblock.com/",
+      "retrieved": "2026-10-30",
+      "http_status": 200,
+      "supports": "Allan Block segmental retaining wall systems (material)"
+    },
+    {
+      "url": "https://www.keystonewalls.com/",
+      "title": "https://www.keystonewalls.com/",
+      "retrieved": "2026-10-30",
+      "http_status": 200,
+      "supports": "Keystone Retaining Walls segmental units (material)"
+    },
+    {
+      "url": "https://www.redi-rock.com/",
+      "title": "https://www.redi-rock.com/",
+      "retrieved": "2026-10-30",
+      "http_status": 200,
+      "supports": "Redi-Rock large precast retaining wall blocks (material)"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=pNPpXezR3Ic",
+      "title": "https://www.youtube.com/watch?v=pNPpXezR3Ic",
+      "retrieved": "2026-10-30",
+      "http_status": 200,
+      "supports": "YouTube: Build an AB Reinforced Retaining Wall with Geogrid Reinforcement - Installation Steps (Allan Block), oEmbed 200"
+    }
+  ],
+  "dropped": [
+    "WAC 51-51-0105 (no WA amendment page; returns chapter index) - no IRC exemption section number cited",
+    "mukilteo.municipal.codes (404)",
+    "belgard.com (403)",
+    "mutualmaterials.com (403)",
+    "versa-lok.com, tensar.com (no response)",
+    "adspipe/ndspro/solmax (already in rotation/repo)",
+    "all fees/prices/geogrid lengths/height charts"
+  ]
+}

@@ -54,6 +54,7 @@ Base: `https://boardofprojectstewardship.com/`
 | `blog/rss.xml` | Blog RSS feed |
 | `news/rss.xml` | News RSS feed |
 | `404.html` | Branded Board 404 |
+| `posts/2026-10-30-retaining-wall-mukilteo-wa.html` | Retaining Wall Mukilteo WA — When a Wall Needs a Permit, Steep-Slope Critical Areas, Drainage and Engineering |
 | `posts/2026-10-29-load-bearing-wall-removal-kirkland-wa.html` | Load-Bearing Wall Removal Kirkland WA — Permits, Beams, Engineering and Open-Concept Remodels |
 | `posts/2026-10-28-aging-in-place-remodel-edmonds-wa.html` | Aging-in-Place Remodel Edmonds WA — Permits, Curbless Showers, Grab-Bar Blocking, Wider Doors and Entry Ramps |
 | `posts/2026-10-27-yard-foundation-drainage-kenmore-wa.html` | Yard and Foundation Drainage Kenmore WA — French Drains, Downspout Tightlines, Grading and Where the Water Can Go |
