@@ -1,0 +1,54 @@
+{
+  "producer": "openclaw",
+  "agent": "seo-specialist",
+  "slug": "retaining-wall-mukilteo-wa",
+  "title": "Retaining Wall Mukilteo WA \u2014 When a Wall Needs a Permit, Steep-Slope Critical Areas, Drainage and Engineering",
+  "description": "A Mukilteo homeowner's guide to building a retaining wall on a sloped lot: when the City requires an engineering permit, how landslide-hazard critical areas and geotechnical reports come in, drainage behind the wall, block, concrete and timber options, and how to vet the contractor.",
+  "category": "Guides",
+  "keywords": [
+    "retaining wall Mukilteo WA",
+    "retaining wall permit Mukilteo",
+    "steep slope retaining wall Snohomish County",
+    "retaining wall drainage",
+    "segmental block retaining wall geogrid"
+  ],
+  "outline": [
+    "Key Takeaways",
+    "Why so many Mukilteo yards need a wall",
+    "When a Mukilteo retaining wall needs a permit",
+    "Steep slopes and landslide-hazard critical areas",
+    "Engineering: what the designer is checking",
+    "Drainage: where the water goes",
+    "Block, concrete or timber",
+    "How the wall goes in",
+    "Rain, saturated soils and the wet season",
+    "Property lines, neighbors and the survey",
+    "Materials Worth Knowing",
+    "How to shortlist and verify a retaining wall contractor",
+    "Where Pacific Pro Group fits",
+    "Next steps for a Mukilteo retaining wall"
+  ],
+  "search_intent": "A Mukilteo homeowner with a sloped lot wants to know when a retaining wall needs a City engineering permit, how landslide-hazard critical areas and geotechnical reports apply, how to drain the wall, which wall type fits, and how to vet the contractor.",
+  "local_angles": [
+    "City of Mukilteo 'Do You Need a Permit for That?': engineering permit if over 4 ft or load bearing (tiered, holding slopes, supporting driveways/buildings)",
+    "Fence on retaining wall: heights added together",
+    "Known Critical Areas map: landslide hazards, field-determined by qualified professional",
+    "Critical area regulations updated Mar 23, 2026 (Ord. 1533)",
+    "Engineering permit checklist: geotech report/letter per MMC 17.52A.040, structural plans for engineered walls, drainage site plan, TESC",
+    "Public Works stormwater oversight; 2024 Stormwater Management Manual for Western Washington",
+    "Old Town / Olympus Terrace / Harbour Pointe slopes, gulches and bluffs"
+  ],
+  "internal_links": [
+    "../mukilteo.html",
+    "../permits.html",
+    "../verify-contractor.html",
+    "../hiring-a-contractor.html",
+    "../bonds-and-insurance.html",
+    "../red-flags-hiring.html"
+  ],
+  "notes": "Box-authored fallback brief. PPG only as Board #1 -> https://pacificprogroup.com/.",
+  "generation": {
+    "agent": "box-authored",
+    "mode": "box-fallback"
+  }
+}
