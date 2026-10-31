@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-10-31-wood-stove-fireplace-insert-mountlake-terrace-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-10-31T10:55:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Wood Stove and Fireplace Insert Replacement Mountlake Terrace WA \u2014 Permits, Chimney Liners, Clearances and Burn Bans",
+    "date": "2026-10-31",
+    "slug": "wood-stove-fireplace-insert-mountlake-terrace-wa",
+    "description": "A Mountlake Terrace homeowner's guide to replacing an old wood stove or fireplace insert: the City mechanical permit, wood, pellet and gas insert options, stainless chimney liners, hearth and clearance checks, carbon monoxide alarms, burn bans, and how to vet the installer.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 offline; no 2026-10-31 packets. Topic: wood stove and fireplace insert replacement (wood, pellet, gas inserts; chimney liners; hearth/clearances; CO alarms; burn bans), Mountlake Terrace WA (Snohomish County), not in the last 14 posts. Permit basis: City of Mountlake Terrace Mechanical and Plumbing Checklist (Fireplace/Stove, Vents, Gas Piping) and Construction Permit FAQ (appliance vents for chimneys as mechanical permit example). Ecology wood stove page, WAC 173-433-100/-150, Ecology burn bans, clean air agency burn ban pages, RCW 19.27.530 CO alarms, L&I pages cited (200). No clearance numbers, fees or prices. Producer role fields kept per intake contract."
+}
