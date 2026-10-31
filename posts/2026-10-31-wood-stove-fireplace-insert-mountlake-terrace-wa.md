@@ -20,6 +20,8 @@ Walk through almost any Mountlake Terrace neighborhood in late October and you c
 
 That combination is why stove and insert replacement is one of the most practical fall projects in south Snohomish County. A newer certified wood insert, a pellet insert or a gas insert can turn a drafty, smoky fireplace into a controlled heat source. It can also keep you burning legally on more winter days, because the air quality rules that apply here treat certified and uncertified devices very differently.
 
+![An open brick fireplace with a soot-darkened firebox in a mid-century living room in Mountlake Terrace, WA](../assets/images/posts/2026-10-31-mountlake-terrace-open-fireplace-before-4.webp "Many Mountlake Terrace, WA homes still have an open masonry fireplace or an older stove, which is where most replacement projects start.")
+
 This guide walks through the decisions in the order a careful installer works through them: permit first, then the fuel choice, the chimney and liner, the hearth and clearances, carbon monoxide safety, burn bans, and finally how to vet the company doing the work. If the fireplace is part of a larger remodel, the Board's [Mountlake Terrace home addition guide](../posts/2026-09-25-home-addition-mountlake-terrace-wa.html), its [guide to hiring a remodeler in Mountlake Terrace](../posts/2026-09-29-hiring-a-remodeler-mountlake-terrace-wa.html) and the [Mountlake Terrace page](../mountlake-terrace.html) cover other local work.
 
 ## When a Mountlake Terrace stove or insert needs a permit
@@ -43,6 +45,8 @@ Most Mountlake Terrace replacements fall into one of three families:
 - **Pellet stoves and inserts.** Pellet units feed compressed pellets from a hopper with an electric auger and blower, so they need power and a vent the manufacturer lists. They are easy to run day to day, but they stop when the power goes out unless you plan a backup. Under the burn ban rules described below, pellet stoves are treated like other solid-fuel devices in a Stage 2 ban.
 - **Gas inserts and gas stoves.** A sealed, direct-vent gas insert gives heat at the push of a button, works through burn bans, and needs no wood storage. It needs a gas line and a gas permit, a vent kit the manufacturer specifies, and in most cases power for the controls. If your house has no gas service yet, ask your gas utility about service first.
 
+![A freestanding pellet stove on a tile hearth pad in a family room in Mountlake Terrace, WA](../assets/images/posts/2026-10-31-mountlake-terrace-pellet-stove-5.webp "Pellet stoves in Mountlake Terrace, WA homes feed from a hopper with an electric auger and blower, so they need power and a vent the manufacturer lists.")
+
 There is no single right answer. Owners who want heat that keeps running in a winter power outage often favor wood. Owners who mostly want ambience with a thermostat often favor gas. Whatever you choose, pick a specific make and model before the permit is filed, because the installation manual for that model sets the venting, the hearth and the clearances the inspector will check.
 
 ## The chimney and the liner
@@ -51,12 +55,16 @@ The chimney is where most stove and insert projects get complicated. Many older 
 
 That is why most insert installations run a continuous liner, usually flexible or rigid stainless steel, from the insert's flue collar to the top of the chimney, with a top plate or flashing and a cap. Some manufacturers call for an insulated liner. What matters is that the liner, connector and termination are the ones the insert's installation instructions list for that model, and that the size matches the insert's outlet.
 
+![A stainless steel liner being fed down a brick chimney from the roof of a house in Mountlake Terrace, WA](../assets/images/posts/2026-10-31-mountlake-terrace-chimney-liner-6.webp "Most insert installs in Mountlake Terrace, WA run a continuous stainless liner from the insert's flue collar to the top of the chimney.")
+
 Before any new appliance goes in, ask for:
 
 - **A chimney inspection and sweep.** Have the existing flue cleaned and inspected for cracked tiles, missing mortar, a damaged crown and old creosote. The findings decide whether the chimney can be relined or needs masonry repair first.
 - **The liner specification in writing.** Material, diameter, whether it is insulated, and the brand, so you can match it against the insert's manual.
 - **A plan for the damper and smoke chamber.** Installers often remove or permanently open the old damper and seal the opening around the liner with a block-off plate so warm air does not escape up the old flue.
 - **The roof work.** The liner termination, cap and any flashing touch the roof. If your roof is near the end of its life, the Board's [Shoreline roof replacement guide](../posts/2026-10-23-roof-replacement-shoreline-wa.html) covers flashing and the other details to settle in that scope, so coordinate the two jobs.
+
+![A flashlight on cracked clay flue tiles and creosote inside a masonry chimney in Mountlake Terrace, WA](../assets/images/posts/2026-10-31-mountlake-terrace-flue-inspection-7.webp "A sweep and inspection of a Mountlake Terrace, WA chimney looks for cracked tiles, missing mortar and old creosote before a new appliance goes in.")
 
 Freestanding stoves in a room without a masonry chimney use a listed chimney system instead: stovepipe from the stove to the ceiling, then a factory-built chimney through the attic and roof with its own support, firestop and roof flashing. Again, the brand and model must be the ones the stove's manual allows.
 
@@ -88,6 +96,8 @@ A few operating habits keep a new stove safe and clean:
 - **Watch the chimney.** Ecology also notes that you cannot create chimney smoke above 20 percent opacity for more than six consecutive minutes. Thick smoke usually means wet wood or a starved fire.
 - **Keep it inspected.** Have the chimney and liner inspected and swept on the schedule the manufacturer and your sweep recommend, and fix any damaged door gaskets or glass right away.
 
+![Split firewood stacked off the ground under a small roofed woodshed beside a house in Mountlake Terrace, WA](../assets/images/posts/2026-10-31-mountlake-terrace-dry-firewood-8.webp "Burn only dry, untreated firewood; a covered stack kept off the ground stays drier through a wet Mountlake Terrace, WA fall.")
+
 ## Burn bans and the wet season in Snohomish County
 
 Fall and winter in Mountlake Terrace bring two things at once: the months you most want a fire, and the stagnant, foggy weather that traps wood smoke near the ground. Air quality burn bans for King, Kitsap, Pierce and Snohomish counties are issued by the Puget Sound Clean Air Agency, and its [About Air Quality Burn Bans page](https://pscleanair.gov/172/About-Air-Quality-Burn-Bans) explains the two stages:
@@ -106,6 +116,8 @@ Ecology's [wood stove page](https://www.ecology.wa.gov/air-climate/air-quality/s
 - **Selling, exchanging or giving away an uncertified wood stove is illegal** in Washington under [WAC 173-433-100](https://apps.leg.wa.gov/WAC/default.aspx?cite=173-433-100). Do not list the old unit online or leave it on the curb for someone else to install.
 - **Recycling is the recommended route.** Ecology encourages owners to recycle an uncertified stove.
 - **Stoves are certified when they are manufactured.** A homeowner cannot apply to certify an old stove later, so look for the certification label or documentation on the unit itself.
+
+![An old cast-iron wood stove strapped to a hand truck in a garage after removal from a Mountlake Terrace, WA home](../assets/images/posts/2026-10-31-mountlake-terrace-old-stove-removal-9.webp "Washington makes it illegal to sell or give away an uncertified wood stove, so an old unit pulled from a Mountlake Terrace, WA home should be recycled.")
 
 Ecology also notes that removing an uncertified wood stove is not required when you buy or sell a house. If you are buying in Mountlake Terrace and the house has an older stove, ask for its label and documentation, and budget for an inspection before the first fire.
 

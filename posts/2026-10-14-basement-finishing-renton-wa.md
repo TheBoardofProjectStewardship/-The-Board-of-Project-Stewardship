@@ -12,13 +12,15 @@ slug: "basement-finishing-renton-wa"
 - **Electrical, plumbing, and mechanical are separate permits** from the building remodel. Over-the-counter trades run on the City's [Online Permit Portal (CASSP / Civic Access)](https://www.rentonwa.gov/City-Services/Permit-Services/Online-Permit-Portal); Renton issues its own electrical permits and appears on Washington L&I's [city electrical list](https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections) ([Building Permits FAQ](https://www.rentonwa.gov/City-Services/Permit-Services/Building-Fire-and-Signs/Building-Permits-FAQ)).
 - Before demolition, plan an **asbestos survey** under Puget Sound Clean Air and L&I rules the City cites, and if the house is on septic and you are adding a bedroom or bath, obtain King County Environmental Health approval first — then re-check every firm on [Washington L&I Verify](https://secure.lni.wa.gov/verify/) ([Residential Interior Remodels](https://www.rentonwa.gov/City-Services/Permit-Services/Building-Fire-and-Signs/Residential-Interior-Remodels); [Puget Sound Clean Air Agency](https://www.pscleanair.gov/)).
 
-![A finished lower-level living room with daylight and seating in Renton](../assets/images/posts/2026-10-14-renton-basement-1.webp)
+![A finished basement family room with carpet, a sofa and daylight from a window well in Renton, WA](../assets/images/posts/2026-10-14-renton-basement-family-room-1.webp)
 
 ## Why Renton basements need their own permit map
 
 Renton's housing stock stretches from Kennydale hillside daylight basements and Fairwood ranch houses to Highlands tracts and older neighborhoods near the Cedar River. Many of those lower levels started as storage, laundry, or unfinished recreation space. Finishing them into a family room, bedroom, office, or bathroom looks like "just drywall" until you open the ceiling, add circuits, move plumbing, or cut an egress opening.
 
 Two early checks save weeks. First, confirm the parcel is inside City of Renton limits with the City's COR Maps tool described on the [Building Permits FAQ](https://www.rentonwa.gov/City-Services/Permit-Services/Building-Fire-and-Signs/Building-Permits-FAQ) — unincorporated King County addresses near the city edge follow a different desk. Second, decide whether the scope is cosmetic paint and flooring in an already-permitted finished space, or a true conversion that adds walls, rooms, fixtures, or trade work. Renton Municipal Code, as quoted on the FAQ, requires a permit when you construct, enlarge, alter, repair, convert, or change occupancy, or when you install or alter regulated electrical, gas, mechanical, or plumbing systems ([Building Permits FAQ](https://www.rentonwa.gov/City-Services/Permit-Services/Building-Fire-and-Signs/Building-Permits-FAQ); [Permit Services](https://www.rentonwa.gov/City-Services/Permit-Services)).
+
+![An unfinished basement with bare concrete walls and a laundry corner before finishing in Renton, WA](../assets/images/posts/2026-10-14-renton-unfinished-basement-before-7.webp "An unfinished Renton, WA basement goes through the City's own interior remodel path once the parcel is confirmed inside City limits.")
 
 The Board of Project Stewardship's [Renton directory](../renton.html) and [permits](../permits.html) hub give broader market context. This guide stays on published City and state rules: how the interior remodel application is built, why trades are separate tickets on Civic Access, what asbestos and septic notes block early, and how moisture and egress belong in the written scope before framing starts. Related planning for expanding living area lives on the Board's [additions](../additions.html) page.
 
@@ -47,9 +49,9 @@ The person signing the application must be the owner or the person responsible f
 
 Do not start work before the permit is issued and on site. The FAQ is explicit: work may not legally begin before the permit is obtained ([Building Permits FAQ](https://www.rentonwa.gov/City-Services/Permit-Services/Building-Fire-and-Signs/Building-Permits-FAQ)).
 
-![Open framing and unfinished lower-level space ready for insulation, electrical rough-in, and City of Renton](../assets/images/posts/2026-10-14-renton-basement-2.webp)
+![New stud walls framing a bedroom and hallway on the concrete slab of an unfinished basement in Renton, WA](../assets/images/posts/2026-10-14-renton-basement-framing-2.webp)
 
-![An electrician wiring outlet boxes in new stud walls during a Renton basement finishing project — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-14-renton-basement-4.webp)
+![An electrician wiring outlet boxes in new stud walls during a Renton basement finishing project](../assets/images/posts/2026-10-14-renton-basement-4.webp)
 
 ## Separate trade permits on the City portal
 
@@ -68,11 +70,13 @@ Two Renton-specific notes stop basement projects before framing:
 - **Asbestos survey.** Before renovation or demolition, Puget Sound Clean Air Agency and Washington L&I rules require an asbestos survey to determine whether asbestos-containing materials are in the work area. The remodel page links [Puget Sound Clean Air Agency](https://www.pscleanair.gov/) and L&I asbestos resources — treat the survey as a pre-demolition deliverable, not a punch-list item ([Residential Interior Remodels](https://www.rentonwa.gov/City-Services/Permit-Services/Building-Fire-and-Signs/Residential-Interior-Remodels)).
 - **Septic systems and new bedrooms or baths.** If the property is on a private on-site septic system and the interior work creates or adds a bedroom or bathroom, you must obtain approval from King County Environmental Health **before** City approval and include that approval letter with the permit submittal ([Residential Interior Remodels](https://www.rentonwa.gov/City-Services/Permit-Services/Building-Fire-and-Signs/Residential-Interior-Remodels)). Daylight basements marketed as "bonus rooms" that become sleeping rooms often trip this rule.
 
+![Old square floor tiles and a textured ceiling in an older basement before an asbestos survey in Renton, WA](../assets/images/posts/2026-10-14-renton-basement-old-floor-tile-8.webp "Old floor tile, mastic and ceiling texture in an older Renton, WA basement are the kind of materials an asbestos survey checks before demolition.")
+
 Also confirm licensing before issuance: the City requires a **State of Washington contractor license** and a **City of Renton business license** prior to issuing permits ([Building Permits FAQ](https://www.rentonwa.gov/City-Services/Permit-Services/Building-Fire-and-Signs/Building-Permits-FAQ)). Owner-builders may perform work on their own property after permits are in hand, with a notable electrical exception — homeowners may do electrical work themselves only if they have resided in the house for at least three years ([Building Permits FAQ](https://www.rentonwa.gov/City-Services/Permit-Services/Building-Fire-and-Signs/Building-Permits-FAQ)).
 
 Construction hours for single-family remodel work in residential areas are restricted (weekdays earlier than weekends); check the FAQ before you schedule noisy demolition or late deliveries ([Building Permits FAQ](https://www.rentonwa.gov/City-Services/Permit-Services/Building-Fire-and-Signs/Building-Permits-FAQ)).
 
-![A new basement egress window with a metal window well and ladder beside a Renton home — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-10-14-renton-basement-5.webp)
+![A new basement egress window with a metal window well and ladder beside a Renton home](../assets/images/posts/2026-10-14-renton-basement-5.webp)
 
 ## Moisture, egress, and South King County basement details
 
@@ -84,6 +88,8 @@ South King County winters keep foundation walls damp longer than a mood board su
 - **Treat sleeping rooms as code rooms.** Egress openings, smoke alarms, and ceiling height are part of the floor-layout conversation with plan review, not a weekend add-on.
 - **Vent baths and laundry outdoors.** Recirculating fans do not replace a ducted exhaust path in a tight lower level.
 - **Leave access to mechanicals.** Water heaters, cleanouts, shutoffs, and panel clearances should stay reachable after drywall.
+
+![A downspout extension carrying rainwater away from the foundation of a house with a basement in Renton, WA](../assets/images/posts/2026-10-14-renton-downspout-extension-9.webp "Gutters, downspout extensions and grading away from the foundation come before any wall goes up in a Renton, WA basement.")
 
 The video below walks through a full basement-finishing sequence from empty concrete to framed, insulated, and finished rooms — useful context for why moisture detailing and rough-in order matter before finishes land.
 
@@ -101,7 +107,7 @@ Manufacturer references commonly evaluated on Renton-scale basement finishes (ro
 
 Brand names are a starting point. Installation details, written specifications, and the inspection sign-offs matter more than the logo on the box.
 
-![A completed interior suite with windows and finished walls in Renton](../assets/images/posts/2026-10-14-renton-basement-3.webp)
+![A finished basement bedroom suite with a window, painted drywall and plank flooring in Renton, WA](../assets/images/posts/2026-10-14-renton-basement-suite-3.webp)
 
 ## How to shortlist and verify contractors
 
