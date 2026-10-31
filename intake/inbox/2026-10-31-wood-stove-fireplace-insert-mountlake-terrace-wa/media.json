@@ -1,0 +1,44 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-10-31-mountlake-terrace-fireplace-1.webp",
+      "repo_path": "assets/images/posts/2026-10-31-mountlake-terrace-fireplace-1.webp",
+      "alt": "Mountlake Terrace, WA fireplace insert install: crew setting a steel wood insert, liner coiled on a drop cloth \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "3ce43124cba91fa0cb701fc129bc4cfb",
+      "source": "Newly generated image (built-in image generator, 2026-10-31), source gen-1.jpg 1280x720, resized to 1600x900 webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-31-mountlake-terrace-fireplace-2.webp",
+      "repo_path": "assets/images/posts/2026-10-31-mountlake-terrace-fireplace-2.webp",
+      "alt": "Mountlake Terrace, WA wood stove clearance check: tape run from a cast-iron stove on a stone hearth to a stud \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "d3c6e81b05ab3c516ddbc51ae01e7c6c",
+      "source": "Newly generated image (built-in image generator, 2026-10-31), source gen-2.jpg 1280x720, resized to 1600x900 webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-10-31-mountlake-terrace-fireplace-3.webp",
+      "repo_path": "assets/images/posts/2026-10-31-mountlake-terrace-fireplace-3.webp",
+      "alt": "Mountlake Terrace, WA gas fireplace insert: glass-front unit in a slate surround, wood mantel and wall alarm \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "fa7918d34271c7f56e39b5c9d9f62648",
+      "source": "Newly generated image (built-in image generator, 2026-10-31), source gen-3.jpg 1280x720, resized to 1600x900 webp"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "qe8T7tpUs-Y",
+      "url": "https://www.youtube.com/watch?v=qe8T7tpUs-Y",
+      "title": "How to Install Fireplace Insert & Liner in Brick Chimney existing Clay Flue Liner",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "3 newly generated images (built-in generator), 0 regraded stills, 0 paid media."
+}

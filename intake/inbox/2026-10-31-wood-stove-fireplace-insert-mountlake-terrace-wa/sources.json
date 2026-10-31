@@ -1,0 +1,115 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Mountlake Terrace",
+    "service": "Wood stove and fireplace insert replacement",
+    "slug": "wood-stove-fireplace-insert-mountlake-terrace-wa"
+  },
+  "sources": [
+    {
+      "url": "https://www.cityofmlt.com/177/Building-Permits",
+      "title": "https://www.cityofmlt.com/177/Building-Permits",
+      "retrieved": "2026-10-31",
+      "http_status": 200,
+      "supports": "City of Mountlake Terrace Building Permits: residential mechanical/plumbing/electrical/building applications; inspections via portal; permits on site; Ask a Permit Specialist; smoke alarm information"
+    },
+    {
+      "url": "https://www.cityofmlt.com/DocumentCenter/View/37311/Mechanical-and-Plumbing-Checklist",
+      "title": "https://www.cityofmlt.com/DocumentCenter/View/37311/Mechanical-and-Plumbing-Checklist",
+      "retrieved": "2026-10-31",
+      "http_status": 200,
+      "supports": "Mountlake Terrace Mechanical and Plumbing Checklist: Fireplace/Stove, Vents, Gas Piping listed as mechanical items"
+    },
+    {
+      "url": "https://www.cityofmlt.com/DocumentCenter/View/21045/Construction-Permit-Frequently-Asked-Questions",
+      "title": "https://www.cityofmlt.com/DocumentCenter/View/21045/Construction-Permit-Frequently-Asked-Questions",
+      "retrieved": "2026-10-31",
+      "http_status": 200,
+      "supports": "Mountlake Terrace Construction Permit FAQ: changes to mechanical systems need permits; mechanical examples include heaters and appliance vents for chimneys; exposing studs needs permit; unpermitted work penalties incl. doubled fees"
+    },
+    {
+      "url": "https://mltw-trk.aspgov.com/eTRAKiT/",
+      "title": "https://mltw-trk.aspgov.com/eTRAKiT/",
+      "retrieved": "2026-10-31",
+      "http_status": 200,
+      "supports": "City of Mountlake Terrace eTRAKiT permit portal"
+    },
+    {
+      "url": "https://www.codepublishing.com/WA/MountlakeTerrace/",
+      "title": "https://www.codepublishing.com/WA/MountlakeTerrace/",
+      "retrieved": "2026-10-31",
+      "http_status": 200,
+      "supports": "Mountlake Terrace Municipal Code online"
+    },
+    {
+      "url": "https://www.ecology.wa.gov/air-climate/air-quality/smoke-fire/wood-stove-info",
+      "title": "https://www.ecology.wa.gov/air-climate/air-quality/smoke-fire/wood-stove-info",
+      "retrieved": "2026-10-31",
+      "http_status": 200,
+      "supports": "Ecology wood stove info: illegal to sell uncertified stoves; recycle; certified at manufacture; removal not required at sale; illegal fuels; 20% opacity / 6 minutes; burn ban stages"
+    },
+    {
+      "url": "https://ecology.wa.gov/Burnbans",
+      "title": "https://ecology.wa.gov/Burnbans",
+      "retrieved": "2026-10-31",
+      "http_status": 200,
+      "supports": "Ecology burn bans overview: who calls bans; stages"
+    },
+    {
+      "url": "https://apps.leg.wa.gov/WAC/default.aspx?cite=173-433-150",
+      "title": "https://apps.leg.wa.gov/WAC/default.aspx?cite=173-433-150",
+      "retrieved": "2026-10-31",
+      "http_status": 200,
+      "supports": "WAC 173-433-150 impaired air quality burn bans"
+    },
+    {
+      "url": "https://apps.leg.wa.gov/WAC/default.aspx?cite=173-433-100",
+      "title": "https://apps.leg.wa.gov/WAC/default.aspx?cite=173-433-100",
+      "retrieved": "2026-10-31",
+      "http_status": 200,
+      "supports": "WAC 173-433-100 sale of uncertified devices"
+    },
+    {
+      "url": "https://pscleanair.gov/172/About-Air-Quality-Burn-Bans",
+      "title": "https://pscleanair.gov/172/About-Air-Quality-Burn-Bans",
+      "retrieved": "2026-10-31",
+      "http_status": 200,
+      "supports": "Clean air agency: Stage 1 / Stage 2 rules for King, Kitsap, Pierce, Snohomish; no visible smoke; ban duration"
+    },
+    {
+      "url": "https://www.pscleanair.gov/168/Air-Quality-Burn-Ban-Status",
+      "title": "https://www.pscleanair.gov/168/Air-Quality-Burn-Ban-Status",
+      "retrieved": "2026-10-31",
+      "http_status": 200,
+      "supports": "Clean air agency current burn ban status"
+    },
+    {
+      "url": "https://app.leg.wa.gov/RCW/default.aspx?cite=19.27.530",
+      "title": "https://app.leg.wa.gov/RCW/default.aspx?cite=19.27.530",
+      "retrieved": "2026-10-31",
+      "http_status": 200,
+      "supports": "RCW 19.27.530 carbon monoxide alarms; owner-occupied pre-July 26, 2009 exemption; seller must equip at sale"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "retrieved": "2026-10-31",
+      "http_status": 200,
+      "supports": "L&I hiring a contractor guidance"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-10-31",
+      "http_status": 200,
+      "supports": "L&I Verify a contractor"
+    }
+  ],
+  "dropped": [
+    "epa.gov burnwise certified list URL (404)",
+    "pscleanair.gov FAQ.aspx (302) - Snohomish trigger values not cited",
+    "napoleon.com (403)",
+    "travisproducts.com, dura-vent.com (no response)",
+    "all clearance distances, fees, prices, BTU figures"
+  ]
+}
