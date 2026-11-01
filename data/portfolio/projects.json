@@ -364,7 +364,7 @@
         "Both fireplaces are shown as solid masonry blocks at their drawn size.",
         "The basement bath is shown as remodeled on the proposed plan: vanity, toilet and a combination tub and shower between two new 2x6 walls.",
         "The plans label two main floor rooms Bedroom and two Bath; they are numbered here so the room picker can tell them apart.",
-        "Kitchen, laundry and bath fixtures sit where the plan symbols are, scaled from the drawing. Their heights are assumed. Interior doors are shown as open gaps. Closet shelving, siding and trim are not modeled."
+        "Kitchen, laundry and bath fixtures sit where the plan symbols are, scaled from the drawing. Their heights are assumed. Interior door leaves are shown open where the plans draw them: swing doors at a right angle, pocket doors part way into the wall and the bypass closet doors overlapped. Closet shelving, siding and trim are not modeled."
       ]
     },
     {
