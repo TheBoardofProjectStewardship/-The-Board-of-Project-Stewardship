@@ -1,0 +1,115 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Bellevue",
+    "service": "Side sewer repair and replacement",
+    "slug": "side-sewer-repair-replacement-bellevue-wa"
+  },
+  "sources": [
+    {
+      "url": "https://bellevuewa.gov/city-government/departments/utilities/manage-your-utility-services/wastewater",
+      "title": "https://bellevuewa.gov/city-government/departments/utilities/manage-your-utility-services/wastewater",
+      "retrieved": "2026-11-01",
+      "http_status": 200,
+      "supports": "Bellevue Wastewater: City maintains mains and service connections in ROW/easements; emergency backup line 425-452-7840; slow drainage likely side sewer, call private service; location info 425-452-4187; no private locates"
+    },
+    {
+      "url": "https://bellevuewa.gov/city-government/departments/development/permits/faqs/work-requiring-permits",
+      "title": "https://bellevuewa.gov/city-government/departments/development/permits/faqs/work-requiring-permits",
+      "retrieved": "2026-11-01",
+      "http_status": 200,
+      "supports": "Bellevue work requiring permits: side sewer permit for minor repair, replacement, revision, added connection; clearing and grading permit may apply to long runs/large excavations"
+    },
+    {
+      "url": "https://bellevuewa.gov/city-government/departments/development/permits/utilities-permits/side-sewer-permit",
+      "title": "https://bellevuewa.gov/city-government/departments/development/permits/utilities-permits/side-sewer-permit",
+      "retrieved": "2026-11-01",
+      "http_status": 200,
+      "supports": "Bellevue Side Sewer Permit: apply via MyBuildingPermit; required and additional documents; Utility Review contact"
+    },
+    {
+      "url": "https://bellevuewa.gov/city-government/departments/utilities/utilities-projects-plans-standards/utilities-codes-and-standards/side-sewer-permit-conditions",
+      "title": "https://bellevuewa.gov/city-government/departments/utilities/utilities-projects-plans-standards/utilities-codes-and-standards/side-sewer-permit-conditions",
+      "retrieved": "2026-11-01",
+      "http_status": 200,
+      "supports": "Side Sewer Permit Conditions: preconstruction meeting code 630; 811; no backfill before inspection; crushed rock bedding; restoration; easement notice; ROW PVC SDR 35, separate ROW permit; couplings; final and re-inspection within 7 days"
+    },
+    {
+      "url": "https://bellevuewa.gov/city-government/departments/utilities/utilities-projects-plans-standards/utilities-codes-and-standards/side-sewer-permit-conditions/relining-side-sewers",
+      "title": "https://bellevuewa.gov/city-government/departments/utilities/utilities-projects-plans-standards/utilities-codes-and-standards/side-sewer-permit-conditions/relining-side-sewers",
+      "retrieved": "2026-11-01",
+      "http_status": 200,
+      "supports": "Relining side sewers: ASTM F1216; manufacturer license/certified installers; cleaning; CCTV; protrusion check; as-built update; deficiency notice; no line/grade change"
+    },
+    {
+      "url": "https://bellevuewa.gov/city-government/departments/utilities/utilities-projects-plans-standards/utilities-codes-and-standards/side-sewer-permit-conditions/pipe-bursting",
+      "title": "https://bellevuewa.gov/city-government/departments/utilities/utilities-projects-plans-standards/utilities-codes-and-standards/side-sewer-permit-conditions/pipe-bursting",
+      "retrieved": "2026-11-01",
+      "http_status": 200,
+      "supports": "Pipe bursting: HDPE 24-hour rest; anchors within 3 ft; DR 26 min; 4-inch min private, 6-inch joint use; transition coupling with stiffening sleeve; post-install CCTV; mandrel; as-built"
+    },
+    {
+      "url": "https://bellevuewa.gov/city-government/departments/development/permits-and-inspections/permits-and-forms/right-of-way-permits",
+      "title": "https://bellevuewa.gov/city-government/departments/development/permits-and-inspections/permits-and-forms/right-of-way-permits",
+      "retrieved": "2026-11-01",
+      "http_status": 200,
+      "supports": "Bellevue right-of-way permits"
+    },
+    {
+      "url": "https://bellevuewa.gov/sites/default/files/media/pdf_document/As%20Built%20Packet.pdf",
+      "title": "https://bellevuewa.gov/sites/default/files/media/pdf_document/As%20Built%20Packet.pdf",
+      "retrieved": "2026-11-01",
+      "http_status": 200,
+      "supports": "Bellevue side sewer as-built packet"
+    },
+    {
+      "url": "https://bellevue.municipal.codes/BCC/24.04.115",
+      "title": "https://bellevue.municipal.codes/BCC/24.04.115",
+      "retrieved": "2026-11-01",
+      "http_status": 200,
+      "supports": "BCC 24.04.115 system ownership: utility owns mains/stubs in ROW; private side sewers owned and maintained by owner incl. check valves, cleanouts, pumps"
+    },
+    {
+      "url": "https://bellevue.municipal.codes/BCC/24.04.120",
+      "title": "https://bellevue.municipal.codes/BCC/24.04.120",
+      "retrieved": "2026-11-01",
+      "http_status": 200,
+      "supports": "BCC 24.04.120: side sewer permit required to construct or make additions, repairs, connections"
+    },
+    {
+      "url": "https://bellevue.municipal.codes/BCC/24.04.170",
+      "title": "https://bellevue.municipal.codes/BCC/24.04.170",
+      "retrieved": "2026-11-01",
+      "http_status": 200,
+      "supports": "BCC 24.04.170: side sewers constructed only by licensed contractors or owners; permit on site; designated stub; utility installs stub if not found"
+    },
+    {
+      "url": "https://mybuildingpermit.com/",
+      "title": "https://mybuildingpermit.com/",
+      "retrieved": "2026-11-01",
+      "http_status": 200,
+      "supports": "MyBuildingPermit portal"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "retrieved": "2026-11-01",
+      "http_status": 200,
+      "supports": "L&I hiring a contractor guidance"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-11-01",
+      "http_status": 503,
+      "supports": "L&I Verify a contractor (WAF 503 from box on 2026-11-01; 200 on 2026-10-31; required link kept)"
+    }
+  ],
+  "dropped": [
+    "wa811.org (403), callbeforeyoudig.org (no response) - 811 cited as text only",
+    "perma-liner.com (no response), envirosight.com (403)",
+    "Bellevue Sewer Engineering Standards PDF (200) not cited to keep claims to permit conditions",
+    "all fees, prices, timelines",
+    "tttechnologies.com (no response x4) -> HammerHead Trenchless used"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-11-01-side-sewer-repair-replacement-bellevue-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-11-01T11:50:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Side Sewer Repair and Replacement Bellevue WA \u2014 Camera Inspections, Trenchless Options, Permits and Inspections",
+    "date": "2026-11-01",
+    "slug": "side-sewer-repair-replacement-bellevue-wa",
+    "description": "A Bellevue homeowner's guide to side sewer repair: what the City owns versus you, camera inspections, roots and old clay pipe, cleanouts, open trench versus pipe bursting and lining, the side sewer permit, right-of-way work, inspections, wet-season scheduling and vetting the contractor.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 offline; no 2026-11-01 packets. Topic: side sewer repair and replacement (camera inspection, roots/clay/Orangeburg, cleanouts, open trench vs pipe bursting and lining, right-of-way, permits and inspections, wet-season scheduling), Bellevue WA (King County), not in the last 14 posts. Permit basis: Bellevue work requiring permits page and Side Sewer Permit page (MyBuildingPermit), Side Sewer Permit Conditions plus relining and pipe bursting conditions, BCC 24.04.115/.120/.170, Wastewater page. L&I pages cited. No fees or prices. Producer role fields kept per intake contract."
+}

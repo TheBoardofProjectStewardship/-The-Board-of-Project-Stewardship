@@ -1,0 +1,55 @@
+{
+  "producer": "openclaw",
+  "agent": "seo-specialist",
+  "slug": "side-sewer-repair-replacement-bellevue-wa",
+  "title": "Side Sewer Repair and Replacement Bellevue WA \u2014 Camera Inspections, Trenchless Options, Permits and Inspections",
+  "description": "A Bellevue homeowner's guide to side sewer repair: what the City owns versus you, camera inspections, roots and old clay pipe, cleanouts, open trench versus pipe bursting and lining, the side sewer permit, right-of-way work, inspections, wet-season scheduling and vetting the contractor.",
+  "category": "Guides",
+  "keywords": [
+    "side sewer repair Bellevue WA",
+    "side sewer replacement Bellevue",
+    "sewer camera inspection Bellevue",
+    "pipe bursting Bellevue WA",
+    "Bellevue side sewer permit"
+  ],
+  "outline": [
+    "Key Takeaways",
+    "Why side sewers become a Bellevue homeowner's problem",
+    "When it is an emergency, and when it is not",
+    "Start with a camera inspection",
+    "Roots, clay, Orangeburg and other common failures",
+    "Cleanouts: the access point you will be glad to have",
+    "Open trench, spot repair, pipe bursting or lining",
+    "The Bellevue side sewer permit",
+    "Right-of-way work, easements and digging safely",
+    "Inspections: what the City will want to see",
+    "Wet-season scheduling in Bellevue",
+    "Materials Worth Knowing",
+    "How to shortlist and verify a side sewer contractor",
+    "Where Pacific Pro Group fits",
+    "Next steps for a Bellevue side sewer"
+  ],
+  "search_intent": "A Bellevue homeowner with slow drains, roots or a failing side sewer wants to know what the City owns versus the owner, how a camera inspection works, whether open trench, pipe bursting or lining fits, which Bellevue permits and inspections apply, and how to vet the contractor.",
+  "local_angles": [
+    "BCC 24.04.115: private side sewers owned and maintained by property owner incl. cleanouts, check valves, pumps; utility owns mains and stubs in ROW",
+    "Bellevue Wastewater: sewage backup with no water use -> 425-452-7840; slow drains -> private service; location info 425-452-4187; no private locates",
+    "Side sewer permit required for minor repair, replacement, revision, added connection; clearing and grading for long runs",
+    "Side Sewer Permit via MyBuildingPermit: Bill-to, King County Sewer Use Certification, site plan; ROW use permit, as-built packet",
+    "Permit conditions: no backfill before inspection; 5/8-inch minus crushed rock, no pea gravel; ROW 6-inch PVC SDR 35, separate ROW permit; easement 48-hour notice; 811",
+    "Relining: ASTM F1216, manufacturer license and certified installers, CCTV, no protrusion; pipe bursting: HDPE 24-hour rest, anchors within 3 ft, DR 26, 4-inch min",
+    "BCC 24.04.170: licensed contractors or owners; permit on site; designated stub"
+  ],
+  "internal_links": [
+    "../bellevue.html",
+    "../permits.html",
+    "../verify-contractor.html",
+    "../hiring-a-contractor.html",
+    "../bonds-and-insurance.html",
+    "../red-flags-hiring.html"
+  ],
+  "notes": "Box-authored fallback brief. PPG only as Board #1 -> https://pacificprogroup.com/.",
+  "generation": {
+    "agent": "box-authored",
+    "mode": "box-fallback"
+  }
+}
