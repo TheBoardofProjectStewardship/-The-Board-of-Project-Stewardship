@@ -31,6 +31,8 @@ Bellevue's [Wastewater page](https://bellevuewa.gov/city-government/departments/
 - **Sewage coming up inside the house when no water is being used.** The City asks you to call its Wastewater Operation and Maintenance Division right away at 425-452-7840 (or 911 after business hours), because a problem in the public main can push sewage back into homes. Crews are available around the clock.
 - **Slow drains or a blockage while you are using water.** That usually points to your own side sewer, and the City directs you to a private service.
 
+![Water pooled around a backed-up basement floor drain in a Bellevue, WA home](../assets/images/posts/2026-11-01-bellevue-side-sewer-floor-drain-backup-4.webp "A floor drain that backs up while water is running in a Bellevue, WA house usually points to a problem in the private side sewer.")
+
 If you do not know where your pipe runs, the same page says you can call 425-452-4187 and a utilities employee will share whatever location information the City has. The City does not perform locates on private property, so the side sewer drawing in the City's records, if there is one, is a starting point, not a guarantee.
 
 ## Start with a camera inspection
@@ -58,9 +60,13 @@ The fix depends on what the camera shows:
 - **Deformed or collapsing pipe.** Fiber pipe that has lost its shape, or a crushed section, may not be a candidate for lining at all, and may need bursting or open-trench replacement.
 - **Problems at the house.** Many failures happen at the foundation, where the building drain leaves the house. That is also where a good cleanout belongs.
 
+![Old clay sewer pipe sections with tree roots grown through a joint, dug up from a yard in Bellevue, WA](../assets/images/posts/2026-11-01-bellevue-side-sewer-clay-pipe-roots-5.webp "Fine roots entering old clay joints are one of the most common side sewer failures under mature trees in Bellevue, WA yards.")
+
 ## Cleanouts: the access point you will be glad to have
 
 A cleanout is a capped fitting that gives access to the side sewer for cameras and cleaning equipment without pulling a toilet or cutting into the line. City code places cleanouts among the private appurtenances the owner maintains. Many older Bellevue houses have no exterior cleanout, or one buried in a planting bed. When you repair or replace a side sewer, ask the contractor where a cleanout to grade near the foundation would go, how it will be capped and protected from mowers and vehicles, and whether a two-way cleanout makes sense so the line can be serviced toward both the house and the street. Bellevue's trenchless conditions require any new appurtenances, including a cleanout to grade, to be shown on the updated as-built drawing.
+
+![A capped two-way sewer cleanout at grade beside the foundation of a house in Bellevue, WA](../assets/images/posts/2026-11-01-bellevue-side-sewer-cleanout-6.webp "A cleanout to grade near the foundation gives cameras and cleaning equipment access to a Bellevue, WA side sewer without pulling a toilet.")
 
 ## Open trench, spot repair, pipe bursting or lining
 
@@ -75,6 +81,8 @@ There are four main ways to fix a Bellevue side sewer. A careful contractor will
 ![Bellevue, WA trenchless side sewer: pipe-bursting pit at a driveway edge with black HDPE pipe and safety fence](../assets/images/posts/2026-11-01-bellevue-side-sewer-3.webp)
 
 **Lining (cured-in-place pipe).** A resin-saturated liner is inserted into the cleaned host pipe and cured in place, forming a new pipe inside the old one. Bellevue's [relining conditions](https://bellevuewa.gov/city-government/departments/utilities/utilities-projects-plans-standards/utilities-codes-and-standards/side-sewer-permit-conditions/relining-side-sewers) require liner materials on private property to conform to ASTM F1216, require the contractor to hold a current license agreement with the liner manufacturer and the installers to be certified by that manufacturer, and require the host pipe to be cleaned, root cut and jetted first. The contractor must show the inspector on live video that the liner does not protrude into the City's lateral or main.
+
+![A resin-saturated liner being fed into an old side sewer pipe from a small access pit at a house in Bellevue, WA](../assets/images/posts/2026-11-01-bellevue-side-sewer-liner-7.webp "Lining cures a new pipe inside the old one; in Bellevue, WA the City's relining conditions and camera video for the inspector apply.")
 
 For both trenchless methods, the City makes one trade-off explicit: because the new pipe follows the old one, significant changes in line and grade are not possible. The owner accepts that the pipe may have less than minimum slope and swales, which may mean more frequent maintenance. If your camera report shows a deep belly, ask whether trenchless can actually solve your problem or only part of it.
 
@@ -102,6 +110,8 @@ The Board's [permits page](../permits.html) explains how to read a permit record
 
 Many Bellevue side sewer jobs stop at the property line. Others do not. If the failure is near the street, or the work has to reach the City's stub, the job may enter the public right of way. Bellevue's permit conditions say a separate right-of-way permit is required for that work and that a repair permit cannot include work in the right of way. Inside the right of way or a public easement, the minimum side sewer size is 6 inches and the pipe material is PVC (SDR 35 minimum). Excavations in the right of way are backfilled with crushed rock to finished subgrade, and a compaction test report goes to the inspector. The City's [right-of-way permits page](https://bellevuewa.gov/city-government/departments/development/permits-and-inspections/permits-and-forms/right-of-way-permits) is where that permit starts.
 
+![A side sewer excavation at the edge of a residential street with traffic cones and a steel plate in Bellevue, WA](../assets/images/posts/2026-11-01-bellevue-side-sewer-street-excavation-8.webp "When a Bellevue, WA side sewer repair reaches the City's stub in the street, a separate right-of-way permit is required.")
+
 Easements matter too. If your side sewer crosses a neighbor's lot or runs in a shared line, the permit conditions require the contractor to notify the easement grantor and Bellevue Utilities in writing at least 48 hours before work begins, and to furnish a written release from the grantor for restoration of the easement area before permit sign-off. Failure to notify can bring a stop work order. Shared lines may also need a joint use maintenance agreement.
 
 Before anyone digs, utilities must be located. Bellevue's permit conditions tell owners and contractors to call 811 before digging and warn that City drawings are based on the best available information and should be field verified. An optional on-site preconstruction meeting can be scheduled by calling the inspection line at 425-452-6875 and entering inspection code 630.
@@ -126,6 +136,8 @@ Side sewer failures do not wait for summer, and many of them show up in fall and
 - **Restoration may wait.** Lawn and planting restoration can be harder in cold, wet weather. Get the restoration scope and timing in writing.
 - **Long runs can trigger grading rules.** The City notes that long runs or large excavations may need a clearing and grading permit. Ask early, so the permit does not hold up an urgent repair.
 - **Your house may be out of service.** Ask how many hours or days you will be without use of drains, where the crew will tie in temporary measures, and what happens if inspection is delayed. Pipe bursting's 24-hour HDPE rest period is part of that timeline.
+
+![A rain-soaked side sewer trench with a pump hose and a covered soil pile in a Bellevue, WA backyard](../assets/images/posts/2026-11-01-bellevue-side-sewer-wet-season-trench-9.webp "Wet-season side sewer work in Bellevue, WA means pumping trenches, covering spoils and keeping mud out of storm drains.")
 
 If the trench or excavation runs near a foundation, a downspout line or a yard drain, coordinate the work. The Board's [Kenmore yard and foundation drainage guide](../posts/2026-10-27-yard-foundation-drainage-kenmore-wa.html) covers how storm water should be routed away from the house, and its [Auburn crawl space moisture guide](../posts/2026-10-26-crawl-space-moisture-control-auburn-wa.html) covers what happens when water and leaks reach the space under the floor.
 

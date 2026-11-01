@@ -39,6 +39,8 @@ Two sentences in that same code section matter just as much as the exemption:
 
 The most common way a reclad picks up a permit is through the openings. Bellevue's page says a permit with plan review is required for "installing or moving an exterior door, skylight or window, including making an existing window wider," while "no permit is required for replacements of the same size in the same location." So swapping windows into the same rough openings during a reclad stays exempt; widening a living room window does not.
 
+![A widened window opening with a new header framed into an exterior wall during a siding job in Bellevue, WA](../assets/images/posts/2026-10-17-bellevue-siding-window-opening-7.webp "Widening a window or adding a door during a Bellevue, WA reclad turns a siding job into permit work with plan review.")
+
 The second way is structure. The City's [Single-Family Remodel Permit](https://bellevuewa.gov/city-government/departments/development/permits/residential-building-permits/single-family-remodel-permit) (BU) covers structural changes such as "enlarging the size of a window or door opening," "installing or relocating a doorway header," and "performing an earthquake home retrofit." The code's definition of ordinary repairs also excludes "the removal or cutting of any structural beam or load-bearing support." If the old siding comes off and the crew finds a rotted header or sill plate that has to be cut out and replaced, ask the City whether that repair now needs a permit before the wall is closed up.
 
 For nonstructural work that still needs a permit, Bellevue offers a [Single-Family Remodel Permit with no plan review](https://bellevuewa.gov/city-government/departments/development/permits/residential-building-permits/single-family-remodel-permit-no-plan-review) (BT), which the City says usually does not require plan review and can be issued the same day. Inspections are still required, and the City notes that if a field inspector decides the work exceeds that scope, plans will be required, with plan review that "may involve a three-week turnaround time." Applications for both permits go through [MyBuildingPermit](https://mybuildingpermit.com/). For a scope question, the City's Permit Center is at 425-452-4898 or permits@bellevuewa.gov.
@@ -52,6 +54,8 @@ One more note for older homes: when the siding is off at the base of the house, 
 The Puget Sound Clean Air Agency, which covers King County, requires an asbestos survey before a renovation. Its [Homeowner Renovation](https://www.pscleanair.gov/192/Homeowner-Renovation) page says that if you live in and own the single-family house being remodeled, you may conduct your own survey using the agency's guidance. "In all other situations, such as renovating your rental property or condominium, or demolishing your house," an AHERA-certified building inspector must do it.
 
 The survey results must be shared with anyone who may come in contact with the material. If friable asbestos-containing material has to be removed, the agency says you must file a Single-Family Residence Notification and pay the agency's filing fee before removal, and a renter, landlord, or condo owner must hire a certified abatement contractor. The agency's [asbestos page](https://www.pscleanair.gov/155/Asbestos) has the details.
+
+![Old cement shingle siding with a few cracked pieces on a mid-century rambler in Bellevue, WA](../assets/images/posts/2026-10-17-bellevue-siding-old-shingles-8.webp "Older shingle siding on a mid-century Bellevue, WA house is checked by an asbestos survey before the first piece comes off.")
 
 Why this matters for siding: many mid-century houses carry older shingle siding, roofing felts, and patching materials whose contents nobody has checked. Settle it before the first board comes off, not after the dumpster is half full.
 
@@ -74,6 +78,8 @@ A siding replacement in Bellevue is mostly a water-management job. These are the
 - **Rainscreen gap.** A drainage gap behind the siding, built with furring strips or a drainage mat, lets water that gets past the cladding drain and lets the wall dry. Ask whether it is included and how trim depths change around windows.
 - **Clearances.** Write in the manufacturer's required clearances above grade, roofs, decks, and hard surfaces.
 - **Weather plan.** In fall and winter, ask how much wall will be open at once and how it will be protected at the end of each day.
+
+![Vertical furring strips over house wrap creating a rainscreen gap before new siding on a house in Bellevue, WA](../assets/images/posts/2026-10-17-bellevue-siding-rainscreen-furring-9.webp "A rainscreen gap behind new siding lets water drain and the wall dry through a long Bellevue, WA rainy season.")
 
 https://www.youtube.com/watch?v=38DQRt4aS48
 

@@ -96,11 +96,15 @@ If you have a second bathroom, ask whether its water will be shut off at any poi
 
 Think about pets and kids, too. Open walls, tools and a front door that opens and closes all day are a lot for a dog or a toddler. Decide where they'll spend work hours. Clear a path from the front door to the bathroom, take pictures off the walls along it and move anything fragile.
 
+![A plastic dust wall with a zipper door and floor protection in a hallway during a bathroom remodel in Edmonds, WA](../assets/images/posts/2026-10-18-edmonds-bathroom-remodel-dust-wall-7.webp "A sealed dust wall and floor protection keep a bathroom remodel in an Edmonds, WA home from spreading through the house.")
+
 Finally, agree on the daily rhythm: when the crew arrives, when they leave, where they can take breaks and who you text with questions. Small things like that shape how the weeks feel.
 
 ## Stage 5: Demolition {#demo}
 
 This is the loud part. Tile, mortar, old fixtures and sometimes drywall come out, usually fast. It's also the stage with the most surprises, because nobody can see inside a wall until it's open.
+
+![A dated tile bathroom partly demolished with debris in buckets during a remodel in Seattle](../assets/images/posts/2026-10-18-seattle-bathroom-demolition-8.webp "Demolition is the loudest stage of a Seattle bathroom remodel and the one where hidden damage behind old tile shows up.")
 
 Older houses can hold surprises once the walls are open, such as water damage around old fixtures or earlier work that doesn't meet today's code. Finding something doesn't mean anything went wrong. What matters is how your contractor handles it: they should show you, explain the fix and price it before doing it.
 
@@ -169,6 +173,8 @@ It's worth asking when glass gets measured, whether every fixture is already on 
 ## Stage 9: The punch list and the last walkthrough {#punch}
 
 The punch list is the running tally of small fixes at the end, such as a cabinet door that needs adjusting. Walk the room with your contractor, write everything down and agree on when each item gets done. Pacific Pro Group ends its process with a final walkthrough and handover of warranties. Ask for copies of product warranties, care instructions and the final inspection sign-off.
+
+![Small pieces of blue tape marking punch-list touch-ups in a finished bathroom in Seattle](../assets/images/posts/2026-10-18-seattle-bathroom-punch-list-9.webp "Tape marks each small fix during the final walkthrough of a Seattle-area bathroom remodel, so nothing on the punch list is missed.")
 
 **What to ask:**
 
