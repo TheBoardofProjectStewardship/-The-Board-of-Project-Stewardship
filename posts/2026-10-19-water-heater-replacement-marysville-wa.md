@@ -20,6 +20,8 @@ Marysville has grown fast, and its housing reflects that: older homes near downt
 
 That urgency is exactly when homeowners skip steps. A replacement looks like a one-for-one swap, but it touches water piping, a pressure-relief discharge line, sometimes gas piping and venting, sometimes electrical, and the anchoring that keeps a full tank from tipping in an earthquake. The Board of Project Stewardship's [Marysville directory](../marysville.html), [plumber page](../plumber.html), [plumbing guide](../plumbing.html), and [permits overview](../permits.html) cover the broader picture. This guide sticks to what the City of Marysville and Washington L&I actually publish.
 
+![An old rusted water heater with a puddle on the floor of a utility closet in Marysville, WA](../assets/images/posts/2026-10-19-marysville-old-water-heater-leak-7.webp "A leaking tank is often what starts a water heater replacement in a Marysville, WA home, and urgency is when steps get skipped.")
+
 ## The City plumbing permit
 
 Marysville adopts the 2021 Uniform Plumbing Code by ordinance. [MMC 16.08.010](https://ecode360.com/49264480) says it regulates "the installation, removal, alteration or repair of plumbing and drainage systems and fixtures and water heating and treating equipment." The City's amended permit fee table in the same chapter lists separate unit items for each water heater and/or vent, for gas piping systems, and for alterations of water piping. In plain terms: replacing the tank, its vent, or the gas line to it are all things the City expects to see on a plumbing permit.
@@ -45,6 +47,8 @@ Why this matters for a water heater:
 - A switch to a **heat pump water heater** can change the circuit, the location, or the need for a condensate drain. [ENERGY STAR's heat pump water heater page](https://www.energystar.gov/products/heat_pump_water_heaters) is a neutral place to compare the product category before you talk to installers.
 - A move from gas to electric, or electric to gas, changes the permit picture on both sides — electrical work on one end, gas piping and venting on the other.
 
+![A gas tank water heater with its metal vent pipe and gas shutoff valve in a Marysville, WA garage](../assets/images/posts/2026-10-19-marysville-gas-water-heater-vent-8.webp "Gas water heaters in Marysville, WA homes add gas piping, venting and combustion air to the permit picture.")
+
 Ask every bidder which permits they will pull and from which office. "We'll take care of it" is not an answer you can check.
 
 ![Electric tank water heater with its wiring conduit and a wall-mounted disconnect in a Marysville, WA garage](../assets/images/posts/2026-10-19-marysville-water-heater-4.webp "Electric tank water heater with its wiring conduit and a wall-mounted disconnect in a Marysville, WA garage.")
@@ -57,6 +61,8 @@ Two things follow:
 
 1. **If you pay someone, they need to be a certified plumber** working for a registered contractor. A handyman who "does water heaters" is not automatically qualified.
 2. **Doing it yourself does not skip the permit.** The owner exemption is about who may do the work, not about whether the City inspects it.
+
+![A temperature and pressure relief valve with a copper discharge pipe on a new water heater in Marysville, WA](../assets/images/posts/2026-10-19-marysville-relief-valve-discharge-9.webp "The relief valve and its discharge line are inspected safety items on every Marysville, WA water heater replacement, whoever does the work.")
 
 https://www.youtube.com/watch?v=_jWMQWQJyAU
 
