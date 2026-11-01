@@ -54,6 +54,7 @@ Base: `https://boardofprojectstewardship.com/`
 | `blog/rss.xml` | Blog RSS feed |
 | `news/rss.xml` | News RSS feed |
 | `404.html` | Branded Board 404 |
+| `posts/2026-11-01-side-sewer-repair-replacement-bellevue-wa.html` | Side Sewer Repair and Replacement Bellevue WA — Camera Inspections, Trenchless Options, Permits and Inspections |
 | `posts/2026-10-31-wood-stove-fireplace-insert-mountlake-terrace-wa.html` | Wood Stove and Fireplace Insert Replacement Mountlake Terrace WA — Permits, Chimney Liners, Clearances and Burn Bans |
 | `posts/2026-10-30-retaining-wall-mukilteo-wa.html` | Retaining Wall Mukilteo WA — When a Wall Needs a Permit, Steep-Slope Critical Areas, Drainage and Engineering |
 | `posts/2026-10-29-load-bearing-wall-removal-kirkland-wa.html` | Load-Bearing Wall Removal Kirkland WA — Permits, Beams, Engineering and Open-Concept Remodels |

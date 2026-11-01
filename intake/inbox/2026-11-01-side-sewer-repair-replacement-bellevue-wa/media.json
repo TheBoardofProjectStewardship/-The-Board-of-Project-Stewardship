@@ -1,0 +1,44 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-11-01-bellevue-side-sewer-1.webp",
+      "repo_path": "assets/images/posts/2026-11-01-bellevue-side-sewer-1.webp",
+      "alt": "Bellevue, WA side sewer replacement: new white PVC pipe on crushed-rock bedding in a shored front-yard trench \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "a7eee127f46df89c2f04aa9ed46ad932",
+      "source": "Newly generated image (built-in image generator, 2026-11-01), source gen-1.jpg 1280x720, resized to 1600x900 webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-01-bellevue-side-sewer-2.webp",
+      "repo_path": "assets/images/posts/2026-11-01-bellevue-side-sewer-2.webp",
+      "alt": "Bellevue, WA side sewer camera inspection at a foundation cleanout, monitor showing roots at a clay joint \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "7206bc9a3d8803b7ad28fc417269605e",
+      "source": "Newly generated image (built-in image generator, 2026-11-01), source gen-2.jpg 1280x720, resized to 1600x900 webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-01-bellevue-side-sewer-3.webp",
+      "repo_path": "assets/images/posts/2026-11-01-bellevue-side-sewer-3.webp",
+      "alt": "Bellevue, WA trenchless side sewer: pipe-bursting pit at a driveway edge with black HDPE pipe and safety fence \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "222d2175067e0c385a762c0eb838f4dd",
+      "source": "Newly generated image (built-in image generator, 2026-11-01), source gen-3.jpg 1280x720, resized to 1600x900 webp"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "bvN3nEqf0qA",
+      "url": "https://www.youtube.com/watch?v=bvN3nEqf0qA",
+      "title": "Pipe Bursting Explained | Trenchless Sewer Replacement Process",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "3 newly generated images (built-in generator), 0 regraded stills, 0 paid media."
+}
