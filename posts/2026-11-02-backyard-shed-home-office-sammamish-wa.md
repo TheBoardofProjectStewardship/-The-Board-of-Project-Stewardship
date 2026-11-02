@@ -36,6 +36,8 @@ The handout also says plainly that "due to the size and location of most accesso
 
 If you are unsure, the City's [permit center getting-started page](https://www.sammamish.us/government/community-development/permit-center/getting-started-and-faqs/) recommends submitting for Project Guidance, which it describes as a free service that provides property-specific code information early in planning. All permit applications are submitted online at [MyBuildingPermit](https://mybuildingpermit.com/), where you can also upload plans, pay, check status and request inspections. The City says building and electrical permit fees are based on the fair market value of the work and points to its fee schedule; the Board does not quote fees here, so check the current schedule for your project.
 
+![A small storage shed on a gravel pad in the corner of a fenced backyard in Sammamish, WA](../assets/images/posts/2026-11-02-sammamish-backyard-storage-shed-4.webp "A small storage shed in a Sammamish, WA backyard can fall under the permit threshold, while a larger studio usually needs a building permit.")
+
 ## Setbacks, height and lot coverage
 
 Where a detached structure can sit on your lot is set by [Sammamish Development Code 21.04.030](https://sammamish.municipal.codes/DC/21.04.030), the residential site planning standards. The code has a separate row for accessory structure setbacks, and the City's handout and its zone summary pages (for example the [R-4](https://www.sammamish.us/government/community-development/current-planning/codes-and-regulations/commonly-requested-information/r-4-development-standards/) and [R-6](https://www.sammamish.us/government/community-development/current-planning/codes-and-regulations/commonly-requested-information/r-6-development-standards/) development standards pages) summarize them for a storage shed:
@@ -68,6 +70,8 @@ Sammamish has wetlands, streams, lakes and steep slopes spread across the platea
 
 For a backyard building, the practical lesson is to site the structure around the trees you want to keep. Foundation digging and trenching for power can damage roots well outside the trunk. Ask the designer or contractor to show tree locations, root protection and the power trench route on the site plan.
 
+![Orange tree-protection fencing around a fir's root zone on a sloped backyard in Sammamish, WA](../assets/images/posts/2026-11-02-sammamish-backyard-tree-protection-5.webp "Slopes, wetlands and significant trees can shape where a backyard building fits on a Sammamish, WA lot.")
+
 ## How a Sammamish studio gets power: City electrical permits
 
 Many homeowners assume all Washington electrical permits come from the Department of Labor & Industries. That is not the case in Sammamish. L&I's [City Electrical Permits & Inspections](https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections) page lists the cities that issue their own electrical permits and perform inspections within their limits, and says L&I does not issue permits or do inspections in those cities. Sammamish is on that list, at City Hall, 801 228th Ave SE.
@@ -88,6 +92,8 @@ For a detached office or studio, the electrical questions to settle early are:
 A year-round office in Sammamish needs to stay dry and reasonably warm through a long, damp season. That usually means an insulated floor, walls and roof, a weather-resistive barrier behind the siding, a way to manage moisture from people and equipment, and a heat source. Small ductless heat pumps are common in detached studios, and electric resistance heaters are another option. Whatever you choose, the heater, its circuit and any outdoor unit belong in the plans and the electrical permit.
 
 Plumbing changes the project more than anything else. The City's handout says any plumbing work on an accessory structure needs a permit. A sink means a water line, a drain and a way to get that drain to the house sewer or septic system. On sites served by septic, ask early how a new fixture affects the system. A toilet or shower is a bigger step, and it is often the point at which homeowners start asking whether the building is becoming a dwelling.
+
+![An insulated backyard studio interior with partial drywall and a ductless heating unit in Sammamish, WA](../assets/images/posts/2026-11-02-sammamish-backyard-studio-insulation-6.webp "Insulation, heat and moisture control turn a Sammamish, WA backyard shed into a room you can use all year.")
 
 ## When a backyard studio becomes an ADU
 
@@ -113,6 +119,8 @@ Whichever you choose, keep wood off the soil and away from splash-back, give the
 
 https://www.youtube.com/watch?v=n5TylfICb1o
 
+![Concrete pier blocks and treated wood beams for a backyard building foundation in Sammamish, WA](../assets/images/posts/2026-11-02-sammamish-backyard-pier-foundation-7.webp "Piers, skids and slabs each change cost, permits and drainage for a Sammamish, WA backyard building.")
+
 ## Drainage and stormwater in Pacific Northwest rain
 
 A new roof sheds a lot of water in a Sammamish winter. If it lands next to the building, it soaks the foundation, splashes the siding and can end up in a neighbor's yard. Plan gutters and a downspout route from the start, and send the water somewhere it can soak in or flow away safely, not toward the house, a slope or a property line.
@@ -120,6 +128,8 @@ A new roof sheds a lot of water in a Sammamish winter. If it lands next to the b
 The City also regulates stormwater on development projects. [Development Code 21.03.050](https://sammamish.municipal.codes/DC/21.03.050) says drainage review is required when a project subject to a City permit would result in 2,000 square feet or more of new, replaced, or new plus replaced impervious surface, or 7,000 square feet or more of land disturbing activity, and the code counts roofs, pavement, gravel and compacted surfaces as impervious. The City's [Sammamish Addendum to the 2021 King County Surface Water Design Manual](https://www.sammamish.us/media/dafjdpzj/20241001-adopted-sammamish-addendum-to-2021-kcswdm.pdf) sets lower thresholds in some critical drainage areas, including areas draining to a landslide hazard area (a net increase in impervious surface of 200 square feet or more), areas draining to Pine or Beaver Lake (500 square feet or more), and the Tamarack and Inglewood Historic Plats (any net increase). The City's [drainage and surface water standards page](https://www.sammamish.us/government/public-works/resources/drainage-surface-water-standards-and-forms/) links the current manual and the lot-level stormwater information.
 
 A small office alone may not reach the base threshold, but a building, a patio, a path and a new driveway spur can add up, and a lot in one of those drainage areas can cross a lower line quickly. Ask your designer to total the new and replaced hard surfaces for the whole project. The Board's [Kenmore yard and foundation drainage guide](../posts/2026-10-27-yard-foundation-drainage-kenmore-wa.html) covers downspouts, dispersion and yard drains in more detail.
+
+![A downspout draining into a gravel dispersion trench beside a backyard studio in Sammamish, WA](../assets/images/posts/2026-11-02-sammamish-backyard-downspout-dispersion-8.webp "Roof runoff from a new Sammamish, WA backyard building needs a planned place to go in the rainy season.")
 
 ## Wet-season scheduling in Sammamish
 
@@ -129,6 +139,8 @@ Fall and winter are when many homeowners finally decide they need the space, and
 - **Protect the excavation.** Open footing holes and trenches fill with water. Ask how the crew will pump, cover and keep sediment out of storm drains and streams.
 - **Dry in quickly.** Once framing starts, get the roof, wrap, windows and doors on fast, and keep framing lumber and subfloor covered. Ask how wet material will be handled before insulation and finishes.
 - **Respect working hours.** The City's getting-started page says, under SMC 16.05.030, construction is allowed Monday through Friday from 7:00 a.m. to 8:00 p.m. and Saturday from 9:00 a.m. to 6:00 p.m., and not on Sundays or listed holidays. That shapes how fast a crew can catch up after a stretch of rain.
+
+![A partly built backyard studio under a tarp during fall rain in Sammamish, WA](../assets/images/posts/2026-11-02-sammamish-backyard-studio-rain-9.webp "Fall and winter work on a Sammamish, WA backyard studio means keeping framing and materials dry between rain bands.")
 
 ## Materials Worth Knowing
 

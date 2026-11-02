@@ -25,6 +25,8 @@ That is usually when a homeowner hears the words "panel upgrade" or "service upg
 
 Both involve the utility, a City permit, and inspections. The Board of Project Stewardship's [Federal Way directory](../federal-way.html), [electrician page](../electrician.html), [HVAC page](../hvac.html), and [permits overview](../permits.html) cover the wider picture. This guide sticks to what the City of Federal Way, Washington L&I, and Puget Sound Energy actually publish.
 
+![An older fuse box on a basement wall in a Federal Way, WA home](../assets/images/posts/2026-10-20-federal-way-panel-old-fuse-box-6.webp "Older fuse boxes and undersized panels in Federal Way, WA homes are a common reason owners plan an upgrade.")
+
 ## The electrical permit comes from the City, not L&I
 
 Across most of Washington, electrical permits come from L&I. Federal Way is one of the exceptions. L&I's [City Electrical Permits & Inspections](https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections) page says the listed cities issue permits and perform inspections within their city limits, and that L&I does not issue permits or do inspections in those cities. Federal Way's entry lists the City's Permit Center at 33325 8th Ave South, 253-835-2607.
