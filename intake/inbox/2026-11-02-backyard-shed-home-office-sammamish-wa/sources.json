@@ -1,0 +1,149 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Sammamish",
+    "service": "Backyard shed / detached home office or studio",
+    "slug": "backyard-shed-home-office-sammamish-wa"
+  },
+  "sources": [
+    {
+      "url": "https://sammamish.municipal.codes/SMC/16.20.200",
+      "title": "https://sammamish.municipal.codes/SMC/16.20.200",
+      "retrieved": "2026-11-02",
+      "http_status": 200,
+      "supports": "SMC 16.20.200 work exempt from permit: IRC tool/storage sheds, playhouses, not vehicle storage, floor area <=200 sf, height <=12 ft from grade plane; exemptions do not apply in critical areas or standard shoreline setbacks; no authorization to violate code"
+    },
+    {
+      "url": "https://www.sammamish.us/media/xh0cugkr/240-handout-accessory-structures.pdf",
+      "title": "https://www.sammamish.us/media/xh0cugkr/240-handout-accessory-structures.pdf",
+      "retrieved": "2026-11-02",
+      "http_status": 200,
+      "supports": "Sammamish Handout No. 240 Accessory Structures: exemption conditions (no critical areas/buffers, <=200 sf, <=12 ft, used for storage); likely need a permit; permit for electric/plumbing; setbacks/height table; arterial 30 ft; 5 ft by recorded neighbor agreement"
+    },
+    {
+      "url": "https://sammamish.municipal.codes/DC/21.04.030",
+      "title": "https://sammamish.municipal.codes/DC/21.04.030",
+      "retrieved": "2026-11-02",
+      "http_status": 200,
+      "supports": "SDC 21.04.030 residential site planning standards: accessory structure setbacks, height maximums, hardscape coverage, DADU setbacks/height and condition (7), arterial front setback condition (5)"
+    },
+    {
+      "url": "https://www.sammamish.us/government/community-development/current-planning/codes-and-regulations/commonly-requested-information/r-4-development-standards/",
+      "title": "https://www.sammamish.us/government/community-development/current-planning/codes-and-regulations/commonly-requested-information/r-4-development-standards/",
+      "retrieved": "2026-11-02",
+      "http_status": 200,
+      "supports": "Sammamish R-4 development standards: accessory structure (storage shed) setbacks 15/10/10, height 35 ft; DADU 15/5/5, 24 ft"
+    },
+    {
+      "url": "https://www.sammamish.us/government/community-development/current-planning/codes-and-regulations/commonly-requested-information/r-6-development-standards/",
+      "title": "https://www.sammamish.us/government/community-development/current-planning/codes-and-regulations/commonly-requested-information/r-6-development-standards/",
+      "retrieved": "2026-11-02",
+      "http_status": 200,
+      "supports": "Sammamish R-6 development standards: accessory structure (storage shed) setbacks 15/10/10, height 35 ft; DADU 15/5/5, 24 ft"
+    },
+    {
+      "url": "https://www.sammamish.us/government/community-development/housing/accessory-dwelling-units-adus/",
+      "title": "https://www.sammamish.us/government/community-development/housing/accessory-dwelling-units-adus/",
+      "retrieved": "2026-11-02",
+      "http_status": 200,
+      "supports": "Sammamish ADUs: complete residences with kitchens, bedrooms, bathroom, entrances; up to two ADUs; detached max 1,000 sf; FAR exempt; Option 1 / Option 2 standards"
+    },
+    {
+      "url": "https://www.sammamish.us/government/community-development/permit-center/getting-started-and-faqs/",
+      "title": "https://www.sammamish.us/government/community-development/permit-center/getting-started-and-faqs/",
+      "retrieved": "2026-11-02",
+      "http_status": 200,
+      "supports": "Sammamish permit center getting started: Project Guidance (free); apply at MyBuildingPermit; fees based on fair market value; construction hours SMC 16.05.030; inspections via MyBuildingPermit"
+    },
+    {
+      "url": "https://mybuildingpermit.com/",
+      "title": "https://mybuildingpermit.com/",
+      "retrieved": "2026-11-02",
+      "http_status": 200,
+      "supports": "MyBuildingPermit portal"
+    },
+    {
+      "url": "https://sammamish.municipal.codes/SMC/16.20.197",
+      "title": "https://sammamish.municipal.codes/SMC/16.20.197",
+      "retrieved": "2026-11-02",
+      "http_status": 200,
+      "supports": "SMC 16.20.197 electrical permits required per Chapter 19.28 RCW, incl. low voltage and telecom thresholds"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "title": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "retrieved": "2026-11-02",
+      "http_status": 200,
+      "supports": "L&I City Electrical Permits & Inspections: listed cities issue own permits/inspections; L&I does not in those cities; Sammamish listed (801 228th Ave SE)"
+    },
+    {
+      "url": "https://www.lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/index",
+      "title": "https://www.lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/index",
+      "retrieved": "2026-11-02",
+      "http_status": 200,
+      "supports": "L&I electrical permits overview: permit purchased by contractor or owner doing the work; hired contractor buys own permit; correct jurisdiction"
+    },
+    {
+      "url": "https://sammamish.municipal.codes/DC/21.03.020",
+      "title": "https://sammamish.municipal.codes/DC/21.03.020",
+      "retrieved": "2026-11-02",
+      "http_status": 200,
+      "supports": "SDC 21.03.020 critical areas"
+    },
+    {
+      "url": "https://www.sammamish.us/government/community-development/permit-center/trees/",
+      "title": "https://www.sammamish.us/government/community-development/permit-center/trees/",
+      "retrieved": "2026-11-02",
+      "http_status": 200,
+      "supports": "Sammamish tree removal permits: significant conifer >8 in DBH, deciduous >12 in DBH; all trees in critical areas/buffers; no removal before construction permit on development sites"
+    },
+    {
+      "url": "https://sammamish.municipal.codes/DC/21.03.060",
+      "title": "https://sammamish.municipal.codes/DC/21.03.060",
+      "retrieved": "2026-11-02",
+      "http_status": 200,
+      "supports": "SDC 21.03.060 trees: approval required; arborist evaluation; removal caps by lot size for R-1/R-4/R-6"
+    },
+    {
+      "url": "https://sammamish.municipal.codes/DC/21.03.050",
+      "title": "https://sammamish.municipal.codes/DC/21.03.050",
+      "retrieved": "2026-11-02",
+      "http_status": 200,
+      "supports": "SDC 21.03.050 surface water: drainage review at 2,000 sf new/replaced impervious or 7,000 sf land disturbing; impervious surface definition"
+    },
+    {
+      "url": "https://www.sammamish.us/media/dafjdpzj/20241001-adopted-sammamish-addendum-to-2021-kcswdm.pdf",
+      "title": "https://www.sammamish.us/media/dafjdpzj/20241001-adopted-sammamish-addendum-to-2021-kcswdm.pdf",
+      "retrieved": "2026-11-02",
+      "http_status": 200,
+      "supports": "Sammamish Addendum to 2021 KCSWDM (eff. 2024-10-01): critical drainage area thresholds (landslide 200 sf, Pine/Beaver Lake 500 sf, Tamarack/Inglewood any net increase)"
+    },
+    {
+      "url": "https://www.sammamish.us/government/public-works/resources/drainage-surface-water-standards-and-forms/",
+      "title": "https://www.sammamish.us/government/public-works/resources/drainage-surface-water-standards-and-forms/",
+      "retrieved": "2026-11-02",
+      "http_status": 200,
+      "supports": "Sammamish drainage and surface water standards and forms"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "retrieved": "2026-11-02",
+      "http_status": 200,
+      "supports": "L&I hiring a contractor guidance"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-11-02",
+      "http_status": 200,
+      "supports": "L&I Verify a contractor"
+    }
+  ],
+  "dropped": [
+    "codepublishing.com/WA/Sammamish/ (200) not cited: SMC and Development Code now served at sammamish.municipal.codes",
+    "Brief premise 'Sammamish electrical is L&I' corrected: L&I lists Sammamish as a city that issues its own electrical permits",
+    "all fees, prices, timelines (tree review timing and permit fees omitted)",
+    "King County residential accessory building PDF (county rules, not city)"
+  ]
+}

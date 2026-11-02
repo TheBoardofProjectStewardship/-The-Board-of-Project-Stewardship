@@ -1,0 +1,44 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-11-02-sammamish-backyard-office-1.webp",
+      "repo_path": "assets/images/posts/2026-11-02-sammamish-backyard-office-1.webp",
+      "alt": "Sammamish, WA backyard home office: detached cedar studio with glass doors on concrete piers \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "0d5454617714cb220c2add9d69b6bc23",
+      "source": "Newly generated image (built-in image generator, 2026-11-02), source gen-1.jpg 1280x720, resized to 1600x900 webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-02-sammamish-backyard-office-2.webp",
+      "repo_path": "assets/images/posts/2026-11-02-sammamish-backyard-office-2.webp",
+      "alt": "Sammamish, WA backyard office setbacks: crew measuring from a property-line fence to new footings \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "1419aa40fa829f4330a3490f08fc1367",
+      "source": "Newly generated image (built-in image generator, 2026-11-02), source gen-2.jpg 1280x720, resized to 1600x900 webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-02-sammamish-backyard-office-3.webp",
+      "repo_path": "assets/images/posts/2026-11-02-sammamish-backyard-office-3.webp",
+      "alt": "Sammamish, WA backyard studio electrical: framed walls with outlet boxes, cable and floor conduit \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "2e958ffd1e0460f0243e03862ed2f1e4",
+      "source": "Newly generated image (built-in image generator, 2026-11-02), source gen-3.jpg 1280x720, resized to 1600x900 webp"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "n5TylfICb1o",
+      "url": "https://www.youtube.com/watch?v=n5TylfICb1o",
+      "title": "How To Build A Concrete Base For Your Shed/Garden Room",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "3 newly generated images (built-in generator), 0 regraded stills, 0 paid media."
+}
