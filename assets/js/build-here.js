@@ -124,6 +124,7 @@
   function setJuris(s) {
     var key = R.cityKey(s.city);
     s.cityKey = "";
+    if (s.stateAbbr && s.stateAbbr !== "WA") { s.juris = "outside"; s.jurisLabel = (s.city ? s.city + ", " : "") + (s.county ? s.county + ", " : "") + (s.stateName || s.stateAbbr); s.cityKey = ""; return; }
     if (/^King/.test(s.county)) s.juris = s.city === "Seattle" ? "seattle" : s.city === "Kenmore" ? "kenmore" : (s.city ? "other" : "kc");
     else if (/^Snohomish/.test(s.county)) s.juris = s.city === "Edmonds" ? "edmonds" : (s.city ? "other" : "sno");
     else s.juris = "outside";
@@ -131,7 +132,7 @@
     s.jurisLabel = s.city ? "City of " + s.city + ", " + s.county : (s.county ? "Unincorporated " + s.county : "Unknown");
   }
   function geocode(s, address) {
-    return jsonp(EP.census, { address: address, benchmark: "Public_AR_Current", vintage: "Current_Current", layers: "Counties,Incorporated Places" })
+    return jsonp(EP.census, { address: address, benchmark: "Public_AR_Current", vintage: "Current_Current", layers: "States,Counties,Incorporated Places" })
       .then(function (j) {
         var m = j && j.result && j.result.addressMatches && j.result.addressMatches[0];
         if (!m) throw new Error("census nomatch");
@@ -139,16 +140,18 @@
         s.matched = m.matchedAddress; s.lon = m.coordinates.x; s.lat = m.coordinates.y;
         var g = m.geographies || {};
         s.county = ((g.Counties || [])[0] || {}).NAME || "";
+        var st = (g.States || [])[0] || {}; s.stateAbbr = st.STUSAB || ""; s.stateName = st.NAME || "";
         s.city = (((g["Incorporated Places"] || [])[0] || {}).NAME || "").replace(/ city$| town$/i, "");
       })
       .catch(function () {
         // Second try: the Esri World geocoder. It gives the county but only the postal city, so the city comes from the county parcel or city layer next.
-        return getJSON(EP.esriGeo, { SingleLine: address, f: "json", outFields: "Subregion,Region,Addr_type", maxLocations: 1, countryCode: "USA" }).then(function (j) {
+        return getJSON(EP.esriGeo, { SingleLine: address, f: "json", outFields: "Subregion,Region,RegionAbbr,Addr_type", maxLocations: 1, countryCode: "USA" }).then(function (j) {
           var c = (j.candidates || [])[0];
-          if (!c || c.score < 85 || !/Washington/.test(c.attributes.Region || "")) { log(s, false, "Address geocoders (US Census, Esri World)", "No match for that address."); throw new Error("nomatch"); }
+          if (!c || c.score < 85) { log(s, false, "Address geocoders (US Census, Esri World)", "No match for that address."); throw new Error("nomatch"); }
           log(s, true, "Esri World geocoder (the US Census geocoder had no match)");
           s.matched = c.address; s.lon = c.location.x; s.lat = c.location.y;
           s.county = c.attributes.Subregion || ""; s.city = ""; s.cityFromParcel = true;
+          s.stateName = c.attributes.Region || ""; s.stateAbbr = /^Washington$/.test(s.stateName) ? "WA" : (c.attributes.RegionAbbr || "");
         });
       });
   }
@@ -177,18 +180,30 @@
       .then(function () {
         setJuris(s);
         setStatus("Found " + s.matched + ". Reading parcel records...");
+        if (s.juris === "outside") return s;
         if (/^King/.test(s.county)) return kingParcel(s);
         if (/^Snohomish/.test(s.county)) return snoParcel(s);
         return s;
       })
       .then(function () { return cityCheck(s); })
-      .then(function () { return Promise.all([zoning(s), hazards(s), permits(s), extras(s), neighbors(s)]); })
+      .then(function () { return Promise.all([zoning(s), hazards(s), permits(s), extras(s), neighbors(s), landscape(s)]); })
       .then(function () { buildImagery(s); return s; })
       .catch(function (e) {
         if (e && e.message === "nomatch") return s;
         log(s, false, "Lookup", "Stopped early: " + (e && e.message));
         return s;
       });
+  }
+
+  /* Site coverage and landscape split (assets/js/build-here-landscape.js). */
+  function landscape(s) {
+    var L = window.BuildHereLandscape;
+    if (!L || s.lon == null) return Promise.resolve();
+    setStatus("Measuring house, driveway, landscape and slope...");
+    return L.analyze(s).then(function (r) {
+      s.landscape = r;
+      r.sources.forEach(function (x) { log(s, x.ok, x.name, x.note); });
+    }).catch(function (e) { log(s, false, "Site coverage and slope", e.message); });
   }
 
   function houseAndStreet(matched) {
@@ -607,7 +622,7 @@
     s.frontDir = v.front || "";
     var out = [];
     var place = s.city ? s.city.toUpperCase() : (s.county || "").replace(" County", "").toUpperCase() + " COUNTY";
-    var page = function (title, body, cls) { return '<section class="bh-page ' + (cls || "") + '"><div class="bh-page-body">' + body + '</div><footer class="bh-page-foot"><span>' + esc(place) + ' | WA</span><strong>' + esc(title) + '</strong><span class="bh-brand">Board of Project Stewardship</span></footer></section>'; };
+    var page = function (title, body, cls) { return '<section class="bh-page ' + (cls || "") + '"><div class="bh-page-body">' + body + '</div><footer class="bh-page-foot"><span>' + esc(place) + ' | ' + esc(s.stateAbbr || "WA") + '</span><strong>' + esc(title) + '</strong><span class="bh-brand">Board of Project Stewardship</span></footer></section>'; };
 
     // Cover
     out.push(page("Feasibility snapshot", '<div class="bh-cover"><p class="bh-kicker">Single-family lot · first-pass feasibility</p><h2>' + esc(s.matched || s.input) + '</h2><p class="bh-cover-sub">' + esc(s.jurisLabel) + (s.parcel ? " · Parcel " + esc(s.parcel) : "") + '</p><p class="bh-cover-date">Prepared ' + new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }) + ' from public records. Rules last checked ' + R.CHECKED + '.</p><p class="bh-disclaimer"><strong>Planning estimate only.</strong> This is not a legal, zoning or permit determination. Confirm every number with the jurisdiction and a licensed professional before you design, buy or build.</p></div>', "bh-cover-page"));
@@ -636,7 +651,7 @@
     // Code review
     var cr;
     if (!rs) {
-      var why = s.juris === "other" ? "We could not match " + esc(s.jurisLabel) + " to a city in our list. Verify the rules with the city." : (s.juris === "city" && !v.lot ? "Enter the lot size in step 2 to see the rules and the math for " + esc(s.jurisLabel) + "." : (s.juris === "outside" ? "This address is outside King and Snohomish counties." : "We do not have verified rules coded for zone " + esc(v.zone || "(blank)") + " here. Verify with the jurisdiction."));
+      var why = s.juris === "other" ? "We could not match " + esc(s.jurisLabel) + " to a city in our list. Verify the rules with the city." : (s.juris === "city" && !v.lot ? "Enter the lot size in step 2 to see the rules and the math for " + esc(s.jurisLabel) + "." : (s.juris === "outside" ? "Zoning rules are coded only for King and Snohomish counties, WA. The site coverage and slope page below works nationwide." : "We do not have verified rules coded for zone " + esc(v.zone || "(blank)") + " here. Verify with the jurisdiction."));
       cr = '<p class="bh-verify">' + why + '</p><p><a href="./permits.html">The Board permit hub</a> lists city and county permit offices.</p>';
     } else {
       cr = '<h3>' + esc(rs.title) + '</h3><table class="bh-table bh-rules"><thead><tr><th scope="col">Standard</th><th scope="col">What the code says</th><th scope="col">Source (checked ' + R.CHECKED + ')</th></tr></thead><tbody>' +
@@ -681,6 +696,9 @@
     // Lot imagery and site plan
     var img = s.imagery ? '<figure class="bh-aerial"><div class="bh-aerial-frame"><img src="' + esc(s.imagery.url) + '" alt="Aerial photo of the parcel with the county parcel outline drawn on top" width="' + s.imagery.W + '" height="' + s.imagery.H + '" crossorigin="anonymous"><svg viewBox="0 0 ' + s.imagery.W + " " + s.imagery.H + '" aria-hidden="true"><path d="' + s.imagery.path + '" class="bh-outline"/></svg></div><figcaption>' + esc(s.imagery.credit) + ". Parcel outline: " + (/^Snohomish/.test(s.county) ? "Snohomish County Assessor parcels" : "King County GIS parcels") + ". Outlines are approximate and are not a survey. The photo uses a web map projection, so it is not to scale.</figcaption></figure>" : '<p class="bh-muted">No parcel outline was found, so no aerial view is shown.</p>';
     out.push(page("Existing lot", '<div class="bh-cols"><div>' + img + '</div><div><h3>Site plan diagram</h3>' + sitePlanSVG(s, rs) + '<p class="bh-muted">Diagrammatic only. Drawn from the county parcel outline. The shaded envelope is every point at least the required setback from each lot line. ' + (s.frontDir ? "The street side was set by hand in step 2." : (s.neighborRings ? "The street side is the lot line with no parcel beyond it nearest the address point; check it against the aerial and set it in step 2 if it is wrong." : "Which line is the front, side or rear is our guess from the address point; set the street side in step 2 if it is wrong.")) + ' A licensed surveyor sets the real lines.</p></div></div>'));
+
+    // Site coverage, landscape and slope
+    if (window.BuildHereLandscape && s.landscape) out.push(page("Site coverage and landscape", window.BuildHereLandscape.renderHTML(s.landscape, s)));
 
     // Plans and permits
     var pm = "<h3>House plans and permit history</h3>";
