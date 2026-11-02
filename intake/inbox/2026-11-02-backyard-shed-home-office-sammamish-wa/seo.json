@@ -1,0 +1,56 @@
+{
+  "producer": "openclaw",
+  "agent": "seo-specialist",
+  "slug": "backyard-shed-home-office-sammamish-wa",
+  "title": "Backyard Shed and Home Office Sammamish WA \u2014 When It Needs a Permit, Setbacks, Electrical and Rain-Ready Foundations",
+  "description": "A Sammamish homeowner's guide to backyard sheds, studios and detached home offices: the 200-square-foot permit exemption and its limits, accessory setbacks and height, critical areas and trees, City electrical permits, when a studio becomes an ADU, foundations, drainage and vetting the builder.",
+  "category": "Guides",
+  "keywords": [
+    "backyard shed permit Sammamish WA",
+    "home office shed Sammamish",
+    "detached studio Sammamish",
+    "accessory structure setbacks Sammamish",
+    "Sammamish shed electrical permit"
+  ],
+  "outline": [
+    "Key Takeaways",
+    "Why backyard offices and studios are popular in Sammamish",
+    "When a Sammamish shed needs a building permit",
+    "Setbacks, height and lot coverage",
+    "Critical areas, slopes and trees",
+    "How a Sammamish studio gets power: City electrical permits",
+    "Heat, plumbing and insulation for a year-round studio",
+    "When a backyard studio becomes an ADU",
+    "Foundation choices: piers, skids or slab",
+    "Drainage and stormwater in Pacific Northwest rain",
+    "Wet-season scheduling in Sammamish",
+    "Materials Worth Knowing",
+    "How to shortlist and verify a backyard building contractor",
+    "Where Pacific Pro Group fits",
+    "Next steps for a Sammamish backyard building"
+  ],
+  "search_intent": "A Sammamish homeowner planning a backyard shed, studio or detached home office wants to know when a building permit is required, which setbacks, height and coverage limits apply, how critical areas, trees and drainage affect siting, who issues the electrical permit, when a studio becomes an ADU, which foundation fits, and how to vet the builder.",
+  "local_angles": [
+    "SMC 16.20.200: exempt IRC tool/storage sheds, playhouses, not vehicle storage, <=200 sf floor area, <=12 ft grade plane to roof top; exemption void in critical areas and standard shoreline setbacks",
+    "Handout No. 240: likely need a permit; permit for any electric or plumbing work; setbacks table; arterial front 30 ft; side/rear reducible to 5 ft by recorded neighbor agreement (SMC 21.04.030.C.19)",
+    "SDC 21.04.030: accessory structure setbacks by zone; height 35/60 ft; hardscape coverage max 30/40/50/75/85/85%; DADU 5 ft side/rear, 24 ft height, only stand-alone",
+    "Sammamish ADU page: up to two ADUs; detached max 1,000 sf; complete residences with kitchen, bedroom, bathroom, entrance; ADUs exempt from FAR",
+    "L&I city electrical list includes Sammamish (801 228th Ave SE); SMC 16.20.197 electrical permit required; L&I: contractor buys own permit",
+    "Trees: significant conifer >8 in DBH, deciduous >12 in DBH; all trees in critical areas/buffers need permit; SDC 21.03.060 removal caps",
+    "SDC 21.03.050 drainage review at 2,000 sf impervious or 7,000 sf land disturbance; Sammamish Addendum lower thresholds (landslide 200 sf, Pine/Beaver Lake 500 sf, Tamarack/Inglewood any)",
+    "Construction hours SMC 16.05.030: M-F 7am-8pm, Sat 9am-6pm, no Sundays/holidays"
+  ],
+  "internal_links": [
+    "../sammamish.html",
+    "../permits.html",
+    "../verify-contractor.html",
+    "../hiring-a-contractor.html",
+    "../bonds-and-insurance.html",
+    "../red-flags-hiring.html"
+  ],
+  "notes": "Box-authored fallback brief. PPG only as Board #1 -> https://pacificprogroup.com/.",
+  "generation": {
+    "agent": "box-authored",
+    "mode": "box-fallback"
+  }
+}
