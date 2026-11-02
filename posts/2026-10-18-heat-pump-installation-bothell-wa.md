@@ -96,6 +96,8 @@ A heat pump bid is easy to compare on equipment and hard to compare on everythin
 
 Ask bidders which equipment they actually install and service, why they chose it for your house, and who you call for warranty work.
 
+![An insulated refrigerant line set entering an exterior wall through a sealed sleeve at a home in Bothell](../assets/images/posts/2026-10-18-bothell-heat-pump-line-set-8.webp "A sealed wall penetration and covered line set protect a Bothell heat pump installation from Northwest rain.")
+
 ## How to shortlist and verify HVAC contractors
 
 Ask each bidder for recent heat pump installations with photos of the outdoor setup and wall penetration, not only the indoor unit, and a written scope that covers the contract items above. Then:
@@ -104,6 +106,8 @@ Ask each bidder for recent heat pump installations with photos of the outdoor se
 - Confirm who holds Section 608 certification on the crew.
 - Ask who applies for the Bothell mechanical permit and who buys the L&I electrical permit.
 - Walk through the Board's [verify a contractor](../verify-contractor.html) checklist before you sign.
+
+![New insulated ductwork connected to a supply plenum during a ducted heat pump installation in Bothell](../assets/images/posts/2026-10-18-bothell-heat-pump-ductwork-9.webp "A ducted heat pump in a Bothell home often reuses or replaces ductwork, so duct condition belongs in the bid.")
 
 ## Where Pacific Pro Group fits
 

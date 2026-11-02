@@ -87,6 +87,8 @@ https://www.youtube.com/watch?v=87joDusz_ic
 
 In the video above, a master electrician walks through a typical Level 2 job: looking at how the homeowner parks, checking the panel with the main breaker locked out and the power verified off, and planning the route for the new 240-volt circuit. Every house is different, but the order of operations is the one you want to see in a Redmond bid.
 
+![A shallow trench with electrical conduit running to a detached garage for an EV charger in Redmond, WA](../assets/images/posts/2026-10-22-redmond-ev-charger-conduit-trench-6.webp "Putting a charger in a detached garage or by the driveway in Redmond, WA can mean trenching a new circuit.")
+
 ## Plug-in or hardwired?
 
 Level 2 chargers come in two broad styles:
@@ -135,6 +137,8 @@ A clear bid makes the job easy to compare and easy to inspect. Ask each installe
 - [Wallbox](https://wallbox.com/en_us/) — compact smart Level 2 chargers for garage and outdoor walls.
 
 Ask which models a bidder installs most often, confirm the exact model against PSE's qualified list if you plan to claim a rebate, and make sure an outdoor location gets an outdoor-rated unit.
+
+![A 240-volt garage receptacle with a plug-in EV charging cord in a Redmond, WA home](../assets/images/posts/2026-10-22-redmond-ev-charger-240v-outlet-9.webp "A plug-in charger on a 240-volt receptacle is one option for a Redmond, WA garage; a hardwired unit is the other.")
 
 ## How to shortlist and verify an installer
 
