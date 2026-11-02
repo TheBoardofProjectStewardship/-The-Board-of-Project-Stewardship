@@ -489,6 +489,69 @@
         "The outside stair to the first floor door is drawn on the plans; the stair down to the basement door beside it is cut off at the sheet edge, so its well and steps are assumed. An angled stair shown with a break line under the first floor at the east landing is not modeled because the sheets do not show where it goes.",
         "Interior doors are shown as open gaps. Kitchen and bath fixtures, closet shelving, siding and trim are not modeled."
       ]
+    },
+    {
+      "slug": "two-story-house-garage-apartment",
+      "engine": "config",
+      "config": "two-story-house-garage-apartment.json",
+      "title": "Two-story house with a garage apartment addition",
+      "card": "A two-story house whose one-story garage wing gets a new upper floor: a one-bedroom apartment over a garage extended 9 feet to the west, under a new 8:12 gable and reached by an outside stair.",
+      "facts": [
+        "New 682 square foot upper apartment",
+        "Garage extended 9 feet",
+        "Outside stair to the apartment"
+      ],
+      "kicker": "Garage apartment addition",
+      "thumb": "/portfolio/two-story-house-garage-apartment/thumb.png",
+      "dek": "Explore the house layer by layer: the finished house, the garage side, the roofs, the upper floor, the main floor and the floor deck.",
+      "sourceNote": "Modeled from the designer's draft floor plans and elevations for the addition at 1/4 inch = 1 foot, with the full plan set floor plans, elevations and sections for the two-story house. Walls, openings, stairs and room names come from those sheets, and the new ridge height and roof pitch are printed. Heights that are not printed are scaled from the elevations and sections and listed below.",
+      "learn": {
+        "house": [
+          "roof",
+          "partition"
+        ],
+        "front": [
+          "partition"
+        ],
+        "roof": [
+          "roof"
+        ],
+        "upper": [
+          "partition"
+        ],
+        "plan": [
+          "garage"
+        ],
+        "foundation": [
+          "garage"
+        ]
+      },
+      "notes": {
+        "roof": [
+          "Roofs",
+          "Every roof is 8:12. The new gable over the apartment runs north to south with its ridge at 27 feet, the height printed on the elevations, and a deep west eave over the outside stair. The house has two gables with a low flat section between them, and the hipped roof over the entry porch."
+        ],
+        "partition": [
+          "Apartment over the garage",
+          "The new upper floor covers the whole garage wing, 682 square feet: a bedroom with two closets, a bath, a laundry closet, an entry and an open living room and kitchen. Its floor sits a little below the upper floor of the house, and it has its own door from the outside stair."
+        ],
+        "garage": [
+          "Garage extension",
+          "The garage grows 9 feet to the west, to the line of the utility room, with one 16 foot door. A step up leads from the garage to the kitchen door; the main floor of the house sits about a foot above the garage slab."
+        ]
+      },
+      "assumptions": [
+        "Levels are scaled from the elevations and the section: main floor about 1 foot over the garage slab, the house upper floor 8 feet 8 3/4 inches above it, the apartment floor at about 8 feet 11 inches over the slab.",
+        "The 27 foot ridge of the new gable is printed; the plate heights, eaves and the flat section between the two house gables are scaled from the elevations.",
+        "Rake overhangs of the two house gables are drawn at 1 foot; the plans do not dimension them.",
+        "The outside stair is drawn with equal risers and a mid landing at half height; open treads, posts and guards are simplified.",
+        "The chimney is drawn only above the roof; the draft plan does not show how it passes the new kitchen.",
+        "The step up from the garage to the kitchen door and the furred wall around it are read from the plan lines and not dimensioned.",
+        "Interior wall heights and ceilings are scaled from the sections. No room areas are printed, so labels show names only.",
+        "The window on the west wall of the house upper floor where the apartment meets it is removed and filled in, as noted on the draft plan.",
+        "The step outside the north sliding door is drawn on the north elevation; its 3 foot depth is assumed.",
+        "Window and door sizes come from the size tags and the elevations; sills not printed are scaled."
+      ]
     }
   ]
 }

@@ -253,6 +253,28 @@ console.log(JSON.stringify({{ids:m.groups.map(g=>g.id),floors:[...new Set(m.labe
         words |= {w[:6] for w in words if w.isdigit()}
         self.assertFalse({hashlib.sha256(w.encode()).hexdigest()[:16] for w in words} & private)
 
+    def test_garage_apartment_addition_is_plan_data(self):
+        p = next(p for p in self.projects if p["slug"] == "two-story-house-garage-apartment")
+        cfg = ps.load_config(p)
+        self.assertEqual([s["id"] for s in cfg["stages"]], list(ps.STAGE_PROGRESS))
+        self.assertEqual(cfg["totalSqft"], 682)  # printed addition area
+        g = next(g for g in cfg["gableRoof"]["gables"] if g["name"] == "Addition gable")
+        span = g["r"][2] - g["r"][0]
+        self.assertAlmostEqual(g["plate"] + span / 2 * g["pitch"] / 12, 27.0, places=1)  # printed 27'-0" ridge
+        self.assertTrue(all(gg["pitch"] == 8.0 for gg in cfg["gableRoof"]["gables"]))  # 8:12 printed
+        for r in cfg["rooms"]:  # the plans print no room areas
+            self.assertTrue(r.get("areaNotPrinted"), r["name"])
+            self.assertNotIn("SF", r["text"])
+        bath = next(o for o in cfg["openings"] if o["tag"] == "bath window" and o["lvl"] == 1)
+        self.assertEqual((bath["axis"], bath["at"]), ("x", 0.25))  # north wall over the tub, as drawn
+        self.assertFalse([o for o in cfg["openings"] if o["kind"] == "W" and o["axis"] == "z" and o["at"] < 1])  # no west windows on the apartment
+        self.assertTrue(p.get("assumptions"))
+        private = {'6627835f988e2c5e', '00f2e65596ab8c19', '8ca7616799857320', 'a60954a1a077ac23', '56533080816acfbf',
+                   '5276b057f64eb13f', '2b591b9e683fe768'}  # sha256 prefixes of the client's private words, kept out of the repo in plain text
+        text = (json.dumps(p) + json.dumps(cfg)).lower()
+        words = set(re.findall(r"[a-z0-9]+", text))
+        self.assertFalse({hashlib.sha256(w.encode()).hexdigest()[:16] for w in words} & private)
+
     @unittest.skipUnless(shutil.which("node"), "node not installed")
     def test_engine_builds_three_levels(self):
         script = f"""
