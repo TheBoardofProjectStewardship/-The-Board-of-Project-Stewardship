@@ -1,0 +1,19 @@
+{
+  "submission_id": "2026-11-03-exterior-house-painting-renton-wa",
+  "idempotency_key": "sha256:fed7ef5b770e6a4dbd3b5bc622af0da990cd3bef9c102ca2020aeae3cc4bd5b5",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-11-03T11:42:04Z",
+  "outputs": [
+    "assets/images/posts/2026-11-03-renton-exterior-painting-1.webp",
+    "assets/images/posts/2026-11-03-renton-exterior-painting-2.webp",
+    "assets/images/posts/2026-11-03-renton-exterior-painting-3.webp",
+    "posts/2026-11-03-exterior-house-painting-renton-wa.md",
+    "posts/2026-11-03-exterior-house-painting-renton-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 91
+}

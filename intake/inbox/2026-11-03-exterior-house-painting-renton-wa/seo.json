@@ -1,0 +1,50 @@
+{
+  "producer": "openclaw",
+  "agent": "seo-specialist",
+  "slug": "exterior-house-painting-renton-wa",
+  "title": "Exterior House Painting Renton WA \u2014 Lead-Safe Prep, Permits, Rain Windows and Choosing a Painter",
+  "description": "A Renton homeowner's guide to exterior house painting: when Renton's permit exemption for painting applies, Washington lead-safe (RRP) rules for pre-1978 homes, prep that makes paint last, working around Northwest rain, and how to vet a painting contractor.",
+  "category": "Guides",
+  "keywords": [
+    "exterior house painting Renton WA",
+    "house painter Renton",
+    "lead-safe painting pre-1978 home Renton",
+    "Renton painting permit",
+    "exterior paint prep Renton"
+  ],
+  "outline": [
+    "Key Takeaways",
+    "Why exterior paint matters in Renton",
+    "Do you need a permit to paint a house in Renton?",
+    "Pre-1978 homes: Washington's lead-safe rules",
+    "Prep that makes paint last",
+    "Rain, temperature and timing in Renton",
+    "Materials Worth Knowing",
+    "How to shortlist and verify a painting contractor",
+    "Where Pacific Pro Group fits",
+    "Next steps for a Renton exterior paint job"
+  ],
+  "search_intent": "A Renton homeowner planning an exterior repaint wants to know whether a permit is needed, what Washington's lead-safe rules require for a pre-1978 house, which prep steps make paint last, how to schedule around rain, and how to vet a painting contractor.",
+  "local_angles": [
+    "RMC 4-5-060 exemption: painting, nonstructural wood/vinyl siding and similar finish work exempt; not veneer, stucco or EIFS; not RCW 64.55 condo structures; permit required for exterior regulated work in WUI locations",
+    "Renton permit portal permitting.rentonwa.gov",
+    "Commerce RRP: certification required for renovation, repair or painting work on pre-1978 homes; WAC 365-230-360 firm certification",
+    "WAC 365-230-330 exterior: close doors/windows within 20 ft, ground cover 10 ft, vertical containment within 10 ft of property line; no open-flame burning; shrouded HEPA machines only; heat guns below 1,100 F",
+    "EPA: RRP generally not for owner-occupants doing own work, applies to rentals, home child care, flippers",
+    "Commerce certified RRP company lists by city and county"
+  ],
+  "internal_links": [
+    "../renton.html",
+    "../painting.html",
+    "../permits.html",
+    "../verify-contractor.html",
+    "../hiring-a-contractor.html",
+    "../bonds-and-insurance.html",
+    "../red-flags-hiring.html"
+  ],
+  "notes": "Box-authored fallback brief. PPG only as Board #1 -> https://pacificprogroup.com/.",
+  "generation": {
+    "agent": "box-authored",
+    "mode": "box-fallback"
+  }
+}
