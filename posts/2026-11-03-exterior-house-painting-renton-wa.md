@@ -22,6 +22,8 @@ That is why a good Renton paint project starts with an inspection, not a color c
 
 The Board's [Renton page](../renton.html) collects local resources, and its [Renton basement finishing guide](../posts/2026-10-14-basement-finishing-renton-wa.html) covers how Renton permits interior projects. If the inspection shows the siding itself is failing, read the Board's [Bellevue siding replacement guide](../posts/2026-10-17-siding-replacement-bellevue-wa.html) before you pay to paint it. The Board's [painting trade page](../painting.html) covers what to expect from a painting scope in general.
 
+![Peeling paint and bare wood on the lower lap siding of an older house in Renton, WA](../assets/images/posts/2026-11-03-renton-exterior-painting-peeling-siding-4.webp "Peeling down to bare wood near the soil line on a Renton, WA house points to moisture problems that a fresh coat alone will not fix.")
+
 ## Do you need a permit to paint a house in Renton?
 
 Usually not for the paint. Renton adopts its building codes in [RMC 4-5-060](https://www.codepublishing.com/WA/Renton/html/Renton04/Renton0405/Renton0405060.html), and its list of work exempt from a building permit includes "painting, nonstructural wood and vinyl siding, papering, tiling, carpeting, cabinets, counter tops and similar finish work," provided existing required accessible features are not altered.
@@ -34,6 +36,8 @@ The same exemption has important limits:
 - **Repairs can become structural.** Replacing a rotted trim board is finish work. Replacing rotted sheathing, framing, a deck ledger or a structural post is not. If the painter's prep turns up damage behind the siding, stop and decide with the contractor whether a permit is needed before it is closed up.
 
 Renton's online permit portal is [permitting.rentonwa.gov](https://permitting.rentonwa.gov). Even when no building permit is needed, the City's other rules still apply, and if you belong to a homeowners association, check its color and approval rules before you buy paint.
+
+![A rotted window trim board removed for repair before exterior painting in Renton, WA](../assets/images/posts/2026-11-03-renton-exterior-painting-rotted-trim-5.webp "Replacing rotted trim is finish work, but damaged sheathing or framing found during prep on a Renton, WA house may need a permit.")
 
 ## Pre-1978 homes: Washington's lead-safe rules
 
@@ -57,6 +61,8 @@ The EPA's [lead-safe renovations for DIYers page](https://www.epa.gov/lead/lead-
 
 Commerce's [business and homeowner resources page](https://www.commerce.wa.gov/lead-based-paint/lbp-resources/) links to downloadable lists of certified RRP companies, sorted alphabetically and by city and county, plus enforcement records. Check the painting firm on that list as well as with L&I.
 
+![A shrouded sander connected to a dust extractor on old painted siding in Renton, WA](../assets/images/posts/2026-11-03-renton-exterior-painting-hepa-sander-6.webp "On a pre-1978 Renton, WA house, power sanding is allowed only with a shroud and a HEPA vacuum attachment.")
+
 ## Prep that makes paint last
 
 Most exterior paint failures are prep failures. A written scope should say which of these steps are included and how each is done:
@@ -71,6 +77,8 @@ Most exterior paint failures are prep failures. A written scope should say which
 The video below shows a painting contractor's prep sequence on wood siding: washing, scraping, sanding, caulking and priming before the topcoat. On a pre-1978 house, the same steps must follow the lead-safe rules above.
 
 https://www.youtube.com/watch?v=vD-V-piNSjI
+
+![Caulking the joint between a corner board and lap siding before painting a house in Renton, WA](../assets/images/posts/2026-11-03-renton-exterior-painting-caulking-trim-7.webp "Caulk seals trim joints and corners on a Renton, WA house, while the bottom laps of the siding stay open to let water out.")
 
 ## Rain, temperature and timing in Renton
 
@@ -87,6 +95,8 @@ Practical points to agree on before work starts:
 
 If your house also needs windows or new siding, sequence those first so the paint goes on once. The Board's [Kent window replacement guide](../posts/2026-10-25-window-replacement-kent-wa.html) covers how window work and trim fit together.
 
+![A house partway through an exterior repaint with covered shrubs on an overcast day in Renton, WA](../assets/images/posts/2026-11-03-renton-exterior-painting-partial-repaint-8.webp "Fall paint work in Renton, WA goes wall by wall around the forecast, with plants and surfaces covered between coats.")
+
 ## Materials Worth Knowing
 
 - [Miller Paint](https://www.millerpaint.com/) is a Northwest paint company whose stores and product data are a useful reference when you compare exterior primers and topcoats.
@@ -95,6 +105,8 @@ If your house also needs windows or new siding, sequence those first so the pain
 - [Festool](https://www.festool.com/) makes sanders and dust extractors, including extractors with HEPA filtration that can connect to shrouded sanders for dust collection at the tool.
 
 Whatever brands a bidder proposes, ask for the exact product names for primer, caulk and topcoat, the number of coats, the sheen, and the data sheets. Keep them with your house papers so the next repaint starts from facts.
+
+![Unlabeled primer and paint cans, brushes and caulk on a drop cloth for a house painting job in Renton, WA](../assets/images/posts/2026-11-03-renton-exterior-painting-supplies-9.webp "Ask a Renton, WA painting bidder for the exact primer, caulk and topcoat products and their data sheets.")
 
 ## How to shortlist and verify a painting contractor
 
