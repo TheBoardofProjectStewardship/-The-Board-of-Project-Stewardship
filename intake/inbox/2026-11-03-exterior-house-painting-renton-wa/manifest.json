@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-11-03-exterior-house-painting-renton-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-11-03T11:50:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Exterior House Painting Renton WA \u2014 Lead-Safe Prep, Permits, Rain Windows and Choosing a Painter",
+    "date": "2026-11-03",
+    "slug": "exterior-house-painting-renton-wa",
+    "description": "A Renton homeowner's guide to exterior house painting: when Renton's permit exemption for painting applies, Washington lead-safe (RRP) rules for pre-1978 homes, prep that makes paint last, working around Northwest rain, and how to vet a painting contractor.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 offline; no 2026-11-03 packets. Topic: exterior house painting (RMC 4-5-060 finish-work permit exemption and its limits, Washington Commerce RRP certification for pre-1978 homes, WAC 365-230-330 exterior containment and prohibited practices, EPA RRP background and DIY exemption, prep, wet-season timing, contractor vetting), Renton WA (King County), not in the last 14 posts. L&I pages cited. No fees or prices. Producer role fields kept per intake contract."
+}

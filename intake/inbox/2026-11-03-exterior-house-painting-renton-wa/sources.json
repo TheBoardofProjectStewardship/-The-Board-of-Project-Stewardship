@@ -1,0 +1,93 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Renton",
+    "service": "Exterior house painting",
+    "slug": "exterior-house-painting-renton-wa"
+  },
+  "sources": [
+    {
+      "url": "https://www.codepublishing.com/WA/Renton/html/Renton04/Renton0405/Renton0405060.html",
+      "title": "https://www.codepublishing.com/WA/Renton/html/Renton04/Renton0405/Renton0405060.html",
+      "retrieved": "2026-11-03",
+      "http_status": 200,
+      "supports": "RMC 4-5-060 building code amendments: permit exemption for painting, nonstructural wood and vinyl siding and similar finish work; not veneer, stucco, EIFS; not RCW 64.55 structures; permit for exterior regulated work in WUI locations"
+    },
+    {
+      "url": "https://permitting.rentonwa.gov",
+      "title": "https://permitting.rentonwa.gov",
+      "retrieved": "2026-11-03",
+      "http_status": 200,
+      "supports": "Renton online permit portal"
+    },
+    {
+      "url": "https://www.epa.gov/lead/renovation-repair-and-painting-program",
+      "title": "https://www.epa.gov/lead/renovation-repair-and-painting-program",
+      "retrieved": "2026-11-03",
+      "http_status": 200,
+      "supports": "EPA RRP program: 1978 ban; about three-quarters of pre-1978 homes contain some lead-based paint; RRP projects can create lead dust; homeowner exemption and exceptions"
+    },
+    {
+      "url": "https://www.epa.gov/lead/lead-safe-renovations-diyers",
+      "title": "https://www.epa.gov/lead/lead-safe-renovations-diyers",
+      "retrieved": "2026-11-03",
+      "http_status": 200,
+      "supports": "EPA lead-safe renovations for DIYers: RRP generally not for owners on own home; applies to rentals, child care, flippers; recommends certified contractors; assume lead if age unknown"
+    },
+    {
+      "url": "https://www.commerce.wa.gov/lead-based-paint/",
+      "title": "https://www.commerce.wa.gov/lead-based-paint/",
+      "retrieved": "2026-11-03",
+      "http_status": 200,
+      "supports": "Washington Commerce lead-based paint programs: training, certification, enforcement; RRP certification needed for work on pre-1978 properties"
+    },
+    {
+      "url": "https://www.commerce.wa.gov/lead-based-paint/rrp/",
+      "title": "https://www.commerce.wa.gov/lead-based-paint/rrp/",
+      "retrieved": "2026-11-03",
+      "http_status": 200,
+      "supports": "Commerce RRP page: certification required for renovation, repair or painting work on pre-1978 homes or child-occupied facilities; firm and individual paths"
+    },
+    {
+      "url": "https://www.commerce.wa.gov/lead-based-paint/lbp-resources/",
+      "title": "https://www.commerce.wa.gov/lead-based-paint/lbp-resources/",
+      "retrieved": "2026-11-03",
+      "http_status": 200,
+      "supports": "Commerce resources: certified RRP company lists alphabetical and by city/county; enforcement records"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=365-230-330",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=365-230-330",
+      "retrieved": "2026-11-03",
+      "http_status": 200,
+      "supports": "WAC 365-230-330 work practice standards: signs, exterior containment (20 ft doors/windows, 10 ft ground cover, vertical containment near property line), prohibited practices, heat gun below 1,100 F, waste"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=365-230-360",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=365-230-360",
+      "retrieved": "2026-11-03",
+      "http_status": 200,
+      "supports": "WAC 365-230-360 firm certification: no firm may perform or offer renovations for compensation without certification; at least one certified individual; five-year period"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "retrieved": "2026-11-03",
+      "http_status": 200,
+      "supports": "L&I hiring a contractor guidance"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/contractors/register-as-a-contractor/",
+      "title": "https://lni.wa.gov/licensing-permits/contractors/register-as-a-contractor/",
+      "retrieved": "2026-11-03",
+      "http_status": 200,
+      "supports": "L&I contractor registration requirements"
+    }
+  ],
+  "dropped": [
+    "rentonwa.gov Building Permits FAQ (403 to automated check) not cited",
+    "EPA authorized-state list not cited (Washington runs its RRP certification through Commerce under WAC 365-230; agency authorization wording avoided)",
+    "all fees, prices, timelines",
+    "claims about the age of Renton's housing stock (not sourced)"
+  ]
+}

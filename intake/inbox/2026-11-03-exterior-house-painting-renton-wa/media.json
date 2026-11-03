@@ -1,0 +1,44 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-11-03-renton-exterior-painting-1.webp",
+      "repo_path": "assets/images/posts/2026-11-03-renton-exterior-painting-1.webp",
+      "alt": "Renton, WA exterior house painting: freshly painted 1960s rambler with white trim and a painter on a ladder \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "74346eb5d1b234c33e45f1765862d7d3",
+      "source": "Newly generated image (built-in image generator, 2026-11-03), source gen-1.jpg 1280x720, resized to 1600x900 webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-03-renton-exterior-painting-2.webp",
+      "repo_path": "assets/images/posts/2026-11-03-renton-exterior-painting-2.webp",
+      "alt": "Renton, WA lead-safe exterior painting prep: plastic ground cover, respirator and wet scraping of old siding paint \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "00dd921c624531193b1ec89f94e9ac95",
+      "source": "Newly generated image (built-in image generator, 2026-11-03), source gen-2.jpg 1280x720, resized to 1600x900 webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-03-renton-exterior-painting-3.webp",
+      "repo_path": "assets/images/posts/2026-11-03-renton-exterior-painting-3.webp",
+      "alt": "Renton, WA exterior painting in wet weather: priming bare cedar trim beside a moisture meter on the siding \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "3a2975f3679352414ac940e0a6a00ea6",
+      "source": "Newly generated image (built-in image generator, 2026-11-03), source gen-3.jpg 1280x720, resized to 1600x900 webp"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "vD-V-piNSjI",
+      "url": "https://www.youtube.com/watch?v=vD-V-piNSjI",
+      "title": "Exterior wood siding painting preparation - tips, tools, how to guide",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "3 newly generated images (built-in generator), 0 regraded stills, 0 paid media."
+}
