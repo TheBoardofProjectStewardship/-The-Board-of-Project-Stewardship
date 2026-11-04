@@ -275,6 +275,26 @@ console.log(JSON.stringify({{ids:m.groups.map(g=>g.id),floors:[...new Set(m.labe
         words = set(re.findall(r"[a-z0-9]+", text))
         self.assertFalse({hashlib.sha256(w.encode()).hexdigest()[:16] for w in words} & private)
 
+    def test_two_level_city_house_is_plan_data(self):
+        p = next(p for p in self.projects if p["slug"] == "two-level-city-house")
+        cfg = ps.load_config(p)
+        self.assertEqual([s["id"] for s in cfg["stages"]], list(ps.STAGE_PROGRESS))
+        lv = {l["id"]: l["y"] for l in cfg["levels"]}
+        self.assertAlmostEqual(lv["main"] - lv["lower"], 10.25, places=2)  # printed 10'-3" basement to level 1
+        self.assertAlmostEqual(lv["upper"] - lv["main"], 9.625, places=2)  # printed 9'-7 1/2"
+        roof_top = max(pt[1] for f in cfg["gableRoof"]["faces"] if not f.get("c") for pt in f["p"])  # roof planes only, not the ridge cap trim
+        self.assertAlmostEqual(roof_top - (lv["main"] - (4 + 5 / 12)), 31 + 2.5 / 12, places=1)  # printed building height over grade
+        self.assertNotIn("totalSqft", cfg)
+        for r in cfg["rooms"]:  # the plans print no room areas
+            self.assertTrue(r.get("areaNotPrinted"), r["name"])
+            self.assertNotIn("SF", r["text"])
+        self.assertTrue(p.get("assumptions"))
+        private = {'01ca2f649a8f2ac3', '05c5f6ef21bb02be', '22b823edd9da9a72', '5c87db0f23473b6f', '62fe739825059f30', '656d5be9b8439710',
+                   '8961d9b745b78e1f', 'e8aaa8720c56cca6', 'e93c7bd5513c2bcd', 'fc52fabe94c0e037', 'fe6f7df5c099acc7'}  # sha256 prefixes of the client's private words, kept out of the repo in plain text
+        text = (json.dumps(p) + json.dumps(cfg) + ps.pages()["portfolio/two-level-city-house/index.html"]).lower()
+        words = set(re.findall(r"[a-z0-9]+", text))
+        self.assertFalse({hashlib.sha256(w.encode()).hexdigest()[:16] for w in words} & private)
+
     @unittest.skipUnless(shutil.which("node"), "node not installed")
     def test_engine_builds_three_levels(self):
         script = f"""

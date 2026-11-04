@@ -552,6 +552,68 @@
         "The step outside the north sliding door is drawn on the north elevation; its 3 foot depth is assumed.",
         "Window and door sizes come from the size tags and the elevations; sills not printed are scaled."
       ]
+    },
+    {
+      "slug": "two-level-city-house",
+      "engine": "config",
+      "config": "two-level-city-house.json",
+      "title": "Two-story house remodel with an east addition and a new basement",
+      "card": "A two-story house that grows to the east with a two-story addition under a new 9:12 gable, gains a full basement under the existing house, and gets a west deck and a covered entry porch.",
+      "facts": [
+        "New two-story addition with a living room, entry and two bedrooms",
+        "New basement with an outside areaway",
+        "West deck and a covered east porch"
+      ],
+      "kicker": "Addition and new basement",
+      "thumb": "/portfolio/two-level-city-house/thumb.png",
+      "dek": "Explore the house layer by layer: the finished house, the entry side, the roofs, the second floor, the first floor and the basement.",
+      "sourceNote": "Modeled from the architect's schematic design floor plans, elevations and sections at 1/4 inch = 1 foot. Walls, openings, stairs and room names come from those sheets, and the floor levels, grade, plate height, building height and new roof pitch are printed. Heights that are not printed are scaled from the elevations and sections and listed below.",
+      "learn": {
+        "house": [
+          "roof",
+          "partition"
+        ],
+        "front": [
+          "partition"
+        ],
+        "roof": [
+          "roof"
+        ],
+        "upper": [
+          "partition"
+        ],
+        "plan": [
+          "partition"
+        ],
+        "foundation": [
+          "garage"
+        ]
+      },
+      "notes": {
+        "roof": [
+          "Roofs",
+          "The existing house keeps its low gable running north to south, with a cross gable over the west bedroom. The addition gets a steeper 9:12 gable running east to west, with its ridge at the printed building height of 31 feet 2 1/2 inches above grade, meeting the old roof in a valley and a short hip."
+        ],
+        "partition": [
+          "East addition",
+          "The two-story addition opens the first floor into a new living room with a north bump-out window and a new entry off the covered porch. Upstairs it holds two bedrooms with closets, reached from the hall through a short vestibule."
+        ],
+        "garage": [
+          "New basement",
+          "A new basement is dug under the existing house, 10 feet 3 inches below the first floor, with its own stair under the main stair and an outside areaway down to a door on the north side. Gear storage sits under the south end of the deck."
+        ]
+      },
+      "assumptions": [
+        "Levels are printed on the sections: average grade 4 feet 5 inches below the first floor, the second floor 9 feet 7 1/2 inches above it, the top of plate 7 feet above the second floor, the new basement 10 feet 3 inches below the first floor, and the building height 31 feet 2 1/2 inches.",
+        "The new roof over the addition is a printed 9:12 gable with its ridge at the building height. The existing roof pitch (about 4:12) and the cross gable over the west bedroom are scaled from the elevations.",
+        "The existing basement floor height is scaled from the section; that basement is outside the scope and drawn as an empty room.",
+        "The crawl space ground under the addition is assumed 2 feet below grade.",
+        "Window sizes and sills come from the elevations; the bath window sills and a few heads not printed are scaled.",
+        "The ground is drawn level at the average grade; the plans do not show the slope of the lot.",
+        "The deck, its stair and the areaway steps are drawn with equal risers; guards and posts are simplified.",
+        "The detached garage and the existing outside stair on the south side are not part of this work and are not drawn.",
+        "Furniture and fixtures follow the plan symbols where drawn; room areas are not printed, so labels show names only."
+      ]
     }
   ]
 }
