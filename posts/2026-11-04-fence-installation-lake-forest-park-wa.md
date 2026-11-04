@@ -20,6 +20,8 @@ A fence looks like a weekend project, but in Lake Forest Park it touches several
 
 The Board's [Lake Forest Park page](../lake-forest-park.html) collects local resources, and its [Lake Forest Park bathroom remodel guide](../posts/2026-09-30-bathroom-remodel-lake-forest-park-wa.html) covers how the City handles interior permits. If your fence line runs along a slope or on top of a wall, read the Board's [Mukilteo retaining wall guide](../posts/2026-10-30-retaining-wall-mukilteo-wa.html) as well, because the wall may need more attention than the fence.
 
+![A cedar fence follows a slope beside trees and a low wall in Lake Forest Park, WA.](../assets/images/posts/2026-11-04-lake-forest-park-fence-4.webp "On a wooded Lake Forest Park, WA lot, a fence line can run beside trees, drainage, and a low wall.")
+
 ## Fence height rules in Lake Forest Park
 
 Lake Forest Park sets fence rules in [LFPMC 18.50.010](https://www.codepublishing.com/WA/LakeForestPark/html/LakeForestPark18/LakeForestPark1850.html). In an R or RM zone, the code says:
@@ -30,6 +32,8 @@ Lake Forest Park sets fence rules in [LFPMC 18.50.010](https://www.codepublishin
 - **Prohibited types:** barbed wire, razor wire and electrified fences are prohibited.
 
 The code also explains how height is measured. Where a fence sits directly on the ground, height is the vertical distance from the top board, rail or wire to the ground directly below. Where a masonry wall is used as a fence, height is measured from the top of the wall to the ground on the high side. A fence may be placed on a retaining wall if it meets the height limit, and for measuring that fence the low point is the average height of the retaining wall.
+
+![A low front-yard fence and a taller side fence stand at a house in Lake Forest Park, WA.](../assets/images/posts/2026-11-04-lake-forest-park-fence-5.webp "Lake Forest Park, WA fence rules treat the front of a lot differently from the side and rear.")
 
 ## When a fence needs a permit
 
@@ -43,6 +47,8 @@ That leaves a few situations where you should talk to the City before building:
 - **A lot near a stream, wetland or steep slope,** where other City rules may apply to digging and clearing even when the fence itself is exempt.
 
 The City's main site is [cityoflfp.gov](https://www.cityoflfp.gov/), and its FAQ links to the zoning code for details. Even when no permit is required, the height, measurement and prohibited-fence rules still apply, and an HOA or recorded covenant may add its own limits on style or height.
+
+![A homeowner and a contractor look at a fence on a wall in Lake Forest Park, WA.](../assets/images/posts/2026-11-04-lake-forest-park-fence-6.webp "A fence on a retaining wall in Lake Forest Park, WA is a case to talk through with the City before building.")
 
 ## Property lines, neighbors and sight triangles
 
@@ -62,6 +68,8 @@ Practical steps before any posts go in:
 Every fence post is an excavation, and Washington law treats it that way. Under [RCW 19.122.030](https://app.leg.wa.gov/rcw/default.aspx?cite=19.122.030), before starting an excavation the excavator must mark the boundary of the dig area with white lining or white pin flags, then notify all facility operators through the one-number locator service, which you reach by dialing 811. That notice must be given not less than two full business days and not more than 10 full business days before the scheduled start.
 
 The exemptions in [RCW 19.122.031](https://app.leg.wa.gov/rcw/default.aspx?cite=19.122.031) include excavation less than twelve inches deep on private noncommercial property done by the owner or occupant. Fence post holes are usually much deeper than that, so plan on a locate request whether you dig yourself or hire the work out. Private lines that the utilities do not mark, such as a sprinkler line, a power feed to a detached shop or a drain line, are on you, so mark what you know before the crew arrives. The Board's [Kenmore drainage guide](../posts/2026-10-27-yard-foundation-drainage-kenmore-wa.html) covers buried drain lines and where yard water goes.
+
+![Colored locate flags and a white line mark a fence dig in Lake Forest Park, WA.](../assets/images/posts/2026-11-04-lake-forest-park-fence-7.webp "Locate flags and a white line mark the dig area for a fence in Lake Forest Park, WA.")
 
 ## Posts that last in Northwest rain
 
@@ -89,6 +97,8 @@ https://www.youtube.com/watch?v=aUTHbArkPu0
 
 Whatever brands a bidder proposes, ask for the post size and treatment rating, the hole depth and backfill method, the board species and grade, the fasteners and the finish, and keep those details with your house papers.
 
+![Cedar boards, a treated post, gravel, and concrete for a fence in Lake Forest Park, WA.](../assets/images/posts/2026-11-04-lake-forest-park-fence-8.webp "Boards, a post, gravel, and concrete laid out for a fence in Lake Forest Park, WA.")
+
 ## How to shortlist and verify a fence contractor
 
 Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming that a contractor has an active registration, is bonded and insured, and has a clean history, getting at least three written bids, and putting the job in a written contract. L&I's [contractor registration page](https://lni.wa.gov/licensing-permits/contractors/register-as-a-contractor/) explains who must register.
@@ -110,5 +120,7 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 3. Check for sight distance triangles, retaining walls over 48 inches, streams, steep slopes and trees, and call the City if any apply.
 4. White-line the post locations and submit a locate request through 811 at least two full business days before digging.
 5. Get at least three written bids that name post material, depth, backfill, finish and who handles the locate and the line, and verify every firm with L&I.
+
+![A homeowner reviews fence papers with a contractor in Lake Forest Park, WA.](../assets/images/posts/2026-11-04-lake-forest-park-fence-9.webp "A homeowner and a contractor go over papers beside a new fence and gate in Lake Forest Park, WA.")
 
 A good Lake Forest Park fence is one nobody argues about: it sits on the right side of the line, meets the City's height rules, missed every buried line, and its posts are still straight after a decade of wet winters. A contractor who starts with the code, the line, the locate and the drainage, and puts those details in writing, is usually the one worth hiring.
