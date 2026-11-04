@@ -1,0 +1,72 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Lake Forest Park",
+    "service": "Fence installation",
+    "slug": "fence-installation-lake-forest-park-wa"
+  },
+  "sources": [
+    {
+      "url": "https://www.codepublishing.com/WA/LakeForestPark/html/LakeForestPark18/LakeForestPark1850.html",
+      "title": "https://www.codepublishing.com/WA/LakeForestPark/html/LakeForestPark18/LakeForestPark1850.html",
+      "retrieved": "2026-11-04",
+      "http_status": 200,
+      "supports": "LFPMC 18.50.010 walls and fences: height limits, prohibited fence types, height measurement, fence on retaining wall, building permit for fence over 6 ft and retaining wall over 48 in"
+    },
+    {
+      "url": "https://www.cityoflfp.gov/faq.aspx?TID=17",
+      "title": "https://www.cityoflfp.gov/faq.aspx?TID=17",
+      "retrieved": "2026-11-04",
+      "http_status": 200,
+      "supports": "Lake Forest Park permit center FAQ: fence permit thresholds, confirm property lines, check with neighbors, sight distance triangles"
+    },
+    {
+      "url": "https://www.cityoflfp.gov/",
+      "title": "https://www.cityoflfp.gov/",
+      "retrieved": "2026-11-04",
+      "http_status": 200,
+      "supports": "City of Lake Forest Park"
+    },
+    {
+      "url": "https://app.leg.wa.gov/rcw/default.aspx?cite=19.122.030",
+      "title": "https://app.leg.wa.gov/rcw/default.aspx?cite=19.122.030",
+      "retrieved": "2026-11-04",
+      "http_status": 200,
+      "supports": "RCW 19.122.030: white lining and notice to one-number locator service 2 to 10 full business days before excavation"
+    },
+    {
+      "url": "https://app.leg.wa.gov/rcw/default.aspx?cite=19.122.031",
+      "title": "https://app.leg.wa.gov/rcw/default.aspx?cite=19.122.031",
+      "retrieved": "2026-11-04",
+      "http_status": 200,
+      "supports": "RCW 19.122.031 exemptions: owner/occupant excavation under 12 inches on private noncommercial property"
+    },
+    {
+      "url": "https://kingcounty.gov/en/dept/kcit/data-information-services/gis-center/maps-apps/parcel-viewer",
+      "title": "https://kingcounty.gov/en/dept/kcit/data-information-services/gis-center/maps-apps/parcel-viewer",
+      "retrieved": "2026-11-04",
+      "http_status": 200,
+      "supports": "King County Parcel Viewer"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "retrieved": "2026-11-04",
+      "http_status": 200,
+      "supports": "L&I hiring a contractor guidance"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/contractors/register-as-a-contractor/",
+      "title": "https://lni.wa.gov/licensing-permits/contractors/register-as-a-contractor/",
+      "retrieved": "2026-11-04",
+      "http_status": 200,
+      "supports": "L&I contractor registration requirements"
+    }
+  ],
+  "dropped": [
+    "wa811.org (blocked automated check; 811 named in text only)",
+    "Lake Forest Park critical-areas code specifics (not verified today; general advice only)",
+    "sight-triangle dimensions (not verified; reader told to ask the City)",
+    "all fees, prices, timelines"
+  ]
+}

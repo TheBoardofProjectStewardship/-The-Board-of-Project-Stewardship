@@ -54,6 +54,7 @@ Base: `https://boardofprojectstewardship.com/`
 | `blog/rss.xml` | Blog RSS feed |
 | `news/rss.xml` | News RSS feed |
 | `404.html` | Branded Board 404 |
+| `posts/2026-11-04-fence-installation-lake-forest-park-wa.html` | Fence Installation Lake Forest Park WA — Height Limits, When a Permit Applies, Property Lines and Rot-Resistant Posts |
 | `posts/2026-11-03-exterior-house-painting-renton-wa.html` | Exterior House Painting Renton WA — Lead-Safe Prep, Permits, Rain Windows and Choosing a Painter |
 | `posts/2026-11-02-backyard-shed-home-office-sammamish-wa.html` | Backyard Shed and Home Office Sammamish WA — When It Needs a Permit, Setbacks, Electrical and Rain-Ready Foundations |
 | `posts/2026-11-01-side-sewer-repair-replacement-bellevue-wa.html` | Side Sewer Repair and Replacement Bellevue WA — Camera Inspections, Trenchless Options, Permits and Inspections |

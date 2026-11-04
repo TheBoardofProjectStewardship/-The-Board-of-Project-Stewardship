@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-11-04-fence-installation-lake-forest-park-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-11-04T11:55:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Fence Installation Lake Forest Park WA \u2014 Height Limits, When a Permit Applies, Property Lines and Rot-Resistant Posts",
+    "date": "2026-11-04",
+    "slug": "fence-installation-lake-forest-park-wa",
+    "description": "A Lake Forest Park homeowner's guide to building a fence: the city's 4-foot and 6-foot height rules, when a fence or retaining wall needs a building permit, sight distance triangles, property lines, Washington's call-before-you-dig law, and posts that last in Northwest rain.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 offline; no 2026-11-04 packets. Topic: fence installation (LFPMC 18.50.010 height limits, measurement, prohibited fences, permit over 6 ft and walls over 48 in; City FAQ on permits, property lines and sight distance triangles; RCW 19.122.030/.031 locate law; post durability), Lake Forest Park WA (King County), not in the last 14 posts. L&I pages cited. No fees or prices. Producer role fields kept per intake contract."
+}

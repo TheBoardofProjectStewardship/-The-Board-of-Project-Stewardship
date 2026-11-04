@@ -1,0 +1,44 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-11-04-lake-forest-park-fence-1.webp",
+      "repo_path": "assets/images/posts/2026-11-04-lake-forest-park-fence-1.webp",
+      "alt": "Lake Forest Park, WA fence installation: new six-foot cedar privacy fence along a wooded back yard on a wet day \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "896c9a320f91ec4a297a24fdf3417e2a",
+      "source": "Newly generated image (built-in image generator, 2026-11-04), source gen-1.jpg 1280x720, resized to 1600x900 webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-04-lake-forest-park-fence-2.webp",
+      "repo_path": "assets/images/posts/2026-11-04-lake-forest-park-fence-2.webp",
+      "alt": "Lake Forest Park, WA fence layout: crew measuring from a property corner marker along a string line beside utility locate marks \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "83fb1550cdc0d8a28383f5ba3e2d767c",
+      "source": "Newly generated image (built-in image generator, 2026-11-04), source gen-2.jpg 1280x720, resized to 1600x900 webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-04-lake-forest-park-fence-3.webp",
+      "repo_path": "assets/images/posts/2026-11-04-lake-forest-park-fence-3.webp",
+      "alt": "Lake Forest Park, WA fence post set on drainage gravel with concrete crowned to shed rain and a level checking plumb \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "c94b7008c389c4d2342bbeaca5a40ff6",
+      "source": "Newly generated image (built-in image generator, 2026-11-04), source gen-3.jpg 1280x720, resized to 1600x900 webp"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "aUTHbArkPu0",
+      "url": "https://www.youtube.com/watch?v=aUTHbArkPu0",
+      "title": "How to Set a Post for a Fence or Deck",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "3 newly generated images (built-in generator), 0 regraded stills, 0 paid media."
+}
