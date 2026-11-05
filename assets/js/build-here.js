@@ -186,7 +186,7 @@
         return s;
       })
       .then(function () { return cityCheck(s); })
-      .then(function () { return Promise.all([zoning(s), hazards(s), permits(s), extras(s), neighbors(s), landscape(s)]); })
+      .then(function () { return Promise.all([zoning(s), hazards(s), permits(s), extras(s), neighbors(s), landscape(s), kingLivingSqft(s)]); })
       .then(function () { buildImagery(s); return s; })
       .catch(function (e) {
         if (e && e.message === "nomatch") return s;
@@ -220,13 +220,60 @@
       (r && r.rows || []).forEach(function (row) {
         if (row.key === "house" && row.sf != null && !s.footprint) { s.footprint = Math.round(row.sf); s.footprintSrc = row.src || "Mapped building footprint"; }
       });
+      applyLandscapeSqft(s);
     }).catch(function (e) {
       log(s, false, "Site coverage and slope", e.message);
       s.landscape = emptyLandscape(e.message || "Landscape measurement failed.");
     });
   }
 
+  /* Autofill finished living SF / stories from King County Assessor residential building extract (sharded under /data/kc-resbldg). */
+  function kingLivingSqft(s) {
+    if (!s.parcel || s.existing) return Promise.resolve();
+    if (!/^King/.test(s.county || "") || (s.stateAbbr && s.stateAbbr !== "WA")) return Promise.resolve();
+    var pin = String(s.parcel).replace(/\D/g, "");
+    if (pin.length !== 10) return Promise.resolve();
+    var shard = pin.slice(0, 2);
+    return fetch("/data/kc-resbldg/" + shard + ".json", { credentials: "same-origin" }).then(function (r) {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.json();
+    }).then(function (j) {
+      var rec = j && j.b && j.b[pin];
+      if (!rec || !rec[0]) { log(s, false, "King County living area", "PIN " + pin + " not in residential building extract"); return; }
+      s.existing = Math.round(rec[0]);
+      s.existingSrc = "King County Assessor residential building extract (SqFtTotLiving)" + (j.asOf ? ", as of " + j.asOf : "");
+      if (rec[1] && !s.yearBuilt) { s.yearBuilt = String(rec[1]); s.yearSrc = "King County Assessor residential building extract (YrBuilt)"; }
+      if (rec[2] && !s.stories) { s.stories = rec[2]; s.storiesSrc = "King County Assessor residential building extract (Stories)"; }
+      if (rec[3] && !s.footprint) { s.footprint = Math.round(rec[3]); s.footprintSrc = "King County Assessor first-floor SF (SqFt1stFloor); roof outline may differ"; }
+      if (rec[4] && !s.garageSf) { s.garageSf = Math.round(rec[4]); s.garageSrc = "King County Assessor garage SF"; }
+      log(s, true, "King County living area (SqFtTotLiving)", s.existing + " sf");
+    }).catch(function (e) { log(s, false, "King County living area", e.message); });
+  }
+
+  /* After landscape split, copy mapped footprint / hardscape into form fields when still blank. */
+  function applyLandscapeSqft(s) {
+    var r = s.landscape;
+    if (!r || !r.rows) return;
+    var by = {};
+    r.rows.forEach(function (row) { by[row.key] = row; });
+    if (!s.footprint && by.house && by.house.sf != null) {
+      s.footprint = Math.round(by.house.sf);
+      s.footprintSrc = by.house.src || "Mapped building footprint";
+    }
+    if (s.imperv == null) {
+      var hard = 0, got = false;
+      ["house", "garage", "otherbld", "drive", "hard"].forEach(function (k) {
+        if (by[k] && by[k].sf != null) { hard += by[k].sf; got = true; }
+      });
+      if (got && hard > 0) {
+        s.imperv = Math.round(hard);
+        s.impervSrc = "Mapped buildings + driveway/hardscape from the lot breakdown (planning estimate)";
+      }
+    }
+  }
+
   function houseAndStreet(matched) {
+
     var first = String(matched).split(",")[0].trim().toUpperCase();
     var m = first.match(/^(\d+)\s+(.*)$/);
     return m ? { num: m[1], street: m[2], full: first } : { num: "", street: first, full: first };
@@ -648,9 +695,16 @@
     $("bh-footprint").value = s.footprint || "";
     $("bh-lot-src").textContent = s.lot ? "From: " + s.lotSrc : "Not found in public data. Enter it from your survey or the assessor page.";
     $("bh-zone-src").textContent = s.zone ? "From: " + s.zoneSrc : "Not found. Enter the zone from the city or county zoning map.";
-    $("bh-existing-src").textContent = s.juris === "sno" || /^King/.test(s.county) ? "The assessor's living area is not published through a browser-callable service. Read it on the assessor page and enter it here." : "Enter the existing finished floor area.";
+    $("bh-existing-src").textContent = s.existing
+      ? ("From: " + (s.existingSrc || "public assessor record") + ". Edit if you know a better number.")
+      : (/^King/.test(s.county || "") ? "No finished living area found in the Assessor residential building extract for this PIN. Enter it from the assessor page."
+        : "Enter the existing finished floor area from the assessor record if you have it.");
     $("bh-footprint-src").textContent = s.footprint ? "From: " + s.footprintSrc + ". Edit if you know the real footprint." : "Optional. The ground-floor footprint of all buildings, for the coverage check.";
-    if (s.imperv) { $("bh-imperv").value = s.imperv; $("bh-imperv-src").textContent = "From: " + s.impervSrc + ". Measured from imagery for stormwater billing; edit if you know better."; }
+    if (s.imperv) { $("bh-imperv").value = s.imperv; $("bh-imperv-src").textContent = "From: " + s.impervSrc + ". Edit if you know better."; }
+    if (s.stories && $("bh-stories")) {
+      var st = String(Math.round(Number(s.stories)));
+      if ([].slice.call($("bh-stories").options).some(function (o) { return o.value === st; })) $("bh-stories").value = st;
+    }
     $("bh-confirm").hidden = false;
   }
 
@@ -673,7 +727,7 @@
       ["Jurisdiction", esc(s.jurisLabel)],
       ["Lot area", v.lot ? fmt(v.lot) + " sf" : "Enter by hand"],
       ["Zone", v.zone ? esc(v.zone) + (s.cityZone && s.cityZone !== v.zone ? " (city map shows " + esc(s.cityZone) + ")" : "") : "Enter by hand"],
-      ["Existing finished area", v.existing ? fmt(v.existing) + " sf (your entry)" : "Not entered"],
+      ["Existing finished area", v.existing ? fmt(v.existing) + " sf" + (s.existingSrc ? ' <span class="bh-muted">· ' + esc(s.existingSrc) + "</span>" : " (your entry)") : "Not entered"],
       ["Building footprint", v.footprint ? fmt(v.footprint) + " sf" : "Not entered"],
       ["Year built", s.yearBuilt ? esc(s.yearBuilt) + " (" + esc(s.yearSrc) + ")" : "Not in a browser-callable record. See the assessor page."],
       ["Stories (existing)", String(v.stories)],
@@ -730,7 +784,7 @@
       if (rs.floorCap) {
         var room = v.existing != null ? rs.floorCap - v.existing : null;
         lines.push(["Floor area cap", fmt(rs.floorCap) + " sf (" + esc(rs.floorCapLabel) + ")"]);
-        if (room != null) lines.push(["Existing counted area (your entry)", fmt(v.existing) + " sf"], ["Room left under the cap", room > 0 ? "<strong>About " + fmt(room) + " sf</strong> (" + fmt(rs.floorCap) + " cap minus " + fmt(v.existing) + " existing)" : "None. The house is at or over the cap as entered."]);
+        if (room != null) lines.push(["Existing counted area", fmt(v.existing) + " sf" + (s.existingSrc ? " (" + esc(s.existingSrc) + ")" : "")], ["Room left under the cap", room > 0 ? "<strong>About " + fmt(room) + " sf</strong> (" + fmt(rs.floorCap) + " cap minus " + fmt(v.existing) + " existing)" : "None. The house is at or over the cap as entered."]);
         else lines.push(["Room left under the cap", "Enter the existing finished area in step 2 to see the room left."]);
         lines.push(["Before you rely on this", "Below-grade floor area may be exempt, so the counted existing area can be lower than the finished area." + (rs.key === "seattle-nr" ? " Since January 2026, ADU floor area counts toward FAR in Seattle NR zones." : "")]);
       } else { lines.push(["Floor area", esc(rs.floorCapLabel)]); }
