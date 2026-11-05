@@ -86,12 +86,30 @@
   }
 
   function fillBriefs(root, seed) {
+    seed = seed || readSeed() || {};
     const pb = root.querySelector('#bh-pascal-brief, #b3-prompt');
     if (pb) pb.value = pascalBrief(seed);
     const cb = root.querySelector('#bh-civil-brief, #b3-civil-brief');
     if (cb) cb.value = civilBrief(seed);
     const xb = root.querySelector('#bh-csrx-brief');
     if (xb) xb.value = csrxBrief(seed);
+  }
+
+  function ensureBrief(root, kind, seed) {
+    seed = seed || readSeed() || {};
+    if (kind === 'pascal') {
+      const ta = root.querySelector('#bh-pascal-brief, #b3-prompt');
+      if (ta) ta.value = pascalBrief(seed);
+      return ta;
+    }
+    if (kind === 'csrx') {
+      const ta = root.querySelector('#bh-csrx-brief');
+      if (ta) ta.value = csrxBrief(seed);
+      return ta;
+    }
+    const ta = root.querySelector('#bh-civil-brief, #b3-civil-brief');
+    if (ta) ta.value = civilBrief(seed);
+    return ta;
   }
 
   function bindMedia(root) {
@@ -123,24 +141,38 @@
   }
 
   function bindActions(root, seed) {
+    seed = seed || readSeed() || {};
+    function liveSeed() {
+      try {
+        const fresh = readSeed();
+        return (fresh && (fresh.address || fresh.ring || fresh.lot)) ? fresh : seed;
+      } catch (e) { return seed; }
+    }
     root.querySelectorAll('[data-bh-copy="pascal"]').forEach((btn) => {
       btn.onclick = () => {
-        const ta = root.querySelector('#bh-pascal-brief, #b3-prompt');
-        if (ta && navigator.clipboard) navigator.clipboard.writeText(ta.value).then(() => { btn.textContent = 'Copied'; });
+        const ta = ensureBrief(root, 'pascal', liveSeed());
+        const text = ta ? ta.value : pascalBrief(liveSeed());
+        if (navigator.clipboard) navigator.clipboard.writeText(text).then(() => { btn.textContent = 'Copied'; });
       };
     });
     root.querySelectorAll('[data-bh-copy="csrx"]').forEach((btn) => {
       btn.onclick = () => {
-        const ta = root.querySelector('#bh-csrx-brief');
-        if (ta && navigator.clipboard) navigator.clipboard.writeText(ta.value).then(() => { btn.textContent = 'Copied'; });
+        const ta = ensureBrief(root, 'csrx', liveSeed());
+        const text = ta ? ta.value : csrxBrief(liveSeed());
+        if (navigator.clipboard) navigator.clipboard.writeText(text).then(() => { btn.textContent = 'Copied'; });
       };
     });
     root.querySelectorAll('[data-bh-csv], #b3-civil-csv').forEach((btn) => {
-      btn.onclick = () => downloadCsv(seed);
+      btn.onclick = () => {
+        ensureBrief(root, 'civil', liveSeed());
+        downloadCsv(liveSeed());
+      };
     });
     root.querySelectorAll('[data-try]').forEach((b) => {
       b.onclick = () => {
         const m = b.dataset.try;
+        const s = liveSeed();
+        fillBriefs(root, s);
         const target = m === 'pascal'
           ? root.querySelector('#bh-study-pascal, #b3-pascal, #b3-tab-pascal')
           : m === 'csrx'
@@ -149,10 +181,8 @@
         if (m === 'pascal' && $('b3-tab-pascal')) $('b3-tab-pascal').click();
         if (m === 'civil' && $('b3-tab-civil')) $('b3-tab-civil').click();
         if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        if (m === 'csrx') {
-          const ta = root.querySelector('#bh-csrx-brief');
-          if (ta) ta.focus();
-        }
+        const ta = ensureBrief(root, m === 'csrx' ? 'csrx' : (m === 'pascal' ? 'pascal' : 'civil'), s);
+        if (ta) { try { ta.focus(); } catch (e) {} }
       };
     });
   }
@@ -192,22 +222,80 @@
     });
   }
 
-  function init(root) {
+
+  /** Optional in-page Google Photorealistic 3D Tiles when Alex adds a Map Tiles API key. */
+  function mapTilesKey() {
+    if (global.BOPS_GOOGLE_MAP_TILES_KEY) return String(global.BOPS_GOOGLE_MAP_TILES_KEY);
+    const meta = document.querySelector('meta[name="bops-google-map-tiles-key"]');
+    return meta && meta.content ? meta.content.trim() : '';
+  }
+  function mountPhotoreal3d(seed) {
+    const host = document.getElementById('bh-photoreal-3d');
+    if (!host) return;
+    const key = mapTilesKey();
+    const lat = seed && seed.lat, lon = seed && seed.lon;
+    if (!key || lat == null || lon == null || !isFinite(lat) || !isFinite(lon)) return;
+    host.hidden = false;
+    host.innerHTML = '<p class="bh-help" style="padding:1rem;color:#cbd5e1">Loading Google Photorealistic 3D for this lot...</p>';
+    const cesiumCss = 'https://cesium.com/downloads/cesiumjs/releases/1.125/Build/Cesium/Widgets/widgets.css';
+    const cesiumJs = 'https://cesium.com/downloads/cesiumjs/releases/1.125/Build/Cesium/Cesium.js';
+    function go() {
+      try {
+        // Cesium Ion not required when using Google Map Tiles API directly.
+        const viewer = new Cesium.Viewer(host, {
+          animation: false, timeline: false, baseLayerPicker: false, geocoder: false,
+          homeButton: false, sceneModePicker: false, navigationHelpButton: false,
+          fullscreenButton: true, imageryProvider: false
+        });
+        const tileset = viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
+          url: 'https://tile.googleapis.com/v1/3dtiles/root.json?key=' + encodeURIComponent(key)
+        }));
+        viewer.camera.flyTo({
+          destination: Cesium.Cartesian3.fromDegrees(lon, lat, 250),
+          orientation: { heading: 0, pitch: Cesium.Math.toRadians(-45), roll: 0 }
+        });
+        tileset.readyPromise.then(function () {
+          host.querySelector('p') && host.querySelector('p').remove();
+        }).catch(function (e) {
+          host.innerHTML = '<p class="bh-verify" role="alert">Photorealistic 3D tiles did not load (' + (e && e.message || 'error') + '). Use Open in Google Earth above.</p>';
+        });
+      } catch (e) {
+        host.innerHTML = '<p class="bh-verify" role="alert">Photorealistic 3D could not start. Use Open in Google Earth above.</p>';
+      }
+    }
+    if (!document.getElementById('bh-cesium-css')) {
+      const l = document.createElement('link'); l.id = 'bh-cesium-css'; l.rel = 'stylesheet'; l.href = cesiumCss; document.head.appendChild(l);
+    }
+    if (global.Cesium) go();
+    else {
+      const s = document.createElement('script');
+      s.src = cesiumJs;
+      s.onload = go;
+      s.onerror = function () { host.innerHTML = '<p class="bh-verify">Cesium failed to load. Use Open in Google Earth above.</p>'; };
+      document.head.appendChild(s);
+    }
+  }
+
+  function init(root, seedOpt) {
     root = root || document;
-    const seed = readSeed();
+    const seed = seedOpt || readSeed() || {};
+    try { if (seedOpt) localStorage.setItem('bh3dSeed', JSON.stringify(seedOpt)); } catch (e) {}
     fillBriefs(root, seed);
     bindMedia(root);
     bindActions(root, seed);
     bind3dTabs();
+    try { mountPhotoreal3d(seed); } catch (e) {}
   }
 
   global.BuildHereTools = {
     init: init,
+    fillBriefs: fillBriefs,
     readSeed: readSeed,
     pascalBrief: pascalBrief,
     civilBrief: civilBrief,
     csrxBrief: csrxBrief,
-    downloadCsv: downloadCsv
+    downloadCsv: downloadCsv,
+    mountPhotoreal3d: mountPhotoreal3d
   };
 
   // Auto-init on 3D page (static markup). Report page calls init after render.

@@ -577,6 +577,8 @@
   }
 
   var api = { analyze: analyze, renderHTML: renderHTML, _coverage: coverage, _frame: frame };
+  // Always expose on the browser global. A stray CommonJS `module` shim must not
+  // steal the export or Generate shows "landscape calculator script did not load".
+  root.BuildHereLandscape = api;
   if (typeof module !== "undefined" && module.exports) module.exports = api;
-  else root.BuildHereLandscape = api;
 })(typeof window !== "undefined" ? window : this);

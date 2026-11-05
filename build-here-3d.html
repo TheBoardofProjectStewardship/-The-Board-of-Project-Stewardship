@@ -88,7 +88,7 @@
   <div class="bh-wrap">
     <section class="bh-card">
       <p id="b3-info" class="bh-help" role="status" aria-live="polite"></p>
-      <div class="b3-tabs" role="tablist"><button class="bh-btn" id="b3-tab-mass" role="tab" aria-selected="true">Massing sketch</button> <button class="bh-btn b3-off" id="b3-tab-pascal" role="tab" aria-selected="false">Pascal Editor (walls, rooms, AI)</button> <button class="bh-btn b3-off" id="b3-tab-civil" role="tab" aria-selected="false">CivilCraft (grade, slope, drainage)</button></div>
+      <div class="b3-tabs" role="tablist"><button class="bh-btn" id="b3-tab-mass" role="tab" aria-selected="true">Massing sketch</button> <button class="bh-btn b3-off" id="b3-tab-pascal" role="tab" aria-selected="false">Pascal Editor (walls, rooms, prompts)</button> <button class="bh-btn b3-off" id="b3-tab-civil" role="tab" aria-selected="false">CivilCraft (grade, slope, drainage)</button></div>
       <div id="b3-mass">
         <div class="b3-tools">
           <label>Add <select id="b3-kind" class="bh-input"><option value="house">House</option><option value="addition">Addition</option><option value="adu">ADU</option><option value="shop">Shop / garage</option><option value="deck">Deck / patio</option></select></label>
@@ -103,7 +103,7 @@
         <p><button class="bh-btn" id="b3-json" type="button">Download sketch (JSON)</button> <button class="bh-btn" id="b3-png" type="button">Save picture</button></p>
       </div>
       <div id="b3-pascal" hidden>
-        <p class="text-sm">Pascal Editor is an open-source (MIT) 3D building editor from Pascal Group: walls, slabs, roofs, doors, windows and zones, rendered with WebGPU, with AI agents that can build from a prompt. It runs best in a current Chrome or Edge on a desktop. Copy the brief below, open the editor, and paste it into its AI chat, or draw the lot by hand with these numbers.</p>
+        <p class="text-sm">Pascal Editor is an open-source (MIT) 3D building editor from Pascal Group: walls, slabs, roofs, doors, windows and zones, rendered with WebGPU, with agents that can build from a prompt. It runs best in a current Chrome or Edge on a desktop. Copy the brief below, open the editor, and paste it into its prompt chat, or draw the lot by hand with these numbers.</p>
         <label class="bh-label" for="b3-prompt">Starting brief for Pascal Editor</label>
         <textarea id="b3-prompt" class="bh-input" rows="7" readonly></textarea>
         <p><button class="bh-btn" id="b3-copy" type="button">Copy brief</button> <a class="bh-btn" href="https://editor.pascal.app/" target="_blank" rel="noopener">Open Pascal Editor in a new tab</a> <button class="bh-btn" id="b3-embed" type="button">Load it here</button></p>
@@ -125,7 +125,7 @@
       <div class="b3-media-grid">
         <figure class="b3-fig">
           <video id="b3-pv" src="https://video.twimg.com/amplify_video/2117671403608780800/vid/avc1/1280x720/tJoLnt9uxn6yne-1.mp4#t=10" controls muted playsinline preload="metadata"></video>
-          <figcaption><b>Pascal Editor</b> · walls, rooms, roofs, AI from a prompt
+          <figcaption><b>Pascal Editor</b> · walls, rooms, roofs, from a prompt
             <div class="b3-chaps" id="b3-chaps">
               <button data-t="2" data-img="2">Site in 3D</button><button data-t="10" data-img="10">Floor plan</button><button data-t="30" data-img="30">Every wall &amp; window</button><button data-t="60" data-img="60">Levels</button><button data-t="90" data-img="90">Site in the real world</button><button data-t="120" data-img="120">Ask the building</button>
             </div>
@@ -149,6 +149,24 @@
       </div>
     </section>
   </div>
+  <section id="another-story-cta" class="max-w-6xl mx-auto px-4 py-10 relative z-20 border-t border-white/5">
+    <div class="bg-charcoal border border-secondary/25 rounded-xl overflow-hidden flex flex-col md:flex-row card-hover">
+      <div class="md:w-2/5 shrink-0">
+        <img src="./assets/images/another-story-banner-800.webp" alt="Conceptual before-and-after second-story idea for Another Story SEA in Puget Sound" class="w-full h-40 md:h-full object-cover" width="640" height="360" loading="eager" srcset="./assets/images/another-story-banner-480.webp 480w, ./assets/images/another-story-banner-800.webp 800w, ./assets/images/another-story-banner-1200.webp 1200w" sizes="(max-width: 640px) 100vw, 800px" fetchpriority="high">
+      </div>
+      <div class="p-6 md:p-8 flex flex-col justify-center gap-3">
+        <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary">Board feature</p>
+        <h2 class="text-2xl font-black text-white tracking-tight">Another Story</h2>
+        <p class="text-sm text-slate-400 font-light leading-relaxed max-w-xl">Same home. Another story. Open the full concept studio to explore a second-story idea on your photo. Concept preview only, not a bid or permit document.</p>
+        <div>
+          <a href="./another-story.html" class="inline-flex items-center gap-2 bg-primary text-white px-5 py-3 rounded font-bold hover:bg-emerald-700 transition uppercase tracking-wider text-xs shadow-glow-sleek">
+            Open Another Story <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <style>
     .b3-canvas{height:560px;border-radius:12px;overflow:hidden;background:#0b1220;margin:.75rem 0;touch-action:none}
     .b3-tools{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
@@ -169,7 +187,7 @@
   </style>
   <script src="/assets/js/site.js" defer></script>
   <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
-  <script type="module" src="/assets/js/build-here-3d.js"></script>
-  <script type="module" src="/assets/js/build-here-tools.js"></script>
+  <script type="module" src="/assets/js/build-here-3d.js?v=20261105b"></script>
+  <script src="/assets/js/build-here-tools.js?v=20261105b" defer></script>
 </body>
 </html>

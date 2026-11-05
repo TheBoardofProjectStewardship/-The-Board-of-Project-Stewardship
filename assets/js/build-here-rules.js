@@ -472,5 +472,6 @@
   function fmt(n) { return (Math.round(n)).toLocaleString("en-US"); }
 
   var api = { pick: pick, SRC: SRC, CHECKED: CHECKED, fmt: fmt, CITY: CITY, cityKey: cityKey, findZone: findZone, zonesFor: function (k) { return CZ[k] ? Object.keys(CZ[k].zones) : []; } };
-  if (typeof module !== "undefined" && module.exports) module.exports = api; else root.BuildHereRules = api;
-})(this);
+  root.BuildHereRules = api;
+  if (typeof module !== "undefined" && module.exports) module.exports = api;
+})(typeof window !== "undefined" ? window : this);

@@ -2811,8 +2811,10 @@ def home_feasibility_tool_section() -> str:
     </div>
 {tool}
     <p class="text-xs text-slate-400 font-light leading-relaxed">A planning estimate, not a legal, zoning or permit determination. Confirm every number with the city or county and a licensed professional. <a href="./build-here.html" class="text-secondary hover:underline">Open the full tool page</a> for the editor review form and the full disclaimer.</p>
-    <script src="/assets/js/build-here-rules.js" defer></script>
-    <script src="/assets/js/build-here.js" defer></script>
+    <script src="/assets/js/build-here-rules.js?v=20261105b" defer></script>
+    <script src="/assets/js/build-here-landscape.js?v=20261105b" defer></script>
+    <script src="/assets/js/build-here-tools.js?v=20261105b" defer></script>
+    <script src="/assets/js/build-here.js?v=20261105b" defer></script>
   </section>"""
 
 

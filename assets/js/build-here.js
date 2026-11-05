@@ -609,6 +609,22 @@
     }
     return { rows: rows, area: count * cell * cell };
   }
+  function fillToolBriefsFallback(seed) {
+    seed = seed || {};
+    function set(id, text) { var el = $(id); if (el) el.value = text; }
+    var addr = seed.address || "this lot";
+    var lot = seed.lot ? ("Lot about " + fmt(seed.lot) + " sf. ") : "";
+    var zone = seed.zone ? ("Zone " + seed.zone + ". ") : "";
+    var sb = seed.setbacks || {};
+    var n = function (x) { return typeof x === "number" ? x + " ft" : "verify"; };
+    var setLine = "Setbacks: front " + n(sb.front) + ", side " + n(sb.side) + ", rear " + n(sb.rear) + ".";
+    set("bh-pascal-brief", "Model a residential lot at " + addr + ". " + lot + zone + setLine + (seed.height ? " Height limit " + seed.height + " ft." : "") + "\nPlace a single-family house inside the setbacks with walls, a slab, a roof, doors and windows.");
+    set("bh-civil-brief", addr + "\n" + zone + lot + setLine + "\nIn CivilCraft: open the CSV (columns P,N,E,Z,D, feet). Elevations are a flat 100 ft placeholder.");
+    var lat = (seed.lat != null && isFinite(seed.lat)) ? Number(seed.lat).toFixed(6) : "";
+    var lon = (seed.lon != null && isFinite(seed.lon)) ? Number(seed.lon).toFixed(6) : "";
+    set("bh-csrx-brief", "CutSheet RX on " + addr + "." + (lat && lon ? ("\nGo To search: paste \"" + lat + ", " + lon + "\" or the street address.") : "\nGo To search: paste the street address.") + "\n" + lot + zone);
+  }
+
   function seed3D(s, v, rs) {
     var sb = rs && rs.setbacks || {}, seed = { address: s.matched || s.input || "", zone: v.zone || "", juris: s.jurisLabel || "", lot: v.lot || null, footprint: v.footprint || null, stories: v.stories || 1, type: v.type || "", coverage: rs && rs.coverage || null, setbacks: { front: sb.front, side: sb.side, rear: sb.rear }, height: null, ring: null, env: null, lat: s.lat, lon: s.lon };
     if (rs && rs.rules) rs.rules.some(function (r) { if (/height/i.test(r.label) && !/ADU|accessory/i.test(r.label)) { var m = String(r.value || "").match(/(\d+(?:\.\d+)?)\s*ft/); if (m) { seed.height = +m[1]; return true; } } return false; });
@@ -822,6 +838,32 @@
     var img = s.imagery ? '<figure class="bh-aerial"><div class="bh-aerial-frame"><img src="' + esc(s.imagery.url) + '" alt="Aerial photo of the parcel with the county parcel outline drawn on top" width="' + s.imagery.W + '" height="' + s.imagery.H + '" crossorigin="anonymous"><svg viewBox="0 0 ' + s.imagery.W + " " + s.imagery.H + '" aria-hidden="true"><path d="' + s.imagery.path + '" class="bh-outline"/></svg></div><figcaption>' + esc(s.imagery.credit) + ". Parcel outline: " + esc(outlineCredit) + ". Outlines are approximate and are not a survey. The photo uses a web map projection, so it is not to scale.</figcaption></figure>" : '<p class="bh-muted">No parcel outline was found, so no aerial view is shown.</p>';
     out.push(page("Existing lot", '<div class="bh-cols"><div>' + img + '</div><div><h3>Site plan diagram</h3>' + sitePlanSVG(s, rs) + '<p class="bh-muted">Diagrammatic only. Drawn from the county parcel outline. The shaded envelope is every point at least the required setback from each lot line. ' + (s.frontDir ? "The street side was set by hand in step 2." : (s.neighborRings ? "The street side is the lot line with no parcel beyond it nearest the address point; check it against the aerial and set it in step 2 if it is wrong." : "Which line is the front, side or rear is our guess from the address point; set the street side in step 2 if it is wrong.")) + ' A licensed surveyor sets the real lines.</p></div></div>'));
 
+    // Pull up the entered address on a live map (Google Maps embed + Earth). Photorealistic 3D Tiles need a Map Tiles API key.
+    (function () {
+      var q = s.matched || s.input || "";
+      var lat = (s.lat != null && isFinite(s.lat)) ? Number(s.lat) : null;
+      var lon = (s.lon != null && isFinite(s.lon)) ? Number(s.lon) : null;
+      var mapsQ = encodeURIComponent(q || (lat != null ? (lat + "," + lon) : ""));
+      var embedSrc = mapsQ
+        ? ("https://maps.google.com/maps?q=" + mapsQ + "&z=19&t=k&output=embed")
+        : "";
+      var earthHref = (lat != null && lon != null)
+        ? ("https://earth.google.com/web/@" + lat.toFixed(6) + "," + lon.toFixed(6) + ",80a,120d,35y,0h,0t,0r")
+        : ("https://earth.google.com/web/search/" + mapsQ);
+      var gmapsHref = mapsQ ? ("https://www.google.com/maps/search/?api=1&query=" + mapsQ) : "#";
+      var body = '<h3>See this lot on the map</h3><p class="bh-muted">Same geocoded address used for parcel, landscape and tool briefs. Satellite embed below; open Google Earth for the photorealistic 3D globe of this pin.</p>';
+      if (embedSrc) {
+        body += '<div class="bh-map-frame"><iframe title="Google Maps satellite of the entered address" src="' + embedSrc + '" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>';
+      } else {
+        body += '<p class="bh-verify">No geocoded point yet, so the map cannot center on the lot.</p>';
+      }
+      body += '<p><a class="bh-btn" href="' + esc(earthHref) + '" target="_blank" rel="noopener">Open in Google Earth (3D)</a> ';
+      body += '<a class="bh-btn bh-btn-ghost" href="' + esc(gmapsHref) + '" target="_blank" rel="noopener">Open in Google Maps</a></p>';
+      body += '<p class="bh-muted">In-page Google Photorealistic 3D Tiles (Cesium / Map Tiles API) need a browser key from Google Cloud (Map Tiles API). Set <code>window.BOPS_GOOGLE_MAP_TILES_KEY</code> or a meta tag <code>name="bops-google-map-tiles-key"</code> on this page when Alex adds one - until then Earth + Maps links above pull up the real address with no paid key.</p>';
+      body += '<div id="bh-photoreal-3d" class="bh-photoreal-3d" hidden></div>';
+      out.push(page("Lot on the map", body));
+    })();
+
     // Unified feasibility study: site coverage/landscape (never remove) + massing + Pascal + CivilCraft
     var seed3d = seed3D(s, v, rs);
     try { localStorage.setItem("bh3dSeed", JSON.stringify(seed3d)); } catch (e) {}
@@ -905,13 +947,17 @@
     })();
 
 
+    var Ttools = window.BuildHereTools;
+    var pascalText = Ttools ? Ttools.pascalBrief(seed3d) : ("Model a residential lot" + (seed3d.address ? " at " + seed3d.address : "") + ".");
+    var civilText = Ttools ? Ttools.civilBrief(seed3d) : ((seed3d.address || "Lot") + "\n" + (seed3d.zone ? "Zone " + seed3d.zone + ". " : "") + (seed3d.lot ? "Lot " + fmt(seed3d.lot) + " sf." : ""));
+    var csrxText = Ttools ? Ttools.csrxBrief(seed3d) : ("CutSheet RX on " + (seed3d.address || "this lot") + ".");
     var pascalMedia =
       '<div class="bh-study-media" id="bh-study-pascal">' +
         '<h3>Design it in 3D · Pascal Editor</h3>' +
         '<p>Pascal Editor is an open-source (MIT) 3D building editor: walls, slabs, roofs, doors, windows and zones, that can build from a prompt. It needs WebGPU (current Chrome or Edge on a desktop). The brief below is prefilled from this lot.</p>' +
         '<div class="b3-media-grid">' +
           '<figure class="b3-fig">' +
-            '<video id="bh-pv" src="https://video.twimg.com/amplify_video/2117671403608780800/vid/avc1/1280x720/tJoLnt9uxn6yne-1.mp4#t=10" controls muted playsinline preload="metadata"></video>' +
+            '<video id="bh-pv" src="/assets/videos/tools/pascal-promo.mp4#t=10" poster="/assets/images/tools/pascal-promo.webp" controls muted playsinline preload="metadata"></video>' +
             '<figcaption><b>Pascal Editor</b> · walls, rooms, roofs, from a prompt' +
               '<div class="b3-chaps" id="bh-chaps">' +
                 '<button type="button" data-t="2">Site in 3D</button>' +
@@ -928,11 +974,11 @@
           '</figure>' +
           '<div>' +
             '<label class="bh-label" for="bh-pascal-brief">Starting brief for this lot</label>' +
-            '<textarea id="bh-pascal-brief" class="bh-input" rows="8" readonly></textarea>' +
+            '<textarea id="bh-pascal-brief" class="bh-input" rows="8" readonly>' + esc(pascalText) + '</textarea>' +
             '<p><button class="bh-btn" type="button" data-bh-copy="pascal">Copy brief</button> ' +
             '<a class="bh-btn" href="https://editor.pascal.app/" target="_blank" rel="noopener">Open Pascal Editor</a> ' +
             '<a class="bh-btn bh-btn-ghost" href="/build-here-3d.html">Massing sketcher first</a></p>' +
-            '<p class="bh-muted">Pascal Editor is made by Pascal Group Inc. and is <a href="https://github.com/pascalorg/editor" target="_blank" rel="noopener">open source on GitHub</a> under the MIT license. The Board is not affiliated with Pascal. Video currently streams from X CDN (fragile); a stable Board-hosted copy can replace it later if Alex approves.</p>' +
+            '<p class="bh-muted">Pascal Editor is made by Pascal Group Inc. and is <a href="https://github.com/pascalorg/editor" target="_blank" rel="noopener">open source on GitHub</a> under the MIT license. The Board is not affiliated with Pascal. Promo video is hosted on this site under assets/videos/tools/.</p>' +
           '</div>' +
         '</div>' +
       '</div>';
@@ -960,7 +1006,7 @@
           '</figure>' +
           '<div>' +
             '<label class="bh-label" for="bh-civil-brief">Lot summary for CivilCraft</label>' +
-            '<textarea id="bh-civil-brief" class="bh-input" rows="7" readonly></textarea>' +
+            '<textarea id="bh-civil-brief" class="bh-input" rows="7" readonly>' + esc(civilText) + '</textarea>' +
             '<p><button class="bh-btn" type="button" data-bh-csv>Download lot points (CSV)</button> ' +
             '<a class="bh-btn" href="https://getcadcraft.com/use/civilcraft" target="_blank" rel="noopener">Open CivilCraft</a> ' +
             '<a class="bh-btn bh-btn-ghost" href="https://getcadcraft.com/tutorials/civilcraft/getting-started" target="_blank" rel="noopener">10-minute guide</a></p>' +
@@ -1001,7 +1047,7 @@
           '</figure>' +
           '<div>' +
             '<label class="bh-label" for="bh-csrx-brief">Lot brief for CutSheet RX</label>' +
-            '<textarea id="bh-csrx-brief" class="bh-input" rows="8" readonly></textarea>' +
+            '<textarea id="bh-csrx-brief" class="bh-input" rows="8" readonly>' + esc(csrxText) + '</textarea>' +
             '<p><button class="bh-btn" type="button" data-bh-copy="csrx">Copy brief</button> ' +
             '<a class="bh-btn" id="bh-csrx-open" href="' + esc(csrxHref) + '" target="_blank" rel="noopener">Try it on my lot</a> ' +
             '<a class="bh-btn bh-btn-ghost" href="https://www.senterfarms.com/programs/csrx/" target="_blank" rel="noopener">Open CutSheet RX</a></p>' +
@@ -1029,7 +1075,8 @@
 
     $("bh-report").innerHTML = out.join("");
     $("bh-report-wrap").hidden = false;
-    if (window.BuildHereTools) window.BuildHereTools.init($("bh-report"));
+    if (window.BuildHereTools) window.BuildHereTools.init($("bh-report"), seed3d);
+    else fillToolBriefsFallback(seed3d);
     if ($("bh-lead-address")) $("bh-lead-address").value = s.matched || s.input;
   }
 
