@@ -198,18 +198,32 @@
   /* Site coverage and landscape split (assets/js/build-here-landscape.js). */
   function landscape(s) {
     var L = window.BuildHereLandscape;
-    if (!L || s.lon == null) return Promise.resolve();
+    function emptyLandscape(note) {
+      return { rows: [], notes: note ? [note] : [], sources: [], slope: { ok: false, note: note || "unavailable" }, flags: [], warn: "" };
+    }
+    if (!L) {
+      s.landscape = emptyLandscape("The landscape calculator script did not load. Refresh the page and try again.");
+      log(s, false, "Site coverage and slope", "build-here-landscape.js missing");
+      return Promise.resolve();
+    }
+    if (s.lon == null) {
+      s.landscape = emptyLandscape("No geocoded point, so house / driveway / landscape / slope could not be measured.");
+      return Promise.resolve();
+    }
     setStatus("Measuring house, driveway, landscape and slope...");
     return L.analyze(s).then(function (r) {
-      s.landscape = r;
-      r.sources.forEach(function (x) { log(s, x.ok, x.name, x.note); });
+      s.landscape = r || emptyLandscape("Landscape analyze returned no result.");
+      (r && r.sources || []).forEach(function (x) { log(s, x.ok, x.name, x.note); });
       // analyze() already writes rings / parcel / lot onto s when a public outline is found (MN Met Council / MnGeo path).
-      if (r.rings && !s.rings) s.rings = r.rings;
-      if (r.lot && r.lot.sf && !s.lot) { s.lot = r.lot.sf; s.lotSrc = r.lot.src; }
-      (r.rows || []).forEach(function (row) {
+      if (r && r.rings && !s.rings) s.rings = r.rings;
+      if (r && r.lot && r.lot.sf && !s.lot) { s.lot = r.lot.sf; s.lotSrc = r.lot.src; }
+      (r && r.rows || []).forEach(function (row) {
         if (row.key === "house" && row.sf != null && !s.footprint) { s.footprint = Math.round(row.sf); s.footprintSrc = row.src || "Mapped building footprint"; }
       });
-    }).catch(function (e) { log(s, false, "Site coverage and slope", e.message); });
+    }).catch(function (e) {
+      log(s, false, "Site coverage and slope", e.message);
+      s.landscape = emptyLandscape(e.message || "Landscape measurement failed.");
+    });
   }
 
   function houseAndStreet(matched) {
@@ -650,7 +664,7 @@
     var page = function (title, body, cls) { return '<section class="bh-page ' + (cls || "") + '"><div class="bh-page-body">' + body + '</div><footer class="bh-page-foot"><span>' + esc(place) + ' | ' + esc(s.stateAbbr || "WA") + '</span><strong>' + esc(title) + '</strong><span class="bh-brand">Board of Project Stewardship</span></footer></section>'; };
 
     // Cover
-    out.push(page("Feasibility snapshot", '<div class="bh-cover"><p class="bh-kicker">Single-family lot · one combined feasibility study</p><h2>' + esc(s.matched || s.input) + '</h2><p class="bh-cover-sub">' + esc(s.jurisLabel) + (s.parcel ? " · Parcel " + esc(s.parcel) : "") + '</p><p class="bh-cover-date">Prepared ' + new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }) + ' from public records. Rules last checked ' + R.CHECKED + '.</p><p class="bh-disclaimer"><strong>Planning estimate only.</strong> This is not a legal, zoning or permit determination. Confirm every number with the jurisdiction and a licensed professional before you design, buy or build.</p></div>', "bh-cover-page"));
+    out.push(page("Feasibility snapshot", '<div class="bh-cover"><p class="bh-kicker">Single-family lot · one combined feasibility study (zoning + landscape + design tools)</p><h2>' + esc(s.matched || s.input) + '</h2><p class="bh-cover-sub">' + esc(s.jurisLabel) + (s.parcel ? " · Parcel " + esc(s.parcel) : "") + '</p><p class="bh-cover-date">Prepared ' + new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }) + ' from public records. Rules last checked ' + R.CHECKED + '.</p><p class="bh-disclaimer"><strong>Planning estimate only.</strong> This is not a legal, zoning or permit determination. Confirm every number with the jurisdiction and a licensed professional before you design, buy or build.</p></div>', "bh-cover-page"));
 
     // Project summary
     var rows = [
@@ -665,6 +679,25 @@
       ["Stories (existing)", String(v.stories)],
       ["Project type", esc($("bh-type").selectedOptions[0].text)]
     ];
+    // ADD: surface landscaping SF in the early snapshot so the unify never hides them.
+    function landCell(row) {
+      if (!row) return '<span class="bh-tbd">Unavailable</span>';
+      if (row.sf == null) return '<span class="bh-tbd">Unavailable</span>' + (row.src ? ' <span class="bh-muted">(' + esc(row.src) + ')</span>' : '');
+      return fmt(row.sf) + " sf" + (row.pct != null ? " (" + row.pct + "% of lot)" : "") + (row.src ? ' <span class="bh-muted">· ' + esc(row.src) + "</span>" : "");
+    }
+    if (s.landscape && s.landscape.rows && s.landscape.rows.length) {
+      var byKey = {};
+      s.landscape.rows.forEach(function (r) { byKey[r.key] = r; });
+      rows.push(["House footprint (mapped)", landCell(byKey.house)]);
+      rows.push(["Garage / accessory", landCell(byKey.garage || byKey.otherbld)]);
+      rows.push(["Driveway / paving", landCell(byKey.drive)]);
+      if (byKey.hard) rows.push(["Other hardscape", landCell(byKey.hard)]);
+      rows.push(["Remaining landscape", landCell(byKey.land)]);
+      var sl = s.landscape.slope;
+      rows.push(["Lot slope (USGS 3DEP)", sl && sl.ok ? ("avg " + sl.mean + "% · median " + sl.median + "% · " + sl.pct40 + "% of lot at 40%+") : ('<span class="bh-tbd">Unavailable</span>' + (sl && sl.note ? " (" + esc(sl.note) + ")" : ""))]);
+    } else {
+      rows.push(["House / garage / driveway / landscape", '<span class="bh-tbd">Measuring…</span> See the Site coverage and landscape section below.']);
+    }
     var haz = s.hazards.length ? "<ul>" + s.hazards.map(function (h) { return "<li>" + esc(h) + "</li>"; }).join("") + "</ul>" : (s.hazardSource ? "<p>No mapped hazard layer touched this parcel in the " + esc(s.hazardSource) + ". Maps are not field studies; a site visit can still find steep ground, wet soils or streams.</p>" : "<p>Hazard maps were not checked for this jurisdiction. Ask the city.</p>");
     if (s.hazardNotes.length) haz += '<p class="bh-muted">' + esc(s.hazardNotes.join("; ")) + "</p>";
     out.push(page("Project summary", '<div class="bh-cols"><div><h3>Site data</h3><table class="bh-table">' + rows.map(function (r) { return "<tr><th scope=\"row\">" + r[0] + "</th><td>" + r[1] + "</td></tr>"; }).join("") + '</table></div><div><h3>Special site features</h3>' + haz +
@@ -732,13 +765,16 @@
     var img = s.imagery ? '<figure class="bh-aerial"><div class="bh-aerial-frame"><img src="' + esc(s.imagery.url) + '" alt="Aerial photo of the parcel with the county parcel outline drawn on top" width="' + s.imagery.W + '" height="' + s.imagery.H + '" crossorigin="anonymous"><svg viewBox="0 0 ' + s.imagery.W + " " + s.imagery.H + '" aria-hidden="true"><path d="' + s.imagery.path + '" class="bh-outline"/></svg></div><figcaption>' + esc(s.imagery.credit) + ". Parcel outline: " + esc(outlineCredit) + ". Outlines are approximate and are not a survey. The photo uses a web map projection, so it is not to scale.</figcaption></figure>" : '<p class="bh-muted">No parcel outline was found, so no aerial view is shown.</p>';
     out.push(page("Existing lot", '<div class="bh-cols"><div>' + img + '</div><div><h3>Site plan diagram</h3>' + sitePlanSVG(s, rs) + '<p class="bh-muted">Diagrammatic only. Drawn from the county parcel outline. The shaded envelope is every point at least the required setback from each lot line. ' + (s.frontDir ? "The street side was set by hand in step 2." : (s.neighborRings ? "The street side is the lot line with no parcel beyond it nearest the address point; check it against the aerial and set it in step 2 if it is wrong." : "Which line is the front, side or rear is our guess from the address point; set the street side in step 2 if it is wrong.")) + ' A licensed surveyor sets the real lines.</p></div></div>'));
 
-    // Unified feasibility study: lot breakdown + massing + Pascal + CivilCraft
+    // Unified feasibility study: site coverage/landscape (never remove) + massing + Pascal + CivilCraft
     var seed3d = seed3D(s, v, rs);
     try { localStorage.setItem("bh3dSeed", JSON.stringify(seed3d)); } catch (e) {}
 
-    if (window.BuildHereLandscape && s.landscape) {
-      out.push(page("Lot breakdown", '<h3>House, garage, driveway, landscape and slope</h3><p class="bh-muted">Same address and parcel as the rest of this study. Figures come from public imagery and the lot outline; they are a planning estimate, not a survey.</p>' + window.BuildHereLandscape.renderHTML(s.landscape, s)));
-    }
+    // Hard rule: keep Site coverage and landscape in every study (PR #176 title). Pascal/CivilCraft ADD after; nothing is stripped.
+    var landBody = '<h3>House, garage, driveway, landscape and slope</h3><p class="bh-muted">Same address and parcel as the rest of this study. Lot broken into house / garage / driveway-paving / landscape SF with slope from public survey layers (USGS 3DEP, county parcel, building footprints). Planning estimate only — not a survey.</p>';
+    if (window.BuildHereLandscape && s.landscape) landBody += window.BuildHereLandscape.renderHTML(s.landscape, s);
+    else if (window.BuildHereLandscape) landBody += window.BuildHereLandscape.renderHTML({ rows: [], notes: ["Landscape data was not attached to this run."], sources: [], slope: { ok: false, note: "not measured" } }, s);
+    else landBody += '<p class="bh-verify" role="alert">The landscape calculator script did not load. Refresh and generate again.</p>';
+    out.push(page("Site coverage and landscape", landBody));
 
     var sb = seed3d.setbacks || {};
     var sbLine = ["front " + (typeof sb.front === "number" ? sb.front + " ft" : "verify"), "side " + (typeof sb.side === "number" ? sb.side + " ft" : "verify"), "rear " + (typeof sb.rear === "number" ? sb.rear + " ft" : "verify")].join(", ");
@@ -918,7 +954,7 @@
         if (!s.matched) { setStatus("We could not match that address. Check the spelling and include the city and ZIP."); return; }
         fillForm(s);
         setStatus(s.juris === "other" ? "Found it in " + s.jurisLabel + ". We could not match that city to our list; verify the rules with the city. You can still read the parcel data below."
-          : s.juris === "outside" && s.stateAbbr === "MN" ? "Found " + s.matched + " in Minnesota. Zoning numbers are not coded for MN yet; lot breakdown, slope and design tools still run from public parcel data. Check the values below."
+          : s.juris === "outside" && s.stateAbbr === "MN" ? "Found " + s.matched + " in Minnesota. Zoning numbers are not coded for MN yet; Site coverage and landscape, slope and design tools still run from public parcel data. Check the values below."
           : s.juris === "outside" ? "Found " + s.matched + " outside King/Snohomish WA. Zoning rules are not coded here; lot coverage and slope still run where a public parcel layer answers."
           : s.manualZone ? "Found " + s.matched + " in " + s.jurisLabel + ". " + s.city + " does not publish a zoning map we can read, so enter the zone from the city map below."
           : "Found " + s.matched + ". Check the values below, then build the report.");
