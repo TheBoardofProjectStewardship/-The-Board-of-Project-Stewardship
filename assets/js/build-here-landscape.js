@@ -391,23 +391,37 @@
     var lotRings = s.rings, parcelName = s.rings ? "" : null, parcelAuto = false;
     var seattle = s.juris === "seattle", sno = /^Snohomish/.test(s.county || "") && (!s.stateAbbr || s.stateAbbr === "WA"), king = /^King/.test(s.county || "") && (!s.stateAbbr || s.stateAbbr === "WA");
     // 1. Parcel: the county record from the main lookup, else a statewide layer, else auto-discovery.
+    function applyParcelHit(h) {
+      if (!h) return;
+      lotRings = h.f.geometry.rings; parcelName = h.name; parcelAuto = h.auto; out.parcelBig = !!h.f.big;
+      out.matchedBy = h.f.numMatch === 2 ? "address" : h.f.numMatch === 1 ? "number" : "location";
+      out.rings = lotRings;
+      out.parcelAttrs = h.f.attributes || {};
+      // Feed the main study the outline (and any free assessor fields) so aerial, site plan, Pascal and CivilCraft share one lot.
+      if (!s.rings) s.rings = lotRings;
+      var a = out.parcelAttrs, pin = a.PIN || a.COUNTY_PIN || a.STATE_PIN || a.PARCEL_ID || a.PID || a.Parcel_ID || a.TAX_PIN || a.PARCELID || a.PARCELNUM || a.PARCEL_NUM || "";
+      if (!s.parcel && pin) s.parcel = String(pin);
+      var fin = a.FIN_SQ_FT || a.FINISHED_SQFT || a.BLDG_SQFT || a.LIVINGAREA || a.SQFT || null;
+      if (!s.existing && fin && +fin > 0) { s.existing = Math.round(+fin); s.existingSrc = (h.name || "Public parcel record") + " finished area"; }
+      var yb = a.YEAR_BUILT || a.YR_BUILT || a.YEARBUILT || a.YEAR_BUILT_ || null;
+      if (!s.yearBuilt && yb && +yb > 1800) { s.yearBuilt = String(Math.round(+yb)); s.yearSrc = h.name || "Public parcel record"; }
+      if (h.f.numMatch === 2) out.notes.push("Lot matched by the house number and street on the parcel record.");
+      else if (h.f.numMatch === 1) out.notes.push("Lot matched by house number only (street name not confirmed on the parcel record). Please verify on the aerial.");
+      else out.warn = "Lot matched by location only, please verify. No parcel within 60 m lists this house number" + (h.f.numChecked ? "" : " (this parcel layer has no address fields)") + ", so the nearest lot was used.";
+      var where = h.f.numMatch === 2 ? "house number and street match the parcel record" : h.f.numMatch ? "house number matches the parcel record" : h.f.dist ? "nearest lot, " + Math.round(h.f.dist) + " ft from the geocoded point (the point fell in the street)" : "outline contains the address point";
+      if (h.f.dist && !h.f.numMatch) out.notes.push("The geocoded point fell outside any lot, so the nearest lot (" + Math.round(h.f.dist) + " ft away) was used. Check the outline on the aerial.");
+      if (h.f.big) out.notes.push("The only lot found is over 2 acres. It may be a road, rail or multi-lot record rather than this property; treat the numbers below with caution.");
+      src(h.name, true, (h.auto ? "Auto-discovered county parcel layer; " : "Public parcel layer; ") + where);
+    }
     var pJob = lotRings ? Promise.resolve() : findParcel(s).then(function (h) {
-      if (h) {
-        lotRings = h.f.geometry.rings; parcelName = h.name; parcelAuto = h.auto; out.parcelBig = !!h.f.big;
-        out.matchedBy = h.f.numMatch === 2 ? "address" : h.f.numMatch === 1 ? "number" : "location";
-        if (h.f.numMatch === 2) out.notes.push("Lot matched by the house number and street on the parcel record.");
-        else if (h.f.numMatch === 1) out.notes.push("Lot matched by house number only (street name not confirmed on the parcel record). Please verify on the aerial.");
-        else out.warn = "Lot matched by location only, please verify. No parcel within 60 m lists this house number" + (h.f.numChecked ? "" : " (this parcel layer has no address fields)") + ", so the nearest lot was used.";
-        var where = h.f.numMatch === 2 ? "house number and street match the parcel record" : h.f.numMatch ? "house number matches the parcel record" : h.f.dist ? "nearest lot, " + Math.round(h.f.dist) + " ft from the geocoded point (the point fell in the street)" : "outline contains the address point";
-        if (h.f.dist && !h.f.numMatch) out.notes.push("The geocoded point fell outside any lot, so the nearest lot (" + Math.round(h.f.dist) + " ft away) was used. Check the outline on the aerial.");
-        if (h.f.big) out.notes.push("The only lot found is over 2 acres. It may be a road, rail or multi-lot record rather than this property; treat the numbers below with caution.");
-        src(h.name, true, (h.auto ? "Auto-discovered county parcel layer; " : "Public parcel layer; ") + where);
-      } else src("Parcel outline (statewide registry and ArcGIS Online discovery)", false, "No free public parcel layer answered for this address.");
+      if (h) applyParcelHit(h);
+      else src("Parcel outline (statewide registry and ArcGIS Online discovery)", false, "No free public parcel layer answered for this address.");
     }).catch(function (e) { src("Parcel outline", false, e.message); });
 
     return pJob.then(function () {
       var area0 = lotRings ? null : circle(s.lon, s.lat, 60);
       if (!lotRings) { out.mode = "point"; out.notes.push("No parcel outline was found, so lot area and landscape are unavailable. The house footprint is the building at the address point, and slope is read within 60 ft of that point."); }
+      else { out.rings = lotRings; if (!s.rings) s.rings = lotRings; }
       var shape = lotRings || area0;
       var fr = frame(shape), env = envelope(shape, 60);
       var layers = { buildings: [], drive: [], hard: [], driveLines: [] }, bSrc = "", dSrc = "", hSrc = "", gotB = false, gotD = false, msB = null, osmO = null;
@@ -542,7 +556,12 @@
         '<tr><th scope="row">Share of lot at 15%+ / 25%+ / 40%+</th><td>' + sl.pct15 + "% / " + sl.pct25 + "% / " + sl.pct40 + "%</td></tr>" +
         '<tr><th scope="row">Ground elevation range</th><td>' + n(sl.elevMin) + " to " + n(sl.elevMax) + " ft (" + (sl.elevMax - sl.elevMin) + " ft of fall)</td></tr>" +
         '<tr><th scope="row">Source</th><td>USGS 3DEP bare-earth lidar, ' + (sl.res ? sl.res + " m" : "best available") + " resolution, sampled every " + sl.step + " ft. Confidence: medium. Lidar is bare earth, so slopes at retaining walls and building edges read steep. A topographic survey sets the real grades.</td></tr></table>";
-    } else h += '<p class="bh-verify">Slope is unavailable: ' + esc(sl && sl.note || "the elevation service did not answer") + '. The <a href="' + LINKS.dnrLidar + '" target="_blank" rel="noopener">WA DNR lidar portal</a> has the same ground data to view by hand.</p>';
+    } else {
+      var slopeHint = (s && s.stateAbbr === "WA")
+        ? ' The <a href="' + LINKS.dnrLidar + '" target="_blank" rel="noopener">WA DNR lidar portal</a> has the same ground data to view by hand.'
+        : ' The USGS 3DEP viewer or the local county GIS site has the same ground data to view by hand.';
+      h += '<p class="bh-verify">Slope is unavailable: ' + esc(sl && sl.note || "the elevation service did not answer") + '.' + slopeHint + '</p>';
+    }
     (r.flags || []).forEach(function (t) { h += '<p class="bh-muted">' + esc(t) + "</p>"; });
     if (r.steep) h += '<p>' + (r.steep.mapped ? '<strong>Seattle ECA steep slope (40%+) is mapped on about ' + n(r.steep.sf) + " sf of this lot.</strong> Work there needs SDCI steep slope review and usually a geotechnical report." : "No Seattle ECA steep slope area (40%+) is mapped on this lot.") + "</p>";
     else if (sl && sl.ok && sl.pct40 > 0) h += "<p>About " + sl.pct40 + "% of the lot reads 40% or steeper from lidar. Ask the jurisdiction whether a steep slope critical area applies.</p>";
