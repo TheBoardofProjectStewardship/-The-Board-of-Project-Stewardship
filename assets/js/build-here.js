@@ -227,14 +227,14 @@
     });
   }
 
-  /* Autofill finished living SF / stories from King County Assessor residential building extract (sharded under /data/kc-resbldg). */
+  /* Autofill finished living SF / stories from King County Assessor residential building extract (sharded under /assets/data/kc-resbldg). */
   function kingLivingSqft(s) {
     if (!s.parcel || s.existing) return Promise.resolve();
     if (!/^King/.test(s.county || "") || (s.stateAbbr && s.stateAbbr !== "WA")) return Promise.resolve();
     var pin = String(s.parcel).replace(/\D/g, "");
     if (pin.length !== 10) return Promise.resolve();
     var shard = pin.slice(0, 2);
-    return fetch("/data/kc-resbldg/" + shard + ".json", { credentials: "same-origin" }).then(function (r) {
+    return fetch("/assets/data/kc-resbldg/" + shard + ".json", { credentials: "same-origin" }).then(function (r) {
       if (!r.ok) throw new Error("HTTP " + r.status);
       return r.json();
     }).then(function (j) {

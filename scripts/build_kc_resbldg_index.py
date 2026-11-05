@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Download King County Assessor Residential Building extract and shard by PIN prefix.
 
-Produces data/kc-resbldg/{XX}.json used by Build Here to autofill finished living SF.
+Produces assets/data/kc-resbldg/{XX}.json used by Build Here to autofill finished living SF.
 Usage: python3 scripts/build_kc_resbldg_index.py
 """
 from __future__ import annotations
@@ -16,7 +16,7 @@ from io import TextIOWrapper
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "data" / "kc-resbldg"
+OUT = ROOT / "assets" / "data" / "kc-resbldg"
 ZIP_URL = "https://aqua.kingcounty.gov/extranet/assessor/Residential%20Building.zip"
 
 
