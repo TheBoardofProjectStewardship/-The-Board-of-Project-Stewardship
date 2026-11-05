@@ -101,3 +101,16 @@
 #bh-home .bh-card{background:#141414;border-color:rgba(255,255,255,.1)}
 #bh-home .bh-card h2,#bh-home .bh-toolbar h2{font-size:1.25rem}
 @media (max-width:639px){#bh-home .bh-row{flex-direction:column;align-items:stretch}#bh-home .bh-row>.bh-grow{flex:none}#bh-home .bh-row>div[style]{padding-bottom:0!important;align-self:stretch!important}#bh-home .bh-btn{width:100%}#bh-home .bh-card{padding:1rem}#bh-home .bh-page-body{padding:1.25rem 1rem 1rem}#bh-home .bh-page-foot{padding:.75rem 1rem;flex-wrap:wrap}}
+
+/* Unified feasibility study: Pascal / CivilCraft media inside the report */
+.b3-media-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:.75rem}
+.b3-fig video,.b3-hot img{width:100%;height:auto;border-radius:12px;display:block;background:#0b1220}
+.b3-chaps{display:flex;flex-wrap:wrap;gap:.35rem;margin:.5rem 0}
+.b3-chaps button{font-size:.75rem;padding:.3rem .6rem;border:1px solid #94a3b8;border-radius:999px;color:#334155;background:#fff;cursor:pointer}
+.b3-chaps button.on,.b3-pin.on{background:#166534;color:#fff;border-color:#166534}
+.b3-hot{position:relative}
+.b3-pin{position:absolute;transform:translate(-50%,-50%);width:2rem;height:2rem;border-radius:999px;background:#0b1220;color:#4ade80;border:2px solid #4ade80;font-weight:800;box-shadow:0 0 0 4px rgba(74,222,128,.25);cursor:pointer}
+.bh-study-media .bh-input{background:#fff;color:#1f2933;border-color:#cbd5e1}
+.bh-study-media .bh-label{color:#166534}
+.bh-study-media .bh-help{color:#52606d}
+.b3-off{opacity:.6}

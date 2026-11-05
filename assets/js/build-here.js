@@ -644,7 +644,7 @@
     var page = function (title, body, cls) { return '<section class="bh-page ' + (cls || "") + '"><div class="bh-page-body">' + body + '</div><footer class="bh-page-foot"><span>' + esc(place) + ' | ' + esc(s.stateAbbr || "WA") + '</span><strong>' + esc(title) + '</strong><span class="bh-brand">Board of Project Stewardship</span></footer></section>'; };
 
     // Cover
-    out.push(page("Feasibility snapshot", '<div class="bh-cover"><p class="bh-kicker">Single-family lot · first-pass feasibility</p><h2>' + esc(s.matched || s.input) + '</h2><p class="bh-cover-sub">' + esc(s.jurisLabel) + (s.parcel ? " · Parcel " + esc(s.parcel) : "") + '</p><p class="bh-cover-date">Prepared ' + new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }) + ' from public records. Rules last checked ' + R.CHECKED + '.</p><p class="bh-disclaimer"><strong>Planning estimate only.</strong> This is not a legal, zoning or permit determination. Confirm every number with the jurisdiction and a licensed professional before you design, buy or build.</p></div>', "bh-cover-page"));
+    out.push(page("Feasibility snapshot", '<div class="bh-cover"><p class="bh-kicker">Single-family lot · one combined feasibility study</p><h2>' + esc(s.matched || s.input) + '</h2><p class="bh-cover-sub">' + esc(s.jurisLabel) + (s.parcel ? " · Parcel " + esc(s.parcel) : "") + '</p><p class="bh-cover-date">Prepared ' + new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }) + ' from public records. Rules last checked ' + R.CHECKED + '.</p><p class="bh-disclaimer"><strong>Planning estimate only.</strong> This is not a legal, zoning or permit determination. Confirm every number with the jurisdiction and a licensed professional before you design, buy or build.</p></div>', "bh-cover-page"));
 
     // Project summary
     var rows = [
@@ -716,13 +716,91 @@
     var img = s.imagery ? '<figure class="bh-aerial"><div class="bh-aerial-frame"><img src="' + esc(s.imagery.url) + '" alt="Aerial photo of the parcel with the county parcel outline drawn on top" width="' + s.imagery.W + '" height="' + s.imagery.H + '" crossorigin="anonymous"><svg viewBox="0 0 ' + s.imagery.W + " " + s.imagery.H + '" aria-hidden="true"><path d="' + s.imagery.path + '" class="bh-outline"/></svg></div><figcaption>' + esc(s.imagery.credit) + ". Parcel outline: " + (/^Snohomish/.test(s.county) ? "Snohomish County Assessor parcels" : "King County GIS parcels") + ". Outlines are approximate and are not a survey. The photo uses a web map projection, so it is not to scale.</figcaption></figure>" : '<p class="bh-muted">No parcel outline was found, so no aerial view is shown.</p>';
     out.push(page("Existing lot", '<div class="bh-cols"><div>' + img + '</div><div><h3>Site plan diagram</h3>' + sitePlanSVG(s, rs) + '<p class="bh-muted">Diagrammatic only. Drawn from the county parcel outline. The shaded envelope is every point at least the required setback from each lot line. ' + (s.frontDir ? "The street side was set by hand in step 2." : (s.neighborRings ? "The street side is the lot line with no parcel beyond it nearest the address point; check it against the aerial and set it in step 2 if it is wrong." : "Which line is the front, side or rear is our guess from the address point; set the street side in step 2 if it is wrong.")) + ' A licensed surveyor sets the real lines.</p></div></div>'));
 
-    // Design it in 3D (build-here-3d.html, inspired by Pascal Editor)
+    // Unified feasibility study: lot breakdown + massing + Pascal + CivilCraft
     var seed3d = seed3D(s, v, rs);
     try { localStorage.setItem("bh3dSeed", JSON.stringify(seed3d)); } catch (e) {}
-    out.push(page("Design it in 3D", '<h3>Sketch your project in 3D</h3><p>Open the lot in a 3D massing editor. It starts with this parcel outline, the setback envelope' + (seed3d.height ? ", a " + seed3d.height + " ft height plane" : "") + (seed3d.coverage ? " and the " + fmt(seed3d.coverage) + " sf coverage cap" : "") + '. Drop in boxes for the house, an addition, an ADU or a shop, stack floors, and watch the coverage and height checks update. When you want walls, doors and rooms, hand the same numbers to <a href="https://github.com/pascalorg/editor" target="_blank" rel="noopener">Pascal Editor</a>, the open-source 3D building editor.</p><p><a class="bh-btn" href="/build-here-3d.html" target="_blank" rel="noopener">Open the 3D editor</a></p><p class="bh-muted">A sketch tool, not a design. The checks use the numbers in this report.</p>'));
 
-    // Site coverage, landscape and slope
-    if (window.BuildHereLandscape && s.landscape) out.push(page("Site coverage and landscape", window.BuildHereLandscape.renderHTML(s.landscape, s)));
+    if (window.BuildHereLandscape && s.landscape) {
+      out.push(page("Lot breakdown", '<h3>House, garage, driveway, landscape and slope</h3><p class="bh-muted">Same address and parcel as the rest of this study. Figures come from public imagery and the lot outline; they are a planning estimate, not a survey.</p>' + window.BuildHereLandscape.renderHTML(s.landscape, s)));
+    }
+
+    var sb = seed3d.setbacks || {};
+    var sbLine = ["front " + (typeof sb.front === "number" ? sb.front + " ft" : "verify"), "side " + (typeof sb.side === "number" ? sb.side + " ft" : "verify"), "rear " + (typeof sb.rear === "number" ? sb.rear + " ft" : "verify")].join(", ");
+    var massRows = [
+      ["Address", esc(seed3d.address || s.matched || s.input || "")],
+      ["Zone", esc(seed3d.zone || "—")],
+      ["Lot area", seed3d.lot ? fmt(seed3d.lot) + " sf" : "—"],
+      ["Setbacks used", esc(sbLine)],
+      ["Height limit", seed3d.height ? seed3d.height + " ft" : "Verify with the jurisdiction"],
+      ["Coverage cap", seed3d.coverage ? fmt(seed3d.coverage) + " sf" : "Verify with the jurisdiction"],
+      ["Buildable envelope", seed3d.env && seed3d.env.area ? "About " + fmt(seed3d.env.area) + " sf inside setbacks (diagrammatic)" : (seed3d.ring ? "Lot outline loaded; setbacks not fully verified for an envelope area" : "No parcel outline in this run")]
+    ];
+    out.push(page("What you can build", '<h3>Massing and envelope</h3><p>These caps and setbacks are the same numbers used in the rest of this study. Sketch boxes against them in the 3D massing editor (WebGL), or continue into Pascal Editor for walls and rooms.</p><table class="bh-table">' + massRows.map(function (r) { return "<tr><th scope=\"row\">" + r[0] + "</th><td>" + r[1] + "</td></tr>"; }).join("") + '</table><p><a class="bh-btn" href="/build-here-3d.html">Deepen in the 3D massing sketcher</a></p><p class="bh-muted">Optional deepen step for WebGL massing. Pascal and CivilCraft tools for this lot are in the next sections of this same study — you do not need a second address lookup.</p>'));
+
+    var pascalMedia =
+      '<div class="bh-study-media" id="bh-study-pascal">' +
+        '<h3>Design it in 3D · Pascal Editor</h3>' +
+        '<p>Pascal Editor is an open-source (MIT) 3D building editor: walls, slabs, roofs, doors, windows and zones, with AI that can build from a prompt. It needs WebGPU (current Chrome or Edge on a desktop). The brief below is prefilled from this lot.</p>' +
+        '<div class="b3-media-grid">' +
+          '<figure class="b3-fig">' +
+            '<video id="bh-pv" src="https://video.twimg.com/amplify_video/2117671403608780800/vid/avc1/1280x720/tJoLnt9uxn6yne-1.mp4#t=10" controls muted playsinline preload="metadata"></video>' +
+            '<figcaption><b>Pascal Editor</b> · walls, rooms, roofs, AI from a prompt' +
+              '<div class="b3-chaps" id="bh-chaps">' +
+                '<button type="button" data-t="2">Site in 3D</button>' +
+                '<button type="button" data-t="10">Floor plan</button>' +
+                '<button type="button" data-t="30">Every wall &amp; window</button>' +
+                '<button type="button" data-t="60">Levels</button>' +
+                '<button type="button" data-t="90">Site in the real world</button>' +
+                '<button type="button" data-t="120">Ask the building</button>' +
+              '</div>' +
+              '<p id="bh-chap-note" class="bh-help"></p>' +
+              '<button class="bh-btn" data-try="pascal" type="button">Jump to lot brief</button> ' +
+              '<a class="bh-muted" href="https://x.com/neotoolstack/status/2117671794002018568" target="_blank" rel="noopener">Video via @neotoolstack on X</a>' +
+            '</figcaption>' +
+          '</figure>' +
+          '<div>' +
+            '<label class="bh-label" for="bh-pascal-brief">Starting brief for this lot</label>' +
+            '<textarea id="bh-pascal-brief" class="bh-input" rows="8" readonly></textarea>' +
+            '<p><button class="bh-btn" type="button" data-bh-copy="pascal">Copy brief</button> ' +
+            '<a class="bh-btn" href="https://editor.pascal.app/" target="_blank" rel="noopener">Open Pascal Editor</a> ' +
+            '<a class="bh-btn bh-btn-ghost" href="/build-here-3d.html">Massing sketcher first</a></p>' +
+            '<p class="bh-muted">Pascal Editor is made by Pascal Group Inc. and is <a href="https://github.com/pascalorg/editor" target="_blank" rel="noopener">open source on GitHub</a> under the MIT license. The Board is not affiliated with Pascal. Video currently streams from X CDN (fragile); a stable BOPS-hosted copy can replace it later if Alex approves.</p>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    out.push(page("Design it in 3D", pascalMedia));
+
+    var civilMedia =
+      '<div class="bh-study-media" id="bh-study-civil">' +
+        '<h3>Civil / site work · CivilCraft</h3>' +
+        '<p>CivilCraft is a free, open-source (Apache-2.0) civil and site design app. It builds a ground surface from survey points, then lets you grade a pad, lay a driveway, see cut and fill, and check drainage. Download this lot as a point file, open CivilCraft, and drop the file in. Nothing is uploaded.</p>' +
+        '<div class="b3-media-grid">' +
+          '<figure class="b3-fig">' +
+            '<div class="b3-hot">' +
+              '<img src="/assets/images/tools/civilcraft.webp" alt="CivilCraft screenshot: contour surface with a road alignment and a building pad in 3D" width="1024" height="576" loading="lazy">' +
+              '<button type="button" class="b3-pin" style="left:44%;top:30%" data-note="Existing ground: contours and elevation bands built from survey points. Your lot slope shows up here.">1</button>' +
+              '<button type="button" class="b3-pin" style="left:42%;top:58%" data-note="Alignment and profile: a driveway or road laid on the surface, with its grade checked against the ground.">2</button>' +
+              '<button type="button" class="b3-pin" style="left:63%;top:42%" data-note="Building pad: set a pad elevation and slopes, and CivilCraft shows cut and fill to daylight. This is where your massing box sits.">3</button>' +
+              '<button type="button" class="b3-pin" style="left:80%;top:35%" data-note="Drainage: draw a catchment and pipe network and check flows. Useful for stormwater questions on a permit.">4</button>' +
+            '</div>' +
+            '<figcaption><b>CivilCraft</b> · surfaces, grading, earthwork, drainage' +
+              '<p id="bh-hot-note" class="bh-help">Tap a numbered pin.</p>' +
+              '<button class="bh-btn" data-try="civil" type="button">Jump to lot CSV</button> ' +
+              '<a class="bh-muted" href="https://x.com/semhustej/status/2118346460538249459" target="_blank" rel="noopener">Image via @semhustej on X</a> · ' +
+              '<a class="bh-muted" href="https://youtu.be/R8naLwdCawQ" target="_blank" rel="noopener">First-look video</a>' +
+            '</figcaption>' +
+          '</figure>' +
+          '<div>' +
+            '<label class="bh-label" for="bh-civil-brief">Lot summary for CivilCraft</label>' +
+            '<textarea id="bh-civil-brief" class="bh-input" rows="7" readonly></textarea>' +
+            '<p><button class="bh-btn" type="button" data-bh-csv>Download lot points (CSV)</button> ' +
+            '<a class="bh-btn" href="https://getcadcraft.com/use/civilcraft" target="_blank" rel="noopener">Open CivilCraft</a> ' +
+            '<a class="bh-btn bh-btn-ghost" href="https://getcadcraft.com/tutorials/civilcraft/getting-started" target="_blank" rel="noopener">10-minute guide</a></p>' +
+            '<p class="bh-muted">Elevations in the CSV are a flat 100 ft placeholder. Replace with survey points before relying on slope, cut or fill. CivilCraft is made by CadCraft (Apache-2.0). The Board is not affiliated with CadCraft.</p>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    out.push(page("Civil / site work", civilMedia));
 
     // Plans and permits
     var pm = "<h3>House plans and permit history</h3>";
@@ -741,6 +819,7 @@
 
     $("bh-report").innerHTML = out.join("");
     $("bh-report-wrap").hidden = false;
+    if (window.BuildHereTools) window.BuildHereTools.init($("bh-report"));
     if ($("bh-lead-address")) $("bh-lead-address").value = s.matched || s.input;
   }
 
