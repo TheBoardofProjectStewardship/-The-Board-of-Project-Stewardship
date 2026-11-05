@@ -1,0 +1,19 @@
+{
+  "submission_id": "2026-11-05-standby-generator-installation-maple-valley-wa",
+  "idempotency_key": "sha256:192c5ae5818e923aa6c340c4a5bd1a765bc8b1cca5a14744e344f78f02471623",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-11-05T11:44:05Z",
+  "outputs": [
+    "assets/images/posts/2026-11-05-maple-valley-generator-1.webp",
+    "assets/images/posts/2026-11-05-maple-valley-generator-2.webp",
+    "assets/images/posts/2026-11-05-maple-valley-generator-3.webp",
+    "posts/2026-11-05-standby-generator-installation-maple-valley-wa.md",
+    "posts/2026-11-05-standby-generator-installation-maple-valley-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 93
+}

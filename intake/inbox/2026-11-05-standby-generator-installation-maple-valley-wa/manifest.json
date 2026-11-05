@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-11-05-standby-generator-installation-maple-valley-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-11-05T11:45:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Standby Generator Installation Maple Valley WA \u2014 L&I Electrical Permit, City Mechanical Path, Placement and Fuel",
+    "date": "2026-11-05",
+    "slug": "standby-generator-installation-maple-valley-wa",
+    "description": "A Maple Valley homeowner's guide to a permanent standby generator: why Washington L&I issues the electrical permit, when the City's MyBuildingPermit mechanical path applies, placement and manufacturer clearances, fuel options, noise rules, and how to vet the installer.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 offline; no 2026-11-05 packets. Topic: standby generator (L&I electrical; City Express Mechanical / MyBuildingPermit; MVMC 9.05.480 noise; placement/fuel), Maple Valley WA (King County), not in last 14 posts. generate_site.py needs maple-valley added to _SLUG_PLACES/_PLACE_NAMES. No fees or prices. Producer role fields kept per intake contract."
+}
