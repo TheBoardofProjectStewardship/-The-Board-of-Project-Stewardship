@@ -542,6 +542,25 @@
     }
     return { rows: rows, area: count * cell * cell };
   }
+  function seed3D(s, v, rs) {
+    var sb = rs && rs.setbacks || {}, seed = { address: s.matched || s.input || "", zone: v.zone || "", juris: s.jurisLabel || "", lot: v.lot || null, footprint: v.footprint || null, stories: v.stories || 1, type: v.type || "", coverage: rs && rs.coverage || null, setbacks: { front: sb.front, side: sb.side, rear: sb.rear }, height: null, ring: null, env: null };
+    if (rs && rs.rules) rs.rules.some(function (r) { if (/height/i.test(r.label) && !/ADU|accessory/i.test(r.label)) { var m = String(r.value || "").match(/(\d+(?:\.\d+)?)\s*ft/); if (m) { seed.height = +m[1]; return true; } } return false; });
+    if (s.rings) {
+      var b = bbox(s.rings), lat0 = (b[1] + b[3]) / 2, lon0 = (b[0] + b[2]) / 2, ring = toFeet([s.rings[0]], lat0, lon0)[0];
+      if (ring.length >= 4) {
+        if (ring[0][0] !== ring[ring.length - 1][0] || ring[0][1] !== ring[ring.length - 1][1]) ring.push(ring[0]);
+        seed.ring = ring.map(function (p) { return [Math.round(p[0] * 10) / 10, Math.round(p[1] * 10) / 10]; });
+        if ([sb.front, sb.rear, sb.side].every(function (x) { return typeof x === "number"; })) {
+          var st = toFeet([[[s.lon, s.lat]]], lat0, lon0)[0][0];
+          var ce = classifyEdges(ring, st, s.frontDir, s.neighborRings ? toFeet(s.neighborRings, lat0, lon0) : null);
+          var er = envelopeRows(ring, ce.edges, function (e) { return e.kind === "front" ? sb.front : e.kind === "rear" ? sb.rear : sb.side; });
+          seed.env = { rows: er.rows.map(function (r) { return r.map(function (n) { return Math.round(n * 10) / 10; }); }), area: Math.round(er.area) };
+          seed.front = { x: ce.fx, y: ce.fy };
+        }
+      }
+    }
+    return seed;
+  }
   function sitePlanSVG(s, rs) {
     if (!s.rings) return '<p class="bh-muted">No parcel outline was available, so no diagram can be drawn.</p>';
     var b = bbox(s.rings), lat0 = (b[1] + b[3]) / 2, lon0 = (b[0] + b[2]) / 2;
@@ -696,6 +715,11 @@
     // Lot imagery and site plan
     var img = s.imagery ? '<figure class="bh-aerial"><div class="bh-aerial-frame"><img src="' + esc(s.imagery.url) + '" alt="Aerial photo of the parcel with the county parcel outline drawn on top" width="' + s.imagery.W + '" height="' + s.imagery.H + '" crossorigin="anonymous"><svg viewBox="0 0 ' + s.imagery.W + " " + s.imagery.H + '" aria-hidden="true"><path d="' + s.imagery.path + '" class="bh-outline"/></svg></div><figcaption>' + esc(s.imagery.credit) + ". Parcel outline: " + (/^Snohomish/.test(s.county) ? "Snohomish County Assessor parcels" : "King County GIS parcels") + ". Outlines are approximate and are not a survey. The photo uses a web map projection, so it is not to scale.</figcaption></figure>" : '<p class="bh-muted">No parcel outline was found, so no aerial view is shown.</p>';
     out.push(page("Existing lot", '<div class="bh-cols"><div>' + img + '</div><div><h3>Site plan diagram</h3>' + sitePlanSVG(s, rs) + '<p class="bh-muted">Diagrammatic only. Drawn from the county parcel outline. The shaded envelope is every point at least the required setback from each lot line. ' + (s.frontDir ? "The street side was set by hand in step 2." : (s.neighborRings ? "The street side is the lot line with no parcel beyond it nearest the address point; check it against the aerial and set it in step 2 if it is wrong." : "Which line is the front, side or rear is our guess from the address point; set the street side in step 2 if it is wrong.")) + ' A licensed surveyor sets the real lines.</p></div></div>'));
+
+    // Design it in 3D (build-here-3d.html, inspired by Pascal Editor)
+    var seed3d = seed3D(s, v, rs);
+    try { localStorage.setItem("bh3dSeed", JSON.stringify(seed3d)); } catch (e) {}
+    out.push(page("Design it in 3D", '<h3>Sketch your project in 3D</h3><p>Open the lot in a 3D massing editor. It starts with this parcel outline, the setback envelope' + (seed3d.height ? ", a " + seed3d.height + " ft height plane" : "") + (seed3d.coverage ? " and the " + fmt(seed3d.coverage) + " sf coverage cap" : "") + '. Drop in boxes for the house, an addition, an ADU or a shop, stack floors, and watch the coverage and height checks update. When you want walls, doors and rooms, hand the same numbers to <a href="https://github.com/pascalorg/editor" target="_blank" rel="noopener">Pascal Editor</a>, the open-source 3D building editor.</p><p><a class="bh-btn" href="/build-here-3d.html" target="_blank" rel="noopener">Open the 3D editor</a></p><p class="bh-muted">A sketch tool, not a design. The checks use the numbers in this report.</p>'));
 
     // Site coverage, landscape and slope
     if (window.BuildHereLandscape && s.landscape) out.push(page("Site coverage and landscape", window.BuildHereLandscape.renderHTML(s.landscape, s)));
