@@ -203,6 +203,12 @@
     return L.analyze(s).then(function (r) {
       s.landscape = r;
       r.sources.forEach(function (x) { log(s, x.ok, x.name, x.note); });
+      // analyze() already writes rings / parcel / lot onto s when a public outline is found (MN Met Council / MnGeo path).
+      if (r.rings && !s.rings) s.rings = r.rings;
+      if (r.lot && r.lot.sf && !s.lot) { s.lot = r.lot.sf; s.lotSrc = r.lot.src; }
+      (r.rows || []).forEach(function (row) {
+        if (row.key === "house" && row.sf != null && !s.footprint) { s.footprint = Math.round(row.sf); s.footprintSrc = row.src || "Mapped building footprint"; }
+      });
     }).catch(function (e) { log(s, false, "Site coverage and slope", e.message); });
   }
 
@@ -665,12 +671,18 @@
       '<h3>Soils and geotechnical</h3><p>No soils report is on file with this snapshot. Slopes, fill or a mapped hazard often lead the jurisdiction to ask for a geotechnical report on bearing soil and drainage.</p>' +
       '<h3>Drainage and civil</h3><p>Larger additions and new houses usually trigger stormwater review. The size thresholds come from the local stormwater code; ask the jurisdiction which applies before design.</p>' +
       '<h3>Construction cost</h3><p>Not estimated here. Get a written bid from a licensed contractor for your own numbers.</p>' +
-      '<h3>Codes that will apply</h3><p>Local zoning (cited below), the Washington State Residential Code and the <a href="' + R.SRC.wsec.url + '" target="_blank" rel="noopener">Washington State Energy Code</a>. Energy credits depend on project size and type; your designer confirms them.</p></div></div>'));
+      '<h3>Codes that will apply</h3><p>' + (s.stateAbbr === "WA"
+        ? 'Local zoning (cited below), the Washington State Residential Code and the <a href="' + R.SRC.wsec.url + '" target="_blank" rel="noopener">Washington State Energy Code</a>. Energy credits depend on project size and type; your designer confirms them.'
+        : s.stateAbbr === "MN"
+          ? 'Local zoning and the Minnesota State Building Code apply. We have not coded Minnesota zone setbacks, coverage or FAR yet — confirm those with the city or county before design. Lot area, landscape split and slope below come from public Minnesota GIS.'
+          : 'Local zoning and the applicable state residential / building code apply. Confirm setbacks, coverage and height with the jurisdiction before design.') + '</p></div></div>'));
 
     // Code review
     var cr;
     if (!rs) {
-      var why = s.juris === "other" ? "We could not match " + esc(s.jurisLabel) + " to a city in our list. Verify the rules with the city." : (s.juris === "city" && !v.lot ? "Enter the lot size in step 2 to see the rules and the math for " + esc(s.jurisLabel) + "." : (s.juris === "outside" ? "Zoning rules are coded only for King and Snohomish counties, WA. The site coverage and slope page below works nationwide." : "We do not have verified rules coded for zone " + esc(v.zone || "(blank)") + " here. Verify with the jurisdiction."));
+      var why = s.juris === "other" ? "We could not match " + esc(s.jurisLabel) + " to a city in our list. Verify the rules with the city." : (s.juris === "city" && !v.lot ? "Enter the lot size in step 2 to see the rules and the math for " + esc(s.jurisLabel) + "." : (s.juris === "outside" ? (s.stateAbbr === "MN"
+        ? "Minnesota zoning setbacks, coverage and FAR are not coded yet — verify those with the city or county. Parcel outline, lot area, house/driveway/landscape split and slope below come from Minnesota public GIS (Met Council / MnGeo where available). Pascal and CivilCraft still open for this lot when an outline exists."
+        : "Zoning rules are coded only for King and Snohomish counties, WA. Parcel outline, site coverage and slope below work for Minnesota and other states where a free public parcel layer answers.") : "We do not have verified rules coded for zone " + esc(v.zone || "(blank)") + " here. Verify with the jurisdiction."));
       cr = '<p class="bh-verify">' + why + '</p><p><a href="./permits.html">The Board permit hub</a> lists city and county permit offices.</p>';
     } else {
       cr = '<h3>' + esc(rs.title) + '</h3><table class="bh-table bh-rules"><thead><tr><th scope="col">Standard</th><th scope="col">What the code says</th><th scope="col">Source (checked ' + R.CHECKED + ')</th></tr></thead><tbody>' +
@@ -713,7 +725,11 @@
     out.push(page("Zoning review", "<h3>How much could you add?</h3>" + cap + redFlags(s, v, rs)));
 
     // Lot imagery and site plan
-    var img = s.imagery ? '<figure class="bh-aerial"><div class="bh-aerial-frame"><img src="' + esc(s.imagery.url) + '" alt="Aerial photo of the parcel with the county parcel outline drawn on top" width="' + s.imagery.W + '" height="' + s.imagery.H + '" crossorigin="anonymous"><svg viewBox="0 0 ' + s.imagery.W + " " + s.imagery.H + '" aria-hidden="true"><path d="' + s.imagery.path + '" class="bh-outline"/></svg></div><figcaption>' + esc(s.imagery.credit) + ". Parcel outline: " + (/^Snohomish/.test(s.county) ? "Snohomish County Assessor parcels" : "King County GIS parcels") + ". Outlines are approximate and are not a survey. The photo uses a web map projection, so it is not to scale.</figcaption></figure>" : '<p class="bh-muted">No parcel outline was found, so no aerial view is shown.</p>';
+    var outlineCredit = (/^Snohomish/.test(s.county) && (!s.stateAbbr || s.stateAbbr === "WA")) ? "Snohomish County Assessor parcels"
+      : (/^King/.test(s.county) && (!s.stateAbbr || s.stateAbbr === "WA")) ? "King County GIS parcels"
+      : (s.landscape && s.landscape.parcelSrc) ? s.landscape.parcelSrc
+      : "public parcel outline";
+    var img = s.imagery ? '<figure class="bh-aerial"><div class="bh-aerial-frame"><img src="' + esc(s.imagery.url) + '" alt="Aerial photo of the parcel with the county parcel outline drawn on top" width="' + s.imagery.W + '" height="' + s.imagery.H + '" crossorigin="anonymous"><svg viewBox="0 0 ' + s.imagery.W + " " + s.imagery.H + '" aria-hidden="true"><path d="' + s.imagery.path + '" class="bh-outline"/></svg></div><figcaption>' + esc(s.imagery.credit) + ". Parcel outline: " + esc(outlineCredit) + ". Outlines are approximate and are not a survey. The photo uses a web map projection, so it is not to scale.</figcaption></figure>" : '<p class="bh-muted">No parcel outline was found, so no aerial view is shown.</p>';
     out.push(page("Existing lot", '<div class="bh-cols"><div>' + img + '</div><div><h3>Site plan diagram</h3>' + sitePlanSVG(s, rs) + '<p class="bh-muted">Diagrammatic only. Drawn from the county parcel outline. The shaded envelope is every point at least the required setback from each lot line. ' + (s.frontDir ? "The street side was set by hand in step 2." : (s.neighborRings ? "The street side is the lot line with no parcel beyond it nearest the address point; check it against the aerial and set it in step 2 if it is wrong." : "Which line is the front, side or rear is our guess from the address point; set the street side in step 2 if it is wrong.")) + ' A licensed surveyor sets the real lines.</p></div></div>'));
 
     // Unified feasibility study: lot breakdown + massing + Pascal + CivilCraft
@@ -828,7 +844,8 @@
     if (s.hazards.length) f.push("Mapped critical area or hazard on or touching the parcel: " + s.hazards.join(", ") + ". Expect a critical area review and possibly a geotechnical report.");
     if (v.type === "teardown") {
       f.push("A teardown needs a demolition permit, and utilities must be capped first.");
-      f.push('An asbestos survey by a certified inspector is required before demolition in the Puget Sound region (<a href="' + R.SRC.pscaa.url + '" target="_blank" rel="noopener">Puget Sound Clean Air Agency</a>). Older houses can also have lead paint.');
+      if (!s.stateAbbr || s.stateAbbr === "WA") f.push('An asbestos survey by a certified inspector is required before demolition in the Puget Sound region (<a href="' + R.SRC.pscaa.url + '" target="_blank" rel="noopener">Puget Sound Clean Air Agency</a>). Older houses can also have lead paint.');
+      else f.push("Check local asbestos and lead-paint rules before demolition. Older houses commonly need testing.");
       f.push("A new house loses any grandfathered setbacks or size the old one had.");
     }
     if (s.hazards.some(function (h) { return /1990/.test(h); }) && !s.hazards.some(function (h) { return /2016|City of Kenmore critical/.test(h); })) f.push("The older 1990 county maps flag this parcel but the 2016 landslide and steep slope maps do not. The city may still ask for a geotechnical report to settle it; budget for one.");
@@ -900,7 +917,11 @@
         state = s; $("bh-go").disabled = false;
         if (!s.matched) { setStatus("We could not match that address. Check the spelling and include the city and ZIP."); return; }
         fillForm(s);
-        setStatus(s.juris === "other" ? "Found it in " + s.jurisLabel + ". We could not match that city to our list; verify the rules with the city. You can still read the parcel data below." : s.manualZone ? "Found " + s.matched + " in " + s.jurisLabel + ". " + s.city + " does not publish a zoning map we can read, so enter the zone from the city map below." : "Found " + s.matched + ". Check the values below, then build the report.");
+        setStatus(s.juris === "other" ? "Found it in " + s.jurisLabel + ". We could not match that city to our list; verify the rules with the city. You can still read the parcel data below."
+          : s.juris === "outside" && s.stateAbbr === "MN" ? "Found " + s.matched + " in Minnesota. Zoning numbers are not coded for MN yet; lot breakdown, slope and design tools still run from public parcel data. Check the values below."
+          : s.juris === "outside" ? "Found " + s.matched + " outside King/Snohomish WA. Zoning rules are not coded here; lot coverage and slope still run where a public parcel layer answers."
+          : s.manualZone ? "Found " + s.matched + " in " + s.jurisLabel + ". " + s.city + " does not publish a zoning map we can read, so enter the zone from the city map below."
+          : "Found " + s.matched + ". Check the values below, then build the report.");
         render();
       });
     });
