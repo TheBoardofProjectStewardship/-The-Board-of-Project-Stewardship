@@ -59,6 +59,8 @@ Practical placement checks for a Maple Valley lot:
 - **Plan the route.** Gas line, electrical conduit and any propane tank or vaporizer path should be marked, and utility locates requested before excavation. Dial 811 and follow Washington's locate rules before you dig.
 - **Think about testing.** Generators exercise on a schedule. Place the unit where weekly or biweekly test runs will not blast a bedroom window or a shared fence line if another legal location on the lot works.
 
+![Crews broom-finish a standby generator pad in Maple Valley, WA.](../assets/images/posts/2026-11-05-maple-valley-generator-4.webp "A concrete pad pour for a standby generator in Maple Valley, WA, with gravel at the forms.")
+
 ## Fuel: natural gas and propane
 
 Most permanent residential standby units in this area run on natural gas or propane. Natural gas needs a properly sized supply from the meter; propane needs tank placement, regulators and lines that meet fuel-gas and fire rules. Either way, the fuel work is separate from the L&I electrical permit and may need a City mechanical permit.
@@ -72,11 +74,15 @@ Ask the bidder to put in writing:
 
 Puget Sound Energy publishes [backup power information for customers](https://www.pse.com/en/outage/backup-power). Read the utility's current interconnection and safety guidance for your service, and never assume a generator can parallel with the grid without approved transfer equipment.
 
+![A gas line stub and valve sit by a standby generator pad in Maple Valley, WA.](../assets/images/posts/2026-11-05-maple-valley-generator-5.webp "A capped gas line stub beside a standby generator pad in Maple Valley, WA.")
+
 ## Noise and neighbor expectations
 
 Maple Valley regulates public disturbance noise in [MVMC 9.05.480](https://www.codepublishing.com/WA/MapleValley/html/MapleValley09/MapleValley0905.html). The code prohibits sound that is a public disturbance noise, and it lists examples that include frequent, repetitive or continuous sounds from an internal combustion engine in a residential district that unreasonably disturb neighbors. It also sets hours for construction-site noise and for residential maintenance equipment. A standby generator that runs during an outage is not the same as daytime construction, but test cycles and poorly placed units still create neighbor complaints.
 
 The City also publishes Temporary Noise Variance submittal requirements on its applications page. That path is for temporary exceptions, not a substitute for choosing a quieter location or a unit with a documented sound rating. Put the manufacturer's published sound level, the planned exercise schedule and the pad location in the contract so everyone knows what "normal" will sound like.
+
+![A standby generator sits clear of a window on a Maple Valley, WA house.](../assets/images/posts/2026-11-05-maple-valley-generator-6.webp "Clearance stakes and a tape show space around a standby generator in Maple Valley, WA.")
 
 https://www.youtube.com/watch?v=ooIbjLWSW58
 
@@ -86,6 +92,8 @@ https://www.youtube.com/watch?v=ooIbjLWSW58
 - [Siemens](https://www.siemens.com/) makes residential electrical distribution and transfer equipment used in service and panel upgrades that often accompany a generator install.
 - [Gastite](https://www.gastite.com/) makes CSST flexible gas piping systems; when a bid includes CSST, ask how bonding and protection will follow the manufacturer's instructions.
 - [Sakrete](https://www.sakrete.com/) makes concrete mixes used for equipment pads and related flatwork, with published coverage and finishing guidance for outdoor slabs.
+
+![Conduit runs from a standby generator to the meter on a Maple Valley, WA house.](../assets/images/posts/2026-11-05-maple-valley-generator-7.webp "Electrical conduit connects a standby generator pad to the house in Maple Valley, WA.")
 
 Whatever brands a bidder proposes, ask for the generator model, transfer-switch rating, fuel-pipe specification, pad thickness and clearance dimensions in writing, and keep the manuals with the permit paperwork.
 
@@ -99,6 +107,8 @@ Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-per
 - Require a startup and load test with you present, and written settings for the exercise schedule.
 - Read the Board's [permits guide](../permits.html), [hiring a contractor guide](../hiring-a-contractor.html), [bonds and insurance page](../bonds-and-insurance.html) and [red flags](../red-flags-hiring.html) list before you sign, and use the [verify a contractor](../verify-contractor.html) page for the checks.
 
+![An open automatic transfer switch for a standby generator in Maple Valley, WA.](../assets/images/posts/2026-11-05-maple-valley-generator-8.webp "The interior of an automatic transfer switch during a standby generator install in Maple Valley, WA.")
+
 ## Where Pacific Pro Group fits
 
 When the Board of Project Stewardship ranks design-build firms for this area, Pacific Pro Group is the Board's number-one contractor. It is a strong fit when a Maple Valley standby generator is part of a larger project that combines service upgrades, additions, remodels or site work under one scope and one schedule. That is an editorial ranking, not a guarantee. Re-verify any firm on [Washington L&I Verify](https://secure.lni.wa.gov/verify/) and compare written scopes. Learn more at [https://pacificprogroup.com/](https://pacificprogroup.com/).
@@ -110,5 +120,7 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 3. Stake the pad to the manufacturer's clearances, confirm zoning setbacks with the City, and request utility locates before excavation.
 4. Get at least three written bids that name the generator, transfer switch, fuel scope, pad, permits and who pulls each one.
 5. Verify every firm with L&I, keep manuals and permit numbers with your house papers, and attend the final startup test.
+
+![A homeowner and an electrician review standby generator permits in Maple Valley, WA.](../assets/images/posts/2026-11-05-maple-valley-generator-9.webp "A homeowner and an electrician go over standby generator permit papers in Maple Valley, WA.")
 
 A standby generator that is worth owning in Maple Valley is one that starts when the grid fails, passes inspection the first time, sits where the manual and the City both allow it, and does not surprise the neighbors every Tuesday at noon. An installer who starts with L&I, the City, the clearances and the fuel plan — and puts those details in writing — is usually the one worth hiring.
