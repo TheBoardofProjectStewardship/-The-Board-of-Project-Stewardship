@@ -1,0 +1,51 @@
+{
+  "producer": "openclaw",
+  "agent": "seo-specialist",
+  "slug": "standby-generator-installation-maple-valley-wa",
+  "title": "Standby Generator Installation Maple Valley WA \u2014 L&I Electrical Permit, City Mechanical Path, Placement and Fuel",
+  "description": "A Maple Valley homeowner's guide to a permanent standby generator: why Washington L&I issues the electrical permit, when the City's MyBuildingPermit mechanical path applies, placement and manufacturer clearances, fuel options, noise rules, and how to vet the installer.",
+  "category": "Guides",
+  "keywords": [
+    "standby generator Maple Valley WA",
+    "Maple Valley generator permit",
+    "L&I electrical permit generator",
+    "home backup generator Maple Valley",
+    "transfer switch installation King County"
+  ],
+  "outline": [
+    "Key Takeaways",
+    "Why a standby generator is more than a pad and a box in Maple Valley",
+    "Who issues which permit",
+    "Electrical work: transfer switch, panel capacity and inspections",
+    "Placement, pad and manufacturer clearances",
+    "Fuel: natural gas and propane",
+    "Noise and neighbor expectations",
+    "Materials Worth Knowing",
+    "How to shortlist and verify the installer",
+    "Where Pacific Pro Group fits",
+    "Next steps for a Maple Valley standby generator"
+  ],
+  "search_intent": "A Maple Valley homeowner planning a permanent standby generator wants to know who issues the electrical and mechanical permits, where the unit can sit, how fuel and noise work, and how to vet the installer.",
+  "local_angles": [
+    "Maple Valley building applications page: electrical via L&I 360-902-5269; Express Mechanical on MyBuildingPermit; commercial generator checklist exists",
+    "L&I electrical permits/fees/inspections: L&I covers jobsites outside cities that run their own electrical programs",
+    "L&I electrical permit basics: permit required for most work; installer buys permit",
+    "MVMC 9.05.480 public disturbance noise including ICE sounds in residential districts; construction noise hours",
+    "PSE backup power page; manufacturer clearances; City setbacks even when building permit not required"
+  ],
+  "internal_links": [
+    "../maple-valley.html",
+    "../electrician.html",
+    "../hvac.html",
+    "../permits.html",
+    "../verify-contractor.html",
+    "../hiring-a-contractor.html",
+    "../bonds-and-insurance.html",
+    "../red-flags-hiring.html"
+  ],
+  "notes": "Box-authored fallback brief. PPG only as Board #1 -> https://pacificprogroup.com/.",
+  "generation": {
+    "agent": "box-authored",
+    "mode": "box-fallback"
+  }
+}

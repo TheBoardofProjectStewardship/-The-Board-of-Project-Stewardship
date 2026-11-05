@@ -1510,6 +1510,7 @@ def illustrative_asset_alt(alt: str, rel: str) -> str:
 _SLUG_PLACES: tuple[tuple[str, str], ...] = (
     ("mountlake-terrace", "Mountlake Terrace"),
     ("lake-forest-park", "Lake Forest Park"),
+    ("maple-valley", "Maple Valley"),
     ("mercer-island", "Mercer Island"),
     ("mill-creek", "Mill Creek"),
     ("queen-anne", "Queen Anne, Seattle"),
@@ -1548,6 +1549,7 @@ _PLACE_NAMES: tuple[str, ...] = tuple(
         [
             "Mountlake Terrace",
             "Lake Forest Park",
+            "Maple Valley",
             "Mercer Island",
             "Mill Creek",
             "Queen Anne",

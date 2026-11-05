@@ -1,0 +1,85 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Maple Valley",
+    "service": "Standby generator installation",
+    "slug": "standby-generator-installation-maple-valley-wa"
+  },
+  "sources": [
+    {
+      "url": "https://www.maplevalleywa.gov/government/departments/community_development/building_and_land_use_applications.php",
+      "title": "Maple Valley building and land use applications",
+      "retrieved": "2026-11-05",
+      "http_status": 200,
+      "supports": "Electrical via L&I; Express Mechanical Permit; MyBuildingPermit portal; commercial generator checklist; contact permits@maplevalleywa.gov / 425-413-8800"
+    },
+    {
+      "url": "https://www.maplevalleywa.gov/",
+      "title": "City of Maple Valley",
+      "retrieved": "2026-11-05",
+      "http_status": 200,
+      "supports": "City of Maple Valley"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-basics-for-home-business-owners/electrical-permit-basics",
+      "title": "L&I electrical permit basics",
+      "retrieved": "2026-11-05",
+      "http_status": 200,
+      "supports": "Electrical permit required for most work; person doing work buys permit"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections",
+      "title": "L&I electrical permits, fees and inspections",
+      "retrieved": "2026-11-05",
+      "http_status": 200,
+      "supports": "L&I permits/inspects jobsites outside cities that do their own electrical programs; NEC adoption note"
+    },
+    {
+      "url": "https://www.mybuildingpermit.com/",
+      "title": "MyBuildingPermit",
+      "retrieved": "2026-11-05",
+      "http_status": 200,
+      "supports": "Portal Maple Valley uses for permit submittal"
+    },
+    {
+      "url": "https://www.codepublishing.com/WA/MapleValley/html/MapleValley09/MapleValley0905.html",
+      "title": "MVMC 9.05 including 9.05.480 Noise",
+      "retrieved": "2026-11-05",
+      "http_status": 200,
+      "supports": "Public disturbance noise; ICE sounds in residential districts; construction noise hours"
+    },
+    {
+      "url": "https://www.codepublishing.com/WA/MapleValley/",
+      "title": "Maple Valley Municipal Code",
+      "retrieved": "2026-11-05",
+      "http_status": 200,
+      "supports": "City code publishing index"
+    },
+    {
+      "url": "https://www.pse.com/en/outage/backup-power",
+      "title": "PSE backup power",
+      "retrieved": "2026-11-05",
+      "http_status": 200,
+      "supports": "Utility backup-power customer information"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "L&I hiring a contractor",
+      "retrieved": "2026-11-05",
+      "http_status": 200,
+      "supports": "L&I hiring a contractor guidance"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/contractors/register-as-a-contractor/",
+      "title": "L&I register as a contractor",
+      "retrieved": "2026-11-05",
+      "http_status": 200,
+      "supports": "L&I contractor registration requirements"
+    }
+  ],
+  "dropped": [
+    "Generator-specific zoning setback dimensions (not verified; reader told to ask City for zoning setbacks)",
+    "Commercial generator checklist contents (commercial, not residential; cited only as signal to ask City)",
+    "All fees, prices, timelines, sound dB claims not taken from a verified manufacturer page for a specific model"
+  ]
+}
