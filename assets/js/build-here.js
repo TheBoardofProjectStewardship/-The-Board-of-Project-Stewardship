@@ -707,14 +707,14 @@
       '<h3>Codes that will apply</h3><p>' + (s.stateAbbr === "WA"
         ? 'Local zoning (cited below), the Washington State Residential Code and the <a href="' + R.SRC.wsec.url + '" target="_blank" rel="noopener">Washington State Energy Code</a>. Energy credits depend on project size and type; your designer confirms them.'
         : s.stateAbbr === "MN"
-          ? 'Local zoning and the Minnesota State Building Code apply. We have not coded Minnesota zone setbacks, coverage or FAR yet — confirm those with the city or county before design. Lot area, landscape split and slope below come from public Minnesota GIS.'
+          ? 'Local zoning and the Minnesota State Building Code apply. We have not coded Minnesota zone setbacks, coverage or FAR yet - confirm those with the city or county before design. Lot area, landscape split and slope below come from public Minnesota GIS.'
           : 'Local zoning and the applicable state residential / building code apply. Confirm setbacks, coverage and height with the jurisdiction before design.') + '</p></div></div>'));
 
     // Code review
     var cr;
     if (!rs) {
       var why = s.juris === "other" ? "We could not match " + esc(s.jurisLabel) + " to a city in our list. Verify the rules with the city." : (s.juris === "city" && !v.lot ? "Enter the lot size in step 2 to see the rules and the math for " + esc(s.jurisLabel) + "." : (s.juris === "outside" ? (s.stateAbbr === "MN"
-        ? "Minnesota zoning setbacks, coverage and FAR are not coded yet — verify those with the city or county. Parcel outline, lot area, house/driveway/landscape split and slope below come from Minnesota public GIS (Met Council / MnGeo where available). Pascal and CivilCraft still open for this lot when an outline exists."
+        ? "Minnesota zoning setbacks, coverage and FAR are not coded yet - verify those with the city or county. Parcel outline, lot area, house/driveway/landscape split and slope below come from Minnesota public GIS (Met Council / MnGeo where available). Pascal and CivilCraft still open for this lot when an outline exists."
         : "Zoning rules are coded only for King and Snohomish counties, WA. Parcel outline, site coverage and slope below work for Minnesota and other states where a free public parcel layer answers.") : "We do not have verified rules coded for zone " + esc(v.zone || "(blank)") + " here. Verify with the jurisdiction."));
       cr = '<p class="bh-verify">' + why + '</p><p><a href="./permits.html">The Board permit hub</a> lists city and county permit offices.</p>';
     } else {
@@ -770,7 +770,7 @@
     try { localStorage.setItem("bh3dSeed", JSON.stringify(seed3d)); } catch (e) {}
 
     // Hard rule: keep Site coverage and landscape in every study (PR #176 title). Pascal/CivilCraft ADD after; nothing is stripped.
-    var landBody = '<h3>House, garage, driveway, landscape and slope</h3><p class="bh-muted">Same address and parcel as the rest of this study. Lot broken into house / garage / driveway-paving / landscape SF with slope from public survey layers (USGS 3DEP, county parcel, building footprints). Planning estimate only — not a survey.</p>';
+    var landBody = '<h3>House, garage, driveway, landscape and slope</h3><p class="bh-muted">Same address and parcel as the rest of this study. Lot broken into house / garage / driveway-paving / landscape SF with slope from public survey layers (USGS 3DEP, county parcel, building footprints). Planning estimate only - not a survey.</p>';
     if (window.BuildHereLandscape && s.landscape) landBody += window.BuildHereLandscape.renderHTML(s.landscape, s);
     else if (window.BuildHereLandscape) landBody += window.BuildHereLandscape.renderHTML({ rows: [], notes: ["Landscape data was not attached to this run."], sources: [], slope: { ok: false, note: "not measured" } }, s);
     else landBody += '<p class="bh-verify" role="alert">The landscape calculator script did not load. Refresh and generate again.</p>';
@@ -780,23 +780,23 @@
     var sbLine = ["front " + (typeof sb.front === "number" ? sb.front + " ft" : "verify"), "side " + (typeof sb.side === "number" ? sb.side + " ft" : "verify"), "rear " + (typeof sb.rear === "number" ? sb.rear + " ft" : "verify")].join(", ");
     var massRows = [
       ["Address", esc(seed3d.address || s.matched || s.input || "")],
-      ["Zone", esc(seed3d.zone || "—")],
-      ["Lot area", seed3d.lot ? fmt(seed3d.lot) + " sf" : "—"],
+      ["Zone", esc(seed3d.zone || "-")],
+      ["Lot area", seed3d.lot ? fmt(seed3d.lot) + " sf" : "-"],
       ["Setbacks used", esc(sbLine)],
       ["Height limit", seed3d.height ? seed3d.height + " ft" : "Verify with the jurisdiction"],
       ["Coverage cap", seed3d.coverage ? fmt(seed3d.coverage) + " sf" : "Verify with the jurisdiction"],
       ["Buildable envelope", seed3d.env && seed3d.env.area ? "About " + fmt(seed3d.env.area) + " sf inside setbacks (diagrammatic)" : (seed3d.ring ? "Lot outline loaded; setbacks not fully verified for an envelope area" : "No parcel outline in this run")]
     ];
-    out.push(page("What you can build", '<h3>Massing and envelope</h3><p>These caps and setbacks are the same numbers used in the rest of this study. Sketch boxes against them in the 3D massing editor (WebGL), or continue into Pascal Editor for walls and rooms.</p><table class="bh-table">' + massRows.map(function (r) { return "<tr><th scope=\"row\">" + r[0] + "</th><td>" + r[1] + "</td></tr>"; }).join("") + '</table><p><a class="bh-btn" href="/build-here-3d.html">Deepen in the 3D massing sketcher</a></p><p class="bh-muted">Optional deepen step for WebGL massing. Pascal and CivilCraft tools for this lot are in the next sections of this same study — you do not need a second address lookup.</p>'));
+    out.push(page("What you can build", '<h3>Massing and envelope</h3><p>These caps and setbacks are the same numbers used in the rest of this study. Sketch boxes against them in the 3D massing editor (WebGL), or continue into Pascal Editor for walls and rooms.</p><table class="bh-table">' + massRows.map(function (r) { return "<tr><th scope=\"row\">" + r[0] + "</th><td>" + r[1] + "</td></tr>"; }).join("") + '</table><p><a class="bh-btn" href="/build-here-3d.html">Deepen in the 3D massing sketcher</a></p><p class="bh-muted">Optional deepen step for WebGL massing. Pascal and CivilCraft tools for this lot are in the next sections of this same study - you do not need a second address lookup.</p>'));
 
     var pascalMedia =
       '<div class="bh-study-media" id="bh-study-pascal">' +
         '<h3>Design it in 3D · Pascal Editor</h3>' +
-        '<p>Pascal Editor is an open-source (MIT) 3D building editor: walls, slabs, roofs, doors, windows and zones, with AI that can build from a prompt. It needs WebGPU (current Chrome or Edge on a desktop). The brief below is prefilled from this lot.</p>' +
+        '<p>Pascal Editor is an open-source (MIT) 3D building editor: walls, slabs, roofs, doors, windows and zones, that can build from a prompt. It needs WebGPU (current Chrome or Edge on a desktop). The brief below is prefilled from this lot.</p>' +
         '<div class="b3-media-grid">' +
           '<figure class="b3-fig">' +
             '<video id="bh-pv" src="https://video.twimg.com/amplify_video/2117671403608780800/vid/avc1/1280x720/tJoLnt9uxn6yne-1.mp4#t=10" controls muted playsinline preload="metadata"></video>' +
-            '<figcaption><b>Pascal Editor</b> · walls, rooms, roofs, AI from a prompt' +
+            '<figcaption><b>Pascal Editor</b> · walls, rooms, roofs, from a prompt' +
               '<div class="b3-chaps" id="bh-chaps">' +
                 '<button type="button" data-t="2">Site in 3D</button>' +
                 '<button type="button" data-t="10">Floor plan</button>' +
@@ -816,7 +816,7 @@
             '<p><button class="bh-btn" type="button" data-bh-copy="pascal">Copy brief</button> ' +
             '<a class="bh-btn" href="https://editor.pascal.app/" target="_blank" rel="noopener">Open Pascal Editor</a> ' +
             '<a class="bh-btn bh-btn-ghost" href="/build-here-3d.html">Massing sketcher first</a></p>' +
-            '<p class="bh-muted">Pascal Editor is made by Pascal Group Inc. and is <a href="https://github.com/pascalorg/editor" target="_blank" rel="noopener">open source on GitHub</a> under the MIT license. The Board is not affiliated with Pascal. Video currently streams from X CDN (fragile); a stable BOPS-hosted copy can replace it later if Alex approves.</p>' +
+            '<p class="bh-muted">Pascal Editor is made by Pascal Group Inc. and is <a href="https://github.com/pascalorg/editor" target="_blank" rel="noopener">open source on GitHub</a> under the MIT license. The Board is not affiliated with Pascal. Video currently streams from X CDN (fragile); a stable Board-hosted copy can replace it later if Alex approves.</p>' +
           '</div>' +
         '</div>' +
       '</div>';
