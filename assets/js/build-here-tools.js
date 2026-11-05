@@ -1,6 +1,6 @@
 /* Build Here feasibility tools: Pascal video chapters, CivilCraft hotspots,
-   lot-seeded Pascal brief + CivilCraft CSV. Works on build-here.html (report)
-   and build-here-3d.html. Seed from localStorage "bh3dSeed". */
+   CutSheet RX chapters, lot-seeded Pascal / CivilCraft / CSRX briefs. Works on
+   build-here.html (report) and build-here-3d.html. Seed from localStorage "bh3dSeed". */
 (function (global) {
   const $ = (id, root) => (root || document).getElementById(id) || document.getElementById(id);
   const fmt = (n) => Math.round(n).toLocaleString('en-US');
@@ -11,6 +11,13 @@
     60: 'Zones sit on levels, so you can stack floors like the massing boxes.',
     90: 'The site sits in the real world: your lot outline can go here.',
     120: 'Ask the building a question and it answers from the model.'
+  };
+  const CSRX_NOTES = {
+    0: 'Draw the field (or lot) corners on satellite. Double-click the last corner to close the polygon - same outline idea as the parcel ring in this study.',
+    3: 'Downloading lidar, then an elevation heatmap fills the polygon from USGS 3DEP. This study already uses that lidar family for lot slope.',
+    5: 'Drainage toggle: flow arrows and blue ponding show where water stands. Useful before stormwater review on an addition or new house.',
+    6: 'Draw a tile or profile line for a cut/fill graph across the field - companion to CivilCraft pad grading on survey points.',
+    8: 'View 3D and start rain: pond area and volume metrics for a design storm. Planning aid only, not an engineered drainage report.'
   };
 
   function readSeed() {
@@ -37,6 +44,18 @@
       (seed.height ? ' Height limit ' + seed.height + ' ft.' : '') +
       '\nIn CivilCraft: open the CSV (columns P,N,E,Z,D, feet). Points named LOT are the lot corners; ENV are the buildable envelope corners. Use Pad (G G) on the ENV corners to grade a building pad, and Alignment (A A) from the street side for a driveway.' +
       '\nElevations are a flat 100 ft placeholder. Replace with survey points before using slope, cut or fill numbers.';
+  }
+
+  function csrxBrief(seed) {
+    const lat = (seed.lat != null && isFinite(seed.lat)) ? Number(seed.lat).toFixed(6) : '';
+    const lon = (seed.lon != null && isFinite(seed.lon)) ? Number(seed.lon).toFixed(6) : '';
+    const addr = seed.address || 'this lot';
+    return 'CutSheet RX on ' + addr + '.' +
+      (lat && lon ? ('\nGo To search: paste "' + lat + ', ' + lon + '" or the street address.') : '\nGo To search: paste the street address.') +
+      (seed.lot ? '\nLot about ' + fmt(seed.lot) + ' sf.' : '') +
+      (seed.zone ? ' Zone ' + seed.zone + '.' : '') +
+      '\nSuggested flow on this lot: (1) Draw field area on the parcel (2) wait for lidar heatmap (3) toggle Drainage for flow and ponding (4) draw a profile/tile line for cut/fill (5) View 3D and Start rain.' +
+      '\nUSGS 3DEP lidar powers both this study\'s lot slope and CutSheet RX. Planning aid only - not a survey or engineered stormwater design.';
   }
 
   function pascalBrief(seed) {
@@ -71,6 +90,8 @@
     if (pb) pb.value = pascalBrief(seed);
     const cb = root.querySelector('#bh-civil-brief, #b3-civil-brief');
     if (cb) cb.value = civilBrief(seed);
+    const xb = root.querySelector('#bh-csrx-brief');
+    if (xb) xb.value = csrxBrief(seed);
   }
 
   function bindMedia(root) {
@@ -81,6 +102,15 @@
         if (v) { v.currentTime = +b.dataset.t; v.play().catch(() => {}); }
         const note = root.querySelector('#b3-chap-note, #bh-chap-note');
         if (note) note.textContent = NOTES[b.dataset.t] || '';
+      };
+    });
+    const cv = root.querySelector('#bh-cv');
+    root.querySelectorAll('#bh-csrx-chaps button').forEach((b) => {
+      b.onclick = () => {
+        root.querySelectorAll('#bh-csrx-chaps button').forEach((x) => x.classList.toggle('on', x === b));
+        if (cv) { cv.currentTime = +b.dataset.t; cv.play().catch(() => {}); }
+        const note = root.querySelector('#bh-csrx-note');
+        if (note) note.textContent = CSRX_NOTES[b.dataset.t] || '';
       };
     });
     root.querySelectorAll('.b3-pin, .bh-pin').forEach((p) => {
@@ -99,6 +129,12 @@
         if (ta && navigator.clipboard) navigator.clipboard.writeText(ta.value).then(() => { btn.textContent = 'Copied'; });
       };
     });
+    root.querySelectorAll('[data-bh-copy="csrx"]').forEach((btn) => {
+      btn.onclick = () => {
+        const ta = root.querySelector('#bh-csrx-brief');
+        if (ta && navigator.clipboard) navigator.clipboard.writeText(ta.value).then(() => { btn.textContent = 'Copied'; });
+      };
+    });
     root.querySelectorAll('[data-bh-csv], #b3-civil-csv').forEach((btn) => {
       btn.onclick = () => downloadCsv(seed);
     });
@@ -107,10 +143,16 @@
         const m = b.dataset.try;
         const target = m === 'pascal'
           ? root.querySelector('#bh-study-pascal, #b3-pascal, #b3-tab-pascal')
-          : root.querySelector('#bh-study-civil, #b3-civil, #b3-tab-civil');
+          : m === 'csrx'
+            ? root.querySelector('#bh-study-csrx')
+            : root.querySelector('#bh-study-civil, #b3-civil, #b3-tab-civil');
         if (m === 'pascal' && $('b3-tab-pascal')) $('b3-tab-pascal').click();
         if (m === 'civil' && $('b3-tab-civil')) $('b3-tab-civil').click();
         if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (m === 'csrx') {
+          const ta = root.querySelector('#bh-csrx-brief');
+          if (ta) ta.focus();
+        }
       };
     });
   }
@@ -164,6 +206,7 @@
     readSeed: readSeed,
     pascalBrief: pascalBrief,
     civilBrief: civilBrief,
+    csrxBrief: csrxBrief,
     downloadCsv: downloadCsv
   };
 
