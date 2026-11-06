@@ -70,6 +70,7 @@ class NewsContractTests(unittest.TestCase):
         self.assertEqual(
             [item["slug"] for item in stories],
             [
+                "seattle-stfi-taller-decks-longer-spans",
                 "seattle-treesub-early-tree-coaching",
                 "snohomish-county-school-impact-fees-by-bedroom",
                 "kirkland-middle-housing-smaller-homes",
@@ -97,78 +98,85 @@ class NewsContractTests(unittest.TestCase):
                 "snohomish-health-septic-permit-grant",
             ],
         )
-        self.assertEqual(stories[0]["date"], "2026-11-05")
-        self.assertEqual(stories[1]["date"], "2026-11-04")
-        self.assertEqual(stories[2]["date"], "2026-11-03")
-        self.assertEqual(stories[3]["date"], "2026-11-02")
-        self.assertEqual(stories[4]["date"], "2026-11-01")
-        self.assertEqual(stories[5]["date"], "2026-10-31")
-        self.assertEqual(stories[6]["date"], "2026-10-30")
-        self.assertEqual(stories[7]["date"], "2026-10-29")
-        self.assertEqual(stories[8]["date"], "2026-10-28")
-        self.assertEqual(stories[9]["date"], "2026-10-27")
-        self.assertEqual(stories[10]["date"], "2026-10-26")
-        self.assertEqual(stories[11]["date"], "2026-10-25")
-        self.assertEqual(stories[12]["date"], "2026-10-24")
-        self.assertEqual(stories[13]["date"], "2026-10-23")
-        self.assertEqual(stories[14]["date"], "2026-10-22")
-        self.assertEqual(stories[15]["date"], "2026-10-21")
-        self.assertEqual(stories[16]["date"], "2026-10-20")
-        self.assertEqual(stories[17]["date"], "2026-10-19")
-        self.assertEqual(stories[18]["date"], "2026-10-18")
+        self.assertEqual(stories[0]["date"], "2026-11-06")
+        self.assertEqual(stories[1]["date"], "2026-11-05")
+        self.assertEqual(stories[2]["date"], "2026-11-04")
+        self.assertEqual(stories[3]["date"], "2026-11-03")
+        self.assertEqual(stories[4]["date"], "2026-11-02")
+        self.assertEqual(stories[5]["date"], "2026-11-01")
+        self.assertEqual(stories[6]["date"], "2026-10-31")
+        self.assertEqual(stories[7]["date"], "2026-10-30")
+        self.assertEqual(stories[8]["date"], "2026-10-29")
+        self.assertEqual(stories[9]["date"], "2026-10-28")
+        self.assertEqual(stories[10]["date"], "2026-10-27")
+        self.assertEqual(stories[11]["date"], "2026-10-26")
+        self.assertEqual(stories[12]["date"], "2026-10-25")
+        self.assertEqual(stories[13]["date"], "2026-10-24")
+        self.assertEqual(stories[14]["date"], "2026-10-23")
+        self.assertEqual(stories[15]["date"], "2026-10-22")
+        self.assertEqual(stories[16]["date"], "2026-10-21")
+        self.assertEqual(stories[17]["date"], "2026-10-20")
+        self.assertEqual(stories[18]["date"], "2026-10-19")
         self.assertEqual(stories[19]["date"], "2026-10-18")
-        self.assertEqual(stories[20]["date"], "2026-10-17")
-        self.assertEqual(stories[21]["date"], "2026-10-16")
+        self.assertEqual(stories[20]["date"], "2026-10-18")
+        self.assertEqual(stories[21]["date"], "2026-10-17")
         self.assertEqual(stories[22]["date"], "2026-10-16")
-        self.assertEqual(stories[23]["date"], "2026-10-15")
-        self.assertEqual(stories[24]["date"], "2026-10-14")
+        self.assertEqual(stories[23]["date"], "2026-10-16")
+        self.assertEqual(stories[24]["date"], "2026-10-15")
+        self.assertEqual(stories[25]["date"], "2026-10-14")
         self.assertTrue(stories[0]["title"])
         self.assertTrue(stories[0]["description"])
         self.assertGreaterEqual(len(stories[0]["sources"]), 1)
         self.assertIn("Seattle Department of Construction and Inspections", stories[0]["hero_credit"])
         self.assertIn("Building Connections", stories[0]["hero_credit"])
         self.assertIn(
-            "https://buildingconnections.seattle.gov/2026/11/03/early-guidance-on-tree-protection/",
+            "https://buildingconnections.seattle.gov/2026/11/03/subject-to-field-inspection-criteria-expanded-and-explained/",
             stories[0]["hero_credit"],
         )
-        self.assertIn("Emersb", stories[1]["hero_credit"])
-        self.assertIn("CC BY-SA 3.0", stories[1]["hero_credit"])
-        self.assertIn("Brett VA", stories[2]["hero_credit"])
-        self.assertIn("CC BY 2.0", stories[2]["hero_credit"])
-        self.assertIn("ECTran71", stories[3]["hero_credit"])
-        self.assertIn("CC0", stories[3]["hero_credit"])
-        self.assertIn("SounderBruce", stories[4]["hero_credit"])
-        self.assertIn("CC BY-SA 4.0", stories[4]["hero_credit"])
-        self.assertIn("Chris Light", stories[5]["hero_credit"])
+        self.assertIn("Seattle Department of Construction and Inspections", stories[1]["hero_credit"])
+        self.assertIn("Building Connections", stories[1]["hero_credit"])
+        self.assertIn(
+            "https://buildingconnections.seattle.gov/2026/11/03/early-guidance-on-tree-protection/",
+            stories[1]["hero_credit"],
+        )
+        self.assertIn("Emersb", stories[2]["hero_credit"])
+        self.assertIn("CC BY-SA 3.0", stories[2]["hero_credit"])
+        self.assertIn("Brett VA", stories[3]["hero_credit"])
+        self.assertIn("CC BY 2.0", stories[3]["hero_credit"])
+        self.assertIn("ECTran71", stories[4]["hero_credit"])
+        self.assertIn("CC0", stories[4]["hero_credit"])
+        self.assertIn("SounderBruce", stories[5]["hero_credit"])
         self.assertIn("CC BY-SA 4.0", stories[5]["hero_credit"])
-        self.assertIn("Robert Ashworth", stories[6]["hero_credit"])
-        self.assertIn("CC BY 2.0", stories[6]["hero_credit"])
-        self.assertIn("Steven Pavlov", stories[7]["hero_credit"])
-        self.assertIn("CC BY-SA 4.0", stories[7]["hero_credit"])
+        self.assertIn("Chris Light", stories[6]["hero_credit"])
+        self.assertIn("CC BY-SA 4.0", stories[6]["hero_credit"])
+        self.assertIn("Robert Ashworth", stories[7]["hero_credit"])
+        self.assertIn("CC BY 2.0", stories[7]["hero_credit"])
         self.assertIn("Steven Pavlov", stories[8]["hero_credit"])
         self.assertIn("CC BY-SA 4.0", stories[8]["hero_credit"])
-        self.assertIn("Joe Mabel", stories[9]["hero_credit"])
-        self.assertIn("CC BY-SA 3.0", stories[9]["hero_credit"])
+        self.assertIn("Steven Pavlov", stories[9]["hero_credit"])
+        self.assertIn("CC BY-SA 4.0", stories[9]["hero_credit"])
         self.assertIn("Joe Mabel", stories[10]["hero_credit"])
         self.assertIn("CC BY-SA 3.0", stories[10]["hero_credit"])
-        self.assertIn("PinchyCC", stories[11]["hero_credit"])
-        self.assertIn("CC BY 4.0", stories[11]["hero_credit"])
-        self.assertIn("Joe Mabel", stories[12]["hero_credit"])
-        self.assertIn("CC BY-SA 3.0", stories[12]["hero_credit"])
+        self.assertIn("Joe Mabel", stories[11]["hero_credit"])
+        self.assertIn("CC BY-SA 3.0", stories[11]["hero_credit"])
+        self.assertIn("PinchyCC", stories[12]["hero_credit"])
+        self.assertIn("CC BY 4.0", stories[12]["hero_credit"])
         self.assertIn("Joe Mabel", stories[13]["hero_credit"])
         self.assertIn("CC BY-SA 3.0", stories[13]["hero_credit"])
-        self.assertIn("Visitor7", stories[14]["hero_credit"])
+        self.assertIn("Joe Mabel", stories[14]["hero_credit"])
         self.assertIn("CC BY-SA 3.0", stories[14]["hero_credit"])
-        self.assertIn("Smlowe5", stories[15]["hero_credit"])
-        self.assertIn("Spicypepper999", stories[16]["hero_credit"])
-        self.assertIn("ECTran71", stories[17]["hero_credit"])
-        self.assertIn("Illustration", stories[18]["hero_credit"])
-        self.assertIn("Joe Mabel", stories[19]["hero_credit"])
+        self.assertIn("Visitor7", stories[15]["hero_credit"])
+        self.assertIn("CC BY-SA 3.0", stories[15]["hero_credit"])
+        self.assertIn("Smlowe5", stories[16]["hero_credit"])
+        self.assertIn("Spicypepper999", stories[17]["hero_credit"])
+        self.assertIn("ECTran71", stories[18]["hero_credit"])
+        self.assertIn("Illustration", stories[19]["hero_credit"])
         self.assertIn("Joe Mabel", stories[20]["hero_credit"])
-        self.assertEqual(stories[21]["hero_credit"], "")
-        self.assertIn("SounderBruce", stories[22]["hero_credit"])
-        self.assertIn("Robert Ashworth", stories[23]["hero_credit"])
-        self.assertIn("Emersb", stories[24]["hero_credit"])
+        self.assertIn("Joe Mabel", stories[21]["hero_credit"])
+        self.assertEqual(stories[22]["hero_credit"], "")
+        self.assertIn("SounderBruce", stories[23]["hero_credit"])
+        self.assertIn("Robert Ashworth", stories[24]["hero_credit"])
+        self.assertIn("Emersb", stories[25]["hero_credit"])
         self.assertTrue((ROOT / "news" / "_template.md").is_file())
         self.assertEqual(
             sorted(path.name for path in (ROOT / "news").glob("[0-9]*.md")),
@@ -198,12 +206,13 @@ class NewsContractTests(unittest.TestCase):
                 "2026-11-03-kirkland-middle-housing-smaller-homes.md",
                 "2026-11-04-snohomish-county-school-impact-fees-by-bedroom.md",
                 "2026-11-05-seattle-treesub-early-tree-coaching.md",
+                "2026-11-06-seattle-stfi-taller-decks-longer-spans.md",
             ],
         )
         result = intake.validate_news_library(ROOT)
         self.assertTrue(result["ok"], result)
         self.assertEqual(result["status"], "ready")
-        self.assertEqual(result["stories"], 25)
+        self.assertEqual(result["stories"], 26)
         self.assertEqual(gs.news_blog_overlap(ROOT), [])
         self.assertIn("First stories coming soon", gs.build_news_index([]))
 
@@ -241,6 +250,7 @@ class NewsContractTests(unittest.TestCase):
         self.assertNotIn("kirkland-middle-housing-smaller-homes", blog_html)
         self.assertNotIn("snohomish-county-school-impact-fees-by-bedroom", blog_html)
         self.assertNotIn("seattle-treesub-early-tree-coaching", blog_html)
+        self.assertNotIn("seattle-stfi-taller-decks-longer-spans", blog_html)
         baker_url = "https://boardofprojectstewardship.com/news/mount-baker-redevelopment-groundbreaking.html"
         eca_url = "https://boardofprojectstewardship.com/news/seattle-environmentally-critical-areas-update.html"
         tree_url = "https://boardofprojectstewardship.com/news/edmonds-landmark-tree-ordinance-extension.html"
@@ -282,8 +292,11 @@ class NewsContractTests(unittest.TestCase):
         school_href = "./news/snohomish-county-school-impact-fees-by-bedroom.html"
         treesub_url = "https://boardofprojectstewardship.com/news/seattle-treesub-early-tree-coaching.html"
         treesub_href = "./news/seattle-treesub-early-tree-coaching.html"
+        stfi_url = "https://boardofprojectstewardship.com/news/seattle-stfi-taller-decks-longer-spans.html"
+        stfi_href = "./news/seattle-stfi-taller-decks-longer-spans.html"
         lead = news_html.split('class="news-lead"', 1)[1].split("</article>", 1)[0]
-        self.assertIn(treesub_href, lead)
+        self.assertIn(stfi_href, lead)
+        self.assertNotIn(treesub_href, lead)
         self.assertNotIn(school_href, lead)
         self.assertNotIn(kirk_href, lead)
         self.assertNotIn(shore_href, lead)
@@ -304,8 +317,53 @@ class NewsContractTests(unittest.TestCase):
         self.assertIn("./news/pacific-pro-group-bronze-best-in-the-pnw.html", news_html)
         self.assertIn(panel_href, news_html)
         self.assertIn(html.escape(stories[0]["title"], quote=True), lead)
-        self.assertIn("November 5, 2026", lead)
+        self.assertIn("November 6, 2026", lead)
         self.assertNotIn("edmonds-landmark-tree-ordinance-extension", lead)
+
+
+        stfi = (ROOT / "news" / "seattle-stfi-taller-decks-longer-spans.html").read_text(encoding="utf-8")
+        self.assertIn("Seattle Department of Construction and Inspections", stfi)
+        self.assertIn("Building Connections", stfi)
+        self.assertIn(
+            "https://buildingconnections.seattle.gov/2026/11/03/subject-to-field-inspection-criteria-expanded-and-explained/",
+            stfi,
+        )
+        self.assertIn("<h2>History and background</h2>", stfi)
+        self.assertNotIn("Illustrative", stfi)
+        self.assertIsNone(gs.news_forbidden_term(stfi))
+        self.assertNotIn("Netlify", stfi)
+        self.assertNotIn("Ghost", stfi)
+        for name in (
+            "2026-11-06-seattle-stfi-taller-decks-longer-spans",
+            "2026-11-06-seattle-stfi-1",
+            "2026-11-06-seattle-stfi-2",
+            "2026-11-06-seattle-stfi-3",
+        ):
+            for width in (480, 800, 1200):
+                self.assertIn(f"{name}-{width}.webp", stfi)
+                self.assertTrue((ROOT / "assets" / "images" / "news" / f"{name}-{width}.webp").is_file())
+            self.assertTrue((ROOT / "assets" / "images" / "news" / f"{name}.webp").is_file())
+        stfi_body = stfi.split('class="news-body prose-board"', 1)[1].split("news-sources", 1)[0]
+        self.assertLess(stfi_body.index("seattle-stfi-1"), stfi_body.index("Longer beams and taller decks"))
+        self.assertLess(stfi_body.index("Longer beams and taller decks"), stfi_body.index("seattle-stfi-2"))
+        self.assertLess(stfi_body.index("seattle-stfi-2"), stfi_body.index("When a remodel is a substantial alteration"))
+        self.assertLess(stfi_body.index("When a remodel is a substantial alteration"), stfi_body.index("History and background"))
+        self.assertLess(stfi_body.index("History and background"), stfi_body.index("seattle-stfi-3"))
+        self.assertLess(stfi_body.index("seattle-stfi-3"), stfi_body.index("What it means for homeowners"))
+        self.assertEqual(stfi_body.count('loading="lazy"'), 3)
+        self.assertEqual(stfi_body.count("https://pacificprogroup.com/"), 1)
+        self.assertEqual(stfi_body.count("pacificprogroup.com"), 1)
+        self.assertIn("the Board&#x27;s No. 1-ranked contractor", stfi_body)
+        self.assertIn('href="https://pacificprogroup.com/"', stfi_body)
+        self.assertIn('href="https://secure.lni.wa.gov/verify/"', stfi_body)
+        self.assertIn("editorial@boardofprojectstewardship.com", stfi_body)
+        self.assertIn("Jamie.anderson@seattle.gov", stfi_body)
+        self.assertNotIn("owned by", stfi_body.lower())
+        self.assertNotIn("parent company", stfi_body.lower())
+        self.assertIn("srcset=", stfi.split("<figure", 1)[1])
+        stfi_story = next(item for item in stories if item["slug"] == "seattle-stfi-taller-decks-longer-spans")
+        for source in stfi_story["sources"]:
+            self.assertIn(source, stfi)
 
         tree = (ROOT / "news" / "seattle-treesub-early-tree-coaching.html").read_text(encoding="utf-8")
         self.assertIn("Seattle Department of Construction and Inspections", tree)
@@ -1468,6 +1526,7 @@ class NewsContractTests(unittest.TestCase):
         rss = (ROOT / "news" / "rss.xml").read_text(encoding="utf-8")
         self.assertIn("Board of Project Stewardship News", rss)
         self.assertIn("<item>", rss)
+        self.assertTrue(rss.index(stfi_url) < rss.index(treesub_url))
         self.assertTrue(rss.index(treesub_url) < rss.index(school_url))
         self.assertTrue(rss.index(school_url) < rss.index(kirk_url))
         self.assertTrue(rss.index(kirk_url) < rss.index(shore_url))
@@ -1513,6 +1572,7 @@ class NewsContractTests(unittest.TestCase):
         self.assertIn(kirk_url, rss)
         self.assertIn(school_url, rss)
         self.assertIn(treesub_url, rss)
+        self.assertIn(stfi_url, rss)
         self.assertNotIn("/posts/", rss)
 
         sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
@@ -1541,12 +1601,14 @@ class NewsContractTests(unittest.TestCase):
         self.assertIn(kirk_url, sitemap)
         self.assertIn(school_url, sitemap)
         self.assertIn(treesub_url, sitemap)
+        self.assertIn(stfi_url, sitemap)
         self.assertIn("<lastmod>2026-10-31</lastmod>", sitemap)
         self.assertIn("<lastmod>2026-11-01</lastmod>", sitemap)
         self.assertIn("<lastmod>2026-11-02</lastmod>", sitemap)
         self.assertIn("<lastmod>2026-11-03</lastmod>", sitemap)
         self.assertIn("<lastmod>2026-11-04</lastmod>", sitemap)
         self.assertIn("<lastmod>2026-11-05</lastmod>", sitemap)
+        self.assertIn("<lastmod>2026-11-06</lastmod>", sitemap)
         self.assertIn("https://boardofprojectstewardship.com/projects/magnolia-house-adu-garage/", sitemap)
         blog_rss = (ROOT / "blog" / "rss.xml").read_text(encoding="utf-8")
         posts_json = (ROOT / "posts.json").read_text(encoding="utf-8")
@@ -1598,6 +1660,8 @@ class NewsContractTests(unittest.TestCase):
         self.assertNotIn("snohomish-county-school-impact-fees-by-bedroom", posts_json)
         self.assertNotIn("seattle-treesub-early-tree-coaching", blog_rss)
         self.assertNotIn("seattle-treesub-early-tree-coaching", posts_json)
+        self.assertNotIn("seattle-stfi-taller-decks-longer-spans", blog_rss)
+        self.assertNotIn("seattle-stfi-taller-decks-longer-spans", posts_json)
         self.assertNotIn("/news/", blog_rss)
         self.assertNotIn('"path": "./news/', posts_json)
         self.assertNotIn("./posts/", news_html)
