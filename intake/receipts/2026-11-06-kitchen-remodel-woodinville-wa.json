@@ -1,0 +1,19 @@
+{
+  "submission_id": "2026-11-06-kitchen-remodel-woodinville-wa",
+  "idempotency_key": "sha256:f7b0c28c90d472b8b7df343525fa3bfb49db0a232d6a616c9d919eb364b3c44f",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-11-06T11:51:27Z",
+  "outputs": [
+    "assets/images/posts/2026-11-06-woodinville-kitchen-1.webp",
+    "assets/images/posts/2026-11-06-woodinville-kitchen-2.webp",
+    "assets/images/posts/2026-11-06-woodinville-kitchen-3.webp",
+    "posts/2026-11-06-kitchen-remodel-woodinville-wa.md",
+    "posts/2026-11-06-kitchen-remodel-woodinville-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 94
+}

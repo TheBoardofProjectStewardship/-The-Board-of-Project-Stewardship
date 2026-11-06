@@ -1,0 +1,127 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Woodinville",
+    "service": "Kitchen remodel",
+    "slug": "kitchen-remodel-woodinville-wa"
+  },
+  "sources": [
+    {
+      "url": "https://www.woodinville.gov/347/Apply-for-a-Permit-Online",
+      "title": "Woodinville Apply for a Permit Online",
+      "retrieved": "2026-11-06",
+      "http_status": 403,
+      "supports": "Permit Portal; New \u2192 Building/Engineering/Fire/Planning; street-number location search; WA contractor license + Woodinville business license before issuance (official page text; box curl 403)"
+    },
+    {
+      "url": "https://www.woodinville.gov/364/Commercial-Residential-Construction-Perm",
+      "title": "Woodinville commercial and residential construction permits",
+      "retrieved": "2026-11-06",
+      "http_status": 403,
+      "supports": "Combined Building Permit for residential construction; PDF plans via portal; Permit Center PermitCenter@woodinville.gov / 425-489-2754; C&D recycling via King County (official page text; box curl 403)"
+    },
+    {
+      "url": "https://www.woodinville.gov/200/Permitting",
+      "title": "Woodinville Permitting FAQs",
+      "retrieved": "2026-11-06",
+      "http_status": 403,
+      "supports": "When building permit required; electrical permits; plan sets (official page text; box curl 403)"
+    },
+    {
+      "url": "https://www.ci.woodinville.wa.us/168/Development-Services",
+      "title": "Woodinville Development Services",
+      "retrieved": "2026-11-06",
+      "http_status": 500,
+      "supports": "Development Services hub already linked from Board of Project Stewardship woodinville.html (box curl 500/redirect)"
+    },
+    {
+      "url": "https://mybuildingpermit.com/",
+      "title": "MyBuildingPermit",
+      "retrieved": "2026-11-06",
+      "http_status": 200,
+      "supports": "Regional permit portal"
+    },
+    {
+      "url": "https://customer.mybuildingpermit.com/Default.aspx",
+      "title": "MyBuildingPermit customer login",
+      "retrieved": "2026-11-06",
+      "http_status": 200,
+      "supports": "Portal login (redirects to epermit login)"
+    },
+    {
+      "url": "https://www.mybuildingpermit.com/sites/default/files/TS-00_Permits%20Required%20and%20Not%20Required_FINAL_6.11.26.pdf",
+      "title": "MyBuildingPermit Tip Sheet 00 \u2014 permits required and not required",
+      "retrieved": "2026-11-06",
+      "http_status": 200,
+      "supports": "Kitchen/bath fixture replacements without plumbing-line modifications often no building permit; tub/shower replacement requires permit; interior finish and portable appliances on not-required list; Woodinville not a named column jurisdiction \u2014 confirm locally"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/",
+      "title": "L&I electrical permits, fees and inspections",
+      "retrieved": "2026-11-06",
+      "http_status": 200,
+      "supports": "City-issued electrical vs L&I for all other jobsites"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "title": "L&I city electrical permits and inspections list",
+      "retrieved": "2026-11-06",
+      "http_status": 200,
+      "supports": "Woodinville not listed among cities that issue their own electrical permits"
+    },
+    {
+      "url": "https://kingcounty.gov/en/dept/local-services/certificates-permits-licenses/permits",
+      "title": "King County permits hub",
+      "retrieved": "2026-11-06",
+      "http_status": 200,
+      "supports": "AHJ for unincorporated valley parcels"
+    },
+    {
+      "url": "https://kingcounty.gov/en/dept/local-services/certificates-permits-licenses/permits/permits-inspections-codes-buildings-land-use/do-you-need-a-permit",
+      "title": "King County \u2014 Do you need a permit?",
+      "retrieved": "2026-11-06",
+      "http_status": 200,
+      "supports": "County guidance for whether a permit is needed"
+    },
+    {
+      "url": "https://www.codepublishing.com/WA/Woodinville/html/Woodinville15/Woodinville15.html",
+      "title": "WMC Title 15 Buildings and Construction",
+      "retrieved": "2026-11-06",
+      "http_status": 200,
+      "supports": "City buildings and construction code title index"
+    },
+    {
+      "url": "https://www.codepublishing.com/WA/Woodinville/",
+      "title": "Woodinville Municipal Code index",
+      "retrieved": "2026-11-06",
+      "http_status": 200,
+      "supports": "City code publishing index"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "L&I hiring a contractor",
+      "retrieved": "2026-11-06",
+      "http_status": 200,
+      "supports": "Hiring guidance; verify registration/bonding/insurance"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/contractors/register-as-a-contractor/",
+      "title": "L&I register as a contractor",
+      "retrieved": "2026-11-06",
+      "http_status": 200,
+      "supports": "Contractor registration requirements"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "L&I Verify",
+      "retrieved": "2026-11-06",
+      "http_status": 200,
+      "supports": "Contractor license verification"
+    }
+  ],
+  "dropped": [
+    "https://www.ci.woodinville.wa.us/253/Building-Permits (redirects toward woodinville.gov Building-Permits and returned 500 from box)",
+    "Fees, prices, timelines, and any invented Woodinville-specific tip-sheet column (Woodinville not named on Tip Sheet 00)",
+    "Claim that Woodinville issues its own electrical permits (not on L&I city list)"
+  ]
+}

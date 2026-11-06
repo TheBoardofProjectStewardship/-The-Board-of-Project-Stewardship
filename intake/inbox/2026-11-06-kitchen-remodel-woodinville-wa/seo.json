@@ -1,0 +1,50 @@
+{
+  "producer": "openclaw",
+  "agent": "seo-specialist",
+  "slug": "kitchen-remodel-woodinville-wa",
+  "title": "Kitchen Remodel Woodinville WA \u2014 Permits, Layout Changes, Wet Walls and Hiring",
+  "description": "A Woodinville homeowner's guide to a kitchen remodel: City Permit Portal vs unincorporated King County, when a Combined Building Permit applies, L&I electrical coverage, wet-wall and layout changes, fixture swaps that often skip a building permit, and how to verify the crew.",
+  "category": "Guides",
+  "keywords": [
+    "kitchen remodel Woodinville WA",
+    "Woodinville kitchen permit",
+    "wet wall kitchen remodel King County",
+    "MyBuildingPermit Tip Sheet kitchen fixtures",
+    "L&I electrical permit kitchen Woodinville"
+  ],
+  "outline": [
+    "Key Takeaways",
+    "Why a Woodinville kitchen remodel starts with the map, not the mood board",
+    "Which authority has your parcel",
+    "When a Combined Building Permit applies \u2014 and when a fixture swap may not",
+    "Wet walls, layout changes and inspections",
+    "Electrical: why L&I usually has the kitchen circuits",
+    "Materials Worth Knowing",
+    "How to shortlist and verify the remodel team",
+    "Where Pacific Pro Group fits",
+    "Next steps for a Woodinville kitchen remodel"
+  ],
+  "search_intent": "A Woodinville homeowner planning a kitchen remodel wants to know city vs unincorporated King County permitting, when layout and wet-wall changes need a building permit, who issues electrical permits, and how to vet the remodel team.",
+  "local_angles": [
+    "Woodinville Permit Portal (Apply for a Permit Online): Building/Engineering/Fire/Planning; WA contractor license + Woodinville business license before issuance",
+    "Combined Building Permit residential construction page; Permit Center PermitCenter@woodinville.gov / 425-489-2754; C&D recycling via King County",
+    "Unincorporated valley parcels \u2192 King County AHJ (permits hub + Do you need a permit?)",
+    "Woodinville not on L&I city electrical list \u2192 L&I electrical permits/inspections",
+    "MBP Tip Sheet 00: kitchen fixture replacements without plumbing-line modifications often no building permit; tub/shower replacement does require a permit; confirm with City"
+  ],
+  "internal_links": [
+    "../woodinville.html",
+    "../kitchen.html",
+    "../kitchen-remodel-planning.html",
+    "../permits.html",
+    "../verify-contractor.html",
+    "../hiring-a-contractor.html",
+    "../bonds-and-insurance.html",
+    "../red-flags-hiring.html"
+  ],
+  "notes": "Box-authored fallback brief. PPG only as Board #1 -> https://pacificprogroup.com/.",
+  "generation": {
+    "agent": "box-authored",
+    "mode": "box-fallback"
+  }
+}
