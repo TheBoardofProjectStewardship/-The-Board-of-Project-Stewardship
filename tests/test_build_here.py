@@ -100,6 +100,31 @@ class BuildHereTest(unittest.TestCase):
         self.assertIn('if ($("bh-lead-address"))', js)
         self.assertIn('if ($("bh-lead"))', js)
 
+    def test_us_wide_address_coverage(self):
+        page = PAGE.read_text(encoding="utf-8")
+        home = (ROOT / "index.html").read_text(encoding="utf-8")
+        gen = (ROOT / "generate_site.py").read_text(encoding="utf-8")
+        js = (ROOT / "assets/js/build-here.js").read_text(encoding="utf-8")
+        help_line = "Works for street addresses across the United States. The address goes to the US Census geocoder and to public parcel / map services. We do not store it."
+        for text, name in ((page, "build-here.html"), (home, "index.html"), (gen, "generate_site.py")):
+            self.assertNotIn("Works for King", text, name)
+            self.assertNotIn("or a Minnesota address", text, name)
+        self.assertIn(help_line, page)
+        self.assertIn(help_line, home)
+        self.assertIn('"name": "United States"', page)
+        self.assertNotIn('"name": "Minnesota"', page)
+        self.assertIn("We do not invent FAR.", page)
+        self.assertNotIn("outside King/Snohomish", js)
+        self.assertNotIn("coded only for King and Snohomish", js)
+        self.assertNotIn("in Minnesota. Zoning numbers", js)
+        self.assertIn("Zoning setbacks, coverage and FAR are not coded for this place.", js)
+        self.assertIn("worldImagery", js)
+        # Outside King/Snohomish the county parcel step is skipped; landscape still runs.
+        lookup = js.split("function lookup(", 1)[1].split("function landscape(", 1)[0]
+        self.assertIn('s.juris === "outside"', lookup)
+        self.assertIn("landscape(s)", lookup)
+        self.assertLess(lookup.index("landscape(s)"), lookup.index(".catch(function (e)"))
+
     def test_rules_math_and_sources(self):
         script = r"""
         const R = require(process.argv[1]);

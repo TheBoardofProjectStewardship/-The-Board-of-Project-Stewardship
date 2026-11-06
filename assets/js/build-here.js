@@ -22,6 +22,7 @@
     snoHost: "https://gis.snoco.org/host/rest/services/Hosted/",
     snoSlope: "https://gis.snoco.org/sas/rest/services/SAS_Services/SAS_Steep_Slopes/MapServer/0/query",
     snoAerial: "https://gis.snoco.org/sas/rest/services/SAS_Services/SAS_Imagery_2024/MapServer/export",
+    worldImagery: "https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/export",
     edmZoning: "https://maps.edmondswa.gov/gis/rest/services/DevServices/Zoning/MapServer/5/query",
     esriGeo: "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates",
     snoCities: "https://gis.snoco.org/sas/rest/services/SAS_Services/SAS_Cities/MapServer/0/query"
@@ -214,7 +215,7 @@
     return L.analyze(s).then(function (r) {
       s.landscape = r || emptyLandscape("Landscape analyze returned no result.");
       (r && r.sources || []).forEach(function (x) { log(s, x.ok, x.name, x.note); });
-      // analyze() already writes rings / parcel / lot onto s when a public outline is found (MN Met Council / MnGeo path).
+      // analyze() already writes rings / parcel / lot onto s when a public outline is found (state parcel layer or ArcGIS discovery).
       if (r && r.rings && !s.rings) s.rings = r.rings;
       if (r && r.lot && r.lot.sf && !s.lot) { s.lot = r.lot.sf; s.lotSrc = r.lot.src; }
       (r && r.rows || []).forEach(function (row) {
@@ -348,7 +349,8 @@
      (no parcel on the other side) and which are shared with a neighbor. */
   function neighbors(s) {
     if (!s.rings) return Promise.resolve();
-    var url = /^King/.test(s.county) ? EP.kcParcel : /^Snohomish/.test(s.county) ? EP.snoParcel : null;
+    var waNbr = !s.stateAbbr || s.stateAbbr === "WA";
+    var url = (waNbr && /^King/.test(s.county || "")) ? EP.kcParcel : (waNbr && /^Snohomish/.test(s.county || "")) ? EP.snoParcel : null;
     if (!url) return Promise.resolve();
     var b = bbox(s.rings), pad = 0.0003;
     return getJSON(url, { f: "json", geometry: [b[0] - pad, b[1] - pad, b[2] + pad, b[3] + pad].join(","), geometryType: "esriGeometryEnvelope", inSR: 4326, spatialRel: "esriSpatialRelIntersects", outFields: url === EP.kcParcel ? "PIN" : "PARCEL_ID", returnGeometry: true, outSR: 4326 })
@@ -416,7 +418,7 @@
         jobs.push(countHit(EP.seaEca + L[0] + "/query", rings, L[1], h, s, "Seattle ECA"));
       });
       s.hazardSource = "City of Seattle Environmentally Critical Areas map layers";
-    } else if (/^King/.test(s.county)) {
+    } else if (/^King/.test(s.county || "") && (!s.stateAbbr || s.stateAbbr === "WA")) {
       [[1, "Potential landslide hazard (King County 2016)"], [3, "Landslide hazard (King County 1990 map, incorporated areas)"], [4, "Potential steep slope hazard (King County 2016)"], [8, "Seismic hazard (King County 1990 map)"], [7, "Erosion hazard (King County 1990 map)"], [22, "Wetland (National Wetland Inventory 2024)"], [15, "Channel migration hazard area"]].forEach(function (L) {
         jobs.push(countHit(EP.kcSensitive + L[0] + "/query", rings, L[1], h, s, "King County Sensitive Areas"));
       });
@@ -447,7 +449,7 @@
           if (f && f.attributes.SUM_impervious_area_update) { s.imperv = Math.round(f.attributes.SUM_impervious_area_update); s.impervSrc = "City of Kenmore impervious surface by parcel (2025 data)"; log(s, true, "City of Kenmore impervious surface by parcel"); }
         }).catch(function () {}));
       }
-    } else if (/^Snohomish/.test(s.county)) {
+    } else if (/^Snohomish/.test(s.county || "") && (!s.stateAbbr || s.stateAbbr === "WA")) {
       jobs.push(countHit(EP.snoSlope, rings, "Steep slope 33% or more (county map)", h, s, "SAS_Steep_Slopes"));
       [["TOPOGRAPHY__LANDSLIDE__county_lha_model", "Landslide hazard area (county model)"], ["ENVIRONMENTAL__wetlands", "Mapped wetland"], ["ENVIRONMENTAL__fema_flood", "FEMA special flood hazard area (100-year floodplain)", 1, "sfha_tf='T'"]].forEach(function (L) {
         jobs.push(countHit(EP.snoHost + L[0] + "/FeatureServer/" + (L[2] || 0) + "/query", rings, L[1], h, s, L[0], L[3]));
@@ -504,8 +506,11 @@
     var cx = (a[0] + c[0]) / 2, cy = (a[1] + c[1]) / 2, half = Math.max(w, h) / 2 + pad;
     var W = 800, H = 600, hw = half * 4 / 3, hh = half;
     var box = [cx - hw, cy - hh, cx + hw, cy + hh];
-    var base = /^Snohomish/.test(s.county) ? EP.snoAerial : EP.kcAerial;
-    var credit = /^Snohomish/.test(s.county) ? "Imagery: Snohomish County Assessor, 2024 orthophoto (gis.snoco.org)" : "Imagery: King County GIS, 2025 aerial (gismaps.kingcounty.gov)";
+    var wa = !s.stateAbbr || s.stateAbbr === "WA";
+    var snoImg = wa && /^Snohomish/.test(s.county || "");
+    var kingImg = wa && /^King/.test(s.county || "");
+    var base = snoImg ? EP.snoAerial : kingImg ? EP.kcAerial : EP.worldImagery;
+    var credit = snoImg ? "Imagery: Snohomish County Assessor, 2024 orthophoto (gis.snoco.org)" : kingImg ? "Imagery: King County GIS, 2025 aerial (gismaps.kingcounty.gov)" : "Imagery: Esri World Imagery";
     var url = base + "?" + qs({ bbox: box.join(","), bboxSR: 3857, imageSR: 3857, size: W + "," + H, format: "jpg", f: "image" });
     var path = s.rings.map(function (r) {
       return r.map(function (p, i) { var m = merc(p[0], p[1]); return (i ? "L" : "M") + ((m[0] - box[0]) / (box[2] - box[0]) * W).toFixed(1) + " " + ((box[3] - m[1]) / (box[3] - box[1]) * H).toFixed(1); }).join(" ") + " Z";
@@ -713,7 +718,7 @@
     $("bh-zone-src").textContent = s.zone ? "From: " + s.zoneSrc : "Not found. Enter the zone from the city or county zoning map.";
     $("bh-existing-src").textContent = s.existing
       ? ("From: " + (s.existingSrc || "public assessor record") + ". Edit if you know a better number.")
-      : (/^King/.test(s.county || "") ? "No finished living area found in the Assessor residential building extract for this PIN. Enter it from the assessor page."
+      : ((/^King/.test(s.county || "") && (!s.stateAbbr || s.stateAbbr === "WA")) ? "No finished living area found in the Assessor residential building extract for this PIN. Enter it from the assessor page."
         : "Enter the existing finished floor area from the assessor record if you have it.");
     $("bh-footprint-src").textContent = s.footprint ? "From: " + s.footprintSrc + ". Edit if you know the real footprint." : "Optional. The ground-floor footprint of all buildings, for the coverage check.";
     if (s.imperv) { $("bh-imperv").value = s.imperv; $("bh-imperv-src").textContent = "From: " + s.impervSrc + ". Edit if you know better."; }
@@ -731,7 +736,7 @@
     s.frontDir = v.front || "";
     var out = [];
     var place = s.city ? s.city.toUpperCase() : (s.county || "").replace(" County", "").toUpperCase() + " COUNTY";
-    var page = function (title, body, cls) { return '<section class="bh-page ' + (cls || "") + '"><div class="bh-page-body">' + body + '</div><footer class="bh-page-foot"><span>' + esc(place) + ' | ' + esc(s.stateAbbr || "WA") + '</span><strong>' + esc(title) + '</strong><span class="bh-brand">Board of Project Stewardship</span></footer></section>'; };
+    var page = function (title, body, cls) { return '<section class="bh-page ' + (cls || "") + '"><div class="bh-page-body">' + body + '</div><footer class="bh-page-foot"><span>' + esc(place) + ' | ' + esc(s.stateAbbr || "US") + '</span><strong>' + esc(title) + '</strong><span class="bh-brand">Board of Project Stewardship</span></footer></section>'; };
 
     // Cover
     out.push(page("Feasibility snapshot", '<div class="bh-cover"><p class="bh-kicker">Single-family lot · one combined feasibility study (zoning + landscape + FAR + options + design tools)</p><h2>' + esc(s.matched || s.input) + '</h2><p class="bh-cover-sub">' + esc(s.jurisLabel) + (s.parcel ? " · Parcel " + esc(s.parcel) : "") + '</p><p class="bh-cover-date">Prepared ' + new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }) + ' from public records. Rules last checked ' + R.CHECKED + '.</p><p class="bh-disclaimer"><strong>Planning estimate only.</strong> This is not a legal, zoning or permit determination. Confirm every number with the jurisdiction and a licensed professional before you design, buy or build.</p></div>', "bh-cover-page"));
@@ -776,16 +781,14 @@
       '<h3>Construction cost</h3><p>Not estimated here. Get a written bid from a licensed contractor for your own numbers.</p>' +
       '<h3>Codes that will apply</h3><p>' + (s.stateAbbr === "WA"
         ? 'Local zoning (cited below), the Washington State Residential Code and the <a href="' + R.SRC.wsec.url + '" target="_blank" rel="noopener">Washington State Energy Code</a>. Energy credits depend on project size and type; your designer confirms them.'
-        : s.stateAbbr === "MN"
-          ? 'Local zoning and the Minnesota State Building Code apply. We have not coded Minnesota zone setbacks, coverage or FAR yet - confirm those with the city or county before design. Lot area, landscape split and slope below come from public Minnesota GIS.'
-          : 'Local zoning and the applicable state residential / building code apply. Confirm setbacks, coverage and height with the jurisdiction before design.') + '</p></div></div>'));
+        : 'Local zoning and the state residential or building code apply. We have not coded zone setbacks, coverage or FAR for this place. Confirm those with the city or county before design. Lot area, landscape split and slope below come from public GIS where a layer answers.') + '</p></div></div>'));
 
     // Code review
     var cr;
     if (!rs) {
-      var why = s.juris === "other" ? "We could not match " + esc(s.jurisLabel) + " to a city in our list. Verify the rules with the city." : (s.juris === "city" && !v.lot ? "Enter the lot size in step 2 to see the rules and the math for " + esc(s.jurisLabel) + "." : (s.juris === "outside" ? (s.stateAbbr === "MN"
-        ? "Minnesota zoning setbacks, coverage and FAR are not coded yet - verify those with the city or county. Parcel outline, lot area, house/driveway/landscape split and slope below come from Minnesota public GIS (Met Council / MnGeo where available). Pascal, CivilCraft and CutSheet RX still open for this lot when an outline exists."
-        : "Zoning rules are coded only for King and Snohomish counties, WA. Parcel outline, site coverage and slope below work for Minnesota and other states where a free public parcel layer answers.") : "We do not have verified rules coded for zone " + esc(v.zone || "(blank)") + " here. Verify with the jurisdiction."));
+      var why = s.juris === "other" ? "We could not match " + esc(s.jurisLabel) + " to a city in our list. Verify the rules with the city." : (s.juris === "city" && !v.lot ? "Enter the lot size in step 2 to see the rules and the math for " + esc(s.jurisLabel) + "." : (s.juris === "outside"
+        ? "Zoning setbacks, coverage and FAR are not coded for this place. Verify those with the city or county. Parcel outline, lot area, house/driveway/landscape split and slope below come from public parcel and elevation layers where they answer. Pascal, CivilCraft and CutSheet RX still open for this lot when an outline exists."
+        : "We do not have verified rules coded for zone " + esc(v.zone || "(blank)") + " here. Verify with the jurisdiction."));
       cr = '<p class="bh-verify">' + why + '</p><p><a href="./permits.html">The Board permit hub</a> lists city and county permit offices.</p>';
     } else {
       cr = '<h3>' + esc(rs.title) + '</h3><table class="bh-table bh-rules"><thead><tr><th scope="col">Standard</th><th scope="col">What the code says</th><th scope="col">Source (checked ' + R.CHECKED + ')</th></tr></thead><tbody>' +
@@ -1159,8 +1162,7 @@
         if (!s.matched) { setStatus("We could not match that address. Check the spelling and include the city and ZIP."); return; }
         fillForm(s);
         setStatus(s.juris === "other" ? "Found it in " + s.jurisLabel + ". We could not match that city to our list; verify the rules with the city. You can still read the parcel data below."
-          : s.juris === "outside" && s.stateAbbr === "MN" ? "Found " + s.matched + " in Minnesota. Zoning numbers are not coded for MN yet; Site coverage and landscape, slope and design tools still run from public parcel data. Check the values below."
-          : s.juris === "outside" ? "Found " + s.matched + " outside King/Snohomish WA. Zoning rules are not coded here; lot coverage and slope still run where a public parcel layer answers."
+          : s.juris === "outside" ? "Found " + s.matched + ". Zoning numbers are not coded for this place yet. Verify setbacks, coverage and FAR with the jurisdiction. Site coverage, landscape, slope and design tools still run where a public parcel layer answers."
           : s.manualZone ? "Found " + s.matched + " in " + s.jurisLabel + ". " + s.city + " does not publish a zoning map we can read, so enter the zone from the city map below."
           : "Found " + s.matched + ". Check the values below, then build the report.");
         render();
