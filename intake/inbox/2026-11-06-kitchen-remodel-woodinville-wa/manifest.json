@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-11-06-kitchen-remodel-woodinville-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-11-06T11:50:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Kitchen Remodel Woodinville WA \u2014 Permits, Layout Changes, Wet Walls and Hiring",
+    "date": "2026-11-06",
+    "slug": "kitchen-remodel-woodinville-wa",
+    "description": "A Woodinville homeowner's guide to a kitchen remodel: City Permit Portal vs unincorporated King County, when a Combined Building Permit applies, L&I electrical coverage, wet-wall and layout changes, fixture swaps that often skip a building permit, and how to verify the crew.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 offline; no 2026-11-06 packets. Topic: kitchen remodel (Woodinville Permit Portal / Combined Building Permit; unincorporated King County AHJ; L&I electrical \u2014 Woodinville not on city electrical list; wet walls/layout; MBP Tip Sheet 00 fixture guidance), Woodinville WA (King County). woodinville already in _SLUG_PLACES/_PLACE_NAMES. Last Woodinville daily 2026-09-28. No fees or prices. Producer role fields kept per intake contract."
+}

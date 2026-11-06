@@ -1,0 +1,44 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-11-06-woodinville-kitchen-1.webp",
+      "repo_path": "assets/images/posts/2026-11-06-woodinville-kitchen-1.webp",
+      "alt": "Woodinville, WA kitchen remodel: kitchen under construction with base cabinets set, unfinished walls and temporary work lights \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "8a0ea6cd740b07c06453a9fdcb6be01d",
+      "source": "Newly generated image (built-in image generator, 2026-11-06), source gen-1.jpg 1280x720, resized to 1600x900 webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-06-woodinville-kitchen-2.webp",
+      "repo_path": "assets/images/posts/2026-11-06-woodinville-kitchen-2.webp",
+      "alt": "Woodinville, WA kitchen remodel rough-in: open wet wall with copper and PEX plumbing, electrical boxes and temporary bracing before drywall \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "ebbed3e69a3886828367fab609fff1b9",
+      "source": "Newly generated image (built-in image generator, 2026-11-06), source gen-2.jpg 1280x720, resized to 1600x900 webp"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-06-woodinville-kitchen-3.webp",
+      "repo_path": "assets/images/posts/2026-11-06-woodinville-kitchen-3.webp",
+      "alt": "Woodinville, WA finished kitchen remodel: completed kitchen with shaker cabinets, quartz-look counters, island seating and pendant lights \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "937dbe79523f5fc2b8cda721c115cd51",
+      "source": "Newly generated image (built-in image generator, 2026-11-06), source gen-3.jpg 1280x720, resized to 1600x900 webp"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "_Os7ZoxfY5w",
+      "url": "https://www.youtube.com/watch?v=_Os7ZoxfY5w",
+      "title": "Full DIY Kitchen Remodel | START TO FINISH",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "3 newly generated images (built-in generator), 0 regraded stills, 0 paid media."
+}
