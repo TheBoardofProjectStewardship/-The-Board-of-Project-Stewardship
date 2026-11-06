@@ -111,6 +111,11 @@ class BuildHereTest(unittest.TestCase):
             self.assertNotIn("or a Minnesota address", text, name)
         self.assertIn(help_line, page)
         self.assertIn(help_line, home)
+        for text, name in ((page, "build-here.html"), (home, "index.html")):
+            self.assertNotIn("Ruffner", text, name)
+            self.assertNotIn("Bryant Ave", text, name)
+            self.assertNotIn("Try a Seattle address", text, name)
+            self.assertIn('placeholder="Street address, city, state ZIP"', text, name)
         self.assertIn('"name": "United States"', page)
         self.assertNotIn('"name": "Minnesota"', page)
         self.assertIn("We do not invent FAR.", page)
