@@ -1,0 +1,119 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Federal Way",
+    "service": "Bathroom remodel",
+    "slug": "bathroom-remodel-federal-way-wa"
+  },
+  "sources": [
+    {
+      "url": "https://www.federalwaywa.gov/page/permit-center",
+      "title": "Federal Way Permit Center",
+      "retrieved": "2026-11-07",
+      "http_status": 200,
+      "supports": "Building/Electrical/Mechanical/Plumbing handouts; MyBuildingPermit for residential electrical/mechanical/plumbing; E-Permits archive for past permits; electronic document submittal; residential/commercial exemptions links; inspections; Permit Center contact"
+    },
+    {
+      "url": "https://www.federalwaywa.gov/page/residential-permit-exemptions",
+      "title": "Federal Way residential permit exemptions",
+      "retrieved": "2026-11-07",
+      "http_status": 200,
+      "supports": "IRC R105.2-style building/electrical/mechanical/plumbing exemptions; finish work (painting/papering/tiling/cabinets/countertops); plumbing leak/water-closet limits; electrical receptacle and branch OCPD replacement; critical areas not exempt; call 253.835.2607 if in doubt"
+    },
+    {
+      "url": "https://www.federalwaywa.gov/page/community-development",
+      "title": "Federal Way Community Development",
+      "retrieved": "2026-11-07",
+      "http_status": 200,
+      "supports": "Community Development department hub"
+    },
+    {
+      "url": "https://www.federalwaywa.gov/page/inspection-information",
+      "title": "Federal Way inspection information",
+      "retrieved": "2026-11-07",
+      "http_status": 200,
+      "supports": "Schedule via inspection.mybuildingpermit.com; same-day change/cancel via Permit Center 253.835.2607"
+    },
+    {
+      "url": "https://www.cityoffederalway.com/page/electronic-document-submittal",
+      "title": "Federal Way electronic document submittal",
+      "retrieved": "2026-11-07",
+      "http_status": 200,
+      "supports": "Electronic plan review document upload path"
+    },
+    {
+      "url": "https://mybuildingpermit.com/",
+      "title": "MyBuildingPermit",
+      "retrieved": "2026-11-07",
+      "http_status": 200,
+      "supports": "Regional permit portal used by Federal Way for residential electrical/mechanical/plumbing"
+    },
+    {
+      "url": "https://epermits.cityoffederalway.com/PublicPortal/FederalWayDev/common/index.jsp",
+      "title": "Federal Way E-Permits archive",
+      "retrieved": "2026-11-07",
+      "http_status": 200,
+      "supports": "Past residential electrical/mechanical/plumbing lookup only (per Permit Center)"
+    },
+    {
+      "url": "https://www.mybuildingpermit.com/sites/default/files/TS-00_Permits%20Required%20and%20Not%20Required_FINAL_6.11.26.pdf",
+      "title": "MyBuildingPermit Tip Sheet 00 \u2014 permits required and not required",
+      "retrieved": "2026-11-07",
+      "http_status": 200,
+      "supports": "Bathroom/kitchen fixture replacements without plumbing-line modifications often no building permit; tub/shower replacement requires permit; Federal Way not a named column \u2014 confirm locally"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "title": "L&I city electrical permits and inspections list",
+      "retrieved": "2026-11-07",
+      "http_status": 200,
+      "supports": "Federal Way Permit Center listed (33325 8th Ave South, 253-835-2607); City issues electrical permits/inspections inside city limits"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/",
+      "title": "L&I electrical permits, fees and inspections",
+      "retrieved": "2026-11-07",
+      "http_status": 200,
+      "supports": "City-issued electrical vs L&I for all other jobsites"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "L&I Verify a contractor",
+      "retrieved": "2026-11-07",
+      "http_status": 200,
+      "supports": "License/bond/insurance lookup before hiring"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor",
+      "title": "L&I hiring a contractor",
+      "retrieved": "2026-11-07",
+      "http_status": 200,
+      "supports": "State hiring guidance: registration, bids, written contract"
+    },
+    {
+      "url": "https://www.federalwaywa.gov/",
+      "title": "City of Federal Way home",
+      "retrieved": "2026-11-07",
+      "http_status": 200,
+      "supports": "City site root; population/community context on related pages"
+    }
+  ],
+  "dropped": [
+    {
+      "url": "https://www.federalwaywa.gov/page/building-permits",
+      "reason": "404 from box"
+    },
+    {
+      "url": "https://www.federalwaywa.gov/page/electrical-permits",
+      "reason": "404 from box"
+    },
+    {
+      "url": "https://www.mybuildingpermit.com/cities/federal-way",
+      "reason": "404 from box"
+    },
+    {
+      "note": "Dropped fees, prices, and review timelines not verified on live City pages"
+    }
+  ],
+  "notes": "Box curl 2026-11-07. Federal Way confirmed on L&I city electrical list. Cite only 200 pages with useful content."
+}

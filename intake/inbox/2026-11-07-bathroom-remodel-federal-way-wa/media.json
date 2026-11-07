@@ -1,0 +1,92 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-11-07-federal-way-bath-1.webp",
+      "repo_path": "assets/images/posts/2026-11-07-federal-way-bath-1.webp",
+      "alt": "Federal Way, WA bathroom remodel: finished bath with wood vanity, wall mirror, and soft daylight \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "dd12c99911180cedb773e84e931c0c31",
+      "source": "Newly generated image (built-in image generator, 2026-11-07), source gen-1.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-07-federal-way-bath-2.webp",
+      "repo_path": "assets/images/posts/2026-11-07-federal-way-bath-2.webp",
+      "alt": "Federal Way, WA bathroom remodel demolition: tub and tile removed, open studs and exposed plumbing before waterproofing \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "49607ba15adbc13a59ea82c6b3f92918",
+      "source": "Newly generated image (built-in image generator, 2026-11-07), source gen-2.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-07-federal-way-bath-3.webp",
+      "repo_path": "assets/images/posts/2026-11-07-federal-way-bath-3.webp",
+      "alt": "Federal Way, WA bathroom remodel rough-in: open wet wall with supply and drain lines, valve rough-in and temporary bracing before waterproofing \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "3eeb2a1863960fbc297ed38918405e37",
+      "source": "Newly generated image (built-in image generator, 2026-11-07), source gen-3.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-07-federal-way-bath-4.webp",
+      "repo_path": "assets/images/posts/2026-11-07-federal-way-bath-4.webp",
+      "alt": "Federal Way, WA bathroom waterproofing: shower niche and wet walls with membrane installed before tile \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "e4df134e7b7ab1191c6e9076d1584d4c",
+      "source": "Newly generated image (built-in image generator, 2026-11-07), source gen-4.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-07-federal-way-bath-5.webp",
+      "repo_path": "assets/images/posts/2026-11-07-federal-way-bath-5.webp",
+      "alt": "Federal Way, WA bathroom remodel: tiled shower with linear floor drain and wall-mounted shower controls after waterproofing \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "9929146d13c89c82fb1ea69effadeef0",
+      "source": "Newly generated image (built-in image generator, 2026-11-07), source gen-5.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-07-federal-way-bath-6.webp",
+      "repo_path": "assets/images/posts/2026-11-07-federal-way-bath-6.webp",
+      "alt": "Federal Way, WA bathroom remodel: double vanity with quartz-look tops and framed mirrors in a finished primary bath \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "ca4088bd4c2561a374e1981837246e2e",
+      "source": "Newly generated image (built-in image generator, 2026-11-07), source gen-6.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-07-federal-way-bath-7.webp",
+      "repo_path": "assets/images/posts/2026-11-07-federal-way-bath-7.webp",
+      "alt": "Federal Way, WA bathroom remodel: freestanding soaking tub beside a window with evergreen views outside \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "1f52b73c8c011faacede340fdd9b416e",
+      "source": "Newly generated image (built-in image generator, 2026-11-07), source gen-7.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-07-federal-way-bath-8.webp",
+      "repo_path": "assets/images/posts/2026-11-07-federal-way-bath-8.webp",
+      "alt": "Federal Way, WA bathroom remodel: walk-in shower with large-format wall tile and glass panel after final inspection-ready finish \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "2f764afeecfa73fa493a78aeedae43b0",
+      "source": "Newly generated image (built-in image generator, 2026-11-07), source gen-8.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-07-federal-way-bath-9.webp",
+      "repo_path": "assets/images/posts/2026-11-07-federal-way-bath-9.webp",
+      "alt": "Federal Way, WA bathroom remodel: finished powder room with pedestal sink, wall sconce lighting and simple tile floor \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "574f452964c15002d64632e137cae0f4",
+      "source": "Newly generated image (built-in image generator, 2026-11-07), source gen-9.jpg converted to 1600w webp q82"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "ys9YEPP5FUo",
+      "url": "https://www.youtube.com/watch?v=ys9YEPP5FUo",
+      "title": "Complete Guest Bathroom Remodel DIY | Start to Finish Tub to Shower Conversion",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "9 newly generated images (built-in generator), 0 regraded stills, 0 paid media."
+}
