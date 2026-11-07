@@ -1,0 +1,53 @@
+{
+  "producer": "openclaw",
+  "agent": "seo-specialist",
+  "slug": "bathroom-remodel-federal-way-wa",
+  "title": "Bathroom Remodel Federal Way WA \u2014 Permits, Waterproofing, Wet Walls and Hiring",
+  "description": "A Federal Way homeowner's guide to a bathroom remodel: City Permit Center and MyBuildingPermit paths, residential exemptions vs wet-wall work, city-issued electrical permits, waterproofing and wet-wall details, and how to verify the crew.",
+  "category": "Guides",
+  "keywords": [
+    "bathroom remodel Federal Way WA",
+    "Federal Way bathroom permit",
+    "Federal Way residential permit exemptions",
+    "MyBuildingPermit Federal Way plumbing electrical",
+    "Federal Way city electrical permit bathroom"
+  ],
+  "outline": [
+    "Key Takeaways",
+    "Why a Federal Way bathroom needs its own permit map",
+    "Three common scopes, three different permit answers",
+    "How Federal Way wants you to apply",
+    "What the residential exemptions actually cover",
+    "Electrical: City permit, not L&I",
+    "Wet walls, waterproofing and details",
+    "Materials Worth Knowing",
+    "How to shortlist and verify the remodel team",
+    "Where Pacific Pro Group fits",
+    "Next steps for a Federal Way bathroom remodel"
+  ],
+  "search_intent": "A Federal Way homeowner planning a bathroom remodel wants to know City Permit Center vs MyBuildingPermit paths, when finish work is exempt, who issues electrical permits, waterproofing/wet-wall details, and how to verify the remodel team.",
+  "local_angles": [
+    "Federal Way Permit Center: Building/Electrical/Mechanical/Plumbing via portal + electronic document submittal",
+    "MyBuildingPermit for residential electrical, mechanical, plumbing; E-Permits archive for past permits only",
+    "Residential permit exemptions: finish work vs plumbing/electrical exemptions; critical areas not exempt",
+    "Federal Way on L&I city electrical list \u2014 City issues electrical permits (253-835-2607)",
+    "MBP Tip Sheet 00: tub/shower replacement requires permit; confirm locally (FW not named column)",
+    "Inspections via inspection.mybuildingpermit.com"
+  ],
+  "internal_links": [
+    "../federal-way.html",
+    "../bathrooms.html",
+    "../bathroom-waterproofing-guide.html",
+    "../bathroom-cost-factors.html",
+    "../permits.html",
+    "../verify-contractor.html",
+    "../hiring-a-contractor.html",
+    "../bonds-and-insurance.html",
+    "../red-flags-hiring.html"
+  ],
+  "notes": "Box-authored fallback brief. PPG only as Board #1 -> https://pacificprogroup.com/.",
+  "generation": {
+    "agent": "box-authored",
+    "mode": "box-fallback"
+  }
+}

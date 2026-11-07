@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-11-07-bathroom-remodel-federal-way-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-11-07T11:45:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Bathroom Remodel Federal Way WA \u2014 Permits, Waterproofing, Wet Walls and Hiring",
+    "date": "2026-11-07",
+    "slug": "bathroom-remodel-federal-way-wa",
+    "description": "A Federal Way homeowner's guide to a bathroom remodel: City Permit Center and MyBuildingPermit paths, residential exemptions vs wet-wall work, city-issued electrical permits, waterproofing and wet-wall details, and how to verify the crew.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 offline; no 2026-11-07 packets. Topic: bathroom remodel (Federal Way Permit Center / MyBuildingPermit residential electrical-mechanical-plumbing; city electrical list; residential exemptions finish vs wet wall; Tip Sheet 00 tub/shower note), Federal Way WA (King County). federal-way already in _SLUG_PLACES/_PLACE_NAMES. Last Federal Way daily 2026-10-20 electrical panel (OK; different topic). No fees or prices. Producer role fields kept per intake contract."
+}
