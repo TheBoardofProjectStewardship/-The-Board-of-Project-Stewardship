@@ -56,6 +56,8 @@ Eligibility comes first. The [prescriptive plan set](https://www.seattle.gov/doc
 
 In plain terms, the flyer describes eligible homes as light wood-frame construction with a light roof, not irregularly shaped, on a concrete or reinforced masonry foundation in good condition, and on a relatively level lot. Questions about heavy cladding and roofing matter because the plan set has a weight classification on Sheet S3. A house with a heavy tile roof or masonry veneer behaves differently in shaking than one with composition shingles and wood siding. If you are not sure how to answer a question, SDCI invites you to [send them a question](https://www.seattle.gov/sdci/resources/send-us-a-question).
 
+![Wood sill plate bolted to concrete in a Seattle earthquake retrofit crawlspace](../assets/images/posts/2026-10-11-seattle-retrofit-crawlspace-sill-4.webp "Anchor bolts fasten a wood sill plate to the concrete foundation in a Seattle earthquake retrofit crawlspace.")
+
 ![An exposed wood-framed wall with studs, sheathing, and a window opening during a remodel in Seattle](../assets/images/posts/2026-10-11-seattle-retrofit-2.webp)
 
 ## Anchor, brace, connect: what the work looks like
@@ -64,9 +66,15 @@ All of the prescriptive work happens below the first floor, in the crawlspace or
 
 **Anchor to the foundation.** The wood sill plate that sits on the concrete gets fastened to the foundation at a spacing set by the plan set. In older homes there is often not enough headroom to drill straight down through the sill, so retrofit plates that attach from the side are common. Sheet D1 of the plan set covers sill-to-foundation connection details.
 
+![Side-mount steel anchor plate on a wood sill and concrete in a Seattle earthquake retrofit](../assets/images/posts/2026-10-11-seattle-retrofit-anchor-plate-6.webp "A side-mount steel plate connects a wood sill to concrete during a Seattle earthquake retrofit.")
+
 **Brace the cripple wall.** Where the house sits on short stud walls, those walls get structural panel sheathing to form "braced wall panels." Per SDCI's presentation, the maximum cripple wall height for the program is 7 feet, a braced panel must be at least 2 feet long, and every exterior wall line needs a minimum total length of bracing. Sheet S3.1, the retrofit schedule, tells you how much based on the house's weight category, floor area, and cripple wall height.
 
+![OSB sheathing nailed to a short cripple wall in a Seattle earthquake retrofit crawlspace](../assets/images/posts/2026-10-11-seattle-retrofit-cripple-brace-5.webp "OSB structural sheathing is nailed to a short cripple wall in a Seattle earthquake retrofit crawlspace.")
+
 **Connect the floor to the wall.** Finally, the first-floor framing is tied to the top of the braced wall or sill so the house cannot slide across it. Sheets D2 and D3 show floor-framing-to-sill and floor-framing-to-cripple-wall connection details.
+
+![Steel floor-framing connector under the joists in a Seattle earthquake retrofit](../assets/images/posts/2026-10-11-seattle-retrofit-floor-connector-8.webp "A steel connector ties floor framing to the sill under a Seattle house during an earthquake retrofit.")
 
 The video below, from a public-safety series, shows the same sequence under a real house: blocking at the mudsill, nailing plywood on every edge, and steel connectors tying the floor framing to the top of the wall.
 
@@ -85,6 +93,8 @@ Sheet 01 of the plan set gives instructions, and Sheets X1 through X5 show compl
 - **D1 through D6** — connection details
 
 Applications go through the Seattle Services Portal. SDCI says you pay most of your fees when you submit, the city notifies you of any final fees before issuing, and once issued you print the permit, approved coversheet, and approved plan set and post the permit at the site. Inspections follow.
+
+![Printed plan sheets and a pencil on a table for a Seattle earthquake retrofit](../assets/images/posts/2026-10-11-seattle-retrofit-plan-set-7.webp "Printed linework sheets and a pencil on a table while a Seattle earthquake retrofit plan set is prepared.")
 
 ## When you need an engineer instead
 
@@ -115,6 +125,8 @@ Questions worth asking every bidder:
 - What anchor and connector types will you use, and are they on the plan set's list?
 - What happens if you find rot, a cracked foundation, or a cripple wall taller than 7 feet?
 - Is a chimney, an interior post line, or anything above the first floor outside your scope?
+
+![Three plain bid folders on a table for a Seattle earthquake retrofit](../assets/images/posts/2026-10-11-seattle-retrofit-bids-9.webp "Three bid packets on a table before a Seattle earthquake retrofit contractor shortlist is checked.")
 
 ## Where Pacific Pro Group fits
 
