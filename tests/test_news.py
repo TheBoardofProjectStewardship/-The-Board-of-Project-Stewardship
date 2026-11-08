@@ -355,6 +355,16 @@ class NewsContractTests(unittest.TestCase):
         self.assertNotIn("edmonds-landmark-tree-ordinance-extension", lead)
 
         adu = (ROOT / "news" / "snohomish-county-pre-approved-adu-plan-catalog.html").read_text(encoding="utf-8")
+        expected_desc = (
+            "Nine Haas Architects designs offer a starting point for detached ADUs "
+            "in unincorporated Snohomish County, but site permits are still required."
+        )
+        self.assertEqual(stories[0]["description"], expected_desc)
+        self.assertLessEqual(gs.published_meta_len(expected_desc), 160)
+        self.assertEqual(gs.clamp_description(expected_desc), expected_desc)
+        self.assertIn(f'content="{expected_desc}"', adu)
+        self.assertIn(f"<p class=\"news-dek\">{expected_desc}</p>", adu)
+        self.assertIn(expected_desc, lead)
         self.assertIn("Dicklyon", adu)
         self.assertIn("Hat Island", adu)
         self.assertIn("CC BY-SA 4.0", adu)
@@ -1785,6 +1795,18 @@ class NewsContractTests(unittest.TestCase):
         self.assertIn(
             "/news/snohomish-county-pre-approved-adu-plan-catalog.html",
             {item["url"] for item in search_index},
+        )
+        adu_search = next(
+            item for item in search_index
+            if item["url"] == "/news/snohomish-county-pre-approved-adu-plan-catalog.html"
+        )
+        self.assertEqual(
+            adu_search["description"],
+            "Nine Haas Architects designs offer a starting point for detached ADUs in unincorporated Snohomish County, but site permits are still required.",
+        )
+        self.assertIn(
+            "<description>Nine Haas Architects designs offer a starting point for detached ADUs in unincorporated Snohomish County, but site permits are still required.</description>",
+            rss,
         )
         self.assertIn("https://boardofprojectstewardship.com/projects/magnolia-house-adu-garage/", sitemap)
         blog_rss = (ROOT / "blog" / "rss.xml").read_text(encoding="utf-8")

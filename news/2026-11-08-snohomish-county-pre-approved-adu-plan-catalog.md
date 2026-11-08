@@ -2,7 +2,7 @@
 title: "Snohomish County offers nine pre-approved backyard cottage plans"
 date: 2026-11-08
 slug: "snohomish-county-pre-approved-adu-plan-catalog"
-description: "Nine Haas Architects designs offer a starting point for detached ADUs in unincorporated Snohomish County, with lower plan-check fees but site permits still required."
+description: "Nine Haas Architects designs offer a starting point for detached ADUs in unincorporated Snohomish County, but site permits are still required."
 city: "Unincorporated Snohomish County"
 county: "Snohomish County"
 sources:
