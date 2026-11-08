@@ -22,6 +22,8 @@ A deck replacement looks like a weekend project from the yard. In practice, the 
 
 One jurisdiction note first. Bulletin #21 applies only to property in unincorporated Snohomish County. If your address is inside a city, such as Everett, Lynnwood, Mill Creek, Bothell, Mukilteo, or Lake Stevens, that city's building department sets the rules, and its exemptions may differ. Check the city first.
 
+![Weathered gray deck boards on a house in unincorporated Snohomish County](../assets/images/posts/2026-10-10-snohomish-deck-weathered-4.webp "A gray pressure-treated deck with a worn rail sits against a shingled house on a wooded Snohomish County lot.")
+
 ## When the county requires a permit
 
 The county's [Assistance Bulletin #21 for decks, porches, and steps](https://snohomishcountywa.gov/DocumentCenter/View/8128/21---Decks-porches-and-steps-PDF) (revised January 2025) lists four triggers. If any one applies, you need a residential building permit:
@@ -53,6 +55,8 @@ Two documents are required:
 
 The county does not publish a flat deck fee. Per the bulletin, plan review fees are collected when plans are submitted, and the rest of the permit fee is collected when the approved permit is issued. Ask for an estimate on your own project rather than relying on a general figure.
 
+![Printed deck plan sheets and a pencil for a Snohomish County deck replacement](../assets/images/posts/2026-10-10-snohomish-deck-plan-set-5.webp "Printed joist linework and a pencil on a table while a Snohomish County deck replacement plan set is prepared.")
+
 ## Setbacks: where a deck can sit
 
 Setbacks depend on your zoning and on whether a property line borders a public right-of-way or an easement. The bulletin summarizes how the Snohomish County zoning code treats decks:
@@ -61,6 +65,8 @@ Setbacks depend on your zoning and on whether a property line borders a public r
 - An uncovered deck **more than 4 feet high**, or **any covered** deck, porch, or step, must meet all building setback requirements.
 
 That matters most when a replacement grows. Making a deck deeper, raising it to meet a new door, or adding a roof can move it from the projection allowance into the full setback rule. Settle the footprint on the site plan before anyone orders lumber.
+
+![String line and stakes set back from a fence for a Snohomish County deck](../assets/images/posts/2026-10-10-snohomish-deck-setback-6.webp "Grade stakes and string mark a deck footprint back from a fence on an unincorporated Snohomish County lot.")
 
 ## The ledger is where decks fail
 
@@ -72,6 +78,8 @@ Replacement is also the time to look at what the ledger was hiding. Pull the old
 
 https://www.youtube.com/watch?v=2a9waUpVg-Y
 
+![Ledger board with membrane and cap flashing on a Snohomish County deck replacement](../assets/images/posts/2026-10-10-snohomish-deck-ledger-7.webp "Self-adhered membrane and metal cap flashing cover the top of a ledger board during a Snohomish County deck replacement.")
+
 ## Footings, posts, and guards
 
 Under Washington's R507 tables, footing size depends on how much deck area each post supports and on the bearing value of your soil, and post height limits depend on post size and species. A replacement deck that spans farther between posts, or that sits higher off a slope, may need bigger footings and posts than the original. Reusing old footings is a question for the plans and the inspector, not a shortcut to assume.
@@ -79,6 +87,8 @@ Under Washington's R507 tables, footing size depends on how much deck area each 
 Where the walking surface is more than 30 inches above grade, the deck needs guards, and stairs need handrails and proper riser and tread geometry. Many older county decks were built before current guard spacing and height rules, so a replacement usually means a new rail system rather than reusing the old one.
 
 If you plan to add deck lighting, a heater, or outlets, that is electrical work with its own permit. In unincorporated areas, Washington L&I issues electrical permits and inspections unless a city runs its own program; see L&I's [electrical permits, fees, and inspections](https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/) page.
+
+![Concrete deck footing, open joists, and a guard post in Snohomish County](../assets/images/posts/2026-10-10-snohomish-deck-footings-8.webp "A concrete pier, galvanized post hardware, and open joists support a new guard post before decking on a Snohomish County deck replacement.")
 
 ![A covered entry porch with a stained wood door, wood ceiling, stone-clad column bases in Snohomish County](../assets/images/posts/2026-10-10-snohomish-deck-3.webp)
 
@@ -100,6 +110,8 @@ When you compare bids, ask each contractor:
 - How will the ledger be attached and flashed, and what will you do if the rim joist behind it is rotten?
 - Are you reusing any existing footings or posts, and how will you confirm they are adequate?
 - What guard and stair details are included, and is any electrical work under a separate permit?
+
+![Blank bid folders on a table for a Snohomish County deck replacement](../assets/images/posts/2026-10-10-snohomish-deck-bids-9.webp "Blank bid folders on a table before a Snohomish County deck replacement contractor shortlist is checked.")
 
 ## Where Pacific Pro Group fits
 
