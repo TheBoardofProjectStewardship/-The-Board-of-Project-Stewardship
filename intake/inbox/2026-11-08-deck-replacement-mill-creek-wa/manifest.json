@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-11-08-deck-replacement-mill-creek-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-11-08T11:55:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Deck Replacement Mill Creek WA \u2014 Permits, Ledger Flashing, Rot and Hiring",
+    "date": "2026-11-08",
+    "slug": "deck-replacement-mill-creek-wa",
+    "description": "A Mill Creek homeowner's winter guide to planning a spring deck replacement: when the City requires a deck permit, the OpenGov portal, Washington deck code basics for ledgers, footings and lateral connections, PNW rot details, L&I electrical for deck lighting, and how to verify the crew.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 offline; no 2026-11-08 packets. Topic: deck replacement (Mill Creek permit flyer: decks >30in incl. repairs; MCMC 15.04.055 exemption #9; OpenGov portal; design criteria incl. 12in frost depth; electrical via L&I; WAC 51-51-0507 R507 ledger flashing/lateral load), Mill Creek WA (Snohomish County). mill-creek already in _SLUG_PLACES/_PLACE_NAMES. Last Mill Creek daily 2026-10-04 window replacement; last deck post 2026-10-10 Snohomish County. No fees or prices. Producer role fields kept per intake contract."
+}
