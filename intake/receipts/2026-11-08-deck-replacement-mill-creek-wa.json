@@ -1,0 +1,25 @@
+{
+  "submission_id": "2026-11-08-deck-replacement-mill-creek-wa",
+  "idempotency_key": "sha256:298b1ae5fb02a62fbb9d97b98007cc779e7d4d16c422c31988e305188bf090ce",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-11-08T11:48:38Z",
+  "outputs": [
+    "assets/images/posts/2026-11-08-mill-creek-deck-1.webp",
+    "assets/images/posts/2026-11-08-mill-creek-deck-2.webp",
+    "assets/images/posts/2026-11-08-mill-creek-deck-3.webp",
+    "assets/images/posts/2026-11-08-mill-creek-deck-4.webp",
+    "assets/images/posts/2026-11-08-mill-creek-deck-5.webp",
+    "assets/images/posts/2026-11-08-mill-creek-deck-6.webp",
+    "assets/images/posts/2026-11-08-mill-creek-deck-7.webp",
+    "assets/images/posts/2026-11-08-mill-creek-deck-8.webp",
+    "assets/images/posts/2026-11-08-mill-creek-deck-9.webp",
+    "posts/2026-11-08-deck-replacement-mill-creek-wa.md",
+    "posts/2026-11-08-deck-replacement-mill-creek-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 96
+}

@@ -1,0 +1,129 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Mill Creek",
+    "service": "Deck replacement",
+    "slug": "deck-replacement-mill-creek-wa"
+  },
+  "sources": [
+    {
+      "url": "https://millcreekwa.gov/permits",
+      "title": "Mill Creek Permits and Licensing",
+      "retrieved": "2026-11-08",
+      "http_status": 200,
+      "supports": "OpenGov for building/mechanical/plumbing permits; apply link; Permit Counter 425-551-7254; walk-in/appointment hours; pre-application consultations; no system altered/replaced without a permit"
+    },
+    {
+      "url": "https://millcreekwa.gov/sites/default/files/2025-08/do-i-need-a-permit-flyer-updated-2025-08-27.pdf",
+      "title": "Mill Creek Do I Need a Permit? flyer",
+      "retrieved": "2026-11-08",
+      "http_status": 200,
+      "supports": "Decks more than 30in above grade including repairs require permit; City Hall North 15720 Main St Ste 110; Building Department 425-551-7254; electrical permits via L&I; flyer may not be complete"
+    },
+    {
+      "url": "https://ecode360.com/50644397",
+      "title": "Mill Creek Municipal Code Chapter 15.04 Building Code",
+      "retrieved": "2026-11-08",
+      "http_status": 200,
+      "supports": "Adopts 2021 IRC with WAC 51-51 amendments; 15.04.055 R105.2 exemption #9 decks <=30in at any point, not attached, not serving R311.4 exit door; fees set by council resolution; valuation includes labor, materials, overhead and profit"
+    },
+    {
+      "url": "https://millcreekwa.gov/topics/building-codes-and-guidance",
+      "title": "Mill Creek Building Codes and Guidance",
+      "retrieved": "2026-11-08",
+      "http_status": 200,
+      "supports": "Adopted 2021 codes; electrical administered by WA L&I; design criteria 25 psf ground snow, SDC D1, 110 mph wind, exposure B & C, 12in min frost depth; OpenGov apply/status"
+    },
+    {
+      "url": "https://millcreekwa.portal.opengov.com/",
+      "title": "Mill Creek OpenGov portal",
+      "retrieved": "2026-11-08",
+      "http_status": 200,
+      "supports": "Permit application portal"
+    },
+    {
+      "url": "https://millcreekwa.portal.opengov.com/categories/1084/record-types/6492",
+      "title": "Mill Creek OpenGov apply for building permit",
+      "retrieved": "2026-11-08",
+      "http_status": 200,
+      "supports": "Building permit application record type"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51",
+      "title": "WAC 51-51 State Building Code adoption of IRC",
+      "retrieved": "2026-11-08",
+      "http_status": 200,
+      "supports": "Washington amendments to IRC"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51-0507",
+      "title": "WAC 51-51-0507 Section R507 Decks",
+      "retrieved": "2026-11-08",
+      "http_status": 200,
+      "supports": "Footing table; post table; ledgers flashed per R703.4 to prevent water contacting house band joist; band joist details; R507.9.2 lateral load hold-downs two locations within 24in of each end"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "title": "L&I city electrical permits and inspections list",
+      "retrieved": "2026-11-08",
+      "http_status": 200,
+      "supports": "Mill Creek not listed -> L&I issues electrical permits"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/",
+      "title": "L&I electrical permits, fees and inspections",
+      "retrieved": "2026-11-08",
+      "http_status": 200,
+      "supports": "L&I electrical permit path"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "L&I Verify a contractor",
+      "retrieved": "2026-11-08",
+      "http_status": 200,
+      "supports": "License/bond/insurance lookup"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "L&I hiring a contractor",
+      "retrieved": "2026-11-08",
+      "http_status": 200,
+      "supports": "State hiring guidance: registration, bids, written contract"
+    },
+    {
+      "url": "https://millcreekwa.gov/",
+      "title": "City of Mill Creek home",
+      "retrieved": "2026-11-08",
+      "http_status": 200,
+      "supports": "City site root"
+    }
+  ],
+  "dropped": [
+    {
+      "url": "https://millcreekwa.gov/inspections",
+      "reason": "404 from box"
+    },
+    {
+      "url": "https://millcreekwa.gov/building-inspections",
+      "reason": "404 from box"
+    },
+    {
+      "note": "HOA / architectural review claims dropped: no official source verified"
+    },
+    {
+      "note": "Guard height / stair dimension numbers dropped: not in fetched WAC 51-51-0507 text"
+    },
+    {
+      "note": "Dropped fees, prices, and review timelines not verified on live City pages"
+    },
+    {
+      "url": "https://www.azek.com/",
+      "reason": "redirects to James Hardie brands page; dropped"
+    },
+    {
+      "url": "https://gcpat.com/en/solutions/products/vycor-flashing-systems",
+      "reason": "403 from box"
+    }
+  ],
+  "notes": "Box curl 2026-11-08. Mill Creek electrical via L&I (City codes page + not on L&I city list). Cite only 200 pages with useful content."
+}
