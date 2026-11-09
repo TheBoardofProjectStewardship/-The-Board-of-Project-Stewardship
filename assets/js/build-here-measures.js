@@ -271,6 +271,7 @@
     else if (ctx.roomCov != null && ctx.roomCov > 0 && !ctx.hasImpervious) shop = card("shop", "Garage or shop", "ready", "This zone has no separate impervious cap in the coded rules. Coverage room left is about " + Math.round(ctx.roomCov) + " sf." + envBit + " This does not say a permit will be issued.", Math.round(ctx.roomCov) + " sf coverage room");
     else if (ctx.roomCov != null && ctx.roomCov > 0 && ctx.hasImpervious && ctx.roomImp == null) shop = card("shop", "Garage or shop", "partial", "Coverage room is about " + Math.round(ctx.roomCov) + " sf. Impervious room is unknown because driveway or other paving was not measured. It is not filled in as zero.", Math.round(ctx.roomCov) + " sf coverage room");
     else if (!z) shop = card("shop", "Garage or shop", "partial", "Coverage and impervious caps are not coded here, so a shop size is not calculated.", "Zoning not coded");
+    else if (ctx.roof != null && ctx.fullCov == null && ctx.hasImpervious && ctx.roomImp == null) shop = card("shop", "Garage or shop", "partial", "A roof outline is on record. This zone has no coverage cap in the coded rules. Impervious room is unknown because driveway or other paving was not measured. It is not filled in as zero.", "Paving not measured");
     else shop = card("shop", "Garage or shop", "partial", "Enter a building footprint to see coverage room. Paving stays blank until a source measures it.", "Needs a footprint");
 
     var teardown;
@@ -283,8 +284,8 @@
 
     var remodel;
     if (!living && !roof) remodel = card("remodel", "Remodel", "nodata", "No existing house size is on record, so a remodel scope cannot be checked.", "Needs living area or a footprint");
-    else if (living && roof) remodel = card("remodel", "Remodel", "ready", "Interior work that stays inside the existing walls usually does not change the " + Math.round(living) + " sf living area or the " + Math.round(roof) + " sf roof outline. Those two numbers are not added. Structural, plumbing, electrical, and mechanical permits can still apply. This does not say a permit will be issued.", Math.round(living) + " sf living area");
-    else if (living) remodel = card("remodel", "Remodel", "partial", "Finished living area is " + Math.round(living) + " sf. A roof outline was not measured, so coverage change cannot be checked.", Math.round(living) + " sf living area");
+    else if (living && roof) remodel = card("remodel", "Remodel", "ready", "Interior work that stays inside the existing walls usually does not change the " + Math.round(ctx.living) + " sf living area or the " + Math.round(ctx.roof) + " sf roof outline. Those two numbers are not added. Structural, plumbing, electrical, and mechanical permits can still apply. This does not say a permit will be issued.", Math.round(ctx.living) + " sf living area");
+    else if (living) remodel = card("remodel", "Remodel", "partial", "Finished living area is " + Math.round(ctx.living) + " sf. A roof outline was not measured, so coverage change cannot be checked.", Math.round(ctx.living) + " sf living area");
     else remodel = card("remodel", "Remodel", ctx.hasFloorCap === false ? "partial" : "partial", ctx.hasFloorCap === false ? "A roof outline is on record. This zone has no floor-area ratio, so living area is not required to check a floor cap. Finished living area was not in the sources read for this lot." : "A roof outline is on record and finished living area is not, so an interior remodel cannot be checked against a floor-area cap.", ctx.hasFloorCap === false ? "No floor-area ratio" : "Needs finished living area");
 
     return [addition, adu, shop, teardown, remodel];

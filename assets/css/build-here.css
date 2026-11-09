@@ -92,7 +92,7 @@
   .bh-stage-map{height:auto!important;max-height:none!important;overflow:visible!important}
   .bh-stage-map img,.bh-stage-map svg,.bh-stage-map .bh-siteplan{max-height:3.4in;object-fit:contain}
   .bh-stage-fade{position:static!important;background:#eef5ef!important;color:#102a1c!important}
-  .bh-stage-fade h2,.bh-stage-fade .bh-kicker,.bh-stage-fade p{color:#102a1c!important}
+  .bh-stage-fade h2,.bh-stage-fade .bh-kicker,.bh-stage-fade .bh-stage-place,.bh-stage-fade .bh-stage-date,.bh-stage-fade p{color:#102a1c!important}
   td[data-label]::before{content:attr(data-label) ": ";font-weight:800;color:#166534}
   .bh-noprint,.bh-btn,button,iframe,video,.bh-map-frame,.bh-toolbar{display:none!important}
   .bh-print-only{display:block;visibility:visible}
@@ -184,3 +184,10 @@
   .bh-scenario:nth-child(5){animation-delay:.16s}
 }
 @keyframes bh-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* Print comes after the screen mint color. Equal specificity plus !important,
+   so this later rule is the one that paints the kicker, place, and date. */
+@media print{
+  .bh-stage-fade .bh-kicker,
+  .bh-stage-fade .bh-stage-place,
+  .bh-stage-fade .bh-stage-date{color:#102a1c!important}
+}

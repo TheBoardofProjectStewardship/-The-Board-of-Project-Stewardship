@@ -8,6 +8,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 MEASURES = ROOT / "assets/js/build-here-measures.js"
 EXPORT = ROOT / "assets/js/build-here-export.js"
+STAGE = ROOT / "assets/js/build-here-stage.js"
+CSS = ROOT / "assets/css/build-here.css"
 
 
 def node_call(module, expr):
@@ -116,6 +118,10 @@ class MeasureTests(unittest.TestCase):
         self.assertEqual(by["adu"]["state"], "ready")
         self.assertEqual(by["teardown"]["state"], "ready")
         self.assertEqual(by["remodel"]["state"], "ready")
+        self.assertIn("2000", by["remodel"]["line"])
+        self.assertIn("1400", by["remodel"]["line"])
+        self.assertNotIn("1 sf living", by["remodel"]["line"])
+        self.assertIn("2000", by["remodel"]["metric"])
         self.assertIn("does not say a permit will be issued", by["addition"]["line"])
 
     def test_edmonds_without_far_uses_coverage_not_a_fake_floor_cap(self):
@@ -186,7 +192,42 @@ class MeasureTests(unittest.TestCase):
         })""")
         self.assertEqual(data["effective"]["impervious"], 2600)
         self.assertEqual(data["effective"]["roomImp"], 1900)
-        self.assertEqual(data["bundle"]["measures"][-1]["confidence"] != "High" or data["bundle"]["measures"][0]["method"] == "survey", True)
+        by_kind = {m["kind"]: m for m in data["bundle"]["measures"]}
+        self.assertEqual(by_kind["driveway"]["sf"], 500)
+        self.assertEqual(by_kind["driveway"]["method"], "survey")
+        self.assertFalse(by_kind["driveway"]["automatic"])
+        self.assertEqual(by_kind["driveway"]["confidence"], "Medium")
+        self.assertEqual(by_kind["hardscape"]["sf"], 100)
+        self.assertEqual(by_kind["hardscape"]["confidence"], "Medium")
+        self.assertNotEqual(by_kind["driveway"]["confidence"], "High")
+        shop = next(c for c in data["cards"] if c["id"] == "shop")
+        self.assertEqual(shop["state"], "ready")
+        self.assertIn("1900", shop["line"])
+        self.assertIn("impervious", shop["line"])
+        blank = node_call(MEASURES, """M.resolveStudy({
+          lot: 10000, zoningCoded: true, hasFloorCap: false, coverageCap: 3500, imperviousCap: 4500,
+          auto: { roof: { sf: 2000, source: 'Roof outline', method: 'roof outline' } }
+        })""")
+        self.assertIsNone(blank["effective"]["impervious"])
+        self.assertIsNone(blank["effective"]["roomImp"])
+        blank_shop = next(c for c in blank["cards"] if c["id"] == "shop")
+        self.assertEqual(blank_shop["state"], "partial")
+        self.assertIn("not filled in as zero", blank_shop["line"])
+
+    def test_remodel_card_uses_the_real_areas_not_a_boolean(self):
+        cards = node_call(MEASURES, """M.scenarios({
+          lot: 7643, living: 2430, roof: 1934, zoningCoded: true, hasFloorCap: false,
+          floorCap: null, fullCov: null, hasImpervious: true, roomImp: null,
+          aduRule: 'Up to 2 ADUs in the urban area'
+        })""")
+        by = {c["id"]: c for c in cards}
+        self.assertEqual(by["remodel"]["state"], "ready")
+        self.assertIn("2430 sf living area", by["remodel"]["line"])
+        self.assertIn("1934 sf roof outline", by["remodel"]["line"])
+        self.assertEqual(by["remodel"]["metric"], "2430 sf living area")
+        self.assertEqual(by["shop"]["state"], "partial")
+        self.assertIn("not filled in as zero", by["shop"]["line"])
+        self.assertNotIn("Needs a footprint", by["shop"]["metric"])
 
     def test_detached_footprint_counts_once_toward_coverage(self):
         data = node_call(MEASURES, """M.resolveStudy({
@@ -246,6 +287,38 @@ class ExportTests(unittest.TestCase):
         self.assertNotIn("Additions rankings", html)
         self.assertIn("not living area", html)
         self.assertIn("https://gis.example/parcels", html)
+
+    def test_stripping_the_edit_link_does_not_leave_a_second_period(self):
+        stage = node_call(STAGE, "M.renderStage({ address: 'Sample lot', date: '2026-11-09', placeLine: 'Example County (sample)', cards: [] })")
+        self.assertIn('href="#bh-confirm"', stage)
+        self.assertNotIn("permit. .", stage)
+        self.assertIn("Nothing here is a permit.", stage)
+        saved = node_call(EXPORT, "M.buildStudyFile({ address: 'Sample lot', date: '2026-11-09', bodyHtml: " + json.dumps(stage) + " })")
+        self.assertNotIn("#bh-confirm", saved)
+        self.assertNotIn("permit. .", saved)
+        self.assertIn("Nothing here is a permit.", saved)
+        self.assertIn(".bh-stage-place", saved)
+        self.assertIn("color:#102a1c", saved)
+        legacy = node_call(EXPORT, """M.buildStudyFile({
+          address: 'Sample lot', date: '2026-11-09',
+          bodyHtml: '<p class="bh-muted">Nothing here is a permit. <a href="#bh-confirm">Edit the facts used on these cards</a>.</p>'
+        })""")
+        self.assertNotIn("#bh-confirm", legacy)
+        self.assertNotIn("permit. .", legacy)
+        self.assertIn("Nothing here is a permit.", legacy)
+
+    def test_print_header_color_comes_after_the_screen_mint(self):
+        css = CSS.read_text(encoding="utf-8")
+        screen_at = css.find("color:#d1fae5!important")
+        self.assertGreater(screen_at, 0)
+        later = css[screen_at:]
+        print_at = later.find("@media print")
+        self.assertGreater(print_at, 0)
+        block = later[print_at:]
+        self.assertIn(".bh-stage-fade .bh-kicker", block)
+        self.assertIn(".bh-stage-fade .bh-stage-place", block)
+        self.assertIn(".bh-stage-fade .bh-stage-date", block)
+        self.assertIn("color:#102a1c!important", block)
 
 
 if __name__ == "__main__":

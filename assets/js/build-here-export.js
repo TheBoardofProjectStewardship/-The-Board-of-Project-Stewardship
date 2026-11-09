@@ -37,7 +37,7 @@
     if (!/Map embed omitted/.test(out)) {
       out += '<p class="bh-fallback">Map embed omitted from this file. Use the site plan diagram. An aerial photo, when the study included one, still needs a network connection. The diagram itself is drawn in this file.</p>';
     }
-    return out;
+    return out.replace(/Nothing here is a permit\.\s*\./g, "Nothing here is a permit.");
   }
 
   function sourceItems(sources) {
@@ -68,7 +68,7 @@
     ".bh-front,.bh-envlabel,.bh-note{fill:#14532d;font-size:11px}",
     ".bh-stage-map{position:static;height:auto;background:#fff}",
     ".bh-stage-fade{position:static;background:#eef5ef;color:#102a1c;padding:.6rem}",
-    ".bh-stage-fade h2,.bh-stage-fade .bh-kicker,.bh-stage-fade p{color:#102a1c}",
+    ".bh-stage-fade h2,.bh-stage-fade .bh-kicker,.bh-stage-fade .bh-stage-place,.bh-stage-fade .bh-stage-date,.bh-stage-fade p{color:#102a1c}",
     ".bh-scenario{break-inside:avoid;border:1px solid #d6d3cb;padding:.4rem;margin:.35rem 0}",
     ".bh-page{break-after:auto;page-break-after:auto;break-inside:auto}",
     ".bh-disclaimer,.bh-limit{border-left:4px solid #166534;background:#eef5ef;color:#102a1c;padding:.6rem .8rem}",

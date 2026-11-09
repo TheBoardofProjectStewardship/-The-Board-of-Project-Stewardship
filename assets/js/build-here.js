@@ -365,6 +365,7 @@
     s.factAttempts = s.factAttempts || [];
     s.factAttempts.push({ field: "Finished living area", name: "Snohomish County parcels (SAS_Parcels)", ok: false, note: "Read the public parcel layer. It has no finished living area, story count, or garage floor-area field." });
     s.factAttempts.push({ field: "Finished living area", name: "Snohomish County appraisal characteristics", ok: false, note: "SAS_Appraisal_Characteristics publishes condition, grade, and land type, not living area." });
+    s.factAttempts.push({ field: "Finished living area", name: "Snohomish County Improvement Records", ok: false, note: "A public assessor workbook from SnocoGIS has finished size, stories, year built, and attached and detached garage area. This page does not load that workbook, so those figures stay blank here.", url: "https://www.arcgis.com/sharing/rest/content/items/3c5edc985cec4fba8b3938d16ed1d3c3" });
     s.factAttempts.push({ field: "Finished living area", name: "Assessor account page", ok: false, note: s.assessorUrl ? "The county link is kept below. An unsigned request does not return building facts, and this tool does not sign in." : "No assessor account link was on the parcel." });
     s.factAttempts.push({ field: "Finished living area", name: "Listing sites", ok: false, note: "Redfin and Zillow are not queried. No supported public endpoint was verified." });
     if (!s.parcel) {
@@ -919,8 +920,13 @@
         var kindShown = ($("bh-footprint-kind") && $("bh-footprint-kind").value) || s.footprintKind || "roof";
         var edited = s.footprint != null && Number(v.footprint) !== Number(s.footprint);
         var yours = edited || !s.footprintSrc || kindShown === "footprint";
-        var note = kindShown === "firstFloor" ? " (first-floor area, not roof coverage)" : (kindShown === "footprint" ? " (surveyed footprint, your entry)" : " (roof outline, not living area)");
-        if (yours) note += " (your entry" + (edited ? "; recorded figure was " + fmt(s.footprint) + " sf" : "") + ")";
+        var kindPhrase = kindShown === "firstFloor" ? "first-floor area, not roof coverage" : (kindShown === "footprint" ? "surveyed footprint" : "roof outline, not living area");
+        var note = " (" + kindPhrase;
+        if (yours) {
+          note += ", your entry";
+          if (edited) note += "; recorded figure was " + fmt(s.footprint) + " sf";
+        }
+        note += ")";
         return fmt(v.footprint) + " sf" + note;
       })()],
       ["Year built", s.yearBuilt ? esc(s.yearBuilt) + " (" + esc(s.yearSrc) + ")" : "Not in a browser-callable record. See the assessor page."],
