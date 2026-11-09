@@ -854,7 +854,7 @@
         : "Enter the existing finished floor area from the assessor record if you have it.");
     $("bh-footprint-src").textContent = s.footprint ? "From: " + s.footprintSrc + ". A roof outline is not living area. Edit the number and the type if you know better." : "Optional. Roof outline or surveyed footprint for the coverage check. First-floor area is a different box.";
     if ($("bh-footprint-kind")) {
-      var kind = s.footprintKind || "";
+      var kind = s.footprintKind || "roof";
       if ([].slice.call($("bh-footprint-kind").options).some(function (o) { return o.value === kind; })) $("bh-footprint-kind").value = kind;
     }
     renderManualList();
@@ -914,7 +914,15 @@
       ["Lot area", v.lot ? fmt(v.lot) + " sf" : "Enter by hand"],
       ["Zone", v.zone ? esc(v.zone) + (s.cityZone && s.cityZone !== v.zone ? " (city map shows " + esc(s.cityZone) + ")" : "") : "Enter by hand"],
       ["Existing finished area", v.existing ? fmt(v.existing) + " sf" + ((s.existing != null && Number(v.existing) !== Number(s.existing)) || !s.existingSrc ? " (your entry" + (s.existing != null && Number(v.existing) !== Number(s.existing) ? "; recorded figure was " + fmt(s.existing) + " sf" : "") + ")" : ' <span class="bh-muted">· ' + esc(s.existingSrc) + "</span>") : "Not entered"],
-      ["Building footprint", v.footprint ? fmt(v.footprint) + " sf" + (( ($("bh-footprint-kind") && $("bh-footprint-kind").value) || s.footprintKind) === "firstFloor" ? " (first-floor area, not roof coverage)" : (/roof|eave/i.test(s.footprintSrc || "") || (($("bh-footprint-kind") && $("bh-footprint-kind").value) || s.footprintKind) === "roof" ? " (roof outline, not living area)" : "")) : "Not entered"],
+      ["Building footprint", (function () {
+        if (v.footprint == null) return "Not entered";
+        var kindShown = ($("bh-footprint-kind") && $("bh-footprint-kind").value) || s.footprintKind || "roof";
+        var edited = s.footprint != null && Number(v.footprint) !== Number(s.footprint);
+        var yours = edited || !s.footprintSrc || kindShown === "footprint";
+        var note = kindShown === "firstFloor" ? " (first-floor area, not roof coverage)" : (kindShown === "footprint" ? " (surveyed footprint, your entry)" : " (roof outline, not living area)");
+        if (yours) note += " (your entry" + (edited ? "; recorded figure was " + fmt(s.footprint) + " sf" : "") + ")";
+        return fmt(v.footprint) + " sf" + note;
+      })()],
       ["Year built", s.yearBuilt ? esc(s.yearBuilt) + " (" + esc(s.yearSrc) + ")" : "Not in a browser-callable record. See the assessor page."],
       ["Stories (existing)", String(v.stories)],
       ["Project type", esc($("bh-type").selectedOptions[0].text)]
@@ -967,7 +975,8 @@
       }
       if (rs.impervious) {
         lines.push(["Impervious surface cap", fmt(rs.impervious) + " sf (all hard surfaces)" + (rs.imperviousMax ? "; up to " + fmt(rs.imperviousMax) + " sf with approved low impact development" : "")]);
-        if (v.imperv != null) { var il = rs.impervious - v.imperv; lines.push(["Existing impervious (your entry)", fmt(v.imperv) + " sf"], ["Impervious room left", il > 0 ? "<strong>About " + fmt(il) + " sf</strong> at the base limit" + (rs.imperviousMax ? ", about " + fmt(rs.imperviousMax - v.imperv) + " sf at the maximum" : "") : "None at the base limit as entered" + (rs.imperviousMax && rs.imperviousMax > v.imperv ? "; about " + fmt(rs.imperviousMax - v.imperv) + " sf at the maximum with low impact development" : "") + "."]); }
+        var usedImp = v.imperv != null ? v.imperv : (ctx && ctx.effective ? ctx.effective.impervious : null);
+        if (usedImp != null) { var il = rs.impervious - usedImp; var impHow = v.imperv != null ? "your entry" : "building coverage plus typed or mapped paving"; lines.push(["Existing impervious (" + impHow + ")", fmt(usedImp) + " sf"], ["Impervious room left", il > 0 ? "<strong>About " + fmt(il) + " sf</strong> at the base limit" + (rs.imperviousMax ? ", about " + fmt(rs.imperviousMax - usedImp) + " sf at the maximum" : "") : "None at the base limit as entered" + (rs.imperviousMax && rs.imperviousMax > usedImp ? "; about " + fmt(rs.imperviousMax - usedImp) + " sf at the maximum with low impact development" : "") + "."]); }
         else lines.push(["Impervious room left", '<span class="bh-tbd">Not measured.</span> Enter paving under Edit the facts, or add a source-backed driveway and hardscape. Unknown paving is not filled with zero.']);
       }
       if (!rs.floorCap && (ctx && ctx.effective ? ctx.effective.living : v.existing) == null) lines.push(["Existing house size", '<span class="bh-tbd">Not measured.</span> This zone has no floor-area ratio. Enter finished living area under Edit the facts if you have it.']);
@@ -982,7 +991,7 @@
       lines.push(["For your project type", typeNote]);
       cap = '<table class="bh-table">' + lines.map(function (l) { return "<tr><th scope=\"row\">" + l[0] + "</th><td>" + l[1] + "</td></tr>"; }).join("") + "</table>";
     } else cap = '<p class="bh-verify">' + (v.lot ? "The size limits for this zone are not coded yet. Verify with the jurisdiction." : "Enter the lot size under Edit the facts to see the size limits.") + '</p>';
-    out.push(page("Zoning review", "<h3>How much could you add?</h3>" + cap + redFlags(s, v, rs)));
+    out.push(page("Zoning review", "<h3>How much could you add?</h3>" + cap + redFlags(s, v, rs, ctx && ctx.effective ? ctx.effective.living : null)));
 
     // Lot imagery and site plan
     var outlineCredit = (/^Snohomish/.test(s.county) && (!s.stateAbbr || s.stateAbbr === "WA")) ? "Snohomish County Assessor parcels"
@@ -1050,7 +1059,7 @@
 
     // Plans and permits
     var pm = "<h3>House plans and permit history</h3>";
-    if (s.permits.length) pm += '<table class="bh-table"><thead><tr><th scope="col">Permit</th><th scope="col">Type</th><th scope="col">Description</th><th scope="col">Issued</th><th scope="col">Finaled</th></tr></thead><tbody>' + s.permits.slice(0, 12).map(function (p) { return "<tr><td>" + esc(p.id) + "</td><td>" + esc(p.type) + "</td><td>" + esc(p.desc) + "</td><td>" + esc(p.issued) + "</td><td>" + esc(p.final) + "</td></tr>"; }).join("") + "</tbody></table>";
+    if (s.permits.length) pm += '<table class="bh-table bh-permits"><thead><tr><th scope="col">Permit</th><th scope="col">Type</th><th scope="col">Description</th><th scope="col">Issued</th><th scope="col">Finaled</th></tr></thead><tbody>' + s.permits.slice(0, 12).map(function (p) { return "<tr><td data-label=\"Permit\">" + esc(p.id) + "</td><td data-label=\"Type\">" + esc(p.type) + "</td><td data-label=\"Description\">" + esc(p.desc) + "</td><td data-label=\"Issued\">" + esc(p.issued) + "</td><td data-label=\"Finaled\">" + esc(p.final) + "</td></tr>"; }).join("") + "</tbody></table>";
     else pm += "<p>No permit records were found for this parcel in the public permit layers we can read from the browser" + (s.juris === "seattle" ? " (Seattle issued and finaled residential permits)" : s.juris === "sno" ? " (Snohomish County active permits)" : "") + ". That does not mean none exist; older records are often only on microfilm.</p>";
     pm += "<p><strong>Plan sets:</strong> We did not find published plan drawings for this address, and we do not draw or guess them. Approved plans are public records you can request from the permit office.</p>";
     if (s.permitLinks.length) pm += "<ul>" + s.permitLinks.map(function (l) { return '<li><a href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.label) + "</a></li>"; }).join("") + "</ul>";
@@ -1065,15 +1074,17 @@
     out.push(page("Data sources", "<h3>Limitations and confidence</h3><p class=\"bh-disclaimer\">" + esc(STUDY_LIMITS) + "</p><h3>What we tried for living area and year built</h3>" + (attempts ? "<ul>" + attempts + "</ul>" : "<p>No extra building-fact lookup was required for this run.</p>") + "<h3>What we read for this report</h3><ul>" + s.sources.map(function (x) { return "<li>" + (x.ok ? "Read live: " : "Did not answer: ") + esc(x.name) + (x.note ? " · " + esc(x.note) : "") + "</li>"; }).join("") + "</ul><h3>Rule sources</h3><ul>" + (rs ? rs.sources : []).map(function (x) { return '<li><a href="' + esc(x.url) + '" target="_blank" rel="noopener">' + esc(x.label) + "</a> (checked " + R.CHECKED + ")</li>"; }).join("") + "</ul>" + '<p class="bh-disclaimer"><strong>Planning estimate only.</strong> This is not a legal or zoning determination. Codes change; confirm with the jurisdiction and a licensed professional.</p>'));
 
     s.exportSources = (s.sources || []).concat((s.factAttempts || []).map(function (x) { return { name: x.field + ": " + x.name, ok: !!x.ok, note: x.note || "", url: x.url || "" }; })).concat((rs && rs.sources ? rs.sources : []).map(function (x) { return { name: x.label, ok: true, note: "Zoning rule, checked " + R.CHECKED, url: x.url }; })).concat((s.manual || []).map(function (m) { return { name: "User-entered " + (m.label || m.kind), ok: true, note: (m.method || "") + (m.retrieved ? " " + m.retrieved : "") + (m.source ? " " + m.source : ""), url: m.url || "" }; }));
+    var confirm = $("bh-confirm");
+    var wrap = $("bh-report-wrap");
+    if (confirm && wrap && confirm.parentNode === $("bh-report")) wrap.parentNode.insertBefore(confirm, wrap.nextSibling);
     $("bh-report").innerHTML = out.join("");
     $("bh-report-wrap").hidden = false;
     var stagePage = $("bh-report").querySelector(".bh-stage-page");
-    var confirm = $("bh-confirm");
-    if (stagePage && confirm && confirm.parentNode) stagePage.parentNode.insertBefore(confirm, stagePage.nextSibling);
+    if (stagePage && confirm && stagePage.parentNode) stagePage.parentNode.insertBefore(confirm, stagePage.nextSibling);
     if ($("bh-lead-address")) $("bh-lead-address").value = s.matched || s.input;
   }
 
-  function redFlags(s, v, rs) {
+  function redFlags(s, v, rs, livingUsed) {
     var f = [];
     if (s.hazards.length) f.push("Mapped critical area or hazard on or touching the parcel: " + s.hazards.join(", ") + ". Expect a critical area review and possibly a geotechnical report.");
     if (v.type === "teardown") {
@@ -1090,7 +1101,8 @@
     if (v.type === "addition" || v.type === "shop") f.push("An addition ties into old framing and foundations. Expect surprises in houses built before modern codes, and budget for engineering.");
     if (v.type === "addition" || v.type === "teardown" || v.type === "shop") f.push("Basements or deep footings close to a lot line can need shoring and neighbor coordination. Ask your engineer early.");
     if (s.yearBuilt && +s.yearBuilt < 1980) f.push("Built " + esc(s.yearBuilt) + ": plan for possible asbestos and lead paint testing before any demolition or remodel work.");
-    if (rs && rs.floorCap && v.existing != null && v.existing >= rs.floorCap) f.push("The existing house is at or over the floor area cap as entered. Adding counted floor area may not be allowed. Below-grade space or a different unit count can change the cap, so ask the city.");
+    var livingNow = livingUsed != null ? livingUsed : v.existing;
+    if (rs && rs.floorCap && livingNow != null && livingNow >= rs.floorCap) f.push("The existing house is at or over the floor area cap as entered. Adding counted floor area may not be allowed. Below-grade space or a different unit count can change the cap, so ask the city.");
     if (!f.length) f.push("No red flags from the data we could read. That is not a clean bill; a site visit matters.");
     return "<h3>Red flags to check</h3><ul class=\"bh-flags\">" + f.map(function (x) { return "<li>" + x + "</li>"; }).join("") + "</ul>";
   }

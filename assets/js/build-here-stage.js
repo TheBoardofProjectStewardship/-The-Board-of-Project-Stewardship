@@ -53,10 +53,10 @@
         '<p class="bh-scenario-metric">' + esc(card.metric) + "</p></div></article>";
     }).join("");
     return '<div class="bh-stage">' +
-      '<div class="bh-stage-map">' + map +
+      '<div class="bh-stage-map">' + map + "</div>" +
       '<div class="bh-stage-fade"><p class="bh-kicker">See what you can build</p><h2>' + esc(opts.address || "") + "</h2>" +
       '<p class="bh-stage-place">' + esc(opts.placeLine || "") + "</p>" +
-      '<p class="bh-stage-date">Prepared ' + esc(opts.date || "") + "</p></div></div>" +
+      '<p class="bh-stage-date">Prepared ' + esc(opts.date || "") + "</p></div>" +
       '<p class="bh-disclaimer"><strong>Planning estimate only.</strong> This is not a legal, zoning or permit determination. Confirm every number with the jurisdiction and a licensed professional before you design, buy or build.</p>' +
       '<h3>Ways this property could go</h3>' +
       '<p class="bh-muted">The map above is this parcel when an outline or aerial was returned. The five diagrams are schematic icons, not a scaled plan. A card stays partial or empty when a measurement or a zoning rule is missing. Nothing here is a permit. <a href="#bh-confirm">Edit the facts used on these cards</a>.</p>' +

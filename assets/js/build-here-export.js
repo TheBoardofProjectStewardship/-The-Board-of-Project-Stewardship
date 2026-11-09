@@ -13,14 +13,27 @@
   function stripTag(html, tag) {
     return String(html || "").replace(new RegExp("<" + tag + "\\b[\\s\\S]*?<\\/" + tag + ">", "gi"), "");
   }
+  function stripWithDom(html) {
+    if (typeof DOMParser === "undefined") return null;
+    var doc = new DOMParser().parseFromString("<div id=\"bh-export-root\">" + html + "</div>", "text/html");
+    var root = doc.getElementById("bh-export-root");
+    if (!root) return null;
+    root.querySelectorAll("script,iframe,video,button,textarea,input,a.bh-btn,.bh-map-frame,.bh-print-only,.bh-noprint,.bh-cta,a[href='#bh-confirm']").forEach(function (el) { el.remove(); });
+    return root.innerHTML;
+  }
   function stripControls(html) {
-    var out = String(html || "");
-    ["script", "iframe", "video", "button", "textarea"].forEach(function (tag) { out = stripTag(out, tag); });
-    out = out.replace(/<input\b[^>]*>/gi, "");
-    out = out.replace(/<a\b[^>]*\bbh-btn\b[^>]*>[\s\S]*?<\/a>/gi, "");
-    out = out.replace(/<div\b[^>]*\bbh-map-frame\b[^>]*>[\s\S]*?<\/div>/gi, "");
-    out = out.replace(/<p\b[^>]*\bbh-print-only\b[^>]*>[\s\S]*?<\/p>/gi, "");
-    out = out.replace(/<(div|section|p)\b[^>]*\bbh-noprint\b[^>]*>[\s\S]*?<\/\1>/gi, "");
+    var dommed = stripWithDom(html);
+    var out = dommed == null ? String(html || "") : dommed;
+    if (dommed == null) {
+      ["script", "iframe", "video", "button", "textarea"].forEach(function (tag) { out = stripTag(out, tag); });
+      out = out.replace(/<input\b[^>]*>/gi, "");
+      out = out.replace(/<a\b[^>]*\bbh-btn\b[^>]*>[\s\S]*?<\/a>/gi, "");
+      out = out.replace(/<a\b[^>]*href=(["'])#bh-confirm\1[^>]*>[\s\S]*?<\/a>/gi, "");
+      out = out.replace(/<div\b[^>]*\bbh-map-frame\b[^>]*>[\s\S]*?<\/div>/gi, "");
+      out = out.replace(/<div\b[^>]*\bbh-cta\b[^>]*>[\s\S]*?<\/div>/gi, "");
+      out = out.replace(/<p\b[^>]*\bbh-print-only\b[^>]*>[\s\S]*?<\/p>/gi, "");
+      out = out.replace(/<(div|section|p)\b[^>]*\bbh-noprint\b[^>]*>[\s\S]*?<\/\1>/gi, "");
+    }
     if (!/Map embed omitted/.test(out)) {
       out += '<p class="bh-fallback">Map embed omitted from this file. Use the site plan diagram. An aerial photo, when the study included one, still needs a network connection. The diagram itself is drawn in this file.</p>';
     }
@@ -69,7 +82,7 @@
     var body = stripControls(o.bodyHtml || "");
     var limits = o.limitations || "Planning estimate only. This is not a legal, zoning, or permit determination. Where zoning is not coded, the study does not say a project is allowed.";
     var sources = sourceItems(o.sources);
-    return "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Feasibility study</title><style>" + PRINT_CSS + "</style></head><body>" +
+    return "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><base href=\"https://boardofprojectstewardship.com/\"><title>Feasibility study</title><style>" + PRINT_CSS + "</style></head><body>" +
       "<header><p>Board of Project Stewardship</p><h1>" + esc(address) + "</h1><p>Prepared " + esc(date) + "</p></header>" +
       "<section class=\"bh-limit\"><h2>Limitations and confidence</h2><p>" + esc(limits) + "</p></section>" +
       "<section class=\"bh-sources\"><h2>Sources</h2><ul>" + (sources || "<li>No source list was attached to this file.</li>") + "</ul></section>" +

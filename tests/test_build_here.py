@@ -73,6 +73,11 @@ class BuildHereTest(unittest.TestCase):
         for needle in ("Pascal", "CivilCraft", "CutSheet"):
             self.assertNotIn(needle, body)
         self.assertIn('id="b3-canvas"', body)
+        js = (ROOT / "assets/js/build-here.js").read_text(encoding="utf-8")
+        self.assertLess(js.index('confirm.parentNode === $("bh-report")'), js.index('$("bh-report").innerHTML = out.join("")'))
+        stage = (ROOT / "assets/js/build-here-stage.js").read_text(encoding="utf-8")
+        self.assertLess(stage.index('map + "</div>"'), stage.index('class="bh-stage-fade"'))
+        self.assertIn('data-label=\\"Permit\\"', js)
 
     def test_budget_calculator_removed(self):
         home = (ROOT / "index.html").read_text(encoding="utf-8")

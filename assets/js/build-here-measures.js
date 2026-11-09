@@ -62,7 +62,13 @@
         url: raw.url || "",
         retrieved: raw.retrieved || "",
         method: method || (raw.automatic ? "public record" : "manual"),
-        confidence: estimate ? "Low" : (raw.confidence || "Medium"),
+        confidence: (function () {
+          var conf = raw.confidence || "Medium";
+          var lowMethod = estimate || method === "listing" || method === "tape";
+          if (lowMethod) return "Low";
+          if (!raw.automatic && conf === "High") return "Medium";
+          return conf;
+        })(),
         automatic: !!raw.automatic,
         measuredZero: !!raw.measuredZero,
         note: raw.note || ""
@@ -356,7 +362,7 @@
     });
     return {
       bundle: bundle, cards: cards,
-      effective: { living: living, roof: roof, buildings: buildings, drive: drive, hard: hard, roomFar: roomFar, roomCov: roomCov, roomImp: roomImp }
+      effective: { living: living, roof: roof, buildings: buildings, drive: drive, hard: hard, impervious: impBase, roomFar: roomFar, roomCov: roomCov, roomImp: roomImp }
     };
   }
 

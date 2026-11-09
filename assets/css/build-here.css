@@ -89,7 +89,7 @@
   .bh-table,.bh-table thead,.bh-table tbody,.bh-table tr,.bh-table th,.bh-table td{display:block;width:auto!important;overflow:visible}
   .bh-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
   img,svg,.bh-siteplan,.bh-aerial-frame img{max-width:100%!important;height:auto}
-  .bh-stage-map{height:auto;max-height:none}
+  .bh-stage-map{height:auto!important;max-height:none!important;overflow:visible!important}
   .bh-stage-map img,.bh-stage-map svg,.bh-stage-map .bh-siteplan{max-height:3.4in;object-fit:contain}
   .bh-stage-fade{position:static!important;background:#eef5ef!important;color:#102a1c!important}
   .bh-stage-fade h2,.bh-stage-fade .bh-kicker,.bh-stage-fade p{color:#102a1c!important}

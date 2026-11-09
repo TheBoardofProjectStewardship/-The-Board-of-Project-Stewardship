@@ -168,6 +168,25 @@ class MeasureTests(unittest.TestCase):
         self.assertTrue(photo["ok"])
         self.assertEqual(photo["measure"]["confidence"], "Low")
         self.assertIsNone(photo["measure"]["sf"])
+        listing = node_call(MEASURES, "M.cleanMeasure({ kind: 'living', method: 'listing', sf: 1900, source: 'Listing page', confidence: 'High' })")
+        tape = node_call(MEASURES, "M.cleanMeasure({ kind: 'living', method: 'tape', sf: 1900, source: 'Tape', confidence: 'High' })")
+        survey = node_call(MEASURES, "M.cleanMeasure({ kind: 'footprint', method: 'survey', sf: 1900, source: 'Survey sheet', confidence: 'High' })")
+        self.assertEqual(listing["measure"]["confidence"], "Low")
+        self.assertEqual(tape["measure"]["confidence"], "Low")
+        self.assertEqual(survey["measure"]["confidence"], "Medium")
+
+    def test_manual_paving_sets_impervious_used_for_zoning(self):
+        data = node_call(MEASURES, """M.resolveStudy({
+          lot: 10000, zoningCoded: true, hasFloorCap: false, coverageCap: 3500, imperviousCap: 4500,
+          auto: { roof: { sf: 2000, source: 'Roof outline', method: 'roof outline' } },
+          manual: [
+            { kind: 'driveway', sf: 500, source: 'Survey', method: 'survey', confidence: 'High' },
+            { kind: 'hardscape', sf: 100, source: 'Survey', method: 'survey', confidence: 'Medium' }
+          ]
+        })""")
+        self.assertEqual(data["effective"]["impervious"], 2600)
+        self.assertEqual(data["effective"]["roomImp"], 1900)
+        self.assertEqual(data["bundle"]["measures"][-1]["confidence"] != "High" or data["bundle"]["measures"][0]["method"] == "survey", True)
 
     def test_detached_footprint_counts_once_toward_coverage(self):
         data = node_call(MEASURES, """M.resolveStudy({
@@ -207,6 +226,26 @@ class ExportTests(unittest.TestCase):
         self.assertNotIn("<iframe", html.lower())
         self.assertNotIn("<video", html.lower())
         self.assertIn("Map embed omitted", html)
+
+    def test_saved_file_resolves_site_links_and_drops_edit_controls(self):
+        expr = r"""
+        M.buildStudyFile({
+          address: 'Sample lot (not a property record)',
+          date: '2026-11-09',
+          limitations: 'Planning estimate only. This is not a legal, zoning, or permit determination. Unknown driveway stays blank. A roof outline is not living area.',
+          sources: [{ name: 'County parcels', ok: true, note: 'outline', url: 'https://gis.example/parcels' }],
+          bodyHtml: '<p><a href="#bh-confirm">Edit the facts used on these cards</a></p><p><a href="./permits.html">Permit resources</a> <a href="./bid-comparison.html">How to compare bids</a></p><div class="bh-cta"><h3>Talk</h3><p><a class="bh-btn" href="./additions.html">Additions rankings</a></p></div>'
+        })
+        """
+        html = node_call(EXPORT, expr)
+        self.assertIn('<base href="https://boardofprojectstewardship.com/">', html)
+        self.assertIn('href="./permits.html"', html)
+        self.assertIn('href="./bid-comparison.html"', html)
+        self.assertNotIn("#bh-confirm", html)
+        self.assertNotIn("bh-cta", html)
+        self.assertNotIn("Additions rankings", html)
+        self.assertIn("not living area", html)
+        self.assertIn("https://gis.example/parcels", html)
 
 
 if __name__ == "__main__":
