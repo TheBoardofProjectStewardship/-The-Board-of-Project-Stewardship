@@ -8,6 +8,7 @@
 
   var KINDS = {
     living: "Finished living area",
+    countyFinSize: "FinSize (county finished size; basement and lower-level finished area recorded separately and not added)",
     gfa: "Gross floor area",
     roof: "Roof outline (includes eaves when the source is a roof layer)",
     footprint: "Surveyed building footprint",
@@ -77,9 +78,29 @@
     };
   }
 
-  /* Physical fields from one Snohomish improvement-record row.
+  /* Physical fields from one active Snohomish dwelling row.
      [FinSize, YrBuilt, Stories, AttGarSF, DetGarSF, dwellingRowCount, rowUpdated]
-     Garage floor area is returned separately and is not a footprint. */
+     FinSize is not proven to be total finished living area. BsmtFin, LowerFin,
+     and AtticFinSF are separate columns and are not in this array. */
+  function finSizeNote(nDwell) {
+    var note = "FinSize is the county finished-size column on one active dwelling row. Basement finished area, lower-level finished area, and attic finished area are separate columns and are not added. No official data dictionary was found, so this number is not total finished living area and the option cards do not use it as floor-area living area.";
+    if (nDwell > 1) note += " This parcel has " + nDwell + " active dwelling rows. The figure is the largest FinSize, not a sum of the rows.";
+    return note;
+  }
+  function countyFinSizeRecord(rec) {
+    var row = readSnoImprovement(rec);
+    if (!row || row.fin == null) return null;
+    return {
+      sf: row.fin,
+      nDwell: row.nDwell,
+      source: "Snohomish County Improvement Records, FinSize column. Not enabled on the public page while the county-use hold is open.",
+      method: "assessor extract",
+      confidence: "Low",
+      retrieved: row.updated || "",
+      automatic: true,
+      note: finSizeNote(row.nDwell)
+    };
+  }
   function readSnoImprovement(rec) {
     if (!rec || !rec.length) return null;
     function pos(v) {
@@ -310,7 +331,15 @@
     else if (living) remodel = card("remodel", "Remodel", "partial", "Finished living area is " + Math.round(ctx.living) + " sf. A roof outline was not measured, so coverage change cannot be checked.", Math.round(ctx.living) + " sf living area");
     else remodel = card("remodel", "Remodel", ctx.hasFloorCap === false ? "partial" : "partial", ctx.hasFloorCap === false ? "A roof outline is on record. This zone has no floor-area ratio, so living area is not required to check a floor cap. Finished living area was not in the sources read for this lot." : "A roof outline is on record and finished living area is not, so an interior remodel cannot be checked against a floor-area cap.", ctx.hasFloorCap === false ? "No floor-area ratio" : "Needs finished living area");
 
-    return [addition, adu, shop, teardown, remodel];
+    var finBit = "";
+    if (ctx.countyFinSize != null) {
+      finBit = " County FinSize on the ledger is about " + Math.round(ctx.countyFinSize) + " sf. It is not used as finished living area. Basement and lower-level finished area are separate columns and are not added.";
+      if (ctx.countyFinRows > 1) finBit += " More than one active dwelling row exists. The figure is the largest row, not a sum.";
+    }
+    return [addition, adu, shop, teardown, remodel].map(function (c) {
+      if (finBit) c.line += finBit;
+      return c;
+    });
   }
 
   function pickPoint(list, kind, usersOnly) {
@@ -342,6 +371,7 @@
     pushAuto("otherBuilding", auto.other);
     pushAuto("driveway", auto.drive);
     pushAuto("hardscape", auto.hard);
+    pushAuto("countyFinSize", auto.countyFinSize);
     var edit = input.edit || {};
     if (edit.living != null) records = withEdit(records, "living", edit.living, input.date);
     if (edit.roof != null) records = withEdit(records, "roof", edit.roof, input.date);
@@ -367,6 +397,10 @@
     } else hard = pickPoint(list, "hardscape");
     var drive = pickPoint(list, "driveway");
     var living = pickPoint(list, "living");
+    var countyFin = pickPoint(list, "countyFinSize");
+    if (living != null && countyFin != null && Math.round(living) !== Math.round(countyFin)) {
+      bundle.notes.push("FinSize is " + Math.round(countyFin) + " sf and another finished-area figure on this study is " + Math.round(living) + " sf. Both stay visible. FinSize is not substituted for finished living area.");
+    }
     var open = openArea(input.lot, { buildings: buildings, drive: drive, hard: hard });
     bundle.open = open;
     if (open.sf != null && !open.verifiedLandscape) bundle.notes.push(open.note);
@@ -382,7 +416,8 @@
       lot: input.lot, living: living, roof: roof, zoningCoded: !!input.zoningCoded,
       hasFloorCap: !!input.hasFloorCap, floorCap: floorCap, fullCov: fullCov,
       roomFar: roomFar, roomCov: roomCov, roomImp: roomImp, hasImpervious: hasImpervious,
-      envArea: input.envArea != null ? input.envArea : null, aduRule: input.aduRule || ""
+      envArea: input.envArea != null ? input.envArea : null, aduRule: input.aduRule || "",
+      countyFinSize: countyFin, countyFinRows: (auto.countyFinSize && auto.countyFinSize.nDwell) || 0
     });
     return {
       bundle: bundle, cards: cards,
@@ -400,7 +435,9 @@
     scenarios: scenarios,
     resolveStudy: resolveStudy,
     pickPoint: pickPoint,
-    readSnoImprovement: readSnoImprovement
+    readSnoImprovement: readSnoImprovement,
+    countyFinSizeRecord: countyFinSizeRecord,
+    finSizeNote: finSizeNote
   };
   root.BuildHereMeasures = api;
   if (typeof module !== "undefined" && module.exports) module.exports = api;

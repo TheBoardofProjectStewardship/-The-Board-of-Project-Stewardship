@@ -322,48 +322,53 @@ class ExportTests(unittest.TestCase):
 
 
 class SnohomishImprovementTests(unittest.TestCase):
-    PIN = "00370400000200"
-
-    def test_record_reader_keeps_garage_floor_off_the_footprint(self):
-        row = node_call(MEASURES, "M.readSnoImprovement([1865, 1954, 1, 240, 0, 1, '2020-12-02'])")
-        self.assertEqual(row["fin"], 1865)
-        self.assertEqual(row["year"], 1954)
-        self.assertEqual(row["stories"], 1)
-        self.assertEqual(row["attGar"], 240)
-        self.assertIsNone(row["detGar"])
+    def test_finsize_is_not_living_area_and_warns_on_the_cards(self):
+        made = node_call(MEASURES, "M.countyFinSizeRecord([1865, 1954, 1, 240, 0, 2, '2020-12-02'])")
+        self.assertEqual(made["confidence"], "Low")
+        self.assertIn("not total finished living area", made["note"])
+        self.assertIn("2 active dwelling rows", made["note"])
+        self.assertIn("largest FinSize", made["note"])
+        self.assertIn("not added", made["note"])
         data = node_call(MEASURES, """M.resolveStudy({
-          lot: 10000, zoningCoded: true, hasFloorCap: false, coverageCap: 4000,
+          lot: 10000, zoningCoded: true, hasFloorCap: true, floorCap: 3000, coverageCap: 4000,
           auto: {
+            living: { sf: 1600, source: 'Another finished-area figure', method: 'assessor extract', confidence: 'Medium' },
             roof: { sf: 1934, source: 'Mapped roof outline', method: 'roof outline' },
-            attachedGarage: { sf: 240, source: 'AttGarSF', method: 'assessor extract' },
-            detachedGarageFloor: { sf: 600, source: 'DetGarSF', method: 'assessor extract' }
+            countyFinSize: M.countyFinSizeRecord([1865, 1954, 1, 240, 0, 2, '2020-12-02']),
+            attachedGarage: { sf: 240, source: 'AttGarSF', method: 'assessor extract' }
           }
         })""")
+        self.assertEqual(data["effective"]["living"], 1600)
         self.assertEqual(data["effective"]["buildings"], 1934)
-        kinds = {m["kind"]: m["sf"] for m in data["bundle"]["measures"]}
-        self.assertEqual(kinds["attachedGarage"], 240)
-        self.assertEqual(kinds["detachedGarageFloor"], 600)
-        self.assertNotIn("footprint", kinds)
+        self.assertNotEqual(data["effective"]["buildings"], 1934 + 240)
+        kinds = {m["kind"]: m for m in data["bundle"]["measures"]}
+        self.assertIn("basement", kinds["countyFinSize"]["label"].lower())
+        self.assertIn("not total finished living area", kinds["countyFinSize"]["note"])
+        self.assertTrue(any("Both stay visible" in n for n in data["bundle"]["notes"]))
+        remodel = next(c for c in data["cards"] if c["id"] == "remodel")
+        self.assertIn("1600", remodel["line"])
+        self.assertIn("not used as finished living area", remodel["line"])
+        self.assertIn("largest row", remodel["line"])
+        self.assertNotIn("1865 sf living", remodel["line"])
 
-    def test_public_pin_matches_the_existing_house_size_index(self):
-        shard = json.loads((ROOT / "assets/data/sno-bldg" / (self.PIN[:4] + ".json")).read_text(encoding="utf-8"))
-        house = json.loads((ROOT / "assets/data/house-size/snoh" / (self.PIN[:4] + ".json")).read_text(encoding="utf-8"))
-        rec = shard["b"][self.PIN]
-        self.assertEqual(rec[0], house[self.PIN][0])
-        self.assertEqual(rec[1], house[self.PIN][1])
-        self.assertEqual(rec[2], house[self.PIN][3])
-        self.assertEqual(rec, [1865, 1954, 1, 240, 0, 1, "2020-12-02"])
-        self.assertEqual(shard["sourceModified"], "2026-07-30")
-        self.assertIn("FinSize", shard["fields"])
-        self.assertNotIn("Owner", shard["fields"])
-        self.assertNotIn("Site_Address", json.dumps(shard["b"][self.PIN]))
-        meta = json.loads((ROOT / "assets/data/sno-bldg/_meta.json").read_text(encoding="utf-8"))
-        self.assertGreater(meta["parcels"], 200000)
-        self.assertIn("Owner names", meta["omitted"])
+    def test_workbook_source_is_gated_off_and_not_published(self):
+        js = (ROOT / "assets/js/build-here.js").read_text(encoding="utf-8")
+        landscape = (ROOT / "assets/js/build-here-landscape.js").read_text(encoding="utf-8")
         script = (ROOT / "scripts/build_sno_bldg_index.py").read_text(encoding="utf-8")
-        self.assertIn('"PIN", "ImprType", "Stories", "YrBuilt", "FinSize", "AttGarSF", "DetGarSF", "LastUpdD"', script)
-        self.assertNotIn("Owner_Name", script)
-        self.assertNotIn("Taxpayer", script)
+        workflow = (ROOT / ".github/workflows/house-size-index.yml").read_text(encoding="utf-8")
+        config = (ROOT / "_config.yml").read_text(encoding="utf-8")
+        self.assertIn("var SNO_IMPR_ENABLED = false", js)
+        self.assertNotIn("/assets/data/sno-bldg/", js)
+        self.assertIn("Not enabled", js)
+        self.assertIn('== "A"', script)
+        self.assertIn("HOLD:", script)
+        self.assertNotIn("sno-bldg", workflow)
+        self.assertIn("assets/data/sno-bldg", config)
+        self.assertFalse((ROOT / "assets/data/sno-bldg").exists())
+        self.assertNotIn("exportImage", landscape)
+        self.assertNotIn("Aspect Map", landscape)
+        self.assertNotIn("Preset 10ft", landscape)
+        self.assertIn("contour and aspect pictures are not shown", landscape)
 
 
 class TerrainEstimateTests(unittest.TestCase):

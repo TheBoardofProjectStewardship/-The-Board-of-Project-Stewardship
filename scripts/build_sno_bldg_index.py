@@ -13,8 +13,11 @@ dwelling-row count and the dwelling row's LastUpdD. FinSize is the finished
 size on the largest dwelling improvement row. It is not a roof outline.
 AttGarSF and DetGarSF are garage floor area. They are not added to a footprint.
 
-Usage:
-  python3 scripts/build_sno_bldg_index.py [--xlsx PATH] [--out assets/data/sno-bldg]
+Held. Do not write shards into this site. The command exits unless
+--hold-override is set and --out is outside the repository.
+
+Usage after written clearance only:
+  python3 scripts/build_sno_bldg_index.py --hold-override --out /tmp/sno-bldg --xlsx PATH
 """
 from __future__ import annotations
 
@@ -29,7 +32,7 @@ ROOT = Path(__file__).resolve().parents[1]
 ITEM = "3c5edc985cec4fba8b3938d16ed1d3c3"
 ITEM_URL = "https://www.arcgis.com/sharing/rest/content/items/" + ITEM
 DATA_URL = ITEM_URL + "/data"
-KEEP = ("PIN", "ImprType", "Stories", "YrBuilt", "FinSize", "AttGarSF", "DetGarSF", "LastUpdD")
+KEEP = ("PIN", "ImprType", "Stories", "YrBuilt", "FinSize", "AttGarSF", "DetGarSF", "LastUpdD", "ImpStat")
 
 
 def source_modified() -> str:
@@ -86,7 +89,8 @@ def build(xlsx: Path, out: Path, source_modified_day: str) -> None:
             continue
         att = num(row[index["AttGarSF"]])
         det = num(row[index["DetGarSF"]])
-        if dwelling(row[index["ImprType"]]):
+        active = str(row[index["ImpStat"]] or "").strip().upper() == "A"
+        if dwelling(row[index["ImprType"]]) and active:
             dwell_count[pin] += 1
             fin = num(row[index["FinSize"]])
             rec = {
@@ -136,11 +140,11 @@ def build(xlsx: Path, out: Path, source_modified_day: str) -> None:
         "sourceModified": source_modified_day,
         "source": "Snohomish County Improvement Records (SnocoGIS). Physical building fields only.",
         "sourceUrl": ITEM_URL,
-        "cadence": "Not a live assessor query. sourceModified is the SnocoGIS item date. built is the day this extract was written. The house-size workflow rebuilds this directory weekly once that workflow file is on the default branch.",
+        "cadence": "Not a live source and not for the public site while the county-use hold is open. sourceModified is the SnocoGIS item date. built is the day this file was written.",
         "fields": ["FinSize", "YrBuilt", "Stories", "AttGarSF", "DetGarSF", "dwellingRowCount", "rowUpdated"],
         "omitted": "Owner names, taxpayer names, site addresses, photos, sketches, and notes are not copied.",
         "meaning": {
-            "FinSize": "Finished size on the largest dwelling improvement row. Not a roof outline and not garage floor area.",
+            "FinSize": "County finished-size column on the largest active dwelling row (ImpStat A). Basement finished area, lower-level finished area, and attic finished area are separate columns and are not copied. Not proven to be total finished living area.",
             "AttGarSF": "Attached garage floor area. Not added to the footprint.",
             "DetGarSF": "Detached garage floor area. Not added to the footprint.",
         },
@@ -166,13 +170,19 @@ def build(xlsx: Path, out: Path, source_modified_day: str) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--xlsx", default="")
-    parser.add_argument("--out", default=str(ROOT / "assets" / "data" / "sno-bldg"))
+    parser.add_argument("--out", default="")
+    parser.add_argument("--hold-override", action="store_true", help="Write outside this repository after written county or counsel clearance.")
     args = parser.parse_args()
+    if not args.hold_override:
+        raise SystemExit("HOLD: Snohomish Improvement Records are not enabled for this public site. The item terms cover data from which a list of individuals may be compiled. Refusing to build shards.")
+    out = Path(args.out).resolve() if args.out else None
+    if out is None or out.is_relative_to(ROOT.resolve()):
+        raise SystemExit("HOLD: refusing to write the extract inside this repository or its assets directory.")
     modified = source_modified()
     xlsx = Path(args.xlsx) if args.xlsx else Path("/tmp/sno-impr.xlsx")
     if not xlsx.exists():
         urllib.request.urlretrieve(DATA_URL, xlsx)
-    build(xlsx, Path(args.out), modified)
+    build(xlsx, out, modified)
 
 
 if __name__ == "__main__":

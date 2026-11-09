@@ -18,6 +18,8 @@ exclude:
   - data
   - pages
   - assets/CDN-MAP.json
+  # County-use hold. Do not publish PIN-keyed Improvement Records shards.
+  - assets/data/sno-bldg
   - tools/board_intake.py
   - tools/check_seo_pack.py
   - tools/dup-scan.py

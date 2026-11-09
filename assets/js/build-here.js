@@ -357,55 +357,13 @@
       .catch(function (e) { log(s, false, "Snohomish County parcels", e.message); });
   }
 
-  /* Snohomish parcel and appraisal layers have no living-area or garage-floor field.
-     Physical building facts come from a PIN-keyed extract of the public Improvement
-     Records workbook: finished size, stories, year built, and garage floor area.
-     Owner names and contact fields are not in that extract. Garage floor area is
-     not copied onto the roof outline. */
+  /* County-use hold. The Improvement Records item terms cover data from which a
+     list of individuals may be compiled, and a PIN joins to owner names on the
+     public parcel layer. This flag stays false. The page does not fetch shards.
+     FinSize is not finished living area: basement, lower level, and attic
+     finished columns are separate and are not added. */
+  var SNO_IMPR_ENABLED = false;
   var SNO_IMPR_URL = "https://www.arcgis.com/sharing/rest/content/items/3c5edc985cec4fba8b3938d16ed1d3c3";
-  function applySnoImprovement(s, rec, meta) {
-    var M = window.BuildHereMeasures;
-    var row = M && M.readSnoImprovement ? M.readSnoImprovement(rec) : null;
-    if (!row) return;
-    var published = (meta && (meta.sourceModified || meta.asOf)) || "";
-    var when = row.updated || published;
-    var base = "Snohomish County Improvement Records";
-    var cadence = published ? " Workbook item date " + published + "." : "";
-    var rowDate = row.updated ? " Dwelling row last update " + row.updated + "." : "";
-    var multi = row.nDwell > 1 ? " This parcel has " + row.nDwell + " dwelling rows. The finished size is the largest dwelling row, not a sum of every improvement." : "";
-    s.factAttempts = s.factAttempts || [];
-    if (row.fin) {
-      if (s.existing != null && Number(s.existing) !== Number(row.fin)) {
-        s.factAttempts.push({ field: "Finished living area", name: base, ok: true, note: "FinSize on the dwelling row is " + row.fin + " sf. Another figure already on this study is " + s.existing + " sf. Both stay visible." + cadence + rowDate + multi, url: SNO_IMPR_URL });
-      } else if (s.existing == null) {
-        s.existing = Math.round(row.fin);
-        s.existingAsOf = when;
-        s.existingSrc = base + " (FinSize, finished size of the dwelling row, not a roof outline)" + (when ? ", " + when : "") + ".";
-        s.factAttempts.push({ field: "Finished living area", name: base, ok: true, note: s.existingSrc + cadence + multi, url: SNO_IMPR_URL });
-      }
-    }
-    if (row.year) {
-      if (s.yearBuilt && String(s.yearBuilt) !== String(row.year)) {
-        s.factAttempts.push({ field: "Year built", name: base, ok: true, note: "YrBuilt on the dwelling row is " + row.year + ". Another year already on this study is " + s.yearBuilt + ". Both stay visible." + cadence + rowDate, url: SNO_IMPR_URL });
-      } else if (!s.yearBuilt) {
-        s.yearBuilt = String(row.year);
-        s.yearSrc = base + ", YrBuilt on the dwelling row" + (row.updated ? ", row updated " + row.updated : "") + ". Not a sales-record year.";
-      }
-    }
-    if (row.stories && !s.stories) {
-      var whole = Math.max(1, Math.min(3, Math.round(row.stories)));
-      s.stories = whole;
-      s.storiesSrc = base + ", Stories " + row.stories + " on the dwelling row" + (whole !== row.stories ? ". The form uses whole stories, so this shows as " + whole : "") + ".";
-    }
-    if (row.attGar && s.garageFloor == null) {
-      s.garageFloor = Math.round(row.attGar);
-      s.garageFloorSrc = base + " (AttGarSF, attached garage floor area). Not added to the roof outline or the lot coverage footprint.";
-    }
-    if (row.detGar && s.detGarageFloor == null) {
-      s.detGarageFloor = Math.round(row.detGar);
-      s.detGarageFloorSrc = base + " (DetGarSF, detached garage floor area). Not added to the roof outline or the lot coverage footprint.";
-    }
-  }
   function snoBuildingFacts(s) {
     if (!/^Snohomish/.test(s.county || "") || (s.stateAbbr && s.stateAbbr !== "WA")) return Promise.resolve();
     s.factAttempts = s.factAttempts || [];
@@ -413,27 +371,16 @@
     s.factAttempts.push({ field: "Finished living area", name: "Snohomish County appraisal characteristics", ok: false, note: "SAS_Appraisal_Characteristics publishes condition, grade, and land type, not living area." });
     s.factAttempts.push({ field: "Finished living area", name: "Assessor account page", ok: false, note: s.assessorUrl ? "The county link is kept below. An unsigned request does not return building facts, and this tool does not sign in." : "No assessor account link was on the parcel." });
     s.factAttempts.push({ field: "Finished living area", name: "Listing sites", ok: false, note: "Redfin and Zillow are not queried. No supported public endpoint was verified." });
-    var pin = String(s.parcel || "").replace(/\D/g, "");
-    var imprJob = pin.length >= 4
-      ? fetch("/assets/data/sno-bldg/" + pin.slice(0, 4) + ".json", { credentials: "same-origin" }).then(function (r) {
-          if (!r.ok) throw new Error("HTTP " + r.status);
-          return r.json();
-        }).then(function (j) {
-          var rec = j && j.b && j.b[pin];
-          if (!rec) {
-            s.factAttempts.push({ field: "Finished living area", name: "Snohomish County Improvement Records", ok: false, note: "PIN " + pin + " is not in the dwelling rows of the improvement-record extract.", url: SNO_IMPR_URL });
-            return;
-          }
-          applySnoImprovement(s, rec, j);
-          log(s, !!s.existing, "Snohomish County Improvement Records", s.existing ? s.existing + " sf FinSize" : "No finished size on the dwelling row");
-        }).catch(function (e) {
-          s.factAttempts.push({ field: "Finished living area", name: "Snohomish County Improvement Records", ok: false, note: e.message, url: SNO_IMPR_URL });
-          log(s, false, "Snohomish County Improvement Records", e.message);
-        })
-      : Promise.resolve().then(function () {
-          s.factAttempts.push({ field: "Finished living area", name: "Snohomish County Improvement Records", ok: false, note: "No parcel id, so the improvement-record extract was not opened.", url: SNO_IMPR_URL });
-        });
-    return imprJob.then(function () {
+    s.factAttempts.push({
+      field: "FinSize",
+      name: "Snohomish County Improvement Records",
+      ok: false,
+      note: SNO_IMPR_ENABLED
+        ? "The enable flag is on, and this page still does not load the workbook. Written county or counsel clearance is a separate step. FinSize is not used as finished living area."
+        : "Not enabled. The workbook has FinSize, Stories, YrBuilt, AttGarSF, and DetGarSF. The item terms cover data from which a list of individuals may be compiled, and the same PIN can be joined to owner names on the public parcel layer. This page does not load that extract. FinSize is not used as total finished living area: basement finished area, lower-level finished area, and attic finished area are separate columns and are not added. No official data dictionary was found.",
+      url: SNO_IMPR_URL
+    });
+    return Promise.resolve().then(function () {
     if (!s.parcel) {
       s.factAttempts.push({ field: "Year built", name: "Snohomish County recent sales (SnocoGIS)", ok: false, note: "No parcel id, so the sales layer was not queried." });
       return;
@@ -452,7 +399,7 @@
         s.yearSrc = "Snohomish County recent property sales, YEAR_BUILT on the " + (feats[0].attributes.YEAR_SOLD || "recorded") + " sale. Not the current building card.";
         s.factAttempts.push({ field: "Year built", name: "Snohomish County recent sales (SnocoGIS)", ok: true, note: s.yearSrc, url: saleUrl });
       } else if (y && s.yearBuilt && String(s.yearBuilt) !== String(y)) {
-        s.factAttempts.push({ field: "Year built", name: "Snohomish County recent sales (SnocoGIS)", ok: true, note: "Sales YEAR_BUILT is " + y + " on the " + (feats[0].attributes.YEAR_SOLD || "recorded") + " sale. The dwelling improvement row already shows " + s.yearBuilt + ". Both stay visible.", url: saleUrl });
+        s.factAttempts.push({ field: "Year built", name: "Snohomish County recent sales (SnocoGIS)", ok: true, note: "Sales YEAR_BUILT is " + y + " on the " + (feats[0].attributes.YEAR_SOLD || "recorded") + " sale. Another year already on this study is " + s.yearBuilt + ". Both stay visible.", url: saleUrl });
       } else {
         s.factAttempts.push({ field: "Year built", name: "Snohomish County recent sales (SnocoGIS)", ok: false, note: y ? "Year built was already set from another source and matches." : "A sale row exists and YEAR_BUILT was blank.", url: saleUrl });
       }
@@ -1012,7 +959,7 @@
     if (s.hazardNotes.length) haz += '<p class="bh-muted">' + esc(s.hazardNotes.join("; ")) + "</p>";
     out.push(page("Project summary", ledger + '<div class="bh-cols"><div><h3>Site data</h3><table class="bh-table">' + rows.map(function (r) { return "<tr><th scope=\"row\">" + r[0] + "</th><td>" + r[1] + "</td></tr>"; }).join("") + '</table></div><div><h3>Special site features</h3>' + haz +
       '<h3>Soils and geotechnical</h3><p>No soils report is on file with this snapshot. Slopes, fill or a mapped hazard often lead the jurisdiction to ask for a geotechnical report on bearing soil and drainage.</p>' +
-      '<h3>Drainage and civil</h3><p>Larger additions and new houses usually trigger stormwater review. The size thresholds come from the local stormwater code; ask the jurisdiction which applies before design. The slope sample in this study is bare-earth elevation from USGS 3DEP: slope stats, an elevation range, an estimated downhill direction, and the service\'s own contour and aspect pictures when the service answers. That sample does not size pipes, ditches, or a stormwater facility.</p>' +
+      '<h3>Drainage and civil</h3><p>Larger additions and new houses usually trigger stormwater review. The size thresholds come from the local stormwater code; ask the jurisdiction which applies before design. The slope table is a bare-earth sample from USGS 3DEP: average and median slope, steep-cell share, elevation range, and an estimated lot-average fall direction. Contour and aspect pictures are not shown. The sample does not size pipes, ditches, or a stormwater facility.</p>' +
       '<h3>Construction cost</h3><p>Not estimated here. Get a written bid from a licensed contractor for your own numbers.</p>' +
       '<h3>Codes that will apply</h3><p>' + (s.stateAbbr === "WA"
         ? 'Local zoning (cited below), the Washington State Residential Code and the <a href="' + R.SRC.wsec.url + '" target="_blank" rel="noopener">Washington State Energy Code</a>. Energy credits depend on project size and type; your designer confirms them.'
