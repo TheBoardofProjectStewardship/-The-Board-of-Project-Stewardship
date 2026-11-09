@@ -321,5 +321,63 @@ class ExportTests(unittest.TestCase):
         self.assertIn("color:#102a1c!important", block)
 
 
+class SnohomishImprovementTests(unittest.TestCase):
+    PIN = "00370400000200"
+
+    def test_record_reader_keeps_garage_floor_off_the_footprint(self):
+        row = node_call(MEASURES, "M.readSnoImprovement([1865, 1954, 1, 240, 0, 1, '2020-12-02'])")
+        self.assertEqual(row["fin"], 1865)
+        self.assertEqual(row["year"], 1954)
+        self.assertEqual(row["stories"], 1)
+        self.assertEqual(row["attGar"], 240)
+        self.assertIsNone(row["detGar"])
+        data = node_call(MEASURES, """M.resolveStudy({
+          lot: 10000, zoningCoded: true, hasFloorCap: false, coverageCap: 4000,
+          auto: {
+            roof: { sf: 1934, source: 'Mapped roof outline', method: 'roof outline' },
+            attachedGarage: { sf: 240, source: 'AttGarSF', method: 'assessor extract' },
+            detachedGarageFloor: { sf: 600, source: 'DetGarSF', method: 'assessor extract' }
+          }
+        })""")
+        self.assertEqual(data["effective"]["buildings"], 1934)
+        kinds = {m["kind"]: m["sf"] for m in data["bundle"]["measures"]}
+        self.assertEqual(kinds["attachedGarage"], 240)
+        self.assertEqual(kinds["detachedGarageFloor"], 600)
+        self.assertNotIn("footprint", kinds)
+
+    def test_public_pin_matches_the_existing_house_size_index(self):
+        shard = json.loads((ROOT / "assets/data/sno-bldg" / (self.PIN[:4] + ".json")).read_text(encoding="utf-8"))
+        house = json.loads((ROOT / "assets/data/house-size/snoh" / (self.PIN[:4] + ".json")).read_text(encoding="utf-8"))
+        rec = shard["b"][self.PIN]
+        self.assertEqual(rec[0], house[self.PIN][0])
+        self.assertEqual(rec[1], house[self.PIN][1])
+        self.assertEqual(rec[2], house[self.PIN][3])
+        self.assertEqual(rec, [1865, 1954, 1, 240, 0, 1, "2020-12-02"])
+        self.assertEqual(shard["sourceModified"], "2026-07-30")
+        self.assertIn("FinSize", shard["fields"])
+        self.assertNotIn("Owner", shard["fields"])
+        self.assertNotIn("Site_Address", json.dumps(shard["b"][self.PIN]))
+        meta = json.loads((ROOT / "assets/data/sno-bldg/_meta.json").read_text(encoding="utf-8"))
+        self.assertGreater(meta["parcels"], 200000)
+        self.assertIn("Owner names", meta["omitted"])
+        script = (ROOT / "scripts/build_sno_bldg_index.py").read_text(encoding="utf-8")
+        self.assertIn('"PIN", "ImprType", "Stories", "YrBuilt", "FinSize", "AttGarSF", "DetGarSF", "LastUpdD"', script)
+        self.assertNotIn("Owner_Name", script)
+        self.assertNotIn("Taxpayer", script)
+
+
+class TerrainEstimateTests(unittest.TestCase):
+    def test_downhill_direction_is_opposite_the_uphill_gradient(self):
+        west = node_call(ROOT / "assets/js/build-here-landscape.js", "M.fallFromGradient(1, 0)")
+        south = node_call(ROOT / "assets/js/build-here-landscape.js", "M.fallFromGradient(0, 1)")
+        flat = node_call(ROOT / "assets/js/build-here-landscape.js", "M.fallFromGradient(0, 0)")
+        self.assertEqual(west["compass"], "west")
+        self.assertEqual(west["deg"], 270)
+        self.assertEqual(south["compass"], "south")
+        self.assertEqual(south["deg"], 180)
+        self.assertEqual(flat["compass"], "flat")
+        self.assertIsNone(flat["deg"])
+
+
 if __name__ == "__main__":
     unittest.main()

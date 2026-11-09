@@ -15,6 +15,7 @@
     firstFloor: "First-floor area",
     attachedGarage: "Attached garage floor area",
     detachedGarage: "Detached garage or accessory footprint",
+    detachedGarageFloor: "Detached garage floor area",
     driveway: "Driveway and parking",
     hardscape: "Walkways, patios, decks and other hardscape",
     patio: "Patio",
@@ -73,6 +74,27 @@
         measuredZero: !!raw.measuredZero,
         note: raw.note || ""
       }
+    };
+  }
+
+  /* Physical fields from one Snohomish improvement-record row.
+     [FinSize, YrBuilt, Stories, AttGarSF, DetGarSF, dwellingRowCount, rowUpdated]
+     Garage floor area is returned separately and is not a footprint. */
+  function readSnoImprovement(rec) {
+    if (!rec || !rec.length) return null;
+    function pos(v) {
+      var n = Number(v);
+      return isFinite(n) && n > 0 ? n : null;
+    }
+    var year = pos(rec[1]);
+    return {
+      fin: pos(rec[0]),
+      year: year && year > 1800 ? Math.round(year) : null,
+      stories: pos(rec[2]),
+      attGar: pos(rec[3]),
+      detGar: pos(rec[4]),
+      nDwell: Number(rec[5]) > 0 ? Number(rec[5]) : 0,
+      updated: rec[6] ? String(rec[6]) : ""
     };
   }
 
@@ -316,6 +338,7 @@
     pushAuto("firstFloor", auto.firstFloor);
     pushAuto("attachedGarage", auto.attachedGarage);
     pushAuto("detachedGarage", auto.detached);
+    pushAuto("detachedGarageFloor", auto.detachedGarageFloor);
     pushAuto("otherBuilding", auto.other);
     pushAuto("driveway", auto.drive);
     pushAuto("hardscape", auto.hard);
@@ -376,7 +399,8 @@
     withEdit: withEdit,
     scenarios: scenarios,
     resolveStudy: resolveStudy,
-    pickPoint: pickPoint
+    pickPoint: pickPoint,
+    readSnoImprovement: readSnoImprovement
   };
   root.BuildHereMeasures = api;
   if (typeof module !== "undefined" && module.exports) module.exports = api;

@@ -21,11 +21,13 @@ jobs:
         run: pip install openpyxl
       - name: Rebuild house-size index
         run: python3 scripts/build_index.py --out assets/data/house-size
+      - name: Rebuild Snohomish physical-building extract
+        run: python3 scripts/build_sno_bldg_index.py --out assets/data/sno-bldg
       - name: Commit and push index
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/data/house-size
+          git add assets/data/house-size assets/data/sno-bldg
           if git diff --staged --quiet; then
             echo "Index unchanged"
           else

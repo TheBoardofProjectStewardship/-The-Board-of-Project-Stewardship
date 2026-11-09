@@ -15,6 +15,7 @@
     snoRoof: "https://gis.snoco.org/host/rest/services/Hosted/BUILDINGS__roofprints/FeatureServer/0/query",
     kcParcel: "https://gismaps.kingcounty.gov/arcgis/rest/services/Property/KingCo_PropertyInfo/MapServer/2/query",
     dem: "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer/getSamples",
+    demExport: "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer/exportImage",
     overpass: "https://overpass-api.de/api/interpreter",
     overpass2: "https://overpass.kumi.systems/api/interpreter",
     overpass3: "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
@@ -317,6 +318,30 @@
     return [r];
   }
 
+  /* Downhill direction of one gradient. gx is east, gy is north, and both point uphill.
+     The result is an estimate from those two numbers, not a pipe or ditch design. */
+  function fallFromGradient(gx, gy) {
+    if (!isFinite(gx) || !isFinite(gy)) return null;
+    var mag = Math.sqrt(gx * gx + gy * gy);
+    if (mag < 0.001) return { pct: 0, deg: null, compass: "flat" };
+    var up = Math.atan2(gx, gy) * 180 / Math.PI;
+    var down = (up + 180) % 360;
+    if (down < 0) down += 360;
+    var names = ["north", "northeast", "east", "southeast", "south", "southwest", "west", "northwest"];
+    return { pct: Math.round(mag * 1000) / 10, deg: Math.round(down), compass: names[Math.round(down / 45) % 8] };
+  }
+  function demPicture(rings, rasterFunction) {
+    if (!rings || !rings.length) return "";
+    var b = bbox(rings);
+    var padX = Math.max((b[2] - b[0]) * 0.35, 0.0003);
+    var padY = Math.max((b[3] - b[1]) * 0.35, 0.0003);
+    var box = [b[0] - padX, b[1] - padY, b[2] + padX, b[3] + padY].map(function (n) { return Math.round(n * 1e6) / 1e6; });
+    return EP.demExport + "?" + qs({
+      bbox: box.join(","), bboxSR: 4326, imageSR: 4326, size: "640,480", format: "png", f: "image",
+      renderingRule: JSON.stringify({ rasterFunction: rasterFunction })
+    });
+  }
+
   /* ---------- slope ---------- */
   function slope(rings, fr) {
     var R = proj(rings, fr), b = bbox(R);
@@ -326,7 +351,7 @@
     for (var j = 0; j < ny; j++) for (var i = 0; i < nx; i++) pts.push(fr.inv(b[0] + (i - 1) * step, b[1] + (j - 1) * step));
     return demSamples(pts).then(function (d) {
       var z = function (i, j) { return d.vals[j * nx + i]; };
-      var slopes = [], elev = [];
+      var slopes = [], elev = [], gxSum = 0, gySum = 0;
       for (var j = 1; j < ny - 1; j++) for (var i = 1; i < nx - 1; i++) {
         var x = b[0] + (i - 1) * step, y = b[1] + (j - 1) * step;
         if (!inPoly(x, y, R)) continue;
@@ -334,18 +359,21 @@
         if (c != null) elev.push(c);
         if ([e, wv, n, s].some(function (v) { return v == null; })) continue;
         var gx = (e - wv) / (2 * step), gy = (n - s) / (2 * step);
+        gxSum += gx; gySum += gy;
         slopes.push(Math.sqrt(gx * gx + gy * gy) * 100);
       }
       if (slopes.length < 4) return { ok: false, note: "Too few lidar samples fell inside the lot (" + slopes.length + ")." };
       var sorted = slopes.slice().sort(function (a, c) { return a - c; });
       var mean = slopes.reduce(function (a, v) { return a + v; }, 0) / slopes.length;
       var frac = function (t) { return slopes.filter(function (v) { return v >= t; }).length / slopes.length; };
+      var fall = fallFromGradient(gxSum / slopes.length, gySum / slopes.length);
       return {
         ok: true, step: Math.round(step * 10) / 10, samples: slopes.length, res: d.res,
         mean: Math.round(mean), median: Math.round(sorted[Math.floor(sorted.length / 2)]),
         p95: Math.round(sorted[Math.floor(sorted.length * 0.95)]), max: Math.round(sorted[sorted.length - 1]),
         pct15: Math.round(frac(15) * 100), pct25: Math.round(frac(25) * 100), pct40: Math.round(frac(40) * 100),
-        elevMin: Math.round(Math.min.apply(null, elev)), elevMax: Math.round(Math.max.apply(null, elev))
+        elevMin: Math.round(Math.min.apply(null, elev)), elevMax: Math.round(Math.max.apply(null, elev)),
+        fallPct: fall ? fall.pct : null, fallDeg: fall ? fall.deg : null, fallCompass: fall ? fall.compass : ""
       };
     });
   }
@@ -580,7 +608,15 @@
         '<tr><th scope="row">Steepest part</th><td>' + sl.p95 + "% (95th percentile); single steepest cell " + sl.max + "%, often a wall, rockery or building edge</td></tr>" +
         '<tr><th scope="row">Share of lot at 15%+ / 25%+ / 40%+</th><td>' + sl.pct15 + "% / " + sl.pct25 + "% / " + sl.pct40 + "%</td></tr>" +
         '<tr><th scope="row">Ground elevation range</th><td>' + n(sl.elevMin) + " to " + n(sl.elevMax) + " ft (" + (sl.elevMax - sl.elevMin) + " ft of fall)</td></tr>" +
-        '<tr><th scope="row">Source</th><td>USGS 3DEP bare-earth lidar, ' + (sl.res ? sl.res + " m" : "best available") + " resolution, sampled every " + sl.step + " ft. Confidence: medium. Lidar is bare earth, so slopes at retaining walls and building edges read steep. A topographic survey sets the real grades.</td></tr></table>";
+        '<tr><th scope="row">Estimated surface fall</th><td>' + (sl.fallCompass && sl.fallCompass !== "flat" ? "Toward the " + esc(sl.fallCompass) + (sl.fallDeg != null ? " (about " + sl.fallDeg + " degrees clockwise from north)" : "") + ", average gradient about " + sl.fallPct + "%." : "The sample grid is nearly flat, so no single downhill direction stands out.") + " This is the average bare-earth fall of the same 3DEP samples. It is not a flow path, ditch, or pipe.</td></tr>" +
+        '<tr><th scope="row">Source</th><td>USGS 3DEP bare-earth lidar, ' + (sl.res ? sl.res + " m" : "best available") + " resolution, sampled every " + sl.step + " ft. Confidence: medium. Lidar is bare earth, so slopes at retaining walls and building edges read steep. A topographic survey sets the real grades. This sample does not save a surface, draw surveyed contours, or size drainage.</td></tr></table>";
+      if (s && s.rings) {
+        var contour = demPicture(s.rings, "Preset 10ft Contour Interval");
+        var aspect = demPicture(s.rings, "Aspect Map");
+        h += '<h3>Estimated surface pictures</h3><p class="bh-muted">These two pictures are drawn by the USGS 3DEP service from bare-earth elevation. The contour view uses that service\'s 10-foot contour drawing. The aspect view shows which way the ground faces, which is the downhill direction of that surface. They are estimates. They are not a surveyed topo map and they are not an engineered drainage or pipe design.</p>';
+        h += '<figure class="bh-aerial"><img src="' + esc(contour) + '" alt="USGS 3DEP 10-foot contour drawing for this lot. Estimated bare-earth surface, not a survey."><figcaption>USGS 3DEP preset 10-foot contours. Estimated bare-earth surface.</figcaption></figure>';
+        h += '<figure class="bh-aerial"><img src="' + esc(aspect) + '" alt="USGS 3DEP aspect drawing for this lot. Estimated downhill direction of the bare-earth surface, not a drainage plan."><figcaption>USGS 3DEP aspect. Estimated downhill direction of the bare-earth surface.</figcaption></figure>';
+      }
     } else {
       var slopeHint = (s && s.stateAbbr === "WA")
         ? ' The <a href="' + LINKS.dnrLidar + '" target="_blank" rel="noopener">WA DNR lidar portal</a> has the same ground data to view by hand.'
@@ -601,7 +637,7 @@
     return h;
   }
 
-  var api = { analyze: analyze, renderHTML: renderHTML, _coverage: coverage, _frame: frame };
+  var api = { analyze: analyze, renderHTML: renderHTML, fallFromGradient: fallFromGradient, _coverage: coverage, _frame: frame };
   // Always expose on the browser global. A stray CommonJS `module` shim must not
   // steal the export or Generate shows "landscape calculator script did not load".
   root.BuildHereLandscape = api;

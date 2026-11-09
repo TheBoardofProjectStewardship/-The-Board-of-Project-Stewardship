@@ -1,0 +1,25 @@
+{
+  "v": 1,
+  "built": "2026-11-09",
+  "sourceModified": "2026-07-30",
+  "source": "Snohomish County Improvement Records (SnocoGIS). Physical building fields only.",
+  "sourceUrl": "https://www.arcgis.com/sharing/rest/content/items/3c5edc985cec4fba8b3938d16ed1d3c3",
+  "cadence": "Not a live assessor query. sourceModified is the SnocoGIS item date. built is the day this extract was written. The house-size workflow rebuilds this directory weekly once that workflow file is on the default branch.",
+  "fields": [
+    "FinSize",
+    "YrBuilt",
+    "Stories",
+    "AttGarSF",
+    "DetGarSF",
+    "dwellingRowCount",
+    "rowUpdated"
+  ],
+  "omitted": "Owner names, taxpayer names, site addresses, photos, sketches, and notes are not copied.",
+  "meaning": {
+    "FinSize": "Finished size on the largest dwelling improvement row. Not a roof outline and not garage floor area.",
+    "AttGarSF": "Attached garage floor area. Not added to the footprint.",
+    "DetGarSF": "Detached garage floor area. Not added to the footprint."
+  },
+  "parcels": 260051,
+  "shards": 126
+}
