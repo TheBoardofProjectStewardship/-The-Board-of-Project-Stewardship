@@ -116,7 +116,70 @@ class MeasureTests(unittest.TestCase):
         self.assertEqual(by["adu"]["state"], "ready")
         self.assertEqual(by["teardown"]["state"], "ready")
         self.assertEqual(by["remodel"]["state"], "ready")
-        self.assertNotIn("permit", by["addition"]["line"].split("not a permit")[0].lower() + "x")
+        self.assertIn("does not say a permit will be issued", by["addition"]["line"])
+
+    def test_edmonds_without_far_uses_coverage_not_a_fake_floor_cap(self):
+        cards = node_call(MEASURES, """M.scenarios({
+          lot: 10000, living: null, roof: 2000, zoningCoded: true, hasFloorCap: false,
+          floorCap: null, roomFar: null, roomCov: 1500, fullCov: 3500, envArea: 6000,
+          hasImpervious: false, roomImp: null
+        })""")
+        by = {c["id"]: c for c in cards}
+        self.assertNotIn("floor-area cap is coded", by["addition"]["line"])
+        self.assertEqual(by["addition"]["state"], "ready")
+        self.assertIn("1500", by["addition"]["metric"])
+        self.assertIn("no floor-area ratio", by["addition"]["line"].lower())
+        self.assertIn("3500", by["teardown"]["metric"])
+        self.assertNotIn("paving was not measured", by["shop"]["line"])
+        self.assertEqual(by["shop"]["state"], "ready")
+        self.assertNotIn("floor-area cap", by["remodel"]["line"])
+
+    def test_zero_capacity_is_not_ready(self):
+        cards = node_call(MEASURES, """M.scenarios({
+          lot: 8000, living: 3000, roof: 2800, zoningCoded: true, hasFloorCap: true,
+          floorCap: 3000, roomFar: 0, roomCov: 0, fullCov: 2800, hasImpervious: true, roomImp: -20
+        })""")
+        by = {c["id"]: c for c in cards}
+        self.assertNotEqual(by["addition"]["state"], "ready")
+        self.assertNotEqual(by["shop"]["state"], "ready")
+
+    def test_manual_living_and_paving_change_the_math(self):
+        data = node_call(MEASURES, """M.resolveStudy({
+          lot: 12088, zoningCoded: true, hasFloorCap: false, floorCap: null, coverageCap: 4200,
+          imperviousCap: null, envArea: 5000,
+          auto: { roof: { sf: 3278, source: 'Mapped roof outline', method: 'roof outline', confidence: 'Low' } },
+          manual: [
+            { kind: 'living', sf: 1800, source: 'Assessor card', method: 'assessor', retrieved: '2026-11-09', confidence: 'Medium' },
+            { kind: 'driveway', sf: 600, source: 'Survey', method: 'survey', retrieved: '2026-11-09', confidence: 'High' },
+            { kind: 'hardscape', sf: 200, source: 'Survey', method: 'survey', retrieved: '2026-11-09', confidence: 'High' }
+          ]
+        })""")
+        by = {c["id"]: c for c in data["cards"]}
+        self.assertEqual(data["effective"]["living"], 1800)
+        self.assertEqual(data["effective"]["buildings"], 3278)
+        self.assertTrue(data["bundle"]["open"]["verifiedLandscape"])
+        self.assertEqual(data["bundle"]["open"]["sf"], 12088 - 3278 - 600 - 200)
+        self.assertNotIn("Surveyed", " ".join(m["label"] for m in data["bundle"]["measures"] if m["kind"] == "roof"))
+        self.assertTrue(any(not m["automatic"] and m["kind"] == "living" for m in data["bundle"]["measures"]))
+        self.assertIn("coverage", by["addition"]["line"].lower())
+
+    def test_photo_cannot_be_high_confidence(self):
+        photo = node_call(MEASURES, "M.cleanMeasure({ kind: 'driveway', method: 'photo', sfLow: 200, sfHigh: 400, source: 'picture', confidence: 'High' })")
+        self.assertTrue(photo["ok"])
+        self.assertEqual(photo["measure"]["confidence"], "Low")
+        self.assertIsNone(photo["measure"]["sf"])
+
+    def test_detached_footprint_counts_once_toward_coverage(self):
+        data = node_call(MEASURES, """M.resolveStudy({
+          lot: 10000, zoningCoded: true, hasFloorCap: false, coverageCap: 3500,
+          auto: {
+            roof: { sf: 2000, source: 'Roof outline', method: 'roof outline' },
+            detached: { sf: 400, source: 'Detached outline', method: 'building outline' },
+            attachedGarage: { sf: 240, source: 'Assessor garage floor', method: 'assessor extract' }
+          }
+        })""")
+        self.assertEqual(data["effective"]["buildings"], 2400)
+        self.assertEqual(data["effective"]["roomCov"], 1100)
 
 
 class ExportTests(unittest.TestCase):
@@ -127,7 +190,7 @@ class ExportTests(unittest.TestCase):
           date: '2026-11-09',
           limitations: 'Planning estimate only. Not a permit determination.',
           sources: [{ name: 'County parcels', ok: true, note: 'outline' }, { name: 'Listing site', ok: false, note: 'not fetched' }],
-          bodyHtml: '<section class="bh-page"><h2>Study</h2><button type="button">Print</button><iframe src="https://maps.example/embed"></iframe><video src="x.mp4"></video><p>Roof outline 3278 sf</p><div class="bh-map-frame"><iframe src="https://maps.example/2"></iframe></div></section>'
+          bodyHtml: '<section class="bh-page"><h2>Study</h2><button type="button">Print</button><iframe src="https://maps.example/embed"></iframe><video src="x.mp4"></video><p>Roof outline 3278 sf</p><svg class="bh-siteplan"><path class="bh-lot" fill="#f3f1ea" stroke="#1f2933" d="M0 0 L10 0 L10 10 Z"/></svg><div class="bh-map-frame bh-noprint"><iframe src="https://maps.example/2"></iframe></div><p class="bh-print-only">Map embed omitted from print.</p></section>'
         })
         """
         html = node_call(EXPORT, expr)
@@ -137,7 +200,9 @@ class ExportTests(unittest.TestCase):
         self.assertIn("Not a permit determination", html)
         self.assertIn("Roof outline 3278 sf", html)
         self.assertIn("@page", html)
-        self.assertIn("page-break-after:always", html)
+        self.assertIn("page-break-after:auto", html)
+        self.assertIn(".bh-lot{fill:#f3f1ea", html)
+        self.assertNotIn("page-break-after:always", html)
         self.assertNotIn("<button", html.lower())
         self.assertNotIn("<iframe", html.lower())
         self.assertNotIn("<video", html.lower())

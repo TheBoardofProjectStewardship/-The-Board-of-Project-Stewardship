@@ -2811,13 +2811,12 @@ def home_feasibility_tool_section() -> str:
     </div>
 {tool}
     <p class="text-xs text-slate-400 font-light leading-relaxed">A planning estimate, not a legal, zoning or permit determination. Confirm every number with the city or county and a licensed professional. <a href="./build-here.html" class="text-secondary hover:underline">Open the full tool page</a> for the editor review form and the full disclaimer.</p>
-    <script src="/assets/js/build-here-rules.js?v=20261109a" defer></script>
-    <script src="/assets/js/build-here-landscape.js?v=20261109a" defer></script>
-    <script src="/assets/js/build-here-measures.js?v=20261109a" defer></script>
-    <script src="/assets/js/build-here-stage.js?v=20261109a" defer></script>
-    <script src="/assets/js/build-here-export.js?v=20261109a" defer></script>
-    <script src="/assets/js/build-here-tools.js?v=20261109a" defer></script>
-    <script src="/assets/js/build-here.js?v=20261109a" defer></script>
+    <script src="/assets/js/build-here-rules.js?v=20261109b" defer></script>
+    <script src="/assets/js/build-here-landscape.js?v=20261109b" defer></script>
+    <script src="/assets/js/build-here-measures.js?v=20261109b" defer></script>
+    <script src="/assets/js/build-here-stage.js?v=20261109b" defer></script>
+    <script src="/assets/js/build-here-export.js?v=20261109b" defer></script>
+    <script src="/assets/js/build-here.js?v=20261109b" defer></script>
   </section>"""
 
 

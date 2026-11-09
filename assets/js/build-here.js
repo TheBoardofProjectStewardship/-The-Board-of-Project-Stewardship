@@ -19,6 +19,7 @@
     seaEca: "https://services.arcgis.com/ZOyb2t4B0UYuYNYH/arcgis/rest/services/Environmentally_Critical_Areas_ECA/FeatureServer/",
     seaPermits: "https://services.arcgis.com/ZOyb2t4B0UYuYNYH/arcgis/rest/services/Residential_Building_Permits_Issued_and_Final/FeatureServer/0/query",
     snoParcel: "https://gis.snoco.org/sas/rest/services/SAS_Services/SAS_Parcels/MapServer/0/query",
+    snoSales: "https://services6.arcgis.com/z6WYi9VRHfgwgtyW/arcgis/rest/services/Recent_Property_Sales/FeatureServer/0/query",
     snoHost: "https://gis.snoco.org/host/rest/services/Hosted/",
     snoSlope: "https://gis.snoco.org/sas/rest/services/SAS_Services/SAS_Steep_Slopes/MapServer/0/query",
     snoAerial: "https://gis.snoco.org/sas/rest/services/SAS_Services/SAS_Imagery_2024/MapServer/export",
@@ -116,7 +117,7 @@
   /* ---------- data model ---------- */
   var state = null;
   function blank() {
-    return { input: "", matched: "", lon: null, lat: null, county: "", city: "", juris: "other", jurisLabel: "", parcel: "", assessorUrl: "", lot: null, lotSrc: "", zone: "", zoneSrc: "", existing: null, existingSrc: "", existingAsOf: "", footprint: null, footprintSrc: "", footprintKind: "", firstFloor: null, firstFloorSrc: "", garageFloor: null, garageFloorSrc: "", yearBuilt: "", yearSrc: "", rings: null, hazards: [], hazardNotes: [], nearNotices: [], frontDir: "", permits: [], permitNote: "", permitLinks: [], imagery: null, sources: [], manual: [], prepared: "" };
+    return { input: "", matched: "", lon: null, lat: null, county: "", city: "", juris: "other", jurisLabel: "", parcel: "", assessorUrl: "", lot: null, lotSrc: "", zone: "", zoneSrc: "", existing: null, existingSrc: "", existingAsOf: "", footprint: null, footprintSrc: "", footprintKind: "", firstFloor: null, firstFloorSrc: "", garageFloor: null, garageFloorSrc: "", yearBuilt: "", yearSrc: "", rings: null, hazards: [], hazardNotes: [], nearNotices: [], frontDir: "", permits: [], permitNote: "", permitLinks: [], imagery: null, sources: [], manual: [], prepared: "", factAttempts: [], gen: 0 };
   }
   function log(s, ok, name, note) { s.sources.push({ name: name, ok: ok, note: note || "" }); }
 
@@ -174,22 +175,26 @@
     }
     setJuris(s); return Promise.resolve();
   }
+  var lookupGen = 0;
   function lookup(address) {
-    var s = blank(); s.input = address;
-    setStatus("Looking up the address...");
+    var gen = ++lookupGen;
+    var s = blank(); s.input = address; s.gen = gen;
+    function live() { return gen === lookupGen; }
+    if (live()) setStatus("Looking up the address...");
     return geocode(s, address)
       .then(function () {
         setJuris(s);
-        setStatus("Found " + s.matched + ". Reading parcel records...");
+        if (s.gen === lookupGen) setStatus("Found " + s.matched + ". Reading parcel records...");
         if (s.juris === "outside") return s;
         if (/^King/.test(s.county)) return kingParcel(s);
         if (/^Snohomish/.test(s.county)) return snoParcel(s);
         return s;
       })
       .then(function () { return cityCheck(s); })
-      .then(function () { return Promise.all([zoning(s), hazards(s), permits(s), extras(s), neighbors(s), landscape(s), kingLivingSqft(s)]); })
-      .then(function () { buildImagery(s); return s; })
+      .then(function () { return Promise.all([zoning(s), hazards(s), permits(s), extras(s), neighbors(s), landscape(s), kingLivingSqft(s), snoBuildingFacts(s)]); })
+      .then(function () { if (s.gen !== lookupGen) return null; recordFactGaps(s); buildImagery(s); return s; })
       .catch(function (e) {
+        if (s.gen !== lookupGen) return null;
         if (e && e.message === "nomatch") return s;
         log(s, false, "Lookup", "Stopped early: " + (e && e.message));
         return s;
@@ -211,7 +216,7 @@
       s.landscape = emptyLandscape("No geocoded point, so house / driveway / landscape / slope could not be measured.");
       return Promise.resolve();
     }
-    setStatus("Measuring house, driveway, landscape and slope...");
+    if (!s.gen || s.gen === lookupGen) setStatus("Measuring house, driveway, landscape and slope...");
     return L.analyze(s).then(function (r) {
       s.landscape = r || emptyLandscape("Landscape analyze returned no result.");
       (r && r.sources || []).forEach(function (x) { log(s, x.ok, x.name, x.note); });
@@ -222,7 +227,7 @@
         if (row.key === "house" && row.sf != null && !s.footprint) {
           s.footprint = Math.round(row.sf);
           s.footprintSrc = row.src || "Mapped building footprint";
-          s.footprintKind = /roof|eave/i.test(s.footprintSrc) ? "roof" : "footprint";
+          s.footprintKind = "roof";
         }
       });
       applyLandscapeSqft(s);
@@ -244,7 +249,12 @@
       return r.json();
     }).then(function (j) {
       var rec = j && j.b && j.b[pin];
-      if (!rec || !rec[0]) { log(s, false, "King County living area", "PIN " + pin + " not in residential building extract"); return; }
+      if (!rec || !rec[0]) {
+        s.factAttempts = s.factAttempts || [];
+        s.factAttempts.push({ field: "Finished living area", name: "King County Assessor residential building extract", ok: false, note: "PIN " + pin + " is not in the residential building extract." });
+        log(s, false, "King County living area", "PIN " + pin + " not in residential building extract");
+        return;
+      }
       s.existing = Math.round(rec[0]);
       s.existingAsOf = j.asOf || "";
       s.existingSrc = "King County Assessor residential building extract (SqFtTotLiving)" + (j.asOf ? ", as of " + j.asOf : "");
@@ -265,7 +275,7 @@
     if (!s.footprint && by.house && by.house.sf != null) {
       s.footprint = Math.round(by.house.sf);
       s.footprintSrc = by.house.src || "Mapped building footprint";
-      s.footprintKind = /roof|eave/i.test(s.footprintSrc) ? "roof" : "footprint";
+      s.footprintKind = "roof";
     }
     if (s.imperv == null && by.drive && by.drive.sf != null && by.hard && by.hard.sf != null) {
       var hard = by.drive.sf + by.hard.sf;
@@ -345,6 +355,52 @@
           }).catch(function (e) { log(s, false, "Snohomish County roof outlines", e.message); });
       })
       .catch(function (e) { log(s, false, "Snohomish County parcels", e.message); });
+  }
+
+  /* Snohomish publishes parcel outlines and a sales layer. The parcel layer has
+     no living-area, story, or garage-floor field. The assessor account link does
+     not return those facts to an unsigned request. */
+  function snoBuildingFacts(s) {
+    if (!/^Snohomish/.test(s.county || "") || (s.stateAbbr && s.stateAbbr !== "WA")) return Promise.resolve();
+    s.factAttempts = s.factAttempts || [];
+    s.factAttempts.push({ field: "Finished living area", name: "Snohomish County parcels (SAS_Parcels)", ok: false, note: "Read the public parcel layer. It has no finished living area, story count, or garage floor-area field." });
+    s.factAttempts.push({ field: "Finished living area", name: "Snohomish County appraisal characteristics", ok: false, note: "SAS_Appraisal_Characteristics publishes condition, grade, and land type, not living area." });
+    s.factAttempts.push({ field: "Finished living area", name: "Assessor account page", ok: false, note: s.assessorUrl ? "The county link is kept below. An unsigned request does not return building facts, and this tool does not sign in." : "No assessor account link was on the parcel." });
+    s.factAttempts.push({ field: "Finished living area", name: "Listing sites", ok: false, note: "Redfin and Zillow are not queried. No supported public endpoint was verified." });
+    if (!s.parcel) {
+      s.factAttempts.push({ field: "Year built", name: "Snohomish County recent sales (SnocoGIS)", ok: false, note: "No parcel id, so the sales layer was not queried." });
+      return Promise.resolve();
+    }
+    var id = String(s.parcel).replace(/'/g, "");
+    return getJSON(EP.snoSales, { f: "json", where: "PARCEL_ID='" + id + "'", outFields: "YEAR_BUILT,YEAR_SOLD,IMPRV_TYPE", returnGeometry: false, resultRecordCount: 5 }).then(function (j) {
+      var feats = (j.features || []).slice().sort(function (a, b) { return (b.attributes.YEAR_SOLD || 0) - (a.attributes.YEAR_SOLD || 0); });
+      if (!feats.length) {
+        s.factAttempts.push({ field: "Year built", name: "Snohomish County recent sales (SnocoGIS)", ok: false, note: "No sale row for this parcel, so year built is not filled from sales.", url: "https://services6.arcgis.com/z6WYi9VRHfgwgtyW/arcgis/rest/services/Recent_Property_Sales/FeatureServer/0" });
+        return;
+      }
+      var y = feats[0].attributes.YEAR_BUILT;
+      if (y && !s.yearBuilt) {
+        s.yearBuilt = String(y);
+        s.yearSrc = "Snohomish County recent property sales, YEAR_BUILT on the " + (feats[0].attributes.YEAR_SOLD || "recorded") + " sale. Not the current building card.";
+        s.factAttempts.push({ field: "Year built", name: "Snohomish County recent sales (SnocoGIS)", ok: true, note: s.yearSrc, url: "https://services6.arcgis.com/z6WYi9VRHfgwgtyW/arcgis/rest/services/Recent_Property_Sales/FeatureServer/0" });
+      } else {
+        s.factAttempts.push({ field: "Year built", name: "Snohomish County recent sales (SnocoGIS)", ok: false, note: y ? "Year built was already set from another source." : "A sale row exists and YEAR_BUILT was blank." });
+      }
+      log(s, true, "Snohomish County recent property sales", feats.length + " sale row" + (feats.length > 1 ? "s" : ""));
+    }).catch(function (e) {
+      s.factAttempts.push({ field: "Year built", name: "Snohomish County recent sales (SnocoGIS)", ok: false, note: e.message });
+      log(s, false, "Snohomish County recent property sales", e.message);
+    });
+  }
+  function recordFactGaps(s) {
+    s.factAttempts = s.factAttempts || [];
+    var king = /^King/.test(s.county || "") && (!s.stateAbbr || s.stateAbbr === "WA");
+    var sno = /^Snohomish/.test(s.county || "") && (!s.stateAbbr || s.stateAbbr === "WA");
+    if (king && s.existing) s.factAttempts.push({ field: "Finished living area", name: "King County Assessor residential building extract", ok: true, note: s.existingSrc || "SqFtTotLiving" });
+    if (!king && !sno) {
+      s.factAttempts.push({ field: "Finished living area", name: "Local assessor extract", ok: false, note: "Finished living area is read automatically from the King County residential building extract. This place is outside that extract, and no other living-area service is wired." });
+      s.factAttempts.push({ field: "Finished living area", name: "Listing sites", ok: false, note: "Redfin and Zillow are not queried. No supported public endpoint was verified." });
+    }
   }
 
   /* Neighboring parcel outlines, used only to tell which lot lines face a street
@@ -631,86 +687,71 @@
     if (!M) return null;
     var prepared = s.prepared || todayStamp();
     s.prepared = prepared;
-    var records = [];
-    if (s.existing != null && v.existing != null && Number(v.existing) !== Number(s.existing)) {
-      records = M.withEdit([{
-        kind: "living", sf: s.existing, source: s.existingSrc || "Assessor record", url: s.assessorUrl || "",
-        retrieved: s.existingAsOf || prepared, method: "assessor extract", confidence: "Medium", automatic: true
-      }], "living", v.existing, prepared);
-    } else if (v.existing != null) {
-      records.push({
-        kind: "living", sf: v.existing, source: s.existingSrc || "Entered in this session", url: s.assessorUrl || "",
-        retrieved: s.existingAsOf || prepared, method: s.existingSrc ? "assessor extract" : "edited",
-        confidence: s.existingSrc ? "Medium" : "Low", automatic: !!s.existingSrc
-      });
+    var kindSel = ($("bh-footprint-kind") && $("bh-footprint-kind").value) || s.footprintKind || "roof";
+    var g = rowBy(s, "garage"), d = rowBy(s, "drive"), h = rowBy(s, "hard"), o = rowBy(s, "otherbld");
+    var edit = {};
+    if (v.existing != null && (s.existing == null || Number(v.existing) !== Number(s.existing))) edit.living = v.existing;
+    if (kindSel === "firstFloor") {
+      if (v.footprint != null) edit.firstFloor = v.footprint;
+    } else if (kindSel === "footprint") {
+      if (v.footprint != null) edit.survey = v.footprint;
+    } else if (v.footprint != null && (s.footprint == null || Number(v.footprint) !== Number(s.footprint))) {
+      edit.roof = v.footprint;
     }
-    var kindSel = ($("bh-footprint-kind") && $("bh-footprint-kind").value) || s.footprintKind || "";
-    var coverageSf = null, roofSf = null;
-    if (v.footprint != null && kindSel !== "firstFloor") {
-      var asRoof = kindSel !== "footprint";
-      records.push({
-        kind: asRoof ? "roof" : "footprint", sf: v.footprint,
-        source: s.footprintSrc || "Entered in this session", retrieved: prepared,
-        method: (/roof|eave/i.test(s.footprintSrc || "") || asRoof) ? "roof outline" : "surveyed footprint",
-        confidence: /OpenStreetMap|Microsoft/i.test(s.footprintSrc || "") ? "Low" : "Medium",
-        automatic: !!s.footprintSrc,
-        note: "Not living area and not gross floor area."
-      });
-      coverageSf = v.footprint;
-      roofSf = v.footprint;
-    }
-    if (s.firstFloor != null) {
-      records.push({
-        kind: "firstFloor", sf: s.firstFloor, source: s.firstFloorSrc || "Assessor first floor",
-        url: s.assessorUrl || "", retrieved: s.existingAsOf || prepared, method: "assessor extract",
-        confidence: "Medium", automatic: true, note: "First-floor area. Not a roof outline."
-      });
-    }
-    if (kindSel === "firstFloor" && v.footprint != null) {
-      records.push({
-        kind: "firstFloor", sf: v.footprint, source: "Edited in this session", retrieved: prepared,
-        method: "edited", confidence: "Medium", automatic: false,
-        note: "Entered as first-floor area, so it is not used as roof coverage."
-      });
-    }
-    if (s.garageFloor != null) {
-      records.push({
-        kind: "attachedGarage", sf: s.garageFloor, source: s.garageFloorSrc || "Assessor garage area",
-        url: s.assessorUrl || "", retrieved: s.existingAsOf || prepared, method: "assessor extract",
-        confidence: "Medium", automatic: true,
-        note: "Floor area on the building record. Not a detached footprint."
-      });
-    }
-    var g = rowBy(s, "garage"), d = rowBy(s, "drive"), h = rowBy(s, "hard");
-    var gSf = M.sfOrUnknown(g), driveSf = M.sfOrUnknown(d), hardSf = M.sfOrUnknown(h);
-    if (gSf != null) records.push({ kind: "detachedGarage", sf: gSf, source: (g && g.src) || "Mapped outline", retrieved: prepared, method: "building outline", confidence: "Low", automatic: true, measuredZero: !!(g && g.measuredZero), note: "Detached outline. Not attached garage floor area." });
-    if (driveSf != null) records.push({ kind: "driveway", sf: driveSf, source: (d && d.src) || "", retrieved: prepared, method: "paved-surface layer", confidence: (d && d.measuredZero) ? "Low" : "Medium", automatic: true, measuredZero: !!(d && d.measuredZero) });
-    if (hardSf != null) records.push({ kind: "hardscape", sf: hardSf, source: (h && h.src) || "", retrieved: prepared, method: "paved-surface layer", confidence: "Medium", automatic: true, measuredZero: !!(h && h.measuredZero) });
-    var bundle = M.assemble({ lot: v.lot, records: records, manual: s.manual || [], coverageSf: coverageSf, driveSf: driveSf, hardSf: hardSf });
     var aduRule = "";
     if (rs && rs.rules) rs.rules.forEach(function (r) { if (/ADU|accessory dwelling/i.test(r.label) && r.value) aduRule = r.value; });
-    var cards = M.scenarios({
-      lot: v.lot, living: v.existing, roof: roofSf, zoningCoded: !!rs,
-      roomFar: (rs && rs.floorCap != null && v.existing != null) ? rs.floorCap - v.existing : null,
-      roomCov: (rs && rs.coverage != null && coverageSf != null) ? rs.coverage - coverageSf : null,
-      roomImp: (rs && rs.impervious != null && v.imperv != null) ? rs.impervious - v.imperv : null,
+    var seed = seed3D(s, v, rs);
+    var solved = M.resolveStudy({
+      lot: v.lot,
+      date: prepared,
+      zoningCoded: !!rs,
+      hasFloorCap: !!(rs && rs.floorCap != null),
       floorCap: rs && rs.floorCap != null ? rs.floorCap : null,
-      aduRule: aduRule
+      coverageCap: rs && rs.coverage != null ? rs.coverage : null,
+      imperviousCap: rs && rs.impervious != null ? rs.impervious : null,
+      imperv: v.imperv,
+      envArea: seed.env && seed.env.area != null ? seed.env.area : null,
+      aduRule: aduRule,
+      edit: edit,
+      manual: s.manual || [],
+      auto: {
+        living: s.existing != null ? { sf: s.existing, source: s.existingSrc || "Assessor record", url: s.assessorUrl || "", retrieved: s.existingAsOf || prepared, method: "assessor extract", confidence: "Medium" } : null,
+        roof: s.footprint != null ? { sf: s.footprint, source: s.footprintSrc || "Mapped building outline", retrieved: prepared, method: "roof outline", confidence: /OpenStreetMap|Microsoft/i.test(s.footprintSrc || "") ? "Low" : "Medium", note: "Mapped outline. Not a survey, not living area, and not gross floor area." } : null,
+        firstFloor: s.firstFloor != null ? { sf: s.firstFloor, source: s.firstFloorSrc || "Assessor first floor", url: s.assessorUrl || "", retrieved: s.existingAsOf || prepared, method: "assessor extract", note: "First-floor area. Not a roof outline." } : null,
+        attachedGarage: s.garageFloor != null ? { sf: s.garageFloor, source: s.garageFloorSrc || "Assessor garage area", url: s.assessorUrl || "", retrieved: s.existingAsOf || prepared, method: "assessor extract", note: "Floor area on the building record. Not a detached footprint." } : null,
+        detached: M.sfOrUnknown(g) != null ? { sf: M.sfOrUnknown(g), source: (g && g.src) || "Mapped outline", retrieved: prepared, method: "building outline", confidence: "Low", measuredZero: !!(g && g.measuredZero), note: "Detached outline. Not attached garage floor area." } : null,
+        other: M.sfOrUnknown(o) != null ? { sf: M.sfOrUnknown(o), source: (o && o.src) || "Mapped outline", retrieved: prepared, method: "building outline", confidence: "Low", note: "Other mapped building. Counted in coverage, not in living area." } : null,
+        drive: M.sfOrUnknown(d) != null ? { sf: M.sfOrUnknown(d), source: (d && d.src) || "", retrieved: prepared, method: "paved-surface layer", confidence: (d && d.measuredZero) ? "Low" : "Medium", measuredZero: !!(d && d.measuredZero) } : null,
+        hard: M.sfOrUnknown(h) != null ? { sf: M.sfOrUnknown(h), source: (h && h.src) || "", retrieved: prepared, method: "paved-surface layer", confidence: "Medium", measuredZero: !!(h && h.measuredZero) } : null
+      }
     });
-    return { bundle: bundle, cards: cards, prepared: prepared };
+    if (s.landscape && s.landscape.rows && solved.bundle.open) {
+      s.landscape.rows.forEach(function (row) {
+        if (row.key !== "land") return;
+        row.sf = solved.bundle.open.sf;
+        row.label = solved.bundle.open.label;
+        row.verifiedLandscape = solved.bundle.open.verifiedLandscape;
+        row.src = solved.bundle.open.note;
+        row.conf = solved.bundle.open.sf == null ? "Unavailable" : (solved.bundle.open.verifiedLandscape ? "Medium" : "Low");
+      });
+    }
+    return { bundle: solved.bundle, cards: solved.cards, prepared: prepared, effective: solved.effective, seed: seed };
   }
   function measureValue(m) {
     if (m.sfLow != null && m.sfHigh != null) return fmt(Math.round(m.sfLow)) + " to " + fmt(Math.round(m.sfHigh)) + " sf (range)";
     if (m.sf == null) return "Not measured";
     return fmt(Math.round(m.sf)) + " sf";
   }
+  var METHOD_LABEL = { aerial: "Aerial estimate, typed by you (range, not a survey)", photo: "Unscaled photo, typed by you (range, not a survey)", assessor: "Assessor card, typed by you", "assessor extract": "Assessor extract", listing: "Listing page, typed by you", survey: "Survey, typed by you", permit: "Permit plan, typed by you", tape: "Tape measure, typed by you", edited: "Edited in this session", "roof outline": "Mapped roof or building outline (not a survey)", "paved-surface layer": "Paved-surface layer", "building outline": "Mapped building outline (not a survey)" };
+  function methodLabel(m) { return METHOD_LABEL[m] || m || ""; }
   function ledgerHtml(bundle) {
     if (!bundle) return "";
     var rows = bundle.measures.map(function (m) {
-      return "<tr><th scope=\"row\">" + esc(m.label) + "</th><td>" + measureValue(m) + "</td><td>" + esc(m.confidence || "") + "</td><td>" + esc(m.method || "") + (m.retrieved ? " · " + esc(m.retrieved) : "") + (m.source ? "<br><span class=\"bh-muted\">" + esc(m.source) + "</span>" : "") + (m.url ? "<br><a href=\"" + esc(m.url) + "\" target=\"_blank\" rel=\"noopener\">Source page</a>" : "") + (m.note ? "<br><span class=\"bh-muted\">" + esc(m.note) + "</span>" : "") + "</td></tr>";
+      var who = m.automatic ? "" : "User-entered. ";
+      return "<tr><th scope=\"row\">" + esc(m.label) + "</th><td data-label=\"Amount\">" + measureValue(m) + "</td><td data-label=\"Confidence\">" + esc(m.confidence || "") + "</td><td data-label=\"Source\">" + esc(who + methodLabel(m.method)) + (m.retrieved ? " · " + esc(m.retrieved) : "") + (m.source ? "<br><span class=\"bh-muted\">" + esc(m.source) + "</span>" : "") + (m.url ? "<br><a href=\"" + esc(m.url) + "\" target=\"_blank\" rel=\"noopener\">Source page</a>" : "") + (m.note ? "<br><span class=\"bh-muted\">" + esc(m.note) + "</span>" : "") + "</td></tr>";
     }).join("");
     var open = bundle.open || {};
-    var openRow = "<tr><th scope=\"row\">" + esc(open.label || "Open area") + "</th><td>" + (open.sf == null ? '<span class="bh-tbd">Not measured</span>' : fmt(Math.round(open.sf)) + " sf") + "</td><td>" + (open.verifiedLandscape ? "Medium" : "Low") + "</td><td>" + esc(open.note || "") + "</td></tr>";
+    var openRow = "<tr><th scope=\"row\">" + esc(open.label || "Open area") + "</th><td data-label=\"Amount\">" + (open.sf == null ? '<span class="bh-tbd">Not measured</span>' : fmt(Math.round(open.sf)) + " sf") + "</td><td data-label=\"Confidence\">" + (open.verifiedLandscape ? "Medium" : "Low") + "</td><td data-label=\"Source\">" + esc(open.note || "") + "</td></tr>";
     var extra = "";
     (bundle.notes || []).forEach(function (t) { extra += '<p class="bh-muted">' + esc(t) + "</p>"; });
     (bundle.conflicts || []).forEach(function (c) { extra += '<p class="bh-verify">' + esc(c.note) + "</p>"; });
@@ -761,7 +802,8 @@
     var f1 = function (n) { return n.toFixed(1); };
     var poly = ring.map(function (p, i) { return (i ? "L" : "M") + f1(X(p[0])) + " " + f1(Y(p[1])); }).join(" ") + " Z";
     var lines = ce.edges.map(function (e) {
-      return '<line x1="' + f1(X(e.a[0])) + '" y1="' + f1(Y(e.a[1])) + '" x2="' + f1(X(e.b[0])) + '" y2="' + f1(Y(e.b[1])) + '" class="bh-edge bh-edge-' + e.kind + '"/>';
+      var stroke = e.kind === "front" ? "#b45309" : e.kind === "rear" ? "#1d4ed8" : "#1f2933";
+      return '<line x1="' + f1(X(e.a[0])) + '" y1="' + f1(Y(e.a[1])) + '" x2="' + f1(X(e.b[0])) + '" y2="' + f1(Y(e.b[1])) + '" class="bh-edge bh-edge-' + e.kind + '" stroke="' + stroke + '" stroke-width="3"/>';
     }).join("");
     var env = "", envArea = null, envC = null, ecx = 0, ecy = 0;
     if (known) {
@@ -771,7 +813,7 @@
       if (ca) { ecx /= ca; ecy /= ca; envC = [ecx, ecy]; }
       if (er.rows.length) {
         var d = er.rows.map(function (r) { return "M" + f1(X(r[0])) + " " + f1(Y(r[1] + r[3])) + "h" + f1(r[2] * sc + 0.4) + "v" + f1(r[3] * sc + 0.4) + "h" + f1(-(r[2] * sc + 0.4)) + "z"; }).join("");
-        env = '<path d="' + d + '" class="bh-env"/>';
+        env = '<path d="' + d + '" class="bh-env" fill="rgba(22,101,52,0.28)" stroke="none"/>';
       }
     }
     var clamp = function (v, lo, hi) { return Math.max(lo, Math.min(hi, v)); };
@@ -788,10 +830,10 @@
     if (Math.abs(ely - ly) < 16 && Math.abs(elx - lx) < (tw(streetTxt) + 160) / 2) ely = ly > H / 2 ? ly - 22 : ly + 22;
     var envText = envArea != null ? (envArea > 0 ? "Envelope about " + fmt(Math.round(envArea / 10) * 10) + " sf" : "No envelope left after setbacks") : "Setbacks not verified";
     return '<svg viewBox="0 0 ' + W + " " + H + '" class="bh-siteplan" role="img" aria-label="Diagrammatic site plan: parcel outline, front, side and rear setbacks, and the remaining buildable envelope. ' + esc(envText) + '.">' +
-      '<path d="' + poly + '" class="bh-lot"/>' + env + lines +
-      '<text x="' + f1(lx) + '" y="' + f1(ly) + '" class="bh-front" text-anchor="middle" aria-hidden="true">Street side, front ' + label(F) + '</text>' +
-      '<text x="' + f1(elx) + '" y="' + f1(ely) + '" class="bh-envlabel" text-anchor="middle" aria-hidden="true">' + esc(envText) + '</text>' +
-      '<g class="bh-north" aria-hidden="true" transform="translate(' + (W - 24) + ',30)"><path d="M0 -14 L6 4 L0 0 L-6 4 Z"/><text y="18" text-anchor="middle">N</text></g>' +
+      '<path d="' + poly + '" class="bh-lot" fill="#f3f1ea" stroke="#1f2933" stroke-width="2"/>' + env + lines +
+      '<text x="' + f1(lx) + '" y="' + f1(ly) + '" class="bh-front" fill="#14532d" text-anchor="middle" aria-hidden="true">Street side, front ' + label(F) + '</text>' +
+      '<text x="' + f1(elx) + '" y="' + f1(ely) + '" class="bh-envlabel" fill="#14532d" text-anchor="middle" aria-hidden="true">' + esc(envText) + '</text>' +
+      '<g class="bh-north" aria-hidden="true" transform="translate(' + (W - 24) + ',30)"><path d="M0 -14 L6 4 L0 0 L-6 4 Z" fill="#1f2933"/><text y="18" text-anchor="middle" fill="#1f2933">N</text></g>' +
       '<text x="12" y="' + (H - 10) + '" class="bh-note" text-anchor="start" aria-hidden="true"><tspan class="bh-k-front">Front ' + label(F) + '</tspan>  <tspan class="bh-k-side">Side ' + label(S) + '</tspan>  <tspan class="bh-k-rear">Rear ' + label(Rr) + '</tspan>  Scale approximate</text>' +
       "</svg>";
   }
@@ -816,11 +858,21 @@
       if ([].slice.call($("bh-footprint-kind").options).some(function (o) { return o.value === kind; })) $("bh-footprint-kind").value = kind;
     }
     renderManualList();
-    if (s.imperv) { $("bh-imperv").value = s.imperv; $("bh-imperv-src").textContent = "From: " + s.impervSrc + ". Edit if you know better."; }
-    if (s.stories && $("bh-stories")) {
-      var st = String(Math.round(Number(s.stories)));
+    if ($("bh-imperv")) {
+      $("bh-imperv").value = s.imperv != null ? s.imperv : "";
+      $("bh-imperv-src").textContent = s.imperv != null ? "From: " + s.impervSrc + ". Edit if you know better." : "Leave blank when paving is unknown. Do not type 0.";
+    }
+    if ($("bh-stories")) {
+      var st = s.stories ? String(Math.round(Number(s.stories))) : "1";
       if ([].slice.call($("bh-stories").options).some(function (o) { return o.value === st; })) $("bh-stories").value = st;
     }
+    if ($("bh-front")) $("bh-front").value = "";
+    if ($("bh-units")) $("bh-units").value = "1";
+    if ($("bh-type")) $("bh-type").value = "addition";
+    ["bh-man-sf", "bh-man-low", "bh-man-high", "bh-man-source", "bh-man-url", "bh-man-date"].forEach(function (id) { if ($(id)) $(id).value = ""; });
+    if ($("bh-man-note")) $("bh-man-note").textContent = "";
+    if ($("bh-man-conf")) $("bh-man-conf").value = "Medium";
+    if ($("bh-man-method")) $("bh-man-method").value = "assessor";
     $("bh-confirm").hidden = false;
   }
 
@@ -837,7 +889,9 @@
     var prepared = (ctx && ctx.prepared) || todayStamp();
     var mapHtml = "";
     if (s.imagery) {
-      mapHtml = '<figure class="bh-aerial"><div class="bh-aerial-frame"><img src="' + esc(s.imagery.url) + '" alt="Aerial photo of this parcel with the parcel outline drawn on top" width="' + s.imagery.W + '" height="' + s.imagery.H + '"><svg viewBox="0 0 ' + s.imagery.W + " " + s.imagery.H + '" aria-hidden="true"><path d="' + s.imagery.path + '" class="bh-outline"/></svg></div></figure>';
+      var mw = isFinite(Number(s.imagery.W)) ? String(Number(s.imagery.W)) : "0";
+      var mh = isFinite(Number(s.imagery.H)) ? String(Number(s.imagery.H)) : "0";
+      mapHtml = '<figure class="bh-aerial"><div class="bh-aerial-frame"><img src="' + esc(s.imagery.url) + '" alt="Aerial photo of this parcel with the parcel outline drawn on top" width="' + esc(mw) + '" height="' + esc(mh) + '"><svg viewBox="0 0 ' + esc(mw) + " " + esc(mh) + '" aria-hidden="true"><path d="' + esc(s.imagery.path) + '" class="bh-outline" fill="rgba(255,255,255,0.08)" stroke="#ffffff" stroke-width="2"/></svg></div></figure>';
     } else if (s.rings) {
       mapHtml = sitePlanSVG(s, rs);
     }
@@ -859,7 +913,7 @@
       ["Jurisdiction", esc(s.jurisLabel)],
       ["Lot area", v.lot ? fmt(v.lot) + " sf" : "Enter by hand"],
       ["Zone", v.zone ? esc(v.zone) + (s.cityZone && s.cityZone !== v.zone ? " (city map shows " + esc(s.cityZone) + ")" : "") : "Enter by hand"],
-      ["Existing finished area", v.existing ? fmt(v.existing) + " sf" + (s.existingSrc ? ' <span class="bh-muted">· ' + esc(s.existingSrc) + "</span>" : " (your entry)") : "Not entered"],
+      ["Existing finished area", v.existing ? fmt(v.existing) + " sf" + ((s.existing != null && Number(v.existing) !== Number(s.existing)) || !s.existingSrc ? " (your entry" + (s.existing != null && Number(v.existing) !== Number(s.existing) ? "; recorded figure was " + fmt(s.existing) + " sf" : "") + ")" : ' <span class="bh-muted">· ' + esc(s.existingSrc) + "</span>") : "Not entered"],
       ["Building footprint", v.footprint ? fmt(v.footprint) + " sf" + (( ($("bh-footprint-kind") && $("bh-footprint-kind").value) || s.footprintKind) === "firstFloor" ? " (first-floor area, not roof coverage)" : (/roof|eave/i.test(s.footprintSrc || "") || (($("bh-footprint-kind") && $("bh-footprint-kind").value) || s.footprintKind) === "roof" ? " (roof outline, not living area)" : "")) : "Not entered"],
       ["Year built", s.yearBuilt ? esc(s.yearBuilt) + " (" + esc(s.yearSrc) + ")" : "Not in a browser-callable record. See the assessor page."],
       ["Stories (existing)", String(v.stories)],
@@ -881,13 +935,13 @@
     // Code review
     var cr;
     if (!rs) {
-      var why = s.juris === "other" ? "We could not match " + esc(s.jurisLabel) + " to a city in our list. Verify the rules with the city." : (s.juris === "city" && !v.lot ? "Enter the lot size in step 2 to see the rules and the math for " + esc(s.jurisLabel) + "." : (s.juris === "outside"
+      var why = s.juris === "other" ? "We could not match " + esc(s.jurisLabel) + " to a city in our list. Verify the rules with the city." : (s.juris === "city" && !v.lot ? "Enter the lot size under Edit the facts to see the rules and the math for " + esc(s.jurisLabel) + "." : (s.juris === "outside"
         ? "Zoning setbacks, coverage and FAR are not coded for this place. Verify those with the city or county. Parcel outline, lot area, house and slope notes below come from public parcel and elevation layers where they answer. This is not a permit determination."
         : "We do not have verified rules coded for zone " + esc(v.zone || "(blank)") + " here. Verify with the jurisdiction."));
       cr = '<p class="bh-verify">' + why + '</p><p><a href="./permits.html">The Board permit hub</a> lists city and county permit offices.</p>';
     } else {
       cr = '<h3>' + esc(rs.title) + '</h3><table class="bh-table bh-rules"><thead><tr><th scope="col">Standard</th><th scope="col">What the code says</th><th scope="col">Source (checked ' + R.CHECKED + ')</th></tr></thead><tbody>' +
-        rs.rules.map(function (r) { return "<tr><th scope=\"row\">" + esc(r.label) + "</th><td>" + (r.value == null ? '<span class="bh-verify">Verify with the jurisdiction.</span> ' : esc(r.value) + " ") + (r.note ? '<span class="bh-muted">' + esc(r.note) + "</span>" : "") + '</td><td><a href="' + esc(r.src.url) + '" target="_blank" rel="noopener">' + esc(r.src.label) + "</a></td></tr>"; }).join("") + "</tbody></table>" + (rs.caveat ? '<p class="bh-muted">' + esc(rs.caveat) + "</p>" : "");
+        rs.rules.map(function (r) { return "<tr><th scope=\"row\">" + esc(r.label) + "</th><td data-label=\"What the code says\">" + (r.value == null ? '<span class="bh-verify">Verify with the jurisdiction.</span> ' : esc(r.value) + " ") + (r.note ? '<span class="bh-muted">' + esc(r.note) + "</span>" : "") + '</td><td data-label=\"Source\"><a href="' + esc(r.src.url) + '" target="_blank" rel="noopener">' + esc(r.src.label) + "</a></td></tr>"; }).join("") + "</tbody></table>" + (rs.caveat ? '<p class="bh-muted">' + esc(rs.caveat) + "</p>" : "");
     }
     out.push(page("Code review", cr));
 
@@ -896,25 +950,27 @@
     if (rs) {
       var lines = [];
       if (rs.floorCap) {
-        var room = v.existing != null ? rs.floorCap - v.existing : null;
+        var usedLiving = ctx && ctx.effective ? ctx.effective.living : v.existing;
+        var room = usedLiving != null ? rs.floorCap - usedLiving : null;
         var farRatio = (v.lot && v.lot > 0) ? (rs.floorCap / v.lot) : null;
-        var usedFar = (v.lot && v.lot > 0 && v.existing != null) ? (v.existing / v.lot) : null;
+        var usedFar = (v.lot && v.lot > 0 && usedLiving != null) ? (usedLiving / v.lot) : null;
         lines.push(["Floor area cap (FAR)", fmt(rs.floorCap) + " sf (" + esc(rs.floorCapLabel) + ")"]);
         if (farRatio != null) lines.push(["FAR ratio", farRatio.toFixed(2) + " x lot (" + fmt(rs.floorCap) + " / " + fmt(v.lot) + ")" + (usedFar != null ? "; used about " + usedFar.toFixed(2) + " today" : "")]);
-        if (room != null) lines.push(["Existing counted area", fmt(v.existing) + " sf" + (s.existingSrc ? " (" + esc(s.existingSrc) + ")" : "")], ["Room left under the cap", room > 0 ? "<strong>About " + fmt(room) + " sf</strong> (" + fmt(rs.floorCap) + " cap minus " + fmt(v.existing) + " existing)" : "None. The house is at or over the cap as entered."]);
-        else lines.push(["Room left under the cap", "Enter the existing finished area in step 2 to see the room left."]);
+        if (room != null) lines.push(["Existing counted area", fmt(usedLiving) + " sf"], ["Room left under the cap", room > 0 ? "<strong>About " + fmt(room) + " sf</strong> (" + fmt(rs.floorCap) + " cap minus " + fmt(usedLiving) + " existing)" : "None. The house is at or over the cap as entered."]);
+        else lines.push(["Room left under the cap", "Enter the existing finished area under Edit the facts to see the room left."]);
         lines.push(["Before you rely on this", "Below-grade floor area may be exempt, so the counted existing area can be lower than the finished area." + (rs.key === "seattle-nr" ? " Since January 2026, ADU floor area counts toward FAR in Seattle NR zones." : "")]);
       } else { lines.push(["Floor area / FAR", esc(rs.floorCapLabel)]); }
       if (rs.coverage) {
         lines.push(["Lot coverage cap", fmt(rs.coverage) + " sf"]);
-        if (v.footprint) { var left = rs.coverage - v.footprint; lines.push(["Footprint room left", left > 0 ? "About " + fmt(left) + " sf of new footprint" : "None at the ground floor as entered. Building up may still work."]); }
+        var covBase = ctx && ctx.effective ? ctx.effective.buildings : null;
+        if (covBase != null) { var left = rs.coverage - covBase; lines.push(["Footprint room left", left > 0 ? "About " + fmt(left) + " sf of new footprint, counting the house outline and any detached footprints" : "None at the ground floor as entered. Building up may still work."]); }
       }
       if (rs.impervious) {
         lines.push(["Impervious surface cap", fmt(rs.impervious) + " sf (all hard surfaces)" + (rs.imperviousMax ? "; up to " + fmt(rs.imperviousMax) + " sf with approved low impact development" : "")]);
         if (v.imperv != null) { var il = rs.impervious - v.imperv; lines.push(["Existing impervious (your entry)", fmt(v.imperv) + " sf"], ["Impervious room left", il > 0 ? "<strong>About " + fmt(il) + " sf</strong> at the base limit" + (rs.imperviousMax ? ", about " + fmt(rs.imperviousMax - v.imperv) + " sf at the maximum" : "") : "None at the base limit as entered" + (rs.imperviousMax && rs.imperviousMax > v.imperv ? "; about " + fmt(rs.imperviousMax - v.imperv) + " sf at the maximum with low impact development" : "") + "."]); }
-        else lines.push(["Impervious room left", '<span class="bh-tbd">TBD.</span> Enter the existing impervious surface in step 2. It is not in the public records we can read.']);
+        else lines.push(["Impervious room left", '<span class="bh-tbd">Not measured.</span> Enter paving under Edit the facts, or add a source-backed driveway and hardscape. Unknown paving is not filled with zero.']);
       }
-      if (!rs.floorCap && v.existing == null) lines.push(["Existing house size", '<span class="bh-tbd">TBD.</span> Enter the finished area from the assessor record in step 2.']);
+      if (!rs.floorCap && (ctx && ctx.effective ? ctx.effective.living : v.existing) == null) lines.push(["Existing house size", '<span class="bh-tbd">Not measured.</span> This zone has no floor-area ratio. Enter finished living area under Edit the facts if you have it.']);
       if (rs.sideNote) lines.push(["Side setback split", esc(rs.sideNote)]);
       var typeNote = {
         addition: "An addition keeps the existing foundation and grandfathered conditions where they comply. It must fit the room left under the caps above.",
@@ -925,7 +981,7 @@
       }[v.type];
       lines.push(["For your project type", typeNote]);
       cap = '<table class="bh-table">' + lines.map(function (l) { return "<tr><th scope=\"row\">" + l[0] + "</th><td>" + l[1] + "</td></tr>"; }).join("") + "</table>";
-    } else cap = '<p class="bh-verify">' + (v.lot ? "The size limits for this zone are not coded yet. Verify with the jurisdiction." : "Enter the lot size in step 2 to see the size limits.") + '</p>';
+    } else cap = '<p class="bh-verify">' + (v.lot ? "The size limits for this zone are not coded yet. Verify with the jurisdiction." : "Enter the lot size under Edit the facts to see the size limits.") + '</p>';
     out.push(page("Zoning review", "<h3>How much could you add?</h3>" + cap + redFlags(s, v, rs)));
 
     // Lot imagery and site plan
@@ -933,8 +989,14 @@
       : (/^King/.test(s.county) && (!s.stateAbbr || s.stateAbbr === "WA")) ? "King County GIS parcels"
       : (s.landscape && s.landscape.parcelSrc) ? s.landscape.parcelSrc
       : "public parcel outline";
-    var img = s.imagery ? '<figure class="bh-aerial"><div class="bh-aerial-frame"><img src="' + esc(s.imagery.url) + '" alt="Aerial photo of the parcel with the county parcel outline drawn on top" width="' + s.imagery.W + '" height="' + s.imagery.H + '" crossorigin="anonymous"><svg viewBox="0 0 ' + s.imagery.W + " " + s.imagery.H + '" aria-hidden="true"><path d="' + s.imagery.path + '" class="bh-outline"/></svg></div><figcaption>' + esc(s.imagery.credit) + ". Parcel outline: " + esc(outlineCredit) + ". Outlines are approximate and are not a survey. The photo uses a web map projection, so it is not to scale.</figcaption></figure>" : '<p class="bh-muted">No parcel outline was found, so no aerial view is shown.</p>';
-    out.push(page("Existing lot", '<div class="bh-cols"><div>' + img + '</div><div><h3>Site plan diagram</h3>' + sitePlanSVG(s, rs) + '<p class="bh-muted">Diagrammatic only. Drawn from the county parcel outline. The shaded envelope is every point at least the required setback from each lot line. ' + (s.frontDir ? "The street side was set by hand in step 2." : (s.neighborRings ? "The street side is the lot line with no parcel beyond it nearest the address point; check it against the aerial and set it in step 2 if it is wrong." : "Which line is the front, side or rear is our guess from the address point; set the street side in step 2 if it is wrong.")) + ' A licensed surveyor sets the real lines.</p></div></div>'));
+    var img;
+    if (s.imagery) {
+      var iw = isFinite(Number(s.imagery.W)) ? String(Number(s.imagery.W)) : "0";
+      var ih = isFinite(Number(s.imagery.H)) ? String(Number(s.imagery.H)) : "0";
+      img = '<figure class="bh-aerial"><div class="bh-aerial-frame"><img src="' + esc(s.imagery.url) + '" alt="Aerial photo of the parcel with the parcel outline drawn on top" width="' + esc(iw) + '" height="' + esc(ih) + '" crossorigin="anonymous"><svg viewBox="0 0 ' + esc(iw) + " " + esc(ih) + '" aria-hidden="true"><path d="' + esc(s.imagery.path) + '" class="bh-outline" fill="rgba(255,255,255,0.08)" stroke="#ffffff" stroke-width="2"/></svg></div><figcaption>' + esc(s.imagery.credit) + ". Parcel outline: " + esc(outlineCredit) + ". Outlines are approximate and are not a survey. The photo uses a web map projection, so it is not to scale.</figcaption></figure>";
+    } else if (s.rings) img = '<p class="bh-muted">No aerial photo was returned for this lookup. The site plan uses the parcel outline.</p>';
+    else img = '<p class="bh-muted">No parcel outline was found, so no aerial view is shown.</p>';
+    out.push(page("Existing lot", '<div class="bh-cols"><div>' + img + '</div><div><h3>Site plan diagram</h3>' + sitePlanSVG(s, rs) + '<p class="bh-muted">Diagrammatic only. ' + (s.rings ? "Drawn from the parcel outline." : "No parcel outline was available.") + ' The shaded envelope is every point at least the required setback from each lot line. ' + (s.frontDir ? "The street side was set by hand under Edit the facts." : (s.neighborRings ? "The street side is the lot line with no parcel beyond it nearest the address point; check it against the aerial and set it under Edit the facts if it is wrong." : "Which line is the front, side or rear is our guess from the address point; set the street side under Edit the facts if it is wrong.")) + ' A licensed surveyor sets the real lines.</p></div></div>'));
 
     // Pull up the entered address on a live map (Google Maps embed + Earth). Photorealistic 3D Tiles need a Map Tiles API key.
     (function () {
@@ -958,13 +1020,12 @@
       }
       body += '<p><a class="bh-btn" href="' + esc(earthHref) + '" target="_blank" rel="noopener">Open in Google Earth (3D)</a> ';
       body += '<a class="bh-btn bh-btn-ghost" href="' + esc(gmapsHref) + '" target="_blank" rel="noopener">Open in Google Maps</a></p>';
-      body += '<p class="bh-muted">In-page Google Photorealistic 3D Tiles (Cesium / Map Tiles API) need a browser key from Google Cloud (Map Tiles API). Set <code>window.BOPS_GOOGLE_MAP_TILES_KEY</code> or a meta tag <code>name="bops-google-map-tiles-key"</code> on this page when Alex adds one - until then Earth + Maps links above pull up the real address with no paid key.</p>';
       body += '<div id="bh-photoreal-3d" class="bh-photoreal-3d" hidden></div>';
       out.push(page("Lot on the map", body));
     })();
 
     // Site coverage and landscape stay in every study.
-    var seed3d = seed3D(s, v, rs);
+    var seed3d = (ctx && ctx.seed) || seed3D(s, v, rs);
     try { localStorage.setItem("bh3dSeed", JSON.stringify(seed3d)); } catch (e) {}
 
     // Hard rule: keep site coverage and landscape in every study.
@@ -1000,13 +1061,15 @@
       '<div class="bh-cta"><h3>Talk to a local design-build pro</h3><p>See the firms the Board ranks for this kind of work, and how we rank them.</p><p><a class="bh-btn" href="./additions.html">Additions rankings</a> <a class="bh-btn" href="./custom-homes.html">Custom home rankings</a> <a class="bh-btn bh-btn-ghost" href="./how-we-rank.html">How we rank</a> <a class="bh-btn bh-btn-ghost" href="./permits.html">Permit resources</a></p></div>'));
 
     // Data sources
-    out.push(page("Data sources", "<h3>Limitations and confidence</h3><p class=\"bh-disclaimer\">" + esc(STUDY_LIMITS) + "</p><h3>What we read for this report</h3><ul>" + s.sources.map(function (x) { return "<li>" + (x.ok ? "Read live: " : "Did not answer: ") + esc(x.name) + (x.note ? " · " + esc(x.note) : "") + "</li>"; }).join("") + "</ul><h3>Rule sources</h3><ul>" + (rs ? rs.sources : []).map(function (x) { return '<li><a href="' + esc(x.url) + '" target="_blank" rel="noopener">' + esc(x.label) + "</a> (checked " + R.CHECKED + ")</li>"; }).join("") + "</ul>" + '<p class="bh-disclaimer"><strong>Planning estimate only.</strong> This is not a legal or zoning determination. Codes change; confirm with the jurisdiction and a licensed professional.</p>'));
+    var attempts = (s.factAttempts || []).map(function (x) { return "<li>" + esc(x.field) + ": " + (x.ok ? "Read: " : "Not filled from: ") + esc(x.name) + (x.note ? " · " + esc(x.note) : "") + (x.url ? ' · <a href="' + esc(x.url) + '" target="_blank" rel="noopener">layer</a>' : "") + "</li>"; }).join("");
+    out.push(page("Data sources", "<h3>Limitations and confidence</h3><p class=\"bh-disclaimer\">" + esc(STUDY_LIMITS) + "</p><h3>What we tried for living area and year built</h3>" + (attempts ? "<ul>" + attempts + "</ul>" : "<p>No extra building-fact lookup was required for this run.</p>") + "<h3>What we read for this report</h3><ul>" + s.sources.map(function (x) { return "<li>" + (x.ok ? "Read live: " : "Did not answer: ") + esc(x.name) + (x.note ? " · " + esc(x.note) : "") + "</li>"; }).join("") + "</ul><h3>Rule sources</h3><ul>" + (rs ? rs.sources : []).map(function (x) { return '<li><a href="' + esc(x.url) + '" target="_blank" rel="noopener">' + esc(x.label) + "</a> (checked " + R.CHECKED + ")</li>"; }).join("") + "</ul>" + '<p class="bh-disclaimer"><strong>Planning estimate only.</strong> This is not a legal or zoning determination. Codes change; confirm with the jurisdiction and a licensed professional.</p>'));
 
+    s.exportSources = (s.sources || []).concat((s.factAttempts || []).map(function (x) { return { name: x.field + ": " + x.name, ok: !!x.ok, note: x.note || "", url: x.url || "" }; })).concat((rs && rs.sources ? rs.sources : []).map(function (x) { return { name: x.label, ok: true, note: "Zoning rule, checked " + R.CHECKED, url: x.url }; })).concat((s.manual || []).map(function (m) { return { name: "User-entered " + (m.label || m.kind), ok: true, note: (m.method || "") + (m.retrieved ? " " + m.retrieved : "") + (m.source ? " " + m.source : ""), url: m.url || "" }; }));
     $("bh-report").innerHTML = out.join("");
     $("bh-report-wrap").hidden = false;
-    if (window.BuildHereTools && window.BuildHereTools.mountPhotoreal3d) {
-      try { window.BuildHereTools.mountPhotoreal3d(seed3d); } catch (e) {}
-    }
+    var stagePage = $("bh-report").querySelector(".bh-stage-page");
+    var confirm = $("bh-confirm");
+    if (stagePage && confirm && confirm.parentNode) stagePage.parentNode.insertBefore(confirm, stagePage.nextSibling);
     if ($("bh-lead-address")) $("bh-lead-address").value = s.matched || s.input;
   }
 
@@ -1070,7 +1133,7 @@
       address: state.matched || state.input || "Address not matched",
       date: state.prepared || todayStamp(),
       bodyHtml: report.innerHTML,
-      sources: state.sources || [],
+      sources: state.exportSources || state.sources || [],
       limitations: STUDY_LIMITS
     });
     var a = document.createElement("a");
@@ -1175,7 +1238,9 @@
       $("bh-go").disabled = true;
       $("bh-report-wrap").hidden = true;
       lookup(a).then(function (s) {
-        state = s; $("bh-go").disabled = false;
+        $("bh-go").disabled = false;
+        if (!s) return;
+        state = s;
         if (!s.matched) { setStatus("We could not match that address. Check the spelling and include the city and ZIP."); return; }
         fillForm(s);
         setStatus(s.juris === "other" ? "Found it in " + s.jurisLabel + ". We could not match that city to our list; verify the rules with the city. You can still read the parcel data below."
@@ -1183,10 +1248,10 @@
           : s.manualZone ? "Found " + s.matched + " in " + s.jurisLabel + ". " + s.city + " does not publish a zoning map we can read, so enter the zone from the city map below."
           : "Found " + s.matched + ". Options for this lot are first. Edit a fact under the study if a number is wrong.");
         render();
-        if ($("bh-report")) $("bh-report").focus();
+        if ($("bh-step3")) $("bh-step3").focus();
       });
     });
-    $("bh-confirm-form").addEventListener("submit", function (e) { e.preventDefault(); if (state) { render(); $("bh-report").focus(); } });
+    $("bh-confirm-form").addEventListener("submit", function (e) { e.preventDefault(); if (state) { render(); if ($("bh-step3")) $("bh-step3").focus(); } });
     $("bh-print").addEventListener("click", printReport);
     if ($("bh-download")) $("bh-download").addEventListener("click", downloadStudy);
     if ($("bh-manual-form")) $("bh-manual-form").addEventListener("submit", addManual);

@@ -46,7 +46,8 @@
       var state = STATE_LABEL[card.state] || "Partial";
       return '<article class="bh-scenario" data-state="' + esc(card.state) + '">' +
         '<div class="bh-scenario-fig">' + figure(card) + "</div>" +
-        '<div class="bh-scenario-copy"><p class="bh-scenario-kicker">' + esc(card.title) + '</p>' +
+        '<div class="bh-scenario-copy"><h3 class="bh-scenario-kicker">' + esc(card.title) + '</h3>' +
+        '<p class="bh-scenario-figlabel">Schematic icon, not this lot.</p>' +
         '<p class="bh-scenario-state">' + esc(state) + "</p>" +
         "<p>" + esc(card.line) + "</p>" +
         '<p class="bh-scenario-metric">' + esc(card.metric) + "</p></div></article>";
@@ -58,7 +59,7 @@
       '<p class="bh-stage-date">Prepared ' + esc(opts.date || "") + "</p></div></div>" +
       '<p class="bh-disclaimer"><strong>Planning estimate only.</strong> This is not a legal, zoning or permit determination. Confirm every number with the jurisdiction and a licensed professional before you design, buy or build.</p>' +
       '<h3>Ways this property could go</h3>' +
-      '<p class="bh-muted">Same address, five paths. A card stays partial or empty when a measurement or a zoning rule is missing. Nothing here is a permit.</p>' +
+      '<p class="bh-muted">The map above is this parcel when an outline or aerial was returned. The five diagrams are schematic icons, not a scaled plan. A card stays partial or empty when a measurement or a zoning rule is missing. Nothing here is a permit. <a href="#bh-confirm">Edit the facts used on these cards</a>.</p>' +
       '<div class="bh-scenario-grid">' + cardsHtml + "</div></div>";
   }
 

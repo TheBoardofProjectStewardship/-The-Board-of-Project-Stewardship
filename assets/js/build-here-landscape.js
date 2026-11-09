@@ -397,7 +397,7 @@
       out.matchedBy = h.f.numMatch === 2 ? "address" : h.f.numMatch === 1 ? "number" : "location";
       out.rings = lotRings;
       out.parcelAttrs = h.f.attributes || {};
-      // Feed the main study the outline (and any free assessor fields) so aerial, site plan, Pascal and CivilCraft share one lot.
+      // Feed the main study the outline and any free assessor fields so the aerial and site plan share one lot.
       if (!s.rings) s.rings = lotRings;
       var a = out.parcelAttrs, pin = a.PIN || a.COUNTY_PIN || a.STATE_PIN || a.PARCEL_ID || a.PID || a.Parcel_ID || a.TAX_PIN || a.PARCELID || a.PARCELNUM || a.PARCEL_NUM || "";
       if (!s.parcel && pin) s.parcel = String(pin);
@@ -566,8 +566,8 @@
     var h = "<h3>What is house, garage, driveway and landscape</h3>";
     if (r.warn) h += '<p class="bh-verify" role="alert"><strong>' + esc(r.warn) + "</strong></p>";
     if (r.rows.length) {
-      h += '<table class="bh-table"><thead><tr><th scope="col">Area</th><th scope="col">Square feet</th><th scope="col">Share of lot</th><th scope="col">Confidence</th><th scope="col">Source</th></tr></thead><tbody>' + r.rows.map(function (x) {
-        return "<tr><th scope=\"row\">" + esc(x.label) + "</th><td>" + (x.sf == null ? '<span class="bh-tbd">Unavailable</span>' : n(x.sf) + " sf") + "</td><td>" + (x.pct == null ? "–" : x.pct + "%") + "</td><td>" + esc(x.conf) + "</td><td>" + esc(x.src) + "</td></tr>";
+      h += '<table class="bh-table bh-land"><thead><tr><th scope="col">Area</th><th scope="col">Square feet</th><th scope="col">Share of lot</th><th scope="col">Confidence</th><th scope="col">Source</th></tr></thead><tbody>' + r.rows.map(function (x) {
+        return "<tr><th scope=\"row\">" + esc(x.label) + "</th><td data-label=\"Square feet\">" + (x.sf == null ? '<span class="bh-tbd">Unavailable</span>' : n(x.sf) + " sf") + "</td><td data-label=\"Share of lot\">" + (x.pct == null ? "none" : x.pct + "%") + "</td><td data-label=\"Confidence\">" + esc(x.conf) + "</td><td data-label=\"Source\">" + esc(x.src) + "</td></tr>";
       }).join("") + "</tbody></table>";
     }
     var landRow = (r.rows || []).filter(function (x) { return x.key === "land" && x.verifiedLandscape === false && x.sf != null; })[0];
