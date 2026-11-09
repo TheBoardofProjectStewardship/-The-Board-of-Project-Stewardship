@@ -20,6 +20,8 @@ Bellevue's single-family neighborhoods, from Lake Hills and Crossroads to Newpor
 
 What changed is the rulebook. Washington's Growth Management Act now sets minimum standards that cities must follow for ADUs, and Bellevue's code has been rewritten around them. The Board's [ADU hub](../adu.html), the [ADU checklist](../adu-checklist.html), and the [ADU cost factors](../adu-cost-factors.html) page explain the general planning sequence. This post focuses on what Bellevue's own code says. Firms that work locally are listed in the Board's [Bellevue directory](../bellevue.html).
 
+![Stakes and string marking a backyard ADU footprint in Bellevue](../assets/images/posts/2026-10-09-bellevue-adu-setback-4.webp "Grade stakes and string mark an accessory dwelling footprint in a Bellevue backyard, set back from the house and the rear fence.")
+
 ## How many units, and in what shape
 
 [LUC 20.20.120](https://bellevue.municipal.codes/LUC/20.20.120) allows up to two ADUs on each lot in a land use district where a single-family dwelling may be located. The state statute that drives it, [RCW 36.70A.681](https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.681), spells out the configurations cities must accept: one attached and one detached, two attached, or two detached units in one or two buildings.
@@ -31,6 +33,8 @@ The code treats the two types differently:
 
 A few limits catch homeowners off guard. A site may not hold both an ADU and a business that needs a Home Occupation Permit. A lot created through a unit lot subdivision and developed under that approval cannot add a new ADU. And until use and occupancy of the ADU is allowed under the city's building code, the unit stays subordinate to the main house on the same lot.
 
+![Attached ADU wing with its own door on a Bellevue rambler](../assets/images/posts/2026-10-09-bellevue-adu-attached-5.webp "A one-story wing with its own door and window is attached to a Bellevue rambler as a second living unit.")
+
 ## The 1,200 square foot cap and its exceptions
 
 Bellevue limits each ADU to 1,200 square feet of floor area. For attached units, that floor area does not count toward the maximum allowable square footage for single-family and middle housing projects under LUC 20.20.390.
@@ -38,6 +42,8 @@ Bellevue limits each ADU to 1,200 square feet of floor area. For attached units,
 The director may approve more floor area in three situations: the ADU sits entirely on a single floor of the primary structure, it is an addition to an existing detached accessory structure, or it is created by converting one. A structure previously permitted as a guest cottage can be converted without the floor-area cap, as long as the conversion does not expand it. Up to 300 square feet per unit used for parking or unheated storage is exempt from the maximum.
 
 For comparison, the state statute says a city may not set an ADU floor-area maximum below 1,000 square feet and may not hold roof height below 24 feet unless the house itself is held lower. Bellevue's numbers sit at or above those floors.
+
+![Compact Bellevue ADU interior with a galley kitchen and bedroom](../assets/images/posts/2026-10-09-bellevue-adu-interior-6.webp "A compact Bellevue accessory dwelling interior with a galley kitchen, a table for two, and a bedroom beyond the doorway.")
 
 ![Bellevue accessory dwelling unit at the framing stage, with roof trusses, open stud walls on a concrete slab](../assets/images/posts/2026-10-09-adu-bellevue-2.webp)
 
@@ -47,11 +53,15 @@ The most practical clause for older Bellevue lots is about existing buildings. T
 
 That does not make a garage conversion simple. A garage slab usually needs a moisture and insulation plan before it can become living space. The framing may need new headers where the garage door was, new windows for egress and light, and a real foundation review if walls will carry more load. Sewer, water, and power often have to run from the house, and the panel may need more capacity. The video below follows the framing stage of a garage-to-ADU conversion and shows how much of the original shell gets rebuilt.
 
+![Garage being converted into an ADU in a Bellevue backyard](../assets/images/posts/2026-10-09-bellevue-adu-garage-7.webp "Open framing and housewrap on a detached garage in a Bellevue backyard, with insulation stacked on the slab.")
+
 https://www.youtube.com/watch?v=M172vM8DngI
 
 ## Parking, fees, and occupancy
 
 Off-street parking for an ADU is in addition to whatever the main house requires. Under Bellevue's code, no extra stall is needed for an ADU under 1,000 square feet of floor area (garage area excluded) or for a unit within one-half mile of a major transit stop, as the state defines that term. Otherwise, one off-street space is required per ADU. With East Link light rail stations in Bellevue, it is worth checking your parcel's distance to the nearest stop before you design around a parking pad.
+
+![Off-street parking pad beside a Bellevue backyard ADU](../assets/images/posts/2026-10-09-bellevue-adu-parking-8.webp "An empty concrete parking pad sits beside a backyard accessory dwelling on a Bellevue lot.")
 
 [RCW 36.70A.681](https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.681) also caps impact fees on ADU construction at 50 percent of what the principal unit would pay, and it says a city may not require the owner to live in the ADU or the main house. Ask the city for a fee estimate on your specific project rather than relying on a general figure.
 
@@ -60,6 +70,8 @@ One timing note: the city's published code says this section has been amended by
 ## Permits and the electrical twist
 
 An ADU is new living space, so expect building, mechanical, plumbing, and electrical permits, plus any land use review your site triggers. Bellevue is one of the participating jurisdictions on [MyBuildingPermit.com](https://www.mybuildingpermit.com/), the shared online portal several Puget Sound cities use for applications and inspection requests.
+
+![Printed ADU floor plan and a pencil for a Bellevue permit set](../assets/images/posts/2026-10-09-bellevue-adu-plan-set-9.webp "Printed floor-plan linework, a pencil, and a scale rest on a table while a Bellevue ADU plan set is prepared.")
 
 Electrical work is the piece people miss. Washington L&I lists Bellevue among the [cities that do their own electrical permits and inspections](https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections), so the electrical permit for a new subpanel, kitchen circuits, heat pump, and lighting comes from the city, not from L&I. If a bid says "electrician pulls an L&I permit," ask who is really pulling the Bellevue permit and when the rough-in inspection is scheduled. The Board's [permits](../permits.html) page walks through how inspections usually sequence on a remodel or addition.
 
