@@ -2800,21 +2800,24 @@ def home_feasibility_tool_section() -> str:
     """
     page = (Path(__file__).resolve().parent / "build-here.html").read_text(encoding="utf-8")
     start = page.index('    <section class="bh-card" aria-labelledby="bh-step1">')
-    end = page.index("</section>", page.index('<section id="bh-report-wrap"')) + len("</section>")
+    end = page.index("<!-- bh-tool-end -->")
     tool = page[start:end].replace('<h2 id="bh-step3" class="text-2xl font-black text-white">', '<h2 id="bh-step3" class="text-xl font-black text-white">')
     return f"""  <section id="bh-home" class="mb-14" aria-labelledby="bh-home-h">
     <link rel="stylesheet" href="/assets/css/build-here.css">
     <div class="mb-6 border-b border-white/10 pb-4">
       <span class="text-secondary text-xs font-bold uppercase tracking-widest">Good Steward Tools</span>
       <h2 id="bh-home-h" class="text-3xl font-black text-white tracking-tight">What can I build here?</h2>
-      <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Type a United States street address and get a free first-pass feasibility study: parcel facts, landscape and slope, and design tools. Zoning math (FAR, setbacks and coverage) is coded for Seattle (Neighborhood Residential), Edmonds (LDR), Kenmore (R-1, R-4, R-6), unincorporated King County and unincorporated Snohomish County. Elsewhere in the US, public parcel and landscape data run where a layer answers, and zoning says verify with the jurisdiction.</p>
+      <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Type a United States street address. The first result is what that lot can take: addition, ADU, garage or shop, teardown, or remodel, using the public facts we can read. Zoning math (FAR, setbacks and coverage) is coded for Seattle (Neighborhood Residential), Edmonds (LDR), Kenmore (R-1, R-4, R-6), unincorporated King County and unincorporated Snohomish County. Elsewhere in the US, public parcel data runs where a layer answers, and zoning says verify with the jurisdiction.</p>
     </div>
 {tool}
     <p class="text-xs text-slate-400 font-light leading-relaxed">A planning estimate, not a legal, zoning or permit determination. Confirm every number with the city or county and a licensed professional. <a href="./build-here.html" class="text-secondary hover:underline">Open the full tool page</a> for the editor review form and the full disclaimer.</p>
-    <script src="/assets/js/build-here-rules.js?v=20261105b" defer></script>
-    <script src="/assets/js/build-here-landscape.js?v=20261105b" defer></script>
-    <script src="/assets/js/build-here-tools.js?v=20261105b" defer></script>
-    <script src="/assets/js/build-here.js?v=20261106a" defer></script>
+    <script src="/assets/js/build-here-rules.js?v=20261109a" defer></script>
+    <script src="/assets/js/build-here-landscape.js?v=20261109a" defer></script>
+    <script src="/assets/js/build-here-measures.js?v=20261109a" defer></script>
+    <script src="/assets/js/build-here-stage.js?v=20261109a" defer></script>
+    <script src="/assets/js/build-here-export.js?v=20261109a" defer></script>
+    <script src="/assets/js/build-here-tools.js?v=20261109a" defer></script>
+    <script src="/assets/js/build-here.js?v=20261109a" defer></script>
   </section>"""
 
 

@@ -1,5 +1,5 @@
 /* Design it in 3D: a small massing sketcher seeded from the Build Here report
-   (localStorage "bh3dSeed"), plus a hand-off to Pascal Editor (MIT, pascalorg/editor). */
+   (localStorage "bh3dSeed"). */
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
@@ -17,7 +17,7 @@ const KIND = { house: { c: 0xe8dcc8, w: 40, d: 30 }, addition: { c: 0x93c5fd, w:
 const FLOOR = 10;
 
 $('b3-info').textContent = demo
-  ? 'No lot loaded yet. Run an address on What can I build here? and use "Open the 3D editor" in the report. Showing a sample ' + fmt(seed.lot) + ' sf lot.'
+  ? 'No lot loaded yet. Run an address on What can I build here?, then open the massing sketch from that study. Showing a sample ' + fmt(seed.lot) + ' sf lot.'
   : 'Loaded: ' + seed.address + (seed.zone ? ' · zone ' + seed.zone : '') + (seed.lot ? ' · lot ' + fmt(seed.lot) + ' sf' : '') + '.';
 
 // Center the lot
@@ -143,20 +143,5 @@ renderer.setAnimationLoop(() => { controls.update(); renderer.render(scene, came
 
 // Exports
 function dl(name, href) { const a = document.createElement('a'); a.href = href; a.download = name; a.click(); }
-$('b3-json').onclick = () => dl('bops-3d-sketch.json', URL.createObjectURL(new Blob([JSON.stringify({ seed, boxes: boxes.map((b) => Object.assign({ x: b.position.x + cx, y: -b.position.z + cy }, b.userData)) }, null, 2)], { type: 'application/json' })));
-$('b3-png').onclick = () => dl('bops-3d-sketch.png', renderer.domElement.toDataURL('image/png'));
-
-// Pascal Editor hand-off
-function brief() {
-  const sb = seed.setbacks || {}, n = (x) => typeof x === 'number' ? x + ' ft' : 'verify';
-  const bx = boxes.map((b) => '- ' + b.userData.kind + ': ' + b.userData.w + ' x ' + b.userData.d + ' ft, ' + b.userData.floors + ' floor(s)').join('\n');
-  return 'Model a residential lot' + (seed.address ? ' at ' + seed.address : '') + '. Lot outline in feet (x east, y north): ' + JSON.stringify(seed.ring) + '.' +
-    (seed.lot ? ' Lot area ' + fmt(seed.lot) + ' sf.' : '') + (seed.zone ? ' Zone ' + seed.zone + '.' : '') +
-    ' Setbacks: front ' + n(sb.front) + ', side ' + n(sb.side) + ', rear ' + n(sb.rear) + '.' + (seed.height ? ' Height limit ' + seed.height + ' ft.' : '') +
-    (seed.coverage ? ' Lot coverage cap ' + fmt(seed.coverage) + ' sf.' : '') +
-    (bx ? '\nPlace these buildings inside the setbacks, with walls, a slab, a roof, doors and windows:\n' + bx : '\nPlace a single-family house inside the setbacks with walls, a slab, a roof, doors and windows.');
-}
-const tab = (m) => { $('b3-mass').hidden = m !== 'mass'; $('b3-pascal').hidden = m === 'mass'; $('b3-tab-mass').classList.toggle('b3-off', m !== 'mass'); $('b3-tab-pascal').classList.toggle('b3-off', m === 'mass'); $('b3-tab-mass').setAttribute('aria-selected', m === 'mass'); $('b3-tab-pascal').setAttribute('aria-selected', m !== 'mass'); if (m !== 'mass') $('b3-prompt').value = brief(); else resize(); };
-$('b3-tab-mass').onclick = () => tab('mass'); $('b3-tab-pascal').onclick = () => tab('pascal');
-$('b3-copy').onclick = () => { navigator.clipboard && navigator.clipboard.writeText($('b3-prompt').value); $('b3-copy').textContent = 'Copied'; };
-$('b3-embed').onclick = () => { $('b3-frame-wrap').innerHTML = '<iframe src="https://editor.pascal.app/" title="Pascal Editor" allow="clipboard-read; clipboard-write; fullscreen; xr-spatial-tracking" loading="lazy"></iframe>' + (navigator.gpu ? '' : '<p class="bh-help">This browser does not report WebGPU, so Pascal may run slowly or not at all. Try current Chrome or Edge on a desktop.</p>'); };
+$('b3-json').onclick = () => dl('lot-massing-sketch.json', URL.createObjectURL(new Blob([JSON.stringify({ seed, boxes: boxes.map((b) => Object.assign({ x: b.position.x + cx, y: -b.position.z + cy }, b.userData)) }, null, 2)], { type: 'application/json' })));
+$('b3-png').onclick = () => dl('lot-massing-sketch.png', renderer.domElement.toDataURL('image/png'));

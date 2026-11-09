@@ -479,7 +479,7 @@
       { key: "garage", label: "Detached garage / accessory building", sf: null, conf: "Unavailable", src: "Needs the lot outline to tell which outbuildings belong to this property." },
       { key: "drive", label: "Driveway and parking", sf: null, conf: "Unavailable", src: "Needs the lot outline." },
       { key: "hard", label: "Walkways, patios, decks and other hardscape", sf: null, conf: "Unavailable", src: "Needs the lot outline." },
-      { key: "land", label: "Remaining landscape", sf: null, conf: "Unavailable", src: "Needs the lot outline." }
+      { key: "land", label: "Unclassified open area (not verified landscaping)", sf: null, verifiedLandscape: false, conf: "Unavailable", src: "Needs the lot outline. Not filled in as landscaping." }
     ];
   }
 
@@ -497,7 +497,7 @@
       var rows = [];
       rows.push({ key: "lot", label: "Lot area", sf: lot, pct: 100, conf: fromCounty ? "High" : (out.parcelBig ? "Low" : parcelAuto ? "Medium-low" : "Medium"), src: lotSrc + (Math.abs(c.area - lot) > lot * 0.03 ? ". The mapped outline measures " + Math.round(c.area).toLocaleString("en-US") + " sf." : "") });
       if (!gotB) rows.push({ key: "house", label: "House footprint", sf: null, conf: "Unavailable", src: "No building outline layer answered for this address." });
-      else if (!house) rows.push({ key: "house", label: "House footprint", sf: 0, pct: 0, conf: "Medium", src: bSrc + ": no building mapped on this lot." });
+      else if (!house) rows.push({ key: "house", label: "House footprint", sf: null, conf: "Unavailable", src: bSrc + ": no building outline intersected this lot. That is not a measured house of 0 sf." });
       // Suspect footprint: a machine-traced outline that fills most of the lot, or one that mostly lies outside it.
       var suspect = house && lowB && (house.sf > c.area * 0.8 || house.full > house.sf * 2);
       if (suspect) out.notes.push("The mapped building outline " + (house.sf > c.area * 0.8 ? "covers over 80% of the lot" : "lies mostly outside this lot") + ", which is unusual for a house. It may be merged with neighboring buildings or the lot may be wrong. The house number below is clipped to the lot and marked low confidence; check it on the aerial.");
@@ -511,15 +511,38 @@
       rows.push({ key: "garage", label: "Detached garage / accessory building", sf: garageLabel.sf, pct: garageLabel.sf != null ? pct(garageLabel.sf, c.area) : null, conf: garageLabel.conf, src: garageLabel.src });
       var otherAcc = acc.filter(function (p) { return gar.indexOf(p) < 0; }).reduce(function (t, p) { return t + p.sf; }, 0);
       if (otherAcc > 0) rows.push({ key: "otherbld", label: "Other buildings", sf: Math.round(otherAcc), pct: pct(otherAcc, c.area), conf: lowB ? "Medium-low" : "Medium", src: bSrc });
-      if (!gotD) rows.push({ key: "drive", label: "Driveway and parking", sf: null, conf: "Unavailable", src: "No public driveway or paved-surface layer answered for this address. Measure it from the aerial or a survey." });
+      if (!gotD) rows.push({ key: "drive", label: "Driveway and parking", sf: null, conf: "Unavailable", src: "No public driveway or paved-surface layer answered for this address. Left blank, not zero. A survey, a permit plan, or a typed source can fill it." });
       else {
         var est = c.driveEst > 0, mapped = c.drive > 0;
-        rows.push({ key: "drive", label: "Driveway and parking", sf: r10(c.drive + c.driveEst), pct: pct(c.drive + c.driveEst, c.area), conf: seattle ? "Medium" : (est || mapped) ? "Low (estimated)" : "Low", src: dSrc + (est ? ". About " + r10(c.driveEst) + " sf is a mapped driveway centerline at an assumed 10 ft width." : "") + (seattle ? " Mapped from 2015 aerials; newer paving is not shown." : (!est && !mapped ? ". No driveway is mapped in OpenStreetMap here; many residential driveways are not, so 0 may be an undercount." : "")) + " Only paving inside the lot lines counts." });
+        if (!mapped && !est && !seattle) {
+          rows.push({ key: "drive", label: "Driveway and parking", sf: null, conf: "Unavailable", src: dSrc + ". The layer answered and did not map a driveway. Absence is not a measurement of 0. Many residential driveways are missing from OpenStreetMap." });
+        } else if (seattle && !mapped && !est) {
+          rows.push({ key: "drive", label: "Driveway and parking", sf: 0, measuredZero: true, pct: 0, conf: "Low", src: dSrc + ". The 2015 impervious layer classified no driveway on this lot. Newer paving may exist. This zero is that classification, not a guess." });
+        } else {
+          rows.push({ key: "drive", label: "Driveway and parking", sf: r10(c.drive + c.driveEst), pct: pct(c.drive + c.driveEst, c.area), conf: seattle ? "Medium" : "Low (estimated)", src: dSrc + (est ? ". About " + r10(c.driveEst) + " sf is a mapped driveway centerline at an assumed 10 ft width." : "") + (seattle ? " Mapped from 2015 aerials; newer paving is not shown." : "") + " Only paving inside the lot lines counts." });
+        }
       }
-      if (seattle && gotD) rows.push({ key: "hard", label: "Walkways, patios, decks and other hardscape", sf: r10(c.hard), pct: pct(c.hard, c.area), conf: "Medium", src: hSrc + ". Mapped from 2015 aerials; newer work is not shown." });
-      else rows.push({ key: "hard", label: "Walkways, patios, decks and other hardscape", sf: null, conf: "Unavailable", src: "No free public walkway or patio layer covers this address." });
-      var haveAll = gotB && gotD && seattle;
-      rows.push({ key: "land", label: haveAll ? "Remaining landscape (softscape)" : "Remaining open area (landscape plus unmapped hardscape)", sf: gotB ? r10(c.land) : null, pct: gotB ? pct(c.land, c.area) : null, conf: !gotB ? "Unavailable" : haveAll ? "Medium" : "Low", src: !gotB ? "Needs the building footprint." : haveAll ? "Lot area minus every mapped building and hard surface." : "Lot area minus mapped buildings" + (gotD ? " and mapped driveways" : "") + ". Walkways and patios are not mapped here, so true landscape is smaller." });
+      if (seattle && gotD) rows.push({ key: "hard", label: "Walkways, patios, decks and other hardscape", sf: r10(c.hard), measuredZero: c.hard === 0, pct: pct(c.hard, c.area), conf: "Medium", src: hSrc + ". Mapped from 2015 aerials; newer work is not shown." });
+      else rows.push({ key: "hard", label: "Walkways, patios, decks and other hardscape", sf: null, conf: "Unavailable", src: "No free public walkway or patio layer covers this address. Left blank, not zero." });
+      var driveRow = rows.filter(function (row) { return row.key === "drive"; })[0];
+      var hardRow = rows.filter(function (row) { return row.key === "hard"; })[0];
+      var buildingsKnown = !!(gotB && house);
+      var hardKnown = !!(driveRow && driveRow.sf != null && hardRow && hardRow.sf != null);
+      var verifiedLand = buildingsKnown && hardKnown;
+      var buildingSf = 0;
+      if (house) buildingSf += house.sf;
+      rows.forEach(function (row) { if ((row.key === "garage" || row.key === "otherbld") && row.sf != null) buildingSf += row.sf; });
+      var landSf = null;
+      if (buildingsKnown) landSf = r10(verifiedLand ? c.land : Math.max(0, c.area - buildingSf));
+      rows.push({
+        key: "land",
+        label: verifiedLand ? "Remaining landscape (softscape)" : "Unclassified open area (not verified landscaping)",
+        verifiedLandscape: verifiedLand,
+        sf: landSf,
+        pct: landSf != null ? pct(landSf, c.area) : null,
+        conf: !buildingsKnown ? "Unavailable" : verifiedLand ? "Medium" : "Low",
+        src: !buildingsKnown ? "Building coverage is not measured, so open area is not computed from a zero house." : verifiedLand ? "Lot area minus mapped buildings and classified hard surfaces. Planning estimate, not a survey." : "Lot area minus mapped building coverage only. Driveway, walks, patios, or eaves are not all known, so this number is not landscaping."
+      });
       out.rows = rows;
       out.coverage = { step: Math.round(c.step * 10) / 10 };
   }
@@ -547,6 +570,8 @@
         return "<tr><th scope=\"row\">" + esc(x.label) + "</th><td>" + (x.sf == null ? '<span class="bh-tbd">Unavailable</span>' : n(x.sf) + " sf") + "</td><td>" + (x.pct == null ? "–" : x.pct + "%") + "</td><td>" + esc(x.conf) + "</td><td>" + esc(x.src) + "</td></tr>";
       }).join("") + "</tbody></table>";
     }
+    var landRow = (r.rows || []).filter(function (x) { return x.key === "land" && x.verifiedLandscape === false && x.sf != null; })[0];
+    if (landRow) h += '<p class="bh-verify">The open-area figure is not verified landscaping. Paving, patios, or eaves may be inside it.</p>';
     r.notes.forEach(function (t) { h += '<p class="bh-verify">' + esc(t) + "</p>"; });
     h += "<h3>Slope</h3>";
     var sl = r.slope;

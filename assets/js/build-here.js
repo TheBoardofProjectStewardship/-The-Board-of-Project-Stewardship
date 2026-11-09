@@ -116,7 +116,7 @@
   /* ---------- data model ---------- */
   var state = null;
   function blank() {
-    return { input: "", matched: "", lon: null, lat: null, county: "", city: "", juris: "other", jurisLabel: "", parcel: "", assessorUrl: "", lot: null, lotSrc: "", zone: "", zoneSrc: "", existing: null, existingSrc: "", footprint: null, footprintSrc: "", yearBuilt: "", yearSrc: "", rings: null, hazards: [], hazardNotes: [], nearNotices: [], frontDir: "", permits: [], permitNote: "", permitLinks: [], imagery: null, sources: [], manual: [] };
+    return { input: "", matched: "", lon: null, lat: null, county: "", city: "", juris: "other", jurisLabel: "", parcel: "", assessorUrl: "", lot: null, lotSrc: "", zone: "", zoneSrc: "", existing: null, existingSrc: "", existingAsOf: "", footprint: null, footprintSrc: "", footprintKind: "", firstFloor: null, firstFloorSrc: "", garageFloor: null, garageFloorSrc: "", yearBuilt: "", yearSrc: "", rings: null, hazards: [], hazardNotes: [], nearNotices: [], frontDir: "", permits: [], permitNote: "", permitLinks: [], imagery: null, sources: [], manual: [], prepared: "" };
   }
   function log(s, ok, name, note) { s.sources.push({ name: name, ok: ok, note: note || "" }); }
 
@@ -219,7 +219,11 @@
       if (r && r.rings && !s.rings) s.rings = r.rings;
       if (r && r.lot && r.lot.sf && !s.lot) { s.lot = r.lot.sf; s.lotSrc = r.lot.src; }
       (r && r.rows || []).forEach(function (row) {
-        if (row.key === "house" && row.sf != null && !s.footprint) { s.footprint = Math.round(row.sf); s.footprintSrc = row.src || "Mapped building footprint"; }
+        if (row.key === "house" && row.sf != null && !s.footprint) {
+          s.footprint = Math.round(row.sf);
+          s.footprintSrc = row.src || "Mapped building footprint";
+          s.footprintKind = /roof|eave/i.test(s.footprintSrc) ? "roof" : "footprint";
+        }
       });
       applyLandscapeSqft(s);
     }).catch(function (e) {
@@ -242,11 +246,12 @@
       var rec = j && j.b && j.b[pin];
       if (!rec || !rec[0]) { log(s, false, "King County living area", "PIN " + pin + " not in residential building extract"); return; }
       s.existing = Math.round(rec[0]);
+      s.existingAsOf = j.asOf || "";
       s.existingSrc = "King County Assessor residential building extract (SqFtTotLiving)" + (j.asOf ? ", as of " + j.asOf : "");
       if (rec[1] && !s.yearBuilt) { s.yearBuilt = String(rec[1]); s.yearSrc = "King County Assessor residential building extract (YrBuilt)"; }
       if (rec[2] && !s.stories) { s.stories = rec[2]; s.storiesSrc = "King County Assessor residential building extract (Stories)"; }
-      if (rec[3] && !s.footprint) { s.footprint = Math.round(rec[3]); s.footprintSrc = "King County Assessor first-floor SF (SqFt1stFloor); roof outline may differ"; }
-      if (rec[4] && !s.garageSf) { s.garageSf = Math.round(rec[4]); s.garageSrc = "King County Assessor garage SF"; }
+      if (rec[3]) { s.firstFloor = Math.round(rec[3]); s.firstFloorSrc = "King County Assessor first-floor SF (SqFt1stFloor). Not a roof outline and not living area."; }
+      if (rec[4]) { s.garageFloor = Math.round(rec[4]); s.garageFloorSrc = "King County Assessor garage square feet (floor area). Not a detached building footprint."; }
       log(s, true, "King County living area (SqFtTotLiving)", s.existing + " sf");
     }).catch(function (e) { log(s, false, "King County living area", e.message); });
   }
@@ -260,16 +265,13 @@
     if (!s.footprint && by.house && by.house.sf != null) {
       s.footprint = Math.round(by.house.sf);
       s.footprintSrc = by.house.src || "Mapped building footprint";
+      s.footprintKind = /roof|eave/i.test(s.footprintSrc) ? "roof" : "footprint";
     }
-    if (s.imperv == null) {
-      var hard = 0, got = false;
-      ["house", "garage", "otherbld", "drive", "hard"].forEach(function (k) {
-        if (by[k] && by[k].sf != null) { hard += by[k].sf; got = true; }
-      });
-      if (got && hard > 0) {
-        s.imperv = Math.round(hard);
-        s.impervSrc = "Mapped buildings + driveway/hardscape from the lot breakdown (planning estimate)";
-      }
+    if (s.imperv == null && by.drive && by.drive.sf != null && by.hard && by.hard.sf != null) {
+      var hard = by.drive.sf + by.hard.sf;
+      ["house", "garage", "otherbld"].forEach(function (k) { if (by[k] && by[k].sf != null) hard += by[k].sf; });
+      s.imperv = Math.round(hard);
+      s.impervSrc = "Classified buildings plus driveway and hardscape. Planning estimate, not a survey.";
     }
   }
 
@@ -614,21 +616,109 @@
     }
     return { rows: rows, area: count * cell * cell };
   }
-  function fillToolBriefsFallback(seed) {
-    seed = seed || {};
-    function set(id, text) { var el = $(id); if (el) el.value = text; }
-    var addr = seed.address || "this lot";
-    var lot = seed.lot ? ("Lot about " + fmt(seed.lot) + " sf. ") : "";
-    var zone = seed.zone ? ("Zone " + seed.zone + ". ") : "";
-    var sb = seed.setbacks || {};
-    var n = function (x) { return typeof x === "number" ? x + " ft" : "verify"; };
-    var setLine = "Setbacks: front " + n(sb.front) + ", side " + n(sb.side) + ", rear " + n(sb.rear) + ".";
-    set("bh-pascal-brief", "Model a residential lot at " + addr + ". " + lot + zone + setLine + (seed.height ? " Height limit " + seed.height + " ft." : "") + "\nPlace a single-family house inside the setbacks with walls, a slab, a roof, doors and windows.");
-    set("bh-civil-brief", addr + "\n" + zone + lot + setLine + "\nIn CivilCraft: open the CSV (columns P,N,E,Z,D, feet). Elevations are a flat 100 ft placeholder.");
-    var lat = (seed.lat != null && isFinite(seed.lat)) ? Number(seed.lat).toFixed(6) : "";
-    var lon = (seed.lon != null && isFinite(seed.lon)) ? Number(seed.lon).toFixed(6) : "";
-    set("bh-csrx-brief", "CutSheet RX on " + addr + "." + (lat && lon ? ("\nGo To search: paste \"" + lat + ", " + lon + "\" or the street address.") : "\nGo To search: paste the street address.") + "\n" + lot + zone);
+  function todayStamp() {
+    var d = new Date();
+    var m = String(d.getMonth() + 1), day = String(d.getDate());
+    return d.getFullYear() + "-" + (m.length < 2 ? "0" + m : m) + "-" + (day.length < 2 ? "0" + day : day);
   }
+  function rowBy(s, key) {
+    var rows = (s.landscape && s.landscape.rows) || [];
+    for (var i = 0; i < rows.length; i++) if (rows[i].key === key) return rows[i];
+    return null;
+  }
+  function studyContext(s, v, rs) {
+    var M = window.BuildHereMeasures;
+    if (!M) return null;
+    var prepared = s.prepared || todayStamp();
+    s.prepared = prepared;
+    var records = [];
+    if (s.existing != null && v.existing != null && Number(v.existing) !== Number(s.existing)) {
+      records = M.withEdit([{
+        kind: "living", sf: s.existing, source: s.existingSrc || "Assessor record", url: s.assessorUrl || "",
+        retrieved: s.existingAsOf || prepared, method: "assessor extract", confidence: "Medium", automatic: true
+      }], "living", v.existing, prepared);
+    } else if (v.existing != null) {
+      records.push({
+        kind: "living", sf: v.existing, source: s.existingSrc || "Entered in this session", url: s.assessorUrl || "",
+        retrieved: s.existingAsOf || prepared, method: s.existingSrc ? "assessor extract" : "edited",
+        confidence: s.existingSrc ? "Medium" : "Low", automatic: !!s.existingSrc
+      });
+    }
+    var kindSel = ($("bh-footprint-kind") && $("bh-footprint-kind").value) || s.footprintKind || "";
+    var coverageSf = null, roofSf = null;
+    if (v.footprint != null && kindSel !== "firstFloor") {
+      var asRoof = kindSel !== "footprint";
+      records.push({
+        kind: asRoof ? "roof" : "footprint", sf: v.footprint,
+        source: s.footprintSrc || "Entered in this session", retrieved: prepared,
+        method: (/roof|eave/i.test(s.footprintSrc || "") || asRoof) ? "roof outline" : "surveyed footprint",
+        confidence: /OpenStreetMap|Microsoft/i.test(s.footprintSrc || "") ? "Low" : "Medium",
+        automatic: !!s.footprintSrc,
+        note: "Not living area and not gross floor area."
+      });
+      coverageSf = v.footprint;
+      roofSf = v.footprint;
+    }
+    if (s.firstFloor != null) {
+      records.push({
+        kind: "firstFloor", sf: s.firstFloor, source: s.firstFloorSrc || "Assessor first floor",
+        url: s.assessorUrl || "", retrieved: s.existingAsOf || prepared, method: "assessor extract",
+        confidence: "Medium", automatic: true, note: "First-floor area. Not a roof outline."
+      });
+    }
+    if (kindSel === "firstFloor" && v.footprint != null) {
+      records.push({
+        kind: "firstFloor", sf: v.footprint, source: "Edited in this session", retrieved: prepared,
+        method: "edited", confidence: "Medium", automatic: false,
+        note: "Entered as first-floor area, so it is not used as roof coverage."
+      });
+    }
+    if (s.garageFloor != null) {
+      records.push({
+        kind: "attachedGarage", sf: s.garageFloor, source: s.garageFloorSrc || "Assessor garage area",
+        url: s.assessorUrl || "", retrieved: s.existingAsOf || prepared, method: "assessor extract",
+        confidence: "Medium", automatic: true,
+        note: "Floor area on the building record. Not a detached footprint."
+      });
+    }
+    var g = rowBy(s, "garage"), d = rowBy(s, "drive"), h = rowBy(s, "hard");
+    var gSf = M.sfOrUnknown(g), driveSf = M.sfOrUnknown(d), hardSf = M.sfOrUnknown(h);
+    if (gSf != null) records.push({ kind: "detachedGarage", sf: gSf, source: (g && g.src) || "Mapped outline", retrieved: prepared, method: "building outline", confidence: "Low", automatic: true, measuredZero: !!(g && g.measuredZero), note: "Detached outline. Not attached garage floor area." });
+    if (driveSf != null) records.push({ kind: "driveway", sf: driveSf, source: (d && d.src) || "", retrieved: prepared, method: "paved-surface layer", confidence: (d && d.measuredZero) ? "Low" : "Medium", automatic: true, measuredZero: !!(d && d.measuredZero) });
+    if (hardSf != null) records.push({ kind: "hardscape", sf: hardSf, source: (h && h.src) || "", retrieved: prepared, method: "paved-surface layer", confidence: "Medium", automatic: true, measuredZero: !!(h && h.measuredZero) });
+    var bundle = M.assemble({ lot: v.lot, records: records, manual: s.manual || [], coverageSf: coverageSf, driveSf: driveSf, hardSf: hardSf });
+    var aduRule = "";
+    if (rs && rs.rules) rs.rules.forEach(function (r) { if (/ADU|accessory dwelling/i.test(r.label) && r.value) aduRule = r.value; });
+    var cards = M.scenarios({
+      lot: v.lot, living: v.existing, roof: roofSf, zoningCoded: !!rs,
+      roomFar: (rs && rs.floorCap != null && v.existing != null) ? rs.floorCap - v.existing : null,
+      roomCov: (rs && rs.coverage != null && coverageSf != null) ? rs.coverage - coverageSf : null,
+      roomImp: (rs && rs.impervious != null && v.imperv != null) ? rs.impervious - v.imperv : null,
+      floorCap: rs && rs.floorCap != null ? rs.floorCap : null,
+      aduRule: aduRule
+    });
+    return { bundle: bundle, cards: cards, prepared: prepared };
+  }
+  function measureValue(m) {
+    if (m.sfLow != null && m.sfHigh != null) return fmt(Math.round(m.sfLow)) + " to " + fmt(Math.round(m.sfHigh)) + " sf (range)";
+    if (m.sf == null) return "Not measured";
+    return fmt(Math.round(m.sf)) + " sf";
+  }
+  function ledgerHtml(bundle) {
+    if (!bundle) return "";
+    var rows = bundle.measures.map(function (m) {
+      return "<tr><th scope=\"row\">" + esc(m.label) + "</th><td>" + measureValue(m) + "</td><td>" + esc(m.confidence || "") + "</td><td>" + esc(m.method || "") + (m.retrieved ? " · " + esc(m.retrieved) : "") + (m.source ? "<br><span class=\"bh-muted\">" + esc(m.source) + "</span>" : "") + (m.url ? "<br><a href=\"" + esc(m.url) + "\" target=\"_blank\" rel=\"noopener\">Source page</a>" : "") + (m.note ? "<br><span class=\"bh-muted\">" + esc(m.note) + "</span>" : "") + "</td></tr>";
+    }).join("");
+    var open = bundle.open || {};
+    var openRow = "<tr><th scope=\"row\">" + esc(open.label || "Open area") + "</th><td>" + (open.sf == null ? '<span class="bh-tbd">Not measured</span>' : fmt(Math.round(open.sf)) + " sf") + "</td><td>" + (open.verifiedLandscape ? "Medium" : "Low") + "</td><td>" + esc(open.note || "") + "</td></tr>";
+    var extra = "";
+    (bundle.notes || []).forEach(function (t) { extra += '<p class="bh-muted">' + esc(t) + "</p>"; });
+    (bundle.conflicts || []).forEach(function (c) { extra += '<p class="bh-verify">' + esc(c.note) + "</p>"; });
+    (bundle.stale || []).forEach(function (c) { extra += '<p class="bh-verify">' + esc(c.note) + "</p>"; });
+    (bundle.errors || []).forEach(function (t) { extra += '<p class="bh-verify">' + esc(t) + "</p>"; });
+    return '<h3>Measurements and where they came from</h3><p class="bh-muted">Each number keeps its source, the date it was read, the method, and a confidence. A roof outline is not living area. Unknown driveway, garage, and hardscape stay blank.</p><table class="bh-table bh-measures"><thead><tr><th scope="col">Measure</th><th scope="col">Amount</th><th scope="col">Confidence</th><th scope="col">Source</th></tr></thead><tbody>' + rows + openRow + "</tbody></table>" + extra;
+  }
+  var STUDY_LIMITS = "Planning estimate only. This is not a legal, zoning, or permit determination. Where zoning is not coded, the study does not say a project is allowed. Unknown driveway, garage, and hardscape are left blank rather than filled with zero. A roof outline is not living area or gross floor area. Open area left after a roof outline is not landscaping when paving is unknown. Listing sites are not fetched. A number you type from a listing, survey, or permit plan is labeled as your entry.";
 
   function seed3D(s, v, rs) {
     var sb = rs && rs.setbacks || {}, seed = { address: s.matched || s.input || "", zone: v.zone || "", juris: s.jurisLabel || "", lot: v.lot || null, footprint: v.footprint || null, stories: v.stories || 1, type: v.type || "", coverage: rs && rs.coverage || null, setbacks: { front: sb.front, side: sb.side, rear: sb.rear }, height: null, ring: null, env: null, lat: s.lat, lon: s.lon };
@@ -720,7 +810,12 @@
       ? ("From: " + (s.existingSrc || "public assessor record") + ". Edit if you know a better number.")
       : ((/^King/.test(s.county || "") && (!s.stateAbbr || s.stateAbbr === "WA")) ? "No finished living area found in the Assessor residential building extract for this PIN. Enter it from the assessor page."
         : "Enter the existing finished floor area from the assessor record if you have it.");
-    $("bh-footprint-src").textContent = s.footprint ? "From: " + s.footprintSrc + ". Edit if you know the real footprint." : "Optional. The ground-floor footprint of all buildings, for the coverage check.";
+    $("bh-footprint-src").textContent = s.footprint ? "From: " + s.footprintSrc + ". A roof outline is not living area. Edit the number and the type if you know better." : "Optional. Roof outline or surveyed footprint for the coverage check. First-floor area is a different box.";
+    if ($("bh-footprint-kind")) {
+      var kind = s.footprintKind || "";
+      if ([].slice.call($("bh-footprint-kind").options).some(function (o) { return o.value === kind; })) $("bh-footprint-kind").value = kind;
+    }
+    renderManualList();
     if (s.imperv) { $("bh-imperv").value = s.imperv; $("bh-imperv-src").textContent = "From: " + s.impervSrc + ". Edit if you know better."; }
     if (s.stories && $("bh-stories")) {
       var st = String(Math.round(Number(s.stories)));
@@ -738,8 +833,24 @@
     var place = s.city ? s.city.toUpperCase() : (s.county || "").replace(" County", "").toUpperCase() + " COUNTY";
     var page = function (title, body, cls) { return '<section class="bh-page ' + (cls || "") + '"><div class="bh-page-body">' + body + '</div><footer class="bh-page-foot"><span>' + esc(place) + ' | ' + esc(s.stateAbbr || "US") + '</span><strong>' + esc(title) + '</strong><span class="bh-brand">Board of Project Stewardship</span></footer></section>'; };
 
-    // Cover
-    out.push(page("Feasibility snapshot", '<div class="bh-cover"><p class="bh-kicker">Single-family lot · one combined feasibility study (zoning + landscape + FAR + options + design tools)</p><h2>' + esc(s.matched || s.input) + '</h2><p class="bh-cover-sub">' + esc(s.jurisLabel) + (s.parcel ? " · Parcel " + esc(s.parcel) : "") + '</p><p class="bh-cover-date">Prepared ' + new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }) + ' from public records. Rules last checked ' + R.CHECKED + '.</p><p class="bh-disclaimer"><strong>Planning estimate only.</strong> This is not a legal, zoning or permit determination. Confirm every number with the jurisdiction and a licensed professional before you design, buy or build.</p></div>', "bh-cover-page"));
+    var ctx = studyContext(s, v, rs);
+    var prepared = (ctx && ctx.prepared) || todayStamp();
+    var mapHtml = "";
+    if (s.imagery) {
+      mapHtml = '<figure class="bh-aerial"><div class="bh-aerial-frame"><img src="' + esc(s.imagery.url) + '" alt="Aerial photo of this parcel with the parcel outline drawn on top" width="' + s.imagery.W + '" height="' + s.imagery.H + '"><svg viewBox="0 0 ' + s.imagery.W + " " + s.imagery.H + '" aria-hidden="true"><path d="' + s.imagery.path + '" class="bh-outline"/></svg></div></figure>';
+    } else if (s.rings) {
+      mapHtml = sitePlanSVG(s, rs);
+    }
+    var stageInner = window.BuildHereStage
+      ? window.BuildHereStage.renderStage({
+          address: s.matched || s.input,
+          date: prepared,
+          placeLine: (s.jurisLabel || "") + (s.parcel ? " · Parcel " + s.parcel : "") + (v.zone ? " · Zone " + v.zone : ""),
+          mapHtml: mapHtml,
+          cards: ctx ? ctx.cards : []
+        })
+      : '<p class="bh-verify">The options view did not load. Refresh the page.</p>';
+    out.push(page("What you can build", stageInner, "bh-stage-page"));
 
     // Project summary
     var rows = [
@@ -749,33 +860,17 @@
       ["Lot area", v.lot ? fmt(v.lot) + " sf" : "Enter by hand"],
       ["Zone", v.zone ? esc(v.zone) + (s.cityZone && s.cityZone !== v.zone ? " (city map shows " + esc(s.cityZone) + ")" : "") : "Enter by hand"],
       ["Existing finished area", v.existing ? fmt(v.existing) + " sf" + (s.existingSrc ? ' <span class="bh-muted">· ' + esc(s.existingSrc) + "</span>" : " (your entry)") : "Not entered"],
-      ["Building footprint", v.footprint ? fmt(v.footprint) + " sf" : "Not entered"],
+      ["Building footprint", v.footprint ? fmt(v.footprint) + " sf" + (( ($("bh-footprint-kind") && $("bh-footprint-kind").value) || s.footprintKind) === "firstFloor" ? " (first-floor area, not roof coverage)" : (/roof|eave/i.test(s.footprintSrc || "") || (($("bh-footprint-kind") && $("bh-footprint-kind").value) || s.footprintKind) === "roof" ? " (roof outline, not living area)" : "")) : "Not entered"],
       ["Year built", s.yearBuilt ? esc(s.yearBuilt) + " (" + esc(s.yearSrc) + ")" : "Not in a browser-callable record. See the assessor page."],
       ["Stories (existing)", String(v.stories)],
       ["Project type", esc($("bh-type").selectedOptions[0].text)]
     ];
-    // ADD: surface landscaping SF in the early snapshot so the unify never hides them.
-    function landCell(row) {
-      if (!row) return '<span class="bh-tbd">Unavailable</span>';
-      if (row.sf == null) return '<span class="bh-tbd">Unavailable</span>' + (row.src ? ' <span class="bh-muted">(' + esc(row.src) + ')</span>' : '');
-      return fmt(row.sf) + " sf" + (row.pct != null ? " (" + row.pct + "% of lot)" : "") + (row.src ? ' <span class="bh-muted">· ' + esc(row.src) + "</span>" : "");
-    }
-    if (s.landscape && s.landscape.rows && s.landscape.rows.length) {
-      var byKey = {};
-      s.landscape.rows.forEach(function (r) { byKey[r.key] = r; });
-      rows.push(["House footprint (mapped)", landCell(byKey.house)]);
-      rows.push(["Garage / accessory", landCell(byKey.garage || byKey.otherbld)]);
-      rows.push(["Driveway / paving", landCell(byKey.drive)]);
-      if (byKey.hard) rows.push(["Other hardscape", landCell(byKey.hard)]);
-      rows.push(["Remaining landscape", landCell(byKey.land)]);
-      var sl = s.landscape.slope;
-      rows.push(["Lot slope (USGS 3DEP)", sl && sl.ok ? ("avg " + sl.mean + "% · median " + sl.median + "% · " + sl.pct40 + "% of lot at 40%+") : ('<span class="bh-tbd">Unavailable</span>' + (sl && sl.note ? " (" + esc(sl.note) + ")" : ""))]);
-    } else {
-      rows.push(["House / garage / driveway / landscape", '<span class="bh-tbd">Measuring…</span> See the Site coverage and landscape section below.']);
-    }
+    var slEarly = s.landscape && s.landscape.slope;
+    rows.push(["Lot slope (USGS 3DEP)", slEarly && slEarly.ok ? ("avg " + slEarly.mean + "% · median " + slEarly.median + "% · " + slEarly.pct40 + "% of lot at 40%+") : '<span class="bh-tbd">Not measured</span>']);
+    var ledger = ledgerHtml(ctx && ctx.bundle);
     var haz = s.hazards.length ? "<ul>" + s.hazards.map(function (h) { return "<li>" + esc(h) + "</li>"; }).join("") + "</ul>" : (s.hazardSource ? "<p>No mapped hazard layer touched this parcel in the " + esc(s.hazardSource) + ". Maps are not field studies; a site visit can still find steep ground, wet soils or streams.</p>" : "<p>Hazard maps were not checked for this jurisdiction. Ask the city.</p>");
     if (s.hazardNotes.length) haz += '<p class="bh-muted">' + esc(s.hazardNotes.join("; ")) + "</p>";
-    out.push(page("Project summary", '<div class="bh-cols"><div><h3>Site data</h3><table class="bh-table">' + rows.map(function (r) { return "<tr><th scope=\"row\">" + r[0] + "</th><td>" + r[1] + "</td></tr>"; }).join("") + '</table></div><div><h3>Special site features</h3>' + haz +
+    out.push(page("Project summary", ledger + '<div class="bh-cols"><div><h3>Site data</h3><table class="bh-table">' + rows.map(function (r) { return "<tr><th scope=\"row\">" + r[0] + "</th><td>" + r[1] + "</td></tr>"; }).join("") + '</table></div><div><h3>Special site features</h3>' + haz +
       '<h3>Soils and geotechnical</h3><p>No soils report is on file with this snapshot. Slopes, fill or a mapped hazard often lead the jurisdiction to ask for a geotechnical report on bearing soil and drainage.</p>' +
       '<h3>Drainage and civil</h3><p>Larger additions and new houses usually trigger stormwater review. The size thresholds come from the local stormwater code; ask the jurisdiction which applies before design.</p>' +
       '<h3>Construction cost</h3><p>Not estimated here. Get a written bid from a licensed contractor for your own numbers.</p>' +
@@ -787,7 +882,7 @@
     var cr;
     if (!rs) {
       var why = s.juris === "other" ? "We could not match " + esc(s.jurisLabel) + " to a city in our list. Verify the rules with the city." : (s.juris === "city" && !v.lot ? "Enter the lot size in step 2 to see the rules and the math for " + esc(s.jurisLabel) + "." : (s.juris === "outside"
-        ? "Zoning setbacks, coverage and FAR are not coded for this place. Verify those with the city or county. Parcel outline, lot area, house/driveway/landscape split and slope below come from public parcel and elevation layers where they answer. Pascal, CivilCraft and CutSheet RX still open for this lot when an outline exists."
+        ? "Zoning setbacks, coverage and FAR are not coded for this place. Verify those with the city or county. Parcel outline, lot area, house and slope notes below come from public parcel and elevation layers where they answer. This is not a permit determination."
         : "We do not have verified rules coded for zone " + esc(v.zone || "(blank)") + " here. Verify with the jurisdiction."));
       cr = '<p class="bh-verify">' + why + '</p><p><a href="./permits.html">The Board permit hub</a> lists city and county permit offices.</p>';
     } else {
@@ -854,9 +949,10 @@
         ? ("https://earth.google.com/web/@" + lat.toFixed(6) + "," + lon.toFixed(6) + ",80a,120d,35y,0h,0t,0r")
         : ("https://earth.google.com/web/search/" + mapsQ);
       var gmapsHref = mapsQ ? ("https://www.google.com/maps/search/?api=1&query=" + mapsQ) : "#";
-      var body = '<h3>See this lot on the map</h3><p class="bh-muted">Same geocoded address used for parcel, landscape and tool briefs. Satellite embed below; open Google Earth for the photorealistic 3D globe of this pin.</p>';
+      var body = '<h3>See this lot on the map</h3><p class="bh-muted">Same geocoded address used for the parcel and the measurements. Satellite embed below; open Google Earth for the photorealistic 3D globe of this pin.</p>';
       if (embedSrc) {
-        body += '<div class="bh-map-frame"><iframe title="Google Maps satellite of the entered address" src="' + embedSrc + '" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>';
+        body += '<div class="bh-map-frame bh-noprint"><iframe title="Google Maps satellite of the entered address" src="' + embedSrc + '" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>';
+        body += '<p class="bh-print-only">Map embed omitted from print and from the downloaded file. The site plan diagram in this study is the fallback.</p>';
       } else {
         body += '<p class="bh-verify">No geocoded point yet, so the map cannot center on the lot.</p>';
       }
@@ -867,11 +963,11 @@
       out.push(page("Lot on the map", body));
     })();
 
-    // Unified feasibility study: site coverage/landscape (never remove) + massing + Pascal + CivilCraft
+    // Site coverage and landscape stay in every study.
     var seed3d = seed3D(s, v, rs);
     try { localStorage.setItem("bh3dSeed", JSON.stringify(seed3d)); } catch (e) {}
 
-    // Hard rule: keep Site coverage and landscape in every study (PR #176 title). Pascal/CivilCraft ADD after; nothing is stripped.
+    // Hard rule: keep site coverage and landscape in every study.
     var landBody = '<h3>House, garage, driveway, landscape and slope</h3><p class="bh-muted">Same address and parcel as the rest of this study. Lot broken into house / garage / driveway-paving / landscape SF with slope from public survey layers (USGS 3DEP, county parcel, building footprints). Planning estimate only - not a survey.</p>';
     if (window.BuildHereLandscape && s.landscape) landBody += window.BuildHereLandscape.renderHTML(s.landscape, s);
     else if (window.BuildHereLandscape) landBody += window.BuildHereLandscape.renderHTML({ rows: [], notes: ["Landscape data was not attached to this run."], sources: [], slope: { ok: false, note: "not measured" } }, s);
@@ -889,177 +985,7 @@
       ["Coverage cap", seed3d.coverage ? fmt(seed3d.coverage) + " sf" : "Verify with the jurisdiction"],
       ["Buildable envelope", seed3d.env && seed3d.env.area ? "About " + fmt(seed3d.env.area) + " sf inside setbacks (diagrammatic)" : (seed3d.ring ? "Lot outline loaded; setbacks not fully verified for an envelope area" : "No parcel outline in this run")]
     ];
-    out.push(page("What you can build", '<h3>Massing and envelope</h3><p>These caps and setbacks are the same numbers used in the Options cards and the rest of this study. Sketch boxes against them in the 3D massing editor (WebGL), or continue into Pascal Editor for walls and rooms.</p><table class="bh-table">' + massRows.map(function (r) { return "<tr><th scope=\"row\">" + r[0] + "</th><td>" + r[1] + "</td></tr>"; }).join("") + '</table><p><a class="bh-btn" href="/build-here-3d.html">Deepen in the 3D massing sketcher</a></p><p class="bh-muted">Optional deepen step for WebGL massing. Pascal, CivilCraft and CutSheet RX tools for this lot are in the next sections of this same study - you do not need a second address lookup.</p>'));
-
-    // Option cards: every path this lot can take (ADD only; never strip other sections).
-    (function () {
-      var envArea = seed3d && seed3d.env && seed3d.env.area ? seed3d.env.area : null;
-      var roomFar = (rs && rs.floorCap != null && v.existing != null) ? Math.max(0, rs.floorCap - v.existing) : null;
-      var roomCov = (rs && rs.coverage != null && v.footprint != null) ? Math.max(0, rs.coverage - v.footprint) : null;
-      var roomImp = (rs && rs.impervious != null && v.imperv != null) ? Math.max(0, rs.impervious - v.imperv) : null;
-      var fullFar = rs && rs.floorCap != null ? rs.floorCap : null;
-      var fullCov = rs && rs.coverage != null ? rs.coverage : null;
-      var aduNote = "";
-      if (rs && rs.rules) rs.rules.forEach(function (r) { if (/^ADU/i.test(r.label) || /accessory dwelling/i.test(r.label)) aduNote = (r.value || "") + (r.note ? " · " + r.note : ""); });
-      function numOr(v, fb) { return v != null ? "<strong>" + fmt(Math.round(v)) + " sf</strong>" : fb; }
-      function card(title, body, metrics) {
-        return '<article class="bh-opt-card"><h4>' + title + '</h4><p>' + body + '</p><ul class="bh-opt-metrics">' +
-          metrics.map(function (m) { return "<li><span>" + m[0] + "</span> " + m[1] + "</li>"; }).join("") + "</ul></article>";
-      }
-      var verify = '<span class="bh-verify">Verify with the jurisdiction</span>';
-      var cards = [];
-      cards.push(card("Addition",
-        "Keep the existing foundation and add floor area where room remains under FAR, coverage and setbacks. Best when the house sits under the caps.",
-        [
-          ["FAR / floor room left", roomFar != null ? numOr(roomFar, verify) : (rs && rs.floorCapLabel ? esc(rs.floorCapLabel) : verify)],
-          ["Coverage room left", roomCov != null ? numOr(roomCov, verify) : (fullCov != null ? "Cap " + fmt(fullCov) + " sf; enter footprint to see room left" : verify)],
-          ["Buildable envelope", envArea != null ? "About " + fmt(Math.round(envArea / 10) * 10) + " sf inside setbacks" : verify]
-        ]));
-      cards.push(card("ADU (accessory dwelling)",
-        "Often the largest gain when the main house is near its floor-area cap. Size and count follow the ADU rule for this zone (state law allows up to two ADUs per lot inside most urban growth areas).",
-        [
-          ["ADU rule", aduNote ? esc(aduNote) : verify],
-          ["Main-house FAR room", roomFar != null ? numOr(roomFar, verify) + (rs && rs.key === "seattle-nr" ? " (ADU area now counts toward Seattle NR FAR)" : "") : (rs && rs.floorCapLabel ? esc(rs.floorCapLabel) : verify)],
-          ["Coverage / envelope", roomCov != null ? numOr(roomCov, verify) + " footprint room" : (envArea != null ? "Envelope about " + fmt(Math.round(envArea / 10) * 10) + " sf" : verify)]
-        ]));
-      cards.push(card("Garage / shop",
-        "Attach to the house (house setbacks, adds to footprint) or stand alone as an accessory building. Counts toward coverage and impervious; a street-facing vehicle door needs the driveway length the zone requires.",
-        [
-          ["Coverage room left", roomCov != null ? numOr(roomCov, verify) : (fullCov != null ? "Cap " + fmt(fullCov) + " sf" : verify)],
-          ["Impervious room left", roomImp != null ? numOr(roomImp, verify) : (rs && rs.impervious != null ? "Cap " + fmt(rs.impervious) + " sf; enter existing hardscape" : verify)],
-          ["Envelope", envArea != null ? "About " + fmt(Math.round(envArea / 10) * 10) + " sf inside setbacks" : verify]
-        ]));
-      cards.push(card("Teardown + new house",
-        "Demolish and rebuild to current setbacks, height and caps. Size to the full floor-area and coverage caps, not the leftover room under an existing house.",
-        [
-          ["Full FAR / floor cap", fullFar != null ? numOr(fullFar, verify) + (v.lot ? " (" + (fullFar / v.lot).toFixed(2) + " x lot)" : "") : (rs && rs.floorCapLabel ? esc(rs.floorCapLabel) : verify)],
-          ["Full coverage cap", fullCov != null ? numOr(fullCov, verify) : verify],
-          ["Buildable envelope", envArea != null ? "About " + fmt(Math.round(envArea / 10) * 10) + " sf inside setbacks" : verify]
-        ]));
-      cards.push(card("Remodel (inside walls)",
-        "Interior work inside the existing walls usually does not change floor area, coverage or setbacks. Structural, plumbing, electrical and mechanical permits still apply.",
-        [
-          ["FAR change", "None expected if walls stay put"],
-          ["Coverage change", "None expected if footprint stays put"],
-          ["Existing counted area", v.existing != null ? fmt(v.existing) + " sf" : "Enter finished area in step 2"]
-        ]));
-      var intro = rs
-        ? "<p>Five paths on this same lot. Numbers below reuse the FAR, coverage, impervious and setback envelope from the rest of this study. They are planning estimates - confirm with the jurisdiction before design.</p>"
-        : "<p>Five paths every single-family lot can take. Zoning numbers for this address are not fully coded yet, so the cards stay honest about what to verify. Landscape split, slope and the design tools still run on this same study.</p>";
-      out.push(page("What you can do", "<h3>Options for this lot</h3>" + intro + '<div class="bh-opt-grid">' + cards.join("") + "</div>"));
-    })();
-
-
-    var Ttools = window.BuildHereTools;
-    var pascalText = Ttools ? Ttools.pascalBrief(seed3d) : ("Model a residential lot" + (seed3d.address ? " at " + seed3d.address : "") + ".");
-    var civilText = Ttools ? Ttools.civilBrief(seed3d) : ((seed3d.address || "Lot") + "\n" + (seed3d.zone ? "Zone " + seed3d.zone + ". " : "") + (seed3d.lot ? "Lot " + fmt(seed3d.lot) + " sf." : ""));
-    var csrxText = Ttools ? Ttools.csrxBrief(seed3d) : ("CutSheet RX on " + (seed3d.address || "this lot") + ".");
-    var pascalMedia =
-      '<div class="bh-study-media" id="bh-study-pascal">' +
-        '<h3>Design it in 3D · Pascal Editor</h3>' +
-        '<p>Pascal Editor is an open-source (MIT) 3D building editor: walls, slabs, roofs, doors, windows and zones, that can build from a prompt. It needs WebGPU (current Chrome or Edge on a desktop). The brief below is prefilled from this lot.</p>' +
-        '<div class="b3-media-grid">' +
-          '<figure class="b3-fig">' +
-            '<video id="bh-pv" src="/assets/videos/tools/pascal-promo.mp4#t=10" poster="/assets/images/tools/pascal-promo.webp" controls muted playsinline preload="metadata"></video>' +
-            '<figcaption><b>Pascal Editor</b> · walls, rooms, roofs, from a prompt' +
-              '<div class="b3-chaps" id="bh-chaps">' +
-                '<button type="button" data-t="2">Site in 3D</button>' +
-                '<button type="button" data-t="10">Floor plan</button>' +
-                '<button type="button" data-t="30">Every wall &amp; window</button>' +
-                '<button type="button" data-t="60">Levels</button>' +
-                '<button type="button" data-t="90">Site in the real world</button>' +
-                '<button type="button" data-t="120">Ask the building</button>' +
-              '</div>' +
-              '<p id="bh-chap-note" class="bh-help"></p>' +
-              '<button class="bh-btn" data-try="pascal" type="button">Jump to lot brief</button> ' +
-              '<a class="bh-muted" href="https://x.com/neotoolstack/status/2117671794002018568" target="_blank" rel="noopener">Video via @neotoolstack on X</a>' +
-            '</figcaption>' +
-          '</figure>' +
-          '<div>' +
-            '<label class="bh-label" for="bh-pascal-brief">Starting brief for this lot</label>' +
-            '<textarea id="bh-pascal-brief" class="bh-input" rows="8" readonly>' + esc(pascalText) + '</textarea>' +
-            '<p><button class="bh-btn" type="button" data-bh-copy="pascal">Copy brief</button> ' +
-            '<a class="bh-btn" href="https://editor.pascal.app/" target="_blank" rel="noopener">Open Pascal Editor</a> ' +
-            '<a class="bh-btn bh-btn-ghost" href="/build-here-3d.html">Massing sketcher first</a></p>' +
-            '<p class="bh-muted">Pascal Editor is made by Pascal Group Inc. and is <a href="https://github.com/pascalorg/editor" target="_blank" rel="noopener">open source on GitHub</a> under the MIT license. The Board is not affiliated with Pascal. Promo video is hosted on this site under assets/videos/tools/.</p>' +
-          '</div>' +
-        '</div>' +
-      '</div>';
-    out.push(page("Design it in 3D", pascalMedia));
-
-    var civilMedia =
-      '<div class="bh-study-media" id="bh-study-civil">' +
-        '<h3>Civil / site work · CivilCraft</h3>' +
-        '<p>CivilCraft is a free, open-source (Apache-2.0) civil and site design app. It builds a ground surface from survey points, then lets you grade a pad, lay a driveway, see cut and fill, and check drainage. Download this lot as a point file, open CivilCraft, and drop the file in. Nothing is uploaded.</p>' +
-        '<div class="b3-media-grid">' +
-          '<figure class="b3-fig">' +
-            '<div class="b3-hot">' +
-              '<img src="/assets/images/tools/civilcraft.webp" alt="CivilCraft screenshot: contour surface with a road alignment and a building pad in 3D" width="1024" height="576" loading="lazy">' +
-              '<button type="button" class="b3-pin" style="left:44%;top:30%" data-note="Existing ground: contours and elevation bands built from survey points. Your lot slope shows up here.">1</button>' +
-              '<button type="button" class="b3-pin" style="left:42%;top:58%" data-note="Alignment and profile: a driveway or road laid on the surface, with its grade checked against the ground.">2</button>' +
-              '<button type="button" class="b3-pin" style="left:63%;top:42%" data-note="Building pad: set a pad elevation and slopes, and CivilCraft shows cut and fill to daylight. This is where your massing box sits.">3</button>' +
-              '<button type="button" class="b3-pin" style="left:80%;top:35%" data-note="Drainage: draw a catchment and pipe network and check flows. Useful for stormwater questions on a permit.">4</button>' +
-            '</div>' +
-            '<figcaption><b>CivilCraft</b> · surfaces, grading, earthwork, drainage' +
-              '<p id="bh-hot-note" class="bh-help">Tap a numbered pin.</p>' +
-              '<button class="bh-btn" data-try="civil" type="button">Jump to lot CSV</button> ' +
-              '<a class="bh-muted" href="https://x.com/semhustej/status/2118346460538249459" target="_blank" rel="noopener">Image via @semhustej on X</a> · ' +
-              '<a class="bh-muted" href="https://youtu.be/R8naLwdCawQ" target="_blank" rel="noopener">First-look video</a>' +
-            '</figcaption>' +
-          '</figure>' +
-          '<div>' +
-            '<label class="bh-label" for="bh-civil-brief">Lot summary for CivilCraft</label>' +
-            '<textarea id="bh-civil-brief" class="bh-input" rows="7" readonly>' + esc(civilText) + '</textarea>' +
-            '<p><button class="bh-btn" type="button" data-bh-csv>Download lot points (CSV)</button> ' +
-            '<a class="bh-btn" href="https://getcadcraft.com/use/civilcraft" target="_blank" rel="noopener">Open CivilCraft</a> ' +
-            '<a class="bh-btn bh-btn-ghost" href="https://getcadcraft.com/tutorials/civilcraft/getting-started" target="_blank" rel="noopener">10-minute guide</a></p>' +
-            '<p class="bh-muted">Elevations in the CSV are a flat 100 ft placeholder. Replace with survey points before relying on slope, cut or fill. CivilCraft is made by CadCraft (Apache-2.0). The Board is not affiliated with CadCraft.</p>' +
-          '</div>' +
-        '</div>' +
-      '</div>';
-    out.push(page("Civil / site work", civilMedia));
-
-    var csrxLat = (s.lat != null && isFinite(s.lat)) ? Number(s.lat).toFixed(6) : "";
-    var csrxLon = (s.lon != null && isFinite(s.lon)) ? Number(s.lon).toFixed(6) : "";
-    var csrxAddr = s.matched || s.input || "";
-    var csrxQ = csrxAddr || (csrxLat && csrxLon ? csrxLat + ", " + csrxLon : "");
-    var csrxHref = "https://www.senterfarms.com/programs/csrx/" +
-      (csrxLat && csrxLon ? ("?lat=" + encodeURIComponent(csrxLat) + "&lon=" + encodeURIComponent(csrxLon) + (csrxQ ? "&q=" + encodeURIComponent(csrxQ) : "")) : "");
-    var slopeHint = (s.landscape && s.landscape.slope && s.landscape.slope.ok)
-      ? ("This study already measured lot slope from USGS 3DEP (avg " + s.landscape.slope.mean + "%, median " + s.landscape.slope.median + "%). CutSheet RX can deepen that into a drainage heatmap, tile profile and rain run on the same lidar.")
-      : "This study pulls USGS 3DEP where available for slope. CutSheet RX uses the same public lidar family to draw drainage, ponding, cut/fill and a rain simulation on a field you outline.";
-    var csrxMedia =
-      '<div class="bh-study-media" id="bh-study-csrx">' +
-        '<h3>Drainage and terrain · CutSheet RX</h3>' +
-        '<p>' + slopeHint + ' Walk the promo below, then open CutSheet RX on this lot. Paste the address or lat/long into its Go To search (the app accepts town, county, address, or lat, long).</p>' +
-        '<div class="b3-media-grid">' +
-          '<figure class="b3-fig">' +
-            '<video id="bh-cv" src="/assets/videos/tools/cutsheet-rx.mp4" poster="/assets/images/tools/cutsheet-rx.webp" controls muted playsinline preload="metadata"></video>' +
-            '<figcaption><b>CutSheet RX</b> · field outline, lidar heatmap, drainage, tile profile, 3D rain' +
-              '<div class="b3-chaps" id="bh-csrx-chaps">' +
-                '<button type="button" data-t="0">Draw field area</button>' +
-                '<button type="button" data-t="3">Elevation heatmap</button>' +
-                '<button type="button" data-t="5">Drainage / ponding</button>' +
-                '<button type="button" data-t="6">Profile / tile cut-fill</button>' +
-                '<button type="button" data-t="8">3D rain</button>' +
-              '</div>' +
-              '<p id="bh-csrx-note" class="bh-help"></p>' +
-              '<button class="bh-btn" data-try="csrx" type="button">Jump to lot brief</button> ' +
-              '<a class="bh-muted" href="https://x.com/traviss22" target="_blank" rel="noopener">Promo via @traviss22 on X</a>' +
-            '</figcaption>' +
-          '</figure>' +
-          '<div>' +
-            '<label class="bh-label" for="bh-csrx-brief">Lot brief for CutSheet RX</label>' +
-            '<textarea id="bh-csrx-brief" class="bh-input" rows="8" readonly>' + esc(csrxText) + '</textarea>' +
-            '<p><button class="bh-btn" type="button" data-bh-copy="csrx">Copy brief</button> ' +
-            '<a class="bh-btn" id="bh-csrx-open" href="' + esc(csrxHref) + '" target="_blank" rel="noopener">Try it on my lot</a> ' +
-            '<a class="bh-btn bh-btn-ghost" href="https://www.senterfarms.com/programs/csrx/" target="_blank" rel="noopener">Open CutSheet RX</a></p>' +
-            '<p class="bh-muted">CutSheet RX is made by Travis Senter / Senter Farms (<a href="https://www.senterfarms.com/programs/csrx/" target="_blank" rel="noopener">senterfarms.com/programs/csrx</a>). The Board is not affiliated with CutSheet RX or Senter Farms. Elevations and drainage are planning aids, not a survey or engineered stormwater design.</p>' +
-          '</div>' +
-        '</div>' +
-      '</div>';
-    out.push(page("Drainage and terrain", csrxMedia));
-
+    out.push(page("Massing", '<h3>Massing and envelope</h3><p>These caps and setbacks match the option cards at the top of this study. The massing sketch draws boxes for this lot. It is a diagram, not a permit drawing.</p><table class="bh-table">' + massRows.map(function (r) { return "<tr><th scope=\"row\">" + r[0] + "</th><td>" + r[1] + "</td></tr>"; }).join("") + '</table><p class="bh-noprint"><a class="bh-btn" href="/build-here-3d.html">Open the massing sketch for this lot</a></p>'));
 
     // Plans and permits
     var pm = "<h3>House plans and permit history</h3>";
@@ -1074,12 +1000,13 @@
       '<div class="bh-cta"><h3>Talk to a local design-build pro</h3><p>See the firms the Board ranks for this kind of work, and how we rank them.</p><p><a class="bh-btn" href="./additions.html">Additions rankings</a> <a class="bh-btn" href="./custom-homes.html">Custom home rankings</a> <a class="bh-btn bh-btn-ghost" href="./how-we-rank.html">How we rank</a> <a class="bh-btn bh-btn-ghost" href="./permits.html">Permit resources</a></p></div>'));
 
     // Data sources
-    out.push(page("Data sources", "<h3>What we read for this report</h3><ul>" + s.sources.map(function (x) { return "<li>" + (x.ok ? "Read live: " : "Did not answer: ") + esc(x.name) + (x.note ? " · " + esc(x.note) : "") + "</li>"; }).join("") + "</ul><h3>Rule sources</h3><ul>" + (rs ? rs.sources : []).map(function (x) { return '<li><a href="' + esc(x.url) + '" target="_blank" rel="noopener">' + esc(x.label) + "</a> (checked " + R.CHECKED + ")</li>"; }).join("") + "</ul>" + '<p class="bh-disclaimer"><strong>Planning estimate only.</strong> This is not a legal or zoning determination. Codes change; confirm with the jurisdiction and a licensed professional.</p>'));
+    out.push(page("Data sources", "<h3>Limitations and confidence</h3><p class=\"bh-disclaimer\">" + esc(STUDY_LIMITS) + "</p><h3>What we read for this report</h3><ul>" + s.sources.map(function (x) { return "<li>" + (x.ok ? "Read live: " : "Did not answer: ") + esc(x.name) + (x.note ? " · " + esc(x.note) : "") + "</li>"; }).join("") + "</ul><h3>Rule sources</h3><ul>" + (rs ? rs.sources : []).map(function (x) { return '<li><a href="' + esc(x.url) + '" target="_blank" rel="noopener">' + esc(x.label) + "</a> (checked " + R.CHECKED + ")</li>"; }).join("") + "</ul>" + '<p class="bh-disclaimer"><strong>Planning estimate only.</strong> This is not a legal or zoning determination. Codes change; confirm with the jurisdiction and a licensed professional.</p>'));
 
     $("bh-report").innerHTML = out.join("");
     $("bh-report-wrap").hidden = false;
-    if (window.BuildHereTools) window.BuildHereTools.init($("bh-report"), seed3d);
-    else fillToolBriefsFallback(seed3d);
+    if (window.BuildHereTools && window.BuildHereTools.mountPhotoreal3d) {
+      try { window.BuildHereTools.mountPhotoreal3d(seed3d); } catch (e) {}
+    }
     if ($("bh-lead-address")) $("bh-lead-address").value = s.matched || s.input;
   }
 
@@ -1135,6 +1062,96 @@
 
   /* On the homepage the report sits inside a long page, so print a copy of
      the report on its own instead of the whole homepage. */
+  function downloadStudy() {
+    var Ex = window.BuildHereExport;
+    var report = $("bh-report");
+    if (!Ex || !report || !state) return;
+    var file = Ex.buildStudyFile({
+      address: state.matched || state.input || "Address not matched",
+      date: state.prepared || todayStamp(),
+      bodyHtml: report.innerHTML,
+      sources: state.sources || [],
+      limitations: STUDY_LIMITS
+    });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([file], { type: "text/html" }));
+    a.download = "feasibility-study.html";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+  function renderManualList() {
+    var list = $("bh-manual-list");
+    if (!list || !state) return;
+    var items = state.manual || [];
+    list.innerHTML = items.length ? items.map(function (m, i) {
+      var amount = (m.sfLow != null && m.sfHigh != null) ? (m.sfLow + " to " + m.sfHigh + " sf") : ((m.sf != null ? m.sf + " sf" : "no amount"));
+      return "<li>" + esc(m.label || m.kind) + ": " + esc(amount) + " · " + esc(m.method || "manual") + (m.retrieved ? " · " + esc(m.retrieved) : "") + (m.source ? " · " + esc(m.source) : "") + " <button type=\"button\" class=\"bh-linkbtn\" data-man-del=\"" + i + "\">Remove</button></li>";
+    }).join("") : "<li>No extra source-backed numbers yet.</li>";
+  }
+  function addManual(e) {
+    e.preventDefault();
+    if (!state || !window.BuildHereMeasures) return;
+    var raw = {
+      kind: $("bh-man-kind").value,
+      sf: $("bh-man-sf").value,
+      sfLow: $("bh-man-low").value,
+      sfHigh: $("bh-man-high").value,
+      source: $("bh-man-source").value.trim(),
+      url: $("bh-man-url").value.trim(),
+      retrieved: $("bh-man-date").value,
+      method: $("bh-man-method").value,
+      confidence: $("bh-man-conf").value,
+      automatic: false
+    };
+    var cleaned = window.BuildHereMeasures.cleanMeasure(raw);
+    var note = $("bh-man-note");
+    if (!cleaned.ok) { if (note) note.textContent = cleaned.error; return; }
+    if (!cleaned.measure.source) { if (note) note.textContent = "Name the source, such as the assessor card or the survey sheet."; return; }
+    state.manual = state.manual || [];
+    state.manual.push(cleaned.measure);
+    if (note) note.textContent = "Added. The study shows this beside any automatic number.";
+    $("bh-man-sf").value = "";
+    $("bh-man-low").value = "";
+    $("bh-man-high").value = "";
+    renderManualList();
+    render();
+  }
+  function sampleState() {
+    var s = blank();
+    s.input = "Sample lot";
+    s.matched = "Sample lot (not a property record)";
+    s.juris = "outside";
+    s.jurisLabel = "Example County (sample)";
+    s.county = "Example County";
+    s.stateAbbr = "WA";
+    s.city = "Example";
+    s.lot = 12088;
+    s.lotSrc = "Illustrative lot area for this sample. Not a client file.";
+    s.footprint = 3278;
+    s.footprintSrc = "Illustrative roof outline for this sample. Not living area.";
+    s.footprintKind = "roof";
+    s.prepared = "2026-11-09";
+    s.lon = -90.0091;
+    s.lat = 40.0006;
+    s.rings = [[[-90.01, 40], [-90.01, 40.0012], [-90.0082, 40.0012], [-90.0082, 40], [-90.01, 40]]];
+    s.landscape = {
+      rows: [
+        { key: "lot", label: "Lot area", sf: 12088, conf: "Low", src: "Sample only." },
+        { key: "house", label: "House footprint (on this lot)", sf: 3278, conf: "Low", src: "Sample roof outline. Includes eaves. Not living area." },
+        { key: "garage", label: "Detached garage / accessory building", sf: null, conf: "Unavailable", src: "Not measured. Left blank." },
+        { key: "drive", label: "Driveway and parking", sf: null, conf: "Unavailable", src: "Not measured. Not entered as 0." },
+        { key: "hard", label: "Walkways, patios, decks and other hardscape", sf: null, conf: "Unavailable", src: "Not measured. Not entered as 0." },
+        { key: "land", label: "Unclassified open area (not verified landscaping)", sf: 8810, verifiedLandscape: false, conf: "Low", src: "Lot area minus the roof outline only. Not landscaping." }
+      ],
+      notes: ["Sample layout. These numbers are not a property record."],
+      sources: [],
+      slope: { ok: false, note: "not measured in the sample" },
+      flags: []
+    };
+    s.sources = [{ name: "Sample fixture", ok: true, note: "No live lookup. Not a client address." }];
+    return s;
+  }
   function printReport() {
     if (!document.getElementById("bh-home")) { window.print(); return; }
     var host = document.createElement("div");
@@ -1162,16 +1179,34 @@
         if (!s.matched) { setStatus("We could not match that address. Check the spelling and include the city and ZIP."); return; }
         fillForm(s);
         setStatus(s.juris === "other" ? "Found it in " + s.jurisLabel + ". We could not match that city to our list; verify the rules with the city. You can still read the parcel data below."
-          : s.juris === "outside" ? "Found " + s.matched + ". Zoning numbers are not coded for this place yet. Verify setbacks, coverage and FAR with the jurisdiction. Site coverage, landscape, slope and design tools still run where a public parcel layer answers."
+          : s.juris === "outside" ? "Found " + s.matched + ". Zoning numbers are not coded for this place yet. Verify setbacks, coverage and FAR with the jurisdiction. Parcel, landscape, and slope still run where a public layer answers. Missing paving stays blank."
           : s.manualZone ? "Found " + s.matched + " in " + s.jurisLabel + ". " + s.city + " does not publish a zoning map we can read, so enter the zone from the city map below."
-          : "Found " + s.matched + ". Check the values below, then build the report.");
+          : "Found " + s.matched + ". Options for this lot are first. Edit a fact under the study if a number is wrong.");
         render();
+        if ($("bh-report")) $("bh-report").focus();
       });
     });
     $("bh-confirm-form").addEventListener("submit", function (e) { e.preventDefault(); if (state) { render(); $("bh-report").focus(); } });
     $("bh-print").addEventListener("click", printReport);
+    if ($("bh-download")) $("bh-download").addEventListener("click", downloadStudy);
+    if ($("bh-manual-form")) $("bh-manual-form").addEventListener("submit", addManual);
+    if ($("bh-manual-list")) $("bh-manual-list").addEventListener("click", function (e) {
+      var btn = e.target.closest ? e.target.closest("[data-man-del]") : null;
+      if (!btn || !state || !state.manual) return;
+      state.manual.splice(parseInt(btn.getAttribute("data-man-del"), 10), 1);
+      renderManualList();
+      render();
+    });
     if ($("bh-lead")) $("bh-lead").addEventListener("submit", lead);
-    var p = new URLSearchParams(location.search).get("address");
+    var params = new URLSearchParams(location.search);
+    if (params.get("sample") === "1") {
+      state = sampleState();
+      fillForm(state);
+      render();
+      setStatus("Sample layout only. These numbers are not a property record.");
+      return;
+    }
+    var p = params.get("address");
     if (p) { $("bh-address").value = p; $("bh-go").click(); }
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();

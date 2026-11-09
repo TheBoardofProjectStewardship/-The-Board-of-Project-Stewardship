@@ -721,7 +721,7 @@
     <div class="mb-6 border-b border-white/10 pb-4">
       <span class="text-secondary text-xs font-bold uppercase tracking-widest">Good Steward Tools</span>
       <h2 id="bh-home-h" class="text-3xl font-black text-white tracking-tight">What can I build here?</h2>
-      <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Type a United States street address and get a free first-pass feasibility study: parcel facts, landscape and slope, and design tools. Zoning math (FAR, setbacks and coverage) is coded for Seattle (Neighborhood Residential), Edmonds (LDR), Kenmore (R-1, R-4, R-6), unincorporated King County and unincorporated Snohomish County. Elsewhere in the US, public parcel and landscape data run where a layer answers, and zoning says verify with the jurisdiction.</p>
+      <p class="text-slate-400 font-light mt-3 max-w-3xl leading-relaxed">Type a United States street address. The first result is what that lot can take: addition, ADU, garage or shop, teardown, or remodel, using the public facts we can read. Zoning math (FAR, setbacks and coverage) is coded for Seattle (Neighborhood Residential), Edmonds (LDR), Kenmore (R-1, R-4, R-6), unincorporated King County and unincorporated Snohomish County. Elsewhere in the US, public parcel data runs where a layer answers, and zoning says verify with the jurisdiction.</p>
     </div>
     <section class="bh-card" aria-labelledby="bh-step1">
       <h2 id="bh-step1">1. Find the lot</h2>
@@ -736,16 +736,29 @@
       <p id="bh-status" class="bh-status" role="status" aria-live="polite"></p>
     </section>
 
+    <section id="bh-report-wrap" aria-labelledby="bh-step3" hidden>
+      <div class="bh-toolbar">
+        <h2 id="bh-step3" class="text-xl font-black text-white">What you can build</h2>
+        <p>
+          <button id="bh-print" class="bh-btn" type="button">Print</button>
+          <button id="bh-download" class="bh-btn" type="button">Download study</button>
+        </p>
+      </div>
+      <p class="bh-help">Print opens the browser print dialog. Download saves an HTML file of this study, separate from that dialog. The file includes the address, date, sources, and limitations, and it prints on Letter or A4.</p>
+      <div id="bh-report" class="bh-report" tabindex="-1"></div>
+    </section>
+
     <section id="bh-confirm" class="bh-card" aria-labelledby="bh-step2" hidden>
-      <h2 id="bh-step2">2. Check the numbers</h2>
-      <p class="text-sm">Public records can be stale or missing. We look up finished living area, footprint and hardscape when the Assessor publishes them - fix anything that looks wrong; the report uses what you see here.</p>
+      <h2 id="bh-step2">Edit the facts</h2>
+      <p class="text-sm">Public records can be stale or missing. Finished living area, a roof outline, and paving are different numbers. Fix anything that looks wrong. The options above use what you see here. Leave a paving box blank when you do not know it. Do not type 0 for unknown.</p>
       <form id="bh-confirm-form">
         <div class="bh-grid">
           <div><label class="bh-label" for="bh-lot">Lot size (sq ft)</label><input id="bh-lot" class="bh-input" inputmode="numeric" aria-describedby="bh-lot-src"><p id="bh-lot-src" class="bh-help"></p></div>
           <div><label class="bh-label" for="bh-zone">Zone</label><input id="bh-zone" class="bh-input" aria-describedby="bh-zone-src"><p id="bh-zone-src" class="bh-help"></p></div>
-          <div><label class="bh-label" for="bh-existing">Existing house (finished sq ft)</label><input id="bh-existing" class="bh-input" inputmode="numeric" aria-describedby="bh-existing-src"><p id="bh-existing-src" class="bh-help"></p></div>
-          <div><label class="bh-label" for="bh-footprint">Building footprint (sq ft)</label><input id="bh-footprint" class="bh-input" inputmode="numeric" aria-describedby="bh-footprint-src"><p id="bh-footprint-src" class="bh-help"></p></div>
-          <div><label class="bh-label" for="bh-imperv">Existing impervious surface (sq ft)</label><input id="bh-imperv" class="bh-input" inputmode="numeric" aria-describedby="bh-imperv-src"><p id="bh-imperv-src" class="bh-help">Optional. Roofs, driveway, patios and walks. Used where the zone caps impervious surface.</p></div>
+          <div><label class="bh-label" for="bh-existing">Finished living area (sq ft)</label><input id="bh-existing" class="bh-input" inputmode="numeric" aria-describedby="bh-existing-src"><p id="bh-existing-src" class="bh-help"></p></div>
+          <div><label class="bh-label" for="bh-footprint">Roof or building footprint (sq ft)</label><input id="bh-footprint" class="bh-input" inputmode="numeric" aria-describedby="bh-footprint-src"><p id="bh-footprint-src" class="bh-help"></p></div>
+          <div><label class="bh-label" for="bh-footprint-kind">What that footprint number is</label><select id="bh-footprint-kind" class="bh-input"><option value="">Not set</option><option value="roof">Roof outline (includes eaves)</option><option value="footprint">Surveyed building footprint</option><option value="firstFloor">First-floor area (not a roof)</option></select><p class="bh-help">First-floor area is not used as roof coverage. A roof outline is not living area.</p></div>
+          <div><label class="bh-label" for="bh-imperv">Existing impervious surface (sq ft)</label><input id="bh-imperv" class="bh-input" inputmode="numeric" aria-describedby="bh-imperv-src"><p id="bh-imperv-src" class="bh-help">Optional. Roofs, driveway, patios and walks. Used where the zone caps impervious surface. Leave blank if paving is unknown.</p></div>
           <div><label class="bh-label" for="bh-front">Street side of the lot</label><select id="bh-front" class="bh-input" aria-describedby="bh-front-help"><option value="">Guess from the address point</option><option value="N">North</option><option value="E">East</option><option value="S">South</option><option value="W">West</option></select><p id="bh-front-help" class="bh-help">Sets which lot line gets the front setback on the site plan.</p></div>
           <div><label class="bh-label" for="bh-units">Homes on the lot after the project</label><select id="bh-units" class="bh-input" aria-describedby="bh-units-help"><option value="1">1 (one house)</option><option value="2">2 (house plus ADU, or a duplex)</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select><p id="bh-units-help" class="bh-help">Counts the house and any ADUs. In Seattle more homes on a lot raise the floor area limit.</p></div>
           <div><label class="bh-label" for="bh-stories">Existing stories</label><select id="bh-stories" class="bh-input"><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
@@ -753,20 +766,37 @@
         </div>
         <p><button class="bh-btn" type="submit">Update the report</button></p>
       </form>
+      <h3 class="bh-label" id="bh-manual-h">Add a source-backed number</h3>
+      <p class="bh-help" id="bh-manual-help">Use this when an automatic layer is blank. Type a figure you read on an assessor card, a survey, a permit plan, or a listing page. This tool does not fetch listing sites. An aerial photo or an unscaled picture needs a low and a high, not one precise number.</p>
+      <form id="bh-manual-form">
+        <div class="bh-grid">
+          <div><label class="bh-label" for="bh-man-kind">Measure</label><select id="bh-man-kind" class="bh-input"><option value="living">Finished living area</option><option value="gfa">Gross floor area</option><option value="roof">Roof outline</option><option value="firstFloor">First-floor area</option><option value="attachedGarage">Attached garage floor area</option><option value="detachedGarage">Detached garage footprint</option><option value="driveway">Driveway and parking</option><option value="hardscape">Other hardscape</option><option value="patio">Patio</option><option value="eaves">Eave overhang</option></select></div>
+          <div><label class="bh-label" for="bh-man-sf">Square feet</label><input id="bh-man-sf" class="bh-input" inputmode="decimal" aria-describedby="bh-manual-help"></div>
+          <div><label class="bh-label" for="bh-man-low">Range low</label><input id="bh-man-low" class="bh-input" inputmode="decimal"></div>
+          <div><label class="bh-label" for="bh-man-high">Range high</label><input id="bh-man-high" class="bh-input" inputmode="decimal"></div>
+          <div><label class="bh-label" for="bh-man-method">How you got it</label><select id="bh-man-method" class="bh-input"><option value="assessor">Assessor or property card</option><option value="survey">Survey</option><option value="permit">Permit plan</option><option value="listing">Listing page (typed by you)</option><option value="tape">Tape measure</option><option value="aerial">Aerial estimate</option><option value="photo">Unscaled photo</option></select></div>
+          <div><label class="bh-label" for="bh-man-conf">Confidence</label><select id="bh-man-conf" class="bh-input"><option value="High">High</option><option value="Medium" selected>Medium</option><option value="Low">Low</option></select></div>
+          <div><label class="bh-label" for="bh-man-source">Source name</label><input id="bh-man-source" class="bh-input" autocomplete="off"></div>
+          <div><label class="bh-label" for="bh-man-url">Source page</label><input id="bh-man-url" class="bh-input" inputmode="url" placeholder="https://"></div>
+          <div><label class="bh-label" for="bh-man-date">Date you read it</label><input id="bh-man-date" class="bh-input" type="date"></div>
+        </div>
+        <p><button class="bh-btn" type="submit">Add this source</button></p>
+        <p id="bh-man-note" class="bh-help" role="status"></p>
+        <ul id="bh-manual-list" class="bh-help"></ul>
+      </form>
     </section>
-
-    <section id="bh-report-wrap" aria-labelledby="bh-step3" hidden>
-      <div class="bh-toolbar"><h2 id="bh-step3" class="text-xl font-black text-white">3. Your feasibility study</h2><button id="bh-print" class="bh-btn" type="button">Print or save as PDF</button></div>
-      <div id="bh-report" class="bh-report" tabindex="-1"></div>
-    </section>
+    
     <p class="text-xs text-slate-400 font-light leading-relaxed">A planning estimate, not a legal, zoning or permit determination. Confirm every number with the city or county and a licensed professional. <a href="./build-here.html" class="text-secondary hover:underline">Open the full tool page</a> for the editor review form and the full disclaimer.</p>
-    <script src="/assets/js/build-here-rules.js?v=20261105b" defer></script>
-    <script src="/assets/js/build-here-landscape.js?v=20261105b" defer></script>
-    <script src="/assets/js/build-here-tools.js?v=20261105b" defer></script>
-    <script src="/assets/js/build-here.js?v=20261106a" defer></script>
+    <script src="/assets/js/build-here-rules.js?v=20261109a" defer></script>
+    <script src="/assets/js/build-here-landscape.js?v=20261109a" defer></script>
+    <script src="/assets/js/build-here-measures.js?v=20261109a" defer></script>
+    <script src="/assets/js/build-here-stage.js?v=20261109a" defer></script>
+    <script src="/assets/js/build-here-export.js?v=20261109a" defer></script>
+    <script src="/assets/js/build-here-tools.js?v=20261109a" defer></script>
+    <script src="/assets/js/build-here.js?v=20261109a" defer></script>
   </section>
 
-    <section id="mission" class="mb-12">
+  <section id="mission" class="mb-12">
     <iframe
       id="mesh-flow-mission"
       class="board-section-frame"

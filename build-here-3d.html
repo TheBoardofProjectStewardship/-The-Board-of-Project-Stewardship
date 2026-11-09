@@ -83,12 +83,11 @@
   <header class="max-w-6xl mx-auto px-4 pt-10 pb-6">
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Good Steward Tools · Feasibility · 3D</p>
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Design it in 3D</h1>
-    <p class="text-slate-300 font-light max-w-3xl leading-relaxed">Optional deepen step for the combined feasibility study on <a href="/build-here.html" class="underline">What can I build here?</a>. Your lot (outline, setbacks, height, coverage) is already seeded from that report. Add massing boxes here; Pascal and CivilCraft for the same lot also live in the main study — use the tabs below if you opened this page directly.</p>
+    <p class="text-slate-300 font-light max-w-3xl leading-relaxed">Optional deepen step for the feasibility study on <a href="/build-here.html" class="underline">What can I build here?</a>. The lot outline, setbacks, height, and coverage are seeded from that report when you open this page in the same browser. Add massing boxes here. This is a diagram, not a permit drawing.</p>
   </header>
   <div class="bh-wrap">
     <section class="bh-card">
       <p id="b3-info" class="bh-help" role="status" aria-live="polite"></p>
-      <div class="b3-tabs" role="tablist"><button class="bh-btn" id="b3-tab-mass" role="tab" aria-selected="true">Massing sketch</button> <button class="bh-btn b3-off" id="b3-tab-pascal" role="tab" aria-selected="false">Pascal Editor (walls, rooms, prompts)</button> <button class="bh-btn b3-off" id="b3-tab-civil" role="tab" aria-selected="false">CivilCraft (grade, slope, drainage)</button></div>
       <div id="b3-mass">
         <div class="b3-tools">
           <label>Add <select id="b3-kind" class="bh-input"><option value="house">House</option><option value="addition">Addition</option><option value="adu">ADU</option><option value="shop">Shop / garage</option><option value="deck">Deck / patio</option></select></label>
@@ -101,51 +100,6 @@
         <p class="bh-help">Drag a box to move it. Drag empty ground to orbit, right-drag to pan, scroll to zoom. Floors are 10 ft each. Diagram only, not a survey or a design.</p>
         <table class="bh-table" id="b3-check"></table>
         <p><button class="bh-btn" id="b3-json" type="button">Download sketch (JSON)</button> <button class="bh-btn" id="b3-png" type="button">Save picture</button></p>
-      </div>
-      <div id="b3-pascal" hidden>
-        <p class="text-sm">Pascal Editor is an open-source (MIT) 3D building editor from Pascal Group: walls, slabs, roofs, doors, windows and zones, rendered with WebGPU, with agents that can build from a prompt. It runs best in a current Chrome or Edge on a desktop. Copy the brief below, open the editor, and paste it into its prompt chat, or draw the lot by hand with these numbers.</p>
-        <label class="bh-label" for="b3-prompt">Starting brief for Pascal Editor</label>
-        <textarea id="b3-prompt" class="bh-input" rows="7" readonly></textarea>
-        <p><button class="bh-btn" id="b3-copy" type="button">Copy brief</button> <a class="bh-btn" href="https://editor.pascal.app/" target="_blank" rel="noopener">Open Pascal Editor in a new tab</a> <button class="bh-btn" id="b3-embed" type="button">Load it here</button></p>
-        <div id="b3-frame-wrap"></div>
-        <p class="bh-muted">Pascal Editor is made by Pascal Group Inc. and is <a href="https://github.com/pascalorg/editor" target="_blank" rel="noopener">open source on GitHub</a> under the MIT license. The Board is not affiliated with Pascal. What you draw there stays in that app.</p>
-      </div>
-      <div id="b3-civil" hidden>
-        <p class="text-sm">CivilCraft is a free, open-source (Apache-2.0) civil and site design app from the CadCraft suite. It builds a ground surface from survey points, then lets you grade a building pad, lay a driveway, see cut and fill, and check drainage. It runs in the browser and nothing is uploaded. Download your lot as a point file below, open CivilCraft, and drop the file in.</p>
-        <label class="bh-label" for="b3-civil-brief">Lot summary for CivilCraft</label>
-        <textarea id="b3-civil-brief" class="bh-input" rows="6" readonly></textarea>
-        <p><button class="bh-btn" id="b3-civil-csv" type="button">Download lot points (CSV)</button> <a class="bh-btn" href="https://getcadcraft.com/use/civilcraft" target="_blank" rel="noopener">Open CivilCraft in a new tab</a> <a class="bh-btn" href="https://getcadcraft.com/tutorials/civilcraft/getting-started" target="_blank" rel="noopener">10-minute guide</a></p>
-        <p class="bh-help">The point file has your lot corners and the setback envelope at elevation 100 ft, as a flat stand-in. Real grades need a survey: replace them with your surveyor's points before you trust any cut, fill or slope number.</p>
-        <p class="bh-muted">CivilCraft is made by CadCraft and is open source under the Apache-2.0 license. The Board is not affiliated with CadCraft.</p>
-      </div>
-    </section>
-    <section class="bh-card" id="b3-media" aria-labelledby="b3-media-h">
-      <h2 id="b3-media-h" class="text-lg font-bold">Free tools for the next step: see them, then try them on your lot</h2>
-      <p class="bh-help">Click a chapter or a hotspot. Every "Try it" button opens that tool with your lot from the report already filled in.</p>
-      <div class="b3-media-grid">
-        <figure class="b3-fig">
-          <video id="b3-pv" src="https://video.twimg.com/amplify_video/2117671403608780800/vid/avc1/1280x720/tJoLnt9uxn6yne-1.mp4#t=10" controls muted playsinline preload="metadata"></video>
-          <figcaption><b>Pascal Editor</b> · walls, rooms, roofs, from a prompt
-            <div class="b3-chaps" id="b3-chaps">
-              <button data-t="2" data-img="2">Site in 3D</button><button data-t="10" data-img="10">Floor plan</button><button data-t="30" data-img="30">Every wall &amp; window</button><button data-t="60" data-img="60">Levels</button><button data-t="90" data-img="90">Site in the real world</button><button data-t="120" data-img="120">Ask the building</button>
-            </div>
-            <p id="b3-chap-note" class="bh-help"></p>
-            <button class="bh-btn" data-try="pascal" type="button">Try it on my lot</button>
-            <a class="bh-muted" href="https://x.com/neotoolstack/status/2117671794002018568" target="_blank" rel="noopener">Video via @neotoolstack on X</a></figcaption>
-        </figure>
-        <figure class="b3-fig">
-          <div class="b3-hot">
-            <img src="/assets/images/tools/civilcraft.webp" alt="CivilCraft screenshot: contour surface with a road alignment and a building pad in 3D" width="1024" height="576" loading="lazy">
-            <button class="b3-pin" style="left:44%;top:30%" data-note="Existing ground: contours and elevation bands built from survey points. Your lot's slope shows up here.">1</button>
-            <button class="b3-pin" style="left:42%;top:58%" data-note="Alignment and profile: a driveway or road laid on the surface, with its grade checked against the ground.">2</button>
-            <button class="b3-pin" style="left:63%;top:42%" data-note="Building pad: set a pad elevation and slopes, and CivilCraft shows cut and fill to daylight. This is where your massing box sits.">3</button>
-            <button class="b3-pin" style="left:80%;top:35%" data-note="Drainage: draw a catchment and pipe network and check flows. Useful for stormwater questions on a permit.">4</button>
-          </div>
-          <figcaption><b>CivilCraft</b> · surfaces, grading, earthwork, drainage
-            <p id="b3-hot-note" class="bh-help">Tap a numbered pin.</p>
-            <button class="bh-btn" data-try="civil" type="button">Try it on my lot</button>
-            <a class="bh-muted" href="https://x.com/semhustej/status/2118346460538249459" target="_blank" rel="noopener">Image via @semhustej on X</a> · <a class="bh-muted" href="https://youtu.be/R8naLwdCawQ" target="_blank" rel="noopener">First-look video</a></figcaption>
-        </figure>
       </div>
     </section>
   </div>
@@ -187,7 +141,6 @@
   </style>
   <script src="/assets/js/site.js" defer></script>
   <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
-  <script type="module" src="/assets/js/build-here-3d.js?v=20261105b"></script>
-  <script src="/assets/js/build-here-tools.js?v=20261105b" defer></script>
+  <script type="module" src="/assets/js/build-here-3d.js?v=20261109a"></script>
 </body>
 </html>
