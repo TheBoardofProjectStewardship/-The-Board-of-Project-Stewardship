@@ -1,0 +1,25 @@
+{
+  "submission_id": "2026-11-09-patio-cover-lynnwood-wa",
+  "idempotency_key": "sha256:8711ec4f03611b5e7bc0d6f6ef135d5481c3e86580d616993671284a146732e8",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-11-09T11:53:01Z",
+  "outputs": [
+    "assets/images/posts/2026-11-09-lynnwood-patio-cover-1.webp",
+    "assets/images/posts/2026-11-09-lynnwood-patio-cover-2.webp",
+    "assets/images/posts/2026-11-09-lynnwood-patio-cover-3.webp",
+    "assets/images/posts/2026-11-09-lynnwood-patio-cover-4.webp",
+    "assets/images/posts/2026-11-09-lynnwood-patio-cover-5.webp",
+    "assets/images/posts/2026-11-09-lynnwood-patio-cover-6.webp",
+    "assets/images/posts/2026-11-09-lynnwood-patio-cover-7.webp",
+    "assets/images/posts/2026-11-09-lynnwood-patio-cover-8.webp",
+    "assets/images/posts/2026-11-09-lynnwood-patio-cover-9.webp",
+    "posts/2026-11-09-patio-cover-lynnwood-wa.md",
+    "posts/2026-11-09-patio-cover-lynnwood-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 97
+}

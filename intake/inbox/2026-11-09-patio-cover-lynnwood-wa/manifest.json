@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-11-09-patio-cover-lynnwood-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-11-09T12:00:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Patio Cover Lynnwood WA \u2014 Permits, Snow Load, Setbacks and Rain-Ready Drainage",
+    "date": "2026-11-09",
+    "slug": "patio-cover-lynnwood-wa",
+    "description": "A Lynnwood homeowner's guide to a covered patio: the City's permit-exempt list, the online portal, Lynnwood's snow load and frost depth, setbacks, rain-ready gutters and drainage, City electrical permits for lights and fans, and how to verify the crew.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 connected but no 2026-11-09 board-intake packet (latest openclaw-seo-2026-11-08); PC not touched. Topic: patio cover (Lynnwood Work Exempt list: detached accessory <=200 sf, window awnings <=54in projection; combo permit w/ separate City electrical; Structural Design Criteria 22 psf snow, 98 mph, SDC D/D2, 18in frost, 1in/hr rainfall; site plan to roof overhang; accessory structure setbacks = primary; residential inspections), Lynnwood WA (Snohomish County). lynnwood already in place lists. Last Lynnwood daily 2026-10-21; no prior patio-cover post. No fees or prices. Producer role fields kept per intake contract."
+}
