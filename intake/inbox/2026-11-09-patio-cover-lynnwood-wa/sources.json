@@ -1,0 +1,171 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Lynnwood",
+    "service": "Patio cover",
+    "slug": "patio-cover-lynnwood-wa"
+  },
+  "sources": [
+    {
+      "url": "https://alumawoodpatio.com/",
+      "title": "https://alumawoodpatio.com/",
+      "retrieved": "2026-11-09",
+      "http_status": 200,
+      "supports": "Material: aluminum shade structures"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51",
+      "retrieved": "2026-11-09",
+      "http_status": 200,
+      "supports": "WA amendments to IRC (2021 WA Residential Code)"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51-0301",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51-0301",
+      "retrieved": "2026-11-09",
+      "http_status": 200,
+      "supports": "Section R301 design criteria (WA amendments)"
+    },
+    {
+      "url": "https://duralum.com/",
+      "title": "https://duralum.com/",
+      "retrieved": "2026-11-09",
+      "http_status": 200,
+      "supports": "Material: aluminum patio cover systems"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "retrieved": "2026-11-09",
+      "http_status": 200,
+      "supports": "State hiring guidance: registration, bids, written contract"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "title": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "retrieved": "2026-11-09",
+      "http_status": 200,
+      "supports": "Lynnwood listed (PO Box 5008, 425-670-5400) -> City issues electrical permits"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-11-09",
+      "http_status": 200,
+      "supports": "License/bond/insurance lookup"
+    },
+    {
+      "url": "https://www.amerimax.com/",
+      "title": "https://www.amerimax.com/",
+      "retrieved": "2026-11-09",
+      "http_status": 200,
+      "supports": "Material: gutters, downspouts, flashing"
+    },
+    {
+      "url": "https://www.lynnwoodwa.gov/Services/Apply-for-a-Permit",
+      "title": "https://www.lynnwoodwa.gov/Services/Apply-for-a-Permit",
+      "retrieved": "2026-11-09",
+      "http_status": 200,
+      "supports": "DBS issues residential building and electrical permits; Permit Center 425-670-5400, City Hall 19100 44th Ave W; online portal"
+    },
+    {
+      "url": "https://www.lynnwoodwa.gov/Services/Apply-for-a-Permit/Adopted-Codes-City-Design-Guidelines-Plans",
+      "title": "https://www.lynnwoodwa.gov/Services/Apply-for-a-Permit/Adopted-Codes-City-Design-Guidelines-Plans",
+      "retrieved": "2026-11-09",
+      "http_status": 200,
+      "supports": "LMC regulates setbacks/height/lot size; Title 8 Unified Development Code effective July 1 (2025); repeal of LMC Title 21; 2021 WA Residential Code adopted"
+    },
+    {
+      "url": "https://www.lynnwoodwa.gov/Services/Apply-for-a-Permit/Applications-Checklists",
+      "title": "https://www.lynnwoodwa.gov/Services/Apply-for-a-Permit/Applications-Checklists",
+      "retrieved": "2026-11-09",
+      "http_status": 200,
+      "supports": "No permitting outside city limits; Development Engineering covers work outside building footprint incl. grading/storm drainage; fee and review-time info"
+    },
+    {
+      "url": "https://www.lynnwoodwa.gov/Services/Apply-for-a-Permit/Guide-to-Getting-a-Permit",
+      "title": "https://www.lynnwoodwa.gov/Services/Apply-for-a-Permit/Guide-to-Getting-a-Permit",
+      "retrieved": "2026-11-09",
+      "http_status": 200,
+      "supports": "Check city limits (Do I Live in Lynnwood map); review Work Exempt list; contact staff; online account"
+    },
+    {
+      "url": "https://www.lynnwoodwa.gov/Services/Apply-for-a-Permit/Online-Permit-Portal-Apply-Review-Pay-Issue-Permits-Inspections",
+      "title": "https://www.lynnwoodwa.gov/Services/Apply-for-a-Permit/Online-Permit-Portal-Apply-Review-Pay-Issue-Permits-Inspections",
+      "retrieved": "2026-11-09",
+      "http_status": 200,
+      "supports": "Online permit portal (redirects to ci-lynnwood-wa.smartgovcommunity.com)"
+    },
+    {
+      "url": "https://www.lynnwoodwa.gov/files/9e028769-e9bd-4e02-8e70-2a4b886bc590/STRUCTURAL-DESIGN-CRITERIA-LYNNWOOD-2026.2.pdf",
+      "title": "https://www.lynnwoodwa.gov/files/9e028769-e9bd-4e02-8e70-2a4b886bc590/STRUCTURAL-DESIGN-CRITERIA-LYNNWOOD-2026.2.pdf",
+      "retrieved": "2026-11-09",
+      "http_status": 200,
+      "supports": "98 mph (ASCE 7-16) exp B; 22 psf ground snow; SDC D (D2 res); rainfall 1in/hr; frost 18in; soil 1500 psf"
+    },
+    {
+      "url": "https://www.lynnwoodwa.gov/files/sharedassets/public/v/1/dbs/checklists/building/accessory-structure-permit-checklist-2024.06.pdf",
+      "title": "https://www.lynnwoodwa.gov/files/sharedassets/public/v/1/dbs/checklists/building/accessory-structure-permit-checklist-2024.06.pdf",
+      "retrieved": "2026-11-09",
+      "http_status": 200,
+      "supports": "Detached accessory must meet primary structure setbacks; lot coverage via Land Use Planner 425-670-5410; height not exceeding 15 ft or primary; detached carports listed"
+    },
+    {
+      "url": "https://www.lynnwoodwa.gov/files/sharedassets/public/v/1/dbs/checklists/building/building-inspections-residential-2024.08.pdf",
+      "title": "https://www.lynnwoodwa.gov/files/sharedassets/public/v/1/dbs/checklists/building/building-inspections-residential-2024.08.pdf",
+      "retrieved": "2026-11-09",
+      "http_status": 200,
+      "supports": "Permit holder requests inspections by 4pm day before; plans+card on site; footing/setback/erosion inspection before concrete with corner pins/string lines; 180-day expiry"
+    },
+    {
+      "url": "https://www.lynnwoodwa.gov/files/sharedassets/public/v/1/dbs/checklists/building/residential-permit-checklist-2024.06.pdf",
+      "title": "https://www.lynnwoodwa.gov/files/sharedassets/public/v/1/dbs/checklists/building/residential-permit-checklist-2024.06.pdf",
+      "retrieved": "2026-11-09",
+      "http_status": 200,
+      "supports": "Combo permit with electrical separate; licensed electrical contractor if sold/rented/leased within 12 months; Planning 425-670-5410, Building 425-670-5550; site plan distances incl. roof overhang"
+    },
+    {
+      "url": "https://www.lynnwoodwa.gov/files/sharedassets/public/v/1/dbs/checklists/building/work-exempted-from-building-permit-2024.06.pdf",
+      "title": "https://www.lynnwoodwa.gov/files/sharedassets/public/v/1/dbs/checklists/building/work-exempted-from-building-permit-2024.06.pdf",
+      "retrieved": "2026-11-09",
+      "http_status": 200,
+      "supports": "Exempt: detached one-story accessory <=200 sf; window awnings <=54in projection w/o additional support; decks <=200 sf etc.; exemption does not authorize code violations"
+    },
+    {
+      "url": "https://www.lynnwoodwa.gov/files/sharedassets/public/v/1/dbs/checklists/building/work-exempted-from-electrical-permit-2024.06.pdf",
+      "title": "https://www.lynnwoodwa.gov/files/sharedassets/public/v/1/dbs/checklists/building/work-exempted-from-electrical-permit-2024.06.pdf",
+      "retrieved": "2026-11-09",
+      "http_status": 200,
+      "supports": "City's own electrical permit exemption list"
+    },
+    {
+      "url": "https://www.palram.com/",
+      "title": "https://www.palram.com/",
+      "retrieved": "2026-11-09",
+      "http_status": 200,
+      "supports": "Material: polycarbonate/PVC roofing panels"
+    }
+  ],
+  "dropped": [
+    {
+      "url": "https://lynnwood.municipal.codes/LMC/8",
+      "reason": "403 from box curl; Title 8 setback numbers not cited"
+    },
+    {
+      "url": "https://www.codepublishing.com/WA/Lynnwood/",
+      "reason": "403 from box curl"
+    },
+    {
+      "note": "IRC Appendix H patio covers: not in WAC 51-51 amendment list; not cited"
+    },
+    {
+      "note": "Setback distances, fees, prices, review timelines omitted (zone-specific / not verified)"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=CKQkrUkVTNw",
+      "reason": "oEmbed 404"
+    }
+  ],
+  "notes": "Box curl 2026-11-09 (lynnwoodwa.gov returns 403 to plain curl UA; 200 with browser UA/headers). Lynnwood issues its own electrical permits (City page + L&I city list). Cite only 200 pages."
+}

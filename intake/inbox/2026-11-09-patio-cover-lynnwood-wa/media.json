@@ -1,0 +1,92 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-11-09-lynnwood-patio-cover-1.webp",
+      "repo_path": "assets/images/posts/2026-11-09-lynnwood-patio-cover-1.webp",
+      "alt": "Lynnwood, WA patio cover: new attached wood-framed patio cover with clear roof panels on fir posts and footings beside a two-story house under tall evergreens on an overcast day \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "ae4e3d5dd8004207c411496ac10a5680",
+      "source": "Newly generated image (built-in image generator, 2026-11-09), source gen-1.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-09-lynnwood-patio-cover-2.webp",
+      "repo_path": "assets/images/posts/2026-11-09-lynnwood-patio-cover-2.webp",
+      "alt": "Lynnwood, WA patio cover ledger detail: ledger board bolted to the house rim with metal Z-flashing above, house wrap and gray lap siding, rain droplets on the wood \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "044a251186a044b3e8b593d697385483",
+      "source": "Newly generated image (built-in image generator, 2026-11-09), source gen-2.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-09-lynnwood-patio-cover-3.webp",
+      "repo_path": "assets/images/posts/2026-11-09-lynnwood-patio-cover-3.webp",
+      "alt": "Lynnwood, WA patio cover post base: wood post on a galvanized steel post base set on a round concrete footing with gravel and a wet patio slab \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "018c0e2e14a08720c5a31735e2df9c17",
+      "source": "Newly generated image (built-in image generator, 2026-11-09), source gen-3.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-09-lynnwood-patio-cover-4.webp",
+      "repo_path": "assets/images/posts/2026-11-09-lynnwood-patio-cover-4.webp",
+      "alt": "Lynnwood, WA patio cover in the rain: view under the cover with exposed beams and rafters, a gutter at the roof edge, rain falling beyond and a dry dining table \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "adadcccb1dc00750d680f7e1a8a89a8a",
+      "source": "Newly generated image (built-in image generator, 2026-11-09), source gen-4.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-09-lynnwood-patio-cover-5.webp",
+      "repo_path": "assets/images/posts/2026-11-09-lynnwood-patio-cover-5.webp",
+      "alt": "Lynnwood, WA patio cover planning: printed site plan with the patio cover outline and setback lines on a kitchen table with a tape measure, pencil and coffee beside a rainy window \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "3ea4f9a4222eb92139e57d68417f0c19",
+      "source": "Newly generated image (built-in image generator, 2026-11-09), source gen-5.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-09-lynnwood-patio-cover-6.webp",
+      "repo_path": "assets/images/posts/2026-11-09-lynnwood-patio-cover-6.webp",
+      "alt": "Lynnwood, WA patio cover drainage: downspout from the patio cover gutter running into a black drain pipe beside the concrete patio, ferns and rain \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "a8d3e5a00bd17c6aa84a056b68e2c93d",
+      "source": "Newly generated image (built-in image generator, 2026-11-09), source gen-6.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-09-lynnwood-patio-cover-7.webp",
+      "repo_path": "assets/images/posts/2026-11-09-lynnwood-patio-cover-7.webp",
+      "alt": "Lynnwood, WA patio cover at dusk: covered patio ceiling with a recessed light and ceiling fan, an outdoor outlet on a post and a wet slab \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "f0b45a42c2d8f9c95af16d3041b430ea",
+      "source": "Newly generated image (built-in image generator, 2026-11-09), source gen-7.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-09-lynnwood-patio-cover-8.webp",
+      "repo_path": "assets/images/posts/2026-11-09-lynnwood-patio-cover-8.webp",
+      "alt": "Lynnwood, WA patio cover replacement: old failing patio cover with a mossy corrugated roof, a rotted post bottom and a sagging beam \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "f21ca04dd82c0a81dcac58cccd2e4930",
+      "source": "Newly generated image (built-in image generator, 2026-11-09), source gen-8.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-09-lynnwood-patio-cover-9.webp",
+      "repo_path": "assets/images/posts/2026-11-09-lynnwood-patio-cover-9.webp",
+      "alt": "Lynnwood, WA patio cover framing: clipboard and framing plans on a sawhorse beside a partly framed patio cover with beams and rafters but no roof yet \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "c995f83dbeb4ce5830f82ca5d29d08ae",
+      "source": "Newly generated image (built-in image generator, 2026-11-09), source gen-9.jpg converted to 1600w webp q82"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "Vo8-6iWRCt4",
+      "url": "https://www.youtube.com/watch?v=Vo8-6iWRCt4",
+      "title": "How to Install Patio Roof Riser Brackets for a Patio Cover, Pergola, or Roof - Part 1/2",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "9 newly generated images (built-in generator), 0 regraded stills, 0 paid media."
+}

@@ -1,0 +1,56 @@
+{
+  "producer": "openclaw",
+  "agent": "seo-specialist",
+  "slug": "patio-cover-lynnwood-wa",
+  "title": "Patio Cover Lynnwood WA \u2014 Permits, Snow Load, Setbacks and Rain-Ready Drainage",
+  "description": "A Lynnwood homeowner's guide to a covered patio: the City's permit-exempt list, the online portal, Lynnwood's snow load and frost depth, setbacks, rain-ready gutters and drainage, City electrical permits for lights and fans, and how to verify the crew.",
+  "category": "Guides",
+  "keywords": [
+    "patio cover Lynnwood WA",
+    "Lynnwood patio cover permit",
+    "covered patio Lynnwood",
+    "Lynnwood structural design criteria snow load",
+    "Lynnwood patio cover contractor"
+  ],
+  "outline": [
+    "Key Takeaways",
+    "Why a covered patio makes sense in Lynnwood",
+    "First, confirm you are actually in Lynnwood",
+    "When a Lynnwood patio cover needs a permit",
+    "How Lynnwood wants you to apply",
+    "Setbacks and the site plan",
+    "Lynnwood's design numbers",
+    "Attaching to the house without inviting rot",
+    "Inspections to expect",
+    "Rain-ready drainage",
+    "Lights, fans and outlets: a Lynnwood electrical permit",
+    "Replacing an old, failing cover",
+    "Materials Worth Knowing",
+    "How to shortlist and verify the crew",
+    "Where Pacific Pro Group fits",
+    "Next steps for a Lynnwood patio cover"
+  ],
+  "search_intent": "A Lynnwood homeowner planning a covered patio wants to know whether the City requires a permit, how to apply online, which design loads, setbacks and drainage details matter, who issues the electrical permit for lights and fans, and how to verify the crew.",
+  "local_angles": [
+    "Lynnwood address vs city limits (Do I Live in Lynnwood map; no permitting outside city limits)",
+    "Work Exempt list: detached one-story accessory <=200 sf; window awnings <=54in projection w/o extra support; decks <=200 sf/<=30in/not attached",
+    "Combo permit (building+mechanical+plumbing) with electrical separate; Permit Center 425-670-5400, Planning 425-670-5410, Building 425-670-5550",
+    "Structural Design Criteria: 98 mph exp B, 22 psf ground snow, SDC D (D2 res), 1in/hr rainfall, 18in frost, 1500 psf soil",
+    "Site plan distances measured incl. roof overhangs; accessory structures meet primary setbacks, <=15ft or primary height",
+    "Lynnwood issues its own electrical permits (on L&I city list)",
+    "Residential inspections: footing/setback/erosion before concrete; request by 4pm day before; 180-day expiry"
+  ],
+  "internal_links": [
+    "../lynnwood.html",
+    "../permits.html",
+    "../verify-contractor.html",
+    "../hiring-a-contractor.html",
+    "../bonds-and-insurance.html",
+    "../red-flags-hiring.html"
+  ],
+  "notes": "Box-authored fallback brief. PPG only as Board #1 -> https://pacificprogroup.com/.",
+  "generation": {
+    "agent": "box-authored",
+    "mode": "box-fallback"
+  }
+}
