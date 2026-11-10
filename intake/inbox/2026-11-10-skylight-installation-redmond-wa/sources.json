@@ -1,0 +1,172 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Redmond",
+    "service": "Skylight installation",
+    "slug": "skylight-installation-redmond-wa"
+  },
+  "sources": [
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R",
+      "retrieved": "2026-11-10",
+      "http_status": 200,
+      "supports": "WA State Energy Code, residential"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R-40211",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R-40211",
+      "retrieved": "2026-11-10",
+      "http_status": 200,
+      "supports": "Table R402.1.2: CZ5 and Marine 4 fenestration U-0.30, skylight U-0.50"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R-40230",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R-40230",
+      "retrieved": "2026-11-10",
+      "http_status": 200,
+      "supports": "R402.3.3: up to 15 sf glazed fenestration per dwelling unit exempt from U/SHGC in R402.1.2; not for UA alternative"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R-40240",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R-40240",
+      "retrieved": "2026-11-10",
+      "http_status": 200,
+      "supports": "R402.4.2: windows/skylights/sliders <=0.3 cfm/sf tested to NFRC 400 or AAMA/WDMA/CSA 101/I.S.2/A440, listed and labeled"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R-40241",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R-40241",
+      "retrieved": "2026-11-10",
+      "http_status": 200,
+      "supports": "Table R402.4.1.1: space between skylights and framing shall be sealed"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R-40250",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R-40250",
+      "retrieved": "2026-11-10",
+      "http_status": 200,
+      "supports": "R402.5: area-weighted max U 0.48 vertical, 0.75 skylights with tradeoffs (R402.1.5/R405)"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51",
+      "retrieved": "2026-11-10",
+      "http_status": 200,
+      "supports": "WA amendments to IRC (WA Residential Code)"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "retrieved": "2026-11-10",
+      "http_status": 200,
+      "supports": "State hiring guidance: registration, bids, written contract"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "title": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "retrieved": "2026-11-10",
+      "http_status": 200,
+      "supports": "Redmond listed (15670 NE 85th St, 425-556-2473) -> City issues electrical permits"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-11-10",
+      "http_status": 200,
+      "supports": "License/bond/insurance lookup"
+    },
+    {
+      "url": "https://solatube.com/",
+      "title": "https://solatube.com/",
+      "retrieved": "2026-11-10",
+      "http_status": 200,
+      "supports": "Material: tubular daylighting devices"
+    },
+    {
+      "url": "https://www.fakrousa.com/",
+      "title": "https://www.fakrousa.com/",
+      "retrieved": "2026-11-10",
+      "http_status": 200,
+      "supports": "Material: skylights, roof windows, flashing"
+    },
+    {
+      "url": "https://www.kennedyskylights.com/",
+      "title": "https://www.kennedyskylights.com/",
+      "retrieved": "2026-11-10",
+      "http_status": 200,
+      "supports": "Material: skylights and solar ventilation"
+    },
+    {
+      "url": "https://www.redmond.gov/379/Schedule-Inspection",
+      "title": "https://www.redmond.gov/379/Schedule-Inspection",
+      "retrieved": "2026-11-10",
+      "http_status": 200,
+      "supports": "Inspections via REPS or IVR 425-556-2435; by 11 pm for next business day; homeowner 1-hour window via 2 or 425-556-2760 M-F 8-5"
+    },
+    {
+      "url": "https://www.redmond.gov/462/How-to-Apply",
+      "title": "https://www.redmond.gov/462/How-to-Apply",
+      "retrieved": "2026-11-10",
+      "http_status": 200,
+      "supports": "REPS for OTC permits; PRO for plan-reviewed permits (permit number email within 48 hours); permits@redmond.gov; DSC 2nd floor; USB PDFs; phishing warning"
+    },
+    {
+      "url": "https://www.redmond.gov/469/Residential-Permits",
+      "title": "https://www.redmond.gov/469/Residential-Permits",
+      "retrieved": "2026-11-10",
+      "http_status": 200,
+      "supports": "Building permits for additions, alterations and remodel of existing home; 'When don't I need a permit?' list incl. exterior window replacement in existing openings; projects not on list require permit; separate submittals; fees based on value; permit card/plans on site; inspections before covering work"
+    },
+    {
+      "url": "https://www.redmond.gov/484/ElectricalMechanicalPlumbing-Permit",
+      "title": "https://www.redmond.gov/484/ElectricalMechanicalPlumbing-Permit",
+      "retrieved": "2026-11-10",
+      "http_status": 200,
+      "supports": "New or altered electrical circuit, panel or service needs permit; residential E/M/P OTC via REPS"
+    },
+    {
+      "url": "https://www.redmond.gov/DocumentCenter/View/2200",
+      "title": "https://www.redmond.gov/DocumentCenter/View/2200",
+      "retrieved": "2026-11-10",
+      "http_status": 200,
+      "supports": "Work Exempt from Permit (IBC & IRC 2021, published 03/2024): exemption does not authorize code violations; light weight roof covering <4 psf; exterior windows in existing openings"
+    },
+    {
+      "url": "https://www.redmond.gov/DocumentCenter/View/2220",
+      "title": "https://www.redmond.gov/DocumentCenter/View/2220",
+      "retrieved": "2026-11-10",
+      "http_status": 200,
+      "supports": "Codes and Design Requirements: 2021 IRC, 2021 IECC w/ WA amendments, 2023 NEC, WAC 51-51, 51-11R; 110 mph, 15 psf ground snow, 5 psf rain-on-snow flat roofs, SDC D (D2 res), 1in/hr rainfall, 12in frost, 1500 psf soil; RMC 15.12, 15.18"
+    },
+    {
+      "url": "https://www.sun-tek.com/",
+      "title": "https://www.sun-tek.com/",
+      "retrieved": "2026-11-10",
+      "http_status": 200,
+      "supports": "Material: residential curb/deck-mount skylights"
+    }
+  ],
+  "dropped": [
+    {
+      "url": "https://www.mybuildingpermit.com/",
+      "reason": "200 but Redmond permits run through its own REPS/PRO portals per redmond.gov How to Apply; not cited"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51-0308",
+      "reason": "200 but section body has no amendment text; not cited"
+    },
+    {
+      "url": "https://www.veluxusa.com/",
+      "reason": "already in media rotation/repo"
+    },
+    {
+      "url": "https://www.odl.com/",
+      "reason": "could not confirm tubular skylight product on homepage"
+    },
+    {
+      "note": "Fees, prices, review timelines omitted"
+    }
+  ],
+  "notes": "Box curl 2026-11-10 (browser UA). Redmond issues its own electrical permits (L&I city list + City E/M/P page). Cite only 200 pages."
+}
