@@ -27,9 +27,14 @@ Kirkland adopts the state building codes with local administrative rules in Titl
 Read that exemption as a narrow test:
 
 - **Like-for-like cabinets and counters** in the same footprint generally fall inside the finish-work exemption.
+
+![Installer setting new shaker base cabinets and a countertop in the same footprint in a Kirkland kitchen](../assets/images/posts/2026-10-07-kirkland-kitchen-cabinets-4.webp "Swapping cabinets and counters in the same footprint is the kind of finish work Kirkland's code exempts from a building permit, outside critical areas and flood zones.")
+
 - **Moving or removing walls** to open a galley kitchen is structural or framing work, not finish work. Expect a building permit and, for a bearing wall, an engineered beam and header design.
 - **Location matters.** The code says permit exemptions do not apply in flood hazard areas, city critical areas and their required buffers, or locations subject to the wildland-urban interface code. With streams, wetlands, and steep slopes in several Kirkland neighborhoods, confirm your parcel's status before assuming any exemption.
 - **Exempt does not mean code-free.** The same section says an exemption does not authorize work that violates the technical codes.
+
+![Temporary shoring and a new header where a galley wall was opened in a Kirkland kitchen](../assets/images/posts/2026-10-07-kirkland-kitchen-wall-opening-5.webp "Opening a galley wall is framing work, not finish work; in Kirkland, expect a building permit and an engineered beam for a bearing wall.")
 
 Kirkland is one of the jurisdictions on [MyBuildingPermit.com](https://www.mybuildingpermit.com/), the shared online portal that several Puget Sound cities use for permit applications and inspection requests. The Board's [permits](../permits.html) page explains how permit scope and inspections usually sequence on a remodel.
 
@@ -39,17 +44,23 @@ In most of Washington, homeowners and contractors buy electrical permits from th
 
 In practice that covers new countertop receptacles, island circuits, under-cabinet lighting, a dedicated circuit for an induction range or a wall oven, and the hood itself. If your bid assumes "the electrician will pull an L&I permit," ask who is actually pulling the city electrical permit and when the rough-in inspection happens. If a gas line, a new range location, or an induction conversion is part of the plan, put it in the scope early: it changes both panel capacity and the inspection sequence.
 
+![Rough-in wiring and new boxes for countertop receptacles and an island circuit in a Kirkland kitchen](../assets/images/posts/2026-10-07-kirkland-kitchen-electrical-6.webp "New countertop and island circuits in Kirkland are permitted and inspected by the city, not Washington L&I.")
+
 ![Open sink base with plumbing supply lines, drain trap, and electrical boxes roughed in before in Kirkland](../assets/images/posts/2026-10-07-kirkland-kitchen-2.webp)
 
 ## Range hoods and makeup air
 
 A bigger, quieter hood is one of the most requested kitchen upgrades, and it is also where remodels get surprised. The model residential code has long addressed makeup air for kitchen exhaust hoods rated above 400 cubic feet per minute. As [Fine Homebuilding explains](https://www.finehomebuilding.com/project-guides/kitchens/the-basics-of-makeup-air), the 2009 edition required makeup air roughly equal to the exhaust rate for those larger hoods, and the 2018 edition tied the requirement to whether the home has fuel-burning appliances that could be backdrafted.
 
+![Sealed metal range-hood duct running through open ceiling framing to an exterior wall in a Kirkland kitchen](../assets/images/posts/2026-10-07-kirkland-kitchen-hood-duct-7.webp "A range-hood duct routed through the framing to the outdoors before cabinets go up in a Kirkland kitchen remodel.")
+
 Washington amends the mechanical portions of its adopted codes, so do not rely on a national summary. Ask the designer or contractor to confirm with the City of Kirkland's plans examiner whether your hood rating and your home's appliances call for a makeup-air damper, and get that answer before you order the hood. Practical planning points:
 
 - Vent the hood outdoors with a properly sized, sealed duct run — not into an attic or soffit.
 - If makeup air is needed, plan the intake location, the motorized damper, and the interlock wiring as part of the electrical and mechanical scope.
 - Run the duct route through the framing plan before cabinets are ordered; chases and soffits are much cheaper to build than to rebuild.
+
+![Motorized makeup-air damper on an insulated duct near a range-hood run in a Kirkland home](../assets/images/posts/2026-10-07-kirkland-kitchen-makeup-air-8.webp "A motorized makeup-air damper; whether a Kirkland kitchen needs one depends on the hood rating and the home's fuel-burning appliances.")
 
 The video below, from the manufacturer, shows how one makeup-air damper system is wired and how it opens when the hood runs — useful for understanding what an installer means when the topic comes up.
 
@@ -70,6 +81,8 @@ Brand names are a starting point. Installation details, written specifications, 
 ## How to shortlist and verify contractors
 
 Ask each bidder for recent Kirkland or Eastside kitchen projects, photos of rough-in work (not only finished rooms), and a written scope that states which work is permit-exempt finish work and which needs building, electrical, plumbing, or mechanical permits.
+
+![Written kitchen remodel scope, floor plan and permit checklist on a counter in a Kirkland home](../assets/images/posts/2026-10-07-kirkland-kitchen-scope-9.webp "A written scope that separates permit-exempt finish work from building, electrical, plumbing and mechanical permits makes Kirkland kitchen bids comparable.")
 
 Walk through the Board's [verify a contractor](../verify-contractor.html) checklist. Use [Washington L&I Verify](https://secure.lni.wa.gov/verify/) to confirm registration, bond, and insurance for the general contractor and any electrical or plumbing subcontractor. Because [KMC 21.06.247](https://kirkland.municipal.codes/KMC/21.06.247) requires the contractor's registration number and Kirkland business license number before a permit is issued, a firm that hesitates to share either is telling you something.
 
