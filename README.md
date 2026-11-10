@@ -54,6 +54,7 @@ Base: `https://boardofprojectstewardship.com/`
 | `blog/rss.xml` | Blog RSS feed |
 | `news/rss.xml` | News RSS feed |
 | `404.html` | Branded Board 404 |
+| `posts/2026-11-10-skylight-installation-redmond-wa.html` | Skylight Installation Redmond WA — Permits, Energy Code U-Factors, Roof Framing and Leak-Proof Flashing |
 | `posts/2026-11-09-patio-cover-lynnwood-wa.html` | Patio Cover Lynnwood WA — Permits, Snow Load, Setbacks and Rain-Ready Drainage |
 | `posts/2026-11-08-deck-replacement-mill-creek-wa.html` | Deck Replacement Mill Creek WA — Permits, Ledger Flashing, Rot and Hiring |
 | `posts/2026-11-07-bathroom-remodel-federal-way-wa.html` | Bathroom Remodel Federal Way WA — Permits, Waterproofing, Wet Walls and Hiring |

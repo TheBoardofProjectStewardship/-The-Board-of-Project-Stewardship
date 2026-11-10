@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-11-10-skylight-installation-redmond-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-11-10T12:00:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Skylight Installation Redmond WA \u2014 Permits, Energy Code U-Factors, Roof Framing and Leak-Proof Flashing",
+    "date": "2026-11-10",
+    "slug": "skylight-installation-redmond-wa",
+    "description": "A Redmond homeowner's guide to adding or replacing a skylight: when the City requires a building permit, how to apply, Washington's skylight U-factor limits, roof framing, flashing that stays dry, electrical permits for powered units, and how to verify the crew.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC board-intake inbox had no 2026-11-10 packets (checked 3:44 AM PT); PC not touched. Topic: skylight installation (Redmond Residential Permits: alterations/remodels need building permit; Work Exempt handout only exempts window replacement in existing openings and light roof covering <4 psf; REPS/PRO apply; separate submittals; Code & Design Requirements 110 mph, 15 psf snow, SDC D/D2, 12in frost; WSEC-R Table R402.1.2 skylight U-0.50, R402.5 max 0.75 w/ tradeoffs, R402.3.3 15 sf exemption, R402.4.2 air leakage; Redmond issues own electrical permits; inspections via REPS/IVR by 11 pm), Redmond WA (King County). redmond already in place lists. Last Redmond daily 2026-10-22; no prior skylight post. No fees or prices. Producer role fields kept per intake contract."
+}

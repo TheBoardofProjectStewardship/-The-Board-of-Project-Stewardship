@@ -1,0 +1,25 @@
+{
+  "submission_id": "2026-11-10-skylight-installation-redmond-wa",
+  "idempotency_key": "sha256:eaad2468f03aa813c1e3d1f4591676d00633ebbbd1a7491fc5b780fd25a88d0d",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-11-10T11:51:40Z",
+  "outputs": [
+    "assets/images/posts/2026-11-10-redmond-skylight-1.webp",
+    "assets/images/posts/2026-11-10-redmond-skylight-2.webp",
+    "assets/images/posts/2026-11-10-redmond-skylight-3.webp",
+    "assets/images/posts/2026-11-10-redmond-skylight-4.webp",
+    "assets/images/posts/2026-11-10-redmond-skylight-5.webp",
+    "assets/images/posts/2026-11-10-redmond-skylight-6.webp",
+    "assets/images/posts/2026-11-10-redmond-skylight-7.webp",
+    "assets/images/posts/2026-11-10-redmond-skylight-8.webp",
+    "assets/images/posts/2026-11-10-redmond-skylight-9.webp",
+    "posts/2026-11-10-skylight-installation-redmond-wa.md",
+    "posts/2026-11-10-skylight-installation-redmond-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 98
+}
