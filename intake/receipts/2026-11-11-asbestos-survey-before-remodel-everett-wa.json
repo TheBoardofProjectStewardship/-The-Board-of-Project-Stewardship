@@ -1,0 +1,25 @@
+{
+  "submission_id": "2026-11-11-asbestos-survey-before-remodel-everett-wa",
+  "idempotency_key": "sha256:4f6459437b829fc1cef6e1f2943a3fe2f5ce0d54e135d9da3f565d959487c62d",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-11-11T11:51:46Z",
+  "outputs": [
+    "assets/images/posts/2026-11-11-everett-asbestos-1.webp",
+    "assets/images/posts/2026-11-11-everett-asbestos-2.webp",
+    "assets/images/posts/2026-11-11-everett-asbestos-3.webp",
+    "assets/images/posts/2026-11-11-everett-asbestos-4.webp",
+    "assets/images/posts/2026-11-11-everett-asbestos-5.webp",
+    "assets/images/posts/2026-11-11-everett-asbestos-6.webp",
+    "assets/images/posts/2026-11-11-everett-asbestos-7.webp",
+    "assets/images/posts/2026-11-11-everett-asbestos-8.webp",
+    "assets/images/posts/2026-11-11-everett-asbestos-9.webp",
+    "posts/2026-11-11-asbestos-survey-before-remodel-everett-wa.md",
+    "posts/2026-11-11-asbestos-survey-before-remodel-everett-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 99
+}

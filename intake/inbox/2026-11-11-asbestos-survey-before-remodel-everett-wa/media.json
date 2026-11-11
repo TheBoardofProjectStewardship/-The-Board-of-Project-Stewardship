@@ -1,0 +1,92 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-11-11-everett-asbestos-1.webp",
+      "repo_path": "assets/images/posts/2026-11-11-everett-asbestos-1.webp",
+      "alt": "Everett, WA asbestos survey: inspector in a respirator taking a sample of a popcorn ceiling in a rambler living room \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "433e8fa0f27f465c3c23accb3ac4bd3a",
+      "source": "Newly generated image (built-in image generator, 2026-11-11), source gen-1.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-11-everett-asbestos-2.webp",
+      "repo_path": "assets/images/posts/2026-11-11-everett-asbestos-2.webp",
+      "alt": "Everett, WA asbestos testing: gloved hand placing a vinyl floor tile sample into a bag with black mastic visible on the subfloor \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "ad625469548af89b9b18d6ae8f6a568d",
+      "source": "Newly generated image (built-in image generator, 2026-11-11), source gen-2.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-11-everett-asbestos-3.webp",
+      "repo_path": "assets/images/posts/2026-11-11-everett-asbestos-3.webp",
+      "alt": "Everett, WA asbestos survey of a basement: old wrapped pipe insulation and taped heating duct in an unfinished basement \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "3d2471402cd298b295ce1b1347b5a988",
+      "source": "Newly generated image (built-in image generator, 2026-11-11), source gen-3.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-11-everett-asbestos-4.webp",
+      "repo_path": "assets/images/posts/2026-11-11-everett-asbestos-4.webp",
+      "alt": "Everett, WA asbestos abatement containment: two workers in protective suits and respirators inside a room sealed with plastic sheeting, a zipper door and a HEPA negative air machine \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "36dbaad5f864fc99029623bde19443ff",
+      "source": "Newly generated image (built-in image generator, 2026-11-11), source gen-4.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-11-everett-asbestos-5.webp",
+      "repo_path": "assets/images/posts/2026-11-11-everett-asbestos-5.webp",
+      "alt": "Everett, WA asbestos survey and siding: contractor and homeowner looking at gray cement-asbestos shingle siding on a 1950s house \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "8f0717060c1bd1411fd8833d0da5b222",
+      "source": "Newly generated image (built-in image generator, 2026-11-11), source gen-5.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-11-everett-asbestos-6.webp",
+      "repo_path": "assets/images/posts/2026-11-11-everett-asbestos-6.webp",
+      "alt": "Everett, WA asbestos sampling: labeled sample bags lined up beside a chain-of-custody clipboard and a small cooler \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "e11a3a21684c607fbb682f40360402d6",
+      "source": "Newly generated image (built-in image generator, 2026-11-11), source gen-6.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-11-everett-asbestos-7.webp",
+      "repo_path": "assets/images/posts/2026-11-11-everett-asbestos-7.webp",
+      "alt": "Everett, WA asbestos survey review: homeowners and a contractor at a kitchen table going over an asbestos survey report and a floor plan \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "b6508efa920b620f861235fd21910293",
+      "source": "Newly generated image (built-in image generator, 2026-11-11), source gen-7.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-11-everett-asbestos-8.webp",
+      "repo_path": "assets/images/posts/2026-11-11-everett-asbestos-8.webp",
+      "alt": "Everett, WA asbestos waste disposal: workers in protective gear loading sealed, wrapped bags into a covered roll-off container in a driveway on a drizzly day \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "cd52e5f144169ca6f862d4eee683b058",
+      "source": "Newly generated image (built-in image generator, 2026-11-11), source gen-8.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-11-everett-asbestos-9.webp",
+      "repo_path": "assets/images/posts/2026-11-11-everett-asbestos-9.webp",
+      "alt": "Everett, WA remodel after asbestos abatement: cleared room with exposed framing as a carpenter measures new studs \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "c72dfa6464089c44712f23fcb9b60920",
+      "source": "Newly generated image (built-in image generator, 2026-11-11), source gen-9.jpg converted to 1600w webp q82"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "AkCGMR2qjIo",
+      "url": "https://www.youtube.com/watch?v=AkCGMR2qjIo",
+      "title": "How Asbestos Abatement Works | This Old House",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "9 newly generated images (built-in generator), 0 regraded stills, 0 paid media."
+}
