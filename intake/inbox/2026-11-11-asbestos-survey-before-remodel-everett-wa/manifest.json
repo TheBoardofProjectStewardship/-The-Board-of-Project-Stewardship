@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-11-11-asbestos-survey-before-remodel-everett-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-11-11T12:00:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Asbestos Survey Before Remodeling Everett WA \u2014 Clean Air Agency Rules, Testing, Abatement and Permits",
+    "date": "2026-11-11",
+    "slug": "asbestos-survey-before-remodel-everett-wa",
+    "description": "An Everett homeowner's guide to asbestos before a remodel: when a survey is required, who can do it, which materials in older homes get tested, Washington L&I abatement rules, Clean Air Agency notification, disposal, and how it fits with Everett permits.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 offline (ListMachines connected=false 3:43 AM PT); no PC packets; PC not touched. Topic: asbestos survey before remodeling (PSCAA Homeowner Renovation: owner-occupied SFR remodel may self-survey, all others incl. rentals/condos/demolition need AHERA inspector; SFR notification + filing fee, none under 10 lf/48 sf friable or nonfriable; demolition notification + 10-day wait; Snohomish County has no authorized asbestos disposal sites; L&I good faith inspection required, mandatory daily fine, certified contractor list; RCW 49.26.013; WAC 296-65; Everett Permit Services 2930 Wetmore Ave, 425-257-8810, online portal, demolition checklist points to PSCAA notification), Everett WA (Snohomish County). everett already in place lists. Last Everett daily 2026-10-24 (garage conversion); no prior asbestos post. No prices or timelines beyond agency-published figures. Producer role fields kept per intake contract."
+}

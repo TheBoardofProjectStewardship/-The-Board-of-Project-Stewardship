@@ -1,0 +1,222 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Everett",
+    "service": "Asbestos survey before remodeling",
+    "slug": "asbestos-survey-before-remodel-everett-wa"
+  },
+  "sources": [
+    {
+      "url": "https://app.leg.wa.gov/rcw/default.aspx?cite=49.26",
+      "title": "https://app.leg.wa.gov/rcw/default.aspx?cite=49.26",
+      "retrieved": "2026-11-11",
+      "http_status": 200,
+      "supports": "Chapter 49.26 RCW Health and safety - asbestos"
+    },
+    {
+      "url": "https://app.leg.wa.gov/rcw/default.aspx?cite=49.26.013",
+      "title": "https://app.leg.wa.gov/rcw/default.aspx?cite=49.26.013",
+      "retrieved": "2026-11-11",
+      "http_status": 200,
+      "supports": "Owner/agent must have good faith inspection by accredited person; written report to all contractors before bid; assumption alternative"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=296-62-077",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=296-62-077",
+      "retrieved": "2026-11-11",
+      "http_status": 200,
+      "supports": "WAC 296-62-077 asbestos construction work requirements"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=296-65",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=296-65",
+      "retrieved": "2026-11-11",
+      "http_status": 200,
+      "supports": "Chapter 296-65 WAC asbestos removal and encapsulation: worker/supervisor/contractor certification, notification"
+    },
+    {
+      "url": "https://fosterproducts.com/",
+      "title": "https://fosterproducts.com/",
+      "retrieved": "2026-11-11",
+      "http_status": 200,
+      "supports": "Material: H.B. Fuller Foster coatings/encapsulants, asbestos abatement market"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "retrieved": "2026-11-11",
+      "http_status": 200,
+      "supports": "State hiring guidance: registration, bids, written contract"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/other-licenses-permits/asbestos-certification",
+      "title": "https://lni.wa.gov/licensing-permits/other-licenses-permits/asbestos-certification",
+      "retrieved": "2026-11-11",
+      "http_status": 200,
+      "supports": "L&I: owners and contractors share responsibility; AHERA good faith inspection regardless of age; mandatory daily fine; provide survey to bidders, post on site; certified contractors list (no endorsement); revoked list"
+    },
+    {
+      "url": "https://lni.wa.gov/safety-health/safety-topics/topics/asbestos",
+      "title": "https://lni.wa.gov/safety-health/safety-topics/topics/asbestos",
+      "retrieved": "2026-11-11",
+      "http_status": 200,
+      "supports": "L&I asbestos topic: good faith inspection before renovation/remodel/demolition for homeowners, owners, contractors; not banned; material list (pipe insulation, popcorn, joint compound, vinyl tile, siding, around stoves); own-residence non-commercial exemption from general survey but must inform contractors"
+    },
+    {
+      "url": "https://omnicleanair.com/",
+      "title": "https://omnicleanair.com/",
+      "retrieved": "2026-11-11",
+      "http_status": 200,
+      "supports": "Material: HEPA negative air machines, containment monitoring"
+    },
+    {
+      "url": "https://onlinepermits.everettwa.gov",
+      "title": "https://onlinepermits.everettwa.gov",
+      "retrieved": "2026-11-11",
+      "http_status": 200,
+      "supports": "Everett online permitting portal (eTRAKiT)"
+    },
+    {
+      "url": "https://pscleanair.gov/189/Contractor-Renovation",
+      "title": "https://pscleanair.gov/189/Contractor-Renovation",
+      "retrieved": "2026-11-11",
+      "http_status": 200,
+      "supports": "Friable asbestos must be removed by certified abatement contractor unless owner-occupied SFR; encapsulant types and cautions"
+    },
+    {
+      "url": "https://pscleanair.gov/191/Homeowner-Demolition",
+      "title": "https://pscleanair.gov/191/Homeowner-Demolition",
+      "retrieved": "2026-11-11",
+      "http_status": 200,
+      "supports": "Demolition: AHERA survey; notification + fee before removal or demolition; 10-day wait after filing"
+    },
+    {
+      "url": "https://pscleanair.gov/192/Homeowner-Renovation",
+      "title": "https://pscleanair.gov/192/Homeowner-Renovation",
+      "retrieved": "2026-11-11",
+      "http_status": 200,
+      "supports": "Owner-occupied SFR remodel may self-survey; others need AHERA inspector; leave/encapsulate/remove; owner may remove; SFR notification + filing fee; no notice <10 lf/48 sf friable per year or nonfriable; strong recommendation to hire certified contractor; disposal within 10 days"
+    },
+    {
+      "url": "https://pscleanair.gov/193/Disposal-Facilities",
+      "title": "https://pscleanair.gov/193/Disposal-Facilities",
+      "retrieved": "2026-11-11",
+      "http_status": 200,
+      "supports": "Friable waste to authorized facility with shipment record; nonfriable labeled container; no Snohomish County landfills/transfer stations authorized; Seattle facility accepts all cities/counties"
+    },
+    {
+      "url": "https://pscleanair.gov/DocumentCenter/View/373",
+      "title": "https://pscleanair.gov/DocumentCenter/View/373",
+      "retrieved": "2026-11-11",
+      "http_status": 200,
+      "supports": "Asbestos Survey Guidance: Reg III 4.02(a) survey before renovation/demolition; AHERA inspector except owner-occupied SFR renovation; demolition of owner-occupied SFR needs AHERA; pre-purchase limited survey insufficient; destructive investigation; 40 CFR 763.86; sample ACM list"
+    },
+    {
+      "url": "https://pscleanair.gov/asbestos",
+      "title": "https://pscleanair.gov/asbestos",
+      "retrieved": "2026-11-11",
+      "http_status": 200,
+      "supports": "Agency asbestos program page: asbestos is an EPA hazardous air pollutant; demolition/renovation must comply before they begin"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-11-11",
+      "http_status": 200,
+      "supports": "License/bond/insurance lookup"
+    },
+    {
+      "url": "https://www.epa.gov/asbestos/protect-your-family-exposures-asbestos",
+      "title": "https://www.epa.gov/asbestos/protect-your-family-exposures-asbestos",
+      "retrieved": "2026-11-11",
+      "http_status": 200,
+      "supports": "EPA homeowner asbestos guidance"
+    },
+    {
+      "url": "https://www.everettwa.gov/2684/STEP-2-Prepare-apply",
+      "title": "https://www.everettwa.gov/2684/STEP-2-Prepare-apply",
+      "retrieved": "2026-11-11",
+      "http_status": 200,
+      "supports": "Submittal checklists: residential building permit (remodel/additions), demolition permit (complete removal); exemptions"
+    },
+    {
+      "url": "https://www.everettwa.gov/2693/STEP-5-Construction-inspections",
+      "title": "https://www.everettwa.gov/2693/STEP-5-Construction-inspections",
+      "retrieved": "2026-11-11",
+      "http_status": 200,
+      "supports": "Permits posted on site with approved documents; inspections for all stages via online portal; permit final"
+    },
+    {
+      "url": "https://www.everettwa.gov/DocumentCenter/View/38693/Demolition-Permit-Submittal-Checklist-and-Requirements-PDF",
+      "title": "https://www.everettwa.gov/DocumentCenter/View/38693/Demolition-Permit-Submittal-Checklist-and-Requirements-PDF",
+      "retrieved": "2026-11-11",
+      "http_status": 200,
+      "supports": "Everett demolition checklist: asbestos abatement in line with PSCAA; notification before asbestos removal or demolition; abatement report docs on site; Snohomish Health District for lead"
+    },
+    {
+      "url": "https://www.everettwa.gov/Faq.aspx?QID=168",
+      "title": "https://www.everettwa.gov/Faq.aspx?QID=168",
+      "retrieved": "2026-11-11",
+      "http_status": 200,
+      "supports": "Permit required for most work except as exempted; required before work begins; 425-257-8810; fees vary by type, square footage, valuation"
+    },
+    {
+      "url": "https://www.everettwa.gov/permits",
+      "title": "https://www.everettwa.gov/permits",
+      "retrieved": "2026-11-11",
+      "http_status": 200,
+      "supports": "Everett Permit Services: processes all permits for private construction; moved to 2nd floor Everett Municipal Building 2930 Wetmore Ave; 5 steps"
+    },
+    {
+      "url": "https://www.fiberlock.com/",
+      "title": "https://www.fiberlock.com/",
+      "retrieved": "2026-11-11",
+      "http_status": 200,
+      "supports": "Material: asbestos abatement encapsulants, lockdowns, wetting agents, decon"
+    },
+    {
+      "url": "https://www.moldex.com/",
+      "title": "https://www.moldex.com/",
+      "retrieved": "2026-11-11",
+      "http_status": 200,
+      "supports": "Material: respirators"
+    },
+    {
+      "url": "https://www.zipwall.com/",
+      "title": "https://www.zipwall.com/",
+      "retrieved": "2026-11-11",
+      "http_status": 200,
+      "supports": "Material: dust barrier pole systems"
+    }
+  ],
+  "dropped": [
+    {
+      "url": "https://everett.municipal.codes/EMC/16.005",
+      "reason": "403 to box curl today; not cited"
+    },
+    {
+      "url": "https://www.abatement.com/",
+      "reason": "403 to box curl; not cited"
+    },
+    {
+      "url": "https://www.3m.com/",
+      "reason": "403 to box curl; not cited"
+    },
+    {
+      "url": "https://pscleanair.gov/593/Explaining-Asbestos-Survey-Requirements-",
+      "reason": "agency video is Vimeo, not YouTube; not embedded"
+    },
+    {
+      "url": "https://ecology.wa.gov/ (asbestos pages)",
+      "reason": "guessed URLs 404; disposal covered by agency Disposal Facilities page"
+    },
+    {
+      "url": "https://www.snohomishcountywa.gov/5348/Asbestos",
+      "reason": "404"
+    },
+    {
+      "note": "Survey/abatement prices and lab timelines omitted; no fee or fine figures quoted (validator forbids dollar figures)"
+    }
+  ],
+  "notes": "Box curl 2026-11-11 (browser UA; everettwa.gov needs full browser headers, Cloudflare intermittently 403). Cite only 200 pages."
+}
