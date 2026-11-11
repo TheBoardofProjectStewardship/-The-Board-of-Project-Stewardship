@@ -33,6 +33,8 @@ Read that language as a test, not a blanket pass:
 - **Bedroom egress** — a replacement unit that shrinks the clear opening of an emergency escape window below what the code requires fails the exemption and creates a safety problem. Ask for measured clear-opening dimensions, not rough catalog sizes.
 - **Energy code** — even exempt replacements should meet current Washington energy code performance for the glass and frame; ask for the U-factor on the written quote.
 
+![Tape measure checking the clear opening of a bedroom egress casement window in a Shoreline home](../assets/images/posts/2026-10-06-shoreline-window-egress-5.webp "Measuring the clear opening of a bedroom egress window; in Shoreline, a replacement that shrinks it no longer fits the permit exemption.")
+
 An exemption from a building permit does not exempt the work from the code itself, and it does not cover other work bundled into the same job, such as new wiring or siding replacement. Confirm the parcel is inside Shoreline city limits before relying on city rules; the Board's [permits](../permits.html) guide covers how to check jurisdiction.
 
 ![Interior room with new white-framed casement windows overlooking the water and a finished sill in Shoreline](../assets/images/posts/2026-10-06-shoreline-window-2.webp)
@@ -47,6 +49,8 @@ For a Shoreline homeowner, that means three practical questions before signing:
 2. **Who is the certified renovator on site?** Ask for the name, and ask how containment, cleanup, and verification will be handled at each opening.
 3. **How will debris leave the property?** Old sashes and trim should be wrapped and removed, not broken up in the yard.
 
+![Plastic sheeting containment around an old painted wood window during removal in a Shoreline home](../assets/images/posts/2026-10-06-shoreline-window-lead-safe-6.webp "Plastic containment around an old painted sash; on pre-1978 Shoreline homes, paid window work calls for a Washington RRP-certified firm.")
+
 If the house was built in 1978 or later, this section may not apply, but it is still worth asking how dust will be controlled inside occupied rooms.
 
 ## Insert or full-frame: choosing the scope
@@ -56,6 +60,8 @@ Two installation methods dominate residential replacement:
 **Insert (pocket) replacement** sets a new unit inside the existing frame. It keeps interior and exterior trim intact and is faster, but it reduces glass area slightly and depends on the old frame being sound and dry.
 
 **Full-frame replacement** removes the old frame down to the rough opening. It costs more and disturbs trim, but it lets the crew find hidden rot, rebuild the sill, and integrate new flashing with the weather-resistive barrier. When Shoreline homes show soft sills, staining below the window, or chronic leaks, full-frame is usually the stronger choice.
+
+![Window rough opening stripped to the framing with a rebuilt sill during full-frame replacement in Shoreline](../assets/images/posts/2026-10-06-shoreline-window-full-frame-7.webp "Full-frame replacement exposes the rough opening so a soft sill can be rebuilt before the new Shoreline window goes in.")
 
 A useful sequence:
 
@@ -67,6 +73,8 @@ A useful sequence:
 ## Flashing that drains, not just seals
 
 Most long-term window failures start at the bottom corners of the rough opening. A good installation uses a sloped or pan-flashed sill, jamb and head flashing lapped shingle-style so water always runs outward, and a deliberate gap at the bottom of the unit so any water that gets behind the frame can escape. Sealing the bottom edge shut can trap water against framing — a common mistake in quick replacements.
+
+![Sloped sill pan flashing with upturned corners in a window rough opening on a Shoreline house](../assets/images/posts/2026-10-06-shoreline-window-sill-pan-8.webp "A sloped sill pan lapped shingle-style so water drains outward at the bottom corners of a Shoreline window opening.")
 
 https://www.youtube.com/watch?v=kZYxIa5Qsvg
 
@@ -87,6 +95,8 @@ Brand names are a starting point. Installation details and written performance v
 ## How to shortlist and verify installers
 
 Ask each bidder for recent Shoreline or north King County window projects, photos of sill and head flashing (not only finished interiors), and a written scope that names insert or full-frame per opening.
+
+![Window replacement quote and a sample window corner section on a table in a Shoreline home](../assets/images/posts/2026-10-06-shoreline-window-quote-9.webp "A written Shoreline window quote that names insert or full-frame per opening, U-factor and flashing products makes bids comparable.")
 
 Walk through the Board's [verify a contractor](../verify-contractor.html) checklist. Use [Washington L&I Verify](https://secure.lni.wa.gov/verify/) to confirm registration, bond, and insurance for the general contractor and any specialty window crew. For pre-1978 homes, confirm Washington RRP firm certification as well. Prefer written scopes that list flashing products, interior protection, trim restoration, disposal of old units, and who pays if a permit becomes necessary after an opening is changed.
 
