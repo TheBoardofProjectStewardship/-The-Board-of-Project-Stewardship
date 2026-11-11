@@ -295,6 +295,26 @@ console.log(JSON.stringify({{ids:m.groups.map(g=>g.id),floors:[...new Set(m.labe
         words = set(re.findall(r"[a-z0-9]+", text))
         self.assertFalse({hashlib.sha256(w.encode()).hexdigest()[:16] for w in words} & private)
 
+    def test_garage_house_with_adu_is_plan_data(self):
+        p = next(p for p in self.projects if p["slug"] == "garage-house-with-adu")
+        cfg = ps.load_config(p)
+        self.assertEqual([s["id"] for s in cfg["stages"]], list(ps.STAGE_PROGRESS))
+        lv = {l["id"]: l["y"] for l in cfg["levels"]}
+        self.assertAlmostEqual(lv["upper"] - lv["main"], 9.0, places=2)  # printed 9'-0" first to second floor
+        self.assertAlmostEqual(lv["main"], 3.5, places=2)  # printed grade -3'-6" on the deck side
+        shed = cfg["gableRoof"]["sheds"][0]
+        self.assertAlmostEqual(shed["top"] - lv["main"], 28.5, places=2)  # printed 28'-6" top of roof
+        areas = {r["name"]: r.get("area") for r in cfg["rooms"]}
+        for name, sf in {"Bed Rm": 112, "Bath": 54, "Garage": 610, "Kitchen": 168, "Dining Rm": 172, "Living Rm": 222}.items():
+            self.assertEqual(areas[name], sf)  # printed room areas
+        self.assertTrue(p.get("assumptions"))
+        private = {'05c2b812bf088eec', '17eebc0598244f4c', '39255c91df91a8be', '5adaeec3b75cfea9', '6e0534af16e1fe99', '7ab6ae09350685c7',
+                   '90b85891ef2e9559', 'b0193ceb57d22ae3', 'b260539511e16996', 'd2a6dde6655f3c33', 'df3dc066033652fc', 'eeba9af98eb63324',
+                   'f999a402c2638cef', 'fa041afc3ea8fc31'}  # sha256 prefixes of the client's private words, kept out of the repo in plain text
+        text = (json.dumps(p) + json.dumps(cfg) + ps.pages()["portfolio/garage-house-with-adu/index.html"]).lower()
+        words = set(re.findall(r"[a-z0-9]+", text))
+        self.assertFalse({hashlib.sha256(w.encode()).hexdigest()[:16] for w in words} & private)
+
     @unittest.skipUnless(shutil.which("node"), "node not installed")
     def test_engine_builds_three_levels(self):
         script = f"""

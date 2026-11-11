@@ -614,6 +614,68 @@
         "The detached garage and the existing outside stair on the south side are not part of this work and are not drawn.",
         "Furniture and fixtures follow the plan symbols where drawn; room areas are not printed, so labels show names only."
       ]
+    },
+    {
+      "slug": "garage-house-with-adu",
+      "engine": "config",
+      "config": "garage-house-with-adu.json",
+      "title": "Two-story house over a garage and accessory unit",
+      "card": "A compact two-story house on a sloping lot: a one-bedroom accessory unit and a two-car garage on the first floor, the main home above, and one shed roof that rises over a long second-floor deck.",
+      "facts": [
+        "One-bedroom accessory unit beside a two-car garage",
+        "Second-floor home with an open kitchen, dining and living room",
+        "Shed roof with clerestory windows over a 5 foot deck"
+      ],
+      "kicker": "New house with an accessory unit",
+      "thumb": "/portfolio/garage-house-with-adu/thumb.png",
+      "dek": "Explore the house layer by layer: the finished house, the deck side, the roof, the second floor, the first floor and the floor deck.",
+      "sourceNote": "Modeled from a designer's progress deck: a site plan, both floor plans, four elevations and a section. The overall size, floor levels, ceiling and roof heights, the grade on the deck side and the room areas are printed. The plans are images rather than scaled drawings, so walls and openings are scaled from them using the printed overall dimensions; other heights are scaled from the elevations and listed below.",
+      "learn": {
+        "house": [
+          "roof",
+          "partition"
+        ],
+        "front": [
+          "partition"
+        ],
+        "roof": [
+          "roof"
+        ],
+        "upper": [
+          "partition"
+        ],
+        "plan": [
+          "garage"
+        ],
+        "foundation": [
+          "garage"
+        ]
+      },
+      "notes": {
+        "roof": [
+          "Shed roof",
+          "One roof plane covers the whole house at about 3 in 12, from 28 feet 6 inches above the first floor at the deck-side eave down toward the garage side. The high side overhangs the second-floor deck by 7 feet, and a row of clerestory windows sits under it."
+        ],
+        "partition": [
+          "Second floor",
+          "The main home is upstairs: a bedroom or office and a primary bedroom on either side of a shared bath, a linen closet and powder room behind them, and an open kitchen, dining and living room along the back with the entry doors onto the deck."
+        ],
+        "garage": [
+          "First floor",
+          "The first floor holds a one-bedroom accessory unit with its own entry off the walkway, a bath and a kitchen and living room, next to a two-car garage with a washer and dryer and the mechanical space."
+        ]
+      },
+      "assumptions": [
+        "The source is a design progress deck marked for reference, not for construction; the design may still change.",
+        "The plans are images, not drawings to scale: walls and openings are scaled from them using the printed overall dimensions, so positions may be off by a few inches.",
+        "Window and door heights are scaled from the elevations; window sizes are not printed.",
+        "The roof pitch (about 3 in 12) and the north and south overhangs are scaled from the section and elevations; the east and west overhangs are printed.",
+        "The ground is drawn as a plane from the printed grade 3 feet 6 inches below the first floor on the deck side up to about floor level at the garage side; the plans do not give spot grades.",
+        "The second floor bath opens to both bedrooms; the door types there are not legible and are drawn as plain openings.",
+        "Closet walls on the second floor are drawn 8 feet tall; the bath and linen walls run up to the sloped ceiling as the section shows.",
+        "Deck stair guards and the dog gates are not drawn; the deck guards are drawn as horizontal bars, as the elevations show.",
+        "Roofing material is not printed."
+      ]
     }
   ]
 }
