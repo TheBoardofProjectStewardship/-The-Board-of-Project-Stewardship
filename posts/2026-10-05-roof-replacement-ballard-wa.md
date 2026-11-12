@@ -22,6 +22,8 @@ The neighborhood's housing mix shapes the job. Older Craftsman and bungalow home
 
 Moss and shade are the other local constant. Mature street trees and north-facing slopes keep roofs damp well after a storm passes. Moss holds that moisture against the roof covering and pushes up shingle edges. Neglect a roof long enough and the damage reaches the deck, which is why a tear-off in this neighborhood often turns up soft sheathing near the eaves and valleys.
 
+![Thick moss on aging asphalt shingles under evergreen shade on a Ballard, Seattle house](../assets/images/posts/2026-10-05-ballard-roof-moss-5.webp "Moss on a shaded Ballard roof holds rain against the shingles and lifts their edges, one reason tear-offs here often find soft sheathing.")
+
 ## When Seattle requires a re-roof permit
 
 Roofing in Ballard is regulated by the City of Seattle through the [Seattle Department of Construction and Inspections (SDCI)](https://www.seattle.gov/construction-and-inspections), not by King County. SDCI's [Re-Roof Permit](https://www.seattle.gov/construction-and-inspections/permits/permits-we-issue-%28a-z%29/re-roof-permit) guidance draws a clear line:
@@ -42,7 +44,11 @@ Ask bidders to walk you through the roof as a system, from the deck up:
 
 **1. Deck inspection and repair.** After tear-off, the sheathing should be inspected and soft or delaminated panels replaced before anything goes on top. A good bid explains how rot repair is priced so it is not a surprise later.
 
+![New plywood sheathing patched into a roof deck near the eave after tear-off on a Ballard, Seattle home](../assets/images/posts/2026-10-05-ballard-roof-deck-repair-6.webp "Replacing soft roof sheathing after tear-off on a Ballard home, before membranes and underlayment go down.")
+
 **2. Eave and valley membranes.** Self-adhering ice-and-water membranes at eaves, in valleys, and around penetrations add protection where wind-driven rain gets pushed under the roof covering.
+
+![Self-adhering ice-and-water membrane lining a roof valley on a Ballard, Seattle Craftsman](../assets/images/posts/2026-10-05-ballard-roof-valley-membrane-7.webp "Ice-and-water membrane in a roof valley adds protection where Ballard's wind-driven rain gets pushed under the roof covering.")
 
 **3. Field underlayment.** Synthetic underlayments resist tearing and stay in place better than traditional felt during a wet "dry-in" day. Ask which product is specified and how laps are fastened.
 
@@ -60,6 +66,8 @@ Seattle roofing happens year-round, and that means planning for rain. The house 
 - Who watches the forecast, and what is the tarping plan if weather turns mid-day?
 - How are gutters, landscaping, neighbors' cars, and tight side yards protected during debris removal? Narrow Ballard lots often leave little room for a dumpster or material drop.
 - If a permit is needed, when are inspections expected and who schedules them?
+
+![Blue tarp secured over a partly opened roof on a rainy day in Ballard, Seattle](../assets/images/posts/2026-10-05-ballard-roof-tarp-8.webp "A tarp plan matters in Ballard's wet season: open only as much roof as can be dried in the same day.")
 
 ## Materials Worth Knowing
 
@@ -80,6 +88,8 @@ The Board of Project Stewardship does not endorse a single brand. These manufact
 - **Spongy spots underfoot or visible sag:** a sign of deck or framing damage. Get a structural look before a re-roof scope is finalized.
 
 The Board's [roofing](../roofing.html) hub covers trade-level questions to ask before you collect bids.
+
+![Ridge vent and new architectural shingles along the peak of a re-roofed Ballard, Seattle house](../assets/images/posts/2026-10-05-ballard-roof-ridge-vent-9.webp "A finished ridge vent on a re-roofed Ballard house, paired with soffit intake so attic moisture can escape.")
 
 ## How to shortlist and verify roofers
 
