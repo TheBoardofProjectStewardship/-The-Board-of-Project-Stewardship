@@ -1,0 +1,25 @@
+{
+  "submission_id": "2026-11-12-tree-removal-permit-remodel-shoreline-wa",
+  "idempotency_key": "sha256:84bf6020c6d0a1a57120538d584ee8ad9db2a7cbab1949077fc826bb0e671ece",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-11-12T11:50:10Z",
+  "outputs": [
+    "assets/images/posts/2026-11-12-shoreline-tree-1.webp",
+    "assets/images/posts/2026-11-12-shoreline-tree-2.webp",
+    "assets/images/posts/2026-11-12-shoreline-tree-3.webp",
+    "assets/images/posts/2026-11-12-shoreline-tree-4.webp",
+    "assets/images/posts/2026-11-12-shoreline-tree-5.webp",
+    "assets/images/posts/2026-11-12-shoreline-tree-6.webp",
+    "assets/images/posts/2026-11-12-shoreline-tree-7.webp",
+    "assets/images/posts/2026-11-12-shoreline-tree-8.webp",
+    "assets/images/posts/2026-11-12-shoreline-tree-9.webp",
+    "posts/2026-11-12-tree-removal-permit-remodel-shoreline-wa.md",
+    "posts/2026-11-12-tree-removal-permit-remodel-shoreline-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 100
+}

@@ -54,6 +54,7 @@ Base: `https://boardofprojectstewardship.com/`
 | `blog/rss.xml` | Blog RSS feed |
 | `news/rss.xml` | News RSS feed |
 | `404.html` | Branded Board 404 |
+| `posts/2026-11-12-tree-removal-permit-remodel-shoreline-wa.html` | Tree Removal Permits Before Remodeling Shoreline WA — Significant Trees, Critical Areas, Arborist Reports and Tree Protection |
 | `posts/2026-11-11-asbestos-survey-before-remodel-everett-wa.html` | Asbestos Survey Before Remodeling Everett WA — Clean Air Agency Rules, Testing, Abatement and Permits |
 | `posts/2026-11-10-skylight-installation-redmond-wa.html` | Skylight Installation Redmond WA — Permits, Energy Code U-Factors, Roof Framing and Leak-Proof Flashing |
 | `posts/2026-11-09-patio-cover-lynnwood-wa.html` | Patio Cover Lynnwood WA — Permits, Snow Load, Setbacks and Rain-Ready Drainage |

@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-11-12-tree-removal-permit-remodel-shoreline-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-11-12T12:00:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Tree Removal Permits Before Remodeling Shoreline WA \u2014 Significant Trees, Critical Areas, Arborist Reports and Tree Protection",
+    "date": "2026-11-12",
+    "slug": "tree-removal-permit-remodel-shoreline-wa",
+    "description": "A Shoreline homeowner's guide to trees before a remodel or addition: which trees are significant, when removal needs a permit, critical areas, replacement trees, arborist reports, tree protection fencing and root zones, street trees, and how it all fits with Shoreline permits.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 connected but board-intake inbox had no 2026-11-12 packets at 3:40 AM PT; PC not touched further. Topic: tree removal and tree protection before a remodel or addition in Shoreline WA (King County): SMC 20.50 Subchapter 5 (20.50.290-.370) tree cutting = clearing; additions subject; tree materials with development application; significant tree 6 in DBH at 4.5 ft; 36-month allowance (3 trees <=24 in on lots to 7,200 sf + 1 per additional 7,200 sf, outside critical areas, City must be informed); >24 in needs clearing and grading permit; retention 35%/30%; replacement 1 per 6 in + 1 per 3 in up to 3, 6 ft conifer / 1.5 in caliper; arborist evaluation and tree protection plan; preconstruction meeting; 6 ft chain-link barriers, CRZ no staging/fill/excavation, project arborist on site, 3 in roots cut cleanly, 4-5 in wood chips, 1 in water/week; critical areas SMC 20.80; hazard trees; ROW Use Permit for street trees; SCL vegetation contact; Permit Services City Hall 3rd floor 17500 Midvale Ave N, (206) 801-2500. shoreline already in place lists. Last Shoreline daily 2026-10-23 (roof replacement); no prior tree post. No fee, fine or price figures. Producer role fields kept per intake contract."
+}
