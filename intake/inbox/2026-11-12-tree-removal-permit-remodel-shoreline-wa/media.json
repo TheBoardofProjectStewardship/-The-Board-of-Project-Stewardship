@@ -1,0 +1,92 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-11-12-shoreline-tree-1.webp",
+      "repo_path": "assets/images/posts/2026-11-12-shoreline-tree-1.webp",
+      "alt": "Shoreline, WA tree protection for a remodel: orange tree protection fencing set around the dripline of a tall Douglas fir beside a rambler \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "d6e42b1619c93c54192201bde44cd393",
+      "source": "Newly generated image (built-in image generator, 2026-11-12), source gen-1.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-12-shoreline-tree-2.webp",
+      "repo_path": "assets/images/posts/2026-11-12-shoreline-tree-2.webp",
+      "alt": "Shoreline, WA arborist measuring a tree for a permit: arborist wrapping a diameter tape around a conifer trunk at chest height in a backyard \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "e07fd3057392bdf1ae5e33d56da4eee8",
+      "source": "Newly generated image (built-in image generator, 2026-11-12), source gen-2.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-12-shoreline-tree-3.webp",
+      "repo_path": "assets/images/posts/2026-11-12-shoreline-tree-3.webp",
+      "alt": "Shoreline, WA remodel site plan with trees: a printed site plan on a kitchen table showing a dashed addition outline and circles marking tree root zones \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "2a05a5fa15eb6a516fd25d16b9e67687",
+      "source": "Newly generated image (built-in image generator, 2026-11-12), source gen-3.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-12-shoreline-tree-4.webp",
+      "repo_path": "assets/images/posts/2026-11-12-shoreline-tree-4.webp",
+      "alt": "Shoreline, WA tree roots near an addition foundation: exposed conifer roots wrapped in burlap beside a new foundation trench and formwork \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "b361ce944a7748a3f3dcaec77ff44ef6",
+      "source": "Newly generated image (built-in image generator, 2026-11-12), source gen-4.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-12-shoreline-tree-5.webp",
+      "repo_path": "assets/images/posts/2026-11-12-shoreline-tree-5.webp",
+      "alt": "Shoreline, WA tree protection zone during construction: wood-chip mulch and plywood ground-protection mats under a cedar with a mini excavator working outside the orange fence \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "5b595623576b8eca6770d0621212f1ad",
+      "source": "Newly generated image (built-in image generator, 2026-11-12), source gen-5.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-12-shoreline-tree-6.webp",
+      "repo_path": "assets/images/posts/2026-11-12-shoreline-tree-6.webp",
+      "alt": "Shoreline, WA hazard tree work: a tree crew with a bucket truck removing a broken limb hanging over a house roof \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "7cef14357291e9cd9bc79d68eb308b38",
+      "source": "Newly generated image (built-in image generator, 2026-11-12), source gen-6.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-12-shoreline-tree-7.webp",
+      "repo_path": "assets/images/posts/2026-11-12-shoreline-tree-7.webp",
+      "alt": "Shoreline, WA replacement trees after a remodel: a newly planted vine maple and small cedar with stakes and mulch rings beside fresh siding \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "81632834514df83b931dfea7724a32d8",
+      "source": "Newly generated image (built-in image generator, 2026-11-12), source gen-7.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-12-shoreline-tree-8.webp",
+      "repo_path": "assets/images/posts/2026-11-12-shoreline-tree-8.webp",
+      "alt": "Shoreline, WA critical area slope: a wooded steep slope dropping to a small ravine creek behind a house \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "58231ee163ee1c79298cd5ccc1b19e3b",
+      "source": "Newly generated image (built-in image generator, 2026-11-12), source gen-8.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-12-shoreline-tree-9.webp",
+      "repo_path": "assets/images/posts/2026-11-12-shoreline-tree-9.webp",
+      "alt": "Shoreline, WA addition with preserved trees: a finished second-story addition framed by tall Douglas firs that were kept through construction \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "1513f0cd4b7f206baacd5e1dc6791e09",
+      "source": "Newly generated image (built-in image generator, 2026-11-12), source gen-9.jpg converted to 1600w webp q82"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "X-ZvaF2FZTU",
+      "url": "https://www.youtube.com/watch?v=X-ZvaF2FZTU",
+      "title": "Best Practices - Setting Up a Tree Protection Zone",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "9 newly generated images (built-in generator), 0 regraded stills, 0 paid media."
+}

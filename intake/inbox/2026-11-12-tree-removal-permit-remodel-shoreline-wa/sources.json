@@ -1,0 +1,172 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Shoreline",
+    "service": "Tree removal permits and tree protection before remodeling",
+    "slug": "tree-removal-permit-remodel-shoreline-wa"
+  },
+  "sources": [
+    {
+      "url": "https://ecode360.com/49768297",
+      "title": "https://ecode360.com/49768297",
+      "retrieved": "2026-11-12",
+      "http_status": 200,
+      "supports": "SMC 20.50 Subchapter 5 (20.50.290-.370): tree cutting is clearing; permit unless exempt; concurrent review with development; replacement trees protected; critical areas greatest protection; NR zones BMPs/stop work; 310 exemptions (emergency w/ photo proof, partial 36-month cumulative, >24 in needs clearing and grading permit); 320 additions, 50 cy, 3,000/1,500 sf clearing, >6 trees, 4 ft grade, impervious 1,500/500 sf; 330 certified arborist evaluation/TPP, within 5 ft CRZ, hazard assessment, preconstruction meeting and marking; 350 retention 35%/30%, 36 months, ISA/ASCA exception, 10 ft eligibility, wind hazards; 360 replacement ratios, sizes, ANLA, fee in lieu, native, 3:1 nonsignificant, SFR maintenance bond exemption, monitoring, undocumented critical areas stop work; 370 protection standards (plans, ISA CRZ, fencing before disturbance, 6 ft chain link, signs, arborist on site, 3 in roots, rope/flagging alt, rock walls, understory, deadwood, 4-5 in chips, 1 in water/week May-Sept, arborist-based waiver)"
+    },
+    {
+      "url": "https://ecode360.com/49769152",
+      "title": "https://ecode360.com/49769152",
+      "retrieved": "2026-11-12",
+      "http_status": 200,
+      "supports": "SMC Chapter 20.80 Critical Areas (20.80.010-20.80.620)"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "retrieved": "2026-11-12",
+      "http_status": 200,
+      "supports": "State hiring guidance: registration, bids, written contract"
+    },
+    {
+      "url": "https://permits.shorelinewa.gov/eTRAKiT/",
+      "title": "https://permits.shorelinewa.gov/eTRAKiT/",
+      "retrieved": "2026-11-12",
+      "http_status": 200,
+      "supports": "Shoreline eTRAKiT permit portal"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-11-12",
+      "http_status": 200,
+      "supports": "License/bond/insurance lookup"
+    },
+    {
+      "url": "https://sherrilltree.com/",
+      "title": "https://sherrilltree.com/",
+      "retrieved": "2026-11-12",
+      "http_status": 200,
+      "supports": "Material: arborist supplies incl cabling/support, root barriers, planting and staking"
+    },
+    {
+      "url": "https://treegator.com/",
+      "title": "https://treegator.com/",
+      "retrieved": "2026-11-12",
+      "http_status": 200,
+      "supports": "Material: slow-release tree watering bags"
+    },
+    {
+      "url": "https://www.deeproot.com/",
+      "title": "https://www.deeproot.com/",
+      "retrieved": "2026-11-12",
+      "http_status": 200,
+      "supports": "Material: tree root barriers, utility protection barrier, Silva Cell"
+    },
+    {
+      "url": "https://www.forestry-suppliers.com/",
+      "title": "https://www.forestry-suppliers.com/",
+      "retrieved": "2026-11-12",
+      "http_status": 200,
+      "supports": "Material: diameter tapes, tree shelters & stakes, trunk protectors, arborist equipment"
+    },
+    {
+      "url": "https://www.isa-arbor.com/Credentials/Types-of-Credentials/Tree-Risk-Assessment-Qualification",
+      "title": "https://www.isa-arbor.com/Credentials/Types-of-Credentials/Tree-Risk-Assessment-Qualification",
+      "retrieved": "2026-11-12",
+      "http_status": 200,
+      "supports": "ISA credential types incl Certified Arborist and Tree Risk Assessment Qualification"
+    },
+    {
+      "url": "https://www.seattle.gov/city-light/in-the-community/vegetation-management",
+      "title": "https://www.seattle.gov/city-light/in-the-community/vegetation-management",
+      "retrieved": "2026-11-12",
+      "http_status": 200,
+      "supports": "SCL vegetation management: certified arborist and power line clearance crews"
+    },
+    {
+      "url": "https://www.shorelinewa.gov/government/departments/planning-community-development/long-range-planning/tree-code-update",
+      "title": "https://www.shorelinewa.gov/government/departments/planning-community-development/long-range-planning/tree-code-update",
+      "retrieved": "2026-11-12",
+      "http_status": 200,
+      "supports": "Tree Code being updated; early 2025 Development Code changes simplified replacement and raised retention outside critical areas 25%->35%"
+    },
+    {
+      "url": "https://www.shorelinewa.gov/government/departments/planning-community-development/permit-search",
+      "title": "https://www.shorelinewa.gov/government/departments/planning-community-development/permit-search",
+      "retrieved": "2026-11-12",
+      "http_status": 200,
+      "supports": "Permit search: eTRAKiT 2001-present; permits allow physical work incl tree removals"
+    },
+    {
+      "url": "https://www.shorelinewa.gov/government/departments/public-works/engineering-standards",
+      "title": "https://www.shorelinewa.gov/government/departments/public-works/engineering-standards",
+      "retrieved": "2026-11-12",
+      "http_status": 200,
+      "supports": "Engineering Development Manual (Appendix G street trees per trees page)"
+    },
+    {
+      "url": "https://www.shorelinewa.gov/government/departments/public-works/right-of-way-permitting-and-inspection-services",
+      "title": "https://www.shorelinewa.gov/government/departments/public-works/right-of-way-permitting-and-inspection-services",
+      "retrieved": "2026-11-12",
+      "http_status": 200,
+      "supports": "All construction in ROW by utilities/private entities requires permit and inspection; ROW line typically but not always 60 or 30 ft from street center"
+    },
+    {
+      "url": "https://www.shorelinewa.gov/home/showpublisheddocument/12180/639185177606830000",
+      "title": "https://www.shorelinewa.gov/home/showpublisheddocument/12180/639185177606830000",
+      "retrieved": "2026-11-12",
+      "http_status": 200,
+      "supports": "City Tree Regulations for Private Property (updated 6/2026): SMC 20.50 Subch. 5; significant 6 in DBH at 4.5 ft, circumference/3.14, measure below bumps, uphill side; exempt zones CB/MB/NB/MUR-70/TC; 35% retention, 30% with critical areas; replacement table 1/2/3; 6 ft conifer, 1.5 in caliper; multi-stem average, quadratic mean by arborist; allowance 3 trees <=24 in on lots to 7,200 sf + 1/7,200 sf in 36 months, City informed, not in critical areas; removal as part of construction evaluated through development permits; checklist site plan; per-tree fee >=24 in per fee schedule; ANSI A300 pruning <25%; SCL (206) 386-1733 sclvegetation@seattle.gov; hazard trees; Public Works 206-801-2700; penalties table"
+    },
+    {
+      "url": "https://www.shorelinewa.gov/our-city/environment/trees",
+      "title": "https://www.shorelinewa.gov/our-city/environment/trees",
+      "retrieved": "2026-11-12",
+      "http_status": 200,
+      "supports": "City trees page: canopy 37.1%, goal 40% by 2050; owner responsible for permits before removal, enforcement incl fines; critical areas trees any size, City review, maps/planner 206-801-2500; significant 6 in DBH; street trees, Right-of-Way Use Permit, EDM Appendix G; pruning <25% no permit, critical-area pruning by qualified arborist; hazard trees; checklist (stream/wetland/slope, >24 in, multiple, ROW beyond pavement) call 206-801-2500; Customer Response Team 206-801-2700; Tree Code Update"
+    },
+    {
+      "url": "https://www.shorelinewa.gov/our-city/maps-gis/online-interactive-maps",
+      "title": "https://www.shorelinewa.gov/our-city/maps-gis/online-interactive-maps",
+      "retrieved": "2026-11-12",
+      "http_status": 200,
+      "supports": "PCD Property Information App: permits, environmentally sensitive areas, zoning, parcels"
+    },
+    {
+      "url": "https://www.shorelinewa.gov/services/permit-services",
+      "title": "https://www.shorelinewa.gov/services/permit-services",
+      "retrieved": "2026-11-12",
+      "http_status": 200,
+      "supports": "Permit Services: City Hall 3rd Floor 17500 Midvale Ave N Shoreline WA 98133; (206) 801-2500; pcd@shorelinewa.gov; permit processing 8-4; business hours vary by day"
+    },
+    {
+      "url": "https://www.treesaregood.org/Find-an-Arborist",
+      "title": "https://www.treesaregood.org/Find-an-Arborist",
+      "retrieved": "2026-11-12",
+      "http_status": 200,
+      "supports": "ISA Find an Arborist; ISA certification holders held to Code of Ethics"
+    }
+  ],
+  "dropped": [
+    {
+      "url": "https://www.codepublishing.com/WA/Shoreline/",
+      "reason": "403 to box curl; SMC read on ecode360 instead (City trees page links ecode360 for ch. 20.50)"
+    },
+    {
+      "url": "https://www.shorelinewa.gov/government/departments/planning-community-development/for-residents-permits-development-information",
+      "reason": "403 (Akamai) to box curl; not cited"
+    },
+    {
+      "url": "https://www.alturnamats.com/",
+      "reason": "no response to box curl; not cited"
+    },
+    {
+      "url": "https://www.tenaxus.com/en/",
+      "reason": "200 but homepage not tree-protection specific; not cited"
+    },
+    {
+      "note": "Penalty, fee-in-lieu and tree fee dollar amounts verified on City pages but omitted (validator forbids dollar figures); 1,500 vs 3,000 sf small-tree clearing threshold differs between City guide and trees page, omitted for small trees; Ordinance 1031 interim TC-3/TC-4 rule (through July 2025, may be extended) omitted"
+    }
+  ],
+  "notes": "Box curl 2026-11-12 (shorelinewa.gov needs full browser headers incl Sec-Fetch/sec-ch-ua; some PCD pages Akamai 403). Cite only 200 pages."
+}

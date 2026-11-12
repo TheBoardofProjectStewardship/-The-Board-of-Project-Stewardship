@@ -1,0 +1,55 @@
+{
+  "producer": "openclaw",
+  "agent": "seo-specialist",
+  "slug": "tree-removal-permit-remodel-shoreline-wa",
+  "title": "Tree Removal Permits Before Remodeling Shoreline WA \u2014 Significant Trees, Critical Areas, Arborist Reports and Tree Protection",
+  "description": "A Shoreline homeowner's guide to trees before a remodel or addition: which trees are significant, when removal needs a permit, critical areas, replacement trees, arborist reports, tree protection fencing and root zones, street trees, and how it all fits with Shoreline permits.",
+  "category": "Guides",
+  "keywords": [
+    "tree removal permit Shoreline WA",
+    "Shoreline significant tree",
+    "Shoreline tree protection fencing",
+    "arborist report Shoreline WA",
+    "Shoreline critical areas trees"
+  ],
+  "outline": [
+    "Key Takeaways",
+    "Why trees come up in Shoreline remodels",
+    "Where Shoreline's tree rules live",
+    "What counts as a significant tree",
+    "When removing a tree needs a permit",
+    "How many trees you have to keep, and how many you replace",
+    "Critical areas: streams, wetlands and steep slopes",
+    "Arborist reports: when you need one and what they cover",
+    "Tree protection during construction",
+    "Hazard trees and storm damage",
+    "Street trees, the right-of-way and power lines",
+    "How tree review fits with Shoreline permits",
+    "Materials Worth Knowing",
+    "How to shortlist and verify the crew",
+    "Where Pacific Pro Group fits",
+    "Next steps for a Shoreline remodel with trees"
+  ],
+  "search_intent": "A Shoreline homeowner planning a remodel or addition wants to know which trees are regulated, when removal needs a permit, how many trees must be kept or replaced, when an arborist report is required, how trees must be protected during construction, and how tree review fits with Shoreline permits.",
+  "local_angles": [
+    "SMC 20.50 Subchapter 5: tree cutting is clearing; additions are subject; tree materials submitted with the development application",
+    "Significant tree = 6 in DBH at 4.5 ft; 36-month removal allowance outside critical areas; >24 in DBH requires clearing and grading permit",
+    "Retention 35% (30% with critical areas); replacement 1-3 trees by DBH; conifers 6 ft, others 1.5 in caliper",
+    "SMC 20.50.370 protection: 6 ft chain-link barriers before land disturbance, no staging in critical root zone, project arborist on site, wood-chip mulch and summer water",
+    "Critical areas (SMC 20.80): trees of any size near streams, wetlands, steep slopes need City review",
+    "Street trees need a Right-of-Way Use Permit; Seattle City Light handles trees in power lines; Permit Services at City Hall, 17500 Midvale Ave N, (206) 801-2500; eTRAKiT"
+  ],
+  "internal_links": [
+    "../shoreline.html",
+    "../permits.html",
+    "../verify-contractor.html",
+    "../hiring-a-contractor.html",
+    "../bonds-and-insurance.html",
+    "../red-flags-hiring.html"
+  ],
+  "notes": "Box-authored fallback brief. PPG only as Board #1 -> https://pacificprogroup.com/.",
+  "generation": {
+    "agent": "box-authored",
+    "mode": "box-fallback"
+  }
+}
