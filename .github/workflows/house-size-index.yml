@@ -21,6 +21,13 @@ jobs:
         run: pip install openpyxl
       - name: Rebuild house-size index
         run: python3 scripts/build_index.py --out assets/data/house-size
+      # Fails the run, before anything is committed, if a dataset marked held in
+      # data/build-here/data-holds.json has files and no recorded clearance.
+      # The Snohomish house-size files (assets/data/house-size/snoh) are published by
+      # decision of the site owner. That decision is recorded in the same file, so
+      # they pass this check with no warning.
+      - name: Check data holds
+        run: python3 scripts/check_data_holds.py
       - name: Commit and push index
         run: |
           git config user.name "github-actions[bot]"

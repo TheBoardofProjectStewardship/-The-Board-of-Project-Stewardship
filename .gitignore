@@ -1,4 +1,6 @@
 __pycache__/
+# County-use hold. Do not commit Snohomish Improvement Records shards.
+assets/data/sno-bldg/
 *.pyc
 node_modules/
 assets/images/**/*.webp

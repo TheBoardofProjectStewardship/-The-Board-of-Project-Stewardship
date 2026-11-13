@@ -6,7 +6,11 @@
    Runs in the browser (window.BuildHereLandscape) and in Node 18+ (module.exports). */
 (function (root) {
   "use strict";
-  var TIMEOUT = 30000;
+  /* Time budget. Every job in analyze() runs in parallel and is bounded on its own:
+     15 s per request and at most two tries (about 32 s worst case), 18 s in total for
+     OpenStreetMap, 20 s for the nationwide parcel search. Before this the OpenStreetMap
+     retry chain alone could hold the whole study for about 94 s. */
+  var TIMEOUT = 15000;
   var SEA = "https://services.arcgis.com/ZOyb2t4B0UYuYNYH/arcgis/rest/services/";
   var EP = {
     seaBldg: SEA + "Building_Outlines_2023/FeatureServer/0/query",
@@ -17,7 +21,6 @@
     dem: "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer/getSamples",
     overpass: "https://overpass-api.de/api/interpreter",
     overpass2: "https://overpass.kumi.systems/api/interpreter",
-    overpass3: "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
     msbfp: "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/MSBFP2/FeatureServer/0/query",
     agolSearch: "https://www.arcgis.com/sharing/rest/search"
   };
@@ -39,6 +42,13 @@
       { url: "https://public.gis.olmstedcounty.gov/arcgis/rest/services/AGOL_Open_Data/Parcels/FeatureServer/0", name: "Olmsted County parcels (Olmsted County GIS)", county: "Olmsted" }],
     AK: [{ url: "https://services1.arcgis.com/7HDiw78fcUiM2BWn/arcgis/rest/services/AK_Parcels/FeatureServer/0", name: "Alaska statewide parcels" }]
   };
+  /* Optional page configuration. window.BuildHereConfig = { parcelDiscovery: false } turns the ArcGIS
+     Online search off, which is the right setting for an embed that only serves King and Snohomish counties. */
+  var CFG = root.BuildHereConfig || {};
+  var SVC = CFG.services || {}; // openStreetMap: false and msFootprints: false turn those two sources off
+  /* A discovered layer is somebody's public ArcGIS Online item, and the item decides which server the
+     browser calls. Only a government domain or Esri's own hosting is sent the visitor's coordinates. */
+  var DISCOVERY_HOST = /^https:\/\/([a-z0-9-]+\.)*(arcgis\.com|[a-z0-9-]+\.gov|[a-z0-9-]+\.[a-z]{2}\.us|state\.[a-z]{2}\.us)\//i;
   var LINKS = {
     kcRecorder: "https://recordsearch.kingcounty.gov/LandmarkWeb",
     kcRecorderInfo: "https://kingcounty.gov/en/dept/executive-services/certificates-permits-licenses/records-licensing/recorders-office/records-search",
@@ -139,25 +149,21 @@
   function osm(env) {
     var b = [env[1], env[0], env[3], env[2]].join(",");
     var q = "[out:json][timeout:25];(way[building](" + b + ");way[highway=service](" + b + ");way[amenity=parking](" + b + ");way['area:highway'](" + b + "););out geom tags;";
-    // Each try gets its own 20 s timeout. Busy (429/504) or slow: back off and move to the next mirror.
-    var urls = [EP.overpass, EP.overpass3, EP.overpass2, EP.overpass];
-    var waits = [0, 2000, 4000, 8000];
-    var wait = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
-    var call = function (u) {
-      var ctl = new AbortController(), tm = setTimeout(function () { ctl.abort(); }, 20000);
+    // Driveway centerlines are a low-confidence extra, so they get a small budget: two public
+    // mirrors, one try each, 18 s in total. A busy (429/504) or slow server ends its try at once.
+    var urls = [EP.overpass, EP.overpass2], end = Date.now() + 18000, i = 0;
+    var call = function (u, ms) {
+      var ctl = new AbortController(), tm = setTimeout(function () { ctl.abort(); }, ms);
       return fetch(u, { method: "POST", body: "data=" + encodeURIComponent(q), headers: { "Content-Type": "application/x-www-form-urlencoded" }, signal: ctl.signal })
         .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
         .finally(function () { clearTimeout(tm); });
     };
-    var i = 0;
-    var attempt = function () {
-      var k = i++;
-      return wait(waits[k]).then(function () { return call(urls[k]); }).catch(function (e) {
-        if (i >= urls.length) throw new Error("all Overpass servers busy or unreachable (" + (e.name === "AbortError" ? "timeout" : e.message) + ")");
-        return attempt();
-      });
+    var attempt = function (last) {
+      var left = end - Date.now();
+      if (i >= urls.length || left < 1500) return Promise.reject(new Error("Overpass servers busy or unreachable (" + last + ")"));
+      return call(urls[i++], Math.min(10000, left)).catch(function (e) { return attempt(e.name === "AbortError" ? "timeout" : e.message); });
     };
-    return attempt()
+    return attempt("not tried")
       .then(function (j) {
         var out = { buildings: [], drives: [], parking: [] };
         (j.elements || []).forEach(function (e) {
@@ -174,7 +180,7 @@
     var chunks = [];
     for (var i = 0; i < points.length; i += 250) chunks.push(points.slice(i, i + 250));
     return Promise.all(chunks.map(function (c, ci) {
-      return getJSON(EP.dem, { geometry: JSON.stringify({ points: c, spatialReference: { wkid: 4326 } }), geometryType: "esriGeometryMultipoint", returnFirstValueOnly: true, f: "json" }, true, 3)
+      return getJSON(EP.dem, { geometry: JSON.stringify({ points: c, spatialReference: { wkid: 4326 } }), geometryType: "esriGeometryMultipoint", returnFirstValueOnly: true, f: "json" }, true, 2)
         .then(function (j) {
           var vals = new Array(c.length).fill(null), res = null;
           (j.samples || []).forEach(function (sm) { var v = parseFloat(sm.value); if (isFinite(v) && v > -1000) vals[sm.locationId] = v * 3.28084; res = sm.resolution; });
@@ -273,19 +279,21 @@
      then keep the first one whose polygon contains the address point. */
   function discoverParcel(county, stateName, lon, lat, num, street) {
     var c = String(county || "").replace(/ (County|Parish|Borough|Census Area|Municipality)$/i, "");
-    if (!c) return Promise.resolve(null);
+    if (!c || CFG.parcelDiscovery === false || SVC.parcelDiscovery === false) return Promise.resolve(null);
     var q = '(parcels OR parcel OR taxlots) "' + c + '" (type:"Feature Service" OR type:"Map Service") access:public';
     return getJSON(EP.agolSearch, { f: "json", q: q, num: 20, sortField: "numviews", sortOrder: "desc" }, false, 1).then(function (j) {
       var re = new RegExp(c.replace(/[^A-Za-z ]/g, ""), "i");
       var items = (j.results || []).filter(function (r) {
         var t = (r.title || "") + " " + (r.snippet || "") + " " + (r.tags || []).join(" ");
-        return r.url && /parcel|tax ?lot/i.test(r.title) && (re.test(t) || (stateName && new RegExp(stateName, "i").test(t))) && !/sale|centroid|point|easement|right.of.way|pipeline|subset|model|histor|change|mile|inventory|impact/i.test(r.title);
+        return r.url && DISCOVERY_HOST.test(r.url) && /parcel|tax ?lot/i.test(r.title) && (re.test(t) || (stateName && new RegExp(stateName, "i").test(t))) && !/sale|centroid|point|easement|right.of.way|pipeline|subset|model|histor|change|mile|inventory|impact/i.test(r.title);
       }).slice(0, 5);
       var i = 0;
       function next() {
         if (i >= items.length) return null;
         var it = items[i++];
-        return parcelLayerOf(it.url).then(function (u) { return pointHit(u, lon, lat, num, street).then(function (f) { return f && !f.big ? { f: f, name: it.title + " (published by " + it.owner + " on ArcGIS Online)", auto: true } : next(); }); })
+        // An unvetted layer is used when its parcel carries this address, or when its outline contains the
+        // address point. A nearest-lot guess on a layer nobody checked is two weak links, so the next layer is tried.
+        return parcelLayerOf(it.url).then(function (u) { return pointHit(u, lon, lat, num, street).then(function (f) { return f && !f.big && !(f.numMatch === 0 && f.dist > 0) ? { f: f, name: it.title + " (published by " + it.owner + " on ArcGIS Online)", auto: true } : next(); }); })
           .catch(function () { return next(); });
       }
       return next();
@@ -317,6 +325,18 @@
     return [r];
   }
 
+  /* Downhill direction of one gradient. gx is east, gy is north, and both point uphill.
+     The result is an estimate from those two numbers, not a pipe or ditch design. */
+  function fallFromGradient(gx, gy) {
+    if (!isFinite(gx) || !isFinite(gy)) return null;
+    var mag = Math.sqrt(gx * gx + gy * gy);
+    if (mag < 0.001) return { pct: 0, deg: null, compass: "flat" };
+    var up = Math.atan2(gx, gy) * 180 / Math.PI;
+    var down = (up + 180) % 360;
+    if (down < 0) down += 360;
+    var names = ["north", "northeast", "east", "southeast", "south", "southwest", "west", "northwest"];
+    return { pct: Math.round(mag * 1000) / 10, deg: Math.round(down), compass: names[Math.round(down / 45) % 8] };
+  }
   /* ---------- slope ---------- */
   function slope(rings, fr) {
     var R = proj(rings, fr), b = bbox(R);
@@ -326,7 +346,7 @@
     for (var j = 0; j < ny; j++) for (var i = 0; i < nx; i++) pts.push(fr.inv(b[0] + (i - 1) * step, b[1] + (j - 1) * step));
     return demSamples(pts).then(function (d) {
       var z = function (i, j) { return d.vals[j * nx + i]; };
-      var slopes = [], elev = [];
+      var slopes = [], elev = [], gxSum = 0, gySum = 0;
       for (var j = 1; j < ny - 1; j++) for (var i = 1; i < nx - 1; i++) {
         var x = b[0] + (i - 1) * step, y = b[1] + (j - 1) * step;
         if (!inPoly(x, y, R)) continue;
@@ -334,18 +354,21 @@
         if (c != null) elev.push(c);
         if ([e, wv, n, s].some(function (v) { return v == null; })) continue;
         var gx = (e - wv) / (2 * step), gy = (n - s) / (2 * step);
+        gxSum += gx; gySum += gy;
         slopes.push(Math.sqrt(gx * gx + gy * gy) * 100);
       }
       if (slopes.length < 4) return { ok: false, note: "Too few lidar samples fell inside the lot (" + slopes.length + ")." };
       var sorted = slopes.slice().sort(function (a, c) { return a - c; });
       var mean = slopes.reduce(function (a, v) { return a + v; }, 0) / slopes.length;
       var frac = function (t) { return slopes.filter(function (v) { return v >= t; }).length / slopes.length; };
+      var fall = fallFromGradient(gxSum / slopes.length, gySum / slopes.length);
       return {
         ok: true, step: Math.round(step * 10) / 10, samples: slopes.length, res: d.res,
         mean: Math.round(mean), median: Math.round(sorted[Math.floor(sorted.length / 2)]),
         p95: Math.round(sorted[Math.floor(sorted.length * 0.95)]), max: Math.round(sorted[sorted.length - 1]),
         pct15: Math.round(frac(15) * 100), pct25: Math.round(frac(25) * 100), pct40: Math.round(frac(40) * 100),
-        elevMin: Math.round(Math.min.apply(null, elev)), elevMax: Math.round(Math.max.apply(null, elev))
+        elevMin: Math.round(Math.min.apply(null, elev)), elevMax: Math.round(Math.max.apply(null, elev)),
+        fallPct: fall ? fall.pct : null, fallDeg: fall ? fall.deg : null, fallCompass: fall ? fall.compass : ""
       };
     });
   }
@@ -386,7 +409,7 @@
   /* ---------- main ---------- */
   function analyze(s) {
     var out = { ok: false, rows: [], slope: null, steep: null, survey: null, notes: [], sources: [], parcelSrc: "", mode: "lot" };
-    function src(name, ok, note) { out.sources.push({ name: name, ok: ok, note: note || "" }); }
+    function src(name, ok, note, how) { var x = { name: name, ok: ok, note: note || "" }; if (how) x.how = how; out.sources.push(x); }
     if (!s || (!s.rings && s.lon == null)) { out.notes.push("No location was found, so the site coverage could not be measured."); return Promise.resolve(out); }
     var lotRings = s.rings, parcelName = s.rings ? "" : null, parcelAuto = false;
     var seattle = s.juris === "seattle", sno = /^Snohomish/.test(s.county || "") && (!s.stateAbbr || s.stateAbbr === "WA"), king = /^King/.test(s.county || "") && (!s.stateAbbr || s.stateAbbr === "WA");
@@ -396,13 +419,20 @@
       lotRings = h.f.geometry.rings; parcelName = h.name; parcelAuto = h.auto; out.parcelBig = !!h.f.big;
       out.matchedBy = h.f.numMatch === 2 ? "address" : h.f.numMatch === 1 ? "number" : "location";
       out.rings = lotRings;
-      out.parcelAttrs = h.f.attributes || {};
-      // Feed the main study the outline (and any free assessor fields) so aerial, site plan, Pascal and CivilCraft share one lot.
+      // These layers are queried with outFields=* because every state names its fields differently, so owner,
+      // taxpayer and mailing fields can come back with the outline. They are read here for the parcel number,
+      // finished area and year built, and are not kept on the study or passed to the report.
+      var a = h.f.attributes || {};
+      h.f.attributes = null;
+      // Feed the main study the outline and any free assessor fields so the aerial and site plan share one lot.
       if (!s.rings) s.rings = lotRings;
-      var a = out.parcelAttrs, pin = a.PIN || a.COUNTY_PIN || a.STATE_PIN || a.PARCEL_ID || a.PID || a.Parcel_ID || a.TAX_PIN || a.PARCELID || a.PARCELNUM || a.PARCEL_NUM || "";
+      var pin = a.PIN || a.COUNTY_PIN || a.STATE_PIN || a.PARCEL_ID || a.PID || a.Parcel_ID || a.TAX_PIN || a.PARCELID || a.PARCELNUM || a.PARCEL_NUM || "";
       if (!s.parcel && pin) s.parcel = String(pin);
-      var fin = a.FIN_SQ_FT || a.FINISHED_SQFT || a.BLDG_SQFT || a.LIVINGAREA || a.SQFT || null;
-      if (!s.existing && fin && +fin > 0) { s.existing = Math.round(+fin); s.existingSrc = (h.name || "Public parcel record") + " finished area"; }
+      // Finished area is taken only from a field name that can mean nothing else, only from a layer in the
+      // registry above, and the field is named in the source. BLDG_SQFT is gross building area and SQFT is
+      // the lot area in many county schemas; both were being shown as finished living area.
+      var finKey = h.auto ? null : ["FIN_SQ_FT", "FINISHED_SQFT", "LIVINGAREA"].filter(function (k) { return a[k] != null && +a[k] > 0; })[0];
+      if (!s.existing && finKey) { s.existing = Math.round(+a[finKey]); s.existingSrc = (h.name || "Public parcel record") + ", field " + finKey; }
       var yb = a.YEAR_BUILT || a.YR_BUILT || a.YEARBUILT || a.YEAR_BUILT_ || null;
       if (!s.yearBuilt && yb && +yb > 1800) { s.yearBuilt = String(Math.round(+yb)); s.yearSrc = h.name || "Public parcel record"; }
       if (h.f.numMatch === 2) out.notes.push("Lot matched by the house number and street on the parcel record.");
@@ -413,8 +443,15 @@
       if (h.f.big) out.notes.push("The only lot found is over 2 acres. It may be a road, rail or multi-lot record rather than this property; treat the numbers below with caution.");
       src(h.name, true, (h.auto ? "Auto-discovered county parcel layer; " : "Public parcel layer; ") + where);
     }
-    var pJob = lotRings ? Promise.resolve() : findParcel(s).then(function (h) {
-      if (h) applyParcelHit(h);
+    // The nationwide search walks several layers one after another. It gets 20 s; a late answer is dropped
+    // (findParcel has no side effects, so nothing arrives after the study is drawn).
+    var search = lotRings ? null : new Promise(function (resolve, reject) {
+      var timer = setTimeout(function () { resolve({ timedOut: true }); }, 20000);
+      findParcel(s).then(function (h) { clearTimeout(timer); resolve(h); }, function (e) { clearTimeout(timer); reject(e); });
+    });
+    var pJob = lotRings ? Promise.resolve() : search.then(function (h) {
+      if (h && h.timedOut) src("Parcel outline (statewide registry and ArcGIS Online discovery)", false, "The parcel layers did not answer within 20 seconds.");
+      else if (h) applyParcelHit(h);
       else src("Parcel outline (statewide registry and ArcGIS Online discovery)", false, "No free public parcel layer answered for this address.");
     }).catch(function (e) { src("Parcel outline", false, e.message); });
 
@@ -428,12 +465,13 @@
       var jobs = [];
       if (seattle) jobs.push(seattleBuildings(env).then(function (b) { layers.buildings = b; gotB = true; bSrc = "City of Seattle building outlines (2023)"; src(bSrc, true, b.length + " outlines near the lot"); }).catch(function (e) { src("City of Seattle building outlines (2023)", false, e.message); }));
       else if (sno) jobs.push(snoBuildings(env).then(function (b) { if (b.length) { layers.buildings = b; gotB = true; bSrc = "Snohomish County roof outlines (include eaves)"; } src("Snohomish County roof outlines", true, b.length + " outlines near the lot"); }).catch(function (e) { src("Snohomish County roof outlines", false, e.message); }));
-      if (!seattle) jobs.push(msBuildings(env).then(function (b) { msB = b; src("Microsoft US Building Footprints (Esri-hosted MSBFP2)", true, b.length + " footprints near the lot"); }).catch(function (e) { src("Microsoft US Building Footprints", false, e.message); }));
+      if (!seattle && SVC.msFootprints !== false) jobs.push(msBuildings(env).then(function (b) { msB = b; src("Microsoft US Building Footprints (Esri-hosted MSBFP2)", true, b.length + " footprints near the lot"); }).catch(function (e) { src("Microsoft US Building Footprints", false, e.message); }));
       if (seattle) jobs.push(seattleImpervious(env).then(function (imp) {
         imp.forEach(function (p) { if (p.cls === "drive") layers.drive.push(p); else if (p.cls === "hard") layers.hard.push(p); else if (p.cls === "bld") layers.bldFallback = (layers.bldFallback || []).concat([p]); });
         gotD = true; dSrc = "City of Seattle impervious surface (2015 aerial mapping)"; hSrc = dSrc;
         src(dSrc, true, imp.length + " mapped hard-surface polygons near the lot");
       }).catch(function (e) { src("City of Seattle impervious surface (2015)", false, e.message); }));
+      else if (SVC.openStreetMap === false) src("OpenStreetMap (Overpass API)", false, "Turned off for this site, so driveways are shown as Unavailable", "Not used: ");
       else jobs.push(osm(env).then(function (o) { osmO = o; src("OpenStreetMap (Overpass API)", true, o.buildings.length + " buildings, " + o.drives.length + " service roads, " + o.parking.length + " parking areas near the lot"); })
         .catch(function (e) { src("OpenStreetMap (Overpass API)", false, e.message + ". Driveways are shown as Unavailable; try again in a minute"); }));
       jobs.push(slope(shape, fr).then(function (sl) { out.slope = sl; src("USGS 3DEP elevation (ImageServer getSamples)", sl.ok, sl.ok ? sl.samples + " slope cells at about " + sl.step + " ft spacing" : sl.note); })
@@ -461,6 +499,7 @@
           if (osmO.drives.length) layers.driveLines = osmO.drives;
           gotD = true; dSrc = "OpenStreetMap driveways and parking";
         }
+        out.osmUsed = /OpenStreetMap/.test(bSrc) || !!(osmO && (osmO.parking.length || osmO.drives.length));
         return out.mode === "point" ? pointRows(s, out, layers, fr, gotB, bSrc) : lotRows(s, out, layers, lotRings, fr, gotB, gotD, bSrc, dSrc, hSrc, seattle, parcelName, parcelAuto);
       });
     }).then(function () { slopeFlags(out, seattle); out.ok = true; return out; })
@@ -479,7 +518,7 @@
       { key: "garage", label: "Detached garage / accessory building", sf: null, conf: "Unavailable", src: "Needs the lot outline to tell which outbuildings belong to this property." },
       { key: "drive", label: "Driveway and parking", sf: null, conf: "Unavailable", src: "Needs the lot outline." },
       { key: "hard", label: "Walkways, patios, decks and other hardscape", sf: null, conf: "Unavailable", src: "Needs the lot outline." },
-      { key: "land", label: "Remaining landscape", sf: null, conf: "Unavailable", src: "Needs the lot outline." }
+      { key: "land", label: "Unclassified open area (not verified landscaping)", sf: null, verifiedLandscape: false, conf: "Unavailable", src: "Needs the lot outline. Not filled in as landscaping." }
     ];
   }
 
@@ -495,9 +534,10 @@
       c.parts.forEach(function (p, i) { p.straddle = p.full > p.sf * 1.25 + 50; if (i === 0) house = p; else acc.push(p); });
       var lowB = /OpenStreetMap|Microsoft/.test(bSrc);
       var rows = [];
-      rows.push({ key: "lot", label: "Lot area", sf: lot, pct: 100, conf: fromCounty ? "High" : (out.parcelBig ? "Low" : parcelAuto ? "Medium-low" : "Medium"), src: lotSrc + (Math.abs(c.area - lot) > lot * 0.03 ? ". The mapped outline measures " + Math.round(c.area).toLocaleString("en-US") + " sf." : "") });
+      // "High" is for an area the assessor record states. An area measured off mapped parcel lines is "Medium".
+      rows.push({ key: "lot", label: "Lot area", sf: lot, pct: 100, conf: fromCounty ? (s.lotKind === "outline" ? "Medium" : "High") : (out.parcelBig ? "Low" : parcelAuto ? "Medium-low" : "Medium"), src: String(lotSrc).replace(/\.\s*$/, "") + (Math.abs(c.area - lot) > lot * 0.03 ? ". The mapped outline measures " + Math.round(c.area).toLocaleString("en-US") + " sf." : "") });
       if (!gotB) rows.push({ key: "house", label: "House footprint", sf: null, conf: "Unavailable", src: "No building outline layer answered for this address." });
-      else if (!house) rows.push({ key: "house", label: "House footprint", sf: 0, pct: 0, conf: "Medium", src: bSrc + ": no building mapped on this lot." });
+      else if (!house) rows.push({ key: "house", label: "House footprint", sf: null, conf: "Unavailable", src: bSrc + ": no building outline intersected this lot. That is not a measured house of 0 sf." });
       // Suspect footprint: a machine-traced outline that fills most of the lot, or one that mostly lies outside it.
       var suspect = house && lowB && (house.sf > c.area * 0.8 || house.full > house.sf * 2);
       if (suspect) out.notes.push("The mapped building outline " + (house.sf > c.area * 0.8 ? "covers over 80% of the lot" : "lies mostly outside this lot") + ", which is unusual for a house. It may be merged with neighboring buildings or the lot may be wrong. The house number below is clipped to the lot and marked low confidence; check it on the aerial.");
@@ -511,15 +551,38 @@
       rows.push({ key: "garage", label: "Detached garage / accessory building", sf: garageLabel.sf, pct: garageLabel.sf != null ? pct(garageLabel.sf, c.area) : null, conf: garageLabel.conf, src: garageLabel.src });
       var otherAcc = acc.filter(function (p) { return gar.indexOf(p) < 0; }).reduce(function (t, p) { return t + p.sf; }, 0);
       if (otherAcc > 0) rows.push({ key: "otherbld", label: "Other buildings", sf: Math.round(otherAcc), pct: pct(otherAcc, c.area), conf: lowB ? "Medium-low" : "Medium", src: bSrc });
-      if (!gotD) rows.push({ key: "drive", label: "Driveway and parking", sf: null, conf: "Unavailable", src: "No public driveway or paved-surface layer answered for this address. Measure it from the aerial or a survey." });
+      if (!gotD) rows.push({ key: "drive", label: "Driveway and parking", sf: null, conf: "Unavailable", src: "No public driveway or paved-surface layer answered for this address. Left blank, not zero. A survey, a permit plan, or a typed source can fill it." });
       else {
         var est = c.driveEst > 0, mapped = c.drive > 0;
-        rows.push({ key: "drive", label: "Driveway and parking", sf: r10(c.drive + c.driveEst), pct: pct(c.drive + c.driveEst, c.area), conf: seattle ? "Medium" : (est || mapped) ? "Low (estimated)" : "Low", src: dSrc + (est ? ". About " + r10(c.driveEst) + " sf is a mapped driveway centerline at an assumed 10 ft width." : "") + (seattle ? " Mapped from 2015 aerials; newer paving is not shown." : (!est && !mapped ? ". No driveway is mapped in OpenStreetMap here; many residential driveways are not, so 0 may be an undercount." : "")) + " Only paving inside the lot lines counts." });
+        if (!mapped && !est && !seattle) {
+          rows.push({ key: "drive", label: "Driveway and parking", sf: null, conf: "Unavailable", src: dSrc + ". The layer answered and did not map a driveway. Absence is not a measurement of 0. Many residential driveways are missing from OpenStreetMap." });
+        } else if (seattle && !mapped && !est) {
+          rows.push({ key: "drive", label: "Driveway and parking", sf: 0, measuredZero: true, pct: 0, conf: "Low", src: dSrc + ". The 2015 impervious layer classified no driveway on this lot. Newer paving may exist. This zero is that classification, not a guess." });
+        } else {
+          rows.push({ key: "drive", label: "Driveway and parking", est: est, sf: r10(c.drive + c.driveEst), pct: pct(c.drive + c.driveEst, c.area), conf: seattle ? "Medium" : "Low (estimated)", src: dSrc + (est ? ". About " + r10(c.driveEst) + " sf is a mapped driveway centerline at an assumed 10 ft width." : "") + (seattle ? " Mapped from 2015 aerials; newer paving is not shown." : "") + " Only paving inside the lot lines counts." });
+        }
       }
-      if (seattle && gotD) rows.push({ key: "hard", label: "Walkways, patios, decks and other hardscape", sf: r10(c.hard), pct: pct(c.hard, c.area), conf: "Medium", src: hSrc + ". Mapped from 2015 aerials; newer work is not shown." });
-      else rows.push({ key: "hard", label: "Walkways, patios, decks and other hardscape", sf: null, conf: "Unavailable", src: "No free public walkway or patio layer covers this address." });
-      var haveAll = gotB && gotD && seattle;
-      rows.push({ key: "land", label: haveAll ? "Remaining landscape (softscape)" : "Remaining open area (landscape plus unmapped hardscape)", sf: gotB ? r10(c.land) : null, pct: gotB ? pct(c.land, c.area) : null, conf: !gotB ? "Unavailable" : haveAll ? "Medium" : "Low", src: !gotB ? "Needs the building footprint." : haveAll ? "Lot area minus every mapped building and hard surface." : "Lot area minus mapped buildings" + (gotD ? " and mapped driveways" : "") + ". Walkways and patios are not mapped here, so true landscape is smaller." });
+      if (seattle && gotD) rows.push({ key: "hard", label: "Walkways, patios, decks and other hardscape", sf: r10(c.hard), measuredZero: c.hard === 0, pct: pct(c.hard, c.area), conf: "Medium", src: hSrc + ". Mapped from 2015 aerials; newer work is not shown." });
+      else rows.push({ key: "hard", label: "Walkways, patios, decks and other hardscape", sf: null, conf: "Unavailable", src: "No free public walkway or patio layer covers this address. Left blank, not zero." });
+      var driveRow = rows.filter(function (row) { return row.key === "drive"; })[0];
+      var hardRow = rows.filter(function (row) { return row.key === "hard"; })[0];
+      var buildingsKnown = !!(gotB && house);
+      var hardKnown = !!(driveRow && driveRow.sf != null && hardRow && hardRow.sf != null);
+      var verifiedLand = buildingsKnown && hardKnown;
+      var buildingSf = 0;
+      if (house) buildingSf += house.sf;
+      rows.forEach(function (row) { if ((row.key === "garage" || row.key === "otherbld") && row.sf != null) buildingSf += row.sf; });
+      var landSf = null;
+      if (buildingsKnown) landSf = r10(verifiedLand ? c.land : Math.max(0, c.area - buildingSf));
+      rows.push({
+        key: "land",
+        label: verifiedLand ? "Remaining landscape (softscape)" : "Unclassified open area (not verified landscaping)",
+        verifiedLandscape: verifiedLand,
+        sf: landSf,
+        pct: landSf != null ? pct(landSf, c.area) : null,
+        conf: !buildingsKnown ? "Unavailable" : verifiedLand ? "Medium" : "Low",
+        src: !buildingsKnown ? "Building coverage is not measured, so open area is not computed from a zero house." : verifiedLand ? "Lot area minus mapped buildings and classified hard surfaces. Planning estimate, not a survey." : "Lot area minus mapped building coverage only. Driveway, walks, patios, or eaves are not all known, so this number is not landscaping."
+      });
       out.rows = rows;
       out.coverage = { step: Math.round(c.step * 10) / 10 };
   }
@@ -543,11 +606,14 @@
     var h = "<h3>What is house, garage, driveway and landscape</h3>";
     if (r.warn) h += '<p class="bh-verify" role="alert"><strong>' + esc(r.warn) + "</strong></p>";
     if (r.rows.length) {
-      h += '<table class="bh-table"><thead><tr><th scope="col">Area</th><th scope="col">Square feet</th><th scope="col">Share of lot</th><th scope="col">Confidence</th><th scope="col">Source</th></tr></thead><tbody>' + r.rows.map(function (x) {
-        return "<tr><th scope=\"row\">" + esc(x.label) + "</th><td>" + (x.sf == null ? '<span class="bh-tbd">Unavailable</span>' : n(x.sf) + " sf") + "</td><td>" + (x.pct == null ? "–" : x.pct + "%") + "</td><td>" + esc(x.conf) + "</td><td>" + esc(x.src) + "</td></tr>";
+      h += '<table class="bh-table bh-land"><thead><tr><th scope="col">Area</th><th scope="col">Square feet</th><th scope="col">Share of lot</th><th scope="col">Confidence</th><th scope="col">Source</th></tr></thead><tbody>' + r.rows.map(function (x) {
+        return "<tr><th scope=\"row\">" + esc(x.label) + "</th><td data-label=\"Square feet\">" + (x.sf == null ? '<span class="bh-tbd">Unavailable</span>' : n(x.sf) + " sf") + "</td><td data-label=\"Share of lot\">" + (x.pct == null ? "Not measured" : x.pct + "%") + "</td><td data-label=\"Confidence\">" + esc(x.conf) + "</td><td data-label=\"Source\">" + esc(x.src) + "</td></tr>";
       }).join("") + "</tbody></table>";
     }
+    var landRow = (r.rows || []).filter(function (x) { return x.key === "land" && x.verifiedLandscape === false && x.sf != null; })[0];
+    if (landRow) h += '<p class="bh-verify">The open-area figure is not verified landscaping. Paving, patios, or eaves may be inside it.</p>';
     r.notes.forEach(function (t) { h += '<p class="bh-verify">' + esc(t) + "</p>"; });
+    if (r.osmUsed) h += '<p class="bh-muted">Building or driveway data &copy; OpenStreetMap contributors, used under the Open Database License.</p>';
     h += "<h3>Slope</h3>";
     var sl = r.slope;
     if (sl && sl.ok) {
@@ -555,7 +621,8 @@
         '<tr><th scope="row">Steepest part</th><td>' + sl.p95 + "% (95th percentile); single steepest cell " + sl.max + "%, often a wall, rockery or building edge</td></tr>" +
         '<tr><th scope="row">Share of lot at 15%+ / 25%+ / 40%+</th><td>' + sl.pct15 + "% / " + sl.pct25 + "% / " + sl.pct40 + "%</td></tr>" +
         '<tr><th scope="row">Ground elevation range</th><td>' + n(sl.elevMin) + " to " + n(sl.elevMax) + " ft (" + (sl.elevMax - sl.elevMin) + " ft of fall)</td></tr>" +
-        '<tr><th scope="row">Source</th><td>USGS 3DEP bare-earth lidar, ' + (sl.res ? sl.res + " m" : "best available") + " resolution, sampled every " + sl.step + " ft. Confidence: medium. Lidar is bare earth, so slopes at retaining walls and building edges read steep. A topographic survey sets the real grades.</td></tr></table>";
+        '<tr><th scope="row">Estimated surface fall</th><td>' + (sl.fallCompass && sl.fallCompass !== "flat" ? "Toward the " + esc(sl.fallCompass) + (sl.fallDeg != null ? " (about " + sl.fallDeg + " degrees clockwise from north)" : "") + ", average gradient about " + sl.fallPct + "%." : "The sample grid is nearly flat, so no single downhill direction stands out.") + " This is the average bare-earth fall of the same 3DEP samples. On a lot that rises and then falls, the directions can cancel. It is not a flow path, ditch, or pipe.</td></tr>" +
+        '<tr><th scope="row">Source</th><td>USGS 3DEP bare-earth lidar, ' + (sl.res ? sl.res + " m" : "best available") + " resolution, sampled every " + sl.step + " ft. Confidence: medium. Lidar is bare earth, so slopes at retaining walls and building edges read steep. A topographic survey sets the real grades. This table does not save a surface, and contour and aspect pictures are not shown. It does not size drainage.</td></tr></table>";
     } else {
       var slopeHint = (s && s.stateAbbr === "WA")
         ? ' The <a href="' + LINKS.dnrLidar + '" target="_blank" rel="noopener">WA DNR lidar portal</a> has the same ground data to view by hand.'
@@ -576,7 +643,7 @@
     return h;
   }
 
-  var api = { analyze: analyze, renderHTML: renderHTML, _coverage: coverage, _frame: frame };
+  var api = { analyze: analyze, renderHTML: renderHTML, fallFromGradient: fallFromGradient, _coverage: coverage, _frame: frame };
   // Always expose on the browser global. A stray CommonJS `module` shim must not
   // steal the export or Generate shows "landscape calculator script did not load".
   root.BuildHereLandscape = api;

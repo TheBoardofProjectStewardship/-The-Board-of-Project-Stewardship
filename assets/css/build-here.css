@@ -16,7 +16,12 @@
 .bh-btn[disabled]{opacity:.6;cursor:wait}
 .bh-btn-ghost{background:transparent;color:#166534;border:1px solid #166534}
 .bh-status{min-height:1.5rem;color:#e2e8f0;margin-top:.75rem}
-.bh-example{display:inline-block;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;background:#fde68a;color:#422006;border-radius:.25rem;padding:.15rem .45rem;margin-left:.4rem}
+.bh-field-error{color:#fca5a5;font-weight:700}
+.bh-privacy{margin-top:.35rem}
+.bh-privacy summary{cursor:pointer;font-size:.8rem;color:#cbd5e1}
+.bh-privacy summary:focus-visible{outline:3px solid #4ade80;outline-offset:2px}
+.bh-field-error:empty{display:none}
+.bh-input[aria-invalid=true]{border-color:#f87171}
 .bh-toolbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;margin:0 0 1rem}
 .bh-toolbar p{color:#cbd5e1;margin:0}
 
@@ -38,15 +43,10 @@
 .bh-table th[scope=row]{font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:.72rem;color:#3e4c59;width:38%}
 .bh-table thead th{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#166534;border-bottom:2px solid #166534}
 .bh-rules th[scope=row]{width:24%}
-.bh-total th,.bh-total td{font-weight:800;color:#102a1c}
 .bh-muted{color:#52606d!important;font-size:.8rem!important}
 .bh-verify{color:#8a4b08!important;font-weight:700}
 .bh-flags li{margin-bottom:.35rem}
-.bh-cover{display:flex;flex-direction:column;justify-content:center;min-height:30rem;text-align:center}
 .bh-kicker{letter-spacing:.32em;text-transform:uppercase;font-size:.75rem!important;color:#166534!important;font-weight:800}
-.bh-cover h2{font-size:clamp(1.6rem,3.4vw,2.6rem);font-weight:300;letter-spacing:.08em;text-transform:uppercase;color:#102a1c;margin:.6rem 0}
-.bh-cover-sub{letter-spacing:.14em;text-transform:uppercase}
-.bh-cover-date{color:#616e7c!important}
 .bh-disclaimer{border-left:4px solid #166534;background:#eef5ef;padding:.75rem 1rem;text-align:left;max-width:40rem;margin:1.25rem auto 0}
 .bh-aerial{margin:0}
 .bh-aerial-frame{position:relative;line-height:0}
@@ -58,6 +58,12 @@
 .bh-lot{fill:#f3f1ea;stroke:#1f2933;stroke-width:2}
 .bh-env{fill:rgba(22,101,52,.28);stroke:none}
 .bh-edge{stroke-width:3;stroke-linecap:round}.bh-edge-front{stroke:#b45309}.bh-edge-side{stroke:#1f2933}.bh-edge-rear{stroke:#1d4ed8}
+.bh-edge-street{stroke:#b45309;stroke-dasharray:7 5}
+.bh-plan-key{list-style:none;margin:.5rem 0 .6rem;padding:0;display:flex;flex-wrap:wrap;gap:.3rem 1.1rem}
+.bh-plan-key li{display:flex;align-items:center;gap:.45rem}
+.bh-key{flex:none;display:inline-block;width:1.5rem;height:0;border-top:3px solid #1f2933;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.bh-key-front{border-top-color:#b45309}.bh-key-street{border-top:3px dashed #b45309}.bh-key-rear{border-top-color:#1d4ed8}
+.bh-key-env{height:.8rem;border:0;background:rgba(22,101,52,.28)}
 .bh-k-front{fill:#b45309}.bh-k-rear{fill:#1d4ed8}.bh-k-side{fill:#1f2933}
 .bh-north path{fill:#1f2933}.bh-north text{font:700 10px Inter,system-ui,sans-serif;fill:#1f2933}
 .bh-siteplan{overflow:visible}
@@ -67,33 +73,54 @@
 .bh-cta{margin-top:1.25rem;border:1px solid #166534;border-radius:.5rem;padding:1rem 1.25rem;background:#f1f7f2}
 .bh-cta .bh-btn{color:#052e16}
 .bh-cta .bh-btn-ghost{color:#14532d}
-@media (max-width:760px){.bh-cols{grid-template-columns:1fr}.bh-page-body{padding:1.25rem}.bh-page-foot{padding:.75rem 1.25rem;flex-wrap:wrap;gap:.5rem}.bh-brand{margin-left:0}.bh-table th[scope=row]{width:auto}.bh-rules thead{display:none}.bh-rules tr{display:block;border-bottom:1px solid #e4e1d8;padding:.4rem 0}.bh-rules th,.bh-rules td{display:block;border:0;padding:.15rem 0}.bh-cover{min-height:20rem}}
+@media (max-width:760px){.bh-cols{grid-template-columns:1fr}.bh-page-body{padding:1.25rem}.bh-page-foot{padding:.75rem 1.25rem;flex-wrap:wrap;gap:.5rem}.bh-brand{margin-left:0}.bh-table th[scope=row]{width:auto}.bh-rules thead{display:none}.bh-rules tr{display:block;border-bottom:1px solid #e4e1d8;padding:.4rem 0}.bh-rules th,.bh-rules td{display:block;border:0;padding:.15rem 0}}
 
+.bh-print-only{display:none}
+/* Printing. The page script copies the study into #bh-print-host, a direct child of
+   <body>, and sets body.bh-printing for the length of the print. Only then is the rest
+   of the page hidden. Without that class this stylesheet changes nothing about how a
+   host page prints: no page-wide visibility rule, no bare element selectors. The page
+   margin is set by the script for the same reason. */
+#bh-print-host{display:none}
+/* The copy is new in the document, so the card entrance animation would restart at
+   opacity 0 and the cards would print blank. No animation in the copy or on paper. */
+.bh-print-copy .bh-scenario{animation:none!important}
 @media print{
-  @page{size:letter landscape;margin:.4in}
-  body{background:#fff!important}
-  body *{visibility:hidden}
-  #bh-report,#bh-report *{visibility:visible}
-  #bh-report{position:absolute;left:0;top:0;width:100%;display:block}
+  .bh-scenario{animation:none!important;opacity:1!important;transform:none!important}
+  body.bh-printing{background:#fff!important}
   body.bh-printing>*:not(#bh-print-host){display:none!important}
-  body.bh-printing #bh-print-host,body.bh-printing #bh-print-host *{visibility:visible}
-  .bh-page{box-shadow:none;border-radius:0;break-after:page;page-break-after:always;min-height:8.4in}
+  body.bh-printing>#bh-print-host{display:block!important}
+  .bh-page{box-shadow:none;border-radius:0;break-after:auto;page-break-after:auto;min-height:0;overflow:visible}
   .bh-page:last-child{break-after:auto;page-break-after:auto}
-  .bh-page a{text-decoration:none}
-  .bh-page,.bh-env,.bh-edge,.bh-outline,.bh-disclaimer,.bh-cta{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .bh-aerial-frame,.bh-siteplan,.bh-table tr{break-inside:avoid;page-break-inside:avoid}
-  .bh-cta .bh-btn{border:1px solid #166534;background:#fff}
-  .bh-page{font-size:10.5px;padding:.3in .4in .2in!important}
-  .bh-page h3{margin:.35em 0 .3em}
-  .bh-table th,.bh-table td{padding:3px 6px!important;line-height:1.3}
+  .bh-page a{text-decoration:none;overflow-wrap:anywhere}
+  .bh-page,.bh-env,.bh-edge,.bh-outline,.bh-disclaimer,.bh-cta,.bh-stage-fade{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .bh-aerial-frame,.bh-siteplan,.bh-scenario,.bh-table tr{break-inside:avoid;page-break-inside:avoid}
+  .bh-page{font-size:11px;padding:0!important}
+  .bh-page-body{padding:.2in 0 .4in}
+  .bh-page .bh-cols,.bh-page .bh-scenario-grid{display:block}
+  .bh-page .bh-scenario{margin:0 0 .5rem}
+  .bh-table,.bh-table thead,.bh-table tbody,.bh-table tr,.bh-table th,.bh-table td{display:block;width:auto!important;overflow:visible}
+  .bh-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .bh-page img,.bh-page svg{max-width:100%!important}
+  .bh-stage-fade{position:static!important;background:#eef5ef!important;color:#102a1c!important}
+  .bh-stage-fade h2,.bh-stage-fade .bh-kicker,.bh-stage-fade .bh-stage-place,.bh-stage-fade .bh-stage-date,.bh-stage-fade p{color:#102a1c!important}
+  .bh-page td[data-label]::before{content:attr(data-label) ": ";font-weight:800;color:#166534}
+  .bh-noprint,.bh-report .bh-btn,.bh-report button,.bh-report iframe,.bh-report video,.bh-map-frame,.bh-toolbar{display:none!important}
+  .bh-print-only{display:block;visibility:visible}
   .bh-flags li{margin:.15em 0}
 }
 
 .bh-tbd{display:inline-block;background:#fef3c7;color:#92400e;font-weight:700;padding:0 .35em;border-radius:3px}
 
 .bh-siteplan{max-width:100%;height:auto}
-@media screen and (max-width:699px){.bh-page .bh-table:not(.bh-rules){display:block;overflow-x:auto}}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@media screen and (max-width:699px){
+  .bh-page .bh-table,.bh-page .bh-table tbody,.bh-page .bh-table tr,.bh-page .bh-table th,.bh-page .bh-table td{display:block;width:auto}
+  .bh-page .bh-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .bh-page .bh-table tr{border-bottom:1px solid #e4e1d8;padding:.35rem 0}
+  .bh-page .bh-table th[scope=row]{padding-bottom:0}
+  .bh-page td[data-label]::before{content:attr(data-label) ": ";font-weight:800;color:#166534}
+}
+@media (prefers-reduced-motion:reduce){.bh-wrap *,.bh-report *,#bh-home *{animation:none!important;transition:none!important}}
 .bh-envlabel,.bh-front{paint-order:stroke;stroke:#fbfaf7;stroke-width:4px;stroke-linejoin:round}
 .bh-linkbtn{background:none;border:0;padding:0;color:#4ade80;text-decoration:underline;font:inherit;cursor:pointer;min-height:24px}
 
@@ -102,30 +129,58 @@
 #bh-home .bh-card h2,#bh-home .bh-toolbar h2{font-size:1.25rem}
 @media (max-width:639px){#bh-home .bh-row{flex-direction:column;align-items:stretch}#bh-home .bh-row>.bh-grow{flex:none}#bh-home .bh-row>div[style]{padding-bottom:0!important;align-self:stretch!important}#bh-home .bh-btn{width:100%}#bh-home .bh-card{padding:1rem}#bh-home .bh-page-body{padding:1.25rem 1rem 1rem}#bh-home .bh-page-foot{padding:.75rem 1rem;flex-wrap:wrap}}
 
-/* Unified feasibility study: Pascal / CivilCraft media inside the report */
-.b3-media-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:.75rem}
-.b3-fig video,.b3-hot img{width:100%;height:auto;border-radius:12px;display:block;background:#0b1220}
-.b3-chaps{display:flex;flex-wrap:wrap;gap:.35rem;margin:.5rem 0}
-.b3-chaps button{font-size:.75rem;padding:.3rem .6rem;border:1px solid #94a3b8;border-radius:999px;color:#334155;background:#fff;cursor:pointer}
-.b3-chaps button.on,.b3-pin.on{background:#166534;color:#fff;border-color:#166534}
-.b3-hot{position:relative}
-.b3-pin{position:absolute;transform:translate(-50%,-50%);width:2rem;height:2rem;border-radius:999px;background:#0b1220;color:#4ade80;border:2px solid #4ade80;font-weight:800;box-shadow:0 0 0 4px rgba(74,222,128,.25);cursor:pointer}
-.bh-study-media .bh-input{background:#fff;color:#1f2933;border-color:#cbd5e1}
-.bh-study-media .bh-label{color:#166534}
-.bh-study-media .bh-help{color:#52606d}
-.b3-off{opacity:.6}
 
-/* Option cards: addition / ADU / shop / teardown / remodel */
-.bh-opt-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));margin-top:.75rem}
-.bh-opt-card{background:#fff;border:1px solid #d6d3cb;border-radius:.5rem;padding:1rem 1.1rem;box-shadow:0 1px 0 rgba(16,42,28,.04)}
-.bh-opt-card h4{margin:0 0 .45rem;font-size:.95rem;font-weight:800;color:#102a1c;letter-spacing:.02em}
-.bh-opt-card p{margin:0 0 .65rem;font-size:.82rem!important;line-height:1.5;color:#323f4b!important}
-.bh-opt-metrics{list-style:none;margin:0;padding:0;display:grid;gap:.35rem}
-.bh-opt-metrics li{font-size:.78rem;line-height:1.4;color:#323f4b;border-top:1px solid #eeeae2;padding-top:.35rem}
-.bh-opt-metrics li span{display:block;font-size:.65rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#166534;margin-bottom:.1rem}
 
 
 /* Live Google Maps / Earth lot pull-up */
 .bh-map-frame{position:relative;width:100%;aspect-ratio:16/10;border-radius:12px;overflow:hidden;border:1px solid #d6d3cb;background:#0b1220;margin:.75rem 0 1rem}
 .bh-map-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.bh-photoreal-3d{width:100%;min-height:280px;border-radius:12px;overflow:hidden;border:1px solid #d6d3cb;margin-top:.75rem;background:#0b1220}
+.bh-map-frame .bh-map-load{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);margin:0;max-width:90%;text-align:center}
+
+/* Property stage: aerial, thin parcel line, dark green fade, then option cards. */
+/* The photo and the outline share one box and one crop. The lot spans at most 46% of the
+   photo's height, and a 5:2 box shows the middle 53%, so the whole lot stays in view. */
+.bh-stage-map{position:relative;aspect-ratio:5/2;background:#102a1c;border-radius:.6rem;overflow:hidden}
+.bh-stage-map .bh-aerial,.bh-stage-map .bh-aerial-frame,.bh-stage-map .bh-siteplan{position:absolute;inset:0;margin:0;width:100%;height:100%}
+.bh-stage-map .bh-aerial-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.bh-stage-map svg.bh-siteplan{display:block}
+.bh-stage .bh-outline{fill:rgba(255,255,255,.08);stroke:#fff;stroke-width:2}
+.bh-stage-map .bh-note{display:none}
+.bh-stage-fade{position:static;padding:.9rem 1rem;background:#052e16;color:#f8fafc}
+.bh-stage-fade h2{margin:.2rem 0 .35rem;font-size:clamp(1.25rem,4vw,1.8rem);font-weight:700;letter-spacing:0;text-transform:none;color:#fff;line-height:1.2}
+.bh-stage-fade .bh-kicker,.bh-stage-fade .bh-stage-place,.bh-stage-fade .bh-stage-date{color:#d1fae5!important}
+.bh-stage-fade .bh-disclaimer{color:#102a1c;margin: .75rem 0 0}
+.bh-stage-warn{margin:.75rem 0 0;border-left:4px solid #b45309;background:#fff7ed;padding:.6rem .8rem}
+.bh-stage-fallback{min-height:14rem;display:flex;align-items:flex-end;padding:1rem;color:#ecfdf5}
+.bh-stage-fallback p{margin:0;max-width:36rem}
+.bh-scenario-grid{display:grid;gap:.75rem;grid-template-columns:1fr;margin-top:.75rem}
+@media (min-width:720px){.bh-scenario-grid{grid-template-columns:1fr 1fr}}
+@media (min-width:1100px){.bh-scenario-grid{grid-template-columns:1fr 1fr 1fr}}
+.bh-scenario{display:grid;grid-template-columns:7.5rem 1fr;gap:.75rem;align-items:center;background:#fff;border:1px solid #d6d3cb;border-radius:.5rem;padding:.75rem}
+.bh-scenario[data-state="nodata"]{background:#f8fafc}
+.bh-scenario[data-state="partial"]{border-color:#d97706}
+.bh-scenario[data-state="ready"]{border-color:#166534}
+.bh-scenario-svg{width:100%;height:auto;display:block}
+.bh-scenario-kicker{margin:0 0 .45rem;font-size:.95rem!important;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#102a1c!important}
+.bh-scenario-figlabel{margin:.15rem 0;font-size:.68rem!important;letter-spacing:.04em;text-transform:uppercase;color:#52606d!important}
+.bh-scenario-state{margin:.15rem 0 .35rem;font-size:.68rem!important;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#166534!important}
+.bh-scenario[data-state="partial"] .bh-scenario-state{color:#9a3412!important}
+.bh-scenario[data-state="nodata"] .bh-scenario-state{color:#52606d!important}
+.bh-scenario-metric{margin:.4rem 0 0;font-weight:700;color:#102a1c!important}
+.bh-toolbar .bh-btn-ghost{color:#d1fae5;border-color:#4ade80}
+@media (max-width:639px){.bh-scenario{grid-template-columns:5.75rem 1fr}.bh-stage-map{aspect-ratio:3/2}.bh-toolbar .bh-btn{width:auto}.bh-siteplan .bh-note{display:none}}
+@media (prefers-reduced-motion:no-preference){
+  .bh-scenario{animation:bh-in .35s ease both}
+  .bh-scenario:nth-child(2){animation-delay:.04s}
+  .bh-scenario:nth-child(3){animation-delay:.08s}
+  .bh-scenario:nth-child(4){animation-delay:.12s}
+  .bh-scenario:nth-child(5){animation-delay:.16s}
+}
+@keyframes bh-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* Print comes after the screen mint color. Equal specificity plus !important,
+   so this later rule is the one that paints the kicker, place, and date. */
+@media print{
+  .bh-stage-fade .bh-kicker,
+  .bh-stage-fade .bh-stage-place,
+  .bh-stage-fade .bh-stage-date{color:#102a1c!important}
+}

@@ -1,12 +1,16 @@
 /* Design it in 3D: a small massing sketcher seeded from the Build Here report
-   (localStorage "bh3dSeed"), plus a hand-off to Pascal Editor (MIT, pascalorg/editor). */
+   (sessionStorage "bh3dSeed", so it lasts for the tab that ran the study). */
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-const $ = (id) => document.getElementById(id);
+/* The page can name the element that holds the sketch markup (an embed mounts it in a shadow root).
+   Without that, ids are looked up in the document as before. */
+const CFG = window.BuildHereConfig || {};
+const ROOT = CFG.sketchRoot || document;
+const $ = (id) => ROOT.getElementById(id);
 const fmt = (n) => Math.round(n).toLocaleString('en-US');
 let seed = null;
-try { seed = JSON.parse(localStorage.getItem('bh3dSeed') || 'null'); } catch (e) {}
+try { seed = JSON.parse(sessionStorage.getItem(CFG.seedKey || 'bh3dSeed') || 'null'); } catch (e) {}
 const demo = !seed || !seed.ring;
 if (demo) {
   seed = Object.assign({ address: '', zone: '', lot: 5000, coverage: null, height: null, setbacks: {}, stories: 1 }, seed || {});
@@ -17,7 +21,7 @@ const KIND = { house: { c: 0xe8dcc8, w: 40, d: 30 }, addition: { c: 0x93c5fd, w:
 const FLOOR = 10;
 
 $('b3-info').textContent = demo
-  ? 'No lot loaded yet. Run an address on What can I build here? and use "Open the 3D editor" in the report. Showing a sample ' + fmt(seed.lot) + ' sf lot.'
+  ? 'No lot loaded yet. Run an address on What can I build here?, then open the massing sketch from that study. Showing a sample ' + fmt(seed.lot) + ' sf lot.'
   : 'Loaded: ' + seed.address + (seed.zone ? ' · zone ' + seed.zone : '') + (seed.lot ? ' · lot ' + fmt(seed.lot) + ' sf' : '') + '.';
 
 // Center the lot
@@ -27,7 +31,16 @@ const P = (x, y) => new THREE.Vector3(x - cx, 0, -(y - cy));
 let span = 0; pts.forEach((p) => { span = Math.max(span, Math.hypot(p[0] - cx, p[1] - cy)); });
 
 const host = $('b3-canvas');
-const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+// Without WebGL the constructor throws and the page used to sit blank with no word of why.
+let renderer;
+try {
+  renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+} catch (e) {
+  $('b3-info').textContent = 'The 3D view needs WebGL, and this browser or device did not provide it. The study itself does not need this page.';
+  if ($('b3-mass')) $('b3-mass').hidden = true;
+  window.__b3ready = true;
+  throw e;
+}
 renderer.setPixelRatio(Math.min(2, window.devicePixelRatio));
 renderer.shadowMap.enabled = true;
 host.appendChild(renderer.domElement);
@@ -35,6 +48,10 @@ const scene = new THREE.Scene(); scene.background = new THREE.Color(0x0b1220);
 const camera = new THREE.PerspectiveCamera(45, 1, 1, 5000);
 camera.position.set(span * 1.3, span * 1.2, span * 1.5);
 const controls = new OrbitControls(camera, renderer.domElement); controls.enableDamping = true;
+// The scene is drawn when something changed, not sixty times a second for as long as the tab is open.
+let dirty = true;
+const redraw = () => { dirty = true; };
+controls.addEventListener('change', redraw);
 scene.add(new THREE.HemisphereLight(0xffffff, 0x334155, 0.9));
 const sun = new THREE.DirectionalLight(0xffffff, 1.2); sun.position.set(span, span * 2, span * 0.6); sun.castShadow = true;
 Object.assign(sun.shadow.camera, { left: -span * 2, right: span * 2, top: span * 2, bottom: -span * 2 }); sun.shadow.mapSize.set(2048, 2048);
@@ -69,11 +86,11 @@ if (seed.front) {
 
 // Boxes
 const boxes = []; let sel = null;
-function makeBox(kind, x, z, w, d, floors, rot) {
+function makeBox(kind, x, z, w, d, floors, rot, placeholder) {
   const k = KIND[kind];
   const mesh = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshStandardMaterial({ color: k.c, roughness: 0.8 }));
   mesh.castShadow = mesh.receiveShadow = true;
-  mesh.userData = { kind, w: w || k.w, d: d || k.d, floors: k.flat ? 0 : (floors || 1), rot: rot || 0 };
+  mesh.userData = { kind, w: w || k.w, d: d || k.d, floors: k.flat ? 0 : (floors || 1), rot: rot || 0, placeholder: !!placeholder };
   mesh.position.set(x || 0, 0, z || 0);
   scene.add(mesh); boxes.push(mesh); applyBox(mesh); return mesh;
 }
@@ -81,6 +98,12 @@ function applyBox(b) {
   const u = b.userData, h = u.floors ? u.floors * FLOOR : 1.5;
   b.scale.set(u.w, h, u.d); b.position.y = h / 2; b.rotation.y = -u.rot * Math.PI / 180;
   b.material.emissive = new THREE.Color(b === sel ? 0x334155 : 0x000000);
+  redraw();
+}
+function showPosition(b) {
+  // East and north of the middle of the lot, in feet. The typed boxes are the keyboard way to move a box.
+  if ($('b3-x')) $('b3-x').value = Math.round(b.position.x * 2) / 2;
+  if ($('b3-y')) $('b3-y').value = Math.round(-b.position.z * 2) / 2;
 }
 function select(b) {
   sel = b; boxes.forEach(applyBox);
@@ -88,18 +111,27 @@ function select(b) {
   $('b3-sel-name').textContent = $('b3-kind').querySelector('option[value="' + b.userData.kind + '"]').textContent;
   $('b3-w').value = b.userData.w; $('b3-d').value = b.userData.d; $('b3-f').value = b.userData.floors; $('b3-r').value = b.userData.rot;
   $('b3-f').disabled = !!KIND[b.userData.kind].flat;
+  showPosition(b);
 }
 ['w', 'd', 'f', 'r'].forEach((k) => $('b3-' + k).addEventListener('input', () => {
   if (!sel) return; const v = parseFloat($('b3-' + k).value); if (isNaN(v)) return;
   const key = { w: 'w', d: 'd', f: 'floors', r: 'rot' }[k];
   sel.userData[key] = k === 'f' ? Math.max(1, Math.min(4, Math.round(v))) : k === 'r' ? v : Math.max(4, v);
+  sel.userData.placeholder = false;
   applyBox(sel); check();
 }));
+['x', 'y'].forEach((k) => { if ($('b3-' + k)) $('b3-' + k).addEventListener('input', () => {
+  if (!sel) return; const v = parseFloat($('b3-' + k).value); if (isNaN(v)) return;
+  if (k === 'x') sel.position.x = v; else sel.position.z = -v;
+  sel.userData.placeholder = false;
+  redraw(); check();
+}); });
 $('b3-add').onclick = () => { select(makeBox($('b3-kind').value, 0, 0)); check(); };
-$('b3-del').onclick = () => { if (!sel) return; scene.remove(sel); boxes.splice(boxes.indexOf(sel), 1); select(null); check(); };
+$('b3-del').onclick = () => { if (!sel) return; scene.remove(sel); boxes.splice(boxes.indexOf(sel), 1); select(null); redraw(); check(); };
 
-// Seed: existing house from the footprint
-if (seed.footprint) { const s = Math.sqrt(seed.footprint); makeBox('house', 0, 0, Math.round(s * 1.25), Math.round(s / 1.25), seed.stories || 1); }
+// Seed: a stand-in for the existing house. The record gives its footprint area only. Where it stands and
+// what shape it is are not known, so the box sits at the middle of the lot and is not judged until it is moved.
+if (seed.footprint) { const s = Math.sqrt(seed.footprint); makeBox('house', 0, 0, Math.round(s * 1.25), Math.round(s / 1.25), seed.stories || 1, 0, true); }
 
 // Drag on ground
 const ray = new THREE.Raycaster(), mouse = new THREE.Vector2(), plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
@@ -112,14 +144,26 @@ renderer.domElement.addEventListener('pointerdown', (e) => {
 });
 renderer.domElement.addEventListener('pointermove', (e) => {
   if (!drag) return; setMouse(e); const p = new THREE.Vector3();
-  if (ray.ray.intersectPlane(plane, p)) { drag.position.x = Math.round((p.x + off.x) * 2) / 2; drag.position.z = Math.round((p.z + off.z) * 2) / 2; check(); }
+  if (ray.ray.intersectPlane(plane, p)) { drag.position.x = Math.round((p.x + off.x) * 2) / 2; drag.position.z = Math.round((p.z + off.z) * 2) / 2; drag.userData.placeholder = false; showPosition(drag); redraw(); check(); }
 });
 renderer.domElement.addEventListener('pointerup', () => { drag = null; controls.enabled = true; });
 
-// Checks: footprint vs coverage cap, height vs limit, corners inside the envelope
+// Checks: footprint vs coverage cap, height vs limit, outline inside the envelope
 function corners(b) {
-  const u = b.userData, a = u.rot * Math.PI / 180, c = Math.cos(a), s = Math.sin(a), X = b.position.x + cx, Y = -b.position.z + cy;
+  // The box is drawn with rotation.y = -rot (a clockwise turn seen from above), so the corners used for the
+  // setback check turn the same way. With +rot the check tested the mirror image of the box on screen.
+  const u = b.userData, a = -u.rot * Math.PI / 180, c = Math.cos(a), s = Math.sin(a), X = b.position.x + cx, Y = -b.position.z + cy;
   return [[-1, -1], [1, -1], [1, 1], [-1, 1]].map(([i, j]) => [X + (i * u.w / 2) * c - (j * u.d / 2) * s, Y + (i * u.w / 2) * s + (j * u.d / 2) * c]);
+}
+/* Points every 2 ft around the box. Four corners can all sit inside an L-shaped or notched envelope
+   while a wall between them crosses outside it. */
+function outline(b) {
+  const c = corners(b), out = [];
+  for (let i = 0; i < 4; i++) {
+    const a = c[i], d = c[(i + 1) % 4], n = Math.max(1, Math.ceil(Math.hypot(d[0] - a[0], d[1] - a[1]) / 2));
+    for (let k = 0; k < n; k++) out.push([a[0] + (d[0] - a[0]) * k / n, a[1] + (d[1] - a[1]) * k / n]);
+  }
+  return out;
 }
 const inEnv = (x, y) => envCells.some((r) => x >= r[0] - 0.01 && x <= r[0] + r[2] + 0.01 && y >= r[1] - 0.01 && y <= r[1] + r[3] + 0.01);
 function check() {
@@ -129,34 +173,23 @@ function check() {
   const tall = roofed.reduce((t, b) => Math.max(t, b.userData.floors * FLOOR), 0);
   const ok = (good, txt) => '<span class="' + (good ? 'b3-ok' : 'b3-bad') + '">' + txt + '</span>';
   const rows = [['Boxes', String(boxes.length)], ['Footprint (roofed)', fmt(foot) + ' sf' + (seed.coverage ? ' of ' + fmt(seed.coverage) + ' sf cap · ' + ok(foot <= seed.coverage, foot <= seed.coverage ? 'within' : 'over by ' + fmt(foot - seed.coverage) + ' sf') : '')], ['Floor area (10 ft floors)', fmt(floor) + ' sf'], ['Tallest box', tall + ' ft' + (seed.height ? ' vs ' + seed.height + ' ft limit · ' + ok(tall <= seed.height, tall <= seed.height ? 'within' : 'over') : '')]];
+  const standIn = boxes.filter((b) => b.userData.placeholder);
+  const placed = boxes.filter((b) => !b.userData.placeholder);
   if (envCells.length) {
-    const out = boxes.filter((b) => corners(b).some((p) => !inEnv(p[0], p[1])));
-    rows.push(['Inside setbacks', out.length ? ok(false, out.length + ' box' + (out.length > 1 ? 'es reach' : ' reaches') + ' past the envelope (accessory buildings can have their own setbacks)') : ok(true, 'all boxes inside the envelope')]);
+    const out = placed.filter((b) => outline(b).some((p) => !inEnv(p[0], p[1])));
+    rows.push(['Inside setbacks', !placed.length ? 'No box has been placed yet' : out.length ? ok(false, out.length + ' box' + (out.length > 1 ? 'es reach' : ' reaches') + ' past the envelope (accessory buildings can have their own setbacks)') : ok(true, placed.length === 1 ? 'the placed box is inside the envelope' : 'all placed boxes are inside the envelope')]);
   } else rows.push(['Inside setbacks', 'Setbacks not verified for this lot']);
+  if (standIn.length) rows.push(['Existing house box', 'A stand-in at the middle of the lot, sized from the footprint on record. Where the house stands and its shape are not known, so this box is not checked against the setbacks until you move or resize it.']);
   $('b3-check').innerHTML = rows.map((r) => '<tr><th scope="row">' + r[0] + '</th><td>' + r[1] + '</td></tr>').join('');
 }
 check();
 
-function resize() { const w = host.clientWidth, h = host.clientHeight; renderer.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix(); }
+function resize() { const w = host.clientWidth, h = host.clientHeight; renderer.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix(); redraw(); }
 window.addEventListener('resize', resize); resize();
-renderer.setAnimationLoop(() => { controls.update(); renderer.render(scene, camera); });
+renderer.setAnimationLoop(() => { controls.update(); if (dirty) { dirty = false; renderer.render(scene, camera); } });
 
 // Exports
 function dl(name, href) { const a = document.createElement('a'); a.href = href; a.download = name; a.click(); }
-$('b3-json').onclick = () => dl('bops-3d-sketch.json', URL.createObjectURL(new Blob([JSON.stringify({ seed, boxes: boxes.map((b) => Object.assign({ x: b.position.x + cx, y: -b.position.z + cy }, b.userData)) }, null, 2)], { type: 'application/json' })));
-$('b3-png').onclick = () => dl('bops-3d-sketch.png', renderer.domElement.toDataURL('image/png'));
-
-// Pascal Editor hand-off
-function brief() {
-  const sb = seed.setbacks || {}, n = (x) => typeof x === 'number' ? x + ' ft' : 'verify';
-  const bx = boxes.map((b) => '- ' + b.userData.kind + ': ' + b.userData.w + ' x ' + b.userData.d + ' ft, ' + b.userData.floors + ' floor(s)').join('\n');
-  return 'Model a residential lot' + (seed.address ? ' at ' + seed.address : '') + '. Lot outline in feet (x east, y north): ' + JSON.stringify(seed.ring) + '.' +
-    (seed.lot ? ' Lot area ' + fmt(seed.lot) + ' sf.' : '') + (seed.zone ? ' Zone ' + seed.zone + '.' : '') +
-    ' Setbacks: front ' + n(sb.front) + ', side ' + n(sb.side) + ', rear ' + n(sb.rear) + '.' + (seed.height ? ' Height limit ' + seed.height + ' ft.' : '') +
-    (seed.coverage ? ' Lot coverage cap ' + fmt(seed.coverage) + ' sf.' : '') +
-    (bx ? '\nPlace these buildings inside the setbacks, with walls, a slab, a roof, doors and windows:\n' + bx : '\nPlace a single-family house inside the setbacks with walls, a slab, a roof, doors and windows.');
-}
-const tab = (m) => { $('b3-mass').hidden = m !== 'mass'; $('b3-pascal').hidden = m === 'mass'; $('b3-tab-mass').classList.toggle('b3-off', m !== 'mass'); $('b3-tab-pascal').classList.toggle('b3-off', m === 'mass'); $('b3-tab-mass').setAttribute('aria-selected', m === 'mass'); $('b3-tab-pascal').setAttribute('aria-selected', m !== 'mass'); if (m !== 'mass') $('b3-prompt').value = brief(); else resize(); };
-$('b3-tab-mass').onclick = () => tab('mass'); $('b3-tab-pascal').onclick = () => tab('pascal');
-$('b3-copy').onclick = () => { navigator.clipboard && navigator.clipboard.writeText($('b3-prompt').value); $('b3-copy').textContent = 'Copied'; };
-$('b3-embed').onclick = () => { $('b3-frame-wrap').innerHTML = '<iframe src="https://editor.pascal.app/" title="Pascal Editor" allow="clipboard-read; clipboard-write; fullscreen; xr-spatial-tracking" loading="lazy"></iframe>' + (navigator.gpu ? '' : '<p class="bh-help">This browser does not report WebGPU, so Pascal may run slowly or not at all. Try current Chrome or Edge on a desktop.</p>'); };
+$('b3-json').onclick = () => dl('lot-massing-sketch.json', URL.createObjectURL(new Blob([JSON.stringify({ seed, boxes: boxes.map((b) => Object.assign({ x: b.position.x + cx, y: -b.position.z + cy }, b.userData)) }, null, 2)], { type: 'application/json' })));
+$('b3-png').onclick = () => { renderer.render(scene, camera); dl('lot-massing-sketch.png', renderer.domElement.toDataURL('image/png')); };
+window.__b3ready = true;

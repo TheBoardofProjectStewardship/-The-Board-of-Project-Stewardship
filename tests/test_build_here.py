@@ -8,7 +8,14 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGE = ROOT / "build-here.html"
-JS = [ROOT / "assets/js/build-here.js", ROOT / "assets/js/build-here-rules.js", ROOT / "assets/css/build-here.css"]
+JS = [
+    ROOT / "assets/js/build-here.js",
+    ROOT / "assets/js/build-here-rules.js",
+    ROOT / "assets/js/build-here-measures.js",
+    ROOT / "assets/js/build-here-stage.js",
+    ROOT / "assets/js/build-here-export.js",
+    ROOT / "assets/css/build-here.css",
+]
 
 
 def main_text():
@@ -51,6 +58,27 @@ class BuildHereTest(unittest.TestCase):
         self.assertNotIn("fc-price", text)
         self.assertNotIn("Budget and resale calculator", text)
 
+    def test_blank_handoffs_removed_and_study_comes_first(self):
+        main = main_text()
+        js = (ROOT / "assets/js/build-here.js").read_text(encoding="utf-8")
+        for needle in ("Pascal", "CivilCraft", "CutSheet", "Jump to lot brief", "bh-pascal-brief"):
+            self.assertNotIn(needle, main)
+            self.assertNotIn(needle, js)
+        self.assertIn('id="bh-download"', main)
+        self.assertIn("Download study", main)
+        self.assertLess(main.index('id="bh-report-wrap"'), main.index('id="bh-confirm"'))
+        self.assertIn("See what you can build", (ROOT / "assets/js/build-here-stage.js").read_text(encoding="utf-8"))
+        d3 = (ROOT / "build-here-3d.html").read_text(encoding="utf-8")
+        body = d3.split('<main id="main-content">', 1)[1].split("</main>", 1)[0]
+        for needle in ("Pascal", "CivilCraft", "CutSheet"):
+            self.assertNotIn(needle, body)
+        self.assertIn('id="b3-canvas"', body)
+        js = (ROOT / "assets/js/build-here.js").read_text(encoding="utf-8")
+        self.assertLess(js.index('confirm.parentNode === $("bh-report")'), js.index('$("bh-report").innerHTML = out.join("")'))
+        stage = (ROOT / "assets/js/build-here-stage.js").read_text(encoding="utf-8")
+        self.assertLess(stage.index('map + "</div>"'), stage.index('class="bh-stage-fade"'))
+        self.assertIn('data-label=\\"Permit\\"', js)
+
     def test_budget_calculator_removed(self):
         home = (ROOT / "index.html").read_text(encoding="utf-8")
         for needle in ("budget-calculator", "hc-example", "home-calculator", "Budget and resale calculator"):
@@ -80,11 +108,14 @@ class BuildHereTest(unittest.TestCase):
         k = home.index('<section id="mission"')
         self.assertLess(j, k)
         self.assertLess(k, home.index('id="integrity-shield"'))
-        tail = home[home.index("</section>", home.index('id="bh-report-wrap"')) + len("</section>"):k]
-        self.assertEqual(tail.count("</section>"), 1)
-        self.assertNotIn("<section", tail)
         sec = home[j:k]
+        self.assertLess(sec.index('id="bh-report-wrap"'), sec.index('id="bh-confirm"'))
+        close = home.rfind("</section>", j, k)
+        after = home[close + len("</section>"):k]
+        self.assertNotIn("<section", after)
+        self.assertNotIn("</section>", after)
         for needle in ('id="bh-form"', 'id="bh-address"', 'id="bh-confirm"', 'id="bh-report"', 'id="bh-print"',
+                       'id="bh-download"',
                        "/assets/js/build-here.js", "/assets/js/build-here-rules.js", "/assets/css/build-here.css",
                        "not a legal, zoning or permit determination", "./build-here.html"):
             self.assertIn(needle, sec)

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Feasibility tool test page with a hostile theme</title>
+<style>
+/* A theme written to break an embedded widget: a 10px root font, loud element rules with !important,
+   and rules that reuse the tool's own class names and ids. None of it may reach inside the tool,
+   and the tool must not change any of it. */
+html{font-size:62.5%}
+body{margin:0;font-family:Georgia,"Times New Roman",serif;font-size:1.6rem;line-height:2;color:#663399;letter-spacing:.05em;text-align:center;text-transform:capitalize}
+*{box-sizing:content-box}
+h1,h2,h3,h4{font-size:4rem;color:red;text-transform:uppercase;margin:3rem 0;letter-spacing:.3em}
+p{margin:2em 0;color:purple}
+input,select,textarea{border:5px solid red!important;background:yellow!important;width:50px!important;height:10px!important}
+button,.elementor-button{background:hotpink!important;color:lime!important;border-radius:0!important;font-size:30px!important}
+table{border:10px solid blue!important}
+td,th{padding:30px!important;display:inline!important}
+a{color:orange!important;text-decoration:line-through!important}
+ul,ol{list-style:square inside!important;margin:5rem!important}
+svg{width:10px!important;height:10px!important}
+img{filter:invert(1)!important;width:20px!important}
+section{display:none!important}
+[hidden]{display:block!important}
+.bh-card,.bh-btn,.bh-page,.bh-report,.bh-input{display:none!important}
+#bh-report,#bh-form,#bh-address{display:none!important}
+.site{max-width:1140px;margin:0 auto;padding:0 20px;text-align:left}
+.elementor-widget-container{padding:10px}
+</style>
+</head>
+<body class="page elementor-page">
+<div class="site">
+  <h1 id="t-h1">Lot Feasibility</h1>
+  <p id="t-p">Theme paragraph above the tool.</p>
+  <button id="t-btn" class="elementor-button" type="button">Theme button</button>
+  <div class="elementor-widget-container">
+    <div class="ppgbh-block"><div class="ppgbh-frame" style="__FRAME_STYLE__"><div class="ppgbh-host" style="__HOST_STYLE__" data-ppgbh="__CONFIG__"><p class="ppgbh-fallback" style="margin:0">The lot feasibility tool is loading. It needs JavaScript.</p></div></div></div>
+  </div>
+  <div class="elementor-widget-container">
+    <div class="ppgbh-block"><div class="ppgbh-frame" style="__FRAME_STYLE__"><div class="ppgbh-host" id="second" style="__HOST_STYLE__" data-ppgbh="{}"><p class="ppgbh-fallback" style="margin:0">Second shortcode on the same page.</p></div></div></div>
+  </div>
+  <p id="t-after">Theme paragraph below the tool.</p>
+</div>
+<script src="/wp-content/plugins/ppg-build-here/assets/js/ppg-build-here.js" defer></script>
+</body>
+</html>

@@ -37,6 +37,11 @@
     hb1337: { label: "RCW 36.70A.680 and .681 (ADU rules from HB 1337)", url: "https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.681" }
   };
 
+  /* Two flags on a rule set drive the option cards.
+     coded: false   The zone is recognized, and its numbers are not coded here
+                    (state-law floor and links only). Cards treat it as not coded.
+     farNone: true  The code table itself sets no floor area ratio.
+     A null floorCap without farNone means "not known here", never "none". */
   function verify(label, src, note) { return { label: label, value: null, src: src, note: note || "" }; }
   function rule(label, value, src, note, num) { return { label: label, value: value, src: src, note: note || "", num: num }; }
 
@@ -49,7 +54,14 @@
     var cap = Math.round(far * lot);
     if (lot < 5000 && cap < 2500) cap = 2500;
     var cov = Math.round(0.5 * lot); // 23.44.080.A
+    // The form counts homes, and a home can be a principal unit or an ADU. The 10 ft front and rear
+    // setbacks need three principal units, which this page cannot tell apart, so the diagram stays at 15 ft.
+    var allow = Math.max(4, Math.floor(lot / 1250));
+    var notes = [];
+    if (units >= 3) notes.push("The diagram keeps the 15 ft front and rear setbacks. With three or more principal units the code allows 10 ft. This page counts homes and cannot tell a principal unit from an ADU.");
+    if (units > allow) notes.push(units + " homes is more than this lot's base allowance of " + allow + " (the greater of 4, or 1 per 1,250 sf of lot). It needs the major transit stop or affordable unit allowance.");
     return {
+      setbackNote: notes.join(" "),
       key: "seattle-nr",
       title: "City of Seattle, Neighborhood Residential (" + v.zone + ")",
       floorCap: cap,
@@ -78,7 +90,7 @@
     var imp = Math.round(z.imp * v.lot);
     return {
       key: "kc-urban", title: "Unincorporated King County, urban " + v.zone,
-      floorCap: null, floorCapLabel: "No floor area ratio for houses in this table. Impervious surface and setbacks limit size.",
+      floorCap: null, farNone: true, floorCapLabel: "No floor area ratio for houses in this table. Impervious surface and setbacks limit size.",
       coverage: null, impervious: imp,
       setbacks: { front: z.street, rear: z.interior, side: z.interior },
       rules: [
@@ -99,7 +111,7 @@
     var z = KC_RURAL[v.zone];
     return {
       key: "kc-rural", title: "Unincorporated King County, rural " + v.zone,
-      floorCap: null, floorCapLabel: "No floor area ratio. Impervious limits and septic and well capacity usually control.",
+      floorCap: null, farNone: true, floorCapLabel: "No floor area ratio. Impervious limits and septic and well capacity usually control.",
       coverage: null,
       setbacks: { front: 30, rear: z.interior, side: z.interior },
       rules: [
@@ -121,7 +133,7 @@
     var cov = Math.round(0.35 * v.lot);
     return {
       key: "edmonds", title: "City of Edmonds, " + v.zone,
-      floorCap: null, floorCapLabel: "The LDR table sets no floor area ratio. Lot coverage, height and setbacks limit size.",
+      floorCap: null, farNone: true, floorCapLabel: "The LDR table sets no floor area ratio. Lot coverage, height and setbacks limit size.",
       coverage: cov,
       setbacks: { front: z.street, rear: z.rear, side: z.side, rearAlley: 5 },
       rules: [
@@ -146,7 +158,7 @@
     var cov = Math.round(0.35 * v.lot);
     return {
       key: "sno-table1", title: "Unincorporated Snohomish County, " + v.zone,
-      floorCap: null, floorCapLabel: "The bulk matrix sets no floor area ratio. Lot coverage, height and setbacks limit size.",
+      floorCap: null, farNone: true, floorCapLabel: "The bulk matrix sets no floor area ratio. Lot coverage, height and setbacks limit size.",
       coverage: cov,
       setbacks: { front: null, rear: 5, side: 5 },
       rules: [
@@ -164,7 +176,7 @@
   function snoUrbanVerify(v) {
     return {
       key: "sno-urban", title: "Unincorporated Snohomish County, " + v.zone,
-      floorCap: null, floorCapLabel: "Verify with Snohomish County PDS.",
+      coded: false, floorCap: null, floorCapLabel: "Verify with Snohomish County PDS.",
       coverage: null, setbacks: { front: null, rear: null, side: null },
       rules: [
         verify("Lot coverage, height and setbacks", SRC.scc23032, "Urban residential zones use the SCC 30.23.032 matrix. We could not confirm its current values for this release, so we do not show numbers."),
@@ -185,7 +197,7 @@
     var imp = Math.round(z.imp * v.lot), impMax = Math.round(z.impMax * v.lot);
     return {
       key: "kenmore", title: "City of Kenmore, " + (v.from ? v.from + " (R-4 standards apply on lots under 15,000 sf, Table B note 7)" : v.zone),
-      floorCap: null, floorCapLabel: "Table B sets no floor area ratio. Setbacks, height and impervious surface limit size.",
+      floorCap: null, farNone: true, floorCapLabel: "Table B sets no floor area ratio. Setbacks, height and impervious surface limit size.",
       coverage: null, impervious: imp, imperviousMax: impMax,
       setbacks: { front: z.street, rear: z.rear, side: z.side },
       sideNote: v.zone === "R-1" ? "" : "5 ft minimum each side, 15 ft combined. The diagram splits it 7.5 ft and 7.5 ft; you can shift it, say 5 ft and 10 ft.",
@@ -261,8 +273,8 @@
     goldbar: C("Gold Bar", "Snohomish", 0, "https://cityofgoldbar.us", "https://cityofgoldbar.us/city-government/municipal-code/"),
     granitefalls: C("Granite Falls", "Snohomish", 0, "https://www.ci.granite-falls.wa.us", EC + "GR4467", null, { gis: { url: "https://services6.arcgis.com/jKx0TrmHfSkeebdK/arcgis/rest/services/Zoning/FeatureServer/0", field: "ZoningCode", name: "City of Granite Falls zoning map" } }),
     index: C("Index", "Snohomish", 0, "https://www.indexwa.gov", EC + "IN4812"),
-    lakestevens: C("Lake Stevens", "Snohomish", 2, "https://www.lakestevenswa.gov", EC + "LA4738", null, { gis: { url: "https://services.arcgis.com/gr7sYYW0YAciUIIG/arcgis/rest/services/Zoning_August_2021/FeatureServer/0", field: "Zoning", name: "City of Lake Stevens zoning map (August 2021 layer)" } }),
-    lynnwood: C("Lynnwood", "Snohomish", 2, "https://www.lynnwoodwa.gov", "https://lynnwood" + MC + "/LMC", "Lynnwood Municipal Code", { gis: { url: "https://services2.arcgis.com/W2b0jYHWnOivta60/arcgis/rest/services/Future_Zones_Draft_4_25/FeatureServer/0", field: "Future_Zon", name: "City of Lynnwood zoning map (2025 zone update layer)" } }),
+    lakestevens: C("Lake Stevens", "Snohomish", 2, "https://www.lakestevenswa.gov", EC + "LA4738", null, { gis: { url: "https://services.arcgis.com/gr7sYYW0YAciUIIG/arcgis/rest/services/Zoning_August_2021/FeatureServer/0", field: "Zoning", name: "City of Lake Stevens zoning map (August 2021 layer; confirm the current zone with the city)" } }),
+    lynnwood: C("Lynnwood", "Snohomish", 2, "https://www.lynnwoodwa.gov", "https://lynnwood" + MC + "/LMC", "Lynnwood Municipal Code", { gis: { url: "https://services2.arcgis.com/W2b0jYHWnOivta60/arcgis/rest/services/Future_Zones_Draft_4_25/FeatureServer/0", field: "Future_Zon", name: "City of Lynnwood draft future zones layer (the city's April 2025 draft, not the adopted zoning map)", draft: true } }),
     marysville: C("Marysville", "Snohomish", 2, "https://www.marysvillewa.gov", EC + "MA4529", null, { gis: { url: "https://services2.arcgis.com/ZASkNq1SMoPvFBOv/arcgis/rest/services/Zoning_AGOL1/FeatureServer/3", field: "Zoning_Abbreviation", name: "City of Marysville zoning map" } }),
     millcreek: C("Mill Creek", "Snohomish", 3, "https://millcreekwa.gov", EC + "MI4537"),
     monroe: C("Monroe", "Snohomish", 0, "https://www.monroewa.gov", "https://monroe" + MC, null, { gis: { url: "https://gis.monroewa.gov/citygis/rest/services/Zoning_Map_MIL1/MapServer/8", field: "Zone", name: "City of Monroe zoning map" } }),
@@ -401,7 +413,7 @@
     if (!zk) {
       return {
         key: "city-" + key + "-base", title: "City of " + c.name + (v.zone ? ", zone " + v.zone : ""), city: c,
-        floorCap: null, floorCapLabel: "We have not coded this zone's floor area, coverage or setback numbers yet. Read them in the city code, linked below.",
+        coded: false, floorCap: null, floorCapLabel: "We have not coded this zone's floor area, coverage or setback numbers yet. Read them in the city code, linked below.",
         coverage: null, impervious: null, setbacks: {},
         rules: [verify("Zone standards (height, setbacks, coverage)", c.code, "We did not verify " + c.name + "'s numbers for " + (v.zone ? "zone " + v.zone : "this zone") + ". Read the zone chapter in the city code or ask the permit counter.")].concat(stateRows(c), tailRows(c), [rule("Permit office", "City of " + c.name, cityLink, "Ask for a pre-application meeting before design.")]),
         sources: [c.code, SRC.hb1110, SRC.hb1337, cityLink],
@@ -419,8 +431,16 @@
     rows.push(rule("Maximum height", Z.h, src));
     if (Z.sizeSb) {
       var big = key === "sammamish" && zk === "R-4";
-      rows.push(rule("Setbacks by house size", "Under 2,500 sf: front 15, side 5, rear 15 (12 min). 2,500 to 4,000 sf: front " + (big ? 20 : 15) + ", side 10 average (8 min), rear " + (big ? 20 : 15) + ". Over 4,000 sf: front " + (big ? 25 : 20) + ", side " + (big ? 12 : 10) + ", rear " + (big ? 25 : 20) + ".", src, "Feet. The diagram uses the smallest house size row."));
-      Z = Object.assign({}, Z, { f: 15, r: 15, s: 5 });
+      // Setbacks grow with the house. The diagram and the envelope on the cards use the row for the largest
+      // house this lot can hold: the floor cap, or the house on record when that is already larger. A smaller
+      // house gets the smaller setbacks in the table. The smallest row used to be drawn for every lot.
+      var house = v.house != null && isFinite(Number(v.house)) ? Number(v.house) : 0;
+      var basis = Math.max(cap || 0, house);
+      var ri = !basis ? 2 : basis < 2500 ? 0 : basis <= 4000 ? 1 : 2;
+      var SB = [{ f: 15, s: 5, r: 15 }, { f: big ? 20 : 15, s: 10, r: big ? 20 : 15 }, { f: big ? 25 : 20, s: big ? 12 : 10, r: big ? 25 : 20 }][ri];
+      var rowName = ["under 2,500 sf", "2,500 to 4,000 sf", "over 4,000 sf"][ri];
+      rows.push(rule("Setbacks by house size", "Under 2,500 sf: front 15, side 5, rear 15 (12 min). 2,500 to 4,000 sf: front " + (big ? 20 : 15) + ", side 10 average (8 min), rear " + (big ? 20 : 15) + ". Over 4,000 sf: front " + (big ? 25 : 20) + ", side " + (big ? 12 : 10) + ", rear " + (big ? 25 : 20) + ".", src, "Feet. The diagram uses the row for a house " + rowName + ", the largest house this lot's floor cap allows" + (house > (cap || 0) ? " or the house on record, whichever is larger" : "") + ". A smaller house gets the smaller setbacks in the row above it."));
+      Z = Object.assign({}, Z, SB);
     } else {
       rows.push(Z.f != null ? rule("Front setback", Z.f + " ft", src) : verify("Front setback", src));
       rows.push(Z.s != null ? rule("Side setbacks", Z.sideTxt || (Z.s + " ft"), src) : verify("Side setbacks", key === "redmond" ? CS.redmondSb : src));
@@ -435,7 +455,7 @@
     rows = rows.concat(stateRows(c), tailRows(c), [rule("Permit office", "City of " + c.name, cityLink, "Ask for a pre-application meeting before design.")]);
     return {
       key: "city-" + key, title: "City of " + c.name + ", " + Z.label, city: c,
-      floorCap: cap, floorCapLabel: cap ? capLabel : "No floor area ratio coded for this zone. Setbacks, height and coverage limit size.",
+      floorCap: cap, floorCapLabel: cap ? capLabel : "A floor area limit for this zone is not coded here, and one may apply. Read the zone chapter. Setbacks, height and coverage are listed above.",
       coverage: cov, impervious: imp, imperviousMax: null,
       setbacks: { front: Z.f, rear: Z.r, side: Z.s },
       sideNote: Z.sideTxt || "",
