@@ -1,0 +1,57 @@
+{
+  "producer": "openclaw",
+  "agent": "seo-specialist",
+  "slug": "solar-panel-installation-issaquah-wa",
+  "title": "Solar Panel Installation Issaquah WA \u2014 Permits, L&I Electrical, Roof Loads and PSE Net Metering",
+  "description": "An Issaquah homeowner's guide to rooftop solar: when the City's solar checklist means no building permit, the L&I electrical permit and inspections, roof load and flashing rules, firefighter access pathways, shade from tall firs, and PSE interconnection and net metering.",
+  "category": "Guides",
+  "keywords": [
+    "solar panel installation Issaquah WA",
+    "Issaquah solar permit checklist",
+    "L&I electrical permit solar Issaquah",
+    "PSE net metering Issaquah",
+    "Issaquah firefighter solar pathways"
+  ],
+  "outline": [
+    "Key Takeaways",
+    "Why solar in Issaquah needs its own plan",
+    "First, confirm the City of Issaquah is your permit office",
+    "The Issaquah Solar Checklist, item by item",
+    "Check the roof before the panels go on",
+    "Flashing: where most solar roof problems start",
+    "Firefighter access pathways and setbacks",
+    "Shade, firs and where the panels should go",
+    "The L&I electrical permit and inspections",
+    "PSE interconnection and net metering, step by step",
+    "Inspections, work hours and records in Issaquah",
+    "A simple order of operations",
+    "Materials Worth Knowing",
+    "How to shortlist and verify the crew",
+    "Where Pacific Pro Group fits",
+    "Next steps for an Issaquah solar project"
+  ],
+  "search_intent": "An Issaquah homeowner considering rooftop solar wants to know when a City building permit is required versus the exemption checklist, how the L&I electrical permit and inspections work, what roof load and flashing rules apply, how firefighter access pathways affect the layout, how shade from tall firs is evaluated, and how PSE interconnection and net metering work.",
+  "local_angles": [
+    "City of Issaquah Solar Checklist (10/06/2025): most standard residential systems skip building permit if all items yes; still email checklist to Sustainability Team; L&I electrical always required",
+    "Load and height: 3.5 psf, 50 lb point load, 18 in max above roofing, not above ridge; flashing per IRC M2301.2.9; single-layer lightweight roof",
+    "MyBuildingPermit.com Tip Sheet 24: 36 in eave-to-ridge pathways, 18 in from ridge and from hips/valleys with panels both sides, 150 ft array limit",
+    "Issaquah electrical permits issued and inspected by L&I (Bellevue office); City business license still required; inspect before conceal and within 3 days of completion or 1 day of energizing",
+    "PSE Customer Connected Solar: application, Approval to Construct, install, electrical final, Notice of Completion, test/meters, approval to energize; Rate Schedule 150; credits expire March 31; 100 kW cap",
+    "Confirm City of Issaquah jurisdiction (Klahanie and Mirrormont are not); Permit Center 130 E Sunset Way, 425-837-3100; MyBuildingPermit.com"
+  ],
+  "internal_links": [
+    "../issaquah.html",
+    "../permits.html",
+    "../verify-contractor.html",
+    "../hiring-a-contractor.html",
+    "../bonds-and-insurance.html",
+    "../red-flags-hiring.html",
+    "../electrician.html",
+    "../roofing.html"
+  ],
+  "notes": "Box-authored fallback brief. PPG only as Board #1 -> https://pacificprogroup.com/.",
+  "generation": {
+    "agent": "box-authored",
+    "mode": "box-fallback"
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-11-13-issaquah-solar-1.webp",
+      "repo_path": "assets/images/posts/2026-11-13-issaquah-solar-1.webp",
+      "alt": "Issaquah, WA rooftop solar installation: a craftsman home with a new solar panel array on its roof below wooded foothills \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "ffe0d09c840613e79fcb4843d598479c",
+      "source": "Newly generated image (built-in image generator, 2026-11-13), source gen-1.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-13-issaquah-solar-2.webp",
+      "repo_path": "assets/images/posts/2026-11-13-issaquah-solar-2.webp",
+      "alt": "Issaquah, WA solar roof mounts: aluminum racking rails and flashed roof attachments on a wet composition shingle roof \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "c7b244b7457b0c5785fc2b7ce5e7d5bb",
+      "source": "Newly generated image (built-in image generator, 2026-11-13), source gen-2.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-13-issaquah-solar-3.webp",
+      "repo_path": "assets/images/posts/2026-11-13-issaquah-solar-3.webp",
+      "alt": "Issaquah, WA solar electrical equipment: a garage wall with a solar inverter, an AC disconnect and the main electrical panel connected by conduit \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "533586f587b0c33381aff913cac3dc50",
+      "source": "Newly generated image (built-in image generator, 2026-11-13), source gen-3.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-13-issaquah-solar-4.webp",
+      "repo_path": "assets/images/posts/2026-11-13-issaquah-solar-4.webp",
+      "alt": "Issaquah, WA solar roof check: attic rafters and roof sheathing being checked with a tape measure and flashlight before a solar installation \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "fe33a5dd17a982b648565bd1e814a300",
+      "source": "Newly generated image (built-in image generator, 2026-11-13), source gen-4.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-13-issaquah-solar-5.webp",
+      "repo_path": "assets/images/posts/2026-11-13-issaquah-solar-5.webp",
+      "alt": "Issaquah, WA solar metering: an exterior utility meter, a solar production meter and a disconnect switch mounted on gray siding \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "69ba4e6fcd23329bdb7f906ca2b36f53",
+      "source": "Newly generated image (built-in image generator, 2026-11-13), source gen-5.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-13-issaquah-solar-6.webp",
+      "repo_path": "assets/images/posts/2026-11-13-issaquah-solar-6.webp",
+      "alt": "Issaquah, WA solar shade: aerial view of a hillside neighborhood where tall firs shade most roofs, one home with solar panels, and misty foothills behind \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "2a3d63e04cb06251f3f901dea1eb430e",
+      "source": "Newly generated image (built-in image generator, 2026-11-13), source gen-6.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-13-issaquah-solar-7.webp",
+      "repo_path": "assets/images/posts/2026-11-13-issaquah-solar-7.webp",
+      "alt": "Issaquah, WA solar planning: a homeowner and contractor reviewing a rooftop solar panel layout plan at a kitchen table \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "2293b7f263cf0aca005cd390fd46b833",
+      "source": "Newly generated image (built-in image generator, 2026-11-13), source gen-7.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-13-issaquah-solar-8.webp",
+      "repo_path": "assets/images/posts/2026-11-13-issaquah-solar-8.webp",
+      "alt": "Issaquah, WA solar fire access: rooftop solar panels set back from the ridge and roof edge to leave a clear firefighter access pathway \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "75c89debe0e4959bea8ae584f3ac0c71",
+      "source": "Newly generated image (built-in image generator, 2026-11-13), source gen-8.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-13-issaquah-solar-9.webp",
+      "repo_path": "assets/images/posts/2026-11-13-issaquah-solar-9.webp",
+      "alt": "Issaquah, WA solar inspection: an electrical inspector with a clipboard checking rooftop conduit and a junction box beside solar panels \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "43486b6a317cb34d2322ba8d2f0d9b5b",
+      "source": "Newly generated image (built-in image generator, 2026-11-13), source gen-9.jpg converted to 1600w webp q82"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "fH3P8qw0s2Y",
+      "url": "https://www.youtube.com/watch?v=fH3P8qw0s2Y",
+      "title": "Low Profile QuickBOLT with Dual Flashing (Microflashing + Miniflashing) | INSTALL VIDEO",
+      "oembed_status": 200
+    },
+    {
+      "id": "-qN5dwEumCM",
+      "url": "https://www.youtube.com/watch?v=-qN5dwEumCM",
+      "title": "FlashFoot2 \u2014 Solar's Strongest Attachment Flashing",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "9 newly generated images (built-in generator), 0 regraded stills, 0 paid media."
+}
