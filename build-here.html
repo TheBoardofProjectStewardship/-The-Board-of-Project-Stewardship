@@ -37,7 +37,7 @@
   <title>What Can I Build Here? Free Lot Feasibility Report | Board of Project Stewardship</title>
   <link rel="preload" href="/assets/fonts/InterLatin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/css/site.css">
-  <link rel="stylesheet" href="/assets/css/build-here.css">
+  <link rel="stylesheet" href="/assets/css/build-here.css?v=20261113a">
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -147,6 +147,7 @@
           <label class="bh-label" for="bh-address">Street address, city and ZIP</label>
           <input id="bh-address" name="address" class="bh-input" type="text" autocomplete="street-address" placeholder="Street address, city, state ZIP" aria-describedby="bh-address-help">
           <p id="bh-address-help" class="bh-help">Works for street addresses across the United States. The address goes to the US Census geocoder and to public parcel / map services. We do not store it.</p>
+          <details class="bh-privacy"><summary>Where the address goes</summary><p class="bh-help">The address you type goes to the US Census Bureau geocoder. If the Census has no match, it goes to the Esri World Geocoder. The matched address and the location of the lot then go to county, city and state map servers. The location also goes to the USGS elevation service, Esri-hosted building footprints and OpenStreetMap servers. Google receives the map point only if you press Show the satellite map. This site does not store the address, and an address in the page link is taken out of the link when the page opens.</p></details>
         </div>
         <div style="align-self:end;padding-bottom:1.7rem"><button id="bh-go" class="bh-btn" type="submit">Look it up</button></div>
       </form>
@@ -162,6 +163,7 @@
         </p>
       </div>
       <p class="bh-help">Print opens the browser print dialog. Download saves an HTML file of this study, separate from that dialog. The file includes the address, date, sources, and limitations, and it prints on Letter or A4.</p>
+      <p id="bh-export-status" class="bh-help" role="status" aria-live="polite"></p>
       <div id="bh-report" class="bh-report" tabindex="-1"></div>
     </section>
 
@@ -292,12 +294,12 @@
   })();
   </script>
   <script src="/assets/js/site.js" defer></script>
-  <script src="/assets/js/build-here-rules.js?v=20261109b" defer></script>
-  <script src="/assets/js/build-here-landscape.js?v=20261109b" defer></script>
-  <script src="/assets/js/build-here-measures.js?v=20261109b" defer></script>
-  <script src="/assets/js/build-here-stage.js?v=20261109b" defer></script>
-  <script src="/assets/js/build-here-export.js?v=20261109b" defer></script>
-  <script src="/assets/js/build-here.js?v=20261109b" defer></script>
+  <script src="/assets/js/build-here-rules.js?v=20261113a" defer></script>
+  <script src="/assets/js/build-here-landscape.js?v=20261113a" defer></script>
+  <script src="/assets/js/build-here-measures.js?v=20261113a" defer></script>
+  <script src="/assets/js/build-here-stage.js?v=20261113a" defer></script>
+  <script src="/assets/js/build-here-export.js?v=20261113a" defer></script>
+  <script src="/assets/js/build-here.js?v=20261113a" defer></script>
 
 </body>
 </html>
