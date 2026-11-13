@@ -46,7 +46,7 @@
       var state = STATE_LABEL[card.state] || "Partial";
       return '<article class="bh-scenario" data-state="' + esc(card.state) + '">' +
         '<div class="bh-scenario-fig">' + figure(card) + "</div>" +
-        '<div class="bh-scenario-copy"><h3 class="bh-scenario-kicker">' + esc(card.title) + '</h3>' +
+        '<div class="bh-scenario-copy"><h4 class="bh-scenario-kicker">' + esc(card.title) + '</h4>' +
         '<p class="bh-scenario-figlabel">Schematic icon, not this lot.</p>' +
         '<p class="bh-scenario-state">' + esc(state) + "</p>" +
         "<p>" + esc(card.line) + "</p>" +
@@ -57,6 +57,8 @@
       '<div class="bh-stage-fade"><p class="bh-kicker">See what you can build</p><h2>' + esc(opts.address || "") + "</h2>" +
       '<p class="bh-stage-place">' + esc(opts.placeLine || "") + "</p>" +
       '<p class="bh-stage-date">Prepared ' + esc(opts.date || "") + "</p></div>" +
+      (opts.warn ? '<p class="bh-verify bh-stage-warn" role="alert"><strong>' + esc(opts.warn) + "</strong></p>" : "") +
+      (opts.edited ? '<p class="bh-verify bh-stage-warn">' + esc(opts.edited) + "</p>" : "") +
       '<p class="bh-disclaimer"><strong>Planning estimate only.</strong> This is not a legal, zoning or permit determination. Confirm every number with the jurisdiction and a licensed professional before you design, buy or build.</p>' +
       '<h3>Ways this property could go</h3>' +
       '<p class="bh-muted">The map above is this parcel when an outline or aerial was returned. The five diagrams are schematic icons, not a scaled plan. A card stays partial or empty when a measurement or a zoning rule is missing. Nothing here is a permit. <a href="#bh-confirm">Edit the facts used on these cards.</a></p>' +
