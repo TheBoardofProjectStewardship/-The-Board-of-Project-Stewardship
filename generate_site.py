@@ -2801,9 +2801,9 @@ def home_feasibility_tool_section() -> str:
     page = (Path(__file__).resolve().parent / "build-here.html").read_text(encoding="utf-8")
     start = page.index('    <section class="bh-card" aria-labelledby="bh-step1">')
     end = page.index("<!-- bh-tool-end -->")
-    tool = page[start:end].replace('<h2 id="bh-step3" class="text-2xl font-black text-white">', '<h2 id="bh-step3" class="text-xl font-black text-white">')
+    tool = page[start:end].replace('<h2 id="bh-step3" class="text-2xl font-black text-white" tabindex="-1">', '<h2 id="bh-step3" class="text-xl font-black text-white" tabindex="-1">')
     return f"""  <section id="bh-home" class="mb-14" aria-labelledby="bh-home-h">
-    <link rel="stylesheet" href="/assets/css/build-here.css">
+    <link rel="stylesheet" href="/assets/css/build-here.css?v=20261113a">
     <div class="mb-6 border-b border-white/10 pb-4">
       <span class="text-secondary text-xs font-bold uppercase tracking-widest">Good Steward Tools</span>
       <h2 id="bh-home-h" class="text-3xl font-black text-white tracking-tight">What can I build here?</h2>
@@ -2811,12 +2811,12 @@ def home_feasibility_tool_section() -> str:
     </div>
 {tool}
     <p class="text-xs text-slate-400 font-light leading-relaxed">A planning estimate, not a legal, zoning or permit determination. Confirm every number with the city or county and a licensed professional. <a href="./build-here.html" class="text-secondary hover:underline">Open the full tool page</a> for the editor review form and the full disclaimer.</p>
-    <script src="/assets/js/build-here-rules.js?v=20261109b" defer></script>
-    <script src="/assets/js/build-here-landscape.js?v=20261109b" defer></script>
-    <script src="/assets/js/build-here-measures.js?v=20261109b" defer></script>
-    <script src="/assets/js/build-here-stage.js?v=20261109b" defer></script>
-    <script src="/assets/js/build-here-export.js?v=20261109b" defer></script>
-    <script src="/assets/js/build-here.js?v=20261109b" defer></script>
+    <script src="/assets/js/build-here-rules.js?v=20261113a" defer></script>
+    <script src="/assets/js/build-here-landscape.js?v=20261113a" defer></script>
+    <script src="/assets/js/build-here-measures.js?v=20261113a" defer></script>
+    <script src="/assets/js/build-here-stage.js?v=20261113a" defer></script>
+    <script src="/assets/js/build-here-export.js?v=20261113a" defer></script>
+    <script src="/assets/js/build-here.js?v=20261113a" defer></script>
   </section>"""
 
 

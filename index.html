@@ -717,7 +717,7 @@
   </section>
   <div class="max-w-6xl mx-auto px-4 pt-10 relative z-20" id="home-after-magnolia">
     <section id="bh-home" class="mb-14" aria-labelledby="bh-home-h">
-    <link rel="stylesheet" href="/assets/css/build-here.css">
+    <link rel="stylesheet" href="/assets/css/build-here.css?v=20261113a">
     <div class="mb-6 border-b border-white/10 pb-4">
       <span class="text-secondary text-xs font-bold uppercase tracking-widest">Good Steward Tools</span>
       <h2 id="bh-home-h" class="text-3xl font-black text-white tracking-tight">What can I build here?</h2>
@@ -730,6 +730,7 @@
           <label class="bh-label" for="bh-address">Street address, city and ZIP</label>
           <input id="bh-address" name="address" class="bh-input" type="text" autocomplete="street-address" placeholder="Street address, city, state ZIP" aria-describedby="bh-address-help">
           <p id="bh-address-help" class="bh-help">Works for street addresses across the United States. The address goes to the US Census geocoder and to public parcel / map services. We do not store it.</p>
+          <details class="bh-privacy"><summary>Where the address goes</summary><p class="bh-help">The address you type goes to the US Census Bureau geocoder. If the Census has no match, it goes to the Esri World Geocoder. The matched address and the location of the lot then go to county, city and state map servers. The location also goes to the USGS elevation service, Esri-hosted building footprints and OpenStreetMap servers. Google receives the map point only if you press Show the satellite map. This site does not store the address, and an address in the page link is taken out of the link when the page opens.</p></details>
         </div>
         <div style="align-self:end;padding-bottom:1.7rem"><button id="bh-go" class="bh-btn" type="submit">Look it up</button></div>
       </form>
@@ -738,13 +739,14 @@
 
     <section id="bh-report-wrap" aria-labelledby="bh-step3" hidden>
       <div class="bh-toolbar">
-        <h2 id="bh-step3" class="text-2xl font-black text-white" tabindex="-1">What you can build</h2>
+        <h2 id="bh-step3" class="text-xl font-black text-white" tabindex="-1">What you can build</h2>
         <p>
           <button id="bh-print" class="bh-btn" type="button">Print</button>
           <button id="bh-download" class="bh-btn" type="button">Download study</button>
         </p>
       </div>
       <p class="bh-help">Print opens the browser print dialog. Download saves an HTML file of this study, separate from that dialog. The file includes the address, date, sources, and limitations, and it prints on Letter or A4.</p>
+      <p id="bh-export-status" class="bh-help" role="status" aria-live="polite"></p>
       <div id="bh-report" class="bh-report" tabindex="-1"></div>
     </section>
 
@@ -787,12 +789,12 @@
     </section>
     
     <p class="text-xs text-slate-400 font-light leading-relaxed">A planning estimate, not a legal, zoning or permit determination. Confirm every number with the city or county and a licensed professional. <a href="./build-here.html" class="text-secondary hover:underline">Open the full tool page</a> for the editor review form and the full disclaimer.</p>
-    <script src="/assets/js/build-here-rules.js?v=20261109b" defer></script>
-    <script src="/assets/js/build-here-landscape.js?v=20261109b" defer></script>
-    <script src="/assets/js/build-here-measures.js?v=20261109b" defer></script>
-    <script src="/assets/js/build-here-stage.js?v=20261109b" defer></script>
-    <script src="/assets/js/build-here-export.js?v=20261109b" defer></script>
-    <script src="/assets/js/build-here.js?v=20261109b" defer></script>
+    <script src="/assets/js/build-here-rules.js?v=20261113a" defer></script>
+    <script src="/assets/js/build-here-landscape.js?v=20261113a" defer></script>
+    <script src="/assets/js/build-here-measures.js?v=20261113a" defer></script>
+    <script src="/assets/js/build-here-stage.js?v=20261113a" defer></script>
+    <script src="/assets/js/build-here-export.js?v=20261113a" defer></script>
+    <script src="/assets/js/build-here.js?v=20261113a" defer></script>
   </section>
 
   <section id="mission" class="mb-12">
