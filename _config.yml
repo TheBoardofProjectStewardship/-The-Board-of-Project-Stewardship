@@ -15,6 +15,7 @@ exclude:
   - intake
   - places
   - tests
+  - wordpress
   - data
   - pages
   - assets/CDN-MAP.json

@@ -1,0 +1,17 @@
+{
+  "note": "Folders that must not hold published files until the question in 'reason' is answered in writing. Read by scripts/check_data_holds.py. To clear one, put who cleared it, or who decided to publish it, and the date in 'clearance'.",
+  "holds": [
+    {
+      "path": "assets/data/sno-bldg",
+      "status": "held",
+      "reason": "Snohomish County Improvement Records. The county item's terms cover data from which a list of individuals may be compiled, and a parcel number joins to owner names on the public parcel layer. See scripts/build_sno_bldg_index.py.",
+      "clearance": ""
+    },
+    {
+      "path": "assets/data/house-size/snoh",
+      "status": "owner-accepted",
+      "reason": "Published weekly by .github/workflows/house-size-index.yml from scripts/build_index.py. The review of pull request 208 (finding C4) did not see that script, so it could not tell whether these files are built from the Snohomish County Improvement Records named in the hold above.",
+      "clearance": "Site owner decision of 2026-11-13 by Alex Nikitenko, passed to the review: keep these files and keep publishing them. The owner accepted the open question about their source. The review did not check the source."
+    }
+  ]
+}
