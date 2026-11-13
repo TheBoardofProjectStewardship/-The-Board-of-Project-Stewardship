@@ -20,6 +20,8 @@ Mill Creek’s residential mix spans late-twentieth-century custom homes, planne
 
 Snohomish County weather rewards moisture management over catalog aesthetics. High annual rainfall, persistent humidity, and shaded elevations keep wall assemblies wet longer after storms. When seals fail, condensation appears between panes first; when flashing fails, water migrates into sheathing and drywall around the rough opening. Replacement is therefore a building-envelope project, not a finish swap.
 
+![Fogged double-pane window with condensation between the glass on a Mill Creek, WA home](../assets/images/posts/2026-10-04-mill-creek-window-fogged-glass-5.webp "Condensation trapped between panes is a common sign of a failed insulated-glass seal in older Mill Creek windows.")
+
 Multi-story layouts are common. Upper bedrooms and lofted volumes raise egress and thermal questions at once: bedroom openings must meet emergency-escape rules, while heat rising into upper floors amplifies the cost of leaky or low-performing glass. Neighborhood context for comparing local firms lives in the Board’s Mill Creek directory; trade-specific orientation sits in the [windows](../windows.html) hub.
 
 ## City of Mill Creek permits and OpenGov
@@ -40,6 +42,8 @@ Window replacement is systemic. A structured sequence reduces mid-project correc
 
 **1. Performance audit.** Separate air leakage (drafts), water intrusion (rot, staining), and thermal failure (condensation between panes). Pocket or insert replacements slide a new unit into an existing frame; full-frame replacements remove jambs and sill so crews can repair hidden rot and rebuild flashing. Full-frame is the stronger default when Mill Creek homes show soft sills or chronic leaks.
 
+![Old window frame removed down to the rough opening for a full-frame replacement on a Mill Creek, WA house](../assets/images/posts/2026-10-04-mill-creek-window-full-frame-6.webp "A full-frame window replacement in Mill Creek exposes the rough opening so jambs, sill and flashing can be inspected and rebuilt.")
+
 **2. Goal definition.** Rank energy comfort, street noise attenuation near busier corridors, daylight, and exterior character. That ranking drives glass packages (low-E coatings, gas fills) and frame material — vinyl, fiberglass, or wood-clad composites all behave differently in humid swings.
 
 **3. Measurement and quoting.** Require written U-factor and Solar Heat Gain Coefficient values, plus an explicit flashing method and sealant type. A quote that names only brand and rough sizes is incomplete for Pacific Northwest walls.
@@ -50,9 +54,13 @@ Window replacement is systemic. A structured sequence reduces mid-project correc
 
 The rough opening is where most long-term failures start. Inspectors and careful installers look for a continuous transition from window frame to house wrap or equivalent weather-resistive barrier, with sill pans or equivalent drainage paths that do not trap water behind cladding. Side and head flashing must shed water outward; sealing the bottom shut can hold moisture against framing.
 
+![Sloped sill pan flashing and taped weather barrier at a window rough opening in Mill Creek, WA](../assets/images/posts/2026-10-04-mill-creek-window-sill-pan-7.webp "A sloped sill pan and lapped weather barrier give water a way out of the opening, a key detail for Mill Creek's wet seasons.")
+
 https://www.youtube.com/watch?v=DGmLFvZ7Jg0
 
 Bedroom egress openings deserve their own line item. If a replacement narrows a clear opening below code, the “upgrade” can create a safety defect. Ask for measured clear-opening calculations on sleeping rooms, not brochure rough sizes alone.
+
+![Upstairs bedroom casement window opened wide for egress in a two-story Mill Creek, WA home](../assets/images/posts/2026-10-04-mill-creek-window-egress-8.webp "Upper-floor bedroom windows in Mill Creek homes need a clear opening that still meets emergency-escape rules after replacement.")
 
 Energy performance belongs in writing. Low-E coatings and argon fills help only when the unit is square, shimmed without warping the frame, and sealed without crushing drainage paths. The Board of Project Stewardship does not publish invented payback percentages; compare scopes on detailing quality and verification steps instead.
 
@@ -73,6 +81,8 @@ Installation quality dominates brand marketing. Ask for recent Mill Creek or nea
 Walk the Board’s [verify a contractor](../verify-contractor.html) checklist yourself. Use [Washington L&I Verify](https://secure.lni.wa.gov/verify/) to confirm registration, bond, and insurance for the general contractor and any specialty window crew before mobilization. Registration is not a substitute for a bond; bonding and insurance protect homeowners when work is unfinished or unpaid trades appear.
 
 Prefer written scopes that name flashing products, temporary weather protection, trim restoration, disposal of old units, and who pays for city resubmittals after corrections. The lowest bid often omits those line items.
+
+![Plastic sheeting protecting an open window opening on a rainy day at a Mill Creek, WA house](../assets/images/posts/2026-10-04-mill-creek-window-weather-protection-9.webp "Temporary weather protection over an open window opening keeps rain out of the wall during a wet-season replacement in Mill Creek.")
 
 ## Where Pacific Pro Group fits
 
