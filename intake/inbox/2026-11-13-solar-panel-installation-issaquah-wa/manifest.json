@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-11-13-solar-panel-installation-issaquah-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-11-13T12:00:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Solar Panel Installation Issaquah WA \u2014 Permits, L&I Electrical, Roof Loads and PSE Net Metering",
+    "date": "2026-11-13",
+    "slug": "solar-panel-installation-issaquah-wa",
+    "description": "An Issaquah homeowner's guide to rooftop solar: when the City's solar checklist means no building permit, the L&I electrical permit and inspections, roof load and flashing rules, firefighter access pathways, shade from tall firs, and PSE interconnection and net metering.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 connected but board-intake inbox had no 2026-11-13 packets at 3:45 AM PT; PC not touched further. Topic: rooftop solar panel installation in Issaquah WA (King County; utility PSE): City Solar Panel Permits page (100+ installations, SolSmart Gold, most standard residential systems skip building permit but still need L&I electrical); Solar Checklist dated 10/06/2025 (IRC 2018 form): licensed contractor, single-layer lightweight roof, 18 in max height and not above ridge, 3.5 psf, 50 lb point load, flashing per IRC M2301.2.9, firefighter pathways per Tip Sheet 24, email checklist to sustainability@issaquahwa.gov; if any no, Permit Center 425-837-3100 / CPD@issaquahwa.gov plan review; commercial needs building + electrical; Tip Sheet 24 36 in pathways, 18 in ridge/hip-valley, 150 ft array; L&I electrical (Issaquah uses L&I not City; Bellevue office 616 120th Ave NE Ste C201, 425-990-1400; City business license still required); L&I permit before work, inspect before conceal, within 3 days of complete or 1 day of energizing; PSE Customer Connected Solar: PowerClerk application, Approval to Construct, install, electrical final, Notice of Completion, PSE test/meters, approval to energize; Rate Schedule 150 net metering, banked credits expire March 31, 100 kW cap; availability stated through at least Dec 31, 2025 so ask current terms; shade/Solar Pathfinder; tree permits separate; Do I Need a Permit: Klahanie/Mirrormont not City; inspections 7 a.m.-6 p.m. Mon-Fri. issaquah already in place lists. Prior Issaquah daily 2026-10-13 (kitchen remodel); no prior solar post. No fee, fine or price figures. Producer role fields kept per intake contract."
+}

@@ -1,0 +1,176 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Issaquah",
+    "service": "Rooftop solar panel installation permits, L&I electrical, roof loads and PSE net metering",
+    "slug": "solar-panel-installation-issaquah-wa"
+  },
+  "sources": [
+    {
+      "url": "https://enphase.com/",
+      "title": "https://enphase.com/",
+      "retrieved": "2026-11-13",
+      "http_status": 200,
+      "supports": "Material: microinverters, battery storage and energy monitoring"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "retrieved": "2026-11-13",
+      "http_status": 200,
+      "supports": "State hiring guidance: registration, bids, written contract"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-basics-for-home-business-owners/",
+      "title": "https://lni.wa.gov/licensing-permits/electrical/electrical-basics-for-home-business-owners/",
+      "retrieved": "2026-11-13",
+      "http_status": 200,
+      "supports": "Most new, remodel and maintenance electrical work needs a permit; links to residential permit and inspection guides"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/",
+      "title": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/",
+      "retrieved": "2026-11-13",
+      "http_status": 200,
+      "supports": "Electrical work requires permit and inspection except as in WAC 296-46B-901; permit purchased by contractor or owner doing the work; if hiring a contractor they must buy their own permit; Issaquah is L&I jurisdiction (not a city that does its own electrical); L&I inspects to 2023 NEC; buy permit before starting work"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/purchase-permits-request-inspections",
+      "title": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/purchase-permits-request-inspections",
+      "retrieved": "2026-11-13",
+      "http_status": 200,
+      "supports": "Homeowners buy a permit only if doing the work themselves; contact serving utility before disconnect/reconnect/new service; permits good 1 year; request inspection before conceal and within 3 days of completing or 1 day of energizing, whichever first"
+    },
+    {
+      "url": "https://quickbolt.com/",
+      "title": "https://quickbolt.com/",
+      "retrieved": "2026-11-13",
+      "http_status": 200,
+      "supports": "Material: solar roof mounts with microflashing"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-11-13",
+      "http_status": 200,
+      "supports": "License/bond/insurance lookup"
+    },
+    {
+      "url": "https://unirac.com/",
+      "title": "https://unirac.com/",
+      "retrieved": "2026-11-13",
+      "http_status": 200,
+      "supports": "Material: solar racking and mounting systems"
+    },
+    {
+      "url": "https://www.ironridge.com/",
+      "title": "https://www.ironridge.com/",
+      "retrieved": "2026-11-13",
+      "http_status": 200,
+      "supports": "Material: solar racking rails and attachments for pitched residential roofs"
+    },
+    {
+      "url": "https://www.issaquahwa.gov/146/Permitting",
+      "title": "https://www.issaquahwa.gov/146/Permitting",
+      "retrieved": "2026-11-13",
+      "http_status": 200,
+      "supports": "2018 codes adopted statewide Feb 1, 2021 noted; adopted codes list; MyBuildingPermit.com Check Status; application packets incl Solar Panels (SF and commercial); inspections; Permit Center CPD 130 E Sunset Way, 425-837-3100; virtual appointments"
+    },
+    {
+      "url": "https://www.issaquahwa.gov/165/Inspections",
+      "title": "https://www.issaquahwa.gov/165/Inspections",
+      "retrieved": "2026-11-13",
+      "http_status": 200,
+      "supports": "Schedule inspections; Today's Inspection List; MyBuildingPermit.com status and corrections; construction hours 7 a.m.-6 p.m. Mon-Fri; Expanded Work Hours Permit for work outside hours; CPD 130 E Sunset Way, 425-837-3100"
+    },
+    {
+      "url": "https://www.issaquahwa.gov/183/Do-I-Need-a-Permit",
+      "title": "https://www.issaquahwa.gov/183/Do-I-Need-a-Permit",
+      "retrieved": "2026-11-13",
+      "http_status": 200,
+      "supports": "City administers permits only inside city limits; Klahanie and Mirrormont not in City; unincorporated King County goes to King County DPER; Klahanie to City of Sammamish; Permit Center 425-837-3100"
+    },
+    {
+      "url": "https://www.issaquahwa.gov/2884/Solar-Panel-Permits",
+      "title": "https://www.issaquahwa.gov/2884/Solar-Panel-Permits",
+      "retrieved": "2026-11-13",
+      "http_status": 200,
+      "supports": "Over 100 solar installations incl. Maple Street Fire Station; SolSmart Gold; most standard residential systems do not need a building permit (L&I electrical still required); consult Solar Checklist; if no, CPD reviews plans; commercial needs building and electrical; shade-free roof and Solar Pathfinder; typical rooftop needs no extra structural engineering except older/unusual buildings; firefighter accessibility via Tip Sheet 24"
+    },
+    {
+      "url": "https://www.issaquahwa.gov/3092/Electrical-Permits",
+      "title": "https://www.issaquahwa.gov/3092/Electrical-Permits",
+      "retrieved": "2026-11-13",
+      "http_status": 200,
+      "supports": "Electrical permits reviewed and issued by WA L&I, many online; closest office Bellevue 616 120th Avenue NE Suite C201, 425-990-1400; City of Issaquah business license still required for contractors in city limits"
+    },
+    {
+      "url": "https://www.issaquahwa.gov/928/Building-Codes",
+      "title": "https://www.issaquahwa.gov/928/Building-Codes",
+      "retrieved": "2026-11-13",
+      "http_status": 200,
+      "supports": "Adopted codes incl 2021 IBC/IRC/IFC with WA amendments, 2021 Washington State Energy Code; see IMC Title 16.04"
+    },
+    {
+      "url": "https://www.issaquahwa.gov/DocumentCenter/View/4605",
+      "title": "https://www.issaquahwa.gov/DocumentCenter/View/4605",
+      "retrieved": "2026-11-13",
+      "http_status": 200,
+      "supports": "Building Permit Exemption Checklist for Residential Photovoltaic Systems, 10/06/2025, IRC 2018: 15 yes/no items (dwelling type, licensed contractor, rooftop, engineered PV mounting, lightweight single-layer roof, 18 in height / not above ridge, 3.5 psf, 50 lb point, manufacturer instructions, flashing IRC M2301.2.9, setbacks/height, IRC Ch. 23 and noncombustible or FRT supports, firefighter access Tip Sheet 24, L&I electrical). All yes: no building permit; email checklist to sustainability@issaquahwa.gov; any no: Permit Center 425-837-3100 / CPD@issaquahwa.gov"
+    },
+    {
+      "url": "https://www.mybuildingpermit.com/",
+      "title": "https://www.mybuildingpermit.com/",
+      "retrieved": "2026-11-13",
+      "http_status": 200,
+      "supports": "eCityGov Alliance MyBuildingPermit.com portal used by Issaquah for status, applications and inspections"
+    },
+    {
+      "url": "https://www.mybuildingpermit.com/sites/default/files/documentation/Tip%20Sheet%2024%20Residential%20Solar%20Systems.pdf",
+      "title": "https://www.mybuildingpermit.com/sites/default/files/documentation/Tip%20Sheet%2024%20Residential%20Solar%20Systems.pdf",
+      "retrieved": "2026-11-13",
+      "http_status": 200,
+      "supports": "Tip Sheet 24, July 1, 2016, 2015 IRC/IFC w/ WA amendments: building permit may be required (check jurisdiction); electrical permit always required; firefighter access: strong-point access, 150 ft array, 36 in pathways between arrays and eave-to-ridge except 2:12 or less, 18 in from hip/valley if both sides, 18 in from ridge unless fire chief allows otherwise"
+    },
+    {
+      "url": "https://www.pse.com/en/green-options/Renewable-Energy-Programs/customer-connected-solar",
+      "title": "https://www.pse.com/en/green-options/Renewable-Energy-Programs/customer-connected-solar",
+      "retrieved": "2026-11-13",
+      "http_status": 200,
+      "supports": "Customer Connected Solar: interconnection and net metering; multiple bids; REPs; steps: PowerClerk application, Approval to Construct, install under local codes, electrical final, Notice of Completion, PSE test and meters, approval to energize; Rate Schedule 150; banked credits expire March 31; 100 kW cap; not with TOU 307/327 or schedule 171; availability stated through at least Dec 31, 2025; WA sales-tax exemption mentioned (no dollar figures used)"
+    },
+    {
+      "url": "https://www.s-5.com/",
+      "title": "https://www.s-5.com/",
+      "retrieved": "2026-11-13",
+      "http_status": 200,
+      "supports": "Material: clamps and brackets for standing-seam metal roofs"
+    }
+  ],
+  "dropped": [
+    {
+      "url": "https://www.issaquahwa.gov/154/Permit-Center",
+      "reason": "404; used /146/Permitting instead"
+    },
+    {
+      "url": "https://www.snapnrack.com/",
+      "reason": "429 to box curl; not cited"
+    },
+    {
+      "url": "https://www.sunmodo.com/",
+      "reason": "no response to box curl; not cited"
+    },
+    {
+      "url": "https://www.solsmart.org/",
+      "reason": "202 (redirect); SolSmart fact taken from City Issaquah page instead, not cited"
+    },
+    {
+      "url": "https://dor.wa.gov/",
+      "reason": "WA solar sales-tax exemption mentioned on PSE page; DOR page not fetched as a standalone cite to avoid fee/dollar language; exemption not expanded in the post"
+    },
+    {
+      "note": "Tip Sheet 24 is dated 2016 (2015 IRC/IFC) and the Solar Checklist is labeled IRC 2018 while the City Building Codes page lists 2021 IRC/IFC; post flags the version lag and tells readers to confirm with the Permit Center. PSE net metering availability stated through at least Dec 31, 2025 is past; post flags to ask current terms. No dollar amounts."
+    }
+  ],
+  "notes": "Box curl 2026-11-13 with browser UA and full browser headers. Cite only 200 pages (SolSmart 202 dropped). Checklist PDF resolved to /DocumentCenter/View/4605/Solar-Checklist?bidId= (200)."
+}
