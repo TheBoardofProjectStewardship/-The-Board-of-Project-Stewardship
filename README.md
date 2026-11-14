@@ -54,6 +54,7 @@ Base: `https://boardofprojectstewardship.com/`
 | `blog/rss.xml` | Blog RSS feed |
 | `news/rss.xml` | News RSS feed |
 | `404.html` | Branded Board 404 |
+| `posts/2026-11-14-lead-safe-remodeling-burien-wa.html` | Lead-Safe Remodeling Burien WA — Pre-1978 Homes, RRP Certified Firms, Permits and Cleanup Verification |
 | `posts/2026-11-13-solar-panel-installation-issaquah-wa.html` | Solar Panel Installation Issaquah WA — Permits, L&I Electrical, Roof Loads and PSE Net Metering |
 | `posts/2026-11-12-tree-removal-permit-remodel-shoreline-wa.html` | Tree Removal Permits Before Remodeling Shoreline WA — Significant Trees, Critical Areas, Arborist Reports and Tree Protection |
 | `posts/2026-11-11-asbestos-survey-before-remodel-everett-wa.html` | Asbestos Survey Before Remodeling Everett WA — Clean Air Agency Rules, Testing, Abatement and Permits |

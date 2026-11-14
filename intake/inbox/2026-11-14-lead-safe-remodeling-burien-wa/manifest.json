@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-11-14-lead-safe-remodeling-burien-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-11-14T12:00:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Lead-Safe Remodeling Burien WA \u2014 Pre-1978 Homes, RRP Certified Firms, Permits and Cleanup Verification",
+    "date": "2026-11-14",
+    "slug": "lead-safe-remodeling-burien-wa",
+    "description": "A Burien homeowner's guide to remodeling a pre-1978 house: when Washington's lead renovation rules apply, how to confirm a firm and renovator are certified, what Burien permits cover, how containment and waste handling work, and how cleaning verification is done.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 connected but board-intake inbox had no 2026-11-14 packets at 3:36 AM PT; PC not touched. Topic: lead-safe remodeling of pre-1978 homes in Burien WA (King County). WA Commerce Lead-Based Paint programs (training, certification, compliance enforcement); RRP certification required to offer/bid/perform renovation, repair or painting on pre-1978 homes and child-occupied facilities; firm needs individual renovator not within 6 months of expiration who supervises or performs work, plus DOR/business license/SOS/L&I registrations; renovator class 8 hours incl. 2 hands-on, every 5 years; EPA/other-state certs must be registered with Commerce (WAC 365-230-380); RRP certs up to 5 years, LBPA 3 years; RRP not abatement (abatement 20+ years). WAC 365-230-300 exceptions (inspector determination, EPA-recognized test kit, paint chip lab; 1.0 mg/cm2 or 0.5%); emergency renovations still need cleaning + verification. WAC 365-230-320 Renovate Right pamphlet no more than 60 days before; acknowledgment or certificate of mailing 7 days prior; adult occupant if owner not resident. WAC 365-230-330: signs, interior containment (objects, ducts, doors, floor 6 ft), egress, exterior (doors/windows within 20 ft, ground 10 ft, vertical containment near property line), prohibited open flame, high-speed without shroud+HEPA, heat gun <1100F, waste contained/covered chute/stored under containment; cleaning within 2 ft, high to low, HEPA, two-bucket mop; cleaning verification card procedure (1 hour wait, dry cloth). EPA work practices: records on site and kept 3 years. Burien Permit Center hours/address/phone, MyBuildingPermit; Building Division processes construction, electrical, plumbing, mechanical etc.; Required Permits sheet (eff. Feb 1, 2021): interior remodels need permit, exterior doors/windows/skylights with new opening or in Airport Noise Zone 1 need permit, painting and most nonstructural siding exempt. DOH Lead Safe from the Start questionnaire. burien already in place lists; prior Burien daily 2026-10-16 (home addition) cross-linked; Everett asbestos 2026-11-11 cross-linked, not repeated. No fee, fine or price figures. Producer role fields kept per intake contract."
+}
