@@ -3,7 +3,10 @@
 
 They do not skip when port 8765 is down: this file starts the server.
 A missing Chrome binary fails the test instead of recording a skip.
+The websocket-client module is optional; CI does not install it, so the
+browser test skips when `websocket` cannot be imported.
 """
+import importlib.util
 import json
 import shutil
 import subprocess
@@ -57,6 +60,10 @@ class InteractTest(unittest.TestCase):
             cls.server.kill()
             cls.server.wait(timeout=5)
 
+    @unittest.skipUnless(
+        importlib.util.find_spec("websocket") is not None,
+        "websocket-client is not installed",
+    )
     def test_edit_form_survives_rerender_and_address_is_visible(self):
         if not CHROME:
             self.fail("chrome is not installed; the interaction test did not run")
