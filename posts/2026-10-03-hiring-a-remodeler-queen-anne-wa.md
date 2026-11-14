@@ -20,6 +20,8 @@ Queen Anne is not a flat-lot subdivision. Much of the neighborhood sits on signi
 
 Steep lots affect structural engineering for additions and decks, drainage after grading, and how crews deliver lumber without blocking neighbors. Historic millwork and old-growth framing mean a remodeler who only knows new stick framing may open walls they cannot responsibly close. Moisture is the third constraint: Pacific Northwest damp finds every weak flashing detail once luxury finishes go in.
 
+![Older Craftsman house on a steep hillside lot with tall retaining wall and stairs in Queen Anne, Seattle](../assets/images/posts/2026-10-03-queen-anne-steep-lot-5.webp "Steep Queen Anne lots shape structural, drainage and access decisions before a Seattle remodel starts.")
+
 Neighborhood context for homeowners comparing local firms lives in the Board’s [Queen Anne](../queen-anne.html) directory. Broader hiring process and red-flag patterns sit in [hiring a contractor](../hiring-a-contractor.html) and [red flags when hiring](../red-flags-hiring.html).
 
 ## SDCI permitting is part of the remodel — not a side chore
@@ -27,6 +29,8 @@ Neighborhood context for homeowners comparing local firms lives in the Board’s
 Queen Anne parcels follow City of Seattle rules under [SDCI](https://www.seattle.gov/sdci). Interior cosmetic work and full envelope or footprint changes are not the same permit path.
 
 Start with SDCI’s published process on [How Do You Get a Permit?](https://www.seattle.gov/sdci/permits/how-do-you-get-a-permit). In practice, most construction and land-use applications begin with a Building & Land Use Pre-Application in the [Seattle Services Portal](https://services.seattle.gov/Portal/Customization/SEATTLE/Welcome.aspx). Projects with ground disturbance, mapped steep slopes, or environmentally critical areas often trigger a Pre-Application Site Visit (PASV) and, for larger scopes, a Preliminary Assessment Report before full intake.
+
+![Rolled remodel plan sheets and a permit folder on a workbench inside a Queen Anne, Seattle home](../assets/images/posts/2026-10-03-queen-anne-permit-plans-6.webp "Permit-ready drawings keep a Queen Anne remodel moving through Seattle plan review.")
 
 Design review and landmark constraints can add exterior-material and massing scrutiny on some Queen Anne properties. A contractor who promises to “skip” intake, or who treats SDCI timelines as optional, is signaling the wrong culture for this hill. Build calendar buffer for review cycles; do not let a low bid erase that buffer.
 
@@ -49,6 +53,8 @@ General “years in business” claims are not enough. Prefer concrete, local an
 3. How do you join new framing or beams to existing historic structure without guessing at hidden rot?
 4. How do you verify every subcontractor on [L&I Verify](https://secure.lni.wa.gov/verify/) before they mobilize?
 
+![Lumber and debris bin staged neatly at the curb on a sloped residential street in Queen Anne, Seattle](../assets/images/posts/2026-10-03-queen-anne-street-staging-7.webp "Material staging and debris haul on steep Queen Anne streets is a planning question to ask every remodeler.")
+
 Walk the Board’s [verify a contractor](../verify-contractor.html) checklist yourself. Registration status, bond, and insurance are public records; a firm that cannot be found there leaves homeowners exposed on injuries and unfinished work.
 
 https://www.youtube.com/watch?v=57CeGJR_Xow
@@ -59,7 +65,11 @@ Queen Anne value often sits in original trim, windows proportions, and street-fa
 
 Historic envelopes frequently lack modern weather-resistive detailing. Sealing a house tightly without ventilation planning can trap moisture in walls. Ask remodelers how they sequence house wrap or equivalent barriers, flashing at openings, and interior finish work so wet-season rain does not sit in cavities behind new cabinetry or hardwood.
 
+![Weather-resistive barrier and new sheathing on an older house wall during a Queen Anne, Seattle remodel](../assets/images/posts/2026-10-03-queen-anne-weather-barrier-8.webp "Adding weather-resistive detailing to an older Queen Anne envelope needs a ventilation plan alongside it.")
+
 Preserve millwork where it is sound. Matching old-growth fir profiles is not the same as installing commodity pine from a big-box aisle. When windows or doors must change for egress or energy performance, require written flashing details — not catalog brochures alone.
+
+![Original fir window casing and trim being preserved during an interior remodel in Queen Anne, Seattle](../assets/images/posts/2026-10-03-queen-anne-original-millwork-9.webp "Keeping sound original fir trim protects the character Queen Anne homes are known for.")
 
 ## Budgeting without invented numbers
 
