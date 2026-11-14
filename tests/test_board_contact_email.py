@@ -107,7 +107,9 @@ def _host(email: str) -> str:
 
 def _is_ahj(email: str) -> bool:
     host = _host(email)
-    return host.endswith((".gov", ".us")) or host == "cityofmilton.net"
+    # snoco.org is Snohomish County's published council address, the same kind
+    # of hearing citation as a .gov permit desk.
+    return host.endswith((".gov", ".us")) or host in {"cityofmilton.net", "snoco.org"}
 
 
 def _is_ppg_listed(email: str, ppg_emails: set[str]) -> bool:
