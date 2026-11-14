@@ -1,0 +1,98 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-11-14-burien-lead-safe-1.webp",
+      "repo_path": "assets/images/posts/2026-11-14-burien-lead-safe-1.webp",
+      "alt": "Burien, WA pre-1978 home before a lead-safe remodel: a single-story rambler with peeling white painted siding under tall evergreens \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "df36c5c1b12073a61d64820880dc54ec",
+      "source": "Newly generated image (built-in image generator, 2026-11-14), source gen-1.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-14-burien-lead-safe-2.webp",
+      "repo_path": "assets/images/posts/2026-11-14-burien-lead-safe-2.webp",
+      "alt": "Burien, WA lead paint risk on an older window: close-up of cracked, alligatored paint layers peeling from a wood window sash and sill \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "f28b14988ca7cbafa9c6d52b236b11cd",
+      "source": "Newly generated image (built-in image generator, 2026-11-14), source gen-2.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-14-burien-lead-safe-3.webp",
+      "repo_path": "assets/images/posts/2026-11-14-burien-lead-safe-3.webp",
+      "alt": "Burien, WA interior lead-safe containment: plastic sheeting taped over the floor and a zippered plastic door barrier at a room entry \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "db78bb44194e67f0d7f9b9374d2aa377",
+      "source": "Newly generated image (built-in image generator, 2026-11-14), source gen-3.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-14-burien-lead-safe-4.webp",
+      "repo_path": "assets/images/posts/2026-11-14-burien-lead-safe-4.webp",
+      "alt": "Burien, WA lead-safe surface prep: a worker in white coveralls and a respirator misting a peeling painted wall inside plastic containment \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "3c220d76ae9e1081a32879b751a8e3d0",
+      "source": "Newly generated image (built-in image generator, 2026-11-14), source gen-4.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-14-burien-lead-safe-5.webp",
+      "repo_path": "assets/images/posts/2026-11-14-burien-lead-safe-5.webp",
+      "alt": "Burien, WA lead-safe cleanup near a window replacement: a HEPA vacuum on plastic-covered floor beside a newly installed window \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "0cc22a42b35a441e86d7bb05bb491580",
+      "source": "Newly generated image (built-in image generator, 2026-11-14), source gen-5.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-14-burien-lead-safe-6.webp",
+      "repo_path": "assets/images/posts/2026-11-14-burien-lead-safe-6.webp",
+      "alt": "Burien, WA exterior lead-safe setup: plastic ground sheeting held down with sandbags under a ladder beside painted siding \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "6e779d6e0803f4696570071841bedb69",
+      "source": "Newly generated image (built-in image generator, 2026-11-14), source gen-6.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-14-burien-lead-safe-7.webp",
+      "repo_path": "assets/images/posts/2026-11-14-burien-lead-safe-7.webp",
+      "alt": "Burien, WA lead-safe cleaning verification: a gloved hand wiping a windowsill with a damp disposable cloth next to a cleaning verification card \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "b937595d4c49bdfbb6dad00f051b8485",
+      "source": "Newly generated image (built-in image generator, 2026-11-14), source gen-7.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-14-burien-lead-safe-8.webp",
+      "repo_path": "assets/images/posts/2026-11-14-burien-lead-safe-8.webp",
+      "alt": "Burien, WA renovation waste from lead-safe work: sealed heavy plastic debris bags stacked beside a garage door \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "f0c8f7d213cdc5c877bc626d48d0c584",
+      "source": "Newly generated image (built-in image generator, 2026-11-14), source gen-8.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-14-burien-lead-safe-9.webp",
+      "repo_path": "assets/images/posts/2026-11-14-burien-lead-safe-9.webp",
+      "alt": "Burien, WA finished lead-safe remodel: a bright living room with fresh white window trim and clean floors after the work area passed cleaning verification \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "3dd197d530b2659a93fefd4f9003121a",
+      "source": "Newly generated image (built-in image generator, 2026-11-14), source gen-9.jpg converted to 1600w webp q82"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "WWzkap2jdX8",
+      "url": "https://www.youtube.com/watch?v=WWzkap2jdX8",
+      "title": "EPA Cleaning Verification Procedure after a lead safe job",
+      "oembed_status": 200
+    },
+    {
+      "id": "U-3U1pcSIyg",
+      "url": "https://www.youtube.com/watch?v=U-3U1pcSIyg",
+      "title": "Lead-Safe Certified Remodeling with Dean Johnson",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "9 newly generated images (built-in generator), 0 regraded stills, 0 paid media."
+}

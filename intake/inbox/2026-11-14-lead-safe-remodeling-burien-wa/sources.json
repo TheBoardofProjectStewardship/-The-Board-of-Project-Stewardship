@@ -1,0 +1,186 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Burien",
+    "service": "Lead-safe remodeling of pre-1978 homes: RRP certified firms, permits, containment and cleaning verification",
+    "slug": "lead-safe-remodeling-burien-wa"
+  },
+  "sources": [
+    {
+      "url": "https://app.leg.wa.gov/WAC/default.aspx?cite=365-230-300",
+      "title": "https://app.leg.wa.gov/WAC/default.aspx?cite=365-230-300",
+      "retrieved": "2026-11-14",
+      "http_status": 200,
+      "supports": "Applicability to renovations for compensation in target housing and child-occupied facilities; exceptions: inspector/risk assessor written determination, EPA-recognized test kit by certified renovator per component, paint chip lab; 1.0 mg/cm2 or 0.5% by weight; emergency renovations still subject to cleaning and cleaning verification"
+    },
+    {
+      "url": "https://app.leg.wa.gov/WAC/default.aspx?cite=365-230-320",
+      "title": "https://app.leg.wa.gov/WAC/default.aspx?cite=365-230-320",
+      "retrieved": "2026-11-14",
+      "http_status": 200,
+      "supports": "Pamphlet no more than sixty days before renovation; owner written acknowledgment or certificate of mailing at least seven days prior; adult occupant if owner not occupying"
+    },
+    {
+      "url": "https://app.leg.wa.gov/WAC/default.aspx?cite=365-230-330",
+      "title": "https://app.leg.wa.gov/WAC/default.aspx?cite=365-230-330",
+      "retrieved": "2026-11-14",
+      "http_status": 200,
+      "supports": "Work practice standards: certified firms using certified renovators; warning signs in occupants' primary language until cleaning verification; interior containment (objects, ducts, windows/doors, entry plastic, floor six feet); egress; exterior: close doors/windows within twenty feet, ground cover ten feet, vertical containment within ten feet of property line; prohibited open-flame, high-speed removal without shroud and HEPA, heat gun below 1,100 F; waste contained, covered chute, stored under containment; cleaning within two feet, higher to lower, HEPA with beater bar, two-bucket mop; cleaning verification card procedure; exterior visual inspection; remove signs after passing"
+    },
+    {
+      "url": "https://app.leg.wa.gov/WAC/default.aspx?cite=365-230-380",
+      "title": "https://app.leg.wa.gov/WAC/default.aspx?cite=365-230-380",
+      "retrieved": "2026-11-14",
+      "http_status": 200,
+      "supports": "Renovator certification; EPA or authorized-state certification registered with department; expiration not exceeding original"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=365-230",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=365-230",
+      "retrieved": "2026-11-14",
+      "http_status": 200,
+      "supports": "Chapter 365-230 WAC: accreditation of lead-based paint training programs and certification of firms and individuals conducting lead-based paint activities and renovation"
+    },
+    {
+      "url": "https://blue.kingcounty.com/Assessor/eRealProperty/default.aspx",
+      "title": "https://blue.kingcounty.com/Assessor/eRealProperty/default.aspx",
+      "retrieved": "2026-11-14",
+      "http_status": 200,
+      "supports": "King County Assessor eReal Property parcel search (year built lookup)"
+    },
+    {
+      "url": "https://cdnsm5-hosted.civiclive.com/UserFiles/Servers/Server_11045935/File/Business/Building%20&%20Construction/Permit%20Center/Fact%20Sheets%20and%20Fee%20Tables/Required%20Permits%20for%20Single%20Family%20Residences.pdf",
+      "title": "https://cdnsm5-hosted.civiclive.com/UserFiles/Servers/Server_11045935/File/Business/Building%20&%20Construction/Permit%20Center/Fact%20Sheets%20and%20Fee%20Tables/Required%20Permits%20for%20Single%20Family%20Residences.pdf",
+      "retrieved": "2026-11-14",
+      "http_status": 200,
+      "supports": "When Are Permits Required (Residential), effective February 1, 2021: interior remodels require permit; exterior doors, windows and skylights requiring new opening or in Airport Noise Zone 1 require permit; painting, papering, tiling, carpeting, cabinets, countertops exempt; most nonstructural siding replacement exempt; call City Hall if unsure"
+    },
+    {
+      "url": "https://doh.wa.gov/community-and-environment/contaminants/lead",
+      "title": "https://doh.wa.gov/community-and-environment/contaminants/lead",
+      "retrieved": "2026-11-14",
+      "http_status": 200,
+      "supports": "DOH lead page: Lead Safe from the Start questionnaire (parents of child under 6; pregnant people); contact county health department for local services"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "retrieved": "2026-11-14",
+      "http_status": 200,
+      "supports": "State hiring guidance: registration, bids, written contract"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-11-14",
+      "http_status": 200,
+      "supports": "License/bond/insurance lookup"
+    },
+    {
+      "url": "https://trimaco.com/",
+      "title": "https://trimaco.com/",
+      "retrieved": "2026-11-14",
+      "http_status": 200,
+      "supports": "Material: drop cloths, dust barrier systems, heavy duty surface protection, protective films"
+    },
+    {
+      "url": "https://www.3m.com/3M/en_US/respiratory-protection-us/",
+      "title": "https://www.3m.com/3M/en_US/respiratory-protection-us/",
+      "retrieved": "2026-11-14",
+      "http_status": 200,
+      "supports": "Material: disposable and reusable respirators, powered and supplied air systems"
+    },
+    {
+      "url": "https://www.burienwa.gov/business/community_development",
+      "title": "https://www.burienwa.gov/business/community_development",
+      "retrieved": "2026-11-14",
+      "http_status": 200,
+      "supports": "Building Division processes construction, electrical, fire alarm, fire sprinkler, plumbing, mechanical and sign permits"
+    },
+    {
+      "url": "https://www.burienwa.gov/business/community_development/permit_center",
+      "title": "https://www.burienwa.gov/business/community_development/permit_center",
+      "retrieved": "2026-11-14",
+      "http_status": 200,
+      "supports": "Permit Center: intake, review, tracking, issuing permits; Planning, Building, Public Works staff; MyBuildingPermit paperless portal; in-person Mon-Thu 9-noon; phone/email Mon-Thu 9-4; closed Fridays and noon-1 daily; 400 SW 152nd St Suite 300; (206) 241-4647"
+    },
+    {
+      "url": "https://www.commerce.wa.gov/lead-based-paint/",
+      "title": "https://www.commerce.wa.gov/lead-based-paint/",
+      "retrieved": "2026-11-14",
+      "http_status": 200,
+      "supports": "Commerce Lead-Based Paint programs: training, certification, compliance enforcement; LBPA (inspection, risk assessment, clearance, abatement 20+ years) vs RRP (not intended to permanently remove hazards); RRP needed to offer/bid/contract on pre-1978 residential and child-occupied facilities; remodels, painting, restoration, any paint-disturbing work; RRP certs up to 5 years, LBPA 3 years; LBPInfo@Commerce.wa.gov, 360-586-5323 voicemail"
+    },
+    {
+      "url": "https://www.commerce.wa.gov/lead-based-paint/lbp-training/",
+      "title": "https://www.commerce.wa.gov/lead-based-paint/lbp-training/",
+      "retrieved": "2026-11-14",
+      "http_status": 200,
+      "supports": "Renovator training 8-hour class incl. 2 hours hands-on; required every 5 years; online refreshers valid 3 years every other cycle"
+    },
+    {
+      "url": "https://www.commerce.wa.gov/lead-based-paint/rrp/",
+      "title": "https://www.commerce.wa.gov/lead-based-paint/rrp/",
+      "retrieved": "2026-11-14",
+      "http_status": 200,
+      "supports": "RRP certification paths; firm needs individual RRP-certified employee/owner, cert valid and not within six months of expiration, who supervises or performs work; DOR account, WA business license, SOS registration if applicable, L&I contractor license if applicable; individuals certified via WA-accredited training provider; EPA/other-state certified individuals must register with Commerce"
+    },
+    {
+      "url": "https://www.epa.gov/lead/lead-renovation-repair-and-painting-program",
+      "title": "https://www.epa.gov/lead/lead-renovation-repair-and-painting-program",
+      "retrieved": "2026-11-14",
+      "http_status": 200,
+      "supports": "EPA RRP program (federal) landing page"
+    },
+    {
+      "url": "https://www.epa.gov/lead/renovate-right",
+      "title": "https://www.epa.gov/lead/renovate-right",
+      "retrieved": "2026-11-14",
+      "http_status": 200,
+      "supports": "Renovate Right pamphlet: general information about legal requirements for lead-safe work practices for homeowners, tenants, childcare providers and parents"
+    },
+    {
+      "url": "https://www.epa.gov/lead/renovation-repair-and-painting-program-work-practices",
+      "title": "https://www.epa.gov/lead/renovation-repair-and-painting-program-work-practices",
+      "retrieved": "2026-11-14",
+      "http_status": 200,
+      "supports": "Work practices: containment, prohibition of open-flame and power tools without HEPA exhaust, cleanup and verification; records on job site (renovator certificates); records kept 3 years (designated renovator, test kit/paint chip results, pre-renovation education proof); links Hometime video U-3U1pcSIyg"
+    },
+    {
+      "url": "https://www.milwaukeetool.com/products/power-tools/dust-management",
+      "title": "https://www.milwaukeetool.com/products/power-tools/dust-management",
+      "retrieved": "2026-11-14",
+      "http_status": 200,
+      "supports": "Material: dust extractors and attachments with HEPA filters"
+    },
+    {
+      "url": "https://www.mybuildingpermit.com/",
+      "title": "https://www.mybuildingpermit.com/",
+      "retrieved": "2026-11-14",
+      "http_status": 200,
+      "supports": "MyBuildingPermit portal used by Burien for paperless applications"
+    }
+  ],
+  "dropped": [
+    {
+      "url": "https://kingcounty.gov/en/dept/dph/health-safety/environmental-health/lead-toxics",
+      "reason": "404; DOH lead page used instead"
+    },
+    {
+      "url": "https://www.nilfisk.com/en-us/professional/",
+      "reason": "200 but page did not mention HEPA; not cited"
+    },
+    {
+      "url": "https://www.kleenguard.com/",
+      "reason": "no response to box curl; not cited"
+    },
+    {
+      "url": "https://pscleanair.gov/",
+      "reason": "not cited; asbestos handled by cross-link to 2026-11-11 Everett post"
+    },
+    {
+      "note": "No dollar amounts (Commerce $25 application fee deliberately omitted). Burien Required Permits sheet dated Feb 1, 2021; post says call permit staff if unsure. Minor-repair square-foot thresholds not cited (not in fetched sections)."
+    }
+  ],
+  "notes": "Box curl 2026-11-14 with browser UA and full browser headers. All cited = 200 (see source-status.txt). EPA URLs cited at their final redirect targets."
+}
