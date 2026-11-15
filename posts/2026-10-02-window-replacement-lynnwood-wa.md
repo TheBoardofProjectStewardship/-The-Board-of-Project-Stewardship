@@ -22,6 +22,8 @@ Failed windows show up as winter drafts, uneven room temperatures, and higher he
 
 Curb appeal matters too. Updating window profiles in established Lynnwood neighborhoods can refresh a mid-century ranch or a later contemporary elevation without rewriting the street’s architectural character. For a city-level overview of local context, see the Board’s [Lynnwood](../lynnwood.html) directory. Trade options and glazing vocabulary live in the [windows](../windows.html) directory.
 
+![Aging aluminum windows on a 1970s split-level house in Lynnwood, Washington before window replacement](../assets/images/posts/2026-10-02-lynnwood-split-level-windows-5.webp "Many Lynnwood split-levels still carry original single-pane or early aluminum windows that drive replacement decisions.")
+
 ## Choosing frames and materials for Snohomish County weather
 
 Moisture is the primary longevity stressor for windows in this region.
@@ -46,6 +48,8 @@ In Lynnwood, winter comfort hinges on keeping heat inside and stopping cold brid
 
 None of these features rescue a poorly flashed opening. The wet-season failure mode in Snohomish County is almost always at the interface between window, house wrap, and exterior cladding — not at the glass label alone.
 
+![Close-up of a new double-pane Low-E window sash corner during a Lynnwood window replacement](../assets/images/posts/2026-10-02-lynnwood-low-e-glass-6.webp "Insulated Low-E glass and warm-edge spacers are the energy details to compare on Lynnwood window quotes.")
+
 ## Styles that fit Lynnwood housing stock
 
 Lynnwood’s residential fabric mixes mid-century ranch forms with later contemporary builds. Style should follow function and egress rules, not catalogs alone.
@@ -56,6 +60,8 @@ Lynnwood’s residential fabric mixes mid-century ranch forms with later contemp
 - **Picture windows** — fixed glass for views and daylight; highest thermal performance when there are no operable parts.
 
 Bedroom and basement conversions must meet egress clear opening rules. Changing an opening size to meet egress usually moves the project out of “simple insert” territory and into full permitting.
+
+![Single-story rambler with new white vinyl slider and picture windows in Lynnwood, Washington](../assets/images/posts/2026-10-02-lynnwood-rambler-windows-7.webp "Matching window style to Lynnwood rambler and split-level housing keeps replacements looking original to the house.")
 
 ## Navigating Lynnwood and Snohomish County permits
 
@@ -76,6 +82,8 @@ Confirm city versus county jurisdiction from the tax parcel, not the mailing add
 
 Unpermitted structural or opening changes can stall a future sale or force tear-out after an inspection. A contractor who urges you to skip review on work that clearly changes the opening is signaling the wrong culture for Lynnwood residential work.
 
+![Window schedule and permit paperwork on a clipboard inside a Lynnwood home before window replacement](../assets/images/posts/2026-10-02-lynnwood-permit-review-8.webp "Checking whether a Lynnwood window job needs a permit starts with the window schedule and any opening-size changes.")
+
 ## Installation quality and contractor verification
 
 The highest-spec window still fails if flashing tape, shims, and insulation are wrong. In PNW rain, water that sneaks behind cladding finds the rough opening first. Professional installation levels the unit, shims without distorting the frame, and integrates flashing with the weather-resistive barrier so the wall cavity stays dry.
@@ -83,6 +91,8 @@ The highest-spec window still fails if flashing tape, shims, and insulation are 
 Protect the investment by verifying every firm on [Washington L&I Verify](https://secure.lni.wa.gov/verify/). Registration, bonding, and insurance status are public; a company that cannot be found there may leave the homeowner exposed on injuries or property damage. More Board guidance sits in [verify a contractor](../verify-contractor.html).
 
 https://www.youtube.com/watch?v=s8Rlfs7gZOo
+
+![Sloped sill pan flashing installed in a rough opening during a window replacement in Lynnwood, Washington](../assets/images/posts/2026-10-02-lynnwood-sill-flashing-9.webp "Sill pan flashing and sealed rough openings are what keep Lynnwood rain out of the wall after replacement.")
 
 ## Materials Worth Knowing
 
