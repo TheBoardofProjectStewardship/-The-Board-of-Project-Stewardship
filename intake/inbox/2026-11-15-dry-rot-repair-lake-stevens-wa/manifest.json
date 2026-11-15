@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-11-15-dry-rot-repair-lake-stevens-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-11-15T12:00:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Dry Rot Repair Lake Stevens WA \u2014 Finding Hidden Decay, Permits, Flashing and Lasting Repairs",
+    "date": "2026-11-15",
+    "slug": "dry-rot-repair-lake-stevens-wa",
+    "description": "A Lake Stevens guide to dry rot repair: where decay hides, how to probe and measure moisture, why the water source comes first, when City permits apply, and the flashing and clearance details that make a repair last.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 connected but board-intake inbox had no 2026-11-15 packets at 3:47 AM PT; PC not touched. Topic: dry rot repair in Lake Stevens WA (Snohomish County). Where decay hides (corner trim, fascia, sills, rim joist/sill plate, deck ledger, bath subfloor); probing, moisture meters, opening up; water source first (EPA mold/moisture guide, dry within 24-48 h); FS Wood Handbook. City of Lake Stevens: Planning and Community Development 1812 Main St, (425) 622-9400, permits@; Citizens Connect portal; Ordinance 1160 adds R105.2 exemptions 11 (lightweight reroof <4 psf) and 12 (windows in existing openings); Residential Interior Permit Exemptions sheet (siding repair/replacement, trim, windows in existing openings, painting, drywall holes; exemption doesn't authorize code violations); Residential Inspections Handout (no concealment before approval, weather barrier/window flashing inspection, electrical via L&I); Deck Tip Sheet (permit if >=200 sf, >=30 in, attached, or required exit; PT or decay-resistant wood, end cut solution, SS/HDG fasteners; engineer for ledger over bay windows/brick/stone/CMU, hot tub); owner-builder form (RCW 18.27, city business license). IRC 2021 ch.3 decay protection (8 in framing on foundation; 6 in siding/sheathing/framing to ground, 2 in to slabs) and ch.7 flashing (shingle-fashion at windows/doors, projecting trim, deck attachment); WA adoption 51-51 WAC. Lake Stevens added to _SLUG_PLACES/_PLACE_NAMES (first Lake Stevens daily); lake-stevens.html unchanged (no Nearby guides list). Cross-links: Burien lead-safe 2026-11-14, Auburn crawl space 2026-10-26, Mill Creek deck 2026-11-08, Federal Way bath 2026-11-07. No fee, fine or price figures. Producer role fields kept per intake contract."
+}

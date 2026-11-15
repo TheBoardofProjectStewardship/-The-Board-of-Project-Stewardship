@@ -1,0 +1,151 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Lake Stevens",
+    "service": "Dry rot repair: finding hidden decay, permits, flashing and lasting repairs",
+    "slug": "dry-rot-repair-lake-stevens-wa"
+  },
+  "sources": [
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51",
+      "retrieved": "2026-11-15",
+      "http_status": 200,
+      "supports": "Chapter 51-51 WAC: Washington adoption and amendment of the International Residential Code"
+    },
+    {
+      "url": "https://apps.lakestevenswa.gov/Citizen/Home/LIVE/PERMIT",
+      "title": "https://apps.lakestevenswa.gov/Citizen/Home/LIVE/PERMIT",
+      "retrieved": "2026-11-15",
+      "http_status": 200,
+      "supports": "Citizens Connect permit portal (apply, status, inspections)"
+    },
+    {
+      "url": "https://codes.iccsafe.org/content/IRC2021P2/chapter-3-building-planning",
+      "title": "https://codes.iccsafe.org/content/IRC2021P2/chapter-3-building-planning",
+      "retrieved": "2026-11-15",
+      "http_status": 200,
+      "supports": "2021 IRC chapter 3: R317 protection of wood against decay (framing on foundation walls <8 in from exposed ground; siding/sheathing/framing <6 in from ground or <2 in from slabs must be naturally durable or preservative-treated)"
+    },
+    {
+      "url": "https://codes.iccsafe.org/content/IRC2021P2/chapter-7-wall-covering",
+      "title": "https://codes.iccsafe.org/content/IRC2021P2/chapter-7-wall-covering",
+      "retrieved": "2026-11-15",
+      "http_status": 200,
+      "supports": "2021 IRC chapter 7: R703.4 flashing, approved corrosion-resistant, shingle-fashion, at window/door openings, above projecting wood trim, where porches/decks/stairs attach to wood-frame wall or floor, wall-roof intersections"
+    },
+    {
+      "url": "https://nisuscorp.com/",
+      "title": "https://nisuscorp.com/",
+      "retrieved": "2026-11-15",
+      "http_status": 200,
+      "supports": "Material: Nisus borate wood preservatives and wood protection"
+    },
+    {
+      "url": "https://research.fs.usda.gov/treesearch/62200",
+      "title": "https://research.fs.usda.gov/treesearch/62200",
+      "retrieved": "2026-11-15",
+      "http_status": 200,
+      "supports": "Forest Products Laboratory Wood Handbook (FPL-GTR-282, 2021): chapters on moisture content, biodeterioration of wood, wood preservatives"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-11-15",
+      "http_status": 200,
+      "supports": "License/bond/insurance lookup"
+    },
+    {
+      "url": "https://versatex.com/",
+      "title": "https://versatex.com/",
+      "retrieved": "2026-11-15",
+      "http_status": 200,
+      "supports": "Material: cellular PVC trimboard, corners, soffit, mouldings"
+    },
+    {
+      "url": "https://www.epa.gov/mold/brief-guide-mold-moisture-and-your-home",
+      "title": "https://www.epa.gov/mold/brief-guide-mold-moisture-and-your-home",
+      "retrieved": "2026-11-15",
+      "http_status": 200,
+      "supports": "Key to mold control is moisture control; fix the water problem; dry water-damaged areas within 24-48 hours"
+    },
+    {
+      "url": "https://www.lakestevenswa.gov/158/Permit-Center",
+      "title": "https://www.lakestevenswa.gov/158/Permit-Center",
+      "retrieved": "2026-11-15",
+      "http_status": 200,
+      "supports": "Permit Center: Citizens Connect to apply online, active permits, schedule inspections; permits@lakestevenswa.gov; Ordinance 1160 link; handouts"
+    },
+    {
+      "url": "https://www.lakestevenswa.gov/DocumentCenter/View/13059/1160-Building-Construction-and-Fire-Code-Amendment",
+      "title": "https://www.lakestevenswa.gov/DocumentCenter/View/13059/1160-Building-Construction-and-Fire-Code-Amendment",
+      "retrieved": "2026-11-15",
+      "http_status": 200,
+      "supports": "Ordinance 1160 amending LSMC 14.80 to comply with state adoption of 2021 codes (effective March 15, 2024); IRC R105.2 additions: item 11 lightweight roof covering <4 psf, item 12 replacement of exterior windows in existing openings"
+    },
+    {
+      "url": "https://www.lakestevenswa.gov/DocumentCenter/View/13293/DRAFT_InteriorWorkExempt",
+      "title": "https://www.lakestevenswa.gov/DocumentCenter/View/13293/DRAFT_InteriorWorkExempt",
+      "retrieved": "2026-11-15",
+      "http_status": 200,
+      "supports": "Residential Interior Permit Exemptions (approved 12/2022): painting, papering, tiling, carpeting, cabinets, countertops, drywall holes, trim around windows/doors; windows in existing openings (size/operable opening not altered or decreased); repair or replacement of siding; interior doors; clearing drain blocks/leaks; exemption does not authorize code violations; Planning and Community Development 1812 Main St, (425) 622-9400, permits@lakestevenswa.gov"
+    },
+    {
+      "url": "https://www.lakestevenswa.gov/DocumentCenter/View/13297/DRAFT_Residential-Inspections-Handout",
+      "title": "https://www.lakestevenswa.gov/DocumentCenter/View/13297/DRAFT_Residential-Inspections-Handout",
+      "retrieved": "2026-11-15",
+      "http_status": 200,
+      "supports": "Permit holder requests inspections; no work beyond each inspection point without approval; unapproved portions not covered or concealed; inspection card and plans on site; electrical permits and inspections via L&I; weather barrier/window flashing inspection after windows installed with flashing and weather barrier complete"
+    },
+    {
+      "url": "https://www.lakestevenswa.gov/DocumentCenter/View/15163/Handout_Deck_Tip-Sheet",
+      "title": "https://www.lakestevenswa.gov/DocumentCenter/View/15163/Handout_Deck_Tip-Sheet",
+      "retrieved": "2026-11-15",
+      "http_status": 200,
+      "supports": "Deck permit if >=200 sf, >=30 in above grade, attached to dwelling, or serves required exit (2021 IRC w/ WA amendments); all wood PT or naturally decay resistant, treat cuts with end cut solution; fasteners SS/HDG or as required for preservative; design professional when ledger over bay windows, brick, stone, CMU or hot tub"
+    },
+    {
+      "url": "https://www.lakestevenswa.gov/DocumentCenter/View/16095/ST_Requirements_Acting-Contractor-4-21-26",
+      "title": "https://www.lakestevenswa.gov/DocumentCenter/View/16095/ST_Requirements_Acting-Contractor-4-21-26",
+      "retrieved": "2026-11-15",
+      "http_status": 200,
+      "supports": "Owner-builder form: RCW 18.27 licensed contractor required unless exempt (RCW 18.27.090); owner-builder liability for unlicensed workers' injuries; owner verifies contractor state license and City of Lake Stevens business license"
+    },
+    {
+      "url": "https://www.lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "https://www.lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "retrieved": "2026-11-15",
+      "http_status": 200,
+      "supports": "State hiring guidance: registration, bids, written contract"
+    },
+    {
+      "url": "https://www.protimeter.com/",
+      "title": "https://www.protimeter.com/",
+      "retrieved": "2026-11-15",
+      "http_status": 200,
+      "supports": "Material: professional moisture meters and hygrometers for hidden moisture"
+    },
+    {
+      "url": "https://www.westlakeroyalbuildingproducts.com/siding-and-accessories/truexterior",
+      "title": "https://www.westlakeroyalbuildingproducts.com/siding-and-accessories/truexterior",
+      "retrieved": "2026-11-15",
+      "http_status": 200,
+      "supports": "Material: TruExterior poly-ash siding and trim; resists moisture, bugs, ground contact (maker claim)"
+    }
+  ],
+  "dropped": [
+    {
+      "url": "https://extension.psu.edu/wood-decay-fungi-in-homes",
+      "reason": "404"
+    },
+    {
+      "url": "https://www.abatron.com/",
+      "reason": "redirects to a different brand site; not cited"
+    },
+    {
+      "url": "https://www.delmhorst.com/",
+      "reason": "406 to curl; not cited"
+    }
+  ],
+  "notes": "Box curl 2026-11-15 with browser UA and full browser headers. All cited = 200 (see source-status.txt). ICC code chapter pages render text client-side; requirements stated from the 2021 IRC sections R317.1 and R703.4."
+}
