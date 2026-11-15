@@ -1,0 +1,25 @@
+{
+  "submission_id": "2026-11-15-dry-rot-repair-lake-stevens-wa",
+  "idempotency_key": "sha256:7003bd5adb3781925583b07778b01e9d9f8b5865d2b43865353e3bf123218901",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-11-15T11:52:42Z",
+  "outputs": [
+    "assets/images/posts/2026-11-15-lake-stevens-dry-rot-1.webp",
+    "assets/images/posts/2026-11-15-lake-stevens-dry-rot-2.webp",
+    "assets/images/posts/2026-11-15-lake-stevens-dry-rot-3.webp",
+    "assets/images/posts/2026-11-15-lake-stevens-dry-rot-4.webp",
+    "assets/images/posts/2026-11-15-lake-stevens-dry-rot-5.webp",
+    "assets/images/posts/2026-11-15-lake-stevens-dry-rot-6.webp",
+    "assets/images/posts/2026-11-15-lake-stevens-dry-rot-7.webp",
+    "assets/images/posts/2026-11-15-lake-stevens-dry-rot-8.webp",
+    "assets/images/posts/2026-11-15-lake-stevens-dry-rot-9.webp",
+    "posts/2026-11-15-dry-rot-repair-lake-stevens-wa.md",
+    "posts/2026-11-15-dry-rot-repair-lake-stevens-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 103
+}
