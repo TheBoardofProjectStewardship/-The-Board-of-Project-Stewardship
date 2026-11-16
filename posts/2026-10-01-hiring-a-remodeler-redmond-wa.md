@@ -24,6 +24,8 @@ When you define goals, keep the Eastside architectural context in view. Whether 
 
 Budgeting for a King County remodel means building a range with contingency for unforeseen conditions. In older Redmond homes those conditions often include wiring, soft subfloor, or framing surprises that only appear after demo. Ask every bidder how allowances and change orders work in writing. Do not invent a single “market average” number; compare line-item scopes instead.
 
+![Remodel wish list, tape measure and floor sketch on a kitchen island in a Redmond, Washington home](../assets/images/posts/2026-10-01-redmond-remodel-planning-5.webp "Writing down goals and a working budget before calling Redmond remodelers makes bids easier to compare.")
+
 ## How to vet remodeling contractors in Redmond
 
 The vetting process is the core of project stewardship. A polished website does not protect your property — registration, bonding, and insurance do. The Board of Project Stewardship recommends a multi-step check every homeowner can run without special software.
@@ -52,6 +54,8 @@ Electrical, mechanical, and plumbing often travel as separate trade permits even
 
 Skipping permits to “save time” is not a shortcut. Unpermitted work can mean stop-work orders, tear-out, and sale complications later. A contractor who pressures you to bypass review is signaling the wrong culture for Redmond residential work.
 
+![Residential remodel permit drawings rolled out on a table inside a Redmond, Washington house](../assets/images/posts/2026-10-01-redmond-permit-review-6.webp "Redmond remodel permits start with clear drawings and a scope that matches what the city's residential permit pages describe.")
+
 ## Red flags during the bidding phase
 
 Cross-check the Board’s [red flags when hiring](../red-flags-hiring.html) directory. Slow down or walk away when you see:
@@ -64,6 +68,8 @@ Cross-check the Board’s [red flags when hiring](../red-flags-hiring.html) dire
 
 Portfolio photos do not override a bad registration. Always re-check [L&I Verify](https://secure.lni.wa.gov/verify/) yourself.
 
+![Several remodeling bids laid side by side for comparison in a Redmond, Washington home office](../assets/images/posts/2026-10-01-redmond-bid-comparison-7.webp "Comparing written Redmond remodel bids line by line exposes missing scope and unexplained low numbers.")
+
 ## Fixed-price versus cost-plus contracts
 
 Contract structure should match how much certainty you need versus how much finish flexibility you want.
@@ -74,11 +80,15 @@ Contract structure should match how much certainty you need versus how much fini
 
 Neither structure replaces license checks or a detailed scope. Pick the form that matches your risk tolerance, then still demand written exclusions, allowance language, and retainage for punch list and final inspection.
 
+![Remodeling contract and change-order form on a dining table in a Redmond, Washington home](../assets/images/posts/2026-10-01-redmond-contract-review-8.webp "Whether a Redmond remodel is fixed-price or cost-plus, the contract should spell out allowances and change-order rules.")
+
 ## Timeline expectations for Redmond renovations
 
 Eastside timelines bend around three realities. First, City of Redmond plan review duration depends on application completeness and current volume — build float into the schedule instead of promising a start date before first comments clear. Second, the wet season affects exterior work: siding, roofing, and deck milestones need weather windows, while interior trades can continue under a dry envelope. Third, long-lead items such as custom windows or cabinetry set the critical path; a project moves only as fast as its slowest ordered component.
 
 Ask for a schedule that names which tasks must finish before others begin, who owns permit corrections, and how rain delays are communicated. Vague “eight weeks” promises without a critical path are not a plan.
+
+![Interior remodel in progress with new drywall and protected floors in a Redmond, Washington house](../assets/images/posts/2026-10-01-redmond-remodel-progress-9.webp "Redmond renovation timelines depend on permit review, inspections and the order trades move through the house.")
 
 ## Process video: hiring a contractor for a home renovation
 
