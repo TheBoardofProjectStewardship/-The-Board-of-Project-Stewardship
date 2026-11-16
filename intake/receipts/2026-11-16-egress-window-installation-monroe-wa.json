@@ -1,0 +1,25 @@
+{
+  "submission_id": "2026-11-16-egress-window-installation-monroe-wa",
+  "idempotency_key": "sha256:f1fd394005a32608045d74108b02039dac480626f774d5e6e0205125d3b34f88",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-11-16T11:50:19Z",
+  "outputs": [
+    "assets/images/posts/2026-11-16-monroe-egress-window-1.webp",
+    "assets/images/posts/2026-11-16-monroe-egress-window-2.webp",
+    "assets/images/posts/2026-11-16-monroe-egress-window-3.webp",
+    "assets/images/posts/2026-11-16-monroe-egress-window-4.webp",
+    "assets/images/posts/2026-11-16-monroe-egress-window-5.webp",
+    "assets/images/posts/2026-11-16-monroe-egress-window-6.webp",
+    "assets/images/posts/2026-11-16-monroe-egress-window-7.webp",
+    "assets/images/posts/2026-11-16-monroe-egress-window-8.webp",
+    "assets/images/posts/2026-11-16-monroe-egress-window-9.webp",
+    "posts/2026-11-16-egress-window-installation-monroe-wa.md",
+    "posts/2026-11-16-egress-window-installation-monroe-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 104
+}
