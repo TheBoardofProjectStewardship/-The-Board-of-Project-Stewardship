@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-11-16-egress-window-installation-monroe-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-11-16T12:00:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Egress Window Installation Monroe WA \u2014 Bedroom Escape Openings, Window Wells, Permits and Inspections",
+    "date": "2026-11-16",
+    "slug": "egress-window-installation-monroe-wa",
+    "description": "A Monroe guide to basement egress windows: when an escape opening is required, why cutting a foundation wall needs a City remodel permit, window wells, drainage, flashing, utility locates, inspections and hiring.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 board-intake inbox had no 2026-11-16 packets at 3:47 AM PT (per parent); PC not touched. Topic: basement egress window installation in Monroe WA (Snohomish County). WAC 51-51-03100 (WA amended R310.1: basements, habitable attics, every sleeping room; each basement sleeping room; 36 in path; exceptions; R310.2.4 under decks 36x36, <=60 in; R310.5 not adopted). 2021 IRC R310 figures (5.7 sf, 5 sf grade floor, 24 in h, 20 in w, 44 in sill, well 9 sf / 36 in, ladder >44 in deep, 6 in encroachment, cover R310.4.4). City of Monroe: When Do I Need a Permit (widening/changing window frame -> residential remodel permit; electrical via L&I); Residential Addition/Remodel checklist (site plan, plans, RDP form, structural calcs if applicable, WSEC, L&I license; SDC D1/D2, 18 in frost depth; WAC title 51 as amended by MMC Title 15); Window Replacement checklist; Permit Center 806 W Main St, 360-863-4501; Online Permits/portal monroe.onlama.com; Building Division inspections (online, M-F, by 4 pm likely next business day; electrical via L&I). Washington 811 locate. IRC ch.7 flashing. Monroe added to _SLUG_PLACES/_PLACE_NAMES (first Monroe daily); monroe.html unchanged. Cross-links: Kenmore drainage 2026-10-27, Renton basement 2026-10-14. No fee, fine or price figures. Producer role fields kept per intake contract."
+}

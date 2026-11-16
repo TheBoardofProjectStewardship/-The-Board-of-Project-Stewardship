@@ -1,0 +1,158 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Monroe",
+    "service": "Basement egress window installation: escape openings, window wells, permits and inspections",
+    "slug": "egress-window-installation-monroe-wa"
+  },
+  "sources": [
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51",
+      "retrieved": "2026-11-16",
+      "http_status": 200,
+      "supports": "Chapter 51-51 WAC: Washington adoption and amendment of the International Residential Code"
+    },
+    {
+      "url": "https://apps.leg.wa.gov/wac/default.aspx?cite=51-51-03100",
+      "title": "https://apps.leg.wa.gov/wac/default.aspx?cite=51-51-03100",
+      "retrieved": "2026-11-16",
+      "http_status": 200,
+      "supports": "WAC 51-51-03100: WA amended R310.1 (basements, habitable attics, every sleeping room; each basement sleeping room; 36 in path to public way; exceptions incl. 200 sf mechanical basements and P2904 sprinklers; gates and R310.4.4 covers not obstructions); R310.2.4 under decks/porches/cantilevers (36 in high, 36 in wide, <=60 in long); R310.5 not adopted"
+    },
+    {
+      "url": "https://codes.iccsafe.org/content/IRC2021P2/chapter-3-building-planning",
+      "title": "https://codes.iccsafe.org/content/IRC2021P2/chapter-3-building-planning",
+      "retrieved": "2026-11-16",
+      "http_status": 200,
+      "supports": "2021 IRC chapter 3: R310 emergency escape and rescue openings (5.7 sf net clear, 5 sf grade floor; 24 in height, 20 in width; sill <=44 in; operable without keys/tools; area wells 9 sf, 36 in; ladder >44 in deep, 6 in encroachment; R310.4.4 covers)"
+    },
+    {
+      "url": "https://codes.iccsafe.org/content/IRC2021P2/chapter-7-wall-covering",
+      "title": "https://codes.iccsafe.org/content/IRC2021P2/chapter-7-wall-covering",
+      "retrieved": "2026-11-16",
+      "http_status": 200,
+      "supports": "2021 IRC chapter 7: R703.4 flashing, approved corrosion-resistant, shingle-fashion, at window openings"
+    },
+    {
+      "url": "https://monroe.onlama.com/",
+      "title": "https://monroe.onlama.com/",
+      "retrieved": "2026-11-16",
+      "http_status": 200,
+      "supports": "City of Monroe permit portal (submittal per City checklists)"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-11-16",
+      "http_status": 200,
+      "supports": "License/bond/insurance lookup"
+    },
+    {
+      "url": "https://www.bilco.com/scapewel-egress-window-wells",
+      "title": "https://www.bilco.com/scapewel-egress-window-wells",
+      "retrieved": "2026-11-16",
+      "http_status": 200,
+      "supports": "Material: Bilco ScapeWel molded egress window wells with built-in steps"
+    },
+    {
+      "url": "https://www.lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "https://www.lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "retrieved": "2026-11-16",
+      "http_status": 200,
+      "supports": "State hiring guidance: registration, bids, written contract"
+    },
+    {
+      "url": "https://www.lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/",
+      "title": "https://www.lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/",
+      "retrieved": "2026-11-16",
+      "http_status": 200,
+      "supports": "L&I electrical permits, fees and inspections"
+    },
+    {
+      "url": "https://www.monroewa.gov/1330/Online-Permits",
+      "title": "https://www.monroewa.gov/1330/Online-Permits",
+      "retrieved": "2026-11-16",
+      "http_status": 200,
+      "supports": "Online Permits: building applications accepted through portal; track status; request inspections online"
+    },
+    {
+      "url": "https://www.monroewa.gov/342/Submittal-Requirements",
+      "title": "https://www.monroewa.gov/342/Submittal-Requirements",
+      "retrieved": "2026-11-16",
+      "http_status": 200,
+      "supports": "When Do I Need a Permit?: no permit to replace glass in existing frame; widening or changing a window frame requires a residential remodel permit; electrical permits through L&I; Permit Division 360-863-4501"
+    },
+    {
+      "url": "https://www.monroewa.gov/637/Building",
+      "title": "https://www.monroewa.gov/637/Building",
+      "retrieved": "2026-11-16",
+      "http_status": 200,
+      "supports": "Building Division: online inspection requests; inspections M-F business hours; online request by 4 p.m. likely next business day; no inspections on observed holidays; electrical permits and inspections from L&I"
+    },
+    {
+      "url": "https://www.monroewa.gov/745/Residential-Building-Permits",
+      "title": "https://www.monroewa.gov/745/Residential-Building-Permits",
+      "retrieved": "2026-11-16",
+      "http_status": 200,
+      "supports": "Residential submittal checklists: New/Addition/Remodel, Window Replacement, etc."
+    },
+    {
+      "url": "https://www.monroewa.gov/93/Permitting",
+      "title": "https://www.monroewa.gov/93/Permitting",
+      "retrieved": "2026-11-16",
+      "http_status": 200,
+      "supports": "Permit Center 806 W Main St; Development Review Services (360) 863-4501; online permitting from March 23, 2026; 2021 codes effective March 15, 2024"
+    },
+    {
+      "url": "https://www.monroewa.gov/DocumentCenter/View/17942/Residential-Window-Replacement",
+      "title": "https://www.monroewa.gov/DocumentCenter/View/17942/Residential-Window-Replacement",
+      "retrieved": "2026-11-16",
+      "http_status": 200,
+      "supports": "Residential Window Replacement checklist: window schedule (size, operation, U-factor, location), L&I license copy if applicable"
+    },
+    {
+      "url": "https://www.monroewa.gov/DocumentCenter/View/17943/Residential---New-Addition-or-Remodel",
+      "title": "https://www.monroewa.gov/DocumentCenter/View/17943/Residential---New-Addition-or-Remodel",
+      "retrieved": "2026-11-16",
+      "http_status": 200,
+      "supports": "Residential Addition/Remodel checklist: site plan, house plans (elevations, foundation, floor), RDP form, structural calcs (if applicable), WSEC checklist, L&I license copy; WAC title 51 as amended by MMC Title 15; SDC D1/D2, frost depth 18 in"
+    },
+    {
+      "url": "https://www.sika.com/",
+      "title": "https://www.sika.com/",
+      "retrieved": "2026-11-16",
+      "http_status": 200,
+      "supports": "Material: Sika sealants, waterproofing and concrete repair products"
+    },
+    {
+      "url": "https://www.stihlusa.com/en",
+      "title": "https://www.stihlusa.com/en",
+      "retrieved": "2026-11-16",
+      "http_status": 200,
+      "supports": "Material: STIHL cut-off saws for concrete and masonry"
+    },
+    {
+      "url": "https://www.washington811.com/",
+      "title": "https://www.washington811.com/",
+      "retrieved": "2026-11-16",
+      "http_status": 200,
+      "supports": "Washington 811: call 811 / locate request before digging"
+    }
+  ],
+  "dropped": [
+    {
+      "url": "https://www.monroewa.gov/347/Inspection-Requests",
+      "reason": "404; used /637/Building instead"
+    },
+    {
+      "url": "https://www.rockwellwindowwells.com/",
+      "reason": "no response to curl; not cited"
+    },
+    {
+      "url": "https://www.stihlusa.com/en/products/cut-off-machines",
+      "reason": "404; homepage cited"
+    }
+  ],
+  "notes": "Box curl 2026-11-16 with browser UA and full browser headers. All cited = 200 (see source-status.txt). ICC code chapter pages render text client-side; R310 figures stated from 2021 IRC R310 text (cross-checked against a Washington city's published R310 handout); WA amendments verified from WAC 51-51-03100 text."
+}
