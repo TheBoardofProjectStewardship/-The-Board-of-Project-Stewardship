@@ -54,6 +54,7 @@ Base: `https://boardofprojectstewardship.com/`
 | `blog/rss.xml` | Blog RSS feed |
 | `news/rss.xml` | News RSS feed |
 | `404.html` | Branded Board 404 |
+| `posts/2026-11-17-driveway-replacement-bothell-wa.html` | Driveway Replacement Bothell WA — Right-of-Way Permits, Curb Cuts, Drainage and Concrete Done Right |
 | `posts/2026-11-16-egress-window-installation-monroe-wa.html` | Egress Window Installation Monroe WA — Bedroom Escape Openings, Window Wells, Permits and Inspections |
 | `posts/2026-11-15-dry-rot-repair-lake-stevens-wa.html` | Dry Rot Repair Lake Stevens WA — Finding Hidden Decay, Permits, Flashing and Lasting Repairs |
 | `posts/2026-11-14-lead-safe-remodeling-burien-wa.html` | Lead-Safe Remodeling Burien WA — Pre-1978 Homes, RRP Certified Firms, Permits and Cleanup Verification |

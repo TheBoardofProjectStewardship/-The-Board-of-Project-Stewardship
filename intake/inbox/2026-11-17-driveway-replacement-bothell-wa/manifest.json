@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-11-17-driveway-replacement-bothell-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-11-17T12:00:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Driveway Replacement Bothell WA \u2014 Right-of-Way Permits, Curb Cuts, Drainage and Concrete Done Right",
+    "date": "2026-11-17",
+    "slug": "driveway-replacement-bothell-wa",
+    "description": "A Bothell guide to replacing a concrete driveway: the City right-of-way permit for the apron and curb cut, hard-surface and stormwater rules, utility locates, base, joints and curing in wet weather, permeable options and how to hire.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 board-intake inbox had no 2026-11-17 packets (per parent); PC not touched. Topic: concrete driveway replacement in Bothell WA (first driveway daily). City of Bothell: Right-of-Way permit info sheet T (ROW invasion permit for driveway approaches; new driveways and paved-surface cuts = major; 5-year paved street cut rule; bond, COI naming City, state contractor license, City business license; job start inspection; site precon for major one week prior); ROW checklist 47 (MyBuildingPermit; plan items; MUTCD traffic control); Permit Center (online only via MyBuildingPermit; 425-806-6400; permits@bothellwa.gov; inspections via permits.bothellwa.gov); Design and Construction Standards ch.3 (16 ft approach per single ownership, Table 3-1 widths, 20 ft safety island, 4 ft from curb return, 15% max grade, no encroachment, park entirely on private property; 3-18 Class 3000, slump <=3 in, apron 6 in min over 4 in CSTC 95% MDD, inspector approval, center expansion joint >15 ft wide, full curb and gutter removal, 6 ft curb between adjacent-lot driveways, neighbor co-sign; sidewalk joints 10 ft expansion / 1/4 depth control on 5 ft; rain cover; WSDOT/APWA curing; longitudinal broom at driveway crossings; no calcium chloride); ch.4 storm drainage (KCSWDM adopted; service area = city limits; 5,000 sf / 50% target surfaces language; Sammamish River quarter-mile infiltration; landslide hazard; pervious pavement not in ROW without deviation; permeable pavement roadway sections, 3,000 psi; LID performance testing; plastic grid pavers; wheel strips; backwater valves); SF building permit checklist (hard surface calc, driveway grade <15%, garage/curb elevations); grading checklist 40; Washington 811 (RCW 19.122). Bothell already in _SLUG_PLACES/_PLACE_NAMES; generate_site.py unchanged; bothell.html unchanged. Cross-links: Kenmore drainage 2026-10-27, Bothell heat pump 2026-10-18. No fee, bond, price figures. Producer role fields kept per intake contract."
+}
