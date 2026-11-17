@@ -22,6 +22,8 @@ Whether the house faces the lake, sits back toward Ballinger Way, or nestles und
 
 Tree permits and outdoor work can touch a bath project even when the wet room itself is interior-only. Exterior exhaust terminations, roof penetrations for fans, and temporary construction access sometimes interact with the City’s tree and right-of-way rules. Put those constraints in the proposal so they are not discovered after rough-in is underway. Cross-check the Board’s [plumber](../plumber.html) and [electrician](../electrician.html) directories when fixture moves and circuit work share the same critical path, and [tile](../tile.html) when wet-zone assemblies drive the schedule. Local context pages for [Lake Forest Park](../lake-forest-park.html) and the broader [King County](../king-county.html) notes help when you are comparing nearby jurisdictions — but your lot still follows City of Lake Forest Park rules.
 
+![Quiet bathroom exhaust fan and ducting above a remodeled shower in a Lake Forest Park, Washington home](../assets/images/posts/2026-09-30-lake-forest-park-bath-ventilation-5.webp "In wooded, damp Lake Forest Park lots, a properly ducted bath fan matters as much as the finishes.")
+
 ## Climate, moisture, and the City permit path
 
 Western Washington bathrooms live with cool outdoor air and long damp seasons. Lake Forest Park is less wind-driven than an Edmonds bluff lot, but winter humidity, slow-drying grout, and fans that dump into attics still show up as soft drywall and failed caulk long before finishes look dated. Prefer continuous waterproofing in the wet zone, correct slope to the drain, and exhaust terminated outdoors with a quiet, appropriately rated fan. Fancy finishes cannot compensate for a pan that ponds or a niche that was never banded into the membrane.
@@ -65,6 +67,8 @@ Manufacturer product pages for wet-area assemblies and fixtures when you compare
 - [Kohler](https://www.kohler.com/en) — bath fixtures and related trim often specified when lavatory, toilet, and shower clearances must match the layout
 - [Delta Faucet](https://www.deltafaucet.com/) — bath faucet and shower trim systems commonly compared when valve walls and finish kits are redesigned
 
+![Porcelain wall tile and a linear shower drain in a remodeled Lake Forest Park, Washington bathroom](../assets/images/posts/2026-09-30-lake-forest-park-bath-tile-6.webp "Porcelain tile and a sloped, waterproofed shower floor are common choices for Lake Forest Park bathroom remodels.")
+
 ## FAQ
 
 **Does Lake Forest Park still accept paper building plans in person?**  
@@ -85,9 +89,13 @@ Normalize permit ownership (City iWorQ vs L&I electrical), waterproofing product
 **Where should I shortlist contractors?**  
 Use the Board’s [bathroom directory](../bathrooms.html), interview two or three licensed firms, request written scopes, and verify each at [L&I Verify](https://secure.lni.wa.gov/verify/).
 
+![New double vanity and mirror lighting in a Lake Forest Park, Washington bathroom remodel](../assets/images/posts/2026-09-30-lake-forest-park-bath-vanity-7.webp "Vanity, lighting and storage decisions shape how a Lake Forest Park bathroom remodel works day to day.")
+
 ## Lake Forest Park vs Shoreline, Kenmore, and Edmonds bath scopes
 
 Neighboring Shoreline and Kenmore share King County climate patterns but not the same portal. Lake Forest Park homeowners should plan for **iWorQ** plus a separate **L&I electrical** path, with payment and inspection timing called out in writing. Homes closer to Puget Sound take more wind-driven wetting on the exterior envelope; canopy-heavy Lake Forest Park lots still see the cool, damp climate that slows drying inside wet rooms. Ask firms that also work Edmonds or Seattle how their membrane, curb, and exhaust details change when the job sits under mature trees with tight staging — the honest answer is usually detailing, portal ownership, and sequencing, not a one-size coastal package.
+
+![Bathroom gutted to the subfloor and wall studs during a remodel in a Lake Forest Park, Washington house](../assets/images/posts/2026-09-30-lake-forest-park-bath-subfloor-8.webp "Opening a Lake Forest Park bathroom to the studs shows whether subfloor, framing or plumbing need repair first.")
 
 ## Putting it together for homeowners
 
@@ -98,3 +106,5 @@ When you interview firms, ask them to walk a recent King County bath chronologic
 Use the Board directories as a starting shortlist — especially [bathrooms](../bathrooms.html) and [Lake Forest Park](../lake-forest-park.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [https://pacificprogroup.com/](https://pacificprogroup.com/) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, allowance logs, iWorQ permit numbers, L&I electrical records if any, inspection results, product cut sheets, and dated photos of hidden membranes before tile closes. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
+
+![Finished walk-in shower with glass panel and tile niche in a Lake Forest Park, Washington bathroom](../assets/images/posts/2026-09-30-lake-forest-park-bath-finished-9.webp "A finished Lake Forest Park bathroom remodel with a tiled niche and glass shower panel.")
