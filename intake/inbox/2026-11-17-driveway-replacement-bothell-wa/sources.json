@@ -1,0 +1,155 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Bothell",
+    "service": "Concrete driveway replacement: right-of-way permits, curb cuts, drainage and concrete",
+    "slug": "driveway-replacement-bothell-wa"
+  },
+  "sources": [
+    {
+      "url": "https://abtdrains.com/",
+      "title": "https://abtdrains.com/",
+      "retrieved": "2026-11-17",
+      "http_status": 200,
+      "supports": "Material: ABT trench drain systems"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "retrieved": "2026-11-17",
+      "http_status": 200,
+      "supports": "State hiring guidance: registration, bids, written contract"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-11-17",
+      "http_status": 200,
+      "supports": "License/bond/insurance lookup"
+    },
+    {
+      "url": "https://unilock.com/",
+      "title": "https://unilock.com/",
+      "retrieved": "2026-11-17",
+      "http_status": 200,
+      "supports": "Material: Unilock hardscape pavers incl. permeable pavers"
+    },
+    {
+      "url": "https://www.bothellwa.gov/337/Permit-Center",
+      "title": "https://www.bothellwa.gov/337/Permit-Center",
+      "retrieved": "2026-11-17",
+      "http_status": 200,
+      "supports": "Permit Center: applications online only via MyBuildingPermit.com; 425-806-6400; permits@bothellwa.gov; inspection scheduling at permits.bothellwa.gov; electrical permits via L&I"
+    },
+    {
+      "url": "https://www.bothellwa.gov/353/Bothell-Standards",
+      "title": "https://www.bothellwa.gov/353/Bothell-Standards",
+      "retrieved": "2026-11-17",
+      "http_status": 200,
+      "supports": "Bothell Standards page: City adopted 2021 KCSWDM (amended 2024) as amended by ch.4; links to King County RainScapes and Snohomish County RainScaping"
+    },
+    {
+      "url": "https://www.bothellwa.gov/393/Applications-Forms",
+      "title": "https://www.bothellwa.gov/393/Applications-Forms",
+      "retrieved": "2026-11-17",
+      "http_status": 200,
+      "supports": "Applications and Forms: submittal checklists incl. ROW, grading, example site plan"
+    },
+    {
+      "url": "https://www.bothellwa.gov/DocumentCenter/View/16794",
+      "title": "https://www.bothellwa.gov/DocumentCenter/View/16794",
+      "retrieved": "2026-11-17",
+      "http_status": 200,
+      "supports": "Example site plan (City of Bothell)"
+    },
+    {
+      "url": "https://www.bothellwa.gov/DocumentCenter/View/18694/Chapter-3---Streets-and-Related-Work",
+      "title": "https://www.bothellwa.gov/DocumentCenter/View/18694/Chapter-3---Streets-and-Related-Work",
+      "retrieved": "2026-11-17",
+      "http_status": 200,
+      "supports": "Design and Construction Standards ch.3: 3-4.2.6 driveways (16 ft approach, Table 3-1, safety island, corner/curb return, infrastructure, 15% grade, no encroachment, parking on private property); 3-16 sidewalk joints, rain cover, WSDOT/APWA curing, longitudinal broom at driveway crossings, no calcium chloride; 3-18 cement concrete driveway (Class 3000, slump <=3 in, 6 in apron over 4 in CSTC 95% MDD, inspector approval, center expansion joint >15 ft, full curb/gutter removal, 6 ft curb between adjacent-lot driveways, neighbor co-sign)"
+    },
+    {
+      "url": "https://www.bothellwa.gov/DocumentCenter/View/18695/Chapter-4---Storm-Drainage",
+      "title": "https://www.bothellwa.gov/DocumentCenter/View/18695/Chapter-4---Storm-Drainage",
+      "retrieved": "2026-11-17",
+      "http_status": 200,
+      "supports": "Design and Construction Standards ch.4: service area = city limits; KCSWDM adopted; target surfaces 5,000 sf / 50% language; Sammamish River quarter-mile infiltration; landslide hazard areas; pervious pavement not in ROW without deviation; permeable pavement roadway sections and 3,000 psi; LID performance testing; plastic grid pavers; wheel strip driveways; backwater valves"
+    },
+    {
+      "url": "https://www.bothellwa.gov/DocumentCenter/View/2904",
+      "title": "https://www.bothellwa.gov/DocumentCenter/View/2904",
+      "retrieved": "2026-11-17",
+      "http_status": 200,
+      "supports": "Right-of-Way Permits info sheet T: ROW invasion permit for driveway approaches; major activities incl. new driveways and paved-surface cuts; 5-year paved street cut rule; bond, COI naming City, state contractor license, City business license; job start inspection; site precon one week prior for major"
+    },
+    {
+      "url": "https://www.bothellwa.gov/DocumentCenter/View/851/3---Single-Family-Building-Permit-PDF",
+      "title": "https://www.bothellwa.gov/DocumentCenter/View/851/3---Single-Family-Building-Permit-PDF",
+      "retrieved": "2026-11-17",
+      "http_status": 200,
+      "supports": "Single-family building permit checklist: driveway/impervious surfaces with square footage, driveway width, grade under 15%, garage and curb elevations, hard surface coverage calc"
+    },
+    {
+      "url": "https://www.bothellwa.gov/DocumentCenter/View/935",
+      "title": "https://www.bothellwa.gov/DocumentCenter/View/935",
+      "retrieved": "2026-11-17",
+      "http_status": 200,
+      "supports": "Grading permit checklist 40: MyBuildingPermit submittal; contours, drainage channels, plan items"
+    },
+    {
+      "url": "https://www.bothellwa.gov/DocumentCenter/View/945",
+      "title": "https://www.bothellwa.gov/DocumentCenter/View/945",
+      "retrieved": "2026-11-17",
+      "http_status": 200,
+      "supports": "Right-of-Way submittal checklist 47: ROW invasion permit for driveway approaches; plan items (vicinity map, disturbed area, existing utilities, cut dimensions, restoration); MUTCD traffic control; bond/COI/license before issuance"
+    },
+    {
+      "url": "https://www.euclidchemical.com/",
+      "title": "https://www.euclidchemical.com/",
+      "retrieved": "2026-11-17",
+      "http_status": 200,
+      "supports": "Material: Euclid Chemical concrete admixtures and curing compounds"
+    },
+    {
+      "url": "https://www.mybuildingpermit.com/",
+      "title": "https://www.mybuildingpermit.com/",
+      "retrieved": "2026-11-17",
+      "http_status": 200,
+      "supports": "MyBuildingPermit: online permit applications, status and inspection scheduling"
+    },
+    {
+      "url": "https://www.washington811.com/",
+      "title": "https://www.washington811.com/",
+      "retrieved": "2026-11-17",
+      "http_status": 200,
+      "supports": "Washington 811: call 811 / locate request before digging; WA dig law RCW 19.122"
+    },
+    {
+      "url": "https://www.wrmeadows.com/",
+      "title": "https://www.wrmeadows.com/",
+      "retrieved": "2026-11-17",
+      "http_status": 200,
+      "supports": "Material: W. R. Meadows concrete construction products (curing compounds, expansion joint materials)"
+    }
+  ],
+  "dropped": [
+    {
+      "url": "https://bothell.municipal.codes/BMC/17.06",
+      "reason": "403 to box curl; City standards PDFs cited instead"
+    },
+    {
+      "url": "https://www.bothellwa.gov/1129/Stormwater",
+      "reason": "404; ch.4 and Bothell Standards cited"
+    },
+    {
+      "url": "https://www.wackerneuson.com/en-us",
+      "reason": "404; not cited"
+    },
+    {
+      "url": "https://www.washington811.com/faq/",
+      "reason": "404; homepage cited"
+    }
+  ],
+  "notes": "Box curl 2026-11-17 with browser UA and full browser headers. All cited = 200 (see cited-status.txt; two bothellwa.gov pages had a one-off curl timeout and re-checked 200). City PDFs read via pdftotext. No fee, bond amount or price figures quoted."
+}
