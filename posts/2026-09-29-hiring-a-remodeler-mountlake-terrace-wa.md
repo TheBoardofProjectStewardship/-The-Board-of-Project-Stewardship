@@ -24,6 +24,8 @@ Local rules on setbacks, height, and accessory dwelling units (ADUs) affect what
 
 Climate drives the rest. Prolonged wet seasons punish missing flashings, compressed housewrap, and closed rainscreen gaps. Ask bidders to write envelope details into the scope — not as a change-order after demolition.
 
+![Mid-century rambler with a remodel underway on a quiet street in Mountlake Terrace, Washington](../assets/images/posts/2026-09-29-mountlake-terrace-remodel-rambler-5.webp "Many Mountlake Terrace remodels start with a mid-century rambler or split-level that needs updated systems along with new finishes.")
+
 ## Essential questions to ask your potential remodeler
 
 Use the Board of Project Stewardship [hiring a contractor](../hiring-a-contractor.html) checklist, then add Mountlake Terrace specifics:
@@ -47,6 +49,8 @@ Electrical work commonly routes through Washington L&I even when the building pe
 
 An experienced remodeler should own corrections — the city’s request for plan revisions — without leaving the homeowner to guess which file name the portal wants next.
 
+![Remodel permit drawings and a site plan laid out on a kitchen table in a Mountlake Terrace, Washington home](../assets/images/posts/2026-09-29-mountlake-terrace-permit-plans-6.webp "Clear drawings and a site plan help a Mountlake Terrace remodel move through permit review.")
+
 ## The design-build advantage for complex remodels
 
 On larger Mountlake Terrace projects — full interior gut, primary suite, or an addition — design-build often reduces the gap between drawings and buildable cost. In a traditional design-bid-build path, finished plans can still arrive over budget once a builder prices structure, envelope, and mid-century unknowns.
@@ -58,6 +62,8 @@ Design-build keeps design and construction on one team:
 - **Faster coordination** — envelope, structure, and finish decisions move together instead of in serial bid cycles.
 
 That delivery model does not replace license checks or written scopes. It only helps when the same firm still clears L&I Verify and puts moisture and permit work in writing.
+
+![Framing changes for an opened-up kitchen and living area during a design-build remodel in Mountlake Terrace, Washington](../assets/images/posts/2026-09-29-mountlake-terrace-design-build-7.webp "On complex Mountlake Terrace remodels, design and construction decisions such as moving a wall are easier to coordinate under one team.")
 
 ## Red flags when vetting contractors
 
@@ -89,6 +95,8 @@ Surface finishes are the easy line items. Mid-century houses often reveal cost o
 
 Successful bids show allowances for unknowns instead of pretending the first open wall will be clean.
 
+![Written remodel scope and line-item bid sheets on a desk in a Mountlake Terrace, Washington house](../assets/images/posts/2026-09-29-mountlake-terrace-budget-review-8.webp "Comparing written, line-item scopes is the most reliable way to set a realistic Mountlake Terrace remodel budget.")
+
 ## Materials Worth Knowing
 
 Manufacturer pages homeowners and pros often compare when Mountlake Terrace scopes call for better daylighting and tighter openings. No prices or endorsements implied.
@@ -96,6 +104,8 @@ Manufacturer pages homeowners and pros often compare when Mountlake Terrace scop
 - [Milgard Windows](https://www.milgard.com/) — West Coast window systems commonly specified on remodels and additions.
 - [Velux skylights](https://www.veluxusa.com/) — daylighting for halls, stairs, and lofted volumes in split-level plans.
 - [Andersen Windows](https://www.andersenwindows.com/) — high-performance view and egress openings in suite and addition work.
+
+![Finished kitchen remodel with new cabinets and durable flooring in a Mountlake Terrace, Washington home](../assets/images/posts/2026-09-29-mountlake-terrace-finished-remodel-9.webp "A finished Mountlake Terrace kitchen remodel with durable, moisture-tolerant materials.")
 
 ## Taking the first step
 
