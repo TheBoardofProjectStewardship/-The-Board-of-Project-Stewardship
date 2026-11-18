@@ -1,0 +1,98 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-11-18-edmonds-gutter-1.webp",
+      "repo_path": "assets/images/posts/2026-11-18-edmonds-gutter-1.webp",
+      "alt": "Edmonds, WA gutter replacement: a craftsman-style house with new seamless dark-bronze gutters and downspouts carrying November rain away from the porch \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "fbd3966820668b94d6004bc2df9d7e3f",
+      "source": "Newly generated image (built-in image generator, 2026-11-18), source gen-1.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-18-edmonds-gutter-2.webp",
+      "repo_path": "assets/images/posts/2026-11-18-edmonds-gutter-2.webp",
+      "alt": "Edmonds, WA failing gutter: an old sagging gutter packed with fir needles and moss overflowing in heavy rain along the roof edge \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "a5c9c5e9663407ab85cb55330770e579",
+      "source": "Newly generated image (built-in image generator, 2026-11-18), source gen-2.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-18-edmonds-gutter-3.webp",
+      "repo_path": "assets/images/posts/2026-11-18-edmonds-gutter-3.webp",
+      "alt": "Edmonds, WA gutter installation: a worker in a fall-protection harness on a ladder hanging a new seamless gutter on the fascia of a 1960s brick rambler \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "286549f50fa0c2ab8cd10dead34c8b31",
+      "source": "Newly generated image (built-in image generator, 2026-11-18), source gen-3.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-18-edmonds-gutter-4.webp",
+      "repo_path": "assets/images/posts/2026-11-18-edmonds-gutter-4.webp",
+      "alt": "Edmonds, WA downspout tightline: a downspout connected to buried black drain pipe in a gravel-lined trench running away from the house \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "3491072dfdb3f94839f665d869c34384",
+      "source": "Newly generated image (built-in image generator, 2026-11-18), source gen-4.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-18-edmonds-gutter-5.webp",
+      "repo_path": "assets/images/posts/2026-11-18-edmonds-gutter-5.webp",
+      "alt": "Edmonds, WA rain garden: a front-yard rain garden with river rock and native plants fed by a downspout splash channel \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "42c24ecbafa3bd748b9ea57ef595282e",
+      "source": "Newly generated image (built-in image generator, 2026-11-18), source gen-5.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-18-edmonds-gutter-6.webp",
+      "repo_path": "assets/images/posts/2026-11-18-edmonds-gutter-6.webp",
+      "alt": "Edmonds, WA fascia repair: rotted fascia and soffit boards exposed after the old gutter came off, with new primed boards ready to install \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "1ff5dd70f9c465df638cda0a37f0ae1a",
+      "source": "Newly generated image (built-in image generator, 2026-11-18), source gen-6.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-18-edmonds-gutter-7.webp",
+      "repo_path": "assets/images/posts/2026-11-18-edmonds-gutter-7.webp",
+      "alt": "Edmonds, WA gutter guard: a mesh gutter guard on a new dark gutter holding back wet maple leaves at the roof edge \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "a9e8afa058ce2101d854a9bdf3be474d",
+      "source": "Newly generated image (built-in image generator, 2026-11-18), source gen-7.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-18-edmonds-gutter-8.webp",
+      "repo_path": "assets/images/posts/2026-11-18-edmonds-gutter-8.webp",
+      "alt": "Edmonds, WA downspout splash block: a downspout emptying onto a concrete splash block that sends roof water away from the foundation and crawl space vent \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "4d95a16b19657dc13662d8a837e7c662",
+      "source": "Newly generated image (built-in image generator, 2026-11-18), source gen-8.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-18-edmonds-gutter-9.webp",
+      "repo_path": "assets/images/posts/2026-11-18-edmonds-gutter-9.webp",
+      "alt": "Edmonds, WA gutter crew: a contractor pickup with a portable seamless gutter machine and a coil of bronze gutter stock parked on a wet residential street \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "d98de83a104a5677750270357d7caf46",
+      "source": "Newly generated image (built-in image generator, 2026-11-18), source gen-9.jpg converted to 1600w webp q82"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "h8gOBg9VP9I",
+      "url": "https://www.youtube.com/watch?v=h8gOBg9VP9I",
+      "title": "How I Install & Fabricate 60 foot Sections Of Seamless Gutters Solo",
+      "oembed_status": 200
+    },
+    {
+      "id": "rMcSb15pxcI",
+      "url": "https://www.youtube.com/watch?v=rMcSb15pxcI",
+      "title": "How To Install A Downspout Drainage System",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "9 newly generated images (built-in generator), 0 regraded stills, 0 paid media."
+}
