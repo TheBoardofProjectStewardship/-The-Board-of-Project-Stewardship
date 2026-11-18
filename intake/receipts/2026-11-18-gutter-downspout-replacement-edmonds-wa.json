@@ -1,0 +1,25 @@
+{
+  "submission_id": "2026-11-18-gutter-downspout-replacement-edmonds-wa",
+  "idempotency_key": "sha256:3b6c4a3474f89cb82da4eecd77ac0f5aab10da537764192b2ff246102920eb49",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-11-18T11:51:04Z",
+  "outputs": [
+    "assets/images/posts/2026-11-18-edmonds-gutter-1.webp",
+    "assets/images/posts/2026-11-18-edmonds-gutter-2.webp",
+    "assets/images/posts/2026-11-18-edmonds-gutter-3.webp",
+    "assets/images/posts/2026-11-18-edmonds-gutter-4.webp",
+    "assets/images/posts/2026-11-18-edmonds-gutter-5.webp",
+    "assets/images/posts/2026-11-18-edmonds-gutter-6.webp",
+    "assets/images/posts/2026-11-18-edmonds-gutter-7.webp",
+    "assets/images/posts/2026-11-18-edmonds-gutter-8.webp",
+    "assets/images/posts/2026-11-18-edmonds-gutter-9.webp",
+    "posts/2026-11-18-gutter-downspout-replacement-edmonds-wa.md",
+    "posts/2026-11-18-gutter-downspout-replacement-edmonds-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 106
+}

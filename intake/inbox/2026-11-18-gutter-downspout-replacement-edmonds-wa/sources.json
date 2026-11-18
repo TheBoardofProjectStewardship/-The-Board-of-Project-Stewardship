@@ -1,0 +1,158 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Edmonds",
+    "service": "Gutter and downspout replacement: roof drainage, stormwater connections, fascia repair and permits",
+    "slug": "gutter-downspout-replacement-edmonds-wa"
+  },
+  "sources": [
+    {
+      "url": "https://bergerbp.com/",
+      "title": "https://bergerbp.com/",
+      "retrieved": "2026-11-18",
+      "http_status": 200,
+      "supports": "Material maker: gutters, gutter coil or gutter guards"
+    },
+    {
+      "url": "https://ecology.wa.gov/regulations-permits/guidance-technical-assistance/stormwater-permittee-guidance-resources/stormwater-manuals",
+      "title": "https://ecology.wa.gov/regulations-permits/guidance-technical-assistance/stormwater-permittee-guidance-resources/stormwater-manuals",
+      "retrieved": "2026-11-18",
+      "http_status": 200,
+      "supports": "Ecology stormwater manuals (SWMMWW)"
+    },
+    {
+      "url": "https://gutterglove.com/",
+      "title": "https://gutterglove.com/",
+      "retrieved": "2026-11-18",
+      "http_status": 200,
+      "supports": "Material maker: gutters, gutter coil or gutter guards"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "retrieved": "2026-11-18",
+      "http_status": 200,
+      "supports": "State hiring guidance"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-11-18",
+      "http_status": 200,
+      "supports": "License/bond/insurance lookup"
+    },
+    {
+      "url": "https://www.edmondswa.gov/UserFiles/Servers/Server_16494932/File/Government/Departments/Public%20Works%20and%20Utilities/Engineering%20Codes%20%26%20Design/Appx_D_Design_Checklists_Jan2024.pdf",
+      "title": "https://www.edmondswa.gov/UserFiles/Servers/Server_16494932/File/Government/Departments/Public%20Works%20and%20Utilities/Engineering%20Codes%20%26%20Design/Appx_D_Design_Checklists_Jan2024.pdf",
+      "retrieved": "2026-11-18",
+      "http_status": 200,
+      "supports": "Addendum Appendix D checklist 14: splash block and dispersion trench criteria and setbacks"
+    },
+    {
+      "url": "https://www.edmondswa.gov/UserFiles/Servers/Server_16494932/File/Government/Departments/Public%20Works%20and%20Utilities/Engineering%20Codes%20%26%20Design/ECDC_18.30_effective%2007012022_FINAL_CLEAN.pdf",
+      "title": "https://www.edmondswa.gov/UserFiles/Servers/Server_16494932/File/Government/Departments/Public%20Works%20and%20Utilities/Engineering%20Codes%20%26%20Design/ECDC_18.30_effective%2007012022_FINAL_CLEAN.pdf",
+      "retrieved": "2026-11-18",
+      "http_status": 200,
+      "supports": "ECDC 18.30 Stormwater Management Code: adopts 2019 SWMMWW and Addendum; illicit discharges; Category 1/2 thresholds; new MS4 connections case by case"
+    },
+    {
+      "url": "https://www.edmondswa.gov/UserFiles/Servers/Server_16494932/File/Government/Departments/Public%20Works%20and%20Utilities/Engineering%20Codes%20%26%20Design/ENGR-DEV%28STM%29-2011-02%20Rev1.Pumping.Private%20Property.pdf",
+      "title": "https://www.edmondswa.gov/UserFiles/Servers/Server_16494932/File/Government/Departments/Public%20Works%20and%20Utilities/Engineering%20Codes%20%26%20Design/ENGR-DEV%28STM%29-2011-02%20Rev1.Pumping.Private%20Property.pdf",
+      "retrieved": "2026-11-18",
+      "http_status": 200,
+      "supports": "Stormwater Pumping Policy: pumps last resort; force mains not direct to City system"
+    },
+    {
+      "url": "https://www.edmondswa.gov/UserFiles/Servers/Server_16494932/File/Government/Departments/Public%20Works%20and%20Utilities/Engineering%20Codes%20%26%20Design/Edmonds_Stormwater_Addendum_January_2024.pdf",
+      "title": "https://www.edmondswa.gov/UserFiles/Servers/Server_16494932/File/Government/Departments/Public%20Works%20and%20Utilities/Engineering%20Codes%20%26%20Design/Edmonds_Stormwater_Addendum_January_2024.pdf",
+      "retrieved": "2026-11-18",
+      "http_status": 200,
+      "supports": "Edmonds Stormwater Addendum Jan 2024: till/hardpan soils; 25% steep/ESLHA (Meadowdale); manage all downspouts"
+    },
+    {
+      "url": "https://www.edmondswa.gov/UserFiles/Servers/Server_16494932/File/Services/Permits%20Development/General%20Permit%20Assistance/Informational%20Handouts/Work_exempt_from_a_permit.pdf",
+      "title": "https://www.edmondswa.gov/UserFiles/Servers/Server_16494932/File/Services/Permits%20Development/General%20Permit%20Assistance/Informational%20Handouts/Work_exempt_from_a_permit.pdf",
+      "retrieved": "2026-11-18",
+      "http_status": 200,
+      "supports": "City of Edmonds Work Exempt from a Building Permit: replacement or repair of existing gutters or downspouts exempt"
+    },
+    {
+      "url": "https://www.edmondswa.gov/UserFiles/Servers/Server_16494932/File/Standard%20Details/LID%20Storm/SD-631%20Typical%20Downspout%20Dispersion.pdf",
+      "title": "https://www.edmondswa.gov/UserFiles/Servers/Server_16494932/File/Standard%20Details/LID%20Storm/SD-631%20Typical%20Downspout%20Dispersion.pdf",
+      "retrieved": "2026-11-18",
+      "http_status": 200,
+      "supports": "Standard detail SD-631 Typical Downspout Dispersion"
+    },
+    {
+      "url": "https://www.edmondswa.gov/government/departments/public_works_and_utilities/stormwater_utility_system/",
+      "title": "https://www.edmondswa.gov/government/departments/public_works_and_utilities/stormwater_utility_system/",
+      "retrieved": "2026-11-18",
+      "http_status": 200,
+      "supports": "Edmonds Stormwater Utility page"
+    },
+    {
+      "url": "https://www.edmondswa.gov/services/permit_assistance",
+      "title": "https://www.edmondswa.gov/services/permit_assistance",
+      "retrieved": "2026-11-18",
+      "http_status": 200,
+      "supports": "Permit Assistance: apply online at MyBuildingPermit; City Hall 121 5th Ave N; 425.771.0220"
+    },
+    {
+      "url": "https://www.edmondswa.gov/services/permit_assistance/codes_and_standards/engineering_codes_design",
+      "title": "https://www.edmondswa.gov/services/permit_assistance/codes_and_standards/engineering_codes_design",
+      "retrieved": "2026-11-18",
+      "http_status": 200,
+      "supports": "Engineering Codes and Design page: links stormwater code, addendum, details, policies"
+    },
+    {
+      "url": "https://www.edmondswa.gov/services/permit_assistance/permit_information___forms/informational_handouts",
+      "title": "https://www.edmondswa.gov/services/permit_assistance/permit_information___forms/informational_handouts",
+      "retrieved": "2026-11-18",
+      "http_status": 200,
+      "supports": "Edmonds informational handouts index"
+    },
+    {
+      "url": "https://www.englertinc.com/",
+      "title": "https://www.englertinc.com/",
+      "retrieved": "2026-11-18",
+      "http_status": 200,
+      "supports": "Material maker: gutters, gutter coil or gutter guards"
+    },
+    {
+      "url": "https://www.mybuildingpermit.com/",
+      "title": "https://www.mybuildingpermit.com/",
+      "retrieved": "2026-11-18",
+      "http_status": 200,
+      "supports": "MyBuildingPermit online permit portal"
+    },
+    {
+      "url": "https://www.raindropgutterguard.com/",
+      "title": "https://www.raindropgutterguard.com/",
+      "retrieved": "2026-11-18",
+      "http_status": 200,
+      "supports": "Material maker: gutters, gutter coil or gutter guards"
+    },
+    {
+      "url": "https://www.washington811.com/",
+      "title": "https://www.washington811.com/",
+      "retrieved": "2026-11-18",
+      "http_status": 200,
+      "supports": "Washington 811 locate before digging"
+    }
+  ],
+  "dropped": [
+    {
+      "url": "https://edmonds.municipal.codes/ECDC/18.30",
+      "reason": "403 to box curl; City-hosted ECDC 18.30 PDF cited instead"
+    },
+    {
+      "url": "https://www.edmondswa.gov/government/departments/public_works___utilities/stormwater",
+      "reason": "404"
+    },
+    {
+      "url": "http://www.codepublishing.com/WA/Edmonds/",
+      "reason": "500"
+    }
+  ],
+  "notes": "Box curl 2026-11-18 with browser UA and full browser headers. All cited = 200 (see cited-status.txt). City PDFs read via pdftotext. No fee or price figures quoted."
+}

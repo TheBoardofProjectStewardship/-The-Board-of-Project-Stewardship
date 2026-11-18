@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-11-18-gutter-downspout-replacement-edmonds-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-11-18T12:00:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Gutter and Downspout Replacement Edmonds WA \u2014 Roof Drainage, Stormwater Connections, Fascia Repair and Permits",
+    "date": "2026-11-18",
+    "slug": "gutter-downspout-replacement-edmonds-wa",
+    "description": "An Edmonds guide to replacing gutters and downspouts: when the City exempts the work from a building permit, where roof water is allowed to go, downspout dispersion and tightline rules, fascia repair, gutter guards and how to hire.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 board-intake inbox had no 2026-11-18 packets (per parent); PC not touched. Topic: gutter and downspout replacement in Edmonds WA (first gutter daily; seasonal November rain). City of Edmonds: Work Exempt from a Building Permit handout (replacement or repair of existing gutters or downspouts exempt); Permit Assistance (all permits online via MyBuildingPermit; permit counter 121 5th Ave N, 425-771-0220); Informational Handouts; Engineering Codes and Design page; ECDC 18.30 Stormwater Management Code (adopts 2019 SWMMWW + Edmonds Stormwater Addendum, more stringent applies; illicit discharges prohibited per ECC 7.200; Category 1 at 2,000 sf new+replaced hard surface or 7,000 sf disturbance, Category 2 at 5,000 sf; new MS4 connections case by case with City approval, >=2,000 sf drained to MS4 triggers chapter); Stormwater Addendum Jan 2024 (till/hardpan soils; ~25% of land area slope >=15% or ESLHA, Meadowdale; multiple downspouts must all be managed); Appendix D checklist 14 (splash block <=700 sf roof, 50 ft vegetated flow path; dispersion trench 25 ft flow path, 1.5 ft deep, 4 in perforated pipe, >700 sf extra length + catch basin; 5 ft from property lines/easements; not in North Edmonds ESLHA or buffer without geotech); SD-631 Typical Downspout Dispersion (10x2 ft trench for <=700 sf roof); Stormwater Pumping Policy (pumps last resort; private force mains not direct to City system); Stormwater Utility page; Ecology SWMMWW manuals page; Washington 811. Edmonds already in _SLUG_PLACES/_PLACE_NAMES; generate_site.py unchanged; edmonds.html unchanged. Cross-links: Edmonds roof replacement 2026-09-21, Kenmore drainage 2026-10-27, Lake Stevens dry rot 2026-11-15. No fee or price figures. Producer role fields kept per intake contract."
+}
