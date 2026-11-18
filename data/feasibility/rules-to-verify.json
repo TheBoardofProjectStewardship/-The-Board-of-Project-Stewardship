@@ -1,0 +1,461 @@
+{
+  "updated": "2026-11-17",
+  "note": "The code values the study prints with 'verify', and the rules it does not code at all. This is the owner's checklist. Nothing reads this file at run time; the values live in assets/js/build-here-rules.js (and, where 'code' says so, in another file). To clear an item: read the text named in 'clear', correct the value in the code if it differs, give it a checked date there (or drop verifyTag), then delete the item here. Until then the study shows the item in orange with 'verify' and never as a confirmed fact.",
+  "status": {
+    "verify": "A value is coded and printed, with 'verify' beside it, because the code text itself was not read.",
+    "not-coded": "No value is coded. The study says so and tells the reader whom to ask. It never prints a 0 or a guess.",
+    "assumption": "Not a code value. A drawing or planning assumption the study labels as one."
+  },
+  "items": [
+    {
+      "id": "redmond-nr-setbacks",
+      "place": "City of Redmond",
+      "zone": "NR",
+      "status": "verify",
+      "shows": "Front 10 ft, rear 5 ft, side 3 ft, street side 10 ft, 2 ft from an alley. Each prints with (verify), on the site plan sheet, the facts sheet and the zoning card. The buildable area is drawn from them.",
+      "from": "City of Redmond residential zones summary page (https://www.redmond.gov/2107/Residential-zones), read 2026-11-17, and PPG's study of 5514 160th Ave NE.",
+      "clear": "Read the setback rows of the RZC 21.08 table for NR (https://redmond.municipal.codes/RZC/21.08.200) and RZC 21.16.200. Also confirm: side setback 0 ft for attached or zero-lot-line homes, garage setback 3 ft and what it is measured from, 35 ft from Lake Sammamish.",
+      "code": "assets/js/build-here-rules.js: CZ.redmond.zones.NR (f, r, s, ss, ra, verifyTag)"
+    },
+    {
+      "id": "redmond-nr-building-separation",
+      "place": "City of Redmond",
+      "zone": "NR",
+      "status": "verify",
+      "shows": "5 ft between buildings. A detached ADU or shop concept is kept 5 ft from the mapped buildings and the sheet names it the zone's building separation.",
+      "from": "City of Redmond residential zones summary page, read 2026-11-17.",
+      "clear": "RZC 21.08 table for NR, building separation row.",
+      "code": "assets/js/build-here-rules.js: CZ.redmond.zones.NR (sep)"
+    },
+    {
+      "id": "redmond-nr-height",
+      "place": "City of Redmond",
+      "zone": "NR",
+      "status": "verify",
+      "shows": "38 ft (verify). Used for the height row, the roof-change row and the 3D massing.",
+      "from": "In the October 2026 data, and matched to the City's summary page on 2026-11-17.",
+      "clear": "RZC 21.08 table for NR, maximum height, and how Redmond measures height.",
+      "code": "assets/js/build-here-rules.js: CZ.redmond.zones.NR (h)"
+    },
+    {
+      "id": "redmond-nr-lot-coverage",
+      "place": "City of Redmond",
+      "zone": "NR",
+      "status": "verify",
+      "shows": "50% of the lot (verify). The note adds 60% on lots of 18,000 sf or less with three or more units, which the study does not apply.",
+      "from": "In the October 2026 data, and matched to the City's summary page on 2026-11-17.",
+      "clear": "RZC 21.08 table for NR, lot coverage for structures, and what Redmond counts (eaves, decks, covered porches).",
+      "code": "assets/js/build-here-rules.js: CZ.redmond.zones.NR (cov)"
+    },
+    {
+      "id": "redmond-nr-impervious",
+      "place": "City of Redmond",
+      "zone": "NR",
+      "status": "verify",
+      "shows": "70% impervious surface (verify). The note also carries open space 20% and hardscaping 25%, which the study prints as text and does not check.",
+      "from": "In the October 2026 data, and matched to the City's summary page on 2026-11-17.",
+      "clear": "RZC 21.08 table for NR: impervious surface, minimum open space and the hardscape limit, and which surfaces count toward each.",
+      "code": "assets/js/build-here-rules.js: CZ.redmond.zones.NR (imp, note)"
+    },
+    {
+      "id": "redmond-nr-floor-area",
+      "place": "City of Redmond",
+      "zone": "NR",
+      "status": "verify",
+      "shows": "Total floor area cap of 4,500 sf for one unit plus 1,500 sf for each added unit (15,000 sf at eight). Garage, basement and outbuilding floor area are counted against it. The table title and the facts row say verify.",
+      "from": "The cap was in the October 2026 data (RZC 21.08.200). What counts toward it follows Redmond's 2025 draft text, which counts below-grade floor area.",
+      "clear": "The adopted RZC 21.08 text: the cap per unit count, and whether garages, basements and detached accessory buildings count.",
+      "code": "assets/js/build-here-rules.js: CZ.redmond.zones.NR (gfa, accounting)"
+    },
+    {
+      "id": "redmond-nr-adu-count",
+      "place": "City of Redmond",
+      "zone": "NR",
+      "status": "verify",
+      "shows": "2 ADUs per lot, beside 6 units per lot (8 with one affordable unit). The ADU size limit is the state-law floor; Redmond's own size limit is not coded.",
+      "from": "City of Redmond residential zones summary page, read 2026-11-17.",
+      "clear": "RZC ADU section: how many ADUs, the size limit, height, setbacks, and whether ADUs count toward the unit total.",
+      "code": "assets/js/build-here-rules.js: CZ.redmond.zones.NR (aduCount, units)"
+    },
+    {
+      "id": "redmond-drainage-trigger",
+      "place": "City of Redmond",
+      "zone": "all",
+      "status": "verify",
+      "shows": "2,000 sf of new plus replaced hard surface as the point where civil (drainage) review starts (verify).",
+      "from": "PPG's Redmond study. Not read against the Redmond stormwater code.",
+      "clear": "Redmond's stormwater code (Redmond Municipal Code title 13) and the City's Stormwater Technical Notebook: the thresholds for drainage review and for flow control.",
+      "code": "assets/js/build-here-rules.js: siteRules() drainage"
+    },
+    {
+      "id": "lynnwood-draft-zone-layer",
+      "place": "City of Lynnwood",
+      "zone": "all",
+      "status": "verify",
+      "shows": "The zone is read from the City's April 2025 draft future zones layer. The study says it is a draft beside the zone and asks the reader to confirm it.",
+      "from": "https://services2.arcgis.com/W2b0jYHWnOivta60/arcgis/rest/services/Future_Zones_Draft_4_25/FeatureServer/0",
+      "clear": "Find the City's adopted zoning layer and put its address in the Lynnwood entry, then remove draft: true there and zoningLayerDraft in jurisdictions.json.",
+      "code": "assets/js/build-here-rules.js: CITY.lynnwood (gis.draft)"
+    },
+    {
+      "id": "seattle-stormwater-2026",
+      "place": "City of Seattle",
+      "zone": "all",
+      "status": "not-coded",
+      "shows": "Says Seattle adopted a revised Stormwater Code in 2026 (Ord. 127444), that the earlier code started drainage review at 750 sf of new plus replaced hard surface, and that the 2026 thresholds are not coded (verify).",
+      "from": "Seattle SDCI Stormwater Code page.",
+      "clear": "The Seattle Stormwater Code (SMC 22.800 to 22.808) as amended by Ord. 127444, and the Stormwater Manual that goes with it: the thresholds for single-family projects.",
+      "code": "assets/js/build-here-rules.js: siteRules() drainage"
+    },
+    {
+      "id": "seattle-nr-far-garage",
+      "place": "City of Seattle",
+      "zone": "NR1, NR2, NR3",
+      "status": "verify",
+      "shows": "Floor area counted against FAR leaves out basements (stories no more than 4 ft above grade) and counts ADU floor area. Whether a garage counts is not coded, so the floor-area row says verify.",
+      "from": "SMC 23.44.050 as adopted by Ord. 127376.",
+      "clear": "SMC 23.44.050: the list of floor area exempt from FAR (garages, accessory structures).",
+      "code": "assets/js/build-here-rules.js: seattleNR() accounting"
+    },
+    {
+      "id": "seattle-nr-three-unit-setbacks",
+      "place": "City of Seattle",
+      "zone": "NR1, NR2, NR3",
+      "status": "assumption",
+      "shows": "The drawing keeps the 15 ft front and rear setbacks. With three or more principal units the code allows 10 ft, and the study cannot tell a principal unit from an ADU.",
+      "from": "SMC 23.44.090.",
+      "clear": "Nothing to correct. Listed so the owner knows why a three-unit study still draws 15 ft.",
+      "code": "assets/js/build-here-rules.js: seattleNR() setbackNote"
+    },
+    {
+      "id": "exempt-accessory-structures",
+      "place": "Seattle, unincorporated King County, Edmonds",
+      "zone": "all",
+      "status": "not-coded",
+      "shows": "Permit-exempt accessory structures: verify with the permit office. No size is printed.",
+      "from": "Not coded. The exemption sizes are in each building code, not the zoning chapter.",
+      "clear": "Each jurisdiction's amendments to IRC R105.2 (work exempt from permit): the Seattle Residential Code, King County Code title 16, and Edmonds Community Development Code title 19. Snohomish County's sizes are coded (200 sf inside an urban growth area, 400 sf outside).",
+      "code": "assets/js/build-here-rules.js: verify(\"Permit-exempt accessory structures\", ...)"
+    },
+    {
+      "id": "king-county-rural-impervious",
+      "place": "Unincorporated King County",
+      "zone": "rural zones",
+      "status": "not-coded",
+      "shows": "Maximum impervious surface: verify. The rural table lists several percentages that depend on lot size and development conditions 12 and 17.",
+      "from": "KCC 21A.09T.030, rural area density and dimensions.",
+      "clear": "The impervious surface row of KCC 21A.09T.030 and its development conditions 12 and 17, for the lot's zone and size.",
+      "code": "assets/js/build-here-rules.js: King County rural rule set"
+    },
+    {
+      "id": "snohomish-county-street-setback",
+      "place": "Unincorporated Snohomish County",
+      "zone": "rural zones",
+      "status": "not-coded",
+      "shows": "Setback from a street right of way: verify with PDS. With the front setback not coded, no buildable area is drawn.",
+      "from": "SCC 30.23.040 reference notes. The setback depends on the road class.",
+      "clear": "SCC 30.23.030 and 30.23.040 for the lot's zone and the class of the road it fronts.",
+      "code": "assets/js/build-here-rules.js: snoRural()"
+    },
+    {
+      "id": "snohomish-county-urban-zones",
+      "place": "Unincorporated Snohomish County",
+      "zone": "R-7,200, R-8,400, R-9,600, T, LDMR, MR",
+      "status": "not-coded",
+      "shows": "Lot coverage, height and setbacks: verify with PDS. No numbers are shown and nothing is drawn from them.",
+      "from": "SCC 30.23.032 matrix. Its current values could not be confirmed.",
+      "clear": "SCC 30.23.032 urban residential zones bulk matrix.",
+      "code": "assets/js/build-here-rules.js: snoUrbanVerify()"
+    },
+    {
+      "id": "snohomish-county-adu",
+      "place": "Unincorporated Snohomish County",
+      "zone": "all",
+      "status": "not-coded",
+      "shows": "ADUs: verify. Snohomish County updated its ADU rules in 2025 (Ord. 25-014).",
+      "from": "SCC 30.28.010.",
+      "clear": "SCC 30.28.010 as amended by Ord. 25-014: unit count, size, height.",
+      "code": "assets/js/build-here-rules.js: snoRural(), snoUrbanVerify()"
+    },
+    {
+      "id": "kenmore-adu-and-accessory",
+      "place": "City of Kenmore",
+      "zone": "R-1, R-4, R-6",
+      "status": "not-coded",
+      "shows": "ADUs print the state-law floor (two per lot, at least 1,000 sf and 24 ft each) and say Kenmore's own size and design limits were not verified. Accessory building size limits: verify.",
+      "from": "RCW 36.70A.681. Kenmore's ADU and accessory building chapters were not read.",
+      "clear": "KMC title 18: the ADU chapter and the accessory building standards.",
+      "code": "assets/js/build-here-rules.js: kenmore()"
+    },
+    {
+      "id": "kirkland-far-large-lots",
+      "place": "City of Kirkland",
+      "zone": "RS and RSX zones",
+      "status": "not-coded",
+      "shows": "FAR 50% is applied on lots under 7,200 sf. On larger lots the floor-area row says the FAR depends on lot size and is not coded.",
+      "from": "Kirkland Zoning Code, read October 2026.",
+      "clear": "KZC FAR table for lots of 7,200 sf or more, and the pitched-roof bonus (60%).",
+      "code": "assets/js/build-here-rules.js: CZ.kirkland (farSmall)"
+    },
+    {
+      "id": "woodinville-coverage-and-rear",
+      "place": "City of Woodinville",
+      "zone": "R-1, R-4, R-6, R-8",
+      "status": "not-coded",
+      "shows": "Street setback 10 ft (20 ft to a garage) and interior setback are coded. Lot coverage depends on lot size and is not coded, and no rear setback is coded, so no buildable area is drawn.",
+      "from": "WMC 21.32, read October 2026.",
+      "clear": "WMC 21.32: the coverage table by lot size, and the rear setback.",
+      "code": "assets/js/build-here-rules.js: CZ.woodinville"
+    },
+    {
+      "id": "shoreline-nr1-front-setback",
+      "place": "City of Shoreline",
+      "zone": "NR1",
+      "status": "not-coded",
+      "shows": "Rear 5 ft and side 5 ft are coded. The front setback is not, because the table sets it in footnotes, so no buildable area is drawn for NR1.",
+      "from": "SMC 20.50.020 Table 20.50.020(1), read October 2026.",
+      "clear": "The footnotes of Table 20.50.020(1) for the NR1 front and side setbacks.",
+      "code": "assets/js/build-here-rules.js: CZ.shoreline.zones.NR1"
+    },
+    {
+      "id": "mountlake-terrace-r2-side-setback",
+      "place": "City of Mountlake Terrace",
+      "zone": "R-2",
+      "status": "not-coded",
+      "shows": "Front and rear 15 ft are coded (10 ft with three or more units, which the drawing does not apply). The side setback is not, so no buildable area is drawn for R-2.",
+      "from": "Mountlake Terrace zoning code, read October 2026.",
+      "clear": "The R-2 side setback in the city's residential dimension table.",
+      "code": "assets/js/build-here-rules.js: CZ.mountlaketerrace.zones[\"R-2\"]"
+    },
+    {
+      "id": "renton-r8-rear-setback",
+      "place": "City of Renton",
+      "zone": "R-8",
+      "status": "not-coded",
+      "shows": "Front 20 ft (15 ft on an alley-loaded lot, as a note) and side 5 ft are coded. The rear setback is not, so no buildable area is drawn for R-8.",
+      "from": "RMC 4-2-110A, read October 2026.",
+      "clear": "The R-8 rear setback in RMC 4-2-110A.",
+      "code": "assets/js/build-here-rules.js: CZ.renton.zones[\"R-8\"]"
+    },
+    {
+      "id": "sammamish-r4-r6-setbacks",
+      "place": "City of Sammamish",
+      "zone": "R-4, R-6",
+      "status": "not-coded",
+      "shows": "Height, impervious surface and FAR 50% are coded. Setbacks are not coded as numbers, because they depend on the size of the house, so no buildable area is drawn.",
+      "from": "Sammamish development code, read October 2026.",
+      "clear": "The setback table by house size, and whether an addition is measured by the whole house or by the addition alone.",
+      "code": "assets/js/build-here-rules.js: CZ.sammamish (sizeSb)"
+    },
+    {
+      "id": "bellevue-zone-names-and-chart",
+      "place": "City of Bellevue",
+      "zone": "LL-1 to MDR-2",
+      "status": "verify",
+      "shows": "Bellevue's numbers are keyed by the current zone names (LL-1, SR-1, LDR-1, MDR-1 and so on) and read from the middle housing standards (LUC 20.20.538). No floor area ratio is coded. The zone itself comes from the King County parcel record, because no city zoning layer is wired. If that record still carries an old zone name (R-1 to R-30), the study treats the zone as not coded and says so.",
+      "from": "LUC 20.20.538, read October 2026. The dimensional chart in LUC 20.20.010 was not applied.",
+      "clear": "Which of LUC 20.20.010 and LUC 20.20.538 governs a single house on a lot, the FAR that applies, and what zone names the county record returns for Bellevue parcels. Wire the City's zoning layer if one is public.",
+      "code": "assets/js/build-here-rules.js: CZ.bellevue, CS.bellevueChart"
+    },
+    {
+      "id": "king-county-urban-r1-impervious",
+      "place": "Unincorporated King County",
+      "zone": "R-1",
+      "status": "verify",
+      "shows": "Maximum impervious surface 8%, with the note that 30% is allowed under condition 12. The cap check uses 8%.",
+      "from": "KCC 21A.09H table, read October 2026.",
+      "clear": "Condition 12 of the table: when the 30% applies to an R-1 lot, and which figure a typical R-1 house lot should be checked against.",
+      "code": "assets/js/build-here-rules.js: KC_URBAN[\"R-1\"]"
+    },
+    {
+      "id": "kirkland-coverage-definition",
+      "place": "City of Kirkland",
+      "zone": "RS and RSX zones",
+      "status": "verify",
+      "shows": "Lot coverage 50%, checked against mapped roof area only.",
+      "from": "Kirkland Zoning Code, read October 2026.",
+      "clear": "Whether Kirkland's 50% counts buildings only or all hard surface (driveways, patios, walks). If it counts all hard surface, the check belongs with impervious surface, not with building coverage.",
+      "code": "assets/js/build-here-rules.js: CZ.kirkland (cov)"
+    },
+    {
+      "id": "city-zones-not-coded",
+      "place": "Every city in jurisdictions.json",
+      "zone": "any zone not in that city's verifiedZones",
+      "status": "not-coded",
+      "shows": "Zone standards (height, setbacks, coverage): not verified for this zone. The study gives the state-law rows, the code link and the permit office, draws no buildable area and judges no option.",
+      "from": "Not coded.",
+      "clear": "Add the zone to the city's table in the rules file from the zone chapter of the city code, then to verifiedZones in jurisdictions.json.",
+      "code": "assets/js/build-here-rules.js: cityRules(), CZ"
+    },
+    {
+      "id": "overlay-zones",
+      "place": "all",
+      "zone": "any zone with an overlay suffix",
+      "status": "not-coded",
+      "shows": "The base zone's numbers, with a line that the overlay's added rules are not coded (verify).",
+      "from": "Not coded.",
+      "clear": "The overlay chapter for the lot. Overlays, planned unit developments and plat conditions can change every number.",
+      "code": "assets/js/build-here-rules.js: pick(), stripOverlay()"
+    },
+    {
+      "id": "adu-local-size-limit",
+      "place": "Cities where only the state floor is coded",
+      "zone": "all",
+      "status": "not-coded",
+      "shows": "ADU row: the state-law floor (two per lot inside urban growth areas, each allowed at least 1,000 sf and 24 ft), marked 'state-law floor; the local size limit is not coded — verify'.",
+      "from": "RCW 36.70A.681, read November 2026.",
+      "clear": "The city's ADU section: size limit, height, setbacks, parking, owner occupancy for short-term rental.",
+      "code": "assets/js/build-here-rules.js: ADU_STATE, adu.status === \"state\""
+    },
+    {
+      "id": "parking-tables",
+      "place": "all cities",
+      "zone": "all",
+      "status": "not-coded",
+      "shows": "The 2025 state caps (ESSB 5184): one space per single-family home, half a space per multifamily unit, none for a home under 1,200 sf, in cities over 30,000 people, with the compliance dates. Says the city's own parking table is not coded (verify).",
+      "from": "ESSB 5184, Laws of 2025 ch. 204, read November 2026.",
+      "clear": "The city's off-street parking table, and whether the city has adopted its ESSB 5184 changes yet. Cities of 50,000 or more had 18 months from July 27, 2025; cities of 30,000 to 50,000 have three years.",
+      "code": "assets/js/build-here-rules.js: siteRules() parking"
+    },
+    {
+      "id": "drainage-thresholds",
+      "place": "Every place except Seattle and Redmond",
+      "zone": "all",
+      "status": "not-coded",
+      "shows": "The stormwater threshold for this place is not coded. Verify with the jurisdiction. The impervious figures are still measured and shown.",
+      "from": "Not coded.",
+      "clear": "The jurisdiction's adopted stormwater manual (most use the Ecology Stormwater Management Manual for Western Washington or the King County Surface Water Design Manual): the new plus replaced hard surface thresholds.",
+      "code": "assets/js/build-here-rules.js: siteRules() drainage"
+    },
+    {
+      "id": "reroof-permit",
+      "place": "Every place except Seattle",
+      "zone": "all",
+      "status": "not-coded",
+      "shows": "The re-roof permit rule for this place is not coded. The two-layer tear-off rule (IRC R908.3.1.1) is printed as a fact.",
+      "from": "Seattle's rule was read on the SDCI re-roof page in November 2026. No other place was read.",
+      "clear": "The jurisdiction's re-roof tip sheet or its adopted IRC R105.2 amendments.",
+      "code": "assets/js/build-here-rules.js: siteRules() reroof"
+    },
+    {
+      "id": "fence-height",
+      "place": "all",
+      "zone": "all",
+      "status": "not-coded",
+      "shows": "Fence height limits for this place are not coded. Verify with the jurisdiction.",
+      "from": "Not coded.",
+      "clear": "The fence section of the zoning code (front yard and side or rear yard heights, corner sight triangle) and the building code's permit exemption height.",
+      "code": "assets/js/build-here-rules.js: siteRules() fence"
+    },
+    {
+      "id": "tree-rules",
+      "place": "all",
+      "zone": "all",
+      "status": "not-coded",
+      "shows": "Tree protection rules for this place are not coded. The count of trees mapped in OpenStreetMap is shown and called rarely complete.",
+      "from": "Not coded.",
+      "clear": "The jurisdiction's tree code: which trees are protected, removal limits, replacement and permit rules.",
+      "code": "assets/js/build-here-rules.js: siteRules() trees"
+    },
+    {
+      "id": "kitchen-bath-exempt-work",
+      "place": "all",
+      "zone": "all",
+      "status": "verify",
+      "shows": "No building permit for finish work (cabinets, counters, tile, flooring, paint). Moving plumbing, wiring, gas or ducts needs trade permits; moving walls needs a building permit (verify).",
+      "from": "International Residential Code R105.2 (work exempt from permit), as adopted in Washington. Local amendments were not read.",
+      "clear": "The jurisdiction's amendments to IRC R105.2.",
+      "code": "assets/js/build-here-summary.js: blocks() kitchenBath row"
+    },
+    {
+      "id": "energy-credits-1500-sf",
+      "place": "Washington",
+      "zone": "all",
+      "status": "verify",
+      "shows": "An addition of exactly 1,500 sf is rated 8.0 credits (medium dwelling unit) with verify, because the code's words for the boundary were not confirmed.",
+      "from": "2021 Washington State Energy Code, Residential, R406.3 (WAC 51-11R-40620), read November 2026.",
+      "clear": "R406.3 and Table R406.3: whether 1,500 sf of conditioned floor area is the top of 'small' or the bottom of 'medium'.",
+      "code": "assets/js/build-here-rules.js: energyCredits()"
+    },
+    {
+      "id": "energy-credits-new-house-small",
+      "place": "Washington",
+      "zone": "all",
+      "status": "assumption",
+      "shows": "A new house under 1,500 sf is rated 5.0 credits, and the row says that takes under 300 sf of window area, otherwise 8.0.",
+      "from": "2021 WSEC-R R406.3 definition of a small dwelling unit.",
+      "clear": "Nothing to correct. The window area is a design choice the study cannot know.",
+      "code": "assets/js/build-here-rules.js: energyCredits()"
+    },
+    {
+      "id": "energy-code-2024",
+      "place": "Washington",
+      "zone": "all",
+      "status": "not-coded",
+      "shows": "For a study prepared on or after May 3, 2027: the 2024 energy code applies and its credit table is not coded (verify). Before that date the 2021 table is used.",
+      "from": "Washington State Building Code Council: the 2024 codes take effect May 3, 2027 (read November 2026).",
+      "clear": "The adopted 2024 WSEC-R credit table, and the effective date if the Council moves it again.",
+      "code": "assets/js/build-here-rules.js: WSEC, energyCredits()"
+    },
+    {
+      "id": "through-lot-setback",
+      "place": "all",
+      "zone": "all",
+      "status": "verify",
+      "shows": "When a street also runs behind the lot, the rear setback is drawn at the rear line and a note says the jurisdiction may apply a front setback there (verify).",
+      "from": "A drawing rule, not read from any code.",
+      "clear": "The jurisdiction's definition of a through lot and which line it treats as the front.",
+      "code": "assets/js/build-here-siteplan.js: planMarkup() notes"
+    },
+    {
+      "id": "building-separation-allowance",
+      "place": "Every zone with no coded building separation",
+      "zone": "all",
+      "status": "assumption",
+      "shows": "A detached concept is kept 6 ft from the mapped buildings, and the sheet says that is a drawing allowance, not a code distance.",
+      "from": "A drawing allowance.",
+      "clear": "Code the zone's building separation (sep) to replace the allowance. Fire separation under IRC R302 is a separate check.",
+      "code": "assets/js/build-here-siteplan.js: placeDetached()"
+    },
+    {
+      "id": "driveway-width",
+      "place": "all",
+      "zone": "all",
+      "status": "assumption",
+      "shows": "Where OpenStreetMap has only a driveway centerline, the driveway is drawn and measured at an assumed 10 ft width, labeled approx.",
+      "from": "A drawing assumption.",
+      "clear": "Nothing to correct. A survey or a site visit gives the real paving.",
+      "code": "assets/js/build-here-landscape.js; assets/js/build-here-siteplan.js"
+    },
+    {
+      "id": "critical-areas-and-shoreline",
+      "place": "all",
+      "zone": "all",
+      "status": "not-coded",
+      "shows": "Mapped hazard layers that touch the lot are listed and hatched. Buffers, building setbacks from them and the Shoreline Master Program rules are not coded; the rows say verify with the jurisdiction. Shoreline is read from a map only in Kenmore.",
+      "from": "King County, Snohomish County, Seattle and Kenmore hazard map layers. Other cities' own critical-area maps are not read.",
+      "clear": "The jurisdiction's critical areas chapter and Shoreline Master Program, and its own critical-area map.",
+      "code": "assets/js/build-here.js: hazards(); assets/js/build-here-rules.js: tailRows()"
+    },
+    {
+      "id": "snohomish-house-size-index",
+      "place": "Snohomish County",
+      "zone": "all",
+      "status": "assumption",
+      "shows": "House size (FinSize), year built, bedrooms and stories from the house-size files. FinSize is printed as the county's figure and is not used in the floor-area math. Stories prints with a note that the files may drop a half story.",
+      "from": "scripts/build_index.py, which was not changed: it writes whole numbers, so 1.5 stories is stored as 1, and it keeps the first dwelling row of a parcel, so a second dwelling on the lot is not added. It does not check whether a row is active.",
+      "clear": "Decide whether to change scripts/build_index.py (keep half stories, take the largest active dwelling row). Another page of the source site reads the same files, so check that page before changing the format.",
+      "code": "scripts/build_index.py: num(), snoh(); assets/js/build-here.js: snoHouseSize()"
+    },
+    {
+      "id": "not-wired-site-questions",
+      "place": "all",
+      "zone": "all",
+      "status": "not-coded",
+      "shows": "Sewer or septic, water, power and gas service, easements and covenants, landmark or historic status, frontage improvements, and whether the lot is inside an urban growth area are not read from any layer. The facts sheet lists them in its 'confirms on site' row. The state ADU floor is printed as applying inside urban growth areas without the study knowing which side of the line the lot is on.",
+      "from": "No public layer wired.",
+      "clear": "Wire a layer per jurisdiction, or keep the answer as a site-visit item.",
+      "code": "assets/js/build-here-summary.js: blocks() visit row"
+    }
+  ]
+}
