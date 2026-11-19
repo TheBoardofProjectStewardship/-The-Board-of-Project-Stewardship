@@ -1,0 +1,182 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Kirkland",
+    "service": "Whole-house repiping: galvanized and polybutylene replacement, plumbing permits, inspections and wall repair",
+    "slug": "whole-house-repiping-kirkland-wa"
+  },
+  "sources": [
+    {
+      "url": "https://inspection.mybuildingpermit.com/",
+      "title": "https://inspection.mybuildingpermit.com/",
+      "retrieved": "2026-11-19",
+      "http_status": 200,
+      "supports": "MyBuildingPermit inspection scheduling"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "retrieved": "2026-11-19",
+      "http_status": 200,
+      "supports": "State hiring guidance"
+    },
+    {
+      "url": "https://mybuildingpermit.com/inspection-checklist",
+      "title": "https://mybuildingpermit.com/inspection-checklist",
+      "retrieved": "2026-11-19",
+      "http_status": 200,
+      "supports": "MyBuildingPermit inspection checklists index"
+    },
+    {
+      "url": "https://mybuildingpermit.com/sites/default/files/2021_IC_Residential_Plumbing-Rough-In_checklist_Final.pdf",
+      "title": "https://mybuildingpermit.com/sites/default/files/2021_IC_Residential_Plumbing-Rough-In_checklist_Final.pdf",
+      "retrieved": "2026-11-19",
+      "http_status": 200,
+      "supports": "MyBuildingPermit 2021 Residential Plumbing Rough-In checklist"
+    },
+    {
+      "url": "https://mybuildingpermit.com/sites/default/files/2021_IC_Residential_Plumbing_checklist_Final.pdf",
+      "title": "https://mybuildingpermit.com/sites/default/files/2021_IC_Residential_Plumbing_checklist_Final.pdf",
+      "retrieved": "2026-11-19",
+      "http_status": 200,
+      "supports": "MyBuildingPermit 2021 Residential Plumbing Final checklist"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-11-19",
+      "http_status": 200,
+      "supports": "License/bond/insurance lookup"
+    },
+    {
+      "url": "https://www.epa.gov/ground-water-and-drinking-water/basic-information-about-lead-drinking-water",
+      "title": "https://www.epa.gov/ground-water-and-drinking-water/basic-information-about-lead-drinking-water",
+      "retrieved": "2026-11-19",
+      "http_status": 200,
+      "supports": "EPA: lead pipes/solder more likely in homes built before 1986"
+    },
+    {
+      "url": "https://www.huduser.gov/Publications/PDF/pex_design_guide.pdf",
+      "title": "https://www.huduser.gov/Publications/PDF/pex_design_guide.pdf",
+      "retrieved": "2026-11-19",
+      "http_status": 200,
+      "supports": "HUD PEX design guide: PB c.1978-1995 no longer approved; manifold systems"
+    },
+    {
+      "url": "https://www.insurancejournal.com/magazines/mag-features/2013/03/25/285518.htm",
+      "title": "https://www.insurancejournal.com/magazines/mag-features/2013/03/25/285518.htm",
+      "retrieved": "2026-11-19",
+      "http_status": 200,
+      "supports": "Insurance Journal: galvanized corrosion and flow"
+    },
+    {
+      "url": "https://www.kirklandwa.gov/Government/Departments/Development-Services-Center/Apply-for-a-Permit/Mechanical-Plumbing-Electrical-and-Fire-Permit-Process",
+      "title": "https://www.kirklandwa.gov/Government/Departments/Development-Services-Center/Apply-for-a-Permit/Mechanical-Plumbing-Electrical-and-Fire-Permit-Process",
+      "retrieved": "2026-11-19",
+      "http_status": 200,
+      "supports": "Kirkland: plumbing permits required for plumbing equipment or systems; apply via MyBuildingPermit; counter and hours"
+    },
+    {
+      "url": "https://www.kirklandwa.gov/Government/Departments/Development-Services-Center/Do-you-need-a-permit",
+      "title": "https://www.kirklandwa.gov/Government/Departments/Development-Services-Center/Do-you-need-a-permit",
+      "retrieved": "2026-11-19",
+      "http_status": 200,
+      "supports": "Kirkland: KMC 21.06.205 permit required to alter plumbing system; like-in-kind exemption; drywall needs permit; exemptions not in critical areas"
+    },
+    {
+      "url": "https://www.kirklandwa.gov/Government/Departments/Public-Works-Department/Water",
+      "title": "https://www.kirklandwa.gov/Government/Departments/Public-Works-Department/Water",
+      "retrieved": "2026-11-19",
+      "http_status": 200,
+      "supports": "Kirkland Water page: service areas; backflow program"
+    },
+    {
+      "url": "https://www.kirklandwa.gov/Government/Departments/Public-Works-Department/Water/Home-Water",
+      "title": "https://www.kirklandwa.gov/Government/Departments/Public-Works-Department/Water/Home-Water",
+      "retrieved": "2026-11-19",
+      "http_status": 200,
+      "supports": "Kirkland: owner responsibility for service line, shutoff, PRV; meter box; emergency line"
+    },
+    {
+      "url": "https://www.kirklandwa.gov/files/sharedassets/public/v/3/development-services/pdfs/building-pdfs/plumbing-permit-checklist.pdf",
+      "title": "https://www.kirklandwa.gov/files/sharedassets/public/v/3/development-services/pdfs/building-pdfs/plumbing-permit-checklist.pdf",
+      "retrieved": "2026-11-19",
+      "http_status": 200,
+      "supports": "Kirkland Plumbing Permit Checklist"
+    },
+    {
+      "url": "https://www.kirklandwa.gov/files/sharedassets/public/v/4/development-services/pdfs/building-pdfs/single-family-plumbing-worksheet.pdf",
+      "title": "https://www.kirklandwa.gov/files/sharedassets/public/v/4/development-services/pdfs/building-pdfs/single-family-plumbing-worksheet.pdf",
+      "retrieved": "2026-11-19",
+      "http_status": 200,
+      "supports": "Kirkland Single Family Plumbing Worksheet: water districts; >39 fixture units 1 in meter"
+    },
+    {
+      "url": "https://www.lni.wa.gov/licensing-permits/plumbing/plumber-certification/",
+      "title": "https://www.lni.wa.gov/licensing-permits/plumbing/plumber-certification/",
+      "retrieved": "2026-11-19",
+      "http_status": 200,
+      "supports": "L&I: must be certified to work in plumbing trade in Washington"
+    },
+    {
+      "url": "https://www.lni.wa.gov/licensing-permits/plumbing/plumber-certification/plumber-trainee/",
+      "title": "https://www.lni.wa.gov/licensing-permits/plumbing/plumber-certification/plumber-trainee/",
+      "retrieved": "2026-11-19",
+      "http_status": 200,
+      "supports": "L&I plumber trainee: direct supervision"
+    },
+    {
+      "url": "https://www.mybuildingpermit.com/",
+      "title": "https://www.mybuildingpermit.com/",
+      "retrieved": "2026-11-19",
+      "http_status": 200,
+      "supports": "MyBuildingPermit online permit portal"
+    },
+    {
+      "url": "https://www.nachi.org/pb.htm",
+      "title": "https://www.nachi.org/pb.htm",
+      "retrieved": "2026-11-19",
+      "http_status": 200,
+      "supports": "InterNACHI polybutylene guide"
+    },
+    {
+      "url": "https://www.nibco.com/",
+      "title": "https://www.nibco.com/",
+      "retrieved": "2026-11-19",
+      "http_status": 200,
+      "supports": "Material maker: plumbing, valves, fittings"
+    },
+    {
+      "url": "https://www.viega.com/",
+      "title": "https://www.viega.com/",
+      "retrieved": "2026-11-19",
+      "http_status": 200,
+      "supports": "Material maker: plumbing, valves, fittings"
+    },
+    {
+      "url": "https://www.watts.com/",
+      "title": "https://www.watts.com/",
+      "retrieved": "2026-11-19",
+      "http_status": 200,
+      "supports": "Material maker: plumbing, valves, fittings"
+    },
+    {
+      "url": "https://www.zurn.com/",
+      "title": "https://www.zurn.com/",
+      "retrieved": "2026-11-19",
+      "http_status": 200,
+      "supports": "Material maker: plumbing, valves, fittings"
+    }
+  ],
+  "dropped": [
+    {
+      "url": "https://kirkland.municipal.codes/KMC/21.06_ArtV",
+      "reason": "403 to box curl; City Do-you-need-a-permit page cited instead"
+    },
+    {
+      "url": "https://www.kirklandwa.gov/Government/Departments/Planning-and-Building/Permits",
+      "reason": "404"
+    }
+  ],
+  "notes": "Box curl 2026-11-19 with browser UA and full browser headers. All cited = 200 (see cited-status.txt). City and MyBuildingPermit PDFs read via pdftotext. No fee or price figures quoted."
+}
