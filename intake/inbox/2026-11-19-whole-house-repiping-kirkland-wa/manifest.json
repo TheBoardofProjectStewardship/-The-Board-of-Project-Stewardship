@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-11-19-whole-house-repiping-kirkland-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-11-19T12:00:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Whole-House Repiping Kirkland WA \u2014 Replacing Galvanized and Polybutylene Pipe, Plumbing Permits, Inspections and Wall Repair",
+    "date": "2026-11-19",
+    "slug": "whole-house-repiping-kirkland-wa",
+    "description": "A Kirkland guide to whole-house repiping: why galvanized and polybutylene supply pipe get replaced, the City of Kirkland plumbing permit, rough-in pressure testing, drywall access and patching, shutoff valves and pressure reducing valves, and how to hire a certified plumber.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 board-intake inbox had no 2026-11-19 packets (per parent); PC not touched. Topic: whole-house repiping in Kirkland WA. City of Kirkland issues plumbing permits (Mechanical, Plumbing, Electrical and Fire Permit Process page: plumbing permits required for plumbing equipment or systems; applications online via MyBuildingPermit; Plumbing Permit Checklist; Single Family Plumbing Worksheet, >39 fixture units = 1 in meter); Do you need a permit page (KMC 21.06.205; like-in-kind fixture exemption only if no plumbing line modifications; drywall removal/installation needs permit; exemptions not in critical areas); permit tracking system unavailable Nov 23-24 2026; counter 123 Fifth Ave, 425-587-3600. Water: Public Works Water page (City serves South Juanita/Totem Lake southward; Northshore Utility District and Woodinville Water District serve Finn Hill, Kingsgate, North Juanita), Home-Water page (owner owns service line, shutoff, PRV; City has no record of private shutoff; meter box clearance; emergency 425-587-3900). MyBuildingPermit 2021 Plumbing Rough-In and Final checklists (water test working pressure or 50 psi 15 min, PEX air exception, PRV over 80 psi, dielectric fittings galvanized/copper, nail plates, licensed plumber on permit RCW 18.106.400). L&I Plumber Certification and trainee pages, Verify, hiring a contractor. HUD PEX design guide (PB c.1978-1995 no longer approved), InterNACHI PB page, EPA lead, Insurance Journal aging plumbing. Kirkland already in _SLUG_PLACES/_PLACE_NAMES; generate_site.py unchanged; kirkland.html unchanged. Cross-links: load-bearing wall Kirkland 2026-10-29, kitchen remodel Kirkland 2026-10-07, water heater Marysville 2026-10-19, Magnolia plumbing 2026-08-31. No fee or price figures. Producer role fields kept per intake contract."
+}

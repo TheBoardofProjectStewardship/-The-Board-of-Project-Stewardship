@@ -1,0 +1,25 @@
+{
+  "submission_id": "2026-11-19-whole-house-repiping-kirkland-wa",
+  "idempotency_key": "sha256:915342f561b24c8a7bcab90024acee04c437efc264e774015d7a0935f56b7b22",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-11-19T11:46:39Z",
+  "outputs": [
+    "assets/images/posts/2026-11-19-kirkland-repipe-1.webp",
+    "assets/images/posts/2026-11-19-kirkland-repipe-2.webp",
+    "assets/images/posts/2026-11-19-kirkland-repipe-3.webp",
+    "assets/images/posts/2026-11-19-kirkland-repipe-4.webp",
+    "assets/images/posts/2026-11-19-kirkland-repipe-5.webp",
+    "assets/images/posts/2026-11-19-kirkland-repipe-6.webp",
+    "assets/images/posts/2026-11-19-kirkland-repipe-7.webp",
+    "assets/images/posts/2026-11-19-kirkland-repipe-8.webp",
+    "assets/images/posts/2026-11-19-kirkland-repipe-9.webp",
+    "posts/2026-11-19-whole-house-repiping-kirkland-wa.md",
+    "posts/2026-11-19-whole-house-repiping-kirkland-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 107
+}

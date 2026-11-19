@@ -1,0 +1,98 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-11-19-kirkland-repipe-1.webp",
+      "repo_path": "assets/images/posts/2026-11-19-kirkland-repipe-1.webp",
+      "alt": "Kirkland, WA whole-house repiping: a Kirkland home with coils of red and blue PEX supply tubing laid out on the driveway ready for a repipe \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "b938334e2ff8fd7ff249f9ec9d213bd4",
+      "source": "Newly generated image (built-in image generator, 2026-11-19), source gen-1.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-19-kirkland-repipe-2.webp",
+      "repo_path": "assets/images/posts/2026-11-19-kirkland-repipe-2.webp",
+      "alt": "Kirkland, WA galvanized pipe repiping: corroded galvanized steel supply pipe in a floor joist bay with newer red and blue PEX lines run alongside it \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "e67dda91c4c152bc807d572b03cb154e",
+      "source": "Newly generated image (built-in image generator, 2026-11-19), source gen-2.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-19-kirkland-repipe-3.webp",
+      "repo_path": "assets/images/posts/2026-11-19-kirkland-repipe-3.webp",
+      "alt": "Kirkland, WA crawl space plumbing: a Kirkland crawl space under floor framing showing plumbing piping under the floor framing before whole-house repiping \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "4702ddcd61fcf0807d8a309a1d908b5b",
+      "source": "Newly generated image (built-in image generator, 2026-11-19), source gen-3.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-19-kirkland-repipe-4.webp",
+      "repo_path": "assets/images/posts/2026-11-19-kirkland-repipe-4.webp",
+      "alt": "Kirkland, WA PEX repiping manifold: a home-run PEX manifold with red and blue lines next to a water heater in a Kirkland garage utility area \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "c88664b6048057dfeef9f085c60bf6c8",
+      "source": "Newly generated image (built-in image generator, 2026-11-19), source gen-4.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-19-kirkland-repipe-5.webp",
+      "repo_path": "assets/images/posts/2026-11-19-kirkland-repipe-5.webp",
+      "alt": "Kirkland, WA repiping drywall access: a hallway wall with several small drywall cutouts exposing red and blue PEX lines for whole-house repiping \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "2d6a5de9d1f6d62a20c8475e580703a9",
+      "source": "Newly generated image (built-in image generator, 2026-11-19), source gen-5.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-19-kirkland-repipe-6.webp",
+      "repo_path": "assets/images/posts/2026-11-19-kirkland-repipe-6.webp",
+      "alt": "Kirkland, WA repiping plumber at work: a plumber's hands connecting new supply lines and shutoff valves under a sink during a whole-house repiping \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "7e4d48791363248fca917de978846fa4",
+      "source": "Newly generated image (built-in image generator, 2026-11-19), source gen-6.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-19-kirkland-repipe-7.webp",
+      "repo_path": "assets/images/posts/2026-11-19-kirkland-repipe-7.webp",
+      "alt": "Kirkland, WA repiping pressure check: a pressure gauge attached to an exterior hose bib beside a Kirkland garden wall to verify water pressure after whole-house repiping \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "deec440809cbdd688c29ad1f1e11f366",
+      "source": "Newly generated image (built-in image generator, 2026-11-19), source gen-7.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-19-kirkland-repipe-8.webp",
+      "repo_path": "assets/images/posts/2026-11-19-kirkland-repipe-8.webp",
+      "alt": "Kirkland, WA repiping rough-in inspection: open wall framing with new pipes in place, an inspector's clipboard and a hard hat waiting for the rough-in plumbing inspection \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "926c73fdd63b9fffbf6c879045e18d17",
+      "source": "Newly generated image (built-in image generator, 2026-11-19), source gen-8.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-19-kirkland-repipe-9.webp",
+      "repo_path": "assets/images/posts/2026-11-19-kirkland-repipe-9.webp",
+      "alt": "Kirkland, WA repiping finished result: a bright Kirkland bathroom with patched, painted walls, new fixtures and a window view of evergreens after whole-house repiping \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "90d74e5515f69c8562e026aa4e50dcfa",
+      "source": "Newly generated image (built-in image generator, 2026-11-19), source gen-9.jpg converted to 1600w webp q82"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "Q1cJKZgyaNg",
+      "url": "https://www.youtube.com/watch?v=Q1cJKZgyaNg",
+      "title": "Ken of Allison Plumbing shows how a whole-house repipe is done.",
+      "oembed_status": 200
+    },
+    {
+      "id": "7O_QN1npN1A",
+      "url": "https://www.youtube.com/watch?v=7O_QN1npN1A",
+      "title": "Whole House Repipe: Fixing Slab Leaks and Upgrading to PEX | Reliant Plumbing",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "9 newly generated images (built-in generator), 0 regraded stills, 0 paid media."
+}
