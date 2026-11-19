@@ -22,6 +22,8 @@ Whether you are near Downtown Woodinville, the Tourist District corridor, Hollyw
 
 Equestrian and larger-lot properties sometimes carry accessory structures, septic or well constraints, critical-area overlays, or longer driveway staging that a city-lot second story never sees. Put those constraints in the proposal so they are not discovered after the roof comes off. Cross-check [roofing.html](../roofing.html) and [siding.html](../siding.html) when the new volume reopens the envelope, and [trades.html](../trades.html) when plumber, electrician, and HVAC share the same riser and chase windows upstairs.
 
+![Single-story rambler on a wooded Woodinville, Washington lot before a second-story addition](../assets/images/posts/2026-09-28-woodinville-second-story-addition-lot-5.webp "Many Woodinville second-story additions start with a single-story home on a treed lot, where setbacks and drainage shape the plan.")
+
 ## Climate, jurisdiction, and Accela permitting realities
 
 Western Washington second stories live and die by weather windows. Woodinville is inland relative to Edmonds — less salt-air stress on cladding — but cool, damp seasons still demand temporary roofing, taped or sealed sheathing, and a written dry-in milestone before interior finishes upstairs. Fancy upstairs baths cannot compensate for a roof opening that sat wet for a weekend.
@@ -73,6 +75,8 @@ Manufacturer product pages for sheathing, roofing, and insulation when you compa
 - [GAF](https://www.gaf.com/) — roofing systems commonly compared once the new volume is sheathed and ready for finish roofing
 - [Owens Corning insulation](https://www.owenscorning.com/en-us/insulation) — insulation products frequently specified after the new story is enclosed and inspection holds clear
 
+![Engineered floor joists, sheathing and house wrap staged for a second-story addition in Woodinville, Washington](../assets/images/posts/2026-09-28-woodinville-second-story-addition-materials-6.webp "Engineered lumber, sheathing and weather barrier staged for a Woodinville second-story addition.")
+
 ## FAQ
 
 **Does Woodinville use MyBuildingPermit for second-story additions?**  
@@ -93,9 +97,13 @@ Normalize permit ownership (City Accela vs county portal vs L&I electrical), str
 **Where should I shortlist contractors?**  
 Use the Board’s [additions directory](../additions.html), review [Another Story](../another-story.html) when vertical expansion is the goal, interview two or three licensed firms, request written scopes, and verify each at [L&I Verify](https://secure.lni.wa.gov/verify/).
 
+![New stair opening framed to reach a second-story addition in a Woodinville, Washington home](../assets/images/posts/2026-09-28-woodinville-second-story-addition-stairs-7.webp "A new stair opening is one of the interior changes a Woodinville second-story addition usually needs.")
+
 ## Woodinville vs Edmonds, Shoreline, and other Eastside second-story scopes
 
 Coastal Edmonds and Shoreline jobs lean harder on salt-air cladding and wind-driven wetting; Woodinville and other inland Eastside lots still see the same cool, damp climate that punishes open roofs. Neighboring cities may use MyBuildingPermit or other portals — Woodinville city parcels should plan for **Accela**, while many Woodinville mailing addresses must plan for **King County MyBuildingPermit** or a Snohomish County path instead. Ask firms that also work Edmonds, Shoreline, Kirkland, or Bothell how their temporary roof, sheathing, and stay-in-home details change on a Sammamish Valley or Hollywood Hill lot versus a coastal ranch — the honest answer is usually jurisdiction, staging, and sequencing, not a one-size coastal package. Cross-check [roofing.html](../roofing.html) and [siding.html](../siding.html) when the envelope reopens; the City still issues the local building path for city lots through [Accela](https://aca-prod.accela.com/woodinville/default.aspx).
+
+![Roofline and dry-in of a second-story addition on an Eastside home in Woodinville, Washington](../assets/images/posts/2026-09-28-woodinville-second-story-addition-roofline-8.webp "Getting the new Woodinville second story dried in quickly protects the existing house below during wet months.")
 
 ## Putting it together for homeowners
 
@@ -106,3 +114,5 @@ When you interview firms, ask them to walk a recent Eastside or Snohomish County
 Use the Board directories as a starting shortlist — especially [additions](../additions.html) and [Another Story](../another-story.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, allowance logs, Accela or county permit numbers, L&I electrical records if any, inspection results, product cut sheets, and dated photos of temporary roofing and hidden structure before finishes close. That file protects you during construction and years later when a roof needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
+
+![Finished two-story home after a second-story addition in Woodinville, Washington](../assets/images/posts/2026-09-28-woodinville-second-story-addition-finished-9.webp "A finished Woodinville second-story addition with siding and windows matched to the original house.")
