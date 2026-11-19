@@ -9402,6 +9402,29 @@ def write_sitemap(posts: list[dict]) -> None:
             "  </url>"
         )
 
+    # Hand-published Feasibility Study page (PR #234). Regen must keep this URL.
+    feasibility_loc = f"{BASE_URL}feasibility-study.html"
+    if (SITE_DIR / "feasibility-study.html").is_file() and not any(
+        feasibility_loc in entry for entry in entries
+    ):
+        feasibility_lastmod = "2026-11-18"
+        sitemap_path = SITE_DIR / "sitemap.xml"
+        if sitemap_path.is_file():
+            prior = re.search(
+                rf"<loc>{re.escape(feasibility_loc)}</loc>\s*<lastmod>([^<]+)</lastmod>",
+                sitemap_path.read_text(encoding="utf-8"),
+            )
+            if prior:
+                feasibility_lastmod = prior.group(1)
+        entries.append(
+            "  <url>\n"
+            f"    <loc>{feasibility_loc}</loc>\n"
+            f"    <lastmod>{feasibility_lastmod}</lastmod>\n"
+            "    <changefreq>monthly</changefreq>\n"
+            "    <priority>0.6</priority>\n"
+            "  </url>"
+        )
+
     xml = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
