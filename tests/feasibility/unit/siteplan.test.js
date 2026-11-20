@@ -211,4 +211,6 @@ t.ok("and the floor-area total stays 'not in public data', with no total with th
 var th = SP.thumb(M, pa);
 t.ok("a thumbnail is a small picture with no text", /^<svg viewBox="0 0 220 150" class="bh-thumb" aria-hidden="true"/.test(th) && !/<text/.test(th) && !/\sid="/.test(th));
 t.ok("no thumbnail without a lot outline", SP.thumb(SP.model({ rings: null }), null) === "");
+var studySheet = SP.sheet(M, { F: F, opt: opt("addition"), sheet: "SP-1", noSources: true, noInset: true, compact: true, pageLabel: "Page 3 of 6", pageNum: 3, totalPages: 6 }).html;
+t.ok("the study sheet is the one drawing, labeled Page 3 of 6, with no inset and no links", /class="bh-sheet-svg"/.test(studySheet) && /Page 3 of 6/.test(studySheet) && /data-page="3"/.test(studySheet) && /data-total="6"/.test(studySheet) && !/bh-sheet-twin/.test(studySheet) && !/<image /.test(studySheet) && !/<a\b/i.test(studySheet) && !/\bPPG\b/.test(studySheet));
 t.done();

@@ -440,7 +440,7 @@
             if (up != null && up >= 300) {
               a.kind = "secondStory"; a.title = "Second-story addition"; a.feasible = farUnknown || farRoomUnknown ? null : true;
               a.footprintSf = 0; a.levels = 1; a.gfaSf = r10(up);
-              a.why = "No lot coverage room is left at the ground, so the concept goes up over the existing house. PPG checks the framing and foundation on site.";
+              a.why = "No lot coverage room is left at the ground, so the concept goes up over the existing house. Pacific Pro Group checks the framing and foundation on site.";
             }
           }
           if (a.kind !== "secondStory") { a.feasible = false; a.why = "No lot coverage room is left for a ground-floor addition" + (st != null && st >= 2 ? ", and the record shows " + st + " stories already." : "."); }

@@ -878,5 +878,85 @@ kingLivingSqft(s).then(function () { console.log(JSON.stringify({ s: s, asked: a
         self.assertNotIn("r.json()", reader)
 
 
+class FeasibilitySixPageTests(unittest.TestCase):
+    """The printed feasibility study (assets/feasibility), not the interactive Build Here tool."""
+
+    JS = ROOT / "assets/feasibility/build-here.js"
+    CSS = ROOT / "assets/feasibility/build-here.css"
+    HTML = ROOT / "feasibility-study.html"
+    SUMMARY = ROOT / "assets/feasibility/build-here-summary.js"
+    SITEPLAN = ROOT / "assets/feasibility/build-here-siteplan.js"
+    EXPORT = ROOT / "assets/feasibility/build-here-export.js"
+
+    def test_listing_hook_stays_off_and_county_extracts_are_not_added(self):
+        js = self.JS.read_text(encoding="utf-8")
+        self.assertIn('listingFactsUrl: ""', js)
+        self.assertIn("snoHouseSize(s)", js)
+        self.assertNotIn("maps.google.com", js)
+        self.assertNotIn("/assets/data/sno-bldg/", js)
+        self.assertNotIn("turf", js.lower())
+        self.assertNotIn("lawn", js.lower())
+        css = self.CSS.read_text(encoding="utf-8")
+        self.assertIn("@page{size:letter landscape;margin:0.35in}", css)
+        self.assertIn(".bh-what-you-can-build-page", css)
+        page = self.HTML.read_text(encoding="utf-8")
+        self.assertIn("/assets/feasibility/build-here.js?v=20261119a", page)
+
+    def test_study_sheets_and_download_have_no_links(self):
+        script = r"""
+const path = require('path');
+const root = process.argv[1];
+globalThis.window = globalThis;
+globalThis.BuildHereGeom = require(path.join(root, 'assets/feasibility/build-here-geom.js'));
+globalThis.BuildHereRules = require(path.join(root, 'assets/feasibility/build-here-rules.js'));
+globalThis.BuildHereSitePlan = require(path.join(root, 'assets/feasibility/build-here-siteplan.js'));
+const Sum = require(path.join(root, 'assets/feasibility/build-here-summary.js'));
+const SP = require(path.join(root, 'assets/feasibility/build-here-siteplan.js'));
+const Ex = require(path.join(root, 'assets/feasibility/build-here-export.js'));
+const fx = require(path.join(root, 'tests/feasibility/unit/_fixture.js'));
+const s = fx.state(), v = fx.view(s), rs = fx.rules(s, v);
+const M = SP.model({ rings: s.rings, lon: s.lon, lat: s.lat, neighbors: s.neighborRings, setbacks: rs.setbacks, setbackVerify: rs.setbackVerify, addrStreet: '160TH AVE NE', geo: s.landscape.geo, slope: s.landscape.slope });
+const F = Sum.facts(s, v, rs, fx.context(s, v, rs, M.env.area), { brand: fx.BRAND }, M);
+const facts = Sum.factsSheet(F, Sum.blocks(F), { pageLabel: 'Page 2 of 6', pageNum: 2, totalPages: 6 });
+const opt = { id: 'addition', title: 'Addition', kind: 'addition', gfaSf: 1500, footprintSf: 750, levels: 2, feasible: true, placement: 'rear', where: 'rear' };
+const placed = SP.place(M, opt);
+const sheet = SP.sheet(M, { F: F, opt: opt, placed: placed, sheet: 'SP-1', noSources: true, noInset: true, compact: true, pageLabel: 'Page 3 of 6', pageNum: 3, totalPages: 6 }).html;
+const pages = [
+  '<section class="bh-page" data-page="1" data-total="6">Page 1 of 6</section>',
+  facts, sheet,
+  '<section class="bh-page" data-page="4" data-total="6">Page 4 of 6</section>',
+  '<section class="bh-page bh-details-page" data-page="5" data-total="6">Page 5 of 6 Permit history and plan sets</section>',
+  '<section class="bh-page" data-page="6" data-total="6">Page 6 of 6</section>'
+];
+const file = Ex.buildStudyFile({ address: 'Sample lot', date: '2026-11-19', noSources: true, bodyHtml: pages.join(''), sources: [{ name: 'County', url: 'https://gis.example/parcels' }], limitations: 'not printed' });
+const joined = pages.join('');
+console.log(JSON.stringify({
+  pages: (joined.match(/class="bh-page/g) || []).length,
+  sheets: (joined.match(/class="bh-page bh-sheet/g) || []).length,
+  anchors: (joined.match(/<a\b/gi) || []).length,
+  http: (joined.match(/href="https?:/gi) || []).length,
+  ppg: /\bPPG\b/.test(joined),
+  see: /See page 5\./.test(facts),
+  label: /Page 3 of 6/.test(sheet),
+  fileAnchors: (file.match(/<a\b/gi) || []).length,
+  fileSources: /<h2>Sources<\/h2>/.test(file) || /gis\.example/.test(file),
+  fileLimits: /Limitations and confidence/.test(file),
+  fileBreak: /page-break-after:always/.test(file)
+}));
+"""
+        out = json.loads(subprocess.check_output(["node", "-e", script, str(ROOT)], text=True))
+        self.assertEqual(out["pages"], 6)
+        self.assertEqual(out["sheets"], 1)
+        self.assertEqual(out["anchors"], 0)
+        self.assertEqual(out["http"], 0)
+        self.assertFalse(out["ppg"])
+        self.assertTrue(out["see"])
+        self.assertTrue(out["label"])
+        self.assertEqual(out["fileAnchors"], 0)
+        self.assertFalse(out["fileSources"])
+        self.assertFalse(out["fileLimits"])
+        self.assertTrue(out["fileBreak"])
+
+
 if __name__ == "__main__":
     unittest.main()

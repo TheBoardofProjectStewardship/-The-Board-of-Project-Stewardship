@@ -37,7 +37,10 @@ t.ok("no owner field is carried into the facts", JSON.stringify(a.F, function (k
 /* ---- four blocks, every row a fact or a labeled estimate ---- */
 t.ok("four blocks with rows", a.B.building.length >= 12 && a.B.remodel.length >= 8 && a.B.landscaping.length >= 9 && a.B.roofing.length >= 5, [a.B.building.length, a.B.remodel.length, a.B.landscaping.length, a.B.roofing.length]);
 t.ok("every row has a label, a value and a state", allRows(a.B).every(function (r) { return r.k && r.v && /^(fact|est|partial|missing|verify)$/.test(r.s); }));
-t.ok("no row is a bare link", allRows(a.B).every(function (r) { return !/https?:\/\//.test(r.v) && !/^\s*(see|open|search|visit)\b/i.test(r.v) && r.v.length >= 4; }), allRows(a.B).filter(function (r) { return /https?:\/\//.test(r.v) || r.v.length < 4; }));
+t.ok("no row is a bare link", allRows(a.B).every(function (r) {
+  if (r.key === "permitHistory" && r.v === "See page 5.") return true;
+  return !/https?:\/\//.test(r.v) && !/^\s*(see|open|search|visit)\b/i.test(r.v) && r.v.length >= 4;
+}), allRows(a.B).filter(function (r) { return r.key !== "permitHistory" && (/https?:\/\//.test(r.v) || /^\s*(see|open|search|visit)\b/i.test(r.v) || r.v.length < 4); }).map(function (r) { return r.key + ": " + r.v; }));
 t.ok("row keys are unique", allRows(a.B).map(function (r) { return r.key; }).sort().join().indexOf(",,") < 0 && new Set(allRows(a.B).map(function (r) { return r.key; })).size === allRows(a.B).length);
 t.ok("sources are numbered footnotes", a.B.notes.length >= 6 && a.B.notes.every(function (n, i) { return n.n === i + 1 && n.label; }) && allRows(a.B).some(function (r) { return r.fn.length > 0; }));
 t.ok("a footnote number always has a footnote", allRows(a.B).every(function (r) { return r.fn.every(function (n) { return n >= 1 && n <= a.B.notes.length; }); }));
@@ -72,7 +75,7 @@ t.ok("with no year on record the lead rule is planned for", /plan as if/.test(ro
 t.ok("house size lists living, first floor, basement and stories", /1,840 sf finished living · 1st floor 1,220 sf · basement 1,220 sf \(620 finished\) · 1 story/.test(rowOf(a.B, "house").v), rowOf(a.B, "house").v);
 t.ok("bedrooms and baths from the index", /3 bedrooms · 1\.75 baths/.test(rowOf(a.B, "rooms").v));
 t.ok("garage and deck from the record", /attached garage 550 sf · deck 180 sf/.test(rowOf(a.B, "garage").v));
-t.ok("permit history says when it is not online, with no link list", /not available online/.test(rowOf(a.B, "permitHistory").v) && rowOf(a.B, "permitHistory").s === "missing");
+t.ok("the facts row points at the permit page instead of repeating a source list", rowOf(a.B, "permitHistory").v === "See page 5." && rowOf(a.B, "permitHistory").s === "fact");
 t.ok("kitchen and bath permits are answered and marked verify", /cabinets, counters, tile/.test(rowOf(a.B, "kitchenBath").v) && rowOf(a.B, "kitchenBath").s === "verify");
 
 /* ---- Landscaping ---- */
@@ -123,11 +126,12 @@ t.ok("a thin study still maps every question", ansE.every(function (q) { return 
 
 /* ---- the sheet ---- */
 t.ok("the facts sheet is page F-1 with four blocks", /data-sheet="F-1"/.test(a.html) && /<h3>Building<\/h3>/.test(a.html) && /<h3>Remodel<\/h3>/.test(a.html) && /<h3>Landscaping<\/h3>/.test(a.html) && /<h3>Roofing<\/h3>/.test(a.html));
-t.ok("phone and email are links a visitor can tap", /href="tel:\+12064465656"/.test(a.html) && /href="mailto:admin@pacificprogroup\.com"/.test(a.html) && /href="https:\/\/pacificprogroup\.com"/.test(a.html));
+t.ok("phone and site are plain text, with no link", /\(206\) 446-5656/.test(a.html) && /pacificprogroup\.com/.test(a.html) && !/<a\b/i.test(a.html) && !/href="/i.test(a.html));
 t.ok("an empty registration number is hidden", !/contractor reg/.test(a.html));
 t.ok("a registration number shows when set", /WA contractor reg\. PACIFPG123AB/.test(Sum.factsSheet(Object.assign({}, a.F, { brand: Object.assign({}, fx.BRAND, { license: "PACIFPG123AB" }) }))));
 t.ok("orange and estimate states are marked for the stylesheet", /class="bh-s-missing"/.test(a.html) && /class="bh-s-est"/.test(a.html) && /class="bh-s-verify"/.test(a.html));
-t.ok("footnotes are a numbered list", /<ol class="bh-facts-notes"><li>/.test(a.html) && /<sup class="bh-fn">\d/.test(a.html));
+t.ok("the printed facts sheet has no footnote list and no source links", !/<ol class="bh-facts-notes">/.test(a.html) && !/<sup class="bh-fn">/.test(a.html) && !/https?:\/\//.test(a.html));
+t.ok("the facts sheet is page 2 of 6 and does not say PPG", /Page 2 of 6/.test(a.html) && /data-page="2"/.test(a.html) && /data-total="6"/.test(a.html) && !/\bPPG\b/.test(a.html));
 t.ok("no owner name on the sheet", a.html.indexOf("CANARY") < 0);
 t.ok("no top-of-wall or bottom-of-wall wording", !/\bTOW\b|\bBOW\b/.test(a.html));
 var evil = fx.state(); evil.matched = '5514 <img src=x onerror=alert(1)> AVE, REDMOND, WA, 98052';

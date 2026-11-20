@@ -87,7 +87,7 @@
     F.permits = s.permits || []; F.permitSearch = s.permitSearch || "none";
     F.soils = s.soils || null; F.flood = s.flood || null;
     F.imageryCredit = s.imagery && s.imagery.credit ? s.imagery.credit : "";
-    F.type = v.type || "addition";
+    F.type = v.type || "addition"; F.isSample = !!s.isSample; F.listingFacts = s.listingFacts || null;
     // From the drawing: frontage, corner, alley, envelope, what was mapped.
     F.hasLot = !!(M && M.ok);
     F.frontage = M && M.ok && M.ce && isNum(M.ce.frontage) ? M.ce.frontage : null; F.corner = !!(M && M.ok && M.corner); F.alley = !!(M && M.ok && M.ce && M.ce.alley); F.through = !!(M && M.ok && M.ce && M.ce.through);
@@ -239,8 +239,8 @@
       pv = pr.length + " permit record" + (pr.length === 1 ? "" : "s") + " on this parcel in the layer read. Latest: " + [latest.type, latest.issued ? "issued " + latest.issued : "", latest.final ? "finaled " + latest.final : ""].filter(Boolean).join(", ") + ". The full list is on the Records page.";
     } else if (F.permitSearch === "ok") pv = "No permit record on this parcel in the layer read (" + (F.juris === "seattle" ? "Seattle issued and finaled residential permits" : "Snohomish County active permits") + "). Older work is often only on microfilm.";
     else if (F.permitSearch === "failed") pv = "The permit layer did not answer, so permit history was not read.";
-    else pv = "Permit history is not available online in a form this study reads for " + place + ". PPG pulls it for the site visit.";
-    add(Rm, "permitHistory", "Permit history", pv, pr.length || F.permitSearch === "ok" ? "fact" : "missing", [pr.length || F.permitSearch === "ok" ? (F.juris === "seattle" ? "City of Seattle residential building permits layer" : "Snohomish County active permits layer") : ""]);
+    else pv = "Permit history is not available online in a form this study reads for " + place + ". Pacific Pro Group pulls it for the site visit.";
+    add(Rm, "permitHistory", "Permit history", "See page 5.", "fact", []);
     add(Rm, "kitchenBath", "Kitchen or bath remodel", "No building permit for finish work (cabinets, counters, tile, flooring, paint) under the residential code's exempt-work list. Moving plumbing, wiring, gas or ducts needs trade permits; moving walls needs a building permit (verify with " + place + ").", "verify", [{ label: "International Residential Code R105.2 (work exempt from permit), as adopted in Washington; cities amend it", url: "" }]);
     add(Rm, "remodelOption", "If an addition does not fit", "A kitchen, bath or basement remodel inside the existing walls adds no lot coverage, floor area or setback question, so it stays open when the lot limits block an addition.", "fact", []);
 
@@ -343,27 +343,30 @@
   function contactHtml(b, cls) {
     b = b || {};
     var bits = [];
-    if (b.phone && telHref(b.phone)) bits.push('<a href="' + esc(telHref(b.phone)) + '" data-bh-cta="call" data-bh-place="strip">' + esc(b.phone) + "</a>");
-    if (b.email && mailHref(b.email)) bits.push('<a href="' + esc(mailHref(b.email)) + '" data-bh-cta="email" data-bh-place="strip">' + esc(b.email) + "</a>");
-    if (b.site) bits.push('<a href="' + esc(siteHref(b.site)) + '" data-bh-cta="site" data-bh-place="strip">' + esc(String(b.site).replace(/^https?:\/\//i, "").replace(/\/$/, "")) + "</a>");
+    if (b.phone) bits.push(esc(b.phone));
+    if (b.site) bits.push(esc(String(b.site).replace(/^https?:\/\//i, "").replace(/\/$/, "")));
     if (b.license) bits.push("WA contractor reg. " + esc(b.license));
     return '<p class="' + (cls || "bh-contact") + '">' + (b.name ? "<strong>" + esc(b.name) + (b.tagline ? " · " + esc(b.tagline) : "") + "</strong>" + (bits.length ? " · " : "") : "") + bits.join(" · ") + "</p>";
   }
   function blockHtml(name, rows) {
     return '<div class="bh-facts-block"><h3>' + esc(name) + '</h3><table class="bh-facts-table"><tbody>' + rows.map(function (r) {
-      return '<tr><th scope="row">' + esc(r.k) + '</th><td class="' + (STATE_CLASS[r.s] || "bh-s-fact") + '">' + esc(r.v) + (r.fn.length ? ' <sup class="bh-fn">' + r.fn.join(",") + "</sup>" : "") + "</td></tr>";
+      return '<tr><th scope="row">' + esc(r.k) + '</th><td class="' + (STATE_CLASS[r.s] || "bh-s-fact") + '">' + esc(r.v) + "</td></tr>";
     }).join("") + "</tbody></table></div>";
   }
   /* Page 2 of the summary. */
-  function factsSheet(F, B) {
+  function factsSheet(F, B, opts) {
     B = B || blocks(F);
+    opts = opts || {};
     var b = F.brand || {};
-    return '<section class="bh-page bh-facts" data-sheet="F-1"><header class="bh-facts-head"><div><h2>Property facts</h2><p>' + esc(F.address) + (F.parcel ? " · Parcel " + esc(F.parcel) : "") + (F.preparedText ? " · Prepared " + esc(F.preparedText) : "") + '</p></div><div class="bh-facts-id" aria-hidden="true">F-1</div></header>' +
-      '<p class="bh-facts-key"><span class="bh-s-est">≈ estimate from public data</span> · <span class="bh-s-partial">≥ a total that lacks a part</span> · <span class="bh-s-missing">orange: not in public data, or verify</span> · small numbers are the sources below</p>' +
+    var pageLabel = opts.pageLabel || "Page 2 of 6";
+    var pageNum = opts.pageNum || 2;
+    var totalPages = opts.totalPages || 6;
+    var sampleTxt = F.isSample ? " · SAMPLE LAYOUT — NOT A PROPERTY RECORD" : "";
+    return '<section class="bh-page bh-facts" data-sheet="F-1" data-page="' + esc(pageNum) + '" data-total="' + esc(totalPages) + '"><header class="bh-facts-head"><div><h2>Property facts</h2><p>' + esc(F.address) + (F.parcel ? " · Parcel " + esc(F.parcel) : "") + (F.preparedText ? " · Prepared " + esc(F.preparedText) : "") + esc(sampleTxt) + '</p></div><div class="bh-facts-id" aria-hidden="true">F-1 · ' + esc(pageLabel) + '</div></header>' +
+      '<p class="bh-facts-key"><span class="bh-s-est">≈ estimate from public data</span> · <span class="bh-s-partial">≥ a total that lacks a part</span> · <span class="bh-s-missing">orange: not in public data, or verify</span></p>' +
       '<div class="bh-facts-cols"><div>' + blockHtml("Building", B.building) + "</div><div>" + blockHtml("Remodel", B.remodel) + blockHtml("Landscaping", B.landscaping) + blockHtml("Roofing", B.roofing) + "</div></div>" +
       '<p class="bh-facts-visit"><strong>' + esc(b.name ? b.name + " confirms on site" : "Confirmed on site") + ":</strong> " + esc(B.visit.items.join(" · ")) + ".</p>" +
-      '<ol class="bh-facts-notes">' + B.notes.map(function (n) { return "<li>" + (n.url ? '<a href="' + esc(n.url) + '" target="_blank" rel="noopener">' + esc(n.label) + "</a>" : esc(n.label)) + "</li>"; }).join("") + "</ol>" +
-      '<footer class="bh-facts-foot">' + contactHtml(b) + '<p class="bh-facts-disc">Planning estimate from public records. Not a survey, a title report or a permit decision. Verify with ' + esc(F.place) + ".</p></footer></section>";
+      '<footer class="bh-facts-foot">' + contactHtml(b) + '<p class="bh-facts-disc">Planning estimate from public records; not a survey or permit determination. Verify with ' + esc(F.place) + " · <strong>" + esc(pageLabel) + "</strong></p></footer></section>";
   }
   /* The next step, tied to what this study found. It takes the place of the generic list when link-only blocks are hidden. */
   function nextStep(F) {
