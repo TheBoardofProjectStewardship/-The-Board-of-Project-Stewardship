@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-11-20-foundation-crack-repair-kent-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-11-20T11:45:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Foundation Crack Repair Kent WA \u2014 Settlement Signs, Structural Engineers, Permits and Lasting Fixes",
+    "date": "2026-11-20",
+    "slug": "foundation-crack-repair-kent-wa",
+    "description": "A Kent guide to foundation cracks and settlement: which cracks to watch, valley soils and liquefaction maps, when to bring in a structural engineer, City of Kent permits and inspections, pier and crack-injection repairs, drainage, and how to hire a registered contractor.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 board-intake inbox had no 2026-11-20 packets (latest 2026-11-19); PC not touched. Topic: foundation crack and settlement repair in Kent WA. City of Kent Residential Building Permits page (permit for most construction, alteration or repair work incl. changing structure; all permits via permitting portal; inspection reschedule via Citizen Portal, same-day cancel 253-856-5300); Work Exempt from Permit sheet (IRC R105.2 list; no foundation repair exemption; retaining walls <=4 ft exempt unless surcharge); FAQ (owner may do own work but permit required; L&I handles electrical permits); Permit Center 400 W Gowe St, M-F 9-4, 253-856-5300, Building Codes 253-856-5412; Residential Alteration checklist (stamped drawings; WA PE stamps calcs for non-conventional bracing); New Residences checklist design criteria (SDC D2, 12 in frost, 1500 psf assumed bearing, geotech soils report conditions, 6-mil ground cover, anchor bolts). DNR geologic hazard maps page, Geologic Information Portal, DNR Des Moines/Renton liquefaction study (lower Green River valley; Kent borings; fill/alluvium high; not a substitute for site-specific investigation). L&I Verify + hiring a contractor; Kent How to Hire a Contractor PDF. Kent already in _SLUG_PLACES/_PLACE_NAMES; generate_site.py unchanged; kent.html unchanged. Cross-links: window replacement Kent 2026-10-25, Kenmore drainage 2026-10-27, Auburn crawl space 2026-10-26, Mukilteo retaining wall 2026-10-30, Renton basement 2026-10-14. No fee or price figures. Producer role fields kept per intake contract."
+}

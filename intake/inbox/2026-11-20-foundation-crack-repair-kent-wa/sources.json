@@ -1,0 +1,154 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Kent",
+    "service": "Foundation crack and settlement repair: settlement signs, structural and geotechnical engineers, permits, piers, crack injection and drainage",
+    "slug": "foundation-crack-repair-kent-wa"
+  },
+  "sources": [
+    {
+      "url": "https://dnr.wa.gov/sites/default/files/2025-04/ger_gm41_liquifaction_suscep_desmoines_renton_area.pdf",
+      "title": "https://dnr.wa.gov/sites/default/files/2025-04/ger_gm41_liquifaction_suscep_desmoines_renton_area.pdf",
+      "retrieved": "2026-11-20",
+      "http_status": 200,
+      "supports": "DNR liquefaction susceptibility Des Moines/Renton quadrangles (lower Green River valley)"
+    },
+    {
+      "url": "https://dnr.wa.gov/washington-geological-survey/geologic-hazards-and-environment/geologic-hazard-maps",
+      "title": "https://dnr.wa.gov/washington-geological-survey/geologic-hazards-and-environment/geologic-hazard-maps",
+      "retrieved": "2026-11-20",
+      "http_status": 200,
+      "supports": "DNR geologic hazard maps: liquefaction and NEHRP site class"
+    },
+    {
+      "url": "https://earthcontactproducts.com/",
+      "title": "https://earthcontactproducts.com/",
+      "retrieved": "2026-11-20",
+      "http_status": 200,
+      "supports": "Material maker: foundation repair piers or crack injection resins"
+    },
+    {
+      "url": "https://geologyportal.dnr.wa.gov/",
+      "title": "https://geologyportal.dnr.wa.gov/",
+      "retrieved": "2026-11-20",
+      "http_status": 200,
+      "supports": "DNR Geologic Information Portal"
+    },
+    {
+      "url": "https://pacificprogroup.com/",
+      "title": "https://pacificprogroup.com/",
+      "retrieved": "2026-11-20",
+      "http_status": 200,
+      "supports": "Board #1 ranked firm link"
+    },
+    {
+      "url": "https://permitportal.kentwa.gov/",
+      "title": "https://permitportal.kentwa.gov/",
+      "retrieved": "2026-11-20",
+      "http_status": 200,
+      "supports": "Kent permitting portal"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-11-20",
+      "http_status": 200,
+      "supports": "License/bond/insurance lookup"
+    },
+    {
+      "url": "https://www.kentwa.gov/government/frequently-asked-questions",
+      "title": "https://www.kentwa.gov/government/frequently-asked-questions",
+      "retrieved": "2026-11-20",
+      "http_status": 200,
+      "supports": "Kent FAQ: owner may do work with permit; L&I electrical permits"
+    },
+    {
+      "url": "https://www.kentwa.gov/home/showpublisheddocument/17513/637667898613670000",
+      "title": "https://www.kentwa.gov/home/showpublisheddocument/17513/637667898613670000",
+      "retrieved": "2026-11-20",
+      "http_status": 200,
+      "supports": "Kent How to Hire a Contractor"
+    },
+    {
+      "url": "https://www.kentwa.gov/home/showpublisheddocument/24943/639113413466730000",
+      "title": "https://www.kentwa.gov/home/showpublisheddocument/24943/639113413466730000",
+      "retrieved": "2026-11-20",
+      "http_status": 200,
+      "supports": "Kent Work Exempt from Permit (IRC R105.2 list)"
+    },
+    {
+      "url": "https://www.kentwa.gov/home/showpublisheddocument/24949/639113423427630000",
+      "title": "https://www.kentwa.gov/home/showpublisheddocument/24949/639113423427630000",
+      "retrieved": "2026-11-20",
+      "http_status": 200,
+      "supports": "Kent Residential Alteration checklist: stamped drawings; WA PE calcs"
+    },
+    {
+      "url": "https://www.kentwa.gov/home/showpublisheddocument/24951/639114097219700000",
+      "title": "https://www.kentwa.gov/home/showpublisheddocument/24951/639114097219700000",
+      "retrieved": "2026-11-20",
+      "http_status": 200,
+      "supports": "Kent New Residences checklist: design criteria SDC D2, 12 in frost, 1500 psf; soils report conditions; ground cover; anchor bolts"
+    },
+    {
+      "url": "https://www.kentwa.gov/pay-and-apply/apply-for-a-permit",
+      "title": "https://www.kentwa.gov/pay-and-apply/apply-for-a-permit",
+      "retrieved": "2026-11-20",
+      "http_status": 200,
+      "supports": "Kent Permit Center address, hours, phones"
+    },
+    {
+      "url": "https://www.kentwa.gov/pay-and-apply/apply-for-a-permit/check-your-permit-status",
+      "title": "https://www.kentwa.gov/pay-and-apply/apply-for-a-permit/check-your-permit-status",
+      "retrieved": "2026-11-20",
+      "http_status": 200,
+      "supports": "Kent check permit status"
+    },
+    {
+      "url": "https://www.kentwa.gov/pay-and-apply/apply-for-a-permit/residential-building-permits",
+      "title": "https://www.kentwa.gov/pay-and-apply/apply-for-a-permit/residential-building-permits",
+      "retrieved": "2026-11-20",
+      "http_status": 200,
+      "supports": "Kent: residential building permit for most construction, alteration or repair work; permitting portal; inspection reschedule/cancel"
+    },
+    {
+      "url": "https://www.lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "https://www.lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "retrieved": "2026-11-20",
+      "http_status": 200,
+      "supports": "State hiring guidance"
+    },
+    {
+      "url": "https://www.primeresins.com/",
+      "title": "https://www.primeresins.com/",
+      "retrieved": "2026-11-20",
+      "http_status": 200,
+      "supports": "Material maker: foundation repair piers or crack injection resins"
+    },
+    {
+      "url": "https://www.ramjack.com/",
+      "title": "https://www.ramjack.com/",
+      "retrieved": "2026-11-20",
+      "http_status": 200,
+      "supports": "Material maker: foundation repair piers or crack injection resins"
+    },
+    {
+      "url": "https://www.supportworks.com/",
+      "title": "https://www.supportworks.com/",
+      "retrieved": "2026-11-20",
+      "http_status": 200,
+      "supports": "Material maker: foundation repair piers or crack injection resins"
+    }
+  ],
+  "dropped": [
+    {
+      "url": "https://dol.wa.gov/professional-licenses/engineers-and-land-surveyors",
+      "reason": "404"
+    },
+    {
+      "url": "https://kingcounty.gov/en/dept/kcit/data-information-services/gis-center/maps-apps/imap",
+      "reason": "502 to box curl"
+    }
+  ],
+  "notes": "Box curl 2026-11-20 with browser UA and full browser headers. All cited = 200 (see cited-status.txt). City and DNR PDFs read via pdftotext. No fee or price figures quoted."
+}

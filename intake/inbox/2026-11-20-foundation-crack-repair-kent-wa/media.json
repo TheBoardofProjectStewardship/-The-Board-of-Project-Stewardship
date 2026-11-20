@@ -1,0 +1,98 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-11-20-kent-foundation-1.webp",
+      "repo_path": "assets/images/posts/2026-11-20-kent-foundation-1.webp",
+      "alt": "Kent, WA foundation crack repair: a Kent split-level house with a stair-step crack running diagonally through the concrete block foundation wall below the siding \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "9efa45c5b4a775b0838b2388705a9c8f",
+      "source": "Newly generated image (built-in image generator, 2026-11-20), source gen-1.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-20-kent-foundation-2.webp",
+      "repo_path": "assets/images/posts/2026-11-20-kent-foundation-2.webp",
+      "alt": "Kent, WA foundation crack monitoring: a tape measure and a crack-width gauge card held against a vertical crack in a poured concrete basement wall \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "15d480db9c29f5d1b4ea830d5719744e",
+      "source": "Newly generated image (built-in image generator, 2026-11-20), source gen-2.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-20-kent-foundation-3.webp",
+      "repo_path": "assets/images/posts/2026-11-20-kent-foundation-3.webp",
+      "alt": "Kent, WA crawl space foundation repair: a Kent crawl space with wood posts on concrete piers, a temporary jack and shoring under a beam, and plastic ground cover \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "a6925457da2abd4c36c5bb56230ac7db",
+      "source": "Newly generated image (built-in image generator, 2026-11-20), source gen-3.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-20-kent-foundation-4.webp",
+      "repo_path": "assets/images/posts/2026-11-20-kent-foundation-4.webp",
+      "alt": "Kent, WA foundation engineer evaluation: a clipboard with a floor plan sketch and a tripod-mounted laser level set up on a hardwood floor to check floor levels in a Kent home \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "d2588638e3035b40b2d15af04bfce82e",
+      "source": "Newly generated image (built-in image generator, 2026-11-20), source gen-4.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-20-kent-foundation-5.webp",
+      "repo_path": "assets/images/posts/2026-11-20-kent-foundation-5.webp",
+      "alt": "Kent, WA foundation pier installation: hydraulic installation equipment driving steel push piers along a trench dug beside a Kent home's foundation, with orange safety fencing in the yard \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "2a3226775e436844e7857d517d5bedca",
+      "source": "Newly generated image (built-in image generator, 2026-11-20), source gen-5.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-20-kent-foundation-6.webp",
+      "repo_path": "assets/images/posts/2026-11-20-kent-foundation-6.webp",
+      "alt": "Kent, WA foundation settlement sign: a diagonal drywall crack running up from the top corner of an interior door frame in a Kent home \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "26960cf4fd4d58b6b849d5b94ec32219",
+      "source": "Newly generated image (built-in image generator, 2026-11-20), source gen-6.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-20-kent-foundation-7.webp",
+      "repo_path": "assets/images/posts/2026-11-20-kent-foundation-7.webp",
+      "alt": "Kent, WA foundation drainage fix: a downspout connected to a black corrugated extension that carries roof water away from the foundation to a gravel swale in a Kent yard \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "6d3c10141d0d3621fdc4ac8889f71930",
+      "source": "Newly generated image (built-in image generator, 2026-11-20), source gen-7.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-20-kent-foundation-8.webp",
+      "repo_path": "assets/images/posts/2026-11-20-kent-foundation-8.webp",
+      "alt": "Kent, WA foundation inspection: a hand holding a blank inspection card at a new footing form with rebar in place, before concrete is poured at a Kent house \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "bddfd645baf40256b9837cf391c1a556",
+      "source": "Newly generated image (built-in image generator, 2026-11-20), source gen-8.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-20-kent-foundation-9.webp",
+      "repo_path": "assets/images/posts/2026-11-20-kent-foundation-9.webp",
+      "alt": "Kent, WA foundation crack repair result: a repaired basement wall crack lined with injection ports, beside a clean painted wall and a dehumidifier on the floor \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "71df27a30ce1e0b8bb9569f5c0d963c2",
+      "source": "Newly generated image (built-in image generator, 2026-11-20), source gen-9.jpg converted to 1600w webp q82"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "A6H5-yyapvk",
+      "url": "https://www.youtube.com/watch?v=A6H5-yyapvk",
+      "title": "Raising a Sinking Foundation with Push Piers | Foundation Supportworks",
+      "oembed_status": 200
+    },
+    {
+      "id": "HjHKV2lCLQs",
+      "url": "https://www.youtube.com/watch?v=HjHKV2lCLQs",
+      "title": "How To Fix a Concrete Foundation Crack | This Old House",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "9 newly generated images (built-in generator), 0 regraded stills, 0 paid media."
+}
