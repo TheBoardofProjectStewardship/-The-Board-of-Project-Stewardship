@@ -905,7 +905,9 @@ class FeasibilitySixPageTests(unittest.TestCase):
         self.assertIn("Map3DElement", gjs)
         self.assertIn("FlattenerElement", gjs)
         self.assertIn("CAP = 50", gjs)
+        self.assertNotIn("mapReserve", gjs)
         self.assertNotIn("AIza", gjs)
+        self.assertIn("tilesRoot: 0.006", gjs)
         self.assertNotIn("maps.google.com", js)
         self.assertNotIn("/assets/data/sno-bldg/", js)
         css = self.CSS.read_text(encoding="utf-8")
@@ -914,11 +916,51 @@ class FeasibilitySixPageTests(unittest.TestCase):
         self.assertNotIn("#bh-print-host{filter", css)
         self.assertNotIn("turf", js.lower())
         self.assertNotIn("lawn", js.lower())
-        css = self.CSS.read_text(encoding="utf-8")
         self.assertIn("@page{size:letter landscape;margin:0.35in}", css)
         self.assertIn(".bh-what-you-can-build-page", css)
         page = self.HTML.read_text(encoding="utf-8")
         self.assertIn("/assets/feasibility/build-here.js?v=20261119a", page)
+
+    def test_google_ledger_charges_a_map_load_and_solar_height_sets_stories(self):
+        import json
+        import subprocess
+        script = r"""
+var G = require("./assets/feasibility/build-here-google3d.js");
+var off = G.callsFor({ hasKey: false });
+var grid = G.callsFor({ hasKey: true });
+var elev = G.callsFor({ hasKey: true, needsElevation: true });
+var again = G.callsFor({ hasKey: true, mapCached: true, solarCached: true, needsElevation: true, elevationCached: true });
+var tiles = G.callsFor({ directTilesRoot: true });
+if (off.usd !== 0 || off.map !== 0 || off.tilesRoot !== 0) throw new Error("off " + JSON.stringify(off));
+if (grid.map !== 1 || grid.solar !== 1 || grid.elevation !== 0 || grid.tilesRoot !== 0 || grid.usd !== 0.017) throw new Error("grid " + JSON.stringify(grid));
+if (elev.elevation !== 1 || elev.usd !== 0.022) throw new Error("elev " + JSON.stringify(elev));
+if (again.usd !== 0) throw new Error("again " + JSON.stringify(again));
+if (tiles.tilesRoot !== 1 || tiles.usd !== 0.006 || tiles.map !== 0) throw new Error("tiles " + JSON.stringify(tiles));
+if (G.PRICE.mapLoad !== 0.007 || G.PRICE.solar !== 0.01 || G.PRICE.elevation !== 0.005 || G.PRICE.tilesRoot !== 0.006) throw new Error("price");
+if (G.PRICE.mapReserve != null) throw new Error("reserve");
+var M = 3.280839895;
+var spec = { buildings: [{ role: "house", heightFt: 10, stories: 1, label: "Approximate height: 1 story on the county record, drawn at 10 ft a story. The record has no eave height." }], dem: { vals: [100] }, caption: "Footprint: sample. Approximate height: 1 story on the county record, drawn at 10 ft a story. The record has no eave height. Ground uses the elevation samples." };
+var solar = { solarPotential: { roofSegmentStats: [
+  { pitchDegrees: 32, azimuthDegrees: 180, planeHeightAtCenterMeters: 122 / M },
+  { pitchDegrees: 28, azimuthDegrees: 0, planeHeightAtCenterMeters: 118 / M }
+] } };
+var state = {};
+G.applySolar(spec, solar, state);
+G.applySolar(spec, solar, state);
+var house = spec.buildings[0];
+if (house.heightFt !== 22) throw new Error("height " + house.heightFt);
+if (house.stories !== 2) throw new Error("stories " + house.stories);
+if (spec.solarStories !== 2 || state.solarStories !== 2) throw new Error("solar stories");
+if ((spec.caption.match(/Height 22 ft/g) || []).length !== 1) throw new Error("caption dup " + spec.caption);
+if (/10 ft a story/.test(spec.caption)) throw new Error("still approximate " + spec.caption);
+var bare = { buildings: [{ role: "house", heightFt: 10, label: "approx" }], caption: "Approximate height: 10 ft for the house. No eave height is on the county record." };
+G.applySolar(bare, solar, {});
+if (bare.buildings[0].heightFt !== 10 || bare.buildings[0].stories) throw new Error("no ground " + JSON.stringify(bare.buildings[0]));
+console.log(JSON.stringify({ grid: grid.usd, elev: elev.usd, tiles: tiles.usd, height: house.heightFt, stories: house.stories }));
+"""
+        out = subprocess.check_output(["node", "-e", script], cwd=ROOT, text=True)
+        got = json.loads(out)
+        self.assertEqual(got, {"grid": 0.017, "elev": 0.022, "tiles": 0.006, "height": 22, "stories": 2})
 
     def test_study_sheets_and_download_have_no_links(self):
         script = r"""

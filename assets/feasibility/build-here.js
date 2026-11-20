@@ -43,7 +43,7 @@
       leadSource: "",     // "Sent from ..." in the lead message; the page address when empty
       allowSample: false, listingFactsUrl: "", // ?sample=1 draws a labeled sample study; off except on a local test server
       googleMapsKey: "", // empty: free massing only. No key is shipped and no Google request is made.
-      google3dTilesKey: "", // unused alias. Photorealistic tiles are not called from this page.
+      google3dTilesKey: "", // unused. Map3DElement is an Immersive Maps load. This page does not call the Map Tiles API.
       geocodeUrl: "",
       // The firm named in the title block of the sheets and in the contact rows. Each is left off when empty.
       legalName: "",       // the firm's full name for the title block; the brand name when empty

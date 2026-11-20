@@ -1,17 +1,21 @@
 /* Optional Google layer for the feasibility study. Nothing here runs unless
    BuildHereConfig.googleMapsKey is a non-empty string. No key is shipped.
    List prices used for the $50 cap (first paid tier, USD per event, Nov 2026 price list):
-     Immersive Maps (one 3D map load)           $7 / 1000 = $0.007
-     Solar API Building Insights (one findClosest) $10 / 1000 = $0.010
-     Elevation API (one request)                $5 / 1000 = $0.005
-     Photorealistic 3D Tiles are fetched by the map as the camera moves and are
-     not visible to this page, so each new map session also reserves $1.00
-     (about 167 tiles at $6 / 1000) before the map is created.
+     Immersive Maps, SKU for Map3DElement. Billable event is one successful
+     map load. 5,000 free per month, then $7 / 1,000 = $0.007. This is not
+     the Map Tiles API. Map3DElement does not reserve a per-tile charge.
+     Solar API Building Insights (one findClosest) $10 / 1,000 = $0.010
+     Elevation API (one request)                $5 / 1,000 = $0.005
+     Map Tiles API Photorealistic 3D Tiles applies only to a direct tiles
+     request (Cesium or the Map Tiles API). This page does not make one.
+     If it did, one root tileset request covers up to a 3-hour session
+     at $6 / 1,000 = $0.006. It is not billed per tile and not at $1.00.
    A cached address makes none of these calls again. */
 (function (root) {
   "use strict";
   var CAP = 50;
-  var PRICE = { mapLoad: 0.007, solar: 0.01, elevation: 0.005, mapReserve: 1 };
+  var STORY_FT = 10;
+  var PRICE = { mapLoad: 0.007, solar: 0.01, elevation: 0.005, tilesRoot: 0.006 };
   var M_TO_FT = 3.280839895;
 
   function store() {
@@ -55,12 +59,13 @@
   /* Calls a fresh model would make. Cached hits are zeros. */
   function callsFor(opts) {
     opts = opts || {};
-    if (!opts.hasKey) return { map: 0, solar: 0, elevation: 0, usd: 0 };
-    var map = opts.mapCached ? 0 : 1;
-    var solar = opts.solarCached ? 0 : 1;
-    var elevation = opts.needsElevation && !opts.elevationCached ? 1 : 0;
-    var usd = (map ? PRICE.mapLoad + PRICE.mapReserve : 0) + solar * PRICE.solar + elevation * PRICE.elevation;
-    return { map: map, solar: solar, elevation: elevation, usd: Math.round(usd * 1000) / 1000 };
+    var map = opts.hasKey && !opts.mapCached ? 1 : 0;
+    var solar = opts.hasKey && !opts.solarCached ? 1 : 0;
+    var elevation = opts.hasKey && opts.needsElevation && !opts.elevationCached ? 1 : 0;
+    /* A direct Map Tiles / Cesium root request, only when that path is actually used. */
+    var tilesRoot = opts.directTilesRoot && !opts.tilesCached ? 1 : 0;
+    var usd = map * PRICE.mapLoad + solar * PRICE.solar + elevation * PRICE.elevation + tilesRoot * PRICE.tilesRoot;
+    return { map: map, solar: solar, elevation: elevation, tilesRoot: tilesRoot, usd: Math.round(usd * 1000) / 1000 };
   }
 
   function keyOf(cfg) { return cfg && String(cfg.googleMapsKey || "").trim(); }
@@ -92,19 +97,27 @@
     var pitched = pitches.filter(function (p) { return p >= 5; }).length;
     var flat = pitches.length - pitched;
     var note = "Roof: " + segs.length + " plane" + (segs.length === 1 ? "" : "s") + " from Google Solar API buildingInsights (" + pitched + " pitched, " + flat + " under 5 degrees).";
+    spec.caption = (spec.caption || "").replace(/ Approximate height:.*?The record has no eave height\./g, "").replace(/ Height \d+ ft \(\d+ stor(?:y|ies)\) from Google Solar API buildingInsights\./g, "").replace(/ Roof: \d+ plane[\s\S]*$/, "").replace(/\s+$/, "");
     if (heights.length) {
       var ridge = Math.round(Math.max.apply(null, heights));
+      var stories = Math.max(1, Math.round(ridge / STORY_FT));
       var planes = segs.map(function (seg) {
         return { pitch: typeof seg.pitchDegrees === "number" ? seg.pitchDegrees : 0, azimuth: typeof seg.azimuthDegrees === "number" ? seg.azimuthDegrees : 0, heightFt: ridge };
       });
+      var heightLine = "Height " + ridge + " ft (" + stories + " " + (stories === 1 ? "story" : "stories") + ") from Google Solar API buildingInsights.";
       spec.buildings.forEach(function (b) {
         if (b.role === "house") {
           b.heightFt = ridge;
+          b.stories = stories;
           b.roofPlanes = planes;
-          b.label = "Height " + ridge + " ft: Google Solar API roof-plane height above sea level, minus the ground elevation already on this lot. Not a surveyed eave.";
+          b.label = heightLine + " The wall is drawn at the roof-plane height above sea level minus the ground elevation on this lot. The story count is that height divided by 10 ft. Not a surveyed eave, and not the 10 ft approximate default.";
         }
       });
-      note += " House height uses that difference.";
+      spec.solarHeightFt = ridge;
+      spec.solarStories = stories;
+      if (s) { s.solarHeightFt = ridge; s.solarStories = stories; }
+      if (spec.caption.indexOf(heightLine) < 0) spec.caption = (spec.caption ? spec.caption + " " : "") + heightLine;
+      note += " The wall uses that height, and the story count is that height divided by 10 ft.";
     } else {
       spec.buildings.forEach(function (b) {
         if (b.role !== "house") return;
@@ -157,12 +170,9 @@
 
   function showMap(s, key) {
     if (cacheGet("map", s.lat, s.lon)) return Promise.resolve({ cached: true });
-    var reserve = PRICE.mapLoad + PRICE.mapReserve;
-    if (!canSpend(reserve)) return Promise.resolve({ blocked: true });
+    if (!canSpend(PRICE.mapLoad)) return Promise.resolve({ blocked: true });
     var host = document.getElementById("bh-3d-google");
     if (!host) return Promise.resolve({ skipped: true });
-    charge(reserve);
-    cacheSet("map", s.lat, s.lon, { at: Date.now() });
     return loadMaps(key).then(function () {
       return root.google.maps.importLibrary("maps3d");
     }).then(function (lib) {
@@ -178,6 +188,8 @@
         gestureHandling: "GREEDY"
       });
       host.appendChild(map);
+      charge(PRICE.mapLoad);
+      cacheSet("map", s.lat, s.lon, { at: Date.now() });
       if (lib.FlattenerElement && s.rings && s.rings[0]) {
         var flat = new lib.FlattenerElement();
         flat.path = s.rings[0].map(function (p) { return { lat: p[1], lng: p[0], altitude: 0 }; });
@@ -241,9 +253,7 @@
     }).catch(function () { return spec; });
   }
 
-  function keyOf(cfg) { return cfg && String(cfg.googleMapsKey || "").trim(); }
-
-  var api = { CAP: CAP, PRICE: PRICE, callsFor: callsFor, canSpend: canSpend, spent: spent, charge: charge, enhance: enhance, cacheGet: cacheGet };
+  var api = { CAP: CAP, PRICE: PRICE, STORY_FT: STORY_FT, callsFor: callsFor, canSpend: canSpend, spent: spent, charge: charge, enhance: enhance, applySolar: applySolar, cacheGet: cacheGet };
   root.BuildHereGoogle3D = api;
   if (typeof module !== "undefined" && module.exports) module.exports = api;
 })(typeof window !== "undefined" ? window : globalThis);
