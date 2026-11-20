@@ -354,7 +354,9 @@
 .bh-progress-track{height:12px;background:#f5f3eb;border:1px solid #132019;border-radius:999px;overflow:hidden}
 .bh-progress-fill{height:100%;width:0;background:#132019;box-shadow:inset -4px 0 0 #C4A35A}
 .bh-progress-fill.is-animated{transition:width .25s linear}
-.bh-progress-status{margin:.45rem 0 0;color:#132019;font-size:.95rem;font-weight:600;line-height:1.35}
+/* Beat .bh-card p (pale slate on the Board page, and the embed's later card rule). #132019 on #FFF9F2 is 16:1. */
+.bh-card .bh-progress-status,
+.bh-progress .bh-progress-status{margin:.45rem 0 0;color:#132019;font-size:.95rem;font-weight:600;line-height:1.35}
 .bh-progress.is-error{border-color:#b42318}
 .bh-progress.is-error .bh-progress-track{border-color:#b42318}
 .bh-progress.is-error .bh-progress-fill{background:#b42318;box-shadow:none}
