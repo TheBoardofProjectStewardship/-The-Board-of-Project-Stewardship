@@ -1062,8 +1062,18 @@ class FeasibilityOpeningSitePlanTests(unittest.TestCase):
         self.assertLess(sp1, facts)
         self.assertEqual(js.count('\n        sheet: "SP-1",'), 1)
         self.assertNotIn('pageLabel: "Page 3 of "', js)
-        self.assertIn("<h3>Setback key</h3>", js)
         self.assertNotIn("\u2014 ", js.split('out.push(page("Cover"')[1].split("/* ---------- EXISTING LOT")[0])
+
+    def test_sp1_title_block_fits_and_parcel_warning_leads(self):
+        sp = (ROOT / "assets/feasibility/20261120b/build-here-siteplan.js").read_text(encoding="utf-8")
+        self.assertIn("var TB = { x: 40, y: 1044, w: 1570, h: 126 };", sp)
+        self.assertNotIn("ty + 124", sp)
+        self.assertNotIn("ty + 128", sp)
+        js = self.V_B.read_text(encoding="utf-8")
+        head = js.split('sheet: "SP-1",')[1].split("/* ---------- EXISTING LOT")[0]
+        self.assertIn("s.parcelWarn", head)
+        self.assertIn('role="alert"', head)
+        self.assertIn('(hasSP1 ? "Setback key" : "Site diagram")', js)
 
     def test_20261120a_is_unchanged(self):
         js = self.V_A.read_text(encoding="utf-8")
@@ -1075,5 +1085,5 @@ class FeasibilityOpeningSitePlanTests(unittest.TestCase):
         names = sorted(p.name for p in a.iterdir())
         self.assertEqual(names, sorted(p.name for p in b.iterdir()))
         for n in names:
-            if n != "build-here.js":
+            if n not in ("build-here.js", "build-here-siteplan.js", "build-here.css", "build-here-export.js"):
                 self.assertEqual((a / n).read_bytes(), (b / n).read_bytes(), n)
