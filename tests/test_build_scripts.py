@@ -117,8 +117,9 @@ class DataHoldTests(unittest.TestCase):
         self.assertEqual(code, 0, lines)
 
     def test_a_held_dataset_fails_and_an_unverified_one_warns(self):
+        held = [{"path": "assets/data/sno-bldg", "status": "held", "reason": "Still held in this fixture.", "clearance": ""}]
         with tempfile.TemporaryDirectory() as tmp:
-            code, lines = HOLDS.check(self.tree(tmp, ["assets/data/sno-bldg/00.json"]))
+            code, lines = HOLDS.check(self.tree(tmp, ["assets/data/sno-bldg/00.json"], holds=held))
             self.assertEqual(code, 1)
             self.assertTrue(any(l.startswith("::error::assets/data/sno-bldg") for l in lines), lines)
         # A dataset nobody has decided on yet: a warning on the run, and an error under --strict.
@@ -148,8 +149,10 @@ class DataHoldTests(unittest.TestCase):
                 self.assertEqual(code, 0, lines)
                 self.assertFalse([l for l in lines if l.startswith(("::warning::", "::error::"))], lines)
                 self.assertTrue(any(l.startswith("ok") and self.SNOH + ": 2 files, cleared (Site owner decision of 2026-11-13" in l for l in lines), lines)
-        # The decision covers that folder only. The index built from the county improvement records stays held.
-        self.assertEqual((holds["assets/data/sno-bldg"]["status"], holds["assets/data/sno-bldg"]["clearance"]), ("held", ""))
+        # The owner lifted the Snohomish hold on 2026-11-20. The raw workbook extract is still not published here.
+        self.assertEqual(holds["assets/data/sno-bldg"]["status"], "lifted")
+        self.assertIn("2026-11-20", holds["assets/data/sno-bldg"]["clearance"])
+        self.assertIn("owner names", holds["assets/data/sno-bldg"]["clearance"].lower())
 
     def test_the_weekly_workflow_still_builds_and_publishes_the_whole_house_size_folder(self):
         wf = self.WORKFLOW.read_text(encoding="utf-8")

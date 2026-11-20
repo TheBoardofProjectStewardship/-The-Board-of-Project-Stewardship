@@ -69,6 +69,46 @@ try:
           siteHeaderVisibility: getComputedStyle(document.querySelector('header.site-header')).visibility,
           bodyClass: document.body.className.includes('bh-printing'),
           docHeightPx: document.documentElement.scrollHeight, reportHeightPx: Math.round(document.getElementById('bh-report').getBoundingClientRect().height) })""")
+        # The feasibility study is a separate page from the interactive tool. It prints six landscape sheets.
+        page.emulate_media(media="screen")
+        page.goto("http://127.0.0.1:%d/feasibility-study.html?sample=2" % port)
+        page.wait_for_selector("#bh-report .bh-cover")
+        page.wait_for_function("""() => {
+          const imgs = [...document.querySelectorAll('#bh-report img')];
+          return imgs.length >= 2 && imgs.every(img => img.complete && img.naturalWidth > 0);
+        }""")
+        res["study"] = page.evaluate("""() => {
+          const root = document.getElementById('bh-report');
+          const pages = [...root.querySelectorAll('.bh-page')];
+          const label = (el) => { const m = el.textContent.match(/Page \\d+ of \\d+/); return m ? m[0] : ''; };
+          const text = root.textContent;
+          const logos = [...root.querySelectorAll('img.bh-foot-logo, img.bh-cover-logo')];
+          return {
+            pages: pages.length,
+            labels: pages.map(label),
+            dataPages: pages.map(p => p.getAttribute('data-page') + ' of ' + p.getAttribute('data-total')),
+            sheets: root.querySelectorAll('.bh-sheet').length,
+            httpLinks: root.querySelectorAll('a[href^="http"]').length,
+            anchors: root.querySelectorAll('a[href]').length,
+            iframes: root.querySelectorAll('iframe').length,
+            ppg: /\\bPPG\\b/.test(text),
+            turf: /turf|lawn/i.test(text),
+            permit: /Permit history and plan sets/.test(text),
+            listingOff: /no listing data service connected/.test(text),
+            cover: !!(pages[0] && pages[0].classList.contains('bh-cover') && /Feasibility Study/.test(pages[0].textContent)),
+            logoCount: logos.length,
+            logoOk: logos.length > 0 && logos.every(img => img.naturalWidth > 0),
+            massing: !!document.querySelector('#bh-3d canvas'),
+            shot: !!((document.getElementById('bh-3d-shot') || {}).src || '').startsWith('data:image'),
+            controls: !!document.getElementById('bh-3d-roof'),
+            interior: /CONCEPTUAL — VERIFY ON SITE/.test((document.getElementById('bh-report') || {}).textContent || ''),
+            googleKeyed: /Google 3D Maps|Solar/.test((document.getElementById('bh-3d-legend') || {}).textContent || '')
+          };
+        }""")
+        res["studyErrors"] = list(page.errors)
+        page.emulate_media(media="print")
+        page.pdf(path=str(out / "study_print.pdf"), format="Letter", landscape=True, print_background=True, prefer_css_page_size=True)
+        res["studyPrintPages"] = pages(out / "study_print.pdf")
 finally:
     host_file.unlink()
 

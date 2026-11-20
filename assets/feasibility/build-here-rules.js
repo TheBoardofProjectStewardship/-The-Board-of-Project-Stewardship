@@ -401,7 +401,7 @@
     kirkland: { src: CS.kirkland, zones: (function () { var o = {}; ["5.0", "6.3", "7.2", "8.5", "12.5", "35"].forEach(function (n) { o["RS" + n] = { label: "RS " + n, f: 20, r: 10, s: 5, h: "25 ft above average building elevation", cov: 0.5, sideTxt: "5 ft minimum, 15 ft combined", sc: 15, farSmall: true }; o["RSX" + n] = { label: "RSX " + n, f: 20, r: 10, s: 5, h: "30 ft above average building elevation", cov: 0.5, sideTxt: "5 ft minimum, 15 ft combined", sc: 15, farSmall: true }; }); return o; })() },
     redmond: { src: CS.redmond, zones: {
       // Setbacks, building separation, height, coverage, impervious and open space below match the City of
-      // Redmond's own zone summary page (redmond.gov/2107), read 17 Nov 2026, and PPG's study of 5514 160th
+      // Redmond's own zone summary page (redmond.gov/2107), read 17 Nov 2026, and Pacific Pro Group's study of 5514 160th
       // Ave NE. The RZC 21.08 table itself was not opened, so every one of them prints with "verify".
       NR: { label: "Neighborhood Residential (NR)", f: 10, r: 5, s: 3, ss: 10, ra: 2, sep: 5, verifyTag: true, sbSrc: CS.redmondCity, h: "38 ft", cov: 0.5, imp: 0.7, gfa: true, aduCount: 2,
         accounting: { farIncludesGarage: true, farIncludesBasement: true, farIncludesAccessory: true, verify: true, note: "Redmond caps the total floor area of all structures on the lot, and its 2025 draft text counts below-grade floor area. Garage, basement and outbuilding area are counted here; confirm against the adopted RZC 21.08 table." },
@@ -624,7 +624,7 @@
       reroofLayers: datum("A new roof may not be laid over a roof that already has two or more layers. That roof is torn off first.", SRC.irc908, CHECKED_NOV),
       drainage: v.juris === "seattle"
         ? datum("Seattle adopted a revised Stormwater Code in 2026 (Ord. 127444). The earlier code started drainage review at 750 sf of new plus replaced hard surface. The 2026 thresholds are not coded here.", SRC.sdciStorm, null)
-        : (v.city === "redmond" ? datum("PPG's Redmond study used 2,000 sf of new plus replaced hard surface as the point where civil (drainage) review starts.", code, null)
+        : (v.city === "redmond" ? datum("City of Redmond stormwater review threshold: verify (commonly triggered near 2,000 sf of new plus replaced hard surface; confirm with the City of Redmond).", code, null)
           : datum(null, code, null, "The stormwater threshold for " + place + " is not coded.")),
       parking: city
         ? datum("State law (ESSB 5184, 2025) caps what a city of more than 30,000 people may require: one space per single-family home, half a space per multifamily unit, and none for a home under 1,200 sf. Cities of 50,000 or more had 18 months from July 27, 2025 to comply, and cities of 30,000 to 50,000 have three years. The parking table of " + place + " is not coded here.", SRC.sb5184, CHECKED_NOV)

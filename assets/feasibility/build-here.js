@@ -41,7 +41,9 @@
       contactLine: "",    // one plain line for the foot of the saved study, such as a name, phone and web address
       leadEmail: "editorial@boardofprojectstewardship.com",
       leadSource: "",     // "Sent from ..." in the lead message; the page address when empty
-      allowSample: false, // ?sample=1 draws a labeled sample study; off except on a local test server
+      allowSample: false, listingFactsUrl: "", // ?sample=1 draws a labeled sample study; off except on a local test server
+      googleMapsKey: "", // empty: free massing only. No key is shipped and no Google request is made.
+      google3dTilesKey: "", // unused. Map3DElement is an Immersive Maps load. This page does not call the Map Tiles API.
       geocodeUrl: "",
       // The firm named in the title block of the sheets and in the contact rows. Each is left off when empty.
       legalName: "",       // the firm's full name for the title block; the brand name when empty
@@ -105,6 +107,18 @@
     snoAerial: "https://gis.snoco.org/sas/rest/services/SAS_Services/SAS_Imagery_2024/MapServer/export",
     worldImagery: "https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/export",
     edmZoning: "https://maps.edmondswa.gov/gis/rest/services/DevServices/Zoning/MapServer/5/query",
+    /* County assessor and permit layers checked Nov 2026. Queries name the fields they read.
+       Owner, taxpayer, and applicant name fields exist on some of these layers and are never requested. */
+    pierceParcel: "https://services2.arcgis.com/1UvBaQ5y1ubjUPmd/arcgis/rest/services/Tax_Parcels/FeatureServer/0/query",
+    pierceBldg: "https://services2.arcgis.com/1UvBaQ5y1ubjUPmd/arcgis/rest/services/PCB_Buildings/FeatureServer/0/query",
+    pierceZone: "https://services2.arcgis.com/1UvBaQ5y1ubjUPmd/arcgis/rest/services/Zoning/FeatureServer/0/query",
+    piercePermits: "https://services2.arcgis.com/1UvBaQ5y1ubjUPmd/arcgis/rest/services/Permits_Pierce_County/FeatureServer/0/query",
+    kitsapParcel: "https://services6.arcgis.com/qt3UCV9x5kB4CwRA/arcgis/rest/services/ParcelDetails/FeatureServer/0/query",
+    kitsapBldg: "https://services6.arcgis.com/qt3UCV9x5kB4CwRA/arcgis/rest/services/Building_Information/FeatureServer/0/query",
+    kitsapZone: "https://services6.arcgis.com/qt3UCV9x5kB4CwRA/arcgis/rest/services/Zoning_Designations/FeatureServer/0/query",
+    kitsapPermits: "https://services6.arcgis.com/qt3UCV9x5kB4CwRA/arcgis/rest/services/Permits/FeatureServer/0/query",
+    skagitParcel: "https://gis.skagitcountywa.gov/arcgis/rest/services/OpenData/AssessorDataParcels/FeatureServer/0/query",
+    waParcel: "https://services.arcgis.com/jsIt88o09Q0r1j8h/arcgis/rest/services/Current_Parcels/FeatureServer/0/query",
     esriGeo: "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates",
     snoCities: "https://gis.snoco.org/sas/rest/services/SAS_Services/SAS_Cities/MapServer/0/query"
   };
@@ -249,7 +263,7 @@
   /* ---------- data model ---------- */
   var state = null;
   function blank() {
-    return { input: "", matched: "", lon: null, lat: null, county: "", city: "", juris: "other", jurisLabel: "", parcel: "", assessorUrl: "", lot: null, lotSrc: "", zone: "", zoneSrc: "", existing: null, existingSrc: "", existingAsOf: "", existingFile: "", footprint: null, footprintSrc: "", footprintKind: "", firstFloor: null, firstFloorSrc: "", garageFloor: null, garageFloorSrc: "", yearBuilt: "", yearSrc: "", rings: null, hazards: [], hazardNotes: [], nearNotices: [], frontDir: "", permits: [], permitSearch: "none", permitNote: "", permitLinks: [], imagery: null, sources: [], manual: [], prepared: "", factAttempts: [], hazardScope: "", hazardShapes: [], hazardHits: [], neighborParcels: null, soils: null, flood: null, basementTotal: null, basementFinished: null, basementGarage: null, upperFloor: null, halfFloor: null, deck: null, beds: null, baths: null, yrRenov: "", garageNone: false, basementNone: false, countyFin: null, snoHouse: null, seq: 0, editSeq: {}, formWas: null, gen: 0 };
+    return { input: "", matched: "", lon: null, lat: null, county: "", city: "", juris: "other", jurisLabel: "", parcel: "", assessorUrl: "", lot: null, lotSrc: "", zone: "", zoneSrc: "", existing: null, existingSrc: "", existingAsOf: "", existingFile: "", footprint: null, footprintSrc: "", footprintKind: "", firstFloor: null, firstFloorSrc: "", garageFloor: null, garageFloorSrc: "", yearBuilt: "", yearSrc: "", rings: null, hazards: [], hazardNotes: [], nearNotices: [], frontDir: "", permits: [], permitSearch: "none", permitNote: "", permitLinks: [], imagery: null, sources: [], manual: [], prepared: "", factAttempts: [], hazardScope: "", hazardShapes: [], hazardHits: [], neighborParcels: null, soils: null, flood: null, basementTotal: null, basementFinished: null, basementGarage: null, upperFloor: null, halfFloor: null, deck: null, beds: null, baths: null, yrRenov: "", garageNone: false, basementNone: false, countyFin: null, snoHouse: null, listingFacts: null, isSample: false, seq: 0, editSeq: {}, formWas: null, gen: 0 };
   }
   function log(s, ok, name, note, how) { var x = { name: name, ok: ok, note: note || "" }; if (how) x.how = how; s.sources.push(x); }
   /* Year built can come from several records, and they answer in any order. Each one is kept. The oldest
@@ -274,6 +288,7 @@
     if (s.stateAbbr && s.stateAbbr !== "WA") { s.juris = "outside"; s.jurisLabel = (s.city ? s.city + ", " : "") + (s.county ? s.county + ", " : "") + (s.stateName || s.stateAbbr); s.cityKey = ""; return; }
     if (/^King/.test(s.county)) s.juris = s.city === "Seattle" ? "seattle" : s.city === "Kenmore" ? "kenmore" : (s.city ? "other" : "kc");
     else if (/^Snohomish/.test(s.county)) s.juris = s.city === "Edmonds" ? "edmonds" : (s.city ? "other" : "sno");
+    else if (s.county && (!s.stateAbbr || s.stateAbbr === "WA")) s.juris = "county";
     else s.juris = "outside";
     if (s.juris === "other" && R.CITY[key]) { s.juris = "city"; s.cityKey = key; s.city = R.CITY[key].name; }
     s.jurisLabel = s.city ? "City of " + s.city + ", " + s.county : (s.county ? "Unincorporated " + s.county : "Unknown");
@@ -360,9 +375,7 @@
         setJuris(s);
         if (s.gen === lookupGen) setStatus("Found " + s.matched + ". Reading parcel records...");
         if (s.juris === "outside") return s;
-        if (/^King/.test(s.county)) return kingParcel(s);
-        if (/^Snohomish/.test(s.county)) return snoParcel(s);
-        return s;
+        return parcelForCounty(s);
       })
       .then(function () { return cityCheck(s); })
       // The lot outline comes first. When the county lookup gave none, a statewide layer is asked before
@@ -370,7 +383,7 @@
       // about a small box at the address point while the outline was still on its way, and the study then
       // said the parcel had been checked.
       .then(function () { return outlineFirst(s); })
-      .then(function () { return Promise.all([zoning(s), hazards(s), permits(s), extras(s), neighbors(s), landscape(s), kingLivingSqft(s), snoBuildingFacts(s), snoHouseSize(s), soils(s), flood(s)]); })
+      .then(function () { return Promise.all([zoning(s), hazards(s), permits(s), extras(s), neighbors(s), landscape(s), kingLivingSqft(s), snoBuildingFacts(s), snoHouseSize(s), countyAssessor(s), soils(s), flood(s), listingFacts(s)]); })
       .then(function () {
         clearTimeout(slow);
         if (s.gen !== lookupGen) return null;
@@ -589,6 +602,255 @@
     else if (hit.pick.d > 660) s.parcelWarn = "The county parcel with this address is about " + Math.round(hit.pick.d) + " ft from the geocoded point. Check the parcel number and the aerial.";
   }
 
+  /* A county name from the geocoder picks the public parcel layer. King and Snohomish keep their
+     existing readers. Pierce, Kitsap, and Skagit use the assessor layers checked above. Any other
+     Washington county tries the statewide parcel layer, which has an outline and a parcel number
+     and does not carry house size or year built. */
+  function parcelForCounty(s) {
+    if (/^King/.test(s.county || "")) return kingParcel(s);
+    if (/^Snohomish/.test(s.county || "")) return snoParcel(s);
+    if (/^Pierce/.test(s.county || "")) return pierceParcel(s);
+    if (/^Kitsap/.test(s.county || "")) return kitsapParcel(s);
+    if (/^Skagit/.test(s.county || "")) return skagitParcel(s);
+    if (!s.stateAbbr || s.stateAbbr === "WA") return waParcel(s);
+    return Promise.resolve();
+  }
+  function sqlLit(v) { return String(v == null ? "" : v).replace(/'/g, "''").replace(/[%_]/g, "").slice(0, 80); }
+  function countyYear(v) {
+    var n = Number(v);
+    if (!isFinite(n) || n < 1800 || n > new Date().getFullYear() + 1) return null;
+    return Math.round(n);
+  }
+  function countySf(v) {
+    var n = Number(v);
+    if (!isFinite(n) || n <= 0 || n > 500000) return null;
+    return Math.round(n);
+  }
+  function countyDate(v) {
+    if (v == null || v === "") return "";
+    if (typeof v === "number" && isFinite(v) && v > 1e11) {
+      try { return new Date(v).toISOString().slice(0, 10); } catch (e) { return ""; }
+    }
+    var s = String(v), m = s.match(/\d{4}-\d{2}-\d{2}/);
+    if (m) return m[0];
+    var d = Date.parse(s);
+    if (isFinite(d) && d > 0) {
+      try { return new Date(d).toISOString().slice(0, 10); } catch (e2) { return ""; }
+    }
+    return "";
+  }
+  function rememberCounty(s, field, value, source) {
+    if (value == null || value === "") return;
+    s.countyFacts = s.countyFacts || [];
+    s.countyFacts.push({ field: field, value: String(value), source: source });
+  }
+  /* Address search, then the lot nearest the geocoded point. `read` copies attributes onto the study.
+     It must not read owner, taxpayer, or contact name fields. */
+  function matchParcel(s, url, fields, addressField, read, layerName) {
+    var hs = houseAndStreet(s.matched || "");
+    var streetWord = (hs.street || "").split(/\s+/).filter(function (w) { return w && !ST_TYPE[w] && !ST_DIR[w] && (/\d/.test(w) || w.length >= 3); })[0] || "";
+    var like = hs.num ? (addressField + " LIKE '%" + sqlLit(hs.num) + (streetWord ? "%" + sqlLit(streetWord) : "") + "%'") : "";
+    var asked = like ? getJSON(url, { f: "json", where: like, outFields: fields, returnGeometry: true, outSR: 4326, resultRecordCount: 25 }) : Promise.resolve({ features: [] });
+    return asked.then(function (j) {
+      var ranked = rankParcels(s, j.features || []);
+      if (ranked.length) return { pick: ranked[0], how: "address", others: Math.max(0, ranked.length - 1) };
+      return byLocation(s, url, fields);
+    }).then(function (hit) {
+      if (!hit) { log(s, false, layerName, "No parcel matched."); return; }
+      var a = hit.pick.f.attributes || {};
+      noteParcelMatch(s, hit, String(a[addressField] || "").trim());
+      read(hit.pick.f, a, hit);
+      s.parcelLayer = { url: url, idField: s.parcelIdField || "" };
+      log(s, true, layerName, hit.how === "address" ? "matched by street address" : "matched by location, not by address");
+    }).catch(function (e) { log(s, false, layerName, e.message); });
+  }
+  function pierceParcel(s) {
+    return matchParcel(s, EP.pierceParcel, "TaxParcelNumber,Site_Address,Land_Acres,Landuse_Description", "Site_Address", function (f, a) {
+      s.parcel = String(a.TaxParcelNumber || "");
+      s.parcelIdField = "TaxParcelNumber";
+      s.rings = f.geometry && f.geometry.rings;
+      var acres = Number(a.Land_Acres);
+      if (isFinite(acres) && acres > 0) {
+        s.lot = Math.round(acres * 43560);
+        s.lotSrc = "County record (Pierce County assessor, Land_Acres)";
+        s.lotKind = "record";
+        rememberCounty(s, "Lot area", fmt(s.lot) + " sf", s.lotSrc);
+      } else if (s.rings) {
+        s.lot = Math.round(polyAreaSqft(s.rings));
+        s.lotSrc = "County record (Pierce County parcel outline; the acreage field was blank)";
+        s.lotKind = "outline";
+      }
+      if (a.Landuse_Description) rememberCounty(s, "Land use", String(a.Landuse_Description).slice(0, 80), "County record (Pierce County assessor, Landuse_Description). Not a zoning code.");
+    }, "Pierce County tax parcels");
+  }
+  function kitsapParcel(s) {
+    return matchParcel(s, EP.kitsapParcel, "PARCEL_ID,APN,RP_ACCT_ID,SITE_ADDR,YEAR_BUILT,ZONE_CODE,LIS_ACRES,POLY_ACRES", "SITE_ADDR", function (f, a) {
+      s.parcel = String(a.PARCEL_ID || a.APN || "");
+      s.parcelIdField = "PARCEL_ID";
+      s.kitsapAcct = a.RP_ACCT_ID != null ? String(a.RP_ACCT_ID) : "";
+      s.rings = f.geometry && f.geometry.rings;
+      var acres = Number(a.LIS_ACRES || a.POLY_ACRES);
+      if (isFinite(acres) && acres > 0) {
+        s.lot = Math.round(acres * 43560);
+        s.lotSrc = "County record (Kitsap County assessor, " + (a.LIS_ACRES ? "LIS_ACRES" : "POLY_ACRES") + ")";
+        s.lotKind = "record";
+        rememberCounty(s, "Lot area", fmt(s.lot) + " sf", s.lotSrc);
+      } else if (s.rings) {
+        s.lot = Math.round(polyAreaSqft(s.rings));
+        s.lotSrc = "County record (Kitsap County parcel outline; the acreage field was blank)";
+        s.lotKind = "outline";
+      }
+      var y = countyYear(a.YEAR_BUILT);
+      if (y && noteYear(s, y, "County record (Kitsap County assessor, YEAR_BUILT)")) rememberCounty(s, "Year built", String(y), "County record (Kitsap County assessor, YEAR_BUILT)");
+      if (a.ZONE_CODE && !s.zone) {
+        s.zone = String(a.ZONE_CODE).trim();
+        s.zoneSrc = "County record (Kitsap County assessor, ZONE_CODE)";
+        rememberCounty(s, "Zone", s.zone, s.zoneSrc);
+      }
+    }, "Kitsap County assessor parcels");
+  }
+  function skagitParcel(s) {
+    var hs = houseAndStreet(s.matched || "");
+    var word = (hs.street || "").split(/\s+/).filter(function (w) { return w && !ST_TYPE[w] && !ST_DIR[w] && (/\d/.test(w) || w.length >= 3); })[0] || "";
+    var where = hs.num ? "SitusStNo='" + sqlLit(hs.num) + "'" + (word ? " AND SitusStName LIKE '%" + sqlLit(word) + "%'" : "") : "";
+    var fields = "PARCELID,SitusStNo,SitusStName,SitusCSZ,Acres,YearBuilt,LivingArea,LandUse,GarageSqFt,NoOfBedrooms,FinishedBasement";
+    var asked = where ? getJSON(EP.skagitParcel, { f: "json", where: where, outFields: fields, returnGeometry: true, outSR: 4326, resultRecordCount: 25 }) : Promise.resolve({ features: [] });
+    return asked.then(function (j) {
+      var ranked = rankParcels(s, j.features || []);
+      if (ranked.length) return { pick: ranked[0], how: "address", others: Math.max(0, ranked.length - 1) };
+      return byLocation(s, EP.skagitParcel, fields);
+    }).then(function (hit) {
+      if (!hit) { log(s, false, "Skagit County assessor parcels", "No parcel matched."); return; }
+      var f = hit.pick.f, a = f.attributes || {};
+      noteParcelMatch(s, hit, [a.SitusStNo, a.SitusStName].filter(Boolean).join(" "));
+      s.parcelLayer = { url: EP.skagitParcel, idField: "PARCELID" };
+      s.parcel = String(a.PARCELID || "");
+      s.parcelIdField = "PARCELID";
+      s.rings = f.geometry && f.geometry.rings;
+      var acres = Number(a.Acres);
+      if (isFinite(acres) && acres > 0) {
+        s.lot = Math.round(acres * 43560);
+        s.lotSrc = "County record (Skagit County assessor, Acres)";
+        s.lotKind = "record";
+        rememberCounty(s, "Lot area", fmt(s.lot) + " sf", s.lotSrc);
+      } else if (s.rings) {
+        s.lot = Math.round(polyAreaSqft(s.rings));
+        s.lotSrc = "County record (Skagit County parcel outline; the acreage field was blank)";
+        s.lotKind = "outline";
+      }
+      var y = countyYear(a.YearBuilt);
+      if (y && noteYear(s, y, "County record (Skagit County assessor, YearBuilt)")) rememberCounty(s, "Year built", String(y), "County record (Skagit County assessor, YearBuilt)");
+      var live = countySf(a.LivingArea);
+      if (live && !s.existing) {
+        s.existing = live;
+        s.existingSrc = "County record (Skagit County assessor, LivingArea)";
+        rememberCounty(s, "Finished living area", fmt(live) + " sf", s.existingSrc);
+      }
+      if (a.LandUse) rememberCounty(s, "Land use", String(a.LandUse).slice(0, 80), "County record (Skagit County assessor, LandUse). Not a zoning code.");
+      var gar = countySf(a.GarageSqFt);
+      if (gar && !s.garageFloor) { s.garageFloor = gar; s.garageFloorSrc = "County record (Skagit County assessor, GarageSqFt)"; rememberCounty(s, "Garage", fmt(gar) + " sf", s.garageFloorSrc); }
+      if (a.NoOfBedrooms != null && countySf(a.NoOfBedrooms) && s.beds == null) { s.beds = countySf(a.NoOfBedrooms); rememberCounty(s, "Bedrooms", String(s.beds), "County record (Skagit County assessor, NoOfBedrooms)"); }
+      log(s, true, "Skagit County assessor parcels", hit.how === "address" ? "matched by street address" : "matched by location, not by address");
+    }).catch(function (e) { log(s, false, "Skagit County assessor parcels", e.message); });
+  }
+  function waParcel(s) {
+    var county = String(s.county || "").replace(/\s+County$/i, "");
+    if (!county) return Promise.resolve();
+    var hs = houseAndStreet(s.matched || "");
+    var where = "COUNTY_NM LIKE '" + sqlLit(county) + "%'" + (hs.num ? " AND SITUS_ADDRESS LIKE '%" + sqlLit(hs.num) + "%'" : "");
+    return getJSON(EP.waParcel, { f: "json", where: where, outFields: "PARCEL_ID_NR,SITUS_ADDRESS,SITUS_CITY_NM,COUNTY_NM", returnGeometry: true, outSR: 4326, resultRecordCount: 25 }).then(function (j) {
+      var ranked = rankParcels(s, j.features || []);
+      var hit = ranked.length ? { pick: ranked[0], how: "address", others: Math.max(0, ranked.length - 1) } : null;
+      if (!hit) return byLocation(s, EP.waParcel, "PARCEL_ID_NR,SITUS_ADDRESS,SITUS_CITY_NM,COUNTY_NM");
+      return hit;
+    }).then(function (hit) {
+      if (!hit) { log(s, false, "Washington statewide parcels", "No parcel matched."); s.countyRecordNote = "Parcel, house size, year built, zoning, and permit history are not available online for " + s.county + "."; return; }
+      var f = hit.pick.f, a = f.attributes || {};
+      noteParcelMatch(s, hit, String(a.SITUS_ADDRESS || "").trim());
+      s.parcel = String(a.PARCEL_ID_NR || "");
+      s.rings = f.geometry && f.geometry.rings;
+      if (s.rings && !s.lot) {
+        s.lot = Math.round(polyAreaSqft(s.rings));
+        s.lotSrc = "County record (Washington statewide parcel outline for " + s.county + "; the layer has no assessor lot-area field)";
+        s.lotKind = "outline";
+      }
+      s.countyRecordNote = "The statewide parcel layer has an outline and a parcel number for " + s.county + ". House size, year built, zoning, and permit history are not available online from a county assessor layer for this county.";
+      log(s, true, "Washington statewide parcels", s.county);
+    }).catch(function (e) {
+      s.countyRecordNote = "County records are not available online for " + (s.county || "this county") + ".";
+      log(s, false, "Washington statewide parcels", e.message);
+    });
+  }
+  /* Building facts and permits that are not already read by the King and Snohomish paths. */
+  function countyAssessor(s) {
+    if (/^Pierce/.test(s.county || "") && s.parcel) return pierceBuildings(s).then(function () { return piercePermits(s); });
+    if (/^Kitsap/.test(s.county || "") && s.kitsapAcct) return kitsapBuildings(s).then(function () { return kitsapPermits(s); });
+    if (/^Skagit/.test(s.county || "")) {
+      s.permitSearch = s.permitSearch || "none";
+      s.permitNote = "Skagit County's public permit layer does not publish permit numbers. Ask the Skagit County permit counter.";
+      return Promise.resolve();
+    }
+    if (s.juris === "county" && !/^Pierce|^Kitsap|^Skagit|^King|^Snohomish/.test(s.county || "")) {
+      s.permitSearch = "none";
+      if (!s.countyRecordNote) s.countyRecordNote = "House size, year built, zoning, and permit history are not available online for " + (s.county || "this county") + ".";
+    }
+    return Promise.resolve();
+  }
+  function pierceBuildings(s) {
+    var id = sqlLit(s.parcel);
+    return getJSON(EP.pierceBldg, { f: "json", where: "TaxParcelNumber='" + id + "'", outFields: "TaxParcelNumber,Year_Built,Built_As_Square_Feet,Built_As_Description,Stories,Bedrooms,Bathrooms,Year_Remodeled", returnGeometry: false, resultRecordCount: 12 }).then(function (j) {
+      var rows = (j.features || []).map(function (f) { return f.attributes || {}; }).filter(function (a) { return countySf(a.Built_As_Square_Feet) || countyYear(a.Year_Built); });
+      if (!rows.length) { rememberCounty(s, "Building size", "not in the county building layer", "County record (Pierce County buildings). No row with a size or a year."); return; }
+      rows.sort(function (a, b) { return (countySf(b.Built_As_Square_Feet) || 0) - (countySf(a.Built_As_Square_Feet) || 0); });
+      var top = rows[0], sf = countySf(top.Built_As_Square_Feet), y = countyYear(top.Year_Built);
+      var src = "County record (Pierce County buildings, Built_As_Square_Feet). This is the size the county recorded for the building, not confirmed finished living area, so it is not used in the floor-area math.";
+      if (sf) rememberCounty(s, "Largest building", fmt(sf) + " sf" + (rows.length > 1 ? " (" + rows.length + " buildings on the parcel; they are not added)" : "") + (top.Built_As_Description ? ", " + String(top.Built_As_Description).slice(0, 40) : ""), src);
+      if (y && noteYear(s, y, "County record (Pierce County buildings, Year_Built)")) rememberCounty(s, "Year built", String(y), "County record (Pierce County buildings, Year_Built)");
+      if (countySf(top.Stories)) rememberCounty(s, "Stories", String(countySf(top.Stories)), "County record (Pierce County buildings, Stories)");
+      log(s, true, "Pierce County buildings", rows.length + " row" + (rows.length > 1 ? "s" : ""));
+    }).catch(function (e) { log(s, false, "Pierce County buildings", e.message); });
+  }
+  function piercePermits(s) {
+    var id = sqlLit(s.parcel);
+    return getJSON(EP.piercePermits, { f: "json", where: "parcelNumber='" + id + "'", outFields: "applicationNumber,applicationType,applicationStatus,issuedDate,finalDate", returnGeometry: false, resultRecordCount: 24 }).then(function (j) {
+      s.permits = (j.features || []).map(function (f) {
+        var a = f.attributes || {};
+        return { id: a.applicationNumber || "Number not in the layer", type: a.applicationType || "", desc: a.applicationStatus || "", issued: countyDate(a.issuedDate), final: countyDate(a.finalDate) };
+      });
+      s.permitSearch = "ok";
+      log(s, true, "Pierce County permits", s.permits.length + " record" + (s.permits.length === 1 ? "" : "s"));
+    }).catch(function (e) { s.permitSearch = "failed"; log(s, false, "Pierce County permits", e.message); });
+  }
+  function kitsapBuildings(s) {
+    var id = sqlLit(s.kitsapAcct);
+    return getJSON(EP.kitsapBldg, { f: "json", where: "RP_ACCT_ID='" + id + "'", outFields: "RP_ACCT_ID,YEAR_BUILT,STORIES,FLR_FIN_SF,FLR_TOT_SF,BEDROOMS,FULL_BATHS,HALF_BATHS,DET_GAR_SF,BLDG_TYP", returnGeometry: false, resultRecordCount: 12 }).then(function (j) {
+      var rows = (j.features || []).map(function (f) { return f.attributes || {}; });
+      if (!rows.length) { rememberCounty(s, "Finished floor area", "not in the county building layer", "County record (Kitsap County Building_Information). No row for this account."); return; }
+      rows.sort(function (a, b) { return (countySf(b.FLR_FIN_SF) || 0) - (countySf(a.FLR_FIN_SF) || 0); });
+      var top = rows[0], fin = countySf(top.FLR_FIN_SF), y = countyYear(top.YEAR_BUILT);
+      if (fin && !s.existing) {
+        s.existing = fin;
+        s.existingSrc = "County record (Kitsap County assessor, FLR_FIN_SF" + (rows.length > 1 ? "; largest of " + rows.length + " improvement rows, not added" : "") + ")";
+        rememberCounty(s, "Finished floor area", fmt(fin) + " sf", s.existingSrc);
+      }
+      if (y && noteYear(s, y, "County record (Kitsap County assessor, YEAR_BUILT)")) rememberCounty(s, "Year built", String(y), "County record (Kitsap County assessor building layer, YEAR_BUILT)");
+      var gar = countySf(top.DET_GAR_SF);
+      if (gar && !s.detGarageFloor) { s.detGarageFloor = gar; rememberCounty(s, "Detached garage", fmt(gar) + " sf", "County record (Kitsap County assessor, DET_GAR_SF)"); }
+      log(s, true, "Kitsap County buildings", rows.length + " row" + (rows.length > 1 ? "s" : ""));
+    }).catch(function (e) { log(s, false, "Kitsap County buildings", e.message); });
+  }
+  function kitsapPermits(s) {
+    var id = sqlLit(s.kitsapAcct);
+    return getJSON(EP.kitsapPermits, { f: "json", where: "RP_ACCT_ID='" + id + "'", outFields: "PERMIT_NO,TYPE_CODE,STATUS,ISSUED_DATE,STATUS_DATE", returnGeometry: false, resultRecordCount: 24 }).then(function (j) {
+      s.permits = (j.features || []).map(function (f) {
+        var a = f.attributes || {};
+        return { id: a.PERMIT_NO || "Number not in the layer", type: a.TYPE_CODE || "", desc: a.STATUS || "", issued: countyDate(a.ISSUED_DATE), final: countyDate(a.STATUS_DATE) };
+      });
+      s.permitSearch = "ok";
+      log(s, true, "Kitsap County permits", s.permits.length + " record" + (s.permits.length === 1 ? "" : "s"));
+    }).catch(function (e) { s.permitSearch = "failed"; log(s, false, "Kitsap County permits", e.message); });
+  }
+
   function kingParcel(s) {
     var hs = houseAndStreet(s.matched), zip = zipOf(s.matched);
     var where = "ADDR_FULL LIKE '" + hs.full.replace(/[%_]/g, "").replace(/'/g, "''") + "%'" + (zip ? " AND ZIP5='" + zip + "'" : "");
@@ -757,8 +1019,9 @@
     var king = /^King/.test(s.county || "") && (!s.stateAbbr || s.stateAbbr === "WA");
     var sno = /^Snohomish/.test(s.county || "") && (!s.stateAbbr || s.stateAbbr === "WA");
     if (king && s.existing) s.factAttempts.push({ field: "Finished living area", name: "King County Assessor residential building extract", ok: true, note: s.existingSrc || "SqFtTotLiving" });
-    if (!king && !sno) {
-      s.factAttempts.push({ field: "Finished living area", name: "Local assessor extract", ok: false, note: "Finished living area is read automatically from the King County residential building extract. This place is outside that extract, and no other living-area service is wired." });
+    if (/^Snohomish/.test(s.county || "") && s.countyFin) s.factAttempts.push({ field: "House size", name: "Snohomish County Improvement Records", ok: true, note: "County record. " + (s.countyFin.source || "FinSize") });
+    if (!king && !sno && !s.existing) {
+      s.factAttempts.push({ field: "Finished living area", name: "County assessor", ok: false, note: s.countyRecordNote || ("Finished living area is not available online for " + (s.county || "this county") + ". Nothing was filled in.") });
       if (!CFG.hideLinkOnly) s.factAttempts.push({ field: "Finished living area", name: "Listing sites", ok: false, note: "Redfin and Zillow are not queried. No supported public endpoint was verified." });
     }
   }
@@ -769,12 +1032,13 @@
   function neighbors(s) {
     if (!s.rings) return Promise.resolve();
     var waNbr = !s.stateAbbr || s.stateAbbr === "WA";
-    var url = (waNbr && /^King/.test(s.county || "")) ? EP.kcParcel : (waNbr && /^Snohomish/.test(s.county || "")) ? EP.snoParcel : null;
+    var url = (waNbr && /^King/.test(s.county || "")) ? EP.kcParcel : (waNbr && /^Snohomish/.test(s.county || "")) ? EP.snoParcel : (s.parcelLayer && s.parcelLayer.url) || null;
     if (!url) return Promise.resolve();
     var b = bbox(s.rings), pad = 0.0003;
-    return getJSON(url, { f: "json", geometry: [b[0] - pad, b[1] - pad, b[2] + pad, b[3] + pad].join(","), geometryType: "esriGeometryEnvelope", inSR: 4326, spatialRel: "esriSpatialRelIntersects", outFields: url === EP.kcParcel ? "PIN" : "PARCEL_ID", returnGeometry: true, outSR: 4326 })
+    var idField = url === EP.kcParcel ? "PIN" : url === EP.snoParcel ? "PARCEL_ID" : (s.parcelLayer && s.parcelLayer.idField) || "OBJECTID";
+    return getJSON(url, { f: "json", geometry: [b[0] - pad, b[1] - pad, b[2] + pad, b[3] + pad].join(","), geometryType: "esriGeometryEnvelope", inSR: 4326, spatialRel: "esriSpatialRelIntersects", outFields: idField, returnGeometry: true, outSR: 4326 })
       .then(function (j) {
-        var own = String(s.parcel || ""), key = url === EP.kcParcel ? "PIN" : "PARCEL_ID";
+        var own = String(s.parcel || ""), key = idField;
         s.neighborRings = []; s.neighborParcels = [];
         (j.features || []).forEach(function (f) {
           if (!f.geometry || !f.geometry.rings) return;
@@ -833,6 +1097,28 @@
         if (z) { s.zone = z; s.zoneSrc = g.name; s.zoneDraft = !!g.draft; }
         log(s, true, g.name);
       }).catch(function (e) { log(s, false, g.name, e.message + ". Enter the zone by hand."); });
+    }
+    if (/^Pierce/.test(s.county || "")) {
+      return getJSON(EP.pierceZone, ptQuery(s.lon, s.lat, { outFields: "ZONING,JURISDICT" })).then(function (j) {
+        var f = (j.features || [])[0];
+        if (f && f.attributes.ZONING) {
+          s.zone = String(f.attributes.ZONING).trim();
+          s.zoneSrc = "County record (Pierce County zoning map" + (f.attributes.JURISDICT ? ", " + String(f.attributes.JURISDICT).slice(0, 40) : "") + ")";
+          rememberCounty(s, "Zone", s.zone, s.zoneSrc);
+        }
+        log(s, true, "Pierce County zoning");
+      }).catch(function (e) { log(s, false, "Pierce County zoning", e.message); });
+    }
+    if (/^Kitsap/.test(s.county || "")) {
+      return getJSON(EP.kitsapZone, ptQuery(s.lon, s.lat, { outFields: "ZONEBREV,ZONE_DESCRIPTION" })).then(function (j) {
+        var f = (j.features || [])[0];
+        if (f && (f.attributes.ZONEBREV || f.attributes.ZONE_DESCRIPTION)) {
+          s.zone = String(f.attributes.ZONEBREV || f.attributes.ZONE_DESCRIPTION).trim();
+          s.zoneSrc = "County record (Kitsap County zoning map)";
+          rememberCounty(s, "Zone", s.zone, s.zoneSrc);
+        }
+        log(s, true, "Kitsap County zoning");
+      }).catch(function (e) { log(s, false, "Kitsap County zoning", e.message); });
     }
     if (s.juris === "sno") {
       var zq = function (svc) { return getJSON(EP.snoHost + svc + "/FeatureServer/0/query", ptQuery(s.lon, s.lat, { outFields: "abbrev,label" })); };
@@ -937,7 +1223,17 @@
     }
     if (s.juris === "kenmore") { s.permitLinks = [{ label: "MyBuildingPermit permit search (Kenmore records)", url: LINKS.mbp }, { label: "King County permit records before Kenmore incorporated (1998)", url: LINKS.kcPortal }]; return Promise.resolve(); }
     if (s.juris === "kc") { s.permitLinks = [{ label: "King County Permitting portal (search by parcel number)", url: LINKS.kcPortal }]; return Promise.resolve(); }
-    if (s.juris === "edmonds") { s.permitLinks = [{ label: "MyBuildingPermit permit search (Edmonds records)", url: LINKS.mbp }, { label: "Edmonds Development Services", url: LINKS.edmDev }]; return Promise.resolve(); }
+    if (s.juris === "edmonds") {
+      s.permitNote = "City of Edmonds permits are not in the county layer. Ask the City of Edmonds Development Services permit counter. The county active-permit layer is still read below when it answers.";
+      if (!s.rings) { s.permitSearch = "none"; return Promise.resolve(); }
+      return getJSON(EP.snoHost + "PLANNING__active_permits/FeatureServer/0/query", polyQuery(shrunk(s.rings, 3), { outFields: "permit_number,PERMIT_NUMBER,permit_no,permit_type,PERMIT_TYPE,type,status,STATUS,permit_status" })).then(function (j) {
+        s.permits = (j.features || []).map(function (f) { var a = f.attributes || {};
+          return { id: a.permit_number || a.PERMIT_NUMBER || a.permit_no || "Number not in the layer", type: a.permit_type || a.PERMIT_TYPE || a.type || "", desc: a.status || a.STATUS || a.permit_status || "", issued: "", final: "" };
+        });
+        s.permitSearch = "ok";
+        log(s, true, "Snohomish County active permits layer");
+      }).catch(function (e) { s.permitSearch = "failed"; log(s, false, "Snohomish County active permits", e.message); });
+    }
     if (s.juris === "city") {
       var c = R.CITY[s.cityKey];
       s.permitLinks = [{ label: "City of " + c.name + " (permits, planning and records requests)", url: c.home }, { label: c.code.label, url: c.code.url }, { label: "MyBuildingPermit permit search (many King and Snohomish cities)", url: LINKS.mbp }];
@@ -1011,6 +1307,66 @@
     }).catch(function (e) { s.flood = { ok: false, note: "data unavailable: the FEMA map service did not answer" }; log(s, false, NAME, e.message); });
   }
 
+  function listingFacts(s) {
+    var url = safeUrl(CFG.listingFactsUrl);
+    if (!url) {
+      s.listingFacts = { status: "off", results: [] };
+      return Promise.resolve();
+    }
+    var NAME = "Listing facts service";
+    var ctl = new AbortController(), t = setTimeout(function () { ctl.abort(); }, 12000);
+    var payload = {
+      address: s.matched || s.input || "",
+      parcel: s.parcel ? String(s.parcel) : "",
+      lat: s.lat,
+      lon: s.lon
+    };
+    return fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "omit",
+      signal: ctl.signal,
+      body: JSON.stringify(payload)
+    })
+      .finally(function () { clearTimeout(t); })
+      .then(function (r) {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.json();
+      })
+      .then(function (j) {
+        if (!j || !Array.isArray(j.results)) throw new Error("invalid listing contract");
+        var maxYear = new Date().getFullYear() + 1;
+        var clean = [];
+        j.results.forEach(function (item) {
+          if (!item || typeof item !== "object") return;
+          var prov = String(item.provider == null ? "" : item.provider).trim().slice(0, 40);
+          if (!prov) return;
+          var sqft = typeof item.livingSqft === "number" && isFinite(item.livingSqft) && item.livingSqft > 0 ? Math.round(item.livingSqft) : null;
+          var beds = typeof item.beds === "number" && isFinite(item.beds) && item.beds >= 0 ? Math.round(item.beds * 10) / 10 : null;
+          var baths = typeof item.baths === "number" && isFinite(item.baths) && item.baths >= 0 ? Math.round(item.baths * 100) / 100 : null;
+          var yb = typeof item.yearBuilt === "number" && isFinite(item.yearBuilt) && item.yearBuilt > 1800 && item.yearBuilt <= maxYear ? Math.round(item.yearBuilt) : null;
+          var imgs = Array.isArray(item.floorPlanImages) ? item.floorPlanImages.map(safeUrl).filter(Boolean).slice(0, 4) : [];
+          var fetchedAt = typeof item.fetchedAt === "string" ? item.fetchedAt.trim().slice(0, 40) : "";
+          if (sqft != null || beds != null || baths != null || yb != null || imgs.length) {
+            clean.push({
+              provider: prov,
+              livingSqft: sqft,
+              beds: beds,
+              baths: baths,
+              yearBuilt: yb,
+              floorPlanImages: imgs,
+              fetchedAt: fetchedAt
+            });
+          }
+        });
+        s.listingFacts = { status: "ok", results: clean };
+        log(s, true, NAME, clean.length + " provider record" + (clean.length === 1 ? "" : "s"));
+      })
+      .catch(function (e) {
+        s.listingFacts = { status: "failed", results: [] };
+        log(s, false, NAME, e && e.name === "AbortError" ? "timeout" : (e && e.message) || "request failed");
+      });
+  }
   function buildImagery(s) {
     if (!s.rings) return;
     var b = bbox(s.rings), a = merc(b[0], b[1]), c = merc(b[2], b[3]);
@@ -1182,17 +1538,11 @@
   function ledgerHtml(bundle) {
     if (!bundle) return "";
     var rows = bundle.measures.map(function (m) {
-      var who = m.automatic ? "" : "User-entered. ";
-      return "<tr><th scope=\"row\">" + esc(m.label) + "</th><td data-label=\"Amount\">" + measureValue(m) + "</td><td data-label=\"Confidence\">" + esc(m.confidence || "") + "</td><td data-label=\"Source\">" + esc(who + methodLabel(m.method)) + (m.retrieved ? " · " + esc(m.retrieved) : "") + (m.source ? "<br><span class=\"bh-muted\">" + esc(m.source) + "</span>" : "") + (safeUrl(m.url) ? "<br><a href=\"" + esc(safeUrl(m.url)) + "\" target=\"_blank\" rel=\"noopener\">Source page</a>" : "") + (m.note ? "<br><span class=\"bh-muted\">" + esc(m.note) + "</span>" : "") + "</td></tr>";
+      return '<tr><th scope="row">' + esc(m.label) + '</th><td data-label="Amount">' + measureValue(m) + "</td></tr>";
     }).join("");
     var open = bundle.open || {};
-    var openRow = "<tr><th scope=\"row\">" + esc(open.label || "Open area") + "</th><td data-label=\"Amount\">" + (open.sf == null ? '<span class="bh-tbd">Not measured</span>' : fmt(Math.round(open.sf)) + " sf") + "</td><td data-label=\"Confidence\">" + (open.verifiedLandscape ? "Medium" : "Low") + "</td><td data-label=\"Source\">" + esc(open.note || "") + "</td></tr>";
-    var extra = "";
-    (bundle.notes || []).forEach(function (t) { extra += '<p class="bh-muted">' + esc(t) + "</p>"; });
-    (bundle.conflicts || []).forEach(function (c) { extra += '<p class="bh-verify">' + esc(c.note) + "</p>"; });
-    (bundle.stale || []).forEach(function (c) { extra += '<p class="bh-verify">' + esc(c.note) + "</p>"; });
-    (bundle.errors || []).forEach(function (t) { extra += '<p class="bh-verify">' + esc(t) + "</p>"; });
-    return '<h3>Measurements and where they came from</h3><p class="bh-muted">Each number keeps its source, the date it was read, the method, and a confidence. A roof outline is not living area. Unknown driveway, garage, and hardscape stay blank.</p><table class="bh-table bh-measures"><thead><tr><th scope="col">Measure</th><th scope="col">Amount</th><th scope="col">Confidence</th><th scope="col">Source</th></tr></thead><tbody>' + rows + openRow + "</tbody></table>" + extra;
+    var openRow = '<tr><th scope="row">' + esc(open.label || "Open area") + '</th><td data-label="Amount">' + (open.sf == null ? '<span class="bh-tbd">Not available</span>' : fmt(Math.round(open.sf)) + " sf (approx.)") + "</td></tr>";
+    return '<h3>Measurements</h3><table class="bh-table bh-measures"><thead><tr><th scope="col">Measure</th><th scope="col">Amount</th></tr></thead><tbody>' + rows + openRow + "</tbody></table>";
   }
   /* The call to action at the end of the study. Buttons are hidden on paper, so the same links are
      also written out as text for the printed copy. */
@@ -1227,7 +1577,7 @@
     var b = contactButtons();
     return b.length && (CFG.phone || CFG.email) ? ctaHtml(heading, text, b) : "";
   }
-  var STUDY_LIMITS = "Planning estimate only. This is not a legal, zoning, or permit determination. Where zoning is not coded, the study does not say a project is allowed. Unknown driveway, garage, and hardscape are left blank rather than filled with zero. A roof outline is not living area or gross floor area. Open area left after a roof outline is not landscaping when paving is unknown. Listing sites are not fetched. A number you type from a listing, survey, or permit plan is labeled as your entry.";
+  var STUDY_LIMITS = "Planning estimate from public records; not a survey or permit determination. Where zoning is not coded, the study does not say a project is allowed. Unknown driveway, garage, and hardscape are left blank rather than filled with zero. A roof outline is not living area or gross floor area. Open area left after a roof outline is not landscaping when paving is unknown. Listing data is printed only when a connected listing data service returns it.";
 
   /* The largest ring of the parcel outline. A parcel record can carry several rings (separate parts, or a
      hole). The diagram and the envelope are drawn from one ring, and it used to be whichever came first. */
@@ -1260,11 +1610,15 @@
     var sb = rs && rs.setbacks || {}, seed = { address: s.matched || s.input || "", zone: v.zone || "", juris: s.jurisLabel || "", lot: v.lot || null, footprint: v.footprint || null, stories: v.stories || 1, type: v.type || "", coverage: rs && rs.coverage || null, setbacks: { front: sb.front, side: sb.side, rear: sb.rear, streetSide: sb.streetSide, rearAlley: sb.rearAlley }, height: null, ring: null, env: null, lat: s.lat, lon: s.lon };
     // The height limit as a number comes from the rule set. It used to be read back out of the rule table's text.
     if (rs && rs.height && typeof rs.height.ft === "number") seed.height = rs.height.ft;
+    seed.setbackVerify = !!(rs && rs.setbackVerify);
+    seed.heightVerify = !!(rs && rs.height && rs.height.verify);
     var g = lotGeometry(s, sb);
     if (g) {
       seed.ring = g.ring.map(function (q) { return [Math.round(q[0] * 10) / 10, Math.round(q[1] * 10) / 10]; });
+      seed.corner = !!g.corner;
+      seed.alley = !!(g.ce && g.ce.alley);
       if (g.er) {
-        seed.env = { rows: g.er.rows.map(function (r) { return r.map(function (n) { return Math.round(n * 10) / 10; }); }), area: Math.round(g.er.area) };
+        seed.env = { rows: g.er.rows.map(function (r) { return r.map(function (n) { return Math.round(n * 10) / 10; }); }), area: Math.round(g.er.area / 10) * 10 };
         seed.front = { x: g.ce.fx, y: g.ce.fy };
       }
     }
@@ -1275,72 +1629,84 @@
     var sb = rs && rs.setbacks || {};
     var g = lotGeometry(s, sb);
     if (!g) return "";
-    var ring = g.ring, ce = g.ce;
-    var F = sb.front, Rr = sb.rear, S = sb.side;
+    var ring = g.ring, ce = g.ce, linesMerged = g.lines && g.lines.length ? g.lines : ce.edges;
+    var sv = !!(rs && rs.setbackVerify);
     var minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
-    ring.forEach(function (p) { minX = Math.min(minX, p[0]); minY = Math.min(minY, p[1]); maxX = Math.max(maxX, p[0]); maxY = Math.max(maxY, p[1]); });
-    var pad = 46, W = 560, H = 420;
-    var sw = maxX - minX || 1, sh = maxY - minY || 1, sc = Math.min((W - 2 * pad) / sw, (H - 2 * pad) / sh);
-    var ox = (W - sw * sc) / 2, oy = (H - sh * sc) / 2;
+    ring.forEach(function (pt) { minX = Math.min(minX, pt[0]); minY = Math.min(minY, pt[1]); maxX = Math.max(maxX, pt[0]); maxY = Math.max(maxY, pt[1]); });
+    var padL = 52, padR = 52, padT = 46, padB = 52, W = 520, H = 400;
+    var sw = maxX - minX || 1, sh = maxY - minY || 1;
+    var sc = Math.min((W - padL - padR) / sw, (H - padT - padB) / sh);
+    var ox = padL + (W - padL - padR - sw * sc) / 2;
+    var oy = padT + (H - padT - padB - sh * sc) / 2;
     var X = function (x) { return ox + (x - minX) * sc; };
     var Y = function (y) { return H - oy - (y - minY) * sc; };
     var f1 = function (n) { return n.toFixed(1); };
-    var poly = ring.map(function (p, i) { return (i ? "L" : "M") + f1(X(p[0])) + " " + f1(Y(p[1])); }).join(" ") + " Z";
-    var lines = ce.edges.map(function (e) {
-      var stroke = e.kind === "front" || e.kind === "street" ? "#b45309" : e.kind === "rear" ? "#1d4ed8" : "#1f2933";
-      return '<line x1="' + f1(X(e.a[0])) + '" y1="' + f1(Y(e.a[1])) + '" x2="' + f1(X(e.b[0])) + '" y2="' + f1(Y(e.b[1])) + '" class="bh-edge bh-edge-' + e.kind + '" stroke="' + stroke + '" stroke-width="3"' + (e.kind === "street" ? ' stroke-dasharray="7 5"' : "") + "/>";
+    var pathOf = function (ringFt) { return (ringFt || []).map(function (pt, i) { return (i ? "L" : "M") + f1(X(pt[0])) + " " + f1(Y(pt[1])); }).join(" ") + " Z"; };
+    var poly = pathOf(ring);
+    var edgeStyle = { front: { w: 2.6, dash: "12 4" }, street: { w: 2.2, dash: "9 4" }, rear: { w: 1.8, dash: "9 3 2 3" }, side: { w: 1.6, dash: "2.2 2.6" }, alley: { w: 1.8, dash: "6 2 2 2" } };
+    var lotEdges = ce.edges.map(function (e) {
+      var st = e.alley ? edgeStyle.alley : (edgeStyle[e.kind] || edgeStyle.side);
+      return '<line x1="' + f1(X(e.a[0])) + '" y1="' + f1(Y(e.a[1])) + '" x2="' + f1(X(e.b[0])) + '" y2="' + f1(Y(e.b[1])) + '" class="bh-edge bh-edge-' + e.kind + '" stroke="#111" stroke-width="' + st.w + '" stroke-dasharray="' + st.dash + '"/>';
     }).join("");
-    var env = "", envArea = null, envC = null, ecx = 0, ecy = 0;
-    if (g.er) {
-      var er = g.er;
-      envArea = er.area;
-      var ca = 0; er.rows.forEach(function (r) { var a = r[2] * r[3]; ca += a; ecx += (r[0] + r[2] / 2) * a; ecy += (r[1] + r[3] / 2) * a; });
-      if (ca) { ecx /= ca; ecy /= ca; envC = [ecx, ecy]; }
-      if (er.rows.length) {
-        var d = er.rows.map(function (r) { return "M" + f1(X(r[0])) + " " + f1(Y(r[1] + r[3])) + "h" + f1(r[2] * sc + 0.4) + "v" + f1(r[3] * sc + 0.4) + "h" + f1(-(r[2] * sc + 0.4)) + "z"; }).join("");
-        env = '<path d="' + d + '" class="bh-env" fill="rgba(22,101,52,0.28)" stroke="none"/>';
-      }
+    var env = "", envArea = null;
+    if (g.er && g.er.rings && g.er.rings.length) {
+      envArea = g.er.area;
+      var hatch = (G && G.hatch) ? G.hatch(g.er.rings, Math.max(4, 7 / sc), 45).slice(0, 400) : [];
+      var hatchD = hatch.map(function (q) { return "M" + f1(X(q[0])) + " " + f1(Y(q[1])) + "L" + f1(X(q[2])) + " " + f1(Y(q[3])); }).join("");
+      var envD = g.er.rings.map(pathOf).join("");
+      env = '<path d="' + envD + '" fill="#f3f3f3" stroke="none"/>' + (hatchD ? '<path d="' + hatchD + '" fill="none" stroke="#b5b5b5" stroke-width="0.6"/>' : "") + '<path d="' + envD + '" class="bh-env" fill="none" stroke="#111" stroke-width="1.15" stroke-dasharray="6 3"/>';
     }
+    var geo = s.landscape && s.landscape.geo, bld = "", drive = "";
+    if (geo && geo.driveLines) geo.driveLines.forEach(function (d) {
+      var line = d.line || [];
+      if (line.length < 2) return;
+      drive += '<polyline points="' + line.map(function (pt) { return f1(X(pt[0])) + "," + f1(Y(pt[1])); }).join(" ") + '" fill="none" stroke="#777" stroke-width="5" stroke-linecap="butt"/>';
+    });
+    if (geo && geo.buildings) geo.buildings.forEach(function (b) {
+      if (!b.ring || b.role === "neighbor") return;
+      var name = b.role === "house" ? "(E) HOUSE" : b.role === "garage" ? "(E) GARAGE" : "(E) BLDG";
+      bld += '<path d="' + pathOf(b.ring) + '" fill="#ffffff" stroke="#111" stroke-width="' + (b.role === "house" ? "1.8" : "1.2") + '"/>';
+      var c = G && G.centroid ? G.centroid(b.ring) : null;
+      if (c) bld += '<text x="' + f1(X(c[0])) + '" y="' + f1(Y(c[1])) + '" text-anchor="middle" fill="#111" stroke="#fff" stroke-width="3" paint-order="stroke" font-size="10" font-weight="700">' + name + "</text>";
+    });
     var clamp = function (v, lo, hi) { return Math.max(lo, Math.min(hi, v)); };
-    // Street label: just outside the front lot line, kept inside the drawing.
-    var lx = clamp(X(ce.fx + ce.near.nx * 14), 70, W - 70), ly = clamp(Y(ce.fy + ce.near.ny * 14), 16, H - 30);
-    var label = function (v) { return typeof v === "number" ? v + " ft" : "verify"; };
-    var cx = 0, cy = 0, cn = 0;
-    ring.slice(0, -1).forEach(function (p) { cx += p[0]; cy += p[1]; cn++; });
-    // Envelope label at the envelope's own centroid; nudge it clear of the street label.
-    var elx = clamp(envC ? X(envC[0]) : X(cx / cn), 80, W - 80), ely = clamp(envC ? Y(envC[1]) : Y(cy / cn), 20, H - 34);
-    var tw = function (t) { return t.length * 6.2; };
-    var streetTxt = "Street side, front " + label(F);
-    for (var tries = 0; tries < 8 && Math.abs(ely - ly) < 16 && Math.abs(elx - lx) < (tw(streetTxt) + 160) / 2; tries++) ely = clamp(ely + (ely >= ly ? 18 : -18), 20, H - 34);
-    if (Math.abs(ely - ly) < 16 && Math.abs(elx - lx) < (tw(streetTxt) + 160) / 2) ely = ly > H / 2 ? ly - 22 : ly + 22;
-    var envText = envArea != null ? (envArea > 0 ? "Envelope about " + fmt(Math.round(envArea / 10) * 10) + " sf" : "No envelope left after setbacks") : "Setbacks not verified";
-    return '<svg viewBox="0 0 ' + W + " " + H + '" class="bh-siteplan" role="img" aria-label="Diagrammatic site plan: parcel outline, front, side and rear setbacks, and the remaining buildable envelope. ' + esc(envText) + '.">' +
-      '<path d="' + poly + '" class="bh-lot" fill="#f3f1ea" stroke="#1f2933" stroke-width="2"/>' + env + lines +
-      '<text x="' + f1(lx) + '" y="' + f1(ly) + '" class="bh-front" fill="#14532d" text-anchor="middle" aria-hidden="true">Street side, front ' + label(F) + '</text>' +
-      '<text x="' + f1(elx) + '" y="' + f1(ely) + '" class="bh-envlabel" fill="#14532d" text-anchor="middle" aria-hidden="true">' + esc(envText) + '</text>' +
-      '<g class="bh-north" aria-hidden="true" transform="translate(' + (W - 24) + ',30)"><path d="M0 -14 L6 4 L0 0 L-6 4 Z" fill="#1f2933"/><text y="18" text-anchor="middle" fill="#1f2933">N</text></g>' +
-      '<text x="12" y="' + (H - 10) + '" class="bh-note" text-anchor="start" aria-hidden="true"><tspan class="bh-k-front">Front ' + label(F) + '</tspan>  <tspan class="bh-k-side">Side ' + label(S) + '</tspan>  <tspan class="bh-k-rear">Rear ' + label(Rr) + '</tspan>  Scale approximate</text>' +
-      "</svg>";
+    var dims = "";
+    (linesMerged || []).forEach(function (ln) {
+      var L = ln.len || ln.path || 0;
+      if (L * sc < 36) return;
+      var ang = Math.atan2(-(ln.b[1] - ln.a[1]), ln.b[0] - ln.a[0]) * 180 / Math.PI;
+      while (ang >= 90) ang -= 180; while (ang < -90) ang += 180;
+      var mx = clamp(X(ln.mx) + (ln.nx || 0) * 13, 24, W - 24), my = clamp(Y(ln.my) - (ln.ny || 0) * 13, 14, H - 28);
+      dims += '<text x="' + f1(mx) + '" y="' + f1(my) + '" text-anchor="middle" fill="#111" stroke="#fff" stroke-width="3" paint-order="stroke" font-size="9" font-weight="700" transform="rotate(' + ang.toFixed(1) + " " + f1(mx) + " " + f1(my) + ')">' + (Math.round(L * 10) / 10).toFixed(1) + "'</text>";
+    });
+    var streetName = (houseAndStreet(s.matched || s.input || "").street || "STREET").toUpperCase();
+    var slx = clamp(X(ce.fx) + ce.fnx * 26, 70, W - 70), sly = clamp(Y(ce.fy) - ce.fny * 26, 16, H - 24);
+    var streetLbl = '<text x="' + f1(slx) + '" y="' + f1(sly) + '" text-anchor="middle" fill="#444" stroke="#fff" stroke-width="3" paint-order="stroke" font-size="9" font-weight="700" letter-spacing="1.2">' + esc(streetName) + "</text>";
+    var unit = 20;
+    if (2 * unit * sc > 120) unit = 10; else if (2 * unit * sc < 50) unit = 50;
+    var uPx = unit * sc;
+    var scaleBar = '<g class="bh-scale" transform="translate(12,' + (H - 20) + ')"><rect x="-4" y="-13" width="' + f1(2 * uPx + 18) + '" height="24" fill="#fff"/><rect x="0" y="0" width="' + f1(uPx) + '" height="4" fill="#111"/><rect x="' + f1(uPx) + '" y="0" width="' + f1(uPx) + '" height="4" fill="#fff" stroke="#111" stroke-width="0.6"/><text x="0" y="-2" font-size="8" fill="#111">0</text><text x="' + f1(2 * uPx) + '" y="-2" text-anchor="end" font-size="8" fill="#111">' + (2 * unit) + " ft</text></g>";
+    var north = '<g class="bh-north" transform="translate(' + (W - 24) + ',26)"><circle cx="0" cy="0" r="12" fill="#fff" stroke="#111" stroke-width="1"/><path d="M0 -16 L4.5 5 L0 1 L-4.5 5 Z" fill="#111"/><text y="22" text-anchor="middle" fill="#111" font-size="9" font-weight="700">N</text></g>';
+    var envRound = envArea != null ? Math.round(envArea / 10) * 10 : null;
+    var envText = envRound != null ? (envRound > 0 ? "Buildable area ≈ " + fmt(envRound) + " sf" + (sv ? " (verify)" : "") : "No area inside setbacks") : "Setbacks: verify";
+    return '<svg viewBox="0 0 ' + W + " " + H + '" class="bh-siteplan bh-lot-svg" role="img" aria-label="Site diagram. ' + esc(envText) + '."><rect width="' + W + '" height="' + H + '" fill="#fff"/><path d="' + poly + '" class="bh-lot" fill="#fff" stroke="#bbb" stroke-width="0.6"/>' + env + lotEdges + drive + bld + streetLbl + dims + north + scaleBar + "</svg>";
   }
-  /* The same figures as text. In the drawing they are 11 px at full width and about 7 px on a phone,
-     and they are hidden from screen readers. */
   function sitePlanKey(s, rs) {
     var sb = rs && rs.setbacks || {}, g = lotGeometry(s, sb);
     if (!g) return "";
-    var label = function (v) { return typeof v === "number" ? v + " ft" : "verify with the jurisdiction"; };
-    var items = ['<li><span class="bh-key bh-key-front"></span>Front, the street side: ' + label(sb.front) + "</li>"];
-    if (g.corner) items.push('<li><span class="bh-key bh-key-street"></span>Second street side of this corner lot: ' + (typeof sb.streetSide === "number" ? "the zone's street-side setback, " + label(sb.streetSide) : "drawn at the front setback, " + label(sb.front)) + "</li>");
-    if (g.ce && g.ce.alley) items.push('<li><span class="bh-key bh-key-side"></span>One line is on an alley' + (typeof sb.rearAlley === "number" ? ": " + sb.rearAlley + " ft there" : ". The rear or side setback is drawn there") + "</li>");
-    items.push('<li><span class="bh-key bh-key-side"></span>Side: ' + label(sb.side) + "</li>");
-    items.push('<li><span class="bh-key bh-key-rear"></span>Rear: ' + label(sb.rear) + "</li>");
-    items.push('<li><span class="bh-key bh-key-env"></span>' + (g.er ? (g.er.area > 0 ? "Envelope inside the setbacks: about " + fmt(Math.round(g.er.area / 10) * 10) + " sf" : "No area is left inside the setbacks as drawn") : "Envelope not drawn. The setbacks are not all coded.") + "</li>");
+    var sv = !!(rs && rs.setbackVerify);
+    var label = function (v) { return typeof v === "number" ? v + " ft" + (sv ? " (verify)" : "") : "verify"; };
+    var sw = function (dash, width) { return '<svg class="bh-key-svg" width="28" height="10" viewBox="0 0 28 10" aria-hidden="true"><line x1="1" y1="5" x2="27" y2="5" stroke="#111" stroke-width="' + width + '" stroke-dasharray="' + dash + '"/></svg>'; };
+    var items = ['<li>' + sw("12 3.5", "2.4") + "<span>Front " + label(sb.front) + "</span></li>"];
+    if (g.corner) items.push('<li>' + sw("9 3", "2") + "<span>Street side " + label(typeof sb.streetSide === "number" ? sb.streetSide : sb.front) + "</span></li>");
+    items.push('<li>' + sw("2.2 2.4", "1.6") + "<span>Side " + label(sb.side) + "</span></li>");
+    items.push('<li>' + sw("8 2.5 2 2.5", "1.7") + "<span>Rear " + label(sb.rear) + "</span></li>");
+    if (g.ce && g.ce.alley) items.push('<li>' + sw("6 2 2 2", "1.6") + "<span>Alley" + (typeof sb.rearAlley === "number" ? " " + sb.rearAlley + " ft" : "") + "</span></li>");
+    var envTxt = g.er ? (g.er.area > 0 ? "Buildable area ≈ " + fmt(Math.round(g.er.area / 10) * 10) + " sf" : "No envelope inside setbacks") : "Envelope not drawn";
+    items.push('<li><svg class="bh-key-svg" width="28" height="10" viewBox="0 0 28 10" aria-hidden="true"><rect x="1" y="1" width="26" height="8" fill="#f3f3f3" stroke="#111" stroke-dasharray="4 2"/><path d="M3 8 L10 1 M11 8 L18 1" stroke="#aaa" stroke-width="0.6"/></svg><span>' + envTxt + "</span></li>");
     return '<ul class="bh-plan-key">' + items.join("") + "</ul>";
   }
 
-  /* ---------- report ---------- */
-  /* A typed area is digits, with optional thousands commas, an optional decimal part and an optional
-     "sf" or "sq ft". Nothing else is guessed at. parseFloat read "-5000" as a negative lot (and negative
-     caps), "0.25 acres" as a quarter of a square foot, "5000-6000" as 5000 and "12 000" as 12. */
   function parseArea(text) {
     var t = String(text == null ? "" : text).trim();
     if (!t) return { value: null, error: "" };
@@ -1424,319 +1790,447 @@
     $("bh-confirm").hidden = false;
   }
 
+  /* Renumber whatever pages render() actually built. `pages` is an array of section HTML.
+     The permit sentence ("See page 5.") is rewritten to the details page's real number.
+     SP-1's title block says "Page N of M" as plain text inside the SVG, so the same pass fixes it. */
+  function stampStudyPages(pages) {
+    var total = pages.length, permitAt = 0;
+    pages.forEach(function (html, i) { if (String(html).indexOf("bh-details-page") >= 0) permitAt = i + 1; });
+    return pages.map(function (html, i) {
+      var n = i + 1;
+      var out = String(html)
+        .replace(/data-page="\d+"/g, 'data-page="' + n + '"')
+        .replace(/data-total="\d+"/g, 'data-total="' + total + '"')
+        .replace(/Page \d+ of \d+/g, "Page " + n + " of " + total);
+      if (permitAt) out = out.replace(/See page \d+\./g, "See page " + permitAt + ".");
+      return out;
+    });
+  }
+
   function render() {
     var s = state;
     var stRaw = $("bh-stories") ? parseFloat($("bh-stories").value) : NaN, kindNow = ($("bh-footprint-kind") && $("bh-footprint-kind").value) || "";
     var v = { lot: num("bh-lot", "A lot size of 0 was not used. Enter the lot size in square feet."), zone: $("bh-zone").value.trim(), existing: num("bh-existing"), footprint: num("bh-footprint"), imperv: num("bh-imperv", "A 0 here was not used. Impervious surface includes the roof. Leave the box blank when paving is unknown."), front: $("bh-front").value, units: parseInt($("bh-units").value, 10) || 1, stories: isFinite(stRaw) && stRaw > 0 ? stRaw : null, type: $("bh-type").value };
-    // The rules are read for the place and the zone whether or not the lot size is known. A cap that is a
-    // share of the lot then has no square-foot figure, and says so. Before this, a lot with no size on record
-    // got no setbacks, no height limit and no ADU rule either.
     var rs = ["seattle", "kc", "sno", "edmonds", "kenmore", "city"].indexOf(s.juris) >= 0 ? R.pick({ juris: s.juris, city: s.cityKey, zone: v.zone, lot: v.lot, units: v.units, house: v.existing }) : null;
-    // Which box the visitor changed since the last draw, in the order the changes were made.
     if (s.formWas) {
       if (v.existing !== s.formWas.existing) s.editSeq.living = ++s.seq;
       if (v.footprint !== s.formWas.footprint || kindNow !== s.formWas.kind) s.editSeq.footprint = ++s.seq;
     }
     s.formWas = { existing: v.existing, footprint: v.footprint, kind: kindNow };
     s.frontDir = v.front || "";
-    // Lot size and zone drive every cap in the study. When they are typed on this page
-    // they are labeled as the visitor's entry, next to the public record figure.
     var lotEdited = v.lot != null && (s.lot == null || Number(v.lot) !== Number(s.lot));
     var zoneEdited = !!v.zone && v.zone !== (s.zone || "");
-    var out = [];
-    // "Orleans Parish" and "Anchorage Municipality" are county names as they stand. Only a bare name gets the word added.
     var place = s.city ? s.city.toUpperCase() : (s.county ? (/(County|Parish|Borough|Census Area|Municipality)$/i.test(s.county) ? s.county : s.county + " County").toUpperCase() : "PLACE NOT MATCHED");
-    var page = function (title, body, cls) { return '<section class="bh-page ' + (cls || "") + '"><div class="bh-page-body">' + body + '</div><footer class="bh-page-foot"><span>' + esc(place) + ' | ' + esc(s.stateAbbr || "US") + '</span><strong>' + esc(title) + '</strong><span class="bh-brand">' + esc(CFG.brand) + '</span></footer></section>'; };
+    var sampleBadge = s.isSample ? " · SAMPLE LAYOUT — NOT A PROPERTY RECORD" : "";
+    var TOTAL_PAGES = 6;
+    var contactBrand = [CFG.brand || "Pacific Pro Group", CFG.phone || "(206) 446-5656", CFG.site || "pacificprogroup.com", CFG.license ? "WA Reg. # " + CFG.license : ""].filter(Boolean).join(" · ");
+    var footLogo = '<img class="bh-foot-logo" src="/assets/feasibility/pacific-pro-group-logo.png" alt="Pacific Pro Group">';
+    var foot = function (title, pageNum) {
+      var pLabel = "Page " + pageNum + " of " + TOTAL_PAGES;
+      return '<footer class="bh-page-foot"><span class="bh-foot-left"><span class="bh-foot-place">' + esc(place) + " | " + esc(s.stateAbbr || "US") + '</span><strong>' + esc(title) + "</strong><span class=\"bh-foot-pg\"> · " + esc(pLabel) + (s.isSample ? " · SAMPLE" : "") + '</span></span><span class="bh-brand">' + footLogo + "<span>" + esc(contactBrand) + "</span></span></footer>";
+    };
+    var page = function (title, body, cls, pageNum) {
+      return '<section class="bh-page bh-study-page ' + (cls || "") + '" data-page="' + pageNum + '" data-total="' + TOTAL_PAGES + '"><div class="bh-page-body">' + body + "</div>" + foot(title, pageNum) + "</section>";
+    };
 
     var ctx = studyContext(s, v, rs);
     var prepared = (ctx && ctx.prepared) || todayStamp();
-    var hide = !!CFG.hideLinkOnly;
-    // The drawing model, the facts both summary pages are written from, and one concept per project type.
     var sbNow = rs && rs.setbacks || {}, landGeo = s.landscape && s.landscape.geo ? s.landscape.geo : null;
     var M = SP && SUM && CFG.sheets !== false ? SP.model({
       rings: s.rings, lon: s.lon, lat: s.lat, frontDir: s.frontDir, neighbors: s.neighborRings, setbacks: sbNow, setbackVerify: !!(rs && rs.setbackVerify),
       addrStreet: houseAndStreet(s.matched || s.input || "").street, geo: landGeo, slope: s.landscape && s.landscape.slope, hazardShapes: s.hazardShapes, imagery: s.imagery, lines: lotGeometry(s, sbNow)
     }) : null;
     var F = SUM ? SUM.facts(s, v, rs, ctx, { brand: brandInfo() }, M) : null, FB = F ? SUM.blocks(F) : null;
-    var options = (ctx && ctx.options) || [], optBy = {}, placedBy = {}, thumbs = {};
+    var options = (ctx && ctx.options) || [], optBy = {}, placedBy = {};
     options.forEach(function (o) { optBy[o.id] = o; });
-    if (M && M.ok) options.forEach(function (o) { placedBy[o.id] = SP.place(M, o); thumbs[o.id] = SP.thumb(M, placedBy[o.id] && placedBy[o.id].ok ? placedBy[o.id] : null); });
+    if (M && M.ok) options.forEach(function (o) { placedBy[o.id] = SP.place(M, o); });
     var fb = function (key) { var hit = null; if (FB) ["building", "remodel", "landscaping", "roofing"].forEach(function (b) { FB[b].forEach(function (x) { if (x.key === key) hit = x; }); }); return hit; };
-    var fbHtml = function (key) { var r = fb(key); return r ? "<p" + (r.s === "missing" || r.s === "verify" ? ' class="bh-verify"' : "") + ">" + esc(r.v) + "</p>" : ""; };
+    var fbHtml = function (key) { var r = fb(key); return r ? "<p" + (r.s === "missing" || r.s === "verify" ? ' class="bh-verify"' : "") + ">" + esc(String(r.v || "").replace(/\bPPG\b/g, "Pacific Pro Group")) + "</p>" : ""; };
     var placeName = F ? F.place : "the jurisdiction";
-    // Pages 1 and 2: the site plan sheet and the facts sheet. The full report follows, unshortened.
-    if (M && F) {
-      var optMain = optBy[v.type] || null;
-      out.push(SP.sheet(M, { F: F, opt: optMain, placed: optMain && M.ok ? placedBy[optMain.id] : undefined, sheet: "SP-1" }).html);
-      out.push(SUM.factsSheet(F, FB));
-    }
-    var mapHtml = "";
-    if (s.imagery) {
-      var mw = isFinite(Number(s.imagery.W)) ? String(Number(s.imagery.W)) : "0";
-      var mh = isFinite(Number(s.imagery.H)) ? String(Number(s.imagery.H)) : "0";
-      mapHtml = '<figure class="bh-aerial"><div class="bh-aerial-frame"><img src="' + esc(s.imagery.url) + '" alt="Aerial photo of this parcel with the parcel outline drawn on top" width="' + esc(mw) + '" height="' + esc(mh) + '"><svg viewBox="0 0 ' + esc(mw) + " " + esc(mh) + '" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="' + esc(s.imagery.path) + '" class="bh-outline" fill="rgba(255,255,255,0.08)" stroke="#ffffff" stroke-width="2"/></svg></div></figure>';
-    } else if (s.rings) {
-      mapHtml = sitePlanSVG(s, rs);
-    }
-    var stageInner = window.BuildHereStage
-      ? window.BuildHereStage.renderStage({
-          address: s.matched || s.input,
-          date: prepared,
-          placeLine: (s.jurisLabel || "") + (s.parcel ? " · Parcel " + s.parcel : "") + (v.zone ? " · Zone " + v.zone + (zoneEdited ? " (your entry)" : "") : ""),
-          edited: lotEdited || zoneEdited ? "These cards use a " + (lotEdited && zoneEdited ? "lot size and zone" : lotEdited ? "lot size" : "zone") + " typed on this page, not the public record. The summary shows both." : "",
-          mapHtml: mapHtml,
-          warn: s.parcelWarn || (s.landscape && s.landscape.warn) || "",
-          cards: ctx ? ctx.cards : [],
-          thumbs: thumbs,
-          hideIcons: hide,
-          planLabel: $("bh-lead") || CFG.bookUrl ? "Plan this with " + CFG.brand : "",
-          planUrl: CFG.bookUrl && linkUrl(CFG.bookUrl) ? CFG.bookUrl : "#bh-lead-card"
-        })
-      : '<p class="bh-verify">The options view did not load. Refresh the page.</p>';
-    out.push(page("What you can build", stageInner, "bh-stage-page"));
+    var asOfDate = (F && F.preparedText) || prepared;
 
-    // Project summary
-    var rows = [
-      ["Parcel number", s.parcel ? esc(s.parcel) + (s.assessorUrl ? ' · <a href="' + esc(s.assessorUrl) + '" target="_blank" rel="noopener">assessor record</a>' : "") + (s.parcelMatch === "nearest" || s.parcelMatch === "point" ? ' <span class="bh-verify">Matched by location, not by address. Verify.</span>' : (s.parcelMatch === "address" ? ' <span class="bh-muted">· matched by street address</span>' : "")) : "Not found"],
-      ["Site address", esc(s.matched || s.input)],
-      ["Jurisdiction", esc(s.jurisLabel)],
-      ["Lot area", v.lot ? fmt(v.lot) + " sf" + (lotEdited ? " (your entry" + (s.lot != null ? "; the public record figure was " + fmt(s.lot) + " sf" : "") + ")" : ' <span class="bh-muted">· ' + esc(s.lotSrc || "public record") + "</span>") : "Enter by hand"],
-      ["Zone", v.zone ? esc(v.zone) + (zoneEdited ? " (your entry" + (s.zone ? "; the public record shows " + esc(s.zone) : "") + ")" : (s.zoneSrc ? ' <span class="bh-muted">· ' + esc(s.zoneSrc) + "</span>" : "")) + (!zoneEdited && s.assessorZone ? ' <span class="bh-muted">(the county assessor field shows ' + esc(s.assessorZone) + ")</span>" : "") : "Enter by hand"],
-      ["Existing finished area", v.existing ? fmt(v.existing) + " sf" + ((s.existing != null && Number(v.existing) !== Number(s.existing)) || !s.existingSrc ? " (your entry" + (s.existing != null && Number(v.existing) !== Number(s.existing) ? "; recorded figure was " + fmt(s.existing) + " sf" : "") + ")" : ' <span class="bh-muted">· ' + esc(s.existingSrc) + "</span>") : "Not entered"],
-      ["Building footprint", (function () {
-        if (v.footprint == null) return "Not entered";
-        var kindShown = ($("bh-footprint-kind") && $("bh-footprint-kind").value) || s.footprintKind || "roof";
-        var edited = s.footprint != null && Number(v.footprint) !== Number(s.footprint);
-        var yours = edited || !s.footprintSrc || kindShown === "footprint";
-        var kindPhrase = kindShown === "firstFloor" ? "first-floor area, not roof coverage" : (kindShown === "footprint" ? "surveyed footprint" : "roof outline, not living area");
-        var note = " (" + kindPhrase;
-        if (yours) {
-          note += ", your entry";
-          if (edited) note += "; recorded figure was " + fmt(s.footprint) + " sf";
-        }
-        note += ")";
-        return fmt(v.footprint) + " sf" + note;
-      })()],
-      ["Year built", (function () {
-        if (!s.yearBuilt) return "Not found in the public records this page reads. See the assessor page.";
-        var others = (s.years || []).filter(function (r) { return String(r.y) !== String(s.yearBuilt); });
-        return esc(s.yearBuilt) + " (" + esc(s.yearSrc) + ")" + (others.length ? ' <span class="bh-verify">Another record shows ' + others.map(function (r) { return esc(r.y) + " (" + esc(r.src) + ")"; }).join("; ") + ". The older year is the one used for the asbestos and lead-paint flag.</span>" : "");
-      })()],
-      ["Stories (existing)", v.stories == null ? '<span class="bh-tbd">Not on record.</span> Choose it under Edit the facts if you know it.' : String(v.stories) + (s.storiesSrc && String(v.stories) === s.storiesFilled ? ' <span class="bh-muted">· ' + esc(s.storiesSrc) + (s.storiesNote ? "; " + esc(s.storiesNote) : "") + "</span>" : (s.storiesSrc ? " (your entry; " + esc(s.storiesSrc) + " shows " + esc(s.stories) + ")" : " (your entry; not from a record)"))],
-      ["Project type", esc($("bh-type").selectedOptions[0].text)]
+    var seed3d = (ctx && ctx.seed) || seed3D(s, v, rs);
+    try { if (CFG.massingUrl) sessionStorage.setItem(SEED_KEY, JSON.stringify(seed3d)); localStorage.removeItem("bh3dSeed"); } catch (e) {}
+
+    var out = [];
+
+    /* Cover is physical page 1. stampStudyPages renumbers every sheet after this, including SP-1. */
+    var coverQr = String(CFG.coverQrUrl || "").trim();
+    var coverBody = '<div class="bh-cover-wrap"><div class="bh-cover-top"><img class="bh-cover-logo" src="/assets/feasibility/pacific-pro-group-logo.png" alt="Pacific Pro Group">' +
+      '<p class="bh-cover-kicker">SINGLE-FAMILY RESIDENCE <span aria-hidden="true">|</span> <strong>FEASIBILITY STUDY</strong></p><div class="bh-cover-bar" aria-hidden="true"></div></div>' +
+      '<div class="bh-cover-art"><img src="/assets/feasibility/feasibility-cover.jpg" alt="Pen-and-ink drawing of a house on its lot"></div>' +
+      '<div class="bh-cover-meta"><div><p class="bh-cover-label">Subject property</p><p class="bh-cover-address">' + esc(s.matched || s.input || "Address not matched") + "</p>" +
+      '<p class="bh-cover-date">Prepared ' + esc(asOfDate) + (s.isSample ? " · Sample layout — not a property record" : "") + "</p></div>" +
+      '<div class="bh-cover-firm-col"><p class="bh-cover-firm">Pacific Pro Group LLC, Design-Build General Contractor, WA Reg. # PACIFPG765OF</p>' +
+      "<p>Edmonds: 144 Railroad Ave #307, Edmonds, WA 98020, (206) 446-5656</p>" +
+      "<p>Seattle: 110 Lakeside Ave Ste 110F, Seattle, WA 98122, (425) 570-9340</p>" +
+      "<p>pacificprogroup.com</p></div>" +
+      (coverQr ? '<img class="bh-cover-qr" src="' + esc(coverQr) + '" alt="">' : "") +
+      "</div></div>";
+    out.push(page("Cover", coverBody, "bh-cover", 1));
+
+    /* ---------- EXISTING LOT (diagram + area + slope on one sheet) ---------- */
+    var rLand = s.landscape || { rows: [], notes: [], slope: { ok: false, note: "not measured" }, flags: [] };
+    var p1Left = "<h3>Site diagram</h3>" + '<div class="bh-lot-diagram">' + sitePlanSVG(s, rs) + sitePlanKey(s, rs) + "</div>" +
+      '<p class="bh-muted">Line diagram from the county parcel and mapped footprints. Sheet SP-1 is the scaled site plan. Not a survey.</p>';
+    var p1Right = "";
+    if (s.isSample) p1Right += '<p class="bh-verify bh-alert-box"><strong>Sample layout only — these numbers are not a property record.</strong></p>';
+    if (s.parcelWarn || rLand.warn) p1Right += '<p class="bh-verify bh-alert-box" role="alert"><strong>' + esc(s.parcelWarn || rLand.warn) + "</strong></p>";
+    p1Right += "<h3>House, garage, driveway and open area</h3>";
+    if (rLand.rows && rLand.rows.length) {
+      p1Right += '<table class="bh-table bh-land"><thead><tr><th scope="col">Area</th><th scope="col">Square feet</th><th scope="col">Share</th></tr></thead><tbody>' + rLand.rows.map(function (x) {
+        var sfTxt = x.sf == null ? '<span class="bh-tbd">Not available</span>' : (x.key === "lot" && s.lotKind === "record" ? fmt(x.sf) + " sf" : "approx. " + fmt(x.sf) + " sf");
+        var pctTxt = x.pct == null ? "Not measured" : x.pct + "%";
+        return '<tr><th scope="row">' + esc(x.label) + '</th><td data-label="Square feet">' + sfTxt + '</td><td data-label="Share">' + esc(pctTxt) + "</td></tr>";
+      }).join("") + "</tbody></table>";
+    } else p1Right += '<p class="bh-muted">Site coverage was not measured.</p>';
+    var landRow = (rLand.rows || []).filter(function (x) { return x.key === "land" && x.verifiedLandscape === false && x.sf != null; })[0];
+    if (landRow) p1Right += '<p class="bh-verify">Open area is not verified landscaping. Paving, patios, or eaves may be inside it.</p>';
+    (rLand.notes || []).forEach(function (t) { p1Right += '<p class="bh-verify">' + esc(t) + "</p>"; });
+    p1Right += '<p class="bh-muted">Measured by sampling the parcel outline every ' + ((rLand.coverage && rLand.coverage.step) || 1) + " ft. Planning estimate only.</p>";
+    var sl = rLand.slope;
+    p1Right += "<h3>Slope (approx.)</h3>";
+    if (sl && sl.ok) {
+      p1Right += '<table class="bh-table">' +
+        '<tr><th scope="row">Average slope</th><td>approx. ' + sl.mean + "% (median " + sl.median + "%)</td></tr>" +
+        '<tr><th scope="row">Steepest part</th><td>approx. ' + sl.p95 + "% (95th); peak cell " + sl.max + "%</td></tr>" +
+        '<tr><th scope="row">Lot at 15% / 25% / 40%+</th><td>' + sl.pct15 + "% / " + sl.pct25 + "% / " + sl.pct40 + "%</td></tr>" +
+        '<tr><th scope="row">Elevation range</th><td>approx. ' + fmt(sl.elevMin) + " to " + fmt(sl.elevMax) + " ft</td></tr>" +
+        '<tr><th scope="row">Surface fall</th><td>' + (sl.fallCompass && sl.fallCompass !== "flat" ? "Toward the " + esc(sl.fallCompass) + ", approx. " + sl.fallPct + "%." : "Nearly flat.") + " Not a survey.</td></tr></table>";
+    } else p1Right += '<p class="bh-verify">Slope: data unavailable (' + esc(sl && sl.note || "the elevation service did not answer") + ").</p>";
+    out.push(page("Existing lot", '<div class="bh-cols bh-existing-lot-cols"><div>' + p1Left + "</div><div>" + p1Right + "</div></div>", "bh-existing-lot-page", out.length + 1));
+
+    /* ---------- PAGE 2: F-1 PROPERTY FACTS ---------- */
+    if (F && SUM) {
+      var factsHtml = SUM.factsSheet(F, FB, { pageLabel: "Page " + (out.length + 1) + " of " + TOTAL_PAGES, pageNum: out.length + 1, totalPages: TOTAL_PAGES });
+      factsHtml = factsHtml.replace(/<footer class="bh-facts-foot">[\s\S]*?<\/footer>/i, foot("Property facts", out.length + 1));
+      out.push(factsHtml);
+    }
+
+    /* ---------- PAGE 3: SP-1 PRELIMINARY SITE PLAN ---------- */
+    if (M && F && SP) {
+      var optMain = optBy[v.type] || null;
+      out.push(SP.sheet(M, {
+        F: F,
+        opt: optMain,
+        placed: optMain && M.ok ? placedBy[optMain.id] : undefined,
+        sheet: "SP-1",
+        noSources: true,
+        noInset: true,
+        compact: true,
+        pageLabel: "Page 3 of " + TOTAL_PAGES,
+        pageNum: 3,
+        totalPages: TOTAL_PAGES
+      }).html.replace("</section>", foot("Preliminary site plan", 3) + "</section>"));
+    }
+
+    /* ---------- PAGE 4: WHAT YOU CAN BUILD (2-column compact layout) ---------- */
+    var rowsP4 = [
+      ["Parcel number", s.parcel ? esc(s.parcel) + (s.parcelMatch === "nearest" || s.parcelMatch === "point" ? ' <span class="bh-verify">Matched by location, not by address. Verify.</span>' : (s.parcelMatch === "address" ? " · matched by street address" : "")) : "not available"],
+      ["Site address", esc(s.matched || s.input || "not available")],
+      ["Jurisdiction", esc(s.jurisLabel || "not available")],
+      ["Lot area", v.lot ? fmt(v.lot) + " sf" + (lotEdited && s.lot != null ? " (your entry; county record " + fmt(s.lot) + " sf)" : (lotEdited ? " (your entry)" : (s.lotRecordSf && Math.abs(s.lotRecordSf - v.lot) > 300 ? " (approx. outline; parcel record lists " + fmt(s.lotRecordSf) + " sf)" : ""))) : "not available"]
     ];
-    if (s.detGarageFloor) rows.push(["Detached garage floor area", fmt(s.detGarageFloor) + " sf" + (s.detGarageFloorSrc ? ' <span class="bh-muted">· ' + esc(s.detGarageFloorSrc) + "</span>" : "")]);
-    // What else the building record and the map layers hold for this lot. A row is added only when there is something to say.
-    var mute = function (t) { return t ? ' <span class="bh-muted">· ' + esc(t) + "</span>" : ""; };
-    if (F && F.plat) rows.push(["Plat and lot", esc(F.plat.name) + (F.plat.lot ? ", lot " + esc(F.plat.lot) : "") + (F.plat.block ? ", block " + esc(F.plat.block) : "") + mute("King County parcel record")]);
-    if (s.beds != null || s.baths != null) rows.push(["Bedrooms and baths", (s.beds != null ? esc(s.beds) + " bedroom" + (Number(s.beds) === 1 ? "" : "s") : "bedrooms not on record") + ", " + (s.baths != null ? esc(s.baths) + " bath" + (Number(s.baths) === 1 ? "" : "s") + " (a full bath counts 1, a three-quarter bath 0.75, a half bath 0.5)" : "baths not on record") + mute(s.existingSrc || s.countyFinSrc)]);
-    if (s.upperFloor || s.halfFloor) rows.push(["Upper floors on record", [s.upperFloor ? fmt(s.upperFloor) + " sf above the first floor" : "", s.halfFloor ? fmt(s.halfFloor) + " sf of half story" : ""].filter(Boolean).join(" · ") + mute("King County Assessor (SqFt2ndFloor and SqFtUpperFloor added; SqFtHalfFloor)" + (s.existingBuildings > 1 ? ", the sum of " + s.existingBuildings + " buildings" : ""))]);
-    if (s.basementTotal) rows.push(["Basement", fmt(s.basementTotal) + " sf" + (s.basementFinished != null ? ", " + fmt(s.basementFinished) + " sf of it finished" : "") + mute(s.basementSrc)]);
-    else if (s.basementNone) rows.push(["Basement", "None on the assessor record"]);
-    if (s.garageFloor) rows.push(["Attached garage", fmt(s.garageFloor) + " sf" + mute(s.garageFloorSrc)]);
-    if (s.basementGarage) rows.push(["Basement garage", fmt(s.basementGarage) + " sf" + mute(s.basementGarageSrc)]);
-    if (!s.garageFloor && !s.basementGarage && s.garageNone) rows.push(["Garage", "None on the assessor record"]);
-    if (s.deck) rows.push(["Deck", fmt(s.deck) + " sf" + mute("King County Assessor deck square feet (SqFtDeck)")]);
-    if (s.yrRenov) rows.push(["Year renovated", esc(s.yrRenov) + mute("King County Assessor residential building extract (YrRenovated" + (s.existingBuildings > 1 ? ", the latest of " + s.existingBuildings + " buildings" : "") + ")")]);
-    if (s.countyFin) rows.push(["House size (county FinSize)", "≈ " + fmt(s.countyFin.sf) + " sf" + mute(s.countyFin.source + ". " + (s.countyFin.note || ""))]);
-    if (s.flood) rows.push(["Flood zone (FEMA)", s.flood.ok ? (s.flood.zones.length ? esc(s.flood.zones.join(", ")) + (s.flood.sfha ? ' <span class="bh-verify">A special flood hazard area touches the lot.</span>' : " · outside the special flood hazard area") : "No flood zone polygon at this location") + mute("FEMA National Flood Hazard Layer") : '<span class="bh-tbd">Not read</span> (' + esc(s.flood.note || "no answer") + ")"]);
-    if (s.soils) rows.push(["Soil map unit (NRCS)", s.soils.ok ? esc(s.soils.name) + (s.soils.hsg ? " · hydrologic group " + esc(s.soils.hsg) : "") + (s.soils.drainage ? " · " + esc(String(s.soils.drainage).toLowerCase()) : "") + mute("USDA NRCS Soil Survey. A map unit, not a soils report") : '<span class="bh-tbd">Not read</span> (' + esc(s.soils.note || "no answer") + ")"]);
-    var slEarly = s.landscape && s.landscape.slope;
-    rows.push(["Lot slope (USGS 3DEP)", slEarly && slEarly.ok ? ("avg " + slEarly.mean + "% · median " + slEarly.median + "% · " + slEarly.pct40 + "% of lot at 40%+" + (slEarly.fallCompass && slEarly.fallCompass !== "flat" ? " · estimated fall toward the " + esc(slEarly.fallCompass) : "")) : '<span class="bh-tbd">Not measured</span>']);
-    var ledger = ledgerHtml(ctx && ctx.bundle);
-    // "No mapped hazard" is only true of the layers read and the area checked. Inside a city other than
-    // Seattle and Kenmore only county layers are read, and with no parcel outline only the address point is checked.
-    var hazWhere = s.hazardScope === "parcel" ? "this parcel" : s.hazardScope === "box" ? "a box around this parcel (its outline is too long to send, so the box around it was asked about)" : "the address point (no parcel outline was found, so only that point was checked)";
+    if (F && F.plat) {
+      rowsP4.push(["Plat and lot", esc(F.plat.name) + (F.plat.lot ? ", lot " + esc(F.plat.lot) : "") + (F.plat.block ? ", block " + esc(F.plat.block) : "")]);
+    }
+
+    var secRow = fb("secondStory");
+    var optRows = [
+      { label: (optBy.addition && (optBy.addition.kind === "secondStory" || optBy.addition.footprintSf === 0)) ? "Addition (upward)" : "Addition", opt: optBy.addition },
+      { label: "Second story", secondStory: true, row: secRow },
+      { label: "ADU / detached ADU", opt: optBy.adu },
+      { label: "Garage or shop", opt: optBy.shop },
+      { label: "New house (teardown)", opt: optBy.teardown },
+      { label: "Interior remodel", opt: optBy.remodel }
+    ].map(function (item) {
+      var fitTxt = "Verify", sizeTxt = "not available";
+      if (item.secondStory) {
+        // Integrator fix (Grok Bot): no sizing heuristic here. The second-story row prints the study's own
+        // height / stories / floor-area-room line from BuildHereSummary.blocks and is always "Verify".
+        fitTxt = "Verify";
+        sizeTxt = item.row ? item.row.v : "Confirm height limit and framing on site";
+      } else if (item.opt) {
+        var o = item.opt;
+        if (o.feasible === true) {
+          fitTxt = o.placement === "unchecked" ? "Size fits (verify setbacks)" : "Fits";
+          sizeTxt = (o.gfaSf > 0 ? "approx. " + fmt(o.gfaSf) + " sf" + (o.levels > 1 ? " (" + o.levels + " levels)" : "") + (o.footprintSf > 0 ? ", " + fmt(o.footprintSf) + " sf footprint" : "") : "Within existing footprint (0 sf added)") + (o.notes && o.notes.length ? ". " + o.notes.join(" ") : "");
+        } else if (o.feasible === false) {
+          fitTxt = "Does not fit";
+          sizeTxt = o.why || "Exceeds lot limits as read.";
+        } else {
+          fitTxt = "Verify";
+          sizeTxt = (o.gfaSf > 0 ? "Concept approx. " + fmt(o.gfaSf) + " sf. " : "") + (o.why || "Verify limits with the jurisdiction.");
+        }
+      }
+      sizeTxt = String(sizeTxt || "").replace(/\bPPG\b/g, "Pacific Pro Group");
+      return '<tr><th scope="row">' + esc(item.label) + '</th><td data-label="Fit"><strong>' + esc(fitTxt) + '</strong></td><td data-label="Size and notes">' + esc(sizeTxt) + "</td></tr>";
+    }).join("");
+    var optionsTableHtml = '<h3>Project options comparison</h3><table class="bh-table bh-options-table"><thead><tr><th scope="col">Project</th><th scope="col">Fit</th><th scope="col">Size that fits &amp; notes</th></tr></thead><tbody>' + optRows + "</tbody></table>";
+
+    var hazWhere = s.hazardScope === "parcel" ? "this parcel" : s.hazardScope === "box" ? "a box around this parcel" : "the address point";
     var hazCity = s.juris === "city" ? "Only county layers were read. The City of " + esc(s.city) + " keeps its own critical-area maps, and those were not checked." : "";
     var haz;
     if (s.hazards.length) haz = "<ul>" + s.hazards.map(function (h) { return "<li>" + esc(h) + "</li>"; }).join("") + "</ul>" + (hazCity ? '<p class="bh-muted">' + hazCity + "</p>" : "");
-    else if (s.hazardSource && s.hazardNotes.length) haz = "<p>The layers that answered show no mapped hazard on " + hazWhere + " (" + esc(s.hazardSource) + "). " + (hazCity ? hazCity + " " : "") + "Some layers did not answer and were not checked, so this is not a full map check.</p>";
-    else if (s.hazardSource) haz = "<p>No mapped hazard layer touched " + hazWhere + " in the " + esc(s.hazardSource) + ". " + (hazCity ? hazCity + " " : "") + "Maps are not field studies; a site visit can still find steep ground, wet soils or streams.</p>";
+    else if (s.hazardSource && s.hazardNotes.length) haz = "<p>The layers that answered show no mapped hazard on " + hazWhere + ". " + (hazCity ? hazCity + " " : "") + "Some layers did not answer and were not checked, so this is not a full map check.</p>";
+    else if (s.hazardSource) haz = "<p>No mapped hazard layer touched " + hazWhere + ". " + (hazCity ? hazCity + " " : "") + "Maps are not field studies; a site visit can still find steep ground, wet soils or streams.</p>";
     else haz = "<p>Hazard maps were not checked for this jurisdiction. Ask the city or county.</p>";
     if (s.hazardNotes.length) haz += '<p class="bh-muted">' + esc(s.hazardNotes.join("; ")) + "</p>";
-    out.push(page("Project summary", ledger + '<div class="bh-cols"><div><h3>Site data</h3><table class="bh-table">' + rows.map(function (r) { return "<tr><th scope=\"row\">" + r[0] + "</th><td>" + r[1] + "</td></tr>"; }).join("") + '</table></div><div><h3>Special site features</h3>' + haz +
-      '<h3>Soils and geotechnical</h3>' + fbHtml("soils") + (hide ? "" : '<p>No soils report is on file with this snapshot. Slopes, fill or a mapped hazard often lead the jurisdiction to ask for a geotechnical report on bearing soil and drainage.</p>') +
-      '<h3>Drainage and civil</h3>' + fbHtml("drainage") + (hide ? "" : '<p>Larger additions and new houses usually trigger stormwater review. The size thresholds come from the local stormwater code; ask the jurisdiction which applies before design. The slope table is a bare-earth sample from USGS 3DEP: average and median slope, steep-cell share, elevation range, and an estimated lot-average fall direction. The contours on the site plan sheet are drawn from the same lidar. The sample does not size pipes, ditches, or a stormwater facility.</p>') +
-      (hide ? "" : '<h3>Construction cost</h3><p>Not estimated here. Get a written bid from a licensed contractor for your own numbers.</p>') +
-      '<h3>Codes that will apply</h3>' + fbHtml("energy") + (hide ? "" : '<p>' + (s.stateAbbr === "WA"
-        ? 'Local zoning (cited below), the Washington State Residential Code and the <a href="' + R.SRC.wsec.url + '" target="_blank" rel="noopener">Washington State Energy Code</a>. Energy credits depend on project size and type; your designer confirms them.'
-        : 'Local zoning and the state residential or building code apply. We have not coded zone setbacks, coverage or FAR for this place. Confirm those with the city or county before design. Lot area, landscape split and slope below come from public GIS where a layer answers.') + '</p>') + '</div></div>'));
 
-    // Code review
-    var cr;
-    if (!rs) {
-      var why = s.juris === "other" ? "We could not match " + esc(s.jurisLabel) + " to a city in our list. Verify the rules with the city." : (s.juris === "city" && !v.lot ? "Enter the lot size under Edit the facts to see the rules and the math for " + esc(s.jurisLabel) + "." : (s.juris === "outside"
-        ? "Zoning setbacks, coverage and FAR are not coded for this place. Verify those with the city or county. Parcel outline, lot area, house and slope notes below come from public parcel and elevation layers where they answer. This is not a permit determination."
-        : "We do not have verified rules coded for zone " + esc(v.zone || "(blank)") + " here. Verify with the jurisdiction."));
-      cr = '<p class="bh-verify">' + why + "</p>" + (hide ? (SUM && (CFG.phone || CFG.email) ? "<p>The rules for " + esc(placeName) + " can be confirmed with its permit office, or with us:</p>" + SUM.contactHtml(brandInfo()) : "")
-        : (CFG.links.permits ? '<p><a href="' + esc(CFG.links.permits) + '">' + esc(CFG.permitHubLabel) + "</a> lists city and county permit offices.</p>" : ""));
-    } else {
-      cr = '<h3>' + esc(rs.title) + '</h3><table class="bh-table bh-rules"><thead><tr><th scope="col">Standard</th><th scope="col">What the code says</th><th scope="col">Source (checked ' + R.CHECKED + ')</th></tr></thead><tbody>' +
-        rs.rules.map(function (r) { return "<tr><th scope=\"row\">" + esc(r.label) + "</th><td data-label=\"What the code says\">" + (r.value == null ? '<span class="bh-verify">Verify with the jurisdiction.</span> ' : esc(r.value) + " ") + (r.note ? '<span class="bh-muted">' + esc(r.note) + "</span>" : "") + '</td><td data-label=\"Source\"><a href="' + esc(r.src.url) + '" target="_blank" rel="noopener">' + esc(r.src.label) + "</a></td></tr>"; }).join("") + "</tbody></table>" + (rs.caveat ? '<p class="bh-muted">' + esc(rs.caveat) + "</p>" : "");
+    var bdl = ctx && ctx.bundle;
+    var mRows = bdl ? bdl.measures.map(function (m) {
+      return '<tr><th scope="row">' + esc(m.label) + '</th><td data-label="Amount">' + measureValue(m) + "</td></tr>";
+    }).join("") : "";
+    var openObj = (bdl && bdl.open) || {};
+    var openRowHtml = '<tr><th scope="row">' + esc(openObj.label || "Open area") + '</th><td data-label="Amount">' + (openObj.sf == null ? '<span class="bh-tbd">Not available</span>' : "approx. " + fmt(Math.round(openObj.sf)) + " sf") + "</td></tr>";
+    var measureNotes = "";
+    if (bdl) {
+      (bdl.notes || []).forEach(function (t) { measureNotes += '<p class="bh-muted">' + esc(t) + "</p>"; });
+      (bdl.conflicts || []).forEach(function (c) { measureNotes += '<p class="bh-verify">' + esc(c.note) + "</p>"; });
+      (bdl.stale || []).forEach(function (c) { measureNotes += '<p class="bh-verify">' + esc(c.note) + "</p>"; });
+      (bdl.errors || []).forEach(function (t) { measureNotes += '<p class="bh-verify">' + esc(t) + "</p>"; });
     }
-    out.push(page("Code review", cr));
+    var compactLedger = '<h3>Measurements</h3><table class="bh-table bh-measures"><thead><tr><th scope="col">Measure</th><th scope="col">Amount</th></tr></thead><tbody>' + mRows + openRowHtml + "</tbody></table>" + measureNotes;
 
-    // Capacity
-    var cap = "";
-    if (rs) {
-      var lines = [];
-      if (!v.lot) lines.push(["Lot size", '<span class="bh-tbd">Not on record.</span> A cap that is a share of the lot has no square-foot figure until the lot size is entered under Edit the facts. Setbacks, height and the other rules are on the Code review page.']);
-      if (rs.floorCap) {
-        var usedLiving = ctx && ctx.effective ? ctx.effective.floorUsed : v.existing;
-        var basisLabel = ctx && ctx.effective && ctx.effective.floorBasis === "gfa" ? "gross floor area you entered" : "assessor finished living area, a stand-in for code-counted floor area";
-        var room = usedLiving != null ? rs.floorCap - usedLiving : null;
-        var farRatio = (v.lot && v.lot > 0) ? (rs.floorCap / v.lot) : null;
-        var usedFar = (v.lot && v.lot > 0 && usedLiving != null) ? (usedLiving / v.lot) : null;
-        lines.push(["Floor area cap (FAR)", fmt(rs.floorCap) + " sf (" + esc(rs.floorCapLabel) + ")"]);
-        if (farRatio != null) lines.push(["FAR ratio", farRatio.toFixed(2) + " x lot (" + fmt(rs.floorCap) + " / " + fmt(v.lot) + ")" + (usedFar != null ? "; used about " + usedFar.toFixed(2) + " today" : "")]);
-        if (room != null) lines.push(["Floor area on record (" + basisLabel + ")", fmt(usedLiving) + " sf"], ["Estimated room left under the cap", room > 0 ? "<strong>About " + fmt(room) + " sf</strong> (" + fmt(rs.floorCap) + " cap minus " + fmt(usedLiving) + " on record)" : "None. The house is at or over the cap as entered."]);
-        else lines.push(["Estimated room left under the cap", "Enter the existing finished area under Edit the facts to see the room left."]);
-        lines.push(["Before you rely on this", "A floor-area cap counts gross floor area the way the code defines it. Exterior walls, garages and unfinished space can add to the count, and below-grade floor area may be exempt, so the real room can be lower or higher than this estimate. A measured plan settles it. A gross floor area typed under Add a source-backed number replaces the assessor figure here." + (rs.key === "seattle-nr" ? " Since January 2026, ADU floor area counts toward FAR in Seattle NR zones." : "")]);
-      } else { lines.push(["Floor area / FAR", esc(rs.floorCapLabel)]); }
-      if (rs.coverage) {
-        lines.push(["Lot coverage cap", fmt(rs.coverage) + " sf"]);
-        var covBase = ctx && ctx.effective ? ctx.effective.buildings : null;
-        if (covBase != null) { var left = rs.coverage - covBase; lines.push(["Footprint room left", left > 0 ? "About " + fmt(left) + " sf of new footprint, counting the house outline and any detached footprints" : "None at the ground floor as entered. Building up may still work."]); }
-      }
-      if (rs.impervious) {
-        lines.push(["Impervious surface cap", fmt(rs.impervious) + " sf (all hard surfaces)" + (rs.imperviousMax ? "; up to " + fmt(rs.imperviousMax) + " sf with approved low impact development" : "")]);
-        var impBad = !!(ctx && ctx.effective && ctx.effective.impervRejected);
-        var usedImp = impBad ? null : (v.imperv != null ? v.imperv : (ctx && ctx.effective ? ctx.effective.impervious : null));
-        if (impBad) lines.push(["Impervious room left", '<span class="bh-verify">Not calculated.</span> The impervious figure typed (' + fmt(v.imperv) + " sf) is smaller than the building coverage on this study (" + fmt(ctx.effective.buildings) + " sf). Roofs are impervious. Correct the figure under Edit the facts, or leave it blank."]);
-        else if (usedImp != null) { var il = rs.impervious - usedImp; var impHow = v.imperv == null ? "building coverage plus typed or mapped paving" : (s.imperv != null && Number(v.imperv) === Number(s.imperv) && s.impervSrc ? s.impervSrc : "your entry"); lines.push(["Existing impervious (" + esc(impHow) + ")", fmt(usedImp) + " sf"], ["Impervious room left", il > 0 ? "<strong>About " + fmt(il) + " sf</strong> at the base limit" + (rs.imperviousMax ? ", about " + fmt(rs.imperviousMax - usedImp) + " sf at the maximum" : "") : "None at the base limit as entered" + (rs.imperviousMax && rs.imperviousMax > usedImp ? "; about " + fmt(rs.imperviousMax - usedImp) + " sf at the maximum with low impact development" : "") + "."]); }
-        else lines.push(["Impervious room left", '<span class="bh-tbd">Not measured.</span> Enter paving under Edit the facts, or add a source-backed driveway and hardscape. Unknown paving is not filled with zero.']);
-      }
-      if (!rs.floorCap && (ctx && ctx.effective ? ctx.effective.living : v.existing) == null) lines.push(["Existing house size", '<span class="bh-tbd">Not measured.</span> ' + (rs.farNone ? "This zone has no floor-area ratio. " : "No floor-area limit is coded for this zone here. ") + "Enter finished living area under Edit the facts if you have it."]);
-      if (rs.sideNote) lines.push(["Side setback split", esc(rs.sideNote)]);
-      if (rs.setbackNote) lines.push(["Homes and setbacks", esc(rs.setbackNote)]);
-      var typeNote = {
-        addition: "An addition keeps the existing foundation and grandfathered conditions where they comply. It must fit the room left under the caps above.",
-        adu: "An ADU or detached ADU is often the largest gain on a lot that is near its house size cap, because ADU area is governed by its own size limit.",
-        teardown: "A teardown resets the lot to current setbacks, height and caps. Size the new house to the full cap, not the room left over.",
-        shop: "A shop can attach to the house (it then follows the house setbacks and adds to its footprint) or stand alone as an accessory building. Either way it counts toward impervious surface, and a vehicle door facing the street needs the driveway length the zone requires.",
-        remodel: "An interior remodel inside the existing walls usually does not change floor area, coverage or setbacks. Permits still apply to structural, plumbing, electrical and mechanical work."
-      }[v.type];
-      // What this lot shows for the project type chosen, then the general note.
-      var optNow = optBy[v.type], fit = "";
-      if (optNow && optNow.feasible === true) fit = (optNow.placement === "unchecked" ? "As read, the size fits" : "As read, this fits") + (optNow.gfaSf > 0 ? ": about " + fmt(optNow.gfaSf) + " sf" + (optNow.levels > 1 ? " on " + optNow.levels + " levels" : "") + (optNow.footprintSf > 0 ? ", a footprint of about " + fmt(optNow.footprintSf) + " sf" : "") : "") + ". " + (optNow.notes || []).map(esc).join(" ");
-      else if (optNow && optNow.feasible === false) fit = "As read, this does not fit. " + esc(optNow.why || "");
-      else if (optNow && optNow.why) fit = esc(optNow.why);
-      lines.push(["For your project type", (fit ? "<strong>" + fit.trim() + "</strong> " : "") + (hide && fit ? "" : typeNote)]);
-      cap = '<table class="bh-table">' + lines.map(function (l) { return "<tr><th scope=\"row\">" + l[0] + "</th><td>" + l[1] + "</td></tr>"; }).join("") + "</table>";
-    } else cap = '<p class="bh-verify">' + (v.lot ? "The size limits for this zone are not coded yet. Verify with the jurisdiction." : "Enter the lot size under Edit the facts to see the size limits.") + '</p>';
-    out.push(page("Zoning review", "<h3>How much could you add?</h3>" + cap + redFlags(s, v, rs, ctx && ctx.effective ? ctx.effective.floorUsed : null)));
+    out.push(page("Project summary", '<div class="bh-cols bh-summary-cols"><div><h3>Site data</h3><table class="bh-table">' + rowsP4.map(function (r) { return '<tr><th scope="row">' + r[0] + "</th><td>" + r[1] + "</td></tr>"; }).join("") + "</table>" + compactLedger + '</div><div>' + optionsTableHtml + '<h3>Special site features</h3>' + haz + '<h3>Soils and geotechnical</h3>' + fbHtml("soils") + '<h3>Drainage and civil</h3>' + fbHtml("drainage") + "</div></div>", "bh-what-you-can-build-page", out.length + 1));
 
-    // Lot imagery and site plan
-    var outlineCredit = (/^Snohomish/.test(s.county) && (!s.stateAbbr || s.stateAbbr === "WA")) ? "Snohomish County Assessor parcels"
-      : (/^King/.test(s.county) && (!s.stateAbbr || s.stateAbbr === "WA")) ? "King County GIS parcels"
-      : (s.landscape && s.landscape.parcelSrc) ? s.landscape.parcelSrc
-      : "public parcel outline";
-    var img;
-    if (s.imagery) {
-      var iw = isFinite(Number(s.imagery.W)) ? String(Number(s.imagery.W)) : "0";
-      var ih = isFinite(Number(s.imagery.H)) ? String(Number(s.imagery.H)) : "0";
-      img = '<figure class="bh-aerial"><div class="bh-aerial-frame"><img src="' + esc(s.imagery.url) + '" alt="Aerial photo of the parcel with the parcel outline drawn on top" width="' + esc(iw) + '" height="' + esc(ih) + '"><svg viewBox="0 0 ' + esc(iw) + " " + esc(ih) + '" aria-hidden="true"><path d="' + esc(s.imagery.path) + '" class="bh-outline" fill="rgba(255,255,255,0.08)" stroke="#ffffff" stroke-width="2"/></svg></div><figcaption>' + esc(s.imagery.credit) + ". Parcel outline: " + esc(outlineCredit) + ". Outlines are approximate and are not a survey. The photo uses a web map projection, so it is not to scale.</figcaption></figure>";
-    } else if (s.rings) img = '<p class="bh-muted">' + esc(s.imageryNote || "No aerial photo was returned for this lookup.") + " The site plan uses the parcel outline.</p>";
-    else img = '<p class="bh-muted">No parcel outline was found, so no aerial view is shown.</p>';
-    out.push(page("Existing lot", '<div class="bh-cols"><div>' + img + '</div><div><h3>Site plan diagram</h3>' + sitePlanSVG(s, rs) + sitePlanKey(s, rs) + '<p class="bh-muted">Diagrammatic only. ' + (s.rings ? "Drawn from the parcel outline." : "No parcel outline was available.") + (s.geo && s.geo.parts > 1 ? " The parcel record has " + s.geo.parts + " outline rings (separate parts, or a hole). The diagram and the envelope use the largest one." : "") + (s.geo && s.geo.corner ? (rs && rs.setbacks && typeof rs.setbacks.streetSide === "number" ? " This is a corner lot. The second street side is drawn at the zone's street-side setback." : " This is a corner lot. The second street side is drawn at the front setback, which is the cautious choice. Many codes allow a smaller street-side setback.") : "") + (s.geo && s.geo.ce && s.geo.ce.alley ? " One lot line is on an alley, and is not treated as a street front." : "") + ' The full drawing is the site plan sheet at the front of this study.' + ' The shaded envelope is every point at least the required setback from each lot line. ' + (s.frontDir ? "The street side was set by hand under Edit the facts." : (s.neighborRings ? "The street side is the lot line with no parcel beyond it nearest the address point; check it against the aerial and set it under Edit the facts if it is wrong." : "Which line is the front, side or rear is our guess from the address point; set the street side under Edit the facts if it is wrong.")) + ' A licensed surveyor sets the real lines.</p></div></div>'));
-
-    // The lot on a live map. Nothing goes to Google until the visitor asks for the map, and the pin is the
-    // geocoded point this study used. (Sending the address text let Google choose its own spot, so the map
-    // could show a different place than the parcel, and it sent the address without the visitor asking.)
-    (function () {
-      var lat = (s.lat != null && isFinite(s.lat)) ? Number(s.lat) : null;
-      var lon = (s.lon != null && isFinite(s.lon)) ? Number(s.lon) : null;
-      if (lat == null || lon == null || CFG.services.googleMap === false || hide) return;
-      var pin = lat.toFixed(6) + "," + lon.toFixed(6);
-      var embedSrc = "https://maps.google.com/maps?q=" + pin + "&z=19&t=k&output=embed";
-      var earthHref = "https://earth.google.com/web/@" + pin + ",80a,120d,35y,0h,0t,0r";
-      var gmapsHref = "https://www.google.com/maps/search/?api=1&query=" + pin;
-      var body = '<h3>See this lot on the map</h3><p class="bh-muted">The pin is the geocoded point this study used for the parcel and the measurements. The map comes from Google and loads only when you ask for it. Google then receives that point.</p>';
-      body += '<div class="bh-map-frame" data-bh-map="' + esc(embedSrc) + '"><button type="button" class="bh-btn bh-map-load">Show the satellite map (loads Google Maps)</button></div>';
-      body += '<p><a class="bh-btn" href="' + esc(earthHref) + '" target="_blank" rel="noopener">Open in Google Earth (3D)</a> ';
-      body += '<a class="bh-btn bh-btn-ghost" href="' + esc(gmapsHref) + '" target="_blank" rel="noopener">Open in Google Maps</a></p>';
-      out.push(page("Lot on the map", body, "bh-noprint"));
-    })();
-
-    // Site coverage and landscape stay in every study.
-    var seed3d = (ctx && ctx.seed) || seed3D(s, v, rs);
-    // Session storage: the address, coordinates and lot outline are gone when the tab closes. Local storage
-    // kept them on a shared computer indefinitely. The old key is cleared for visitors who already have one.
-    // With no massing page configured (an embed that leaves the sketch out), nothing is stored at all.
-    try { if (CFG.massingUrl) sessionStorage.setItem(SEED_KEY, JSON.stringify(seed3d)); localStorage.removeItem("bh3dSeed"); } catch (e) {}
-
-    // Hard rule: keep site coverage and landscape in every study.
-    var landBody = '<h3>House, garage, driveway, landscape and slope</h3><p class="bh-muted">Same address and parcel as the rest of this study. Lot broken into house / garage / driveway-paving / landscape SF with slope from public survey layers (USGS 3DEP, county parcel, building footprints). Planning estimate only - not a survey.</p>';
-    if (window.BuildHereLandscape && s.landscape) landBody += window.BuildHereLandscape.renderHTML(s.landscape, s);
-    else if (window.BuildHereLandscape) landBody += window.BuildHereLandscape.renderHTML({ rows: [], notes: ["Landscape data was not attached to this run."], sources: [], slope: { ok: false, note: "not measured" } }, s);
-    else landBody += '<p class="bh-verify" role="alert">The landscape calculator script did not load. Refresh and generate again.</p>';
-    out.push(page("Site coverage and landscape", landBody));
-
-    var sb = seed3d.setbacks || {};
-    var sbLine = ["front " + (typeof sb.front === "number" ? sb.front + " ft" : "verify"), "side " + (typeof sb.side === "number" ? sb.side + " ft" : "verify"), "rear " + (typeof sb.rear === "number" ? sb.rear + " ft" : "verify")].join(", ");
-    var massRows = [
-      ["Address", esc(seed3d.address || s.matched || s.input || "")],
-      ["Zone", esc(seed3d.zone || "-")],
-      ["Lot area", seed3d.lot ? fmt(seed3d.lot) + " sf" : "-"],
-      ["Setbacks used", esc(sbLine)],
-      ["Height limit", seed3d.height ? seed3d.height + " ft" : "Verify with the jurisdiction"],
-      ["Coverage cap", seed3d.coverage ? fmt(seed3d.coverage) + " sf" : "Verify with the jurisdiction"],
-      ["Buildable envelope", seed3d.env ? (seed3d.env.area > 0 ? "About " + fmt(seed3d.env.area) + " sf inside setbacks (diagrammatic)" : "No area is left inside the setbacks as drawn. Check the street side under Edit the facts.") : (seed3d.ring ? "Lot outline loaded. The setbacks are not all coded, so no envelope area is drawn." : "No parcel outline in this run")]
+    /* ---------- PAGE 5: PROJECT DETAILS, LISTING DATA, CODES & PERMIT HISTORY ---------- */
+    var rowsP5 = [
+      ["Zone", v.zone ? esc(v.zone) + (zoneEdited ? " (your entry" + (s.zone ? "; county/city map " + esc(s.zone) : "") + ")" : "") + (!zoneEdited && s.assessorZone ? " (" + esc(s.assessorZone) + " on county assessor)" : "") : "not available"],
+      ["Existing finished area", v.existing ? fmt(v.existing) + " sf" + ((s.existing != null && Number(v.existing) !== Number(s.existing)) ? " (your entry; " + fmt(s.existing) + " sf (county))" : (s.existingSrc ? " (county)" : " (your entry)")) : "not available"],
+      ["Building footprint", (function () {
+        if (v.footprint == null) return "not available";
+        var kindShown = ($("bh-footprint-kind") && $("bh-footprint-kind").value) || s.footprintKind || "roof";
+        var edited = s.footprint != null && Number(v.footprint) !== Number(s.footprint);
+        var kindPhrase = kindShown === "firstFloor" ? "first-floor area, not roof coverage" : (kindShown === "footprint" ? "surveyed footprint" : "approx. roof outline, not living area");
+        return fmt(v.footprint) + " sf (" + kindPhrase + (edited ? ", your entry; mapped figure " + fmt(s.footprint) + " sf" : "") + ")";
+      })()],
+      ["Year built", (function () {
+        if (!s.yearBuilt) return "not available";
+        var others = (s.years || []).filter(function (r) { return String(r.y) !== String(s.yearBuilt); });
+        return esc(s.yearBuilt) + (others.length ? ' <span class="bh-verify">(another record shows ' + others.map(function (r) { return esc(r.y); }).join(", ") + "; the older year governs lead and asbestos rules)</span>" : "");
+      })()],
+      ["Stories (existing)", v.stories == null ? '<span class="bh-tbd">not available</span>' : esc(String(v.stories)) + (s.storiesSrc && String(v.stories) !== s.storiesFilled ? " (your entry; record shows " + esc(s.stories) + ")" : "")],
+      ["Project type", esc($("bh-type") && $("bh-type").selectedOptions && $("bh-type").selectedOptions[0] ? $("bh-type").selectedOptions[0].text : v.type)]
     ];
-    out.push(page("Massing", '<h3>Massing and envelope</h3><p>These caps and setbacks match the option cards at the top of this study. The massing sketch draws boxes for this lot. It is a diagram, not a permit drawing.</p><table class="bh-table">' + massRows.map(function (r) { return "<tr><th scope=\"row\">" + r[0] + "</th><td>" + r[1] + "</td></tr>"; }).join("") + '</table>' + (CFG.massingUrl && !hide ? '<p class="bh-noprint"><a class="bh-btn" href="' + esc(CFG.massingUrl) + '">Open the massing sketch for this lot</a></p>' : "")));
+    if (s.beds != null || s.baths != null) rowsP5.push(["Bedrooms and baths", (s.beds != null ? esc(s.beds) + " bedroom" + (Number(s.beds) === 1 ? "" : "s") : "bedrooms not available") + ", " + (s.baths != null ? esc(s.baths) + " bath" + (Number(s.baths) === 1 ? "" : "s") : "baths not available")]);
+    if (s.firstFloor) rowsP5.push(["First-floor area", fmt(s.firstFloor) + " sf (county)"]);
+    if (s.upperFloor || s.halfFloor) rowsP5.push(["Upper floors", [s.upperFloor ? fmt(s.upperFloor) + " sf above first floor" : "", s.halfFloor ? fmt(s.halfFloor) + " sf half story" : ""].filter(Boolean).join(" · ")]);
+    if (s.basementTotal) rowsP5.push(["Basement", fmt(s.basementTotal) + " sf" + (s.basementFinished != null ? " (" + fmt(s.basementFinished) + " sf finished)" : "")]);
+    else if (s.basementNone) rowsP5.push(["Basement", "None on record"]);
+    if (s.garageFloor) rowsP5.push(["Attached garage", fmt(s.garageFloor) + " sf"]);
+    if (s.basementGarage) rowsP5.push(["Basement garage", fmt(s.basementGarage) + " sf"]);
+    if (s.detGarageFloor) rowsP5.push(["Detached garage floor area", fmt(s.detGarageFloor) + " sf"]);
+    if (!s.garageFloor && !s.basementGarage && !s.detGarageFloor && s.garageNone) rowsP5.push(["Garage", "None on record"]);
+    if (s.deck) rowsP5.push(["Deck", fmt(s.deck) + " sf"]);
+    if (s.yrRenov) rowsP5.push(["Year renovated", esc(s.yrRenov)]);
+    if (s.countyFin) rowsP5.push(["House size (county FinSize)", "approx. " + fmt(s.countyFin.sf) + " sf (county FinSize — basement, lower-level and attic finished area are separate columns and are not added; not used as total living area in FAR math)"]);
+    if (s.flood) rowsP5.push(["Flood zone (FEMA)", s.flood.ok ? (s.flood.zones.length ? esc(s.flood.zones.join(", ")) + (s.flood.sfha ? ' <span class="bh-verify">Special flood hazard area touches the lot.</span>' : " · outside the special flood hazard area") : "No flood zone polygon at this location") : '<span class="bh-tbd">data unavailable</span>']);
+    else rowsP5.push(["Flood zone (FEMA)", '<span class="bh-tbd">data unavailable</span>']);
+    if (s.soils) rowsP5.push(["Soil map unit (NRCS)", s.soils.ok ? esc(s.soils.name) + (s.soils.hsg ? " · hydrologic group " + esc(s.soils.hsg) : "") + (s.soils.drainage ? " · " + esc(String(s.soils.drainage).toLowerCase()) : "") + " (approx. map unit, not a soils report)" : '<span class="bh-tbd">data unavailable</span>']);
+    else rowsP5.push(["Soil map unit (NRCS)", '<span class="bh-tbd">data unavailable</span>']);
 
-    // Plans and permits
-    var pm = "<h3>House plans and permit history</h3>";
-    if (s.permits.length) pm += '<table class="bh-table bh-permits"><thead><tr><th scope="col">Permit</th><th scope="col">Type</th><th scope="col">Status</th><th scope="col">Issued</th><th scope="col">Finaled</th></tr></thead><tbody>' + s.permits.slice(0, 12).map(function (p) { return "<tr><td data-label=\"Permit\">" + esc(p.id) + "</td><td data-label=\"Type\">" + esc(p.type) + "</td><td data-label=\"Status\">" + esc(p.desc) + "</td><td data-label=\"Issued\">" + esc(p.issued) + "</td><td data-label=\"Finaled\">" + esc(p.final) + "</td></tr>"; }).join("") + "</tbody></table>";
-    else if (s.permitSearch === "ok") pm += "<p>No permit records were found for this parcel in the layer read (" + (s.juris === "seattle" ? "Seattle issued and finaled residential permits" : "Snohomish County active permits only") + "). That does not mean none exist; older records are often only on microfilm.</p>";
-    else if (s.permitSearch === "failed") pm += "<p>The public permit layer did not answer, so permit history was not searched." + (s.permitLinks.length ? " Use the links below." : "") + "</p>";
-    else pm += hide ? "<p>Permit history is not available online in a form this study reads for " + esc(placeName) + ". " + esc(CFG.brand) + " pulls it for the site visit.</p>"
-      : "<p>Permit history was not searched. No public permit layer is read for this jurisdiction." + (s.permitLinks.length ? " Use the links below or ask the permit office." : " Ask the local permit office.") + "</p>";
-    if (!hide) pm += "<p><strong>Plan sets:</strong> We did not find published plan drawings for this address, and we do not draw or guess them. Approved plans are public records you can request from the permit office.</p>";
-    if (!hide && s.permitLinks.length) pm += "<ul>" + s.permitLinks.map(function (l) { return '<li><a href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.label) + "</a></li>"; }).join("") + "</ul>";
-    // With the link-only blocks hidden, a Records page that holds no record is left out. Its one line is on the facts sheet.
-    if (!(hide && !s.permits.length && s.permitSearch !== "ok" && s.permitSearch !== "failed")) out.push(page("Records", pm));
+    var countyRows = (s.countyFacts || []).map(function (r) {
+      return '<tr><th scope="row">' + esc(r.field) + '</th><td>' + esc(r.value) + ' <span class="bh-muted">(' + esc(r.source) + ")</span></td></tr>";
+    }).join("");
+    var countyHtml = '<h3>County record</h3>' + (countyRows
+      ? '<table class="bh-table">' + countyRows + "</table>"
+      : "<p>" + esc(s.countyRecordNote || "Figures in this study that name a county assessor, a county map, or the house-size index are county records. A blank is not available online. Nothing on this page is estimated to fill a gap.") + "</p>");
+    var lf = s.listingFacts;
+    var listingHtml = countyHtml;
+    if (lf && lf.status && lf.status !== "off" && lf.status === "ok" && lf.results && lf.results.length) {
+      listingHtml += "<h3>Existing plans and listing size</h3>";
+      var countyTag = s.existing != null ? " (vs " + fmt(s.existing) + " sf (county))" : (s.countyFin && s.countyFin.sf != null ? " (vs approx. " + fmt(s.countyFin.sf) + " sf (county FinSize))" : "");
+      listingHtml += '<table class="bh-table"><thead><tr><th scope="col">Provider</th><th scope="col">Living area</th><th scope="col">Beds / baths</th><th scope="col">Year built</th><th scope="col">Floor plans</th></tr></thead><tbody>' +
+        lf.results.map(function (r) {
+          var sq = r.livingSqft != null ? fmt(r.livingSqft) + " sf (" + esc(r.provider) + ")" + esc(countyTag) : "not available";
+          var bb = (r.beds != null || r.baths != null) ? (r.beds != null ? esc(r.beds) + " bed" : "—") + " / " + (r.baths != null ? esc(r.baths) + " bath" : "—") : "not available";
+          var yb = r.yearBuilt != null ? esc(r.yearBuilt) : "not available";
+          var fp = r.floorPlanImages && r.floorPlanImages.length
+            ? r.floorPlanImages.map(function (u, idx) { return '<img class="bh-floorplan-img" src="' + esc(u) + '" alt="Floor plan ' + (idx + 1) + " from " + esc(r.provider) + '">'; }).join(" ")
+            : "None in listing record";
+          return '<tr><th scope="row">' + esc(r.provider) + "</th><td>" + sq + "</td><td>" + bb + "</td><td>" + yb + "</td><td>" + fp + "</td></tr>";
+        }).join("") + "</tbody></table>";
+    }
 
-    // Next steps
-    // The next step tied to this lot's numbers comes first. The general list follows unless link-only blocks are hidden.
-    var ns = F && SUM ? SUM.nextStep(F) : null;
-    var nextHtml = ns ? "<h3>Next step for this lot</h3><p><strong>" + esc(ns.lead) + "</strong></p><ol class=\"bh-steps\">" + ns.steps.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ol>" + (FB ? '<p class="bh-muted">' + esc(FB.visit.text) + "</p>" : "") : "";
-    var stepsGeneric = '<ol class="bh-steps"><li><strong>Confirm the facts.</strong> Pull the assessor record, a title report and any recorded easements.</li><li><strong>Survey.</strong> A boundary and topographic survey fixes lot lines, grades and trees.</li><li><strong>Pre-application meeting.</strong> Ask the jurisdiction about the zone, critical areas, drainage and utilities.</li><li><strong>Consultants as needed.</strong> Structural engineer, geotechnical engineer for slopes or poor soils, civil engineer for drainage, arborist for protected trees, septic designer off sewer.</li><li><strong>Design and permit set.</strong> Plans, energy code forms and engineering go to the permit office.</li><li><strong>Bid and build.</strong> Compare bids on the same scope.' + (CFG.links.bids ? ' <a href="' + esc(CFG.links.bids) + '">How to compare bids</a>.' : "") + "</li></ol>";
-    var stepsCta = (CFG.cta && CFG.cta.heading ? ctaHtml(CFG.cta.heading, CFG.cta.text || "", CFG.cta.buttons)
-        : (CFG.phone || CFG.email) ? firmCta("Talk to " + CFG.brand, "A site visit confirms what public records cannot: the lot lines against the house, the slope, the utilities and what the house can carry.")
-        : CFG.showRankingsCta && !hide ? ctaHtml("Talk to a local design-build pro", "See the firms the Board ranks for this kind of work, and how we rank them.", [
-          { label: "Additions rankings", url: CFG.links.additions }, { label: "Custom home rankings", url: CFG.links.customHomes },
-          { label: "How we rank", url: CFG.links.howWeRank, ghost: true }, { label: "Permit resources", url: CFG.links.permits, ghost: true }]) : "");
-    out.push(page("Next steps", nextHtml + (hide && nextHtml ? "" : (nextHtml ? "<h3>The usual order of work</h3>" : "") + stepsGeneric) + stepsCta));
+    var officeName = s.juris === "seattle" ? "Seattle Department of Construction and Inspections (SDCI) permit counter"
+      : s.juris === "edmonds" ? "City of Edmonds Development Services permit counter"
+      : s.juris === "kenmore" ? "City of Kenmore Development Services permit counter"
+      : s.juris === "kc" ? "King County Department of Local Services, Permitting Division"
+      : s.juris === "sno" ? "Snohomish County Planning and Development Services (PDS) permit counter"
+      : s.city ? "City of " + s.city + " permit counter"
+      : (s.county ? s.county + " permit office" : "local permit office");
+    var layerLabel = s.juris === "seattle" ? "Seattle issued and finaled residential permits layer" : "Snohomish County active permits layer";
+    var pmHtml = "<h3>Permit history and plan sets</h3>";
+    if (s.permits && s.permits.length) {
+      pmHtml += '<table class="bh-table bh-permits"><thead><tr><th scope="col">Permit</th><th scope="col">Type</th><th scope="col">Status</th><th scope="col">Issued</th><th scope="col">Finaled</th></tr></thead><tbody>' +
+        s.permits.slice(0, 12).map(function (p) {
+          return '<tr><td data-label="Permit">' + esc(p.id) + '</td><td data-label="Type">' + esc(p.type) + '</td><td data-label="Status">' + esc(p.desc) + '</td><td data-label="Issued">' + esc(p.issued || "—") + '</td><td data-label="Finaled">' + esc(p.final || "—") + "</td></tr>";
+        }).join("") + "</tbody></table>";
+      pmHtml += '<p class="bh-muted">Older permits and archived plan sets may be on microfilm — ask the ' + esc(officeName) + " for the complete address file.</p>";
+    } else if (s.permitSearch === "ok") {
+      pmHtml += "<p>No permits found in " + esc(layerLabel) + " on " + esc(asOfDate) + ". Older records and approved plan sets are often stored on microfilm — ask the " + esc(officeName) + " for the address history and any plan sets.</p>";
+    } else if (s.permitSearch === "failed") {
+      pmHtml += "<p>No permits could be read from " + esc(layerLabel) + " on " + esc(asOfDate) + " (data unavailable — the service did not answer). Ask the " + esc(officeName) + " for the address history and any plan sets.</p>";
+    } else {
+      var cityLabel = s.city ? "the City of " + s.city : (s.county || placeName);
+      pmHtml += "<p>" + esc(s.permitNote || ("Permit records for " + cityLabel + " are not searchable online by this study — ask the " + officeName + " for the address history and any plan sets.")) + (s.city && /^King/.test(s.county || "") ? " For work permitted before city incorporation, also check King County Department of Local Services, Permitting Division archives." : "") + "</p>";
+    }
+    if (s.permitNote && s.permits && s.permits.length) pmHtml += '<p class="bh-muted">' + esc(s.permitNote) + "</p>";
 
-    // Data sources
-    var attempts = (s.factAttempts || []).map(function (x) { return "<li>" + esc(x.field) + ": " + (x.ok ? "Read: " : "Not filled from: ") + esc(x.name) + (x.note ? " · " + esc(x.note) : "") + (x.url && !hide ? ' · <a href="' + esc(x.url) + '" target="_blank" rel="noopener">layer</a>' : "") + "</li>"; }).join("");
-    out.push(page("Data sources", "<h3>Limitations and confidence</h3><p class=\"bh-disclaimer\">" + esc(STUDY_LIMITS) + "</p><h3>What we tried for living area and year built</h3>" + (attempts ? "<ul>" + attempts + "</ul>" : "<p>No extra building-fact lookup was required for this run.</p>") + "<h3>What we read for this report</h3><ul>" + s.sources.map(function (x) { return "<li>" + (x.how ? esc(x.how) : (x.ok ? "Read live: " : "No data from: ")) + esc(x.name) + (x.note ? " · " + esc(x.note) : "") + "</li>"; }).join("") + "</ul>" + (hide ? "" : "<h3>Rule sources</h3><ul>" + (rs ? rs.sources : []).map(function (x) { return '<li><a href="' + esc(x.url) + '" target="_blank" rel="noopener">' + esc(x.label) + "</a> (checked " + R.CHECKED + ")</li>"; }).join("") + "</ul>") + '<p class="bh-disclaimer"><strong>Planning estimate only.</strong> This is not a legal or zoning determination. Codes change; confirm with the jurisdiction and a licensed professional.</p>'));
+    var p5 = '<div class="bh-cols"><div><h3>Building and environmental profile</h3><table class="bh-table">' +
+      rowsP5.map(function (r) { return '<tr><th scope="row">' + r[0] + "</th><td>" + r[1] + "</td></tr>"; }).join("") +
+      "</table></div><div>" + listingHtml + '<h3>Construction cost</h3><p>Not estimated here. Get a written bid from a licensed contractor for your own numbers.</p>' +
+      '<h3>Codes that will apply</h3>' + fbHtml("energy") + '<p>' + (s.stateAbbr === "WA"
+        ? "Local zoning, the Washington State Residential Code and the Washington State Energy Code. Energy credits depend on project size and type; your designer confirms them."
+        : "Local zoning and the state residential or building code apply. Confirm setbacks, coverage and FAR with the city or county before design.") + "</p>" +
+      pmHtml + "</div></div>";
+    out.push(page("What you can build (continued)", p5, "bh-details-page", out.length + 1));
+    if (s.permits && s.permits.length > 12) {
+      for (var pi = 12; pi < s.permits.length; pi += 12) {
+        var more = s.permits.slice(pi, pi + 12).map(function (p) {
+          return '<tr><td data-label="Permit">' + esc(p.id) + '</td><td data-label="Type">' + esc(p.type) + '</td><td data-label="Status">' + esc(p.desc) + '</td><td data-label="Issued">' + esc(p.issued || "—") + '</td><td data-label="Finaled">' + esc(p.final || "—") + "</td></tr>";
+        }).join("");
+        out.push(page("Permit history (continued)", '<h3>Permit history, continued</h3><table class="bh-table bh-permits"><thead><tr><th scope="col">Permit</th><th scope="col">Type</th><th scope="col">Status</th><th scope="col">Issued</th><th scope="col">Finaled</th></tr></thead><tbody>' + more + "</tbody></table>", "bh-details-page", out.length + 1));
+      }
+    }
 
-    // The other concepts, one sheet each, after the full report. The one already on SP-1 is not repeated.
-    if (M && M.ok && F) ["addition", "adu", "teardown", "shop"].forEach(function (id, i) {
-      var o = optBy[id];
-      if (o && id !== v.type) out.push(SP.sheet(M, { F: F, opt: o, placed: placedBy[id], sheet: "SP-" + (i + 2) }).html);
-    });
+    /* ---------- PAGE 6: SITE COVERAGE, LANDSCAPE AND MASSING ---------- */
+    var coverNotes = "";
+    (rLand.flags || []).forEach(function (t) { coverNotes += "<p>" + esc(t) + "</p>"; });
+    if (rLand.steep) {
+      coverNotes += "<p>" + (rLand.steep.mapped ? "<strong>Seattle ECA steep slope (40%+) is mapped on approx. " + fmt(rLand.steep.sf) + " sf of this lot.</strong> Work there needs SDCI steep slope review and usually a geotechnical report." : "No Seattle ECA steep slope area (40%+) is mapped on this lot.") + "</p>";
+    } else if (sl && sl.ok && sl.pct40 > 0) {
+      coverNotes += "<p>Approx. " + sl.pct40 + "% of the lot reads 40% or steeper from bare-earth elevation samples. Ask the jurisdiction whether a steep slope critical area applies.</p>";
+    } else if (sl && sl.ok) {
+      coverNotes += "<p>No steep-slope band (40%+) was flagged on this lot. Confirm grades with a site survey.</p>";
+    }
+    var p6Left = (coverNotes ? "<h3>Site coverage and landscape</h3>" + coverNotes : "") + "<h3>Survey and plat</h3>";
+    var sv = rLand.survey;
+    var platBits = sv && sv.plat ? (sv.lot ? ", lot " + esc(sv.lot) : "") + (sv.block ? ", block " + esc(sv.block) : "") + (sv.major ? " (plat number " + esc(sv.major) + ")" : "") : "";
+    if (sv && sv.plat) {
+      p6Left += "<p>Recorded plat on the county record: <strong>" + esc(sv.plat) + "</strong>" + platBits + ". Search the plat and any recorded surveys by that name at the King County Recorder's Office. We did not find a published survey drawing, and we do not draw one.</p>";
+    } else if (/^Snohomish/.test(s.county || "")) {
+      p6Left += "<p>Search recorded plats and surveys in Snohomish County Auditor recorded documents. We did not find a published survey drawing, and we do not draw one.</p>";
+    } else if (/^King/.test(s.county || "") && (!s.stateAbbr || s.stateAbbr === "WA")) {
+      p6Left += "<p>No plat name was on the public parcel record. Recorded surveys can be requested from the King County Recorder's Office.</p>";
+    } else {
+      p6Left += "<p>Recorded plats and surveys are kept by the county recorder for " + esc(s.county || "this county") + ". We did not find a published survey drawing, and we do not draw one.</p>";
+    }
+    var sb = seed3d.setbacks || {};
+    var sbMark = seed3d.setbackVerify ? " (verify)" : "";
+    var sbBits = ["front " + (typeof sb.front === "number" ? sb.front + " ft" : "verify") + sbMark, "side " + (typeof sb.side === "number" ? sb.side + " ft" : "verify") + sbMark, "rear " + (typeof sb.rear === "number" ? sb.rear + " ft" : "verify") + sbMark];
+    if (seed3d.corner) sbBits.push("street side " + (typeof sb.streetSide === "number" ? sb.streetSide + " ft" : "front figure") + sbMark);
+    if (seed3d.alley && typeof sb.rearAlley === "number") sbBits.push("alley " + sb.rearAlley + " ft" + sbMark);
+    var sbLine = sbBits.join(", ");
+    var massRows = [
+      ["Address", esc(seed3d.address || s.matched || s.input || "not available")],
+      ["Zone", esc(seed3d.zone || "not available")],
+      ["Lot area", seed3d.lot ? fmt(seed3d.lot) + " sf" : "not available"],
+      ["Setbacks used", esc(sbLine)],
+      ["Height limit", seed3d.height ? seed3d.height + " ft" + (seed3d.heightVerify ? " (verify)" : "") : "Verify with the jurisdiction"],
+      ["Coverage cap", seed3d.coverage ? fmt(seed3d.coverage) + " sf" : "Verify with the jurisdiction"],
+      ["Buildable envelope", seed3d.env ? (seed3d.env.area > 0 ? "Approx. " + fmt(seed3d.env.area) + " sf inside setbacks (diagrammatic)" : "No area is left inside the setbacks as drawn. Check the street side under Edit the facts.") : (seed3d.ring ? "Lot outline loaded. The setbacks are not all coded, so no envelope area is drawn." : "No parcel outline in this run")]
+    ];
+    var p6Right = '<h3>Massing and envelope</h3><p>These caps and setbacks match the site plan and property facts in this study. It is a diagram, not a permit drawing.</p><table class="bh-table">' +
+      massRows.map(function (r) { return '<tr><th scope="row">' + r[0] + "</th><td>" + r[1] + "</td></tr>"; }).join("") + "</table>";
+
+    out.push(page("Site coverage and massing", '<div class="bh-cols"><div>' + p6Left + "</div><div>" + p6Right + "</div></div>", "bh-massing-page", out.length + 1));
+    var interiorPlan = null;
+    if (window.BuildHereInterior && landGeo && landGeo.buildings) {
+      var houseB = null, garageRings = [];
+      landGeo.buildings.forEach(function (b) { if (b.role === "house" && !houseB) houseB = b; else if (b.role === "garage" && b.ring) garageRings.push(b.ring); });
+      var addPlaced = placedBy.addition && placedBy.addition.ok && placedBy.addition.ring && !placedBy.addition.over && !placedBy.addition.existing ? { ring: placedBy.addition.ring } : null;
+      var showUpper = (v.stories && v.stories >= 2) || !!(optBy.addition && optBy.addition.feasible && optBy.addition.footprintSf === 0) || v.type === "secondStory";
+      if (houseB && houseB.ring) interiorPlan = BuildHereInterior.plan(houseB.ring, { stories: v.stories, showUpper: showUpper, front: s.geo && s.geo.ce ? { nx: s.geo.ce.fnx, ny: s.geo.ce.fny } : null, garageRings: garageRings, addition: addPlaced });
+    }
+    if (interiorPlan && interiorPlan.levels && interiorPlan.levels.length) {
+      out.push(page("Conceptual interior", "<h3>Conceptual interior</h3>" + BuildHereInterior.svg(interiorPlan), "bh-interior-page", out.length + 1));
+    }
+    var massSpec = window.BuildHereMassing ? BuildHereMassing.spec(s, s.geo) : null;
+    if (massSpec && interiorPlan) massSpec.interior = interiorPlan;
+    if (massSpec) massSpec.onRoom = function (room) {
+      var box = $("bh-3d-room");
+      if (box) box.textContent = room.name + ": " + room.purpose + " Approx. " + Math.round(room.w) + " ft by " + Math.round(room.d) + " ft. Conceptual — verify on site.";
+    };
+    if (massSpec) {
+      out.push(page("House and property", '<h3>House and property</h3><p id="bh-3d-print-note">' + esc(massSpec.caption) + '</p><img id="bh-3d-shot" class="bh-3d-shot" alt="Isometric massing of the parcel and the buildings whose footprints are on record">', "bh-massing-shot", out.length + 1));
+    }
+
+    /* Page numbers are written as if all six sheets exist. A missing drawing (no parcel outline, so no
+       SP-1) or a missing facts sheet drops a page. Stamp the pages that were actually built, including the
+       site-plan title block, which is baked into the SVG before this pass. */
+    out = stampStudyPages(out);
+
     s.sheetDrawn = !!(M && M.ok);
-
-    s.exportSources = (s.sources || []).concat((s.factAttempts || []).map(function (x) { return { name: x.field + ": " + x.name, ok: !!x.ok, how: x.ok ? "Read: " : "Not filled from: ", note: x.note || "", url: x.url || "" }; })).concat((rs && rs.sources ? rs.sources : []).map(function (x) { return { name: x.label, ok: true, note: "Zoning rule, checked " + R.CHECKED, url: x.url }; })).concat((s.manual || []).map(function (m) { return { name: "User-entered " + (m.label || m.kind), ok: true, note: (m.method || "") + (m.retrieved ? " " + m.retrieved : "") + (m.source ? " " + m.source : ""), url: m.url || "" }; }));
+    s.exportSources = [];
     var confirm = $("bh-confirm");
     var wrap = $("bh-report-wrap");
     if (confirm && wrap && confirm.parentNode === $("bh-report")) wrap.parentNode.insertBefore(confirm, wrap.nextSibling);
     $("bh-report").innerHTML = out.join("");
-    [].forEach.call($("bh-report").querySelectorAll(".bh-aerial-frame img"), function (img) {
-      img.addEventListener("error", function () { aerialFailed(s, img.getAttribute("src")); });
-    });
     $("bh-report-wrap").hidden = false;
-    var stagePage = $("bh-report").querySelector(".bh-stage-page");
-    if (stagePage && confirm && stagePage.parentNode) stagePage.parentNode.insertBefore(confirm, stagePage.nextSibling);
+    if (confirm && wrap && wrap.parentNode && confirm.previousElementSibling !== wrap) {
+      wrap.parentNode.insertBefore(confirm, wrap.nextSibling);
+    }
     if ($("bh-lead-address") && !$("bh-lead-address").value) $("bh-lead-address").value = s.matched || s.input;
-    // The contact bar and the lead form appear with the first study, so the page's first screen stays short.
     if ($("bh-cta-bar")) $("bh-cta-bar").hidden = false;
     if ($("bh-lead-card")) $("bh-lead-card").hidden = false;
-    syncPrint();
+    showMassing(s, massSpec);
     watchSheet(s);
+  }
+  function legendItems(s, spec) {
+    var geo = s.landscape && s.landscape.geo;
+    var src = geo && geo.src && geo.src.buildings ? geo.src.buildings : "no building outline layer answered for this lot";
+    var height = spec.buildings && spec.buildings[0] ? spec.buildings[0].label : "No building mass is drawn.";
+    var items = [
+      "Parcel: " + (s.lotSrc || "the parcel outline on this study") + ".",
+      "Footprint: " + src + ".",
+      "Height: " + height,
+      spec.dem ? "Ground: the elevation samples already read for this lot." : "Ground: no elevation grid was available, so the lot is flat in the free model."
+    ];
+    if (spec.roof && spec.roof.note) items.push(spec.roof.note);
+    if (!String(CFG.googleMapsKey || "").trim()) items.push("Photorealistic layer: off. No Google Maps key is set. The free massing model is the view, and nothing is sent to Google.");
+    else {
+      var g = spec.google || {};
+      items.push("Photorealistic layer: Google 3D Maps (" + (g.map || "not requested") + "). Solar buildingInsights: " + (g.solar || "not requested") + ".");
+    }
+    return items;
+  }
+  function showMassing(s, spec) {
+    var panel = $("bh-3d-panel"), view = $("bh-3d"), note = $("bh-3d-note"), legend = $("bh-3d-legend");
+    var finish = function (ready) {
+      if (panel && ready) panel.hidden = false;
+      if (note && ready) note.textContent = ready.caption || "";
+      if (legend && ready) legend.innerHTML = legendItems(s, ready).map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("");
+      var mounted = (view && ready && window.BuildHereMassing) ? BuildHereMassing.mount(view, ready) : null;
+      var img = $("bh-3d-shot"), printNote = $("bh-3d-print-note");
+      if (printNote && ready) printNote.textContent = ready.caption || "";
+      if (mounted && img) {
+        var url = mounted.snapshot();
+        if (url) img.src = url;
+      }
+      var roofOn = true;
+      var roofBtn = $("bh-3d-roof");
+      if (roofBtn) roofBtn.onclick = function () { roofOn = !roofOn; if (mounted && mounted.setRoof) mounted.setRoof(roofOn); };
+      [].forEach.call(document.querySelectorAll("#bh-3d-panel [data-floor]"), function (btn) {
+        btn.onclick = function () { if (mounted && mounted.setFloor) mounted.setFloor(btn.getAttribute("data-floor")); };
+      });
+      [].forEach.call(document.querySelectorAll("#bh-3d-panel [data-mode]"), function (btn) {
+        btn.onclick = function () {
+          var mode = btn.getAttribute("data-mode");
+          if (mounted && mounted.setMode) mounted.setMode(mode);
+          var gHost = $("bh-3d-google"), viewEl = $("bh-3d");
+          if (gHost) gHost.hidden = mode !== "google";
+          if (viewEl) viewEl.hidden = mode === "google";
+        };
+      });
+      s.massingCaption = ready && ready.caption || "";
+      syncPrint();
+    };
+    if (!spec) { syncPrint(); return; }
+    var G3 = window.BuildHereGoogle3D;
+    if (G3 && String(CFG.googleMapsKey || "").trim()) G3.enhance(spec, s, CFG).then(finish, function () { finish(spec); });
+    else finish(spec);
   }
   /* bh_siteplan_view: once per lookup, when half of the site plan drawing is on screen. The drawing is
      watched, not its page: on a phone the page also holds the tables as text and is several screens tall. */
@@ -1751,7 +2245,7 @@
 
   function redFlags(s, v, rs, livingUsed) {
     var f = [];
-    if (s.hazards.length) f.push("Mapped critical area or hazard on or touching the parcel: " + s.hazards.map(esc).join(", ") + ". Expect a critical area review and possibly a geotechnical report.");
+    if (s.hazards.length) f.push("Mapped critical area or hazard on or touching the parcel: " + s.hazards.join(", ") + ". Expect a critical area review and possibly a geotechnical report.");
     if (v.type === "teardown") {
       f.push("A teardown needs a demolition permit, and utilities must be capped first.");
       f.push("A new house loses any grandfathered setbacks or size the old one had.");
@@ -1759,36 +2253,29 @@
     if (s.hazards.some(function (h) { return /1990/.test(h); }) && !s.hazards.some(function (h) { return /2016|City of Kenmore critical/.test(h); })) f.push("The older 1990 county maps flag this parcel but the 2016 landslide and steep slope maps do not. The city may still ask for a geotechnical report to settle it; budget for one.");
     if (s.nearNotices && s.nearNotices.length) {
       var kinds = s.nearNotices.join(", ").split(", ").filter(function (x, i, a) { return x && a.indexOf(x) === i; });
-      f.push("A sensitive area notice is recorded on title for " + (s.nearNotices.length === 1 ? "a neighboring parcel" : s.nearNotices.length + " neighboring parcels") + " within about 50 ft of this lot (" + esc(kinds.join(", ")) + "). That points to slope or erosion conditions next door, so expect the city to ask about this lot too.");
+      f.push("A sensitive area notice is recorded on title for " + (s.nearNotices.length === 1 ? "a neighboring parcel" : s.nearNotices.length + " neighboring parcels") + " within about 50 ft of this lot (" + kinds.join(", ") + "). That points to slope or erosion conditions next door, so expect the city to ask about this lot too.");
     }
-    if (s.juris === "kenmore") f.push(s.shoreline ? "The parcel is inside Kenmore shoreline jurisdiction (" + esc(s.shoreline) + "). Work here follows the Shoreline Master Program (KMC Title 16): shoreline buffers and setbacks, vegetation rules, and possibly a shoreline exemption or permit before the building permit." : "We did not find this parcel in Kenmore's shoreline map. If any part of the lot is within 200 ft of Lake Washington or the Sammamish River, the Shoreline Master Program still applies (RCW 90.58), so verify with the city.");
-    if (s.juris === "kenmore" && s.hazards.some(function (h) { return /City of Kenmore critical/.test(h); })) f.push("Kenmore's own critical areas map shows a hazard on this parcel. Under KMC 18.55 expect a geotechnical report. Landslide hazard areas carry a buffer of at least the slope height or 50 ft, which a qualified study can reduce to 25 ft (KMC 18.55 Article XVIII). Erosion areas need sediment control and seasonal limits on clearing.");
+    if (s.juris === "kenmore") f.push(s.shoreline ? "The parcel is inside Kenmore shoreline jurisdiction (" + s.shoreline + "). Work here follows the Shoreline Master Program: shoreline buffers and setbacks, vegetation rules, and possibly a shoreline exemption or permit before the building permit." : "We did not find this parcel in Kenmore's shoreline map. If any part of the lot is within 200 ft of Lake Washington or the Sammamish River, the Shoreline Master Program still applies, so verify with the city.");
+    if (s.juris === "kenmore" && s.hazards.some(function (h) { return /City of Kenmore critical/.test(h); })) f.push("Kenmore's own critical areas map shows a hazard on this parcel. Expect a geotechnical report. Landslide hazard areas carry a buffer of at least the slope height or 50 ft, which a qualified study can reduce to 25 ft. Erosion areas need sediment control and seasonal limits on clearing.");
     if (v.type === "shop") f.push("A shop near a slope or lot line may need retaining walls or engineered footings. Drainage from the new roof and driveway must be managed on site.");
-    // The two general cautions print where this lot gives a reason for them. The old-framing note used to print
-    // for a house built last year, and the shoring note for a flat acre.
     var yb = s.yearBuilt ? +s.yearBuilt : null, sl = s.landscape && s.landscape.slope;
     var slopey = !!(sl && sl.ok && (sl.mean >= 15 || sl.pct25 >= 10));
     var tight = slopey || (rs && rs.setbacks && typeof rs.setbacks.side === "number" && rs.setbacks.side <= 5) || (v.lot != null && v.lot < 7500);
-    if ((v.type === "addition" || v.type === "shop") && (yb == null || yb < 1995)) f.push("An addition ties into old framing and foundations. " + (yb == null ? "The year built is not on record, so plan" : "This house was built in " + esc(s.yearBuilt) + ", so plan") + " for surprises behind the walls, and budget for engineering.");
+    if ((v.type === "addition" || v.type === "shop") && (yb == null || yb < 1995)) f.push("An addition ties into old framing and foundations. " + (yb == null ? "The year built is not on record, so plan" : "This house was built in " + s.yearBuilt + ", so plan") + " for surprises behind the walls, and budget for engineering.");
     if ((v.type === "addition" || v.type === "teardown" || v.type === "shop") && tight) f.push("Basements or deep footings close to a lot line can need shoring and neighbor coordination" + (slopey ? ", and this lot slopes (about " + sl.mean + "% on average)" : "") + ". Ask your engineer early.");
-    // Asbestos and lead, for any work that opens up the existing house. The asbestos survey is required whatever
-    // the year built: it used to be flagged for teardowns only, and by a 1980 cut-off that is not in the rule.
-    // The federal lead-safe renovation rule is the one with a year: homes built before 1978.
     var puget = (!s.stateAbbr || s.stateAbbr === "WA") && /^(King|Snohomish|Pierce|Kitsap)/.test(s.county || "");
     var site = rs && rs.site ? rs.site : (R.siteRules ? R.siteRules({ juris: s.juris, city: s.cityKey }, rs) : null);
-    var cite = function (d) { return d && d.src && safeUrl(d.src.url) ? ' (<a href="' + esc(d.src.url) + '" target="_blank" rel="noopener">' + esc(d.src.label) + "</a>)" : ""; };
     if (v.type === "teardown" || v.type === "addition" || v.type === "remodel" || v.type === "adu") {
-      if (puget && site && site.asbestos && site.asbestos.v) f.push(esc(site.asbestos.v.replace(/\.$/, "")) + cite(site.asbestos) + ".");
+      if (puget && site && site.asbestos && site.asbestos.v) f.push(site.asbestos.v.replace(/\.$/, "") + ".");
       else f.push("Check the local air agency's asbestos rule before any demolition or renovation. Many require a survey first, whatever the age of the house.");
-      if (yb == null) f.push("The year built is not on record. Plan as if the house was built before 1978: paid renovation work in such a home must follow lead-safe work practices" + cite(site && site.lead) + ".");
-      else if (yb < 1978) f.push("Built " + esc(s.yearBuilt) + ", before 1978: paid renovation work must follow lead-safe work practices" + cite(site && site.lead) + ".");
+      if (yb == null) f.push("The year built is not on record. Plan as if the house was built before 1978: paid renovation work in such a home must follow lead-safe work practices.");
+      else if (yb < 1978) f.push("Built " + s.yearBuilt + ", before 1978: paid renovation work must follow lead-safe work practices.");
     }
     var livingNow = livingUsed != null ? livingUsed : v.existing;
     if (rs && rs.floorCap && livingNow != null && livingNow >= rs.floorCap) f.push("The existing house is at or over the floor area cap as entered. Adding counted floor area may not be allowed. Below-grade space or a different unit count can change the cap, so ask the city.");
     if (!f.length) f.push("No red flags from the data we could read. That is not a clean bill; a site visit matters.");
-    return "<h3>Red flags to check</h3><ul class=\"bh-flags\">" + f.map(function (x) { return "<li>" + x + "</li>"; }).join("") + "</ul>";
+    return f;
   }
-
   /* ---------- lead form ---------- */
   function copyText(text, done, failed) {
     var legacy = function () {
@@ -1896,12 +2383,13 @@
       address: state.matched || state.input || "Address not matched",
       date: state.prepared || todayStamp(),
       bodyHtml: report.innerHTML,
-      sources: state.exportSources || state.sources || [],
+      sources: [],
+      noSources: true,
       limitations: STUDY_LIMITS,
       baseHref: CFG.siteBase,
       brand: CFG.brand,
-      contact: CFG.contactLine || [CFG.brand, CFG.phone, CFG.email, CFG.site].filter(Boolean).join(" · "),
-      hideLinkOnly: !!CFG.hideLinkOnly
+      contact: CFG.contactLine || [CFG.brand, CFG.phone, CFG.site, CFG.license ? "WA contractor reg. " + CFG.license : ""].filter(Boolean).join(" · "),
+      hideLinkOnly: true
     });
     track("bh_study_export", { method: "download" });
     var a = document.createElement("a"), url = URL.createObjectURL(new Blob([file], { type: "text/html" }));
@@ -1911,7 +2399,6 @@
     document.body.appendChild(a);
     a.click();
     a.remove();
-    // In-app browsers and some phones drop a file made in the page without a word. The visitor is told what to expect and what to do.
     exportStatus("Saved " + a.download + " to your downloads. If no file appeared, this browser blocked it: press Print and choose Save as PDF.");
     setTimeout(function () { URL.revokeObjectURL(url); }, 60000);
   }
@@ -1965,7 +2452,7 @@
     var rectFt = function (a, b, c, d) { return [[a, b], [c, b], [c, d], [a, d], [a, b]]; };
     var house = coded ? rectFt(-42, -22, -8, 24.5) : rectFt(-31, -40, 31, 12.9), houseSf = Math.round(G.area([house]));
     var pt = ll(coded ? -30 : 0, coded ? 0 : -20);
-    s.input = "Sample lot";
+    s.input = "Sample lot"; s.isSample = true;
     s.matched = coded ? "Sample lot, Redmond NR zone (not a property record)" : "Sample lot (not a property record)";
     s.juris = coded ? "city" : "outside";
     s.cityKey = coded ? R.cityKey("Redmond") : "";
@@ -2051,32 +2538,31 @@
     var host = document.createElement("div"), box = host;
     host.id = "bh-print-host";
     if (ROOT !== document && CFG.printCss && host.attachShadow) {
-      // The page's stylesheets do not reach into a shadow root and the tool's do not reach out of one,
-      // so the copy gets a shadow root of its own with the tool's stylesheet inside it.
       var shadow = host.attachShadow({ mode: "open" }), sheet = document.createElement("style");
       sheet.textContent = CFG.printCss;
       box = document.createElement("div");
       shadow.appendChild(sheet); shadow.appendChild(box);
-      if (CFG.hostStyle) host.setAttribute("style", CFG.hostStyle); // the embed's color and size variables
+      if (CFG.hostStyle) host.setAttribute("style", CFG.hostStyle);
     }
-    box.className = "bh-report bh-print-copy" + (CFG.rootClass ? " " + CFG.rootClass : ""); // rootClass: the embed's wrapper class
+    box.className = "bh-report bh-print-copy" + (CFG.rootClass ? " " + CFG.rootClass : "");
     box.innerHTML = report.innerHTML;
     [].forEach.call(box.querySelectorAll(".bh-noprint,.bh-screen-only,script,iframe,video,button"), function (el) { if (el.parentNode) el.parentNode.removeChild(el); });
-    // Ids are dropped so the copy cannot clash with the page. The sheets reference nothing by id.
+    [].forEach.call(box.querySelectorAll("a[href]"), function (a) {
+      var span = document.createElement("span");
+      span.textContent = a.textContent;
+      if (a.className) span.className = a.className;
+      if (a.parentNode) a.parentNode.replaceChild(span, a);
+    });
     [].forEach.call(box.querySelectorAll("[id]"), function (el) { el.removeAttribute("id"); });
     var page = document.createElement("style");
-    // These rules are also in build-here.css. They are repeated here so an embed that keeps the stylesheet
-    // inside a shadow root needs nothing in the page's own styles for printing to work.
-    page.textContent = "@page{size:letter landscape;margin:0.35in}#bh-print-host{display:none}@media print{body.bh-printing{background:#fff!important}body.bh-printing>*:not(#bh-print-host){display:none!important}body.bh-printing>#bh-print-host{display:block!important}}";
+    page.textContent = "@page{size:letter landscape;margin:0.35in}#bh-print-host{display:none}@media print{body.bh-printing{background:#fff!important}body.bh-printing>*:not(#bh-print-host){display:none!important}body.bh-printing>#bh-print-host{display:block!important}.bh-print-copy .bh-page{break-after:page;page-break-after:always;break-inside:avoid;page-break-inside:avoid;margin:0!important;box-shadow:none!important;zoom:var(--bh-fit,1)}.bh-print-copy .bh-page:last-child{break-after:auto!important;page-break-after:auto!important}.bh-print-copy .bh-page-body{padding:.12in 0 .18in!important}.bh-print-copy .bh-page-foot{padding:.08in 0 0!important}}";
     document.head.appendChild(page);
     document.body.appendChild(host);
     document.body.classList.add("bh-printing");
     printJob = { host: host, page: page, box: box };
     fitFacts();
-    // A web font that arrives after the study is drawn changes how the lines wrap, so the fit is taken again.
     try { if (document.fonts && document.fonts.ready && document.fonts.ready.then) { var job = printJob; document.fonts.ready.then(function () { if (printJob === job) fitFacts(); }); } } catch (e) {}
   }
-
   /* The facts sheet has to hold one landscape page, and its rows are sentences, so its height changes from one
      study to the next. The copy that prints is measured the way paper lays it out: the tool's own stylesheet
      with its print rules switched on, in a box as wide as the printable page (letter landscape less the 0.35 in
@@ -2097,40 +2583,52 @@
         for (var i = 0; i < rules.length; i++) out += rules[i].cssText + "\n";
       });
     } catch (e) { out = ""; }
-    return /\.bh-facts\b/.test(out) ? out : "";
+    return /\.(bh-facts|bh-study-page|bh-page)\b/.test(out) ? out : "";
   }
   function fitFacts() {
     if (!printJob || !printJob.host || !document.body) return 1;
-    var root = printJob.host.shadowRoot || printJob.host, copy = root.querySelector(".bh-facts");
-    var report = $("bh-report"), live = report ? report.querySelector(".bh-facts") : null, fit = 1, probe = null;
-    if (!copy) return 1;
+    var root = printJob.host.shadowRoot || printJob.host;
+    var copies = root.querySelectorAll(".bh-page");
+    var report = $("bh-report"), lives = report ? report.querySelectorAll(".bh-page") : [];
+    if (!copies.length) return 1;
+    var minFit = 1, probe = null;
     try {
       var css = paperCss();
       probe = document.createElement("div");
       if (css && probe.attachShadow) {
         probe.setAttribute("style", (CFG.hostStyle ? CFG.hostStyle + ";" : "") + "position:fixed!important;left:-30000px!important;top:0!important;width:" + PAPER_W_IN + "in!important;height:auto!important;display:block!important;visibility:hidden!important;pointer-events:none!important");
         probe.setAttribute("aria-hidden", "true");
-        var shadow = probe.attachShadow({ mode: "open" }), sheet = document.createElement("style"), box = document.createElement("div"), f = copy.cloneNode(true);
+        var shadow = probe.attachShadow({ mode: "open" }), sheet = document.createElement("style"), box = document.createElement("div");
         sheet.textContent = css.replace(/@media\s+print\b/g, "@media all");
         box.className = printJob.box ? printJob.box.className : "bh-report bh-print-copy";
-        f.style.removeProperty("--bh-fit");
-        box.appendChild(f); shadow.appendChild(sheet); shadow.appendChild(box);
+        shadow.appendChild(sheet);
+        shadow.appendChild(box);
         document.body.appendChild(probe);
-        // The box is not scaled, so its height is the height the scaled sheet takes on paper.
-        var target = PAPER_H_IN * 96 * 0.98, h = box.getBoundingClientRect().height, tries = 0;
-        while (h > target && fit > FIT_MIN && tries++ < 6) {
-          fit = Math.max(FIT_MIN, Math.floor(fit * Math.sqrt(target / h) * 995) / 1000);
-          f.style.setProperty("--bh-fit", String(fit));
-          h = box.getBoundingClientRect().height;
+        var target = PAPER_H_IN * 96 * 0.96, floorFit = 0.72;
+        for (var i = 0; i < copies.length; i++) {
+          var copy = copies[i], live = lives[i] || null;
+          if (!copy.classList || copy.classList.contains("bh-sheet")) continue;
+          box.innerHTML = "";
+          var f = copy.cloneNode(true);
+          f.style.removeProperty("--bh-fit");
+          box.appendChild(f);
+          var fit = 1, h = box.getBoundingClientRect().height, tries = 0;
+          while (h > target && fit > floorFit && tries++ < 8) {
+            fit = Math.max(floorFit, Math.floor(fit * Math.sqrt(target / h) * 990) / 1000);
+            f.style.setProperty("--bh-fit", String(fit));
+            h = box.getBoundingClientRect().height;
+          }
+          if (fit < minFit) minFit = fit;
+          [copy, live].forEach(function (el) {
+            if (!el || !el.style) return;
+            if (fit < 1) el.style.setProperty("--bh-fit", String(fit));
+            else el.style.removeProperty("--bh-fit");
+          });
         }
       }
-    } catch (e) { fit = 1; }
+    } catch (e) { minFit = 1; }
     if (probe && probe.parentNode) probe.parentNode.removeChild(probe);
-    [copy, live].forEach(function (el) {
-      if (!el || !el.style) return;
-      if (fit < 1) el.style.setProperty("--bh-fit", String(fit)); else el.style.removeProperty("--bh-fit");
-    });
-    return fit;
+    return minFit;
   }
   function preparePrint() { if (!printJob) syncPrint(); else fitFacts(); }
   function printReport() { preparePrint(); track("bh_study_export", { method: "print" }); window.print(); }
@@ -2152,17 +2650,16 @@
         if (!s.matched) track("bh_lookup_error", { reason: s.lookupError ? "service" : "no_match" });
         if (!s.matched) { setStatus(s.lookupError ? "The address lookup did not finish (" + s.lookupError + "). The address was not rejected. Wait a minute and try again." : "We could not match that address. Check the spelling and include the city and ZIP."); return; }
         try {
-        fillForm(s);
-        setStatus(s.juris === "other" ? "Found it in " + s.jurisLabel + ". We could not match that city to our list; verify the rules with the city. You can still read the parcel data below."
-          : s.juris === "outside" ? "Found " + s.matched + ". Zoning numbers are not coded for this place yet. Verify setbacks, coverage and FAR with the jurisdiction. Parcel, landscape, and slope still run where a public layer answers. Missing paving stays blank."
-          : s.manualZone ? "Found " + s.matched + " in " + s.jurisLabel + ". " + s.city + " does not publish a zoning map we can read, so enter the zone from the city map below."
-          : s.parcelWarn ? "Found " + s.matched + ". " + s.parcelWarn
-          : "Found " + s.matched + ". Options for this lot are first. Edit a fact under the study if a number is wrong.");
-        render();
-        track("bh_report_ready", { county: s.county, jurisdiction: s.jurisLabel, zone_code: $("bh-zone").value.trim(), rules_coded: ["seattle", "kc", "sno", "edmonds", "kenmore", "city"].indexOf(s.juris) >= 0 && !!s.zone });
-        if ($("bh-step3")) $("bh-step3").focus();
+          fillForm(s);
+          setStatus(s.juris === "other" ? "Found it in " + s.jurisLabel + ". We could not match that city to our list; verify the rules with the city. You can still read the parcel data below."
+            : s.juris === "outside" ? "Found " + s.matched + ". Zoning numbers are not coded for this place yet. Verify setbacks, coverage and FAR with the jurisdiction. Parcel, landscape, and slope still run where a public layer answers. Missing paving stays blank."
+            : s.manualZone ? "Found " + s.matched + " in " + s.jurisLabel + ". " + s.city + " does not publish a zoning map we can read, so enter the zone from the city map below."
+            : s.parcelWarn ? "Found " + s.matched + ". " + s.parcelWarn
+            : "Found " + s.matched + ". The feasibility study is below. Edit a fact under the study if a number is wrong.");
+          render();
+          track("bh_report_ready", { county: s.county, jurisdiction: s.jurisLabel, zone_code: $("bh-zone").value.trim(), rules_coded: ["seattle", "kc", "sno", "edmonds", "kenmore", "city"].indexOf(s.juris) >= 0 && !!s.zone });
+          if ($("bh-step3")) $("bh-step3").focus();
         } catch (err) {
-          // Without this the status line said "Found" and nothing appeared.
           setStatus("Found " + s.matched + ", and the study could not be drawn. Reload the page and try again.");
           track("bh_lookup_error", { reason: "draw" });
           if (window.console && console.error) console.error(err);
@@ -2172,7 +2669,6 @@
     $("bh-confirm-form").addEventListener("submit", function (e) { e.preventDefault(); if (state) { render(); if ($("bh-step3")) $("bh-step3").focus(); } });
     $("bh-print").addEventListener("click", printReport);
     window.addEventListener("beforeprint", function () { preparePrint(); });
-    // Every tap on a call, email, booking or "plan this" control is counted, with the control's name and where it sits.
     ROOT.addEventListener("click", function (e) {
       var el = e.target && e.target.closest ? e.target.closest("[data-bh-cta]") : null;
       if (!el) return;
@@ -2188,32 +2684,18 @@
       state.manual.splice(parseInt(btn.getAttribute("data-man-del"), 10), 1);
       renderManualList();
       render();
-      // The Remove button that had focus is gone with its row. Say what happened and put focus on a control that exists.
       if ($("bh-man-note")) $("bh-man-note").textContent = "Removed. The study no longer uses that number.";
       if ($("bh-man-kind")) $("bh-man-kind").focus();
     });
     if ($("bh-lead")) $("bh-lead").addEventListener("submit", lead);
     $("bh-report").addEventListener("click", function (e) {
-      // A link to a section of the tool (Edit the facts) is followed here, so it also works when the tool is
-      // mounted where the browser cannot resolve the fragment by id.
       var jump = e.target.closest ? e.target.closest('a[href^="#bh-"]') : null, dest = jump ? $(jump.getAttribute("href").slice(1)) : null;
       if (dest) {
         e.preventDefault();
         dest.scrollIntoView({ block: "start" });
         var head = dest.querySelector("h2,h3");
         if (head) { head.setAttribute("tabindex", "-1"); head.focus({ preventScroll: true }); }
-        return;
       }
-      var btn = e.target.closest ? e.target.closest(".bh-map-load") : null;
-      var frame = btn ? btn.parentNode : null, src = frame ? frame.getAttribute("data-bh-map") || "" : "";
-      if (!btn || !/^https:\/\/maps\.google\.com\/maps\?q=-?[0-9.]+,-?[0-9.]+&/.test(src)) return;
-      var f = document.createElement("iframe");
-      f.title = "Google Maps satellite view of the geocoded point";
-      f.setAttribute("referrerpolicy", "no-referrer");
-      f.setAttribute("allowfullscreen", "");
-      f.src = src;
-      frame.innerHTML = "";
-      frame.appendChild(f);
     });
     var params = new URLSearchParams(location.search);
     if (/^[12]$/.test(params.get("sample") || "") && G && (CFG.allowSample || /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname))) {
@@ -2225,7 +2707,6 @@
     }
     var p = params.get("bh_address") || params.get("address");
     if (p) {
-      // Analytics, browser history and copied links all carry the page URL, so the address does not stay in it.
       try {
         params.delete("bh_address"); params.delete("address");
         var rest = params.toString();
@@ -2236,5 +2717,5 @@
   }
   // An embed builds the markup first and then calls init() itself (autoInit: false).
   if (CFG.autoInit !== false) { if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init(); }
-  window.BuildHere = { polyAreaSqft: polyAreaSqft, minRect: minRect, classifyEdges: classifyEdges, envelopeRows: envelopeRows, init: init, setbackFor: setbackFor, lotGeometry: lotGeometry, ctaUrl: ctaUrl, linkUrl: linkUrl, streetParts: streetParts, track: track, sampleState: sampleState, polyQuery: polyQuery, brandInfo: brandInfo };
+  window.BuildHere = { polyAreaSqft: polyAreaSqft, minRect: minRect, classifyEdges: classifyEdges, envelopeRows: envelopeRows, init: init, setbackFor: setbackFor, lotGeometry: lotGeometry, ctaUrl: ctaUrl, linkUrl: linkUrl, streetParts: streetParts, track: track, sampleState: sampleState, polyQuery: polyQuery, brandInfo: brandInfo, stampStudyPages: stampStudyPages };
 })();

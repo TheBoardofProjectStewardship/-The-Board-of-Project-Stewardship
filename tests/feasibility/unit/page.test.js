@@ -133,4 +133,28 @@ t.ok("the setback of a line follows its kind", BH.setbackFor({ kind: "front" }, 
 var mr = BH.minRect(G.project(st.rings, G.frame(st.lat, st.lon))[0]);
 t.ok("the smallest rectangle around the lot has the lot's sides", !!mr && t.near(Math.max(mr.w, mr.d), fx.W, 0.5) && t.near(Math.min(mr.w, mr.d), fx.H, 0.5), mr && [mr.w, mr.d]);
 
+/* ---- page numbers when a sheet drops out ---- */
+function sec(cls, n, extra) {
+  return '<section class="bh-page ' + cls + '" data-page="' + n + '" data-total="6"><strong>Page ' + n + ' of 6</strong>' + (extra || "") + "</section>";
+}
+var six = BH.stampStudyPages([
+  sec("", 1),
+  sec("bh-facts", 2, " See page 5."),
+  '<section class="bh-page bh-sheet" data-sheet="SP-1" data-page="3" data-total="6"><text>SP-1 · Page 3 of 6</text><text>REDMOND | WA | Page 3 of 6</text></section>',
+  sec("bh-what-you-can-build-page", 4),
+  sec("bh-details-page", 5),
+  sec("bh-massing-page", 6)
+]);
+t.ok("six pages stay Page 1 of 6 through Page 6 of 6", six.length === 6 && /Page 1 of 6/.test(six[0]) && /Page 3 of 6/.test(six[2]) && /data-page="3"/.test(six[2]) && /See page 5\./.test(six[1]) && /Page 6 of 6/.test(six[5]));
+var noSheet = BH.stampStudyPages([sec("", 1), sec("bh-facts", 2, " See page 5."), sec("bh-what-you-can-build-page", 4), sec("bh-details-page", 5), sec("bh-massing-page", 6)]);
+t.ok("with SP-1 missing the later pages renumber and the permit line follows", noSheet.length === 5 && /Page 3 of 5/.test(noSheet[2]) && /data-page="4"/.test(noSheet[3]) && /Page 4 of 5/.test(noSheet[3]) && /See page 4\./.test(noSheet[1]) && !/Page 3 of 6/.test(noSheet.join("")));
+var noFacts = BH.stampStudyPages([
+  sec("", 1, " See page 5."),
+  '<section class="bh-page bh-sheet" data-page="3" data-total="6">SP-1 · Page 3 of 6</section>',
+  sec("bh-details-page", 5)
+]);
+t.ok("SP-1's own label moves when a page ahead of it drops", /data-page="2"/.test(noFacts[1]) && /Page 2 of 3/.test(noFacts[1]) && !/Page 3 of 6/.test(noFacts[1]) && /See page 3\./.test(noFacts[0]));
+var seven = BH.stampStudyPages([sec("", 1), sec("", 2), sec("", 3), sec("", 4), sec("", 5), sec("", 6), sec("", 6)]);
+t.ok("a seventh page is Page 7 of 7", seven.length === 7 && /Page 7 of 7/.test(seven[6]) && /data-total="7"/.test(seven[0]));
+
 t.done();

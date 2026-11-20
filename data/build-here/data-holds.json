@@ -3,9 +3,9 @@
   "holds": [
     {
       "path": "assets/data/sno-bldg",
-      "status": "held",
-      "reason": "Snohomish County Improvement Records. The county item's terms cover data from which a list of individuals may be compiled, and a parcel number joins to owner names on the public parcel layer. See scripts/build_sno_bldg_index.py.",
-      "clearance": ""
+      "status": "lifted",
+      "reason": "Snohomish County Improvement Records. The owner lifted the hold on 2026-11-20. The study reads house size, year built, stories, and bedrooms from the published house-size index and from public county map layers. Owner, taxpayer, and mailing names are not requested and are not printed. The raw workbook extract is still not written into this repository.",
+      "clearance": "Site owner, 2026-11-20: the Snohomish data hold is lifted for the feasibility study. Use county improvement facts. Do not publish owner names."
     },
     {
       "path": "assets/data/house-size/snoh",

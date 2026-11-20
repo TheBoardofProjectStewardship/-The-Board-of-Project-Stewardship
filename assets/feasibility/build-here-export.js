@@ -155,9 +155,13 @@
     var address = o.address || "Address not matched";
     var date = o.date || "";
     var body = stripControls(o.bodyHtml || "", o.baseHref || "");
+    if (o.noSources) {
+      body = body.replace(/<a\b[^>]*>([\s\S]*?)<\/a>/gi, "$1");
+      var css = PRINT_CSS.replace(".bh-page{break-after:auto;page-break-after:auto;break-inside:auto}", ".bh-page{break-after:page;page-break-after:always;break-inside:avoid;page-break-inside:avoid}.bh-page:last-child{break-after:auto;page-break-after:auto}");
+      return "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Feasibility study: " + esc(address) + "</title><style>" + css + "</style></head><body><article>" + body + "</article></body></html>";
+    }
     var limits = o.limitations || "Planning estimate only. This is not a legal, zoning, or permit determination. Where zoning is not coded, the study does not say a project is allowed.";
     var sources = sourceItems(o.sources, !!o.hideLinkOnly);
-    // No <base> element: with one, every link in the file that points at a part of the file itself was sent to the site instead.
     return "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Feasibility study: " + esc(address) + "</title><style>" + PRINT_CSS + "</style></head><body>" +
       "<header>" + (o.brand ? "<p>" + esc(o.brand) + "</p>" : "") + "<h1>" + esc(address) + "</h1><p>Prepared " + esc(date) + (o.contact ? " · " + esc(o.contact) : "") + "</p></header>" +
       "<article>" + body + "</article>" +
@@ -165,7 +169,6 @@
       "<section class=\"bh-sources\"><h2>Sources</h2><ul>" + (sources || "<li>No source list was attached to this file.</li>") + "</ul></section>" +
       "<footer><p>End of study. " + esc(address) + ". " + esc(date) + ".</p>" + (o.contact ? "<p>" + esc(o.contact) + "</p>" : "") + "</footer></body></html>";
   }
-
   var api = { buildStudyFile: buildStudyFile, stripControls: stripControls };
   root.BuildHereExport = api;
   if (typeof module !== "undefined" && module.exports) module.exports = api;

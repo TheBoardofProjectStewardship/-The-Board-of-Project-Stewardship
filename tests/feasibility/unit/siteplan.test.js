@@ -142,7 +142,7 @@ t.ok("the tables also come as HTML", /<caption>SITE DATA<\/caption>/.test(html) 
 
 /* ---- the sheet ---- */
 var sh = SP.sheet(M, { F: F, opt: opt("addition"), sheet: "SP-1" }), svg = sh.html;
-t.ok("the sheet is one landscape drawing", /viewBox="0 0 1650 1250"/.test(svg) && /class="bh-page bh-sheet"/.test(svg));
+t.ok("the sheet is one landscape drawing", /viewBox="0 0 1650 1175"/.test(svg) && /class="bh-page bh-sheet"/.test(svg));
 t.ok("title, sheet number and address are on it", /PRELIMINARY SITE PLAN/.test(svg) && />SP-1</.test(svg) && /5514 160TH AVE NE/.test(svg));
 t.ok("the title block carries the company, phone, email and site", /PACIFIC PRO GROUP LLC/.test(svg) && /\(206\) 446-5656/.test(svg) && /admin@pacificprogroup\.com/.test(svg) && /pacificprogroup\.com/.test(svg));
 t.ok("kitchen and bath remodels are in the service line", /Kitchen &amp; bath remodels/.test(svg));
@@ -164,7 +164,7 @@ t.ok("the same figures follow as text", /bh-screen-only bh-sheet-twin/.test(svg)
 t.ok("the buildable area is captioned", /BUILDABLE AREA ≈ 7,7[0-9]0 SF/.test(svg), (svg.match(/BUILDABLE AREA[^<]*/) || [""])[0]);
 t.ok("the fall of the ground is noted as approximate", /GROUND FALLS ≈ 19&#39; ±/.test(svg));
 var svgHz = SP.svg(modelOf(s, rs, { hazards: [{ label: "Steep slope", rings: [fx.rectLL(20, -39, 60, 0)] }] }), { F: F });
-t.ok("a mapped hazard area is hatched and in the legend", /Mapped critical area/.test(svgHz) && /stroke="#b3261e"/.test(svgHz));
+t.ok("a mapped hazard area is hatched and in the legend", /Mapped critical area/.test(svgHz) && /stroke="#333333"/.test(svgHz));
 /* A concept is kept off mapped hazard ground while there is anywhere else for it to go. */
 function onGround(P, x0, y0, x1, y1) {
   // Samples the placed rectangle and says whether any point of it lies inside the box (a third of a foot in from its edge).
@@ -211,4 +211,6 @@ t.ok("and the floor-area total stays 'not in public data', with no total with th
 var th = SP.thumb(M, pa);
 t.ok("a thumbnail is a small picture with no text", /^<svg viewBox="0 0 220 150" class="bh-thumb" aria-hidden="true"/.test(th) && !/<text/.test(th) && !/\sid="/.test(th));
 t.ok("no thumbnail without a lot outline", SP.thumb(SP.model({ rings: null }), null) === "");
+var studySheet = SP.sheet(M, { F: F, opt: opt("addition"), sheet: "SP-1", noSources: true, noInset: true, compact: true, pageLabel: "Page 3 of 6", pageNum: 3, totalPages: 6 }).html;
+t.ok("the study sheet is the one drawing, labeled Page 3 of 6, with no inset and no links", /class="bh-sheet-svg"/.test(studySheet) && /Page 3 of 6/.test(studySheet) && /data-page="3"/.test(studySheet) && /data-total="6"/.test(studySheet) && !/bh-sheet-twin/.test(studySheet) && !/<image /.test(studySheet) && !/<a\b/i.test(studySheet) && !/\bPPG\b/.test(studySheet));
 t.done();

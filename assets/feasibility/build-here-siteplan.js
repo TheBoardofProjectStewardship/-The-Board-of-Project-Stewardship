@@ -25,13 +25,14 @@
   /* Sheet: letter, landscape. The stylesheet prints the drawing 10.16 in wide (inside 0.35 in margins), so
      one inch on paper is UPI drawing units, and the plan can be held to a standard scale (1 in = 20 ft, and
      so on). Keep PRINT_W_IN in step with the .bh-sheet-svg print rule. */
-  var SHEET_W = 1650, SHEET_H = 1250, PRINT_W_IN = 10.16, UPI = SHEET_W / PRINT_W_IN;
-  var PLAN = { x: 40, y: 116, w: 1000, h: 930 };
-  var COL = { x: 1066, y: 116, w: 544, h: 930 };
-  var TB = { x: 40, y: 1066, w: 1570, h: 144 };
+  var SHEET_W = 1650, SHEET_H = 1175, PRINT_W_IN = 10.30, UPI = SHEET_W / PRINT_W_IN;
+  var PLAN = { x: 40, y: 108, w: 1000, h: 930 };
+  var COL = { x: 1066, y: 108, w: 544, h: 930 };
+  var TB = { x: 40, y: 1054, w: 1570, h: 106 };
   var SCALES = [8, 10, 16, 20, 30, 40, 50, 60, 80, 100, 150, 200, 300, 400, 500, 600, 800, 1000];
-  var INK = "#2f3a3a", MUTE = "#5b6460", RULE = "#8b8878", GREEN = "#2f6b45", GREEN_FILL = "#dfe9df", TAN = "#b3a58a", EARTH = "#7a6a4f";
-  var ORANGE = "#b8650a", PAPER = "#fbfaf6", GREY = "#ecece8", GREY_LINE = "#a9ada8", ROAD = "#e6e5df", HAZ = "#b3261e";
+  /* Grayscale only. A verify row says "(verify)"; a hazard is named in the legend. Color is not the signal. */
+  var INK = "#111111", MUTE = "#444444", RULE = "#666666", GREEN = "#222222", GREEN_FILL = "#eeeeee", TAN = "#777777", EARTH = "#555555";
+  var ORANGE = "#111111", PAPER = "#ffffff", GREY = "#dddddd", GREY_LINE = "#888888", ROAD = "#eeeeee", HAZ = "#333333";
   var FONT = "Montserrat, 'Helvetica Neue', Helvetica, Arial, sans-serif";
   var MISSING = "not in public data — verify";
 
@@ -907,16 +908,17 @@
     var nxp = W - 52, nyp = 52;
     out.push('<circle cx="' + nxp + '" cy="' + nyp + '" r="22" fill="#ffffff" stroke="' + INK + '" stroke-width="1.2"/><path d="M' + nxp + " " + (nyp - 30) + "L" + (nxp + 8) + " " + (nyp + 12) + "L" + nxp + " " + (nyp + 5) + "L" + (nxp - 8) + " " + (nyp + 12) + 'Z" fill="' + INK + '"/>' + T(nxp, nyp + 44, "N", { size: 13, weight: 700, anchor: "middle" }));
     if (M.slope && isNum(M.slope.fallDeg) && M.slope.fallCompass && M.slope.fallCompass !== "flat") {
-      var fx = W - 52, fy = 150, fall = Math.max(0, Math.round(M.slope.elevMax - M.slope.elevMin));
+      var fx = W - 78, fy = 148, fall = Math.max(0, Math.round(M.slope.elevMax - M.slope.elevMin));
       if (B.free([fx - 46, fy - 22, fx + 46, fy + 34])) {
         B.add([fx - 46, fy - 22, fx + 46, fy + 34]);
         out.push('<g transform="rotate(' + r1(M.slope.fallDeg) + " " + fx + " " + fy + ')"><path d="M' + fx + " " + (fy + 14) + "L" + fx + " " + (fy - 8) + '" stroke="' + EARTH + '" stroke-width="2" fill="none"/><path d="M' + fx + " " + (fy - 17) + "L" + (fx + 6) + " " + (fy - 6) + "L" + (fx - 6) + " " + (fy - 6) + 'Z" fill="' + EARTH + '"/></g>' +
-          T(fx, fy + 30, "GROUND FALLS ≈ " + fall + "' ±", { size: 9.5, anchor: "middle", fill: EARTH, halo: true, haloW: 3 }));
+          T(W - 8, fy + 28, "GROUND FALLS ≈ " + fall + "' ±", { size: 9, anchor: "end", fill: EARTH, halo: true, haloW: 3 }));
       }
     }
     /* scale bar */
     var unit = sc <= 10 ? 5 : sc <= 20 ? 10 : sc <= 40 ? 20 : sc <= 80 ? 40 : sc <= 200 ? 100 : sc <= 500 ? 200 : 500;
-    var sx0 = 18, sy0 = Hh - 30, u = unit * k, bar = "";
+    var sx0 = 18, sy0 = Hh - 30, u = unit * k;
+    var bar = '<rect x="8" y="' + (sy0 - 16) + '" width="' + r1(Math.min(W - 16, Math.max(2 * u + 280, 420))) + '" height="42" fill="#ffffff" stroke="#dddddd" stroke-width="0.6"/>';
     [[0, 0.5, INK], [0.5, 1, "#ffffff"], [1, 2, INK]].forEach(function (s) { bar += '<rect x="' + r1(sx0 + s[0] * u) + '" y="' + sy0 + '" width="' + r1((s[1] - s[0]) * u) + '" height="7" fill="' + s[2] + '" stroke="' + INK + '" stroke-width="1"/>'; });
     [0, 0.5, 1, 2].forEach(function (m) { bar += T(sx0 + m * u, sy0 - 5, (m * unit) + "'", { size: 10.5, anchor: "middle" }); });
     bar += T(sx0 + 2 * u + 16, sy0 + 7, "GRAPHIC SCALE (feet) · 1 in = " + sc + " ft on a letter sheet printed at 100%", { size: 10.5, fill: MUTE }) +
@@ -963,14 +965,14 @@
     if (used.paving) L.push({ sym: '<rect x="0" y="-1" width="40" height="12" fill="#e2e0d9" stroke="#bdbbb2" stroke-width="0.8"/>', text: "Mapped driveway / paving (approx.)" });
     if (used.hazards) L.push({ sym: '<rect x="0" y="-1" width="40" height="12" fill="' + HAZ + '" fill-opacity="0.08" stroke="' + HAZ + '" stroke-width="1" stroke-dasharray="4 3"/>', text: "Mapped critical area (see the facts sheet)" });
     if (used.trees) L.push({ sym: '<circle cx="20" cy="5" r="6" fill="none" stroke="' + GREEN + '" stroke-width="1" stroke-dasharray="3 2"/>', text: "Mapped tree (OpenStreetMap; crown not to scale)" });
-    L.push({ sym: '<text x="0" y="9" font-size="12" fill="' + ORANGE + '">abc</text>', text: "Orange = not in public data, or verify" });
+    L.push({ sym: '<text x="0" y="9" font-size="12" fill="' + INK + '">(verify)</text>', text: "(verify) = not in public data, or confirm on site" });
     return L;
   }
   /* The whole sheet. o: { F, opt, placed, tables, sheet, title, kicker } */
   function svg(M, o) {
     o = o || {};
     var F = o.F || {}, brand = F.brand || {}, opt = o.opt || null, P = o.placed || null, tb = o.tables || tables(M, opt, P, F), out = [];
-    var plan = M && M.ok ? planMarkup(M, { opt: opt, placed: P, imagery: M.imagery, place: F.place }) : null;
+    var plan = M && M.ok ? planMarkup(M, { opt: opt, placed: P, imagery: o.noInset ? null : M.imagery, place: F.place }) : null;
     var used = plan ? plan.used : {};
     if (plan && M.contours) used.contourText = M.contours.interval + " ft contour, USGS 3DEP lidar (approx.)";
     var envText = M && M.ok && M.env ? (M.env.area > 0 ? "buildable area about " + fmt(Math.round(M.env.area / 10) * 10) + " sf inside the setbacks" : "no area left inside the setbacks as drawn") : "setbacks not all coded, so no envelope is drawn";
@@ -978,15 +980,14 @@
     out.push('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + SHEET_W + " " + SHEET_H + '" class="bh-sheet-svg" role="img" aria-label="' + esc(aria) + '" font-family="' + esc(FONT) + '">');
     out.push('<rect x="0" y="0" width="' + SHEET_W + '" height="' + SHEET_H + '" fill="#ffffff"/>');
     /* header */
-    // The line under the title names the concept only when it is on the drawing. A concept that could not be
-    // placed still has its figures in the tables, and the line says so.
     var optName = opt ? String(opt.title || opt.kind).toUpperCase() : "";
     var kicker = o.kicker || ("EXISTING CONDITIONS" + (opt ? (P && P.ok ? " + " + optName + " CONCEPT" : " · " + optName + " FIGURES ONLY, NOT DRAWN") : ""));
-    var sub = [kicker, String(F.address || "").toUpperCase(), F.parcel ? "PARCEL " + F.parcel : ""].filter(Boolean).join(" · ");
+    var sub = [F.isSample ? "SAMPLE LAYOUT — NOT A PROPERTY RECORD" : "", kicker, String(F.address || "").toUpperCase(), F.parcel ? "PARCEL " + F.parcel : ""].filter(Boolean).join(" · ");
     out.push(T(40, 60, o.title || "PRELIMINARY SITE PLAN", { size: 30, weight: 700, ls: 4 }));
     out.push(T(40, 90, clip(sub, 120), { size: 14.5, fill: MUTE, ls: 1.6, fit: twMin(clip(sub, 120), 14.5, 1.6) > 1400 ? 1400 : 0 }));
     out.push('<rect x="40" y="100" width="' + PLAN.w + '" height="4" fill="' + RULE + '"/>');
-    out.push(T(COL.x + COL.w, 60, o.sheet || "SP-1", { size: 30, weight: 700, anchor: "end", ls: 1 }));
+    var headRight = (o.sheet || "SP-1") + (o.pageLabel ? " · " + String(o.pageLabel) : "");
+    out.push(T(COL.x + COL.w, 60, headRight, { size: o.pageLabel ? 21 : 30, weight: 700, anchor: "end", ls: 1 }));
     /* plan */
     if (plan) out.push('<svg x="' + PLAN.x + '" y="' + PLAN.y + '" width="' + PLAN.w + '" height="' + PLAN.h + '" viewBox="0 0 ' + PLAN.w + " " + PLAN.h + '">' + plan.svg + "</svg>");
     else out.push('<rect x="' + PLAN.x + '" y="' + PLAN.y + '" width="' + PLAN.w + '" height="' + PLAN.h + '" fill="' + PAPER + '" stroke="#d8d7cf"/>' +
@@ -1002,18 +1003,23 @@
       var words = name.split(/\s+/).filter(Boolean), first = words[0] || "", rest = words.slice(1).join(" ");
       out.push(T(TB.x + 125, ty + (rest ? 70 : 84), first, { size: first.length > 9 ? 26 : 36, weight: 600, anchor: "middle", ls: 6 }) + (rest ? T(TB.x + 125, ty + 100, rest, { size: 12.5, anchor: "middle", ls: 4, fill: MUTE }) : ""));
     }
-    var bx = TB.x + 270, line2 = [brand.phone, brand.email, brand.site].filter(Boolean).join("  ·  "), line3 = [brand.services, brand.license ? "WA contractor reg. " + brand.license : ""].filter(Boolean).join("  ·  ");
+    var bx = TB.x + 270, line2 = [brand.phone, o.noSources ? "" : brand.email, brand.site].filter(Boolean).join("  ·  "), line3 = [brand.services, brand.license ? "WA contractor reg. " + brand.license : ""].filter(Boolean).join("  ·  ");
     out.push(T(bx, ty + 34, clip(name + (brand.tagline ? "  ·  " + String(brand.tagline).toUpperCase() : ""), 70), { size: 15.5, weight: 700, ls: 2.4 }));
     if (line2) out.push(T(bx, ty + 60, clip(line2, 86), { size: 15, ls: 1 }));
     if (line3) out.push(T(bx, ty + 84, clip(line3, 118), { size: 11.5, fill: MUTE, fit: twMin(clip(line3, 118), 11.5) > 830 ? 830 : 0 }));
-    var disc1 = "Planning estimate from public records" + (F.sourceLine ? " (" + F.sourceLine + ")" : "") + ".";
-    var disc2 = "Not a survey or a permit drawing. Verify with " + (F.place || "the jurisdiction") + ".";
+    var disc1 = o.noSources
+      ? ("As of " + (F.preparedText || F.prepared || "today") + ". Planning estimate from public records; not a survey or permit determination.")
+      : ("Planning estimate from public records" + (F.sourceLine ? " (" + F.sourceLine + ")" : "") + ".");
+    var disc2 = o.noSources
+      ? ("Verify with " + (F.place || "the jurisdiction") + "." + (F.isSample ? " SAMPLE LAYOUT — NOT A PROPERTY RECORD." : ""))
+      : ("Not a survey or a permit drawing. Verify with " + (F.place || "the jurisdiction") + ".");
     out.push(T(bx, ty + 108, clip(disc1, 130), { size: 11, fill: ORANGE, fit: twMin(clip(disc1, 130), 11) > 830 ? 830 : 0 }) + T(bx, ty + 124, clip(disc2, 130), { size: 11, fill: ORANGE }));
     var px = TB.x + 1140, addr = String(F.address || "").toUpperCase();
+    var rightMeta = [String(F.placeShort || "").toUpperCase(), F.stateAbbr || "", o.pageLabel || "SITE PLAN"].filter(Boolean).join(" | ");
     out.push(T(px, ty + 26, "PROJECT", { size: 10.5, fill: MUTE, ls: 1.2 }) + T(px, ty + 46, clip(addr, 48), { size: 14, weight: 700, fit: twMin(clip(addr, 48), 14) > 410 ? 410 : 0 }) +
       T(px, ty + 70, "PREPARED", { size: 10.5, fill: MUTE, ls: 1.2 }) + T(px, ty + 89, clip((F.preparedText || F.prepared || "") + " · auto-generated study", 56), { size: 13 }) +
       T(px, ty + 126, "SHEET", { size: 10.5, fill: MUTE, ls: 1.2 }) + T(px + 56, ty + 128, o.sheet || "SP-1", { size: 24, weight: 700 }) +
-      T(px + 150, ty + 126, clip([String(F.placeShort || "").toUpperCase(), F.stateAbbr || "", "SITE PLAN"].filter(Boolean).join(" | "), 34), { size: 11.5, ls: 2, fill: MUTE }));
+      T(px + 150, ty + 126, clip(rightMeta, 38), { size: 11.5, ls: 1.5, fill: MUTE }));
     out.push("</svg>");
     return out.join("");
   }
@@ -1038,14 +1044,14 @@
   /* One sheet as a report page: the drawing, then the same tables as HTML for small screens and screen readers. */
   function sheet(M, o) {
     o = o || {};
-    var P = o.opt ? (o.placed ? o.placed : place(M, o.opt)) : null, tb = tables(M, o.opt || null, P, o.F || {});
+    var P = o.opt ? (o.placed ? o.placed : place(M, o.opt)) : null, tb = o.tables || tables(M, o.opt || null, P, o.F || {});
+    var twin = o.compact ? "" : '<div class="bh-screen-only bh-sheet-twin"><h3>' + esc((o.sheet || "SP-1") + " figures as text") + "</h3>" + (P && !P.ok && o.opt ? '<p class="bh-verify">' + esc((o.opt.title || "This option") + " is not drawn: " + P.why) + "</p>" : "") + (P && P.ok && P.note ? '<p class="bh-muted">' + esc(P.note) + "</p>" : "") + tablesHtml(tb) + "</div>";
+    var pageNum = o.pageNum || 3, totalPages = o.totalPages || 6;
     return {
       placed: P, tables: tb,
-      html: '<section class="bh-page bh-sheet" data-sheet="' + esc(o.sheet || "SP-1") + '">' + svg(M, { F: o.F, opt: o.opt, placed: P, tables: tb, sheet: o.sheet, title: o.title, kicker: o.kicker }) +
-        '<div class="bh-screen-only bh-sheet-twin"><h3>' + esc((o.sheet || "SP-1") + " figures as text") + "</h3>" + (P && !P.ok && o.opt ? '<p class="bh-verify">' + esc((o.opt.title || "This option") + " is not drawn: " + P.why) + "</p>" : "") + (P && P.ok && P.note ? '<p class="bh-muted">' + esc(P.note) + "</p>" : "") + tablesHtml(tb) + "</div></section>"
+      html: '<section class="bh-page bh-sheet" data-sheet="' + esc(o.sheet || "SP-1") + '" data-page="' + esc(pageNum) + '" data-total="' + esc(totalPages) + '">' + svg(M, { F: o.F, opt: o.opt, placed: P, tables: tb, sheet: o.sheet, title: o.title, kicker: o.kicker, noInset: o.noInset, noSources: o.noSources, pageLabel: o.pageLabel, compact: o.compact }) + twin + "</section>"
     };
   }
-
   var api = {
     SHEET: { w: SHEET_W, h: SHEET_H, printWidthIn: PRINT_W_IN }, MISSING: MISSING,
     streetCore: streetCore, setbackFor: setbackFor, classifyEdges: classifyEdges, lotLines: lotLines, model: model, place: place,

@@ -103,6 +103,9 @@ def s_print(tmp):
     check("a page that only loads the stylesheet still prints its own content", d.get("hostPrint", {}).get("heading") == "visible" and d["hostPrint"]["button"] == "visible" and d["hostPrint"]["tdPrefix"] == "none", d.get("hostPrint"))
     check("the browser's own Print command prepares the study", d.get("beforeprintFiredByPdf") == 1 and 8 <= d.get("toolPrintPagesViaBrowserCommand", 0) <= 14, d.get("toolPrintPagesViaBrowserCommand"))
     check("the print copy has every study page, no form and no duplicate ids", d.get("printHost", {}).get("pages") == 10 and d["printHost"]["hasEditForm"] is False and d["printHost"]["duplicateIds"] == 0, d.get("printHost"))
+    st = d.get("study") or {}
+    n = st.get("pages") or 0
+    check("the feasibility study starts with a cover, a 3D massing view, and numbered pages", n >= 6 and d.get("studyPrintPages") == n and st.get("cover") is True and st.get("logoOk") is True and st.get("massing") is True and st.get("shot") is True and st.get("controls") is True and st.get("interior") is True and st.get("sheets") == 1 and st.get("httpLinks") == 0 and st.get("anchors") == 0 and st.get("iframes") == 0 and st.get("ppg") is False and st.get("turf") is False and st.get("permit") is True and st.get("labels") == ["Page %d of %d" % (i, n) for i in range(1, n + 1)] and st.get("dataPages") == ["%d of %d" % (i, n) for i in range(1, n + 1)], st)
 
 
 def s_homeprint(tmp):
