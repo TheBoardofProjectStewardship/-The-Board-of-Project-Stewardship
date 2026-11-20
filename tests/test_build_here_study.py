@@ -1043,3 +1043,47 @@ console.log(JSON.stringify({
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class FeasibilityOpeningSitePlanTests(unittest.TestCase):
+    """20261120b: the report opens on the scaled SP-1 Preliminary Site Plan right after the cover.
+    20261120a (still used by the live widgets until their pinned version changes) is left as it was."""
+
+    V_B = ROOT / "assets/feasibility/20261120b/build-here.js"
+    V_A = ROOT / "assets/feasibility/20261120a/build-here.js"
+
+    def test_sp1_follows_the_cover_in_20261120b(self):
+        js = self.V_B.read_text(encoding="utf-8")
+        cover = js.index('out.push(page("Cover", coverBody, "bh-cover", 1));')
+        sp1 = js.index('sheet: "SP-1",', cover)
+        lot = js.index('out.push(page("Existing lot"', cover)
+        facts = js.index("SUM.factsSheet(F, FB", cover)
+        self.assertLess(sp1, lot)
+        self.assertLess(sp1, facts)
+        self.assertEqual(js.count('\n        sheet: "SP-1",'), 1)
+        self.assertNotIn('pageLabel: "Page 3 of "', js)
+        self.assertNotIn("\u2014 ", js.split('out.push(page("Cover"')[1].split("/* ---------- EXISTING LOT")[0])
+
+    def test_sp1_title_block_fits_and_parcel_warning_leads(self):
+        sp = (ROOT / "assets/feasibility/20261120b/build-here-siteplan.js").read_text(encoding="utf-8")
+        self.assertIn("var TB = { x: 40, y: 1044, w: 1570, h: 126 };", sp)
+        self.assertNotIn("ty + 124", sp)
+        self.assertNotIn("ty + 128", sp)
+        js = self.V_B.read_text(encoding="utf-8")
+        head = js.split('sheet: "SP-1",')[1].split("/* ---------- EXISTING LOT")[0]
+        self.assertIn("s.parcelWarn", head)
+        self.assertIn('role="alert"', head)
+        self.assertIn('(hasSP1 ? "Setback key" : "Site diagram")', js)
+
+    def test_20261120a_is_unchanged(self):
+        js = self.V_A.read_text(encoding="utf-8")
+        self.assertLess(js.index('out.push(page("Existing lot"'), js.index('sheet: "SP-1",'))
+
+    def test_only_build_here_js_differs_between_versions(self):
+        a = ROOT / "assets/feasibility/20261120a"
+        b = ROOT / "assets/feasibility/20261120b"
+        names = sorted(p.name for p in a.iterdir())
+        self.assertEqual(names, sorted(p.name for p in b.iterdir()))
+        for n in names:
+            if n not in ("build-here.js", "build-here-siteplan.js", "build-here.css", "build-here-export.js"):
+                self.assertEqual((a / n).read_bytes(), (b / n).read_bytes(), n)
