@@ -105,7 +105,7 @@ def s_print(tmp):
     check("the print copy has every study page, no form and no duplicate ids", d.get("printHost", {}).get("pages") == 10 and d["printHost"]["hasEditForm"] is False and d["printHost"]["duplicateIds"] == 0, d.get("printHost"))
     st = d.get("study") or {}
     n = st.get("pages") or 0
-    check("the feasibility study starts with a cover, a 3D massing view, and numbered pages", n >= 6 and d.get("studyPrintPages") == n and st.get("cover") is True and st.get("logoOk") is True and st.get("massing") is True and st.get("shot") is True and st.get("controls") is True and st.get("interior") is True and st.get("sheets") == 1 and st.get("httpLinks") == 0 and st.get("anchors") == 0 and st.get("iframes") == 0 and st.get("ppg") is False and st.get("turf") is False and st.get("permit") is True and st.get("labels") == ["Page %d of %d" % (i, n) for i in range(1, n + 1)] and st.get("dataPages") == ["%d of %d" % (i, n) for i in range(1, n + 1)], st)
+    check("the feasibility study is a 7-page cover study with spaced footers and no interior or 3D sheets", n == 7 and d.get("studyPrintPages") == 7 and st.get("cover") is True and st.get("logoOk") is True and st.get("viewer") is False and st.get("interior") is False and st.get("houseSheet") is False and st.get("footerTouch") is False and st.get("footerGap") is True and st.get("sheets") == 1 and st.get("httpLinks") == 0 and st.get("anchors") == 0 and st.get("iframes") == 0 and st.get("ppg") is False and st.get("turf") is False and st.get("permit") is True and st.get("labels") == ["Page %d of %d" % (i, n) for i in range(1, n + 1)] and st.get("dataPages") == ["%d of %d" % (i, n) for i in range(1, n + 1)], st)
 
 
 def s_homeprint(tmp):
