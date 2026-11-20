@@ -1,0 +1,25 @@
+{
+  "submission_id": "2026-11-20-foundation-crack-repair-kent-wa",
+  "idempotency_key": "sha256:abcf030c67bf0db231e0f2598e44febfa3cdf3ec46b00c1bf69d2e0665db8136",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-11-20T11:45:20Z",
+  "outputs": [
+    "assets/images/posts/2026-11-20-kent-foundation-1.webp",
+    "assets/images/posts/2026-11-20-kent-foundation-2.webp",
+    "assets/images/posts/2026-11-20-kent-foundation-3.webp",
+    "assets/images/posts/2026-11-20-kent-foundation-4.webp",
+    "assets/images/posts/2026-11-20-kent-foundation-5.webp",
+    "assets/images/posts/2026-11-20-kent-foundation-6.webp",
+    "assets/images/posts/2026-11-20-kent-foundation-7.webp",
+    "assets/images/posts/2026-11-20-kent-foundation-8.webp",
+    "assets/images/posts/2026-11-20-kent-foundation-9.webp",
+    "posts/2026-11-20-foundation-crack-repair-kent-wa.md",
+    "posts/2026-11-20-foundation-crack-repair-kent-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 108
+}
