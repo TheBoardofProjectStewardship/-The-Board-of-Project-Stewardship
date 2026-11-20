@@ -1087,3 +1087,96 @@ class FeasibilityOpeningSitePlanTests(unittest.TestCase):
         for n in names:
             if n not in ("build-here.js", "build-here-siteplan.js", "build-here.css", "build-here-export.js"):
                 self.assertEqual((a / n).read_bytes(), (b / n).read_bytes(), n)
+
+
+class Feasibility20261120cLayoutTests(unittest.TestCase):
+    """20261120c: report footers that do not overlap or wrap, a heading with no focus box, homeowner wording
+    instead of raw data field names, an SP-1 scale note that is true on screen and on paper, and seven sheets
+    that print as seven pages. 20261120b (live until the widget pins 20261120c) is left as it was."""
+
+    C = ROOT / "assets/feasibility/20261120c"
+    B = ROOT / "assets/feasibility/20261120b"
+
+    def read(self, name, ver=None):
+        return ((ver or self.C) / name).read_text(encoding="utf-8")
+
+    def test_same_files_as_20261120b_and_b_untouched(self):
+        self.assertEqual(sorted(p.name for p in self.B.iterdir()), sorted(p.name for p in self.C.iterdir()))
+        self.assertIn('row("(E) house size (county FinSize)"', self.read("build-here-siteplan.js", self.B))
+        self.assertNotIn("bh-scale-print", self.read("build-here-siteplan.js", self.B))
+        for n in ("build-here-geom.js", "build-here-landscape.js", "build-here-rules.js", "build-here-stage.js"):
+            self.assertEqual((self.B / n).read_bytes(), (self.C / n).read_bytes(), n)
+
+    def test_no_raw_field_names_in_visible_strings(self):
+        import re
+        for n in ("build-here.js", "build-here-siteplan.js", "build-here-summary.js", "build-here-measures.js"):
+            js = self.read(n)
+            lits = re.findall(r'"(?:[^"\\\n]|\\.)*"', js)
+            bad = [s for s in lits if "FinSize" in s and s != '"countyFinSize"']  # a data key, never shown
+            self.assertEqual(bad, [], n)
+            self.assertNotIn("(GIS outline)", js, n)
+            self.assertNotIn("county GIS outline", js, n)
+            self.assertNotIn('"OSM"', js, n)
+            self.assertNotIn('"MS footprints"', js, n)
+            self.assertNotIn("FAR / GFA", js, n)
+            self.assertNotIn("no FAR limit", js, n)
+        self.assertIn('row("(E) house size (county record)"', self.read("build-here-siteplan.js"))
+        self.assertIn('label: "House size (county record)"', self.read("build-here-summary.js"))
+
+    def test_sp1_strings_have_no_dashes_to_strip(self):
+        sp = self.read("build-here-siteplan.js")
+        for n in ("build-here-siteplan.js", "build-here-summary.js", "build-here.js"):
+            self.assertNotIn(" \u2014 ", self.read(n), n)
+        self.assertNotIn('" · GIS ', sp)
+        # The white box behind the scale lines is sized to the longer line.
+        self.assertIn("Math.max(tw(scaleScreen, 10.5), tw(scalePrint, 10.5))", sp)
+        self.assertIn('" (cap not coded, verify)"', sp)
+
+    def test_scale_ratio_only_on_paper(self):
+        sp = self.read("build-here-siteplan.js")
+        screen = sp.split('var scaleScreen = ')[1].split(";")[0]
+        self.assertNotIn("1 in = ", screen)
+        self.assertIn("Measure with the bar", screen)
+        self.assertIn("1 in = ", sp.split('var scalePrint = ')[1].split(";")[0])
+        self.assertIn('<g class="bh-scale-screen">\' + T(sx0 + 2 * u + 16, sy0 + 7, scaleScreen', sp)
+        self.assertIn('<g class="bh-scale-print" display="none">', sp)
+        css = self.read("build-here.css")
+        self.assertIn(".bh-scale-print{display:none}", css)
+        pr = css.rsplit("@media print{", 1)[1]
+        self.assertIn(".bh-scale-screen{display:none!important}", pr)
+        self.assertIn(".bh-scale-print{display:inline!important}", pr)
+        ex = self.read("build-here-export.js")
+        self.assertIn(".bh-scale-print{display:none}", ex)
+        self.assertIn(".bh-scale-print{display:inline!important}", ex)
+        # The saved file prints the drawing at the width the scale was computed for (PRINT_W_IN).
+        self.assertIn("PRINT_W_IN = 10.30", sp)
+        self.assertIn(".bh-sheet-svg{width:10.30in;height:7.33in;border:0}", ex)
+        self.assertNotIn("10.16in", ex)
+
+    def test_footer_never_overlaps_or_wraps_a_label(self):
+        css = self.read("build-here.css")
+        self.assertIn(".bh-foot-place,.bh-foot-pg,.bh-page-foot strong{white-space:nowrap}", css)
+        self.assertIn(".bh-foot-logo{flex:none;margin-right:0}", css)
+        self.assertIn(".bh-page-foot{flex-wrap:wrap;row-gap:.35rem}", css)
+        js = self.read("build-here.js")
+        self.assertIn('<span class="bh-foot-place">', js)
+        self.assertIn('<span class="bh-foot-pg">', js)
+
+    def test_heading_has_no_focus_box(self):
+        css = self.read("build-here.css")
+        self.assertIn("#bh-step3:focus,#bh-step3:focus-visible,.bh-report:focus,.bh-report:focus-visible{outline:none}", css)
+        # Real controls keep their keyboard outline.
+        self.assertIn(".bh-input:focus-visible,.bh-btn:focus-visible{outline:3px solid", css)
+
+    def test_seven_sheets_fit_seven_pages(self):
+        pr = self.read("build-here.css").rsplit("@media print{", 1)[1]
+        self.assertIn(".bh-page{min-height:7.7in!important;max-height:7.8in;box-sizing:border-box!important;border:0!important;box-shadow:none!important}", pr)
+        self.assertIn(".bh-page-foot{flex-wrap:nowrap!important}", pr)
+        ex = self.read("build-here-export.js")
+        self.assertIn("@media print{.bh-page-foot{flex-wrap:nowrap!important;", ex)
+        self.assertIn(".bh-foot-logo{height:.24in}.bh-sheet-svg{display:block}", ex)
+        # The saved file carries the cover styles, so its cover prints on one page.
+        self.assertIn(".bh-cover-art img{display:block;max-width:100%;max-height:3.4in", ex)
+        self.assertIn(".bh-sheet .bh-page-foot,.bh-facts .bh-page-foot{padding:3pt 0 0!important", pr)
+        # 7.33 in drawing + compact footer stays under the 7.8 in printable height.
+        self.assertIn(".bh-sheet .bh-sheet-svg{width:10.30in!important;height:7.33in!important;border:0!important}", self.read("build-here.css"))
