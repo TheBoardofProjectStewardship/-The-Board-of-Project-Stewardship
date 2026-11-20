@@ -33,7 +33,18 @@
 .bh-page{background:#fbfaf7;color:#1f2933;border-radius:.25rem;box-shadow:0 10px 30px rgba(0,0,0,.45);display:flex;flex-direction:column;min-height:min(70vw,42rem);font-family:Inter,system-ui,sans-serif}
 .bh-study-page{position:relative;box-sizing:border-box}
 .bh-page-body{padding:1.75rem 2.25rem 1.25rem;flex:1}
-.bh-page-foot{display:flex;gap:1rem;align-items:baseline;justify-content:space-between;border-top:1px solid #d6d3cb;padding:.75rem 2.25rem;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#52606d}
+.bh-page-foot{display:flex;gap:.6rem;align-items:center;justify-content:space-between;border-top:1px solid #111;padding:.45rem 1.25rem;font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:#111}
+.bh-foot-logo{height:.32in;width:auto;vertical-align:middle;margin-right:.35rem}
+.bh-brand{display:inline-flex;align-items:center;gap:.35rem}
+
+/* Cover. Colors and sizes sit on the section so a later stylesheet can restyle them in one place. */
+.bh-cover{--bh-cover-ink:#111;--bh-cover-muted:#333;color:var(--bh-cover-ink);background:#fff}
+.bh-cover-art img{display:block;width:100%;max-height:3.7in;object-fit:contain;object-position:center bottom}
+.bh-cover-copy{padding:.15in 0 0}
+.bh-cover-logo{height:.62in;width:auto;display:block;margin:0 0 .2in}
+.bh-cover h2{margin:0;font-size:1.35rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--bh-cover-ink)}
+.bh-cover-address{font-size:1rem;font-weight:700;margin:.25rem 0 .1rem}
+.bh-cover-date,.bh-cover-firm,.bh-cover-copy p{color:var(--bh-cover-muted);margin:.12rem 0}
 .bh-page-foot strong{color:#102a1c;letter-spacing:.18em;font-weight:800}
 .bh-brand{margin-left:auto;color:#166534;font-weight:800;letter-spacing:.06em;text-transform:none}
 .bh-page h3{font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:#166534;font-weight:800;margin:.95rem 0 .35rem}
@@ -72,6 +83,17 @@
 .bh-aerial-frame svg{position:absolute;inset:0;width:100%;height:100%}
 .bh-outline{fill:rgba(250,204,21,.08);stroke:#facc15;stroke-width:3}
 .bh-aerial figcaption{font-size:.72rem;color:#616e7c;margin-top:.4rem;line-height:1.4}
+.bh-3d-panel{margin:0 0 1.25rem;background:#fff;color:#111;border:1px solid #111;padding:.75rem}
+.bh-3d-panel h2{margin:0 0 .35rem;font-size:1rem;letter-spacing:.12em;text-transform:uppercase}
+.bh-3d-view{width:100%;min-height:280px;background:#fff;touch-action:none}
+.bh-3d-view canvas{display:block;width:100%;height:auto;cursor:grab}
+.bh-3d-google{width:100%;height:360px;margin-top:.5rem;background:#fff}
+.bh-3d-google gmp-map-3d{width:100%;height:360px;display:block}
+.bh-3d-legend{list-style:none;margin:.5rem 0 0;padding:0;font-size:.78rem;line-height:1.4}
+.bh-3d-legend li{margin:.15rem 0}
+.bh-3d-shot{display:block;width:100%;max-height:6.2in;object-fit:contain;background:#fff;border:1px solid #111}
+.bh-lot-diagram{margin:0 0 .6rem}
+.bh-lot-diagram .bh-lot-svg,.bh-lot-diagram .bh-siteplan{width:100%;max-height:2.45in;border:1px solid #111;background:#fff}
 .bh-siteplan{width:100%;max-width:100%;height:auto;background:#fff;border:1px solid #e4e1d8;overflow:visible}
 .bh-lot{fill:#f3f1ea;stroke:#1f2933;stroke-width:2}
 .bh-env{fill:rgba(22,101,52,.28);stroke:none}
@@ -320,7 +342,10 @@
   .bh-details-page .bh-permits td{font-size:9.5pt!important;padding:2.5pt 3.5pt!important}
 
   /* SP-1 Site Plan sheet (Page 3) */
-  .bh-sheet .bh-sheet-svg{width:10.16in!important;height:7.7in!important;border:0!important}
+  .bh-sheet .bh-sheet-svg{width:10.16in!important;height:7.15in!important;border:0!important}
+  .bh-cover-art img{max-height:3.55in!important;filter:grayscale(1)}
+  .bh-cover h2{font-size:16pt!important}
+  .bh-cover-copy p{font-size:9pt!important}
 
   /* F-1 Property Facts sheet (Page 2) */
   .bh-facts-head{border-bottom-width:3px;padding-bottom:2pt}
@@ -338,7 +363,20 @@
   .bh-facts .bh-facts-foot p{font-size:6.6pt}
   .bh-facts .bh-facts-disc{font-size:6.2pt}
 
-  .bh-stage-fade{position:static!important;background:#eef5ef!important;color:#102a1c!important}
+  /* Print is black and white. Meaning is in the words (verify, county record, not measured), not in a color.
+     A CSS filter is not used: Chrome rasterizes a filtered page and the sheet stops being text. */
+  .bh-print-copy .bh-page,.bh-print-copy .bh-facts,.bh-print-copy .bh-sheet{color:#000!important;background:#fff!important}
+  .bh-print-copy h2,.bh-print-copy h3,.bh-print-copy th,.bh-print-copy .bh-brand,.bh-print-copy .bh-s-missing,.bh-print-copy .bh-s-verify,.bh-print-copy .bh-verify,.bh-print-copy .bh-tbd{color:#000!important;background:transparent!important}
+  .bh-print-copy .bh-s-missing,.bh-print-copy .bh-s-verify,.bh-print-copy .bh-verify{font-style:italic}
+  .bh-print-copy .bh-tbd{border:1px solid #000}
+  .bh-print-copy .bh-lot-diagram .bh-edge,
+  .bh-print-copy .bh-lot-diagram .bh-env,
+  .bh-print-copy .bh-lot-diagram .bh-lot{stroke:#111!important}
+  .bh-print-copy .bh-lot-diagram .bh-env{fill:none!important}
+  .bh-print-copy .bh-lot-diagram .bh-lot{fill:#fff!important}
+  .bh-print-copy .bh-key,.bh-print-copy .bh-key-front,.bh-print-copy .bh-key-street,.bh-print-copy .bh-key-side,.bh-print-copy .bh-key-rear{border-top-color:#111!important;background:none!important}
+  .bh-print-copy .bh-key-env{background:#fff!important;border:1px dashed #111!important}
+  .bh-stage-fade{position:static!important;background:#fff!important;color:#000!important}
   .bh-stage-fade h2,.bh-stage-fade .bh-kicker,.bh-stage-fade .bh-stage-place,.bh-stage-fade .bh-stage-date,.bh-stage-fade p{color:#102a1c!important}
   .bh-scenario-thumb .bh-thumb{max-width:1.7in}
 }

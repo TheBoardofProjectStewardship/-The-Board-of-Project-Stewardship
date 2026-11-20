@@ -346,7 +346,7 @@
     if (b.phone) bits.push(esc(b.phone));
     if (b.site) bits.push(esc(String(b.site).replace(/^https?:\/\//i, "").replace(/\/$/, "")));
     if (b.license) bits.push("WA contractor reg. " + esc(b.license));
-    return '<p class="' + (cls || "bh-contact") + '">' + (b.name ? "<strong>" + esc(b.name) + (b.tagline ? " · " + esc(b.tagline) : "") + "</strong>" + (bits.length ? " · " : "") : "") + bits.join(" · ") + "</p>";
+    return '<p class="' + (cls || "bh-contact") + '"><img class="bh-foot-logo" src="/assets/feasibility/pacific-pro-group-logo.png" alt="Pacific Pro Group"> ' + (b.name ? "<strong>" + esc(b.name) + (b.tagline ? " · " + esc(b.tagline) : "") + "</strong>" + (bits.length ? " · " : "") : "") + bits.join(" · ") + "</p>";
   }
   function blockHtml(name, rows) {
     return '<div class="bh-facts-block"><h3>' + esc(name) + '</h3><table class="bh-facts-table"><tbody>' + rows.map(function (r) {
@@ -363,7 +363,7 @@
     var totalPages = opts.totalPages || 6;
     var sampleTxt = F.isSample ? " · SAMPLE LAYOUT — NOT A PROPERTY RECORD" : "";
     return '<section class="bh-page bh-facts" data-sheet="F-1" data-page="' + esc(pageNum) + '" data-total="' + esc(totalPages) + '"><header class="bh-facts-head"><div><h2>Property facts</h2><p>' + esc(F.address) + (F.parcel ? " · Parcel " + esc(F.parcel) : "") + (F.preparedText ? " · Prepared " + esc(F.preparedText) : "") + esc(sampleTxt) + '</p></div><div class="bh-facts-id" aria-hidden="true">F-1 · ' + esc(pageLabel) + '</div></header>' +
-      '<p class="bh-facts-key"><span class="bh-s-est">≈ estimate from public data</span> · <span class="bh-s-partial">≥ a total that lacks a part</span> · <span class="bh-s-missing">orange: not in public data, or verify</span></p>' +
+      '<p class="bh-facts-key"><span class="bh-s-est">≈ estimate from public data</span> · <span class="bh-s-partial">≥ a total that lacks a part</span> · <span class="bh-s-missing">marked verify: not in public data, or confirm</span></p>' +
       '<div class="bh-facts-cols"><div>' + blockHtml("Building", B.building) + "</div><div>" + blockHtml("Remodel", B.remodel) + blockHtml("Landscaping", B.landscaping) + blockHtml("Roofing", B.roofing) + "</div></div>" +
       '<p class="bh-facts-visit"><strong>' + esc(b.name ? b.name + " confirms on site" : "Confirmed on site") + ":</strong> " + esc(B.visit.items.join(" · ")) + ".</p>" +
       '<footer class="bh-facts-foot">' + contactHtml(b) + '<p class="bh-facts-disc">Planning estimate from public records; not a survey or permit determination. Verify with ' + esc(F.place) + " · <strong>" + esc(pageLabel) + "</strong></p></footer></section>";

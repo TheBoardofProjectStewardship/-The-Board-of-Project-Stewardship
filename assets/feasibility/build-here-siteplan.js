@@ -30,8 +30,9 @@
   var COL = { x: 1066, y: 116, w: 544, h: 930 };
   var TB = { x: 40, y: 1066, w: 1570, h: 144 };
   var SCALES = [8, 10, 16, 20, 30, 40, 50, 60, 80, 100, 150, 200, 300, 400, 500, 600, 800, 1000];
-  var INK = "#2f3a3a", MUTE = "#5b6460", RULE = "#8b8878", GREEN = "#2f6b45", GREEN_FILL = "#dfe9df", TAN = "#b3a58a", EARTH = "#7a6a4f";
-  var ORANGE = "#b8650a", PAPER = "#fbfaf6", GREY = "#ecece8", GREY_LINE = "#a9ada8", ROAD = "#e6e5df", HAZ = "#b3261e";
+  /* Grayscale only. A verify row says "(verify)"; a hazard is named in the legend. Color is not the signal. */
+  var INK = "#111111", MUTE = "#444444", RULE = "#666666", GREEN = "#222222", GREEN_FILL = "#eeeeee", TAN = "#777777", EARTH = "#555555";
+  var ORANGE = "#111111", PAPER = "#ffffff", GREY = "#dddddd", GREY_LINE = "#888888", ROAD = "#eeeeee", HAZ = "#333333";
   var FONT = "Montserrat, 'Helvetica Neue', Helvetica, Arial, sans-serif";
   var MISSING = "not in public data — verify";
 
@@ -963,7 +964,7 @@
     if (used.paving) L.push({ sym: '<rect x="0" y="-1" width="40" height="12" fill="#e2e0d9" stroke="#bdbbb2" stroke-width="0.8"/>', text: "Mapped driveway / paving (approx.)" });
     if (used.hazards) L.push({ sym: '<rect x="0" y="-1" width="40" height="12" fill="' + HAZ + '" fill-opacity="0.08" stroke="' + HAZ + '" stroke-width="1" stroke-dasharray="4 3"/>', text: "Mapped critical area (see the facts sheet)" });
     if (used.trees) L.push({ sym: '<circle cx="20" cy="5" r="6" fill="none" stroke="' + GREEN + '" stroke-width="1" stroke-dasharray="3 2"/>', text: "Mapped tree (OpenStreetMap; crown not to scale)" });
-    L.push({ sym: '<text x="0" y="9" font-size="12" fill="' + ORANGE + '">abc</text>', text: "Orange = not in public data, or verify" });
+    L.push({ sym: '<text x="0" y="9" font-size="12" fill="' + INK + '">(verify)</text>', text: "(verify) = not in public data, or confirm on site" });
     return L;
   }
   /* The whole sheet. o: { F, opt, placed, tables, sheet, title, kicker } */

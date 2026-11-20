@@ -164,7 +164,7 @@ t.ok("the same figures follow as text", /bh-screen-only bh-sheet-twin/.test(svg)
 t.ok("the buildable area is captioned", /BUILDABLE AREA ≈ 7,7[0-9]0 SF/.test(svg), (svg.match(/BUILDABLE AREA[^<]*/) || [""])[0]);
 t.ok("the fall of the ground is noted as approximate", /GROUND FALLS ≈ 19&#39; ±/.test(svg));
 var svgHz = SP.svg(modelOf(s, rs, { hazards: [{ label: "Steep slope", rings: [fx.rectLL(20, -39, 60, 0)] }] }), { F: F });
-t.ok("a mapped hazard area is hatched and in the legend", /Mapped critical area/.test(svgHz) && /stroke="#b3261e"/.test(svgHz));
+t.ok("a mapped hazard area is hatched and in the legend", /Mapped critical area/.test(svgHz) && /stroke="#333333"/.test(svgHz));
 /* A concept is kept off mapped hazard ground while there is anywhere else for it to go. */
 function onGround(P, x0, y0, x1, y1) {
   // Samples the placed rectangle and says whether any point of it lies inside the box (a third of a foot in from its edge).

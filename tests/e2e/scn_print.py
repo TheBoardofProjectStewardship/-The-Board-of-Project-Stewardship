@@ -72,12 +72,17 @@ try:
         # The feasibility study is a separate page from the interactive tool. It prints six landscape sheets.
         page.emulate_media(media="screen")
         page.goto("http://127.0.0.1:%d/feasibility-study.html?sample=2" % port)
-        page.wait_for_selector("#bh-report .bh-page")
+        page.wait_for_selector("#bh-report .bh-cover")
+        page.wait_for_function("""() => {
+          const imgs = [...document.querySelectorAll('#bh-report img')];
+          return imgs.length >= 2 && imgs.every(img => img.complete && img.naturalWidth > 0);
+        }""")
         res["study"] = page.evaluate("""() => {
           const root = document.getElementById('bh-report');
           const pages = [...root.querySelectorAll('.bh-page')];
           const label = (el) => { const m = el.textContent.match(/Page \\d+ of \\d+/); return m ? m[0] : ''; };
           const text = root.textContent;
+          const logos = [...root.querySelectorAll('img.bh-foot-logo, img.bh-cover-logo')];
           return {
             pages: pages.length,
             labels: pages.map(label),
@@ -89,7 +94,13 @@ try:
             ppg: /\\bPPG\\b/.test(text),
             turf: /turf|lawn/i.test(text),
             permit: /Permit history and plan sets/.test(text),
-            listingOff: /no listing data service connected/.test(text)
+            listingOff: /no listing data service connected/.test(text),
+            cover: !!(pages[0] && pages[0].classList.contains('bh-cover') && /Feasibility Study/.test(pages[0].textContent)),
+            logoCount: logos.length,
+            logoOk: logos.length > 0 && logos.every(img => img.naturalWidth > 0),
+            massing: !!document.querySelector('#bh-3d canvas'),
+            shot: !!((document.getElementById('bh-3d-shot') || {}).src || '').startsWith('data:image'),
+            googleOff: !document.querySelector('script[src*="maps.googleapis.com"]') && /No Google Maps key/.test((document.getElementById('bh-3d-legend') || {}).textContent || '')
           };
         }""")
         res["studyErrors"] = list(page.errors)

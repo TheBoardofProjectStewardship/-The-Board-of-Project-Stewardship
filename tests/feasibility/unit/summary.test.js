@@ -135,7 +135,8 @@ t.ok("the facts sheet is page 2 of 6 and does not say PPG", /Page 2 of 6/.test(a
 t.ok("no owner name on the sheet", a.html.indexOf("CANARY") < 0);
 t.ok("no top-of-wall or bottom-of-wall wording", !/\bTOW\b|\bBOW\b/.test(a.html));
 var evil = fx.state(); evil.matched = '5514 <img src=x onerror=alert(1)> AVE, REDMOND, WA, 98052';
-t.ok("record text is escaped", !/<img/.test(Sum.factsSheet(Sum.facts(evil, a.v, a.rs, a.ctx, { brand: fx.BRAND }, a.M))));
+var evilHtml = Sum.factsSheet(Sum.facts(evil, a.v, a.rs, a.ctx, { brand: fx.BRAND }, a.M));
+t.ok("record text is escaped", /&lt;img src=x onerror=alert\(1\)&gt;/.test(evilHtml) && !/<img src=x/.test(evilHtml));
 t.ok("contact links refuse anything that is not a phone, an email or a web address", Sum.telHref("javascript:alert(1)") === "" && Sum.mailHref("a@b.co\"><script>") === "" && Sum.siteHref("pacificprogroup.com") === "https://pacificprogroup.com");
 
 /* ---- next step tied to the result ---- */

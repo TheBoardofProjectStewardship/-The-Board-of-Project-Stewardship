@@ -154,5 +154,7 @@ var noFacts = BH.stampStudyPages([
   sec("bh-details-page", 5)
 ]);
 t.ok("SP-1's own label moves when a page ahead of it drops", /data-page="2"/.test(noFacts[1]) && /Page 2 of 3/.test(noFacts[1]) && !/Page 3 of 6/.test(noFacts[1]) && /See page 3\./.test(noFacts[0]));
+var seven = BH.stampStudyPages([sec("", 1), sec("", 2), sec("", 3), sec("", 4), sec("", 5), sec("", 6), sec("", 6)]);
+t.ok("a seventh page is Page 7 of 7", seven.length === 7 && /Page 7 of 7/.test(seven[6]) && /data-total="7"/.test(seven[0]));
 
 t.done();
