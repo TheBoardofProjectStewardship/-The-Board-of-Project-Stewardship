@@ -2075,13 +2075,18 @@
         pageLabel: "Page " + (out.length + 1) + " of " + TOTAL_PAGES,
         pageNum: out.length + 1,
         totalPages: TOTAL_PAGES
-      }).html.replace("</section>", foot("Preliminary site plan", out.length + 1) + "</section>"));
+      }).html.replace("</section>", foot("Preliminary site plan", out.length + 1) + "</section>")
+        // A parcel matched by location (or any parcel warning) is flagged on this first sheet too, on screen and in the saved file.
+        // Paper skips it (.bh-sheet-alert): the sheet fills the page, and the next page prints the same warning.
+        .replace(/^(<section\b[^>]*>)/, (s.parcelWarn || (s.landscape && s.landscape.warn)) ? '$1<p class="bh-verify bh-alert-box bh-sheet-alert" role="alert"><strong>' + esc(s.parcelWarn || s.landscape.warn).replace(/\$/g, "$$$$") + "</strong></p>" : "$1"));
     }
+    var hasSP1 = !!(M && F && SP);
 
     /* ---------- EXISTING LOT (setback key + area + slope on one sheet) ---------- */
     var rLand = s.landscape || { rows: [], notes: [], slope: { ok: false, note: "not measured" }, flags: [] };
-    var p1Left = "<h3>Setback key</h3>" + '<div class="bh-lot-diagram">' + sitePlanSVG(s, rs) + sitePlanKey(s, rs) + "</div>" +
-      '<p class="bh-muted">Setback key drawn from the county parcel and mapped footprints. Sheet SP-1 is the scaled site plan. Not a survey.</p>';
+    var p1Left = "<h3>" + (hasSP1 ? "Setback key" : "Site diagram") + "</h3>" + '<div class="bh-lot-diagram">' + sitePlanSVG(s, rs) + sitePlanKey(s, rs) + "</div>" +
+      (hasSP1 ? '<p class="bh-muted">Setback key drawn from the county parcel and mapped footprints. Sheet SP-1 is the scaled site plan. Not a survey.</p>'
+        : '<p class="bh-muted">Line diagram from the county parcel and mapped footprints. Not a survey.</p>');
     var p1Right = "";
     if (s.isSample) p1Right += '<p class="bh-verify bh-alert-box"><strong>Sample layout only — these numbers are not a property record.</strong></p>';
     if (s.parcelWarn || rLand.warn) p1Right += '<p class="bh-verify bh-alert-box" role="alert"><strong>' + esc(s.parcelWarn || rLand.warn) + "</strong></p>";

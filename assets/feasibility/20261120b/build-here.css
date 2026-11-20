@@ -242,6 +242,7 @@
 
 /* Print layout: scoped strictly to body.bh-printing, #bh-print-host and .bh-* so host pages print normally */
 @media print{
+  .bh-sheet-alert{display:none!important}
   body.bh-printing{background:#fff!important}
   body.bh-printing>*:not(#bh-print-host){display:none!important}
   body.bh-printing>#bh-print-host{display:block!important}

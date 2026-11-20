@@ -28,7 +28,7 @@
   var SHEET_W = 1650, SHEET_H = 1175, PRINT_W_IN = 10.30, UPI = SHEET_W / PRINT_W_IN;
   var PLAN = { x: 40, y: 108, w: 1000, h: 930 };
   var COL = { x: 1066, y: 108, w: 544, h: 930 };
-  var TB = { x: 40, y: 1054, w: 1570, h: 106 };
+  var TB = { x: 40, y: 1044, w: 1570, h: 126 }; // 20261120b: tall enough for its last text line (was y 1054, h 106, which cut off the bottom row)
   var SCALES = [8, 10, 16, 20, 30, 40, 50, 60, 80, 100, 150, 200, 300, 400, 500, 600, 800, 1000];
   /* Grayscale only. A verify row says "(verify)"; a hazard is named in the legend. Color is not the signal. */
   var INK = "#111111", MUTE = "#444444", RULE = "#666666", GREEN = "#222222", GREEN_FILL = "#eeeeee", TAN = "#777777", EARTH = "#555555";
@@ -1013,13 +1013,13 @@
     var disc2 = o.noSources
       ? ("Verify with " + (F.place || "the jurisdiction") + "." + (F.isSample ? " SAMPLE LAYOUT — NOT A PROPERTY RECORD." : ""))
       : ("Not a survey or a permit drawing. Verify with " + (F.place || "the jurisdiction") + ".");
-    out.push(T(bx, ty + 108, clip(disc1, 130), { size: 11, fill: ORANGE, fit: twMin(clip(disc1, 130), 11) > 830 ? 830 : 0 }) + T(bx, ty + 124, clip(disc2, 130), { size: 11, fill: ORANGE }));
+    out.push(T(bx, ty + 104, clip(disc1, 130), { size: 11, fill: ORANGE, fit: twMin(clip(disc1, 130), 11) > 830 ? 830 : 0 }) + T(bx, ty + 119, clip(disc2, 130), { size: 11, fill: ORANGE }));
     var px = TB.x + 1140, addr = String(F.address || "").toUpperCase();
     var rightMeta = [String(F.placeShort || "").toUpperCase(), F.stateAbbr || "", o.pageLabel || "SITE PLAN"].filter(Boolean).join(" | ");
     out.push(T(px, ty + 26, "PROJECT", { size: 10.5, fill: MUTE, ls: 1.2 }) + T(px, ty + 46, clip(addr, 48), { size: 14, weight: 700, fit: twMin(clip(addr, 48), 14) > 410 ? 410 : 0 }) +
       T(px, ty + 70, "PREPARED", { size: 10.5, fill: MUTE, ls: 1.2 }) + T(px, ty + 89, clip((F.preparedText || F.prepared || "") + " · auto-generated study", 56), { size: 13 }) +
-      T(px, ty + 126, "SHEET", { size: 10.5, fill: MUTE, ls: 1.2 }) + T(px + 56, ty + 128, o.sheet || "SP-1", { size: 24, weight: 700 }) +
-      T(px + 150, ty + 126, clip(rightMeta, 38), { size: 11.5, ls: 1.5, fill: MUTE }));
+      T(px, ty + 114, "SHEET", { size: 10.5, fill: MUTE, ls: 1.2 }) + T(px + 56, ty + 116, o.sheet || "SP-1", { size: 24, weight: 700 }) +
+      T(px + 150, ty + 114, clip(rightMeta, 38), { size: 11.5, ls: 1.5, fill: MUTE }));
     out.push("</svg>");
     return out.join("");
   }
