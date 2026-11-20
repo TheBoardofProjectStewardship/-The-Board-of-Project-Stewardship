@@ -1822,12 +1822,14 @@
     var zoneEdited = !!v.zone && v.zone !== (s.zone || "");
     var place = s.city ? s.city.toUpperCase() : (s.county ? (/(County|Parish|Borough|Census Area|Municipality)$/i.test(s.county) ? s.county : s.county + " County").toUpperCase() : "PLACE NOT MATCHED");
     var sampleBadge = s.isSample ? " · SAMPLE LAYOUT — NOT A PROPERTY RECORD" : "";
-    var TOTAL_PAGES = 6;
+    var TOTAL_PAGES = 7;
     var contactBrand = [CFG.brand || "Pacific Pro Group", CFG.phone || "(206) 446-5656", CFG.site || "pacificprogroup.com", CFG.license ? "WA Reg. # " + CFG.license : ""].filter(Boolean).join(" · ");
     var footLogo = '<img class="bh-foot-logo" src="/assets/feasibility/pacific-pro-group-logo.png" alt="Pacific Pro Group">';
     var foot = function (title, pageNum) {
       var pLabel = "Page " + pageNum + " of " + TOTAL_PAGES;
-      return '<footer class="bh-page-foot"><span class="bh-foot-left"><span class="bh-foot-place">' + esc(place) + " | " + esc(s.stateAbbr || "US") + '</span><strong>' + esc(title) + "</strong><span class=\"bh-foot-pg\"> · " + esc(pLabel) + (s.isSample ? " · SAMPLE" : "") + '</span></span><span class="bh-brand">' + footLogo + "<span>" + esc(contactBrand) + "</span></span></footer>";
+      // A real separator. The place span and the title used to be adjacent tags, so print
+      // read "REDMOND | WACOVER" and "SEATTLE | WACONCEPTUAL INTERIOR".
+      return '<footer class="bh-page-foot"><span class="bh-foot-left"><span class="bh-foot-place">' + esc(place) + " | " + esc(s.stateAbbr || "US") + '</span><span class="bh-foot-gap">\u00a0·\u00a0</span><strong>' + esc(title) + '</strong><span class="bh-foot-pg">\u00a0·\u00a0' + esc(pLabel) + (s.isSample ? "\u00a0·\u00a0SAMPLE" : "") + '</span></span><span class="bh-brand">' + footLogo + "<span>" + esc(contactBrand) + "</span></span></footer>";
     };
     var page = function (title, body, cls, pageNum) {
       return '<section class="bh-page bh-study-page ' + (cls || "") + '" data-page="' + pageNum + '" data-total="' + TOTAL_PAGES + '"><div class="bh-page-body">' + body + "</div>" + foot(title, pageNum) + "</section>";
@@ -2136,30 +2138,11 @@
       massRows.map(function (r) { return '<tr><th scope="row">' + r[0] + "</th><td>" + r[1] + "</td></tr>"; }).join("") + "</table>";
 
     out.push(page("Site coverage and massing", '<div class="bh-cols"><div>' + p6Left + "</div><div>" + p6Right + "</div></div>", "bh-massing-page", out.length + 1));
-    var interiorPlan = null;
-    if (window.BuildHereInterior && landGeo && landGeo.buildings) {
-      var houseB = null, garageRings = [];
-      landGeo.buildings.forEach(function (b) { if (b.role === "house" && !houseB) houseB = b; else if (b.role === "garage" && b.ring) garageRings.push(b.ring); });
-      var addPlaced = placedBy.addition && placedBy.addition.ok && placedBy.addition.ring && !placedBy.addition.over && !placedBy.addition.existing ? { ring: placedBy.addition.ring } : null;
-      var showUpper = (v.stories && v.stories >= 2) || !!(optBy.addition && optBy.addition.feasible && optBy.addition.footprintSf === 0) || v.type === "secondStory";
-      if (houseB && houseB.ring) interiorPlan = BuildHereInterior.plan(houseB.ring, { stories: v.stories, showUpper: showUpper, front: s.geo && s.geo.ce ? { nx: s.geo.ce.fnx, ny: s.geo.ce.fny } : null, garageRings: garageRings, addition: addPlaced });
-    }
-    if (interiorPlan && interiorPlan.levels && interiorPlan.levels.length) {
-      out.push(page("Conceptual interior", "<h3>Conceptual interior</h3>" + BuildHereInterior.svg(interiorPlan), "bh-interior-page", out.length + 1));
-    }
-    var massSpec = window.BuildHereMassing ? BuildHereMassing.spec(s, s.geo) : null;
-    if (massSpec && interiorPlan) massSpec.interior = interiorPlan;
-    if (massSpec) massSpec.onRoom = function (room) {
-      var box = $("bh-3d-room");
-      if (box) box.textContent = room.name + ": " + room.purpose + " Approx. " + Math.round(room.w) + " ft by " + Math.round(room.d) + " ft. Conceptual — verify on site.";
-    };
-    if (massSpec) {
-      out.push(page("House and property", '<h3>House and property</h3><p id="bh-3d-print-note">' + esc(massSpec.caption) + '</p><img id="bh-3d-shot" class="bh-3d-shot" alt="Isometric massing of the parcel and the buildings whose footprints are on record">', "bh-massing-shot", out.length + 1));
-    }
 
-    /* Page numbers are written as if all six sheets exist. A missing drawing (no parcel outline, so no
-       SP-1) or a missing facts sheet drops a page. Stamp the pages that were actually built, including the
-       site-plan title block, which is baked into the SVG before this pass. */
+    /* Page numbers are written for the seven-page study (cover through site coverage). A missing drawing
+       (no parcel outline, so no SP-1), a missing facts sheet, or an extra permit page changes the count.
+       Stamp the pages that were actually built, including the site-plan title block, which is baked into
+       the SVG before this pass. */
     out = stampStudyPages(out);
 
     s.sheetDrawn = !!(M && M.ok);
@@ -2175,62 +2158,8 @@
     if ($("bh-lead-address") && !$("bh-lead-address").value) $("bh-lead-address").value = s.matched || s.input;
     if ($("bh-cta-bar")) $("bh-cta-bar").hidden = false;
     if ($("bh-lead-card")) $("bh-lead-card").hidden = false;
-    showMassing(s, massSpec);
     watchSheet(s);
-  }
-  function legendItems(s, spec) {
-    var geo = s.landscape && s.landscape.geo;
-    var src = geo && geo.src && geo.src.buildings ? geo.src.buildings : "no building outline layer answered for this lot";
-    var height = spec.buildings && spec.buildings[0] ? spec.buildings[0].label : "No building mass is drawn.";
-    var items = [
-      "Parcel: " + (s.lotSrc || "the parcel outline on this study") + ".",
-      "Footprint: " + src + ".",
-      "Height: " + height,
-      spec.dem ? "Ground: the elevation samples already read for this lot." : "Ground: no elevation grid was available, so the lot is flat in the free model."
-    ];
-    if (spec.roof && spec.roof.note) items.push(spec.roof.note);
-    if (!String(CFG.googleMapsKey || "").trim()) items.push("Photorealistic layer: off. No Google Maps key is set. The free massing model is the view, and nothing is sent to Google.");
-    else {
-      var g = spec.google || {};
-      items.push("Photorealistic layer: Google 3D Maps (" + (g.map || "not requested") + "). Solar buildingInsights: " + (g.solar || "not requested") + ".");
-    }
-    return items;
-  }
-  function showMassing(s, spec) {
-    var panel = $("bh-3d-panel"), view = $("bh-3d"), note = $("bh-3d-note"), legend = $("bh-3d-legend");
-    var finish = function (ready) {
-      if (panel && ready) panel.hidden = false;
-      if (note && ready) note.textContent = ready.caption || "";
-      if (legend && ready) legend.innerHTML = legendItems(s, ready).map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("");
-      var mounted = (view && ready && window.BuildHereMassing) ? BuildHereMassing.mount(view, ready) : null;
-      var img = $("bh-3d-shot"), printNote = $("bh-3d-print-note");
-      if (printNote && ready) printNote.textContent = ready.caption || "";
-      if (mounted && img) {
-        var url = mounted.snapshot();
-        if (url) img.src = url;
-      }
-      var roofOn = true;
-      var roofBtn = $("bh-3d-roof");
-      if (roofBtn) roofBtn.onclick = function () { roofOn = !roofOn; if (mounted && mounted.setRoof) mounted.setRoof(roofOn); };
-      [].forEach.call(document.querySelectorAll("#bh-3d-panel [data-floor]"), function (btn) {
-        btn.onclick = function () { if (mounted && mounted.setFloor) mounted.setFloor(btn.getAttribute("data-floor")); };
-      });
-      [].forEach.call(document.querySelectorAll("#bh-3d-panel [data-mode]"), function (btn) {
-        btn.onclick = function () {
-          var mode = btn.getAttribute("data-mode");
-          if (mounted && mounted.setMode) mounted.setMode(mode);
-          var gHost = $("bh-3d-google"), viewEl = $("bh-3d");
-          if (gHost) gHost.hidden = mode !== "google";
-          if (viewEl) viewEl.hidden = mode === "google";
-        };
-      });
-      s.massingCaption = ready && ready.caption || "";
-      syncPrint();
-    };
-    if (!spec) { syncPrint(); return; }
-    var G3 = window.BuildHereGoogle3D;
-    if (G3 && String(CFG.googleMapsKey || "").trim()) G3.enhance(spec, s, CFG).then(finish, function () { finish(spec); });
-    else finish(spec);
+    syncPrint();
   }
   /* bh_siteplan_view: once per lookup, when half of the site plan drawing is on screen. The drawing is
      watched, not its page: on a phone the page also holds the tables as text and is several screens tall. */

@@ -34,6 +34,8 @@
 .bh-study-page{position:relative;box-sizing:border-box}
 .bh-page-body{padding:1.75rem 2.25rem 1.25rem;flex:1}
 .bh-page-foot{display:flex;gap:.6rem;align-items:center;justify-content:space-between;border-top:1px solid #111;padding:.45rem 1.25rem;font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:#111}
+.bh-foot-left{display:inline-flex;align-items:baseline;gap:.45rem;min-width:0}
+.bh-foot-gap{white-space:pre;flex:none}
 .bh-foot-logo{height:.32in;width:auto;vertical-align:middle;margin-right:.35rem}
 .bh-brand{display:inline-flex;align-items:center;gap:.35rem}
 
@@ -65,7 +67,7 @@
 .bh-table thead th{font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;color:#111;border-bottom:1.5px solid #111}
 .bh-rules th[scope=row]{width:24%}
 
-/* Page-specific and table-specific classes for the 6-page feasibility study */
+/* Page-specific and table-specific classes for the 7-page feasibility study */
 .bh-existing-lot-page .bh-page-body{padding-top:1.5rem}
 .bh-what-you-can-build-page .bh-cols,.bh-details-page .bh-cols,.bh-massing-page .bh-cols{align-items:start}
 .bh-land th[scope=row]{width:48%}
@@ -89,19 +91,6 @@
 .bh-aerial-frame svg{position:absolute;inset:0;width:100%;height:100%}
 .bh-outline{fill:rgba(250,204,21,.08);stroke:#facc15;stroke-width:3}
 .bh-aerial figcaption{font-size:.72rem;color:#616e7c;margin-top:.4rem;line-height:1.4}
-.bh-3d-panel{margin:0 0 1.25rem;background:#fff;color:#111;border:1px solid #111;padding:.75rem}
-.bh-3d-panel h2{margin:0 0 .35rem;font-size:1rem;letter-spacing:.12em;text-transform:uppercase}
-.bh-3d-view{width:100%;min-height:280px;background:#fff;touch-action:none}
-.bh-3d-view canvas{display:block;width:100%;height:auto;cursor:grab}
-.bh-3d-google{width:100%;height:360px;margin-top:.5rem;background:#fff}
-.bh-3d-google gmp-map-3d{width:100%;height:360px;display:block}
-.bh-3d-legend{list-style:none;margin:.5rem 0 0;padding:0;font-size:.78rem;line-height:1.4}
-.bh-3d-legend li{margin:.15rem 0}
-.bh-3d-shot{display:block;width:100%;max-height:6.2in;object-fit:contain;background:#fff;border:1px solid #111}
-.bh-floors{display:grid;grid-template-columns:1fr 1fr;gap:.12in}
-.bh-floor{margin:0}
-.bh-floor figcaption{font-size:8pt;letter-spacing:.14em;font-weight:700;margin:0 0 2pt}
-.bh-floor-svg{width:100%;height:2.55in;border:1px solid #111;background:#fff}
 .bh-lot-diagram{margin:0 0 .6rem}
 .bh-lot-diagram .bh-lot-svg,.bh-lot-diagram .bh-siteplan{width:100%;max-height:2.45in;border:1px solid #111;background:#fff}
 .bh-siteplan{width:100%;max-width:100%;height:auto;background:#fff;border:1px solid #e4e1d8;overflow:visible}
@@ -293,6 +282,8 @@
   .bh-study-page .bh-page-body{padding:.06in 0 .08in!important}
   .bh-study-page .bh-page-foot{padding:3.5pt 0 0!important;margin-top:auto!important;font-size:6.5pt!important;letter-spacing:.06em!important;flex-wrap:nowrap!important;gap:.35rem!important}
   .bh-study-page .bh-page-foot strong{white-space:nowrap}
+  .bh-print-copy .bh-foot-left,.bh-study-page .bh-foot-left{display:inline-flex!important;align-items:baseline!important;gap:.28rem!important;min-width:0}
+  .bh-print-copy .bh-foot-gap,.bh-study-page .bh-foot-gap{white-space:pre!important;flex:none}
   .bh-study-page h3{font-size:8.2pt!important;letter-spacing:.16em!important;margin:5pt 0 2pt!important;line-height:1.18!important}
   .bh-study-page h3:first-child{margin-top:0!important}
   .bh-study-page p,.bh-study-page li,.bh-study-page td,.bh-study-page th{font-size:8.3pt!important;line-height:1.28!important}

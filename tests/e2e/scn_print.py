@@ -69,7 +69,7 @@ try:
           siteHeaderVisibility: getComputedStyle(document.querySelector('header.site-header')).visibility,
           bodyClass: document.body.className.includes('bh-printing'),
           docHeightPx: document.documentElement.scrollHeight, reportHeightPx: Math.round(document.getElementById('bh-report').getBoundingClientRect().height) })""")
-        # The feasibility study is a separate page from the interactive tool. It prints six landscape sheets.
+        # The feasibility study is a separate page from the interactive tool. It prints seven landscape sheets.
         page.emulate_media(media="screen")
         page.goto("http://127.0.0.1:%d/feasibility-study.html?sample=2" % port)
         page.wait_for_selector("#bh-report .bh-cover")
@@ -95,14 +95,17 @@ try:
             turf: /turf|lawn/i.test(text),
             permit: /Permit history and plan sets/.test(text),
             listingOff: /no listing data service connected/.test(text),
-            cover: !!(pages[0] && pages[0].classList.contains('bh-cover') && /Feasibility Study/.test(pages[0].textContent)),
+            cover: !!(pages[0] && pages[0].classList.contains('bh-cover') && /feasibility study/i.test(pages[0].textContent)),
             logoCount: logos.length,
             logoOk: logos.length > 0 && logos.every(img => img.naturalWidth > 0),
-            massing: !!document.querySelector('#bh-3d canvas'),
-            shot: !!((document.getElementById('bh-3d-shot') || {}).src || '').startsWith('data:image'),
-            controls: !!document.getElementById('bh-3d-roof'),
-            interior: /CONCEPTUAL — VERIFY ON SITE/.test((document.getElementById('bh-report') || {}).textContent || ''),
-            googleKeyed: /Google 3D Maps|Solar/.test((document.getElementById('bh-3d-legend') || {}).textContent || '')
+            viewer: !!document.getElementById('bh-3d-panel') || !!document.getElementById('bh-3d') || !!document.getElementById('bh-3d-roof'),
+            interior: /CONCEPTUAL — VERIFY ON SITE|CONCEPTUAL INTERIOR/.test(text),
+            houseSheet: /House and property/i.test(text),
+            footerTouch: /\\| WA[A-Za-z]/.test(text.replace(/\\u00a0/g, ' ')),
+            footerGap: pages.length > 0 && pages.every(p => {
+              const f = p.querySelector('.bh-page-foot');
+              return !!f && /\\|\\s*WA\\s*·/.test((f.textContent || '').replace(/\\u00a0/g, ' '));
+            })
           };
         }""")
         res["studyErrors"] = list(page.errors)
