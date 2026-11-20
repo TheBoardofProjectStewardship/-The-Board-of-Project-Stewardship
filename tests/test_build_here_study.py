@@ -895,7 +895,7 @@ class FeasibilitySixPageTests(unittest.TestCase):
         self.assertIn("parcelForCounty", js)
         self.assertIn("bh-lot-diagram", js)
         self.assertIn("bh-cover", js)
-        self.assertIn("Feasibility Study", js)
+        self.assertIn("FEASIBILITY STUDY", js)
         self.assertIn("feasibility-cover.jpg", js)
         self.assertIn("pacific-pro-group-logo.png", js)
         self.assertIn("County record", js)
@@ -903,7 +903,9 @@ class FeasibilitySixPageTests(unittest.TestCase):
         gjs = (ROOT / "assets/feasibility/build-here-google3d.js").read_text(encoding="utf-8")
         self.assertIn("buildingInsights:findClosest", gjs)
         self.assertIn("Map3DElement", gjs)
-        self.assertIn("FlattenerElement", gjs)
+        self.assertNotIn("FlattenerElement", gjs)
+        self.assertIn("ElevationService", gjs)
+        self.assertNotIn("elevation/json", gjs)
         self.assertIn("CAP = 50", gjs)
         self.assertNotIn("mapReserve", gjs)
         self.assertNotIn("AIza", gjs)
@@ -912,7 +914,7 @@ class FeasibilitySixPageTests(unittest.TestCase):
         self.assertNotIn("/assets/data/sno-bldg/", js)
         css = self.CSS.read_text(encoding="utf-8")
         self.assertIn("Print is black and white", css)
-        self.assertIn(".bh-cover-art img{max-height:3.55in!important;filter:grayscale(1)}", css)
+        self.assertIn("filter:grayscale(1) contrast(1.05)!important;mix-blend-mode:multiply!important", css)
         self.assertNotIn("#bh-print-host{filter", css)
         self.assertNotIn("turf", js.lower())
         self.assertNotIn("lawn", js.lower())
@@ -920,6 +922,11 @@ class FeasibilitySixPageTests(unittest.TestCase):
         self.assertIn(".bh-what-you-can-build-page", css)
         page = self.HTML.read_text(encoding="utf-8")
         self.assertIn("/assets/feasibility/build-here.js?v=20261119a", page)
+        self.assertIn("build-here-interior.js", page)
+        self.assertIn('logoUrl: "/assets/feasibility/pacific-pro-group-logo.png"', page)
+        import re
+        key = re.search(r'googleMapsKey:\s*"([^"]*)"', page)
+        self.assertTrue(key and len(key.group(1)) > 20)
 
     def test_google_ledger_charges_a_map_load_and_solar_height_sets_stories(self):
         import json
@@ -949,7 +956,8 @@ G.applySolar(spec, solar, state);
 G.applySolar(spec, solar, state);
 var house = spec.buildings[0];
 if (house.heightFt !== 22) throw new Error("height " + house.heightFt);
-if (house.stories !== 2) throw new Error("stories " + house.stories);
+if (house.stories !== 2) throw new Error("stories " + house.stories + " eave " + house.eaveFt);
+if (house.roofMode !== "solar") throw new Error("mode " + house.roofMode);
 if (spec.solarStories !== 2 || state.solarStories !== 2) throw new Error("solar stories");
 if ((spec.caption.match(/Height 22 ft/g) || []).length !== 1) throw new Error("caption dup " + spec.caption);
 if (/10 ft a story/.test(spec.caption)) throw new Error("still approximate " + spec.caption);

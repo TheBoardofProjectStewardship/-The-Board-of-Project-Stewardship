@@ -70,14 +70,35 @@
 
   function keyOf(cfg) { return cfg && String(cfg.googleMapsKey || "").trim(); }
 
+  var inFlightUsd = 0;
+  function reserve(usd) {
+    if (spent() + inFlightUsd + usd > CAP + 1e-9) return false;
+    inFlightUsd = Math.round((inFlightUsd + usd) * 1000) / 1000;
+    return true;
+  }
+  function release(usd, commit) {
+    inFlightUsd = Math.max(0, Math.round((inFlightUsd - usd) * 1000) / 1000);
+    if (commit) charge(usd);
+  }
   function groundFt(spec, s) {
     var dem = spec && spec.dem;
-    if (dem && dem.vals) {
-      var min = Infinity;
-      dem.vals.forEach(function (v) { if (typeof v === "number" && v < min) min = v; });
-      if (isFinite(min)) return min;
+    var house = spec && spec.buildings && spec.buildings.filter(function (b) { return b.role === "house"; })[0];
+    var G = root.BuildHereGeom;
+    if (dem && dem.vals && dem.step && house && house.ring && G && G.bilinear && G.centroid) {
+      var c = G.centroid(house.ring);
+      var atHouse = G.bilinear(dem, c[0], c[1]);
+      if (typeof atHouse === "number" && isFinite(atHouse)) return atHouse;
     }
-    if (s && s.landscape && s.landscape.slope && typeof s.landscape.slope.elevMin === "number") return s.landscape.slope.elevMin;
+    if (dem && dem.vals && dem.vals.length) {
+      var sum = 0, n = 0;
+      dem.vals.forEach(function (v) { if (typeof v === "number" && isFinite(v)) { sum += v; n++; } });
+      if (n) return sum / n;
+    }
+    if (s && typeof s.googleGroundFt === "number" && isFinite(s.googleGroundFt)) return s.googleGroundFt;
+    if (s && s.landscape && s.landscape.slope && typeof s.landscape.slope.elevMin === "number") {
+      var hi = typeof s.landscape.slope.elevMax === "number" ? s.landscape.slope.elevMax : s.landscape.slope.elevMin;
+      return (s.landscape.slope.elevMin + hi) / 2;
+    }
     return null;
   }
 
@@ -91,7 +112,7 @@
       if (typeof seg.pitchDegrees === "number") pitches.push(Math.round(seg.pitchDegrees * 10) / 10);
       if (ground != null && typeof seg.planeHeightAtCenterMeters === "number") {
         var above = seg.planeHeightAtCenterMeters * M_TO_FT - ground;
-        if (above > 6 && above < 80) heights.push(above);
+        if (above >= 8 && above <= 75) heights.push(above);
       }
     });
     var pitched = pitches.filter(function (p) { return p >= 5; }).length;
@@ -100,24 +121,32 @@
     spec.caption = (spec.caption || "").replace(/ Approximate height:.*?The record has no eave height\./g, "").replace(/ Height \d+ ft \(\d+ stor(?:y|ies)\) from Google Solar API buildingInsights\./g, "").replace(/ Roof: \d+ plane[\s\S]*$/, "").replace(/\s+$/, "");
     if (heights.length) {
       var ridge = Math.round(Math.max.apply(null, heights));
-      var stories = Math.max(1, Math.round(ridge / STORY_FT));
+      var eave = Math.max(8, Math.min(ridge - 2, Math.round(Math.min.apply(null, heights) - 2)));
+      var countyStories = s && typeof s.stories === "number" && s.stories > 0 ? s.stories : null;
+      var stories = countyStories || Math.max(1, Math.round(eave / STORY_FT));
+      var fr = spec.frame && root.BuildHereGeom && root.BuildHereGeom.frame ? root.BuildHereGeom.frame(spec.frame.lat0, spec.frame.lon0) : null;
       var planes = segs.map(function (seg) {
-        return { pitch: typeof seg.pitchDegrees === "number" ? seg.pitchDegrees : 0, azimuth: typeof seg.azimuthDegrees === "number" ? seg.azimuthDegrees : 0, heightFt: ridge };
+        var hAbove = ground != null && typeof seg.planeHeightAtCenterMeters === "number" ? seg.planeHeightAtCenterMeters * M_TO_FT - ground : null;
+        var cFt = fr && seg.center && typeof seg.center.longitude === "number" ? fr.fwd([seg.center.longitude, seg.center.latitude]) : null;
+        var bb = fr && seg.boundingBox && seg.boundingBox.sw && seg.boundingBox.ne ? { sw: fr.fwd([seg.boundingBox.sw.longitude, seg.boundingBox.sw.latitude]), ne: fr.fwd([seg.boundingBox.ne.longitude, seg.boundingBox.ne.latitude]) } : null;
+        return { pitch: typeof seg.pitchDegrees === "number" ? seg.pitchDegrees : 0, azimuth: typeof seg.azimuthDegrees === "number" ? seg.azimuthDegrees : 0, heightFt: hAbove != null && hAbove >= 8 && hAbove <= 75 ? hAbove : ridge, cx: cFt ? cFt[0] : null, cy: cFt ? cFt[1] : null, bbox: bb };
       });
       var heightLine = "Height " + ridge + " ft (" + stories + " " + (stories === 1 ? "story" : "stories") + ") from Google Solar API buildingInsights.";
       spec.buildings.forEach(function (b) {
         if (b.role === "house") {
           b.heightFt = ridge;
+          b.eaveFt = eave;
           b.stories = stories;
+          b.roofMode = "solar";
           b.roofPlanes = planes;
-          b.label = heightLine + " The wall is drawn at the roof-plane height above sea level minus the ground elevation on this lot. The story count is that height divided by 10 ft. Not a surveyed eave, and not the 10 ft approximate default.";
+          b.label = heightLine + " The wall is drawn from the roof planes above the ground at the house, not the 10 ft approximate default. " + (countyStories ? "Story count stays the county record." : "Story count is the eave divided by 10 ft.") + " Not a surveyed eave.";
         }
       });
       spec.solarHeightFt = ridge;
       spec.solarStories = stories;
       if (s) { s.solarHeightFt = ridge; s.solarStories = stories; }
       if (spec.caption.indexOf(heightLine) < 0) spec.caption = (spec.caption ? spec.caption + " " : "") + heightLine;
-      note += " The wall uses that height, and the story count is that height divided by 10 ft.";
+      note += " The wall uses that height.";
     } else {
       spec.buildings.forEach(function (b) {
         if (b.role !== "house") return;
@@ -133,7 +162,10 @@
   }
 
   function fetchJson(url) {
-    return fetch(url, { credentials: "omit" }).then(function (r) {
+    var ctrl = typeof AbortController !== "undefined" ? new AbortController() : null;
+    var timer = ctrl ? setTimeout(function () { try { ctrl.abort(); } catch (e) {} }, 8000) : null;
+    return fetch(url, { credentials: "omit", signal: ctrl ? ctrl.signal : undefined }).then(function (r) {
+      if (timer) clearTimeout(timer);
       if (!r.ok) throw new Error("HTTP " + r.status);
       return r.json();
     });
@@ -142,26 +174,39 @@
   function solar(lat, lon, key) {
     var hit = cacheGet("solar", lat, lon);
     if (hit) return Promise.resolve({ data: hit, cached: true });
-    if (!canSpend(PRICE.solar)) return Promise.resolve({ data: null, blocked: true });
+    if (!reserve(PRICE.solar)) return Promise.resolve({ data: null, blocked: true });
     var url = "https://solar.googleapis.com/v1/buildingInsights:findClosest?location.latitude=" + lat + "&location.longitude=" + lon + "&requiredQuality=LOW&key=" + encodeURIComponent(key);
     return fetchJson(url).then(function (data) {
-      charge(PRICE.solar);
-      cacheSet("solar", lat, lon, data);
-      return { data: data, cached: false };
-    }).catch(function () { return { data: null, cached: false, failed: true }; });
+      var ok = data && data.solarPotential && data.solarPotential.roofSegmentStats;
+      release(PRICE.solar, !!ok);
+      if (ok) cacheSet("solar", lat, lon, data);
+      return { data: ok ? data : null, cached: false, failed: !ok };
+    }).catch(function () { release(PRICE.solar, false); return { data: null, cached: false, failed: true }; });
   }
 
   function elevation(points, key, lat, lon) {
     var hit = cacheGet("elev", lat, lon);
-    if (hit) return Promise.resolve({ data: hit, cached: true });
-    if (!canSpend(PRICE.elevation)) return Promise.resolve({ data: null, blocked: true });
-    var loc = points.map(function (p) { return p[1] + "," + p[0]; }).join("|");
-    var url = "https://maps.googleapis.com/maps/api/elevation/json?locations=" + encodeURIComponent(loc) + "&key=" + encodeURIComponent(key);
-    return fetchJson(url).then(function (data) {
-      charge(PRICE.elevation);
-      cacheSet("elev", lat, lon, data);
-      return { data: data, cached: false };
-    }).catch(function () { return { data: null, failed: true }; });
+    if (hit && typeof hit.elevation === "number") return Promise.resolve({ data: hit, cached: true });
+    if (!reserve(PRICE.elevation)) return Promise.resolve({ data: null, blocked: true });
+    return loadMaps(key).then(function () {
+      var maps = root.google && root.google.maps;
+      if (maps && maps.importLibrary) return maps.importLibrary("elevation");
+      return null;
+    }).then(function (lib) {
+      var Svc = (lib && lib.ElevationService) || (root.google && root.google.maps && root.google.maps.ElevationService);
+      if (!Svc) { release(PRICE.elevation, false); return { data: null, failed: true }; }
+      var svc = new Svc();
+      return new Promise(function (resolve) {
+        svc.getElevationForLocations({ locations: points.map(function (p) { return { lat: p[1], lng: p[0] }; }) }, function (results, status) {
+          var ok = status === "OK" && results && results[0] && typeof results[0].elevation === "number";
+          release(PRICE.elevation, ok);
+          if (!ok) { resolve({ data: null, failed: true }); return; }
+          var data = { elevation: results[0].elevation, status: "OK" };
+          cacheSet("elev", lat, lon, data);
+          resolve({ data: data, cached: false });
+        });
+      });
+    }).catch(function () { release(PRICE.elevation, false); return { data: null, failed: true }; });
   }
 
   function pathAttr(ring) {
@@ -170,9 +215,9 @@
 
   function showMap(s, key) {
     if (cacheGet("map", s.lat, s.lon)) return Promise.resolve({ cached: true });
-    if (!canSpend(PRICE.mapLoad)) return Promise.resolve({ blocked: true });
+    if (!reserve(PRICE.mapLoad)) return Promise.resolve({ blocked: true });
     var host = document.getElementById("bh-3d-google");
-    if (!host) return Promise.resolve({ skipped: true });
+    if (!host) { release(PRICE.mapLoad, false); return Promise.resolve({ skipped: true }); }
     return loadMaps(key).then(function () {
       return root.google.maps.importLibrary("maps3d");
     }).then(function (lib) {
@@ -188,13 +233,8 @@
         gestureHandling: "GREEDY"
       });
       host.appendChild(map);
-      charge(PRICE.mapLoad);
+      release(PRICE.mapLoad, true);
       cacheSet("map", s.lat, s.lon, { at: Date.now() });
-      if (lib.FlattenerElement && s.rings && s.rings[0]) {
-        var flat = new lib.FlattenerElement();
-        flat.path = s.rings[0].map(function (p) { return { lat: p[1], lng: p[0], altitude: 0 }; });
-        map.appendChild(flat);
-      }
       if (lib.Polygon3DElement && s.rings && s.rings[0]) {
         var poly = new lib.Polygon3DElement();
         poly.path = s.rings[0].map(function (p) { return { lat: p[1], lng: p[0], altitude: 0 }; });
@@ -205,7 +245,7 @@
         map.appendChild(poly);
       }
       return { shown: true, path: pathAttr(s.rings && s.rings[0]) };
-    }).catch(function () { return { failed: true }; });
+    }).catch(function () { release(PRICE.mapLoad, false); return { failed: true }; });
   }
 
   function loadMaps(key) {
@@ -241,10 +281,10 @@
       var pts = [[s.lon, s.lat]];
       return elevation(pts, key, s.lat, s.lon);
     }).then(function (elev) {
-      if (elev && elev.data && elev.data.results && elev.data.results[0] && typeof elev.data.results[0].elevation === "number") {
-        s.googleGroundFt = elev.data.results[0].elevation * M_TO_FT;
-        spec.caption += " Ground elevation " + Math.round(s.googleGroundFt) + " ft from the Google Elevation API, because the slope grid was missing.";
-        if (spec.google && spec.google.solar === "read" || (spec.google && spec.google.solar === "cached")) applySolar(spec, cacheGet("solar", s.lat, s.lon), s);
+      if (elev && elev.data && typeof elev.data.elevation === "number") {
+        s.googleGroundFt = elev.data.elevation * M_TO_FT;
+        spec.caption += " Ground elevation " + Math.round(s.googleGroundFt) + " ft from the Google Maps Elevation service, because the slope grid was missing.";
+        if (spec.google && (spec.google.solar === "read" || spec.google.solar === "cached")) applySolar(spec, cacheGet("solar", s.lat, s.lon), s);
       }
       return showMap(s, key);
     }).then(function (map) {

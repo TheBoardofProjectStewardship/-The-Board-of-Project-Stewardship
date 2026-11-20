@@ -100,7 +100,9 @@ try:
             logoOk: logos.length > 0 && logos.every(img => img.naturalWidth > 0),
             massing: !!document.querySelector('#bh-3d canvas'),
             shot: !!((document.getElementById('bh-3d-shot') || {}).src || '').startsWith('data:image'),
-            googleOff: !document.querySelector('script[src*="maps.googleapis.com"]') && /No Google Maps key/.test((document.getElementById('bh-3d-legend') || {}).textContent || '')
+            controls: !!document.getElementById('bh-3d-roof'),
+            interior: /CONCEPTUAL — VERIFY ON SITE/.test((document.getElementById('bh-report') || {}).textContent || ''),
+            googleKeyed: /Google 3D Maps|Solar/.test((document.getElementById('bh-3d-legend') || {}).textContent || '')
           };
         }""")
         res["studyErrors"] = list(page.errors)

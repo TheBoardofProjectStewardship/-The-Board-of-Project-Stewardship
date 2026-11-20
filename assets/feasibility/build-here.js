@@ -1610,11 +1610,15 @@
     var sb = rs && rs.setbacks || {}, seed = { address: s.matched || s.input || "", zone: v.zone || "", juris: s.jurisLabel || "", lot: v.lot || null, footprint: v.footprint || null, stories: v.stories || 1, type: v.type || "", coverage: rs && rs.coverage || null, setbacks: { front: sb.front, side: sb.side, rear: sb.rear, streetSide: sb.streetSide, rearAlley: sb.rearAlley }, height: null, ring: null, env: null, lat: s.lat, lon: s.lon };
     // The height limit as a number comes from the rule set. It used to be read back out of the rule table's text.
     if (rs && rs.height && typeof rs.height.ft === "number") seed.height = rs.height.ft;
+    seed.setbackVerify = !!(rs && rs.setbackVerify);
+    seed.heightVerify = !!(rs && rs.height && rs.height.verify);
     var g = lotGeometry(s, sb);
     if (g) {
       seed.ring = g.ring.map(function (q) { return [Math.round(q[0] * 10) / 10, Math.round(q[1] * 10) / 10]; });
+      seed.corner = !!g.corner;
+      seed.alley = !!(g.ce && g.ce.alley);
       if (g.er) {
-        seed.env = { rows: g.er.rows.map(function (r) { return r.map(function (n) { return Math.round(n * 10) / 10; }); }), area: Math.round(g.er.area) };
+        seed.env = { rows: g.er.rows.map(function (r) { return r.map(function (n) { return Math.round(n * 10) / 10; }); }), area: Math.round(g.er.area / 10) * 10 };
         seed.front = { x: g.ce.fx, y: g.ce.fy };
       }
     }
@@ -1625,115 +1629,84 @@
     var sb = rs && rs.setbacks || {};
     var g = lotGeometry(s, sb);
     if (!g) return "";
-    var ring = g.ring, ce = g.ce;
-    var F = sb.front, Rr = sb.rear, S = sb.side;
+    var ring = g.ring, ce = g.ce, linesMerged = g.lines && g.lines.length ? g.lines : ce.edges;
+    var sv = !!(rs && rs.setbackVerify);
     var minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
-    ring.forEach(function (p) { minX = Math.min(minX, p[0]); minY = Math.min(minY, p[1]); maxX = Math.max(maxX, p[0]); maxY = Math.max(maxY, p[1]); });
-    var pad = 46, W = 560, H = 420;
-    var sw = maxX - minX || 1, sh = maxY - minY || 1, sc = Math.min((W - 2 * pad) / sw, (H - 2 * pad) / sh);
-    var ox = (W - sw * sc) / 2, oy = (H - sh * sc) / 2;
+    ring.forEach(function (pt) { minX = Math.min(minX, pt[0]); minY = Math.min(minY, pt[1]); maxX = Math.max(maxX, pt[0]); maxY = Math.max(maxY, pt[1]); });
+    var padL = 52, padR = 52, padT = 46, padB = 52, W = 520, H = 400;
+    var sw = maxX - minX || 1, sh = maxY - minY || 1;
+    var sc = Math.min((W - padL - padR) / sw, (H - padT - padB) / sh);
+    var ox = padL + (W - padL - padR - sw * sc) / 2;
+    var oy = padT + (H - padT - padB - sh * sc) / 2;
     var X = function (x) { return ox + (x - minX) * sc; };
     var Y = function (y) { return H - oy - (y - minY) * sc; };
     var f1 = function (n) { return n.toFixed(1); };
-    var poly = ring.map(function (p, i) { return (i ? "L" : "M") + f1(X(p[0])) + " " + f1(Y(p[1])); }).join(" ") + " Z";
-    var dash = { front: "10 4", street: "10 4", rear: "8 3 2 3", side: "2 3" };
-    var lines = ce.edges.map(function (e) {
-      return '<line x1="' + f1(X(e.a[0])) + '" y1="' + f1(Y(e.a[1])) + '" x2="' + f1(X(e.b[0])) + '" y2="' + f1(Y(e.b[1])) + '" class="bh-edge bh-edge-' + e.kind + '" stroke="#111" stroke-width="1.6" stroke-dasharray="' + (dash[e.kind] || "2 3") + '"/>';
+    var pathOf = function (ringFt) { return (ringFt || []).map(function (pt, i) { return (i ? "L" : "M") + f1(X(pt[0])) + " " + f1(Y(pt[1])); }).join(" ") + " Z"; };
+    var poly = pathOf(ring);
+    var edgeStyle = { front: { w: 2.6, dash: "12 4" }, street: { w: 2.2, dash: "9 4" }, rear: { w: 1.8, dash: "9 3 2 3" }, side: { w: 1.6, dash: "2.2 2.6" }, alley: { w: 1.8, dash: "6 2 2 2" } };
+    var lotEdges = ce.edges.map(function (e) {
+      var st = e.alley ? edgeStyle.alley : (edgeStyle[e.kind] || edgeStyle.side);
+      return '<line x1="' + f1(X(e.a[0])) + '" y1="' + f1(Y(e.a[1])) + '" x2="' + f1(X(e.b[0])) + '" y2="' + f1(Y(e.b[1])) + '" class="bh-edge bh-edge-' + e.kind + '" stroke="#111" stroke-width="' + st.w + '" stroke-dasharray="' + st.dash + '"/>';
     }).join("");
-    var env = "", envArea = null, envC = null, ecx = 0, ecy = 0;
-    if (g.er) {
-      var er = g.er;
-      envArea = er.area;
-      var ca = 0; er.rows.forEach(function (r) { var a = r[2] * r[3]; ca += a; ecx += (r[0] + r[2] / 2) * a; ecy += (r[1] + r[3] / 2) * a; });
-      if (ca) { ecx /= ca; ecy /= ca; envC = [ecx, ecy]; }
-      if (er.rows.length) {
-        var d = er.rows.map(function (r) { return "M" + f1(X(r[0])) + " " + f1(Y(r[1] + r[3])) + "h" + f1(r[2] * sc + 0.4) + "v" + f1(r[3] * sc + 0.4) + "h" + f1(-(r[2] * sc + 0.4)) + "z"; }).join("");
-        env = '<path d="' + d + '" class="bh-env" fill="none" stroke="#111" stroke-width="1.2" stroke-dasharray="5 3"/>';
-      }
+    var env = "", envArea = null;
+    if (g.er && g.er.rings && g.er.rings.length) {
+      envArea = g.er.area;
+      var hatch = (G && G.hatch) ? G.hatch(g.er.rings, Math.max(4, 7 / sc), 45).slice(0, 400) : [];
+      var hatchD = hatch.map(function (q) { return "M" + f1(X(q[0])) + " " + f1(Y(q[1])) + "L" + f1(X(q[2])) + " " + f1(Y(q[3])); }).join("");
+      var envD = g.er.rings.map(pathOf).join("");
+      env = '<path d="' + envD + '" fill="#f3f3f3" stroke="none"/>' + (hatchD ? '<path d="' + hatchD + '" fill="none" stroke="#b5b5b5" stroke-width="0.6"/>' : "") + '<path d="' + envD + '" class="bh-env" fill="none" stroke="#111" stroke-width="1.15" stroke-dasharray="6 3"/>';
     }
     var geo = s.landscape && s.landscape.geo, bld = "", drive = "";
-    var pathOf = function (ringFt) {
-      return (ringFt || []).map(function (p, i) { return (i ? "L" : "M") + f1(X(p[0])) + " " + f1(Y(p[1])); }).join(" ") + " Z";
-    };
-    var centroid = function (ringFt) {
-      var sx = 0, sy = 0, n = 0;
-      (ringFt || []).slice(0, -1).forEach(function (p) { sx += p[0]; sy += p[1]; n++; });
-      return n ? [sx / n, sy / n] : null;
-    };
-    if (geo && geo.buildings) {
-      geo.buildings.forEach(function (b) {
-        if (!b.ring || b.role === "neighbor") return;
-        var name = b.role === "house" ? "House" : b.role === "garage" ? "Garage" : "Building";
-        bld += '<path d="' + pathOf(b.ring) + '" fill="none" stroke="#111" stroke-width="' + (b.role === "house" ? "1.8" : "1.2") + '"/>';
-        var c = centroid(b.ring);
-        if (c) bld += '<text x="' + f1(X(c[0])) + '" y="' + f1(Y(c[1])) + '" text-anchor="middle" fill="#111" font-size="11" font-family="Inter,system-ui,sans-serif">' + name + "</text>";
-      });
-    }
-    if (geo && geo.driveLines && geo.driveLines.length) {
-      geo.driveLines.forEach(function (d) {
-        var line = d.line || [];
-        if (line.length < 2) return;
-        drive += '<polyline points="' + line.map(function (p) { return f1(X(p[0])) + "," + f1(Y(p[1])); }).join(" ") + '" fill="none" stroke="#111" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>';
-        var mid = line[Math.floor(line.length / 2)];
-        drive += '<text x="' + f1(X(mid[0])) + '" y="' + f1(Y(mid[1]) - 8) + '" text-anchor="middle" fill="#111" font-size="11" font-family="Inter,system-ui,sans-serif">Driveway</text>';
-      });
-    } else if (geo && geo.drives && geo.drives.length) {
-      geo.drives.forEach(function (d) {
-        if (!d.ring) return;
-        drive += '<path d="' + pathOf(d.ring) + '" fill="none" stroke="#111" stroke-width="1.4" stroke-dasharray="4 2"/>';
-        var c = centroid(d.ring);
-        if (c) drive += '<text x="' + f1(X(c[0])) + '" y="' + f1(Y(c[1])) + '" text-anchor="middle" fill="#111" font-size="11" font-family="Inter,system-ui,sans-serif">Driveway</text>';
-      });
-    }
-    var barFt = 50, barPx = barFt * sc;
-    if (barPx > 140) { barFt = 20; barPx = barFt * sc; }
-    if (barPx < 50) { barFt = 100; barPx = barFt * sc; }
-    var scaleBar = '<g class="bh-scale" aria-hidden="true" transform="translate(16,' + (H - 36) + ')">' +
-      '<line x1="0" y1="0" x2="' + f1(barPx) + '" y2="0" stroke="#111" stroke-width="2"/>' +
-      '<line x1="0" y1="-4" x2="0" y2="4" stroke="#111" stroke-width="1.4"/>' +
-      '<line x1="' + f1(barPx) + '" y1="-4" x2="' + f1(barPx) + '" y2="4" stroke="#111" stroke-width="1.4"/>' +
-      '<text x="' + f1(barPx / 2) + '" y="14" text-anchor="middle" fill="#111" font-size="10" font-family="Inter,system-ui,sans-serif">' + barFt + " ft</text></g>";
+    if (geo && geo.driveLines) geo.driveLines.forEach(function (d) {
+      var line = d.line || [];
+      if (line.length < 2) return;
+      drive += '<polyline points="' + line.map(function (pt) { return f1(X(pt[0])) + "," + f1(Y(pt[1])); }).join(" ") + '" fill="none" stroke="#777" stroke-width="5" stroke-linecap="butt"/>';
+    });
+    if (geo && geo.buildings) geo.buildings.forEach(function (b) {
+      if (!b.ring || b.role === "neighbor") return;
+      var name = b.role === "house" ? "(E) HOUSE" : b.role === "garage" ? "(E) GARAGE" : "(E) BLDG";
+      bld += '<path d="' + pathOf(b.ring) + '" fill="#ffffff" stroke="#111" stroke-width="' + (b.role === "house" ? "1.8" : "1.2") + '"/>';
+      var c = G && G.centroid ? G.centroid(b.ring) : null;
+      if (c) bld += '<text x="' + f1(X(c[0])) + '" y="' + f1(Y(c[1])) + '" text-anchor="middle" fill="#111" stroke="#fff" stroke-width="3" paint-order="stroke" font-size="10" font-weight="700">' + name + "</text>";
+    });
     var clamp = function (v, lo, hi) { return Math.max(lo, Math.min(hi, v)); };
-    // Street label: just outside the front lot line, kept inside the drawing.
-    var lx = clamp(X(ce.fx + ce.near.nx * 14), 70, W - 70), ly = clamp(Y(ce.fy + ce.near.ny * 14), 16, H - 30);
-    var label = function (v) { return typeof v === "number" ? v + " ft" : "verify"; };
-    var cx = 0, cy = 0, cn = 0;
-    ring.slice(0, -1).forEach(function (p) { cx += p[0]; cy += p[1]; cn++; });
-    // Envelope label at the envelope's own centroid; nudge it clear of the street label.
-    var elx = clamp(envC ? X(envC[0]) : X(cx / cn), 80, W - 80), ely = clamp(envC ? Y(envC[1]) : Y(cy / cn), 20, H - 34);
-    var tw = function (t) { return t.length * 6.2; };
-    var streetTxt = "Street side, front " + label(F);
-    for (var tries = 0; tries < 8 && Math.abs(ely - ly) < 16 && Math.abs(elx - lx) < (tw(streetTxt) + 160) / 2; tries++) ely = clamp(ely + (ely >= ly ? 18 : -18), 20, H - 34);
-    if (Math.abs(ely - ly) < 16 && Math.abs(elx - lx) < (tw(streetTxt) + 160) / 2) ely = ly > H / 2 ? ly - 22 : ly + 22;
-    var envText = envArea != null ? (envArea > 0 ? "Envelope about " + fmt(Math.round(envArea / 10) * 10) + " sf" : "No envelope left after setbacks") : "Setbacks not verified";
-    return '<svg viewBox="0 0 ' + W + " " + H + '" class="bh-siteplan bh-lot-svg" role="img" aria-label="Line diagram of the lot: parcel outline, house, garage and driveway where mapped, dashed setback lines, north arrow and scale bar. ' + esc(envText) + '. The scaled site plan is sheet SP-1.">' +
-      '<rect x="0" y="0" width="' + W + '" height="' + H + '" fill="#fff"/>' +
-      '<path d="' + poly + '" class="bh-lot" fill="#fff" stroke="#111" stroke-width="1.8"/>' + env + lines + drive + bld +
-      '<text x="' + f1(lx) + '" y="' + f1(ly) + '" class="bh-front" fill="#111" font-size="11" text-anchor="middle" aria-hidden="true">Front ' + label(F) + '</text>' +
-      '<text x="' + f1(elx) + '" y="' + f1(ely) + '" class="bh-envlabel" fill="#111" font-size="11" text-anchor="middle" aria-hidden="true">' + esc(envText) + '</text>' +
-      '<g class="bh-north" aria-hidden="true" transform="translate(' + (W - 28) + ',34)"><path d="M0 -16 L5 6 L0 2 L-5 6 Z" fill="#111"/><text y="18" text-anchor="middle" fill="#111" font-size="12" font-family="Inter,system-ui,sans-serif">N</text></g>' +
-      scaleBar +
-      "</svg>";
+    var dims = "";
+    (linesMerged || []).forEach(function (ln) {
+      var L = ln.len || ln.path || 0;
+      if (L * sc < 36) return;
+      var ang = Math.atan2(-(ln.b[1] - ln.a[1]), ln.b[0] - ln.a[0]) * 180 / Math.PI;
+      while (ang >= 90) ang -= 180; while (ang < -90) ang += 180;
+      var mx = clamp(X(ln.mx) + (ln.nx || 0) * 13, 24, W - 24), my = clamp(Y(ln.my) - (ln.ny || 0) * 13, 14, H - 28);
+      dims += '<text x="' + f1(mx) + '" y="' + f1(my) + '" text-anchor="middle" fill="#111" stroke="#fff" stroke-width="3" paint-order="stroke" font-size="9" font-weight="700" transform="rotate(' + ang.toFixed(1) + " " + f1(mx) + " " + f1(my) + ')">' + (Math.round(L * 10) / 10).toFixed(1) + "'</text>";
+    });
+    var streetName = (houseAndStreet(s.matched || s.input || "").street || "STREET").toUpperCase();
+    var slx = clamp(X(ce.fx) + ce.fnx * 26, 70, W - 70), sly = clamp(Y(ce.fy) - ce.fny * 26, 16, H - 24);
+    var streetLbl = '<text x="' + f1(slx) + '" y="' + f1(sly) + '" text-anchor="middle" fill="#444" stroke="#fff" stroke-width="3" paint-order="stroke" font-size="9" font-weight="700" letter-spacing="1.2">' + esc(streetName) + "</text>";
+    var unit = 20;
+    if (2 * unit * sc > 120) unit = 10; else if (2 * unit * sc < 50) unit = 50;
+    var uPx = unit * sc;
+    var scaleBar = '<g class="bh-scale" transform="translate(12,' + (H - 20) + ')"><rect x="-4" y="-13" width="' + f1(2 * uPx + 18) + '" height="24" fill="#fff"/><rect x="0" y="0" width="' + f1(uPx) + '" height="4" fill="#111"/><rect x="' + f1(uPx) + '" y="0" width="' + f1(uPx) + '" height="4" fill="#fff" stroke="#111" stroke-width="0.6"/><text x="0" y="-2" font-size="8" fill="#111">0</text><text x="' + f1(2 * uPx) + '" y="-2" text-anchor="end" font-size="8" fill="#111">' + (2 * unit) + " ft</text></g>";
+    var north = '<g class="bh-north" transform="translate(' + (W - 24) + ',26)"><circle cx="0" cy="0" r="12" fill="#fff" stroke="#111" stroke-width="1"/><path d="M0 -16 L4.5 5 L0 1 L-4.5 5 Z" fill="#111"/><text y="22" text-anchor="middle" fill="#111" font-size="9" font-weight="700">N</text></g>';
+    var envRound = envArea != null ? Math.round(envArea / 10) * 10 : null;
+    var envText = envRound != null ? (envRound > 0 ? "Buildable area ≈ " + fmt(envRound) + " sf" + (sv ? " (verify)" : "") : "No area inside setbacks") : "Setbacks: verify";
+    return '<svg viewBox="0 0 ' + W + " " + H + '" class="bh-siteplan bh-lot-svg" role="img" aria-label="Site diagram. ' + esc(envText) + '."><rect width="' + W + '" height="' + H + '" fill="#fff"/><path d="' + poly + '" class="bh-lot" fill="#fff" stroke="#bbb" stroke-width="0.6"/>' + env + lotEdges + drive + bld + streetLbl + dims + north + scaleBar + "</svg>";
   }
-  /* The same figures as text. In the drawing they are 11 px at full width and about 7 px on a phone,
-     and they are hidden from screen readers. */
   function sitePlanKey(s, rs) {
     var sb = rs && rs.setbacks || {}, g = lotGeometry(s, sb);
     if (!g) return "";
-    var label = function (v) { return typeof v === "number" ? v + " ft" : "verify with the jurisdiction"; };
-    var items = ['<li><span class="bh-key bh-key-front"></span>Front, long dash, the street side: ' + label(sb.front) + "</li>"];
-    if (g.corner) items.push('<li><span class="bh-key bh-key-street"></span>Second street side, long dash: ' + (typeof sb.streetSide === "number" ? "the zone's street-side setback, " + label(sb.streetSide) : "drawn at the front setback, " + label(sb.front)) + "</li>");
-    if (g.ce && g.ce.alley) items.push('<li><span class="bh-key bh-key-side"></span>One line is on an alley' + (typeof sb.rearAlley === "number" ? ": " + sb.rearAlley + " ft there" : ". The rear or side setback is drawn there") + "</li>");
-    items.push('<li><span class="bh-key bh-key-side"></span>Side, dotted: ' + label(sb.side) + "</li>");
-    items.push('<li><span class="bh-key bh-key-rear"></span>Rear, dash-dot: ' + label(sb.rear) + "</li>");
-    items.push('<li><span class="bh-key bh-key-env"></span>' + (g.er ? (g.er.area > 0 ? "Dashed setback line. Envelope inside the setbacks: about " + fmt(Math.round(g.er.area / 10) * 10) + " sf" : "No area is left inside the setbacks as drawn") : "Setback envelope not drawn. The setbacks are not all coded.") + "</li>");
+    var sv = !!(rs && rs.setbackVerify);
+    var label = function (v) { return typeof v === "number" ? v + " ft" + (sv ? " (verify)" : "") : "verify"; };
+    var sw = function (dash, width) { return '<svg class="bh-key-svg" width="28" height="10" viewBox="0 0 28 10" aria-hidden="true"><line x1="1" y1="5" x2="27" y2="5" stroke="#111" stroke-width="' + width + '" stroke-dasharray="' + dash + '"/></svg>'; };
+    var items = ['<li>' + sw("12 3.5", "2.4") + "<span>Front " + label(sb.front) + "</span></li>"];
+    if (g.corner) items.push('<li>' + sw("9 3", "2") + "<span>Street side " + label(typeof sb.streetSide === "number" ? sb.streetSide : sb.front) + "</span></li>");
+    items.push('<li>' + sw("2.2 2.4", "1.6") + "<span>Side " + label(sb.side) + "</span></li>");
+    items.push('<li>' + sw("8 2.5 2 2.5", "1.7") + "<span>Rear " + label(sb.rear) + "</span></li>");
+    if (g.ce && g.ce.alley) items.push('<li>' + sw("6 2 2 2", "1.6") + "<span>Alley" + (typeof sb.rearAlley === "number" ? " " + sb.rearAlley + " ft" : "") + "</span></li>");
+    var envTxt = g.er ? (g.er.area > 0 ? "Buildable area ≈ " + fmt(Math.round(g.er.area / 10) * 10) + " sf" : "No envelope inside setbacks") : "Envelope not drawn";
+    items.push('<li><svg class="bh-key-svg" width="28" height="10" viewBox="0 0 28 10" aria-hidden="true"><rect x="1" y="1" width="26" height="8" fill="#f3f3f3" stroke="#111" stroke-dasharray="4 2"/><path d="M3 8 L10 1 M11 8 L18 1" stroke="#aaa" stroke-width="0.6"/></svg><span>' + envTxt + "</span></li>");
     return '<ul class="bh-plan-key">' + items.join("") + "</ul>";
   }
 
-  /* ---------- report ---------- */
-  /* A typed area is digits, with optional thousands commas, an optional decimal part and an optional
-     "sf" or "sq ft". Nothing else is guessed at. parseFloat read "-5000" as a negative lot (and negative
-     caps), "0.25 acres" as a quarter of a square foot, "5000-6000" as 5000 and "12 000" as 12. */
   function parseArea(text) {
     var t = String(text == null ? "" : text).trim();
     if (!t) return { value: null, error: "" };
@@ -1850,11 +1823,11 @@
     var place = s.city ? s.city.toUpperCase() : (s.county ? (/(County|Parish|Borough|Census Area|Municipality)$/i.test(s.county) ? s.county : s.county + " County").toUpperCase() : "PLACE NOT MATCHED");
     var sampleBadge = s.isSample ? " · SAMPLE LAYOUT — NOT A PROPERTY RECORD" : "";
     var TOTAL_PAGES = 6;
-    var contactBrand = [CFG.brand || "Pacific Pro Group", CFG.phone || "(206) 446-5656", CFG.site || "pacificprogroup.com"].filter(Boolean).join(" · ");
+    var contactBrand = [CFG.brand || "Pacific Pro Group", CFG.phone || "(206) 446-5656", CFG.site || "pacificprogroup.com", CFG.license ? "WA Reg. # " + CFG.license : ""].filter(Boolean).join(" · ");
     var footLogo = '<img class="bh-foot-logo" src="/assets/feasibility/pacific-pro-group-logo.png" alt="Pacific Pro Group">';
     var foot = function (title, pageNum) {
       var pLabel = "Page " + pageNum + " of " + TOTAL_PAGES;
-      return '<footer class="bh-page-foot"><span class="bh-foot-place">' + esc(place) + " | " + esc(s.stateAbbr || "US") + esc(sampleBadge) + '</span><strong>' + esc(title) + " · " + esc(pLabel) + '</strong><span class="bh-brand">' + footLogo + esc(contactBrand) + "</span></footer>";
+      return '<footer class="bh-page-foot"><span class="bh-foot-left"><span class="bh-foot-place">' + esc(place) + " | " + esc(s.stateAbbr || "US") + '</span><strong>' + esc(title) + "</strong><span class=\"bh-foot-pg\"> · " + esc(pLabel) + (s.isSample ? " · SAMPLE" : "") + '</span></span><span class="bh-brand">' + footLogo + "<span>" + esc(contactBrand) + "</span></span></footer>";
     };
     var page = function (title, body, cls, pageNum) {
       return '<section class="bh-page bh-study-page ' + (cls || "") + '" data-page="' + pageNum + '" data-total="' + TOTAL_PAGES + '"><div class="bh-page-body">' + body + "</div>" + foot(title, pageNum) + "</section>";
@@ -1882,57 +1855,56 @@
     var out = [];
 
     /* Cover is physical page 1. stampStudyPages renumbers every sheet after this, including SP-1. */
-    var coverBody = '<div class="bh-cover-art"><img src="/assets/feasibility/feasibility-cover.jpg" alt="Pen-and-ink drawing of a house on its lot"></div>' +
-      '<div class="bh-cover-copy"><img class="bh-cover-logo" src="/assets/feasibility/pacific-pro-group-logo.png" alt="Pacific Pro Group">' +
-      "<h2>Feasibility Study</h2>" +
-      '<p class="bh-cover-address">' + esc(s.matched || s.input || "Address not matched") + "</p>" +
-      '<p class="bh-cover-date">Prepared ' + esc(asOfDate) + (s.isSample ? " · Sample layout — not a property record" : "") + "</p>" +
-      '<p class="bh-cover-firm">Pacific Pro Group LLC, Design-Build General Contractor, WA Reg. # PACIFPG765OF</p>' +
+    var coverQr = String(CFG.coverQrUrl || "").trim();
+    var coverBody = '<div class="bh-cover-wrap"><div class="bh-cover-top"><img class="bh-cover-logo" src="/assets/feasibility/pacific-pro-group-logo.png" alt="Pacific Pro Group">' +
+      '<p class="bh-cover-kicker">SINGLE-FAMILY RESIDENCE <span aria-hidden="true">|</span> <strong>FEASIBILITY STUDY</strong></p><div class="bh-cover-bar" aria-hidden="true"></div></div>' +
+      '<div class="bh-cover-art"><img src="/assets/feasibility/feasibility-cover.jpg" alt="Pen-and-ink drawing of a house on its lot"></div>' +
+      '<div class="bh-cover-meta"><div><p class="bh-cover-label">Subject property</p><p class="bh-cover-address">' + esc(s.matched || s.input || "Address not matched") + "</p>" +
+      '<p class="bh-cover-date">Prepared ' + esc(asOfDate) + (s.isSample ? " · Sample layout — not a property record" : "") + "</p></div>" +
+      '<div class="bh-cover-firm-col"><p class="bh-cover-firm">Pacific Pro Group LLC, Design-Build General Contractor, WA Reg. # PACIFPG765OF</p>' +
       "<p>Edmonds: 144 Railroad Ave #307, Edmonds, WA 98020, (206) 446-5656</p>" +
       "<p>Seattle: 110 Lakeside Ave Ste 110F, Seattle, WA 98122, (425) 570-9340</p>" +
-      "<p>pacificprogroup.com</p></div>";
+      "<p>pacificprogroup.com</p></div>" +
+      (coverQr ? '<img class="bh-cover-qr" src="' + esc(coverQr) + '" alt="">' : "") +
+      "</div></div>";
     out.push(page("Cover", coverBody, "bh-cover", 1));
 
-    /* ---------- EXISTING LOT ---------- */
+    /* ---------- EXISTING LOT (diagram + area + slope on one sheet) ---------- */
     var rLand = s.landscape || { rows: [], notes: [], slope: { ok: false, note: "not measured" }, flags: [] };
-    var p1 = "<h3>Existing lot — " + esc(s.matched || s.input) + (s.parcel ? " (Parcel " + esc(s.parcel) + ")" : "") + "</h3>";
-    if (s.isSample) p1 += '<p class="bh-verify"><strong>Sample layout only — these numbers are not a property record.</strong></p>';
-    p1 += '<p class="bh-muted">As of ' + esc(asOfDate) + '. Planning estimate from public records; not a survey or permit determination.</p>';
-    if (s.parcelWarn || rLand.warn) p1 += '<p class="bh-verify" role="alert"><strong>' + esc(s.parcelWarn || rLand.warn) + "</strong></p>";
-    p1 += '<div class="bh-lot-diagram"><h3>Site diagram</h3>' + sitePlanSVG(s, rs) + sitePlanKey(s, rs) + '<p class="bh-muted">Line diagram only: solid lot line, labeled house, garage, and driveway where a public outline exists, dashed setback lines, north arrow, and scale bar. Sheet SP-1 is the scaled site plan. Not a survey.</p></div>';
-    p1 += "<h3>What is house, garage, driveway and landscape</h3>";
+    var p1Left = "<h3>Site diagram</h3>" + '<div class="bh-lot-diagram">' + sitePlanSVG(s, rs) + sitePlanKey(s, rs) + "</div>" +
+      '<p class="bh-muted">Line diagram from the county parcel and mapped footprints. Sheet SP-1 is the scaled site plan. Not a survey.</p>';
+    var p1Right = "";
+    if (s.isSample) p1Right += '<p class="bh-verify bh-alert-box"><strong>Sample layout only — these numbers are not a property record.</strong></p>';
+    if (s.parcelWarn || rLand.warn) p1Right += '<p class="bh-verify bh-alert-box" role="alert"><strong>' + esc(s.parcelWarn || rLand.warn) + "</strong></p>";
+    p1Right += "<h3>House, garage, driveway and open area</h3>";
     if (rLand.rows && rLand.rows.length) {
-      p1 += '<table class="bh-table bh-land"><thead><tr><th scope="col">Area</th><th scope="col">Square feet</th><th scope="col">Share of lot</th></tr></thead><tbody>' + rLand.rows.map(function (x) {
+      p1Right += '<table class="bh-table bh-land"><thead><tr><th scope="col">Area</th><th scope="col">Square feet</th><th scope="col">Share</th></tr></thead><tbody>' + rLand.rows.map(function (x) {
         var sfTxt = x.sf == null ? '<span class="bh-tbd">Not available</span>' : (x.key === "lot" && s.lotKind === "record" ? fmt(x.sf) + " sf" : "approx. " + fmt(x.sf) + " sf");
         var pctTxt = x.pct == null ? "Not measured" : x.pct + "%";
-        return '<tr><th scope="row">' + esc(x.label) + '</th><td data-label="Square feet">' + sfTxt + '</td><td data-label="Share of lot">' + esc(pctTxt) + "</td></tr>";
+        return '<tr><th scope="row">' + esc(x.label) + '</th><td data-label="Square feet">' + sfTxt + '</td><td data-label="Share">' + esc(pctTxt) + "</td></tr>";
       }).join("") + "</tbody></table>";
-    } else {
-      p1 += '<p class="bh-muted">Site coverage was not measured.</p>';
-    }
+    } else p1Right += '<p class="bh-muted">Site coverage was not measured.</p>';
     var landRow = (rLand.rows || []).filter(function (x) { return x.key === "land" && x.verifiedLandscape === false && x.sf != null; })[0];
-    if (landRow) p1 += '<p class="bh-verify">The open-area figure is not verified landscaping. Paving, patios, or eaves may be inside it. Not measured is not zero.</p>';
-    (rLand.notes || []).forEach(function (t) { p1 += '<p class="bh-verify">' + esc(t) + "</p>"; });
-    out.push(page("Existing lot", p1, "bh-existing-lot-page", out.length + 1));
-
+    if (landRow) p1Right += '<p class="bh-verify">Open area is not verified landscaping. Paving, patios, or eaves may be inside it.</p>';
+    (rLand.notes || []).forEach(function (t) { p1Right += '<p class="bh-verify">' + esc(t) + "</p>"; });
+    p1Right += '<p class="bh-muted">Measured by sampling the parcel outline every ' + ((rLand.coverage && rLand.coverage.step) || 1) + " ft. Planning estimate only.</p>";
     var sl = rLand.slope;
-    var slopeBody = "<h3>Slope (approx.)</h3>";
+    p1Right += "<h3>Slope (approx.)</h3>";
     if (sl && sl.ok) {
-      slopeBody += '<table class="bh-table">' +
-        '<tr><th scope="row">Average slope across the lot</th><td>approx. ' + sl.mean + "% (median " + sl.median + "%)</td></tr>" +
-        '<tr><th scope="row">Steepest part</th><td>approx. ' + sl.p95 + "% (95th percentile); single steepest cell " + sl.max + "%, often a wall, rockery or building edge</td></tr>" +
-        '<tr><th scope="row">Share of lot at 15%+ / 25%+ / 40%+</th><td>' + sl.pct15 + "% / " + sl.pct25 + "% / " + sl.pct40 + "%</td></tr>" +
-        '<tr><th scope="row">Ground elevation range</th><td>approx. ' + fmt(sl.elevMin) + " to " + fmt(sl.elevMax) + " ft (" + (sl.elevMax - sl.elevMin) + " ft of fall across the lot)</td></tr>" +
-        '<tr><th scope="row">Estimated surface fall</th><td>' + (sl.fallCompass && sl.fallCompass !== "flat" ? "Toward the " + esc(sl.fallCompass) + (sl.fallDeg != null ? " (approx. " + sl.fallDeg + " degrees clockwise from north)" : "") + ", average gradient approx. " + sl.fallPct + "%." : "The sample grid is nearly flat, so no single downhill direction stands out.") + " Bare-earth elevation sample; not a drainage flow path or survey.</td></tr>" +
-        "</table>";
-    } else {
-      slopeBody += '<p class="bh-verify">Slope: data unavailable (' + esc(sl && sl.note || "the elevation service did not answer") + "). County records do not fill this in.</p>";
-    }
-    out.push(page("Slope", slopeBody, "bh-slope-page", out.length + 1));
+      p1Right += '<table class="bh-table">' +
+        '<tr><th scope="row">Average slope</th><td>approx. ' + sl.mean + "% (median " + sl.median + "%)</td></tr>" +
+        '<tr><th scope="row">Steepest part</th><td>approx. ' + sl.p95 + "% (95th); peak cell " + sl.max + "%</td></tr>" +
+        '<tr><th scope="row">Lot at 15% / 25% / 40%+</th><td>' + sl.pct15 + "% / " + sl.pct25 + "% / " + sl.pct40 + "%</td></tr>" +
+        '<tr><th scope="row">Elevation range</th><td>approx. ' + fmt(sl.elevMin) + " to " + fmt(sl.elevMax) + " ft</td></tr>" +
+        '<tr><th scope="row">Surface fall</th><td>' + (sl.fallCompass && sl.fallCompass !== "flat" ? "Toward the " + esc(sl.fallCompass) + ", approx. " + sl.fallPct + "%." : "Nearly flat.") + " Not a survey.</td></tr></table>";
+    } else p1Right += '<p class="bh-verify">Slope: data unavailable (' + esc(sl && sl.note || "the elevation service did not answer") + ").</p>";
+    out.push(page("Existing lot", '<div class="bh-cols bh-existing-lot-cols"><div>' + p1Left + "</div><div>" + p1Right + "</div></div>", "bh-existing-lot-page", out.length + 1));
 
     /* ---------- PAGE 2: F-1 PROPERTY FACTS ---------- */
     if (F && SUM) {
-      out.push(SUM.factsSheet(F, FB, { pageLabel: "Page 2 of " + TOTAL_PAGES, pageNum: 2, totalPages: TOTAL_PAGES }));
+      var factsHtml = SUM.factsSheet(F, FB, { pageLabel: "Page " + (out.length + 1) + " of " + TOTAL_PAGES, pageNum: out.length + 1, totalPages: TOTAL_PAGES });
+      factsHtml = factsHtml.replace(/<footer class="bh-facts-foot">[\s\S]*?<\/footer>/i, foot("Property facts", out.length + 1));
+      out.push(factsHtml);
     }
 
     /* ---------- PAGE 3: SP-1 PRELIMINARY SITE PLAN ---------- */
@@ -1965,7 +1937,7 @@
 
     var secRow = fb("secondStory");
     var optRows = [
-      { label: "Addition", opt: optBy.addition },
+      { label: (optBy.addition && (optBy.addition.kind === "secondStory" || optBy.addition.footprintSf === 0)) ? "Addition (upward)" : "Addition", opt: optBy.addition },
       { label: "Second story", secondStory: true, row: secRow },
       { label: "ADU / detached ADU", opt: optBy.adu },
       { label: "Garage or shop", opt: optBy.shop },
@@ -2020,8 +1992,7 @@
     }
     var compactLedger = '<h3>Measurements</h3><table class="bh-table bh-measures"><thead><tr><th scope="col">Measure</th><th scope="col">Amount</th></tr></thead><tbody>' + mRows + openRowHtml + "</tbody></table>" + measureNotes;
 
-    out.push(page("What you can build", compactLedger + '<h3>Site data</h3><table class="bh-table">' + rowsP4.map(function (r) { return '<tr><th scope="row">' + r[0] + "</th><td>" + r[1] + "</td></tr>"; }).join("") + "</table>", "bh-what-you-can-build-page", out.length + 1));
-    out.push(page("What fits on this lot", optionsTableHtml + '<h3>Special site features</h3>' + haz + '<h3>Soils and geotechnical</h3>' + fbHtml("soils") + '<h3>Drainage and civil</h3>' + fbHtml("drainage"), "bh-what-you-can-build-page", out.length + 1));
+    out.push(page("Project summary", '<div class="bh-cols bh-summary-cols"><div><h3>Site data</h3><table class="bh-table">' + rowsP4.map(function (r) { return '<tr><th scope="row">' + r[0] + "</th><td>" + r[1] + "</td></tr>"; }).join("") + "</table>" + compactLedger + '</div><div>' + optionsTableHtml + '<h3>Special site features</h3>' + haz + '<h3>Soils and geotechnical</h3>' + fbHtml("soils") + '<h3>Drainage and civil</h3>' + fbHtml("drainage") + "</div></div>", "bh-what-you-can-build-page", out.length + 1));
 
     /* ---------- PAGE 5: PROJECT DETAILS, LISTING DATA, CODES & PERMIT HISTORY ---------- */
     var rowsP5 = [
@@ -2064,10 +2035,11 @@
     }).join("");
     var countyHtml = '<h3>County record</h3>' + (countyRows
       ? '<table class="bh-table">' + countyRows + "</table>"
-      : "<p>" + esc(s.countyRecordNote || "Figures above that name a county assessor, a county map, or the house-size index are county records. A blank is not available online. Nothing on this page is estimated to fill a gap.") + "</p>");
+      : "<p>" + esc(s.countyRecordNote || "Figures in this study that name a county assessor, a county map, or the house-size index are county records. A blank is not available online. Nothing on this page is estimated to fill a gap.") + "</p>");
     var lf = s.listingFacts;
-    var listingHtml = countyHtml + "<h3>Existing plans and listing size (Zillow, Redfin)</h3>";
-    if (lf && lf.status === "ok" && lf.results && lf.results.length) {
+    var listingHtml = countyHtml;
+    if (lf && lf.status && lf.status !== "off" && lf.status === "ok" && lf.results && lf.results.length) {
+      listingHtml += "<h3>Existing plans and listing size</h3>";
       var countyTag = s.existing != null ? " (vs " + fmt(s.existing) + " sf (county))" : (s.countyFin && s.countyFin.sf != null ? " (vs approx. " + fmt(s.countyFin.sf) + " sf (county FinSize))" : "");
       listingHtml += '<table class="bh-table"><thead><tr><th scope="col">Provider</th><th scope="col">Living area</th><th scope="col">Beds / baths</th><th scope="col">Year built</th><th scope="col">Floor plans</th></tr></thead><tbody>' +
         lf.results.map(function (r) {
@@ -2079,8 +2051,6 @@
             : "None in listing record";
           return '<tr><th scope="row">' + esc(r.provider) + "</th><td>" + sq + "</td><td>" + bb + "</td><td>" + yb + "</td><td>" + fp + "</td></tr>";
         }).join("") + "</tbody></table>";
-    } else {
-      listingHtml += "<p>Listing data (Zillow, Redfin): not checked — no listing data service connected.</p>";
     }
 
     var officeName = s.juris === "seattle" ? "Seattle Department of Construction and Inspections (SDCI) permit counter"
@@ -2126,14 +2096,16 @@
     }
 
     /* ---------- PAGE 6: SITE COVERAGE, LANDSCAPE AND MASSING ---------- */
-    var p6Left = "<h3>Site coverage and landscape</h3>";
-    (rLand.flags || []).forEach(function (t) { p6Left += '<p>' + esc(t) + "</p>"; });
+    var coverNotes = "";
+    (rLand.flags || []).forEach(function (t) { coverNotes += "<p>" + esc(t) + "</p>"; });
     if (rLand.steep) {
-      p6Left += "<p>" + (rLand.steep.mapped ? "<strong>Seattle ECA steep slope (40%+) is mapped on approx. " + fmt(rLand.steep.sf) + " sf of this lot.</strong> Work there needs SDCI steep slope review and usually a geotechnical report." : "No Seattle ECA steep slope area (40%+) is mapped on this lot.") + "</p>";
+      coverNotes += "<p>" + (rLand.steep.mapped ? "<strong>Seattle ECA steep slope (40%+) is mapped on approx. " + fmt(rLand.steep.sf) + " sf of this lot.</strong> Work there needs SDCI steep slope review and usually a geotechnical report." : "No Seattle ECA steep slope area (40%+) is mapped on this lot.") + "</p>";
     } else if (sl && sl.ok && sl.pct40 > 0) {
-      p6Left += "<p>Approx. " + sl.pct40 + "% of the lot reads 40% or steeper from bare-earth elevation samples. Ask the jurisdiction whether a steep slope critical area applies.</p>";
+      coverNotes += "<p>Approx. " + sl.pct40 + "% of the lot reads 40% or steeper from bare-earth elevation samples. Ask the jurisdiction whether a steep slope critical area applies.</p>";
+    } else if (sl && sl.ok) {
+      coverNotes += "<p>No steep-slope band (40%+) was flagged on this lot. Confirm grades with a site survey.</p>";
     }
-    p6Left += "<h3>Survey and plat</h3>";
+    var p6Left = (coverNotes ? "<h3>Site coverage and landscape</h3>" + coverNotes : "") + "<h3>Survey and plat</h3>";
     var sv = rLand.survey;
     var platBits = sv && sv.plat ? (sv.lot ? ", lot " + esc(sv.lot) : "") + (sv.block ? ", block " + esc(sv.block) : "") + (sv.major ? " (plat number " + esc(sv.major) + ")" : "") : "";
     if (sv && sv.plat) {
@@ -2145,24 +2117,42 @@
     } else {
       p6Left += "<p>Recorded plats and surveys are kept by the county recorder for " + esc(s.county || "this county") + ". We did not find a published survey drawing, and we do not draw one.</p>";
     }
-    p6Left += '<p class="bh-muted">Measured by sampling the parcel outline every ' + (rLand.coverage ? rLand.coverage.step : 1) + " ft and assigning each point to one class (building, then driveway, then hardscape, then open area). Planning estimate only; a site survey is the authority.</p>";
-
     var sb = seed3d.setbacks || {};
-    var sbLine = ["front " + (typeof sb.front === "number" ? sb.front + " ft" : "verify"), "side " + (typeof sb.side === "number" ? sb.side + " ft" : "verify"), "rear " + (typeof sb.rear === "number" ? sb.rear + " ft" : "verify")].join(", ");
+    var sbMark = seed3d.setbackVerify ? " (verify)" : "";
+    var sbBits = ["front " + (typeof sb.front === "number" ? sb.front + " ft" : "verify") + sbMark, "side " + (typeof sb.side === "number" ? sb.side + " ft" : "verify") + sbMark, "rear " + (typeof sb.rear === "number" ? sb.rear + " ft" : "verify") + sbMark];
+    if (seed3d.corner) sbBits.push("street side " + (typeof sb.streetSide === "number" ? sb.streetSide + " ft" : "front figure") + sbMark);
+    if (seed3d.alley && typeof sb.rearAlley === "number") sbBits.push("alley " + sb.rearAlley + " ft" + sbMark);
+    var sbLine = sbBits.join(", ");
     var massRows = [
       ["Address", esc(seed3d.address || s.matched || s.input || "not available")],
       ["Zone", esc(seed3d.zone || "not available")],
       ["Lot area", seed3d.lot ? fmt(seed3d.lot) + " sf" : "not available"],
       ["Setbacks used", esc(sbLine)],
-      ["Height limit", seed3d.height ? seed3d.height + " ft" : "Verify with the jurisdiction"],
+      ["Height limit", seed3d.height ? seed3d.height + " ft" + (seed3d.heightVerify ? " (verify)" : "") : "Verify with the jurisdiction"],
       ["Coverage cap", seed3d.coverage ? fmt(seed3d.coverage) + " sf" : "Verify with the jurisdiction"],
       ["Buildable envelope", seed3d.env ? (seed3d.env.area > 0 ? "Approx. " + fmt(seed3d.env.area) + " sf inside setbacks (diagrammatic)" : "No area is left inside the setbacks as drawn. Check the street side under Edit the facts.") : (seed3d.ring ? "Lot outline loaded. The setbacks are not all coded, so no envelope area is drawn." : "No parcel outline in this run")]
     ];
     var p6Right = '<h3>Massing and envelope</h3><p>These caps and setbacks match the site plan and property facts in this study. It is a diagram, not a permit drawing.</p><table class="bh-table">' +
       massRows.map(function (r) { return '<tr><th scope="row">' + r[0] + "</th><td>" + r[1] + "</td></tr>"; }).join("") + "</table>";
 
-    out.push(page("Site coverage and landscape", '<div class="bh-cols"><div>' + p6Left + "</div><div>" + p6Right + "</div></div>", "bh-massing-page", out.length + 1));
+    out.push(page("Site coverage and massing", '<div class="bh-cols"><div>' + p6Left + "</div><div>" + p6Right + "</div></div>", "bh-massing-page", out.length + 1));
+    var interiorPlan = null;
+    if (window.BuildHereInterior && landGeo && landGeo.buildings) {
+      var houseB = null, garageRings = [];
+      landGeo.buildings.forEach(function (b) { if (b.role === "house" && !houseB) houseB = b; else if (b.role === "garage" && b.ring) garageRings.push(b.ring); });
+      var addPlaced = placedBy.addition && placedBy.addition.ok && placedBy.addition.ring && !placedBy.addition.over && !placedBy.addition.existing ? { ring: placedBy.addition.ring } : null;
+      var showUpper = (v.stories && v.stories >= 2) || !!(optBy.addition && optBy.addition.feasible && optBy.addition.footprintSf === 0) || v.type === "secondStory";
+      if (houseB && houseB.ring) interiorPlan = BuildHereInterior.plan(houseB.ring, { stories: v.stories, showUpper: showUpper, front: s.geo && s.geo.ce ? { nx: s.geo.ce.fnx, ny: s.geo.ce.fny } : null, garageRings: garageRings, addition: addPlaced });
+    }
+    if (interiorPlan && interiorPlan.levels && interiorPlan.levels.length) {
+      out.push(page("Conceptual interior", "<h3>Conceptual interior</h3>" + BuildHereInterior.svg(interiorPlan), "bh-interior-page", out.length + 1));
+    }
     var massSpec = window.BuildHereMassing ? BuildHereMassing.spec(s, s.geo) : null;
+    if (massSpec && interiorPlan) massSpec.interior = interiorPlan;
+    if (massSpec) massSpec.onRoom = function (room) {
+      var box = $("bh-3d-room");
+      if (box) box.textContent = room.name + ": " + room.purpose + " Approx. " + Math.round(room.w) + " ft by " + Math.round(room.d) + " ft. Conceptual — verify on site.";
+    };
     if (massSpec) {
       out.push(page("House and property", '<h3>House and property</h3><p id="bh-3d-print-note">' + esc(massSpec.caption) + '</p><img id="bh-3d-shot" class="bh-3d-shot" alt="Isometric massing of the parcel and the buildings whose footprints are on record">', "bh-massing-shot", out.length + 1));
     }
@@ -2219,6 +2209,21 @@
         var url = mounted.snapshot();
         if (url) img.src = url;
       }
+      var roofOn = true;
+      var roofBtn = $("bh-3d-roof");
+      if (roofBtn) roofBtn.onclick = function () { roofOn = !roofOn; if (mounted && mounted.setRoof) mounted.setRoof(roofOn); };
+      [].forEach.call(document.querySelectorAll("#bh-3d-panel [data-floor]"), function (btn) {
+        btn.onclick = function () { if (mounted && mounted.setFloor) mounted.setFloor(btn.getAttribute("data-floor")); };
+      });
+      [].forEach.call(document.querySelectorAll("#bh-3d-panel [data-mode]"), function (btn) {
+        btn.onclick = function () {
+          var mode = btn.getAttribute("data-mode");
+          if (mounted && mounted.setMode) mounted.setMode(mode);
+          var gHost = $("bh-3d-google"), viewEl = $("bh-3d");
+          if (gHost) gHost.hidden = mode !== "google";
+          if (viewEl) viewEl.hidden = mode === "google";
+        };
+      });
       s.massingCaption = ready && ready.caption || "";
       syncPrint();
     };
@@ -2542,6 +2547,12 @@
     box.className = "bh-report bh-print-copy" + (CFG.rootClass ? " " + CFG.rootClass : "");
     box.innerHTML = report.innerHTML;
     [].forEach.call(box.querySelectorAll(".bh-noprint,.bh-screen-only,script,iframe,video,button"), function (el) { if (el.parentNode) el.parentNode.removeChild(el); });
+    [].forEach.call(box.querySelectorAll("a[href]"), function (a) {
+      var span = document.createElement("span");
+      span.textContent = a.textContent;
+      if (a.className) span.className = a.className;
+      if (a.parentNode) a.parentNode.replaceChild(span, a);
+    });
     [].forEach.call(box.querySelectorAll("[id]"), function (el) { el.removeAttribute("id"); });
     var page = document.createElement("style");
     page.textContent = "@page{size:letter landscape;margin:0.35in}#bh-print-host{display:none}@media print{body.bh-printing{background:#fff!important}body.bh-printing>*:not(#bh-print-host){display:none!important}body.bh-printing>#bh-print-host{display:block!important}.bh-print-copy .bh-page{break-after:page;page-break-after:always;break-inside:avoid;page-break-inside:avoid;margin:0!important;box-shadow:none!important;zoom:var(--bh-fit,1)}.bh-print-copy .bh-page:last-child{break-after:auto!important;page-break-after:auto!important}.bh-print-copy .bh-page-body{padding:.12in 0 .18in!important}.bh-print-copy .bh-page-foot{padding:.08in 0 0!important}}";
@@ -2596,7 +2607,7 @@
         var target = PAPER_H_IN * 96 * 0.96, floorFit = 0.72;
         for (var i = 0; i < copies.length; i++) {
           var copy = copies[i], live = lives[i] || null;
-          if (!copy.classList || !copy.classList.contains("bh-facts")) continue;
+          if (!copy.classList || copy.classList.contains("bh-sheet")) continue;
           box.innerHTML = "";
           var f = copy.cloneNode(true);
           f.style.removeProperty("--bh-fit");

@@ -37,17 +37,23 @@
 .bh-foot-logo{height:.32in;width:auto;vertical-align:middle;margin-right:.35rem}
 .bh-brand{display:inline-flex;align-items:center;gap:.35rem}
 
-/* Cover. Colors and sizes sit on the section so a later stylesheet can restyle them in one place. */
-.bh-cover{--bh-cover-ink:#111;--bh-cover-muted:#333;color:var(--bh-cover-ink);background:#fff}
-.bh-cover-art img{display:block;width:100%;max-height:3.7in;object-fit:contain;object-position:center bottom}
-.bh-cover-copy{padding:.15in 0 0}
-.bh-cover-logo{height:.62in;width:auto;display:block;margin:0 0 .2in}
-.bh-cover h2{margin:0;font-size:1.35rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--bh-cover-ink)}
-.bh-cover-address{font-size:1rem;font-weight:700;margin:.25rem 0 .1rem}
-.bh-cover-date,.bh-cover-firm,.bh-cover-copy p{color:var(--bh-cover-muted);margin:.12rem 0}
+.bh-cover{--bh-cover-ink:#111;--bh-cover-muted:#444;color:var(--bh-cover-ink);background:#fff}
+.bh-cover-wrap{display:flex;flex-direction:column;gap:.12in}
+.bh-cover-top{text-align:center}
+.bh-cover-logo{height:.72in;width:auto;display:block;margin:0 auto .08in}
+.bh-cover-kicker{margin:0;letter-spacing:.22em;text-transform:uppercase;font-size:10pt;color:#444}
+.bh-cover-kicker strong{color:#111;letter-spacing:.16em}
+.bh-cover-bar{width:5.2in;height:8pt;background:#222;margin:.08in auto 0}
+.bh-cover-art img{display:block;max-width:100%;max-height:3.4in;margin:0 auto;object-fit:contain;background:#fff;filter:grayscale(1) contrast(1.05);mix-blend-mode:multiply}
+.bh-cover-meta{display:flex;justify-content:space-between;gap:.3in;border-top:1.5pt solid #111;padding-top:.1in}
+.bh-cover-label{margin:0;font-size:7pt;letter-spacing:.18em;text-transform:uppercase;color:#555}
+.bh-cover-address{font-size:12pt;font-weight:800;margin:.04in 0;text-transform:uppercase}
+.bh-cover-date,.bh-cover-firm-col p{margin:.04in 0;font-size:8pt;color:#333}
+.bh-cover-firm{font-weight:700;color:#111}
+.bh-cover-qr{width:.7in;height:.7in}
 .bh-page-foot strong{color:#102a1c;letter-spacing:.18em;font-weight:800}
 .bh-brand{margin-left:auto;color:#166534;font-weight:800;letter-spacing:.06em;text-transform:none}
-.bh-page h3{font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:#166534;font-weight:800;margin:.95rem 0 .35rem}
+.bh-page h3{font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:#111;font-weight:800;margin:.95rem 0 .35rem;border-bottom:1px solid #111;padding-bottom:.12rem}
 .bh-page h3:first-child{margin-top:0}
 .bh-page p,.bh-page li,.bh-page td,.bh-page th{font-size:.84rem;line-height:1.48;color:#323f4b}
 .bh-page p{margin:.35rem 0}
@@ -56,7 +62,7 @@
 .bh-table{width:100%;border-collapse:collapse;margin:.2rem 0 .45rem}
 .bh-table th,.bh-table td{text-align:left;vertical-align:top;padding:.34rem .45rem;border-bottom:1px solid #e4e1d8}
 .bh-table th[scope=row]{font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:.72rem;color:#3e4c59;width:38%}
-.bh-table thead th{font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;color:#166534;border-bottom:2px solid #166534}
+.bh-table thead th{font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;color:#111;border-bottom:1.5px solid #111}
 .bh-rules th[scope=row]{width:24%}
 
 /* Page-specific and table-specific classes for the 6-page feasibility study */
@@ -92,6 +98,10 @@
 .bh-3d-legend{list-style:none;margin:.5rem 0 0;padding:0;font-size:.78rem;line-height:1.4}
 .bh-3d-legend li{margin:.15rem 0}
 .bh-3d-shot{display:block;width:100%;max-height:6.2in;object-fit:contain;background:#fff;border:1px solid #111}
+.bh-floors{display:grid;grid-template-columns:1fr 1fr;gap:.12in}
+.bh-floor{margin:0}
+.bh-floor figcaption{font-size:8pt;letter-spacing:.14em;font-weight:700;margin:0 0 2pt}
+.bh-floor-svg{width:100%;height:2.55in;border:1px solid #111;background:#fff}
 .bh-lot-diagram{margin:0 0 .6rem}
 .bh-lot-diagram .bh-lot-svg,.bh-lot-diagram .bh-siteplan{width:100%;max-height:2.45in;border:1px solid #111;background:#fff}
 .bh-siteplan{width:100%;max-width:100%;height:auto;background:#fff;border:1px solid #e4e1d8;overflow:visible}
@@ -106,7 +116,7 @@
 .bh-key-env{height:.8rem;border:0;background:rgba(22,101,52,.28)}
 .bh-k-front{fill:#b45309}.bh-k-rear{fill:#1d4ed8}.bh-k-side{fill:#1f2933}
 .bh-north path{fill:#1f2933}.bh-north text{font:700 10px Inter,system-ui,sans-serif;fill:#1f2933}
-.bh-envlabel,.bh-front,.bh-note{font:600 11px Inter,system-ui,sans-serif;fill:#14532d}
+.bh-envlabel,.bh-front,.bh-note{font:600 11px Inter,system-ui,sans-serif;fill:#111}
 .bh-envlabel,.bh-front{paint-order:stroke;stroke:#fbfaf7;stroke-width:4px;stroke-linejoin:round}
 .bh-note{fill:#52606d;font-weight:500}
 .bh-steps li{margin-bottom:.5rem}
@@ -194,7 +204,7 @@
 @keyframes bh-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
 /* Summary sheets: SP-1 (site plan sheet) and F-1 (facts sheet) */
-.bh-s-missing,.bh-s-verify{color:#b8650a!important}
+.bh-s-missing,.bh-s-verify{color:#111!important;font-style:italic}
 .bh-s-est,.bh-s-partial,.bh-s-fact{color:inherit}
 .bh-sheet{position:relative;display:block;min-height:0;padding:1rem}
 .bh-sheet-svg{display:block;width:100%;height:auto;background:#fff;border:1px solid #d8d7cf}
@@ -219,7 +229,7 @@
 .bh-facts-table th{width:27%;text-align:left;font-weight:700;vertical-align:top;padding:.22rem .5rem .22rem 0;border-bottom:1px solid #e7e5dc;font-size:.78rem;color:#2f3a3a}
 .bh-facts-table td{vertical-align:top;padding:.22rem 0;border-bottom:1px solid #e7e5dc;font-size:.8rem;line-height:1.4}
 .bh-fn{font-size:.68em;color:#5b6460;font-weight:400;line-height:0}
-.bh-facts .bh-facts-visit{margin:.8rem 0 .4rem;padding:.45rem .7rem;border-left:4px solid #b8650a;background:#fbf4ea}
+.bh-facts .bh-facts-visit{margin:.8rem 0 .4rem;padding:.45rem .7rem;border-left:3px solid #111;background:#f3f3f3;color:#111}
 .bh-facts-notes{margin:.4rem 0 0;padding-left:1.5rem;columns:2;column-gap:1.5rem}
 .bh-facts .bh-facts-notes li{font-size:.68rem;line-height:1.35;color:#5b6460;break-inside:avoid}
 .bh-facts-foot{margin-top:.6rem;border-top:1.5px solid #2f3a3a;padding-top:.4rem;display:flex;justify-content:space-between;gap:.5rem 1.5rem;flex-wrap:wrap}
@@ -255,9 +265,11 @@
   .bh-page{
     box-shadow:none!important;
     border-radius:0!important;
-    min-height:0!important;
+    min-height:7.8in!important;
     margin:0!important;
     padding:0!important;
+    display:flex!important;
+    flex-direction:column!important;
     overflow:hidden!important;
     break-inside:avoid!important;
     page-break-inside:avoid!important;
@@ -277,13 +289,13 @@
   .bh-aerial-frame,.bh-siteplan,.bh-scenario,.bh-table tr{break-inside:avoid;page-break-inside:avoid}
 
   /* Compact single-sheet print typography for .bh-study-page (Pages 1, 4, 5, 6) */
-  .bh-study-page{font-size:8pt!important}
+  .bh-study-page{font-size:8.5pt!important}
   .bh-study-page .bh-page-body{padding:.06in 0 .08in!important}
-  .bh-study-page .bh-page-foot{padding:3.5pt 0 0!important;margin-top:3.5pt!important;font-size:6.5pt!important;letter-spacing:.06em!important;flex-wrap:nowrap!important;gap:.35rem!important}
+  .bh-study-page .bh-page-foot{padding:3.5pt 0 0!important;margin-top:auto!important;font-size:6.5pt!important;letter-spacing:.06em!important;flex-wrap:nowrap!important;gap:.35rem!important}
   .bh-study-page .bh-page-foot strong{white-space:nowrap}
-  .bh-study-page h3{font-size:7.6pt!important;letter-spacing:.14em!important;margin:5pt 0 2pt!important;line-height:1.18!important}
+  .bh-study-page h3{font-size:8.2pt!important;letter-spacing:.16em!important;margin:5pt 0 2pt!important;line-height:1.18!important}
   .bh-study-page h3:first-child{margin-top:0!important}
-  .bh-study-page p,.bh-study-page li,.bh-study-page td,.bh-study-page th{font-size:7.8pt!important;line-height:1.25!important}
+  .bh-study-page p,.bh-study-page li,.bh-study-page td,.bh-study-page th{font-size:8.3pt!important;line-height:1.28!important}
   .bh-study-page p{margin:2pt 0!important}
   .bh-study-page .bh-muted{font-size:7.2pt!important}
   .bh-study-page .bh-cols{display:grid!important;grid-template-columns:1fr 1fr!important;gap:.22in!important;align-items:start!important}
@@ -298,52 +310,13 @@
   .bh-study-page .bh-permits th,.bh-study-page .bh-permits td{font-size:7.1pt!important;padding:1.6pt 3pt!important}
   .bh-flags li{margin:.12em 0!important}
 
-  /* Pages 4–6 are two short columns. Larger type fills the sheet; fitFacts() scales a dense page back down. */
-  .bh-what-you-can-build-page{font-size:11.5pt!important}
-  .bh-details-page{font-size:13pt!important}
-  .bh-massing-page{font-size:14.5pt!important}
-  .bh-what-you-can-build-page .bh-page-body,
-  .bh-details-page .bh-page-body,
-  .bh-massing-page .bh-page-body{padding:.1in 0 .12in!important}
-  .bh-what-you-can-build-page h3{font-size:12pt!important;letter-spacing:.1em!important;margin:8pt 0 3pt!important}
-  .bh-details-page h3{font-size:13pt!important;letter-spacing:.1em!important;margin:9pt 0 4pt!important}
-  .bh-massing-page h3{font-size:14.5pt!important;letter-spacing:.1em!important;margin:10pt 0 4pt!important}
-  .bh-what-you-can-build-page p,
-  .bh-what-you-can-build-page li,
-  .bh-what-you-can-build-page td,
-  .bh-what-you-can-build-page th{font-size:11pt!important;line-height:1.32!important}
-  .bh-details-page p,
-  .bh-details-page li,
-  .bh-details-page td,
-  .bh-details-page th{font-size:12.5pt!important;line-height:1.32!important}
-  .bh-massing-page p,
-  .bh-massing-page li,
-  .bh-massing-page td,
-  .bh-massing-page th{font-size:14pt!important;line-height:1.34!important}
-  .bh-what-you-can-build-page p,
-  .bh-details-page p,
-  .bh-massing-page p{margin:3pt 0!important}
-  .bh-what-you-can-build-page .bh-muted,
-  .bh-details-page .bh-muted,
-  .bh-massing-page .bh-muted{font-size:9.5pt!important}
-  .bh-what-you-can-build-page .bh-table th,
-  .bh-details-page .bh-table th,
-  .bh-massing-page .bh-table th,
-  .bh-what-you-can-build-page .bh-table td,
-  .bh-details-page .bh-table td,
-  .bh-massing-page .bh-table td{padding:3.5pt 4pt!important}
-  .bh-what-you-can-build-page .bh-table th[scope=row],
-  .bh-details-page .bh-table th[scope=row],
-  .bh-massing-page .bh-table th[scope=row]{font-size:9pt!important}
-  .bh-what-you-can-build-page .bh-table thead th,
-  .bh-details-page .bh-table thead th,
-  .bh-massing-page .bh-table thead th{font-size:8.5pt!important}
-  .bh-details-page .bh-permits th,
-  .bh-details-page .bh-permits td{font-size:9.5pt!important;padding:2.5pt 3.5pt!important}
+  .bh-existing-lot-cols{grid-template-columns:48% 1fr!important}
+  .bh-summary-cols{grid-template-columns:42% 1fr!important}
+  .bh-study-page h3{border-bottom:1pt solid #111!important;color:#111!important}
 
   /* SP-1 Site Plan sheet (Page 3) */
-  .bh-sheet .bh-sheet-svg{width:10.16in!important;height:7.15in!important;border:0!important}
-  .bh-cover-art img{max-height:3.55in!important;filter:grayscale(1)}
+  .bh-sheet .bh-sheet-svg{width:10.30in!important;height:7.33in!important;border:0!important}
+  .bh-cover-art img{max-height:3.35in!important;filter:grayscale(1) contrast(1.05)!important;mix-blend-mode:multiply!important;background:#fff!important}
   .bh-cover h2{font-size:16pt!important}
   .bh-cover-copy p{font-size:9pt!important}
 
@@ -374,6 +347,9 @@
   .bh-print-copy .bh-lot-diagram .bh-lot{stroke:#111!important}
   .bh-print-copy .bh-lot-diagram .bh-env{fill:none!important}
   .bh-print-copy .bh-lot-diagram .bh-lot{fill:#fff!important}
+  .bh-print-copy .bh-table thead th{border-bottom:1.5pt solid #111!important;color:#111!important}
+  .bh-print-copy .bh-facts-visit{border-left:3pt solid #111!important;background:#f3f3f3!important;color:#111!important}
+  .bh-print-copy .bh-front,.bh-print-copy .bh-envlabel{fill:#111!important}
   .bh-print-copy .bh-key,.bh-print-copy .bh-key-front,.bh-print-copy .bh-key-street,.bh-print-copy .bh-key-side,.bh-print-copy .bh-key-rear{border-top-color:#111!important;background:none!important}
   .bh-print-copy .bh-key-env{background:#fff!important;border:1px dashed #111!important}
   .bh-stage-fade{position:static!important;background:#fff!important;color:#000!important}

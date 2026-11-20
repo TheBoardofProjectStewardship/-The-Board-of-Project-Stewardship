@@ -624,7 +624,7 @@
       reroofLayers: datum("A new roof may not be laid over a roof that already has two or more layers. That roof is torn off first.", SRC.irc908, CHECKED_NOV),
       drainage: v.juris === "seattle"
         ? datum("Seattle adopted a revised Stormwater Code in 2026 (Ord. 127444). The earlier code started drainage review at 750 sf of new plus replaced hard surface. The 2026 thresholds are not coded here.", SRC.sdciStorm, null)
-        : (v.city === "redmond" ? datum("Pacific Pro Group's Redmond study used 2,000 sf of new plus replaced hard surface as the point where civil (drainage) review starts.", code, null)
+        : (v.city === "redmond" ? datum("City of Redmond stormwater review threshold: verify (commonly triggered near 2,000 sf of new plus replaced hard surface; confirm with the City of Redmond).", code, null)
           : datum(null, code, null, "The stormwater threshold for " + place + " is not coded.")),
       parking: city
         ? datum("State law (ESSB 5184, 2025) caps what a city of more than 30,000 people may require: one space per single-family home, half a space per multifamily unit, and none for a home under 1,200 sf. Cities of 50,000 or more had 18 months from July 27, 2025 to comply, and cities of 30,000 to 50,000 have three years. The parking table of " + place + " is not coded here.", SRC.sb5184, CHECKED_NOV)

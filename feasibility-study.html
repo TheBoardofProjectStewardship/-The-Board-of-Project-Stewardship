@@ -167,6 +167,16 @@
       <section id="bh-3d-panel" class="bh-3d-panel bh-noprint" hidden>
         <h2>House and property</h2>
         <p id="bh-3d-note" class="bh-help"></p>
+        <div class="bh-3d-controls" role="toolbar" aria-label="3D view controls">
+          <button type="button" id="bh-3d-roof" class="bh-btn bh-btn-ghost">Roof on/off</button>
+          <button type="button" class="bh-btn bh-btn-ghost" data-floor="Main">Main</button>
+          <button type="button" class="bh-btn bh-btn-ghost" data-floor="Upper">Upper</button>
+          <button type="button" class="bh-btn bh-btn-ghost" data-floor="All">All</button>
+          <button type="button" class="bh-btn bh-btn-ghost" data-mode="existing">Existing footprint</button>
+          <button type="button" class="bh-btn bh-btn-ghost" data-mode="interior">Optimized interior + addition</button>
+          <button type="button" class="bh-btn bh-btn-ghost" data-mode="google">Google 3D aerial</button>
+        </div>
+        <p id="bh-3d-room" class="bh-help"></p>
         <div id="bh-3d" class="bh-3d-view" aria-label="Interactive massing of the lot and house"></div>
         <div id="bh-3d-google" class="bh-3d-google" hidden></div>
         <ul id="bh-3d-legend" class="bh-3d-legend"></ul>
@@ -311,6 +321,9 @@
       site: "pacificprogroup.com",
       license: "PACIFPG765OF",
       servicesLine: "Additions and remodels",
+      logoUrl: "/assets/feasibility/pacific-pro-group-logo.png",
+      coverQrUrl: "",
+      googleMapsKey: "AIzaSyBg1yIKZ3VapGpmTVA8gE0MbYwWO7j7Sko",
       leadEmail: "editorial@boardofprojectstewardship.com",
       sheets: true
     };
@@ -324,7 +337,8 @@
   <script src="/assets/feasibility/build-here-stage.js?v=20261119a" defer></script>
   <script src="/assets/feasibility/build-here-export.js?v=20261119a" defer></script>
   <script src="/assets/feasibility/vendor/three.min.js?v=20261120a" defer></script>
-  <script src="/assets/feasibility/build-here-massing.js?v=20261120a" defer></script>
+  <script src="/assets/feasibility/build-here-interior.js?v=20261120b" defer></script>
+  <script src="/assets/feasibility/build-here-massing.js?v=20261120b" defer></script>
   <script src="/assets/feasibility/build-here-google3d.js?v=20261120a" defer></script>
   <script src="/assets/feasibility/build-here.js?v=20261119a" defer></script>
 </body>

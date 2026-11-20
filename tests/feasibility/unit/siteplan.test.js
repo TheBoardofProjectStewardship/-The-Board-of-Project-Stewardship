@@ -142,7 +142,7 @@ t.ok("the tables also come as HTML", /<caption>SITE DATA<\/caption>/.test(html) 
 
 /* ---- the sheet ---- */
 var sh = SP.sheet(M, { F: F, opt: opt("addition"), sheet: "SP-1" }), svg = sh.html;
-t.ok("the sheet is one landscape drawing", /viewBox="0 0 1650 1250"/.test(svg) && /class="bh-page bh-sheet"/.test(svg));
+t.ok("the sheet is one landscape drawing", /viewBox="0 0 1650 1175"/.test(svg) && /class="bh-page bh-sheet"/.test(svg));
 t.ok("title, sheet number and address are on it", /PRELIMINARY SITE PLAN/.test(svg) && />SP-1</.test(svg) && /5514 160TH AVE NE/.test(svg));
 t.ok("the title block carries the company, phone, email and site", /PACIFIC PRO GROUP LLC/.test(svg) && /\(206\) 446-5656/.test(svg) && /admin@pacificprogroup\.com/.test(svg) && /pacificprogroup\.com/.test(svg));
 t.ok("kitchen and bath remodels are in the service line", /Kitchen &amp; bath remodels/.test(svg));

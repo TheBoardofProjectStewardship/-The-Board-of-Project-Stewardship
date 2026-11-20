@@ -25,10 +25,10 @@
   /* Sheet: letter, landscape. The stylesheet prints the drawing 10.16 in wide (inside 0.35 in margins), so
      one inch on paper is UPI drawing units, and the plan can be held to a standard scale (1 in = 20 ft, and
      so on). Keep PRINT_W_IN in step with the .bh-sheet-svg print rule. */
-  var SHEET_W = 1650, SHEET_H = 1250, PRINT_W_IN = 10.16, UPI = SHEET_W / PRINT_W_IN;
-  var PLAN = { x: 40, y: 116, w: 1000, h: 930 };
-  var COL = { x: 1066, y: 116, w: 544, h: 930 };
-  var TB = { x: 40, y: 1066, w: 1570, h: 144 };
+  var SHEET_W = 1650, SHEET_H = 1175, PRINT_W_IN = 10.30, UPI = SHEET_W / PRINT_W_IN;
+  var PLAN = { x: 40, y: 108, w: 1000, h: 930 };
+  var COL = { x: 1066, y: 108, w: 544, h: 930 };
+  var TB = { x: 40, y: 1054, w: 1570, h: 106 };
   var SCALES = [8, 10, 16, 20, 30, 40, 50, 60, 80, 100, 150, 200, 300, 400, 500, 600, 800, 1000];
   /* Grayscale only. A verify row says "(verify)"; a hazard is named in the legend. Color is not the signal. */
   var INK = "#111111", MUTE = "#444444", RULE = "#666666", GREEN = "#222222", GREEN_FILL = "#eeeeee", TAN = "#777777", EARTH = "#555555";
@@ -908,16 +908,17 @@
     var nxp = W - 52, nyp = 52;
     out.push('<circle cx="' + nxp + '" cy="' + nyp + '" r="22" fill="#ffffff" stroke="' + INK + '" stroke-width="1.2"/><path d="M' + nxp + " " + (nyp - 30) + "L" + (nxp + 8) + " " + (nyp + 12) + "L" + nxp + " " + (nyp + 5) + "L" + (nxp - 8) + " " + (nyp + 12) + 'Z" fill="' + INK + '"/>' + T(nxp, nyp + 44, "N", { size: 13, weight: 700, anchor: "middle" }));
     if (M.slope && isNum(M.slope.fallDeg) && M.slope.fallCompass && M.slope.fallCompass !== "flat") {
-      var fx = W - 52, fy = 150, fall = Math.max(0, Math.round(M.slope.elevMax - M.slope.elevMin));
+      var fx = W - 78, fy = 148, fall = Math.max(0, Math.round(M.slope.elevMax - M.slope.elevMin));
       if (B.free([fx - 46, fy - 22, fx + 46, fy + 34])) {
         B.add([fx - 46, fy - 22, fx + 46, fy + 34]);
         out.push('<g transform="rotate(' + r1(M.slope.fallDeg) + " " + fx + " " + fy + ')"><path d="M' + fx + " " + (fy + 14) + "L" + fx + " " + (fy - 8) + '" stroke="' + EARTH + '" stroke-width="2" fill="none"/><path d="M' + fx + " " + (fy - 17) + "L" + (fx + 6) + " " + (fy - 6) + "L" + (fx - 6) + " " + (fy - 6) + 'Z" fill="' + EARTH + '"/></g>' +
-          T(fx, fy + 30, "GROUND FALLS ≈ " + fall + "' ±", { size: 9.5, anchor: "middle", fill: EARTH, halo: true, haloW: 3 }));
+          T(W - 8, fy + 28, "GROUND FALLS ≈ " + fall + "' ±", { size: 9, anchor: "end", fill: EARTH, halo: true, haloW: 3 }));
       }
     }
     /* scale bar */
     var unit = sc <= 10 ? 5 : sc <= 20 ? 10 : sc <= 40 ? 20 : sc <= 80 ? 40 : sc <= 200 ? 100 : sc <= 500 ? 200 : 500;
-    var sx0 = 18, sy0 = Hh - 30, u = unit * k, bar = "";
+    var sx0 = 18, sy0 = Hh - 30, u = unit * k;
+    var bar = '<rect x="8" y="' + (sy0 - 16) + '" width="' + r1(Math.min(W - 16, Math.max(2 * u + 280, 420))) + '" height="42" fill="#ffffff" stroke="#dddddd" stroke-width="0.6"/>';
     [[0, 0.5, INK], [0.5, 1, "#ffffff"], [1, 2, INK]].forEach(function (s) { bar += '<rect x="' + r1(sx0 + s[0] * u) + '" y="' + sy0 + '" width="' + r1((s[1] - s[0]) * u) + '" height="7" fill="' + s[2] + '" stroke="' + INK + '" stroke-width="1"/>'; });
     [0, 0.5, 1, 2].forEach(function (m) { bar += T(sx0 + m * u, sy0 - 5, (m * unit) + "'", { size: 10.5, anchor: "middle" }); });
     bar += T(sx0 + 2 * u + 16, sy0 + 7, "GRAPHIC SCALE (feet) · 1 in = " + sc + " ft on a letter sheet printed at 100%", { size: 10.5, fill: MUTE }) +
