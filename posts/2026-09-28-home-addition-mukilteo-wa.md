@@ -24,6 +24,8 @@ Mukilteo sits on the bluffs above Possession Sound. Many lots have water or moun
 
 In either direction, match the new roof lines, siding profile, and window proportions to the house you already have. When the original siding is no longer made, ask your designer for a deliberate, compatible alternative rather than a near-miss match.
 
+![Split-level home on a sloped Mukilteo, Washington lot where a home addition could go up or out](../assets/images/posts/2026-09-28-mukilteo-home-addition-going-up-6.webp "On many Mukilteo lots, slope and setbacks decide whether a home addition goes up or out.")
+
 ## City of Mukilteo permits: where to start
 
 First, confirm your parcel is inside City of Mukilteo limits. A mailing address alone doesn't settle jurisdiction, and unincorporated parcels are permitted by Snohomish County, not the city.
@@ -34,6 +36,8 @@ For city parcels, the [Building Permits page](https://mukilteowa.gov/207/Buildin
 2. **Electrical permits go through Washington Labor and Industries.** The city's page points to L&I's [electrical permits, fees, and inspections](https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/) page. Put the L&I electrical permit on the same schedule as the city building permit.
 3. **Ask Planning early.** For questions about how the rules apply to a specific property, the city asks you to email the Planning Department and may suggest a free pre-application meeting for complex questions. On a sloped or waterfront lot, that meeting is worth having before design is finished.
 4. **Watch for payment scams.** The city warns about fake permit invoices sent by email. It accepts payments only through its online portal or in person at City Hall, 11930 Cyrus Way. City Hall is open Monday through Thursday and closed Fridays.
+
+![Rolled addition plans and a site plan on a table inside a Mukilteo, Washington home](../assets/images/posts/2026-09-28-mukilteo-home-addition-permits-7.webp "A clear site plan and drawings are the starting point for a Mukilteo home addition permit.")
 
 ## Trees, slopes, and the addition footprint
 
@@ -51,6 +55,8 @@ Western Washington's long wet seasons are hard on an open roof deck or unwrapped
 - **Inspection holds before cover-up.** Framing, insulation, and mechanical rough-ins should be inspected before drywall closes the walls.
 
 Our [roofing](../roofing.html) and [siding](../siding.html) guides go deeper when the addition opens the envelope.
+
+![Window flashing and rainscreen furring on a home addition wall in Mukilteo, Washington](../assets/images/posts/2026-09-28-mukilteo-home-addition-weatherproof-8.webp "Flashing and a rainscreen gap help a Mukilteo home addition handle marine wind and rain.")
 
 ## Process video: rainscreen and window integration
 
@@ -72,6 +78,8 @@ These manufacturer pages are useful when you compare addition scopes. We don't i
 - [SIGA air-sealing tapes and membranes](https://www.siga.swiss/us_en/): tapes and membranes used to seal sheathing seams, windows, and penetrations in the building envelope.
 - [FastenMaster structural screws](https://www.fastenmaster.com/): structural wood screws and ledger fasteners that come up when new framing ties into existing structure.
 
+![Fiber cement siding, house wrap and framing lumber staged for a home addition in Mukilteo, Washington](../assets/images/posts/2026-09-28-mukilteo-home-addition-materials-9.webp "Siding, weather barrier and framing lumber staged for a Mukilteo home addition.")
+
 ## Planning checklist for a Mukilteo addition
 
 1. Confirm city or county jurisdiction, then gather a survey or site plan showing slopes, trees, buffers, and setbacks.
@@ -82,6 +90,8 @@ These manufacturer pages are useful when you compare addition scopes. We don't i
 6. Verify every contractor at [L&I Verify](https://secure.lni.wa.gov/verify/). Our [verify a contractor](../verify-contractor.html) page explains how.
 
 More Mukilteo context is on our [Mukilteo page](../mukilteo.html).
+
+![Finished home addition blended into an existing house in Mukilteo, Washington](../assets/images/posts/2026-09-28-mukilteo-home-addition-finished-10.webp "A finished Mukilteo home addition with siding and rooflines matched to the original house.")
 
 ## Where Pacific Pro Group fits
 
