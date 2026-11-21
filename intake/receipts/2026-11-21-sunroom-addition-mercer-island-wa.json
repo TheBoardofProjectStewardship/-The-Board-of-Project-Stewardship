@@ -1,0 +1,25 @@
+{
+  "submission_id": "2026-11-21-sunroom-addition-mercer-island-wa",
+  "idempotency_key": "sha256:ae3661fa702aacc415dc55d5cd60f71a09e95a1e6bcc2cd40f9fdb91d4efcf73",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-11-21T11:55:30Z",
+  "outputs": [
+    "assets/images/posts/2026-11-21-mercer-island-sunroom-1.webp",
+    "assets/images/posts/2026-11-21-mercer-island-sunroom-2.webp",
+    "assets/images/posts/2026-11-21-mercer-island-sunroom-3.webp",
+    "assets/images/posts/2026-11-21-mercer-island-sunroom-4.webp",
+    "assets/images/posts/2026-11-21-mercer-island-sunroom-5.webp",
+    "assets/images/posts/2026-11-21-mercer-island-sunroom-6.webp",
+    "assets/images/posts/2026-11-21-mercer-island-sunroom-7.webp",
+    "assets/images/posts/2026-11-21-mercer-island-sunroom-8.webp",
+    "assets/images/posts/2026-11-21-mercer-island-sunroom-9.webp",
+    "posts/2026-11-21-sunroom-addition-mercer-island-wa.md",
+    "posts/2026-11-21-sunroom-addition-mercer-island-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 109
+}
