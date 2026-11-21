@@ -101,6 +101,10 @@ t.ok("a commercial lot does not say living area is missing", ballardMiss.remodel
 var countyLot = R.pick({ juris: "kc", zone: "IH", stateAbbr: "WA", lot: 40000 });
 var countyWalk = Sum.blocks(Sum.facts({ stateAbbr: "WA", juris: "kc", county: "King County" }, { zone: "IH" }, countyLot, {}, {}, { ok: true, hasGeo: true, sidewalks: [], trees: [], streets: [] })).landscaping.filter(function (r) { return r.key === "sidewalk"; })[0];
 t.ok("an unincorporated sidewalk names the county", countyWalk && /King County/.test(countyWalk.v) && !/the city/i.test(countyWalk.v), countyWalk && countyWalk.v);
+var houseWalk = Sum.blocks(Sum.facts({ stateAbbr: "WA", juris: "seattle", city: "Seattle" }, { zone: "LR1 (M)", lot: 4000 }, R.pick({ juris: "seattle", zone: "LR1 (M)", lot: 4000, mha: "M" }), {}, {}, { ok: true, hasGeo: true, sidewalks: [], trees: [], streets: [] })).landscaping.filter(function (r) { return r.key === "sidewalk"; })[0];
+t.ok("a residential sidewalk sentence capitalizes the city", houseWalk && /complete\. The City of Seattle can ask/.test(houseWalk.v) && houseWalk.v.indexOf(". the ") < 0, houseWalk && houseWalk.v);
+var deptWalk = Sum.blocks(Sum.facts({ stateAbbr: "TX", juris: "outside" }, { zone: "", lot: 8000 }, R.pick({ juris: "outside", zone: "", lot: 8000, stateAbbr: "TX" }), {}, {}, { ok: true, hasGeo: true, sidewalks: [], trees: [], streets: [] })).landscaping.filter(function (r) { return r.key === "sidewalk"; })[0];
+t.ok("a residential sidewalk sentence capitalizes the planning department", deptWalk && /complete\. The local planning department can ask/.test(deptWalk.v), deptWalk && deptWalk.v);
 var txRules = R.pick({ juris: "outside", zone: "", lot: 8000, stateAbbr: "TX" });
 t.ok("an out-of-state lot with no zone uses typical assumptions", txRules.assumed === true && txRules.setbacks.front === 25);
 t.ok("an out-of-state study does not carry the Washington parking cap", txRules.site.parking == null && txRules.site.wa === false);
