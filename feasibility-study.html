@@ -135,7 +135,7 @@
   <header class="max-w-6xl mx-auto px-4 pt-10 pb-6">
     <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary mb-2">Pacific Pro Group · Feasibility</p>
     <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight mb-3">Pacific Pro Group's Feasibility Study</h1>
-    <p class="text-slate-300 font-light max-w-3xl leading-relaxed">Type a street address in the United States. The study opens with a site plan sheet (SP-1) and a facts sheet (F-1), then the full lot report: what the lot can take, parcel facts, landscape, slope, and floor area and coverage where the zoning math is coded. Print it, or download an HTML file you can open later.</p>
+    <p class="text-slate-300 font-light max-w-3xl leading-relaxed">Type a street address. The study opens with a site plan sheet (SP-1) and a facts sheet (F-1), then the lot report: parcel facts, landscape, slope, and the standards that apply to that lot. Print it, or download an HTML file you can open later.</p>
     <p class="text-slate-400 text-sm font-light max-w-3xl leading-relaxed mt-2">King County living area is read from the assessor extract already published on this site. Snohomish house size, when a parcel is in the published house-size index, is shown as the county FinSize and is not used as finished living area. FEMA flood zones and USDA soil map units are read from those public services. If a service or file does not answer, the row says data unavailable. Nothing is filled in with a stand-in number. The Board's original tool is unchanged at <a href="./build-here.html" class="text-secondary hover:underline">What can I build here?</a></p>
   </header>
 
@@ -146,7 +146,7 @@
         <div class="bh-grow">
           <label class="bh-label" for="bh-address">Street address, city and ZIP</label>
           <input id="bh-address" name="address" class="bh-input" type="text" autocomplete="street-address" placeholder="Street address, city, state ZIP" aria-describedby="bh-address-help">
-          <p id="bh-address-help" class="bh-help">Works for street addresses across the United States. The address goes to the US Census geocoder and to public parcel / map services. We do not store it.</p>
+          <p id="bh-address-help" class="bh-help">Type a street address. The study reads public parcel and map records for that address. This site does not store it.</p>
           <details class="bh-privacy"><summary>Where the address goes</summary><p class="bh-help">The address you type goes to the US Census Bureau geocoder. If the Census has no match, it goes to the Esri World Geocoder. The matched address and the location of the lot then go to county, city and state map servers. The location also goes to the USGS elevation service, the FEMA flood map service, the USDA soil survey service, Esri-hosted building footprints and OpenStreetMap servers. Google receives the map point only if you press Show the satellite map. This site does not store the address, and an address in the page link is taken out of the link when the page opens. Page analytics record that a lookup ran and the county, city and zone it was in, never the address.</p></details>
         </div>
         <div style="align-self:end;padding-bottom:1.7rem"><button id="bh-go" class="bh-btn" type="submit">Look it up</button></div>
