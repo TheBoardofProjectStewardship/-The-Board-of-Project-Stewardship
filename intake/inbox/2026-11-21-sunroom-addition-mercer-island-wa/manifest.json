@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-11-21-sunroom-addition-mercer-island-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-11-21T12:05:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Sunroom Addition Mercer Island WA \u2014 Permits, Energy Code Glazing, Foundations and Lot Coverage",
+    "date": "2026-11-21",
+    "slug": "sunroom-addition-mercer-island-wa",
+    "description": "A Mercer Island guide to adding a sunroom: City permits, small vs. substantial additions, lot coverage and setbacks, geohazard and shoreline checks, energy code rules for glass, foundations, flashing, inspections and hiring.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 board-intake inbox had no 2026-11-21 packets (latest openclaw-seo-2026-11-20); PC not touched further. Topic: sunroom addition in Mercer Island WA. City of Mercer Island CPD pages: permits required (MICC 17.14.010 Sec 105.1/105.2; exemptions do not apply in critical areas); Small Residential Additions (<500 sf new footprint and <500 sf new impervious, no critical area; required forms/documents; pre-application meeting; geotech/critical area/energy/structural/stormwater/arborist reports); Substantial Residential Projects (>=500 sf); Zoning summary (single-family setbacks 20/25 ft, side yards, GFA 40% of net lot area, lot coverage by slope 40/35/30/20%, 9% hardscape); Permit FAQ (no work before permit; no expedite; revisions; geotech report by WA-licensed engineer with statement of risk; wet season Oct 1-Apr 1 on slope hazard lots; owner as contractor; surveyor for lines; final inspection card = CO; City Hall currently closed); Shoreline (200 ft of OHWM Lake Washington; Shoreline Exemption; SEPA checklist; 14-day appeal); Inspections (MyBuildingPermit.com, request by 6 a.m.; work hours); Residential energy code page (2021 WSEC-R effective March 15 2024; addition credits 2/5). 2021 WSEC-R: skylight definition includes sunroom glazing <60 deg; Table R402.1.2 U 0.30 fenestration / 0.50 skylight; R402.3.3; R402.5; R502.1, R502.1.1, R502.2, R502.3.1. L&I Verify + hiring a contractor. Mercer Island already in _SLUG_PLACES/_PLACE_NAMES; generate_site.py unchanged; mercer-island.html unchanged. Cross-links: patio cover Lynnwood 2026-11-09, skylight Redmond 2026-11-10, window replacement Kent 2026-10-25, home addition Kirkland 2026-09-19, bathroom remodel Mercer Island 2026-10-15. No fee or price figures. Producer role fields kept per intake contract."
+}

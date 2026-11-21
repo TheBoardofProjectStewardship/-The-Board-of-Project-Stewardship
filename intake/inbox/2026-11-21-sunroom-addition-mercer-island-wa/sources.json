@@ -1,0 +1,172 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Mercer Island",
+    "service": "Sunroom addition: permits, small vs substantial addition review, lot coverage and setbacks, geohazard and shoreline, energy code glazing, foundations, flashing and inspections",
+    "slug": "sunroom-addition-mercer-island-wa"
+  },
+  "sources": [
+    {
+      "url": "https://pacificprogroup.com/",
+      "title": "https://pacificprogroup.com/",
+      "retrieved": "2026-11-21",
+      "http_status": 200,
+      "supports": "Board #1 ranked firm link"
+    },
+    {
+      "url": "https://sbcc.wa.gov/sites/default/files/2024-10/2021%20WSEC_R%20_Sept2024.pdf",
+      "title": "https://sbcc.wa.gov/sites/default/files/2024-10/2021%20WSEC_R%20_Sept2024.pdf",
+      "retrieved": "2026-11-21",
+      "http_status": 200,
+      "supports": "2021 WSEC-R: skylight definition, Table R402.1.2, R402.3.3, R402.5, R502"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-11-21",
+      "http_status": 200,
+      "supports": "License/bond/insurance lookup"
+    },
+    {
+      "url": "https://temosunrooms.com/",
+      "title": "https://temosunrooms.com/",
+      "retrieved": "2026-11-21",
+      "http_status": 200,
+      "supports": "Material maker: sunroom systems or insulating glass"
+    },
+    {
+      "url": "https://www.cardinalcorp.com/",
+      "title": "https://www.cardinalcorp.com/",
+      "retrieved": "2026-11-21",
+      "http_status": 200,
+      "supports": "Material maker: sunroom systems or insulating glass"
+    },
+    {
+      "url": "https://www.fourseasonssunrooms.com/",
+      "title": "https://www.fourseasonssunrooms.com/",
+      "retrieved": "2026-11-21",
+      "http_status": 200,
+      "supports": "Material maker: sunroom systems or insulating glass"
+    },
+    {
+      "url": "https://www.lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "https://www.lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "retrieved": "2026-11-21",
+      "http_status": 200,
+      "supports": "State hiring guidance"
+    },
+    {
+      "url": "https://www.mercerisland.gov/cpd/page/building-permits-when-are-they-required",
+      "title": "https://www.mercerisland.gov/cpd/page/building-permits-when-are-they-required",
+      "retrieved": "2026-11-21",
+      "http_status": 200,
+      "supports": "Mercer Island: when permits are required (MICC 17.14.010 105.1/105.2; critical areas)"
+    },
+    {
+      "url": "https://www.mercerisland.gov/cpd/page/codes-design-criteria-research",
+      "title": "https://www.mercerisland.gov/cpd/page/codes-design-criteria-research",
+      "retrieved": "2026-11-21",
+      "http_status": 200,
+      "supports": "Mercer Island codes, design criteria, geohazard geotech reports, wind map"
+    },
+    {
+      "url": "https://www.mercerisland.gov/cpd/page/how-upload-your-submittal",
+      "title": "https://www.mercerisland.gov/cpd/page/how-upload-your-submittal",
+      "retrieved": "2026-11-21",
+      "http_status": 200,
+      "supports": "Mercer Island Permit Submittal Portal"
+    },
+    {
+      "url": "https://www.mercerisland.gov/cpd/page/inspections",
+      "title": "https://www.mercerisland.gov/cpd/page/inspections",
+      "retrieved": "2026-11-21",
+      "http_status": 200,
+      "supports": "Mercer Island Inspections: MyBuildingPermit.com, work hours"
+    },
+    {
+      "url": "https://www.mercerisland.gov/cpd/page/permit-faq",
+      "title": "https://www.mercerisland.gov/cpd/page/permit-faq",
+      "retrieved": "2026-11-21",
+      "http_status": 200,
+      "supports": "Mercer Island Permit FAQ: no early start, revisions, geotech, wet season, owner as contractor, CO"
+    },
+    {
+      "url": "https://www.mercerisland.gov/cpd/page/residential-energy-code-compliance-mercer-island",
+      "title": "https://www.mercerisland.gov/cpd/page/residential-energy-code-compliance-mercer-island",
+      "retrieved": "2026-11-21",
+      "http_status": 200,
+      "supports": "Mercer Island residential energy code: 2021 WSEC-R effective date, addition credits"
+    },
+    {
+      "url": "https://www.mercerisland.gov/cpd/page/shoreline-management-sma",
+      "title": "https://www.mercerisland.gov/cpd/page/shoreline-management-sma",
+      "retrieved": "2026-11-21",
+      "http_status": 200,
+      "supports": "Mercer Island Shoreline Management: 200 ft OHWM, exemption, SEPA, appeal"
+    },
+    {
+      "url": "https://www.mercerisland.gov/cpd/page/simple-residential-projects-over-counter-otc",
+      "title": "https://www.mercerisland.gov/cpd/page/simple-residential-projects-over-counter-otc",
+      "retrieved": "2026-11-21",
+      "http_status": 200,
+      "supports": "Mercer Island simple projects: OTC unavailable; additions routed to small additions; business license"
+    },
+    {
+      "url": "https://www.mercerisland.gov/cpd/page/small-residential-additions-and-remodels",
+      "title": "https://www.mercerisland.gov/cpd/page/small-residential-additions-and-remodels",
+      "retrieved": "2026-11-21",
+      "http_status": 200,
+      "supports": "Mercer Island Small Residential Additions and Remodels: thresholds, forms, documents"
+    },
+    {
+      "url": "https://www.mercerisland.gov/cpd/page/substantial-residential-projects",
+      "title": "https://www.mercerisland.gov/cpd/page/substantial-residential-projects",
+      "retrieved": "2026-11-21",
+      "http_status": 200,
+      "supports": "Mercer Island Substantial Residential Projects (500 sf or more)"
+    },
+    {
+      "url": "https://www.mercerisland.gov/cpd/page/zoning-island",
+      "title": "https://www.mercerisland.gov/cpd/page/zoning-island",
+      "retrieved": "2026-11-21",
+      "http_status": 200,
+      "supports": "Mercer Island zoning summary: setbacks, GFA, lot coverage by slope"
+    },
+    {
+      "url": "https://www.mercerisland.gov/sites/default/files/fileattachments/community_planning_amp_development/page/1981/2021_design_criteria_table_r301_-_mercer_island_.pdf",
+      "title": "https://www.mercerisland.gov/sites/default/files/fileattachments/community_planning_amp_development/page/1981/2021_design_criteria_table_r301_-_mercer_island_.pdf",
+      "retrieved": "2026-11-21",
+      "http_status": 200,
+      "supports": "Mercer Island 2021 design criteria table"
+    },
+    {
+      "url": "https://www.mybuildingpermit.com/",
+      "title": "https://www.mybuildingpermit.com/",
+      "retrieved": "2026-11-21",
+      "http_status": 200,
+      "supports": "MyBuildingPermit inspections and status"
+    },
+    {
+      "url": "https://www.patioenclosures.com/",
+      "title": "https://www.patioenclosures.com/",
+      "retrieved": "2026-11-21",
+      "http_status": 200,
+      "supports": "Material maker: sunroom systems or insulating glass"
+    }
+  ],
+  "dropped": [
+    {
+      "url": "https://www.mercerisland.gov/cpd/page/permits",
+      "reason": "403"
+    },
+    {
+      "url": "https://www.mercerisland.gov/cpd/page/plan-review-process",
+      "reason": "403"
+    },
+    {
+      "url": "https://library.municode.com/wa/mercer_island",
+      "reason": "403 to box curl"
+    }
+  ],
+  "notes": "Box curl 2026-11-21 with browser UA and full browser headers. All cited = 200 (see cited-status.txt). WSEC-R PDF read via pdftotext. No fee or price figures quoted (shoreline dollar threshold intentionally omitted)."
+}
