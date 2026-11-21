@@ -505,7 +505,7 @@
     if (isNum(F.garageAtt) && F.garageAtt > 0) gar.push(fmt(F.garageAtt) + " sf attached");
     if (isNum(F.garageBsmt) && F.garageBsmt > 0) gar.push(fmt(F.garageBsmt) + " sf in basement");
     if (isNum(F.garageDet) && F.garageDet > 0) gar.push(fmt(F.garageDet) + " sf detached");
-    r.push(gar.length ? row("Garage (assessor)", gar.join(" · ")) : F.garageNone ? row("Garage (assessor)", "none on the record") : miss("Garage"));
+    if (!F.nonres) r.push(gar.length ? row("Garage (assessor)", gar.join(" · ")) : F.garageNone ? row("Garage (assessor)", "none on the record") : miss("Garage"));
     var ys = [F.yearBuilt ? "built " + F.yearBuilt : "", F.stories ? F.stories + (F.stories === "1" ? " story" : " stories") + (isNum(F.basementTotal) && F.basementTotal > 0 ? " + basement" : "") : ""].filter(Boolean);
     r.push(ys.length ? row("Year built / stories", ys.join(" · ")) : miss("Year built / stories"));
     var sl = F.slope;
@@ -532,7 +532,8 @@
     };
     r = [];
     if (F.assumed) r.push(row("Basis", "Typical residential assumptions, confirm with your local planning department. These are not the local code.", "verify"));
-    if (F.unrecognized) r.push(row("Basis", "This zone is not recognized. Confirm the standards with your local planning department.", "verify"));
+    if (F.blank) r.push(row("Basis", "No zone was found for this lot, confirm with your local planning department.", "verify"));
+    else if (F.unrecognized) r.push(row("Basis", "This zone is not recognized. Confirm the standards with your local planning department.", "verify"));
     else if (F.nonres || F.residential === false) r.push(row("Basis", "This lot is not a house lot. An addition is not drawn. Confirm the use with your local planning department.", "verify"));
     r.push(sbRow("Front (street)", sb.front, "front"));
     if ((M && M.corner) || ((!M || !M.ok) && isNum(sb.streetSide))) r.push(isNum(sb.streetSide) ? sbRow("Street side (corner lot)", sb.streetSide, "street") : row("Street side (corner lot)", isNum(sb.front) ? "front setback used: " + sb.front + " ft (verify)" + ex("street") : "not coded, verify with " + place, "verify"));
@@ -546,6 +547,8 @@
 
     /* Lot coverage */
     var bld = isNum(eff.buildings) ? eff.buildings : null, acc = (isNum(eff.detached) ? eff.detached : 0) + (isNum(eff.other) ? eff.other : 0);
+    var mainSf = isNum(eff.survey) ? eff.survey : (isNum(eff.roof) ? eff.roof : null);
+    if (mainSf != null && acc > 0 && (bld == null || bld + 1 < mainSf + acc)) bld = mainSf + acc;
     var hasAcc = isNum(eff.detached) || isNum(eff.other), fp = opt && isNum(opt.footprintSf) && opt.kind !== "remodel" && opt.kind !== "secondStory" ? (P && P.ok && isNum(P.sf) && P.partial ? P.sf : opt.footprintSf) : null;
     r = [];
     var bldWord = F.residential ? "house" : "building";
@@ -594,7 +597,7 @@
     (eff.floorMissing || []).forEach(function (m) { r.push(miss("(E) " + m)); });
     var used = isNum(eff.floorUsed) ? eff.floorUsed : null, fPartial = !!(eff.floorMissing && eff.floorMissing.length);
     if (used == null && F.living && F.living.finSize && isNum(F.living.sf)) r.push(row("(E) " + (F.residential === false ? "building size" : "house size") + " (county record)", "≈ " + fmt(F.living.sf) + " sf · not total living area", "est"));
-    r.push(used != null ? row("TOTAL EXISTING", (fPartial ? "≥ " : "") + fmt(used) + " sf", fPartial ? "partial" : "fact", true) : miss("TOTAL EXISTING", "living area " + MISSING));
+    r.push(used != null ? row("TOTAL EXISTING", (fPartial ? "≥ " : "") + fmt(used) + " sf", fPartial ? "partial" : "fact", true) : miss("TOTAL EXISTING", (F.nonres ? "floor area " : "living area ") + MISSING));
     if (opt && isNum(opt.gfaSf) && opt.gfaSf > 0) {
       r.push(row("(N) " + (OPT_ROW[opt.kind] || "option"), fmt(opt.gfaSf) + " sf" + (opt.levels > 1 && isNum(opt.footprintSf) ? " (" + fmt(opt.footprintSf) + " × " + opt.levels + " levels)" : "")));
       var gT = opt.kind === "teardown" ? opt.gfaSf : (used != null ? used + opt.gfaSf : null);

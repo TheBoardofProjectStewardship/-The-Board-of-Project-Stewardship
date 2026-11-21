@@ -1668,6 +1668,7 @@
     var assumed = !!(rs && rs.assumed);
     var nonres = !!(rs && rs.residential === false);
     var unrecognized = !!(rs && rs.unrecognized);
+    var blank = !!(rs && rs.blank);
     var houseLot = !rs || (rs.residential !== false && !rs.unrecognized);
     var coded = !!(rs && rs.coded !== false && !assumed && houseLot);
     var aduRule = adu && adu.status === "coded" ? adu.text : "", aduStateNote = !assumed && adu && adu.status === "state" ? adu.text : "";
@@ -1699,6 +1700,7 @@
       assumed: assumed,
       nonres: nonres,
       unrecognized: unrecognized,
+      blank: blank,
       hasFloorCap: caps.hasFloorCap,
       floorCap: caps.floorCap,
       coverageCap: caps.coverageCap,
@@ -1757,7 +1759,7 @@
     }
     // One concept per project type, sized from the same figures as the cards: what the site plan sheets draw.
     var options = M.options ? M.options({
-      effective: solved.effective, zoningCoded: coded, assumed: assumed, nonres: nonres, unrecognized: unrecognized, hasFloorCap: caps.hasFloorCap, floorCap: caps.floorCap, coverageCap: caps.coverageCap,
+      effective: solved.effective, zoningCoded: coded, assumed: assumed, nonres: nonres, unrecognized: unrecognized, blank: blank, hasFloorCap: caps.hasFloorCap, floorCap: caps.floorCap, coverageCap: caps.coverageCap,
       imperviousCap: caps.imperviousCap, envArea: caps.envArea, stories: v.stories, firstFloor: s.firstFloor, heightFt: rs && rs.height ? rs.height.ft : null, adu: adu
     }) : [];
     return { bundle: solved.bundle, cards: solved.cards, prepared: prepared, effective: solved.effective, seed: seed, options: options };
@@ -2187,7 +2189,7 @@
     var optRows = [
       { label: (optBy.addition && (optBy.addition.kind === "secondStory" || optBy.addition.footprintSf === 0)) ? "Addition (upward)" : "Addition", opt: optBy.addition },
       { label: "Second story", secondStory: true, row: secRow, hide: !!(rs && (rs.residential === false || rs.unrecognized)) },
-      { label: "ADU / detached ADU", opt: optBy.adu },
+      { label: "ADU / detached ADU", opt: optBy.adu, hide: !!(rs && rs.residential === false) },
       { label: "Garage or shop", opt: optBy.shop, hide: !!(rs && rs.residential === false) },
       { label: "New house (teardown)", opt: optBy.teardown, hide: !!(rs && rs.residential === false) },
       { label: "Interior remodel", opt: optBy.remodel }

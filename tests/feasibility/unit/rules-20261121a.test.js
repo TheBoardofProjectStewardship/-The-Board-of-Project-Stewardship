@@ -43,6 +43,9 @@ t.ok("Everett UR4 keeps the state-law rows", stateLaw(R.pick({ juris: "city", ci
 t.ok("Edmonds RS-8 keeps the state-law rows", stateLaw(R.pick({ juris: "edmonds", zone: "RS-8", lot: 7000, stateAbbr: "WA" })));
 var everett = R.pick({ juris: "city", city: "everett", zone: "UR3", lot: 6000, stateAbbr: "WA" });
 t.ok("Everett UR3 is a house zone under state law, not typical setbacks", stateLaw(everett) && !/not a house lot/.test(JSON.stringify(everett)));
+t.ok("an uncoded Seattle residential zone keeps the state-law rows", stateLaw(R.pick({ juris: "seattle", zone: "SF5000", lot: 5000, stateAbbr: "WA" })));
+t.ok("an uncoded Kenmore residential zone keeps the state-law rows", stateLaw(R.pick({ juris: "kenmore", zone: "RS", lot: 8000, stateAbbr: "WA" })));
+t.ok("Kenmore R-1 stays on the coded table", R.pick({ juris: "kenmore", zone: "R-1", lot: 20000 }).key === "kenmore" && R.pick({ juris: "kenmore", zone: "R-1", lot: 20000 }).setbacks.front === 20);
 var pd = R.pick({ juris: "outside", zone: "PD", lot: 8000, stateAbbr: "OH" });
 t.ok("PD is unrecognized and is not called a house lot or a typical house", pd.unrecognized === true && pd.residential == null && pd.assumed !== true && !pd.setbacks.front && /not recognized/.test(pd.caveat) && !/not a house lot/.test(pd.caveat));
 var sea = R.pick({ juris: "seattle", zone: "SF5000", stateAbbr: "WA", lot: 5000 });
@@ -66,10 +69,17 @@ t.ok("Railroad shows the Edmonds code chapter", chapter && /ECDC/.test(chapter.v
 var blankPermit = Sum.blocks(Sum.facts({ stateAbbr: "WA", juris: "city" }, { zone: "" }, R.pick({ juris: "city", city: "", zone: "", stateAbbr: "WA" }), {}, {}, null)).building.filter(function (r) { return r.key === "permits"; })[0];
 t.ok("a blank city does not print City of undefined", blankPermit && blankPermit.v.indexOf("undefined") < 0 && JSON.stringify(blankPermit).indexOf("City of undefined") < 0, blankPermit && blankPermit.v);
 var pdCards = Ms.scenarios({ unrecognized: true, lot: 8000, living: 1500, roof: 900, zoningCoded: false });
-["adu", "shop", "teardown"].forEach(function (id) {
+["addition", "adu", "shop", "teardown"].forEach(function (id) {
   var card = pdCards.filter(function (c) { return c.id === id; })[0];
   t.ok(id + " card says the zone is not recognized", card && /not recognized/.test(card.line) && /confirm locally/i.test(card.metric), card && card.line);
 });
+var blankCards = Ms.scenarios({ blank: true, unrecognized: true, lot: 5000, living: 1200, roof: 900 });
+["addition", "adu", "shop", "teardown"].forEach(function (id) {
+  var card = blankCards.filter(function (c) { return c.id === id; })[0];
+  t.ok(id + " card says no zone was found", card && card.line === "No zone was found for this lot, confirm with your local planning department." && !/not recognized/.test(card.line), card && card.line);
+});
+var blankRs = R.pick({ juris: "seattle", zone: "", stateAbbr: "WA" });
+t.ok("a blank Seattle zone is not called unrecognized", blankRs.blank === true && blankRs.caveat === "No zone was found for this lot, confirm with your local planning department.");
 var pdOpts = Ms.options({ unrecognized: true, zoningCoded: false, effective: { living: 1500, roof: 900 }, envArea: 2000 });
 ["adu", "shop", "teardown"].forEach(function (id) {
   var opt = pdOpts.filter(function (o) { return o.id === id; })[0];
@@ -82,6 +92,15 @@ t.ok("a commercial sidewalk note does not mention a new house", nonresBlocks.lan
 var ballardRoof = Sum.facts({ stateAbbr: "WA", juris: "seattle", city: "Seattle" }, { zone: "NC2-55 (M)" }, nc, {}, {}, { ok: true, sidewalks: [] });
 ballardRoof = Sum.blocks(ballardRoof);
 t.ok("a commercial re-roof note is not the one-family exemption", ballardRoof.roofing.filter(function (r) { return r.key === "reroofRule"; })[0].v.indexOf("one- or two-family") < 0);
+t.ok("a commercial lot hides the ADU row", !nonresBlocks.building.some(function (r) { return r.key === "adu"; }));
+t.ok("a commercial lot hides garage and deck", !nonresBlocks.remodel.some(function (r) { return r.key === "garage" || /Garage/.test(r.k); }));
+t.ok("a commercial kitchen note does not cite the residential code", nonresBlocks.remodel.filter(function (r) { return r.key === "kitchenBath"; })[0].v.indexOf("residential code") < 0);
+t.ok("a commercial asbestos line says the building", (function () { var a = nonresBlocks.remodel.filter(function (r) { return r.key === "asbestos"; })[0]; return a && a.v.indexOf("the building") >= 0 && a.v.indexOf("the house") < 0; })());
+var ballardMiss = Sum.blocks(Sum.facts({ stateAbbr: "WA", juris: "seattle", city: "Seattle" }, { zone: "NC2-55 (M)" }, nc, { effective: {} }, {}, null));
+t.ok("a commercial lot does not say living area is missing", ballardMiss.remodel.filter(function (r) { return r.key === "house"; })[0].v.indexOf("Living area") < 0);
+var countyLot = R.pick({ juris: "kc", zone: "IH", stateAbbr: "WA", lot: 40000 });
+var countyWalk = Sum.blocks(Sum.facts({ stateAbbr: "WA", juris: "kc", county: "King County" }, { zone: "IH" }, countyLot, {}, {}, { ok: true, hasGeo: true, sidewalks: [], trees: [], streets: [] })).landscaping.filter(function (r) { return r.key === "sidewalk"; })[0];
+t.ok("an unincorporated sidewalk names the county", countyWalk && /King County/.test(countyWalk.v) && !/the city/i.test(countyWalk.v), countyWalk && countyWalk.v);
 var txRules = R.pick({ juris: "outside", zone: "", lot: 8000, stateAbbr: "TX" });
 t.ok("an out-of-state lot with no zone uses typical assumptions", txRules.assumed === true && txRules.setbacks.front === 25);
 t.ok("an out-of-state study does not carry the Washington parking cap", txRules.site.parking == null && txRules.site.wa === false);
@@ -139,5 +158,10 @@ function rect(x0, y0, x1, y1) { return [ll(x0, y0), ll(x1, y0), ll(x1, y1), ll(x
   var additionRow = Sum.blocks(F).building.filter(function (r) { return r.key === "addition"; })[0];
   t.ok(sample.name + " draws an addition and labels (E) HOUSE", house && F.residential === true && add && add.footprintSf > 0 && svg.indexOf("(E) HOUSE") >= 0 && additionRow && additionRow.v.indexOf("not a house lot") < 0, [rs.key, rs.residential, add && add.footprintSf, additionRow && additionRow.v]);
 });
+
+var solved = Ms.resolveStudy({ lot: 20000, nonres: true, zoningCoded: false, auto: { roof: { sf: 4000, source: "map" }, other: { sf: 900, source: "map" } } });
+var cov = SP.tables(null, null, null, { nonres: true, residential: false, lot: { sf: 20000 }, eff: solved.effective, sb: {}, height: {} }).filter(function (t) { return t.id === "coverage"; })[0];
+var total = cov.rows.filter(function (r) { return r.k === "TOTAL EXISTING"; })[0];
+t.ok("a hidden accessory row still counts in the commercial total", solved.effective.buildings === 4900 && total && total.v.indexOf("4,900") >= 0 && !cov.rows.some(function (r) { return /garage|accessory|shed/i.test(r.k); }), total && total.v);
 
 t.done();

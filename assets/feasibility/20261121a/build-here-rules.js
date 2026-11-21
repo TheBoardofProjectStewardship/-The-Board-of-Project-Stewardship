@@ -776,6 +776,8 @@
   }
   var ECDC16 = { label: "ECDC Title 16", url: "https://edmonds.municipal.codes/ECDC/16" };
   var EDMONDS_CITY = { name: "Edmonds", tier: 0, home: "https://www.edmondswa.gov/government/departments/development_services", code: ECDC16 };
+  var SEATTLE_CITY = { name: "Seattle", tier: 1, home: "https://www.seattle.gov/sdci", code: SRC.smc2344 };
+  var KENMORE_CITY = { name: "Kenmore", tier: 0, home: "https://www.kenmorewa.gov/government/departments/development-services/permit-center", code: SRC.kmc21030 };
   function nonResidential(v) {
     v = v || {};
     if (!v.codeChapter && v.juris === "edmonds") v.codeChapter = ECDC16;
@@ -799,7 +801,7 @@
     }, v);
   }
   var UNRECOGNIZED = "This zone is not recognized. Confirm the standards with your local planning department.";
-  var BLANK_ZONE = "No zone was found for this lot. Confirm the standards with your local planning department.";
+  var BLANK_ZONE = "No zone was found for this lot, confirm with your local planning department.";
   function unrecognized(v) {
     v = v || {};
     var named = String(v.zone || "").trim();
@@ -809,6 +811,7 @@
       assumed: false,
       residential: null,
       unrecognized: true,
+      blank: !named,
       uncoded: true,
       coded: false,
       title: named ? "Zone " + named : "Zone not on record",
@@ -909,7 +912,7 @@
     var code = c ? c.code : null, city = v.juris === "city" || v.juris === "seattle" || v.juris === "kenmore" || v.juris === "edmonds";
     return {
       place: place,
-      asbestos: datum("An asbestos survey is required before any renovation or demolition, whatever the year the house was built.", SRC.pscaa402, CHECKED_NOV),
+      asbestos: datum("An asbestos survey is required before any renovation or demolition, whatever the year the " + (rs && rs.residential === false ? "building" : "house") + " was built.", SRC.pscaa402, CHECKED_NOV),
       lead: datum("In a home built before 1978, paid renovation work must follow lead-safe work practices.", SRC.epaRrp, CHECKED_NOV),
       reroof: v.juris === "seattle" && !(rs && rs.residential === false)
         ? datum("No permit for re-roofing a one- or two-family home or townhouse when the work does not change the building envelope beyond adding or replacing insulation. Replacing sheathing or framing needs a permit.", SRC.sdciReroof, CHECKED_NOV)
@@ -967,9 +970,9 @@
     if (!rs) {
       var cls = lotClass(v);
       var wa = v.stateAbbr ? v.stateAbbr === "WA" : v.juris !== "outside";
-      var cityRec = v.juris === "city" && CITY[v.city] ? CITY[v.city] : (v.juris === "edmonds" ? EDMONDS_CITY : null);
+      var cityRec = v.juris === "city" && CITY[v.city] ? CITY[v.city] : v.juris === "seattle" ? SEATTLE_CITY : v.juris === "kenmore" ? KENMORE_CITY : v.juris === "edmonds" ? EDMONDS_CITY : null;
       if (cls === "nonres") rs = nonResidential(v);
-      else if ((cls === "residential" || cls === "blank") && wa && cityRec) rs = stateLawCity(v, cityRec);
+      else if (cls === "residential" && wa && cityRec) rs = stateLawCity(v, cityRec);
       else if (cls === "residential") rs = typicalResidential(v);
       else if (cls === "blank" && !wa) rs = typicalResidential(v);
       else rs = unrecognized(v);

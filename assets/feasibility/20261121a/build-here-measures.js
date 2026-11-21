@@ -318,7 +318,9 @@
     var NONRES = "This lot is not a house lot. The building is not labeled as a house, and an addition is not drawn. Confirm the use with your local planning department.";
     var addition;
     var UNKNOWN = "This zone is not recognized. Confirm the standards with your local planning department.";
+    var BLANK = "No zone was found for this lot, confirm with your local planning department.";
     if (ctx.nonres) addition = card("addition", "Addition", "partial", NONRES, "Not a house lot");
+    else if (ctx.blank) addition = card("addition", "Addition", "partial", BLANK, "Confirm locally");
     else if (ctx.unrecognized) addition = card("addition", "Addition", "partial", UNKNOWN, "Confirm locally");
     else if (ctx.assumed) addition = card("addition", "Addition", "partial", TYPICAL + " The concept is about 1,500 sf inside the assumed setbacks.", "Concept only");
     else if (!any) addition = card("addition", "Addition", "nodata", "No lot or house measurement is on record yet, so an addition cannot be sized.", "Needs a lot size or a house measurement");
@@ -337,6 +339,7 @@
 
     var adu;
     if (ctx.nonres) adu = card("adu", "ADU", "partial", NONRES, "Not a house lot");
+    else if (ctx.blank) adu = card("adu", "ADU", "partial", BLANK, "Confirm locally");
     else if (ctx.unrecognized) adu = card("adu", "ADU", "partial", UNKNOWN, "Confirm locally");
     else if (ctx.assumed) adu = card("adu", "ADU", "partial", TYPICAL, "Concept only");
     else if (!any && !z) adu = card("adu", "ADU", "nodata", "No lot facts and no coded ADU rule are on record.", "Needs a lot and a zoning rule");
@@ -349,6 +352,7 @@
     var shop;
     var impNone = ctx.hasImpervious ? "" : " No impervious cap is coded for this zone here. One may still apply.";
     if (ctx.nonres) shop = card("shop", "Garage or shop", "partial", NONRES, "Not a house lot");
+    else if (ctx.blank) shop = card("shop", "Garage or shop", "partial", BLANK, "Confirm locally");
     else if (ctx.unrecognized) shop = card("shop", "Garage or shop", "partial", UNKNOWN, "Confirm locally");
     else if (ctx.assumed) shop = card("shop", "Garage or shop", "partial", TYPICAL, "Concept only");
     else if (!any) shop = card("shop", "Garage or shop", "nodata", "No lot or coverage fact is on record, so a garage or shop cannot be sized.", "Needs a lot measurement");
@@ -365,6 +369,7 @@
 
     var teardown;
     if (ctx.nonres) teardown = card("teardown", "Teardown and new house", "partial", NONRES, "Not a house lot");
+    else if (ctx.blank) teardown = card("teardown", "Teardown and new house", "partial", BLANK, "Confirm locally");
     else if (ctx.unrecognized) teardown = card("teardown", "Teardown and new house", "partial", UNKNOWN, "Confirm locally");
     else if (ctx.assumed) teardown = card("teardown", "Teardown and new house", "partial", TYPICAL, "Concept only");
     else if (!lot && !z) teardown = card("teardown", "Teardown and new house", "nodata", "No lot size and no coded cap are on record, so a new house cannot be sized.", "Needs a lot and a zoning rule");
@@ -444,7 +449,9 @@
     var NONRES = "This lot is not a house lot. The building is not labeled as a house, and an addition is not drawn. Confirm the use with your local planning department.";
     var a = opt("addition", "Addition"), wantGfa = d.additionGfa || 1500, lv = d.additionLevels || 2;
     var UNKNOWN = "This zone is not recognized. Confirm the standards with your local planning department.";
+    var BLANK = "No zone was found for this lot, confirm with your local planning department.";
     if (o.nonres) a.why = NONRES;
+    else if (o.blank) a.why = BLANK;
     else if (o.unrecognized) a.why = UNKNOWN;
     else if (o.assumed) {
       a.footprintSf = Math.round(wantGfa / lv); a.levels = lv; a.gfaSf = r10(wantGfa); a.feasible = null;
@@ -485,6 +492,7 @@
     var u = opt("adu", "Detached ADU"), adu = o.adu || {};
     var maxSf = adu.maxSf != null ? adu.maxSf : (adu.status === "state" ? 1000 : null);
     if (o.nonres) u.why = NONRES;
+    else if (o.blank) u.why = BLANK;
     else if (o.unrecognized) u.why = UNKNOWN;
     else if (o.assumed) u.why = TYPICAL;
     else if (!z) u.why = "An ADU is not sized for this zone.";
@@ -508,6 +516,7 @@
     // Garage or shop: a two-car footprint unless coverage or impervious room says less.
     var s = opt("shop", "Garage or shop");
     if (o.nonres) s.why = NONRES;
+    else if (o.blank) s.why = BLANK;
     else if (o.unrecognized) s.why = UNKNOWN;
     else if (o.assumed) s.why = TYPICAL;
     else if (!z) s.why = "A garage or shop is not sized for this zone.";
@@ -527,6 +536,7 @@
     // New house: the full floor cap on two levels, inside the coverage cap and the envelope.
     var t = opt("teardown", "New house"), lv2 = d.houseLevels || 2;
     if (o.nonres) t.why = NONRES;
+    else if (o.blank) t.why = BLANK;
     else if (o.unrecognized) t.why = UNKNOWN;
     else if (o.assumed) t.why = TYPICAL;
     else if (!z) t.why = "A new house is not sized for this zone.";
@@ -711,7 +721,7 @@
       roomFar: roomFar, roomCov: roomCov, roomImp: roomImp, hasImpervious: hasImpervious,
       envArea: input.envArea != null ? input.envArea : null, aduRule: input.aduRule || "",
       aduStateNote: input.aduStateNote || "", siteCaution: input.siteCaution || "", matchCaution: input.matchCaution || "", zoneCaution: input.zoneCaution || "",
-      assumed: !!input.assumed, nonres: !!input.nonres, unrecognized: !!input.unrecognized,
+      assumed: !!input.assumed, nonres: !!input.nonres, unrecognized: !!input.unrecognized, blank: !!input.blank,
       countyFinSize: countyFin, countyFinRows: (auto.countyFinSize && auto.countyFinSize.nDwell) || 0
     });
     return {

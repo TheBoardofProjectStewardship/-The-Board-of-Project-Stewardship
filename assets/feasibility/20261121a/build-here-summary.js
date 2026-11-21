@@ -53,7 +53,7 @@
     F.zone = v.zone || ""; F.zoneTyped = !!v.zone && v.zone !== (s.zone || ""); F.zoneSrc = F.zoneTyped ? "Typed on this page" : (s.zoneSrc || "");
     F.zoneName = F.zoneTyped && !rs ? "" : zoneNameOf(rs); F.overlay = rs && rs.overlay ? rs.overlay : ""; F.zoneDraft = !!s.zoneDraft && !F.zoneTyped;
     F.coded = !!(rs && rs.coded !== false && !rs.assumed && rs.residential !== false && !rs.unrecognized); F.rs = rs || null; F.site = site;
-    F.wa = wa; F.residential = !rs || (rs.residential !== false && !rs.unrecognized); F.nonres = !!(rs && rs.residential === false); F.unrecognized = !!(rs && rs.unrecognized);
+    F.wa = wa; F.residential = !rs || (rs.residential !== false && !rs.unrecognized); F.nonres = !!(rs && rs.residential === false); F.unrecognized = !!(rs && rs.unrecognized); F.blank = !!(rs && rs.blank);
     var lotTyped = isNum(v.lot) && (s.lot == null || Number(v.lot) !== Number(s.lot));
     F.lot = { sf: isNum(v.lot) ? v.lot : null, kind: !isNum(v.lot) ? null : lotTyped ? "typed" : s.lotKind === "record" ? "record" : "outline", gisSf: !lotTyped && s.lotKind === "record" && land.lot && isNum(land.lot.outlineSf) ? land.lot.outlineSf : null, src: lotTyped ? "Typed on this page" : (s.lotSrc || "") };
     var livTyped = isNum(v.existing) && (s.existing == null || Number(v.existing) !== Number(s.existing));
@@ -179,11 +179,13 @@
     var room = eff.roomFar;
     if (F.residential) add(B, "secondStory", "Second story", (isNum(H.ft) ? "Height limit " + H.ft + " ft" + (H.verify ? " (verify)" : "") : "Height limit " + notCoded) + "; " + (F.stories ? F.stories + (F.storiesNum === 1 ? " story" : " stories") + (F.storiesSrc ? " on record" : " as entered") : "stories are not on record") + "; " + (caps.farNone ? "no floor-area cap applies" : isNum(room) ? (room > 0 ? "floor-area room " + (fPartial ? "≤ " : "≈ ") + fmt(room) + " sf" : "no floor-area room left as read") : "floor-area room not known") + ". Whether the framing and foundation can carry another level is checked on site.", "est", [codeSrc]);
     var adu = rs && rs.adu ? rs.adu : null, od = optOf(F, "adu"), td = optText(od);
-    var aduHas = !!(adu && adu.text);
-    var aduBody = aduHas ? String(adu.text).replace(/[.\s]+$/, "") : "";
-    var aduLead = aduHas ? aduBody + (adu.status === "state" ? " (state-law floor; the local size limit is not applied, verify)" : adu.status === "verify" ? " (verify)" : "") + ". " : "ADU rules " + notCoded + ". ";
-    var aduFit = td && !(!aduHas && /not coded/i.test(td.v)) ? td.v : ""; // do not say "not coded" twice
-    add(B, "adu", "ADU / detached ADU", aduLead + aduFit + (adu && adu.status !== "verify" ? " State law caps an ADU's impact fees at half of a house's." : ""), adu && adu.status === "coded" && !adu.partial ? (td ? td.s : "fact") : "verify", [adu && adu.src ? adu.src : codeSrc, site.aduState && site.aduState.src ? site.aduState.src : null]);
+    if (!F.nonres) {
+      var aduHas = !!(adu && adu.text);
+      var aduBody = aduHas ? String(adu.text).replace(/[.\s]+$/, "") : "";
+      var aduLead = aduHas ? aduBody + (adu.status === "state" ? " (state-law floor; the local size limit is not applied, verify)" : adu.status === "verify" ? " (verify)" : "") + ". " : "ADU rules " + notCoded + ". ";
+      var aduFit = td && !(!aduHas && /not coded/i.test(td.v)) ? td.v : ""; // do not say "not coded" twice
+      add(B, "adu", "ADU / detached ADU", aduLead + aduFit + (adu && adu.status !== "verify" ? " State law caps an ADU's impact fees at half of a house's." : ""), adu && adu.status === "coded" && !adu.partial ? (td ? td.s : "fact") : "verify", [adu && adu.src ? adu.src : codeSrc, site.aduState && site.aduState.src ? site.aduState.src : null]);
+    }
     var on = optOf(F, "teardown"), tn = optText(on);
     if (!F.nonres) add(B, "newHouse", "New house (teardown)", tn ? tn.v + " A new house loses any grandfathered setbacks or size." : "Not judged.", tn ? tn.s : "verify", [codeSrc]);
     var units = null;
@@ -234,15 +236,15 @@
     if (isNum(F.basementTotal) && F.basementTotal > 0) hs.push("basement " + fmt(F.basementTotal) + " sf" + (isNum(F.basementFinished) ? " (" + fmt(F.basementFinished) + " finished)" : ""));
     else if (F.basementNone) hs.push("no basement on the record");
     if (F.stories) hs.push(F.stories + (F.storiesNum === 1 ? " story" : " stories"));
-    add(Rm, "house", F.nonres ? "Building size" : "House size", hs.length ? hs.join(" · ") : "Living area " + MISSING, F.living ? (F.living.est ? "est" : "fact") : "missing", [F.living ? F.living.src : ""]);
+    add(Rm, "house", F.nonres ? "Building size" : "House size", hs.length ? hs.join(" · ") : (F.nonres ? "Floor area " : "Living area ") + MISSING, F.living ? (F.living.est ? "est" : "fact") : "missing", [F.living ? F.living.src : ""]);
     add(Rm, "rooms", "Bedrooms / baths", isNum(F.beds) || isNum(F.baths) ? (isNum(F.beds) ? F.beds + " bedroom" + (F.beds === 1 ? "" : "s") : "bedrooms not on record") + " · " + (isNum(F.baths) ? F.baths + " bath" + (F.baths === 1 ? "" : "s") + " (full 1, three-quarter 0.75, half 0.5)" : "baths not on record") : MISSING, isNum(F.beds) || isNum(F.baths) ? "fact" : "missing", [F.recordSrc]);
     var gd = [];
     if (isNum(F.garageAtt) && F.garageAtt > 0) gd.push("attached garage " + fmt(F.garageAtt) + " sf");
     if (isNum(F.garageBsmt) && F.garageBsmt > 0) gd.push("basement garage " + fmt(F.garageBsmt) + " sf");
     if (!F.nonres && isNum(F.garageDet) && F.garageDet > 0) gd.push("detached garage " + fmt(F.garageDet) + " sf");
-    if (!gd.length && F.garageNone) gd.push("no garage on the record");
-    if (isNum(F.deck) && F.deck > 0) gd.push("deck " + fmt(F.deck) + " sf");
-    add(Rm, "garage", "Garage and deck", gd.length ? gd.join(" · ") : MISSING, gd.length ? "fact" : "missing", [F.recordSrc]);
+    if (!F.nonres && !gd.length && F.garageNone) gd.push("no garage on the record");
+    if (!F.nonres && isNum(F.deck) && F.deck > 0) gd.push("deck " + fmt(F.deck) + " sf");
+    if (!F.nonres) add(Rm, "garage", "Garage and deck", gd.length ? gd.join(" · ") : MISSING, gd.length ? "fact" : "missing", [F.recordSrc]);
     var as = datumRow(site.asbestos, place, "The asbestos rule");
     add(Rm, "asbestos", "Asbestos", (F.stateAbbr && F.stateAbbr !== "WA") ? "Check the local air agency's asbestos rule before any demolition or renovation." : as.v, (F.stateAbbr && F.stateAbbr !== "WA") ? "verify" : as.s, [as.src]);
     var ld = datumRow(site.lead, place, "The lead rule"), yb = +F.yearBuilt;
@@ -255,7 +257,7 @@
     else if (F.permitSearch === "failed") pv = "The permit layer did not answer, so permit history was not read.";
     else pv = "Permit history is not available online in a form this study reads for " + place + ". Pacific Pro Group pulls it for the site visit.";
     add(Rm, "permitHistory", "Permit history", "See page 5.", "fact", []);
-    add(Rm, "kitchenBath", "Kitchen or bath remodel", "No building permit for finish work (cabinets, counters, tile, flooring, paint) under the residential code's exempt-work list. Moving plumbing, wiring, gas or ducts needs trade permits; moving walls needs a building permit (verify with " + place + ").", "verify", [{ label: "International Residential Code R105.2 (work exempt from permit), as adopted in Washington; cities amend it", url: "" }]);
+    add(Rm, "kitchenBath", "Kitchen or bath remodel", F.nonres ? "Finish work is confirmed with " + place + ". Moving plumbing, wiring, gas, ducts, or walls needs a permit." : "No building permit for finish work (cabinets, counters, tile, flooring, paint) under the residential code's exempt-work list. Moving plumbing, wiring, gas or ducts needs trade permits; moving walls needs a building permit (verify with " + place + ").", "verify", F.nonres ? [] : [{ label: "International Residential Code R105.2 (work exempt from permit), as adopted in Washington; cities amend it", url: "" }]);
     add(Rm, "remodelOption", "If an addition does not fit", "A kitchen, bath or basement remodel inside the existing walls adds no lot coverage, floor area or setback question, so it stays open when the lot limits block an addition.", "fact", []);
 
     /* ---- Landscaping ---- */
@@ -292,7 +294,8 @@
     var fe = datumRow(site.fence, place, "The fence height limit");
     add(L, "fence", "Fences and yard rules", fe.v + (rs && isNum(rs.openSpacePct) ? " Open space: " + rs.openSpacePct + "% of the lot." : ""), fe.s, [fe.src]);
     if (F.wa) add(L, "shoreline", "Shoreline", F.shoreline ? "Inside shoreline jurisdiction (" + F.shoreline + " environment). The Shoreline Master Program adds buffers and a shoreline review." : "Not read from a shoreline map. Land within 200 ft of a lake, large stream, or the sound follows the Shoreline Master Program. Confirm it with " + place + ".", F.shoreline ? "fact" : "verify", [F.shoreline ? "Shoreline designations" : { label: "RCW 90.58 Shoreline Management Act", url: "https://app.leg.wa.gov/RCW/default.aspx?cite=90.58" }]);
-    add(L, "sidewalk", "Sidewalk on the frontage", F.sidewalk == null ? "Not read." : F.sidewalk ? "A sidewalk is mapped along the street in OpenStreetMap." : (F.nonres ? "None mapped along the street in OpenStreetMap, which is rarely complete. Frontage improvements are confirmed with the city." : "None mapped along the street in OpenStreetMap, which is rarely complete. A city can ask for curb, gutter and sidewalk with a new house."), F.sidewalk == null ? "missing" : "est", [F.sidewalk != null ? "OpenStreetMap (sidewalks)" : ""]);
+    var walkPlace = place && place !== "the jurisdiction" ? place : "the local planning department";
+    add(L, "sidewalk", "Sidewalk on the frontage", F.sidewalk == null ? "Not read." : F.sidewalk ? "A sidewalk is mapped along the street in OpenStreetMap." : (F.nonres ? "None mapped along the street in OpenStreetMap, which is rarely complete. Frontage improvements are confirmed with " + walkPlace + "." : "None mapped along the street in OpenStreetMap, which is rarely complete. " + walkPlace + " can ask for curb, gutter and sidewalk with a new house."), F.sidewalk == null ? "missing" : "est", [F.sidewalk != null ? "OpenStreetMap (sidewalks)" : ""]);
 
     /* ---- Roofing ---- */
     var Rf = "roofing", roof = isNum(eff.roof) ? eff.roof : null;
