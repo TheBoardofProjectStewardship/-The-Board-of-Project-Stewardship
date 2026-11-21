@@ -24,6 +24,8 @@ The first public meeting is a "Community Conversation on Annexation." The city a
 
 **Why this matters for a remodel:** until an annexation is actually completed, an Esperance addition, ADU, or major remodel is permitted by the county, not the city. Snohomish County Planning and Development Services takes applications online through its [PDS Permit Portal process](https://snohomishcountywa.gov/3920/Online-Permitting). Its [residential building permit page](https://snohomishcountywa.gov/2908/Residential) lists what a typical submittal needs, including a structural plan, a site plan, and a drainage plan. For parcels inside Edmonds city limits, start at the city's [Apply for a Permit](https://edmondswa.gov/services/permit_assistance/apply_for_a_permit) page. If you plan to start work in Esperance over the next year or two, ask your designer which agency will review the plans and what happens if the jurisdiction changes partway through the project. For electrical work, check the Washington L&I [electrical permits page](https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/) to see who issues and inspects permits for your address. Don't assume.
 
+![Older single-family homes on a tree-lined street in the Esperance area near Edmonds, Washington](../assets/images/posts/2026-09-28-edmonds-permit-news-annexation-6.webp "Esperance-area homeowners near Edmonds should confirm which jurisdiction reviews their permit before they apply.")
+
 ## Edmonds and Lynnwood budget season
 
 [My Edmonds News reports](https://myedmondsnews.com/2026/09/rosen-to-present-budget-oct-5-and-civic-roundtable-invites-to-you-to-stay-and-chat-after/) that Edmonds Mayor Mike Rosen will present his proposed 2027–2028 biennial budget at 5:30 p.m. on Monday, Oct. 5, at the Edmonds Waterfront Center, 220 Railroad Ave. City budgets set the staffing and service levels behind plan review and inspections, so homeowners with projects coming up may want to follow the discussion.
@@ -32,15 +34,21 @@ In Lynnwood, the [Lynnwood Times reported](https://lynnwoodtimes.com/2026/09/25/
 
 ![Edmonds, Washington — early foundation forms and framing on a residential lot, rainy daylight](../assets/images/posts/2026-09-28-edmonds-permit-news-4.webp)
 
+![Empty public meeting room with rows of chairs set up for a city budget hearing in Edmonds, Washington](../assets/images/posts/2026-09-28-edmonds-permit-news-budget-7.webp "Budget season in Edmonds and Lynnwood is when utility rates and permit-related fees come up for discussion.")
+
 ## Kenmore: long-term sidewalk closure near SR 522
 
 [Shoreline Area News](https://www.shorelineareanews.com/2026/09/long-term-sidewalk-closure-in-front-of.html) shared Sound Transit's notice. Starting Monday, Sept. 28, the sidewalk in front of the Kenmore Park-and-Ride's east parking lot is closed for Stride S3 Line construction. Crews work Monday through Friday from 6 a.m. to 3 p.m. on utility work, roadway improvements, and a new landscaping strip, and the closure is expected to last through the end of the year. Pedestrians follow detours by way of 73rd Ave NE, 77th Ave NE, SR 522, and the Burke-Gilman Trail. The park-and-ride stays open. Sound Transit's [Stride bus rapid transit page](https://www.soundtransit.org/system-expansion/stride-bus-rapid-transit) has more on the program. If you have a Kenmore remodel under way near the corridor, ask your contractor how material drops and crew parking will work around the work zone.
+
+![Fenced-off sidewalk with orange barricades along a busy road in Kenmore, Washington](../assets/images/posts/2026-09-28-edmonds-permit-news-sidewalk-8.webp "A long-term sidewalk closure in Kenmore can affect deliveries and site access for nearby remodels.")
 
 ## Process video: the order of residential inspections
 
 Whichever agency ends up with your permit, inspections follow a predictable order from underground work to final. This public walkthrough explains the typical sequence. It covers general building-code practice, and your local inspector's list always governs.
 
 https://www.youtube.com/watch?v=ca-1Xbrh8Tc
+
+![Open stud wall with new wiring and plumbing ready for a rough-in inspection in an Edmonds, Washington remodel](../assets/images/posts/2026-09-28-edmonds-permit-news-inspection-9.webp "Rough-in work stays open until it passes inspection in an Edmonds-area remodel.")
 
 ## Before you start a project
 
@@ -59,6 +67,8 @@ With utility rates on local agendas, these manufacturer pages are worth a look w
 - [Mitsubishi Electric heating and cooling](https://www.mitsubishicomfort.com/): ductless and ducted heat pump systems that often come up when an addition or remodel needs heating and cooling.
 - [Rheem water heaters](https://www.rheem.com/): water heater lines, including heat pump models, to compare when a remodel moves or replaces the tank.
 - [Daikin comfort systems](https://www.daikincomfort.com/): heat pump and furnace systems to include in apples-to-apples mechanical bids.
+
+![Lumber, house wrap and siding staged in a driveway for a home remodel in Edmonds, Washington](../assets/images/posts/2026-09-28-edmonds-permit-news-materials-10.webp "Materials staged in the driveway for an Edmonds home remodel.")
 
 ## Where Pacific Pro Group fits
 
