@@ -136,7 +136,7 @@ class BuildHereTest(unittest.TestCase):
         home = (ROOT / "index.html").read_text(encoding="utf-8")
         gen = (ROOT / "generate_site.py").read_text(encoding="utf-8")
         js = (ROOT / "assets/js/build-here.js").read_text(encoding="utf-8")
-        help_line = "Works for street addresses across the United States. The address goes to the US Census geocoder and to public parcel / map services. We do not store it."
+        help_line = "Type a street address. The study reads public parcel and map records for that address. This site does not store it."
         for text, name in ((page, "build-here.html"), (home, "index.html"), (gen, "generate_site.py")):
             self.assertNotIn("Works for King", text, name)
             self.assertNotIn("or a Minnesota address", text, name)
