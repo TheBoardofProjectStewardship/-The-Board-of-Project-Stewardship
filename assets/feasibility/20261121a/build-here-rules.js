@@ -587,15 +587,13 @@
   }
 
   /* Seattle LR1, LR2, LR3. Read November 2026 from the adopted code, not from a pending plan.
-     Setbacks: SMC 23.45.518 Table A, as amended by Ord. 127219 (the ordinance the city's current
-     zoning layer names for LR1 (M), effective 2025-06-27). The same three numbers apply in every
+     Setbacks: SMC 23.45.518 Table A, Ord. 127376. The same three numbers apply in every
      LR zone. An (M), (M1), or (M2) suffix does not change this table.
-     Height: SMC 23.45.514 Table A, Ord. 127219. LR1 is 32 ft for rowhouses, townhouses, and
-     apartments with or without an MHA suffix. LR2 is 40 ft with a suffix and 32 ft without.
-     LR3 outside an urban center, urban village, or station area overlay is 40 ft with a suffix
-     and 32 ft without; inside those areas it is 50 ft with a suffix and 40 ft without. Cottage
-     housing is 22 ft. This study does not decide whether a lot is inside a growth area, so LR3
-     uses the lower (outside) height.
+     Height: SMC 23.45.514 Table A, Ord. 127376. LR1 is 32 ft with or without an MHA suffix.
+     LR2 and LR3 are 40 ft with a suffix and 32 ft without, outside an urban center or urban
+     village. Stacked dwelling units can be higher. This study does not decide whether a lot
+     is inside a growth area, so the higher inside-area height is not applied. A suffixed zone
+     does not print the unsuffixed 32 ft house note.
      Floor area: SMC 23.45.510 Table A, as amended by Ord. 127376 (signed Dec. 22, 2025, in effect
      January 2026; the same ordinance this file already uses for chapter 23.44). LR1 is 1.3 with an
      MHA suffix (1.5 for stacked dwelling units) and 1.0 without. LR2 is 1.4 with a suffix (1.6 for
