@@ -777,7 +777,7 @@
   function renderHTML(r, s, opts) {
     if (!r) return '<p class="bh-muted">Site coverage was not measured.</p>';
     var hide = !!(opts && opts.hideLinkOnly);
-    var h = "<h3>What is house, garage, driveway and landscape</h3>";
+    var h = "<h3>What is building, paving and open area</h3>";
     if (r.warn) h += '<p class="bh-verify" role="alert"><strong>' + esc(r.warn) + "</strong></p>";
     if (r.rows.length) {
       h += '<table class="bh-table bh-land"><thead><tr><th scope="col">Area</th><th scope="col">Square feet</th><th scope="col">Share of lot</th><th scope="col">Confidence</th><th scope="col">Source</th></tr></thead><tbody>' + r.rows.map(function (x) {

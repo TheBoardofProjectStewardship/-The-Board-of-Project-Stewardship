@@ -467,7 +467,7 @@
   };
   function stateRows(c) {
     return [
-      c.tier ? rule("Middle housing (state law)", TIER[c.tier], SRC.hb1110, "RCW 36.70A.635. The adopted code sets the details; read it before you count units.") : verify("Middle housing (state law)", SRC.hb1110, (c.name ? c.name + " is" : "This jurisdiction is") + " not on the state middle housing list (HB 1110 applies by city size and location). Ask the planning department what its own code allows."),
+      c.tier ? rule("Middle housing (state law)", TIER[c.tier], SRC.hb1110, "RCW 36.70A.635. The adopted code sets the details; read it before you count units.") : rule("Middle housing (state law)", "Confirm the local middle-housing standard", SRC.hb1110, "RCW 36.70A.635. Confirm how it applies with the local planning department."),
       rule("ADUs (state law)", "Cities inside the urban growth area must allow two ADUs per lot", SRC.hb1337, "RCW 36.70A.680 and .681. Ask the city for its ADU size limits and any area outside the urban growth area.")
     ];
   }
@@ -504,11 +504,11 @@
     var cityLink = { label: "City of " + c.name + " permits and planning", url: c.home };
     if (!zk) {
       var lookup = { label: "Zoning code", url: c.code && c.code.url ? c.code.url : c.home };
-      var passed = { lot: v.lot, zone: v.zone, use: v.use, presentUse: v.presentUse, zoneClass: v.zoneClass, lookup: lookup, codeChapter: v.codeChapter, city: c };
+      var passed = { lot: v.lot, zone: v.zone, use: v.use, presentUse: v.presentUse, zoneClass: v.zoneClass, lookup: lookup, codeChapter: v.codeChapter, juris: v.juris, city: v.city };
       var cls = lotClass(passed);
       if (cls === "nonres") return nonResidential(passed);
-      if (cls === "unknown") return notCoded(passed);
-      return stateLawCity(v, c, cityLink);
+      if (cls === "residential") return typicalResidential(passed);
+      return unrecognized(passed);
     }
     var Z = t.zones[zk], cm = t.common || {}, src = Z.src || t.src, sbSrc = Z.sbSrc || src;
     // verifyTag: the numbers match an official summary, and the code table itself was not read.
@@ -617,13 +617,17 @@
   }
   function parseLr(zone, mhaField) {
     var raw = String(zone || "").toUpperCase().replace(/\s+/g, "");
-    // Only a zone that starts as LR1, LR2, or LR3. MIO-65-LR3 is a major-institution overlay, not LR3.
+    // Only a zone that starts as LR1, LR2, or LR3. A short token such as RC may sit before the suffix: LR3 RC (M).
+    // MIO-65-LR3 is a major-institution overlay, not LR3.
+    raw = raw.replace(/^(LR-?[123])[A-Z]{1,4}(?=\(|$)/, "$1");
     var hit = raw.match(/^LR-?([123])(?:\(|$)/);
     if (!hit) return null;
     return { base: "LR" + hit[1], mha: mhaSuffix(zone, mhaField) };
   }
   function lrHeight(base, mha) {
-    if (base === "LR1" || base === "LR3") return 32;
+    if (base === "LR1") return 32;
+    // Ord. 127376: LR2 and LR3 are 40 ft with an MHA suffix outside urban centers and villages, and 32 ft without the suffix.
+    // Stacked dwelling units can be higher. A house addition uses 40 when the suffix is present and 32 when it is not.
     return mha ? 40 : 32;
   }
   function seattleLR(v, parsed) {
@@ -635,7 +639,7 @@
       ? "The (" + mha + ") suffix is a Mandatory Housing Affordability suffix (SMC 23.58B and 23.58C). It sets the payment or performance amount. It does not change the setbacks. It uses the MHA column of the floor-area table."
       : "No MHA suffix is on this zone, so the table column without a suffix is used.";
     var heightNote = base === "LR3"
-      ? " A house in LR3 is 32 ft when the zone has no MHA suffix. 40 ft applies only to stacked dwelling units, so this house addition uses 32 ft."
+      ? (mha ? " 40 ft with an MHA suffix, outside an urban center or urban village. Stacked dwelling units can be higher." : " 32 ft without an MHA suffix. Stacked dwelling units can be higher.")
       : (base === "LR1" ? " LR1 height is 32 ft with or without the suffix." : (mha ? " The MHA suffix column is used." : " The column without an MHA suffix is used."));
     return {
       setbackNote: "",
@@ -645,7 +649,7 @@
       floorCapLabel: cap != null ? "FAR " + far + " x " + fmt(lot) + " sf lot" : "FAR " + far + " of the lot. The lot size is not on record, so no square-foot cap is shown.",
       coverage: null,
       setbacks: { front: 7, rear: 7, side: 5, rearAlley: 0 },
-      height: { ft: ht, text: ht + " ft" + (base === "LR3" ? ". A house without an MHA suffix is 32 ft. 40 ft applies only to stacked dwelling units." : "") },
+      height: { ft: ht, text: ht + " ft" + (base === "LR3" ? (mha ? ". 40 ft with an MHA suffix, outside an urban center or urban village. Stacked dwelling units can be higher." : ". 32 ft without an MHA suffix. Stacked dwelling units can be higher.") : "") },
       adu: { status: "coded", maxCount: 2, maxSf: null, rearSetback: null, sideSetback: null, heightFt: null, text: "ADUs are allowed with single-family dwelling units, rowhouses, and townhouses. They do not count toward the density limit. The size limit is in SMC 23.45.545 and is not applied as a number here.", src: SRC.smc2345 },
       accounting: { farIncludesGarage: null, farIncludesBasement: null, farIncludesAccessory: null, verify: true, note: "Floor area follows SMC 23.45.510. Whether a garage or a basement counts is not taken from a second table here." },
       rules: [
@@ -715,12 +719,12 @@
   function nameSaysNonres(zone) {
     var z = zoneCompact(zone);
     if (!z) return false;
-    return /^(MIO|SM|NC\d?P?|C[12]|IC|IB|IG|UI|ID|DMC|DMR|DOC|DH|CBD|CW|BD\d?|BC|BN|CG\d?|OS|P|MU|NB|CB|PO|IL|IH|LI|HI|BP|OP|GC|HC|RC|TC|DC|I-\d|M-\d)/.test(z);
+    return /^(MIO|SM|NC\d?P?|C[12]|IC|IB|IG|UI|ID|DMC|DMR|DOC|DH|CBD|CW|BD\d?|BC|BN|CG\d?|OS|P$|MU|NB|CB|PO|IL|IH|LI|HI|BP|OP|GC|HC|RC|TC|DC|I-\d|M-\d)/.test(z);
   }
   function nameSaysResidential(zone) {
     var z = zoneCompact(zone);
     if (!z || nameSaysNonres(zone)) return false;
-    return /^(NR[123]?|LR[123]|RSL|SF\d*|RS[A-Z]?|LDR(-[A-Z0-9]+)?|RM(-[\d.]+|-EW)?|R-?\d+[A-Z]?|RA-?\d+)/.test(z);
+    return /^(NR[123]?|LR[123]|RSL|SF[A-Z0-9-]*|RS[A-Z0-9-]*|RE[A-Z0-9-]*|UR[A-Z0-9-]*|LDR(-[A-Z0-9]+)?|RM(-[\d.]+|-EW)?|R-?\d+[A-Z]?|RA-?\d+)/.test(z);
   }
   function lotClass(v) {
     v = v || {};
@@ -771,8 +775,10 @@
     }
     return rs;
   }
+  var ECDC16 = { label: "ECDC Title 16", url: "https://edmonds.municipal.codes/ECDC/16" };
   function nonResidential(v) {
     v = v || {};
+    if (!v.codeChapter && v.juris === "edmonds") v.codeChapter = ECDC16;
     var link = v.lookup && v.lookup.url ? v.lookup : null;
     return withChapter({
       key: "nonresidential",
@@ -791,6 +797,28 @@
       sources: link ? [link] : [],
       caveat: NONRES_NOTE
     }, v);
+  }
+  var UNRECOGNIZED = "This zone is not recognized. Confirm the standards with your local planning department.";
+  function unrecognized(v) {
+    v = v || {};
+    return {
+      key: "unrecognized",
+      assumed: false,
+      residential: null,
+      unrecognized: true,
+      uncoded: true,
+      coded: false,
+      title: v.zone ? "Zone " + v.zone : "Zone not recognized",
+      floorCap: null,
+      floorCapLabel: UNRECOGNIZED,
+      coverage: null,
+      setbacks: {},
+      height: { ft: null, text: "" },
+      adu: { status: "verify", maxCount: null, maxSf: null, text: "", src: null },
+      rules: [rule("Zone", UNRECOGNIZED, v.lookup)],
+      sources: v.lookup && v.lookup.url ? [v.lookup] : [],
+      caveat: UNRECOGNIZED
+    };
   }
   function notCoded(v) {
     v = v || {};
@@ -847,7 +875,7 @@
     }
     if (v.juris === "kenmore") { z = z.replace(/^R-?(\d)$/, "R-$1"); if (KEN[z]) return kenmore({ lot: v.lot, zone: z }); return null; }
     if (v.juris === "edmonds") {
-      var ez = String(v.zone || "").toUpperCase().replace(/\s+/g, "");
+      var ez = String(v.zone || "").toUpperCase().replace(/\s+/g, "").replace(/^RM(\d)/, "RM-$1");
       if (EDM[ez]) return edmonds({ lot: v.lot, zone: ez });
       if (EDM_RM[ez]) return edmondsRm({ lot: v.lot, zone: ez });
       return null;
@@ -934,12 +962,11 @@
       var cls = lotClass(v);
       var wa = v.stateAbbr ? v.stateAbbr === "WA" : v.juris !== "outside";
       if (cls === "nonres") rs = nonResidential(v);
-      else if (cls === "unknown") rs = notCoded(v);
-      else if (cls === "residential" && wa && v.juris === "city" && CITY[v.city]) rs = stateLawCity(v, CITY[v.city]);
-      else if (cls === "residential" && wa) rs = stateLawCity(v, CITY[v.city] || { name: "", tier: 0 });
-      else if ((cls === "residential" || cls === "blank") && !wa) rs = typicalResidential(v);
+      else if (cls === "residential") rs = typicalResidential(v);
+      else if (cls === "blank" && !wa) rs = typicalResidential(v);
       else if (cls === "blank" && wa && v.juris === "city" && CITY[v.city]) rs = stateLawCity(v, CITY[v.city]);
-      else rs = notCoded(v);
+      else if (cls === "unknown" || cls === "blank") rs = unrecognized(v);
+      else rs = unrecognized(v);
     }
     if (so.overlay && rs.coded !== false) {
       rs.overlay = so.overlay;

@@ -500,7 +500,7 @@
       if (isNum(F.basementFinished) && F.basementFinished > 0) bits.push("bsmt fin. " + fmt(F.basementFinished));
       else if (isNum(F.basementTotal) && F.basementTotal > 0) bits.push("bsmt " + fmt(F.basementTotal));
       r.push(row(F.living.label || "Existing finished living", (F.living.est ? "≈ " : "") + fmt(F.living.sf) + " sf" + (bits.length ? " (" + bits.join(" + ") + ")" : ""), F.living.est ? "est" : "fact"));
-    } else r.push(miss("Existing finished living"));
+    } else r.push(miss(F.nonres ? "Existing floor area" : "Existing finished living"));
     var gar = [];
     if (isNum(F.garageAtt) && F.garageAtt > 0) gar.push(fmt(F.garageAtt) + " sf attached");
     if (isNum(F.garageBsmt) && F.garageBsmt > 0) gar.push(fmt(F.garageBsmt) + " sf in basement");
@@ -522,7 +522,7 @@
     var ex = function (key) {
       if (!hd || !isNum(hd[key])) return "";
       var d = Math.round(hd[key]);
-      var who = F.residential === false ? "(E) building" : "(E) house";
+      var who = F.residential ? "(E) house" : "(E) building";
       if (d < 2) return " · " + who + " mapped outline meets this line (eaves or the drawing, not a surveyed wall)";
       return " · " + who + " ≈ " + d + " ft";
     };
@@ -532,7 +532,8 @@
     };
     r = [];
     if (F.assumed) r.push(row("Basis", "Typical residential assumptions, confirm with your local planning department. These are not the local code.", "verify"));
-    if (F.residential === false) r.push(row("Basis", "This lot is not a house lot. An addition is not drawn. Confirm the use with your local planning department.", "verify"));
+    if (F.unrecognized) r.push(row("Basis", "This zone is not recognized. Confirm the standards with your local planning department.", "verify"));
+    else if (F.nonres || F.residential === false) r.push(row("Basis", "This lot is not a house lot. An addition is not drawn. Confirm the use with your local planning department.", "verify"));
     r.push(sbRow("Front (street)", sb.front, "front"));
     if ((M && M.corner) || ((!M || !M.ok) && isNum(sb.streetSide))) r.push(isNum(sb.streetSide) ? sbRow("Street side (corner lot)", sb.streetSide, "street") : row("Street side (corner lot)", isNum(sb.front) ? "front setback used: " + sb.front + " ft (verify)" + ex("street") : "not coded, verify with " + place, "verify"));
     r.push(sbRow("Side (interior)" + (isNum(sb.sideCombined) ? ", " + sb.sideCombined + " ft both sides" : ""), sb.side, "side"));
@@ -547,7 +548,7 @@
     var bld = isNum(eff.buildings) ? eff.buildings : null, acc = (isNum(eff.detached) ? eff.detached : 0) + (isNum(eff.other) ? eff.other : 0);
     var hasAcc = isNum(eff.detached) || isNum(eff.other), fp = opt && isNum(opt.footprintSf) && opt.kind !== "remodel" && opt.kind !== "secondStory" ? (P && P.ok && isNum(P.sf) && P.partial ? P.sf : opt.footprintSf) : null;
     r = [];
-    var bldWord = F.residential === false ? "building" : "house";
+    var bldWord = F.residential ? "house" : "building";
     if (isNum(eff.survey)) r.push(row("(E) " + bldWord + " footprint (your entry)", fmt(eff.survey) + " sf"));
     else if (isNum(eff.roof)) r.push(row("(E) roof outline" + (F.srcShort && F.srcShort.buildings ? " (" + F.srcShort.buildings + ")" : ""), "≈ " + fmt(eff.roof) + " sf", "est"));
     else r.push(miss("(E) " + bldWord + " outline"));
@@ -969,42 +970,69 @@
     return { svg: out.join(""), used: used };
   }
 
-  /* The tables in the right column. Row height is set from the room there is. */
+  /* The tables in the right column. Wrapped values are counted before the row height is chosen,
+     so the legend stays above the title block. */
+  function valueLines(text, room, size) {
+    var maxCh = Math.max(12, Math.floor(room / (size * 0.52)));
+    var words = String(text || "").split(/\s+/).filter(Boolean), lines = [], cur = "";
+    words.forEach(function (word) {
+      var next = cur ? cur + " " + word : word;
+      if (next.length > maxCh && cur) { lines.push(cur); cur = word; }
+      else cur = next;
+    });
+    if (cur) lines.push(cur);
+    return lines.slice(0, 2);
+  }
+  function columnUsed(tb, legend, rowH, size) {
+    var titleH = 22, y = 0, w = COL.w;
+    tb.forEach(function (t) {
+      y += titleH;
+      t.rows.forEach(function (r) {
+        var room = w - Math.min(tw(r.k, size), w * 0.46) - 14;
+        var lines = valueLines(r.v, room, size);
+        y += rowH * Math.max(1, lines.length);
+      });
+      y += 4;
+    });
+    if (legend.length) y += titleH + legend.length * rowH;
+    return y;
+  }
   function drawTables(tb, legend) {
-    var x = COL.x, w = COL.w, out = [], nRows = 0, nT = tb.length + (legend.length ? 1 : 0);
-    tb.forEach(function (t) { nRows += t.rows.length; });
-    nRows += legend.length;
-    var titleH = 30, rowH = Math.max(14.5, Math.min(21, (COL.h - nT * titleH - 6) / Math.max(1, nRows))), size = Math.min(14.5, rowH * 0.74), y = COL.y + 12;
+    var x = COL.x, w = COL.w, limit = TB.y - COL.y - 8, titleH = 22;
+    var rowH = 18, size = 12;
+    for (var tryH = 18; tryH >= 11; tryH -= 0.5) {
+      var trySize = Math.min(13, tryH * 0.72);
+      if (columnUsed(tb, legend, tryH, trySize) <= limit) { rowH = tryH; size = trySize; break; }
+      rowH = tryH; size = trySize;
+    }
+    var out = [], y = COL.y + 8, stop = TB.y - 6;
     var COLOR = { fact: INK, est: INK, partial: INK, missing: ORANGE, verify: ORANGE };
     tb.forEach(function (t) {
-      out.push(T(x, y, clip(t.title, 60), { size: 13.5, weight: 700, ls: 1.6, fit: twMin(clip(t.title, 60), 13.5, 1.6) > w ? w : 0 }) + '<rect x="' + x + '" y="' + r1(y + 6) + '" width="' + w + '" height="1.4" fill="' + RULE + '"/>');
-      y += titleH - 6;
+      if (y > stop - titleH) return;
+      out.push(T(x, y, clip(t.title, 60), { size: 12.5, weight: 700, ls: 1.2, fit: twMin(clip(t.title, 60), 12.5, 1.2) > w ? w : 0 }) + '<rect x="' + x + '" y="' + r1(y + 5) + '" width="' + w + '" height="1.2" fill="' + RULE + '"/>');
+      y += titleH;
       t.rows.forEach(function (r) {
-        var room = w - Math.min(tw(r.k, size), w * 0.55) - 14, k = clip(r.k, Math.floor(w * 0.56 / (size * 0.56)));
-        var maxCh = Math.max(18, Math.floor(room / (size * 0.52)));
-        var words = String(r.v || "").split(/\s+/), lines = [], cur = "";
-        words.forEach(function (word) {
-          var next = cur ? cur + " " + word : word;
-          if (next.length > maxCh && cur) { lines.push(cur); cur = word; }
-          else cur = next;
-        });
-        if (cur) lines.push(cur);
-        if (lines.length > 2) lines = [lines[0], lines.slice(1).join(" ")];
-        if (lines[1] && lines[1].length > maxCh) lines[1] = lines[1].slice(0, maxCh).replace(/\s+\S*$/, "");
-        out.push(T(x, y, k, { size: size, weight: r.b ? 700 : 400, fit: twMin(k, size) > w * 0.56 ? w * 0.56 : 0 }) +
+        if (y > stop - rowH) return;
+        var room = w - Math.min(tw(r.k, size), w * 0.46) - 14, k = clip(r.k, Math.floor(w * 0.48 / (size * 0.56)));
+        var lines = valueLines(r.v, room, size);
+        out.push(T(x, y, k, { size: size, weight: r.b ? 700 : 400, fit: twMin(k, size) > w * 0.48 ? w * 0.48 : 0 }) +
           T(x + w, y, lines[0] || "", { size: size, weight: r.b ? 700 : 400, anchor: "end", fill: COLOR[r.s] || INK }));
-        if (lines[1]) {
-          y += rowH * 0.85;
+        y += rowH;
+        if (lines[1] && y <= stop - rowH * 0.4) {
           out.push(T(x + w, y, lines[1], { size: size, weight: r.b ? 700 : 400, anchor: "end", fill: COLOR[r.s] || INK }));
+          y += rowH;
         }
+      });
+      y += 4;
+    });
+    if (legend.length && y <= stop - titleH - rowH) {
+      out.push(T(x, y, "LEGEND", { size: 12.5, weight: 700, ls: 1.2 }) + '<rect x="' + x + '" y="' + r1(y + 5) + '" width="' + w + '" height="1.2" fill="' + RULE + '"/>');
+      y += titleH;
+      legend.forEach(function (l) {
+        if (y > stop - rowH) return;
+        out.push('<g transform="translate(' + x + " " + r1(y - 8) + ')">' + l.sym + "</g>" + T(x + 54, y, l.text, { size: Math.min(size, 12) }));
         y += rowH;
       });
-      y += 6;
-    });
-    if (legend.length) {
-      out.push(T(x, y, "LEGEND", { size: 13.5, weight: 700, ls: 1.6 }) + '<rect x="' + x + '" y="' + r1(y + 6) + '" width="' + w + '" height="1.4" fill="' + RULE + '"/>');
-      y += titleH - 6;
-      legend.forEach(function (l) { out.push('<g transform="translate(' + x + " " + r1(y - 9) + ')">' + l.sym + "</g>" + T(x + 54, y, l.text, { size: size })); y += rowH; });
     }
     return out.join("");
   }

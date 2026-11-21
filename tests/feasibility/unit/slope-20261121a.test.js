@@ -56,5 +56,12 @@ globalThis.fetch = function (url, opt) {
   t.ok("the lot line stays inside the plan frame", xs.length > 2 && Math.min.apply(null, xs) >= -1 && Math.max.apply(null, xs) <= 1001, xs);
   t.ok("the sheet names the fall across the lot, not a cell average beside it", /ft of fall/.test(svg) && !/avg 45/.test(svg) && !/· avg /.test(svg));
   t.ok("the plan drawing does not bleed with overflow visible", svg.indexOf('overflow="visible"') < 0);
+  var long = "Typical residential assumptions, confirm with your local planning department. These are not the local code.";
+  var rows = [];
+  for (var n = 0; n < 14; n++) rows.push({ k: "Row " + n, v: long, s: "verify" });
+  var wrapped = SP.svg(M, { F: { address: "759 HARVARD AVE E", place: "the City of Seattle" }, tables: [{ id: "site", title: "SITE DATA", rows: rows }] });
+  var legendAt = wrapped.indexOf(">LEGEND<");
+  var legendY = legendAt < 0 ? 9999 : Number((wrapped.slice(Math.max(0, legendAt - 80), legendAt).match(/y="([\d.]+)"[^>]*$/) || [])[1]);
+  t.ok("the legend stays above the title block when rows wrap", legendAt > 0 && legendY < 1044, legendY);
   t.done();
 })();

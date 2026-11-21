@@ -1667,7 +1667,8 @@
     // A verified local table is coded. Typical assumptions and a non-house lot are not.
     var assumed = !!(rs && rs.assumed);
     var nonres = !!(rs && rs.residential === false);
-    var coded = !!(rs && rs.coded !== false && !assumed && !nonres);
+    var unrecognized = !!(rs && rs.unrecognized);
+    var coded = !!(rs && rs.coded !== false && !assumed && rs.residential === true);
     var aduRule = adu && adu.status === "coded" ? adu.text : "", aduStateNote = !assumed && adu && adu.status === "state" ? adu.text : "";
     var cautions = [];
     if (s.hazards && s.hazards.length) cautions.push("a mapped critical area or hazard");
@@ -1696,6 +1697,7 @@
       zoningCoded: coded,
       assumed: assumed,
       nonres: nonres,
+      unrecognized: unrecognized,
       hasFloorCap: caps.hasFloorCap,
       floorCap: caps.floorCap,
       coverageCap: caps.coverageCap,
@@ -1754,7 +1756,7 @@
     }
     // One concept per project type, sized from the same figures as the cards: what the site plan sheets draw.
     var options = M.options ? M.options({
-      effective: solved.effective, zoningCoded: coded, assumed: assumed, nonres: nonres, hasFloorCap: caps.hasFloorCap, floorCap: caps.floorCap, coverageCap: caps.coverageCap,
+      effective: solved.effective, zoningCoded: coded, assumed: assumed, nonres: nonres, unrecognized: unrecognized, hasFloorCap: caps.hasFloorCap, floorCap: caps.floorCap, coverageCap: caps.coverageCap,
       imperviousCap: caps.imperviousCap, envArea: caps.envArea, stories: v.stories, firstFloor: s.firstFloor, heightFt: rs && rs.height ? rs.height.ft : null, adu: adu
     }) : [];
     return { bundle: solved.bundle, cards: solved.cards, prepared: prepared, effective: solved.effective, seed: seed, options: options };
@@ -1895,7 +1897,7 @@
     });
     if (geo && geo.buildings) geo.buildings.forEach(function (b) {
       if (!b.ring || b.role === "neighbor") return;
-      var houseLot = !rs || rs.residential !== false;
+      var houseLot = !rs || rs.residential === true;
       var name = b.role === "garage" ? "(E) GARAGE" : (b.role === "house" && houseLot && b.use !== "nonres" ? "(E) HOUSE" : "(E) BUILDING");
       bld += '<path d="' + pathOf(b.ring) + '" fill="#ffffff" stroke="#111" stroke-width="' + (b.role === "house" ? "1.8" : "1.2") + '"/>';
       var c = G && G.centroid ? G.centroid(b.ring) : null;
@@ -2071,7 +2073,7 @@
     var prepared = (ctx && ctx.prepared) || todayStamp();
     var sbNow = rs && rs.setbacks || {}, landGeo = s.landscape && s.landscape.geo ? s.landscape.geo : null;
     var M = SP && SUM && CFG.sheets !== false ? SP.model({
-      rings: s.rings, lon: s.lon, lat: s.lat, frontDir: s.frontDir, neighbors: s.neighborRings, setbacks: sbNow, setbackVerify: !!(rs && rs.setbackVerify), residential: !rs || rs.residential !== false,
+      rings: s.rings, lon: s.lon, lat: s.lat, frontDir: s.frontDir, neighbors: s.neighborRings, setbacks: sbNow, setbackVerify: !!(rs && rs.setbackVerify), residential: !rs || rs.residential === true,
       addrStreet: houseAndStreet(s.matched || s.input || "").street, geo: landGeo, slope: s.landscape && s.landscape.slope, hazardShapes: s.hazardShapes, imagery: s.imagery, lines: lotGeometry(s, sbNow)
     }) : null;
     var F = SUM ? SUM.facts(s, v, rs, ctx, { brand: brandInfo() }, M) : null, FB = F ? SUM.blocks(F) : null;
@@ -2091,7 +2093,7 @@
     /* Cover is physical page 1. stampStudyPages renumbers every sheet after this, including SP-1. */
     var coverQr = String(CFG.coverQrUrl || "").trim();
     var coverBody = '<div class="bh-cover-wrap"><div class="bh-cover-top"><img class="bh-cover-logo" src="/assets/feasibility/pacific-pro-group-logo.png" alt="Pacific Pro Group">' +
-      '<p class="bh-cover-kicker">' + (rs && rs.residential === false ? "<strong>FEASIBILITY STUDY</strong>" : 'SINGLE-FAMILY RESIDENCE <span aria-hidden="true">|</span> <strong>FEASIBILITY STUDY</strong>') + '</p><div class="bh-cover-bar" aria-hidden="true"></div></div>' +
+      '<p class="bh-cover-kicker">' + (rs && rs.residential === true ? 'SINGLE-FAMILY RESIDENCE <span aria-hidden="true">|</span> <strong>FEASIBILITY STUDY</strong>' : "<strong>FEASIBILITY STUDY</strong>") + '</p><div class="bh-cover-bar" aria-hidden="true"></div></div>' +
       '<div class="bh-cover-art"><img src="/assets/feasibility/feasibility-cover.jpg" alt="Pen-and-ink drawing of a house on its lot"></div>' +
       '<div class="bh-cover-meta"><div><p class="bh-cover-label">Subject property</p><p class="bh-cover-address">' + esc(s.matched || s.input || "Address not matched") + "</p>" +
       '<p class="bh-cover-date">Prepared ' + esc(asOfDate) + (s.isSample ? " · Sample layout, not a property record" : "") + "</p></div>" +
@@ -2136,7 +2138,7 @@
     var p1Right = "";
     if (s.isSample) p1Right += '<p class="bh-verify bh-alert-box"><strong>Sample layout only, these numbers are not a property record.</strong></p>';
     if (s.parcelWarn || rLand.warn) p1Right += '<p class="bh-verify bh-alert-box" role="alert"><strong>' + esc(s.parcelWarn || rLand.warn) + "</strong></p>";
-    p1Right += "<h3>House, garage, driveway and open area</h3>";
+    p1Right += "<h3>Buildings, paving and open area</h3>";
     if (rLand.rows && rLand.rows.length) {
       p1Right += '<table class="bh-table bh-land"><thead><tr><th scope="col">Area</th><th scope="col">Square feet</th><th scope="col">Share</th></tr></thead><tbody>' + rLand.rows.map(function (x) {
         var sfTxt = x.sf == null ? '<span class="bh-tbd">Not available</span>' : (x.key === "lot" && s.lotKind === "record" ? fmt(x.sf) + " sf" : "approx. " + fmt(x.sf) + " sf");

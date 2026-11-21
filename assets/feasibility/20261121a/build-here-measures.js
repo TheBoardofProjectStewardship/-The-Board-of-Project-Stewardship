@@ -317,12 +317,14 @@
     var TYPICAL = "Typical residential assumptions, confirm with your local planning department. These are not the local code.";
     var NONRES = "This lot is not a house lot. The building is not labeled as a house, and an addition is not drawn. Confirm the use with your local planning department.";
     var addition;
+    var UNKNOWN = "This zone is not recognized. Confirm the standards with your local planning department.";
     if (ctx.nonres) addition = card("addition", "Addition", "partial", NONRES, "Not a house lot");
+    else if (ctx.unrecognized) addition = card("addition", "Addition", "partial", UNKNOWN, "Confirm locally");
     else if (ctx.assumed) addition = card("addition", "Addition", "partial", TYPICAL + " The concept is about 1,500 sf inside the assumed setbacks.", "Concept only");
     else if (!any) addition = card("addition", "Addition", "nodata", "No lot or house measurement is on record yet, so an addition cannot be sized.", "Needs a lot size or a house measurement");
     else if (ctx.roomFar != null && ctx.roomFar <= 0) addition = card("addition", "Addition", "partial", "Floor area on record is already at or over the coded floor cap as entered. Adding counted floor area may not fit. Below-grade area can change the count." + covPhrase() + envBit, "No floor room left");
     else if (ctx.roomFar != null) addition = card("addition", "Addition", "ready", "Floor area left under the coded cap is about " + Math.round(ctx.roomFar) + " sf, counted from " + basis + "." + covPhrase() + envBit + " Planning figure only. This does not say a permit will be issued.", "About " + Math.round(ctx.roomFar) + " sf floor room");
-    else if (!z) addition = card("addition", "Addition", "partial", TYPICAL, "Concept only");
+    else if (!z) addition = card("addition", "Addition", "partial", "An addition is not sized for this zone.", "Not sized");
     else if (farUnknown) addition = card("addition", "Addition", "partial", "A floor-area limit may apply in this zone and is not coded here, so floor room is not calculated." + covPhrase() + envBit + " Coverage alone does not say an addition fits.", "Floor-area limit not coded");
     else if (farNone) {
       if (ctx.roomCov != null && ctx.roomCov > 0) addition = card("addition", "Addition", "ready", "This zone has no floor-area ratio. Coverage room left is about " + Math.round(ctx.roomCov) + " sf." + envBit + " This does not say a permit will be issued.", Math.round(ctx.roomCov) + " sf coverage room");
@@ -340,7 +342,7 @@
     else if (z && ctx.aduRule && ctx.roomCov != null && ctx.roomCov <= 0) adu = card("adu", "ADU", "partial", "The coded ADU standard for this zone is on the card. No lot coverage room is left for a detached ADU. An ADU inside the existing house, such as a basement or garage conversion, adds no coverage." + envBit, ctx.aduRule);
     else if (z && ctx.aduRule) adu = card("adu", "ADU", "ready", "The coded ADU standard for this zone is on the card. Count, size, and parking still have to be confirmed with the jurisdiction. This does not say an ADU permit will be issued." + covPhrase() + envBit, ctx.aduRule);
     else if (ctx.aduStateNote) adu = card("adu", "ADU", "partial", "State law sets a floor: a city inside an urban growth area must allow two ADUs on lots in zones that allow single-family homes. This zone's own ADU count, size, setbacks and parking are not coded here, and the floor does not reach every zone or lot. This card does not say an ADU fits this lot.", "State-law floor only. Local ADU standard not coded");
-    else if (!z) adu = card("adu", "ADU", "partial", TYPICAL, "Concept only");
+    else if (!z) adu = card("adu", "ADU", "partial", "An ADU is not sized for this zone.", "Not sized");
     else adu = card("adu", "ADU", "partial", "Zoning math is coded for this place, and a specific ADU size was not found in the rule set.", "Verify the ADU standard");
 
     var shop;
@@ -353,7 +355,7 @@
     else if (ctx.roomCov != null && ctx.roomCov > 0 && ctx.hasImpervious && ctx.roomImp != null && ctx.roomImp > 0) shop = card("shop", "Garage or shop", "ready", "About " + Math.round(ctx.roomCov) + " sf of coverage room and about " + Math.round(ctx.roomImp) + " sf of impervious room are left under the coded caps. A street-facing vehicle door can also need a driveway length. This does not say a permit will be issued.", Math.round(ctx.roomCov) + " sf coverage room");
     else if (ctx.roomCov != null && ctx.roomCov > 0 && !ctx.hasImpervious) shop = card("shop", "Garage or shop", "ready", "Coverage room left is about " + Math.round(ctx.roomCov) + " sf." + impNone + envBit + " This does not say a permit will be issued.", Math.round(ctx.roomCov) + " sf coverage room");
     else if (ctx.roomCov != null && ctx.roomCov > 0 && ctx.hasImpervious && ctx.roomImp == null) shop = card("shop", "Garage or shop", "partial", "Coverage room is about " + Math.round(ctx.roomCov) + " sf. Impervious room is unknown because driveway or other paving was not measured. It is not filled in as zero.", Math.round(ctx.roomCov) + " sf coverage room");
-    else if (!z) shop = card("shop", "Garage or shop", "partial", TYPICAL, "Concept only");
+    else if (!z) shop = card("shop", "Garage or shop", "partial", "A garage or shop is not sized for this zone.", "Not sized");
     else if (ctx.fullCov == null && ctx.hasImpervious && ctx.roomImp != null) shop = card("shop", "Garage or shop", "ready", "No lot coverage cap is coded for this zone here. About " + Math.round(ctx.roomImp) + " sf of impervious room is left under the coded cap, and a new roof, driveway or apron all count against it." + envBit + " This does not say a permit will be issued.", "About " + Math.round(ctx.roomImp) + " sf impervious room");
     else if (ctx.fullCov == null && ctx.hasImpervious) shop = card("shop", "Garage or shop", "partial", (roof ? "A roof outline is on record. " : "") + "This zone has no coverage cap in the coded rules. Impervious room is unknown because driveway or other paving was not measured. It is not filled in as zero.", "Paving not measured");
     else if (ctx.fullCov != null) shop = card("shop", "Garage or shop", "partial", "A coverage cap of about " + Math.round(ctx.fullCov) + " sf is coded. Enter a building footprint to see coverage room. Paving stays blank until a source measures it.", "Needs a footprint");
@@ -365,7 +367,7 @@
     else if (!lot && !z) teardown = card("teardown", "Teardown and new house", "nodata", "No lot size and no coded cap are on record, so a new house cannot be sized.", "Needs a lot and a zoning rule");
     else if (ctx.floorCap != null && ctx.floorCap > 0) teardown = card("teardown", "Teardown and new house", "ready", "A new house is sized to the full coded floor cap, about " + Math.round(ctx.floorCap) + " sf, not to leftover room under the current house." + covPhrase() + envBit + " Demolition rules are separate. This does not say a permit will be issued.", Math.round(ctx.floorCap) + " sf full floor cap");
     else if (ctx.floorCap != null && ctx.floorCap <= 0) teardown = card("teardown", "Teardown and new house", "partial", "The coded floor cap is not a positive area, so a new house is not sized from it." + covPhrase(), "No positive floor cap");
-    else if (!z) teardown = card("teardown", "Teardown and new house", "partial", TYPICAL, "Concept only");
+    else if (!z) teardown = card("teardown", "Teardown and new house", "partial", "A new house is not sized for this zone.", "Not sized");
     else if (farUnknown) teardown = card("teardown", "Teardown and new house", "partial", "A floor-area limit may apply in this zone and is not coded here." + (ctx.fullCov != null && ctx.fullCov > 0 ? " The coded coverage cap is about " + Math.round(ctx.fullCov) + " sf." : "") + envBit + " A new house is not sized from coverage alone.", ctx.fullCov != null && ctx.fullCov > 0 ? Math.round(ctx.fullCov) + " sf coverage cap, floor-area limit not coded" : "Floor-area limit not coded");
     else if (ctx.fullCov != null && ctx.fullCov > 0) teardown = card("teardown", "Teardown and new house", "ready", "The coded table sets no floor-area ratio. A new house is limited by the coverage cap of about " + Math.round(ctx.fullCov) + " sf, with height and setbacks." + envBit + " This does not say a permit will be issued.", Math.round(ctx.fullCov) + " sf coverage cap");
     else teardown = card("teardown", "Teardown and new house", "partial", farNone ? "The coded table sets no floor-area ratio and no lot coverage cap for this zone. Impervious surface, height and setbacks set the size of a new house, so no single cap is shown." + envBit : "No floor cap or coverage cap comes out of the coded rules for this lot.", "Verify the cap");
@@ -438,12 +440,15 @@
     var TYPICAL = "Typical residential assumptions, confirm with your local planning department. These are not the local code.";
     var NONRES = "This lot is not a house lot. The building is not labeled as a house, and an addition is not drawn. Confirm the use with your local planning department.";
     var a = opt("addition", "Addition"), wantGfa = d.additionGfa || 1500, lv = d.additionLevels || 2;
+    var UNKNOWN = "This zone is not recognized. Confirm the standards with your local planning department.";
     if (o.nonres) a.why = NONRES;
-    else if (!z || o.assumed) {
+    else if (o.unrecognized) a.why = UNKNOWN;
+    else if (o.assumed) {
       a.footprintSf = Math.round(wantGfa / lv); a.levels = lv; a.gfaSf = r10(wantGfa); a.feasible = null;
       a.why = TYPICAL;
       a.notes.push("Concept only. The setbacks and the height are assumptions, not the local code.");
     }
+    else if (!z) a.why = "An addition is not sized for this zone.";
     else if (roomFar != null && roomFar <= 0) { a.feasible = false; a.why = "The floor area on record is at or over the floor cap."; }
     else {
       var gfa = minOf(wantGfa, roomFar), fp = gfa / lv;
@@ -477,7 +482,9 @@
     var u = opt("adu", "Detached ADU"), adu = o.adu || {};
     var maxSf = adu.maxSf != null ? adu.maxSf : (adu.status === "state" ? 1000 : null);
     if (o.nonres) u.why = NONRES;
-    else if (o.assumed || !z) u.why = TYPICAL;
+    else if (o.unrecognized) u.why = UNKNOWN;
+    else if (o.assumed) u.why = TYPICAL;
+    else if (!z) u.why = "An ADU is not sized for this zone.";
     else if (maxSf == null) u.why = "The ADU standard for this zone is not coded.";
     else if (roomFar != null && roomFar <= 0) { u.feasible = false; u.why = "The floor area on record is at or over the floor cap. Some codes raise the cap when a home is added: set Homes on the lot under Edit the facts."; }
     else {
@@ -498,7 +505,9 @@
     // Garage or shop: a two-car footprint unless coverage or impervious room says less.
     var s = opt("shop", "Garage or shop");
     if (o.nonres) s.why = NONRES;
-    else if (o.assumed || !z) s.why = TYPICAL;
+    else if (o.unrecognized) s.why = UNKNOWN;
+    else if (o.assumed) s.why = TYPICAL;
+    else if (!z) s.why = "A garage or shop is not sized for this zone.";
     else if (roomCov != null && roomCov <= 0) { s.feasible = false; s.why = "No lot coverage room is left under the cap."; }
     else if (o.imperviousCap != null && roomImp != null && roomImp <= 0) { s.feasible = false; s.why = "No impervious surface room is left under the cap."; }
     else {
@@ -515,7 +524,9 @@
     // New house: the full floor cap on two levels, inside the coverage cap and the envelope.
     var t = opt("teardown", "New house"), lv2 = d.houseLevels || 2;
     if (o.nonres) t.why = NONRES;
-    else if (o.assumed || !z) t.why = TYPICAL;
+    else if (o.unrecognized) t.why = UNKNOWN;
+    else if (o.assumed) t.why = TYPICAL;
+    else if (!z) t.why = "A new house is not sized for this zone.";
     else if (o.floorCap == null && o.coverageCap == null && !(o.envArea > 0)) t.why = "No floor cap, coverage cap or setback envelope is known for this lot, so a new house is not sized.";
     else {
       var fpt = minOf(o.coverageCap, o.floorCap != null ? o.floorCap / lv2 : null, o.envArea > 0 ? o.envArea * 0.85 : null, d.houseFootprintMax || 3000);
@@ -697,7 +708,7 @@
       roomFar: roomFar, roomCov: roomCov, roomImp: roomImp, hasImpervious: hasImpervious,
       envArea: input.envArea != null ? input.envArea : null, aduRule: input.aduRule || "",
       aduStateNote: input.aduStateNote || "", siteCaution: input.siteCaution || "", matchCaution: input.matchCaution || "", zoneCaution: input.zoneCaution || "",
-      assumed: !!input.assumed, nonres: !!input.nonres,
+      assumed: !!input.assumed, nonres: !!input.nonres, unrecognized: !!input.unrecognized,
       countyFinSize: countyFin, countyFinRows: (auto.countyFinSize && auto.countyFinSize.nDwell) || 0
     });
     return {

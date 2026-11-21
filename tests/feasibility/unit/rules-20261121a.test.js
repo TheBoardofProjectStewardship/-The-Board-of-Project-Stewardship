@@ -13,7 +13,10 @@ var lr2m = pick({ juris: "seattle", zone: "LR2 (M)", lot: 5000 });
 var lr2 = pick({ juris: "seattle", zone: "LR2", lot: 5000 });
 t.ok("LR2 (M) is FAR 1.4 and 40 ft; LR2 without the suffix is FAR 1.1 and 32 ft", lr2m.floorCap === 7000 && lr2m.height.ft === 40 && lr2.floorCap === 5500 && lr2.height.ft === 32);
 var lr3 = pick({ juris: "seattle", zone: "LR3 (M1)", lot: 6000 });
-t.ok("LR3 (M1) keeps the MHA floor area and a 32 ft house height", lr3.floorCap === 10800 && lr3.height.ft === 32 && /stacked dwelling units/.test(JSON.stringify(lr3.rules)) && !/Cottage housing/.test(JSON.stringify(lr3.rules)));
+t.ok("LR3 (M1) is 40 ft with the suffix and does not say the unsuffixed house height", lr3.floorCap === 10800 && lr3.height.ft === 40 && /40 ft with an MHA suffix/.test(lr3.height.text) && !/without an MHA suffix is 32/.test(JSON.stringify(lr3)));
+t.ok("LR3 without a suffix is 32 ft", R.pick({ juris: "seattle", zone: "LR3", lot: 6000 }).height.ft === 32);
+t.ok("LR3 RC (M) is LR3 with the suffix", R.parseLr("LR3 RC (M)").base === "LR3" && R.parseLr("LR3 RC (M)").mha === "M" && R.pick({ juris: "seattle", zone: "LR3 RC (M)", lot: 5000 }).height.ft === 40);
+t.ok("RM 1.5 with a space is RM-1.5", R.pick({ juris: "edmonds", zone: "RM 1.5", lot: 6000 }).setbacks.side === 10 && R.pick({ juris: "edmonds", zone: "RM 1.5", lot: 6000 }).key === "edmonds-rm");
 t.ok("LR standards cite Ord. 127376", lr1m.sources.some(function (s) { return /23\.45\.518/.test(s.label) && /127376/.test(s.label); }) && lr1m.sources.some(function (s) { return /23\.45\.514/.test(s.label) && /127376/.test(s.label); }));
 t.ok("MIO-65-LR3 is not read as LR3", R.parseLr("MIO-65-LR3 (M)") === null && R.pick({ juris: "seattle", zone: "MIO-65-LR3 (M)", zoneClass: "Major Institutions" }).key !== "seattle-lr");
 ["NC2-55 (M)", "NC2P-65 (M1)", "C1-55 (M)"].forEach(function (z) {
@@ -25,8 +28,27 @@ t.ok("Edmonds BD1 is not a house zone", bd.residential === false && !bd.setbacks
 ["BC", "BN", "CG2", "OS", "P"].forEach(function (z) {
   t.ok("Edmonds " + z + " is not a house zone", R.pick({ juris: "edmonds", zone: z }).residential === false);
 });
-var waCity = R.pick({ juris: "city", city: "redmond", zone: "R-1", lot: 7000, stateAbbr: "WA" });
-t.ok("an uncoded residential city zone keeps the state-law rows and no assumed setbacks", waCity.residential === true && !waCity.setbacks.front && waCity.rules.some(function (r) { return /HB 1110|Middle housing/.test(r.label + r.value); }) && waCity.rules.some(function (r) { return /ADU/.test(r.label); }));
+["UR3", "RE-1", "RS", "SF-3", "R-1"].forEach(function (z) {
+  var rs = R.pick({ juris: "outside", zone: z, lot: 7000, stateAbbr: "TX" });
+  t.ok(z + " uses typical residential assumptions", rs.assumed === true && rs.residential === true && rs.setbacks.front === 25 && rs.caveat === R.TYPICAL, rs.key);
+});
+var everett = R.pick({ juris: "city", city: "everett", zone: "UR3", lot: 6000, stateAbbr: "WA" });
+t.ok("Everett UR3 is typical residential, not a non-house lot", everett.assumed === true && everett.residential === true && !/not a house lot/.test(JSON.stringify(everett)));
+var pd = R.pick({ juris: "outside", zone: "PD", lot: 8000, stateAbbr: "OH" });
+t.ok("PD is unrecognized and is not called a house lot or a typical house", pd.unrecognized === true && pd.residential == null && pd.assumed !== true && !pd.setbacks.front && /not recognized/.test(pd.caveat) && !/not a house lot/.test(pd.caveat));
+var sea = R.pick({ juris: "seattle", zone: "SF5000", stateAbbr: "WA", lot: 5000 });
+t.ok("Seattle is never said to be off the middle housing list", !/not on the state middle housing list/.test(JSON.stringify(sea)) && !/not on the state middle housing list/.test(JSON.stringify(R.pick({ juris: "seattle", zone: "", stateAbbr: "WA" }))));
+var edm = R.pick({ juris: "edmonds", zone: "BD1", lot: 8000 });
+t.ok("Edmonds commercial zones link ECDC Title 16", edm.residential === false && edm.sources.some(function (s) { return s.url === "https://edmonds.municipal.codes/ECDC/16"; }));
+var Sum = require("../../../assets/feasibility/20261121a/build-here-summary.js");
+var fs = require("fs");
+var nc = R.pick({ juris: "seattle", zone: "NC2-55 (M)", zoneClass: "Commercial/Mixed Use", stateAbbr: "WA", lot: 5000 });
+var Fc = Sum.facts({ stateAbbr: "WA", juris: "seattle", matched: "5400 BALLARD AVE NW" }, { zone: "NC2-55 (M)", existing: 1200 }, nc, { effective: { living: 1200 } }, {}, null);
+t.ok("a commercial lot does not say existing finished living", Fc.living && Fc.living.label.indexOf("Existing finished living") < 0, Fc.living && Fc.living.label);
+var permit = Sum.blocks(Fc).building.filter(function (r) { return r.key === "permits"; })[0];
+t.ok("a commercial permit line does not offer an addition, ADU or new house", permit && permit.v.indexOf("addition, ADU or new house") < 0, permit && permit.v);
+var pageJs = fs.readFileSync(require("path").join(__dirname, "../../../assets/feasibility/20261121a/build-here.js"), "utf8");
+t.ok("the area heading is neutral", pageJs.indexOf("House, garage, driveway and open area") < 0 && pageJs.indexOf("Buildings, paving and open area") >= 0);
 var txRules = R.pick({ juris: "outside", zone: "", lot: 8000, stateAbbr: "TX" });
 t.ok("an out-of-state lot with no zone uses typical assumptions", txRules.assumed === true && txRules.setbacks.front === 25);
 t.ok("an out-of-state study does not carry the Washington parking cap", txRules.site.parking == null && txRules.site.wa === false);
