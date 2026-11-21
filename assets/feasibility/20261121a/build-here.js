@@ -1668,7 +1668,8 @@
     var assumed = !!(rs && rs.assumed);
     var nonres = !!(rs && rs.residential === false);
     var unrecognized = !!(rs && rs.unrecognized);
-    var coded = !!(rs && rs.coded !== false && !assumed && rs.residential === true);
+    var houseLot = !rs || (rs.residential !== false && !rs.unrecognized);
+    var coded = !!(rs && rs.coded !== false && !assumed && houseLot);
     var aduRule = adu && adu.status === "coded" ? adu.text : "", aduStateNote = !assumed && adu && adu.status === "state" ? adu.text : "";
     var cautions = [];
     if (s.hazards && s.hazards.length) cautions.push("a mapped critical area or hazard");
@@ -1897,7 +1898,7 @@
     });
     if (geo && geo.buildings) geo.buildings.forEach(function (b) {
       if (!b.ring || b.role === "neighbor") return;
-      var houseLot = !rs || rs.residential === true;
+      var houseLot = !rs || (rs.residential !== false && !rs.unrecognized);
       var name = b.role === "garage" ? "(E) GARAGE" : (b.role === "house" && houseLot && b.use !== "nonres" ? "(E) HOUSE" : "(E) BUILDING");
       bld += '<path d="' + pathOf(b.ring) + '" fill="#ffffff" stroke="#111" stroke-width="' + (b.role === "house" ? "1.8" : "1.2") + '"/>';
       var c = G && G.centroid ? G.centroid(b.ring) : null;
@@ -2073,7 +2074,7 @@
     var prepared = (ctx && ctx.prepared) || todayStamp();
     var sbNow = rs && rs.setbacks || {}, landGeo = s.landscape && s.landscape.geo ? s.landscape.geo : null;
     var M = SP && SUM && CFG.sheets !== false ? SP.model({
-      rings: s.rings, lon: s.lon, lat: s.lat, frontDir: s.frontDir, neighbors: s.neighborRings, setbacks: sbNow, setbackVerify: !!(rs && rs.setbackVerify), residential: !rs || rs.residential === true,
+      rings: s.rings, lon: s.lon, lat: s.lat, frontDir: s.frontDir, neighbors: s.neighborRings, setbacks: sbNow, setbackVerify: !!(rs && rs.setbackVerify), residential: !rs || (rs.residential !== false && !rs.unrecognized), unrecognized: !!(rs && rs.unrecognized),
       addrStreet: houseAndStreet(s.matched || s.input || "").street, geo: landGeo, slope: s.landscape && s.landscape.slope, hazardShapes: s.hazardShapes, imagery: s.imagery, lines: lotGeometry(s, sbNow)
     }) : null;
     var F = SUM ? SUM.facts(s, v, rs, ctx, { brand: brandInfo() }, M) : null, FB = F ? SUM.blocks(F) : null;
@@ -2093,7 +2094,7 @@
     /* Cover is physical page 1. stampStudyPages renumbers every sheet after this, including SP-1. */
     var coverQr = String(CFG.coverQrUrl || "").trim();
     var coverBody = '<div class="bh-cover-wrap"><div class="bh-cover-top"><img class="bh-cover-logo" src="/assets/feasibility/pacific-pro-group-logo.png" alt="Pacific Pro Group">' +
-      '<p class="bh-cover-kicker">' + (rs && rs.residential === true ? 'SINGLE-FAMILY RESIDENCE <span aria-hidden="true">|</span> <strong>FEASIBILITY STUDY</strong>' : "<strong>FEASIBILITY STUDY</strong>") + '</p><div class="bh-cover-bar" aria-hidden="true"></div></div>' +
+      '<p class="bh-cover-kicker">' + (rs && rs.residential !== false && !rs.unrecognized ? 'SINGLE-FAMILY RESIDENCE <span aria-hidden="true">|</span> <strong>FEASIBILITY STUDY</strong>' : "<strong>FEASIBILITY STUDY</strong>") + '</p><div class="bh-cover-bar" aria-hidden="true"></div></div>' +
       '<div class="bh-cover-art"><img src="/assets/feasibility/feasibility-cover.jpg" alt="Pen-and-ink drawing of a house on its lot"></div>' +
       '<div class="bh-cover-meta"><div><p class="bh-cover-label">Subject property</p><p class="bh-cover-address">' + esc(s.matched || s.input || "Address not matched") + "</p>" +
       '<p class="bh-cover-date">Prepared ' + esc(asOfDate) + (s.isSample ? " · Sample layout, not a property record" : "") + "</p></div>" +
@@ -2140,7 +2141,7 @@
     if (s.parcelWarn || rLand.warn) p1Right += '<p class="bh-verify bh-alert-box" role="alert"><strong>' + esc(s.parcelWarn || rLand.warn) + "</strong></p>";
     p1Right += "<h3>Buildings, paving and open area</h3>";
     if (rLand.rows && rLand.rows.length) {
-      p1Right += '<table class="bh-table bh-land"><thead><tr><th scope="col">Area</th><th scope="col">Square feet</th><th scope="col">Share</th></tr></thead><tbody>' + rLand.rows.map(function (x) {
+      p1Right += '<table class="bh-table bh-land"><thead><tr><th scope="col">Area</th><th scope="col">Square feet</th><th scope="col">Share</th></tr></thead><tbody>' + rLand.rows.filter(function (x) { return !(rs && rs.residential === false && x.key === "garage"); }).map(function (x) {
         var sfTxt = x.sf == null ? '<span class="bh-tbd">Not available</span>' : (x.key === "lot" && s.lotKind === "record" ? fmt(x.sf) + " sf" : "approx. " + fmt(x.sf) + " sf");
         var pctTxt = x.pct == null ? "Not measured" : x.pct + "%";
         return '<tr><th scope="row">' + esc(x.label) + '</th><td data-label="Square feet">' + sfTxt + '</td><td data-label="Share">' + esc(pctTxt) + "</td></tr>";
@@ -2185,10 +2186,10 @@
     var secRow = fb("secondStory");
     var optRows = [
       { label: (optBy.addition && (optBy.addition.kind === "secondStory" || optBy.addition.footprintSf === 0)) ? "Addition (upward)" : "Addition", opt: optBy.addition },
-      { label: "Second story", secondStory: true, row: secRow, hide: !!(rs && rs.residential === false) },
+      { label: "Second story", secondStory: true, row: secRow, hide: !!(rs && (rs.residential === false || rs.unrecognized)) },
       { label: "ADU / detached ADU", opt: optBy.adu },
-      { label: "Garage or shop", opt: optBy.shop },
-      { label: "New house (teardown)", opt: optBy.teardown },
+      { label: "Garage or shop", opt: optBy.shop, hide: !!(rs && rs.residential === false) },
+      { label: "New house (teardown)", opt: optBy.teardown, hide: !!(rs && rs.residential === false) },
       { label: "Interior remodel", opt: optBy.remodel }
     ].filter(function (item) { return !item.hide; }).map(function (item) {
       var fitTxt = "Verify", sizeTxt = "not available";
@@ -2216,7 +2217,7 @@
     var optionsTableHtml = '<h3>Project options comparison</h3><table class="bh-table bh-options-table"><thead><tr><th scope="col">Project</th><th scope="col">Fit</th><th scope="col">Size that fits &amp; notes</th></tr></thead><tbody>' + optRows + "</tbody></table>";
 
     var hazWhere = s.hazardScope === "parcel" ? "this parcel" : s.hazardScope === "box" ? "a box around this parcel" : "the address point";
-    var hazCity = s.juris === "city" ? "Only county layers were read. The City of " + esc(s.city) + " keeps its own critical-area maps, and those were not checked." : "";
+    var hazCity = s.juris === "city" && s.city ? "Only county layers were read. The City of " + esc(s.city) + " keeps its own critical-area maps, and those were not checked." : "";
     var haz;
     if (s.hazards.length) haz = "<ul>" + s.hazards.map(function (h) { return "<li>" + esc(h) + "</li>"; }).join("") + "</ul>" + (hazCity ? '<p class="bh-muted">' + hazCity + "</p>" : "");
     else if (s.hazardSource && s.hazardNotes.length) haz = "<p>The layers that answered show no mapped hazard on " + hazWhere + ". " + (hazCity ? hazCity + " " : "") + "Some layers did not answer and were not checked, so this is not a full map check.</p>";
@@ -2267,7 +2268,7 @@
     else if (s.basementNone) rowsP5.push(["Basement", "None on record"]);
     if (s.garageFloor) rowsP5.push(["Attached garage", fmt(s.garageFloor) + " sf"]);
     if (s.basementGarage) rowsP5.push(["Basement garage", fmt(s.basementGarage) + " sf"]);
-    if (s.detGarageFloor) rowsP5.push(["Detached garage floor area", fmt(s.detGarageFloor) + " sf"]);
+    if (s.detGarageFloor && !(rs && rs.residential === false)) rowsP5.push(["Detached garage floor area", fmt(s.detGarageFloor) + " sf"]);
     if (!s.garageFloor && !s.basementGarage && !s.detGarageFloor && s.garageNone) rowsP5.push(["Garage", "None on record"]);
     if (s.deck) rowsP5.push(["Deck", fmt(s.deck) + " sf"]);
     if (s.yrRenov) rowsP5.push(["Year renovated", esc(s.yrRenov)]);

@@ -504,10 +504,11 @@
     var cityLink = { label: "City of " + c.name + " permits and planning", url: c.home };
     if (!zk) {
       var lookup = { label: "Zoning code", url: c.code && c.code.url ? c.code.url : c.home };
-      var passed = { lot: v.lot, zone: v.zone, use: v.use, presentUse: v.presentUse, zoneClass: v.zoneClass, lookup: lookup, codeChapter: v.codeChapter, juris: v.juris, city: v.city };
+      var passed = { lot: v.lot, zone: v.zone, use: v.use, presentUse: v.presentUse, zoneClass: v.zoneClass, lookup: lookup, codeChapter: v.codeChapter, juris: v.juris, city: v.city, stateAbbr: v.stateAbbr };
+      if (!String(v.zone || "").trim()) return null;
       var cls = lotClass(passed);
       if (cls === "nonres") return nonResidential(passed);
-      if (cls === "residential") return typicalResidential(passed);
+      if (cls === "residential") return null;
       return unrecognized(passed);
     }
     var Z = t.zones[zk], cm = t.common || {}, src = Z.src || t.src, sbSrc = Z.sbSrc || src;
@@ -617,7 +618,7 @@
     var raw = String(zone || "").toUpperCase().replace(/\s+/g, "");
     // Only a zone that starts as LR1, LR2, or LR3. A short token such as RC may sit before the suffix: LR3 RC (M).
     // MIO-65-LR3 is a major-institution overlay, not LR3.
-    raw = raw.replace(/^(LR-?[123])[A-Z]{1,4}(?=\(|$)/, "$1");
+    raw = raw.replace(/^(LR-?[123])-?[A-Z]{1,4}(?=\(|$)/, "$1");
     var hit = raw.match(/^LR-?([123])(?:\(|$)/);
     if (!hit) return null;
     return { base: "LR" + hit[1], mha: mhaSuffix(zone, mhaField) };
@@ -625,7 +626,7 @@
   function lrHeight(base, mha) {
     if (base === "LR1") return 32;
     // Ord. 127376: LR2 and LR3 are 40 ft with an MHA suffix outside urban centers and villages, and 32 ft without the suffix.
-    // Stacked dwelling units can be higher. A house addition uses 40 when the suffix is present and 32 when it is not.
+    // The higher height for stacked units inside a growth area is not applied, and it is not printed on an MHA lot.
     return mha ? 40 : 32;
   }
   function seattleLR(v, parsed) {
@@ -637,7 +638,7 @@
       ? "The (" + mha + ") suffix is a Mandatory Housing Affordability suffix (SMC 23.58B and 23.58C). It sets the payment or performance amount. It does not change the setbacks. It uses the MHA column of the floor-area table."
       : "No MHA suffix is on this zone, so the table column without a suffix is used.";
     var heightNote = base === "LR3"
-      ? (mha ? " 40 ft with an MHA suffix, outside an urban center or urban village. Stacked dwelling units can be higher." : " 32 ft without an MHA suffix. Stacked dwelling units can be higher.")
+      ? (mha ? " 40 ft with an MHA suffix, outside an urban center or urban village." : " 32 ft without an MHA suffix.")
       : (base === "LR1" ? " LR1 height is 32 ft with or without the suffix." : (mha ? " The MHA suffix column is used." : " The column without an MHA suffix is used."));
     return {
       setbackNote: "",
@@ -647,7 +648,7 @@
       floorCapLabel: cap != null ? "FAR " + far + " x " + fmt(lot) + " sf lot" : "FAR " + far + " of the lot. The lot size is not on record, so no square-foot cap is shown.",
       coverage: null,
       setbacks: { front: 7, rear: 7, side: 5, rearAlley: 0 },
-      height: { ft: ht, text: ht + " ft" + (base === "LR3" ? (mha ? ". 40 ft with an MHA suffix, outside an urban center or urban village. Stacked dwelling units can be higher." : ". 32 ft without an MHA suffix. Stacked dwelling units can be higher.") : "") },
+      height: { ft: ht, text: base === "LR3" ? (mha ? "40 ft with an MHA suffix, outside an urban center or urban village." : "32 ft without an MHA suffix.") : (ht + " ft") },
       adu: { status: "coded", maxCount: 2, maxSf: null, rearSetback: null, sideSetback: null, heightFt: null, text: "ADUs are allowed with single-family dwelling units, rowhouses, and townhouses. They do not count toward the density limit. The size limit is in SMC 23.45.545 and is not applied as a number here.", src: SRC.smc2345 },
       accounting: { farIncludesGarage: null, farIncludesBasement: null, farIncludesAccessory: null, verify: true, note: "Floor area follows SMC 23.45.510. Whether a garage or a basement counts is not taken from a second table here." },
       rules: [
@@ -774,6 +775,7 @@
     return rs;
   }
   var ECDC16 = { label: "ECDC Title 16", url: "https://edmonds.municipal.codes/ECDC/16" };
+  var EDMONDS_CITY = { name: "Edmonds", tier: 0, home: "https://www.edmondswa.gov/government/departments/development_services", code: ECDC16 };
   function nonResidential(v) {
     v = v || {};
     if (!v.codeChapter && v.juris === "edmonds") v.codeChapter = ECDC16;
@@ -797,8 +799,11 @@
     }, v);
   }
   var UNRECOGNIZED = "This zone is not recognized. Confirm the standards with your local planning department.";
+  var BLANK_ZONE = "No zone was found for this lot. Confirm the standards with your local planning department.";
   function unrecognized(v) {
     v = v || {};
+    var named = String(v.zone || "").trim();
+    var text = named ? UNRECOGNIZED : BLANK_ZONE;
     return {
       key: "unrecognized",
       assumed: false,
@@ -806,16 +811,16 @@
       unrecognized: true,
       uncoded: true,
       coded: false,
-      title: v.zone ? "Zone " + v.zone : "Zone not recognized",
+      title: named ? "Zone " + named : "Zone not on record",
       floorCap: null,
-      floorCapLabel: UNRECOGNIZED,
+      floorCapLabel: text,
       coverage: null,
       setbacks: {},
       height: { ft: null, text: "" },
       adu: { status: "verify", maxCount: null, maxSf: null, text: "", src: null },
-      rules: [rule("Zone", UNRECOGNIZED, v.lookup)],
+      rules: [rule("Zone", text, v.lookup)],
       sources: v.lookup && v.lookup.url ? [v.lookup] : [],
-      caveat: UNRECOGNIZED
+      caveat: text
     };
   }
   function notCoded(v) {
@@ -898,15 +903,18 @@
      checked: null was not read against the code text and prints with "verify". */
   function siteRules(v, rs) {
     var c = rs && rs.city;
+    var cname = c && typeof c.name === "string" && c.name && c.name !== "undefined" ? c.name : "";
     var wa = v.stateAbbr ? v.stateAbbr === "WA" : v.juris !== "outside";
-    var place = c ? "the City of " + c.name : v.juris === "seattle" ? "the City of Seattle" : v.juris === "kenmore" ? "the City of Kenmore" : v.juris === "edmonds" ? "the City of Edmonds" : v.juris === "kc" ? "unincorporated King County" : v.juris === "sno" ? "unincorporated Snohomish County" : "the local planning department";
+    var place = cname ? "the City of " + cname : v.juris === "seattle" ? "the City of Seattle" : v.juris === "kenmore" ? "the City of Kenmore" : v.juris === "edmonds" ? "the City of Edmonds" : v.juris === "kc" ? "unincorporated King County" : v.juris === "sno" ? "unincorporated Snohomish County" : "the local planning department";
     var code = c ? c.code : null, city = v.juris === "city" || v.juris === "seattle" || v.juris === "kenmore" || v.juris === "edmonds";
     return {
       place: place,
       asbestos: datum("An asbestos survey is required before any renovation or demolition, whatever the year the house was built.", SRC.pscaa402, CHECKED_NOV),
       lead: datum("In a home built before 1978, paid renovation work must follow lead-safe work practices.", SRC.epaRrp, CHECKED_NOV),
-      reroof: v.juris === "seattle"
+      reroof: v.juris === "seattle" && !(rs && rs.residential === false)
         ? datum("No permit for re-roofing a one- or two-family home or townhouse when the work does not change the building envelope beyond adding or replacing insulation. Replacing sheathing or framing needs a permit.", SRC.sdciReroof, CHECKED_NOV)
+        : v.juris === "seattle"
+        ? datum("Re-roof work on this building is confirmed with SDCI.", SRC.sdciReroof, CHECKED_NOV)
         : datum(null, code, null, "The re-roof permit rule for " + place + " is not coded."),
       reroofLayers: datum("A new roof may not be laid over a roof that already has two or more layers. That roof is torn off first.", SRC.irc908, CHECKED_NOV),
       drainage: v.juris === "seattle"
@@ -959,13 +967,14 @@
     if (!rs) {
       var cls = lotClass(v);
       var wa = v.stateAbbr ? v.stateAbbr === "WA" : v.juris !== "outside";
+      var cityRec = v.juris === "city" && CITY[v.city] ? CITY[v.city] : (v.juris === "edmonds" ? EDMONDS_CITY : null);
       if (cls === "nonres") rs = nonResidential(v);
+      else if ((cls === "residential" || cls === "blank") && wa && cityRec) rs = stateLawCity(v, cityRec);
       else if (cls === "residential") rs = typicalResidential(v);
       else if (cls === "blank" && !wa) rs = typicalResidential(v);
-      else if (cls === "blank" && wa && v.juris === "city" && CITY[v.city]) rs = stateLawCity(v, CITY[v.city]);
-      else if (cls === "unknown" || cls === "blank") rs = unrecognized(v);
       else rs = unrecognized(v);
     }
+    if (rs && rs.residential === undefined && !rs.unrecognized) rs.residential = true;
     if (so.overlay && rs.coded !== false) {
       rs.overlay = so.overlay;
       rs.overlayNote = "The zoning map shows " + String(v.zone).trim() + ". The " + so.overlay + " suffix marks " + (/SO/.test(so.overlay) ? "a special district overlay" : "property-specific development conditions") + " that sit on top of the base zone. The numbers here are the base zone's. Ask the jurisdiction what the suffix adds.";

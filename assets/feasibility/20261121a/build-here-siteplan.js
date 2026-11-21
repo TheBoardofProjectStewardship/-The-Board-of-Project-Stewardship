@@ -552,7 +552,7 @@
     if (isNum(eff.survey)) r.push(row("(E) " + bldWord + " footprint (your entry)", fmt(eff.survey) + " sf"));
     else if (isNum(eff.roof)) r.push(row("(E) roof outline" + (F.srcShort && F.srcShort.buildings ? " (" + F.srcShort.buildings + ")" : ""), "≈ " + fmt(eff.roof) + " sf", "est"));
     else r.push(miss("(E) " + bldWord + " outline"));
-    r.push(hasAcc ? row("(E) garage / accessory outline", "≈ " + fmt(acc) + " sf", "est") : miss("(E) shed / accessory", "not mapped"));
+    if (!F.nonres) r.push(hasAcc ? row("(E) garage / accessory outline", "≈ " + fmt(acc) + " sf", "est") : miss("(E) shed / accessory", "not mapped"));
     r.push(bld != null ? row("TOTAL EXISTING", "≈ " + fmt(bld) + " sf" + (pctOf(bld, lot) ? " · " + pctOf(bld, lot) : ""), "est", true) : miss("TOTAL EXISTING"));
     if (opt) {
       if (fp == null) r.push(row("(N) " + (OPT_ROW[opt.kind] || "option"), "no new footprint"));
@@ -998,14 +998,15 @@
     return y;
   }
   function drawTables(tb, legend) {
-    var x = COL.x, w = COL.w, limit = TB.y - COL.y - 8, titleH = 22;
+    var x = COL.x, w = COL.w, titleH = 22, start = COL.y + 8, stop = TB.y - 6;
     var rowH = 18, size = 12;
     for (var tryH = 18; tryH >= 11; tryH -= 0.5) {
       var trySize = Math.min(13, tryH * 0.72);
-      if (columnUsed(tb, legend, tryH, trySize) <= limit) { rowH = tryH; size = trySize; break; }
+      // The last legend baseline has to land on or above `stop`. columnUsed ends one row below that baseline.
+      if (columnUsed(tb, legend, tryH, trySize) <= stop - start + tryH) { rowH = tryH; size = trySize; break; }
       rowH = tryH; size = trySize;
     }
-    var out = [], y = COL.y + 8, stop = TB.y - 6;
+    var out = [], y = start;
     var COLOR = { fact: INK, est: INK, partial: INK, missing: ORANGE, verify: ORANGE };
     tb.forEach(function (t) {
       if (y > stop - titleH) return;
@@ -1025,11 +1026,11 @@
       });
       y += 4;
     });
-    if (legend.length && y <= stop - titleH - rowH) {
+    if (legend.length && y + titleH <= stop) {
       out.push(T(x, y, "LEGEND", { size: 12.5, weight: 700, ls: 1.2 }) + '<rect x="' + x + '" y="' + r1(y + 5) + '" width="' + w + '" height="1.2" fill="' + RULE + '"/>');
       y += titleH;
       legend.forEach(function (l) {
-        if (y > stop - rowH) return;
+        if (y > stop) return;
         out.push('<g transform="translate(' + x + " " + r1(y - 8) + ')">' + l.sym + "</g>" + T(x + 54, y, l.text, { size: Math.min(size, 12) }));
         y += rowH;
       });

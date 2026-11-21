@@ -58,10 +58,17 @@ globalThis.fetch = function (url, opt) {
   t.ok("the plan drawing does not bleed with overflow visible", svg.indexOf('overflow="visible"') < 0);
   var long = "Typical residential assumptions, confirm with your local planning department. These are not the local code.";
   var rows = [];
-  for (var n = 0; n < 14; n++) rows.push({ k: "Row " + n, v: long, s: "verify" });
+  for (var n = 0; n < 36; n++) rows.push({ k: "Row " + n + " setback and height note", v: long, s: "verify" });
   var wrapped = SP.svg(M, { F: { address: "759 HARVARD AVE E", place: "the City of Seattle" }, tables: [{ id: "site", title: "SITE DATA", rows: rows }] });
-  var legendAt = wrapped.indexOf(">LEGEND<");
-  var legendY = legendAt < 0 ? 9999 : Number((wrapped.slice(Math.max(0, legendAt - 80), legendAt).match(/y="([\d.]+)"[^>]*$/) || [])[1]);
-  t.ok("the legend stays above the title block when rows wrap", legendAt > 0 && legendY < 1044, legendY);
+  function textY(svg, needle) {
+    var at = svg.indexOf(needle);
+    if (at < 0) return -1;
+    var ys = svg.slice(Math.max(0, at - 220), at).match(/y="([\d.]+)"/g) || [];
+    return ys.length ? Number(ys[ys.length - 1].replace(/[^0-9.]/g, "")) : -1;
+  }
+  var legendY = textY(wrapped, ">LEGEND<");
+  var verifyY = textY(wrapped, "(verify) = not in public data, or confirm on site");
+  t.ok("the legend stays above the title block when rows wrap", legendY > 0 && legendY < 1044, legendY);
+  t.ok("the last legend row is drawn above the title block", verifyY > legendY && verifyY <= 1038, verifyY);
   t.done();
 })();

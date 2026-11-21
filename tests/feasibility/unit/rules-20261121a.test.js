@@ -13,9 +13,10 @@ var lr2m = pick({ juris: "seattle", zone: "LR2 (M)", lot: 5000 });
 var lr2 = pick({ juris: "seattle", zone: "LR2", lot: 5000 });
 t.ok("LR2 (M) is FAR 1.4 and 40 ft; LR2 without the suffix is FAR 1.1 and 32 ft", lr2m.floorCap === 7000 && lr2m.height.ft === 40 && lr2.floorCap === 5500 && lr2.height.ft === 32);
 var lr3 = pick({ juris: "seattle", zone: "LR3 (M1)", lot: 6000 });
-t.ok("LR3 (M1) is 40 ft with the suffix and does not say the unsuffixed house height", lr3.floorCap === 10800 && lr3.height.ft === 40 && /40 ft with an MHA suffix/.test(lr3.height.text) && !/without an MHA suffix is 32/.test(JSON.stringify(lr3)));
+t.ok("LR3 (M1) is 40 ft with the suffix and does not say the unsuffixed house height", lr3.floorCap === 10800 && lr3.height.ft === 40 && /40 ft with an MHA suffix/.test(lr3.height.text) && !/without an MHA suffix is 32/.test(JSON.stringify(lr3)) && !/Stacked dwelling units can be higher/.test(lr3.height.text));
 t.ok("LR3 without a suffix is 32 ft", R.pick({ juris: "seattle", zone: "LR3", lot: 6000 }).height.ft === 32);
 t.ok("LR3 RC (M) is LR3 with the suffix", R.parseLr("LR3 RC (M)").base === "LR3" && R.parseLr("LR3 RC (M)").mha === "M" && R.pick({ juris: "seattle", zone: "LR3 RC (M)", lot: 5000 }).height.ft === 40);
+t.ok("LR3-RC (M) with a hyphen is LR3 with the suffix", R.parseLr("LR3-RC (M)").base === "LR3" && R.parseLr("LR3-RC (M)").mha === "M" && R.pick({ juris: "seattle", zone: "LR3-RC (M)", lot: 5000 }).height.ft === 40);
 t.ok("RM 1.5 with a space is RM-1.5", R.pick({ juris: "edmonds", zone: "RM 1.5", lot: 6000 }).setbacks.side === 10 && R.pick({ juris: "edmonds", zone: "RM 1.5", lot: 6000 }).key === "edmonds-rm");
 t.ok("LR standards cite Ord. 127376", lr1m.sources.some(function (s) { return /23\.45\.518/.test(s.label) && /127376/.test(s.label); }) && lr1m.sources.some(function (s) { return /23\.45\.514/.test(s.label) && /127376/.test(s.label); }));
 t.ok("MIO-65-LR3 is not read as LR3", R.parseLr("MIO-65-LR3 (M)") === null && R.pick({ juris: "seattle", zone: "MIO-65-LR3 (M)", zoneClass: "Major Institutions" }).key !== "seattle-lr");
@@ -32,8 +33,16 @@ t.ok("Edmonds BD1 is not a house zone", bd.residential === false && !bd.setbacks
   var rs = R.pick({ juris: "outside", zone: z, lot: 7000, stateAbbr: "TX" });
   t.ok(z + " uses typical residential assumptions", rs.assumed === true && rs.residential === true && rs.setbacks.front === 25 && rs.caveat === R.TYPICAL, rs.key);
 });
+function stateLaw(rs) {
+  return rs.residential === true && rs.assumed !== true && !rs.setbacks.front && rs.rules.some(function (r) { return /Middle housing/.test(r.label); }) && rs.rules.some(function (r) { return /HB 1110|36\.70A\.635/.test(String(r.value) + String(r.note) + (r.src && r.src.label || "")); }) && rs.rules.some(function (r) { return /ADU/.test(r.label) && /36\.70A\.680|HB 1337/.test(String(r.note) + (r.src && r.src.label || "")); });
+}
+var waCity = R.pick({ juris: "city", city: "redmond", zone: "R-1", lot: 7000, stateAbbr: "WA" });
+t.ok("an uncoded residential city zone keeps the state-law rows and no assumed setbacks", stateLaw(waCity));
+t.ok("Bellevue R-1 keeps the state-law rows", stateLaw(R.pick({ juris: "city", city: "bellevue", zone: "R-1", lot: 8000, stateAbbr: "WA" })));
+t.ok("Everett UR4 keeps the state-law rows", stateLaw(R.pick({ juris: "city", city: "everett", zone: "UR4", lot: 6000, stateAbbr: "WA" })));
+t.ok("Edmonds RS-8 keeps the state-law rows", stateLaw(R.pick({ juris: "edmonds", zone: "RS-8", lot: 7000, stateAbbr: "WA" })));
 var everett = R.pick({ juris: "city", city: "everett", zone: "UR3", lot: 6000, stateAbbr: "WA" });
-t.ok("Everett UR3 is typical residential, not a non-house lot", everett.assumed === true && everett.residential === true && !/not a house lot/.test(JSON.stringify(everett)));
+t.ok("Everett UR3 is a house zone under state law, not typical setbacks", stateLaw(everett) && !/not a house lot/.test(JSON.stringify(everett)));
 var pd = R.pick({ juris: "outside", zone: "PD", lot: 8000, stateAbbr: "OH" });
 t.ok("PD is unrecognized and is not called a house lot or a typical house", pd.unrecognized === true && pd.residential == null && pd.assumed !== true && !pd.setbacks.front && /not recognized/.test(pd.caveat) && !/not a house lot/.test(pd.caveat));
 var sea = R.pick({ juris: "seattle", zone: "SF5000", stateAbbr: "WA", lot: 5000 });
@@ -49,6 +58,30 @@ var permit = Sum.blocks(Fc).building.filter(function (r) { return r.key === "per
 t.ok("a commercial permit line does not offer an addition, ADU or new house", permit && permit.v.indexOf("addition, ADU or new house") < 0, permit && permit.v);
 var pageJs = fs.readFileSync(require("path").join(__dirname, "../../../assets/feasibility/20261121a/build-here.js"), "utf8");
 t.ok("the area heading is neutral", pageJs.indexOf("House, garage, driveway and open area") < 0 && pageJs.indexOf("Buildings, paving and open area") >= 0);
+var lr3Facts = Sum.blocks(Sum.facts({ stateAbbr: "WA", juris: "seattle", city: "Seattle" }, { zone: "LR3 (M)", lot: 6000 }, lr3, {}, {}, null)).building.filter(function (r) { return r.key === "height"; })[0];
+t.ok("the LR3 height row does not repeat 40 ft or say stacked units are higher", lr3Facts && lr3Facts.v.indexOf("40 ft · 40 ft") < 0 && lr3Facts.v.indexOf("Stacked dwelling units can be higher") < 0 && /40 ft with an MHA suffix/.test(lr3Facts.v), lr3Facts && lr3Facts.v);
+var cwFacts = Sum.facts({ stateAbbr: "WA", juris: "edmonds", city: "Edmonds", matched: "144 RAILROAD AVE" }, { zone: "CW", lot: 20000 }, R.pick({ juris: "edmonds", zone: "CW", lot: 20000 }), { effective: {} }, {}, null);
+var chapter = Sum.blocks(cwFacts).building.filter(function (r) { return r.key === "chapter"; })[0];
+t.ok("Railroad shows the Edmonds code chapter", chapter && /ECDC/.test(chapter.v), chapter && chapter.v);
+var blankPermit = Sum.blocks(Sum.facts({ stateAbbr: "WA", juris: "city" }, { zone: "" }, R.pick({ juris: "city", city: "", zone: "", stateAbbr: "WA" }), {}, {}, null)).building.filter(function (r) { return r.key === "permits"; })[0];
+t.ok("a blank city does not print City of undefined", blankPermit && blankPermit.v.indexOf("undefined") < 0 && JSON.stringify(blankPermit).indexOf("City of undefined") < 0, blankPermit && blankPermit.v);
+var pdCards = Ms.scenarios({ unrecognized: true, lot: 8000, living: 1500, roof: 900, zoningCoded: false });
+["adu", "shop", "teardown"].forEach(function (id) {
+  var card = pdCards.filter(function (c) { return c.id === id; })[0];
+  t.ok(id + " card says the zone is not recognized", card && /not recognized/.test(card.line) && /confirm locally/i.test(card.metric), card && card.line);
+});
+var pdOpts = Ms.options({ unrecognized: true, zoningCoded: false, effective: { living: 1500, roof: 900 }, envArea: 2000 });
+["adu", "shop", "teardown"].forEach(function (id) {
+  var opt = pdOpts.filter(function (o) { return o.id === id; })[0];
+  t.ok(id + " option says the zone is not recognized", opt && /not recognized/.test(opt.why) && opt.footprintSf == null, opt && opt.why);
+});
+var FcSide = Sum.facts({ stateAbbr: "WA", juris: "seattle", matched: "5400 BALLARD AVE NW" }, { zone: "NC2-55 (M)", existing: 1200 }, nc, { effective: { living: 1200 } }, {}, { ok: true, hasGeo: true, sidewalks: [], trees: [], streets: [] });
+var nonresBlocks = Sum.blocks(FcSide);
+t.ok("a commercial lot hides the new-house row", !nonresBlocks.building.some(function (r) { return r.key === "newHouse" || /New house \(teardown\)/.test(r.k); }));
+t.ok("a commercial sidewalk note does not mention a new house", nonresBlocks.landscaping.filter(function (r) { return r.key === "sidewalk"; })[0].v.indexOf("with a new house") < 0);
+var ballardRoof = Sum.facts({ stateAbbr: "WA", juris: "seattle", city: "Seattle" }, { zone: "NC2-55 (M)" }, nc, {}, {}, { ok: true, sidewalks: [] });
+ballardRoof = Sum.blocks(ballardRoof);
+t.ok("a commercial re-roof note is not the one-family exemption", ballardRoof.roofing.filter(function (r) { return r.key === "reroofRule"; })[0].v.indexOf("one- or two-family") < 0);
 var txRules = R.pick({ juris: "outside", zone: "", lot: 8000, stateAbbr: "TX" });
 t.ok("an out-of-state lot with no zone uses typical assumptions", txRules.assumed === true && txRules.setbacks.front === 25);
 t.ok("an out-of-state study does not carry the Washington parking cap", txRules.site.parking == null && txRules.site.wa === false);
@@ -76,6 +109,35 @@ var banned = ["\u2014", "PPG", "turf", "lawn"];
 [R.TYPICAL, R.NONRES_NOTE, add.why, cw.caveat].forEach(function (s) {
   banned.forEach(function (w) { t.ok("copy avoids " + w, String(s).indexOf(w) < 0, s); });
   t.ok("copy does not say AI", !/\bAI\b/.test(String(s)));
+});
+
+globalThis.BuildHereGeom = require("../../../assets/feasibility/20261121a/build-here-geom.js");
+var SP = require("../../../assets/feasibility/20261121a/build-here-siteplan.js");
+var G = globalThis.BuildHereGeom;
+var fr = G.frame(47.65, -122.39);
+function ll(x, y) { return fr.inv(x, y); }
+function rect(x0, y0, x1, y1) { return [ll(x0, y0), ll(x1, y0), ll(x1, y1), ll(x0, y1), ll(x0, y0)]; }
+[
+  { name: "LR1 (M)", spec: { juris: "seattle", zone: "LR1 (M)", lot: 4000, mha: "M" } },
+  { name: "NR3", spec: { juris: "seattle", zone: "NR3", lot: 5000, units: 1 } },
+  { name: "LDR-S", spec: { juris: "edmonds", zone: "LDR-S", lot: 8000 } },
+  { name: "RM-1.5", spec: { juris: "edmonds", zone: "RM-1.5", lot: 6000 } }
+].forEach(function (sample) {
+  var rs = R.pick(sample.spec);
+  var house = rs.residential !== false && !rs.unrecognized;
+  var coded = rs.coded !== false && !rs.assumed && house;
+  var roomFar = rs.floorCap != null ? rs.floorCap - 1200 : null;
+  var roomCov = rs.coverage != null ? rs.coverage - 800 : 2000;
+  var opts = Ms.options({ zoningCoded: coded, nonres: false, unrecognized: false, hasFloorCap: coded ? (rs.floorCap != null ? true : (rs.farNone ? false : null)) : null, floorCap: coded ? rs.floorCap : null, coverageCap: coded ? rs.coverage : null, effective: { living: 1200, roof: 800, buildings: 800, roomFar: roomFar, roomCov: roomCov }, envArea: 2500, heightFt: rs.height.ft, adu: rs.adu });
+  var F = Sum.facts({ stateAbbr: "WA", juris: sample.spec.juris, city: sample.spec.juris === "seattle" ? "Seattle" : "Edmonds", lot: sample.spec.lot }, { zone: sample.spec.zone, lot: sample.spec.lot, existing: 1200 }, rs, { effective: { living: 1200, roof: 800, buildings: 800, roomFar: roomFar, roomCov: roomCov }, options: opts }, {}, null);
+  var add = opts.filter(function (o) { return o.id === "addition" || o.kind === "secondStory"; })[0];
+  var M = SP.model({
+    rings: [rect(-40, -40, 40, 40)], lon: -122.39, lat: 47.65, setbacks: rs.setbacks, residential: F.residential,
+    geo: { frame: { lat0: fr.lat0, lon0: fr.lon0 }, buildings: [{ role: "house", ring: [[-8, -8], [8, -8], [8, 8], [-8, 8], [-8, -8]], sf: 256 }], streets: [], drives: [], driveLines: [], hard: [], sidewalks: [], trees: [] }
+  });
+  var svg = SP.svg(M, { F: F, opt: add });
+  var additionRow = Sum.blocks(F).building.filter(function (r) { return r.key === "addition"; })[0];
+  t.ok(sample.name + " draws an addition and labels (E) HOUSE", house && F.residential === true && add && add.footprintSf > 0 && svg.indexOf("(E) HOUSE") >= 0 && additionRow && additionRow.v.indexOf("not a house lot") < 0, [rs.key, rs.residential, add && add.footprintSf, additionRow && additionRow.v]);
 });
 
 t.done();

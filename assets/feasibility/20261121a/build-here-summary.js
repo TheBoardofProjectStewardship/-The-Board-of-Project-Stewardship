@@ -52,8 +52,8 @@
     F.jurisSrc = king ? "King County parcel record (city name field)" : sno ? "Snohomish County city limits layer" : "US Census geocoder";
     F.zone = v.zone || ""; F.zoneTyped = !!v.zone && v.zone !== (s.zone || ""); F.zoneSrc = F.zoneTyped ? "Typed on this page" : (s.zoneSrc || "");
     F.zoneName = F.zoneTyped && !rs ? "" : zoneNameOf(rs); F.overlay = rs && rs.overlay ? rs.overlay : ""; F.zoneDraft = !!s.zoneDraft && !F.zoneTyped;
-    F.coded = !!(rs && rs.coded !== false && !rs.assumed && rs.residential === true); F.rs = rs || null; F.site = site;
-    F.wa = wa; F.residential = rs ? rs.residential === true : true; F.nonres = !!(rs && rs.residential === false); F.unrecognized = !!(rs && rs.unrecognized);
+    F.coded = !!(rs && rs.coded !== false && !rs.assumed && rs.residential !== false && !rs.unrecognized); F.rs = rs || null; F.site = site;
+    F.wa = wa; F.residential = !rs || (rs.residential !== false && !rs.unrecognized); F.nonres = !!(rs && rs.residential === false); F.unrecognized = !!(rs && rs.unrecognized);
     var lotTyped = isNum(v.lot) && (s.lot == null || Number(v.lot) !== Number(s.lot));
     F.lot = { sf: isNum(v.lot) ? v.lot : null, kind: !isNum(v.lot) ? null : lotTyped ? "typed" : s.lotKind === "record" ? "record" : "outline", gisSf: !lotTyped && s.lotKind === "record" && land.lot && isNum(land.lot.outlineSf) ? land.lot.outlineSf : null, src: lotTyped ? "Typed on this page" : (s.lotSrc || "") };
     var livTyped = isNum(v.existing) && (s.existing == null || Number(v.existing) !== Number(s.existing));
@@ -147,11 +147,17 @@
     /* ---- Building ---- */
     var B = "building";
     add(B, "zone", "Zone", F.zone ? F.zone + (F.zoneName && String(F.zoneName).toUpperCase() !== String(F.zone).toUpperCase() ? " · " + F.zoneName : "") + (F.overlay ? " · overlay " + F.overlay + " (its added rules are not coded, verify)" : "") + (F.zoneTyped ? " (your entry)" : "") + (F.zoneDraft ? ", read from a draft city zoning layer, confirm with the city" : "") : "not found in public data, enter the zone from the zoning map", !F.zone ? "missing" : (F.zoneDraft || F.overlay) ? "verify" : "fact", [F.zoneSrc]);
-    var chapter = (rs && rs.sources || []).filter(function (s) { return s && s.url && /23\.\d+|ECDC\/16\./.test(s.url); })[0];
+    var chapter = (rs && rs.sources || []).filter(function (s) { return s && s.url && /23\.\d+|ECDC\/16/.test(s.url); })[0];
     if (F.nonres && chapter) add(B, "chapter", "Code chapter", chapter.label || "Zoning code", "fact", [chapter]);
     add(B, "juris", "Jurisdiction", (F.incorporated ? "Inside the City of " + F.city + (F.county ? ", " + F.county : "") : F.county ? "Unincorporated " + F.county + " (urban growth area not checked)" : "not matched") + (F.mailCity ? ". The mailing address says " + F.mailCity + "; permits follow the jurisdiction, not the mailing city" : ""), F.county ? "fact" : "missing", [F.jurisSrc]);
     var H = F.height || {};
-    add(B, "height", "Height limit", isNum(H.ft) ? H.ft + " ft" + (H.verify ? " (verify)" : "") + (H.text && H.text !== H.ft + " ft" ? " · " + H.text : "") : (H.text || notCoded), isNum(H.ft) ? (H.verify ? "verify" : "fact") : (H.text ? "fact" : "verify"), [codeSrc]);
+    var heightLine = H.text || notCoded;
+    if (isNum(H.ft)) {
+      var bare = H.ft + " ft", extra = String(H.text || "").replace(/\s+/g, " ").trim();
+      heightLine = !extra || extra === bare || extra.indexOf(bare) === 0 ? (extra || bare) : bare + " · " + extra;
+      if (H.verify && heightLine.indexOf("(verify)") < 0) heightLine += " (verify)";
+    }
+    add(B, "height", "Height limit", heightLine, isNum(H.ft) ? (H.verify ? "verify" : "fact") : (H.text ? "fact" : "verify"), [codeSrc]);
     var fPartial = !!(eff.floorMissing && eff.floorMissing.length), fl;
     if (caps.farNone) fl = { v: "No floor-area ratio in this zone. Height, lot coverage and setbacks set the size.", s: "fact" };
     else { fl = capLine(F, caps.floorCap, null, false, eff.floorUsed, fPartial, eff.roomFar, "living area", (eff.floorMissing || []).join(", ")); if (isNum(caps.floorCap) && caps.floorCapLabel) fl.v = fl.v.replace(/^Cap [\d,]+ sf/, "Cap " + fmt(caps.floorCap) + " sf (" + caps.floorCapLabel + ")"); }
@@ -179,7 +185,7 @@
     var aduFit = td && !(!aduHas && /not coded/i.test(td.v)) ? td.v : ""; // do not say "not coded" twice
     add(B, "adu", "ADU / detached ADU", aduLead + aduFit + (adu && adu.status !== "verify" ? " State law caps an ADU's impact fees at half of a house's." : ""), adu && adu.status === "coded" && !adu.partial ? (td ? td.s : "fact") : "verify", [adu && adu.src ? adu.src : codeSrc, site.aduState && site.aduState.src ? site.aduState.src : null]);
     var on = optOf(F, "teardown"), tn = optText(on);
-    add(B, "newHouse", "New house (teardown)", tn ? tn.v + " A new house loses any grandfathered setbacks or size." : "Not judged.", tn ? tn.s : "verify", [codeSrc]);
+    if (!F.nonres) add(B, "newHouse", "New house (teardown)", tn ? tn.v + " A new house loses any grandfathered setbacks or size." : "Not judged.", tn ? tn.s : "verify", [codeSrc]);
     var units = null;
     (rs && rs.rules || []).forEach(function (r) { if (!units && /^Units per lot|^Middle housing/i.test(r.label) && r.value) units = r; });
     add(B, "units", "Units per lot", units ? units.value + (units.note ? " " + String(units.note).replace(/\s*Ask the city.*$/, "") : "") : "Unit count " + notCoded, units ? "fact" : "verify", [units && units.src ? units.src : codeSrc]);
@@ -199,7 +205,8 @@
       enSrc = e.src;
     });
     if (F.wa) add(B, "energy", "Energy code credits", en.length ? (enState === "verify" && en.length === 1 && !/credits|exempt/.test(en[0]) ? String(en[0]).replace(/[.\s]+$/, "") : "2021 energy code (WSEC-R; the 2024 code starts May 3, 2027). " + cap1(en.join("; "))) + "." : "No option size to rate.", en.length ? enState : "verify", [enSrc]);
-    add(B, "permits", "Permit path", "Building permit and plan review by " + place + (F.nonres ? " for work on this building" : F.residential ? " for an addition, ADU or new house" : "") + ", plus trade permits (electrical, plumbing, mechanical). Review time for the scope is confirmed with the permit office.", "fact", [rs && rs.city ? { label: "City of " + rs.city.name + " permits and planning", url: rs.city.home } : null]);
+    var permitCity = rs && rs.city && typeof rs.city.name === "string" && rs.city.name && rs.city.name !== "undefined" ? rs.city.name : "";
+    add(B, "permits", "Permit path", "Building permit and plan review by " + place + (F.nonres ? " for work on this building" : F.residential ? " for an addition, ADU or new house" : "") + ", plus trade permits (electrical, plumbing, mechanical). Review time for the scope is confirmed with the permit office.", "fact", [permitCity ? { label: "City of " + permitCity + " permits and planning", url: rs.city.home } : null]);
     var fr = [];
     if (F.frontStreet) fr.push("Front on " + title(F.frontStreet) + (F.frontByName ? "" : " (nearest street; confirm)"));
     if (isNum(F.frontage)) fr.push("≈ " + Math.round(F.frontage) + " ft of street frontage");
@@ -232,7 +239,7 @@
     var gd = [];
     if (isNum(F.garageAtt) && F.garageAtt > 0) gd.push("attached garage " + fmt(F.garageAtt) + " sf");
     if (isNum(F.garageBsmt) && F.garageBsmt > 0) gd.push("basement garage " + fmt(F.garageBsmt) + " sf");
-    if (isNum(F.garageDet) && F.garageDet > 0) gd.push("detached garage " + fmt(F.garageDet) + " sf");
+    if (!F.nonres && isNum(F.garageDet) && F.garageDet > 0) gd.push("detached garage " + fmt(F.garageDet) + " sf");
     if (!gd.length && F.garageNone) gd.push("no garage on the record");
     if (isNum(F.deck) && F.deck > 0) gd.push("deck " + fmt(F.deck) + " sf");
     add(Rm, "garage", "Garage and deck", gd.length ? gd.join(" · ") : MISSING, gd.length ? "fact" : "missing", [F.recordSrc]);
@@ -267,7 +274,7 @@
     var across = sl && sl.ok ? (sl.overallPct != null ? sl.overallPct : sl.fallPct) : null;
     add(L, "slope", "Slope (lidar approx.)", sl && sl.ok ? "About " + fallFt + " ft of fall" + (across != null ? ", about " + across + "% across the lot" : "") + (sl.fallCompass && sl.fallCompass !== "flat" ? " toward the " + sl.fallCompass : "") + ". Local cells average " + sl.mean + "% (median " + sl.median + "%), which is steeper where a wall or a building edge is in the sample. " + sl.pct15 + "% of the cells are 15% or steeper, " + sl.pct25 + "% are 25% or steeper, and " + sl.pct40 + "% are 40% or steeper. Ground " + fmt(sl.elevMin) + " to " + fmt(sl.elevMax) + " ft." : "Not measured: the elevation service did not answer.", sl && sl.ok ? "est" : "missing", [sl && sl.ok ? "USGS 3DEP elevation (bare-earth lidar samples)" : ""]);
     var where = F.hazardScope === "parcel" ? "this parcel" : F.hazardScope === "box" ? "a box around this parcel (its outline is too long to send)" : "the address point only (no parcel outline was found)", hz;
-    var cityGap = F.juris === "city" ? " Only county layers were read; the City of " + F.city + " keeps its own critical-area maps." : "";
+    var cityGap = F.juris === "city" && F.city ? " Only county layers were read; the City of " + F.city + " keeps its own critical-area maps." : "";
     if (F.hazards.length) hz = { v: F.hazards.join("; ") + "." + cityGap + " Expect a critical-area review.", s: "fact" };
     else if (F.hazardSource) hz = { v: "None mapped on " + where + " in the " + F.hazardSource + (F.hazardNotes.length ? ", among the layers that answered (" + F.hazardNotes.length + " did not)" : "") + "." + cityGap + " A map is not a field study.", s: F.hazardNotes.length || cityGap || F.hazardScope !== "parcel" ? "partial" : "fact" };
     else hz = { v: "Critical-area maps were not read for this place, verify with " + place + ".", s: "missing" };
@@ -285,7 +292,7 @@
     var fe = datumRow(site.fence, place, "The fence height limit");
     add(L, "fence", "Fences and yard rules", fe.v + (rs && isNum(rs.openSpacePct) ? " Open space: " + rs.openSpacePct + "% of the lot." : ""), fe.s, [fe.src]);
     if (F.wa) add(L, "shoreline", "Shoreline", F.shoreline ? "Inside shoreline jurisdiction (" + F.shoreline + " environment). The Shoreline Master Program adds buffers and a shoreline review." : "Not read from a shoreline map. Land within 200 ft of a lake, large stream, or the sound follows the Shoreline Master Program. Confirm it with " + place + ".", F.shoreline ? "fact" : "verify", [F.shoreline ? "Shoreline designations" : { label: "RCW 90.58 Shoreline Management Act", url: "https://app.leg.wa.gov/RCW/default.aspx?cite=90.58" }]);
-    add(L, "sidewalk", "Sidewalk on the frontage", F.sidewalk == null ? "Not read." : F.sidewalk ? "A sidewalk is mapped along the street in OpenStreetMap." : "None mapped along the street in OpenStreetMap, which is rarely complete. A city can ask for curb, gutter and sidewalk with a new house.", F.sidewalk == null ? "missing" : "est", [F.sidewalk != null ? "OpenStreetMap (sidewalks)" : ""]);
+    add(L, "sidewalk", "Sidewalk on the frontage", F.sidewalk == null ? "Not read." : F.sidewalk ? "A sidewalk is mapped along the street in OpenStreetMap." : (F.nonres ? "None mapped along the street in OpenStreetMap, which is rarely complete. Frontage improvements are confirmed with the city." : "None mapped along the street in OpenStreetMap, which is rarely complete. A city can ask for curb, gutter and sidewalk with a new house."), F.sidewalk == null ? "missing" : "est", [F.sidewalk != null ? "OpenStreetMap (sidewalks)" : ""]);
 
     /* ---- Roofing ---- */
     var Rf = "roofing", roof = isNum(eff.roof) ? eff.roof : null;

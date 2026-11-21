@@ -337,6 +337,7 @@
 
     var adu;
     if (ctx.nonres) adu = card("adu", "ADU", "partial", NONRES, "Not a house lot");
+    else if (ctx.unrecognized) adu = card("adu", "ADU", "partial", UNKNOWN, "Confirm locally");
     else if (ctx.assumed) adu = card("adu", "ADU", "partial", TYPICAL, "Concept only");
     else if (!any && !z) adu = card("adu", "ADU", "nodata", "No lot facts and no coded ADU rule are on record.", "Needs a lot and a zoning rule");
     else if (z && ctx.aduRule && ctx.roomCov != null && ctx.roomCov <= 0) adu = card("adu", "ADU", "partial", "The coded ADU standard for this zone is on the card. No lot coverage room is left for a detached ADU. An ADU inside the existing house, such as a basement or garage conversion, adds no coverage." + envBit, ctx.aduRule);
@@ -348,6 +349,7 @@
     var shop;
     var impNone = ctx.hasImpervious ? "" : " No impervious cap is coded for this zone here. One may still apply.";
     if (ctx.nonres) shop = card("shop", "Garage or shop", "partial", NONRES, "Not a house lot");
+    else if (ctx.unrecognized) shop = card("shop", "Garage or shop", "partial", UNKNOWN, "Confirm locally");
     else if (ctx.assumed) shop = card("shop", "Garage or shop", "partial", TYPICAL, "Concept only");
     else if (!any) shop = card("shop", "Garage or shop", "nodata", "No lot or coverage fact is on record, so a garage or shop cannot be sized.", "Needs a lot measurement");
     else if (ctx.roomCov != null && ctx.roomCov <= 0) shop = card("shop", "Garage or shop", "partial", "No coverage room is left under the coded cap." + impNone + envBit, "No coverage room left");
@@ -363,6 +365,7 @@
 
     var teardown;
     if (ctx.nonres) teardown = card("teardown", "Teardown and new house", "partial", NONRES, "Not a house lot");
+    else if (ctx.unrecognized) teardown = card("teardown", "Teardown and new house", "partial", UNKNOWN, "Confirm locally");
     else if (ctx.assumed) teardown = card("teardown", "Teardown and new house", "partial", TYPICAL, "Concept only");
     else if (!lot && !z) teardown = card("teardown", "Teardown and new house", "nodata", "No lot size and no coded cap are on record, so a new house cannot be sized.", "Needs a lot and a zoning rule");
     else if (ctx.floorCap != null && ctx.floorCap > 0) teardown = card("teardown", "Teardown and new house", "ready", "A new house is sized to the full coded floor cap, about " + Math.round(ctx.floorCap) + " sf, not to leftover room under the current house." + covPhrase() + envBit + " Demolition rules are separate. This does not say a permit will be issued.", Math.round(ctx.floorCap) + " sf full floor cap");
