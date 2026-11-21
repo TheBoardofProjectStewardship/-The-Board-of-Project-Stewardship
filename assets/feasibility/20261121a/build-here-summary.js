@@ -52,12 +52,13 @@
     F.jurisSrc = king ? "King County parcel record (city name field)" : sno ? "Snohomish County city limits layer" : "US Census geocoder";
     F.zone = v.zone || ""; F.zoneTyped = !!v.zone && v.zone !== (s.zone || ""); F.zoneSrc = F.zoneTyped ? "Typed on this page" : (s.zoneSrc || "");
     F.zoneName = F.zoneTyped && !rs ? "" : zoneNameOf(rs); F.overlay = rs && rs.overlay ? rs.overlay : ""; F.zoneDraft = !!s.zoneDraft && !F.zoneTyped;
-    F.coded = !!(rs && rs.coded !== false); F.rs = rs || null; F.site = site;
+    F.coded = !!(rs && rs.coded !== false && !rs.assumed && rs.residential !== false); F.rs = rs || null; F.site = site;
+    F.wa = wa; F.residential = !rs || rs.residential !== false;
     var lotTyped = isNum(v.lot) && (s.lot == null || Number(v.lot) !== Number(s.lot));
     F.lot = { sf: isNum(v.lot) ? v.lot : null, kind: !isNum(v.lot) ? null : lotTyped ? "typed" : s.lotKind === "record" ? "record" : "outline", gisSf: !lotTyped && s.lotKind === "record" && land.lot && isNum(land.lot.outlineSf) ? land.lot.outlineSf : null, src: lotTyped ? "Typed on this page" : (s.lotSrc || "") };
     var livTyped = isNum(v.existing) && (s.existing == null || Number(v.existing) !== Number(s.existing));
     if (isNum(eff.living)) F.living = { sf: eff.living, label: livTyped ? "Existing finished living (your entry)" : "Existing finished living (assessor)", est: false, src: livTyped ? "Typed on this page" : (s.existingSrc || "Assessor record") };
-    else if (isNum(eff.countyFinSize)) F.living = { sf: eff.countyFinSize, label: "House size (county record)", est: true, finSize: true, src: s.countyFinSrc || "Snohomish County Improvement Records, finished-size column" };
+    else if (isNum(eff.countyFinSize)) F.living = { sf: eff.countyFinSize, label: (F.residential === false ? "Building size (county record)" : "House size (county record)"), est: true, finSize: true, src: s.countyFinSrc || "County improvement records, finished-size column" };
     else F.living = null;
     F.firstFloor = isNum(s.firstFloor) ? s.firstFloor : null; F.basementTotal = isNum(s.basementTotal) ? s.basementTotal : null; F.basementFinished = isNum(s.basementFinished) ? s.basementFinished : null;
     F.garageAtt = isNum(s.garageFloor) ? s.garageFloor : null; F.garageBsmt = isNum(s.basementGarage) ? s.basementGarage : null; F.garageDet = isNum(s.detGarageFloor) ? s.detGarageFloor : null;
@@ -74,6 +75,7 @@
     F.codeSrc = rs && rs.sources && rs.sources[0] ? rs.sources[0].label + ", checked " + (R ? R.CHECKED : "") : "";
     F.eff = eff; F.options = (ctx && ctx.options) || []; F.cards = (ctx && ctx.cards) || [];
     F.slope = land.slope || null; F.steep = land.steep || null; F.rows = land.rows || [];
+    if (F.residential === false) F.rows.forEach(function (r) { if (r && /House footprint/i.test(r.label || "")) r.label = String(r.label).replace(/House footprint/gi, "Building footprint"); });
     F.assumed = !!(rs && rs.assumed); F.residential = !rs || rs.residential !== false;
     F.srcShort = { buildings: shortSrc(land.geo && land.geo.src && land.geo.src.buildings || s.footprintSrc) };
     F.footprintSrc = s.footprintSrc || "";
@@ -145,6 +147,8 @@
     /* ---- Building ---- */
     var B = "building";
     add(B, "zone", "Zone", F.zone ? F.zone + (F.zoneName && String(F.zoneName).toUpperCase() !== String(F.zone).toUpperCase() ? " · " + F.zoneName : "") + (F.overlay ? " · overlay " + F.overlay + " (its added rules are not coded, verify)" : "") + (F.zoneTyped ? " (your entry)" : "") + (F.zoneDraft ? ", read from a draft city zoning layer, confirm with the city" : "") : "not found in public data, enter the zone from the zoning map", !F.zone ? "missing" : (F.zoneDraft || F.overlay) ? "verify" : "fact", [F.zoneSrc]);
+    var chapter = (rs && rs.sources || []).filter(function (s) { return s && s.url && /23\.\d+|ECDC\/16\./.test(s.url); })[0];
+    if (F.residential === false && chapter) add(B, "chapter", "Code chapter", chapter.label || "Zoning code", "fact", [chapter]);
     add(B, "juris", "Jurisdiction", (F.incorporated ? "Inside the City of " + F.city + (F.county ? ", " + F.county : "") : F.county ? "Unincorporated " + F.county + " (urban growth area not checked)" : "not matched") + (F.mailCity ? ". The mailing address says " + F.mailCity + "; permits follow the jurisdiction, not the mailing city" : ""), F.county ? "fact" : "missing", [F.jurisSrc]);
     var H = F.height || {};
     add(B, "height", "Height limit", isNum(H.ft) ? H.ft + " ft" + (H.verify ? " (verify)" : "") + (H.text && H.text !== H.ft + " ft" ? " · " + H.text : "") : (H.text || notCoded), isNum(H.ft) ? (H.verify ? "verify" : "fact") : (H.text ? "fact" : "verify"), [codeSrc]);
@@ -167,10 +171,11 @@
     var oa = optOf(F, "addition"), ta = optText(oa);
     add(B, "addition", oa && oa.kind === "secondStory" ? "Addition (upward)" : "Addition", ta ? ta.v : "Not judged: the option study did not run.", ta ? ta.s : "verify", [codeSrc]);
     var room = eff.roomFar;
-    add(B, "secondStory", "Second story", (isNum(H.ft) ? "Height limit " + H.ft + " ft" + (H.verify ? " (verify)" : "") : "Height limit " + notCoded) + "; " + (F.stories ? "the house has " + F.stories + (F.storiesNum === 1 ? " story" : " stories") + (F.storiesSrc ? " on record" : " as entered") : "stories are not on record") + "; " + (caps.farNone ? "no floor-area cap applies" : isNum(room) ? (room > 0 ? "floor-area room " + (fPartial ? "≤ " : "≈ ") + fmt(room) + " sf" : "no floor-area room left as read") : "floor-area room not known") + ". Whether the framing and foundation can carry it is checked on site.", "est", [codeSrc]);
+    if (F.residential !== false) add(B, "secondStory", "Second story", (isNum(H.ft) ? "Height limit " + H.ft + " ft" + (H.verify ? " (verify)" : "") : "Height limit " + notCoded) + "; " + (F.stories ? F.stories + (F.storiesNum === 1 ? " story" : " stories") + (F.storiesSrc ? " on record" : " as entered") : "stories are not on record") + "; " + (caps.farNone ? "no floor-area cap applies" : isNum(room) ? (room > 0 ? "floor-area room " + (fPartial ? "≤ " : "≈ ") + fmt(room) + " sf" : "no floor-area room left as read") : "floor-area room not known") + ". Whether the framing and foundation can carry another level is checked on site.", "est", [codeSrc]);
     var adu = rs && rs.adu ? rs.adu : null, od = optOf(F, "adu"), td = optText(od);
     var aduHas = !!(adu && adu.text);
-    var aduLead = aduHas ? adu.text + (adu.status === "state" ? " (state-law floor; the local size limit is not coded, verify)" : adu.status === "verify" ? " (verify)" : "") + ". " : "ADU rules " + notCoded + ". ";
+    var aduBody = aduHas ? String(adu.text).replace(/[.\s]+$/, "") : "";
+    var aduLead = aduHas ? aduBody + (adu.status === "state" ? " (state-law floor; the local size limit is not applied, verify)" : adu.status === "verify" ? " (verify)" : "") + ". " : "ADU rules " + notCoded + ". ";
     var aduFit = td && !(!aduHas && /not coded/i.test(td.v)) ? td.v : ""; // do not say "not coded" twice
     add(B, "adu", "ADU / detached ADU", aduLead + aduFit + (adu && adu.status !== "verify" ? " State law caps an ADU's impact fees at half of a house's." : ""), adu && adu.status === "coded" && !adu.partial ? (td ? td.s : "fact") : "verify", [adu && adu.src ? adu.src : codeSrc, site.aduState && site.aduState.src ? site.aduState.src : null]);
     var on = optOf(F, "teardown"), tn = optText(on);
@@ -178,10 +183,11 @@
     var units = null;
     (rs && rs.rules || []).forEach(function (r) { if (!units && /^Units per lot|^Middle housing/i.test(r.label) && r.value) units = r; });
     add(B, "units", "Units per lot", units ? units.value + (units.note ? " " + String(units.note).replace(/\s*Ask the city.*$/, "") : "") : "Unit count " + notCoded, units ? "fact" : "verify", [units && units.src ? units.src : codeSrc]);
-    var pk = datumRow(site.parking, place, "The parking table");
-    // The sheet carries the state caps in one line. The full wording is on the Code review page's source.
-    if (site.parking && site.parking.v && /ESSB 5184/.test(site.parking.v)) pk.v = "State law (ESSB 5184, 2025) caps what a city over 30,000 people may require: 1 space per house, half a space per multifamily unit, none for a home under 1,200 sf. The local parking table is not coded, verify with " + place + ".";
-    add(B, "parking", "Parking", pk.v, site.parking && site.parking.v && /ESSB 5184/.test(site.parking.v) ? "verify" : pk.s, [pk.src]);
+    if (F.wa) {
+      var pk = datumRow(site.parking, place, "The parking table");
+      if (site.parking && site.parking.v && /ESSB 5184/.test(site.parking.v)) pk.v = "State law (ESSB 5184, 2025) caps what a city over 30,000 people may require: 1 space per house, half a space per multifamily unit, none for a home under 1,200 sf. The local parking table is not applied. Confirm it with " + place + ".";
+      add(B, "parking", "Parking", pk.v, site.parking && site.parking.v && /ESSB 5184/.test(site.parking.v) ? "verify" : pk.s, [pk.src]);
+    }
     var en = [], enSrc = null, enState = "fact";
     [["addition", oa], ["new house", on], ["detached ADU", od]].forEach(function (p) {
       if (!p[1] || !isNum(p[1].gfaSf) || p[1].gfaSf <= 0) return;
@@ -192,7 +198,7 @@
       if (e.state !== "fact") enState = "verify";
       enSrc = e.src;
     });
-    add(B, "energy", "Energy code credits", en.length ? (enState === "verify" && en.length === 1 && !/credits|exempt/.test(en[0]) ? en[0] : "2021 energy code (WSEC-R; the 2024 code starts May 3, 2027). " + cap1(en.join("; ")) + ".") : (F.stateAbbr && F.stateAbbr !== "WA" ? "Washington's credit table does not apply here." : "No option size to rate."), en.length ? enState : "verify", [enSrc]);
+    if (F.wa) add(B, "energy", "Energy code credits", en.length ? (enState === "verify" && en.length === 1 && !/credits|exempt/.test(en[0]) ? String(en[0]).replace(/[.\s]+$/, "") : "2021 energy code (WSEC-R; the 2024 code starts May 3, 2027). " + cap1(en.join("; "))) + "." : "No option size to rate.", en.length ? enState : "verify", [enSrc]);
     add(B, "permits", "Permit path", "Building permit and plan review by " + place + " for an addition, ADU or new house, plus trade permits (electrical, plumbing, mechanical). Review time for the scope is confirmed with the permit office.", "fact", [rs && rs.city ? { label: "City of " + rs.city.name + " permits and planning", url: rs.city.home } : null]);
     var fr = [];
     if (F.frontStreet) fr.push("Front on " + title(F.frontStreet) + (F.frontByName ? "" : " (nearest street; confirm)"));
@@ -221,7 +227,7 @@
     if (isNum(F.basementTotal) && F.basementTotal > 0) hs.push("basement " + fmt(F.basementTotal) + " sf" + (isNum(F.basementFinished) ? " (" + fmt(F.basementFinished) + " finished)" : ""));
     else if (F.basementNone) hs.push("no basement on the record");
     if (F.stories) hs.push(F.stories + (F.storiesNum === 1 ? " story" : " stories"));
-    add(Rm, "house", "House size", hs.length ? hs.join(" · ") : "Living area " + MISSING, F.living ? (F.living.est ? "est" : "fact") : "missing", [F.living ? F.living.src : ""]);
+    add(Rm, "house", F.residential === false ? "Building size" : "House size", hs.length ? hs.join(" · ") : "Living area " + MISSING, F.living ? (F.living.est ? "est" : "fact") : "missing", [F.living ? F.living.src : ""]);
     add(Rm, "rooms", "Bedrooms / baths", isNum(F.beds) || isNum(F.baths) ? (isNum(F.beds) ? F.beds + " bedroom" + (F.beds === 1 ? "" : "s") : "bedrooms not on record") + " · " + (isNum(F.baths) ? F.baths + " bath" + (F.baths === 1 ? "" : "s") + " (full 1, three-quarter 0.75, half 0.5)" : "baths not on record") : MISSING, isNum(F.beds) || isNum(F.baths) ? "fact" : "missing", [F.recordSrc]);
     var gd = [];
     if (isNum(F.garageAtt) && F.garageAtt > 0) gd.push("attached garage " + fmt(F.garageAtt) + " sf");
@@ -278,7 +284,7 @@
     add(L, "drainage", "Drainage trigger", dr.v + (addH || newH ? " For scale: " + (addH ? "the addition option adds ≈ " + fmt(addH) + " sf of roof" : "the addition option adds no new roof") + (newH ? ", a new house ≈ " + fmt(newH) + " sf" : "") + ", before new paving." : ""), dr.s, [dr.src]);
     var fe = datumRow(site.fence, place, "The fence height limit");
     add(L, "fence", "Fences and yard rules", fe.v + (rs && isNum(rs.openSpacePct) ? " Open space: " + rs.openSpacePct + "% of the lot." : ""), fe.s, [fe.src]);
-    add(L, "shoreline", "Shoreline", F.shoreline ? "Inside shoreline jurisdiction (" + F.shoreline + " environment). The Shoreline Master Program adds buffers and a shoreline review." : "Not read from a shoreline map. Land within 200 ft of a lake, large stream or Puget Sound follows the Shoreline Master Program, verify with " + place + ".", F.shoreline ? "fact" : "verify", [F.shoreline ? "City of Kenmore shoreline designations" : { label: "RCW 90.58 Shoreline Management Act", url: "https://app.leg.wa.gov/RCW/default.aspx?cite=90.58" }]);
+    if (F.wa) add(L, "shoreline", "Shoreline", F.shoreline ? "Inside shoreline jurisdiction (" + F.shoreline + " environment). The Shoreline Master Program adds buffers and a shoreline review." : "Not read from a shoreline map. Land within 200 ft of a lake, large stream, or the sound follows the Shoreline Master Program. Confirm it with " + place + ".", F.shoreline ? "fact" : "verify", [F.shoreline ? "Shoreline designations" : { label: "RCW 90.58 Shoreline Management Act", url: "https://app.leg.wa.gov/RCW/default.aspx?cite=90.58" }]);
     add(L, "sidewalk", "Sidewalk on the frontage", F.sidewalk == null ? "Not read." : F.sidewalk ? "A sidewalk is mapped along the street in OpenStreetMap." : "None mapped along the street in OpenStreetMap, which is rarely complete. A city can ask for curb, gutter and sidewalk with a new house.", F.sidewalk == null ? "missing" : "est", [F.sidewalk != null ? "OpenStreetMap (sidewalks)" : ""]);
 
     /* ---- Roofing ---- */
@@ -289,7 +295,7 @@
     } else add(Rf, "roofArea", "Roof area (estimate)", "Roof outline " + MISSING + ". Roof area is not worked out from living area.", "missing", []);
     var reroof = null;
     F.permits.forEach(function (p) { if (!reroof && /roof/i.test(String(p.type || "") + " " + String(p.desc || ""))) reroof = p; });
-    add(Rf, "roofAge", "Roof age", (F.yearBuilt ? "House built " + F.yearBuilt + ". " : "Year built " + MISSING + ". ") + (reroof ? "A roofing permit is on record" + (reroof.issued ? ", issued " + reroof.issued : "") + "." : F.permits.length || F.permitSearch === "ok" ? "No roofing permit is in the permit records read." : "Re-roof permits are not in the records this study reads, so the roof's age is not known."), reroof ? "fact" : "missing", [F.yearSrc]);
+    add(Rf, "roofAge", "Roof age", (F.yearBuilt ? (F.residential === false ? "Building built " : "House built ") + F.yearBuilt + ". " : "Year built " + MISSING + ". ") + (reroof ? "A roofing permit is on record" + (reroof.issued ? ", issued " + reroof.issued : "") + "." : F.permits.length || F.permitSearch === "ok" ? "No roofing permit is in the permit records read." : "Re-roof permits are not in the records this study reads, so the roof's age is not known."), reroof ? "fact" : "missing", [F.yearSrc]);
     var rr = datumRow(site.reroof, place, "The re-roof permit rule");
     add(Rf, "reroofRule", "Re-roof permit", rr.v, rr.s, [rr.src]);
     var ly = datumRow(site.reroofLayers, place, "The roof recover rule");
@@ -298,7 +304,9 @@
     add(Rf, "solar", "Solar", "Not estimated: no solar service is read in this study, and roof pitch and facing are not measured.", "missing", []);
 
     /* ---- what public data cannot answer ---- */
-    var items = ["sewer or septic, and whether the side sewer or septic can take more bedrooms or an ADU", "water, power and gas service and capacity", "easements and covenants (title report)", "whether the framing and foundation can carry a second story", "electrical panel and heating", "permit review time for this scope", "frontage improvements the city may ask for", "landmark or historic status", "unpermitted work", "staging the job so you can stay in the house", "construction cost"];
+    var items = F.residential === false
+      ? ["water, power, sewer and gas service and capacity", "easements and covenants (title report)", "electrical service", "permit review time for this scope", "frontage improvements the city may ask for", "landmark or historic status", "unpermitted work", "construction cost"]
+      : ["sewer or septic, and whether the side sewer or septic can take more bedrooms or an ADU", "water, power and gas service and capacity", "easements and covenants (title report)", "whether the framing and foundation can carry a second story", "electrical panel and heating", "permit review time for this scope", "frontage improvements the city may ask for", "landmark or historic status", "unpermitted work", "staging the job so you can stay in the house", "construction cost"];
     var b = F.brand || {};
     out.visit = { items: items, text: (b.name ? b.name + " confirms on site: " : "Confirmed on site: ") + items.join(" · ") + "." };
     out.notes = notes;
@@ -351,9 +359,15 @@
     if (b.license) bits.push("WA contractor reg. " + esc(b.license));
     return '<p class="' + (cls || "bh-contact") + '"><img class="bh-foot-logo" src="/assets/feasibility/pacific-pro-group-logo.png" alt="Pacific Pro Group"> ' + (b.name ? "<strong>" + esc(b.name) + (b.tagline ? " · " + esc(b.tagline) : "") + "</strong>" + (bits.length ? " · " : "") : "") + bits.join(" · ") + "</p>";
   }
-  function blockHtml(name, rows) {
+  function blockHtml(name, rows, notes) {
+    notes = notes || [];
     return '<div class="bh-facts-block"><h3>' + esc(name) + '</h3><table class="bh-facts-table"><tbody>' + rows.map(function (r) {
-      return '<tr><th scope="row">' + esc(r.k) + '</th><td class="' + (STATE_CLASS[r.s] || "bh-s-fact") + '">' + esc(r.v) + "</td></tr>";
+      var link = "";
+      if (r.key === "chapter") (r.fn || []).forEach(function (n) {
+        var note = notes.filter(function (x) { return x.n === n; })[0];
+        if (note && note.url) link = ' <a href="' + esc(note.url) + '">' + esc(note.label || r.v) + "</a>";
+      });
+      return '<tr><th scope="row">' + esc(r.k) + '</th><td class="' + (STATE_CLASS[r.s] || "bh-s-fact") + '">' + (link || esc(r.v)) + "</td></tr>";
     }).join("") + "</tbody></table></div>";
   }
   /* Page 2 of the summary. */
@@ -367,7 +381,7 @@
     var sampleTxt = F.isSample ? " · SAMPLE LAYOUT, NOT A PROPERTY RECORD" : "";
     return '<section class="bh-page bh-facts" data-sheet="F-1" data-page="' + esc(pageNum) + '" data-total="' + esc(totalPages) + '"><header class="bh-facts-head"><div><h2>Property facts</h2><p>' + esc(F.address) + (F.parcel ? " · Parcel " + esc(F.parcel) : "") + (F.preparedText ? " · Prepared " + esc(F.preparedText) : "") + esc(sampleTxt) + '</p></div><div class="bh-facts-id" aria-hidden="true">F-1 · ' + esc(pageLabel) + '</div></header>' +
       '<p class="bh-facts-key"><span class="bh-s-est">≈ estimate from public data</span> · <span class="bh-s-partial">≥ a total that lacks a part</span> · <span class="bh-s-missing">marked verify: not in public data, or confirm</span></p>' +
-      '<div class="bh-facts-cols"><div>' + blockHtml("Building", B.building) + "</div><div>" + blockHtml("Remodel", B.remodel) + blockHtml("Landscaping", B.landscaping) + blockHtml("Roofing", B.roofing) + "</div></div>" +
+      '<div class="bh-facts-cols"><div>' + blockHtml("Building", B.building, B.notes) + "</div><div>" + blockHtml("Remodel", B.remodel, B.notes) + blockHtml("Landscaping", B.landscaping, B.notes) + blockHtml("Roofing", B.roofing, B.notes) + "</div></div>" +
       '<p class="bh-facts-visit"><strong>' + esc(b.name ? b.name + " confirms on site" : "Confirmed on site") + ":</strong> " + esc(B.visit.items.join(" · ")) + ".</p>" +
       '<footer class="bh-facts-foot">' + contactHtml(b) + '<p class="bh-facts-disc">Planning estimate from public records; not a survey or permit determination. Verify with ' + esc(F.place) + " · <strong>" + esc(pageLabel) + "</strong></p></footer></section>";
   }

@@ -1239,11 +1239,16 @@
   function zoning(s) {
     if (s.lon == null) return Promise.resolve();
     if (s.juris === "seattle") {
-      return getJSON(EP.seaZoning, ptQuery(s.lon, s.lat, { outFields: "ZONING,ZONELUT,MHA,MHA_VALUE" })).then(function (j) {
+      return getJSON(EP.seaZoning, ptQuery(s.lon, s.lat, { outFields: "ZONING,ZONELUT,MHA,MHA_VALUE,CLASS_DESC,CATEGORY_DESC,CHAPTER,CHAPTER_LINK,MIO_NAME" })).then(function (j) {
         var f = (j.features || [])[0];
         if (f) {
-          var full = String(f.attributes.ZONING || "").trim(), lut = String(f.attributes.ZONELUT || "").trim();
-          s.mha = String(f.attributes.MHA_VALUE || "").trim();
+          var a = f.attributes || {};
+          var full = String(a.ZONING || "").trim(), lut = String(a.ZONELUT || "").trim();
+          s.mha = String(a.MHA_VALUE || "").trim();
+          s.zoneClass = String(a.CLASS_DESC || "").trim();
+          s.zoneCategory = String(a.CATEGORY_DESC || "").trim();
+          if (a.CHAPTER_LINK) s.codeChapter = { label: String(a.CHAPTER || "Zoning code").trim(), url: String(a.CHAPTER_LINK).trim() };
+          if (a.MIO_NAME) s.mioName = String(a.MIO_NAME).trim();
           // ZONING keeps the MHA suffix, for example LR1 (M). ZONELUT is the base name only.
           s.cityZone = full || lut;
           log(s, true, "Seattle zoning (Current_Land_Use_Zoning_Detail)");
@@ -1327,7 +1332,7 @@
     var county = String(s.county || "").replace(/ (County|Parish|Borough|Census Area|Municipality)$/i, "");
     if (!county) return Promise.resolve();
     var q = '(zoning) "' + county.replace(/"/g, "") + '" (type:"Feature Service" OR type:"Map Service") access:public';
-    var hostOk = /^https:\/\/([a-z0-9-]+\.)*(arcgis\.com|[a-z0-9-]+\.gov|[a-z0-9-]+\.[a-z]{2}\.us|state\.[a-z]{2}\.us)\//i;
+    var hostOk = /^https:\/\/([a-z0-9-]+\.)+[a-z0-9-]+\.gov\//i;
     return getJSON("https://www.arcgis.com/sharing/rest/search", { f: "json", q: q, num: 5, sortField: "numviews", sortOrder: "desc" }).then(function (j) {
       var items = (j.results || []).filter(function (r) {
         return r.url && hostOk.test(r.url) && /zon/i.test(r.title || "") && !/overlay|flood|school|tax|census|proposed|draft|future/i.test(r.title || "");
@@ -2038,7 +2043,7 @@
     var s = state;
     var stRaw = $("bh-stories") ? parseFloat($("bh-stories").value) : NaN, kindNow = ($("bh-footprint-kind") && $("bh-footprint-kind").value) || "";
     var v = { lot: num("bh-lot", "A lot size of 0 was not used. Enter the lot size in square feet."), zone: $("bh-zone").value.trim(), existing: num("bh-existing"), footprint: num("bh-footprint"), imperv: num("bh-imperv", "A 0 here was not used. Impervious surface includes the roof. Leave the box blank when paving is unknown."), front: $("bh-front").value, units: parseInt($("bh-units").value, 10) || 1, stories: isFinite(stRaw) && stRaw > 0 ? stRaw : null, type: $("bh-type").value };
-    var rs = R.pick({ juris: s.juris, city: s.cityKey, zone: v.zone, lot: v.lot, units: v.units, house: v.existing, mha: s.mha, use: s.buildingUse, presentUse: s.presentUse, lookup: s.zoneLookup });
+    var rs = R.pick({ juris: s.juris, city: s.cityKey, zone: v.zone, lot: v.lot, units: v.units, house: v.existing, mha: s.mha, use: s.buildingUse, presentUse: s.presentUse, lookup: s.zoneLookup, stateAbbr: s.stateAbbr, zoneClass: s.zoneClass, codeChapter: s.codeChapter });
     if (s.formWas) {
       if (v.existing !== s.formWas.existing) s.editSeq.living = ++s.seq;
       if (v.footprint !== s.formWas.footprint || kindNow !== s.formWas.kind) s.editSeq.footprint = ++s.seq;
@@ -2086,7 +2091,7 @@
     /* Cover is physical page 1. stampStudyPages renumbers every sheet after this, including SP-1. */
     var coverQr = String(CFG.coverQrUrl || "").trim();
     var coverBody = '<div class="bh-cover-wrap"><div class="bh-cover-top"><img class="bh-cover-logo" src="/assets/feasibility/pacific-pro-group-logo.png" alt="Pacific Pro Group">' +
-      '<p class="bh-cover-kicker">SINGLE-FAMILY RESIDENCE <span aria-hidden="true">|</span> <strong>FEASIBILITY STUDY</strong></p><div class="bh-cover-bar" aria-hidden="true"></div></div>' +
+      '<p class="bh-cover-kicker">' + (rs && rs.residential === false ? "<strong>FEASIBILITY STUDY</strong>" : 'SINGLE-FAMILY RESIDENCE <span aria-hidden="true">|</span> <strong>FEASIBILITY STUDY</strong>') + '</p><div class="bh-cover-bar" aria-hidden="true"></div></div>' +
       '<div class="bh-cover-art"><img src="/assets/feasibility/feasibility-cover.jpg" alt="Pen-and-ink drawing of a house on its lot"></div>' +
       '<div class="bh-cover-meta"><div><p class="bh-cover-label">Subject property</p><p class="bh-cover-address">' + esc(s.matched || s.input || "Address not matched") + "</p>" +
       '<p class="bh-cover-date">Prepared ' + esc(asOfDate) + (s.isSample ? " · Sample layout, not a property record" : "") + "</p></div>" +
@@ -2178,12 +2183,12 @@
     var secRow = fb("secondStory");
     var optRows = [
       { label: (optBy.addition && (optBy.addition.kind === "secondStory" || optBy.addition.footprintSf === 0)) ? "Addition (upward)" : "Addition", opt: optBy.addition },
-      { label: "Second story", secondStory: true, row: secRow },
+      { label: "Second story", secondStory: true, row: secRow, hide: !!(rs && rs.residential === false) },
       { label: "ADU / detached ADU", opt: optBy.adu },
       { label: "Garage or shop", opt: optBy.shop },
       { label: "New house (teardown)", opt: optBy.teardown },
       { label: "Interior remodel", opt: optBy.remodel }
-    ].map(function (item) {
+    ].filter(function (item) { return !item.hide; }).map(function (item) {
       var fitTxt = "Verify", sizeTxt = "not available";
       if (item.secondStory) {
         // Integrator fix (Grok Bot): no sizing heuristic here. The second-story row prints the study's own
@@ -2264,7 +2269,7 @@
     if (!s.garageFloor && !s.basementGarage && !s.detGarageFloor && s.garageNone) rowsP5.push(["Garage", "None on record"]);
     if (s.deck) rowsP5.push(["Deck", fmt(s.deck) + " sf"]);
     if (s.yrRenov) rowsP5.push(["Year renovated", esc(s.yrRenov)]);
-    if (s.countyFin) rowsP5.push(["House size (county record)", "approx. " + fmt(s.countyFin.sf) + " sf (county record; basement, lower-level and attic finished area are recorded separately and are not added; not used as total living area in the floor-area math)"]);
+    if (s.countyFin) rowsP5.push([(rs && rs.residential === false ? "Building size (county record)" : "House size (county record)"), "approx. " + fmt(s.countyFin.sf) + " sf (county record; basement, lower-level and attic finished area are recorded separately and are not added; not used as total living area in the floor-area math)"]);
     if (s.flood) rowsP5.push(["Flood zone (FEMA)", s.flood.ok ? (s.flood.zones.length ? esc(s.flood.zones.join(", ")) + (s.flood.sfha ? ' <span class="bh-verify">Special flood hazard area touches the lot.</span>' : " · outside the special flood hazard area") : "No flood zone polygon at this location") : '<span class="bh-tbd">data unavailable</span>']);
     else rowsP5.push(["Flood zone (FEMA)", '<span class="bh-tbd">data unavailable</span>']);
     if (s.soils) rowsP5.push(["Soil map unit (NRCS)", s.soils.ok ? esc(s.soils.name) + (s.soils.hsg ? " · hydrologic group " + esc(s.soils.hsg) : "") + (s.soils.drainage ? " · " + esc(String(s.soils.drainage).toLowerCase()) : "") + " (approx. map unit, not a soils report)" : '<span class="bh-tbd">data unavailable</span>']);

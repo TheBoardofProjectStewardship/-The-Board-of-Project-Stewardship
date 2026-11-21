@@ -475,7 +475,7 @@
 
     // Detached ADU: the coded size limit, or the 1,000 sf state law guarantees where the city's is not coded.
     var u = opt("adu", "Detached ADU"), adu = o.adu || {};
-    var maxSf = adu.maxSf || (adu.status === "state" || adu.status === "coded" ? 1000 : null);
+    var maxSf = adu.maxSf != null ? adu.maxSf : (adu.status === "state" ? 1000 : null);
     if (o.nonres) u.why = NONRES;
     else if (o.assumed || !z) u.why = TYPICAL;
     else if (maxSf == null) u.why = "The ADU standard for this zone is not coded.";

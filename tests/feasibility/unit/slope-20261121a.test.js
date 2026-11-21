@@ -55,5 +55,6 @@ globalThis.fetch = function (url, opt) {
   for (var i = 0; i < nums.length; i += 2) xs.push(nums[i]);
   t.ok("the lot line stays inside the plan frame", xs.length > 2 && Math.min.apply(null, xs) >= -1 && Math.max.apply(null, xs) <= 1001, xs);
   t.ok("the sheet names the fall across the lot, not a cell average beside it", /ft of fall/.test(svg) && !/avg 45/.test(svg) && !/· avg /.test(svg));
+  t.ok("the plan drawing does not bleed with overflow visible", svg.indexOf('overflow="visible"') < 0);
   t.done();
 })();

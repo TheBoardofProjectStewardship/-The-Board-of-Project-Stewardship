@@ -269,7 +269,8 @@
     return stHit ? 2 : 1;
   }
   function hasSitus(attrs) { return Object.keys(attrs).some(function (k) { return !NOT_SITUS.test(k) && /anumber|num|addr|house|situs|hn$/i.test(k); }); }
-  var NUM_KEY = /^(anumber|addr_?hn|add_?num|addnum|house_?n(o|um|umber)?|hse_?num|st_?num|street_?num|situs_?num|site_?num|addressnum|address_number)$/i;
+  var NUM_KEY = /^(anumber|addr_?hn|add_?num|addnum|house_?n(o|um|umber)?|hse_?num|st_?num|street_?num|situs_?num|site_?num|addressnum|address_number|physical_street_num|situs_house_no)$/i;
+  var ADDR_KEY = /PHYSICAL_ADDRESS$|SITUS_ADDR|SITE_ADDR|ADDR_FULL|FULL_?ADDRESS$|^ADDRESS$/i;
   function cand(f, lon, lat, num, street) {
     var fr = frame(f.geometry.rings), R = proj(f.geometry.rings, fr), p = fr.fwd([lon, lat]);
     var inside = inPoly(p[0], p[1], R), d = inside ? 0 : Math.min.apply(null, R.map(function (r) { var m = Infinity; for (var i = 1; i < r.length; i++) m = Math.min(m, segDist(p[0], p[1], r[i - 1], r[i])); return m; }));
@@ -292,10 +293,12 @@
       var sized = function (c) { return c.area <= BIG && c.area >= 500; };
       var full = cands.filter(function (c) { return c.num === 2 && sized(c); }).sort(function (a, b) { return a.d - b.d; });
       if (full.length) return finish(full[0], cands, num);
-      var numKey = num && Object.keys(cands[0].f.attributes || {}).filter(function (k) { return NUM_KEY.test(k); })[0];
+      var attrs0 = cands[0].f.attributes || {};
+      var numKey = num && Object.keys(attrs0).filter(function (k) { return NUM_KEY.test(k) && !NOT_SITUS.test(k); })[0];
+      var addrKey = num && street && Object.keys(attrs0).filter(function (k) { return !NOT_SITUS.test(k) && ADDR_KEY.test(k); })[0];
       var wide = numKey && /^\d+$/.test(num) ? getJSON(url + "/query", Object.assign({}, base, { distance: 250, where: numKey + "=" + num, resultRecordCount: 40 }), false, 1).catch(function () {
         return getJSON(url + "/query", Object.assign({}, base, { distance: 250, where: numKey + "='" + num + "'", resultRecordCount: 40 }), false, 1);
-      }).catch(function () { return { features: [] }; }) : Promise.resolve({ features: [] });
+      }).catch(function () { return { features: [] }; }) : (addrKey ? getJSON(url + "/query", Object.assign({}, base, { distance: 250, where: addrKey + " LIKE '" + String(num).replace(/'/g, "") + "%" + String(street).replace(/'/g, "") + "%'", resultRecordCount: 40 }), false, 1).catch(function () { return { features: [] }; }) : Promise.resolve({ features: [] }));
       return wide.then(function (w) {
         var wf = (w.features || []).filter(ok).map(function (f) { return cand(f, lon, lat, num, street); }).filter(function (c) { return c.num === 2 && sized(c); }).sort(function (a, b) { return a.d - b.d; });
         if (wf.length) return finish(wf[0], cands, num);

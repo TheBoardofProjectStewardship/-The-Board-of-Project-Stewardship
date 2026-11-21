@@ -16,11 +16,11 @@
     smc2344: { label: "SMC ch. 23.44 (Neighborhood Residential)", url: "https://library.municode.com/wa/seattle/codes/municipal_code?nodeId=TIT23LAUSCO_SUBTITLE_IIILAUSRE_CH23.44NERE" },
     smc2344pdf: { label: "Seattle Ord. 127376 (CB 120993), new ch. 23.44 and amended 23.42.022, signed Dec. 22, 2025, in effect January 2026", url: "https://clerk.seattle.gov/~archives/Ordinances/Ord_127376.pdf" },
     smc2345: { label: "SMC ch. 23.45 (Lowrise multifamily)", url: "https://library.municode.com/wa/seattle/codes/municipal_code?nodeId=TIT23LAUSCO_SUBTITLE_IIILAUSRE_CH23.45MU" },
-    smc2345510: { label: "SMC 23.45.510 Table A (floor area), as amended by Ord. 127376, in effect January 2026", url: "https://clerk.seattle.gov/~archives/Ordinances/Ord_127376.pdf" },
-    smc2345514: { label: "SMC 23.45.514 Table A (height), Ord. 127219, effective June 27, 2025", url: "https://clerk.seattle.gov/~archives/Ordinances/Ord_127219.pdf" },
-    smc2345518: { label: "SMC 23.45.518 Table A (setbacks), Ord. 127219, effective June 27, 2025", url: "https://clerk.seattle.gov/~archives/Ordinances/Ord_127219.pdf" },
+    smc2345510: { label: "SMC 23.45.510 Table A (floor area), Ord. 127376, in effect January 2026", url: "https://clerk.seattle.gov/~archives/Ordinances/Ord_127376.pdf" },
+    smc2345514: { label: "SMC 23.45.514 Table A (height), Ord. 127376, in effect January 2026", url: "https://clerk.seattle.gov/~archives/Ordinances/Ord_127376.pdf" },
+    smc2345518: { label: "SMC 23.45.518 Table A (setbacks), Ord. 127376, in effect January 2026", url: "https://clerk.seattle.gov/~archives/Ordinances/Ord_127376.pdf" },
     smc2358: { label: "SMC ch. 23.58B and 23.58C (Mandatory Housing Affordability)", url: "https://library.municode.com/wa/seattle/codes/municipal_code" },
-    ord127219: { label: "Seattle Ord. 127219, lowrise height and setbacks, effective June 27, 2025", url: "https://clerk.seattle.gov/~archives/Ordinances/Ord_127219.pdf" },
+    ord127376lr: { label: "Seattle Ord. 127376, current lowrise text, in effect January 2026", url: "https://clerk.seattle.gov/~archives/Ordinances/Ord_127376.pdf" },
     ecdc1630: { label: "ECDC 16.30.030 site development standards (RM zones), Ord. 4414 and Ord. 4397 (2025)", url: "https://edmonds.municipal.codes/ECDC/16.30.030" },
     sdciNR: { label: "SDCI Neighborhood Residential zoning summary (January 2026)", url: "https://www.seattle.gov/documents/Departments/SDCI/Codes/NeighborhoodResidentialSummary.pdf" },
     smc23080: { label: "SMC 23.44.080 lot coverage", url: "https://library.municode.com/wa/seattle/codes/municipal_code?nodeId=TIT23LAUSCO_SUBTITLE_IIILAUSRE_CH23.44NERE_23.44.080LOCO" },
@@ -467,7 +467,7 @@
   };
   function stateRows(c) {
     return [
-      c.tier ? rule("Middle housing (state law)", TIER[c.tier], SRC.hb1110, "RCW 36.70A.635. The city's adopted code sets the details; read it before you count units.") : verify("Middle housing (state law)", SRC.hb1110, c.name + " is not on the state middle housing list (HB 1110 covers cities by size and location). Ask the city what its own code allows."),
+      c.tier ? rule("Middle housing (state law)", TIER[c.tier], SRC.hb1110, "RCW 36.70A.635. The adopted code sets the details; read it before you count units.") : verify("Middle housing (state law)", SRC.hb1110, (c.name ? c.name + " is" : "This jurisdiction is") + " not on the state middle housing list (HB 1110 applies by city size and location). Ask the planning department what its own code allows."),
       rule("ADUs (state law)", "Cities inside the urban growth area must allow two ADUs per lot", SRC.hb1337, "RCW 36.70A.680 and .681. Ask the city for its ADU size limits and any area outside the urban growth area.")
     ];
   }
@@ -504,11 +504,11 @@
     var cityLink = { label: "City of " + c.name + " permits and planning", url: c.home };
     if (!zk) {
       var lookup = { label: "Zoning code", url: c.code && c.code.url ? c.code.url : c.home };
-      var passed = { lot: v.lot, zone: v.zone, use: v.use, presentUse: v.presentUse, lookup: lookup };
-      if (lotClass(passed) === "nonres") return nonResidential(passed);
-      var typical = typicalResidential(passed);
-      typical.sources = [c.code, cityLink];
-      return typical;
+      var passed = { lot: v.lot, zone: v.zone, use: v.use, presentUse: v.presentUse, zoneClass: v.zoneClass, lookup: lookup, codeChapter: v.codeChapter, city: c };
+      var cls = lotClass(passed);
+      if (cls === "nonres") return nonResidential(passed);
+      if (cls === "unknown") return notCoded(passed);
+      return stateLawCity(v, c, cityLink);
     }
     var Z = t.zones[zk], cm = t.common || {}, src = Z.src || t.src, sbSrc = Z.sbSrc || src;
     // verifyTag: the numbers match an official summary, and the code table itself was not read.
@@ -616,13 +616,14 @@
     return hit ? hit[1] : "";
   }
   function parseLr(zone, mhaField) {
-    var raw = String(zone || "");
-    var hit = raw.toUpperCase().replace(/\s+/g, "").match(/LR-?([123])/);
+    var raw = String(zone || "").toUpperCase().replace(/\s+/g, "");
+    // Only a zone that starts as LR1, LR2, or LR3. MIO-65-LR3 is a major-institution overlay, not LR3.
+    var hit = raw.match(/^LR-?([123])(?:\(|$)/);
     if (!hit) return null;
-    return { base: "LR" + hit[1], mha: mhaSuffix(raw, mhaField) };
+    return { base: "LR" + hit[1], mha: mhaSuffix(zone, mhaField) };
   }
   function lrHeight(base, mha) {
-    if (base === "LR1") return 32;
+    if (base === "LR1" || base === "LR3") return 32;
     return mha ? 40 : 32;
   }
   function seattleLR(v, parsed) {
@@ -631,9 +632,11 @@
     var cap = lot != null ? Math.round(far * lot) : null;
     var ht = lrHeight(base, mha);
     var suffixNote = mha
-      ? "The (" + mha + ") suffix is a Mandatory Housing Affordability suffix (SMC 23.58B and 23.58C). It sets the payment or performance amount. It does not change the setbacks. It uses the MHA column of the floor-area table" + (base === "LR1" ? ". LR1 height is 32 ft with or without the suffix." : " and the higher height.")
-      : "No MHA suffix is on this zone, so the table column without a suffix is used. An (M), (M1), or (M2) suffix would use the other column.";
-    var growthNote = base === "LR3" ? " LR3 inside an urban center, urban village, or station area overlay has a higher height (50 ft with an MHA suffix, 40 ft without) and can have a higher floor area. This study does not decide that location, so the lower outside figures are used." : "";
+      ? "The (" + mha + ") suffix is a Mandatory Housing Affordability suffix (SMC 23.58B and 23.58C). It sets the payment or performance amount. It does not change the setbacks. It uses the MHA column of the floor-area table."
+      : "No MHA suffix is on this zone, so the table column without a suffix is used.";
+    var heightNote = base === "LR3"
+      ? " A house in LR3 is 32 ft when the zone has no MHA suffix. 40 ft applies only to stacked dwelling units, so this house addition uses 32 ft."
+      : (base === "LR1" ? " LR1 height is 32 ft with or without the suffix." : (mha ? " The MHA suffix column is used." : " The column without an MHA suffix is used."));
     return {
       setbackNote: "",
       key: "seattle-lr",
@@ -642,18 +645,18 @@
       floorCapLabel: cap != null ? "FAR " + far + " x " + fmt(lot) + " sf lot" : "FAR " + far + " of the lot. The lot size is not on record, so no square-foot cap is shown.",
       coverage: null,
       setbacks: { front: 7, rear: 7, side: 5, rearAlley: 0 },
-      height: { ft: ht, text: ht + " ft for rowhouses, townhouses, and apartments. Cottage housing developments are limited to 22 ft." },
+      height: { ft: ht, text: ht + " ft" + (base === "LR3" ? ". A house without an MHA suffix is 32 ft. 40 ft applies only to stacked dwelling units." : "") },
       adu: { status: "coded", maxCount: 2, maxSf: null, rearSetback: null, sideSetback: null, heightFt: null, text: "ADUs are allowed with single-family dwelling units, rowhouses, and townhouses. They do not count toward the density limit. The size limit is in SMC 23.45.545 and is not applied as a number here.", src: SRC.smc2345 },
       accounting: { farIncludesGarage: null, farIncludesBasement: null, farIncludesAccessory: null, verify: true, note: "Floor area follows SMC 23.45.510. Whether a garage or a basement counts is not taken from a second table here." },
       rules: [
-        cap == null ? rule("Maximum floor area (FAR)", "FAR " + far + " of the lot", SRC.smc2345510, suffixNote + " Stacked dwelling units can use a higher ratio (LR1 1.5, LR2 1.6, LR3 1.3 without a suffix). A house addition uses the base ratio." + growthNote) : rule("Maximum floor area (FAR)", fmt(cap) + " sf", SRC.smc2345510, "FAR " + far + " (SMC 23.45.510 Table A, " + (mha ? "MHA suffix column" : "no MHA suffix") + "). " + suffixNote + " Stacked dwelling units can use a higher ratio. A house addition uses the base ratio." + growthNote, cap),
-        rule("Maximum height", ht + " ft", SRC.smc2345514, "SMC 23.45.514 Table A, Ord. 127219, for rowhouses, townhouses, and apartments. Cottage housing is 22 ft." + (base === "LR1" ? " LR1 is 32 ft with or without an MHA suffix." : (mha ? " The MHA suffix column is used." : " The column without an MHA suffix is used.")) + growthNote),
+        cap == null ? rule("Maximum floor area (FAR)", "FAR " + far + " of the lot", SRC.smc2345510, suffixNote + " Stacked dwelling units can use a higher ratio (LR1 1.5, LR2 1.6). A house addition uses the base ratio.") : rule("Maximum floor area (FAR)", fmt(cap) + " sf", SRC.smc2345510, "FAR " + far + " (SMC 23.45.510 Table A, Ord. 127376, " + (mha ? "MHA suffix column" : "no MHA suffix") + "). " + suffixNote + " A house addition uses the base ratio.", cap),
+        rule("Maximum height", ht + " ft", SRC.smc2345514, "SMC 23.45.514 Table A, Ord. 127376." + heightNote),
         rule("Front setback", "7 ft average, 5 ft minimum", SRC.smc2345518, "SMC 23.45.518 Table A. The diagram uses the 7 ft average."),
         rule("Rear setback", "7 ft average, 5 ft minimum (none when it abuts an alley)", SRC.smc2345518, "The diagram uses 7 ft, or 0 ft on an alley."),
         rule("Side setbacks", "5 ft", SRC.smc2345518),
         rule("MHA suffix", mha ? "(" + mha + ") applies" : "none on this zone", SRC.smc2358, suffixNote)
       ],
-      sources: [SRC.smc2345518, SRC.smc2345514, SRC.smc2345510, SRC.ord127219, SRC.smc2344pdf]
+      sources: [SRC.smc2345518, SRC.smc2345514, SRC.smc2345510, SRC.ord127376lr]
     };
   }
 
@@ -694,27 +697,40 @@
     };
   }
 
-  /* A zone name is classified only to decide whether a house addition should be drawn.
-     The list is of zone labels, not of dimensional rules. An unrecognized label is treated
-     as residential so the lot still gets a drawing. */
-  var NONRES_ZONE = { CW: 1, CBD: 1, CG: 1, CN: 1, CC: 1, CH: 1, CL: 1, CR: 1, CS: 1, NC: 1, NC1: 1, NC2: 1, NC3: 1, C1: 1, C2: 1, IC: 1, IB: 1, IG: 1, UI: 1, IL: 1, IH: 1, LI: 1, HI: 1, BP: 1, OP: 1, GC: 1, HC: 1, RC: 1, TC: 1, DC: 1, MU: 1, NB: 1, CB: 1, OB: 1, PO: 1, "M-1": 1, "M-2": 1, M1: 1, M2: 1, "I-1": 1, "I-2": 1 };
-  function zoneToken(zone) {
-    var raw = String(zone || "").toUpperCase();
-    raw = raw.replace(/\(\s*(M1|M2|M)\s*\)/g, "");
-    var so = stripOverlay(raw);
-    return String(so.base || raw).toUpperCase().replace(/\s+/g, "");
+  /* A zone is a house zone only when the name or the city's class field says so.
+     Anything else with a zone name is not given house setbacks or an addition.
+     A blank zone outside Washington still uses the labeled typical assumptions. */
+  function zoneCompact(zone) {
+    return String(zone || "").toUpperCase().replace(/\s+/g, "").replace(/\((M1|M2|M)\)$/, "");
+  }
+  function classSaysNonres(desc) {
+    var c = String(desc || "").toLowerCase();
+    return /commercial|industrial|downtown|institution|seattle mixed|mixed use/.test(c);
+  }
+  function classSaysResidential(desc) {
+    var c = String(desc || "").toLowerCase();
+    if (classSaysNonres(c)) return false;
+    return /residential|multi-family|multifamily|single family|lowrise/.test(c);
+  }
+  function nameSaysNonres(zone) {
+    var z = zoneCompact(zone);
+    if (!z) return false;
+    return /^(MIO|SM|NC\d?P?|C[12]|IC|IB|IG|UI|ID|DMC|DMR|DOC|DH|CBD|CW|BD\d?|BC|BN|CG\d?|OS|P|MU|NB|CB|PO|IL|IH|LI|HI|BP|OP|GC|HC|RC|TC|DC|I-\d|M-\d)/.test(z);
+  }
+  function nameSaysResidential(zone) {
+    var z = zoneCompact(zone);
+    if (!z || nameSaysNonres(zone)) return false;
+    return /^(NR[123]?|LR[123]|RSL|SF\d*|RS[A-Z]?|LDR(-[A-Z0-9]+)?|RM(-[\d.]+|-EW)?|R-?\d+[A-Z]?|RA-?\d+)/.test(z);
   }
   function lotClass(v) {
-    var present = String((v && v.presentUse) || "");
-    var use = String((v && v.use) || "");
-    if (use === "nonres") return "nonres";
+    v = v || {};
+    var present = String(v.presentUse || "");
+    if (v.use === "nonres") return "nonres";
     if (/commercial|industrial|office|retail|warehouse|manufactur/i.test(present) && !/resid/i.test(present)) return "nonres";
-    var raw = String((v && v.zone) || "");
-    if (/commercial|industrial|office|retail|warehouse|manufactur/i.test(raw) && !/resid/i.test(raw)) return "nonres";
-    var token = zoneToken(raw);
-    if (token && NONRES_ZONE[token]) return "nonres";
-    if (/^(C|I)-\d/.test(token)) return "nonres";
-    return "residential";
+    if (classSaysNonres(v.zoneClass) || nameSaysNonres(v.zone)) return "nonres";
+    if (classSaysResidential(v.zoneClass) || nameSaysResidential(v.zone)) return "residential";
+    if (String(v.zone || "").trim()) return "unknown";
+    return "blank";
   }
   var TYPICAL = "Typical residential assumptions, confirm with your local planning department. These are not the local code.";
   var NONRES_NOTE = "This lot is not a house lot. The building is not labeled as a house, and an addition is not drawn. Confirm the use with your local planning department.";
@@ -747,10 +763,18 @@
       caveat: TYPICAL
     };
   }
+  function withChapter(rs, v) {
+    var ch = v && v.codeChapter;
+    if (ch && ch.url) {
+      rs.sources = (rs.sources || []).concat([ch]);
+      rs.rules = (rs.rules || []).concat([rule("Code chapter", ch.label || "Zoning code", ch)]);
+    }
+    return rs;
+  }
   function nonResidential(v) {
     v = v || {};
     var link = v.lookup && v.lookup.url ? v.lookup : null;
-    return {
+    return withChapter({
       key: "nonresidential",
       assumed: false,
       residential: false,
@@ -766,6 +790,48 @@
       rules: [rule("Use", NONRES_NOTE, link, v.zone ? "Zone " + v.zone + "." : "")],
       sources: link ? [link] : [],
       caveat: NONRES_NOTE
+    }, v);
+  }
+  function notCoded(v) {
+    v = v || {};
+    return withChapter({
+      key: "not-coded",
+      assumed: false,
+      residential: false,
+      uncoded: true,
+      coded: false,
+      title: v.zone ? "Zone " + v.zone : "Zone standards not applied",
+      floorCap: null,
+      floorCapLabel: "House setbacks and an addition are not drawn for this zone.",
+      coverage: null,
+      setbacks: {},
+      height: { ft: null, text: "" },
+      adu: { status: "verify", maxCount: null, maxSf: null, text: "", src: null },
+      rules: [rule("Zone", "House setbacks and an addition are not drawn for this zone.", v.lookup)],
+      sources: [],
+      caveat: "House setbacks and an addition are not drawn for this zone."
+    }, v);
+  }
+  function stateLawCity(v, c, cityLink) {
+    c = c || {};
+    var link = cityLink || (c.home ? { label: "Permits and planning", url: c.home } : null);
+    return {
+      key: "city-" + (v.city || "wa") + "-state",
+      title: (v.zone ? "Zone " + v.zone + ". " : "") + "State-law floor",
+      city: c.name ? c : null,
+      coded: false,
+      residential: true,
+      assumed: false,
+      floorCap: null,
+      floorCapLabel: "No floor-area figure is applied.",
+      coverage: null,
+      impervious: null,
+      setbacks: {},
+      height: { ft: null, text: "" },
+      adu: { status: "state", maxCount: ADU_STATE.maxCount, maxSf: null, heightFt: null, rearSetback: null, sideSetback: null, text: ADU_STATE.text, src: ADU_STATE.src },
+      rules: stateRows(c.name ? c : { name: "", tier: 0, code: link }).concat(c.name ? tailRows(c) : []),
+      sources: [c.code || link, SRC.hb1110, SRC.hb1337, link].filter(function (x) { return x && x.url; }),
+      caveat: "The zone's own setback and height numbers are not applied. The rows below are the state-law floor. Confirm the zone standards with your local planning department."
     };
   }
 
@@ -806,7 +872,8 @@
      checked: null was not read against the code text and prints with "verify". */
   function siteRules(v, rs) {
     var c = rs && rs.city;
-    var place = c ? "the City of " + c.name : v.juris === "seattle" ? "the City of Seattle" : v.juris === "kenmore" ? "the City of Kenmore" : v.juris === "edmonds" ? "the City of Edmonds" : v.juris === "kc" ? "unincorporated King County" : v.juris === "sno" ? "unincorporated Snohomish County" : "this jurisdiction";
+    var wa = v.stateAbbr ? v.stateAbbr === "WA" : v.juris !== "outside";
+    var place = c ? "the City of " + c.name : v.juris === "seattle" ? "the City of Seattle" : v.juris === "kenmore" ? "the City of Kenmore" : v.juris === "edmonds" ? "the City of Edmonds" : v.juris === "kc" ? "unincorporated King County" : v.juris === "sno" ? "unincorporated Snohomish County" : "the local planning department";
     var code = c ? c.code : null, city = v.juris === "city" || v.juris === "seattle" || v.juris === "kenmore" || v.juris === "edmonds";
     return {
       place: place,
@@ -820,9 +887,10 @@
         ? datum("Seattle adopted a revised Stormwater Code in 2026 (Ord. 127444). The earlier code started drainage review at 750 sf of new plus replaced hard surface. The 2026 thresholds are not coded here.", SRC.sdciStorm, null)
         : (v.city === "redmond" ? datum("City of Redmond stormwater review threshold: verify (commonly triggered near 2,000 sf of new plus replaced hard surface; confirm with the City of Redmond).", code, null)
           : datum(null, code, null, "The stormwater threshold for " + place + " is not coded.")),
-      parking: city
-        ? datum("State law (ESSB 5184, 2025) caps what a city of more than 30,000 people may require: one space per single-family home, half a space per multifamily unit, and none for a home under 1,200 sf. Cities of 50,000 or more had 18 months from July 27, 2025 to comply, and cities of 30,000 to 50,000 have three years. The parking table of " + place + " is not coded here.", SRC.sb5184, CHECKED_NOV)
-        : datum(null, code, null, "The parking table for " + place + " is not coded. The 2025 state parking caps apply to cities."),
+      wa: wa,
+      parking: !wa ? null : (city
+        ? datum("State law (ESSB 5184, 2025) caps what a city of more than 30,000 people may require: one space per single-family home, half a space per multifamily unit, and none for a home under 1,200 sf. Cities of 50,000 or more had 18 months from July 27, 2025 to comply, and cities of 30,000 to 50,000 have three years. The local parking table is not applied here.", SRC.sb5184, CHECKED_NOV)
+        : datum(null, code, null, "The local parking table is not applied.")),
       fence: datum(null, code, null, "Fence height limits for " + place + " are not coded."),
       trees: datum(null, code, null, "Tree protection rules for " + place + " are not coded."),
       aduState: ADU_STATE
@@ -862,7 +930,17 @@
       v2.zone = so.base;
       rs = pickBase(v2);
     }
-    if (!rs) rs = lotClass(v) === "nonres" ? nonResidential(v) : typicalResidential(v);
+    if (!rs) {
+      var cls = lotClass(v);
+      var wa = v.stateAbbr ? v.stateAbbr === "WA" : v.juris !== "outside";
+      if (cls === "nonres") rs = nonResidential(v);
+      else if (cls === "unknown") rs = notCoded(v);
+      else if (cls === "residential" && wa && v.juris === "city" && CITY[v.city]) rs = stateLawCity(v, CITY[v.city]);
+      else if (cls === "residential" && wa) rs = stateLawCity(v, CITY[v.city] || { name: "", tier: 0 });
+      else if ((cls === "residential" || cls === "blank") && !wa) rs = typicalResidential(v);
+      else if (cls === "blank" && wa && v.juris === "city" && CITY[v.city]) rs = stateLawCity(v, CITY[v.city]);
+      else rs = notCoded(v);
+    }
     if (so.overlay && rs.coded !== false) {
       rs.overlay = so.overlay;
       rs.overlayNote = "The zoning map shows " + String(v.zone).trim() + ". The " + so.overlay + " suffix marks " + (/SO/.test(so.overlay) ? "a special district overlay" : "property-specific development conditions") + " that sit on top of the base zone. The numbers here are the base zone's. Ask the jurisdiction what the suffix adds.";

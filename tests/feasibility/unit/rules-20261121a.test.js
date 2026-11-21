@@ -13,8 +13,23 @@ var lr2m = pick({ juris: "seattle", zone: "LR2 (M)", lot: 5000 });
 var lr2 = pick({ juris: "seattle", zone: "LR2", lot: 5000 });
 t.ok("LR2 (M) is FAR 1.4 and 40 ft; LR2 without the suffix is FAR 1.1 and 32 ft", lr2m.floorCap === 7000 && lr2m.height.ft === 40 && lr2.floorCap === 5500 && lr2.height.ft === 32);
 var lr3 = pick({ juris: "seattle", zone: "LR3 (M1)", lot: 6000 });
-t.ok("LR3 (M1) uses the MHA column and the lower outside height", lr3.floorCap === 10800 && lr3.height.ft === 40 && /outside/.test(JSON.stringify(lr3.rules)));
-t.ok("LR setbacks cite SMC 23.45.518 and the height cites Ord. 127219", lr1m.sources.some(function (s) { return /23\.45\.518/.test(s.label) && /127219/.test(s.label); }) && lr1m.sources.some(function (s) { return /23\.45\.514/.test(s.label); }));
+t.ok("LR3 (M1) keeps the MHA floor area and a 32 ft house height", lr3.floorCap === 10800 && lr3.height.ft === 32 && /stacked dwelling units/.test(JSON.stringify(lr3.rules)) && !/Cottage housing/.test(JSON.stringify(lr3.rules)));
+t.ok("LR standards cite Ord. 127376", lr1m.sources.some(function (s) { return /23\.45\.518/.test(s.label) && /127376/.test(s.label); }) && lr1m.sources.some(function (s) { return /23\.45\.514/.test(s.label) && /127376/.test(s.label); }));
+t.ok("MIO-65-LR3 is not read as LR3", R.parseLr("MIO-65-LR3 (M)") === null && R.pick({ juris: "seattle", zone: "MIO-65-LR3 (M)", zoneClass: "Major Institutions" }).key !== "seattle-lr");
+["NC2-55 (M)", "NC2P-65 (M1)", "C1-55 (M)"].forEach(function (z) {
+  var rs = R.pick({ juris: "seattle", zone: z, zoneClass: "Commercial/Mixed Use", lot: 5000 });
+  t.ok(z + " is not a house zone", rs.residential === false && !rs.setbacks.front && rs.assumed !== true, rs.key);
+});
+var bd = R.pick({ juris: "edmonds", zone: "BD1", lot: 8000 });
+t.ok("Edmonds BD1 is not a house zone", bd.residential === false && !bd.setbacks.front);
+["BC", "BN", "CG2", "OS", "P"].forEach(function (z) {
+  t.ok("Edmonds " + z + " is not a house zone", R.pick({ juris: "edmonds", zone: z }).residential === false);
+});
+var waCity = R.pick({ juris: "city", city: "redmond", zone: "R-1", lot: 7000, stateAbbr: "WA" });
+t.ok("an uncoded residential city zone keeps the state-law rows and no assumed setbacks", waCity.residential === true && !waCity.setbacks.front && waCity.rules.some(function (r) { return /HB 1110|Middle housing/.test(r.label + r.value); }) && waCity.rules.some(function (r) { return /ADU/.test(r.label); }));
+var txRules = R.pick({ juris: "outside", zone: "", lot: 8000, stateAbbr: "TX" });
+t.ok("an out-of-state lot with no zone uses typical assumptions", txRules.assumed === true && txRules.setbacks.front === 25);
+t.ok("an out-of-state study does not carry the Washington parking cap", txRules.site.parking == null && txRules.site.wa === false);
 t.ok("an NR lot is unchanged", pick({ juris: "seattle", zone: "NR3", lot: 5000, units: 1 }).floorCap === 3000 && pick({ juris: "seattle", zone: "NR3", lot: 5000 }).setbacks.front === 15);
 
 var rm = pick({ juris: "edmonds", zone: "RM-1.5", lot: 6000 });

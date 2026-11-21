@@ -485,6 +485,7 @@
     /* Site data */
     r = [];
     r.push(F.parcel ? row("Parcel / plat", F.parcel + (F.plat && F.plat.name ? " · " + F.plat.name + (F.plat.lot ? ", lot " + F.plat.lot : "") : "")) : miss("Parcel / plat"));
+    if (F.parcelMatch === "nearest" || F.parcelMatch === "location" || F.parcelMatch === "point") r.push(row("Lot match", "Nearest lot to the address point, not an address match. Confirm the parcel number.", "verify"));
     r.push(F.jurisLabel ? row("Jurisdiction", F.jurisLabel) : miss("Jurisdiction"));
     if (lot != null) {
       var ac = " (" + (Math.round(lot / 43560 * 100) / 100).toFixed(2) + " ac)";
@@ -518,7 +519,13 @@
 
     /* Setbacks */
     var sb = F.sb || {}, sv = !!F.sbVerify, hd = M && M.houseDist, coded = F.coded !== false;
-    var ex = function (key) { return hd && isNum(hd[key]) ? " · (E) house ≈ " + Math.round(hd[key]) + " ft" : ""; };
+    var ex = function (key) {
+      if (!hd || !isNum(hd[key])) return "";
+      var d = Math.round(hd[key]);
+      var who = F.residential === false ? "(E) building" : "(E) house";
+      if (d < 2) return " · " + who + " mapped outline meets this line (eaves or the drawing, not a surveyed wall)";
+      return " · " + who + " ≈ " + d + " ft";
+    };
     var sbRow = function (label, val, key) {
       var tx = ftText(val, sv);
       return tx ? row(label, tx + ex(key), sv ? "verify" : "fact") : row(label, coded ? "not coded, verify with " + place : "zone not coded, verify with " + place, "verify");
@@ -540,9 +547,10 @@
     var bld = isNum(eff.buildings) ? eff.buildings : null, acc = (isNum(eff.detached) ? eff.detached : 0) + (isNum(eff.other) ? eff.other : 0);
     var hasAcc = isNum(eff.detached) || isNum(eff.other), fp = opt && isNum(opt.footprintSf) && opt.kind !== "remodel" && opt.kind !== "secondStory" ? (P && P.ok && isNum(P.sf) && P.partial ? P.sf : opt.footprintSf) : null;
     r = [];
-    if (isNum(eff.survey)) r.push(row("(E) house footprint (your entry)", fmt(eff.survey) + " sf"));
+    var bldWord = F.residential === false ? "building" : "house";
+    if (isNum(eff.survey)) r.push(row("(E) " + bldWord + " footprint (your entry)", fmt(eff.survey) + " sf"));
     else if (isNum(eff.roof)) r.push(row("(E) roof outline" + (F.srcShort && F.srcShort.buildings ? " (" + F.srcShort.buildings + ")" : ""), "≈ " + fmt(eff.roof) + " sf", "est"));
-    else r.push(miss("(E) house outline"));
+    else r.push(miss("(E) " + bldWord + " outline"));
     r.push(hasAcc ? row("(E) garage / accessory outline", "≈ " + fmt(acc) + " sf", "est") : miss("(E) shed / accessory", "not mapped"));
     r.push(bld != null ? row("TOTAL EXISTING", "≈ " + fmt(bld) + " sf" + (pctOf(bld, lot) ? " · " + pctOf(bld, lot) : ""), "est", true) : miss("TOTAL EXISTING"));
     if (opt) {
@@ -584,7 +592,7 @@
     (eff.floorParts || []).forEach(function (p) { if (isNum(p.sf)) r.push(row("(E) " + String(p.label || p.key).toLowerCase() + (p.counted === false ? " (not counted)" : ""), fmt(p.sf) + " sf")); });
     (eff.floorMissing || []).forEach(function (m) { r.push(miss("(E) " + m)); });
     var used = isNum(eff.floorUsed) ? eff.floorUsed : null, fPartial = !!(eff.floorMissing && eff.floorMissing.length);
-    if (used == null && F.living && F.living.finSize && isNum(F.living.sf)) r.push(row("(E) house size (county record)", "≈ " + fmt(F.living.sf) + " sf · not total living area", "est"));
+    if (used == null && F.living && F.living.finSize && isNum(F.living.sf)) r.push(row("(E) " + (F.residential === false ? "building size" : "house size") + " (county record)", "≈ " + fmt(F.living.sf) + " sf · not total living area", "est"));
     r.push(used != null ? row("TOTAL EXISTING", (fPartial ? "≥ " : "") + fmt(used) + " sf", fPartial ? "partial" : "fact", true) : miss("TOTAL EXISTING", "living area " + MISSING));
     if (opt && isNum(opt.gfaSf) && opt.gfaSf > 0) {
       r.push(row("(N) " + (OPT_ROW[opt.kind] || "option"), fmt(opt.gfaSf) + " sf" + (opt.levels > 1 && isNum(opt.footprintSf) ? " (" + fmt(opt.footprintSf) + " × " + opt.levels + " levels)" : "")));
@@ -796,7 +804,7 @@
     var notes = [];
     if (!M.hasGeo) notes.push("BUILDINGS / PAVING: outlines were not read for this lot, verify on site.");
     else {
-      if (!M.buildings.length) notes.push("HOUSE OUTLINE: not in public data. Nothing is drawn for it.");
+      if (!M.buildings.length) notes.push((M.residential === false ? "BUILDING OUTLINE" : "HOUSE OUTLINE") + ": not in public data. Nothing is drawn for it.");
       if (!M.drives.length && !M.driveLines.length && !M.hard.length) notes.push("DRIVEWAY / WALKS / PATIO: not in public data, verify on site.");
       else if (M.driveLines.length && !M.drives.length) notes.push("DRIVEWAY: mapped centerline at an assumed 10 ft width (approx.).");
     }
@@ -972,10 +980,23 @@
       out.push(T(x, y, clip(t.title, 60), { size: 13.5, weight: 700, ls: 1.6, fit: twMin(clip(t.title, 60), 13.5, 1.6) > w ? w : 0 }) + '<rect x="' + x + '" y="' + r1(y + 6) + '" width="' + w + '" height="1.4" fill="' + RULE + '"/>');
       y += titleH - 6;
       t.rows.forEach(function (r) {
-        var lw = tw(r.k, size), vw = tw(r.v, size), room = w - Math.min(lw, w * 0.55) - 14, k = clip(r.k, Math.floor(w * 0.56 / (size * 0.56)));
-        var v = vw > room * 1.5 ? clip(r.v, Math.floor(room * 1.5 / (size * 0.56))) : r.v;
+        var room = w - Math.min(tw(r.k, size), w * 0.55) - 14, k = clip(r.k, Math.floor(w * 0.56 / (size * 0.56)));
+        var maxCh = Math.max(18, Math.floor(room / (size * 0.52)));
+        var words = String(r.v || "").split(/\s+/), lines = [], cur = "";
+        words.forEach(function (word) {
+          var next = cur ? cur + " " + word : word;
+          if (next.length > maxCh && cur) { lines.push(cur); cur = word; }
+          else cur = next;
+        });
+        if (cur) lines.push(cur);
+        if (lines.length > 2) lines = [lines[0], lines.slice(1).join(" ")];
+        if (lines[1] && lines[1].length > maxCh) lines[1] = lines[1].slice(0, maxCh).replace(/\s+\S*$/, "");
         out.push(T(x, y, k, { size: size, weight: r.b ? 700 : 400, fit: twMin(k, size) > w * 0.56 ? w * 0.56 : 0 }) +
-          T(x + w, y, v, { size: size, weight: r.b ? 700 : 400, anchor: "end", fill: COLOR[r.s] || INK, fit: twMin(v, size) > room ? room : 0 }));
+          T(x + w, y, lines[0] || "", { size: size, weight: r.b ? 700 : 400, anchor: "end", fill: COLOR[r.s] || INK }));
+        if (lines[1]) {
+          y += rowH * 0.85;
+          out.push(T(x + w, y, lines[1], { size: size, weight: r.b ? 700 : 400, anchor: "end", fill: COLOR[r.s] || INK }));
+        }
         y += rowH;
       });
       y += 6;
@@ -1022,7 +1043,7 @@
     var headRight = (o.sheet || "SP-1") + (o.pageLabel ? " · " + String(o.pageLabel) : "");
     out.push(T(COL.x + COL.w, 60, headRight, { size: o.pageLabel ? 21 : 30, weight: 700, anchor: "end", ls: 1 }));
     /* plan */
-    if (plan) out.push('<svg x="' + PLAN.x + '" y="' + PLAN.y + '" width="' + PLAN.w + '" height="' + PLAN.h + '" viewBox="0 0 ' + PLAN.w + " " + PLAN.h + '" overflow="visible">' + plan.svg + "</svg>");
+    if (plan) out.push('<svg x="' + PLAN.x + '" y="' + PLAN.y + '" width="' + PLAN.w + '" height="' + PLAN.h + '" viewBox="0 0 ' + PLAN.w + " " + PLAN.h + '">' + plan.svg + "</svg>");
     else out.push('<rect x="' + PLAN.x + '" y="' + PLAN.y + '" width="' + PLAN.w + '" height="' + PLAN.h + '" fill="' + PAPER + '" stroke="#d8d7cf"/>' +
       T(PLAN.x + PLAN.w / 2, PLAN.y + PLAN.h / 2 - 12, clip((M && M.why) || "No parcel outline was found, so the site plan is not drawn.", 110), { size: 17, fill: ORANGE, anchor: "middle" }) +
       T(PLAN.x + PLAN.w / 2, PLAN.y + PLAN.h / 2 + 16, "The tables on the right hold what public records do show." + (brand.phone ? " " + (brand.name || "We") + " can confirm the lot on site: " + brand.phone + "." : ""), { size: 13.5, fill: MUTE, anchor: "middle" }));
