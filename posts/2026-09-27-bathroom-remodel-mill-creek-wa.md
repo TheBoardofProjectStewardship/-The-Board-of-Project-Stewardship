@@ -22,6 +22,8 @@ Whether you are near Town Center, the SR-527 corridor, or deeper into HOA cul-de
 
 HOA or design-review expectations can affect exterior exhaust terminations, bath window changes, and roof penetrations even when the wet room itself is interior-only. Put those constraints in the proposal so they are not discovered after rough-in is underway. Cross-check [plumber.html](../plumber.html) and [electrician.html](../electrician.html) when fixture moves and circuit work share the same critical path, and [tile.html](../tile.html) when wet-zone assemblies drive the schedule.
 
+![Two-story suburban home with an upstairs bathroom window on a quiet street in Mill Creek, Washington](../assets/images/posts/2026-09-27-mill-creek-bath-suburban-home-6.webp "Many Mill Creek homes date from the late 1980s to 2000s, so original upstairs baths are common remodel candidates.")
+
 ## Climate, moisture, and OpenGov permitting realities
 
 Western Washington bathrooms live with cool outdoor air and long damp seasons. Mill Creek is inland relative to Edmonds — less salt-air stress on exterior finishes — but winter humidity, slow-drying grout, and fans that dump into attics still show up as soft drywall and failed caulk long before style looks dated. Prefer continuous waterproofing in the wet zone, correct slope to the drain, and exhaust terminated outdoors with a quiet, appropriately rated fan. Fancy finishes cannot compensate for a pan that ponds or a niche that was never banded into the membrane.
@@ -47,6 +49,8 @@ https://www.youtube.com/watch?v=pWePjMmyha0
 
 [Watch the short process clip](../assets/videos/posts/2026-09-shared-waterproofing.mp4)
 
+![Shower walls coated with a waterproofing membrane before tile in a Mill Creek, Washington bathroom remodel](../assets/images/posts/2026-09-27-mill-creek-bath-waterproofing-7.webp "Waterproofing goes on and gets checked before any tile is set in a Mill Creek shower.")
+
 ## Design, trades, and coordination
 
 Measure the wet zone, valve height, niche, and glass opening before you lock a catalog number. Glass lead times can dominate the end of the schedule — measure only after walls are true. Coordinate plumber and electrician so one trade’s fastener line does not puncture the membrane the next trade just finished. Keep exhaust duct routing visible on the plan so it is not improvised through joist bays after tile is ordered. If accessibility or aging-in-place is a goal, plan curb details, clearances, and lever hardware during layout, when changes are cheap.
@@ -64,6 +68,8 @@ Manufacturer product pages for wet-area assemblies and fixtures when you compare
 - [Moen](https://www.moen.com/) — bath faucet and shower trim systems commonly compared when valve walls and finish kits are redesigned
 - [LATICRETE](https://laticrete.com/) — tile setting materials and waterproofing-related assemblies frequently discussed for wet rooms
 - [TOTO](https://www.totousa.com/) — toilets, lavatories, and related bath fixtures often specified when rough-in and clearances must match the layout
+
+![Porcelain tile, cement board and shower valve parts staged for a bathroom remodel in Mill Creek, Washington](../assets/images/posts/2026-09-27-mill-creek-bath-tile-materials-8.webp "Tile, backer board and valve parts staged before a Mill Creek bathroom remodel begins.")
 
 ## FAQ
 
@@ -86,6 +92,8 @@ Use the Board’s [bathroom directory](../bathrooms.html), interview two or thre
 
 Neighboring Bothell often still uses MyBuildingPermit habits; Mill Creek homeowners should plan for **OpenGov** plus a separate **L&I electrical** path. Homes closer to Puget Sound take more wind-driven wetting on the exterior envelope; inland Mill Creek wet rooms still see the same cool, damp climate that slows drying. Ask firms that also work Edmonds, Bothell, or Seattle how their membrane, curb, and exhaust details change when the job is an HOA cul-de-sac rather than a bluff or downtown condo — the honest answer is usually detailing, portal ownership, and sequencing, not a one-size coastal package. Cross-check [plumber.html](../plumber.html) and [electrician.html](../electrician.html) when trade permits share the critical path; the City still issues the local building path for your lot through [OpenGov](https://millcreekwa.portal.opengov.com/categories/1076).
 
+![Bathroom ceiling exhaust fan above a new shower in a Mill Creek, Washington remodel](../assets/images/posts/2026-09-27-mill-creek-bath-exhaust-fan-9.webp "A properly ducted exhaust fan helps a Mill Creek bathroom handle damp Puget Sound winters.")
+
 ## Putting it together for homeowners
 
 For **bathroom remodels in Mill Creek**, durable projects share a pattern: respect the **City of Mill Creek OpenGov path** (and the separate **L&I electrical** path), put **membrane continuity and outdoor exhaust** on the critical path, and keep **staging, HOA rules, and inspection holds** visible before finish selections freeze. Style still matters — it just should not outrun the wet assemblies or the written allowances.
@@ -95,3 +103,5 @@ When you interview firms, ask them to walk a recent Snohomish County bath chrono
 Use the Board directories as a starting shortlist — especially [bathrooms](../bathrooms.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, allowance logs, OpenGov permit numbers, L&I electrical records if any, inspection results, product cut sheets, and dated photos of hidden membranes before tile closes. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
+
+![Finished bathroom remodel with a tiled walk-in shower and double vanity in Mill Creek, Washington](../assets/images/posts/2026-09-27-mill-creek-bath-finished-10.webp "A finished bathroom remodel in a Mill Creek home after permits and inspections were closed out.")
