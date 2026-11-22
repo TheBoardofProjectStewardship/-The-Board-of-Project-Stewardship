@@ -54,6 +54,7 @@ Base: `https://boardofprojectstewardship.com/`
 | `blog/rss.xml` | Blog RSS feed |
 | `news/rss.xml` | News RSS feed |
 | `404.html` | Branded Board 404 |
+| `posts/2026-11-22-kitchen-remodel-sammamish-wa.html` | Kitchen Remodel Sammamish WA — Permits, City Electrical, Range Hood Ventilation and Water District Checks |
 | `posts/2026-11-21-sunroom-addition-mercer-island-wa.html` | Sunroom Addition Mercer Island WA — Permits, Energy Code Glazing, Foundations and Lot Coverage |
 | `posts/2026-11-20-foundation-crack-repair-kent-wa.html` | Foundation Crack Repair Kent WA — Settlement Signs, Structural Engineers, Permits and Lasting Fixes |
 | `posts/2026-11-19-whole-house-repiping-kirkland-wa.html` | Whole-House Repiping Kirkland WA — Replacing Galvanized and Polybutylene Pipe, Plumbing Permits, Inspections and Wall Repair |

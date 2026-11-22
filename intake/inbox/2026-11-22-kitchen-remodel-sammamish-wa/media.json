@@ -1,0 +1,98 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-11-22-sammamish-kitchen-1.webp",
+      "repo_path": "assets/images/posts/2026-11-22-sammamish-kitchen-1.webp",
+      "alt": "Sammamish, WA kitchen remodel finished: a white shaker-style kitchen with a center island, two pendant lights, stainless appliances and a large window looking out at tall fir trees \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "575a743fb6107f40becf480568b90b80",
+      "source": "Newly generated image (built-in image generator, 2026-11-22), source gen-1.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-22-sammamish-kitchen-2.webp",
+      "repo_path": "assets/images/posts/2026-11-22-sammamish-kitchen-2.webp",
+      "alt": "Sammamish, WA kitchen remodel demolition: an older kitchen with cabinets removed, wall studs exposed, drop cloths on the floor and a sawhorse with tools \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "66890a1e98aa9c18af80e685e117c174",
+      "source": "Newly generated image (built-in image generator, 2026-11-22), source gen-2.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-22-sammamish-kitchen-3.webp",
+      "repo_path": "assets/images/posts/2026-11-22-sammamish-kitchen-3.webp",
+      "alt": "Sammamish, WA kitchen remodel electrical rough-in: blue electrical boxes and yellow cable run along open wall studs, with an inspection tag on a stud \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "63bb9bad1bb9ffb12146192bd3cadb63",
+      "source": "Newly generated image (built-in image generator, 2026-11-22), source gen-3.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-22-sammamish-kitchen-4.webp",
+      "repo_path": "assets/images/posts/2026-11-22-sammamish-kitchen-4.webp",
+      "alt": "Sammamish, WA kitchen remodel plumbing rough-in: red and blue PEX supply lines and a gray vent pipe in an open wall below a kitchen window, with insulation around the framing \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "6cb331e034cfa4d31fea9530772dadb2",
+      "source": "Newly generated image (built-in image generator, 2026-11-22), source gen-4.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-22-sammamish-kitchen-5.webp",
+      "repo_path": "assets/images/posts/2026-11-22-sammamish-kitchen-5.webp",
+      "alt": "Sammamish, WA kitchen remodel planning: printed floor plans, a tape measure, cabinet and countertop samples, a laptop and a coffee mug on a wood table by a window \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "28f5c761fe60839bf8b8b95a5693517c",
+      "source": "Newly generated image (built-in image generator, 2026-11-22), source gen-5.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-22-sammamish-kitchen-6.webp",
+      "repo_path": "assets/images/posts/2026-11-22-sammamish-kitchen-6.webp",
+      "alt": "Sammamish, WA kitchen remodel range hood: a stainless wall-mount range hood over an induction cooktop, white subway tile backsplash and light wood cabinets, with fir trees outside the window \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "7258afdc17180840c547a4ce19b5b136",
+      "source": "Newly generated image (built-in image generator, 2026-11-22), source gen-6.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-22-sammamish-kitchen-7.webp",
+      "repo_path": "assets/images/posts/2026-11-22-sammamish-kitchen-7.webp",
+      "alt": "Sammamish, WA kitchen remodel cabinets: unfinished base cabinet boxes set on a new plank floor, with a level on top and a cordless drill on the floor \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "779fee96b5ecac2a2a1759470a864a58",
+      "source": "Newly generated image (built-in image generator, 2026-11-22), source gen-7.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-22-sammamish-kitchen-8.webp",
+      "repo_path": "assets/images/posts/2026-11-22-sammamish-kitchen-8.webp",
+      "alt": "Sammamish, WA kitchen remodel underway: a gray two-story house on a wooded street with a remodel dumpster in the driveway \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "f2fb40039d51d4357cb268401a66ebf9",
+      "source": "Newly generated image (built-in image generator, 2026-11-22), source gen-8.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-22-sammamish-kitchen-9.webp",
+      "repo_path": "assets/images/posts/2026-11-22-sammamish-kitchen-9.webp",
+      "alt": "Sammamish, WA kitchen remodel at dusk: a kitchen with an island and bar stools, warm under-cabinet lights and pendants, and dark fir trees and a misty hill outside the windows \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "c8b1e1243d303e3dd047c1f9350297dd",
+      "source": "Newly generated image (built-in image generator, 2026-11-22), source gen-9.jpg converted to 1600w webp q82"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "YyPjw-UawqI",
+      "url": "https://www.youtube.com/watch?v=YyPjw-UawqI",
+      "title": "Kitchen Remodel Part 3 \u2013 Rough In Plumbing and Electrical, and Drywall Repairs | Randall Wingett",
+      "oembed_status": 200
+    },
+    {
+      "id": "2PKOdt05JdQ",
+      "url": "https://www.youtube.com/watch?v=2PKOdt05JdQ",
+      "title": "Makeup Air Systems Explained: How They Work with Your Range Hood (Live Demo) | Proline Range Hoods",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "9 newly generated images (built-in generator), 0 regraded stills, 0 paid media."
+}
