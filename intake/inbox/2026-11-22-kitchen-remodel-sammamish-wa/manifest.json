@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-11-22-kitchen-remodel-sammamish-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-11-22T12:05:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Kitchen Remodel Sammamish WA \u2014 Permits, City Electrical, Range Hood Ventilation and Water District Checks",
+    "date": "2026-11-22",
+    "slug": "kitchen-remodel-sammamish-wa",
+    "description": "A Sammamish kitchen remodel guide: when the City requires a remodel permit, why the City (not L&I) issues electrical permits, fixture counts and water district certificates, range hood rules, inspections and hiring.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 board-intake inbox had no 2026-11-22 packets (latest *-2026-11-21); PC not touched. Topic: kitchen remodel in Sammamish WA. City of Sammamish pages: Getting Started and FAQs (alterations/repairs generally require a permit; 'changing the layout of a home'; Project Guidance free; MyBuildingPermit; building and electrical fees based on fair market value; contractor registration RCW 18.27; construction hours SMC 16.05.030; expiration SMC 16.20.225); Residential Remodel Submittal Checklist (Building / Single-Family Residential / Remodel; required items incl. as-is and proposed plan set, narrative, Residential Fixture Count Form; potentially applicable sewer/water availability certificates from Sammamish Plateau Water or NE Sammamish Water & Sewer District when >50% assessed value or added fixtures; water meter sizing form); Permitting Process PDF (4 working day screening, 90 day corrections); Plan Review and Inspections (city-issued Building, Plumbing, Mechanical permits; do not cover before inspection; ready at 8:00 am); Adopted Codes (2024 Sammamish Electrical Code RCW 19.28, IRC, IMC, IFGC, NFPA 54, UPC, WSEC); Building Division (electrical inspector on staff; staff-transition service notice); Project Guidance (one-week response); Permit Center hours/walk-ins. L&I City Electrical Permits & Inspections lists Sammamish (L&I does not issue permits there). WAC 51-51-1503 (M1503.3 exhaust discharge, ductless exception, M1503.5) and WAC 51-51-1505 (M1505.4.4.1 local exhaust; Table M1505.4.4.3 65% CE/160 cfm electric, 80% CE/250 cfm combustion; 300 cfm other intermittent). 2021 WSEC-R R403.6, Table R403.6.1 range hoods 2.8 cfm/W, R403.6.2 exception, R404.1, R404.2. L&I Verify + hiring a contractor. Sammamish already in _SLUG_PLACES/_PLACE_NAMES; generate_site.py unchanged; sammamish.html unchanged. Cross-links: kitchen Issaquah 2026-10-13, kitchen Woodinville 2026-11-06, kitchen Kirkland 2026-10-07, bathroom Sammamish 2026-10-12, shed/home office Sammamish 2026-11-02, panel upgrade Federal Way 2026-10-20, load-bearing wall Kirkland 2026-10-29. No fee or price figures. Makeup air cfm threshold not quoted (base IRC M1503.6 text not fetchable today). Producer role fields kept per intake contract."
+}

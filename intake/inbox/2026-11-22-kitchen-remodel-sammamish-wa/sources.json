@@ -1,0 +1,179 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Sammamish",
+    "service": "Kitchen remodel: City remodel permit, City electrical permit, fixture counts and water district certificates, range hood and kitchen exhaust code, lighting energy code, review steps and inspections",
+    "slug": "kitchen-remodel-sammamish-wa"
+  },
+  "sources": [
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51-1503",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51-1503",
+      "retrieved": "2026-11-22",
+      "http_status": 200,
+      "supports": "WAC 51-51-1503 kitchen exhaust discharge and ductless exception"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51-1505",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51-1505",
+      "retrieved": "2026-11-22",
+      "http_status": 200,
+      "supports": "WAC 51-51-1505 local exhaust and range hood airflow/capture efficiency"
+    },
+    {
+      "url": "https://pacificprogroup.com/",
+      "title": "https://pacificprogroup.com/",
+      "retrieved": "2026-11-22",
+      "http_status": 200,
+      "supports": "Board #1 ranked firm link"
+    },
+    {
+      "url": "https://sbcc.wa.gov/sites/default/files/2024-10/2021%20WSEC_R%20_Sept2024.pdf",
+      "title": "https://sbcc.wa.gov/sites/default/files/2024-10/2021%20WSEC_R%20_Sept2024.pdf",
+      "retrieved": "2026-11-22",
+      "http_status": 200,
+      "supports": "2021 WSEC-R R403.6, Table R403.6.1, R404.1, R404.2"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-11-22",
+      "http_status": 200,
+      "supports": "License/bond/insurance lookup"
+    },
+    {
+      "url": "https://www.elkay.com/us/en.html",
+      "title": "https://www.elkay.com/us/en.html",
+      "retrieved": "2026-11-22",
+      "http_status": 200,
+      "supports": "Material maker: kitchen ventilation, hardware, sinks or lighting"
+    },
+    {
+      "url": "https://www.fantech.net/en-us",
+      "title": "https://www.fantech.net/en-us",
+      "retrieved": "2026-11-22",
+      "http_status": 200,
+      "supports": "Material maker: kitchen ventilation, hardware, sinks or lighting"
+    },
+    {
+      "url": "https://www.hettich.com/en-us/home",
+      "title": "https://www.hettich.com/en-us/home",
+      "retrieved": "2026-11-22",
+      "http_status": 200,
+      "supports": "Material maker: kitchen ventilation, hardware, sinks or lighting"
+    },
+    {
+      "url": "https://www.kichler.com/",
+      "title": "https://www.kichler.com/",
+      "retrieved": "2026-11-22",
+      "http_status": 200,
+      "supports": "Material maker: kitchen ventilation, hardware, sinks or lighting"
+    },
+    {
+      "url": "https://www.lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "https://www.lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "retrieved": "2026-11-22",
+      "http_status": 200,
+      "supports": "State hiring guidance"
+    },
+    {
+      "url": "https://www.lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/",
+      "title": "https://www.lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/",
+      "retrieved": "2026-11-22",
+      "http_status": 200,
+      "supports": "L&I: get electrical permit from correct jurisdiction"
+    },
+    {
+      "url": "https://www.lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "title": "https://www.lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "retrieved": "2026-11-22",
+      "http_status": 200,
+      "supports": "L&I list of cities issuing own electrical permits (includes Sammamish)"
+    },
+    {
+      "url": "https://www.mybuildingpermit.com/",
+      "title": "https://www.mybuildingpermit.com/",
+      "retrieved": "2026-11-22",
+      "http_status": 200,
+      "supports": "MyBuildingPermit application, status, inspections"
+    },
+    {
+      "url": "https://www.sammamish.us/government/community-development/building/",
+      "title": "https://www.sammamish.us/government/community-development/building/",
+      "retrieved": "2026-11-22",
+      "http_status": 200,
+      "supports": "Sammamish Building Division (electrical inspector, service notice)"
+    },
+    {
+      "url": "https://www.sammamish.us/government/community-development/building/adopted-codes/",
+      "title": "https://www.sammamish.us/government/community-development/building/adopted-codes/",
+      "retrieved": "2026-11-22",
+      "http_status": 200,
+      "supports": "Sammamish adopted codes incl. Sammamish Electrical Code"
+    },
+    {
+      "url": "https://www.sammamish.us/government/community-development/building/inspections/",
+      "title": "https://www.sammamish.us/government/community-development/building/inspections/",
+      "retrieved": "2026-11-22",
+      "http_status": 200,
+      "supports": "Sammamish plan review and inspections"
+    },
+    {
+      "url": "https://www.sammamish.us/government/community-development/permit-center/",
+      "title": "https://www.sammamish.us/government/community-development/permit-center/",
+      "retrieved": "2026-11-22",
+      "http_status": 200,
+      "supports": "Sammamish Permit Center hours"
+    },
+    {
+      "url": "https://www.sammamish.us/government/community-development/permit-center/getting-started-and-faqs",
+      "title": "https://www.sammamish.us/government/community-development/permit-center/getting-started-and-faqs",
+      "retrieved": "2026-11-22",
+      "http_status": 200,
+      "supports": "Sammamish permit FAQ"
+    },
+    {
+      "url": "https://www.sammamish.us/government/community-development/permit-center/project-guidance-form/",
+      "title": "https://www.sammamish.us/government/community-development/permit-center/project-guidance-form/",
+      "retrieved": "2026-11-22",
+      "http_status": 200,
+      "supports": "Sammamish Project Guidance"
+    },
+    {
+      "url": "https://www.sammamish.us/media/4fwlmvgw/submittal-checklist-residential-remodel1-1.pdf",
+      "title": "https://www.sammamish.us/media/4fwlmvgw/submittal-checklist-residential-remodel1-1.pdf",
+      "retrieved": "2026-11-22",
+      "http_status": 200,
+      "supports": "Sammamish Residential Remodel Submittal Checklist"
+    },
+    {
+      "url": "https://www.sammamish.us/media/a2vozmxd/permitting-process.pdf",
+      "title": "https://www.sammamish.us/media/a2vozmxd/permitting-process.pdf",
+      "retrieved": "2026-11-22",
+      "http_status": 200,
+      "supports": "Sammamish Permitting Process steps"
+    },
+    {
+      "url": "https://zephyronline.com/",
+      "title": "https://zephyronline.com/",
+      "retrieved": "2026-11-22",
+      "http_status": 200,
+      "supports": "Material maker: kitchen ventilation, hardware, sinks or lighting"
+    }
+  ],
+  "dropped": [
+    {
+      "url": "https://sammamish.municipal.codes/SMC/16.20.197",
+      "reason": "403 to box curl"
+    },
+    {
+      "url": "https://www.codepublishing.com/WA/Sammamish/html/Sammamish16/Sammamish1620.html",
+      "reason": "403"
+    },
+    {
+      "url": "https://codes.iccsafe.org/content/IRC2021P2/chapter-15-exhaust-systems",
+      "reason": "script-rendered, M1503.6 text not readable"
+    }
+  ],
+  "notes": "Box curl 2026-11-22 with browser UA and full browser headers. All cited = 200 (see cited-status.txt). WSEC-R PDF and City PDFs read via pdftotext. No fee or price figures quoted."
+}
