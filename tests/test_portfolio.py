@@ -315,6 +315,27 @@ console.log(JSON.stringify({{ids:m.groups.map(g=>g.id),floors:[...new Set(m.labe
         words = set(re.findall(r"[a-z0-9]+", text))
         self.assertFalse({hashlib.sha256(w.encode()).hexdigest()[:16] for w in words} & private)
 
+    def test_three_bedroom_interior_remodel_is_plan_data(self):
+        p = next(p for p in self.projects if p["slug"] == "three-bedroom-interior-remodel")
+        cfg = ps.load_config(p)
+        self.assertEqual([s["id"] for s in cfg["stages"]], list(ps.STAGE_PROGRESS))
+        house_walls = [w for w in cfg["walls"] if min(y for _, y in w["q"]) >= 0]  # the two pad posts sit north of the house
+        self.assertTrue(all(abs(w["h"] - 91 / 12) < 0.01 for w in house_walls))  # printed 91" on the new bath elevation
+        self.assertEqual(len(cfg["walls"]) - len(house_walls), 2)
+        names = {r["name"] for r in cfg["rooms"]}
+        for n in ("New Bath", "New WIC", "New Closet", "New Linen", "Kitchen", "Living", "Laundry", "Pantry", "Hallway"):
+            self.assertIn(n, names)  # room names printed on the proposed main level
+        self.assertEqual(sum(r["name"] == "Bedroom" for r in cfg["rooms"]), 3)
+        wins = sorted(round(o["b"] - o["a"], 2) for o in cfg["openings"] if o["kind"] == "W" and o["tag"].startswith("new"))
+        self.assertEqual(wins, [2.94, 2.94, 3.93, 4.94, 5.96])  # printed 36x60 (2), 48x12, 60x35, 72x24 widths
+        self.assertTrue(cfg["fieldRoof"]["assumed"])
+        self.assertTrue(p.get("assumptions"))
+        private = {'4b1afb0ae9d64b7c', '42b5bf6a3fa51849', '46e8a893096d9fa5', 'bfabb6cf02daa6bf', '5fffc9a409285b9b', '2e414eb23f358c04',
+                   '4e679ce0a735d3dd', 'c608d1c43be36183', '0e5b7a38853aba4d', '1b2fc9341a16ae4e', '8e1404558f6e4a03'}  # sha256 prefixes of the client's private words, kept out of the repo in plain text
+        text = (json.dumps(p) + json.dumps(cfg) + ps.pages()["portfolio/three-bedroom-interior-remodel/index.html"]).lower()
+        words = set(re.findall(r"[a-z0-9]+", text))
+        self.assertFalse({hashlib.sha256(w.encode()).hexdigest()[:16] for w in words} & private)
+
     @unittest.skipUnless(shutil.which("node"), "node not installed")
     def test_engine_builds_three_levels(self):
         script = f"""

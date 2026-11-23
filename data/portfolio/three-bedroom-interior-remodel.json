@@ -1,0 +1,2501 @@
+{
+ "slug": "three-bedroom-interior-remodel",
+ "title": "Three-bedroom house interior remodel",
+ "source": "Proposed main level plan of a single-family house interior remodel, the framing plan with the approximate roof layout, and the new bath interior elevation.",
+ "totalSqft": null,
+ "floor": 1.25,
+ "walls": [
+  {
+   "q": [
+    [
+     0,
+     0
+    ],
+    [
+     2.1,
+     0
+    ],
+    [
+     2.1,
+     0.58
+    ],
+    [
+     0,
+     0.58
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     5.04,
+     0
+    ],
+    [
+     6.77,
+     0
+    ],
+    [
+     6.77,
+     0.58
+    ],
+    [
+     5.04,
+     0.58
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     9.71,
+     0
+    ],
+    [
+     17.19,
+     0
+    ],
+    [
+     17.19,
+     0.58
+    ],
+    [
+     9.71,
+     0.58
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     21.12,
+     0
+    ],
+    [
+     23.06,
+     0
+    ],
+    [
+     23.06,
+     0.58
+    ],
+    [
+     21.12,
+     0.58
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     26.0,
+     0
+    ],
+    [
+     28.73,
+     0
+    ],
+    [
+     28.73,
+     0.58
+    ],
+    [
+     26.0,
+     0.58
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     30.67,
+     0
+    ],
+    [
+     32.92,
+     0
+    ],
+    [
+     32.92,
+     0.58
+    ],
+    [
+     30.67,
+     0.58
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     37.85,
+     0
+    ],
+    [
+     41.12,
+     0
+    ],
+    [
+     41.12,
+     0.58
+    ],
+    [
+     37.85,
+     0.58
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     0,
+     0.58
+    ],
+    [
+     0.6,
+     0.58
+    ],
+    [
+     0.6,
+     13.65
+    ],
+    [
+     0,
+     13.65
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     0,
+     13.65
+    ],
+    [
+     0.6,
+     13.65
+    ],
+    [
+     0.6,
+     15.31
+    ],
+    [
+     0,
+     15.31
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     0,
+     21.27
+    ],
+    [
+     0.6,
+     21.27
+    ],
+    [
+     0.6,
+     23.1
+    ],
+    [
+     0,
+     23.1
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     0.6,
+     22.54
+    ],
+    [
+     3.33,
+     22.54
+    ],
+    [
+     3.33,
+     23.1
+    ],
+    [
+     0.6,
+     23.1
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     8.27,
+     22.54
+    ],
+    [
+     11.0,
+     22.54
+    ],
+    [
+     11.0,
+     23.1
+    ],
+    [
+     8.27,
+     23.1
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     11.0,
+     22.54
+    ],
+    [
+     11.6,
+     22.54
+    ],
+    [
+     11.6,
+     28.1
+    ],
+    [
+     11.0,
+     28.1
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     11.6,
+     27.54
+    ],
+    [
+     15.67,
+     27.54
+    ],
+    [
+     15.67,
+     28.1
+    ],
+    [
+     11.6,
+     28.1
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     19.6,
+     27.54
+    ],
+    [
+     25.25,
+     27.54
+    ],
+    [
+     25.25,
+     28.1
+    ],
+    [
+     19.6,
+     28.1
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     28.19,
+     27.54
+    ],
+    [
+     30.79,
+     27.54
+    ],
+    [
+     30.79,
+     28.1
+    ],
+    [
+     28.19,
+     28.1
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     36.73,
+     27.54
+    ],
+    [
+     41.12,
+     27.54
+    ],
+    [
+     41.12,
+     28.1
+    ],
+    [
+     36.73,
+     28.1
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     40.52,
+     0.58
+    ],
+    [
+     41.12,
+     0.58
+    ],
+    [
+     41.12,
+     5.46
+    ],
+    [
+     40.52,
+     5.46
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     40.52,
+     8.44
+    ],
+    [
+     41.12,
+     8.44
+    ],
+    [
+     41.12,
+     15.83
+    ],
+    [
+     40.52,
+     15.83
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     40.52,
+     20.81
+    ],
+    [
+     41.12,
+     20.81
+    ],
+    [
+     41.12,
+     27.54
+    ],
+    [
+     40.52,
+     27.54
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     11.17,
+     0.58
+    ],
+    [
+     11.6,
+     0.58
+    ],
+    [
+     11.6,
+     3.33
+    ],
+    [
+     11.17,
+     3.33
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     11.17,
+     5.9
+    ],
+    [
+     11.6,
+     5.9
+    ],
+    [
+     11.6,
+     6.52
+    ],
+    [
+     11.17,
+     6.52
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     11.17,
+     6.52
+    ],
+    [
+     13.27,
+     6.52
+    ],
+    [
+     13.27,
+     6.92
+    ],
+    [
+     11.17,
+     6.92
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     15.79,
+     6.52
+    ],
+    [
+     18.71,
+     6.52
+    ],
+    [
+     18.71,
+     6.92
+    ],
+    [
+     15.79,
+     6.92
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     11.17,
+     6.92
+    ],
+    [
+     11.6,
+     6.92
+    ],
+    [
+     11.6,
+     10.31
+    ],
+    [
+     11.17,
+     10.31
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     18.27,
+     6.92
+    ],
+    [
+     18.71,
+     6.92
+    ],
+    [
+     18.71,
+     10.31
+    ],
+    [
+     18.27,
+     10.31
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     21.65,
+     0.58
+    ],
+    [
+     22.08,
+     0.58
+    ],
+    [
+     22.08,
+     10.31
+    ],
+    [
+     21.65,
+     10.31
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     22.08,
+     7.31
+    ],
+    [
+     22.31,
+     7.31
+    ],
+    [
+     22.31,
+     7.71
+    ],
+    [
+     22.08,
+     7.71
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     24.75,
+     7.31
+    ],
+    [
+     27.58,
+     7.31
+    ],
+    [
+     27.58,
+     7.71
+    ],
+    [
+     24.75,
+     7.71
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     7.79,
+     10.31
+    ],
+    [
+     8.48,
+     10.31
+    ],
+    [
+     8.48,
+     10.71
+    ],
+    [
+     7.79,
+     10.71
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     10.92,
+     10.31
+    ],
+    [
+     22.08,
+     10.31
+    ],
+    [
+     22.08,
+     10.71
+    ],
+    [
+     10.92,
+     10.71
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     0.6,
+     11.33
+    ],
+    [
+     8.23,
+     11.33
+    ],
+    [
+     8.23,
+     11.77
+    ],
+    [
+     0.6,
+     11.77
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     7.79,
+     10.71
+    ],
+    [
+     8.23,
+     10.71
+    ],
+    [
+     8.23,
+     13.65
+    ],
+    [
+     7.79,
+     13.65
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     0.6,
+     13.65
+    ],
+    [
+     1.19,
+     13.65
+    ],
+    [
+     1.19,
+     14.04
+    ],
+    [
+     0.6,
+     14.04
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     7.12,
+     13.65
+    ],
+    [
+     8.48,
+     13.65
+    ],
+    [
+     8.48,
+     14.04
+    ],
+    [
+     7.12,
+     14.04
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     10.92,
+     13.65
+    ],
+    [
+     11.73,
+     13.65
+    ],
+    [
+     11.73,
+     14.04
+    ],
+    [
+     10.92,
+     14.04
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     14.33,
+     13.65
+    ],
+    [
+     21.08,
+     13.65
+    ],
+    [
+     21.08,
+     14.04
+    ],
+    [
+     14.33,
+     14.04
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     23.52,
+     13.65
+    ],
+    [
+     24.21,
+     13.65
+    ],
+    [
+     24.21,
+     14.04
+    ],
+    [
+     23.52,
+     14.04
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     11.17,
+     14.04
+    ],
+    [
+     11.6,
+     14.04
+    ],
+    [
+     11.6,
+     22.54
+    ],
+    [
+     11.17,
+     22.54
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     14.46,
+     14.04
+    ],
+    [
+     14.88,
+     14.04
+    ],
+    [
+     14.88,
+     15.96
+    ],
+    [
+     14.46,
+     15.96
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     20.4,
+     14.04
+    ],
+    [
+     20.83,
+     14.04
+    ],
+    [
+     20.83,
+     16.29
+    ],
+    [
+     20.4,
+     16.29
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     11.6,
+     15.96
+    ],
+    [
+     14.88,
+     15.96
+    ],
+    [
+     14.88,
+     16.29
+    ],
+    [
+     11.6,
+     16.29
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     23.77,
+     14.04
+    ],
+    [
+     24.21,
+     14.04
+    ],
+    [
+     24.21,
+     27.54
+    ],
+    [
+     23.77,
+     27.54
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     26.81,
+     0.58
+    ],
+    [
+     27.25,
+     0.58
+    ],
+    [
+     27.25,
+     4.94
+    ],
+    [
+     26.81,
+     4.94
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     26.81,
+     4.94
+    ],
+    [
+     31.12,
+     4.94
+    ],
+    [
+     31.12,
+     5.35
+    ],
+    [
+     26.81,
+     5.35
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     27.15,
+     5.35
+    ],
+    [
+     27.58,
+     5.35
+    ],
+    [
+     27.58,
+     7.31
+    ],
+    [
+     27.15,
+     7.31
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     30.69,
+     3.29
+    ],
+    [
+     31.12,
+     3.29
+    ],
+    [
+     31.12,
+     11.57
+    ],
+    [
+     30.69,
+     11.57
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     30.69,
+     0.58
+    ],
+    [
+     31.12,
+     0.58
+    ],
+    [
+     31.12,
+     0.73
+    ],
+    [
+     30.69,
+     0.73
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     27.15,
+     11.79
+    ],
+    [
+     29.5,
+     11.79
+    ],
+    [
+     29.5,
+     12.23
+    ],
+    [
+     27.15,
+     12.23
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     27.15,
+     14.54
+    ],
+    [
+     29.5,
+     14.54
+    ],
+    [
+     29.5,
+     14.96
+    ],
+    [
+     27.15,
+     14.96
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     29.5,
+     11.57
+    ],
+    [
+     34.79,
+     11.57
+    ],
+    [
+     34.79,
+     13.9
+    ],
+    [
+     29.5,
+     13.9
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     29.5,
+     13.9
+    ],
+    [
+     30.3,
+     13.9
+    ],
+    [
+     30.3,
+     14.64
+    ],
+    [
+     29.5,
+     14.64
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     33.9,
+     13.9
+    ],
+    [
+     34.79,
+     13.9
+    ],
+    [
+     34.79,
+     14.64
+    ],
+    [
+     33.9,
+     14.64
+    ]
+   ],
+   "h": 7.583
+  },
+  {
+   "q": [
+    [
+     30.3,
+     13.9
+    ],
+    [
+     33.9,
+     13.9
+    ],
+    [
+     33.9,
+     14.64
+    ],
+    [
+     30.3,
+     14.64
+    ]
+   ],
+   "h": 7.583,
+   "y0": 3.85
+  },
+  {
+   "q": [
+    [
+     27.32,
+     -4.84
+    ],
+    [
+     27.82,
+     -4.84
+    ],
+    [
+     27.82,
+     -4.68
+    ],
+    [
+     27.32,
+     -4.68
+    ]
+   ],
+   "h": 6.75
+  },
+  {
+   "q": [
+    [
+     40.42,
+     -4.84
+    ],
+    [
+     40.92,
+     -4.84
+    ],
+    [
+     40.92,
+     -4.68
+    ],
+    [
+     40.42,
+     -4.68
+    ]
+   ],
+   "h": 6.75
+  }
+ ],
+ "openings": [
+  {
+   "axis": "x",
+   "at": 0.29,
+   "a": 2.1,
+   "b": 5.04,
+   "t": 0.6,
+   "kind": "W",
+   "sill": 1.67,
+   "head": 6.67,
+   "h": 7.583,
+   "tag": "new 36x60 egress window"
+  },
+  {
+   "axis": "x",
+   "at": 0.29,
+   "a": 6.77,
+   "b": 9.71,
+   "t": 0.6,
+   "kind": "W",
+   "sill": 1.67,
+   "head": 6.67,
+   "h": 7.583,
+   "tag": "new 36x60 window"
+  },
+  {
+   "axis": "x",
+   "at": 0.29,
+   "a": 17.19,
+   "b": 21.12,
+   "t": 0.6,
+   "kind": "W",
+   "sill": 5.83,
+   "head": 6.83,
+   "h": 7.583,
+   "tag": "new 48x12 shower window"
+  },
+  {
+   "axis": "x",
+   "at": 0.29,
+   "a": 23.06,
+   "b": 26.0,
+   "t": 0.6,
+   "kind": "W",
+   "sill": 3.5,
+   "head": 6.67,
+   "h": 7.583,
+   "tag": "existing bath window"
+  },
+  {
+   "axis": "x",
+   "at": 0.29,
+   "a": 28.73,
+   "b": 30.67,
+   "t": 0.6,
+   "kind": "W",
+   "sill": 3.0,
+   "head": 6.67,
+   "h": 7.583,
+   "tag": "existing pantry window"
+  },
+  {
+   "axis": "x",
+   "at": 0.29,
+   "a": 32.92,
+   "b": 37.85,
+   "t": 0.6,
+   "kind": "DG",
+   "door": 6.67,
+   "h": 7.583,
+   "tag": "existing sliding door to the landing"
+  },
+  {
+   "axis": "z",
+   "at": 0.3,
+   "a": 15.31,
+   "b": 21.27,
+   "t": 0.6,
+   "kind": "W",
+   "sill": 4.67,
+   "head": 6.67,
+   "h": 7.583,
+   "tag": "new 72x24 window"
+  },
+  {
+   "axis": "x",
+   "at": 22.82,
+   "a": 3.33,
+   "b": 8.27,
+   "t": 0.6,
+   "kind": "W",
+   "sill": 3.75,
+   "head": 6.67,
+   "h": 7.583,
+   "tag": "new 60x35 window"
+  },
+  {
+   "axis": "x",
+   "at": 27.82,
+   "a": 15.67,
+   "b": 19.6,
+   "t": 0.6,
+   "kind": "W",
+   "sill": 3.0,
+   "head": 6.67,
+   "h": 7.583,
+   "tag": "existing bedroom window"
+  },
+  {
+   "axis": "x",
+   "at": 27.82,
+   "a": 30.79,
+   "b": 36.73,
+   "t": 0.6,
+   "kind": "W",
+   "sill": 3.0,
+   "head": 6.67,
+   "h": 7.583,
+   "tag": "existing living room window"
+  },
+  {
+   "axis": "x",
+   "at": 27.82,
+   "a": 25.25,
+   "b": 28.19,
+   "t": 0.6,
+   "kind": "D",
+   "door": 6.67,
+   "h": 7.583,
+   "tag": "existing entry door",
+   "leaf": true
+  },
+  {
+   "axis": "z",
+   "at": 40.82,
+   "a": 5.46,
+   "b": 8.44,
+   "t": 0.6,
+   "kind": "W",
+   "sill": 3.5,
+   "head": 6.67,
+   "h": 7.583,
+   "tag": "existing kitchen window"
+  },
+  {
+   "axis": "z",
+   "at": 40.82,
+   "a": 15.83,
+   "b": 20.81,
+   "t": 0.6,
+   "kind": "W",
+   "sill": 3.0,
+   "head": 6.67,
+   "h": 7.583,
+   "tag": "existing living room window"
+  },
+  {
+   "axis": "z",
+   "at": 11.38,
+   "a": 3.33,
+   "b": 5.9,
+   "t": 0.45,
+   "kind": "D",
+   "door": 6.67,
+   "h": 7.583,
+   "tag": "new 30x80 pocket door, bedroom to bath"
+  },
+  {
+   "axis": "x",
+   "at": 6.72,
+   "a": 13.27,
+   "b": 15.79,
+   "t": 0.45,
+   "kind": "D",
+   "door": 6.67,
+   "h": 7.583,
+   "tag": "new 30x80 pocket door, bath to walk-in closet"
+  },
+  {
+   "axis": "x",
+   "at": 7.51,
+   "a": 22.31,
+   "b": 24.75,
+   "t": 0.45,
+   "kind": "D",
+   "door": 6.67,
+   "h": 7.583,
+   "tag": "existing bath door"
+  },
+  {
+   "axis": "x",
+   "at": 10.51,
+   "a": 8.48,
+   "b": 10.92,
+   "t": 0.45,
+   "kind": "D",
+   "door": 6.67,
+   "h": 7.583,
+   "tag": "new 30x80 bedroom door"
+  },
+  {
+   "axis": "x",
+   "at": 13.85,
+   "a": 1.19,
+   "b": 7.12,
+   "t": 0.45,
+   "kind": "O",
+   "door": 6.67,
+   "h": 7.583,
+   "tag": "new closet sliding doors"
+  },
+  {
+   "axis": "x",
+   "at": 13.85,
+   "a": 8.48,
+   "b": 10.92,
+   "t": 0.45,
+   "kind": "D",
+   "door": 6.67,
+   "h": 7.583,
+   "tag": "new 30x80 bedroom door"
+  },
+  {
+   "axis": "x",
+   "at": 13.85,
+   "a": 11.73,
+   "b": 14.33,
+   "t": 0.45,
+   "kind": "D",
+   "door": 6.67,
+   "h": 7.583,
+   "tag": "new 30x80 linen door"
+  },
+  {
+   "axis": "x",
+   "at": 13.85,
+   "a": 21.08,
+   "b": 23.52,
+   "t": 0.45,
+   "kind": "D",
+   "door": 6.67,
+   "h": 7.583,
+   "tag": "existing bedroom door"
+  },
+  {
+   "axis": "x",
+   "at": 16.12,
+   "a": 14.88,
+   "b": 20.4,
+   "t": 0.45,
+   "kind": "O",
+   "door": 6.67,
+   "h": 7.583,
+   "tag": "new closet sliding doors"
+  },
+  {
+   "axis": "z",
+   "at": 27.37,
+   "a": 7.71,
+   "b": 11.79,
+   "t": 0.45,
+   "kind": "O",
+   "door": 6.67,
+   "h": 7.583,
+   "tag": "existing laundry doors"
+  },
+  {
+   "axis": "z",
+   "at": 27.37,
+   "a": 12.23,
+   "b": 14.54,
+   "t": 0.45,
+   "kind": "D",
+   "door": 6.67,
+   "h": 7.583,
+   "tag": "existing closet door"
+  },
+  {
+   "axis": "z",
+   "at": 30.9,
+   "a": 0.73,
+   "b": 3.29,
+   "t": 0.45,
+   "kind": "D",
+   "door": 6.67,
+   "h": 7.583,
+   "tag": "existing pantry door"
+  }
+ ],
+ "rooms": [
+  {
+   "name": "New Bath",
+   "area": 70.8,
+   "ch": 7.583,
+   "poly": [
+    [
+     11.6,
+     0.58
+    ],
+    [
+     21.65,
+     0.58
+    ],
+    [
+     21.65,
+     10.31
+    ],
+    [
+     18.71,
+     10.31
+    ],
+    [
+     18.71,
+     6.52
+    ],
+    [
+     11.6,
+     6.52
+    ]
+   ],
+   "box": [
+    11.6,
+    0.58,
+    21.65,
+    10.31
+   ],
+   "label": [
+    16.5,
+    2.6
+   ],
+   "traced": 70.8,
+   "areaTraced": true,
+   "text": "New Bath 71 SF",
+   "minor": false
+  },
+  {
+   "name": "New WIC",
+   "area": 22.6,
+   "ch": 7.583,
+   "poly": [
+    [
+     11.6,
+     6.92
+    ],
+    [
+     18.27,
+     6.92
+    ],
+    [
+     18.27,
+     10.31
+    ],
+    [
+     11.6,
+     10.31
+    ]
+   ],
+   "box": [
+    11.6,
+    6.92,
+    18.27,
+    10.31
+   ],
+   "label": [
+    15.6,
+    8.3
+   ],
+   "traced": 22.6,
+   "areaTraced": true,
+   "text": "New WIC",
+   "minor": false
+  },
+  {
+   "name": "Bedroom",
+   "area": 113.6,
+   "ch": 7.583,
+   "poly": [
+    [
+     0.6,
+     0.58
+    ],
+    [
+     11.17,
+     0.58
+    ],
+    [
+     11.17,
+     11.33
+    ],
+    [
+     0.6,
+     11.33
+    ]
+   ],
+   "box": [
+    0.6,
+    0.58,
+    11.17,
+    11.33
+   ],
+   "label": [
+    4.4,
+    5.0
+   ],
+   "traced": 113.6,
+   "areaTraced": true,
+   "text": "Bedroom 114 SF",
+   "minor": false
+  },
+  {
+   "name": "Bath",
+   "area": 34.1,
+   "ch": 7.583,
+   "poly": [
+    [
+     22.08,
+     0.58
+    ],
+    [
+     27.15,
+     0.58
+    ],
+    [
+     27.15,
+     7.31
+    ],
+    [
+     22.08,
+     7.31
+    ]
+   ],
+   "box": [
+    22.08,
+    0.58,
+    27.15,
+    7.31
+   ],
+   "label": [
+    25.3,
+    6.3
+   ],
+   "traced": 34.1,
+   "areaTraced": true,
+   "text": "Bath",
+   "minor": false
+  },
+  {
+   "name": "Pantry",
+   "area": 15.0,
+   "ch": 7.583,
+   "poly": [
+    [
+     27.25,
+     0.58
+    ],
+    [
+     30.69,
+     0.58
+    ],
+    [
+     30.69,
+     4.94
+    ],
+    [
+     27.25,
+     4.94
+    ]
+   ],
+   "box": [
+    27.25,
+    0.58,
+    30.69,
+    4.94
+   ],
+   "label": [
+    29.0,
+    2.0
+   ],
+   "traced": 15.0,
+   "areaTraced": true,
+   "text": "Pantry",
+   "minor": false
+  },
+  {
+   "name": "Laundry",
+   "area": 20.0,
+   "ch": 7.583,
+   "poly": [
+    [
+     27.58,
+     5.35
+    ],
+    [
+     30.69,
+     5.35
+    ],
+    [
+     30.69,
+     11.79
+    ],
+    [
+     27.58,
+     11.79
+    ]
+   ],
+   "box": [
+    27.58,
+    5.35,
+    30.69,
+    11.79
+   ],
+   "label": [
+    29.1,
+    10.0
+   ],
+   "traced": 20.0,
+   "areaTraced": true,
+   "text": "Laundry",
+   "minor": false
+  },
+  {
+   "name": "Kitchen",
+   "area": 103.3,
+   "ch": 7.583,
+   "poly": [
+    [
+     31.12,
+     0.58
+    ],
+    [
+     40.52,
+     0.58
+    ],
+    [
+     40.52,
+     11.57
+    ],
+    [
+     31.12,
+     11.57
+    ]
+   ],
+   "box": [
+    31.12,
+    0.58,
+    40.52,
+    11.57
+   ],
+   "label": [
+    36.2,
+    5.8
+   ],
+   "traced": 103.3,
+   "areaTraced": true,
+   "text": "Kitchen 103 SF",
+   "minor": false
+  },
+  {
+   "name": "Hallway",
+   "area": 70.8,
+   "ch": 7.583,
+   "poly": [
+    [
+     8.23,
+     10.71
+    ],
+    [
+     22.08,
+     10.71
+    ],
+    [
+     22.08,
+     7.71
+    ],
+    [
+     27.15,
+     7.71
+    ],
+    [
+     27.15,
+     13.65
+    ],
+    [
+     8.23,
+     13.65
+    ]
+   ],
+   "box": [
+    8.23,
+    7.71,
+    27.15,
+    13.65
+   ],
+   "label": [
+    17.0,
+    11.75
+   ],
+   "traced": 70.8,
+   "areaTraced": true,
+   "text": "Hallway 71 SF",
+   "minor": false
+  },
+  {
+   "name": "New Closet",
+   "area": 13.5,
+   "ch": 7.583,
+   "poly": [
+    [
+     0.6,
+     11.77
+    ],
+    [
+     7.79,
+     11.77
+    ],
+    [
+     7.79,
+     13.65
+    ],
+    [
+     0.6,
+     13.65
+    ]
+   ],
+   "box": [
+    0.6,
+    11.77,
+    7.79,
+    13.65
+   ],
+   "label": [
+    4.0,
+    12.75
+   ],
+   "traced": 13.5,
+   "areaTraced": true,
+   "text": "New Closet",
+   "minor": false
+  },
+  {
+   "name": "Closet",
+   "area": 5.4,
+   "ch": 7.583,
+   "poly": [
+    [
+     27.15,
+     12.23
+    ],
+    [
+     29.5,
+     12.23
+    ],
+    [
+     29.5,
+     14.54
+    ],
+    [
+     27.15,
+     14.54
+    ]
+   ],
+   "box": [
+    27.15,
+    12.23,
+    29.5,
+    14.54
+   ],
+   "label": [
+    28.3,
+    13.75
+   ],
+   "traced": 5.4,
+   "areaTraced": true,
+   "text": "Closet",
+   "minor": false
+  },
+  {
+   "name": "Bedroom",
+   "area": 89.8,
+   "ch": 7.583,
+   "poly": [
+    [
+     0.6,
+     14.04
+    ],
+    [
+     11.17,
+     14.04
+    ],
+    [
+     11.17,
+     22.54
+    ],
+    [
+     0.6,
+     22.54
+    ]
+   ],
+   "box": [
+    0.6,
+    14.04,
+    11.17,
+    22.54
+   ],
+   "label": [
+    5.9,
+    18.2
+   ],
+   "traced": 89.8,
+   "areaTraced": true,
+   "text": "Bedroom 90 SF",
+   "minor": false
+  },
+  {
+   "name": "New Linen",
+   "area": 5.5,
+   "ch": 7.583,
+   "poly": [
+    [
+     11.6,
+     14.04
+    ],
+    [
+     14.46,
+     14.04
+    ],
+    [
+     14.46,
+     15.96
+    ],
+    [
+     11.6,
+     15.96
+    ]
+   ],
+   "box": [
+    11.6,
+    14.04,
+    14.46,
+    15.96
+   ],
+   "label": [
+    13.3,
+    15.25
+   ],
+   "traced": 5.5,
+   "areaTraced": true,
+   "text": "Linen",
+   "minor": false
+  },
+  {
+   "name": "New Closet",
+   "area": 10.6,
+   "ch": 7.583,
+   "poly": [
+    [
+     14.88,
+     14.04
+    ],
+    [
+     20.4,
+     14.04
+    ],
+    [
+     20.4,
+     15.96
+    ],
+    [
+     14.88,
+     15.96
+    ]
+   ],
+   "box": [
+    14.88,
+    14.04,
+    20.4,
+    15.96
+   ],
+   "label": [
+    19.0,
+    15.0
+   ],
+   "traced": 10.6,
+   "areaTraced": true,
+   "text": "Closet",
+   "minor": false
+  },
+  {
+   "name": "Bedroom",
+   "area": 143.5,
+   "ch": 7.583,
+   "poly": [
+    [
+     11.6,
+     16.29
+    ],
+    [
+     20.83,
+     16.29
+    ],
+    [
+     20.83,
+     14.04
+    ],
+    [
+     23.77,
+     14.04
+    ],
+    [
+     23.77,
+     27.54
+    ],
+    [
+     11.6,
+     27.54
+    ]
+   ],
+   "box": [
+    11.6,
+    14.04,
+    23.77,
+    27.54
+   ],
+   "label": [
+    15.5,
+    21.5
+   ],
+   "traced": 143.5,
+   "areaTraced": true,
+   "text": "Bedroom 144 SF",
+   "minor": false
+  },
+  {
+   "name": "Living",
+   "area": 230.1,
+   "ch": 7.583,
+   "poly": [
+    [
+     24.21,
+     13.65
+    ],
+    [
+     27.15,
+     13.65
+    ],
+    [
+     27.15,
+     14.96
+    ],
+    [
+     29.5,
+     14.96
+    ],
+    [
+     29.5,
+     14.64
+    ],
+    [
+     34.79,
+     14.64
+    ],
+    [
+     34.79,
+     11.57
+    ],
+    [
+     40.52,
+     11.57
+    ],
+    [
+     40.52,
+     27.54
+    ],
+    [
+     24.21,
+     27.54
+    ]
+   ],
+   "box": [
+    24.21,
+    11.57,
+    40.52,
+    27.54
+   ],
+   "label": [
+    32.0,
+    21.0
+   ],
+   "traced": 230.1,
+   "areaTraced": true,
+   "text": "Living 230 SF",
+   "minor": false
+  }
+ ],
+ "pads": [
+  {
+   "name": "Landing",
+   "poly": [
+    [
+     32.92,
+     -3.0
+    ],
+    [
+     37.85,
+     -3.0
+    ],
+    [
+     37.85,
+     0
+    ],
+    [
+     32.92,
+     0
+    ]
+   ],
+   "kind": "porch",
+   "y1": 0.65
+  },
+  {
+   "name": "Concrete pad",
+   "poly": [
+    [
+     27.0,
+     -9.0
+    ],
+    [
+     41.2,
+     -9.0
+    ],
+    [
+     41.2,
+     0
+    ],
+    [
+     27.0,
+     0
+    ]
+   ],
+   "kind": "drive"
+  },
+  {
+   "name": "Heat pump outdoor unit",
+   "poly": [
+    [
+     -1.87,
+     0.54
+    ],
+    [
+     -0.21,
+     0.54
+    ],
+    [
+     -0.21,
+     2.8
+    ],
+    [
+     -1.87,
+     2.8
+    ]
+   ],
+   "kind": "unit",
+   "y1": 3.0
+  }
+ ],
+ "fixtures": [
+  {
+   "kind": "bed",
+   "room": "Bedroom",
+   "r": [
+    0.74,
+    3.13,
+    7.7,
+    8.13
+   ],
+   "h": 2.0
+  },
+  {
+   "kind": "bed",
+   "room": "Bedroom",
+   "r": [
+    0.63,
+    15.9,
+    7.6,
+    20.9
+   ],
+   "h": 2.0
+  },
+  {
+   "kind": "bed",
+   "room": "Bedroom",
+   "r": [
+    16.8,
+    18.9,
+    23.6,
+    25.4
+   ],
+   "h": 2.0
+  },
+  {
+   "kind": "vanity",
+   "room": "New Bath",
+   "r": [
+    12.04,
+    0.58,
+    17.04,
+    2.3
+   ],
+   "h": 3.33
+  },
+  {
+   "kind": "shower",
+   "room": "New Bath",
+   "r": [
+    17.0,
+    0.58,
+    21.65,
+    3.58
+   ],
+   "h": 0.3
+  },
+  {
+   "kind": "toilet",
+   "room": "New Bath",
+   "r": [
+    19.4,
+    8.6,
+    20.8,
+    10.31
+   ],
+   "h": 1.4
+  },
+  {
+   "kind": "tub",
+   "room": "Bath",
+   "r": [
+    22.17,
+    0.74,
+    26.63,
+    3.13
+   ],
+   "h": 1.5
+  },
+  {
+   "kind": "toilet",
+   "room": "Bath",
+   "r": [
+    24.2,
+    3.7,
+    26.1,
+    5.0
+   ],
+   "h": 1.4
+  },
+  {
+   "kind": "vanity",
+   "room": "Bath",
+   "r": [
+    25.3,
+    5.35,
+    27.15,
+    7.31
+   ],
+   "h": 2.9
+  },
+  {
+   "kind": "counter",
+   "room": "Kitchen",
+   "r": [
+    31.12,
+    5.35,
+    33.1,
+    11.57
+   ],
+   "h": 3.0
+  },
+  {
+   "kind": "counter",
+   "room": "Kitchen",
+   "r": [
+    33.1,
+    9.6,
+    34.79,
+    11.57
+   ],
+   "h": 3.0
+  },
+  {
+   "kind": "range",
+   "room": "Kitchen",
+   "r": [
+    31.12,
+    5.4,
+    33.1,
+    7.8
+   ],
+   "h": 3.05
+  },
+  {
+   "kind": "fridge",
+   "room": "Kitchen",
+   "r": [
+    38.2,
+    0.9,
+    40.0,
+    3.3
+   ],
+   "h": 6.0
+  },
+  {
+   "kind": "counter",
+   "room": "Kitchen",
+   "r": [
+    38.2,
+    3.3,
+    40.52,
+    8.6
+   ],
+   "h": 3.0
+  },
+  {
+   "kind": "counter",
+   "room": "Kitchen",
+   "r": [
+    38.93,
+    8.6,
+    40.52,
+    14.64
+   ],
+   "h": 7.0
+  },
+  {
+   "kind": "washer",
+   "room": "Laundry",
+   "r": [
+    27.8,
+    9.3,
+    30.3,
+    11.5
+   ],
+   "h": 3.0
+  },
+  {
+   "kind": "counter",
+   "room": "Laundry",
+   "r": [
+    28.9,
+    7.8,
+    30.69,
+    9.0
+   ],
+   "h": 3.0
+  },
+  {
+   "kind": "mech",
+   "room": "Laundry",
+   "r": [
+    27.6,
+    5.5,
+    28.9,
+    6.4
+   ],
+   "h": 5.0
+  }
+ ],
+ "fieldRoof": {
+  "assumed": true,
+  "pitch": 6,
+  "overhang": 1.5,
+  "fascia": 0.6,
+  "note": "Hipped roof over the whole house, following the approximate roof layout on the framing plan. Pitch and overhang are not printed: assumed 6 in 12 (as detail 8 on S3.0 draws the existing rafters) with 18 inch overhangs.",
+  "zones": [
+   {
+    "name": "House",
+    "plate": 7.583,
+    "rects": [
+     [
+      0,
+      0,
+      11.6,
+      23.1
+     ],
+     [
+      11.0,
+      0,
+      41.12,
+      28.1
+     ]
+    ]
+   }
+  ]
+ },
+ "stages": [
+  {
+   "id": "house",
+   "progress": 0.04,
+   "end": 0.16,
+   "noun": "house",
+   "label": "House",
+   "line": "The finished house: a one-story, three-bedroom house under a hipped roof. The remodel works inside the existing walls. Choose Explore to turn the model or go to a room."
+  },
+  {
+   "id": "front",
+   "progress": 0.22,
+   "end": 0.32,
+   "noun": "entry side",
+   "label": "Entry side",
+   "line": "The entry side: the front door into the living room, with bedroom and living room windows on either side."
+  },
+  {
+   "id": "roof",
+   "progress": 0.38,
+   "end": 0.48,
+   "noun": "roof",
+   "label": "Roof",
+   "line": "The roof lifts away: one hipped roof over the whole house. The remodel keeps it and adds no roof bearing on the walls that come out."
+  },
+  {
+   "id": "upper",
+   "progress": 0.56,
+   "end": 0.66,
+   "noun": "floor plan",
+   "label": "Floor plan",
+   "line": "The remodeled floor plan: a new bath, walk-in closet and closets carved from the bedroom wing, with the kitchen, laundry and living room kept as they are."
+  },
+  {
+   "id": "plan",
+   "progress": 0.74,
+   "end": 0.84,
+   "noun": "rooms",
+   "label": "Rooms",
+   "line": "The plan cut flat with every room named. New rooms are marked New; the areas are traced inside the wall faces."
+  },
+  {
+   "id": "foundation",
+   "progress": 0.93,
+   "end": 2,
+   "noun": "floor",
+   "label": "Floor",
+   "line": "The main floor deck over the crawl space, with the landing and concrete pad outside the kitchen."
+  }
+ ],
+ "heading": {
+  "axon": 36,
+  "front": 0,
+  "plan": 0
+ },
+ "frontAngle": 54,
+ "render": {
+  "antialias": true,
+  "fullPixelRatio": true
+ },
+ "assume": {
+  "door": 6.67,
+  "head": 6.67,
+  "sill": 3.0,
+  "garageDoor": 7.0
+ },
+ "dims": [
+  {
+   "text": "10'-2\"",
+   "at": [
+    16.4,
+    -2.0
+   ]
+  },
+  {
+   "text": "12'-3\"",
+   "at": [
+    17.7,
+    29.6
+   ]
+  },
+  {
+   "text": "10'-7 1/2\"",
+   "at": [
+    5.9,
+    24.6
+   ]
+  }
+ ],
+ "sheetLabel": "Static plan of a three-bedroom house interior remodel.",
+ "bounds": {
+  "min": [
+   -8.0,
+   -0.5,
+   -11.0
+  ],
+  "max": [
+   49.0,
+   16.858,
+   36.0
+  ]
+ },
+ "planBounds": {
+  "min": [
+   -4,
+   -10
+  ],
+  "max": [
+   45,
+   31
+  ]
+ },
+ "assumptions": [
+  "Room areas are not printed on the plan; the labels show areas traced inside the wall faces, and the smallest rooms show their names only.",
+  "Wall and ceiling height: 7 feet 7 inches (91 inches), as printed on the new bath interior elevation; the same height is assumed in every room.",
+  "Roof: the framing plan draws an approximate hipped roof layout over the whole house. Pitch and overhang are not printed: assumed 6 in 12, as detail 8 on the framing sheets draws the existing rafters, with 18 inch overhangs.",
+  "The floor is drawn 1 foot 3 inches above grade over a crawl space; the floor-to-grade height is not printed, and entry steps are not drawn.",
+  "New window sizes are printed on the plan (width by height); their heads are set at 6 feet 8 inches, except the 48 by 12 inch shower window, whose head (6 feet 10 inches) is scaled from the bath elevation.",
+  "Existing window and door sizes are not printed: sills at 3 feet and heads at 6 feet 8 inches are assumed.",
+  "The existing fireplace is drawn as a solid mass with its opening toward the living room; its chimney is not drawn on the plans and is not modeled.",
+  "Two existing metal posts are marked on the concrete pad outside the kitchen. Their height is not printed (drawn 8 feet), and whatever they carry is not drawn, so nothing is modeled on top of them.",
+  "The heat pump outdoor unit beside the front bedroom is drawn as a 3 foot tall box over the dashed outline on the plan; its height is not printed.",
+  "Kitchen, laundry and bath fixtures are placed from the plan symbols; their heights are assumed."
+ ]
+}
