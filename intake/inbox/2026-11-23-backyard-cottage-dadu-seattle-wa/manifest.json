@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-11-23-backyard-cottage-dadu-seattle-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-11-23T12:05:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Backyard Cottage (DADU) Seattle WA \u2014 SDCI Permits, Size Limits, Utility Connections and Building It Right",
+    "date": "2026-11-23",
+    "slug": "backyard-cottage-dadu-seattle-wa",
+    "description": "A Seattle backyard cottage (DADU) guide: the SDCI building permit, the city's size, height and setback rules, City Light service, SPU side sewer, electrical permits, energy code and hiring.",
+    "category": "Additions"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 board-intake inbox had no 2026-11-23 packets (latest openclaw-seo-2026-11-22); PC not touched. Topic: backyard cottage / detached ADU (DADU) in Seattle WA. Sources read 2026-11-23: SDCI Accessory Dwelling Unit page (ADU/DADU definitions, only two ADUs, parking/street improvements/MHA do not apply, must meet current codes, King County capacity charge form, City Light service, ADUniverse, tiny houses on wheels); SDCI construction addition/alteration permit page; SDCI Tip 101 (updated 2026-06-30: DADUs always require plan review, not STFI; initial review estimate 4 weeks for new DADU, can double); SDCI Tip 116B (updated 2023-08-18: process steps, escape windows, separate heating controls, capacity charge billing, flagged as older than the amended code); SMC 23.42.022 as amended and effective 2025-06-30 (Ordinances 127211, 127219) via SDCI/OPCD One Seattle Plan chapter 23.44 PDF (1,000 sq ft GFA with exclusions, two ADUs, NR height = principal, no alley setback, 5 ft rear setback otherwise, 5 ft eave-to-eave separation, no parking, conversion of structures existing before 2023-07-23); Seattle Services Portal standard-plan help article (NR1-NR3, no ECA, under 750 sq ft ground disturbance); Seattle City Light new/upgraded service and capacity/load pages; SDCI electrical permit page, Seattle Electrical Code quick reference (separate permit per structure), electrical inspections page (cover/service/final, trenches); L&I city electrical list includes Seattle; SPU side sewer permits page and Director's Rule 4-2011 section M.5 (DADU may use existing side sewer with indemnification); SDCI Energy Code page (2021 Seattle Energy Code). L&I Verify + hiring a contractor. Seattle already in _SLUG_PLACES/_PLACE_NAMES; generate_site.py unchanged; seattle.html unchanged. Cross-links: ADU Bellevue 2026-10-09, ADU planning Edmonds 2026-09-07, Seattle bathroom permits 2026-09-06, earthquake retrofit Seattle 2026-10-11, garage conversion Everett 2026-10-24, shed/home office Sammamish 2026-11-02, heat pump Bothell 2026-10-18, panel upgrade Federal Way 2026-10-20. No fee or price figures. Producer role fields kept per intake contract."
+}

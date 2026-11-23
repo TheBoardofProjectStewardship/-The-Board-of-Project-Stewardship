@@ -1,0 +1,57 @@
+{
+  "producer": "openclaw",
+  "agent": "seo-specialist",
+  "slug": "backyard-cottage-dadu-seattle-wa",
+  "title": "Backyard Cottage (DADU) Seattle WA \u2014 SDCI Permits, Size Limits, Utility Connections and Building It Right",
+  "description": "A Seattle backyard cottage (DADU) guide: the SDCI building permit, the city's size, height and setback rules, City Light service, SPU side sewer, electrical permits, energy code and hiring.",
+  "category": "Guides",
+  "keywords": [
+    "backyard cottage Seattle",
+    "DADU Seattle WA",
+    "Seattle SDCI DADU permit",
+    "Seattle City Light new service",
+    "SPU side sewer permit"
+  ],
+  "outline": [
+    "Key Takeaways",
+    "Why Seattle homeowners build backyard cottages",
+    "What the City says you need to build one",
+    "Size, height and setbacks under SMC 23.42.022",
+    "Pre-approved plans and the ADUniverse",
+    "Utilities: where most DADU schedules slip",
+    "Building it right: framing, envelope and heating",
+    "Materials Worth Knowing",
+    "Questions to ask before you sign",
+    "Related Board of Project Stewardship guides",
+    "Where Pacific Pro Group fits",
+    "Next steps for a Seattle backyard cottage"
+  ],
+  "search_intent": "A Seattle homeowner considering a backyard cottage wants to know the SDCI permit path, the current size, height and setback rules, whether pre-approved plans qualify, how City Light, SPU and the electrical permit fit in, the King County capacity charge, energy code basics, and how to hire a registered contractor.",
+  "local_angles": [
+    "SDCI issues the building and electrical permits (L&I does not issue electrical permits in Seattle)",
+    "SMC 23.42.022 as amended effective June 30, 2025",
+    "ADUniverse pre-approved DADU plans (NR zones, no critical areas, under 750 sq ft ground disturbance)",
+    "Seattle City Light service application and load study",
+    "SPU side sewer permit and Director's Rule 4-2011 existing side sewer reuse",
+    "King County sewer capacity charge",
+    "Alley lots: no setback from alley lot line"
+  ],
+  "internal_links": [
+    "../seattle.html",
+    "../adu.html",
+    "../adu-checklist.html",
+    "../adu-cost-factors.html",
+    "../framing.html",
+    "../concrete.html",
+    "../excavation.html",
+    "../insulation.html",
+    "../verify-contractor.html",
+    "../bonds-and-insurance.html",
+    "../red-flags-hiring.html"
+  ],
+  "notes": "Box-authored fallback brief. PPG only as Board #1 -> https://pacificprogroup.com/.",
+  "generation": {
+    "agent": "box-authored",
+    "mode": "box-fallback"
+  }
+}
