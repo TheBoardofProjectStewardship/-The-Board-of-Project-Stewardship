@@ -22,6 +22,8 @@ Whether you are near downtown Kenmore, the Burke-Gilman Trail corridor, Lakepoin
 
 HOA or neighborhood design expectations can affect exterior hood terminations, window changes over a sink, and dumpster placement even when the kitchen itself is interior-only. Put those constraints in the proposal so they are not discovered after rough-in is underway. Cross-check [plumber.html](../plumber.html) and [electrician.html](../electrician.html) when fixture moves and circuit work share the same critical path, and [trades.html](../trades.html) when multiple specialties share one window.
 
+![Split-level home among evergreen trees on a residential street in Kenmore, Washington, a common kitchen remodel candidate](../assets/images/posts/2026-09-26-kenmore-kitchen-split-level-6.webp "Many Kenmore split-levels and ramblers still have their original closed-in kitchens.")
+
 ## Climate, moisture-smart specs, and permits
 
 Western Washington’s cool, damp seasons punish weak ventilation and cold-wall detailing. Prefer a quiet, adequately sized range hood that ducts outdoors — not a recirculating unit that leaves grease and moisture in the room. Detail continuous exterior-wall assemblies where cabinets land on cold walls, keep correct slope at wet zones near sinks and dishwashers, and treat backsplash and sink cutouts as moisture assemblies, not afterthoughts. Fancy finishes cannot compensate for a hood that dumps into an attic or a dishwasher drain that backs up under a new island.
@@ -45,6 +47,8 @@ A clear public walkthrough of planning a kitchen layout cabinet-by-cabinet, plac
 
 https://www.youtube.com/watch?v=Jp29ucu6zZQ
 
+![Range hood duct run to an exterior wall cap during a kitchen remodel in Kenmore, Washington](../assets/images/posts/2026-09-26-kenmore-kitchen-hood-duct-7.webp "A Kenmore kitchen range hood ducted straight outside to move cooking moisture out of the house.")
+
 ## Design-build sequencing and trade coordination
 
 Measure appliance depths, island overhangs, and glass or window openings honestly before you lock a catalog number. Countertop template lead times can dominate the end of the schedule — template only after cabinets are set and true. Coordinate plumber and electrician so one trade’s fastener line does not puncture a cold wall the next trade just insulated. Keep hood duct routing visible on the plan so it is not improvised through joist bays after cabinets are ordered. If accessibility or aging-in-place is a goal, plan wider aisles, lever hardware, and parallel work zones during layout, when changes are cheap.
@@ -64,6 +68,8 @@ Manufacturer product pages for fixtures, surfaces, and appliances when you compa
 - [Delta Faucet](https://www.deltafaucet.com/) — kitchen faucet and related fixture systems commonly compared when sink and prep zones are redesigned
 - [Caesarstone](https://www.caesarstoneus.com/) — quartz surface options frequently discussed for islands, perimeter tops, and wet-zone durability in daily-use kitchens
 - [Bosch Home Appliances](https://www.bosch-home.com/us/) — cooking, dishwashing, and related appliance lines often specified when panel capacity, clearances, and ventilation must match the layout
+
+![Quartz countertop sample, cabinet door and backsplash tile laid out for a kitchen remodel in Kenmore, Washington](../assets/images/posts/2026-09-26-kenmore-kitchen-materials-8.webp "Counter, cabinet and backsplash samples compared side by side before a Kenmore kitchen order.")
 
 ## FAQ
 
@@ -95,3 +101,5 @@ When you interview firms, ask them to walk a recent north King County kitchen ch
 Use the Board directories as a starting shortlist — especially [kitchen](../kitchen.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden rough-in before cabinets close. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
+
+![Finished open kitchen remodel with an island and wood floors in a Kenmore, Washington home](../assets/images/posts/2026-09-26-kenmore-kitchen-finished-9.webp "A finished kitchen remodel in a Kenmore home after permits and inspections were closed out.")
