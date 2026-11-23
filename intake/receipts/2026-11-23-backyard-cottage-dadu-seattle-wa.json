@@ -1,0 +1,25 @@
+{
+  "submission_id": "2026-11-23-backyard-cottage-dadu-seattle-wa",
+  "idempotency_key": "sha256:fbe8a6eb2755607cbf38a4b686acfb3eb23e5e50a636caa377e3de7f9e50f3c1",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-11-23T11:44:10Z",
+  "outputs": [
+    "assets/images/posts/2026-11-23-seattle-dadu-1.webp",
+    "assets/images/posts/2026-11-23-seattle-dadu-2.webp",
+    "assets/images/posts/2026-11-23-seattle-dadu-3.webp",
+    "assets/images/posts/2026-11-23-seattle-dadu-4.webp",
+    "assets/images/posts/2026-11-23-seattle-dadu-5.webp",
+    "assets/images/posts/2026-11-23-seattle-dadu-6.webp",
+    "assets/images/posts/2026-11-23-seattle-dadu-7.webp",
+    "assets/images/posts/2026-11-23-seattle-dadu-8.webp",
+    "assets/images/posts/2026-11-23-seattle-dadu-9.webp",
+    "posts/2026-11-23-backyard-cottage-dadu-seattle-wa.md",
+    "posts/2026-11-23-backyard-cottage-dadu-seattle-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 111
+}

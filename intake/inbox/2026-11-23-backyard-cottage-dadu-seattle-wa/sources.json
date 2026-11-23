@@ -1,0 +1,207 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Seattle",
+    "service": "Backyard cottage (DADU): SDCI building permit, SMC 23.42.022 size/height/setbacks, pre-approved plans, City Light service, SPU side sewer, SDCI electrical permit, King County capacity charge, energy code",
+    "slug": "backyard-cottage-dadu-seattle-wa"
+  },
+  "sources": [
+    {
+      "url": "https://aduniverse-seattlecitygis.hub.arcgis.com/",
+      "title": "https://aduniverse-seattlecitygis.hub.arcgis.com/",
+      "retrieved": "2026-11-23",
+      "http_status": 200,
+      "supports": "ADUniverse"
+    },
+    {
+      "url": "https://kingcounty.gov/en/dept/dnrp/waste-services/wastewater-treatment/sewer-system-services/capacity-charge",
+      "title": "https://kingcounty.gov/en/dept/dnrp/waste-services/wastewater-treatment/sewer-system-services/capacity-charge",
+      "retrieved": "2026-11-23",
+      "http_status": 200,
+      "supports": "King County capacity charge"
+    },
+    {
+      "url": "https://pacificprogroup.com/](https://pacificprogroup.com/",
+      "title": "https://pacificprogroup.com/](https://pacificprogroup.com/",
+      "retrieved": "2026-11-23",
+      "http_status": 200,
+      "supports": "Material maker"
+    },
+    {
+      "url": "https://seattlegov.zendesk.com/hc/en-us/articles/360055659813-How-To-Apply-for-a-Detached-Accessory-Dwelling-Unit-Using-a-Pre-Approved-Standard-Plan",
+      "title": "https://seattlegov.zendesk.com/hc/en-us/articles/360055659813-How-To-Apply-for-a-Detached-Accessory-Dwelling-Unit-Using-a-Pre-Approved-Standard-Plan",
+      "retrieved": "2026-11-23",
+      "http_status": 200,
+      "supports": "Seattle Services Portal standard plan help article"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-11-23",
+      "http_status": 200,
+      "supports": "License/bond/insurance lookup"
+    },
+    {
+      "url": "https://services.seattle.gov/Portal/Customization/SEATTLE/welcome.aspx",
+      "title": "https://services.seattle.gov/Portal/Customization/SEATTLE/welcome.aspx",
+      "retrieved": "2026-11-23",
+      "http_status": 200,
+      "supports": "Seattle Services Portal"
+    },
+    {
+      "url": "https://www.cerrowire.com/",
+      "title": "https://www.cerrowire.com/",
+      "retrieved": "2026-11-23",
+      "http_status": 200,
+      "supports": "Material maker"
+    },
+    {
+      "url": "https://www.knaufinsulation.com/",
+      "title": "https://www.knaufinsulation.com/",
+      "retrieved": "2026-11-23",
+      "http_status": 200,
+      "supports": "Material maker"
+    },
+    {
+      "url": "https://www.lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "https://www.lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "retrieved": "2026-11-23",
+      "http_status": 200,
+      "supports": "State hiring guidance"
+    },
+    {
+      "url": "https://www.lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "title": "https://www.lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "retrieved": "2026-11-23",
+      "http_status": 200,
+      "supports": "SDCI electrical permit"
+    },
+    {
+      "url": "https://www.rinnai.us/",
+      "title": "https://www.rinnai.us/",
+      "retrieved": "2026-11-23",
+      "http_status": 200,
+      "supports": "Material maker"
+    },
+    {
+      "url": "https://www.se.com/us/en/brands/squared/",
+      "title": "https://www.se.com/us/en/brands/squared/",
+      "retrieved": "2026-11-23",
+      "http_status": 200,
+      "supports": "Material maker"
+    },
+    {
+      "url": "https://www.seattle.gov/DPD/Publications/CAM/cam101.pdf",
+      "title": "https://www.seattle.gov/DPD/Publications/CAM/cam101.pdf",
+      "retrieved": "2026-11-23",
+      "http_status": 200,
+      "supports": "SDCI Tip 101: DADU plan review, not STFI, review estimate"
+    },
+    {
+      "url": "https://www.seattle.gov/DPD/Publications/CAM/cam116b.pdf",
+      "title": "https://www.seattle.gov/DPD/Publications/CAM/cam116b.pdf",
+      "retrieved": "2026-11-23",
+      "http_status": 200,
+      "supports": "SDCI Tip 116B (Aug 2023): DADU process and requirements"
+    },
+    {
+      "url": "https://www.seattle.gov/a/163321",
+      "title": "https://www.seattle.gov/a/163321",
+      "retrieved": "2026-11-23",
+      "http_status": 200,
+      "supports": "Seattle Electrical Code quick reference"
+    },
+    {
+      "url": "https://www.seattle.gov/city-light/construction-services/apply-for-new-or-upgraded-service",
+      "title": "https://www.seattle.gov/city-light/construction-services/apply-for-new-or-upgraded-service",
+      "retrieved": "2026-11-23",
+      "http_status": 200,
+      "supports": "Seattle City Light service application / capacity"
+    },
+    {
+      "url": "https://www.seattle.gov/city-light/construction-services/apply-for-new-or-upgraded-service/capacity-load-and-service-questions",
+      "title": "https://www.seattle.gov/city-light/construction-services/apply-for-new-or-upgraded-service/capacity-load-and-service-questions",
+      "retrieved": "2026-11-23",
+      "http_status": 200,
+      "supports": "Seattle City Light service application / capacity"
+    },
+    {
+      "url": "https://www.seattle.gov/construction-and-inspections/codes/codes-we-enforce-%28a-z%29/energy-code",
+      "title": "https://www.seattle.gov/construction-and-inspections/codes/codes-we-enforce-%28a-z%29/energy-code",
+      "retrieved": "2026-11-23",
+      "http_status": 200,
+      "supports": "Seattle Energy Code page"
+    },
+    {
+      "url": "https://www.seattle.gov/construction-and-inspections/inspections/electrical-inspections",
+      "title": "https://www.seattle.gov/construction-and-inspections/inspections/electrical-inspections",
+      "retrieved": "2026-11-23",
+      "http_status": 200,
+      "supports": "SDCI electrical inspections"
+    },
+    {
+      "url": "https://www.seattle.gov/construction-and-inspections/permits/common-projects/accessory-dwelling-units",
+      "title": "https://www.seattle.gov/construction-and-inspections/permits/common-projects/accessory-dwelling-units",
+      "retrieved": "2026-11-23",
+      "http_status": 200,
+      "supports": "SDCI ADU page"
+    },
+    {
+      "url": "https://www.seattle.gov/construction-and-inspections/permits/permits-we-issue-%28a-z%29/construction-permit---addition-or-alteration",
+      "title": "https://www.seattle.gov/construction-and-inspections/permits/permits-we-issue-%28a-z%29/construction-permit---addition-or-alteration",
+      "retrieved": "2026-11-23",
+      "http_status": 200,
+      "supports": "SDCI construction addition/alteration permit"
+    },
+    {
+      "url": "https://www.seattle.gov/construction-and-inspections/permits/permits-we-issue-%28a-z%29/electrical-permit",
+      "title": "https://www.seattle.gov/construction-and-inspections/permits/permits-we-issue-%28a-z%29/electrical-permit",
+      "retrieved": "2026-11-23",
+      "http_status": 200,
+      "supports": "SDCI electrical permit"
+    },
+    {
+      "url": "https://www.seattle.gov/documents/Departments/OPCD/SeattlePlan/OneSeattlePlanChapter23.44-Amended.pdf",
+      "title": "https://www.seattle.gov/documents/Departments/OPCD/SeattlePlan/OneSeattlePlanChapter23.44-Amended.pdf",
+      "retrieved": "2026-11-23",
+      "http_status": 200,
+      "supports": "SMC 23.42.022 as amended effective 2025-06-30"
+    },
+    {
+      "url": "https://www.seattle.gov/dpd/codes/dr/DR2011-4.pdf",
+      "title": "https://www.seattle.gov/dpd/codes/dr/DR2011-4.pdf",
+      "retrieved": "2026-11-23",
+      "http_status": 200,
+      "supports": "Director's Rule 4-2011 side sewers"
+    },
+    {
+      "url": "https://www.seattle.gov/utilities/construction-resources/sewer-and-drainage/side-sewer-permits",
+      "title": "https://www.seattle.gov/utilities/construction-resources/sewer-and-drainage/side-sewer-permits",
+      "retrieved": "2026-11-23",
+      "http_status": 200,
+      "supports": "SPU side sewer permits"
+    },
+    {
+      "url": "https://www.soprema.us/",
+      "title": "https://www.soprema.us/",
+      "retrieved": "2026-11-23",
+      "http_status": 200,
+      "supports": "Material maker"
+    }
+  ],
+  "dropped": [
+    {
+      "url": "https://www.seattle.gov/sdci/permits/common-projects/backyard-cottages",
+      "reason": "404"
+    },
+    {
+      "url": "https://www.seattle.gov/utilities/your-services/sewer",
+      "reason": "404"
+    },
+    {
+      "url": "https://sclesr.seattle.gov/sclesrintake/",
+      "reason": "no response to box curl"
+    }
+  ],
+  "notes": "Box curl 2026-11-23 with browser UA. All cited = 200 (see cited-status.txt). PDFs read via pdftotext. No fee or price figures quoted."
+}
