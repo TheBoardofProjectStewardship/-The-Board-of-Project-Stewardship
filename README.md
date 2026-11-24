@@ -54,6 +54,7 @@ Base: `https://boardofprojectstewardship.com/`
 | `blog/rss.xml` | Blog RSS feed |
 | `news/rss.xml` | News RSS feed |
 | `404.html` | Branded Board 404 |
+| `posts/2026-11-24-detached-garage-marysville-wa.html` | Detached Garage Marysville WA — Permits, Setbacks, Foundations, Power and Building It Right |
 | `posts/2026-11-23-backyard-cottage-dadu-seattle-wa.html` | Backyard Cottage (DADU) Seattle WA — SDCI Permits, Size Limits, Utility Connections and Building It Right |
 | `posts/2026-11-22-kitchen-remodel-sammamish-wa.html` | Kitchen Remodel Sammamish WA — Permits, City Electrical, Range Hood Ventilation and Water District Checks |
 | `posts/2026-11-21-sunroom-addition-mercer-island-wa.html` | Sunroom Addition Mercer Island WA — Permits, Energy Code Glazing, Foundations and Lot Coverage |

@@ -1,0 +1,92 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-11-24-marysville-garage-1.webp",
+      "repo_path": "assets/images/posts/2026-11-24-marysville-garage-1.webp",
+      "alt": "Marysville, WA detached garage finished: a two-car garage with gray siding and white trim standing beside the house, with a concrete driveway in front \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "a9227a3a348662c2ea3cb14c71eb9983",
+      "source": "Newly generated image (built-in image generator, 2026-11-24), source gen-1.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-24-marysville-garage-2.webp",
+      "repo_path": "assets/images/posts/2026-11-24-marysville-garage-2.webp",
+      "alt": "Marysville, WA detached garage planning: a site plan, tape measure and notes on a table, used to check setbacks and the garage footprint before applying \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "89961ab64d0a1d397126b4904b658f6f",
+      "source": "Newly generated image (built-in image generator, 2026-11-24), source gen-2.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-24-marysville-garage-3.webp",
+      "repo_path": "assets/images/posts/2026-11-24-marysville-garage-3.webp",
+      "alt": "Marysville, WA detached garage foundation: wood slab forms and a rebar grid set on gravel before the concrete pour \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "15ab1734e9445915e07e87a2cbfb2bc4",
+      "source": "Newly generated image (built-in image generator, 2026-11-24), source gen-3.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-24-marysville-garage-4.webp",
+      "repo_path": "assets/images/posts/2026-11-24-marysville-garage-4.webp",
+      "alt": "Marysville, WA detached garage framing: wood wall framing with roof trusses set and house wrap going on the walls \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "ad2880f6b92cc3156dc1fb0613f57669",
+      "source": "Newly generated image (built-in image generator, 2026-11-24), source gen-4.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-24-marysville-garage-5.webp",
+      "repo_path": "assets/images/posts/2026-11-24-marysville-garage-5.webp",
+      "alt": "Marysville, WA detached garage utilities: a trench with electrical conduit running across the yard from the house toward the new garage, with a mini excavator nearby \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "3dd0f0e8822650e0205c07e571350d81",
+      "source": "Newly generated image (built-in image generator, 2026-11-24), source gen-5.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-24-marysville-garage-6.webp",
+      "repo_path": "assets/images/posts/2026-11-24-marysville-garage-6.webp",
+      "alt": "Marysville, WA detached garage interior: a finished workshop with a subpanel on the wall, LED shop lights and a coated concrete floor \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "d506df612dcc924f16f8328cc0e5d400",
+      "source": "Newly generated image (built-in image generator, 2026-11-24), source gen-6.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-24-marysville-garage-7.webp",
+      "repo_path": "assets/images/posts/2026-11-24-marysville-garage-7.webp",
+      "alt": "Marysville, WA detached garage roofing: a roofer installing asphalt shingles on the new garage roof \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "6e4d1e1d5c6d63e912638858378d1a39",
+      "source": "Newly generated image (built-in image generator, 2026-11-24), source gen-7.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-24-marysville-garage-8.webp",
+      "repo_path": "assets/images/posts/2026-11-24-marysville-garage-8.webp",
+      "alt": "Marysville, WA detached garage drainage: a downspout at the garage corner discharging onto a splash block and gravel so roof water moves away from the slab \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "e31ed4aeae6198bdaf0e08946d3fe4c9",
+      "source": "Newly generated image (built-in image generator, 2026-11-24), source gen-8.jpg converted to 1600w webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-24-marysville-garage-9.webp",
+      "repo_path": "assets/images/posts/2026-11-24-marysville-garage-9.webp",
+      "alt": "Marysville, WA detached garage at dusk: a finished garage with exterior lights on and carriage-style doors open to a lit interior \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "2e4750b855c0d329a8e50b0ec54bf7db",
+      "source": "Newly generated image (built-in image generator, 2026-11-24), source gen-9.jpg converted to 1600w webp q82"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "qm_mpacx1fA",
+      "url": "https://www.youtube.com/watch?v=qm_mpacx1fA",
+      "title": "Framing a 20x20 Detached Garage (DIY)",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "9 newly generated images (built-in generator), 0 regraded stills, 0 paid media."
+}

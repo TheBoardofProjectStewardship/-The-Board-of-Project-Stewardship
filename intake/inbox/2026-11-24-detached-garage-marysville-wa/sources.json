@@ -1,0 +1,193 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Marysville",
+    "service": "Detached garage: City building permit (Outbuilding), MMC 22C.180 setbacks/height/footprint, foundation and framing, Snohomish County PUD service, City electrical permit, stormwater, hiring",
+    "slug": "detached-garage-marysville-wa"
+  },
+  "sources": [
+    {
+      "url": "https://ecode360.com/49264440",
+      "title": "https://ecode360.com/49264440",
+      "retrieved": "2026-11-24",
+      "http_status": 200,
+      "supports": "MMC 16.04 building code exemptions"
+    },
+    {
+      "url": "https://ecode360.com/49271247",
+      "title": "https://ecode360.com/49271247",
+      "retrieved": "2026-11-24",
+      "http_status": 200,
+      "supports": "MMC 22C.180 accessory structures"
+    },
+    {
+      "url": "https://marysvillewa.gov/101/Development-Engineering-Services",
+      "title": "https://marysvillewa.gov/101/Development-Engineering-Services",
+      "retrieved": "2026-11-24",
+      "http_status": 200,
+      "supports": "Marysville Development Engineering Services"
+    },
+    {
+      "url": "https://marysvillewa.gov/1440/Permit-Services",
+      "title": "https://marysvillewa.gov/1440/Permit-Services",
+      "retrieved": "2026-11-24",
+      "http_status": 200,
+      "supports": "Marysville Permit Services"
+    },
+    {
+      "url": "https://marysvillewa.gov/1457/Permit-Turnaround-Information",
+      "title": "https://marysvillewa.gov/1457/Permit-Turnaround-Information",
+      "retrieved": "2026-11-24",
+      "http_status": 200,
+      "supports": "Marysville permit turnaround times"
+    },
+    {
+      "url": "https://marysvillewa.gov/1463/Private-Stormwater-Facility-FAQs",
+      "title": "https://marysvillewa.gov/1463/Private-Stormwater-Facility-FAQs",
+      "retrieved": "2026-11-24",
+      "http_status": 200,
+      "supports": "Marysville private stormwater facility FAQs"
+    },
+    {
+      "url": "https://marysvillewa.gov/179/Surface-Water",
+      "title": "https://marysvillewa.gov/179/Surface-Water",
+      "retrieved": "2026-11-24",
+      "http_status": 200,
+      "supports": "Marysville Surface Water"
+    },
+    {
+      "url": "https://marysvillewa.gov/97/Building-services",
+      "title": "https://marysvillewa.gov/97/Building-services",
+      "retrieved": "2026-11-24",
+      "http_status": 200,
+      "supports": "Marysville Building Services"
+    },
+    {
+      "url": "https://pacificprogroup.com/",
+      "title": "https://pacificprogroup.com/",
+      "retrieved": "2026-11-24",
+      "http_status": 200,
+      "supports": "Board #1 contractor link"
+    },
+    {
+      "url": "https://permits.marysvillewa.gov/",
+      "title": "https://permits.marysvillewa.gov/",
+      "retrieved": "2026-11-24",
+      "http_status": 200,
+      "supports": "Marysville Permit Portal"
+    },
+    {
+      "url": "https://sbcc.wa.gov/state-codes-regulations-guidelines/state-building-code/energy-code",
+      "title": "https://sbcc.wa.gov/state-codes-regulations-guidelines/state-building-code/energy-code",
+      "retrieved": "2026-11-24",
+      "http_status": 200,
+      "supports": "Washington State Energy Code page"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-11-24",
+      "http_status": 200,
+      "supports": "License/bond/insurance lookup"
+    },
+    {
+      "url": "https://www.amarr.com/us/en",
+      "title": "https://www.amarr.com/us/en",
+      "retrieved": "2026-11-24",
+      "http_status": 200,
+      "supports": "Material maker"
+    },
+    {
+      "url": "https://www.clopaydoor.com/",
+      "title": "https://www.clopaydoor.com/",
+      "retrieved": "2026-11-24",
+      "http_status": 200,
+      "supports": "Material maker"
+    },
+    {
+      "url": "https://www.liftmaster.com/",
+      "title": "https://www.liftmaster.com/",
+      "retrieved": "2026-11-24",
+      "http_status": 200,
+      "supports": "Material maker"
+    },
+    {
+      "url": "https://www.lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "https://www.lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "retrieved": "2026-11-24",
+      "http_status": 200,
+      "supports": "State hiring guidance"
+    },
+    {
+      "url": "https://www.lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/",
+      "title": "https://www.lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/",
+      "retrieved": "2026-11-24",
+      "http_status": 200,
+      "supports": "L&I electrical permits"
+    },
+    {
+      "url": "https://www.lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "title": "https://www.lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "retrieved": "2026-11-24",
+      "http_status": 200,
+      "supports": "L&I list of cities issuing own electrical permits (includes Marysville)"
+    },
+    {
+      "url": "https://www.marysvillewa.gov/DocumentCenter/View/9063/Exempted-Work-2021-IBC",
+      "title": "https://www.marysvillewa.gov/DocumentCenter/View/9063/Exempted-Work-2021-IBC",
+      "retrieved": "2026-11-24",
+      "http_status": 200,
+      "supports": "Marysville Exempted Work handout (permit exemptions)"
+    },
+    {
+      "url": "https://www.marysvillewa.gov/DocumentCenter/View/9227",
+      "title": "https://www.marysvillewa.gov/DocumentCenter/View/9227",
+      "retrieved": "2026-11-24",
+      "http_status": 200,
+      "supports": "Marysville Choosing a Contractor handout"
+    },
+    {
+      "url": "https://www.rustoleum.com/",
+      "title": "https://www.rustoleum.com/",
+      "retrieved": "2026-11-24",
+      "http_status": 200,
+      "supports": "Material maker"
+    },
+    {
+      "url": "https://www.snopud.com/doing-business/construction-remodel/",
+      "title": "https://www.snopud.com/doing-business/construction-remodel/",
+      "retrieved": "2026-11-24",
+      "http_status": 200,
+      "supports": "Snohomish County PUD construction and remodeling (NSQ)"
+    },
+    {
+      "url": "https://www.snopud.com/doing-business/construction-remodel/guides-requirements/",
+      "title": "https://www.snopud.com/doing-business/construction-remodel/guides-requirements/",
+      "retrieved": "2026-11-24",
+      "http_status": 200,
+      "supports": "Snohomish County PUD guides and requirements"
+    },
+    {
+      "url": "https://www.washington811.com/",
+      "title": "https://www.washington811.com/",
+      "retrieved": "2026-11-24",
+      "http_status": 200,
+      "supports": "Washington 811"
+    }
+  ],
+  "dropped": [
+    {
+      "url": "https://marysvillewa.gov/284/Permits",
+      "reason": "404"
+    },
+    {
+      "url": "https://www.snopud.com/services/new-service/",
+      "reason": "404"
+    },
+    {
+      "url": "https://www.codepublishing.com/WA/Marysville/",
+      "reason": "403 to box curl; ecode360 used"
+    }
+  ],
+  "notes": "Box curl 2026-11-24 with browser UA. All cited = 200 (see cited-status.txt). PDFs read via pdftotext. No fee or price figures quoted."
+}

@@ -1,0 +1,25 @@
+{
+  "submission_id": "2026-11-24-detached-garage-marysville-wa",
+  "idempotency_key": "sha256:3ad102f0779e1e8eacf4eb2df33734a7c906783fab41a572c59c286dae361ffa",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-11-24T11:49:51Z",
+  "outputs": [
+    "assets/images/posts/2026-11-24-marysville-garage-1.webp",
+    "assets/images/posts/2026-11-24-marysville-garage-2.webp",
+    "assets/images/posts/2026-11-24-marysville-garage-3.webp",
+    "assets/images/posts/2026-11-24-marysville-garage-4.webp",
+    "assets/images/posts/2026-11-24-marysville-garage-5.webp",
+    "assets/images/posts/2026-11-24-marysville-garage-6.webp",
+    "assets/images/posts/2026-11-24-marysville-garage-7.webp",
+    "assets/images/posts/2026-11-24-marysville-garage-8.webp",
+    "assets/images/posts/2026-11-24-marysville-garage-9.webp",
+    "posts/2026-11-24-detached-garage-marysville-wa.md",
+    "posts/2026-11-24-detached-garage-marysville-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 112
+}
