@@ -22,6 +22,8 @@ Whether you are near downtown Bothell, Canyon Park, North Creek, or closer to th
 
 HOA or design-review rules can affect exterior vents, window changes over a sink, or visible roof penetrations for a range hood even when the kitchen itself is interior-only. Put those constraints in the proposal so they are not discovered after rough-in is underway. Cross-check [plumber.html](../plumber.html) and [electrician.html](../electrician.html) when fixture moves and circuit work share the same critical path.
 
+![Two-story home with evergreen trees on a residential street in Bothell, Washington, a typical kitchen remodel candidate](../assets/images/posts/2026-09-24-bothell-kitchen-street-6.webp "Many Bothell homes from the 1970s through the 1990s still have their original kitchen layouts.")
+
 ## Climate, moisture, and permitting realities
 
 Western Washington kitchens live with cool outdoor air and long damp seasons. Condensation on exterior walls, slow-drying paint, and range hoods that dump into attics show up as soft drywall and failed caulk long before style looks dated. Prefer continuous exterior-wall detailing where cabinets land on cold walls, correct slope at wet zones near sinks, and exhaust terminated outdoors with a quiet, appropriately rated hood or fan. Fancy finishes cannot compensate for a hood that recirculates grease into the room or a dishwasher drain that backs up under a new island.
@@ -45,6 +47,8 @@ https://www.youtube.com/watch?v=5xN9kPD7ddU
 
 [Watch the short process clip](../assets/videos/posts/2026-09-25-mill-creek-kitchen-hood.mp4)
 
+![Base cabinets being leveled and fastened along a wall during a kitchen remodel in Bothell, Washington](../assets/images/posts/2026-09-24-bothell-kitchen-cabinet-install-7.webp "Base cabinets get leveled and secured before countertops are templated in a Bothell kitchen remodel.")
+
 ## Design, trades, and coordination
 
 Measure appliance depths, island overhangs, and glass or window openings before you lock a catalog number. Countertop template lead times can dominate the end of the schedule — template only after cabinets are set and true. Coordinate plumber and electrician so one trade’s fastener line does not puncture a cold wall the next trade just insulated. Keep hood duct routing visible on the plan so it is not improvised through joist bays after cabinets are ordered.
@@ -64,6 +68,8 @@ Manufacturer product pages for daylight, coatings, and openings when you compare
 - [Andersen Windows](https://www.andersenwindows.com/) — window and patio-door systems often discussed when a kitchen gains daylight or replaces a sink-wall unit
 - [Velux skylights](https://www.veluxusa.com/) — daylight options when a flat or low-pitch roof plane sits over a darker kitchen
 - [Sherwin-Williams coatings](https://www.sherwin-williams.com/) — interior finish systems for cabinets, walls, and trim in humid Pacific Northwest kitchens
+
+![Countertop, cabinet door and backsplash tile samples laid out for a kitchen remodel in Bothell, Washington](../assets/images/posts/2026-09-24-bothell-kitchen-materials-8.webp "Counter, cabinet and tile samples compared side by side before a Bothell kitchen order.")
 
 ## FAQ
 
@@ -92,3 +98,5 @@ When you interview firms, ask them to walk a recent Eastside kitchen chronologic
 Use the Board directories as a starting shortlist — especially [kitchen](../kitchen.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden rough-in before cabinets close. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
+
+![Finished kitchen remodel with an island and pendant lights in a Bothell, Washington home](../assets/images/posts/2026-09-24-bothell-kitchen-finished-9.webp "A finished kitchen remodel in a Bothell home after permits and inspections were closed out.")
