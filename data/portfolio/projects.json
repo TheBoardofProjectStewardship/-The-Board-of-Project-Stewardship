@@ -740,6 +740,68 @@
         "The heat pump outdoor unit beside the front bedroom is drawn as a 3 foot tall box over the dashed outline on the plan; its height is not printed.",
         "Kitchen, laundry and bath fixtures are placed from the plan symbols; their heights are assumed."
       ]
+    },
+    {
+      "slug": "l-shaped-single-story-house",
+      "engine": "config",
+      "config": "l-shaped-single-story-house.json",
+      "title": "L-shaped single-story house floor plan",
+      "card": "A one-story, L-shaped house modeled from its first floor plan: a large north-west wing with a bath and laundry joined to the main house, with the kitchen, front room and east bedrooms.",
+      "facts": [
+        "One-story L-shaped plan, about 1,900 square feet traced under the roof line",
+        "Openings sized from the printed dimensions",
+        "Plan, ceiling plan and interior elevations used"
+      ],
+      "kicker": "Floor plan model",
+      "thumb": "/portfolio/l-shaped-single-story-house/thumb.png",
+      "dek": "Explore the house layer by layer: the finished house, the entry side, the roof, the floor plan, every room and the floor deck.",
+      "sourceNote": "Modeled from the first floor plan, the ceiling plan and the interior elevations. Walls, openings and the printed opening widths come from the plan; the wall height comes from an interior elevation. The sheets show no roof and name no rooms, so the roof form and room names are listed below as assumptions.",
+      "learn": {
+        "house": [
+          "roof",
+          "partition"
+        ],
+        "front": [
+          "header"
+        ],
+        "roof": [
+          "roof"
+        ],
+        "upper": [
+          "partition",
+          "header"
+        ],
+        "plan": [
+          "partition"
+        ],
+        "foundation": [
+          "partition"
+        ]
+      },
+      "notes": {
+        "roof": [
+          "Roof",
+          "The set has no roof plan or exterior elevations, so a simple hipped roof over the whole footprint is assumed."
+        ],
+        "partition": [
+          "North-west wing",
+          "A large open room and a smaller room, with a bath and laundry beside them, make up the wing. It joins the main house through a hall."
+        ],
+        "header": [
+          "Openings",
+          "Two 8 foot windows and the entry door face south, a 5 foot 6 inch sliding glass door and two windows face north, and the openings use the widths printed on the plan."
+        ]
+      },
+      "assumptions": [
+        "Scale: the sheet states 3/8 inch to the foot, but the drawing measures 28.58 points to the foot (the printed 8 foot, 6 foot and 5 foot 6 inch openings fit that scale), so lengths are taken at that scale.",
+        "Room names are not printed on the plan. The sheets number the rooms (1 to 9) on the elevation tags; names appear only where fixtures show the use, and room areas are traced inside the wall faces.",
+        "Wall height: 7 feet 11 1/2 inches, the one wall height printed (interior elevation 1-d), applied to every wall. The ceiling plan prints ceiling heights of 7 feet 2 inches to 7 feet 9 inches in places; room labels are not affected.",
+        "Roof: the set has no roof plan or exterior elevations. A hipped roof over the whole footprint is assumed, pitch 4 in 12 with 18 inch overhangs.",
+        "The floor is drawn 1 foot above grade: the floor-to-grade height is not printed, and no steps are drawn.",
+        "Window and door sizes are taken from the printed opening widths where the plan gives them; sills at 3 feet and heads at 6 feet 8 inches are assumed, as are all door heights.",
+        "The two stacked boxes on the east wall of the front room are drawn as hollow wall outlines, as the plan shows them; their use is not printed.",
+        "Kitchen, bath and laundry fixtures are placed from the plan symbols; their heights are assumed."
+      ]
     }
   ]
 }

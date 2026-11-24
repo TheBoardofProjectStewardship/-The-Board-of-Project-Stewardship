@@ -336,6 +336,20 @@ console.log(JSON.stringify({{ids:m.groups.map(g=>g.id),floors:[...new Set(m.labe
         words = set(re.findall(r"[a-z0-9]+", text))
         self.assertFalse({hashlib.sha256(w.encode()).hexdigest()[:16] for w in words} & private)
 
+    def test_l_shaped_single_story_house_is_plan_data(self):
+        p = next(p for p in self.projects if p["slug"] == "l-shaped-single-story-house")
+        cfg = ps.load_config(p)
+        self.assertEqual([s["id"] for s in cfg["stages"]], list(ps.STAGE_PROGRESS))
+        self.assertTrue(all(abs(w["h"] - (7 + 11.5 / 12)) < 0.01 for w in cfg["walls"]))  # printed 7'-11 1/2" on interior elevation 1-d
+        wins = sorted(round(o["b"] - o["a"], 1) for o in cfg["openings"] if o["kind"] == "W" and "as printed" in o["tag"])
+        self.assertEqual(wins, [2.8, 3.0, 3.2, 5.9, 5.9, 7.9, 7.9])  # printed 2'-9", 2'-11", 3'-3", 6'-0" (2), 8'-0" (2) widths
+        self.assertTrue(cfg["fieldRoof"]["assumed"])
+        self.assertTrue(p.get("assumptions"))
+        private = {'ba0a5096cdb80573', '44f7c3a14552d55a', 'ac1bbda19c220e2d'}  # sha256 prefixes of the client's private words, kept out of the repo in plain text
+        text = (json.dumps(p) + json.dumps(cfg) + ps.pages()["portfolio/l-shaped-single-story-house/index.html"]).lower()
+        words = set(re.findall(r"[a-z0-9]+", text))
+        self.assertFalse({hashlib.sha256(w.encode()).hexdigest()[:16] for w in words} & private)
+
     @unittest.skipUnless(shutil.which("node"), "node not installed")
     def test_engine_builds_three_levels(self):
         script = f"""
