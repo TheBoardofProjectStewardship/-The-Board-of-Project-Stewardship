@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-11-24-detached-garage-marysville-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-11-24T12:05:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Detached Garage Marysville WA \u2014 Permits, Setbacks, Foundations, Power and Building It Right",
+    "date": "2026-11-24",
+    "slug": "detached-garage-marysville-wa",
+    "description": "A Marysville detached garage guide: when the City's building permit applies, MMC 22C.180 setbacks, height and footprint limits, slab and framing, Snohomish PUD power, electrical permits and hiring.",
+    "category": "Additions"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored fallback. Home PC DESKTOP-B69F181 board-intake inbox had no 2026-11-24 packets (latest openclaw-seo-2026-11-23); PC not touched. Topic: detached garage in Marysville WA (Snohomish County). Sources read 2026-11-24: City of Marysville Exempted Work handout (2021 IBC/IRC 105 as amended: only one-story detached tool/storage sheds, playhouses <=120 sq ft exempt, still meet MMC 22C.180 setbacks); MMC 16.04 building code exemptions (ecode360); MMC 22C.180 accessory structures (side 5 ft, side street 10/15 ft, rear 5/10/15 ft, 50% rear setback coverage, 80% footprint, 20 ft / 30 ft height, director deviations, front/side yard design conditions, no metal siding/roofing unless matching); Permit Services page (online portal, 360.363.8223); eTRAKiT portal (Outbuilding type; inspection requests by 3:30 PM next business day); Building Services (electrical permit processing, Choosing a Contractor, WSEC worksheets); Permit Turnaround Information (Outbuildings 25/19/19/16 days, Electrical 5); Development Engineering Services (grading/clearing via portal; ROW permits); Surface Water page and Private Stormwater Facility FAQs (MMC 14.17.010); Snohomish County PUD Construction & Remodeling (New Service Questionnaire, residential form for garages) and guides/requirements; L&I city electrical permits list (includes Marysville, 80 Columbia Ave); L&I electrical permits; SBCC energy code page; Washington 811. L&I Verify + hiring a contractor. First Marysville place token: added (\"marysville\", \"Marysville\") to _SLUG_PLACES and \"Marysville\" to _PLACE_NAMES (generate_site.py +2, same pattern as Monroe 2026-11-16); marysville.html unchanged. Cross-links: water heater Marysville 2026-10-19, garage conversion Everett 2026-10-24, shed/home office Sammamish 2026-11-02, panel upgrade Federal Way 2026-10-20, driveway Bothell 2026-11-17, gutters Edmonds 2026-11-18. No fee or price figures. Producer role fields kept per intake contract."
+}
