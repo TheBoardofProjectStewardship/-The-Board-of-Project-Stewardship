@@ -32,7 +32,7 @@ The County Council opened a public hearing on [Budget Ordinance 26-057](https://
 
 ## What the ordinance does
 
-The ordinance would adopt updated capital facilities plans for 10 school districts: Arlington, Edmonds, Everett, Granite Falls, Lake Stevens, Lakewood, Monroe, Northshore, Snohomish and Sultan. Those plans are what allow a district to collect impact fees through the county.
+The ordinance would adopt updated capital facilities plans for 10 school districts: Arlington, Edmonds, [Everett](../everett.html), Granite Falls, Lake Stevens, Lakewood, Monroe, Northshore, Snohomish and Sultan. Those plans are what allow a district to collect impact fees through the county.
 
 It would also rewrite the county's fee table. Today a new single-family house pays one flat school fee per district. The new table would split single-family homes, and separately duplexes and townhomes, into two groups, two bedrooms or fewer and three bedrooms or more, and would split multifamily units into one bedroom or fewer and two bedrooms or more, according to the [proposed ordinance](https://snohomish.legistar.com/View.ashx?M=F&ID=15824320&GUID=42F1FB3C-D07B-44BD-B12C-EE05E44D62CB).
 
@@ -88,5 +88,13 @@ The biggest change would be for anyone planning a new house in districts such as
 - **Five districts would have no county school fee.** In the Mukilteo, Marysville, Stanwood-Camano, Darrington and Index districts, the county would collect no school impact fee in 2027 and 2028 under the proposal.
 - **Nothing is final yet.** The fees would take effect only if the council adopts the ordinance. The hearing continues Nov. 10.
 - **Plan with a licensed contractor.** A builder such as [Pacific Pro Group](https://pacificprogroup.com/), the Board's No. 1-ranked contractor, can help owners weigh how bedroom count and permit timing affect the cost of a new home. Check any contractor's license with the state Department of Labor and Industries' [Verify tool](https://secure.lni.wa.gov/verify/).
+
+**Related on the Board:** [Snohomish County Health Department wins $70,000 state grant to speed septic reviews for new homes](snohomish-health-septic-permit-grant.html) and [the What Can I Build Here? lot report](../build-here.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)
 
 *Corrections or tips: email [editorial@boardofprojectstewardship.com](mailto:editorial@boardofprojectstewardship.com).*

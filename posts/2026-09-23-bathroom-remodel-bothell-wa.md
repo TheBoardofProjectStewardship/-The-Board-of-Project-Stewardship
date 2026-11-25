@@ -18,13 +18,13 @@ Bothell straddles North Creek, the Sammamish River corridor, and a mix of ranch,
 
 ## Neighborhood and house-stock context
 
-Whether you are near downtown Bothell, Canyon Park, North Creek, or closer to the river greenway, staging still matters. Dumpsters, tile pallets, and overnight protection for open wet walls need a plan before demolition day. Mid-century baths often hide undersized vents, galvanized supply, and pans that were never flood-tested. Ask bidders how they protect finished floors on the way to an upstairs bath, how they handle discovery of soft subfloor at the shower, and who owns change-order language when a valve wall must move for code clearance.
+Whether you are near downtown [Bothell](../bothell.html), Canyon Park, North Creek, or closer to the river greenway, staging still matters. Dumpsters, tile pallets, and overnight protection for open wet walls need a plan before demolition day. Mid-century baths often hide undersized vents, galvanized supply, and pans that were never flood-tested. Ask bidders how they protect finished floors on the way to an upstairs bath, how they handle discovery of soft subfloor at the shower, and who owns change-order language when a valve wall must move for code clearance.
 
 HOA or design-review rules can affect exterior exhaust terminations, window changes in a bath, or visible roof penetrations even when the wet room itself is interior-only. Put those constraints in the proposal so they are not discovered after rough-in is underway. Cross-check [plumber.html](../plumber.html) and [electrician.html](../electrician.html) when fixture moves and circuit work share the same critical path.
 
 ## Climate, moisture, and permitting realities
 
-Western Washington bathrooms live with cool outdoor air and long damp seasons. Condensation on exterior walls, slow-drying grout, and fans that dump into attics show up as soft drywall and failed caulk long before style looks dated. Prefer continuous waterproofing in the wet zone, correct slope to the drain, and exhaust terminated outdoors with a quiet, appropriately rated fan. Fancy finishes cannot compensate for a pan that ponds or a niche that was never banded into the membrane.
+Western Washington bathrooms live with cool outdoor air and long damp seasons. Condensation on exterior walls, slow-drying grout, and fans that dump into attics show up as soft drywall and failed caulk long before style looks dated. Prefer continuous [waterproofing](../bathroom-waterproofing-guide.html) in the wet zone, correct slope to the drain, and exhaust terminated outdoors with a quiet, appropriately rated fan. Fancy finishes cannot compensate for a pan that ponds or a niche that was never banded into the membrane.
 
 City of Bothell accepts permit and land-use applications online through [MyBuildingPermit](https://mybuildingpermit.com/). The City’s [Applications & Forms](https://www.bothellwa.gov/393/Applications-Forms) page is the practical starting point for residential single-family remodel checklists and residential plumbing/mechanical forms. Do not assume a “like-for-like” fixture swap always avoids review — moving drains, altering walls, or changing electrical usually triggers plumbing and/or electrical paths, and sometimes building review. Put permit ownership, inspection holds, and temporary living plans in writing before demolition day.
 
@@ -92,3 +92,11 @@ When you interview firms, ask them to walk a recent Eastside bath chronologicall
 Use the Board directories as a starting shortlist — especially [bathrooms](../bathrooms.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden membranes before tile closes. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
+
+**Related on the Board:** [Home Addition Bothell WA](2026-08-20-home-addition-bothell-wa.html) and [bathroom cost factors](../bathroom-cost-factors.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)

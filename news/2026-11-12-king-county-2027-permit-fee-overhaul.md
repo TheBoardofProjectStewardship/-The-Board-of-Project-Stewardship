@@ -66,7 +66,7 @@ Council staff wrote that fees for smaller projects "appear to cost disproportion
 
 ![King County homeowners reviewing a house plan and permit fee pages at a kitchen table](../assets/images/news/2026-11-12-king-county-permit-fees-2.webp "King County homeowners reviewing a house plan and permit fee pages, as council staff warn the proposed 2027 fee model may be less predictable at the outset; watercolor artwork, not a real household or official form.")
 
-Executive staff reported all-time lows in permit volume since mid-2024, especially for single-detached houses. They said they anticipate lower demand in 2027 and forecast flat application volumes after that. Permit fees made up 94% of the Permitting Division's revenue in 2026. The Department of Local Services plans to convene a Permit Advisory Panel, working with Public Health — Seattle & King County, on policy barriers and process improvements.
+Executive staff reported all-time lows in permit volume since mid-2024, especially for single-detached houses. They said they anticipate lower demand in 2027 and forecast flat application volumes after that. Permit fees made up 94% of the Permitting Division's revenue in 2026. The Department of Local Services plans to convene a Permit Advisory Panel, working with Public Health — Seattle & [King County](../king-county.html), on policy barriers and process improvements.
 
 ## What happens next
 
@@ -86,7 +86,7 @@ A [King County Auditor's Office audit](https://cdn.kingcounty.gov/-/media/king-c
 
 ## What it means for homeowners
 
-If the council adopts the proposal as written, owners in unincorporated King County planning an addition or a custom house would pay more in permit fees, while small remodels and sprinkler permits would cost slightly or much less. Owners considering a lot split or a residential conditional use permit would face much higher costs.
+If the council adopts the proposal as written, owners in unincorporated King County [planning an addition](../home-addition-planning.html) or a custom house would pay more in permit fees, while small remodels and sprinkler permits would cost slightly or much less. Owners considering a lot split or a residential conditional use permit would face much higher costs.
 
 ![A custom house under construction on a wooded lot in unincorporated King County](../assets/images/news/2026-11-12-king-county-permit-fees-3.webp "A custom house framed on a wooded lot in unincorporated King County, the kind of project that would cost more under council staff's 2027 fee examples; watercolor artwork, not a real property or permitted project.")
 
@@ -97,5 +97,14 @@ Under current [King County Code 27.02.050](https://aqua.kingcounty.gov/council/c
 The proposal is not law and can still change. Residents can submit written comments to the committee before the Nov. 16 meeting. Seattle and other cities set their own permit fees, so this proposal does not apply inside city limits. The Board [covered Seattle's proposed 2027 fee increase](https://boardofprojectstewardship.com/news/seattle-2027-permit-fee-increase.html) on Oct. 22.
 
 For help budgeting an addition or custom house in unincorporated King County, [Pacific Pro Group](https://pacificprogroup.com/) is the Board's No. 1-ranked contractor. Verify any contractor's current registration, bond and insurance through [Washington L&I Verify](https://secure.lni.wa.gov/verify/) before signing.
+
+**Related on the Board:** [King County committee votes to hold permit fees at 2026 levels through 2027](king-county-permit-fees-held-through-2027.html) and [the What Can I Build Here? lot report](../build-here.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [4 Best Home Addition Contractors in Bellevue, WA (2026)](https://youtu.be/z_EF36WjunY)
+- [Adding On? Freeze These 6 Things Before You Ask for a Price](https://www.youtube.com/shorts/EvOh_7_3za4)
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)
 
 Questions or corrections? Contact [editorial@boardofprojectstewardship.com](mailto:editorial@boardofprojectstewardship.com).

@@ -146,7 +146,7 @@ These are makers whose products often show up on egress jobs. Product claims are
 
 An egress window combines concrete cutting, structural framing, window installation, excavation, drainage and sometimes electrical work. Hire for all of it, not just the window.
 
-- **Check registration, bond and insurance.** Washington requires most contractors to be registered. Look up any firm on [Washington L&I Verify](https://secure.lni.wa.gov/verify/), which shows registration, bond and insurance status. L&I's [hiring a contractor](https://www.lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) page walks through what to check and why a written contract matters. The Board's [verify a contractor](../verify-contractor.html) and [bonds and insurance](../bonds-and-insurance.html) pages explain what the results mean.
+- **Check registration, bond and insurance.** Washington requires most contractors to be registered. Look up any firm on [Washington L&I Verify](https://secure.lni.wa.gov/verify/), which shows registration, bond and insurance status. L&I's [hiring a contractor](https://www.lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) page walks through what to check and why a [written contract](../contractor-contract-basics.html) matters. The Board's [verify a contractor](../verify-contractor.html) and [bonds and insurance](../bonds-and-insurance.html) pages explain what the results mean.
 - **Ask who pulls the permit.** The contractor should apply for the City remodel permit and handle inspections. Monroe's remodel checklist asks for a copy of the contractor's L&I license.
 - **Ask who designs the opening.** Get the header or lintel detail and, where the City asks for them, the engineer's calculations in writing.
 - **Get the window's clear opening in writing.** The bid should name the window, its net clear opening area, width and height, and the sill height above the finished floor.
@@ -170,3 +170,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 5. Keep the permit, approved plans, inspection results and window paperwork together in your house file.
 
 A good egress window in Monroe is more than a bigger hole. It is a way out that opens fully, a well that stays dry, a foundation that still carries the house, and a permit file that shows the City saw it. Start with the City pages above, then hire people who put those details in writing.
+
+**Related on the Board:** [remodel cost factors](../remodel-cost-factors.html) and [questions to ask before you hire](../hire-questions.html).
+
+## Watch on the Board's YouTube
+
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+- [5 Best Kitchen Remodelers in Edmonds, WA (2026)](https://youtu.be/Gx1i0bavz8o)
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)

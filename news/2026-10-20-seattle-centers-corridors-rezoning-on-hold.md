@@ -24,7 +24,7 @@ hero_credit: "Photo by Spicypepper999, CC0, via Wikimedia Commons: https://commo
 
 ## The rezoning stays on hold
 
-SEATTLE, Wash. — Seattle is keeping the next phase of its 20-year growth plan off the zoning map for at least another year. The Office of Planning and Community Development says the Centers and Corridors legislation, and the Downtown Regional Center Subarea Plan, are on hold until a supplemental environmental impact statement is finished, according to [a city blog post published Oct. 19](https://dailyplanit.seattle.gov/addressing-the-growth-management-hearings-board-decision-and-creating-a-livable-seattle-for-all/).
+SEATTLE, Wash. — [Seattle](../seattle.html) is keeping the next phase of its 20-year growth plan off the zoning map for at least another year. The Office of Planning and Community Development says the Centers and Corridors legislation, and the Downtown Regional Center Subarea Plan, are on hold until a supplemental environmental impact statement is finished, according to [a city blog post published Oct. 19](https://dailyplanit.seattle.gov/addressing-the-growth-management-hearings-board-decision-and-creating-a-livable-seattle-for-all/).
 
 The hold follows a Sept. 9 decision by the Central Puget Sound Growth Management Hearings Board. The board upheld the city's Comprehensive Plan, including its approach to racial equity in housing and water infrastructure, the city said. It also found the plan's environmental impact statement inadequate because Seattle studied expected growth over 20 years rather than the "maximum possible development" the zoning could allow.
 
@@ -65,5 +65,13 @@ The city plans to release a draft of the additional environmental review in 2027
 ![Seattle planning staff presenting a zoning map marked on hold to the City Council](../assets/images/news/2026-10-20-seattle-centers-corridors-4.webp)
 
 Anyone hiring a contractor for an addition, a remodel or a new building should confirm the parcel's zoning with the Seattle Department of Construction and Inspections and verify the contractor's license and bond through [Washington L&I Verify](https://secure.lni.wa.gov/verify/).
+
+**Related on the Board:** [contractor contract basics](../contractor-contract-basics.html) and [change orders and allowances](../change-orders.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
 
 Questions or corrections: editorial@boardofprojectstewardship.com

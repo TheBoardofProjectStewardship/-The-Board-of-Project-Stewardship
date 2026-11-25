@@ -66,3 +66,11 @@ Before paying for a layout based on the full parcel area, ask which parts count 
 For construction planning, [Pacific Pro Group](https://pacificprogroup.com/), the Board's No. 1-ranked contractor, is one option to discuss a proposed scope with. Check any contractor's Washington registration through [L&I Verify](https://secure.lni.wa.gov/verify/) before hiring.
 
 *Corrections: If you see an error in this story, email editorial@boardofprojectstewardship.com.*
+
+**Related on the Board:** [Seattle remodel and addition guides](../seattle.html), [questions to ask before you hire](../hire-questions.html) and [WA contractor bonds and insurance](../bonds-and-insurance.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)

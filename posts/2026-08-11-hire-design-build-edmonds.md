@@ -71,7 +71,7 @@ Be wary of unusually large upfront payments. Tie payments to milestones.
 
 Look for phases: feasibility, schematic, design development, permit set, and construction. Understand what is fixed-price when, and what remains allowance-based. If construction pricing is “to be determined after design,” clarify how you can exit if numbers miss your range — and whether design fees credit toward build.
 
-Ask how the firm handles coastal weather detailing on additions and wet-area assemblies on baths. Edmonds projects punish generic inland details. Request examples of flashing at old-to-new joints and shower membrane photo logs.
+Ask how the firm handles coastal weather detailing on additions and wet-area assemblies on baths. [Edmonds](../edmonds.html) projects punish generic inland details. Request examples of flashing at old-to-new joints and shower membrane photo logs.
 
 ![Edmonds, Washington — a covered side entry with a clean walkway and no signs](../assets/images/posts/2026-08-11-hire-design-build-edmonds-5.webp)
 
@@ -91,8 +91,17 @@ Progress payments should track visible milestones: design deliverables, permit s
 
 For **Edmonds design-build hiring**, the durable projects share a pattern: respect **phase pricing clarity and coastal detailing fluency**, put **permit ownership and waterproofing accountability** in writing, and keep **milestone payments tied to dry-in — not charm** on the critical path instead of the punch list. Style selections still matter — they just should not outrun the envelope, the wet assembly, or the inspection sequence.
 
-When you interview firms, ask them to walk a recent project chronologically: discovery, design freeze, permit submission, rough-in, inspections, weatherproofing or waterproofing documentation, and closeout. Vague storytelling is a signal; specific sequencing is a better one. Re-check every company at [L&I Verify](https://secure.lni.wa.gov/verify/) even if a friend referred them, and treat licensing as a living status rather than a one-time screenshot.
+When you interview firms, ask them to walk a recent project chronologically: discovery, design freeze, permit submission, rough-in, inspections, weatherproofing or [waterproofing](../bathroom-waterproofing-guide.html) documentation, and closeout. Vague storytelling is a signal; specific sequencing is a better one. Re-check every company at [L&I Verify](https://secure.lni.wa.gov/verify/) even if a friend referred them, and treat licensing as a living status rather than a one-time screenshot.
 
 Use the Board of Project Stewardship directories as a starting shortlist — especially [edmonds custom homes](../edmonds-custom-homes.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden assemblies. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
+
+**Related on the Board:** [Heated Floors in Edmonds Bathrooms](2026-08-17-heated-floors-edmonds-bathrooms.html) and [bathroom cost factors](../bathroom-cost-factors.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)

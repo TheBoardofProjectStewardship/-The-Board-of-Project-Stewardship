@@ -18,7 +18,7 @@ Kenmore sits on the north end of Lake Washington between Lake Forest Park, Bothe
 
 ## Neighborhood and house-stock context
 
-Whether you are near downtown Kenmore, the Burke-Gilman Trail corridor, Lakepointe-adjacent streets, or closer to the Lake Forest Park and Bothell edges, staging still matters. Narrow lots, shared driveways, and street parking limit dumpster and cabinet-crate deliveries. Mid-century kitchens often hide undersized circuits, galvanized supply, and bearing walls that were never meant to open into a great room. Ask bidders how they protect finished floors on the haul path, how they handle soft subfloor at a peninsula, and who owns change-order language when a range-hood duct must move for code clearance or attic routing.
+Whether you are near downtown [Kenmore](../kenmore.html), the Burke-Gilman Trail corridor, Lakepointe-adjacent streets, or closer to the Lake Forest Park and Bothell edges, staging still matters. Narrow lots, shared driveways, and street parking limit dumpster and cabinet-crate deliveries. Mid-century kitchens often hide undersized circuits, galvanized supply, and bearing walls that were never meant to open into a great room. Ask bidders how they protect finished floors on the haul path, how they handle soft subfloor at a peninsula, and who owns change-order language when a range-hood duct must move for code clearance or attic routing.
 
 HOA or neighborhood design expectations can affect exterior hood terminations, window changes over a sink, and dumpster placement even when the kitchen itself is interior-only. Put those constraints in the proposal so they are not discovered after rough-in is underway. Cross-check [plumber.html](../plumber.html) and [electrician.html](../electrician.html) when fixture moves and circuit work share the same critical path, and [trades.html](../trades.html) when multiple specialties share one window.
 
@@ -103,3 +103,11 @@ Use the Board directories as a starting shortlist — especially [kitchen](../ki
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden rough-in before cabinets close. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
 
 ![Finished open kitchen remodel with an island and wood floors in a Kenmore, Washington home](../assets/images/posts/2026-09-26-kenmore-kitchen-finished-9.webp "A finished kitchen remodel in a Kenmore home after permits and inspections were closed out.")
+
+**Related on the Board:** [kitchen cost factors](../kitchen-cost-factors.html) and [change orders and allowances](../change-orders.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Kitchen Remodelers in Edmonds, WA (2026)](https://youtu.be/Gx1i0bavz8o)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)

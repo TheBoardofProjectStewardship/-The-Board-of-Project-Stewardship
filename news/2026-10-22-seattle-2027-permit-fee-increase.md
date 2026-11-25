@@ -85,5 +85,12 @@ Before signing a contract, check that your contractor is licensed and bonded thr
 
 ![A technician installs a new furnace in the basement of a Seattle house, work that needs a separate mechanical permit and inspection](../assets/images/news/2026-10-22-seattle-furnace-inspection-fees-3.webp "Furnace replacement in a Seattle basement. Under the proposal, Seattle mechanical and furnace inspection fees would rise 15% above inflation.")
 
+**Related on the Board:** [Seattle remodel and addition guides](../seattle.html), [the bid comparison checklist](../bid-comparison.html) and [the permit jurisdiction hub](../permits.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
 
 Questions or corrections: editorial@boardofprojectstewardship.com

@@ -99,3 +99,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 5. **Verify and compare** — L&I Verify results, Kirkland business license, and written scopes before any deposit.
 
 Treat Kirkland's code language, its varied house stock, and the realities of venting a modern kitchen as design inputs from the start, and the finished room will pass inspection as cleanly as it looks.
+
+**Related on the Board:** [Load-Bearing Wall Removal Kirkland WA](2026-10-29-load-bearing-wall-removal-kirkland-wa.html), [electrician and electrical directory](../electrician.html) and [kitchen cost factors](../kitchen-cost-factors.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Kitchen Remodelers in Edmonds, WA (2026)](https://youtu.be/Gx1i0bavz8o)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)

@@ -92,7 +92,7 @@ O-4956 changes how long two kinds of public works permits last:
 
 State law, [RCW 58.17.060](https://app.leg.wa.gov/RCW/default.aspx?cite=58.17.060), requires cities and towns in counties planning under the Growth Management Act to adopt unit lot subdivision procedures. Parts of the parent lot not in individual unit lots are owned in common by the unit lot owners or a homeowners association. Except where state law requires one, the procedures may not require a public meeting or hearing before a decision, and they must apply only clear and objective standards. The community and property owners within 250 feet of the unit lot must get notice of how to submit written comments.
 
-The statute's history lists amendments in 2023 and 2025, from [Senate Bill 5258](https://app.leg.wa.gov/billsummary?BillNumber=5258&Year=2023) (Chapter 337, 2023 Laws) and [Senate Bill 5559](https://app.leg.wa.gov/billsummary?BillNumber=5559&Year=2025) (Chapter 271, 2025 Laws). The staff memo says Kirkland's unit lot subdivision rules, adopted in June 2025, implement SB 5559.
+The statute's history lists amendments in 2023 and 2025, from [Senate Bill 5258](https://app.leg.wa.gov/billsummary?BillNumber=5258&Year=2023) (Chapter 337, 2023 Laws) and [Senate Bill 5559](https://app.leg.wa.gov/billsummary?BillNumber=5559&Year=2025) (Chapter 271, 2025 Laws). The staff memo says [Kirkland](../kirkland.html)'s unit lot subdivision rules, adopted in June 2025, implement SB 5559.
 
 On June 17, 2025, the City Council adopted [Ordinance O-4905](https://www.kirklandwa.gov/Government/Departments/Planning-and-Building/Planning-Projects/Middle-Housing-Code-Amendments) to align city rules with state laws on middle housing, ADUs, parking and design review. According to the city, it allows four units per lot in all residential zones and six within a half mile of a major transit stop, removed size limits on second ADUs and set a 0.5 on-site parking requirement for new middle housing units. Several sections O-4956 changes, including the tree removal, driveway and floor-area rules, were last amended by O-4905.
 
@@ -109,5 +109,13 @@ The Board reported Nov. 3 on a separate Kirkland discussion about floor area lim
 The full text of O-4956 will be mailed at no charge to anyone who requests it from the Kirkland City Clerk, according to the ordinance summary.
 
 Homeowners weighing an ADU, a lot split or a new home can compare options with [Pacific Pro Group](https://pacificprogroup.com/), the Board of Project Stewardship's No. 1-ranked contractor. Verify any contractor's current registration, bond and insurance through [Washington L&I Verify](https://secure.lni.wa.gov/verify/) before signing.
+
+**Related on the Board:** [Kirkland council signals support for more, smaller middle housing homes](kirkland-middle-housing-smaller-homes.html) and [home addition cost factors](../addition-cost-factors.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [4 Best Home Addition Contractors in Bellevue, WA (2026)](https://youtu.be/z_EF36WjunY)
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)
 
 Questions or corrections? Contact [editorial@boardofprojectstewardship.com](mailto:editorial@boardofprojectstewardship.com).

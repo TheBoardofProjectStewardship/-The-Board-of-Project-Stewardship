@@ -28,7 +28,7 @@ The Board of Project Stewardship's [Renton directory](../renton.html) and [permi
 
 Renton's [Residential Interior Remodels](https://www.rentonwa.gov/City-Services/Permit-Services/Building-Fire-and-Signs/Residential-Interior-Remodels) page is the authoritative packet for finishing a basement that rearranges walls, creates rooms, or adds fixtures. The City does not accept paper. The electronic path is:
 
-1. Email the project name, address, and scope of work to **permittech@rentonwa.gov**.
+1. Email the project name, address, and [scope of work](../contractor-contract-basics.html) to **permittech@rentonwa.gov**.
 2. A Permit Specialist replies with an FTP link for uploads.
 3. Allow about five days for initial application completeness review.
 4. If complete, you receive acceptance and payment instructions; if incomplete, you get a deficiency list.
@@ -136,3 +136,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 6. Verify every firm on [L&I Verify](https://secure.lni.wa.gov/verify/), confirm the City business license, and schedule inspections through the portal or 425-430-7202.
 
 A clear City permit map and a moisture-smart scope beat a beautiful mood board that never survives rough-in. Start with jurisdiction, asbestos, and septic blockers, then choose finishes that match how Renton basements actually get inspected and lived in.
+
+**Related on the Board:** [Exterior House Painting Renton WA](2026-11-03-exterior-house-painting-renton-wa.html) and [electrician and electrical directory](../electrician.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)

@@ -38,7 +38,7 @@ Pacific Northwest bathrooms fail predictably when water has nowhere honest to go
 
 ## Accountability
 
-Ask which product system will be used, who installs it, and who warranties leaks. Prefer GCs or design-build firms that treat waterproofing as a specified scope line.
+Ask which product system will be used, who installs it, and who warranties leaks. Prefer GCs or design-build firms that treat [waterproofing](../bathroom-waterproofing-guide.html) as a specified scope line.
 
 https://www.youtube.com/watch?v=wAKfLIN79pY
 
@@ -85,7 +85,7 @@ You do not need to be a tradesperson to notice ponding on a “finished” showe
 
 ![Bathroom waterproofing essentials on a home in Puget Sound](../assets/images/posts/2026-08-18-waterproofing-5.webp)
 
-If three bids look similar until you ask about membranes, the cheap bid often omitted the real wet assembly. Normalize scopes. Prefer contractors who discuss systems calmly over those who dismiss waterproofing questions as overkill — in the PNW, that dismissal is a warning.
+If [three bids](../bid-comparison.html) look similar until you ask about membranes, the cheap bid often omitted the real wet assembly. Normalize scopes. Prefer contractors who discuss systems calmly over those who dismiss waterproofing questions as overkill — in the PNW, that dismissal is a warning.
 
 Pair this guide with local bath hiring context on [bathrooms.html](../bathrooms.html) and trade context on [trades.html](../trades.html).
 
@@ -100,3 +100,11 @@ When you interview firms, ask them to walk a recent project chronologically: dis
 Use the Board directories as a starting shortlist — especially [bathrooms](../bathrooms.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden assemblies. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
+
+**Related on the Board:** [bathroom cost factors](../bathroom-cost-factors.html) and [hiring a contractor](../hiring-a-contractor.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)

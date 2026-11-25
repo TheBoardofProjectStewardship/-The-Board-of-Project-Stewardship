@@ -121,7 +121,7 @@ Whatever products a bidder proposes, ask for the exact liner name and thickness,
 
 ## How to shortlist and verify a crawl space contractor
 
-Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming that a contractor is actively registered, bonded and insured, reviewing their history, getting at least three written bids, and putting the job in a written contract.
+Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming that a contractor is actively registered, bonded and insured, reviewing their history, getting at least three written bids, and putting the job in a [written contract](../contractor-contract-basics.html).
 
 - Look up every firm, including any electrician or subcontracted crew, on [L&I Verify](https://secure.lni.wa.gov/verify/).
 - Ask whether the crawl space will stay vented or become sealed, and how the design meets WAC 51-51-0408 either way.
@@ -142,7 +142,15 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 2. Look in the crawl space with a good light: note the ground cover, vents, standing water, insulation and any staining on the framing, and take photos.
 3. Check your address on the [FEMA Flood Map Service Center](https://msc.fema.gov/portal/home) and read [ACC 15.68.310](https://auburn.municipal.codes/ACC/15.68.310) if any part of the lot is mapped.
 4. Read [WAC 51-51-0408](https://app.leg.wa.gov/wac/default.aspx?cite=51-51-0408) so you know the difference between a code-compliant vented crawl space and a sealed one.
-5. Confirm with the City of Auburn permit center which parts of the work need a permit, and get at least three written bids that state vented or sealed, the materials, the radon and exhaust details, and how repairs will be priced.
+5. Confirm with the City of Auburn permit center which parts of the work need a permit, and get at least three [written bids](../bid-comparison.html) that state vented or sealed, the materials, the radon and exhaust details, and how repairs will be priced.
 6. Verify every firm on [L&I Verify](https://secure.lni.wa.gov/verify/), and keep moisture readings, photos, product sheets and any inspection records with your house papers.
 
 A dry crawl space is mostly about getting the order right: water away from the house first, a proper ground cover, a deliberate vented or sealed design, then repairs. The contractor who explains that order in writing, with the Washington code sections attached, is usually the one who leaves you with a crawl space that stays dry through an Auburn winter.
+
+**Related on the Board:** [remodel cost factors](../remodel-cost-factors.html) and [change orders and allowances](../change-orders.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)

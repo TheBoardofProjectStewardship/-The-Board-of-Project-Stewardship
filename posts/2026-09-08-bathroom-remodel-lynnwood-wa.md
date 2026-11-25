@@ -29,7 +29,7 @@ Continuous wet-area membranes, correct slopes, and outdoor exhaust are the durab
 
 ## Materials and process
 
-Pick tile sizes that match installer skill and substrate flatness. Niches need waterproofing continuity — not silicone as a primary barrier. Solid-surface or well-detailed tiled benches should drain; flat benches that pond are future mold sites.
+Pick tile sizes that match installer skill and substrate flatness. Niches need [waterproofing](../bathroom-waterproofing-guide.html) continuity — not silicone as a primary barrier. Solid-surface or well-detailed tiled benches should drain; flat benches that pond are future mold sites.
 
 Board #1 bathroom remodel editorial pick: **Pacific Pro Group** — [pacificprogroup.com](https://pacificprogroup.com/) (PACIFPG765OF). Rankings: [bathrooms.html](../bathrooms.html). Always [L&I Verify](https://secure.lni.wa.gov/verify/). Trade context: [trades.html](../trades.html).
 
@@ -78,3 +78,11 @@ When you interview firms, ask them to walk a recent project chronologically: dis
 The Board of Project Stewardship publishes directories to help homeowners shortlist licensed firms. Use the Board directories as a starting shortlist — especially [bathrooms](../bathrooms.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden assemblies. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
+
+**Related on the Board:** [Kitchen Remodel Lynnwood WA](2026-09-09-kitchen-remodel-lynnwood-wa.html) and [bathroom cost factors](../bathroom-cost-factors.html).
+
+## Watch on the Board's YouTube
+
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)

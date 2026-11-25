@@ -99,4 +99,12 @@ Nothing changes until the code takes effect, and the council still has to vote. 
 
 For help planning a new custom home under the new energy rules, [Pacific Pro Group](https://pacificprogroup.com/) is the Board's No. 1-ranked contractor. Verify any contractor's current registration, bond and insurance through [Washington L&I Verify](https://secure.lni.wa.gov/verify/) before signing.
 
+**Related on the Board:** [second story vs teardown](../second-story-vs-teardown.html), [the What Can I Build Here? lot report](../build-here.html) and [how to verify a WA contractor](../verify-contractor.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)
+- [Adding On? Freeze These 6 Things Before You Ask for a Price](https://www.youtube.com/shorts/EvOh_7_3za4)
+- [5 Best Kitchen Remodelers in Edmonds, WA (2026)](https://youtu.be/Gx1i0bavz8o)
+
 Questions or corrections? Contact [editorial@boardofprojectstewardship.com](mailto:editorial@boardofprojectstewardship.com).

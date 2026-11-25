@@ -172,7 +172,7 @@ Products don't make a job compliant. The survey, a certified crew where the rule
 
 ## How to shortlist and verify the crew
 
-Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming registration, bonding and insurance, getting written bids and signing a written contract. For a remodel with asbestos in the picture, look up every firm involved: the inspector's company, the abatement contractor and the remodeler. Check the abatement contractor against L&I's [certified contractors list](https://lni.wa.gov/licensing-permits/other-licenses-permits/asbestos-certification) and [L&I Verify](https://secure.lni.wa.gov/verify/).
+Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming registration, bonding and insurance, getting written bids and signing a [written contract](../contractor-contract-basics.html). For a remodel with asbestos in the picture, look up every firm involved: the inspector's company, the abatement contractor and the remodeler. Check the abatement contractor against L&I's [certified contractors list](https://lni.wa.gov/licensing-permits/other-licenses-permits/asbestos-certification) and [L&I Verify](https://secure.lni.wa.gov/verify/).
 
 Ask each bidder for a written scope that states:
 
@@ -199,3 +199,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 5. Apply for your Everett permit through the [online permitting portal](https://onlinepermits.everettwa.gov), file any agency notification, and keep the survey and paperwork on site until the final inspection.
 
 An Everett remodel that handles asbestos well isn't dramatic. It starts with a real survey, puts the results in every bidder's hands, uses certified crews where the law requires them, and keeps the paperwork on site. Start with the agency and L&I pages above, then hire people who put those steps in writing.
+
+**Related on the Board:** [questions to ask before you hire](../hire-questions.html) and [change orders and allowances](../change-orders.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)
+- [5 Best Kitchen Remodelers in Edmonds, WA (2026)](https://youtu.be/Gx1i0bavz8o)
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)

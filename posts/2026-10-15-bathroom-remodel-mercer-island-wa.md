@@ -138,3 +138,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 6. Verify every firm on [L&I Verify](https://secure.lni.wa.gov/verify/) and confirm the Mercer Island business license before signing.
 
 A clear permit map and a written wet-area spec beat a beautiful tile sample that never survives rough-in. Start with the City's thresholds and critical-area check, then choose the finishes.
+
+**Related on the Board:** [Electrical Upgrades for Bathroom Remodels WA](2026-08-10-electrical-upgrades-bathroom-remodels-wa.html), [electrician and electrical directory](../electrician.html) and [WA contractor bonds and insurance](../bonds-and-insurance.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)

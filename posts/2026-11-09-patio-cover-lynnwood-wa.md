@@ -145,7 +145,7 @@ Brand names are a starting point. The ledger flashing, the footings, the uplift 
 
 ## How to shortlist and verify the crew
 
-Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming active registration, bonding and insurance, getting multiple written bids, and using a written contract. Look up every firm — the builder and the electrical contractor — on [L&I Verify](https://secure.lni.wa.gov/verify/). Ask each bidder for recent patio covers, photos of the ledger and footing stage (not only finished work), and a written scope that states:
+Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming active registration, bonding and insurance, getting multiple written bids, and using a [written contract](../contractor-contract-basics.html). Look up every firm — the builder and the electrical contractor — on [L&I Verify](https://secure.lni.wa.gov/verify/). Ask each bidder for recent patio covers, photos of the ledger and footing stage (not only finished work), and a written scope that states:
 
 - Whether the property is inside Lynnwood city limits, and which permits — building and electrical — the bidder will apply for.
 - The site plan dimensions to each property line, measured to the roof edge.
@@ -169,3 +169,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 5. Apply through the City's [Online Permit Portal](https://www.lynnwoodwa.gov/Services/Apply-for-a-Permit/Online-Permit-Portal-Apply-Review-Pay-Issue-Permits-Inspections) over the winter, add the electrical permit if you want lights or a fan, and schedule the footing inspection before any concrete goes in.
 
 A Lynnwood patio cover worth having is one that is permitted, flashed where it meets the house, set on proper footings, and drained so the water lands somewhere it belongs. Start with the City's own checklists, read the bids against them, and hire a crew that puts those details in writing.
+
+**Related on the Board:** [Kitchen Remodel Lynnwood WA](2026-09-09-kitchen-remodel-lynnwood-wa.html) and [the bid comparison checklist](../bid-comparison.html).
+
+## Watch on the Board's YouTube
+
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)

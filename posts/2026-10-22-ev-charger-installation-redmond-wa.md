@@ -142,9 +142,9 @@ Ask which models a bidder installs most often, confirm the exact model against P
 
 ## How to shortlist and verify an installer
 
-Get two or three written bids built on the list above. Then:
+Get two or three [written bids](../bid-comparison.html) built on the list above. Then:
 
-- Look up each company on [Washington L&I Verify](https://secure.lni.wa.gov/verify/) and confirm the person doing the wiring holds the right electrical license and the company holds an electrical contractor license, bond and insurance.
+- Look up each company on [Washington L&I Verify](https://secure.lni.wa.gov/verify/) and confirm the person doing the wiring holds the right electrical license and the company holds an electrical contractor license, [bond and insurance](../bonds-and-insurance.html).
 - Redmond's [electrical application](https://www.redmond.gov/DocumentCenter/View/2198/Electrical-Application-PDF) asks for the contractor's Washington license number and whether they hold a Redmond business license. Ask for both before work starts.
 - Ask to see the permit in REPS once it is issued, and do not close up walls or ceilings before the inspection.
 - Walk through the Board's [verify a contractor](../verify-contractor.html) and [red flags](../red-flags-hiring.html) pages before you sign.
@@ -163,3 +163,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 6. Verify every firm on [L&I Verify](https://secure.lni.wa.gov/verify/) and make sure the Redmond electrical permit is issued before the wiring starts.
 
 A home charger looks like a small purchase. In Redmond it is really a short electrical project — capacity check, circuit design, City permit, inspection — and the installer who walks you through those steps in writing is usually the one who will do it right.
+
+**Related on the Board:** [home addition cost factors](../addition-cost-factors.html) and [second story vs teardown](../second-story-vs-teardown.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [4 Best Home Addition Contractors in Bellevue, WA (2026)](https://youtu.be/z_EF36WjunY)
+- [Adding On? Freeze These 6 Things Before You Ask for a Price](https://www.youtube.com/shorts/EvOh_7_3za4)

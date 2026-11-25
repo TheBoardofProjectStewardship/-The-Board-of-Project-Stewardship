@@ -18,7 +18,7 @@ Kirkland’s mix of waterfront-adjacent neighborhoods, mid-century ranches, and 
 
 ## Neighborhood context
 
-Whether you are near Juanita, Houghton, the Rose Hill corridor, or closer to downtown Kirkland, staging, street parking, and neighbor noticing still matter. Steep or partially retained lots can change foundation type, excavation access, and how long temporary weather protection has to stay up. Ask bidders how they have sequenced Kirkland or nearby Eastside additions of similar age and grade — especially homes where a prior partial remodel never updated the roof drainage plan.
+Whether you are near Juanita, Houghton, the Rose Hill corridor, or closer to downtown [Kirkland](../kirkland.html), staging, street parking, and neighbor noticing still matter. Steep or partially retained lots can change foundation type, excavation access, and how long temporary weather protection has to stay up. Ask bidders how they have sequenced Kirkland or nearby Eastside additions of similar age and grade — especially homes where a prior partial remodel never updated the roof drainage plan.
 
 HOA or neighborhood design rules can affect exterior materials, window proportions, and dumpster placement even when the addition itself is clearly allowed. Put those constraints in the proposal so they are not discovered after framing starts.
 
@@ -84,3 +84,12 @@ When you interview firms, ask them to walk a recent addition chronologically: di
 Use the Board directories as a starting shortlist — especially [additions](../additions.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for addition work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden assemblies. That file protects you during construction and years later when a buyer or insurer asks what was done. More local guidance continues on the [blog](../blog.html).
+
+**Related on the Board:** [second story vs teardown](../second-story-vs-teardown.html) and [home addition cost factors](../addition-cost-factors.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [4 Best Home Addition Contractors in Bellevue, WA (2026)](https://youtu.be/z_EF36WjunY)
+- [Adding On? Freeze These 6 Things Before You Ask for a Price](https://www.youtube.com/shorts/EvOh_7_3za4)
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)

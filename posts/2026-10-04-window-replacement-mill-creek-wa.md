@@ -96,3 +96,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 4. **Schedule** — build calendar buffer for wet-weather protection and inspection timing published by the city.
 
 Stay editorial: verify credentials, insist on drained openings, and treat Mill Creek’s code and climate as design inputs — not afterthoughts.
+
+**Related on the Board:** [Deck Replacement Mill Creek WA](2026-11-08-deck-replacement-mill-creek-wa.html), [red flags when hiring](../red-flags-hiring.html) and [hiring a contractor](../hiring-a-contractor.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)

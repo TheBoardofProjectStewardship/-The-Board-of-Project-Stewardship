@@ -72,7 +72,7 @@ If a split would displace a renter through demolition or alteration of existing 
 
 Cities whose next comprehensive plan update is due in 2027 must adopt the rules in that update. All other cities must put them in place within two years of July 27, 2025.
 
-The lot split work follows Edmonds' 2025 middle housing code. In June 2025, the City Council voted 6-1 to adopt [Ordinance 4397](https://cdnsm5-hosted.civiclive.com/UserFiles/Servers/Server_16494932/File/Government/Departments/Planning%20and%20Development/Planning%20Division/Code%20Updates/Ordinance%204397%20-%20Middle%20Housing.pdf) to comply with HB 1110, the 2023 state law requiring cities to allow duplexes, triplexes or other multifamily housing in single-family zones, [My Edmonds News reported](https://myedmondsnews.com/2025/06/council-approves-middle-housing-code-debates-details-of-levy-lid-lift-resolution/). The ordinance changed all RS single-family zones to new LDR low-density residential zones and cut lot coverage from 45% to 35% for all lots.
+The lot split work follows [Edmonds](../edmonds.html)' 2025 middle housing code. In June 2025, the City Council voted 6-1 to adopt [Ordinance 4397](https://cdnsm5-hosted.civiclive.com/UserFiles/Servers/Server_16494932/File/Government/Departments/Planning%20and%20Development/Planning%20Division/Code%20Updates/Ordinance%204397%20-%20Middle%20Housing.pdf) to comply with HB 1110, the 2023 state law requiring cities to allow duplexes, triplexes or other multifamily housing in single-family zones, [My Edmonds News reported](https://myedmondsnews.com/2025/06/council-approves-middle-housing-code-debates-details-of-levy-lid-lift-resolution/). The ordinance changed all RS single-family zones to new LDR low-density residential zones and cut lot coverage from 45% to 35% for all lots.
 
 Nearby governments acted on lot splits this month. The Snohomish County Council unanimously approved Ordinance 26-036 on Oct. 14, making residential lot splits an administrative process, [The Herald reported](https://www.heraldnet.com/2026/10/14/snoco-council-passes-ordinance-to-make-lot-splitting-easier/). Everett approved changes allowing lots as small as 2,000 square feet, down from a 5,000-square-foot minimum, [The Herald reported](https://www.heraldnet.com/2026/10/16/everett-approves-reforms-to-land-division-process/).
 
@@ -91,5 +91,13 @@ Owners weighing a split together with a new home or ADU may want a builder's inp
 Follow the Planning Board's agendas and comment when the subdivision package reaches its public hearing.
 
 ![A homeowner reviews a parcel map and measuring tape at a kitchen table in Edmonds](../assets/images/news/2026-10-26-edmonds-lot-split-homeowner-3.webp "Nothing changes yet for Edmonds homeowners; lot-split rules are still in introduction, with standards under debate before a public hearing on a bundled subdivision package.")
+
+**Related on the Board:** [Edmonds custom home builders](../edmonds-custom-homes.html) and [ADU planning](../adu.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Kitchen Remodelers in Edmonds, WA (2026)](https://youtu.be/Gx1i0bavz8o)
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)
 
 Questions or corrections: editorial@boardofprojectstewardship.com

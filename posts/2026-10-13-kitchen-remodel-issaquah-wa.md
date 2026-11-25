@@ -133,3 +133,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 5. Verify every firm on [L&I Verify](https://secure.lni.wa.gov/verify/), confirm the City business license, and keep inspection requests on [inspection.mybuildingpermit.com](https://inspection.mybuildingpermit.com/).
 
 A clear permit map and a moisture-smart scope beat a beautiful mood board that never survives rough-in. Start with jurisdiction and paperwork, then choose finishes that match how Issaquah kitchens actually get inspected and lived in.
+
+**Related on the Board:** [Solar Panel Installation Issaquah WA](2026-11-13-solar-panel-installation-issaquah-wa.html), [electrician and electrical directory](../electrician.html) and [kitchen cost factors](../kitchen-cost-factors.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Kitchen Remodelers in Edmonds, WA (2026)](https://youtu.be/Gx1i0bavz8o)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)

@@ -25,7 +25,7 @@ EDMONDS -- Three months after Edmonds launched a program meant to speed permits 
 
 ## Where the Edmonds program stands
 
-The city launched the pre-approved DADU program in late July, [The Herald](https://www.heraldnet.com/2026/07/31/edmonds-launches-pre-approved-design-program-for-adus/) reported at the time. Ted Corey, Edmonds' permitting program manager, told My Edmonds News the city has received inquiries from architects trying to understand the program, along with interest from designers who want their plans in the catalog and from developers working directly with architects. None has filed a formal application.
+The city launched the pre-approved DADU program in late July, [The Herald](https://www.heraldnet.com/2026/07/31/edmonds-launches-pre-approved-design-program-for-adus/) reported at the time. Ted Corey, [Edmonds](../edmonds.html)' permitting program manager, told My Edmonds News the city has received inquiries from architects trying to understand the program, along with interest from designers who want their plans in the catalog and from developers working directly with architects. None has filed a formal application.
 
 Asked when the catalog will be available to the public, Corey said that is out of the city's hands, because someone has to apply first, [My Edmonds News reported](https://myedmondsnews.com/2026/10/where-does-south-snohomish-county-stand-with-pre-approved-dadus/). He also said new state building codes are expected to take effect next year, and architects may be weighing that, because designs that are not up to code cannot stay in the catalog.
 
@@ -76,5 +76,13 @@ For now, there are no pre-approved plans to buy in Edmonds, so a homeowner build
 ![Homeowner checklist, tape and city permitting handout on a kitchen table in Edmonds](../assets/images/news/2026-10-27-edmonds-dadu-catalog-homeowner-3.webp "Until Edmonds has catalog plans to buy, homeowners still need a full design review with the site plan, and should check zoning, critical areas and the coming state code update.")
 
 Before hiring, homeowners can check a contractor's registration with the Washington Department of Labor & Industries. [Pacific Pro Group](https://pacificprogroup.com/), the Board of Project Stewardship's No. 1-ranked hire, is one contractor homeowners can ask to review a backyard cottage project.
+
+**Related on the Board:** [Edmonds rewrites park impact fees so smaller homes pay less](edmonds-park-impact-fees-smaller-homes.html) and [ADU cost factors](../adu-cost-factors.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)
+- [5 Best Kitchen Remodelers in Edmonds, WA (2026)](https://youtu.be/Gx1i0bavz8o)
 
 Questions or corrections: editorial@boardofprojectstewardship.com

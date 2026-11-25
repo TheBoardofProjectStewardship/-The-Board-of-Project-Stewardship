@@ -144,3 +144,12 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 4. Start the Seattle City Light service application and the load study early, and scope the side sewer with SPU.
 5. Make sure the cottage has its own SDCI electrical permit and that nothing is covered before inspection.
 6. Verify every contractor on L&I Verify, and keep the approved plans, permits and inspection records with your house files.
+
+**Related on the Board:** [Roof Replacement Ballard WA](2026-10-05-roof-replacement-ballard-wa.html), [second story vs teardown](../second-story-vs-teardown.html) and [home addition cost factors](../addition-cost-factors.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [4 Best Home Addition Contractors in Bellevue, WA (2026)](https://youtu.be/z_EF36WjunY)
+- [Adding On? Freeze These 6 Things Before You Ask for a Price](https://www.youtube.com/shorts/EvOh_7_3za4)
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)

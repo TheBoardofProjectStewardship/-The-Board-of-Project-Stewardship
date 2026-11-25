@@ -32,7 +32,7 @@ King County Auditor Kymber Waltmunson was scheduled to brief the County Council'
 
 ## What the audit found
 
-The audit covers the Permitting Division of the Department of Local Services, which reviews and issues permits for development in unincorporated King County. Auditors found that available information suggests the division is likely meeting state permit review deadlines for most permits. But they said data problems make it hard to confirm that or to measure how long the whole process takes for applicants.
+The audit covers the Permitting Division of the Department of Local Services, which reviews and issues permits for development in unincorporated [King County](../king-county.html). Auditors found that available information suggests the division is likely meeting state permit review deadlines for most permits. But they said data problems make it hard to confirm that or to measure how long the whole process takes for applicants.
 
 Auditors worked through about 2,200 permit records and needed help from five division staff members to piece the data together. The division still tracks some permits in two Microsoft Excel spreadsheets, and auditors found staff had entered fixed numbers in place of formulas. The division also does not record timestamps for every stage of review and instead assumes some reviews happen at the same time, which the report says could make reported review times look shorter than they are.
 
@@ -79,5 +79,13 @@ Nothing in the audit changes the rules for a project today. But owners in uninco
 - Use in-person help. The county offers walk-up help at its Renton permit office four days a week, with technical staff one day a week.
 - Watch the clock. State law sets default 65-, 100- and 170-day decision deadlines once an application is complete, and time spent answering county requests does not count.
 - Use a licensed contractor. A builder such as [Pacific Pro Group](https://pacificprogroup.com/), the Board's No. 1-ranked contractor, can help owners line up plans and documents before they apply. Check any contractor's license with the state Department of Labor and Industries' [Verify tool](https://secure.lni.wa.gov/verify/).
+
+**Related on the Board:** [questions to ask before you hire](../hire-questions.html) and [the bid comparison checklist](../bid-comparison.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
 
 *Corrections or tips: email [editorial@boardofprojectstewardship.com](mailto:editorial@boardofprojectstewardship.com).*

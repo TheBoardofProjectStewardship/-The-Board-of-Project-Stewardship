@@ -112,3 +112,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 4. **Verify and compare** — L&I Verify results, flashing details, and performance values in writing before any deposit.
 
 Treat Shoreline's code language, older house stock, and wet weather as design inputs from the start, and the new windows will keep the wall dry long after the installer leaves.
+
+**Related on the Board:** [Tree Removal Permits Before Remodeling Shoreline WA](2026-11-12-tree-removal-permit-remodel-shoreline-wa.html), [red flags when hiring](../red-flags-hiring.html) and [hiring a contractor](../hiring-a-contractor.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)

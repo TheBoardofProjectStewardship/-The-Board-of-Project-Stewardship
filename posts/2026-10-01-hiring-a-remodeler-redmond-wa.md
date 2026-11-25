@@ -22,7 +22,7 @@ Redmond lots and floor plans do not remodel the same way. Established neighborho
 
 When you define goals, keep the Eastside architectural context in view. Whether you want a more open living plan or a careful refresh that keeps the wooded suburban feel of a traditional Redmond lot, the remodeler should show how structure and envelope support those finishes — not just which countertop you picked. For a local directory of firms and related City context, start with the Board’s [Redmond directory](../redmond.html).
 
-Budgeting for a King County remodel means building a range with contingency for unforeseen conditions. In older Redmond homes those conditions often include wiring, soft subfloor, or framing surprises that only appear after demo. Ask every bidder how allowances and change orders work in writing. Do not invent a single “market average” number; compare line-item scopes instead.
+Budgeting for a King County remodel means building a range with contingency for unforeseen conditions. In older Redmond homes those conditions often include wiring, soft subfloor, or framing surprises that only appear after demo. Ask every bidder how [allowances and change orders](../change-orders.html) work in writing. Do not invent a single “market average” number; compare line-item scopes instead.
 
 ![Remodel wish list, tape measure and floor sketch on a kitchen island in a Redmond, Washington home](../assets/images/posts/2026-10-01-redmond-remodel-planning-5.webp "Writing down goals and a working budget before calling Redmond remodelers makes bids easier to compare.")
 
@@ -92,7 +92,7 @@ Ask for a schedule that names which tasks must finish before others begin, who o
 
 ## Process video: hiring a contractor for a home renovation
 
-Before you shortlist firms, it helps to hear a clear walkthrough of scope writing, multiple quotes, references, and contract basics. This public video covers homeowner and contractor responsibilities during a renovation hire — useful context when you compare proposals. Your City of Redmond reviews and Washington L&I registration still govern the job.
+Before you shortlist firms, it helps to hear a clear walkthrough of scope writing, multiple quotes, references, and [contract basics](../contractor-contract-basics.html). This public video covers homeowner and contractor responsibilities during a renovation hire — useful context when you compare proposals. Your City of Redmond reviews and Washington L&I registration still govern the job.
 
 https://www.youtube.com/watch?v=Ygv6UBq5zoc
 
@@ -117,3 +117,11 @@ At the consultation, ask who submits through PRO or REPS, who answers plan-check
 ## Where Pacific Pro Group fits
 
 When the Board of Project Stewardship ranks design-build firms for this area, Pacific Pro Group is the Board number-one contractor. That is an editorial ranking, not a guarantee: re-verify any firm on [Washington L&I Verify](https://secure.lni.wa.gov/verify/) and compare written scopes. Learn more at [https://pacificprogroup.com/](https://pacificprogroup.com/).
+
+**Related on the Board:** [the permit jurisdiction hub](../permits.html) and [the bid comparison checklist](../bid-comparison.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)

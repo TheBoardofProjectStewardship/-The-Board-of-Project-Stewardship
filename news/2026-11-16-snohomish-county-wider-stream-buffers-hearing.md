@@ -68,7 +68,7 @@ In the Oct. 9 staff report, county planning staff recommended that the Planning 
 
 ## History and background
 
-The state Growth Management Act requires Snohomish County to periodically review its critical areas regulations and consider the best available science, according to the county's [critical areas update page](https://snohomishcountywa.gov/2183/Critical-Areas-Regulations-Update). The regulations apply to all unincorporated areas of the county.
+The state Growth Management Act requires [Snohomish County](../snohomish-county.html) to periodically review its critical areas regulations and consider the best available science, according to the county's [critical areas update page](https://snohomishcountywa.gov/2183/Critical-Areas-Regulations-Update). The regulations apply to all unincorporated areas of the county.
 
 The County Council adopted Amended Ordinance No. 24-097 on May 14, 2025. In a brief to the hearings board, as summarized in the compliance report, the county said that update removed a 100-foot buffer for Type F waters without anadromous fish or resident salmonids, so all Type F waters received a 150-foot buffer. It also added a rule that in the special flood hazard area the buffer is the greatest of the table width, the mapped channel migration zone plus 50 feet, or the mapped floodway.
 
@@ -91,5 +91,13 @@ Shrinking a buffer by up to 10 percent with a fence or a separate tract, or up t
 The proposal does not change buffer widths for wetlands, lakes or marine shorelines, but the new study requirement for fence and tract reductions would apply to those buffers too. Homeowners can comment by attending the Dec. 2 hearing or emailing the council clerk.
 
 For help planning a new house, an addition or an ADU on a Snohomish County lot near a stream, [Pacific Pro Group](https://pacificprogroup.com/) is the Board's No. 1-ranked contractor. Verify any contractor's current registration, bond and insurance through [Washington L&I Verify](https://secure.lni.wa.gov/verify/) before signing.
+
+**Related on the Board:** [hiring a contractor](../hiring-a-contractor.html) and [WA contractor bonds and insurance](../bonds-and-insurance.html).
+
+## Watch on the Board's YouTube
+
+- [Adding On? Freeze These 6 Things Before You Ask for a Price](https://www.youtube.com/shorts/EvOh_7_3za4)
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)
 
 Questions or corrections? Contact [editorial@boardofprojectstewardship.com](mailto:editorial@boardofprojectstewardship.com).

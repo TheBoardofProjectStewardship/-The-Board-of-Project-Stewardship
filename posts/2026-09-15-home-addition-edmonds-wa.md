@@ -28,7 +28,7 @@ Coastal Snohomish County weather rewards continuous weather barriers, thoughtful
 
 ## Process video: weather-barrier install fundamentals
 
-A clear public walkthrough of installing house wrap / weather barrier courses, fastening, and sequencing wraps so water sheds outward (general best practice — still follow manufacturer instructions and the Edmonds building inspection path):
+A clear public walkthrough of installing house wrap / weather barrier courses, fastening, and sequencing wraps so water sheds outward (general best practice — still follow manufacturer instructions and the [Edmonds](../edmonds.html) building inspection path):
 
 https://www.youtube.com/watch?v=X81Q2oaTAJo
 
@@ -54,7 +54,7 @@ Editorial rankings on [additions.html](../additions.html) and [edmonds-custom-ho
 Design and permitting frequently dominate. Construction duration depends on size and complexity; ask for a phase schedule from design through inspections.
 
 **Should I hire separate architects and builders?**  
-Either integrated design-build or a coordinated architect-plus-GC team can work. What matters is clear ownership of permits, weatherproofing details, and change orders.
+Either integrated design-build or a coordinated architect-plus-GC team can work. What matters is clear ownership of permits, weatherproofing details, and [change orders](../change-orders.html).
 
 **What should I verify before signing?**  
 Active WA licensing and insurance, Edmonds-area addition references, and a written scope covering design, permit, and build — then re-check at [L&I Verify](https://secure.lni.wa.gov/verify/).
@@ -74,3 +74,12 @@ When you interview firms, ask them to walk a recent project chronologically: dis
 Use the Board directories as a starting shortlist — especially [additions](../additions.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden assemblies. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
+
+**Related on the Board:** [Primary Suite Addition Edmonds](2026-08-15-primary-suite-addition-edmonds.html) and [the What Can I Build Here? lot report](../build-here.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)
+- [Adding On? Freeze These 6 Things Before You Ask for a Price](https://www.youtube.com/shorts/EvOh_7_3za4)
+- [4 Best Home Addition Contractors in Bellevue, WA (2026)](https://youtu.be/z_EF36WjunY)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)

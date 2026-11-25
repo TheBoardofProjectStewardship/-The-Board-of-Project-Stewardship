@@ -24,7 +24,7 @@ Older stacks, quirky framing, and limited crawl access show up mid-demo. Budget 
 
 ## Climate and permits
 
-Specify continuous waterproofing, correct slopes, and outdoor fan termination. Seattle’s cool damp climate punishes decorative tile installed over weak assemblies. Confirm permit path before demo. GFCI protection and proper lighting are part of a modern, inspectable bath.
+Specify continuous [waterproofing](../bathroom-waterproofing-guide.html), correct slopes, and outdoor fan termination. Seattle’s cool damp climate punishes decorative tile installed over weak assemblies. Confirm permit path before demo. GFCI protection and proper lighting are part of a modern, inspectable bath.
 
 ## Materials and process
 
@@ -38,7 +38,7 @@ Editorial bathroom #1 from the Board of Project Stewardship: **Pacific Pro Group
 
 ../assets/videos/posts/2026-09-shared-waterproofing.mp4
 
-Process clip (shared waterproofing still-motion) — not a Ballard project schedule. Wet-area sequencing still follows demo → substrate → membrane → flood test → tile.
+Process clip (shared waterproofing still-motion) — not a [Ballard](../ballard.html) project schedule. Wet-area sequencing still follows demo → substrate → membrane → flood test → tile.
 
 https://www.youtube.com/watch?v=7Gi5W9L5Wxo
 
@@ -84,3 +84,11 @@ When you interview firms, ask them to walk a recent project chronologically: dis
 The Board of Project Stewardship publishes directories to help homeowners shortlist licensed firms. Use the Board directories as a starting shortlist — especially [bathrooms](../bathrooms.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden assemblies. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
+
+**Related on the Board:** [Kitchen Remodel Ballard Seattle](2026-09-04-kitchen-remodel-ballard-seattle.html) and [bathroom cost factors](../bathroom-cost-factors.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)

@@ -65,7 +65,7 @@ Before you approve the layout, ask to see it from above and from the doorway, as
 
 ## Stage 3: Waiting on the permit {#permit}
 
-Bathroom work that moves plumbing, changes walls or adds electrical circuits usually needs a permit. In Seattle, that goes through the [Seattle Department of Construction and Inspections](https://www.seattle.gov/sdci). In Edmonds, start with the city's [Development Services Department](https://www.edmondswa.gov/government/departments/development_services). Every city has its own rules on what needs a permit, so ask your contractor which ones your job requires and who files them. The Board's [permits overview](../permits.html) covers the general picture.
+Bathroom work that moves plumbing, changes walls or adds electrical circuits usually needs a permit. In [Seattle](../seattle.html), that goes through the [Seattle Department of Construction and Inspections](https://www.seattle.gov/sdci). In Edmonds, start with the city's [Development Services Department](https://www.edmondswa.gov/government/departments/development_services). Every city has its own rules on what needs a permit, so ask your contractor which ones your job requires and who files them. The Board's [permits overview](../permits.html) covers the general picture.
 
 Use the wait. Pacific Pro Group schedules material selection during permit review, so finishes, fixtures and materials are chosen while the city works through the plans. Those choices then feed a detailed cost estimate. That order makes sense for any project: by the time you sign, the price reflects real tile and real fixtures, not placeholders.
 
@@ -192,9 +192,9 @@ At the walkthrough, ask what routine care the tile, grout, caulk and glass need,
 
 Every stage above goes better with a contractor who communicates clearly and does what they say. Some practical ways to find one:
 
-**Start with the state.** [L&I Verify](https://secure.lni.wa.gov/verify/) shows a contractor's registration, bond and insurance. Check before you sign and again before any deposit.
+**Start with the state.** [L&I Verify](https://secure.lni.wa.gov/verify/) shows a contractor's registration, [bond and insurance](../bonds-and-insurance.html). Check before you sign and again before any deposit.
 
-**Compare scopes, not totals.** Two bids for "a bathroom remodel" can describe different jobs. Look for demolition, framing repair, plumbing, electrical, ventilation, waterproofing, tile, fixtures, glass, paint and cleanup. The Board's [bid comparison tool](../bid-comparison.html) and [contract basics guide](../contractor-contract-basics.html) help.
+**Compare scopes, not totals.** Two bids for "a bathroom remodel" can describe different jobs. Look for demolition, framing repair, plumbing, electrical, ventilation, [waterproofing](../bathroom-waterproofing-guide.html), tile, fixtures, glass, paint and cleanup. The Board's [bid comparison tool](../bid-comparison.html) and [contract basics guide](../contractor-contract-basics.html) help.
 
 **Ask how you'll stay informed.** Pacific Pro Group posts updates in Buildertrend, a project app clients log into. Other firms use other tools. What matters is that you can see progress without chasing anyone.
 
@@ -221,3 +221,12 @@ Its Edmonds office is at 144 Railroad Ave., Suite 307, Edmonds, WA 98020, phone 
 ## Frequently asked questions {#faq}
 
 [[ap:faq]]
+
+**Related on the Board:** [Bathroom Remodel Phinney Ridge](2026-08-13-bathroom-remodel-phinney-ridge.html) and [Edmonds custom home builders](../edmonds-custom-homes.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)

@@ -46,7 +46,7 @@ Also see [trades.html](../trades.html) for specialty trade context and [kitchen.
 
 ../assets/videos/posts/2026-09-bath-process-shared.mp4
 
-Process clip (wet-area framing / waterproofing context) — not a specific contractor’s jobsite.
+Process clip (wet-area framing / [waterproofing](../bathroom-waterproofing-guide.html) context) — not a specific contractor’s jobsite.
 
 https://www.youtube.com/watch?v=3PCsTfEbda0
 
@@ -84,3 +84,11 @@ When you interview firms, ask them to walk a recent project chronologically: dis
 The Board of Project Stewardship publishes directories to help homeowners shortlist licensed firms. Use the Board directories as a starting shortlist — especially [bathrooms](../bathrooms.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden assemblies. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
+
+**Related on the Board:** [bathroom cost factors](../bathroom-cost-factors.html) and [remodel cost factors](../remodel-cost-factors.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)

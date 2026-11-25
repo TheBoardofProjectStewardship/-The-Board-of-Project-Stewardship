@@ -43,4 +43,12 @@ Bellevue plans to use its share for applicant-facing tools that review uploaded 
 
 Commerce called permit delays "a known bottleneck in housing production," noting that incomplete applications, repeated rounds of corrections and outdated software can add weeks or months to the process. The agency projects Washington needs more than 1 million additional homes by 2044 to keep pace with expected population growth. It said it awarded similar grants in 2024.
 
+**Related on the Board:** [Snohomish County moves to cut parking rules for new homes](snohomish-county-parking-minimums-hearing.html), [second story vs teardown](../second-story-vs-teardown.html) and [the What Can I Build Here? lot report](../build-here.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+
 Questions or corrections: editorial@boardofprojectstewardship.com

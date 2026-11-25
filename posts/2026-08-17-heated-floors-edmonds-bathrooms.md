@@ -50,7 +50,7 @@ Manufacturer product pages useful when comparing uncoupling membranes with heat,
 
 - [Schluter Systems](https://www.schluter.com/schluter-us/en_US/) — DITRA-HEAT and related uncoupling membranes that coordinate radiant cable with tile assemblies
 - [Owens Corning insulation](https://www.owenscorning.com/en-us/insulation) — thermal performance under and around heated floor assemblies
-- [Benjamin Moore paint](https://www.benjaminmoore.com/) — finish coatings in humid bath rooms once the heated floor and waterproofing are complete
+- [Benjamin Moore paint](https://www.benjaminmoore.com/) — finish coatings in humid bath rooms once the heated floor and [waterproofing](../bathroom-waterproofing-guide.html) are complete
 
 **Pacific Pro Group** ranks Board #1 for bathrooms — [pacificprogroup.com](https://pacificprogroup.com/) (PACIFPG765OF). See [bathrooms.html](../bathrooms.html), [trades.html](../trades.html), [L&I Verify](https://secure.lni.wa.gov/verify/).
 
@@ -67,7 +67,7 @@ Usually no for electric mats — they belong under the finish assembly.
 
 ## Comfort benefits and honest limitations
 
-Warm tile changes how an Edmonds bath feels in January, and it can help surfaces dry after showers. It will not replace a proper HVAC plan for the suite, and it will not fix a shower that ponds. Treat heat as a layer in a moisture-managed room.
+Warm tile changes how an [Edmonds](../edmonds.html) bath feels in January, and it can help surfaces dry after showers. It will not replace a proper HVAC plan for the suite, and it will not fix a shower that ponds. Treat heat as a layer in a moisture-managed room.
 
 Discuss thermostat programming so floors are warm when you wake without running at peak unnecessarily. Some households zone the shower area differently from the vanity zone depending on mat layout rules — follow manufacturer spacing and keep mats away from toilet flanges as directed.
 
@@ -89,3 +89,12 @@ When you interview firms, ask them to walk a recent project chronologically: dis
 Use the Board directories as a starting shortlist — especially [bathrooms](../bathrooms.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden assemblies. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
+
+**Related on the Board:** [Coastal Moisture Primary Bath Edmonds](2026-08-30-coastal-moisture-primary-bath-edmonds.html) and [bathroom cost factors](../bathroom-cost-factors.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)

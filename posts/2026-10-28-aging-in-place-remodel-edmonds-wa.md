@@ -121,7 +121,7 @@ Whatever products a bidder proposes, ask for the model and finish of each grab b
 
 ## How to shortlist and verify an aging-in-place contractor
 
-Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming that a contractor has an active registration, is bonded and insured, and has a clean history, getting at least three written bids, and putting the job in a written contract.
+Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming that a contractor has an active registration, is bonded and insured, and has a clean history, getting at least three written bids, and putting the job in a [written contract](../contractor-contract-basics.html).
 
 - Look up every firm, including the plumber and electrician, on [L&I Verify](https://secure.lni.wa.gov/verify/).
 - Ask how they will get a flush shower entry in your house specifically: recessing the floor, building up the room, or something else, and whether an engineer is needed.
@@ -144,3 +144,12 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 6. Keep the permit records, blocking photos and product sheets together with your house papers.
 
 The best aging-in-place remodels in Edmonds are the ones planned before they are needed. The blocking, the floor slope and the door widths are cheap to get right while the walls are open and hard to fix later, so a contractor who talks about those details first, and puts them in writing, is usually the one worth hiring.
+
+**Related on the Board:** [Heated Floors in Edmonds Bathrooms](2026-08-17-heated-floors-edmonds-bathrooms.html) and [windows and doors directory](../windows.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Kitchen Remodelers in Edmonds, WA (2026)](https://youtu.be/Gx1i0bavz8o)

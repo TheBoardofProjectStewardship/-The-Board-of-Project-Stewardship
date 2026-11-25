@@ -20,7 +20,7 @@ A kitchen remodel touches structure, plumbing, electrical, finishes, and daily l
 
 - **Active WA licensing and insurance** — verify at [L&I Verify](https://secure.lni.wa.gov/verify/) before you sign.
 - **Kitchen portfolio depth** — ask for recent local projects similar in size and finish level.
-- **Clear process** — design meetings, selections schedule, permit ownership, and change-order rules in writing.
+- **Clear process** — design meetings, selections schedule, permit ownership, and [change-order](../change-orders.html) rules in writing.
 - **Local service area** — Edmonds, Shoreline, Lynnwood, North Seattle, and Eastside firms that already know North Sound codes save time.
 
 ## Shortlist from an editorial directory
@@ -56,7 +56,7 @@ Manufacturer product pages useful when comparing windows adjacent to kitchens, f
 
 Edmonds, Shoreline, Lynnwood, and North Seattle kitchens often share the same constraints: older electrical panels, outdoor-exhaust paths that must clear roofs or sidewalls, and long-lead cabinets that drive the calendar more than demolition days. Ask bidders how they protect adjacent floors when the kitchen opens to dining, and how they stage a temporary cooking setup so you are not living out of a microwave for months without a plan.
 
-When comparing proposals, line up identical scopes: cabinet manufacturer tier, countertop material, appliance package, plumbing fixture grade, electrical panel work, and whether structural openings are engineered. A cheap bid that omits make-up air for a large hood or treats allowances as “owner will figure it out” is not a bargain.
+When [comparing proposals](../bid-comparison.html), line up identical scopes: cabinet manufacturer tier, countertop material, appliance package, plumbing fixture grade, electrical panel work, and whether structural openings are engineered. A cheap bid that omits make-up air for a large hood or treats allowances as “owner will figure it out” is not a bargain.
 
 ## Permit ownership and inspection gates
 
@@ -71,3 +71,11 @@ When you interview firms, ask them to walk a recent project chronologically: dis
 Use the Board of Project Stewardship directories as a starting shortlist — especially [kitchen](../kitchen.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder.
 
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden assemblies. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. Compare at least two or three licensed design-build remodelers, request written scopes, and weigh communication and process as heavily as the bottom line. More local guidance continues on the [blog](../blog.html).
+
+**Related on the Board:** [kitchen cost factors](../kitchen-cost-factors.html) and [red flags when hiring](../red-flags-hiring.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Kitchen Remodelers in Edmonds, WA (2026)](https://youtu.be/Gx1i0bavz8o)
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)

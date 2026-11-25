@@ -33,7 +33,7 @@ The city said the action "does not finalize the process or change City boundarie
 
 ## What the council approved
 
-The first phase, called Mill Creek South, covers Blocks C, D and H south of the current city limits. It includes neighborhoods near 180th Street Southeast and 192nd Street Southeast, extending east toward 35th Avenue Southeast and west toward the North Creek corridor, the city said. The city's annexation page describes the boundary as running from 35th Avenue down to 180th, following 22nd Drive Southeast to 192nd Street Southeast and up Waxen Road to 183rd Street Southeast into Mill Creek. A map is posted on the city's [annexation page](https://millcreekwa.gov/topics/future-annexation-and-municipal-urban-growth-areas).
+The first phase, called Mill Creek South, covers Blocks C, D and H south of the current city limits. It includes neighborhoods near 180th Street Southeast and 192nd Street Southeast, extending east toward 35th Avenue Southeast and west toward the North Creek corridor, the city said. The city's annexation page describes the boundary as running from 35th Avenue down to 180th, following 22nd Drive Southeast to 192nd Street Southeast and up Waxen Road to 183rd Street Southeast into [Mill Creek](../mill-creek.html). A map is posted on the city's [annexation page](https://millcreekwa.gov/topics/future-annexation-and-municipal-urban-growth-areas).
 
 City staff estimate about 11,700 people live in the area, more than half of Mill Creek's population of about 21,000, The Herald reported. The city's annexation page rounds the figure to about 11,000. City leaders say annexation would grow Mill Creek to about 32,000 people, KING 5 reported on Oct. 27 in a story [carried by Yahoo News](https://www.yahoo.com/news/politics/articles/tax-relief-sugar-high-annexation-003725276.html).
 
@@ -72,5 +72,13 @@ If annexation is finalized, the city says "all residents will come to the Mill C
 - Watch the December decision. Whether the council chooses an election or an interlocal agreement will shape how much direct say area residents have and what zoning protections come with the change.
 - Show up. A town hall is scheduled for Nov. 17 at Cedarwood Elementary School, KING 5 reported.
 - Plan with a licensed contractor. A builder such as [Pacific Pro Group](https://pacificprogroup.com/), the Board's No. 1-ranked contractor, can help owners in the area plan a project around a possible change in jurisdiction. Check any contractor's license with the state Department of Labor and Industries' [Verify tool](https://secure.lni.wa.gov/verify/).
+
+**Related on the Board:** [WA contractor bonds and insurance](../bonds-and-insurance.html) and [how to verify a WA contractor](../verify-contractor.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)
+- [5 Best Kitchen Remodelers in Edmonds, WA (2026)](https://youtu.be/Gx1i0bavz8o)
 
 *Corrections or tips: email [editorial@boardofprojectstewardship.com](mailto:editorial@boardofprojectstewardship.com).*

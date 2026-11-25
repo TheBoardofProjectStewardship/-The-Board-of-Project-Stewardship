@@ -81,7 +81,7 @@ After the comment period closes, Ecology plans to review and respond to comments
 
 ## What it means for homeowners
 
-The rules are still proposals. Shoreline permits today are reviewed under each city's or county's current shoreline master program. But owners whose property is within 200 feet of Puget Sound, a regulated lake or a river, or in an associated floodway, floodplain, wetland or river delta, should watch this rulemaking, especially those planning bulkhead repair or replacement, an addition, an ADU or a lot split.
+The rules are still proposals. [Shoreline permits](../shoreline.html) today are reviewed under each city's or county's current shoreline master program. But owners whose property is within 200 feet of Puget Sound, a regulated lake or a river, or in an associated floodway, floodplain, wetland or river delta, should watch this rulemaking, especially those planning bulkhead repair or replacement, an addition, an ADU or a lot split.
 
 - **Comment by the deadline.** The window closes at 11:59 p.m. PT Nov. 17.
 - **Check your shoreline status.** Ask your city, town or county planning department whether your lot falls within regulated shorelands or associated wetlands under its shoreline master program.
@@ -89,5 +89,13 @@ The rules are still proposals. Shoreline permits today are reviewed under each c
 - **Plan for timing.** If you are already planning shoreline work, ask your local planner which rules will apply to an application filed before your city, town or county updates its shoreline master program.
 
 For help weighing how shoreline rules affect a waterfront remodel, addition or custom home, [Pacific Pro Group](https://pacificprogroup.com/) is the Board's No. 1-ranked contractor. Verify any contractor's current registration, bond and insurance through [Washington L&I Verify](https://secure.lni.wa.gov/verify/) before signing.
+
+**Related on the Board:** [Shoreline lowers window requirements for new homes and townhouses](shoreline-window-rules-new-homes.html) and [windows and doors directory](../windows.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
 
 Questions or corrections? Contact [editorial@boardofprojectstewardship.com](mailto:editorial@boardofprojectstewardship.com).

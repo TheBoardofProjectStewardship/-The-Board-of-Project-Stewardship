@@ -42,7 +42,7 @@ Board of Project Stewardship Edmonds custom-home coverage lives at [edmonds-cust
 
 ../assets/videos/posts/2026-09-shared-waterproofing.mp4
 
-Process clip (shared wet-assembly still-motion) — not an Edmonds custom-home schedule. Envelope and bath wet rooms still need sequenced membrane work before finishes.
+Process clip (shared wet-assembly still-motion) — not an [Edmonds](../edmonds.html) custom-home schedule. Envelope and bath wet rooms still need sequenced membrane work before finishes.
 
 https://www.youtube.com/watch?v=KRaloDMnASo
 
@@ -80,3 +80,12 @@ When you interview firms, ask them to walk a recent project chronologically: dis
 The Board of Project Stewardship publishes directories to help homeowners shortlist licensed firms. Use the Board directories as a starting shortlist — especially [edmonds custom homes](../edmonds-custom-homes.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden assemblies. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
+
+**Related on the Board:** [Second Story vs Teardown Edmonds](2026-08-09-second-story-vs-teardown-edmonds.html) and [second story vs teardown](../second-story-vs-teardown.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)
+- [5 Best Kitchen Remodelers in Edmonds, WA (2026)](https://youtu.be/Gx1i0bavz8o)
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)

@@ -18,7 +18,7 @@ Mountlake Terrace sits in south Snohomish County between Edmonds, Shoreline, and
 
 ## Neighborhood and jurisdiction context
 
-Whether you are near Town Center, the Interurban Trail corridor, Lake Ballinger–adjacent streets, or closer to the Edmonds and Brier edges, staging still matters. Narrow lots, shared driveways, and street parking limit dumpster and lumber deliveries. Ask bidders how they protect finished rooms on the haul path, how long temporary weather wrap stays up in a wet stretch, and who owns change-order language when excavation discovers soft soils or an undersized footing under an existing wall you planned to open.
+Whether you are near Town Center, the Interurban Trail corridor, Lake Ballinger–adjacent streets, or closer to the Edmonds and Brier edges, staging still matters. Narrow lots, shared driveways, and street parking limit dumpster and lumber deliveries. Ask bidders how they protect finished rooms on the haul path, how long temporary weather wrap stays up in a wet stretch, and who owns [change-order](../change-orders.html) language when excavation discovers soft soils or an undersized footing under an existing wall you planned to open.
 
 HOA or neighborhood design expectations can affect exterior materials, window proportions, and dumpster placement even when the addition itself is clearly allowed. Put those constraints in the proposal so they are not discovered after framing starts. Cross-check [trades.html](../trades.html) for excavation, concrete, framing, and roofing context when your scope touches the envelope.
 
@@ -28,7 +28,7 @@ HOA or neighborhood design expectations can affect exterior materials, window pr
 
 ## Climate, setbacks, stormwater, and permits
 
-Western Washington’s cool, damp seasons punish weak drainage and envelope detailing. If you enlarge the footprint, change roof planes, or disturb grades, expect building review plus possible engineering and stormwater requirements — confirm the current checklist with Mountlake Terrace rather than assuming an Edmonds MyBuildingPermit package or a Kirkland Eastside hillside package transfers. Put permit ownership, inspection sequencing, and temporary living plans in writing before demolition or excavation begins.
+Western Washington’s cool, damp seasons punish weak drainage and envelope detailing. If you enlarge the footprint, change roof planes, or disturb grades, expect building review plus possible engineering and stormwater requirements — confirm the current checklist with [Mountlake Terrace](../mountlake-terrace.html) rather than assuming an Edmonds MyBuildingPermit package or a Kirkland Eastside hillside package transfers. Put permit ownership, inspection sequencing, and temporary living plans in writing before demolition or excavation begins.
 
 Mountlake Terrace publishes residential building application types and filing requirements on its [Building Permits](https://www.cityofmlt.com/177/Building-Permits) page and routes online applications and inspection scheduling through the City’s [Permit Portal](https://mltw-trk.aspgov.com/eTRAKiT/) (also linked from [Permits & Licenses](https://www.cityofmlt.com/1993/Permits-Licenses)). Typical residential review timing published by the City is measured from submittal to first comments — plan for that cycle rather than treating issuance as same-week for a full addition. Do not assume a “small bump-out” skips review when you change structure, exterior walls, or utilities.
 
@@ -109,3 +109,12 @@ When you interview firms, ask them to walk a recent south Snohomish or nearby Ki
 Use the Board directories as a starting shortlist — especially [additions](../additions.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for addition work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden assemblies before walls close. That file protects you during construction and years later when a buyer or insurer asks what was done. More local guidance continues on the [blog](../blog.html).
+
+**Related on the Board:** [Kitchen Addition vs Remodel Edmonds](2026-08-29-kitchen-addition-vs-remodel-edmonds.html) and [the What Can I Build Here? lot report](../build-here.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)
+- [Adding On? Freeze These 6 Things Before You Ask for a Price](https://www.youtube.com/shorts/EvOh_7_3za4)
+- [4 Best Home Addition Contractors in Bellevue, WA (2026)](https://youtu.be/z_EF36WjunY)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)

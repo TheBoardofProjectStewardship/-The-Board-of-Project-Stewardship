@@ -69,7 +69,7 @@ Most exterior paint failures are prep failures. A written scope should say which
 
 1. **Wash.** Remove dirt, mildew and chalky residue so primer and paint can bond. On a pre-1978 house, washing that strips old paint is still disturbing paint, so it belongs inside the lead-safe plan, with containment and cleanup.
 2. **Scrape and feather.** Remove loose and peeling paint and smooth the edges. On older homes, that means wet methods and hand tools or shrouded, HEPA-connected sanders, not open sanding.
-3. **Repair wood.** Replace or consolidate soft trim, sills and siding before painting. Ask the painter whether carpentry is in the bid or will be a change order, and at what rate.
+3. **Repair wood.** Replace or consolidate soft trim, sills and siding before painting. Ask the painter whether carpentry is in the bid or will be a [change order](../change-orders.html), and at what rate.
 4. **Prime bare wood and repairs.** Bare wood and patched areas need primer that matches the substrate and the topcoat. Ask which primer the bidder will use and where.
 5. **Caulk the right joints.** Seal gaps at trim, corners and penetrations, but do not caulk the bottom laps of lap siding shut; those gaps let water out.
 6. **Protect what is not being painted.** Windows, roofing, decks, plants and the neighbor's car all need covering, and on a pre-1978 house the ground cover is a legal requirement, not a courtesy.
@@ -110,7 +110,7 @@ Whatever brands a bidder proposes, ask for the exact product names for primer, c
 
 ## How to shortlist and verify a painting contractor
 
-Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming that a contractor has an active registration, is bonded and insured, and has a clean history, getting at least three written bids, and putting the job in a written contract. L&I's [contractor registration page](https://lni.wa.gov/licensing-permits/contractors/register-as-a-contractor/) explains who must register.
+Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming that a contractor has an active registration, is bonded and insured, and has a clean history, getting at least three written bids, and putting the job in a [written contract](../contractor-contract-basics.html). L&I's [contractor registration page](https://lni.wa.gov/licensing-permits/contractors/register-as-a-contractor/) explains who must register.
 
 - Look up every bidder on [L&I Verify](https://secure.lni.wa.gov/verify/), and for a pre-1978 house, check Commerce's certified RRP company lists too.
 - Ask who on the crew holds the individual renovator certification and whether that person will be on site.
@@ -131,3 +131,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 5. Agree on weather rules and moisture checks before the first day, and keep the product data sheets and final invoice with your house papers.
 
 A good Renton paint job is one you stop thinking about: the prep was done right, the old paint was handled safely, the wood underneath stays dry, and the next owner can see exactly what was used and when. A contractor who starts with the surface, the lead rules and the weather, and puts those details in writing, is usually the one worth hiring.
+
+**Related on the Board:** [windows and doors directory](../windows.html) and [the bid comparison checklist](../bid-comparison.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)

@@ -86,4 +86,12 @@ The accessory structure ordinance takes effect five days after a summary is publ
 
 When hiring professionals for additions, remodels or accessory buildings, homeowners should verify contractors' licenses and bonds through the [Washington L&I Verify](https://secure.lni.wa.gov/verify/) website.
 
+**Related on the Board:** [Mountlake Terrace remodel and addition guides](../mountlake-terrace.html), [contractor contract basics](../contractor-contract-basics.html) and [how to verify a WA contractor](../verify-contractor.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+- [5 Best Kitchen Remodelers in Edmonds, WA (2026)](https://youtu.be/Gx1i0bavz8o)
+
 Questions or corrections: editorial@boardofprojectstewardship.com

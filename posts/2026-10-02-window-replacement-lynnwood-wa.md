@@ -34,7 +34,7 @@ Moisture is the primary longevity stressor for windows in this region.
 
 **Wood** still fits traditional architecture, but bare wood exteriors need diligent maintenance. Wood-clad or hybrid units keep a warm interior while putting a weather-resistant skin outside — often the practical path for Lynnwood homes that want wood character without constant scraping and painting.
 
-Match frame choice to exposure: windward elevations, second-story suites, and rooms over garages all see different condensation and egress demands. When you compare bids, ask for U-factor and Solar Heat Gain Coefficient (SHGC) in writing so “energy efficient” is not a slogan.
+Match frame choice to exposure: windward elevations, second-story suites, and rooms over garages all see different condensation and egress demands. When you [compare bids](../bid-comparison.html), ask for U-factor and Solar Heat Gain Coefficient (SHGC) in writing so “energy efficient” is not a slogan.
 
 ![Window flashing and rough-opening preparation during a Pacific Northwest remodel in Lynnwood](../assets/images/posts/2026-10-02-lynnwood-window-2.webp)
 
@@ -124,3 +124,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 - [Windows](../windows.html)
 - [Permits](../permits.html)
 - [Verify a contractor](../verify-contractor.html)
+
+**Related on the Board:** [Bathroom Remodel Lynnwood WA](2026-09-08-bathroom-remodel-lynnwood-wa.html) and [WA contractor bonds and insurance](../bonds-and-insurance.html).
+
+## Watch on the Board's YouTube
+
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)

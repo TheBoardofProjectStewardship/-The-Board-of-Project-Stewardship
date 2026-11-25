@@ -77,7 +77,7 @@ The program has grown each year it has published totals. In 2025 it ran 298 cate
 
 As a design-build shop, Pacific Pro Group keeps the drawings, the permit work and the build under one roof. Its headquarters is at 144 Railroad Ave., Suite 307, in Edmonds, a short walk from the ferry dock, and it has a second office at 110 Lakeside Ave., Suite 110F, in Seattle's Leschi neighborhood.
 
-Its company profile points to coastal houses as a specialty, a natural fit for a Puget Sound town like Edmonds.
+Its company profile points to coastal houses as a specialty, a natural fit for a Puget Sound town like [Edmonds](../edmonds.html).
 
 Pacific Pro Group is listed with Built Green and the Master Builders Association of King and Snohomish Counties. On Trustindex, which pulls public reviews into one score, it held a 4.9 rating from 229 reviews as of Oct. 15.
 
@@ -115,7 +115,7 @@ The license also bars changing or redrawing the logo. The badge shown here is th
 
 The Board of Project Stewardship ranks Pacific Pro Group No. 1 in its [bathroom remodeler directory](../bathrooms.html). That is the Board's own editorial ranking. It is separate from The Seattle Times award, and the newspaper played no part in it.
 
-Readers comparing firms can use the Board's [hiring guide](../hiring-a-contractor.html), its list of [questions to ask before you hire](../hire-questions.html) and its [bathroom waterproofing guide](../bathroom-waterproofing-guide.html). Before signing with any contractor, check the company's license, bond and insurance on [Washington L&I Verify](https://secure.lni.wa.gov/verify/).
+Readers comparing firms can use the Board's [hiring guide](../hiring-a-contractor.html), its list of [questions to ask before you hire](../hire-questions.html) and its [bathroom waterproofing guide](../bathroom-waterproofing-guide.html). Before signing with any contractor, check the company's license, [bond and insurance](../bonds-and-insurance.html) on [Washington L&I Verify](https://secure.lni.wa.gov/verify/).
 
 [[ap:checklist]]
 
@@ -126,3 +126,12 @@ The Board's [blog](../blog.html) has a longer guide on what to look for in a Sea
 ## How to reach Pacific Pro Group
 
 Pacific Pro Group's Edmonds office is at 144 Railroad Ave., Suite 307, Edmonds, WA 98020, phone 206-446-5656. The Seattle office is at 110 Lakeside Ave., Suite 110F, Seattle, WA 98122, phone 425-570-9340. Website: [pacificprogroup.com](https://pacificprogroup.com/).
+
+**Related on the Board:** [bathroom cost factors](../bathroom-cost-factors.html) and [Seattle remodel and addition guides](../seattle.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+- [5 Best Kitchen Remodelers in Edmonds, WA (2026)](https://youtu.be/Gx1i0bavz8o)

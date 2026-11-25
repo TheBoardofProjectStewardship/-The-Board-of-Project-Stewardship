@@ -72,7 +72,7 @@ The longer office hours followed Zahilay's requirement that county staff work mo
 
 "Improving predictability, coordination, and review timelines is a top priority for our members," Shakotko of the Master Builders Association said in the release.
 
-Dr. Sandra J. Valenciano, director and health officer for Public Health – Seattle & King County, said, "Septic system permitting is an essential part of keeping our communities healthy and safe."
+Dr. Sandra J. Valenciano, director and health officer for Public Health – [Seattle](../seattle.html) & King County, said, "Septic system permitting is an essential part of keeping our communities healthy and safe."
 
 ![Wood-framed home addition going up on a single-story King County house](../assets/images/news/2026-10-18-king-county-permitting-advisory-panel-3.webp)
 
@@ -97,5 +97,13 @@ King County's permitting covers unincorporated King County. Homeowners inside ci
 Homeowners planning a project in unincorporated areas can find the county's permit times dashboard on its [permitting reports page](https://kingcounty.gov/en/dept/local-services/certificates-permits-licenses/permits/permits-inspections-codes-buildings-land-use/permit-forms-application-materials/reports). The dashboard covers residential building permits applied for after Jan. 1, 2025, and issued in the past 12 months, and it separates the applicant's time from the county's review time. The same page links to the county's permit customer service page and support portal.
 
 Before hiring anyone for a remodel or new build, confirm the contractor is registered with the state at [Washington L&I Verify](https://secure.lni.wa.gov/verify/).
+
+**Related on the Board:** [King County permit fee overhaul would raise costs for additions, cut some others](king-county-2027-permit-fee-overhaul.html) and [King County remodel and addition hub](../king-county.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
 
 Questions or corrections: editorial@boardofprojectstewardship.com

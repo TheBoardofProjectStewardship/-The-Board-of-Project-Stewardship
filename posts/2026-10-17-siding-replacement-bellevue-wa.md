@@ -120,3 +120,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 6. Verify every firm on [L&I Verify](https://secure.lni.wa.gov/verify/) before signing.
 
 New siding is the part everyone sees. The barrier, flashing, and the decisions made with the wall open are the part that keeps a Bellevue house dry. Plan for those first, then pick the color.
+
+**Related on the Board:** [WA contractor bonds and insurance](../bonds-and-insurance.html), [hiring a contractor](../hiring-a-contractor.html) and [the bid comparison checklist](../bid-comparison.html).
+
+## Watch on the Board's YouTube
+
+- [4 Best Home Addition Contractors in Bellevue, WA (2026)](https://youtu.be/z_EF36WjunY)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)

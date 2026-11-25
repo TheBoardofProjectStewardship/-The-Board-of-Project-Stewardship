@@ -117,7 +117,7 @@ Whatever products a bidder proposes, ask for the exact product names and the man
 
 ## How to shortlist and verify a contractor
 
-Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends checking that the contractor is actively registered, bonded and insured, reviewing their history, getting at least three written bids and putting the job in a written contract.
+Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends checking that the contractor is actively registered, bonded and insured, reviewing their history, getting at least three written bids and putting the job in a [written contract](../contractor-contract-basics.html).
 
 - Look up every firm, including the electrician, on [L&I Verify](https://secure.lni.wa.gov/verify/).
 - Ask who will apply for the building, electrical and mechanical permits with the City of Everett, and get that in the contract.
@@ -141,3 +141,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 6. Keep the inspection records with your house papers. They are the proof that your new room is legal living space.
 
 A garage conversion can be one of the most efficient ways to add living space in Everett. The contractor who explains the slab, the walls, the egress window and the permits in writing before the old door comes out is usually the one who leaves you with a warm, dry, legal room.
+
+**Related on the Board:** [home addition cost factors](../addition-cost-factors.html) and [the What Can I Build Here? lot report](../build-here.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [Adding On? Freeze These 6 Things Before You Ask for a Price](https://www.youtube.com/shorts/EvOh_7_3za4)

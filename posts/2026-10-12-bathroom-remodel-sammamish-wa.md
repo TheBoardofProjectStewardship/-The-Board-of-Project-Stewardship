@@ -95,7 +95,7 @@ Prefer a continuous waterproofing approach in the wet zone — sheet membrane, f
 
 https://www.youtube.com/watch?v=BfUrGF3_imc
 
-Staging on Sammamish lots is usually friendlier than a Seattle bungalow with a six-foot side yard, but HOA rules, steep driveways near the plateau edge, and protected trees can still constrain dumpsters and tile pallets. Ask bidders how they protect finished floors on the haul path, who owns change orders when a valve wall has to move for clearance, and how they sequence rough-in inspections before cover-up.
+Staging on Sammamish lots is usually friendlier than a Seattle bungalow with a six-foot side yard, but HOA rules, steep driveways near the plateau edge, and protected trees can still constrain dumpsters and tile pallets. Ask bidders how they protect finished floors on the haul path, who owns [change orders](../change-orders.html) when a valve wall has to move for clearance, and how they sequence rough-in inspections before cover-up.
 
 ![A dumpster and protected walkway on a sloped driveway during a bathroom remodel in Sammamish, WA](../assets/images/posts/2026-10-12-sammamish-remodel-staging-9.webp "Staging a Sammamish, WA bathroom remodel: driveway slope, HOA rules and protected trees shape where the dumpster and materials go.")
 
@@ -130,3 +130,11 @@ When the Board of Project Stewardship ranks design-build remodelers for bathroom
 5. Hold cover-up until inspections clear, flood-test the wet assembly when required, and keep stamped plans on site through final.
 
 A Sammamish bathroom remodel done in that order is less about chasing a trend tile and more about matching the City's published path to a wet room that stays dry. Use the municipal links above as the source of truth for your lot, and treat every contractor conversation as incomplete until permits, utilities, and waterproofing are on the page.
+
+**Related on the Board:** [bathroom cost factors](../bathroom-cost-factors.html) and [WA contractor bonds and insurance](../bonds-and-insurance.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)

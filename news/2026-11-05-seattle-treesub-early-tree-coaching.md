@@ -64,7 +64,7 @@ SDCI said in a [July 1, 2026, post](https://buildingconnections.seattle.gov/2026
 
 On Neighborhood Residential lots, required tree protection areas — and strips less than 10 feet wide between a protection area and a setback — do not count as buildable area when the city checks whether Tier 2 removal is needed to reach maximum lot coverage. With more than one tree on a Neighborhood Residential lot, the city bases its decision on the sum of all tree protection areas on the site — including all on-site Tier 2 trees and the protection areas on the lot from off-site Tier 1, Tier 2 and Tier 3 trees — not a tree-by-tree analysis, and approves only the minimum tree removals needed to meet the allowances in SMC 25.11.070.A.1, according to Trees & Codes.
 
-Much of Seattle is zoned Neighborhood Residential, which now allows attached, detached and stacked homes and accessory dwelling units after middle-housing updates tied to Ordinance 127376 in 2025, the city’s [Neighborhood Residential Code](https://www.seattle.gov/construction-and-inspections/codes/codes-we-enforce-(a-z)/neighborhood-residential-code) page says. That denser menu of house types is why early tree and critical-area mapping matters more for ordinary lots.
+Much of [Seattle](../seattle.html) is zoned Neighborhood Residential, which now allows attached, detached and stacked homes and accessory dwelling units after middle-housing updates tied to Ordinance 127376 in 2025, the city’s [Neighborhood Residential Code](https://www.seattle.gov/construction-and-inspections/codes/codes-we-enforce-(a-z)/neighborhood-residential-code) page says. That denser menu of house types is why early tree and critical-area mapping matters more for ordinary lots.
 
 ## What it means for homeowners
 
@@ -73,5 +73,13 @@ Anyone sketching a remodel, an ADU or a teardown-rebuild on a tree-heavy Seattle
 Owners with wetlands, streams or shoreline setbacks on the property should treat the matching ECA analysis the same way: get the excluded areas on paper before counting units or lot coverage. Steep-slope lots may still need a separate relief request for any work inside the hazard area or its buffer.
 
 TreeSub does not replace a full permit application, a project arborist’s proposed tree protection area or SDCI’s verification during permit review. It is an early opinion. A builder such as [Pacific Pro Group](https://pacificprogroup.com/), the Board's No. 1-ranked contractor, can help owners line up the site plan and Tree or ECA analysis request before a full permit is filed. Check any contractor's license with the state Department of Labor and Industries' [Verify tool](https://secure.lni.wa.gov/verify/).
+
+**Related on the Board:** [the bid comparison checklist](../bid-comparison.html) and [remodel cost factors](../remodel-cost-factors.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
 
 *Corrections or tips: email [editorial@boardofprojectstewardship.com](mailto:editorial@boardofprojectstewardship.com).*

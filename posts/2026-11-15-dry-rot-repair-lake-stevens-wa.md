@@ -47,7 +47,7 @@ A careful inspection usually combines three things:
 2. **Moisture readings.** A moisture meter shows where wood is still wet, which points back toward the water source and shows whether the area has dried enough to close up. The Forest Service's [Wood Handbook](https://research.fs.usda.gov/treesearch/62200) has chapters on moisture content, biodeterioration and wood preservatives if you want the background.
 3. **Opening up.** When probing and readings say the damage continues behind siding or under flooring, the only way to know the full extent is to remove some of the covering. A good contractor will tell you up front that the scope may grow once the wall is open and will explain how changes will be priced in writing.
 
-Ask anyone you hire to photograph what they find when they open a wall or floor. Those photos help you understand change orders and keep a record for the house.
+Ask anyone you hire to photograph what they find when they open a wall or floor. Those photos help you understand [change orders](../change-orders.html) and keep a record for the house.
 
 ![Lake Stevens, WA hidden rot behind siding: siding removed to expose a decayed rim joist and sill plate on top of the concrete foundation — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-11-15-lake-stevens-dry-rot-3.webp)
 
@@ -132,7 +132,7 @@ Interior rot follows the same rules as exterior rot. A soft spot around a toilet
 2. Open the floor far enough to reach solid subfloor in every direction, and check the joists below with a probe and a moisture meter.
 3. Let wet framing dry before closing up. EPA's guidance to dry water-damaged areas within 24 to 48 hours is about preventing mold; wood that has been wet for months may take longer, so measure, don't guess.
 4. Replace decayed subfloor, and sister or replace joists if they're damaged. Ask the Permit Center whether the structural work, or any drain work at the flange, needs a permit.
-5. Rebuild the finished floor with proper waterproofing in wet areas.
+5. Rebuild the finished floor with proper [waterproofing](../bathroom-waterproofing-guide.html) in wet areas.
 
 ![Lake Stevens, WA bathroom subfloor rot: flooring removed to expose rotted subfloor around a toilet flange, with a moisture meter on the floor — not a real Board of Project Stewardship job photo](../assets/images/posts/2026-11-15-lake-stevens-dry-rot-9.webp)
 
@@ -215,3 +215,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 5. Keep photos, moisture readings, permits and inspection records together in your house file.
 
 A good rot repair in Lake Stevens doesn't end when the soft wood comes out. It ends when the water that caused it has somewhere else to go: flashing lapped the right way, trim off the ground, gutters that work and a wall that can dry. Start with the City pages above, then hire people who put those steps in writing.
+
+**Related on the Board:** [bathroom cost factors](../bathroom-cost-factors.html) and [remodel cost factors](../remodel-cost-factors.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)

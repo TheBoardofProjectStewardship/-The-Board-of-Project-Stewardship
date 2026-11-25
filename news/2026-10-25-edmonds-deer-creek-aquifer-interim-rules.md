@@ -57,7 +57,7 @@ Councilmember Susan Paine asked for more information on costs, permit fees and w
 
 Washington's Growth Management Act required every county and city to designate critical areas by Sept. 1, 1991, under [RCW 36.70A.170](https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.170).
 
-In January 2026, the Edmonds council changed its critical areas ordinance to prohibit stormwater wells in the Deer Creek CARA, which stretches from Deer Creek in Woodway to Highway 99 in south Edmonds, [The Herald reported](https://www.heraldnet.com/2026/02/11/edmonds-issues-moratorium-on-development-in-deer-creek-aquifer/). The change followed concerns from environmentalists that stormwater wells could let PFAS reach drinking water.
+In January 2026, the [Edmonds](../edmonds.html) council changed its critical areas ordinance to prohibit stormwater wells in the Deer Creek CARA, which stretches from Deer Creek in Woodway to Highway 99 in south Edmonds, [The Herald reported](https://www.heraldnet.com/2026/02/11/edmonds-issues-moratorium-on-development-in-deer-creek-aquifer/). The change followed concerns from environmentalists that stormwater wells could let PFAS reach drinking water.
 
 City staff said the change effectively ruled out stormwater infiltration, the only feasible method in the basin, making many projects hard to approve. The council unanimously adopted a six-month moratorium, [Ordinance 4430](https://edmonds.municipal.codes/enactments/Ord4430), on Feb. 10. It took effect Feb. 18 and covers applications for work that would trigger stormwater management requirements in the CARA.
 
@@ -80,5 +80,13 @@ Build the council calendar into your schedule: discussion Nov. 24, interim rules
 Homeowners who want a contractor ready to move once permits reopen can start with the Board of Project Stewardship's No. 1 hire, [Pacific Pro Group](https://pacificprogroup.com/), which is headquartered in Edmonds.
 
 ![A homeowner reviews building plans at a kitchen table for a project in Edmonds](../assets/images/news/2026-10-25-edmonds-deer-creek-homeowner-3.webp "Homeowners planning additions or large hardscape in south Edmonds should confirm whether their parcel sits inside the Deer Creek Critical Aquifer Recharge Area before full design work.")
+
+**Related on the Board:** [roofing directory](../roofing.html) and [ADU planning](../adu.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Kitchen Remodelers in Edmonds, WA (2026)](https://youtu.be/Gx1i0bavz8o)
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
 
 Questions or corrections: editorial@boardofprojectstewardship.com

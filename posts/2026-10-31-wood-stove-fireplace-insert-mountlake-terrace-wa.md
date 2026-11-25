@@ -152,7 +152,7 @@ Whatever you choose, ask each bidder to name the exact appliance make and model,
 
 ## How to shortlist and verify a stove or insert installer
 
-Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming that a contractor has an active registration, is bonded and insured, and has a clean history, getting at least three written bids, and putting the job in a written contract.
+Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming that a contractor has an active registration, is bonded and insured, and has a clean history, getting at least three written bids, and putting the job in a [written contract](../contractor-contract-basics.html).
 
 - Look up every firm, including any chimney, gas or electrical subcontractor, on [L&I Verify](https://secure.lni.wa.gov/verify/).
 - Ask who pulls the Mountlake Terrace mechanical permit and any gas, electrical or building permits, and confirm the permit numbers before work starts.
@@ -176,3 +176,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 6. Verify every firm on [L&I Verify](https://secure.lni.wa.gov/verify/), confirm the City permit through the [permit portal](https://mltw-trk.aspgov.com/eTRAKiT/), and keep the permit record, manuals and photos together.
 
 The best stove and insert replacements in Mountlake Terrace are mostly about what you cannot see: a liner sized and listed for the appliance, clearances checked against the manual, alarms that work, and a permit that was inspected. A contractor who starts with the permit, the chimney and the manual, and puts those details in writing, is usually the one worth hiring.
+
+**Related on the Board:** [Kitchen Remodel Mountlake Terrace](2026-08-23-kitchen-remodel-mountlake-terrace.html) and [questions to ask before you hire](../hire-questions.html).
+
+## Watch on the Board's YouTube
+
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)

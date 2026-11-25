@@ -86,7 +86,7 @@ There are four main ways to fix a Bellevue side sewer. A careful contractor will
 
 For both trenchless methods, the City makes one trade-off explicit: because the new pipe follows the old one, significant changes in line and grade are not possible. The owner accepts that the pipe may have less than minimum slope and swales, which may mean more frequent maintenance. If your camera report shows a deep belly, ask whether trenchless can actually solve your problem or only part of it.
 
-This short video from a plumbing contractor shows a residential pipe burst from start to finish, including fusing the new pipe and pulling it through:
+This short video from a [plumbing contractor](../plumber.html) shows a residential pipe burst from start to finish, including fusing the new pipe and pulling it through:
 
 https://www.youtube.com/watch?v=bvN3nEqf0qA
 
@@ -152,7 +152,7 @@ Whatever you choose, ask each bidder to name the method, the pipe material and s
 
 ## How to shortlist and verify a side sewer contractor
 
-Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming that a contractor has an active registration, is bonded and insured, and has a clean history, getting at least three written bids, and putting the job in a written contract.
+Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming that a contractor has an active registration, is bonded and insured, and has a clean history, getting at least three written bids, and putting the job in a [written contract](../contractor-contract-basics.html).
 
 - Look up every firm, including any camera, excavation or lining subcontractor, on [L&I Verify](https://secure.lni.wa.gov/verify/).
 - Ask whether the firm meets Bellevue's side sewer contractor requirements and who will pull the side sewer permit and any right-of-way or grading permit.
@@ -176,3 +176,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 6. Keep the permit record, before-and-after videos and updated as-built drawing together with your house papers.
 
 The best side sewer repairs in Bellevue are the ones you never think about again: a pipe chosen from real camera evidence, a method that fits its condition, inspections passed before backfill, and a drawing that shows the next owner exactly where it runs. A contractor who starts with the video, the permit and the City's conditions, and puts those details in writing, is usually the one worth hiring.
+
+**Related on the Board:** [remodel cost factors](../remodel-cost-factors.html) and [change orders and allowances](../change-orders.html).
+
+## Watch on the Board's YouTube
+
+- [4 Best Home Addition Contractors in Bellevue, WA (2026)](https://youtu.be/z_EF36WjunY)
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)

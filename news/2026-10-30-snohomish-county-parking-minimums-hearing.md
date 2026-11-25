@@ -56,7 +56,7 @@ County staff recommended approval. The report says no written or spoken public c
 
 The changes carry out two 2025 state laws. [Senate Bill 5184](https://app.leg.wa.gov/billsummary?BillNumber=5184&Year=2025&Initiative=false) passed the Senate 40-8 and the House 64-31 and was signed May 7, 2025, after the Senate agreed to House amendments 36-13. Its county parking limits are now [RCW 36.01.397](https://app.leg.wa.gov/RCW/default.aspx?cite=36.01.397), which bars counties from requiring more than one parking space per single-family home or more than half a space per multifamily unit, and from requiring any parking for homes under 1,200 square feet, affordable housing and senior housing.
 
-The law lets counties require off-street parking where county roads are not developed to the street and road standards adopted by cities in the county. Counties with 50,000 or more people must comply within 18 months of July 27, 2025, which gives Snohomish County a Jan. 27, 2027, deadline, according to a [Sept. 22 briefing](https://www.snohomishcountywa.gov/DocumentCenter/View/152091/Planning-Commission-Breifing-Powerpoint-9_22) to the commission.
+The law lets counties require off-street parking where county roads are not developed to the street and road standards adopted by cities in the county. Counties with 50,000 or more people must comply within 18 months of July 27, 2025, which gives [Snohomish County](../snohomish-county.html) a Jan. 27, 2027, deadline, according to a [Sept. 22 briefing](https://www.snohomishcountywa.gov/DocumentCenter/View/152091/Planning-Commission-Breifing-Powerpoint-9_22) to the commission.
 
 In passing the law, the Legislature found that "predetermined on-site parking requirements needlessly drive up the cost of development, particularly housing." It said the parking a project needs "should be determined on a case-by-case basis by permit applicants sensitive to actual market conditions rather than a one-size-fits-all regulation."
 
@@ -78,5 +78,13 @@ Owners planning a project should:
 - Measure the home. The no-parking rule for small homes applies to units under 1,200 square feet.
 - Plan for the cars you will actually have. The rules set a minimum, and owners can still build more parking.
 - Use a licensed contractor. A builder such as [Pacific Pro Group](https://pacificprogroup.com/), the Board's No. 1-ranked contractor, can help owners plan a site layout and confirm current county rules before applying for permits. Check any contractor's license with the state Department of Labor and Industries' [Verify tool](https://secure.lni.wa.gov/verify/).
+
+**Related on the Board:** [Snohomish County Health Department wins $70,000 state grant to speed septic reviews for new homes](snohomish-health-septic-permit-grant.html) and [second story vs teardown](../second-story-vs-teardown.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)
+- [Adding On? Freeze These 6 Things Before You Ask for a Price](https://www.youtube.com/shorts/EvOh_7_3za4)
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
 
 *Corrections or tips: email [editorial@boardofprojectstewardship.com](mailto:editorial@boardofprojectstewardship.com).*

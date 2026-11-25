@@ -115,7 +115,7 @@ Whatever brand a bidder proposes, ask for the exact shingle line, the underlayme
 
 ## How to shortlist and verify a roofer
 
-Washington L&I's [hiring a contractor page](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends checking that a contractor has an active registration and is bonded and insured, reviewing their history for violations or lawsuits, getting at least three written bids and a written contract, and considering a performance bond on larger jobs. For a Shoreline roof:
+Washington L&I's [hiring a contractor page](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends checking that a contractor has an active registration and is bonded and insured, reviewing their history for violations or lawsuits, getting at least three written bids and a [written contract](../contractor-contract-basics.html), and considering a performance bond on larger jobs. For a Shoreline roof:
 
 - Look up every company on [Washington L&I Verify](https://secure.lni.wa.gov/verify/) and confirm the registration is active, the bond and insurance are current, and the business name matches the bid.
 - Compare at least three written bids line by line using the details above, especially the deck repair allowance and dry-in plan.
@@ -141,3 +141,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 6. Schedule with the weather in mind, and expect the crew to dry the roof in every night.
 
 A new roof is one of the biggest maintenance projects a Shoreline house will see. The roofer who explains the deck, the details and the permit question in writing before the first shingle comes off is usually the one who will leave you with a dry attic for a long time.
+
+**Related on the Board:** [Window Replacement Shoreline WA](2026-10-06-window-replacement-shoreline-wa.html) and [change orders and allowances](../change-orders.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)

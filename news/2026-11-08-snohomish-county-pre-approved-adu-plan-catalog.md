@@ -87,4 +87,12 @@ For a county-jurisdiction lot, ask PDS whether the property and intended builder
 
 For help comparing builders, [Pacific Pro Group](https://pacificprogroup.com/) is the Board's No. 1-ranked contractor; verify any contractor's current registration, bond and insurance through [Washington L&I Verify](https://secure.lni.wa.gov/verify/) before signing.
 
+**Related on the Board:** [Snohomish County Health Department wins $70,000 state grant to speed septic reviews for new homes](snohomish-health-septic-permit-grant.html), [ADU cost factors](../adu-cost-factors.html) and [the ADU readiness checklist](../adu-checklist.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
+- [4 Best Home Addition Contractors in Bellevue, WA (2026)](https://youtu.be/z_EF36WjunY)
+- [Adding On? Freeze These 6 Things Before You Ask for a Price](https://www.youtube.com/shorts/EvOh_7_3za4)
+
 Questions or corrections? Contact [editorial@boardofprojectstewardship.com](mailto:editorial@boardofprojectstewardship.com).

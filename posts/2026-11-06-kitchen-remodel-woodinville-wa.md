@@ -57,7 +57,7 @@ Stay-in-home remodels need one more line in that scope: where cooking and dishwa
 
 ## Wet walls, layout changes and inspections
 
-A wet wall is any wall that carries supply, drain or vent piping — and often electrical — for the sink, dishwasher, fridge water line or nearby bath. Opening that wall for a new layout is the moment permits and sequencing matter most. Rough-in plumbing and electrical must be inspected before insulation and drywall hide the work. Changing the island footprint after cabinets are built is how change orders eat the contingency.
+A wet wall is any wall that carries supply, drain or vent piping — and often electrical — for the sink, dishwasher, fridge water line or nearby bath. Opening that wall for a new layout is the moment permits and sequencing matter most. Rough-in plumbing and electrical must be inspected before insulation and drywall hide the work. Changing the island footprint after cabinets are built is how [change orders](../change-orders.html) eat the contingency.
 
 Ask every bidder for a written wet-wall plan that names:
 
@@ -98,7 +98,7 @@ Whatever brands a bidder proposes, ask for model numbers, cut sheets, circuit re
 
 ## How to shortlist and verify the remodel team
 
-Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming active registration, bonding and insurance, collecting multiple written bids and using a written contract. L&I's [register as a contractor](https://lni.wa.gov/licensing-permits/contractors/register-as-a-contractor/) page explains who must register. Look up every firm — GC, electrician, plumber — on [L&I Verify](https://secure.lni.wa.gov/verify/). For City of Woodinville building permits, expect the contractor to hold a Woodinville business license before issuance as the City's Permit Portal guidance describes.
+Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming active registration, bonding and insurance, collecting multiple written bids and using a [written contract](../contractor-contract-basics.html). L&I's [register as a contractor](https://lni.wa.gov/licensing-permits/contractors/register-as-a-contractor/) page explains who must register. Look up every firm — GC, electrician, plumber — on [L&I Verify](https://secure.lni.wa.gov/verify/). For City of Woodinville building permits, expect the contractor to hold a Woodinville business license before issuance as the City's Permit Portal guidance describes.
 
 - Compare bids on wet-wall scope, electrical path, stay-in-home sequencing and allowance language, not only cabinet brands.
 - Require a written list of who pulls the building permit and who pulls the L&I electrical permit.
@@ -118,3 +118,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 5. Verify every firm with L&I, confirm any required City business license, and keep plan sets and permit numbers with your house papers.
 
 A Woodinville kitchen remodel worth living with is one that matches the right AHJ, opens wet walls only once, passes electrical and building inspections in order, and keeps the contract honest about what is finish work and what is construction. Start with the map, the Permit Center or King County, and a crew that puts those details in writing.
+
+**Related on the Board:** [kitchen cost factors](../kitchen-cost-factors.html) and [questions to ask before you hire](../hire-questions.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Kitchen Remodelers in Edmonds, WA (2026)](https://youtu.be/Gx1i0bavz8o)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)

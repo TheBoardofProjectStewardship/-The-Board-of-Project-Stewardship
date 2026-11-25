@@ -50,7 +50,7 @@ Questions on the STFI changes can go to Jamie Anderson at 206-615-0715 or Jamie.
 
 ## History and background
 
-STFI permits have long been Seattle’s shortcut for simple residential work that does not need a full plan review before issuance. Tip 316 is the city’s standing handout for that path; the CamDetail summary says applicants with a simple construction project that does not need extensive plan review may speed application, review and issuance by using STFI, and the Tip lists qualifying types and application requirements.
+STFI permits have long been [Seattle](../seattle.html)’s shortcut for simple residential work that does not need a full plan review before issuance. Tip 316 is the city’s standing handout for that path; the CamDetail summary says applicants with a simple construction project that does not need extensive plan review may speed application, review and issuance by using STFI, and the Tip lists qualifying types and application requirements.
 
 Substantial-alteration rules sit in the Seattle Residential Code. In an [April 5, 2022, Building Connections post](https://buildingconnections.seattle.gov/2022/04/05/revised-policy-for-use-of-fire-walls-in-lieu-of-substantial-alterations/), SDCI explained that substantial alterations apply when a large share of a house is renovated or a large addition is built, citing SRC Section R107.9, and that the point of those rules is to update major life-safety items for fire, egress and seismic performance. That 2022 post also described a policy allowing certain fire-wall separations so a new addition does not always force full substantial-alteration upgrades on the existing house.
 
@@ -65,5 +65,13 @@ Owners sketching a deck taller than 8 feet, a beam that spans more than 14 feet,
 Anyone planning a basement finish plus a kitchen strip-out should add the work areas before calling the job a simple remodel. Crossing the 60 percent line likely makes the project a substantial alteration and can add extra requirements, such as stamped seismic upgrades or an approved Earthquake Home Retrofit, to stay on an STFI.
 
 STFI still does not replace on-site inspections or stamped engineering where required, and Tip 316 directs applicants to Tip 104 for electrical and over-the-counter mechanical permits. A builder such as [Pacific Pro Group](https://pacificprogroup.com/), the Board's No. 1-ranked contractor, can help owners match the scope to Tip 316 and decide whether to submit as STFI or as a full residential permit. Check any contractor's license with the state Department of Labor and Industries' [Verify tool](https://secure.lni.wa.gov/verify/).
+
+**Related on the Board:** [remodel cost factors](../remodel-cost-factors.html) and [red flags when hiring](../red-flags-hiring.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
 
 *Corrections or tips: email [editorial@boardofprojectstewardship.com](mailto:editorial@boardofprojectstewardship.com).*

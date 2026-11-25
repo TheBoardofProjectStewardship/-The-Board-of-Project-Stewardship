@@ -165,7 +165,7 @@ These are makers whose products often show up on concrete driveway jobs. Product
 
 A driveway replacement mixes demolition, excavation, drainage, concrete and work in the City right-of-way. Hire for all of it.
 
-- **Check registration, bond and insurance.** Washington requires most contractors to be registered. Look up any firm on [Washington L&I Verify](https://secure.lni.wa.gov/verify/), which shows registration, bond and insurance status. L&I's [hiring a contractor](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) page explains what to check and why a written contract matters. The Board's [verify a contractor](../verify-contractor.html) and [bonds and insurance](../bonds-and-insurance.html) pages explain what the results mean.
+- **Check registration, bond and insurance.** Washington requires most contractors to be registered. Look up any firm on [Washington L&I Verify](https://secure.lni.wa.gov/verify/), which shows registration, bond and insurance status. L&I's [hiring a contractor](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) page explains what to check and why a [written contract](../contractor-contract-basics.html) matters. The Board's [verify a contractor](../verify-contractor.html) and [bonds and insurance](../bonds-and-insurance.html) pages explain what the results mean.
 - **Ask who pulls the right-of-way permit.** The City wants a performance bond, a certificate of insurance naming the City and a verified state contractor's license before it issues the permit. A crew that cannot provide those should not be cutting your curb.
 - **Get the apron details in writing.** Approach width, apron thickness, base, curb and gutter removal, joints and the inspection steps should match Bothell's Chapter 3 standards.
 - **Get the private slab details in writing.** Base depth and compaction, slab thickness, reinforcement, joint layout, finish, curing and the rain plan.
@@ -190,3 +190,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 The Board's earlier [Bothell heat pump guide](2026-10-18-heat-pump-installation-bothell-wa.html) covers another common Bothell project with its own permit path.
 
 A good Bothell driveway is more than a fresh slab. It is an apron the City signed off on, a base that will not settle, joints that put the cracks where you want them, and water that goes somewhere other than your garage. Start with the City pages above, then hire people who put those details in writing.
+
+**Related on the Board:** [Home Addition Bothell WA](2026-08-20-home-addition-bothell-wa.html) and [home addition cost factors](../addition-cost-factors.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [4 Best Home Addition Contractors in Bellevue, WA (2026)](https://youtu.be/z_EF36WjunY)
+- [Adding On? Freeze These 6 Things Before You Ask for a Price](https://www.youtube.com/shorts/EvOh_7_3za4)

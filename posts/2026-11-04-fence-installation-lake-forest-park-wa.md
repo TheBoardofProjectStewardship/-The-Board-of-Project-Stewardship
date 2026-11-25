@@ -101,7 +101,7 @@ Whatever brands a bidder proposes, ask for the post size and treatment rating, t
 
 ## How to shortlist and verify a fence contractor
 
-Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming that a contractor has an active registration, is bonded and insured, and has a clean history, getting at least three written bids, and putting the job in a written contract. L&I's [contractor registration page](https://lni.wa.gov/licensing-permits/contractors/register-as-a-contractor/) explains who must register.
+Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming that a contractor has an active registration, is bonded and insured, and has a clean history, getting at least three written bids, and putting the job in a [written contract](../contractor-contract-basics.html). L&I's [contractor registration page](https://lni.wa.gov/licensing-permits/contractors/register-as-a-contractor/) explains who must register.
 
 - Look up every bidder on [L&I Verify](https://secure.lni.wa.gov/verify/).
 - Ask who requests the utility locate, who confirms the property line, and who is responsible if the fence lands in the wrong place.
@@ -124,3 +124,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 ![A homeowner reviews fence papers with a contractor in Lake Forest Park, WA.](../assets/images/posts/2026-11-04-lake-forest-park-fence-9.webp "A homeowner and a contractor go over papers beside a new fence and gate in Lake Forest Park, WA.")
 
 A good Lake Forest Park fence is one nobody argues about: it sits on the right side of the line, meets the City's height rules, missed every buried line, and its posts are still straight after a decade of wet winters. A contractor who starts with the code, the line, the locate and the drainage, and puts those details in writing, is usually the one worth hiring.
+
+**Related on the Board:** [Home Addition Lake Forest Park](2026-08-26-home-addition-lake-forest-park.html) and [change orders and allowances](../change-orders.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)

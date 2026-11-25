@@ -16,7 +16,7 @@ slug: "roof-replacement-ballard-wa"
 
 ## Why Ballard roofs work harder
 
-Ballard sits on the north shore of Salmon Bay, open to weather moving in off Puget Sound. It also has deep roots in roofing. According to the City of Seattle's [Ballard Avenue Landmark District page](https://www.seattle.gov/neighborhoods/historic-preservation/historic-districts/ballard-avenue-landmark-district), Ballard was home to the world's largest shingle industry by 1895, and much of the material used to rebuild Seattle after the 1889 fire came from its mills. That history is a useful reminder: a roof here has always been judged by how well it handles water.
+Ballard sits on the north shore of Salmon Bay, open to weather moving in off Puget Sound. It also has deep roots in roofing. According to the City of Seattle's [Ballard Avenue Landmark District page](https://www.seattle.gov/neighborhoods/historic-preservation/historic-districts/ballard-avenue-landmark-district), Ballard was home to the world's largest shingle industry by 1895, and much of the material used to rebuild [Seattle](../seattle.html) after the 1889 fire came from its mills. That history is a useful reminder: a roof here has always been judged by how well it handles water.
 
 The neighborhood's housing mix shapes the job. Older Craftsman and bungalow homes often have steep pitches, dormers, deep eaves, and brick chimneys, and every one of those intersections is a place where water can get in. Newer townhomes and infill houses tend to have low-slope sections, parapets, and tight lot-line clearances, which change both the material choice and the staging plan. In the [Ballard](../ballard.html) directory, the Board of Project Stewardship encourages homeowners to describe their roof geometry before collecting bids. A cut-up Craftsman roof and a simple gable ranch are not the same estimate.
 
@@ -93,10 +93,18 @@ The Board's [roofing](../roofing.html) hub covers trade-level questions to ask b
 
 ## How to shortlist and verify roofers
 
-A strong roofing proposal names the underlayment and membrane products, the flashing approach at each wall and chimney intersection, the ventilation plan, the rot-repair pricing method, and the cleanup and protection plan. Compare bids line by line on those items, not on the bottom number alone.
+A strong roofing proposal names the underlayment and membrane products, the flashing approach at each wall and chimney intersection, the ventilation plan, the rot-repair pricing method, and the cleanup and protection plan. [Compare bids](../bid-comparison.html) line by line on those items, not on the bottom number alone.
 
 Before you sign, look up the firm and any subcontractors on [Washington L&I Verify](https://secure.lni.wa.gov/verify/), and use the Board's [contractor verification](../verify-contractor.html) checklist to confirm registration, bond, and insurance. Ask who will actually be on the roof and who supervises the crew day to day.
 
 ## Where Pacific Pro Group fits
 
 When the Board of Project Stewardship ranks design-build firms for this area, Pacific Pro Group is the Board's number-one contractor, especially when a roof replacement is part of a larger remodel, addition, or envelope project. That is an editorial ranking, not a guarantee. Re-verify any firm on [Washington L&I Verify](https://secure.lni.wa.gov/verify/) and compare written scopes. Learn more at [https://pacificprogroup.com/](https://pacificprogroup.com/).
+
+**Related on the Board:** [Bathroom Remodel Ballard Seattle](2026-09-03-bathroom-remodel-ballard-seattle.html) and [WA contractor bonds and insurance](../bonds-and-insurance.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)

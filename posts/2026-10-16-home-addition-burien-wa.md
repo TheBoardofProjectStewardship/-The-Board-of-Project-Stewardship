@@ -136,3 +136,12 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 6. Verify every firm on [L&I Verify](https://secure.lni.wa.gov/verify/) and confirm the Burien endorsement before signing.
 
 A well-mapped lot and complete utility certificates do more for a Burien addition schedule than any design flourish. Start with the site, then draw the rooms.
+
+**Related on the Board:** [second story vs teardown](../second-story-vs-teardown.html), [the What Can I Build Here? lot report](../build-here.html) and [hiring a contractor](../hiring-a-contractor.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [4 Best Home Addition Contractors in Bellevue, WA (2026)](https://youtu.be/z_EF36WjunY)
+- [Adding On? Freeze These 6 Things Before You Ask for a Price](https://www.youtube.com/shorts/EvOh_7_3za4)
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)

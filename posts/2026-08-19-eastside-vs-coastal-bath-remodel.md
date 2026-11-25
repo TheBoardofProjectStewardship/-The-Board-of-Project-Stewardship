@@ -71,7 +71,7 @@ Logistics differ too: Eastside arterials and coastal hillside streets create dif
 
 ## Shared inspection mindset
 
-Regardless of side of the lake, do not cover plumbing or electrical before inspections, and do not treat caulk as waterproofing. The PNW climate is unforgiving of theater finishes. Use [bathrooms.html](../bathrooms.html) to shortlist, then interview for detailing fluency.
+Regardless of side of the lake, do not cover plumbing or electrical before inspections, and do not treat caulk as [waterproofing](../bathroom-waterproofing-guide.html). The PNW climate is unforgiving of theater finishes. Use [bathrooms.html](../bathrooms.html) to shortlist, then interview for detailing fluency.
 
 ## Putting it together for homeowners
 
@@ -82,3 +82,11 @@ When you interview firms, ask them to walk a recent project chronologically: dis
 Use the Board directories as a starting shortlist — especially [bathrooms](../bathrooms.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden assemblies. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
+
+**Related on the Board:** [bathroom cost factors](../bathroom-cost-factors.html) and [hiring a contractor](../hiring-a-contractor.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)

@@ -18,7 +18,7 @@ Mill Creek is a planned Snohomish County community along the SR-527 corridor, wi
 
 ## Neighborhood and house-stock context
 
-Whether you are near Town Center, the SR-527 corridor, or deeper into HOA cul-de-sacs, staging still matters. Narrow driveways, shared guest parking, and association rules can limit dumpster placement, tile-pallet deliveries, and overnight protection for open wet walls. Mid-1990s–2010s baths often hide undersized exhaust ducts, aging supply lines, and shower pans that were never detailed for today’s continuous-membrane expectations. Ask bidders how they protect finished floors on the haul path to an upstairs bath, how they handle soft subfloor at the shower curb, and who owns change-order language when a valve wall must move for code clearance.
+Whether you are near Town Center, the SR-527 corridor, or deeper into HOA cul-de-sacs, staging still matters. Narrow driveways, shared guest parking, and association rules can limit dumpster placement, tile-pallet deliveries, and overnight protection for open wet walls. Mid-1990s–2010s baths often hide undersized exhaust ducts, aging supply lines, and shower pans that were never detailed for today’s continuous-membrane expectations. Ask bidders how they protect finished floors on the haul path to an upstairs bath, how they handle soft subfloor at the shower curb, and who owns [change-order](../change-orders.html) language when a valve wall must move for code clearance.
 
 HOA or design-review expectations can affect exterior exhaust terminations, bath window changes, and roof penetrations even when the wet room itself is interior-only. Put those constraints in the proposal so they are not discovered after rough-in is underway. Cross-check [plumber.html](../plumber.html) and [electrician.html](../electrician.html) when fixture moves and circuit work share the same critical path, and [tile.html](../tile.html) when wet-zone assemblies drive the schedule.
 
@@ -26,7 +26,7 @@ HOA or design-review expectations can affect exterior exhaust terminations, bath
 
 ## Climate, moisture, and OpenGov permitting realities
 
-Western Washington bathrooms live with cool outdoor air and long damp seasons. Mill Creek is inland relative to Edmonds — less salt-air stress on exterior finishes — but winter humidity, slow-drying grout, and fans that dump into attics still show up as soft drywall and failed caulk long before style looks dated. Prefer continuous waterproofing in the wet zone, correct slope to the drain, and exhaust terminated outdoors with a quiet, appropriately rated fan. Fancy finishes cannot compensate for a pan that ponds or a niche that was never banded into the membrane.
+Western Washington bathrooms live with cool outdoor air and long damp seasons. [Mill Creek](../mill-creek.html) is inland relative to Edmonds — less salt-air stress on exterior finishes — but winter humidity, slow-drying grout, and fans that dump into attics still show up as soft drywall and failed caulk long before style looks dated. Prefer continuous waterproofing in the wet zone, correct slope to the drain, and exhaust terminated outdoors with a quiet, appropriately rated fan. Fancy finishes cannot compensate for a pan that ponds or a niche that was never banded into the membrane.
 
 City of Mill Creek transitioned building, plumbing, and mechanical applications from MyBuildingPermit to **OpenGov** in 2026. Use the City’s [Permits](https://millcreekwa.gov/permits) hub and [Building Permits](https://millcreekwa.gov/topics/building-permits-0) page for orientation, then [apply or check status in OpenGov](https://millcreekwa.portal.opengov.com/categories/1076) (portal home: [millcreekwa.portal.opengov.com](https://millcreekwa.portal.opengov.com/)). Schedule inspections from the [OpenGov dashboard](https://millcreekwa.portal.opengov.com/dashboard). For thresholds and exemption notes, review the City’s [Do I Need a Permit flyer (PDF)](https://millcreekwa.gov/sites/default/files/2025-08/do-i-need-a-permit-flyer-updated-2025-08-27.pdf) and fee context on the [Master Fee Schedule](https://millcreekwa.gov/topics/master-fee-schedule). Building codes and design criteria notes live on [Building codes and guidance](https://millcreekwa.gov/topics/building-codes-and-guidance) — that page also notes electrical is administered under the NEC by Washington State L&I, not as a City OpenGov electrical permit.
 
@@ -43,7 +43,7 @@ Practical sequencing that works on Mill Creek lots:
 
 ## Process video: shower waterproofing order
 
-A clear public walkthrough of the correct order for waterproofing showers (general best practice — still follow your product’s install guide and the Mill Creek OpenGov / L&I inspection path):
+A clear public walkthrough of the correct order for [waterproofing](../bathroom-waterproofing-guide.html) showers (general best practice — still follow your product’s install guide and the Mill Creek OpenGov / L&I inspection path):
 
 https://www.youtube.com/watch?v=pWePjMmyha0
 
@@ -105,3 +105,11 @@ Use the Board directories as a starting shortlist — especially [bathrooms](../
 Finally, keep a simple owner file: proposals, allowance logs, OpenGov permit numbers, L&I electrical records if any, inspection results, product cut sheets, and dated photos of hidden membranes before tile closes. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
 
 ![Finished bathroom remodel with a tiled walk-in shower and double vanity in Mill Creek, Washington](../assets/images/posts/2026-09-27-mill-creek-bath-finished-10.webp "A finished bathroom remodel in a Mill Creek home after permits and inspections were closed out.")
+
+**Related on the Board:** [Window Replacement Mill Creek WA](2026-10-04-window-replacement-mill-creek-wa.html) and [bathroom cost factors](../bathroom-cost-factors.html).
+
+## Watch on the Board's YouTube
+
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)

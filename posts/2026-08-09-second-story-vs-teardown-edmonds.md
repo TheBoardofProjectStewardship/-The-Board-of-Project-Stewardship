@@ -67,7 +67,7 @@ Reusing structure can reduce waste when the bones are sound — another reason t
 
 Second stories carry discovery risk inside existing walls and foundations. Teardowns carry full replacement cost with clearer (but larger) scope. A responsible comparison uses ranges with contingencies, not single-point optimism. Include temporary housing, soft costs, and permit timelines in both columns.
 
-Visit both types of completed Edmonds projects if you can — living next to a vertical addition feels different from moving back into a new build.
+Visit both types of completed [Edmonds](../edmonds.html) projects if you can — living next to a vertical addition feels different from moving back into a new build.
 
 ![Second story vs teardown on a home in Edmonds](../assets/images/posts/2026-08-09-second-story-teardown-3.webp)
 
@@ -94,3 +94,12 @@ When you interview firms, ask them to walk a recent project chronologically: dis
 Use the Board of Project Stewardship directories as a starting shortlist — especially [additions](../additions.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden assemblies. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
+
+**Related on the Board:** [Primary Suite Addition Edmonds](2026-08-15-primary-suite-addition-edmonds.html) and [second story vs teardown](../second-story-vs-teardown.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)
+- [Adding On? Freeze These 6 Things Before You Ask for a Price](https://www.youtube.com/shorts/EvOh_7_3za4)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)

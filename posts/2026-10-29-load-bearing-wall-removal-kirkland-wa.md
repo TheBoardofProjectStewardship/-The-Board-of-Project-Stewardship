@@ -119,7 +119,7 @@ Whatever product the engineer specifies, ask the bidder to name the exact beam p
 
 ## How to shortlist and verify a wall-removal contractor
 
-Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming that a contractor has an active registration, is bonded and insured, and has a clean history, getting at least three written bids, and putting the job in a written contract.
+Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming that a contractor has an active registration, is bonded and insured, and has a clean history, getting at least three written bids, and putting the job in a [written contract](../contractor-contract-basics.html).
 
 - Look up every firm, including the electrician and plumber, on [L&I Verify](https://secure.lni.wa.gov/verify/).
 - Ask who provides the structural engineering, and whether the engineer will visit the house or design from photos and measurements.
@@ -142,3 +142,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 6. Verify every firm on [L&I Verify](https://secure.lni.wa.gov/verify/), sign a written contract, and keep the drawings, permit record and framing photos together.
 
 The best open-concept remodels in Kirkland start with the structure, not the cabinets. A contractor who talks first about the engineer, the shoring and the load path, and puts those details in writing, is usually the one worth hiring.
+
+**Related on the Board:** [Home Addition Kirkland WA](2026-09-19-home-addition-kirkland-wa.html) and [kitchen cost factors](../kitchen-cost-factors.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Kitchen Remodelers in Edmonds, WA (2026)](https://youtu.be/Gx1i0bavz8o)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)

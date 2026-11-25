@@ -87,7 +87,7 @@ The Planning Commission was briefed on April 28, 2026, held a public hearing May
 
 ## What it means for homeowners
 
-The proposal would not change the height limits that apply to houses, townhouses or other buildings on lots zoned R-9600, R-8400, R-7200, Townhouse or LDMR. It would change only the cap on new UC-zoned buildings, or portions of those buildings, within 90 feet of those zones. Homeowners in incorporated cities such as Everett, or in King County and other Washington jurisdictions, are governed by their own local codes. This proposal applies only to unincorporated Snohomish County.
+The proposal would not change the height limits that apply to houses, townhouses or other buildings on lots zoned R-9600, R-8400, R-7200, Townhouse or LDMR. It would change only the cap on new UC-zoned buildings, or portions of those buildings, within 90 feet of those zones. Homeowners in incorporated cities such as Everett, or in King County and other Washington jurisdictions, are governed by their own local codes. This proposal applies only to unincorporated [Snohomish County](../snohomish-county.html).
 
 Owners of property near Urban Center zoning in unincorporated Snohomish County should check whether a lot within 90 feet of a proposed UC building is zoned R-9600, R-8400, R-7200, Townhouse or LDMR, using the [county height table](https://snohomish.county.codes/SCC/30.23.032) to find the listed maximum height. If more than one of those adjacent zones applies, the greatest of those maximum heights would control. The subsection (2) cap also would not apply where a qualifying right-of-way, railroad, utility easement at least 20 feet wide, or critical area protection area and buffer provides enough separation, as described above. Under the current formula, a building 40 feet from the zoning line could be 20 feet tall, while one 80 feet away could be 40 feet tall. Under the proposal, a building anywhere within 90 feet of an R-7200 line — where no higher-limit adjacent zone or subsection (3) separation applies — would be capped at 35 feet, the R-7200 listed maximum, subject to the table's reference notes. That means buildings close to the line could be taller than today's formula allows, while buildings more than 70 feet from an R-7200 line, up to 90 feet, would have a lower height cap than the current formula allows.
 
@@ -96,5 +96,13 @@ The council can still amend or reject the proposal. Homeowners who want to comme
 ![Townhouses and houses near a more densely built street in unincorporated Snohomish County](../assets/images/news/2026-11-14-snohomish-county-uc-height-limits-3.webp "Houses along a wet residential street in unincorporated Snohomish County, with taller buildings in the distance, the kind of neighborhood edge the Nov. 25 height hearing addresses; watercolor artwork, not a real property or permitted project.")
 
 For help designing an addition, a new house or a backyard cottage in unincorporated Snohomish County, [Pacific Pro Group](https://pacificprogroup.com/) is the Board's No. 1-ranked contractor. Verify any contractor's current registration, bond and insurance through [Washington L&I Verify](https://secure.lni.wa.gov/verify/) before signing.
+
+**Related on the Board:** [Snohomish County Council votes to let homeowners split residential lots without a council hearing](snohomish-county-administrative-lot-splits.html) and [Everett remodel and addition guides](../everett.html).
+
+## Watch on the Board's YouTube
+
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)
 
 Questions or corrections? Contact [editorial@boardofprojectstewardship.com](mailto:editorial@boardofprojectstewardship.com).

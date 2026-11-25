@@ -18,11 +18,11 @@ Bathroom remodels in Edmonds range from powder-room refreshes to full primary-su
 
 ## Neighborhood context
 
-Whether you are near downtown Edmonds, the highway corridor, or hillside streets with view exposure, access and staging matter. Many owners combine bath work with bedroom updates or laundry relocation. Ask for local references that match your home’s age and whether the bath sits on an exterior wall.
+Whether you are near downtown [Edmonds](../edmonds.html), the highway corridor, or hillside streets with view exposure, access and staging matter. Many owners combine bath work with bedroom updates or laundry relocation. Ask for local references that match your home’s age and whether the bath sits on an exterior wall.
 
 ## Climate, moisture, and permits
 
-Cool, damp air plus hot showers equals condensation risk. Exhaust fans should terminate outdoors, not into attics. Waterproofing at showers and tub decks is non-negotiable. City of Edmonds typically requires trade permits for fixture and circuit changes; moving walls or expanding into closets can add building review. Build inspection timing into your move-in expectations for the finished space.
+Cool, damp air plus hot showers equals condensation risk. Exhaust fans should terminate outdoors, not into attics. [Waterproofing](../bathroom-waterproofing-guide.html) at showers and tub decks is non-negotiable. City of Edmonds typically requires trade permits for fixture and circuit changes; moving walls or expanding into closets can add building review. Build inspection timing into your move-in expectations for the finished space.
 
 ![Edmonds, Washington — a walk-in shower with large pale tile and a linear drain, empty, from the side yard](../assets/images/posts/2026-09-13-bathroom-edmonds-4.webp)
 
@@ -76,3 +76,12 @@ When you interview firms, ask them to walk a recent project chronologically: dis
 Use the Board directories as a starting shortlist — especially [bathrooms](../bathrooms.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden assemblies. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
+
+**Related on the Board:** [How to Hire a Design-Build Firm Edmonds](2026-08-11-hire-design-build-edmonds.html) and [bathroom cost factors](../bathroom-cost-factors.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)
