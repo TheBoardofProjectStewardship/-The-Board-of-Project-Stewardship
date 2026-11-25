@@ -22,7 +22,7 @@ Homes near Magnolia Village, Briarcliff, and the bluff streets frequently have c
 
 ## Climate and permitting
 
-Cooking plus PNW humidity means range hoods that actually exhaust outdoors outperform recirculating units for long-term finish health. Electrical panels in mid-century Magnolia homes may need capacity checks before induction ranges or extra circuits. Seattle generally requires electrical and plumbing permits for kitchen rewires and sink/dishwasher moves; structural openings need building review. Ask who submits, who attends inspections, and how temporary kitchen use is handled.
+Cooking plus PNW humidity means range hoods that actually exhaust outdoors outperform recirculating units for long-term finish health. Electrical panels in mid-century [Magnolia](../magnolia.html) homes may need capacity checks before induction ranges or extra circuits. Seattle generally requires electrical and plumbing permits for kitchen rewires and sink/dishwasher moves; structural openings need building review. Ask who submits, who attends inspections, and how temporary kitchen use is handled.
 
 ![Close-up of outdoor-venting range hood ductwork and cabinet framing in Magnolia, Seattle](../assets/images/posts/2026-09-16-magnolia-kitchen-2.webp)
 
@@ -74,3 +74,11 @@ When you interview firms, ask them to walk a recent project chronologically: dis
 Use the Board directories as a starting shortlist — especially [kitchen](../kitchen.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden assemblies. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
+
+**Related on the Board:** [Kitchen Remodel Greenwood Seattle](2026-08-14-kitchen-remodel-greenwood-seattle.html) and [kitchen cost factors](../kitchen-cost-factors.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Kitchen Remodelers in Edmonds, WA (2026)](https://youtu.be/Gx1i0bavz8o)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)

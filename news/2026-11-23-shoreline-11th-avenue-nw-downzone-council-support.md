@@ -29,7 +29,7 @@ SHORELINE, Wash. — Most Shoreline City Council members who spoke at a Nov. 9 s
 
 ## What the council discussed
 
-Ordinance No. 1073 would adopt most of Shoreline's 2026 Comprehensive Plan docket, the annual list of proposed plan changes. Amendment No. 5 is a citizen-initiated request to change the land use map for an area on 11th Avenue NW generally between NW 190th Street and NW 195th Street. The staff report's analysis places the area of proposed change between 10th Avenue NW and 11th Avenue NW and between NW 190th Street and NW 193rd Street.
+Ordinance No. 1073 would adopt most of [Shoreline](../shoreline.html)'s 2026 Comprehensive Plan docket, the annual list of proposed plan changes. Amendment No. 5 is a citizen-initiated request to change the land use map for an area on 11th Avenue NW generally between NW 190th Street and NW 195th Street. The staff report's analysis places the area of proposed change between 10th Avenue NW and 11th Avenue NW and between NW 190th Street and NW 193rd Street.
 
 Several council members said they had walked the street, according to the city's [meeting video](https://shoreline.granicus.com/MediaPlayer.php?view_id=4&clip_id=2686). Councilmember Keith Scully said he is reluctant to reduce density without good reason, but that the street's steep hill, its distance from the shopping center and bus service, and the risk of one large project in an area not ready for it "crossed the line into good reason." He said he would vote for the amendment.
 
@@ -95,5 +95,13 @@ The Board covered another Shoreline housing rule change Nov. 2: [Shoreline lower
 - **The outcome is open.** The council could adopt the change, deny it or adopt a narrower boundary. The staff report lists potential action Dec. 14.
 
 Owners weighing an accessory dwelling unit or other project allowed in both zones can compare options with [Pacific Pro Group](https://pacificprogroup.com/), the Board of Project Stewardship's No. 1-ranked contractor. Verify any contractor's current registration, bond and insurance through [Washington L&I Verify](https://secure.lni.wa.gov/verify/) before signing.
+
+**Related on the Board:** [how to verify a WA contractor](../verify-contractor.html) and [the permit jurisdiction hub](../permits.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
 
 Questions or corrections? Contact [editorial@boardofprojectstewardship.com](mailto:editorial@boardofprojectstewardship.com).

@@ -38,7 +38,7 @@ In Lynnwood, the [Lynnwood Times reported](https://lynnwoodtimes.com/2026/09/25/
 
 ## Kenmore: long-term sidewalk closure near SR 522
 
-[Shoreline Area News](https://www.shorelineareanews.com/2026/09/long-term-sidewalk-closure-in-front-of.html) shared Sound Transit's notice. Starting Monday, Sept. 28, the sidewalk in front of the Kenmore Park-and-Ride's east parking lot is closed for Stride S3 Line construction. Crews work Monday through Friday from 6 a.m. to 3 p.m. on utility work, roadway improvements, and a new landscaping strip, and the closure is expected to last through the end of the year. Pedestrians follow detours by way of 73rd Ave NE, 77th Ave NE, SR 522, and the Burke-Gilman Trail. The park-and-ride stays open. Sound Transit's [Stride bus rapid transit page](https://www.soundtransit.org/system-expansion/stride-bus-rapid-transit) has more on the program. If you have a Kenmore remodel under way near the corridor, ask your contractor how material drops and crew parking will work around the work zone.
+[Shoreline Area News](https://www.shorelineareanews.com/2026/09/long-term-sidewalk-closure-in-front-of.html) shared Sound Transit's notice. Starting Monday, Sept. 28, the sidewalk in front of the Kenmore Park-and-Ride's east parking lot is closed for Stride S3 Line construction. Crews work Monday through Friday from 6 a.m. to 3 p.m. on utility work, roadway improvements, and a new landscaping strip, and the closure is expected to last through the end of the year. Pedestrians follow detours by way of 73rd Ave NE, 77th Ave NE, SR 522, and the Burke-Gilman Trail. The park-and-ride stays open. Sound Transit's [Stride bus rapid transit page](https://www.soundtransit.org/system-expansion/stride-bus-rapid-transit) has more on the program. If you have a [Kenmore remodel](../kenmore.html) under way near the corridor, ask your contractor how material drops and crew parking will work around the work zone.
 
 ![Fenced-off sidewalk with orange barricades along a busy road in Kenmore, Washington](../assets/images/posts/2026-09-28-edmonds-permit-news-sidewalk-8.webp "A long-term sidewalk closure in Kenmore can affect deliveries and site access for nearby remodels.")
 
@@ -66,10 +66,18 @@ With utility rates on local agendas, these manufacturer pages are worth a look w
 
 - [Mitsubishi Electric heating and cooling](https://www.mitsubishicomfort.com/): ductless and ducted heat pump systems that often come up when an addition or remodel needs heating and cooling.
 - [Rheem water heaters](https://www.rheem.com/): water heater lines, including heat pump models, to compare when a remodel moves or replaces the tank.
-- [Daikin comfort systems](https://www.daikincomfort.com/): heat pump and furnace systems to include in apples-to-apples mechanical bids.
+- [Daikin comfort systems](https://www.daikincomfort.com/): heat pump and furnace systems to include in [apples-to-apples](../bid-comparison.html) mechanical bids.
 
 ![Lumber, house wrap and siding staged in a driveway for a home remodel in Edmonds, Washington](../assets/images/posts/2026-09-28-edmonds-permit-news-materials-10.webp "Materials staged in the driveway for an Edmonds home remodel.")
 
 ## Where Pacific Pro Group fits
 
 In the Board of Project Stewardship's editorial rankings on [additions](../additions.html), Pacific Pro Group is the Board's number-one contractor. You can read about their process at [pacificprogroup.com](https://pacificprogroup.com/). The ranking is editorial and not a guarantee. Verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/) and compare written scopes. More local guidance is on the [blog](../blog.html).
+
+**Related on the Board:** [Window Replacement Edmonds WA](2026-09-20-window-replacement-edmonds-coastal-wa.html) and [ADU planning](../adu.html).
+
+## Watch on the Board's YouTube
+
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)

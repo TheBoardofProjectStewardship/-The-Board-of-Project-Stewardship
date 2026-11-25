@@ -135,7 +135,7 @@ Ask each bidder which panel lines they actually install and stock breakers for, 
 
 ## How to shortlist and verify an electrical contractor
 
-Get two or three written bids built on the list above. Then:
+Get two or three [written bids](../bid-comparison.html) built on the list above. Then:
 
 - Look up each company on [Washington L&I Verify](https://secure.lni.wa.gov/verify/) — license, bond, and insurance — and confirm the electricians on the job are certified for the work, as L&I's [hiring guidance](https://lni.wa.gov/licensing-permits/electrical/electrical-basics-for-home-business-owners/hiring-an-electrical-contractor) recommends.
 - Ask who pulls the Federal Way electrical permit, and see it in [MyBuildingPermit](https://mybuildingpermit.com/) once it is issued. L&I notes that for jobsites inside cities that do their own permitting, the city is where you search for permit and inspection records.
@@ -158,3 +158,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 6. Plan the City's service inspection around the PSE reconnect, and do not skip the final electrical inspection.
 
 A panel upgrade is easy to treat as a box on the wall. In Federal Way it is really a sequence — City permit, PSE disconnect, inspection, reconnect — and the contractor who can explain that sequence clearly in the bid is usually the one who will run it well.
+
+**Related on the Board:** [change orders and allowances](../change-orders.html) and [contractor contract basics](../contractor-contract-basics.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)

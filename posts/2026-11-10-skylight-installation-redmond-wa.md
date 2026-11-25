@@ -146,7 +146,7 @@ Brand names are a starting point. The rated U-factor on the label, the flashing 
 
 ## How to shortlist and verify the crew
 
-Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming active registration, bonding and insurance, getting several written bids and signing a written contract. Look up every firm, both the builder or roofer and the electrical contractor, on [L&I Verify](https://secure.lni.wa.gov/verify/). Ask each bidder for recent skylight jobs with photos of the framing and flashing stages, not just finished ceilings, and a written scope that states:
+Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming active registration, bonding and insurance, getting several written bids and signing a [written contract](../contractor-contract-basics.html). Look up every firm, both the builder or roofer and the electrical contractor, on [L&I Verify](https://secure.lni.wa.gov/verify/). Ask each bidder for recent skylight jobs with photos of the framing and flashing stages, not just finished ceilings, and a written scope that states:
 
 - Which permits (building and, if needed, electrical) the bidder will apply for, and who requests inspections.
 - The exact skylight model, its rated U-factor, and whether it is venting, fixed or powered.
@@ -170,3 +170,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 5. Apply through Redmond's [How to Apply](https://www.redmond.gov/462/How-to-Apply) process (REPS or PRO), add the electrical permit if the unit is wired, and schedule inspections before anything gets covered up.
 
 A Redmond skylight worth having is permitted, framed properly, flashed in the right order, insulated so it doesn't sweat, and rated for Washington's energy code. Start with the City's own pages, read the bids against them, and hire a crew that puts those details in writing.
+
+**Related on the Board:** [framing and carpentry directory](../framing.html) and [roofing directory](../roofing.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)

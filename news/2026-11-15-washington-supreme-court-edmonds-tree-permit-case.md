@@ -41,7 +41,7 @@ Hodges put the question this way in a statement to My Edmonds News: "If a city w
 
 ## How the dispute began
 
-The dispute dates to 2022, when Rimmer applied for a permit to build a single-family home on a vacant infill lot in Edmonds. The city determined the home met all structural and building criteria, but a single ornamental dogwood tree stood in the footprint of the planned house, My Edmonds News reported.
+The dispute dates to 2022, when Rimmer applied for a permit to build a single-family home on a vacant infill lot in [Edmonds](../edmonds.html). The city determined the home met all structural and building criteria, but a single ornamental dogwood tree stood in the footprint of the planned house, My Edmonds News reported.
 
 Under the tree ordinance then in effect, the city refused to issue the building permit unless Rimmer recorded a permanent covenant, a "Notice on Title," that would bind him and all future owners to plant and maintain two native trees on the lot as replacements for the dogwood, according to My Edmonds News.
 
@@ -99,5 +99,13 @@ The case also shows how short LUPA's 21-day window is. That deadline is state la
 ![A new craftsman-style house in Edmonds with young staked native trees planted in a mulched front yard](../assets/images/news/2026-11-15-edmonds-tree-permit-case-3.webp "A newly built house with young native replacement trees in the front yard, the kind of planting Edmonds' tree replacement rules require; watercolor artwork, not a real property or permitted project.")
 
 For help planning a new house, an addition or a backyard cottage on an Edmonds lot with trees, [Pacific Pro Group](https://pacificprogroup.com/) is the Board's No. 1-ranked contractor. Verify any contractor's current registration, bond and insurance through [Washington L&I Verify](https://secure.lni.wa.gov/verify/) before signing.
+
+**Related on the Board:** [Edmonds custom home builders](../edmonds-custom-homes.html) and [ADU planning](../adu.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)
+- [5 Best Kitchen Remodelers in Edmonds, WA (2026)](https://youtu.be/Gx1i0bavz8o)
 
 Questions or corrections? Contact [editorial@boardofprojectstewardship.com](mailto:editorial@boardofprojectstewardship.com).

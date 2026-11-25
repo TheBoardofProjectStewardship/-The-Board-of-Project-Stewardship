@@ -199,3 +199,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 5. Choose the range hood and duct route together, and confirm the airflow or capture-efficiency rating against the state table.
 6. Apply on [MyBuildingPermit.com](https://www.mybuildingpermit.com/), get the City electrical permit, and verify every contractor on L&I Verify.
 7. Do not cover any work before it passes City inspection, and keep the approved plans and inspection record with your house files.
+
+**Related on the Board:** [remodel cost factors](../remodel-cost-factors.html), [the permit jurisdiction hub](../permits.html) and [change orders and allowances](../change-orders.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Kitchen Remodelers in Edmonds, WA (2026)](https://youtu.be/Gx1i0bavz8o)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)

@@ -18,7 +18,7 @@ Mukilteo bathroom remodels serve homes near the waterfront, hillside streets, an
 
 ## Neighborhood context
 
-Some homes sit on slopes with tricky material access and limited staging. Upstairs baths over living rooms need leak-conscious detailing and a written plan for temporary living if the only full bath is offline. Owners often combine bath updates with bedroom refreshes for aging-in-place or resale readiness — keep those scopes on one schedule so waterproofing, electrical, and finishes do not fight each other.
+Some homes sit on slopes with tricky material access and limited staging. Upstairs baths over living rooms need leak-conscious detailing and a written plan for temporary living if the only full bath is offline. Owners often combine bath updates with bedroom refreshes for aging-in-place or resale readiness — keep those scopes on one schedule so [waterproofing](../bathroom-waterproofing-guide.html), electrical, and finishes do not fight each other.
 
 Ferry-adjacent and bluff streets can constrain dumpster placement and delivery windows. Tell bidders about access constraints up front so proposals reflect real logistics, not a flat-lot assumption imported from inland Snohomish County.
 
@@ -80,3 +80,11 @@ When you interview firms, ask them to walk a recent project chronologically: dis
 Use the Board directories as a starting shortlist — especially [bathrooms](../bathrooms.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden assemblies. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
+
+**Related on the Board:** [Kitchen Remodel Mukilteo WA](2026-08-27-kitchen-remodel-mukilteo-wa.html) and [Mukilteo remodel and addition guides](../mukilteo.html).
+
+## Watch on the Board's YouTube
+
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)

@@ -106,3 +106,12 @@ When the Board of Project Stewardship ranks design-build firms for ADUs and addi
 5. **Confirm current code** — ask a city planner about the pending amendment before final drawings, then verify and compare bidders.
 
 Bellevue's code now gives most single-family lots real room for a second household. Treat the floor-area cap, parking triggers, and utility runs as design inputs from day one, and the unit will move through review as smoothly as it lives.
+
+**Related on the Board:** [ADU Planning Edmonds WA](2026-09-07-adu-planning-edmonds-wa.html), [home addition cost factors](../addition-cost-factors.html) and [the What Can I Build Here? lot report](../build-here.html).
+
+## Watch on the Board's YouTube
+
+- [4 Best Home Addition Contractors in Bellevue, WA (2026)](https://youtu.be/z_EF36WjunY)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [Adding On? Freeze These 6 Things Before You Ask for a Price](https://www.youtube.com/shorts/EvOh_7_3za4)
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)

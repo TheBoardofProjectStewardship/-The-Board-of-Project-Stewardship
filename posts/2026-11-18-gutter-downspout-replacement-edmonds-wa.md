@@ -160,7 +160,7 @@ These are makers whose products often show up on gutter and roof drainage jobs. 
 
 A gutter replacement mixes roof-edge work, carpentry and drainage. Hire for all three.
 
-- **Check registration, bond and insurance.** Washington requires most contractors to be registered. Look up any firm on [Washington L&I Verify](https://secure.lni.wa.gov/verify/), which shows registration, bond and insurance status. L&I's [hiring a contractor](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) page explains what to check and why a written contract matters. The Board's [verify a contractor](../verify-contractor.html) and [bonds and insurance](../bonds-and-insurance.html) pages explain what the results mean.
+- **Check registration, bond and insurance.** Washington requires most contractors to be registered. Look up any firm on [Washington L&I Verify](https://secure.lni.wa.gov/verify/), which shows registration, bond and insurance status. L&I's [hiring a contractor](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) page explains what to check and why a [written contract](../contractor-contract-basics.html) matters. The Board's [verify a contractor](../verify-contractor.html) and [bonds and insurance](../bonds-and-insurance.html) pages explain what the results mean.
 - **Get the gutter details in writing.** Profile, size, material, color, hanger type and spacing, downspout count and locations, and any guards.
 - **Get the carpentry plan in writing.** How fascia and soffit will be checked, and how extra repairs will be priced and approved.
 - **Ask where every downspout will discharge.** Splash block, dispersion trench, tightline, rain garden or an existing connection, and whether any of it needs City approval.
@@ -186,3 +186,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 The Board's earlier [Edmonds roof replacement guide](2026-09-21-roof-replacement-edmonds-coastal-wa.html) covers the roof above the gutters, and the [Kenmore yard and foundation drainage guide](2026-10-27-yard-foundation-drainage-kenmore-wa.html) goes deeper on moving water away from a house.
 
 Good gutters in Edmonds are more than new metal on the roof edge. They hang on sound wood, they are big enough for the roof and the trees, and every downspout sends water somewhere the City, your foundation and your neighbors can live with. Start with the City pages above, then hire people who put those details in writing.
+
+**Related on the Board:** [Fiber-Cement Siding Replacement Edmonds WA](2026-09-22-siding-replacement-edmonds-coastal-wa.html) and [ADU planning](../adu.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)

@@ -136,7 +136,7 @@ Ask which products a bidder actually installs, and confirm the insulation chosen
 
 ## How to shortlist and verify an insulation contractor
 
-Get two or three written bids built on the list above. Then:
+Get two or three [written bids](../bid-comparison.html) built on the list above. Then:
 
 - Look up each company on [Washington L&I Verify](https://secure.lni.wa.gov/verify/) for license, bond and insurance, and confirm a licensed electrical contractor will handle any wiring.
 - Ask who will contact Lynnwood DBS, and see any permit in the City's [online portal](https://www.lynnwoodwa.gov/Services/Apply-for-a-Permit/Online-Permit-Portal-Apply-Review-Pay-Issue-Permits-Inspections) once it is issued.
@@ -157,3 +157,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 6. Ask for photos of the sealed attic floor before the insulation goes in.
 
 An attic upgrade is easy to sell as "more insulation." In Lynnwood it is really a sequence — inspect, seal, vent, then insulate — and the contractor who can explain that sequence clearly in the bid is usually the one who will do it well.
+
+**Related on the Board:** [Window Replacement Lynnwood WA](2026-10-02-window-replacement-lynnwood-wa.html) and [questions to ask before you hire](../hire-questions.html).
+
+## Watch on the Board's YouTube
+
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
+- [5 Best Kitchen Remodelers in Edmonds, WA (2026)](https://youtu.be/Gx1i0bavz8o)

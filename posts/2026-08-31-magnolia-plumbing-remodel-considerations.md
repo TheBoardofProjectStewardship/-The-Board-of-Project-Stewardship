@@ -51,7 +51,7 @@ Capacity and location may need updates when adding showers or fixtures — evalu
 
 ../assets/videos/posts/2026-09-bath-process-shared.mp4
 
-Process clip (shared wet-area still-motion) — not a Magnolia plumbing schedule. Rough-in still follows assessment → fixture lock → inspection → pressure test.
+Process clip (shared wet-area still-motion) — not a [Magnolia](../magnolia.html) plumbing schedule. Rough-in still follows assessment → fixture lock → inspection → pressure test.
 
 https://www.youtube.com/watch?v=EUIKy7vmc40
 
@@ -71,14 +71,22 @@ Discuss water pressure and hammer issues during design. New valves and fixtures 
 
 ## Coordination etiquette between trades
 
-Plumbers, electricians, and waterproofers sequence tightly in baths. A GC who runs a clear daily plan prevents one trade from closing a wall another still needs. Ask how RFIs and hidden-condition photos are shared with you as the owner so surprises are documented, not whispered.
+[Plumbers](../plumber.html), electricians, and waterproofers sequence tightly in baths. A GC who runs a clear daily plan prevents one trade from closing a wall another still needs. Ask how RFIs and hidden-condition photos are shared with you as the owner so surprises are documented, not whispered.
 
 ## Putting it together for homeowners
 
 For **Magnolia plumbing remodels**, the durable projects share a pattern: respect **aging supply branches and hillside crawl access**, put **Seattle plumbing permits for substantive changes** in writing, and keep **vent correctness and accessible shutoffs while walls are open** on the critical path instead of the punch list. Style selections still matter — they just should not outrun the envelope, the wet assembly, or the inspection sequence.
 
-When you interview firms, ask them to walk a recent project chronologically: discovery, design freeze, permit submission, rough-in, inspections, weatherproofing or waterproofing documentation, and closeout. Vague storytelling is a signal; specific sequencing is a better one. Re-check every company at [L&I Verify](https://secure.lni.wa.gov/verify/) even if a friend referred them, and treat licensing as a living status rather than a one-time screenshot.
+When you interview firms, ask them to walk a recent project chronologically: discovery, design freeze, permit submission, rough-in, inspections, weatherproofing or [waterproofing](../bathroom-waterproofing-guide.html) documentation, and closeout. Vague storytelling is a signal; specific sequencing is a better one. Re-check every company at [L&I Verify](https://secure.lni.wa.gov/verify/) even if a friend referred them, and treat licensing as a living status rather than a one-time screenshot.
 
 Use the Board directories as a starting shortlist — especially [bathrooms](../bathrooms.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden assemblies. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
+
+**Related on the Board:** [Walk-In Shower Remodel Magnolia](2026-08-16-walk-in-shower-remodel-magnolia.html) and [bathroom cost factors](../bathroom-cost-factors.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)

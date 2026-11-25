@@ -20,7 +20,7 @@ Repiping means replacing the water supply lines that run from the main shutoff t
 
 Two older materials come up most often. **Galvanized steel** pipe is zinc-coated steel that was common in older homes. An Insurance Journal building-systems article on [aging plumbing systems](https://www.insurancejournal.com/magazines/mag-features/2013/03/25/285518.htm) says the zinc coating erodes over time, causing corrosion build-up inside the pipe that can reduce or block water flow and raise the risk of leaks. **Polybutylene** (often shortened to PB) is a gray or similar flexible plastic. The U.S. Department of Housing and Urban Development's [PEX design guide](https://www.huduser.gov/Publications/PDF/pex_design_guide.pdf) says polybutylene was used for supply plumbing from about 1978 to 1995, that there were several reported failures, and that it is no longer approved for water supply piping.
 
-The home-inspection association InterNACHI's [polybutylene guide](https://www.nachi.org/pb.htm) adds that no regulation requires replacing PB, that many plumbers recommend it anyway, and that leaks behind drywall can go unnoticed for a long time. It also notes that some copper systems were found with short PB sections at fixture stub-outs, which is why a plumber should trace the whole system rather than glance at one visible run.
+The home-inspection association InterNACHI's [polybutylene guide](https://www.nachi.org/pb.htm) adds that no regulation requires replacing PB, that many [plumbers](../plumber.html) recommend it anyway, and that leaks behind drywall can go unnoticed for a long time. It also notes that some copper systems were found with short PB sections at fixture stub-outs, which is why a plumber should trace the whole system rather than glance at one visible run.
 
 This guide sticks to what the City of Kirkland, MyBuildingPermit, Washington L&I and other public sources publish. For Kirkland firms and neighborhood context, start with the Board of Project Stewardship's [Kirkland directory](../kirkland.html), and for the trade itself see the Board's [plumbing](../plumbing.html) page.
 
@@ -124,7 +124,7 @@ Leave the pipes visible and accessible for the rough-in inspection. Do not let a
 
 Plumbing is a certified trade in Washington. L&I's [Plumber Certification](https://www.lni.wa.gov/licensing-permits/plumbing/plumber-certification/) page says you must be certified by the Washington State Plumber Certification Program to work in the plumbing trade in Washington. Its [plumber trainee](https://www.lni.wa.gov/licensing-permits/plumbing/plumber-certification/plumber-trainee/) page explains that trainees must work under the direct supervision of a certified plumber while they build the required hours. A trainee on your job is normal; an unsupervised one is not.
 
-- **Verify the company.** Look it up on [Washington L&I Verify](https://secure.lni.wa.gov/verify/) for registration, bond and insurance. L&I's [hiring a contractor](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) page explains what to check and why a written contract matters. The Board's [verify a contractor](../verify-contractor.html) and [bonds and insurance](../bonds-and-insurance.html) pages explain what the results mean.
+- **Verify the company.** Look it up on [Washington L&I Verify](https://secure.lni.wa.gov/verify/) for registration, bond and insurance. L&I's [hiring a contractor](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) page explains what to check and why a [written contract](../contractor-contract-basics.html) matters. The Board's [verify a contractor](../verify-contractor.html) and [bonds and insurance](../bonds-and-insurance.html) pages explain what the results mean.
 - **Ask who is the certified plumber on the job** and who will be on site.
 - **Ask who pulls the permit and schedules the inspections.** The permit should be in the plumber's or contractor's name unless you are doing the work yourself.
 - **Get the scope in writing:** pipe material, fittings, number of fixtures, shutoff and PRV work, openings and wall repair, cleanup, and what happens if hidden damage is found.
@@ -175,3 +175,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 5. Get written bids covering the pipe material, shutoff and PRV, openings, drywall repair and paint, and who pulls the permit.
 6. Plan the rough-in inspection, the pressure test and the wall closing in that order, and avoid November 23 and 24 for online permit and inspection tasks.
 7. Keep the permit, the final inspection sign-off, photos of the open walls and the manufacturer's information in your house file.
+
+**Related on the Board:** [the bid comparison checklist](../bid-comparison.html) and [remodel cost factors](../remodel-cost-factors.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)

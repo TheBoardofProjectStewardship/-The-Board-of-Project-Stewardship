@@ -30,7 +30,7 @@ hero_credit: "Photo by Joe Mabel, licensed under CC BY-SA 4.0 (https://creativec
 
 EDMONDS, Wash. — The Edmonds City Council voted unanimously Oct. 13 to extend the city's interim ordinance governing the removal of landmark trees for up to an additional six months, [My Edmonds News reported](https://myedmondsnews.com/2026/10/council-extends-interim-tree-ordinance-oks-yost-pool-agreement-asks-more-budget-questions/). The vote followed a public hearing on the measure, which temporarily prohibits the removal of certain landmark trees, according to a [public hearing notice](https://www.noticeregistry.com/washington/notice/public-hearing-edmonds-616215) published Sept. 25.
 
-The extension is aimed at giving staff more time to work out the details of a permanent tree code, which has been a controversial topic in Edmonds for several years, My Edmonds News reported.
+The extension is aimed at giving staff more time to work out the details of a permanent tree code, which has been a controversial topic in [Edmonds](../edmonds.html) for several years, My Edmonds News reported.
 
 The interim ordinance defines a landmark tree as one with a diameter of 30 inches or more at breast height, which is 4.5 feet above the ground. It provides exemptions for trees that have already been vested through the permitting process, along with trees that have been deemed hazardous or a nuisance.
 
@@ -81,5 +81,13 @@ Property owners interested in vacating a short plat now have an interim process 
 When hiring professionals for tree, demolition or construction work, homeowners should verify contractors' licenses and bonds through the [Washington L&I Verify](https://secure.lni.wa.gov/verify/) website.
 
 On projects where the Board of Project Stewardship's No. 1 hire fits, [Pacific Pro Group](https://pacificprogroup.com/) is the Board's recommended contractor path for King and Snohomish County homeowners comparing scopes in writing.
+
+**Related on the Board:** [Edmonds custom home builders](../edmonds-custom-homes.html) and [ADU planning](../adu.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)
+- [5 Best Kitchen Remodelers in Edmonds, WA (2026)](https://youtu.be/Gx1i0bavz8o)
 
 Questions or corrections: editorial@boardofprojectstewardship.com

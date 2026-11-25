@@ -129,7 +129,7 @@ Whatever products a bidder proposes, ask for the pipe type and diameter, solid o
 
 ## How to shortlist and verify a drainage contractor
 
-Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming that a contractor is actively registered, bonded and insured, reviewing their history, getting at least three written bids, and putting the job in a written contract.
+Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming that a contractor is actively registered, bonded and insured, reviewing their history, getting at least three written bids, and putting the job in a [written contract](../contractor-contract-basics.html).
 
 - Look up every firm, including any excavation subcontractor, on [L&I Verify](https://secure.lni.wa.gov/verify/).
 - Ask what is causing the water and how they know. A good bidder walks the site in the rain or tests the downspouts before proposing a fix.
@@ -149,9 +149,17 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 2. Hose-test existing downspout lines to find where they really go.
 3. Fix gutters, downspouts and grading at the wall before paying for a subsurface drain.
 4. Check your parcel on [King County iMap](https://gismaps.kingcounty.gov/iMap/) for nearby streams, wetlands or steep slopes, and read [KMC 15.25](https://ecode360.com/49597144) on land alteration.
-5. Ask the City of Kenmore permit center whether your plan needs a permit or drainage review and where the water may legally discharge. Get at least three written bids that name the drain type, materials, slope, cleanouts and outlet.
+5. Ask the City of Kenmore permit center whether your plan needs a permit or drainage review and where the water may legally discharge. Get at least three [written bids](../bid-comparison.html) that name the drain type, materials, slope, cleanouts and outlet.
 6. Make sure [Washington 811](https://www.washington811.com/) is called before digging, verify every firm on [L&I Verify](https://secure.lni.wa.gov/verify/), and keep trench photos, product sheets and any permit records with your house papers.
 
 ![A finished yard drainage project in Kenmore, WA with restored lawn, a flush area drain and a rock swale](../assets/images/posts/2026-10-27-kenmore-finished-drainage-9.webp "A Kenmore, WA side yard after drainage work, with the lawn restored, a flush area drain grate and a river-rock swale carrying surface water away from the house.")
 
 Good drainage in Kenmore mostly comes down to the order of the work. Handle roof water first, then the grade at the wall, then a subsurface drain where the water actually moves, all sent to an outlet the City accepts. A contractor who explains that order in writing, with the outlet and the code sections spelled out, is usually the one whose drain still works ten winters from now.
+
+**Related on the Board:** [concrete and foundation directory](../concrete.html) and [remodel cost factors](../remodel-cost-factors.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)

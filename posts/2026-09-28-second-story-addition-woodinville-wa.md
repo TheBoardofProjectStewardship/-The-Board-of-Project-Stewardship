@@ -18,7 +18,7 @@ Woodinville sits at the edge of the Sammamish Valley — wine-country tourism al
 
 ## Neighborhood and lot context
 
-Whether you are near Downtown Woodinville, the Tourist District corridor, Hollywood Hill, or a larger Sammamish Valley / equestrian-lot edge, staging still shapes the schedule. Wider rural drives can accept lumber drops more easily than tight cul-de-sacs; winery-weekend traffic along SR-202 can slow deliveries; HOA or neighbor sight-line expectations can affect height, window placement, and exterior cladding even when the footprint stays the same. Many mid-century and 1980s–2000s ranches and split-levels are vertical-expansion candidates — ask bidders for a written structural path (foundation, first-floor walls, lateral system) before upstairs floor plans freeze.
+Whether you are near Downtown [Woodinville](../woodinville.html), the Tourist District corridor, Hollywood Hill, or a larger Sammamish Valley / equestrian-lot edge, staging still shapes the schedule. Wider rural drives can accept lumber drops more easily than tight cul-de-sacs; winery-weekend traffic along SR-202 can slow deliveries; HOA or neighbor sight-line expectations can affect height, window placement, and exterior cladding even when the footprint stays the same. Many mid-century and 1980s–2000s ranches and split-levels are vertical-expansion candidates — ask bidders for a written structural path (foundation, first-floor walls, lateral system) before upstairs floor plans freeze.
 
 Equestrian and larger-lot properties sometimes carry accessory structures, septic or well constraints, critical-area overlays, or longer driveway staging that a city-lot second story never sees. Put those constraints in the proposal so they are not discovered after the roof comes off. Cross-check [roofing.html](../roofing.html) and [siding.html](../siding.html) when the new volume reopens the envelope, and [trades.html](../trades.html) when plumber, electrician, and HVAC share the same riser and chase windows upstairs.
 
@@ -92,7 +92,7 @@ Washington State Labor & Industries — not the City. See [Electrical Permits](h
 Written temporary roofing, rapid sheathing and WRB, rain-delay rules that protect the existing floor, inspection holds before cover-up, and stair/shaft protection — not an upstairs mood board alone.
 
 **How do I compare Woodinville second-story bids fairly?**  
-Normalize permit ownership (City Accela vs county portal vs L&I electrical), structural engineering scope, temporary roof method, dry-in milestone, stay-in-home zoning, allowance lists, and change-order language for discovery in the existing roof and first-floor walls. Ask for a short narrative of how they sequence demo, framing, dry-in, and inspections on Eastside lots.
+Normalize permit ownership (City Accela vs county portal vs L&I electrical), structural engineering scope, temporary roof method, dry-in milestone, stay-in-home zoning, allowance lists, and [change-order](../change-orders.html) language for discovery in the existing roof and first-floor walls. Ask for a short narrative of how they sequence demo, framing, dry-in, and inspections on Eastside lots.
 
 **Where should I shortlist contractors?**  
 Use the Board’s [additions directory](../additions.html), review [Another Story](../another-story.html) when vertical expansion is the goal, interview two or three licensed firms, request written scopes, and verify each at [L&I Verify](https://secure.lni.wa.gov/verify/).
@@ -116,3 +116,12 @@ Use the Board directories as a starting shortlist — especially [additions](../
 Finally, keep a simple owner file: proposals, allowance logs, Accela or county permit numbers, L&I electrical records if any, inspection results, product cut sheets, and dated photos of temporary roofing and hidden structure before finishes close. That file protects you during construction and years later when a roof needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
 
 ![Finished two-story home after a second-story addition in Woodinville, Washington](../assets/images/posts/2026-09-28-woodinville-second-story-addition-finished-9.webp "A finished Woodinville second-story addition with siding and windows matched to the original house.")
+
+**Related on the Board:** [the What Can I Build Here? lot report](../build-here.html) and [second story vs teardown](../second-story-vs-teardown.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [4 Best Home Addition Contractors in Bellevue, WA (2026)](https://youtu.be/z_EF36WjunY)
+- [Adding On? Freeze These 6 Things Before You Ask for a Price](https://www.youtube.com/shorts/EvOh_7_3za4)
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)

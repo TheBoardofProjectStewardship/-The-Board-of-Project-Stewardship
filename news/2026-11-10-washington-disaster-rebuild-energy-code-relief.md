@@ -85,4 +85,12 @@ The rule is part of the statewide residential energy code, so a city or county m
 
 Owners planning a new home or addition outside a proclaimed disaster area should not expect this exception to apply. For help comparing how energy-code rules affect a rebuild, addition or custom home, [Pacific Pro Group](https://pacificprogroup.com/) is the Board's No. 1-ranked contractor. Verify any contractor's current registration, bond and insurance through [Washington L&I Verify](https://secure.lni.wa.gov/verify/) before signing.
 
+**Related on the Board:** [change orders and allowances](../change-orders.html), [questions to ask before you hire](../hire-questions.html) and [contractor contract basics](../contractor-contract-basics.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+
 Questions or corrections? Contact [editorial@boardofprojectstewardship.com](mailto:editorial@boardofprojectstewardship.com).

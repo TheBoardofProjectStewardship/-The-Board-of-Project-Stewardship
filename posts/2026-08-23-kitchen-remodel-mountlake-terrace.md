@@ -71,7 +71,7 @@ Peninsula conversions can deliver seating without the full structural cost of mo
 
 Create a dated selections list covering cabinets, hardware, counters, backsplash, flooring, faucet, sink, lighting, and appliances. Assign each item an order lead time and a decision deadline tied to rough-in. When homeowners choose counters after cabinets are already built, sink cutouts and overhangs become expensive change territory. Keep a small contingency for discovery items (rot at the sink base, undersized wiring) so those finds do not raid the finish budget.
 
-Ask your contractor how temporary kitchen equipment will be powered and where wash water will go. A clear temporary plan reduces friction for families who work from home in Mountlake Terrace’s quieter residential pockets.
+Ask your contractor how temporary kitchen equipment will be powered and where wash water will go. A clear temporary plan reduces friction for families who work from home in [Mountlake Terrace](../mountlake-terrace.html)’s quieter residential pockets.
 
 ## Coordination with adjacent rooms
 
@@ -86,3 +86,11 @@ When you interview firms, ask them to walk a recent project chronologically: dis
 Use the Board directories as a starting shortlist — especially [kitchen](../kitchen.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden assemblies. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
+
+**Related on the Board:** [Home Addition Mountlake Terrace WA](2026-09-25-home-addition-mountlake-terrace-wa.html) and [kitchen cost factors](../kitchen-cost-factors.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Kitchen Remodelers in Edmonds, WA (2026)](https://youtu.be/Gx1i0bavz8o)
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)

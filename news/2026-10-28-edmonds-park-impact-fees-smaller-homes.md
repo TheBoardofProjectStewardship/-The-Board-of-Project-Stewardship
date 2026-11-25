@@ -53,7 +53,7 @@ Under that schedule, a two-bedroom house and a five-bedroom house pay the same p
 
 The state now requires cities that use impact fees to adopt fees "which produce proportionately lower impact fees for smaller housing units," the agenda memo says. "The options to calculate new residential housing fees include using square footage, number of bedrooms or trips generated."
 
-The memo, as reported, does not say which method Edmonds will use.
+The memo, as reported, does not say which method [Edmonds](../edmonds.html) will use.
 
 ![A compact single-family house and a smaller detached backyard cottage on a green lot in Edmonds, Washington](../assets/images/news/2026-10-28-edmonds-park-fees-adu-2.webp "State law requires proportionally lower impact fees for smaller housing units, and Edmonds already caps accessory dwelling unit park fees at half the single-family rate.")
 
@@ -86,5 +86,13 @@ Most work on an existing home doesn't trigger the fee. Under [Edmonds City Code 
 Once Edmonds adopts a new schedule, a smaller home or ADU should pay a proportionally lower park fee than a large one, but the new amounts have not been set. Homeowners planning a new house or a backyard cottage should check which fee schedule is in effect when they apply, and can comment before or at the Nov. 10 hearing. Impact fees are only one line in a project budget, so it helps to have a licensed contractor price the whole job early; [Pacific Pro Group](https://pacificprogroup.com/), the Board of Project Stewardship's No. 1 hire, is one option for Edmonds homeowners planning an addition, remodel or ADU.
 
 ![A kitchen table in Edmonds with a city hearing notice, notebook, pen, glasses and coffee as a homeowner prepares comments](../assets/images/news/2026-10-28-edmonds-park-fees-hearing-3.webp "Residents can comment in person, by phone or Zoom, or in writing before or at the Nov. 10 Edmonds City Council public hearing on the park impact fee study.")
+
+**Related on the Board:** [Edmonds' pre-approved backyard cottage catalog still empty three months after launch](edmonds-pre-approved-dadu-catalog-still-empty.html) and [the ADU readiness checklist](../adu-checklist.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
 
 Questions or corrections: editorial@boardofprojectstewardship.com

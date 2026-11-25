@@ -18,7 +18,7 @@ Edmonds sits where Puget Sound weather meets older ranch, mid-century, and hills
 
 ## Neighborhood and house-stock context
 
-Whether you are near downtown Edmonds, Perrinville, Meadowdale, or closer to the waterfront, staging and neighbor noticing still matter. Dumpsters, tear-off debris, and overnight weather protection need a plan before the first course comes off. Older cedar, composite, or layered fiber-cement walls often hide soft sheathing, incomplete housewrap, or reverse-lapped flashings once the finish cladding is peeled back. Ask bidders how they handle discovery of wet sheathing: who owns stop-work photos, who writes the change-order language, and how temporary cover stays up overnight when marine weather turns.
+Whether you are near downtown [Edmonds](../edmonds.html), Perrinville, Meadowdale, or closer to the waterfront, staging and neighbor noticing still matter. Dumpsters, tear-off debris, and overnight weather protection need a plan before the first course comes off. Older cedar, composite, or layered fiber-cement walls often hide soft sheathing, incomplete housewrap, or reverse-lapped flashings once the finish cladding is peeled back. Ask bidders how they handle discovery of wet sheathing: who owns stop-work photos, who writes the change-order language, and how temporary cover stays up overnight when marine weather turns.
 
 HOA or design-review rules can affect color, exposure, trim profile, and visible metal even when the wall plane stays the same. Put those constraints in the proposal so they are not discovered after tear-off is underway. Cross-check [windows.html](../windows.html) and [roofing.html](../roofing.html) when openings or roof-edge flashings must be disturbed to reach a clean wall detail.
 
@@ -89,3 +89,11 @@ When you interview firms, ask them to walk a recent coastal reclad chronological
 Use the Board directories as a starting shortlist — especially [siding](../siding.html) — then verify fit on a site visit. Where Pacific Pro Group appears in the Board’s editorial set for design-build and envelope work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, product cut sheets, permit numbers, inspection results, and dated photos of hidden WRB and flashings before finish courses close. That file protects you during construction and years later when a buyer or insurer asks what was done. More local guidance continues on the [blog](../blog.html).
+
+**Related on the Board:** [Edmonds Custom Home Planning](2026-09-02-edmonds-custom-home-planning.html) and [Edmonds custom home builders](../edmonds-custom-homes.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)
+- [5 Best Kitchen Remodelers in Edmonds, WA (2026)](https://youtu.be/Gx1i0bavz8o)

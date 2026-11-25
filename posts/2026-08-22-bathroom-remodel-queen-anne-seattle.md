@@ -18,7 +18,7 @@ Queen Anne bathroom projects range from classic home powder rooms to primary sui
 
 ## Local context
 
-Housing ages vary from early craftsmanship to newer construction. Shared walls and precious finish floors downstairs raise the stakes for leak-proof showers. Ask for Queen Anne or comparable hillside references.
+Housing ages vary from early craftsmanship to newer construction. Shared walls and precious finish floors downstairs raise the stakes for leak-proof showers. Ask for [Queen Anne](../queen-anne.html) or comparable hillside references.
 
 Confirm plumbing and electrical permit expectations with [Seattle Department of Construction and Inspections (SDCI)](https://www.seattle.gov/sdci) rather than assuming a suburban checklist applies on a steep lot.
 
@@ -30,7 +30,7 @@ Seattle dampness plus hot showers demands membranes, slopes, and outdoor exhaust
 
 ## Materials and process
 
-Prioritize waterproofing details, quiet ventilation, and layouts that respect small footprints. Quality valves and properly grounded circuits are non-negotiable. Large-format tile needs flat substrates — budget prep.
+Prioritize [waterproofing](../bathroom-waterproofing-guide.html) details, quiet ventilation, and layouts that respect small footprints. Quality valves and properly grounded circuits are non-negotiable. Large-format tile needs flat substrates — budget prep.
 
 https://www.youtube.com/watch?v=mMbSgZCcsDU
 
@@ -84,3 +84,11 @@ When you interview firms, ask them to walk a recent project chronologically: dis
 Use the Board directories as a starting shortlist — especially [bathrooms](../bathrooms.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden assemblies. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
+
+**Related on the Board:** [Kitchen Remodel Queen Anne Seattle](2026-08-21-kitchen-remodel-queen-anne-seattle.html) and [bathroom cost factors](../bathroom-cost-factors.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)

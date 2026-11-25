@@ -76,7 +76,7 @@ For a backyard building, the practical lesson is to site the structure around th
 
 Many homeowners assume all Washington electrical permits come from the Department of Labor & Industries. That is not the case in Sammamish. L&I's [City Electrical Permits & Inspections](https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections) page lists the cities that issue their own electrical permits and perform inspections within their limits, and says L&I does not issue permits or do inspections in those cities. Sammamish is on that list, at City Hall, 801 228th Ave SE.
 
-The City's own code, [SMC 16.20.197](https://sammamish.municipal.codes/SMC/16.20.197), says that, in accordance with Chapter 19.28 RCW, an electrical permit is required for the installation, alteration, repair, replacement, modification or maintenance of all electrical systems, wire and electrical equipment, and for certain low-voltage systems. L&I's [electrical permits overview](https://www.lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/index) adds a rule that still applies: electrical permits must be purchased by the electrical contractor or the property owner who will actually do the work, and if you hire an electrical contractor, they must buy their own permit.
+The City's own code, [SMC 16.20.197](https://sammamish.municipal.codes/SMC/16.20.197), says that, in accordance with Chapter 19.28 RCW, an electrical permit is required for the installation, alteration, repair, replacement, modification or maintenance of all electrical systems, wire and electrical equipment, and for certain low-voltage systems. L&I's [electrical permits overview](https://www.lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/index) adds a rule that still applies: electrical permits must be purchased by the [electrical contractor](../electrician.html) or the property owner who will actually do the work, and if you hire an electrical contractor, they must buy their own permit.
 
 ![Sammamish, WA backyard studio electrical: framed walls with outlet boxes, cable and floor conduit](../assets/images/posts/2026-11-02-sammamish-backyard-office-3.webp)
 
@@ -153,7 +153,7 @@ Whatever you choose, ask each bidder to name the foundation system, the siding a
 
 ## How to shortlist and verify a backyard building contractor
 
-Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming that a contractor has an active registration, is bonded and insured, and has a clean history, getting at least three written bids, and putting the job in a written contract.
+Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming that a contractor has an active registration, is bonded and insured, and has a clean history, getting at least three written bids, and putting the job in a [written contract](../contractor-contract-basics.html).
 
 - Look up every firm, including the electrician, excavator and any kit installer, on [L&I Verify](https://secure.lni.wa.gov/verify/).
 - Ask who will submit the building and electrical permits through MyBuildingPermit, and who will request inspections.
@@ -176,3 +176,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 6. Submit building and electrical permits through [MyBuildingPermit](https://mybuildingpermit.com/), and keep the approved plans, inspection records and product data with your house papers.
 
 A good backyard office in Sammamish is one you stop noticing: it sits where the code allows, the trees around it are healthy, the water runs away from it, the wiring passed inspection, and the next owner can see exactly what it is and how it was permitted. A contractor who starts with the zoning, the site and the permits, and puts those details in writing, is usually the one worth hiring.
+
+**Related on the Board:** [concrete and foundation directory](../concrete.html) and [the ADU readiness checklist](../adu-checklist.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)

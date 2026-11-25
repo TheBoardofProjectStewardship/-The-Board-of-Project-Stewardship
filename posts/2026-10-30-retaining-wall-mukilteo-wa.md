@@ -144,7 +144,7 @@ Whatever system you choose, ask each bidder to name the exact block product, the
 
 ## How to shortlist and verify a retaining wall contractor
 
-Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming that a contractor has an active registration, is bonded and insured, and has a clean history, getting at least three written bids, and putting the job in a written contract.
+Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming that a contractor has an active registration, is bonded and insured, and has a clean history, getting at least three written bids, and putting the job in a [written contract](../contractor-contract-basics.html).
 
 - Look up every firm, including any excavation subcontractor, on [L&I Verify](https://secure.lni.wa.gov/verify/).
 - Ask who provides the geotechnical and structural engineering, and whether the engineer will visit the site.
@@ -167,3 +167,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 6. Verify every firm on [L&I Verify](https://secure.lni.wa.gov/verify/), sign a written contract, and keep the plans, permit record and construction photos together.
 
 The best retaining walls in Mukilteo are mostly invisible work: a compacted base, a drain that has somewhere to go, and a design that matches the hill. A contractor who starts the conversation with the permit question, the soils and the water, and puts those details in writing, is usually the one worth hiring.
+
+**Related on the Board:** [Bathroom Remodel Mukilteo WA](2026-08-28-bathroom-remodel-mukilteo-wa.html) and [the bid comparison checklist](../bid-comparison.html).
+
+## Watch on the Board's YouTube
+
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+- [5 Best Kitchen Remodelers in Edmonds, WA (2026)](https://youtu.be/Gx1i0bavz8o)
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)

@@ -98,7 +98,7 @@ Ask installers which brands they actually stock and service, and who you call wh
 
 ## How to shortlist and verify a plumber
 
-Get two or three written bids built on the list above. Then:
+Get two or three [written bids](../bid-comparison.html) built on the list above. Then:
 
 - Look up each company on [Washington L&I Verify](https://secure.lni.wa.gov/verify/) — contractor registration, bond, and insurance — and confirm the person doing the work holds a plumber certificate.
 - Ask who pulls the Marysville plumbing permit in the [Permit Portal](https://permits.marysvillewa.gov/), and, if electrical work is involved, who pulls the City electrical permit.
@@ -119,3 +119,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 6. Request inspections in the portal by 3:30 p.m. for the next business day, and do not skip the final.
 
 A water heater is one of the most ordinary replacements in a house, which is why it is easy to rush. In Marysville, the permit, the right office for the electrical work, and a certified plumber are the difference between a swap that simply works and one you have to explain when you sell.
+
+**Related on the Board:** [electrician and electrical directory](../electrician.html) and [questions to ask before you hire](../hire-questions.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Kitchen Remodelers in Edmonds, WA (2026)](https://youtu.be/Gx1i0bavz8o)
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)

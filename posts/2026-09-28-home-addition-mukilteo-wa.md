@@ -96,3 +96,11 @@ More Mukilteo context is on our [Mukilteo page](../mukilteo.html).
 ## Where Pacific Pro Group fits
 
 In the Board of Project Stewardship's editorial rankings on [additions](../additions.html), Pacific Pro Group is the Board's number-one contractor for home additions. You can read about their process at [pacificprogroup.com](https://pacificprogroup.com/). The ranking is editorial and not a guarantee. Verify every bidder at [L&I Verify](https://secure.lni.wa.gov/verify/), compare written scopes, and read current public sources yourself. More guidance is on the [blog](../blog.html).
+
+**Related on the Board:** [Kitchen Remodel Mukilteo WA](2026-08-27-kitchen-remodel-mukilteo-wa.html), [second story vs teardown](../second-story-vs-teardown.html) and [home addition cost factors](../addition-cost-factors.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)
+- [Adding On? Freeze These 6 Things Before You Ask for a Price](https://www.youtube.com/shorts/EvOh_7_3za4)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)

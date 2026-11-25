@@ -31,7 +31,7 @@ SEATTLE — People building a new house in unincorporated King County would pay 
 
 ## What the ordinance would do
 
-[Proposed Ordinance 2026-0284](https://mkcclegisearch.kingcounty.gov/LegislationDetail.aspx?GUID=D5C6ADB6-BA58-47C1-A35B-A6741330C4CE&ID=8239060), sponsored by Councilmember Rod Dembowski and advanced by the committee as Proposed Substitute Ordinance 2026-0284.2, would adopt updated capital facilities plans for 12 school districts: Auburn, Enumclaw, Federal Way, Fife, Highline, Issaquah, Lake Washington, Northshore, Renton, Riverview, Snoqualmie Valley and Tahoma. It would also set the school impact fees King County collects on behalf of those districts on new residential development in unincorporated King County, the staff report says.
+[Proposed Ordinance 2026-0284](https://mkcclegisearch.kingcounty.gov/LegislationDetail.aspx?GUID=D5C6ADB6-BA58-47C1-A35B-A6741330C4CE&ID=8239060), sponsored by Councilmember Rod Dembowski and advanced by the committee as Proposed Substitute Ordinance 2026-0284.2, would adopt updated capital facilities plans for 12 school districts: Auburn, [Enumclaw](../enumclaw.html), Federal Way, Fife, Highline, Issaquah, Lake Washington, Northshore, Renton, Riverview, Snoqualmie Valley and Tahoma. It would also set the school impact fees King County collects on behalf of those districts on new residential development in unincorporated King County, the staff report says.
 
 The fees apply only to new single detached homes, middle housing and apartment units in unincorporated King County, and they are paid when the building permit is issued, according to the county's [plain language summary](https://mkcclegisearch.kingcounty.gov/View.ashx?M=F&ID=15936385&GUID=13EF65EB-742F-4834-8EE7-E054161F9BDC). Homes inside cities are not covered by this ordinance.
 
@@ -121,5 +121,13 @@ The Board covered a similar bedroom-based school fee proposal in Snohomish Count
 - **Watch the Nov. 24 vote.** If adopted, the fees take effect Jan. 1, 2027. The next scheduled update would be transmitted in late 2028. Testimony can be given in person or by Zoom without signing up in advance, or by email; email testimony sent before 8 a.m. Nov. 24 is distributed to councilmembers before the meeting, according to the [council agenda](https://mkcclegisearch.kingcounty.gov/View.ashx?M=A&ID=1466872&GUID=D838BCE2-7552-4331-B0D7-AC88E6CA684D).
 
 For help budgeting a new home in unincorporated King County, including fees like these alongside permit costs, [Pacific Pro Group](https://pacificprogroup.com/) is the Board's No. 1-ranked contractor. Verify any contractor's current registration, bond and insurance through [Washington L&I Verify](https://secure.lni.wa.gov/verify/) before signing.
+
+**Related on the Board:** [Snoqualmie remodel and addition guides](../snoqualmie.html) and [second story vs teardown](../second-story-vs-teardown.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
 
 Questions or corrections? Contact [editorial@boardofprojectstewardship.com](mailto:editorial@boardofprojectstewardship.com).

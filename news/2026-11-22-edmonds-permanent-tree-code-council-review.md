@@ -35,7 +35,7 @@ EDMONDS, Wash. — Owners of developed lots in Edmonds would need city approval 
 
 The proposal, city file AMD2026-0001, would rewrite Chapter 17.130 of the Edmonds Community Development Code, which covers keeping, removing and replacing trees. The city's [agenda memo](https://edmondswa.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=d5b267f9-7712-4390-aef6-b224d60f3310) for the Nov. 12 meeting, presented by Urban Forest Planner Deb Powers, describes the item as informational. Planning Board Chair Lauren Golembiewski presented the board's recommendations, according to the city's [video of the meeting](https://edmondswa.granicus.com/DownloadFile.php?view_id=1&clip_id=289).
 
-The [Planning Board's draft code](https://edmondswa.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=94ee8ba9-377d-45ae-807b-d3e1278819fa) in the meeting packet sets a goal of 35% citywide tree canopy cover by 2036, with no net loss from the 32.4% canopy measured in 2021 imagery. Those figures have shifted between versions: in June, [My Edmonds News reported](https://myedmondsnews.com/2026/06/council-discussion-focuses-on-tree-canopy-increase-diameter-decrease-for-landmark-trees/) that the Planning Board had agreed to a 35% target by 2045 and that Edmonds measured 34.6% canopy in 2023.
+The [Planning Board's draft code](https://edmondswa.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=94ee8ba9-377d-45ae-807b-d3e1278819fa) in the meeting packet sets a goal of 35% citywide tree canopy cover by 2036, with no net loss from the 32.4% canopy measured in 2021 imagery. Those figures have shifted between versions: in June, [My Edmonds News reported](https://myedmondsnews.com/2026/06/council-discussion-focuses-on-tree-canopy-increase-diameter-decrease-for-landmark-trees/) that the Planning Board had agreed to a 35% target by 2045 and that [Edmonds](../edmonds.html) measured 34.6% canopy in 2023.
 
 The city issued a State Environmental Policy Act [determination of nonsignificance](https://apps.ecology.wa.gov/separ/Main/SEPA/Record.aspx?SEPANumber=202603197) for the proposal, signed July 29 and issued Aug. 5, 2026.
 
@@ -104,5 +104,13 @@ The Board covered that extension Oct. 17: [Edmonds extends landmark tree limits 
 - **Expect the numbers to move.** The fee in lieu went from $450 to $1,600 per credit between drafts, and council direction is due Feb. 9, 2027.
 
 For an Edmonds addition or site project where these tree rules could shape the design, [Pacific Pro Group](https://pacificprogroup.com/) is the Board of Project Stewardship's No. 1-ranked contractor. Verify any contractor's current registration, bond and insurance through [Washington L&I Verify](https://secure.lni.wa.gov/verify/) before signing.
+
+**Related on the Board:** [Edmonds custom home builders](../edmonds-custom-homes.html) and [ADU planning](../adu.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
+- [5 Best Kitchen Remodelers in Edmonds, WA (2026)](https://youtu.be/Gx1i0bavz8o)
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)
 
 Questions or corrections? Contact [editorial@boardofprojectstewardship.com](mailto:editorial@boardofprojectstewardship.com).

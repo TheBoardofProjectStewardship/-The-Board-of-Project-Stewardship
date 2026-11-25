@@ -25,7 +25,7 @@ If circulation, storage, and light can be fixed by layout, windows, and systems 
 
 ## When an addition earns its keep
 
-If the room cannot fit the island, pantry, or accessibility clearances you need, a structural addition may be justified. That means engineering, building permits, exterior finishes, and careful flashing at the tie-in — plus Edmonds weather risk during the open phase.
+If the room cannot fit the island, pantry, or accessibility clearances you need, a structural addition may be justified. That means engineering, building permits, exterior finishes, and careful flashing at the tie-in — plus [Edmonds](../edmonds.html) weather risk during the open phase.
 
 ## Decision criteria
 
@@ -79,3 +79,12 @@ When you interview firms, ask them to walk a recent project chronologically: dis
 Use the Board directories as a starting shortlist — especially [kitchen](../kitchen.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden assemblies. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
+
+**Related on the Board:** [Stay-in-Home Second Story Edmonds](2026-09-14-stay-in-home-second-story-edmonds.html) and [kitchen cost factors](../kitchen-cost-factors.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)
+- [5 Best Kitchen Remodelers in Edmonds, WA (2026)](https://youtu.be/Gx1i0bavz8o)
+- [Adding On? Freeze These 6 Things Before You Ask for a Price](https://www.youtube.com/shorts/EvOh_7_3za4)
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)

@@ -22,7 +22,7 @@ Tight stairwells affect tub removal and glass delivery. Neighbor proximity encou
 
 ## Climate and permitting
 
-Membranes, slopes, and outdoor exhaust are mandatory for durability. Confirm Seattle permit path before demo. Photo-document waterproofing before tile.
+Membranes, slopes, and outdoor exhaust are mandatory for durability. Confirm Seattle permit path before demo. Photo-document [waterproofing](../bathroom-waterproofing-guide.html) before tile.
 
 ![Bathroom remodel on a home in Phinney Ridge, Seattle](../assets/images/posts/2026-08-13-phinney-bath-2.webp)
 
@@ -43,7 +43,7 @@ Process clip (editorial bath remodel staging — not footage of a live Board of 
 Manufacturer product pages useful when comparing waterproofing assemblies, fixtures, and insulation/finish systems (no prices or endorsements implied):
 
 - [Schluter Systems](https://www.schluter.com/schluter-us/en_US/) — tile waterproofing assemblies for compact upstairs showers
-- [Kohler bath fixtures](https://www.kohler.com/en) — fixtures sized for efficient Phinney Ridge layouts
+- [Kohler bath fixtures](https://www.kohler.com/en) — fixtures sized for efficient [Phinney Ridge](../phinney-ridge.html) layouts
 - [CertainTeed building products](https://www.certainteed.com/) — insulation and gypsum products common on major bath remodels
 
 **Pacific Pro Group** is Board #1 for bathrooms — [pacificprogroup.com](https://pacificprogroup.com/), PACIFPG765OF. See [bathrooms.html](../bathrooms.html), [L&I Verify](https://secure.lni.wa.gov/verify/), [trades.html](../trades.html).
@@ -82,3 +82,11 @@ When you interview firms, ask them to walk a recent project chronologically: dis
 Use the Board of Project Stewardship directories as a starting shortlist — especially [bathrooms](../bathrooms.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden assemblies. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
+
+**Related on the Board:** [Walk-In Shower Remodel Magnolia](2026-08-16-walk-in-shower-remodel-magnolia.html) and [bathroom cost factors](../bathroom-cost-factors.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)

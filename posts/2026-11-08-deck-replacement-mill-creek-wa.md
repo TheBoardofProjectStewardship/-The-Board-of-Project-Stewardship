@@ -116,7 +116,7 @@ Brand names are a starting point. The ledger detail, the flashing, the footings 
 
 ## How to shortlist and verify the deck crew
 
-Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming active registration, bonding and insurance, getting multiple written bids, and using a written contract. Look up every firm — the deck builder and any electrician — on [L&I Verify](https://secure.lni.wa.gov/verify/). Ask each bidder for recent Snohomish County deck replacements, photos of the ledger and flashing stage (not only finished decks), and a written scope that states:
+Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming active registration, bonding and insurance, getting multiple written bids, and using a [written contract](../contractor-contract-basics.html). Look up every firm — the deck builder and any electrician — on [L&I Verify](https://secure.lni.wa.gov/verify/). Ask each bidder for recent Snohomish County deck replacements, photos of the ledger and flashing stage (not only finished decks), and a written scope that states:
 
 - Whether the deck is attached, how high it sits above grade at its highest point, and therefore whether the City permit applies.
 - Who applies on OpenGov, who schedules inspections, and who pulls any L&I electrical permit.
@@ -141,3 +141,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 5. Apply through [OpenGov](https://millcreekwa.portal.opengov.com/) over the winter, add an L&I electrical permit if you want lighting, and schedule tear-out for drier spring weather.
 
 A Mill Creek deck replacement worth having is one that is permitted, flashed at the house, set on proper footings and tied back against lateral load. Start with the City's permit flyer, read the bids against the code, and hire a crew that puts those details in writing.
+
+**Related on the Board:** [the bid comparison checklist](../bid-comparison.html) and [change orders and allowances](../change-orders.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)

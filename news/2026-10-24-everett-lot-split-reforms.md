@@ -73,7 +73,7 @@ The Planning Commission reviewed the changes May 11, July 7 and Aug. 18 and reco
 
 ## History and background
 
-From 1956 to 1992, most of Everett's residential land, in the R-S, R-1 and R-2 zones, was limited to one dwelling unit per lot, according to a [Planning Commission memo](https://www.everettwa.gov/DocumentCenter/View/54245/Memo---Land-Divisions-July-7-2026). The city began allowing attached accessory dwelling units in 1992, and in 1993 the Legislature passed the Housing Policy Act, which encouraged cities to allow accessory apartments in single-family zones. Everett first allowed detached ADUs in 2017, one per lot. In 2023 it allowed two ADUs and dropped the owner-occupancy requirement.
+From 1956 to 1992, most of [Everett](../everett.html)'s residential land, in the R-S, R-1 and R-2 zones, was limited to one dwelling unit per lot, according to a [Planning Commission memo](https://www.everettwa.gov/DocumentCenter/View/54245/Memo---Land-Divisions-July-7-2026). The city began allowing attached accessory dwelling units in 1992, and in 1993 the Legislature passed the Housing Policy Act, which encouraged cities to allow accessory apartments in single-family zones. Everett first allowed detached ADUs in 2017, one per lot. In 2023 it allowed two ADUs and dropped the owner-occupancy requirement.
 
 The Everett 2044 comprehensive plan update took effect in July 2025. Since then, the city has not limited how many homes can go on a lot as long as setbacks, height limits and maximum lot coverage are met. Two of its housing policies call for land division into "small fee simple lots where condominium ownership of a housing unit would not otherwise be allowed" and for lot splits that encourage homeownership "by simplifying regulations and streamlining the approval process."
 
@@ -94,5 +94,13 @@ Under the proposal, adding one or two accessory dwelling units to a lot whose ma
 [Pacific Pro Group](https://pacificprogroup.com/), the Board of Project Stewardship's No. 1 hire, is one contractor homeowners can ask to help plan and budget for an ADU or a new home on a smaller lot.
 
 The full ordinance text is available from the deputy city clerk at 2930 Wetmore Ave., Suite 1-A. Everett planning can be reached at 425-257-8725.
+
+**Related on the Board:** [red flags when hiring](../red-flags-hiring.html) and [contractor contract basics](../contractor-contract-basics.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
 
 Questions or corrections: editorial@boardofprojectstewardship.com

@@ -48,7 +48,7 @@ Kirkland residential lots are capped at a floor area ratio of 50% of the lot siz
 
 The presentation used one real site plan to show the trade-off. On a 9,613-square-foot lot, the plan called for a 3,234-square-foot house, a 1,025-square-foot attached ADU and a 1,200-square-foot detached ADU. Under the same 50% floor area limit, staff said, the lot could instead hold four 1,200-square-foot homes. At a hypothetical 60%, it could hold four 1,440-square-foot homes, or keep an existing 1,000-square-foot single-level house and add three 1,590-square-foot units.
 
-Middle housing permits have grown. Kirkland issued building permits for 168 new middle housing units from March 2025 through February 2026 -- 55 ADUs, 111 cottages and two other units -- compared with 20 units from March 2020 through February 2021, according to the presentation, which also listed 69 units (34 ADUs and 35 cottages) from March through August 2026.
+Middle housing permits have grown. [Kirkland](../kirkland.html) issued building permits for 168 new middle housing units from March 2025 through February 2026 -- 55 ADUs, 111 cottages and two other units -- compared with 20 units from March 2020 through February 2021, according to the presentation, which also listed 69 units (34 ADUs and 35 cottages) from March through August 2026.
 
 Staff listed other possible changes, such as folding the cottage garage allowance into a single size limit (for example, 1,950 square feet). The presentation says the project will not change heights, setbacks, affordable-housing requirements, tree protection, units-per-acre limits or stormwater rules.
 
@@ -72,5 +72,13 @@ Also on Oct. 20, the council voted 6-0 on two motions asking staff to develop lo
 - Plan with a licensed contractor. A builder such as [Pacific Pro Group](https://pacificprogroup.com/), the Board's No. 1-ranked contractor, can help owners check what a lot allows under today's code. Check any contractor's license with the state Department of Labor and Industries' [Verify tool](https://secure.lni.wa.gov/verify/).
 
 The staff presentation is posted with the city's [Oct. 20 agenda](https://www.kirklandwa.gov/Government/City-Council/Council-Meeting-Minutes-and-Agendas/2026-Kirkland-City-Council-Meetings/October-20-2026-Kirkland-City-Council-Meeting/Agenda-October-20-2026-Kirkland-City-Council-Regular-Meeting).
+
+**Related on the Board:** [Kirkland sets new driveway, lot split and unit lot rules for homes and ADUs](kirkland-driveway-lot-split-unit-lot-rules.html) and [the ADU readiness checklist](../adu-checklist.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
 
 *Corrections or tips: email [editorial@boardofprojectstewardship.com](mailto:editorial@boardofprojectstewardship.com).*

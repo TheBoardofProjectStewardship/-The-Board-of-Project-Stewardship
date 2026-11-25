@@ -67,7 +67,7 @@ The legal framework for dividing land in Washington is governed by chapter 58.17
 
 In 2025, the Washington Legislature passed [House Bill 1096](https://app.leg.wa.gov/billsummary?BillNumber=1096&Year=2025&Initiative=false) (E2SHB 1096, chapter 301, Laws of 2025), titled "Increasing housing options through lot splitting." The bill passed the House 93-4 and the Senate 43-4, with the House concurring 94-4. The governor signed the bill May 17, 2025, and it took effect July 27, 2025.
 
-According to the Legislature's [final bill report](https://lawfilesext.leg.wa.gov/biennium/2025-26/Pdf/Bill%20Reports/House/1096-S2.E%20HBR%20FBR%2025.pdf), HB 1096 requires cities to provide an administrative lot-split review decided by a planning director or designee using clear and objective standards, without a pre-decision public hearing. The law specifies that only one new lot may be created, both lots must meet minimum size requirements, the parent lot must be in a residential zone, and the parent lot may not have been the result of a previous lot split. Additionally, water and sewer providers must certify availability, and a lot split survey must be recorded with the county auditor noting that no future lot splits are permitted. Cities with a comprehensive plan update due in 2027 must comply by that update; others must comply within two years of the effective date. The law applies to cities, not counties, which is why Snohomish County was not required to act but chose to use it as a starting point, Saponaro told the council.
+According to the Legislature's [final bill report](https://lawfilesext.leg.wa.gov/biennium/2025-26/Pdf/Bill%20Reports/House/1096-S2.E%20HBR%20FBR%2025.pdf), HB 1096 requires cities to provide an administrative lot-split review decided by a planning director or designee using clear and objective standards, without a pre-decision public hearing. The law specifies that only one new lot may be created, both lots must meet minimum size requirements, the parent lot must be in a residential zone, and the parent lot may not have been the result of a previous lot split. Additionally, water and sewer providers must certify availability, and a lot split survey must be recorded with the county auditor noting that no future lot splits are permitted. Cities with a comprehensive plan update due in 2027 must comply by that update; others must comply within two years of the effective date. The law applies to cities, not counties, which is why [Snohomish County](../snohomish-county.html) was not required to act but chose to use it as a starting point, Saponaro told the council.
 
 ![Detached backyard cottage behind a single-family home in Snohomish County](../assets/images/news/2026-10-15-snohomish-county-lot-split-3.webp)
 
@@ -76,5 +76,13 @@ According to the Legislature's [final bill report](https://lawfilesext.leg.wa.go
 The Board of Project Stewardship advises homeowners interested in splitting their residential parcels to confirm all specific requirements, zoning restrictions, and application procedures with Snohomish County Planning and Development Services. Because the lot-split process is now separate from development permits, owners should be aware that dividing a lot does not automatically grant the right to build a new structure.
 
 When hiring professionals to facilitate a lot split, homeowners should know the county's notice says applications must be prepared by a registered professional land surveyor. To ensure the quality and legality of work performed on a property, homeowners should check the license status of any contractor through the [Washington L&I Verify](https://secure.lni.wa.gov/verify/).
+
+**Related on the Board:** [Proposed Snohomish County school fees on new homes would vary by bedroom count](snohomish-county-school-impact-fees-by-bedroom.html) and [Everett remodel and addition guides](../everett.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
 
 Questions or corrections: editorial@boardofprojectstewardship.com

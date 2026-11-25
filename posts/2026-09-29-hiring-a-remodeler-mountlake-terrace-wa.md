@@ -22,7 +22,7 @@ Ranch and split-level homes dominate many Mountlake Terrace blocks. Opening a sp
 
 Local rules on setbacks, height, and accessory dwelling units (ADUs) affect what a designer can draw. A remodeler who has already submitted packages to Mountlake Terrace reviewers will usually catch jurisdiction and submittal issues earlier than a firm guessing from a mailing address alone.
 
-Climate drives the rest. Prolonged wet seasons punish missing flashings, compressed housewrap, and closed rainscreen gaps. Ask bidders to write envelope details into the scope — not as a change-order after demolition.
+Climate drives the rest. Prolonged wet seasons punish missing flashings, compressed housewrap, and closed rainscreen gaps. Ask bidders to write envelope details into the scope — not as a [change-order](../change-orders.html) after demolition.
 
 ![Mid-century rambler with a remodel underway on a quiet street in Mountlake Terrace, Washington](../assets/images/posts/2026-09-29-mountlake-terrace-remodel-rambler-5.webp "Many Mountlake Terrace remodels start with a mid-century rambler or split-level that needs updated systems along with new finishes.")
 
@@ -116,3 +116,11 @@ Write must-haves versus nice-to-haves before the first interview. Note daylight 
 ## Where Pacific Pro Group fits
 
 When the Board of Project Stewardship ranks design-build firms for this area, Pacific Pro Group is the Board number-one contractor. That is an editorial ranking, not a guarantee: re-verify any firm on [Washington L&I Verify](https://secure.lni.wa.gov/verify/) and compare written scopes. Learn more at [https://pacificprogroup.com/](https://pacificprogroup.com/).
+
+**Related on the Board:** [Kitchen Remodel Mountlake Terrace](2026-08-23-kitchen-remodel-mountlake-terrace.html) and [remodel cost factors](../remodel-cost-factors.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)
+- [5 Best Kitchen Remodelers in Edmonds, WA (2026)](https://youtu.be/Gx1i0bavz8o)

@@ -123,3 +123,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 6. Schedule every inspection, including the final.
 
 The equipment is the easy part to shop for. The permits, the spot in the yard, and the care taken with refrigerant and the wall penetration are what make a Bothell heat pump work quietly for years. Plan those first, then pick the brand.
+
+**Related on the Board:** [change orders and allowances](../change-orders.html), [remodel cost factors](../remodel-cost-factors.html) and [the bid comparison checklist](../bid-comparison.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)

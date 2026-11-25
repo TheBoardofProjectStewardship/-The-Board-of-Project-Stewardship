@@ -217,7 +217,7 @@ Products don't protect a tree on their own. A fence that stays up, a root zone n
 
 ## How to shortlist and verify the crew
 
-Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming registration, bonding and insurance, getting written bids and signing a written contract. On a Shoreline project with trees in play, look up every firm involved: the remodeler, the excavation or site-work subcontractor, and the tree service. Use [L&I Verify](https://secure.lni.wa.gov/verify/) for each.
+Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming registration, bonding and insurance, getting [written bids](../bid-comparison.html) and signing a written contract. On a Shoreline project with trees in play, look up every firm involved: the remodeler, the excavation or site-work subcontractor, and the tree service. Use [L&I Verify](https://secure.lni.wa.gov/verify/) for each.
 
 Ask each bidder for a written scope that states:
 
@@ -246,3 +246,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 5. Apply with the tree materials included, track the permit in [eTRAKiT](https://permits.shorelinewa.gov/eTRAKiT/), and keep the fencing up until the permit says it can come down.
 
 A Shoreline remodel that handles trees well doesn't look dramatic. It starts with a tree survey, puts the protection zones on the plans, fences them before the first shovel, and finishes with replacement trees that actually get watered. Start with the City pages above, then hire people who put those steps in writing.
+
+**Related on the Board:** [Second Story Addition Shoreline](2026-08-24-second-story-addition-shoreline.html) and [second story vs teardown](../second-story-vs-teardown.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [4 Best Home Addition Contractors in Bellevue, WA (2026)](https://youtu.be/z_EF36WjunY)
+- [Adding On? Freeze These 6 Things Before You Ask for a Price](https://www.youtube.com/shorts/EvOh_7_3za4)

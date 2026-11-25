@@ -18,7 +18,7 @@ Tile is the visible finish people remember, but in Edmonds baths and kitchens it
 
 ## Local context
 
-Coastal humidity and temperature swings stress grout and thinset. Exterior-door mudrooms and wet baths need slip-aware flooring choices. Many Edmonds projects involve large-format tile that reveals wavy walls instantly — flatness specs matter.
+Coastal humidity and temperature swings stress grout and thinset. Exterior-door mudrooms and wet baths need slip-aware flooring choices. Many [Edmonds](../edmonds.html) projects involve large-format tile that reveals wavy walls instantly — flatness specs matter.
 
 ![Hiring tile contractor on a home in Edmonds](../assets/images/posts/2026-09-01-tile-edmonds-2.webp)
 
@@ -42,7 +42,7 @@ For whole-bath accountability, Board of Project Stewardship bathroom rankings on
 
 ../assets/videos/posts/2026-09-shared-waterproofing.mp4
 
-Process clip (shared waterproofing still-motion) — not an Edmonds tile schedule. Membrane ownership still belongs upstream of thinset.
+Process clip (shared [waterproofing](../bathroom-waterproofing-guide.html) still-motion) — not an Edmonds tile schedule. Membrane ownership still belongs upstream of thinset.
 
 https://www.youtube.com/watch?v=vC6Il3vPt0E
 
@@ -84,3 +84,12 @@ When you interview firms, ask them to walk a recent project chronologically: dis
 The Board of Project Stewardship publishes directories to help homeowners shortlist licensed firms. Use the Board directories as a starting shortlist — especially [trades](../trades.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden assemblies. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
+
+**Related on the Board:** [Living Through a Seattle-Area Bathroom Remodel, Stage by Stage: What to Expect and What to Ask](2026-10-18-hiring-a-bathroom-remodeler-seattle-edmonds.html) and [tile directory](../tile.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)

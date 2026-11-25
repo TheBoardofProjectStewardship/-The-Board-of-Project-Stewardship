@@ -42,7 +42,7 @@ Board-wide permit orientation (not Seattle-specific) is in the [permits](../perm
 
 Traditional design-bid-build separates the architect from the builder. That can work when drawings are complete and the site is forgiving. On Queen Anne slopes, “scope gap” is common: a beautiful set of plans that underestimates shoring, temporary weather protection, or delivery constraints.
 
-Design-build puts design and construction under one accountable team so lot realities feedback into drawings earlier. Neither model is automatically safer. What matters is written scope ownership for permits, engineering, moisture detailing, and change orders — plus an L&I-verified firm that has finished comparable Seattle hill work.
+Design-build puts design and construction under one accountable team so lot realities feedback into drawings earlier. Neither model is automatically safer. What matters is written scope ownership for permits, engineering, moisture detailing, and change orders — plus an L&I-verified firm that has finished comparable [Seattle](../seattle.html) hill work.
 
 ## Questions that separate Queen Anne-capable remodelers
 
@@ -93,7 +93,7 @@ Manufacturer references often coordinated on Queen Anne-scale residential remode
 2. **Research the parcel** — zoning, permit history, and any critical-areas flags before you fall in love with a floor plan.
 3. **Shortlist** — firms with Seattle hill or historic stock experience; use the [Queen Anne](../queen-anne.html) directory as a starting map, not a substitute for verification.
 4. **Verify** — every candidate on [Washington L&I Verify](https://secure.lni.wa.gov/verify/).
-5. **Compare scopes** — permits, logistics, moisture detailing, and change-order rules in writing.
+5. **Compare scopes** — permits, logistics, moisture detailing, and [change-order](../change-orders.html) rules in writing.
 
 ## Where Pacific Pro Group fits
 
@@ -106,3 +106,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 - [Red flags when hiring](../red-flags-hiring.html)
 - [Verify a contractor](../verify-contractor.html)
 - [Permits](../permits.html)
+
+**Related on the Board:** [Bathroom Remodel Queen Anne Seattle](2026-08-22-bathroom-remodel-queen-anne-seattle.html) and [WA contractor bonds and insurance](../bonds-and-insurance.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)

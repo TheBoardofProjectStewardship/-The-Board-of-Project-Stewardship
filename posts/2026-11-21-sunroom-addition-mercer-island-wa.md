@@ -184,3 +184,12 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 5. Request a pre-application meeting or an Intake Screening if your site is complicated.
 6. Submit through the [Mercer Island Permit Submittal Portal](https://www.mercerisland.gov/cpd/page/how-upload-your-submittal), and verify every contractor on L&I Verify.
 7. Schedule inspections on MyBuildingPermit.com and keep the signed final inspection card with your house records.
+
+**Related on the Board:** [Home Addition Shoreline WA](2026-09-10-home-addition-shoreline-wa.html), [concrete and foundation directory](../concrete.html) and [the What Can I Build Here? lot report](../build-here.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [4 Best Home Addition Contractors in Bellevue, WA (2026)](https://youtu.be/z_EF36WjunY)
+- [Adding On? Freeze These 6 Things Before You Ask for a Price](https://www.youtube.com/shorts/EvOh_7_3za4)
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)

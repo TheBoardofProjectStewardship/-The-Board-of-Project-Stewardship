@@ -145,7 +145,7 @@ A few details from PSE's page are worth reading closely with your installer:
 - PSE says net metering is not currently available in combination with its time-of-use schedules 307 and 327 or the non-communicating meter schedule 171.
 - PSE's availability statement says net metering is open to new participants through at least December 31, 2025. That date has passed, so ask PSE or your installer for the current terms before you sign.
 
-PSE also recommends getting multiple bids and checking references, and its Recommended Energy Professionals list can be pulled from your PSE online account.
+PSE also recommends getting [multiple bids](../bid-comparison.html) and checking references, and its Recommended Energy Professionals list can be pulled from your PSE online account.
 
 Don't energize the system on your own. PSE's approval to energize is the last step, after the L&I electrical final.
 
@@ -189,7 +189,7 @@ Hardware only helps if it matches your roof and goes on per the manufacturer's i
 
 ## How to shortlist and verify the crew
 
-Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming registration, bonding and insurance, getting written bids and signing a written contract. A solar job usually involves more than one license: the installer or general contractor, and the electrical contractor who buys the L&I permit. Look each one up on [L&I Verify](https://secure.lni.wa.gov/verify/), and confirm they hold a City of Issaquah business license.
+Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming registration, bonding and insurance, getting written bids and signing a [written contract](../contractor-contract-basics.html). A solar job usually involves more than one license: the installer or general contractor, and the electrical contractor who buys the L&I permit. Look each one up on [L&I Verify](https://secure.lni.wa.gov/verify/), and confirm they hold a City of Issaquah business license.
 
 Ask each bidder for a written scope that states:
 
@@ -216,3 +216,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 5. Keep the checklist or permit, the L&I final and PSE's approval to energize together in your house file.
 
 A good Issaquah solar job doesn't look dramatic. It starts with a sound roof and an honest shade report, leaves the pathways firefighters need, flashes every mount, and doesn't energize until L&I and PSE both sign off. Start with the City and utility pages above, then hire people who put those steps in writing.
+
+**Related on the Board:** [remodel cost factors](../remodel-cost-factors.html) and [questions to ask before you hire](../hire-questions.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)

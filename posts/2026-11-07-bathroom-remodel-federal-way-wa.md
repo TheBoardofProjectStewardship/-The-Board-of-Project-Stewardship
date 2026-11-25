@@ -103,7 +103,7 @@ Brand names are a starting point. Installation details, the written specificatio
 
 ## How to shortlist and verify the remodel team
 
-Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming active registration, bonding and insurance, collecting multiple written bids, and using a written contract. Look up every firm — general contractor, electrician, plumber — on [L&I Verify](https://secure.lni.wa.gov/verify/). Ask each bidder for recent south King County bathroom projects, photos of rough-in and waterproofing stages (not only finished rooms), and a written scope that states:
+Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming active registration, bonding and insurance, collecting multiple written bids, and using a [written contract](../contractor-contract-basics.html). Look up every firm — general contractor, electrician, plumber — on [L&I Verify](https://secure.lni.wa.gov/verify/). Ask each bidder for recent south King County bathroom projects, photos of rough-in and waterproofing stages (not only finished rooms), and a written scope that states:
 
 - Which of the three scope categories the job falls into, and whether a building permit is expected in addition to plumbing and electrical.
 - Who pulls each City permit on [MyBuildingPermit](https://mybuildingpermit.com/) and who schedules inspections at [inspection.mybuildingpermit.com](https://inspection.mybuildingpermit.com/).
@@ -130,3 +130,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 5. Get at least three written bids, verify every firm with L&I, and keep plan sets and permit numbers with your house papers.
 
 A Federal Way bathroom remodel worth living with is one that matches the City's permit map, opens wet walls only once, passes plumbing and electrical inspections in order, and keeps the contract honest about what is finish work and what is construction. Start with the Permit Center, the exemptions page, and a crew that puts those details in writing.
+
+**Related on the Board:** [the bid comparison checklist](../bid-comparison.html) and [change orders and allowances](../change-orders.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)

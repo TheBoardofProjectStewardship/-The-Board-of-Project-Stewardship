@@ -184,7 +184,7 @@ Products only help when the crew uses them as part of the containment, tool and 
 
 ## How to shortlist and verify the crew
 
-Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming registration, bonding and insurance, getting written bids and signing a written contract. For a pre-1978 Burien house, add lead-specific items to that list. Confirm the contractor on [L&I Verify](https://secure.lni.wa.gov/verify/), then confirm the RRP firm certification and the assigned renovator with Commerce.
+Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming registration, bonding and insurance, getting written bids and signing a [written contract](../contractor-contract-basics.html). For a pre-1978 Burien house, add lead-specific items to that list. Confirm the contractor on [L&I Verify](https://secure.lni.wa.gov/verify/), then confirm the RRP firm certification and the assigned renovator with Commerce.
 
 Ask each bidder for a written scope that states:
 
@@ -212,3 +212,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 5. Keep the pamphlet acknowledgment, any test results, permits and the cleaning verification record together in your house file.
 
 A good lead-safe job in Burien looks a little fussy: plastic taped down past where the work happens, signs at the door, waste bagged before it leaves the room, and a renovator wiping sills and comparing cloths to a card before anyone calls it done. Start with the state and City pages above, then hire people who put those steps in writing.
+
+**Related on the Board:** [questions to ask before you hire](../hire-questions.html) and [remodel cost factors](../remodel-cost-factors.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)

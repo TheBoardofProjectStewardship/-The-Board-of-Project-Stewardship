@@ -89,4 +89,12 @@ People who want to weigh in can comment during Friday's meeting in person, on Zo
 
 ![House plans and a building permit application on a kitchen table in a Washington home as an owner checks timing under the 2024 residential code](../assets/images/news/2026-10-29-olympia-residential-code-3.webp "Under state law, a fully complete building permit application is reviewed under the codes in effect when it is filed; the 2024 codes are set to take effect statewide May 3, 2027.")
 
+**Related on the Board:** [second story vs teardown](../second-story-vs-teardown.html), [the What Can I Build Here? lot report](../build-here.html) and [how to verify a WA contractor](../verify-contractor.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)
+- [Adding On? Freeze These 6 Things Before You Ask for a Price](https://www.youtube.com/shorts/EvOh_7_3za4)
+- [5 Best Kitchen Remodelers in Edmonds, WA (2026)](https://youtu.be/Gx1i0bavz8o)
+
 Questions or corrections: editorial@boardofprojectstewardship.com

@@ -141,3 +141,11 @@ When the Board of Project Stewardship ranks design-build firms for structural re
 5. Verify your contractor on L&I before work starts.
 
 An earthquake retrofit is one of the least glamorous remodeling projects you can do. Nobody sees it. It is also one of the few that is aimed squarely at keeping the house on its foundation when it matters most.
+
+**Related on the Board:** [Kitchen Remodel Magnolia Seattle](2026-09-16-kitchen-remodel-magnolia-seattle.html), [concrete and foundation directory](../concrete.html) and [hiring a contractor](../hiring-a-contractor.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)

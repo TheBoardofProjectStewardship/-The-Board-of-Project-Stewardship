@@ -22,7 +22,7 @@ Lots along the I-5 corridor differ from quieter residential pockets near parks a
 
 ## Climate and permitting
 
-The old-to-new joint is where leaks start. Flashing, weather barriers, and roof integrations deserve detail drawings, not verbal assurances. Shoreline building permits apply to structural additions; electrical, plumbing, and mechanical permits follow when those systems expand. Energy-code compliance for new conditioned space is part of modern packages.
+The old-to-new joint is where leaks start. Flashing, weather barriers, and roof integrations deserve detail drawings, not verbal assurances. [Shoreline](../shoreline.html) building permits apply to structural additions; electrical, plumbing, and mechanical permits follow when those systems expand. Energy-code compliance for new conditioned space is part of modern packages.
 
 ![Shoreline, Washington — an addition roof being tied into the existing roof, underlayment only, from the side](../assets/images/posts/2026-09-10-home-addition-shoreline-4.webp)
 
@@ -43,7 +43,7 @@ Depends on foundation capacity, lot coverage, and budget. Engineers and experien
 Tell your insurer when heated square footage changes. That is an owner task parallel to construction.
 
 **What belongs in the contract?**  
-Scope, exclusions, allowance schedule, permit ownership, change-order rules, and weatherproofing milestones.
+Scope, exclusions, allowance schedule, permit ownership, [change-order](../change-orders.html) rules, and weatherproofing milestones.
 
 ## Tie-in detailing worth paying for
 
@@ -64,3 +64,12 @@ When you interview firms, ask them to walk a recent project chronologically: dis
 Use the Board directories as a starting shortlist — especially [additions](../additions.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden assemblies. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
+
+**Related on the Board:** [Second Story Addition Shoreline](2026-08-24-second-story-addition-shoreline.html) and [home addition cost factors](../addition-cost-factors.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [4 Best Home Addition Contractors in Bellevue, WA (2026)](https://youtu.be/z_EF36WjunY)
+- [Adding On? Freeze These 6 Things Before You Ask for a Price](https://www.youtube.com/shorts/EvOh_7_3za4)
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)

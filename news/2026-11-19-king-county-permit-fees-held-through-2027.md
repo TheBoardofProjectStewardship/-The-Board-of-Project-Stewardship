@@ -75,7 +75,7 @@ The two faster options in the staff report would each reach a zero fund balance 
 
 According to executive staff cited in the [staff report](https://kingcounty.legistar1.com/kingcounty/attachments/697859ad-4149-4741-bd31-14aa398ebc03.docx), the county has seen all-time lows in permit volume since mid-2024, especially for single-detached homes. The Permitting Division expects lower demand in 2027 and flat volumes after that.
 
-The Department of Local Services plans to convene a Permitting Advisory Panel, working with Public Health — Seattle & King County, to look at policy barriers and process improvements. The [staff report on the motion](https://kingcounty.legistar1.com/kingcounty/attachments/053ed80d-c7ed-47a0-8b91-04555d524b2b.docx) says more work on the division's staffing model may also happen through that panel in 2027. The Board [reported on the panel](/news/king-county-permitting-advisory-panel.html) Oct. 18.
+The Department of Local Services plans to convene a Permitting Advisory Panel, working with Public Health — Seattle & [King County](../king-county.html), to look at policy barriers and process improvements. The [staff report on the motion](https://kingcounty.legistar1.com/kingcounty/attachments/053ed80d-c7ed-47a0-8b91-04555d524b2b.docx) says more work on the division's staffing model may also happen through that panel in 2027. The Board [reported on the panel](/news/king-county-permitting-advisory-panel.html) Oct. 18.
 
 Both measures now go to the full council. The county's legislative records list each with the status "Second Reading Consent." No date for a final vote has been confirmed.
 
@@ -103,5 +103,13 @@ For homeowners planning a new home, an addition, an accessory dwelling unit or a
 Check the [county's current fee guides](https://www.kingcounty.gov/en/dept/local-services/certificates-permits-licenses/permits/permits-inspections-codes-buildings-land-use/permit-forms-application-materials/fees) before applying, and ask King County Permitting for an estimate for your own property.
 
 For help budgeting a home project in unincorporated King County, [Pacific Pro Group](https://pacificprogroup.com/) is the Board's No. 1-ranked contractor. Verify any contractor's current registration, bond and insurance through [Washington L&I Verify](https://secure.lni.wa.gov/verify/) before signing.
+
+**Related on the Board:** [King County permit fee overhaul would raise costs for additions, cut some others](king-county-2027-permit-fee-overhaul.html) and [hiring a contractor](../hiring-a-contractor.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
 
 Questions or corrections? Contact [editorial@boardofprojectstewardship.com](mailto:editorial@boardofprojectstewardship.com).

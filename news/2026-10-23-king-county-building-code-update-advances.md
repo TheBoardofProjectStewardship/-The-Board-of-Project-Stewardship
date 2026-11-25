@@ -28,7 +28,7 @@ The Local Services and Land Use Committee voted to recommend the measure, which 
 
 ## What the committee did
 
-The committee passed Proposed Substitute Ordinance 2025-0321.2 with a "Do Pass" recommendation, according to the [county's legislative record](https://kingcounty.legistar.com/LegislationDetail.aspx?GUID=794B76B7-6422-4960-951E-51C113473722&ID=7685931). The ordinance adopts the 2021 state codes and makes locally specific changes to King County Code Titles 16 and 17 for unincorporated King County.
+The committee passed Proposed Substitute Ordinance 2025-0321.2 with a "Do Pass" recommendation, according to the [county's legislative record](https://kingcounty.legistar.com/LegislationDetail.aspx?GUID=794B76B7-6422-4960-951E-51C113473722&ID=7685931). The ordinance adopts the 2021 state codes and makes locally specific changes to King County Code Titles 16 and 17 for unincorporated [King County](../king-county.html).
 
 The committee amended the proposal with Striking Amendment S2, sponsored by Councilmember Sarah Perry, along with Amendment 1, which removed two inadvertent section repeals, and a title amendment, the [staff report](https://kingcounty.legistar.com/View.ashx?M=F&ID=16085973&GUID=015470D7-DCB8-4D53-97AC-282048D2D9E8) says. The 2021 state codes took effect in March 2024, while the county's current building codes still adopt the 2018 version.
 
@@ -93,5 +93,13 @@ The rules apply only to unincorporated King County, not cities such as Seattle, 
 - The county's permitting line is 206-296-6659.
 
 Before hiring, homeowners can check a contractor's registration through the Washington Department of Labor & Industries' [online lookup](https://secure.lni.wa.gov/verify/). The Board of Project Stewardship's No. 1-ranked hire, [Pacific Pro Group](https://pacificprogroup.com/), is one contractor homeowners can ask to review permit and fire requirements before design starts.
+
+**Related on the Board:** [change orders and allowances](../change-orders.html) and [questions to ask before you hire](../hire-questions.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
 
 Questions or corrections: editorial@boardofprojectstewardship.com

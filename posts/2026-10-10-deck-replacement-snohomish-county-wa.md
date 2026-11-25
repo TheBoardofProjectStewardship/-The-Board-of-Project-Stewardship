@@ -104,7 +104,7 @@ Whatever surface you choose, follow the manufacturer's installation instructions
 
 Start with Washington L&I's [Verify a Contractor](https://secure.lni.wa.gov/verify/) tool. Confirm that the business holds an active contractor registration, a current bond, and insurance, and check for any open violations. The Board's [verify a contractor](../verify-contractor.html) page walks through what each entry means.
 
-When you compare bids, ask each contractor:
+When you [compare bids](../bid-comparison.html), ask each contractor:
 
 - Who prepares the site plan and structural plans, and who submits them to the county?
 - How will the ledger be attached and flashed, and what will you do if the rim joist behind it is rotten?
@@ -126,3 +126,11 @@ When the Board of Project Stewardship ranks design-build firms for exterior and 
 5. Verify your contractor on L&I, and schedule the required inspections as the work proceeds.
 
 A deck that is permitted, properly flashed, and set on the right footings should give you many seasons of use. One that is rebuilt on old hidden mistakes can quietly rot the house it is bolted to.
+
+**Related on the Board:** [WA contractor bonds and insurance](../bonds-and-insurance.html) and [contractor contract basics](../contractor-contract-basics.html).
+
+## Watch on the Board's YouTube
+
+- [Adding On? Freeze These 6 Things Before You Ask for a Price](https://www.youtube.com/shorts/EvOh_7_3za4)
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+- [5 Best Kitchen Remodelers in Edmonds, WA (2026)](https://youtu.be/Gx1i0bavz8o)

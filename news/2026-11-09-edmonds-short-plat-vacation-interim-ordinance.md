@@ -34,7 +34,7 @@ EDMONDS — The Edmonds City Council holds a public hearing Tuesday, Nov. 10, on
 
 The council passed [Ordinance No. 4449](https://www.noticeregistry.com/washington/notice/ordinance-edmonds-619931) on Oct. 13. Its published title describes "an interim regulation to provide for the vacation of short plats without dedication as a Type I staff decision." A short plat is a recorded division of land into a small number of lots. Vacating one legally undoes the division. Under the title, a Type I staff decision is made by city staff rather than by the council at a hearing.
 
-The city acted after a property owner asked for a vacation, [My Edmonds News reported](https://myedmondsnews.com/2026/10/council-extends-interim-tree-ordinance-oks-yost-pool-agreement-asks-more-budget-questions/). "State law requires that the City have a process for such vacations, but Edmonds currently does not," the news site wrote.
+The city acted after a property owner asked for a vacation, [My Edmonds News reported](https://myedmondsnews.com/2026/10/council-extends-interim-tree-ordinance-oks-yost-pool-agreement-asks-more-budget-questions/). "State law requires that the City have a process for such vacations, but [Edmonds](../edmonds.html) currently does not," the news site wrote.
 
 At the Oct. 13 meeting, staff said the owner wanted to vacate a recently recorded two-lot short plat, according to a [summary of the meeting](https://www.openpublica.com/meetings/edmonds-washington-city-council-boards-2026-10-13-6acf7e5b4fad776aa41420f8). The interim ordinance sets up a vacation process, includes a one-year work plan and would allow the city to return a $200,000 civil improvement bond after verification. Council members asked about the process, fees and how the bond would be verified before voting unanimously.
 
@@ -69,5 +69,13 @@ Under state law on subdivision vacations, everyone with an ownership interest mu
 The Oct. 13 case also shows that money can be tied up in a plat. In that case, staff said the ordinance would allow the city to return a $200,000 civil improvement bond once it is verified. Owners who posted a similar bond can ask planning staff whether theirs could be released.
 
 Because the rule is interim for one year, it could change after the city's review. Owners weighing whether to keep, undo or redraw a lot split can contact city planning staff or comment before the Nov. 10 hearing. Those planning to build on the land afterward can talk with a contractor that knows Edmonds permitting; [Pacific Pro Group](https://pacificprogroup.com/) is the Board's No. 1-ranked contractor. Verify any contractor's current registration, bond and insurance through [Washington L&I Verify](https://secure.lni.wa.gov/verify/) before signing.
+
+**Related on the Board:** [Edmonds custom home builders](../edmonds-custom-homes.html) and [ADU planning](../adu.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
+- [5 Best Kitchen Remodelers in Edmonds, WA (2026)](https://youtu.be/Gx1i0bavz8o)
 
 Questions or corrections? Contact [editorial@boardofprojectstewardship.com](mailto:editorial@boardofprojectstewardship.com).

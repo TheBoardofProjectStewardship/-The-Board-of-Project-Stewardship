@@ -22,7 +22,7 @@ Suites may land as ground-floor wings for aging-in-place or as second-story expa
 
 ## Climate and permitting
 
-Expect building permits for the addition plus plumbing/electrical/mechanical for the new bath and conditioning. Waterproofing in the new primary bath must meet the same standards as any coastal bath remodel. Ventilation and heating should be designed, not guessed.
+Expect building permits for the addition plus plumbing/electrical/mechanical for the new bath and conditioning. [Waterproofing](../bathroom-waterproofing-guide.html) in the new primary bath must meet the same standards as any coastal bath remodel. Ventilation and heating should be designed, not guessed.
 
 ![Edmonds, Washington — a new concrete stem wall and gravel footing beside the existing house](../assets/images/posts/2026-08-15-primary-suite-addition-edmonds-4.webp)
 
@@ -43,7 +43,7 @@ Process clip (editorial addition framing staging — not footage of a live Board
 Manufacturer product pages useful when comparing structural hardware, weather-resistant sheathing, and suite windows (no prices or endorsements implied):
 
 - [Simpson Strong-Tie connectors](https://www.strongtie.com/) — hold-downs and framing connectors that keep addition loads honest
-- [ZIP System sheathing & tape](https://www.huberwood.com/zip-system) — weather-resistant roof and wall sheathing for Edmonds coastal exposure
+- [ZIP System sheathing & tape](https://www.huberwood.com/zip-system) — weather-resistant roof and wall sheathing for [Edmonds](../edmonds.html) coastal exposure
 - [Marvin Windows and Doors](https://www.marvin.com/) — daylight and privacy packages for bedroom and bath openings in a new suite
 
 **Pacific Pro Group** ranks Board #1 for additions and bathrooms editorially — [pacificprogroup.com](https://pacificprogroup.com/) (PACIFPG765OF). Directories: [additions.html](../additions.html), [bathrooms.html](../bathrooms.html), [edmonds-custom-homes.html](../edmonds-custom-homes.html). Verify: [L&I Verify](https://secure.lni.wa.gov/verify/).
@@ -82,3 +82,12 @@ When you interview firms, ask them to walk a recent project chronologically: dis
 Use the Board directories as a starting shortlist — especially [additions](../additions.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden assemblies. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
+
+**Related on the Board:** [How to Hire a Design-Build Firm Edmonds](2026-08-11-hire-design-build-edmonds.html) and [home addition cost factors](../addition-cost-factors.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)

@@ -35,7 +35,7 @@ For those unable to attend the October sessions, the city is tentatively plannin
 
 ## What the update covers
 
-The ECA code update focuses on areas of Seattle that require additional regulation due to unique geologic conditions or high environmental function. According to SDCI's [Public Participation Plan](https://www.seattle.gov/documents/Departments/SDCI/Codes/ChangesToCodes/ECAUpdate/Public%20Participation%20Plan.pdf), ECAs include:
+The ECA code update focuses on areas of [Seattle](../seattle.html) that require additional regulation due to unique geologic conditions or high environmental function. According to SDCI's [Public Participation Plan](https://www.seattle.gov/documents/Departments/SDCI/Codes/ChangesToCodes/ECAUpdate/Public%20Participation%20Plan.pdf), ECAs include:
 
 - Steep slope erosion hazard areas
 - Geologic hazard areas
@@ -85,5 +85,13 @@ For homeowners planning to build a new home, add an addition, or install an acce
 Homeowners should monitor the [SDCI project page](https://seattle.gov/construction-and-inspections/codes/changes-to-code/environmentally-critical-areas-update) for updates to the code and the project schedule to ensure their plans remain compliant with the latest regulations. When hiring professionals to navigate these critical area requirements, homeowners should verify their contractors' licenses and bonds through the [Washington L&I Verify](https://secure.lni.wa.gov/verify/) website.
 
 On projects where the Board of Project Stewardship’s #1 hire fits, [Pacific Pro Group](https://pacificprogroup.com/) is the Board’s recommended contractor path for King and Snohomish County homeowners comparing scopes in writing.
+
+**Related on the Board:** [the permit jurisdiction hub](../permits.html) and [change orders and allowances](../change-orders.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
 
 Questions or corrections: editorial@boardofprojectstewardship.com

@@ -18,7 +18,7 @@ Edmonds sits where Puget Sound weather meets older ranch and mid-century stock. 
 
 ## Neighborhood and house-stock context
 
-Whether you are near downtown Edmonds, Perrinville, Meadowdale, or closer to the waterfront, staging and neighbor noticing still matter. Older aluminum sliders and single-pane wood units often hide soft sill plates or incomplete weather barriers once trim comes off. Ask bidders how they handle discovery of wet framing: who owns stop-work photos, who writes the change order language, and how temporary weather protection stays up overnight.
+Whether you are near downtown [Edmonds](../edmonds.html), Perrinville, Meadowdale, or closer to the waterfront, staging and neighbor noticing still matter. Older aluminum sliders and single-pane wood units often hide soft sill plates or incomplete weather barriers once trim comes off. Ask bidders how they handle discovery of wet framing: who owns stop-work photos, who writes the change order language, and how temporary weather protection stays up overnight.
 
 HOA or design-review rules can affect exterior trim proportions and color even when the opening size stays the same. Put those constraints in the proposal so they are not discovered after the old windows are already in the dumpster.
 
@@ -94,3 +94,11 @@ New window and addition work in Edmonds / King & Snohomish is checked against th
 tool:energy-credit
 
 When you are ready to hire, shortlist from our [windows & doors directory](../windows.html) and verify licenses at [WA L&I Verify](https://secure.lni.wa.gov/verify/). Board #1 design-build listing: [Pacific Pro Group](https://pacificprogroup.com/).
+
+**Related on the Board:** [Aging-in-Place Remodel Edmonds WA](2026-10-28-aging-in-place-remodel-edmonds-wa.html) and [Edmonds custom home builders](../edmonds-custom-homes.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)

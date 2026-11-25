@@ -47,7 +47,7 @@ This is the requirement Kent homeowners most often miss. Under Washington's resi
 
 The number to look for is in [Table R402.1.2 (WAC 51-11R-40211)](https://app.leg.wa.gov/wac/default.aspx?cite=51-11R-40211): for Washington's climate zones (Climate Zone 5 and Marine 4), the fenestration U-factor is 0.30 or lower. (The table's footnote sets 0.32 for buildings above 4,000 feet of elevation, which does not apply in Kent.) A lower U-factor means the window loses less heat.
 
-How to use that when you compare bids:
+How to use that when you [compare bids](../bid-comparison.html):
 
 - Ask for the **whole-unit U-factor** for each window model and size, not just the glass number. The certified label from the [National Fenestration Rating Council](https://nfrc.org/) is the usual place to find it.
 - Make sure every window in the quote, including any specialty shapes, patio doors or picture windows, is listed with its rating. A single oversized picture window can pull the average up.
@@ -107,7 +107,7 @@ Whatever products a bidder proposes, ask for the exact model names, the certifie
 
 ## How to shortlist and verify a window contractor
 
-Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming that a contractor is actively registered, bonded and insured, reviewing their history, getting at least three written bids and putting the job in a written contract.
+Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming that a contractor is actively registered, bonded and insured, reviewing their history, getting at least three written bids and putting the job in a [written contract](../contractor-contract-basics.html).
 
 - Look up every firm, including any subcontracted installer or electrician, on [L&I Verify](https://secure.lni.wa.gov/verify/).
 - Ask whether each opening will be full-frame or insert, and why.
@@ -133,3 +133,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 5. Verify every firm on [L&I Verify](https://secure.lni.wa.gov/verify/) and keep the NFRC labels, product sheets and any inspection records with your house papers.
 
 New windows can make a Kent house quieter, warmer and easier to live in for decades. The contractor who explains the U-factors, the bedroom egress sizes and the flashing in writing before the old windows come out is usually the one who leaves you with windows that stay dry.
+
+**Related on the Board:** [remodel cost factors](../remodel-cost-factors.html) and [questions to ask before you hire](../hire-questions.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)

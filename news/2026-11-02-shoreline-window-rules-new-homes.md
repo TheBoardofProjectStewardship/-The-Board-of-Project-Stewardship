@@ -48,7 +48,7 @@ Staff tied the townhouse change partly to the state energy code. Under it, a typ
 
 ## Parking and subdivision timelines
 
-The ordinance says parking can't be placed in a setback but may extend into a rear yard setback, as long as it stays at least 5 feet from the rear property line. The staff report says the change carries out direction the Planning Commission gave in June 2025. Shoreline removed all off-street parking requirements in August 2025, according to the report.
+The ordinance says parking can't be placed in a setback but may extend into a rear yard setback, as long as it stays at least 5 feet from the rear property line. The staff report says the change carries out direction the Planning Commission gave in June 2025. [Shoreline](../shoreline.html) removed all off-street parking requirements in August 2025, according to the report.
 
 State law expires preliminary subdivision approvals after five years, the staff report says, and a few Shoreline subdivisions expired even while they had active construction permits. The ordinance now allows further extensions of the time to file a final plat if active construction permits for the subdivision improvements have not expired.
 
@@ -72,5 +72,13 @@ That [state law](https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.635) requir
 - Plan with a licensed contractor. A builder such as [Pacific Pro Group](https://pacificprogroup.com/), the Board's No. 1-ranked contractor, can help owners check a new home or addition against the updated code. Check any contractor's license with the state Department of Labor and Industries' [Verify tool](https://secure.lni.wa.gov/verify/).
 
 The full ordinance is posted on the city's [code website](https://ecode360.com/SH4640/laws/LF2844126.pdf).
+
+**Related on the Board:** [Comment window closes Nov. 17 on state shoreline rules that could change waterfront home projects](washington-shoreline-rules-comment-deadline.html) and [the What Can I Build Here? lot report](../build-here.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
 
 *Corrections or tips: email [editorial@boardofprojectstewardship.com](mailto:editorial@boardofprojectstewardship.com).*

@@ -18,7 +18,7 @@ Lake Forest Park sits between Shoreline and Kenmore along the northeast shore of
 
 ## Neighborhood and lot context
 
-Whether the house faces the lake, sits back toward Ballinger Way, or nestles under mature firs on a cul-de-sac, staging still drives schedule. Narrow drives, limited street parking, and canopy drip lines can constrain dumpster placement, tile-pallet deliveries, and overnight protection for open wet walls. Ask bidders how they protect finished floors on the haul path to an upstairs bath, how they handle soft subfloor at a shower curb, and who owns change-order language when a valve wall must move for clearance.
+Whether the house faces the lake, sits back toward Ballinger Way, or nestles under mature firs on a cul-de-sac, staging still drives schedule. Narrow drives, limited street parking, and canopy drip lines can constrain dumpster placement, tile-pallet deliveries, and overnight protection for open wet walls. Ask bidders how they protect finished floors on the haul path to an upstairs bath, how they handle soft subfloor at a shower curb, and who owns [change-order](../change-orders.html) language when a valve wall must move for clearance.
 
 Tree permits and outdoor work can touch a bath project even when the wet room itself is interior-only. Exterior exhaust terminations, roof penetrations for fans, and temporary construction access sometimes interact with the City’s tree and right-of-way rules. Put those constraints in the proposal so they are not discovered after rough-in is underway. Cross-check the Board’s [plumber](../plumber.html) and [electrician](../electrician.html) directories when fixture moves and circuit work share the same critical path, and [tile](../tile.html) when wet-zone assemblies drive the schedule. Local context pages for [Lake Forest Park](../lake-forest-park.html) and the broader [King County](../king-county.html) notes help when you are comparing nearby jurisdictions — but your lot still follows City of Lake Forest Park rules.
 
@@ -26,7 +26,7 @@ Tree permits and outdoor work can touch a bath project even when the wet room it
 
 ## Climate, moisture, and the City permit path
 
-Western Washington bathrooms live with cool outdoor air and long damp seasons. Lake Forest Park is less wind-driven than an Edmonds bluff lot, but winter humidity, slow-drying grout, and fans that dump into attics still show up as soft drywall and failed caulk long before finishes look dated. Prefer continuous waterproofing in the wet zone, correct slope to the drain, and exhaust terminated outdoors with a quiet, appropriately rated fan. Fancy finishes cannot compensate for a pan that ponds or a niche that was never banded into the membrane.
+Western Washington bathrooms live with cool outdoor air and long damp seasons. Lake Forest Park is less wind-driven than an Edmonds bluff lot, but winter humidity, slow-drying grout, and fans that dump into attics still show up as soft drywall and failed caulk long before finishes look dated. Prefer continuous [waterproofing](../bathroom-waterproofing-guide.html) in the wet zone, correct slope to the drain, and exhaust terminated outdoors with a quiet, appropriately rated fan. Fancy finishes cannot compensate for a pan that ponds or a niche that was never banded into the membrane.
 
 As of late 2025 into 2026, the City of Lake Forest Park routes building, planning, right-of-way, and tree applications through its online **iWorQ** Permit Portal. Start at the City’s [Permit Center](https://cityoflfp.gov/165/Permit-Center) for orientation, then submit applications, checklists, and plans at the [Citizen Portal](https://lakeforestparkwa.portal.iworq.net/portalhome/lakeforestparkwa). New building applications after July 1, 2025 generally use the Building & Public Works module; older records may sit under Past Permits. The City states that applications cannot be submitted in person with paper plans — everything goes online. Payments are handled separately (phone or City Hall), so build fee settlement into your contractor’s critical path rather than assuming the portal charges a card at submit.
 
@@ -53,7 +53,7 @@ https://www.youtube.com/watch?v=ynLqnKeoGnc
 
 Measure the wet zone, valve height, niche, and glass opening before you lock a catalog number. Glass lead times can dominate the end of the schedule — measure only after walls are true. Coordinate plumber and electrician so one trade’s fastener line does not puncture the membrane the next trade just finished. Keep exhaust duct routing visible on the plan so it is not improvised through joist bays after tile is ordered. If accessibility or aging-in-place is a goal, plan curb details, clearances, and lever hardware during layout, when changes are cheap.
 
-If the bath sits inside a larger kitchen, addition, or primary-suite package, keep waterproofing on the same critical path as structure and mechanical penetrations. Relative planning companions: [bathrooms](../bathrooms.html), [kitchen](../kitchen.html), [tile](../tile.html), and [trades](../trades.html) when multiple specialties share the same rough-in window. For hiring process and red flags, see [hiring a contractor](../hiring-a-contractor.html) and [verify contractor](../verify-contractor.html).
+If the bath sits inside a larger kitchen, addition, or primary-suite package, keep waterproofing on the same critical path as structure and mechanical penetrations. Relative planning companions: [bathrooms](../bathrooms.html), [kitchen](../kitchen.html), [tile](../tile.html), and [trades](../trades.html) when multiple specialties share the same rough-in window. For hiring process and [red flags](../red-flags-hiring.html), see [hiring a contractor](../hiring-a-contractor.html) and [verify contractor](../verify-contractor.html).
 
 ![Finished Pacific Northwest bathroom layout with vanity and shower context in Lake Forest Park](../assets/images/posts/2026-09-30-lfp-bath-3.webp)
 
@@ -108,3 +108,11 @@ Use the Board directories as a starting shortlist — especially [bathrooms](../
 Finally, keep a simple owner file: proposals, allowance logs, iWorQ permit numbers, L&I electrical records if any, inspection results, product cut sheets, and dated photos of hidden membranes before tile closes. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
 
 ![Finished walk-in shower with glass panel and tile niche in a Lake Forest Park, Washington bathroom](../assets/images/posts/2026-09-30-lake-forest-park-bath-finished-9.webp "A finished Lake Forest Park bathroom remodel with a tiled niche and glass shower panel.")
+
+**Related on the Board:** [Bathroom Remodel Lake Forest Park](2026-08-25-bathroom-remodel-lake-forest-park.html) and [bathroom cost factors](../bathroom-cost-factors.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)

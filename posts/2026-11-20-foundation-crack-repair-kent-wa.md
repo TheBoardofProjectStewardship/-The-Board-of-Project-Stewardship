@@ -168,3 +168,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 5. Get written bids that follow the engineer's report, and verify each contractor on L&I Verify.
 6. Apply through the City of Kent [permitting portal](https://permitportal.kentwa.gov/), or call the Permit Center at 253-856-5300 with questions.
 7. Keep the report, permit, inspection results, pier logs and warranty in your house file.
+
+**Related on the Board:** [contractor contract basics](../contractor-contract-basics.html), [change orders and allowances](../change-orders.html) and [hiring a contractor](../hiring-a-contractor.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)

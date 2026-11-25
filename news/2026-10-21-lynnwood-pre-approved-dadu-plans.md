@@ -59,7 +59,7 @@ The [state Department of Commerce](https://www.commerce.wa.gov/growth-management
 
 Lynnwood is one of several Snohomish County cities moving the same way. Everett launched a similar program in June with three pre-approved designs, and Snohomish County is developing its own, [The Herald reported](https://www.heraldnet.com/2026/07/31/edmonds-launches-pre-approved-design-program-for-adus/) in July. Edmonds launched its program in late July, with catalog plans to be sold directly by the designer at a set rate of no more than $1,000. Edmonds changed its code in 2024 to allow two ADUs on a lot, and DADU applications there rose from three in 2024 to 40 in 2025.
 
-Almgren said Lynnwood's program is based heavily on Seattle's and acknowledged there is "lots of criticism of whether or not [Seattle's] program worked." He said Lynnwood worked closely with Seattle and learned what worked and what Seattle would change if it were starting over. In Seattle, permitting for pre-approved designs averaged 40% faster than for designs without pre-approval, according to a 2023 report cited by The Herald.
+Almgren said [Lynnwood](../lynnwood.html)'s program is based heavily on Seattle's and acknowledged there is "lots of criticism of whether or not [Seattle's] program worked." He said Lynnwood worked closely with Seattle and learned what worked and what Seattle would change if it were starting over. In Seattle, permitting for pre-approved designs averaged 40% faster than for designs without pre-approval, according to a 2023 report cited by The Herald.
 
 ## What it means for homeowners
 
@@ -72,5 +72,13 @@ State law allows two ADUs on most urban residential lots. Owners may also be abl
 Before choosing a plan, confirm your lot's requirements with Lynnwood planning at 425-670-5410 or Planning@LynnwoodWA.gov. When it is time to hire, any contractor's license can be checked at [Washington L&I Verify](https://secure.lni.wa.gov/verify/).
 
 ![Foundation forms and a utility trench dug for a backyard cottage in a Snohomish County yard, site work Lynnwood's pre-approved DADU plans do not cover](../assets/images/news/2026-10-21-lynnwood-dadu-site-work-3.webp "Image of DADU site work in Snohomish County. Lynnwood's pre-approved plans cover the building only, so grading and utilities still need site-specific review.")
+
+**Related on the Board:** [ADU cost factors](../adu-cost-factors.html) and [the ADU readiness checklist](../adu-checklist.html).
+
+## Watch on the Board's YouTube
+
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)
 
 Questions or corrections: editorial@boardofprojectstewardship.com

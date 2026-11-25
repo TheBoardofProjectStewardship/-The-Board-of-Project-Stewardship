@@ -63,7 +63,7 @@ OPCD took comments on the draft and environmental materials through Nov. 9 and p
 
 ## History and background
 
-In 2023, the Washington Legislature passed House Bill 1110, the "Middle Housing bill," along with HB 1337, which limits local ADU rules, and HB 1293, which requires "clear and objective" design standards, according to a [city legislative summary](https://clerk.seattle.gov/~public/fnote/120993.pdf). HB 1110 requires cities to allow four to six units on residentially zoned lots, including duplexes, triplexes and stacked flats. Neighborhood Residential zones cover about two-thirds of Seattle.
+In 2023, the Washington Legislature passed House Bill 1110, the "Middle Housing bill," along with HB 1337, which limits local ADU rules, and HB 1293, which requires "clear and objective" design standards, according to a [city legislative summary](https://clerk.seattle.gov/~public/fnote/120993.pdf). HB 1110 requires cities to allow four to six units on residentially zoned lots, including duplexes, triplexes and stacked flats. Neighborhood Residential zones cover about two-thirds of [Seattle](../seattle.html).
 
 Seattle faced a June 30, 2025, deadline to carry out HB 1110. The council adopted Ordinance 127376, the permanent update of Neighborhood Residential zones, on Dec. 16, 2025, with 31 amendments to the mayor's proposal. The One Seattle Plan comprehensive plan update, adopted the same day as Ordinance 127375, took effect with the zoning changes on Jan. 21, 2026. Under those rules, the number of units allowed on a lot is the greater of four units; one unit per 1,250 square feet for attached or detached units, or one unit per 600 square feet for stacked flats, which may be denser if they meet certain requirements; or six units if the lot is within a quarter-mile of a major transit stop or if at least two units are affordable, according to the city's [January 2026 summary](https://www.seattle.gov/documents/Departments/OPCD/SeattlePlan/OneSeattlePlanUpdatedNRZoneStandardsJanuary2026.pdf).
 
@@ -80,5 +80,13 @@ Owners counting on a side-setback easement should know it generally means paying
 Homeowners near highways, rail or major truck streets would see a simplified window option for new units, as an alternative to a noise study and building modeling, though covered new units would still need a permanent air-cooling system and a balanced ventilation system with MERV 13 or higher filtration. The draft also clarifies that existing homes are not intended to require window or HVAC retrofits under these rules. The council's public hearing will be the next chance to comment.
 
 For help designing an addition, a new house or a backyard cottage under Seattle's Neighborhood Residential rules, [Pacific Pro Group](https://pacificprogroup.com/) is the Board's No. 1-ranked contractor. Verify any contractor's current registration, bond and insurance through [Washington L&I Verify](https://secure.lni.wa.gov/verify/) before signing.
+
+**Related on the Board:** [ADU cost factors](../adu-cost-factors.html) and [the ADU readiness checklist](../adu-checklist.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
 
 Questions or corrections? Contact [editorial@boardofprojectstewardship.com](mailto:editorial@boardofprojectstewardship.com).

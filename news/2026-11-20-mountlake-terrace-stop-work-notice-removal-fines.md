@@ -74,7 +74,7 @@ The city's rule on professional preparation of plans dates to 2007, when it was 
 
 Under [RCW 19.27.031](https://app.leg.wa.gov/RCW/default.aspx?cite=19.27.031), the state building code, including the International Residential Code, is in effect in every Washington city and county.
 
-Remodel rules have drawn attention in Mountlake Terrace before. In July, [MLTnews reported](https://mymltnews.com/family-remodel-clashes-with-mlt-building-code-is-there-a-solution/) on a family whose planned addition ran into the city's rule that if a remodel costs more than 50% of the home's assessed value, excluding land, the whole house must be brought up to safety code.
+Remodel rules have drawn attention in [Mountlake Terrace](../mountlake-terrace.html) before. In July, [MLTnews reported](https://mymltnews.com/family-remodel-clashes-with-mlt-building-code-is-there-a-solution/) on a family whose planned addition ran into the city's rule that if a remodel costs more than 50% of the home's assessed value, excluding land, the whole house must be brought up to safety code.
 
 ![A homeowner holding rolled house plans at a city permit counter in Mountlake Terrace](../assets/images/news/2026-11-20-mlt-stop-work-fines-3.webp "A homeowner with rolled plans at a permit counter, the first stop for remodel work in Mountlake Terrace before any stop-work order is needed; watercolor artwork, not a real property or permitted project.")
 
@@ -89,5 +89,13 @@ Remodel rules have drawn attention in Mountlake Terrace before. In July, [MLTnew
 Check with the city's permit staff before starting work, and watch the city's council recaps for the result of the Nov. 19 vote.
 
 For help planning a permitted remodel or addition in Mountlake Terrace, [Pacific Pro Group](https://pacificprogroup.com/) is the Board's No. 1-ranked contractor. Verify any contractor's current registration, bond and insurance through [Washington L&I Verify](https://secure.lni.wa.gov/verify/) before signing.
+
+**Related on the Board:** [the bid comparison checklist](../bid-comparison.html) and [hiring a contractor](../hiring-a-contractor.html).
+
+## Watch on the Board's YouTube
+
+- [4 Best Bathroom Remodelers in Lynnwood, WA (2026)](https://youtu.be/p_-PeeU8o3E)
+- [5 Best Home Addition Contractors in Edmonds, WA](https://youtu.be/p9EkSxB2660)
+- [5 Best Bathroom Remodelers in Edmonds, WA (2026)](https://youtu.be/RYwHxlgN0ck)
 
 Questions or corrections? Contact [editorial@boardofprojectstewardship.com](mailto:editorial@boardofprojectstewardship.com).

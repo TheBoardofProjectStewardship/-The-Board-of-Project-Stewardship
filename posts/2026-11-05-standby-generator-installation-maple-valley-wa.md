@@ -99,7 +99,7 @@ Whatever brands a bidder proposes, ask for the generator model, transfer-switch 
 
 ## How to shortlist and verify the installer
 
-Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming active registration, bonding and insurance, getting multiple written bids, and using a written contract. L&I's [contractor registration page](https://lni.wa.gov/licensing-permits/contractors/register-as-a-contractor/) explains who must register. For electrical work, the firm that pulls the L&I electrical permit must be properly licensed for that work.
+Washington L&I's [hiring a contractor guidance](https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/) recommends confirming active registration, bonding and insurance, getting multiple written bids, and using a [written contract](../contractor-contract-basics.html). L&I's [contractor registration page](https://lni.wa.gov/licensing-permits/contractors/register-as-a-contractor/) explains who must register. For electrical work, the firm that pulls the L&I electrical permit must be properly licensed for that work.
 
 - Look up every bidder on [L&I Verify](https://secure.lni.wa.gov/verify/).
 - Ask who buys the L&I electrical permit, who handles any City mechanical permit, and who schedules each inspection.
@@ -124,3 +124,11 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 ![A homeowner and an electrician review standby generator permits in Maple Valley, WA.](../assets/images/posts/2026-11-05-maple-valley-generator-9.webp "A homeowner and an electrician go over standby generator permit papers in Maple Valley, WA.")
 
 A standby generator that is worth owning in Maple Valley is one that starts when the grid fails, passes inspection the first time, sits where the manual and the City both allow it, and does not surprise the neighbors every Tuesday at noon. An installer who starts with L&I, the City, the clearances and the fuel plan — and puts those details in writing — is usually the one worth hiring.
+
+**Related on the Board:** [change orders and allowances](../change-orders.html) and [remodel cost factors](../remodel-cost-factors.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)

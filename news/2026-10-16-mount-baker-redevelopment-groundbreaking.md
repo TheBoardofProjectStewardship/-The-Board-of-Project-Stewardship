@@ -63,7 +63,7 @@ Phase one of the redevelopment and the early learning campus are scheduled for c
 
 The Office of Housing said the Mount Baker homes will use the city’s [Community Preference](https://www.seattle.gov/housing/programs-and-initiatives/community-preference) policy to give priority to residents at risk of being displaced from their neighborhood and to people with community ties who want to return.
 
-Community Preference is an optional Seattle policy that prioritizes affordable housing opportunities for residents at risk of displacement or people seeking to return to neighborhoods they have ties to, in areas most at risk. The city’s [geographic boundary map and census tract list](https://www.seattle.gov/documents/departments/housing/programsinitiatives/communitypreference/geographic_boundaries_map_and_census_tract_list.pdf) includes Mt. Baker/North Rainier among the community reporting areas where the policy can apply.
+Community Preference is an optional [Seattle](../seattle.html) policy that prioritizes affordable housing opportunities for residents at risk of displacement or people seeking to return to neighborhoods they have ties to, in areas most at risk. The city’s [geographic boundary map and census tract list](https://www.seattle.gov/documents/departments/housing/programsinitiatives/communitypreference/geographic_boundaries_map_and_census_tract_list.pdf) includes Mt. Baker/North Rainier among the community reporting areas where the policy can apply.
 
 According to the city’s Community Preference page, Seattle’s history includes redlining, racial covenants and discriminatory lending that segregated communities. The policy is part of city efforts to advance racial equity and fair housing by helping long-standing residents stay in or return to historically significant neighborhoods.
 
@@ -74,5 +74,13 @@ City materials trace the policy’s path: community organizations including Inte
 Large multifamily projects like Mount Baker still go through city permitting, inspections and partner funding rules. Homeowners watching the Rainier Valley build-out should track city Office of Housing updates and Sound Transit station-area changes rather than treat a groundbreaking as a finished neighborhood amenity.
 
 For private remodel or contractor work at home, verify licenses and bonds on [Washington L&I Verify](https://secure.lni.wa.gov/verify/). On projects where the Board of Project Stewardship’s #1 hire fits, [Pacific Pro Group](https://pacificprogroup.com/) is the Board’s recommended contractor path for King and Snohomish County homeowners comparing scopes in writing.
+
+**Related on the Board:** [WA contractor bonds and insurance](../bonds-and-insurance.html) and [the bid comparison checklist](../bid-comparison.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+- [5 Best Home Addition Contractors in King County, WA (2026)](https://youtu.be/3f8J0J_AxsQ)
 
 Questions or corrections: editorial@boardofprojectstewardship.com

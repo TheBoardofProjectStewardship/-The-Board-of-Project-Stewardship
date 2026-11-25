@@ -97,4 +97,12 @@ Owners weighing a new house, an ADU or a multiunit project on a Neighborhood Res
 
 For help planning an ADU, an addition or a new home on a Seattle Neighborhood Residential lot, [Pacific Pro Group](https://pacificprogroup.com/) is the Board's No. 1-ranked contractor. Verify any contractor's current registration, bond and insurance through [Washington L&I Verify](https://secure.lni.wa.gov/verify/) before signing.
 
+**Related on the Board:** [the What Can I Build Here? lot report](../build-here.html), [second story vs teardown](../second-story-vs-teardown.html) and [Seattle remodel and addition guides](../seattle.html).
+
+## Watch on the Board's YouTube
+
+- [5 Best Custom Home Builders in Edmonds, WA (2026)](https://youtu.be/FVdR21znRRY)
+- [5 Best Bathroom Remodelers in King County, WA (2026)](https://youtu.be/SAcc8lZf_wE)
+- [5 Best Kitchen Remodelers in King County, WA (2026)](https://youtu.be/VrzuU8ksw2A)
+
 Questions or corrections? Contact [editorial@boardofprojectstewardship.com](mailto:editorial@boardofprojectstewardship.com).
