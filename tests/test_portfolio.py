@@ -350,6 +350,20 @@ console.log(JSON.stringify({{ids:m.groups.map(g=>g.id),floors:[...new Set(m.labe
         words = set(re.findall(r"[a-z0-9]+", text))
         self.assertFalse({hashlib.sha256(w.encode()).hexdigest()[:16] for w in words} & private)
 
+    def test_one_story_house_bathroom_remodel_is_plan_data(self):
+        p = next(p for p in self.projects if p["slug"] == "one-story-house-bathroom-remodel")
+        cfg = ps.load_config(p)
+        self.assertEqual([s["id"] for s in cfg["stages"]], list(ps.STAGE_PROGRESS))
+        self.assertTrue(all(abs(w["h"] - 8.0) < 0.01 for w in cfg["walls"]))  # wall height is not printed: assumed 8 ft and listed
+        baths = sorted(round(o["b"] - o["a"], 1) for o in cfg["openings"] if o["kind"] == "D" and "bath" in o["tag"])
+        self.assertEqual(baths, [2.4, 2.4])  # printed 2'-6" bath doors, traced gaps
+        self.assertTrue(cfg["fieldRoof"]["assumed"])
+        self.assertTrue(p.get("assumptions"))
+        private = {'2dec26043f679fdd', '96383128fd72933f', '6627835f988e2c5e', 'dcd79ebce907b98a', 'dc5321cfe2b29a88', '8fbfa0e140934b1b', '535deaacd7e6df94', '33aa121cf832195c'}  # sha256 prefixes of the client's private words, kept out of the repo in plain text
+        text = (json.dumps(p) + json.dumps(cfg) + ps.pages()["portfolio/one-story-house-bathroom-remodel/index.html"]).lower()
+        words = set(re.findall(r"[a-z0-9]+", text))
+        self.assertFalse({hashlib.sha256(w.encode()).hexdigest()[:16] for w in words} & private)
+
     @unittest.skipUnless(shutil.which("node"), "node not installed")
     def test_engine_builds_three_levels(self):
         script = f"""

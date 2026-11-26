@@ -802,6 +802,69 @@
         "The two stacked boxes on the east wall of the front room are drawn as hollow wall outlines, as the plan shows them; their use is not printed.",
         "Kitchen, bath and laundry fixtures are placed from the plan symbols; their heights are assumed."
       ]
+    },
+    {
+      "slug": "one-story-house-bathroom-remodel",
+      "engine": "config",
+      "config": "one-story-house-bathroom-remodel.json",
+      "title": "One-story house with attached garage, bathroom remodel floor plan",
+      "card": "A one-story house with an attached garage, modeled from its proposed main floor plan: two baths side by side beside three bedrooms, with the living room, kitchen and dining room open to one another.",
+      "facts": [
+        "One-story plan, about 1,200 square feet plus a 220 square foot garage",
+        "Two baths with a tub and shower in each",
+        "Openings traced from the plan; the printed sizes are used where given"
+      ],
+      "kicker": "Floor plan model",
+      "thumb": "/portfolio/one-story-house-bathroom-remodel/thumb.png",
+      "dek": "Explore the house layer by layer: the finished house, the entry side, the roof, the floor plan, every room and the floor deck.",
+      "sourceNote": "Modeled from the proposed main floor plan. Walls, openings and room names come from the plan; the wall height is not printed. The sheets show no roof, so the roof form and heights are listed below as assumptions.",
+      "learn": {
+        "house": [
+          "roof",
+          "partition"
+        ],
+        "front": [
+          "header"
+        ],
+        "roof": [
+          "roof"
+        ],
+        "upper": [
+          "partition",
+          "header"
+        ],
+        "plan": [
+          "partition"
+        ],
+        "foundation": [
+          "partition"
+        ]
+      },
+      "notes": {
+        "roof": [
+          "Roof",
+          "The set has no roof plan or exterior elevations, so a simple hipped roof over the house and garage is assumed."
+        ],
+        "partition": [
+          "Baths",
+          "Two baths sit side by side at the north of the bedroom wing. Each has a tub and shower, a toilet and a vanity, and opens to the hall."
+        ],
+        "header": [
+          "Openings",
+          "The entry door and porch face south beside the living room window, and the dining room opens to the patio through a sliding glass door on the north."
+        ]
+      },
+      "assumptions": [
+        "Scale: the sheet states 1/4 inch to the foot (18 points per foot) and the printed 5 ft and 6 ft 10 in bath widths, the 8 ft bath depth, the 2 ft 6 in doors and the 4 ft 8 in window all measure within about 2 percent of that scale, so lengths are taken at 18 points per foot.",
+        "Wall height: 8 feet, not printed anywhere on the set, applied to every wall. Wall thickness is the thickness drawn on the plan.",
+        "Roof: the set has no roof plan or exterior elevations. A hipped roof over the house and garage is assumed, pitch 4 in 12 with 18 inch overhangs.",
+        "The floor is drawn 1 foot above grade: the floor-to-grade height is not printed, and no steps are drawn. The patio and porch slabs are drawn just below the floor.",
+        "Window and door sizes are traced from the openings on the plan; only the bath window (4 ft 8 in), the bath doors (2 ft 6 in) and the bath dimensions are printed. Sills at 3 feet and heads at 6 feet 8 inches are assumed, as are all door heights and the garage door height.",
+        "The sheet prints room names for the bedrooms, baths, kitchen, dining, living room, garage, porch and patio. The small room at the west end of the hall and the hall itself are not named.",
+        "The living room, kitchen and dining room are one open space. The lines between them are placed at the counter ends and the garage wall.",
+        "Bath, kitchen and counter fixtures are placed from the plan symbols; their heights are assumed. The refrigerator, range and counters in the kitchen are drawn as simple boxes.",
+        "The patio (15 by 15 feet) and porch (5 by 3 feet) are the concrete areas outlined on the plan."
+      ]
     }
   ]
 }
