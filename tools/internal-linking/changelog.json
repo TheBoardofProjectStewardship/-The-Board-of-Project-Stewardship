@@ -4277,7 +4277,42 @@
     "Gx1i0bavz8o",
     "RYwHxlgN0ck"
    ]
+  },
+  "news/seattle-council-approves-sdci-fee-ordinance-cb-121310.html": {
+   "md": "news/2026-11-26-seattle-council-approves-sdci-fee-ordinance-cb-121310.md",
+   "inline": [
+    {
+     "anchor": "building permit",
+     "href": "../permits.html",
+     "target": "permits.html"
+    },
+    {
+     "anchor": "Seattle",
+     "href": "../seattle.html",
+     "target": "seattle.html"
+    }
+   ],
+   "youtube_inline": [],
+   "related": [
+    {
+     "label": "Seattle permit fees would rise 10.7% next year under mayor's budget",
+     "target": "news/seattle-2027-permit-fee-increase.html"
+    },
+    {
+     "label": "home addition cost factors",
+     "target": "addition-cost-factors.html"
+    },
+    {
+     "label": "ADU planning",
+     "target": "adu.html"
+    }
+   ],
+   "youtube_block": [
+    "VrzuU8ksw2A",
+    "SAcc8lZf_wE",
+    "3f8J0J_AxsQ"
+   ]
   }
  },
- "generated": "2026-11-25 10:15 PST"
+ "generated": "2026-11-26 02:07 PST"
 }
