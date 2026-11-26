@@ -704,8 +704,27 @@ class NewsContractTests(unittest.TestCase):
             self.assertTrue((ROOT / "assets" / "images" / "news" / f"2026-11-26-seattle-permit-fee-ordinance-hero-{width}.webp").is_file())
         self.assertTrue((ROOT / "assets" / "images" / "news" / "2026-11-26-seattle-permit-fee-ordinance-hero.webp").is_file())
         sdci_body = sdci.split('class="news-body prose-board"', 1)[1].split("news-sources", 1)[0]
-        self.assertLess(sdci_body.index("What the council passed and the vote"), sdci_body.index("king-county-permit-fees-hero"))
-        self.assertLess(sdci_body.index("How much fees rise"), sdci_body.index("2026-10-22-seattle-2027-permit-fee-increase"))
+        self.assertLess(sdci_body.index("What the council passed and the vote"), sdci_body.index("2026-11-26-seattle-permit-counter-1"))
+        self.assertLess(sdci_body.index("How much fees rise"), sdci_body.index("2026-11-26-seattle-heat-pump-permit-3"))
+        self.assertLess(sdci_body.index("Hourly fee timing change"), sdci_body.index("2026-11-26-seattle-home-addition-2"))
+        self.assertLess(sdci_body.index("2026-11-26-seattle-home-addition-2"), sdci_body.index("New rental agreement fee"))
+        self.assertLess(sdci_body.index("<h2>History and background</h2>"), sdci_body.index("2026-11-26-seattle-backyard-cottage-adu-4"))
+        self.assertLess(sdci_body.index("2026-11-26-seattle-backyard-cottage-adu-4"), sdci_body.index("What it means for homeowners"))
+        self.assertNotIn("king-county-permit-fees-hero", sdci_body)
+        self.assertNotIn("2026-10-22-seattle-2027-permit-fee-increase.webp", sdci_body)
+        self.assertEqual(sdci_body.count('loading="lazy"'), 4)
+        self.assertEqual(sdci_body.count("watercolor artwork, not a real"), 3)
+        self.assertEqual(sdci_body.count("Watercolor artwork, not a real"), 1)
+        for name in (
+            "2026-11-26-seattle-permit-counter-1",
+            "2026-11-26-seattle-home-addition-2",
+            "2026-11-26-seattle-heat-pump-permit-3",
+            "2026-11-26-seattle-backyard-cottage-adu-4",
+        ):
+            for width in (480, 800, 1200):
+                self.assertIn(f"{name}-{width}.webp", sdci)
+                self.assertTrue((ROOT / "assets" / "images" / "news" / f"{name}-{width}.webp").is_file())
+            self.assertTrue((ROOT / "assets" / "images" / "news" / f"{name}.webp").is_file())
         self.assertLess(sdci_body.index("What it means for homeowners"), sdci_body.index("pacificprogroup.com"))
         self.assertEqual(sdci_body.count("https://pacificprogroup.com/"), 1)
         self.assertEqual(sdci_body.count("pacificprogroup.com"), 1)
@@ -729,7 +748,7 @@ class NewsContractTests(unittest.TestCase):
         self.assertNotIn("../posts/", sdci_body)
         self.assertNotIn("owned by", sdci_body.lower())
         self.assertNotIn("parent company", sdci_body.lower())
-        self.assertEqual(len(re.findall(r"<figure\b", sdci)), 3)
+        self.assertEqual(len(re.findall(r"<figure\b", sdci)), 5)
         sdci_story = next(item for item in stories if item["slug"] == "seattle-council-approves-sdci-fee-ordinance-cb-121310")
         for source in sdci_story["sources"]:
             self.assertIn(html.escape(source, quote=True), sdci)
