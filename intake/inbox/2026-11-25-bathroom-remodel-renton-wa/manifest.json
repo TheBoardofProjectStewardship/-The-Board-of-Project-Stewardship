@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-11-25-bathroom-remodel-renton-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-11-26T10:30:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Bathroom Remodel Renton WA \u2014 Permits, Asbestos Checks, Ventilation, Waterproofing and Hiring",
+    "date": "2026-11-25",
+    "slug": "bathroom-remodel-renton-wa",
+    "description": "A Renton bathroom remodel guide: when the City's Residential Interior Remodel permit applies, separate plumbing, electrical and mechanical permits, asbestos surveys, review times, inspections and hiring.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored catch-up for the missed 2026-11-25 run (built 2026-11-26 early morning). Home PC DESKTOP-B69F181 board-intake inbox not readable at the usual path (see intake); no 2026-11-25 board post packet used. Topic: bathroom remodel in Renton WA (King County). Sources read 2026-11-26: City of Renton Residential Interior Remodels page (asbestos survey first per PSCAA/L&I; King County Environmental Health approval for septic properties adding a bath or bedroom; submittal plan contents incl. fixture/fan/vent locations, wall section, stamped plans for structural changes, WSEC-R checklist; separate electrical/plumbing/mechanical/fire permits; OTC permits in portal typically same day; electronic submittal, 5 days intake review; residential first review 2-3 weeks, revisions 1-2 weeks); Renton Building Permits FAQ (RMC 4-5-060E.1 quote, 105.2 exemptions, no expedite, no Basics program, no work before permit, fee estimator, construction hours, DIY electrical 3-year residency, no combined permits, IVR 425-430-7202 / CASSP inspections, no call-ahead, virtual meetings, no CO for single family, WA contractor license + Renton business license before permit, 425-430-7215, City Hall 1055 South Grady Way); Renton COR Maps; Online Permit Portal Help; Renton Housing Repair Assistance Program; PSCAA asbestos; L&I asbestos certification (AHERA good-faith inspection); EPA RRP; King County Environmental Health permits; King County C&D materials; SBCC energy code; Energy Star ventilation fans; PSE rebates; L&I Verify + hiring a contractor. Renton place token already in generate_site.py; no generator change. Internal links (Nov 25 rule): renton.html, king-county.html, bathrooms.html (+#feasibility-calculator), bathroom-waterproofing-guide.html, bathroom-cost-factors.html, directories.html, permits.html, feasibility-study.html, bid-comparison.html, build-here.html, hire-questions.html, verify-contractor.html and 11 related posts (incl. 0-inbound orphans pnw-bathroom-waterproofing-essentials, eastside-vs-coastal-bath-remodel, hire-bathroom-remodeler-king-snohomish, bathroom-remodel-bothell, whole-house-repiping-kirkland). 4 Board YouTube links (channel UCpej558rCLbYWTt3tEW6a5A). No fee or price figures. Producer role fields kept per intake contract."
+}
