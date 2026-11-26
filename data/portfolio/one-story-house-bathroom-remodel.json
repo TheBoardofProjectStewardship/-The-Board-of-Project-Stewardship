@@ -1215,6 +1215,7 @@
    "kind": "G",
    "door": 7.0,
    "h": 8.0,
+   "base": 0,
    "tag": "garage door"
   },
   {
@@ -1479,7 +1480,12 @@
    "traced": 88.2,
    "areaTraced": true,
    "text": "Bdrm 3",
-   "minor": false
+   "minor": false,
+   "tint": [
+    0.86,
+    0.835,
+    0.81
+   ]
   },
   {
    "name": "Bedroom 2",
@@ -1516,7 +1522,12 @@
    "traced": 146.6,
    "areaTraced": true,
    "text": "Bdrm 2",
-   "minor": false
+   "minor": false,
+   "tint": [
+    0.86,
+    0.835,
+    0.81
+   ]
   },
   {
    "name": "Bedroom 1",
@@ -1553,7 +1564,12 @@
    "traced": 146.7,
    "areaTraced": true,
    "text": "Bdrm 1",
-   "minor": false
+   "minor": false,
+   "tint": [
+    0.86,
+    0.835,
+    0.81
+   ]
   },
   {
    "name": "Living",
@@ -1613,8 +1629,13 @@
    ],
    "traced": 324.2,
    "areaTraced": true,
-   "text": "Living 324 SF",
-   "minor": false
+   "text": "Living",
+   "minor": false,
+   "tint": [
+    0.93,
+    0.87,
+    0.78
+   ]
   },
   {
    "name": "Kitchen",
@@ -1651,7 +1672,12 @@
    "traced": 128.8,
    "areaTraced": true,
    "text": "Kitchen",
-   "minor": false
+   "minor": false,
+   "tint": [
+    0.93,
+    0.87,
+    0.78
+   ]
   },
   {
    "name": "Dining",
@@ -1688,7 +1714,12 @@
    "traced": 126.3,
    "areaTraced": true,
    "text": "Dining",
-   "minor": false
+   "minor": false,
+   "tint": [
+    0.93,
+    0.87,
+    0.78
+   ]
   },
   {
    "name": "Garage",
@@ -1724,8 +1755,14 @@
    ],
    "traced": 202.4,
    "areaTraced": true,
-   "text": "Garage 202 SF",
-   "minor": false
+   "text": "Garage 220 SF",
+   "minor": false,
+   "tint": [
+    0.83,
+    0.835,
+    0.83
+   ],
+   "base": 0.12
   },
   {
    "name": "Porch",
@@ -1971,7 +2008,7 @@
   "zones": [
    {
     "name": "House",
-    "plate": 8.0,
+    "plate": 8.1,
     "rects": [
      [
       0,
@@ -1989,7 +2026,7 @@
       25.7,
       11.2,
       46.36,
-      22.05
+      24.06
      ],
      [
       46.01,
@@ -2077,7 +2114,7 @@
   ],
   "max": [
    63.0,
-   15.333,
+   15.433,
    37.0
   ]
  },
@@ -2095,9 +2132,10 @@
   "Scale: the sheet states 1/4 inch to the foot (18 points per foot) and the printed 5 ft and 6 ft 10 in bath widths, the 8 ft bath depth, the 2 ft 6 in doors and the 4 ft 8 in window all measure within about 2 percent of that scale, so lengths are taken at 18 points per foot.",
   "Wall height: 8 feet, not printed anywhere on the set, applied to every wall. Wall thickness is the thickness drawn on the plan.",
   "Roof: the set has no roof plan or exterior elevations. A hipped roof over the house and garage is assumed, pitch 4 in 12 with 18 inch overhangs.",
-  "The floor is drawn 1 foot above grade: the floor-to-grade height is not printed, and no steps are drawn. The patio and porch slabs are drawn just below the floor.",
+  "The floor is drawn 1 foot above grade: the floor-to-grade height is not printed, and no steps are drawn. The garage floor and overhead door are drawn at grade (concrete garage floor), so the garage sits about 1 foot below the house floor at the door to the dining room. The patio and porch slabs are drawn just below the house floor.",
   "Window and door sizes are traced from the openings on the plan; only the bath window (4 ft 8 in), the bath doors (2 ft 6 in) and the bath dimensions are printed. Sills at 3 feet and heads at 6 feet 8 inches are assumed, as are all door heights and the garage door height.",
   "The sheet prints room names for the bedrooms, baths, kitchen, dining, living room, garage, porch and patio. The small room at the west end of the hall and the hall itself are not named.",
+  "Floor tints follow the finishes printed on the sheet: carpet in the three bedrooms, wood in the living room, kitchen and dining room, tile in the baths and concrete in the garage.",
   "The living room, kitchen and dining room are one open space. The lines between them are placed at the counter ends and the garage wall.",
   "Bath, kitchen and counter fixtures are placed from the plan symbols; their heights are assumed. The refrigerator, range and counters in the kitchen are drawn as simple boxes.",
   "The patio (15 by 15 feet) and porch (5 by 3 feet) are the concrete areas outlined on the plan."

@@ -120,7 +120,7 @@ function buildFromConfig(cfg) {
   for (const r of cfg.rooms) {
     if (!r.poly) continue;
     const wet = /bath|shower|^[tw]c$|laundry|water heater|powder/i.test(r.name);
-    if (!LV) { prism(slab, r.poly, 0, F, wet ? C_TILE : C_FLOOR, 7, false); continue; }
+    if (!LV) { prism(slab, r.poly, 0, r.base != null ? r.base : F, r.tint || (wet ? C_TILE : C_FLOOR), 7, false); continue; } // r.base: slab top below the main floor (garage on grade); r.tint: printed floor finish
     if (wet && r.ch) { const b = baseOf(r); prism(G(r).slab, r.poly, b, b + 0.02, C_TILE, 7, false); }
   }
   // Walls: every traced wall piece, from the slab edge up to its room's ceiling height.
