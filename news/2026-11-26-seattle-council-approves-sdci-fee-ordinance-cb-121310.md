@@ -39,9 +39,7 @@ The vote was 7-1, according to the [clerk's record of the Nov. 20 vote](https://
 
 Mayor Katie Wilson's office transmitted the legislation to the council Sept. 22, and the council's Select Budget Committee voted Nov. 16 to pass it as amended. As of Nov. 26, the clerk's record did not list an ordinance number for the bill. The [ordinance text](https://seattle.legistar.com/View.ashx?M=F&ID=16147693&GUID=FF2B81DF-2060-4C48-A0C8-A57FCAA9F81E) includes a signature line for the mayor and says it takes effect as provided by Seattle Municipal Code Sections 1.04.020 and 1.04.070. The fiscal note says the fee code changes take effect Jan. 1, 2027.
 
-![Construction excavation in front of the King County Courthouse in downtown Seattle, for a story on Seattle building permit fees](../assets/images/news/2026-11-12-king-county-permit-fees-hero.webp "A construction excavation in front of the King County Courthouse at Third Avenue and James Street in Seattle, Sept. 12, 2007. The photo shows a Seattle construction site, not a project covered by the 2027 fee ordinance.")
-
-*Photo: [Joe Mabel](https://commons.wikimedia.org/wiki/File:Seattle_-_King_County_Courthouse_01.jpg) via Wikimedia Commons, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/). Cropped and resized; adapted image under the same license.*
+![A Seattle homeowner handing rolled building plans across a permit counter, for a story on Seattle permit fees rising in 2027](../assets/images/news/2026-11-26-seattle-permit-counter-1.webp "A homeowner hands building plans across a Seattle permit counter, where the 2027 fee increase will show up in plan review and permit costs; watercolor artwork, not a real Seattle permit office or applicant.")
 
 ## How much fees rise
 
@@ -58,9 +56,7 @@ Specific changes in the ordinance and the city's [fee table summary](https://sea
 
 The fiscal note estimates the changes will bring in $7,638,899 in 2027 and $7,061,164 in 2028, revenue that goes to funds outside the city's general fund.
 
-![The Seattle Municipal Tower in downtown Seattle, where the city's construction and inspections department takes permit applications](../assets/images/news/2026-10-22-seattle-2027-permit-fee-increase.webp "The Seattle Municipal Tower at 700 Fifth Avenue in downtown Seattle, where the Department of Construction and Inspections has its offices. The photo shows the permit office building, not a project covered by the 2027 fee ordinance.")
-
-*Photo: Visitor7 via [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Seattle_Municipal_Tower_1.JPG), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).*
+![A technician installing a heat pump beside a Seattle craftsman house, for a story on Seattle furnace and heat pump permit fees](../assets/images/news/2026-11-26-seattle-heat-pump-permit-3.webp "A technician sets an outdoor heat pump unit beside a Seattle craftsman house; per-unit furnace and heat pump permit fees rise from $60.35 to $71.65 in 2027. Watercolor artwork, not a real Seattle property or permitted project.")
 
 ## Why the city says it needs the money
 
@@ -72,6 +68,8 @@ The bill changes when hourly fees are locked in. Under the ordinance, hourly fee
 
 The fiscal note describes the land use hourly change as charging those reviews at the rate in effect when the service is performed, rather than the rate in effect when the application was received, other than for environmentally critical areas review.
 
+![A wood-framed two-story home under construction on a rainy Seattle street, for a story on Seattle hourly permit review fees](../assets/images/news/2026-11-26-seattle-home-addition-2.webp "A wood-framed two-story home under construction on a rainy Seattle street, the kind of project whose land use reviews will be billed at the hourly rate in effect when the work is done; watercolor artwork, not a real Seattle property or permitted project.")
+
 ## New rental agreement fee
 
 The bill also creates a Rental Agreement Regulation Fee in a new Chapter 22.900J of the municipal code. A [Select Budget Committee amendment](https://seattle.legistar.com/View.ashx?M=F&ID=16132483&GUID=146EBEDE-D700-4B49-8170-9D406ACF8EB4) raised it from $11 to $12 per rental housing unit, paid every two years with rental housing registration, and exempted buildings with units funded and monitored by the Office of Housing. Short-term rentals are also excluded. The amendment describes the change as budget-neutral. The adopted ordinance text sets the fee at $12.
@@ -81,6 +79,8 @@ The bill also creates a Rental Agreement Regulation Fee in a new Chapter 22.900J
 On Jan. 1, 2026, the department applied a 6.5% inflationary increase to most fees, set its base hourly rate at $292 and raised construction and master use permit fees 18% year over year, according to its [2026 fee summary](https://www.adc.seattle.gov/documents/Departments/SDCI/Codes/2026FeeSummary.pdf). The department said those increases were needed to sustain permitting services and maintain review timelines amid a post-pandemic shift from high-value development projects to more small- and mid-sized projects.
 
 The same summary showed the effect on two example projects. Plan review and permit fees for a 500-square-foot detached accessory dwelling unit valued at $93,145 rose from $2,908 in 2025 to $3,453 in 2026. For a 1,500-square-foot single-family house with a garage valued at $308,307, they rose from $5,759 to $6,853.
+
+![Backyard cottage framing behind a Seattle bungalow, for a story on Seattle permit fees for detached accessory dwelling units](../assets/images/news/2026-11-26-seattle-backyard-cottage-adu-4.webp "A detached backyard cottage being framed behind a Seattle bungalow, the kind of accessory dwelling unit whose permit fees the city used as a 2026 example; watercolor artwork, not a real Seattle property or permitted project.")
 
 In a [Sept. 22 post](https://buildingconnections.seattle.gov/2026/09/22/mayor-wilsons-2027-2028-proposed-budget-for-sdci/) on the mayor's proposed 2027-2028 budget, the department said it relies primarily on permit fees to pay for permitting, plan review and inspections, and called the 2026 increase "the first step in a phased approach." For 2027 it proposed a 7% adjustment above the 3.7% inflationary adjustment for applicable building and land use permit fees. The department called that a "checkpoint approach" and said it would keep monitoring development activity, permit workload, revenues, service levels and fund balance before deciding whether more increases are needed. It said the fee proposal is paired with cost reductions, primarily in vacant fee-supported positions.
 
