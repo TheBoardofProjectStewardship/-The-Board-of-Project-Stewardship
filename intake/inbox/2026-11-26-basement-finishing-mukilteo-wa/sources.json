@@ -1,0 +1,203 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Mukilteo",
+    "service": "Basement finishing: City building/plumbing/mechanical permits, L&I electrical, moisture and radon checks, insulation, asbestos/lead, inspections, critical areas, hiring",
+    "slug": "basement-finishing-mukilteo-wa"
+  },
+  "sources": [
+    {
+      "url": "https://ci-mukilteo-wa.smartgovcommunity.com/Public/DocumentsView/Download/8e64fdda-a157-40f0-ae92-b077012022f8",
+      "title": "https://ci-mukilteo-wa.smartgovcommunity.com/Public/DocumentsView/Download/8e64fdda-a157-40f0-ae92-b077012022f8",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Mukilteo Pre-Application Meeting Checklist"
+    },
+    {
+      "url": "https://ci-mukilteo-wa.smartgovcommunity.com/Public/DocumentsView/Download/b6761fe3-34dc-4e0e-aa86-b0de011c54f7",
+      "title": "https://ci-mukilteo-wa.smartgovcommunity.com/Public/DocumentsView/Download/b6761fe3-34dc-4e0e-aa86-b0de011c54f7",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Mukilteo Residential Building Permit Checklist"
+    },
+    {
+      "url": "https://ci-mukilteo-wa.smartgovcommunity.com/Public/Home",
+      "title": "https://ci-mukilteo-wa.smartgovcommunity.com/Public/Home",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Mukilteo Online Permit Center"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "State hiring guidance"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/",
+      "title": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "L&I electrical permits, fees and inspections"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/other-licenses-permits/asbestos-certification",
+      "title": "https://lni.wa.gov/licensing-permits/other-licenses-permits/asbestos-certification",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "L&I asbestos certification / AHERA good faith inspection"
+    },
+    {
+      "url": "https://mukilteowa.gov/205/Business-Licenses",
+      "title": "https://mukilteowa.gov/205/Business-Licenses",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Mukilteo Business Licenses"
+    },
+    {
+      "url": "https://mukilteowa.gov/207/Building-Permits",
+      "title": "https://mukilteowa.gov/207/Building-Permits",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Mukilteo Building and Permits page"
+    },
+    {
+      "url": "https://mukilteowa.gov/210/Do-You-Need-a-Permit-for-That",
+      "title": "https://mukilteowa.gov/210/Do-You-Need-a-Permit-for-That",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Mukilteo Do You Need a Permit for That?"
+    },
+    {
+      "url": "https://mukilteowa.gov/DocumentCenter/View/21668/Known-Critical-Areas-PDF",
+      "title": "https://mukilteowa.gov/DocumentCenter/View/21668/Known-Critical-Areas-PDF",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Mukilteo Known Critical Areas map"
+    },
+    {
+      "url": "https://pacificprogroup.com/",
+      "title": "https://pacificprogroup.com/",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Board #1 contractor link"
+    },
+    {
+      "url": "https://pscleanair.gov/185/Asbestos",
+      "title": "https://pscleanair.gov/185/Asbestos",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Puget Sound Clean Air Agency asbestos"
+    },
+    {
+      "url": "https://sbcc.wa.gov/state-codes-regulations-guidelines/state-building-code/energy-code",
+      "title": "https://sbcc.wa.gov/state-codes-regulations-guidelines/state-building-code/energy-code",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Washington State Energy Code page"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "License/bond/insurance lookup"
+    },
+    {
+      "url": "https://www.coretecfloors.com/",
+      "title": "https://www.coretecfloors.com/",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Material maker"
+    },
+    {
+      "url": "https://www.energystar.gov/products/dehumidifiers",
+      "title": "https://www.energystar.gov/products/dehumidifiers",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Energy Star dehumidifiers"
+    },
+    {
+      "url": "https://www.epa.gov/lead/lead-renovation-repair-and-painting-program",
+      "title": "https://www.epa.gov/lead/lead-renovation-repair-and-painting-program",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "EPA RRP lead rule"
+    },
+    {
+      "url": "https://www.epa.gov/radon",
+      "title": "https://www.epa.gov/radon",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "EPA radon"
+    },
+    {
+      "url": "https://www.pergo.com/",
+      "title": "https://www.pergo.com/",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Material maker"
+    },
+    {
+      "url": "https://www.radonaway.com/",
+      "title": "https://www.radonaway.com/",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Material maker"
+    },
+    {
+      "url": "https://www.snopud.com/save-energy/",
+      "title": "https://www.snopud.com/save-energy/",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Snohomish County PUD save energy"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=oKQdo88Ne74",
+      "title": "https://www.youtube.com/watch?v=oKQdo88Ne74",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Construction process video embed"
+    },
+    {
+      "url": "https://youtu.be/EvOh_7_3za4",
+      "title": "https://youtu.be/EvOh_7_3za4",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Board of Project Stewardship YouTube video"
+    },
+    {
+      "url": "https://youtu.be/FVdR21znRRY",
+      "title": "https://youtu.be/FVdR21znRRY",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Board of Project Stewardship YouTube video"
+    },
+    {
+      "url": "https://youtu.be/Gx1i0bavz8o",
+      "title": "https://youtu.be/Gx1i0bavz8o",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Board of Project Stewardship YouTube video"
+    },
+    {
+      "url": "https://youtu.be/p9EkSxB2660",
+      "title": "https://youtu.be/p9EkSxB2660",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Board of Project Stewardship YouTube video"
+    }
+  ],
+  "dropped": [
+    {
+      "url": "https://www.thermadry.com/",
+      "reason": "200 but no readable content to box (JS-only); not cited"
+    },
+    {
+      "url": "https://doh.wa.gov/community-and-environment/radiation/radon",
+      "reason": "404 to box; EPA radon page used"
+    }
+  ],
+  "notes": "Box curl 2026-11-26 with browser UA. All cited = 200 (see cited-status.txt). No fee or price figures quoted. No email addresses in body."
+}

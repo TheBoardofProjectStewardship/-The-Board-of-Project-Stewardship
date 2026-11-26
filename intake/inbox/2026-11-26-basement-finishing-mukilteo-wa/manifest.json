@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-11-26-basement-finishing-mukilteo-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-11-26T12:00:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Basement Finishing Mukilteo WA \u2014 Permits, Moisture Checks, Radon, Electrical and Hiring",
+    "date": "2026-11-26",
+    "slug": "basement-finishing-mukilteo-wa",
+    "description": "A Mukilteo basement finishing guide: when the City's building alteration permit applies, what the checklist asks for, L&I electrical permits, moisture and radon checks, review times, inspections and hiring.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored daily post for 2026-11-26 (built 2026-11-26 early morning). Home PC DESKTOP-B69F181 board-intake inbox (WSL Ubuntu ~/SEO_PLAN_PacificProGroup/board-intake/inbox) read-only at ~3:42 AM PT: no 2026-11-26 entries; no board post packet used. Topic: basement finishing in Mukilteo WA (Snohomish County). Sources read 2026-11-26: City of Mukilteo Do You Need a Permit for That? (wall demolition needs building permit; plumbing moves; water heater plumbing permit; furnace/heat pump mechanical permit; all new windows need building permit; electrical new wiring/circuits/breakers approved and inspected by L&I; drainage/stormwater engineering permit; retaining walls over 4 ft or load bearing); Mukilteo Building and Permits page (Mon-Thu inspections, 3 pm day-before cutoff, email payment scam notice, critical areas Ord. 1533 adopted 2026-03-23, in-person hours); Mukilteo Online Permit Center (plumbing/mechanical/re-roof generally issued within a week, other new applications reviewed within six weeks, resubmittals within four weeks, order received, 21-day incomplete window, inspections mostly 9-3, Permit Center 11930 Cyrus Way, 425-263-8000, closed Fridays); Residential Building Permit Checklist (Building Alteration/Internal ADU and Demo items); Pre-Application Meeting Checklist (free, virtual Thursdays, within two weeks, narrative/questions/site plan); Known Critical Areas map; Mukilteo Business Licenses (DOR, non-resident license); L&I electrical permits (WAC 296-46B-901, permit purchased by contractor or owner doing the work, before work, 2023 NEC); EPA radon; Energy Star dehumidifiers (20% less energy); SBCC energy code; L&I asbestos certification (AHERA good faith inspection, shared responsibility); PSCAA asbestos; EPA RRP; Snohomish County PUD save energy; L&I Verify + hiring a contractor. Mukilteo place token already in generate_site.py; no generator change; mukilteo.html unchanged. Internal links: mukilteo.html, snohomish-county.html, adu-checklist.html, adu.html, electrician.html, insulation.html, drywall.html, flooring.html, hvac.html, bid-comparison.html, hire-questions.html, directories.html, permits.html, remodel-cost-factors.html, feasibility-study.html, living-through-remodel.html, build-here.html, verify-contractor.html and 16 related posts. 4 Board YouTube links (channel UCpej558rCLbYWTt3tEW6a5A). No fee or price figures. Producer role fields kept per intake contract."
+}
