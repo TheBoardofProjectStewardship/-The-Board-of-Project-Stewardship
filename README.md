@@ -54,6 +54,7 @@ Base: `https://boardofprojectstewardship.com/`
 | `blog/rss.xml` | Blog RSS feed |
 | `news/rss.xml` | News RSS feed |
 | `404.html` | Branded Board 404 |
+| `posts/2026-11-26-basement-finishing-mukilteo-wa.html` | Basement Finishing Mukilteo WA — Permits, Moisture Checks, Radon, Electrical and Hiring |
 | `posts/2026-11-25-bathroom-remodel-renton-wa.html` | Bathroom Remodel Renton WA — Permits, Asbestos Checks, Ventilation, Waterproofing and Hiring |
 | `posts/2026-11-24-detached-garage-marysville-wa.html` | Detached Garage Marysville WA — Permits, Setbacks, Foundations, Power and Building It Right |
 | `posts/2026-11-23-backyard-cottage-dadu-seattle-wa.html` | Backyard Cottage (DADU) Seattle WA — SDCI Permits, Size Limits, Utility Connections and Building It Right |

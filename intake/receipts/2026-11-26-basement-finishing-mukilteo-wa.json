@@ -1,0 +1,25 @@
+{
+  "submission_id": "2026-11-26-basement-finishing-mukilteo-wa",
+  "idempotency_key": "sha256:30d47d81a078e41148916bb953d07b769f13c92c9215f8aa84ea3a993c9dde47",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-11-26T11:52:13Z",
+  "outputs": [
+    "assets/images/posts/2026-11-26-mukilteo-basement-1.webp",
+    "assets/images/posts/2026-11-26-mukilteo-basement-2.webp",
+    "assets/images/posts/2026-11-26-mukilteo-basement-3.webp",
+    "assets/images/posts/2026-11-26-mukilteo-basement-4.webp",
+    "assets/images/posts/2026-11-26-mukilteo-basement-5.webp",
+    "assets/images/posts/2026-11-26-mukilteo-basement-6.webp",
+    "assets/images/posts/2026-11-26-mukilteo-basement-7.webp",
+    "assets/images/posts/2026-11-26-mukilteo-basement-8.webp",
+    "assets/images/posts/2026-11-26-mukilteo-basement-9.webp",
+    "posts/2026-11-26-basement-finishing-mukilteo-wa.md",
+    "posts/2026-11-26-basement-finishing-mukilteo-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 114
+}
