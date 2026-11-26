@@ -22,6 +22,8 @@ Whether you are near downtown [Bothell](../bothell.html), Canyon Park, North Cre
 
 HOA or design-review rules can affect exterior exhaust terminations, window changes in a bath, or visible roof penetrations even when the wet room itself is interior-only. Put those constraints in the proposal so they are not discovered after rough-in is underway. Cross-check [plumber.html](../plumber.html) and [electrician.html](../electrician.html) when fixture moves and circuit work share the same critical path.
 
+![Split-level home with evergreen trees on a residential street in Bothell, Washington, a typical bathroom remodel candidate](../assets/images/posts/2026-09-23-bothell-bathroom-street-6.webp "Many Bothell homes from the 1970s through the 1990s still have original hall and primary bathrooms.")
+
 ## Climate, moisture, and permitting realities
 
 Western Washington bathrooms live with cool outdoor air and long damp seasons. Condensation on exterior walls, slow-drying grout, and fans that dump into attics show up as soft drywall and failed caulk long before style looks dated. Prefer continuous [waterproofing](../bathroom-waterproofing-guide.html) in the wet zone, correct slope to the drain, and exhaust terminated outdoors with a quiet, appropriately rated fan. Fancy finishes cannot compensate for a pan that ponds or a niche that was never banded into the membrane.
@@ -45,6 +47,8 @@ https://www.youtube.com/watch?v=qrObaJbftcE
 
 [Watch the short process clip](../assets/videos/posts/2026-09-shared-waterproofing.mp4)
 
+![Bathroom exhaust fan housing and insulated duct installed in an open ceiling during a bathroom remodel in Bothell, Washington](../assets/images/posts/2026-09-23-bothell-bathroom-fan-duct-7.webp "An exhaust fan and duct roughed in while the ceiling is open during a Bothell bathroom remodel.")
+
 ## Design, trades, and coordination
 
 Measure the wet zone, valve height, niche, and glass opening before you lock a catalog number. Glass lead times can dominate the end of the schedule — measure only after walls are true. Coordinate plumber and electrician so one trade’s fastener line does not puncture the membrane the next trade just finished. Keep exhaust duct routing visible on the plan so it is not improvised through joist bays after tile is ordered.
@@ -64,6 +68,8 @@ Manufacturer product pages for wet-area assemblies and fixtures when you compare
 - [Schluter Systems](https://www.schluter.com/schluter-us/en_US/) — tile waterproofing assemblies for showers and wet walls
 - [Kohler bath fixtures](https://www.kohler.com/en) — fixtures commonly discussed in primary-bath scopes
 - [Benjamin Moore paint](https://www.benjaminmoore.com/) — humid-room-rated interior finishes for baths
+
+![Porcelain tile, waterproofing membrane and vanity top samples laid out for a bathroom remodel in Bothell, Washington](../assets/images/posts/2026-09-23-bothell-bathroom-materials-8.webp "Tile, membrane and vanity-top samples compared side by side before a Bothell bathroom order.")
 
 ## FAQ
 
@@ -92,6 +98,8 @@ When you interview firms, ask them to walk a recent Eastside bath chronologicall
 Use the Board directories as a starting shortlist — especially [bathrooms](../bathrooms.html) — then verify fit on a site visit. Where Pacific Pro Group appears as the Board’s editorial #1 for kitchen, bath, or additions work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden membranes before tile closes. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
+
+![Finished hall bathroom remodel with a tiled tub surround and new vanity in a Bothell, Washington home](../assets/images/posts/2026-09-23-bothell-bathroom-finished-9.webp "A finished hall bathroom in a Bothell home after permits and inspections were closed out.")
 
 **Related on the Board:** [Home Addition Bothell WA](2026-08-20-home-addition-bothell-wa.html) and [bathroom cost factors](../bathroom-cost-factors.html).
 
