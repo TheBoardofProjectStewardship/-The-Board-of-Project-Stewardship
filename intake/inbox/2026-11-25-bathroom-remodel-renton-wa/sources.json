@@ -1,0 +1,214 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Renton",
+    "service": "Bathroom remodel: Residential Interior Remodel permit, separate trade permits, asbestos/lead, septic approval, ventilation, waterproofing, inspections, hiring",
+    "slug": "bathroom-remodel-renton-wa"
+  },
+  "sources": [
+    {
+      "url": "https://kingcounty.gov/en/dept/dnrp/waste-services/garbage-recycling-compost/services/construction-demolition",
+      "title": "https://kingcounty.gov/en/dept/dnrp/waste-services/garbage-recycling-compost/services/construction-demolition",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "King County C&D materials"
+    },
+    {
+      "url": "https://kingcounty.gov/en/dept/dph/health-safety/environmental-health/permits",
+      "title": "https://kingcounty.gov/en/dept/dph/health-safety/environmental-health/permits",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "King County Environmental Health permits (septic)"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "State hiring guidance"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/other-licenses-permits/asbestos-certification",
+      "title": "https://lni.wa.gov/licensing-permits/other-licenses-permits/asbestos-certification",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "L&I asbestos certification / AHERA good faith inspection"
+    },
+    {
+      "url": "https://maps.rentonwa.gov/Html5viewer/Index.html?viewer=CORmaps",
+      "title": "https://maps.rentonwa.gov/Html5viewer/Index.html?viewer=CORmaps",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Renton COR Maps (city limits)"
+    },
+    {
+      "url": "https://pacificprogroup.com/",
+      "title": "https://pacificprogroup.com/",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Board #1 contractor link"
+    },
+    {
+      "url": "https://permitting.rentonwa.gov/#/home",
+      "title": "https://permitting.rentonwa.gov/#/home",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Renton online permitting portal (CASSP)"
+    },
+    {
+      "url": "https://pscleanair.gov/185/Asbestos",
+      "title": "https://pscleanair.gov/185/Asbestos",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Puget Sound Clean Air Agency asbestos"
+    },
+    {
+      "url": "https://sbcc.wa.gov/state-codes-regulations-guidelines/state-building-code/energy-code",
+      "title": "https://sbcc.wa.gov/state-codes-regulations-guidelines/state-building-code/energy-code",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Washington State Energy Code page"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "License/bond/insurance lookup"
+    },
+    {
+      "url": "https://www.dreamline.com/",
+      "title": "https://www.dreamline.com/",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Material maker"
+    },
+    {
+      "url": "https://www.energystar.gov/products/ventilation_fans",
+      "title": "https://www.energystar.gov/products/ventilation_fans",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Energy Star ventilation fans"
+    },
+    {
+      "url": "https://www.epa.gov/lead/lead-renovation-repair-and-painting-program",
+      "title": "https://www.epa.gov/lead/lead-renovation-repair-and-painting-program",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "EPA RRP lead rule"
+    },
+    {
+      "url": "https://www.fireclaytile.com/",
+      "title": "https://www.fireclaytile.com/",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Material maker"
+    },
+    {
+      "url": "https://www.hansgrohe-usa.com/",
+      "title": "https://www.hansgrohe-usa.com/",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Material maker"
+    },
+    {
+      "url": "https://www.pse.com/en/rebates",
+      "title": "https://www.pse.com/en/rebates",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "PSE rebates"
+    },
+    {
+      "url": "https://www.rentonwa.gov/City-Services/Permit-Services/Building-Fire-and-Signs/Building-Permits-FAQ",
+      "title": "https://www.rentonwa.gov/City-Services/Permit-Services/Building-Fire-and-Signs/Building-Permits-FAQ",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Renton Building Permits FAQ"
+    },
+    {
+      "url": "https://www.rentonwa.gov/City-Services/Permit-Services/Building-Fire-and-Signs/Residential-Interior-Remodels",
+      "title": "https://www.rentonwa.gov/City-Services/Permit-Services/Building-Fire-and-Signs/Residential-Interior-Remodels",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Renton Residential Interior Remodels permit page"
+    },
+    {
+      "url": "https://www.rentonwa.gov/City-Services/Permit-Services/Online-Permit-Portal-Help",
+      "title": "https://www.rentonwa.gov/City-Services/Permit-Services/Online-Permit-Portal-Help",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Renton Online Permit Portal Help"
+    },
+    {
+      "url": "https://www.rentonwa.gov/Government/Departments-and-Offices/Parks-and-Recreation/Community-support-assistance/Human-Services/Housing-Repair-Assistance-Program",
+      "title": "https://www.rentonwa.gov/Government/Departments-and-Offices/Parks-and-Recreation/Community-support-assistance/Human-Services/Housing-Repair-Assistance-Program",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Renton Housing Repair Assistance Program"
+    },
+    {
+      "url": "https://www.warmlyyours.com/",
+      "title": "https://www.warmlyyours.com/",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Material maker"
+    },
+    {
+      "url": "https://www.wedi.net/",
+      "title": "https://www.wedi.net/",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Material maker"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=6MOV4H6SZqs",
+      "title": "https://www.youtube.com/watch?v=6MOV4H6SZqs",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Construction process video embed"
+    },
+    {
+      "url": "https://youtu.be/RYwHxlgN0ck",
+      "title": "https://youtu.be/RYwHxlgN0ck",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Board of Project Stewardship YouTube video"
+    },
+    {
+      "url": "https://youtu.be/SAcc8lZf_wE",
+      "title": "https://youtu.be/SAcc8lZf_wE",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Board of Project Stewardship YouTube video"
+    },
+    {
+      "url": "https://youtu.be/VrzuU8ksw2A",
+      "title": "https://youtu.be/VrzuU8ksw2A",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Board of Project Stewardship YouTube video"
+    },
+    {
+      "url": "https://youtu.be/p_-PeeU8o3E",
+      "title": "https://youtu.be/p_-PeeU8o3E",
+      "retrieved": "2026-11-26",
+      "http_status": 200,
+      "supports": "Board of Project Stewardship YouTube video"
+    }
+  ],
+  "dropped": [
+    {
+      "url": "https://www.mapei.com/us/en-us/home-page",
+      "reason": "403 to box curl on recheck"
+    },
+    {
+      "url": "https://www.waenergycodes.com/",
+      "reason": "commercial-provisions support site; SBCC page used"
+    },
+    {
+      "url": "https://www.codepublishing.com/WA/Renton/",
+      "reason": "not fetched (403 pattern to box); RMC quoted via City FAQ"
+    }
+  ],
+  "notes": "Box curl 2026-11-26 with browser UA. All cited = 200 (see cited-status.txt). No fee or price figures quoted. No email addresses in body."
+}

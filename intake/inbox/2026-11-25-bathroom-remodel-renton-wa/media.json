@@ -1,0 +1,92 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-11-25-renton-bath-1.webp",
+      "repo_path": "assets/images/posts/2026-11-25-renton-bath-1.webp",
+      "alt": "Renton, WA bathroom remodel finished: a bright bathroom with a walk-in tiled shower behind clear glass, a floating vanity and a matte black faucet \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "953fdebfc48ac8fc7fb894f1a047f7a6",
+      "source": "Newly generated image (built-in image generator, 2026-11-26), source gen-1 converted to 1600x900 webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-25-renton-bath-2.webp",
+      "repo_path": "assets/images/posts/2026-11-25-renton-bath-2.webp",
+      "alt": "Renton, WA bathroom remodel planning: a floor plan sketch, tape measure and tile samples on a table, used to map fixture locations before applying \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "92a79aa5052e7043b32663a67fdebcfa",
+      "source": "Newly generated image (built-in image generator, 2026-11-26), source gen-2 converted to 1600x900 webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-25-renton-bath-3.webp",
+      "repo_path": "assets/images/posts/2026-11-25-renton-bath-3.webp",
+      "alt": "Renton, WA bathroom remodel rough-in: open stud walls with new PEX supply lines, a shower valve and drain piping before inspection \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "a1bc79b4d223ddda78536aacb6e49453",
+      "source": "Newly generated image (built-in image generator, 2026-11-26), source gen-3 converted to 1600x900 webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-25-renton-bath-4.webp",
+      "repo_path": "assets/images/posts/2026-11-25-renton-bath-4.webp",
+      "alt": "Renton, WA bathroom remodel ventilation: a ceiling exhaust fan housing mounted between joists with insulated duct running toward the exterior wall \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "52d682673ae9a36541e09478469a44a2",
+      "source": "Newly generated image (built-in image generator, 2026-11-26), source gen-4 converted to 1600x900 webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-25-renton-bath-5.webp",
+      "repo_path": "assets/images/posts/2026-11-25-renton-bath-5.webp",
+      "alt": "Renton, WA bathroom remodel waterproofing: a shower stall coated with a waterproofing membrane over backer board, with a sloped floor and a linear drain \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "81808b663a1467c27f53f634516ed84a",
+      "source": "Newly generated image (built-in image generator, 2026-11-26), source gen-5 converted to 1600x900 webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-25-renton-bath-6.webp",
+      "repo_path": "assets/images/posts/2026-11-25-renton-bath-6.webp",
+      "alt": "Renton, WA bathroom remodel tile work: a tile setter laying large-format porcelain tile on a shower wall with spacers and a level \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "6415f7b64dfd64977928d956eae23e67",
+      "source": "Newly generated image (built-in image generator, 2026-11-26), source gen-6 converted to 1600x900 webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-25-renton-bath-7.webp",
+      "repo_path": "assets/images/posts/2026-11-25-renton-bath-7.webp",
+      "alt": "Renton, WA bathroom remodel inspection: a building inspector with a clipboard reviewing an open wall and new shower valve with the homeowner \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "dab783786eed94ce8b027f566cff80c4",
+      "source": "Newly generated image (built-in image generator, 2026-11-26), source gen-7 converted to 1600x900 webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-25-renton-bath-8.webp",
+      "repo_path": "assets/images/posts/2026-11-25-renton-bath-8.webp",
+      "alt": "Renton, WA bathroom remodel materials: tile samples, a brushed nickel shower valve trim, grout swatches and a waterproofing membrane roll laid out on a counter \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "74d5788873d81eaa8e0ccb9c41ac6333",
+      "source": "Newly generated image (built-in image generator, 2026-11-26), source gen-8 converted to 1600x900 webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-25-renton-bath-9.webp",
+      "repo_path": "assets/images/posts/2026-11-25-renton-bath-9.webp",
+      "alt": "Renton, WA bathroom remodel complete: a finished bathroom with soft evening light, a freestanding tub, wood-look tile floor and a large mirror \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "310b6a61453eeb647bc89460f81dde50",
+      "source": "Newly generated image (built-in image generator, 2026-11-26), source gen-9 converted to 1600x900 webp q82"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "6MOV4H6SZqs",
+      "url": "https://www.youtube.com/watch?v=6MOV4H6SZqs",
+      "title": "How a Bathroom Vent Fan Works | This First House",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "9 newly generated images (built-in generator), 0 regraded stills, 0 paid media."
+}
