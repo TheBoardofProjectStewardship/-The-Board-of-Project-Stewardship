@@ -147,6 +147,8 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 
 A dry crawl space is mostly about getting the order right: water away from the house first, a proper ground cover, a deliberate vented or sealed design, then repairs. The contractor who explains that order in writing, with the Washington code sections attached, is usually the one who leaves you with a crawl space that stays dry through an Auburn winter.
 
+Watch: [What's Under Your Floor? Crawlspace Cutaway #shorts](https://www.youtube.com/shorts/W6fmYi99SC8) (Board video, 0:23).
+
 **Related on the Board:** [remodel cost factors](../remodel-cost-factors.html) and [change orders and allowances](../change-orders.html).
 
 ## Watch on the Board's YouTube

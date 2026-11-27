@@ -482,6 +482,7 @@ ARTICLES = [
             ("../../bathroom-waterproofing-guide.html", "Bathroom waterproofing guide"),
             ("../../coastal-waterproofing.html", "Coastal waterproofing"),
         ],
+        "video": ("https://www.youtube.com/shorts/6Ktz52DzAG0", "What's Inside a Wall? #shorts", "0:23"),
     },
     {
         "slug": "stairs",
@@ -1072,6 +1073,11 @@ def build_article(item: dict) -> str:
     if item.get("diagram"):
         body.append(DIAGRAMS[item["diagram"]])
     body.append('<div class="learn-prose">' + "".join(item["body"]) + "</div>")
+    if item.get("video"):
+        v_url, v_title, v_len = item["video"]
+        body.append(
+            f'<p class="learn-related">Watch: <a href="{esc(v_url)}" target="_blank" rel="noopener">{esc(v_title)}</a> (Board video, {esc(v_len)}).</p>'
+        )
     body.append(related(item["related"]))
     return (
         head(item["name"], desc, canon, article + crumb_ld([(n, ORIGIN + "/" + (h or "")) for n, h in crumbs]), 2, "article", slug)

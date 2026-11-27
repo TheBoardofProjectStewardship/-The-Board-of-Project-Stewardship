@@ -1,5 +1,5 @@
 {
-  "_readme": "Board of Project Stewardship YouTube videos that link_pass.py may link. channel_id must stay UCpej558rCLbYWTt3tEW6a5A. Add a new entry (or run `python3 link_pass.py sync-youtube`) after each upload; only public videos from the channel's own feed are accepted. service: additions | kitchen | bathroom | custom-homes | general. place: a city slug, a county slug (king-county, snohomish-county) or null for any place.",
+  "_readme": "Board of Project Stewardship YouTube videos that link_pass.py may link. channel_id must stay UCpej558rCLbYWTt3tEW6a5A. Add a new entry (or run `python3 link_pass.py sync-youtube`) after each upload; only public videos from the channel's own feed are accepted. service: additions | kitchen | bathroom | custom-homes | general. place: a city slug, a county slug (king-county, snohomish-county) or null for any place. kind 'explainer' = a non-listicle Board video (never used for inline listicle anchors). topics = optional hint for hand-placed links (link_pass ignores it).",
   "channel_id": "UCpej558rCLbYWTt3tEW6a5A",
   "videos": [
     {"id": "p9EkSxB2660", "url": "https://youtu.be/p9EkSxB2660", "title": "5 Best Home Addition Contractors in Edmonds, WA", "kind": "listicle", "service": "additions", "place": "edmonds"},
@@ -11,6 +11,11 @@
     {"id": "3f8J0J_AxsQ", "url": "https://youtu.be/3f8J0J_AxsQ", "title": "5 Best Home Addition Contractors in King County, WA (2026)", "kind": "listicle", "service": "additions", "place": "king-county"},
     {"id": "p_-PeeU8o3E", "url": "https://youtu.be/p_-PeeU8o3E", "title": "4 Best Bathroom Remodelers in Lynnwood, WA (2026)", "kind": "listicle", "service": "bathroom", "place": "lynnwood"},
     {"id": "VrzuU8ksw2A", "url": "https://youtu.be/VrzuU8ksw2A", "title": "5 Best Kitchen Remodelers in King County, WA (2026)", "kind": "listicle", "service": "kitchen", "place": "king-county"},
-    {"id": "EvOh_7_3za4", "url": "https://www.youtube.com/shorts/EvOh_7_3za4", "title": "Adding On? Freeze These 6 Things Before You Ask for a Price", "kind": "short", "service": "additions", "place": null}
+    {"id": "EvOh_7_3za4", "url": "https://www.youtube.com/shorts/EvOh_7_3za4", "title": "Adding On? Freeze These 6 Things Before You Ask for a Price", "kind": "short", "service": "additions", "place": null},
+    {"id": "aD1aZG5Rl2M", "url": "https://youtu.be/aD1aZG5Rl2M", "title": "7 Contractor Red Flags in Washington (Before You Sign)", "kind": "explainer", "service": "general", "place": null, "topics": ["red-flags", "verify-contractor", "hiring"], "disabled": false},
+    {"id": "W6fmYi99SC8", "url": "https://www.youtube.com/shorts/W6fmYi99SC8", "title": "What's Under Your Floor? Crawlspace Cutaway #shorts", "kind": "short", "service": "general", "place": null, "topics": ["crawl-space", "flooring", "building-science"], "disabled": false},
+    {"id": "6Ktz52DzAG0", "url": "https://www.youtube.com/shorts/6Ktz52DzAG0", "title": "What's Inside a Wall? #shorts", "kind": "short", "service": "general", "place": null, "topics": ["wall-assembly", "building-science"], "disabled": false},
+    {"id": "OzYDOc_xyDY", "url": "https://youtu.be/OzYDOc_xyDY", "title": "Renton Remodel: Before and After (and the Messy Middle)", "kind": "explainer", "service": "general", "place": "renton", "topics": ["before-after", "hiring", "timeline"], "disabled": false},
+    {"id": "3Pb8_vxJrrA", "url": "https://youtu.be/3Pb8_vxJrrA", "title": "6 Phases of a Remodel, Shown on 1 Real Job", "kind": "explainer", "service": "general", "place": null, "topics": ["project-timeline", "design-build"], "disabled": false}
   ]
 }

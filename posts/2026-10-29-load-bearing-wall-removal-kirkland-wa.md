@@ -143,6 +143,8 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 
 The best open-concept remodels in Kirkland start with the structure, not the cabinets. A contractor who talks first about the engineer, the shoring and the load path, and puts those details in writing, is usually the one worth hiring.
 
+Watch: [What's Inside a Wall? #shorts](https://www.youtube.com/shorts/6Ktz52DzAG0) (Board video, 0:23).
+
 **Related on the Board:** [Home Addition Kirkland WA](2026-09-19-home-addition-kirkland-wa.html) and [kitchen cost factors](../kitchen-cost-factors.html).
 
 ## Watch on the Board's YouTube

@@ -137,6 +137,8 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 
 A clear City permit map and a moisture-smart scope beat a beautiful mood board that never survives rough-in. Start with jurisdiction, asbestos, and septic blockers, then choose finishes that match how Renton basements actually get inspected and lived in.
 
+Watch: [Renton Remodel: Before and After (and the Messy Middle)](https://youtu.be/OzYDOc_xyDY) (Board video, 0:32).
+
 **Related on the Board:** [Exterior House Painting Renton WA](2026-11-03-exterior-house-painting-renton-wa.html) and [electrician and electrical directory](../electrician.html).
 
 ## Watch on the Board's YouTube

@@ -3182,6 +3182,48 @@ def verification_meta_html() -> str:
     return "\n".join(tags) + "\n"
 
 
+# Board YouTube videos placed on specific guide pages (round 3, Nov 27 2026).
+# Keyed by published path; titles are the exact YouTube titles. embed=True uses the
+# click-to-load facade (apply_iframe_pass turns the iframe into a button). Pages not
+# listed here are unchanged.
+_BV = {
+    "v1": ("aD1aZG5Rl2M", "7 Contractor Red Flags in Washington (Before You Sign)", "https://youtu.be/aD1aZG5Rl2M", "0:45"),
+    "v2": ("W6fmYi99SC8", "What's Under Your Floor? Crawlspace Cutaway #shorts", "https://www.youtube.com/shorts/W6fmYi99SC8", "0:23"),
+    "v4": ("OzYDOc_xyDY", "Renton Remodel: Before and After (and the Messy Middle)", "https://youtu.be/OzYDOc_xyDY", "0:32"),
+    "v5": ("3Pb8_vxJrrA", "6 Phases of a Remodel, Shown on 1 Real Job", "https://youtu.be/3Pb8_vxJrrA", "0:47"),
+}
+BOARD_VIDEOS: dict[str, list[tuple[str, bool]]] = {
+    "red-flags-hiring.html": [("v1", True)],
+    "verify-contractor.html": [("v1", False)],
+    "hire-questions.html": [("v1", False)],
+    "hiring-a-contractor.html": [("v4", False), ("v1", False)],
+    "project-timeline.html": [("v5", True), ("v4", False)],
+    "flooring.html": [("v2", False)],
+    "renton.html": [("v4", False)],
+}
+
+
+def board_video_section(rel: str) -> str:
+    """Board video block for a page listed in BOARD_VIDEOS; empty string otherwise."""
+    items = BOARD_VIDEOS.get(rel)
+    if not items:
+        return ""
+    parts = []
+    for key, embed in items:
+        vid, title, url, length = _BV[key]
+        if embed:
+            parts.append(
+                '      <div class="relative w-full pb-[56.25%] h-0 rounded-xl overflow-hidden border border-white/10 bg-black mb-4">'
+                f'<iframe src="https://www.youtube-nocookie.com/embed/{vid}" title="{esc(title)}" '
+                'allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>\n'
+            )
+        parts.append(
+            f'      <p class="text-sm text-slate-300 font-light leading-relaxed mb-2">Watch: <a href="{esc(url)}" target="_blank" rel="noopener" '
+            f'class="text-secondary hover:underline">{esc(title)}</a> (Board video, {length}).</p>\n'
+        )
+    return _hub_section("Watch on the Board's YouTube", "".join(parts).rstrip("\n"))
+
+
 def page_shell(
     title: str,
     description: str,
@@ -3209,6 +3251,7 @@ def page_shell(
     for obj in json_ld or []:
         ld_objs.append(obj)
     canon = canonical or (BASE_URL + ("" if active in ("home", "about-home") else f"{active}.html" if active != "blog" else "blog.html"))
+    body = body + board_video_section(_rel_from_canonical(canon))
     updated = stored_lastmod(_rel_from_canonical(canon))
     if breadcrumbs:
         ld_objs.append(breadcrumb_ld(list(breadcrumbs), canon))
