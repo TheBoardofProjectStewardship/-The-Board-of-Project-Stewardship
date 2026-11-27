@@ -1,0 +1,25 @@
+{
+  "submission_id": "2026-11-27-laundry-room-remodel-woodinville-wa",
+  "idempotency_key": "sha256:68f97ac7c265dbba87afcca97328ada944e83c12b1e3c7a0b1aeacfef2f879cd",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-11-27T11:44:18Z",
+  "outputs": [
+    "assets/images/posts/2026-11-27-woodinville-laundry-1.webp",
+    "assets/images/posts/2026-11-27-woodinville-laundry-2.webp",
+    "assets/images/posts/2026-11-27-woodinville-laundry-3.webp",
+    "assets/images/posts/2026-11-27-woodinville-laundry-4.webp",
+    "assets/images/posts/2026-11-27-woodinville-laundry-5.webp",
+    "assets/images/posts/2026-11-27-woodinville-laundry-6.webp",
+    "assets/images/posts/2026-11-27-woodinville-laundry-7.webp",
+    "assets/images/posts/2026-11-27-woodinville-laundry-8.webp",
+    "assets/images/posts/2026-11-27-woodinville-laundry-9.webp",
+    "posts/2026-11-27-laundry-room-remodel-woodinville-wa.md",
+    "posts/2026-11-27-laundry-room-remodel-woodinville-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 115
+}

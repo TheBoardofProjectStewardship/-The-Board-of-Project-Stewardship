@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-11-27-laundry-room-remodel-woodinville-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-11-27T12:00:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Laundry Room Remodel Woodinville WA \u2014 Permits, Dryer Vents, Drains, Electrical and Moisture",
+    "date": "2026-11-27",
+    "slug": "laundry-room-remodel-woodinville-wa",
+    "description": "A Woodinville laundry room remodel guide: which City permits apply, L&I electrical permits, dryer vent code rules, washer drains and leak protection, review times, inspections and hiring.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored daily post for 2026-11-27 (built 2026-11-27 early morning). Home PC DESKTOP-B69F181 board-intake inbox (WSL Ubuntu ~/SEO_PLAN_PacificProGroup/board-intake/inbox) read-only at ~3:40 AM PT: no 2026-11-27 entries (newest 2026-11-26 role set); no board post packet used. Topic: laundry room remodel in Woodinville WA (King County). Sources read 2026-11-27: City of Woodinville permitting FAQ (plumbing fixture/water heater/gas line/mechanical appliance permits; remodels creating walls or converting garages/basements; window/door changes; interior finish work, cabinets and counters exempt; partitions under 5 ft 9 in exempt; unpermitted-work consequences; turnaround times: SF plumbing/mechanical alteration 1 week, SF building alteration 2-5 weeks; fee basis without figures; plan set contents; owner may do own work, hired contractors must be state licensed; inspections; Woodinville Water District; septic via Public Health - Seattle & King County); Commercial & Residential Construction Permits (8 steps, combined Building/Mechanical/Plumbing application, contractor license + Woodinville business license before issuance, C&D recycling); Electrical Permits (L&I reviews, issues and inspects); My Property Info; Apply for a Permit Online; Applications & Forms; Permitting; Inspections (current issued permit required, phone requests by 3:00 PM previous business day, online cancel before 6:00 AM); WAC 51-51-003 (2021 IRC adopted; plumbing 51-56, electrical 296-46B); IRC 2021 M1502 clothes dryer exhaust (independent to outdoors, ductless exception, 3 ft termination default, backdraft damper, no screen, 28 gage smooth metal 4 in, 12 ft support, joints, UL 2158A transition max 8 ft not concealed, no booster fans, UL 705 power ventilator, 35 ft max with fitting table, manufacturer instructions at concealment inspection, label over 35 ft, exhaust duct required); L&I electrical permits (WAC 296-46B-901, contractor or owner doing work buys, before work, 2023 NEC); L&I Electrical Basics; ENERGY STAR clothes dryers (heat pump ~70% less energy, closed loop) and washers (20% less energy, 30% less water; front-load ~50% vs top-load agitator); PSE washer/dryer rebates (eligibility only, no amounts); King County permits; L&I hiring a contractor + Verify; EPA RRP contractors (pre-1978). Woodinville place token already in generate_site.py; no generator change; woodinville.html unchanged. 37 unique contextual internal links. 4 Board YouTube links (channel UCpej558rCLbYWTt3tEW6a5A). No fee, price or rebate dollar figures. Producer role fields kept per intake contract."
+}
