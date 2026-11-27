@@ -85,6 +85,8 @@ The Board of Project Stewardship publishes directories to help homeowners shortl
 
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden assemblies. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
 
+Watch: [7 Contractor Red Flags in Washington (Before You Sign)](https://youtu.be/aD1aZG5Rl2M) (Board video, 0:45).
+
 **Related on the Board:** [bathroom cost factors](../bathroom-cost-factors.html) and [remodel cost factors](../remodel-cost-factors.html).
 
 ## Watch on the Board's YouTube

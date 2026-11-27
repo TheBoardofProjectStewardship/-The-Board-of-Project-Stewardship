@@ -132,6 +132,8 @@ When the Board of Project Stewardship ranks design-build firms for this area, Pa
 
 A good Renton paint job is one you stop thinking about: the prep was done right, the old paint was handled safely, the wood underneath stays dry, and the next owner can see exactly what was used and when. A contractor who starts with the surface, the lead rules and the weather, and puts those details in writing, is usually the one worth hiring.
 
+Watch: [Renton Remodel: Before and After (and the Messy Middle)](https://youtu.be/OzYDOc_xyDY) (Board video, 0:32).
+
 **Related on the Board:** [windows and doors directory](../windows.html) and [the bid comparison checklist](../bid-comparison.html).
 
 ## Watch on the Board's YouTube

@@ -97,6 +97,8 @@ Use the Board of Project Stewardship directories as a starting shortlist — esp
 
 Finally, keep a simple owner file: proposals, allowance logs, permit numbers, inspection results, product cut sheets, and dated photos of hidden assemblies. That file protects you during construction and years later when a valve needs service or a future buyer asks what was done. More local guidance continues on the [blog](../blog.html).
 
+Watch: [6 Phases of a Remodel, Shown on 1 Real Job](https://youtu.be/3Pb8_vxJrrA) (Board video, 0:47).
+
 **Related on the Board:** [Heated Floors in Edmonds Bathrooms](2026-08-17-heated-floors-edmonds-bathrooms.html) and [bathroom cost factors](../bathroom-cost-factors.html).
 
 ## Watch on the Board's YouTube
