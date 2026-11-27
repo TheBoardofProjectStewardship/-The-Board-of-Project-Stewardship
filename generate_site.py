@@ -7973,8 +7973,15 @@ def build_news_story_page(story: dict, news_names: set[str] | None = None, relat
     photo_place = news_photo_place(story)
     _PHOTO_CTX["place"] = photo_place
     _PHOTO_CTX["topic"] = "news"
+    # Body text is escaped before Markdown links are parsed, so a raw &
+    # in a URL is already &amp; when the href is escaped again. Unescape
+    # the href first so news links publish as a single &amp;.
     article_html = rewrite_post_root_hrefs(
-        md_to_html(story.get("body_md") or "", balanced_url_parens=True),
+        md_to_html(
+            story.get("body_md") or "",
+            link_unescape=True,
+            balanced_url_parens=True,
+        ),
         news_names or set(),
     )
     canon = f"{BASE_URL}news/{story['out_name']}"
