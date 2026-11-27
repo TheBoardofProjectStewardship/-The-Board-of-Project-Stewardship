@@ -1,0 +1,221 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Woodinville",
+    "service": "Laundry room remodel: City building/plumbing/mechanical permits, L&I electrical, dryer vent code M1502, washer drains and leak protection, efficiency, inspections, hiring",
+    "slug": "laundry-room-remodel-woodinville-wa"
+  },
+  "sources": [
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51-003",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51-003",
+      "retrieved": "2026-11-27",
+      "http_status": 200,
+      "supports": "WAC 51-51-003 IRC adoption"
+    },
+    {
+      "url": "https://codes.iccsafe.org/s/IRC2021P2/chapter-15-exhaust-systems/IRC2021P2-Pt05-Ch15-SecM1502",
+      "title": "https://codes.iccsafe.org/s/IRC2021P2/chapter-15-exhaust-systems/IRC2021P2-Pt05-Ch15-SecM1502",
+      "retrieved": "2026-11-27",
+      "http_status": 200,
+      "supports": "IRC 2021 M1502 clothes dryer exhaust"
+    },
+    {
+      "url": "https://dryerbox.com/",
+      "title": "https://dryerbox.com/",
+      "retrieved": "2026-11-27",
+      "http_status": 200,
+      "supports": "Material maker"
+    },
+    {
+      "url": "https://kingcounty.gov/en/dept/local-services/certificates-permits-licenses/permits",
+      "title": "https://kingcounty.gov/en/dept/local-services/certificates-permits-licenses/permits",
+      "retrieved": "2026-11-27",
+      "http_status": 200,
+      "supports": "King County permits"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "retrieved": "2026-11-27",
+      "http_status": 200,
+      "supports": "State hiring guidance"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/",
+      "title": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/",
+      "retrieved": "2026-11-27",
+      "http_status": 200,
+      "supports": "L&I electrical permits, fees and inspections"
+    },
+    {
+      "url": "https://pacificprogroup.com/",
+      "title": "https://pacificprogroup.com/",
+      "retrieved": "2026-11-27",
+      "http_status": 200,
+      "supports": "Board #1 contractor link"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-11-27",
+      "http_status": 200,
+      "supports": "License/bond/insurance lookup"
+    },
+    {
+      "url": "https://www.deflecto.com/",
+      "title": "https://www.deflecto.com/",
+      "retrieved": "2026-11-27",
+      "http_status": 200,
+      "supports": "Material maker"
+    },
+    {
+      "url": "https://www.energystar.gov/products/clothes_dryers",
+      "title": "https://www.energystar.gov/products/clothes_dryers",
+      "retrieved": "2026-11-27",
+      "http_status": 200,
+      "supports": "ENERGY STAR clothes dryers"
+    },
+    {
+      "url": "https://www.energystar.gov/products/clothes_washers",
+      "title": "https://www.energystar.gov/products/clothes_washers",
+      "retrieved": "2026-11-27",
+      "http_status": 200,
+      "supports": "ENERGY STAR clothes washers"
+    },
+    {
+      "url": "https://www.epa.gov/lead/renovation-repair-and-painting-program-contractors",
+      "title": "https://www.epa.gov/lead/renovation-repair-and-painting-program-contractors",
+      "retrieved": "2026-11-27",
+      "http_status": 200,
+      "supports": "EPA RRP lead rule"
+    },
+    {
+      "url": "https://www.lni.wa.gov/licensing-permits/electrical/electrical-basics-for-home-business-owners/",
+      "title": "https://www.lni.wa.gov/licensing-permits/electrical/electrical-basics-for-home-business-owners/",
+      "retrieved": "2026-11-27",
+      "http_status": 200,
+      "supports": "L&I Electrical Basics for Home & Business Owners"
+    },
+    {
+      "url": "https://www.oatey.com/",
+      "title": "https://www.oatey.com/",
+      "retrieved": "2026-11-27",
+      "http_status": 200,
+      "supports": "Material maker"
+    },
+    {
+      "url": "https://www.pse.com/en/rebates/appliances/fridge-and-clothes-washer-rebates",
+      "title": "https://www.pse.com/en/rebates/appliances/fridge-and-clothes-washer-rebates",
+      "retrieved": "2026-11-27",
+      "http_status": 200,
+      "supports": "PSE washer and dryer rebates (eligibility only)"
+    },
+    {
+      "url": "https://www.woodinville.gov/200/Permitting",
+      "title": "https://www.woodinville.gov/200/Permitting",
+      "retrieved": "2026-11-27",
+      "http_status": 200,
+      "supports": "Woodinville Permitting"
+    },
+    {
+      "url": "https://www.woodinville.gov/201/My-Property-Info",
+      "title": "https://www.woodinville.gov/201/My-Property-Info",
+      "retrieved": "2026-11-27",
+      "http_status": 200,
+      "supports": "Woodinville My Property Info"
+    },
+    {
+      "url": "https://www.woodinville.gov/347/Apply-for-a-Permit-Online",
+      "title": "https://www.woodinville.gov/347/Apply-for-a-Permit-Online",
+      "retrieved": "2026-11-27",
+      "http_status": 200,
+      "supports": "Woodinville online permit portal"
+    },
+    {
+      "url": "https://www.woodinville.gov/348/Applications-Forms",
+      "title": "https://www.woodinville.gov/348/Applications-Forms",
+      "retrieved": "2026-11-27",
+      "http_status": 200,
+      "supports": "Woodinville Applications & Forms"
+    },
+    {
+      "url": "https://www.woodinville.gov/364/Commercial-Residential-Construction-Perm",
+      "title": "https://www.woodinville.gov/364/Commercial-Residential-Construction-Perm",
+      "retrieved": "2026-11-27",
+      "http_status": 200,
+      "supports": "Woodinville Commercial & Residential Construction Permits"
+    },
+    {
+      "url": "https://www.woodinville.gov/367/Electrical-Permits",
+      "title": "https://www.woodinville.gov/367/Electrical-Permits",
+      "retrieved": "2026-11-27",
+      "http_status": 200,
+      "supports": "Woodinville Electrical Permits"
+    },
+    {
+      "url": "https://www.woodinville.gov/370/Inspections",
+      "title": "https://www.woodinville.gov/370/Inspections",
+      "retrieved": "2026-11-27",
+      "http_status": 200,
+      "supports": "Woodinville Inspections"
+    },
+    {
+      "url": "https://www.woodinville.gov/FAQ.aspx?QID=78",
+      "title": "https://www.woodinville.gov/FAQ.aspx?QID=78",
+      "retrieved": "2026-11-27",
+      "http_status": 200,
+      "supports": "Woodinville permitting FAQ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=yYDMPPZbEWY",
+      "title": "https://www.youtube.com/watch?v=yYDMPPZbEWY",
+      "retrieved": "2026-11-27",
+      "http_status": 200,
+      "supports": "Construction process video embed"
+    },
+    {
+      "url": "https://youtu.be/3f8J0J_AxsQ",
+      "title": "https://youtu.be/3f8J0J_AxsQ",
+      "retrieved": "2026-11-27",
+      "http_status": 200,
+      "supports": "Board of Project Stewardship YouTube video"
+    },
+    {
+      "url": "https://youtu.be/EvOh_7_3za4",
+      "title": "https://youtu.be/EvOh_7_3za4",
+      "retrieved": "2026-11-27",
+      "http_status": 200,
+      "supports": "Board of Project Stewardship YouTube video"
+    },
+    {
+      "url": "https://youtu.be/SAcc8lZf_wE",
+      "title": "https://youtu.be/SAcc8lZf_wE",
+      "retrieved": "2026-11-27",
+      "http_status": 200,
+      "supports": "Board of Project Stewardship YouTube video"
+    },
+    {
+      "url": "https://youtu.be/VrzuU8ksw2A",
+      "title": "https://youtu.be/VrzuU8ksw2A",
+      "retrieved": "2026-11-27",
+      "http_status": 200,
+      "supports": "Board of Project Stewardship YouTube video"
+    }
+  ],
+  "dropped": [
+    {
+      "url": "https://www.woodinvillewater.com/",
+      "reason": "intermittent 000/timeout to box curl; District named in text without link"
+    },
+    {
+      "url": "https://www.codepublishing.com/WA/Woodinville/html/Woodinville21/Woodinville2162.html",
+      "reason": "403 to box; City FAQ used instead"
+    },
+    {
+      "url": "https://www.energystar.gov/products/heat_pump_dryers",
+      "reason": "404; clothes dryers page used"
+    }
+  ],
+  "notes": "Box curl 2026-11-27 with browser UA. All cited = 200 (see cited-status.txt). No fee, price or rebate dollar figures quoted. No email addresses in body."
+}

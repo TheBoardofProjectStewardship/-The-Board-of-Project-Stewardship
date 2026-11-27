@@ -1,0 +1,92 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-11-27-woodinville-laundry-1.webp",
+      "repo_path": "assets/images/posts/2026-11-27-woodinville-laundry-1.webp",
+      "alt": "Woodinville, WA laundry room remodel complete: a bright laundry room with a front-load washer and dryer, cabinets, a folding counter and a window looking out to evergreen trees \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "b616fe433506e83b5e1f742d33340d21",
+      "source": "Newly generated image (built-in image generator, 2026-11-27), source gen-1 converted to 1600x900 webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-27-woodinville-laundry-2.webp",
+      "repo_path": "assets/images/posts/2026-11-27-woodinville-laundry-2.webp",
+      "alt": "Woodinville, WA laundry room remodel planning: a floor plan sketch, tape measure and sample tiles on a planning bench \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "506801a1c5b14b5c67369e8a657af66a",
+      "source": "Newly generated image (built-in image generator, 2026-11-27), source gen-2 converted to 1600x900 webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-27-woodinville-laundry-3.webp",
+      "repo_path": "assets/images/posts/2026-11-27-woodinville-laundry-3.webp",
+      "alt": "Woodinville, WA laundry room remodel rough-in: an open stud wall with a recessed washer outlet box, a drain standpipe and new wiring before inspection \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "6272e92213fb07a0a9a5e9a68eb743f2",
+      "source": "Newly generated image (built-in image generator, 2026-11-27), source gen-3 converted to 1600x900 webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-27-woodinville-laundry-4.webp",
+      "repo_path": "assets/images/posts/2026-11-27-woodinville-laundry-4.webp",
+      "alt": "Woodinville, WA laundry room remodel dryer vent: a short rigid metal duct run from the dryer location to an exterior wall vent hood \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "cf638c8857258749852e848536e70415",
+      "source": "Newly generated image (built-in image generator, 2026-11-27), source gen-4 converted to 1600x900 webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-27-woodinville-laundry-5.webp",
+      "repo_path": "assets/images/posts/2026-11-27-woodinville-laundry-5.webp",
+      "alt": "Woodinville, WA laundry room remodel leak protection: a front-load washer set in a drain pan with a leak sensor on a tile floor \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "f1e6fe97741ab8375d389ffa36af731a",
+      "source": "Newly generated image (built-in image generator, 2026-11-27), source gen-5 converted to 1600x900 webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-27-woodinville-laundry-6.webp",
+      "repo_path": "assets/images/posts/2026-11-27-woodinville-laundry-6.webp",
+      "alt": "Woodinville, WA laundry room remodel cabinets: a utility sink and new cabinets being installed along one wall \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "ca5344190ffd48def067ac3e9addd3cb",
+      "source": "Newly generated image (built-in image generator, 2026-11-27), source gen-6 converted to 1600x900 webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-27-woodinville-laundry-7.webp",
+      "repo_path": "assets/images/posts/2026-11-27-woodinville-laundry-7.webp",
+      "alt": "Woodinville, WA laundry room remodel inspection: an inspector with a clipboard checks open wall plumbing and wiring, face not visible \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "1aca1fa616318f4c0434a4b25152b259",
+      "source": "Newly generated image (built-in image generator, 2026-11-27), source gen-7 converted to 1600x900 webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-27-woodinville-laundry-8.webp",
+      "repo_path": "assets/images/posts/2026-11-27-woodinville-laundry-8.webp",
+      "alt": "Woodinville, WA laundry room remodel materials: tile, a washer drain pan, rigid metal dryer duct and a washer valve box on a workbench \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "c0684bb3328c6d17823636ee599dccc1",
+      "source": "Newly generated image (built-in image generator, 2026-11-27), source gen-8 converted to 1600x900 webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-27-woodinville-laundry-9.webp",
+      "repo_path": "assets/images/posts/2026-11-27-woodinville-laundry-9.webp",
+      "alt": "Woodinville, WA laundry room remodel complete at dusk: a mudroom laundry with a built-in bench, wall hooks and warm lights \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "29b7c8f891b31eaf1ffae41812aec9e0",
+      "source": "Newly generated image (built-in image generator, 2026-11-27), source gen-9 converted to 1600x900 webp q82"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "yYDMPPZbEWY",
+      "url": "https://www.youtube.com/watch?v=yYDMPPZbEWY",
+      "title": "How to Install a Dryer Vent | The Home Depot with @thisoldhouse",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "9 newly generated images (built-in generator), 0 regraded stills, 0 paid media."
+}
