@@ -22,6 +22,8 @@ Whether you are near downtown [Edmonds](../edmonds.html), Perrinville, Meadowdal
 
 HOA or design-review rules can affect color, exposure, trim profile, and visible metal even when the wall plane stays the same. Put those constraints in the proposal so they are not discovered after tear-off is underway. Cross-check [windows.html](../windows.html) and [roofing.html](../roofing.html) when openings or roof-edge flashings must be disturbed to reach a clean wall detail.
 
+![Older rambler with worn wood lap siding on a residential street near the water in Edmonds, Washington, a typical siding replacement candidate](../assets/images/posts/2026-09-22-edmonds-siding-street-6.webp "Many coastal Edmonds homes still carry original wood siding that takes salt air and wind-driven rain.")
+
 ## Climate, WRB, flashings, and permits
 
 King and Snohomish coastal weather punishes reverse-lapped flashings and missing WRB continuity at corners, penetrations, and openings. Water that gets behind a plank needs a clear drain path — not a caulk dam at a window head or door sill. Prefer assemblies that follow manufacturer instructions and a shingle-style weather sequence: sheathing repair as needed, continuous WRB with taped seams, sill pans and jamb/head flashings at windows and doors, starter and clearances at grade, then fiber-cement field courses with joint flashing where required. Do not treat inland Eastside install habits as a free pass for Edmonds or Mukilteo waterfront exposures.
@@ -41,6 +43,8 @@ https://www.youtube.com/watch?v=pEFmR8uXa0E
 Process clip (staging atmosphere for coastal Edmonds-style envelope work — not footage of a live Board job):
 
 [Watch the short process clip](../assets/videos/posts/2026-09-22-edmonds-siding.mp4)
+
+![Old siding removed to expose sheathing and the weather-resistive barrier during a siding replacement in Edmonds, Washington](../assets/images/posts/2026-09-22-edmonds-siding-tearoff-7.webp "Tear-off exposes the sheathing so damage can be checked before new barrier and siding go on in Edmonds.")
 
 ## Design, openings, and coordination
 
@@ -62,6 +66,8 @@ Manufacturer product pages for siding and envelope discussions with your contrac
 - [Therma-Tru](https://www.thermatru.com/) — exterior door systems that must integrate with WRB and sill/jamb flashings during reclad work
 - [Sherwin-Williams](https://www.sherwin-williams.com/) — exterior coatings literature relevant when primed fiber-cement or trim is field-finished
 - [Owens Corning insulation](https://www.owenscorning.com/en-us/insulation) — cavity and continuous insulation options discussed when walls are opened during reclad
+
+![Fiber-cement lap boards, trim and flashing samples laid out for a siding replacement in Edmonds, Washington](../assets/images/posts/2026-09-22-edmonds-siding-materials-8.webp "Lap board, trim and flashing samples compared side by side before an Edmonds siding order.")
 
 ## FAQ
 
@@ -89,6 +95,8 @@ When you interview firms, ask them to walk a recent coastal reclad chronological
 Use the Board directories as a starting shortlist — especially [siding](../siding.html) — then verify fit on a site visit. Where Pacific Pro Group appears in the Board’s editorial set for design-build and envelope work, you can review their process overview at [pacificprogroup.com](https://pacificprogroup.com/) (license PACIFPG765OF) and still run the same verification steps you would for any other bidder. Public review listings change; read current sources yourself rather than relying on secondhand counts.
 
 Finally, keep a simple owner file: proposals, product cut sheets, permit numbers, inspection results, and dated photos of hidden WRB and flashings before finish courses close. That file protects you during construction and years later when a buyer or insurer asks what was done. More local guidance continues on the [blog](../blog.html).
+
+![Finished siding replacement with new lap siding and painted trim on a two-story home in Edmonds, Washington](../assets/images/posts/2026-09-22-edmonds-siding-finished-9.webp "A finished Edmonds siding replacement after flashing, trim and paint were completed.")
 
 **Related on the Board:** [Edmonds Custom Home Planning](2026-09-02-edmonds-custom-home-planning.html) and [Edmonds custom home builders](../edmonds-custom-homes.html).
 
