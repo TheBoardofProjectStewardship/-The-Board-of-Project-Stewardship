@@ -22,6 +22,8 @@ Whether you are near downtown [Edmonds](../edmonds.html), Perrinville, Meadowdal
 
 HOA or design-review rules can affect color, ridge profile, and visible metal even when the roof plane stays the same. Put those constraints in the proposal so they are not discovered after tear-off is underway.
 
+![Older rambler with a worn, moss-streaked shingle roof on a residential street in Edmonds, Washington, a typical roof replacement candidate](../assets/images/posts/2026-09-21-edmonds-roof-street-6.webp "Many older Edmonds homes carry aging shingle roofs that take years of wind-driven rain and shade moss.")
+
 ## Climate, underlayment, flashing, and permits
 
 King and Snohomish coastal weather punishes reverse-lapped flashings and missing ice-and-water at eaves and valleys. Water that gets under a shingle needs a clear path out — not a caulk dam at a wall or chimney. Prefer assemblies that follow manufacturer instructions and a shingle-style weather sequence: deck repair as needed, eave drip edge, ice-and-water where required, field underlayment, rake drip edge over underlayment, starter course, field shingles, woven step flashing at walls, and dedicated boots and counterflashing at penetrations. Do not treat inland Eastside install habits as a free pass for Edmonds or Mukilteo waterfront exposures.
@@ -39,6 +41,8 @@ https://www.youtube.com/watch?v=sBwxw3KsVOM
 Process clip (staging atmosphere for coastal Edmonds-style roof work — not footage of a live Board job):
 
 [Watch the short process clip](../assets/videos/posts/2026-09-21-edmonds-roof.mp4)
+
+![Old shingles torn off to expose the roof deck during a roof replacement in Edmonds, Washington](../assets/images/posts/2026-09-21-edmonds-roof-tearoff-7.webp "Tear-off exposes the roof deck so soft sheathing can be found and fixed before underlayment goes on in Edmonds.")
 
 ## Design, ventilation, and coordination
 
@@ -61,6 +65,8 @@ Manufacturer product pages for roof and envelope discussions with your contracto
 - [CertainTeed building products](https://www.certainteed.com/) — roofing, underlayment, and related envelope products common on major remodels
 - [Velux skylights](https://www.veluxusa.com/) — daylighting penetrations that must be flashed into the new roof plane
 
+![Shingle bundles, underlayment rolls, drip edge and step flashing staged for a roof replacement in Edmonds, Washington](../assets/images/posts/2026-09-21-edmonds-roof-materials-8.webp "Underlayment, drip edge and flashing staged next to shingle bundles before an Edmonds re-roof starts.")
+
 ## FAQ
 
 **Do I need a permit to replace a roof in Edmonds?**  
@@ -77,6 +83,8 @@ Normalize permit ownership, number of layers to tear off, sheathing repair allow
 Homes farther from the Sound still see winter rain, but waterfront-adjacent and hill-exposed Edmonds roofs take more wind-driven wetting and moss pressure. Ask firms that also work inland King County how their ice-and-water, valley, and wall-flashing details change when marine exposure is in play — the honest answer is usually detailing and materials, not a one-size inland package.
 
 When roof work sits inside a kitchen or bath remodel, keep ventilation and waterproofing on the same plan conversation as the roof planes. Cross-check [kitchen.html](../kitchen.html) and [bathrooms.html](../bathrooms.html); the City still issues the permits for your lot.
+
+![New shingle roof with ridge vent on a hillside home facing Puget Sound in Edmonds, Washington](../assets/images/posts/2026-09-21-edmonds-roof-hillside-9.webp "Hill-exposed Edmonds roofs facing the Sound see more wind-driven rain, so valley and wall flashing details matter.")
 
 ## Putting it together for homeowners
 
