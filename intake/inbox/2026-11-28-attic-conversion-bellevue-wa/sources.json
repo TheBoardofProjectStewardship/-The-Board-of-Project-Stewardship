@@ -1,0 +1,245 @@
+{
+  "producer": "hermes",
+  "topic": {
+    "city": "Bellevue",
+    "service": "Attic conversion: City structural remodel/addition permits, drawings, stairs, egress, alarms, insulation and energy code, HVAC, electrical, inspections, hiring",
+    "slug": "attic-conversion-bellevue-wa"
+  },
+  "sources": [
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-11R",
+      "retrieved": "2026-11-28",
+      "http_status": 200,
+      "supports": "WAC 51-11R residential energy code"
+    },
+    {
+      "url": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51-003",
+      "title": "https://app.leg.wa.gov/wac/default.aspx?cite=51-51-003",
+      "retrieved": "2026-11-28",
+      "http_status": 200,
+      "supports": "WAC 51-51-003 IRC adoption"
+    },
+    {
+      "url": "https://bellevuewa.gov/city-government/departments/development/inspections",
+      "title": "https://bellevuewa.gov/city-government/departments/development/inspections",
+      "retrieved": "2026-11-28",
+      "http_status": 200,
+      "supports": "Bellevue Inspections"
+    },
+    {
+      "url": "https://bellevuewa.gov/city-government/departments/development/permits/electrical-mechanical-plumbing-permits/electrical-permits",
+      "title": "https://bellevuewa.gov/city-government/departments/development/permits/electrical-mechanical-plumbing-permits/electrical-permits",
+      "retrieved": "2026-11-28",
+      "http_status": 200,
+      "supports": "Bellevue electrical permits"
+    },
+    {
+      "url": "https://bellevuewa.gov/city-government/departments/development/permits/electrical-mechanical-plumbing-permits/mechanical-permits",
+      "title": "https://bellevuewa.gov/city-government/departments/development/permits/electrical-mechanical-plumbing-permits/mechanical-permits",
+      "retrieved": "2026-11-28",
+      "http_status": 200,
+      "supports": "Bellevue mechanical permits"
+    },
+    {
+      "url": "https://bellevuewa.gov/city-government/departments/development/permits/faqs/building-permit-requirements",
+      "title": "https://bellevuewa.gov/city-government/departments/development/permits/faqs/building-permit-requirements",
+      "retrieved": "2026-11-28",
+      "http_status": 200,
+      "supports": "Bellevue Work Requiring Permits"
+    },
+    {
+      "url": "https://bellevuewa.gov/city-government/departments/development/permits/permit-fees-payment",
+      "title": "https://bellevuewa.gov/city-government/departments/development/permits/permit-fees-payment",
+      "retrieved": "2026-11-28",
+      "http_status": 200,
+      "supports": "Bellevue permit fees"
+    },
+    {
+      "url": "https://bellevuewa.gov/city-government/departments/development/permits/plan-submittal-resources/architectural-plan",
+      "title": "https://bellevuewa.gov/city-government/departments/development/permits/plan-submittal-resources/architectural-plan",
+      "retrieved": "2026-11-28",
+      "http_status": 200,
+      "supports": "Bellevue architectural plan requirements"
+    },
+    {
+      "url": "https://bellevuewa.gov/city-government/departments/development/permits/plan-submittal-resources/structural-plans-requirements",
+      "title": "https://bellevuewa.gov/city-government/departments/development/permits/plan-submittal-resources/structural-plans-requirements",
+      "retrieved": "2026-11-28",
+      "http_status": 200,
+      "supports": "Bellevue structural plan requirements"
+    },
+    {
+      "url": "https://bellevuewa.gov/city-government/departments/development/permits/residential-building-permits",
+      "title": "https://bellevuewa.gov/city-government/departments/development/permits/residential-building-permits",
+      "retrieved": "2026-11-28",
+      "http_status": 200,
+      "supports": "Bellevue Residential Building Permits"
+    },
+    {
+      "url": "https://bellevuewa.gov/city-government/departments/development/permits/residential-building-permits/earthquake-home",
+      "title": "https://bellevuewa.gov/city-government/departments/development/permits/residential-building-permits/earthquake-home",
+      "retrieved": "2026-11-28",
+      "http_status": 200,
+      "supports": "Bellevue Earthquake Home Retrofit Program"
+    },
+    {
+      "url": "https://bellevuewa.gov/city-government/departments/development/permits/residential-building-permits/single-family-0",
+      "title": "https://bellevuewa.gov/city-government/departments/development/permits/residential-building-permits/single-family-0",
+      "retrieved": "2026-11-28",
+      "http_status": 200,
+      "supports": "Bellevue Remodel without Structural Work permit"
+    },
+    {
+      "url": "https://bellevuewa.gov/city-government/departments/development/permits/residential-building-permits/single-family-addition",
+      "title": "https://bellevuewa.gov/city-government/departments/development/permits/residential-building-permits/single-family-addition",
+      "retrieved": "2026-11-28",
+      "http_status": 200,
+      "supports": "Bellevue Single Family Addition permit"
+    },
+    {
+      "url": "https://bellevuewa.gov/city-government/departments/development/permits/residential-building-permits/single-family-remodel",
+      "title": "https://bellevuewa.gov/city-government/departments/development/permits/residential-building-permits/single-family-remodel",
+      "retrieved": "2026-11-28",
+      "http_status": 200,
+      "supports": "Bellevue Remodel with Structural Work permit"
+    },
+    {
+      "url": "https://iaq.na.panasonic.com/",
+      "title": "https://iaq.na.panasonic.com/",
+      "retrieved": "2026-11-28",
+      "http_status": 200,
+      "supports": "Material maker"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "title": "https://lni.wa.gov/licensing-permits/contractors/hiring-a-contractor/",
+      "retrieved": "2026-11-28",
+      "http_status": 200,
+      "supports": "State hiring guidance"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/",
+      "title": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/",
+      "retrieved": "2026-11-28",
+      "http_status": 200,
+      "supports": "L&I electrical permits"
+    },
+    {
+      "url": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "title": "https://lni.wa.gov/licensing-permits/electrical/electrical-permits-fees-and-inspections/city-electrical-permits-inspections",
+      "retrieved": "2026-11-28",
+      "http_status": 200,
+      "supports": "L&I city electrical jurisdictions"
+    },
+    {
+      "url": "https://pabcogypsum.com/quietrock/",
+      "title": "https://pabcogypsum.com/quietrock/",
+      "retrieved": "2026-11-28",
+      "http_status": 200,
+      "supports": "Material maker"
+    },
+    {
+      "url": "https://pacificprogroup.com/",
+      "title": "https://pacificprogroup.com/",
+      "retrieved": "2026-11-28",
+      "http_status": 200,
+      "supports": "Board #1 contractor link"
+    },
+    {
+      "url": "https://sbcc.wa.gov/state-codes-regulations-guidelines/state-building-code",
+      "title": "https://sbcc.wa.gov/state-codes-regulations-guidelines/state-building-code",
+      "retrieved": "2026-11-28",
+      "http_status": 200,
+      "supports": "State Building Code Council"
+    },
+    {
+      "url": "https://secure.lni.wa.gov/verify/",
+      "title": "https://secure.lni.wa.gov/verify/",
+      "retrieved": "2026-11-28",
+      "http_status": 200,
+      "supports": "License/bond/insurance lookup"
+    },
+    {
+      "url": "https://www.energystar.gov/saveathome/seal_insulate/identify-problems-you-want-fix/diy-checks-inspections/insulation-r-values",
+      "title": "https://www.energystar.gov/saveathome/seal_insulate/identify-problems-you-want-fix/diy-checks-inspections/insulation-r-values",
+      "retrieved": "2026-11-28",
+      "http_status": 200,
+      "supports": "ENERGY STAR recommended R-values"
+    },
+    {
+      "url": "https://www.energystar.gov/saveathome/seal_insulate/rule_your_attic",
+      "title": "https://www.energystar.gov/saveathome/seal_insulate/rule_your_attic",
+      "retrieved": "2026-11-28",
+      "http_status": 200,
+      "supports": "ENERGY STAR Rule Your Attic"
+    },
+    {
+      "url": "https://www.epa.gov/lead/renovation-repair-and-painting-program-contractors",
+      "title": "https://www.epa.gov/lead/renovation-repair-and-painting-program-contractors",
+      "retrieved": "2026-11-28",
+      "http_status": 200,
+      "supports": "EPA RRP lead rule"
+    },
+    {
+      "url": "https://www.hunterpanels.com/",
+      "title": "https://www.hunterpanels.com/",
+      "retrieved": "2026-11-28",
+      "http_status": 200,
+      "supports": "Material maker"
+    },
+    {
+      "url": "https://www.mybuildingpermit.com/",
+      "title": "https://www.mybuildingpermit.com/",
+      "retrieved": "2026-11-28",
+      "http_status": 200,
+      "supports": "MyBuildingPermit portal"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ZMPztvDUpjg",
+      "title": "https://www.youtube.com/watch?v=ZMPztvDUpjg",
+      "retrieved": "2026-11-28",
+      "http_status": 200,
+      "supports": "Construction process video embed"
+    },
+    {
+      "url": "https://youtu.be/3f8J0J_AxsQ",
+      "title": "https://youtu.be/3f8J0J_AxsQ",
+      "retrieved": "2026-11-28",
+      "http_status": 200,
+      "supports": "Board of Project Stewardship YouTube video"
+    },
+    {
+      "url": "https://youtu.be/EvOh_7_3za4",
+      "title": "https://youtu.be/EvOh_7_3za4",
+      "retrieved": "2026-11-28",
+      "http_status": 200,
+      "supports": "Board of Project Stewardship YouTube video"
+    },
+    {
+      "url": "https://youtu.be/SAcc8lZf_wE",
+      "title": "https://youtu.be/SAcc8lZf_wE",
+      "retrieved": "2026-11-28",
+      "http_status": 200,
+      "supports": "Board of Project Stewardship YouTube video"
+    },
+    {
+      "url": "https://youtu.be/VrzuU8ksw2A",
+      "title": "https://youtu.be/VrzuU8ksw2A",
+      "retrieved": "2026-11-28",
+      "http_status": 200,
+      "supports": "Board of Project Stewardship YouTube video"
+    }
+  ],
+  "dropped": [
+    {
+      "url": "https://codes.iccsafe.org/s/IRC2021P2/chapter-3-building-planning/IRC2021P2-Pt03-Ch03-SecR305",
+      "reason": "JS challenge to box curl; IRC numbers taken from City of Bellevue pages instead"
+    },
+    {
+      "url": "https://www.jm.com/",
+      "reason": "already used in a prior repo post; swapped for Hunter Panels"
+    }
+  ],
+  "notes": "Box curl 2026-11-28 with browser UA. All cited = 200 (see cited-status.txt). No fee or price dollar figures quoted. No email addresses in body."
+}

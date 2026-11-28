@@ -54,6 +54,7 @@ Base: `https://boardofprojectstewardship.com/`
 | `blog/rss.xml` | Blog RSS feed |
 | `news/rss.xml` | News RSS feed |
 | `404.html` | Branded Board 404 |
+| `posts/2026-11-28-attic-conversion-bellevue-wa.html` | Attic Conversion Bellevue WA — Permits, Stairs, Egress, Insulation and Hiring |
 | `posts/2026-11-27-laundry-room-remodel-woodinville-wa.html` | Laundry Room Remodel Woodinville WA — Permits, Dryer Vents, Drains, Electrical and Moisture |
 | `posts/2026-11-26-basement-finishing-mukilteo-wa.html` | Basement Finishing Mukilteo WA — Permits, Moisture Checks, Radon, Electrical and Hiring |
 | `posts/2026-11-25-bathroom-remodel-renton-wa.html` | Bathroom Remodel Renton WA — Permits, Asbestos Checks, Ventilation, Waterproofing and Hiring |
