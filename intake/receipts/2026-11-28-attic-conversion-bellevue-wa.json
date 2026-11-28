@@ -1,0 +1,25 @@
+{
+  "submission_id": "2026-11-28-attic-conversion-bellevue-wa",
+  "idempotency_key": "sha256:37f8fac8a2719b690f1e0bd4298c7995b19892f7887c406dd858d5b98997cda6",
+  "status": "published",
+  "publisher": "steward",
+  "published_at": "2026-11-28T11:58:01Z",
+  "outputs": [
+    "assets/images/posts/2026-11-28-bellevue-attic-1.webp",
+    "assets/images/posts/2026-11-28-bellevue-attic-2.webp",
+    "assets/images/posts/2026-11-28-bellevue-attic-3.webp",
+    "assets/images/posts/2026-11-28-bellevue-attic-4.webp",
+    "assets/images/posts/2026-11-28-bellevue-attic-5.webp",
+    "assets/images/posts/2026-11-28-bellevue-attic-6.webp",
+    "assets/images/posts/2026-11-28-bellevue-attic-7.webp",
+    "assets/images/posts/2026-11-28-bellevue-attic-8.webp",
+    "assets/images/posts/2026-11-28-bellevue-attic-9.webp",
+    "posts/2026-11-28-attic-conversion-bellevue-wa.md",
+    "posts/2026-11-28-attic-conversion-bellevue-wa.html",
+    "posts.json",
+    "blog.html",
+    "blog/rss.xml",
+    "sitemap.xml"
+  ],
+  "post_count": 116
+}

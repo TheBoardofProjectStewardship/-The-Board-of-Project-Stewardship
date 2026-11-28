@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "submission_id": "2026-11-28-attic-conversion-bellevue-wa",
+  "kind": "post-bundle",
+  "producer": "chief-of-staff",
+  "created_at": "2026-11-28T12:00:00Z",
+  "target": {
+    "site": "https://boardofprojectstewardship.com/",
+    "content_type": "blog-post"
+  },
+  "roles": {
+    "assembler": "chief-of-staff",
+    "draft": "ollama",
+    "sources": "hermes",
+    "seo": "openclaw",
+    "media": "grok-build"
+  },
+  "post": {
+    "title": "Attic Conversion Bellevue WA \u2014 Permits, Stairs, Egress, Insulation and Hiring",
+    "date": "2026-11-28",
+    "slug": "attic-conversion-bellevue-wa",
+    "description": "A Bellevue attic conversion guide: which City permit applies, plan review, structural drawings, stair and egress rules, smoke alarms, energy code insulation, electrical permits, inspections and hiring.",
+    "category": "Guides"
+  },
+  "artifacts": {
+    "draft": "draft.md",
+    "sources": "sources.json",
+    "seo": "seo.json",
+    "media": "media.json"
+  },
+  "notes": "Box-authored daily post for 2026-11-28 (built 2026-11-28 early morning). Home PC DESKTOP-B69F181 board-intake inbox (WSL Ubuntu ~/SEO_PLAN_PacificProGroup/board-intake/inbox) read-only at ~3:46 AM PT: no 2026-11-28 entries (newest 2026-11-27 role set); no board post packet used. Topic: attic conversion in Bellevue WA (King County). Sources read 2026-11-28: City of Bellevue Residential Building Permits (BT/BU/BR/BS types), Remodel with Structural Work permit (BU: conversion of unconditioned to conditioned space; includes electrical, mechanical, plumbing; architectural plan; MyBuildingPermit), Remodel without Structural Work (BT scope limits, three-week plan review if exceeded, required inspections, IRC stair/egress/alarm/safety glazing/energy summary), Work Requiring Permits (dormers/roof slope = addition with plan review; windows/skylights; fixtures; circuits), Single Family Addition, architectural and structural plan requirements, Inspections (MyBuildingPermit or 425-452-6875; start within 1 year, complete within 3; insurance note), Electrical and Mechanical permit pages, Permit fees page, Earthquake Home Retrofit Program; L&I city electrical jurisdictions (Bellevue issues its own electrical permits); L&I electrical permits; WAC 51-51-003; WAC 51-11R; SBCC state building code; ENERGY STAR Rule Your Attic (15%/11% savings) and R-values; L&I hiring a contractor + Verify; EPA RRP. Bellevue place token already in generate_site.py; no generator change; bellevue.html unchanged. 4 Board YouTube links (channel UCpej558rCLbYWTt3tEW6a5A). No fee or price dollar figures. Producer role fields kept per intake contract."
+}

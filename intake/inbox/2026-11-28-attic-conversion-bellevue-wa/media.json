@@ -1,0 +1,92 @@
+{
+  "producer": "grok-build",
+  "status": "ready",
+  "files": [
+    {
+      "role": "hero",
+      "intake_file": "media/2026-11-28-bellevue-attic-1.webp",
+      "repo_path": "assets/images/posts/2026-11-28-bellevue-attic-1.webp",
+      "alt": "Bellevue, WA attic conversion complete: a bright attic bedroom with sloped white ceilings, a dormer window looking out to evergreen trees, wood floors and built-in storage in the knee walls \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "01418d9f16cacc316c7f427fe0aa4997",
+      "source": "Newly generated image (built-in image generator, 2026-11-28), source gen-1 converted to 1600x900 webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-28-bellevue-attic-2.webp",
+      "repo_path": "assets/images/posts/2026-11-28-bellevue-attic-2.webp",
+      "alt": "Bellevue, WA attic conversion planning: a hand-drawn attic floor plan, tape measure, pencil and level on a plywood work surface under exposed roof rafters \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "516c04246cf1884c9411c61db87ae65e",
+      "source": "Newly generated image (built-in image generator, 2026-11-28), source gen-2 converted to 1600x900 webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-28-bellevue-attic-3.webp",
+      "repo_path": "assets/images/posts/2026-11-28-bellevue-attic-3.webp",
+      "alt": "Bellevue, WA attic conversion stair: a new wood staircase with a handrail rising to an attic opening framed in the floor, before drywall \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "ea33af67bd7578fda5698aa858832acc",
+      "source": "Newly generated image (built-in image generator, 2026-11-28), source gen-3 converted to 1600x900 webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-28-bellevue-attic-4.webp",
+      "repo_path": "assets/images/posts/2026-11-28-bellevue-attic-4.webp",
+      "alt": "Bellevue, WA attic conversion egress: a new dormer with a large casement window framed into a sloped roof, with house wrap and flashing visible from outside \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "d46b004a7f16b057600f97bf01cb926b",
+      "source": "Newly generated image (built-in image generator, 2026-11-28), source gen-4 converted to 1600x900 webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-28-bellevue-attic-5.webp",
+      "repo_path": "assets/images/posts/2026-11-28-bellevue-attic-5.webp",
+      "alt": "Bellevue, WA attic conversion insulation: insulation installed between sloped roof rafters and behind a framed knee wall, with air sealing at the seams before drywall \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "f5597002b3d6a3ce79929d6d2ba8043f",
+      "source": "Newly generated image (built-in image generator, 2026-11-28), source gen-5 converted to 1600x900 webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-28-bellevue-attic-6.webp",
+      "repo_path": "assets/images/posts/2026-11-28-bellevue-attic-6.webp",
+      "alt": "Bellevue, WA attic conversion rough-in: new electrical boxes and wiring stapled to framing in an attic room with exposed rafters, before insulation is covered \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "e0a43a4f2c63e75868637ffa757f2332",
+      "source": "Newly generated image (built-in image generator, 2026-11-28), source gen-6 converted to 1600x900 webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-28-bellevue-attic-7.webp",
+      "repo_path": "assets/images/posts/2026-11-28-bellevue-attic-7.webp",
+      "alt": "Bellevue, WA attic conversion inspection: an inspector holding a clipboard checks open framing and insulation in an attic room, face not visible \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "78ad9efa75d86aabef7c546e6f227245",
+      "source": "Newly generated image (built-in image generator, 2026-11-28), source gen-7 converted to 1600x900 webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-28-bellevue-attic-8.webp",
+      "repo_path": "assets/images/posts/2026-11-28-bellevue-attic-8.webp",
+      "alt": "Bellevue, WA attic conversion materials: rigid insulation panels, a ventilation fan box, a drywall sheet edge and a stair tread sample laid out on a workbench \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "eb2c993045ed3e71fbcfa3a0343aff13",
+      "source": "Newly generated image (built-in image generator, 2026-11-28), source gen-8 converted to 1600x900 webp q82"
+    },
+    {
+      "role": "in-body",
+      "intake_file": "media/2026-11-28-bellevue-attic-9.webp",
+      "repo_path": "assets/images/posts/2026-11-28-bellevue-attic-9.webp",
+      "alt": "Bellevue, WA attic conversion complete at dusk: a cozy attic home office with a desk under a sloped ceiling, warm lamp light and a dormer window showing blue evening sky \u2014 not a real Board of Project Stewardship job photo",
+      "md5": "f3a7412e7da1db37a31875a2b846fa23",
+      "source": "Newly generated image (built-in image generator, 2026-11-28), source gen-9 converted to 1600x900 webp q82"
+    }
+  ],
+  "youtube": [
+    {
+      "id": "ZMPztvDUpjg",
+      "url": "https://www.youtube.com/watch?v=ZMPztvDUpjg",
+      "title": "How to Insulate an Attic | This Old House",
+      "oembed_status": 200
+    }
+  ],
+  "rules": [
+    "Public markdown images use ../assets/images/posts/*.webp only",
+    "No CloudFront URLs",
+    "Free image sources first; no paid media credits"
+  ],
+  "notes": "9 newly generated images (built-in generator), 0 regraded stills, 0 paid media."
+}
